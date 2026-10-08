@@ -1,3 +1,6 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
+<!-- Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority. -->
 # M3 collection lanes for Java 21
 
 This separately built Apache-2.0 library adapts Synexia's indexed collection owners to
@@ -45,7 +48,7 @@ range streams include all addresses, including zeros, with weakly consistent val
 streams capture immutable snapshots. Bitmap streams are weakly consistent and not SIZED.
 Parallel mode is available, not a promise that every workload is faster.
 
-## Build, recipe and verification
+## Historical lane build, recipe and verification
 
 From the repository root, with Java 21 and Maven:
 
@@ -90,3 +93,26 @@ warnings are errors. `evidence/STATUS.md` records exact proof scope and remainin
 
 Source implementation: [Synexia PR #7705](https://github.com/hsoliwal/com.synexia/pull/7705),
 commit `1d0deb92f379cc05a001ac48e0e427b0db6c263f`.
+
+## Current separately built receiver qualification (2026-10-08)
+
+The lane installer described above is a frozen 21-file historical recipe. Run its Maven
+SDK fixture independently; do not run its installer against the expanded live factory.
+Current product verification uses the exact 88-Java installed manifest and preserves
+current primitive, identity and enum owners in the existing com.m3.collections package.
+
+```sh
+mvn -f m3/collections/recipe/pom.xml verify
+JUNIT_CONSOLE_JAR=/path/to/junit-platform-console-standalone-1.12.2.jar \
+  python3 m3/collections/verify_donation.py --cost-probe
+```
+
+Java 21, Linux and GCC/UBSan are required by the complete product verifier. It runs
+113 contract tests and both lazy self-tests, packages notices, checks java.base-only
+runtime dependencies, and measures JNI parity and prepared allocation. Diagnostic cost
+samples do not establish retained heap or a universal performance advantage.
+Canonical recipes and actual source/runtime qualification stay in Synexia's
+`m3jdk-packed-collections-receiving-repair-20261008` packet; this target is a receiver.
+See `synexia-donation.json`, `name-mapping.json` and `qualification/receiving-repair-20261008.json`.
+The global migration remains in STRING. No array/collection/AST phase or JDK backend
+is promoted by this independent module proof. Historical records retain their own hashes.

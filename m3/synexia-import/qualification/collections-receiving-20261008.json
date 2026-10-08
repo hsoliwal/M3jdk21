@@ -1,0 +1,98 @@
+{
+  "schema": "M3_COLLECTION_IMPORTER_RECEIVING_QUALIFICATION_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "canonical_source_repository": "hsoliwal/com.synexia",
+  "canonical_source_path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008",
+  "source_revision": "13464c25a679fa7105e74f107c8bd151e0d609ea",
+  "target_baseline": "439b767c7c92e2751f7f6a47c012f96472420905",
+  "java_qualification": {
+    "status": "IMPORTER_JAVA_QUALIFIED_OVERALL_RECEIVING_HOLD",
+    "target_revision": "439b767c7c92e2751f7f6a47c012f96472420905",
+    "execution": "YAML_ACTIVATED_OPENREWRITE_SDK_8.90.4",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "serial_results": [
+      1,
+      1,
+      1
+    ],
+    "aggregate_results": 3,
+    "fixed_point_results": 0,
+    "readback_fixed_point_results": 0,
+    "recipe_refusals": 10,
+    "existing_importer_scenarios": 35,
+    "qualified_importer_tests": 38,
+    "current_context_files": 92,
+    "current_compilation": "PASS_JAVA21_XLINT_ALL_WERROR",
+    "current_baseline_tests": "34_PASS_1_STALE_AUTHORITY_ASSERTION",
+    "reproduced_family_gap_failures": 3,
+    "current_compile_and_other_fixture_repairs": "PRESERVED_UNCHANGED",
+    "table": "EXACT_QUALIFICATION_COINPUT_SEPARATE_TEXT_SDK_ARM",
+    "current_global_map": "PRESERVED_BLOB_56a2d439a832920ef28e5e242d799d81d45ff59b",
+    "current_public_verify_shell_syntax": "EXISTING_BASELINE_DEFECT_NOT_REPAIRED_BY_THIS_JAVA_ARM",
+    "phase_advance": false,
+    "live_target_written": false,
+    "hosted_ci_full_reactor_jacoco": "NOT_RUN",
+    "exact_context_leaf_readback": true,
+    "preimage_sha256_and_git_blob_checked": true
+  },
+  "java_qualification_sha256": "183c7ea1c1cd13917fd75d73aa4cbfc98deec2a60d9b0f93d8a533e1984d7baa",
+  "public_verifier_qualification": {
+    "status": "PUBLIC_SCRIPT_QUALIFIED",
+    "target_revision": "439b767c7c92e2751f7f6a47c012f96472420905",
+    "script_sha256": "0b767a1a40f0c8471da49d203d15e25fad22327fc05dc40bc059706d9786f1cf",
+    "script_git_blob": "fed32e1c8a1e3366be337bf99bc77d50fc2a63a8",
+    "script_origin": "ACTUAL_CANONICAL_TEXT_SDK_OUTPUT_PROVIDED_BY_METADATA_ARM",
+    "current_frozen_context": 101,
+    "retained_a3_export_files": 8,
+    "current_importer_java_sdk_outputs": 3,
+    "baseline_syntax_defect_reproduced": true,
+    "cases": [
+      {
+        "case": "exact",
+        "exit": 0,
+        "required_diagnostic": null,
+        "pass": true
+      },
+      {
+        "case": "manifest-drift",
+        "exit": 4,
+        "required_diagnostic": "PUBLIC_A3_EXPORT_MANIFEST_DRIFT",
+        "pass": true
+      },
+      {
+        "case": "source-drift",
+        "exit": 4,
+        "required_diagnostic": "PUBLIC_A3_EXPORT_SOURCE_DRIFT",
+        "pass": true
+      },
+      {
+        "case": "source-missing",
+        "exit": 4,
+        "required_diagnostic": "PUBLIC_A3_EXPORT_SOURCE_REQUIRED",
+        "pass": true
+      },
+      {
+        "case": "source-symlink",
+        "exit": 4,
+        "required_diagnostic": "PUBLIC_A3_EXPORT_SOURCE_REQUIRED",
+        "pass": true
+      }
+    ],
+    "source_mutation_authority": false,
+    "promotion_authority": false,
+    "live_target_written": false,
+    "phase_advance": false,
+    "java_version": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)"
+  },
+  "public_verifier_qualification_sha256": "8d09debea658fab08e53f1ff7ce6aacac222c3d22f4b5513fb4ceb251b452e14",
+  "active_phase": "STRING",
+  "phase_advance": false,
+  "live_target_written": false,
+  "source_tree": "4a18a941fac116cc15b8a70f79852288858667e4",
+  "source_revision_status": "PUBLISHED_CANONICAL_RECIPE",
+  "receiving_recipe_artifact_root_sha256": "7425647648cf8a33fcd9feea795c4995d9e8ead9c860cf06fa8e63ba64e898a0",
+  "receiving_recipe_artifact_count": 442,
+  "receiving_recipe_artifact_root_encoding": "UTF8_SORTED_PATH_MODE_GIT_BLOB_SHA256_TAB_SEPARATED_LF_NO_HEADER",
+  "receiving_application_state": "CANONICAL_SOURCE_PUBLISHED_TARGET_PR_PENDING"
+}

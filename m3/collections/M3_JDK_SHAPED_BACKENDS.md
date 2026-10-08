@@ -35,3 +35,16 @@ map value replacement do not invalidate iterators merely because the table has c
 See `JDK_FAMILY_MAP.tsv` for existing/pending names and
 `m3/compatibility/synexia-to-m3-family-status-20261007.tsv` for the wider MIndex/M3Index
 receiving ledger. No PENDING row is implied complete by this PR.
+
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
+<!-- Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority. -->
+
+## Receiving repair on 2026-10-08
+
+Current primitive, identity and enum owners stay byte-identical. The same existing
+factory gains the qualified ordered, sorted, weak, blocking, lazy and progress families;
+no second primitive payload hierarchy is introduced. The existing M3LongList interface adds M3LongSequence as its superinterface;
+the latter retains the current boolean add/addAll signatures.
+The exact local mapping and installed manifest are named in synexia-donation.json.
+The broader receiving phase remains STRING; Java/JNI module qualification does not
+complete the family catalogue or promote a public JDK backend.

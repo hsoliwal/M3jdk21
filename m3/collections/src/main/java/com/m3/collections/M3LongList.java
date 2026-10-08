@@ -2,6 +2,8 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
+// Modified 2026 by Hitesh Soliwal and contributors: restore the public sequence
+// superinterface while retaining the current list owner and default aliases.
 package com.m3.collections;
 
 import java.util.function.LongPredicate;
@@ -17,7 +19,7 @@ import java.util.function.LongPredicate;
  * Synexia {@code LongSequence} names {@code insert} and {@code removeValue} remain as defaulted
  * aliases so neither lineage's callers change. One semantic owner: {@link M3LongArrayList}.</p>
  */
-public interface M3LongList extends M3LongCollection {
+public interface M3LongList extends M3LongSequence {
     boolean add(long value);
 
     void add(int index, long value);

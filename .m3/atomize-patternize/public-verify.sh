@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# Modified 2026 by Hitesh Soliwal and contributors: repair TSV IFS shell quoting; preserve all public verification guards.
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
 
@@ -59,7 +61,7 @@ a3_manifest_blob="$(git_blob "$a3_manifest")"
   fail "PUBLIC_A3_EXPORT_MANIFEST_DRIFT expected=$a3_expected_manifest_blob actual=$a3_manifest_blob"
 
 a3_files=0
-while IFS=\t' read -r class_name source_path source_blob; do
+while IFS=$'\t' read -r class_name source_path source_blob; do
   [[ -n "$class_name" ]] || continue
   [[ "$class_name" != \#* ]] || continue
   [[ "$class_name" != class ]] || continue

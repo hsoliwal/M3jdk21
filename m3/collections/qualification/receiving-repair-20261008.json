@@ -1,0 +1,35 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "schema": "M3_COLLECTION_RECEIVING_QUALIFICATION_V1",
+  "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
+  "installed_source_manifest_sha256": "063ae7c1857cf683464160408cfab94c9e63503d40eabc4adc630b2e668815e1",
+  "java_sources": 65,
+  "test_sources": 23,
+  "junit": {
+    "tests": 113,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "main_self_tests": [
+    "M3LazyTreeMapSelfTest:PASS",
+    "M3LazyValueStateSelfTest:PASS"
+  ],
+  "java_compile": "--release 21 -Xlint:all,-module -Werror",
+  "runtime_requires": [
+    "java.base"
+  ],
+  "native_standard": "c17",
+  "undefined_behavior_sanitizer": "PASS",
+  "checked_jni": "PASS",
+  "prepared_lane_allocation": "PASS",
+  "packaged_license_provenance": "PASS",
+  "cost_probe": "DIAGNOSTIC_RECORDED",
+  "full_reactor": "NOT_RUN",
+  "openjdk_jtreg_hotspot": "NOT_RUN",
+  "universal_performance_claim": false,
+  "phase_advance": false,
+  "active_phase": "STRING",
+  "target_baseline": "439b767c7c92e2751f7f6a47c012f96472420905"
+}

@@ -1,4 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-07: retain concurrent A3 export checks and check the exact README authority boundary.
 package com.m3.synexia.importer;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -47,7 +49,8 @@ final class PublicAtomPatternReceiverTest {
 
         assertTrue(readme.contains("fresh public clone"));
         assertTrue(readme.contains("M3_ATOM_PATTERN_MODE=maintainer"));
-        assertTrue(readme.contains("no mutation, source-copy"));
+        assertTrue(readme.contains(
+                "Neither mode grants source-copy, replacement, merge, semantic-equivalence or promotion authority."));
     }
 
     private static Path repositoryRoot() {
