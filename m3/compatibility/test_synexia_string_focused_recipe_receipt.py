@@ -116,24 +116,28 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
 
         self.assertEqual(1, len(rows))
         row = rows[0]
-        self.assertEqual("M3JDK21_STRING_ESTATE_RECEIPT_V1", row["schema"])
+        self.assertEqual("M3JDK21_STRING_ESTATE_RECEIPT_V2", row["schema"])
         self.assertEqual("TEXT_INDEXSTRING", row["family"])
         self.assertEqual(
             "296323958b1019edd59b60b9c05cb148d024cfe5",
-            row["full_estate_revision"],
+            row["source_snapshot_revision"],
         )
-        self.assertEqual("9860", row["full_estate_source_pr"])
+        self.assertEqual(
+            "f22cdc6185aa4d6e428a60ee9ea6eb9e8eaadb35",
+            row["estate_manifest_revision"],
+        )
+        self.assertEqual("9860", row["estate_source_pr"])
         self.assertEqual(
             ".m3/m3jdk21-full-borrow-estate.tsv",
-            row["full_estate_path"],
+            row["estate_manifest_path"],
         )
         self.assertEqual(
             "1e795e0d781159ff4f96dc3e650deb0cc36c5533",
-            row["full_estate_git_blob"],
+            row["estate_manifest_git_blob"],
         )
         self.assertEqual(
             "3d1bbf3bc944e827b8b82aa6841bc0720d618e93",
-            row["family_source_tree"],
+            row["source_family_tree"],
         )
         self.assertEqual(
             "e89630d3fb2b5f77526f408fc0d2389d67964b31",
