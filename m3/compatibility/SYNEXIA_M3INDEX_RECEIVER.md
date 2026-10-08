@@ -45,3 +45,13 @@ third-party code are never relicensed by this handoff. Abstract algorithms/ideas
 not an ownership claim over non-copyrightable subject matter.
 
 No source materialization or JDK product admission follows from this ownership pin alone; target build/runtime proof remains independent.
+
+
+## Focused String recipe composition
+
+For the currently absorbed focused String search lanes, M3JDK21 consumes the Synexia-owned
+composition recipe `com.synexia.rewrite.M3Jdk21StringFocusedSearchConvergence`. That composition
+serially owns adaptive prepared search, exact UTF-16 position masks, then fail-closed superset
+acceptance. It is recipe/provenance authority only: the three runtime lanes remain owned and
+qualified inside M3JDK21, and this repository must not create a duplicate descriptor under
+`m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite`.
