@@ -1744,6 +1744,11 @@ public final class String
         Objects.checkFromToIndex(beginIndex, endIndex, length());
         M3String storage = m3();
         if (storage != null) {
+            M3StringCodePointPrecompute.Geometry geometry =
+                    M3StringCodePointPrecompute.prepare(storage);
+            if (geometry != null) {
+                return geometry.codePointCount(beginIndex, endIndex);
+            }
             return storage.slice(beginIndex, endIndex).facts().codePointCount;
         }
         if (isLatin1()) {
@@ -1785,6 +1790,11 @@ public final class String
                 if (result >= 0L && result <= storage.length()) {
                     return (int) result;
                 }
+            }
+            M3StringCodePointPrecompute.Geometry geometry =
+                    M3StringCodePointPrecompute.prepare(storage);
+            if (geometry != null) {
+                return geometry.offsetByCodePoints(index, codePointOffset);
             }
         }
         return Character.offsetByCodePoints(this, index, codePointOffset);
