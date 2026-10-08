@@ -1149,6 +1149,21 @@ final class M3String implements CharSequence {
         return joinValues(pieces);
     }
 
+    /**
+     * True only when the JDK regex language is exactly the supplied UTF-16 spelling.
+     *
+     * <p>Backslash and every visible Pattern metacharacter force the normal regex engine.
+     * Empty and surrogate-containing ordinary literals are safe for full-value equality.</p>
+     */
+    static boolean isConservativeLiteralRegex(String regex) {
+        Objects.requireNonNull(regex, "regex");
+        for (int index = 0; index < regex.length(); index++) {
+            char unit = regex.charAt(index);
+            if (unit == '\\' || ".^$|?*+()[]{}".indexOf(unit) >= 0) return false;
+        }
+        return true;
+    }
+
     /** Conservative BMP literal subset; all regex/replacement syntax stays in Matcher. */
     static boolean isLiteralRegexReplacement(String regex, String replacement) {
         if (regex == null || regex.isEmpty() || replacement == null) return false;
