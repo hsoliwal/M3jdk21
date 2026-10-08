@@ -76,6 +76,14 @@ jobs:
             -p 'test_synexia_recipe_home_policy.py' \
             -v
 
+      - name: Verify canonical A3 descriptor owners and refusal controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$REPO"
+          python3 m3/tooling/migration-recipes/test_canonical_atom_descriptors.py -v
+          python3 m3/tooling/migration-recipes/verify_canonical_atom_descriptors.py
+
       - name: Maven JUnit OpenRewrite proof
         shell: bash
         run: |
