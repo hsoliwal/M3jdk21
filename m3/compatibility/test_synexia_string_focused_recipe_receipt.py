@@ -123,7 +123,7 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             row["source_snapshot_revision"],
         )
         self.assertEqual(
-            "f22cdc6185aa4d6e428a60ee9ea6eb9e8eaadb35",
+            "ee8a03de09f7a2de04bc5ee39aab65d31e85cde0",
             row["estate_manifest_revision"],
         )
         self.assertEqual("9860", row["estate_source_pr"])
@@ -132,8 +132,16 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             row["estate_manifest_path"],
         )
         self.assertEqual(
-            "1e795e0d781159ff4f96dc3e650deb0cc36c5533",
+            "292bc31a96cd3d20c36d617045c6b01a7a7c8faf",
             row["estate_manifest_git_blob"],
+        )
+        self.assertEqual(
+            ".m3/m3jdk21-full-borrow-dag.tsv",
+            row["estate_dag_path"],
+        )
+        self.assertEqual(
+            "3e6c56b8555231fb36d0ac620ab112aa5970d45a",
+            row["estate_dag_git_blob"],
         )
         self.assertEqual(
             "3d1bbf3bc944e827b8b82aa6841bc0720d618e93",
