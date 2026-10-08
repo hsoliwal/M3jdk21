@@ -121,6 +121,7 @@ public final class SynexiaImporter {
         Objects.requireNonNull(gate, "gate");
 
         List<Created> created = new ArrayList<>();
+        List<Path> createdDirectories = new ArrayList<>();
         int writeIndex = 0;
         try {
             for (SynexiaImportManifest.Entry entry : manifest.entries()) {
@@ -128,7 +129,10 @@ public final class SynexiaImporter {
                 Path target = resolve(targetRoot, entry.targetPath(), "target");
                 if (Files.exists(target, LinkOption.NOFOLLOW_LINKS)) continue;
                 Path parent = target.getParent();
-                if (parent != null) Files.createDirectories(parent);
+                if (parent != null) {
+                    recordMissingDirectories(targetRoot, parent, createdDirectories);
+                    Files.createDirectories(parent);
+                }
                 Path temporary = Files.createTempFile(
                         parent == null ? targetRoot : parent,
                         target.getFileName().toString(),
@@ -158,7 +162,7 @@ public final class SynexiaImporter {
             }
             verify(synexiaRoot, m3jdkRoot, manifest);
         } catch (IOException | RuntimeException failure) {
-            rollback(created, failure);
+            rollback(created, createdDirectories, failure);
             throw failure;
         }
     }
@@ -196,7 +200,19 @@ public final class SynexiaImporter {
         }
     }
 
-    private static void rollback(List<Created> created, Throwable primary) {
+    private static void recordMissingDirectories(
+            Path root, Path parent, List<Path> createdDirectories) {
+        Path current = root;
+        for (Path part : root.relativize(parent)) {
+            current = current.resolve(part);
+            if (!Files.exists(current, LinkOption.NOFOLLOW_LINKS)) {
+                createdDirectories.add(current);
+            }
+        }
+    }
+
+    private static void rollback(
+            List<Created> created, List<Path> createdDirectories, Throwable primary) {
         for (int index = created.size() - 1; index >= 0; index--) {
             Created item = created.get(index);
             try {
@@ -212,6 +228,20 @@ public final class SynexiaImporter {
                             "rollback refuses changed target: " + item.target());
                 }
                 Files.delete(item.target());
+            } catch (IOException | RuntimeException rollbackFailure) {
+                primary.addSuppressed(rollbackFailure);
+            }
+        }
+        for (int index = createdDirectories.size() - 1; index >= 0; index--) {
+            Path directory = createdDirectories.get(index);
+            try {
+                if (!Files.exists(directory, LinkOption.NOFOLLOW_LINKS)) continue;
+                if (!Files.isDirectory(directory, LinkOption.NOFOLLOW_LINKS)
+                        || Files.isSymbolicLink(directory)) {
+                    throw new IllegalStateException(
+                            "rollback directory is no longer a real directory: " + directory);
+                }
+                Files.delete(directory);
             } catch (IOException | RuntimeException rollbackFailure) {
                 primary.addSuppressed(rollbackFailure);
             }
