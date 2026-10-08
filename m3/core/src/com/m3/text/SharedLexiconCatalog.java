@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Read-only catalog over an exported Synexia shard manifest.
@@ -56,6 +57,7 @@ public final class SharedLexiconCatalog {
     private final Map<Coordinate, PrecomputeFacts> precompute;
     private final List<PrecomputeProfile> precomputeProfiles;
     private final long recordCount;
+    private final ReentrantReadWriteLock lifecycle = new ReentrantReadWriteLock();
     private volatile boolean closed;
 
     private SharedLexiconCatalog(List<ShardSlot> shards, List<String> files,
@@ -143,20 +145,26 @@ public final class SharedLexiconCatalog {
     public long recordCount() { return recordCount; }
     public List<String> shardFiles() { return files; }
     public List<SourceMapping> mappingsAt(Coordinate coordinate) {
-        ensureOpen();
-        requireCoordinate(coordinate);
-        imageAt(coordinate.shardId());
-        return mappings.get(coordinate);
+        lifecycle.readLock().lock();
+        try {
+            ensureOpen();
+            requireCoordinate(coordinate);
+            imageAt(coordinate.shardId());
+            return mappings.get(coordinate);
+        } finally { lifecycle.readLock().unlock(); }
     }
     /** Returns the preserved mapping for one exact Synexia source identity. */
     public Optional<SourceMapping> findMapping(String sourceId, String recordId) {
-        ensureOpen();
-        Objects.requireNonNull(sourceId);
-        Objects.requireNonNull(recordId);
-        SourceMapping mapping = mappingsByIdentity.get(new SourceIdentity(sourceId, recordId));
-        if (mapping == null) return Optional.empty();
-        imageAt(mapping.coordinate().shardId());
-        return Optional.of(mapping);
+        lifecycle.readLock().lock();
+        try {
+            ensureOpen();
+            Objects.requireNonNull(sourceId);
+            Objects.requireNonNull(recordId);
+            SourceMapping mapping = mappingsByIdentity.get(new SourceIdentity(sourceId, recordId));
+            if (mapping == null) return Optional.empty();
+            imageAt(mapping.coordinate().shardId());
+            return Optional.of(mapping);
+        } finally { lifecycle.readLock().unlock(); }
     }
     /** Finds all source mappings attached to one exact UTF-16 lexeme. */
     public List<SourceMapping> findMappings(String text) {
@@ -164,39 +172,60 @@ public final class SharedLexiconCatalog {
         return coordinate.isEmpty() ? List.of() : mappingsAt(coordinate.orElseThrow());
     }
     public PrecomputeFacts precomputeAt(Coordinate coordinate) {
-        ensureOpen();
-        requireCoordinate(coordinate);
-        imageAt(coordinate.shardId());
-        return precompute.get(coordinate);
+        lifecycle.readLock().lock();
+        try {
+            ensureOpen();
+            requireCoordinate(coordinate);
+            imageAt(coordinate.shardId());
+            return precompute.get(coordinate);
+        } finally { lifecycle.readLock().unlock(); }
     }
-    public List<PrecomputeProfile> precomputeProfiles() { ensureOpen(); return precomputeProfiles; }
+    public List<PrecomputeProfile> precomputeProfiles() {
+        lifecycle.readLock().lock();
+        try { ensureOpen(); return precomputeProfiles; }
+        finally { lifecycle.readLock().unlock(); }
+    }
 
     /** Explicitly warms all mapped shards; this does not flatten their payloads. */
-    public void warm() { for (int shard = 0; shard < shards.size(); shard++) imageAt(shard).warm(); }
+    public void warm() {
+        lifecycle.readLock().lock();
+        try {
+            ensureOpen();
+            for (int shard = 0; shard < shards.size(); shard++) imageAt(shard).warm();
+        } finally { lifecycle.readLock().unlock(); }
+    }
 
     /** Fences future lookups and drops published mapped-image references. */
     public void close() {
-        closed = true;
-        for (ShardSlot shard : shards) {
-            synchronized (shard) { shard.image = null; }
-        }
+        lifecycle.writeLock().lock();
+        try {
+            if (closed) return;
+            closed = true;
+            for (ShardSlot shard : shards) {
+                synchronized (shard) { shard.image = null; }
+            }
+        } finally { lifecycle.writeLock().unlock(); }
     }
 
     /** Finds an exact UTF-16 record and returns its stable shard/image coordinate. */
     public Optional<Coordinate> find(String text) {
-        Objects.requireNonNull(text);
-        int low = 0, high = firstLexemes.size() - 1, candidate = -1;
-        while (low <= high) {
-            int middle = (low + high) >>> 1;
-            if (firstLexemes.get(middle).compareTo(text) <= 0) {
-                candidate = middle;
-                low = middle + 1;
-            } else high = middle - 1;
-        }
-        if (candidate < 0 || lastLexemes.get(candidate).compareTo(text) < 0)
-            return Optional.empty();
-        int row = imageAt(candidate).findRecord(text);
-        return row < 0 ? Optional.empty() : Optional.of(new Coordinate(candidate, row));
+        lifecycle.readLock().lock();
+        try {
+            ensureOpen();
+            Objects.requireNonNull(text);
+            int low = 0, high = firstLexemes.size() - 1, candidate = -1;
+            while (low <= high) {
+                int middle = (low + high) >>> 1;
+                if (firstLexemes.get(middle).compareTo(text) <= 0) {
+                    candidate = middle;
+                    low = middle + 1;
+                } else high = middle - 1;
+            }
+            if (candidate < 0 || lastLexemes.get(candidate).compareTo(text) < 0)
+                return Optional.empty();
+            int row = imageAt(candidate).findRecord(text);
+            return row < 0 ? Optional.empty() : Optional.of(new Coordinate(candidate, row));
+        } finally { lifecycle.readLock().unlock(); }
     }
 
     /**
@@ -205,24 +234,32 @@ public final class SharedLexiconCatalog {
      * the candidate range is located or verified.
      */
     public List<Coordinate> prefix(String value, int limit) {
-        if (value == null || value.isEmpty()) throw new IllegalArgumentException("prefix required");
-        if (limit < 1 || limit > 100_000) throw new IllegalArgumentException("limit must be 1..100000");
-        ArrayList<Coordinate> result = new ArrayList<>(Math.min(limit, 16));
-        for (int shard = 0; shard < shards.size() && result.size() < limit; shard++) {
-            SharedLexiconImage image = imageAt(shard);
-            for (int row = image.lowerBound(value);
-                 row < image.size() && result.size() < limit && image.startsWith(row, value); row++) {
-                result.add(new Coordinate(shard, row));
+        lifecycle.readLock().lock();
+        try {
+            ensureOpen();
+            if (value == null || value.isEmpty()) throw new IllegalArgumentException("prefix required");
+            if (limit < 1 || limit > 100_000) throw new IllegalArgumentException("limit must be 1..100000");
+            ArrayList<Coordinate> result = new ArrayList<>(Math.min(limit, 16));
+            for (int shard = 0; shard < shards.size() && result.size() < limit; shard++) {
+                SharedLexiconImage image = imageAt(shard);
+                for (int row = image.lowerBound(value);
+                     row < image.size() && result.size() < limit && image.startsWith(row, value); row++) {
+                    result.add(new Coordinate(shard, row));
+                }
             }
-        }
-        return List.copyOf(result);
+            return List.copyOf(result);
+        } finally { lifecycle.readLock().unlock(); }
     }
 
     /** Materializes exactly one requested UTF-16 record. */
     public String textAt(Coordinate coordinate) {
-        Objects.requireNonNull(coordinate);
-        requireCoordinate(coordinate);
-        return imageAt(coordinate.shardId()).recordText(coordinate.imageRow());
+        lifecycle.readLock().lock();
+        try {
+            ensureOpen();
+            Objects.requireNonNull(coordinate);
+            requireCoordinate(coordinate);
+            return imageAt(coordinate.shardId()).recordText(coordinate.imageRow());
+        } finally { lifecycle.readLock().unlock(); }
     }
 
     private void requireCoordinate(Coordinate coordinate) {
