@@ -13,7 +13,7 @@ Observed branch before this receipt:
 - a failed multi-file materialization rolls back only files created by that invocation;
 - rollback deletes a created file only if it remains a regular non-symlink file with the exact expected SHA-256;
 - rollback failures are suppressed onto the primary failure rather than hiding it;
-- invocation-created empty directory chains are removed in reverse order when safe;
+- invocation-created empty directory chains are removed in reverse order when safe; directory ownership is recorded only after this invocation successfully creates each directory;
 - source and destination resolution reject symlink/non-directory ancestors;
 - `verify-strict`, `materialize-strict` and `stage-strict` bind the manifest's source revision to an exact clean Synexia Git checkout;
 - the strict receiver accepts the import manifest's existing 40- or 64-hex Git object-id grammar;
@@ -22,12 +22,12 @@ Observed branch before this receipt:
 ## Fresh executed focused evidence
 
 Exact current importer Git blob:
-`0af93db7d22189bb935716d5ce86e6b5c6a4168e`
+`6b6d902d13d4ad75aff551a065f03a8f7a73a7c4`
 
 The locally executed `SynexiaImporter.java` was checked with `git hash-object` and matched that blob exactly before compilation.
 
 Exact current Git-checkout helper blob:
-`cb03a2c5a13321405c8d8dae080a2d9c13474cd8`
+`7f1302fccfe5575ce54538ec4796b98db0bb48ef`
 
 Java 21 compile used:
 
@@ -52,14 +52,15 @@ That proof exercised:
 Strict checkout output:
 
 ```text
-M3JDK21_TARGET_GIT_SEAL_V2_PASS checks=4
+M3JDK21_TARGET_GIT_SEAL_V2_PASS checks=5
 ```
 
 That proof exercised:
 1. exact committed HEAD plus a tracked manifest source admitted;
 2. a SHA-correct but untracked manifest source refused;
-3. a different 64-hex manifest revision refused as a revision mismatch (not a grammar error);
-4. tracked worktree drift refused.
+3. an untracked source containing Git pathspec metacharacters was refused literally rather than matching another tracked file;
+4. a different 64-hex manifest revision refused as a revision mismatch (not a grammar error);
+5. tracked worktree drift refused.
 
 ## Authored repository tests
 
