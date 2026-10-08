@@ -1,0 +1,12 @@
+key	value
+source_head	5fb3e5d0836df1d4529a3f5365da3f55e54323da
+purpose	CURRENT_MASTER_JEP485_REPROOF
+canonical_product_receipt	m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+expected_state	CANDIDATE_MATERIALIZED_UNVERIFIED
+recipe_dag_required	true
+java21_patched_module_required	true
+openjdk_image_required	true
+gatherer_jtreg_required	true
+stream_regression_required	true
+built_jdk_api_smoke_required	true
+promotion_authority	false
