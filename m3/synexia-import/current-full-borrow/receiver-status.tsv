@@ -1,5 +1,5 @@
 family	source_tree_or_blob	target_state	target_surface	proof_receipt
-TEXT_INDEXSTRING	3d1bbf3bc944e827b8b82aa6841bc0720d618e93	SOURCE_PIN_ONLY	m3/vendor/synexia/synexia-indexstring + m3/ports/indexstring + java.lang.M3String*	NONE
+TEXT_INDEXSTRING	8535757300a93d56df9db5c66e81e2ba81ecde01	SOURCE_PIN_ONLY	m3/vendor/synexia/synexia-indexstring + m3/ports/indexstring + java.lang.M3String*	NONE
 AST	c210a504036d896a1568f2ef73a561e277f0f270	SOURCE_PIN_ONLY	m3/vendor/synexia + compiler/index tooling	NONE
 GRAMMAR	a5cbc81dbc21f8a3822155a785b881cb9793f203	SOURCE_PIN_ONLY	m3/vendor/synexia + compiler/parser tooling	NONE
 INDEX_PRECOMPUTE	527faec803802de6ee9ae737dd46b734293e6727	SOURCE_PIN_ONLY	m3/ports/precompute + java.lang.M3String*Precompute	NONE
@@ -26,7 +26,7 @@ MAT_COLLECTION_HISTORY	5e65ddd4daf0d7dd57abd43ac86d0785b47d9163	SOURCE_PIN_ONLY	
 MAT_INDEX_STRING_HISTORY	993fa6caae8aa436ce800ee4571c79ae3bc240b6	SOURCE_PIN_ONLY	m3/ports/indexstring history	NONE
 NATIVE_INTEROP	ebb32c5f38457740763c845010ca510e56f7f900	SOURCE_PIN_ONLY	m3 native/JNI adapters	NONE
 FAST_SEARCH	22dc56c084f0c414abac2ae64ab429397365f6f6	SOURCE_PIN_ONLY	m3 search/fuzzy/precompute receiver	NONE
-OPENREWRITE_RECIPES	bb1935e5b0412717b5d9af6a8715993fbfa70a4d	SOURCE_PIN_ONLY	m3 tooling/receipts/materialized outputs	NONE
+OPENREWRITE_RECIPES	460491ea7ce48580ba9ba1f7373e190464666a56	SOURCE_PIN_ONLY	m3 tooling/receipts/materialized outputs	NONE
 MINDEX_STRING_RUNTIME	1840f12a3ea64750d829f6dd2bda7916fc25d9f5	TARGET_MAPPING_PINNED	m3/ports/indexstring + java.lang.M3String* runtime adapter	m3/synexia-import/current-full-borrow/string-source-target-map.tsv
 MINDEX_AST_RUNTIME	87032ae60d2ce2a849ff56dc9abaff9d267ebe2e	SOURCE_PIN_ONLY	m3 AST/precompute + compiler tooling	NONE
 DAG	ea7dc0fc4fd628a8e5efdaa0d9d7beb3be0a3521	SOURCE_PIN_ONLY	m3 DAG/data-structure receiver	NONE
