@@ -14,11 +14,35 @@ RESIDUE = ROOT / "compatibility" / "synexia-canonical-residue-gitblobs.tsv"
 
 
 class SynexiaRecipeHomePolicyTest(unittest.TestCase):
+    def test_retired_atom_legacy_stays_absent_while_synexia_mirror_remains(self) -> None:
+        ownership = ROOT / "compatibility" / "synexia-recipe-ownership.tsv"
+        with ownership.open(encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle, delimiter="\t"))
+
+        retired = [
+            row for row in rows
+            if row["state"] == "BORROWED_CANONICAL_LEGACY_RETIRED"
+        ]
+        self.assertEqual(7, len(retired))
+        for row in retired:
+            self.assertIn("/com/m3/rewrite/atom/", row["legacy_path"])
+            self.assertFalse((ROOT.parent / row["legacy_path"]).exists(), row["legacy_path"])
+            self.assertTrue((ROOT.parent / row["canonical_path"]).is_file(), row["canonical_path"])
+
+        frozen = [
+            row for row in rows
+            if row["state"] == "BORROWED_CANONICAL_WITH_FROZEN_LEGACY"
+        ]
+        self.assertGreater(len(frozen), 0)
+        for row in frozen:
+            self.assertTrue((ROOT.parent / row["legacy_path"]).is_file(), row["legacy_path"])
+            self.assertTrue((ROOT.parent / row["canonical_path"]).is_file(), row["canonical_path"])
+
     def test_policy_is_consumer_only_for_reusable_m3_surfaces(self) -> None:
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(12, len(rows))
+        self.assertEqual(16, len(rows))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])

@@ -19,8 +19,15 @@ tree readback succeeds.
 
 ## Receiver rule
 
-Generic M3String/M3AST/M3Dag/data-structure/precompute and reusable Java/JNI algorithms stay
-canonical in Synexia. M3JDK21 owns only exact JDK-specific integration:
+Generic donor families remain canonical in Synexia, with explicit receiver naming:
+
+- `MIndexString` -> M3JDK21 **M3 String** / `M3String`;
+- `MIndexAST` -> `M3AST`;
+- `MIndexASTAtom` -> `M3ASTAtom`;
+- `MIndexDag` -> `M3Dag`;
+- generic data-structure, precompute, migration-recipe and reusable Java/JNI algorithms remain Synexia-owned.
+
+M3JDK21 owns only exact JDK-specific integration across `HotSpot/JIT/GC/CDS/JVMTI/JNI`:
 
 - java.lang.String representation and bootstrap;
 - HotSpot/interpreter/JIT/GC/CDS/JVMTI integration;
@@ -38,3 +45,13 @@ third-party code are never relicensed by this handoff. Abstract algorithms/ideas
 not an ownership claim over non-copyrightable subject matter.
 
 No source materialization or JDK product admission follows from this ownership pin alone; target build/runtime proof remains independent.
+
+
+## Focused String recipe composition
+
+For the currently absorbed focused String search lanes, M3JDK21 consumes the Synexia-owned
+composition recipe `com.synexia.rewrite.M3Jdk21StringFocusedSearchConvergence`. That composition
+serially owns adaptive prepared search, exact UTF-16 position masks, then fail-closed superset
+acceptance. It is recipe/provenance authority only: the three runtime lanes remain owned and
+qualified inside M3JDK21, and this repository must not create a duplicate descriptor under
+`m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite`.

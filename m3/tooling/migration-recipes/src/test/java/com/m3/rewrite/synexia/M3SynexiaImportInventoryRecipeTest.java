@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.InMemoryExecutionContext;
-import org.openrewrite.InMemoryLargeSourceSet;
+import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.text.PlainText;
 
 final class M3SynexiaImportInventoryRecipeTest {

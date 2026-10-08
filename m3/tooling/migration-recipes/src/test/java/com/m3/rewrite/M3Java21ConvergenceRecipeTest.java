@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
-import com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe;
-import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
-import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
+import com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe;
+import com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe;
+import com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates;
+import com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

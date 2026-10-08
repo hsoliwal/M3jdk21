@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import org.junit.jupiter.api.Test;
-import org.openrewrite.Environment;
+import org.openrewrite.config.Environment;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Result;
 import org.openrewrite.SourceFile;

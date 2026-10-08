@@ -105,7 +105,10 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
         if row["family"] in families:
             raise ValueError(f"duplicate recipe family {row['family']}")
         families.add(row["family"])
-        if row["state"] != "BORROWED_CANONICAL_WITH_FROZEN_LEGACY":
+        if row["state"] not in {
+            "BORROWED_CANONICAL_WITH_FROZEN_LEGACY",
+            "BORROWED_CANONICAL_LEGACY_RETIRED",
+        }:
             raise ValueError(f"invalid recipe ownership state at row {physical}")
         if not HEX40.fullmatch(row["synexia_revision"]):
             raise ValueError(f"invalid Synexia revision at row {physical}")
@@ -120,8 +123,12 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
 
         legacy = ROOT / row["legacy_path"]
         canonical = ROOT / row["canonical_path"]
-        if not legacy.is_file() or git_blob(legacy) != row["legacy_git_blob"]:
-            raise ValueError(f"frozen legacy recipe drift: {row['legacy_path']}")
+        if row["state"] == "BORROWED_CANONICAL_WITH_FROZEN_LEGACY":
+            if not legacy.is_file() or git_blob(legacy) != row["legacy_git_blob"]:
+                raise ValueError(f"frozen legacy recipe drift: {row['legacy_path']}")
+        else:
+            if legacy.exists():
+                raise ValueError(f"retired legacy recipe reintroduced: {row['legacy_path']}")
         if not canonical.is_file() or git_blob(canonical) != row["synexia_git_blob"]:
             raise ValueError(f"Synexia canonical mirror drift: {row['canonical_path']}")
 
