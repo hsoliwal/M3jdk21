@@ -18,7 +18,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(12, len(rows))
+        self.assertEqual(16, len(rows))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
