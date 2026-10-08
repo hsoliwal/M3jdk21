@@ -452,20 +452,27 @@ final class StringConcatHelper {
      * by MethodHandle adaptation; stringOf preserves the JLS null/toString rules.
      */
     static String m3Concat(String[] constants, Object[] args) {
-        String[] pieces = new String[args.length * 2 + 1];
-        int piece = 0;
+        M3String result = M3String.empty();
         for (int index = 0; index < args.length; index++) {
             String constant = constants[index];
-            if (constant != null) {
-                pieces[piece++] = constant;
+            if (constant != null && !constant.isEmpty()) {
+                M3String piece = M3String.canonicalize(constant);
+                result = result.length() == 0 ? piece : result.concat(piece);
             }
-            pieces[piece++] = stringOf(args[index]);
+
+            String argument = stringOf(args[index]);
+            if (!argument.isEmpty()) {
+                M3String piece = M3String.canonicalize(argument);
+                result = result.length() == 0 ? piece : result.concat(piece);
+            }
         }
+
         String suffix = constants[args.length];
-        if (suffix != null) {
-            pieces[piece++] = suffix;
+        if (suffix != null && !suffix.isEmpty()) {
+            M3String piece = M3String.canonicalize(suffix);
+            result = result.length() == 0 ? piece : result.concat(piece);
         }
-        return String.join("", "", "", pieces, piece);
+        return new String(result);
     }
 
     /**
