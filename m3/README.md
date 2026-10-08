@@ -77,3 +77,21 @@ Synexia source, recipes, tests and JNI atoms may be imported below m3/vendor/syn
 the independently verified manifest/receiver contract.
 
 See docs/synexia-delivery.md.
+
+## Third-party code and attribution
+
+The delivered owners (`m3/collections`, `m3/arrays`, `m3/ports/*`, `java.lang.M3*`,
+`jdk.internal.mindex.*`) import no third-party code; every donor is first-party Synexia source
+under Apache-2.0, attributed per leaf in `m3/compatibility/synexia-*-receipt.json`. Third-party
+material under `m3/` is build and test tooling only, plus one vendored license file:
+
+| Artifact | License | Role |
+| --- | --- | --- |
+| OpenRewrite 8.17.1 (+ Jackson 2.16.1, JetBrains annotations 24.1.0 transitively) | Apache-2.0 | recipe engine for hash-pinned receivers and proofs |
+| SLF4J 1.7.36 / 2.0.9 API, 2.0.13 simple | MIT | logging facade and test-scope binding required by OpenRewrite; no `org.slf4j` import under `m3/` |
+| JUnit Jupiter 5.10.2, JUnit Platform Console 1.12.2 | EPL-2.0 | test harness and hosted runner |
+| Mapbox `jni/ownership.hpp` license (`m3/vendor/synexia/third-party/mapbox-jni-ownership/`) | ISC | referenced, not copied, by the mirrored `shared_arrays.cpp` |
+
+Eclipse Collections, RE2/J, commonmark-java, ASM, SWT and JMH are imported by Synexia donor
+modules but were never pulled into this tree; the full table with versions, upstream links,
+obligations and the inventory method is `m3/THIRD_PARTY_NOTICES.md`.
