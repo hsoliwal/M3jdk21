@@ -17,6 +17,7 @@ PIN = BASE / "pin.tsv"
 ESTATE = BASE / "synexia-estate.tsv"
 DAG = BASE / "synexia-dag.tsv"
 STATUS = BASE / "receiver-status.tsv"
+PHASES = BASE / "promotion-phases.tsv"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
 PIN_EXPECTED = {
@@ -29,11 +30,14 @@ PIN_EXPECTED = {
     "source_dag_path": ".m3/m3jdk21-full-borrow-dag.tsv",
     "source_dag_git_blob": "3e6c56b8555231fb36d0ac620ab112aa5970d45a",
     "source_family_count": "32",
+    "source_phase_path": ".m3/m3jdk21-promotion-phases.tsv",
+    "source_phase_git_blob": "c4e8582f99caba32d718b2c1e86dae0854cdce3d",
     "source_canonical_invariant": "docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md",
     "target_repository": "hsoliwal/M3jdk21",
     "target_baseline": "c9b07049c57ecdf43175f5885e11998918416a00",
     "target_estate_copy": "m3/synexia-import/current-full-borrow/synexia-estate.tsv",
     "target_dag_copy": "m3/synexia-import/current-full-borrow/synexia-dag.tsv",
+    "target_phase_copy": "m3/synexia-import/current-full-borrow/promotion-phases.tsv",
     "copyright_notice": "Copyright 2026 Hitesh Soliwal and contributors",
     "first_party_license": "Apache-2.0",
     "abstract_idea_policy": "ABSTRACT_IDEA_NOT_RELABELED_AS_COPYRIGHTED_SOURCE",
@@ -146,6 +150,7 @@ def load_pin() -> dict[str, str]:
         "source_revision",
         "source_estate_git_blob",
         "source_dag_git_blob",
+        "source_phase_git_blob",
         "target_baseline",
     ):
         if not HEX40.fullmatch(values[field]):
@@ -263,6 +268,69 @@ def load_dag(pin: dict[str, str], estate: dict[str, dict[str, str]]) -> None:
 
 
 
+
+PHASE_HEADER = [
+    "schema",
+    "phase",
+    "predecessor",
+    "source_families",
+    "target_authority",
+    "state",
+]
+
+EXPECTED_PHASE_ORDER = [
+    "STRING",
+    "ARRAYS",
+    "COLLECTIONS",
+    "AST_COMPILER",
+    "REMAINING_FAMILIES",
+]
+
+
+def load_phases(pin: dict[str, str], estate: dict[str, dict[str, str]]) -> None:
+    with PHASES.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        if reader.fieldnames != PHASE_HEADER:
+            raise ValueError("invalid mirrored promotion-phase header")
+        rows = list(reader)
+
+    if git_blob(PHASES) != pin["source_phase_git_blob"]:
+        raise ValueError("mirrored promotion-phase bytes do not match pinned source Git blob")
+    if [row["phase"] for row in rows] != EXPECTED_PHASE_ORDER:
+        raise ValueError("M3JDK promotion phase order drift")
+
+    estate_families = set(estate)
+    referenced: set[str] = set()
+    previous = "-"
+    for physical, row in enumerate(rows, start=2):
+        if any(not row[field] for field in PHASE_HEADER):
+            raise ValueError(f"blank receiver phase field at row {physical}")
+        if row["schema"] != "SYNEXIA_M3JDK21_PROMOTION_PHASE_V1":
+            raise ValueError(f"invalid receiver phase schema at row {physical}")
+        if row["predecessor"] != previous:
+            raise ValueError(
+                f"promotion predecessor drift for {row['phase']}: "
+                f"expected={previous} actual={row['predecessor']}"
+            )
+        if row["state"] != "PLANNED":
+            raise ValueError(f"promotion phase cannot self-promote: {row['phase']}")
+        families = set(row["source_families"].split(";"))
+        unknown = families - estate_families
+        if unknown:
+            raise ValueError(
+                f"promotion phase {row['phase']} references unknown families: {sorted(unknown)}"
+            )
+        referenced.update(families)
+        previous = row["phase"]
+
+    missing = estate_families - referenced
+    if missing:
+        raise ValueError(
+            f"estate families missing from receiver promotion plan: {sorted(missing)}"
+        )
+
+
+
 def load_status(estate: dict[str, dict[str, str]]) -> None:
     with STATUS.open(encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle, delimiter="\t")
@@ -303,6 +371,7 @@ def main(argv: list[str]) -> int:
     pin = load_pin()
     estate = load_estate(pin)
     load_dag(pin, estate)
+    load_phases(pin, estate)
     load_status(estate)
     mixed = sum(
         row["copyright_class"] == MIXED_COPYRIGHT for row in estate.values()
@@ -310,7 +379,9 @@ def main(argv: list[str]) -> int:
     print(
         "SYNEXIA_FULL_BORROW_RECEIVER_PASS "
         f"families={len(estate)} source={pin['source_revision']} "
-        f"state=SOURCE_PIN_ONLY mixed_review_rows={mixed} dag=acyclic completion=false"
+        f"state=SOURCE_PIN_ONLY mixed_review_rows={mixed} dag=acyclic "
+        "phases=STRING>ARRAYS>COLLECTIONS>AST_COMPILER>REMAINING_FAMILIES "
+        "completion=false"
     )
     return 0
 
