@@ -21,8 +21,8 @@ final class SynexiaGitCheckout {
                 .toAbsolutePath()
                 .normalize();
         String expected = Objects.requireNonNull(expectedRevision, "expectedRevision");
-        if (!expected.matches("[0-9a-f]{40}")) {
-            throw new IllegalArgumentException("sourceRevision must be an exact Git SHA-1");
+        if (!expected.matches("(?:[0-9a-f]{40}|[0-9a-f]{64})")) {
+            throw new IllegalArgumentException("sourceRevision must be an exact Git object id");
         }
         if (!Files.isDirectory(root, LinkOption.NOFOLLOW_LINKS) || Files.isSymbolicLink(root)) {
             throw new IllegalArgumentException("repositoryRoot must be a real directory");
