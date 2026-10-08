@@ -804,7 +804,7 @@ public class M3StringPrecomputeSearchTest {
         int pieces = 1 + random.nextInt(8);
         String[] escapes = {
                 "\\b", "\\f", "\\n", "\\r", "\\s", "\\t",
-                "\\'", "\\"", "\\\\", "\\0", "\\7", "\\12",
+                "\\'", "\\\"", "\\\\", "\\0", "\\7", "\\12",
                 "\\141", "\\\n", "\\\r", "\\\r\n"
         };
         for (int index = 0; index < pieces; index++) {
