@@ -35,5 +35,8 @@
     "TARGET_RECEIVERS_MAY_REPLAY_HASH_PINNED_OPENJDK_POSTIMAGES",
     "MIGRATION_RESIDUE_MUST_NOT_EVOLVE_PORTABLE_SEMANTICS",
     "NO_SYNEXIA_RUNTIME_DEPENDENCY"
-  ]
+  ],
+  "synexia_descriptor_classification_pr": 9840,
+  "synexia_descriptor_classification_merge": "b38acf1ad679b57acb3f1fa65a0413cfeeeffcba",
+  "synexia_superseded_classification_pr": 9839
 }
