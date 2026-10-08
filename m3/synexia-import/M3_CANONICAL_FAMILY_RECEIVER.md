@@ -84,8 +84,9 @@ can now request a stronger checkout gate:
 - `SynexiaImportPlanCli stage-strict`
 
 These actions require the Synexia checkout's Git `HEAD` to equal the manifest
-`source_revision` and require the tracked worktree to be clean before the existing importer or
-stager runs. The receiver accepts the manifest's existing 40- or 64-hex Git object-id grammar.
+`source_revision`, require the tracked worktree to be clean, and require every manifest source
+path to be Git-tracked at that exact HEAD before the existing importer or stager runs. Unrelated
+untracked files do not gain import authority. The receiver accepts the manifest's existing 40- or 64-hex Git object-id grammar.
 Existing non-strict actions remain source-compatible for synthetic fixtures, replay tooling and
 already-sealed source trees.
 
