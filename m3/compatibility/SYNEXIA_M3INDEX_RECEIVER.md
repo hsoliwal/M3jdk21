@@ -19,8 +19,15 @@ tree readback succeeds.
 
 ## Receiver rule
 
-Generic MIndexString (mapped into M3JDK21 as M3 String), M3String/M3AST/M3Dag/data-structure/precompute and reusable Java/JNI algorithms stay
-canonical in Synexia. M3JDK21 owns only exact JDK-specific integration:
+Generic donor families remain canonical in Synexia, with explicit receiver naming:
+
+- `MIndexString` -> M3JDK21 **M3 String** / `M3String`;
+- `MIndexAST` -> `M3AST`;
+- `MIndexASTAtom` -> `M3ASTAtom`;
+- `MIndexDag` -> `M3Dag`;
+- generic data-structure, precompute, migration-recipe and reusable Java/JNI algorithms remain Synexia-owned.
+
+M3JDK21 owns only exact JDK-specific integration across `HotSpot/JIT/GC/CDS/JVMTI/JNI`:
 
 - java.lang.String representation and bootstrap;
 - HotSpot/interpreter/JIT/GC/CDS/JVMTI integration;
