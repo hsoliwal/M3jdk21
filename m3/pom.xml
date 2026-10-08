@@ -13,6 +13,7 @@
   <modules>
     <module>indexdb</module>
     <module>synexia-import</module>
+    <module>synexia-import/pure-int-recipe-custody</module>
     <module>tooling/migration-recipes</module>
     <module>tooling/synexia-jdk-a3-recipes</module>
     <module>tooling/a3</module>

@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Synexia pure-int public custody
+
+on:
+  pull_request:
+    paths:
+      - 'm3/pom.xml'
+      - 'm3/synexia-import/pure-int-recipe-custody/**'
+      - '.github/workflows/m3-synexia-pure-int-public-custody.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: 1 - Diff hygiene
+        run: git diff --check
+
+      - name: 2 - Verify exact source custody and behavior
+        run: >-
+          mvn -B -ntp
+          -f m3/synexia-import/pure-int-recipe-custody/pom.xml
+          clean verify
+
+      - name: 3 - Install receiver artifact
+        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh
+
+      - name: 4 - Verify local canonical GAV
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s "$HOME/.m2/repository/com/synexia/synexia-openrewrite-recipes/1.0.0-SNAPSHOT/synexia-openrewrite-recipes-1.0.0-SNAPSHOT.jar"
