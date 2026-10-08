@@ -3320,6 +3320,11 @@ public final class String
      * @since 1.4
      */
     public boolean matches(String regex) {
+        Objects.requireNonNull(regex, "regex");
+        M3String storage = m3();
+        if (storage != null && M3String.isLiteralRegexReplacement(regex, "")) {
+            return storage.contentEquals(regex);
+        }
         return Pattern.matches(regex, this);
     }
 
