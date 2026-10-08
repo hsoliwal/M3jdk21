@@ -69,8 +69,10 @@ for identity in ("mindex.string.regex-split-indexed",
                  "mindex.string.compiler-concat-reference-dag",
                  "mindex.string.codepoint-range-precompute",
                  "mindex.string.codepoint-offset-precompute"):
-    need(items[identity][4] == "PENDING_RUNTIME",
-         "unqualified runtime promotion " + identity)
+    need(items[identity][3] == "ALREADY_ABSORBED",
+         "qualified runtime disposition drift " + identity)
+    need(items[identity][4] == "TESTED_BY_NEW_JTREG",
+         "qualified runtime proof drift " + identity)
 
 string = read("src/java.base/share/classes/java/lang/String.java")
 m3 = read("src/java.base/share/classes/java/lang/M3String.java")
@@ -97,6 +99,7 @@ for marker, owner in [
     ("void getChars(int start, int end, char[] destination", tuple_),
     ("M3StringCharArrayHistoryTest.java", workflow),
     ("check-m3string-history-recovery.py", workflow),
+    ("M3StringRegexSplitHistoryTest.java", workflow),
 ]:
     need(marker in owner, "current implementation or proof missing: " + marker)
 
