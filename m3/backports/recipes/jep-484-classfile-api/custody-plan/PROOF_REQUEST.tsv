@@ -1,9 +1,9 @@
 field	value
 jep	484
 title	Class-File API
-proof_base	80b8534ad1e45002185fb3eeab233f98d3a7c0bd
-proof_requested	2026-10-07
-proof_branch	m3/jep484-custody-proof-20261007
+proof_base	cb066949884b83d687f29b46eecb97ffbba19875
+proof_requested	2026-10-08
+proof_branch	m3/jep484-current-master-custody-reproof-20261008
 scope	LIBRARY_API
 default_java21	NO
 classification	OPT_IN_SE_API_EXTENSION
@@ -19,4 +19,4 @@ source_materialized	false
 current_tree_receipt_authorized	false
 mutation_authority	false
 promotion	NOT_AUTHORIZED
-next_action	RUN_CURRENT_TREE_CUSTODY_PLANNER_THEN_GENERATE_ONLY_MECHANICALLY_CLEAN_SOURCE_SEALED_OPT_IN_CRATES
+next_action	RUN_CURRENT_TREE_CUSTODY_PLANNER_AND_IF_GREEN_GENERATE_ONLY_MECHANICALLY_CLEAN_SOURCE_SEALED_OPT_IN_CRATES
