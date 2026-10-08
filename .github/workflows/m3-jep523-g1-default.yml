@@ -15,6 +15,8 @@ on:
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-jep523-g1-default/**"
       - ".github/workflows/m3-jep523-g1-default.yml"
+      - "m3/tooling/validators/WorkflowStructureCheck.java"
+      - "m3/compatibility/synexia-workflow-structure-check-receipt-20261008.tsv"
   pull_request:
     paths:
       - "src/hotspot/share/gc/shared/gcConfig.cpp"
@@ -26,6 +28,8 @@ on:
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-jep523-g1-default/**"
       - ".github/workflows/m3-jep523-g1-default.yml"
+      - "m3/tooling/validators/WorkflowStructureCheck.java"
+      - "m3/compatibility/synexia-workflow-structure-check-receipt-20261008.tsv"
   workflow_dispatch:
 
 permissions:
@@ -36,23 +40,21 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
           cache: maven
 
-      - name: 0 - Consume canonical Synexia workflow-structure validator
+      - name: 0 - Validate workflow through pinned Synexia receiver
         shell: bash
         run: |
           set -euo pipefail
-          SYNEXIA="$RUNNER_TEMP/synexia-recipe-owner"
-          git init -q "$SYNEXIA"
-          git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
-          git -C "$SYNEXIA" -c protocol.version=2 fetch -q --depth=1 origin 0f0f9965092955c15f5c32f5eb102137fd0dbf8e
-          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
-          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
+          test "$(git hash-object m3/tooling/validators/WorkflowStructureCheck.java)" = \
+            "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7"
+          java m3/tooling/validators/WorkflowStructureCheck.java --self-test
+          java m3/tooling/validators/WorkflowStructureCheck.java \
             .github/workflows/m3-jep523-g1-default.yml
 
       - name: Diff hygiene
@@ -90,8 +92,8 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 75
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
@@ -139,8 +141,8 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 75
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
