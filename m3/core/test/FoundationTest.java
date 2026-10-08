@@ -155,6 +155,7 @@ public final class FoundationTest {
         Files.move(repaired,lazyTwo,StandardCopyOption.REPLACE_EXISTING);
         check(retry.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));
         retry.close();expect(IllegalStateException.class,()->retry.find("a"));
+        expect(IllegalStateException.class,()->retry.precomputeAt(new SharedLexiconCatalog.Coordinate(0,0)));
         lazy.close();expect(IllegalStateException.class,()->lazy.textAt(new SharedLexiconCatalog.Coordinate(0,0)));
         try(var paths=Files.list(lazyDirectory)){for(Path path:paths.toList())Files.delete(path);}Files.delete(lazyDirectory);
         String overlapMappings=mappings.replace("profile-high2\tprofile-high2\t{}\n",

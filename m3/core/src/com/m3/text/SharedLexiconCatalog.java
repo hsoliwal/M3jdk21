@@ -143,14 +143,20 @@ public final class SharedLexiconCatalog {
     public long recordCount() { return recordCount; }
     public List<String> shardFiles() { return files; }
     public List<SourceMapping> mappingsAt(Coordinate coordinate) {
+        ensureOpen();
         requireCoordinate(coordinate);
+        imageAt(coordinate.shardId());
         return mappings.get(coordinate);
     }
     /** Returns the preserved mapping for one exact Synexia source identity. */
     public Optional<SourceMapping> findMapping(String sourceId, String recordId) {
+        ensureOpen();
         Objects.requireNonNull(sourceId);
         Objects.requireNonNull(recordId);
-        return Optional.ofNullable(mappingsByIdentity.get(new SourceIdentity(sourceId, recordId)));
+        SourceMapping mapping = mappingsByIdentity.get(new SourceIdentity(sourceId, recordId));
+        if (mapping == null) return Optional.empty();
+        imageAt(mapping.coordinate().shardId());
+        return Optional.of(mapping);
     }
     /** Finds all source mappings attached to one exact UTF-16 lexeme. */
     public List<SourceMapping> findMappings(String text) {
@@ -158,10 +164,12 @@ public final class SharedLexiconCatalog {
         return coordinate.isEmpty() ? List.of() : mappingsAt(coordinate.orElseThrow());
     }
     public PrecomputeFacts precomputeAt(Coordinate coordinate) {
+        ensureOpen();
         requireCoordinate(coordinate);
+        imageAt(coordinate.shardId());
         return precompute.get(coordinate);
     }
-    public List<PrecomputeProfile> precomputeProfiles() { return precomputeProfiles; }
+    public List<PrecomputeProfile> precomputeProfiles() { ensureOpen(); return precomputeProfiles; }
 
     /** Explicitly warms all mapped shards; this does not flatten their payloads. */
     public void warm() { for (int shard = 0; shard < shards.size(); shard++) imageAt(shard).warm(); }
@@ -223,6 +231,10 @@ public final class SharedLexiconCatalog {
                 || coordinate.imageRow() < 0
                 || coordinate.imageRow() >= shards.get(coordinate.shardId()).expectedRecords)
             throw new IndexOutOfBoundsException("coordinate=" + coordinate);
+    }
+
+    private void ensureOpen() {
+        if (closed) throw new IllegalStateException("catalog closed");
     }
 
     private SharedLexiconImage imageAt(int shardId) {
