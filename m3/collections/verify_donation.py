@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026 by Hitesh Soliwal and contributors: qualify concurrent EnumSet in a new exact inventory; preserve all acceptance guards and historical receipts.
 # Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.
 """Verify the installed M3 collection donation with target-native Java/JNI checks.
 
@@ -58,7 +59,7 @@ def main():
     version = run('01-java-version', [java_home / 'bin/java', '-version'])
     if 'version "21.' not in version and 'version "21"' not in version:
         raise SystemExit('The qualified baseline requires Java 21')
-    manifest = HERE / 'qualification/installed-source-receiving-20261008.tsv'
+    manifest = HERE / 'qualification/installed-source-enum-set-20261008.tsv'
     packet = json.loads((HERE / 'synexia-donation.json').read_text())
     if digest(manifest) != packet['installed_source_manifest_sha256']:
         raise SystemExit('Installed source manifest drift; reconcile with canonical recipe before verifying')
@@ -146,7 +147,7 @@ def main():
                'cost_probe': 'DIAGNOSTIC_RECORDED' if args.cost_probe else 'NOT_RUN',
                'full_reactor': 'NOT_RUN', 'openjdk_jtreg_hotspot': 'NOT_RUN',
                'universal_performance_claim': False, 'phase_advance': False,
-               'active_phase': 'STRING', 'target_baseline': '439b767c7c92e2751f7f6a47c012f96472420905'}
+               'active_phase': 'STRING', 'target_baseline': 'eda1ae0733952394851c3580f8efb7624563b98c'}
     (evidence / 'qualification.json').write_text(json.dumps(receipt, indent=2) + '\n')
     print(json.dumps(receipt, indent=2))
 

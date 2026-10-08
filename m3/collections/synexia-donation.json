@@ -3,7 +3,7 @@
   "source_repository": "hsoliwal/com.synexia",
   "source_revision": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
   "target_repository": "hsoliwal/M3jdk21",
-  "target_baseline": "439b767c7c92e2751f7f6a47c012f96472420905",
+  "target_baseline": "eda1ae0733952394851c3580f8efb7624563b98c",
   "target_module": "com.m3.collections",
   "target_package": "com.m3.collections",
   "canonical_recipe": "com.synexia.rewrite.M3PackedCollectionsPortRecipe",
@@ -12,8 +12,8 @@
   "source_pins_sha256": "856e0b3e0efd47c88bfedfd6ac47291078ba6207e58178baaaac30017ade081f",
   "name_map_sha256": "e976621377edae456e5c69308208b9a193d81c2d221cd137afefcd2d07e67b94",
   "applied_java_manifest_sha256": "31ef71b432356b141588bbc1352638890f1abeae81acb89d97a497f8e0eda513",
-  "installed_source_manifest_sha256": "063ae7c1857cf683464160408cfab94c9e63503d40eabc4adc630b2e668815e1",
-  "qualification_receipt": "qualification/receiving-repair-20261008.json",
+  "installed_source_manifest_sha256": "6627c851e6a879e28c0434b41f988669c118649e04a4d89bcf30102aa9e767ed",
+  "qualification_receipt": "qualification/receiving-enum-set-20261008.json",
   "application_receipt": "qualification/synexia-receiving-application-20261008.json",
   "first_party_license": "Apache-2.0",
   "copyright": "Copyright © 2026 Hitesh Soliwal and Contributors to the Synexia Project.",
@@ -773,7 +773,7 @@
   "prior_qualified_target_commit": "e567cd9a3c4f7f371aecf19c8dd46f31a1cf9b05",
   "prior_qualification_scope": "HISTORICAL_79_JAVA_DONATION_BEFORE_CONCURRENT_PRIMITIVE_RECONCILIATION",
   "original_applied_java_manifest_sha256": "1f45bc0ccd7ad714e8789724e67ac303f4c5c26b7f1a8bedcb942189e6cc4ae2",
-  "installed_source_manifest": "qualification/installed-source-receiving-20261008.tsv",
+  "installed_source_manifest": "qualification/installed-source-enum-set-20261008.tsv",
   "name_mapping": "name-mapping.json",
   "canonical_successor_recipe_path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008",
   "canonical_successor_engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
@@ -954,12 +954,64 @@
       "target_commit": "439b767c7c92e2751f7f6a47c012f96472420905",
       "canonical_reusable_source_home": "hsoliwal/com.synexia",
       "source_admission": "NO_NEW_DONOR_COPY_BY_THIS_METADATA_RECIPE"
+    },
+    {
+      "target": "com.m3.collections.M3EnumSet",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3EnumSet.java",
+      "target_sha256": "a4c359c8035efdf31edbe6f5c36808984bf3de628e9f7c293429a1c7578ce77c",
+      "target_commit": "eda1ae0733952394851c3580f8efb7624563b98c",
+      "disposition": "CURRENT_CONCURRENT_TARGET_OWNER_PRESERVED_BYTE_EXACT",
+      "canonical_reusable_source_home": "hsoliwal/com.synexia",
+      "canonical_source_commit": "234b50350dc3b20e0928b893ca009ac0fc78cea2",
+      "canonical_descriptor": "com.synexia.m3.EnumSet",
+      "canonical_source_pull_request": 9817,
+      "canonical_central_home_registration": "NOT_REASSERTED; existing source crate staging row is PENDING_COMMIT",
+      "license": "Apache-2.0",
+      "source_admission": "NO_NEW_DONOR_COPY; existing target owner and immutable published source templates match",
+      "provenance_receipt": "m3/compatibility/synexia-enum-set-receipt.json",
+      "mapping_fragment": "m3/docs/name-mapping.d/m3-enum-set.json"
     }
   ],
   "qualification_source_counts": {
-    "main_java": 65,
-    "test_java": 23,
-    "junit_tests": 113
+    "main_java": 66,
+    "test_java": 24
   },
-  "historical_receipts": "Immutable 20261007 evidence remains canonical in Synexia; it is not current target qualification."
+  "historical_receipts": "Immutable 20261007 evidence remains canonical in Synexia; it is not current target qualification.",
+  "historical_receiving_repair_20261008": {
+    "target_baseline": "439b767c7c92e2751f7f6a47c012f96472420905",
+    "installed_source_manifest": "qualification/installed-source-receiving-20261008.tsv",
+    "installed_source_manifest_sha256": "063ae7c1857cf683464160408cfab94c9e63503d40eabc4adc630b2e668815e1",
+    "qualification_receipt": "qualification/receiving-repair-20261008.json",
+    "qualification_source_counts": {
+      "main_java": 65,
+      "test_java": 23,
+      "junit_tests": 113
+    },
+    "application_receipt": "qualification/synexia-receiving-application-20261008.json",
+    "disposition": "HISTORICAL_88_MODULE_SOURCE_PROOF_UNCHANGED"
+  },
+  "source_set_successor": {
+    "descriptor": "com.synexia.m3.M3CollectionsEnumSetInventorySuccessor20261008",
+    "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008/metadata-proof/enum-set-source-set-successor",
+    "source_baseline": "1074559415050bcda1110ca5c485870b3e7513a7",
+    "new_packet_publication": "PUBLISHED_CANONICAL_SOURCE",
+    "target_baseline": "eda1ae0733952394851c3580f8efb7624563b98c",
+    "scope": "EXACT_ADDITIVE_90_MODULE_SOURCE_COHORT",
+    "installed_rows": 95,
+    "standalone_java_probes": 2,
+    "non_java_inputs": 3,
+    "runtime_source_changes": 0,
+    "preserved_enum_set_receipt": "m3/compatibility/synexia-enum-set-receipt.json",
+    "preserved_enum_set_mapping_fragment": "m3/docs/name-mapping.d/m3-enum-set.json",
+    "preserved_family_map": "m3/collections/JDK_FAMILY_MAP.tsv",
+    "historical_receipts": "Original93-row inventory and88-module-source qualification/application evidence remain unchanged.",
+    "phase_advance": false,
+    "canonical_source_revision": "ea441c53361caf7222eb064b24640be7f7927672",
+    "canonical_source_tree": "21ba9919ac6c5a6f41019f8af05528915d7b0e60",
+    "canonical_source_artifact_root_sha256": "2b4f251c5730672f86566ab82543adc6c8169602f03e49f9635df6d845b1f568",
+    "canonical_source_artifact_files": 57,
+    "canonical_source_artifact_format": "SHA256 of UTF8 sorted path<TAB>mode<TAB>git_blob<TAB>sha256<LF>; excludes live central home and the external manifest",
+    "publication_binding_notice": "Modified 2026: bind the qualified current cohort to its exact published canonical packet; all runtime and historical qualification facts remain unchanged."
+  },
+  "modifications_20261008_enum_set_successor": "Preserve concurrent EnumSet code and its existing licensing/mapping receipts; qualify exact current inventory without changing historical88-source proof."
 }
