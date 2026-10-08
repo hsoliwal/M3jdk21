@@ -19,7 +19,7 @@ tree readback succeeds.
 
 ## Receiver rule
 
-Generic M3String/M3AST/M3Dag/data-structure/precompute and reusable Java/JNI algorithms stay
+Generic MIndexString (mapped into M3JDK21 as M3 String), M3String/M3AST/M3Dag/data-structure/precompute and reusable Java/JNI algorithms stay
 canonical in Synexia. M3JDK21 owns only exact JDK-specific integration:
 
 - java.lang.String representation and bootstrap;
