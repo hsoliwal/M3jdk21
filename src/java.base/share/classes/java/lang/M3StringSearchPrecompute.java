@@ -204,6 +204,152 @@ final class M3StringSearchPrecompute {
         return -1;
     }
 
+    static int indexOf(
+            byte[] source,
+            byte sourceCoder,
+            int sourceCount,
+            M3String pattern,
+            int fromIndex) {
+        int from = Math.clamp(fromIndex, 0, sourceCount);
+        int patternLength = pattern.length();
+        if (patternLength == 0) return from;
+        if (patternLength > sourceCount - from) return -1;
+        if (patternLength == 1) {
+            char wanted = pattern.charAt(0);
+            for (int index = from; index < sourceCount; index++) {
+                if (sourceUnit(source, sourceCoder, index) == wanted) return index;
+            }
+            return -1;
+        }
+
+        Plan plan = prepare(pattern);
+        if (plan != null) {
+            return plan.patternLength >= 8
+                    ? adaptiveBmh(source, sourceCoder, sourceCount, pattern, plan, from)
+                    : kmp(source, sourceCoder, sourceCount, pattern, plan, from);
+        }
+
+        int limit = sourceCount - patternLength;
+        char first = pattern.charAt(0);
+        for (int candidate = from; candidate <= limit; candidate++) {
+            if (sourceUnit(source, sourceCoder, candidate) != first) continue;
+            int index = 1;
+            while (index < patternLength
+                    && sourceUnit(source, sourceCoder, candidate + index) == pattern.charAt(index)) {
+                index++;
+            }
+            if (index == patternLength) return candidate;
+        }
+        return -1;
+    }
+
+    private static int kmp(
+            byte[] source,
+            byte sourceCoder,
+            int sourceCount,
+            M3String pattern,
+            Plan plan,
+            int fromIndex) {
+        int matched = 0;
+        for (int index = fromIndex; index < sourceCount; index++) {
+            char unit = sourceUnit(source, sourceCoder, index);
+            while (matched > 0 && unit != pattern.charAt(matched)) {
+                matched = plan.prefix[matched - 1];
+            }
+            if (unit == pattern.charAt(matched)) matched++;
+            if (matched == plan.patternLength) {
+                return index - plan.patternLength + 1;
+            }
+        }
+        return -1;
+    }
+
+    private static int adaptiveBmh(
+            byte[] source,
+            byte sourceCoder,
+            int sourceCount,
+            M3String pattern,
+            Plan plan,
+            int fromIndex) {
+        int maximumStart = sourceCount - plan.patternLength;
+        int at = fromIndex;
+        long failedComparisonWork = 0L;
+        while (at <= maximumStart) {
+            int index = plan.patternLength - 1;
+            while (index >= 0
+                    && pattern.charAt(index)
+                            == sourceUnit(source, sourceCoder, at + index)) {
+                index--;
+            }
+            if (index < 0) return at;
+
+            int shift =
+                    plan.skip256[
+                            sourceUnit(source, sourceCoder, at + plan.patternLength - 1) & 255];
+            if (shift > maximumStart - at) return -1;
+            at += shift;
+
+            failedComparisonWork += plan.patternLength - index;
+            if (failedComparisonWork
+                    > (long) plan.patternLength + 2L * (at - fromIndex)) {
+                return kmp(source, sourceCoder, sourceCount, pattern, plan, at);
+            }
+        }
+        return -1;
+    }
+
+    static int lastIndexOf(
+            byte[] source,
+            byte sourceCoder,
+            int sourceCount,
+            M3String pattern,
+            int fromIndex) {
+        int patternLength = pattern.length();
+        int maximumStart = Math.min(fromIndex, sourceCount - patternLength);
+        if (maximumStart < 0) return -1;
+        if (patternLength == 0) return maximumStart;
+        if (patternLength == 1) {
+            char wanted = pattern.charAt(0);
+            for (int index = maximumStart; index >= 0; index--) {
+                if (sourceUnit(source, sourceCoder, index) == wanted) return index;
+            }
+            return -1;
+        }
+
+        Plan plan = prepare(pattern);
+        if (plan != null) {
+            int matched = 0;
+            int scanStart = maximumStart + plan.patternLength - 1;
+            for (int index = scanStart; index >= 0; index--) {
+                char unit = sourceUnit(source, sourceCoder, index);
+                while (matched > 0 && unit != reverseUnit(pattern, matched)) {
+                    matched = plan.reversePrefix[matched - 1];
+                }
+                if (unit == reverseUnit(pattern, matched)) matched++;
+                if (matched == plan.patternLength) return index;
+            }
+            return -1;
+        }
+
+        char first = pattern.charAt(0);
+        for (int candidate = maximumStart; candidate >= 0; candidate--) {
+            if (sourceUnit(source, sourceCoder, candidate) != first) continue;
+            int index = 1;
+            while (index < patternLength
+                    && sourceUnit(source, sourceCoder, candidate + index) == pattern.charAt(index)) {
+                index++;
+            }
+            if (index == patternLength) return candidate;
+        }
+        return -1;
+    }
+
+    private static char sourceUnit(byte[] source, byte sourceCoder, int index) {
+        return sourceCoder == String.LATIN1
+                ? StringLatin1.charAt(source, index)
+                : StringUTF16.charAt(source, index);
+    }
+
     static int lastIndexOf(
             M3String source,
             M3String pattern,

@@ -1783,6 +1783,15 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
 
     private final void appendChars(String s, int off, int end) {
         M3String storage = s.m3();
+        if (storage != null && isLatin1() && !s.isLatin1()) {
+            M3String range = storage.slice(off, end);
+            M3StringFacts prepared = range.factsIfPrepared();
+            if (prepared != null && prepared.latin1) {
+                range.getBytes(this.value, 0, this.count, LATIN1, end - off);
+                count += end - off;
+                return;
+            }
+        }
         if (isLatin1()) {
             if (s.isLatin1()) {
                 if (storage != null) {

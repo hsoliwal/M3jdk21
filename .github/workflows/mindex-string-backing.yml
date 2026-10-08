@@ -23,7 +23,10 @@ on:
       - 'src/hotspot/share/opto/stringopts.cpp'
       - 'src/java.base/share/native/libjava/String.c'
       - 'src/java.base/share/classes/java/lang/M3String*.java'
+      - 'src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java'
       - 'src/java.base/share/classes/java/lang/String.java'
+      - 'src/java.base/share/classes/java/lang/StringConcatHelper.java'
+      - 'src/java.base/share/classes/java/lang/AbstractStringBuilder.java'
       - 'test/jdk/java/lang/String/M3MappedStringBackingTest.java'
       - 'test/jdk/java/lang/String/MapGuardTest.java'
       - 'test/jdk/java/lang/String/MapFactsTest.java'
@@ -35,6 +38,12 @@ on:
       - 'test/jdk/java/lang/String/M3StringRegexReplacementTest.java'
       - 'test/jdk/java/lang/String/M3StringInternTest.java'
       - 'test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java'
+      - 'test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java'
+      - 'test/jdk/java/lang/String/M3StringCodePointGeometryTest.java'
+      - 'test/jdk/java/lang/String/M3StringLiteralMatchesTest.java'
+      - 'test/jdk/java/lang/String/M3StringBuilderRangeBulkTest.java'
+      - 'test/jdk/java/lang/String/M3StringByteSourceNeedleTest.java'
+      - 'test/jdk/java/lang/String/M3StringMixedLiteralReplaceTest.java'
       - 'test/jdk/jdk/internal/mindex/M3TQFactsTest.java'
       - 'test/jdk/java/util/regex/M3RegexLiteralTQTest.java'
       - 'test/jdk/java/util/regex/M3RegexReuseTest.java'
@@ -65,6 +74,18 @@ jobs:
         run: python3 m3/runtime-integration/check-m3string-invariants.py
       - name: Check current MIndexString history parity
         run: python3 m3/runtime-integration/check-m3string-history-recovery.py
+      - name: Check compiler concat reference DAG
+        run: python3 m3/runtime-integration/check-m3string-concat-reference-dag.py
+      - name: Check bounded M3 String code-point geometry
+        run: python3 m3/runtime-integration/check-m3string-codepoint-geometry.py
+      - name: Check conservative literal String.matches receiver
+        run: python3 m3/runtime-integration/check-m3string-literal-matches.py
+      - name: Check prepared M3 builder range bulk receiver
+        run: python3 m3/runtime-integration/check-m3string-builder-range-bulk.py
+      - name: Check byte-source canonical M3 needle receiver
+        run: python3 m3/runtime-integration/check-m3string-byte-source-needle.py
+      - name: Check mixed canonical literal replacement receiver
+        run: python3 m3/runtime-integration/check-m3string-mixed-literal-replace.py
       - name: Prove canonical DAG master-repair recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
       - name: Prove direct M3 String stream traversal recipe
@@ -85,4 +106,4 @@ jobs:
       - name: Build matching runtime image
         run: make images
       - name: Run M3 String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringStreamsTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringRegexReplacementTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java test/jdk/java/util/regex/M3RegexReuseTest.java"
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringStreamsTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringRegexReplacementTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java test/jdk/java/lang/String/M3StringCodePointGeometryTest.java test/jdk/java/lang/String/M3StringLiteralMatchesTest.java test/jdk/java/lang/String/M3StringBuilderRangeBulkTest.java test/jdk/java/lang/String/M3StringByteSourceNeedleTest.java test/jdk/java/lang/String/M3StringMixedLiteralReplaceTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java test/jdk/java/util/regex/M3RegexReuseTest.java"
