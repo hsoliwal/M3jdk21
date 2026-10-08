@@ -11,7 +11,7 @@ public final class SynexiaImportCli {
     public static void main(String[] args) throws Exception {
         if (args.length != 4) {
             throw new IllegalArgumentException(
-                    "usage: SynexiaImportCli <verify|verify-target|materialize> <manifest.tsv> <synexia-root> <m3jdk-root>");
+                    "usage: SynexiaImportCli <verify|verify-strict|verify-target|materialize|materialize-strict> <manifest.tsv> <synexia-root> <m3jdk-root>");
         }
         String action = args[0];
         SynexiaImportManifest manifest =
@@ -20,8 +20,22 @@ public final class SynexiaImportCli {
         Path m3jdkRoot = Path.of(args[3]);
         switch (action) {
             case "verify" -> SynexiaImporter.verify(synexiaRoot, m3jdkRoot, manifest);
+            case "verify-strict" -> {
+                SynexiaGitCheckout.requireExactCleanHead(
+                        synexiaRoot,
+                        manifest.sourceRevision(),
+                        manifest.entries().stream()
+                                .map(SynexiaImportManifest.Entry::sourcePath)
+                                .toList());
+                SynexiaImporter.verify(synexiaRoot, m3jdkRoot, manifest);
+            }
             case "verify-target" -> SynexiaImporter.verifyTargetSnapshot(m3jdkRoot, manifest);
             case "materialize" -> SynexiaImporter.materialize(synexiaRoot, m3jdkRoot, manifest);
+            case "materialize-strict" -> {
+                SynexiaGitCheckout.requireExactCleanHead(
+                        synexiaRoot, manifest.sourceRevision());
+                SynexiaImporter.materialize(synexiaRoot, m3jdkRoot, manifest);
+            }
             default -> throw new IllegalArgumentException("unknown action: " + action);
         }
         System.out.println(manifest.root());

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -103,6 +104,243 @@ final class SynexiaImporterTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> SynexiaImporter.verify(synexia, temp.resolve("absent-target"), manifest));
+    }
+
+    @Test
+    void materializeRollsBackEarlierAddsWhenALaterWriteFails() throws Exception {
+        Path synexia = temp.resolve("synexia-rollback");
+        Path m3jdk = temp.resolve("m3jdk-rollback");
+        Files.createDirectories(synexia);
+        Files.createDirectories(m3jdk);
+
+        byte[] a = apache("package p; final class A {}\n");
+        byte[] b = apache("package p; final class B {}\n");
+        String sourceA = "module/src/main/java/p/A.java";
+        String sourceB = "module/src/main/java/p/B.java";
+        String targetA = "m3/vendor/synexia/module/src/main/java/p/A.java";
+        String targetB = "m3/vendor/synexia/module/src/main/java/p/B.java";
+        write(synexia.resolve(sourceA), a);
+        write(synexia.resolve(sourceB), b);
+        SynexiaImportManifest manifest =
+                new SynexiaImportManifest(
+                        "a".repeat(40),
+                        "m3jdk21",
+                        List.of(
+                                new SynexiaImportManifest.Entry(
+                                        "seed", sourceA, targetA, sha256(a), "Apache-2.0",
+                                        SynexiaImportManifest.Mode.APACHE_SOURCE),
+                                new SynexiaImportManifest.Entry(
+                                        "seed", sourceB, targetB, sha256(b), "Apache-2.0",
+                                        SynexiaImportManifest.Mode.APACHE_SOURCE)),
+                        "");
+
+        assertThrows(
+                IOException.class,
+                () ->
+                        SynexiaImporter.materialize(
+                                synexia,
+                                m3jdk,
+                                manifest,
+                                (index, entry) -> {
+                                    if (index == 1) throw new IOException("injected second-write failure");
+                                }));
+
+        assertFalse(Files.exists(m3jdk.resolve(targetA)));
+        assertFalse(Files.exists(m3jdk.resolve(targetB)));
+        assertFalse(
+                Files.exists(m3jdk.resolve("m3")),
+                "rollback must remove only the empty directory chain created by this invocation");
+    }
+
+    @Test
+    void strictCliRequiresManifestRevisionAndCleanTrackedCheckout() throws Exception {
+        Path synexia = temp.resolve("synexia-git");
+        Path m3jdk = temp.resolve("m3jdk-git");
+        Files.createDirectories(synexia);
+        Files.createDirectories(m3jdk);
+
+        String sourcePath = "module/src/main/java/p/A.java";
+        String targetPath = "m3/vendor/synexia/module/src/main/java/p/A.java";
+        byte[] bytes = apache("package p; final class A {}\n");
+        write(synexia.resolve(sourcePath), bytes);
+        Files.writeString(synexia.resolve("README.md"), "clean\n");
+        git(synexia, "init");
+        git(synexia, "config", "user.email", "m3@example.invalid");
+        git(synexia, "config", "user.name", "M3 Test");
+        git(synexia, "add", sourcePath, "README.md");
+        git(synexia, "commit", "-m", "fixture");
+        String head = git(synexia, "rev-parse", "HEAD").trim();
+
+        SynexiaImportManifest manifest =
+                new SynexiaImportManifest(
+                        head,
+                        "m3jdk21",
+                        List.of(new SynexiaImportManifest.Entry(
+                                "seed",
+                                sourcePath,
+                                targetPath,
+                                sha256(bytes),
+                                "Apache-2.0",
+                                SynexiaImportManifest.Mode.APACHE_SOURCE)),
+                        "");
+        Path manifestFile = temp.resolve("strict-manifest.tsv");
+        Files.writeString(manifestFile, manifest.toTsv());
+
+        SynexiaImportCli.main(
+                new String[] {
+                    "verify-strict",
+                    manifestFile.toString(),
+                    synexia.toString(),
+                    m3jdk.toString()
+                });
+
+        SynexiaImportManifest wrongRevision =
+                new SynexiaImportManifest(
+                        "0".repeat(40), "m3jdk21", manifest.entries(), "");
+        Path wrongFile = temp.resolve("wrong-revision.tsv");
+        Files.writeString(wrongFile, wrongRevision.toTsv());
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        SynexiaImportCli.main(
+                                new String[] {
+                                    "verify-strict",
+                                    wrongFile.toString(),
+                                    synexia.toString(),
+                                    m3jdk.toString()
+                                }));
+
+        SynexiaImportManifest wrongSha256Revision =
+                new SynexiaImportManifest(
+                        "0".repeat(64), "m3jdk21", manifest.entries(), "");
+        Path wrongSha256File = temp.resolve("wrong-sha256-revision.tsv");
+        Files.writeString(wrongSha256File, wrongSha256Revision.toTsv());
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        SynexiaImportCli.main(
+                                new String[] {
+                                    "verify-strict",
+                                    wrongSha256File.toString(),
+                                    synexia.toString(),
+                                    m3jdk.toString()
+                                }));
+
+        Files.writeString(synexia.resolve("README.md"), "tracked drift\n");
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        SynexiaImportCli.main(
+                                new String[] {
+                                    "materialize-strict",
+                                    manifestFile.toString(),
+                                    synexia.toString(),
+                                    m3jdk.toString()
+                                }));
+        assertFalse(Files.exists(m3jdk.resolve(targetPath)));
+
+        git(synexia, "checkout", "--", "README.md");
+        String untrackedSource = "module/src/main/java/p/B.java";
+        String untrackedTarget = "m3/vendor/synexia/" + untrackedSource;
+        write(
+                synexia.resolve(untrackedSource),
+                apache("package p; final class B {}\n"));
+        SynexiaImportManifest untrackedManifest =
+                new SynexiaImportManifest(
+                        head,
+                        "m3jdk21",
+                        List.of(new SynexiaImportManifest.Entry(
+                                "seed",
+                                untrackedSource,
+                                untrackedTarget,
+                                "2140213c926ce6d65e25fe23c8fb82f7d75906172aaebee0a1aa8cf3d133c57a",
+                                "Apache-2.0",
+                                SynexiaImportManifest.Mode.APACHE_SOURCE)),
+                        "");
+        Path untrackedFile = temp.resolve("untracked-source.tsv");
+        Files.writeString(untrackedFile, untrackedManifest.toTsv());
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        SynexiaImportCli.main(
+                                new String[] {
+                                    "verify-strict",
+                                    untrackedFile.toString(),
+                                    synexia.toString(),
+                                    m3jdk.toString()
+                                }));
+        assertFalse(Files.exists(m3jdk.resolve(untrackedTarget)));
+
+        String wildcardSource = "module/src/main/java/p/[AB].java";
+        String wildcardTarget = "m3/vendor/synexia/" + wildcardSource;
+        write(
+                synexia.resolve(wildcardSource),
+                apache("package p; final class Bracket {}\n"));
+        SynexiaImportManifest wildcardManifest =
+                new SynexiaImportManifest(
+                        head,
+                        "m3jdk21",
+                        List.of(new SynexiaImportManifest.Entry(
+                                "seed",
+                                wildcardSource,
+                                wildcardTarget,
+                                "9c2c5f1bfda66d7c0c69c3cbb3bddbfc029e0c838ca26e662799903e5976db78",
+                                "Apache-2.0",
+                                SynexiaImportManifest.Mode.APACHE_SOURCE)),
+                        "");
+        Path wildcardFile = temp.resolve("wildcard-source.tsv");
+        Files.writeString(wildcardFile, wildcardManifest.toTsv());
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        SynexiaImportCli.main(
+                                new String[] {
+                                    "verify-strict",
+                                    wildcardFile.toString(),
+                                    synexia.toString(),
+                                    m3jdk.toString()
+                                }));
+        assertFalse(Files.exists(m3jdk.resolve(wildcardTarget)));
+    }
+
+    @Test
+    void intermediateSymlinksFailClosedWhenSupported() throws Exception {
+        Path synexia = temp.resolve("synexia-symlink");
+        Path m3jdk = temp.resolve("m3jdk-symlink");
+        Path outside = temp.resolve("outside");
+        Files.createDirectories(synexia);
+        Files.createDirectories(m3jdk);
+        Files.createDirectories(outside.resolve("src"));
+        byte[] bytes = apache("package p; final class A {}\n");
+        write(outside.resolve("src/A.java"), bytes);
+
+        Path link = synexia.resolve("module");
+        try {
+            Files.createSymbolicLink(link, outside);
+        } catch (UnsupportedOperationException | java.io.IOException | SecurityException unsupported) {
+            return;
+        }
+
+        SynexiaImportManifest manifest =
+                manifest(
+                        "module/src/A.java",
+                        "m3/vendor/synexia/module/src/A.java",
+                        bytes);
+        assertThrows(
+                IllegalStateException.class,
+                () -> SynexiaImporter.verifySources(synexia, manifest));
+    }
+
+    private static String git(Path root, String... args) throws Exception {
+        String[] command = new String[args.length + 3];
+        command[0] = "git";
+        command[1] = "-C";
+        command[2] = root.toString();
+        System.arraycopy(args, 0, command, 3, args.length);
+        Process process = new ProcessBuilder(command).redirectErrorStream(true).start();
+        String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+        assertEquals(0, process.waitFor(), output);
+        return output;
     }
 
     @Test

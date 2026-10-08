@@ -73,3 +73,33 @@ fast-search and canonical recipes.
 
 It is not target acceptance and does not modify the ordered receiving plan. Advance a family only
 through an additive successor receipt with target-native proof.
+
+## Operational import hardening
+
+The existing manifest/source-hash contract remains the portable data contract. Operational callers
+can now request a stronger checkout gate:
+
+- `SynexiaImportCli verify-strict`
+- `SynexiaImportCli materialize-strict`
+- `SynexiaImportPlanCli stage-strict`
+
+These actions require the Synexia checkout's Git `HEAD` to equal the manifest
+`source_revision`, require the tracked worktree to be clean, and require every manifest source
+path to be Git-tracked at that exact HEAD before the existing importer or stager runs. Unrelated
+untracked files do not gain import authority. The receiver accepts the manifest's existing 40- or 64-hex Git object-id grammar.
+Existing non-strict actions remain source-compatible for synthetic fixtures, replay tooling and
+already-sealed source trees.
+
+Direct materialization remains additive: an existing divergent target fails closed, while an
+identical target is a no-op. A multi-file invocation now records only targets it created. If a later
+write or final verification fails, it walks those newly-created targets in reverse order and removes
+one only when it is still a regular non-symlink file with the exact expected SHA-256. A target that
+changed after creation is never deleted during rollback; that rollback failure is retained as a
+suppressed failure on the original exception.
+
+Source and destination path resolution also rejects symlink or non-directory ancestors. This
+prevents a lexically in-root path from escaping through an intermediate link.
+
+The staged `ADD/REPLACE/KEEP/STALE` planner remains the authority for replacement candidates.
+This hardening does not turn the direct importer into a replacement engine and does not grant
+promotion authority.
