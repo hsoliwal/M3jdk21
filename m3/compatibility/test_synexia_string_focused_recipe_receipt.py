@@ -41,6 +41,27 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             set(by_lane),
         )
 
+        expected_artifacts = {
+            "adaptive-prepared-literal-search": (
+                "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-string-adaptive-search.yml",
+                "a16743de4db9fb63fb857939ce23393fc7adc293",
+                "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-string-adaptive-search-20261008/manifest.tsv",
+                "158fcb491ab53e9b262c1da636b8c3ef27bb3c0d",
+            ),
+            "exact-utf16-position-masks": (
+                "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-string-position-masks.yml",
+                "fdff9654232b9a02171a547ce391367073cdc81a",
+                "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-string-position-masks-20261008/manifest.tsv",
+                "74632a5be565f065677ade1c8d7cbd3f30ce5cda",
+            ),
+            "focused-search-superset-acceptance": (
+                "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-string-focused-search-invariant.yml",
+                "ff96a228535371451ee0c049c17564009832a465",
+                "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3Jdk21StringFocusedSearchInvariantRecipe.java",
+                "37e970abe4f0e45478ff00338086972e5c3708c2",
+            ),
+        }
+
         for row in rows:
             self.assertEqual(
                 "M3JDK21_SYNEXIA_STRING_FOCUSED_RECIPE_RECEIPT_V2",
@@ -57,6 +78,16 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             self.assertRegex(row["canonical_evidence_git_blob"], r"^[0-9a-f]{40}$")
             self.assertTrue(row["canonical_recipe_path"].startswith("synexia-openrewrite-recipes/"))
             self.assertTrue(row["canonical_evidence_path"].startswith("synexia-openrewrite-recipes/"))
+            (
+                recipe_path,
+                recipe_blob,
+                evidence_path,
+                evidence_blob,
+            ) = expected_artifacts[row["lane"]]
+            self.assertEqual(recipe_path, row["canonical_recipe_path"])
+            self.assertEqual(recipe_blob, row["canonical_recipe_git_blob"])
+            self.assertEqual(evidence_path, row["canonical_evidence_path"])
+            self.assertEqual(evidence_blob, row["canonical_evidence_git_blob"])
             self.assertIn(
                 "ALREADY_ABSORBED_MASTER@c9b07049c57ecdf43175f5885e11998918416a00",
                 row["runtime_state"],
