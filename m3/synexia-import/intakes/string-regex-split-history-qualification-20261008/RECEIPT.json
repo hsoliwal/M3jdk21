@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "source_repository": "hsoliwal/com.synexia",
+  "source_pr": 9854,
+  "source_branch": "m3/string-regex-split-history-qualification-20261008",
+  "canonical_recipe": "com.synexia.rewrite.M3Jdk21StringRegexSplitHistoryQualification",
+  "donor_commit": "e9b8e4313e36f0af77cb2cc7f03fa73444634bc7",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_branch": "m3/string-regex-split-history-qualification-receiver-20261008",
+  "application_kind": "QUALIFICATION_ONLY",
+  "runtime_sources_modified": false,
+  "runtime_dependency_on_synexia": false,
+  "created_target": "test/jdk/java/lang/String/M3StringRegexSplitHistoryTest.java",
+  "updated_targets": [
+    ".github/workflows/mindex-string-backing.yml",
+    "m3/docs/m3string-history-recovery.tsv",
+    "m3/runtime-integration/check-m3string-history-recovery.py"
+  ],
+  "promoted_capabilities": [
+    "mindex.string.regex-split-indexed",
+    "mindex.string.literal-regex-matches",
+    "mindex.string.compiler-concat-reference-dag",
+    "mindex.string.codepoint-range-precompute",
+    "mindex.string.codepoint-offset-precompute"
+  ],
+  "verification": {
+    "synexia_openrewrite_sdk": "NOT_RUN",
+    "target_history_checker": "NOT_RUN",
+    "target_jtreg": "NOT_RUN",
+    "target_image": "NOT_RUN"
+  }
+}
