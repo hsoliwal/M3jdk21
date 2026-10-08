@@ -36,6 +36,11 @@ public final class M3SynexiaHandoffGuardRecipe extends Recipe {
     private static final String ARTIFACT_POLICY_V2 = "SYNEXIA_PUBLIC_TARGET_ARTIFACT_CLASS_V1";
     private static final String RESOURCE_ROOT =
             "/com/m3/rewrite/backport/synexia-bridge/";
+    private static final String JAVA_ROOT =
+            "/com/m3/rewrite/backport/jdk21-hash-pinned/";
+    private static final String TEXT_ROOT =
+            "/com/m3/rewrite/backport/jdk21-hash-pinned-text/";
+    private static final long MAX_PAYLOAD_BYTES = 512L * 1024L * 1024L;
 
     @Option(
             displayName = "Synexia crate name",
@@ -160,7 +165,11 @@ public final class M3SynexiaHandoffGuardRecipe extends Recipe {
         requireEquals("@artifact-policy\t" + ARTIFACT_POLICY_V2, lines.get(4), "artifact policy");
 
         int rows = 0;
+        long payloadBytes = 0L;
         Set<String> targets = new HashSet<>();
+        Set<String> payloads = new HashSet<>();
+        java.util.ArrayList<String> javaManifest = new java.util.ArrayList<>();
+        java.util.ArrayList<String> textManifest = new java.util.ArrayList<>();
         for (int index = 5; index < lines.size(); index++) {
             String[] cells = lines.get(index).split("\t", -1);
             if (cells.length != 14 || !"ROW".equals(cells[0])) {
@@ -172,21 +181,99 @@ public final class M3SynexiaHandoffGuardRecipe extends Recipe {
                 throw new IllegalStateException("invalid Synexia handoff kind");
             }
             requireTargetClass(targetClass);
-            requireSha(cells[5], "sourceSha");
+            String source = relative(cells[4]);
+            String sourceSha = requireShaValue(cells[5], "sourceSha");
             String target = relative(cells[6]);
             requireUniqueTarget(targets, target);
-            if (!"ABSENT".equals(cells[7])) requireSha(cells[7], "targetBefore");
-            requireSha(cells[8], "targetAfter");
-            requirePayload(cells[9]);
+            String before = cells[7];
+            if (!"ABSENT".equals(before)) requireSha(before, "targetBefore");
+            String after = requireShaValue(cells[8], "targetAfter");
+            requireEquals(sourceSha, after, "source/target postimage SHA");
+            String payload = cells[9];
+            requirePayload(payload);
+            if (!payloads.add((kind.equals("JAVA") ? "J:" : "T:") + payload)) {
+                throw new IllegalStateException("duplicate Synexia handoff payload leaf");
+            }
             requireEquals("Apache-2.0", cells[10], "V2 source license");
             String recipeId = cells[11];
+            requireReceiverLane(kind, source, target);
             requireTargetClassPath(kind, targetClass, target);
             requireCanonicalRecipeBinding(targetClass, recipeId, target);
             requireSha(cells[12], "contractRoot");
             requireSha(cells[13], "gateRoot");
+
+            String payloadRoot = "JAVA".equals(kind) ? JAVA_ROOT : TEXT_ROOT;
+            String payloadText = resource(payloadRoot + crateName + "/" + payload);
+            requireEquals(after, sha256(payloadText), "payload hash");
+            payloadBytes =
+                    Math.addExact(
+                            payloadBytes,
+                            payloadText.getBytes(StandardCharsets.UTF_8).length);
+            if (payloadBytes > MAX_PAYLOAD_BYTES) {
+                throw new IllegalStateException("Synexia handoff payload budget exceeded");
+            }
+
+            String manifestRow = target + "\t" + before + "\t" + after + "\t" + payload;
+            if ("JAVA".equals(kind)) javaManifest.add(manifestRow);
+            else textManifest.add(manifestRow);
             rows++;
         }
-        requireCounters(properties, rows);
+        verifyManifest(JAVA_ROOT, javaManifest);
+        verifyManifest(TEXT_ROOT, textManifest);
+        requireCounters(properties, rows, payloadBytes);
+    }
+
+    private void verifyManifest(String ownerRoot, List<String> expected) {
+        String name = ownerRoot + crateName + "/manifest.tsv";
+        String actual = resourceOrNull(name);
+        if (expected.isEmpty()) {
+            if (actual != null) {
+                throw new IllegalStateException("unexpected empty Synexia receiver manifest: " + name);
+            }
+            return;
+        }
+        if (actual == null) {
+            throw new IllegalStateException("missing Synexia receiver manifest: " + name);
+        }
+        List<String> rows =
+                actual.lines()
+                        .filter(line -> !line.isBlank() && !line.startsWith("#"))
+                        .toList();
+        if (!rows.equals(expected)) {
+            throw new IllegalStateException("Synexia receiver manifest drift: " + name);
+        }
+    }
+
+    private static void requireReceiverLane(String kind, String source, String target) {
+        if ("JAVA".equals(kind)) {
+            if (!source.endsWith(".java")
+                    || !M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(target)) {
+                throw new IllegalStateException("Synexia Java handoff is outside receiver roots");
+            }
+            return;
+        }
+        if (target.endsWith(".java")) {
+            throw new IllegalStateException(
+                    "Synexia TEXT/NATIVE handoff cannot target a Java compilation unit");
+        }
+        if (!M3Jdk21HashPinnedTextSnapshotRecipe.jdkTextPath(target)) {
+            throw new IllegalStateException("Synexia text/native target is outside receiver roots");
+        }
+        if ("NATIVE".equals(kind) && (!nativePath(source) || !nativePath(target))) {
+            throw new IllegalStateException("Synexia NATIVE handoff requires native file paths");
+        }
+    }
+
+    private static boolean nativePath(String value) {
+        String lower = value.toLowerCase(java.util.Locale.ROOT);
+        return lower.endsWith(".c")
+                || lower.endsWith(".cc")
+                || lower.endsWith(".cpp")
+                || lower.endsWith(".cxx")
+                || lower.endsWith(".h")
+                || lower.endsWith(".hh")
+                || lower.endsWith(".hpp")
+                || lower.endsWith(".s");
     }
 
     private static void requireTargetClass(String value) {
@@ -288,15 +375,26 @@ public final class M3SynexiaHandoffGuardRecipe extends Recipe {
     }
 
     private static void requireCounters(Properties properties, int rows) {
+        requireCounters(properties, rows, -1L);
+    }
+
+    private static void requireCounters(Properties properties, int rows, long actualPayloadBytes) {
         int expectedRows;
+        long expectedPayloadBytes;
         try {
             expectedRows = Integer.parseInt(properties.getProperty("rows"));
-            Long.parseLong(properties.getProperty("payloadBytes"));
+            expectedPayloadBytes = Long.parseLong(properties.getProperty("payloadBytes"));
         } catch (RuntimeException invalid) {
             throw new IllegalStateException("invalid Synexia handoff counters", invalid);
         }
         if (rows < 1 || rows != expectedRows) {
             throw new IllegalStateException("Synexia handoff row count mismatch");
+        }
+        if (expectedPayloadBytes < 0 || expectedPayloadBytes > MAX_PAYLOAD_BYTES) {
+            throw new IllegalStateException("invalid Synexia handoff payloadBytes");
+        }
+        if (actualPayloadBytes >= 0 && actualPayloadBytes != expectedPayloadBytes) {
+            throw new IllegalStateException("Synexia handoff payload byte count mismatch");
         }
     }
 
@@ -342,16 +440,27 @@ public final class M3SynexiaHandoffGuardRecipe extends Recipe {
     }
 
     private static void requireSha(String value, String field) {
+        requireShaValue(value, field);
+    }
+
+    private static String requireShaValue(String value, String field) {
         if (value == null || !value.matches("[0-9a-f]{64}")) {
             throw new IllegalStateException("invalid Synexia " + field);
         }
+        return value;
     }
 
     private static String resource(String name) {
+        String value = resourceOrNull(name);
+        if (value == null) {
+            throw new IllegalStateException("missing Synexia handoff resource: " + name);
+        }
+        return value;
+    }
+
+    private static String resourceOrNull(String name) {
         try (var stream = M3SynexiaHandoffGuardRecipe.class.getResourceAsStream(name)) {
-            if (stream == null) {
-                throw new IllegalStateException("missing Synexia handoff resource: " + name);
-            }
+            if (stream == null) return null;
             return StandardCharsets.UTF_8
                     .newDecoder()
                     .onMalformedInput(CodingErrorAction.REPORT)
