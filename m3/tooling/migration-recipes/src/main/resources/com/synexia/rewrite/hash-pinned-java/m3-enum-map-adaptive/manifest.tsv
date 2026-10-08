@@ -1,0 +1,6 @@
+# path	before_sha256	after_sha256	resource
+m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java	ABSENT	79cac12007699fb2983853af40c27e9b00d2475390d9d1f36c245ddfe7b317d3	00-M3AdaptiveEnumLongMap.java.txt
+m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java	ABSENT	523534ffb1824ffbdd7ac4f1dce04e9688f3f8a9b7ce637796100070df645b92	01-M3IntLongConsumer.java.txt
+m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java	ABSENT	43df8c19ca96e4da9715547ed3e2b2bd1751c26c3dc0b56af7dcfa8d1ce5cddf	02-M3IntLongHashMap.java.txt
+m3/collections/src/test/java/com/m3/collections/M3AdaptiveEnumLongMapTest.java	ABSENT	7c86957b387dd1afa83384b1fbf05ff1c5d0807bb3255f31ffcd9dfd4b5ec140	03-M3AdaptiveEnumLongMapTest.java.txt
+m3/collections/src/test/java/com/m3/collections/M3IntLongHashMapTest.java	ABSENT	59fbd569f900826bead33b3297528aedc94f22b24366039cfd41d584a527ff17	04-M3IntLongHashMapTest.java.txt

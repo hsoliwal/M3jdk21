@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.EnumMapAdaptive
+displayName: M3JDK21 M3AdaptiveEnumLongMap proving-ground owner
+description: >-
+  Adds com.m3.collections.M3AdaptiveEnumLongMap, the adaptive variant deferred from
+  M3EnumLongMap: ordinals are hashed in a new primitive int-to-long owner
+  (com.m3.collections.M3IntLongHashMap, with M3IntLongConsumer) while the mapping count is
+  small, and the map migrates to the dense ordinal-indexed M3EnumLongMap at the size where the
+  dense lane retains fewer bytes; compact re-applies the rule. Adapted from the first-party
+  Synexia donors com.synexia.primitives.AdaptiveEnumPrimitiveMap and
+  com.synexia.primitives.IntLongHashMap, plus differential tests against java.util.EnumMap and
+  java.util.HashMap. Proving ground only (wave 2 of the COLLECTIONS family); no java.util type
+  is replaced.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-enum-map-adaptive
