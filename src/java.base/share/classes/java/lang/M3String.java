@@ -162,8 +162,12 @@ final class M3String implements CharSequence {
         }
     }
 
+    /**
+     * The binary String-concat hot path composes canonical coordinates directly.
+     * Keep the array-based join as the independent compatibility oracle for N-ary joins.
+     */
     static M3String join(String first, String second) {
-        return join(new String[] {first, second});
+        return M3StringPool.concat(canonicalize(first), canonicalize(second));
     }
 
     static M3String join(String[] parts) {
