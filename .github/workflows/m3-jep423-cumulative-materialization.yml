@@ -87,7 +87,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 22             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176             --out "$RUNNER_TEMP/jep423/JDK21_TO_JEP423_FINAL.tsv"
-          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176             --paths-file "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt"             --crate-size 1             --include-native             --include-text             --out "$RUNNER_TEMP/jep423/file-atoms"
+          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176             --paths-file "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt"                         --donor-map m3/backports/recipes/jep-423-region-pinning/PATH_DONOR_OVERRIDES.tsv --crate-size 1             --include-native             --include-text             --out "$RUNNER_TEMP/jep423/file-atoms"
 
       - name: 7 - Prove complete cumulative accounting
         shell: bash
