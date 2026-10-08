@@ -58,3 +58,18 @@ Independently authored Synexia/M3 source, tests, documentation, recipes and othe
 expression retain their authorship/copyright and are distributed under Apache-2.0 where so marked.
 This does not claim copyright over abstract ideas, algorithms as such, or third-party material.
 OpenJDK and donor code retain their own governing licenses and notices.
+
+## Current full-borrow successor snapshot
+
+The historical family table above remains an ownership map. The current exact Synexia source-tree
+snapshot is received separately under `m3/synexia-import/current-full-borrow/`.
+
+That successor is pinned to Synexia revision
+`296323958b1019edd59b60b9c05cb148d024cfe5` and starts every family at
+`SOURCE_PIN_ONLY`. It adds exact source-tree custody for String/IndexString, AST/grammar,
+precompute, MIndex runtime/foundation, data structures, collections, compiler, algorithms, DB,
+JNI/native, search/regex, loaders, M3Index aliases/bridges, MAT history, native interop,
+fast-search and canonical recipes.
+
+It is not target acceptance and does not modify the ordered receiving plan. Advance a family only
+through an additive successor receipt with target-native proof.
