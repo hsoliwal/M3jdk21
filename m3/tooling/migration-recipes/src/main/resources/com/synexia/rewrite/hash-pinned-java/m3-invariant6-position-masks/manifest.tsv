@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java	b6372e4280cc46f2cf5a1baa0b42c35341eea834dac9449fa5697b6aa20a0f2f	a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b	00-M3StringPositionPrecompute.java.txt
+test/jdk/java/lang/String/M3StringPositionInvariant6Test.java	ABSENT	12fa3fe9da681ceded6bb06215665ffa052d99c24ae6ecd891b553ba270d989d	01-M3StringPositionInvariant6Test.java.txt

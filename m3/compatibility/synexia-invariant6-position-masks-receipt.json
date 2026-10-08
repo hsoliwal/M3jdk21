@@ -1,0 +1,64 @@
+{
+  "schema": "M3JDK21_SYNEXIA_INVARIANT6_POSITION_MASKS_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-invariant6-position-masks-20261008",
+    "pullRequest": 9870,
+    "commit": "ae7361e3c31",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.Invariant6PositionMasks",
+    "crate": "m3-invariant6-position-masks",
+    "fossReuseDecisionRow": "string.invariant6.position-masks",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+        "commit": "c9b07049c5",
+        "target": "java.lang.M3StringPositionPrecompute",
+        "mechanics": "the owner itself; ExactBlock char[] unit lane replaced by byte[] first-occurrence offsets resolved against the canonical M3String"
+      }
+    ],
+    "license": "first-party M3 owner",
+    "disposition": "ADAPT: coordinate-keyed masks; indexOf/lastIndexOf semantics unchanged; maximumRetainedPrimitiveBytes counts Byte+Long per source unit"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "c9b07049c57ecdf43175f5885e11998918416a00 + hsoliwal/M3jdk21#442 (A3, b3ed5a00d5)",
+    "owners": [
+      "java.lang.M3StringPositionPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: 65 targets, target_commit cab2f8c0ef; apply.py --check state=after; test_recipe.py 8/8"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+      "before": "b6372e4280cc46f2cf5a1baa0b42c35341eea834dac9449fa5697b6aa20a0f2f",
+      "after": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b",
+      "resource": "00-M3StringPositionPrecompute.java.txt"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringPositionInvariant6Test.java",
+      "before": "ABSENT",
+      "after": "12fa3fe9da681ceded6bb06215665ffa052d99c24ae6ecd891b553ba270d989d",
+      "resource": "01-M3StringPositionInvariant6Test.java.txt"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base over the sealed M3 java.base subset (149 classes)",
+    "structuralTestLocal": "PASS_WINDOWS M3StringPositionInvariant6Test on the patched module (--add-opens java.base/java.lang): 13 checks; ExactBlock lanes exactly byte[] firstOffsets and long[] masks; Blocks/Entry lanes atomics, primitives, weak owner key; maximum formula",
+    "g8RuntimeRecipe": "PASS_WINDOWS apply.py --check state=after; test_recipe.py 8/8",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3Invariant6PositionMasksRecipeTest 2/2 (mvn log sha256 d8d79eddc003d3719dfd0608798a344322a57fd1a0d76f1657a2b3716955cb2a)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3StringPrecomputeSearchTest: exact block masks forward/reverse, every candidate unit; needs the M3 runtime)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "firstOffsets are ordered by unit value at construction (the scratch units are dropped), so lookup is a binary search with one canonical charAt per probe (at most 6 per 64-unit block)",
+    "the cache still keys entries weakly by owner+coordinate and retains only atomics over primitives and the exact blocks",
+    "no timing claim; the flag-on differential on Linux is the functional proof"
+  ]
+}
