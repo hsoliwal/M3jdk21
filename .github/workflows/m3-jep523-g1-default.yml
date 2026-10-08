@@ -17,8 +17,6 @@ on:
       - ".github/workflows/m3-jep523-g1-default.yml"
       - "m3/tooling/validators/WorkflowStructureCheck.java"
       - "m3/compatibility/synexia-workflow-structure-check-receipt-20261008.tsv"
-      - "m3/tooling/validators/WorkflowStructureCheck.java"
-      - "m3/compatibility/synexia-workflow-structure-check-receipt-20261008.tsv"
   pull_request:
     paths:
       - "src/hotspot/share/gc/shared/gcConfig.cpp"
@@ -30,6 +28,8 @@ on:
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-jep523-g1-default/**"
       - ".github/workflows/m3-jep523-g1-default.yml"
+      - "m3/tooling/validators/WorkflowStructureCheck.java"
+      - "m3/compatibility/synexia-workflow-structure-check-receipt-20261008.tsv"
   workflow_dispatch:
 
 permissions:
