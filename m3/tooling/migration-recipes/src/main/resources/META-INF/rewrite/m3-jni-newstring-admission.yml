@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: Apache-2.0
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.rewrite.MIndexJniNewStringAdmission
-displayName: Attach canonical MIndex storage at JNI String ingress
+displayName: Attach canonical M3 String storage at JNI String ingress
 description: >-
-  Applies the reviewed hash-pinned java.lang.String VM-private admission hook so
-  JNI NewString/NewStringUTF can attach the same canonical MIndex storage used by
-  Java constructors after the runtime activation boundary.
+  M3JDK product adapter for java.lang.String/JNI NewString and NewStringUTF admission after
+  the runtime activation boundary. Generic hash-pinned recipe mechanics are Synexia-owned;
+  the OpenJDK String bootstrap/JNI ABI integration and qualification remain target-specific.
 recipeList:
   - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: mindex-jni-newstring-admission
