@@ -17,7 +17,9 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
  * <p>Each 64-code-unit source block stores the same conservative two-bit code-unit signal used by
  * {@link M3StringFacts}. Negative block tests may skip exact work; positive blocks always perform
  * exact UTF-16 comparison. Entries weakly key canonical owner+coordinate and retain only primitive
- * block masks.</p>
+ * block masks: an exact block keys each mask by the block-relative offset of a unit's first
+ * occurrence and reads that unit back from the canonical text, so no code unit is stored twice
+ * (invariant 6: no second spelling store).</p>
  */
 final class M3StringPositionPrecompute {
     private static final int BLOCK_SHIFT = 6;
@@ -60,7 +62,7 @@ final class M3StringPositionPrecompute {
             }
             long positions;
             try {
-                positions = exactBlock(source, blocks, block).mask(unit);
+                positions = exactBlock(source, blocks, block).mask(source, block << BLOCK_SHIFT, unit);
             } catch (OutOfMemoryError unavailable) {
                 for (; index < blockEnd; index++) {
                     if (source.charAt(index) == unit) return index;
@@ -104,7 +106,7 @@ final class M3StringPositionPrecompute {
             }
             long positions;
             try {
-                positions = exactBlock(source, blocks, block).mask(unit);
+                positions = exactBlock(source, blocks, block).mask(source, blockStart, unit);
             } catch (OutOfMemoryError unavailable) {
                 for (; index >= blockStart; index--) {
                     if (source.charAt(index) == unit) return index;
@@ -126,7 +128,7 @@ final class M3StringPositionPrecompute {
                 (MAX_SOURCE_UNITS + BLOCK_MASK) >>> BLOCK_SHIFT;
         long signalBytes = (long) SLOTS * blocksPerEntry * Long.BYTES;
         long exactBytes =
-                (long) SLOTS * MAX_SOURCE_UNITS * (Character.BYTES + Long.BYTES);
+                (long) SLOTS * MAX_SOURCE_UNITS * (Byte.BYTES + Long.BYTES);
         return Math.addExact(signalBytes, exactBytes);
     }
 
@@ -185,7 +187,10 @@ final class M3StringPositionPrecompute {
         int end = Math.min(source.length(), start + BLOCK_SIZE);
         char[] scratch = new char[end - start];
         source.getChars(start, end, scratch, 0);
+        // Scratch only: the distinct units order the lanes during construction and are then
+        // dropped; the block keeps the first-occurrence offsets (ordered by unit) and the masks.
         char[] units = new char[scratch.length];
+        byte[] offsets = new byte[scratch.length];
         long[] masks = new long[scratch.length];
         int count = 0;
 
@@ -199,15 +204,17 @@ final class M3StringPositionPrecompute {
             }
             if (at < count) {
                 System.arraycopy(units, at, units, at + 1, count - at);
+                System.arraycopy(offsets, at, offsets, at + 1, count - at);
                 System.arraycopy(masks, at, masks, at + 1, count - at);
             }
             units[at] = unit;
+            offsets[at] = (byte) index;
             masks[at] = 1L << index;
             count++;
         }
 
         ExactBlock computed = new ExactBlock(
-                Arrays.copyOf(units, count),
+                Arrays.copyOf(offsets, count),
                 Arrays.copyOf(masks, count));
         if (blocks.exact.compareAndSet(block, null, computed)) return computed;
         return blocks.exact.get(block);
@@ -247,18 +254,36 @@ final class M3StringPositionPrecompute {
         }
     }
 
+    /**
+     * Masks keyed by coordinate, not by spelling: {@code firstOffsets[i]} is the block-relative
+     * offset of the first occurrence of the i-th distinct unit in unit order, and lookups read
+     * that unit back from the canonical source. Retained lanes are one byte and one long per
+     * distinct unit.
+     */
     private static final class ExactBlock {
-        final char[] units;
+        final byte[] firstOffsets;
         final long[] masks;
 
-        ExactBlock(char[] units, long[] masks) {
-            this.units = units;
+        ExactBlock(byte[] firstOffsets, long[] masks) {
+            this.firstOffsets = firstOffsets;
             this.masks = masks;
         }
 
-        long mask(char unit) {
-            int index = Arrays.binarySearch(units, unit);
-            return index < 0 ? 0L : masks[index];
+        long mask(M3String source, int blockStart, char unit) {
+            int low = 0;
+            int high = firstOffsets.length - 1;
+            while (low <= high) {
+                int mid = (low + high) >>> 1;
+                char candidate = source.charAt(blockStart + firstOffsets[mid]);
+                if (candidate < unit) {
+                    low = mid + 1;
+                } else if (candidate > unit) {
+                    high = mid - 1;
+                } else {
+                    return masks[mid];
+                }
+            }
+            return 0L;
         }
     }
 
