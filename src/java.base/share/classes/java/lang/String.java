@@ -3329,10 +3329,18 @@ public final class String
      *
      * @since 1.4
      */
+    private static boolean isConservativeLiteralRegex(String regex) {
+        for (int index = 0; index < regex.length(); index++) {
+            char unit = regex.charAt(index);
+            if (unit == '\\' || ".^$|?*+()[]{}".indexOf(unit) >= 0) return false;
+        }
+        return true;
+    }
+
     public boolean matches(String regex) {
         Objects.requireNonNull(regex);
         M3String storage = m3();
-        if (storage != null && M3String.isConservativeLiteralRegex(regex)) {
+        if (storage != null && isConservativeLiteralRegex(regex)) {
             return storage.contentEquals(regex);
         }
         return Pattern.matches(regex, this);
