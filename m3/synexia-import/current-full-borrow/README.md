@@ -18,7 +18,7 @@ Synexia source revision:
 
 Synexia estate source blob:
 
-`1e795e0d781159ff4f96dc3e650deb0cc36c5533`
+`292bc31a96cd3d20c36d617045c6b01a7a7c8faf`
 
 Source PR:
 
@@ -27,6 +27,14 @@ Source PR:
 The exact estate bytes are mirrored at:
 
 `m3/synexia-import/current-full-borrow/synexia-estate.tsv`
+
+Synexia receiving-DAG blob:
+
+`3e6c56b8555231fb36d0ac620ab112aa5970d45a`
+
+The exact DAG bytes are mirrored at:
+
+`m3/synexia-import/current-full-borrow/synexia-dag.tsv`
 
 M3JDK21 does not reinterpret that file as target acceptance. Every copied row begins and remains
 source inventory until target-side receipts advance it.
@@ -42,6 +50,16 @@ and Apache-2.0 where the exact source/component is classified first-party Synexi
 This receiver does not claim copyright over abstract ideas/algorithms as such and does not relicense
 OpenJDK or third-party donor bodies. Mixed first-party/donor rows remain review-required and cannot
 enter the automatic copy lane.
+
+## Explicit 32-family closure
+
+The source estate now contains **32 explicit families**. `MINDEX_STRING_RUNTIME`,
+`MINDEX_AST_RUNTIME`, `DAG`, and `OBJECT` are separately pinned even though broader runtime or
+data-structure trees also contain them. The receiver therefore cannot lose those named legacy
+families behind umbrella custody.
+
+The mirrored dependency DAG must cover every estate family exactly once and remain acyclic.
+Inventory may execute independently; family promotion remains serial and proof-gated.
 
 ## Receiving states
 
