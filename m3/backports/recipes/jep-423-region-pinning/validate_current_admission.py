@@ -100,6 +100,44 @@ def preserved_paths(packet: Path) -> set[str]:
     }
 
 
+def donor_overrides(packet: Path, request: dict[str, str]) -> dict[str, str]:
+    expected = integer(request, "path_donor_overrides") if "path_donor_overrides" in request else 0
+    configured = request.get("donor_override_file", "").strip()
+    if expected == 0 and not configured:
+        return {}
+    if not configured:
+        raise ValueError("path donor overrides require donor_override_file")
+
+    path = packet / Path(configured).name
+    if not path.is_file():
+        raise ValueError(f"missing donor override file: {path}")
+    with path.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    if rows and set(rows[0]) != {"path", "donor_ref"}:
+        raise ValueError("invalid donor override header")
+
+    result: dict[str, str] = {}
+    previous = ""
+    for row in rows:
+        target = row["path"].strip()
+        ref = row["donor_ref"].strip()
+        if (
+            not target
+            or target <= previous
+            or target in result
+            or len(ref) != 40
+            or any(ch not in "0123456789abcdef" for ch in ref)
+        ):
+            raise ValueError(f"invalid donor override row: {row}")
+        previous = target
+        result[target] = ref
+    if len(result) != expected:
+        raise ValueError(
+            f"path donor override count {len(result)} != {expected}"
+        )
+    return result
+
+
 def accounting(packet: Path, runner: Path) -> str:
     request = fields(packet / "CURRENT_TREE_PROOF_REQUEST.tsv")
     candidates = set(lines(packet / "CUMULATIVE_ADMIT_PATHS.txt"))
@@ -123,6 +161,13 @@ def accounting(packet: Path, runner: Path) -> str:
         )
 
     preserved = preserved_paths(packet)
+    overrides = donor_overrides(packet, request)
+    if set(overrides) - candidates:
+        raise ValueError(
+            f"donor override paths outside candidate set: {sorted(set(overrides) - candidates)}"
+        )
+    if set(overrides) & preserved:
+        raise ValueError("donor override and preserved path sets overlap")
     if len(preserved) != expected_preserved:
         raise ValueError(
             f"preserved Java21 path count {len(preserved)} != {expected_preserved}"
@@ -152,6 +197,23 @@ def accounting(packet: Path, runner: Path) -> str:
     if any(int(row["target_count"]) != 1 for row in crates):
         raise ValueError("JEP423 FILE lane emitted a multi-target crate")
     generated = sum(int(row["target_count"]) for row in crates)
+
+    if overrides:
+        crate_donors: dict[str, str] = {}
+        for row in crates:
+            first = row.get("first_path", "")
+            last = row.get("last_path", "")
+            if first != last:
+                raise ValueError("donor override proof requires one path per crate")
+            if first:
+                crate_donors[first] = row.get("donor_ref", "")
+        for target, expected_ref in overrides.items():
+            actual_ref = crate_donors.get(target)
+            if actual_ref != expected_ref:
+                raise ValueError(
+                    f"donor override receipt drift for {target}: "
+                    f"{actual_ref!r} != {expected_ref!r}"
+                )
 
     with (runner / "file-atoms" / "EXCLUSIONS.tsv").open(
         encoding="utf-8", newline=""
