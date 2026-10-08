@@ -393,6 +393,70 @@ final class SynexiaImportPlanTest {
     }
 
     @Test
+    void strictStageRequiresExactCleanSynexiaCheckout() throws Exception {
+        Fixture fixture = fixture();
+        git(fixture.synexia(), "init");
+        git(fixture.synexia(), "config", "user.email", "m3@example.invalid");
+        git(fixture.synexia(), "config", "user.name", "M3 Test");
+        git(fixture.synexia(), "add", ".");
+        git(fixture.synexia(), "commit", "-m", "fixture");
+        String head = git(fixture.synexia(), "rev-parse", "HEAD").trim();
+
+        SynexiaImportManifest strictManifest =
+                new SynexiaImportManifest(
+                        head,
+                        fixture.manifest().targetId(),
+                        fixture.manifest().entries(),
+                        "");
+        Path manifestFile = temp.resolve("strict-stage-manifest.tsv");
+        Files.writeString(manifestFile, strictManifest.toTsv());
+
+        SynexiaImportPlanCli.main(
+                new String[] {
+                    "stage-strict",
+                    manifestFile.toString(),
+                    fixture.synexia().toString(),
+                    fixture.m3jdk().toString(),
+                    "m3/build/synexia-import/strict-stage"
+                });
+        assertTrue(
+                Files.isRegularFile(
+                        fixture.m3jdk()
+                                .resolve("m3/build/synexia-import/strict-stage/ROOT")));
+
+        Files.writeString(
+                fixture.synexia().resolve(fixture.keepSource()),
+                Files.readString(fixture.synexia().resolve(fixture.keepSource())) + "// drift\n");
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        SynexiaImportPlanCli.main(
+                                new String[] {
+                                    "stage-strict",
+                                    manifestFile.toString(),
+                                    fixture.synexia().toString(),
+                                    fixture.m3jdk().toString(),
+                                    "m3/build/synexia-import/strict-stage-drift"
+                                }));
+        assertFalse(
+                Files.exists(
+                        fixture.m3jdk()
+                                .resolve("m3/build/synexia-import/strict-stage-drift")));
+    }
+
+    private static String git(Path root, String... args) throws Exception {
+        String[] command = new String[args.length + 3];
+        command[0] = "git";
+        command[1] = "-C";
+        command[2] = root.toString();
+        System.arraycopy(args, 0, command, 3, args.length);
+        Process process = new ProcessBuilder(command).redirectErrorStream(true).start();
+        String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+        assertEquals(0, process.waitFor(), output);
+        return output;
+    }
+
+    @Test
     void absentVendorTreeProducesOnlyManifestRows() throws Exception {
         Path root = temp.resolve("m3-empty");
         Files.createDirectories(root);
