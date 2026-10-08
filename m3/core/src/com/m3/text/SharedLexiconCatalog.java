@@ -466,7 +466,9 @@ public final class SharedLexiconCatalog {
             Coordinate coordinate = coordinate(fields[6], fields[7], shards, lineNumber);
             String lexeme = decodeSidecarText(fields[5], lineNumber);
             try {
-                SynexiaPrecomputePayload.parse(fields[12]);
+                SynexiaPrecomputePayload payload = SynexiaPrecomputePayload.parse(fields[12]);
+                if (!payload.canonicalJson().equals(fields[12]))
+                    throw malformed(lineNumber, "precompute_payload is not canonical JSON");
             } catch (IllegalArgumentException failure) {
                 throw malformed(lineNumber, "invalid precompute_payload: " + failure.getMessage());
             }
@@ -745,3 +747,4 @@ public final class SharedLexiconCatalog {
         return new IOException("invalid synexia.shards.tsv line " + (lineNumber + 1) + ": " + detail);
     }
 }
+
