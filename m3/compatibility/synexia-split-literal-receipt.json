@@ -1,0 +1,80 @@
+{
+  "schema": "M3JDK21_SYNEXIA_SPLIT_LITERAL_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-split-literal-20261008",
+    "pullRequest": 9867,
+    "commit": "cf994d3f7ad",
+    "recipes": [
+      "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe (crate m3-split-literal: M3String.java preimage->postimage, M3StringLiteralSplitTest ABSENT)",
+      "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe (crate m3-split-literal: String.java preimage->postimage; bootstrap allowlist entry for String.java)"
+    ],
+    "declarativeRecipe": "com.synexia.m3.SplitLiteral",
+    "fossReuseDecisionRow": "string.split-literal.lane",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java split(char, int, boolean)",
+        "commit": "c9b07049c5",
+        "target": "java.lang.String.splitLiteral",
+        "mechanics": "JDK single-char fast path extended to a literal: indexOf(literal), literal length, identical limit/trailing-empty/withDelimiters handling"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java isLiteralRegexReplacement",
+        "commit": "c9b07049c5",
+        "target": "java.lang.M3String.isLiteralRegex",
+        "mechanics": "regex half of the existing literal-replacement predicate; the replacement predicate delegates"
+      }
+    ],
+    "license": "first-party (JDK GPLv2+CPE fast path, M3 owner)",
+    "disposition": "ADAPT: literal lane independent of M3 storage; Pattern remains the authority for every other regex"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "c9b07049c57ecdf43175f5885e11998918416a00 + hsoliwal/M3jdk21#438 (A1, 90531d347d)",
+    "owners": [
+      "java.lang.String.split / splitWithDelimiters literal lane",
+      "java.lang.M3String.isLiteralRegex"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: 65 targets, target_commit c2eca9406b (String.java, M3String.java after-images); apply.py --check state=after; test_recipe.py 8/8"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "a8bee8dc1c99e798b53e29f70368bdc756a53b5d1759f596da35213987ed2fb6",
+      "after": "64dfd24bb7c55416fef3d61d77b189a7d528e3f82c43b29567890f43706a62aa",
+      "resource": "hash-pinned-java/00-M3String.java.txt"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "9a0be5dbeb399eecefec9f0e890d7af7fbef7fdd6b92f624e632381e5cfb67bd",
+      "after": "cd40c8e663722734b6507b9f8b8ec4b4ce4f10084e5c073afd9b1623e3b81d51",
+      "resource": "hash-pinned-text/00-String.java.txt"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringLiteralSplitTest.java",
+      "before": "ABSENT",
+      "after": "bb9392cef19bfd6cdc0ab5c4334246394225e8c3af2268bb5855ff2376fb1428",
+      "resource": "hash-pinned-java/01-M3StringLiteralSplitTest.java.txt"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base over the sealed M3 java.base subset + every java/lang/M3*.java + mindex (149 classes)",
+    "g7rDifferential": "PASS_WINDOWS M3StringLiteralSplitTest: 53,378 checks against Pattern.split/splitWithDelimiters (literal, metacharacter, escape, surrogate, invalid regexes; limits -2..100) identical on stock JDK 21.0.9 and on the patched module; stock jtreg Split body passes on the patched module",
+    "g8RuntimeRecipe": "PASS_WINDOWS apply.py --check state=after; test_recipe.py 8/8 (TMP on K:)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3SplitLiteralRecipeTest 3/3 (mvn log sha256 f250ac705c227efa5b339009ae8e9c7c8c4dd01c89d4977e50d101d87291459e)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "jtregLinux": "PENDING_LINUX (M3StringLiteralSplitTest flag-off and flag-on, Split, M3StringRegexSplitHistoryTest)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "only a regex with no metacharacter, escape or surrogate takes the lane; everything else, including invalid regexes, still goes through Pattern.compile",
+    "splitLiteral reproduces Pattern.split exactly: non-overlapping left-to-right occurrences, limit > 0 bounds pieces, limit == 0 drops trailing empty strings, withDelimiters interleaves the literal",
+    "the lane does not consult M3 storage, so flag-off and flag-on behave identically",
+    "master carries M3 java/lang files outside the runtime recipe scope (recorded in the run ledger a2/g7-feasibility/outside-recipe-scope.txt); the re-seal keeps the recipe's 65-file scope"
+  ]
+}

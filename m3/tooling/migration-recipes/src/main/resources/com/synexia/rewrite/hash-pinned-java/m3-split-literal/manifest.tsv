@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3String.java	a8bee8dc1c99e798b53e29f70368bdc756a53b5d1759f596da35213987ed2fb6	64dfd24bb7c55416fef3d61d77b189a7d528e3f82c43b29567890f43706a62aa	00-M3String.java.txt
+test/jdk/java/lang/String/M3StringLiteralSplitTest.java	ABSENT	bb9392cef19bfd6cdc0ab5c4334246394225e8c3af2268bb5855ff2376fb1428	01-M3StringLiteralSplitTest.java.txt
