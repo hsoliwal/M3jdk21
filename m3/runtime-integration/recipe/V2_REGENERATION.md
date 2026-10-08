@@ -41,3 +41,7 @@ upstream preimage `890adb6410` (jdk-21+35); `target_commit` is the owner commit 
 
 Regenerated after `String.java` and `M3String.java` changed (65 targets unchanged in scope; `target_commit` c2eca9406b). `test_recipe.py` needs `TMP`/`TEMP` on a drive with free space.
 
+
+## 2026-10-08 re-seal (A3 non-boxing concat combinator)
+
+Regenerated after `StringConcatFactory.java` and `StringConcatHelper.java` changed (65 targets; `target_commit` ec0ead0e3f).

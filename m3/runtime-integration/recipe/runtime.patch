@@ -7810,7 +7810,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
  
      @Native static final byte LATIN1 = 0;
 diff --git a/src/java.base/share/classes/java/lang/StringConcatHelper.java b/src/java.base/share/classes/java/lang/StringConcatHelper.java
-index 139181af0963efe5caaa25a03960d30e14b65c41..43aa553036b5dc13123a5dc6d068d1698645ec51 100644
+index 139181af0963efe5caaa25a03960d30e14b65c41..d702eef322bb6dbb3884050c2872989744db3096 100644
 --- a/src/java.base/share/classes/java/lang/StringConcatHelper.java
 +++ b/src/java.base/share/classes/java/lang/StringConcatHelper.java
 @@ -428,6 +428,12 @@ final class StringConcatHelper {
@@ -7826,16 +7826,17 @@ index 139181af0963efe5caaa25a03960d30e14b65c41..43aa553036b5dc13123a5dc6d068d169
          // start "mixing" in length and coder or arguments, order is not
          // important
          long indexCoder = mix(initialCoder(), s1);
-@@ -440,6 +446,35 @@ final class StringConcatHelper {
+@@ -440,6 +446,36 @@ final class StringConcatHelper {
          return newString(buf, indexCoder);
      }
  
 +    /**
 +     * Correctness-first fallback for invokedynamic concat shapes that would
-+     * otherwise allocate one flat byte array. Primitive arguments arrive boxed
-+     * by MethodHandle adaptation; stringOf preserves the JLS null/toString rules.
++     * otherwise allocate one flat byte array. Every argument already went through
++     * a typed stringify gateway in StringConcatFactory (no boxing; references use
++     * stringOf, so the JLS null/toString rules hold and no piece is null).
 +     */
-+    static String m3Concat(String[] constants, Object[] args) {
++    static String m3Concat(String[] constants, String[] args) {
 +        M3String result = M3String.empty();
 +        for (int index = 0; index < args.length; index++) {
 +            String constant = constants[index];
@@ -7844,7 +7845,7 @@ index 139181af0963efe5caaa25a03960d30e14b65c41..43aa553036b5dc13123a5dc6d068d169
 +                result = result.length() == 0 ? piece : result.concat(piece);
 +            }
 +
-+            String argument = stringOf(args[index]);
++            String argument = args[index];
 +            if (!argument.isEmpty()) {
 +                M3String piece = M3String.canonicalize(argument);
 +                result = result.length() == 0 ? piece : result.concat(piece);
@@ -7892,7 +7893,7 @@ index 9d9dbf886e6b3fcc61ad5371c662b15a8be52193..be9fda30d975bf6b31806b272252d10d
              public long stringConcatCoder(char value) {
                  return StringConcatHelper.coder(value);
 diff --git a/src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java b/src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java
-index 6fa79baccb98d1949c72adf9731c60eee102ad3d..e3d41cb655eb8067a92765b4bfdbdf5a5e39476d 100644
+index 6fa79baccb98d1949c72adf9731c60eee102ad3d..a067c1e5bcf31ef9f199218bd66239f5b534f825 100644
 --- a/src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java
 +++ b/src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java
 @@ -485,7 +485,14 @@ public final class StringConcatFactory {
@@ -7911,20 +7912,55 @@ index 6fa79baccb98d1949c72adf9731c60eee102ad3d..e3d41cb655eb8067a92765b4bfdbdf5a
  
          // Create filters and obtain filtered parameter types. Filters would be used in the beginning
          // to convert the incoming arguments into the arguments we can process (e.g. Objects -> Strings).
-@@ -602,6 +609,12 @@ public final class StringConcatFactory {
+@@ -602,6 +609,47 @@ public final class StringConcatFactory {
          return mh;
      }
  
++    // M3 segmented concat: every argument goes through a typed stringify gateway (no boxing;
++    // references keep the JLS null/toString rules through stringOf) and the String pieces are
++    // collected once; StringConcatHelper.m3Concat folds constants and pieces into M3 storage.
 +    private static MethodHandle generateM3Concat(MethodType mt, String[] constants) {
-+        MethodHandle mh = MethodHandles.insertArguments(m3Concat(), 0, (Object) constants);
-+        mh = mh.asCollector(Object[].class, mt.parameterCount());
++        int count = mt.parameterCount();
++        MethodHandle mh = MethodHandles.insertArguments(m3Concat(), 0, (Object) constants)
++                .asCollector(String[].class, count);
++        MethodHandle[] stringifiers = new MethodHandle[count];
++        boolean filtered = false;
++        for (int i = 0; i < count; i++) {
++            MethodHandle stringifier = m3Stringifier(mt.parameterType(i));
++            stringifiers[i] = stringifier;
++            filtered |= stringifier != null;
++        }
++        if (filtered) {
++            mh = MethodHandles.filterArguments(mh, 0, stringifiers);
++        }
 +        return mh.asType(mt.changeReturnType(String.class));
++    }
++
++    // Typed gateways: String.valueOf(primitive) for primitives (byte and short widen to int),
++    // the float/double stringifiers, stringOf for every reference type; null for String itself.
++    private static MethodHandle m3Stringifier(Class<?> type) {
++        if (type == String.class) {
++            return null;
++        }
++        if (type == int.class || type == long.class || type == char.class || type == boolean.class) {
++            return stringValueOf(type);
++        }
++        if (type == byte.class || type == short.class) {
++            return stringValueOf(int.class).asType(methodType(String.class, type));
++        }
++        if (type == float.class) {
++            return floatStringifier();
++        }
++        if (type == double.class) {
++            return doubleStringifier();
++        }
++        return objectStringifier();
 +    }
 +
      // We need one prepender per argument, but also need to fold in constants. We do so by greedily
      // creating prependers that fold in surrounding constants into the argument prepender. This reduces
      // the number of unique MH combinator tree shapes we'll create in an application.
-@@ -866,6 +879,17 @@ public final class StringConcatFactory {
+@@ -866,6 +914,17 @@ public final class StringConcatFactory {
          return mh;
      }
  
@@ -7933,7 +7969,7 @@ index 6fa79baccb98d1949c72adf9731c60eee102ad3d..e3d41cb655eb8067a92765b4bfdbdf5a
 +        MethodHandle mh = M3_CONCAT;
 +        if (mh == null) {
 +            MethodHandle concat = JLA.stringConcatHelper("m3Concat",
-+                    methodType(String.class, String[].class, Object[].class));
++                    methodType(String.class, String[].class, String[].class));
 +            M3_CONCAT = mh = concat.rebind();
 +        }
 +        return mh;
