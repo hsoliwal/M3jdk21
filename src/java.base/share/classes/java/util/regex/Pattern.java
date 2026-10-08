@@ -1987,6 +1987,19 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
             root = hasSupplementary ? new StartS(matchRoot) : new Start(matchRoot);
         }
 
+        // M3TQ absence gate for general patterns: the requirement is derived from the compiled
+        // node tree and refused whenever a pruned search could differ observably from a failed
+        // one (see M3PatternQuery). Still only a necessary condition; the engine stays authority.
+        if (m3Tq == null && !has(LITERAL) && !has(CANON_EQ)) {
+            try {
+                m3Tq = M3PatternQuery.derive(matchRoot, root);
+            } catch (OutOfMemoryError | RuntimeException unavailable) {
+                // Candidate precompute must never add a new Pattern.compile failure mode;
+                // an undecidable tree simply keeps the exact engine unassisted.
+                m3Tq = null;
+            }
+        }
+
         // Optimize the greedy Loop to prevent exponential backtracking, IF there
         // is no group ref in this pattern. With a non-negative localTCNCount value,
         // the greedy type Loop, Curly will skip the backtracking for any starting
