@@ -77,6 +77,28 @@ final class M3SynexiaHandoffReceiverTest {
     }
 
     @Test
+    void v2RejectsPayloadManifestAndAccountingDrift() {
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        new M3SynexiaHandoffGuardRecipe(
+                                        "synexia-guard-v2-payload-drift-v1")
+                                .getVisitor());
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        new M3SynexiaHandoffGuardRecipe(
+                                        "synexia-guard-v2-byte-count-v1")
+                                .getVisitor());
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        new M3SynexiaHandoffGuardRecipe(
+                                        "synexia-guard-v2-manifest-drift-v1")
+                                .getVisitor());
+    }
+
+    @Test
     void receiverRejectsUnscopedCrateNames() {
         assertThrows(
                 IllegalArgumentException.class,
