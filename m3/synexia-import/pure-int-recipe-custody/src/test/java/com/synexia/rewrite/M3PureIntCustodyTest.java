@@ -39,7 +39,11 @@ final class M3PureIntCustodyTest {
 
     @Test
     void custodySourcesRemainExactSynexiaGitBlobs() throws Exception {
-        Path root = Path.of("src/main/java/com/synexia/rewrite");
+        Path root =
+                Path.of(System.getProperty("basedir", "."))
+                        .toAbsolutePath()
+                        .normalize()
+                        .resolve("src/main/java/com/synexia/rewrite");
         for (var entry : BLOBS.entrySet()) {
             byte[] bytes = Files.readAllBytes(root.resolve(entry.getKey()));
             assertEquals(entry.getValue(), gitBlob(bytes), entry.getKey());
