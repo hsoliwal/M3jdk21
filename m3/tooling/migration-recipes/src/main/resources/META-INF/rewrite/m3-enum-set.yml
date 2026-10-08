@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.EnumSet
+displayName: M3JDK21 M3EnumSet proving-ground owner
+description: >-
+  Adds com.m3.collections.M3EnumSet, an enum set backed only by presence words (one bit per
+  constant, no per-element object, ordinal iteration order, JDK EnumSet key handling and the
+  noneOf/allOf/of/copyOf/complementOf/range factories), adapted from the first-party Synexia donor
+  com.synexia.primitives.LongBitSet word operations and the M3EnumLongMap universe handling, plus
+  its differential test against java.util.EnumSet. Proving ground only (wave 2 of the COLLECTIONS
+  family); no java.util type is replaced.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-enum-set
