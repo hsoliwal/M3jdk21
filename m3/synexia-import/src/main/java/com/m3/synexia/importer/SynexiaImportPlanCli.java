@@ -46,7 +46,11 @@ public final class SynexiaImportPlanCli {
         Path synexiaRoot = Path.of(args[2]);
         if (strict) {
             SynexiaGitCheckout.requireExactCleanHead(
-                    synexiaRoot, manifest.sourceRevision());
+                    synexiaRoot,
+                    manifest.sourceRevision(),
+                    manifest.entries().stream()
+                            .map(SynexiaImportManifest.Entry::sourcePath)
+                            .toList());
         }
         SynexiaImportPlan.Plan plan =
                 SynexiaImportPlan.stage(
