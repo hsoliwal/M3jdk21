@@ -1,0 +1,34 @@
+{
+  "schema": "m3-synexia-receiver-receipt-v1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_branch": "m3/string-codepoint-geometry-recipe-20261008",
+  "source_recipe": "com.synexia.rewrite.M3Jdk21StringCodePointGeometry",
+  "source_task_crate": "synexia-m3-recipe/task-crates/m3jdk21-string-codepoint-geometry-20261008.yaml",
+  "donor_commits": [
+    "e4814bde61c442fe654156e1d5b12f3522cfd54b",
+    "85bf56784afd40de2bd3b0facae8657cff08f106"
+  ],
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_branch": "m3/string-codepoint-geometry-receiver-20261008",
+  "target_string_preimage_sha256": "5d718e182db3a29306635857d3a3f5a7c7cd7f18c638988ec5a46d5a518e5866",
+  "target_string_postimage_sha256": "2454e7eb7cfd2609d2fdc5c93436ea03088b2313513a64ec5951e2709eedbf2f",
+  "created_targets": {
+    "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java": "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257",
+    "test/jdk/java/lang/String/M3StringCodePointGeometryTest.java": "678c943c50d63c3d6d3cf56d615731e198f97d4528c8381a9437c7148ae53566"
+  },
+  "runtime_dependency_on_synexia": false,
+  "semantic_rules": [
+    "paired low-surrogate offsets are the only retained O(n) code-point lane",
+    "arbitrary range starts exclude a pair crossing in from beginIndex-1",
+    "positive offsets choose the far edge of a consumed surrogate pair",
+    "negative offsets choose the near start of a consumed surrogate pair",
+    "over-budget or allocation failure falls back to exact JDK traversal"
+  ],
+  "verification": {
+    "source_checker": "m3/runtime-integration/check-m3string-codepoint-geometry.py",
+    "jtreg": "test/jdk/java/lang/String/M3StringCodePointGeometryTest.java",
+    "jdk_build": "NOT_RUN",
+    "jtreg_run": "NOT_RUN",
+    "synexia_maven_recipe_test": "NOT_RUN"
+  }
+}
