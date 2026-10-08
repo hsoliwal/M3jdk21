@@ -3016,6 +3016,12 @@ public final class String
             return fromIndex;
         }
 
+        M3String target = tgtStr.m3();
+        if (target != null) {
+            return M3StringSearchPrecompute.indexOf(
+                    src, srcCoder, srcCount, target, fromIndex);
+        }
+
         byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
         if (srcCoder == tgtCoder) {
@@ -3100,8 +3106,6 @@ public final class String
      */
     static int lastIndexOf(byte[] src, byte srcCoder, int srcCount,
                            String tgtStr, int fromIndex) {
-        byte[] tgt = tgtStr.value();
-        byte tgtCoder = tgtStr.coder();
         int tgtCount = tgtStr.length();
         /*
          * Check arguments; return immediately where possible. For
@@ -3118,6 +3122,15 @@ public final class String
         if (tgtCount == 0) {
             return fromIndex;
         }
+
+        M3String target = tgtStr.m3();
+        if (target != null) {
+            return M3StringSearchPrecompute.lastIndexOf(
+                    src, srcCoder, srcCount, target, fromIndex);
+        }
+
+        byte[] tgt = tgtStr.value();
+        byte tgtCoder = tgtStr.coder();
         if (srcCoder == tgtCoder) {
             return srcCoder == LATIN1
                 ? StringLatin1.lastIndexOf(src, srcCount, tgt, tgtCount, fromIndex)
