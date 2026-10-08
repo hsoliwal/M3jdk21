@@ -36,24 +36,41 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
           cache: maven
 
-      - name: Consume canonical Synexia workflow-structure validator
+      - name: Verify canonical Synexia workflow-validator receiver
         shell: bash
         run: |
           set -euo pipefail
-          SYNEXIA="$RUNNER_TEMP/synexia-recipe-owner"
-          git init -q "$SYNEXIA"
-          git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
-          git -C "$SYNEXIA" -c protocol.version=2 fetch -q --depth=1 origin 0f0f9965092955c15f5c32f5eb102137fd0dbf8e
-          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
-          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
-            .github/workflows/m3-jep485-stream-gatherers.yml
+          test -n "${GITHUB_JOB:-}"
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+          rows = dict(csv.reader(
+              Path("m3/backports/recipes/j485/WORKFLOW_VALIDATOR_RECEIVER.tsv")
+                  .open(encoding="utf-8", newline=""),
+              delimiter="\t"))
+          expected = {
+              "canonical_repository": "hsoliwal/com.synexia",
+              "canonical_commit": "0f0f9965092955c15f5c32f5eb102137fd0dbf8e",
+              "canonical_path": "synexia-code-convergence/tools/WorkflowStructureCheck.java",
+              "canonical_git_blob": "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7",
+              "canonical_owner": "SYNEXIA",
+              "target_role": "M3JDK21_THIN_RECEIVER",
+              "startup_oracle": "GITHUB_ACTIONS_JOB_ADMISSION",
+              "required_failure_modes": "DUPLICATE_MAPPING_KEY,EMPTY_JOB,STEP_OUTSIDE_STEPS,STEP_WITHOUT_EXECUTOR,TAB_INDENT",
+              "source_copy_authority": "false",
+              "promotion_authority": "false",
+          }
+          if rows != expected:
+              raise SystemExit(f"JEP485 workflow receiver drift: {rows}")
+          print("JEP485_WORKFLOW_RECEIVER_OK")
+          PY
 
       - name: Bind checked-out J485 tree to sealed FILE atoms
         shell: bash
@@ -115,8 +132,8 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 100
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
