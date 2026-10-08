@@ -1,0 +1,15 @@
+{
+  "schema": "M3JDK21_SYNEXIA_BULK_EXECUTOR_SOURCE_LOCK_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 9892,
+  "canonical_recipe_revision": "b9c275cb9e0ef0defb665d00e831ce0f9cfef618",
+  "canonical_packet_head": "27cb1b974b5e40899a11fd5e10f636274cbbfb11",
+  "canonical_recipe": "com.synexia.rewrite.M3Jdk21BulkExecutorPortRecipe",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3Jdk21BulkExecutorPortRecipe.java",
+  "tornado_repository": "hsoliwal/synexia-tornadovm",
+  "tornado_pr": 7,
+  "tornado_merge_commit": "3bf826714a48d7fdf346ffde8a0fc25c525572c5",
+  "intake_mode": "TARGET_OWNED_PORT",
+  "runtime_dependency": "NONE",
+  "promotion_authority": false
+}
