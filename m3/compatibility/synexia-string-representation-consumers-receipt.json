@@ -1,0 +1,19 @@
+{
+  "schema": "M3JDK21_STRING_REPRESENTATION_CONSUMERS_RECEIPT_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalPullRequest": 9919,
+  "canonicalRecipe": "com.synexia.rewrite.M3Jdk21StringRepresentationConsumers",
+  "canonicalRecipeHead": "8991ac62f290b6087c2e31633d4f7f180f2abb22",
+  "testSha256": "d9178415fa02131c7b095809e3ea59d12154036f4ce3ab8bd1621caa0dbf1018",
+  "workflowSha256": "806ed123621318d5e31a5dc24bfb5f8a1c925f0a04e3ff3c8962705bc5bf63c9",
+  "consumers": ["SerialGC", "ParallelGC", "G1", "ZGC", "CDS", "JFR", "JVMCI"],
+  "gates": {
+    "matchedImageConsumerRun": "PENDING_CI",
+    "normal": "PENDING_CI",
+    "xint": "PENDING_CI",
+    "c1": "PENDING_CI",
+    "c2": "PENDING_CI",
+    "promotion": "BLOCKED"
+  },
+  "runtimeSourceChanged": false
+}
