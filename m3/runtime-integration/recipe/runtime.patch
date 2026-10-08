@@ -1523,10 +1523,10 @@ index e58ded864f0705bba5a57979230119e017cfd40e..ca697e5da074fabd6368aa79aceb9d40
      }
 diff --git a/src/java.base/share/classes/java/lang/M3String.java b/src/java.base/share/classes/java/lang/M3String.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..90f9037e80d7f8e67de145b61fba125ed0eeb74b
+index 0000000000000000000000000000000000000000..479d1f8145697d270af17f5e2d2f1c85f426fb33
 --- /dev/null
 +++ b/src/java.base/share/classes/java/lang/M3String.java
-@@ -0,0 +1,1258 @@
+@@ -0,0 +1,1317 @@
 +/*
 + * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
 + * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -1719,6 +1719,65 @@ index 0000000000000000000000000000000000000000..90f9037e80d7f8e67de145b61fba125e
 +            level = next;
 +        }
 +        return level.getFirst();
++    }
++
++    /**
++     * Designated String.join adapter with O(log N) temporary M3 references.
++     *
++     * <p>The caller has already converted its CharSequence elements to String, so no
++     * user toString() action is moved across canonical admission. Empty pieces are
++     * excluded exactly as in join(String[]). Adjacent equal-size groups are folded
++     * pairwise, then remaining high groups fold over low suffix groups. The resulting
++     * canonical text always belongs to an M3 owner/range, not a temporary array.</p>
++     */
++    static M3String joinDesignated(
++            String prefix, String suffix, String delimiter, String[] elements, int size) {
++        Objects.requireNonNull(prefix, "prefix");
++        Objects.requireNonNull(suffix, "suffix");
++        Objects.requireNonNull(delimiter, "delimiter");
++        String[] checked = Objects.requireNonNull(elements, "elements");
++        Objects.checkFromIndexSize(0, size, checked.length);
++
++        long maximumPieces = size == 0 ? 2L : 2L * size + 1L;
++        M3String[] levels =
++                new M3String[Long.SIZE - Long.numberOfLeadingZeros(maximumPieces)];
++        joinAddDesignated(levels, prefix);
++        if (size != 0) {
++            joinAddDesignated(levels, checked[0]);
++            for (int index = 1; index < size; index++) {
++                joinAddDesignated(levels, delimiter);
++                joinAddDesignated(levels, checked[index]);
++            }
++        }
++        joinAddDesignated(levels, suffix);
++
++        M3String result = EMPTY;
++        for (int level = 0; level < levels.length; level++) {
++            M3String value = levels[level];
++            if (value != null) {
++                result = result.length() == 0 ? value : M3StringPool.concat(value, result);
++            }
++        }
++        return result;
++    }
++
++    private static void joinAddDesignated(M3String[] levels, String source) {
++        String checked = Objects.requireNonNull(source, "join piece");
++        M3String carry = checked.m3();
++        if (carry == null && checked.length() != 0) {
++            carry = M3String.admit(checked.value(), checked.coder());
++        }
++        if (carry == null || carry.length() == 0) return;
++        for (int level = 0; level < levels.length; level++) {
++            M3String previous = levels[level];
++            if (previous == null) {
++                levels[level] = carry;
++                return;
++            }
++            levels[level] = null;
++            carry = M3StringPool.concat(previous, carry);
++        }
++        throw new InternalError("M3 String.join carry level exhausted");
 +    }
 +
 +    static M3String canonicalize(String source) {
@@ -3281,12 +3340,192 @@ index 0000000000000000000000000000000000000000..7e7645497d08d55cf9b5174e4f04e11c
 +        return M3StringFacts.scan(M3String.range(this, start, length));
 +    }
 +}
+diff --git a/src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java b/src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..6cbb277119f387aac772373d31621af64bea68d5
+--- /dev/null
++++ b/src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java
+@@ -0,0 +1,174 @@
++/*
++ * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
++ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++ *
++ * GPLv2 with the Classpath exception.
++ */
++package java.lang;
++
++import java.lang.ref.WeakReference;
++import java.util.Arrays;
++import java.util.Objects;
++import java.util.concurrent.atomic.AtomicReferenceArray;
++
++/**
++ * Separately bounded exact code-point geometry for one immutable M3 String range.
++ *
++ * <p>The retained lane stores only relative UTF-16 offsets of low surrogates that are paired
++ * with an immediately preceding high surrogate inside the exact source range. Therefore:</p>
++ *
++ * <pre>
++ * codePointCount(begin,end)
++ *   = (end-begin) - pairedLowCount(begin+1,end)
++ * </pre>
++ *
++ * <p>No text, char[], byte[], canonical IDs, or per-String fields are introduced. Cache loss or
++ * budget refusal changes performance only; callers fall back to the exact JDK traversal.</p>
++ */
++final class M3StringCodePointPrecompute {
++    private static final int SLOTS = 64;
++    private static final int SLOT_MASK = SLOTS - 1;
++    private static final int MAX_SOURCE_UNITS = 32_768;
++    private static final AtomicReferenceArray<Entry> CACHE =
++            new AtomicReferenceArray<>(SLOTS);
++
++    private M3StringCodePointPrecompute() {}
++
++    static Geometry prepare(M3String source) {
++        int length = source.length();
++        if (length == 0 || length > MAX_SOURCE_UNITS) return null;
++        try {
++            M3StringOwner owner = source.owner();
++            long coordinate = source.coordinate();
++            int slot = slot(owner, coordinate);
++            Entry entry = CACHE.get(slot);
++            if (entry != null
++                    && entry.owner.get() == owner
++                    && entry.coordinate == coordinate
++                    && entry.geometry.utf16Length == length) {
++                return entry.geometry;
++            }
++
++            int[] scratch = new int[Math.min(length >>> 1, 256)];
++            int count = 0;
++            char previous = source.charAt(0);
++            for (int index = 1; index < length; index++) {
++                char current = source.charAt(index);
++                if (Character.isHighSurrogate(previous)
++                        && Character.isLowSurrogate(current)) {
++                    if (count == scratch.length) {
++                        int next = Math.min(length >>> 1, Math.max(1, scratch.length << 1));
++                        scratch = Arrays.copyOf(scratch, next);
++                    }
++                    scratch[count++] = index;
++                }
++                previous = current;
++            }
++
++            Geometry geometry =
++                    new Geometry(length, count == scratch.length ? scratch : Arrays.copyOf(scratch, count));
++            CACHE.set(slot, new Entry(new WeakReference<>(owner), coordinate, geometry));
++            return geometry;
++        } catch (OutOfMemoryError unavailable) {
++            return null;
++        }
++    }
++
++    static long maximumRetainedPrimitiveBytes() {
++        return (long) SLOTS * (MAX_SOURCE_UNITS >>> 1) * Integer.BYTES;
++    }
++
++    private static int slot(M3StringOwner owner, long coordinate) {
++        long mixed = Integer.toUnsignedLong(System.identityHashCode(owner))
++                ^ Long.rotateLeft(coordinate, 17)
++                ^ Long.rotateLeft(owner.structuralHash64, 31);
++        mixed ^= mixed >>> 33;
++        mixed *= 0xff51afd7ed558ccdL;
++        mixed ^= mixed >>> 33;
++        return ((int) mixed) & SLOT_MASK;
++    }
++
++    static final class Geometry {
++        final int utf16Length;
++        private final int[] pairedLowOffsets;
++
++        Geometry(int utf16Length, int[] pairedLowOffsets) {
++            this.utf16Length = utf16Length;
++            this.pairedLowOffsets = pairedLowOffsets;
++        }
++
++        int codePointCount(int beginIndex, int endIndex) {
++            Objects.checkFromToIndex(beginIndex, endIndex, utf16Length);
++            if (beginIndex == endIndex) return 0;
++            int firstPair = lowerBound(pairedLowOffsets, beginIndex + 1);
++            int afterLastPair = lowerBound(pairedLowOffsets, endIndex);
++            return (endIndex - beginIndex) - (afterLastPair - firstPair);
++        }
++
++        int offsetByCodePoints(int index, int codePointOffset) {
++            Objects.checkIndex(index, utf16Length + 1);
++            if (codePointOffset == 0) return index;
++
++            if (codePointOffset > 0) {
++                int target = codePointOffset;
++                if (codePointCount(index, utf16Length) < target) {
++                    throw new IndexOutOfBoundsException();
++                }
++                int low = index;
++                int high = utf16Length;
++                while (low < high) {
++                    int middle = (low + high + 1) >>> 1;
++                    if (codePointCount(index, middle) <= target) low = middle;
++                    else high = middle - 1;
++                }
++                return low;
++            }
++
++            long targetLong = -(long) codePointOffset;
++            if (targetLong > Integer.MAX_VALUE
++                    || codePointCount(0, index) < targetLong) {
++                throw new IndexOutOfBoundsException();
++            }
++            int target = (int) targetLong;
++            int low = 0;
++            int high = index;
++            while (low < high) {
++                int middle = (low + high) >>> 1;
++                if (codePointCount(middle, index) <= target) high = middle;
++                else low = middle + 1;
++            }
++            return low;
++        }
++
++        int pairedLowCount() {
++            return pairedLowOffsets.length;
++        }
++
++        long retainedPrimitiveBytes() {
++            return (long) pairedLowOffsets.length * Integer.BYTES;
++        }
++    }
++
++    private static int lowerBound(int[] values, int key) {
++        int low = 0;
++        int high = values.length;
++        while (low < high) {
++            int middle = (low + high) >>> 1;
++            if (values[middle] < key) low = middle + 1;
++            else high = middle;
++        }
++        return low;
++    }
++
++    private static final class Entry {
++        final WeakReference<M3StringOwner> owner;
++        final long coordinate;
++        final Geometry geometry;
++
++        Entry(WeakReference<M3StringOwner> owner, long coordinate, Geometry geometry) {
++            this.owner = owner;
++            this.coordinate = coordinate;
++            this.geometry = geometry;
++        }
++    }
++}
 diff --git a/src/java.base/share/classes/java/lang/M3StringFacts.java b/src/java.base/share/classes/java/lang/M3StringFacts.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..ddc7c1fc524a746eb172158d9c82854be80a55e3
+index 0000000000000000000000000000000000000000..763a76fb55a52576ca1a3edc48fcc214663f799e
 --- /dev/null
 +++ b/src/java.base/share/classes/java/lang/M3StringFacts.java
-@@ -0,0 +1,392 @@
+@@ -0,0 +1,443 @@
 +/*
 + * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
 + * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -3603,6 +3842,57 @@ index 0000000000000000000000000000000000000000..ddc7c1fc524a746eb172158d9c82854b
 +        if (width == 0) return true;
 +        long mask = width == 4 ? -1L : (1L << (width * 16)) - 1L;
 +        return (suffix4 & mask) == (suffix.suffix4 & mask);
++    }
++
++    /**
++     * Necessary-condition gate for a flat (non-M3) needle such as a String literal: the needle's
++     * code-unit, bigram and trigram signals are folded on the fly, without allocation, and must be
++     * covered by this record's signals. Rejection proves absence; acceptance proves nothing.
++     */
++    boolean mayContain(String needle) {
++        int length = needle.length();
++        if (length > utf16Length) return false;
++        long units = 0L;
++        long bigrams = 0L;
++        long trigrams = 0L;
++        char previous2 = 0;
++        char previous1 = 0;
++        for (int index = 0; index < length; index++) {
++            char unit = needle.charAt(index);
++            units = addSignal(units, unit);
++            if (index >= 1) bigrams = addBigramSignal(bigrams, previous1, unit);
++            if (index >= 2) trigrams = addTrigramSignal(trigrams, previous2, previous1, unit);
++            previous2 = previous1;
++            previous1 = unit;
++        }
++        if ((bitSignal64 & units) != units) return false;
++        if (length >= 3 && (trigramSignal64 & trigrams) != trigrams) return false;
++        return length < 2 || (bigramSignal64 & bigrams) == bigrams;
++    }
++
++    /** Flat-prefix form of {@link #prefixMayMatch(M3StringFacts)}: first four UTF-16 units. */
++    boolean prefixMayMatch(String prefix) {
++        int width = Math.min(4, prefix.length());
++        if (width == 0) return true;
++        long packed = 0L;
++        for (int index = 0; index < width; index++) {
++            packed |= (long) prefix.charAt(index) << (48 - (index << 4));
++        }
++        long mask = width == 4 ? -1L : -1L << (64 - width * 16);
++        return (prefix4 & mask) == (packed & mask);
++    }
++
++    /** Flat-suffix form of {@link #suffixMayMatch(M3StringFacts)}: last four UTF-16 units. */
++    boolean suffixMayMatch(String suffix) {
++        int length = suffix.length();
++        int width = Math.min(4, length);
++        if (width == 0) return true;
++        long packed = 0L;
++        for (int index = length - width; index < length; index++) {
++            packed = (packed << 16) | suffix.charAt(index);
++        }
++        long mask = width == 4 ? -1L : (1L << (width * 16)) - 1L;
++        return (suffix4 & mask) == (packed & mask);
 +    }
 +
 +    boolean mayContainCodeUnit(char unit) {
@@ -5914,7 +6204,7 @@ index 0000000000000000000000000000000000000000..0d4cfb75317e68d54244588a474eba98
 +    }
 +}
 diff --git a/src/java.base/share/classes/java/lang/String.java b/src/java.base/share/classes/java/lang/String.java
-index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56e8684dc7 100644
+index 5c234d4dfacac9e642578483640d4e6b41488beb..da6f50d2aaf66bfef0564ba79d155287e9f7de56 100644
 --- a/src/java.base/share/classes/java/lang/String.java
 +++ b/src/java.base/share/classes/java/lang/String.java
 @@ -43,6 +43,8 @@ import java.util.Locale;
@@ -6798,7 +7088,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          byte coder = coder();
          if (coder == other.coder()) {
              return coder == LATIN1
-@@ -2281,8 +2541,19 @@ public final class String
+@@ -2281,8 +2541,29 @@ public final class String
          if (toffset < 0 || toffset > length() - prefix.length()) {
              return false;
          }
@@ -6810,6 +7100,16 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
 +            if (prefixM3 != null) {
 +                return sourceM3.startsWith(prefixM3, toffset);
 +            }
++            // Flat prefix (for example a literal): prepared facts can prove a mismatch first.
++            M3StringFacts prepared = sourceM3.factsIfPrepared();
++            if (prepared != null) {
++                if (!prepared.mayContain(prefix)) return false;
++                if (toffset == 0 && !prepared.prefixMayMatch(prefix)) return false;
++                if (toffset == sourceM3.length() - prefix.length()
++                        && !prepared.suffixMayMatch(prefix)) {
++                    return false;
++                }
++            }
 +            for (int index = 0; index < prefix.length(); index++) {
 +                if (sourceM3.charAt(toffset + index) != prefix.charAt(index)) return false;
 +            }
@@ -6820,7 +7120,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          int po = 0;
          int pc = pa.length;
          byte coder = coder();
-@@ -2362,8 +2633,11 @@ public final class String
+@@ -2362,8 +2643,11 @@ public final class String
          // from immutable state
          int h = hash;
          if (h == 0 && !hashIsZero) {
@@ -6834,7 +7134,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
              if (h == 0) {
                  hashIsZero = true;
              } else {
-@@ -2454,8 +2728,17 @@ public final class String
+@@ -2454,8 +2738,17 @@ public final class String
       * {@code fromIndex} were larger than the string length, or were negative.
       */
      public int indexOf(int ch, int fromIndex) {
@@ -6854,7 +7154,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -2500,8 +2783,15 @@ public final class String
+@@ -2500,8 +2793,15 @@ public final class String
       */
      public int indexOf(int ch, int beginIndex, int endIndex) {
          checkBoundsBeginEnd(beginIndex, endIndex, length());
@@ -6872,7 +7172,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -2566,8 +2856,17 @@ public final class String
+@@ -2566,8 +2866,17 @@ public final class String
       *          if the character does not occur before that point.
       */
      public int lastIndexOf(int ch, int fromIndex) {
@@ -6892,7 +7192,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -2585,15 +2884,7 @@ public final class String
+@@ -2585,15 +2894,7 @@ public final class String
       *          or {@code -1} if there is no such occurrence.
       */
      public int indexOf(String str) {
@@ -6909,7 +7209,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -2627,7 +2918,27 @@ public final class String
+@@ -2627,7 +2928,30 @@ public final class String
       *          or {@code -1} if there is no such occurrence.
       */
      public int indexOf(String str, int fromIndex) {
@@ -6923,6 +7223,9 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
 +            int targetLength = str.length();
 +            if (targetLength == 0) return from;
 +            if (targetLength > sourceM3.length() - from) return -1;
++            // Flat needle (for example a literal): prepared facts can prove absence first.
++            M3StringFacts prepared = sourceM3.factsIfPrepared();
++            if (prepared != null && !prepared.mayContain(str)) return -1;
 +            int limit = sourceM3.length() - targetLength;
 +            char first = str.charAt(0);
 +            for (int start = from; start <= limit; start++) {
@@ -6938,7 +7241,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -2660,7 +2971,27 @@ public final class String
+@@ -2660,7 +2984,30 @@ public final class String
              return indexOf(str.charAt(0), beginIndex, endIndex);
          }
          checkBoundsBeginEnd(beginIndex, endIndex, length());
@@ -6952,6 +7255,9 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
 +            int targetLength = str.length();
 +            if (targetLength == 0) return beginIndex;
 +            if (targetLength > endIndex - beginIndex) return -1;
++            // Flat needle (for example a literal): prepared facts can prove absence first.
++            M3StringFacts prepared = sourceM3.factsIfPrepared();
++            if (prepared != null && !prepared.mayContain(str)) return -1;
 +            int limit = endIndex - targetLength;
 +            char first = str.charAt(0);
 +            for (int start = beginIndex; start <= limit; start++) {
@@ -6967,7 +7273,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -2685,7 +3016,13 @@ public final class String
+@@ -2685,7 +3032,13 @@ public final class String
              return fromIndex;
          }
  
@@ -6982,7 +7288,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          byte tgtCoder = tgtStr.coder();
          if (srcCoder == tgtCoder) {
              return srcCoder == LATIN1
-@@ -2736,7 +3073,24 @@ public final class String
+@@ -2736,7 +3089,27 @@ public final class String
       *          or {@code -1} if there is no such occurrence.
       */
      public int lastIndexOf(String str, int fromIndex) {
@@ -6996,6 +7302,9 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
 +            if (targetLength == 0) return start;
 +            M3String target = str.m3();
 +            if (target != null) return storage.lastIndexOf(target, fromIndex);
++            // Flat needle (for example a literal): prepared facts can prove absence first.
++            M3StringFacts prepared = storage.factsIfPrepared();
++            if (prepared != null && !prepared.mayContain(str)) return -1;
 +            for (int candidate = start; candidate >= 0; candidate--) {
 +                int index = 0;
 +                while (index < targetLength
@@ -7008,7 +7317,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -2752,8 +3106,6 @@ public final class String
+@@ -2752,8 +3125,6 @@ public final class String
       */
      static int lastIndexOf(byte[] src, byte srcCoder, int srcCount,
                             String tgtStr, int fromIndex) {
@@ -7017,7 +7326,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          int tgtCount = tgtStr.length();
          /*
           * Check arguments; return immediately where possible. For
-@@ -2770,6 +3122,15 @@ public final class String
+@@ -2770,6 +3141,15 @@ public final class String
          if (tgtCount == 0) {
              return fromIndex;
          }
@@ -7033,7 +7342,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          if (srcCoder == tgtCoder) {
              return srcCoder == LATIN1
                  ? StringLatin1.lastIndexOf(src, srcCount, tgt, tgtCount, fromIndex)
-@@ -2832,8 +3193,16 @@ public final class String
+@@ -2832,8 +3212,16 @@ public final class String
              return this;
          }
          int subLen = endIndex - beginIndex;
@@ -7052,7 +7361,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -2892,6 +3261,12 @@ public final class String
+@@ -2892,6 +3280,12 @@ public final class String
          if (str.isEmpty()) {
              return this;
          }
@@ -7065,7 +7374,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          return StringConcatHelper.simpleConcat(this, str);
      }
  
-@@ -2926,8 +3301,14 @@ public final class String
+@@ -2926,8 +3320,14 @@ public final class String
       */
      public String replace(char oldChar, char newChar) {
          if (oldChar != newChar) {
@@ -7082,7 +7391,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
              if (ret != null) {
                  return ret;
              }
-@@ -2961,7 +3342,20 @@ public final class String
+@@ -2961,7 +3361,20 @@ public final class String
       *
       * @since 1.4
       */
@@ -7103,7 +7412,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          return Pattern.matches(regex, this);
      }
  
-@@ -3018,6 +3412,10 @@ public final class String
+@@ -3018,6 +3431,10 @@ public final class String
       * @since 1.4
       */
      public String replaceFirst(String regex, String replacement) {
@@ -7114,7 +7423,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          return Pattern.compile(regex).matcher(this).replaceFirst(replacement);
      }
  
-@@ -3062,6 +3460,10 @@ public final class String
+@@ -3062,6 +3479,10 @@ public final class String
       * @since 1.4
       */
      public String replaceAll(String regex, String replacement) {
@@ -7125,7 +7434,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          return Pattern.compile(regex).matcher(this).replaceAll(replacement);
      }
  
-@@ -3089,16 +3491,27 @@ public final class String
+@@ -3089,16 +3510,30 @@ public final class String
                  return replace(trgtStr.charAt(0), replStr.charAt(0));
              }
  
@@ -7133,6 +7442,9 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
 +            M3String targetM3 = trgtStr.m3();
 +            M3String replacementM3 = replStr.m3();
 +            if (storage != null || targetM3 != null || replacementM3 != null) {
++                // A flat target that cannot occur (prepared facts) or does not occur leaves
++                // this String unchanged without admitting the target or the replacement.
++                if (storage != null && targetM3 == null && indexOf(trgtStr) < 0) return this;
 +                M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
 +                if (targetM3 == null) targetM3 = M3String.canonicalize(trgtStr);
 +                if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);
@@ -7159,7 +7471,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
              if (ret != null) {
                  return ret;
              }
-@@ -3113,6 +3526,14 @@ public final class String
+@@ -3113,6 +3548,14 @@ public final class String
                  throw new OutOfMemoryError("Required length exceeds implementation limit");
              }
  
@@ -7174,7 +7486,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
              StringBuilder sb = new StringBuilder(resultLen);
              sb.append(replStr);
              for (int i = 0; i < thisLen; ++i) {
-@@ -3349,12 +3770,64 @@ public final class String
+@@ -3349,12 +3792,64 @@ public final class String
              // because the large split loop can usually not be inlined.
              return split(ch, limit, withDelimiters);
          }
@@ -7239,7 +7551,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      private String[] split(char ch, int limit, boolean withDelimiters) {
          int matchCount = 0;
          int off = 0;
-@@ -3489,6 +3962,11 @@ public final class String
+@@ -3489,6 +3984,11 @@ public final class String
       */
      @ForceInline
      static String join(String prefix, String suffix, String delimiter, String[] elements, int size) {
@@ -7251,32 +7563,18 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          int icoder = prefix.coder() | suffix.coder();
          long len = (long) prefix.length() + suffix.length();
          if (size > 1) { // when there are more than one element, size - 1 delimiters will be emitted
-@@ -3504,6 +3982,24 @@ public final class String
+@@ -3504,6 +4004,10 @@ public final class String
              icoder |= el.coder();
          }
          byte coder = (byte) icoder;
 +        if (m3JoinedStringsEnabled()) {
-+            int pieceCount = size == 0 ? 2 : size * 2 + 1;
-+            String[] pieces = new String[pieceCount];
-+            int piece = 0;
-+            pieces[piece++] = prefix;
-+            if (size > 0) {
-+                pieces[piece++] = elements[0];
-+                for (int i = 1; i < size; i++) {
-+                    pieces[piece++] = delimiter;
-+                    pieces[piece++] = elements[i];
-+                }
-+            }
-+            pieces[piece] = suffix;
-+            M3String storage = M3String.join(pieces);
-+            if (storage != null) {
-+                return new String(storage);
-+            }
++            M3String storage = M3String.joinDesignated(prefix, suffix, delimiter, elements, size);
++            return new String(storage);
 +        }
          // long len overflow check, char -> byte length, int len overflow check
          if (len < 0L || (len <<= coder) != (int) len) {
              throw new OutOfMemoryError("Requested string length exceeds VM limit");
-@@ -3632,8 +4128,18 @@ public final class String
+@@ -3632,8 +4136,29 @@ public final class String
       * @since   1.1
       */
      public String toLowerCase(Locale locale) {
@@ -7284,7 +7582,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
 -                          : StringUTF16.toLowerCase(this, value, locale);
 +        Objects.requireNonNull(locale);
 +        M3String storage = m3();
-+        if (storage != null && locale.equals(Locale.ROOT)) {
++        if (storage != null && asciiCaseMappingLocale(locale)) {
 +            M3StringFacts prepared = storage.facts();
 +            if (prepared.ascii) {
 +                M3String mapped = storage.asciiCase(false);
@@ -7294,10 +7592,21 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
 +        byte[] currentValue = value();
 +        return isLatin1() ? StringLatin1.toLowerCase(this, currentValue, locale)
 +                          : StringUTF16.toLowerCase(this, currentValue, locale);
++    }
++
++    /**
++     * Locales whose case mapping of ASCII text is the plain ASCII mapping: every language except
++     * Turkish, Azeri and Lithuanian, the same languages {@code StringLatin1} routes to the
++     * locale-dependent mapping. Lets M3 Strings with ASCII facts map in place for the default
++     * locale instead of materializing a byte shadow.
++     */
++    private static boolean asciiCaseMappingLocale(Locale locale) {
++        String lang = locale.getLanguage();
++        return lang != "tr" && lang != "az" && lang != "lt";
      }
  
      /**
-@@ -3712,8 +4218,18 @@ public final class String
+@@ -3712,8 +4237,18 @@ public final class String
       * @since   1.1
       */
      public String toUpperCase(Locale locale) {
@@ -7305,7 +7614,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
 -                          : StringUTF16.toUpperCase(this, value, locale);
 +        Objects.requireNonNull(locale);
 +        M3String storage = m3();
-+        if (storage != null && locale.equals(Locale.ROOT)) {
++        if (storage != null && asciiCaseMappingLocale(locale)) {
 +            M3StringFacts prepared = storage.facts();
 +            if (prepared.ascii) {
 +                M3String mapped = storage.asciiCase(true);
@@ -7318,7 +7627,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -3772,8 +4288,16 @@ public final class String
+@@ -3772,8 +4307,16 @@ public final class String
       *          has no leading or trailing space.
       */
      public String trim() {
@@ -7337,7 +7646,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          return ret == null ? this : ret;
      }
  
-@@ -3804,8 +4328,16 @@ public final class String
+@@ -3804,8 +4347,16 @@ public final class String
       * @since 11
       */
      public String strip() {
@@ -7356,7 +7665,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          return ret == null ? this : ret;
      }
  
-@@ -3834,8 +4366,16 @@ public final class String
+@@ -3834,8 +4385,16 @@ public final class String
       * @since 11
       */
      public String stripLeading() {
@@ -7375,7 +7684,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          return ret == null ? this : ret;
      }
  
-@@ -3864,8 +4404,16 @@ public final class String
+@@ -3864,8 +4423,16 @@ public final class String
       * @since 11
       */
      public String stripTrailing() {
@@ -7394,7 +7703,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          return ret == null ? this : ret;
      }
  
-@@ -3917,7 +4465,53 @@ public final class String
+@@ -3917,7 +4484,53 @@ public final class String
       * @since 11
       */
      public Stream<String> lines() {
@@ -7449,7 +7758,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -3960,6 +4554,10 @@ public final class String
+@@ -3960,6 +4573,10 @@ public final class String
          if (isEmpty()) {
              return "";
          }
@@ -7460,7 +7769,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          Stream<String> stream = lines();
          if (n > 0) {
              final String spaces = " ".repeat(n);
-@@ -3973,13 +4571,19 @@ public final class String
+@@ -3973,13 +4590,19 @@ public final class String
      }
  
      private int indexOfNonWhitespace() {
@@ -7484,7 +7793,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -4075,6 +4679,10 @@ public final class String
+@@ -4075,6 +4698,10 @@ public final class String
          if (length == 0) {
              return "";
          }
@@ -7495,7 +7804,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          char lastChar = charAt(length - 1);
          boolean optOut = lastChar == '\n' || lastChar == '\r';
          List<String> lines = lines().toList();
-@@ -4197,6 +4805,10 @@ public final class String
+@@ -4197,6 +4824,10 @@ public final class String
          if (isEmpty()) {
              return "";
          }
@@ -7506,7 +7815,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          char[] chars = toCharArray();
          int length = chars.length;
          int from = 0;
-@@ -4307,9 +4919,13 @@ public final class String
+@@ -4307,9 +4938,13 @@ public final class String
       */
      @Override
      public IntStream chars() {
@@ -7522,7 +7831,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
              false);
      }
  
-@@ -4327,9 +4943,13 @@ public final class String
+@@ -4327,9 +4962,13 @@ public final class String
       */
      @Override
      public IntStream codePoints() {
@@ -7538,7 +7847,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
              false);
      }
  
-@@ -4341,8 +4961,13 @@ public final class String
+@@ -4341,8 +4980,13 @@ public final class String
       *          the character sequence represented by this string.
       */
      public char[] toCharArray() {
@@ -7554,7 +7863,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /**
-@@ -4548,6 +5173,9 @@ public final class String
+@@ -4548,6 +5192,9 @@ public final class String
       *          as its single character the argument {@code c}.
       */
      public static String valueOf(char c) {
@@ -7564,7 +7873,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          if (COMPACT_STRINGS && StringLatin1.canEncode(c)) {
              return new String(StringLatin1.toBytes(c), LATIN1);
          }
-@@ -4660,21 +5288,30 @@ public final class String
+@@ -4660,21 +5307,30 @@ public final class String
          if (count == 1) {
              return this;
          }
@@ -7599,7 +7908,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
          repeatCopyRest(multiple, 0, limit, len);
          return new String(multiple, coder);
      }
-@@ -4718,7 +5355,10 @@ public final class String
+@@ -4718,7 +5374,10 @@ public final class String
       * @param coder     the coder of dst[]
       */
      void getBytes(byte[] dst, int dstBegin, byte coder) {
@@ -7611,7 +7920,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
              System.arraycopy(value, 0, dst, dstBegin << coder, value.length);
          } else {    // this.coder == LATIN && coder == UTF16
              StringLatin1.inflate(value, 0, dst, dstBegin, value.length);
-@@ -4738,7 +5378,10 @@ public final class String
+@@ -4738,7 +5397,10 @@ public final class String
       * @param length    the amount of copied chars
       */
      void getBytes(byte[] dst, int srcPos, int dstBegin, byte coder, int length) {
@@ -7623,7 +7932,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
              System.arraycopy(value, srcPos << coder, dst, dstBegin << coder, length << coder);
          } else {    // this.coder == LATIN && coder == UTF16
              StringLatin1.inflate(value, srcPos, dst, dstBegin, length);
-@@ -4758,18 +5401,26 @@ public final class String
+@@ -4758,18 +5420,26 @@ public final class String
          if (len == 0) {
              this.value = "".value;
              this.coder = "".coder;
@@ -7659,7 +7968,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..b7d5d24b2fc1defe308ad9a80bb37b56
      }
  
      /*
-@@ -4779,42 +5430,157 @@ public final class String
+@@ -4779,42 +5449,157 @@ public final class String
      String(AbstractStringBuilder asb, Void sig) {
          byte[] val = asb.getValue();
          int length = asb.length();

@@ -49,3 +49,7 @@ Regenerated after `StringConcatFactory.java` and `StringConcatHelper.java` chang
 ## 2026-10-08 re-seal (A7 invariant 6)
 
 Regenerated after `M3StringPositionPrecompute.java` changed (65 targets; `target_commit` cab2f8c0ef).
+
+## 2026-10-08 re-seal (A4 facts gates for mixed-side consumers)
+
+Regenerated after `M3StringFacts.java` and `String.java` changed (`target_commit` 0d0cc24b51). The same regeneration seals `java/lang/M3StringCodePointPrecompute.java`, an M3-token file that had joined master (code-point geometry receiver) without a re-seal: 66 targets; `test_recipe.py` now expects 66.
