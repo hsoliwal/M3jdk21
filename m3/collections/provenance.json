@@ -262,5 +262,18 @@
         "native postimage SHA updated for renamed JNI symbol"
       ]
     }
-  ]
+  ],
+  "receiving_repair_20261008": {
+    "modification_notice": "Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.",
+    "target_baseline": "439b767c7c92e2751f7f6a47c012f96472420905",
+    "canonical_source_repository": "hsoliwal/com.synexia",
+    "canonical_recipe_path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008",
+    "java_manifest_sha256": "31ef71b432356b141588bbc1352638890f1abeae81acb89d97a497f8e0eda513",
+    "installed_source_manifest": "m3/collections/qualification/installed-source-receiving-20261008.tsv",
+    "installed_source_manifest_sha256": "063ae7c1857cf683464160408cfab94c9e63503d40eabc4adc630b2e668815e1",
+    "rights": "Apache-2.0; preserve all original notices and per-file third-party/OpenJDK rights",
+    "historical_records": "Existing files/tooling_reuse records describe the original 21-file lane intake and are retained without reinterpretation.",
+    "global_map_git_blob": "56a2d439a832920ef28e5e242d799d81d45ff59b",
+    "phase_advance": false
+  }
 }

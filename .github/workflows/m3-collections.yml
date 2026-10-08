@@ -1,0 +1,84 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Canonical recipe: com.synexia.m3.M3PackedCollectionsReceivingMetadata in hsoliwal/com.synexia.
+# Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.
+name: M3 collection contracts
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-collections.yml'
+      - 'm3/collections/**'
+      - 'm3/tooling/migration-recipes/**'
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/m3-collections.yml'
+      - 'm3/collections/**'
+      - 'm3/tooling/migration-recipes/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  historical-lane-recipe:
+    name: Historical lane recipe with real SDK
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare pinned Java 21 compiler
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz' -o "$RUNNER_TEMP/m3-jdk21.tar.gz"
+          printf '%s  %s\n' 'ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94' "$RUNNER_TEMP/m3-jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/m3-jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1/bin" >> "$GITHUB_PATH"
+      - name: Verify frozen lane recipe and fixed point
+        run: mvn --batch-mode --no-transfer-progress --file m3/collections/recipe/pom.xml verify
+      - name: Retain historical recipe reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-collections-historical-recipe-${{ github.sha }}
+          path: m3/collections/recipe/target/surefire-reports/
+          if-no-files-found: warn
+
+  installed-collections:
+    name: Installed Java 21 collections and JNI
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare pinned Java 21 compiler and JUnit console
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz' -o "$RUNNER_TEMP/m3-jdk21.tar.gz"
+          printf '%s  %s\n' 'ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94' "$RUNNER_TEMP/m3-jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/m3-jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1/bin" >> "$GITHUB_PATH"
+          curl --fail --location --retry 3 'https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar' -o "$RUNNER_TEMP/m3-junit-console.jar"
+          printf '%s  %s\n' '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a' "$RUNNER_TEMP/m3-junit-console.jar" | sha256sum --check -
+          printf 'JUNIT_CONSOLE_JAR=%s\n' "$RUNNER_TEMP/m3-junit-console.jar" >> "$GITHUB_ENV"
+      - name: Verify installed module, contracts, packaging, JNI, and allocation
+        run: python3 m3/collections/verify_donation.py --cost-probe
+      - name: Retain installed module evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-collections-installed-${{ github.sha }}
+          path: |
+            m3/collections/target/donation-verification/evidence/
+            m3/collections/target/donation-verification/junit-reports/
+          if-no-files-found: warn

@@ -1,4 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-07: classify the existing Synexia collection and algorithm custody prefixes.
 package com.m3.synexia.importer;
 
 import java.util.List;
@@ -30,6 +32,12 @@ public final class SynexiaCanonicalFamilyPolicy {
         M3INDEX_DB(
                 "synexia-mindex/db/",
                 "com.synexia:synexia-m3index-db"),
+        M3INDEX_COLLECTIONS(
+                "synexia-mindex/collections/",
+                "com.synexia:synexia-m3index-collections"),
+        M3INDEX_ALGORITHM(
+                "synexia-mindex/algorithm/",
+                "com.synexia:synexia-m3index-algorithm"),
         OPENREWRITE(
                 "synexia-openrewrite-recipes/",
                 "com.synexia:synexia-openrewrite-recipes"),

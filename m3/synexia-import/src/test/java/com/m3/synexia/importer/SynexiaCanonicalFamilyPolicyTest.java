@@ -1,4 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-07: cover collection/algorithm custody admission and retained refusal gates.
 package com.m3.synexia.importer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -246,6 +248,79 @@ final class SynexiaCanonicalFamilyPolicyTest {
                                 "1".repeat(64),
                                 "MIT",
                                 SynexiaImportManifest.Mode.APACHE_SOURCE));
+    }
+
+    @Test
+    void collectionAndAlgorithmSourcesResolveToTheirCanonicalSynexiaCoordinates() {
+        List<String> prefixes = List.of(
+                "synexia-mindex/collections/", "synexia-mindex/algorithm/");
+        List<String> names = List.of("M3INDEX_COLLECTIONS", "M3INDEX_ALGORITHM");
+        List<String> owners = List.of(
+                "com.synexia:synexia-m3index-collections",
+                "com.synexia:synexia-m3index-algorithm");
+        for (int i = 0; i < prefixes.size(); i++) {
+            SynexiaCanonicalFamilyPolicy.Family family =
+                    SynexiaCanonicalFamilyPolicy.requireFamily(
+                            prefixes.get(i) + "src/main/java/p/A.java");
+            assertEquals(names.get(i), family.name());
+            assertEquals(owners.get(i), family.canonicalOwner());
+            assertEquals(family, SynexiaCanonicalFamilyPolicy.requireFamily(
+                    prefixes.get(i) + "pom.xml"));
+        }
+
+        // Additive coordinates retain the original, broad alias custody classification.
+        assertEquals(SynexiaCanonicalFamilyPolicy.Family.M3INDEX_ALIAS,
+                SynexiaCanonicalFamilyPolicy.requireFamily(
+                        "synexia-m3index/collections/pom.xml"));
+        assertEquals(SynexiaCanonicalFamilyPolicy.Family.M3INDEX_ALIAS,
+                SynexiaCanonicalFamilyPolicy.requireFamily(
+                        "synexia-m3index/algorithm/pom.xml"));
+    }
+
+    @Test
+    void collectionAndAlgorithmIntakeRetainsApacheAndExactMirrorRequirements() {
+        for (String prefix : List.of(
+                "synexia-mindex/collections/", "synexia-mindex/algorithm/")) {
+            String source = prefix + "src/main/java/p/A.java";
+            String target = "m3/vendor/synexia/" + source;
+            new SynexiaImportManifest.Entry(
+                    "m3index-family", source, target, "1".repeat(64), "Apache-2.0",
+                    SynexiaImportManifest.Mode.APACHE_SOURCE);
+            assertThrows(IllegalArgumentException.class, () ->
+                    new SynexiaImportManifest.Entry(
+                            "m3index-family", source, "m3/vendor/synexia/renamed/A.java",
+                            "1".repeat(64), "Apache-2.0",
+                            SynexiaImportManifest.Mode.APACHE_SOURCE));
+            assertThrows(IllegalArgumentException.class, () ->
+                    new SynexiaImportManifest.Entry(
+                            "m3index-family", source, target, "1".repeat(64), "MIT",
+                            SynexiaImportManifest.Mode.APACHE_SOURCE));
+            assertThrows(IllegalArgumentException.class, () ->
+                    new SynexiaImportManifest.Entry(
+                            "indexstring-java", source, target, "1".repeat(64), "Apache-2.0",
+                            SynexiaImportManifest.Mode.APACHE_SOURCE));
+        }
+    }
+
+    @Test
+    void collectionAndAlgorithmLookalikesAndUnsafePathsStayRefused() {
+        for (String source : List.of(
+                "synexia-mindex/collections-old/pom.xml",
+                "synexia-mindex/algorithmic/pom.xml",
+                "synexia-mindex/collections",
+                "synexia-mindex/algorithm")) {
+            assertTrue(SynexiaCanonicalFamilyPolicy.classify(source).isEmpty());
+            assertThrows(IllegalArgumentException.class, () ->
+                    SynexiaCanonicalFamilyPolicy.requireCategoryFamily(
+                            "m3index-family", source));
+        }
+        for (String source : List.of(
+                "../synexia-mindex/collections/pom.xml",
+                "synexia-mindex/algorithm/../compiler/pom.xml",
+                "synexia-mindex/collections//pom.xml")) {
+            assertThrows(IllegalArgumentException.class, () ->
+                    SynexiaCanonicalFamilyPolicy.classify(source));
+        }
     }
 
     private static Path repositoryRoot() {
