@@ -8012,7 +8012,19 @@
       "public_api": "none by default",
       "target_owners": [],
       "rule": "Do not attach whole-corpus images to java.lang.String or java.util collections without a concrete bounded JDK consumer."
+    },
+    {
+      "source_family": "Synexia BulkTask/BulkExecutor/M3BulkExecutor + TornadoVM verified RV32IM bulk provider",
+      "target_family": "M3 internal bulk scheduler",
+      "public_api": "none; internal jdk.internal.vm.parallel candidate",
+      "target_owners": [
+        "jdk.internal.vm.parallel.BulkTask",
+        "jdk.internal.vm.parallel.BulkExecutor",
+        "jdk.internal.vm.parallel.BulkExecution"
+      ],
+      "rule": "Reviewed operation identity plus bounded work geometry; arbitrary Runnable is not accelerator admission; providers stay outside java.base and accelerated admission requires provider-specific proof including CPU parity where applicable."
     }
+
   ],
   "recipe_authority": {
     "recipe_id": "synexia.m3jdk.string.canonical-dag.20261006",
