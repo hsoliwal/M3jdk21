@@ -45,3 +45,7 @@ Regenerated after `String.java` and `M3String.java` changed (65 targets unchange
 ## 2026-10-08 re-seal (A3 non-boxing concat combinator)
 
 Regenerated after `StringConcatFactory.java` and `StringConcatHelper.java` changed (65 targets; `target_commit` ec0ead0e3f).
+
+## 2026-10-08 re-seal (A7 invariant 6)
+
+Regenerated after `M3StringPositionPrecompute.java` changed (65 targets; `target_commit` cab2f8c0ef).
