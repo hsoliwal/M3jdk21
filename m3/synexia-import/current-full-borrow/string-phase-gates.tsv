@@ -6,16 +6,16 @@ CANONICAL_NAME_MAPPING	PINNED	m3/docs/name-mapping.json MIndexString -> java.lan
 LICENSE_PROVENANCE	PINNED	Apache-2.0 first-party authored expression; preserve NOTICE/provenance
 COPYRIGHT_NOTICE	PINNED	Copyright 2026 Hitesh Soliwal and contributors
 ABSTRACT_IDEA_BOUNDARY	PINNED	PROVENANCE_NOT_COPYRIGHTED_EXPRESSION
-UTF16_DIFFERENTIAL	NOT_EXECUTED	unpaired surrogates, substring/slices, chars/codePoints, hash/equality
-OWNER_COORDINATE_LIFETIME	NOT_EXECUTED	no-second-payload, scalar/mapped/tuple/range lifetime
-SEARCH_DIFFERENTIAL	NOT_EXECUTED	indexOf/contains/prefix/suffix/position precompute
-REGEX_ORACLE	NOT_EXECUTED	java.util.regex remains semantic authority
-JNI_SHADOW_LIFETIME	NOT_EXECUTED	char/byte shadow materialize/acquire/release
-JDK_BUILD	NOT_EXECUTED	matched configure/make image
-JTREG_NORMAL	NOT_EXECUTED	focused M3String tests + stock String regressions
-JTREG_XINT	NOT_EXECUTED	interpreter
-JTREG_C1_C2	NOT_EXECUTED	compiled tiers/deopt
-GC_CDS_JFR_JVMCI	NOT_EXECUTED	representation consumers
-COLD_WARM_RESOURCES	NOT_EXECUTED	CPU/heap/native-retained bytes
-FIXED_POINT_REPLAY	NOT_EXECUTED	source-changing recipe not yet admitted by this packet
+UTF16_DIFFERENTIAL	CANDIDATE	Synexia #9882; M3JDK21 #454 merged; matched-image execution stack pending
+OWNER_COORDINATE_LIFETIME	CANDIDATE	Synexia #9907; M3JDK21 #481/#485 candidate; matched-image execution pending
+SEARCH_DIFFERENTIAL	CANDIDATE	Synexia #9859; M3JDK21 #431 merged candidate; matched-image execution pending
+REGEX_ORACLE	CANDIDATE	Synexia #9857/#9866; M3JDK21 #430/#438 merged candidates; hosted matched-image proof pending
+JNI_SHADOW_LIFETIME	CANDIDATE	Synexia #9909; M3JDK21 #482/#485 candidate; matched-image execution pending
+JDK_BUILD	CANDIDATE	Matched fastdebug configure/java.base/images execution queued on Phase-1 stack
+JTREG_NORMAL	CANDIDATE	Normal focused String/search/regex matched-image jtreg queued
+JTREG_XINT	CANDIDATE	Synexia #9917; M3JDK21 #487 mode execution queued
+JTREG_C1_C2	CANDIDATE	Synexia #9917; M3JDK21 #487 C1/C2 execution queued
+GC_CDS_JFR_JVMCI	CANDIDATE	Synexia #9919; M3JDK21 #488 representation-consumer execution queued
+COLD_WARM_RESOURCES	CANDIDATE	Synexia #9920; M3JDK21 #490 three-fork matched-image measurements queued
+FIXED_POINT_REPLAY	CANDIDATE	Canonical Synexia recipe stack authored with fixed-point/refusal tests; source/target CI evidence pending
 PROMOTION	BLOCKED	all required target gates must close
