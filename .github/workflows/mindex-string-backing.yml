@@ -9,6 +9,11 @@ on:
       - 'm3/docs/synexia-string-recipe-authority.tsv'
       - 'm3/docs/m3jdk21-porting-invariant.md'
       - 'm3/docs/m3string-synexia-lineage.md'
+      - 'm3/synexia-import/current-full-borrow/STRING_PHASE.md'
+      - 'm3/synexia-import/current-full-borrow/string-source-target-map.tsv'
+      - 'm3/synexia-import/current-full-borrow/string-phase-gates.tsv'
+      - 'm3/synexia-import/current-full-borrow/check_string_phase.py'
+      - 'm3/synexia-import/current-full-borrow/receiver-status.tsv'
       - 'm3/docs/synexia-string-precompute-port-map.tsv'
       - 'm3/docs/string-precompute-completeness.tsv'
       - 'm3/runtime-integration/**'
@@ -67,6 +72,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Verify full-borrow MIndexString to M3String custody
+        run: python3 m3/synexia-import/current-full-borrow/check_string_phase.py
       - name: Verify String completeness admission and refusal controls
         run: python3 m3/runtime-integration/test_string_completeness.py
       - name: Verify compiler-parsed M3 String layout
