@@ -563,19 +563,27 @@ class GenerateRecipeCratesTest(unittest.TestCase):
             donor_map = root / "donors.tsv"
             donor_map.write_text(
                 "path\tdonor_ref\n"
-                "a/A.java\tdeadbeef\n"
-                "b/B.java\tcafebabe\n",
+                "a/A.java\t" + ("a" * 40) + "\n"
+                "b/B.java\t" + ("b" * 40) + "\n",
                 encoding="utf-8",
             )
             self.assertEqual(
-                {"a/A.java": "deadbeef", "b/B.java": "cafebabe"},
+                {"a/A.java": "a" * 40, "b/B.java": "b" * 40},
                 self.mod._donor_overrides(donor_map),
             )
 
             donor_map.write_text(
                 "path\tdonor_ref\n"
-                "b/B.java\tcafebabe\n"
-                "a/A.java\tdeadbeef\n",
+                "b/B.java\t" + ("b" * 40) + "\n"
+                "a/A.java\t" + ("a" * 40) + "\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "noncanonical donor-map row"):
+                self.mod._donor_overrides(donor_map)
+
+            donor_map.write_text(
+                "path\tdonor_ref\n"
+                "a/A.java\tmutable-tag\n",
                 encoding="utf-8",
             )
             with self.assertRaisesRegex(ValueError, "noncanonical donor-map row"):
