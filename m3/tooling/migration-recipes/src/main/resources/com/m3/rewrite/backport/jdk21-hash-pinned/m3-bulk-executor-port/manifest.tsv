@@ -1,0 +1,4 @@
+src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecution.java	ABSENT	8ec68b77969ffd29145120061d649e69fd9ebc69b5732cf1eb4e9339a3a48acd	BulkExecution.java.txt
+src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecutor.java	ABSENT	7581df49c7a2c67036633dd4837ed4c6e13025a00105cf4f5416649991a0002a	BulkExecutor.java.txt
+src/java.base/share/classes/jdk/internal/vm/parallel/BulkTask.java	ABSENT	c38cd88a1615df34391761e8a0bc7082eb0a3ca090706f04b15734b1249a75d1	BulkTask.java.txt
+test/jdk/jdk/internal/vm/parallel/BulkExecutorTest.java	ABSENT	8c69cdcec690d8ede71e49488840387a04c8a101d568480f22bb4f27c8146a2d	BulkExecutorTest.java.txt
