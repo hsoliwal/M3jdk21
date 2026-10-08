@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ConcatTuple
+displayName: M3JDK21 non-boxing M3 concat combinator
+description: >-
+  StringConcatFactory.generateM3Concat filters every argument through a typed stringify gateway
+  (no boxing) and collects the pieces once as String[]; StringConcatHelper.m3Concat takes
+  String[] pieces. Ships the jtreg test that proves gateway types, handle types and indy parity
+  (flag-off) and full combinator invocation (flag-on). TARGET_OWNED_PORT postimages;
+  StringConcatFactory.java is carried as text because the pinned Java parser cannot convert its
+  Javadoc.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-concat-tuple
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-concat-tuple

@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/StringConcatHelper.java	c16dcf6693d8f94cb52f9f902b71d7d91160c287affa15e16d245f7e19121510	1d41449dceb4350049689669bca5567e005d51e8440d2a88e81288d6a9f50ce7	00-StringConcatHelper.java.txt
+test/jdk/java/lang/String/M3StringConcatTupleTest.java	ABSENT	cf870f27491be49bcae7acf23900c8ac28a339aea42915f225e2529c98abc4da	01-M3StringConcatTupleTest.java.txt
