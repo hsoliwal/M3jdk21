@@ -186,6 +186,7 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             "m3jdk21-string-adaptive-search.yml",
             "m3jdk21-string-position-masks.yml",
             "m3jdk21-string-focused-search-invariant.yml",
+            "m3jdk21-string-focused-search-convergence.yml",
         )
         for name in forbidden_files:
             self.assertFalse((RECIPE_ROOT / name).exists(), name)
@@ -204,6 +205,11 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             )
             self.assertNotIn(
                 "com.synexia.rewrite.M3Jdk21StringFocusedSearchInvariant",
+                text,
+                path.name,
+            )
+            self.assertNotIn(
+                "com.synexia.rewrite.M3Jdk21StringFocusedSearchConvergence",
                 text,
                 path.name,
             )
