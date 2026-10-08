@@ -1,0 +1,273 @@
+{
+  "schema": 1,
+  "status": "ACTUAL_STRICT_FIVE_SOURCE_COMPILE_EXIT0",
+  "commandPlan": {
+    "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\COMMAND_PLANS.json",
+    "bytes": 39103,
+    "sha256": "096d65fc23b2d6da06bae2214f1bd2c7c5a1a7be5505275f72d3af40379c0ccd"
+  },
+  "preparation": {
+    "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\EXECUTION_PREPARATION.json",
+    "bytes": 47526,
+    "sha256": "d641029972be92e2c76195cf726df1e9630bd8fe865e3aa3614ff890ad1fd89b"
+  },
+  "nativeCompiler": {
+    "name": "REGEX_SUCCESSOR_01_4_compileProgramQueryAndThreeOriginalImageOwners",
+    "actualExitCode": 0,
+    "expectedForThisCase": 0,
+    "log": {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\REGEX_SUCCESSOR_01_4_compileProgramQueryAndThreeOriginalImageOwners.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "exit": {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\REGEX_SUCCESSOR_01_4_compileProgramQueryAndThreeOriginalImageOwners.exit.txt",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    }
+  },
+  "sourceOwners": [
+    "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\receiving-snapshot\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+    "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\source\\MIndexRegexTrigramQuery.java",
+    "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\source\\MIndexRegexProgramImageCodec.java",
+    "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\source\\MIndexRegexAcceleratedImage.java",
+    "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\source\\MIndexCompactAsciiDfaImage.java"
+  ],
+  "classFiles": [
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexCompactAsciiDfaImage.class",
+      "bytes": 6552,
+      "sha256": "4473e56a082863018becea521acf6c13f7fabd15d2af682e150ae7c13975d9e8"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexAcceleratedImage.class",
+      "bytes": 5284,
+      "sha256": "344b028d6568de24f592a9e09f82052079be6595e57a6af30162ebd49121dc75"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$AltNode.class",
+      "bytes": 2637,
+      "sha256": "18a277cc6719553e46e326cb321e18698d014eaeb4c4ede366e8901f2dfc6575"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$AsciiDfaImage.class",
+      "bytes": 2581,
+      "sha256": "7055e35f0996628582c230a6118f775e16f6f5a45975bae11f3915e4b7d68947"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$AsciiDfaTable.class",
+      "bytes": 6781,
+      "sha256": "f0a7025469aefcce9e7a93b2d8adf32b6ef543bdd54b32a8bb6c6f0135c39d98"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$AsciiSubsetTable.class",
+      "bytes": 1925,
+      "sha256": "48fe7f344dcf2e29306566cc519743cfd211888449227e7b5741f1f8012dfdad"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$AtomNode.class",
+      "bytes": 1786,
+      "sha256": "c12e9bb6513c30b62b02074a648d74bb5aea5b9d20db36ffc8e769d295f23288"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$BmpClassTable.class",
+      "bytes": 1944,
+      "sha256": "12b1fbcc53c5627be8ba9f2e7fdbb810703fd62eafdae7b4bab8153be39edd34"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$ClassPiece.class",
+      "bytes": 2102,
+      "sha256": "1aa4a3463811b9a41b67f29c86a6d0be86e0135efd0c30391056a67d9d3f2c84"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$ClassSpec.class",
+      "bytes": 2077,
+      "sha256": "3efd8089416670d65d581ffd10c602190eceee3e20894572edae12f02190e0f2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$ClassTable.class",
+      "bytes": 1929,
+      "sha256": "dc2abe3c5f305077c4fe8d8d15f73884cec69c52390e7509a5f933fc41f94d4d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$ClassTableBuilder.class",
+      "bytes": 8548,
+      "sha256": "d0ad86c903eca2a239448285830fd6692876bf4184c98036658ed2657de02de1"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$CompilationSession$Limits.class",
+      "bytes": 2252,
+      "sha256": "5f2f397b87622abfa3f95140c8922190d185d52f207a93c8bd88faa07e39d36a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$CompilationSession$Policy.class",
+      "bytes": 1437,
+      "sha256": "f95d5881c4f931cb9fb08cb7b29eebef0f47939214d24737efd9ce46a4d4c85e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$CompilationSession$Statistics.class",
+      "bytes": 2167,
+      "sha256": "bdfb5ddc6a172a3020a9c97b664f4da06efbc9e0a00db36282ea267d4ec3700c"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$CompilationSession.class",
+      "bytes": 13625,
+      "sha256": "3ce9bd069bd7e4cdd6fe6aea79b97104cb68deeed86814f1ff626cbe7235d6d3"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$CompilationTimings.class",
+      "bytes": 1878,
+      "sha256": "d413bd817aac664c14458104141a3dbbd74ee548515e142f6ef76c9be1ed5529"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$Compiler.class",
+      "bytes": 6809,
+      "sha256": "2e70d77c66a27d19a01dc73c24bf6c9ae584a8dfb5a2f53eb687fc2f5d7700e7"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$ConcatNode.class",
+      "bytes": 2658,
+      "sha256": "50decbd35c639da76f2c753eb5a924c6fe29466e03623ac91917e0f269dad074"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$EmptyNode.class",
+      "bytes": 1522,
+      "sha256": "fbe25143bec3065d320ab7fc199e12771c3d7ed547c1f971e7eda7846ffd8fe2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$EndNode.class",
+      "bytes": 1512,
+      "sha256": "69f16c3c4cf7ae3f66d26aceb46cf0db6b0168ad4cc48152b85b47d6a003e41c"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$EpsilonClosureTable.class",
+      "bytes": 2722,
+      "sha256": "7bc09656e981e8ab019d92264de5846de76e563664136f8b0cdd998e4c6c4791"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$ExecutionImage.class",
+      "bytes": 5398,
+      "sha256": "cd2ccc9b09ff0bf9a30143d2f3280f849696f6d1ca83cebd8a200b29081afbe6"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$Fragment.class",
+      "bytes": 1826,
+      "sha256": "f22d5c2bfca38841465e34e7e3a6e9302897a34d18dcdc8ed031638876ec5c5c"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$Image.class",
+      "bytes": 5943,
+      "sha256": "b789fc675c8b0b585ae419cb676a7bc3675e7fb40cd6adeac17d4a446866f131"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$Node.class",
+      "bytes": 1125,
+      "sha256": "9e893000ce0d01728a3eb7a2be7387de89e4207c4ab9a9ad5c1baae9b588e029"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$ParsedSyntax.class",
+      "bytes": 2190,
+      "sha256": "0d2b1b8e8cf267359188f587e8953677f81084a2f30e0f3e5c2a7ee0ef17067a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$Parser.class",
+      "bytes": 10042,
+      "sha256": "f33bff8be32a05c883e9b001f0d66dd07d0bf26a79187401fbf2a87bc9165bc7"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$Patch.class",
+      "bytes": 1423,
+      "sha256": "5075616baca5164e905f9ac40e2322b4a2460b616b40432d1622792687a7c286"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$PhaseCpu.class",
+      "bytes": 1580,
+      "sha256": "831a6f94532bd1ac904dcf1de25c9ad2c700a3bf28e8e0b3696775c9e5a4ccf2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$PrecomputedImage.class",
+      "bytes": 2510,
+      "sha256": "ab3cd150cd1f27f1bbc69a454e520a301b58b16c666a395cf36c86f6d9f8be92"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$QuotedNode.class",
+      "bytes": 2658,
+      "sha256": "86e89e05a0780411eb6fedbfc8929fca717cc82c75bd0baee40ae9e9803ff0d0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$RepeatNode.class",
+      "bytes": 2634,
+      "sha256": "01dfc94670a52ed2574b258367a20624d26c8b8c573347e7ad81c26612841d1d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$Scratch.class",
+      "bytes": 1189,
+      "sha256": "6aaf0d1c7afa1e3287bdb4d392a4dd416f0a81d82438519af7df08e25a29a506"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$Semantics.class",
+      "bytes": 1256,
+      "sha256": "e2201c08c0d8f7ef0d24189225d0a947069ea1731cec318678ae09a182f9bdb1"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$SharingLimit.class",
+      "bytes": 485,
+      "sha256": "2ec5b6b778bd0d334ffa28ca7ae0a747092ef81472862cdd4eb5269a9a340b3b"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$StartNode.class",
+      "bytes": 1522,
+      "sha256": "35860fdb94879b2d14a3ed01232fa3f7924daf57d90d3f16934a2803ec0971ac"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$State.class",
+      "bytes": 506,
+      "sha256": "075e8c44e26ab883ec3635800c0287a2d2a20fbb6f1d6561235c6341efb41cbd"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$UnsupportedRegex.class",
+      "bytes": 442,
+      "sha256": "5b44a39bfdeb80379defce6071fdd2de5f2c3addcbe28a51e7f63fd1e604423e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$WordBoundaryNode.class",
+      "bytes": 1690,
+      "sha256": "2350ce039f0f3727ac05ce661df962442447f9267b417cd6b4a5abe1e3525c1e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram$Workspace.class",
+      "bytes": 1655,
+      "sha256": "71168db896ad64d761b1f33688692b97c83f3e4bd748e6a9bf6144acdb6ef68e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgram.class",
+      "bytes": 45025,
+      "sha256": "11b368548080cefe72e93e6ca0357478726360377613d264fe5c9f12efdf871f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexProgramImageCodec.class",
+      "bytes": 22188,
+      "sha256": "e837cfa44f8d2810bd78158f5b17351a2fb4d64632983066af13000eeb2019d0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery$Facts.class",
+      "bytes": 1986,
+      "sha256": "f19a1e1795b5ec58edc38b176422c1ae5bd5d48da86ab542e85edc95b6031928"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery$Op.class",
+      "bytes": 1347,
+      "sha256": "2b83a6e4297cdb4acd7d410ed5305ff5eb850d966a997d8c0089b1077d825558"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.class",
+      "bytes": 8840,
+      "sha256": "59fbf65179f7e63187289b94d0b0006c1ddff1995df5db5fc0ba15c073cc10cb"
+    }
+  ],
+  "classes": 46,
+  "bytes": 206188,
+  "major": 65,
+  "fullSourceClosure": false,
+  "runtimeAdmission": false
+}

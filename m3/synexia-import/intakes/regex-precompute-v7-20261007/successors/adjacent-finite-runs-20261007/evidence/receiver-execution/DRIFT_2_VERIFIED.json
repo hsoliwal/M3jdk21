@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "status": "PASS_EXACT_DRIFT_REFUSAL_NO_RECIPE_MUTATION",
+  "case": 2,
+  "actualExitCode": 1,
+  "log": {
+    "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\native-preparation-06\\M3_REGEX_MAVEN_06_driftQuery.log",
+    "bytes": 8033,
+    "sha256": "3997d960abef0ffad4fcccf3a8ee84aae78dbda83c3945f81f5e1290b4e86bcf"
+  },
+  "prepared": {
+    "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\native-preparation-06\\M3_REGEX_MAVEN_06_DRIFT_2_PREPARED.json",
+    "sha256": "1741e6f8dbda484dda38d65bc233208438b63e491826ee9a9f8aba49d7507c21"
+  },
+  "allTwoTargetsUnchangedDuringRefusal": true,
+  "onlyDeliberateDriftRestored": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+  "restoredSHA256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+}

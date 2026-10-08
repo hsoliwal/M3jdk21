@@ -1,0 +1,181 @@
+{
+  "schema": "m3-regex-original-program-baseline-terminal/v1",
+  "status": "ACTUAL_BASELINE_REPRODUCES_SAME_ORIGINAL_ASSERTION_API_TYPE_FAILURE",
+  "rootNativeTerminal": {
+    "nativeChunk": "0a81ee",
+    "exitCode": 1,
+    "elapsedSeconds": 0.7966686,
+    "authority": "Root actual execution plus exact native exit/log/preflight and JUnit reports",
+    "liveSession": false
+  },
+  "baselinePlan": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/BASELINE_COMMAND_PLAN.json",
+    "bytes": 86851,
+    "sha256": "45e81ccd2fa93534ca5a92904ea53e32dfa400c8f5bd8c3f8840536b9188a52a"
+  },
+  "nativeManifest": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/native-preparation-01/REGEX_BASELINE_01_NATIVE_COMMANDS.json",
+    "bytes": 35442,
+    "sha256": "09c7df1802d0072f97b2c6afb83418bbd89dc243a2b59d0bbd86154d85d1d300"
+  },
+  "baselineClassReceipt": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/BASELINE_PRODUCTION_CLASS_ARTIFACTS_01.json",
+    "bytes": 31438,
+    "sha256": "6e90ba4f9a3ec67b364af180b039a41b71e507db400f039b49b2e59670cef434"
+  },
+  "nativePreflight": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/native-preparation-01/REGEX_BASELINE_01_2_executeBaselineOriginalFailingMethod.preflight.json",
+    "bytes": 779,
+    "sha256": "d1fd2080fb60becc84abec9b9fdbfe458d5e63a030220d5736ebb7eaa58f5dbd"
+  },
+  "nativeLog": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/native-preparation-01/REGEX_BASELINE_01_2_executeBaselineOriginalFailingMethod.log",
+    "bytes": 2083,
+    "sha256": "5871cd94c58b18a922982be55243818cbb41951d7791535e3e5a17ba99e8aefc"
+  },
+  "nativeExit": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/native-preparation-01/REGEX_BASELINE_01_2_executeBaselineOriginalFailingMethod.exit.txt",
+    "bytes": 3,
+    "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+  },
+  "nativeArgv": [
+    "C:/Program Files/Java/jdk-21/bin/java.exe",
+    "-Xmx256m",
+    "-XX:ActiveProcessorCount=2",
+    "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\target\\scratch",
+    "-jar",
+    "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+    "execute",
+    "--class-path",
+    "K:\\codex-work\\m3-regex-dependency-closure-successor-p0-20261007\\target\\test-classes;K:\\codex-work\\m3-regex-dependency-closure-successor-p0-20261007\\target\\dependency-classes;K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\target\\baseline-classes;K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\target\\classes;C:\\Users\\hsoliwal\\.m2\\repository\\com\\synexia\\synexia-cop\\1.0.0-SNAPSHOT\\synexia-cop-1.0.0-SNAPSHOT.jar;K:\\codex-work\\m3-regex-dependency-closure-successor-p0-20261007\\target\\sealed-host-without-successor-explicit-owner-families.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\re2j\\re2j\\1.8-synexia-source-1\\re2j-1.8-synexia-source-1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.15.1\\commons-io-2.15.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.14.0\\commons-lang3-3.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-gradle\\8.17.1\\rewrite-gradle-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-groovy\\8.17.1\\rewrite-groovy-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\groovy\\groovy\\3.0.20\\groovy-3.0.20.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-hcl\\8.17.1\\rewrite-hcl-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-json\\8.17.1\\rewrite-json-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-maven\\8.17.1\\rewrite-maven-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\github\\ben-manes\\caffeine\\caffeine\\2.9.3\\caffeine-2.9.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\checkerframework\\checker-qual\\3.19.0\\checker-qual-3.19.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.10.0\\error_prone_annotations-2.10.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\dev\\failsafe\\failsafe\\3.3.2\\failsafe-3.3.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-xml\\2.16.1\\jackson-dataformat-xml-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\woodstox\\stax2-api\\4.2.1\\stax2-api-4.2.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\woodstox\\woodstox-core\\6.5.1\\woodstox-core-6.5.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-jaxb-annotations\\2.16.1\\jackson-module-jaxb-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\jakarta\\xml\\bind\\jakarta.xml.bind-api\\2.3.3\\jakarta.xml.bind-api-2.3.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\jakarta\\activation\\jakarta.activation-api\\1.2.2\\jakarta.activation-api-1.2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jdk8\\2.16.1\\jackson-datatype-jdk8-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-properties\\8.17.1\\rewrite-properties-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-protobuf\\8.17.1\\rewrite-protobuf-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.42\\lombok-1.18.42.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.22.1\\commons-codec-1.22.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+    "--fail-if-no-tests",
+    "--disable-banner",
+    "--disable-ansi-colors",
+    "--details=tree",
+    "--reports-dir",
+    "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\target\\reports\\baseline-failing-method",
+    "--select-method",
+    "com.synexia.indexstring.MIndexRegexTrigramQueryTest#finiteDomainPlanPrunesDistinctSpellingsBeforeAuthoritativeVerification()"
+  ],
+  "candidateFailureLog": {
+    "path": "K:/codex-work/m3-regex-dependency-closure-successor-p0-20261007/native-preparation-02/DEPENDENCY_SUCCESSOR_02_3_executeTrigramQueryTests.log",
+    "bytes": 2559,
+    "sha256": "c54eb4c19b795ca96baf43a5199031acef157f96bb0d87578bdb79d1f5103d52"
+  },
+  "sameFailureVerbatim": "expected: <MIndexRegexMatch[start=0, end=9, starts=[0, 6]]> but was: <true>",
+  "sameOriginalAssertion": "MIndexRegexTrigramQueryTest.java:129",
+  "baselineJUnit": {
+    "tests": 1,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "aborted": 0,
+    "reports": [
+      {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/target/reports/baseline-failing-method/TEST-junit-jupiter.xml",
+        "bytes": 14399,
+        "sha256": "a56290db3f277924616ab127711e0777d56385e7142debd4ae99488fdf5ef14a",
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/target/reports/baseline-failing-method/TEST-junit-platform-suite.xml",
+        "bytes": 12792,
+        "sha256": "3bf583047432b45c3e585dd099967fdd520476e13010735882e64b93c46bebef",
+        "tests": 0,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/target/reports/baseline-failing-method/TEST-junit-vintage.xml",
+        "bytes": 12771,
+        "sha256": "4527fce434e8917ac328ee23e6bbadb3f79d1b548edd9abcac3c50ec31fca512",
+        "tests": 0,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    ]
+  },
+  "candidateJUnit": {
+    "tests": 8,
+    "passed": 7,
+    "failed": 1,
+    "aborted": 0,
+    "source": "Retained native stage3 log; root separately seals its full terminal"
+  },
+  "differentialAttribution": {
+    "baselineProgramSHA256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131",
+    "candidateProgramSHA256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+    "sameOriginalCompiledTestReceipt": {
+      "path": "K:/codex-work/m3-regex-dependency-closure-successor-p0-20261007/TEST_CLASS_ARTIFACTS_01.json",
+      "bytes": 19633,
+      "sha256": "d917404793bfd862d25cba1187b285bf27adffdd7bb811acd5134c12c11e8dbb"
+    },
+    "sameQueryAndThreeImageOwners": [
+      {
+        "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexTrigramQuery.java",
+        "bytes": 15093,
+        "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+      },
+      {
+        "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexProgramImageCodec.java",
+        "bytes": 30806,
+        "sha256": "09f4ef3d52a432b5a46bd784a91728352d121241dca9ab010df7a06f38d01dc7"
+      },
+      {
+        "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexAcceleratedImage.java",
+        "bytes": 3102,
+        "sha256": "c5d761d364c68ee588091c7258334afb8120125c1638c14c8151c37587360608"
+      },
+      {
+        "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexCompactAsciiDfaImage.java",
+        "bytes": 7563,
+        "sha256": "31f4fd022eba03828d5ddc9d7dec0ab3dc978b3397d305f8b7655957e6a15269"
+      }
+    ],
+    "same29HelperAnd58FixtureClasses": true,
+    "sameFilteredHostAndApiProviders": {
+      "com/synexia/indexstring/MIndexHybridRegex.class": [
+        {
+          "index": 5,
+          "path": "K:/codex-work/m3-regex-dependency-closure-successor-p0-20261007/target/sealed-host-without-successor-explicit-owner-families.jar",
+          "entry": "com/synexia/indexstring/MIndexHybridRegex.class",
+          "bytes": 23429,
+          "sha256": "b79ad3c52f5c0622f643c5f18280cebda42f097f15c6f95a7fc40a2e8c762133"
+        }
+      ],
+      "com/synexia/indexstring/MIndexHybridRegexPlan.class": [
+        {
+          "index": 5,
+          "path": "K:/codex-work/m3-regex-dependency-closure-successor-p0-20261007/target/sealed-host-without-successor-explicit-owner-families.jar",
+          "entry": "com/synexia/indexstring/MIndexHybridRegexPlan.class",
+          "bytes": 4377,
+          "sha256": "ffca0c40aa1a188c2bdc28c1caf2f13669073703a23b4eca88ad58b99a9e14bc"
+        }
+      ],
+      "com/synexia/indexstring/MIndexRegexMatch.class": [
+        {
+          "index": 5,
+          "path": "K:/codex-work/m3-regex-dependency-closure-successor-p0-20261007/target/sealed-host-without-successor-explicit-owner-families.jar",
+          "entry": "com/synexia/indexstring/MIndexRegexMatch.class",
+          "bytes": 3175,
+          "sha256": "4b809a12770129cf3c288bc5d095e6ed014ff5fce2e7875d3c85a3304f93bcbd"
+        }
+      ]
+    },
+    "claim": "The unchanged original method fails identically with original Program and candidate Program over the same sealed fixture/helper/API provider context. This assertion/API type failure is reproduced on the baseline; it is not introduced by the Program finite-run delta within this bounded context.",
+    "notClaimed": [
+      "No general candidate correctness or full40 pass",
+      "No source-complete/native/actualM3-runtime equivalence",
+      "No baseline clean-suite claim"
+    ]
+  },
+  "sourceOrTestEdits": 0,
+  "sealingJvmInvocations": 0,
+  "originalFailureRetained": true,
+  "nextAuthorizedDelta": "Minimal existing owning recipe test correction converts expected find(MIndexString) result to boolean existence != null while retaining membership assertion and exact original corpus."
+}

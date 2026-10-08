@@ -1,0 +1,18 @@
+{
+  "findings": [
+    {
+      "title": "[P1] Include the source payloads referenced by the manifest",
+      "body": "Both manifest rows name `.java.txt` resources beneath the recipe template root, but neither resource is included in the exact seven-file bundle. `M3GpuToolJoinManifest.load` opens every non-`KEEP` fourth-column resource and verifies its postimage before Replay can plan, check, or apply, so this package will fail with `cannot read recipe resource` for the first target. Add both exact pinned payload files to the published bundle (or point the rows to resources actually shipped with it).",
+      "priority": "P1",
+      "confidence": 0.99,
+      "category": "bug",
+      "code_location": {
+        "file_path": "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv",
+        "line": 1
+      }
+    }
+  ],
+  "overall_correctness": "patch is incorrect",
+  "overall_explanation": "The metadata is internally aligned on revisions, hashes, scope, and qualification boundaries, but the executable recipe omits both source resources required by its manifest. Consequently none of the documented plan/check/apply workflows can load the recipe.",
+  "overall_confidence": 0.99
+}

@@ -1,0 +1,8 @@
+Copyright 2026 Hitesh Soliwal and contributors.
+SPDX-License-Identifier: Apache-2.0
+
+This additive source-custody successor carries exact first-party Synexia donor source,
+recipe data and bounded evidence. Existing m3/vendor/synexia/LICENSE and NOTICE,
+source headers and third-party notices remain applicable. The external shared
+Replay/Manifest engine is reused unchanged and is not copied. No OpenJDK or
+third-party body is relicensed. No binary, credential or transcript is included.
