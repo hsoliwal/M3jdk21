@@ -23,7 +23,8 @@ public final class M3BulkExecutorPortRecipe extends Recipe {
     public List<Recipe> getRecipeList() {
         return List.of(
                 new M3Jdk21HashPinnedSnapshotRecipe(CRATE),
-                new M3Jdk21HashPinnedTextSnapshotRecipe(CRATE));
+                new M3Jdk21HashPinnedTextSnapshotRecipe(CRATE),
+                new M3BulkExecutorNameMappingRecipe());
     }
 
     @Override
