@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
@@ -54,6 +55,7 @@ public final class SharedLexiconCatalog {
     private final List<String> lastLexemes;
     private final Map<Coordinate, List<SourceMapping>> mappings;
     private final Map<SourceIdentity, SourceMapping> mappingsByIdentity;
+    private final Map<SourceIdentity, SynexiaPrecomputePayload> payloads = new ConcurrentHashMap<>();
     private final Map<Coordinate, PrecomputeFacts> precompute;
     private final List<PrecomputeProfile> precomputeProfiles;
     private final long recordCount;
@@ -296,6 +298,26 @@ public final class SharedLexiconCatalog {
         }
     }
 
+    /**
+     * Returns the typed owner payload for an exact Synexia source identity.
+     * The source identity is never replaced with the physical image row.
+     * Parsing is cached only after the immutable mapping has passed admission.
+     */
+    public Optional<SynexiaPrecomputePayload> findPrecomputePayload(String sourceId, String recordId) {
+        lifecycle.readLock().lock();
+        try {
+            ensureOpen();
+            Objects.requireNonNull(sourceId);
+            Objects.requireNonNull(recordId);
+            SourceIdentity identity = new SourceIdentity(sourceId, recordId);
+            SourceMapping mapping = mappingsByIdentity.get(identity);
+            if (mapping == null) return Optional.empty();
+            imageAt(mapping.coordinate().shardId());
+            return Optional.of(payloads.computeIfAbsent(identity,
+                    ignored -> SynexiaPrecomputePayload.parse(mapping.precomputePayload())));
+        } finally { lifecycle.readLock().unlock(); }
+    }
+
     private void validateShardSidecars(int shardId, SharedLexiconImage image) throws IOException {
         for (Map.Entry<Coordinate, List<SourceMapping>> entry : mappings.entrySet()) {
             Coordinate coordinate = entry.getKey();
@@ -417,6 +439,11 @@ public final class SharedLexiconCatalog {
             if (!identities.add(identity)) throw malformed(lineNumber, "duplicate source identity");
             Coordinate coordinate = coordinate(fields[6], fields[7], shards, lineNumber);
             String lexeme = decodeSidecarText(fields[5], lineNumber);
+            try {
+                SynexiaPrecomputePayload.parse(fields[12]);
+            } catch (IllegalArgumentException failure) {
+                throw malformed(lineNumber, "invalid precompute_payload: " + failure.getMessage());
+            }
             if (verifyImageText && !imageText(shards, coordinate).equals(lexeme))
                 throw malformed(lineNumber, "mapping lexeme does not match image coordinate");
             SourceMapping mapping = new SourceMapping(fields[0], fields[1], fields[2], fields[3],
