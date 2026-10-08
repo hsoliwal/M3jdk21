@@ -35,7 +35,7 @@ public final class SharedLexiconFamilyContractTest {
         Set<String> found = new HashSet<>();
         for (String line : lines.subList(1, lines.size())) {
             String[] fields = line.split("\\t", -1);
-            check(fields.length == 7, "field-map row width");
+            if (fields.length != 7) throw new AssertionError("field-map row width");
             if (fields[4].startsWith("m3lex-family-v2:")) {
                 check(fields[5].equals("MAPPED"), "family field is admitted");
                 found.add(String.join("|", fields[0], fields[1], fields[2], fields[3], fields[4]));
