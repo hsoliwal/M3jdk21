@@ -70,6 +70,17 @@ public final class M3Jdk21HashPinnedTextSnapshotRecipe
         return crateName;
     }
 
+
+    /**
+     * Exact manifest target paths in deterministic order.
+     *
+     * <p>This is an inspection surface for receiver tests and orchestration; it does not weaken
+     * hash-pinned admission.</p>
+     */
+    public List<String> targetPaths() {
+        return targets().stream().map(Target::path).toList();
+    }
+
     @Override
     public String getDisplayName() {
         return "M3JDK21 hash-pinned text snapshot";
