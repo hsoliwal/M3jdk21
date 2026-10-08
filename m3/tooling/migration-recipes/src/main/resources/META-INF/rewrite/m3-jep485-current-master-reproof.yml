@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.Jep485CurrentMasterReproof
+displayName: Request JEP 485 proof on current M3JDK21 master
+description: >-
+  Adds one sealed evidence-only reproof request for the already-materialized Stream Gatherers
+  candidate. It changes no JDK product source and grants no promotion authority.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: jep485-current-master-reproof-20261008
