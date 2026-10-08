@@ -65,6 +65,18 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
                     scope, new SharedLexiconCatalog.Coordinate(0, 0), "freq-1", "value-a");
             check(family.frequencyAt(frequencyKey).orElseThrow().frequencyAt(1) == 2,
                     mode + " frequency retained");
+            var spellKey = new SharedLexiconFamilySidecarCatalog.SpellKey(
+                    scope, "lex-a", "en", 2, 4, "spell-a");
+            check(family.spellAt(spellKey).orElseThrow().tokenIdsForDelete("a")[1] == 1,
+                    mode + " spell index retained");
+            var tokenHashKey = new SharedLexiconFamilySidecarCatalog.TokenHashKey(
+                    scope, new SharedLexiconCatalog.Coordinate(0, 0), "value-a", "tok-1", 0, 1);
+            check(family.tokenHashAt(tokenHashKey).orElseThrow().tokenSha256().length == 1,
+                    mode + " token hash retained");
+            var prefixKey = new SharedLexiconFamilySidecarCatalog.PrefixKey(
+                    scope, new SharedLexiconCatalog.Coordinate(0, 0), "prefix-1", "value-a", 7);
+            check(family.prefixAt(prefixKey).orElseThrow().rangeCount(0, 1) == 1,
+                    mode + " prefix counts retained");
         } finally {
             catalog.close();
         }
