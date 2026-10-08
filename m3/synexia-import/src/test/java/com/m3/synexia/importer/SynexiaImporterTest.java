@@ -238,6 +238,38 @@ final class SynexiaImporterTest {
                                     m3jdk.toString()
                                 }));
         assertFalse(Files.exists(m3jdk.resolve(targetPath)));
+
+        git(synexia, "checkout", "--", "README.md");
+        String untrackedSource = "module/src/main/java/p/B.java";
+        String untrackedTarget = "m3/vendor/synexia/" + untrackedSource;
+        write(
+                synexia.resolve(untrackedSource),
+                apache("package p; final class B {}\n"));
+        SynexiaImportManifest untrackedManifest =
+                new SynexiaImportManifest(
+                        head,
+                        "m3jdk21",
+                        List.of(new SynexiaImportManifest.Entry(
+                                "seed",
+                                untrackedSource,
+                                untrackedTarget,
+                                "2140213c926ce6d65e25fe23c8fb82f7d75906172aaebee0a1aa8cf3d133c57a",
+                                "Apache-2.0",
+                                SynexiaImportManifest.Mode.APACHE_SOURCE)),
+                        "");
+        Path untrackedFile = temp.resolve("untracked-source.tsv");
+        Files.writeString(untrackedFile, untrackedManifest.toTsv());
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        SynexiaImportCli.main(
+                                new String[] {
+                                    "verify-strict",
+                                    untrackedFile.toString(),
+                                    synexia.toString(),
+                                    m3jdk.toString()
+                                }));
+        assertFalse(Files.exists(m3jdk.resolve(untrackedTarget)));
     }
 
     @Test
