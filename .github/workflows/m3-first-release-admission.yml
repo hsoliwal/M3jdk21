@@ -53,7 +53,7 @@ jobs:
             --sha256-out target/m3-release-proof/SHA256SUMS
           git rev-parse HEAD | tee target/m3-release-proof/HEAD
           git rev-parse 'HEAD^{tree}' | tee target/m3-release-proof/TREE
-          git status --porcelain=v1 | tee target/m3-release-proof/WORKTREE
+          git status --porcelain=v1 --untracked-files=no | tee target/m3-release-proof/WORKTREE
           test ! -s target/m3-release-proof/WORKTREE
       - name: Upload contract evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
