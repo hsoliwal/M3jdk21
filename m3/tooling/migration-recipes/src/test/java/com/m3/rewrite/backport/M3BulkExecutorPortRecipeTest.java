@@ -11,7 +11,7 @@ final class M3BulkExecutorPortRecipeTest {
     @Test
     void receiverMirrorsExactCanonicalTargets() {
         M3BulkExecutorPortRecipe recipe = new M3BulkExecutorPortRecipe();
-        assertEquals(2, recipe.getRecipeList().size());
+        assertEquals(3, recipe.getRecipeList().size());
         assertFalse(recipe.promotionAuthority());
         assertEquals(
                 List.of(
