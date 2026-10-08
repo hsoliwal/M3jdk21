@@ -8,11 +8,14 @@ source_estate_git_blob	292bc31a96cd3d20c36d617045c6b01a7a7c8faf
 source_dag_path	.m3/m3jdk21-full-borrow-dag.tsv
 source_dag_git_blob	3e6c56b8555231fb36d0ac620ab112aa5970d45a
 source_family_count	32
+source_phase_path	.m3/m3jdk21-promotion-phases.tsv
+source_phase_git_blob	c4e8582f99caba32d718b2c1e86dae0854cdce3d
 source_canonical_invariant	docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md
 target_repository	hsoliwal/M3jdk21
 target_baseline	c9b07049c57ecdf43175f5885e11998918416a00
 target_estate_copy	m3/synexia-import/current-full-borrow/synexia-estate.tsv
 target_dag_copy	m3/synexia-import/current-full-borrow/synexia-dag.tsv
+target_phase_copy	m3/synexia-import/current-full-borrow/promotion-phases.tsv
 copyright_notice	Copyright 2026 Hitesh Soliwal and contributors
 first_party_license	Apache-2.0
 abstract_idea_policy	ABSTRACT_IDEA_NOT_RELABELED_AS_COPYRIGHTED_SOURCE
