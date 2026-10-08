@@ -44,3 +44,14 @@ SiUnit	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_pa
 SiDimension	packed	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains donor-owned
 SiUnit	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
 SiUnit	prefixable	boolean	si_prefixable	synexia.records.tsv:precompute_payload	MAPPED	SI prefixability remains an explicit donor boolean
+M3LexiconPrecompute.PrefixCounts	prefixCounts	long[]	prefix_counts	m3lex-family-v2:synexia.prefix-counts.tsv	MAPPED	value-scoped owner keyed by source scope, coordinate, token ID, and value fingerprint
+M3LexiconPrecompute.SpellIndex	deleteToTokenIds	Map<String,int[]>	deleteToTokenIds	m3lex-family-v2:synexia.spell.tsv	MAPPED	sorted delete-key map remains typed and scoped by lexicon, language, configuration, and source fingerprint
+M3LexiconPrecompute.SpellIndex	frequencies	Map<Integer,Long>	frequencies	m3lex-family-v2:synexia.spell.tsv	MAPPED	spell frequencies remain sorted metadata owned by the originating immutable lexicon
+M3LexiconPrecompute.SpellIndex	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.spell.tsv	MAPPED	reload is rejected when the lexicon or spell configuration fingerprint changes
+M3LexiconPrecompute.TokenHashPrecompute	tokenSha256	byte[][]	tokenSha256	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	exact token digests remain byte-preserving and scoped to the originating value and range
+M3LexiconPrecompute.TokenHashPrecompute	rangeFingerprint	RangeFingerprint	rangeFingerprint	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	typed rolling tuple remains a candidate fingerprint and is never token identity
+M3LexiconPrecompute.TokenHashPrecompute	rangeSha256	byte[]	rangeSha256	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	exact range digest remains an explicitly encoded byte value
+M3LexiconPrecompute.TokenFrequency	frequencies	Map<Integer,Integer>	frequencies	m3lex-family-v2:synexia.token-frequency.tsv	MAPPED	sorted frequency fold remains value-scoped derived metadata, never token identity
+M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTokenIds	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
+M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
+M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection

@@ -9,7 +9,7 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
 "$M3_JDK/bin/javac" --release 21 --module-path build/com.m3.text.jar --add-modules com.m3.text -d build/tests \
   core/test/FoundationTest.java core/test/M3LexiconPrecomputeTest.java \
   core/test/SynexiaPrecomputePayloadTest.java core/test/SynexiaPrecomputeReceiverTest.java \
-  core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SynexiaSiUnitDecoderTest.java \
+  core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SharedLexiconFamilyContractTest.java core/test/SynexiaSiUnitDecoderTest.java \
   core/test/M3NumberSpaceTest.java core/test/SharedLexiconCatalogFamilyAdmissionTest.java
 for mode in jit int nocompact c2; do
  flags=();case "$mode" in int)flags=(-Xint);; nocompact)flags=(-XX:-CompactStrings);; c2)flags=(-Xbatch -XX:-TieredCompilation);; esac
@@ -18,6 +18,7 @@ for mode in jit int nocompact c2; do
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputePayloadTest | tee "build/logs/synexia-payload-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputeReceiverTest | tee "build/logs/synexia-receiver-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconFamilySidecarCatalogTest | tee "build/logs/synexia-family-sidecar-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconFamilyContractTest | tee "build/logs/synexia-family-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaSiUnitDecoderTest | tee "build/logs/synexia-si-unit-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceTest | tee "build/logs/synexia-number-space-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconCatalogFamilyAdmissionTest | tee "build/logs/synexia-catalog-family-admission-$mode.log"
