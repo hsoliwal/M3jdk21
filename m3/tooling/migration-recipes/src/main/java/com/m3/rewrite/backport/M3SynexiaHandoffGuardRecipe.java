@@ -108,6 +108,9 @@ public final class M3SynexiaHandoffGuardRecipe extends Recipe {
     }
 
     private void validateV1(String packet, Properties properties) {
+        requirePropertyKeys(
+                properties,
+                Set.of("version", "crate", "sourceRevision", "packetRoot", "rows", "payloadBytes"));
         requireEquals(crateName, properties.getProperty("crate"), "crate");
         requireSha(properties.getProperty("packetRoot"), "packetRoot");
         requireEquals(sha256(packet), properties.getProperty("packetRoot"), "packetRoot");
@@ -148,6 +151,17 @@ public final class M3SynexiaHandoffGuardRecipe extends Recipe {
     }
 
     private void validateV2(String packet, Properties properties) {
+        requirePropertyKeys(
+                properties,
+                Set.of(
+                        "version",
+                        "crate",
+                        "sourceRevision",
+                        "packetRoot",
+                        "licensePolicy",
+                        "artifactPolicy",
+                        "rows",
+                        "payloadBytes"));
         requireEquals(crateName, properties.getProperty("crate"), "crate");
         requireEquals(LICENSE_POLICY_V2, properties.getProperty("licensePolicy"), "license policy");
         requireEquals(ARTIFACT_POLICY_V2, properties.getProperty("artifactPolicy"), "artifact policy");
@@ -221,6 +235,10 @@ public final class M3SynexiaHandoffGuardRecipe extends Recipe {
         verifyManifest(JAVA_ROOT, javaManifest);
         verifyManifest(TEXT_ROOT, textManifest);
         requireCounters(properties, rows, payloadBytes);
+        requireEquals(
+                canonicalAlias(crateName, !javaManifest.isEmpty(), !textManifest.isEmpty()),
+                resource("/META-INF/rewrite/m3-" + crateName + ".yml"),
+                "recipe alias");
     }
 
     private void verifyManifest(String ownerRoot, List<String> expected) {
@@ -425,12 +443,78 @@ public final class M3SynexiaHandoffGuardRecipe extends Recipe {
 
     private static Properties properties(String text) {
         Properties properties = new Properties();
+        Set<String> keys = new HashSet<>();
+        for (String line : text.lines().toList()) {
+            if (line.isBlank() || line.startsWith("#") || line.startsWith("!")) continue;
+            int split = line.indexOf('=');
+            if (split <= 0 || split == line.length() - 1) {
+                throw new IllegalStateException("invalid Synexia bridge property row");
+            }
+            String key = line.substring(0, split);
+            if (!key.matches("[A-Za-z][A-Za-z0-9]*") || !keys.add(key)) {
+                throw new IllegalStateException("duplicate/invalid Synexia bridge property: " + key);
+            }
+        }
         try {
             properties.load(new StringReader(text));
         } catch (IOException impossible) {
             throw new IllegalStateException("cannot parse Synexia bridge properties", impossible);
         }
+        if (!properties.stringPropertyNames().equals(keys)) {
+            throw new IllegalStateException("Synexia bridge property decoding drift");
+        }
         return properties;
+    }
+
+    private static void requirePropertyKeys(Properties properties, Set<String> expected) {
+        if (!properties.stringPropertyNames().equals(expected)) {
+            throw new IllegalStateException("unexpected Synexia bridge property set");
+        }
+    }
+
+    private static String canonicalAlias(String crate, boolean java, boolean text) {
+        StringBuilder yaml =
+                new StringBuilder(
+                        "# SPDX-License-Identifier: Apache-2.0\n---\n"
+                                + "type: specs.openrewrite.org/v1beta/recipe\n"
+                                + "name: com.m3.rewrite.backport.SynexiaBridge"
+                                + camel(crate.substring("synexia-".length()))
+                                + "\n"
+                                + "displayName: Receive reviewed Synexia handoff "
+                                + crate
+                                + "\n"
+                                + "description: Replays exact target-ready Synexia bytes through existing M3JDK21 hash-pinned owners.\n"
+                                + "tags:\n  - m3\n  - synexia\n  - jdk21\n  - hash-pinned\n  - candidate-only\n"
+                                + "recipeList:\n"
+                                + "  - com.m3.rewrite.backport.M3SynexiaHandoffGuardRecipe:\n"
+                                + "      crateName: "
+                                + crate
+                                + "\n");
+        if (java) {
+            yaml.append(
+                            "  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:\n")
+                    .append("      crateName: ")
+                    .append(crate)
+                    .append('\n');
+        }
+        if (text) {
+            yaml.append(
+                            "  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:\n")
+                    .append("      crateName: ")
+                    .append(crate)
+                    .append('\n');
+        }
+        return yaml.toString();
+    }
+
+    private static String camel(String value) {
+        StringBuilder out = new StringBuilder();
+        for (String part : value.split("-")) {
+            if (!part.isEmpty()) {
+                out.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1));
+            }
+        }
+        return out.toString();
     }
 
     private static void requireEquals(String expected, String actual, String field) {
