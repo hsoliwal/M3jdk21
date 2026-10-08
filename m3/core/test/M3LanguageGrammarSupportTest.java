@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Locale;
 import com.m3.text.M3LanguageGrammarSupport;
 
 /** Contract proof for the Synexia grammar-support mapping. */
