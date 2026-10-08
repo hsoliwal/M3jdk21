@@ -1,0 +1,11 @@
+gate	state	evidence
+SYNEXIA_RECIPE	PINNED	hsoliwal/com.synexia#9892@b9c275cb9e0ef0defb665d00e831ce0f9cfef618
+TORNADO_PROVIDER	PINNED	hsoliwal/synexia-tornadovm#7@3bf826714a48d7fdf346ffde8a0fc25c525572c5
+TARGET_POSTIMAGE_IDENTITY	PASS	five target files byte-identical to receiver recipe resources
+NAME_MAPPING	MATERIALIZED	m3/docs/name-mapping.json
+MAVEN_RECIPE	PENDING_HOSTED	workflow m3-bulk-executor-port
+PATCH_COMPILE_RUNTIME	PENDING_HOSTED	workflow m3-bulk-executor-port
+JDK_BUILD	PENDING_HOSTED	workflow m3-bulk-executor-port
+JTREG	PENDING_HOSTED	test/jdk/jdk/internal/vm/parallel/BulkExecutorTest.java
+TORNADO_PHYSICAL_GPU	NOT_EXECUTED	separate provider hardware gate
+PROMOTION	NOT_AUTHORIZED	acceptance gates incomplete
