@@ -339,6 +339,32 @@ public final class SharedLexiconCatalog {
         }
     }
 
+    /**
+     * Decodes only the SI-unit owner from its exact Synexia source family.
+     * Physical image coordinates and record IDs from another source cannot
+     * satisfy this lookup.
+     */
+    public Optional<M3LexiconPrecompute.SiUnitPrecompute> findSiUnitPrecompute(
+            String sourceId, String recordId) {
+        lifecycle.readLock().lock();
+        try {
+            ensureOpen();
+            Objects.requireNonNull(sourceId);
+            Objects.requireNonNull(recordId);
+            SourceMapping mapping = mappingsByIdentity.get(new SourceIdentity(sourceId, recordId));
+            if (mapping == null || !"dictlang.si-units".equals(mapping.sourceId())) return Optional.empty();
+            imageAt(mapping.coordinate().shardId());
+            SynexiaPrecomputePayload payload = payloads.computeIfAbsent(
+                    new SourceIdentity(sourceId, recordId),
+                    ignored -> SynexiaPrecomputePayload.parse(mapping.precomputePayload()));
+            return Optional.of(new M3LexiconPrecompute.SiUnitPrecompute(
+                    payload.requireInt("si_decimal_exponent"),
+                    payload.requireLong("si_dimension_packed"),
+                    payload.requireDouble("si_offset"),
+                    payload.requireBoolean("si_prefixable")));
+        } finally { lifecycle.readLock().unlock(); }
+    }
+
     private static List<ShardSlot> readManifest(Path directory) throws IOException {
         if (!Files.isDirectory(directory)) throw new IOException("not a catalog directory");
         Path manifest = directory.resolve("synexia.shards.tsv");
