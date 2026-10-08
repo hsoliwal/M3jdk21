@@ -58,6 +58,7 @@ public final class SharedLexiconCatalog {
     private final Map<SourceIdentity, SynexiaPrecomputePayload> payloads = new ConcurrentHashMap<>();
     private final Map<Coordinate, PrecomputeFacts> precompute;
     private final List<PrecomputeProfile> precomputeProfiles;
+    private final Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute;
     private final long recordCount;
     private final ReentrantReadWriteLock lifecycle = new ReentrantReadWriteLock();
     private volatile boolean closed;
@@ -67,6 +68,7 @@ public final class SharedLexiconCatalog {
                                  Map<Coordinate, List<SourceMapping>> mappings,
                                  Map<Coordinate, PrecomputeFacts> precompute,
                                  List<PrecomputeProfile> precomputeProfiles,
+                                 Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute,
                                  long recordCount) {
         this.shards = List.copyOf(shards);
         this.files = List.copyOf(files);
@@ -81,6 +83,7 @@ public final class SharedLexiconCatalog {
         this.mappingsByIdentity = Map.copyOf(identityCopy);
         this.precompute = Map.copyOf(precompute);
         this.precomputeProfiles = List.copyOf(precomputeProfiles);
+        this.familyPrecompute = Objects.requireNonNull(familyPrecompute);
         this.recordCount = recordCount;
     }
 
@@ -97,8 +100,10 @@ public final class SharedLexiconCatalog {
             throw new IOException("metadata coverage does not match image records");
         validatePrecomputeProfiles(mappings, precompute);
         List<PrecomputeProfile> profiles = readPrecomputeProfiles(directory, mappings);
+        Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute =
+                SharedLexiconFamilySidecarCatalog.openOptional(directory);
         return new SharedLexiconCatalog(shards, shardFiles(shards), firstLexemes(shards), lastLexemes(shards),
-                mappings, precompute, profiles, recordCount);
+                mappings, precompute, profiles, familyPrecompute, recordCount);
     }
 
     /**
@@ -117,8 +122,10 @@ public final class SharedLexiconCatalog {
             throw new IOException("metadata coverage does not match image records");
         validatePrecomputeProfiles(mappings, precompute);
         List<PrecomputeProfile> profiles = readPrecomputeProfiles(directory, mappings);
+        Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute =
+                SharedLexiconFamilySidecarCatalog.openOptional(directory);
         return new SharedLexiconCatalog(shards, shardFiles(shards), firstLexemes(shards),
-                lastLexemes(shards), mappings, precompute, profiles, recordCount);
+                lastLexemes(shards), mappings, precompute, profiles, familyPrecompute, recordCount);
     }
 
     public record Coordinate(int shardId, int imageRow) { }
@@ -185,6 +192,17 @@ public final class SharedLexiconCatalog {
     public List<PrecomputeProfile> precomputeProfiles() {
         lifecycle.readLock().lock();
         try { ensureOpen(); return precomputeProfiles; }
+        finally { lifecycle.readLock().unlock(); }
+    }
+
+    /**
+     * Returns the optional, already-verified five-family Synexia sidecar.
+     * Legacy exports return {@link Optional#empty()}; partial or corrupt
+     * bundles fail during {@code open}/{@code openLazy}, before publication.
+     */
+    public Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute() {
+        lifecycle.readLock().lock();
+        try { ensureOpen(); return familyPrecompute; }
         finally { lifecycle.readLock().unlock(); }
     }
 
