@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.SynexiaBridgeGuardV2AdapterV1
+displayName: Receive reviewed Synexia handoff synexia-guard-v2-adapter-v1
+description: Replays exact target-ready Synexia bytes through existing M3JDK21 hash-pinned owners.
+tags:
+  - m3
+  - synexia
+  - jdk21
+  - hash-pinned
+  - candidate-only
+recipeList:
+  - com.m3.rewrite.backport.M3SynexiaHandoffGuardRecipe:
+      crateName: synexia-guard-v2-adapter-v1
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: synexia-guard-v2-adapter-v1
