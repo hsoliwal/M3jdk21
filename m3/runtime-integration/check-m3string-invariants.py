@@ -1177,6 +1177,9 @@ if any(re.match(r"^\s*-\s*['\"]test/jdk/", line)
        for line in workflow.splitlines()):
     fail("M3 String workflow contains concatenated path entries")
 
+if "M3StringHistoryConvergenceRecipeTest" in workflow:
+    fail("M3 String workflow must not restore Synexia-owned history recipe proof locally")
+
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
@@ -1185,7 +1188,6 @@ for required_gate in [
     "M3StringStreamsTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
-    "M3StringHistoryConvergenceRecipeTest",
     "M3StringCanonicalDagMasterRepairRecipeTest",
     "M3StringDirectStreamTraversalRecipeTest",
 ]:
@@ -1195,5 +1197,8 @@ for required_gate in [
 
 if "STRING_RECIPE_EXECUTABLE_VERIFIER_IS_SYNEXIA_OPENREWRITE" not in read("m3/docs/m3-runtime-invariants.tsv"):
     fail("M3 String runtime invariant lost Synexia executable verifier binding")
+
+if "SYNEXIA_PORTABLE_HISTORY_CONVERGENCE_RECIPE_AUTHORITY" not in read("m3/docs/m3-runtime-invariants.tsv"):
+    fail("M3 String runtime invariant lost Synexia history-convergence authority binding")
 
 print("M3_STRING_SOURCE_INVARIANTS_PASS")
