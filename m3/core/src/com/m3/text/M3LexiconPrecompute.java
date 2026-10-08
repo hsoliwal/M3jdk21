@@ -21,6 +21,17 @@ import java.util.TreeMap;
 public final class M3LexiconPrecompute {
     private M3LexiconPrecompute() { }
 
+    /** Immutable SI-unit metadata decoded from the canonical Synexia payload. */
+    public record SiUnitPrecompute(int decimalExponent, long dimensionPacked,
+                                   double offset, boolean prefixable) {
+        public SiUnitPrecompute {
+            if (decimalExponent < -100 || decimalExponent > 100)
+                throw new IllegalArgumentException("SI decimal exponent outside -100..100");
+            if (!Double.isFinite(offset))
+                throw new IllegalArgumentException("SI offset is not finite");
+        }
+    }
+
     public static final class TranslationProjection {
         private final String lexiconFingerprint;
         private final String sourceLanguage;
