@@ -3,8 +3,10 @@ type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.M3RegexStringPrecomputeSuperset
 displayName: M3 regex String precompute superset
 description: >-
-  Installs the M3-owned regex/String static fact packet and bounded trial-image hard-case ranking
-  through the exact m3-regex-string-precompute-v2 Java snapshot crate. JDK Pattern and tests remain
-  semantic authority; no java.base promotion occurs here.
+  Target-local frozen receiver/residue for canonical Synexia code-text regex precompute owned by
+  com.synexia.indexstring.M3InstallCodeTextRegexPrecompute and its OpenRewrite review family.
+  Replays the exact M3 regex/String static fact packet and bounded trial-image hard-case ranking;
+  portable semantics must evolve in Synexia. JDK Pattern/tests remain semantic authority and no
+  java.base promotion occurs here.
 recipeList:
   - com.m3.rewrite.backport.M3RegexStringPrecomputeSupersetRecipe
