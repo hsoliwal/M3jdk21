@@ -8,6 +8,7 @@ package java.lang;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 /**
