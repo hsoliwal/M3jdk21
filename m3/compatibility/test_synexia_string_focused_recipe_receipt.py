@@ -71,7 +71,7 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
             self.assertEqual("9859", row["canonical_pr"])
             self.assertEqual(
-                "ca6d7f2d3ec8cf2d1d860fbe9e5669f56abfda8c",
+                "a869a1f291e665aae565e42710009ed766dff61f",
                 row["canonical_revision"],
             )
             self.assertEqual("NO_TARGET_CANONICAL_DUPLICATE", row["target_recipe_policy"])
@@ -140,7 +140,7 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             row["source_family_tree"],
         )
         self.assertEqual(
-            "ca6d7f2d3ec8cf2d1d860fbe9e5669f56abfda8c",
+            "a869a1f291e665aae565e42710009ed766dff61f",
             row["focused_recipe_revision"],
         )
         self.assertEqual("9859", row["focused_recipe_pr"])
