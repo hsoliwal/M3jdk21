@@ -140,6 +140,23 @@ public final class FoundationTest {
         check(catalog.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));
         check(catalog.precomputeAt(new SharedLexiconCatalog.Coordinate(1,0)).javaHash()==55297L);
         check(catalog.find("missing").isEmpty());check(catalog.textAt(new SharedLexiconCatalog.Coordinate(1,1)).equals("\ud802"));
+        Path lazyDirectory=Files.createTempDirectory("m3-lazy-");
+        for(String file:List.of("one.m3lex","two.m3lex","synexia.shards.tsv",
+                "synexia.records.tsv","synexia.precompute.tsv","synexia.precompute-index.tsv"))
+            Files.copy(directory.resolve(file),lazyDirectory.resolve(file));
+        SharedLexiconCatalog lazy=SharedLexiconCatalog.openLazy(lazyDirectory);
+        check(lazy.find("a").equals(Optional.of(new SharedLexiconCatalog.Coordinate(0,0))));
+        Path lazyTwo=lazyDirectory.resolve("two.m3lex"), repaired=lazyDirectory.resolve("two.repaired");
+        Files.copy(lazyTwo,repaired);
+        byte[] damaged=Files.readAllBytes(lazyTwo);damaged[0]^=1;Files.write(lazyTwo,damaged);
+        SharedLexiconCatalog retry=SharedLexiconCatalog.openLazy(lazyDirectory);
+        check(retry.find("a").equals(Optional.of(new SharedLexiconCatalog.Coordinate(0,0))));
+        expect(java.io.UncheckedIOException.class,()->retry.find("\ud801"));
+        Files.move(repaired,lazyTwo,StandardCopyOption.REPLACE_EXISTING);
+        check(retry.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));
+        retry.close();expect(IllegalStateException.class,()->retry.find("a"));
+        lazy.close();expect(IllegalStateException.class,()->lazy.textAt(new SharedLexiconCatalog.Coordinate(0,0)));
+        try(var paths=Files.list(lazyDirectory)){for(Path path:paths.toList())Files.delete(path);}Files.delete(lazyDirectory);
         String overlapMappings=mappings.replace("profile-high2\tprofile-high2\t{}\n",
                 "profile-high\tprofile-high\t{}\n");
         String overlapProfiles=profiles

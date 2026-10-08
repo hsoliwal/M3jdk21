@@ -5,6 +5,7 @@ package com.m3.text;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -46,7 +47,7 @@ public final class SharedLexiconCatalog {
             "precompute_profile", "source_records", "image_records", "sha256"
     };
 
-    private final List<SharedLexiconImage> images;
+    private final List<ShardSlot> shards;
     private final List<String> files;
     private final List<String> firstLexemes;
     private final List<String> lastLexemes;
@@ -55,14 +56,15 @@ public final class SharedLexiconCatalog {
     private final Map<Coordinate, PrecomputeFacts> precompute;
     private final List<PrecomputeProfile> precomputeProfiles;
     private final long recordCount;
+    private volatile boolean closed;
 
-    private SharedLexiconCatalog(List<SharedLexiconImage> images, List<String> files,
+    private SharedLexiconCatalog(List<ShardSlot> shards, List<String> files,
                                  List<String> firstLexemes, List<String> lastLexemes,
                                  Map<Coordinate, List<SourceMapping>> mappings,
                                  Map<Coordinate, PrecomputeFacts> precompute,
                                  List<PrecomputeProfile> precomputeProfiles,
                                  long recordCount) {
-        this.images = List.copyOf(images);
+        this.shards = List.copyOf(shards);
         this.files = List.copyOf(files);
         this.firstLexemes = List.copyOf(firstLexemes);
         this.lastLexemes = List.copyOf(lastLexemes);
@@ -82,63 +84,37 @@ public final class SharedLexiconCatalog {
     public static SharedLexiconCatalog open(Path exportDirectory) throws IOException {
         Objects.requireNonNull(exportDirectory);
         Path directory = exportDirectory.toAbsolutePath().normalize();
-        if (!Files.isDirectory(directory)) throw new IOException("not a catalog directory");
-        Path manifest = directory.resolve("synexia.shards.tsv");
-        List<String> lines = Files.readAllLines(manifest, StandardCharsets.UTF_8);
-        if (lines.isEmpty() || !lines.get(0).equals(String.join("\t", HEADER)))
-            throw new IOException("invalid shard manifest header");
-
-        List<SharedLexiconImage> images = new ArrayList<>();
-        List<String> files = new ArrayList<>();
-        List<String> firstLexemes = new ArrayList<>();
-        List<String> lastLexemes = new ArrayList<>();
-        long recordCount = 0;
-        String previousLast = null;
-        for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
-            String line = lines.get(lineNumber);
-            if (line.isEmpty()) throw malformed(lineNumber, "empty row");
-            String[] fields = line.split("\\t", -1);
-            if (fields.length != HEADER.length) throw malformed(lineNumber, "wrong field count");
-            int shardId = parseNonNegativeInt(fields[0], lineNumber, "shard_id");
-            if (shardId != images.size()) throw malformed(lineNumber, "non-contiguous shard_id");
-            String fileName = fields[1];
-            Path imagePath = safeChild(directory, fileName, lineNumber);
-            String first = decodeSidecarText(fields[2], lineNumber);
-            String last = decodeSidecarText(fields[3], lineNumber);
-            int expectedRecords = parseNonNegativeInt(fields[4], lineNumber, "image_records");
-            long expectedUnits = parseNonNegativeLong(fields[5], lineNumber, "utf16_units");
-            byte[] expectedDigest = parseDigest(fields[6], lineNumber);
-            if (expectedRecords == 0 || first.compareTo(last) > 0)
-                throw malformed(lineNumber, "empty or inverted shard bounds");
-            if (previousLast != null && previousLast.compareTo(first) >= 0)
-                throw malformed(lineNumber, "shards are not globally UTF-16 sorted");
-
-            byte[] actualDigest = sha256(imagePath);
-            if (!MessageDigest.isEqual(expectedDigest, actualDigest))
-                throw malformed(lineNumber, "shard SHA-256 mismatch");
-            SharedLexiconImage image = SharedLexiconImage.open(imagePath);
-            if (image.version() != 2 || image.size() != expectedRecords
-                    || image.utf16Units() != expectedUnits
-                    || !image.recordText(0).equals(first)
-                    || !image.recordText(image.size() - 1).equals(last))
-                throw malformed(lineNumber, "shard metadata does not match image");
-
-            images.add(image);
-            files.add(fileName);
-            firstLexemes.add(first);
-            lastLexemes.add(last);
-            recordCount = Math.addExact(recordCount, expectedRecords);
-            previousLast = last;
-        }
-        if (images.isEmpty()) throw new IOException("empty shard manifest");
-        Map<Coordinate, List<SourceMapping>> mappings = readMappings(directory, images);
-        Map<Coordinate, PrecomputeFacts> precompute = readPrecompute(directory, images);
+        List<ShardSlot> shards = readManifest(directory);
+        for (ShardSlot shard : shards) shard.image = openImage(shard);
+        Map<Coordinate, List<SourceMapping>> mappings = readMappings(directory, shards, true);
+        Map<Coordinate, PrecomputeFacts> precompute = readPrecompute(directory, shards, true);
+        long recordCount = recordCount(shards);
         if (mappings.size() != recordCount || precompute.size() != recordCount)
             throw new IOException("metadata coverage does not match image records");
         validatePrecomputeProfiles(mappings, precompute);
         List<PrecomputeProfile> profiles = readPrecomputeProfiles(directory, mappings);
-        return new SharedLexiconCatalog(images, files, firstLexemes, lastLexemes,
+        return new SharedLexiconCatalog(shards, shardFiles(shards), firstLexemes(shards), lastLexemes(shards),
                 mappings, precompute, profiles, recordCount);
+    }
+
+    /**
+     * Opens and validates the manifest and sidecars without mapping any image.
+     * A shard is opened, checked and published only when a lookup first needs it.
+     * First-touch failures are not cached, so a repaired image can be retried.
+     */
+    public static SharedLexiconCatalog openLazy(Path exportDirectory) throws IOException {
+        Objects.requireNonNull(exportDirectory);
+        Path directory = exportDirectory.toAbsolutePath().normalize();
+        List<ShardSlot> shards = readManifest(directory);
+        Map<Coordinate, List<SourceMapping>> mappings = readMappings(directory, shards, false);
+        Map<Coordinate, PrecomputeFacts> precompute = readPrecompute(directory, shards, false);
+        long recordCount = recordCount(shards);
+        if (mappings.size() != recordCount || precompute.size() != recordCount)
+            throw new IOException("metadata coverage does not match image records");
+        validatePrecomputeProfiles(mappings, precompute);
+        List<PrecomputeProfile> profiles = readPrecomputeProfiles(directory, mappings);
+        return new SharedLexiconCatalog(shards, shardFiles(shards), firstLexemes(shards),
+                lastLexemes(shards), mappings, precompute, profiles, recordCount);
     }
 
     public record Coordinate(int shardId, int imageRow) { }
@@ -163,7 +139,7 @@ public final class SharedLexiconCatalog {
     public record PrecomputeProfile(String profile, long sourceRecords, long imageRecords,
                                     String fingerprint) { }
 
-    public int shardCount() { return images.size(); }
+    public int shardCount() { return shards.size(); }
     public long recordCount() { return recordCount; }
     public List<String> shardFiles() { return files; }
     public List<SourceMapping> mappingsAt(Coordinate coordinate) {
@@ -188,7 +164,15 @@ public final class SharedLexiconCatalog {
     public List<PrecomputeProfile> precomputeProfiles() { return precomputeProfiles; }
 
     /** Explicitly warms all mapped shards; this does not flatten their payloads. */
-    public void warm() { for (SharedLexiconImage image : images) image.warm(); }
+    public void warm() { for (int shard = 0; shard < shards.size(); shard++) imageAt(shard).warm(); }
+
+    /** Fences future lookups and drops published mapped-image references. */
+    public void close() {
+        closed = true;
+        for (ShardSlot shard : shards) {
+            synchronized (shard) { shard.image = null; }
+        }
+    }
 
     /** Finds an exact UTF-16 record and returns its stable shard/image coordinate. */
     public Optional<Coordinate> find(String text) {
@@ -203,7 +187,7 @@ public final class SharedLexiconCatalog {
         }
         if (candidate < 0 || lastLexemes.get(candidate).compareTo(text) < 0)
             return Optional.empty();
-        int row = images.get(candidate).findRecord(text);
+        int row = imageAt(candidate).findRecord(text);
         return row < 0 ? Optional.empty() : Optional.of(new Coordinate(candidate, row));
     }
 
@@ -216,8 +200,8 @@ public final class SharedLexiconCatalog {
         if (value == null || value.isEmpty()) throw new IllegalArgumentException("prefix required");
         if (limit < 1 || limit > 100_000) throw new IllegalArgumentException("limit must be 1..100000");
         ArrayList<Coordinate> result = new ArrayList<>(Math.min(limit, 16));
-        for (int shard = 0; shard < images.size() && result.size() < limit; shard++) {
-            SharedLexiconImage image = images.get(shard);
+        for (int shard = 0; shard < shards.size() && result.size() < limit; shard++) {
+            SharedLexiconImage image = imageAt(shard);
             for (int row = image.lowerBound(value);
                  row < image.size() && result.size() < limit && image.startsWith(row, value); row++) {
                 result.add(new Coordinate(shard, row));
@@ -230,19 +214,150 @@ public final class SharedLexiconCatalog {
     public String textAt(Coordinate coordinate) {
         Objects.requireNonNull(coordinate);
         requireCoordinate(coordinate);
-        return images.get(coordinate.shardId()).recordText(coordinate.imageRow());
+        return imageAt(coordinate.shardId()).recordText(coordinate.imageRow());
     }
 
     private void requireCoordinate(Coordinate coordinate) {
         Objects.requireNonNull(coordinate);
-        if (coordinate.shardId() < 0 || coordinate.shardId() >= images.size()
+        if (coordinate.shardId() < 0 || coordinate.shardId() >= shards.size()
                 || coordinate.imageRow() < 0
-                || coordinate.imageRow() >= images.get(coordinate.shardId()).size())
+                || coordinate.imageRow() >= shards.get(coordinate.shardId()).expectedRecords)
             throw new IndexOutOfBoundsException("coordinate=" + coordinate);
     }
 
+    private SharedLexiconImage imageAt(int shardId) {
+        if (closed) throw new IllegalStateException("catalog closed");
+        ShardSlot shard = shards.get(shardId);
+        SharedLexiconImage current = shard.image;
+        if (current != null) return current;
+        synchronized (shard) {
+            if (closed) throw new IllegalStateException("catalog closed");
+            current = shard.image;
+            if (current == null) {
+                try {
+                    current = openImage(shard);
+                    validateShardSidecars(shardId, current);
+                    shard.image = current;
+                } catch (IOException failure) {
+                    // Do not publish a failed image: repair can be retried.
+                    throw new UncheckedIOException("unable to open shard " + shardId, failure);
+                }
+            }
+            return current;
+        }
+    }
+
+    private void validateShardSidecars(int shardId, SharedLexiconImage image) throws IOException {
+        for (Map.Entry<Coordinate, List<SourceMapping>> entry : mappings.entrySet()) {
+            Coordinate coordinate = entry.getKey();
+            if (coordinate.shardId() != shardId) continue;
+            String text = image.recordText(coordinate.imageRow());
+            for (SourceMapping mapping : entry.getValue()) {
+                if (!mapping.lexeme().equals(text))
+                    throw new IOException("mapping lexeme does not match image coordinate");
+            }
+        }
+        for (Map.Entry<Coordinate, PrecomputeFacts> entry : precompute.entrySet()) {
+            Coordinate coordinate = entry.getKey();
+            if (coordinate.shardId() != shardId) continue;
+            String text = image.recordText(coordinate.imageRow());
+            PrecomputeFacts facts = entry.getValue();
+            if (facts.utf16Units() != text.length()
+                    || facts.javaHash() != Integer.toUnsignedLong(javaHash(text)))
+                throw new IOException("precompute text facts do not match image");
+        }
+    }
+
+    private static List<ShardSlot> readManifest(Path directory) throws IOException {
+        if (!Files.isDirectory(directory)) throw new IOException("not a catalog directory");
+        Path manifest = directory.resolve("synexia.shards.tsv");
+        List<String> lines = Files.readAllLines(manifest, StandardCharsets.UTF_8);
+        if (lines.isEmpty() || !lines.get(0).equals(String.join("\t", HEADER)))
+            throw new IOException("invalid shard manifest header");
+
+        List<ShardSlot> result = new ArrayList<>();
+        String previousLast = null;
+        for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
+            String line = lines.get(lineNumber);
+            if (line.isEmpty()) throw malformed(lineNumber, "empty row");
+            String[] fields = line.split("\\t", -1);
+            if (fields.length != HEADER.length) throw malformed(lineNumber, "wrong field count");
+            int shardId = parseNonNegativeInt(fields[0], lineNumber, "shard_id");
+            if (shardId != result.size()) throw malformed(lineNumber, "non-contiguous shard_id");
+            String fileName = fields[1];
+            Path imagePath = safeChild(directory, fileName, lineNumber);
+            String first = decodeSidecarText(fields[2], lineNumber);
+            String last = decodeSidecarText(fields[3], lineNumber);
+            int expectedRecords = parseNonNegativeInt(fields[4], lineNumber, "image_records");
+            long expectedUnits = parseNonNegativeLong(fields[5], lineNumber, "utf16_units");
+            byte[] expectedDigest = parseDigest(fields[6], lineNumber);
+            if (expectedRecords == 0 || first.compareTo(last) > 0)
+                throw malformed(lineNumber, "empty or inverted shard bounds");
+            if (previousLast != null && previousLast.compareTo(first) >= 0)
+                throw malformed(lineNumber, "shards are not globally UTF-16 sorted");
+            result.add(new ShardSlot(imagePath, fileName, first, last, expectedRecords,
+                    expectedUnits, expectedDigest));
+            previousLast = last;
+        }
+        if (result.isEmpty()) throw new IOException("empty shard manifest");
+        return List.copyOf(result);
+    }
+
+    private static long recordCount(List<ShardSlot> shards) {
+        long count = 0;
+        for (ShardSlot shard : shards) count = Math.addExact(count, shard.expectedRecords);
+        return count;
+    }
+
+    private static List<String> shardFiles(List<ShardSlot> shards) {
+        return shards.stream().map(shard -> shard.fileName).toList();
+    }
+
+    private static List<String> firstLexemes(List<ShardSlot> shards) {
+        return shards.stream().map(shard -> shard.firstLexeme).toList();
+    }
+
+    private static List<String> lastLexemes(List<ShardSlot> shards) {
+        return shards.stream().map(shard -> shard.lastLexeme).toList();
+    }
+
+    private static SharedLexiconImage openImage(ShardSlot shard) throws IOException {
+        byte[] actualDigest = sha256(shard.path);
+        if (!MessageDigest.isEqual(shard.expectedDigest, actualDigest))
+            throw new IOException("shard SHA-256 mismatch");
+        SharedLexiconImage image = SharedLexiconImage.open(shard.path);
+        if (image.version() != 2 || image.size() != shard.expectedRecords
+                || image.utf16Units() != shard.expectedUnits
+                || !image.recordText(0).equals(shard.firstLexeme)
+                || !image.recordText(image.size() - 1).equals(shard.lastLexeme))
+            throw new IOException("shard metadata does not match image");
+        return image;
+    }
+
+    private static final class ShardSlot {
+        private final Path path;
+        private final String fileName;
+        private final String firstLexeme;
+        private final String lastLexeme;
+        private final int expectedRecords;
+        private final long expectedUnits;
+        private final byte[] expectedDigest;
+        private volatile SharedLexiconImage image;
+
+        private ShardSlot(Path path, String fileName, String firstLexeme, String lastLexeme,
+                          int expectedRecords, long expectedUnits, byte[] expectedDigest) {
+            this.path = path;
+            this.fileName = fileName;
+            this.firstLexeme = firstLexeme;
+            this.lastLexeme = lastLexeme;
+            this.expectedRecords = expectedRecords;
+            this.expectedUnits = expectedUnits;
+            this.expectedDigest = expectedDigest.clone();
+        }
+    }
+
     private static Map<Coordinate, List<SourceMapping>> readMappings(
-            Path directory, List<SharedLexiconImage> images) throws IOException {
+            Path directory, List<ShardSlot> shards, boolean verifyImageText) throws IOException {
         List<String> lines = readSidecar(directory.resolve("synexia.records.tsv"), MAPPING_HEADER);
         Map<Coordinate, List<SourceMapping>> result = new HashMap<>();
         java.util.Set<List<String>> identities = new java.util.HashSet<>();
@@ -251,9 +366,9 @@ public final class SharedLexiconCatalog {
             requireFields(fields, lineNumber);
             List<String> identity = List.of(fields[0], fields[4]);
             if (!identities.add(identity)) throw malformed(lineNumber, "duplicate source identity");
-            Coordinate coordinate = coordinate(fields[6], fields[7], images, lineNumber);
+            Coordinate coordinate = coordinate(fields[6], fields[7], shards, lineNumber);
             String lexeme = decodeSidecarText(fields[5], lineNumber);
-            if (!imageText(images, coordinate).equals(lexeme))
+            if (verifyImageText && !imageText(shards, coordinate).equals(lexeme))
                 throw malformed(lineNumber, "mapping lexeme does not match image coordinate");
             SourceMapping mapping = new SourceMapping(fields[0], fields[1], fields[2], fields[3],
                     fields[4], lexeme, coordinate, fields[8], fields[9], fields[10], fields[11], fields[12]);
@@ -264,19 +379,21 @@ public final class SharedLexiconCatalog {
     }
 
     private static Map<Coordinate, PrecomputeFacts> readPrecompute(
-            Path directory, List<SharedLexiconImage> images) throws IOException {
+            Path directory, List<ShardSlot> shards, boolean verifyImageText) throws IOException {
         List<String> lines = readSidecar(directory.resolve("synexia.precompute.tsv"), PRECOMPUTE_HEADER);
         Map<Coordinate, PrecomputeFacts> result = new HashMap<>();
         for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
             String[] fields = splitSidecar(lines.get(lineNumber), PRECOMPUTE_HEADER.length, lineNumber);
             requireFields(fields, lineNumber);
-            Coordinate coordinate = coordinate(fields[0], fields[1], images, lineNumber);
+            Coordinate coordinate = coordinate(fields[0], fields[1], shards, lineNumber);
             if (result.containsKey(coordinate)) throw malformed(lineNumber, "duplicate precompute coordinate");
-            String text = imageText(images, coordinate);
             long units = parseNonNegativeLong(fields[2], lineNumber, "utf16_units");
             long hash = parseUnsignedHash(fields[3], lineNumber);
-            if (units != text.length() || hash != Integer.toUnsignedLong(javaHash(text)))
-                throw malformed(lineNumber, "precompute text facts do not match image");
+            if (verifyImageText) {
+                String text = imageText(shards, coordinate);
+                if (units != text.length() || hash != Integer.toUnsignedLong(javaHash(text)))
+                    throw malformed(lineNumber, "precompute text facts do not match image");
+            }
             int codePoints = parseNonNegativeInt(fields[4], lineNumber, "code_points");
             int unpaired = parseNonNegativeInt(fields[5], lineNumber, "unpaired_surrogates");
             int nonBmp = parseNonNegativeInt(fields[6], lineNumber, "non_bmp_code_points");
@@ -412,17 +529,19 @@ public final class SharedLexiconCatalog {
         for (String field : fields) if (field.isEmpty()) throw malformed(lineNumber, "empty sidecar field");
     }
 
-    private static Coordinate coordinate(String shard, String row, List<SharedLexiconImage> images,
+    private static Coordinate coordinate(String shard, String row, List<ShardSlot> shards,
                                          int lineNumber) throws IOException {
         int shardId = parseNonNegativeInt(shard, lineNumber, "shard_id");
         int imageRow = parseNonNegativeInt(row, lineNumber, "image_row");
-        if (shardId >= images.size() || imageRow >= images.get(shardId).size())
+        if (shardId >= shards.size() || imageRow >= shards.get(shardId).expectedRecords)
             throw malformed(lineNumber, "sidecar coordinate outside image");
         return new Coordinate(shardId, imageRow);
     }
 
-    private static String imageText(List<SharedLexiconImage> images, Coordinate coordinate) {
-        return images.get(coordinate.shardId()).recordText(coordinate.imageRow());
+    private static String imageText(List<ShardSlot> shards, Coordinate coordinate) {
+        SharedLexiconImage image = shards.get(coordinate.shardId()).image;
+        if (image == null) throw new IllegalStateException("image not opened");
+        return image.recordText(coordinate.imageRow());
     }
 
     private static int javaHash(String value) {
