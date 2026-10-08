@@ -2,8 +2,8 @@
   "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
-  "target_commit": "ce17ebce9bca5db973947a6d42cc70b79abd99ef",
-  "patch_sha256": "8b7c50d1009bacef0bc6a1a70e1fb83a6f3d18f47f0686e7b34caa91a90c5227",
+  "target_commit": "c2eca9406b55d7fb9e1b460719ff6731ffa4e95f",
+  "patch_sha256": "0881a2fcf7569240085384f3b306f60812dad55632bfb73544e5b25aa20f98b8",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
     "src/hotspot/share/cds/archiveHeapWriter.cpp": {
@@ -88,7 +88,7 @@
     },
     "src/java.base/share/classes/java/lang/M3String.java": {
       "before": null,
-      "after": "a8bee8dc1c99e798b53e29f70368bdc756a53b5d1759f596da35213987ed2fb6"
+      "after": "64dfd24bb7c55416fef3d61d77b189a7d528e3f82c43b29567890f43706a62aa"
     },
     "src/java.base/share/classes/java/lang/M3StringAtom.java": {
       "before": null,
@@ -120,7 +120,7 @@
     },
     "src/java.base/share/classes/java/lang/String.java": {
       "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
-      "after": "9a0be5dbeb399eecefec9f0e890d7af7fbef7fdd6b92f624e632381e5cfb67bd"
+      "after": "cd40c8e663722734b6507b9f8b8ec4b4ce4f10084e5c073afd9b1623e3b81d51"
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
       "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",
