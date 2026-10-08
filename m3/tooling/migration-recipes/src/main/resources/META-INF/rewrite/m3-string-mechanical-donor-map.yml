@@ -2,7 +2,7 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.rewrite.backport.M3StringMechanicalDonorMap
 displayName: Map Synexia mechanical String precompute donors into M3JDK
-description: Replays the internal-only RE2/Lucene/Tweety donor classification, completeness ledger, broader precompute inventory, and fail-closed source gate without adding external java.base dependencies.
+description: Target-local receiver for Synexia canonical donor-review authorities com.synexia.M3MechanicalDonorShapeReview and com.synexia.rewrite.M3MechanicalPrecomputeInvariant. Replays the internal-only RE2/Lucene/Tweety donor classification, completeness ledger, broader precompute inventory and fail-closed source gate; portable donor taxonomy/invariants must evolve in Synexia, not in M3JDK.
 recipeList:
   - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
       crateName: m3-string-mechanical-donor-map
