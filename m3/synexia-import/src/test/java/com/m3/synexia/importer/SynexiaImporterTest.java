@@ -147,6 +147,9 @@ final class SynexiaImporterTest {
 
         assertFalse(Files.exists(m3jdk.resolve(targetA)));
         assertFalse(Files.exists(m3jdk.resolve(targetB)));
+        assertFalse(
+                Files.exists(m3jdk.resolve("m3")),
+                "rollback must remove only the empty directory chain created by this invocation");
     }
 
     @Test
