@@ -316,6 +316,57 @@ final class M3StringFacts {
         return (suffix4 & mask) == (suffix.suffix4 & mask);
     }
 
+    /**
+     * Necessary-condition gate for a flat (non-M3) needle such as a String literal: the needle's
+     * code-unit, bigram and trigram signals are folded on the fly, without allocation, and must be
+     * covered by this record's signals. Rejection proves absence; acceptance proves nothing.
+     */
+    boolean mayContain(String needle) {
+        int length = needle.length();
+        if (length > utf16Length) return false;
+        long units = 0L;
+        long bigrams = 0L;
+        long trigrams = 0L;
+        char previous2 = 0;
+        char previous1 = 0;
+        for (int index = 0; index < length; index++) {
+            char unit = needle.charAt(index);
+            units = addSignal(units, unit);
+            if (index >= 1) bigrams = addBigramSignal(bigrams, previous1, unit);
+            if (index >= 2) trigrams = addTrigramSignal(trigrams, previous2, previous1, unit);
+            previous2 = previous1;
+            previous1 = unit;
+        }
+        if ((bitSignal64 & units) != units) return false;
+        if (length >= 3 && (trigramSignal64 & trigrams) != trigrams) return false;
+        return length < 2 || (bigramSignal64 & bigrams) == bigrams;
+    }
+
+    /** Flat-prefix form of {@link #prefixMayMatch(M3StringFacts)}: first four UTF-16 units. */
+    boolean prefixMayMatch(String prefix) {
+        int width = Math.min(4, prefix.length());
+        if (width == 0) return true;
+        long packed = 0L;
+        for (int index = 0; index < width; index++) {
+            packed |= (long) prefix.charAt(index) << (48 - (index << 4));
+        }
+        long mask = width == 4 ? -1L : -1L << (64 - width * 16);
+        return (prefix4 & mask) == (packed & mask);
+    }
+
+    /** Flat-suffix form of {@link #suffixMayMatch(M3StringFacts)}: last four UTF-16 units. */
+    boolean suffixMayMatch(String suffix) {
+        int length = suffix.length();
+        int width = Math.min(4, length);
+        if (width == 0) return true;
+        long packed = 0L;
+        for (int index = length - width; index < length; index++) {
+            packed = (packed << 16) | suffix.charAt(index);
+        }
+        long mask = width == 4 ? -1L : (1L << (width * 16)) - 1L;
+        return (suffix4 & mask) == (packed & mask);
+    }
+
     boolean mayContainCodeUnit(char unit) {
         long required = codeUnitSignal(unit);
         return (bitSignal64 & required) == required;

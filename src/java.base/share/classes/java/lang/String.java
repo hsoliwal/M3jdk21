@@ -2547,6 +2547,16 @@ public final class String
             if (prefixM3 != null) {
                 return sourceM3.startsWith(prefixM3, toffset);
             }
+            // Flat prefix (for example a literal): prepared facts can prove a mismatch first.
+            M3StringFacts prepared = sourceM3.factsIfPrepared();
+            if (prepared != null) {
+                if (!prepared.mayContain(prefix)) return false;
+                if (toffset == 0 && !prepared.prefixMayMatch(prefix)) return false;
+                if (toffset == sourceM3.length() - prefix.length()
+                        && !prepared.suffixMayMatch(prefix)) {
+                    return false;
+                }
+            }
             for (int index = 0; index < prefix.length(); index++) {
                 if (sourceM3.charAt(toffset + index) != prefix.charAt(index)) return false;
             }
@@ -2927,6 +2937,9 @@ public final class String
             int targetLength = str.length();
             if (targetLength == 0) return from;
             if (targetLength > sourceM3.length() - from) return -1;
+            // Flat needle (for example a literal): prepared facts can prove absence first.
+            M3StringFacts prepared = sourceM3.factsIfPrepared();
+            if (prepared != null && !prepared.mayContain(str)) return -1;
             int limit = sourceM3.length() - targetLength;
             char first = str.charAt(0);
             for (int start = from; start <= limit; start++) {
@@ -2980,6 +2993,9 @@ public final class String
             int targetLength = str.length();
             if (targetLength == 0) return beginIndex;
             if (targetLength > endIndex - beginIndex) return -1;
+            // Flat needle (for example a literal): prepared facts can prove absence first.
+            M3StringFacts prepared = sourceM3.factsIfPrepared();
+            if (prepared != null && !prepared.mayContain(str)) return -1;
             int limit = endIndex - targetLength;
             char first = str.charAt(0);
             for (int start = beginIndex; start <= limit; start++) {
@@ -3082,6 +3098,9 @@ public final class String
             if (targetLength == 0) return start;
             M3String target = str.m3();
             if (target != null) return storage.lastIndexOf(target, fromIndex);
+            // Flat needle (for example a literal): prepared facts can prove absence first.
+            M3StringFacts prepared = storage.factsIfPrepared();
+            if (prepared != null && !prepared.mayContain(str)) return -1;
             for (int candidate = start; candidate >= 0; candidate--) {
                 int index = 0;
                 while (index < targetLength
@@ -3495,6 +3514,9 @@ public final class String
             M3String targetM3 = trgtStr.m3();
             M3String replacementM3 = replStr.m3();
             if (storage != null || targetM3 != null || replacementM3 != null) {
+                // A flat target that cannot occur (prepared facts) or does not occur leaves
+                // this String unchanged without admitting the target or the replacement.
+                if (storage != null && targetM3 == null && indexOf(trgtStr) < 0) return this;
                 M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
                 if (targetM3 == null) targetM3 = M3String.canonicalize(trgtStr);
                 if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);
@@ -4116,7 +4138,7 @@ public final class String
     public String toLowerCase(Locale locale) {
         Objects.requireNonNull(locale);
         M3String storage = m3();
-        if (storage != null && locale.equals(Locale.ROOT)) {
+        if (storage != null && asciiCaseMappingLocale(locale)) {
             M3StringFacts prepared = storage.facts();
             if (prepared.ascii) {
                 M3String mapped = storage.asciiCase(false);
@@ -4126,6 +4148,17 @@ public final class String
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.toLowerCase(this, currentValue, locale)
                           : StringUTF16.toLowerCase(this, currentValue, locale);
+    }
+
+    /**
+     * Locales whose case mapping of ASCII text is the plain ASCII mapping: every language except
+     * Turkish, Azeri and Lithuanian, the same languages {@code StringLatin1} routes to the
+     * locale-dependent mapping. Lets M3 Strings with ASCII facts map in place for the default
+     * locale instead of materializing a byte shadow.
+     */
+    private static boolean asciiCaseMappingLocale(Locale locale) {
+        String lang = locale.getLanguage();
+        return lang != "tr" && lang != "az" && lang != "lt";
     }
 
     /**
@@ -4206,7 +4239,7 @@ public final class String
     public String toUpperCase(Locale locale) {
         Objects.requireNonNull(locale);
         M3String storage = m3();
-        if (storage != null && locale.equals(Locale.ROOT)) {
+        if (storage != null && asciiCaseMappingLocale(locale)) {
             M3StringFacts prepared = storage.facts();
             if (prepared.ascii) {
                 M3String mapped = storage.asciiCase(true);
