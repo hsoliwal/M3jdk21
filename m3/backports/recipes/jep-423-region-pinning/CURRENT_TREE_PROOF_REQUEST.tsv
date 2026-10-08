@@ -18,6 +18,8 @@ expected_mechanical_paths	62
 expected_held_paths	0
 expected_held_path	NONE
 preserved_java21_deletions	2
+path_donor_overrides	1
+donor_override_file	m3/backports/recipes/jep-423-region-pinning/PATH_DONOR_OVERRIDES.tsv
 admission_tool	m3/backports/current_tree_preimage_inventory.py
 crate_generator	m3/backports/generate_recipe_crates.py
 crate_size	1
