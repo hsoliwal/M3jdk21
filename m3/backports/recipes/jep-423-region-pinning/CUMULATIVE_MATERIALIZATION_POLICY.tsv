@@ -5,9 +5,9 @@ classification	COMPATIBLE_RUNTIME
 headline_implementation_paths	59
 cumulative_lineage_paths	64
 cumulative_candidate_paths	62
-expected_current_mechanical_paths	61
-expected_current_held_paths	1
-expected_current_held_path	test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java
+expected_current_mechanical_paths	62
+expected_current_held_paths	0
+expected_current_held_path	NONE
 preserved_java21_deletions	2
 baseline_ref	jdk-21+35
 donor_ref	0d5f5e15d43f94a79c6133baecd5af217365d176

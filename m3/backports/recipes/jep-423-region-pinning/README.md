@@ -67,8 +67,9 @@ The first pass is strictly file-atomic:
 3. derive the exact 62-path mutation set in `CUMULATIVE_ADMIT_PATHS.txt` by excluding only the two
    preserved Java21 deletions;
 4. compare every cumulative candidate against the exact JDK21 baseline before generation;
-5. on the current tree, require 61 mechanically replayable FILE preimages and keep
-   `test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java` on explicit HOLD;
+5. on the current tree, require all 62 cumulative candidates to be mechanically replayable FILE
+   preimages against the exact JDK21 baseline; `TestEvacuationFailure.java` is byte-identical to
+   the JDK21 baseline and is therefore no longer a current-tree hold;
 6. generate one exact Java/text/native FILE atom per mechanically admitted path from the final required repair commit;
 7. retain per-file atom/pattern/IOP evidence plus JUnit/jtreg/native proof references;
 8. only after all admitted FILE atoms reach fixed point may G1 package/module composition be

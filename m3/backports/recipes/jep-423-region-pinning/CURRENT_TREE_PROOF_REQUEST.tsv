@@ -2,7 +2,7 @@ field	value
 schema	M3_JEP423_CURRENT_PREIMAGE_PROOF_V2
 repository	hsoliwal/M3jdk21
 base_branch	master
-base_commit	5cef0a5b4831db0346fccdd0079d3d28d820a24e
+base_commit	c9b07049c57ecdf43175f5885e11998918416a00
 baseline_repository	openjdk/jdk
 baseline_ref	jdk-21+35
 donor_ref	0d5f5e15d43f94a79c6133baecd5af217365d176
@@ -14,9 +14,9 @@ headline_implementation_paths	59
 cumulative_lineage_paths	64
 headline_admitted_paths	57
 candidate_paths	62
-expected_mechanical_paths	61
-expected_held_paths	1
-expected_held_path	test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java
+expected_mechanical_paths	62
+expected_held_paths	0
+expected_held_path	NONE
 preserved_java21_deletions	2
 admission_tool	m3/backports/current_tree_preimage_inventory.py
 crate_generator	m3/backports/generate_recipe_crates.py
@@ -25,4 +25,4 @@ native_lane	true
 text_lane	true
 mutation_authority	false
 promotion_authority	false
-next_action	RUN_REPAIRED_CURRENT_MASTER_61_FILE_ATOM_MATERIALIZATION_BUILD_JTREG_FIXED_POINT
+next_action	RUN_CURRENT_MASTER_62_FILE_ATOM_MATERIALIZATION_BUILD_JTREG_FIXED_POINT
