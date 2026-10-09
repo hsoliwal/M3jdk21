@@ -775,6 +775,17 @@ final class M3String implements CharSequence {
         return encodeWithEncoder(checked);
     }
 
+    /**
+     * Every unit of this String read once in bulk (A13): the encoders fold this array with their
+     * unchanged byte rules instead of dispatching to the owner per unit. Transient scratch of the
+     * same order as the output they allocate.
+     */
+    private char[] units() {
+        char[] out = new char[length()];
+        getChars(0, out.length, out, 0);
+        return out;
+    }
+
     private byte[] encodeUtf8() {
         M3StringFacts prepared = facts();
         byte[] output = new byte[prepared.utf8Length];
@@ -782,18 +793,19 @@ final class M3String implements CharSequence {
             getBytes(output, 0, 0, String.LATIN1, length());
             return output;
         }
+        char[] units = units();
         int target = 0;
-        for (int index = 0; index < length(); index++) {
-            char unit = charAt(index);
+        for (int index = 0; index < units.length; index++) {
+            char unit = units[index];
             if (unit < 0x80) {
                 output[target++] = (byte) unit;
             } else if (unit < 0x800) {
                 output[target++] = (byte) (0xc0 | (unit >>> 6));
                 output[target++] = (byte) (0x80 | (unit & 0x3f));
             } else if (Character.isHighSurrogate(unit)
-                    && index + 1 < length()
-                    && Character.isLowSurrogate(charAt(index + 1))) {
-                int codePoint = Character.toCodePoint(unit, charAt(++index));
+                    && index + 1 < units.length
+                    && Character.isLowSurrogate(units[index + 1])) {
+                int codePoint = Character.toCodePoint(unit, units[++index]);
                 output[target++] = (byte) (0xf0 | (codePoint >>> 18));
                 output[target++] = (byte) (0x80 | ((codePoint >>> 12) & 0x3f));
                 output[target++] = (byte) (0x80 | ((codePoint >>> 6) & 0x3f));
@@ -821,17 +833,18 @@ final class M3String implements CharSequence {
             return output;
         }
         byte[] output = new byte[prepared.codePointCount];
+        char[] units = units();
         int target = 0;
-        for (int index = 0; index < length(); index++) {
-            char unit = charAt(index);
+        for (int index = 0; index < units.length; index++) {
+            char unit = units[index];
             int limit = asciiOnly ? 0x7f : 0xff;
             if (unit <= limit) {
                 output[target++] = (byte) unit;
                 continue;
             }
             if (Character.isHighSurrogate(unit)
-                    && index + 1 < length()
-                    && Character.isLowSurrogate(charAt(index + 1))) {
+                    && index + 1 < units.length
+                    && Character.isLowSurrogate(units[index + 1])) {
                 index++;
             }
             output[target++] = '?';
@@ -877,18 +890,19 @@ final class M3String implements CharSequence {
             getBytes(output, 0, 0, String.LATIN1, length());
             return output;
         }
+        char[] units = units();
         int target = 0;
-        for (int index = 0; index < length(); index++) {
-            char unit = charAt(index);
+        for (int index = 0; index < units.length; index++) {
+            char unit = units[index];
             if (unit < 0x80) {
                 output[target++] = (byte) unit;
             } else if (unit < 0x800) {
                 output[target++] = (byte) (0xc0 | (unit >>> 6));
                 output[target++] = (byte) (0x80 | (unit & 0x3f));
             } else if (Character.isHighSurrogate(unit)
-                    && index + 1 < length()
-                    && Character.isLowSurrogate(charAt(index + 1))) {
-                int codePoint = Character.toCodePoint(unit, charAt(++index));
+                    && index + 1 < units.length
+                    && Character.isLowSurrogate(units[index + 1])) {
+                int codePoint = Character.toCodePoint(unit, units[++index]);
                 output[target++] = (byte) (0xf0 | (codePoint >>> 18));
                 output[target++] = (byte) (0x80 | ((codePoint >>> 12) & 0x3f));
                 output[target++] = (byte) (0x80 | ((codePoint >>> 6) & 0x3f));
@@ -915,7 +929,7 @@ final class M3String implements CharSequence {
         if (length == 0) return output;
 
         ByteBuffer bytes = ByteBuffer.wrap(output);
-        CharBuffer input = CharBuffer.wrap(this);
+        CharBuffer input = CharBuffer.wrap(units());
         try {
             CoderResult result = encoder.encode(input, bytes, true);
             if (!result.isUnderflow()) result.throwException();
@@ -953,7 +967,7 @@ final class M3String implements CharSequence {
         if (length == 0) return output;
 
         ByteBuffer bytes = ByteBuffer.wrap(output);
-        CharBuffer input = CharBuffer.wrap(this);
+        CharBuffer input = CharBuffer.wrap(units());
         try {
             CoderResult result = encoder.encode(input, bytes, true);
             if (!result.isUnderflow()) result.throwException();
