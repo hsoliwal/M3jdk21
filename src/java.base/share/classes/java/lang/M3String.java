@@ -530,6 +530,126 @@ final class M3String implements CharSequence {
 
     private static final int LATIN1_SCAN_WINDOW = 1024;
 
+    /** The first index that is not whitespace in the stock code-point sense (A24). */
+    int stripStart() {
+        M3StringFacts prepared = factsIfPrepared();
+        return prepared != null ? prepared.stripStart : leadingNonWhitespace(true);
+    }
+
+    /** One past the last index that is not whitespace in the stock code-point sense (A24). */
+    int stripEnd() {
+        M3StringFacts prepared = factsIfPrepared();
+        return prepared != null ? prepared.stripEnd : trailingNonWhitespace(true);
+    }
+
+    /** The first index whose unit is above space (A24). */
+    int trimStart() {
+        M3StringFacts prepared = factsIfPrepared();
+        return prepared != null ? prepared.trimStart : leadingNonWhitespace(false);
+    }
+
+    /** One past the last index whose unit is above space (A24). */
+    int trimEnd() {
+        M3StringFacts prepared = factsIfPrepared();
+        return prepared != null ? prepared.trimEnd : trailingNonWhitespace(false);
+    }
+
+    /**
+     * Leading whitespace scanned in bulk windows with early exit (A24): strip uses
+     * {@code Character.isWhitespace}, trim units at or below space. A surrogate is never
+     * whitespace, paired or not, so the unit scan stops where the stock code-point scan stops.
+     */
+    private int leadingNonWhitespace(boolean strip) {
+        int length = length();
+        char[] window = new char[Math.min(length, FIRST_WINDOW)];
+        for (int from = 0; from < length; ) {
+            if (from > 0 && window.length < LATIN1_SCAN_WINDOW) {
+                window = new char[Math.min(length - from, LATIN1_SCAN_WINDOW)];
+            }
+            int count = Math.min(window.length, length - from);
+            getChars(from, from + count, window, 0);
+            for (int at = 0; at < count; at++) {
+                if (!isWhitespaceUnit(window[at], strip)) return from + at;
+            }
+            from += count;
+        }
+        return length;
+    }
+
+    private int trailingNonWhitespace(boolean strip) {
+        int length = length();
+        char[] window = new char[Math.min(length, FIRST_WINDOW)];
+        for (int end = length; end > 0; ) {
+            if (end < length && window.length < LATIN1_SCAN_WINDOW) {
+                window = new char[Math.min(end, LATIN1_SCAN_WINDOW)];
+            }
+            int count = Math.min(window.length, end);
+            getChars(end - count, end, window, 0);
+            for (int at = count - 1; at >= 0; at--) {
+                if (!isWhitespaceUnit(window[at], strip)) return end - count + at + 1;
+            }
+            end -= count;
+        }
+        return 0;
+    }
+
+    /** Units in the first window of a whitespace scan: most texts decide within it. */
+    private static final int FIRST_WINDOW = 32;
+
+    private static boolean isWhitespaceUnit(char unit, boolean strip) {
+        return strip ? Character.isWhitespace(unit) : unit <= ' ';
+    }
+
+    /** The code point count of this range (A24): a narrow owner's length, prepared facts, or a bulk count of surrogate pairs. */
+    int codePointCountValue() {
+        int length = length();
+        if (coder() == String.LATIN1) return length;
+        M3StringFacts prepared = factsIfPrepared();
+        if (prepared != null) return prepared.codePointCount;
+        char[] window = new char[Math.min(length, LATIN1_SCAN_WINDOW)];
+        int count = length;
+        char previous = 0;
+        for (int from = 0; from < length; from += window.length) {
+            int chunk = Math.min(window.length, length - from);
+            getChars(from, from + chunk, window, 0);
+            for (int at = 0; at < chunk; at++) {
+                char unit = window[at];
+                if (Character.isLowSurrogate(unit) && Character.isHighSurrogate(previous)) {
+                    count--;
+                    previous = 0;
+                } else {
+                    previous = unit;
+                }
+            }
+        }
+        return count;
+    }
+
+    /** Whether every unit is ASCII (A24): prepared facts, or a bulk scan with early exit. */
+    boolean contentIsAscii() {
+        M3StringFacts prepared = factsIfPrepared();
+        if (prepared != null) return prepared.ascii;
+        int length = length();
+        if (coder() == String.LATIN1) {
+            byte[] window = new byte[Math.min(length, LATIN1_SCAN_WINDOW)];
+            for (int from = 0; from < length; from += window.length) {
+                int count = Math.min(window.length, length - from);
+                getBytes(window, from, 0, String.LATIN1, count);
+                if (StringCoding.countPositives(window, 0, count) != count) return false;
+            }
+            return true;
+        }
+        char[] window = new char[Math.min(length, LATIN1_SCAN_WINDOW)];
+        for (int from = 0; from < length; from += window.length) {
+            int count = Math.min(window.length, length - from);
+            getChars(from, from + count, window, 0);
+            for (int at = 0; at < count; at++) {
+                if (window[at] > 0x7f) return false;
+            }
+        }
+        return true;
+    }
+
     long structuralHash64() {
         return owner.structuralHash64;
     }
@@ -1178,15 +1298,16 @@ final class M3String implements CharSequence {
     }
 
     M3String asciiCase(boolean upper) {
-        M3StringFacts prepared = facts();
-        if (!prepared.ascii) {
+        if (!contentIsAscii()) {
             throw new IllegalStateException("ASCII case mapping requires ASCII M3 String");
         }
 
         ArrayList<M3String> pieces = null;
         int cursor = 0;
-        for (int index = 0; index < length(); index++) {
-            char unit = charAt(index);
+        // The units are read once in bulk (A24): the mapping scan reads an array.
+        char[] units = units();
+        for (int index = 0; index < units.length; index++) {
+            char unit = units[index];
             char mapped = upper
                     ? (unit >= 'a' && unit <= 'z' ? (char) (unit - ('a' - 'A')) : unit)
                     : (unit >= 'A' && unit <= 'Z' ? (char) (unit + ('a' - 'A')) : unit);

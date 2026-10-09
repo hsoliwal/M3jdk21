@@ -1744,12 +1744,15 @@ public final class String
         Objects.checkFromToIndex(beginIndex, endIndex, length());
         M3String storage = m3();
         if (storage != null) {
+            // A narrow owner has no surrogates; a cached geometry answers; otherwise the range is
+            // counted in bulk (A24) and no geometry is built for a single count.
+            if (storage.coder() == LATIN1) return endIndex - beginIndex;
             M3StringCodePointPrecompute.Geometry geometry =
-                    M3StringCodePointPrecompute.prepare(storage);
+                    M3StringCodePointPrecompute.prepared(storage);
             if (geometry != null) {
                 return geometry.codePointCount(beginIndex, endIndex);
             }
-            return storage.slice(beginIndex, endIndex).facts().codePointCount;
+            return storage.slice(beginIndex, endIndex).codePointCountValue();
         }
         if (isLatin1()) {
             return endIndex - beginIndex;
@@ -4129,8 +4132,7 @@ public final class String
         Objects.requireNonNull(locale);
         M3String storage = m3();
         if (storage != null && asciiCaseMappingLocale(locale)) {
-            M3StringFacts prepared = storage.facts();
-            if (prepared.ascii) {
+            if (storage.contentIsAscii()) {
                 M3String mapped = storage.asciiCase(false);
                 return mapped == storage ? this : new String(mapped);
             }
@@ -4230,8 +4232,7 @@ public final class String
         Objects.requireNonNull(locale);
         M3String storage = m3();
         if (storage != null && asciiCaseMappingLocale(locale)) {
-            M3StringFacts prepared = storage.facts();
-            if (prepared.ascii) {
+            if (storage.contentIsAscii()) {
                 M3String mapped = storage.asciiCase(true);
                 return mapped == storage ? this : new String(mapped);
             }
@@ -4299,10 +4300,11 @@ public final class String
     public String trim() {
         M3String storage = m3();
         if (storage != null) {
-            M3StringFacts facts = storage.facts();
-            if (facts.trimStart == 0 && facts.trimEnd == storage.length()) return this;
-            if (facts.trimStart == storage.length()) return "";
-            return new String(storage.slice(facts.trimStart, facts.trimEnd));
+            int start = storage.trimStart();
+            if (start == storage.length()) return start == 0 ? this : "";
+            int end = storage.trimEnd();
+            if (start == 0 && end == storage.length()) return this;
+            return new String(storage.slice(start, end));
         }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.trim(currentValue)
@@ -4339,10 +4341,11 @@ public final class String
     public String strip() {
         M3String storage = m3();
         if (storage != null) {
-            M3StringFacts facts = storage.facts();
-            if (facts.stripStart == 0 && facts.stripEnd == storage.length()) return this;
-            if (facts.stripStart == storage.length()) return "";
-            return new String(storage.slice(facts.stripStart, facts.stripEnd));
+            int start = storage.stripStart();
+            if (start == storage.length()) return start == 0 ? this : "";
+            int end = storage.stripEnd();
+            if (start == 0 && end == storage.length()) return this;
+            return new String(storage.slice(start, end));
         }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.strip(currentValue)
@@ -4377,7 +4380,7 @@ public final class String
     public String stripLeading() {
         M3String storage = m3();
         if (storage != null) {
-            int start = storage.facts().stripStart;
+            int start = storage.stripStart();
             if (start == 0) return this;
             if (start == storage.length()) return "";
             return new String(storage.slice(start, storage.length()));
@@ -4415,7 +4418,7 @@ public final class String
     public String stripTrailing() {
         M3String storage = m3();
         if (storage != null) {
-            int end = storage.facts().stripEnd;
+            int end = storage.stripEnd();
             if (end == storage.length()) return this;
             if (end == 0) return "";
             return new String(storage.slice(0, end));
@@ -4581,7 +4584,7 @@ public final class String
 
     private int indexOfNonWhitespace() {
         M3String storage = m3();
-        if (storage != null) return storage.facts().stripStart;
+        if (storage != null) return storage.stripStart();
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.indexOfNonWhitespace(currentValue)
                           : StringUTF16.indexOfNonWhitespace(currentValue);
@@ -4589,7 +4592,7 @@ public final class String
 
     private int lastIndexOfNonWhitespace() {
         M3String storage = m3();
-        if (storage != null) return storage.facts().stripEnd;
+        if (storage != null) return storage.stripEnd();
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(currentValue)
                           : StringUTF16.lastIndexOfNonWhitespace(currentValue);

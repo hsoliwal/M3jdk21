@@ -34,6 +34,21 @@ final class M3StringCodePointPrecompute {
 
     private M3StringCodePointPrecompute() {}
 
+    /** The geometry already cached for this range, or null without building one (A24). */
+    static Geometry prepared(M3String source) {
+        int length = source.length();
+        if (length == 0 || length > MAX_SOURCE_UNITS) return null;
+        M3StringOwner owner = source.owner();
+        long coordinate = source.coordinate();
+        Entry entry = CACHE.get(slot(owner, coordinate));
+        return entry != null
+                && entry.owner.get() == owner
+                && entry.coordinate == coordinate
+                && entry.geometry.utf16Length == length
+                ? entry.geometry
+                : null;
+    }
+
     static Geometry prepare(M3String source) {
         int length = source.length();
         if (length == 0 || length > MAX_SOURCE_UNITS) return null;
@@ -51,9 +66,11 @@ final class M3StringCodePointPrecompute {
 
             int[] scratch = new int[Math.min(length >>> 1, 256)];
             int count = 0;
-            char previous = source.charAt(0);
+            // The units are read once in bulk (A24): the pair scan reads an array.
+            char[] units = source.units();
+            char previous = units[0];
             for (int index = 1; index < length; index++) {
-                char current = source.charAt(index);
+                char current = units[index];
                 if (Character.isHighSurrogate(previous)
                         && Character.isLowSurrogate(current)) {
                     if (count == scratch.length) {
