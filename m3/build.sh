@@ -12,7 +12,7 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
   core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SynexiaSiUnitDecoderTest.java \
   core/test/M3NumberSpaceTest.java core/test/M3NumberSpaceContractTest.java \
   core/test/M3LanguageGrammarSupportTest.java \
-  core/test/AcronymSidecarCatalogTest.java core/test/M3AcronymPrecomputeTest.java
+  core/test/AcronymSidecarCatalogTest.java core/test/M3AcronymPrecomputeTest.java \\\n  core/test/M3AcronymSnapshotReplayTest.java
 for mode in jit int nocompact c2; do
  flags=();case "$mode" in int)flags=(-Xint);; nocompact)flags=(-XX:-CompactStrings);; c2)flags=(-Xbatch -XX:-TieredCompilation);; esac
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests FoundationTest | tee "build/logs/test-$mode.log"
