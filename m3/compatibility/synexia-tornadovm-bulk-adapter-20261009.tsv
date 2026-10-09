@@ -1,0 +1,2 @@
+schema	jdk_contract_repo	jdk_contract_pr	jdk_contract_merge	tornado_repo	tornado_pr	tornado_merge	adapter_path	state	promotion_authority
+M3JDK21_TORNADOVM_BULK_ADAPTER_V1	hsoliwal/M3jdk21	465	dd83865308c1c0f639ceb1ddcbaebfcd22e41506	hsoliwal/synexia-tornadovm	7	3bf826714a48d7fdf346ffde8a0fc25c525572c5	m3/ports/tornadovm-bulk	CANDIDATE_OPTIONAL_PROVIDER	false
