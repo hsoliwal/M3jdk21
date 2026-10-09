@@ -1,0 +1,50 @@
+schema: m3-recipe/v1
+id: synexia-si-unit-proof-receipt-20261009
+pattern: pinned-source-and-runtime-proof-boundary
+purpose: Preserve the exact Synexia SI-unit donor and prevent promotion until the existing four-mode decoder proof executes.
+
+inputs:
+  - donor_receipt: m3/runtime-integration/synexia-si-unit-proof-receipt.tsv
+  - target_map: m3/lexicon/synexia-si-unit-target-map.tsv
+  - field_map: m3/lexicon/synexia-precompute-field-map.tsv
+  - catalog: m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java
+  - owner: m3/core/src/com/m3/text/M3LexiconPrecompute.java
+  - catalog_test: m3/core/test/M3SiUnitPrecomputeCatalogTest.java
+  - decoder_test: m3/core/test/SynexiaSiUnitDecoderTest.java
+  - build: m3/build.sh
+
+phases:
+  - SEARCH: pin the Synexia SiUnit source commit, path, and blob before accepting the target map.
+  - INVENTORY: retain source family, record identity, four precompute fields, owner, and proof modes.
+  - CLASSIFY: ADAPT_COMPOSE; reuse the existing typed receiver and source-gated decoder.
+  - FILTER: reject wrong source families, duplicate identities, non-finite offsets, out-of-range exponents, and String-owned lexical payloads.
+  - PROVE: run the declared decoder in jit, int, nocompact, and c2; source checks alone cannot promote the target.
+  - CHECKPOINT: keep the target state PENDING_TARGET_RECEIVER_PROOF until all four runtime markers are present.
+
+mapping:
+  source_family: dictlang.si-units
+  source_record_id: unit_id
+  fields: decimalExponent,dimensionPacked,offset,prefixable
+  target_owner: com.m3.text.M3LexiconPrecompute.SiUnitPrecompute
+  lookup: SharedLexiconPrecomputeCatalog.SiUnitIdentity
+  license: Apache-2.0
+  state: PENDING_TARGET_RECEIVER_PROOF
+
+verification:
+  source_discriminator_command: python m3/runtime-integration/check-synexia-si-unit-proof-receipt.py --repo-root .
+  source_discriminator: M3_SI_UNIT_PROOF_RECEIPT_SOURCE_PASS checks=34/34|runtime=NOT_RUN
+  required_runtime_marker: M3JDK_SI_UNIT_PASS
+  required_modes: jit,int,nocompact,c2
+  runtime: NOT_RUN
+  hosted_ci: NOT_CLAIMED
+  benchmark: NOT_MEASURED
+
+invariants:
+  - No SI-unit payload is stored in java.lang.String.
+  - The source family cannot be confused with dictlang.acronyms.
+  - Runtime promotion requires all four mode markers.
+  - No public M3String ABI or persisted image format changes.
+
+storage:
+  hosted_artifact_limit: 512MiB
+  minimum_free_after_output: 8GiB
