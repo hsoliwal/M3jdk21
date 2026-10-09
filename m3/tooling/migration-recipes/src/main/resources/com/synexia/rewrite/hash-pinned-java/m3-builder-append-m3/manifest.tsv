@@ -1,0 +1,4 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3String.java	4c3926f5506b1861fd119ae1ed006bf6fb545ff6774f64d975f6a4276c1e23e8	c437c18fd0aef8044d8086993d09e6b2e7c689e44564c02ef2cd4da9feaf2dd9	00-M3String.java.txt
+src/java.base/share/classes/java/lang/M3StringAtom.java	b742092ca0d9453df581fc7d4605627e886dcae0c7ac72dbac32b0dc3cde315e	7f5a04f4e60429b28f389493a36fd708c3f8da3da8f8559a887ccf871da24431	01-M3StringAtom.java.txt
+test/jdk/java/lang/String/M3BuilderAppendTest.java	ABSENT	9c78ffb5248db4c22f8ffef2985512457fd9c5fb830567b3706b57d06025eaaf	02-M3BuilderAppendTest.java.txt

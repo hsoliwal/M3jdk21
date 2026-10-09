@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.BuilderAppendM3
+displayName: M3JDK21 builder appends of M3 Strings widened in bulk, inflation decided cheaply
+description: >-
+  A Latin-1 M3 String appended into a UTF-16 builder copied per unit (a range through
+  StringUTF16.putCharsSB's charAt loop, a whole String through the atom's cross-coder getBytes
+  loop), and appending any M3 String into a Latin-1 builder computed its full facts to decide
+  inflation. M3StringAtom.getBytes widens Latin-1 storage into a UTF-16 destination in bulk
+  through a 4 KiB window and the stock inflate intrinsic; AbstractStringBuilder.appendChars hands a
+  Latin-1 M3 range to that path; inflateIfNeededFor answers from the owner's coder, prepared facts
+  or a bulk Latin-1 scan of the range (M3String.contentIsLatin1) instead of the full facts. Java
+  step: M3String, M3StringAtom and the jtreg proof; text step: AbstractStringBuilder (Javadoc the
+  pinned Java parser cannot convert). Stacks on crate m3-needle-bulk (its postimages are these
+  preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-builder-append-m3
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-builder-append-m3

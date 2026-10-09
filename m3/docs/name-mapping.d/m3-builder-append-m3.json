@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.M3StringAtom.getBytes with Latin-1 storage and a UTF-16 destination: Unsafe.getByte + StringUTF16.putChar per unit (A11 bulk only for same-coder copies, carried to A21 0aed554123)",
+      "source_commit": "0aed554123",
+      "target": "for 64 units and up the bytes come out in bulk through a 4 KiB window (Unsafe.copyMemory) and StringLatin1.inflate widens them; the per-unit loop stays for shorter copies and for UTF-16 storage into a Latin-1 destination",
+      "status": "implemented-locally-verified (G7; flag-off: M3BuilderAppendTest 3,042 checks; a Latin-1 M3 range into a UTF-16 builder 11x..21x faster, a whole String 1.4x..1.6x)",
+      "target_rule": "the same units land in the same destination slots"
+    },
+    {
+      "source": "java.lang.AbstractStringBuilder.inflateIfNeededFor(String) with an M3 argument: storage.facts().latin1 (the full facts computed on first use of every appended owner); appendChars(String, off, end) for a Latin-1 M3 String into a UTF-16 builder: StringUTF16.putCharsSB charAt loop (jdk-21+35 / A11, carried to 0aed554123)",
+      "source_commit": "0aed554123",
+      "target": "inflateIfNeededFor answers from the owner's coder for a narrow owner and, for a wide owner, from prepared facts or M3String.contentIsLatin1 (a bulk scan in 1024-unit windows stopping at the first wide unit); appendChars hands a Latin-1 M3 range to the bulk cross-coder getBytes",
+      "status": "implemented-locally-verified (a fresh M3 String into a Latin-1 builder 2.1x..12x faster; deciding on the owner coder alone was measured and rejected: a wide owner's Latin-1 slice widened the builder and toString kept a UTF-16 String with Latin-1 content)",
+      "target_rule": "the builder inflates exactly when the appended content has a wide unit, as before; the resulting String compacts as the stock one"
+    }
+  ]
+}
