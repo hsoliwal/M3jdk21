@@ -195,7 +195,14 @@ def apply(target=ROOT, reverse=False, check=False):
                 raise ValueError("superseded owner missing: " + replacement_name)
             replacement_data = replacement_path.read_bytes()
             if git_blob(replacement_data) != replacement.get("git_blob"):
-                raise ValueError("superseded owner drift: " + replacement_name)
+                raise ValueError(
+                    "superseded owner drift: "
+                    + replacement_name
+                    + " expected="
+                    + replacement.get("git_blob", "")
+                    + " actual="
+                    + git_blob(replacement_data)
+                )
             states.add("superseded")
             files[name] = (path, b"")
             continue
