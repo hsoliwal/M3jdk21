@@ -3,6 +3,10 @@
  */
 package com.m3.text;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.HexFormat;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -17,15 +21,55 @@ import java.util.Objects;
 public final class M3LangDexPrecompute {
     private M3LangDexPrecompute() { }
 
-    /** Stable source record identity; source revision is part of every key. */
+    /** Stable source record identity; canonical bytes and concept scope are part of every key. */
     public record Identity(String sourceId, String recordId, String glottocode,
-                           String surface, String sourceRevision) {
+                           String surface, String sourceRevision,
+                           InternDomainV1 domain, String canonicalSchema,
+                           byte[] canonicalBytes, String canonicalDigest) {
         public Identity {
             sourceId = text(sourceId, "sourceId");
             recordId = text(recordId, "recordId");
             glottocode = glottocode(glottocode);
             surface = text(surface, "surface");
             sourceRevision = text(sourceRevision, "sourceRevision");
+            domain = Objects.requireNonNull(domain, "domain");
+            if (domain != InternDomainV1.CONCEPT) {
+                throw new IllegalArgumentException("unsupported LangDex domain");
+            }
+            canonicalSchema = text(canonicalSchema, "canonicalSchema");
+            canonicalBytes = copyBytes(canonicalBytes, "canonicalBytes");
+            canonicalDigest = text(canonicalDigest, "canonicalDigest").toLowerCase(Locale.ROOT);
+            if (!canonicalDigest.matches("[0-9a-f]{64}")
+                    || !canonicalDigest.equals(sha256(canonicalBytes))) {
+                throw new IllegalArgumentException("canonical identity digest mismatch");
+            }
+        }
+
+        @Override
+        public byte[] canonicalBytes() {
+            return canonicalBytes.clone();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) return true;
+            if (!(other instanceof Identity value)) return false;
+            return sourceId.equals(value.sourceId)
+                    && recordId.equals(value.recordId)
+                    && glottocode.equals(value.glottocode)
+                    && surface.equals(value.surface)
+                    && sourceRevision.equals(value.sourceRevision)
+                    && domain == value.domain
+                    && canonicalSchema.equals(value.canonicalSchema)
+                    && Arrays.equals(canonicalBytes, value.canonicalBytes)
+                    && canonicalDigest.equals(value.canonicalDigest);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = Objects.hash(sourceId, recordId, glottocode, surface,
+                    sourceRevision, domain, canonicalSchema, canonicalDigest);
+            return 31 * result + Arrays.hashCode(canonicalBytes);
         }
     }
 
@@ -102,6 +146,21 @@ public final class M3LangDexPrecompute {
     static boolean acceptedSource(String sourceId) {
         return "unicodex.langdex.lexemes".equals(sourceId)
                 || "dictlang.huggingface".equals(sourceId);
+    }
+
+    private static byte[] copyBytes(byte[] value, String name) {
+        Objects.requireNonNull(value, name);
+        if (value.length == 0) throw new IllegalArgumentException(name + " is empty");
+        return value.clone();
+    }
+
+    private static String sha256(byte[] value) {
+        try {
+            return HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256").digest(value));
+        } catch (NoSuchAlgorithmException failure) {
+            throw new AssertionError(failure);
+        }
     }
 
     static String text(String value, String name) {
