@@ -85,8 +85,8 @@ public final class M3LexiconsFacadeTest {
             bytes.put(position, (byte) unit).put(position + 1, (byte) (unit >>> 8));
         }
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        digest.update(bytes.asReadOnlyBuffer().slice(0, 32));
-        digest.update(bytes.asReadOnlyBuffer().slice(64, bytes.limit() - 64));
+        digest.update(bytes.array(), 0, 32);
+        digest.update(bytes.array(), 64, bytes.limit() - 64);
         bytes.position(32);
         bytes.put(digest.digest());
         Files.write(target, bytes.array());
