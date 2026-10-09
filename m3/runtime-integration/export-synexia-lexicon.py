@@ -646,7 +646,10 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
         "identity_rule": "source_id + record_id is opaque and never renumbered; image_row is only a physical M3LEX projection",
         "data_policy": "operator-supplied snapshot only; no network download or implicit license grant",
     }
-    (output / "synexia.export.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    manifest_bytes = (
+        json.dumps(manifest, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n"
+    ).encode("utf-8")
+    (output / "synexia.export.json").write_bytes(manifest_bytes)
     return manifest
 
 
@@ -660,12 +663,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--field-map", type=pathlib.Path)
     parser.add_argument("--relations", type=pathlib.Path)
     parser.add_argument("--relation-policy", default="normalized-directed-v1")
-    parser.add_argument("--family-sidecars", type=pathlib.Path,
+    parser.add_argument("--family-sidecar-dir", "--family-sidecars",
+                        dest="family_sidecar_dir", type=pathlib.Path,
                         help="complete typed Synexia family-sidecar directory")
     args = parser.parse_args(argv)
     result = export(args.source_manifest, args.records, args.output,
                     args.source_repository, args.source_commit, args.field_map, args.relations,
-                    args.relation_policy, args.family_sidecars)
+                    args.relation_policy, args.family_sidecar_dir)
     print("SYNEXIA_M3JDK_LEXICON_EXPORT_PASS " + json.dumps(result["counts"], sort_keys=True))
     return 0
 
