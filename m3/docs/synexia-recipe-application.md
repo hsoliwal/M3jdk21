@@ -384,9 +384,11 @@ Canonical aggregate:
 - repository: `hsoliwal/com.synexia`
 - PR: https://github.com/hsoliwal/com.synexia/pull/10007
 - branch: `m3/m3jdk21-string-current-convergence-20261009`
-- pinned Synexia revision: `1b20e36736cd47b23a4ec5dea2a6cbe4a23b8a57`
+- pinned Synexia revision: `7d8a17ed2fc940faead983dd928d0a78f761d564`
 - aggregate recipe: `com.synexia.rewrite.M3Jdk21StringCurrentConvergence`
-- aggregate descriptor blob: `d5315dee9660754b36635f1cdb6de81c45ae8108`
+- aggregate descriptor blob: `868f5fa770cf5c6562869b696a5dd5812c0d4afa`
+- thin receiver recipe: `com.synexia.rewrite.M3Jdk21StringCurrentConvergenceReceiver`
+- receiver descriptor blob: `df5f6c458532e9fb0d5eac950d797a3897625489`
 
 The aggregate composes the canonical String-history packet and the existing current-history,
 code-point, concat/reference-DAG, representation-consumer, builder-range, UTF-16 differential,
@@ -396,7 +398,7 @@ phase-gate and recipe-custody recipes.
 
 M3JDK21 receiver state verified before this receipt-only update:
 
-`c175027436ee431ca23ffaae5e40d01152121d28`
+`102f02f0215b0664d4a90b971aa6fb6c0f106f22`
 
 Current canonical String-history packet under that aggregate:
 
@@ -415,7 +417,7 @@ Manifest identities:
 synexia_java_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-string-history-convergence/manifest.tsv
 synexia_java_manifest_sha256	5fcbfdea15e02d55f295b12bbd59b86fdf5e45b663434c681c5183392a788487
 synexia_text_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-history-convergence/manifest.tsv
-synexia_text_manifest_sha256	b8c9fc24edbba73c9f295074b460ebe4a939a0762db6bedd619394880cfb5bb2
+synexia_text_manifest_sha256	327dd8e9628f8bb4f0d42f5a4b1576af6c2a00bcc5482f6df19ec85074377368
 ```
 
 M3JDK21 remains the runtime owner. Synexia remains the reusable recipe/donor/provenance owner.
