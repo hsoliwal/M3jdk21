@@ -42,7 +42,7 @@ invariants:
 
 verification:
   source_discriminator_command: python m3/runtime-integration/check-synexia-frequency-count-pending-receipt.py --repo-root .
-  source_discriminator: M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=26/26
+  source_discriminator: M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=27/27
   runtime: NOT_RUN
   hosted_ci: NOT_CLAIMED
   benchmark: NOT_MEASURED
