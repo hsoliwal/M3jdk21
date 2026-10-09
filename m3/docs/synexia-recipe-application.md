@@ -294,10 +294,10 @@ Canonical handoff:
 - repository: `hsoliwal/com.synexia`
 - PR: https://github.com/hsoliwal/com.synexia/pull/10001
 - branch: `m3/m3jdk21-string-history-invariant-sync-20261009`
-- pinned revision: `4600df169d4d16589e3cf7ce45b5c0be68ff7a60`
+- pinned revision: `f3a193d46324a3e528c2139295f57915af9eddec`
 - recipe: `com.synexia.rewrite.M3Jdk21StringHistoryConvergence`
-- Java manifest SHA-256: `3568282e0fc234eae201cb29797f884f9e0c2071a85cffbf42bb6a3f4669a342`
-- text/native/workflow manifest SHA-256: `b5363dcb153fcebfe5883fd3e09b9cc3a76efa1b6fbc684a0d293a9121a49aba`
+- Java manifest SHA-256: `373bd85ab43bdfabcb5e1771f98a6b6f87e3dfad8ffc2c08f58834812a713eac`
+- text/native/workflow manifest SHA-256: `29ac170672b95fd7039c98a7193f2aec2a29b602f9e69d4248fed0ac9940a850`
 
 Applied M3JDK21 runtime state before receipt-only commits:
 
@@ -305,9 +305,7 @@ Applied M3JDK21 runtime state before receipt-only commits:
 
 Application mode remains `FIXED_POINT_NO_SOURCE_DELTA`: the inspected M3 String runtime,
 search/position precompute, pool, `AbstractStringBuilder`, `String.java`, differential tests
-and workflow were already byte-identical to the Synexia canonical postimages. The only
-receiver-ahead delta was the fail-closed mandatory-literal regex seam invariant; PR #10001 moves
-that invariant back to Synexia and reseals its text manifest.
+and workflow were already byte-identical to the Synexia canonical postimages. The receiver-ahead deltas were the fail-closed mandatory-literal regex seam invariant, its\n`Pattern.java` GroupHead/GroupTail implementation and regression test, plus the current donor-lineage\nand precompute port-map receipts. PR #10001 moves all of those back to Synexia and reseals both\ncanonical manifests.
 
 The target-local `M3StringHistoryConvergence` descriptor, hash-pinned Java/text crates and local
 fixed-point recipe test are absent from M3JDK21. M3JDK21 retains only the applied product,
