@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.HashRange
+displayName: M3JDK21 range hash folded from bulk-read units without the facts
+description: >-
+  String.hashCode on an M3 range that is not a whole owner computed the range's full facts to
+  read javaHash (about 10 ns per unit for a fresh slice; 2048 units 21.7 us against 0.21 flat).
+  M3String.hashCodeValue keeps the whole owner's precomputed javaHash and prepared range facts,
+  and otherwise folds the String.hashCode polynomial over the units read in 4096-unit bulk windows
+  with ArraysSupport.vectorizedHashCode; the facts are left to the consumers that need them. Java
+  step only: M3String and the jtreg proof. Stacks on crate m3-builder-append-m3 (its postimage is
+  this preimage).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-hash-range
