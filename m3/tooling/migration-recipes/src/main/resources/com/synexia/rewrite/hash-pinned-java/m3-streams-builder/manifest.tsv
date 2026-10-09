@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3String.java	24b8ba668ca03c13701ad1fe4c3c65cc1d1e356781d366ed4d6837661f021e5a	5c1f10bc2110aef3f5e8dd32be5b5128f5a9d54b5adc4764025221f4869c1cb1	00-M3String.java.txt
+test/jdk/java/lang/String/M3StringStreamsBuilderTest.java	ABSENT	9db1541ab32f6f989f03bc22832b726ff5b58f2eed68d22037f13dc0ecd0093e	01-M3StringStreamsBuilderTest.java.txt

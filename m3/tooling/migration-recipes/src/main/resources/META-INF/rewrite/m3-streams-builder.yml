@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.StreamsBuilder
+displayName: M3JDK21 M3 Strings compared with builders in place and streamed from one bulk-read value
+description: >-
+  String.contentEquals(StringBuilder/StringBuffer) on an M3-backed String compared charAt against
+  charAt per unit through owner dispatch; chars() and codePoints() walked two private M3String
+  spliterators that dispatched charAt per unit and lost the SIZED count a flat Latin-1 String has.
+  nonSyncContentEquals hands the builder's value and coder to M3String.mismatchUnits; charsStream
+  and codePointsStream read the range once in bulk into a compact value, narrowed to Latin-1 when
+  every unit allows it, and return the stock StringLatin1/StringUTF16 spliterators over it; the
+  private spliterators are removed. Java step: M3String and the jtreg proof; text step: String.java
+  (Javadoc the pinned Java parser cannot parse). Stacks on crate m3-encode-bulk-units (its
+  postimages are these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-streams-builder
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-streams-builder

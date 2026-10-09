@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.String.nonSyncContentEquals on an M3-backed String: charAt against the builder's charAt per unit after the length check (A13, 01054f2600)",
+      "source_commit": "01054f2600",
+      "target": "the same branch hands the builder's value and coder to M3String.mismatchUnits (the A11/A12 in-place compare: an atom against its native memory, a tuple through its leaves)",
+      "status": "implemented-locally-verified (G7; flag-off: M3StringStreamsBuilderTest 160,335 checks against stock results; contentEquals with a builder 5x..224x faster from 256 units)",
+      "target_rule": "results equal the stock String results on the same spellings; the length check stays in front"
+    },
+    {
+      "source": "java.lang.StringLatin1.CharsSpliterator, StringUTF16.CharsSpliterator and StringUTF16.CodePointsSpliterator over byte arrays (the stock String.chars/codePoints spliterators) and StringUTF16.compress, jdk-21+35 in-tree",
+      "source_commit": "890adb6410",
+      "target": "java.lang.M3String.compactValue/charsStream/codePointsStream: the range read once in bulk through getBytes into a compact value, narrowed to Latin-1 when every unit allows it (the coder a flat String of the same spelling has), the stock spliterators over it; the private M3String CharsSpliterator and CodePointsSpliterator (charAt per unit) removed",
+      "status": "implemented-locally-verified (chars() 1.4x..19x and codePoints() 1.6x..113x faster from 256 units; characteristics, estimateSize and trySplit equal the flat stream)",
+      "target_rule": "the stream yields the same units or code points in the same order with the same spliterator characteristics as the flat String of the same spelling"
+    }
+  ]
+}
