@@ -867,7 +867,8 @@ for pin in [
 ]:
     if pin not in literal_history:
         fail(f"indexed literal replacement history lost donor pin: {pin}")
-# Include the adjacent literal-regex guard and replacement helper in one checked atom.\nliteral_start = m3.find("    static boolean isLiteralRegex(String regex)")
+# Include the adjacent literal-regex guard and replacement helper in one checked atom.
+literal_start = m3.find("    static boolean isLiteralRegex(String regex)")
 literal_end = m3.find("    static int pow31(", literal_start)
 if literal_start < 0 or literal_end < 0:
     fail("indexed literal replacement owner atom is absent")
