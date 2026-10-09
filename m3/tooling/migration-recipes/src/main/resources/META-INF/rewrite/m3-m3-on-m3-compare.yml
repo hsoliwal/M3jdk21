@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3OnM3Compare
+displayName: M3JDK21 two M3 Strings compared in place, leaf atom by leaf atom
+description: >-
+  Comparisons with storage on both sides still folded windows and the pool's lookups compared
+  candidates unit by unit. M3StringAtom.mismatchAtom compares two atoms native-to-native with
+  ArraysSupport.vectorizedMismatch when width and byte order agree; M3StringMixedCompare
+  .mismatchStorages walks both ranges leaf atom by leaf atom (tuple halves descend, slices carry
+  their start) so equals verification, compareTo, regionMatches, startsWith(M3String) and endsWith
+  with storage on both sides never copy; the pool's contentEquals(byte[]), contentEqualsCompactBytes
+  and contentEquals(char[]) compare in place. Java step only: M3String, M3StringAtom,
+  M3StringMixedCompare, the jtreg proof. Stacks on crate m3-atom-bulk-io (its postimages are
+  these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-m3-on-m3-compare
