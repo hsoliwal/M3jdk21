@@ -41,8 +41,12 @@ final class M3DagProjectorTest {
                         .content();
 
         assertTrue(source.contains("n_file_delta >> n_a3_preparation"));
-        assertTrue(source.contains("n_a3_preparation >> n_packet_java"));
-        assertTrue(source.contains("n_a3_preparation >> n_packet_text"));
+        assertTrue(source.contains("n_a3_preparation >> n_a3_atomization_proof"));
+        assertTrue(source.contains("n_a3_atomization_proof >> n_a3_pattern_iop_proof"));
+        assertTrue(source.contains("n_a3_pattern_iop_proof >> n_a3_documentation_proof"));
+        assertTrue(source.contains("n_a3_documentation_proof >> n_a3_fixed_point_proof"));
+        assertTrue(source.contains("n_a3_fixed_point_proof >> n_packet_java"));
+        assertTrue(source.contains("n_a3_fixed_point_proof >> n_packet_text"));
         assertTrue(source.contains("n_packet_java >> n_packet_join"));
         assertTrue(source.contains("n_packet_text >> n_packet_join"));
         assertTrue(source.contains("n_packet_join >> n_recipe_junit"));
