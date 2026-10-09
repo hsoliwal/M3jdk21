@@ -76,6 +76,22 @@ public final class AcronymSidecarCatalog {
     }
 
     public static AcronymSidecarCatalog open(Path directory) throws IOException {
+        return open(directory, null, null, null);
+    }
+
+    /**
+     * Opens the sidecar while binding every entry to the supplied source
+     * revision, source blob, and complete snapshot digest.
+     */
+    public static AcronymSidecarCatalog open(Path directory, String expectedSourceRevision,
+                                             String expectedSourceBlobSha,
+                                             String expectedSnapshotSha256) throws IOException {
+        boolean sourceBound = expectedSourceRevision != null
+                || expectedSourceBlobSha != null || expectedSnapshotSha256 != null;
+        if (sourceBound && (expectedSourceRevision == null
+                || expectedSourceBlobSha == null || expectedSnapshotSha256 == null)) {
+            throw new IllegalArgumentException("incomplete acronym provenance");
+        }
         Path root = Objects.requireNonNull(directory, "directory").toAbsolutePath().normalize();
         if (!Files.isDirectory(root, LinkOption.NOFOLLOW_LINKS) || Files.isSymbolicLink(root)) {
             throw new IllegalArgumentException("sidecar directory");
@@ -133,8 +149,17 @@ public final class AcronymSidecarCatalog {
                 throw new IllegalArgumentException("acronym rows not sorted and unique");
             }
             previous = acronym;
-            Entry entry = new Entry(rowScope,
-                    new M3LexiconPrecompute.AcronymPrecompute(acronym, expansion, domain));
+            M3LexiconPrecompute.AcronymPrecompute value =
+                    sourceBound
+                            ? new M3LexiconPrecompute.AcronymPrecompute(
+                                    acronym, expansion, domain, rowScope.sourceManifestRevision(),
+                                    expectedSourceBlobSha, expectedSnapshotSha256)
+                            : new M3LexiconPrecompute.AcronymPrecompute(
+                                    acronym, expansion, domain);
+            if (sourceBound && !expectedSourceRevision.equals(rowScope.sourceManifestRevision())) {
+                throw new IllegalArgumentException("acronym source revision mismatch");
+            }
+            Entry entry = new Entry(rowScope, value);
             if (values.putIfAbsent(acronym, entry) != null) {
                 throw new IllegalArgumentException("duplicate acronym");
             }
