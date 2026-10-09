@@ -64,7 +64,7 @@ public final class AcronymSidecarCatalogTest {
 
     @FunctionalInterface
     private interface ThrowingSupplier {
-        Object get() throws Exception;
+        Object get() throws java.io.IOException;
     }
 
     private static void expectIllegal(ThrowingSupplier action, String message) {
