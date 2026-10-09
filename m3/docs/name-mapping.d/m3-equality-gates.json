@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.String.equals / M3String.contentEquals: unit compare with one M3 side (m3/facts-scan-fused-20261008 b9496a02e0)",
+      "source_commit": "b9496a02e0",
+      "target": "java.lang.String.cachedHashDiffers -> M3String.hashKnownToDiffer: the flat side's cached hashCode against the M3 owner's canonical hash (whole owner) or prepared range facts, before the unit compare",
+      "status": "implemented-locally-verified (G7; flag-off: exact against String.hashCode on atoms, prepared ranges and tuples; silent on unprepared ranges); flag-on jtreg PENDING_LINUX",
+      "target_rule": "proves inequality only; never prepares facts; reads of hash/hashIsZero are the hashCode() benign race"
+    },
+    {
+      "source": "java.lang.String.regionMatches(ignoreCase) mixed side: per-unit case mapping over owner dispatch (b9496a02e0)",
+      "source_commit": "b9496a02e0",
+      "target": "java.lang.String.mixedAsciiCaseHashDiffers + M3StringFacts.asciiLowerHashOrNegative: allocation-free ASCII-lower fold of the flat region against prepared ASCII facts when the M3 side covers its whole String",
+      "status": "implemented-locally-verified (flag-off: fold equals prepared asciiLowerHash for ASCII regions, -1 for non-ASCII; equal-ignoring-case pairs never gated); flag-on jtreg PENDING_LINUX",
+      "target_rule": "both sides must be ASCII (Kelvin sign, dotted I and long s equal ASCII units ignoring case); the M3 side is never read when the gate rejects"
+    }
+  ]
+}
