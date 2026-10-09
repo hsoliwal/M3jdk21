@@ -53,8 +53,9 @@ public final class SynexiaPrecomputePayloadTest {
                 "{\"canonical_decimal_spelling\":\"10000\",\"code_point_length\":2,"
                         + "\"concept_ids\":[11,0,19],\"flags\":7,\"language_id\":3,"
                         + "\"max_value\":10000,\"min_value\":0,\"precomputed_value_count\":10001,"
-                        + "\"record_id\":\"0\",\"si_offset\":1.5,\"si_prefixable\":true,"
-                        + "\"shared_utf16_storage\":true,\"source_id\":\"dictlang.numbers.0-10000\","
+                        + "\"record_id\":\"0\",\"shared_utf16_storage\":true,"
+                        + "\"si_offset\":1.5,\"si_prefixable\":true,"
+                        + "\"source_id\":\"dictlang.numbers.0-10000\","
                         + "\"translation_grammar_supported\":true,\"unknown_future\":-9}"));
         check(SynexiaPrecomputePayload.parse(payload.canonicalJson()).canonicalJson()
                 .equals(payload.canonicalJson()));
