@@ -21,6 +21,12 @@ and source identity. It admits no proper-name payload or second lexical
 interner; title catalogs remain outside this contract until a canonical title
 source and typed owner exist.
 
+The acronym source family is received by `com.m3.text.M3AcronymPrecompute`.
+It preserves exact acronym and expansion identities, Locale.ROOT expansion
+lookup, optional domains, source scope, and derived UTF-16/Java-hash facts.
+This typed owner does not turn domain labels into title records or lexicon
+identity.
+
 `m3/lexicon/synexia-source-manifest.tsv` is the reviewed source-family map. It
 keeps the Synexia path, source identity field, mapping fields, and target
 precompute owner visible. Its final `precompute_fields` column is the v2
