@@ -9,12 +9,14 @@ import org.junit.jupiter.api.Test;
 
 final class M3BulkExecutorGateRepairRecipeTest {
     @Test
-    void receivesExactlyTwoFocusedRepairs() {
+    void receivesFocusedGateRepairs() {
         var recipe = new M3BulkExecutorGateRepairRecipe();
         assertEquals(2, recipe.getRecipeList().size());
         assertFalse(recipe.promotionAuthority());
         assertEquals(
-                List.of("src/java.base/share/classes/java/lang/String.java"),
+                List.of(
+                        "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3BulkExecutorPortRecipeTest.java",
+                        "src/java.base/share/classes/java/lang/String.java"),
                 new M3Jdk21HashPinnedSnapshotRecipe(recipe.CRATE).targetPaths());
         assertEquals(
                 List.of(".github/workflows/m3-bulk-executor-port.yml"),
