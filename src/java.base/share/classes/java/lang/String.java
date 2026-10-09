@@ -2143,8 +2143,7 @@ public final class String
      */
     private static boolean mixedAsciiCaseHashDiffers(M3String storage, int storageOffset,
             String flat, int flatOffset, int len) {
-        if (storageOffset != 0 || len != storage.length()) return false;
-        M3StringFacts prepared = storage.factsIfPrepared();
+        M3StringFacts prepared = storage.factsIfPrepared(storageOffset, storageOffset + len);
         if (prepared == null || !prepared.ascii) return false;
         long folded = M3StringFacts.asciiLowerHashOrNegative(flat, flatOffset, flatOffset + len);
         return folded >= 0 && (int) folded != prepared.asciiLowerHash;
@@ -2237,16 +2236,7 @@ public final class String
             return 0;
         }
         if (leftM3 != null || rightM3 != null) {
-            int length1 = length();
-            int length2 = anotherString.length();
-            int limit = Math.min(length1, length2);
-            for (int index = 0; index < limit; index++) {
-                int difference = charAt(index) - anotherString.charAt(index);
-                if (difference != 0) {
-                    return difference;
-                }
-            }
-            return length1 - length2;
+            return M3StringMixedCompare.compareUnits(this, anotherString);
         }
         byte[] v1 = value();
         byte[] v2 = anotherString.value();
@@ -2285,26 +2275,7 @@ public final class String
 
         public int compare(String s1, String s2) {
             if (s1.m3() != null || s2.m3() != null) {
-                int i1 = 0;
-                int i2 = 0;
-                int n1 = s1.length();
-                int n2 = s2.length();
-                while (i1 < n1 && i2 < n2) {
-                    int c1 = s1.codePointAt(i1);
-                    int c2 = s2.codePointAt(i2);
-                    if (c1 != c2) {
-                        int u1 = Character.toUpperCase(c1);
-                        int u2 = Character.toUpperCase(c2);
-                        if (u1 != u2) {
-                            int l1 = Character.toLowerCase(u1);
-                            int l2 = Character.toLowerCase(u2);
-                            if (l1 != l2) return l1 - l2;
-                        }
-                    }
-                    i1 += Character.charCount(c1);
-                    i2 += Character.charCount(c2);
-                }
-                return n1 - n2;
+                return M3StringMixedCompare.compareIgnoreCase(s1, s2);
             }
             byte[] v1 = s1.value();
             byte[] v2 = s2.value();
@@ -2508,37 +2479,7 @@ public final class String
                     : mixedAsciiCaseHashDiffers(rightM3, ooffset, this, toffset, len)) {
                 return false;
             }
-            int t = toffset;
-            int o = ooffset;
-            int remaining = len;
-            while (remaining > 0) {
-                int tc = charAt(t);
-                int oc = other.charAt(o);
-                int tcp = tc;
-                int ocp = oc;
-                int tw = 1;
-                int ow = 1;
-                if (Character.isHighSurrogate((char) tc) && remaining > 1
-                        && Character.isLowSurrogate(charAt(t + 1))) {
-                    tcp = Character.toCodePoint((char) tc, charAt(t + 1));
-                    tw = 2;
-                }
-                if (Character.isHighSurrogate((char) oc) && remaining > 1
-                        && Character.isLowSurrogate(other.charAt(o + 1))) {
-                    ocp = Character.toCodePoint((char) oc, other.charAt(o + 1));
-                    ow = 2;
-                }
-                if (tcp != ocp) {
-                    int tu = Character.toUpperCase(tcp);
-                    int ou = Character.toUpperCase(ocp);
-                    if (tu != ou && Character.toLowerCase(tu) != Character.toLowerCase(ou)) return false;
-                }
-                if (tw != ow) return false;
-                t += tw;
-                o += ow;
-                remaining -= tw;
-            }
-            return true;
+            return M3StringMixedCompare.regionMatchesIgnoreCase(this, toffset, other, ooffset, len);
         }
         byte[] tv = value();
         byte[] ov = other.value();

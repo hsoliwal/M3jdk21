@@ -571,6 +571,20 @@ final class M3String implements CharSequence {
                 : owner.rangeFactsIfPrepared(value);
     }
 
+    /**
+     * Prepared facts of {@code [beginIndex, endIndex)} without allocating the range: the owner's
+     * facts for the whole owner, a recorded range fact otherwise, {@code null} when unprepared or
+     * empty. Never prepares anything.
+     */
+    M3StringFacts factsIfPrepared(int beginIndex, int endIndex) {
+        Objects.checkFromToIndex(beginIndex, endIndex, length());
+        int count = endIndex - beginIndex;
+        if (count == 0) return null;
+        int begin = start() + beginIndex;
+        if (begin == 0 && count == owner.length) return owner.factsIfPrepared();
+        return owner.rangeFactsIfPrepared(span(begin, count));
+    }
+
     private static final class CharsSpliterator implements Spliterator.OfInt {
         private final M3String source;
         private int index;
@@ -706,10 +720,7 @@ final class M3String implements CharSequence {
         } else if (other.length() != length()) {
             return false;
         }
-        for (int index = 0; index < length(); index++) {
-            if (charAt(index) != other.charAt(index)) return false;
-        }
-        return true;
+        return M3StringMixedCompare.unitsEqual(this, other);
     }
 
     void getChars(int sourceBegin, int sourceEnd, char[] destination, int destinationBegin) {
