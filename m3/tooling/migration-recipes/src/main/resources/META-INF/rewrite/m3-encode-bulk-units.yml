@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.EncodeBulkUnits
+displayName: M3JDK21 M3 Strings encoded from one bulk-read unit array
+description: >-
+  getBytes(charset) on an M3-backed String folded charAt per unit through owner dispatch wherever
+  the facts could not short-cut. M3String.units() reads every unit once in bulk and encodeUtf8,
+  encodeUtf8NoRepl and encodeSingleByte fold that array with their unchanged byte rules;
+  encodeWithEncoder and encodeWithEncoderNoRepl wrap it. The ASCII and Latin-1 single-byte paths
+  keep their bulk copy. Java step only: M3String and the jtreg proof. Stacks on crate
+  m3-m3-on-m3-compare (its postimage is this preimage).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-encode-bulk-units

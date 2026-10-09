@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.String.encodeUTF8 / encode8859_1 / encodeASCII array loops with the replacement '?' and the no-replacement refusal, jdk-21+35 in-tree",
+      "source_commit": "890adb6410",
+      "target": "java.lang.M3String.units(): every unit read once in bulk (A11 getChars); encodeUtf8, encodeUtf8NoRepl and encodeSingleByte fold that array with the unchanged byte rules; encodeWithEncoder and encodeWithEncoderNoRepl wrap it instead of the per-unit CharSequence",
+      "status": "implemented-locally-verified (G7; flag-off: M3StringEncodeBulkTest 18,279 checks byte-identical to flat over seven charsets, atoms/tuples/slices, surrogates; String.getBytesNoRepl same bytes and refusal class)",
+      "target_rule": "bytes identical to a flat String; the ASCII and Latin-1 single-byte paths keep their bulk copy"
+    }
+  ]
+}
