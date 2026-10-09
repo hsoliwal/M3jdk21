@@ -10,7 +10,7 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
   core/test/FoundationTest.java core/test/M3LexiconPrecomputeTest.java \
   core/test/SynexiaPrecomputePayloadTest.java core/test/SynexiaPrecomputeReceiverTest.java \
   core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SharedLexiconFamilyContractTest.java core/test/SynexiaSiUnitDecoderTest.java \
-  core/test/M3NumberSpaceTest.java core/test/M3NumberPrecomputeTest.java core/test/M3SiUnitPrecomputeCatalogTest.java core/test/SharedLexiconCatalogFamilyAdmissionTest.java
+  core/test/M3NumberSpaceTest.java core/test/M3NumberPrecomputeTest.java core/test/M3SiUnitPrecomputeCatalogTest.java \\n  core/test/M3TypedPrecomputeReceiverTest.java core/test/SharedLexiconCatalogFamilyAdmissionTest.java
 for mode in jit int nocompact c2; do
  flags=();case "$mode" in int)flags=(-Xint);; nocompact)flags=(-XX:-CompactStrings);; c2)flags=(-Xbatch -XX:-TieredCompilation);; esac
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests FoundationTest | tee "build/logs/test-$mode.log"
@@ -41,3 +41,4 @@ trap - EXIT
 printf '%s\n' "$image" > build/english-image-path.txt
 sha256sum build/com.m3.text.jar "$image" | tee build/logs/artifacts.sha256
 
+\n  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3TypedPrecomputeReceiverTest | tee "build/logs/synexia-typed-receiver-matrix-$mode.log"
