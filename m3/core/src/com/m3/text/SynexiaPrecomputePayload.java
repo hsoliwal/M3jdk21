@@ -256,8 +256,8 @@ public final class SynexiaPrecomputePayload {
         }
 
         private Field booleanValue() {
-            if (input.startsWith("true", at)) { at += 4; return new Field(Kind.BOOLEAN, true, 0L, 0.0d, null); }
-            if (input.startsWith("false", at)) { at += 5; return new Field(Kind.BOOLEAN, false, 0L, 0.0d, null); }
+            if (input.startsWith("true", at)) { at += 4; return new Field(Kind.BOOLEAN, true, 0L, 0.0d, null, null); }
+            if (input.startsWith("false", at)) { at += 5; return new Field(Kind.BOOLEAN, false, 0L, 0.0d, null, null); }
             throw error("invalid boolean");
         }
 
@@ -277,10 +277,10 @@ public final class SynexiaPrecomputePayload {
                 try {
                     double value = Double.parseDouble(token);
                     if (!Double.isFinite(value)) throw error("non-finite number");
-                    return new Field(Kind.DECIMAL, false, 0L, value, null);
+                    return new Field(Kind.DECIMAL, false, 0L, value, null, null);
                 } catch (NumberFormatException failure) { throw error("invalid number"); }
             }
-            try { return new Field(Kind.INTEGER, false, Long.parseLong(token), 0.0d, null); }
+            try { return new Field(Kind.INTEGER, false, Long.parseLong(token), 0.0d, null, null); }
             catch (NumberFormatException failure) { throw error("integer outside long range"); }
         }
 
@@ -299,7 +299,7 @@ public final class SynexiaPrecomputePayload {
             }
             long[] result = new long[values.size()];
             for (int index = 0; index < result.length; index++) result[index] = values.get(index);
-            return new Field(Kind.INTEGER_ARRAY, false, 0L, 0.0d, result);
+            return new Field(Kind.INTEGER_ARRAY, false, 0L, 0.0d, null, result);
         }
 
         private void validate(String name, Field field) {
