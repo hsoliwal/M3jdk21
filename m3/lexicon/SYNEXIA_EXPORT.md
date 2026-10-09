@@ -119,7 +119,8 @@ The output is:
   when available, the canonical precompute field-type map and its SHA-256.
 
 `com.m3.text.SharedLexiconCatalog.open(exportDirectory)` validates the shard
-manifest and all four sidecars together. It exposes stable
+manifest and all four legacy sidecars together, plus the complete typed family
+bundle when it is present. It exposes stable
 `(shardId,imageRow)` coordinates, one-to-many source mappings and immutable
 precompute facts plus the complete profile catalog without joining image
 payloads. `textAt` is the explicit single-record materialization boundary;
