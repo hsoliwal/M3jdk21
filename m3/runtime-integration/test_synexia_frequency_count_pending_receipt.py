@@ -18,7 +18,7 @@ class SynexiaFrequencyCountPendingReceiptTest(unittest.TestCase):
         checks = inspect_source(_HERE.parents[2])
         self.assertTrue(all(check.passed for check in checks), receipt_line(checks))
         self.assertEqual(
-            "M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=26/26",
+            "M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=27/27",
             receipt_line(checks),
         )
 
