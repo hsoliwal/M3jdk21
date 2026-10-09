@@ -1,0 +1,88 @@
+{
+  "schema": "M3JDK21_SYNEXIA_MIXED_CODER_COMPARE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-mixed-coder-compare-20261009",
+    "pullRequest": null,
+    "commit": "2013eedcfb7830a967ea0d4385a351e872d624bd",
+    "stackedOn": [
+      {
+        "pullRequest": 10059,
+        "crate": "m3-contentequals-bulk"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.MixedCoderCompare",
+    "crate": "m3-mixed-coder-compare",
+    "fossReuseDecisionRow": "string.compare.cross-coder-in-place",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/StringLatin1.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringAtom.mismatchWideAgainstLatin1",
+        "mechanics": "the inflate(byte[], int, byte[], int, int) intrinsic widening each Latin-1 flat window"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringUTF16.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringAtom.mismatchNarrowAgainstUtf16",
+        "mechanics": "the compress intrinsic narrowing each UTF-16 flat window (zero when a unit above 0xff is present)"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringAtom.java",
+        "commit": "702513fb85",
+        "target": "java.lang.M3StringAtom.mismatchUnits",
+        "mechanics": "the A12 mismatchBytes native-against-heap vectorized mismatch, now fed the converted flat window"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: the same mismatch index as the per-unit loop; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-contentequals-bulk-20261009 (#608, A29) on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringAtom"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3StringAtom.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringAtom.java",
+      "before": "771072177021392542e9d5a1fc576c6bdab169d6410bdd24585d9d2932e090bc",
+      "after": "c295351793b0bbbdee165e8133bda373f16aa57c0edc60a56634eb56b4d1a29f",
+      "resource": "00-M3StringAtom.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3MixedCoderCompareTest.java",
+      "before": "ABSENT",
+      "after": "51805b4077affdcafd3ca1c7bf3689b10bcdb3aac92f39c2cb825ab48f0214bb",
+      "resource": "01-M3MixedCoderCompareTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3MixedCoderCompareTest flag-off: 30,620 checks (equals, compareTo, startsWith, endsWith, regionMatches and contentEquals both ways; a wide-owner slice and a tuple with a wide piece holding Latin-1 text against Latin-1 Strings; Latin-1 atoms, tuples and slices against UTF-16 Strings prefix-equal or with a wide unit at a random place, the first or last unit or the 64/2048/4096/8192-unit window edges; differences at every window edge; same-coder shapes included; 0..20000 units; against the flat Strings)",
+    "regressions": "PASS_WINDOWS M3ContentEqualsTest 7,980; M3IgnoreCaseWindowsTest 188,512; M3IndexOfFlatNeedleTest 137,948; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3NeedleArgTest 73,440; M3RegexSubjectViewTest 9,567; M3TQFactsBuildTest 23,595; M3RegexLiteralGateTest 29,376; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,925; A6 204 + 29",
+    "timing": "flag-off (a30/probe/PlainCompareBench, bench-baseline.tsv on the A29 build vs bench-after.tsv; flat in parentheses): equals(Latin-1 flat) of a wide-owner slice 2048 units 578 ns -> 346 (41), 16384: 3,805 -> 1,570 (298), 65536: 17,492 -> 5,558 (1,715); compareTo(Latin-1 flat) of a wide-owner slice 16384: 4,241 -> 1,564 (251); compareTo(UTF-16 flat) of a Latin-1 atom 2048: 608 -> 151 (78), 16384: 4,539 -> 1,135 (532), 65536: 20,048 -> 4,556 (2,630), tuples alike; startsWith(Latin-1 half) of a UTF-16 atom 16384: 2,022 -> 713 (1,293, the stock mixed loop), 65536: 8,230 -> 2,666 (5,351); same-coder rows within noise",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3StringAtom.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3MixedCoderCompareRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3MixedCoderCompareTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the flat side is converted, never the native side: the storage stays untouched and is compared in place by the A12 vectorized mismatch",
+    "a UTF-16 flat window that compress refuses (a unit above 0xff) is compared per unit: such a unit never equals a Latin-1 storage byte, so the loop ends at or before it",
+    "UTF-16 storage in foreign byte order and counts below 64 units keep the M3StringOwner window loop",
+    "the remaining distance to flat is the UTF-16 in-place vectorized compare itself (the 1.6x the same-coder UTF-16 rows carry) plus the inflate",
+    "stacked on A29: merge after #608 and the Synexia crate PR (#10059 first, content-bearing merges); the owner commit is 1644e0aaed"
+  ]
+}

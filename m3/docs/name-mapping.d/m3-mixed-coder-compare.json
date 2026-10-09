@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.M3StringAtom.mismatchUnits against a flat value of the other coder (UTF-16 storage vs a Latin-1 value, Latin-1 storage vs a UTF-16 value): the M3StringOwner window loop, one unit at a time (A12 lineage, carried to A29 702513fb85)",
+      "source_commit": "702513fb85",
+      "target": "from 64 units the flat window is brought into the storage coder by the stock inflate (Latin-1 flat window for UTF-16 storage in native byte order) or compress (UTF-16 flat window for Latin-1 storage) intrinsic and compared in place by mismatchBytes; a UTF-16 flat window holding a unit above 0xff keeps the per-unit loop for that window",
+      "status": "implemented-locally-verified (G7; flag-off: M3MixedCoderCompareTest 30,620 checks against the flat Strings; cross-coder equals/compareTo 2.4x..4x faster from 2048 units, a UTF-16 receiver with a Latin-1 prefix now under the stock mixed loop)",
+      "target_rule": "the same mismatch index as the per-unit loop"
+    }
+  ]
+}

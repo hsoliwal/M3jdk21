@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.MixedCoderCompare
+displayName: M3JDK21 cross-coder compares in place through the inflate and compress intrinsics
+description: >-
+  M3StringAtom.mismatchUnits against a flat value of the other coder (a UTF-16-coded range holding
+  Latin-1 text against a Latin-1 String, a Latin-1 range against a UTF-16 String) fell to the
+  per-unit window loop: equals and compareTo over 16384 units 3.8 us / 4.5 us against 0.3 / 0.5
+  flat, 10x..13x. The flat window is now brought into the storage coder by the stock inflate or
+  compress intrinsic and compared in place by the vectorized mismatch; a flat UTF-16 window
+  holding a unit above 0xff keeps the per-unit loop for that window; copies below 64 units keep
+  the loop. Java step: M3StringAtom and the jtreg proof; no upstream file changed. Stacks on crate
+  m3-contentequals-bulk (branch order); the M3StringAtom preimage is the m3-ignorecase-windows
+  (A28) postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-mixed-coder-compare
