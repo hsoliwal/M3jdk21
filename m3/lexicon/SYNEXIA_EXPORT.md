@@ -84,7 +84,7 @@ python3 m3/runtime-integration/export-synexia-lexicon.py \
   --source-commit 3e85c872adf556901a341a9eb1c3b59864918da1 \
   --relations /operator/synexia-snapshot/related.tsv \
   --relation-policy gutenberg-antonyms-v1 \
-  --family-sidecars /operator/synexia-snapshot/family-sidecars
+  --family-sidecar-dir /operator/synexia-snapshot/family-sidecars
 ```
 
 The output is:
