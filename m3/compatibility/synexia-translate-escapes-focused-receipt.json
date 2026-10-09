@@ -1,0 +1,60 @@
+{
+  "schema": "M3JDK21_SYNEXIA_TRANSLATE_ESCAPES_FOCUSED_RECEIVER_V1",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 9937,
+    "branch": "codex/m3-translate-escapes-focused-20261009",
+    "commit": "bcb64c72f7b7fb23b7a2c74c08742257923288c2",
+    "recipe": "com.synexia.m3.TranslateEscapesCanonical",
+    "crate": "m3-translate-escapes",
+    "donor": {
+      "pullRequest": 7659,
+      "owner": "MIndexString.translateEscapes"
+    },
+    "exactTargetHistory": [
+      {
+        "commit": "ba95cfcbbc70c7307946ba1e34e0775df72da7fc",
+        "parent": "30796c815b61fee72903e266d07a1c05fb8a3e2a",
+        "owner": "java.lang.M3String"
+      },
+      {
+        "commit": "6e4a09092515b26cc41dd208a7615718f3e6084d",
+        "parent": "ba95cfcbbc70c7307946ba1e34e0775df72da7fc",
+        "owner": "java.lang.String"
+      }
+    ]
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "branch": "m3/translate-escapes-focused-receiver-20261009",
+    "stackedOn": {
+      "pullRequest": 503,
+      "branch": "m3/literal-regex-focused-receiver-20261009",
+      "commit": "3efaa10a4cbb3f1e780bc848559691f7cb5ca541"
+    },
+    "runtimeOwners": [
+      "java.lang.String",
+      "java.lang.M3String",
+      "java.lang.M3StringPool"
+    ],
+    "checker": "m3/runtime-integration/check-m3string-translate-escapes-focused.py",
+    "differential": "test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java",
+    "workflow": ".github/workflows/mindex-string-backing.yml"
+  },
+  "disposition": "CURRENT_SUPERSET_OF_EXACT_TWO_STEP_TRANSLATE_ESCAPES_TRANSITION",
+  "runtimeDependencyOnSynexia": false,
+  "targetLocalFocusedRecipe": false,
+  "semanticBoundary": [
+    "standard JDK21 escape syntax and bounded octal rules",
+    "LF/CR/CRLF escape continuation semantics",
+    "invalid escape diagnostics preserved",
+    "M3 source is scanned by owner coordinates and composed from unchanged ranges plus canonical unit atoms",
+    "non-M3 Strings retain the stock char[] fallback"
+  ],
+  "evidence": {
+    "focusedRecipe": "AUTHORED_SYNEXIA_PR_9937",
+    "currentSourceSupersetChecker": "AUTHORED",
+    "currentDifferentialSelectedByWorkflow": true,
+    "currentMatchedImageQualification": "PENDING_EXECUTION"
+  }
+}
