@@ -101,3 +101,7 @@ Regenerated against 13f7351705: the upstream `AbstractStringBuilder.java` after-
 ## 2026-10-09 re-seal (A23 range hash without facts)
 
 Regenerated against 8a4091fcdc: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3String.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-09 re-seal (A24 one-field consumers from bulk lanes)
+
+Regenerated against 68775c6e7d: the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); the M3-owned `M3String.java` and `M3StringCodePointPrecompute.java` keep their v2 after-images and record the new owner as reviewed `superseded` hashes. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
