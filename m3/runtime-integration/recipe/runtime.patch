@@ -3969,6 +3969,99 @@ index 0000000000000000000000000000000000000000..763a76fb55a52576ca1a3edc48fcc214
 +        return value >= 'A' && value <= 'Z' ? (char) (value + ('a' - 'A')) : value;
 +    }
 +}
+diff --git a/src/java.base/share/classes/java/lang/M3StringMatchText.java b/src/java.base/share/classes/java/lang/M3StringMatchText.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..e0250c833bbf01433fff4f5536ea6c85f07bfa34
+--- /dev/null
++++ b/src/java.base/share/classes/java/lang/M3StringMatchText.java
+@@ -0,0 +1,87 @@
++/*
++ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
++ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++ *
++ * This code is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License version 2 only, as
++ * published by the Free Software Foundation.  Oracle designates this
++ * particular file as subject to the "Classpath" exception as provided
++ * by Oracle in the LICENSE file that accompanied this code.
++ *
++ * This code is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
++ * version 2 for more details (a copy is included in the LICENSE file that
++ * accompanied this code).
++ *
++ * You should have received a copy of the GNU General Public License version
++ * 2 along with this work; if not, write to the Free Software Foundation,
++ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
++ */
++
++package java.lang;
++
++/**
++ * The view a regex matcher reads while matching an M3-backed String (A20). The units are read
++ * from the storage into blocks of {@link #BLOCK} units, each allocated and filled on first touch,
++ * so the engine's per-unit reads are array loads instead of owner dispatch, an early failure
++ * pays one block, and the String itself stays the source of every subsequence the matcher hands
++ * out. Transient per matcher; a String above {@link #MAX_UNITS} units has no view.
++ */
++final class M3StringMatchText implements CharSequence {
++
++    /** Above this many units the matcher reads the String directly (the block table alone would be 64 KiB). */
++    static final int MAX_UNITS = 1 << 24;
++    private static final int BLOCK_SHIFT = 10;
++    private static final int BLOCK = 1 << BLOCK_SHIFT;
++    private static final int BLOCK_MASK = BLOCK - 1;
++
++    private final M3String storage;
++    private final int length;
++    private final char[][] blocks;
++
++    private M3StringMatchText(M3String storage) {
++        this.storage = storage;
++        this.length = storage.length();
++        this.blocks = new char[(length + BLOCK_MASK) >>> BLOCK_SHIFT][];
++    }
++
++    /** The view of an M3-backed String, or {@code null} for a flat String or one above the cap. */
++    static CharSequence of(String subject) {
++        M3String storage = subject.m3();
++        return storage == null || storage.length() > MAX_UNITS ? null : new M3StringMatchText(storage);
++    }
++
++    @Override
++    public int length() {
++        return length;
++    }
++
++    @Override
++    public char charAt(int index) {
++        char[] block = blocks[index >>> BLOCK_SHIFT];
++        if (block == null) block = fill(index >>> BLOCK_SHIFT);
++        return block[index & BLOCK_MASK];
++    }
++
++    private char[] fill(int index) {
++        int from = index << BLOCK_SHIFT;
++        int to = Math.min(length, from + BLOCK);
++        char[] block = new char[to - from];
++        storage.getChars(from, to, block, 0);
++        blocks[index] = block;
++        return block;
++    }
++
++    @Override
++    public CharSequence subSequence(int start, int end) {
++        return toString().substring(start, end);
++    }
++
++    @Override
++    public String toString() {
++        char[] units = new char[length];
++        storage.getChars(0, length, units, 0);
++        return new String(units);
++    }
++}
 diff --git a/src/java.base/share/classes/java/lang/M3StringMixedCompare.java b/src/java.base/share/classes/java/lang/M3StringMixedCompare.java
 new file mode 100644
 index 0000000000000000000000000000000000000000..7b1434b969a69d320a72d9e0607d31eb8e8ddaa2
@@ -8455,7 +8548,7 @@ index 139181af0963efe5caaa25a03960d30e14b65c41..b6a5ac36d90a0648c2653977ee807799
       * Produce a String from a concatenation of single argument, which we
       * end up using for trivial concatenations like {@code "" + arg}.
 diff --git a/src/java.base/share/classes/java/lang/System.java b/src/java.base/share/classes/java/lang/System.java
-index 9d9dbf886e6b3fcc61ad5371c662b15a8be52193..7fab839c05e34eb33b8931c93f61495e776cd500 100644
+index 9d9dbf886e6b3fcc61ad5371c662b15a8be52193..43fe9e3dd61e7bb884b76f4be2296f79ccef3262 100644
 --- a/src/java.base/share/classes/java/lang/System.java
 +++ b/src/java.base/share/classes/java/lang/System.java
 @@ -68,6 +68,7 @@ import java.util.function.Supplier;
@@ -8480,7 +8573,7 @@ index 9d9dbf886e6b3fcc61ad5371c662b15a8be52193..7fab839c05e34eb33b8931c93f61495e
          return 0; // JNI_OK
      }
  
-@@ -2526,6 +2534,14 @@ public final class System {
+@@ -2526,6 +2534,18 @@ public final class System {
                  return StringConcatHelper.mix(lengthCoder, constant);
              }
  
@@ -8490,6 +8583,10 @@ index 9d9dbf886e6b3fcc61ad5371c662b15a8be52193..7fab839c05e34eb33b8931c93f61495e
 +
 +            public M3TQ.Facts m3TrigramFacts(String text) {
 +                return M3StringSearchPrecompute.trigramFacts(text);
++            }
++
++            public CharSequence m3MatchText(String text) {
++                return M3StringMatchText.of(text);
 +            }
 +
              @PreviewFeature(feature=PreviewFeature.Feature.STRING_TEMPLATES)
@@ -8808,7 +8905,7 @@ index 0000000000000000000000000000000000000000..7a13107628460134548a02095ca59854
 +    }
 +}
 diff --git a/src/java.base/share/classes/java/util/regex/Matcher.java b/src/java.base/share/classes/java/util/regex/Matcher.java
-index 54fe63c4f4ba41306253998fd96ebff46080d236..2a18b1d6d6f5c22f83152bdd31f05683a25c59c2 100644
+index 54fe63c4f4ba41306253998fd96ebff46080d236..0041167013d14323c3607cb3eb1342717c74cfcd 100644
 --- a/src/java.base/share/classes/java/util/regex/Matcher.java
 +++ b/src/java.base/share/classes/java/util/regex/Matcher.java
 @@ -38,6 +38,10 @@ import java.util.function.Function;
@@ -8822,7 +8919,30 @@ index 54fe63c4f4ba41306253998fd96ebff46080d236..2a18b1d6d6f5c22f83152bdd31f05683
  /**
   * An engine that performs match operations on a {@linkplain
   * java.lang.CharSequence character sequence} by interpreting a {@link Pattern}.
-@@ -1722,6 +1726,20 @@ public final class Matcher implements MatchResult {
+@@ -144,6 +148,14 @@ public final class Matcher implements MatchResult {
+      */
+     CharSequence text;
+ 
++    /**
++     * What the nodes read while matching: the text itself, or for an M3-backed String a view
++     * whose units are read in blocks into one array (A20), so per-unit reads are array loads.
++     * Subsequences, appends and every observable come from {@link #text}; the view is rebuilt
++     * when the text changes.
++     */
++    private CharSequence subject;
++
+     /**
+      * Matcher state used by the last node. NOANCHOR is used when a
+      * match does not have to consume all of the input. ENDANCHOR is
+@@ -449,6 +461,7 @@ public final class Matcher implements MatchResult {
+      * @return  This matcher
+      */
+     public Matcher reset(CharSequence input) {
++        if (input != text) subject = null;
+         text = input;
+         return reset();
+     }
+@@ -1722,6 +1735,20 @@ public final class Matcher implements MatchResult {
       * calls to the search methods start at a new "soft" boundary which is
       * the end of the previous match.
       */
@@ -8843,10 +8963,11 @@ index 54fe63c4f4ba41306253998fd96ebff46080d236..2a18b1d6d6f5c22f83152bdd31f05683
      boolean search(int from) {
          this.hitEnd = false;
          this.requireEnd = false;
-@@ -1735,6 +1753,15 @@ public final class Matcher implements MatchResult {
+@@ -1735,7 +1762,16 @@ public final class Matcher implements MatchResult {
                  localsPos[i].clear();
          }
          acceptMode = NOANCHOR;
+-        boolean result = parentPattern.root.match(this, from, text);
 +        if (!m3TqAllowsSearch()) {
 +            // Literal Start/BnM search reaches the end on failure. Preserve the observable
 +            // Matcher state while skipping the exact engine only when absence is proven.
@@ -8856,9 +8977,37 @@ index 54fe63c4f4ba41306253998fd96ebff46080d236..2a18b1d6d6f5c22f83152bdd31f05683
 +            this.modCount++;
 +            return false;
 +        }
-         boolean result = parentPattern.root.match(this, from, text);
++        boolean result = parentPattern.root.match(this, from, subject());
          if (!result)
              this.first = -1;
+         this.oldLast = this.last;
+@@ -1762,7 +1798,7 @@ public final class Matcher implements MatchResult {
+                 localsPos[i].clear();
+         }
+         acceptMode = anchor;
+-        boolean result = parentPattern.matchRoot.match(this, from, text);
++        boolean result = parentPattern.matchRoot.match(this, from, subject());
+         if (!result)
+             this.first = -1;
+         this.oldLast = this.last;
+@@ -1770,6 +1806,17 @@ public final class Matcher implements MatchResult {
+         return result;
+     }
+ 
++    private CharSequence subject() {
++        CharSequence view = subject;
++        if (view == null) {
++            JavaLangAccess access = SharedSecrets.getJavaLangAccess();
++            view = text instanceof String string && access != null ? access.m3MatchText(string) : null;
++            if (view == null) view = text;
++            subject = view;
++        }
++        return view;
++    }
++
+     /**
+      * Returns the end index of the text.
+      *
 diff --git a/src/java.base/share/classes/java/util/regex/Pattern.java b/src/java.base/share/classes/java/util/regex/Pattern.java
 index 45c48ddab542f4f0b31884de84ffd862a29519f1..ee1c1951a7498c191810bc1901fff48972cddd53 100644
 --- a/src/java.base/share/classes/java/util/regex/Pattern.java
@@ -8925,7 +9074,7 @@ index 45c48ddab542f4f0b31884de84ffd862a29519f1..ee1c1951a7498c191810bc1901fff489
          // is no group ref in this pattern. With a non-negative localTCNCount value,
          // the greedy type Loop, Curly will skip the backtracking for any starting
 diff --git a/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java b/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java
-index babc1940e78358082bd2231f5516d3265d3145e2..5bfdc0ebd20f27e1e89e4a80083943162e2045f0 100644
+index babc1940e78358082bd2231f5516d3265d3145e2..4b037adc9f14a32ed9b63618485553abfcfb29db 100644
 --- a/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java
 +++ b/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java
 @@ -49,6 +49,7 @@ import jdk.internal.javac.PreviewFeature;
@@ -8936,7 +9085,7 @@ index babc1940e78358082bd2231f5516d3265d3145e2..5bfdc0ebd20f27e1e89e4a8008394316
  import jdk.internal.vm.Continuation;
  import jdk.internal.vm.ContinuationScope;
  import jdk.internal.vm.StackableScope;
-@@ -421,6 +422,20 @@ public interface JavaLangAccess {
+@@ -421,6 +422,27 @@ public interface JavaLangAccess {
       */
      long stringConcatMix(long lengthCoder, String constant);
  
@@ -8953,6 +9102,13 @@ index babc1940e78358082bd2231f5516d3265d3145e2..5bfdc0ebd20f27e1e89e4a8008394316
 +     * the caller then runs its exact search.
 +     */
 +    M3TQ.Facts m3TrigramFacts(String text);
++
++    /**
++     * Returns a view of an M3-backed String for a regex matcher to read while matching (units
++     * read from the storage in blocks into one array), or {@code null} for a flat String or one
++     * above the view's size cap; the caller then reads the String itself.
++     */
++    CharSequence m3MatchText(String text);
 +
     /**
      * Get the coder for the supplied character.
