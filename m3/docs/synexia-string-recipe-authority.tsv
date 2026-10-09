@@ -22,3 +22,19 @@ executable_verifier_pr	hsoliwal/com.synexia#9524
 authority_source_lock_path	synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006/source-lock.json
 authority_source_lock_commit	5fb52a051fa0e2722c2f69f2e22ac7f330c91ce2
 authority_source_lock_blob	0230b1a0864266d9243c161f7541c01492c9626e
+current_recipe_id	synexia.m3jdk.string.a21-current.20261009
+current_authority_repo	hsoliwal/com.synexia
+current_authority_path	synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-string-a21-current-convergence.yml
+current_authority_tracking_ref	refs/heads/m3/m3jdk21-string-a21-current-aggregate-20261009
+current_authority_pr	hsoliwal/com.synexia#10011
+current_authority_commit	d8193d921353e803a0755ac51ad54d8d27a202bd
+current_authority_blob	08c590bcec7e49ce676e2c0da74213c8b78ca84e
+current_portable_recipe	com.synexia.m3.M3Jdk21StringA21CurrentConvergence
+current_target_pr	hsoliwal/M3jdk21#563
+current_target_branch	m3/precompute-builder-m3-args-20261009
+current_target_revision	0aed554123226ce9263e3f24ab646b312fc73b8f
+current_stack_role	ACTIVE_A21_AGGREGATE
+current_runtime_owner	M3JDK
+current_recipe_owner	Synexia
+current_runtime_dependency_on_synexia	false
+current_parallel_branch_rule	A14 and parallel Latin1 experiments require explicit successor admission
