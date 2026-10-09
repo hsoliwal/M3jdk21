@@ -62,7 +62,12 @@ public final class AcronymSidecarCatalogTest {
         if (!condition) throw new AssertionError(message);
     }
 
-    @FunctionalInterface\n    private interface ThrowingSupplier {\n        Object get() throws Exception;\n    }\n\n    private static void expectIllegal(ThrowingSupplier action, String message) {
+    @FunctionalInterface
+    private interface ThrowingSupplier {
+        Object get() throws Exception;
+    }
+
+    private static void expectIllegal(ThrowingSupplier action, String message) {
         try {
             action.get();
             throw new AssertionError(message + " accepted");
