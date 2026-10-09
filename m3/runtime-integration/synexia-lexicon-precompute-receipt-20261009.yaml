@@ -1,0 +1,42 @@
+schema: m3-recipe/v1
+id: synexia-lexicon-precompute-receipt-20261009
+pattern: pinned-cross-repository-lexicon-precompute-receipt
+purpose: Bind the M3JDK lexicon and precompute manifests to exact Synexia mapping documents and source blobs without copying lexical payloads into java.lang.String.
+
+inputs:
+  - donor_receipt: m3/lexicon/synexia-lexicon-precompute-receipt.tsv
+  - synexia_mapping: cognix-nlp/docs/SYNEXIA_TO_M3JDK_MAPPING.tsv
+  - synexia_typed_extension: cognix-nlp/docs/SYNEXIA_TO_M3JDK_TYPED_PRECOMPUTE_EXTENSION.tsv
+  - synexia_pending_contract: cognix-nlp/docs/SYNEXIA_TO_M3JDK_PENDING_TARGET_CONTRACT.tsv
+  - m3_source_manifest: m3/lexicon/synexia-source-manifest.tsv
+  - m3_precompute_map: m3/lexicon/synexia-precompute-field-map.tsv
+
+phases:
+  - SEARCH: pin Synexia commit, path, and blob before accepting every mapping surface.
+  - INVENTORY: retain capability, source role, M3 target, status, and preservation rule.
+  - CLASSIFY: ADAPT_COMPOSE; reuse existing M3 lexicon/precompute manifests and target contracts.
+  - TRANSFORM: preserve dictionary, frequency, LangDex, translation, grammar, SI, acronym, number, related-lexeme, phrase, spell, hash, prefix, and token-frequency mappings.
+  - FILTER: reject stale fingerprints, scope-free caches, lexical payloads inside java.lang.String, and candidate signals treated as semantic proof.
+  - PROVE: run the source discriminator and replay test; runtime, JNI, benchmark, and dataset materialization remain separate.
+  - CHECKPOINT: link the receipt to the Synexia mapping PR and donor-gap PR.
+
+invariants:
+  - Every receipt row uses donor commit c6d128572825cc11f4bbb05d78bcbebb5b3aa67a.
+  - The M3JDK source manifest retains ten mapped source families.
+  - The M3JDK precompute map retains 56 MAPPED field rows.
+  - Translation, spell, hash, prefix, and frequency projections remain scope-keyed and fingerprint-guarded.
+  - Lexicon payloads and semantic metadata remain caller-owned; no lexical payload is added to java.lang.String.
+  - Proper-noun, title, and Rapidex donor gaps remain explicit and are not fabricated.
+  - No public M3String ABI or persisted image format changes.
+
+verification:
+  source_discriminator_command: python m3/runtime-integration/check-synexia-lexicon-precompute-receipt.py --repo-root .
+  source_discriminator: M3_LEXICON_PRECOMPUTE_RECEIPT_SOURCE_PASS checks=35/35|runtime=NOT_RUN
+  runtime: NOT_RUN
+  jni: NOT_RUN
+  benchmark: NOT_MEASURED
+  hosted_ci: NOT_CLAIMED
+
+storage:
+  hosted_artifact_limit: 512MiB
+  minimum_free_after_output: 8GiB
