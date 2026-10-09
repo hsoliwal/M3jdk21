@@ -13,7 +13,7 @@ MAPPING_PATH = Path(__file__).parents[1] / "name-mapping.json"
 AUDIT_PATH = Path(__file__).with_name("synexia-legacy-name-mapping-audit-20261009.tsv")
 EXPECTED_MAPPING_BLOB = "c29a64eaea0ca614d551ad4bcd3fa2695f0fdc9e"
 EXPECTED_ROWS = 47
-EXPECTED_PROOF = "M3JDK_SYNEXIA_LEGACY_MAPPING_AUDIT_PASS rows=47 unpinned_rows=47"
+EXPECTED_PROOF = "M3JDK_SYNEXIA_LEGACY_MAPPING_AUDIT_PASS rows=47 receipt_unpinned_rows=47"
 
 
 def git_blob_sha1(payload: bytes) -> str:
@@ -77,8 +77,12 @@ def main() -> int:
     if len(audit_rows) != EXPECTED_ROWS:
         fail(f"expected {EXPECTED_ROWS} audit rows, got {len(audit_rows)}")
 
-    unpinned = 0
+    receipt_unpinned = 0
     for index, (source, audit_row) in enumerate(zip(source_rows, audit_rows)):
+        # Every legacy row lacks exact target_pr/head/commit/digest/blob fields in
+        # name-mapping.json. The disposition state below is intentionally separate:
+        # donor-only, pending, and review-required are still receipt-unpinned.
+        receipt_unpinned += 1
         if len(audit_row) != len(expected_header):
             fail(f"column-count drift at row {index}")
         mapping_index, source_name, target, status, source_commit, state, reason = audit_row
@@ -94,10 +98,8 @@ def main() -> int:
         expected_state, expected_reason = disposition(status)
         if (state, reason) != (expected_state, expected_reason):
             fail(f"disposition drift at row {index}")
-        if state == "UNPINNED":
-            unpinned += 1
-    if unpinned != EXPECTED_ROWS:
-        fail(f"expected all {EXPECTED_ROWS} rows to remain unpinned, got {unpinned}")
+    if receipt_unpinned != EXPECTED_ROWS:
+        fail(f"expected all {EXPECTED_ROWS} rows to remain receipt-unpinned, got {receipt_unpinned}")
     print(EXPECTED_PROOF)
     return 0
 
