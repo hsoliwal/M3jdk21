@@ -42,7 +42,10 @@ class RecipeTest(unittest.TestCase):
             if hashes["before"] is None:
                 self.assertTrue(superseded, name)
             else:
-                self.assertFalse(superseded, name)
+                # A known current-tree fixed point may supersede the upstream
+                # preimage; unknown or colliding hashes remain invalid.
+                self.assertNotIn(hashes["before"], superseded, name)
+                self.assertNotIn(hashes["after"], superseded, name)
 
     def test_current_tree_is_exact_superseded_fixed_point(self):
         with tempfile.TemporaryDirectory() as folder:
