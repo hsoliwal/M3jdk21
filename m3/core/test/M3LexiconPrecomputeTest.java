@@ -12,7 +12,7 @@ import java.util.Map;
 public final class M3LexiconPrecomputeTest {
     private static int checks;
     private static final String SOURCE_REVISION =
-            "60f4e01eb6fbc353016e5bdd5a49621d93228657";
+            "64a2ea61c73b548413fed6686a9daeeb0b9b0564";
 
     private static void check(boolean value) {
         checks++;
