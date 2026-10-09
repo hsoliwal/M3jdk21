@@ -37,7 +37,7 @@ public final class M3NumberPrecomputeTest {
                 .number(zeroKey, zero)
                 .build();
         check(catalog.numberAt(zeroKey).orElseThrow() == zero);
-        expect(IllegalArgumentException.class, () -> catalog.numberAt(
+        expect(java.util.NoSuchElementException.class, () -> catalog.numberAt(
                 new SharedLexiconPrecomputeCatalog.NumberIdentity(
                         M3NumberSpace.SOURCE_ID, "number", 1, "hi"))
                 .orElseThrow());
