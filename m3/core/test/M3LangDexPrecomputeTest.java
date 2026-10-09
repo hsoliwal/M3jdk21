@@ -5,9 +5,13 @@
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import com.m3.text.InternDomainV1;
 import com.m3.text.M3LangDexPrecompute;
 import com.m3.text.SharedLangDexPrecomputeCatalog;
 
@@ -18,6 +22,26 @@ public final class M3LangDexPrecomputeTest {
     private static void check(boolean condition) {
         checks++;
         if (!condition) throw new AssertionError("check " + checks);
+    }
+
+    private static String digest(byte[] bytes) {
+        try {
+            return HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256").digest(bytes));
+        } catch (NoSuchAlgorithmException failure) {
+            throw new AssertionError(failure);
+        }
+    }
+
+    private static M3LangDexPrecompute.Identity identity(
+            String sourceId, String recordId, String glottocode,
+            String surface, String sourceRevision) {
+        byte[] canonical = (sourceId + "\u0000" + recordId + "\u0000"
+                + glottocode + "\u0000" + surface).getBytes(StandardCharsets.UTF_8);
+        return new M3LangDexPrecompute.Identity(
+                sourceId, recordId, glottocode, surface, sourceRevision,
+                InternDomainV1.CONCEPT, "synexia-canonical-v2",
+                canonical, digest(canonical));
     }
 
     private static void expect(Class<? extends Throwable> type, Runnable body) {
@@ -79,6 +103,9 @@ public final class M3LangDexPrecomputeTest {
         Map<String, Set<String>> fieldMap = parseFieldMap(Files.readString(
                 Path.of("lexicon/synexia-precompute-field-map.tsv"),
                 StandardCharsets.UTF_8));
+        check(fieldMap.get("M3LangDexPrecompute.Identity").equals(Set.of(
+                "sourceId", "recordId", "glottocode", "surface", "sourceRevision",
+                "domain", "canonicalSchema", "canonicalBytes", "canonicalDigest")));
         check(fieldMap.get("M3LangDexPrecompute.Entry").equals(
                 Set.of("conceptId", "frequency", "flags")));
         check(fieldMap.get("M3LangDexPrecompute.WordProfile").equals(Set.of(
@@ -88,11 +115,9 @@ public final class M3LangDexPrecomputeTest {
                 "lexicalClassMask", "featureBits", "evidenceMask", "confidencePermille")));
         check(fieldMap.get("M3LangDexPrecompute.Translation").equals(Set.of("targetLexemeId")));
 
-        M3LangDexPrecompute.Identity identity = new M3LangDexPrecompute.Identity(
-                "unicodex.langdex.lexemes", "lexeme-7", "ENG", "Color", "langdex-r1");
+        M3LangDexPrecompute.Identity identity = identity("unicodex.langdex.lexemes", "lexeme-7", "ENG", "Color", "langdex-r1");
         M3LangDexPrecompute.Identity huggingFaceIdentity =
-                new M3LangDexPrecompute.Identity(
-                        "dictlang.huggingface", "dataset-7", "ENG", "Color", "hf-r1");
+                identity("dictlang.huggingface", "dataset-7", "ENG", "Color", "hf-r1");
         M3LangDexPrecompute.Entry entry = new M3LangDexPrecompute.Entry(
                 "eng", "Color", 7L, 42L, 0x10, "colour");
         M3LangDexPrecompute.WordProfile profile =
@@ -114,12 +139,22 @@ public final class M3LangDexPrecomputeTest {
                 && catalog.wordProfileCount() == 1
                 && catalog.lexicalProfileCount() == 1
                 && catalog.translationCount() == 1);
+        check(identity.domain() == InternDomainV1.CONCEPT);
+        check(identity.canonicalSchema().equals("synexia-canonical-v2"));
+        check(identity.canonicalDigest().equals(digest(identity.canonicalBytes())));
+        byte[] copied = identity.canonicalBytes();
+        copied[0] ^= 1;
+        check(identity.canonicalBytes()[0] != copied[0]);
         check(catalog.entryAt(identity).orElseThrow().glottocode().equals("eng"));
         check(catalog.wordProfileAt(identity).orElseThrow().confidencePermille() == 975);
         check(catalog.lexicalProfileAt(identity).orElseThrow().featureBits() == 8);
         check(SharedLangDexPrecomputeCatalog.builder()
                 .entry(huggingFaceIdentity, entry).build().entryCount() == 1);
 
+        expect(IllegalArgumentException.class, () -> new M3LangDexPrecompute.Identity(
+                "unicodex.langdex.lexemes", "x", "eng", "x", "r",
+                InternDomainV1.CONCEPT, "synexia-canonical-v2",
+                "bad".getBytes(StandardCharsets.UTF_8), "0".repeat(64)));
         expect(IllegalArgumentException.class, () -> new M3LangDexPrecompute.Entry(
                 "eng", "x", 0L, 1L, 0, "x"));
         expect(IllegalArgumentException.class, () -> new M3LangDexPrecompute.Entry(
@@ -128,16 +163,13 @@ public final class M3LangDexPrecomputeTest {
                 "eng", "x", 1L, 1L, 0x10000, "x"));
         expect(IllegalArgumentException.class, () -> new M3LangDexPrecompute.WordProfile(
                 0L, 0L, 0, 0, 0, 1001));
-        expect(IllegalArgumentException.class, () -> new M3LangDexPrecompute.Identity(
-                "unicodex.langdex.lexemes", "x", "en g", "x", "r"));
+        expect(IllegalArgumentException.class, () -> identity("unicodex.langdex.lexemes", "x", "en g", "x", "r"));
         expect(IllegalArgumentException.class, () -> SharedLangDexPrecomputeCatalog.builder()
                 .entry(identity, entry).entry(identity, entry));
         expect(IllegalArgumentException.class, () -> SharedLangDexPrecomputeCatalog.builder()
-                .entry(new M3LangDexPrecompute.Identity(
-                        "other", "x", "eng", "Color", "r"), entry));
+                .entry(identity("other", "x", "eng", "Color", "r"), entry));
         expect(IllegalArgumentException.class, () -> SharedLangDexPrecomputeCatalog.builder()
-                .entry(new M3LangDexPrecompute.Identity(
-                        "unicodex.langdex.lexemes", "x", "eng", "Other", "r"), entry));
+                .entry(identity("unicodex.langdex.lexemes", "x", "eng", "Other", "r"), entry));
         expect(IllegalArgumentException.class, () -> new M3LangDexPrecompute.TranslationIdentity(
                 "unicodex.langdex.lexemes", "translation-8", 0L,
                 "eng", "Color", "fra", "couleur", "langdex-r1"));
