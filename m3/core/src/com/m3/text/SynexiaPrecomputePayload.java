@@ -307,6 +307,7 @@ public final class SynexiaPrecomputePayload {
             if (expected == null) return;
             boolean valid = switch (expected) {
                 case BOOLEAN -> field.kind() == Kind.BOOLEAN;
+                case STRING -> field.kind() == Kind.STRING;
                 case DOUBLE -> field.kind() == Kind.INTEGER || field.kind() == Kind.DECIMAL;
                 case INT -> field.kind() == Kind.INTEGER && field.integerValue() >= Integer.MIN_VALUE
                         && field.integerValue() <= Integer.MAX_VALUE;
