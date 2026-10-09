@@ -130,7 +130,7 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
         String spell = header("source_id", "record_id", "source_manifest_revision", "owner_fingerprint",
                 "lexicon_fingerprint", "language", "max_edit_distance", "prefix_length",
                 "source_fingerprint", "delete_key", "candidate_token_ids", "frequencies")
-                + scope + "lex-a\ten\t2\t4\tspell-a\ta\t1\t1:2\n";
+                + scope + "lex-a\ten\t2\t4\tspell-a\ta\t0,1\t1:2\n";
         String frequency = header("source_id", "record_id", "source_manifest_revision", "owner_fingerprint",
                 "shard_id", "image_row", "derivation_version", "value_fingerprint", "frequencies")
                 + scope + "0\t0\tfreq-1\tvalue-a\t1:2\n";
