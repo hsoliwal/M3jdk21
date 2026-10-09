@@ -279,7 +279,7 @@ class SynexiaExportTest(unittest.TestCase):
             )
             payload = {
                 "langdex_canonical_bytes": [98, 111, 110, 106, 111, 117, 114],
-                "langdex_canonical_digest": "0" * 64,
+                "langdex_canonical_digest": "2cb4b1431b84ec15d35ed83bb927e27e8967d75f4bcd9cc4b25c8d879ae23e18",
                 "langdex_canonical_schema": "fixture-v1",
                 "langdex_concept_id": 42,
                 "langdex_confidence_permille": 950,
