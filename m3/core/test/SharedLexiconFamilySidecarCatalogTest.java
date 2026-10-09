@@ -56,11 +56,11 @@ public final class SharedLexiconFamilySidecarCatalogTest {
                     "token-hash-precompute", 1, "translation-projection", 1)),
                     "row counts");
 
-            Files.writeString(root.resolve("unexpected.tsv"), "unexpected\\n",
+            Files.writeString(root.resolve("synexia.records.tsv"), "legacy\\n",
                     StandardCharsets.UTF_8);
-            expectIOException(() -> SharedLexiconFamilySidecarCatalog.open(root),
-                    "unexpected regular file rejected");
-            Files.delete(root.resolve("unexpected.tsv"));
+            check(SharedLexiconFamilySidecarCatalog.open(root).rowCounts().equals(
+                    catalog.rowCounts()), "legacy export files may coexist");
+            Files.delete(root.resolve("synexia.records.tsv"));
 
             Path legacy = Files.createTempDirectory("m3lex-family-legacy-");
             try {
