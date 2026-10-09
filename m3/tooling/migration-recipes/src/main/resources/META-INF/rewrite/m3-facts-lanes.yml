@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FactsLanes
+displayName: M3JDK21 one-field consumers answered from bulk lanes instead of the facts
+description: >-
+  trim, strip, stripLeading, stripTrailing, isBlank, the whitespace scans behind indent,
+  codePointCount, toLowerCase and toUpperCase on an M3 String computed the range's full facts for
+  one field (an identity strip on a fresh 2048-unit range: 13..49 us against 60..300 ns flat).
+  M3String gains lanes that answer from prepared facts when they exist and otherwise from bulk
+  windows with early exit (stripStart/stripEnd/trimStart/trimEnd, codePointCountValue,
+  contentIsAscii); asciiCase reads its units once; String.codePointCount answers a narrow owner at
+  once and consults only a cached geometry; M3StringCodePointPrecompute builds its geometry from
+  bulk-read units. Java step: M3String, M3StringCodePointPrecompute and the jtreg proof; text step:
+  String.java. Stacks on crate m3-hash-range (its postimages are these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-facts-lanes
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-facts-lanes

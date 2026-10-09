@@ -1,0 +1,105 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FACTS_LANES_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-facts-lanes-20261009",
+    "pullRequest": null,
+    "commit": "3c9b0d55a7b",
+    "stackedOn": [
+      {
+        "pullRequest": 10016,
+        "crate": "m3-hash-range"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.FactsLanes",
+    "crate": "m3-facts-lanes",
+    "fossReuseDecisionRow": "string.facts.single-answer-lanes",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/StringUTF16.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3String.stripStart/stripEnd/trimStart/trimEnd/codePointCountValue",
+        "mechanics": "the whitespace and code point rules of indexOfNonWhitespace, lastIndexOfNonWhitespace and codePointCount over bulk windows"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringCoding.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3String.contentIsAscii",
+        "mechanics": "countPositives over Latin-1 byte windows"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java",
+        "commit": "6f58e1d5dc",
+        "target": "java.lang.M3StringCodePointPrecompute.prepared/prepare",
+        "mechanics": "a cached-only lookup; the geometry built from bulk-read units"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owners",
+    "disposition": "ADAPT: each lane returns the facts' value and the stock flat scan's value; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-hash-without-facts-20261009 (#570, A23) on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.String",
+      "java.lang.M3String",
+      "java.lang.M3StringCodePointPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed under the supersession model: String.java after-image and hunks regenerated from a synthetic after-state tree; M3String.java and M3StringCodePointPrecompute.java owners recorded as superseded; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "6121d4d26970790bad079f252d020cf448ec8b9ab9b0821d7a53f9f404a6e119",
+      "after": "98c0030c0c4df9883315c0bf8e71b8a65ff01287762c335fb02b47d2ba6861b8",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java",
+      "before": "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257",
+      "after": "0e8f47864ecfc877fd20ff2d13b9948e827c5e15843e865d6f5e6227e56085c2",
+      "resource": "01-M3StringCodePointPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3FactsLaneTest.java",
+      "before": "ABSENT",
+      "after": "8f135cec0f619675dcf5785f83425f64f51cee886e417a5759bef006596a098c",
+      "resource": "02-M3FactsLaneTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "28f97eb3b7358c14b9bc7934c0544f7d20244a34e4e362f3a1e54ac56a69325a",
+      "after": "3d86927624c0855c9dcc82f4e1545339aaa500013dfff3dcda97d4fcb0a71b8d",
+      "resource": "00-String.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 151 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3FactsLaneTest flag-off: 8,932 checks (every lane cold and warm against the flat String's offsets, Character.codePointCount and an ASCII scan and against the facts' fields; isBlank, codePointCount over random sub-ranges, identity results of trim/strip/stripLeading/stripTrailing/toLowerCase/toUpperCase and the ASCII case mapping over atoms, nested tuples and slices with whitespace of every kind, U+00A0, surrogate pairs and lone surrogates, all-whitespace and empty texts, 0..20000 units)",
+    "regressions": "PASS_WINDOWS M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3NeedleArgTest 73,440; M3RegexSubjectViewTest 9,567; M3TQFactsBuildTest 23,595; M3RegexLiteralGateTest 29,376; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,922; A6 204 + 29",
+    "timing": "flag-off (a24/probe/FactsLaneBench, bench-baseline.tsv on the A23 build vs bench-after2.tsv, fresh ranges of a 65536-unit owner): 2048 Latin-1 units trim identity 13,227 ns -> 153 (flat 100), strip 13,993 -> 145 (flat 97), isBlank 13,376 -> 121 (flat 93), stripLeading 23,306 -> 120 (flat 89), toLowerCase identity 26,084 -> 1,472 (flat 1,052), codePointCount 2,662 -> 113 (flat 113); UTF-16 2048: trim 43,553 -> 172 (flat 131), isBlank 48,765 -> 154 (flat 125), codePointCount 10,650 -> 2,749 (flat 3,738); 256-unit ranges 11x..126x; 16-unit 3x..13x",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets under the supersession model; apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3FactsLanesRecipeTest 3/3 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3FactsLaneTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "each lane answers from prepared facts when they exist and never computes the facts: a one-field consumer costs a bulk window scan with early exit",
+    "strip uses Character.isWhitespace per unit and trim units at or below space; a surrogate (paired or not) is never whitespace, so the unit scans stop exactly where the stock code-point scans stop",
+    "the whitespace lanes read a 32-unit first window (most texts decide within it) and 1024-unit windows after",
+    "String.codePointCount no longer builds the code point geometry: a narrow owner answers at once, a cached geometry answers, otherwise the range is counted in bulk; random-access consumers (codePointAt, offsetByCodePoints) still build the geometry, now from bulk-read units",
+    "the empty receiver keeps its identity in trim and strip (the first build returned a new empty String; the parity test caught it)",
+    "stacked on A23: merge after #570 and the Synexia crate PR (#10016 first, content-bearing merges); A15 (#538) changes M3StringFacts.scan, not these lanes"
+  ]
+}
