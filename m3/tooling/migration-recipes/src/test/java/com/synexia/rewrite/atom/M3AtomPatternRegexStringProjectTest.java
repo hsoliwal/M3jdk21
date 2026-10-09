@@ -53,7 +53,7 @@ final class M3AtomPatternRegexStringProjectTest {
         assertEquals(original.keySet(), canonical.keySet(), "recipes are file-local");
         assertTrue(canonical.get(FIXTURE).contains("M3-IOP: PURE_INT_EXPRESSION"));
         assertTrue(canonical.get(FIXTURE).contains("M3-ATOM: m3$pureIntAtom;"));
-        assertTrue(canonical.get(FIXTURE).contains("M3-DOC:"));
+        assertTrue(canonical.get(FIXTURE).contains("M3-ATOM: m3$pureIntAtom; Pattern/IOP:"));
         assertEquals(surface(baseline, "lab.Fixture"), surface(MemJava.compile(canonical), "lab.Fixture"));
         assertEquals(surface(baseline, "lab.RegexConsumer"),
                 surface(MemJava.compile(canonical), "lab.RegexConsumer"));
