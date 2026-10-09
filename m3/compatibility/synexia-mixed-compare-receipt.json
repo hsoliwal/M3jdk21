@@ -1,0 +1,118 @@
+{
+  "schema": "M3JDK21_SYNEXIA_MIXED_COMPARE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-mixed-compare-20261009",
+    "pullRequest": null,
+    "commit": "16a94b5edc5",
+    "stackedOn": [
+      {
+        "pullRequest": 9971,
+        "crate": "m3-pool-bounds",
+        "note": "re-applied crates of #9951/#9932/#9931; the A6 postimages are these preimages"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.MixedCompare",
+    "crate": "m3-mixed-compare",
+    "fossReuseDecisionRow": "string.compare.mixed-windows",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/StringLatin1.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringMixedCompare",
+        "mechanics": "compareToCI / regionMatchesCI_UTF16 per-unit rule (upper case first, then the lower case of the upper case) as unitCaseDifference, applied when either side is Latin-1"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringUTF16.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringMixedCompare",
+        "mechanics": "compareToCIImpl / compareCodePointCI / codePointIncluding code-point rule (surrogates joined with one unit of look-back) as compareCodePointsIgnoreCase over two window cursors, applied when both sides are UTF-16"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        "commit": "140b2fb366",
+        "target": "java.lang.M3StringMixedCompare",
+        "mechanics": "the A8 scan window shape: bulk getChars into transient scratch, never per-unit owner dispatch"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "commit": "140b2fb366",
+        "target": "java.lang.M3String",
+        "mechanics": "contentEquals verification through unitsEqual (ArraysSupport.mismatch over windows); factsIfPrepared(begin, end) asks the owner for a recorded range fact by coordinate without allocating the range"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "commit": "140b2fb366",
+        "target": "java.lang.String",
+        "mechanics": "mixed compareTo, CaseInsensitiveComparator.compare and regionMatches(true) route through the helper behind the unchanged A9 gates; mixedAsciiCaseHashDiffers gates prepared sub-ranges"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: results byte-identical to two flat Strings; the stock coder-dependent case rules replace the previous code-point-only mixed rule; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-stack-reapply-20261009 (#531: A8 a37bf443f1, A9 c66aacba5f, A6 aec42c5a02 re-applied, refusal-safe binary join 3c3d66694a, re-seal b1d7bee845, receivers 140b2fb366) on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3String",
+      "java.lang.M3StringMixedCompare",
+      "java.lang.String"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed against 1b68815ddb under the supersession model: String.java after-image and hunks regenerated from a synthetic after-state tree, M3String.java owner recorded as superseded, M3StringMixedCompare.java joins the scope (67 targets); apply.py --check state=superseded; test_recipe.py 6/6"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "24ac1f87c1b2022b08d695ae6b116e9376dad59ed0ffb86f52da0003dd3e036d",
+      "after": "9f51f5ef71c86e0f98a6e0ad7d1efbb24df49a43b2a026ef55457cdc921cba08",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringMixedCompare.java",
+      "before": "ABSENT",
+      "after": "57c50151826d2b1e04964a0a573cfd4046e868637dec8f3d428c9b8e33762697",
+      "resource": "01-M3StringMixedCompare.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringMixedCompareTest.java",
+      "before": "ABSENT",
+      "after": "58d33c622b08994034378ff9c38488bd14a679cf302ab9e1a5c0555182c63108",
+      "resource": "02-M3StringMixedCompareTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "c49e422dfe0e6b83a2d51155f0d36b5223719dfefd211a96313705bc3ee253ca",
+      "after": "4696d49313ec8be619ad1cb074d4c281f1bccc7eb883ed1a9f064b9fefe6833a",
+      "resource": "00-String.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base over the sealed M3 java.base subset plus the new helper (43 files, 151 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3StringMixedCompareTest flag-off on the patched module: 262,675 checks (exact agreement with stock flat results for equals, contentEquals, compareTo, compareToIgnoreCase, CASE_INSENSITIVE_ORDER, equalsIgnoreCase, regionMatches over random atoms/tuples/case variants with Latin-1, Kelvin sign, dotted/dotless I, long s, final sigma, Deseret pairs, lone surrogates; lengths 255..1025 with surrogate pairs on the window boundaries; every length 0..40 differing at every position; prepared range facts)",
+    "regressions": "PASS_WINDOWS A4 M3StringFactsMixedConsumersTest 90,118, A8 M3StringFactsScanWindowTest 329,909, A9 M3StringMixedEqualityGatesTest 46,920, A6 M3StringPoolBoundsTest 204 (16 MiB budget, tuple cap 64) and 29 (defaults) checks on the A10 module",
+    "timing": "flag-off on the patched module, mixed vs the previous mixed path: equals/compareTo 2.0x..6.6x faster from 32 units up, ignore-case consumers 1.1x..4.1x, short lengths at par (stack/probe/MixedCaseBench, bench-before.tsv vs bench-after2.tsv)",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 67 targets under the supersession model; apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3MixedCompareRecipeTest 3/3 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3StringMixedCompareTest, EqualsIgnoreCase, CompareIC, RegionMatches under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "both sides are read through String.getChars into two transient 256-unit windows; an M3 side copies from its owner in bulk, a flat side from its value array; the windows are scratch, never a shadow",
+    "the case rule follows the coders exactly as the stock single-coder paths do: per-unit rule when either side is Latin-1, code-point rule when both are UTF-16; results are byte-identical to two flat Strings, which the previous mixed paths (code-point rule for every pair) were not in the exotic coder/surrogate mixes",
+    "below 16 units the direct unit loop stays: two window copies cost more than sixteen dispatches (bench 8 vs 32 units)",
+    "factsIfPrepared(begin, end) never prepares anything; the ASCII fold gate over a prepared sub-range is sound by the same argument as the whole-owner gate (equal fold hashes are never rejected)",
+    "no new allocation on the short paths; the window allocation on long paths replaces N owner dispatches and is accepted as the A8 scan accepted its window",
+    "stacked on the re-applied A8/A9/A6 stack: merge after #531 and Synexia #9971, or regenerate the runtime re-seal"
+  ]
+}
