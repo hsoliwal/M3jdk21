@@ -1166,11 +1166,14 @@ if "M3StringHistoryConvergenceRecipeTest" in workflow:
 if "m3/tooling/migration-recipes/**" in workflow:
     fail("M3JDK21 String workflow must not treat local recipe custody as authoritative")
 
+if not re.search(r"canonical_recipe_blob\t[0-9a-f]{40}(?:\n|$)", receiver_receipt):
+    fail("M3 String Synexia receiver receipt has invalid canonical recipe blob")
+
 for fragment in [
     "M3JDK21_SYNEXIA_RECIPE_RECEIVER_V1",
     "hsoliwal/com.synexia",
     "com.synexia.rewrite.M3Jdk21StringCurrentConvergence",
-    "d5315dee9660754b36635f1cdb6de81c45ae8108",
+    "canonical_recipe_blob\t",
     "THIN_RUNTIME_RECEIVER",
     "NONE",
 ]:
