@@ -90,6 +90,8 @@ def render(rows: Iterable[Mapping[str, object]]) -> dict[str, bytes]:
     if not normalized:
         raise ValueError("acronym sidecar requires at least one row")
     keys = [(row[0], row[1]) for row in normalized]
+    if len({(row[2], row[3]) for row in normalized}) != 1:
+        raise ValueError("acronym rows must share one scope")
     if keys != sorted(keys) or len(keys) != len(set(keys)):
         raise ValueError("acronym rows must be sorted and unique")
     content = _tsv(COLUMNS, normalized)
@@ -117,6 +119,13 @@ def _read_data(content: bytes) -> list[tuple[str, ...]]:
         normalize(dict(zip(COLUMNS, row, strict=True)))
         for row in rows
     ]
+    if "\r" in text or not text.endswith("\n"):
+        raise ValueError("acronym sidecar must use LF and terminate with LF")
+    keys = [(row[0], row[1]) for row in checked]
+    if keys != sorted(keys) or len(keys) != len(set(keys)):
+        raise ValueError("acronym sidecar rows must be sorted and unique")
+    if len({(row[2], row[3]) for row in checked}) != 1:
+        raise ValueError("acronym sidecar scope drift")
     if checked != rows:
         raise ValueError("acronym sidecar canonical row mismatch")
     return rows
