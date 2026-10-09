@@ -33,7 +33,7 @@ FACT_COLUMNS = ("shard_id", "image_row", "utf16_units", "java_hash", "code_point
                 "contains_whitespace", "precompute_profile")
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
-ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]", "String"))
+ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]", "byte[]", "String"))
 
 
 def digest(data: bytes) -> str:
@@ -96,6 +96,10 @@ def _fits_donor_type(value: object, donor_type: str) -> bool:
     if donor_type == "long[]":
         return (isinstance(value, list)
                 and all(_fits_donor_type(item, "long") for item in value))
+    if donor_type == "byte[]":
+        return (isinstance(value, list)
+                and all(isinstance(item, int) and not isinstance(item, bool) and 0 <= item <= 255
+                        for item in value))
     return False
 
 
@@ -212,7 +216,8 @@ def verify(output: pathlib.Path) -> dict[str, int]:
     if target.get("image_format") != "M3LEX001" or target.get("image_version") != VERSION:
         raise ValueError("unsupported target image contract")
     outputs = manifest.get("outputs", {})
-    required = {"synexia.shards.tsv", "synexia.records.tsv", "synexia.precompute-index.tsv",
+    required = {"synexia.source-manifest.tsv", "synexia.input-records.tsv",
+                "synexia.shards.tsv", "synexia.records.tsv", "synexia.precompute-index.tsv",
                 "synexia.precompute.tsv"}
     if not required.issubset(outputs):
         raise ValueError("export output hashes are incomplete")
@@ -221,7 +226,61 @@ def verify(output: pathlib.Path) -> dict[str, int]:
         if not path.is_file() or digest(path.read_bytes()) != expected:
             raise ValueError(f"output hash mismatch: {name}")
 
-    source_payload_fields = manifest.get("source", {}).get("precompute_fields")
+    source_metadata = manifest.get("source", {})
+    if not isinstance(source_metadata, dict):
+        raise ValueError("source provenance metadata is missing")
+    source_repo = source_metadata.get("repository")
+    source_commit = source_metadata.get("commit")
+    if not (source_repo == "fixture"
+            or isinstance(source_repo, str)
+            and re.fullmatch(r"https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", source_repo)):
+        raise ValueError("source repository claim is invalid")
+    if not isinstance(source_commit, str) or re.fullmatch(r"[0-9a-f]{40}", source_commit) is None:
+        raise ValueError("source commit claim is invalid")
+    source_artifacts = {
+        "manifest_sha256": "synexia.source-manifest.tsv",
+        "records_sha256": "synexia.input-records.tsv",
+    }
+    if source_metadata.get("relations_sha256") is not None:
+        source_artifacts["relations_sha256"] = "synexia.input-relations.tsv"
+    for field, filename in source_artifacts.items():
+        expected = source_metadata.get(field)
+        if not isinstance(expected, str) or re.fullmatch(r"[0-9a-f]{64}", expected) is None:
+            raise ValueError("source input hash is missing: " + field)
+        if filename not in outputs or digest((output / filename).read_bytes()) != expected:
+            raise ValueError("source input hash mismatch: " + field)
+    field_map_digest = source_metadata.get("precompute_field_map_sha256")
+    if field_map_digest is not None:
+        if (not isinstance(field_map_digest, str) or re.fullmatch(r"[0-9a-f]{64}", field_map_digest) is None
+                or "synexia.precompute-field-map.tsv" not in outputs
+                or digest((output / "synexia.precompute-field-map.tsv").read_bytes()) != field_map_digest):
+            raise ValueError("source precompute field-map hash mismatch")
+    identity_map_digest = source_metadata.get("identity_field_map_sha256")
+    if identity_map_digest is not None:
+        if (not isinstance(identity_map_digest, str) or re.fullmatch(r"[0-9a-f]{64}", identity_map_digest) is None
+                or "synexia.langdex-identity-field-map.tsv" not in outputs
+                or digest((output / "synexia.langdex-identity-field-map.tsv").read_bytes()) != identity_map_digest):
+            raise ValueError("source identity field-map hash mismatch")
+    identity_fields = source_metadata.get("identity_fields", {})
+    if not isinstance(identity_fields, dict):
+        raise ValueError("source identity field requirements are invalid")
+    for target_type, fields in identity_fields.items():
+        if (not isinstance(target_type, str) or not re.fullmatch(r"M3LangDexPrecompute\\.[A-Za-z0-9_]+", target_type)
+                or not isinstance(fields, dict)
+                or list(fields) != sorted(fields)
+                or any(not isinstance(field, str) or re.fullmatch(r"[a-z][a-z0-9_]*", field) is None
+                       or not isinstance(value, str) for field, value in fields.items())):
+            raise ValueError("source identity field map is invalid")
+    identity_requirements = source_metadata.get("identity_requirements", {})
+    if not isinstance(identity_requirements, dict):
+        raise ValueError("source identity coverage is invalid")
+    for source_id, fields in identity_requirements.items():
+        if (source_id not in source_payload_fields if isinstance(source_payload_fields, dict) else True):
+            raise ValueError("source identity coverage references unknown source")
+        if not isinstance(fields, list) or fields != sorted(set(fields)):
+            raise ValueError("source identity coverage is not sorted")
+
+    source_payload_fields = source_metadata.get("precompute_fields")
     if not isinstance(source_payload_fields, dict):
         raise ValueError("source precompute field requirements are missing")
     for source_id, fields in source_payload_fields.items():
@@ -236,11 +295,9 @@ def verify(output: pathlib.Path) -> dict[str, int]:
             or donor_type not in ALLOWED_DONOR_TYPES
             for field, donor_type in source_field_types.items()):
         raise ValueError("invalid source precompute field types")
-    field_map_digest = manifest.get("source", {}).get("precompute_field_map_sha256")
-    if (field_map_digest is not None
-            and (not isinstance(field_map_digest, str)
-                 or re.fullmatch(r"[0-9a-f]{64}", field_map_digest) is None)):
-        raise ValueError("invalid source precompute field-map hash")
+    for source_id, required_fields in identity_requirements.items():
+        if not set(required_fields).issubset(source_payload_fields[source_id]):
+            raise ValueError("source identity fields are not admitted by precompute coverage")
 
     shard_rows = read_tsv(output / "synexia.shards.tsv", SHARD_COLUMNS)
     images: dict[tuple[int, int], str] = {}
