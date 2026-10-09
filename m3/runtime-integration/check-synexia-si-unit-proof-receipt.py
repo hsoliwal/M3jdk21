@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import io
 import sys
 from dataclasses import dataclass
@@ -25,13 +26,26 @@ _OWNER = Path("m3/core/src/com/m3/text/M3LexiconPrecompute.java")
 _CATALOG_TEST = Path("m3/core/test/M3SiUnitPrecomputeCatalogTest.java")
 _DECODER_TEST = Path("m3/core/test/SynexiaSiUnitDecoderTest.java")
 _BUILD = Path("m3/build.sh")
+_RECIPE_MANIFEST = Path("m3/recipes/manifest.json")
 _RECIPE = Path("m3/runtime-integration/synexia-si-unit-proof-recipe-20261009.yaml")
 _COMMIT = "c6d128572825cc11f4bbb05d78bcbebb5b3aa67a"
 _BLOB = "3d778837b23b81d4ec3d6cb9383023ef04139e2a"
+_TARGET_BLOBS = {
+    "target_map": "98e491cc391d212c13b732c7b7acfebf722a2f36",
+    "field_map": "6490b29ba92ae7f246f65a2b47ce85ea7be051b4",
+    "build": "3db12fd87065b99081fafd4425daf3ee02d38374",
+    "decoder": "5ca5f5d2e8833ff7c9f6f11349a289b630d9f45e",
+    "recipe_manifest": "d0dd2119cfc339b09604cd2a363a84632283713a",
+}
 
 
 def _read(root: Path, path: Path) -> str:
     return (root / path).read_text(encoding="utf-8")
+
+
+def _git_blob_sha(content: str) -> str:
+    payload = content.encode("utf-8")
+    return hashlib.sha1(b"blob " + str(len(payload)).encode("ascii") + b"\\0" + payload).hexdigest()
 
 
 def _rows(content: str) -> list[dict[str, str]]:
@@ -47,6 +61,7 @@ def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
     catalog_test = _read(root, _CATALOG_TEST)
     decoder = _read(root, _DECODER_TEST)
     build = _read(root, _BUILD)
+    recipe_manifest = _read(root, _RECIPE_MANIFEST)
     recipe = _read(root, _RECIPE)
     receipt_rows = _rows(receipt)
     target_rows = _rows(target)
@@ -67,6 +82,11 @@ def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
         SourceCheck("targetLookup", "SharedLexiconPrecomputeCatalog.SiUnitIdentity" in target),
         SourceCheck("targetLicense", "Apache-2.0" in target),
         SourceCheck("targetPending", "PENDING_TARGET_RECEIVER_PROOF" in target),
+        SourceCheck("targetMapBlob", _git_blob_sha(target) == _TARGET_BLOBS["target_map"]),
+        SourceCheck("fieldMapBlob", _git_blob_sha(fields) == _TARGET_BLOBS["field_map"]),
+        SourceCheck("buildBlob", _git_blob_sha(build) == _TARGET_BLOBS["build"]),
+        SourceCheck("decoderBlob", _git_blob_sha(decoder) == _TARGET_BLOBS["decoder"]),
+        SourceCheck("recipeManifestBlob", _git_blob_sha(recipe_manifest) == _TARGET_BLOBS["recipe_manifest"]),
         SourceCheck("fieldDecimal", "SiUnitPrecompute\tdecimalExponent" in fields and "\tMAPPED\t" in fields),
         SourceCheck("fieldDimension", "SiUnitPrecompute\tdimensionPacked" in fields),
         SourceCheck("fieldOffset", "SiUnitPrecompute\toffset" in fields),
@@ -88,6 +108,7 @@ def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
         SourceCheck("recipeModes", "jit,int,nocompact,c2" in recipe),
         SourceCheck("recipeNoStringPayload", "No SI-unit payload is stored in java.lang.String." in recipe),
         SourceCheck("recipeNoAbi", "No public M3String ABI" in recipe),
+        SourceCheck("recipeTargetEvidence", "target_map_blob: 98e491cc391d212c13b732c7b7acfebf722a2f36" in recipe and "recipe_manifest_blob: d0dd2119cfc339b09604cd2a363a84632283713a" in recipe),
     )
 
 
