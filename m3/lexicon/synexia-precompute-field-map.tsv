@@ -56,3 +56,7 @@ M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTok
 M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
 M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
 NumberPrecompute	value	int	value	synexia.records.tsv:precompute_payload	MAPPED	canonical decimal value remains bounded to the inclusive 0..10000 source contract; spelling and language_tag remain mapping columns
+M3LexiconPrecompute.SiUnitPrecompute	decimalExponent	int	si_decimal_exponent	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	SI exponent remains bounded donor metadata in the canonical dictlang.si-units receiver
+M3LexiconPrecompute.SiUnitPrecompute	dimensionPacked	long	si_dimension_packed	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	packed seven-axis dimension remains source-owned and is not reinterpreted
+M3LexiconPrecompute.SiUnitPrecompute	offset	double	si_offset	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	finite SI offset is preserved as a Java double without conversion
+M3LexiconPrecompute.SiUnitPrecompute	prefixable	boolean	si_prefixable	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	prefixability remains an explicit source boolean
