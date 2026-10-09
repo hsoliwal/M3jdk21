@@ -2542,6 +2542,10 @@ public final class System {
                 return M3StringSearchPrecompute.trigramFacts(text);
             }
 
+            public CharSequence m3MatchText(String text) {
+                return M3StringMatchText.of(text);
+            }
+
             @PreviewFeature(feature=PreviewFeature.Feature.STRING_TEMPLATES)
             public long stringConcatCoder(char value) {
                 return StringConcatHelper.coder(value);

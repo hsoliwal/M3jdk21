@@ -436,6 +436,13 @@ public interface JavaLangAccess {
      */
     M3TQ.Facts m3TrigramFacts(String text);
 
+    /**
+     * Returns a view of an M3-backed String for a regex matcher to read while matching (units
+     * read from the storage in blocks into one array), or {@code null} for a flat String or one
+     * above the view's size cap; the caller then reads the String itself.
+     */
+    CharSequence m3MatchText(String text);
+
    /**
     * Get the coder for the supplied character.
     */

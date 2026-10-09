@@ -149,6 +149,14 @@ public final class Matcher implements MatchResult {
     CharSequence text;
 
     /**
+     * What the nodes read while matching: the text itself, or for an M3-backed String a view
+     * whose units are read in blocks into one array (A20), so per-unit reads are array loads.
+     * Subsequences, appends and every observable come from {@link #text}; the view is rebuilt
+     * when the text changes.
+     */
+    private CharSequence subject;
+
+    /**
      * Matcher state used by the last node. NOANCHOR is used when a
      * match does not have to consume all of the input. ENDANCHOR is
      * the mode used for matching all the input.
@@ -453,6 +461,7 @@ public final class Matcher implements MatchResult {
      * @return  This matcher
      */
     public Matcher reset(CharSequence input) {
+        if (input != text) subject = null;
         text = input;
         return reset();
     }
@@ -1762,7 +1771,7 @@ public final class Matcher implements MatchResult {
             this.modCount++;
             return false;
         }
-        boolean result = parentPattern.root.match(this, from, text);
+        boolean result = parentPattern.root.match(this, from, subject());
         if (!result)
             this.first = -1;
         this.oldLast = this.last;
@@ -1789,12 +1798,23 @@ public final class Matcher implements MatchResult {
                 localsPos[i].clear();
         }
         acceptMode = anchor;
-        boolean result = parentPattern.matchRoot.match(this, from, text);
+        boolean result = parentPattern.matchRoot.match(this, from, subject());
         if (!result)
             this.first = -1;
         this.oldLast = this.last;
         this.modCount++;
         return result;
+    }
+
+    private CharSequence subject() {
+        CharSequence view = subject;
+        if (view == null) {
+            JavaLangAccess access = SharedSecrets.getJavaLangAccess();
+            view = text instanceof String string && access != null ? access.m3MatchText(string) : null;
+            if (view == null) view = text;
+            subject = view;
+        }
+        return view;
     }
 
     /**
