@@ -35,7 +35,7 @@ public final class M3TranslationReceiverMapTest {
         check(fields.equals(Set.of("source_id", "record_id", "source_language",
                 "target_language", "lexicon_fingerprint", "source_fingerprint",
                 "translated_token_ids", "mapped_token_count",
-                "translation_grammar_supported")));
+                "translation_grammar_supported", "source_revision", "source_blob_sha")));
 
         check(Class.forName("com.m3.text.M3LexiconPrecompute$TranslationProjection") != null);
         check(Class.forName(
@@ -46,7 +46,8 @@ public final class M3TranslationReceiverMapTest {
                 Path.of("lexicon/synexia-precompute-field-map.tsv"),
                 StandardCharsets.UTF_8);
         for (String field : List.of("sourceId", "recordId", "sourceLanguage",
-                "targetLanguage", "lexiconFingerprint", "sourceFingerprint")) {
+                "targetLanguage", "lexiconFingerprint", "sourceFingerprint",
+                "sourceRevision", "sourceBlobSha")) {
             check(fieldMap.stream().anyMatch(line -> line.startsWith(
                     "SharedLexiconPrecomputeCatalog.TranslationIdentity\t" + field + "\t")));
         }
