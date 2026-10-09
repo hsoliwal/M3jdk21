@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 RECEIPT = ROOT / "synexia-proper-noun-donor-pending-receipt.tsv"
 RECIPE = ROOT / "synexia-proper-noun-donor-pending-recipe-20261009.yaml"
-TARGET_MAP = ROOT.parent.parent / "lexicon" / "synexia-instance-target-map.tsv"
+TARGET_MAP = ROOT.parent / "lexicon" / "synexia-instance-target-map.tsv"
 
 def main() -> int:
     lines = RECEIPT.read_text(encoding="utf-8").splitlines()
