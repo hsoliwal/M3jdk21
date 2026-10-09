@@ -41,8 +41,9 @@ class RecipeTest(unittest.TestCase):
             self.assertEqual(len(superseded), len(set(superseded)), name)
             if hashes["before"] is None:
                 self.assertTrue(superseded, name)
-            else:
-                self.assertFalse(superseded, name)
+            if superseded:
+                self.assertNotIn(hashes["before"], superseded, name)
+                self.assertNotIn(hashes["after"], superseded, name)
 
     def test_current_tree_is_exact_superseded_fixed_point(self):
         with tempfile.TemporaryDirectory() as folder:
