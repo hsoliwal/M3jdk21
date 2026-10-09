@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public final class M3LexiconPrecomputeTest {
+    private static final String TRANSLATION_SOURCE_REVISION = "64a2ea61c73b548413fed6686a9daeeb0b9b0564";
+    private static final String TRANSLATION_SOURCE_BLOB_SHA = "bb72c00e36f1835d824a34ab398b1fe5aadb1cb3";
     private static int checks;
 
     private static void check(boolean value) {
@@ -43,6 +45,25 @@ public final class M3LexiconPrecomputeTest {
         check(translation.appliesTo("lex-1", "en", "hi", "src-1"));
         check(!translation.appliesTo("lex-2", "en", "hi", "src-1"));
         check(!translation.appliesTo("lex-1", "en", "hi", "src-2"));
+        M3LexiconPrecompute.TranslationProjection boundTranslation =
+                new M3LexiconPrecompute.TranslationProjection(
+                        "lex-1", "en", "hi", "src-1", new int[]{11, 0, 19}, 3,
+                        TRANSLATION_SOURCE_REVISION, TRANSLATION_SOURCE_BLOB_SHA);
+        check(boundTranslation.sourceBound());
+        SharedLexiconPrecomputeCatalog.TranslationIdentity boundIdentity =
+                new SharedLexiconPrecomputeCatalog.TranslationIdentity(
+                        "translate.rows", "row-bound", "en", "hi", "lex-1", "src-1",
+                        TRANSLATION_SOURCE_REVISION, TRANSLATION_SOURCE_BLOB_SHA);
+        check(SharedLexiconPrecomputeCatalog.builder().translation(
+                boundIdentity, boundTranslation).build()
+                .translationAt(boundIdentity).orElseThrow().sourceBound());
+        expect(IllegalArgumentException.class, () ->
+                SharedLexiconPrecomputeCatalog.builder().translation(
+                        new SharedLexiconPrecomputeCatalog.TranslationIdentity(
+                                "translate.rows", "row-bound", "en", "hi", "lex-1", "src-1",
+                                TRANSLATION_SOURCE_REVISION,
+                                "0000000000000000000000000000000000000000"),
+                        boundTranslation));
 
         Map<String, int[]> deletes = new LinkedHashMap<>();
         deletes.put("", new int[]{1});
