@@ -349,6 +349,53 @@ class SynexiaExportTest(unittest.TestCase):
                               "3e85c872adf556901a341a9eb1c3b59864918da1",
                               ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
 
+    def test_directed_related_lexeme_sidecar_round_trips_and_requires_input(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source_id = "dictlang.antonyms"
+            source_path = "synexia-dictlang/src/main/java/com/synexia/dictlang/AntonymLexicon.java"
+            manifest = root / "sources.tsv"
+            manifest.write_text(
+                "\t".join(EXPORT.MANIFEST_COLUMNS) + "\n"
+                + "\t".join((source_id, "Antonyms", source_path, "record_id",
+                             "lexeme,related_lexeme",
+                             "M3StringFacts + IndexWordFacts", "Apache-2.0", "fixture")) + "\n",
+                encoding="utf-8",
+            )
+            records = root / "records.tsv"
+            records.write_text(
+                "\t".join(EXPORT.RECORD_COLUMNS) + "\n"
+                + "\t".join((source_id, source_path, "antonym", "und", "cold", "cold",
+                             "antonym:cold", "COLD", "-", "M3StringFacts + IndexWordFacts")) + "\n",
+                encoding="utf-8",
+            )
+            relations = root / "relations.tsv"
+            relations.write_text(
+                "\t".join(EXPORT.RELATION_COLUMNS) + "\n"
+                + "\t".join((source_id, "cold", "cold", "warm")) + "\n",
+                encoding="utf-8",
+            )
+            output = root / "output"
+            result = EXPORT.export(
+                manifest, records, output, "fixture", "0" * 40,
+                relations_path=relations,
+            )
+            self.assertEqual(1, result["counts"]["relation_records"])
+            self.assertEqual(
+                "dictlang.antonyms\tcold\tcold\twarm\t0\t0\n",
+                (output / "synexia.related.tsv").read_text(encoding="utf-8").splitlines()[1] + "\n",
+            )
+            export_manifest = json.loads(
+                (output / "synexia.export.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual([source_id], export_manifest["source"]["relation_sources"])
+            self.assertEqual("synexia.related.tsv", export_manifest["target"]["relation_sidecar"])
+            self.assertEqual(1, VERIFY.verify(output)["relation_records"])
+            with self.assertRaisesRegex(ValueError, "related-lexeme input is required"):
+                EXPORT.export(
+                    manifest, records, root / "missing-output", "fixture", "0" * 40,
+                )
+
     def test_replay_is_byte_identical_except_for_output_location(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

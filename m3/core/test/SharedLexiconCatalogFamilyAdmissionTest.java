@@ -44,7 +44,8 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
             SharedLexiconCatalog closed = SharedLexiconCatalog.open(complete);
             closed.close();
             expectIllegalState(closed::familyPrecompute, "close fences family getter");
-            System.out.println("M3JDK_CATALOG_FAMILY_ADMISSION_PASS checks=" + checks + " families=5");
+            System.out.println("M3JDK_CATALOG_FAMILY_ADMISSION_PASS checks=" + checks
+                    + " families=5 relations=1");
         } finally {
             deleteTree(complete);
         }
@@ -77,6 +78,12 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
                     scope, new SharedLexiconCatalog.Coordinate(0, 0), "prefix-1", "value-a", 7);
             check(family.prefixAt(prefixKey).orElseThrow().rangeCount(0, 1) == 1,
                     mode + " prefix counts retained");
+            var relation = catalog.relatedLexemes().orElseThrow()
+                    .find("source-a", "record-a").orElseThrow();
+            check(relation.lexeme().equals("alpha")
+                            && relation.relatedLexeme().equals("omega")
+                            && relation.coordinate().equals(new SharedLexiconCatalog.Coordinate(0, 0)),
+                    mode + " directed related lexeme retained");
         } finally {
             catalog.close();
         }
@@ -99,7 +106,18 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
         write(root, "synexia.precompute-index.tsv",
                 "precompute_profile\tsource_records\timage_records\tsha256\n"
                         + "fixture\t1\t1\t" + sha256("fixture\t1\t1\n") + "\n");
-        if (withFamily) writeFamily(root);
+        if (withFamily) {
+            writeFamily(root);
+            writeRelated(root);
+        }
+    }
+
+    private static void writeRelated(Path root) throws Exception {
+        write(root, "synexia.related.tsv",
+                "source_id	record_id	lexeme	related_lexeme	shard_id	image_row
+"
+                        + "source-a	record-a	alpha	omega	0	0
+");
     }
 
     private static void writeFamily(Path root) throws Exception {

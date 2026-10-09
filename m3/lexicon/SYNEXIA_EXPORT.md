@@ -74,7 +74,8 @@ python3 m3/runtime-integration/export-synexia-lexicon.py \
   --records /operator/synexia-snapshot/records.tsv \
   --output /operator/m3jdk-lexicon/export \
   --source-repository https://github.com/hsoliwal/com.synexia \
-  --source-commit 3e85c872adf556901a341a9eb1c3b59864918da1
+  --source-commit 3e85c872adf556901a341a9eb1c3b59864918da1 \
+  --relations /operator/synexia-snapshot/related.tsv
 ```
 
 The output is:
@@ -91,6 +92,9 @@ The output is:
   fingerprint;
 - `synexia.precompute.tsv`: bounded UTF-16/code-point/hash/ASCII/Latin-1/
   whitespace facts plus the Synexia precompute profile;
+- `synexia.related.tsv` (when the source manifest admits `related_lexeme`):
+  sorted directed source/record/lexeme/related-lexeme rows with the physical
+  M3LEX coordinate;
 - `synexia.export.json`: source pins, input/output hashes, counts, policy and,
   when available, the canonical precompute field-type map and its SHA-256.
 
@@ -105,6 +109,13 @@ coordinates through shard-local lower bounds and exact UTF-16 prefix checks.
 `findMapping(sourceId, recordId)` resolves the preserved Synexia identity without
 requiring a physical coordinate, while `findMappings(text)` returns all
 translation/dictionary/unit/number mappings attached to one exact lexeme.
+
+When the source manifest declares `related_lexeme`, the operator must
+provide a separate `--relations` TSV. The exporter rejects missing, duplicate,
+unsorted, non-matching or incomplete directed relation rows. The source-blind
+verifier and `SharedRelatedLexemeCatalog` repeat identity, direction, UTF-16,
+coordinate and order checks. Relation data remains outside `java.lang.String`
+identity and is never reversed or synthesized.
 
 The image is suitable for the existing `-Djdk.mindex.lexicon=/absolute/file`
 boundary. The sidecars remain language-layer metadata; they are not fields of
@@ -125,7 +136,8 @@ python3 m3/runtime-integration/verify-synexia-lexicon.py /operator/m3jdk-lexicon
 ```
 
 The proof covers all number IDs `0..10000`, multilingual/proper-name and unit
-mapping rows, rich owner payloads, the reviewed source-manifest-to-field-map
+mapping rows, directed antonym/thesaurus relation rows, rich owner payloads,
+  the reviewed source-manifest-to-field-map
 lineage, legacy-input compatibility, deterministic replay, M3LEX001 version 2
 metadata, precompute sidecars, conflict refusal before output creation, and
 source-blind rejection of a post-export mutation.

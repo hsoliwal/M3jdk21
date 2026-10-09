@@ -34,6 +34,10 @@ RECORD_COLUMNS = (
     "precompute_profile",
 )
 RECORD_COLUMNS_V2 = RECORD_COLUMNS + ("precompute_payload",)
+RELATION_COLUMNS = ("source_id", "record_id", "lexeme", "related_lexeme")
+RELATION_OUTPUT_COLUMNS = (
+    "source_id", "record_id", "lexeme", "related_lexeme", "shard_id", "image_row"
+)
 MAPPING_COLUMNS = (
     "source_id", "source_path", "source_kind", "language_tag", "record_id", "lexeme",
     "shard_id", "image_row", "mapping_id", "mapping_name", "translation_profile",
@@ -287,6 +291,67 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
     return result, raw
 
 
+def relation_source_ids(sources: dict[str, dict[str, str]]) -> set[str]:
+    return {
+        source_id
+        for source_id, source in sources.items()
+        if "related_lexeme" in {
+            field.strip() for field in source["mapping_fields"].split(",") if field.strip()
+        }
+    }
+
+
+def load_relations(path: pathlib.Path | None, sources: dict[str, dict[str, str]],
+                   records: list[Record]) -> tuple[list[dict[str, str]], bytes | None]:
+    required_sources = relation_source_ids(sources)
+    if path is None:
+        if required_sources:
+            required = ", ".join(sorted(required_sources, key=utf16_units))
+            raise ValueError("related-lexeme input is required for: " + required)
+        return [], None
+    if not required_sources:
+        raise ValueError("related-lexeme input is not admitted by the source manifest")
+    raw = path.read_bytes()
+    rows, _ = read_tsv(path, RELATION_COLUMNS)
+    records_by_identity = {
+        (record["source_id"], record["record_id"]): record for record in records
+    }
+    result: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for row in rows:
+        identity = (row["source_id"], row["record_id"])
+        if row["source_id"] not in required_sources:
+            raise ValueError("related-lexeme source family is not admitted: " + row["source_id"])
+        if identity in seen:
+            raise ValueError("duplicate related-lexeme source/record identity: "
+                             + f"{identity[0]}:{identity[1]}")
+        seen.add(identity)
+        record = records_by_identity.get(identity)
+        if record is None:
+            raise ValueError("related-lexeme references unknown source/record identity: "
+                             + f"{identity[0]}:{identity[1]}")
+        if row["lexeme"] != record["lexeme"]:
+            raise ValueError("related-lexeme lexeme mismatch for "
+                             + f"{identity[0]}:{identity[1]}")
+        if row["related_lexeme"] == "":
+            raise ValueError("related_lexeme must not be empty")
+        result.append(dict(row))
+    expected = {
+        identity for identity in records_by_identity if identity[0] in required_sources
+    }
+    actual = set(seen)
+    if actual != expected:
+        missing = sorted(expected - actual,
+                         key=lambda identity: tuple(utf16_units(value) for value in identity))
+        raise ValueError("related-lexeme coverage mismatch; missing: "
+                         + ",".join(f"{source}:{record}" for source, record in missing))
+    result.sort(key=lambda row: tuple(
+        utf16_units(row[field])
+        for field in ("source_id", "record_id", "lexeme", "related_lexeme")
+    ))
+    return result, raw
+
+
 def image_bytes(lexemes: list[str]) -> bytes:
     if len(lexemes) > MAX_RECORDS:
         raise ValueError("too many unique lexemes")
@@ -354,12 +419,15 @@ def write_tsv(path: pathlib.Path, columns: tuple[str, ...], rows: list[dict[str,
 
 def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pathlib.Path,
            source_repo: str, source_commit: str,
-           field_map: pathlib.Path | None = None) -> dict[str, object]:
+           field_map: pathlib.Path | None = None,
+           relations_path: pathlib.Path | None = None) -> dict[str, object]:
     sources, source_manifest_bytes = read_manifest(source_manifest)
     field_map_path = field_map or source_manifest.with_name("synexia-precompute-field-map.tsv")
     field_types = read_field_map(field_map_path) if field_map_path.is_file() else {}
     field_map_bytes = field_map_path.read_bytes() if field_types else None
     records, records_bytes = load_records(records_path, sources, field_types)
+    relations, relations_bytes = load_relations(relations_path, sources, records)
+    related_source_ids = relation_source_ids(sources)
     if output.exists() and any(output.iterdir()):
         raise FileExistsError(f"output directory is not empty: {output}")
     output.mkdir(parents=True, exist_ok=True)
@@ -399,6 +467,20 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                      for column in mapping_columns} for record in records]
     mapping_bytes = write_tsv(output / "synexia.records.tsv", mapping_columns, mapping_rows)
 
+    related_bytes = None
+    if related_source_ids:
+        related_rows = [{
+            "source_id": relation["source_id"],
+            "record_id": relation["record_id"],
+            "lexeme": escape_sidecar_text(relation["lexeme"]),
+            "related_lexeme": escape_sidecar_text(relation["related_lexeme"]),
+            "shard_id": physical_row[relation["lexeme"]][0],
+            "image_row": physical_row[relation["lexeme"]][1],
+        } for relation in relations]
+        related_bytes = write_tsv(
+            output / "synexia.related.tsv", RELATION_OUTPUT_COLUMNS, related_rows
+        )
+
     profile_sources: dict[str, set[tuple[str, str]]] = {}
     profile_coordinates: dict[str, set[tuple[int, int]]] = {}
     for record in records:
@@ -430,6 +512,9 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
         "source": {"repository": source_repo, "commit": source_commit,
                    "manifest_sha256": sha256_bytes(source_manifest_bytes),
                    "records_sha256": sha256_bytes(records_bytes),
+                   "relations_sha256":
+                       sha256_bytes(relations_bytes) if relations_bytes is not None else None,
+                   "relation_sources": sorted(related_source_ids, key=utf16_units),
                    "precompute_fields": {
                        source_id: [field for field in source["precompute_fields"].split(",") if field]
                        for source_id, source in sorted(sources.items())},
@@ -442,14 +527,19 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                    "mapping_payload_field": "precompute_payload (canonical JSON object; v1 input defaults to {})",
                    "shards_sidecar": "synexia.shards.tsv",
                    "precompute_index_sidecar": "synexia.precompute-index.tsv",
-                   "precompute_sidecar": "synexia.precompute.tsv"},
+                   "precompute_sidecar": "synexia.precompute.tsv",
+                   "relation_sidecar":
+                       "synexia.related.tsv" if related_source_ids else None},
         "counts": {"source_records": len(records), "image_records": len(by_lexeme),
                    "source_families": len(sources), "shards": len(shards),
-                   "precompute_profiles": len(profile_rows)},
+                   "precompute_profiles": len(profile_rows),
+                   "relation_records": len(relations)},
         "outputs": {**image_outputs, "synexia.shards.tsv": sha256_bytes(shard_bytes),
                     "synexia.records.tsv": sha256_bytes(mapping_bytes),
                     "synexia.precompute-index.tsv": sha256_bytes(profile_bytes),
-                    "synexia.precompute.tsv": sha256_bytes(fact_bytes)},
+                    "synexia.precompute.tsv": sha256_bytes(fact_bytes),
+                    **({"synexia.related.tsv": sha256_bytes(related_bytes)}
+                       if related_bytes is not None else {})},
         "identity_rule": "source_id + record_id is opaque and never renumbered; image_row is only a physical M3LEX projection",
         "data_policy": "operator-supplied snapshot only; no network download or implicit license grant",
     }
@@ -465,9 +555,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--source-repository", required=True)
     parser.add_argument("--source-commit", required=True)
     parser.add_argument("--field-map", type=pathlib.Path)
+    parser.add_argument("--relations", type=pathlib.Path)
     args = parser.parse_args(argv)
     result = export(args.source_manifest, args.records, args.output,
-                    args.source_repository, args.source_commit, args.field_map)
+                    args.source_repository, args.source_commit, args.field_map, args.relations)
     print("SYNEXIA_M3JDK_LEXICON_EXPORT_PASS " + json.dumps(result["counts"], sort_keys=True))
     return 0
 

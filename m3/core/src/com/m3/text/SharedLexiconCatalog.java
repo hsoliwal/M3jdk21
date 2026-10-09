@@ -59,6 +59,7 @@ public final class SharedLexiconCatalog {
     private final Map<Coordinate, PrecomputeFacts> precompute;
     private final List<PrecomputeProfile> precomputeProfiles;
     private final Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute;
+    private final Optional<SharedRelatedLexemeCatalog> relatedLexemes;
     private final long recordCount;
     private final ReentrantReadWriteLock lifecycle = new ReentrantReadWriteLock();
     private volatile boolean closed;
@@ -69,6 +70,7 @@ public final class SharedLexiconCatalog {
                                  Map<Coordinate, PrecomputeFacts> precompute,
                                  List<PrecomputeProfile> precomputeProfiles,
                                  Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute,
+                                 Optional<SharedRelatedLexemeCatalog> relatedLexemes,
                                  long recordCount) {
         this.shards = List.copyOf(shards);
         this.files = List.copyOf(files);
@@ -84,6 +86,7 @@ public final class SharedLexiconCatalog {
         this.precompute = Map.copyOf(precompute);
         this.precomputeProfiles = List.copyOf(precomputeProfiles);
         this.familyPrecompute = Objects.requireNonNull(familyPrecompute);
+        this.relatedLexemes = Objects.requireNonNull(relatedLexemes);
         this.recordCount = recordCount;
     }
 
@@ -102,8 +105,10 @@ public final class SharedLexiconCatalog {
         List<PrecomputeProfile> profiles = readPrecomputeProfiles(directory, mappings);
         Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute =
                 SharedLexiconFamilySidecarCatalog.openOptional(directory);
+        Optional<SharedRelatedLexemeCatalog> relatedLexemes =
+                SharedRelatedLexemeCatalog.openOptional(directory);
         return new SharedLexiconCatalog(shards, shardFiles(shards), firstLexemes(shards), lastLexemes(shards),
-                mappings, precompute, profiles, familyPrecompute, recordCount);
+                mappings, precompute, profiles, familyPrecompute, relatedLexemes, recordCount);
     }
 
     /**
@@ -124,8 +129,11 @@ public final class SharedLexiconCatalog {
         List<PrecomputeProfile> profiles = readPrecomputeProfiles(directory, mappings);
         Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute =
                 SharedLexiconFamilySidecarCatalog.openOptional(directory);
+        Optional<SharedRelatedLexemeCatalog> relatedLexemes =
+                SharedRelatedLexemeCatalog.openOptional(directory);
         return new SharedLexiconCatalog(shards, shardFiles(shards), firstLexemes(shards),
-                lastLexemes(shards), mappings, precompute, profiles, familyPrecompute, recordCount);
+                lastLexemes(shards), mappings, precompute, profiles, familyPrecompute,
+                relatedLexemes, recordCount);
     }
 
     public record Coordinate(int shardId, int imageRow) { }
@@ -206,6 +214,13 @@ public final class SharedLexiconCatalog {
         finally { lifecycle.readLock().unlock(); }
     }
 
+    /** Returns the optional directed related-lexeme sidecar. */
+    public Optional<SharedRelatedLexemeCatalog> relatedLexemes() {
+        lifecycle.readLock().lock();
+        try { ensureOpen(); return relatedLexemes; }
+        finally { lifecycle.readLock().unlock(); }
+    }
+
     /** Explicitly warms all mapped shards; this does not flatten their payloads. */
     public void warm() {
         lifecycle.readLock().lock();
@@ -221,6 +236,7 @@ public final class SharedLexiconCatalog {
         try {
             if (closed) return;
             closed = true;
+            relatedLexemes.ifPresent(SharedRelatedLexemeCatalog::close);
             for (ShardSlot shard : shards) {
                 synchronized (shard) { shard.image = null; }
             }
