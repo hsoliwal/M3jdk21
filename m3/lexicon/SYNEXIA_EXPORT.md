@@ -12,6 +12,15 @@ operator-supplied and out of this repository's bundled export. It is separate
 from the five typed family sidecars: no corpus bytes, frequency files, or
 translation data are admitted by this declaration.
 
+The contract-only proper-name instance-index declaration is
+`m3/lexicon/synexia-instance-index-contract.tsv`. It binds Synexia's validated
+UTF-8 `InstanceIndex`/`InstanceRecord` surface to
+`com.m3.text.M3InstanceIndexPrecompute`, preserving normalized-name lookup,
+reverse concept lookup, instance types, metadata, frozen concept coordinates,
+and source identity. It admits no proper-name payload or second lexical
+interner; title catalogs remain outside this contract until a canonical title
+source and typed owner exist.
+
 `m3/lexicon/synexia-source-manifest.tsv` is the reviewed source-family map. It
 keeps the Synexia path, source identity field, mapping fields, and target
 precompute owner visible. Its final `precompute_fields` column is the v2
