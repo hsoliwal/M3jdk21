@@ -18,6 +18,8 @@ public final class M3TypedPrecomputeReceiverTest {
     public static void main(String[] args) {
         var catalog = buildCatalog();
 
+        rejectsMismatchedOwners();
+
         var translation = new SharedLexiconPrecomputeCatalog.TranslationIdentity(
                 "dictlang.translation", "row-1", "en", "hi", "lex-1", "src-1");
         check(catalog.translationAt(translation).orElseThrow().translatedTokenIdAt(1) == 7,
@@ -69,6 +71,39 @@ public final class M3TypedPrecomputeReceiverTest {
         System.out.println("M3JDK_TYPED_RECEIVER_MATRIX_PASS checks=" + checks + " families=7");
     }
 
+    private static void rejectsMismatchedOwners() {
+        var spellScope = new SharedLexiconPrecomputeCatalog.SpellScope(
+                "lex-1", "en", 2, 4, "spell-1");
+        expect(IllegalArgumentException.class, () ->
+                SharedLexiconPrecomputeCatalog.builder().spell(spellScope,
+                        new M3LexiconPrecompute.SpellIndex(
+                                "other-lexicon", "en", 2, 4, "spell-1",
+                                Map.of("a", new int[] {1, 3}), Map.of(3, 4L))));
+
+        var coordinate = new SharedLexiconPrecomputeCatalog.Coordinate(1, 2);
+        var range = new SharedLexiconPrecomputeCatalog.TokenRange(
+                coordinate, "value-1", "tokenizer-1", 0, 2);
+        expect(IllegalArgumentException.class, () ->
+                SharedLexiconPrecomputeCatalog.builder().tokenHashes(range,
+                        new M3LexiconPrecompute.TokenHashPrecompute(
+                                "other-value", 0, 2,
+                                new byte[][] {digest((byte) 0x11), digest((byte) 0x22)},
+                                new M3LexiconPrecompute.RangeFingerprint(11L, 22L, 2),
+                                digest((byte) 0x11))));
+
+        var token = new SharedLexiconPrecomputeCatalog.ValueToken(coordinate, "value-1", 7);
+        expect(IllegalArgumentException.class, () ->
+                SharedLexiconPrecomputeCatalog.builder().prefixCounts(token,
+                        new M3LexiconPrecompute.PrefixCounts(
+                                "other-value", 7, new long[] {0, 1, 2})));
+
+        var value = new SharedLexiconPrecomputeCatalog.ValueScope(coordinate, "value-1");
+        expect(IllegalArgumentException.class, () ->
+                SharedLexiconPrecomputeCatalog.builder().tokenFrequency(value,
+                        new M3LexiconPrecompute.TokenFrequency(
+                                "other-value", Map.of(7, 3))));
+    }
+
     private static SharedLexiconPrecomputeCatalog buildCatalog() {
         byte[] a = digest((byte) 0x11);
         byte[] b = digest((byte) 0x22);
@@ -108,6 +143,15 @@ public final class M3TypedPrecomputeReceiverTest {
         byte[] result = new byte[32];
         Arrays.fill(result, fill);
         return result;
+    }
+
+    private static void expect(Class<? extends Throwable> kind, Runnable action) {
+        try {
+            action.run();
+            throw new AssertionError("missing " + kind.getSimpleName());
+        } catch (Throwable failure) {
+            check(kind.isInstance(failure), "wrong exception: " + failure);
+        }
     }
 
     private static void check(boolean condition, String message) {
