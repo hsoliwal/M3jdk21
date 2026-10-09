@@ -42,5 +42,3 @@ rmdir "$lexicon_tmp"
 trap - EXIT
 printf '%s\n' "$image" > build/english-image-path.txt
 sha256sum build/com.m3.text.jar "$image" | tee build/logs/artifacts.sha256
-
-\n 
