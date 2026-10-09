@@ -1,0 +1,87 @@
+{
+  "schema": "M3JDK21_SYNEXIA_CHAR_SEARCH_WINDOWS_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-char-search-windows-20261009",
+    "pullRequest": null,
+    "commit": "4e776b0d7b97b2d260b3af21d6dc60317b19ac23",
+    "stackedOn": [
+      {
+        "pullRequest": 10062,
+        "crate": "m3-mixed-coder-compare"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.CharSearchWindows",
+    "crate": "m3-char-search-windows",
+    "fossReuseDecisionRow": "string.indexof.char-windows-outside-blocks",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/StringLatin1.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringPositionPrecompute.linearIndexOf / linearLastIndexOf",
+        "mechanics": "indexOf(byte[], int, int, int) and lastIndexOf(byte[], int, int) over each Latin-1 window"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringUTF16.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringPositionPrecompute.linearIndexOf / linearLastIndexOf",
+        "mechanics": "indexOf(byte[], int, int, int) (the indexOfChar intrinsic) and lastIndexOf(byte[], int, int) over each UTF-16 window"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+        "commit": "3866a5c2d8",
+        "target": "java.lang.M3StringPositionPrecompute",
+        "mechanics": "the A7 block signals and exact masks kept for 256..32768-unit sources; the A13 getBytes bulk read feeds the windows"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: the same index as the flat String; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-mixed-coder-compare-20261009 (#609, A30) on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringPositionPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3StringPositionPrecompute.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+      "before": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b",
+      "after": "8cefde51395f11a84eef731a215a5ea3822cb15ce1fa6edff3442699fd190e28",
+      "resource": "00-M3StringPositionPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3CharSearchWindowsTest.java",
+      "before": "ABSENT",
+      "after": "28217680b56cd76faf442e7c030e26d368521f4d301eabe69dc60d3de75952ef",
+      "resource": "01-M3CharSearchWindowsTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3CharSearchWindowsTest flag-off: 61,650 checks (indexOf(int), indexOf(int, from), lastIndexOf(int), lastIndexOf(int, from) with units present at the first, last and a random place, absent, above 0xff in Latin-1 text, supplementary code points, lone surrogates, random from values negative and beyond; atoms, nested tuples and slices of padded owners; ASCII, Latin-1 and mixed UTF-16 texts of every length 0..70, then 100..4097 and 32767..40000; against the flat String)",
+    "regressions": "PASS_WINDOWS M3MixedCoderCompareTest 30,620; M3ContentEqualsTest 7,980; M3IgnoreCaseWindowsTest 188,512; M3IndexOfFlatNeedleTest 137,948; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3NeedleArgTest 73,440; M3RegexSubjectViewTest 9,567; M3TQFactsBuildTest 23,595; M3RegexLiteralGateTest 29,376; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,920; A6 204 + 29",
+    "timing": "flag-off (a31/probe/IndexOfCharBench, bench-baseline.tsv on the A30 build vs bench-after.tsv; flat in parentheses): indexOf(char miss) Latin-1 atom 16 units 61 ns -> 34 (8), 64: 96 -> 30 (5), 128: 160 -> 30 (7), 255: 650 -> 36 (14); tuples 85 -> 36, 292 -> 49, 524 -> 52, 2,192 -> 50; UTF-16 64: 86 -> 40 (9), 128: 359 -> 38 (8), 255: 527 -> 59 (24), tuples 266 -> 55, 1,128 -> 58, 2,294 -> 72; indexOf(char, hit at end) Latin-1 255: 160 -> 27 (5); lastIndexOf(char miss) Latin-1 255: 619 -> 82 (52), UTF-16 689 -> 95 (56); lastIndexOf(char, hit at start) Latin-1 255: 115 -> 39 (12); sources of 256 units and more keep the block path and move with the block cache",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3StringPositionPrecompute.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3CharSearchWindowsRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3CharSearchWindowsTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "only the linear fallbacks change: the A7 block signals and exact masks keep the 256..32768-unit range, where cached negative blocks skip exact work",
+    "a short source is read in one window (4096 units at most), so a 16..255-unit search costs one bulk read and one intrinsic scan instead of a dispatch per unit; tuples descend once per piece instead of per unit",
+    "a unit above 0xff against Latin-1 storage answers -1 before any read, as the stock StringLatin1 search does",
+    "stacked on A30: merge after #609 and the Synexia crate PR (#10062 first, content-bearing merges); the owner commit is 34f4566f87"
+  ]
+}
