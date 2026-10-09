@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: Apache-2.0
+# source_repo=hsoliwal/M3jdk21
+# source_ref=refs/heads/master
+# source_mapping_path=m3/docs/name-mapping.json
+# source_mapping_blob=c29a64eaea0ca614d551ad4bcd3fa2695f0fdc9e
+# purpose=bounded audit of legacy source-to-target rows; this file adds no target promotion
+# proof=M3JDK_SYNEXIA_LEGACY_MAPPING_AUDIT_PASS rows=47 unpinned_rows=47
+mapping_index	source	target	status	source_commit	target_receipt_state	disposition
+0	com.synexia.indexstring.IndexStringTuple	java.lang.M3StringTuple	adapted canonical balanced persistent composition owner	9963cc08ff13922b92a0e3db7c30f56fddacba7d	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+1	com.synexia.indexstring.LocalM3StringPiece	com.m3.text.LocalM3StringPiece	separate provisional byte-format prototype; NOT an API-compatible replacement	9c36c18a7778e6096148a3bbee8f2af7575138b4	REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+2	com.synexia.indexstring.MIndexMappedStringBacking	jdk.internal.mindex.M3MappedStringBacking	renamed target-side internal counterpart	9963cc08ff13922b92a0e3db7c30f56fddacba7d	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+3	com.synexia.indexstring.MIndexNativeResolver / com.synexia.indexstring.nativebridge.MIndexNativeIntern	java.lang.M3StringAtom + java.lang.M3StringPool	adapted scalar canonical-owner responsibility	9963cc08ff13922b92a0e3db7c30f56fddacba7d	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+4	com.synexia.indexstring.MIndexString	java.lang.M3String	implemented-unverified runtime candidate		UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+5	com.synexia.indexstring.MIndexStringBacking	jdk.internal.mindex.M3StringBacking	renamed target-side internal counterpart	9963cc08ff13922b92a0e3db7c30f56fddacba7d	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+6	com.synexia.indexstring.MIndexStringCanonicalFacts / MIndexStringPrecomputation	java.lang.M3StringFacts + jdk.internal.mindex.M3TQ	split internal precompute counterpart; bounded scalar facts implemented, richer donor precompute remains synchronization queue	9963cc08ff13922b92a0e3db7c30f56fddacba7d	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+7	com.synexia.indexstring.nativebridge.MIndexUtf16Shadow	java.lang.M3String.nativeCharShadow + src/java.base/share/native/libjava/String.c	adapted JNI shadow boundary	9963cc08ff13922b92a0e3db7c30f56fddacba7d	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+8	LocalMIndexStringPiece	com.m3.text.LocalM3StringPiece	provisional semantic direction only		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+9	MatIndex family	M3 family	requires per-type source/API/ownership mapping		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+10	MIndex family	M3 family	requires per-type source/API/ownership mapping		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+11	com.synexia.indexstring.IndexResolver / IndexStringTuple	java.lang.M3StringOwner / java.lang.M3StringAtom / java.lang.M3StringTuple	M3JDK bootstrap-safe adaptation		UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+12	com.synexia.indexstring.MIndexStringCanonicalFacts and composable text facts	java.lang.M3StringFacts plus owner-internal bounded range facts	internal-only target adaptation		UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+13	com.synexia.indexstring.MIndexStringSearchPlan and canonical operation-search facts	java.lang.M3StringSearchPrecompute	internal-only bounded operation-precompute adaptation		UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+14	com.synexia.indexstring.MIndexStringPrecomputation / ByteFacts	java.lang.M3StringFacts + java.lang.M3String.encode / encodeNoRepl	internal byte-projection adaptation		UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+15	com.synexia.indexstring.nativebridge.MIndexUtf16Shadow	JNI String UTF-16/char shadow paths and java.lang.M3String.nativeCharShadow	native compatibility adaptation		UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+16	com.synexia.indexstring.nativebridge.MIndexUtf8Shadow	JNI String UTF-8/byte shadow paths and java.lang.M3String.nativeByteShadow	native compatibility adaptation		UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+17	com.synexia.indexstring.MIndexPrecomputedStrings	java.lang.M3StringPool + jdk.internal.mindex.M3MappedStringBacking + java.lang.M3StringOwner	responsibility-split internal target	3338106f30b3f47481bfcf83017a884e1545e8e4	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+18	com.synexia.indexstring.MIndexMappedPrecomputation	jdk.internal.mindex.M3MappedStringBacking + java.lang.M3StringPool + internal fact owners	partial internal storage counterpart	43c49a3f2574c8145e787104e6270bc3fb0cb885	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+19	com.synexia.indexstring.MIndexLiteralSearchSummary	java.lang.M3StringFacts + java.lang.M3StringSearchPrecompute operations	no retained target summary object	9c552723d878a6ded6e7cc290ad31d68aa403121	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+20	com.synexia.indexstring.MIndexMaskLiteralSearch	java.lang.M3StringPositionPrecompute + exact M3String search	absorbed internal execution responsibility	7a47a8a445ca438fb59206508a42b6054956049a	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+21	com.synexia.indexstring.MIndexPrefixFrontier	no java.lang.String counterpart	donor-only fuzzy search state	eb2eecf8cef4ee4891afb732f42716f490b0533e	NO_TARGET_BY_POLICY	DONOR_ONLY_OR_EXCLUDED
+22	com.synexia.indexstring.MIndexExactWeightPrecomputation	no java.lang.String counterpart	donor-only vocabulary/index sidecar	8522504791ca0dc71fc19acfbb2bf550d6027027	NO_TARGET_BY_POLICY	DONOR_ONLY_OR_EXCLUDED
+23	com.synexia.indexstring.MIndexJoinedNativeSearch	optional jdk.internal accelerator only	optional internal acceleration donor	1907a7d040504b546d17a85c67bc2a2677979920	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+24	com.synexia.indexstring.IndexUtf16SearchImage	no java.lang.String counterpart	donor-only dictionary/batch search image	5648dec28cb9a86a9908c190ce2af3d71515b953	NO_TARGET_BY_POLICY	DONOR_ONLY_OR_EXCLUDED
+25	com.synexia.indexstring.precompute.MIndexPrecomputeEngine / Context / Session / Plan / Pass / Artifact / Cache / Catalog / Limits / Scope / Key	M3 internal precompute framework (target-owned, non-public)	inventory mapping		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+26	com.synexia.mindex.precompute.MIndexUniversalPrecompute family	separate M3 internal universal precompute service/image plane	inventory mapping		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+27	com.synexia.indexstring.MIndexStringRelationPrecompute / MIndexStringUnaryProjectionPrecompute / MIndexStringPrecomputeImage	review-required internal M3 String-adjacent lanes	inventory mapping		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+28	com.synexia.indexstring.ast.MIndexAST*Precompute family	M3 compiler/tooling AST precompute plane	inventory mapping		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+29	com.synexia.indexstring.file.MIndexFile*Facts family	M3 file/m3fs fact plane	inventory mapping		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+30	com.synexia.indexstring regex/search precompute families	java.util.regex/internal M3 candidate-plan lanes where justified	inventory mapping		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+31	com.synexia.indexstring MIndexPrefixZ / palindrome / suffix / LCP families	no default java.lang target	inventory mapping		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+32	com.synexia.indexstring lexical / word / bigram / semantic signal images	separate M3 lexicon/language/relation image planes	inventory mapping		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+33	com.synexia.mindex Jini / Coral TPU / LiteRT NPU / Tornado precompute families	optional external/offline M3 accelerators	inventory mapping		REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
+34	com.synexia.indexstring.precompute.MIndexRe2MechanicalFacts	java.util.regex internal candidate/cost evidence + jdk.internal.mindex.M3TQ where semantically safe	selective internal mapping; no RE2/J runtime dependency		UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+35	com.synexia.indexstring.precompute.MIndexLucenePostingPlan	no java.lang.String owner; target search/index service only after separate consumer admission	do not port to java.lang.String		NO_TARGET_BY_POLICY	DONOR_ONLY_OR_EXCLUDED
+36	com.synexia.indexstring.precompute.MIndexTweetyGraphQueryIndex	no java.base String owner; target reasoning/query service only after separate product admission	do not port to java.lang.String		NO_TARGET_BY_POLICY	DONOR_ONLY_OR_EXCLUDED
+37	com.synexia.indexstring.MIndexByteArrayView	com.m3.arrays.M3ByteArrayView	candidate first array substrate slice	8e1f56d448fd31ee5b666c922947e39c2036d4fd	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+38	com.synexia.indexstring.MIndexUtf16ArrayView	com.m3.arrays.M3Utf16ArrayView + com.m3.arrays.M3Utf16Facts	candidate first array substrate slice	8e1f56d448fd31ee5b666c922947e39c2036d4fd	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+39	com.synexia.indexstring.MIndexNativeArrayBoundaries / nativebridge.MIndexNativeArrayFlatten	com.m3.arrays.M3ArrayNative	candidate optional JNI boundary	8e1f56d448fd31ee5b666c922947e39c2036d4fd	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+40	com.synexia.indexstring.MatSegmentedIntArray / MatSegmentedLongArray	com.m3.arrays.M3IntArrayView / M3LongArrayView	candidate immutable value-plane adaptation	8e1f56d448fd31ee5b666c922947e39c2036d4fd	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+41	com.synexia.indexstring.MIndexDirectArrayView / MIndexMaskedUtf16ArrayView / shared.SharedArray*	future com.m3.arrays direct/mask/shared owners	PENDING	8e1f56d448fd31ee5b666c922947e39c2036d4fd	PENDING	PENDING_TARGET_DESIGN
+42	com.synexia.indexstring.MatSegmentedObjectArray	future M3 internal reference-array value plane	PENDING	8e1f56d448fd31ee5b666c922947e39c2036d4fd	PENDING	PENDING_TARGET_DESIGN
+43	com.synexia.indexstring.MIndexCodeTextSignalTrialImage	com.m3.precompute.M3RegexStringTrialImage	implemented isolated M3 port candidate	7a41c084fa80dd60cb0cffdfb9dc3db50b49e71b	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+44	com.synexia.rewrite.M3RegexStringPrecomputeSignals	com.m3.precompute.M3RegexStringSignals	implemented isolated M3 port candidate	6f6fafa01ce78b6f6187d50305b3e9c2829a7eca	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+45	com.synexia.rewrite.M3RegexStringNativeSignals	com.m3.precompute.M3CodeTextSignalBatchNative	no direct port; reuse existing target native owner	6f6fafa01ce78b6f6187d50305b3e9c2829a7eca	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
+46	com.synexia.indexstring.shared.SharedArrayNative.compare / hash32 / metrics / copyTo; SharedSegments.preparedBuffers	java.lang.String.compareTo(String) -> java.lang.M3String / M3StringOwner / M3StringAtom.address; JNI projections -> M3String.getChars/getBytes and nativeCharShadow/nativeByteShadow	Apache source custody pinned; target direct-address fast path not implemented	857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
