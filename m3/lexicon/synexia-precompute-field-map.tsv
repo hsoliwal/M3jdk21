@@ -61,3 +61,24 @@ M3NumberSpace	precomputedValueCount	int	precomputed_value_count	synexia.records.
 M3NumberSpace	sharedUtf16Storage	boolean	shared_utf16_storage	synexia.records.tsv:precompute_payload	MAPPED	shared UTF-16 storage capability remains an explicit boolean
 M3NumberSpace	canonicalDecimalSpelling	String	canonical_decimal_spelling	synexia.records.tsv:precompute_payload	MAPPED	canonical decimal spelling remains source-owned UTF-16 text
 M3LanguageGrammarSupport	supported	boolean	translation_grammar_supported	synexia.records.tsv:precompute_payload	MAPPED	grammar support remains an explicit source-owned boolean
+M3LangDexPrecompute.Entry	lemma	String	lemma	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	lemma is admitted lexical identity metadata and is never inferred from surface
+M3LangDexPrecompute.Identity	sourceId	String	langdex_source_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical identity source ID is preserved without renumbering
+M3LangDexPrecompute.Identity	recordId	String	langdex_record_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical identity record coordinate is preserved without renumbering
+M3LangDexPrecompute.Identity	glottocode	String	langdex_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	identity language coordinate remains source-owned
+M3LangDexPrecompute.Identity	surface	String	langdex_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	identity surface is preserved as UTF-16 text
+M3LangDexPrecompute.Identity	sourceRevision	String	langdex_source_revision	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	identity revision pins the source snapshot
+M3LangDexPrecompute.Identity	domain	String	langdex_domain	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	enum spelling is preserved as an explicit domain token
+M3LangDexPrecompute.Identity	canonicalSchema	String	langdex_canonical_schema	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical schema is preserved as source metadata
+M3LangDexPrecompute.Identity	canonicalBytes	byte[]	langdex_canonical_bytes	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical bytes are admitted as unsigned byte values and never synthesized
+M3LangDexPrecompute.Identity	canonicalDigest	String	langdex_canonical_digest	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical digest is preserved for receiver-side byte verification
+M3LangDexPrecompute.TranslationIdentity	sourceId	String	langdex_source_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation identity retains the originating source family
+M3LangDexPrecompute.TranslationIdentity	recordId	String	langdex_record_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation identity retains the originating source record
+M3LangDexPrecompute.TranslationIdentity	sourceGlottocode	String	langdex_source_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	source language coordinate is preserved
+M3LangDexPrecompute.TranslationIdentity	sourceSurface	String	langdex_source_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	source translation surface is preserved
+M3LangDexPrecompute.TranslationIdentity	targetGlottocode	String	langdex_target_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	target language coordinate is preserved
+M3LangDexPrecompute.TranslationIdentity	targetSurface	String	langdex_target_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	target translation surface is preserved
+M3LangDexPrecompute.TranslationIdentity	sourceRevision	String	langdex_source_revision	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation identity shares the source snapshot revision
+M3LangDexPrecompute.Translation	sourceGlottocode	String	langdex_source_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation source language coordinate is preserved
+M3LangDexPrecompute.Translation	sourceSurface	String	langdex_source_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation source surface is preserved
+M3LangDexPrecompute.Translation	targetGlottocode	String	langdex_target_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation target language coordinate is preserved
+M3LangDexPrecompute.Translation	targetSurface	String	langdex_target_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation target surface is preserved
