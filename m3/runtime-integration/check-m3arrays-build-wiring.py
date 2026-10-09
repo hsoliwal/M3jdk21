@@ -27,8 +27,8 @@ def require(label: str, source: str, fragment: str) -> None:
 
 for fragment in [
     "name: M3 arrays contracts",
-    '"m3/arrays/pom.xml"',
-    '"m3/runtime-integration/check-m3arrays-build-wiring.py"',
+    "m3/arrays/pom.xml",
+    "m3/runtime-integration/check-m3arrays-build-wiring.py",
     "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
     "OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz",
     "sha256sum --check -",
