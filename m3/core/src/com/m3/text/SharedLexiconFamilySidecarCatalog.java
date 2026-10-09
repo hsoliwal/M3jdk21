@@ -165,10 +165,10 @@ public final class SharedLexiconFamilySidecarCatalog {
             if (!HexFormat.of().formatHex(sha256(bytes)).equals(entry.sha256()))
                 throw new IOException("family sidecar checksum mismatch: " + family);
             List<String[]> rows = rows(bytes, fileHeader(family), entry.rows());
-            String previous = null;
+            List<String> previous = null;
             for (String[] row : rows) {
-                String key = key(family, row);
-                if (previous != null && previous.compareTo(key) >= 0)
+                List<String> key = key(family, row);
+                if (previous != null && compareKey(previous, key) >= 0)
                     throw new IOException("family rows are not strictly sorted: " + family);
                 previous = key;
                 try {
@@ -251,6 +251,9 @@ public final class SharedLexiconFamilySidecarCatalog {
     }
 
     private static List<String[]> rows(byte[] bytes, String[] header, int expectedRows) throws IOException {
+        if (bytes.length >= 3 && (bytes[0] & 0xff) == 0xef
+                && (bytes[1] & 0xff) == 0xbb && (bytes[2] & 0xff) == 0xbf)
+            throw new IOException("sidecar must be UTF-8 without BOM and use LF");
         final String text;
         try {
             text = StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)
@@ -258,7 +261,7 @@ public final class SharedLexiconFamilySidecarCatalog {
         } catch (CharacterCodingException failure) {
             throw new IOException("sidecar is not valid UTF-8", failure);
         }
-        if (text.indexOf('\uFEFF') >= 0 || text.indexOf('\r') >= 0)
+        if (text.indexOf('\r') >= 0)
             throw new IOException("sidecar must be UTF-8 without BOM and use LF");
         String[] lines = text.split("\\n", -1);
         if (lines.length == 0 || !lines[0].equals(String.join("\t", header)))
@@ -267,16 +270,58 @@ public final class SharedLexiconFamilySidecarCatalog {
         if (last > 1 && lines[last - 1].isEmpty()) last--;
         List<String[]> result = new ArrayList<>();
         for (int line = 1; line < last; line++) {
-            if (lines[line].endsWith("\r")) throw new IOException("CRLF sidecar is not canonical");
-            String[] fields = lines[line].split("\t", -1);
+            String[] fields = parseTsvLine(lines[line]);
             if (fields.length != header.length) throw new IOException("sidecar field count mismatch");
             result.add(fields);
         }
-        if (result.size() != expectedRows) throw new IOException("sidecar row count mismatch");
+        if (expectedRows >= 0 && result.size() != expectedRows)
+            throw new IOException("sidecar row count mismatch");
         return result;
     }
 
-    private static String key(String family, String[] row) {
+    private static String[] parseTsvLine(String line) throws IOException {
+        List<String> fields = new ArrayList<>();
+        StringBuilder field = new StringBuilder();
+        boolean quoted = false;
+        boolean afterQuote = false;
+        for (int at = 0; at < line.length(); at++) {
+            char value = line.charAt(at);
+            if (quoted) {
+                if (value == '"') {
+                    if (at + 1 < line.length() && line.charAt(at + 1) == '"') {
+                        field.append('"');
+                        at++;
+                    } else {
+                        quoted = false;
+                        afterQuote = true;
+                    }
+                } else {
+                    field.append(value);
+                }
+            } else if (afterQuote) {
+                if (value == '\t') {
+                    fields.add(field.toString());
+                    field.setLength(0);
+                    afterQuote = false;
+                } else {
+                    throw new IOException("invalid quoted TSV field");
+                }
+            } else if (value == '"') {
+                if (field.length() != 0) throw new IOException("invalid quoted TSV field");
+                quoted = true;
+            } else if (value == '\t') {
+                fields.add(field.toString());
+                field.setLength(0);
+            } else {
+                field.append(value);
+            }
+        }
+        if (quoted) throw new IOException("unterminated quoted TSV field");
+        fields.add(field.toString());
+        return fields.toArray(String[]::new);
+    }
+
+    private static List<String> key(String family, String[] row) {
         int count = switch (family) {
             case "translation-projection" -> 8;
             case "spell-index" -> 10;
@@ -285,7 +330,30 @@ public final class SharedLexiconFamilySidecarCatalog {
             case "token-frequency" -> 8;
             default -> throw new IllegalArgumentException("unknown family: " + family);
         };
-        return String.join("\u0000", java.util.Arrays.copyOf(row, count));
+        return List.of(java.util.Arrays.copyOf(row, count));
+    }
+
+    private static int compareKey(List<String> left, List<String> right) {
+        int fields = Math.min(left.size(), right.size());
+        for (int at = 0; at < fields; at++) {
+            int compared = compareCodePoints(left.get(at), right.get(at));
+            if (compared != 0) return compared;
+        }
+        return Integer.compare(left.size(), right.size());
+    }
+
+    private static int compareCodePoints(String left, String right) {
+        int leftAt = 0;
+        int rightAt = 0;
+        while (leftAt < left.length() && rightAt < right.length()) {
+            int leftCodePoint = left.codePointAt(leftAt);
+            int rightCodePoint = right.codePointAt(rightAt);
+            if (leftCodePoint != rightCodePoint) return Integer.compare(leftCodePoint, rightCodePoint);
+            leftAt += Character.charCount(leftCodePoint);
+            rightAt += Character.charCount(rightCodePoint);
+        }
+        return Integer.compare(left.codePointCount(0, left.length()),
+                right.codePointCount(0, right.length()));
     }
 
     private static Map.Entry<SourceScope, Integer> common(String[] row) {
@@ -311,7 +379,7 @@ public final class SharedLexiconFamilySidecarCatalog {
         String source = text(row[8], "source_fingerprint");
         int[] ids = intArray(row[10], "candidate_token_ids", true);
         Map<Integer, Long> frequencies = longMap(row[11], "frequencies");
-        String deleteKey = text(row[9], "delete_key");
+        String deleteKey = text(row[9], "delete_key", true);
         return new SpellEntry(new SpellKey(scope, lexicon, language, max, prefix, source),
                 deleteKey, ids, frequencies);
     }
@@ -454,7 +522,13 @@ public final class SharedLexiconFamilySidecarCatalog {
         return value;
     }
     private static String text(String value, String name) {
-        if (value == null || value.isEmpty() || value.indexOf('\t') >= 0 || value.indexOf('\n') >= 0 || value.indexOf('\r') >= 0)
+        return text(value, name, false);
+    }
+
+    private static String text(String value, String name, boolean allowEmpty) {
+        if (value == null || (!allowEmpty && value.isEmpty())
+                || value.indexOf('\t') >= 0 || value.indexOf('\n') >= 0
+                || value.indexOf('\r') >= 0)
             throw new IllegalArgumentException(name + " is invalid");
         return value;
     }
