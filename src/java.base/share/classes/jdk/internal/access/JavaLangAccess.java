@@ -49,6 +49,7 @@ import jdk.internal.javac.PreviewFeature;
 import jdk.internal.misc.CarrierThreadLocal;
 import jdk.internal.module.ServicesCatalog;
 import jdk.internal.reflect.ConstantPool;
+import jdk.internal.mindex.M3TQ;
 import jdk.internal.vm.Continuation;
 import jdk.internal.vm.ContinuationScope;
 import jdk.internal.vm.StackableScope;
@@ -426,6 +427,14 @@ public interface JavaLangAccess {
      * segmented storage rather than eagerly materializing one byte array.
      */
     boolean stringConcatUsesM3Storage();
+
+    /**
+     * Returns the exact trigram facts the String's M3 storage holds for the whole String
+     * (computed once per owner, shared with the mixed indexOf paths), or {@code null} when
+     * the String is flat, outside the precompute's size band, or the facts are unavailable;
+     * the caller then runs its exact search.
+     */
+    M3TQ.Facts m3TrigramFacts(String text);
 
    /**
     * Get the coder for the supplied character.

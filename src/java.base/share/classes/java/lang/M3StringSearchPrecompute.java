@@ -121,6 +121,26 @@ final class M3StringSearchPrecompute {
         }
     }
 
+    /**
+     * The whole-String trigram facts of an M3-backed String inside the source band, computed
+     * once per owner and shared with the mixed indexOf paths (A18): {@code null} for a flat
+     * String, a length outside the band, or when the facts are unavailable, so the caller
+     * runs its exact search.
+     */
+    static M3TQ.Facts trigramFacts(String text) {
+        M3String source = text.m3();
+        if (source == null
+                || source.length() < MIN_TRIGRAM_SOURCE_UNITS
+                || source.length() > MAX_TRIGRAM_SOURCE_UNITS) {
+            return null;
+        }
+        try {
+            return sourceFacts(source);
+        } catch (OutOfMemoryError unavailable) {
+            return null;
+        }
+    }
+
     private static M3TQ.Facts sourceFacts(M3String source) {
         M3StringOwner owner = source.owner();
         long coordinate = source.coordinate();

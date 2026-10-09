@@ -68,6 +68,7 @@ import java.util.function.Supplier;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
+import jdk.internal.mindex.M3TQ;
 import jdk.internal.misc.CarrierThreadLocal;
 import jdk.internal.misc.Unsafe;
 import jdk.internal.util.StaticProperty;
@@ -2535,6 +2536,10 @@ public final class System {
 
             public boolean stringConcatUsesM3Storage() {
                 return String.m3JoinedStringsEnabled();
+            }
+
+            public M3TQ.Facts m3TrigramFacts(String text) {
+                return M3StringSearchPrecompute.trigramFacts(text);
             }
 
             @PreviewFeature(feature=PreviewFeature.Feature.STRING_TEMPLATES)

@@ -38,6 +38,8 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import jdk.internal.access.JavaLangAccess;
+import jdk.internal.access.SharedSecrets;
 import jdk.internal.mindex.M3TQ;
 
 /**
@@ -145,11 +147,6 @@ public final class Matcher implements MatchResult {
      * The original string being matched.
      */
     CharSequence text;
-
-    private static final int M3_TQ_MAX_UTF16_UNITS = 32_768;
-    private int m3TqFactsFrom = -1;
-    private int m3TqFactsTo = -1;
-    private M3TQ.Facts m3TqFacts;
 
     /**
      * Matcher state used by the last node. NOANCHOR is used when a
@@ -435,9 +432,6 @@ public final class Matcher implements MatchResult {
                 localsPos[i].clear();
         }
         lastAppendPosition = 0;
-        // Derived facts are not match state. Keep them for the same immutable input;
-        // m3TqAllowsSearch checks the exact region before reuse. reset(input) invalidates
-        // before changing text, so no second input reference is needed for cache identity.
         from = 0;
         to = getTextLength();
         modCount++;
@@ -459,11 +453,6 @@ public final class Matcher implements MatchResult {
      * @return  This matcher
      */
     public Matcher reset(CharSequence input) {
-        if (input != text) {
-            m3TqFacts = null;
-            m3TqFactsFrom = -1;
-            m3TqFactsTo = -1;
-        }
         text = input;
         return reset();
     }
@@ -1739,29 +1728,16 @@ public final class Matcher implements MatchResult {
      */
     private boolean m3TqAllowsSearch() {
         M3TQ query = parentPattern.m3Tq;
-        if (query == null || !query.hasConstraints() || !(text instanceof String)) {
+        if (query == null || !query.hasConstraints() || !(text instanceof String subject)
+                || this.from != 0 || to != subject.length()) {
             return true;
         }
-        int regionLength = to - this.from;
-        if (regionLength < 0 || regionLength > M3_TQ_MAX_UTF16_UNITS) {
-            return true;
-        }
-
-        M3TQ.Facts facts = m3TqFacts;
-        if (facts == null
-                || m3TqFactsFrom != this.from
-                || m3TqFactsTo != to) {
-            try {
-                facts = M3TQ.precompute(text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
-            } catch (OutOfMemoryError unavailable) {
-                // Candidate precompute must never add a new failure mode to Matcher.find().
-                return true;
-            }
-            m3TqFactsFrom = this.from;
-            m3TqFactsTo = to;
-            m3TqFacts = facts;
-        }
-        return query.testPrecomputed(facts);
+        // The facts are the subject's own precompute (the per-owner trigram cache the mixed
+        // indexOf paths share), never computed per matcher: a flat String, a sub-region or a
+        // size outside the cache band has none and runs the exact engine, as the stock matcher.
+        JavaLangAccess access = SharedSecrets.getJavaLangAccess();
+        M3TQ.Facts facts = access == null ? null : access.m3TrigramFacts(subject);
+        return facts == null || query.testPrecomputed(facts);
     }
 
     boolean search(int from) {
