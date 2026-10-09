@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.M3StringPositionPrecompute.linearIndexOf / linearLastIndexOf (sources shorter than 256 units, longer than 32768, or without a block entry): one charAt per unit through owner dispatch (A7 lineage, carried to A30 3866a5c2d8)",
+      "source_commit": "3866a5c2d8",
+      "target": "the source comes out in 4096-unit bulk windows in the source coder and the stock StringLatin1/StringUTF16 indexOf and lastIndexOf single-unit searches run over each window; a unit above 0xff is never in Latin-1 storage; the block signals keep the 256..32768-unit range",
+      "status": "implemented-locally-verified (G7; flag-off: M3CharSearchWindowsTest 61,650 checks against the flat String; indexOf(char) over 64..255-unit sources 3x..18x faster on atoms and 6x..44x on tuples, within 2.5x of flat)",
+      "target_rule": "the same index as the flat String"
+    }
+  ]
+}

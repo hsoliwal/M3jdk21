@@ -125,3 +125,7 @@ Regenerated against 8e050d6cd2: the upstream `String.java` after-image and hunks
 ## 2026-10-09 re-seal (A30 cross-coder compares in place)
 
 Regenerated against 0b114a9b55: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3StringAtom.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-09 re-seal (A31 single-unit search windows outside the block range)
+
+Regenerated against e03a8ebfa6: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3StringPositionPrecompute.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.

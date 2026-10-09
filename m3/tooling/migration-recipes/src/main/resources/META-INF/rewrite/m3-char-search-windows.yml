@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CharSearchWindows
+displayName: M3JDK21 single-unit search outside the block range over bulk windows
+description: >-
+  M3StringPositionPrecompute scanned sources outside its block range (shorter than 256 units,
+  longer than 32768, or without a block entry) one charAt at a time through owner dispatch:
+  indexOf(char) over a 255-unit atom cost 650 ns against 24 flat, a tuple 2,192; 64 units 96
+  against 8. Those sources now come out in 4096-unit bulk windows in the source coder and the
+  stock StringLatin1/StringUTF16 single-unit searches run over each window; a unit above 0xff is
+  never in Latin-1 storage; the block signals keep the 256..32768-unit range. Java step:
+  M3StringPositionPrecompute and the jtreg proof; no upstream file changed. Stacks on crate
+  m3-mixed-coder-compare (branch order); the M3StringPositionPrecompute preimage is the A7
+  (invariant 6) postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-char-search-windows
