@@ -321,7 +321,7 @@
       "before": null,
       "after": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
       "superseded": [
-        "0be405cfa1d7fac2fb1fbd5ae42e9798033eda53c6545b47154a16fa57134bd"
+        "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd"
       ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": {
