@@ -155,6 +155,7 @@ final class M3StringFacts {
         long suffix = 0L;
         int previous2 = 0;
         int previous1 = 0;
+        int upperDelta = 0;
         int trimStart = 0;
         int trimEnd = 0;
         boolean leadingTrim = true;
@@ -190,17 +191,20 @@ final class M3StringFacts {
 
             previous2 = previous1;
             previous1 = unit;
+            boolean asciiLetter =
+                    (unit >= 'A' && unit <= 'Z') || (unit >= 'a' && unit <= 'z');
+            upperDelta = 31 * upperDelta + (asciiLetter ? -('a' - 'A') : 0);
             bytes[index] = (byte) (unit >= 'A' && unit <= 'Z' ? unit | 0x20 : unit);
         }
         if (leadingTrim) trimEnd = 0;
         if (leadingStrip) stripEnd = 0;
 
         int lowerHash = ArraysSupport.vectorizedHashCode(bytes, 0, length, 0, ArraysSupport.T_BOOLEAN);
-        for (int index = 0; index < length; index++) {
-            int unit = bytes[index] & 0xff;
-            bytes[index] = (byte) (unit >= 'a' && unit <= 'z' ? unit & ~0x20 : unit);
-        }
-        int upperHash = ArraysSupport.vectorizedHashCode(bytes, 0, length, 0, ArraysSupport.T_BOOLEAN);
+
+        // For every ASCII letter asciiUpper(unit) - asciiLower(unit) == -32; for every
+        // non-letter it is zero. upperDelta is the same Java int polynomial over those per-unit
+        // differences, so ordinary overflow makes this exact: upperHash == lowerHash + upperDelta.
+        int upperHash = lowerHash + upperDelta;
         int titleHash = lowerHash + pow31(length - 1) * (asciiUpper(first) - asciiLower(first));
 
         return new M3StringFacts(
