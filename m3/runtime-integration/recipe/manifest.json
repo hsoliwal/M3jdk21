@@ -151,7 +151,10 @@
     },
     "src/java.base/share/classes/java/lang/String.java": {
       "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
-      "after": "c16fd68b3a0402352569908ba9c99a17dc2853ba7dbb6cbbcb5c3ea6ea4efc8f"
+      "after": "c16fd68b3a0402352569908ba9c99a17dc2853ba7dbb6cbbcb5c3ea6ea4efc8f",
+      "superseded": [
+        "32263fc78517faa8602d354d696bf52352978387"
+      ]
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
       "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",
