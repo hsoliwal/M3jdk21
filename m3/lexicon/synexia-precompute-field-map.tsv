@@ -78,8 +78,8 @@ M3LexiconPrecompute.TokenHashPrecompute	tokenSha256	byte[][]	tokenSha256	m3lex-f
 M3LexiconPrecompute.TokenHashPrecompute	rangeFingerprint	RangeFingerprint	rangeFingerprint	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	typed rolling tuple remains a candidate fingerprint and is never token identity
 M3LexiconPrecompute.TokenHashPrecompute	rangeSha256	byte[]	rangeSha256	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	exact range digest remains an explicitly encoded byte value
 M3LexiconPrecompute.TokenFrequency	frequencies	Map<Integer,Integer>	frequencies	m3lex-family-v2:synexia.token-frequency.tsv	MAPPED	sorted frequency fold remains value-scoped derived metadata, never token identity
-M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTokenIds	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
-M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
+M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translated_token_ids	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
+M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mapped_token_count	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
 M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
 M3InstanceIndexPrecompute.InstanceRecord	nameUtf8	String	instance_name_utf8	m3lex-instance-v1:synexia-instance-index.tsv	MAPPED	Original valid UTF-8 instance name is preserved; normalized lookup is derived and never lexical token identity.
 M3InstanceIndexPrecompute.InstanceRecord	type	M3InstanceIndexPrecompute.InstanceType	instance_type	m3lex-instance-v1:synexia-instance-index.tsv	MAPPED	Instance type remains an explicit entity-instance category and is not collapsed into a token or concept.
@@ -103,3 +103,13 @@ SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceFingerprint	String	sour
 AcronymPrecompute	acronym	String	acronym	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	canonical acronym identity is preserved exactly and remains separate from token identity
 AcronymPrecompute	expansion	String	expansion	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	canonical expansion text is preserved exactly under the source manifest scope
 AcronymPrecompute	domain	String	domain	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	domain is retained as source-owned metadata and never used as token identity
+M3LanguageGrammarSupport	supports	boolean	translation_grammar_supported	synexia.records.tsv:precompute_payload	MAPPED	grammar support is an explicit language-profile result and is never inferred from token identity
+M3NumberSpace	MIN_VALUE	int	min_value	synexia.records.tsv:precompute_payload	MAPPED	admitted numeric vocabulary lower bound remains the canonical 0 boundary
+M3NumberSpace	MAX_VALUE	int	max_value	synexia.records.tsv:precompute_payload	MAPPED	admitted numeric vocabulary upper bound remains the canonical 10000 boundary
+M3NumberSpace	precomputedValueCount	int	precomputed_value_count	synexia.records.tsv:precompute_payload	MAPPED	all admitted integer spellings remain backed by one bounded precompute table
+M3NumberSpace	storageIdentity	StorageIdentity	shared_utf16_storage	synexia.records.tsv:precompute_payload	MAPPED	all numeric views retain one immutable shared UTF-16 owner
+M3NumberSpace	spelling	String	canonical_decimal_spelling	synexia.records.tsv:precompute_payload	MAPPED	canonical decimal spelling remains the explicit materialization boundary
+M3LexiconPrecompute.SiUnitPrecompute	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_payload	MAPPED	SI decimal exponent remains bounded donor metadata in the inclusive -100..100 range
+M3LexiconPrecompute.SiUnitPrecompute	dimensionPacked	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains donor-owned
+M3LexiconPrecompute.SiUnitPrecompute	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
+M3LexiconPrecompute.SiUnitPrecompute	prefixable	boolean	si_prefixable	synexia.records.tsv:precompute_payload	MAPPED	SI prefixability remains an explicit donor boolean
