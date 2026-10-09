@@ -15,7 +15,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -152,7 +151,6 @@ public final class SharedLexiconFamilySidecarCatalog {
         Objects.requireNonNull(directory, "directory");
         Path root = directory.toAbsolutePath().normalize();
         if (!Files.isDirectory(root)) throw new IOException("not a sidecar directory");
-        validateFileSet(root);
         Map<String, IndexEntry> index = readIndex(root.resolve(INDEX_FILE));
         Map<TranslationKey, M3LexiconPrecompute.TranslationProjection> translations = new HashMap<>();
         Map<SpellKey, SpellAccumulator> spellGroups = new HashMap<>();
@@ -468,18 +466,6 @@ public final class SharedLexiconFamilySidecarCatalog {
         try { return Long.parseLong(value); }
         catch (NumberFormatException failure) { throw new IOException("invalid " + name, failure); }
     }
-    private static void validateFileSet(Path root) throws IOException {
-        Set<String> expected = new HashSet<>(FILES.values());
-        expected.add(INDEX_FILE);
-        try (var entries = Files.list(root)) {
-            for (Path entry : entries.toList()) {
-                if (Files.isRegularFile(entry)
-                        && !expected.contains(entry.getFileName().toString()))
-                    throw new IOException("unexpected family sidecar: " + entry.getFileName());
-            }
-        }
-    }
-
     private static Path safeChild(Path root, String file) throws IOException {
         if (file.isEmpty() || file.contains("/") || file.contains("\\") || file.equals(".") || file.equals(".."))
             throw new IOException("unsafe sidecar file");
