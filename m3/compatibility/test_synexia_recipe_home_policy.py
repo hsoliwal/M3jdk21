@@ -42,7 +42,10 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(16, len(rows))
+        # The three A3/JNI receiver rows were admitted after the original 16-row freeze.
+        # Keep exact cardinality and reject duplicate surfaces; do not relax ownership rules.
+        self.assertEqual(19, len(rows))
+        self.assertEqual(19, len({row["local_surface"] for row in rows}))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
