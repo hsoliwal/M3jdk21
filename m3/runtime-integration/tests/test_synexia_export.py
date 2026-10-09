@@ -225,7 +225,7 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
         self.assertEqual("", sources["translate.rows"]["precompute_fields"])
-        self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        self.assertEqual("source_id,record_id,min_value,max_value,precomputed_value_count,shared_utf16_storage,canonical_decimal_spelling,source_revision",\n                         sources["dictlang.numbers.0-10000"]["precompute_fields"])
         self.assertEqual("", sources["dictlang.thesaurus"]["precompute_fields"])
         self.assertEqual("", sources["dictlang.antonyms"]["precompute_fields"])
 
