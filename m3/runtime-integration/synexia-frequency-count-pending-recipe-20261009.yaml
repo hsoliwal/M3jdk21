@@ -1,0 +1,48 @@
+schema: m3-recipe/v1
+id: synexia-frequency-count-pending-20261009
+pattern: source-contract-reconciliation-gate
+purpose: Carry the reconciled Synexia frequency-count semantics into the M3JDK admission queue without promoting a stale frequency-rank mapping.
+
+inputs:
+  - receipt: m3/runtime-integration/synexia-frequency-count-pending-receipt.tsv
+  - source_manifest: m3/lexicon/synexia-source-manifest.tsv
+  - field_map: m3/lexicon/synexia-precompute-field-map.tsv
+
+donor:
+  commit: c6d128572825cc11f4bbb05d78bcbebb5b3aa67a
+  path: synexia-dictlang/src/main/resources/en_full_frequency.txt
+  git_blob: 05ccf20cd2e3789ddb849b14f0374aa089d90cc5
+  content_sha256: 7fea67ab954e2c01df6c608c9826e594cf36f8823b3243554f88245fb75dc506
+  sample: "you 28787591"
+  license: MIT + OPUS/OpenSubtitles attribution
+
+mapping:
+  source_value_semantics: non-negative OpenSubtitles-derived corpus count
+  canonical_payload_field: corpus_count
+  forbidden_authority: frequency_rank
+  target_status: BLOCKED_UNTIL_SOURCE_PR_ACCEPTED
+  target_receiver: M3LexiconPrecompute.IndexWordSignal + SharedLexiconPrecomputeCatalog.WordIdentity
+
+phases:
+  - SEARCH: pin the source commit, path, Git blob, content digest, and sample.
+  - INVENTORY: compare the source contract with the current M3JDK manifest and field map.
+  - CLASSIFY: RECONCILE_SOURCE_MAPPING; do not infer a rank from counts.
+  - FILTER: reject negative counts, frequency_rank as canonical payload, and copied corpus bytes.
+  - PROVE: run the source discriminator; receiver runtime proof remains separate.
+  - CHECKPOINT: remain blocked until Synexia PR #10047 is accepted and the target map is refreshed.
+
+invariants:
+  - The source value is a non-negative corpus count and is not a frequency rank.
+  - The M3JDK target must use corpus_count after source admission.
+  - MIT and OPUS/OpenSubtitles attribution remains required.
+  - No frequency corpus bytes are copied into java.lang.String storage.
+  - Runtime: NOT_RUN
+  - Hosted CI: NOT_CLAIMED
+  - Target promotion: BLOCKED_UNTIL_SOURCE_PR_ACCEPTED
+
+verification:
+  source_discriminator_command: python m3/runtime-integration/check-synexia-frequency-count-pending-receipt.py --repo-root .
+  source_discriminator: M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=26/26
+  runtime: NOT_RUN
+  hosted_ci: NOT_CLAIMED
+  benchmark: NOT_MEASURED
