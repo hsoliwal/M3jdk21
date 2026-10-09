@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ContentEqualsBulk
+displayName: M3JDK21 contentEquals receivers read in bulk windows
+description: >-
+  String.contentEquals(CharSequence) with an M3 receiver and a generic sequence (a CharBuffer, any
+  CharSequence that is neither a String nor a builder) compared one charAt at a time through
+  owner dispatch (2048 units against an equal CharBuffer: an atom 3.5 us, a tuple 20 us, flat
+  0.36 us). The receiver now comes out in 4096-unit bulk windows through M3String.getChars and
+  each window is compared against the sequence, which is read exactly as before. Text step:
+  String.java; Java step: the jtreg proof. Stacks on crate m3-ignorecase-windows (its String.java
+  postimage is this preimage).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-contentequals-bulk
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-contentequals-bulk

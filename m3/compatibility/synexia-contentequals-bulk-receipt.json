@@ -1,0 +1,81 @@
+{
+  "schema": "M3JDK21_SYNEXIA_CONTENTEQUALS_BULK_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-contentequals-bulk-20261009",
+    "pullRequest": null,
+    "commit": "19ad0959b414346358da12b66913658907977131",
+    "stackedOn": [
+      {
+        "pullRequest": 10058,
+        "crate": "m3-ignorecase-windows"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe + M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.ContentEqualsBulk",
+    "crate": "m3-contentequals-bulk",
+    "fossReuseDecisionRow": "string.contentequals.bulk-receiver-windows",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "commit": "890adb6410",
+        "target": "java.lang.String.contentEquals(CharSequence)",
+        "mechanics": "the generic per-unit loop against cs.charAt, now over a bulk-read window of the receiver"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "commit": "ae302ec4d4",
+        "target": "java.lang.String.contentEquals(CharSequence)",
+        "mechanics": "the A11/A26 getChars bulk read in 4096-unit windows (the A10 window pattern)"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: the same boolean as the flat String and the same reads of the sequence; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-ignorecase-windows-20261009 (#606, A28) on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.String"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed under the supersession model: String.java after-image and hunks regenerated from a synthetic after-state tree; no M3-owned file changed; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "test/jdk/java/lang/String/M3ContentEqualsTest.java",
+      "before": "ABSENT",
+      "after": "5dbe26c5f95952dce1b7a92239c4828713b8b9f7aba48413994142de185d41d3",
+      "resource": "00-M3ContentEqualsTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "4cf3817962e88a2eb206a010971e91654641bf0a78372a64544ccd6a44b08c65",
+      "after": "43f51d518f5afe15044c9db6cdc212eb08c2e7a6d26ef2b151cc6a3087b48e6e",
+      "resource": "00-String.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3ContentEqualsTest flag-off: 7,980 checks (contentEquals against a CharBuffer, a counting custom CharSequence, a StringBuilder, a StringBuffer and a String that are equal, differ at a random unit, at the first or last unit, at the 64/4096/8192-unit window edges, or differ in length; atoms, nested tuples and slices of padded owners; both coders; 0..20000 units; against the flat String and an array oracle; the sequence never read past its end)",
+    "regressions": "PASS_WINDOWS M3IgnoreCaseWindowsTest 188,512; M3IndexOfFlatNeedleTest 137,948; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3NeedleArgTest 73,440; M3RegexSubjectViewTest 9,567; M3TQFactsBuildTest 23,595; M3RegexLiteralGateTest 29,376; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,919; A6 204 + 29",
+    "timing": "flag-off (a29/probe/ContentEqualsBench, bench-baseline.tsv on the A28 build vs bench-after.tsv; equal CharBuffer other; flat in parentheses): Latin-1 atom 64 units 123 ns -> 40 (20), 256: 495 -> 113 (59), 2048: 3,490 -> 833 (413), 16384: 36,847 -> 5,358 (2,718), 65536: 257,447 -> 22,717 (11,019); tuples 297 -> 51, 1,323 -> 136, 20,147 -> 748, 117,426 -> 5,390, 625,461 -> 22,091; UTF-16 16384 atom 37,600 -> 4,523 (2,943), tuple 123,104 -> 4,556; a custom CharSequence and a CharBuffer differing at the last unit move alike",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets under the supersession model (String.java synthetic tree; no M3-owned file changed); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3ContentEqualsBulkRecipeTest 3/3 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3ContentEqualsTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the sequence side is read exactly as the stock loop reads it (cs.charAt per unit up to the first difference), so a sequence that counts or limits its reads sees no change",
+    "the receiver window is 4096 units of chars (getChars, both coders) so one lane serves Latin-1 and UTF-16 receivers; the remaining 2x against flat is the window copy plus a loop the JIT does not vectorize for a virtual charAt",
+    "String arguments keep the equals lane and builders the mismatchUnits lane (A10)",
+    "stacked on A28: merge after #606 and the Synexia crate PR (#10058 first, content-bearing merges); the owner commit is f62d0e212e"
+  ]
+}

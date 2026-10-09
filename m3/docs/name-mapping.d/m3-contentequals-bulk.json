@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.String.contentEquals(CharSequence) with an M3 receiver and a generic sequence: charAt(i) != cs.charAt(i) one unit at a time through owner dispatch (carried to A28 ae302ec4d4)",
+      "source_commit": "ae302ec4d4",
+      "target": "the receiver comes out in 4096-unit bulk windows through M3String.getChars and each window is compared against cs.charAt; the sequence is read exactly as before; String, StringBuilder and StringBuffer arguments keep their lanes",
+      "status": "implemented-locally-verified (G7; flag-off: M3ContentEqualsTest 7,980 checks against the flat String and an array oracle; CharBuffer equality 4x..7x faster on atoms and 6x..28x on tuples at 256..65536 units, within 2x of flat)",
+      "target_rule": "the same boolean as the flat String and the same reads of the sequence"
+    }
+  ]
+}

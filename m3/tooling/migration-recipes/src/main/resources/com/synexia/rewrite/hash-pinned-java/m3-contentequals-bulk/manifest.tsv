@@ -1,0 +1,2 @@
+# path	before_sha256	after_sha256	resource
+test/jdk/java/lang/String/M3ContentEqualsTest.java	ABSENT	5dbe26c5f95952dce1b7a92239c4828713b8b9f7aba48413994142de185d41d3	00-M3ContentEqualsTest.java.txt
