@@ -1,0 +1,50 @@
+{
+  "schema": "M3JDK21_SYNEXIA_LITERAL_REGEX_FOCUSED_RECEIVER_V1",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 9935,
+    "branch": "codex/m3-literal-regex-focused-20261009",
+    "commit": "2c2f8e8d29002d35a24fa0182225bdb61e97445f",
+    "recipe": "com.synexia.m3.LiteralRegexReplacement",
+    "crate": "m3-literal-regex-replacement",
+    "historicalTask": "synexia-openrewrite-recipes/tasks/m3jdk-indexed-literal-regex-replacement-20261006",
+    "historicalSourcePr": 9615,
+    "donorCommits": [
+      "55af6236dc304042094fe05b26dceb4264ba0707",
+      "866e3a99fd4101f7e21dd67f7db502f70cb38073"
+    ]
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "branch": "m3/literal-regex-focused-receiver-20261009",
+    "stackedOn": {
+      "pullRequest": 501,
+      "branch": "m3/equality-gates-20261009",
+      "commit": "1b61ea950395f121319aa87fef2bbc19d3e085e6"
+    },
+    "historicalReceiverPr": 271,
+    "runtimeOwners": [
+      "java.lang.String",
+      "java.lang.M3String",
+      "java.lang.M3StringSearchPrecompute"
+    ],
+    "checker": "m3/runtime-integration/check-m3string-literal-regex-focused.py",
+    "jtreg": "test/jdk/java/lang/String/M3StringRegexReplacementTest.java",
+    "workflow": ".github/workflows/mindex-string-backing.yml"
+  },
+  "disposition": "CURRENT_A9_SUPERSET_OF_HISTORICAL_HASH_PINNED_TRANSITION",
+  "runtimeDependencyOnSynexia": false,
+  "targetLocalFocusedRecipe": false,
+  "semanticBoundary": [
+    "non-empty BMP literal regex only",
+    "non-null literal replacement with no dollar/backslash replacement syntax",
+    "surrogate-bearing patterns and regex syntax fall back to Pattern/Matcher",
+    "Pattern/Matcher remains exact authority for unsupported cases and exception ordering"
+  ],
+  "evidence": {
+    "sourceQualification": "PASS_HISTORICAL_TASK_PR_9615",
+    "currentSourceSupersetChecker": "AUTHORED",
+    "currentMatchedImageJtreg": "SELECTED_BY_EXISTING_WORKFLOW",
+    "currentRuntimeQualification": "PENDING_EXECUTION"
+  }
+}
