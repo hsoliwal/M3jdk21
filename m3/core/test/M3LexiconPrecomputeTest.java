@@ -12,6 +12,8 @@ import java.util.Map;
 public final class M3LexiconPrecomputeTest {
     private static final String TRANSLATION_SOURCE_REVISION = "64a2ea61c73b548413fed6686a9daeeb0b9b0564";
     private static final String TRANSLATION_SOURCE_BLOB_SHA = "bb72c00e36f1835d824a34ab398b1fe5aadb1cb3";
+    private static final String SI_SOURCE_REVISION = "64a2ea61c73b548413fed6686a9daeeb0b9b0564";
+    private static final String SI_SOURCE_BLOB_SHA = "28e347c2b7246d745e2cbc64a160c1a6b1879a2e";
     private static int checks;
 
     private static void check(boolean value) {
@@ -64,6 +66,27 @@ public final class M3LexiconPrecomputeTest {
                                 TRANSLATION_SOURCE_REVISION,
                                 "0000000000000000000000000000000000000000"),
                         boundTranslation));
+
+        M3LexiconPrecompute.SiUnitPrecompute unpinnedSi =
+                new M3LexiconPrecompute.SiUnitPrecompute(-6, 0x0102030405060708L, 273.15, true);
+        check(!unpinnedSi.sourceBound());
+        M3LexiconPrecompute.SiUnitPrecompute boundSi =
+                new M3LexiconPrecompute.SiUnitPrecompute(
+                        -6, 0x0102030405060708L, 273.15, true,
+                        SI_SOURCE_REVISION, SI_SOURCE_BLOB_SHA);
+        check(boundSi.sourceBound());
+        SharedLexiconPrecomputeCatalog.SiUnitIdentity boundSiIdentity =
+                new SharedLexiconPrecomputeCatalog.SiUnitIdentity(
+                        "dictlang.si-units", "kelvin", SI_SOURCE_REVISION, SI_SOURCE_BLOB_SHA);
+        check(boundSiIdentity.sourceBound());
+        expect(IllegalArgumentException.class, () ->
+                new SharedLexiconPrecomputeCatalog.SiUnitIdentity("wrong-source", "kelvin"));
+        expect(IllegalArgumentException.class, () ->
+                SharedLexiconPrecomputeCatalog.builder().siUnit(
+                        new SharedLexiconPrecomputeCatalog.SiUnitIdentity(
+                                "dictlang.si-units", "kelvin", SI_SOURCE_REVISION,
+                                "0000000000000000000000000000000000000000"),
+                        boundSi));
 
         Map<String, int[]> deletes = new LinkedHashMap<>();
         deletes.put("", new int[]{1});
@@ -134,6 +157,7 @@ public final class M3LexiconPrecomputeTest {
                 .translation(reverseSource, reverseTranslation)
                 .translation(sourceVariant, translation)
                 .translation(recordVariant, translation)
+                .siUnit(boundSiIdentity, boundSi)
                 .spell(new SharedLexiconPrecomputeCatalog.SpellScope(
                         "lex-1", "en", 2, 7, "spell-1"), spell)
                 .tokenHashes(new SharedLexiconPrecomputeCatalog.TokenRange(
@@ -147,6 +171,7 @@ public final class M3LexiconPrecomputeTest {
         check(catalog.translationAt(reverseSource).orElseThrow().translatedTokenIdAt(0) == 21);
         check(catalog.translationAt(sourceVariant).orElseThrow().translatedTokenIdAt(1) == 0);
         check(catalog.translationAt(recordVariant).orElseThrow().translatedTokenIdAt(2) == 19);
+        check(catalog.siUnitAt(boundSiIdentity).orElseThrow().offset() == 273.15);
         expect(IllegalArgumentException.class, () -> catalogBuilder.translation(
                 new SharedLexiconPrecomputeCatalog.TranslationIdentity(
                         "translate.rows", "row-1", "en", "hi", "lex-2", "src-1"),
