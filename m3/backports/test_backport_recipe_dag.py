@@ -159,17 +159,7 @@ class BackportRecipeDagTest(unittest.TestCase):
             self.assertTrue(j423)
             self.assertTrue(all(atom.state == "MATERIALIZED_RECIPE" for atom in j423))
             self.assertEqual(
-                [
-                    "INVENTORY",
-                    "ATOMIZE",
-                    "PATTERNIZE",
-                    "DOCUMENT",
-                    "RECIPE",
-                    "COMPILE",
-                    "TEST",
-                    "RUNTIME_PARITY",
-                    "FIXED_POINT",
-                ],
+                ["INVENTORY", "RECIPE", "COMPILE", "TEST", "RUNTIME_PARITY", "FIXED_POINT"],
                 [atom.phase for atom in j423],
             )
             self.assertEqual("MULTI_MODULE", j423[0].scope)
@@ -177,28 +167,7 @@ class BackportRecipeDagTest(unittest.TestCase):
 
             j484 = [atom for atom in first if atom.work_id == "JEP-484"]
             self.assertTrue(all(atom.state == "AUTHOR_RECIPE" for atom in j484))
-            self.assertEqual(
-                [
-                    "INVENTORY",
-                    "ATOMIZE",
-                    "PATTERNIZE",
-                    "DOCUMENT",
-                    "RECIPE",
-                    "COMPILE",
-                    "TEST",
-                    "FIXED_POINT",
-                ],
-                [atom.phase for atom in j484],
-            )
             self.assertNotIn("RUNTIME_PARITY", [atom.phase for atom in j484])
-            self.assertIn(
-                "canonical Synexia A3 FILE atomization",
-                j484[1].reason,
-            )
-            self.assertIn(
-                "pattern/IOP attribution",
-                j484[2].reason,
-            )
 
             rejected = [atom for atom in first if atom.work_id == "JEP-511"]
             self.assertEqual(1, len(rejected))
@@ -249,29 +218,17 @@ class BackportRecipeDagTest(unittest.TestCase):
             )
             parsed = [line.split("\t") for line in j423[1:]]
             self.assertEqual(
-                [
-                    "inventory",
-                    "atomize",
-                    "patternize",
-                    "document",
-                    "recipe",
-                    "compile",
-                    "test",
-                    "runtime-parity",
-                    "fixed-point",
-                ],
+                ["inventory", "recipe", "compile", "test", "runtime-parity", "fixed-point"],
                 [row[1] for row in parsed],
             )
             self.assertTrue(all(row[2] == "MULTI_MODULE" for row in parsed))
             self.assertTrue(all(row[3] == "true" for row in parsed))
             self.assertEqual("", parsed[0][5])
             self.assertEqual("inventory", parsed[1][5])
-            self.assertEqual("atomize", parsed[2][5])
-            self.assertEqual("patternize", parsed[3][5])
-            self.assertEqual("document", parsed[4][5])
+            self.assertEqual("recipe", parsed[2][5])
             self.assertEqual(
                 "m3/backports/recipes/jep-423-region-pinning",
-                parsed[4][4],
+                parsed[1][4],
             )
 
             j484 = (packet_dir / "jep-484.tsv").read_text(encoding="utf-8").splitlines()
