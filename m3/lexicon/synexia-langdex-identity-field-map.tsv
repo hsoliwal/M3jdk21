@@ -8,3 +8,11 @@ M3LangDexPrecompute.Identity	domain	InternDomainV1	langdex_domain	true	m3langdex
 M3LangDexPrecompute.Identity	canonicalSchema	String	langdex_canonical_schema	true	m3langdex-family-v1:synexia.langdex.tsv	canonical identity schema is preserved as source metadata
 M3LangDexPrecompute.Identity	canonicalBytes	byte[]	langdex_canonical_bytes	true	m3langdex-family-v1:synexia.langdex.tsv	canonical identity bytes are defensively copied and never synthesized at admission
 M3LangDexPrecompute.Identity	canonicalDigest	String	langdex_canonical_digest	true	m3langdex-family-v1:synexia.langdex.tsv	SHA-256 digest is verified against canonical identity bytes
+M3LangDexPrecompute.TranslationIdentity	sourceId	String	langdex_source_id	true	m3langdex-family-v1:synexia.langdex.tsv	translation source family identity is preserved
+M3LangDexPrecompute.TranslationIdentity	recordId	String	langdex_record_id	true	m3langdex-family-v1:synexia.langdex.tsv	translation source record identity is preserved
+M3LangDexPrecompute.TranslationIdentity	conceptId	long	langdex_concept_id	true	m3langdex-family-v1:synexia.langdex.tsv	translation concept coordinate is preserved
+M3LangDexPrecompute.TranslationIdentity	sourceGlottocode	String	langdex_source_glottocode	true	m3langdex-family-v1:synexia.langdex.tsv	translation source language coordinate is preserved
+M3LangDexPrecompute.TranslationIdentity	sourceSurface	String	langdex_source_surface	true	m3langdex-family-v1:synexia.langdex.tsv	translation source surface is preserved
+M3LangDexPrecompute.TranslationIdentity	targetGlottocode	String	langdex_target_glottocode	true	m3langdex-family-v1:synexia.langdex.tsv	translation target language coordinate is preserved
+M3LangDexPrecompute.TranslationIdentity	targetSurface	String	langdex_target_surface	true	m3langdex-family-v1:synexia.langdex.tsv	translation target surface is preserved
+M3LangDexPrecompute.TranslationIdentity	sourceRevision	String	langdex_source_revision	true	m3langdex-family-v1:synexia.langdex.tsv	translation source revision is preserved
