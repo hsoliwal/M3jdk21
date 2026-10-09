@@ -29,6 +29,7 @@ public final class M3InstanceIndex {
     private final Map<SharedLexiconCatalog.SourceIdentity, InstanceRecord> byIdentity;
     private final Map<Integer, List<SharedLexiconCatalog.SourceIdentity>> byConcept;
     private final Map<NameKey, List<SharedLexiconCatalog.SourceIdentity>> byName;
+    private final Map<NameKey, List<SharedLexiconCatalog.SourceIdentity>> byAlias;
     private final Map<SharedLexiconCatalog.SourceIdentity, List<TitleRecord>> titlesByInstance;
 
     private M3InstanceIndex(List<InstanceRecord> instances, List<TitleRecord> titles) {
@@ -41,6 +42,9 @@ public final class M3InstanceIndex {
         TreeMap<NameKey, List<SharedLexiconCatalog.SourceIdentity>> nameMap =
                 new TreeMap<>(Comparator.comparing(NameKey::languageTag)
                         .thenComparing(NameKey::name));
+        TreeMap<NameKey, List<SharedLexiconCatalog.SourceIdentity>> aliasMap =
+                new TreeMap<>(Comparator.comparing(NameKey::languageTag)
+                        .thenComparing(NameKey::name));
         for (InstanceRecord instance : instances) {
             if (identityMap.put(instance.identity(), instance) != null) {
                 throw new IllegalArgumentException("duplicate instance identity: " + instance.identity());
@@ -49,6 +53,10 @@ public final class M3InstanceIndex {
                     .add(instance.identity());
             nameMap.computeIfAbsent(new NameKey(instance.languageTag(), instance.name()),
                             ignored -> new ArrayList<>()).add(instance.identity());
+            for (String alias : instance.aliases()) {
+                aliasMap.computeIfAbsent(new NameKey(instance.languageTag(), alias),
+                                ignored -> new ArrayList<>()).add(instance.identity());
+            }
         }
 
         TreeMap<SharedLexiconCatalog.SourceIdentity, List<TitleRecord>> titleMap =
@@ -71,6 +79,7 @@ public final class M3InstanceIndex {
         byIdentity = Collections.unmodifiableMap(identityMap);
         byConcept = immutableIdentityListsByConcept(conceptMap);
         byName = immutableIdentityListsByName(nameMap);
+        byAlias = immutableIdentityListsByName(aliasMap);
         titlesByInstance = immutableTitleLists(titleMap);
     }
 
@@ -105,6 +114,18 @@ public final class M3InstanceIndex {
         NameKey key = new NameKey(languageTag, name);
         List<SharedLexiconCatalog.SourceIdentity> identities =
                 byName.getOrDefault(key, List.of());
+        List<InstanceRecord> result = new ArrayList<>(identities.size());
+        for (SharedLexiconCatalog.SourceIdentity identity : identities) {
+            result.add(byIdentity.get(identity));
+        }
+        return List.copyOf(result);
+    }
+
+    /** Exact alias lookup; aliases remain scoped to their source language. */
+    public List<InstanceRecord> findByAlias(String languageTag, String alias) {
+        NameKey key = new NameKey(languageTag, alias);
+        List<SharedLexiconCatalog.SourceIdentity> identities =
+                byAlias.getOrDefault(key, List.of());
         List<InstanceRecord> result = new ArrayList<>(identities.size());
         for (SharedLexiconCatalog.SourceIdentity identity : identities) {
             result.add(byIdentity.get(identity));
