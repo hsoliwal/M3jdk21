@@ -342,3 +342,34 @@ evolution remains in `com.synexia/synexia-openrewrite-recipes`.
 The locale language value-equality repair remains separately fail-closed under Synexia PR #9981
 because it is pinned to a different target preimage; it must not be silently folded across that
 source seal.
+
+
+## String I/O boundary recipe custody — Synexia PR #10006
+
+Two historical runtime transitions that were already absorbed by later M3 String product revisions
+now have explicit reusable Synexia recipe owners.
+
+Canonical Synexia handoff:
+
+- repository: `hsoliwal/com.synexia`
+- PR: https://github.com/hsoliwal/com.synexia/pull/10006
+- branch: `codex/m3-string-io-boundaries-20261009`
+- stacked on: Synexia PR #10004
+- runtime owner: **M3JDK21**
+- runtime dependency on Synexia: **false**
+
+Recipes:
+
+- `com.synexia.m3.GenericCharsetDirect`
+  - target historical commit: `e02cf835c37e51181e23175e5969cc26fd7c6aba`
+  - removes generic-charset `char[]` staging and feeds `CharsetEncoder` through
+    `CharBuffer.wrap(M3String)`.
+- `com.synexia.m3.JniShadowBulk`
+  - target historical commit: `3a050f6fd0307588605080eb5535e487ce8109f9`
+  - replaces per-code-unit JNI/native staging with final-array allocation plus one bulk
+    `M3String.getBytes` / `getChars` dispatch.
+
+These recipes retain their exact historical before/after SHA-256 source seals. The current M3JDK21
+runtime has evolved beyond those isolated postimages, so application status is
+`HISTORICAL_SERIAL_STEP_ALREADY_ABSORBED`; do not apply either postimage over a newer receiver
+that does not match its exact preimage.
