@@ -31,6 +31,8 @@ IndexWordSignal	sourceRevision	String	source_revision	synexia.records.tsv:precom
 M3LangDexPrecompute.Entry	conceptId	long	langdex_concept_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated nonzero LangDex concept coordinate remains donor-owned and is not renumbered
 M3LangDexPrecompute.Entry	frequency	long	langdex_frequency	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated nonnegative LangDex frequency remains source metadata
 M3LangDexPrecompute.Entry	flags	int	langdex_flags	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated unsigned-16-bit LangDex entry flags remain opaque
+M3LangDexPrecompute.Entry	glottocode	String	langdex_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	entry language coordinate is preserved without normalization drift
+M3LangDexPrecompute.Entry	surface	String	langdex_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	entry surface is preserved as source-owned UTF-16 text
 M3LangDexPrecompute.WordProfile	lexicalClassMask	long	langdex_lexical_class_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	primitive lexical class mask is retained without reclassification
 M3LangDexPrecompute.WordProfile	semanticClassMask	long	langdex_semantic_class_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	primitive semantic class mask is retained without reclassification
 M3LangDexPrecompute.WordProfile	subjectId	int	langdex_subject_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated LangDex subject coordinate remains donor-owned
@@ -41,6 +43,7 @@ M3LangDexPrecompute.LexicalProfile	lexicalClassMask	long	langdex_lexical_class_m
 M3LangDexPrecompute.LexicalProfile	featureBits	int	langdex_feature_bits	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level feature bits share the LangDex canonical type
 M3LangDexPrecompute.LexicalProfile	evidenceMask	int	langdex_evidence_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level evidence bits share the LangDex canonical type
 M3LangDexPrecompute.LexicalProfile	confidencePermille	int	langdex_confidence_permille	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level confidence shares the LangDex canonical type and bound
+M3LangDexPrecompute.Translation	conceptId	long	langdex_concept_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation concept coordinate is preserved and must match its identity key
 M3LangDexPrecompute.Translation	targetLexemeId	long	langdex_target_lexeme_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	target lexeme coordinate remains donor-owned and is not substituted with image_row
 SiUnit	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_payload	MAPPED	SI decimal exponent remains bounded donor metadata in the inclusive -100..100 range
 SiDimension	packed	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains donor-owned
