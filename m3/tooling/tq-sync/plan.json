@@ -51,7 +51,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/04-plan.json.txt",
-        "sha256": "592477414957af5b2780b5c9e4ce09391e6f3dc60d11e3ceff5cd0683338796b"
+        "sha256": "0976a8aecf43076cf9914e5f52e4bc27d0ed9f426b1f509ce8939c9f58225f45"
       }
     },
     {
@@ -128,7 +128,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
-        "sha256": "8e6db1b290e9ee55bc028ce51e4aae85773cb8be167b7193ee721b031f46be4b"
+        "sha256": "29e193ebc2c46772f0d4d872fa488549b4676310ba3a12134ec4b0705ebbae2f"
       }
     },
     {
@@ -267,7 +267,7 @@
   "guards": [
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72"
+      "sha256": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
@@ -290,5 +290,5 @@
       "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
     }
   ],
-  "plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096"
+  "plan_sha256": "7a274f0979b12a01310d61d0d911f2d5372d156cce9fe2db20474ca0bb543572"
 }
