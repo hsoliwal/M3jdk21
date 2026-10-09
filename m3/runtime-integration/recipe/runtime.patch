@@ -1523,10 +1523,10 @@ index e58ded864f0705bba5a57979230119e017cfd40e..ca697e5da074fabd6368aa79aceb9d40
      }
 diff --git a/src/java.base/share/classes/java/lang/M3String.java b/src/java.base/share/classes/java/lang/M3String.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..9a6686646e85fac86cbeb6f8263a72bd89d196d2
+index 0000000000000000000000000000000000000000..4312195d6710339ae547a2ff0d976aeba1f359d2
 --- /dev/null
 +++ b/src/java.base/share/classes/java/lang/M3String.java
-@@ -0,0 +1,1327 @@
+@@ -0,0 +1,1356 @@
 +/*
 + * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
 + * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -1695,6 +1695,7 @@ index 0000000000000000000000000000000000000000..9a6686646e85fac86cbeb6f8263a72bd
 +        return join(new String[] {first, second});
 +    }
 +
++    /** The composition, or {@code null} when the pool refuses a flat part (the caller stays flat). */
 +    static M3String join(String[] parts) {
 +        Objects.requireNonNull(parts, "parts");
 +        ArrayList<M3String> level = new ArrayList<>(parts.length);
@@ -1706,6 +1707,7 @@ index 0000000000000000000000000000000000000000..9a6686646e85fac86cbeb6f8263a72bd
 +                // canonical M3 owner only for this composition; do not attach duplicate storage
 +                // back to the old String object.
 +                storage = M3String.admit(checked.value(), checked.coder());
++                if (storage == null) return null;
 +            }
 +            if (storage != null && storage.length() != 0) level.add(storage);
 +        }
@@ -1729,6 +1731,9 @@ index 0000000000000000000000000000000000000000..9a6686646e85fac86cbeb6f8263a72bd
 +     * excluded exactly as in join(String[]). Adjacent equal-size groups are folded
 +     * pairwise, then remaining high groups fold over low suffix groups. The resulting
 +     * canonical text always belongs to an M3 owner/range, not a temporary array.</p>
++     *
++     * @return the composition, or {@code null} when the pool refuses a flat piece (the caller
++     *         takes its flat path)
 +     */
 +    static M3String joinDesignated(
 +            String prefix, String suffix, String delimiter, String[] elements, int size) {
@@ -1741,15 +1746,15 @@ index 0000000000000000000000000000000000000000..9a6686646e85fac86cbeb6f8263a72bd
 +        long maximumPieces = size == 0 ? 2L : 2L * size + 1L;
 +        M3String[] levels =
 +                new M3String[Long.SIZE - Long.numberOfLeadingZeros(maximumPieces)];
-+        joinAddDesignated(levels, prefix);
++        if (!joinAddDesignated(levels, prefix)) return null;
 +        if (size != 0) {
-+            joinAddDesignated(levels, checked[0]);
++            if (!joinAddDesignated(levels, checked[0])) return null;
 +            for (int index = 1; index < size; index++) {
-+                joinAddDesignated(levels, delimiter);
-+                joinAddDesignated(levels, checked[index]);
++                if (!joinAddDesignated(levels, delimiter)) return null;
++                if (!joinAddDesignated(levels, checked[index])) return null;
 +            }
 +        }
-+        joinAddDesignated(levels, suffix);
++        if (!joinAddDesignated(levels, suffix)) return null;
 +
 +        M3String result = EMPTY;
 +        for (int level = 0; level < levels.length; level++) {
@@ -1761,18 +1766,20 @@ index 0000000000000000000000000000000000000000..9a6686646e85fac86cbeb6f8263a72bd
 +        return result;
 +    }
 +
-+    private static void joinAddDesignated(M3String[] levels, String source) {
++    /** False when the pool refuses the flat piece; an empty piece is skipped. */
++    private static boolean joinAddDesignated(M3String[] levels, String source) {
 +        String checked = Objects.requireNonNull(source, "join piece");
 +        M3String carry = checked.m3();
 +        if (carry == null && checked.length() != 0) {
 +            carry = M3String.admit(checked.value(), checked.coder());
++            if (carry == null) return false;
 +        }
-+        if (carry == null || carry.length() == 0) return;
++        if (carry == null || carry.length() == 0) return true;
 +        for (int level = 0; level < levels.length; level++) {
 +            M3String previous = levels[level];
 +            if (previous == null) {
 +                levels[level] = carry;
-+                return;
++                return true;
 +            }
 +            levels[level] = null;
 +            carry = M3StringPool.concat(previous, carry);
@@ -1780,6 +1787,10 @@ index 0000000000000000000000000000000000000000..9a6686646e85fac86cbeb6f8263a72bd
 +        throw new InternalError("M3 String.join carry level exhausted");
 +    }
 +
++    /**
++     * The String's own storage, or its spelling admitted for this composition; {@code null} when
++     * the pool refuses the admission (budget), in which case the caller keeps its flat path.
++     */
 +    static M3String canonicalize(String source) {
 +        String checked = Objects.requireNonNull(source, "source");
 +        M3String storage = checked.m3();
@@ -2771,28 +2782,46 @@ index 0000000000000000000000000000000000000000..9a6686646e85fac86cbeb6f8263a72bd
 +        return true;
 +    }
 +
++    /**
++     * Literal regex lane: the regex is a flat literal located through the receiver's mixed-side
++     * search and never admitted; only the replacement joins the result. {@code null} when the pool
++     * refuses the replacement (the caller takes the Pattern path).
++     */
 +    String replaceLiteralRegex(String original, String regex, String replacement, boolean firstOnly) {
-+        M3String target = canonicalize(regex);
-+        int found = indexOf(target, 0);
++        int found = original.indexOf(regex);
 +        if (found < 0) return original;
++        M3String admitted = canonicalize(replacement);
++        if (admitted == null) return null;
 +        // A match must produce a String even when composition aliases an input descriptor.
-+        return new String(replaceMatches(target, canonicalize(replacement), found, firstOnly));
++        return new String(replaceMatches(null, original, regex, admitted, found, firstOnly));
 +    }
 +
-+    M3String replace(M3String target, M3String replacement) {
++    /** Replaces every occurrence of a non-empty M3 target from its first match {@code found}. */
++    M3String replaceAt(M3String target, M3String replacement, int found) {
 +        M3String checkedTarget = Objects.requireNonNull(target, "target");
-+        M3String checkedReplacement = Objects.requireNonNull(replacement, "replacement");
 +        if (checkedTarget.length() == 0) {
 +            throw new IllegalArgumentException("empty literal target handled by String compatibility path");
 +        }
-+
-+        int found = indexOf(checkedTarget, 0);
-+        if (found < 0) return this;
-+        return replaceMatches(checkedTarget, checkedReplacement, found, false);
++        return replaceMatches(checkedTarget, null, null, replacement, found, false);
 +    }
 +
-+    private M3String replaceMatches(M3String checkedTarget, M3String checkedReplacement,
-+                                    int found, boolean firstOnly) {
++    /**
++     * Transient admission for {@code String.replace}: a flat target is searched through the
++     * receiver's mixed-side {@code indexOf(String, int)} and never enters the pool; the result is
++     * composed from slices of this storage and the replacement only.
++     */
++    M3String replaceFlatTarget(String receiver, String target, M3String replacement, int found) {
++        if (target.isEmpty()) {
++            throw new IllegalArgumentException("empty literal target handled by String compatibility path");
++        }
++        return replaceMatches(null, receiver, target, replacement, found, false);
++    }
++
++    /** Exactly one of {@code target} (M3 needle) and {@code receiver}+{@code flatTarget} drives the search. */
++    private M3String replaceMatches(M3String target, String receiver, String flatTarget,
++                                    M3String replacement, int found, boolean firstOnly) {
++        M3String checkedReplacement = Objects.requireNonNull(replacement, "replacement");
++        int targetLength = target != null ? target.length() : flatTarget.length();
 +        ArrayList<M3String> pieces = new ArrayList<>();
 +        long outputLength = 0L;
 +        int cursor = 0;
@@ -2809,9 +2838,9 @@ index 0000000000000000000000000000000000000000..9a6686646e85fac86cbeb6f8263a72bd
 +            if (outputLength > Integer.MAX_VALUE) {
 +                throw new OutOfMemoryError("Required length exceeds implementation limit");
 +            }
-+            cursor = found + checkedTarget.length();
-+            found = !firstOnly && cursor <= length() - checkedTarget.length()
-+                    ? indexOf(checkedTarget, cursor)
++            cursor = found + targetLength;
++            found = !firstOnly && cursor <= length() - targetLength
++                    ? (target != null ? indexOf(target, cursor) : receiver.indexOf(flatTarget, cursor))
 +                    : -1;
 +        }
 +        if (cursor < length()) {
@@ -4208,10 +4237,10 @@ index 0000000000000000000000000000000000000000..acd2a9584c65c384ddebd9159a8775d1
 +}
 diff --git a/src/java.base/share/classes/java/lang/M3StringPool.java b/src/java.base/share/classes/java/lang/M3StringPool.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b29593d2d
+index 0000000000000000000000000000000000000000..bcff46c8b32a3fd2a45f13fd4466e2cc9f9693a6
 --- /dev/null
 +++ b/src/java.base/share/classes/java/lang/M3StringPool.java
-@@ -0,0 +1,1167 @@
+@@ -0,0 +1,1336 @@
 +/*
 + * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
 + * GPLv2 with the Classpath exception.
@@ -4237,7 +4266,10 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +import java.util.concurrent.ConcurrentHashMap;
 +import java.util.concurrent.atomic.AtomicLong;
 +import java.util.zip.CRC32C;
++import jdk.internal.access.JavaLangRefAccess;
++import jdk.internal.access.SharedSecrets;
 +import jdk.internal.misc.Unsafe;
++import jdk.internal.misc.VM;
 +import sun.nio.ch.DirectBuffer;
 +
 +/**
@@ -4246,6 +4278,20 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 + * <p>Scalar payload is either read-only mapped storage or weakly interned VM-local native memory. Java
 + * byte[]/char[] values are admission or compatibility shadows only and are never retained here.
 + * Tuple nodes retain only child M3 coordinates and form a persistent immutable DAG.</p>
++ *
++ * <p>Bounds. The native bytes retained by VM-local scalar owners are capped by
++ * {@code -Dm3.string.pool.maxBytes} (default {@code Runtime.maxMemory()}, the MaxDirectMemorySize
++ * default); every multi-unit admission reserves its bytes before allocating and a reclaimed block
++ * returns them through the local reference queue. On exhaustion the admission takes the
++ * {@code java.nio.Bits.reserveMemory} route (drain the queue, wait for reference processing, one
++ * {@code System.gc()}, bounded back-off retries) and, if the budget is still short, it is refused:
++ * the intern methods return {@code null} and the String keeps its flat spelling (lineage invariant
++ * 8: precompute absence never changes semantics; no OutOfMemoryError is introduced). A refused
++ * cycle holds further GC-assisted cycles off for one second so sustained pressure stays cheap. The
++ * single-unit lane is bounded by construction (at most 65,536 atoms, 128 KiB) and never refuses.
++ * Canonical tuple retention is capped by {@code -Dm3.string.pool.maxTuples} (default 1,048,576
++ * registered entries); beyond the cap a composition still forms its tuple, only without canonical
++ * reuse. A lexicon that fails to open is reported once on {@code System.err}, never per call.</p>
 + */
 +final class M3StringPool {
 +    private static final long LEXICON_MAGIC = 0x4d334c4558303031L;
@@ -4253,9 +4299,23 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +    private static final int MAX_LEXICON_BYTES = 1 << 30;
 +    private static final Unsafe UNSAFE = Unsafe.getUnsafe();
 +
++    static final String MAX_LOCAL_BYTES_PROPERTY = "m3.string.pool.maxBytes";
++    static final String MAX_RETAINED_TUPLES_PROPERTY = "m3.string.pool.maxTuples";
++    static final long DEFAULT_MAX_RETAINED_TUPLES = 1L << 20;
++    /** Native byte budget of the VM-local scalar lane; {@code 0} admits no multi-unit local atom. */
++    static final long MAX_LOCAL_BYTES =
++            bound(MAX_LOCAL_BYTES_PROPERTY, Runtime.getRuntime().maxMemory());
++    /** Registered canonical tuple entries (live or awaiting expunge) the pool keeps at most. */
++    static final long MAX_RETAINED_TUPLES =
++            bound(MAX_RETAINED_TUPLES_PROPERTY, DEFAULT_MAX_RETAINED_TUPLES);
++    /** Bits.reserveMemory uses 9 (about 0.5 s); String admission refuses after 1+2+4+8 ms. */
++    private static final int MAX_SLEEPS = 4;
++    private static final long SLOW_RESERVE_HOLDOFF_NANOS = 1_000_000_000L;
++
 +    private static final AtomicLong NEXT_LOCAL_ID = new AtomicLong(1L);
 +    private static final AtomicLong NEXT_TUPLE_ID = new AtomicLong(1L << 40);
 +    private static final AtomicLong LOCAL_NATIVE_BYTES = new AtomicLong();
++    private static final AtomicLong RETAINED_TUPLES = new AtomicLong();
 +
 +    private static final ConcurrentHashMap<Fingerprint, LocalBucket> LOCAL =
 +            new ConcurrentHashMap<>();
@@ -4265,6 +4325,10 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +    private static final ReferenceQueue<M3StringTuple> TUPLE_QUEUE = new ReferenceQueue<>();
 +
 +    private static volatile Lexicon lexicon;
++    /** Guarded by the class lock: the lexicon failure report is emitted once per VM. */
++    private static boolean lexiconFailureReported;
++    /** Deadline before which a budget miss is refused without another GC-assisted cycle. */
++    private static volatile long nextSlowReserveNanos = System.nanoTime();
 +
 +    private M3StringPool() {}
 +
@@ -4276,7 +4340,34 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +                lexicon = Lexicon.open(Path.of(file));
 +            } catch (IOException | RuntimeException failure) {
 +                lexicon = Lexicon.unavailable();
++                reportLexiconFailure(file, failure);
 +            }
++        }
++    }
++
++    /** Once per VM (class lock held): a missing or corrupt lexicon is a degraded mode, not an error. */
++    private static void reportLexiconFailure(String file, Exception failure) {
++        if (lexiconFailureReported) return;
++        lexiconFailureReported = true;
++        java.io.PrintStream err = System.err;
++        if (err != null) {
++            err.println("M3StringPool: lexicon " + file + " unavailable, continuing without it: "
++                    + failure);
++        }
++    }
++
++    /** Saved-property bound; absent, negative or unparsable values fall back (as MaxDirectMemorySize). */
++    static long bound(String property, long fallback) {
++        return parseBound(VM.initLevel() >= 1 ? VM.getSavedProperty(property) : null, fallback);
++    }
++
++    static long parseBound(String value, long fallback) {
++        if (value == null) return fallback;
++        try {
++            long parsed = Long.parseLong(value);
++            return parsed < 0L ? fallback : parsed;
++        } catch (NumberFormatException invalid) {
++            return fallback;
 +        }
 +    }
 +
@@ -4343,6 +4434,7 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +        Fingerprint fingerprint = new Fingerprint(coder, byteLength, hash64);
 +
 +        expungeLocals();
++        long reserved = 0L;
 +        for (;;) {
 +            LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
 +            synchronized (bucket) {
@@ -4355,19 +4447,24 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +                        reference.releaseNative();
 +                    } else if (existing.contentEqualsCodePoints(
 +                            source, offset, count, utf16Length, coder)) {
-+                        return M3String.whole(existing);
++                        return found(existing, reserved);
 +                    }
 +                }
 +
-+                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-+                M3StringAtom created =
-+                        M3StringAtom.localCodePoints(
++                if (reserved != 0L || tryReserve(byteLength)) {
++                    M3StringAtom created = null;
++                    try {
++                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
++                        created = M3StringAtom.localCodePoints(
 +                                source, offset, count, utf16Length, coder, id, hash64);
-+                long retainedBytes = created.nativePayloadBytes();
-+                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
-+                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
-+                return M3String.whole(created);
++                    } finally {
++                        if (created == null) release(byteLength);
++                    }
++                    return retain(bucket, fingerprint, created, byteLength);
++                }
 +            }
++            reserved = reserveSlow(byteLength);
++            if (reserved == 0L) return null;
 +        }
 +    }
 +
@@ -4415,6 +4512,7 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +        Fingerprint fingerprint = new Fingerprint(targetCoder, byteLength, hash64);
 +
 +        expungeLocals();
++        long reserved = 0L;
 +        for (;;) {
 +            LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
 +            synchronized (bucket) {
@@ -4427,25 +4525,24 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +                        reference.releaseNative();
 +                    } else if (existing.contentEqualsCompactBytes(
 +                            source, sourceOffset, length, sourceCoder, targetCoder)) {
-+                        return M3String.whole(existing);
++                        return found(existing, reserved);
 +                    }
 +                }
 +
-+                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-+                M3StringAtom created =
-+                        M3StringAtom.localCompactBytes(
-+                                source,
-+                                sourceOffset,
-+                                length,
-+                                sourceCoder,
-+                                targetCoder,
-+                                id,
-+                                hash64);
-+                long retainedBytes = created.nativePayloadBytes();
-+                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
-+                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
-+                return M3String.whole(created);
++                if (reserved != 0L || tryReserve(byteLength)) {
++                    M3StringAtom created = null;
++                    try {
++                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
++                        created = M3StringAtom.localCompactBytes(
++                                source, sourceOffset, length, sourceCoder, targetCoder, id, hash64);
++                    } finally {
++                        if (created == null) release(byteLength);
++                    }
++                    return retain(bucket, fingerprint, created, byteLength);
++                }
 +            }
++            reserved = reserveSlow(byteLength);
++            if (reserved == 0L) return null;
 +        }
 +    }
 +
@@ -4476,6 +4573,7 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +        Fingerprint fingerprint = new Fingerprint(coder, byteLength, hash64);
 +
 +        expungeLocals();
++        long reserved = 0L;
 +        for (;;) {
 +            LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
 +            synchronized (bucket) {
@@ -4488,19 +4586,24 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +                        reference.releaseNative();
 +                    } else if (existing.contentEqualsLatin1Bytes(
 +                            source, offset, length, coder)) {
-+                        return M3String.whole(existing);
++                        return found(existing, reserved);
 +                    }
 +                }
 +
-+                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-+                M3StringAtom created =
-+                        M3StringAtom.localLatin1Bytes(
++                if (reserved != 0L || tryReserve(byteLength)) {
++                    M3StringAtom created = null;
++                    try {
++                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
++                        created = M3StringAtom.localLatin1Bytes(
 +                                source, offset, length, coder, id, hash64);
-+                long retainedBytes = created.nativePayloadBytes();
-+                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
-+                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
-+                return M3String.whole(created);
++                    } finally {
++                        if (created == null) release(byteLength);
++                    }
++                    return retain(bucket, fingerprint, created, byteLength);
++                }
 +            }
++            reserved = reserveSlow(byteLength);
++            if (reserved == 0L) return null;
 +        }
 +    }
 +
@@ -4540,6 +4643,7 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +        Fingerprint fingerprint = new Fingerprint(coder, byteLength, hash64);
 +
 +        expungeLocals();
++        long reserved = 0L;
 +        for (;;) {
 +            LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
 +            synchronized (bucket) {
@@ -4551,21 +4655,30 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +                        iterator.remove();
 +                        reference.releaseNative();
 +                    } else if (existing.contentEquals(source, offset, length, coder)) {
-+                        return M3String.whole(existing);
++                        return found(existing, reserved);
 +                    }
 +                }
 +
-+                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-+                M3StringAtom created =
-+                        M3StringAtom.localChars(source, offset, length, coder, id, hash64);
-+                long retainedBytes = created.nativePayloadBytes();
-+                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
-+                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
-+                return M3String.whole(created);
++                if (reserved != 0L || tryReserve(byteLength)) {
++                    M3StringAtom created = null;
++                    try {
++                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
++                        created = M3StringAtom.localChars(source, offset, length, coder, id, hash64);
++                    } finally {
++                        if (created == null) release(byteLength);
++                    }
++                    return retain(bucket, fingerprint, created, byteLength);
++                }
 +            }
++            reserved = reserveSlow(byteLength);
++            if (reserved == 0L) return null;
 +        }
 +    }
 +
++    /**
++     * Single-unit lane: bounded by construction (at most 65,536 distinct atoms, 128 KiB), so it is
++     * accounted but never refused; the callers inside M3String compositions rely on a non-null result.
++     */
 +    static M3String internUnit(char unit) {
 +        Lexicon active = lexicon;
 +        if (active != null && active.available()) {
@@ -4694,6 +4807,7 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +                    M3StringTuple existing = reference.get();
 +                    if (existing == null) {
 +                        iterator.remove();
++                        RETAINED_TUPLES.decrementAndGet();
 +                    } else if (existing.length == totalLength
 +                            && existing.coder == coder
 +                            && existing.javaHash == javaHash
@@ -4703,7 +4817,12 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +                }
 +                long id = nextId(NEXT_TUPLE_ID, "M3 tuple ID");
 +                M3StringTuple created = new M3StringTuple(left, right, id, routeKey);
-+                bucket.values.add(new TupleRef(created, routeKey, bucket));
++                // Retention cap: past it the tuple composes and lives with its String, uncanonical.
++                if (RETAINED_TUPLES.incrementAndGet() <= MAX_RETAINED_TUPLES) {
++                    bucket.values.add(new TupleRef(created, routeKey, bucket));
++                } else {
++                    RETAINED_TUPLES.decrementAndGet();
++                }
 +                return M3String.whole(created);
 +            }
 +        }
@@ -4728,7 +4847,7 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +        while ((reference = (TupleRef) TUPLE_QUEUE.poll()) != null) {
 +            TupleBucket bucket = reference.bucket;
 +            synchronized (bucket) {
-+                bucket.values.remove(reference);
++                if (bucket.values.remove(reference)) RETAINED_TUPLES.decrementAndGet();
 +                if (bucket.values.isEmpty() && TUPLES.remove(reference.hash64, bucket)) {
 +                    bucket.retired = true;
 +                }
@@ -4739,6 +4858,85 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +    static long localNativeBytes() {
 +        expungeLocals();
 +        return LOCAL_NATIVE_BYTES.get();
++    }
++
++    static long retainedTuples() {
++        expungeTuples();
++        return RETAINED_TUPLES.get();
++    }
++
++    /** Fast budget reservation (CAS); the caller allocates only after it succeeds. */
++    private static boolean tryReserve(long bytes) {
++        for (;;) {
++            long current = LOCAL_NATIVE_BYTES.get();
++            if (bytes > MAX_LOCAL_BYTES - current) return false;
++            if (LOCAL_NATIVE_BYTES.compareAndSet(current, current + bytes)) return true;
++        }
++    }
++
++    private static void release(long bytes) {
++        LOCAL_NATIVE_BYTES.addAndGet(-bytes);
++    }
++
++    /** A bucket hit while a slow-path reservation is held hands the reservation back. */
++    private static M3String found(M3StringAtom existing, long reserved) {
++        if (reserved != 0L) release(reserved);
++        return M3String.whole(existing);
++    }
++
++    /** Publishes a freshly allocated local atom whose bytes are already reserved (bucket lock held). */
++    private static M3String retain(
++            LocalBucket bucket, Fingerprint fingerprint, M3StringAtom created, long bytes) {
++        bucket.values.add(new LocalRef(created, fingerprint, bucket, bytes));
++        return M3String.whole(created);
++    }
++
++    private static boolean reserveAfterDrain(long bytes) {
++        expungeLocals();
++        return tryReserve(bytes);
++    }
++
++    /**
++     * Back-pressure in the shape of {@code java.nio.Bits.reserveMemory} (adapted: no bucket lock is
++     * held, and the terminal step refuses with {@code 0} instead of throwing OutOfMemoryError).
++     * Drains the local queue, waits for pending reference processing, triggers one collection and
++     * retries with bounded exponential back-off. A failed cycle arms a one-second hold-off during
++     * which further misses are refused without another collection. Interrupts are deferred.
++     *
++     * @return the reserved byte count, or {@code 0} when admission is refused
++     */
++    private static long reserveSlow(long bytes) {
++        if (System.nanoTime() - nextSlowReserveNanos < 0L) return 0L;
++        JavaLangRefAccess references = SharedSecrets.getJavaLangRefAccess();
++        boolean interrupted = false;
++        try {
++            for (boolean active = true; active;) {
++                try {
++                    active = references.waitForReferenceProcessing();
++                } catch (InterruptedException deferred) {
++                    interrupted = true;
++                }
++                if (reserveAfterDrain(bytes)) return bytes;
++            }
++            System.gc();
++            for (int sleeps = 0, sleep = 1;;) {
++                if (reserveAfterDrain(bytes)) return bytes;
++                if (sleeps >= MAX_SLEEPS) break;
++                try {
++                    if (!references.waitForReferenceProcessing()) {
++                        Thread.sleep(sleep);
++                        sleep <<= 1;
++                        sleeps++;
++                    }
++                } catch (InterruptedException deferred) {
++                    interrupted = true;
++                }
++            }
++            nextSlowReserveNanos = System.nanoTime() + SLOW_RESERVE_HOLDOFF_NANOS;
++            return 0L;
++        } finally {
++            if (interrupted) Thread.currentThread().interrupt();
++        }
 +    }
 +
 +    private static long nextId(AtomicLong sequence, String label) {
@@ -4837,7 +5035,7 @@ index 0000000000000000000000000000000000000000..d97d0dd8f2c26599086ad817ed5d521b
 +            if (!released) {
 +                released = true;
 +                if (address != 0L) UNSAFE.freeMemory(address);
-+                LOCAL_NATIVE_BYTES.addAndGet(-retainedBytes);
++                release(retainedBytes);
 +            }
 +        }
 +    }
@@ -6291,7 +6489,7 @@ index 0000000000000000000000000000000000000000..0d4cfb75317e68d54244588a474eba98
 +    }
 +}
 diff --git a/src/java.base/share/classes/java/lang/String.java b/src/java.base/share/classes/java/lang/String.java
-index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde9d3d72fd 100644
+index 5c234d4dfacac9e642578483640d4e6b41488beb..dd4033194bc27c640948b59bcc9085d4f357c74c 100644
 --- a/src/java.base/share/classes/java/lang/String.java
 +++ b/src/java.base/share/classes/java/lang/String.java
 @@ -43,6 +43,8 @@ import java.util.Locale;
@@ -6718,7 +6916,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
 -            coder = UTF16;
 -            value = StringUTF16.toBytes(ca, 0, caLen);
 +            return new M3Construction(StringUTF16.toBytes(ca, 0, clen), UTF16);
-+        }
+         }
 +
 +        int en = scale(length, cd.maxCharsPerByte());
 +        cd.onMalformedInput(CodingErrorAction.REPLACE)
@@ -6741,7 +6939,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
 +            if (bs != null) {
 +                return new M3Construction(bs, LATIN1);
 +            }
-         }
++        }
 +        return new M3Construction(StringUTF16.toBytes(ca, 0, caLen), UTF16);
      }
  
@@ -7543,29 +7741,31 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
          return Pattern.matches(regex, this);
      }
  
-@@ -3018,6 +3465,10 @@ public final class String
+@@ -3018,6 +3465,11 @@ public final class String
       * @since 1.4
       */
      public String replaceFirst(String regex, String replacement) {
 +        M3String storage = m3();
 +        if (storage != null && M3String.isLiteralRegexReplacement(regex, replacement)) {
-+            return storage.replaceLiteralRegex(this, regex, replacement, true);
++            String replaced = storage.replaceLiteralRegex(this, regex, replacement, true);
++            if (replaced != null) return replaced;
 +        }
          return Pattern.compile(regex).matcher(this).replaceFirst(replacement);
      }
  
-@@ -3062,6 +3513,10 @@ public final class String
+@@ -3062,6 +3514,11 @@ public final class String
       * @since 1.4
       */
      public String replaceAll(String regex, String replacement) {
 +        M3String storage = m3();
 +        if (storage != null && M3String.isLiteralRegexReplacement(regex, replacement)) {
-+            return storage.replaceLiteralRegex(this, regex, replacement, false);
++            String replaced = storage.replaceLiteralRegex(this, regex, replacement, false);
++            if (replaced != null) return replaced;
 +        }
          return Pattern.compile(regex).matcher(this).replaceAll(replacement);
      }
  
-@@ -3089,16 +3544,30 @@ public final class String
+@@ -3089,16 +3546,24 @@ public final class String
                  return replace(trgtStr.charAt(0), replStr.charAt(0));
              }
  
@@ -7573,14 +7773,8 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
 +            M3String targetM3 = trgtStr.m3();
 +            M3String replacementM3 = replStr.m3();
 +            if (storage != null || targetM3 != null || replacementM3 != null) {
-+                // A flat target that cannot occur (prepared facts) or does not occur leaves
-+                // this String unchanged without admitting the target or the replacement.
-+                if (storage != null && targetM3 == null && indexOf(trgtStr) < 0) return this;
-+                M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
-+                if (targetM3 == null) targetM3 = M3String.canonicalize(trgtStr);
-+                if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);
-+                M3String replaced = sourceM3.replace(targetM3, replacementM3);
-+                return replaced == sourceM3 ? this : new String(replaced);
++                String replaced = m3Replace(storage, trgtStr, targetM3, replStr, replacementM3);
++                if (replaced != null) return replaced;
 +            }
 +
              boolean thisIsLatin1 = this.isLatin1();
@@ -7602,7 +7796,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
              if (ret != null) {
                  return ret;
              }
-@@ -3113,6 +3582,14 @@ public final class String
+@@ -3113,6 +3578,17 @@ public final class String
                  throw new OutOfMemoryError("Required length exceeds implementation limit");
              }
  
@@ -7611,13 +7805,44 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
 +            if (storage != null || replacementM3 != null) {
 +                M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
 +                if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);
-+                return new String(sourceM3.replaceEmptyTarget(replacementM3));
++                // A refused admission (pool budget) leaves the flat path below to build the result.
++                if (sourceM3 != null && replacementM3 != null) {
++                    return new String(sourceM3.replaceEmptyTarget(replacementM3));
++                }
 +            }
 +
              StringBuilder sb = new StringBuilder(resultLen);
              sb.append(replStr);
              for (int i = 0; i < thisLen; ++i) {
-@@ -3349,12 +3826,64 @@ public final class String
+@@ -3122,6 +3598,27 @@ public final class String
+         }
+     }
+ 
++    /**
++     * M3 lane of {@link #replace(CharSequence, CharSequence)} for a non-empty target. The match
++     * is located through the mixed-side search before anything is admitted, so an absent target
++     * keeps this String's identity without admitting the target or the replacement; a flat
++     * target is never admitted (transient: it only drives the search); the replacement joins the
++     * result. Returns {@code null} when the pool refuses an admission (budget), in which case the
++     * flat compatibility path computes the same result.
++     */
++    private String m3Replace(M3String storage, String trgtStr, M3String targetM3,
++                             String replStr, M3String replacementM3) {
++        int found = indexOf(trgtStr);
++        if (found < 0) return this;
++        M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
++        if (sourceM3 == null) return null;
++        M3String replacement = replacementM3 != null ? replacementM3 : M3String.canonicalize(replStr);
++        if (replacement == null) return null;
++        return new String(targetM3 != null
++                ? sourceM3.replaceAt(targetM3, replacement, found)
++                : sourceM3.replaceFlatTarget(this, trgtStr, replacement, found));
++    }
++
+     /**
+      * Splits this string around matches of the given
+      * <a href="../util/regex/Pattern.html#sum">regular expression</a>.
+@@ -3349,12 +3846,64 @@ public final class String
              // because the large split loop can usually not be inlined.
              return split(ch, limit, withDelimiters);
          }
@@ -7682,7 +7907,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
      private String[] split(char ch, int limit, boolean withDelimiters) {
          int matchCount = 0;
          int off = 0;
-@@ -3489,6 +4018,11 @@ public final class String
+@@ -3489,6 +4038,11 @@ public final class String
       */
      @ForceInline
      static String join(String prefix, String suffix, String delimiter, String[] elements, int size) {
@@ -7694,18 +7919,19 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
          int icoder = prefix.coder() | suffix.coder();
          long len = (long) prefix.length() + suffix.length();
          if (size > 1) { // when there are more than one element, size - 1 delimiters will be emitted
-@@ -3504,6 +4038,10 @@ public final class String
+@@ -3504,6 +4058,11 @@ public final class String
              icoder |= el.coder();
          }
          byte coder = (byte) icoder;
 +        if (m3JoinedStringsEnabled()) {
 +            M3String storage = M3String.joinDesignated(prefix, suffix, delimiter, elements, size);
-+            return new String(storage);
++            // null: the pool refused a flat piece (budget); the flat path below builds the result.
++            if (storage != null) return new String(storage);
 +        }
          // long len overflow check, char -> byte length, int len overflow check
          if (len < 0L || (len <<= coder) != (int) len) {
              throw new OutOfMemoryError("Requested string length exceeds VM limit");
-@@ -3632,8 +4170,29 @@ public final class String
+@@ -3632,8 +4191,29 @@ public final class String
       * @since   1.1
       */
      public String toLowerCase(Locale locale) {
@@ -7737,7 +7963,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
      }
  
      /**
-@@ -3712,8 +4271,18 @@ public final class String
+@@ -3712,8 +4292,18 @@ public final class String
       * @since   1.1
       */
      public String toUpperCase(Locale locale) {
@@ -7758,7 +7984,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
      }
  
      /**
-@@ -3772,8 +4341,16 @@ public final class String
+@@ -3772,8 +4362,16 @@ public final class String
       *          has no leading or trailing space.
       */
      public String trim() {
@@ -7777,7 +8003,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
          return ret == null ? this : ret;
      }
  
-@@ -3804,8 +4381,16 @@ public final class String
+@@ -3804,8 +4402,16 @@ public final class String
       * @since 11
       */
      public String strip() {
@@ -7796,7 +8022,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
          return ret == null ? this : ret;
      }
  
-@@ -3834,8 +4419,16 @@ public final class String
+@@ -3834,8 +4440,16 @@ public final class String
       * @since 11
       */
      public String stripLeading() {
@@ -7815,7 +8041,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
          return ret == null ? this : ret;
      }
  
-@@ -3864,8 +4457,16 @@ public final class String
+@@ -3864,8 +4478,16 @@ public final class String
       * @since 11
       */
      public String stripTrailing() {
@@ -7834,7 +8060,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
          return ret == null ? this : ret;
      }
  
-@@ -3917,7 +4518,53 @@ public final class String
+@@ -3917,7 +4539,53 @@ public final class String
       * @since 11
       */
      public Stream<String> lines() {
@@ -7889,7 +8115,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
      }
  
      /**
-@@ -3960,6 +4607,10 @@ public final class String
+@@ -3960,6 +4628,10 @@ public final class String
          if (isEmpty()) {
              return "";
          }
@@ -7900,7 +8126,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
          Stream<String> stream = lines();
          if (n > 0) {
              final String spaces = " ".repeat(n);
-@@ -3973,13 +4624,19 @@ public final class String
+@@ -3973,13 +4645,19 @@ public final class String
      }
  
      private int indexOfNonWhitespace() {
@@ -7924,7 +8150,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
      }
  
      /**
-@@ -4075,6 +4732,10 @@ public final class String
+@@ -4075,6 +4753,10 @@ public final class String
          if (length == 0) {
              return "";
          }
@@ -7935,7 +8161,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
          char lastChar = charAt(length - 1);
          boolean optOut = lastChar == '\n' || lastChar == '\r';
          List<String> lines = lines().toList();
-@@ -4197,6 +4858,10 @@ public final class String
+@@ -4197,6 +4879,10 @@ public final class String
          if (isEmpty()) {
              return "";
          }
@@ -7946,7 +8172,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
          char[] chars = toCharArray();
          int length = chars.length;
          int from = 0;
-@@ -4307,9 +4972,13 @@ public final class String
+@@ -4307,9 +4993,13 @@ public final class String
       */
      @Override
      public IntStream chars() {
@@ -7962,7 +8188,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
              false);
      }
  
-@@ -4327,9 +4996,13 @@ public final class String
+@@ -4327,9 +5017,13 @@ public final class String
       */
      @Override
      public IntStream codePoints() {
@@ -7978,7 +8204,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
              false);
      }
  
-@@ -4341,8 +5014,13 @@ public final class String
+@@ -4341,8 +5035,13 @@ public final class String
       *          the character sequence represented by this string.
       */
      public char[] toCharArray() {
@@ -7994,7 +8220,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
      }
  
      /**
-@@ -4548,6 +5226,9 @@ public final class String
+@@ -4548,6 +5247,9 @@ public final class String
       *          as its single character the argument {@code c}.
       */
      public static String valueOf(char c) {
@@ -8004,7 +8230,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
          if (COMPACT_STRINGS && StringLatin1.canEncode(c)) {
              return new String(StringLatin1.toBytes(c), LATIN1);
          }
-@@ -4660,21 +5341,30 @@ public final class String
+@@ -4660,21 +5362,30 @@ public final class String
          if (count == 1) {
              return this;
          }
@@ -8039,7 +8265,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
          repeatCopyRest(multiple, 0, limit, len);
          return new String(multiple, coder);
      }
-@@ -4718,7 +5408,10 @@ public final class String
+@@ -4718,7 +5429,10 @@ public final class String
       * @param coder     the coder of dst[]
       */
      void getBytes(byte[] dst, int dstBegin, byte coder) {
@@ -8051,7 +8277,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
              System.arraycopy(value, 0, dst, dstBegin << coder, value.length);
          } else {    // this.coder == LATIN && coder == UTF16
              StringLatin1.inflate(value, 0, dst, dstBegin, value.length);
-@@ -4738,7 +5431,10 @@ public final class String
+@@ -4738,7 +5452,10 @@ public final class String
       * @param length    the amount of copied chars
       */
      void getBytes(byte[] dst, int srcPos, int dstBegin, byte coder, int length) {
@@ -8063,7 +8289,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
              System.arraycopy(value, srcPos << coder, dst, dstBegin << coder, length << coder);
          } else {    // this.coder == LATIN && coder == UTF16
              StringLatin1.inflate(value, srcPos, dst, dstBegin, length);
-@@ -4758,18 +5454,26 @@ public final class String
+@@ -4758,18 +5475,26 @@ public final class String
          if (len == 0) {
              this.value = "".value;
              this.coder = "".coder;
@@ -8099,7 +8325,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
      }
  
      /*
-@@ -4779,42 +5483,157 @@ public final class String
+@@ -4779,42 +5504,157 @@ public final class String
      String(AbstractStringBuilder asb, Void sig) {
          byte[] val = asb.getValue();
          int length = asb.length();
@@ -8275,7 +8501,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..f3322a3c249f3ffdfe61ea5e56c59fde
  
      @Native static final byte LATIN1 = 0;
 diff --git a/src/java.base/share/classes/java/lang/StringConcatHelper.java b/src/java.base/share/classes/java/lang/StringConcatHelper.java
-index 139181af0963efe5caaa25a03960d30e14b65c41..d702eef322bb6dbb3884050c2872989744db3096 100644
+index 139181af0963efe5caaa25a03960d30e14b65c41..b6a5ac36d90a0648c2653977ee8077995a645a0a 100644
 --- a/src/java.base/share/classes/java/lang/StringConcatHelper.java
 +++ b/src/java.base/share/classes/java/lang/StringConcatHelper.java
 @@ -428,6 +428,12 @@ final class StringConcatHelper {
@@ -8291,7 +8517,7 @@ index 139181af0963efe5caaa25a03960d30e14b65c41..d702eef322bb6dbb3884050c28729897
          // start "mixing" in length and coder or arguments, order is not
          // important
          long indexCoder = mix(initialCoder(), s1);
-@@ -440,6 +446,36 @@ final class StringConcatHelper {
+@@ -440,6 +446,49 @@ final class StringConcatHelper {
          return newString(buf, indexCoder);
      }
  
@@ -8304,25 +8530,38 @@ index 139181af0963efe5caaa25a03960d30e14b65c41..d702eef322bb6dbb3884050c28729897
 +    static String m3Concat(String[] constants, String[] args) {
 +        M3String result = M3String.empty();
 +        for (int index = 0; index < args.length; index++) {
-+            String constant = constants[index];
-+            if (constant != null && !constant.isEmpty()) {
-+                M3String piece = M3String.canonicalize(constant);
-+                result = result.length() == 0 ? piece : result.concat(piece);
-+            }
-+
-+            String argument = args[index];
-+            if (!argument.isEmpty()) {
-+                M3String piece = M3String.canonicalize(argument);
-+                result = result.length() == 0 ? piece : result.concat(piece);
-+            }
++            result = m3Append(result, constants[index]);
++            if (result == null) return flatConcat(constants, args);
++            result = m3Append(result, args[index]);
++            if (result == null) return flatConcat(constants, args);
 +        }
++        result = m3Append(result, constants[args.length]);
++        return result == null ? flatConcat(constants, args) : new String(result);
++    }
 +
++    /** Null or empty pieces are skipped; {@code null} when the pool refuses the piece (budget). */
++    private static M3String m3Append(M3String result, String piece) {
++        if (piece == null || piece.isEmpty()) return result;
++        M3String admitted = M3String.canonicalize(piece);
++        if (admitted == null) return null;
++        return result.length() == 0 ? admitted : result.concat(admitted);
++    }
++
++    /** The stock one-array shape for the same pieces when the M3 pool refuses an admission. */
++    private static String flatConcat(String[] constants, String[] args) {
++        long indexCoder = initialCoder();
++        for (int index = 0; index < args.length; index++) {
++            if (constants[index] != null) indexCoder = mix(indexCoder, constants[index]);
++            indexCoder = mix(indexCoder, args[index]);
++        }
 +        String suffix = constants[args.length];
-+        if (suffix != null && !suffix.isEmpty()) {
-+            M3String piece = M3String.canonicalize(suffix);
-+            result = result.length() == 0 ? piece : result.concat(piece);
++        if (suffix != null) indexCoder = mix(indexCoder, suffix);
++        byte[] buf = newArray(indexCoder);
++        if (suffix != null) indexCoder = prepend(indexCoder, buf, suffix);
++        for (int index = args.length - 1; index >= 0; index--) {
++            indexCoder = prepend(indexCoder, buf, args[index], constants[index]);
 +        }
-+        return new String(result);
++        return newString(buf, indexCoder);
 +    }
 +
      /**

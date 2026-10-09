@@ -61,3 +61,7 @@ Regenerated after `M3StringFacts.java` changed (`target_commit` b9496a02e0): one
 ## 2026-10-09 re-seal (A9 mixed-side equality gates)
 
 Regenerated after `String.java`, `M3String.java` and `M3StringFacts.java` changed (`target_commit` 86c8a71d41): three after-images updated, 66 targets unchanged.
+
+## 2026-10-09 re-seal (A6 pool bounds)
+
+Regenerated after `M3StringPool.java`, `M3String.java`, `String.java` and `StringConcatHelper.java` changed (`target_commit` c5bd7772ea): four after-images updated, 66 targets unchanged.

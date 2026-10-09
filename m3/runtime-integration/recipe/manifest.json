@@ -2,8 +2,8 @@
   "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
-  "target_commit": "86c8a71d410fd2fe44d50d43feac79081622bf35",
-  "patch_sha256": "33ae24a4a03289620f706bc4cbc8b5873280f738ee0b893f4a92d7e334c2dcfd",
+  "target_commit": "c5bd7772ea20200e5964579f9e1bc660df4f08c1",
+  "patch_sha256": "a13f2f71b6320a733dc20f9a77bbe94abe9490c187b3ea6b757ceef264e58783",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
     "src/hotspot/share/cds/archiveHeapWriter.cpp": {
@@ -88,7 +88,7 @@
     },
     "src/java.base/share/classes/java/lang/M3String.java": {
       "before": null,
-      "after": "200d7c811692ef0369933577a0c18d8821ca2b9c9887e5bcab9130793524a7cf"
+      "after": "120236db0e1baf9bfb7383e80211650231eb07d3f5779f37279834c051847978"
     },
     "src/java.base/share/classes/java/lang/M3StringAtom.java": {
       "before": null,
@@ -108,7 +108,7 @@
     },
     "src/java.base/share/classes/java/lang/M3StringPool.java": {
       "before": null,
-      "after": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b"
+      "after": "10805981cf2e67607e134df4c1416a787d4c3523015e743ec3d52d47c0ed44f1"
     },
     "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java": {
       "before": null,
@@ -124,11 +124,11 @@
     },
     "src/java.base/share/classes/java/lang/String.java": {
       "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
-      "after": "9582e2038c83735f3678ec972343ff3404bd4bf5386a26a755ae2bc911d35ad6"
+      "after": "c49e422dfe0e6b83a2d51155f0d36b5223719dfefd211a96313705bc3ee253ca"
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
       "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",
-      "after": "1d41449dceb4350049689669bca5567e005d51e8440d2a88e81288d6a9f50ce7"
+      "after": "2d25592220f776f019b562f89d9386fbfe188cd3f873306c8ad971027e65d6e6"
     },
     "src/java.base/share/classes/java/lang/System.java": {
       "before": "c51b88b6dc193b6447441769e24e89ebdbc3482796889a7506064bf07a7a8020",
