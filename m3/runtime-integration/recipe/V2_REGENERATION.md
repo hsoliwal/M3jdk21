@@ -57,3 +57,7 @@ Regenerated after `M3StringFacts.java` and `String.java` changed (`target_commit
 ## 2026-10-09 re-seal (A8 fused facts scan)
 
 Regenerated after `M3StringFacts.java` changed (`target_commit` b9496a02e0): one after-image updated, 66 targets unchanged.
+
+## 2026-10-09 re-seal (A9 mixed-side equality gates)
+
+Regenerated after `String.java`, `M3String.java` and `M3StringFacts.java` changed (`target_commit` 86c8a71d41): three after-images updated, 66 targets unchanged.

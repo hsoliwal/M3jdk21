@@ -2,8 +2,8 @@
   "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
-  "target_commit": "b9496a02e0eac1a74f321eacf4bc3f4ee3d46c23",
-  "patch_sha256": "03275823b1af507375db267bc7f5008c63ab2cc8f6d2ece8f6ab537b3f61bf87",
+  "target_commit": "86c8a71d410fd2fe44d50d43feac79081622bf35",
+  "patch_sha256": "33ae24a4a03289620f706bc4cbc8b5873280f738ee0b893f4a92d7e334c2dcfd",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
     "src/hotspot/share/cds/archiveHeapWriter.cpp": {
@@ -88,7 +88,7 @@
     },
     "src/java.base/share/classes/java/lang/M3String.java": {
       "before": null,
-      "after": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b"
+      "after": "200d7c811692ef0369933577a0c18d8821ca2b9c9887e5bcab9130793524a7cf"
     },
     "src/java.base/share/classes/java/lang/M3StringAtom.java": {
       "before": null,
@@ -100,7 +100,7 @@
     },
     "src/java.base/share/classes/java/lang/M3StringFacts.java": {
       "before": null,
-      "after": "51635a2e8cc407f3f7166389f975442b1bf06857e8b8c548852cbc63eaf636b3"
+      "after": "f1cc0ec9d4fd0bbc15d9c684e80b9907b60321cb15ad4fd7fa39f3cf973fc4cd"
     },
     "src/java.base/share/classes/java/lang/M3StringOwner.java": {
       "before": null,
@@ -124,7 +124,7 @@
     },
     "src/java.base/share/classes/java/lang/String.java": {
       "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
-      "after": "c16fd68b3a0402352569908ba9c99a17dc2853ba7dbb6cbbcb5c3ea6ea4efc8f"
+      "after": "9582e2038c83735f3678ec972343ff3404bd4bf5386a26a755ae2bc911d35ad6"
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
       "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",
