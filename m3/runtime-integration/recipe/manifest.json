@@ -2,7 +2,7 @@
   "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
-  "target_commit": "68775c6e7d917c546d2db95b5c43dc3663ea4a8a",
+  "target_commit": "dd9120f2831339fe27ed40c20a780f53e3523dc6",
   "patch_sha256": "6b93579f78830ed1daebca1f8f5c6c5cc2fa85f2b10d56191fa992166841b0d8",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
@@ -110,7 +110,8 @@
         "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f",
         "f0bda25831e87d6b1339e8b8931cb2ac0ce7a543f4fd9ef7ea02e6837fc62d7e",
         "b742092ca0d9453df581fc7d4605627e886dcae0c7ac72dbac32b0dc3cde315e",
-        "7f5a04f4e60429b28f389493a36fd708c3f8da3da8f8559a887ccf871da24431"
+        "7f5a04f4e60429b28f389493a36fd708c3f8da3da8f8559a887ccf871da24431",
+        "755aadd90dce399163eaaba5c3b2d4616555e794e24207dc390a37f414b57027"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java": {
