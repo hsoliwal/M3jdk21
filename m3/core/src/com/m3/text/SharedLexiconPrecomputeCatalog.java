@@ -176,15 +176,42 @@ public final class SharedLexiconPrecomputeCatalog {
             put(translations, identity, value, "translation"); return this;
         }
         public Builder spell(SpellScope scope, M3LexiconPrecompute.SpellIndex value) {
+            Objects.requireNonNull(scope, "spell key");
+            Objects.requireNonNull(value, "spell value");
+            if (!scope.lexiconFingerprint().equals(value.lexiconFingerprint())
+                    || !scope.language().equals(value.language())
+                    || scope.maxEditDistance() != value.maxEditDistance()
+                    || scope.prefixLength() != value.prefixLength()
+                    || !scope.sourceFingerprint().equals(value.sourceFingerprint())) {
+                throw new IllegalArgumentException("spell identity does not match index");
+            }
             put(spellIndexes, scope, value, "spell"); return this;
         }
         public Builder tokenHashes(TokenRange range, M3LexiconPrecompute.TokenHashPrecompute value) {
+            Objects.requireNonNull(range, "token hashes key");
+            Objects.requireNonNull(value, "token hashes value");
+            if (!range.valueFingerprint().equals(value.valueFingerprint())
+                    || range.startInclusive() != value.rangeStart()
+                    || range.endExclusive() != value.rangeEnd()) {
+                throw new IllegalArgumentException("token-hash identity does not match precompute");
+            }
             put(tokenHashes, range, value, "token hashes"); return this;
         }
         public Builder prefixCounts(ValueToken key, M3LexiconPrecompute.PrefixCounts value) {
+            Objects.requireNonNull(key, "prefix counts key");
+            Objects.requireNonNull(value, "prefix counts value");
+            if (!key.valueFingerprint().equals(value.valueFingerprint())
+                    || key.tokenId() != value.tokenId()) {
+                throw new IllegalArgumentException("prefix-count identity does not match precompute");
+            }
             put(prefixCounts, key, value, "prefix counts"); return this;
         }
         public Builder tokenFrequency(ValueScope scope, M3LexiconPrecompute.TokenFrequency value) {
+            Objects.requireNonNull(scope, "token frequency key");
+            Objects.requireNonNull(value, "token frequency value");
+            if (!scope.valueFingerprint().equals(value.valueFingerprint())) {
+                throw new IllegalArgumentException("token-frequency identity does not match precompute");
+            }
             put(tokenFrequencies, scope, value, "token frequency"); return this;
         }
         public SharedLexiconPrecomputeCatalog build() { return new SharedLexiconPrecomputeCatalog(this); }
