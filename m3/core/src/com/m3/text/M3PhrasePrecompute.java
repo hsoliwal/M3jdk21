@@ -193,17 +193,17 @@ public final class M3PhrasePrecompute {
             for (int index = 0; index < phrase.sourceLength(); index++)
                 node = node.children.computeIfAbsent(phrase.sourceTokenAt(index),
                         ignored -> new Node());
-            if (node.phrase != null)
-                throw new IllegalArgumentException("duplicate source phrase");
+            // Synexia IndexPhraseTable is last-write-wins for an existing source phrase.
+            if (node.phrase == null) {
+                phraseCount++;
+                maxSourceLength = Math.max(maxSourceLength, phrase.sourceLength());
+            }
             node.phrase = phrase;
-            phraseCount++;
-            maxSourceLength = Math.max(maxSourceLength, phrase.sourceLength());
             return this;
         }
 
         public Catalog build() {
-            if (phraseCount == 0)
-                throw new IllegalStateException("phrase catalog is empty");
+            // An empty Synexia IndexPhraseTable is a valid identity rewrite.
             return new Catalog(scope, Node.freeze(root), phraseCount, maxSourceLength);
         }
     }
