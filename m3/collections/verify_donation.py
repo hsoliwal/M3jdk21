@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026-10-09 by Hitesh Soliwal and contributors: seal the full current cohort and add offline Maven execution without relaxing the console/native gates.
 # Modified 2026 by Hitesh Soliwal and contributors: qualify concurrent EnumSet in a new exact inventory; preserve all acceptance guards and historical receipts.
 # Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.
 """Verify the installed M3 collection donation with target-native Java/JNI checks.
@@ -27,16 +28,46 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def inventory():
+    """Exact installed-source admission shared by both execution paths."""
+    manifest = HERE / 'qualification/installed-source-current-20261009.tsv'
+    packet = json.loads((HERE / 'synexia-donation.json').read_text())
+    if packet['installed_source_manifest'] != 'qualification/installed-source-current-20261009.tsv':
+        raise SystemExit('Unexpected installed source manifest selection')
+    if digest(manifest) != packet['installed_source_manifest_sha256']:
+        raise SystemExit('Installed source manifest drift; reconcile with canonical recipe before verifying')
+    rows = [line.split('\t') for line in manifest.read_text().splitlines()
+            if line and not line.startswith('#')]
+    if len({row[0] for row in rows}) != len(rows):
+        raise SystemExit('Duplicate installed source path')
+    for path, expected in rows:
+        relative = Path(path)
+        if relative.is_absolute() or '..' in relative.parts or not path.startswith('m3/collections/'):
+            raise SystemExit('Invalid receiver path: ' + path)
+        source = REPO / relative
+        if not source.is_file() or digest(source) != expected:
+            raise SystemExit('Installed source drift: ' + path)
+    declared_java = {path for path, _ in rows if path.endswith('.java') and '/src/' in path}
+    actual_java = {str(path.relative_to(REPO)) for path in (HERE / 'src').rglob('*.java')}
+    if declared_java != actual_java:
+        raise SystemExit('Java source set changed; qualify a successor packet')
+    return manifest, packet, rows, declared_java
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
+    parser.add_argument('--runner', choices=('console', 'maven'), default='console',
+                        help='Console 1.12.2 or the sealed module POM with offline Maven')
     args = parser.parse_args()
     java_home = Path(os.environ['JAVA_HOME']).resolve()
-    junit = Path(os.environ['JUNIT_CONSOLE_JAR']).resolve()
-    if not junit.is_file():
-        raise SystemExit('JUNIT_CONSOLE_JAR must name a real JUnit platform console standalone JAR')
-    if digest(junit) != '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a':
-        raise SystemExit('Expected exact JUnit console 1.12.2 artifact')
+    junit = None
+    if args.runner == 'console':
+        junit = Path(os.environ['JUNIT_CONSOLE_JAR']).resolve()
+        if not junit.is_file():
+            raise SystemExit('JUNIT_CONSOLE_JAR must name a real JUnit platform console standalone JAR')
+        if digest(junit) != '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a':
+            raise SystemExit('Expected exact JUnit console 1.12.2 artifact')
     if not sys.platform.startswith('linux'):
         raise SystemExit('This JNI acceptance host requires Linux; no partial overall PASS')
     target = HERE / 'target/donation-verification'
@@ -59,25 +90,7 @@ def main():
     version = run('01-java-version', [java_home / 'bin/java', '-version'])
     if 'version "21.' not in version and 'version "21"' not in version:
         raise SystemExit('The qualified baseline requires Java 21')
-    manifest = HERE / 'qualification/installed-source-enum-set-20261008.tsv'
-    packet = json.loads((HERE / 'synexia-donation.json').read_text())
-    if digest(manifest) != packet['installed_source_manifest_sha256']:
-        raise SystemExit('Installed source manifest drift; reconcile with canonical recipe before verifying')
-    rows = [line.split('\t') for line in manifest.read_text().splitlines()
-            if line and not line.startswith('#')]
-    if len({row[0] for row in rows}) != len(rows):
-        raise SystemExit('Duplicate installed source path')
-    for path, expected in rows:
-        relative = Path(path)
-        if relative.is_absolute() or '..' in relative.parts or not path.startswith('m3/collections/'):
-            raise SystemExit('Invalid receiver path: ' + path)
-        source = REPO / relative
-        if not source.is_file() or digest(source) != expected:
-            raise SystemExit('Installed source drift: ' + path)
-    declared_java = {path for path, _ in rows if path.endswith('.java') and '/src/' in path}
-    actual_java = {str(path.relative_to(REPO)) for path in (HERE / 'src').rglob('*.java')}
-    if declared_java != actual_java:
-        raise SystemExit('Java source set changed; qualify a successor packet')
+    manifest, packet, rows, declared_java = inventory()
     mains = sorted(REPO / path for path in declared_java if '/src/main/' in path)
     tests = sorted(REPO / path for path in declared_java if '/src/test/' in path)
     probes = [HERE / 'verification' / (name + '.java') for name in
@@ -87,13 +100,29 @@ def main():
     test_classes.mkdir()
     common = [java_home / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror']
     run('02-module-compile', common + ['-d', classes] + mains)
-    run('03-test-compile', common + ['-cp', str(classes) + os.pathsep + str(junit),
-                                   '-d', test_classes] + tests + probes)
-    runtime_classpath = str(classes) + os.pathsep + str(test_classes)
-    reports = target / 'junit-reports'
-    run('04-all-contract-tests', [java_home / 'bin/java', '-jar', junit, 'execute',
-                                '--disable-banner', '--class-path', runtime_classpath,
-                                '--scan-class-path', '--fail-if-no-tests', '--reports-dir', reports])
+    if args.runner == 'console':
+        run('03-test-compile', common + ['-cp', str(classes) + os.pathsep + str(junit),
+                                       '-d', test_classes] + tests + probes)
+        runtime_classpath = str(classes) + os.pathsep + str(test_classes)
+        reports = target / 'junit-reports'
+        run('04-all-contract-tests', [java_home / 'bin/java', '-jar', junit, 'execute',
+                                    '--disable-banner', '--class-path', runtime_classpath,
+                                    '--scan-class-path', '--fail-if-no-tests', '--reports-dir', reports])
+    else:
+        # The POM is part of the sealed inventory; use its actual compiler and test owners.
+        for directory in ('classes', 'test-classes', 'surefire-reports'):
+            shutil.rmtree(HERE / 'target' / directory, ignore_errors=True)
+        command = [os.environ.get('MVN', 'mvn'), '-B', '-ntp', '-o']
+        if os.environ.get('M2_REPO'):
+            command.append('-Dmaven.repo.local=' + os.environ['M2_REPO'])
+        command += ['-Dmaven.test.skip=false', '-DskipTests=false',
+                    '-Dmaven.test.failure.ignore=false', '-DfailIfNoTests=true',
+                    '-f', HERE / 'pom.xml', 'test']
+        run('03-maven-module-tests', command)
+        reports = HERE / 'target/surefire-reports'
+        run('03-native-probe-compile', common + ['-cp', classes, '-d', test_classes] + probes)
+        runtime_classpath = os.pathsep.join(str(path) for path in
+                                           (classes, test_classes, HERE / 'target/test-classes'))
     totals = {'tests': 0, 'failures': 0, 'errors': 0, 'skipped': 0}
     for report in reports.glob('TEST-*.xml'):
         suite = ET.parse(report).getroot()
@@ -101,6 +130,9 @@ def main():
             totals[key] += int(suite.attrib.get(key, '0'))
     if not totals['tests'] or any(totals[key] for key in ('failures', 'errors', 'skipped')):
         raise SystemExit('JUnit acceptance requires nonzero tests and no failures/errors/skips: ' + repr(totals))
+    expected_tests = packet['qualification_source_counts']['junit_tests']
+    if totals['tests'] != expected_tests:
+        raise SystemExit('JUnit source cohort coverage changed: ' + repr(totals))
     for name in ('M3LazyTreeMapSelfTest', 'M3LazyValueStateSelfTest'):
         run('04-' + name, [java_home / 'bin/java', '-ea', '-cp', runtime_classpath,
                            'com.m3.collections.' + name])
@@ -135,8 +167,12 @@ def main():
         cost = run('11-collection-cost-probe', [java_home / 'bin/java', '-Xbatch', '-cp', runtime_classpath,
                                                'com.m3.collections.M3CollectionCostProbe'])
         (evidence / 'collection-cost.csv').write_text(cost)
+    # Tests and native tools cannot silently change an admitted input before receipt emission.
+    inventory()
     receipt = {'copyright': 'Copyright 2026 Hitesh Soliwal and contributors', 'license': 'Apache-2.0', 'schema': 'M3_COLLECTION_RECEIVING_QUALIFICATION_V1',
                'scope': 'SEPARATELY_BUILT_COLLECTION_MODULE',
+               'runner': args.runner, 'pom_sha256': digest(HERE / 'pom.xml'),
+               'junit_console': '1.12.2' if args.runner == 'console' else 'NOT_USED; JUnit 5.10.2 from sealed POM',
                'installed_source_manifest_sha256': digest(manifest),
                'java_sources': len(mains), 'test_sources': len(tests), 'junit': totals,
                'main_self_tests': ['M3LazyTreeMapSelfTest:PASS', 'M3LazyValueStateSelfTest:PASS'],
@@ -147,7 +183,7 @@ def main():
                'cost_probe': 'DIAGNOSTIC_RECORDED' if args.cost_probe else 'NOT_RUN',
                'full_reactor': 'NOT_RUN', 'openjdk_jtreg_hotspot': 'NOT_RUN',
                'universal_performance_claim': False, 'phase_advance': False,
-               'active_phase': 'STRING', 'target_baseline': 'eda1ae0733952394851c3580f8efb7624563b98c'}
+               'active_phase': 'STRING', 'target_baseline': '5f68880c6f4a669e2fe82d6a914c071aef4f80f5'}
     (evidence / 'qualification.json').write_text(json.dumps(receipt, indent=2) + '\n')
     print(json.dumps(receipt, indent=2))
 

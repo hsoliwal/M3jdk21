@@ -116,3 +116,28 @@ Canonical recipes and actual source/runtime qualification stay in Synexia's
 See `synexia-donation.json`, `name-mapping.json` and `qualification/receiving-repair-20261008.json`.
 The global migration remains in STRING. No array/collection/AST phase or JDK backend
 is promoted by this independent module proof. Historical records retain their own hashes.
+
+
+## Current cohort verification (2026-10-09)
+
+The successor inventory seals all 104 current module Java files (76 main, 28 test), both
+standalone probes, native source, LICENSE, NOTICE and the unchanged module POM. The 14 newer
+Java files extend the prior inventory without replacing any runtime owner. Historical inventories
+and receipts remain exact. The source-set equality guard still refuses future unqualified additions.
+
+The target verifier now supports the existing Maven build as an explicit offline execution path:
+
+```sh
+python3 m3/collections/verify_donation.py --runner maven --cost-probe
+```
+
+Set `JAVA_HOME` to Java 21; `MVN`, `M2_REPO` and `CC` may select installed tools and an approved
+offline cache. This mode uses the sealed POM's JUnit 5.10.2 and requires all 133 tests with no skips,
+failures or errors. The default console mode retains its exact JUnit Console 1.12.2 hash requirement.
+Both modes preserve strict compilation, the two lazy self-tests, packaged notices, java.base-only
+module requirements, C17/UBSan, checked JNI and prepared-allocation checks. Neither substitutes
+for OpenJDK/jtreg or changes the active STRING phase.
+
+Canonical recipe: `com.synexia.m3.M3CollectionsCurrentInventory20261009`, under Synexia's existing
+`m3jdk-packed-collections-receiving-repair-20261008/metadata-proof/current-source-set-20261009`
+owner. `synexia-donation.json` links the executed receipt and exact source-publication binding.

@@ -1,0 +1,38 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "schema": "M3_COLLECTION_RECEIVING_QUALIFICATION_V1",
+  "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
+  "runner": "maven",
+  "pom_sha256": "af47d700fbc72e7fc42e065b11423105640943dfdb1eea6d71bb1a31b1699426",
+  "junit_console": "NOT_USED; JUnit 5.10.2 from sealed POM",
+  "installed_source_manifest_sha256": "097ecfcc6d6b0c3487cff7ea782889c074b76627eb7b7a323dbc2ca920ea5654",
+  "java_sources": 76,
+  "test_sources": 28,
+  "junit": {
+    "tests": 133,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "main_self_tests": [
+    "M3LazyTreeMapSelfTest:PASS",
+    "M3LazyValueStateSelfTest:PASS"
+  ],
+  "java_compile": "--release 21 -Xlint:all,-module -Werror",
+  "runtime_requires": [
+    "java.base"
+  ],
+  "native_standard": "c17",
+  "undefined_behavior_sanitizer": "PASS",
+  "checked_jni": "PASS",
+  "prepared_lane_allocation": "PASS",
+  "packaged_license_provenance": "PASS",
+  "cost_probe": "DIAGNOSTIC_RECORDED",
+  "full_reactor": "NOT_RUN",
+  "openjdk_jtreg_hotspot": "NOT_RUN",
+  "universal_performance_claim": false,
+  "phase_advance": false,
+  "active_phase": "STRING",
+  "target_baseline": "5f68880c6f4a669e2fe82d6a914c071aef4f80f5"
+}

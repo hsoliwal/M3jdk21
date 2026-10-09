@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "schema": "M3_COLLECTION_CURRENT_SOURCE_BINDING_V1",
+  "source_repository": "hsoliwal/com.synexia",
+  "canonical_source_revision": "3296830456643d86c5a72355ed49611fbe39f785",
+  "canonical_source_tree": "cd3cdf5c83e9ffed283d6587938fd105684f349e",
+  "canonical_source_artifact_root_sha256": "fa9602a307beb98f77fcf2e4522fea70bc104f1962a5112438d74f51897dcc93",
+  "canonical_source_artifact_manifest": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008/metadata-proof/current-source-set-20261009/artifact-manifest.json",
+  "canonical_recipe": "com.synexia.m3.M3CollectionsCurrentInventory20261009",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008/metadata-proof/current-source-set-20261009",
+  "target_baseline": "5f68880c6f4a669e2fe82d6a914c071aef4f80f5",
+  "target_outputs": {
+    "m3/collections/README.md": "64f4d7ca333a48e97a42dc6e2028e6c4adc82e60df9916e5e28f4b09635fba0a",
+    "m3/collections/qualification/installed-source-current-20261009.tsv": "097ecfcc6d6b0c3487cff7ea782889c074b76627eb7b7a323dbc2ca920ea5654",
+    "m3/collections/qualification/receiving-current-20261009.json": "212b23e7e2ae282f445b366884e9fbc744f92cd00bee4c6623279f3e7f6572bf",
+    "m3/collections/synexia-donation.json": "9db04e279f37d2035cf6c86157e817a541809105281883534268480b7dee881d",
+    "m3/collections/verify_donation.py": "b8e4b4f42cd670481c02606cb2845b100c44356dab59373bdbdce67c1009a26c"
+  },
+  "product_receipt": "m3/collections/qualification/receiving-current-20261009.json",
+  "runtime_source_changes": 0,
+  "phase_advance": false,
+  "active_phase": "STRING",
+  "disposition": "PUBLISHED_CANONICAL_SOURCE_AND_CURRENT_MODULE_PROOF; NO_JDK_PROMOTION"
+}
