@@ -262,8 +262,70 @@ public final class M3TQ {
       window = ((window << 16) | unit) & 0xffffffffffffL;
       if (index >= 2) keys[index - 2] = window;
     }
-    Arrays.sort(keys);
+    sortTrigramKeys(keys);
     return new Facts(length, prefix, (int) window, compactFactKeys(keys));
+  }
+
+  /** Below this many keys the comparison sort wins over the counting passes. */
+  private static final int RADIX_MIN_KEYS = 256;
+  /** Below this many keys a text over a tiny alphabet (heavy duplicates) keeps the comparison sort. */
+  private static final int RADIX_DENSE_MIN_KEYS = 8192;
+  private static final int TINY_ALPHABET_DIGITS = 8;
+  private static final int RADIX_DIGITS = 48 / 8;
+
+  /**
+   * Sorts trigram keys ascending (A19). Keys are 48-bit values, so a least-significant-digit
+   * counting sort over six 8-bit digits is linear in the key count; a digit on which every key
+   * agrees (the high byte of each unit for Latin-1 and most BMP text) is skipped. Small arrays
+   * and mid-sized texts over a tiny alphabet (the three-way comparison sort collapses their
+   * duplicates faster) keep {@code Arrays.sort}. The order and the key values equal those of the
+   * comparison sort; only the build cost changes.
+   */
+  private static void sortTrigramKeys(long[] keys) {
+    if (keys.length < RADIX_MIN_KEYS
+        || (keys.length < RADIX_DENSE_MIN_KEYS && distinctDigits(keys) <= TINY_ALPHABET_DIGITS)) {
+      Arrays.sort(keys);
+      return;
+    }
+    long[] source = keys;
+    long[] scratch = new long[keys.length];
+    int[] counts = new int[256];
+    for (int digit = 0; digit < RADIX_DIGITS; digit++) {
+      if (scatterDigit(source, scratch, counts, digit * 8)) {
+        long[] swap = source;
+        source = scratch;
+        scratch = swap;
+      }
+    }
+    if (source != keys) System.arraycopy(source, 0, keys, 0, keys.length);
+  }
+
+  /** The number of distinct low bytes of the last unit: a proxy for the alphabet size. */
+  private static int distinctDigits(long[] keys) {
+    long seen = 0L;
+    long seenHigh = 0L;
+    for (long key : keys) {
+      int digit = (int) key & 0xff;
+      if (digit < 64) seen |= 1L << digit;
+      else if (digit < 128) seenHigh |= 1L << (digit - 64);
+      else return TINY_ALPHABET_DIGITS + 1;
+    }
+    return Long.bitCount(seen) + Long.bitCount(seenHigh);
+  }
+
+  /** One counting pass over the digit at {@code shift}; false when every key shares it. */
+  private static boolean scatterDigit(long[] source, long[] target, int[] counts, int shift) {
+    Arrays.fill(counts, 0);
+    for (long key : source) counts[(int) (key >>> shift) & 0xff]++;
+    int offset = 0;
+    for (int digit = 0; digit < counts.length; digit++) {
+      int count = counts[digit];
+      if (count == source.length) return false;
+      counts[digit] = offset;
+      offset += count;
+    }
+    for (long key : source) target[counts[(int) (key >>> shift) & 0xff]++] = key;
+    return true;
   }
 
   /**
@@ -447,7 +509,7 @@ public final class M3TQ {
     for (int i = 0; i < keys.length; i++) {
       keys[i] = trigram(value.charAt(i), value.charAt(i + 1), value.charAt(i + 2));
     }
-    Arrays.sort(keys);
+    sortTrigramKeys(keys);
     int unique = 1;
     for (int i = 1; i < keys.length; i++) {
       if (keys[i] != keys[unique - 1]) keys[unique++] = keys[i];
