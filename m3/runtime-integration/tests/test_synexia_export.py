@@ -242,7 +242,8 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("int[]", field_types["memberships"])
         self.assertEqual("long", field_types["lexicon_fingerprint"])
         self.assertEqual("double", field_types["si_offset"])
-        self.assertEqual("boolean", field_types["si_prefixable"])\n        self.assertEqual("boolean", field_types["translation_grammar_supported"])
+        self.assertEqual("boolean", field_types["si_prefixable"])
+        self.assertEqual("boolean", field_types["translation_grammar_supported"])
         self.assertTrue(all(field_types.values()))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
                           "dictlang.thesaurus", "dictlang.antonyms"):
