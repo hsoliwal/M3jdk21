@@ -48,9 +48,16 @@ The field-level donor mapping is maintained in
 `IndexWordSignalEnrichment`, `IndexWordSignalProfile`, `IndexWordSignalFlags`,
 and reviewed LangDex primitive profile families without making their values part
 of `java.lang.String`. Its
-`donor_java_type` column records the inspected scalar or relation-array shape
-(`boolean`, `double`, `int`, `long`, `int[]`, or `long[]`) so future validators can reject shape
-drift without interpreting the language metadata as String semantics. When
+`donor_java_type` column records the inspected scalar, array, byte, map, or
+value-object shape (`boolean`, `double`, `int`, `long`, `String`,
+`int[]`, `long[]`, `byte[]`, `byte[][]`,
+`Map<String,int[]>`, `Map<Integer,Long>`,
+`Map<Integer,Integer>`, or `RangeFingerprint`). When one canonical field
+is shared by owner families with different Java map value types, the exported
+type catalog retains a sorted list of accepted types; payload validation still
+requires the value to match one of those exact shapes. Future validators can
+therefore reject shape drift without interpreting language metadata as String
+semantics. When
 that field map is present beside the source manifest (or is supplied with
 `--field-map`), the exporter enforces those shapes and Java `int`/`long`
 bounds; the source-blind verifier repeats the same check from the exported

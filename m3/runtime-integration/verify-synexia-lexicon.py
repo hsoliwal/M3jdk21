@@ -33,7 +33,11 @@ FACT_COLUMNS = ("shard_id", "image_row", "utf16_units", "java_hash", "code_point
                 "contains_whitespace", "precompute_profile")
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
-ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]"))
+ALLOWED_DONOR_TYPES = frozenset((
+    "boolean", "double", "int", "long", "int[]", "long[]", "String",
+    "byte[]", "byte[][]", "Map<String,int[]>", "Map<Integer,Long>",
+    "Map<Integer,Integer>", "RangeFingerprint",
+))
 
 
 def digest(data: bytes) -> str:
@@ -75,6 +79,8 @@ def canonical_precompute_payload(value: str) -> str:
 
 
 def _fits_donor_type(value: object, donor_type: str) -> bool:
+    if donor_type == "String":
+        return isinstance(value, str)
     if donor_type == "boolean":
         return isinstance(value, bool)
     if donor_type == "double":
@@ -94,11 +100,53 @@ def _fits_donor_type(value: object, donor_type: str) -> bool:
     if donor_type == "long[]":
         return (isinstance(value, list)
                 and all(_fits_donor_type(item, "long") for item in value))
+    if donor_type == "byte[]":
+        return (isinstance(value, list)
+                and all(isinstance(item, int) and not isinstance(item, bool)
+                        and 0 <= item <= 255 for item in value))
+    if donor_type == "byte[][]":
+        return (isinstance(value, list)
+                and all(_fits_donor_type(item, "byte[]") for item in value))
+    if donor_type == "Map<String,int[]>":
+        return (isinstance(value, dict)
+                and all(isinstance(key, str)
+                        and _fits_donor_type(item, "int[]")
+                        for key, item in value.items()))
+    if donor_type in ("Map<Integer,Long>", "Map<Integer,Integer>"):
+        value_type = "long" if donor_type.endswith("Long>") else "int"
+        return (isinstance(value, dict)
+                and all(isinstance(key, str) and _is_decimal_int(key, "int")
+                        and _fits_donor_type(item, value_type)
+                        for key, item in value.items()))
+    if donor_type == "RangeFingerprint":
+        return (isinstance(value, dict)
+                and set(value) == {"first", "second", "length"}
+                and _fits_donor_type(value["first"], "long")
+                and _fits_donor_type(value["second"], "long")
+                and _fits_donor_type(value["length"], "int")
+                and value["length"] >= 0)
     return False
 
 
+def _is_decimal_int(value: object, donor_type: str) -> bool:
+    if not isinstance(value, str) or not re.fullmatch(r"-?(0|[1-9][0-9]*)", value):
+        return False
+    try:
+        parsed = int(value)
+    except ValueError:
+        return False
+    return _fits_donor_type(parsed, donor_type)
+
+
+def _fits_any_donor_type(value: object, donor_type: object) -> bool:
+    candidates = (donor_type,) if isinstance(donor_type, str) else donor_type
+    return (isinstance(candidates, (list, tuple))
+            and all(isinstance(candidate, str) for candidate in candidates)
+            and any(_fits_donor_type(value, candidate) for candidate in candidates))
+
+
 def unescape_sidecar_text(value: str) -> str:
-    """Decode the exporter’s UTF-16-preserving sidecar escaping."""
+    """Decode the exporterâ€™s UTF-16-preserving sidecar escaping."""
     encoded = bytearray()
     at = 0
     while at < len(value):
@@ -230,8 +278,15 @@ def verify(output: pathlib.Path) -> dict[str, int]:
             raise ValueError("invalid source precompute field requirements")
     source_field_types = manifest.get("source", {}).get("precompute_field_types", {})
     if not isinstance(source_field_types, dict) or any(
-            not isinstance(field, str) or not isinstance(donor_type, str)
-            or donor_type not in ALLOWED_DONOR_TYPES
+            not isinstance(field, str)
+            or not isinstance(donor_type, (str, list))
+            or (isinstance(donor_type, str)
+                and donor_type not in ALLOWED_DONOR_TYPES)
+            or (isinstance(donor_type, list)
+                and (not donor_type
+                     or donor_type != sorted(set(donor_type))
+                     or any(candidate not in ALLOWED_DONOR_TYPES
+                            for candidate in donor_type)))
             for field, donor_type in source_field_types.items()):
         raise ValueError("invalid source precompute field types")
     field_map_digest = manifest.get("source", {}).get("precompute_field_map_sha256")
@@ -295,7 +350,7 @@ def verify(output: pathlib.Path) -> dict[str, int]:
         if source_field_types:
             for field in source_payload_fields[row["source_id"]]:
                 donor_type = source_field_types.get(field)
-                if donor_type is None or not _fits_donor_type(payload[field], donor_type):
+                if donor_type is None or not _fits_any_donor_type(payload[field], donor_type):
                     raise ValueError("precompute payload field type mismatch")
         profile = row["precompute_profile"]
         profile_sources.setdefault(profile, set()).add(identity)
@@ -431,3 +486,5 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+

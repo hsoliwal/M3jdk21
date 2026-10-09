@@ -55,7 +55,11 @@ FIELD_MAP_COLUMNS = (
     "donor_type", "donor_field", "donor_java_type", "canonical_payload_field",
     "m3jdk_storage", "status", "preservation_rule",
 )
-ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]"))
+ALLOWED_DONOR_TYPES = frozenset((
+    "boolean", "double", "int", "long", "int[]", "long[]", "String",
+    "byte[]", "byte[][]", "Map<String,int[]>", "Map<Integer,Long>",
+    "Map<Integer,Integer>", "RangeFingerprint",
+))
 
 
 @dataclass(frozen=True)
@@ -152,9 +156,9 @@ def canonical_required_fields(value: str) -> str:
     return ",".join(fields)
 
 
-def read_field_map(path: pathlib.Path) -> dict[str, str]:
+def read_field_map(path: pathlib.Path) -> dict[str, str | tuple[str, ...]]:
     rows, _ = read_tsv(path, FIELD_MAP_COLUMNS)
-    result: dict[str, str] = {}
+    result: dict[str, set[str]] = {}
     for row in rows:
         if row["status"] != "MAPPED":
             continue
@@ -162,15 +166,18 @@ def read_field_map(path: pathlib.Path) -> dict[str, str]:
         donor_type = row["donor_java_type"]
         if donor_type not in ALLOWED_DONOR_TYPES:
             raise ValueError(f"unsupported donor field type: {donor_type}")
-        previous = result.setdefault(field, donor_type)
-        if previous != donor_type:
-            raise ValueError(f"conflicting donor field types for {field}")
+        result.setdefault(field, set()).add(donor_type)
     if not result:
         raise ValueError("precompute field map has no mapped fields")
-    return dict(sorted(result.items()))
+    return {
+        field: next(iter(types)) if len(types) == 1 else tuple(sorted(types))
+        for field, types in sorted(result.items())
+    }
 
 
 def _fits_donor_type(value: object, donor_type: str) -> bool:
+    if donor_type == "String":
+        return isinstance(value, str)
     if donor_type == "boolean":
         return isinstance(value, bool)
     if donor_type == "double":
@@ -190,17 +197,55 @@ def _fits_donor_type(value: object, donor_type: str) -> bool:
     if donor_type == "long[]":
         return (isinstance(value, list)
                 and all(_fits_donor_type(item, "long") for item in value))
+    if donor_type == "byte[]":
+        return (isinstance(value, list)
+                and all(isinstance(item, int) and not isinstance(item, bool)
+                        and 0 <= item <= 255 for item in value))
+    if donor_type == "byte[][]":
+        return (isinstance(value, list)
+                and all(_fits_donor_type(item, "byte[]") for item in value))
+    if donor_type == "Map<String,int[]>":
+        return (isinstance(value, dict)
+                and all(isinstance(key, str)
+                        and _fits_donor_type(item, "int[]")
+                        for key, item in value.items()))
+    if donor_type in ("Map<Integer,Long>", "Map<Integer,Integer>"):
+        value_type = "long" if donor_type.endswith("Long>") else "int"
+        return (isinstance(value, dict)
+                and all(isinstance(key, str) and _is_decimal_int(key, "int")
+                        and _fits_donor_type(item, value_type)
+                        for key, item in value.items()))
+    if donor_type == "RangeFingerprint":
+        return (isinstance(value, dict)
+                and set(value) == {"first", "second", "length"}
+                and _fits_donor_type(value["first"], "long")
+                and _fits_donor_type(value["second"], "long")
+                and _fits_donor_type(value["length"], "int")
+                and value["length"] >= 0)
     return False
 
 
-def validate_payload_shapes(payload: dict[str, object], required_fields: list[str],
-                            field_types: dict[str, str]) -> None:
+def _is_decimal_int(value: object, donor_type: str) -> bool:
+    if not isinstance(value, str) or not re.fullmatch(r"-?(0|[1-9][0-9]*)", value):
+        return False
+    try:
+        parsed = int(value)
+    except ValueError:
+        return False
+    return _fits_donor_type(parsed, donor_type)
+
+
+def validate_payload_shapes(
+        payload: dict[str, object], required_fields: list[str],
+        field_types: dict[str, str | tuple[str, ...]]) -> None:
     for field in required_fields:
         donor_type = field_types.get(field)
         if donor_type is None:
             raise ValueError("precompute field has no admitted type: " + field)
-        if not _fits_donor_type(payload[field], donor_type):
-            raise ValueError(f"precompute payload field {field} is not {donor_type}")
+        candidates = (donor_type,) if isinstance(donor_type, str) else donor_type
+        if not any(_fits_donor_type(payload[field], candidate) for candidate in candidates):
+            expected = "|".join(candidates)
+            raise ValueError(f"precompute payload field {field} is not {expected}")
 
 
 def read_manifest(path: pathlib.Path) -> tuple[dict[str, dict[str, str]], bytes]:
@@ -253,8 +298,10 @@ def canonical_precompute_payload(value: str) -> str:
     return canonical
 
 
-def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
-                 field_types: dict[str, str] | None = None) -> tuple[list[Record], bytes]:
+def load_records(
+        path: pathlib.Path, sources: dict[str, dict[str, str]],
+        field_types: dict[str, str | tuple[str, ...]] | None = None,
+) -> tuple[list[Record], bytes]:
     raw = path.read_bytes()
     with path.open("r", encoding="utf-8", errors="surrogatepass", newline="") as stream:
         columns = tuple(csv.DictReader(stream, delimiter="\t").fieldnames or ())
@@ -584,3 +631,5 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+

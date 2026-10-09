@@ -232,22 +232,60 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8", newline="") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
         mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
-        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]"}
-        field_types: dict[str, str] = {}
+        allowed_types = {
+            "boolean", "double", "int", "long", "int[]", "long[]", "String",
+            "byte[]", "byte[][]", "Map<String,int[]>", "Map<Integer,Long>",
+            "Map<Integer,Integer>", "RangeFingerprint",
+        }
+        field_types: dict[str, set[str]] = {}
         for row in rows:
             self.assertIn(row["donor_java_type"], allowed_types)
-            previous = field_types.setdefault(row["canonical_payload_field"], row["donor_java_type"])
-            self.assertEqual(previous, row["donor_java_type"], row["canonical_payload_field"])
-        self.assertEqual("long[]", field_types["concept_ids"])
-        self.assertEqual("int[]", field_types["memberships"])
-        self.assertEqual("long", field_types["lexicon_fingerprint"])
-        self.assertEqual("double", field_types["si_offset"])
-        self.assertEqual("boolean", field_types["si_prefixable"])
+            field_types.setdefault(row["canonical_payload_field"], set()).add(
+                row["donor_java_type"])
+        self.assertEqual({"long[]"}, field_types["concept_ids"])
+        self.assertEqual({"int[]"}, field_types["memberships"])
+        self.assertEqual({"long"}, field_types["lexicon_fingerprint"])
+        self.assertEqual({"double"}, field_types["si_offset"])
+        self.assertEqual({"boolean"}, field_types["si_prefixable"])
+        self.assertEqual(
+            {"Map<Integer,Integer>", "Map<Integer,Long>"},
+            field_types["frequencies"],
+        )
         self.assertTrue(all(field_types.values()))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
                           "dictlang.thesaurus", "dictlang.antonyms"):
             required = set(sources[source_id]["precompute_fields"].split(","))
             self.assertTrue(required.issubset(mapped), source_id)
+
+    def test_composite_owner_shapes_and_overloaded_field_types_are_admitted(self):
+        field_map = EXPORT.read_field_map(
+            ROOT / "m3/lexicon/synexia-precompute-field-map.tsv"
+        )
+        self.assertEqual(
+            ("Map<Integer,Integer>", "Map<Integer,Long>"),
+            field_map["frequencies"],
+        )
+        samples = {
+            "sourceFingerprint": "source-v1",
+            "deleteToTokenIds": {"a": [1, 2]},
+            "frequencies": {"1": 2},
+            "tokenSha256": [[0, 255]],
+            "rangeFingerprint": {"first": 1, "second": 2, "length": 3},
+            "rangeSha256": [0, 255],
+        }
+        for field, value in samples.items():
+            donor_type = field_map[field]
+            candidates = (donor_type,) if isinstance(donor_type, str) else donor_type
+            self.assertTrue(
+                any(EXPORT._fits_donor_type(value, candidate) for candidate in candidates),
+                field,
+            )
+        self.assertTrue(
+            VERIFY._fits_any_donor_type(
+                {"1": 2},
+                ["Map<Integer,Integer>", "Map<Integer,Long>"],
+            )
+        )
 
     def test_langdex_owner_payload_round_trips_with_admitted_shapes(self):
         with tempfile.TemporaryDirectory() as directory:
