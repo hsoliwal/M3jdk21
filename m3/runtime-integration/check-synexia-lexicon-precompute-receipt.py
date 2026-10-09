@@ -126,7 +126,7 @@ def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
         SourceCheck("mappingNoFabrication", "downloader is never invoked" in manifest and "mapping-only export" in manifest),
         SourceCheck("fieldMapGuard", "reload_guard: value_fingerprint" in recipe),
         SourceCheck("fieldMapScope", "scope-keyed" in recipe),
-        SourceCheck("fieldMapAdmission", "TARGET_CONTRACT_ADMITTED" in _read(root, Path("m3/runtime-integration/synexia-lexicon-precompute-receipt-20261009.yaml")),
+        SourceCheck("fieldMapAdmission", "TARGET_CONTRACT_ADMITTED" in _read(root, Path("m3/runtime-integration/synexia-lexicon-precompute-receipt-20261009.yaml"))),
     )
 
 
