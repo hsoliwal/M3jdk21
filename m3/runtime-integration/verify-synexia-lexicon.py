@@ -265,12 +265,15 @@ def verify(output: pathlib.Path) -> dict[str, int]:
     if not isinstance(identity_fields, dict):
         raise ValueError("source identity field requirements are invalid")
     for target_type, fields in identity_fields.items():
-        if (not isinstance(target_type, str) or not re.fullmatch(r"M3LangDexPrecompute\\.[A-Za-z0-9_]+", target_type)
+        if (not isinstance(target_type, str) or not re.fullmatch(r"M3LangDexPrecompute\.[A-Za-z0-9_]+", target_type)
                 or not isinstance(fields, dict)
                 or list(fields) != sorted(fields)
                 or any(not isinstance(field, str) or re.fullmatch(r"[a-z][a-z0-9_]*", field) is None
                        or not isinstance(value, str) for field, value in fields.items())):
             raise ValueError("source identity field map is invalid")
+    source_payload_fields = source_metadata.get("precompute_fields")
+    if not isinstance(source_payload_fields, dict):
+        raise ValueError("source precompute field requirements are missing")
     identity_requirements = source_metadata.get("identity_requirements", {})
     if not isinstance(identity_requirements, dict):
         raise ValueError("source identity coverage is invalid")
@@ -280,9 +283,6 @@ def verify(output: pathlib.Path) -> dict[str, int]:
         if not isinstance(fields, list) or fields != sorted(set(fields)):
             raise ValueError("source identity coverage is not sorted")
 
-    source_payload_fields = source_metadata.get("precompute_fields")
-    if not isinstance(source_payload_fields, dict):
-        raise ValueError("source precompute field requirements are missing")
     for source_id, fields in source_payload_fields.items():
         if (not isinstance(source_id, str) or not isinstance(fields, list)
                 or any(not isinstance(field, str)
