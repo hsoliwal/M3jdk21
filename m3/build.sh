@@ -33,6 +33,7 @@ for mode in jit int nocompact c2; do
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests AcronymSidecarCatalogTest | tee "build/logs/synexia-acronym-sidecar-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconCatalogFamilyAdmissionTest | tee "build/logs/synexia-catalog-family-admission-$mode.log"
 done
+python3 -m unittest runtime-integration/tests/test_synexia_acronym_sidecar.py runtime-integration/tests/test_synexia_acronym_snapshot.py
 # Build in a private temporary directory, then publish a complete content-addressed file.
 lexicon_tmp=$(mktemp -d build/lexicon.XXXXXX)
 trap 'rm -rf "$lexicon_tmp"' EXIT
