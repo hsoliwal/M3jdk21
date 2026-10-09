@@ -476,6 +476,9 @@ final class M3StringAtom extends M3StringOwner {
         if (sourceCoder != String.LATIN1 && sourceCoder != String.UTF16) return false;
         Objects.checkFromIndexSize(sourceOffset, count, source.length >> sourceCoder);
         if (targetCoder != coder || count != length) return false;
+        if (sourceCoder == coder) {
+            return mismatchUnits(0, source, sourceOffset, sourceCoder, count) < 0;
+        }
         for (int index = 0; index < count; index++) {
             char candidate =
                     sourceCoder == String.LATIN1
@@ -501,22 +504,73 @@ final class M3StringAtom extends M3StringOwner {
         Objects.requireNonNull(source, "source");
         Objects.checkFromIndexSize(offset, count, source.length);
         if (valueCoder != coder || count != length) return false;
+        if (storageWidth == 2 && bigEndian == NATIVE_BIG_ENDIAN) {
+            return mismatchChars(address, source, CHAR_BASE + ((long) offset << 1), count) < 0;
+        }
         for (int index = 0; index < count; index++) {
             if (source[offset + index] != charAt(index)) return false;
         }
         return true;
     }
 
+    /** {@code ArraysSupport.mismatch} shape over an absolute address and a char array. */
+    private static int mismatchChars(long source, char[] units, long unitsOffset, int count) {
+        int index = 0;
+        if (count > 7) {
+            index = ArraysSupport.vectorizedMismatch(null, source, units, unitsOffset, count, 1);
+            if (index >= 0) return index;
+            index = count - ~index;
+        }
+        for (; index < count; index++) {
+            long at = (long) index << 1;
+            if (UNSAFE.getChar(source + at) != UNSAFE.getChar(units, unitsOffset + at)) return index;
+        }
+        return -1;
+    }
+
+    /**
+     * First index in {@code [start, start + count)} whose unit differs from {@code other} at
+     * {@code otherStart}, {@code -1} when none: native-to-native vectorized mismatch when both
+     * atoms share the width and the byte order, a unit loop otherwise.
+     */
+    int mismatchAtom(int start, M3StringAtom other, int otherStart, int count) {
+        Objects.checkFromIndexSize(start, count, length);
+        Objects.checkFromIndexSize(otherStart, count, other.length);
+        if (storageWidth == other.storageWidth && (storageWidth == 1 || bigEndian == other.bigEndian)) {
+            int scale = storageWidth - 1;
+            return mismatchNative(address + ((long) start << scale),
+                    other.address + ((long) otherStart << scale), count, scale);
+        }
+        for (int index = 0; index < count; index++) {
+            if (charAt(start + index) != other.charAt(otherStart + index)) return index;
+        }
+        return -1;
+    }
+
+    /** {@code ArraysSupport.mismatch} shape over two absolute addresses of equal element width. */
+    private static int mismatchNative(long first, long second, int count, int log2Scale) {
+        int index = 0;
+        if (count > 7) {
+            index = ArraysSupport.vectorizedMismatch(null, first, null, second, count, log2Scale);
+            if (index >= 0) return index;
+            index = count - ~index;
+        }
+        if (log2Scale == 0) {
+            for (; index < count; index++) {
+                if (UNSAFE.getByte(first + index) != UNSAFE.getByte(second + index)) return index;
+            }
+            return -1;
+        }
+        for (; index < count; index++) {
+            long at = (long) index << 1;
+            if (UNSAFE.getChar(first + at) != UNSAFE.getChar(second + at)) return index;
+        }
+        return -1;
+    }
+
     boolean contentEquals(byte[] compactValue, byte valueCoder) {
         if (valueCoder != coder || (compactValue.length >> valueCoder) != length) return false;
-        for (int index = 0; index < length; index++) {
-            char candidate =
-                    valueCoder == String.LATIN1
-                            ? StringLatin1.charAt(compactValue, index)
-                            : StringUTF16.charAt(compactValue, index);
-            if (candidate != charAt(index)) return false;
-        }
-        return true;
+        return mismatchUnits(0, compactValue, 0, valueCoder, length) < 0;
     }
 
     @Override

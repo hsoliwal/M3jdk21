@@ -1016,10 +1016,7 @@ final class M3String implements CharSequence {
                 return false;
             }
         }
-        for (int index = 0; index < checked.length(); index++) {
-            if (charAt(offset + index) != checked.charAt(index)) return false;
-        }
-        return true;
+        return M3StringMixedCompare.mismatchStorages(this, offset, checked, 0, checked.length()) < 0;
     }
 
     int indexOf(char unit, int fromIndex, int endIndex) {

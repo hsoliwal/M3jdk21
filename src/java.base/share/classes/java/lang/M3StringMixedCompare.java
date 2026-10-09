@@ -80,24 +80,11 @@ final class M3StringMixedCompare {
     /** Unit equality of {@code storage} against {@code other} of the same length. */
     static boolean unitsEqual(M3String storage, String other) {
         int length = storage.length();
-        if (other.m3() == null) {
+        M3String otherStorage = other.m3();
+        if (otherStorage == null) {
             return storage.mismatchUnits(0, other.value(), 0, other.coder(), length) < 0;
         }
-        if (length <= SHORT) {
-            for (int index = 0; index < length; index++) {
-                if (storage.charAt(index) != other.charAt(index)) return false;
-            }
-            return true;
-        }
-        char[] a = new char[Math.min(length, WINDOW)];
-        char[] b = new char[a.length];
-        for (int base = 0; base < length; base += a.length) {
-            int count = Math.min(a.length, length - base);
-            storage.getChars(base, base + count, a, 0);
-            other.getChars(base, base + count, b, 0);
-            if (ArraysSupport.mismatch(a, b, count) >= 0) return false;
-        }
-        return true;
+        return mismatchStorages(storage, 0, otherStorage, 0, length) < 0;
     }
 
     /** Sentinel of {@link #mismatchInPlace}: neither side is flat, fall back to windows. */
@@ -118,7 +105,52 @@ final class M3StringMixedCompare {
         if (leftStorage == null && rightStorage != null) {
             return rightStorage.mismatchUnits(rightFrom, left.value(), leftFrom, left.coder(), count);
         }
+        if (leftStorage != null) {
+            return mismatchStorages(leftStorage, leftFrom, rightStorage, rightFrom, count);
+        }
         return UNDECIDED;
+    }
+
+    /**
+     * Mismatch index of two M3 ranges: both sides are walked leaf atom by leaf atom (a tuple's
+     * halves descend), and each pair of leaf segments is compared native-to-native through
+     * {@link M3StringAtom#mismatchAtom}; {@code -1} when the ranges agree (A12).
+     */
+    static int mismatchStorages(M3String left, int leftFrom, M3String right, int rightFrom, int count) {
+        Leaf a = new Leaf();
+        Leaf b = new Leaf();
+        for (int done = 0; done < count;) {
+            a.locate(left, leftFrom + done);
+            b.locate(right, rightFrom + done);
+            int chunk = Math.min(count - done, Math.min(a.remaining, b.remaining));
+            int index = a.atom.mismatchAtom(a.offset, b.atom, b.offset, chunk);
+            if (index >= 0) return done + index;
+            done += chunk;
+        }
+        return -1;
+    }
+
+    /** The leaf atom covering one position of an M3 range, with the units left in that atom. */
+    private static final class Leaf {
+        M3StringAtom atom;
+        int offset;
+        int remaining;
+
+        void locate(M3String range, int index) {
+            M3StringOwner owner = range.owner();
+            int at = range.start() + index;
+            while (owner.kind == M3StringOwner.TUPLE) {
+                M3StringTuple tuple = (M3StringTuple) owner;
+                int leftLength = tuple.left.length();
+                M3String half = at < leftLength ? tuple.left : tuple.right;
+                if (at >= leftLength) at -= leftLength;
+                at += half.start();
+                owner = half.owner();
+            }
+            atom = (M3StringAtom) owner;
+            offset = at;
+            remaining = owner.length - at;
+        }
     }
 
     /** {@code left.regionMatches(toffset, right, ooffset, len)} with the bounds checked. */
