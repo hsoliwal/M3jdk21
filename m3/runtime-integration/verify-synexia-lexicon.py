@@ -12,11 +12,14 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import io
 import json
 import math
 import pathlib
 import re
 import struct
+
+import synexia_family_sidecars as family_sidecars
 
 MAGIC = 0x4D334C4558303031
 VERSION = 2
@@ -69,6 +72,12 @@ def _object_without_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str,
             raise ValueError(f"duplicate precompute payload key: {key}")
         result[key] = value
     return result
+
+
+def canonical_manifest_bytes(value: object) -> bytes:
+    return (
+        json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n"
+    ).encode("utf-8")
 
 
 def canonical_precompute_payload(value: str) -> str:
@@ -301,9 +310,44 @@ def read_image(path: pathlib.Path) -> tuple[list[str], list[int], int]:
     return values, hashes, units
 
 
+def verify_family_sidecar_scope(
+        files: dict[str, bytes],
+        mapping_by_identity: dict[tuple[str, str], tuple[str, tuple[int, int]]],
+) -> dict[str, int]:
+    """Verify family sidecars and bind their source/coordinate scope to records."""
+
+    stats = family_sidecars.verify_optional_bundle(files)
+    if bool(stats["legacy"]):
+        return {"families": 0, "rows": 0}
+    rows = 0
+    for family, spec in family_sidecars.FAMILY_SPECS.items():
+        content = files[spec["file"]].decode("utf-8")
+        reader = csv.DictReader(io.StringIO(content), delimiter="\t")
+        for row in reader:
+            identity = (row["source_id"], row["record_id"])
+            mapped = mapping_by_identity.get(identity)
+            if mapped is None:
+                raise ValueError(f"{family} sidecar references unknown source identity")
+            if family in {"prefix-counts", "token-frequency", "token-hash-precompute"}:
+                coordinate = (int(row["shard_id"]), int(row["image_row"]))
+                if coordinate != mapped[1]:
+                    raise ValueError(f"{family} sidecar coordinate mismatch")
+            rows += 1
+    return {"families": int(stats["families"]), "rows": rows}
+
+
 def verify(output: pathlib.Path) -> dict[str, int]:
     manifest_path = output / "synexia.export.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest_bytes = manifest_path.read_bytes()
+    if manifest_bytes.startswith(b"\xef\xbb\xbf") or b"\r" in manifest_bytes:
+        raise ValueError("manifest must be UTF-8 without BOM and use LF")
+    manifest = json.loads(
+        manifest_bytes.decode("utf-8"),
+        object_pairs_hook=_object_without_duplicate_keys,
+        parse_constant=_reject_json_constant,
+    )
+    if manifest_bytes != canonical_manifest_bytes(manifest):
+        raise ValueError("manifest is not canonical")
     if manifest.get("schema") != EXPORT_SCHEMA:
         raise ValueError("unsupported export schema")
     target = manifest.get("target", {})
@@ -487,6 +531,34 @@ def verify(output: pathlib.Path) -> dict[str, int]:
     if len(mapping_rows) != int(manifest["counts"]["source_records"]):
         raise ValueError("source record count mismatch")
 
+    family_names = {family_sidecars.INDEX_FILE} | {
+        spec["file"] for spec in family_sidecars.FAMILY_SPECS.values()
+    }
+    declared_family_files = target.get("family_sidecar_files")
+    declared_family_index = target.get("family_sidecar_index")
+    present_family_outputs = set(outputs) & family_names
+    if not declared_family_files:
+        if declared_family_index is not None or present_family_outputs:
+            raise ValueError("family sidecar metadata is incomplete")
+        family_stats = {"families": 0, "rows": 0}
+    else:
+        expected_family_files = sorted(family_names)
+        if (not isinstance(declared_family_files, list)
+                or declared_family_files != expected_family_files
+                or declared_family_index != family_sidecars.INDEX_FILE
+                or present_family_outputs != family_names):
+            raise ValueError("family sidecar publication metadata is incomplete")
+        family_files = {
+            name: (output / safe_filename(name)).read_bytes()
+            for name in expected_family_files
+        }
+        family_stats = verify_family_sidecar_scope(family_files, mapping_by_identity)
+        if (int(manifest["counts"].get("family_sidecar_families", -1))
+                != family_stats["families"]
+                or int(manifest["counts"].get("family_sidecar_rows", -1))
+                != family_stats["rows"]):
+            raise ValueError("family sidecar count mismatch")
+
     source_metadata = manifest.get("source", {})
     relation_sources = source_metadata.get("relation_sources", [])
     if (not isinstance(relation_sources, list)
@@ -597,6 +669,11 @@ def verify(output: pathlib.Path) -> dict[str, int]:
     result = {"source_records": len(mapping_rows), "image_records": len(images),
               "shards": len(shard_rows), "precompute_profiles": len(profile_rows),
               "utf16_units": total_units}
+    if family_stats["families"]:
+        result.update({
+            "family_sidecar_families": family_stats["families"],
+            "family_sidecar_rows": family_stats["rows"],
+        })
     if relation_sources:
         result["relation_records"] = len(relation_rows)
     return result
