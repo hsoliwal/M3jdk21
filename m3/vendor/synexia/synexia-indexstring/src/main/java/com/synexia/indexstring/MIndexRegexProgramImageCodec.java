@@ -278,7 +278,7 @@ public final class MIndexRegexProgramImageCodec {
     if (size < HEADER_BYTES || size > MAX_IMAGE_BYTES) {
       throw new IllegalArgumentException("regex image file byte geometry");
     }
-    return decode(Files.readAllBytes(source));
+    return decode(ByteBuffer.wrap(Files.readAllBytes(source)));
   }
 
   /**
@@ -305,7 +305,7 @@ public final class MIndexRegexProgramImageCodec {
     if (size < HEADER_BYTES || size > MAX_EXECUTION_IMAGE_BYTES) {
       throw new IllegalArgumentException("regex accelerated image file byte geometry");
     }
-    return decodeAccelerated(Files.readAllBytes(source));
+    return decodeAccelerated(ByteBuffer.wrap(Files.readAllBytes(source)));
   }
 
   public static MIndexRegexAcceleratedImage readAcceleratedMapped(Path path)
@@ -326,7 +326,7 @@ public final class MIndexRegexProgramImageCodec {
     if (size < HEADER_BYTES || size > MAX_EXECUTION_IMAGE_BYTES) {
       throw new IllegalArgumentException("regex execution image file byte geometry");
     }
-    return decodeExecution(Files.readAllBytes(source));
+    return decodeExecution(ByteBuffer.wrap(Files.readAllBytes(source)));
   }
 
   public static MIndexRegexProgram.ExecutionImage readExecutionMapped(Path path)

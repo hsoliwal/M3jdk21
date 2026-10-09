@@ -1,0 +1,212 @@
+[
+  {
+    "trial": 0,
+    "mode": "baseline",
+    "kind": 0,
+    "file_bytes": 1939,
+    "allocated_bytes_per_read": 11752
+  },
+  {
+    "trial": 0,
+    "mode": "baseline",
+    "kind": 1,
+    "file_bytes": 1693991,
+    "allocated_bytes_per_read": 6788176
+  },
+  {
+    "trial": 0,
+    "mode": "baseline",
+    "kind": 2,
+    "file_bytes": 1695627,
+    "allocated_bytes_per_read": 6867624
+  },
+  {
+    "trial": 0,
+    "mode": "candidate",
+    "kind": 0,
+    "file_bytes": 1939,
+    "allocated_bytes_per_read": 9792
+  },
+  {
+    "trial": 0,
+    "mode": "candidate",
+    "kind": 1,
+    "file_bytes": 1693991,
+    "allocated_bytes_per_read": 5094168
+  },
+  {
+    "trial": 0,
+    "mode": "candidate",
+    "kind": 2,
+    "file_bytes": 1695627,
+    "allocated_bytes_per_read": 5171976
+  },
+  {
+    "trial": 1,
+    "mode": "candidate",
+    "kind": 0,
+    "file_bytes": 1939,
+    "allocated_bytes_per_read": 9792
+  },
+  {
+    "trial": 1,
+    "mode": "candidate",
+    "kind": 1,
+    "file_bytes": 1693991,
+    "allocated_bytes_per_read": 5094168
+  },
+  {
+    "trial": 1,
+    "mode": "candidate",
+    "kind": 2,
+    "file_bytes": 1695627,
+    "allocated_bytes_per_read": 5171976
+  },
+  {
+    "trial": 1,
+    "mode": "baseline",
+    "kind": 0,
+    "file_bytes": 1939,
+    "allocated_bytes_per_read": 11752
+  },
+  {
+    "trial": 1,
+    "mode": "baseline",
+    "kind": 1,
+    "file_bytes": 1693991,
+    "allocated_bytes_per_read": 6788176
+  },
+  {
+    "trial": 1,
+    "mode": "baseline",
+    "kind": 2,
+    "file_bytes": 1695627,
+    "allocated_bytes_per_read": 6867624
+  },
+  {
+    "trial": 2,
+    "mode": "baseline",
+    "kind": 0,
+    "file_bytes": 1939,
+    "allocated_bytes_per_read": 11752
+  },
+  {
+    "trial": 2,
+    "mode": "baseline",
+    "kind": 1,
+    "file_bytes": 1693991,
+    "allocated_bytes_per_read": 6788176
+  },
+  {
+    "trial": 2,
+    "mode": "baseline",
+    "kind": 2,
+    "file_bytes": 1695627,
+    "allocated_bytes_per_read": 6867624
+  },
+  {
+    "trial": 2,
+    "mode": "candidate",
+    "kind": 0,
+    "file_bytes": 1939,
+    "allocated_bytes_per_read": 9792
+  },
+  {
+    "trial": 2,
+    "mode": "candidate",
+    "kind": 1,
+    "file_bytes": 1693991,
+    "allocated_bytes_per_read": 5094168
+  },
+  {
+    "trial": 2,
+    "mode": "candidate",
+    "kind": 2,
+    "file_bytes": 1695627,
+    "allocated_bytes_per_read": 5171976
+  },
+  {
+    "trial": 3,
+    "mode": "candidate",
+    "kind": 0,
+    "file_bytes": 1939,
+    "allocated_bytes_per_read": 9792
+  },
+  {
+    "trial": 3,
+    "mode": "candidate",
+    "kind": 1,
+    "file_bytes": 1693991,
+    "allocated_bytes_per_read": 5094168
+  },
+  {
+    "trial": 3,
+    "mode": "candidate",
+    "kind": 2,
+    "file_bytes": 1695627,
+    "allocated_bytes_per_read": 5171976
+  },
+  {
+    "trial": 3,
+    "mode": "baseline",
+    "kind": 0,
+    "file_bytes": 1939,
+    "allocated_bytes_per_read": 11752
+  },
+  {
+    "trial": 3,
+    "mode": "baseline",
+    "kind": 1,
+    "file_bytes": 1693991,
+    "allocated_bytes_per_read": 6788176
+  },
+  {
+    "trial": 3,
+    "mode": "baseline",
+    "kind": 2,
+    "file_bytes": 1695627,
+    "allocated_bytes_per_read": 6867624
+  },
+  {
+    "trial": 4,
+    "mode": "baseline",
+    "kind": 0,
+    "file_bytes": 1939,
+    "allocated_bytes_per_read": 11752
+  },
+  {
+    "trial": 4,
+    "mode": "baseline",
+    "kind": 1,
+    "file_bytes": 1693991,
+    "allocated_bytes_per_read": 6788176
+  },
+  {
+    "trial": 4,
+    "mode": "baseline",
+    "kind": 2,
+    "file_bytes": 1695627,
+    "allocated_bytes_per_read": 6867624
+  },
+  {
+    "trial": 4,
+    "mode": "candidate",
+    "kind": 0,
+    "file_bytes": 1939,
+    "allocated_bytes_per_read": 9792
+  },
+  {
+    "trial": 4,
+    "mode": "candidate",
+    "kind": 1,
+    "file_bytes": 1693991,
+    "allocated_bytes_per_read": 5094168
+  },
+  {
+    "trial": 4,
+    "mode": "candidate",
+    "kind": 2,
+    "file_bytes": 1695627,
+    "allocated_bytes_per_read": 5171976
+  }
+]
