@@ -59,8 +59,8 @@ public final class SharedLexiconFamilySidecarCatalogTest {
             String records = Files.readString(root.resolve("synexia.records.tsv"),
                     StandardCharsets.UTF_8);
             Files.writeString(root.resolve("synexia.records.tsv"),
-                    records.replace("\trecord-a\t\\\"alpha\\\"\\\"quote\\\"\t1\t2\t",
-                            "\trecord-a\talpha\t9\t9\t"),
+                    records.replace("\trecord-a\t\"alpha\"\"quote\"\t1\t2\t",
+                            "\trecord-a\t\"alpha\"\"quote\"\t9\t9\t"),
                     StandardCharsets.UTF_8);
             expectIOException(() -> SharedLexiconFamilySidecarCatalog.open(root),
                     "coordinate mismatch rejected");
