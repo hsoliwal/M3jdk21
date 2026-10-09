@@ -192,6 +192,17 @@ token identity, or allocate an X-spine concept. Titles remain a separate
 contract until a canonical title source is proven.
 
 
+## Rapidex admission status
+
+The pinned Synexia donor audit (PR #10041, commit
+`b2db7b868435f1dc9217061a3610eb74a228de04`) records Rapidex as
+`NO_CANONICAL_OWNER`. M3JDK therefore publishes only the
+`synexia-rapidex-gap-receipt.tsv` and fail-closed recipe; it does not invent
+a Rapidex lexicon field, owner, payload, frequency source, or runtime/JNI
+implementation. Admission requires a pinned canonical owner and proven
+semantics.
+
+
 ## Proof
 
 ```text
