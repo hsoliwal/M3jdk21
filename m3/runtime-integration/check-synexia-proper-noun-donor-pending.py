@@ -30,7 +30,7 @@ def main() -> int:
                for row in rows)
     assert all(row["target_map_blob"] == "5ea190d703ebfe37f91ec63a076e820ccae350e4"
                for row in rows)
-    assert all(row["mapping_blob"] == "1001ce31ea8f9affb198040c08e65570aa6ab8d9" for row in rows)
+    assert all(row["mapping_blob"] == "cff6e28add728f8185c4a13751fa66a3870f35e4" for row in rows)
 
     map_header, map_rows = read_tsv(TARGET_MAP)
     assert map_header[0] == "synexia_capability"
