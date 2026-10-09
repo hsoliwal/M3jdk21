@@ -2,6 +2,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import com.m3.text.M3LexiconPrecompute;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import com.m3.text.M3NumberSpace;
 import com.m3.text.SharedLexiconPrecomputeCatalog;
 
@@ -22,7 +26,24 @@ public final class M3NumberPrecomputeTest {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        List<String> manifest = Files.readAllLines(
+                Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
+        String[] numericManifest = manifest.stream()
+                .filter(line -> line.startsWith("dictlang.numbers.0-10000\\t"))
+                .findFirst().orElseThrow().split("\\t", -1);
+        check(numericManifest.length == 9);
+        check(numericManifest[5].equals("M3StringFacts + M3NumberSpace"));
+        List<String> targetMap = Files.readAllLines(
+                Path.of("lexicon/synexia-number-space-target-map.tsv"), StandardCharsets.UTF_8);
+        check(targetMap.get(0).equals(
+                "source_id\\tsource_path\\tsource_commit\\ttarget_type\\ttarget_api\\tstatus\\tpreservation_rule\\tevidence"));
+        String[] numericTarget = targetMap.stream()
+                .filter(line -> line.startsWith("dictlang.numbers.0-10000\\t"))
+                .findFirst().orElseThrow().split("\\t", -1);
+        check(numericTarget.length == 8);
+        check(numericTarget[3].equals("com.m3.text.M3NumberSpace"));
+        check(numericTarget[5].equals("ADMITTED_TYPED_RECEIVER"));
         M3NumberSpace space = M3NumberSpace.INSTANCE;
         M3LexiconPrecompute.NumberPrecompute zero = space.precompute(0, "und");
         M3LexiconPrecompute.NumberPrecompute max = space.precompute(10_000, "und");
