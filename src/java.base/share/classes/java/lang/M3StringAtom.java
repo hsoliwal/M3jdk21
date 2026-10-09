@@ -325,6 +325,18 @@ final class M3StringAtom extends M3StringOwner {
         int count = end - start;
         if (storageWidth == 1) {
             long source = address + start;
+            if (count >= BULK) {
+                // Latin-1 storage into chars (A26): the bytes come out in bulk through a bounded
+                // window and the stock inflate intrinsic widens them.
+                byte[] window = new byte[Math.min(count, WINDOW)];
+                for (int done = 0; done < count; ) {
+                    int chunk = Math.min(window.length, count - done);
+                    UNSAFE.copyMemory(null, source + done, window, BYTE_BASE, chunk);
+                    StringLatin1.inflate(window, 0, destination, destinationStart + done, chunk);
+                    done += chunk;
+                }
+                return;
+            }
             for (int target = destinationStart; start < end; start++, target++, source++) {
                 destination[target] = (char) (UNSAFE.getByte(source) & 0xff);
             }
