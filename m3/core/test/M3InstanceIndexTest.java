@@ -59,7 +59,7 @@ public final class M3InstanceIndexTest {
         check(index.find(einstein).orElseThrow().aliases().equals(List.of("Albert Einstein", "Einstein")));
         check(index.find(einstein).orElseThrow().metadata().keySet().iterator().next().equals("occupation"));
         M3InstanceIndex.PrecomputeFacts unicode =
-                M3InstanceIndex.PrecomputeFacts.forText("A \\uD83D\\uDE00\\uD800");
+                M3InstanceIndex.PrecomputeFacts.forText("A \uD83D\uDE00\uD800");
         check(unicode.utf16Units() == 5);
         check(unicode.codePoints() == 4);
         check(unicode.unpairedSurrogates() == 1);
