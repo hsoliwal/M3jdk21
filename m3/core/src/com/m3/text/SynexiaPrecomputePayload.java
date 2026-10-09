@@ -73,7 +73,7 @@ public final class SynexiaPrecomputePayload {
         }
     }
 
-    private enum Expected { BOOLEAN, DOUBLE, INT, LONG, INT_ARRAY, LONG_ARRAY }
+    private enum Expected { BOOLEAN, DOUBLE, STRING, INT, LONG, INT_ARRAY, LONG_ARRAY }
 
     private static final Map<String, Expected> FIELD_TYPES = fieldTypes();
     private final Map<String, Field> fields;
