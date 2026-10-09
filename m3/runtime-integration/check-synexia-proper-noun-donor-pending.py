@@ -25,11 +25,12 @@ def main() -> int:
     assert all(row["admission"] == "REFERENCE_ONLY" for row in rows)
     assert all(row["target_status"] == "TARGET_CONTRACT_OPEN_NO_PAYLOAD" for row in rows)
     assert all(row["source_pr"] == "10054" for row in rows)
-    assert all(row["source_head"] == "7a8d48ff57466dafab4ef7fb6072f3915edef142" for row in rows)
+    assert all(row["source_head"] == "293cfb7992db45c6b6a1a25428cd27a978bf0c9a" for row in rows)
     assert all(row["target_map_path"] == "m3/lexicon/synexia-instance-target-map.tsv"
                for row in rows)
     assert all(row["target_map_blob"] == "5ea190d703ebfe37f91ec63a076e820ccae350e4"
                for row in rows)
+    assert all(row["mapping_blob"] == "681da86f511e8df3924c975dde11fe7d39963b26" for row in rows)
 
     map_header, map_rows = read_tsv(TARGET_MAP)
     assert map_header[0] == "synexia_capability"
