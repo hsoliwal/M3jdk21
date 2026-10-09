@@ -53,6 +53,39 @@ public final class SharedLexiconPrecomputeCatalog {
         }
     }
 
+    /** Exact source identity for the canonical Synexia SI-unit family. */
+    public record SiUnitIdentity(String sourceId, String recordId,
+                                 String sourceRevision, String sourceBlobSha) {
+        private static final String UNPINNED = "UNPINNED";
+
+        public SiUnitIdentity(String sourceId, String recordId) {
+            this(sourceId, recordId, UNPINNED, UNPINNED);
+        }
+
+        public SiUnitIdentity {
+            sourceId = text(sourceId, "sourceId");
+            recordId = text(recordId, "recordId");
+            if (!"dictlang.si-units".equals(sourceId))
+                throw new IllegalArgumentException("SI-unit identity has the wrong source family");
+            sourceRevision = provenance(sourceRevision, "sourceRevision");
+            sourceBlobSha = provenance(sourceBlobSha, "sourceBlobSha");
+            if (UNPINNED.equals(sourceRevision) != UNPINNED.equals(sourceBlobSha))
+                throw new IllegalArgumentException("SI provenance must be pinned as a pair");
+        }
+
+        public boolean sourceBound() {
+            return !UNPINNED.equals(sourceRevision) && !UNPINNED.equals(sourceBlobSha);
+        }
+
+        private static String provenance(String value, String name) {
+            text(value, name);
+            if (UNPINNED.equals(value)) return value;
+            if (!value.matches("[0-9a-f]{40}"))
+                throw new IllegalArgumentException(name + " must be lowercase 40-hex provenance");
+            return value;
+        }
+    }
+
     public record Coordinate(int shardId, int imageRow) {
         public Coordinate {
             if (shardId < 0 || imageRow < 0) throw new IllegalArgumentException("negative coordinate");
@@ -96,6 +129,7 @@ public final class SharedLexiconPrecomputeCatalog {
     }
 
     private final Map<TranslationIdentity, M3LexiconPrecompute.TranslationProjection> translations;
+    private final Map<SiUnitIdentity, M3LexiconPrecompute.SiUnitPrecompute> siUnits;
     private final Map<SpellScope, M3LexiconPrecompute.SpellIndex> spellIndexes;
     private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes;
     private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts;
@@ -103,6 +137,7 @@ public final class SharedLexiconPrecomputeCatalog {
 
     private SharedLexiconPrecomputeCatalog(Builder builder) {
         translations = Map.copyOf(builder.translations);
+        siUnits = Map.copyOf(builder.siUnits);
         spellIndexes = Map.copyOf(builder.spellIndexes);
         tokenHashes = Map.copyOf(builder.tokenHashes);
         prefixCounts = Map.copyOf(builder.prefixCounts);
@@ -110,6 +145,10 @@ public final class SharedLexiconPrecomputeCatalog {
     }
 
     public static Builder builder() { return new Builder(); }
+
+    public Optional<M3LexiconPrecompute.SiUnitPrecompute> siUnitAt(SiUnitIdentity identity) {
+        return Optional.ofNullable(siUnits.get(Objects.requireNonNull(identity, "identity")));
+    }
 
     public Optional<M3LexiconPrecompute.TranslationProjection> translationAt(TranslationIdentity identity) {
         return Optional.ofNullable(translations.get(Objects.requireNonNull(identity, "identity")));
@@ -129,10 +168,22 @@ public final class SharedLexiconPrecomputeCatalog {
 
     public static final class Builder {
         private final Map<TranslationIdentity, M3LexiconPrecompute.TranslationProjection> translations = new HashMap<>();
+        private final Map<SiUnitIdentity, M3LexiconPrecompute.SiUnitPrecompute> siUnits = new HashMap<>();
         private final Map<SpellScope, M3LexiconPrecompute.SpellIndex> spellIndexes = new HashMap<>();
         private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes = new HashMap<>();
         private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts = new HashMap<>();
         private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies = new HashMap<>();
+
+        public Builder siUnit(SiUnitIdentity identity, M3LexiconPrecompute.SiUnitPrecompute value) {
+            Objects.requireNonNull(identity, "SI unit key");
+            Objects.requireNonNull(value, "SI unit value");
+            if (!identity.sourceRevision().equals(value.sourceRevision())
+                    || !identity.sourceBlobSha().equals(value.sourceBlobSha())) {
+                throw new IllegalArgumentException("SI-unit identity does not match precompute");
+            }
+            put(siUnits, identity, value, "SI unit");
+            return this;
+        }
 
         public Builder translation(TranslationIdentity identity, M3LexiconPrecompute.TranslationProjection value) {
             Objects.requireNonNull(identity, "translation key");
