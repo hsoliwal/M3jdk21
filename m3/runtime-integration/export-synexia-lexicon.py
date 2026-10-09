@@ -38,6 +38,7 @@ RELATION_COLUMNS = ("source_id", "record_id", "lexeme", "related_lexeme")
 RELATION_OUTPUT_COLUMNS = (
     "source_id", "record_id", "lexeme", "related_lexeme", "shard_id", "image_row"
 )
+RELATION_SOURCE_COLUMNS = ("source_id",)
 MAPPING_COLUMNS = (
     "source_id", "source_path", "source_kind", "language_tag", "record_id", "lexeme",
     "shard_id", "image_row", "mapping_id", "mapping_name", "translation_profile",
@@ -474,7 +475,13 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
     mapping_bytes = write_tsv(output / "synexia.records.tsv", mapping_columns, mapping_rows)
 
     related_bytes = None
+    related_sources_bytes = None
     if related_source_ids:
+        related_sources_bytes = write_tsv(
+            output / "synexia.related-sources.tsv", RELATION_SOURCE_COLUMNS,
+            [{"source_id": source_id}
+             for source_id in sorted(related_source_ids, key=utf16_units)]
+        )
         related_rows = [{
             "source_id": relation["source_id"],
             "record_id": relation["record_id"],
@@ -536,7 +543,9 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                    "precompute_index_sidecar": "synexia.precompute-index.tsv",
                    "precompute_sidecar": "synexia.precompute.tsv",
                    "relation_sidecar":
-                       "synexia.related.tsv" if related_source_ids else None},
+                       "synexia.related.tsv" if related_source_ids else None,
+                   "relation_sources_sidecar":
+                       "synexia.related-sources.tsv" if related_source_ids else None},
         "counts": {"source_records": len(records), "image_records": len(by_lexeme),
                    "source_families": len(sources), "shards": len(shards),
                    "precompute_profiles": len(profile_rows),
@@ -545,7 +554,8 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                     "synexia.records.tsv": sha256_bytes(mapping_bytes),
                     "synexia.precompute-index.tsv": sha256_bytes(profile_bytes),
                     "synexia.precompute.tsv": sha256_bytes(fact_bytes),
-                    **({"synexia.related.tsv": sha256_bytes(related_bytes)}
+                    **({"synexia.related.tsv": sha256_bytes(related_bytes),
+                        "synexia.related-sources.tsv": sha256_bytes(related_sources_bytes)}
                        if related_bytes is not None else {})},
         "identity_rule": "source_id + record_id is opaque and never renumbered; image_row is only a physical M3LEX projection",
         "data_policy": "operator-supplied snapshot only; no network download or implicit license grant",

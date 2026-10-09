@@ -395,6 +395,12 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertEqual([source_id], export_manifest["source"]["relation_sources"])
             self.assertEqual("normalized-directed-v1", export_manifest["source"]["relation_policy"])
             self.assertEqual("synexia.related.tsv", export_manifest["target"]["relation_sidecar"])
+            self.assertEqual("synexia.related-sources.tsv",
+                             export_manifest["target"]["relation_sources_sidecar"])
+            self.assertEqual(
+                "source_id\n" + source_id + "\n",
+                (output / "synexia.related-sources.tsv").read_text(encoding="utf-8"),
+            )
             self.assertEqual(2, VERIFY.verify(output)["relation_records"])
             with self.assertRaisesRegex(ValueError, "related-lexeme input is required"):
                 EXPORT.export(

@@ -97,6 +97,8 @@ The output is:
   sorted directed source/record/lexeme/related-lexeme rows with the physical
   M3LEX coordinate; multiple target rows for one source record are allowed,
   while duplicate directed pairs are rejected;
+- `synexia.related-sources.tsv`: the sorted admitted source-family IDs used by
+  the Java reader to reject relation rows from unrelated mapping families;
 - `synexia.export.json`: source pins, input/output hashes, counts, policy and,
   when available, the canonical precompute field-type map and its SHA-256.
 
@@ -115,8 +117,8 @@ translation/dictionary/unit/number mappings attached to one exact lexeme.
 When the source manifest declares `related_lexeme`, the operator must
 provide a separate `--relations` TSV. The exporter rejects missing, duplicate,
 unsorted, non-matching or incomplete directed relation rows. The source-blind
-verifier and `SharedRelatedLexemeCatalog` repeat identity, direction, UTF-16,
-coordinate and order checks. Relation data remains outside `java.lang.String`
+verifier and `SharedRelatedLexemeCatalog` repeat source-family admission,
+identity, direction, UTF-16, coordinate and order checks. Relation data remains outside `java.lang.String`
 identity and is never reversed or synthesized.
 
 When the source manifest declares `related_lexeme`, the operator must provide

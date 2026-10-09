@@ -115,6 +115,7 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
     }
 
     private static void writeRelated(Path root) throws Exception {
+        write(root, "synexia.related-sources.tsv", "source_id\nsource-a\n");
         write(root, "synexia.related.tsv",
                 "source_id\trecord_id\tlexeme\trelated_lexeme\tshard_id\timage_row\n"
                         + "source-a\trecord-a\talpha\tomega\t0\t0\n"

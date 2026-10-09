@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Immutable directed related-lexeme sidecar.
@@ -23,6 +24,7 @@ import java.util.Optional;
  */
 public final class SharedRelatedLexemeCatalog implements AutoCloseable {
     public static final String FILE = "synexia.related.tsv";
+    private static final String SOURCE_FILE = "synexia.related-sources.tsv";
     private static final String HEADER =
             "source_id\trecord_id\tlexeme\trelated_lexeme\tshard_id\timage_row";
     private static final String MAPPING_HEADER =
@@ -55,7 +57,8 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
             throws IOException {
         Path directory = Objects.requireNonNull(exportDirectory).toAbsolutePath().normalize();
         Path file = directory.resolve(FILE);
-        return Files.isRegularFile(file)
+        Path sources = directory.resolve(SOURCE_FILE);
+        return Files.isRegularFile(file) || Files.isRegularFile(sources)
                 ? Optional.of(open(directory))
                 : Optional.empty();
     }
@@ -65,6 +68,7 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
         if (!Files.isDirectory(directory)) throw new IOException("not a catalog directory");
         Map<SharedLexiconCatalog.SourceIdentity, Mapping> mappings =
                 readMappings(directory.resolve("synexia.records.tsv"));
+        Set<String> relationSources = readRelationSources(directory.resolve(SOURCE_FILE));
         Path file = directory.resolve(FILE);
         if (!Files.isRegularFile(file)) throw new IOException("related sidecar missing");
         List<String> lines = Files.readAllLines(file, StandardCharsets.UTF_8);
@@ -78,6 +82,8 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
             if (cells.size() != 6) throw malformed(lineNumber, "wrong field count");
             String sourceId = cells.get(0);
             String recordId = cells.get(1);
+            if (!relationSources.contains(sourceId))
+                throw malformed(lineNumber, "relation source family is not admitted");
             String lexeme = decodeSidecarText(cells.get(2), lineNumber);
             String related = decodeSidecarText(cells.get(3), lineNumber);
             SharedLexiconCatalog.Coordinate coordinate = new SharedLexiconCatalog.Coordinate(
@@ -140,6 +146,27 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
 
     private void ensureOpen() {
         if (closed) throw new IllegalStateException("related catalog closed");
+    }
+
+    private static Set<String> readRelationSources(Path path) throws IOException {
+        if (!Files.isRegularFile(path)) throw new IOException("related source sidecar missing");
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+        if (lines.isEmpty() || !"source_id".equals(lines.get(0)))
+            throw new IOException("invalid related source sidecar header");
+        List<String> result = new ArrayList<>();
+        String previous = null;
+        for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
+            List<String> cells = parseTsvLine(lines.get(lineNumber), lineNumber);
+            if (cells.size() != 1 || cells.get(0).isEmpty())
+                throw malformed(lineNumber, "invalid related source identity");
+            String sourceId = cells.get(0);
+            if (previous != null && previous.compareTo(sourceId) >= 0)
+                throw malformed(lineNumber, "related sources are not sorted or are duplicated");
+            result.add(sourceId);
+            previous = sourceId;
+        }
+        if (result.isEmpty()) throw new IOException("empty related source sidecar");
+        return Set.copyOf(result);
     }
 
     private static List<String> parseTsvLine(String line, int lineNumber) throws IOException {
