@@ -155,6 +155,7 @@ public final class M3LexiconPrecompute {
     /** Immutable dictionary-level facts keyed by one source record and lexeme. */
     public static final class IndexWordFacts {
         private final String sourceRevision;
+        private final String sourceBlobSha;
         private final int languageId;
         private final int wordCount;
         private final long lexiconFingerprint;
@@ -173,7 +174,18 @@ public final class M3LexiconPrecompute {
                               long totalDocuments, int flags,
                               long corpusCount, int documentFrequency, int[] memberships,
                               long[] conceptIds, long[] subjects, long[] expansionWordIds) {
+            this(sourceRevision, "UNPINNED", languageId, wordCount, lexiconFingerprint,
+                    totalCorpusTokens, totalDocuments, flags, corpusCount, documentFrequency,
+                    memberships, conceptIds, subjects, expansionWordIds);
+        }
+
+        public IndexWordFacts(String sourceRevision, String sourceBlobSha, int languageId,
+                              int wordCount, long lexiconFingerprint, long totalCorpusTokens,
+                              long totalDocuments, int flags, long corpusCount,
+                              int documentFrequency, int[] memberships, long[] conceptIds,
+                              long[] subjects, long[] expansionWordIds) {
             this.sourceRevision = text(sourceRevision, "sourceRevision");
+            this.sourceBlobSha = sourceBlob(sourceBlobSha);
             if (languageId < 0 || wordCount < 0 || totalCorpusTokens < 0
                     || totalDocuments < 0 || corpusCount < 0 || documentFrequency < 0)
                 throw new IllegalArgumentException("negative dictionary fact");
@@ -192,6 +204,7 @@ public final class M3LexiconPrecompute {
         }
 
         public String sourceRevision() { return sourceRevision; }
+        public String sourceBlobSha() { return sourceBlobSha; }
         public int languageId() { return languageId; }
         public int wordCount() { return wordCount; }
         public long lexiconFingerprint() { return lexiconFingerprint; }
@@ -241,6 +254,7 @@ public final class M3LexiconPrecompute {
     /** Immutable dictionary signal profile, including frequency and lexical ranks. */
     public static final class IndexWordSignal {
         private final String sourceRevision;
+        private final String sourceBlobSha;
         private final int utf16Length;
         private final int codePointLength;
         private final int firstCodePoint;
@@ -263,7 +277,18 @@ public final class M3LexiconPrecompute {
                                int lexicalRank, int morphologyMask, long phoneticId,
                                int posMask, long presence64, int scriptOrdinal,
                                long simHash64, long stemId) {
+            this(sourceRevision, "UNPINNED", utf16Length, codePointLength, firstCodePoint,
+                    lastCodePoint, flags, frequencyRank, lemmaId, lexicalRank, morphologyMask,
+                    phoneticId, posMask, presence64, scriptOrdinal, simHash64, stemId);
+        }
+
+        public IndexWordSignal(String sourceRevision, String sourceBlobSha,
+                               int utf16Length, int codePointLength, int firstCodePoint,
+                               int lastCodePoint, int flags, int frequencyRank, long lemmaId,
+                               int lexicalRank, int morphologyMask, long phoneticId, int posMask,
+                               long presence64, int scriptOrdinal, long simHash64, long stemId) {
             this.sourceRevision = text(sourceRevision, "sourceRevision");
+            this.sourceBlobSha = sourceBlob(sourceBlobSha);
             if (utf16Length < 0 || codePointLength < 0 || codePointLength > utf16Length
                     || frequencyRank < 0 || lexicalRank < 0 || scriptOrdinal < 0)
                 throw new IllegalArgumentException("invalid dictionary signal length or rank");
@@ -292,6 +317,7 @@ public final class M3LexiconPrecompute {
         }
 
         public String sourceRevision() { return sourceRevision; }
+        public String sourceBlobSha() { return sourceBlobSha; }
         public int utf16Length() { return utf16Length; }
         public int codePointLength() { return codePointLength; }
         public int firstCodePoint() { return firstCodePoint; }
@@ -422,6 +448,14 @@ public final class M3LexiconPrecompute {
             return frequencies.getOrDefault(tokenId, 0);
         }
         public NavigableMap<Integer, Integer> frequencies() { return frequencies; }
+    }
+
+    private static String sourceBlob(String value) {
+        if ("UNPINNED".equals(value)) return value;
+        if (value == null || !value.matches("[0-9a-f]{40}")) {
+            throw new IllegalArgumentException("sourceBlobSha must be a lowercase 40-hex Git blob SHA");
+        }
+        return value;
     }
 
     private static String text(String value, String name) {
