@@ -124,10 +124,6 @@ public final class M3LangDexPrecompute {
             throw new IllegalArgumentException("LangDex " + field + " identity mismatch");
     }
 
-    static void requireSame(String expected, String actual, String field, String ignored) {
-        requireSame(expected, actual, field);
-    }
-
     static void requireSameGlottocode(String expected, String actual, String field) {
         requireSame(glottocode(expected), glottocode(actual), field);
     }
