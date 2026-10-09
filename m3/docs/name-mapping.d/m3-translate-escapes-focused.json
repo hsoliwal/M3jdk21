@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Focused translateEscapes ownership: Synexia recipe authority, M3JDK runtime authority.",
+  "mappings": [
+    {
+      "source": "Synexia MIndexString.translateEscapes streaming atom @ PR #7659",
+      "target": "java.lang.M3String.translateEscapes",
+      "target_history": "ba95cfcbbc70c7307946ba1e34e0775df72da7fc",
+      "status": "implemented-current-superset; focused recipe authority Synexia PR #9937",
+      "target_rule": "reuse canonical ranges and direct unit atoms; do not stage source char[]"
+    },
+    {
+      "source": "M3JDK String.translateEscapes routing transition",
+      "target": "java.lang.String.translateEscapes -> M3String.translateEscapes with stock fallback",
+      "target_history": "6e4a09092515b26cc41dd208a7615718f3e6084d",
+      "status": "implemented-current-superset; matched-image differential pending",
+      "target_rule": "non-M3 String keeps JDK char[] implementation and exact diagnostics"
+    }
+  ]
+}
