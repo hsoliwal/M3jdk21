@@ -88,16 +88,22 @@ public final class M3LangDexPrecomputeTest {
         String[] langdex = rows.get("unicodex.langdex.lexemes");
         check(langdex != null);
         check("M3LangDexPrecompute.Entry + M3LangDexPrecompute.WordProfile"
-                .concat(" + M3LangDexPrecompute.LexicalProfile + M3LangDexPrecompute.Translation")
+                .concat(" + M3LangDexPrecompute.LexicalProfile + M3LangDexPrecompute.TranslationIdentity"
+                        + " + M3LangDexPrecompute.Translation")
                 .equals(langdex[5]));
         check(langdex[4].equals(
                 "glottocode,lemma,source,concept_id,canonical_schema,canonical_bytes,"
                         + "canonical_digest,domain"));
         check(langdex[8].equals(
-                "langdex_concept_id,langdex_confidence_permille,langdex_evidence_mask,"
-                        + "langdex_feature_bits,langdex_flags,langdex_frequency,"
-                        + "langdex_lexical_class_mask,langdex_semantic_class_mask,"
-                        + "langdex_subject_id,langdex_target_lexeme_id"));
+                "langdex_canonical_bytes,langdex_canonical_digest,langdex_canonical_schema,"
+                        + "langdex_concept_id,langdex_confidence_permille,langdex_domain,"
+                        + "langdex_evidence_mask,langdex_feature_bits,langdex_flags,"
+                        + "langdex_frequency,langdex_glottocode,langdex_lexical_class_mask,"
+                        + "langdex_record_id,langdex_semantic_class_mask,"
+                        + "langdex_source_glottocode,langdex_source_id,"
+                        + "langdex_source_revision,langdex_source_surface,"
+                        + "langdex_subject_id,langdex_surface,langdex_target_glottocode,"
+                        + "langdex_target_lexeme_id,langdex_target_surface,lemma"));
         String[] huggingFace = rows.get("dictlang.huggingface");
         check(huggingFace != null
                 && "M3StringFacts + M3LangDexPrecompute.Identity".equals(huggingFace[5])
@@ -111,18 +117,25 @@ public final class M3LangDexPrecomputeTest {
         Map<String, Set<String>> identityFieldMap = parseFieldMap(Files.readString(
                 Path.of("lexicon/synexia-langdex-identity-field-map.tsv"),
                 StandardCharsets.UTF_8));
-        check(!fieldMap.containsKey("M3LangDexPrecompute.Identity"));
+        check(fieldMap.get("M3LangDexPrecompute.Identity").equals(Set.of(
+                "sourceId", "recordId", "glottocode", "surface", "sourceRevision",
+                "domain", "canonicalSchema", "canonicalBytes", "canonicalDigest")));
         check(identityFieldMap.get("M3LangDexPrecompute.Identity").equals(Set.of(
                 "sourceId", "recordId", "glottocode", "surface", "sourceRevision",
                 "domain", "canonicalSchema", "canonicalBytes", "canonicalDigest")));
+        check(identityFieldMap.get("M3LangDexPrecompute.TranslationIdentity").equals(Set.of(
+                "sourceId", "recordId", "conceptId", "sourceGlottocode", "sourceSurface",
+                "targetGlottocode", "targetSurface", "sourceRevision")));
         check(fieldMap.get("M3LangDexPrecompute.Entry").equals(
-                Set.of("conceptId", "frequency", "flags")));
+                Set.of("glottocode", "surface", "conceptId", "frequency", "flags", "lemma")));
         check(fieldMap.get("M3LangDexPrecompute.WordProfile").equals(Set.of(
                 "lexicalClassMask", "semanticClassMask", "subjectId",
                 "featureBits", "evidenceMask", "confidencePermille")));
         check(fieldMap.get("M3LangDexPrecompute.LexicalProfile").equals(Set.of(
                 "lexicalClassMask", "featureBits", "evidenceMask", "confidencePermille")));
-        check(fieldMap.get("M3LangDexPrecompute.Translation").equals(Set.of("targetLexemeId")));
+        check(fieldMap.get("M3LangDexPrecompute.Translation").equals(Set.of(
+                "conceptId", "sourceGlottocode", "sourceSurface",
+                "targetGlottocode", "targetSurface", "targetLexemeId")));
 
         M3LangDexPrecompute.Identity identity = identity("unicodex.langdex.lexemes", "lexeme-7", "ENG", "Color", "langdex-r1");
         M3LangDexPrecompute.Identity huggingFaceIdentity =
