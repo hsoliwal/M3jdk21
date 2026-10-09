@@ -183,6 +183,10 @@ public final class M3LexiconPrecomputeTest {
         check(wordCatalog.wordFactsAt(signalKey).isEmpty());
         expect(IllegalArgumentException.class, () -> SharedLexiconPrecomputeCatalog.builder()
                 .wordFacts(wordKey, wordFacts).wordFacts(wordKey, wordFacts));
+        expect(IllegalArgumentException.class, () -> SharedLexiconPrecomputeCatalog.builder()
+                .wordFacts(signalKey, wordFacts));
+        expect(IllegalArgumentException.class, () -> SharedLexiconPrecomputeCatalog.builder()
+                .wordSignal(wordKey, wordSignal));
 
         System.out.println("M3JDK_TYPED_PRECOMPUTE_PASS checks=" + checks);
     }
