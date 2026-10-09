@@ -2001,13 +2001,28 @@ public final class String
         M3String leftStorage = m3();
         M3String rightStorage = aString.m3();
         if (leftStorage != null) {
+            if (rightStorage == null && aString.cachedHashDiffers(leftStorage)) return false;
             return leftStorage.contentEquals(aString);
         }
         if (rightStorage != null) {
+            if (cachedHashDiffers(rightStorage)) return false;
             return rightStorage.contentEquals(this);
         }
         return (!COMPACT_STRINGS || this.coder == aString.coder)
                 && StringLatin1.equals(value, aString.value);
+    }
+
+    /**
+     * Mixed-side equality gate: this flat String's cached hash (only when {@link #hashCode()} has
+     * already run) against the M3 String's canonical hash when that is already known. Equal content
+     * implies equal hashes, so a difference proves inequality without reading native storage; an
+     * unknown hash on either side proves nothing. Reads of {@code hash}/{@code hashIsZero} are the
+     * same benign race as in {@link #hashCode()}.
+     */
+    private boolean cachedHashDiffers(M3String storage) {
+        int h = hash;
+        if (h == 0 && !hashIsZero) return false;
+        return storage.hashKnownToDiffer(h);
     }
 
     /**
@@ -2118,6 +2133,21 @@ public final class String
             }
         }
         return true;
+    }
+
+    /**
+     * Mixed-side ignore-case gate (one M3 side, one flat side, as in {@code equalsIgnoreCase} with a
+     * literal): when the M3 side covers its whole String, its prepared facts are ASCII and the flat
+     * region is ASCII, regions that are equal ignoring case have equal ASCII-lower hashes. The flat
+     * region's hash is folded without allocation; the M3 side is not read. Never prepares facts.
+     */
+    private static boolean mixedAsciiCaseHashDiffers(M3String storage, int storageOffset,
+            String flat, int flatOffset, int len) {
+        if (storageOffset != 0 || len != storage.length()) return false;
+        M3StringFacts prepared = storage.factsIfPrepared();
+        if (prepared == null || !prepared.ascii) return false;
+        long folded = M3StringFacts.asciiLowerHashOrNegative(flat, flatOffset, flatOffset + len);
+        return folded >= 0 && (int) folded != prepared.asciiLowerHash;
     }
 
     /**
@@ -2473,6 +2503,10 @@ public final class String
                                 || leftFacts.asciiTitleHash != rightFacts.asciiTitleHash)) {
                     return false;
                 }
+            } else if (leftM3 != null
+                    ? mixedAsciiCaseHashDiffers(leftM3, toffset, other, ooffset, len)
+                    : mixedAsciiCaseHashDiffers(rightM3, ooffset, this, toffset, len)) {
+                return false;
             }
             int t = toffset;
             int o = ooffset;

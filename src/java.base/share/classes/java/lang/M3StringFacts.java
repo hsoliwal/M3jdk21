@@ -499,6 +499,21 @@ final class M3StringFacts {
         return value >= 'a' && value <= 'z' ? (char) (value - ('a' - 'A')) : value;
     }
 
+    /**
+     * ASCII-lower hash of a flat region, the same 31-polynomial fold as {@link #asciiLowerHash}, as
+     * a non-negative value; -1 when a unit above U+007F occurs (the gate then proves nothing, because
+     * non-ASCII units can equal ASCII units ignoring case). Allocation-free.
+     */
+    static long asciiLowerHashOrNegative(String value, int from, int to) {
+        int hash = 0;
+        for (int index = from; index < to; index++) {
+            char unit = value.charAt(index);
+            if (unit > 0x7f) return -1L;
+            hash = 31 * hash + asciiLower(unit);
+        }
+        return hash & 0xffffffffL;
+    }
+
     private static char asciiLower(char value) {
         return value >= 'A' && value <= 'Z' ? (char) (value + ('a' - 'A')) : value;
     }

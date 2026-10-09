@@ -529,6 +529,16 @@ final class M3String implements CharSequence {
         return isWholeOwner() ? owner.javaHash : facts().javaHash;
     }
 
+    /**
+     * True when this String's canonical Java hash is already known (whole owner, or prepared range
+     * facts) and differs from {@code hash}. Never prepares facts; absence proves nothing.
+     */
+    boolean hashKnownToDiffer(int hash) {
+        if (isWholeOwner()) return owner.javaHash != hash;
+        M3StringFacts prepared = factsIfPrepared();
+        return prepared != null && prepared.javaHash != hash;
+    }
+
     M3StringFacts facts() {
         return start() == 0 && length() == owner.length
                 ? owner.facts()
