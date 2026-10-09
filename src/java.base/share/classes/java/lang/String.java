@@ -2361,6 +2361,7 @@ public final class String
         M3String leftM3 = m3();
         M3String rightM3 = other.m3();
         if (leftM3 != null || rightM3 != null) {
+            if (len <= 0) return true;    // as the stock loops: nothing to compare
             if (leftM3 != null && rightM3 != null) {
                 M3String leftRange = leftM3.slice(toffset, toffset + len);
                 M3String rightRange = rightM3.slice(ooffset, ooffset + len);
@@ -2458,6 +2459,7 @@ public final class String
         M3String leftM3 = m3();
         M3String rightM3 = other.m3();
         if (leftM3 != null || rightM3 != null) {
+            if (len <= 0) return true;    // as the stock loops: nothing to compare
             if (leftM3 != null && rightM3 != null) {
                 M3StringFacts leftFacts =
                         leftM3.slice(toffset, toffset + len).factsIfPrepared();

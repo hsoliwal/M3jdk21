@@ -21,6 +21,8 @@
 
 package java.lang;
 
+import java.util.Arrays;
+
 import jdk.internal.util.ArraysSupport;
 
 /**
@@ -32,11 +34,12 @@ import jdk.internal.util.ArraysSupport;
  * windows are transient scratch, never a shadow (the A8 {@code M3StringFacts#scan} shape).
  *
  * <p>The case rules are the stock ones, chosen by the coders exactly as {@code String} does for two
- * flat sides: the per-unit rule of {@code StringLatin1.compareToCI}/{@code regionMatchesCI_UTF16}
- * (upper case first, then the lower case of the upper case) when either side is Latin-1, and the
- * code-point rule of {@code StringUTF16.compareToCIImpl} (surrogate pairs joined, looking one unit
- * back for a leading low surrogate) when both sides are UTF-16. Equality and ordering use the
- * vectorized {@link ArraysSupport#mismatch(char[], char[], int)}.
+ * flat sides: the {@code StringLatin1.compareToCI}/{@code regionMatchesCI} family when either side
+ * is Latin-1 and the code-point rule of {@code StringUTF16.compareToCIImpl} when both sides are
+ * UTF-16. Since A28 the stock helpers themselves run over bulk windows in each side's own coder
+ * ({@link #CASE_WINDOW} units; two UTF-16 sides keep surrogate pairs inside one window), so a
+ * differing unit pair costs what it costs a flat String. Equality and ordering use the vectorized
+ * {@link ArraysSupport#mismatch(char[], char[], int)}.
  */
 final class M3StringMixedCompare {
 
@@ -174,143 +177,120 @@ final class M3StringMixedCompare {
         return true;
     }
 
-    /** {@code CASE_INSENSITIVE_ORDER.compare(left, right)} under the stock coder-dependent rule. */
+    /** Units per window side for the case-insensitive lanes (A28): the stock folds run per window. */
+    static final int CASE_WINDOW = 4096;
+
+    /**
+     * {@code CASE_INSENSITIVE_ORDER.compare(left, right)}: the stock {@code compareToCI} family over
+     * bulk windows of both sides in their own coders (A28); the coder pair picks the stock rule
+     * exactly as {@code String} does for two flat sides. Equal windows continue; the last word is
+     * the length difference, as stock. Two UTF-16 sides keep surrogate pairs inside one window and
+     * take their difference from windows that reach one unit past the shorter side, as the stock
+     * code-point rule does.
+     */
     static int compareIgnoreCase(String left, String right) {
-        if (left.coder() == String.LATIN1 || right.coder() == String.LATIN1) {
-            return compareUnitsIgnoreCase(left, 0, left.length(), right, 0, right.length());
+        int leftLength = left.length();
+        int rightLength = right.length();
+        int limit = Math.min(leftLength, rightLength);
+        byte leftCoder = contentCoder(left);
+        byte rightCoder = contentCoder(right);
+        boolean codePoints = leftCoder == String.UTF16 && rightCoder == String.UTF16;
+        for (int base = 0; base < limit; ) {
+            int count = Math.min(CASE_WINDOW, limit - base);
+            byte[] a = window(left, base, count, leftCoder);
+            byte[] b = window(right, base, count, rightCoder);
+            if (codePoints) {
+                if (count < limit - base && (endsWithHighSurrogate(a) || endsWithHighSurrogate(b))) count--;
+                if (StringUTF16.regionMatchesCI(a, 0, b, 0, count)) {
+                    base += count;
+                    continue;
+                }
+                // The first difference lies in this window. The stock rule joins a surrogate pair
+                // within each side's own length, so across the end of the shorter side too: each
+                // side offers one unit more when it has one, and the difference is the stock one.
+                byte[] leftTail = window(left, base, Math.min(count + 1, leftLength - base), leftCoder);
+                byte[] rightTail = window(right, base, Math.min(count + 1, rightLength - base), rightCoder);
+                return StringUTF16.compareToCI(leftTail, rightTail);
+            }
+            int difference = leftCoder == rightCoder
+                    ? StringLatin1.compareToCI(a, b)
+                    : (leftCoder == String.LATIN1 ? StringLatin1.compareToCI_UTF16(a, b) : StringUTF16.compareToCI_Latin1(a, b));
+            if (difference != 0) return difference;
+            base += count;
         }
-        return compareCodePointsIgnoreCase(left, 0, left.length(), right, 0, right.length());
+        return leftLength - rightLength;
     }
 
-    /** {@code left.regionMatches(true, toffset, right, ooffset, len)} with the bounds checked. */
+    /**
+     * {@code left.regionMatches(true, toffset, right, ooffset, len)} with the bounds checked: the
+     * stock {@code regionMatchesCI} family over bulk windows (A28); a flat side is read in place,
+     * an M3 side through a transient window in its own coder. Two UTF-16 sides keep surrogate
+     * pairs inside one window, so the stock code-point rule sees every pair whole.
+     */
     static boolean regionMatchesIgnoreCase(String left, int toffset, String right, int ooffset,
             int len) {
-        if (left.coder() == String.LATIN1 || right.coder() == String.LATIN1) {
-            return compareUnitsIgnoreCase(left, toffset, toffset + len, right, ooffset,
-                    ooffset + len) == 0;
+        byte leftCoder = contentCoder(left);
+        byte rightCoder = contentCoder(right);
+        boolean codePoints = leftCoder == String.UTF16 && rightCoder == String.UTF16;
+        M3String leftM3 = left.m3();
+        M3String rightM3 = right.m3();
+        byte[] a = leftM3 == null ? left.value() : new byte[Math.min(CASE_WINDOW, len) << leftCoder];
+        byte[] b = rightM3 == null ? right.value() : new byte[Math.min(CASE_WINDOW, len) << rightCoder];
+        for (int base = 0; base < len; ) {
+            int count = Math.min(CASE_WINDOW, len - base);
+            int aOffset = toffset + base;
+            int bOffset = ooffset + base;
+            if (leftM3 != null) {
+                leftM3.getBytes(a, aOffset, 0, leftCoder, count);
+                aOffset = 0;
+            }
+            if (rightM3 != null) {
+                rightM3.getBytes(b, bOffset, 0, rightCoder, count);
+                bOffset = 0;
+            }
+            if (codePoints && count < len - base
+                    && (Character.isHighSurrogate(StringUTF16.getChar(a, aOffset + count - 1))
+                            || Character.isHighSurrogate(StringUTF16.getChar(b, bOffset + count - 1)))) {
+                count--;
+            }
+            boolean same = leftCoder == rightCoder
+                    ? (leftCoder == String.LATIN1
+                            ? StringLatin1.regionMatchesCI(a, aOffset, b, bOffset, count)
+                            : StringUTF16.regionMatchesCI(a, aOffset, b, bOffset, count))
+                    : (leftCoder == String.LATIN1
+                            ? StringLatin1.regionMatchesCI_UTF16(a, aOffset, b, bOffset, count)
+                            : StringUTF16.regionMatchesCI_Latin1(a, aOffset, b, bOffset, count));
+            if (!same) return false;
+            base += count;
         }
-        return compareCodePointsIgnoreCase(left, toffset, toffset + len, right, ooffset,
-                ooffset + len) == 0;
+        return true;
     }
 
-    /** The per-unit rule over windows: units equal, or their upper cases, or those lower cased. */
-    private static int compareUnitsIgnoreCase(String left, int leftFrom, int leftTo, String right,
-            int rightFrom, int rightTo) {
-        int limit = Math.min(leftTo - leftFrom, rightTo - rightFrom);
-        if (limit <= SHORT) {
-            for (int index = 0; index < limit; index++) {
-                char first = left.charAt(leftFrom + index);
-                char second = right.charAt(rightFrom + index);
-                if (first != second) {
-                    int difference = unitCaseDifference(first, second);
-                    if (difference != 0) return difference;
-                }
-            }
-            return (leftTo - leftFrom) - (rightTo - rightFrom);
-        }
-        char[] a = new char[Math.min(limit, WINDOW)];
-        char[] b = new char[a.length];
-        for (int base = 0; base < limit; base += a.length) {
-            int count = Math.min(a.length, limit - base);
-            left.getChars(leftFrom + base, leftFrom + base + count, a, 0);
-            right.getChars(rightFrom + base, rightFrom + base + count, b, 0);
-            for (int index = 0; index < count; index++) {
-                if (a[index] != b[index]) {
-                    int difference = unitCaseDifference(a[index], b[index]);
-                    if (difference != 0) return difference;
-                }
-            }
-        }
-        return (leftTo - leftFrom) - (rightTo - rightFrom);
+    /**
+     * The coder a flat String of the same spelling carries (A28): an M3 range inside a wide owner
+     * whose units all fit Latin-1 compares under the Latin-1 rules, as its flat twin does; prepared
+     * facts answer at once, otherwise a bulk scan with early exit decides.
+     */
+    private static byte contentCoder(String side) {
+        M3String storage = side.m3();
+        if (storage == null || storage.coder() == String.LATIN1) return side.coder();
+        M3StringFacts prepared = storage.factsIfPrepared();
+        if (prepared != null) return prepared.latin1 ? String.LATIN1 : String.UTF16;
+        return storage.contentIsLatin1() ? String.LATIN1 : String.UTF16;
     }
 
-    /** {@code StringLatin1.compareToCI} rule for one unit pair: {@code 0} when they match. */
-    static int unitCaseDifference(char first, char second) {
-        char upperFirst = Character.toUpperCase(first);
-        char upperSecond = Character.toUpperCase(second);
-        if (upperFirst == upperSecond) return 0;
-        char lowerFirst = Character.toLowerCase(upperFirst);
-        char lowerSecond = Character.toLowerCase(upperSecond);
-        return lowerFirst - lowerSecond;
+    /** {@code count} units of {@code source} from {@code from} as a fresh array in {@code coder}. */
+    private static byte[] window(String source, int from, int count, byte coder) {
+        M3String storage = source.m3();
+        if (storage == null) {
+            return Arrays.copyOfRange(source.value(), from << coder, (from + count) << coder);
+        }
+        byte[] out = new byte[count << coder];
+        storage.getBytes(out, from, 0, coder, count);
+        return out;
     }
 
-    /** {@code StringUTF16.compareToCIImpl} over two cursors: code points joined across surrogates. */
-    private static int compareCodePointsIgnoreCase(String left, int leftFrom, int leftTo,
-            String right, int rightFrom, int rightTo) {
-        Cursor first = new Cursor(left, leftFrom, leftTo);
-        Cursor second = new Cursor(right, rightFrom, rightTo);
-        for (int k1 = leftFrom, k2 = rightFrom; k1 < leftTo && k2 < rightTo; k1++, k2++) {
-            int cp1 = first.at(k1);
-            int cp2 = second.at(k2);
-            if (cp1 == cp2 || codePointCaseDifference(cp1, cp2) == 0) continue;
-            cp1 = first.codePointIncluding(cp1, k1);
-            if (cp1 < 0) {
-                k1++;
-                cp1 = -cp1;
-            }
-            cp2 = second.codePointIncluding(cp2, k2);
-            if (cp2 < 0) {
-                k2++;
-                cp2 = -cp2;
-            }
-            int difference = codePointCaseDifference(cp1, cp2);
-            if (difference != 0) return difference;
-        }
-        return (leftTo - leftFrom) - (rightTo - rightFrom);
-    }
-
-    /** {@code StringUTF16.compareCodePointCI}: upper case first, then lower case of the upper case. */
-    static int codePointCaseDifference(int first, int second) {
-        int upperFirst = Character.toUpperCase(first);
-        int upperSecond = Character.toUpperCase(second);
-        if (upperFirst == upperSecond) return 0;
-        int lowerFirst = Character.toLowerCase(upperFirst);
-        int lowerSecond = Character.toLowerCase(upperSecond);
-        return lowerFirst - lowerSecond;
-    }
-
-    /** One side of a code-point comparison: a window over {@code [from, to)} refilled on demand. */
-    private static final class Cursor {
-        private final String source;
-        private final int from;
-        private final int to;
-        private final char[] window;
-        private int base;
-        private int count;
-
-        Cursor(String source, int from, int to) {
-            this.source = source;
-            this.from = from;
-            this.to = to;
-            this.window = new char[Math.min(to - from, WINDOW)];
-            this.base = from;
-            this.count = 0;
-        }
-
-        char at(int index) {
-            if (index < base || index >= base + count) fill(index);
-            return window[index - base];
-        }
-
-        private void fill(int index) {
-            base = index;
-            count = Math.min(window.length, to - index);
-            source.getChars(base, base + count, window, 0);
-        }
-
-        /** {@code StringUTF16.codePointIncluding}: negative for a pair that consumes the next unit. */
-        int codePointIncluding(int unit, int index) {
-            if (!Character.isSurrogate((char) unit)) return unit;
-            if (Character.isLowSurrogate((char) unit)) {
-                if (index > from) {
-                    char before = index - 1 >= base ? window[index - 1 - base] : source.charAt(index - 1);
-                    if (Character.isHighSurrogate(before)) return Character.toCodePoint(before, (char) unit);
-                }
-            } else if (index + 1 < to) {
-                char after = at(index + 1);
-                if (Character.isLowSurrogate(after)) return -Character.toCodePoint((char) unit, after);
-            }
-            return unit;
-        }
+    private static boolean endsWithHighSurrogate(byte[] utf16) {
+        return Character.isHighSurrogate(StringUTF16.getChar(utf16, (utf16.length >> String.UTF16) - 1));
     }
 }

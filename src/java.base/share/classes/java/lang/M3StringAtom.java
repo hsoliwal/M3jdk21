@@ -449,6 +449,30 @@ final class M3StringAtom extends M3StringOwner {
             return;
         }
 
+        if (storageWidth == 2 && destinationCoder == String.LATIN1 && count >= BULK) {
+            // UTF-16 storage into a Latin-1 destination (A28): the units come out in bulk through a
+            // bounded window and the stock compress intrinsic narrows them; a window holding a unit
+            // above 0xff keeps the per-unit truncation of the loop below.
+            byte[] window = new byte[Math.min(count << 1, WINDOW)];
+            int perWindow = window.length >> 1;
+            long source = address + ((long) start << 1);
+            for (int done = 0; done < count; ) {
+                int chunk = Math.min(perWindow, count - done);
+                if (bigEndian == NATIVE_BIG_ENDIAN) {
+                    UNSAFE.copyMemory(null, source + ((long) done << 1), window, BYTE_BASE, (long) chunk << 1);
+                } else {
+                    UNSAFE.copySwapMemory(null, source + ((long) done << 1), window, BYTE_BASE, (long) chunk << 1, 2L);
+                }
+                if (StringUTF16.compress(window, 0, destination, destinationStart + done, chunk) != chunk) {
+                    for (int index = 0; index < chunk; index++) {
+                        destination[destinationStart + done + index] = (byte) StringUTF16.getChar(window, index);
+                    }
+                }
+                done += chunk;
+            }
+            return;
+        }
+
         long source = address + (storageWidth == 1 ? start : ((long) start << 1));
         for (int target = destinationStart; start < end; start++, target++) {
             char unit;
