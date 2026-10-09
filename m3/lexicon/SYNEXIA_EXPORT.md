@@ -180,6 +180,18 @@ canonical source owner, and this repository carries the receiver contract,
 family map, and synthetic proofs rather than bulk lexical data.
 
 
+## Typed proper-name instance precompute
+
+The contract-only instance-index declaration in
+`synexia-instance-index-contract.tsv` binds the validated Synexia UTF-8
+instance surface to `M3InstanceIndexPrecompute`. It preserves source
+revision/fingerprint, normalization revision, frozen positive concept
+coordinates, immutable metadata, normalized-name lookup, and reverse
+concept mappings. It does not bundle a proper-name corpus, create lexical
+token identity, or allocate an X-spine concept. Titles remain a separate
+contract until a canonical title source is proven.
+
+
 ## Proof
 
 ```text
