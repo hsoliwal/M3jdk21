@@ -1,5 +1,5 @@
 scope	donor_responsibility	m3jdk_owner	disposition	retention	semantic_authority	notes
-STRING_RUNTIME	IndexTextMetrics	java.lang.M3StringFacts	IMPLEMENTED_FIXED	fixed owner/range facts	exact M3 UTF-16	utf16Length utf8Length codePointCount unpairedSurrogateCount javaHash hash31Power first/last UTF-16
+STRING_RUNTIME	IndexTextMetrics	java.lang.M3StringFacts	IMPLEMENTED_FIXED	fixed owner/range facts	exact M3 UTF-16	utf16Length utf8Length codePointCount unpairedSurrogateCount javaHash hash31Power first/last UTF-16; M3_STRING_FACTS_SOURCE_PASS checks=57/57; fixed signals and bounded range retention are source-proven, runtime remains pending.
 STRING_RUNTIME	MIndexTextPrecomputedFacts	java.lang.M3StringFacts	IMPLEMENTED_FIXED	fixed owner/range facts	exact verification	character/ascii/latin1 facts ASCII case hashes prefix4 suffix4 bigram/trigram candidate signals
 STRING_RUNTIME	MIndexWhitespaceBoundaries	java.lang.M3StringFacts	IMPLEMENTED_FIXED	fixed owner/range facts	String trim/strip semantics	trimStart trimEnd stripStart stripEnd
 STRING_RUNTIME	MIndexWhitespaceBoundaryCache	java.lang.M3StringOwner.rangeFacts	IMPLEMENTED_BOUNDED	4 exact coordinates per owner	exact M3 coordinate	bounded compatibility responsibility without global live cache
