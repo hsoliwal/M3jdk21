@@ -20,6 +20,12 @@ public final class M3DictionaryFrequencyContractTest {
         }
     }
 
+    private static final String SOURCE_REVISION =
+            "64a2ea61c73b548413fed6686a9daeeb0b9b0564";
+    private static final String DICTIONARY_BLOB_SHA =
+            "0e98aa32ba2d98e590a93dbec6cc6f2c3aedd365";
+    private static final String FREQUENCY_BLOB_SHA =
+            "05ccf20cd2e3789ddb849b14f0374aa089d90cc5";
     private static final String MANIFEST_HEADER =
             "source_id\tcanonical_name\tsynexia_path\trecord_id_field"
                     + "\tmapping_fields\tprecompute_target\tdata_license"
@@ -130,11 +136,11 @@ public final class M3DictionaryFrequencyContractTest {
         check(dictionary[8].equals(
                 "concept_ids,corpus_count,document_frequency,expansion_word_ids,flags,"
                         + "language_id,lexicon_fingerprint,memberships,subjects,"
-                        + "total_corpus_tokens,total_documents,word_count,source_revision"));
+                        + "total_corpus_tokens,total_documents,word_count,source_blob_sha,source_revision"));
         check(frequency[8].equals(
                 "code_point_length,first_code_point,flags,frequency_rank,last_code_point,"
                         + "lemma_id,lexical_rank,morphology_mask,phonetic_id,pos_mask,presence64,"
-                        + "script_ordinal,sim_hash64,stem_id,utf16_length,source_revision"));
+                        + "script_ordinal,sim_hash64,stem_id,utf16_length,source_blob_sha,source_revision"));
         check(thesaurus[5].equals("M3StringFacts")
                 && thesaurus[8].equals("lexeme,related_lexeme"));
         check(antonyms[5].equals("M3StringFacts")
@@ -149,12 +155,13 @@ public final class M3DictionaryFrequencyContractTest {
                 "languageId", "wordCount", "lexiconFingerprint", "totalCorpusTokens",
                 "totalDocuments", "flags", "corpusCount", "documentFrequency",
                 "membershipCount/membershipAt", "conceptCount/conceptAt",
-                "subjectCount/subjectAt", "expansionSize/expansionWordIdAt", "sourceRevision")));
+                "subjectCount/subjectAt", "expansionSize/expansionWordIdAt",
+                "sourceBlobSha", "sourceRevision")));
         check(fieldRows.get("IndexWordSignal").equals(Set.of(
                 "stemId", "lemmaId", "phoneticId", "posMask", "morphologyMask",
                 "lexicalRank", "utf16Length", "codePointLength", "firstCodePoint",
                 "lastCodePoint", "scriptOrdinal", "presence64", "simHash64",
-                "frequencyRank", "EMPTY/ASCII/LATIN1/...", "sourceRevision")));
+                "frequencyRank", "EMPTY/ASCII/LATIN1/...", "sourceBlobSha", "sourceRevision")));
         check(!fieldRows.containsKey("IndexWordSignalProfile"));
         System.out.println("M3JDK_DICTIONARY_FREQUENCY_CONTRACT_PASS checks=" + checks);
     }

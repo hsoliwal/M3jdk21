@@ -80,12 +80,18 @@ public final class SharedLexiconPrecomputeCatalog {
 
     /** Exact source record and lexeme identity for dictionary-derived metadata. */
     public record WordIdentity(String sourceId, String recordId, String lexeme,
-                               String sourceRevision) {
+                               String sourceRevision, String sourceBlobSha) {
+        public WordIdentity(String sourceId, String recordId, String lexeme,
+                            String sourceRevision) {
+            this(sourceId, recordId, lexeme, sourceRevision, "UNPINNED");
+        }
+
         public WordIdentity {
             sourceId = text(sourceId, "sourceId");
             recordId = text(recordId, "recordId");
             lexeme = text(lexeme, "lexeme");
             sourceRevision = text(sourceRevision, "sourceRevision");
+            sourceBlobSha = sourceBlob(sourceBlobSha);
         }
     }
 
@@ -172,8 +178,10 @@ public final class SharedLexiconPrecomputeCatalog {
                 throw new IllegalArgumentException("word facts source family");
             }
             Objects.requireNonNull(value, "word facts value");
-            if (!identity.sourceRevision().equals(value.sourceRevision())) {
-                throw new IllegalArgumentException("word facts source revision");
+            if (!identity.sourceRevision().equals(value.sourceRevision())
+                    || "UNPINNED".equals(identity.sourceBlobSha())
+                    || !identity.sourceBlobSha().equals(value.sourceBlobSha())) {
+                throw new IllegalArgumentException("word facts source revision/blob");
             }
             put(wordFacts, identity, value, "word facts"); return this;
         }
@@ -183,8 +191,10 @@ public final class SharedLexiconPrecomputeCatalog {
                 throw new IllegalArgumentException("word signal source family");
             }
             Objects.requireNonNull(value, "word signal value");
-            if (!identity.sourceRevision().equals(value.sourceRevision())) {
-                throw new IllegalArgumentException("word signal source revision");
+            if (!identity.sourceRevision().equals(value.sourceRevision())
+                    || "UNPINNED".equals(identity.sourceBlobSha())
+                    || !identity.sourceBlobSha().equals(value.sourceBlobSha())) {
+                throw new IllegalArgumentException("word signal source revision/blob");
             }
             put(wordSignals, identity, value, "word signal"); return this;
         }
@@ -196,6 +206,14 @@ public final class SharedLexiconPrecomputeCatalog {
             if (map.putIfAbsent(key, value) != null)
                 throw new IllegalArgumentException("duplicate " + family + " scope");
         }
+    }
+
+    private static String sourceBlob(String value) {
+        if ("UNPINNED".equals(value)) return value;
+        if (value == null || !value.matches("[0-9a-f]{40}")) {
+            throw new IllegalArgumentException("sourceBlobSha must be a lowercase 40-hex Git blob SHA");
+        }
+        return value;
     }
 
     private static String text(String value, String name) {

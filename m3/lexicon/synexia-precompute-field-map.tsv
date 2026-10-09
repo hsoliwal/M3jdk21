@@ -26,7 +26,9 @@ IndexWordSignal	presence64	long	presence64	synexia.records.tsv:precompute_payloa
 IndexWordSignal	simHash64	long	sim_hash64	synexia.records.tsv:precompute_payload	MAPPED	probabilistic signature remains donor-owned and opaque
 IndexWordSignal	frequencyRank	int	frequency_rank	synexia.records.tsv:precompute_payload	MAPPED	frequency ordering remains source metadata, never image_row identity
 IndexWordSignal	EMPTY/ASCII/LATIN1/...	int	flags	synexia.records.tsv:precompute_payload	MAPPED	profile flags are preserved only when supplied; bounded M3StringFacts remain independently verified
+IndexWordFacts	sourceBlobSha	String	source_blob_sha	synexia.records.tsv:precompute_payload	MAPPED	Git blob digest binds the exact source bytes
 IndexWordFacts	sourceRevision	String	source_revision	synexia.records.tsv:precompute_payload	MAPPED	source revision pins the immutable dictionary snapshot used to derive this projection
+IndexWordSignal	sourceBlobSha	String	source_blob_sha	synexia.records.tsv:precompute_payload	MAPPED	Git blob digest binds the exact source bytes
 IndexWordSignal	sourceRevision	String	source_revision	synexia.records.tsv:precompute_payload	MAPPED	source revision pins the immutable frequency snapshot used to derive this projection
 LangDexProjection.Entry	conceptId	long	langdex_concept_id	synexia.records.tsv:precompute_payload	MAPPED	validated nonzero LangDex concept coordinate remains donor-owned and is not renumbered
 LangDexProjection.Entry	frequency	long	langdex_frequency	synexia.records.tsv:precompute_payload	MAPPED	validated nonnegative LangDex frequency remains source metadata
