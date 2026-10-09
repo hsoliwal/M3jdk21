@@ -37,14 +37,30 @@ public final class M3PhrasePrecompute {
     public static final class Phrase {
         private final int[] sourceTokenIds;
         private final int[] replacementTokenIds;
+        private final String vocabularyFingerprint;
 
+        /** Construct an unbound phrase; admission binds it to the builder's vocabulary. */
         public Phrase(int[] sourceTokenIds, int[] replacementTokenIds) {
+            this(null, sourceTokenIds, replacementTokenIds, false);
+        }
+
+        /** Construct a phrase explicitly bound to a vocabulary scope. */
+        public Phrase(Scope scope, int[] sourceTokenIds, int[] replacementTokenIds) {
+            this(Objects.requireNonNull(scope, "scope").vocabularyFingerprint(),
+                    sourceTokenIds, replacementTokenIds, true);
+        }
+
+        private Phrase(String vocabularyFingerprint, int[] sourceTokenIds,
+                       int[] replacementTokenIds, boolean ignored) {
             Objects.requireNonNull(sourceTokenIds, "sourceTokenIds");
             Objects.requireNonNull(replacementTokenIds, "replacementTokenIds");
             if (sourceTokenIds.length == 0)
                 throw new IllegalArgumentException("source phrase must not be empty");
             this.sourceTokenIds = sourceTokenIds.clone();
             this.replacementTokenIds = replacementTokenIds.clone();
+            this.vocabularyFingerprint = vocabularyFingerprint == null
+                    ? null
+                    : text(vocabularyFingerprint, "vocabularyFingerprint");
         }
 
         public int[] sourceTokenIds() {
@@ -53,6 +69,23 @@ public final class M3PhrasePrecompute {
 
         public int[] replacementTokenIds() {
             return replacementTokenIds.clone();
+        }
+
+        /** Synexia's target-token name; replacementTokenIds remains a compatibility alias. */
+        public int[] targetTokenIds() {
+            return replacementTokenIds();
+        }
+
+        private Phrase bindTo(Scope scope) {
+            if (vocabularyFingerprint == null) {
+                return new Phrase(scope.vocabularyFingerprint(), sourceTokenIds,
+                        replacementTokenIds, true);
+            }
+            if (!vocabularyFingerprint.equals(scope.vocabularyFingerprint())) {
+                throw new IllegalArgumentException(
+                        "phrase belongs to a different vocabulary space");
+            }
+            return this;
         }
 
         public int sourceLength() {
@@ -89,6 +122,11 @@ public final class M3PhrasePrecompute {
         public int[] replacementTokenIds() {
             return replacementTokenIds.clone();
         }
+
+        /** Synexia's target-token name; replacementTokenIds remains a compatibility alias. */
+        public int[] targetTokenIds() {
+            return replacementTokenIds();
+        }
     }
 
     /** Immutable phrase trie and allocation-free rewrite metadata. */
@@ -118,6 +156,12 @@ public final class M3PhrasePrecompute {
         }
 
         public Optional<Match> longestMatchAt(int[] input, int start) {
+            return longestMatchAt(scope, input, start);
+        }
+
+        /** Match input only when it belongs to the catalog's vocabulary space. */
+        public Optional<Match> longestMatchAt(Scope inputScope, int[] input, int start) {
+            requireVocabulary(inputScope);
             Objects.requireNonNull(input, "input");
             if (start < 0 || start > input.length)
                 throw new IndexOutOfBoundsException("start: " + start);
@@ -128,8 +172,14 @@ public final class M3PhrasePrecompute {
                             candidate.phrase.replacementTokenIds));
         }
 
-        /** Apply the source IndexPhraseTable left-to-right longest-prefix rule. */
+        /** Apply the source IndexPhraseTable rule in the catalog's vocabulary space. */
         public int[] rewrite(int[] input) {
+            return rewrite(scope, input);
+        }
+
+        /** Apply the rewrite only when the input scope has the same vocabulary space. */
+        public int[] rewrite(Scope inputScope, int[] input) {
+            requireVocabulary(inputScope);
             Objects.requireNonNull(input, "input");
             int[] output = new int[Math.max(4, input.length)];
             int outputLength = 0;
@@ -154,6 +204,14 @@ public final class M3PhrasePrecompute {
                 start += candidate.consumedLength;
             }
             return Arrays.copyOf(output, outputLength);
+        }
+
+        private void requireVocabulary(Scope inputScope) {
+            Objects.requireNonNull(inputScope, "inputScope");
+            if (!scope.vocabularyFingerprint().equals(inputScope.vocabularyFingerprint())) {
+                throw new IllegalArgumentException(
+                        "input belongs to a different vocabulary space");
+            }
         }
 
         private Candidate candidateAt(int[] input, int start) {
@@ -188,17 +246,17 @@ public final class M3PhrasePrecompute {
         }
 
         public Builder put(Phrase phrase) {
-            Objects.requireNonNull(phrase, "phrase");
+            Phrase bound = Objects.requireNonNull(phrase, "phrase").bindTo(scope);
             Node node = root;
-            for (int index = 0; index < phrase.sourceLength(); index++)
-                node = node.children.computeIfAbsent(phrase.sourceTokenAt(index),
+            for (int index = 0; index < bound.sourceLength(); index++)
+                node = node.children.computeIfAbsent(bound.sourceTokenAt(index),
                         ignored -> new Node());
             // Synexia IndexPhraseTable is last-write-wins for an existing source phrase.
             if (node.phrase == null) {
                 phraseCount++;
-                maxSourceLength = Math.max(maxSourceLength, phrase.sourceLength());
+                maxSourceLength = Math.max(maxSourceLength, bound.sourceLength());
             }
-            node.phrase = phrase;
+            node.phrase = bound;
             return this;
         }
 
