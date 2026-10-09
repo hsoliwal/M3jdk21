@@ -109,3 +109,7 @@ Regenerated against 68775c6e7d: the upstream `String.java` after-image and hunks
 ## 2026-10-09 re-seal (A26 Latin-1 atom units widened in bulk for getChars)
 
 Regenerated against dd9120f283: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3StringAtom.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-09 re-seal (A27 flat needles over bulk windows)
+
+Regenerated against d21c8fa886: the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); the M3-owned `M3String.java` keeps its v2 after-image and records the new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
