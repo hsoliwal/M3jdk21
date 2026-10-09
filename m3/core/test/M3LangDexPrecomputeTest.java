@@ -47,7 +47,7 @@ public final class M3LangDexPrecomputeTest {
         for (int i = 1; i < lines.length - 1; i++) {
             String[] columns = lines[i].split("\t", -1);
             check(columns.length == 7);
-            if (columns[0].startsWith("LangDex")) {
+            if (columns[0].startsWith("M3LangDexPrecompute.")) {
                 check("MAPPED".equals(columns[5]));
                 fields.computeIfAbsent(columns[0], ignored -> new java.util.LinkedHashSet<>())
                         .add(columns[1]);
@@ -79,14 +79,14 @@ public final class M3LangDexPrecomputeTest {
         Map<String, Set<String>> fieldMap = parseFieldMap(Files.readString(
                 Path.of("lexicon/synexia-precompute-field-map.tsv"),
                 StandardCharsets.UTF_8));
-        check(fieldMap.get("LangDexProjection.Entry").equals(
+        check(fieldMap.get("M3LangDexPrecompute.Entry").equals(
                 Set.of("conceptId", "frequency", "flags")));
-        check(fieldMap.get("LangDexWordProfile").equals(Set.of(
+        check(fieldMap.get("M3LangDexPrecompute.WordProfile").equals(Set.of(
                 "lexicalClassMask", "semanticClassMask", "subjectId",
                 "featureBits", "evidenceMask", "confidencePermille")));
-        check(fieldMap.get("LangDexLexicalProfile").equals(Set.of(
+        check(fieldMap.get("M3LangDexPrecompute.LexicalProfile").equals(Set.of(
                 "lexicalClassMask", "featureBits", "evidenceMask", "confidencePermille")));
-        check(fieldMap.get("LangDexTranslation").equals(Set.of("targetLexemeId")));
+        check(fieldMap.get("M3LangDexPrecompute.Translation").equals(Set.of("targetLexemeId")));
 
         M3LangDexPrecompute.Identity identity = new M3LangDexPrecompute.Identity(
                 "unicodex.langdex.lexemes", "lexeme-7", "ENG", "Color", "langdex-r1");
