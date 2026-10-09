@@ -27,10 +27,18 @@ For a recipe-driven change:
 Do not recreate or retain duplicate authoritative Synexia recipe manifests, sealed postimage
 templates or recipe fixed-point tests in M3JDK21 after application.
 
-Current canonical recipe owners for the M3 String work:
+Current canonical recipe owners for the M3 String work include:
 
 - `com.synexia.rewrite.M3Jdk21StringHistoryConvergence`
 - `com.synexia.rewrite.M3Jdk21TqConvergence`
+- `com.synexia.rewrite.M3Jdk21StringAdaptivePreparedSearch`
+- `com.synexia.rewrite.M3Jdk21StringExactPositionMasks`
+- `com.synexia.m3.TranslateEscapesCanonical`
+- `com.synexia.m3.ValueOfCharCanonical`
+- `com.synexia.m3.DeprecatedGetBytesBulk`
+
+Focused recipe custody is consolidated on Synexia PR #10004. A target-side copy is a receipt or
+application artifact only, never a second canonical recipe owner.
 
 See `m3/docs/synexia-recipe-application.md`.
 
