@@ -1,0 +1,4 @@
+fixtures=256
+checks=2304
+versions=[1, 2, 3, 4, 5, 6, 7]
+wire-root=c8cb8031fa00452f78724ad1529db25146c89585d3888734c0c9330915a39da0

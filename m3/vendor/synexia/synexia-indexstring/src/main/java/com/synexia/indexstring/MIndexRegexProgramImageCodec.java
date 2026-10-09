@@ -348,7 +348,7 @@ public final class MIndexRegexProgramImageCodec {
     byte[] base = new byte[baseLength];
     input.get(base);
     requireNestedVersion(ByteBuffer.wrap(base), utf16 ? UTF16_VERSION : VERSION);
-    MIndexRegexProgram.Image program = decode(base);
+    MIndexRegexProgram.Image program = decode(ByteBuffer.wrap(base));
 
     long[] asciiStateMasks = readCountedLongs(input, "execution ASCII state masks");
     int epsilonWordsPerRow = getInt(input, "execution epsilon words");

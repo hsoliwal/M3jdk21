@@ -1,0 +1,172 @@
+{
+  "scope": "CODEC_ONLY_EXACT_DECLARATION_PROJECTION",
+  "source_revision": "3190801456bffec6d8ceb71c049831044e5a23bc",
+  "target_revision": "5f68880c6f4a669e2fe82d6a914c071aef4f80f5",
+  "sdk_tests": 4,
+  "codec_tests": 6,
+  "negative_control": "EXPECTED_ASSERTION_FAILURE",
+  "api": "EXACT_EQUAL",
+  "java_base_only_compile": "FOUR_PROJECTED_OWNERS_BOTH_VARIANTS",
+  "commands": [
+    {
+      "name": "sdk",
+      "command": [
+        "/workspace/scratch/18b9e6a1dfc0/tools/apache-maven-3.9.9/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/18b9e6a1dfc0/tools/san-maven-cache",
+        "-f",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/pom.xml",
+        "-Dmaven.test.skip=false",
+        "-DskipTests=false",
+        "test"
+      ],
+      "exit": 0,
+      "sha256": "75e65469ccc1e755b0a2aef1f90b7faa0083e3aca2075ebe74b4cf121ebd137f"
+    },
+    {
+      "name": "baseline-java-base-only-compile",
+      "command": [
+        "/workspace/scratch/18b9e6a1dfc0/tools/jdk-21.0.8+9/bin/javac",
+        "--release",
+        "21",
+        "--limit-modules",
+        "java.base",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/baseline/classes",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/baseline/src/com/synexia/indexstring/MIndexCompactAsciiDfaImage.java",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/baseline/src/com/synexia/indexstring/MIndexRegexAcceleratedImage.java",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/baseline/src/com/synexia/indexstring/MIndexRegexProgram.java",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/baseline/src/com/synexia/indexstring/MIndexRegexProgramImageCodec.java"
+      ],
+      "exit": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "candidate-java-base-only-compile",
+      "command": [
+        "/workspace/scratch/18b9e6a1dfc0/tools/jdk-21.0.8+9/bin/javac",
+        "--release",
+        "21",
+        "--limit-modules",
+        "java.base",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/candidate/classes",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/candidate/src/com/synexia/indexstring/MIndexCompactAsciiDfaImage.java",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/candidate/src/com/synexia/indexstring/MIndexRegexAcceleratedImage.java",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/candidate/src/com/synexia/indexstring/MIndexRegexProgram.java",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/candidate/src/com/synexia/indexstring/MIndexRegexProgramImageCodec.java"
+      ],
+      "exit": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "baseline-api",
+      "command": [
+        "/workspace/scratch/18b9e6a1dfc0/tools/jdk-21.0.8+9/bin/javap",
+        "-classpath",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/baseline/classes",
+        "-public",
+        "-s",
+        "com.synexia.indexstring.MIndexRegexProgramImageCodec"
+      ],
+      "exit": 0,
+      "sha256": "e1d24981882129eb8f9f23637c5ff0d4ba0475edcf837823d40ba74f2abc2571"
+    },
+    {
+      "name": "candidate-api",
+      "command": [
+        "/workspace/scratch/18b9e6a1dfc0/tools/jdk-21.0.8+9/bin/javap",
+        "-classpath",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/candidate/classes",
+        "-public",
+        "-s",
+        "com.synexia.indexstring.MIndexRegexProgramImageCodec"
+      ],
+      "exit": 0,
+      "sha256": "e1d24981882129eb8f9f23637c5ff0d4ba0475edcf837823d40ba74f2abc2571"
+    },
+    {
+      "name": "codec-tests",
+      "command": [
+        "/workspace/scratch/18b9e6a1dfc0/tools/apache-maven-3.9.9/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/18b9e6a1dfc0/tools/san-maven-cache",
+        "-f",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/runtime/pom.xml",
+        "-Dmaven.test.skip=false",
+        "-DskipTests=false",
+        "test"
+      ],
+      "exit": 0,
+      "sha256": "51e1fadbd52747095e373c7c6a78ba64353e3c58a1624d8d9da88d66c1beabb8"
+    },
+    {
+      "name": "expected-mutant-refusal",
+      "command": [
+        "/workspace/scratch/18b9e6a1dfc0/tools/apache-maven-3.9.9/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/18b9e6a1dfc0/tools/san-maven-cache",
+        "-f",
+        "/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/runtime/pom.xml",
+        "-Dcodec.sources=/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/mutant/src",
+        "-Dcodec.build=/workspace/scratch/d9042ed0c738/v7-source/synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009/target/mutant/build",
+        "-Dtest=CodecCopyTest#nestedFormatMismatchRefusesEvenWithValidChecksums",
+        "-Dmaven.test.skip=false",
+        "-DskipTests=false",
+        "test"
+      ],
+      "exit": 1,
+      "sha256": "8b3b7ea96afd5a4a6eeb949b33998a82aadf6b37ce9dc98b84c80b59bd097ae8"
+    }
+  ],
+  "not_run": [
+    "whole MIndexRegexProgram source closure",
+    "canonical serial catalogue/reactor review",
+    "full JDK/jtreg/interpreter/C1/C2/GC/CDS",
+    "JNI/GPU/platform integration"
+  ],
+  "promotion": "NOT_ADMITTED",
+  "recipe": "com.synexia.m3.RegexV7CodecNestedCopy20261009",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_commit": "06768e5519178d32d41662c2f55ae7e35998a9a0",
+  "canonical_path": "synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-20261009",
+  "recipe_artifact_sha256": "100accdc252da35cebca6bde0b58e8a61e8f0ec2346aff01a8a5e8d9e7c1292a",
+  "source_base_revision": "3190801456bffec6d8ceb71c049831044e5a23bc",
+  "target_base_revision": "5f68880c6f4a669e2fe82d6a914c071aef4f80f5",
+  "target_path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgramImageCodec.java",
+  "target_before_git_blob": "937d31e8b77fb4f5f7cca5fa31ffde3083c93361",
+  "target_after_git_blob": "d13f3c6fcd3f449e42a4f6487b1fe69bb74923c5",
+  "target_after_sha256": "9212f9419ac47b341f09c580245c32b18845053239477b9207d80d7030fb9cef",
+  "receiver_validation": "SDK_OUTPUT_BYTE_EQUAL; EXACT_RECEIVER_IMAGE_DECLARATIONS_MATCH_SOURCE_PROJECTION",
+  "evidence": {
+    "allocation.tsv": "1f7e67c7bce0ba6fd62a1c725a154a494aa57dc55b457b877a2db1f294a8048a",
+    "baseline-api.log": "e1d24981882129eb8f9f23637c5ff0d4ba0475edcf837823d40ba74f2abc2571",
+    "baseline-java-base-only-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "candidate-api.log": "e1d24981882129eb8f9f23637c5ff0d4ba0475edcf837823d40ba74f2abc2571",
+    "candidate-java-base-only-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "codec-com.synexia.indexstring.CodecCopyTest.txt": "3e6c7e6c553bf67dc2baa71b23d26418e7ba7a41703cab231434210baff5e272",
+    "codec-tests.log": "51e1fadbd52747095e373c7c6a78ba64353e3c58a1624d8d9da88d66c1beabb8",
+    "corruption-matrix.txt": "18c81189ae03d17ba5936e3b00fef888d3f9ac9d079d1747511cdef46984db43",
+    "expected-mutant-refusal.log": "8b3b7ea96afd5a4a6eeb949b33998a82aadf6b37ce9dc98b84c80b59bd097ae8",
+    "format-matrix.txt": "640b1c6f8cda3e4443d742962a0f1af5b6a6561b50961c1d9bf77725e4e6144c",
+    "projection.json": "5390370d1328a18e75a3aa508e1676e94463365a5d600b4fc99a840be4005982",
+    "receipt.json": "44ad1e06724755355e2e4b25f18565c418929a7cc4ebbdb232b8744a5fd70375",
+    "sdk-com.synexia.rewrite.CodecRecipeTest.txt": "a29537c49af1d0bfac9d7e163ff464b013560bfc781a7e34e3beeeeedeab1de2",
+    "sdk.log": "75e65469ccc1e755b0a2aef1f90b7faa0083e3aca2075ebe74b4cf121ebd137f"
+  },
+  "full_borrow_checker": "BLOCKED_SPARSE_GIT_ANCESTRY",
+  "license": "Apache-2.0",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors"
+}

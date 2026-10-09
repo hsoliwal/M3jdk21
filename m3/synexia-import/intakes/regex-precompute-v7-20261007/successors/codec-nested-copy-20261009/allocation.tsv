@@ -1,0 +1,12 @@
+# fixture preparation bytes=1465416; timing is not a speedup claim
+fixture	trial	provider	bytes_per_decode
+v7-ascii-65536	0	frozen	410264
+v7-ascii-65536	0	candidate	344560
+v7-ascii-65536	1	candidate	344560
+v7-ascii-65536	1	frozen	410264
+v7-ascii-65536	2	frozen	410264
+v7-ascii-65536	2	candidate	344560
+v7-ascii-65536	3	candidate	344560
+v7-ascii-65536	3	frozen	410264
+v7-ascii-65536	4	frozen	410264
+v7-ascii-65536	4	candidate	344560

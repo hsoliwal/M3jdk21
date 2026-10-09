@@ -1,0 +1,13 @@
+{
+  "scope": "CODEC_ONLY_EXACT_DECLARATION_PROJECTION",
+  "program_sources_equal": true,
+  "deleted_accelerated_methods": [
+    "from",
+    "restoreProgram"
+  ],
+  "outputs": {
+    "MIndexRegexProgram.java": "086375cf68ac248d914a1d046da8ef2fe23c893a7a16ca7fcb3ac6d9f30438ff",
+    "MIndexRegexAcceleratedImage.java": "bbbd254b316008a308fe533df135360fb85fb9e21020c3240ab0773a57259192",
+    "MIndexCompactAsciiDfaImage.java": "31f4fd022eba03828d5ddc9d7dec0ab3dc978b3397d305f8b7655957e6a15269"
+  }
+}
