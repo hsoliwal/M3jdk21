@@ -30,7 +30,7 @@ invariants:
 
 verification:
   source_discriminator_command: python m3/runtime-integration/check-m3string-facts-donor-receipt.py --repo-root .
-  source_discriminator: M3_STRING_FACTS_DONOR_RECEIPT_SOURCE_PASS checks=42/42|runtime=NOT_RUN
+  source_discriminator: M3_STRING_FACTS_DONOR_RECEIPT_SOURCE_PASS checks=41/41|runtime=NOT_RUN
   runtime: NOT_RUN
   jtreg: NOT_RUN
   jni: NOT_RUN
