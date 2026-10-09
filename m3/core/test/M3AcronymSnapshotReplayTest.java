@@ -1,6 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
+import com.m3.text.AcronymSidecarCatalog;
 import com.m3.text.M3LexiconPrecompute;
 import com.m3.text.SharedLexiconPrecomputeCatalog;
 
@@ -42,6 +43,7 @@ public final class M3AcronymSnapshotReplayTest {
 
         List<String[]> rows = readSnapshot(snapshot);
         check(rows.size() == EXPECTED_ROWS, "snapshot row count");
+        replayFileBackedReceiver(rows, snapshotBytes);
         Map<String, Integer> domains = new LinkedHashMap<>();
         SharedLexiconPrecomputeCatalog.Builder builder =
                 SharedLexiconPrecomputeCatalog.builder();
@@ -99,6 +101,55 @@ public final class M3AcronymSnapshotReplayTest {
             rows.add(row);
         }
         return rows;
+    }
+
+    private static void replayFileBackedReceiver(List<String[]> rows, byte[] snapshotBytes)
+            throws Exception {
+        Path directory = Files.createTempDirectory("m3-acronym-replay-");
+        try {
+            Files.write(directory.resolve(AcronymSidecarCatalog.DATA_FILE), snapshotBytes);
+            String index = "schema_version\\tfile\\trows\\tsha256\\n"
+                    + AcronymSidecarCatalog.SCHEMA_VERSION + "\\t"
+                    + AcronymSidecarCatalog.DATA_FILE + "\\t" + EXPECTED_ROWS + "\\t"
+                    + sha256(snapshotBytes) + "\\n";
+            Files.writeString(directory.resolve(AcronymSidecarCatalog.INDEX_FILE), index,
+                    StandardCharsets.UTF_8);
+
+            AcronymSidecarCatalog sidecar = AcronymSidecarCatalog.open(directory);
+            check(sidecar.size() == EXPECTED_ROWS, "file-backed receiver row count");
+            check(sidecar.scope().sourceManifestRevision().equals(rows.get(0)[2]),
+                    "file-backed receiver source revision");
+            check(sidecar.scope().ownerFingerprint().equals(rows.get(0)[3]),
+                    "file-backed receiver owner fingerprint");
+
+            SharedLexiconPrecomputeCatalog.Builder builder =
+                    SharedLexiconPrecomputeCatalog.builder();
+            for (String[] row : rows) {
+                AcronymSidecarCatalog.Entry entry = sidecar.find(row[1]).orElseThrow();
+                check(entry.value().equals(new M3LexiconPrecompute.AcronymPrecompute(
+                        row[4], row[5], row[6])), "file-backed receiver value");
+                builder.acronym(
+                        new SharedLexiconPrecomputeCatalog.AcronymIdentity(SOURCE_ID, row[1]),
+                        entry.value());
+            }
+            SharedLexiconPrecomputeCatalog catalog = builder.build();
+            for (String[] row : rows) {
+                check(catalog.acronymAt(
+                        new SharedLexiconPrecomputeCatalog.AcronymIdentity(SOURCE_ID, row[1]))
+                        .orElseThrow().expansion().equals(row[5]),
+                        "file-backed receiver catalog lookup");
+            }
+        } finally {
+            Files.walk(directory)
+                    .sorted(java.util.Comparator.reverseOrder())
+                    .forEach(path -> {
+                        try {
+                            Files.deleteIfExists(path);
+                        } catch (java.io.IOException failure) {
+                            throw new RuntimeException(failure);
+                        }
+                    });
+        }
     }
 
     private static void validateTargetMap(Path path) throws Exception {
