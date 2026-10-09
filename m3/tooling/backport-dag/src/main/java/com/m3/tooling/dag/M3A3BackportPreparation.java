@@ -2,6 +2,7 @@
 package com.m3.tooling.dag;
 
 import com.m3.a3.A3Apply;
+import com.synexia.rewrite.M3RecipeMasteryPortableReceipt;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -76,9 +77,12 @@ public final class M3A3BackportPreparation {
     public static Receipt prepare(
             Path repositoryRoot,
             Path outputRoot,
-            List<String> targetPaths) throws IOException {
+            List<String> targetPaths,
+            M3RecipeMasteryPortableReceipt.Verified mastery) throws IOException {
         Path root = Objects.requireNonNull(repositoryRoot, "repositoryRoot").toAbsolutePath().normalize();
         Path out = Objects.requireNonNull(outputRoot, "outputRoot").toAbsolutePath().normalize();
+        M3RecipeMasteryPortableReceipt.Verified checkedMastery =
+                Objects.requireNonNull(mastery, "mastery");
         List<String> targets = targetPaths.stream()
                 .map(M3A3BackportPreparation::path)
                 .distinct()
@@ -101,7 +105,8 @@ public final class M3A3BackportPreparation {
 
         Map<String, A3Apply.Receipt> javaReceipts = new HashMap<>();
         if (!java.isEmpty()) {
-            for (A3Apply.Receipt receipt : A3Apply.run(root, out.resolve("a3"), java)) {
+            for (A3Apply.Receipt receipt :
+                    A3Apply.run(root, out.resolve("a3"), java, checkedMastery)) {
                 javaReceipts.put(receipt.path(), receipt);
             }
             if (javaReceipts.size() != java.size()) {
@@ -116,8 +121,10 @@ public final class M3A3BackportPreparation {
             if (javaSource(target)) {
                 A3Apply.Receipt receipt = Objects.requireNonNull(
                         javaReceipts.get(target), "missing A3 receipt " + target);
-                if (!receipt.beforeSha().equals(beforeSha) || !receipt.fixedPoint()) {
-                    throw new IllegalStateException("A3 receipt drift: " + target);
+                if (!receipt.beforeSha().equals(beforeSha)
+                        || !receipt.fixedPoint()
+                        || !receipt.masteryRoot().equals(checkedMastery.root())) {
+                    throw new IllegalStateException("A3 receipt/mastery drift: " + target);
                 }
                 rows.add(new Row(
                         target,
