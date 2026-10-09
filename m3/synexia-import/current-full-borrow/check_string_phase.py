@@ -17,6 +17,43 @@ ESTATE = Path(__file__).with_name("synexia-estate.tsv")
 NAME_MAP = ROOT / "m3/docs/name-mapping.json"
 WORK = Path(__file__).with_name("string-phase-work-orders.tsv")
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
+SUCCESSORS = Path(__file__).with_name("string-target-successors.tsv")
+SUCCESSOR_HEADER = [
+    "schema",
+    "target_path",
+    "historical_git_blob",
+    "successor_git_blob",
+    "synexia_prs",
+    "m3jdk_prs",
+    "semantic_evidence",
+    "state",
+]
+EXPECTED_SUCCESSOR_PATHS = {
+    "src/java.base/share/classes/java/lang/M3String.java",
+    "src/java.base/share/classes/java/lang/M3StringFacts.java",
+    "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+}
+SUCCESSOR_MARKERS = {
+    "src/java.base/share/classes/java/lang/M3String.java": (
+        "private final M3StringOwner owner;",
+        "private final long value;",
+        "static M3String joinDesignated(",
+        "return M3StringPool.concat(canonicalize(first), canonicalize(second));",
+        "static boolean isLiteralRegex(String regex)",
+    ),
+    "src/java.base/share/classes/java/lang/M3StringFacts.java": (
+        "boolean mayContain(String needle)",
+        "boolean prefixMayMatch(String prefix)",
+        "boolean suffixMayMatch(String suffix)",
+        "if ((bitSignal64 & units) != units) return false;",
+    ),
+    "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java": (
+        "final byte[] firstOffsets;",
+        "final long[] masks;",
+        "char candidate = source.charAt(blockStart + firstOffsets[mid]);",
+        "MAX_SOURCE_UNITS * (Byte.BYTES + Long.BYTES)",
+    ),
+}
 
 EXPECTED_RELATIONS = {
     "VALUE_OWNER",
@@ -64,6 +101,63 @@ def load_tsv(path: Path, header: list[str]) -> list[dict[str, str]]:
     if not rows:
         raise ValueError(f"empty table: {path}")
     return rows
+
+
+def approved_successors(mapping_rows: list[dict[str, str]]) -> dict[str, dict[str, str]]:
+    """Admit only exact qualified product postimages without rewriting the donor map."""
+    baseline: dict[str, str] = {}
+    for row in mapping_rows:
+        path = row["target_path"]
+        pinned = row["target_git_blob"]
+        if path in baseline and baseline[path] != pinned:
+            raise ValueError("contradictory historical target pin: " + path)
+        baseline[path] = pinned
+
+    received: dict[str, dict[str, str]] = {}
+    for index, row in enumerate(load_tsv(SUCCESSORS, SUCCESSOR_HEADER), start=2):
+        path = row["target_path"]
+        if any(not row[field] for field in SUCCESSOR_HEADER):
+            raise ValueError(f"blank successor receipt field at row {index}")
+        if row["schema"] != "M3JDK21_STRING_TARGET_SUCCESSOR_V1":
+            raise ValueError(f"invalid successor receipt schema at row {index}")
+        if path in received:
+            raise ValueError("duplicate successor owner: " + path)
+        if path not in EXPECTED_SUCCESSOR_PATHS or path not in baseline:
+            raise ValueError("unqualified successor owner: " + path)
+        if row["historical_git_blob"] != baseline[path]:
+            raise ValueError("historical target pin altered: " + path)
+        if not HEX40.fullmatch(row["successor_git_blob"]):
+            raise ValueError("unsealed successor Git blob: " + path)
+        if row["successor_git_blob"] == baseline[path]:
+            raise ValueError("successor did not advance original target: " + path)
+        for key in ("synexia_prs", "m3jdk_prs"):
+            if not re.fullmatch(r"[0-9]+(?:,[0-9]+)*", row[key]):
+                raise ValueError("unqualified successor PR lineage: " + path)
+        if row["state"] != "HISTORY_PRESERVING_SUCCESSOR":
+            raise ValueError("successor promotion policy drift: " + path)
+        received[path] = row
+
+    if set(received) != EXPECTED_SUCCESSOR_PATHS:
+        raise ValueError(
+            "successor inventory drift: missing="
+            + repr(sorted(EXPECTED_SUCCESSOR_PATHS - set(received)))
+            + " unexpected="
+            + repr(sorted(set(received) - EXPECTED_SUCCESSOR_PATHS))
+        )
+    return received
+
+
+def validate_successor_source(path: str, source: str) -> None:
+    for fragment in SUCCESSOR_MARKERS[path]:
+        if fragment not in source:
+            raise ValueError(f"history-preserving successor responsibility lost: {path} {fragment}")
+    if path.endswith("M3StringPositionPrecompute.java"):
+        block = source.split("private static final class ExactBlock {", 1)
+        if len(block) != 2:
+            raise ValueError("position-mask ExactBlock missing")
+        exact = block[1].split("private static final class Entry {", 1)[0]
+        if re.search(r"(?m)^\s*(?:final\s+)?char\s*\[\s*\]\s+\w+\s*;", exact):
+            raise ValueError("position-mask successor reintroduced retained char[] spelling")
 
 
 def estate_snapshot() -> tuple[str, str]:
@@ -182,6 +276,7 @@ def main(argv: list[str]) -> int:
         raise ValueError("MIndexString estate lost Apache-2.0 classification")
 
     rows = load_tsv(MAP, HEADER)
+    successors = approved_successors(rows)
     relations: set[str] = set()
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in HEADER):
@@ -214,11 +309,15 @@ def main(argv: list[str]) -> int:
         if not target.is_file():
             raise ValueError(f"target owner missing: {row['target_path']}")
         actual = git_blob(target)
-        if actual != row["target_git_blob"]:
+        successor = successors.get(row["target_path"])
+        pinned = successor["successor_git_blob"] if successor else row["target_git_blob"]
+        if actual != pinned:
             raise ValueError(
                 f"target owner drift: {row['target_path']} "
-                f"expected={row['target_git_blob']} actual={actual}"
+                f"expected={pinned} actual={actual}"
             )
+        if successor is not None:
+            validate_successor_source(row["target_path"], target.read_text(encoding="utf-8"))
 
     if relations != EXPECTED_RELATIONS:
         raise ValueError(
@@ -230,7 +329,7 @@ def main(argv: list[str]) -> int:
     validate_work_orders()
     print(
         "M3JDK21_STRING_PHASE_PIN_PASS "
-        f"rows={len(rows)} source_revision={revision} "
+        f"rows={len(rows)} source_revision={revision} successors={len(successors)} "
         "promotion=false public_api=java.lang.String"
     )
     return 0

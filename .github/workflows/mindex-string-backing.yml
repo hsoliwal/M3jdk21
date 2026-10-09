@@ -82,6 +82,8 @@ jobs:
           java-version: '21'
       - name: Verify String Phase-1 checkout root and integrity
         run: python3 m3/synexia-import/current-full-borrow/test_string_phase_root.py -v
+      - name: Verify STRING target successor refusal controls
+        run: python3 m3/synexia-import/current-full-borrow/test_string_phase_successors.py -v
       - name: Verify full-borrow MIndexString to M3String custody
         run: python3 m3/synexia-import/current-full-borrow/check_string_phase.py
       - name: Verify String completeness admission and refusal controls
