@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.RegexSubjectView
+displayName: M3JDK21 regex engine reading M3 subjects through a block-filled view
+description: >-
+  Matcher.search and match handed the subject String to the nodes, whose every seq.charAt on an
+  M3-backed String went through owner dispatch (dot-all scans 3x..14x slower than flat). The new
+  java.lang.M3StringMatchText is a CharSequence view whose 1024-unit blocks are read from the
+  storage on first touch; Matcher.subject() builds it once per text through
+  JavaLangAccess.m3MatchText (System.java implementation) and the nodes read it, while text stays
+  the source of every subsequence and observable. Java step: the new M3StringMatchText, Matcher,
+  JavaLangAccess and the jtreg proof; text step: System.java (Javadoc the pinned Java parser
+  cannot convert). Stacks on crate m3-tq-facts-radix (its postimages are these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-regex-subject-view
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-regex-subject-view

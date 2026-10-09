@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.util.regex.Matcher.search/match: the nodes receive the subject text and read seq.charAt per unit, owner dispatch on an M3-backed String (jdk-21+35 Matcher, carried to A19 3347766985)",
+      "source_commit": "3347766985",
+      "target": "Matcher.subject(): the nodes receive a view built once per text through JavaLangAccess.m3MatchText (System.java over M3StringMatchText.of), or the text itself for a flat String, a non-String subject or above the view's cap; text stays the source of every subsequence, append and observable; reset(input) drops the view when the text changes",
+      "status": "implemented-locally-verified (G7; flag-off: M3RegexSubjectViewTest 9,567 checks against flat results; (?s).* scans 3x..14x faster, class/alternation/backreference scans 1.1x..3.6x; early failures pay one block, 0.2..0.8 us per matcher)",
+      "target_rule": "the nodes read the same units in the same order; find/matches/lookingAt/hitEnd/requireEnd results equal the flat engine's on the same spellings"
+    },
+    {
+      "source": "java.lang.M3String.getChars (A11 bulk read, 16ce01f5da) over atoms and tuples",
+      "source_commit": "3347766985",
+      "target": "java.lang.M3StringMatchText (new): a CharSequence view of an M3-backed String whose 1024-unit blocks are allocated and filled on first touch; charAt is an array load; toString (canonical equivalence only) reads the whole spelling; cap 16M units",
+      "status": "implemented-locally-verified (a first build with one eagerly filled flat array made early failures cost O(n), 28 us at 262144 units, and was replaced by the lazy blocks)",
+      "target_rule": "transient per matcher; nothing retained beyond the Matcher; no new admission"
+    }
+  ]
+}
