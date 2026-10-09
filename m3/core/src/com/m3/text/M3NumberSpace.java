@@ -15,6 +15,7 @@ import java.util.Objects;
  */
 public final class M3NumberSpace {
     public static final String SOURCE_ID = "dictlang.numbers.0-10000";
+    public static final String SOURCE_REVISION = "64a2ea61c73b548413fed6686a9daeeb0b9b0564";
     public static final String RECORD_ID = "number";
     public static final int MIN_VALUE = 0;
     public static final int MAX_VALUE = 10_000;
