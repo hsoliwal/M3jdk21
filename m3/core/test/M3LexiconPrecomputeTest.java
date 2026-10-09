@@ -46,6 +46,22 @@ public final class M3LexiconPrecomputeTest {
         check(!translation.appliesTo("lex-2", "en", "hi", "src-1"));
         check(!translation.appliesTo("lex-1", "en", "hi", "src-2"));
 
+        M3LexiconPrecompute.NumberPrecompute number =
+                new M3LexiconPrecompute.NumberPrecompute(
+                        10000, "10000", 0, 10000, 10001, true);
+        check(number.value() == 10000);
+        check(number.canonicalDecimalSpelling().equals("10000"));
+        check(number.sharedUtf16Storage());
+        expect(IllegalArgumentException.class, () ->
+                new M3LexiconPrecompute.NumberPrecompute(
+                        10001, "10001", 0, 10000, 10001, true));
+        expect(IllegalArgumentException.class, () ->
+                new M3LexiconPrecompute.NumberPrecompute(
+                        7, "007", 0, 10000, 10001, true));
+        expect(IllegalArgumentException.class, () ->
+                new M3LexiconPrecompute.NumberPrecompute(
+                        7, "7", 0, 9999, 10000, true));
+
         Map<String, int[]> deletes = new LinkedHashMap<>();
         deletes.put("", new int[]{1});
         deletes.put("helo", new int[]{2, 7});
