@@ -10,6 +10,8 @@ precompute owner visible. Its final `precompute_fields` column is the v2
 requirement map for owner payloads. It is a catalog, not a license to
 redistribute the bulk datasets named by it.
 
+`m3/lexicon/synexia-precompute-family-map.tsv` is the target-owned mapping catalog for the five typed family files; it is kept in schema/order parity with the receiver contract.
+
 The source manifest's legacy eight-column form remains accepted. The v2 form
 appends `precompute_fields`, a sorted, unique comma-separated list of required
 snake_case keys, or `-` when that source family has no inspected owner-field
