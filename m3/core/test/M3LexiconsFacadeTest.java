@@ -52,8 +52,6 @@ public final class M3LexiconsFacadeTest {
                 SharedLexiconFamilySidecarCatalog.SourceScope scope =
                         new SharedLexiconFamilySidecarCatalog.SourceScope(
                                 "source-a", "record-a", "rev-1", "owner-a");
-                SharedLexiconCatalog.Coordinate coordinate =
-                        new SharedLexiconCatalog.Coordinate(0, 0);
                 check(family.prefixAt(new SharedLexiconFamilySidecarCatalog.PrefixKey(
                         scope, coordinate, "prefix-1", "value-a", 7)).orElseThrow()
                         .rangeCount(1, 3) == 1, "prefix sidecar lookup");
