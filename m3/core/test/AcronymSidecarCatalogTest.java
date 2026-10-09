@@ -23,11 +23,11 @@ public final class AcronymSidecarCatalogTest {
                     + "\tHTTP\thypertext transfer protocol\tnetworking\n";
             byte[] data = (header + rows).getBytes(UTF_8);
             Files.write(directory.resolve(AcronymSidecarCatalog.DATA_FILE), data);
-            Files.writeString(directory.resolve(AcronymSidecarCatalog.INDEX_FILE),
-                    "schema_version\tfile\trows\tsha256\n"
-                            + "m3lex-acronym-v1\tsynexia.acronyms.tsv\t2\t"
-                            + HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(data))
-                            + "\n", UTF_8);
+            String indexText = "schema_version\tfile\trows\tsha256\n"
+                    + "m3lex-acronym-v1\tsynexia.acronyms.tsv\t2\t"
+                    + HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(data))
+                    + "\n";
+            Files.writeString(directory.resolve(AcronymSidecarCatalog.INDEX_FILE), indexText, UTF_8);
 
             AcronymSidecarCatalog catalog = AcronymSidecarCatalog.open(directory);
             check(catalog.size() == 2, "row count");
@@ -38,6 +38,13 @@ public final class AcronymSidecarCatalogTest {
             check(catalog.scope().sourceManifestRevision().equals("synexia-acronym-1"),
                     "scope");
             check(catalog.find("MISSING").isEmpty(), "missing lookup");
+
+            Files.writeString(directory.resolve(AcronymSidecarCatalog.INDEX_FILE),
+                    indexText + "m3lex-acronym-v1\tsynexia.acronyms.tsv\t2\t"
+                            + "0000000000000000000000000000000000000000000000000000000000000000\n",
+                    UTF_8);
+            expectIllegal(() -> AcronymSidecarCatalog.open(directory), "extra index row");
+            Files.writeString(directory.resolve(AcronymSidecarCatalog.INDEX_FILE), indexText, UTF_8);
 
             Files.write(directory.resolve(AcronymSidecarCatalog.DATA_FILE), (header + rows
                     + "dictlang.acronyms\tAPI\tsynexia-acronym-1\t" + owner
