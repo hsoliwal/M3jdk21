@@ -275,6 +275,9 @@ def render_bundle(families: Mapping[str, Iterable[Mapping[str, object]]]) -> dic
 def verify_bundle(files: Mapping[str, bytes]) -> dict[str, int]:
     if INDEX_FILE not in files:
         raise ValueError("family index is missing")
+    for name, content in files.items():
+        if content.startswith(b"\xef\xbb\xbf") or b"\r" in content:
+            raise ValueError(f"{name} must be UTF-8 without BOM and use LF")
     index_reader = csv.DictReader(io.StringIO(files[INDEX_FILE].decode("utf-8")), delimiter="\t")
     if tuple(index_reader.fieldnames or ()) != INDEX_COLUMNS:
         raise ValueError("family index header mismatch")
