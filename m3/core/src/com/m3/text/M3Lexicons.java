@@ -19,9 +19,11 @@ import java.util.Optional;
  */
 public final class M3Lexicons implements AutoCloseable {
     private final SharedLexiconCatalog catalog;
+    private final M3InstanceIndexPrecompute instanceIndex;
 
-    private M3Lexicons(SharedLexiconCatalog catalog) {
+    private M3Lexicons(SharedLexiconCatalog catalog, M3InstanceIndexPrecompute instanceIndex) {
         this.catalog = Objects.requireNonNull(catalog, "catalog");
+        this.instanceIndex = instanceIndex;
     }
 
     /** Open the complete validated export with eager shard admission. */
@@ -36,7 +38,31 @@ public final class M3Lexicons implements AutoCloseable {
 
     /** Bind the M3JDK name to one already-admitted catalog without copying it. */
     public static M3Lexicons of(SharedLexiconCatalog catalog) {
-        return new M3Lexicons(catalog);
+        return new M3Lexicons(catalog, null);
+    }
+
+    /**
+     * Bind one already-admitted immutable instance index without copying the
+     * catalog or creating another lexical interner.
+     */
+    public static M3Lexicons of(SharedLexiconCatalog catalog,
+                                M3InstanceIndexPrecompute instanceIndex) {
+        return new M3Lexicons(catalog, Objects.requireNonNull(instanceIndex, "instanceIndex"));
+    }
+
+    /** Return the optional entity-instance owner attached to this facade. */
+    public Optional<M3InstanceIndexPrecompute> instanceIndex() {
+        return Optional.ofNullable(instanceIndex);
+    }
+
+    /** Resolve a proper name only when an instance owner was explicitly bound. */
+    public Optional<M3InstanceIndexPrecompute.InstanceRecord> findInstanceByName(String name) {
+        return instanceIndex().flatMap(index -> Optional.ofNullable(index.findByName(name)));
+    }
+
+    /** Resolve frozen concept coordinates without changing lexical-token identity. */
+    public List<M3InstanceIndexPrecompute.InstanceRecord> instancesOf(long conceptX) {
+        return instanceIndex == null ? List.of() : instanceIndex.instancesOf(conceptX);
     }
 
     /** Return the underlying read-only catalog without creating another owner. */
