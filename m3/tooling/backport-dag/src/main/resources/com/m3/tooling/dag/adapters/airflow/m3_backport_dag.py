@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# M3-DAG-ROOT: 5a4c02c72d8fae2b2e7ffd507bdc71e2cb6fab6696828aaa96ee0bf19f7c5960
+# M3-DAG-ROOT: e5ab303248fa13f1e94317d7ce69bae54688d3a68e0d130ff8c192fa58208667
 """Airflow projection of the canonical M3JDK21 backport DAG."""
 
 from airflow import DAG
@@ -21,6 +21,10 @@ with DAG(
     dependency = BashOperator(task_id="dependency-closure", bash_command="echo dependency-closure")
     delta = BashOperator(task_id="file-delta", bash_command="python3 m3/backports/file_delta_inventory.py --help")
     a3 = BashOperator(task_id="a3-preparation", bash_command="echo run-M3A3BackportPreparation")
+    a3_atom = BashOperator(task_id="a3-atomization-proof", bash_command="echo verify-A3-ATOMIZATION")
+    a3_pattern = BashOperator(task_id="a3-pattern-iop-proof", bash_command="echo verify-A3-PATTERN_IOP")
+    a3_docs = BashOperator(task_id="a3-documentation-proof", bash_command="echo verify-A3-DOCUMENTATION")
+    a3_fixed = BashOperator(task_id="a3-fixed-point-proof", bash_command="echo verify-A3-FIXED_POINT")
     recipe = BashOperator(task_id="recipe-crate", bash_command="python3 m3/backports/generate_recipe_crates.py --help")
     recipe_junit = BashOperator(task_id="recipe-junit", bash_command="mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml test")
     diff = BashOperator(task_id="diff", bash_command="git diff --check")
@@ -31,5 +35,6 @@ with DAG(
     promote = BashOperator(task_id="promote", bash_command="echo serial-promotion")
 
     review_code >> review_atom >> review_problem >> review_jni
-    review_jni >> inventory >> compatibility >> dependency >> delta >> a3 >> recipe >> recipe_junit
+    review_jni >> inventory >> compatibility >> dependency >> delta >> a3
+    a3 >> a3_atom >> a3_pattern >> a3_docs >> a3_fixed >> recipe >> recipe_junit
     recipe_junit >> diff >> lint >> compile_jdk >> jtreg >> runtime >> promote
