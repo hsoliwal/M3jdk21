@@ -68,7 +68,7 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
         Path file = directory.resolve(FILE);
         if (!Files.isRegularFile(file)) throw new IOException("related sidecar missing");
         List<String> lines = Files.readAllLines(file, StandardCharsets.UTF_8);
-        if (lines.isEmpty() || !HEADER.equals(lines.getFirst()))
+        if (lines.isEmpty() || !HEADER.equals(lines.get(0)))
             throw new IOException("invalid related sidecar header");
         List<Relation> result = new ArrayList<>();
         Map<SharedLexiconCatalog.SourceIdentity, List<Relation>> byIdentity = new HashMap<>();
@@ -117,7 +117,7 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
     public Optional<Relation> find(String sourceId, String recordId) {
         ensureOpen();
         List<Relation> values = findAll(sourceId, recordId);
-        return values.size() == 1 ? Optional.of(values.getFirst()) : Optional.empty();
+        return values.size() == 1 ? Optional.of(values.get(0)) : Optional.empty();
     }
 
     public List<Relation> findAll(String sourceId, String recordId) {
@@ -184,7 +184,7 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
             throws IOException {
         if (!Files.isRegularFile(path)) throw new IOException("mapping sidecar missing");
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-        if (lines.isEmpty() || !MAPPING_HEADER.equals(lines.getFirst()))
+        if (lines.isEmpty() || !MAPPING_HEADER.equals(lines.get(0)))
             throw new IOException("invalid mapping sidecar header");
         Map<SharedLexiconCatalog.SourceIdentity, Mapping> result = new HashMap<>();
         for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
