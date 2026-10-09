@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-tornadovm-bulk-adapter</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>5.11.4</junit.version>
+    <m3.gpu>false</m3.gpu>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>com.synexia.m3</groupId>
+      <artifactId>cpu-gpu-rv32im</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>compile-m3-java-base-bulk-contract</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <target>
+                <mkdir dir="${project.build.directory}/bulk-patch-src/jdk/internal/vm/parallel"/>
+                <mkdir dir="${project.build.directory}/bulk-patch-classes"/>
+                <copy todir="${project.build.directory}/bulk-patch-src/jdk/internal/vm/parallel">
+                  <fileset dir="${project.basedir}/../../../src/java.base/share/classes/jdk/internal/vm/parallel">
+                    <include name="BulkTask.java"/>
+                    <include name="BulkExecutor.java"/>
+                    <include name="BulkExecution.java"/>
+                  </fileset>
+                </copy>
+                <javac
+                    srcdir="${project.build.directory}/bulk-patch-src"
+                    destdir="${project.build.directory}/bulk-patch-classes"
+                    source="21"
+                    target="21"
+                    includeantruntime="false"
+                    encoding="UTF-8">
+                  <compilerarg line="--patch-module java.base=${project.build.directory}/bulk-patch-src"/>
+                  <compilerarg line="-Xlint:all -Werror"/>
+                </javac>
+              </target>
+            </configuration>
+            <goals><goal>run</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <source>21</source>
+          <target>21</target>
+          <compilerArgs>
+            <arg>--patch-module</arg>
+            <arg>java.base=${project.build.directory}/bulk-patch-classes</arg>
+            <arg>--add-exports</arg>
+            <arg>java.base/jdk.internal.vm.parallel=ALL-UNNAMED</arg>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.2</version>
+        <configuration>
+          <argLine>--patch-module java.base=${project.build.directory}/bulk-patch-classes --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED</argLine>
+          <systemPropertyVariables>
+            <m3.gpu>${m3.gpu}</m3.gpu>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
