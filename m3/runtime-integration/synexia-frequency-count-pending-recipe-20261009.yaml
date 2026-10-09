@@ -7,6 +7,9 @@ inputs:
   - receipt: m3/runtime-integration/synexia-frequency-count-pending-receipt.tsv
   - source_manifest: m3/lexicon/synexia-source-manifest.tsv
   - field_map: m3/lexicon/synexia-precompute-field-map.tsv
+  - source_mapping_receipt: cognix-nlp/docs/SYNEXIA_FREQUENCY_COUNT_SOURCE_RECEIPT.tsv
+  - source_mapping: cognix-nlp/docs/SYNEXIA_TO_M3JDK_MAPPING.tsv
+  - source_mapping_recipe: synexia-m3-recipe/recipes/frequency-count-mapping-reconcile-20261009.yaml
 
 donor:
   commit: c6d128572825cc11f4bbb05d78bcbebb5b3aa67a
@@ -15,6 +18,20 @@ donor:
   content_sha256: 7fea67ab954e2c01df6c608c9826e594cf36f8823b3243554f88245fb75dc506
   sample: "you 28787591"
   license: MIT + OPUS/OpenSubtitles attribution
+
+source_mapping:
+  repository: hsoliwal/com.synexia
+  pull_request: 10047
+  branch: codex/frequency-count-mapping-reconcile-20261009
+  commit: 6d38638534c08672bf6d50343e7edb857968e57a
+  receipt_path: cognix-nlp/docs/SYNEXIA_FREQUENCY_COUNT_SOURCE_RECEIPT.tsv
+  receipt_blob: e01f44c0cde27d8fa1c33d0eccb0bf8692a3f515
+  mapping_path: cognix-nlp/docs/SYNEXIA_TO_M3JDK_MAPPING.tsv
+  mapping_blob: e80b5b934410fe3d0b7da12135c91f5e1550ac65
+  recipe_path: synexia-m3-recipe/recipes/frequency-count-mapping-reconcile-20261009.yaml
+  recipe_blob: ace136aeba2dd553015da07f246366e1e7555f46
+  status: SOURCE_MAPPING_RECONCILED
+  state: OPEN
 
 mapping:
   source_value_semantics: non-negative OpenSubtitles-derived corpus count
@@ -36,13 +53,15 @@ invariants:
   - The M3JDK target must use corpus_count after source admission.
   - MIT and OPUS/OpenSubtitles attribution remains required.
   - No frequency corpus bytes are copied into java.lang.String storage.
+  - The source mapping PR remains OPEN and is not treated as accepted.
   - Runtime: NOT_RUN
   - Hosted CI: NOT_CLAIMED
+  - Benchmark: NOT_MEASURED
   - Target promotion: BLOCKED_UNTIL_SOURCE_PR_ACCEPTED
 
 verification:
   source_discriminator_command: python m3/runtime-integration/check-synexia-frequency-count-pending-receipt.py --repo-root .
-  source_discriminator: M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=27/27
+  source_discriminator: M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=45/45
   runtime: NOT_RUN
   hosted_ci: NOT_CLAIMED
   benchmark: NOT_MEASURED

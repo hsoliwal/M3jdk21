@@ -27,6 +27,15 @@ _TARGET_FIELD_MAP_BLOB = "c4b5313c6af5aa0eafa5b5774a2e8eae9d745b4b"
 _COMMIT = "c6d128572825cc11f4bbb05d78bcbebb5b3aa67a"
 _BLOB = "05ccf20cd2e3789ddb849b14f0374aa089d90cc5"
 _SHA256 = "7fea67ab954e2c01df6c608c9826e594cf36f8823b3243554f88245fb75dc506"
+_SOURCE_MAPPING_PR = "10047"
+_SOURCE_MAPPING_BRANCH = "codex/frequency-count-mapping-reconcile-20261009"
+_SOURCE_MAPPING_HEAD = "6d38638534c08672bf6d50343e7edb857968e57a"
+_SOURCE_MAPPING_RECEIPT_PATH = "cognix-nlp/docs/SYNEXIA_FREQUENCY_COUNT_SOURCE_RECEIPT.tsv"
+_SOURCE_MAPPING_RECEIPT_BLOB = "e01f44c0cde27d8fa1c33d0eccb0bf8692a3f515"
+_SOURCE_MAPPING_PATH = "cognix-nlp/docs/SYNEXIA_TO_M3JDK_MAPPING.tsv"
+_SOURCE_MAPPING_BLOB = "e80b5b934410fe3d0b7da12135c91f5e1550ac65"
+_SOURCE_MAPPING_RECIPE_PATH = "synexia-m3-recipe/recipes/frequency-count-mapping-reconcile-20261009.yaml"
+_SOURCE_MAPPING_RECIPE_BLOB = "ace136aeba2dd553015da07f246366e1e7555f46"
 
 
 def _read(root: Path, path: Path) -> str:
@@ -86,7 +95,25 @@ def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
         SourceCheck("recipeBlocked", "BLOCKED_UNTIL_SOURCE_PR_ACCEPTED" in recipe),
         SourceCheck("recipeNoPayload", "No frequency corpus bytes are copied into java.lang.String storage." in recipe),
         SourceCheck("recipeRuntime", "Runtime: NOT_RUN" in recipe),
-        SourceCheck("recipeMarker", "M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS" in recipe),
+        SourceCheck("sourceMappingPR", receipt_rows[0].get("source_mapping_pr") == _SOURCE_MAPPING_PR),
+        SourceCheck("sourceMappingBranch", receipt_rows[0].get("source_mapping_branch") == _SOURCE_MAPPING_BRANCH),
+        SourceCheck("sourceMappingHead", receipt_rows[0].get("source_mapping_head") == _SOURCE_MAPPING_HEAD),
+        SourceCheck("sourceMappingReceiptPath", receipt_rows[0].get("source_mapping_receipt_path") == _SOURCE_MAPPING_RECEIPT_PATH),
+        SourceCheck("sourceMappingReceiptBlob", receipt_rows[0].get("source_mapping_receipt_blob") == _SOURCE_MAPPING_RECEIPT_BLOB),
+        SourceCheck("sourceMappingPath", receipt_rows[0].get("source_mapping_path") == _SOURCE_MAPPING_PATH),
+        SourceCheck("sourceMappingBlob", receipt_rows[0].get("source_mapping_blob") == _SOURCE_MAPPING_BLOB),
+        SourceCheck("sourceMappingRecipePath", receipt_rows[0].get("source_mapping_recipe_path") == _SOURCE_MAPPING_RECIPE_PATH),
+        SourceCheck("sourceMappingRecipeBlob", receipt_rows[0].get("source_mapping_recipe_blob") == _SOURCE_MAPPING_RECIPE_BLOB),
+        SourceCheck("sourceMappingStatus", receipt_rows[0].get("source_mapping_status") == "SOURCE_MAPPING_RECONCILED"),
+        SourceCheck("sourceMappingState", receipt_rows[0].get("source_mapping_state") == "OPEN"),
+        SourceCheck("recipeMappingPR", "pull_request: 10047" in recipe),
+        SourceCheck("recipeMappingSource", _SOURCE_MAPPING_HEAD in recipe and _SOURCE_MAPPING_PR in recipe),
+        SourceCheck("recipeMappingReceipts", _SOURCE_MAPPING_RECEIPT_PATH in recipe and _SOURCE_MAPPING_RECEIPT_BLOB in recipe),
+        SourceCheck("recipeMappingPaths", _SOURCE_MAPPING_PATH in recipe and _SOURCE_MAPPING_BLOB in recipe),
+        SourceCheck("recipeMappingRecipe", _SOURCE_MAPPING_RECIPE_PATH in recipe and _SOURCE_MAPPING_RECIPE_BLOB in recipe),
+        SourceCheck("recipeMappingOpen", "state: OPEN" in recipe and "remains OPEN" in recipe),
+        SourceCheck("recipeNoPromotion", "BLOCKED_UNTIL_SOURCE_PR_ACCEPTED" in recipe and "remain blocked until Synexia PR #10047 is accepted" in recipe),
+        SourceCheck("recipeMarker", "M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=45/45" in recipe),
     )
 
 
