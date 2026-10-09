@@ -17,6 +17,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
+sys.path.insert(0, str(ROOT / "m3/runtime-integration"))
+import synexia_family_sidecars as FAMILY
+
 SPEC = importlib.util.spec_from_file_location("synexia_export", ROOT / "m3/runtime-integration/export-synexia-lexicon.py")
 EXPORT = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
@@ -112,13 +115,57 @@ class SynexiaExportTest(unittest.TestCase):
             stream.writelines("\t".join(row) + "\n" for row in rows)
         return manifest, records
 
+    def write_family_bundle(self, root: Path) -> Path:
+        root.mkdir(parents=True, exist_ok=True)
+        digest = "0123456789abcdef" * 4
+        scope = {
+            "source_id": "numbers", "record_id": "0",
+            "source_manifest_revision": "manifest-r1",
+            "owner_fingerprint": "owner-f1",
+        }
+        families = {
+            "prefix-counts": [{
+                **scope, "shard_id": 0, "image_row": 0,
+                "derivation_version": "prefix-v1", "value_fingerprint": "value-0",
+                "token_id": 0, "prefix_counts": [0, 1],
+            }],
+            "spell-index": [{
+                **scope, "lexicon_fingerprint": "lex-1", "language": "und",
+                "max_edit_distance": 2, "prefix_length": 3,
+                "source_fingerprint": "spell-1", "delete_key": "0",
+                "candidate_token_ids": [0], "frequencies": {0: 1},
+            }],
+            "token-frequency": [{
+                **scope, "shard_id": 0, "image_row": 0,
+                "derivation_version": "frequency-v1", "value_fingerprint": "value-0",
+                "frequencies": {0: 1},
+            }],
+            "token-hash-precompute": [{
+                **scope, "shard_id": 0, "image_row": 0,
+                "value_fingerprint": "value-0", "tokenizer_version": "tok-v1",
+                "range_start": 0, "range_end": 1,
+                "range_fingerprint_first": 1, "range_fingerprint_second": 2,
+                "token_sha256": [digest], "range_sha256": digest,
+            }],
+            "translation-projection": [{
+                **scope, "source_language": "en", "target_language": "hi",
+                "lexicon_fingerprint": "lex-1", "source_fingerprint": "translation-1",
+                "translated_token_ids": [0], "mapped_token_count": 1,
+            }],
+        }
+        for name, content in FAMILY.render_bundle(families).items():
+            (root / name).write_bytes(content)
+        return root
+
     def run_export(self, root: Path, output: Path, conflict: bool = False,
-                   with_payload: bool = False):
+                   with_payload: bool = False, with_family: bool = False):
         manifest, records = self.write_inputs(root, conflict, with_payload,
                                               with_requirements=with_payload)
+        family_dir = self.write_family_bundle(root.parent / "family") if with_family else None
         return EXPORT.export(manifest, records, output, "https://github.com/hsoliwal/com.synexia",
                              "3e85c872adf556901a341a9eb1c3b59864918da1",
-                             ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
+                             ROOT / "m3/lexicon/synexia-precompute-field-map.tsv",
+                             family_sidecar_dir=family_dir)
 
     def test_preserves_ids_mappings_numbers_and_precompute(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -169,6 +216,74 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertEqual({"source_records": 10004, "image_records": 10004, "shards": 1,
                               "precompute_profiles": 2,
                               "utf16_units": expected_units}, VERIFY.verify(root / "first"))
+
+    def test_typed_family_sidecars_round_trip_and_reject_partial(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            first = self.run_export(root / "input", root / "output",
+                                    with_payload=True, with_family=True)
+            self.assertEqual(5, first["counts"]["family_sidecar_families"])
+            self.assertEqual(5, first["counts"]["family_sidecar_rows"])
+            manifest_path = root / "output/synexia.export.json"
+            manifest_bytes = manifest_path.read_bytes()
+            manifest = json.loads(manifest_bytes.decode("utf-8"))
+            self.assertFalse(manifest_bytes.startswith(b"\xef\xbb\xbf"))
+            self.assertNotIn(b"\r", manifest_bytes)
+            self.assertEqual(manifest_bytes, VERIFY.canonical_manifest_bytes(manifest))
+            self.assertEqual(sorted({FAMILY.INDEX_FILE, *(
+                spec["file"] for spec in FAMILY.FAMILY_SPECS.values())}),
+                             manifest["target"]["family_sidecar_files"])
+            result = VERIFY.verify(root / "output")
+            self.assertEqual(5, result["family_sidecar_families"])
+            self.assertEqual(5, result["family_sidecar_rows"])
+            family_files = {
+                name: (root / "family" / name).read_bytes()
+                for name in [FAMILY.INDEX_FILE, *(
+                    spec["file"] for spec in FAMILY.FAMILY_SPECS.values())]
+            }
+            mapping = {("numbers", "0"): ("0", (0, 0))}
+            self.assertEqual({"families": 5, "rows": 5},
+                             VERIFY.verify_family_sidecar_scope(family_files, mapping))
+            with self.assertRaisesRegex(ValueError, "coordinate mismatch"):
+                VERIFY.verify_family_sidecar_scope(
+                    family_files, {("numbers", "0"): ("0", (9, 9))})
+            with self.assertRaisesRegex(ValueError, "unknown source identity"):
+                VERIFY.verify_family_sidecar_scope(family_files, {})
+            partial = root / "partial"
+            partial.mkdir()
+            (partial / FAMILY.INDEX_FILE).write_bytes(
+                (root / "family" / FAMILY.INDEX_FILE).read_bytes())
+            broken = {
+                name: (root / "family" / name).read_bytes()
+                for name in [FAMILY.INDEX_FILE, *(
+                    spec["file"] for spec in FAMILY.FAMILY_SPECS.values())]
+            }
+            broken[FAMILY.INDEX_FILE] = b"\xef\xbb\xbf" + broken[FAMILY.INDEX_FILE]
+            with self.assertRaisesRegex(ValueError, "BOM"):
+                FAMILY.verify_optional_bundle(broken)
+            with self.assertRaisesRegex(ValueError, "coverage mismatch"):
+                EXPORT.export(
+                    root / "input/sources.tsv", root / "input/records.tsv",
+                    root / "partial-output", "fixture", "0" * 40,
+                    ROOT / "m3/lexicon/synexia-precompute-field-map.tsv",
+                    family_sidecar_dir=partial)
+
+    def test_family_mapping_catalog_matches_receiver_schema(self):
+        path = ROOT / "m3/lexicon/synexia-precompute-family-map.tsv"
+        rows = list(csv.DictReader(path.open(encoding="utf-8", newline=""), delimiter="\t"))
+        self.assertEqual(
+            {"schema_version", "family", "file", "key_columns",
+             "value_columns", "ordering", "identity_guard"},
+            set(rows[0]),
+        )
+        self.assertEqual(5, len(rows))
+        self.assertEqual([row["family"] for row in rows],
+                         sorted(FAMILY.FAMILY_SPECS))
+        self.assertTrue(all(row["schema_version"] == FAMILY.SCHEMA_VERSION for row in rows))
+        self.assertEqual(
+            {row["file"] for row in rows},
+            {spec["file"] for spec in FAMILY.FAMILY_SPECS.values()},
+        )
 
     def test_legacy_input_defaults_to_empty_owner_payload(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -223,8 +338,9 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
-        self.assertEqual("", sources["translate.rows"]["precompute_fields"])
-        self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        self.assertEqual(["translation_grammar_supported"],
+                         sources["translate.rows"]["precompute_fields"].split(","))
+        self.assertEqual(7, len(sources["dictlang.numbers.0-10000"]["precompute_fields"].split(",")))
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
@@ -252,10 +368,20 @@ class SynexiaExportTest(unittest.TestCase):
             field_types["frequencies"],
         )
         self.assertTrue(all(field_types.values()))
-        for source_id in ("dictlang.dictionary", "dictlang.frequency",
-                          "dictlang.thesaurus", "dictlang.antonyms"):
-            required = set(sources[source_id]["precompute_fields"].split(","))
+        for source_id, source in sources.items():
+            declared = source["precompute_fields"]
+            if declared == "-":
+                continue
+            required = set(declared.split(","))
             self.assertTrue(required.issubset(mapped), source_id)
+        self.assertEqual({"boolean"}, field_types["translation_grammar_supported"])
+        self.assertEqual({"String"}, field_types["canonical_decimal_spelling"])
+        self.assertEqual({"int"}, field_types["min_value"])
+        self.assertEqual({"int"}, field_types["max_value"])
+        self.assertEqual({"int"}, field_types["precomputed_value_count"])
+        self.assertEqual({"String"}, field_types["source_id"])
+        self.assertEqual({"String"}, field_types["record_id"])
+        self.assertEqual({"boolean"}, field_types["shared_utf16_storage"])
 
     def test_composite_owner_shapes_and_overloaded_field_types_are_admitted(self):
         field_map = EXPORT.read_field_map(

@@ -10,6 +10,8 @@ precompute owner visible. Its final `precompute_fields` column is the v2
 requirement map for owner payloads. It is a catalog, not a license to
 redistribute the bulk datasets named by it.
 
+`m3/lexicon/synexia-precompute-family-map.tsv` is the target-owned mapping catalog for the five typed family files; it is kept in schema/order parity with the receiver contract.
+
 The source manifest's legacy eight-column form remains accepted. The v2 form
 appends `precompute_fields`, a sorted, unique comma-separated list of required
 snake_case keys, or `-` when that source family has no inspected owner-field
@@ -83,7 +85,8 @@ python3 m3/runtime-integration/export-synexia-lexicon.py \
   --source-repository https://github.com/hsoliwal/com.synexia \
   --source-commit 3e85c872adf556901a341a9eb1c3b59864918da1 \
   --relations /operator/synexia-snapshot/related.tsv \
-  --relation-policy gutenberg-antonyms-v1
+  --relation-policy gutenberg-antonyms-v1 \
+  --family-sidecar-dir /operator/synexia-snapshot/family-sidecars
 ```
 
 The output is:
@@ -106,11 +109,21 @@ The output is:
   while duplicate directed pairs are rejected;
 - `synexia.related-sources.tsv`: the sorted admitted source-family IDs used by
   the Java reader to reject relation rows from unrelated mapping families;
+- `synexia.precompute-family-index.tsv` and the five typed family sidecars
+  (`synexia.prefix-counts.tsv`, `synexia.spell.tsv`,
+  `synexia.token-frequency.tsv`, `synexia.token-hash.tsv`,
+  `synexia.translation.tsv`) when supplied as one complete bundle; these retain
+  value-scoped prefix, spelling, frequency, token-hash and translation
+  precomputes without coercing them into String metadata;
 - `synexia.export.json`: source pins, input/output hashes, counts, policy and,
   when available, the canonical precompute field-type map and its SHA-256.
 
-`com.m3.text.SharedLexiconCatalog.open(exportDirectory)` validates the shard
-manifest and all four sidecars together. It exposes stable
+`com.m3.text.M3Lexicons.open(exportDirectory)` is the named M3JDK umbrella
+over the read-only catalog. It does not create a second interner or own the M3
+String runtime; `SharedLexiconCatalog` remains the storage, validation, and
+coordinate owner. The catalog validates the shard manifest and all four legacy
+sidecars together, plus the complete typed family bundle when it is present.
+It exposes stable
 `(shardId,imageRow)` coordinates, one-to-many source mappings and immutable
 precompute facts plus the complete profile catalog without joining image
 payloads. `textAt` is the explicit single-record materialization boundary;
@@ -120,6 +133,17 @@ coordinates through shard-local lower bounds and exact UTF-16 prefix checks.
 `findMapping(sourceId, recordId)` resolves the preserved Synexia identity without
 requiring a physical coordinate, while `findMappings(text)` returns all
 translation/dictionary/unit/number mappings attached to one exact lexeme.
+
+### Typed family-sidecar bundle
+
+The optional `--family-sidecars` directory is an operator-supplied, complete
+bundle. It must contain exactly `synexia.precompute-family-index.tsv` plus
+the five typed files named above. The receiver validates schema version,
+sorted unique identity keys, typed encodings, SHA-256 entries, and source
+identity/physical-coordinate joins against `synexia.records.tsv`. A partial
+bundle is rejected; without the option, legacy exports remain supported. The
+bundle is copied byte-for-byte into the output and is never inferred from
+lexeme text or from `java.lang.String`.
 
 When the source manifest declares `related_lexeme`, the operator must
 provide a separate `--relations` TSV. The exporter rejects missing, duplicate,
@@ -161,5 +185,5 @@ The proof covers all number IDs `0..10000`, multilingual/proper-name and unit
 mapping rows, directed antonym/thesaurus relation rows, rich owner payloads,
   the reviewed source-manifest-to-field-map
 lineage, legacy-input compatibility, deterministic replay, M3LEX001 version 2
-metadata, precompute sidecars, conflict refusal before output creation, and
-source-blind rejection of a post-export mutation.
+metadata, legacy and typed precompute sidecars, complete-bundle refusal
+before output creation, and source-blind rejection of a post-export mutation.

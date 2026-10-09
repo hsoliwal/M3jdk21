@@ -20,25 +20,32 @@ import java.util.TreeMap;
  * <p>The exporter owns the field map and source meaning. This class owns only
  * the lossless, bounded JSON value model needed by the JDK receiver. It never
  * turns an image coordinate into a source identity and it accepts no nested,
- * string, null, or non-finite values because the admitted Synexia field map is
- * limited to boolean, double, int, long, int[] and long[]. Unknown field names
- * remain readable with their JSON value kind, which keeps the receiver
+ * null, or non-finite values. Bounded scalar strings are admitted for source,
+ * record, spelling, and other identity fields; known field names still require
+ * the exact type declared by the Synexia field map. Unknown field names remain
+ * readable with their JSON value kind, which keeps the receiver
  * forward-compatible without silently changing a known field's type.</p>
  */
 public final class SynexiaPrecomputePayload {
-    public enum Kind { BOOLEAN, INTEGER, DECIMAL, INTEGER_ARRAY }
+    public enum Kind { BOOLEAN, INTEGER, DECIMAL, STRING, INTEGER_ARRAY }
 
     /** One immutable scalar or integer-array payload field. */
     public record Field(Kind kind, boolean booleanValue, long integerValue,
-                        double decimalValue, long[] integerArrayValue) {
+                        double decimalValue, String stringValue, long[] integerArrayValue) {
         public Field {
             Objects.requireNonNull(kind, "kind");
-            if (kind == Kind.INTEGER_ARRAY) {
+            if (kind == Kind.STRING) {
+                Objects.requireNonNull(stringValue, "stringValue");
+                if (integerArrayValue != null)
+                    throw new IllegalArgumentException("array value on string field");
+            } else if (kind == Kind.INTEGER_ARRAY) {
                 Objects.requireNonNull(integerArrayValue, "integerArrayValue");
                 integerArrayValue = integerArrayValue.clone();
             } else if (integerArrayValue != null) {
                 throw new IllegalArgumentException("array value on scalar field");
             }
+            if (kind != Kind.STRING && stringValue != null)
+                throw new IllegalArgumentException("string value on non-string field");
             if (kind != Kind.DECIMAL && decimalValue != 0.0d)
                 throw new IllegalArgumentException("decimal value on non-decimal field");
             if (kind != Kind.INTEGER && kind != Kind.INTEGER_ARRAY && integerValue != 0L)
@@ -56,17 +63,18 @@ public final class SynexiaPrecomputePayload {
             return kind == value.kind && booleanValue == value.booleanValue
                     && integerValue == value.integerValue
                     && Double.doubleToLongBits(decimalValue) == Double.doubleToLongBits(value.decimalValue)
+                    && Objects.equals(stringValue, value.stringValue)
                     && Arrays.equals(integerArrayValue, value.integerArrayValue);
         }
 
         @Override
         public int hashCode() {
-            int result = Objects.hash(kind, booleanValue, integerValue, decimalValue);
+            int result = Objects.hash(kind, booleanValue, integerValue, decimalValue, stringValue);
             return 31 * result + Arrays.hashCode(integerArrayValue);
         }
     }
 
-    private enum Expected { BOOLEAN, DOUBLE, INT, LONG, INT_ARRAY, LONG_ARRAY }
+    private enum Expected { BOOLEAN, DOUBLE, STRING, INT, LONG, INT_ARRAY, LONG_ARRAY }
 
     private static final Map<String, Expected> FIELD_TYPES = fieldTypes();
     private final Map<String, Field> fields;
@@ -104,6 +112,7 @@ public final class SynexiaPrecomputePayload {
         return field.kind() == Kind.INTEGER ? field.integerValue() : field.decimalValue();
     }
     public boolean requireBoolean(String name) { return require(name, Kind.BOOLEAN).booleanValue(); }
+    public String requireString(String name) { return require(name, Kind.STRING).stringValue(); }
 
     public int[] requireIntArray(String name) {
         long[] values = require(name, Kind.INTEGER_ARRAY).integerArrayValue();
@@ -146,6 +155,7 @@ public final class SynexiaPrecomputePayload {
             case BOOLEAN -> out.append(field.booleanValue());
             case INTEGER -> out.append(field.integerValue());
             case DECIMAL -> out.append(Double.toString(field.decimalValue()));
+            case STRING -> appendString(out, field.stringValue());
             case INTEGER_ARRAY -> {
                 out.append('[');
                 long[] values = field.integerArrayValue();
@@ -185,7 +195,8 @@ public final class SynexiaPrecomputePayload {
                 "pos_mask", "morphology_mask", "lexical_rank", "utf16_length", "code_point_length",
                 "first_code_point", "last_code_point", "script_ordinal", "frequency_rank",
                 "langdex_flags", "langdex_subject_id", "langdex_feature_bits", "langdex_evidence_mask",
-                "langdex_confidence_permille", "si_decimal_exponent")) result.put(name, Expected.INT);
+                "langdex_confidence_permille", "si_decimal_exponent", "min_value", "max_value",
+                "precomputed_value_count")) result.put(name, Expected.INT);
         for (String name : List.of("lexicon_fingerprint", "total_corpus_tokens", "total_documents",
                 "corpus_count", "stem_id", "lemma_id", "phonetic_id", "presence64", "sim_hash64",
                 "langdex_concept_id", "langdex_frequency", "langdex_lexical_class_mask",
@@ -193,6 +204,10 @@ public final class SynexiaPrecomputePayload {
             result.put(name, Expected.LONG);
         result.put("si_offset", Expected.DOUBLE);
         result.put("si_prefixable", Expected.BOOLEAN);
+        result.put("translation_grammar_supported", Expected.BOOLEAN);
+        result.put("shared_utf16_storage", Expected.BOOLEAN);
+        for (String name : List.of("canonical_decimal_spelling", "source_id", "record_id"))
+            result.put(name, Expected.STRING);
         for (String name : List.of("memberships")) result.put(name, Expected.INT_ARRAY);
         for (String name : List.of("concept_ids", "subjects", "expansion_word_ids")) result.put(name, Expected.LONG_ARRAY);
         return Map.copyOf(result);
@@ -230,15 +245,20 @@ public final class SynexiaPrecomputePayload {
             char current = peek();
             Field field;
             if (current == 't' || current == 'f') field = booleanValue();
+            else if (current == '"') field = stringValue();
             else if (current == '[') field = array(name);
             else field = number(name);
             validate(name, field);
             return field;
         }
 
+        private Field stringValue() {
+            return new Field(Kind.STRING, false, 0L, 0.0d, string(), null);
+        }
+
         private Field booleanValue() {
-            if (input.startsWith("true", at)) { at += 4; return new Field(Kind.BOOLEAN, true, 0L, 0.0d, null); }
-            if (input.startsWith("false", at)) { at += 5; return new Field(Kind.BOOLEAN, false, 0L, 0.0d, null); }
+            if (input.startsWith("true", at)) { at += 4; return new Field(Kind.BOOLEAN, true, 0L, 0.0d, null, null); }
+            if (input.startsWith("false", at)) { at += 5; return new Field(Kind.BOOLEAN, false, 0L, 0.0d, null, null); }
             throw error("invalid boolean");
         }
 
@@ -258,10 +278,10 @@ public final class SynexiaPrecomputePayload {
                 try {
                     double value = Double.parseDouble(token);
                     if (!Double.isFinite(value)) throw error("non-finite number");
-                    return new Field(Kind.DECIMAL, false, 0L, value, null);
+                    return new Field(Kind.DECIMAL, false, 0L, value, null, null);
                 } catch (NumberFormatException failure) { throw error("invalid number"); }
             }
-            try { return new Field(Kind.INTEGER, false, Long.parseLong(token), 0.0d, null); }
+            try { return new Field(Kind.INTEGER, false, Long.parseLong(token), 0.0d, null, null); }
             catch (NumberFormatException failure) { throw error("integer outside long range"); }
         }
 
@@ -280,7 +300,7 @@ public final class SynexiaPrecomputePayload {
             }
             long[] result = new long[values.size()];
             for (int index = 0; index < result.length; index++) result[index] = values.get(index);
-            return new Field(Kind.INTEGER_ARRAY, false, 0L, 0.0d, result);
+            return new Field(Kind.INTEGER_ARRAY, false, 0L, 0.0d, null, result);
         }
 
         private void validate(String name, Field field) {
@@ -288,6 +308,7 @@ public final class SynexiaPrecomputePayload {
             if (expected == null) return;
             boolean valid = switch (expected) {
                 case BOOLEAN -> field.kind() == Kind.BOOLEAN;
+                case STRING -> field.kind() == Kind.STRING;
                 case DOUBLE -> field.kind() == Kind.INTEGER || field.kind() == Kind.DECIMAL;
                 case INT -> field.kind() == Kind.INTEGER && field.integerValue() >= Integer.MIN_VALUE
                         && field.integerValue() <= Integer.MAX_VALUE;
