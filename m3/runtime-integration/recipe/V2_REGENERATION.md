@@ -89,3 +89,7 @@ Regenerated against e0305ecf9c: no upstream target changed, so `runtime.patch` a
 ## 2026-10-09 re-seal (A20 regex subject view)
 
 Regenerated against 53fc3b164b: `java/lang/M3StringMatchText.java` joins the scope (68 targets, `before` null, recorded as its own `superseded` owner); the upstream `System.java`, `Matcher.java` and `JavaLangAccess.java` after-images and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical). `apply.py --check` state=superseded; `test_recipe.py` 6/6 (target count 68).
+
+## 2026-10-09 re-seal (A21 M3 needles read once for flat receivers)
+
+Regenerated against 3ec8389d58: the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); the M3-owned `M3String.java` and `M3StringSearchPrecompute.java` keep their v2 after-images and record the new owner as reviewed `superseded` hashes. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
