@@ -28,20 +28,20 @@ IndexWordSignal	frequencyRank	int	frequency_rank	synexia.records.tsv:precompute_
 IndexWordSignal	EMPTY/ASCII/LATIN1/...	int	flags	synexia.records.tsv:precompute_payload	MAPPED	profile flags are preserved only when supplied; bounded M3StringFacts remain independently verified
 IndexWordFacts	sourceRevision	String	source_revision	synexia.records.tsv:precompute_payload	MAPPED	source revision pins the immutable dictionary snapshot used to derive this projection
 IndexWordSignal	sourceRevision	String	source_revision	synexia.records.tsv:precompute_payload	MAPPED	source revision pins the immutable frequency snapshot used to derive this projection
-LangDexProjection.Entry	conceptId	long	langdex_concept_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated nonzero LangDex concept coordinate remains donor-owned and is not renumbered
-LangDexProjection.Entry	frequency	long	langdex_frequency	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated nonnegative LangDex frequency remains source metadata
-LangDexProjection.Entry	flags	int	langdex_flags	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated unsigned-16-bit LangDex entry flags remain opaque
-LangDexWordProfile	lexicalClassMask	long	langdex_lexical_class_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	primitive lexical class mask is retained without reclassification
-LangDexWordProfile	semanticClassMask	long	langdex_semantic_class_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	primitive semantic class mask is retained without reclassification
-LangDexWordProfile	subjectId	int	langdex_subject_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated LangDex subject coordinate remains donor-owned
-LangDexWordProfile	featureBits	int	langdex_feature_bits	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	morphology/feature bits remain donor-owned and opaque
-LangDexWordProfile	evidenceMask	int	langdex_evidence_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	evidence bits remain donor-owned and opaque
-LangDexWordProfile	confidencePermille	int	langdex_confidence_permille	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	confidence remains bounded donor metadata in the inclusive 0..1000 range
-LangDexLexicalProfile	lexicalClassMask	long	langdex_lexical_class_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level lexical class mask shares the LangDex canonical type
-LangDexLexicalProfile	featureBits	int	langdex_feature_bits	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level feature bits share the LangDex canonical type
-LangDexLexicalProfile	evidenceMask	int	langdex_evidence_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level evidence bits share the LangDex canonical type
-LangDexLexicalProfile	confidencePermille	int	langdex_confidence_permille	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level confidence shares the LangDex canonical type and bound
-LangDexTranslation	targetLexemeId	long	langdex_target_lexeme_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	target lexeme coordinate remains donor-owned and is not substituted with image_row
+M3LangDexPrecompute.Entry	conceptId	long	langdex_concept_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated nonzero LangDex concept coordinate remains donor-owned and is not renumbered
+M3LangDexPrecompute.Entry	frequency	long	langdex_frequency	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated nonnegative LangDex frequency remains source metadata
+M3LangDexPrecompute.Entry	flags	int	langdex_flags	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated unsigned-16-bit LangDex entry flags remain opaque
+M3LangDexPrecompute.WordProfile	lexicalClassMask	long	langdex_lexical_class_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	primitive lexical class mask is retained without reclassification
+M3LangDexPrecompute.WordProfile	semanticClassMask	long	langdex_semantic_class_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	primitive semantic class mask is retained without reclassification
+M3LangDexPrecompute.WordProfile	subjectId	int	langdex_subject_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated LangDex subject coordinate remains donor-owned
+M3LangDexPrecompute.WordProfile	featureBits	int	langdex_feature_bits	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	morphology/feature bits remain donor-owned and opaque
+M3LangDexPrecompute.WordProfile	evidenceMask	int	langdex_evidence_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	evidence bits remain donor-owned and opaque
+M3LangDexPrecompute.WordProfile	confidencePermille	int	langdex_confidence_permille	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	confidence remains bounded donor metadata in the inclusive 0..1000 range
+M3LangDexPrecompute.LexicalProfile	lexicalClassMask	long	langdex_lexical_class_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level lexical class mask shares the LangDex canonical type
+M3LangDexPrecompute.LexicalProfile	featureBits	int	langdex_feature_bits	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level feature bits share the LangDex canonical type
+M3LangDexPrecompute.LexicalProfile	evidenceMask	int	langdex_evidence_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level evidence bits share the LangDex canonical type
+M3LangDexPrecompute.LexicalProfile	confidencePermille	int	langdex_confidence_permille	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level confidence shares the LangDex canonical type and bound
+M3LangDexPrecompute.Translation	targetLexemeId	long	langdex_target_lexeme_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	target lexeme coordinate remains donor-owned and is not substituted with image_row
 SiUnit	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_payload	MAPPED	SI decimal exponent remains bounded donor metadata in the inclusive -100..100 range
 SiDimension	packed	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains donor-owned
 SiUnit	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
