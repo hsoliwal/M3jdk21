@@ -55,7 +55,7 @@ FIELD_MAP_COLUMNS = (
     "donor_type", "donor_field", "donor_java_type", "canonical_payload_field",
     "m3jdk_storage", "status", "preservation_rule",
 )
-ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]"))
+ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]", "String"))
 
 
 @dataclass(frozen=True)
@@ -158,6 +158,11 @@ def read_field_map(path: pathlib.Path) -> dict[str, str]:
     for row in rows:
         if row["status"] != "MAPPED":
             continue
+        # The donor map also records family sidecars and relation metadata.
+        # Only fields physically carried in the JSON owner payload participate
+        # in payload shape validation; sidecar fields have their own contracts.
+        if row["m3jdk_storage"] != "synexia.records.tsv:precompute_payload":
+            continue
         field = row["canonical_payload_field"]
         donor_type = row["donor_java_type"]
         if donor_type not in ALLOWED_DONOR_TYPES:
@@ -171,6 +176,8 @@ def read_field_map(path: pathlib.Path) -> dict[str, str]:
 
 
 def _fits_donor_type(value: object, donor_type: str) -> bool:
+    if donor_type == "String":
+        return isinstance(value, str)
     if donor_type == "boolean":
         return isinstance(value, bool)
     if donor_type == "double":
