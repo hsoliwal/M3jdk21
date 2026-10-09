@@ -298,8 +298,10 @@ def canonical_precompute_payload(value: str) -> str:
     return canonical
 
 
-def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
-                 field_types: dict[str, str] | None = None) -> tuple[list[Record], bytes]:
+def load_records(
+        path: pathlib.Path, sources: dict[str, dict[str, str]],
+        field_types: dict[str, str | tuple[str, ...]] | None = None,
+) -> tuple[list[Record], bytes]:
     raw = path.read_bytes()
     with path.open("r", encoding="utf-8", errors="surrogatepass", newline="") as stream:
         columns = tuple(csv.DictReader(stream, delimiter="\t").fieldnames or ())
