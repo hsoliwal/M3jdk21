@@ -3551,9 +3551,10 @@ public final class String
             M3String storage = m3();
             M3String replacementM3 = replStr.m3();
             if (storage != null || replacementM3 != null) {
-                if (storage == null) storage = M3String.canonicalize(this);
+                M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
                 if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);
-                return new String(storage.replaceEmptyTarget(replacementM3));
+                M3String replaced = sourceM3.replaceEmptyTarget(replacementM3);
+                return replaced == sourceM3 ? this : new String(replaced);
             }
 
             StringBuilder sb = new StringBuilder(resultLen);
