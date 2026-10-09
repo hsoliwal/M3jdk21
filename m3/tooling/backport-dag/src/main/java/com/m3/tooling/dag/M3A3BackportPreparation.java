@@ -211,12 +211,7 @@ public final class M3A3BackportPreparation {
         rows.sort(Comparator.comparing(Row::path));
         Receipt receipt = new Receipt(rows, checkedMastery.root());
         write(out, receipt);
-        CURRENT_MASTERY_ROOT.set(receipt.masteryRoot());
-        try {
-            writePhaseProofs(out, receipt.phaseProofs());
-        } finally {
-            CURRENT_MASTERY_ROOT.remove();
-        }
+        writePhaseProofs(out, receipt.phaseProofs(), receipt.masteryRoot());
         return receipt;
     }
 
@@ -243,7 +238,9 @@ public final class M3A3BackportPreparation {
 
     private static void writePhaseProofs(
             Path out,
-            List<PhaseProof> proofs) throws IOException {
+            List<PhaseProof> proofs,
+            String masteryRoot) throws IOException {
+        String checkedMasteryRoot = sha(masteryRoot, "masteryRoot");
         StringBuilder tsv =
                 new StringBuilder("phase\tjavaFiles\tapplicable\troot\tmasteryRoot\n");
         for (PhaseProof proof : proofs) {
@@ -255,7 +252,7 @@ public final class M3A3BackportPreparation {
                     .append('\t')
                     .append(proof.root())
                     .append('\t')
-                    .append(proofs.isEmpty() ? "" : phaseMasteryRoot(proofs))
+                    .append(checkedMasteryRoot)
                     .append('\n');
         }
         Files.writeString(
@@ -263,14 +260,6 @@ public final class M3A3BackportPreparation {
                 tsv,
                 StandardCharsets.UTF_8);
     }
-
-    private static String phaseMasteryRoot(List<PhaseProof> proofs) {
-        // All phase proofs are generated from one Receipt. The root is framed into each proof
-        // digest and exposed by the caller's receipt; this helper exists only for TSV layout.
-        return CURRENT_MASTERY_ROOT.get();
-    }
-
-    private static final ThreadLocal<String> CURRENT_MASTERY_ROOT = new ThreadLocal<>();
 
     private static String phaseRoot(
             ProofPhase phase,
