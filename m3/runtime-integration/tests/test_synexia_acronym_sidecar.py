@@ -49,13 +49,39 @@ class AcronymSidecarTest(unittest.TestCase):
     def test_empty_sidecar_fails_closed(self):
         with self.assertRaises(ValueError):
             SIDECAR.render([])
-        content = ("\\t".join(SIDECAR.COLUMNS) + "\\n").encode("utf-8")
+        content = ("\t".join(SIDECAR.COLUMNS) + "\n").encode("utf-8")
         index = SIDECAR._tsv(
             SIDECAR.INDEX_COLUMNS,
             [(SIDECAR.SCHEMA_VERSION, SIDECAR.DATA_FILE, "0", hashlib.sha256(content).hexdigest())],
         )
         with self.assertRaises(ValueError):
             SIDECAR.verify({SIDECAR.DATA_FILE: content, SIDECAR.INDEX_FILE: index})
+
+    def test_python_verifier_matches_java_order_scope_contract(self):
+        mixed = self.row("HTTP")
+        mixed["source_manifest_revision"] = "other-revision"
+        with self.assertRaises(ValueError):
+            SIDECAR.render([self.row("API"), mixed])
+
+        files = SIDECAR.render([self.row("API"), self.row("HTTP")])
+        lines = files[SIDECAR.DATA_FILE].decode("utf-8").splitlines()
+        reordered = ("\n".join([lines[0], lines[2], lines[1], ""])).encode("utf-8")
+        files[SIDECAR.DATA_FILE] = reordered
+        files[SIDECAR.INDEX_FILE] = SIDECAR._tsv(
+            SIDECAR.INDEX_COLUMNS,
+            [(SIDECAR.SCHEMA_VERSION, SIDECAR.DATA_FILE, "2", hashlib.sha256(reordered).hexdigest())],
+        )
+        with self.assertRaises(ValueError):
+            SIDECAR.verify(files)
+
+        duplicated = ("\n".join([lines[0], lines[1], lines[1], ""])).encode("utf-8")
+        files[SIDECAR.DATA_FILE] = duplicated
+        files[SIDECAR.INDEX_FILE] = SIDECAR._tsv(
+            SIDECAR.INDEX_COLUMNS,
+            [(SIDECAR.SCHEMA_VERSION, SIDECAR.DATA_FILE, "2", hashlib.sha256(duplicated).hexdigest())],
+        )
+        with self.assertRaises(ValueError):
+            SIDECAR.verify(files)
 
     def test_order_duplicate_and_checksum_fail_closed(self):
         with self.assertRaises(ValueError):
