@@ -1,5 +1,5 @@
 # SYNEXIA_M3_HANDOFF_V2
-@crate	synexia-guard-v2-adapter-v1
+@crate	synexia-guard-v2-manifest-drift-v1
 @source-revision	0123456789abcdef0123456789abcdef01234567
 @license-policy	SYNEXIA_FIRST_PARTY_APACHE2_V1
 @artifact-policy	SYNEXIA_PUBLIC_TARGET_ARTIFACT_CLASS_V1
