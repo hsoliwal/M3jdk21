@@ -165,6 +165,11 @@ def read_field_map(path: pathlib.Path) -> dict[str, str]:
     for row in rows:
         if row["status"] != "MAPPED":
             continue
+        # The donor map also records family sidecars and relation metadata.
+        # Only fields physically carried in the JSON owner payload participate
+        # in payload shape validation; sidecar fields have their own contracts.
+        if row["m3jdk_storage"] != "synexia.records.tsv:precompute_payload":
+            continue
         field = row["canonical_payload_field"]
         donor_type = row["donor_java_type"]
         if donor_type not in ALLOWED_DONOR_TYPES:

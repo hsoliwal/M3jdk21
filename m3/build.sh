@@ -14,7 +14,8 @@ if ! "$M3_JDK/bin/javac" --release 21 --module-path build/com.m3.text.jar --add-
   core/test/M3DictionaryFrequencyContractTest.java core/test/M3LangDexPrecomputeTest.java core/test/M3PhrasePrecomputeTest.java core/test/M3TranslationReceiverMapTest.java \
   core/test/AcronymSidecarCatalogTest.java core/test/M3AcronymPrecomputeTest.java \
   core/test/SynexiaPrecomputePayloadTest.java core/test/SynexiaPrecomputeReceiverTest.java \
-  core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SynexiaSiUnitDecoderTest.java \
+  core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SharedRelatedLexemeCatalogTest.java \
+  core/test/SynexiaSiUnitDecoderTest.java \
   core/test/M3NumberSpaceTest.java core/test/M3NumberSpaceContractTest.java \
   core/test/M3LanguageGrammarSupportTest.java > build/logs/test-compile.log 2>&1; then
   cat build/logs/test-compile.log >&2
@@ -36,6 +37,7 @@ for mode in jit int nocompact c2; do
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputePayloadTest | tee "build/logs/synexia-payload-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputeReceiverTest | tee "build/logs/synexia-receiver-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconFamilySidecarCatalogTest | tee "build/logs/synexia-family-sidecar-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedRelatedLexemeCatalogTest | tee "build/logs/synexia-related-lexeme-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaSiUnitDecoderTest | tee "build/logs/synexia-si-unit-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceTest | tee "build/logs/number-space-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceContractTest | tee "build/logs/number-contract-$mode.log"
