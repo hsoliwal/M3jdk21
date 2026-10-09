@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import io
+from pathlib import Path
 import re
 import sys
 
@@ -95,6 +96,33 @@ def validate(text: str) -> int:
     return len(rows)
 
 
+def validate_companions(source_manifest: str, field_map: str) -> None:
+    manifest_rows = list(csv.DictReader(io.StringIO(source_manifest), delimiter="\t"))
+    acronym_rows = [row for row in manifest_rows if row.get("source_id") == "dictlang.acronyms"]
+    if len(acronym_rows) != 1:
+        fail("acronym-manifest-cardinality")
+    acronym_fields = acronym_rows[0].get("precompute_fields", "")
+    if acronym_fields != "acronym,domain,expansion":
+        fail(f"acronym-precompute-fields={acronym_fields}")
+    field_rows = list(csv.DictReader(io.StringIO(field_map), delimiter="\t"))
+    expected = {
+        ("AcronymPrecompute", "acronym", "acronym"),
+        ("AcronymPrecompute", "domain", "domain"),
+        ("AcronymPrecompute", "expansion", "expansion"),
+    }
+    actual = {
+        (row.get("donor_type", ""), row.get("donor_field", ""), row.get("canonical_payload_field", ""))
+        for row in field_rows
+    }
+    if not expected.issubset(actual):
+        fail("acronym-field-map-incomplete")
+
+
 if __name__ == "__main__":
     count = validate(sys.stdin.read())
-    print(f"M3LEXICONS_RECEIVER_MATRIX_PASS rows={count}")
+    root = Path(__file__).resolve().parent
+    validate_companions(
+        (root / "synexia-source-manifest.tsv").read_text(encoding="utf-8"),
+        (root / "synexia-precompute-field-map.tsv").read_text(encoding="utf-8"),
+    )
+    print(f"M3LEXICONS_RECEIVER_MATRIX_PASS rows={count} acronym_fields=3")
