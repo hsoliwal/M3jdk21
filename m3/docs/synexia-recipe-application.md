@@ -373,3 +373,51 @@ These recipes retain their exact historical before/after SHA-256 source seals. T
 runtime has evolved beyond those isolated postimages, so application status is
 `HISTORICAL_SERIAL_STEP_ALREADY_ABSORBED`; do not apply either postimage over a newer receiver
 that does not match its exact preimage.
+
+## Current aggregate recipe authority — Synexia PR #10007
+
+This section supersedes the earlier current-receiver pointers above while preserving them as
+append-only provenance.
+
+Canonical aggregate:
+
+- repository: `hsoliwal/com.synexia`
+- PR: https://github.com/hsoliwal/com.synexia/pull/10007
+- branch: `m3/m3jdk21-string-current-convergence-20261009`
+- pinned Synexia revision: `1b20e36736cd47b23a4ec5dea2a6cbe4a23b8a57`
+- aggregate recipe: `com.synexia.rewrite.M3Jdk21StringCurrentConvergence`
+- aggregate descriptor blob: `d5315dee9660754b36635f1cdb6de81c45ae8108`
+
+The aggregate composes the canonical String-history packet and the existing current-history,
+code-point, concat/reference-DAG, representation-consumer, builder-range, UTF-16 differential,
+phase-gate and recipe-custody recipes.
+
+### Verified fixed point
+
+M3JDK21 receiver state verified before this receipt-only update:
+
+`c175027436ee431ca23ffaae5e40d01152121d28`
+
+Current canonical String-history packet under that aggregate:
+
+- Java/runtime/test targets: **21/21 exact**;
+- text/native/HotSpot/workflow targets: **10/10 exact**;
+- total: **31/31 exact SHA-256 postimages**.
+
+The six receiver-ahead postimages found during reconciliation were promoted back to Synexia first:
+`Pattern.java`, `M3StringPrecomputeSearchTest.java`, `M3RegexLiteralTQTest.java`, the donor
+lineage, the precompute port map, and the fail-closed String invariant. Their original recipe
+preimage hashes were preserved.
+
+Manifest identities:
+
+```text
+synexia_java_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-string-history-convergence/manifest.tsv
+synexia_java_manifest_sha256	5fcbfdea15e02d55f295b12bbd59b86fdf5e45b663434c681c5183392a788487
+synexia_text_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-history-convergence/manifest.tsv
+synexia_text_manifest_sha256	b8c9fc24edbba73c9f295074b460ebe4a939a0762db6bedd619394880cfb5bb2
+```
+
+M3JDK21 remains the runtime owner. Synexia remains the reusable recipe/donor/provenance owner.
+No Synexia runtime dependency exists.
+
