@@ -12,7 +12,7 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
   core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SharedLexiconFamilyContractTest.java core/test/SynexiaSiUnitDecoderTest.java \
   core/test/M3NumberSpaceTest.java core/test/M3NumberPrecomputeTest.java core/test/M3SiUnitPrecomputeCatalogTest.java \
   core/test/M3TypedPrecomputeReceiverTest.java core/test/M3LanguageGrammarSupportTest.java \
-  core/test/M3FrequencyCountContractTest.java \
+  core/test/M3FrequencyCountContractTest.java core/test/M3AcronymPrecomputeTest.java \
   core/test/SharedLexiconCatalogFamilyAdmissionTest.java
 for mode in jit int nocompact c2; do
  flags=();case "$mode" in int)flags=(-Xint);; nocompact)flags=(-XX:-CompactStrings);; c2)flags=(-Xbatch -XX:-TieredCompilation);; esac
@@ -29,6 +29,7 @@ for mode in jit int nocompact c2; do
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3TypedPrecomputeReceiverTest | tee "build/logs/synexia-typed-receiver-matrix-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LanguageGrammarSupportTest | tee "build/logs/synexia-grammar-support-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3FrequencyCountContractTest | tee "build/logs/synexia-frequency-count-contract-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3AcronymPrecomputeTest | tee "build/logs/synexia-acronym-precompute-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconCatalogFamilyAdmissionTest | tee "build/logs/synexia-catalog-family-admission-$mode.log"
 done
 # Build in a private temporary directory, then publish a complete content-addressed file.
