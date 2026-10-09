@@ -71,7 +71,7 @@ class SynexiaFamilyExporterTest(unittest.TestCase):
             for name, data in FAMILY.render_bundle(rows).items():
                 (sidecars / name).write_bytes(data)
             files, stats = EXPORT.load_family_sidecars(sidecars)
-            self.assertEqual(5, len(files) - 0)
+            self.assertEqual(6, len(files))
             self.assertEqual({"families": 5, "rows": 5}, stats)
             (sidecars / FAMILY.INDEX_FILE).unlink()
             with self.assertRaisesRegex(ValueError, "coverage mismatch"):
