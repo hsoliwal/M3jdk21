@@ -1,0 +1,93 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FACTS_SCAN_LATIN1_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-facts-scan-latin1-20261009",
+    "pullRequest": null,
+    "commit": "73c224bd7ee",
+    "stackedOn": [
+      {
+        "pullRequest": 9975,
+        "crate": "m3-encode-bulk-units"
+      },
+      {
+        "pullRequest": 9931,
+        "crate": "m3-facts-scan-fused",
+        "note": "the A8 scan is the lane's exactness oracle"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.FactsScanLatin1",
+    "crate": "m3-facts-scan-latin1",
+    "fossReuseDecisionRow": "string.facts.scan-latin1-lane",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/jdk/internal/util/ArraysSupport.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringFacts",
+        "mechanics": "vectorizedHashCode(T_BOOLEAN) for the three polynomial hashes over raw and case-folded bytes"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringCoding.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringFacts",
+        "mechanics": "countPositives for the ascii fact and the UTF-8 length (1 byte per positive, 2 per negative)"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        "commit": "01054f2600",
+        "target": "java.lang.M3StringFacts",
+        "mechanics": "the A8 scan retained as scanUnits; its signal, n-gram and whitespace rules reused unchanged"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: every fact bit-identical; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-utf8-facts-20261009 (#536, A13) on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringFacts"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed against 02ff2f5224 under the supersession model: no upstream target changed; M3StringFacts owner recorded as superseded; 67 targets, runtime.patch unchanged"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+      "before": "f1cc0ec9d4fd0bbc15d9c684e80b9907b60321cb15ad4fd7fa39f3cf973fc4cd",
+      "after": "0958aadf5ea5536af742a17b97ab0c97af4bb5989fca0f77863a3b286688437e",
+      "resource": "00-M3StringFacts.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringFactsLatin1LaneTest.java",
+      "before": "ABSENT",
+      "after": "3840400b50e1dd46bfb641b23c9b4a55832b908cef8848fc65dc746dd8205d0a",
+      "resource": "01-M3StringFactsLatin1LaneTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (43 files, 152 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3StringFactsLatin1LaneTest flag-off: 85,085 checks (every M3StringFacts field identical between scanLatin1 and scanUnits over random Latin-1 atoms, nested tuples and slices: letters of both cases, 0x80..0xFF, whitespace-heavy and all-whitespace, lengths 1..4100 across the bulk and window boundaries; facts() routing for both coders; fact-reading consumers against flat Strings)",
+    "regressions": "PASS_WINDOWS M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,119; A8 329,909; A9 46,920; A6 204 + 29",
+    "timing": "flag-off (a15/probe/FactsBench, bench-baseline.tsv vs bench-after.tsv): Latin-1 facts 1.9x..2.0x faster from 256 units (5.1 ns/unit vs 9.5; 2048: 10.4 us vs 17.0; 16384: 81 us vs 159), 1.2x at 32 units; UTF-16 unchanged",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 67 targets under the supersession model (no upstream change); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3FactsScanLatin1RecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3StringFactsLatin1LaneTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the lane applies only to owners whose coder is LATIN1 (every unit below 0x100 by admission), so no surrogate or code-point logic is needed; the empty owner routes to the unit scan",
+    "the title hash is derived from the lower hash in int arithmetic exactly as the chained fold computes it",
+    "the n-gram signal mixing stays per unit: it defines the fact values; about 5 ns per unit remain",
+    "the two byte arrays are transient scratch of the owner's size; facts are computed once per owner or range and cached",
+    "stacked on A13: merge after #536 and the Synexia crate PR, or regenerate the runtime re-seal"
+  ]
+}
