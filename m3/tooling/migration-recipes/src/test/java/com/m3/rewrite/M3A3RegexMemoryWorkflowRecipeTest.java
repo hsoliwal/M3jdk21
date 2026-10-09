@@ -97,7 +97,7 @@ final class M3A3RegexMemoryWorkflowRecipeTest {
                             output.put(
                                     after.getSourcePath()
                                             .toString()
-                                            .replace('\', '/'),
+                                            .replace('\\', '/'),
                                     after.printAll());
                         });
         return output;
