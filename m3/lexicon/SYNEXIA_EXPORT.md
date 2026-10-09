@@ -4,6 +4,14 @@ Synexia is the canonical converged donor for language, translation, SI-unit,
 acronym, proper-name, frequency, n-gram and number mappings. M3JDK consumes an
 explicit export; it does not rename, reallocate or infer a replacement lexicon.
 
+The contract-only language-pack declaration is
+`m3/lexicon/synexia-language-pack-contract.tsv`. It binds the Synexia
+LanguagePack/LanguagePackSource/LanguageNgramModel surfaces to
+`com.m3.text.M3LanguageNgramPrecompute` while keeping the n-gram maps
+operator-supplied and out of this repository's bundled export. It is separate
+from the five typed family sidecars: no corpus bytes, frequency files, or
+translation data are admitted by this declaration.
+
 `m3/lexicon/synexia-source-manifest.tsv` is the reviewed source-family map. It
 keeps the Synexia path, source identity field, mapping fields, and target
 precompute owner visible. Its final `precompute_fields` column is the v2
