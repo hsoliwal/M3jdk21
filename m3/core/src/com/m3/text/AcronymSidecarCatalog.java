@@ -81,6 +81,9 @@ public final class AcronymSidecarCatalog {
         Path index = regular(root.resolve(INDEX_FILE), INDEX_FILE);
         String indexText = Files.readString(index, StandardCharsets.UTF_8);
         String[] indexLines = lines(indexText, INDEX_HEADER, INDEX_FILE);
+        if (indexLines.length != 2) {
+            throw new IllegalArgumentException("acronym sidecar index row count");
+        }
         String[] indexRow = fields(indexLines[1], 4, INDEX_FILE);
         if (!SCHEMA_VERSION.equals(indexRow[0]) || !DATA_FILE.equals(indexRow[1])) {
             throw new IllegalArgumentException("acronym sidecar index schema");
