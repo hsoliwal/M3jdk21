@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.String trim/strip/stripLeading/stripTrailing/indexOfNonWhitespace/lastIndexOfNonWhitespace/toLowerCase/toUpperCase and M3String.asciiCase with an M3 receiver: storage.facts() computed for one field (A4 lineage, carried to A23 6f58e1d5dc)",
+      "source_commit": "6f58e1d5dc",
+      "target": "M3String lanes stripStart/stripEnd/trimStart/trimEnd/contentIsAscii: prepared facts answer at once, otherwise bulk windows with early exit (a 32-unit first window then 1024; strip = Character.isWhitespace, trim = units at or below space; surrogates are never whitespace, so the unit scan stops where the stock code-point scan stops; contentIsAscii = StringCoding.countPositives over Latin-1 bytes); asciiCase scans bulk-read units; the empty receiver keeps its identity in trim and strip as stock",
+      "status": "implemented-locally-verified (G7; flag-off: M3FactsLaneTest 8,932 checks against flat offsets and the facts' fields; identity trim/strip/stripLeading/isBlank on fresh ranges 36x..317x faster, ASCII toLowerCase identity 11x..22x)",
+      "target_rule": "each lane returns the value the facts field holds and the stock flat scan returns"
+    },
+    {
+      "source": "java.lang.String.codePointCount with an M3 receiver: M3StringCodePointPrecompute.prepare builds the geometry through charAt per unit for every fresh range, then falls back to the range facts' codePointCount (carried to 6f58e1d5dc)",
+      "source_commit": "6f58e1d5dc",
+      "target": "a narrow owner answers endIndex - beginIndex at once; only a cached geometry (M3StringCodePointPrecompute.prepared) is consulted; otherwise M3String.codePointCountValue counts surrogate pairs in bulk windows; prepare builds its geometry from bulk-read units when a random-access consumer asks",
+      "status": "implemented-locally-verified (codePointCount on fresh Latin-1 ranges 19x..66x faster, O(1); UTF-16 1.4x..8.5x; the geometry build 3x..4x cheaper)",
+      "target_rule": "the count equals Character.codePointCount over the same range"
+    }
+  ]
+}
