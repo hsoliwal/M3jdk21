@@ -23,12 +23,36 @@ public final class M3LexiconPrecompute {
 
     /** Immutable SI-unit metadata decoded from the canonical Synexia payload. */
     public record SiUnitPrecompute(int decimalExponent, long dimensionPacked,
-                                   double offset, boolean prefixable) {
+                                   double offset, boolean prefixable,
+                                   String sourceRevision, String sourceBlobSha) {
+        private static final String UNPINNED = "UNPINNED";
+
+        public SiUnitPrecompute(int decimalExponent, long dimensionPacked,
+                                double offset, boolean prefixable) {
+            this(decimalExponent, dimensionPacked, offset, prefixable, UNPINNED, UNPINNED);
+        }
+
         public SiUnitPrecompute {
             if (decimalExponent < -100 || decimalExponent > 100)
                 throw new IllegalArgumentException("SI decimal exponent outside -100..100");
             if (!Double.isFinite(offset))
                 throw new IllegalArgumentException("SI offset is not finite");
+            sourceRevision = provenance(sourceRevision, "sourceRevision");
+            sourceBlobSha = provenance(sourceBlobSha, "sourceBlobSha");
+            if (UNPINNED.equals(sourceRevision) != UNPINNED.equals(sourceBlobSha))
+                throw new IllegalArgumentException("SI provenance must be pinned as a pair");
+        }
+
+        public boolean sourceBound() {
+            return !UNPINNED.equals(sourceRevision) && !UNPINNED.equals(sourceBlobSha);
+        }
+
+        private static String provenance(String value, String name) {
+            text(value, name);
+            if (UNPINNED.equals(value)) return value;
+            if (!value.matches("[0-9a-f]{40}"))
+                throw new IllegalArgumentException(name + " must be lowercase 40-hex provenance");
+            return value;
         }
     }
 
