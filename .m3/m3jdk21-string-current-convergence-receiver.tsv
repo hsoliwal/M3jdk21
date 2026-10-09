@@ -1,0 +1,2 @@
+schema	family	canonical_repository	canonical_branch	canonical_recipe	canonical_recipe_blob	donor_pr	target_role	runtime_dependency
+M3JDK21_SYNEXIA_RECIPE_RECEIVER_V1	m3jdk21-string-current-convergence	hsoliwal/com.synexia	m3/m3jdk21-string-current-convergence-20261009	com.synexia.rewrite.M3Jdk21StringCurrentConvergence	d5315dee9660754b36635f1cdb6de81c45ae8108	10007	THIN_RUNTIME_RECEIVER	NONE
