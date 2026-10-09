@@ -2,7 +2,7 @@ recipe: synexia-proper-noun-donor-pending-20261009
 version: 1
 source_repo: hsoliwal/com.synexia
 source_pr: 10054
-source_head: b1cbc312d6644b6c886f84b3baac2ed0fbc3aa72
+source_head: 44f40d2ba27ea902c23bd3b7d190db304600d80c
 receipt: m3/runtime-integration/synexia-proper-noun-donor-pending-receipt.tsv
 mode: target-contract-open-no-payload
 laws:
