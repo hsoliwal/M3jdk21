@@ -6,6 +6,7 @@ purpose: Carry the Synexia n-gram donor mapping into M3JDK without fabricating a
 inputs:
   - source_receipt: m3/runtime-integration/synexia-ngram-reference-pending-receipt.tsv
   - synexia_receipt: cognix-nlp/docs/SYNEXIA_NGRAM_REFERENCE_RECEIPT_20261009.tsv
+  - mapping: cognix-nlp/docs/SYNEXIA_TO_M3JDK_MAPPING.tsv
   - synexia_recipe: synexia-m3-recipe/recipes/m3-ngram-reference-boundary-20261009.yaml
   - target_manifest: m3/lexicon/synexia-source-manifest.tsv
   - target_field_map: m3/lexicon/synexia-precompute-field-map.tsv
