@@ -4,6 +4,9 @@
 package com.m3.text;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -79,7 +82,7 @@ public final class AcronymSidecarCatalog {
         }
         Path data = regular(root.resolve(DATA_FILE), DATA_FILE);
         Path index = regular(root.resolve(INDEX_FILE), INDEX_FILE);
-        String indexText = Files.readString(index, StandardCharsets.UTF_8);
+        String indexText = utf8(Files.readAllBytes(index), INDEX_FILE);
         String[] indexLines = lines(indexText, INDEX_HEADER, INDEX_FILE);
         if (indexLines.length != 2) {
             throw new IllegalArgumentException("acronym sidecar index row count");
@@ -90,11 +93,12 @@ public final class AcronymSidecarCatalog {
         }
         int expectedRows = nonNegative(indexRow[2], "rows");
         digest(indexRow[3], "sha256");
-        if (!indexRow[3].equals(sha256(Files.readAllBytes(data)))) {
+        byte[] dataBytes = Files.readAllBytes(data);
+        if (!indexRow[3].equals(sha256(dataBytes))) {
             throw new IllegalArgumentException("acronym sidecar checksum");
         }
 
-        String dataText = Files.readString(data, StandardCharsets.UTF_8);
+        String dataText = utf8(dataBytes, DATA_FILE);
         String[] dataLines = lines(dataText, DATA_HEADER, DATA_FILE);
         if (dataLines.length - 1 != expectedRows) {
             throw new IllegalArgumentException("acronym sidecar row count");
@@ -159,6 +163,18 @@ public final class AcronymSidecarCatalog {
             throw new IllegalArgumentException("missing or non-regular " + name);
         }
         return path;
+    }
+
+    private static String utf8(byte[] bytes, String name) {
+        try {
+            return StandardCharsets.UTF_8.newDecoder()
+                    .onMalformedInput(CodingErrorAction.REPORT)
+                    .onUnmappableCharacter(CodingErrorAction.REPORT)
+                    .decode(ByteBuffer.wrap(bytes))
+                    .toString();
+        } catch (CharacterCodingException failure) {
+            throw new IllegalArgumentException(name + " UTF-8", failure);
+        }
     }
 
     private static String[] lines(String text, String header, String name) {
