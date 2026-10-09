@@ -224,17 +224,34 @@ class SynexiaExportTest(unittest.TestCase):
                                     with_payload=True, with_family=True)
             self.assertEqual(5, first["counts"]["family_sidecar_families"])
             self.assertEqual(5, first["counts"]["family_sidecar_rows"])
-            manifest = json.loads((root / "output/synexia.export.json").read_text(encoding="utf-8"))
+            manifest_path = root / "output/synexia.export.json"
+            manifest_bytes = manifest_path.read_bytes()
+            manifest = json.loads(manifest_bytes.decode("utf-8"))
+            self.assertFalse(manifest_bytes.startswith(b"\xef\xbb\xbf"))
+            self.assertNotIn(b"\r", manifest_bytes)
+            self.assertEqual(manifest_bytes, VERIFY.canonical_manifest_bytes(manifest))
             self.assertEqual(sorted({FAMILY.INDEX_FILE, *(
                 spec["file"] for spec in FAMILY.FAMILY_SPECS.values())}),
                              manifest["target"]["family_sidecar_files"])
             result = VERIFY.verify(root / "output")
             self.assertEqual(5, result["family_sidecar_families"])
             self.assertEqual(5, result["family_sidecar_rows"])
+            family_files = {
+                name: (root / "family" / name).read_bytes()
+                for name in (set(FAMILY.FAMILY_SPECS.values().__iter__()) if False else [])
+            }
             partial = root / "partial"
             partial.mkdir()
             (partial / FAMILY.INDEX_FILE).write_bytes(
                 (root / "family" / FAMILY.INDEX_FILE).read_bytes())
+            broken = {
+                name: (root / "family" / name).read_bytes()
+                for name in [FAMILY.INDEX_FILE, *(
+                    spec["file"] for spec in FAMILY.FAMILY_SPECS.values())]
+            }
+            broken[FAMILY.INDEX_FILE] = b"\xef\xbb\xbf" + broken[FAMILY.INDEX_FILE]
+            with self.assertRaisesRegex(ValueError, "BOM"):
+                FAMILY.verify_optional_bundle(broken)
             with self.assertRaisesRegex(ValueError, "coverage mismatch"):
                 EXPORT.export(
                     root / "input/sources.tsv", root / "input/records.tsv",
