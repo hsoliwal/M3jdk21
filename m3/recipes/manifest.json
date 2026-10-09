@@ -18,7 +18,7 @@
     "m3/NOTICE": "162b80bb88273e07e715cf66d7d80174548515a9ee4c1a1af4d446383d6a551a",
     "m3/README.md": "34e2ed82430e199e10309be435622ba02f0ba629e6a4bdf9bc8fc92510aa3b37",
     "m3/build-openjdk.sh": "f46a09e0039dd2fcf6b1cbf4a16d31d6d77a42cde926c4c5273b04b4b3eac236",
-    "m3/build.sh": "9a59939aac3cc78d8efc77c26041184563b233aefa1e5bfcd6c710363f316dd3",
+    "m3/build.sh": "19d1432214dd8772b8b0a975145a5aa65992d72330824fe50b2f295cbd7fb121",
     "m3/compatibility/SynexiaContractTest.java": "6c96a7b72da88a7fb43a05dbb9ab99a6ca8861468731d885a3f7177b1b1b6589",
     "m3/compatibility/check-synexia.py": "049b2315457668cc754dcbf505d4f0019d43c3a5a5146ad1ccfc336b5b59c92f",
     "m3/core/src/com/m3/text/JoinedM3StringPiece.java": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
