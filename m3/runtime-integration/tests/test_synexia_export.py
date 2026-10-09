@@ -236,6 +236,19 @@ class SynexiaExportTest(unittest.TestCase):
             result = VERIFY.verify(root / "output")
             self.assertEqual(5, result["family_sidecar_families"])
             self.assertEqual(5, result["family_sidecar_rows"])
+            family_files = {
+                name: (root / "family" / name).read_bytes()
+                for name in [FAMILY.INDEX_FILE, *(
+                    spec["file"] for spec in FAMILY.FAMILY_SPECS.values())]
+            }
+            mapping = {("numbers", "0"): ("0", (0, 0))}
+            self.assertEqual({"families": 5, "rows": 5},
+                             VERIFY.verify_family_sidecar_scope(family_files, mapping))
+            with self.assertRaisesRegex(ValueError, "coordinate mismatch"):
+                VERIFY.verify_family_sidecar_scope(
+                    family_files, {("numbers", "0"): ("0", (9, 9))})
+            with self.assertRaisesRegex(ValueError, "unknown source identity"):
+                VERIFY.verify_family_sidecar_scope(family_files, {})
             partial = root / "partial"
             partial.mkdir()
             (partial / FAMILY.INDEX_FILE).write_bytes(
