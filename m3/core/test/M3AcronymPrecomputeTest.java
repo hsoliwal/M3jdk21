@@ -29,8 +29,8 @@ public final class M3AcronymPrecomputeTest {
         check(columns.length == 9, "acronym manifest shape");
         check("M3LexiconPrecompute.AcronymPrecompute".equals(columns[5]),
                 "acronym manifest owner");
-        check("expansion".equals(columns[8]),
-                "acronym manifest precompute field");
+        check("acronym,expansion,domain".equals(columns[8]),
+                "acronym manifest precompute fields");
 
         SharedLexiconPrecomputeCatalog.AcronymIdentity identity =
                 new SharedLexiconPrecomputeCatalog.AcronymIdentity(
