@@ -17,18 +17,18 @@ def main() -> int:
         "chakki-works/Japanese-Company-Lexicon",
     ]
     assert all(row["admission"] == "REFERENCE_ONLY" for row in rows)
-    assert all(row["target_status"] == "NO_TYPED_RECEIVER" for row in rows)
+    assert all(row["target_status"] == "TARGET_CONTRACT_OPEN_NO_PAYLOAD" for row in rows)
     assert all(row["source_pr"] == "10054" for row in rows)
-    assert all(row["source_head"] == "051fecfcd7b2ad1bdfb1666b2faa0e0a52820168" for row in rows)
+    assert all(row["source_head"] == "20bc672b6b7492c3f4bf09eec7364473b2a24594" for row in rows)
     recipe = RECIPE.read_text(encoding="utf-8")
     for marker in (
-        "pending-reference-only",
+        "target-contract-open-no-payload",
         "donor-data-and-code-must-not-be-copied",
         "domain-donor-must-not-become-general-token-identity",
-        "NO_TYPED_RECEIVER",
+        "TARGET_CONTRACT_OPEN_NO_PAYLOAD",
     ):
         assert marker in recipe
-    print("M3_PROPER_NOUN_DONOR_PENDING_SOURCE_PASS checks=24/24")
+    print("M3_PROPER_NOUN_DONOR_TARGET_CONTRACT_PASS checks=28/28")
     return 0
 
 if __name__ == "__main__":
