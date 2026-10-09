@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.AtomGetChars
+displayName: M3JDK21 Latin-1 atom units widened in bulk for getChars
+description: >-
+  M3StringAtom.getChars unpacked Latin-1 storage into chars one Unsafe byte at a time:
+  String.getChars over a 16384-unit Latin-1 atom took 2.4 us against 0.34 us flat (7x; a tuple
+  2.8 us), the cost behind StringReader.read(char[]), Writer.write(String) and every consumer that
+  reads an M3 String's units in bulk (the A20 regex view, the A24 lanes, M3String.units()). From
+  64 units the bytes come out in bulk through a 4 KiB window and the stock StringLatin1.inflate
+  intrinsic widens them into the destination (the A22 pattern of getBytes); shorter copies keep
+  the per-unit loop; UTF-16 storage already copied in bulk. Java step: M3StringAtom and the jtreg
+  proof. Stacks on crate m3-facts-lanes; the M3StringAtom preimage is the m3-builder-append-m3
+  (A22) postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-atom-getchars

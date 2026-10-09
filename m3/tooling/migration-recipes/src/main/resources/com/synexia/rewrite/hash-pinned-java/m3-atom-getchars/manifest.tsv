@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3StringAtom.java	7f5a04f4e60429b28f389493a36fd708c3f8da3da8f8559a887ccf871da24431	755aadd90dce399163eaaba5c3b2d4616555e794e24207dc390a37f414b57027	00-M3StringAtom.java.txt
+test/jdk/java/lang/String/M3AtomGetCharsTest.java	ABSENT	cb34f0fda68f1b928cbd5b826d02d8a11a55d68b020cfa63272ecf638c90e5bf	01-M3AtomGetCharsTest.java.txt

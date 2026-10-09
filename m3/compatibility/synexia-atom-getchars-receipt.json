@@ -1,0 +1,81 @@
+{
+  "schema": "M3JDK21_SYNEXIA_ATOM_GETCHARS_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-atom-getchars-20261009",
+    "pullRequest": null,
+    "commit": "de31feb59f484a76741b7ec37abf950279605a17",
+    "stackedOn": [
+      {
+        "pullRequest": 10023,
+        "crate": "m3-facts-lanes"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.AtomGetChars",
+    "crate": "m3-atom-getchars",
+    "fossReuseDecisionRow": "string.atom.getchars-inflate",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/StringLatin1.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringAtom.getChars",
+        "mechanics": "the inflate(byte[], int, char[], int, int) intrinsic widening each 4 KiB window into the char destination"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringAtom.java",
+        "commit": "5d467e7e78",
+        "target": "java.lang.M3StringAtom.getChars",
+        "mechanics": "the A22 window + inflate pattern of getBytes (BULK threshold, WINDOW size, Unsafe.copyMemory into the window)"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: the same units land in the same destination slots as the flat String's getChars; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-facts-lanes-20261009 (#579, A24) on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringAtom"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3StringAtom.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringAtom.java",
+      "before": "7f5a04f4e60429b28f389493a36fd708c3f8da3da8f8559a887ccf871da24431",
+      "after": "755aadd90dce399163eaaba5c3b2d4616555e794e24207dc390a37f414b57027",
+      "resource": "00-M3StringAtom.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3AtomGetCharsTest.java",
+      "before": "ABSENT",
+      "after": "cb34f0fda68f1b928cbd5b826d02d8a11a55d68b020cfa63272ecf638c90e5bf",
+      "resource": "01-M3AtomGetCharsTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 151 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3AtomGetCharsTest flag-off: 1,572 checks (String.getChars over every range shape: whole, random sub-ranges, starts and ends at the 64-unit bulk and 4096/8192-unit window edges, single units, destination offsets with untouched neighbours; atoms, nested tuples and slices of padded owners, both coders, Latin-1 bytes above 0x7f, 0..20000 units; StringReader.read(char[]); all against the flat String)",
+    "regressions": "PASS_WINDOWS M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3NeedleArgTest 73,440; M3RegexSubjectViewTest 9,567; M3TQFactsBuildTest 23,595; M3RegexLiteralGateTest 29,376; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,919; A6 204 + 29",
+    "timing": "flag-off (a26/probe/GetCharsBench, bench-getchars-a24.tsv on the A24 build vs bench-getchars-a26.tsv; String.getChars over the whole text): Latin-1 atom 2048 units 354 ns -> 180 (flat 64), 16384: 2,420 -> 765 (flat 341), 65536: 10,222 -> 2,967 (flat 2,879); tuples 343 -> 149, 2,824 -> 1,034, 12,466 -> 3,360; 256 units 57 -> 31; 64 units and UTF-16 unchanged within noise; CharBufferBench StringReader.read(char[]) over 16384 Latin-1 units: atom 4,305 -> 1,260, tuple 6,515 -> 1,118",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3StringAtom.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3AtomGetCharsRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3AtomGetCharsTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the bulk lane starts at 64 units (BULK, the A22 threshold of getBytes): below it the per-unit loop is cheaper than a window allocation",
+    "the window is 4 KiB (WINDOW): one bounded allocation per call, the inflate intrinsic runs per window; 65536-unit copies land within 3 percent of flat",
+    "UTF-16 storage is untouched (it already copied in bulk); tuples and slices reach the lane through their owners' getChars descent",
+    "stacked on A24: merge after #579 and the Synexia crate PR (#10023 first, content-bearing merges)"
+  ]
+}
