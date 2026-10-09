@@ -5,19 +5,23 @@
 import hashlib,os,pathlib,subprocess,urllib.request
 root=pathlib.Path(__file__).resolve().parents[1]
 jdk=pathlib.Path(os.environ['M3_JDK'])
-commit='c6cb340d33323348fab94e8157842455e9b72bc2'
+commit='64a2ea61c73b548413fed6686a9daeeb0b9b0564'
 prefix='synexia-indexstring/src/main/java/com/synexia/indexstring/'
-pins={'FrozenChars.java':'0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657',
-      'FrozenBytes.java':'cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4'}
+pins={'FrozenChars.java':'75264c85b4da2cd7d9193d8e245364efb53aa936',
+      'FrozenBytes.java':'0e249745d0e96a1d9a8754a075f33cdf42e8fc0b'}
+def git_blob_sha(data):
+    header=('blob '+str(len(data))+'\\0').encode()
+    return hashlib.sha1(header+data).hexdigest()
+
 paths=[]
 for name,expected in pins.items():
     path=root/'build/reference-src'/commit/'com/synexia/indexstring'/name
     path.parent.mkdir(parents=True,exist_ok=True)
     if not path.exists():
         data=urllib.request.urlopen('https://raw.githubusercontent.com/hsoliwal/com.synexia/'+commit+'/'+prefix+name,timeout=30).read()
-        if hashlib.sha256(data).hexdigest()!=expected:raise ValueError('Reference source pin mismatch: '+name)
+        if git_blob_sha(data)!=expected:raise ValueError('Reference source blob pin mismatch: '+name)
         path.write_bytes(data)
-    if hashlib.sha256(path.read_bytes()).hexdigest()!=expected:raise ValueError('Reference source pin mismatch: '+name)
+    if git_blob_sha(path.read_bytes())!=expected:raise ValueError('Reference source blob pin mismatch: '+name)
     if not path.read_text().startswith('// SPDX-License-Identifier: Apache-2.0'):raise ValueError('Reference license marker changed')
     paths.append(str(path))
 classes=root/'build/reference-test-classes'/commit;classes.mkdir(parents=True,exist_ok=True)
