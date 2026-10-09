@@ -44,6 +44,13 @@ public final class M3PhrasePrecomputeTest {
         check(Arrays.equals(catalog.rewrite(new int[]{1, 2, 3}), new int[]{8}));
         check(catalog.scope().equals(scope));
 
+        M3PhrasePrecompute.Catalog emptyReplacement = M3PhrasePrecompute.builder(scope)
+                .put(new M3PhrasePrecompute.Phrase(new int[]{6, 7}, new int[0]))
+                .build();
+        check(Arrays.equals(emptyReplacement.rewrite(new int[]{6, 7, 4}), new int[]{7}));
+        check(emptyReplacement.longestMatchAt(new int[]{6, 7}, 0).orElseThrow()
+                .replacementTokenIds().length == 0);
+
         expect(IllegalArgumentException.class, () ->
                 new M3PhrasePrecompute.Phrase(new int[0], new int[0]));
         expect(IllegalArgumentException.class, () ->
