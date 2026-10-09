@@ -12,7 +12,7 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
   core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SynexiaSiUnitDecoderTest.java \
   core/test/M3NumberSpaceTest.java core/test/M3NumberSpaceContractTest.java \
   core/test/M3LanguageGrammarSupportTest.java core/test/M3LanguageNgramPrecomputeTest.java \
-  core/test/M3InstanceIndexPrecomputeTest.java
+  core/test/M3InstanceIndexPrecomputeTest.java \
   core/test/M3AcronymPrecomputeTest.java
 for mode in jit int nocompact c2; do
  flags=();case "$mode" in int)flags=(-Xint);; nocompact)flags=(-XX:-CompactStrings);; c2)flags=(-Xbatch -XX:-TieredCompilation);; esac
