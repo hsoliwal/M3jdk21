@@ -20,7 +20,7 @@ def fetch_source(name):
     token=os.environ.get('SYNEXIA_READ_TOKEN','').strip()
     if token:
         endpoint=('https://api.github.com/repos/'+SOURCE_REPOSITORY+'/contents/'+prefix+name
-                  '?ref='+commit)
+                  +'?ref='+commit)
         request=urllib.request.Request(endpoint,headers={
             'Accept':'application/vnd.github+json',
             'Authorization':'Bearer '+token,
