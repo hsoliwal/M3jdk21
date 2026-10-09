@@ -79,11 +79,13 @@ public final class SharedLexiconPrecomputeCatalog {
 
 
     /** Exact source record and lexeme identity for dictionary-derived metadata. */
-    public record WordIdentity(String sourceId, String recordId, String lexeme) {
+    public record WordIdentity(String sourceId, String recordId, String lexeme,
+                               String sourceRevision) {
         public WordIdentity {
             sourceId = text(sourceId, "sourceId");
             recordId = text(recordId, "recordId");
             lexeme = text(lexeme, "lexeme");
+            sourceRevision = text(sourceRevision, "sourceRevision");
         }
     }
 
@@ -169,12 +171,20 @@ public final class SharedLexiconPrecomputeCatalog {
             if (!DICTIONARY_WORD_FACTS_SOURCE.equals(identity.sourceId())) {
                 throw new IllegalArgumentException("word facts source family");
             }
+            Objects.requireNonNull(value, "word facts value");
+            if (!identity.sourceRevision().equals(value.sourceRevision())) {
+                throw new IllegalArgumentException("word facts source revision");
+            }
             put(wordFacts, identity, value, "word facts"); return this;
         }
         public Builder wordSignal(WordIdentity identity, M3LexiconPrecompute.IndexWordSignal value) {
             Objects.requireNonNull(identity, "word signal key");
             if (!FREQUENCY_WORD_SIGNAL_SOURCE.equals(identity.sourceId())) {
                 throw new IllegalArgumentException("word signal source family");
+            }
+            Objects.requireNonNull(value, "word signal value");
+            if (!identity.sourceRevision().equals(value.sourceRevision())) {
+                throw new IllegalArgumentException("word signal source revision");
             }
             put(wordSignals, identity, value, "word signal"); return this;
         }
