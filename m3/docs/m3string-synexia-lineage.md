@@ -254,3 +254,12 @@ range-fact rescans:
 - `String.offsetByCodePoints` uses boundary rank/select with correct mid-surrogate start behavior;
 - out-of-budget/OOME cases fall back to the existing exact JDK path;
 - no code-point arrays or continuation masks are fields of `M3String` or `M3StringFacts`.
+
+
+### Regex capture-entry seam rule
+
+Compiled necessary-literal extraction may continue an exact BMP Slice run across a
+`GroupHead` because that node consumes no input and does not make its successor optional.
+It deliberately stops at `GroupTail`: HotSpot's regex graph also reuses GroupTail during
+group-reference execution, so static transparency is not assumed there. This allows safe
+candidate facts for shapes such as `ab(cd)` while retaining the exact regex engine as authority.
