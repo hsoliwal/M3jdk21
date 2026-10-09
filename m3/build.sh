@@ -24,6 +24,7 @@ for mode in jit int nocompact c2; do
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceTest | tee "build/logs/synexia-number-space-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberPrecomputeTest | tee "build/logs/synexia-number-precompute-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3SiUnitPrecomputeCatalogTest | tee "build/logs/synexia-si-unit-catalog-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3TypedPrecomputeReceiverTest | tee "build/logs/synexia-typed-receiver-matrix-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconCatalogFamilyAdmissionTest | tee "build/logs/synexia-catalog-family-admission-$mode.log"
 done
 # Build in a private temporary directory, then publish a complete content-addressed file.
@@ -42,4 +43,4 @@ trap - EXIT
 printf '%s\n' "$image" > build/english-image-path.txt
 sha256sum build/com.m3.text.jar "$image" | tee build/logs/artifacts.sha256
 
-\n  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3TypedPrecomputeReceiverTest | tee "build/logs/synexia-typed-receiver-matrix-$mode.log"
+\n 
