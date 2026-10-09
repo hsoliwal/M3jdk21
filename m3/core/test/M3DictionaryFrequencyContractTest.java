@@ -48,6 +48,23 @@ public final class M3DictionaryFrequencyContractTest {
         return value;
     }
 
+    private static Map<String, String> parseSourceRevisions(String text) {
+        String[] lines = text.split("\\n", -1);
+        if (lines.length < 2 || !"source_id\\tsource_revision".equals(lines[0])
+                || !lines[lines.length - 1].isEmpty()) {
+            throw new IllegalArgumentException("source revision header/termination");
+        }
+        Map<String, String> revisions = new LinkedHashMap<>();
+        for (int line = 1; line < lines.length - 1; line++) {
+            String[] fields = lines[line].split("\\t", -1);
+            if (fields.length != 2 || fields[0].isEmpty() || fields[1].isEmpty()
+                    || revisions.putIfAbsent(fields[0], fields[1]) != null) {
+                throw new IllegalArgumentException("source revision row shape or duplicate");
+            }
+        }
+        return revisions;
+    }
+
     private static Map<String, Set<String>> parseFieldMap(String fieldMap) {
         String[] lines = fieldMap.split("\\n", -1);
         String header = "donor_type\tdonor_field\tdonor_java_type"
@@ -81,6 +98,15 @@ public final class M3DictionaryFrequencyContractTest {
     public static void main(String[] args) throws Exception {
         String manifest = Files.readString(
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
+        Map<String, String> sourceRevisions = parseSourceRevisions(Files.readString(
+                Path.of("lexicon/synexia-word-source-revisions.tsv"), StandardCharsets.UTF_8));
+        check(sourceRevisions.size() == 2
+                && SOURCE_REVISION.equals(sourceRevisions.get("dictlang.dictionary"))
+                && SOURCE_REVISION.equals(sourceRevisions.get("dictlang.frequency")));
+        expect(IllegalArgumentException.class, () -> parseSourceRevisions(
+                "source_id\\tsource_revision\\n"
+                        + "dictlang.dictionary\\t" + SOURCE_REVISION + "\\n"
+                        + "dictlang.dictionary\\t" + SOURCE_REVISION + "\\n"));
         Map<String, String[]> manifestRows = parseManifest(manifest);
         String[] dictionary = row(manifestRows, "dictlang.dictionary");
         String[] frequency = row(manifestRows, "dictlang.frequency");
