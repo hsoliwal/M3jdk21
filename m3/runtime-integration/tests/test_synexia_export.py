@@ -219,12 +219,12 @@ class SynexiaExportTest(unittest.TestCase):
     def test_reviewed_source_manifest_has_explicit_owner_field_coverage(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
         self.assertEqual(10, len(sources))
-        self.assertEqual(12, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
-        self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
+        self.assertEqual(13, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
+        self.assertEqual(16, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
-        self.assertEqual("", sources["translate.rows"]["precompute_fields"])
-        self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        self.assertEqual("translation_grammar_supported", sources["translate.rows"]["precompute_fields"])
+        self.assertEqual(8, len(sources["dictlang.numbers.0-10000"]["precompute_fields"].split(",")))
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
@@ -232,7 +232,7 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8", newline="") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
         mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
-        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]"}
+        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]", "String"}
         field_types: dict[str, str] = {}
         for row in rows:
             self.assertIn(row["donor_java_type"], allowed_types)
@@ -244,8 +244,20 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("double", field_types["si_offset"])
         self.assertEqual("boolean", field_types["si_prefixable"])
         self.assertTrue(all(field_types.values()))
+        self.assertEqual("String", field_types["source_revision"])
+        self.assertEqual("String", field_types["lexeme"])
+        self.assertEqual("int", field_types["min_value"])
+        self.assertEqual("boolean", field_types["shared_utf16_storage"])
+        rich_map = ROOT / "m3/lexicon/synexia-nonprimitive-precompute-field-map.tsv"
+        with rich_map.open(encoding="utf-8", newline="") as stream:
+            rich_rows = list(csv.DictReader(stream, delimiter="\\t"))
+        self.assertTrue(any(row["donor_java_type"] == "Map<String,int[]>" for row in rich_rows))
+        self.assertTrue(any(row["donor_java_type"] == "byte[]" for row in rich_rows))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
-                          "dictlang.thesaurus", "dictlang.antonyms"):
+                          "dictlang.thesaurus", "dictlang.antonyms",
+                          "dictlang.huggingface", "unicodex.langdex.lexemes",
+                          "translate.rows", "dictlang.si-units",
+                          "dictlang.numbers.0-10000"):
             required = set(sources[source_id]["precompute_fields"].split(","))
             self.assertTrue(required.issubset(mapped), source_id)
 
