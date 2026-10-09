@@ -21,6 +21,8 @@ import re
 import struct
 from dataclasses import dataclass
 
+import synexia_family_sidecars as family_sidecars
+
 MAGIC = 0x4D334C4558303031  # M3LEX001
 VERSION = 2
 EXPORT_SCHEMA = "synexia-m3jdk-lexicon-export-2"
@@ -467,12 +469,36 @@ def write_tsv(path: pathlib.Path, columns: tuple[str, ...], rows: list[dict[str,
     return path.read_bytes()
 
 
+def load_family_sidecars(path: pathlib.Path | None) -> tuple[dict[str, bytes], dict[str, int] | None]:
+    """Read and validate one complete typed family-sidecar bundle."""
+
+    if path is None:
+        return {}, None
+    if not path.is_dir():
+        raise ValueError("family sidecar path is not a directory")
+    expected = {family_sidecars.INDEX_FILE} | {
+        spec["file"] for spec in family_sidecars.FAMILY_SPECS.values()
+    }
+    actual = {entry.name for entry in path.iterdir() if entry.is_file()}
+    if actual != expected:
+        missing = sorted(expected - actual)
+        extra = sorted(actual - expected)
+        raise ValueError(f"family sidecar coverage mismatch: missing={missing} extra={extra}")
+    files = {name: (path / name).read_bytes() for name in sorted(expected)}
+    stats = family_sidecars.verify_optional_bundle(files)
+    return files, {
+        "families": int(stats["families"]),
+        "rows": int(stats["rows"]),
+    }
+
+
 def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pathlib.Path,
            source_repo: str, source_commit: str,
            field_map: pathlib.Path | None = None,
            relations_path: pathlib.Path | None = None,
            relation_policy: str = "normalized-directed-v1",
-           identity_field_map: pathlib.Path | None = None) -> dict[str, object]:
+           identity_field_map: pathlib.Path | None = None,
+           family_sidecar_dir: pathlib.Path | None = None) -> dict[str, object]:
     if not (source_repo == "fixture"
             or re.fullmatch(r"https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", source_repo)):
         raise ValueError("source repository must be a GitHub URL or fixture")
@@ -488,6 +514,7 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
     identity_map_bytes = identity_map_path.read_bytes() if identity_fields else None
     records, records_bytes = load_records(records_path, sources, field_types)
     relations, relations_bytes = load_relations(relations_path, sources, records)
+    family_sidecar_files, family_sidecar_stats = load_family_sidecars(family_sidecar_dir)
     related_source_ids = relation_source_ids(sources)
     if related_source_ids and not relation_policy.strip():
         raise ValueError("relation policy is required for related-lexeme input")
@@ -589,6 +616,8 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
         value, " + ".join(sorted(profiles[value])), physical_row[value][1])}
                  for value in by_lexeme]
     fact_bytes = write_tsv(output / "synexia.precompute.tsv", fact_columns, fact_rows)
+    for filename, content in sorted(family_sidecar_files.items()):
+        (output / filename).write_bytes(content)
 
     manifest = {
         "schema": EXPORT_SCHEMA,
@@ -619,22 +648,35 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                    "relation_sidecar":
                        "synexia.related.tsv" if related_source_ids else None,
                    "relation_sources_sidecar":
-                       "synexia.related-sources.tsv" if related_source_ids else None},
+                       "synexia.related-sources.tsv" if related_source_ids else None,
+                   "family_sidecar_index":
+                       family_sidecars.INDEX_FILE if family_sidecar_files else None,
+                   "family_sidecar_files":
+                       sorted(family_sidecar_files)},
         "counts": {"source_records": len(records), "image_records": len(by_lexeme),
                    "source_families": len(sources), "shards": len(shards),
                    "precompute_profiles": len(profile_rows),
-                   "relation_records": len(relations)},
+                   "relation_records": len(relations),
+                   "family_sidecar_families":
+                       family_sidecar_stats["families"] if family_sidecar_stats else 0,
+                   "family_sidecar_rows":
+                       family_sidecar_stats["rows"] if family_sidecar_stats else 0},
         "outputs": {**input_outputs, **image_outputs, "synexia.shards.tsv": sha256_bytes(shard_bytes),
                     "synexia.records.tsv": sha256_bytes(mapping_bytes),
                     "synexia.precompute-index.tsv": sha256_bytes(profile_bytes),
                     "synexia.precompute.tsv": sha256_bytes(fact_bytes),
                     **({"synexia.related.tsv": sha256_bytes(related_bytes),
                         "synexia.related-sources.tsv": sha256_bytes(related_sources_bytes)}
-                       if related_bytes is not None else {})},
+                       if related_bytes is not None else {}),
+                    **{filename: sha256_bytes(content)
+                       for filename, content in sorted(family_sidecar_files.items())}},
         "identity_rule": "source_id + record_id is opaque and never renumbered; image_row is only a physical M3LEX projection",
         "data_policy": "operator-supplied snapshot only; no network download or implicit license grant",
     }
-    (output / "synexia.export.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    manifest_bytes = (
+        json.dumps(manifest, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n"
+    ).encode("utf-8")
+    (output / "synexia.export.json").write_bytes(manifest_bytes)
     return manifest
 
 
@@ -648,10 +690,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--field-map", type=pathlib.Path)
     parser.add_argument("--relations", type=pathlib.Path)
     parser.add_argument("--relation-policy", default="normalized-directed-v1")
+    parser.add_argument("--family-sidecar-dir", "--family-sidecars",
+                        dest="family_sidecar_dir", type=pathlib.Path,
+                        help="complete typed Synexia family-sidecar directory")
     args = parser.parse_args(argv)
     result = export(args.source_manifest, args.records, args.output,
                     args.source_repository, args.source_commit, args.field_map, args.relations,
-                    args.relation_policy)
+                    args.relation_policy, family_sidecar_dir=args.family_sidecar_dir)
     print("SYNEXIA_M3JDK_LEXICON_EXPORT_PASS " + json.dumps(result["counts"], sort_keys=True))
     return 0
 
