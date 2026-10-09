@@ -56,6 +56,45 @@ public final class SharedLexiconFamilySidecarCatalogTest {
                     "token-hash-precompute", 1, "translation-projection", 1)),
                     "row counts");
 
+            String records = Files.readString(root.resolve("synexia.records.tsv"),
+                    StandardCharsets.UTF_8);
+            Files.writeString(root.resolve("synexia.records.tsv"),
+                    records.replace("\trecord-a\t\"alpha\"\"quote\"\t1\t2\t",
+                            "\trecord-a\t\"alpha\"\"quote\"\t9\t9\t"),
+                    StandardCharsets.UTF_8);
+            expectIOException(() -> SharedLexiconFamilySidecarCatalog.open(root),
+                    "coordinate mismatch rejected");
+            Files.writeString(root.resolve("synexia.records.tsv"),
+                    records.replace("source-a\tsource-path",
+                            "source-missing\tsource-path"),
+                    StandardCharsets.UTF_8);
+            expectIOException(() -> SharedLexiconFamilySidecarCatalog.open(root),
+                    "unknown source identity rejected");
+            Files.writeString(root.resolve("synexia.records.tsv"), records,
+                    StandardCharsets.UTF_8);
+
+            byte[] originalRecordBytes = Files.readAllBytes(root.resolve("synexia.records.tsv"));
+            byte[] bomRecords = new byte[originalRecordBytes.length + 3];
+            bomRecords[0] = (byte) 0xef;
+            bomRecords[1] = (byte) 0xbb;
+            bomRecords[2] = (byte) 0xbf;
+            System.arraycopy(originalRecordBytes, 0, bomRecords, 3, originalRecordBytes.length);
+            Files.write(root.resolve("synexia.records.tsv"), bomRecords);
+            expectIOException(() -> SharedLexiconFamilySidecarCatalog.open(root),
+                    "leading BOM rejected");
+            Files.write(root.resolve("synexia.records.tsv"), originalRecordBytes);
+            Files.writeString(root.resolve("synexia.records.tsv"),
+                    records.replace("\n", "\r\n"), StandardCharsets.UTF_8);
+            expectIOException(() -> SharedLexiconFamilySidecarCatalog.open(root),
+                    "CR line endings rejected");
+            Files.write(root.resolve("synexia.records.tsv"), originalRecordBytes);
+
+            Files.writeString(root.resolve("synexia.export.json"), "legacy\\n",
+                    StandardCharsets.UTF_8);
+            check(SharedLexiconFamilySidecarCatalog.open(root).rowCounts().equals(
+                    catalog.rowCounts()), "legacy export files may coexist");
+            Files.delete(root.resolve("synexia.export.json"));
+
             Path legacy = Files.createTempDirectory("m3lex-family-legacy-");
             try {
                 check(SharedLexiconFamilySidecarCatalog.openOptional(legacy).isEmpty(),
@@ -111,6 +150,12 @@ public final class SharedLexiconFamilySidecarCatalogTest {
         writeFamily(root, "synexia.token-frequency.tsv", frequency);
         writeFamily(root, "synexia.token-hash.tsv", tokenHash);
         writeFamily(root, "synexia.translation.tsv", translation);
+        String records = row("source_id", "source_path", "source_kind", "language_tag",
+                "record_id", "lexeme", "shard_id", "image_row", "mapping_id", "mapping_name",
+                "translation_profile", "precompute_profile", "precompute_payload")
+                + row("source-a", "source-path", "translation", "en", "record-a", "\"alpha\"\"quote\"",
+                        "1", "2", "mapping-a", "name-a", "profile-a", "profile-a", "{}");
+        Files.writeString(root.resolve("synexia.records.tsv"), records, StandardCharsets.UTF_8);
         String index = row("schema_version", "family", "file", "rows", "sha256")
                 + indexLine("prefix-counts", "synexia.prefix-counts.tsv", prefix, 1)
                 + indexLine("spell-index", "synexia.spell.tsv", spell, 2)
