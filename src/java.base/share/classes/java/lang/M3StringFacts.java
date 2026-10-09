@@ -143,54 +143,58 @@ final class M3StringFacts {
 
         int positives = StringCoding.countPositives(bytes, 0, length);
         boolean ascii = positives == length;
-        int utf8 = length;
-        for (int index = positives; index < length; index++) {
-            if (bytes[index] < 0) utf8++;
-        }
         int hash = ArraysSupport.vectorizedHashCode(bytes, 0, length, 0, ArraysSupport.T_BOOLEAN);
 
         char first = (char) (bytes[0] & 0xff);
         char last = (char) (bytes[length - 1] & 0xff);
+        int utf8 = length;
         long signal = 0L;
         long bigrams = 0L;
         long trigrams = 0L;
+        long prefix = 0L;
+        long suffix = 0L;
         int previous2 = 0;
         int previous1 = 0;
+        int trimStart = 0;
+        int trimEnd = 0;
+        boolean leadingTrim = true;
+        int stripStart = 0;
+        int stripEnd = 0;
+        boolean leadingStrip = true;
+
+        // Capture every original-byte fact and lower-fold the same scratch byte before advancing.
         for (int index = 0; index < length; index++) {
             int unit = bytes[index] & 0xff;
+            if (bytes[index] < 0) utf8++;
+
             signal |= LATIN1_UNIT_SIGNAL[unit];
+            if (index < 4) prefix |= (long) unit << (48 - (index << 4));
+            suffix = (suffix << 16) | unit;
             if (index >= 1) bigrams = addBigramSignal(bigrams, (char) previous1, (char) unit);
             if (index >= 2) {
                 trigrams = addTrigramSignal(trigrams, (char) previous2, (char) previous1, (char) unit);
             }
+
+            if (leadingTrim) {
+                if (unit <= ' ') trimStart = index + 1;
+                else leadingTrim = false;
+            }
+            if (unit > ' ') trimEnd = index + 1;
+
+            boolean whitespace = LATIN1_WHITESPACE[unit];
+            if (leadingStrip) {
+                if (whitespace) stripStart = index + 1;
+                else leadingStrip = false;
+            }
+            if (!whitespace) stripEnd = index + 1;
+
             previous2 = previous1;
             previous1 = unit;
-        }
-
-        long prefix = 0L;
-        for (int index = 0; index < Math.min(4, length); index++) {
-            prefix |= (long) (bytes[index] & 0xff) << (48 - (index << 4));
-        }
-        long suffix = 0L;
-        for (int index = Math.max(0, length - 4); index < length; index++) {
-            suffix = (suffix << 16) | (bytes[index] & 0xff);
-        }
-
-        int trimStart = 0;
-        while (trimStart < length && (bytes[trimStart] & 0xff) <= ' ') trimStart++;
-        int trimEnd = length;
-        while (trimEnd > 0 && (bytes[trimEnd - 1] & 0xff) <= ' ') trimEnd--;
-        int stripStart = 0;
-        while (stripStart < length && LATIN1_WHITESPACE[bytes[stripStart] & 0xff]) stripStart++;
-        int stripEnd = length;
-        while (stripEnd > 0 && LATIN1_WHITESPACE[bytes[stripEnd - 1] & 0xff]) stripEnd--;
-
-        // Every fact that depends on the original spelling is captured above. Reuse the one
-        // owner-sized scratch array for both ASCII case-folded polynomial hashes.
-        for (int index = 0; index < length; index++) {
-            int unit = bytes[index] & 0xff;
             bytes[index] = (byte) (unit >= 'A' && unit <= 'Z' ? unit | 0x20 : unit);
         }
+        if (leadingTrim) trimEnd = 0;
+        if (leadingStrip) stripEnd = 0;
+
         int lowerHash = ArraysSupport.vectorizedHashCode(bytes, 0, length, 0, ArraysSupport.T_BOOLEAN);
         for (int index = 0; index < length; index++) {
             int unit = bytes[index] & 0xff;
