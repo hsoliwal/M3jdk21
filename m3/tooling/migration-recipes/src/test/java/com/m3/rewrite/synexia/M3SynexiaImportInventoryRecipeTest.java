@@ -31,7 +31,7 @@ final class M3SynexiaImportInventoryRecipeTest {
                 .run(new InMemoryLargeSourceSet(List.of(manifest)), context(), 1);
 
         assertTrue(run.getChangeset().getAllResults().isEmpty());
-        var rows = run.getDataTableRows(M3SynexiaImportInventoryRecipe.ImportTable.class);
+        var rows = run.<M3SynexiaImportInventoryRecipe.Row>getDataTableRows("M3 Synexia Apache imports");
         assertEquals(2, rows.size());
         assertEquals("m3/vendor/synexia/a/A.java", rows.getFirst().targetPath());
         assertEquals("recipe", rows.getFirst().category());
