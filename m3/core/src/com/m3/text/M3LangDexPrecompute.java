@@ -68,13 +68,14 @@ public final class M3LangDexPrecompute {
     }
 
     /** Stable identity for a source-to-target LangDex translation row. */
-    public record TranslationIdentity(String sourceId, String recordId,
+    public record TranslationIdentity(String sourceId, String recordId, long conceptId,
                                       String sourceGlottocode, String sourceSurface,
                                       String targetGlottocode, String targetSurface,
                                       String sourceRevision) {
         public TranslationIdentity {
             sourceId = text(sourceId, "sourceId");
             recordId = text(recordId, "recordId");
+            if (conceptId <= 0) throw new IllegalArgumentException("conceptId must be positive");
             sourceGlottocode = glottocode(sourceGlottocode);
             sourceSurface = text(sourceSurface, "sourceSurface");
             targetGlottocode = glottocode(targetGlottocode);
@@ -138,6 +139,8 @@ public final class M3LangDexPrecompute {
     }
 
     static void requireSameTranslation(TranslationIdentity key, Translation value) {
+        if (key.conceptId() != value.conceptId())
+            throw new IllegalArgumentException("LangDex conceptId identity mismatch");
         requireSameGlottocode(key.sourceGlottocode(), value.sourceGlottocode(), "sourceGlottocode");
         requireSameText(key.sourceSurface(), value.sourceSurface(), "sourceSurface");
         requireSameGlottocode(key.targetGlottocode(), value.targetGlottocode(), "targetGlottocode");
