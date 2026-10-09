@@ -44,6 +44,14 @@ SiUnit	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_pa
 SiDimension	packed	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains donor-owned
 SiUnit	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
 SiUnit	prefixable	boolean	si_prefixable	synexia.records.tsv:precompute_payload	MAPPED	SI prefixability remains an explicit donor boolean
+TranslationMapping	grammarSupported	boolean	translation_grammar_supported	synexia.records.tsv:precompute_payload	MAPPED	grammar capability remains an explicit translation-layer flag; no language inference
+NumberPrecompute	canonicalDecimalSpelling	String	canonical_decimal_spelling	synexia.records.tsv:precompute_payload	MAPPED	canonical decimal identity remains separate from localized spelling and numeric ID
+NumberPrecompute	maxValue	int	max_value	synexia.records.tsv:precompute_payload	MAPPED	inclusive admitted number range upper bound is preserved without renumbering
+NumberPrecompute	minValue	int	min_value	synexia.records.tsv:precompute_payload	MAPPED	inclusive admitted number range lower bound is preserved without renumbering
+NumberPrecompute	precomputedValueCount	int	precomputed_value_count	synexia.records.tsv:precompute_payload	MAPPED	count is validated against the explicit admitted range
+NumberPrecompute	recordId	String	record_id	synexia.records.tsv:precompute_payload	MAPPED	Synexia record identity remains source-owned and is not replaced by image_row
+NumberPrecompute	sharedUtf16Storage	boolean	shared_utf16_storage	synexia.records.tsv:precompute_payload	MAPPED	shared immutable UTF-16 storage is an explicit owner signal
+NumberPrecompute	sourceId	String	source_id	synexia.records.tsv:precompute_payload	MAPPED	Synexia source identity remains source-owned and is not replaced by image_row
 M3LexiconPrecompute.PrefixCounts	prefixCounts	long[]	prefix_counts	m3lex-family-v2:synexia.prefix-counts.tsv	MAPPED	value-scoped owner keyed by source scope, coordinate, token ID, and value fingerprint
 M3LexiconPrecompute.SpellIndex	deleteToTokenIds	Map<String,int[]>	deleteToTokenIds	m3lex-family-v2:synexia.spell.tsv	MAPPED	sorted delete-key map remains typed and scoped by lexicon, language, configuration, and source fingerprint
 M3LexiconPrecompute.SpellIndex	frequencies	Map<Integer,Long>	frequencies	m3lex-family-v2:synexia.spell.tsv	MAPPED	spell frequencies remain sorted metadata owned by the originating immutable lexicon
