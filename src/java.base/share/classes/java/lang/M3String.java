@@ -537,12 +537,40 @@ final class M3String implements CharSequence {
         return slice(beginIndex, endIndex);
     }
 
+    /**
+     * The compact value of this range read once in bulk (A17), narrowed to Latin-1 when every
+     * unit allows it (as a flat String of the same spelling would be stored): the stock
+     * spliterators fold the array with the characteristics a flat String has. Transient scratch
+     * of the range's size.
+     */
+    private byte[] compactValue() {
+        byte coder = coder();
+        int length = length();
+        byte[] out = new byte[length << coder];
+        getBytes(out, 0, 0, coder, length);
+        if (coder == String.UTF16) {
+            byte[] narrow = new byte[length];
+            if (StringUTF16.compress(out, 0, narrow, 0, length) == length) return narrow;
+        }
+        return out;
+    }
+
     IntStream charsStream() {
-        return StreamSupport.intStream(new CharsSpliterator(this, 0, length()), false);
+        byte[] value = compactValue();
+        return StreamSupport.intStream(
+                value.length == length()
+                        ? new StringLatin1.CharsSpliterator(value, Spliterator.IMMUTABLE)
+                        : new StringUTF16.CharsSpliterator(value, Spliterator.IMMUTABLE),
+                false);
     }
 
     IntStream codePointsStream() {
-        return StreamSupport.intStream(new CodePointsSpliterator(this, 0, length()), false);
+        byte[] value = compactValue();
+        return StreamSupport.intStream(
+                value.length == length()
+                        ? new StringLatin1.CharsSpliterator(value, Spliterator.IMMUTABLE)
+                        : new StringUTF16.CodePointsSpliterator(value, Spliterator.IMMUTABLE),
+                false);
     }
 
     int hashCodeValue() {
@@ -583,118 +611,6 @@ final class M3String implements CharSequence {
         int begin = start() + beginIndex;
         if (begin == 0 && count == owner.length) return owner.factsIfPrepared();
         return owner.rangeFactsIfPrepared(span(begin, count));
-    }
-
-    private static final class CharsSpliterator implements Spliterator.OfInt {
-        private final M3String source;
-        private int index;
-        private final int fence;
-
-        CharsSpliterator(M3String source, int index, int fence) {
-            this.source = Objects.requireNonNull(source, "source");
-            this.index = index;
-            this.fence = fence;
-        }
-
-        @Override
-        public OfInt trySplit() {
-            int lo = index;
-            int mid = (lo + fence) >>> 1;
-            if (mid <= lo) return null;
-            index = mid;
-            return new CharsSpliterator(source, lo, mid);
-        }
-
-        @Override
-        public boolean tryAdvance(IntConsumer action) {
-            Objects.requireNonNull(action, "action");
-            if (index >= fence) return false;
-            action.accept(source.charAt(index++));
-            return true;
-        }
-
-        @Override
-        public void forEachRemaining(IntConsumer action) {
-            Objects.requireNonNull(action, "action");
-            for (int at = index; at < fence; at++) action.accept(source.charAt(at));
-            index = fence;
-        }
-
-        @Override
-        public long estimateSize() {
-            return fence - index;
-        }
-
-        @Override
-        public int characteristics() {
-            return Spliterator.ORDERED
-                    | Spliterator.IMMUTABLE
-                    | Spliterator.SIZED
-                    | Spliterator.SUBSIZED;
-        }
-    }
-
-    private static final class CodePointsSpliterator implements Spliterator.OfInt {
-        private final M3String source;
-        private int index;
-        private final int fence;
-
-        CodePointsSpliterator(M3String source, int index, int fence) {
-            this.source = Objects.requireNonNull(source, "source");
-            this.index = index;
-            this.fence = fence;
-        }
-
-        @Override
-        public OfInt trySplit() {
-            int lo = index;
-            int mid = (lo + fence) >>> 1;
-            if (mid <= lo) return null;
-            if (mid < fence
-                    && mid > lo
-                    && Character.isLowSurrogate(source.charAt(mid))
-                    && Character.isHighSurrogate(source.charAt(mid - 1))) {
-                mid--;
-            }
-            if (mid <= lo) return null;
-            index = mid;
-            return new CodePointsSpliterator(source, lo, mid);
-        }
-
-        @Override
-        public boolean tryAdvance(IntConsumer action) {
-            Objects.requireNonNull(action, "action");
-            if (index >= fence) return false;
-            char first = source.charAt(index++);
-            if (Character.isHighSurrogate(first) && index < fence) {
-                char second = source.charAt(index);
-                if (Character.isLowSurrogate(second)) {
-                    index++;
-                    action.accept(Character.toCodePoint(first, second));
-                    return true;
-                }
-            }
-            action.accept(first);
-            return true;
-        }
-
-        @Override
-        public void forEachRemaining(IntConsumer action) {
-            Objects.requireNonNull(action, "action");
-            while (tryAdvance(action)) {
-                // exact UTF-16 traversal; tryAdvance owns surrogate-pair boundaries.
-            }
-        }
-
-        @Override
-        public long estimateSize() {
-            return fence - index;
-        }
-
-        @Override
-        public int characteristics() {
-            return Spliterator.ORDERED | Spliterator.IMMUTABLE;
-        }
     }
 
     private boolean isWholeOwner() {

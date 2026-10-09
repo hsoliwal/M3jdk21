@@ -2052,13 +2052,9 @@ public final class String
         if (len != sb.length()) {
             return false;
         }
-        if (m3() != null) {
-            for (int index = 0; index < len; index++) {
-                if (charAt(index) != sb.charAt(index)) {
-                    return false;
-                }
-            }
-            return true;
+        M3String storage = m3();
+        if (storage != null) {
+            return storage.mismatchUnits(0, sb.getValue(), 0, sb.getCoder(), len) < 0;
         }
         byte[] v1 = value();
         byte[] v2 = sb.getValue();
