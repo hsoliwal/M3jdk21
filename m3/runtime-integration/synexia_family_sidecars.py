@@ -1,3 +1,6 @@
+# Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
 #!/usr/bin/env python3
 """Deterministic, typed M3JDK family-sidecar contract.
 
