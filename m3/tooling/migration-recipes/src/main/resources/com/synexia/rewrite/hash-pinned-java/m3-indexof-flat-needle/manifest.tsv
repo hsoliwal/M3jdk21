@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3String.java	98c0030c0c4df9883315c0bf8e71b8a65ff01287762c335fb02b47d2ba6861b8	20b548ac0ab2c8aba25e24f9bd4ec5087a8720f4b8082b15863fb42f4d99ff1c	00-M3String.java.txt
+test/jdk/java/lang/String/M3IndexOfFlatNeedleTest.java	ABSENT	62c490864477ee1e39db882dcdfd19ac4db2ad90307d72424ce20556f4150c8c	01-M3IndexOfFlatNeedleTest.java.txt

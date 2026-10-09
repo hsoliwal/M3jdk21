@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.IndexOfFlatNeedle
+displayName: M3JDK21 flat needles searched over M3 haystacks through bulk windows
+description: >-
+  String.indexOf, indexOf(from), indexOf(begin, end), lastIndexOf and lastIndexOf(from) with an
+  M3 receiver and a flat needle (a literal) scanned the haystack one charAt at a time through
+  owner dispatch (an 8-unit needle at the end of a 16384-unit Latin-1 atom: 28 us, a tuple 92 us,
+  against 1.4 us flat). M3String gains indexOf(String, from, end) and lastIndexOf(String,
+  maximumStart): prepared facts and the coder rule prove absence first, then 4096-unit bulk
+  windows in the haystack coder, overlapping by the needle length minus one, are searched by the
+  stock intrinsics. Java step: M3String and the jtreg proof; text step: String.java. Stacks on
+  crate m3-atom-getchars (branch order); the M3String preimage is the m3-facts-lanes (A24)
+  postimage, the String.java preimage the m3-facts-lanes postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-indexof-flat-needle
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-indexof-flat-needle
