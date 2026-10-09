@@ -99,11 +99,11 @@ public final class M3DictionaryFrequencyContractTest {
         check(dictionary[8].equals(
                 "concept_ids,corpus_count,document_frequency,expansion_word_ids,flags,"
                         + "language_id,lexicon_fingerprint,memberships,subjects,"
-                        + "total_corpus_tokens,total_documents,word_count"));
+                        + "total_corpus_tokens,total_documents,word_count,source_revision"));
         check(frequency[8].equals(
                 "code_point_length,first_code_point,flags,frequency_rank,last_code_point,"
                         + "lemma_id,lexical_rank,morphology_mask,phonetic_id,pos_mask,presence64,"
-                        + "script_ordinal,sim_hash64,stem_id,utf16_length"));
+                        + "script_ordinal,sim_hash64,stem_id,utf16_length,source_revision"));
         check(thesaurus[5].equals("M3StringFacts")
                 && thesaurus[8].equals("lexeme,related_lexeme"));
         check(antonyms[5].equals("M3StringFacts")
@@ -118,12 +118,12 @@ public final class M3DictionaryFrequencyContractTest {
                 "languageId", "wordCount", "lexiconFingerprint", "totalCorpusTokens",
                 "totalDocuments", "flags", "corpusCount", "documentFrequency",
                 "membershipCount/membershipAt", "conceptCount/conceptAt",
-                "subjectCount/subjectAt", "expansionSize/expansionWordIdAt")));
+                "subjectCount/subjectAt", "expansionSize/expansionWordIdAt", "sourceRevision")));
         check(fieldRows.get("IndexWordSignal").equals(Set.of(
                 "stemId", "lemmaId", "phoneticId", "posMask", "morphologyMask",
                 "lexicalRank", "utf16Length", "codePointLength", "firstCodePoint",
                 "lastCodePoint", "scriptOrdinal", "presence64", "simHash64",
-                "frequencyRank", "EMPTY/ASCII/LATIN1/...")));
+                "frequencyRank", "EMPTY/ASCII/LATIN1/...", "sourceRevision")));
         check(!fieldRows.containsKey("IndexWordSignalProfile"));
         System.out.println("M3JDK_DICTIONARY_FREQUENCY_CONTRACT_PASS checks=" + checks);
     }
