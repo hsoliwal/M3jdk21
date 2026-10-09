@@ -19,7 +19,7 @@ serial-promotion semantics.
 
 The canonical path is:
 
-`review-code-signal -> review-atom-pattern -> review-problem-planner -> review-jni-contract ->\n`inventory -> compatibility-proof -> dependency-closure -> file-delta -> a3-preparation -> recipe-crate ->\n`recipe-junit -> diff -> lint -> compile -> jtreg -> runtime -> promote`
+`review-code-signal -> review-atom-pattern -> review-problem-planner -> review-jni-contract ->\n`inventory -> compatibility-proof -> dependency-closure -> file-delta -> a3-preparation ->\n`a3-atomization-proof -> a3-pattern-iop-proof -> a3-documentation-proof ->\n`a3-fixed-point-proof -> recipe-crate -> recipe-junit -> diff -> lint -> compile -> jtreg -> runtime -> promote`
 
 Independent FILE recipes derived from one work packet may fan out in the same topological layer.
 Canonical promotion is one serial terminal node.
@@ -35,7 +35,12 @@ source-changing recipe crates.
   `NON_JAVA_SOURCE_SEALED` and continue only through exact source-pinned text/native recipe atoms.
 - The preparation step writes `backport-preparation.tsv` under `m3/build`; it never writes the
   canonical OpenJDK source tree.
-- Packet root atoms depend on `a3-preparation`, not directly on `file-delta`.
+- The same run emits `backport-preparation-phases.tsv`, with content-addressed proof rows for
+  `ATOMIZATION`, `PATTERN_IOP`, `DOCUMENTATION`, and `FIXED_POINT`.
+- Those phase rows are separate DAG atoms for scheduling/proof only; they do not re-run or fork the
+  Synexia recipe implementation.
+- Packet root atoms depend on `a3-fixed-point-proof`, not directly on `a3-preparation` or
+  `file-delta`.
 
 This makes the user's M3 rule mechanical: make each Java leaf structurally easier to absorb first,
 while preserving native truth and delaying wider scope joins until after file-local convergence.
