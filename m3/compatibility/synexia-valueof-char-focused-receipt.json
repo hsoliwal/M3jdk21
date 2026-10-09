@@ -1,0 +1,49 @@
+{
+  "schema": "M3JDK21_SYNEXIA_VALUEOF_CHAR_FOCUSED_RECEIVER_V1",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 9938,
+    "branch": "codex/m3-valueof-char-focused-20261009",
+    "commit": "550461b3984357f1ea38704681afafde49cc5156",
+    "recipe": "com.synexia.m3.ValueOfCharCanonical",
+    "crate": "m3-valueof-char",
+    "exactTargetTransition": {
+      "preimageRef": "af58530641eff7d54e71cd3de99e13ff82f0237c",
+      "transition": "3ee326c0cf08f972b289cf3727ec23719f3ba297",
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "preSha256": "b579574473eef91b4b347dffaec1f1f91783e54b46dcdb8f9ec6628005f23dbd",
+      "postSha256": "8e6c6899313d3189a6d43f9535a45c13c602c4b718dd1686443f1f52c668e116"
+    }
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "branch": "m3/valueof-char-focused-receiver-20261009",
+    "stackedOn": {
+      "pullRequest": 505,
+      "branch": "m3/translate-escapes-focused-receiver-20261009",
+      "commit": "bcace5761a4e2b1ab64ab763f0b9514afe6e58e2"
+    },
+    "runtimeOwners": [
+      "java.lang.String",
+      "java.lang.M3StringPool",
+      "java.lang.M3StringAtom"
+    ],
+    "checker": "m3/runtime-integration/check-m3string-valueof-char-focused.py",
+    "differential": "test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java",
+    "workflow": ".github/workflows/mindex-string-backing.yml"
+  },
+  "disposition": "CURRENT_SUPERSET_OF_EXACT_VALUEOF_CHAR_TRANSITION",
+  "runtimeDependencyOnSynexia": false,
+  "targetLocalFocusedRecipe": false,
+  "semanticBoundary": [
+    "M3 route only after M3String.admissionEnabled()",
+    "fresh String wrapper over canonical unit owner",
+    "stock Compact-String LATIN1/UTF16 bootstrap path preserved"
+  ],
+  "evidence": {
+    "focusedRecipe": "AUTHORED_SYNEXIA_PR_9938",
+    "currentSourceSupersetChecker": "AUTHORED",
+    "currentDifferentialSelectedByWorkflow": true,
+    "currentMatchedImageQualification": "PENDING_EXECUTION"
+  }
+}
