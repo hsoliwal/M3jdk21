@@ -1230,7 +1230,8 @@ final class M3String implements CharSequence {
     static boolean isLiteralRegexReplacement(String regex, String replacement) {
         if (!isLiteralRegex(regex) || replacement == null) return false;
         for (int index = 0; index < regex.length(); index++) {
-            if (Character.isSurrogate(regex.charAt(index))) return false;
+            char unit = regex.charAt(index);
+            if (Character.isSurrogate(unit)) return false;
         }
         for (int index = 0; index < replacement.length(); index++) {
             char unit = replacement.charAt(index);
