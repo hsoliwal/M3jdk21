@@ -98,7 +98,7 @@ public final class M3LangDexPrecomputeTest {
                 .lexicalProfile(identity, lexical)
                 .translation(
                     new M3LangDexPrecompute.TranslationIdentity(
-                            "unicodex.langdex.lexemes", "translation-7",
+                            "unicodex.langdex.lexemes", "translation-7", 7L,
                             "ENG", "Color", "FRA", "couleur", "langdex-r1"),
                     new M3LangDexPrecompute.Translation(
                             7L, "eng", "Color", "fra", "couleur", 19L))
@@ -129,6 +129,15 @@ public final class M3LangDexPrecomputeTest {
         expect(IllegalArgumentException.class, () -> SharedLangDexPrecomputeCatalog.builder()
                 .entry(new M3LangDexPrecompute.Identity(
                         "unicodex.langdex.lexemes", "x", "eng", "Other", "r"), entry));
+        expect(IllegalArgumentException.class, () -> new M3LangDexPrecompute.TranslationIdentity(
+                "unicodex.langdex.lexemes", "translation-8", 0L,
+                "eng", "Color", "fra", "couleur", "langdex-r1"));
+        expect(IllegalArgumentException.class, () -> SharedLangDexPrecomputeCatalog.builder()
+                .translation(new M3LangDexPrecompute.TranslationIdentity(
+                        "unicodex.langdex.lexemes", "translation-8", 8L,
+                        "eng", "Color", "fra", "couleur", "langdex-r1"),
+                        new M3LangDexPrecompute.Translation(
+                                7L, "eng", "Color", "fra", "couleur", 19L)));
 
         System.out.println("M3JDK_LANGDEX_CONTRACT_PASS checks=" + checks
                 + " source=unicodex.langdex.lexemes");
