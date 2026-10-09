@@ -1,0 +1,55 @@
+name: M3 TornadoVM Bulk Adapter
+
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/tornadovm-bulk/**'
+      - 'm3/pom.xml'
+      - 'm3/compatibility/synexia-tornadovm-bulk-adapter-20261009.tsv'
+      - 'm3/docs/name-mapping.json'
+      - '.github/workflows/m3-tornadovm-bulk-adapter.yml'
+  workflow_dispatch:
+    inputs:
+      physical_gpu:
+        description: 'Run verified TornadoVM GPU adapter test on a qualified self-hosted runner'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  cpu-adapter:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/synexia-tornadovm
+          ref: 3bf826714a48d7fdf346ffde8a0fc25c525572c5
+          path: target/synexia-tornadovm
+      - run: |
+          mvn -B -ntp -f target/synexia-tornadovm/m3/cpu-gpu/pom.xml             -DskipTests install
+      - run: |
+          mvn -B -ntp -f m3/ports/tornadovm-bulk/pom.xml             -Dm3.gpu=false test
+
+  physical-gpu-parity:
+    if: github.event_name == 'workflow_dispatch' && inputs.physical_gpu
+    runs-on: [self-hosted, linux, tornadovm-gpu]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/synexia-tornadovm
+          ref: 3bf826714a48d7fdf346ffde8a0fc25c525572c5
+          path: target/synexia-tornadovm
+      - run: mvn -B -ntp -f target/synexia-tornadovm/m3/cpu-gpu/pom.xml -DskipTests install
+      - run: mvn -B -ntp -f m3/ports/tornadovm-bulk/pom.xml -Dm3.gpu=true test
