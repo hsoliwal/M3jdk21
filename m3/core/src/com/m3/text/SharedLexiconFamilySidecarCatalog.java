@@ -47,6 +47,15 @@ public final class SharedLexiconFamilySidecarCatalog {
             "translation-projection", "synexia.translation.tsv");
     private static final String[] INDEX_HEADER = {"schema_version", "family", "file", "rows", "sha256"};
     private static final String[] COMMON = {"source_id", "record_id", "source_manifest_revision", "owner_fingerprint"};
+    private static final String RECORD_FILE = "synexia.records.tsv";
+    private static final String[] RECORD_HEADER = {
+            "source_id", "source_path", "source_kind", "language_tag", "record_id", "lexeme",
+            "shard_id", "image_row", "mapping_id", "mapping_name", "translation_profile",
+            "precompute_profile", "precompute_payload"
+    };
+    private static final Set<String> COORDINATE_FAMILIES =
+            Set.of("prefix-counts", "token-frequency", "token-hash-precompute");
+
 
     /** Stable source ownership carried by every family row. */
     public record SourceScope(String sourceId, String recordId,
@@ -151,6 +160,8 @@ public final class SharedLexiconFamilySidecarCatalog {
         Objects.requireNonNull(directory, "directory");
         Path root = directory.toAbsolutePath().normalize();
         if (!Files.isDirectory(root)) throw new IOException("not a sidecar directory");
+        Map<SourceIdentity, SharedLexiconCatalog.Coordinate> recordCoordinates =
+                readRecordCoordinates(root);
         Map<String, IndexEntry> index = readIndex(root.resolve(INDEX_FILE));
         Map<TranslationKey, M3LexiconPrecompute.TranslationProjection> translations = new HashMap<>();
         Map<SpellKey, SpellAccumulator> spellGroups = new HashMap<>();
@@ -167,6 +178,7 @@ public final class SharedLexiconFamilySidecarCatalog {
             List<String[]> rows = rows(bytes, fileHeader(family), entry.rows());
             List<String> previous = null;
             for (String[] row : rows) {
+                validateScope(row, family, recordCoordinates);
                 List<String> key = key(family, row);
                 if (previous != null && compareKey(previous, key) >= 0)
                     throw new IOException("family rows are not strictly sorted: " + family);
@@ -211,6 +223,43 @@ public final class SharedLexiconFamilySidecarCatalog {
     public Map<String, Integer> rowCounts() { return rowCounts; }
 
     private record IndexEntry(String family, String file, int rows, String sha256) { }
+    private record SourceIdentity(String sourceId, String recordId) { }
+
+    private static Map<SourceIdentity, SharedLexiconCatalog.Coordinate> readRecordCoordinates(
+            Path root) throws IOException {
+        Path path = safeChild(root, RECORD_FILE);
+        List<String[]> rows = rows(Files.readAllBytes(path), RECORD_HEADER, -1);
+        Map<SourceIdentity, SharedLexiconCatalog.Coordinate> result = new HashMap<>();
+        for (String[] row : rows) {
+            SourceIdentity identity = new SourceIdentity(
+                    text(row[0], "source_id"), text(row[4], "record_id"));
+            SharedLexiconCatalog.Coordinate coordinate =
+                    new SharedLexiconCatalog.Coordinate(
+                            nonNegativeInt(row[6], "shard_id"),
+                            nonNegativeInt(row[7], "image_row"));
+            if (result.put(identity, coordinate) != null)
+                throw new IOException("duplicate source identity in " + RECORD_FILE);
+        }
+        return Map.copyOf(result);
+    }
+
+    private static void validateScope(String[] row, String family,
+            Map<SourceIdentity, SharedLexiconCatalog.Coordinate> recordCoordinates)
+            throws IOException {
+        SourceIdentity identity = new SourceIdentity(
+                text(row[0], "source_id"), text(row[1], "record_id"));
+        SharedLexiconCatalog.Coordinate expected = recordCoordinates.get(identity);
+        if (expected == null)
+            throw new IOException(family + " sidecar references unknown source identity");
+        if (COORDINATE_FAMILIES.contains(family)) {
+            SharedLexiconCatalog.Coordinate actual =
+                    new SharedLexiconCatalog.Coordinate(
+                            nonNegativeInt(row[4], "shard_id"),
+                            nonNegativeInt(row[5], "image_row"));
+            if (!expected.equals(actual))
+                throw new IOException(family + " sidecar coordinate mismatch");
+        }
+    }
 
     private static Map<String, IndexEntry> readIndex(Path path) throws IOException {
         List<String[]> rows = rows(Files.readAllBytes(path), INDEX_HEADER, FAMILIES.size());
