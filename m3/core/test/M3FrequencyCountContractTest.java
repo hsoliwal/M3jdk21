@@ -37,6 +37,7 @@ public final class M3FrequencyCountContractTest {
                 "7fea67ab954e2c01df6c608c9826e594cf36f8823b3243554f88245fb75dc506"));
         check(mapColumns[5].contains("not a rank"));
         check(mapColumns[6].equals("corpus_count"));
+        check(mapColumns[9].contains("requireNonNegativeLong(corpus_count)"));
         check(mapColumns[11].equals("TARGET_CONTRACT_STAGED_SOURCE_RECONCILIATION_REQUIRED"));
 
         SynexiaPrecomputePayload payload =
