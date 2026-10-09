@@ -12,6 +12,9 @@ historical_preimage_sha256	c9a0a92458bc6cd833595d7c3d2fe12b529ab5b0236fb711f2dcb
 historical_postimage_sha256	d65bd2dfc6dc8472b8929a671ed2f27038c4640c2d470dbb26ec5cca4387b176
 live_postcondition	CharBuffer.wrap(this); no CharBuffer.wrap(chars)
 live_postcondition_present	true
+supersession_status	HISTORICAL_SERIAL_STEP
+superseded_by	m3-encode-bulk-units
+supersession_note	A13 bulk-unit encoding is the promoted successor on later receiver lines
 recipe	com.synexia.m3.JniShadowBulk
 historical_target_commit	3a050f6fd0307588605080eb5535e487ce8109f9
 historical_preimage_sha256	f779a8276c67a2a326e06e0f32aee42f21cb837a8d7b5321b654ef5883f8fcc6
