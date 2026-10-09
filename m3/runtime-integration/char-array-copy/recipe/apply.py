@@ -151,7 +151,7 @@ def digest(data):
 
 
 def git_blob(data):
-    header = f"blob {len(data)}\\0".encode("ascii")
+    header = f"blob {len(data)}\0".encode("ascii")
     return hashlib.sha1(header + data).hexdigest()
 
 
@@ -185,7 +185,8 @@ def apply(target=ROOT, reverse=False, check=False):
             replacement_safe = PurePosixPath(replacement_name)
             if (replacement_safe.is_absolute()
                     or ".." in replacement_safe.parts
-                    or not replacement_name.startswith("src/")):
+                    or not (replacement_name.startswith("src/")
+                            or replacement_name.startswith("m3/"))):
                 raise ValueError("unsafe superseded path: " + replacement_name)
             replacement_path = target / replacement_name
             if (replacement_path.is_symlink()
