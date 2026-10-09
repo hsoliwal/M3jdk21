@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "A18 recipe-first successor to A17.",
+  "mappings": [
+    {
+      "source": "Synexia com.synexia.m3.FactsScanLatin1DerivedUpper (PR #9997)",
+      "source_commit": "b1826a0d9e1926c9c229d18e642caeb42042e5a2",
+      "target": "java.lang.M3StringFacts.scanLatin1",
+      "status": "receiver-applied",
+      "target_rule": "one raw/lower-fold loop; upperHash derived from lowerHash plus exact Java polynomial ASCII case delta; no upper-fold pass"
+    }
+  ]
+}
