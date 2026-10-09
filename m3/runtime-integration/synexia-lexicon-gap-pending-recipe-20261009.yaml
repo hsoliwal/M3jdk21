@@ -1,0 +1,50 @@
+schema: m3-recipe/v1
+id: synexia-lexicon-gap-pending-20261009
+pattern: fail-closed-cross-repository-gap-receipt
+purpose: Carry Synexia's unresolved proper-noun, Rapidex, and title coverage into the M3JDK admission queue without fabricating an owner or target field.
+
+inputs:
+  - donor_coverage: m3/runtime-integration/synexia-lexicon-gap-pending-receipt.tsv
+  - target_manifest: m3/lexicon/synexia-source-manifest.tsv
+  - target_field_map: m3/lexicon/synexia-precompute-field-map.tsv
+
+donor:
+  repository: hsoliwal/com.synexia
+  branch: codex/m3lexicon-donor-gap-manifest-20261009
+  commit: b2db7b868435f1dc9217061a3610eb74a228de04
+  path: cognix-nlp/docs/SYNEXIA_DONOR_COVERAGE.tsv
+  git_blob: 164ea23596f692a8a105234f465affe851632ba2
+  source_proof: M3LEXICON_DONOR_GAP_SOURCE_PASS checks=26/26
+
+target:
+  repository: hsoliwal/M3jdk21
+  base_branch: codex/synexia-lexicon-precompute-receipt-20261009
+  target_status: GAP_RECORDED_NO_TARGET
+  proper_nouns: SOURCE_ONLY_TARGET_PENDING
+  rapidex: NO_CANONICAL_OWNER
+  titles: NO_CANONICAL_OWNER
+
+phases:
+  - SEARCH: inspect first-party sources and qualified donors for exact ownership and semantics.
+  - INVENTORY: preserve each gap's source paths, status, target surface, and admission condition.
+  - CLASSIFY: SOURCE_ONLY_TARGET_PENDING or NO_CANONICAL_OWNER.
+  - FILTER: reject inferred proper-noun token identity, generic title labels, and incidental Rapidex frequency mentions.
+  - PROVE: replay the pinned source gap receipt and verify the M3JDK target remains unbound.
+  - CHECKPOINT: keep target implementation blocked until a typed owner contract is proven.
+
+invariants:
+  - Proper nouns remain an instance-index/INSTANCE_OF domain.
+  - Rapidex has no canonical owner until one is proven.
+  - Titles require a canonical source and typed target contract.
+  - No gap row exposes an M3JDK precompute field or owner.
+  - Existing mapped families remain unchanged.
+  - Runtime: NOT_RUN
+  - Hosted CI: NOT_CLAIMED
+  - Benchmark: NOT_MEASURED
+
+verification:
+  source_discriminator_command: python m3/runtime-integration/check-synexia-lexicon-gap-pending-receipt.py --repo-root .
+  source_discriminator: M3_LEXICON_GAP_PENDING_SOURCE_PASS checks=28/28
+  runtime: NOT_RUN
+  hosted_ci: NOT_CLAIMED
+  benchmark: NOT_MEASURED
