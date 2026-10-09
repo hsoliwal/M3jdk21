@@ -22,6 +22,7 @@ public final class M3NumberSpaceContractTest {
     public static void main(String[] args) throws Exception {
         M3NumberSpace space = M3NumberSpace.INSTANCE;
         check(M3NumberSpace.SOURCE_ID.equals("dictlang.numbers.0-10000"));
+        check(M3NumberSpace.SOURCE_REVISION.equals("64a2ea61c73b548413fed6686a9daeeb0b9b0564"));
         check(M3NumberSpace.RECORD_ID.equals("number"));
         check(M3NumberSpace.MIN_VALUE == 0);
         check(M3NumberSpace.MAX_VALUE == 10_000);
@@ -41,7 +42,23 @@ public final class M3NumberSpaceContractTest {
         check(columns.length == 9);
         check(columns[8].equals(
                 "source_id,record_id,min_value,max_value,precomputed_value_count,"
-                        + "shared_utf16_storage,canonical_decimal_spelling"));
+                        + "shared_utf16_storage,canonical_decimal_spelling,source_revision"));
+        String targetMap = Files.readString(
+                Path.of("lexicon/synexia-number-target-map.tsv"), StandardCharsets.UTF_8);
+        String[] targetLines = targetMap.split("\\n", -1);
+        String[] targetHeader = targetLines[0].split("\\t", -1);
+        check(targetHeader.length == 11 && targetHeader[0].equals("schema")
+                && targetHeader[10].equals("source_revision"));
+        String targetRow = Arrays.stream(targetLines)
+                .filter(line -> line.startsWith("M3JDK_NUMBER_TARGET_MAP_V1\t"))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("number target map row missing"));
+        String[] targetColumns = targetRow.split("\\t", -1);
+        check(targetColumns.length == 11);
+        check(targetColumns[1].equals(M3NumberSpace.SOURCE_ID));
+        check(targetColumns[6].contains("com.m3.text.M3NumberSpace"));
+        check(targetColumns[9].equals("ADMITTED_TYPED_RECEIVER"));
+        check(targetColumns[10].equals(M3NumberSpace.SOURCE_REVISION));
         System.out.println("M3JDK_NUMBER_CONTRACT_PASS checks=" + checks + " fields=7");
     }
 
