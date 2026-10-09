@@ -22,7 +22,7 @@ public final class M3AcronymPrecomputeTest {
         String manifest = Files.readString(
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
         String row = Arrays.stream(manifest.split("\\n", -1))
-                .filter(line -> line.startsWith("dictlang.acronyms\\t"))
+                .filter(line -> line.startsWith("dictlang.acronyms\t"))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("acronym manifest row missing"));
         String[] columns = row.split("\\t", -1);
