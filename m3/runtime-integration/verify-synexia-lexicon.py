@@ -526,9 +526,12 @@ def verify(output: pathlib.Path) -> dict[str, int]:
         raise ValueError("precompute profile count mismatch")
     result = {"source_records": len(mapping_rows), "image_records": len(images),
               "shards": len(shard_rows), "precompute_profiles": len(profile_rows),
-              "utf16_units": total_units,
-              "family_sidecar_families": family_stats["families"],
-              "family_sidecar_rows": family_stats["rows"]}
+              "utf16_units": total_units}
+    if family_stats["families"]:
+        result.update({
+            "family_sidecar_families": family_stats["families"],
+            "family_sidecar_rows": family_stats["rows"],
+        })
     if relation_sources:
         result["relation_records"] = len(relation_rows)
     return result
