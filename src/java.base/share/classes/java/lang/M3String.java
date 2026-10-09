@@ -1237,6 +1237,99 @@ final class M3String implements CharSequence {
         return -1;
     }
 
+    /** Units per bulk window when a flat needle is searched (A27). */
+    private static final int SEARCH_WINDOW = 4096;
+
+    /**
+     * Index of a flat needle (for example a literal) in {@code [fromIndex, endIndex)}, or -1
+     * (A27): the haystack range comes out in bulk windows in its own coder and the stock
+     * vectorized search runs over each window; consecutive windows overlap by the needle's
+     * length minus one, so a match straddling a window edge is seen by the next window.
+     * Prepared facts prove absence first; a UTF-16 needle is never in a Latin-1 haystack.
+     */
+    int indexOf(String needle, int fromIndex, int endIndex) {
+        int end = Math.min(length(), endIndex);
+        int from = Math.clamp(fromIndex, 0, length());
+        int needleLength = needle.length();
+        if (needleLength == 0) return Math.min(from, end);
+        if (needleLength == 1) return indexOf(needle.charAt(0), from, end);
+        if (from > end - needleLength) return -1;
+        M3StringFacts prepared = factsIfPrepared();
+        if (prepared != null && !prepared.mayContain(needle)) return -1;
+        byte coder = coder();
+        if (coder == String.LATIN1 && !needle.isLatin1()) return -1;
+        int windowUnits = searchWindow(end - from, needleLength, coder);
+        if (windowUnits < 0) return indexOfPerUnit(needle, from, end);
+        byte[] window = new byte[windowUnits << coder];
+        for (int start = from; ; start += windowUnits - needleLength + 1) {
+            int count = Math.min(windowUnits, end - start);
+            getBytes(window, start, 0, coder, count);
+            int found = String.indexOf(window, coder, count, needle, 0);
+            if (found >= 0) return start + found;
+            if (start + count == end) return -1;
+        }
+    }
+
+    /**
+     * Last index of a flat needle starting at or before {@code maximumStart}, or -1 (A27): bulk
+     * windows walked from the end, each overlapping the previous by the needle's length minus
+     * one, searched by the stock reverse search.
+     */
+    int lastIndexOf(String needle, int maximumStart) {
+        int needleLength = needle.length();
+        int start = Math.min(maximumStart, length() - needleLength);
+        if (start < 0) return -1;
+        if (needleLength == 0) return start;
+        if (needleLength == 1) return lastIndexOf(needle.charAt(0), start);
+        M3StringFacts prepared = factsIfPrepared();
+        if (prepared != null && !prepared.mayContain(needle)) return -1;
+        byte coder = coder();
+        if (coder == String.LATIN1 && !needle.isLatin1()) return -1;
+        int end = start + needleLength;
+        int windowUnits = searchWindow(end, needleLength, coder);
+        if (windowUnits < 0) return lastIndexOfPerUnit(needle, start);
+        byte[] window = new byte[windowUnits << coder];
+        for (int stop = end; ; stop -= windowUnits - needleLength + 1) {
+            int count = Math.min(windowUnits, stop);
+            int begin = stop - count;
+            getBytes(window, begin, 0, coder, count);
+            int found = String.lastIndexOf(window, coder, count, needle, count - needleLength);
+            if (found >= 0) return begin + found;
+            if (begin == 0) return -1;
+        }
+    }
+
+    /**
+     * Units per window for a bulk search over {@code span} units: the window, at least twice the
+     * needle, is bounded by {@link #SEARCH_WINDOW}; -1 when a window could not fit a byte array.
+     */
+    private static int searchWindow(int span, int needleLength, byte coder) {
+        long units = Math.min(span, Math.max(SEARCH_WINDOW, 2L * needleLength));
+        return (units << coder) > Integer.MAX_VALUE - 8 ? -1 : (int) units;
+    }
+
+    private int indexOfPerUnit(String needle, int from, int end) {
+        int needleLength = needle.length();
+        char first = needle.charAt(0);
+        for (int start = from; start <= end - needleLength; start++) {
+            if (charAt(start) != first) continue;
+            int index = 1;
+            while (index < needleLength && charAt(start + index) == needle.charAt(index)) index++;
+            if (index == needleLength) return start;
+        }
+        return -1;
+    }
+
+    private int lastIndexOfPerUnit(String needle, int maximumStart) {
+        int needleLength = needle.length();
+        for (int candidate = maximumStart; candidate >= 0; candidate--) {
+            int index = 0;
+            while (index < needleLength && charAt(candidate + index) == needle.charAt(index)) index++;
+            if (index == needleLength) return candidate;
+        }
+        return -1;
+    }
+
     M3String translateEscapes() {
         ArrayList<M3String> pieces = null;
         int cursor = 0;
