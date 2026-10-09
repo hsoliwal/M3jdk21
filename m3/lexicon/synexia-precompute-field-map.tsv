@@ -1,4 +1,5 @@
 donor_type	donor_field	donor_java_type	canonical_payload_field	m3jdk_storage	status	preservation_rule
+IndexPhraseTable	space	IndexStringSpace	vocabulary_fingerprint	M3PhrasePrecompute.Scope.vocabularyFingerprint	MAPPED	vocabulary-space identity is preserved through the scope fingerprint; token IDs are never portable across spaces
 IndexWordFacts	languageId	int	language_id	synexia.records.tsv:precompute_payload	MAPPED	operator-supplied value is preserved at source_id+record_id; no String semantic
 IndexWordFacts	wordCount	int	word_count	synexia.records.tsv:precompute_payload	MAPPED	operator-supplied value is preserved without recomputation
 IndexWordFacts	lexiconFingerprint	long	lexicon_fingerprint	synexia.records.tsv:precompute_payload	MAPPED	fingerprint remains donor-owned and opaque
@@ -60,4 +61,4 @@ M3PhrasePrecompute.Scope	recordId	String	record_id	m3phrase-v1:synexia.phrases.t
 M3PhrasePrecompute.Scope	sourceRevision	String	source_revision	m3phrase-v1:synexia.phrases.tsv	MAPPED	source revision is part of the reusable scope
 M3PhrasePrecompute.Scope	vocabularyFingerprint	String	vocabulary_fingerprint	m3phrase-v1:synexia.phrases.tsv	MAPPED	phrase token IDs are never reused across a different vocabulary fingerprint
 M3PhrasePrecompute.Phrase	sourceTokenIds	int[]	source_token_ids	m3phrase-v1:synexia.phrases.tsv	MAPPED	source token order and non-empty phrase boundary are preserved
-M3PhrasePrecompute.Phrase	replacementTokenIds	int[]	replacement_token_ids	m3phrase-v1:synexia.phrases.tsv	MAPPED	replacement token order, including an empty replacement, is preserved
+M3PhrasePrecompute.Phrase	targetTokenIds	int[]	target_token_ids	m3phrase-v1:synexia.phrases.tsv	MAPPED	target token order, including an empty replacement, is preserved; replacementTokenIds remains a compatibility alias
