@@ -471,4 +471,3 @@ def self_test() -> int:
     else:
         raise AssertionError("invalid prefix counts were accepted")
     return checks
-
