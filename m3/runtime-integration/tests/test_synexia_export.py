@@ -438,6 +438,108 @@ class SynexiaExportTest(unittest.TestCase):
                     "fixture", "0" * 40,
                 )
 
+    def test_python_export_opens_through_java_catalog_for_both_relation_families(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = root / "sources.tsv"
+            source_rows = (
+                ("dictlang.antonyms", "Antonyms",
+                 "synexia-dictlang/src/main/resources/antonyms.txt", "antonym"),
+                ("dictlang.thesaurus", "Thesaurus",
+                 "synexia-dictlang/src/main/resources/thesaurus.txt", "thesaurus"),
+            )
+            manifest.write_text(
+                "\t".join(EXPORT.MANIFEST_COLUMNS) + "\n"
+                + "".join(
+                    "\t".join((source_id, name, source_path, "record_id",
+                               "lexeme,related_lexeme",
+                               "M3StringFacts + IndexWordFacts", "Apache-2.0",
+                               "fixture")) + "\n"
+                    for source_id, name, source_path, _ in source_rows
+                ),
+                encoding="utf-8",
+            )
+            records = root / "records.tsv"
+            records.write_text(
+                "\t".join(EXPORT.RECORD_COLUMNS) + "\n"
+                + "".join(
+                    "\t".join((source_id, source_path, kind, "und", "cold", "cold",
+                               f"{kind}:cold", "COLD", "-", "M3StringFacts + IndexWordFacts")) + "\n"
+                    for source_id, _, source_path, kind in source_rows
+                ),
+                encoding="utf-8",
+            )
+            relations = root / "relations.tsv"
+            relations.write_text(
+                "\t".join(EXPORT.RELATION_COLUMNS) + "\n"
+                + "\n".join((
+                    "dictlang.antonyms\tcold\tcold\thot",
+                    "dictlang.antonyms\tcold\tcold\twarm",
+                    "dictlang.thesaurus\tcold\tcold\tchilly",
+                )) + "\n",
+                encoding="utf-8",
+            )
+            output = root / "output"
+            result = EXPORT.export(
+                manifest, records, output, "fixture", "0" * 40,
+                relations_path=relations,
+            )
+            self.assertEqual(3, result["counts"]["relation_records"])
+            self.assertEqual(2, result["counts"]["source_records"])
+            self.assertEqual(1, result["counts"]["image_records"])
+            self.assertEqual(3, VERIFY.verify(output)["relation_records"])
+
+            probe = root / "ExportedRelatedLexemeJavaProbe.java"
+            probe.write_text(
+                """import com.m3.text.SharedLexiconCatalog;
+import com.m3.text.SharedRelatedLexemeCatalog;
+import java.nio.file.Path;
+
+public final class ExportedRelatedLexemeJavaProbe {
+    public static void main(String[] args) throws Exception {
+        Path output = Path.of(args[0]);
+        check(SharedLexiconCatalog.open(output));
+        check(SharedLexiconCatalog.openLazy(output));
+        System.out.println("M3JDK_EXPORTED_RELATED_LEXEME_JAVA_PASS");
+    }
+
+    private static void check(SharedLexiconCatalog catalog) {
+        try (catalog) {
+            SharedRelatedLexemeCatalog related =
+                    catalog.relatedLexemes().orElseThrow();
+            check(related.findBySource("dictlang.antonyms").size() == 2);
+            check(related.findBySource("dictlang.thesaurus").size() == 1);
+            check(related.findAll("dictlang.antonyms", "cold").size() == 2);
+            check(related.find("dictlang.antonyms", "cold").isEmpty());
+            check(related.find("dictlang.thesaurus", "cold")
+                    .orElseThrow().relatedLexeme().equals("chilly"));
+        }
+    }
+
+    private static void check(boolean condition) {
+        if (!condition) throw new AssertionError("related-lexeme Java probe failed");
+    }
+}
+""",
+                encoding="utf-8",
+            )
+            classes = root / "classes"
+            sources = [ROOT / "m3/core/src/module-info.java"]
+            sources.extend(sorted((ROOT / "m3/core/src/com/m3/text").glob("*.java")))
+            sources.append(probe)
+            compile_run = subprocess.run(
+                ["javac", "-d", str(classes), *(str(source) for source in sources)],
+                cwd=ROOT, text=True, capture_output=True, check=False,
+            )
+            self.assertEqual(0, compile_run.returncode, compile_run.stderr)
+            proof_run = subprocess.run(
+                ["java", "-cp", str(classes),
+                 "ExportedRelatedLexemeJavaProbe", str(output)],
+                cwd=ROOT, text=True, capture_output=True, check=False,
+            )
+            self.assertEqual(0, proof_run.returncode, proof_run.stderr + proof_run.stdout)
+            self.assertIn("M3JDK_EXPORTED_RELATED_LEXEME_JAVA_PASS", proof_run.stdout)
+
     def test_replay_is_byte_identical_except_for_output_location(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
