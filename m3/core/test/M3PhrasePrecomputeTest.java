@@ -48,12 +48,16 @@ public final class M3PhrasePrecomputeTest {
                 new M3PhrasePrecompute.Phrase(new int[0], new int[0]));
         expect(IllegalArgumentException.class, () ->
                 new M3PhrasePrecompute.Scope("", "x", "r", "f"));
-        expect(IllegalArgumentException.class, () ->
-                M3PhrasePrecompute.builder(scope)
-                        .put(new M3PhrasePrecompute.Phrase(new int[]{1}, new int[]{2}))
-                        .put(new M3PhrasePrecompute.Phrase(new int[]{1}, new int[]{3})));
-        expect(IllegalStateException.class, () ->
-                M3PhrasePrecompute.builder(scope).build());
+        M3PhrasePrecompute.Catalog overwritten = M3PhrasePrecompute.builder(scope)
+                .put(new M3PhrasePrecompute.Phrase(new int[]{1}, new int[]{2}))
+                .put(new M3PhrasePrecompute.Phrase(new int[]{1}, new int[]{3}))
+                .build();
+        check(overwritten.phraseCount() == 1);
+        check(Arrays.equals(overwritten.rewrite(new int[]{1}), new int[]{3}));
+
+        M3PhrasePrecompute.Catalog empty = M3PhrasePrecompute.builder(scope).build();
+        check(empty.phraseCount() == 0);
+        check(Arrays.equals(empty.rewrite(new int[]{4, 5}), new int[]{4, 5}));
         expect(IndexOutOfBoundsException.class, () ->
                 catalog.longestMatchAt(new int[]{1}, 2));
 
