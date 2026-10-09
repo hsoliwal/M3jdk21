@@ -2111,10 +2111,18 @@ public final class String
         if (n != length()) {
             return false;
         }
-        if (m3() != null) {
-            for (int i = 0; i < n; i++) {
-                if (charAt(i) != cs.charAt(i)) {
-                    return false;
+        M3String storage = m3();
+        if (storage != null) {
+            // The receiver's units come out in bulk windows and each window is compared against
+            // the sequence (A29); the sequence itself is read as before.
+            char[] window = new char[Math.min(n, 4096)];
+            for (int base = 0; base < n; base += window.length) {
+                int count = Math.min(window.length, n - base);
+                storage.getChars(base, base + count, window, 0);
+                for (int i = 0; i < count; i++) {
+                    if (window[i] != cs.charAt(base + i)) {
+                        return false;
+                    }
                 }
             }
             return true;
