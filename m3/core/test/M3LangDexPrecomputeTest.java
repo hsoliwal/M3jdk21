@@ -90,6 +90,9 @@ public final class M3LangDexPrecomputeTest {
         check("M3LangDexPrecompute.Entry + M3LangDexPrecompute.WordProfile"
                 .concat(" + M3LangDexPrecompute.LexicalProfile + M3LangDexPrecompute.Translation")
                 .equals(langdex[5]));
+        check(langdex[4].equals(
+                "glottocode,lemma,source,concept_id,canonical_schema,canonical_bytes,"
+                        + "canonical_digest,domain"));
         check(langdex[8].equals(
                 "langdex_concept_id,langdex_confidence_permille,langdex_evidence_mask,"
                         + "langdex_feature_bits,langdex_flags,langdex_frequency,"
@@ -98,6 +101,8 @@ public final class M3LangDexPrecomputeTest {
         String[] huggingFace = rows.get("dictlang.huggingface");
         check(huggingFace != null
                 && "M3StringFacts + M3LangDexPrecompute.Identity".equals(huggingFace[5])
+                && "language_tag,lexeme,source_revision,canonical_schema,canonical_bytes,"
+                        + "canonical_digest,domain".equals(huggingFace[4])
                 && "-".equals(huggingFace[8]));
 
         Map<String, Set<String>> fieldMap = parseFieldMap(Files.readString(
