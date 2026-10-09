@@ -3,6 +3,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 helper = (ROOT / "src/java.base/share/classes/java/lang/StringConcatHelper.java").read_text(encoding="utf-8")
+factory = (ROOT / "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java").read_text(encoding="utf-8")
 pool = (ROOT / "src/java.base/share/classes/java/lang/M3StringPool.java").read_text(encoding="utf-8")
 m3 = (ROOT / "src/java.base/share/classes/java/lang/M3String.java").read_text(encoding="utf-8")
 tuple_source = (ROOT / "src/java.base/share/classes/java/lang/M3StringTuple.java").read_text(
@@ -24,7 +25,7 @@ def require(label: str, source: str, fragment: str) -> None:
     checks.append(label)
 
 
-start = helper.find("static String m3Concat(String[] constants, Object[] args)")
+start = helper.find("static String m3Concat(String[] constants, String[] args)")
 if start < 0:
     raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|missing m3Concat")
 end = helper.find("\n    /**", start)
@@ -34,7 +35,7 @@ body = helper[start:end]
 
 for fragment in [
     "M3String result = M3String.empty();",
-    "String argument = stringOf(args[index]);",
+    "String argument = args[index];",
     "M3String.canonicalize(constant)",
     "M3String.canonicalize(argument)",
     "result.concat(piece)",
@@ -53,6 +54,15 @@ for fragment in [
     checks.append("no-staging:" + fragment)
 
 require("stringOf-authority", helper, "static String stringOf(Object value)")
+for fragment in [
+    "private static MethodHandle generateM3Concat(MethodType mt, String[] constants)",
+    "asCollector(String[].class, count)",
+    "MethodHandles.filterArguments(mh, 0, stringifiers)",
+    "private static MethodHandle m3Stringifier(Class<?> type)",
+    "stringOf for every reference type",
+]:
+    require("typed-gateway:" + fragment, factory, fragment)
+
 require(
     "M3String-concat-owner",
     m3,
