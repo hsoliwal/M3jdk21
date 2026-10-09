@@ -474,7 +474,7 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
            relation_policy: str = "normalized-directed-v1",
            identity_field_map: pathlib.Path | None = None) -> dict[str, object]:
     if not (source_repo == "fixture"
-            or re.fullmatch(r"https://github\\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", source_repo)):
+            or re.fullmatch(r"https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", source_repo)):
         raise ValueError("source repository must be a GitHub URL or fixture")
     if re.fullmatch(r"[0-9a-f]{40}", source_commit) is None:
         raise ValueError("source commit must be a 40-character hexadecimal commit")
