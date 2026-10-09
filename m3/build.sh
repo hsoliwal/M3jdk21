@@ -10,8 +10,8 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
   core/test/FoundationTest.java core/test/M3LexiconPrecomputeTest.java \
   core/test/M3DictionaryFrequencyContractTest.java \
   core/test/SynexiaPrecomputePayloadTest.java core/test/SynexiaPrecomputeReceiverTest.java \
-  core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SynexiaSiUnitDecoderTest.java \ \\
-  core/test/SharedRelatedLexemeCatalogTest.java
+  core/test/SharedLexiconFamilySidecarCatalogTest.java \
+  core/test/SharedRelatedLexemeCatalogTest.java \
   core/test/M3NumberSpaceTest.java core/test/M3NumberSpaceContractTest.java \
   core/test/M3LanguageGrammarSupportTest.java
 for mode in jit int nocompact c2; do
