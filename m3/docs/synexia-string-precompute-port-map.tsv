@@ -2,7 +2,7 @@ donor_world	donor_type	m3jdk_target	status	retention_rule	notes
 Synexia	MIndexString	java.lang.M3String	IMPLEMENTED	owner+packed-coordinate only	Donor name differs intentionally in M3JDK
 Synexia	MIndexNativeResolver / MIndexNativeIntern	java.lang.M3StringAtom + M3StringPool	IMPLEMENTED	weak VM-local native owner pool	Live M3 coordinates/DAGs retain owners; reference-queue cleanup frees unreachable local native blocks; retained bytes are internally accounted
 Synexia	IndexResolver / IndexStringTuple	java.lang.M3StringOwner / M3StringAtom / M3StringTuple	IMPLEMENTED	canonical owner/DAG	No spelling arrays in M3 value/owner graph
-Synexia	IndexTextMetrics	java.lang.M3StringFacts	IMPLEMENTED	fixed-size owner/range facts	UTF16 length; code-point count; unpaired surrogate count; Java hash geometry
+Synexia	IndexTextMetrics	java.lang.M3StringFacts	IMPLEMENTED	fixed-size owner/range facts	UTF-16/UTF-8 length; code-point count; unpaired surrogate count; Java hash/hash31 geometry; M3_STRING_FACTS_SOURCE_PASS checks=57/57 proves the fixed fact bundle and bounded owner-local range cache from source; runtime remains pending.
 Synexia	MIndexStringCanonicalFacts	java.lang.M3StringFacts + M3StringOwner	IMPLEMENTED	fixed-size canonical owner facts	Complete String-semantic bundle; no spelling/token payload
 Synexia	MIndexUtf16RangeFacts	M3StringOwner.rangeFacts	IMPLEMENTED	bounded 4-entry owner-local coordinate cache	Key is exact packed range coordinate
 Synexia	MIndexTextPrecomputedFacts	java.lang.M3StringFacts	IMPLEMENTED	fixed-size canonical facts	Bit signal, ASCII case hashes, packed prefix/suffix and bigram/trigram filters; exact UTF-16 verification remains authority
