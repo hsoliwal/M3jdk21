@@ -58,7 +58,11 @@ bounds; the source-blind verifier repeats the same check from the exported
 type map, while the export manifest carries the full field-map hash for
 provenance. Relation source families therefore use `-` in the manifest's
 owner-payload `precompute_fields` column; their directed fields are validated
-by the separate relation sidecars.
+by the separate relation sidecars. The bounded `dictlang.numbers.0-10000`
+family follows the same separation: its seven admitted fields are owned by
+`M3NumberSpace` and `synexia-number-target-map.tsv`, so the generic source
+manifest uses `-` and never duplicates number metadata in the opaque JSON
+owner payload.
 
 `source_id + record_id` is the immutable source identity. The exporter rejects
 duplicates, unknown source families, source-path drift, empty fields and
