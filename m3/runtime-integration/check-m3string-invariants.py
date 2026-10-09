@@ -1120,11 +1120,13 @@ for fragment in [
         fail(f"M3 direct char-array ingress missing: {fragment}")
 
 # Empty-target literal replacement is defined at every UTF-16 code-unit boundary, including
-# between surrogate halves. M3 preserves that exact contract without StringBuilder flattening.
+# between surrogate halves. In mixed flat/M3 calls, transient canonical sourceM3 is the owner;
+# the original flat receiver is not forced to retain an additional M3 payload.
 for fragment in [
     "M3String replaceEmptyTarget(M3String replacement)",
     "pieces.add(slice(index, index + 1));",
-    "return new String(storage.replaceEmptyTarget(replacementM3));",
+    "M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);",
+    "return new String(sourceM3.replaceEmptyTarget(replacementM3));",
 ]:
     if fragment not in (m3 + string):
         fail(f"M3 empty-target replacement route missing: {fragment}")
