@@ -822,7 +822,11 @@ critical_surfaces = {
     "lastIndexOf(String)": "M3String storage = m3();",
     "prepared reverse search": "return storage.lastIndexOf(target, fromIndex);",
     "replace(char,char)": "M3String replaced = storage.replace(oldChar, newChar);",
-    # Both names are the same canonical M3 owner route across adjacent target revisions.\n    "replace(CharSequence,CharSequence)": (\n        "M3String replaced = storage.replace(targetM3, replacementM3);",\n        "M3String replaced = sourceM3.replace(targetM3, replacementM3);",\n    ),
+    # Both names are the same canonical M3 owner route across adjacent target revisions.
+    "replace(CharSequence,CharSequence)": (
+        "M3String replaced = storage.replace(targetM3, replacementM3);",
+        "M3String replaced = sourceM3.replace(targetM3, replacementM3);",
+    ),
     "replaceFirst(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, true);",
     "replaceAll(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, false);",
     "substring": "return new String(storage.slice(beginIndex, endIndex));",
