@@ -52,6 +52,8 @@ public final class M3InstanceIndexTest {
         check(index.find(einstein).orElseThrow().instanceOfX() == 10500);
         check(index.findByName("en", "Paris").size() == 1);
         check(index.findByName("en", "paris").isEmpty());
+        check(index.findByAlias("en", "Einstein").size() == 1);
+        check(index.findByAlias("en", "Einstein").get(0).identity().equals(einstein));
         check(index.instancesOf(650001).get(0).identity().equals(moby));
         check(index.titlesFor(moby).size() == 1);
         check(index.titlesFor(moby).get(0).precompute().utf16Units() == 9);
@@ -74,6 +76,6 @@ public final class M3InstanceIndexTest {
                 List.of(einsteinRecord), List.of(title)));
         expect(IllegalArgumentException.class, () -> new M3InstanceIndex.InstanceRecord(
                 einstein, "en", "", "PERSON", 10500, List.of(), Map.of(), "source"));
-        System.out.println("M3_INSTANCE_INDEX_CONTRACT_PASS checks=" + checks + "/20");
+        System.out.println("M3_INSTANCE_INDEX_CONTRACT_PASS checks=" + checks + "/22");
     }
 }
