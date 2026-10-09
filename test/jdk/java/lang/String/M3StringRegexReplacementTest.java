@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,6 +47,7 @@ public class M3StringRegexReplacementTest {
         preparedPlanReuse();
         canonicalComposition();
         literalMatrix();
+        asciiLocaleMapping();
         fallbackAndExceptions();
         preparedBoundRefusals();
         compilerProjects();
@@ -163,6 +165,21 @@ public class M3StringRegexReplacementTest {
         }
         equal("bba", fresh("aaaaa").replaceAll("aa", "b"), "non-overlapping all matches");
         equal("baaa", fresh("aaaaa").replaceFirst("aa", "b"), "first consumes one non-overlapping match");
+    }
+
+    private static void asciiLocaleMapping() throws Exception {
+        String mixed = fresh("MiXeD");
+        equal("mixed", mixed.toLowerCase(Locale.ROOT), "ASCII lower case uses canonical M3 mapping");
+        equal("MIXED", mixed.toUpperCase(Locale.ROOT), "ASCII upper case uses canonical M3 mapping");
+
+        String turkishInput = fresh("I");
+        Locale turkish = Locale.forLanguageTag("tr");
+        equal("\u0131", turkishInput.toLowerCase(turkish),
+                "Turkish lower case remains locale-sensitive");
+        equal("I", turkishInput.toUpperCase(turkish),
+                "Turkish upper case remains locale-sensitive");
+        check(tuple(mixed) && tuple(turkishInput),
+                "case discriminator receivers remain canonical M3 compositions");
     }
 
     private static void fallbackAndExceptions() throws Exception {
