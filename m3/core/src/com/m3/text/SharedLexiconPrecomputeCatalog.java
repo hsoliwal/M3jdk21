@@ -86,12 +86,23 @@ public final class SharedLexiconPrecomputeCatalog {
         }
     }
 
+    /** Exact source identity for the canonical Synexia SI-unit family. */
+    public record SiUnitIdentity(String sourceId, String recordId) {
+        public SiUnitIdentity {
+            sourceId = text(sourceId, "sourceId");
+            recordId = text(recordId, "recordId");
+            if (!"dictlang.si-units".equals(sourceId))
+                throw new IllegalArgumentException("SI-unit identity has the wrong source family");
+        }
+    }
+
     private final Map<TranslationIdentity, M3LexiconPrecompute.TranslationProjection> translations;
     private final Map<SpellScope, M3LexiconPrecompute.SpellIndex> spellIndexes;
     private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes;
     private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts;
     private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies;
     private final Map<NumberIdentity, M3LexiconPrecompute.NumberPrecompute> numbers;
+    private final Map<SiUnitIdentity, M3LexiconPrecompute.SiUnitPrecompute> siUnits;
 
     private SharedLexiconPrecomputeCatalog(Builder builder) {
         translations = Map.copyOf(builder.translations);
@@ -100,12 +111,17 @@ public final class SharedLexiconPrecomputeCatalog {
         prefixCounts = Map.copyOf(builder.prefixCounts);
         tokenFrequencies = Map.copyOf(builder.tokenFrequencies);
         numbers = Map.copyOf(builder.numbers);
+        siUnits = Map.copyOf(builder.siUnits);
     }
 
     public static Builder builder() { return new Builder(); }
 
     public Optional<M3LexiconPrecompute.NumberPrecompute> numberAt(NumberIdentity identity) {
         return Optional.ofNullable(numbers.get(Objects.requireNonNull(identity, "identity")));
+    }
+
+    public Optional<M3LexiconPrecompute.SiUnitPrecompute> siUnitAt(SiUnitIdentity identity) {
+        return Optional.ofNullable(siUnits.get(Objects.requireNonNull(identity, "identity")));
     }
 
     public Optional<M3LexiconPrecompute.TranslationProjection> translationAt(TranslationIdentity identity) {
@@ -131,6 +147,7 @@ public final class SharedLexiconPrecomputeCatalog {
         private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts = new HashMap<>();
         private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies = new HashMap<>();
         private final Map<NumberIdentity, M3LexiconPrecompute.NumberPrecompute> numbers = new HashMap<>();
+        private final Map<SiUnitIdentity, M3LexiconPrecompute.SiUnitPrecompute> siUnits = new HashMap<>();
 
         public Builder number(NumberIdentity identity, M3LexiconPrecompute.NumberPrecompute value) {
             Objects.requireNonNull(identity, "number key");
@@ -139,6 +156,11 @@ public final class SharedLexiconPrecomputeCatalog {
                     || !identity.languageTag().equals(value.languageTag()))
                 throw new IllegalArgumentException("number identity does not match precompute");
             put(numbers, identity, value, "number");
+            return this;
+        }
+
+        public Builder siUnit(SiUnitIdentity identity, M3LexiconPrecompute.SiUnitPrecompute value) {
+            put(siUnits, identity, value, "SI unit");
             return this;
         }
 
