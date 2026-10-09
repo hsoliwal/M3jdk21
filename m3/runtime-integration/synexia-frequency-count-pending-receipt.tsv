@@ -1,0 +1,2 @@
+donor_commit	donor_path	donor_blob	source_sha256	verified_sample	canonical_payload_field	target_status	preservation
+c6d128572825cc11f4bbb05d78bcbebb5b3aa67a	synexia-dictlang/src/main/resources/en_full_frequency.txt	05ccf20cd2e3789ddb849b14f0374aa089d90cc5	7fea67ab954e2c01df6c608c9826e594cf36f8823b3243554f88245fb75dc506	you 28787591	corpus_count	BLOCKED_UNTIL_SOURCE_PR_ACCEPTED	The source second column is a non-negative OpenSubtitles-derived corpus count, not frequency_rank; preserve MIT and OPUS/OpenSubtitles attribution and do not promote the stale receiver mapping.
