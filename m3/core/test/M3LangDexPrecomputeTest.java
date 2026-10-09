@@ -108,7 +108,11 @@ public final class M3LangDexPrecomputeTest {
         Map<String, Set<String>> fieldMap = parseFieldMap(Files.readString(
                 Path.of("lexicon/synexia-precompute-field-map.tsv"),
                 StandardCharsets.UTF_8));
-        check(fieldMap.get("M3LangDexPrecompute.Identity").equals(Set.of(
+        Map<String, Set<String>> identityFieldMap = parseFieldMap(Files.readString(
+                Path.of("lexicon/synexia-langdex-identity-field-map.tsv"),
+                StandardCharsets.UTF_8));
+        check(!fieldMap.containsKey("M3LangDexPrecompute.Identity"));
+        check(identityFieldMap.get("M3LangDexPrecompute.Identity").equals(Set.of(
                 "sourceId", "recordId", "glottocode", "surface", "sourceRevision",
                 "domain", "canonicalSchema", "canonicalBytes", "canonicalDigest")));
         check(fieldMap.get("M3LangDexPrecompute.Entry").equals(
