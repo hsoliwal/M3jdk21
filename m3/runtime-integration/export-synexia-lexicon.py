@@ -55,7 +55,12 @@ FIELD_MAP_COLUMNS = (
     "donor_type", "donor_field", "donor_java_type", "canonical_payload_field",
     "m3jdk_storage", "status", "preservation_rule",
 )
-ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]", "String"))
+ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]", "byte[]", "String"))
+IDENTITY_MAP_COLUMNS = (
+    "target_type", "target_field", "java_type", "canonical_source_field",
+    "required", "storage_scope", "preservation_rule",
+)
+IDENTITY_TARGET_PATTERN = re.compile(r"M3LangDexPrecompute\.[A-Za-z0-9_]+")
 
 
 @dataclass(frozen=True)
@@ -170,6 +175,41 @@ def read_field_map(path: pathlib.Path) -> dict[str, str]:
     return dict(sorted(result.items()))
 
 
+def read_identity_field_map(path: pathlib.Path) -> dict[str, dict[str, str]]:
+    rows, _ = read_tsv(path, IDENTITY_MAP_COLUMNS)
+    result: dict[str, dict[str, str]] = {}
+    for row in rows:
+        if row["required"].lower() != "true":
+            continue
+        target = row["target_type"]
+        field = row["canonical_source_field"]
+        if IDENTITY_TARGET_PATTERN.fullmatch(target) is None:
+            raise ValueError(f"unsupported identity target type: {target}")
+        if re.fullmatch(r"[a-z][a-z0-9_]*", field) is None:
+            raise ValueError(f"invalid identity payload field: {field}")
+        previous = result.setdefault(target, {}).setdefault(field, row["java_type"])
+        if previous != row["java_type"]:
+            raise ValueError(f"conflicting identity field types for {field}")
+    if not result:
+        raise ValueError("identity field map has no required fields")
+    return {target: dict(sorted(fields.items())) for target, fields in sorted(result.items())}
+
+
+def required_identity_fields(sources: dict[str, dict[str, str]],
+                             identity_fields: dict[str, dict[str, str]]) -> dict[str, list[str]]:
+    requirements: dict[str, list[str]] = {}
+    for source_id, source in sources.items():
+        targets = IDENTITY_TARGET_PATTERN.findall(source["precompute_target"])
+        fields = sorted({field for target in targets for field in identity_fields.get(target, {})})
+        if fields:
+            declared = {field for field in source["precompute_fields"].split(",") if field}
+            missing = sorted(set(fields) - declared)
+            if missing:
+                raise ValueError(f"identity payload fields missing from manifest for {source_id}: {','.join(missing)}")
+            requirements[source_id] = fields
+    return requirements
+
+
 def _fits_donor_type(value: object, donor_type: str) -> bool:
     if donor_type == "String":
         return isinstance(value, str)
@@ -192,6 +232,10 @@ def _fits_donor_type(value: object, donor_type: str) -> bool:
     if donor_type == "long[]":
         return (isinstance(value, list)
                 and all(_fits_donor_type(item, "long") for item in value))
+    if donor_type == "byte[]":
+        return (isinstance(value, list)
+                and all(isinstance(item, int) and not isinstance(item, bool) and 0 <= item <= 255
+                        for item in value))
     return False
 
 
@@ -427,11 +471,21 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
            source_repo: str, source_commit: str,
            field_map: pathlib.Path | None = None,
            relations_path: pathlib.Path | None = None,
-           relation_policy: str = "normalized-directed-v1") -> dict[str, object]:
+           relation_policy: str = "normalized-directed-v1",
+           identity_field_map: pathlib.Path | None = None) -> dict[str, object]:
+    if not (source_repo == "fixture"
+            or re.fullmatch(r"https://github\\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", source_repo)):
+        raise ValueError("source repository must be a GitHub URL or fixture")
+    if re.fullmatch(r"[0-9a-f]{40}", source_commit) is None:
+        raise ValueError("source commit must be a 40-character hexadecimal commit")
     sources, source_manifest_bytes = read_manifest(source_manifest)
     field_map_path = field_map or source_manifest.with_name("synexia-precompute-field-map.tsv")
     field_types = read_field_map(field_map_path) if field_map_path.is_file() else {}
     field_map_bytes = field_map_path.read_bytes() if field_types else None
+    identity_map_path = identity_field_map or source_manifest.with_name("synexia-langdex-identity-field-map.tsv")
+    identity_fields = read_identity_field_map(identity_map_path) if identity_map_path.is_file() else {}
+    identity_requirements = required_identity_fields(sources, identity_fields)
+    identity_map_bytes = identity_map_path.read_bytes() if identity_fields else None
     records, records_bytes = load_records(records_path, sources, field_types)
     relations, relations_bytes = load_relations(relations_path, sources, records)
     related_source_ids = relation_source_ids(sources)
@@ -440,6 +494,20 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
     if output.exists() and any(output.iterdir()):
         raise FileExistsError(f"output directory is not empty: {output}")
     output.mkdir(parents=True, exist_ok=True)
+    input_artifacts = {
+        "synexia.source-manifest.tsv": source_manifest_bytes,
+        "synexia.input-records.tsv": records_bytes,
+    }
+    if field_map_bytes is not None:
+        input_artifacts["synexia.precompute-field-map.tsv"] = field_map_bytes
+    if identity_map_bytes is not None:
+        input_artifacts["synexia.langdex-identity-field-map.tsv"] = identity_map_bytes
+    if relations_bytes is not None:
+        input_artifacts["synexia.input-relations.tsv"] = relations_bytes
+    input_outputs: dict[str, str] = {}
+    for name, data in input_artifacts.items():
+        (output / name).write_bytes(data)
+        input_outputs[name] = sha256_bytes(data)
 
     by_lexeme = sorted({record["lexeme"] for record in records}, key=utf16_units)
     shards = make_shards(by_lexeme)
@@ -536,7 +604,11 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                        for source_id, source in sorted(sources.items())},
                    "precompute_field_types": field_types,
                    "precompute_field_map_sha256":
-                       sha256_bytes(field_map_bytes) if field_map_bytes is not None else None},
+                       sha256_bytes(field_map_bytes) if field_map_bytes is not None else None,
+                   "identity_fields": identity_fields,
+                   "identity_requirements": identity_requirements,
+                   "identity_field_map_sha256":
+                       sha256_bytes(identity_map_bytes) if identity_map_bytes is not None else None},
         "target": {"repository": "https://github.com/hsoliwal/M3jdk21",
                    "image_format": "M3LEX001", "image_version": VERSION,
                    "mapping_sidecar": "synexia.records.tsv",
@@ -552,7 +624,7 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                    "source_families": len(sources), "shards": len(shards),
                    "precompute_profiles": len(profile_rows),
                    "relation_records": len(relations)},
-        "outputs": {**image_outputs, "synexia.shards.tsv": sha256_bytes(shard_bytes),
+        "outputs": {**input_outputs, **image_outputs, "synexia.shards.tsv": sha256_bytes(shard_bytes),
                     "synexia.records.tsv": sha256_bytes(mapping_bytes),
                     "synexia.precompute-index.tsv": sha256_bytes(profile_bytes),
                     "synexia.precompute.tsv": sha256_bytes(fact_bytes),
