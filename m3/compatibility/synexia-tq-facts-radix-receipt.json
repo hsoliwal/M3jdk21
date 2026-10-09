@@ -1,0 +1,77 @@
+{
+  "schema": "M3JDK21_SYNEXIA_TQ_FACTS_RADIX_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-tq-facts-radix-20261009",
+    "pullRequest": null,
+    "commit": "3084582a101",
+    "stackedOn": [
+      {
+        "pullRequest": 10002,
+        "crate": "m3-regex-literal-gate"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.TqFactsRadix",
+    "crate": "m3-tq-facts-radix",
+    "fossReuseDecisionRow": "regex.trigram-facts.radix-build",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+        "commit": "aa3a9ae00a",
+        "target": "jdk.internal.mindex.M3TQ.sortTrigramKeys",
+        "mechanics": "the A1 exact trigram facts build; the comparison sort replaced by a first-party counting sort over 48-bit keys"
+      }
+    ],
+    "license": "first-party M3 owner (GPLv2+CPE in the target); no external donor: a dependency cannot enter java.base",
+    "disposition": "ADAPT: the Facts value is bit-identical; only the build cost changes; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-regex-bulk-20261009 (#554, A18) on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "jdk.internal.mindex.M3TQ"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed under the supersession model: no upstream target changed, runtime.patch and every after image untouched; M3TQ.java owner recorded as superseded; 67 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "before": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+      "after": "b00733e17787e1eaa7787e0412da84e43d0b2ad9ffab2752653721733dabf1a0",
+      "resource": "00-M3TQ.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3TQFactsBuildTest.java",
+      "before": "ABSENT",
+      "after": "f530df8f580ed4aff75907f68530ab7a9031cb2c844be1f9f00b5eb58813a947",
+      "resource": "01-M3TQFactsBuildTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (43 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3TQFactsBuildTest flag-off: 23,595 checks (keys, keyCount, utf16Length, test, containsAll and the fromExact query gate bit-identical to a comparison-sorted reference over alphabets of 1..65536 symbols incl. surrogates, U+FFFF and NUL, lengths 0..40000 across the 256 and 8192 key thresholds, ascending, descending and repeated texts, every precompute overload and random sub-ranges)",
+    "regressions": "PASS_WINDOWS M3RegexLiteralGateTest 29,376; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,920; A6 204 + 29",
+    "timing": "flag-off (a19/probe/TqBuildBench, bench-baseline.tsv on the A18 build vs bench-after2.tsv): M3TQ.precompute 52-letter text 49.5 us -> 27 at 2048 units, 843 -> 215 at 16384, 1,626 -> 434 at 32768; Latin-1 52 -> 20, 732 -> 205, 1,977 -> 397; CJK-mixed 60 -> 30, 813 -> 295, 2,180 -> 760; 3-letter alphabet 14.5 -> 13.2 (fallback), 324 -> 245, 744 -> 457; regex fresh-owner cell (a18/probe/RegexBench) 1,157 us -> 445 at 16384 units",
+    "g8RuntimeRecipe": "PASS_WINDOWS supersession model, no upstream change; apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3TqFactsRadixRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3TQFactsBuildTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the Facts representation (sorted unique 48-bit keys, prefix, suffix, length) is unchanged: the counting sort yields the same order as the comparison sort",
+    "below 256 keys the comparison sort stays (the counting passes' fixed cost dominates); below 8192 keys a text over a tiny alphabet (at most 8 distinct low bytes of the last unit) stays on the comparison sort, whose three-way partitioning collapses heavy duplicates faster (measured 0.6x without this fallback on a 3-letter alphabet at 2048 units)",
+    "a digit on which every key agrees is skipped: Latin-1 text sorts in three passes, BMP text in at most six",
+    "the scratch array and the 256-int histogram are transient; nothing is retained",
+    "the query-term sorts (fromExact, mergeFactKeys seams) are small and keep Arrays.sort",
+    "stacked on A18: merge after #554 and the Synexia crate PR (#10002 first, content-bearing merges)"
+  ]
+}
