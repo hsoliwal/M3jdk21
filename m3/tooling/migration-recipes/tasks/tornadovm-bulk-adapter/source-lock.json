@@ -2,7 +2,7 @@
   "schema": "M3JDK21_TORNADOVM_BULK_ADAPTER_SOURCE_LOCK_V1",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_pr": 9982,
-  "canonical_recipe_revision": "416a521bcf0306128cd16eb02498b6cf414575cc",
+  "canonical_recipe_revision": "f372f8fab6377a388f5aafb82ac9d269839b3556",
   "canonical_recipe": "com.synexia.rewrite.M3Jdk21TornadoBulkAdapterPortRecipe",
   "jdk_contract_pr": 465,
   "jdk_contract_merge": "dd83865308c1c0f639ceb1ddcbaebfcd22e41506",
