@@ -87,6 +87,8 @@ def _tsv(columns: tuple[str, ...], rows: Iterable[tuple[str, ...]]) -> bytes:
 
 def render(rows: Iterable[Mapping[str, object]]) -> dict[str, bytes]:
     normalized = [normalize(row) for row in rows]
+    if not normalized:
+        raise ValueError("acronym sidecar requires at least one row")
     keys = [(row[0], row[1]) for row in normalized]
     if keys != sorted(keys) or len(keys) != len(set(keys)):
         raise ValueError("acronym rows must be sorted and unique")
@@ -107,6 +109,8 @@ def _read_data(content: bytes) -> list[tuple[str, ...]]:
     if tuple(next(reader, ())) != COLUMNS:
         raise ValueError("acronym sidecar header mismatch")
     rows = [tuple(row) for row in reader]
+    if not rows:
+        raise ValueError("acronym sidecar requires at least one row")
     if any(len(row) != len(COLUMNS) for row in rows):
         raise ValueError("acronym sidecar field count mismatch")
     checked = [
