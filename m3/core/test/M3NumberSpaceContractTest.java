@@ -75,6 +75,12 @@ public final class M3NumberSpaceContractTest {
         String[] targetColumns = targetRow.split("\\t", -1);
         check(targetColumns.length == 11);
         check(targetColumns[1].equals(M3NumberSpace.SOURCE_ID));
+        check(targetColumns[4].equals("value,spelling,language_tag"));
+        check(targetColumns[5].equals("value,language_tag"));
+        check(Arrays.stream(columns[8].split(","))
+                .anyMatch(field -> field.equals("language_tag")));
+        check(Arrays.stream(targetColumns[4].split(","))
+                .anyMatch(field -> field.equals("language_tag")));
         check(targetColumns[6].contains("com.m3.text.M3NumberSpace"));
         check(targetColumns[9].equals("ADMITTED_TYPED_RECEIVER"));
         check(targetColumns[10].equals(M3NumberSpace.SOURCE_REVISION));
