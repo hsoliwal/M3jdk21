@@ -118,9 +118,12 @@ The output is:
 - `synexia.export.json`: source pins, input/output hashes, counts, policy and,
   when available, the canonical precompute field-type map and its SHA-256.
 
-`com.m3.text.SharedLexiconCatalog.open(exportDirectory)` validates the shard
-manifest and all four legacy sidecars together, plus the complete typed family
-bundle when it is present. It exposes stable
+`com.m3.text.M3Lexicons.open(exportDirectory)` is the named M3JDK umbrella
+over the read-only catalog. It does not create a second interner or own the M3
+String runtime; `SharedLexiconCatalog` remains the storage, validation, and
+coordinate owner. The catalog validates the shard manifest and all four legacy
+sidecars together, plus the complete typed family bundle when it is present.
+It exposes stable
 `(shardId,imageRow)` coordinates, one-to-many source mappings and immutable
 precompute facts plus the complete profile catalog without joining image
 payloads. `textAt` is the explicit single-record materialization boundary;
