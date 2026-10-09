@@ -978,14 +978,15 @@ for fragment in [
 if "for (int index = 0; index < len; index++)" not in string:
     fail("exact region comparison loop missing after precompute filter")
 
-# Case conversion is canonical only for ASCII + Locale.ROOT. Locale-sensitive and non-ASCII
-# transformations must continue through the stock JDK case engine.
+# Case conversion is canonical only for ASCII plus the JDK-compatible locale predicate.
+# Locale-sensitive and non-ASCII transformations continue through the stock JDK case engine.
 for fragment in [
-    "storage != null && locale.equals(Locale.ROOT)",
+    "storage != null && asciiCaseMappingLocale(locale)",
     "M3StringFacts prepared = storage.facts();",
     "if (prepared.ascii) {",
     "storage.asciiCase(false)",
     "storage.asciiCase(true)",
+    'lang != "tr" && lang != "az" && lang != "lt"',
 ]:
     if fragment not in string:
         fail(f"M3 ROOT ASCII case boundary missing: {fragment}")
