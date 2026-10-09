@@ -19,7 +19,7 @@ def main() -> int:
     assert all(row["admission"] == "REFERENCE_ONLY" for row in rows)
     assert all(row["target_status"] == "TARGET_CONTRACT_OPEN_NO_PAYLOAD" for row in rows)
     assert all(row["source_pr"] == "10054" for row in rows)
-    assert all(row["source_head"] == "20bc672b6b7492c3f4bf09eec7364473b2a24594" for row in rows)
+    assert all(row["source_head"] == "92ef3da1b6dff7a125d8d6e9ab6533133fec5ac7" for row in rows)
     recipe = RECIPE.read_text(encoding="utf-8")
     for marker in (
         "target-contract-open-no-payload",
