@@ -71,6 +71,10 @@ public final class M3LangDexPrecomputeTest {
                         + "langdex_feature_bits,langdex_flags,langdex_frequency,"
                         + "langdex_lexical_class_mask,langdex_semantic_class_mask,"
                         + "langdex_subject_id,langdex_target_lexeme_id"));
+        String[] huggingFace = rows.get("dictlang.huggingface");
+        check(huggingFace != null
+                && "M3StringFacts + M3LangDexPrecompute.Identity".equals(huggingFace[5])
+                && "-".equals(huggingFace[8]));
 
         Map<String, Set<String>> fieldMap = parseFieldMap(Files.readString(
                 Path.of("lexicon/synexia-precompute-field-map.tsv"),
@@ -86,6 +90,9 @@ public final class M3LangDexPrecomputeTest {
 
         M3LangDexPrecompute.Identity identity = new M3LangDexPrecompute.Identity(
                 "unicodex.langdex.lexemes", "lexeme-7", "ENG", "Color", "langdex-r1");
+        M3LangDexPrecompute.Identity huggingFaceIdentity =
+                new M3LangDexPrecompute.Identity(
+                        "dictlang.huggingface", "dataset-7", "ENG", "Color", "hf-r1");
         M3LangDexPrecompute.Entry entry = new M3LangDexPrecompute.Entry(
                 "eng", "Color", 7L, 42L, 0x10, "colour");
         M3LangDexPrecompute.WordProfile profile =
@@ -110,6 +117,8 @@ public final class M3LangDexPrecomputeTest {
         check(catalog.entryAt(identity).orElseThrow().glottocode().equals("eng"));
         check(catalog.wordProfileAt(identity).orElseThrow().confidencePermille() == 975);
         check(catalog.lexicalProfileAt(identity).orElseThrow().featureBits() == 8);
+        check(SharedLangDexPrecomputeCatalog.builder()
+                .entry(huggingFaceIdentity, entry).build().entryCount() == 1);
 
         expect(IllegalArgumentException.class, () -> new M3LangDexPrecompute.Entry(
                 "eng", "x", 0L, 1L, 0, "x"));
