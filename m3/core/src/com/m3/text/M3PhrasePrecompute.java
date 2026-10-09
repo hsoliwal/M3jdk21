@@ -37,7 +37,7 @@ public final class M3PhrasePrecompute {
     public static final class Phrase {
         private final int[] sourceTokenIds;
         private final int[] replacementTokenIds;
-        private final String vocabularyFingerprint;
+        private final Scope scope;
 
         /** Construct an unbound phrase; admission binds it to the builder's vocabulary. */
         public Phrase(int[] sourceTokenIds, int[] replacementTokenIds) {
@@ -46,11 +46,11 @@ public final class M3PhrasePrecompute {
 
         /** Construct a phrase explicitly bound to a vocabulary scope. */
         public Phrase(Scope scope, int[] sourceTokenIds, int[] replacementTokenIds) {
-            this(Objects.requireNonNull(scope, "scope").vocabularyFingerprint(),
+            this(Objects.requireNonNull(scope, "scope"),
                     sourceTokenIds, replacementTokenIds, true);
         }
 
-        private Phrase(String vocabularyFingerprint, int[] sourceTokenIds,
+        private Phrase(Scope scope, int[] sourceTokenIds,
                        int[] replacementTokenIds, boolean ignored) {
             Objects.requireNonNull(sourceTokenIds, "sourceTokenIds");
             Objects.requireNonNull(replacementTokenIds, "replacementTokenIds");
@@ -58,9 +58,7 @@ public final class M3PhrasePrecompute {
                 throw new IllegalArgumentException("source phrase must not be empty");
             this.sourceTokenIds = sourceTokenIds.clone();
             this.replacementTokenIds = replacementTokenIds.clone();
-            this.vocabularyFingerprint = vocabularyFingerprint == null
-                    ? null
-                    : text(vocabularyFingerprint, "vocabularyFingerprint");
+            this.scope = scope;
         }
 
         public int[] sourceTokenIds() {
@@ -77,13 +75,12 @@ public final class M3PhrasePrecompute {
         }
 
         private Phrase bindTo(Scope scope) {
-            if (vocabularyFingerprint == null) {
-                return new Phrase(scope.vocabularyFingerprint(), sourceTokenIds,
-                        replacementTokenIds, true);
+            if (this.scope == null) {
+                return new Phrase(scope, sourceTokenIds, replacementTokenIds, true);
             }
-            if (!vocabularyFingerprint.equals(scope.vocabularyFingerprint())) {
+            if (!this.scope.equals(scope)) {
                 throw new IllegalArgumentException(
-                        "phrase belongs to a different vocabulary space");
+                        "phrase belongs to a different vocabulary scope");
             }
             return this;
         }
@@ -208,9 +205,9 @@ public final class M3PhrasePrecompute {
 
         private void requireVocabulary(Scope inputScope) {
             Objects.requireNonNull(inputScope, "inputScope");
-            if (!scope.vocabularyFingerprint().equals(inputScope.vocabularyFingerprint())) {
+            if (!scope.equals(inputScope)) {
                 throw new IllegalArgumentException(
-                        "input belongs to a different vocabulary space");
+                        "input belongs to a different vocabulary scope");
             }
         }
 
