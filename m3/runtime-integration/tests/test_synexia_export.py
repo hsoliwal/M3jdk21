@@ -225,7 +225,8 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertEqual(5, first["counts"]["family_sidecar_families"])
             self.assertEqual(5, first["counts"]["family_sidecar_rows"])
             manifest = json.loads((root / "output/synexia.export.json").read_text(encoding="utf-8"))
-            self.assertEqual(sorted(FAMILY.FAMILY_SPECS) + [FAMILY.INDEX_FILE],
+            self.assertEqual(sorted({FAMILY.INDEX_FILE, *(
+                spec["file"] for spec in FAMILY.FAMILY_SPECS.values())}),
                              manifest["target"]["family_sidecar_files"])
             result = VERIFY.verify(root / "output")
             self.assertEqual(5, result["family_sidecar_families"])
@@ -235,8 +236,6 @@ class SynexiaExportTest(unittest.TestCase):
             (partial / FAMILY.INDEX_FILE).write_bytes(
                 (root / "family" / FAMILY.INDEX_FILE).read_bytes())
             with self.assertRaisesRegex(ValueError, "coverage mismatch"):
-                self.run_export(root / "partial-input", root / "partial-output",
-                                with_payload=True, with_family=False)
                 EXPORT.export(
                     root / "input/sources.tsv", root / "input/records.tsv",
                     root / "partial-output", "fixture", "0" * 40,
