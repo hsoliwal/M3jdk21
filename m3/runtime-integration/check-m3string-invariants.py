@@ -43,6 +43,7 @@ stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
+receiver_receipt = read(".m3/m3jdk21-string-current-convergence-receiver.tsv")
 recipe_receipt = read("m3/runtime-integration/m3-string-synexia-recipe-application.tsv")
 builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 native_string = read("src/java.base/share/native/libjava/String.c")
@@ -1164,5 +1165,16 @@ if "M3StringHistoryConvergenceRecipeTest" in workflow:
     fail("M3JDK21 workflow must not execute a local Synexia-owned recipe proof")
 if "m3/tooling/migration-recipes/**" in workflow:
     fail("M3JDK21 String workflow must not treat local recipe custody as authoritative")
+
+for fragment in [
+    "M3JDK21_SYNEXIA_RECIPE_RECEIVER_V1",
+    "hsoliwal/com.synexia",
+    "com.synexia.rewrite.M3Jdk21StringCurrentConvergence",
+    "d5315dee9660754b36635f1cdb6de81c45ae8108",
+    "THIN_RUNTIME_RECEIVER",
+    "NONE",
+]:
+    if fragment not in receiver_receipt:
+        fail(f"M3 String Synexia recipe receiver receipt drift: {fragment}")
 
 print("M3_STRING_SOURCE_INVARIANTS_PASS")
