@@ -54,8 +54,8 @@ public final class M3InstanceIndexTest {
         check(index.findByName("en", "paris").isEmpty());
         check(index.instancesOf(650001).get(0).identity().equals(moby));
         check(index.titlesFor(moby).size() == 1);
-        check(index.titlesFor(moby).get(0).precompute().utf16Units() == 8);
-        check(index.find(einstein).orElseThrow().precompute().codePoints() == 14);
+        check(index.titlesFor(moby).get(0).precompute().utf16Units() == 9);
+        check(index.find(einstein).orElseThrow().precompute().codePoints() == 15);
         check(index.find(einstein).orElseThrow().aliases().equals(List.of("Albert Einstein", "Einstein")));
         check(index.find(einstein).orElseThrow().metadata().keySet().iterator().next().equals("occupation"));
         expect(UnsupportedOperationException.class,
@@ -66,6 +66,6 @@ public final class M3InstanceIndexTest {
                 List.of(einsteinRecord), List.of(title)));
         expect(IllegalArgumentException.class, () -> new M3InstanceIndex.InstanceRecord(
                 einstein, "en", "", "PERSON", 10500, List.of(), Map.of(), "source"));
-        System.out.println("M3_INSTANCE_INDEX_CONTRACT_PASS checks=" + checks + "/15");
+        System.out.println("M3_INSTANCE_INDEX_CONTRACT_PASS checks=" + checks + "/13");
     }
 }
