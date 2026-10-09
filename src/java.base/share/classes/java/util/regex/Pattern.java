@@ -2060,19 +2060,33 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     }
 
     /**
-     * Returns one mandatory case-sensitive BMP literal prefix assembled from consecutive exact
-     * Slice nodes. Null means the compiled graph shape is unsupported for candidate pruning.
+     * Returns one mandatory case-sensitive BMP literal prefix assembled from exact Slice nodes.
+     *
+     * <p>Capturing GroupHead nodes consume no input and do not make the following node optional,
+     * so an exact literal may safely continue across a group-entry seam. GroupTail is deliberately
+     * not crossed: the engine also reuses it in group-reference execution, where static
+     * transparency is not guaranteed.</p>
      */
     private static String compiledRequiredLiteral(Node node) {
-        if (node == null || node.getClass() != Slice.class) return null;
+        if (node == null) return null;
         StringBuilder literal = new StringBuilder();
         Node current = node;
-        while (current != null && current.getClass() == Slice.class) {
-            int[] buffer = ((Slice) current).buffer;
-            for (int unit : buffer) literal.append((char) unit);
-            current = current.next;
+        boolean sawSlice = false;
+        while (current != null) {
+            if (current.getClass() == Slice.class) {
+                int[] buffer = ((Slice) current).buffer;
+                for (int unit : buffer) literal.append((char) unit);
+                sawSlice = true;
+                current = current.next;
+                continue;
+            }
+            if (sawSlice && current instanceof GroupHead) {
+                current = current.next;
+                continue;
+            }
+            break;
         }
-        return literal.toString();
+        return sawSlice ? literal.toString() : null;
     }
 
     private Map<String, Integer> namedGroupsMap() {
