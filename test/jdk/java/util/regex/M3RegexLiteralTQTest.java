@@ -3,9 +3,10 @@
  *
  * @test
  * @summary Candidate-only M3TQ literal find gate preserves Matcher result and state
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3RegexLiteralTQTest
+ * @run main/othervm --add-opens=java.base/java.util.regex=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3RegexLiteralTQTest
  */
 
+import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,6 +57,15 @@ public class M3RegexLiteralTQTest {
         compareFind(Pattern.compile("^(?:abcabc|needle-XYZ)"), source, 0, source.length());
         compareFind(Pattern.compile("(?:acbacb|not-present)"), source, 0, source.length());
 
+        Pattern grouped = Pattern.compile("ab(cd)");
+        check(hasM3Tq(grouped), "group-head literal seam compiles TQ");
+        compareFind(grouped, source + "abcd", 0, source.length() + 4);
+        compareFind(grouped, source, 0, source.length());
+
+        Pattern groupedBranch = Pattern.compile("ab(cd)|xy(za)");
+        check(hasM3Tq(groupedBranch), "branch group-head literal seams compile TQ");
+        compareFind(groupedBranch, source + "xyza", 0, source.length() + 4);
+
         // Case-insensitive literal matching has different equivalence semantics and must bypass
         // exact TQ gating.
         compareFind(
@@ -79,6 +89,16 @@ public class M3RegexLiteralTQTest {
         check(!mutableMatcher.find(), "mutable input observes post-construction mutation");
 
         System.out.println("M3_REGEX_LITERAL_TQ_PASS|checks=" + checks);
+    }
+
+    private static boolean hasM3Tq(Pattern pattern) {
+        try {
+            Field field = Pattern.class.getDeclaredField("m3Tq");
+            field.setAccessible(true);
+            return field.get(pattern) != null;
+        } catch (ReflectiveOperationException failure) {
+            throw new AssertionError(failure);
+        }
     }
 
     private static void compareFind(Pattern pattern, String source, int from, int to) {
