@@ -1,0 +1,2 @@
+donor_commit	donor_path	donor_blob	target_owner	status	preservation
+c6d128572825cc11f4bbb05d78bcbebb5b3aa67a	synexia-common/src/main/java/com/synexia/common/language/IndexPhraseTable.java	a06f5493c9ac07de3f881dbef701c72255141eb9	com.m3.text.M3PhrasePrecompute	PENDING_TARGET_RECEIVER_PROOF	Token IDs remain vocabulary-scoped; source order, target order, empty replacements, and left-to-right longest-prefix behavior are preserved outside java.lang.String.
