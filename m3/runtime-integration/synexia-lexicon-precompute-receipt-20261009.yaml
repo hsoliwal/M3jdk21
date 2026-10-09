@@ -31,7 +31,7 @@ invariants:
 
 verification:
   source_discriminator_command: python m3/runtime-integration/check-synexia-lexicon-precompute-receipt.py --repo-root .
-  source_discriminator: M3_LEXICON_PRECOMPUTE_RECEIPT_SOURCE_PASS checks=35/35|runtime=NOT_RUN
+  source_discriminator: M3_LEXICON_PRECOMPUTE_RECEIPT_SOURCE_PASS checks=38/38|runtime=NOT_RUN
   runtime: NOT_RUN
   jni: NOT_RUN
   benchmark: NOT_MEASURED
