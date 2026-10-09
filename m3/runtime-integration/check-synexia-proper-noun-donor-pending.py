@@ -24,6 +24,8 @@ def main() -> int:
     recipe = RECIPE.read_text(encoding="utf-8")
     target_map = TARGET_MAP.read_text(encoding="utf-8")
     assert "M3InstanceIndex" in target_map
+    assert "instanceOfX" in target_map
+    assert "TitleRecord.identity" in target_map
     assert target_map.count("TARGET_CONTRACT_OPEN_NO_PAYLOAD") == 2
     assert target_map.count("REFERENCE_ONLY_PAYLOAD_NOT_ADMITTED") == 2
     for marker in (
@@ -33,7 +35,7 @@ def main() -> int:
         "TARGET_CONTRACT_OPEN_NO_PAYLOAD",
     ):
         assert marker in recipe
-    print("M3_PROPER_NOUN_TARGET_MAP_PASS checks=32/32")
+    print("M3_PROPER_NOUN_TARGET_MAP_PASS checks=34/34")
     return 0
 
 if __name__ == "__main__":
