@@ -223,7 +223,7 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
-        self.assertEqual("", sources["translate.rows"]["precompute_fields"])
+        self.assertEqual("translation_grammar_supported", sources["translate.rows"]["precompute_fields"])
         self.assertEqual("value", sources["dictlang.numbers.0-10000"]["precompute_fields"])
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
@@ -242,7 +242,7 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("int[]", field_types["memberships"])
         self.assertEqual("long", field_types["lexicon_fingerprint"])
         self.assertEqual("double", field_types["si_offset"])
-        self.assertEqual("boolean", field_types["si_prefixable"])
+        self.assertEqual("boolean", field_types["si_prefixable"])\n        self.assertEqual("boolean", field_types["translation_grammar_supported"])
         self.assertTrue(all(field_types.values()))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
                           "dictlang.thesaurus", "dictlang.antonyms"):
