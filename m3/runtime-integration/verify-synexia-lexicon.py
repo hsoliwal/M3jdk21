@@ -395,7 +395,7 @@ def verify(output: pathlib.Path) -> dict[str, int]:
     declared_family_files = target.get("family_sidecar_files")
     declared_family_index = target.get("family_sidecar_index")
     present_family_outputs = set(outputs) & family_names
-    if declared_family_files is None:
+    if not declared_family_files:
         if declared_family_index is not None or present_family_outputs:
             raise ValueError("family sidecar metadata is incomplete")
         family_stats = {"families": 0, "rows": 0}
