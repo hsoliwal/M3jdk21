@@ -56,6 +56,12 @@ public final class SharedLexiconFamilySidecarCatalogTest {
                     "token-hash-precompute", 1, "translation-projection", 1)),
                     "row counts");
 
+            Files.writeString(root.resolve("unexpected.tsv"), "unexpected\\n",
+                    StandardCharsets.UTF_8);
+            expectIOException(() -> SharedLexiconFamilySidecarCatalog.open(root),
+                    "unexpected regular file rejected");
+            Files.delete(root.resolve("unexpected.tsv"));
+
             Path legacy = Files.createTempDirectory("m3lex-family-legacy-");
             try {
                 check(SharedLexiconFamilySidecarCatalog.openOptional(legacy).isEmpty(),
