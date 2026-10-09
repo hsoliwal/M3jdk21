@@ -10,7 +10,7 @@ if ! "$M3_JDK/bin/javac" --release 21 -Xlint:all,-module -d build/classes "${sou
 fi
 "$M3_JDK/bin/jar" --create --file build/com.m3.text.jar -C build/classes .
 if ! "$M3_JDK/bin/javac" --release 21 --module-path build/com.m3.text.jar --add-modules com.m3.text -d build/tests \
-  core/test/FoundationTest.java core/test/M3LexiconPrecomputeTest.java core/test/M3LexiconsFacadeTest.java \
+  core/test/FoundationTest.java core/test/M3LexiconPrecomputeTest.java core/test/M3LexiconsFacadeTest.java core/test/M3InstanceIndexTest.java \
   core/test/M3DictionaryFrequencyContractTest.java core/test/M3LangDexPrecomputeTest.java core/test/M3PhrasePrecomputeTest.java core/test/M3TranslationReceiverMapTest.java \
   core/test/AcronymSidecarCatalogTest.java core/test/M3AcronymPrecomputeTest.java \
   core/test/SynexiaPrecomputePayloadTest.java core/test/SynexiaPrecomputeReceiverTest.java \
@@ -25,6 +25,7 @@ for mode in jit int nocompact c2; do
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests FoundationTest | tee "build/logs/test-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LexiconPrecomputeTest | tee "build/logs/typed-precompute-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LexiconsFacadeTest | tee "build/logs/m3lexicons-facade-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3InstanceIndexTest | tee "build/logs/instance-index-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3DictionaryFrequencyContractTest | tee "build/logs/dictionary-frequency-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LangDexPrecomputeTest | tee "build/logs/langdex-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3PhrasePrecomputeTest | tee "build/logs/phrase-contract-$mode.log"
