@@ -822,7 +822,7 @@ critical_surfaces = {
     "lastIndexOf(String)": "M3String storage = m3();",
     "prepared reverse search": "return storage.lastIndexOf(target, fromIndex);",
     "replace(char,char)": "M3String replaced = storage.replace(oldChar, newChar);",
-    "replace(CharSequence,CharSequence)": "M3String replaced = storage.replace(targetM3, replacementM3);",
+    "replace(CharSequence,CharSequence)": "M3String replaced = sourceM3.replace(targetM3, replacementM3);",
     "replaceFirst(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, true);",
     "replaceAll(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, false);",
     "substring": "return new String(storage.slice(beginIndex, endIndex));",
@@ -862,14 +862,26 @@ for pin in [
 ]:
     if pin not in literal_history:
         fail(f"indexed literal replacement history lost donor pin: {pin}")
-literal_start = m3.find("    static boolean isLiteralRegexReplacement(")
+# The reusable literal-regex classifier now owns syntax and surrogate admission.
+# Replacement must call it; requiring the surrogate test inside the replacement method
+# itself would incorrectly reject this stronger shared-guard design.
+literal_classifier_start = m3.find("    static boolean isLiteralRegex(String regex)")
+literal_start = m3.find("    static boolean isLiteralRegexReplacement(", literal_classifier_start)
 literal_end = m3.find("    static int pow31(", literal_start)
-if literal_start < 0 or literal_end < 0:
-    fail("indexed literal replacement owner atom is absent")
+if literal_classifier_start < 0 or literal_start < 0 or literal_end < 0:
+    fail("indexed literal regex classifier/replacement owner atom is absent")
+literal_classifier = m3[literal_classifier_start:literal_start]
+for marker in [
+    "if (regex == null || regex.isEmpty()) return false;",
+    "Character.isSurrogate(unit)",
+    '".indexOf(unit) >= 0) return false;',
+]:
+    if marker not in literal_classifier:
+        fail(f"indexed literal regex classifier lost surrogate/syntax guard: {marker}")
 literal_atom = m3[literal_start:literal_end]
 for marker in [
     "static boolean isLiteralRegexReplacement(String regex, String replacement)",
-    "Character.isSurrogate(unit)",
+    "if (!isLiteralRegex(regex) || replacement == null) return false;",
     "if (found < 0) return original;",
     "return new String(replaceMatches(target, canonicalize(replacement), found, firstOnly));",
     "found = !firstOnly && cursor <= length() - checkedTarget.length()",
@@ -972,19 +984,33 @@ for fragment in [
 if "for (int index = 0; index < len; index++)" not in string:
     fail("exact region comparison loop missing after precompute filter")
 
-# Case conversion is canonical only for ASCII + Locale.ROOT. Locale-sensitive and non-ASCII
-# transformations must continue through the stock JDK case engine.
+# The canonical ASCII case path is shared by locales with ordinary ASCII mappings.
+# tr/az/lt must remain on the stock JDK case engine, as must non-ASCII text.
 for fragment in [
-    "storage != null && locale.equals(Locale.ROOT)",
+    "storage != null && asciiCaseMappingLocale(locale)",
     "M3StringFacts prepared = storage.facts();",
     "if (prepared.ascii) {",
     "storage.asciiCase(false)",
     "storage.asciiCase(true)",
 ]:
     if fragment not in string:
-        fail(f"M3 ROOT ASCII case boundary missing: {fragment}")
+        fail(f"M3 ASCII locale case boundary missing: {fragment}")
+if string.count("storage != null && asciiCaseMappingLocale(locale)") < 2:
+    fail("M3 ASCII locale guard must protect both lower and upper case")
+locale_start = string.find("private static boolean asciiCaseMappingLocale(Locale locale) {")
+locale_end = string.find("\n    }", locale_start)
+if locale_start < 0 or locale_end < locale_start:
+    fail("M3 ASCII locale admission helper missing")
+locale_admission = string[locale_start:locale_end]
+if "String lang = locale.getLanguage();" not in locale_admission:
+    fail("M3 ASCII locale guard no longer checks the language")
+if not any(rule in locale_admission for rule in [
+    'return lang != "tr" && lang != "az" && lang != "lt";',
+    'return !lang.equals("tr") && !lang.equals("az") && !lang.equals("lt");',
+]):
+    fail("M3 ASCII locale tr/az/lt exclusions lost")
 if "M3String asciiCase(boolean upper)" not in m3:
-    fail("M3String ROOT ASCII canonical case mapper missing")
+    fail("M3String canonical ASCII case mapper missing")
 
 # Builder coder selection may use exact M3 range facts locally. This does not change the
 # String/HotSpot coder; it only avoids inflating a Latin1 builder for a Latin1-only M3 range.
@@ -1094,11 +1120,13 @@ for fragment in [
         fail(f"M3 direct char-array ingress missing: {fragment}")
 
 # Empty-target literal replacement is defined at every UTF-16 code-unit boundary, including
-# between surrogate halves. M3 preserves that exact contract without StringBuilder flattening.
+# between surrogate halves. In mixed flat/M3 calls, transient canonical sourceM3 is the owner;
+# the original flat receiver is not forced to retain an additional M3 payload.
 for fragment in [
     "M3String replaceEmptyTarget(M3String replacement)",
     "pieces.add(slice(index, index + 1));",
-    "return new String(storage.replaceEmptyTarget(replacementM3));",
+    "M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);",
+    "return new String(sourceM3.replaceEmptyTarget(replacementM3));",
 ]:
     if fragment not in (m3 + string):
         fail(f"M3 empty-target replacement route missing: {fragment}")
