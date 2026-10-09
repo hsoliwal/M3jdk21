@@ -2,9 +2,9 @@ recipe: synexia-proper-noun-donor-pending-20261009
 version: 1
 source_repo: hsoliwal/com.synexia
 source_pr: 10054
-source_head: 051fecfcd7b2ad1bdfb1666b2faa0e0a52820168
+source_head: 20bc672b6b7492c3f4bf09eec7364473b2a24594
 receipt: m3/runtime-integration/synexia-proper-noun-donor-pending-receipt.tsv
-mode: pending-reference-only
+mode: target-contract-open-no-payload
 laws:
   - source-head-and-blob-pins-must-match
   - donor-data-and-code-must-not-be-copied
@@ -14,7 +14,7 @@ laws:
 target:
   source_manifest: m3/lexicon/synexia-source-manifest.tsv
   source_manifest_status: no-proper-name-or-title-family
-  receiver_status: NO_TYPED_RECEIVER
+  receiver_status: TARGET_CONTRACT_OPEN_NO_PAYLOAD\n  receiver: M3InstanceIndex\n  receiver_test: M3InstanceIndexTest
 verification:
   checker: m3/runtime-integration/check-synexia-proper-noun-donor-pending.py
   test: m3/runtime-integration/test_synexia_proper_noun_donor_pending.py
