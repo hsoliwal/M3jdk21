@@ -60,7 +60,7 @@ def main() -> int:
             comments.append(line)
         elif line.strip():
             data_lines.append(line)
-    if EXPECTED_PROOF not in comments:
+    if "# proof=" + EXPECTED_PROOF not in comments:
         fail("proof marker drift")
     rows = list(csv.reader(data_lines, delimiter="\t"))
     if not rows or rows[0] != EXPECTED_HEADER:
