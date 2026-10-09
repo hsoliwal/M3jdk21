@@ -72,7 +72,7 @@ public final class SynexiaPrecomputePayloadTest {
         expect(IllegalArgumentException.class, () -> SynexiaPrecomputePayload.parse(
                 "{\"flags\":null}"));
         expect(IllegalArgumentException.class, () -> SynexiaPrecomputePayload.parse(
-                "{\"flags\":{\"nested\":1}"));
+                "{\"flags\":{\"nested\":1}}"));
         expect(IllegalArgumentException.class, () -> payload.requireBoolean("flags"));
         System.out.println("M3JDK_SYNXIA_PAYLOAD_PASS checks=" + checks
                 + " fields=" + payload.fieldNames().size());
