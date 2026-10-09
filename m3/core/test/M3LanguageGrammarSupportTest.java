@@ -33,7 +33,7 @@ public final class M3LanguageGrammarSupportTest {
         String manifest = Files.readString(
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
         String row = Arrays.stream(manifest.split("\\n", -1))
-                .filter(line -> line.startsWith("translate.rows\\t"))
+                .filter(line -> line.startsWith("translate.rows\t"))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("translation manifest row missing"));
         String[] columns = row.split("\\t", -1);
