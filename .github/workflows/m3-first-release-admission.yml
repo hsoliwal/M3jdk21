@@ -92,6 +92,8 @@ jobs:
           python3 m3/runtime-integration/char-array-copy/recipe/test_recipe.py
           python3 m3/runtime-integration/recipe/apply.py --check
           python3 m3/runtime-integration/recipe/test_recipe.py
+          python3 m3/recipes/apply.py --check
+          python3 m3/recipes/test_recipe.py
       - name: Build and test P0 immutable text foundation
         run: ./m3/build.sh
       - name: Verify Synexia compatibility and shared mapping
