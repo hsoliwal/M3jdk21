@@ -58,6 +58,14 @@ public final class M3InstanceIndexTest {
         check(index.find(einstein).orElseThrow().precompute().codePoints() == 15);
         check(index.find(einstein).orElseThrow().aliases().equals(List.of("Albert Einstein", "Einstein")));
         check(index.find(einstein).orElseThrow().metadata().keySet().iterator().next().equals("occupation"));
+        M3InstanceIndex.PrecomputeFacts unicode =
+                M3InstanceIndex.PrecomputeFacts.forText("A \\uD83D\\uDE00\\uD800");
+        check(unicode.utf16Units() == 5);
+        check(unicode.codePoints() == 4);
+        check(unicode.unpairedSurrogates() == 1);
+        check(unicode.nonBmpCodePoints() == 1);
+        check(unicode.containsWhitespace());
+        check(!unicode.ascii() && !unicode.latin1());
         expect(UnsupportedOperationException.class,
                 () -> index.find(einstein).orElseThrow().aliases().add("x"));
         expect(IllegalArgumentException.class, () -> M3InstanceIndex.of(
@@ -66,6 +74,6 @@ public final class M3InstanceIndexTest {
                 List.of(einsteinRecord), List.of(title)));
         expect(IllegalArgumentException.class, () -> new M3InstanceIndex.InstanceRecord(
                 einstein, "en", "", "PERSON", 10500, List.of(), Map.of(), "source"));
-        System.out.println("M3_INSTANCE_INDEX_CONTRACT_PASS checks=" + checks + "/14");
+        System.out.println("M3_INSTANCE_INDEX_CONTRACT_PASS checks=" + checks + "/20");
     }
 }
