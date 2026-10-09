@@ -153,6 +153,33 @@ catalog preserve acronym, expansion, and domain separately; the source
 snapshot remains staged until hosted target checks and synchronized Synexia
 receipts admit it.
 
+## Typed precompute family sidecars
+
+The optional `m3lex-family-v2` bundle publishes five typed, source-scoped
+projections without changing the M3LEX image or `java.lang.String` identity:
+
+- `translation-projection`: translated token IDs and mapped-token count;
+- `spell-index`: delete-key candidates, frequencies, and source fingerprint;
+- `token-hash-precompute`: token/range digests and rolling range fingerprint;
+- `prefix-counts`: value-scoped prefix arrays;
+- `token-frequency`: value-scoped frequency folds.
+
+The bundle is complete-or-absent. It consists of
+`synexia.precompute-family-index.tsv` plus one sidecar for each family,
+with strict UTF-8/LF/no-BOM encoding, deterministic ordering, checksums, typed
+values, and source identity scope. Coordinate-bearing families must match
+`synexia.records.tsv` exactly. Partial bundles, unknown files, coordinate
+drift,
+duplicate rows, and checksum changes are rejected before output is admitted.
+
+An operator may supply a complete bundle to the offline exporter with
+`--family-sidecar-dir /path/to/family-sidecars`. The exporter copies only
+the supplied bytes into the output and records their hashes in the canonical
+manifest; it never downloads or infers family payloads. Synexia remains the
+canonical source owner, and this repository carries the receiver contract,
+family map, and synthetic proofs rather than bulk lexical data.
+
+
 ## Proof
 
 ```text
