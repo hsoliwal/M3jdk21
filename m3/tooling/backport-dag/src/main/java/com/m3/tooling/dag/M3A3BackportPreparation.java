@@ -2,6 +2,7 @@
 package com.m3.tooling.dag;
 
 import com.m3.a3.A3Apply;
+import com.synexia.rewrite.M3RecipeMasteryPortableReceipt;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -74,9 +75,10 @@ public final class M3A3BackportPreparation {
         }
     }
 
-    public record Receipt(List<Row> rows) {
+    public record Receipt(List<Row> rows, String masteryRoot) {
         public Receipt {
             rows = List.copyOf(Objects.requireNonNull(rows, "rows"));
+            masteryRoot = sha(masteryRoot, "masteryRoot");
             if (rows.isEmpty()) {
                 throw new IllegalArgumentException("empty preparation receipt");
             }
@@ -112,7 +114,7 @@ public final class M3A3BackportPreparation {
                             phase,
                             javaCount,
                             applicable,
-                            phaseRoot(phase, rows)))
+                            phaseRoot(phase, rows, masteryRoot)))
                     .toList();
         }
 
@@ -127,10 +129,25 @@ public final class M3A3BackportPreparation {
 
     private M3A3BackportPreparation() {}
 
+    /**
+     * Legacy entry point retained only to fail closed. A3 execution without portable mastery
+     * evidence is forbidden.
+     */
+    @Deprecated(forRemoval = false)
     public static Receipt prepare(
             Path repositoryRoot,
             Path outputRoot,
             List<String> targetPaths) throws IOException {
+        throw new IllegalArgumentException("verified Synexia mastery receipt required");
+    }
+
+    public static Receipt prepare(
+            Path repositoryRoot,
+            Path outputRoot,
+            List<String> targetPaths,
+            M3RecipeMasteryPortableReceipt.Verified mastery) throws IOException {
+        M3RecipeMasteryPortableReceipt.Verified checkedMastery =
+                Objects.requireNonNull(mastery, "mastery");
         Path root = Objects.requireNonNull(repositoryRoot, "repositoryRoot").toAbsolutePath().normalize();
         Path out = Objects.requireNonNull(outputRoot, "outputRoot").toAbsolutePath().normalize();
         List<String> targets = targetPaths.stream()
@@ -155,7 +172,8 @@ public final class M3A3BackportPreparation {
 
         Map<String, A3Apply.Receipt> javaReceipts = new HashMap<>();
         if (!java.isEmpty()) {
-            for (A3Apply.Receipt receipt : A3Apply.run(root, out.resolve("a3"), java)) {
+            for (A3Apply.Receipt receipt :
+                    A3Apply.run(root, out.resolve("a3"), java, checkedMastery)) {
                 javaReceipts.put(receipt.path(), receipt);
             }
             if (javaReceipts.size() != java.size()) {
@@ -191,9 +209,14 @@ public final class M3A3BackportPreparation {
             }
         }
         rows.sort(Comparator.comparing(Row::path));
-        Receipt receipt = new Receipt(rows);
+        Receipt receipt = new Receipt(rows, checkedMastery.root());
         write(out, receipt);
-        writePhaseProofs(out, receipt.phaseProofs());
+        CURRENT_MASTERY_ROOT.set(receipt.masteryRoot());
+        try {
+            writePhaseProofs(out, receipt.phaseProofs());
+        } finally {
+            CURRENT_MASTERY_ROOT.remove();
+        }
         return receipt;
     }
 
@@ -205,14 +228,15 @@ public final class M3A3BackportPreparation {
     private static void write(Path out, Receipt receipt) throws IOException {
         Files.createDirectories(out);
         StringBuilder tsv = new StringBuilder(
-                "path\tlane\tbeforeSha\tpreparedSha\tchanged\tfixedPoint\n");
+                "path\tlane\tbeforeSha\tpreparedSha\tchanged\tfixedPoint\tmasteryRoot\n");
         for (Row row : receipt.rows()) {
             tsv.append(row.path()).append('\t')
                     .append(row.lane()).append('\t')
                     .append(row.beforeSha()).append('\t')
                     .append(row.preparedSha()).append('\t')
                     .append(row.changed()).append('\t')
-                    .append(row.fixedPoint()).append('\n');
+                    .append(row.fixedPoint()).append('\t')
+                    .append(receipt.masteryRoot()).append('\n');
         }
         Files.writeString(out.resolve("backport-preparation.tsv"), tsv, StandardCharsets.UTF_8);
     }
@@ -221,7 +245,7 @@ public final class M3A3BackportPreparation {
             Path out,
             List<PhaseProof> proofs) throws IOException {
         StringBuilder tsv =
-                new StringBuilder("phase\tjavaFiles\tapplicable\troot\n");
+                new StringBuilder("phase\tjavaFiles\tapplicable\troot\tmasteryRoot\n");
         for (PhaseProof proof : proofs) {
             tsv.append(proof.phase())
                     .append('\t')
@@ -230,6 +254,8 @@ public final class M3A3BackportPreparation {
                     .append(proof.applicable())
                     .append('\t')
                     .append(proof.root())
+                    .append('\t')
+                    .append(proofs.isEmpty() ? "" : phaseMasteryRoot(proofs))
                     .append('\n');
         }
         Files.writeString(
@@ -238,12 +264,24 @@ public final class M3A3BackportPreparation {
                 StandardCharsets.UTF_8);
     }
 
-    private static String phaseRoot(ProofPhase phase, List<Row> rows) {
+    private static String phaseMasteryRoot(List<PhaseProof> proofs) {
+        // All phase proofs are generated from one Receipt. The root is framed into each proof
+        // digest and exposed by the caller's receipt; this helper exists only for TSV layout.
+        return CURRENT_MASTERY_ROOT.get();
+    }
+
+    private static final ThreadLocal<String> CURRENT_MASTERY_ROOT = new ThreadLocal<>();
+
+    private static String phaseRoot(
+            ProofPhase phase,
+            List<Row> rows,
+            String masteryRoot) {
         try {
             java.security.MessageDigest digest =
                     java.security.MessageDigest.getInstance("SHA-256");
             update(digest, PHASE_SCHEMA);
             update(digest, Objects.requireNonNull(phase, "phase").name());
+            update(digest, sha(masteryRoot, "masteryRoot"));
             List<Row> javaRows = rows.stream()
                     .filter(row -> row.lane() == Lane.JAVA_A3_FIXED_POINT)
                     .toList();
