@@ -2,8 +2,8 @@
   "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
-  "target_commit": "3c3d66694aaa1b345bbee1c3fe905f1a07ad3906",
-  "patch_sha256": "bfc58c6eb3c7540808839e937a0f64788d65eb64097d10407ecccf899560d0eb",
+  "target_commit": "36fb6a0ceab9a2385d6d699aaebcaf18083bb9e9",
+  "patch_sha256": "f4704fa362a6217d519c980e73155dbddc0a47bc3cbf694467b7e85fb239009b",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
     "src/hotspot/share/cds/archiveHeapWriter.cpp": {
@@ -91,7 +91,8 @@
       "after": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b",
       "superseded": [
         "f88c545538e250c057809d86cb0727cbeb07bed69508b0c85197b0084247fa5c",
-        "24ac1f87c1b2022b08d695ae6b116e9376dad59ed0ffb86f52da0003dd3e036d"
+        "24ac1f87c1b2022b08d695ae6b116e9376dad59ed0ffb86f52da0003dd3e036d",
+        "9f51f5ef71c86e0f98a6e0ad7d1efbb24df49a43b2a026ef55457cdc921cba08"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringAtom.java": {
@@ -114,6 +115,13 @@
       "superseded": [
         "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f",
         "f1cc0ec9d4fd0bbc15d9c684e80b9907b60321cb15ad4fd7fa39f3cf973fc4cd"
+      ]
+    },
+    "src/java.base/share/classes/java/lang/M3StringMixedCompare.java": {
+      "before": null,
+      "after": "57c50151826d2b1e04964a0a573cfd4046e868637dec8f3d428c9b8e33762697",
+      "superseded": [
+        "57c50151826d2b1e04964a0a573cfd4046e868637dec8f3d428c9b8e33762697"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringOwner.java": {
@@ -154,7 +162,7 @@
     },
     "src/java.base/share/classes/java/lang/String.java": {
       "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
-      "after": "c49e422dfe0e6b83a2d51155f0d36b5223719dfefd211a96313705bc3ee253ca"
+      "after": "4696d49313ec8be619ad1cb074d4c281f1bccc7eb883ed1a9f064b9fefe6833a"
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
       "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",
