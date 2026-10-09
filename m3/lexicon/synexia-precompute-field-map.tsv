@@ -1,5 +1,4 @@
 donor_type	donor_field	donor_java_type	canonical_payload_field	m3jdk_storage	status	preservation_rule
-IndexPhraseTable	space	IndexStringSpace	vocabulary_fingerprint	M3PhrasePrecompute.Scope.vocabularyFingerprint	MAPPED	vocabulary-space identity is preserved through the scope fingerprint; token IDs are never portable across spaces
 IndexWordFacts	languageId	int	language_id	synexia.records.tsv:precompute_payload	MAPPED	operator-supplied value is preserved at source_id+record_id; no String semantic
 IndexWordFacts	wordCount	int	word_count	synexia.records.tsv:precompute_payload	MAPPED	operator-supplied value is preserved without recomputation
 IndexWordFacts	lexiconFingerprint	long	lexicon_fingerprint	synexia.records.tsv:precompute_payload	MAPPED	fingerprint remains donor-owned and opaque
@@ -12,53 +11,84 @@ IndexWordFacts	membershipCount/membershipAt	int[]	memberships	synexia.records.ts
 IndexWordFacts	conceptCount/conceptAt	long[]	concept_ids	synexia.records.tsv:precompute_payload	MAPPED	ordered concept IDs retain donor order and ownership
 IndexWordFacts	subjectCount/subjectAt	long[]	subjects	synexia.records.tsv:precompute_payload	MAPPED	ordered subject IDs retain donor order and ownership
 IndexWordFacts	expansionSize/expansionWordIdAt	long[]	expansion_word_ids	synexia.records.tsv:precompute_payload	MAPPED	ordered expansion IDs retain donor order and ownership
-IndexWordSignalEnrichment	stemId	long	stem_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
-IndexWordSignalEnrichment	lemmaId	long	lemma_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
-IndexWordSignalEnrichment	phoneticId	long	phonetic_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
-IndexWordSignalEnrichment	posMask	int	pos_mask	synexia.records.tsv:precompute_payload	MAPPED	bit mask remains donor-owned and opaque
-IndexWordSignalEnrichment	morphologyMask	int	morphology_mask	synexia.records.tsv:precompute_payload	MAPPED	bit mask remains donor-owned and opaque
-IndexWordSignalProfile	lexicalRank	int	lexical_rank	synexia.records.tsv:precompute_payload	MAPPED	lexical ordering signal remains source metadata
-IndexWordSignalProfile	utf16Length	int	utf16_length	synexia.records.tsv:precompute_payload	MAPPED	owner-provided value is retained; independently verified M3StringFacts remain authoritative for image text
-IndexWordSignalProfile	codePointLength	int	code_point_length	synexia.records.tsv:precompute_payload	MAPPED	owner-provided value is retained; independently verified M3StringFacts remain authoritative for image text
-IndexWordSignalProfile	firstCodePoint	int	first_code_point	synexia.records.tsv:precompute_payload	MAPPED	boundary signal remains donor-owned and opaque
-IndexWordSignalProfile	lastCodePoint	int	last_code_point	synexia.records.tsv:precompute_payload	MAPPED	boundary signal remains donor-owned and opaque
-IndexWordSignalProfile	scriptOrdinal	int	script_ordinal	synexia.records.tsv:precompute_payload	MAPPED	Unicode script signal remains language-layer metadata
-IndexWordSignalProfile	presence64	long	presence64	synexia.records.tsv:precompute_payload	MAPPED	presence signature remains donor-owned and opaque
-IndexWordSignalProfile	simHash64	long	sim_hash64	synexia.records.tsv:precompute_payload	MAPPED	probabilistic signature remains donor-owned and opaque
-IndexWordSignalProfile	frequencyRank	int	frequency_rank	synexia.records.tsv:precompute_payload	MAPPED	frequency ordering remains source metadata, never image_row identity
-IndexWordSignalFlags	EMPTY/ASCII/LATIN1/...	int	flags	synexia.records.tsv:precompute_payload	MAPPED	profile flags are preserved only when supplied; bounded M3StringFacts remain independently verified
-LangDexProjection.Entry	conceptId	long	langdex_concept_id	synexia.records.tsv:precompute_payload	MAPPED	validated nonzero LangDex concept coordinate remains donor-owned and is not renumbered
-LangDexProjection.Entry	frequency	long	langdex_frequency	synexia.records.tsv:precompute_payload	MAPPED	validated nonnegative LangDex frequency remains source metadata
-LangDexProjection.Entry	flags	int	langdex_flags	synexia.records.tsv:precompute_payload	MAPPED	validated unsigned-16-bit LangDex entry flags remain opaque
-LangDexWordProfile	lexicalClassMask	long	langdex_lexical_class_mask	synexia.records.tsv:precompute_payload	MAPPED	primitive lexical class mask is retained without reclassification
-LangDexWordProfile	semanticClassMask	long	langdex_semantic_class_mask	synexia.records.tsv:precompute_payload	MAPPED	primitive semantic class mask is retained without reclassification
-LangDexWordProfile	subjectId	int	langdex_subject_id	synexia.records.tsv:precompute_payload	MAPPED	validated LangDex subject coordinate remains donor-owned
-LangDexWordProfile	featureBits	int	langdex_feature_bits	synexia.records.tsv:precompute_payload	MAPPED	morphology/feature bits remain donor-owned and opaque
-LangDexWordProfile	evidenceMask	int	langdex_evidence_mask	synexia.records.tsv:precompute_payload	MAPPED	evidence bits remain donor-owned and opaque
-LangDexWordProfile	confidencePermille	int	langdex_confidence_permille	synexia.records.tsv:precompute_payload	MAPPED	confidence remains bounded donor metadata in the inclusive 0..1000 range
-LangDexLexicalProfile	lexicalClassMask	long	langdex_lexical_class_mask	synexia.records.tsv:precompute_payload	MAPPED	profile-level lexical class mask shares the LangDex canonical type
-LangDexLexicalProfile	featureBits	int	langdex_feature_bits	synexia.records.tsv:precompute_payload	MAPPED	profile-level feature bits share the LangDex canonical type
-LangDexLexicalProfile	evidenceMask	int	langdex_evidence_mask	synexia.records.tsv:precompute_payload	MAPPED	profile-level evidence bits share the LangDex canonical type
-LangDexLexicalProfile	confidencePermille	int	langdex_confidence_permille	synexia.records.tsv:precompute_payload	MAPPED	profile-level confidence shares the LangDex canonical type and bound
-LangDexTranslation	targetLexemeId	long	langdex_target_lexeme_id	synexia.records.tsv:precompute_payload	MAPPED	target lexeme coordinate remains donor-owned and is not substituted with image_row
+IndexWordSignal	stemId	long	stem_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
+IndexWordSignal	lemmaId	long	lemma_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
+IndexWordSignal	phoneticId	long	phonetic_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
+IndexWordSignal	posMask	int	pos_mask	synexia.records.tsv:precompute_payload	MAPPED	bit mask remains donor-owned and opaque
+IndexWordSignal	morphologyMask	int	morphology_mask	synexia.records.tsv:precompute_payload	MAPPED	bit mask remains donor-owned and opaque
+IndexWordSignal	lexicalRank	int	lexical_rank	synexia.records.tsv:precompute_payload	MAPPED	lexical ordering signal remains source metadata
+IndexWordSignal	utf16Length	int	utf16_length	synexia.records.tsv:precompute_payload	MAPPED	owner-provided value is retained; independently verified M3StringFacts remain authoritative for image text
+IndexWordSignal	codePointLength	int	code_point_length	synexia.records.tsv:precompute_payload	MAPPED	owner-provided value is retained; independently verified M3StringFacts remain authoritative for image text
+IndexWordSignal	firstCodePoint	int	first_code_point	synexia.records.tsv:precompute_payload	MAPPED	boundary signal remains donor-owned and opaque
+IndexWordSignal	lastCodePoint	int	last_code_point	synexia.records.tsv:precompute_payload	MAPPED	boundary signal remains donor-owned and opaque
+IndexWordSignal	scriptOrdinal	int	script_ordinal	synexia.records.tsv:precompute_payload	MAPPED	Unicode script signal remains language-layer metadata
+IndexWordSignal	presence64	long	presence64	synexia.records.tsv:precompute_payload	MAPPED	presence signature remains donor-owned and opaque
+IndexWordSignal	simHash64	long	sim_hash64	synexia.records.tsv:precompute_payload	MAPPED	probabilistic signature remains donor-owned and opaque
+IndexWordSignal	frequencyRank	int	frequency_rank	synexia.records.tsv:precompute_payload	MAPPED	frequency ordering remains source metadata, never image_row identity
+IndexWordSignal	EMPTY/ASCII/LATIN1/...	int	flags	synexia.records.tsv:precompute_payload	MAPPED	profile flags are preserved only when supplied; bounded M3StringFacts remain independently verified
+IndexWordFacts	sourceRevision	String	source_revision	synexia.records.tsv:precompute_payload	MAPPED	source revision pins the immutable dictionary snapshot used to derive this projection
+IndexWordSignal	sourceRevision	String	source_revision	synexia.records.tsv:precompute_payload	MAPPED	source revision pins the immutable frequency snapshot used to derive this projection
+M3LangDexPrecompute.Entry	conceptId	long	langdex_concept_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated nonzero LangDex concept coordinate remains donor-owned and is not renumbered
+M3LangDexPrecompute.Entry	frequency	long	langdex_frequency	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated nonnegative LangDex frequency remains source metadata
+M3LangDexPrecompute.Entry	flags	int	langdex_flags	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated unsigned-16-bit LangDex entry flags remain opaque
+M3LangDexPrecompute.Entry	glottocode	String	langdex_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	entry language coordinate is preserved without normalization drift
+M3LangDexPrecompute.Entry	surface	String	langdex_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	entry surface is preserved as source-owned UTF-16 text
+M3LangDexPrecompute.WordProfile	lexicalClassMask	long	langdex_lexical_class_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	primitive lexical class mask is retained without reclassification
+M3LangDexPrecompute.WordProfile	semanticClassMask	long	langdex_semantic_class_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	primitive semantic class mask is retained without reclassification
+M3LangDexPrecompute.WordProfile	subjectId	int	langdex_subject_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated LangDex subject coordinate remains donor-owned
+M3LangDexPrecompute.WordProfile	featureBits	int	langdex_feature_bits	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	morphology/feature bits remain donor-owned and opaque
+M3LangDexPrecompute.WordProfile	evidenceMask	int	langdex_evidence_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	evidence bits remain donor-owned and opaque
+M3LangDexPrecompute.WordProfile	confidencePermille	int	langdex_confidence_permille	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	confidence remains bounded donor metadata in the inclusive 0..1000 range
+M3LangDexPrecompute.LexicalProfile	lexicalClassMask	long	langdex_lexical_class_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level lexical class mask shares the LangDex canonical type
+M3LangDexPrecompute.LexicalProfile	featureBits	int	langdex_feature_bits	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level feature bits share the LangDex canonical type
+M3LangDexPrecompute.LexicalProfile	evidenceMask	int	langdex_evidence_mask	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level evidence bits share the LangDex canonical type
+M3LangDexPrecompute.LexicalProfile	confidencePermille	int	langdex_confidence_permille	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	profile-level confidence shares the LangDex canonical type and bound
+M3LangDexPrecompute.Translation	conceptId	long	langdex_concept_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation concept coordinate is preserved and must match its identity key
+M3LangDexPrecompute.Translation	targetLexemeId	long	langdex_target_lexeme_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	target lexeme coordinate remains donor-owned and is not substituted with image_row
 SiUnit	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_payload	MAPPED	SI decimal exponent remains bounded donor metadata in the inclusive -100..100 range
 SiDimension	packed	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains donor-owned
 SiUnit	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
 SiUnit	prefixable	boolean	si_prefixable	synexia.records.tsv:precompute_payload	MAPPED	SI prefixability remains an explicit donor boolean
 M3LexiconPrecompute.PrefixCounts	prefixCounts	long[]	prefix_counts	m3lex-family-v2:synexia.prefix-counts.tsv	MAPPED	value-scoped owner keyed by source scope, coordinate, token ID, and value fingerprint
-M3LexiconPrecompute.SpellIndex	deleteToTokenIds	Map<String,int[]>	deleteToTokenIds	m3lex-family-v2:synexia.spell.tsv	MAPPED	sorted delete-key map remains typed and scoped by lexicon, language, configuration, and source fingerprint
-M3LexiconPrecompute.SpellIndex	frequencies	Map<Integer,Long>	frequencies	m3lex-family-v2:synexia.spell.tsv	MAPPED	spell frequencies remain sorted metadata owned by the originating immutable lexicon
 M3LexiconPrecompute.SpellIndex	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.spell.tsv	MAPPED	reload is rejected when the lexicon or spell configuration fingerprint changes
-M3LexiconPrecompute.TokenHashPrecompute	tokenSha256	byte[][]	tokenSha256	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	exact token digests remain byte-preserving and scoped to the originating value and range
-M3LexiconPrecompute.TokenHashPrecompute	rangeFingerprint	RangeFingerprint	rangeFingerprint	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	typed rolling tuple remains a candidate fingerprint and is never token identity
-M3LexiconPrecompute.TokenHashPrecompute	rangeSha256	byte[]	rangeSha256	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	exact range digest remains an explicitly encoded byte value
-M3LexiconPrecompute.TokenFrequency	frequencies	Map<Integer,Integer>	frequencies	m3lex-family-v2:synexia.token-frequency.tsv	MAPPED	sorted frequency fold remains value-scoped derived metadata, never token identity
 M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTokenIds	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
 M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
 M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
+SynexiaRecordMetadata	sourceId	String	source_id	synexia.records.tsv:record_metadata	MAPPED	source record identity is preserved as UTF-16 text and is never synthesized by the exporter
+SynexiaRecordMetadata	recordId	String	record_id	synexia.records.tsv:record_metadata	MAPPED	source record coordinate is preserved as UTF-16 text and is never renumbered
+SynexiaRecordMetadata	lexeme	String	lexeme	synexia.records.tsv:record_metadata	MAPPED	source lexeme text remains source-owned UTF-16 data
+SynexiaRecordMetadata	relatedLexeme	String	related_lexeme	synexia.records.tsv:record_metadata	MAPPED	related lexeme text remains source-owned relation data
+M3NumberSpace	minValue	int	min_value	synexia.records.tsv:precompute_payload	MAPPED	bounded number-space minimum is preserved as an admitted integer
+M3NumberSpace	maxValue	int	max_value	synexia.records.tsv:precompute_payload	MAPPED	bounded number-space maximum is preserved as an admitted integer
+M3NumberSpace	precomputedValueCount	int	precomputed_value_count	synexia.records.tsv:precompute_payload	MAPPED	number-space cardinality remains an admitted integer
+M3NumberSpace	sharedUtf16Storage	boolean	shared_utf16_storage	synexia.records.tsv:precompute_payload	MAPPED	shared UTF-16 storage capability remains an explicit boolean
+M3NumberSpace	canonicalDecimalSpelling	String	canonical_decimal_spelling	synexia.records.tsv:precompute_payload	MAPPED	canonical decimal spelling remains source-owned UTF-16 text
+M3LanguageGrammarSupport	supported	boolean	translation_grammar_supported	synexia.records.tsv:precompute_payload	MAPPED	grammar support remains an explicit source-owned boolean
+M3LangDexPrecompute.Entry	lemma	String	lemma	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	lemma is admitted lexical identity metadata and is never inferred from surface
+M3LangDexPrecompute.Identity	sourceId	String	langdex_source_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical identity source ID is preserved without renumbering
+M3LangDexPrecompute.Identity	recordId	String	langdex_record_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical identity record coordinate is preserved without renumbering
+M3LangDexPrecompute.Identity	glottocode	String	langdex_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	identity language coordinate remains source-owned
+M3LangDexPrecompute.Identity	surface	String	langdex_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	identity surface is preserved as UTF-16 text
+M3LangDexPrecompute.Identity	sourceRevision	String	langdex_source_revision	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	identity revision pins the source snapshot
+M3LangDexPrecompute.Identity	domain	String	langdex_domain	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	enum spelling is preserved as an explicit domain token
+M3LangDexPrecompute.Identity	canonicalSchema	String	langdex_canonical_schema	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical schema is preserved as source metadata
+M3LangDexPrecompute.Identity	canonicalBytes	byte[]	langdex_canonical_bytes	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical bytes are admitted as unsigned byte values and never synthesized
+M3LangDexPrecompute.Identity	canonicalDigest	String	langdex_canonical_digest	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical digest is preserved for receiver-side byte verification
+M3LangDexPrecompute.TranslationIdentity	sourceId	String	langdex_source_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation identity retains the originating source family
+M3LangDexPrecompute.TranslationIdentity	recordId	String	langdex_record_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation identity retains the originating source record
+M3LangDexPrecompute.TranslationIdentity	sourceGlottocode	String	langdex_source_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	source language coordinate is preserved
+M3LangDexPrecompute.TranslationIdentity	sourceSurface	String	langdex_source_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	source translation surface is preserved
+M3LangDexPrecompute.TranslationIdentity	targetGlottocode	String	langdex_target_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	target language coordinate is preserved
+M3LangDexPrecompute.TranslationIdentity	targetSurface	String	langdex_target_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	target translation surface is preserved
+M3LangDexPrecompute.TranslationIdentity	sourceRevision	String	langdex_source_revision	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation identity shares the source snapshot revision
+M3LangDexPrecompute.Translation	sourceGlottocode	String	langdex_source_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation source language coordinate is preserved
+M3LangDexPrecompute.Translation	sourceSurface	String	langdex_source_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation source surface is preserved
+M3LangDexPrecompute.Translation	targetGlottocode	String	langdex_target_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation target language coordinate is preserved
+M3LangDexPrecompute.Translation	targetSurface	String	langdex_target_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation target surface is preserved
+IndexPhraseTable	space	IndexStringSpace	vocabulary_fingerprint	M3PhrasePrecompute.Scope.vocabularyFingerprint	MAPPED	vocabulary-space identity is preserved through the scope fingerprint; token IDs are never portable across spaces
 M3PhrasePrecompute.Scope	sourceId	String	source_id	m3phrase-v1:synexia.phrases.tsv	MAPPED	source family remains explicit and is not inferred from token IDs
 M3PhrasePrecompute.Scope	recordId	String	record_id	m3phrase-v1:synexia.phrases.tsv	MAPPED	source record identity remains stable across reloads
 M3PhrasePrecompute.Scope	sourceRevision	String	source_revision	m3phrase-v1:synexia.phrases.tsv	MAPPED	source revision is part of the reusable scope
-M3PhrasePrecompute.Scope	vocabularyFingerprint	String	vocabulary_fingerprint	m3phrase-v1:synexia.phrases.tsv	MAPPED	phrase token IDs are never reused across a different vocabulary fingerprint
+M3PhrasePrecompute.Scope	vocabularyFingerprint	String	vocabulary_fingerprint	m3phrase-v1:synexia.phrases.tsv	MAPPED	phrase token IDs are never reused across a different vocabulary scope
 M3PhrasePrecompute.Phrase	sourceTokenIds	int[]	source_token_ids	m3phrase-v1:synexia.phrases.tsv	MAPPED	source token order and non-empty phrase boundary are preserved
 M3PhrasePrecompute.Phrase	targetTokenIds	int[]	target_token_ids	m3phrase-v1:synexia.phrases.tsv	MAPPED	target token order, including an empty replacement, is preserved; replacementTokenIds remains a compatibility alias
