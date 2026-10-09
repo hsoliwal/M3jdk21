@@ -124,7 +124,7 @@ def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
         SourceCheck("mappingLangDex", "unicodex.langdex.lexemes" in manifest),
         SourceCheck("mappingProvenance", "data_license" in manifest and "data_policy" in manifest),
         SourceCheck("mappingNoFabrication", "downloader is never invoked" in manifest and "mapping-only export" in manifest),
-        SourceCheck("fieldMapGuard", "value-fingerprint guarded" in recipe),
+        SourceCheck("fieldMapGuard", "reload_guard: value_fingerprint" in recipe),
         SourceCheck("fieldMapScope", "scope-keyed" in recipe),
         SourceCheck("fieldMapAdmission", "TARGET_CONTRACT_ADMITTED" in _read(root, Path("m3/runtime-integration/synexia-lexicon-precompute-receipt-20261009.yaml")),
     )
