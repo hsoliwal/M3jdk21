@@ -420,13 +420,32 @@ for fragment in [
 
 for fragment in [
     "final AtomicReferenceArray<ExactBlock> exact;",
-    "Arrays.binarySearch(units, unit)",
+    "final byte[] firstOffsets;",
+    "final long[] masks;",
+    "Arrays.copyOf(offsets, count)",
+    "Arrays.copyOf(masks, count)",
+    "char candidate = source.charAt(blockStart + firstOffsets[mid]);",
     "Long.numberOfTrailingZeros(positions)",
     "Long.numberOfLeadingZeros(positions)",
-    "MAX_SOURCE_UNITS * (Character.BYTES + Long.BYTES)",
+    "MAX_SOURCE_UNITS * (Byte.BYTES + Long.BYTES)",
 ]:
     if fragment not in position_precompute:
         fail(f"M3 exact position-mask layer missing: {fragment}")
+
+# A7 invariant 6: exact block geometry retains byte-sized coordinates and masks,
+# never another canonical spelling array. Temporary scratch/units in exactBlock()
+# may be allocated only during construction and must not become ExactBlock fields.
+if ("private static final class ExactBlock {" not in position_precompute
+        or "private static final class Entry {" not in position_precompute):
+    fail("M3 exact position-mask owner boundaries missing")
+exact_block = position_precompute.split(
+    "private static final class ExactBlock {", 1)[1].split(
+    "private static final class Entry {", 1)[0]
+if re.search(
+    r"(?m)^\s*(?:(?:private|public|protected|static|final)\s+)*char\s*\[\s*\]\s+\w+\s*;",
+    exact_block,
+):
+    fail("M3 exact position-mask reintroduced retained char[] spelling")
 
 for fragment in [
     "private static final int BLOCK_SIZE = 1 << BLOCK_SHIFT;",
