@@ -1,0 +1,2 @@
+source_repo	source_pr	source_head	coverage_path	coverage_blob	surface_id	status	target_surface	preservation	admission
+hsoliwal/com.synexia	10041	b2db7b868435f1dc9217061a3610eb74a228de04	cognix-nlp/docs/SYNEXIA_DONOR_COVERAGE.tsv	164ea23596f692a8a105234f465affe851632ba2	rapidex	NO_CANONICAL_OWNER	no target surface identified	Do not fabricate a Rapidex donor row, lexicon field, or precompute owner.	Identify and prove a canonical Rapidex owner and semantics before target admission.
