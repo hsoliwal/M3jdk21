@@ -224,7 +224,7 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
         self.assertEqual("", sources["translate.rows"]["precompute_fields"])
-        self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        self.assertEqual("value", sources["dictlang.numbers.0-10000"]["precompute_fields"])
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")

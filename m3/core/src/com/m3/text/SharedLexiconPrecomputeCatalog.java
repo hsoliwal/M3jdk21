@@ -68,6 +68,17 @@ public final class SharedLexiconPrecomputeCatalog {
         }
     }
 
+    public record NumberIdentity(String sourceId, String recordId, int value, String languageTag) {
+        public NumberIdentity {
+            sourceId = text(sourceId, "sourceId");
+            recordId = text(recordId, "recordId");
+            languageTag = text(languageTag, "languageTag");
+            if (value < M3LexiconPrecompute.NumberPrecompute.MIN_VALUE
+                    || value > M3LexiconPrecompute.NumberPrecompute.MAX_VALUE)
+                throw new IllegalArgumentException("number value outside 0..10000");
+        }
+    }
+
     public record ValueScope(Coordinate coordinate, String valueFingerprint) {
         public ValueScope {
             coordinate = Objects.requireNonNull(coordinate, "coordinate");
@@ -80,6 +91,7 @@ public final class SharedLexiconPrecomputeCatalog {
     private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes;
     private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts;
     private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies;
+    private final Map<NumberIdentity, M3LexiconPrecompute.NumberPrecompute> numbers;
 
     private SharedLexiconPrecomputeCatalog(Builder builder) {
         translations = Map.copyOf(builder.translations);
@@ -87,9 +99,14 @@ public final class SharedLexiconPrecomputeCatalog {
         tokenHashes = Map.copyOf(builder.tokenHashes);
         prefixCounts = Map.copyOf(builder.prefixCounts);
         tokenFrequencies = Map.copyOf(builder.tokenFrequencies);
+        numbers = Map.copyOf(builder.numbers);
     }
 
     public static Builder builder() { return new Builder(); }
+
+    public Optional<M3LexiconPrecompute.NumberPrecompute> numberAt(NumberIdentity identity) {
+        return Optional.ofNullable(numbers.get(Objects.requireNonNull(identity, "identity")));
+    }
 
     public Optional<M3LexiconPrecompute.TranslationProjection> translationAt(TranslationIdentity identity) {
         return Optional.ofNullable(translations.get(Objects.requireNonNull(identity, "identity")));
@@ -113,6 +130,17 @@ public final class SharedLexiconPrecomputeCatalog {
         private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes = new HashMap<>();
         private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts = new HashMap<>();
         private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies = new HashMap<>();
+        private final Map<NumberIdentity, M3LexiconPrecompute.NumberPrecompute> numbers = new HashMap<>();
+
+        public Builder number(NumberIdentity identity, M3LexiconPrecompute.NumberPrecompute value) {
+            Objects.requireNonNull(identity, "number key");
+            Objects.requireNonNull(value, "number value");
+            if (identity.value() != value.value()
+                    || !identity.languageTag().equals(value.languageTag()))
+                throw new IllegalArgumentException("number identity does not match precompute");
+            put(numbers, identity, value, "number");
+            return this;
+        }
 
         public Builder translation(TranslationIdentity identity, M3LexiconPrecompute.TranslationProjection value) {
             Objects.requireNonNull(identity, "translation key");

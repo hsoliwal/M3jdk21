@@ -151,6 +151,25 @@ public final class M3LexiconPrecompute {
         }
     }
 
+    /** Immutable canonical decimal metadata for Synexia's bounded number vocabulary. */
+    public record NumberPrecompute(int value, String spelling, String languageTag) {
+        public static final int MIN_VALUE = 0;
+        public static final int MAX_VALUE = 10_000;
+
+        public NumberPrecompute {
+            if (value < MIN_VALUE || value > MAX_VALUE)
+                throw new IllegalArgumentException("number value outside 0..10000");
+            spelling = text(spelling, "spelling");
+            languageTag = text(languageTag, "languageTag");
+            if (!spelling.equals(Integer.toString(value)))
+                throw new IllegalArgumentException("number spelling is not canonical");
+        }
+
+        public static NumberPrecompute canonical(int value, String languageTag) {
+            return new NumberPrecompute(value, Integer.toString(value), languageTag);
+        }
+    }
+
     public record RangeFingerprint(long first, long second, int length) {
         public RangeFingerprint {
             if (length < 0) throw new IllegalArgumentException("negative range length");
