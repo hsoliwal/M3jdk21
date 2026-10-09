@@ -11,6 +11,12 @@ import java.util.Set;
 
 /** Contract proof for dictionary/frequency source rows and typed M3JDK receivers. */
 public final class M3DictionaryFrequencyContractTest {
+    private static final String SOURCE_REVISION =
+            "64a2ea61c73b548413fed6686a9daeeb0b9b0564";
+    private static final String DICTIONARY_BLOB_SHA =
+            "0e98aa32ba2d98e590a93dbec6cc6f2c3aedd365";
+    private static final String FREQUENCY_BLOB_SHA =
+            "05ccf20cd2e3789ddb849b14f0374aa089d90cc5";
     private static int checks;
 
     private static void check(boolean condition) {
