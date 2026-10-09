@@ -520,6 +520,11 @@ for fragment in [
     if fragment not in pattern:
         fail(f"Pattern mandatory literal graph precompute missing: {fragment}")
 
+if "sawSlice && current instanceof GroupHead" not in pattern:
+    fail("Pattern mandatory literal planner lost safe GroupHead seam folding")
+if "current instanceof GroupTail" in pattern[pattern.find("compiledRequiredLiteral"):pattern.find("private Map<String, Integer> namedGroupsMap")]:
+    fail("Pattern mandatory literal planner must not cross GroupTail")
+
 for fragment in [
     "transient M3TQ m3Tq;",
     "has(LITERAL) && !has(CASE_INSENSITIVE)",
