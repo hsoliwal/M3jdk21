@@ -32,6 +32,25 @@ public final class M3LexiconPrecompute {
         }
     }
 
+    /** Immutable source-owned acronym metadata; the generic numeric payload remains separate. */
+    public record AcronymPrecompute(String acronym, String expansion, String domain) {
+        private static final String ACRONYM_PATTERN = "[A-Za-z][A-Za-z0-9+.-]{0,31}";
+        private static final String DOMAIN_PATTERN = "[a-z][a-z0-9._-]*";
+
+        public AcronymPrecompute {
+            acronym = text(acronym, "acronym");
+            expansion = text(expansion, "expansion");
+            domain = text(domain, "domain");
+            if (!acronym.matches(ACRONYM_PATTERN))
+                throw new IllegalArgumentException("invalid acronym");
+            if (expansion.isBlank())
+                throw new IllegalArgumentException("blank acronym expansion");
+            if (!domain.matches(DOMAIN_PATTERN))
+                throw new IllegalArgumentException("invalid acronym domain");
+        }
+    }
+
+
     public static final class TranslationProjection {
         private final String lexiconFingerprint;
         private final String sourceLanguage;
