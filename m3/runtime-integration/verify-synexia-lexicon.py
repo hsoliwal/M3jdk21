@@ -64,6 +64,12 @@ def _object_without_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str,
     return result
 
 
+def canonical_manifest_bytes(value: object) -> bytes:
+    return (
+        json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n"
+    ).encode("utf-8")
+
+
 def canonical_precompute_payload(value: str) -> str:
     if len(value.encode("utf-8", "surrogatepass")) > MAX_PRECOMPUTE_PAYLOAD_BYTES:
         raise ValueError("precompute payload exceeds 1 MiB")
@@ -280,7 +286,16 @@ def verify_family_sidecar_scope(
 
 def verify(output: pathlib.Path) -> dict[str, int]:
     manifest_path = output / "synexia.export.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest_bytes = manifest_path.read_bytes()
+    if manifest_bytes.startswith(b"\xef\xbb\xbf") or b"\r" in manifest_bytes:
+        raise ValueError("manifest must be UTF-8 without BOM and use LF")
+    manifest = json.loads(
+        manifest_bytes.decode("utf-8"),
+        object_pairs_hook=_object_without_duplicate_keys,
+        parse_constant=_reject_json_constant,
+    )
+    if manifest_bytes != canonical_manifest_bytes(manifest):
+        raise ValueError("manifest is not canonical")
     if manifest.get("schema") != EXPORT_SCHEMA:
         raise ValueError("unsupported export schema")
     target = manifest.get("target", {})
