@@ -49,6 +49,9 @@ public final class M3LexiconCoverageInvariantTest {
             "M3LangDexPrecompute.TranslationIdentity",
             "SiUnit",
             "SiDimension",
+            "M3LexiconPrecompute.SiUnitPrecompute",
+            "M3NumberSpace",
+            "M3LanguageGrammarSupport",
             "M3LexiconPrecompute.PrefixCounts",
             "M3LexiconPrecompute.SpellIndex",
             "M3LexiconPrecompute.TokenHashPrecompute",
@@ -67,6 +70,8 @@ public final class M3LexiconCoverageInvariantTest {
         Path familyMap = Path.of("lexicon", "synexia-precompute-family-map.tsv");
         Set<String> sourceIds = firstColumn(sourceManifest);
         Set<String> mappedFamilies = mappedFamilies(fieldMap);
+        Set<String> mappedPayloadFields = mappedPayloadFields(fieldMap);
+        Set<String> requiredPayloadFields = precomputeFields(sourceManifest);
         Set<String> sidecarFamilies = secondColumn(familyMap);
 
         check(sourceIds.containsAll(REQUIRED_SOURCE_IDS),
@@ -75,13 +80,17 @@ public final class M3LexiconCoverageInvariantTest {
         check(mappedFamilies.containsAll(REQUIRED_TYPED_FAMILIES),
                 "precompute field map is missing typed families: "
                         + difference(REQUIRED_TYPED_FAMILIES, mappedFamilies));
+        check(mappedPayloadFields.containsAll(requiredPayloadFields),
+                "source manifest fields are missing M3JDK mappings: "
+                        + difference(requiredPayloadFields, mappedPayloadFields));
         check(sidecarFamilies.containsAll(REQUIRED_FAMILY_SIDECARS),
                 "precompute family map is missing sidecars: "
                         + difference(REQUIRED_FAMILY_SIDECARS, sidecarFamilies));
 
         System.out.println("M3JDK_LEXICON_PRECOMPUTE_COVERAGE_PASS "
                 + "source_families=" + REQUIRED_SOURCE_IDS.size()
-                + " typed_families=" + REQUIRED_TYPED_FAMILIES.size());
+                + " typed_families=" + REQUIRED_TYPED_FAMILIES.size()
+                + " payload_fields=" + requiredPayloadFields.size());
     }
 
     private static Set<String> firstColumn(Path path) throws Exception {
@@ -104,6 +113,42 @@ public final class M3LexiconCoverageInvariantTest {
             String[] fields = line.split("\\t", -1);
             if (fields.length >= 2) {
                 values.add(fields[1]);
+            }
+        }
+        return values;
+    }
+
+    private static Set<String> precomputeFields(Path path) throws Exception {
+        Set<String> values = new HashSet<>();
+        for (String line : Files.readAllLines(path, StandardCharsets.UTF_8)) {
+            if (line.isBlank() || line.startsWith("source_id\t")) {
+                continue;
+            }
+            String[] fields = line.split("\\t", -1);
+            if (fields.length < 9) {
+                throw new AssertionError("source manifest row has no precompute field column: " + line);
+            }
+            for (String field : fields[8].split(",", -1)) {
+                if (!field.isBlank() && !field.equals("-")) {
+                    values.add(field);
+                }
+            }
+        }
+        return values;
+    }
+
+    private static Set<String> mappedPayloadFields(Path path) throws Exception {
+        Set<String> values = new HashSet<>();
+        for (String line : Files.readAllLines(path, StandardCharsets.UTF_8)) {
+            if (line.isBlank() || line.startsWith("donor_type\t")) {
+                continue;
+            }
+            String[] fields = line.split("\\t", -1);
+            if (fields.length < 6) {
+                throw new AssertionError("precompute field row is malformed: " + line);
+            }
+            if (fields[5].equals("MAPPED")) {
+                values.add(fields[3]);
             }
         }
         return values;
