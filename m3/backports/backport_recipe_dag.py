@@ -21,9 +21,6 @@ from typing import Iterable, Mapping, Sequence
 
 PHASES = (
     "INVENTORY",
-    "ATOMIZE",
-    "PATTERNIZE",
-    "DOCUMENT",
     "RECIPE",
     "COMPILE",
     "TEST",
@@ -170,15 +167,7 @@ def _candidate_atoms(
     if state not in EXECUTABLE_STATES:
         return [("INVENTORY", scope, state, False, "", reason)]
 
-    phases = [
-        "INVENTORY",
-        "ATOMIZE",
-        "PATTERNIZE",
-        "DOCUMENT",
-        "RECIPE",
-        "COMPILE",
-        "TEST",
-    ]
+    phases = ["INVENTORY", "RECIPE", "COMPILE", "TEST"]
     if _runtime_required(disposition, domain):
         phases.append("RUNTIME_PARITY")
     phases.append("FIXED_POINT")
@@ -188,31 +177,10 @@ def _candidate_atoms(
     for phase in phases:
         atom_id = f"{work_id.lower().replace('-', '_')}.{phase.lower()}"
         phase_reason = reason
-        if phase == "ATOMIZE":
-            phase_reason = (
-                "Run canonical Synexia A3 FILE atomization candidate against the exact source "
-                "preimage; no product mutation or scope promotion authority."
-            )
-        elif phase == "PATTERNIZE":
-            phase_reason = (
-                "Run canonical Synexia A3 pattern/IOP attribution on the atomized FILE candidate; "
-                "preserve public contract and external behavior."
-            )
-        elif phase == "DOCUMENT":
-            phase_reason = (
-                "Converge derivable semantic/Javadoc evidence for the FILE candidate before "
-                "absorption; documentation grants no mutation or promotion authority."
-            )
-        elif phase == "RECIPE" and state == "AUTHOR_RECIPE":
-            phase_reason = (
-                "No checked-in backport packet exists; author/test the source-pinned reusable "
-                "absorption recipe only after the A3 FILE candidate and mastery evidence exist."
-            )
+        if phase == "RECIPE" and state == "AUTHOR_RECIPE":
+            phase_reason = "No checked-in recipe packet exists; author/test source-pinned recipe first."
         elif phase == "RECIPE":
-            phase_reason = (
-                "Reuse checked-in backport packet(s) after A3 FILE preparation; do not duplicate "
-                "implementation ownership."
-            )
+            phase_reason = "Reuse checked-in recipe packet(s); do not duplicate implementation ownership."
         result.append((phase, scope, state, True, previous, phase_reason))
         previous = atom_id
     return result
