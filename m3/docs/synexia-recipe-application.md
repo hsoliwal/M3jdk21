@@ -282,3 +282,34 @@ M3JDK21 retains only the applied HotSpot/runtime result plus the layered machine
 `m3/runtime-integration/m3-string-hotspot-m3-backed-guard-application.tsv`
 
 No Synexia code or recipe is loaded by HotSpot at runtime.
+
+
+## Current invariant refresh — Synexia PR #10001
+
+The canonical String-history recipe remains owned by Synexia. The latest receiver-ahead
+governance delta was promoted back to that owner rather than evolving a target-local recipe.
+
+Canonical handoff:
+
+- repository: `hsoliwal/com.synexia`
+- PR: https://github.com/hsoliwal/com.synexia/pull/10001
+- branch: `m3/m3jdk21-string-history-invariant-sync-20261009`
+- pinned revision: `4600df169d4d16589e3cf7ce45b5c0be68ff7a60`
+- recipe: `com.synexia.rewrite.M3Jdk21StringHistoryConvergence`
+- Java manifest SHA-256: `3568282e0fc234eae201cb29797f884f9e0c2071a85cffbf42bb6a3f4669a342`
+- text/native/workflow manifest SHA-256: `b5363dcb153fcebfe5883fd3e09b9cc3a76efa1b6fbc684a0d293a9121a49aba`
+
+Applied M3JDK21 runtime state before receipt-only commits:
+
+`692a4c648ac952bdfc6b75c193c23e466a8696f3`
+
+Application mode remains `FIXED_POINT_NO_SOURCE_DELTA`: the inspected M3 String runtime,
+search/position precompute, pool, `AbstractStringBuilder`, `String.java`, differential tests
+and workflow were already byte-identical to the Synexia canonical postimages. The only
+receiver-ahead delta was the fail-closed mandatory-literal regex seam invariant; PR #10001 moves
+that invariant back to Synexia and reseals its text manifest.
+
+The target-local `M3StringHistoryConvergence` descriptor, hash-pinned Java/text crates and local
+fixed-point recipe test are absent from M3JDK21. M3JDK21 retains only the applied product,
+target-native verification and this receipt. Runtime ownership remains M3JDK21; recipe ownership
+remains Synexia; runtime dependency on Synexia remains false.
