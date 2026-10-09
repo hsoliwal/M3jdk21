@@ -1,0 +1,18 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Focused literal-regex replacement ownership: Synexia recipe authority, M3JDK runtime authority.",
+  "mappings": [
+    {
+      "source": "Synexia MIndexString replaceFirst literal atom @55af6236dc304042094fe05b26dceb4264ba0707",
+      "target": "java.lang.M3String.replaceLiteralRegex(..., firstOnly=true) via String.replaceFirst",
+      "status": "implemented-current-superset; focused recipe authority Synexia PR #9935; matched-image jtreg pending",
+      "target_rule": "BMP literal subset only; regex/replacement syntax and surrogate patterns stay with Pattern/Matcher"
+    },
+    {
+      "source": "Synexia MIndexString replaceAll literal atom @866e3a99fd4101f7e21dd67f7db502f70cb38073",
+      "target": "java.lang.M3String.replaceMatches via String.replaceAll",
+      "status": "implemented-current-superset; historical receiver M3JDK PR #271; current A9 source checker authored",
+      "target_rule": "non-overlapping exact UTF-16 composition using existing bounded search plan; no-match identity preserved"
+    }
+  ]
+}
