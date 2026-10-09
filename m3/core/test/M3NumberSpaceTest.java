@@ -35,6 +35,10 @@ public final class M3NumberSpaceTest {
             check(space.number(value).flatten().equals(Integer.toString(value)));
         }
         check(space.parse(new View("10000")) == last);
+        var typed = space.precompute(10000, "und");
+        check(typed.value() == 10_000);
+        check(typed.spelling().equals("10000"));
+        check(typed.languageTag().equals("und"));
         expect(NumberFormatException.class, () -> space.parse(new View("01")));
         expect(NumberFormatException.class, () -> space.parse(new View("10001")));
         expect(NumberFormatException.class, () -> space.parse(new View("10x")));
