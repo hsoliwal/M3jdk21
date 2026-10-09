@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "A17 recipe-first successor to A16.",
+  "mappings": [
+    {
+      "source": "Synexia com.synexia.m3.FactsScanLatin1Fused (PR #9996)",
+      "source_commit": "efc009cfa63b08d9c501c27909f0586905964791",
+      "target": "java.lang.M3StringFacts.scanLatin1",
+      "status": "receiver-applied",
+      "target_rule": "single raw/fold pass captures all original-byte facts and lower-folds the one scratch; one upper-fold pass remains"
+    }
+  ]
+}
