@@ -121,3 +121,7 @@ Regenerated against 81caf879c6: the upstream `String.java` after-image and hunks
 ## 2026-10-09 re-seal (A29 contentEquals receivers in bulk windows)
 
 Regenerated against 8e050d6cd2: the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); no M3-owned file changed, so every `superseded` list is untouched. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-09 re-seal (A30 cross-coder compares in place)
+
+Regenerated against 0b114a9b55: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3StringAtom.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
