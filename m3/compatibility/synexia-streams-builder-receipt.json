@@ -1,0 +1,96 @@
+{
+  "schema": "M3JDK21_SYNEXIA_STREAMS_BUILDER_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-streams-builder-20261009",
+    "pullRequest": null,
+    "commit": "14299ed8110",
+    "stackedOn": [
+      {
+        "pullRequest": 9975,
+        "crate": "m3-encode-bulk-units"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.StreamsBuilder",
+    "crate": "m3-streams-builder",
+    "fossReuseDecisionRow": "string.streams.builder-compare",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/StringLatin1.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3String.charsStream/codePointsStream",
+        "mechanics": "CharsSpliterator over the bulk-read Latin-1 value"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringUTF16.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3String.compactValue/charsStream/codePointsStream",
+        "mechanics": "compress to decide the coder; CharsSpliterator and CodePointsSpliterator over the bulk-read UTF-16 value"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "commit": "01054f2600",
+        "target": "java.lang.String.nonSyncContentEquals",
+        "mechanics": "mismatchUnits (A11/A12) against the builder's value and coder"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: results equal the stock String results; no gate removed; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-utf8-facts-20261009 (#536, A13) on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3String",
+      "java.lang.String"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed under the supersession model: String.java after-image and hunks regenerated from a synthetic after-state tree; M3String.java owner recorded as superseded; 67 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "24b8ba668ca03c13701ad1fe4c3c65cc1d1e356781d366ed4d6837661f021e5a",
+      "after": "5c1f10bc2110aef3f5e8dd32be5b5128f5a9d54b5adc4764025221f4869c1cb1",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringStreamsBuilderTest.java",
+      "before": "ABSENT",
+      "after": "9db1541ab32f6f989f03bc22832b726ff5b58f2eed68d22037f13dc0ecd0093e",
+      "resource": "01-M3StringStreamsBuilderTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "86264e9634d2585a7ca5ddb4385c8df51c14cffa16635f11efa8adebc9137eb2",
+      "after": "d1b4a4e4a608a247ad5bea0b01d0ebfbfdc116ce6b57b6dd5455b95d596bdb77",
+      "resource": "00-String.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (43 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3StringStreamsBuilderTest flag-off: 160,335 checks (contentEquals with StringBuilder/StringBuffer of spare capacity, a widened coder, a difference at every position, the last unit, one unit longer and shorter, CharBuffer and String arguments; chars()/codePoints() toArray, count, sum, parallel sum and filter, spliterator characteristics, estimateSize and trySplit over atoms, nested tuples and slices of padded UTF-16 owners against stock)",
+    "regressions": "PASS_WINDOWS M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,920; A6 204 + 29",
+    "timing": "flag-off (a17/probe/ConsumerBench, bench-baseline.tsv vs bench-after3.tsv): contentEquals(StringBuilder) 5x..25x faster at 256 units, 39x..105x at 2048 (Latin-1 atom 4176 ns -> 54, flat 39), 42x..224x at 16384; chars().sum 1.4x..19x; codePoints().count 1.6x..113x (Latin-1 content SIZED again)",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 67 targets under the supersession model; apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3StreamsBuilderRecipeTest 3/3 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3StringStreamsBuilderTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "contentEquals with a builder compares the builder's value array against the M3 storage in place (mismatchUnits), after the unchanged length check",
+    "chars() and codePoints() read the range once in bulk into a compact value; a UTF-16-coded range whose units all fit Latin-1 is narrowed (StringUTF16.compress) so the stream has the coder, characteristics and estimated size of the flat String of the same spelling (a slice of a UTF-16 owner with Latin-1 content was not SIZED before the narrowing; caught by the parity test)",
+    "the compact value is transient scratch of the range's size; nothing is retained",
+    "the two private M3String spliterators are removed: the stock spliterators over the compact value are the only stream path",
+    "stacked on A13: merge after #536 and the Synexia crate PR; a sibling of A14 (#545) and A15 (#538) on the same base, so the runtime-recipe superseded lists and the later leaves' crate preimages are re-run when they stack"
+  ]
+}
