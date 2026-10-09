@@ -6,7 +6,7 @@ import json
 from pathlib import Path, PurePosixPath
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[4]
+ROOT = HERE.parents[3]
 ENGINE = "src/java.base/share/classes/java/lang/MIndexString.java"
 TEST = "m3/runtime-integration/tests/MIndexStringInvariant.java"
 
