@@ -12,7 +12,13 @@ moves through the same M3 recipe-first structure used elsewhere:
 ```text
 authority inventory
  -> compatibility disposition
- -> small source-pinned recipe atoms
+ -> exact file-delta inventory
+ -> canonical Synexia A3 FILE preparation
+ -> atomization proof
+ -> patternization/IOP proof
+ -> documentation proof
+ -> A3 fixed-point proof
+ -> small source-pinned backport recipe atoms
  -> Java-21 compile
  -> jtreg/JUnit
  -> runtime/JNI/VM proof where required
@@ -50,6 +56,36 @@ Only materialized/author-recipe candidates generate executable packet TSVs.
 
 A generated `AUTHOR_RECIPE` packet does not authorize direct editing. Its recipe atom explicitly
 means “author/test the source-pinned reusable recipe first”.
+
+## A3 semantic preparation atoms
+
+Before a source-changing backport packet executes, every Java target passes through the canonical
+Synexia A3 receiver exactly once. M3JDK21 does not fork or reimplement the reusable atomizer,
+patternizer/IOP or documentation recipes.
+
+That one run emits two receipts:
+
+- `backport-preparation.tsv`: exact file before/prepared hashes and Java/non-Java lane;
+- `backport-preparation-phases.tsv`: content-addressed `ATOMIZATION`, `PATTERN_IOP`,
+  `DOCUMENTATION`, and `FIXED_POINT` proof rows.
+
+The canonical orchestration DAG exposes those four phase receipts as separate non-mutating proof
+atoms:
+
+```text
+file-delta
+ -> a3-preparation
+ -> a3-atomization-proof
+ -> a3-pattern-iop-proof
+ -> a3-documentation-proof
+ -> a3-fixed-point-proof
+ -> packet recipe roots
+```
+
+This is the intended small-atom DAG model. Camel, Airflow and Drools may schedule/project these
+nodes, but only the canonical `M3RecipeDag` owns dependencies, scope and promotion semantics.
+Non-Java targets remain in the exact source-sealed native/text lane and receive explicit
+non-applicable A3 phase receipts rather than being parsed as Java.
 
 ## Small packet atoms
 
