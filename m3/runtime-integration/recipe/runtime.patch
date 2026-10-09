@@ -1437,10 +1437,10 @@ index 202a1af08011a26719329ff25b02b69d5e1f6390..561ef1e8672711fe567ef5d17902a621
      str = NEW_C_HEAP_ARRAY(char, length + 1, mtServiceability);
      java_lang_String::as_utf8_string(string, value, str, length + 1);
 diff --git a/src/java.base/share/classes/java/lang/AbstractStringBuilder.java b/src/java.base/share/classes/java/lang/AbstractStringBuilder.java
-index e58ded864f0705bba5a57979230119e017cfd40e..ca697e5da074fabd6368aa79aceb9d40073ca661 100644
+index e58ded864f0705bba5a57979230119e017cfd40e..afcb5e3fc9a8671340008d0abea53a2d582ac033 100644
 --- a/src/java.base/share/classes/java/lang/AbstractStringBuilder.java
 +++ b/src/java.base/share/classes/java/lang/AbstractStringBuilder.java
-@@ -1730,7 +1730,15 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
+@@ -1730,7 +1730,22 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      }
  
      private void inflateIfNeededFor(String input) {
@@ -1450,14 +1450,21 @@ index e58ded864f0705bba5a57979230119e017cfd40e..ca697e5da074fabd6368aa79aceb9d40
 +        }
 +        M3String storage = input.m3();
 +        if (storage != null) {
-+            if (!storage.facts().latin1) {
-+                inflate();
++            // A narrow owner answers at once; a wide owner's range is scanned for a wide unit in
++            // bulk (A22) unless prepared facts already say. Widening on the coder alone would
++            // leave a UTF-16 builder holding Latin-1 content, which toString would not compact.
++            if (storage.coder() != LATIN1) {
++                M3StringFacts prepared = storage.factsIfPrepared();
++                boolean latin1 = prepared != null ? prepared.latin1 : storage.contentIsLatin1();
++                if (!latin1) {
++                    inflate();
++                }
 +            }
 +        } else if (coder != input.coder()) {
              inflate();
          }
      }
-@@ -1774,12 +1782,26 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
+@@ -1774,12 +1789,26 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      }
  
      private final void appendChars(String s, int off, int end) {
@@ -1486,7 +1493,7 @@ index e58ded864f0705bba5a57979230119e017cfd40e..ca697e5da074fabd6368aa79aceb9d40
                  byte[] val = this.value;
                  for (int i = off, j = count; i < end; i++) {
                      char c = s.charAt(i);
-@@ -1788,7 +1810,16 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
+@@ -1788,16 +1817,37 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
                      } else {
                          count = j;
                          inflate();
@@ -1504,10 +1511,16 @@ index e58ded864f0705bba5a57979230119e017cfd40e..ca697e5da074fabd6368aa79aceb9d40
                          count += end - i;
                          return;
                      }
-@@ -1796,8 +1827,15 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
+                 }
              }
          } else if (s.isLatin1()) {
-             StringUTF16.putCharsSB(this.value, this.count, s, off, end);
+-            StringUTF16.putCharsSB(this.value, this.count, s, off, end);
++            if (storage != null) {
++                // A Latin-1 M3 range into a UTF-16 builder widens in bulk (A22).
++                s.getBytes(this.value, off, this.count, UTF16, end - off);
++            } else {
++                StringUTF16.putCharsSB(this.value, this.count, s, off, end);
++            }
 +        } else if (storage != null) {
 +            s.getBytes(this.value, off, this.count, UTF16, end - off);
          } else { // both UTF16

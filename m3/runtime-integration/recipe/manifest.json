@@ -2,8 +2,8 @@
   "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
-  "target_commit": "3ec8389d58f7842bb308337d6ca4be84014b2ac7",
-  "patch_sha256": "4af5631fe4405fad19bec5d88d43b4d3ee0bf3abdd86f0c7c7a26b27706c1e76",
+  "target_commit": "13f7351705b46fce633bdf1a6d5b72c3dab49bf7",
+  "patch_sha256": "a53942ebd203d643f09c7315a25b2c982db364d4830389933c6003d6a86a55fe",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
     "src/hotspot/share/cds/archiveHeapWriter.cpp": {
@@ -84,7 +84,7 @@
     },
     "src/java.base/share/classes/java/lang/AbstractStringBuilder.java": {
       "before": "13f92a675d002851095aca8464e30c52c2a27a2d585b4da6c7263a787c11242d",
-      "after": "a5e7213ca951fab21d6db842804a8abd79e90f924ec672de6c4c455cdebb47d5"
+      "after": "e761aeeea2ef9e90afbc1ac3223d5f2537357c2fd49471a4f57762e61c26bf81"
     },
     "src/java.base/share/classes/java/lang/M3String.java": {
       "before": null,
@@ -97,7 +97,8 @@
         "bb34e805a81e01eb098721b30e34182f823ebd3396046aba05afcf38f38cf6bf",
         "24b8ba668ca03c13701ad1fe4c3c65cc1d1e356781d366ed4d6837661f021e5a",
         "5c1f10bc2110aef3f5e8dd32be5b5128f5a9d54b5adc4764025221f4869c1cb1",
-        "4c3926f5506b1861fd119ae1ed006bf6fb545ff6774f64d975f6a4276c1e23e8"
+        "4c3926f5506b1861fd119ae1ed006bf6fb545ff6774f64d975f6a4276c1e23e8",
+        "c437c18fd0aef8044d8086993d09e6b2e7c689e44564c02ef2cd4da9feaf2dd9"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringAtom.java": {
@@ -106,7 +107,8 @@
       "superseded": [
         "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f",
         "f0bda25831e87d6b1339e8b8931cb2ac0ce7a543f4fd9ef7ea02e6837fc62d7e",
-        "b742092ca0d9453df581fc7d4605627e886dcae0c7ac72dbac32b0dc3cde315e"
+        "b742092ca0d9453df581fc7d4605627e886dcae0c7ac72dbac32b0dc3cde315e",
+        "7f5a04f4e60429b28f389493a36fd708c3f8da3da8f8559a887ccf871da24431"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java": {

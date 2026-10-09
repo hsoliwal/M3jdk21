@@ -1,0 +1,2 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/AbstractStringBuilder.java	a5e7213ca951fab21d6db842804a8abd79e90f924ec672de6c4c455cdebb47d5	e761aeeea2ef9e90afbc1ac3223d5f2537357c2fd49471a4f57762e61c26bf81	00-AbstractStringBuilder.java.txt
