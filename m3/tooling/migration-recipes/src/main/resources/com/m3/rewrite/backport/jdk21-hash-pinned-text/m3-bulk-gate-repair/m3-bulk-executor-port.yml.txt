@@ -1,0 +1,83 @@
+name: M3 Bulk Executor Port
+
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/vm/parallel/**'
+      - 'test/jdk/jdk/internal/vm/parallel/**'
+      - 'm3/compatibility/synexia-bulk-executor-receipt-20261008.tsv'
+      - 'm3/docs/name-mapping.json'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3BulkExecutor*.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3BulkExecutor*.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-executor-port/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bulk-executor-port/**'
+      - 'm3/tooling/migration-recipes/tasks/bulk-executor-port/**'
+      - '.github/workflows/m3-bulk-executor-port.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recipe-receiver:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3BulkExecutorPortRecipeTest,M3BulkExecutorNameMappingRecipeTest test
+      - run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Drewrite.activeRecipes=com.m3.rewrite.backport.M3BulkExecutorPortRecipe             rewrite:dryRun
+
+  patch-smoke:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile java.base patch candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          src="$RUNNER_TEMP/bulk-patch-src"
+          out="$RUNNER_TEMP/bulk-java-base"
+          tests="$RUNNER_TEMP/bulk-tests"
+          mkdir -p "$src/jdk/internal/vm/parallel" "$out" "$tests"
+          cp src/java.base/share/classes/jdk/internal/vm/parallel/BulkTask.java "$src/jdk/internal/vm/parallel/"
+          cp src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecutor.java "$src/jdk/internal/vm/parallel/"
+          cp src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecution.java "$src/jdk/internal/vm/parallel/"
+          javac -Xlint:all -Werror             --patch-module "java.base=$src"             -d "$out"             "$src/jdk/internal/vm/parallel/BulkTask.java"             "$src/jdk/internal/vm/parallel/BulkExecutor.java"             "$src/jdk/internal/vm/parallel/BulkExecution.java"
+          javac -Xlint:all -Werror             --patch-module "java.base=$out"             --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED             -d "$tests"             test/jdk/jdk/internal/vm/parallel/BulkExecutorTest.java
+          java             --patch-module "java.base=$out"             --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED             -cp "$tests"             BulkExecutorTest
+
+  jdk-build-jtreg:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get BootJDK
+        id: bootjdk
+        uses: ./.github/actions/get-bootjdk
+        with:
+          platform: linux-x64
+      - name: Get JTReg
+        id: jtreg
+        uses: ./.github/actions/get-jtreg
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-12 g++-12 libxrandr-dev libxtst-dev libcups2-dev libasound2-dev
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100             --slave /usr/bin/g++ g++ /usr/bin/g++-12
+      - name: Configure
+        run: |
+          bash configure             --with-conf-name=linux-x64-bulk             --with-debug-level=release             --with-boot-jdk='${{ steps.bootjdk.outputs.path }}'             --with-jtreg='${{ steps.jtreg.outputs.path }}'             --with-zlib=system
+      - name: Build release image
+        run: make CONF=linux-x64-bulk images
+      - name: Run focused jtreg
+        run: |
+          make CONF=linux-x64-bulk test             TEST="test/jdk/jdk/internal/vm/parallel/BulkExecutorTest.java"
