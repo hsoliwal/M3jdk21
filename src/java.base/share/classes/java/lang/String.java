@@ -3517,11 +3517,11 @@ public final class String
                 // A flat target that cannot occur (prepared facts) or does not occur leaves
                 // this String unchanged without admitting the target or the replacement.
                 if (storage != null && targetM3 == null && indexOf(trgtStr) < 0) return this;
-                M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
+                storage = storage != null ? storage : M3String.canonicalize(this);
                 if (targetM3 == null) targetM3 = M3String.canonicalize(trgtStr);
                 if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);
-                M3String replaced = sourceM3.replace(targetM3, replacementM3);
-                return replaced == sourceM3 ? this : new String(replaced);
+                M3String replaced = storage.replace(targetM3, replacementM3);
+                return replaced == storage ? this : new String(replaced);
             }
 
             boolean thisIsLatin1 = this.isLatin1();
