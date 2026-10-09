@@ -51,3 +51,10 @@ invariants:
   - No phrase payload is stored in java.lang.String.
   - Runtime: NOT_RUN
   - Hosted CI: NOT_CLAIMED
+
+verification:
+  source_discriminator_command: python m3/runtime-integration/check-synexia-phrase-proof-receipt.py --repo-root .
+  source_discriminator: M3_PHRASE_PROOF_RECEIPT_SOURCE_PASS checks=38/38
+  runtime: NOT_RUN
+  hosted_ci: NOT_CLAIMED
+  benchmark: NOT_MEASURED
