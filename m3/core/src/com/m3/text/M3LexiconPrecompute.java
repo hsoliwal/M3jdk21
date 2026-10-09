@@ -50,6 +50,26 @@ public final class M3LexiconPrecompute {
         }
     }
 
+    /** Immutable owner for the canonical Synexia integer range 0..10000. */
+    public record NumberPrecompute(int value, String canonicalDecimalSpelling,
+                                   int minValue, int maxValue, int precomputedValueCount,
+                                   boolean sharedUtf16Storage) {
+        public static final int ADMITTED_MIN_VALUE = 0;
+        public static final int ADMITTED_MAX_VALUE = 10_000;
+        public static final int ADMITTED_VALUE_COUNT = 10_001;
+
+        public NumberPrecompute {
+            if (minValue != ADMITTED_MIN_VALUE || maxValue != ADMITTED_MAX_VALUE
+                    || precomputedValueCount != ADMITTED_VALUE_COUNT)
+                throw new IllegalArgumentException("number range is not the admitted 0..10000 domain");
+            if (value < minValue || value > maxValue)
+                throw new IllegalArgumentException("number value is outside the admitted range");
+            canonicalDecimalSpelling = text(canonicalDecimalSpelling, "canonicalDecimalSpelling");
+            if (!canonicalDecimalSpelling.equals(Integer.toString(value)))
+                throw new IllegalArgumentException("canonical decimal spelling does not match value");
+        }
+    }
+
     public static final class TranslationProjection {
         private final String lexiconFingerprint;
         private final String sourceLanguage;
