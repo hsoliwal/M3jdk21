@@ -34,7 +34,7 @@ public final class M3NumberSpaceContractTest {
         String manifest = Files.readString(
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
         String row = Arrays.stream(manifest.split("\\n", -1))
-                .filter(line -> line.startsWith(M3NumberSpace.SOURCE_ID + "\\t"))
+                .filter(line -> line.startsWith(M3NumberSpace.SOURCE_ID + "\t"))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("number manifest row missing"));
         String[] columns = row.split("\\t", -1);
@@ -48,7 +48,7 @@ public final class M3NumberSpaceContractTest {
         String[] targetHeader = targetLines[0].split("\\t", -1);
         check(targetHeader.length == 10 && targetHeader[0].equals("schema"));
         String targetRow = Arrays.stream(targetLines)
-                .filter(line -> line.startsWith("M3JDK_NUMBER_TARGET_MAP_V1\\t"))
+                .filter(line -> line.startsWith("M3JDK_NUMBER_TARGET_MAP_V1\t"))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("number target map row missing"));
         String[] targetColumns = targetRow.split("\\t", -1);
