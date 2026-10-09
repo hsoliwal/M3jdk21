@@ -60,3 +60,4 @@ M3LexiconPrecompute.SiUnitPrecompute	decimalExponent	int	si_decimal_exponent	Sha
 M3LexiconPrecompute.SiUnitPrecompute	dimensionPacked	long	si_dimension_packed	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	packed seven-axis dimension remains source-owned and is not reinterpreted
 M3LexiconPrecompute.SiUnitPrecompute	offset	double	si_offset	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	finite SI offset is preserved as a Java double without conversion
 M3LexiconPrecompute.SiUnitPrecompute	prefixable	boolean	si_prefixable	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	prefixability remains an explicit source boolean
+M3LanguageGrammarSupport	supports	boolean	translation_grammar_supported	synexia.records.tsv:precompute_payload	MAPPED	boolean support signal is preserved from the source language profile; grammar rules and rule data remain source-owned
