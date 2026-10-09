@@ -43,7 +43,7 @@ jobs:
           mvn -version
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
       - name: Build and exercise immutable foundation
-        run: ./m3/build.sh
+        run: bash ./m3/build.sh
       - name: Compare pinned Synexia content and range contract
         run: python3 m3/compatibility/check-synexia.py
       - name: Verify two-process read-only image mapping
