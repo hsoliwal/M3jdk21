@@ -25,8 +25,8 @@ EXPECTED = {
 }
 
 EXPECTED_BLOBS = {
-    MANIFEST: "c95258e77ab229b1c64fa3556bb907ee569b0271",
-    FIELD_MAP: "68bc4e1bb6060abc1daba33235e0fd48addcf8bc",
+    MANIFEST: "750fdfc70dd897abb767e89b5bf1a58b6cfb8e98",
+    FIELD_MAP: "1b55d56aad7cf52a117fba7266862931777965f5",
 }
 
 def git_blob_sha(value: str) -> str:
