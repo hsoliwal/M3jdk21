@@ -2,6 +2,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import com.m3.text.M3LexiconPrecompute;
+import com.m3.text.M3LanguageGrammarSupport;
 import com.m3.text.SharedLexiconPrecomputeCatalog;
 
 import java.util.Arrays;
@@ -68,6 +69,9 @@ public final class M3TypedPrecomputeReceiverTest {
                 "dictlang.si-units", "missing")).isEmpty(),
                 "SI-unit record isolation");
 
+        check(M3LanguageGrammarSupport.supports("en"), "grammar support receiver");
+        check(!M3LanguageGrammarSupport.supports("zh"), "grammar support rejection");
+
         var tokenHashes = catalog.tokenHashesAt(range).orElseThrow();
         byte[] digest = tokenHashes.rangeSha256();
         digest[0] ^= 1;
@@ -81,7 +85,7 @@ public final class M3TypedPrecomputeReceiverTest {
                         && tokenHashes.rangeFingerprint().length() == 2,
                 "range fingerprint fields");
 
-        System.out.println("M3JDK_TYPED_RECEIVER_MATRIX_PASS checks=" + checks + " families=7");
+        System.out.println("M3JDK_TYPED_RECEIVER_MATRIX_PASS checks=" + checks + " families=8");
     }
 
     private static void rejectsMismatchedOwners() {
