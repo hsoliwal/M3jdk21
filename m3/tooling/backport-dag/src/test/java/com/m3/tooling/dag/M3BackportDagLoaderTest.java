@@ -10,7 +10,7 @@ final class M3BackportDagLoaderTest {
 
     @Test
     void canonicalResourceLoads() {
-        assertEquals(12, M3BackportDagLoader.load("m3-backport-dag.tsv").size());
+        assertEquals(21, M3BackportDagLoader.load("m3-backport-dag.tsv").size());
     }
 
     @Test
