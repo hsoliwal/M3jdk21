@@ -177,6 +177,6 @@ rejects controls, duplicates, foreign source IDs and checksum/row-count drift,
 and requires the source manifest revision plus a 64-character owner fingerprint.
 The current target map is
 `m3/lexicon/synexia-acronym-target-map.tsv`, bound to
-`AcronymLexicon.java` and its Apache-2.0 source blob. The sidecar is staged
-until its Java receiver, complete 40-entry source snapshot, CI proof and
-source-side receipts are synchronized; staged is not an admission claim.
+`AcronymLexicon.java` and its Apache-2.0 source blob. The sidecar is staged until its Java receiver, pinned 40-entry snapshot, hosted
+CI proof and source-side receipts are synchronized; staged is not an admission
+claim.
