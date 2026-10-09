@@ -105,7 +105,7 @@ public final class M3LexiconsFacadeTest {
         String prefix = row("source_id", "record_id", "source_manifest_revision", "owner_fingerprint",
                 "shard_id", "image_row", "derivation_version", "value_fingerprint",
                 "token_id", "prefix_counts")
-                + scope + "0\t0\tprefix-1\tvalue-a\t7\t0,1,1\n";
+                + scope + "0\t0\tprefix-1\tvalue-a\t7\t0,1,1,2\n";
         String spell = row("source_id", "record_id", "source_manifest_revision", "owner_fingerprint",
                 "lexicon_fingerprint", "language", "max_edit_distance", "prefix_length",
                 "source_fingerprint", "delete_key", "candidate_token_ids", "frequencies")
