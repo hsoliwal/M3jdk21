@@ -44,10 +44,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          src="$RUNNER_TEMP/bulk-patch-src"
           out="$RUNNER_TEMP/bulk-java-base"
           tests="$RUNNER_TEMP/bulk-tests"
-          mkdir -p "$out" "$tests"
-          javac -Xlint:all -Werror             --patch-module java.base=src/java.base/share/classes             -d "$out"             src/java.base/share/classes/jdk/internal/vm/parallel/BulkTask.java             src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecutor.java             src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecution.java
+          mkdir -p "$src/jdk/internal/vm/parallel" "$out" "$tests"
+          cp src/java.base/share/classes/jdk/internal/vm/parallel/BulkTask.java "$src/jdk/internal/vm/parallel/"
+          cp src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecutor.java "$src/jdk/internal/vm/parallel/"
+          cp src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecution.java "$src/jdk/internal/vm/parallel/"
+          javac -Xlint:all -Werror             --patch-module "java.base=$src"             -d "$out"             "$src/jdk/internal/vm/parallel/BulkTask.java"             "$src/jdk/internal/vm/parallel/BulkExecutor.java"             "$src/jdk/internal/vm/parallel/BulkExecution.java"
           javac -Xlint:all -Werror             --patch-module "java.base=$out"             --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED             -d "$tests"             test/jdk/jdk/internal/vm/parallel/BulkExecutorTest.java
           java             --patch-module "java.base=$out"             --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED             -cp "$tests"             BulkExecutorTest
 
