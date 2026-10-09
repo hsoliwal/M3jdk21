@@ -59,7 +59,7 @@ def main() -> int:
             comments.append(line)
         elif line.strip():
             data_lines.append(line)
-    if EXPECTED_PROOF not in comments:
+    if "# proof=" + EXPECTED_PROOF not in comments:
         fail("proof marker missing")
     expected_header = [
         "mapping_index",
