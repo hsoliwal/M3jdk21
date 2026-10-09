@@ -3522,10 +3522,10 @@ index 0000000000000000000000000000000000000000..6cbb277119f387aac772373d31621af6
 +}
 diff --git a/src/java.base/share/classes/java/lang/M3StringFacts.java b/src/java.base/share/classes/java/lang/M3StringFacts.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..763a76fb55a52576ca1a3edc48fcc214663f799e
+index 0000000000000000000000000000000000000000..70bab1c356a3170d1bf46172c42a471e849db005
 --- /dev/null
 +++ b/src/java.base/share/classes/java/lang/M3StringFacts.java
-@@ -0,0 +1,443 @@
+@@ -0,0 +1,505 @@
 +/*
 + * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
 + * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -3627,6 +3627,26 @@ index 0000000000000000000000000000000000000000..763a76fb55a52576ca1a3edc48fcc214
 +        this.stripEnd = stripEnd;
 +    }
 +
++    /**
++     * Bounded materialization window for {@link #scan}: facts are folded over bulk-read UTF-16
++     * units, never through per-unit owner dispatch. The window is transient scratch, not a shadow.
++     */
++    private static final int SCAN_WINDOW = 1024;
++
++    /**
++     * Code-unit signal bits for every Latin-1 unit, folded once at class initialization: the
++     * per-unit scan and the flat-needle folds read the table instead of mixing twice per unit.
++     * Units above U+00FF are mixed on demand. Pure cache of {@link #addSignal}; no output changes.
++     */
++    private static final long[] LATIN1_UNIT_SIGNAL = latin1UnitSignals();
++
++    /**
++     * Folds every fact in one streaming pass over bulk-read windows. The code-point lane keeps a
++     * one-unit delay so a high surrogate is resolved by its successor (or at the end), which keeps
++     * the pass exact across window boundaries. Donor shape: Synexia
++     * {@code MIndexTextPrecomputedFacts.compile} (single loop), extended with the code-point,
++     * strip and trim lanes that are M3JDK-only.
++     */
 +    static M3StringFacts scan(M3String value) {
 +        int length = value.length();
 +        int hash = 0;
@@ -3647,68 +3667,98 @@ index 0000000000000000000000000000000000000000..763a76fb55a52576ca1a3edc48fcc214
 +        char last = 0;
 +        char previous2 = 0;
 +        char previous1 = 0;
-+
-+        for (int index = 0; index < length; index++) {
-+            char unit = value.charAt(index);
-+            if (index == 0) first = unit;
-+            last = unit;
-+            hash = 31 * hash + unit;
-+            signal = addSignal(signal, unit);
-+            ascii &= unit <= 0x7f;
-+            latin1 &= unit <= 0xff;
-+            upperHash = 31 * upperHash + asciiUpper(unit);
-+            lowerHash = 31 * lowerHash + asciiLower(unit);
-+            titleHash = 31 * titleHash + (index == 0 ? asciiUpper(unit) : asciiLower(unit));
-+            if (index < 4) prefix |= (long) unit << (48 - (index << 4));
-+            suffix = (suffix << 16) | unit;
-+            if (index >= 1) bigrams = addBigramSignal(bigrams, previous1, unit);
-+            if (index >= 2) trigrams = addTrigramSignal(trigrams, previous2, previous1, unit);
-+            previous2 = previous1;
-+            previous1 = unit;
-+        }
-+
++        boolean pendingHigh = false;
 +        int stripStart = 0;
 +        int stripEnd = 0;
 +        boolean leadingStrip = true;
-+        int index = 0;
-+        while (index < length) {
-+            int codePointStart = index;
-+            char unit = value.charAt(index);
-+            int codePoint = unit;
-+            int width = 1;
-+            if (Character.isHighSurrogate(unit)
-+                    && index + 1 < length
-+                    && Character.isLowSurrogate(value.charAt(index + 1))) {
-+                codePoint = Character.toCodePoint(unit, value.charAt(index + 1));
-+                width = 2;
-+                utf8 = Math.addExact(utf8, 4);
-+            } else if (Character.isSurrogate(unit)) {
-+                unpaired++;
-+                utf8 = Math.addExact(utf8, UTF8_REPLACEMENT_BYTES);
-+            } else {
-+                utf8 = Math.addExact(utf8, utf8Bytes(unit));
-+            }
-+            codePoints++;
-+
-+            boolean whitespace = Character.isWhitespace(codePoint);
-+            if (leadingStrip) {
-+                if (whitespace) stripStart = codePointStart + width;
-+                else leadingStrip = false;
-+            }
-+            if (!whitespace) stripEnd = codePointStart + width;
-+            index += width;
-+        }
-+
 +        int trimStart = 0;
-+        while (trimStart < length && value.charAt(trimStart) <= ' ') trimStart++;
-+        int trimEnd = length;
-+        while (trimEnd > trimStart && value.charAt(trimEnd - 1) <= ' ') trimEnd--;
++        int trimEnd = 0;
++        boolean leadingTrim = true;
++
++        char[] window = new char[Math.min(length, SCAN_WINDOW)];
++        for (int base = 0; base < length; base += window.length) {
++            int count = Math.min(window.length, length - base);
++            value.getChars(base, base + count, window, 0);
++            for (int offset = 0; offset < count; offset++) {
++                int index = base + offset;
++                char unit = window[offset];
++                if (index == 0) first = unit;
++                last = unit;
++                hash = 31 * hash + unit;
++                signal |= unitSignal(unit);
++                ascii &= unit <= 0x7f;
++                latin1 &= unit <= 0xff;
++                upperHash = 31 * upperHash + asciiUpper(unit);
++                lowerHash = 31 * lowerHash + asciiLower(unit);
++                titleHash = 31 * titleHash + (index == 0 ? asciiUpper(unit) : asciiLower(unit));
++                if (index < 4) prefix |= (long) unit << (48 - (index << 4));
++                suffix = (suffix << 16) | unit;
++                if (index >= 1) bigrams = addBigramSignal(bigrams, previous1, unit);
++                if (index >= 2) trigrams = addTrigramSignal(trigrams, previous2, previous1, unit);
++
++                if (leadingTrim) {
++                    if (unit <= ' ') trimStart = index + 1;
++                    else leadingTrim = false;
++                }
++                if (unit > ' ') trimEnd = index + 1;
++
++                boolean whitespace;
++                if (pendingHigh) {
++                    pendingHigh = false;
++                    if (Character.isLowSurrogate(unit)) {
++                        utf8 = Math.addExact(utf8, 4);
++                        codePoints++;
++                        whitespace = Character.isWhitespace(Character.toCodePoint(previous1, unit));
++                        if (leadingStrip) {
++                            if (whitespace) stripStart = index + 1;
++                            else leadingStrip = false;
++                        }
++                        if (!whitespace) stripEnd = index + 1;
++                        previous2 = previous1;
++                        previous1 = unit;
++                        continue;
++                    }
++                    // The previous high surrogate stays unpaired: a lone surrogate is never whitespace.
++                    unpaired++;
++                    utf8 = Math.addExact(utf8, UTF8_REPLACEMENT_BYTES);
++                    codePoints++;
++                    leadingStrip = false;
++                    stripEnd = index;
++                }
++                if (Character.isHighSurrogate(unit)) {
++                    pendingHigh = true;
++                } else {
++                    if (Character.isLowSurrogate(unit)) {
++                        unpaired++;
++                        utf8 = Math.addExact(utf8, UTF8_REPLACEMENT_BYTES);
++                    } else {
++                        utf8 = Math.addExact(utf8, utf8Bytes(unit));
++                    }
++                    codePoints++;
++                    whitespace = Character.isWhitespace(unit);
++                    if (leadingStrip) {
++                        if (whitespace) stripStart = index + 1;
++                        else leadingStrip = false;
++                    }
++                    if (!whitespace) stripEnd = index + 1;
++                }
++                previous2 = previous1;
++                previous1 = unit;
++            }
++        }
++        if (pendingHigh) {
++            unpaired++;
++            utf8 = Math.addExact(utf8, UTF8_REPLACEMENT_BYTES);
++            codePoints++;
++            leadingStrip = false;
++            stripEnd = length;
++        }
 +
 +        if (length == 0) {
 +            stripStart = stripEnd = trimStart = trimEnd = 0;
 +        } else {
 +            if (leadingStrip) stripEnd = 0;
-+            if (trimStart == length) trimEnd = 0;
++            if (leadingTrim) trimEnd = 0;
 +        }
 +
 +        return new M3StringFacts(
@@ -3859,7 +3909,7 @@ index 0000000000000000000000000000000000000000..763a76fb55a52576ca1a3edc48fcc214
 +        char previous1 = 0;
 +        for (int index = 0; index < length; index++) {
 +            char unit = needle.charAt(index);
-+            units = addSignal(units, unit);
++            units |= unitSignal(unit);
 +            if (index >= 1) bigrams = addBigramSignal(bigrams, previous1, unit);
 +            if (index >= 2) trigrams = addTrigramSignal(trigrams, previous2, previous1, unit);
 +            previous2 = previous1;
@@ -3901,7 +3951,19 @@ index 0000000000000000000000000000000000000000..763a76fb55a52576ca1a3edc48fcc214
 +    }
 +
 +    static long codeUnitSignal(char unit) {
-+        return addSignal(0L, unit);
++        return unitSignal(unit);
++    }
++
++    private static long unitSignal(char unit) {
++        return unit < 0x100 ? LATIN1_UNIT_SIGNAL[unit] : addSignal(0L, unit);
++    }
++
++    private static long[] latin1UnitSignals() {
++        long[] table = new long[0x100];
++        for (int unit = 0; unit < table.length; unit++) {
++            table[unit] = addSignal(0L, (char) unit);
++        }
++        return table;
 +    }
 +
 +    private static int utf8Bytes(char value) {
