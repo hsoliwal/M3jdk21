@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Locale;
 import com.m3.text.M3LanguageGrammarSupport;
+import com.m3.text.SynexiaPrecomputePayload;
 
 /** Contract proof for the Synexia grammar-support mapping. */
 public final class M3LanguageGrammarSupportTest {
@@ -41,6 +42,23 @@ public final class M3LanguageGrammarSupportTest {
         check(columns.length == 9);
         check(columns[5].equals("M3StringFacts + TranslationMapping + GrammarSupport"));
         check(columns[8].equals("translation_grammar_supported"));
+        check(SynexiaPrecomputePayload.parse(
+                "{\"translation_grammar_supported\":true}")
+                .requireBoolean("translation_grammar_supported"));
+        check(!SynexiaPrecomputePayload.parse(
+                "{\"translation_grammar_supported\":false}")
+                .requireBoolean("translation_grammar_supported"));
+        expectIllegalArgument(() -> SynexiaPrecomputePayload.parse(
+                "{\"translation_grammar_supported\":1}"));
         System.out.println("M3JDK_GRAMMAR_SUPPORT_PASS checks=" + checks + " languages=16");
+    }
+
+    private static void expectIllegalArgument(Runnable action) {
+        try {
+            action.run();
+            throw new AssertionError("missing IllegalArgumentException");
+        } catch (IllegalArgumentException expected) {
+            checks++;
+        }
     }
 }
