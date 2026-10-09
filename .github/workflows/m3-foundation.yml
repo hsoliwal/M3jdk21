@@ -11,6 +11,8 @@ jobs:
   foundation:
     runs-on: ubuntu-22.04
     timeout-minutes: 15
+    env:
+      SYNEXIA_READ_TOKEN: ${{ secrets.SYNEXIA_READ_TOKEN }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
