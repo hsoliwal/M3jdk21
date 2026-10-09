@@ -88,39 +88,66 @@
     },
     "src/java.base/share/classes/java/lang/M3String.java": {
       "before": null,
-      "after": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b"
+      "after": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b",
+      "superseded": [
+        "f88c545538e250c057809d86cb0727cbeb07bed69508b0c85197b0084247fa5c"
+      ]
     },
     "src/java.base/share/classes/java/lang/M3StringAtom.java": {
       "before": null,
-      "after": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f"
+      "after": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f",
+      "superseded": [
+        "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f"
+      ]
     },
     "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java": {
       "before": null,
-      "after": "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257"
+      "after": "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257",
+      "superseded": [
+        "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257"
+      ]
     },
     "src/java.base/share/classes/java/lang/M3StringFacts.java": {
       "before": null,
-      "after": "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f"
+      "after": "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f",
+      "superseded": [
+        "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f"
+      ]
     },
     "src/java.base/share/classes/java/lang/M3StringOwner.java": {
       "before": null,
-      "after": "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74"
+      "after": "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74",
+      "superseded": [
+        "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74"
+      ]
     },
     "src/java.base/share/classes/java/lang/M3StringPool.java": {
       "before": null,
-      "after": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b"
+      "after": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b",
+      "superseded": [
+        "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b"
+      ]
     },
     "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java": {
       "before": null,
-      "after": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b"
+      "after": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b",
+      "superseded": [
+        "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b"
+      ]
     },
     "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java": {
       "before": null,
-      "after": "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4"
+      "after": "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4",
+      "superseded": [
+        "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4"
+      ]
     },
     "src/java.base/share/classes/java/lang/M3StringTuple.java": {
       "before": null,
-      "after": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9"
+      "after": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9",
+      "superseded": [
+        "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9"
+      ]
     },
     "src/java.base/share/classes/java/lang/String.java": {
       "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
@@ -140,7 +167,10 @@
     },
     "src/java.base/share/classes/java/util/regex/M3PatternQuery.java": {
       "before": null,
-      "after": "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f"
+      "after": "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f",
+      "superseded": [
+        "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f"
+      ]
     },
     "src/java.base/share/classes/java/util/regex/Matcher.java": {
       "before": "7ae5ae6dc7f763c152c8f872af98551f74abf67cc2a53e331056287226e949ca",
@@ -156,107 +186,185 @@
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java": {
       "before": null,
-      "after": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa"
+      "after": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+      "superseded": [
+        "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java": {
       "before": null,
-      "after": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8"
+      "after": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+      "superseded": [
+        "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java": {
       "before": null,
-      "after": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab"
+      "after": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+      "superseded": [
+        "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": {
       "before": null,
-      "after": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a"
+      "after": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
+      "superseded": [
+        "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": {
       "before": null,
-      "after": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36"
+      "after": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
+      "superseded": [
+        "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": {
       "before": null,
-      "after": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1"
+      "after": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+      "superseded": [
+        "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Class.java": {
       "before": null,
-      "after": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472"
+      "after": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+      "superseded": [
+        "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java": {
       "before": null,
-      "after": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b"
+      "after": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
+      "superseded": [
+        "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java": {
       "before": null,
-      "after": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923"
+      "after": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
+      "superseded": [
+        "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java": {
       "before": null,
-      "after": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+      "after": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "superseded": [
+        "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Field.java": {
       "before": null,
-      "after": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481"
+      "after": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
+      "superseded": [
+        "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java": {
       "before": null,
-      "after": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda"
+      "after": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
+      "superseded": [
+        "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java": {
       "before": null,
-      "after": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644"
+      "after": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
+      "superseded": [
+        "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java": {
       "before": null,
-      "after": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01"
+      "after": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01",
+      "superseded": [
+        "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Member.java": {
       "before": null,
-      "after": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1"
+      "after": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
+      "superseded": [
+        "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java": {
       "before": null,
-      "after": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be"
+      "after": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be",
+      "superseded": [
+        "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java": {
       "before": null,
-      "after": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b"
+      "after": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b",
+      "superseded": [
+        "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Method.java": {
       "before": null,
-      "after": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58"
+      "after": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58",
+      "superseded": [
+        "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3PC.java": {
       "before": null,
-      "after": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898"
+      "after": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898",
+      "superseded": [
+        "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java": {
       "before": null,
-      "after": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd"
+      "after": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
+      "superseded": [
+        "0be405cfa1d7fac2fb1fbd5ae42e9798033eda53c6545b47154a16fa57134bd"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": {
       "before": null,
-      "after": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb"
+      "after": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+      "superseded": [
+        "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java": {
       "before": null,
-      "after": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251"
+      "after": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
+      "superseded": [
+        "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java": {
       "before": null,
-      "after": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4"
+      "after": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+      "superseded": [
+        "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4"
+      ]
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": {
       "before": null,
-      "after": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a"
+      "after": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+      "superseded": [
+        "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a"
+      ]
     },
     "src/java.base/share/legal/synexia.md": {
       "before": null,
-      "after": "2d1d742093ddfd2424442ff27db87af57c9c2b7eb73e68670a05fc5f7d91860a"
+      "after": "2d1d742093ddfd2424442ff27db87af57c9c2b7eb73e68670a05fc5f7d91860a",
+      "superseded": [
+        "2d1d742093ddfd2424442ff27db87af57c9c2b7eb73e68670a05fc5f7d91860a"
+      ]
     },
     "src/java.base/share/native/libjava/M3BitLane28.c": {
       "before": null,
-      "after": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
+      "after": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+      "superseded": [
+        "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
+      ]
     },
     "src/java.base/share/native/libjava/String.c": {
       "before": "4ca26f746733a6b954700fb14cad8a8a0a20100b834e5ad407a360c2b83cd311",
