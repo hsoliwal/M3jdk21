@@ -199,6 +199,7 @@ public final class SynexiaPrecomputePayload {
             result.put(name, Expected.LONG);
         result.put("si_offset", Expected.DOUBLE);
         result.put("si_prefixable", Expected.BOOLEAN);
+        result.put("translation_grammar_supported", Expected.BOOLEAN);
         for (String name : List.of("memberships")) result.put(name, Expected.INT_ARRAY);
         for (String name : List.of("concept_ids", "subjects", "expansion_word_ids")) result.put(name, Expected.LONG_ARRAY);
         return Map.copyOf(result);
