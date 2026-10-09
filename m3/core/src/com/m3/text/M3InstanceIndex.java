@@ -118,9 +118,22 @@ public final class M3InstanceIndex {
     }
 
     public record PrecomputeFacts(int utf16Units, int codePoints, int javaHash,
-                                  boolean ascii, boolean latin1) {
+                                  boolean ascii, boolean latin1,
+                                  int unpairedSurrogates, int nonBmpCodePoints,
+                                  boolean containsWhitespace) {
+        /**
+         * Compatibility constructor for callers that already supply the original
+         * five facts. Exporters should use {@link #forText(String)} so the
+         * supplementary-character facts are derived from the exact UTF-16 value.
+         */
+        public PrecomputeFacts(int utf16Units, int codePoints, int javaHash,
+                               boolean ascii, boolean latin1) {
+            this(utf16Units, codePoints, javaHash, ascii, latin1, 0, 0, false);
+        }
+
         public PrecomputeFacts {
-            if (utf16Units < 0 || codePoints < 0 || codePoints > utf16Units) {
+            if (utf16Units < 0 || codePoints < 0 || codePoints > utf16Units
+                    || unpairedSurrogates < 0 || nonBmpCodePoints < 0) {
                 throw new IllegalArgumentException("invalid text dimensions");
             }
         }
@@ -129,13 +142,29 @@ public final class M3InstanceIndex {
             Objects.requireNonNull(text, "text");
             boolean ascii = true;
             boolean latin1 = true;
+            int unpairedSurrogates = 0;
+            int nonBmpCodePoints = 0;
+            boolean containsWhitespace = false;
             for (int at = 0; at < text.length(); at++) {
                 char value = text.charAt(at);
                 ascii &= value <= 0x7f;
                 latin1 &= value <= 0xff;
+                containsWhitespace |= Character.isWhitespace(value);
+                if (Character.isHighSurrogate(value)) {
+                    if (at + 1 < text.length()
+                            && Character.isLowSurrogate(text.charAt(at + 1))) {
+                        nonBmpCodePoints++;
+                        at++;
+                    } else {
+                        unpairedSurrogates++;
+                    }
+                } else if (Character.isLowSurrogate(value)) {
+                    unpairedSurrogates++;
+                }
             }
             return new PrecomputeFacts(text.length(), text.codePointCount(0, text.length()),
-                    text.hashCode(), ascii, latin1);
+                    text.hashCode(), ascii, latin1, unpairedSurrogates,
+                    nonBmpCodePoints, containsWhitespace);
         }
     }
 
