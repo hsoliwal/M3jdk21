@@ -41,11 +41,11 @@ public final class M3FrequencyCountContractTest {
 
         SynexiaPrecomputePayload payload =
                 SynexiaPrecomputePayload.parse("{\"corpus_count\":28787591}");
-        check(payload.requireLong("corpus_count") == 28_787_591L);
+        check(payload.requireNonNegativeLong("corpus_count") == 28_787_591L);
         check(payload.canonicalJson().equals("{\"corpus_count\":28787591}"));
 
         expect(IllegalArgumentException.class, () ->
-                SynexiaPrecomputePayload.parse("{\"corpus_count\":-1}").requireLong("corpus_count"));
+                SynexiaPrecomputePayload.parse("{\"corpus_count\":-1}").requireNonNegativeLong("corpus_count"));
         check(!payload.field("frequency_rank").isPresent());
         System.out.println("M3JDK_FREQUENCY_COUNT_CONTRACT_PASS checks=" + checks);
     }
