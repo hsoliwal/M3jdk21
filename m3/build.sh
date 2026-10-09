@@ -17,7 +17,7 @@ if ! "$M3_JDK/bin/javac" --release 21 --module-path build/com.m3.text.jar --add-
   core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SharedRelatedLexemeCatalogTest.java \
   core/test/SynexiaSiUnitDecoderTest.java \
   core/test/M3NumberSpaceTest.java core/test/M3NumberSpaceContractTest.java \
-  core/test/M3LanguageGrammarSupportTest.java > build/logs/test-compile.log 2>&1; then
+  core/test/M3LanguageGrammarSupportTest.java core/test/M3LexiconCoverageInvariantTest.java > build/logs/test-compile.log 2>&1; then
   cat build/logs/test-compile.log >&2
   exit 1
 fi
@@ -42,6 +42,7 @@ for mode in jit int nocompact c2; do
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceTest | tee "build/logs/number-space-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceContractTest | tee "build/logs/number-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LanguageGrammarSupportTest | tee "build/logs/grammar-support-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LexiconCoverageInvariantTest | tee "build/logs/lexicon-coverage-$mode.log"
 done
 # Build in a private temporary directory, then publish a complete content-addressed file.
 lexicon_tmp=$(mktemp -d build/lexicon.XXXXXX)
