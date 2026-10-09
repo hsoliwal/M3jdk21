@@ -10,7 +10,7 @@ prefix='synexia-indexstring/src/main/java/com/synexia/indexstring/'
 pins={'FrozenChars.java':'75264c85b4da2cd7d9193d8e245364efb53aa936',
       'FrozenBytes.java':'0e249745d0e96a1d9a8754a075f33cdf42e8fc0b'}
 def git_blob_sha(data):
-    header=('blob '+str(len(data))+'\\0').encode()
+    header=b'blob '+str(len(data)).encode()+bytes([0])
     return hashlib.sha1(header+data).hexdigest()
 
 paths=[]
