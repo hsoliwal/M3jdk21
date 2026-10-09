@@ -6444,8 +6444,179 @@ index 0000000000000000000000000000000000000000..0d4cfb75317e68d54244588a474eba98
 +                right.slice(0, end - leftLength).facts());
 +    }
 +}
+diff --git a/src/java.base/share/classes/java/lang/M3StringWindowSearch.java b/src/java.base/share/classes/java/lang/M3StringWindowSearch.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..76cbf0ef65b7c6c5d67d735df5b4b96c61c93e8a
+--- /dev/null
++++ b/src/java.base/share/classes/java/lang/M3StringWindowSearch.java
+@@ -0,0 +1,165 @@
++/*
++ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
++ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++ *
++ * This code is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License version 2 only, as
++ * published by the Free Software Foundation.  Oracle designates this
++ * particular file as subject to the "Classpath" exception as provided
++ * by Oracle in the LICENSE file that accompanied this code.
++ *
++ * This code is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
++ * version 2 for more details (a copy is included in the LICENSE file that
++ * accompanied this code).
++ *
++ * You should have received a copy of the GNU General Public License version
++ * 2 along with this work; if not, write to the Free Software Foundation,
++ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
++ */
++
++package java.lang;
++
++/**
++ * Needle searches over an M3 haystack with the stock {@code StringLatin1}/{@code StringUTF16}
++ * searches on bulk-copied windows (A14 INDEXOF-NATIVE). A window of {@link #WINDOW} units is
++ * filled through {@link M3String#getBytes} (an atom copies from native memory, a tuple descends)
++ * and consecutive windows overlap by needle length minus one, so a match straddling two windows
++ * is still found; {@code indexOf} walks forward, {@code lastIndexOf} backward. Every facts and
++ * plan gate stays in front of these searches, and the results equal the stock {@code String}
++ * results on the same spellings.
++ */
++final class M3StringWindowSearch {
++
++    /** Units per window; one window buffer per call, transient scratch. */
++    static final int WINDOW = 4096;
++
++    /**
++     * An M3 needle of this many units and up runs the search precompute's skip search over each
++     * window (sublinear for long needles); shorter needles run the stock vectorized search.
++     */
++    static final int LONG_NEEDLE = 16;
++
++    private M3StringWindowSearch() {
++    }
++
++    /** The compact value of an M3 needle, read once in bulk. */
++    static byte[] needleBytes(M3String needle) {
++        byte coder = needle.coder();
++        int count = needle.length();
++        byte[] out = new byte[count << coder];
++        needle.getBytes(out, 0, 0, coder, count);
++        return out;
++    }
++
++    /**
++     * First index in {@code [from, end)} at which the needle starts, else {@code -1}.
++     * {@code needleCount} is at least 1 and at most {@code end - from}.
++     */
++    static int indexOf(M3String haystack, int from, int end, byte[] needle, int needleCount,
++            byte needleCoder) {
++        byte coder = haystack.coder();
++        if (coder == String.LATIN1 && needleCoder == String.UTF16) return -1;
++        int width = Math.min(end - from, Math.max(WINDOW, needleCount));
++        byte[] buffer = new byte[width << coder];
++        for (int base = from; base + needleCount <= end;) {
++            int count = Math.min(width, end - base);
++            haystack.getBytes(buffer, base, 0, coder, count);
++            int found = search(buffer, count, coder, needle, needleCount, needleCoder);
++            if (found >= 0) return base + found;
++            if (base + count >= end) return -1;
++            base += count - (needleCount - 1);
++        }
++        return -1;
++    }
++
++    /**
++     * Last index at most {@code maximumStart} at which the needle starts, else {@code -1}.
++     * {@code maximumStart + needleCount} is at most the haystack length.
++     */
++    static int lastIndexOf(M3String haystack, int maximumStart, byte[] needle, int needleCount,
++            byte needleCoder) {
++        byte coder = haystack.coder();
++        if (coder == String.LATIN1 && needleCoder == String.UTF16) return -1;
++        int end = maximumStart + needleCount;
++        int width = Math.min(end, Math.max(WINDOW, needleCount));
++        byte[] buffer = new byte[width << coder];
++        for (int limit = end; limit >= needleCount;) {
++            int base = Math.max(0, limit - width);
++            int count = limit - base;
++            haystack.getBytes(buffer, base, 0, coder, count);
++            int found = searchLast(buffer, count, coder, needle, needleCount, needleCoder,
++                    count - needleCount);
++            if (found >= 0) return base + found;
++            if (base == 0) return -1;
++            limit = base + (needleCount - 1);
++        }
++        return -1;
++    }
++
++    /** First index in {@code [from, end)} at which the M3 needle starts, else {@code -1}. */
++    static int indexOf(M3String haystack, int from, int end, M3String needle) {
++        int needleCount = needle.length();
++        if (needleCount < LONG_NEEDLE) {
++            return indexOf(haystack, from, end, needleBytes(needle), needleCount, needle.coder());
++        }
++        byte coder = haystack.coder();
++        if (coder == String.LATIN1 && needle.coder() == String.UTF16) return -1;
++        int width = Math.min(end - from, Math.max(WINDOW, needleCount));
++        byte[] buffer = new byte[width << coder];
++        for (int base = from; base + needleCount <= end;) {
++            int count = Math.min(width, end - base);
++            haystack.getBytes(buffer, base, 0, coder, count);
++            int found = M3StringSearchPrecompute.indexOf(buffer, coder, count, needle, 0);
++            if (found >= 0) return base + found;
++            if (base + count >= end) return -1;
++            base += count - (needleCount - 1);
++        }
++        return -1;
++    }
++
++    /** Last index at most {@code maximumStart} at which the M3 needle starts, else {@code -1}. */
++    static int lastIndexOf(M3String haystack, int maximumStart, M3String needle) {
++        int needleCount = needle.length();
++        if (needleCount < LONG_NEEDLE) {
++            return lastIndexOf(haystack, maximumStart, needleBytes(needle), needleCount, needle.coder());
++        }
++        byte coder = haystack.coder();
++        if (coder == String.LATIN1 && needle.coder() == String.UTF16) return -1;
++        int end = maximumStart + needleCount;
++        int width = Math.min(end, Math.max(WINDOW, needleCount));
++        byte[] buffer = new byte[width << coder];
++        for (int limit = end; limit >= needleCount;) {
++            int base = Math.max(0, limit - width);
++            int count = limit - base;
++            haystack.getBytes(buffer, base, 0, coder, count);
++            int found = M3StringSearchPrecompute.lastIndexOf(buffer, coder, count, needle,
++                    count - needleCount);
++            if (found >= 0) return base + found;
++            if (base == 0) return -1;
++            limit = base + (needleCount - 1);
++        }
++        return -1;
++    }
++
++    private static int search(byte[] window, int count, byte coder, byte[] needle, int needleCount,
++            byte needleCoder) {
++        if (coder == String.LATIN1) {
++            return StringLatin1.indexOf(window, count, needle, needleCount, 0);
++        }
++        return needleCoder == String.LATIN1
++                ? StringUTF16.indexOfLatin1(window, count, needle, needleCount, 0)
++                : StringUTF16.indexOf(window, count, needle, needleCount, 0);
++    }
++
++    private static int searchLast(byte[] window, int count, byte coder, byte[] needle,
++            int needleCount, byte needleCoder, int fromIndex) {
++        if (coder == String.LATIN1) {
++            return StringLatin1.lastIndexOf(window, count, needle, needleCount, fromIndex);
++        }
++        return needleCoder == String.LATIN1
++                ? StringUTF16.lastIndexOfLatin1(window, count, needle, needleCount, fromIndex)
++                : StringUTF16.lastIndexOf(window, count, needle, needleCount, fromIndex);
++    }
++}
 diff --git a/src/java.base/share/classes/java/lang/String.java b/src/java.base/share/classes/java/lang/String.java
-index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d8066343e3d19fe 100644
+index 5c234d4dfacac9e642578483640d4e6b41488beb..07e40f53f6011c58c4e86db1a2d37c420cb1f51c 100644
 --- a/src/java.base/share/classes/java/lang/String.java
 +++ b/src/java.base/share/classes/java/lang/String.java
 @@ -43,6 +43,8 @@ import java.util.Locale;
@@ -6872,7 +7043,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
 -            coder = UTF16;
 -            value = StringUTF16.toBytes(ca, 0, caLen);
 +            return new M3Construction(StringUTF16.toBytes(ca, 0, clen), UTF16);
-+        }
+         }
 +
 +        int en = scale(length, cd.maxCharsPerByte());
 +        cd.onMalformedInput(CodingErrorAction.REPLACE)
@@ -6895,7 +7066,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
 +            if (bs != null) {
 +                return new M3Construction(bs, LATIN1);
 +            }
-         }
++        }
 +        return new M3Construction(StringUTF16.toBytes(ca, 0, caLen), UTF16);
      }
  
@@ -7429,7 +7600,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
      }
  
      /**
-@@ -2627,7 +2897,30 @@ public final class String
+@@ -2627,7 +2897,22 @@ public final class String
       *          or {@code -1} if there is no such occurrence.
       */
      public int indexOf(String str, int fromIndex) {
@@ -7446,22 +7617,14 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
 +            // Flat needle (for example a literal): prepared facts can prove absence first.
 +            M3StringFacts prepared = sourceM3.factsIfPrepared();
 +            if (prepared != null && !prepared.mayContain(str)) return -1;
-+            int limit = sourceM3.length() - targetLength;
-+            char first = str.charAt(0);
-+            for (int start = from; start <= limit; start++) {
-+                if (sourceM3.charAt(start) != first) continue;
-+                int index = 1;
-+                while (index < targetLength
-+                        && sourceM3.charAt(start + index) == str.charAt(index)) index++;
-+                if (index == targetLength) return start;
-+            }
-+            return -1;
++            return M3StringWindowSearch.indexOf(sourceM3, from, sourceM3.length(), str.value(),
++                    targetLength, str.coder());
 +        }
 +        return indexOf(value(), coder(), length(), str, fromIndex);
      }
  
      /**
-@@ -2660,7 +2953,30 @@ public final class String
+@@ -2660,7 +2945,22 @@ public final class String
              return indexOf(str.charAt(0), beginIndex, endIndex);
          }
          checkBoundsBeginEnd(beginIndex, endIndex, length());
@@ -7478,22 +7641,14 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
 +            // Flat needle (for example a literal): prepared facts can prove absence first.
 +            M3StringFacts prepared = sourceM3.factsIfPrepared();
 +            if (prepared != null && !prepared.mayContain(str)) return -1;
-+            int limit = endIndex - targetLength;
-+            char first = str.charAt(0);
-+            for (int start = beginIndex; start <= limit; start++) {
-+                if (sourceM3.charAt(start) != first) continue;
-+                int index = 1;
-+                while (index < targetLength
-+                        && sourceM3.charAt(start + index) == str.charAt(index)) index++;
-+                if (index == targetLength) return start;
-+            }
-+            return -1;
++            return M3StringWindowSearch.indexOf(sourceM3, beginIndex, endIndex, str.value(),
++                    targetLength, str.coder());
 +        }
 +        return indexOf(value(), coder(), endIndex, str, beginIndex);
      }
  
      /**
-@@ -2685,7 +3001,13 @@ public final class String
+@@ -2685,7 +2985,13 @@ public final class String
              return fromIndex;
          }
  
@@ -7508,7 +7663,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          byte tgtCoder = tgtStr.coder();
          if (srcCoder == tgtCoder) {
              return srcCoder == LATIN1
-@@ -2736,7 +3058,27 @@ public final class String
+@@ -2736,7 +3042,22 @@ public final class String
       *          or {@code -1} if there is no such occurrence.
       */
      public int lastIndexOf(String str, int fromIndex) {
@@ -7525,19 +7680,14 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
 +            // Flat needle (for example a literal): prepared facts can prove absence first.
 +            M3StringFacts prepared = storage.factsIfPrepared();
 +            if (prepared != null && !prepared.mayContain(str)) return -1;
-+            for (int candidate = start; candidate >= 0; candidate--) {
-+                int index = 0;
-+                while (index < targetLength
-+                        && storage.charAt(candidate + index) == str.charAt(index)) index++;
-+                if (index == targetLength) return candidate;
-+            }
-+            return -1;
++            return M3StringWindowSearch.lastIndexOf(storage, start, str.value(), targetLength,
++                    str.coder());
 +        }
 +        return lastIndexOf(value(), coder(), length(), str, fromIndex);
      }
  
      /**
-@@ -2752,8 +3094,6 @@ public final class String
+@@ -2752,8 +3073,6 @@ public final class String
       */
      static int lastIndexOf(byte[] src, byte srcCoder, int srcCount,
                             String tgtStr, int fromIndex) {
@@ -7546,7 +7696,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          int tgtCount = tgtStr.length();
          /*
           * Check arguments; return immediately where possible. For
-@@ -2770,6 +3110,15 @@ public final class String
+@@ -2770,6 +3089,15 @@ public final class String
          if (tgtCount == 0) {
              return fromIndex;
          }
@@ -7562,7 +7712,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          if (srcCoder == tgtCoder) {
              return srcCoder == LATIN1
                  ? StringLatin1.lastIndexOf(src, srcCount, tgt, tgtCount, fromIndex)
-@@ -2832,8 +3181,16 @@ public final class String
+@@ -2832,8 +3160,16 @@ public final class String
              return this;
          }
          int subLen = endIndex - beginIndex;
@@ -7581,7 +7731,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
      }
  
      /**
-@@ -2892,6 +3249,12 @@ public final class String
+@@ -2892,6 +3228,12 @@ public final class String
          if (str.isEmpty()) {
              return this;
          }
@@ -7594,7 +7744,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          return StringConcatHelper.simpleConcat(this, str);
      }
  
-@@ -2926,8 +3289,14 @@ public final class String
+@@ -2926,8 +3268,14 @@ public final class String
       */
      public String replace(char oldChar, char newChar) {
          if (oldChar != newChar) {
@@ -7611,7 +7761,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
              if (ret != null) {
                  return ret;
              }
-@@ -2961,7 +3330,20 @@ public final class String
+@@ -2961,7 +3309,20 @@ public final class String
       *
       * @since 1.4
       */
@@ -7632,7 +7782,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          return Pattern.matches(regex, this);
      }
  
-@@ -3018,6 +3400,11 @@ public final class String
+@@ -3018,6 +3379,11 @@ public final class String
       * @since 1.4
       */
      public String replaceFirst(String regex, String replacement) {
@@ -7644,7 +7794,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          return Pattern.compile(regex).matcher(this).replaceFirst(replacement);
      }
  
-@@ -3062,6 +3449,11 @@ public final class String
+@@ -3062,6 +3428,11 @@ public final class String
       * @since 1.4
       */
      public String replaceAll(String regex, String replacement) {
@@ -7656,7 +7806,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          return Pattern.compile(regex).matcher(this).replaceAll(replacement);
      }
  
-@@ -3089,16 +3481,24 @@ public final class String
+@@ -3089,16 +3460,24 @@ public final class String
                  return replace(trgtStr.charAt(0), replStr.charAt(0));
              }
  
@@ -7687,7 +7837,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
              if (ret != null) {
                  return ret;
              }
-@@ -3113,6 +3513,17 @@ public final class String
+@@ -3113,6 +3492,17 @@ public final class String
                  throw new OutOfMemoryError("Required length exceeds implementation limit");
              }
  
@@ -7705,7 +7855,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
              StringBuilder sb = new StringBuilder(resultLen);
              sb.append(replStr);
              for (int i = 0; i < thisLen; ++i) {
-@@ -3122,6 +3533,27 @@ public final class String
+@@ -3122,6 +3512,27 @@ public final class String
          }
      }
  
@@ -7733,7 +7883,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
      /**
       * Splits this string around matches of the given
       * <a href="../util/regex/Pattern.html#sum">regular expression</a>.
-@@ -3349,12 +3781,64 @@ public final class String
+@@ -3349,12 +3760,64 @@ public final class String
              // because the large split loop can usually not be inlined.
              return split(ch, limit, withDelimiters);
          }
@@ -7798,7 +7948,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
      private String[] split(char ch, int limit, boolean withDelimiters) {
          int matchCount = 0;
          int off = 0;
-@@ -3489,6 +3973,11 @@ public final class String
+@@ -3489,6 +3952,11 @@ public final class String
       */
      @ForceInline
      static String join(String prefix, String suffix, String delimiter, String[] elements, int size) {
@@ -7810,7 +7960,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          int icoder = prefix.coder() | suffix.coder();
          long len = (long) prefix.length() + suffix.length();
          if (size > 1) { // when there are more than one element, size - 1 delimiters will be emitted
-@@ -3504,6 +3993,11 @@ public final class String
+@@ -3504,6 +3972,11 @@ public final class String
              icoder |= el.coder();
          }
          byte coder = (byte) icoder;
@@ -7822,7 +7972,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          // long len overflow check, char -> byte length, int len overflow check
          if (len < 0L || (len <<= coder) != (int) len) {
              throw new OutOfMemoryError("Requested string length exceeds VM limit");
-@@ -3632,8 +4126,29 @@ public final class String
+@@ -3632,8 +4105,29 @@ public final class String
       * @since   1.1
       */
      public String toLowerCase(Locale locale) {
@@ -7854,7 +8004,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
      }
  
      /**
-@@ -3712,8 +4227,18 @@ public final class String
+@@ -3712,8 +4206,18 @@ public final class String
       * @since   1.1
       */
      public String toUpperCase(Locale locale) {
@@ -7875,7 +8025,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
      }
  
      /**
-@@ -3772,8 +4297,16 @@ public final class String
+@@ -3772,8 +4276,16 @@ public final class String
       *          has no leading or trailing space.
       */
      public String trim() {
@@ -7894,7 +8044,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          return ret == null ? this : ret;
      }
  
-@@ -3804,8 +4337,16 @@ public final class String
+@@ -3804,8 +4316,16 @@ public final class String
       * @since 11
       */
      public String strip() {
@@ -7913,7 +8063,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          return ret == null ? this : ret;
      }
  
-@@ -3834,8 +4375,16 @@ public final class String
+@@ -3834,8 +4354,16 @@ public final class String
       * @since 11
       */
      public String stripLeading() {
@@ -7932,7 +8082,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          return ret == null ? this : ret;
      }
  
-@@ -3864,8 +4413,16 @@ public final class String
+@@ -3864,8 +4392,16 @@ public final class String
       * @since 11
       */
      public String stripTrailing() {
@@ -7951,7 +8101,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          return ret == null ? this : ret;
      }
  
-@@ -3917,7 +4474,53 @@ public final class String
+@@ -3917,7 +4453,53 @@ public final class String
       * @since 11
       */
      public Stream<String> lines() {
@@ -8006,7 +8156,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
      }
  
      /**
-@@ -3960,6 +4563,10 @@ public final class String
+@@ -3960,6 +4542,10 @@ public final class String
          if (isEmpty()) {
              return "";
          }
@@ -8017,7 +8167,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          Stream<String> stream = lines();
          if (n > 0) {
              final String spaces = " ".repeat(n);
-@@ -3973,13 +4580,19 @@ public final class String
+@@ -3973,13 +4559,19 @@ public final class String
      }
  
      private int indexOfNonWhitespace() {
@@ -8041,7 +8191,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
      }
  
      /**
-@@ -4075,6 +4688,10 @@ public final class String
+@@ -4075,6 +4667,10 @@ public final class String
          if (length == 0) {
              return "";
          }
@@ -8052,7 +8202,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          char lastChar = charAt(length - 1);
          boolean optOut = lastChar == '\n' || lastChar == '\r';
          List<String> lines = lines().toList();
-@@ -4197,6 +4814,10 @@ public final class String
+@@ -4197,6 +4793,10 @@ public final class String
          if (isEmpty()) {
              return "";
          }
@@ -8063,7 +8213,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          char[] chars = toCharArray();
          int length = chars.length;
          int from = 0;
-@@ -4307,9 +4928,13 @@ public final class String
+@@ -4307,9 +4907,13 @@ public final class String
       */
      @Override
      public IntStream chars() {
@@ -8079,7 +8229,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
              false);
      }
  
-@@ -4327,9 +4952,13 @@ public final class String
+@@ -4327,9 +4931,13 @@ public final class String
       */
      @Override
      public IntStream codePoints() {
@@ -8095,7 +8245,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
              false);
      }
  
-@@ -4341,8 +4970,13 @@ public final class String
+@@ -4341,8 +4949,13 @@ public final class String
       *          the character sequence represented by this string.
       */
      public char[] toCharArray() {
@@ -8111,7 +8261,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
      }
  
      /**
-@@ -4548,6 +5182,9 @@ public final class String
+@@ -4548,6 +5161,9 @@ public final class String
       *          as its single character the argument {@code c}.
       */
      public static String valueOf(char c) {
@@ -8121,7 +8271,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          if (COMPACT_STRINGS && StringLatin1.canEncode(c)) {
              return new String(StringLatin1.toBytes(c), LATIN1);
          }
-@@ -4660,21 +5297,30 @@ public final class String
+@@ -4660,21 +5276,30 @@ public final class String
          if (count == 1) {
              return this;
          }
@@ -8156,7 +8306,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
          repeatCopyRest(multiple, 0, limit, len);
          return new String(multiple, coder);
      }
-@@ -4718,7 +5364,10 @@ public final class String
+@@ -4718,7 +5343,10 @@ public final class String
       * @param coder     the coder of dst[]
       */
      void getBytes(byte[] dst, int dstBegin, byte coder) {
@@ -8168,7 +8318,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
              System.arraycopy(value, 0, dst, dstBegin << coder, value.length);
          } else {    // this.coder == LATIN && coder == UTF16
              StringLatin1.inflate(value, 0, dst, dstBegin, value.length);
-@@ -4738,7 +5387,10 @@ public final class String
+@@ -4738,7 +5366,10 @@ public final class String
       * @param length    the amount of copied chars
       */
      void getBytes(byte[] dst, int srcPos, int dstBegin, byte coder, int length) {
@@ -8180,7 +8330,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
              System.arraycopy(value, srcPos << coder, dst, dstBegin << coder, length << coder);
          } else {    // this.coder == LATIN && coder == UTF16
              StringLatin1.inflate(value, srcPos, dst, dstBegin, length);
-@@ -4758,18 +5410,26 @@ public final class String
+@@ -4758,18 +5389,26 @@ public final class String
          if (len == 0) {
              this.value = "".value;
              this.coder = "".coder;
@@ -8216,7 +8366,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d806634
      }
  
      /*
-@@ -4779,42 +5439,157 @@ public final class String
+@@ -4779,42 +5418,157 @@ public final class String
      String(AbstractStringBuilder asb, Void sig) {
          byte[] val = asb.getValue();
          int length = asb.length();

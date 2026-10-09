@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.SearchWindows
+displayName: M3JDK21 M3 haystacks searched with the stock intrinsics on bulk-copied windows
+description: >-
+  After the facts gates, indexOf/lastIndexOf/contains with a flat needle over an M3 haystack and
+  M3String.indexOf/lastIndexOf with an M3 needle matched units through charAt owner dispatch. The
+  new java.lang.M3StringWindowSearch fills 4096-unit windows through M3String.getBytes, runs the
+  stock StringLatin1/StringUTF16 searches on each, overlaps consecutive windows by needle length
+  minus one, and hands M3 needles of 16 units and up to the search precompute's byte-array skip
+  search; every facts and plan gate stays in front. Java step: M3String, the new
+  M3StringWindowSearch, the jtreg proof; text step: String.java (Javadoc the pinned Java parser
+  cannot parse). Stacks on crate m3-encode-bulk-units (its postimages are these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-search-windows
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-search-windows

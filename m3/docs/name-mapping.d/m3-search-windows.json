@@ -1,0 +1,27 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.StringLatin1.indexOf/lastIndexOf and StringUTF16.indexOf/indexOfLatin1/lastIndexOf/lastIndexOfLatin1 over byte arrays (the String search intrinsics), jdk-21+35 in-tree",
+      "source_commit": "890adb6410",
+      "target": "java.lang.M3StringWindowSearch: a 4096-unit window filled through M3String.getBytes (atom from native memory, tuple descends), the stock search on each window, consecutive windows overlapping by needle length minus one; indexOf forward, lastIndexOf backward; a Latin-1 haystack refuses a UTF-16 needle early",
+      "status": "implemented-locally-verified (G7; flag-off: M3StringWindowSearchTest 147,021 checks against stock results incl. matches on and across window edges)",
+      "target_rule": "results equal the stock String results on the same spellings; every facts and plan gate stays in front"
+    },
+    {
+      "source": "java.lang.String mixed indexOf(String, from) / indexOf(String, begin, end) / lastIndexOf(String, from) with a flat needle: charAt per unit after the facts gate (A13, 01054f2600)",
+      "source_commit": "01054f2600",
+      "target": "the same branches call M3StringWindowSearch with the needle's compact value after the facts gate",
+      "status": "implemented-locally-verified (flat needle over an M3 haystack 6x..57x faster from 256 units; lastIndexOf 2x..22x)",
+      "target_rule": "no gate removed; empty and over-long needles answered before the search as before"
+    },
+    {
+      "source": "java.lang.M3String.indexOf/lastIndexOf(M3String needle): M3StringSearchPrecompute KMP/BMH over charAt after the plan gates (01054f2600)",
+      "source_commit": "01054f2600",
+      "target": "after the plan gates: an M3 needle below 16 units is read once in bulk and takes the window intrinsic; 16 units and up runs the precompute's byte-array skip search over each window (sublinear for long needles)",
+      "status": "implemented-locally-verified (short M3 needles 2x..45x faster, long needles 1.1x..1.6x; the linear intrinsic alone lost 0.7x on 32-unit UTF-16 needles over 16384 units, hence the threshold)",
+      "target_rule": "the plan's mayContain gate stays; the search precompute is unchanged"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schema": "M3JDK21_SYNEXIA_SEARCH_WINDOWS_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-search-windows-20261009",
+    "pullRequest": null,
+    "commit": "45ea7858ed5",
+    "stackedOn": [
+      {
+        "pullRequest": 9975,
+        "crate": "m3-encode-bulk-units"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.SearchWindows",
+    "crate": "m3-search-windows",
+    "fossReuseDecisionRow": "string.search.window-intrinsics",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/StringLatin1.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringWindowSearch",
+        "mechanics": "indexOf(byte[], int, byte[], int, int) and lastIndexOf over each window"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringUTF16.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringWindowSearch",
+        "mechanics": "indexOf, indexOfLatin1, lastIndexOf, lastIndexOfLatin1 over each window"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "commit": "01054f2600",
+        "target": "java.lang.M3StringWindowSearch",
+        "mechanics": "the byte-array KMP/BMH search over each window for M3 needles of 16 units and up"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: results equal the stock String results; no gate removed; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-utf8-facts-20261009 (#536, A13) on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringWindowSearch",
+      "java.lang.M3String",
+      "java.lang.String"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed under the supersession model: String.java after-image and hunks regenerated from a synthetic after-state tree; M3StringWindowSearch.java joins the scope (68 targets, its own superseded owner); M3String.java owner recorded as superseded"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "24b8ba668ca03c13701ad1fe4c3c65cc1d1e356781d366ed4d6837661f021e5a",
+      "after": "ea0672905a8314f5e72c53836df9f7a871c1ee03ce49fcdb3ebc9728b35316ce",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringWindowSearch.java",
+      "before": "ABSENT",
+      "after": "a28cfff60b76f6c2e3ba0c7ec9de53976b62e33b9a3fad1dd988e5c5d33addab",
+      "resource": "01-M3StringWindowSearch.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringWindowSearchTest.java",
+      "before": "ABSENT",
+      "after": "ee3527213898543854f0c27c9335aa2206c858dc6784afc47825ba20d7191cd9",
+      "resource": "02-M3StringWindowSearchTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "86264e9634d2585a7ca5ddb4385c8df51c14cffa16635f11efa8adebc9137eb2",
+      "after": "4dea9258922916b4c08d8ca9e972be1762ea393b96917746c3f4eaf43c309223",
+      "resource": "00-String.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 153 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3StringWindowSearchTest flag-off: 147,021 checks (indexOf/indexOf(from)/indexOf(begin,end)/lastIndexOf/lastIndexOf(from)/contains with flat and M3 needles over atoms, nested tuples and slices against stock; random 3-letter-alphabet haystacks with needles of 0..40 units of either coder; matches on, before and across the window edges of 4095..12305-unit haystacks with needles of 2..100 units and surrogate pairs split by an edge; empty needles, over-long needles, out-of-range from-indexes)",
+    "regressions": "PASS_WINDOWS M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,919; A6 204 + 29",
+    "timing": "flag-off (a14/probe/IndexOfBench, bench-baseline.tsv vs bench-after3.tsv): flat needle over M3 haystacks 6x..57x faster from 256 units (2048 Latin-1, needle 3: 4.4 us -> 0.26, flat 0.18), short M3 needles 2x..45x, long M3 needles 1.1x..1.6x, lastIndexOf 2x..22x",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets under the supersession model; apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3SearchWindowsRecipeTest 3/3 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3StringWindowSearchTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "a window of 4096 units, consecutive windows overlapping by needle length minus one: a match straddling two windows is found by the second window",
+    "an M3 needle of 16 units and up runs the precompute's byte-array skip search over each window; shorter needles take the stock vectorized search: measured, the linear intrinsic alone lost 0.7x on 32-unit UTF-16 needles over 16384 units",
+    "a Latin-1 haystack cannot contain a UTF-16 needle: early -1, as the stock String code",
+    "every facts gate (mayContain, prefix/suffix) and plan gate stays in front; single-unit searches keep the position precompute",
+    "the window buffer is transient scratch of at most 8 KiB per call",
+    "stacked on A13: merge after #536 and the Synexia crate PR; a sibling of A15 (#538) on the same base, so the runtime-recipe superseded lists are re-run when they stack"
+  ]
+}
