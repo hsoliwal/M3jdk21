@@ -1,0 +1,18 @@
+{
+  "schema": "M3JDK21_STRING_CHECKER_COMPOSITION_RECEIPT_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "targetRepository": "hsoliwal/M3jdk21",
+  "targetBase": "master@5f68880c6f4a669e2fe82d6a914c071aef4f80f5",
+  "canonicalRepairs": [
+    {"sourcePr": 9961, "targetPr": 525, "role": "mixed-replace-marker"},
+    {"sourcePr": 9965, "targetPr": 527, "role": "literal-regex-surrogate-classifier"},
+    {"sourcePr": 9977, "targetPr": 537, "role": "ascii-locale-case-guard"},
+    {"sourcePr": 9979, "targetPr": 539, "role": "mixed-empty-target-owner"},
+    {"sourcePr": 10030, "targetPr": 582, "role": "typed-concat-reference-dag"}
+  ],
+  "changedRuntimeSources": 0,
+  "changedVerificationSources": 2,
+  "runtimePromotionAuthorized": false,
+  "promotion": "BLOCKED",
+  "nextAuthority": "exact-head hosted String workflow"
+}
