@@ -9,7 +9,16 @@ on:
       - "m3/synexia-import/current-full-borrow/string-phase-gates.tsv"
       - "m3/synexia-import/current-full-borrow/string-phase-work-orders.tsv"
       - "m3/synexia-import/current-full-borrow/check_string_phase.py"
+      - "m3/synexia-import/current-full-borrow/check_string_phase_closure.py"
       - "m3/synexia-import/current-full-borrow/receiver-status.tsv"
+      - "m3/compatibility/synexia-string-focused-recipe-receipt-20261008.tsv"
+      - "m3/compatibility/synexia-regex-oracle-harness-receipt.json"
+      - "m3/compatibility/synexia-regex-required-literal-receipt.json"
+      - "m3/compatibility/synexia-string-utf16-differential-receipt.json"
+      - "m3/compatibility/synexia-string-owner-range-lifetime-receipt.json"
+      - "m3/compatibility/synexia-string-jni-shadow-lifetime-receipt.json"
+      - "m3/compatibility/synexia-string-representation-consumers-receipt.json"
+      - "m3/compatibility/synexia-string-phase1-resources-receipt.json"
       - "m3/docs/name-mapping.json"
       - ".github/workflows/m3-full-borrow-string-phase.yml"
   workflow_dispatch:
@@ -42,14 +51,10 @@ jobs:
           set -euo pipefail
           python3 m3/synexia-import/current-full-borrow/check_string_phase.py
 
-      - name: Refuse premature String promotion
-        shell: bash
+      - name: Verify monotonic String phase closure
         run: |
           set -euo pipefail
-          gates=m3/synexia-import/current-full-borrow/string-phase-gates.tsv
-          grep -q $'^PROMOTION\tBLOCKED\t' "$gates"
-          ! grep -q $'^JDK_BUILD\tPASS\t' "$gates"
-          ! grep -q $'^JTREG_NORMAL\tPASS\t' "$gates"
+          python3 m3/synexia-import/current-full-borrow/check_string_phase_closure.py
 
       - name: Require focused target test sources
         shell: bash
