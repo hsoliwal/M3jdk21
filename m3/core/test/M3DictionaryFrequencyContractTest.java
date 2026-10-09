@@ -69,6 +69,15 @@ public final class M3DictionaryFrequencyContractTest {
         return fields;
     }
 
+    private static void expect(Class<? extends Throwable> type, Runnable body) {
+        try {
+            body.run();
+            throw new AssertionError("missing " + type.getName());
+        } catch (Throwable failure) {
+            check(type.isInstance(failure));
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         String manifest = Files.readString(
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
