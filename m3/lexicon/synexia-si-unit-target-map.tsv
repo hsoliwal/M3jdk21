@@ -1,0 +1,2 @@
+schema	source_id	source_path	source_record_id	mapping_fields	precompute_fields	target_owner	target_lookup	license_class	state
+M3JDK_SI_UNIT_TARGET_MAP_V1	dictlang.si-units	synexia-dictlang/shared/api/src/main/java/com/synexia/dictshared/api/SiUnit.java	unit_id	canonical_name,symbol	decimalExponent,dimensionPacked,offset,prefixable	com.m3.text.M3LexiconPrecompute.SiUnitPrecompute	SharedLexiconPrecomputeCatalog.SiUnitIdentity(source_id,record_id)	Apache-2.0	PENDING_TARGET_RECEIVER_PROOF
