@@ -66,17 +66,6 @@ M3LangDexPrecompute.Translation	sourceGlottocode	String	langdex_source_glottocod
 M3LangDexPrecompute.Translation	sourceSurface	String	langdex_source_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation source surface is preserved
 M3LangDexPrecompute.Translation	targetGlottocode	String	langdex_target_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation target language coordinate is preserved
 M3LangDexPrecompute.Translation	targetSurface	String	langdex_target_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	translation target surface is preserved
-LangDexWordProfile	lexicalClassMask	long	langdex_lexical_class_mask	synexia.records.tsv:precompute_payload	MAPPED	primitive lexical class mask is retained without reclassification
-LangDexWordProfile	semanticClassMask	long	langdex_semantic_class_mask	synexia.records.tsv:precompute_payload	MAPPED	primitive semantic class mask is retained without reclassification
-LangDexWordProfile	subjectId	int	langdex_subject_id	synexia.records.tsv:precompute_payload	MAPPED	validated LangDex subject coordinate remains donor-owned
-LangDexWordProfile	featureBits	int	langdex_feature_bits	synexia.records.tsv:precompute_payload	MAPPED	morphology/feature bits remain donor-owned and opaque
-LangDexWordProfile	evidenceMask	int	langdex_evidence_mask	synexia.records.tsv:precompute_payload	MAPPED	evidence bits remain donor-owned and opaque
-LangDexWordProfile	confidencePermille	int	langdex_confidence_permille	synexia.records.tsv:precompute_payload	MAPPED	confidence remains bounded donor metadata in the inclusive 0..1000 range
-LangDexLexicalProfile	lexicalClassMask	long	langdex_lexical_class_mask	synexia.records.tsv:precompute_payload	MAPPED	profile-level lexical class mask shares the LangDex canonical type
-LangDexLexicalProfile	featureBits	int	langdex_feature_bits	synexia.records.tsv:precompute_payload	MAPPED	profile-level feature bits share the LangDex canonical type
-LangDexLexicalProfile	evidenceMask	int	langdex_evidence_mask	synexia.records.tsv:precompute_payload	MAPPED	profile-level evidence bits share the LangDex canonical type
-LangDexLexicalProfile	confidencePermille	int	langdex_confidence_permille	synexia.records.tsv:precompute_payload	MAPPED	profile-level confidence shares the LangDex canonical type and bound
-LangDexTranslation	targetLexemeId	long	langdex_target_lexeme_id	synexia.records.tsv:precompute_payload	MAPPED	target lexeme coordinate remains donor-owned and is not substituted with image_row
 SiUnit	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_payload	MAPPED	SI decimal exponent remains bounded donor metadata in the inclusive -100..100 range
 SiDimension	packed	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains donor-owned
 SiUnit	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
