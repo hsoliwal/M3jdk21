@@ -29,6 +29,9 @@ public final class M3NumberPrecomputeTest {
         check(zero.value() == 0 && zero.spelling().equals("0"));
         check(max.value() == 10_000 && max.spelling().equals("10000"));
         check(zero.languageTag().equals("und"));
+        var hindi = M3LexiconPrecompute.NumberPrecompute.canonical(42, "hi");
+        check(hindi.value() == 42 && hindi.spelling().equals("42"));
+        check(hindi.languageTag().equals("hi"));
 
         SharedLexiconPrecomputeCatalog.NumberIdentity zeroKey =
                 new SharedLexiconPrecomputeCatalog.NumberIdentity(
@@ -45,6 +48,8 @@ public final class M3NumberPrecomputeTest {
                 new M3LexiconPrecompute.NumberPrecompute(10_001, "10001", "und"));
         expect(IllegalArgumentException.class, () ->
                 new M3LexiconPrecompute.NumberPrecompute(1, "01", "und"));
+        expect(IllegalArgumentException.class, () ->
+                new M3LexiconPrecompute.NumberPrecompute(1, "1", ""));
         expect(IllegalArgumentException.class, () ->
                 SharedLexiconPrecomputeCatalog.builder()
                         .number(zeroKey, max));
