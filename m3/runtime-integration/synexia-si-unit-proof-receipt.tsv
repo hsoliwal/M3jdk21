@@ -1,0 +1,2 @@
+donor_commit	donor_path	donor_blob	target_path	target_owner	state	preservation
+c6d128572825cc11f4bbb05d78bcbebb5b3aa67a	synexia-dictlang/shared/api/src/main/java/com/synexia/dictshared/api/SiUnit.java	3d778837b23b81d4ec3d6cb9383023ef04139e2a	m3/lexicon/synexia-si-unit-target-map.tsv	com.m3.text.M3LexiconPrecompute.SiUnitPrecompute	PENDING_TARGET_RECEIVER_PROOF	Source identity remains dictlang.si-units plus unit_id; four typed facts stay outside java.lang.String.
