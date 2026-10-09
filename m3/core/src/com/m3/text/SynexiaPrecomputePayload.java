@@ -97,6 +97,12 @@ public final class SynexiaPrecomputePayload {
     }
 
     public long requireLong(String name) { return require(name, Kind.INTEGER).integerValue(); }
+    /** Require a non-negative long for source fields such as corpus counts. */
+    public long requireNonNegativeLong(String name) {
+        long value = requireLong(name);
+        if (value < 0L) throw new IllegalArgumentException("field is negative: " + name);
+        return value;
+    }
     public double requireDouble(String name) {
         Field field = Objects.requireNonNull(fields.get(name), "missing field: " + name);
         if (field.kind() != Kind.INTEGER && field.kind() != Kind.DECIMAL)
