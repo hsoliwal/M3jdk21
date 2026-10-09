@@ -399,6 +399,40 @@ public final class SharedLexiconCatalog {
         } finally { lifecycle.readLock().unlock(); }
     }
 
+    /**
+     * Decodes the canonical Synexia number owner without replacing the
+     * source record identity with an image row or localized lexeme.
+     */
+    public Optional<M3LexiconPrecompute.NumberPrecompute> findNumberPrecompute(
+            String sourceId, String recordId) {
+        lifecycle.readLock().lock();
+        try {
+            ensureOpen();
+            Objects.requireNonNull(sourceId);
+            Objects.requireNonNull(recordId);
+            SourceMapping mapping = mappingsByIdentity.get(new SourceIdentity(sourceId, recordId));
+            if (mapping == null || !"dictlang.numbers.0-10000".equals(mapping.sourceId()))
+                return Optional.empty();
+            imageAt(mapping.coordinate().shardId());
+            SynexiaPrecomputePayload payload = payloads.computeIfAbsent(
+                    new SourceIdentity(sourceId, recordId),
+                    ignored -> SynexiaPrecomputePayload.parse(mapping.precomputePayload()));
+            final int value;
+            try {
+                value = Integer.parseInt(recordId);
+            } catch (NumberFormatException failure) {
+                throw new IllegalArgumentException("number record_id is not decimal", failure);
+            }
+            return Optional.of(new M3LexiconPrecompute.NumberPrecompute(
+                    value,
+                    payload.requireString("canonical_decimal_spelling"),
+                    payload.requireInt("min_value"),
+                    payload.requireInt("max_value"),
+                    payload.requireInt("precomputed_value_count"),
+                    payload.requireBoolean("shared_utf16_storage")));
+        } finally { lifecycle.readLock().unlock(); }
+    }
+
     private static List<ShardSlot> readManifest(Path directory) throws IOException {
         if (!Files.isDirectory(directory)) throw new IOException("not a catalog directory");
         Path manifest = directory.resolve("synexia.shards.tsv");
