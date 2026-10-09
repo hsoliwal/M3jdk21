@@ -2,8 +2,8 @@
   "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
-  "target_commit": "9fb43814efcce714ee92ed6e93252c2f7eca167a",
-  "patch_sha256": "ffd0d043602b7a59aa1169a0800484f11a6ae30a8f73566cbd7a2cc993ed24bb",
+  "target_commit": "c3b9a15ec44e825870f15a35c0090a7b24a31722",
+  "patch_sha256": "be9be6e2340b764f98565ac25db9d700cce8d9464a3f0f54b2b263785927b181",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
     "src/hotspot/share/cds/archiveHeapWriter.cpp": {
@@ -159,7 +159,8 @@
       "before": null,
       "after": "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4",
       "superseded": [
-        "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4"
+        "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4",
+        "9735b094abb84bb203d40e20269534f979b8c18ae2348c4061b2b1a52561de17"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringTuple.java": {
@@ -180,7 +181,7 @@
     },
     "src/java.base/share/classes/java/lang/System.java": {
       "before": "c51b88b6dc193b6447441769e24e89ebdbc3482796889a7506064bf07a7a8020",
-      "after": "4dcf8f1efbfe1b6ee1e9c5417fa3df50647bb55dc636411d783c844aa5e0847c"
+      "after": "e92aaa681e47d851d412c1c995fd573bfcf1ce04347e2cd8bbf4fc46c8960479"
     },
     "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java": {
       "before": "847d49e8b3b8de4183c4551c0965d9919ab942c0bef996d787f1f36174579010",
@@ -195,7 +196,7 @@
     },
     "src/java.base/share/classes/java/util/regex/Matcher.java": {
       "before": "7ae5ae6dc7f763c152c8f872af98551f74abf67cc2a53e331056287226e949ca",
-      "after": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78"
+      "after": "707acfa7f38325eb132657cc9604460703b3a3107882a0d688a11f6fd805ed4b"
     },
     "src/java.base/share/classes/java/util/regex/Pattern.java": {
       "before": "feccfd9bbb4208790fc4b3f2b21e9f12fce7040b22d0fff39086b5f73bd1813f",
@@ -203,7 +204,7 @@
     },
     "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java": {
       "before": "ccb649b92546459692c48b40ca75e960643e7ad234c8e1f43e1188504d3af29c",
-      "after": "b096377681dbc135d90f26abc972769557ae7c271d48ad59d241e149658438e3"
+      "after": "c46439ad9143a19d71003ca51fa65f5da8a33172dd724d6d949a5867b4ba3fff"
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java": {
       "before": null,

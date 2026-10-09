@@ -8455,10 +8455,18 @@ index 139181af0963efe5caaa25a03960d30e14b65c41..b6a5ac36d90a0648c2653977ee807799
       * Produce a String from a concatenation of single argument, which we
       * end up using for trivial concatenations like {@code "" + arg}.
 diff --git a/src/java.base/share/classes/java/lang/System.java b/src/java.base/share/classes/java/lang/System.java
-index 9d9dbf886e6b3fcc61ad5371c662b15a8be52193..be9fda30d975bf6b31806b272252d10d7ea6d351 100644
+index 9d9dbf886e6b3fcc61ad5371c662b15a8be52193..7fab839c05e34eb33b8931c93f61495e776cd500 100644
 --- a/src/java.base/share/classes/java/lang/System.java
 +++ b/src/java.base/share/classes/java/lang/System.java
-@@ -2234,6 +2234,13 @@ public final class System {
+@@ -68,6 +68,7 @@ import java.util.function.Supplier;
+ import java.util.concurrent.ConcurrentHashMap;
+ import java.util.stream.Stream;
+ 
++import jdk.internal.mindex.M3TQ;
+ import jdk.internal.misc.CarrierThreadLocal;
+ import jdk.internal.misc.Unsafe;
+ import jdk.internal.util.StaticProperty;
+@@ -2234,6 +2235,13 @@ public final class System {
          // module system initialized
          VM.initLevel(2);
  
@@ -8472,12 +8480,16 @@ index 9d9dbf886e6b3fcc61ad5371c662b15a8be52193..be9fda30d975bf6b31806b272252d10d
          return 0; // JNI_OK
      }
  
-@@ -2526,6 +2533,10 @@ public final class System {
+@@ -2526,6 +2534,14 @@ public final class System {
                  return StringConcatHelper.mix(lengthCoder, constant);
              }
  
 +            public boolean stringConcatUsesM3Storage() {
 +                return String.m3JoinedStringsEnabled();
++            }
++
++            public M3TQ.Facts m3TrigramFacts(String text) {
++                return M3StringSearchPrecompute.trigramFacts(text);
 +            }
 +
              @PreviewFeature(feature=PreviewFeature.Feature.STRING_TEMPLATES)
@@ -8796,87 +8808,42 @@ index 0000000000000000000000000000000000000000..7a13107628460134548a02095ca59854
 +    }
 +}
 diff --git a/src/java.base/share/classes/java/util/regex/Matcher.java b/src/java.base/share/classes/java/util/regex/Matcher.java
-index 54fe63c4f4ba41306253998fd96ebff46080d236..b31fde7511bbdd3a139b330d85b66cae9a739224 100644
+index 54fe63c4f4ba41306253998fd96ebff46080d236..2a18b1d6d6f5c22f83152bdd31f05683a25c59c2 100644
 --- a/src/java.base/share/classes/java/util/regex/Matcher.java
 +++ b/src/java.base/share/classes/java/util/regex/Matcher.java
-@@ -38,6 +38,8 @@ import java.util.function.Function;
+@@ -38,6 +38,10 @@ import java.util.function.Function;
  import java.util.stream.Stream;
  import java.util.stream.StreamSupport;
  
++import jdk.internal.access.JavaLangAccess;
++import jdk.internal.access.SharedSecrets;
 +import jdk.internal.mindex.M3TQ;
 +
  /**
   * An engine that performs match operations on a {@linkplain
   * java.lang.CharSequence character sequence} by interpreting a {@link Pattern}.
-@@ -144,6 +146,11 @@ public final class Matcher implements MatchResult {
-      */
-     CharSequence text;
- 
-+    private static final int M3_TQ_MAX_UTF16_UNITS = 32_768;
-+    private int m3TqFactsFrom = -1;
-+    private int m3TqFactsTo = -1;
-+    private M3TQ.Facts m3TqFacts;
-+
-     /**
-      * Matcher state used by the last node. NOANCHOR is used when a
-      * match does not have to consume all of the input. ENDANCHOR is
-@@ -428,6 +435,9 @@ public final class Matcher implements MatchResult {
-                 localsPos[i].clear();
-         }
-         lastAppendPosition = 0;
-+        // Derived facts are not match state. Keep them for the same immutable input;
-+        // m3TqAllowsSearch checks the exact region before reuse. reset(input) invalidates
-+        // before changing text, so no second input reference is needed for cache identity.
-         from = 0;
-         to = getTextLength();
-         modCount++;
-@@ -449,6 +459,11 @@ public final class Matcher implements MatchResult {
-      * @return  This matcher
-      */
-     public Matcher reset(CharSequence input) {
-+        if (input != text) {
-+            m3TqFacts = null;
-+            m3TqFactsFrom = -1;
-+            m3TqFactsTo = -1;
-+        }
-         text = input;
-         return reset();
-     }
-@@ -1722,6 +1737,33 @@ public final class Matcher implements MatchResult {
+@@ -1722,6 +1726,20 @@ public final class Matcher implements MatchResult {
       * calls to the search methods start at a new "soft" boundary which is
       * the end of the previous match.
       */
 +    private boolean m3TqAllowsSearch() {
 +        M3TQ query = parentPattern.m3Tq;
-+        if (query == null || !query.hasConstraints() || !(text instanceof String)) {
++        if (query == null || !query.hasConstraints() || !(text instanceof String subject)
++                || this.from != 0 || to != subject.length()) {
 +            return true;
 +        }
-+        int regionLength = to - this.from;
-+        if (regionLength < 0 || regionLength > M3_TQ_MAX_UTF16_UNITS) {
-+            return true;
-+        }
-+
-+        M3TQ.Facts facts = m3TqFacts;
-+        if (facts == null
-+                || m3TqFactsFrom != this.from
-+                || m3TqFactsTo != to) {
-+            try {
-+                facts = M3TQ.precompute(text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
-+            } catch (OutOfMemoryError unavailable) {
-+                // Candidate precompute must never add a new failure mode to Matcher.find().
-+                return true;
-+            }
-+            m3TqFactsFrom = this.from;
-+            m3TqFactsTo = to;
-+            m3TqFacts = facts;
-+        }
-+        return query.testPrecomputed(facts);
++        // The facts are the subject's own precompute (the per-owner trigram cache the mixed
++        // indexOf paths share), never computed per matcher: a flat String, a sub-region or a
++        // size outside the cache band has none and runs the exact engine, as the stock matcher.
++        JavaLangAccess access = SharedSecrets.getJavaLangAccess();
++        M3TQ.Facts facts = access == null ? null : access.m3TrigramFacts(subject);
++        return facts == null || query.testPrecomputed(facts);
 +    }
 +
      boolean search(int from) {
          this.hitEnd = false;
          this.requireEnd = false;
-@@ -1735,6 +1777,15 @@ public final class Matcher implements MatchResult {
+@@ -1735,6 +1753,15 @@ public final class Matcher implements MatchResult {
                  localsPos[i].clear();
          }
          acceptMode = NOANCHOR;
@@ -8958,10 +8925,18 @@ index 45c48ddab542f4f0b31884de84ffd862a29519f1..ee1c1951a7498c191810bc1901fff489
          // is no group ref in this pattern. With a non-negative localTCNCount value,
          // the greedy type Loop, Curly will skip the backtracking for any starting
 diff --git a/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java b/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java
-index babc1940e78358082bd2231f5516d3265d3145e2..072f08aeabcc5873cb13104467a1dcfed5b44d86 100644
+index babc1940e78358082bd2231f5516d3265d3145e2..5bfdc0ebd20f27e1e89e4a80083943162e2045f0 100644
 --- a/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java
 +++ b/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java
-@@ -421,6 +421,12 @@ public interface JavaLangAccess {
+@@ -49,6 +49,7 @@ import jdk.internal.javac.PreviewFeature;
+ import jdk.internal.misc.CarrierThreadLocal;
+ import jdk.internal.module.ServicesCatalog;
+ import jdk.internal.reflect.ConstantPool;
++import jdk.internal.mindex.M3TQ;
+ import jdk.internal.vm.Continuation;
+ import jdk.internal.vm.ContinuationScope;
+ import jdk.internal.vm.StackableScope;
+@@ -421,6 +422,20 @@ public interface JavaLangAccess {
       */
      long stringConcatMix(long lengthCoder, String constant);
  
@@ -8970,6 +8945,14 @@ index babc1940e78358082bd2231f5516d3265d3145e2..072f08aeabcc5873cb13104467a1dcfe
 +     * segmented storage rather than eagerly materializing one byte array.
 +     */
 +    boolean stringConcatUsesM3Storage();
++
++    /**
++     * Returns the exact trigram facts the String's M3 storage holds for the whole String
++     * (computed once per owner, shared with the mixed indexOf paths), or {@code null} when
++     * the String is flat, outside the precompute's size band, or the facts are unavailable;
++     * the caller then runs its exact search.
++     */
++    M3TQ.Facts m3TrigramFacts(String text);
 +
     /**
      * Get the coder for the supplied character.
