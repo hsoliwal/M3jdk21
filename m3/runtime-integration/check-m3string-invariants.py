@@ -822,7 +822,7 @@ critical_surfaces = {
     "lastIndexOf(String)": "M3String storage = m3();",
     "prepared reverse search": "return storage.lastIndexOf(target, fromIndex);",
     "replace(char,char)": "M3String replaced = storage.replace(oldChar, newChar);",
-    "replace(CharSequence,CharSequence)": "M3String replaced = storage.replace(targetM3, replacementM3);",
+    # Both names are the same canonical M3 owner route across adjacent target revisions.\n    "replace(CharSequence,CharSequence)": (\n        "M3String replaced = storage.replace(targetM3, replacementM3);",\n        "M3String replaced = sourceM3.replace(targetM3, replacementM3);",\n    ),
     "replaceFirst(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, true);",
     "replaceAll(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, false);",
     "substring": "return new String(storage.slice(beginIndex, endIndex));",
@@ -843,7 +843,8 @@ critical_surfaces = {
     "value": "return storage == null ? value : storage.materialize();",
 }
 for surface, marker in critical_surfaces.items():
-    if marker not in string:
+    markers = marker if isinstance(marker, tuple) else (marker,)
+    if not any(candidate in string for candidate in markers):
         fail(f"critical String surface lost M3 route: {surface}")
 
 # Recovered indexed regex replacement is a conservative literal atom, not a regex engine.
