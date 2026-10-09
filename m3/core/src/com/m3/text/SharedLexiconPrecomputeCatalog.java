@@ -20,6 +20,8 @@ import java.util.Optional;
  * decodes the ordinary opaque per-record JSON payload.</p>
  */
 public final class SharedLexiconPrecomputeCatalog {
+    private static final String DICTIONARY_WORD_FACTS_SOURCE = "dictlang.dictionary";
+    private static final String FREQUENCY_WORD_SIGNAL_SOURCE = "dictlang.frequency";
     public record TranslationIdentity(String sourceId, String recordId,
                                       String sourceLanguage, String targetLanguage,
                                       String lexiconFingerprint, String sourceFingerprint) {
@@ -163,9 +165,17 @@ public final class SharedLexiconPrecomputeCatalog {
         }
 
         public Builder wordFacts(WordIdentity identity, M3LexiconPrecompute.IndexWordFacts value) {
+            Objects.requireNonNull(identity, "word facts key");
+            if (!DICTIONARY_WORD_FACTS_SOURCE.equals(identity.sourceId())) {
+                throw new IllegalArgumentException("word facts source family");
+            }
             put(wordFacts, identity, value, "word facts"); return this;
         }
         public Builder wordSignal(WordIdentity identity, M3LexiconPrecompute.IndexWordSignal value) {
+            Objects.requireNonNull(identity, "word signal key");
+            if (!FREQUENCY_WORD_SIGNAL_SOURCE.equals(identity.sourceId())) {
+                throw new IllegalArgumentException("word signal source family");
+            }
             put(wordSignals, identity, value, "word signal"); return this;
         }
         public SharedLexiconPrecomputeCatalog build() { return new SharedLexiconPrecomputeCatalog(this); }
