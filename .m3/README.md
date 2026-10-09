@@ -17,8 +17,10 @@ Current pinned donor packet:
 
 - recipe: `com.synexia.rewrite.M3Jdk21StringCurrentConvergence`
 - Synexia branch: `m3/m3jdk21-string-current-convergence-20261009`
-- descriptor blob: `d5315dee9660754b36635f1cdb6de81c45ae8108`
+- descriptor blob: `868f5fa770cf5c6562869b696a5dd5812c0d4afa`
 - donor PR: `hsoliwal/com.synexia#10007`
+- receiver recipe: `com.synexia.rewrite.M3Jdk21StringCurrentConvergenceReceiver`
+- receiver descriptor blob: `df5f6c458532e9fb0d5eac950d797a3897625489`
 
 This repository is the **thin product/runtime receiver**. It owns `java.base`, HotSpot, JNI,
 M3 String runtime precompute, target-specific postimages, differential tests and promotion.
