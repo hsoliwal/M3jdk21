@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import io
 import sys
 from dataclasses import dataclass
@@ -45,6 +46,13 @@ def _rows(content: str) -> list[dict[str, str]]:
     return list(csv.DictReader(io.StringIO(content), delimiter="\t"))
 
 
+def _git_blob_sha(content: str) -> str:
+    payload = content.encode("utf-8")
+    return hashlib.sha1(
+        b"blob " + str(len(payload)).encode("ascii") + b"\0" + payload
+    ).hexdigest()
+
+
 def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
     receipt = _read(root, _RECEIPT)
     recipe = _read(root, _RECIPE)
@@ -82,12 +90,12 @@ def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
         SourceCheck("testLongest", "longest" in test.lower()),
         SourceCheck("buildModes", "for mode in jit int nocompact c2" in build),
         SourceCheck("buildTest", "M3PhrasePrecomputeTest" in build),
-        SourceCheck("manifestBlob", True),
-        SourceCheck("fieldMapBlob", True),
-        SourceCheck("ownerBlob", True),
-        SourceCheck("testBlob", True),
-        SourceCheck("buildBlob", True),
-        SourceCheck("recipeManifestBlob", True),
+        SourceCheck("manifestBlob", _git_blob_sha(manifest) == _TARGET_BLOBS["manifest"]),
+        SourceCheck("fieldMapBlob", _git_blob_sha(field_map) == _TARGET_BLOBS["field_map"]),
+        SourceCheck("ownerBlob", _git_blob_sha(owner) == _TARGET_BLOBS["owner"]),
+        SourceCheck("testBlob", _git_blob_sha(test) == _TARGET_BLOBS["test"]),
+        SourceCheck("buildBlob", _git_blob_sha(build) == _TARGET_BLOBS["build"]),
+        SourceCheck("recipeManifestBlob", _git_blob_sha(recipe_manifest) == _RECIPE_MANIFEST_BLOB),
         SourceCheck("recipeDonor", "IndexPhraseTable.java" in recipe and "a06f5493c9ac07de3f881dbef701c72255141eb9" in recipe),
         SourceCheck("recipePending", "target_status: OPEN_DRAFT" in recipe),
         SourceCheck("recipeRuntime", "Runtime: NOT_RUN" in recipe),
