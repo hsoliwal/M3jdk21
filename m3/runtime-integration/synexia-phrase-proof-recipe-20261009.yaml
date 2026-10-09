@@ -1,0 +1,53 @@
+schema: m3-recipe/v1
+id: synexia-phrase-proof-receipt-20261009
+pattern: pinned-source-and-runtime-proof-boundary
+purpose: Bind the first-party Synexia IndexPhraseTable contract to the M3JDK token-ID phrase receiver without admitting a phrase corpus or text authority.
+
+inputs:
+  - donor_receipt: m3/runtime-integration/synexia-phrase-proof-receipt.tsv
+  - source_manifest: m3/lexicon/synexia-source-manifest.tsv
+  - field_map: m3/lexicon/synexia-precompute-field-map.tsv
+  - owner: m3/core/src/com/m3/text/M3PhrasePrecompute.java
+  - proof: m3/core/test/M3PhrasePrecomputeTest.java
+  - build: m3/build.sh
+
+donor:
+  commit: c6d128572825cc11f4bbb05d78bcbebb5b3aa67a
+  path: synexia-common/src/main/java/com/synexia/common/language/IndexPhraseTable.java
+  git_blob: a06f5493c9ac07de3f881dbef701c72255141eb9
+  license: Apache-2.0
+
+mapping:
+  source_family: translate.index-phrases
+  source_record_id: source_phrase_token_ids
+  fields: source_token_ids,target_token_ids,vocabulary_fingerprint
+  target_owner: M3PhrasePrecompute.Scope + M3PhrasePrecompute.Phrase
+  target_status: OPEN_DRAFT
+  target_branch: codex/m3jdk-phrase-precompute-20261009
+  target_head: c171665e740a0e9ff66139d4e0c88bc38128f021
+  runtime_marker: M3JDK_PHRASE_PRECOMPUTE_PASS
+
+target_evidence:
+  source_manifest_blob: 0ab05ad3f890035c15747d6f641ce31d5eaf2e11
+  field_map_blob: 25f248060e6490fba5a088b34c1be83f83a3da4c
+  owner_blob: d5b46507a2a7d693ab02adfc8299211283823b7d
+  test_blob: 3bf9528136193f5298666d411b9df0e088b00d99
+  build_blob: 5db3dcaf033af0efabb6e31acdf6bb8a65ad1564
+  recipe_manifest_blob: 5bc51b2dc42a9b8ce509d4a6c1208631842734e8
+
+phases:
+  - SEARCH: pin the donor commit/path/blob and exact receiver head.
+  - INVENTORY: retain vocabulary scope, source/replacement token order, and target fields.
+  - CLASSIFY: ADAPT_COMPOSE; token IDs are the receiver representation.
+  - FILTER: reject foreign vocabulary fingerprints, empty source phrases, duplicate ambiguity, and String-owned phrase payloads.
+  - PROVE: run M3PhrasePrecomputeTest in jit, int, nocompact, and c2.
+  - CHECKPOINT: keep OPEN_DRAFT until all four runtime markers exist.
+
+invariants:
+  - The phrase receiver is token-ID based and vocabulary scoped.
+  - Left-to-right longest-prefix semantics remain authoritative.
+  - Empty replacement targets remain representable.
+  - No external phrase corpus or tokenizer is imported.
+  - No phrase payload is stored in java.lang.String.
+  - Runtime: NOT_RUN
+  - Hosted CI: NOT_CLAIMED
