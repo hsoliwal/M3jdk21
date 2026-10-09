@@ -508,6 +508,27 @@ final class M3String implements CharSequence {
         return owner.coder;
     }
 
+    /**
+     * Whether every unit of this range fits Latin-1 (A22): a narrow owner answers at once; a
+     * wide owner's range is read in bulk windows and the scan stops at the first wide unit.
+     * Far cheaper than the facts when only this bit is needed.
+     */
+    boolean contentIsLatin1() {
+        if (coder() == String.LATIN1) return true;
+        int length = length();
+        char[] window = new char[Math.min(length, LATIN1_SCAN_WINDOW)];
+        for (int from = 0; from < length; from += window.length) {
+            int count = Math.min(window.length, length - from);
+            getChars(from, from + count, window, 0);
+            for (int index = 0; index < count; index++) {
+                if (window[index] > 0xff) return false;
+            }
+        }
+        return true;
+    }
+
+    private static final int LATIN1_SCAN_WINDOW = 1024;
+
     long structuralHash64() {
         return owner.structuralHash64;
     }

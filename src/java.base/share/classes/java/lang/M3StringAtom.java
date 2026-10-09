@@ -27,6 +27,8 @@ final class M3StringAtom extends M3StringOwner {
     private static final long CHAR_BASE = Unsafe.ARRAY_CHAR_BASE_OFFSET;
     /** Bulk copies (a runtime call) pay only from this many units; below, the plain loops win. */
     private static final int BULK = 64;
+    /** Bytes per window when a cross-coder copy goes through the inflate intrinsic. */
+    private static final int WINDOW = 4096;
 
     /** Retains mapped ownership. VM-local native blocks are lifetime-managed by M3StringPool. */
     final Object payloadOwner;
@@ -418,6 +420,19 @@ final class M3StringAtom extends M3StringOwner {
                 UNSAFE.copyMemory(null, source, destination, target, (long) count << 1);
             } else {
                 UNSAFE.copySwapMemory(null, source, destination, target, (long) count << 1, 2L);
+            }
+            return;
+        }
+        if (storageWidth == 1 && destinationCoder == String.UTF16 && count >= BULK) {
+            // Latin-1 storage into a UTF-16 destination (A22): the bytes come out in bulk through
+            // a bounded window and the stock inflate intrinsic widens them.
+            byte[] window = new byte[Math.min(count, WINDOW)];
+            long source = address + start;
+            for (int done = 0; done < count; ) {
+                int chunk = Math.min(window.length, count - done);
+                UNSAFE.copyMemory(null, source + done, window, BYTE_BASE, chunk);
+                StringLatin1.inflate(window, 0, destination, destinationStart + done, chunk);
+                done += chunk;
             }
             return;
         }

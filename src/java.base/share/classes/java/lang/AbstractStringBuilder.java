@@ -1735,8 +1735,15 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         }
         M3String storage = input.m3();
         if (storage != null) {
-            if (!storage.facts().latin1) {
-                inflate();
+            // A narrow owner answers at once; a wide owner's range is scanned for a wide unit in
+            // bulk (A22) unless prepared facts already say. Widening on the coder alone would
+            // leave a UTF-16 builder holding Latin-1 content, which toString would not compact.
+            if (storage.coder() != LATIN1) {
+                M3StringFacts prepared = storage.factsIfPrepared();
+                boolean latin1 = prepared != null ? prepared.latin1 : storage.contentIsLatin1();
+                if (!latin1) {
+                    inflate();
+                }
             }
         } else if (coder != input.coder()) {
             inflate();
@@ -1826,7 +1833,12 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
                 }
             }
         } else if (s.isLatin1()) {
-            StringUTF16.putCharsSB(this.value, this.count, s, off, end);
+            if (storage != null) {
+                // A Latin-1 M3 range into a UTF-16 builder widens in bulk (A22).
+                s.getBytes(this.value, off, this.count, UTF16, end - off);
+            } else {
+                StringUTF16.putCharsSB(this.value, this.count, s, off, end);
+            }
         } else if (storage != null) {
             s.getBytes(this.value, off, this.count, UTF16, end - off);
         } else { // both UTF16
