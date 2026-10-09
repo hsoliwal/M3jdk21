@@ -154,6 +154,7 @@ class SynexiaExportTest(unittest.TestCase):
                              export_manifest["source"]["precompute_fields"]["numbers"])
             self.assertIn("concept_ids", export_manifest["source"]["precompute_fields"]["translations"])
             self.assertEqual("long[]", export_manifest["source"]["precompute_field_types"]["concept_ids"])
+            self.assertEqual("String", export_manifest["source"]["precompute_field_types"]["source_revision"])
             self.assertRegex(export_manifest["source"]["precompute_field_map_sha256"], r"^[0-9a-f]{64}$")
             image = (root / "first/synexia.m3lex").read_bytes()
             magic, version, count, payload, units = struct.unpack_from(">QIIQQ", image)
