@@ -72,7 +72,7 @@ def main() -> int:
             data_lines.append(line)
     if "# proof=" + EXPECTED_PROOF not in comments:
         fail("proof marker drift")
-    rows = list(csv.reader(data_lines, delimiter="\\t"))
+    rows = list(csv.reader(data_lines, delimiter="\t"))
     if not rows or rows[0] != EXPECTED_HEADER:
         fail("header drift")
     data = rows[1:]
