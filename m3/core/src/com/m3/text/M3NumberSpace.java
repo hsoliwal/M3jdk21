@@ -92,4 +92,3 @@ public final class M3NumberSpace {
             throw new IndexOutOfBoundsException("number value: " + value);
     }
 }
-
