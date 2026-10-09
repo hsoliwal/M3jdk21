@@ -56,11 +56,12 @@ invariants:
   - The source mapping PR remains OPEN and is not treated as accepted.
   - Runtime: NOT_RUN
   - Hosted CI: NOT_CLAIMED
+  - Benchmark: NOT_MEASURED
   - Target promotion: BLOCKED_UNTIL_SOURCE_PR_ACCEPTED
 
 verification:
   source_discriminator_command: python m3/runtime-integration/check-synexia-frequency-count-pending-receipt.py --repo-root .
-  source_discriminator: M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=44/44
+  source_discriminator: M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=45/45
   runtime: NOT_RUN
   hosted_ci: NOT_CLAIMED
   benchmark: NOT_MEASURED
