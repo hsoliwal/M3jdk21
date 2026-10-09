@@ -1,0 +1,62 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3 arrays contracts
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/m3-arrays.yml"
+      - "m3/arrays/**"
+      - "m3/runtime-integration/check-m3arrays-build-wiring.py"
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/m3-arrays.yml"
+      - "m3/arrays/**"
+      - "m3/runtime-integration/check-m3arrays-build-wiring.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  arrays:
+    name: Java 21 arrays ${{ matrix.lane }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [java, native]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Prepare pinned Java 21
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz' -o "$RUNNER_TEMP/m3-jdk21.tar.gz"
+          printf '%s  %s\n' 'ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94' "$RUNNER_TEMP/m3-jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/m3-jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1/bin" >> "$GITHUB_PATH"
+
+      - name: Verify build wiring source gate
+        run: python3 m3/runtime-integration/check-m3arrays-build-wiring.py
+
+      - name: Run Maven and JUnit
+        shell: bash
+        env:
+          MAVEN_OPTS: -Dmaven.repo.local=${{ runner.temp }}/m3-maven-repository
+        run: |
+          if [[ "${{ matrix.lane }}" == "native" ]]; then
+            mvn --batch-mode --no-transfer-progress --file m3/arrays/pom.xml -Pnative-linux test
+          else
+            mvn --batch-mode --no-transfer-progress --file m3/arrays/pom.xml test
+          fi
