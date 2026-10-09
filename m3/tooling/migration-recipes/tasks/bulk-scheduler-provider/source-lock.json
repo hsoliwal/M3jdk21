@@ -1,0 +1,13 @@
+{
+  "schema": "M3JDK21_SYNEXIA_BULK_SCHEDULER_PROVIDER_LOCK_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 9989,
+  "canonical_packet_head": "2d0b367a9e9f22a8653083a97b739737b7713cbd",
+  "portable_recipe": "com.synexia.rewrite.M3BulkSchedulerProviderRecipe",
+  "target_port_recipe": "com.synexia.rewrite.M3Jdk21BulkSchedulerProviderPortRecipe",
+  "tornado_repository": "hsoliwal/synexia-tornadovm",
+  "tornado_provider_pr": 7,
+  "intake_mode": "TARGET_OWNED_PORT",
+  "runtime_dependency": "NONE",
+  "promotion_authority": false
+}
