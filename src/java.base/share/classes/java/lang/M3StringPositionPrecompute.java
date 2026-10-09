@@ -214,6 +214,7 @@ final class M3StringPositionPrecompute {
         }
 
         ExactBlock computed = new ExactBlock(
+                Arrays.copyOf(units, count),
                 Arrays.copyOf(offsets, count),
                 Arrays.copyOf(masks, count));
         if (blocks.exact.compareAndSet(block, null, computed)) return computed;
@@ -255,35 +256,25 @@ final class M3StringPositionPrecompute {
     }
 
     /**
-     * Masks keyed by coordinate, not by spelling: {@code firstOffsets[i]} is the block-relative
-     * offset of the first occurrence of the i-th distinct unit in unit order, and lookups read
-     * that unit back from the canonical source. Retained lanes are one byte and one long per
+     * Masks keyed by coordinate and unit order: {@code units[i]} is the i-th distinct unit,
+     * {@code firstOffsets[i]} is its block-relative first-occurrence offset, and {@code masks[i]}
+     * contains the exact positions. The retained lanes are two bytes, one byte and one long per
      * distinct unit.
      */
     private static final class ExactBlock {
+        final char[] units;
         final byte[] firstOffsets;
         final long[] masks;
 
-        ExactBlock(byte[] firstOffsets, long[] masks) {
+        ExactBlock(char[] units, byte[] firstOffsets, long[] masks) {
+            this.units = units;
             this.firstOffsets = firstOffsets;
             this.masks = masks;
         }
 
         long mask(M3String source, int blockStart, char unit) {
-            int low = 0;
-            int high = firstOffsets.length - 1;
-            while (low <= high) {
-                int mid = (low + high) >>> 1;
-                char candidate = source.charAt(blockStart + firstOffsets[mid]);
-                if (candidate < unit) {
-                    low = mid + 1;
-                } else if (candidate > unit) {
-                    high = mid - 1;
-                } else {
-                    return masks[mid];
-                }
-            }
-            return 0L;
+            int at = Arrays.binarySearch(units, unit);
+            return at < 0 ? 0L : masks[at];
         }
     }
 
