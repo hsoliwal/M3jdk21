@@ -3335,6 +3335,19 @@ public final class String
         return this;
     }
 
+    /*
+     * Return true only when the regex source is an ordinary literal whose exact
+     * UTF-16 spelling can be compared directly with M3-backed String storage.
+     * Pattern remains semantic authority for every syntax-bearing expression.
+     */
+    private static boolean isConservativeLiteralRegex(String regex) {
+        for (int index = 0; index < regex.length(); index++) {
+            char unit = regex.charAt(index);
+            if (unit == '\\' || ".^$|?*+()[]{}".indexOf(unit) >= 0) return false;
+        }
+        return true;
+    }
+
     /**
      * Tells whether or not this string matches the given <a
      * href="../util/regex/Pattern.html#sum">regular expression</a>.
@@ -3361,14 +3374,6 @@ public final class String
      *
      * @since 1.4
      */
-    private static boolean isConservativeLiteralRegex(String regex) {
-        for (int index = 0; index < regex.length(); index++) {
-            char unit = regex.charAt(index);
-            if (unit == '\\' || ".^$|?*+()[]{}".indexOf(unit) >= 0) return false;
-        }
-        return true;
-    }
-
     public boolean matches(String regex) {
         Objects.requireNonNull(regex);
         M3String storage = m3();
