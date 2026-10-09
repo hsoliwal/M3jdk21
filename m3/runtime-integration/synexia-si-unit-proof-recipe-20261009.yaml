@@ -30,9 +30,16 @@ mapping:
   license: Apache-2.0
   state: PENDING_TARGET_RECEIVER_PROOF
 
+target_evidence:
+  target_map_blob: 98e491cc391d212c13b732c7b7acfebf722a2f36
+  field_map_blob: 6490b29ba92ae7f246f65a2b47ce85ea7be051b4
+  build_blob: 3db12fd87065b99081fafd4425daf3ee02d38374
+  decoder_blob: 5ca5f5d2e8833ff7c9f6f11349a289b630d9f45e
+  recipe_manifest_blob: d0dd2119cfc339b09604cd2a363a84632283713a
+
 verification:
   source_discriminator_command: python m3/runtime-integration/check-synexia-si-unit-proof-receipt.py --repo-root .
-  source_discriminator: M3_SI_UNIT_PROOF_RECEIPT_SOURCE_PASS checks=34/34|runtime=NOT_RUN
+  source_discriminator: M3_SI_UNIT_PROOF_RECEIPT_SOURCE_PASS checks=40/40|runtime=NOT_RUN
   required_runtime_marker: M3JDK_SI_UNIT_PASS
   required_modes: jit,int,nocompact,c2
   runtime: NOT_RUN
