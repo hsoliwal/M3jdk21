@@ -12,10 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.InMemoryExecutionContext;
-import org.openrewrite.Parser;
 import org.openrewrite.SourceFile;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
-import org.openrewrite.java.JavaParser;
 import org.openrewrite.text.PlainText;
 
 final class M3StringDirectStreamTraversalRecipeTest {
@@ -82,16 +80,8 @@ final class M3StringDirectStreamTraversalRecipeTest {
 
     private static SourceFile java(String path, String resource) {
         String source = resource(JAVA_ROOT + resource);
-        List<SourceFile> parsed = JavaParser.fromJavaVersion()
-                .build()
-                .parseInputs(
-                        List.of(Parser.Input.fromString(Path.of(path), source)),
-                        null,
-                        context())
-                .toList();
-        assertEquals(1, parsed.size());
-        assertEquals(source, parsed.get(0).printAll());
-        return parsed.get(0);
+        return M3Jdk21HashPinnedSnapshotRecipe.parseJava21(
+                Path.of(path), source, context());
     }
 
     private static PlainText text(String path, String resource) {
