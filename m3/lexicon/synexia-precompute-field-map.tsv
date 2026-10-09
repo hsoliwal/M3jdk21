@@ -47,13 +47,17 @@ SiDimension	packed	long	si_dimension_packed	synexia.records.tsv:precompute_paylo
 SiUnit	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
 SiUnit	prefixable	boolean	si_prefixable	synexia.records.tsv:precompute_payload	MAPPED	SI prefixability remains an explicit donor boolean
 M3LexiconPrecompute.PrefixCounts	prefixCounts	long[]	prefix_counts	m3lex-family-v2:synexia.prefix-counts.tsv	MAPPED	value-scoped owner keyed by source scope, coordinate, token ID, and value fingerprint
-M3LexiconPrecompute.SpellIndex	deleteToTokenIds	Map<String,int[]>	deleteToTokenIds	m3lex-family-v2:synexia.spell.tsv	MAPPED	sorted delete-key map remains typed and scoped by lexicon, language, configuration, and source fingerprint
-M3LexiconPrecompute.SpellIndex	frequencies	Map<Integer,Long>	frequencies	m3lex-family-v2:synexia.spell.tsv	MAPPED	spell frequencies remain sorted metadata owned by the originating immutable lexicon
 M3LexiconPrecompute.SpellIndex	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.spell.tsv	MAPPED	reload is rejected when the lexicon or spell configuration fingerprint changes
-M3LexiconPrecompute.TokenHashPrecompute	tokenSha256	byte[][]	tokenSha256	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	exact token digests remain byte-preserving and scoped to the originating value and range
-M3LexiconPrecompute.TokenHashPrecompute	rangeFingerprint	RangeFingerprint	rangeFingerprint	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	typed rolling tuple remains a candidate fingerprint and is never token identity
-M3LexiconPrecompute.TokenHashPrecompute	rangeSha256	byte[]	rangeSha256	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	exact range digest remains an explicitly encoded byte value
-M3LexiconPrecompute.TokenFrequency	frequencies	Map<Integer,Integer>	frequencies	m3lex-family-v2:synexia.token-frequency.tsv	MAPPED	sorted frequency fold remains value-scoped derived metadata, never token identity
 M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTokenIds	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
 M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
 M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
+SynexiaRecordMetadata	sourceId	String	source_id	synexia.records.tsv:record_metadata	MAPPED	source record identity is preserved as UTF-16 text and is never synthesized by the exporter
+SynexiaRecordMetadata	recordId	String	record_id	synexia.records.tsv:record_metadata	MAPPED	source record coordinate is preserved as UTF-16 text and is never renumbered
+SynexiaRecordMetadata	lexeme	String	lexeme	synexia.records.tsv:record_metadata	MAPPED	source lexeme text remains source-owned UTF-16 data
+SynexiaRecordMetadata	relatedLexeme	String	related_lexeme	synexia.records.tsv:record_metadata	MAPPED	related lexeme text remains source-owned relation data
+M3NumberSpace	minValue	int	min_value	synexia.records.tsv:precompute_payload	MAPPED	bounded number-space minimum is preserved as an admitted integer
+M3NumberSpace	maxValue	int	max_value	synexia.records.tsv:precompute_payload	MAPPED	bounded number-space maximum is preserved as an admitted integer
+M3NumberSpace	precomputedValueCount	int	precomputed_value_count	synexia.records.tsv:precompute_payload	MAPPED	number-space cardinality remains an admitted integer
+M3NumberSpace	sharedUtf16Storage	boolean	shared_utf16_storage	synexia.records.tsv:precompute_payload	MAPPED	shared UTF-16 storage capability remains an explicit boolean
+M3NumberSpace	canonicalDecimalSpelling	String	canonical_decimal_spelling	synexia.records.tsv:precompute_payload	MAPPED	canonical decimal spelling remains source-owned UTF-16 text
+M3LanguageGrammarSupport	supported	boolean	translation_grammar_supported	synexia.records.tsv:precompute_payload	MAPPED	grammar support remains an explicit source-owned boolean
