@@ -36,6 +36,8 @@ Current canonical recipe owners for the M3 String work include:
 - `com.synexia.m3.TranslateEscapesCanonical`
 - `com.synexia.m3.ValueOfCharCanonical`
 - `com.synexia.m3.DeprecatedGetBytesBulk`
+- `com.synexia.m3.GenericCharsetDirect`
+- `com.synexia.m3.JniShadowBulk`
 
 Focused recipe custody is consolidated on Synexia PR #10004. A target-side copy is a receipt or
 application artifact only, never a second canonical recipe owner.
