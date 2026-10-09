@@ -455,25 +455,38 @@ final class StringConcatHelper {
     static String m3Concat(String[] constants, String[] args) {
         M3String result = M3String.empty();
         for (int index = 0; index < args.length; index++) {
-            String constant = constants[index];
-            if (constant != null && !constant.isEmpty()) {
-                M3String piece = M3String.canonicalize(constant);
-                result = result.length() == 0 ? piece : result.concat(piece);
-            }
-
-            String argument = args[index];
-            if (!argument.isEmpty()) {
-                M3String piece = M3String.canonicalize(argument);
-                result = result.length() == 0 ? piece : result.concat(piece);
-            }
+            result = m3Append(result, constants[index]);
+            if (result == null) return flatConcat(constants, args);
+            result = m3Append(result, args[index]);
+            if (result == null) return flatConcat(constants, args);
         }
+        result = m3Append(result, constants[args.length]);
+        return result == null ? flatConcat(constants, args) : new String(result);
+    }
 
+    /** Null or empty pieces are skipped; {@code null} when the pool refuses the piece (budget). */
+    private static M3String m3Append(M3String result, String piece) {
+        if (piece == null || piece.isEmpty()) return result;
+        M3String admitted = M3String.canonicalize(piece);
+        if (admitted == null) return null;
+        return result.length() == 0 ? admitted : result.concat(admitted);
+    }
+
+    /** The stock one-array shape for the same pieces when the M3 pool refuses an admission. */
+    private static String flatConcat(String[] constants, String[] args) {
+        long indexCoder = initialCoder();
+        for (int index = 0; index < args.length; index++) {
+            if (constants[index] != null) indexCoder = mix(indexCoder, constants[index]);
+            indexCoder = mix(indexCoder, args[index]);
+        }
         String suffix = constants[args.length];
-        if (suffix != null && !suffix.isEmpty()) {
-            M3String piece = M3String.canonicalize(suffix);
-            result = result.length() == 0 ? piece : result.concat(piece);
+        if (suffix != null) indexCoder = mix(indexCoder, suffix);
+        byte[] buf = newArray(indexCoder);
+        if (suffix != null) indexCoder = prepend(indexCoder, buf, suffix);
+        for (int index = args.length - 1; index >= 0; index--) {
+            indexCoder = prepend(indexCoder, buf, args[index], constants[index]);
         }
-        return new String(result);
+        return newString(buf, indexCoder);
     }
 
     /**

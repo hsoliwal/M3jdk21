@@ -166,6 +166,7 @@ final class M3String implements CharSequence {
         return join(new String[] {first, second});
     }
 
+    /** The composition, or {@code null} when the pool refuses a flat part (the caller stays flat). */
     static M3String join(String[] parts) {
         Objects.requireNonNull(parts, "parts");
         ArrayList<M3String> level = new ArrayList<>(parts.length);
@@ -177,6 +178,7 @@ final class M3String implements CharSequence {
                 // canonical M3 owner only for this composition; do not attach duplicate storage
                 // back to the old String object.
                 storage = M3String.admit(checked.value(), checked.coder());
+                if (storage == null) return null;
             }
             if (storage != null && storage.length() != 0) level.add(storage);
         }
@@ -200,6 +202,9 @@ final class M3String implements CharSequence {
      * excluded exactly as in join(String[]). Adjacent equal-size groups are folded
      * pairwise, then remaining high groups fold over low suffix groups. The resulting
      * canonical text always belongs to an M3 owner/range, not a temporary array.</p>
+     *
+     * @return the composition, or {@code null} when the pool refuses a flat piece (the caller
+     *         takes its flat path)
      */
     static M3String joinDesignated(
             String prefix, String suffix, String delimiter, String[] elements, int size) {
@@ -212,15 +217,15 @@ final class M3String implements CharSequence {
         long maximumPieces = size == 0 ? 2L : 2L * size + 1L;
         M3String[] levels =
                 new M3String[Long.SIZE - Long.numberOfLeadingZeros(maximumPieces)];
-        joinAddDesignated(levels, prefix);
+        if (!joinAddDesignated(levels, prefix)) return null;
         if (size != 0) {
-            joinAddDesignated(levels, checked[0]);
+            if (!joinAddDesignated(levels, checked[0])) return null;
             for (int index = 1; index < size; index++) {
-                joinAddDesignated(levels, delimiter);
-                joinAddDesignated(levels, checked[index]);
+                if (!joinAddDesignated(levels, delimiter)) return null;
+                if (!joinAddDesignated(levels, checked[index])) return null;
             }
         }
-        joinAddDesignated(levels, suffix);
+        if (!joinAddDesignated(levels, suffix)) return null;
 
         M3String result = EMPTY;
         for (int level = 0; level < levels.length; level++) {
@@ -232,18 +237,20 @@ final class M3String implements CharSequence {
         return result;
     }
 
-    private static void joinAddDesignated(M3String[] levels, String source) {
+    /** False when the pool refuses the flat piece; an empty piece is skipped. */
+    private static boolean joinAddDesignated(M3String[] levels, String source) {
         String checked = Objects.requireNonNull(source, "join piece");
         M3String carry = checked.m3();
         if (carry == null && checked.length() != 0) {
             carry = M3String.admit(checked.value(), checked.coder());
+            if (carry == null) return false;
         }
-        if (carry == null || carry.length() == 0) return;
+        if (carry == null || carry.length() == 0) return true;
         for (int level = 0; level < levels.length; level++) {
             M3String previous = levels[level];
             if (previous == null) {
                 levels[level] = carry;
-                return;
+                return true;
             }
             levels[level] = null;
             carry = M3StringPool.concat(previous, carry);
@@ -251,6 +258,10 @@ final class M3String implements CharSequence {
         throw new InternalError("M3 String.join carry level exhausted");
     }
 
+    /**
+     * The String's own storage, or its spelling admitted for this composition; {@code null} when
+     * the pool refuses the admission (budget), in which case the caller keeps its flat path.
+     */
     static M3String canonicalize(String source) {
         String checked = Objects.requireNonNull(source, "source");
         M3String storage = checked.m3();
@@ -1242,28 +1253,46 @@ final class M3String implements CharSequence {
         return true;
     }
 
+    /**
+     * Literal regex lane: the regex is a flat literal located through the receiver's mixed-side
+     * search and never admitted; only the replacement joins the result. {@code null} when the pool
+     * refuses the replacement (the caller takes the Pattern path).
+     */
     String replaceLiteralRegex(String original, String regex, String replacement, boolean firstOnly) {
-        M3String target = canonicalize(regex);
-        int found = indexOf(target, 0);
+        int found = original.indexOf(regex);
         if (found < 0) return original;
+        M3String admitted = canonicalize(replacement);
+        if (admitted == null) return null;
         // A match must produce a String even when composition aliases an input descriptor.
-        return new String(replaceMatches(target, canonicalize(replacement), found, firstOnly));
+        return new String(replaceMatches(null, original, regex, admitted, found, firstOnly));
     }
 
-    M3String replace(M3String target, M3String replacement) {
+    /** Replaces every occurrence of a non-empty M3 target from its first match {@code found}. */
+    M3String replaceAt(M3String target, M3String replacement, int found) {
         M3String checkedTarget = Objects.requireNonNull(target, "target");
-        M3String checkedReplacement = Objects.requireNonNull(replacement, "replacement");
         if (checkedTarget.length() == 0) {
             throw new IllegalArgumentException("empty literal target handled by String compatibility path");
         }
-
-        int found = indexOf(checkedTarget, 0);
-        if (found < 0) return this;
-        return replaceMatches(checkedTarget, checkedReplacement, found, false);
+        return replaceMatches(checkedTarget, null, null, replacement, found, false);
     }
 
-    private M3String replaceMatches(M3String checkedTarget, M3String checkedReplacement,
-                                    int found, boolean firstOnly) {
+    /**
+     * Transient admission for {@code String.replace}: a flat target is searched through the
+     * receiver's mixed-side {@code indexOf(String, int)} and never enters the pool; the result is
+     * composed from slices of this storage and the replacement only.
+     */
+    M3String replaceFlatTarget(String receiver, String target, M3String replacement, int found) {
+        if (target.isEmpty()) {
+            throw new IllegalArgumentException("empty literal target handled by String compatibility path");
+        }
+        return replaceMatches(null, receiver, target, replacement, found, false);
+    }
+
+    /** Exactly one of {@code target} (M3 needle) and {@code receiver}+{@code flatTarget} drives the search. */
+    private M3String replaceMatches(M3String target, String receiver, String flatTarget,
+                                    M3String replacement, int found, boolean firstOnly) {
+        M3String checkedReplacement = Objects.requireNonNull(replacement, "replacement");
+        int targetLength = target != null ? target.length() : flatTarget.length();
         ArrayList<M3String> pieces = new ArrayList<>();
         long outputLength = 0L;
         int cursor = 0;
@@ -1280,9 +1309,9 @@ final class M3String implements CharSequence {
             if (outputLength > Integer.MAX_VALUE) {
                 throw new OutOfMemoryError("Required length exceeds implementation limit");
             }
-            cursor = found + checkedTarget.length();
-            found = !firstOnly && cursor <= length() - checkedTarget.length()
-                    ? indexOf(checkedTarget, cursor)
+            cursor = found + targetLength;
+            found = !firstOnly && cursor <= length() - targetLength
+                    ? (target != null ? indexOf(target, cursor) : receiver.indexOf(flatTarget, cursor))
                     : -1;
         }
         if (cursor < length()) {
