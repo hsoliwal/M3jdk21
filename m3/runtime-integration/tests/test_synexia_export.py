@@ -225,6 +225,8 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
         self.assertEqual("", sources["translate.rows"]["precompute_fields"])
         self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        self.assertEqual("", sources["dictlang.thesaurus"]["precompute_fields"])
+        self.assertEqual("", sources["dictlang.antonyms"]["precompute_fields"])
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
@@ -232,12 +234,23 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8", newline="") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
         mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
-        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]"}
+        payload_types = {"boolean", "double", "int", "long", "int[]", "long[]", "String"}
+        declared_types = payload_types | {
+            "byte[]", "byte[][]", "Map<Integer,Integer>", "Map<Integer,Long>",
+            "Map<String,int[]>", "RangeFingerprint", "SharedLexiconCatalog.Coordinate",
+        }
         field_types: dict[str, str] = {}
         for row in rows:
-            self.assertIn(row["donor_java_type"], allowed_types)
-            previous = field_types.setdefault(row["canonical_payload_field"], row["donor_java_type"])
-            self.assertEqual(previous, row["donor_java_type"], row["canonical_payload_field"])
+            self.assertIn(row["donor_java_type"], declared_types)
+            if row["m3jdk_storage"] == "synexia.records.tsv:precompute_payload":
+                self.assertIn(row["donor_java_type"], payload_types)
+                previous = field_types.setdefault(row["canonical_payload_field"],
+                                                  row["donor_java_type"])
+                self.assertEqual(previous, row["donor_java_type"],
+                                 row["canonical_payload_field"])
+        self.assertNotIn("source_id", field_types)
+        self.assertNotIn("related_lexeme", field_types)
+        self.assertNotIn("shard_id,image_row", field_types)
         self.assertEqual("long[]", field_types["concept_ids"])
         self.assertEqual("int[]", field_types["memberships"])
         self.assertEqual("long", field_types["lexicon_fingerprint"])
