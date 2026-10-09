@@ -255,6 +255,23 @@ class SynexiaExportTest(unittest.TestCase):
                     ROOT / "m3/lexicon/synexia-precompute-field-map.tsv",
                     family_sidecar_dir=partial)
 
+    def test_family_mapping_catalog_matches_receiver_schema(self):
+        path = ROOT / "m3/lexicon/synexia-precompute-family-map.tsv"
+        rows = list(csv.DictReader(path.open(encoding="utf-8", newline=""), delimiter="\t"))
+        self.assertEqual(
+            {"schema_version", "family", "file", "key_columns",
+             "value_columns", "ordering", "identity_guard"},
+            set(rows[0]),
+        )
+        self.assertEqual(5, len(rows))
+        self.assertEqual([row["family"] for row in rows],
+                         sorted(FAMILY.FAMILY_SPECS))
+        self.assertTrue(all(row["schema_version"] == FAMILY.SCHEMA_VERSION for row in rows))
+        self.assertEqual(
+            {row["file"] for row in rows},
+            {spec["file"] for spec in FAMILY.FAMILY_SPECS.values()},
+        )
+
     def test_legacy_input_defaults_to_empty_owner_payload(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
