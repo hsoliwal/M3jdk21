@@ -74,6 +74,11 @@ public final class M3NumberSpace {
         return number(value);
     }
 
+    /** Return immutable typed metadata for one canonical number record. */
+    public M3LexiconPrecompute.NumberPrecompute precompute(int value, String languageTag) {
+        return new M3LexiconPrecompute.NumberPrecompute(value, spelling(value), languageTag);
+    }
+
     public int precomputedValueCount() { return values.length; }
 
     /** All values retain the same immutable backing owner. */
