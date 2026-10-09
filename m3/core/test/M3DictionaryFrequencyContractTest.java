@@ -48,17 +48,18 @@ public final class M3DictionaryFrequencyContractTest {
         return value;
     }
 
-    private static Map<String, String> parseSourceRevisions(String text) {
+    private static Map<String, String[]> parseSourceRevisions(String text) {
         String[] lines = text.split("\\n", -1);
-        if (lines.length < 2 || !"source_id\\tsource_revision".equals(lines[0])
+        if (lines.length < 2 || !"source_id\\tsource_revision\\tsource_blob_sha".equals(lines[0])
                 || !lines[lines.length - 1].isEmpty()) {
             throw new IllegalArgumentException("source revision header/termination");
         }
-        Map<String, String> revisions = new LinkedHashMap<>();
+        Map<String, String[]> revisions = new LinkedHashMap<>();
         for (int line = 1; line < lines.length - 1; line++) {
             String[] fields = lines[line].split("\\t", -1);
-            if (fields.length != 2 || fields[0].isEmpty() || fields[1].isEmpty()
-                    || revisions.putIfAbsent(fields[0], fields[1]) != null) {
+            if (fields.length != 3 || fields[0].isEmpty() || fields[1].isEmpty()
+                    || !fields[2].matches("[0-9a-f]{40}")
+                    || revisions.putIfAbsent(fields[0], fields) != null) {
                 throw new IllegalArgumentException("source revision row shape or duplicate");
             }
         }
@@ -98,15 +99,19 @@ public final class M3DictionaryFrequencyContractTest {
     public static void main(String[] args) throws Exception {
         String manifest = Files.readString(
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
-        Map<String, String> sourceRevisions = parseSourceRevisions(Files.readString(
+        Map<String, String[]> sourceRevisions = parseSourceRevisions(Files.readString(
                 Path.of("lexicon/synexia-word-source-revisions.tsv"), StandardCharsets.UTF_8));
         check(sourceRevisions.size() == 2
-                && SOURCE_REVISION.equals(sourceRevisions.get("dictlang.dictionary"))
-                && SOURCE_REVISION.equals(sourceRevisions.get("dictlang.frequency")));
+                && SOURCE_REVISION.equals(sourceRevisions.get("dictlang.dictionary")[1])
+                && DICTIONARY_BLOB_SHA.equals(sourceRevisions.get("dictlang.dictionary")[2])
+                && SOURCE_REVISION.equals(sourceRevisions.get("dictlang.frequency")[1])
+                && FREQUENCY_BLOB_SHA.equals(sourceRevisions.get("dictlang.frequency")[2]));
         expect(IllegalArgumentException.class, () -> parseSourceRevisions(
-                "source_id\\tsource_revision\\n"
-                        + "dictlang.dictionary\\t" + SOURCE_REVISION + "\\n"
-                        + "dictlang.dictionary\\t" + SOURCE_REVISION + "\\n"));
+                "source_id\\tsource_revision\\tsource_blob_sha\\n"
+                        + "dictlang.dictionary\\t" + SOURCE_REVISION + "\\t"
+                        + DICTIONARY_BLOB_SHA + "\\n"
+                        + "dictlang.dictionary\\t" + SOURCE_REVISION + "\\t"
+                        + DICTIONARY_BLOB_SHA + "\\n"));
         Map<String, String[]> manifestRows = parseManifest(manifest);
         String[] dictionary = row(manifestRows, "dictlang.dictionary");
         String[] frequency = row(manifestRows, "dictlang.frequency");
