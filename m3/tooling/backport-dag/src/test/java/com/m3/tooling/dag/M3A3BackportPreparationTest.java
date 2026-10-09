@@ -78,6 +78,54 @@ final class M3A3BackportPreparationTest {
         assertTrue(Files.isRegularFile(ledger));
         assertTrue(Files.readString(ledger).contains("JAVA_A3_FIXED_POINT"));
         assertTrue(Files.readString(ledger).contains("NON_JAVA_SOURCE_SEALED"));
+
+        var phases = receipt.phaseProofs();
+        assertEquals(
+                List.of(
+                        M3A3BackportPreparation.ProofPhase.ATOMIZATION,
+                        M3A3BackportPreparation.ProofPhase.PATTERN_IOP,
+                        M3A3BackportPreparation.ProofPhase.DOCUMENTATION,
+                        M3A3BackportPreparation.ProofPhase.FIXED_POINT),
+                phases.stream()
+                        .map(M3A3BackportPreparation.PhaseProof::phase)
+                        .toList());
+        assertTrue(phases.stream().allMatch(M3A3BackportPreparation.PhaseProof::applicable));
+        assertTrue(phases.stream().allMatch(proof -> proof.javaFiles() == 1));
+        assertTrue(phases.stream().allMatch(proof -> proof.root().matches("[0-9a-f]{64}")));
+        assertEquals(
+                receipt.requirePhase(M3A3BackportPreparation.ProofPhase.FIXED_POINT),
+                phases.getLast());
+
+        Path phaseLedger =
+                root.resolve("m3/build/backport-preparation/backport-preparation-phases.tsv");
+        assertTrue(Files.isRegularFile(phaseLedger));
+        String phaseText = Files.readString(phaseLedger);
+        assertTrue(phaseText.contains("ATOMIZATION"));
+        assertTrue(phaseText.contains("PATTERN_IOP"));
+        assertTrue(phaseText.contains("DOCUMENTATION"));
+        assertTrue(phaseText.contains("FIXED_POINT"));
+    }
+
+    @Test
+    void nativeOnlyPreparationEmitsExplicitNonApplicablePhaseProofs() throws Exception {
+        Path root = Files.createTempDirectory("m3-a3-backport-native-only-");
+        Path nativeSource = root.resolve("src/hotspot/share/example/native.cpp");
+        Files.createDirectories(nativeSource.getParent());
+        Files.writeString(nativeSource, "int m3_native_fixture() { return 7; }\n");
+
+        var receipt =
+                M3A3BackportPreparation.prepare(
+                        root,
+                        root.resolve("m3/build/backport-preparation"),
+                        List.of("src/hotspot/share/example/native.cpp"));
+
+        assertEquals(0, receipt.javaFiles());
+        assertEquals(1, receipt.nonJavaFiles());
+        assertEquals(4, receipt.phaseProofs().size());
+        assertTrue(receipt.phaseProofs().stream()
+                .allMatch(proof -> !proof.applicable() && proof.javaFiles() == 0));
+        assertTrue(receipt.phaseProofs().stream()
+                .allMatch(proof -> proof.root().matches("[0-9a-f]{64}")));
     }
 
     @Test
