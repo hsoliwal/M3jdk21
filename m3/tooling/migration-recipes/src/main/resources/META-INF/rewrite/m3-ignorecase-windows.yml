@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.IgnoreCaseWindows
+displayName: M3JDK21 case-insensitive comparisons folded by the stock helpers over bulk windows
+description: >-
+  equalsIgnoreCase, regionMatches(ignoreCase) and compareToIgnoreCase with an M3 side folded every
+  differing unit pair through Character.toUpperCase/toLowerCase over 256-unit char windows (a
+  case-swapped 16384-unit Latin-1 atom: 83 us against 7.8 us flat). M3StringMixedCompare now hands
+  4096-unit byte windows, read in the content coder of each side (a Latin-1 range of a wide owner
+  is a Latin-1 side, as its flat twin), to the stock StringLatin1/StringUTF16 compareToCI and
+  regionMatchesCI families; two UTF-16 sides keep surrogate pairs inside one window.
+  M3StringAtom.getBytes narrows UTF-16 storage into a Latin-1 destination in bulk through the
+  compress intrinsic. String.regionMatches with an M3 side answers true for len <= 0 as the stock
+  loops do (it threw). Java step: M3StringAtom, M3StringMixedCompare and the jtreg proof; text
+  step: String.java. Stacks on crate m3-indexof-flat-needle (branch order); the M3StringAtom
+  preimage is the m3-atom-getchars (A26) postimage, the M3StringMixedCompare preimage the
+  m3-mixed-compare (A10) postimage, the String.java preimage the m3-indexof-flat-needle postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ignorecase-windows
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-ignorecase-windows

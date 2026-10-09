@@ -113,3 +113,7 @@ Regenerated against dd9120f283: no upstream target changed, so `runtime.patch` a
 ## 2026-10-09 re-seal (A27 flat needles over bulk windows)
 
 Regenerated against d21c8fa886: the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); the M3-owned `M3String.java` keeps its v2 after-image and records the new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-09 re-seal (A28 case-insensitive folds over bulk windows)
+
+Regenerated against 81caf879c6: the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); the M3-owned `M3StringAtom.java`, `M3StringMixedCompare.java` keep their v2 after-images and record the new owner as reviewed `superseded` hashes. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
