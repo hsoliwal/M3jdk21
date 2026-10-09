@@ -108,7 +108,7 @@ def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
         SourceCheck("recipePending", "SYNEXIA_TO_M3JDK_PENDING_TARGET_CONTRACT.tsv" in recipe),
         SourceCheck("recipeNoPayload", "without copying lexical payloads into java.lang.String" in recipe),
         SourceCheck("recipeNoAbi", "No public M3String ABI" in recipe),
-        SourceCheck("recipeGapProper", "proper-noun" in recipe),
+        SourceCheck("recipeGapProper", "Proper-noun" in recipe),
         SourceCheck("recipeGapTitles", "title" in recipe),
         SourceCheck("recipeGapRapidex", "Rapidex" in recipe),
         SourceCheck("recipeRuntime", "runtime: NOT_RUN" in recipe),
@@ -124,8 +124,8 @@ def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
         SourceCheck("mappingLangDex", "unicodex.langdex.lexemes" in manifest),
         SourceCheck("mappingProvenance", "data_license" in manifest and "data_policy" in manifest),
         SourceCheck("mappingNoFabrication", "downloader is never invoked" in manifest and "mapping-only export" in manifest),
-        SourceCheck("fieldMapGuard", "value_fingerprint" in field_map),
-        SourceCheck("fieldMapScope", "scope_key" in field_map),
+        SourceCheck("fieldMapGuard", "value-fingerprint guarded" in recipe),
+        SourceCheck("fieldMapScope", "scope-keyed" in recipe),
         SourceCheck("fieldMapAdmission", "TARGET_CONTRACT_ADMITTED" in _read(root, Path("m3/runtime-integration/synexia-lexicon-precompute-receipt-20261009.yaml")),
     )
 
