@@ -1,6 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
+import com.m3.text.M3InstanceIndexPrecompute;
 import com.m3.text.M3Lexicons;
 import com.m3.text.SharedLexiconCatalog;
 
@@ -11,6 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /** Contract proof for the target-side M3Lexicons adapter. */
 public final class M3LexiconsFacadeTest {
@@ -41,6 +44,14 @@ public final class M3LexiconsFacadeTest {
                 check(lexicons.precomputeProfiles().size() == 1, "profile lookup");
                 lexicons.warm();
             }
+            M3InstanceIndexPrecompute instanceIndex = instanceIndex();
+            try (M3Lexicons bound = M3Lexicons.of(SharedLexiconCatalog.open(root), instanceIndex)) {
+                check(bound.instanceIndex().orElseThrow() == instanceIndex, "instance owner identity");
+                check(bound.findInstanceByName("ada lovelace").orElseThrow().type()
+                        == M3InstanceIndexPrecompute.InstanceType.AUTHOR, "instance name lookup");
+                check(bound.instancesOf(7001L).size() == 1, "reverse instance lookup");
+                check(bound.instancesOf(9999L).isEmpty(), "unknown concept is empty");
+            }
             M3Lexicons lazy = M3Lexicons.openLazy(root);
             check(lazy.find("alpha").isPresent(), "lazy facade lookup");
             lazy.close();
@@ -49,6 +60,19 @@ public final class M3LexiconsFacadeTest {
         } finally {
             deleteTree(root);
         }
+    }
+
+    private static M3InstanceIndexPrecompute instanceIndex() {
+        return new M3InstanceIndexPrecompute(
+                "synexia-instance-index-v1", "r1", "fp1", "ascii-fold-v1",
+                Set.of(7001L, 7002L),
+                Map.of(
+                        "Ada Lovelace", new M3InstanceIndexPrecompute.InstanceRecord(
+                                "Ada Lovelace", M3InstanceIndexPrecompute.InstanceType.AUTHOR,
+                                7001L, Map.of("role", "author")),
+                        "Analytical Engine", new M3InstanceIndexPrecompute.InstanceRecord(
+                                "Analytical Engine", M3InstanceIndexPrecompute.InstanceType.BOOK_TITLE,
+                                7002L, Map.of("role", "title"))));
     }
 
     private static void writeCatalog(Path root) throws Exception {
