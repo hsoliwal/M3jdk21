@@ -12,7 +12,7 @@ public final class M3PhrasePrecomputeTest {
         M3PhrasePrecompute.Scope scope = new M3PhrasePrecompute.Scope(
                 "translate.index-phrases", "phrases-1", "synexia-r1", "lexicon-sha");
         int[] source = {1, 2, 3};
-        int[] replacement = {8};
+        int[] replacement = {8, 6};
         M3PhrasePrecompute.Phrase longest =
                 new M3PhrasePrecompute.Phrase(source, replacement);
         source[0] = 99;
@@ -28,11 +28,13 @@ public final class M3PhrasePrecomputeTest {
         check(catalog.phraseCount() == 3);
         check(catalog.maxSourceLength() == 3);
         check(Arrays.equals(catalog.rewrite(new int[]{1, 2, 3, 4, 5}),
-                new int[]{8, 7, 5}));
+                new int[]{8, 6, 7, 5}));
         check(catalog.longestMatchAt(new int[]{1, 2, 3}, 0).orElseThrow()
                 .consumedLength() == 3);
         check(Arrays.equals(catalog.longestMatchAt(new int[]{1, 2, 3}, 0)
-                .orElseThrow().replacementTokenIds(), new int[]{8}));
+                .orElseThrow().replacementTokenIds(), new int[]{8, 6}));
+        check(Arrays.equals(catalog.longestMatchAt(new int[]{1, 2, 3}, 0)
+                .orElseThrow().targetTokenIds(), new int[]{8, 6}));
         check(catalog.longestMatchAt(new int[]{1, 2, 3}, 2).isEmpty());
         check(catalog.longestMatchAt(new int[]{4}, 0).orElseThrow()
                 .consumedLength() == 1);
@@ -41,8 +43,18 @@ public final class M3PhrasePrecomputeTest {
         returned[0] = 77;
         int[] returnedReplacement = longest.replacementTokenIds();
         returnedReplacement[0] = 77;
-        check(Arrays.equals(catalog.rewrite(new int[]{1, 2, 3}), new int[]{8}));
+        check(Arrays.equals(catalog.rewrite(new int[]{1, 2, 3}), new int[]{8, 6}));
         check(catalog.scope().equals(scope));
+
+        M3PhrasePrecompute.Scope foreignScope = new M3PhrasePrecompute.Scope(
+                "translate.index-phrases", "phrases-1", "synexia-r1", "other-lexicon");
+        expect(IllegalArgumentException.class, () -> catalog.rewrite(
+                foreignScope, new int[]{1, 2, 3}));
+        expect(IllegalArgumentException.class, () -> catalog.longestMatchAt(
+                foreignScope, new int[]{1, 2, 3}, 0));
+        expect(IllegalArgumentException.class, () -> M3PhrasePrecompute.builder(scope)
+                .put(new M3PhrasePrecompute.Phrase(foreignScope,
+                        new int[]{10}, new int[]{11})));
 
         M3PhrasePrecompute.Catalog emptyReplacement = M3PhrasePrecompute.builder(scope)
                 .put(new M3PhrasePrecompute.Phrase(new int[]{6, 7}, new int[0]))
