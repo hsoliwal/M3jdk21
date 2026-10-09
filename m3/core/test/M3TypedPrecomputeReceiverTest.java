@@ -49,24 +49,37 @@ public final class M3TypedPrecomputeReceiverTest {
 
         var number = new SharedLexiconPrecomputeCatalog.NumberIdentity(
                 "dictlang.numbers.0-10000", "42", 42, "en");
-        check(catalog.numberAt(number).orElseThrow().value() == 42,
-                "number receiver");
+        var numberValue = catalog.numberAt(number).orElseThrow();
+        check(numberValue.value() == 42, "number receiver");
+        check(numberValue.spelling().equals("42"), "number canonical spelling");
+        check(numberValue.languageTag().equals("en"), "number language tag");
         check(catalog.numberAt(new SharedLexiconPrecomputeCatalog.NumberIdentity(
                 "dictlang.numbers.0-10000", "42", 42, "hi")).isEmpty(),
                 "number language isolation");
 
         var unit = new SharedLexiconPrecomputeCatalog.SiUnitIdentity(
                 "dictlang.si-units", "meter");
-        check(catalog.siUnitAt(unit).orElseThrow().decimalExponent() == 0,
-                "SI-unit receiver");
+        var si = catalog.siUnitAt(unit).orElseThrow();
+        check(si.decimalExponent() == -6, "SI-unit exponent");
+        check(si.dimensionPacked() == 0x01020304050607L, "SI-unit dimension");
+        check(si.offset() == 273.15d, "SI-unit offset");
+        check(si.prefixable(), "SI-unit prefixability");
         check(catalog.siUnitAt(new SharedLexiconPrecomputeCatalog.SiUnitIdentity(
                 "dictlang.si-units", "missing")).isEmpty(),
                 "SI-unit record isolation");
 
-        byte[] digest = catalog.tokenHashesAt(range).orElseThrow().rangeSha256();
+        var tokenHashes = catalog.tokenHashesAt(range).orElseThrow();
+        byte[] digest = tokenHashes.rangeSha256();
         digest[0] ^= 1;
-        check(catalog.tokenHashesAt(range).orElseThrow().rangeSha256()[0] != digest[0],
-                "digest defensive copy");
+        check(tokenHashes.rangeSha256()[0] != digest[0], "range digest defensive copy");
+        byte[][] tokenDigests = tokenHashes.tokenSha256();
+        tokenDigests[0][0] ^= 1;
+        check(tokenHashes.tokenSha256()[0][0] != tokenDigests[0][0],
+                "token digest matrix defensive copy");
+        check(tokenHashes.rangeFingerprint().first() == 11L
+                        && tokenHashes.rangeFingerprint().second() == 22L
+                        && tokenHashes.rangeFingerprint().length() == 2,
+                "range fingerprint fields");
 
         System.out.println("M3JDK_TYPED_RECEIVER_MATRIX_PASS checks=" + checks + " families=7");
     }
@@ -135,7 +148,8 @@ public final class M3TypedPrecomputeReceiverTest {
                 .tokenFrequency(valueKey, new M3LexiconPrecompute.TokenFrequency(
                         "value-1", Map.of(7, 3)))
                 .number(numberKey, M3LexiconPrecompute.NumberPrecompute.canonical(42, "en"))
-                .siUnit(unitKey, new M3LexiconPrecompute.SiUnitPrecompute(0, 0L, 0.0, true))
+                .siUnit(unitKey, new M3LexiconPrecompute.SiUnitPrecompute(
+                        -6, 0x01020304050607L, 273.15d, true))
                 .build();
     }
 
