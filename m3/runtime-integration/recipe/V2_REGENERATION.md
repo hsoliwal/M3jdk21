@@ -61,3 +61,7 @@ The three leaves had reached master only as zero-file superset merges (62153d40f
 ## 2026-10-09 re-seal (A10 mixed-side comparison windows)
 
 Regenerated against 1b68815ddb: `java/lang/M3StringMixedCompare.java` joins the scope (67 targets, `before` null, recorded as its own `superseded` owner per the supersession rule); the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); the M3-owned `M3String.java` keeps its v2 after-image and records the new owner as a reviewed `superseded` hash. `apply.py --check` state=superseded; `test_recipe.py` 6/6 (target count 67).
+
+## 2026-10-09 re-seal (A11 atom bulk I/O)
+
+Regenerated against 057e92ecb3: the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); the M3-owned `M3String.java`, `M3StringAtom.java`, `M3StringOwner.java`, `M3StringTuple.java` and `M3StringMixedCompare.java` keep their v2 after-images and record the new owners as reviewed `superseded` hashes. 67 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.

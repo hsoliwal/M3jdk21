@@ -6445,7 +6445,7 @@ index 0000000000000000000000000000000000000000..0d4cfb75317e68d54244588a474eba98
 +    }
 +}
 diff --git a/src/java.base/share/classes/java/lang/String.java b/src/java.base/share/classes/java/lang/String.java
-index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d79fa2bb0 100644
+index 5c234d4dfacac9e642578483640d4e6b41488beb..2ff4c14265f20c20abe5f8818d8066343e3d19fe 100644
 --- a/src/java.base/share/classes/java/lang/String.java
 +++ b/src/java.base/share/classes/java/lang/String.java
 @@ -43,6 +43,8 @@ import java.util.Locale;
@@ -7213,7 +7213,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
              byte coder = s1.coder();
              if (coder == s2.coder()) {
                  return coder == LATIN1 ? StringLatin1.compareToCI(v1, v2)
-@@ -2156,8 +2359,27 @@ public final class String
+@@ -2156,8 +2359,24 @@ public final class String
               (ooffset > (long)other.length() - len)) {
              return false;
          }
@@ -7233,17 +7233,14 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
 +                    return false;
 +                }
 +            }
-+            for (int index = 0; index < len; index++) {
-+                if (charAt(toffset + index) != other.charAt(ooffset + index)) return false;
-+            }
-+            return true;
++            return M3StringMixedCompare.regionMatchesUnits(this, toffset, other, ooffset, len);
 +        }
 +        byte[] tv = value();
 +        byte[] ov = other.value();
          byte coder = coder();
          if (coder == other.coder()) {
              if (coder == UTF16) {
-@@ -2165,23 +2387,15 @@ public final class String
+@@ -2165,23 +2384,15 @@ public final class String
                  ooffset <<= UTF16;
                  len <<= UTF16;
              }
@@ -7275,7 +7272,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
              }
          }
          return true;
-@@ -2240,14 +2454,35 @@ public final class String
+@@ -2240,14 +2451,35 @@ public final class String
          if (!ignoreCase) {
              return regionMatches(toffset, other, ooffset, len);
          }
@@ -7314,7 +7311,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          byte coder = coder();
          if (coder == other.coder()) {
              return coder == LATIN1
-@@ -2281,8 +2516,29 @@ public final class String
+@@ -2281,8 +2513,26 @@ public final class String
          if (toffset < 0 || toffset > length() - prefix.length()) {
              return false;
          }
@@ -7336,17 +7333,14 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
 +                    return false;
 +                }
 +            }
-+            for (int index = 0; index < prefix.length(); index++) {
-+                if (sourceM3.charAt(toffset + index) != prefix.charAt(index)) return false;
-+            }
-+            return true;
++            return M3StringMixedCompare.regionMatchesUnits(this, toffset, prefix, 0, prefix.length());
 +        }
 +        byte[] ta = value();
 +        byte[] pa = prefix.value();
          int po = 0;
          int pc = pa.length;
          byte coder = coder();
-@@ -2362,8 +2618,11 @@ public final class String
+@@ -2362,8 +2612,11 @@ public final class String
          // from immutable state
          int h = hash;
          if (h == 0 && !hashIsZero) {
@@ -7360,7 +7354,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
              if (h == 0) {
                  hashIsZero = true;
              } else {
-@@ -2454,8 +2713,17 @@ public final class String
+@@ -2454,8 +2707,17 @@ public final class String
       * {@code fromIndex} were larger than the string length, or were negative.
       */
      public int indexOf(int ch, int fromIndex) {
@@ -7380,7 +7374,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -2500,8 +2768,15 @@ public final class String
+@@ -2500,8 +2762,15 @@ public final class String
       */
      public int indexOf(int ch, int beginIndex, int endIndex) {
          checkBoundsBeginEnd(beginIndex, endIndex, length());
@@ -7398,7 +7392,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -2566,8 +2841,17 @@ public final class String
+@@ -2566,8 +2835,17 @@ public final class String
       *          if the character does not occur before that point.
       */
      public int lastIndexOf(int ch, int fromIndex) {
@@ -7418,7 +7412,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -2585,15 +2869,7 @@ public final class String
+@@ -2585,15 +2863,7 @@ public final class String
       *          or {@code -1} if there is no such occurrence.
       */
      public int indexOf(String str) {
@@ -7435,7 +7429,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -2627,7 +2903,30 @@ public final class String
+@@ -2627,7 +2897,30 @@ public final class String
       *          or {@code -1} if there is no such occurrence.
       */
      public int indexOf(String str, int fromIndex) {
@@ -7467,7 +7461,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -2660,7 +2959,30 @@ public final class String
+@@ -2660,7 +2953,30 @@ public final class String
              return indexOf(str.charAt(0), beginIndex, endIndex);
          }
          checkBoundsBeginEnd(beginIndex, endIndex, length());
@@ -7499,7 +7493,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -2685,7 +3007,13 @@ public final class String
+@@ -2685,7 +3001,13 @@ public final class String
              return fromIndex;
          }
  
@@ -7514,7 +7508,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          byte tgtCoder = tgtStr.coder();
          if (srcCoder == tgtCoder) {
              return srcCoder == LATIN1
-@@ -2736,7 +3064,27 @@ public final class String
+@@ -2736,7 +3058,27 @@ public final class String
       *          or {@code -1} if there is no such occurrence.
       */
      public int lastIndexOf(String str, int fromIndex) {
@@ -7543,7 +7537,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -2752,8 +3100,6 @@ public final class String
+@@ -2752,8 +3094,6 @@ public final class String
       */
      static int lastIndexOf(byte[] src, byte srcCoder, int srcCount,
                             String tgtStr, int fromIndex) {
@@ -7552,7 +7546,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          int tgtCount = tgtStr.length();
          /*
           * Check arguments; return immediately where possible. For
-@@ -2770,6 +3116,15 @@ public final class String
+@@ -2770,6 +3110,15 @@ public final class String
          if (tgtCount == 0) {
              return fromIndex;
          }
@@ -7568,7 +7562,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          if (srcCoder == tgtCoder) {
              return srcCoder == LATIN1
                  ? StringLatin1.lastIndexOf(src, srcCount, tgt, tgtCount, fromIndex)
-@@ -2832,8 +3187,16 @@ public final class String
+@@ -2832,8 +3181,16 @@ public final class String
              return this;
          }
          int subLen = endIndex - beginIndex;
@@ -7587,7 +7581,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -2892,6 +3255,12 @@ public final class String
+@@ -2892,6 +3249,12 @@ public final class String
          if (str.isEmpty()) {
              return this;
          }
@@ -7600,7 +7594,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          return StringConcatHelper.simpleConcat(this, str);
      }
  
-@@ -2926,8 +3295,14 @@ public final class String
+@@ -2926,8 +3289,14 @@ public final class String
       */
      public String replace(char oldChar, char newChar) {
          if (oldChar != newChar) {
@@ -7617,7 +7611,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
              if (ret != null) {
                  return ret;
              }
-@@ -2961,7 +3336,20 @@ public final class String
+@@ -2961,7 +3330,20 @@ public final class String
       *
       * @since 1.4
       */
@@ -7638,7 +7632,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          return Pattern.matches(regex, this);
      }
  
-@@ -3018,6 +3406,11 @@ public final class String
+@@ -3018,6 +3400,11 @@ public final class String
       * @since 1.4
       */
      public String replaceFirst(String regex, String replacement) {
@@ -7650,7 +7644,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          return Pattern.compile(regex).matcher(this).replaceFirst(replacement);
      }
  
-@@ -3062,6 +3455,11 @@ public final class String
+@@ -3062,6 +3449,11 @@ public final class String
       * @since 1.4
       */
      public String replaceAll(String regex, String replacement) {
@@ -7662,7 +7656,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          return Pattern.compile(regex).matcher(this).replaceAll(replacement);
      }
  
-@@ -3089,16 +3487,24 @@ public final class String
+@@ -3089,16 +3481,24 @@ public final class String
                  return replace(trgtStr.charAt(0), replStr.charAt(0));
              }
  
@@ -7693,7 +7687,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
              if (ret != null) {
                  return ret;
              }
-@@ -3113,6 +3519,17 @@ public final class String
+@@ -3113,6 +3513,17 @@ public final class String
                  throw new OutOfMemoryError("Required length exceeds implementation limit");
              }
  
@@ -7711,7 +7705,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
              StringBuilder sb = new StringBuilder(resultLen);
              sb.append(replStr);
              for (int i = 0; i < thisLen; ++i) {
-@@ -3122,6 +3539,27 @@ public final class String
+@@ -3122,6 +3533,27 @@ public final class String
          }
      }
  
@@ -7739,7 +7733,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      /**
       * Splits this string around matches of the given
       * <a href="../util/regex/Pattern.html#sum">regular expression</a>.
-@@ -3349,12 +3787,64 @@ public final class String
+@@ -3349,12 +3781,64 @@ public final class String
              // because the large split loop can usually not be inlined.
              return split(ch, limit, withDelimiters);
          }
@@ -7804,7 +7798,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      private String[] split(char ch, int limit, boolean withDelimiters) {
          int matchCount = 0;
          int off = 0;
-@@ -3489,6 +3979,11 @@ public final class String
+@@ -3489,6 +3973,11 @@ public final class String
       */
      @ForceInline
      static String join(String prefix, String suffix, String delimiter, String[] elements, int size) {
@@ -7816,7 +7810,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          int icoder = prefix.coder() | suffix.coder();
          long len = (long) prefix.length() + suffix.length();
          if (size > 1) { // when there are more than one element, size - 1 delimiters will be emitted
-@@ -3504,6 +3999,11 @@ public final class String
+@@ -3504,6 +3993,11 @@ public final class String
              icoder |= el.coder();
          }
          byte coder = (byte) icoder;
@@ -7828,7 +7822,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          // long len overflow check, char -> byte length, int len overflow check
          if (len < 0L || (len <<= coder) != (int) len) {
              throw new OutOfMemoryError("Requested string length exceeds VM limit");
-@@ -3632,8 +4132,29 @@ public final class String
+@@ -3632,8 +4126,29 @@ public final class String
       * @since   1.1
       */
      public String toLowerCase(Locale locale) {
@@ -7860,7 +7854,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -3712,8 +4233,18 @@ public final class String
+@@ -3712,8 +4227,18 @@ public final class String
       * @since   1.1
       */
      public String toUpperCase(Locale locale) {
@@ -7881,7 +7875,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -3772,8 +4303,16 @@ public final class String
+@@ -3772,8 +4297,16 @@ public final class String
       *          has no leading or trailing space.
       */
      public String trim() {
@@ -7900,7 +7894,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          return ret == null ? this : ret;
      }
  
-@@ -3804,8 +4343,16 @@ public final class String
+@@ -3804,8 +4337,16 @@ public final class String
       * @since 11
       */
      public String strip() {
@@ -7919,7 +7913,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          return ret == null ? this : ret;
      }
  
-@@ -3834,8 +4381,16 @@ public final class String
+@@ -3834,8 +4375,16 @@ public final class String
       * @since 11
       */
      public String stripLeading() {
@@ -7938,7 +7932,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          return ret == null ? this : ret;
      }
  
-@@ -3864,8 +4419,16 @@ public final class String
+@@ -3864,8 +4413,16 @@ public final class String
       * @since 11
       */
      public String stripTrailing() {
@@ -7957,7 +7951,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          return ret == null ? this : ret;
      }
  
-@@ -3917,7 +4480,53 @@ public final class String
+@@ -3917,7 +4474,53 @@ public final class String
       * @since 11
       */
      public Stream<String> lines() {
@@ -8012,7 +8006,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -3960,6 +4569,10 @@ public final class String
+@@ -3960,6 +4563,10 @@ public final class String
          if (isEmpty()) {
              return "";
          }
@@ -8023,7 +8017,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          Stream<String> stream = lines();
          if (n > 0) {
              final String spaces = " ".repeat(n);
-@@ -3973,13 +4586,19 @@ public final class String
+@@ -3973,13 +4580,19 @@ public final class String
      }
  
      private int indexOfNonWhitespace() {
@@ -8047,7 +8041,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -4075,6 +4694,10 @@ public final class String
+@@ -4075,6 +4688,10 @@ public final class String
          if (length == 0) {
              return "";
          }
@@ -8058,7 +8052,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          char lastChar = charAt(length - 1);
          boolean optOut = lastChar == '\n' || lastChar == '\r';
          List<String> lines = lines().toList();
-@@ -4197,6 +4820,10 @@ public final class String
+@@ -4197,6 +4814,10 @@ public final class String
          if (isEmpty()) {
              return "";
          }
@@ -8069,7 +8063,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          char[] chars = toCharArray();
          int length = chars.length;
          int from = 0;
-@@ -4307,9 +4934,13 @@ public final class String
+@@ -4307,9 +4928,13 @@ public final class String
       */
      @Override
      public IntStream chars() {
@@ -8085,7 +8079,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
              false);
      }
  
-@@ -4327,9 +4958,13 @@ public final class String
+@@ -4327,9 +4952,13 @@ public final class String
       */
      @Override
      public IntStream codePoints() {
@@ -8101,7 +8095,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
              false);
      }
  
-@@ -4341,8 +4976,13 @@ public final class String
+@@ -4341,8 +4970,13 @@ public final class String
       *          the character sequence represented by this string.
       */
      public char[] toCharArray() {
@@ -8117,7 +8111,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /**
-@@ -4548,6 +5188,9 @@ public final class String
+@@ -4548,6 +5182,9 @@ public final class String
       *          as its single character the argument {@code c}.
       */
      public static String valueOf(char c) {
@@ -8127,7 +8121,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          if (COMPACT_STRINGS && StringLatin1.canEncode(c)) {
              return new String(StringLatin1.toBytes(c), LATIN1);
          }
-@@ -4660,21 +5303,30 @@ public final class String
+@@ -4660,21 +5297,30 @@ public final class String
          if (count == 1) {
              return this;
          }
@@ -8162,7 +8156,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
          repeatCopyRest(multiple, 0, limit, len);
          return new String(multiple, coder);
      }
-@@ -4718,7 +5370,10 @@ public final class String
+@@ -4718,7 +5364,10 @@ public final class String
       * @param coder     the coder of dst[]
       */
      void getBytes(byte[] dst, int dstBegin, byte coder) {
@@ -8174,7 +8168,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
              System.arraycopy(value, 0, dst, dstBegin << coder, value.length);
          } else {    // this.coder == LATIN && coder == UTF16
              StringLatin1.inflate(value, 0, dst, dstBegin, value.length);
-@@ -4738,7 +5393,10 @@ public final class String
+@@ -4738,7 +5387,10 @@ public final class String
       * @param length    the amount of copied chars
       */
      void getBytes(byte[] dst, int srcPos, int dstBegin, byte coder, int length) {
@@ -8186,7 +8180,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
              System.arraycopy(value, srcPos << coder, dst, dstBegin << coder, length << coder);
          } else {    // this.coder == LATIN && coder == UTF16
              StringLatin1.inflate(value, srcPos, dst, dstBegin, length);
-@@ -4758,18 +5416,26 @@ public final class String
+@@ -4758,18 +5410,26 @@ public final class String
          if (len == 0) {
              this.value = "".value;
              this.coder = "".coder;
@@ -8222,7 +8216,7 @@ index 5c234d4dfacac9e642578483640d4e6b41488beb..78b627830758f042fcfa75e9de99d82d
      }
  
      /*
-@@ -4779,42 +5445,157 @@ public final class String
+@@ -4779,42 +5439,157 @@ public final class String
      String(AbstractStringBuilder asb, Void sig) {
          byte[] val = asb.getValue();
          int length = asb.length();
