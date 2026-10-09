@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "jdk.internal.util.ArraysSupport.vectorizedHashCode (T_BOOLEAN, the StringLatin1.hashCode polynomial) and java.lang.StringCoding.countPositives, jdk-21+35 in-tree",
+      "source_commit": "890adb6410",
+      "target": "java.lang.M3StringFacts.scanLatin1: javaHash/asciiLowerHash/asciiUpperHash from the vectorized hash over raw and case-folded bytes, asciiTitleHash derived exactly (lower + 31^(n-1) * (upper(u0) - lower(u0))), ascii and utf8Length from countPositives",
+      "status": "implemented-locally-verified (G7; flag-off: M3StringFactsLatin1LaneTest 85,085 checks, every field identical to scanUnits over random Latin-1 atoms, tuples and slices)",
+      "target_rule": "every fact bit-identical to the A8 unit scan; signal functions unchanged"
+    },
+    {
+      "source": "java.lang.M3StringFacts.scan: the A8 single pass over widened char windows (SCAN_WINDOW 1024), 8..10 ns per unit for every coder (A13, 01054f2600)",
+      "source_commit": "01054f2600",
+      "target": "scan dispatches on the owner's coder: Latin-1 owners take scanLatin1 (bulk getBytes, front/back trim and strip scans over a Character.isWhitespace table, no surrogate logic, n-gram mixing per unit); UTF-16 owners keep scanUnits",
+      "status": "implemented-locally-verified (Latin-1 facts 1.9x..2.0x faster from 256 units, 5 ns/unit; UTF-16 unchanged)",
+      "target_rule": "the empty owner and every UTF-16 owner route to the retained unit scan"
+    }
+  ]
+}
