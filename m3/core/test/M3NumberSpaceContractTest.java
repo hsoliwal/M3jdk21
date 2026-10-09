@@ -31,6 +31,15 @@ public final class M3NumberSpaceContractTest {
         check(space.number(0).encoding() == LocalM3StringPiece.Encoding.UTF16_LE);
         check(space.spelling(10_000).equals("10000"));
         check(space.parse(new View("10000")) == space.number(10_000));
+        for (int value = M3NumberSpace.MIN_VALUE; value <= M3NumberSpace.MAX_VALUE; value++) {
+            String canonical = Integer.toString(value);
+            check(space.parse(new View(canonical)) == space.number(value));
+        }
+        expect(IndexOutOfBoundsException.class, () -> space.number(-1));
+        expect(IndexOutOfBoundsException.class, () -> space.number(10_001));
+        expect(NumberFormatException.class, () -> space.parse(new View("")));
+        expect(NumberFormatException.class, () -> space.parse(new View("01")));
+        expect(NumberFormatException.class, () -> space.parse(new View("10001")));
 
         String manifest = Files.readString(
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
@@ -60,6 +69,15 @@ public final class M3NumberSpaceContractTest {
         check(targetColumns[9].equals("ADMITTED_TYPED_RECEIVER"));
         check(targetColumns[10].equals(M3NumberSpace.SOURCE_REVISION));
         System.out.println("M3JDK_NUMBER_CONTRACT_PASS checks=" + checks + " fields=7");
+    }
+
+    private static void expect(Class<? extends Throwable> type, Runnable action) {
+        try {
+            action.run();
+            throw new AssertionError("missing " + type.getName());
+        } catch (Throwable failure) {
+            check(type.isInstance(failure));
+        }
     }
 
     private static final class View implements CharSequence {
