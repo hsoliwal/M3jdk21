@@ -39,7 +39,7 @@ target_evidence:
 
 verification:
   source_discriminator_command: python m3/runtime-integration/check-synexia-si-unit-proof-receipt.py --repo-root .
-  source_discriminator: M3_SI_UNIT_PROOF_RECEIPT_SOURCE_PASS checks=40/40|runtime=NOT_RUN
+  source_discriminator: M3_SI_UNIT_PROOF_RECEIPT_SOURCE_PASS checks=41/41|runtime=NOT_RUN
   required_runtime_marker: M3JDK_SI_UNIT_PASS
   required_modes: jit,int,nocompact,c2
   runtime: NOT_RUN
