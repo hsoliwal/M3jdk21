@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.M3String.hashCodeValue: a range that is not a whole owner computes its full M3StringFacts (n-gram signals and every hash) to read javaHash (A4/A8 lineage, carried to A22 114f040998)",
+      "source_commit": "114f040998",
+      "target": "hashCodeValue keeps owner.javaHash for a whole owner and prepared range facts' javaHash, and otherwise bulkJavaHash folds the String.hashCode polynomial over the range's units read in 4096-unit bulk windows with ArraysSupport.vectorizedHashCode (T_BOOLEAN over Latin-1 bytes, T_CHAR over chars); the facts are not computed for the hash alone",
+      "status": "implemented-locally-verified (G7; flag-off: M3HashRangeTest 920 checks: the hash equals the flat String's hashCode and the facts' javaHash before and after preparation; fresh-range hashing 6x..67x faster, at the flat substring's cost)",
+      "target_rule": "the value is the stock String.hashCode polynomial over the same UTF-16 units; String.hash caching is unchanged"
+    }
+  ]
+}

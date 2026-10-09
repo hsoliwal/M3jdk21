@@ -1,0 +1,87 @@
+{
+  "schema": "M3JDK21_SYNEXIA_HASH_RANGE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-hash-range-20261009",
+    "pullRequest": null,
+    "commit": "4d6d1b83f43",
+    "stackedOn": [
+      {
+        "pullRequest": 10012,
+        "crate": "m3-builder-append-m3"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.HashRange",
+    "crate": "m3-hash-range",
+    "fossReuseDecisionRow": "string.hash.range-without-facts",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/StringLatin1.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3String.bulkJavaHash",
+        "mechanics": "the vectorized hash fold over Latin-1 bytes (T_BOOLEAN)"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringUTF16.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3String.bulkJavaHash",
+        "mechanics": "the vectorized hash fold over UTF-16 units (T_CHAR over a char window)"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "commit": "114f040998",
+        "target": "java.lang.M3String.hashCodeValue",
+        "mechanics": "the A11 bulk getBytes/getChars in 4096-unit windows"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: the value is identical to the flat String's hashCode and to the facts' javaHash; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-tq-bulk-scan-20261009 (#567, A22) on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3String"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed under the supersession model: no upstream target changed, runtime.patch and every after image untouched; M3String.java owner recorded as superseded; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "c437c18fd0aef8044d8086993d09e6b2e7c689e44564c02ef2cd4da9feaf2dd9",
+      "after": "6121d4d26970790bad079f252d020cf448ec8b9ab9b0821d7a53f9f404a6e119",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3HashRangeTest.java",
+      "before": "ABSENT",
+      "after": "34d2ab1e8bfe6cbf1e3ab6df45998a2770a3dd56251368b72e75257f2db8a999",
+      "resource": "01-M3HashRangeTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 151 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3HashRangeTest flag-off: 920 checks (hashCode before and after the facts are prepared, the facts' javaHash, HashMap lookups with M3 keys against flat keys, equals; atoms, nested tuples and slices of padded owners with Latin-1 bytes above 0x7f, Latin-1 spellings inside UTF-16 owners and surrogates; 0..20000 units across the 4096-unit window)",
+    "regressions": "PASS_WINDOWS M3BuilderAppendTest 3,042; M3NeedleArgTest 73,440; M3RegexSubjectViewTest 9,567; M3TQFactsBuildTest 23,595; M3RegexLiteralGateTest 29,376; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,919; A6 204 + 29",
+    "timing": "flag-off (a23/probe/HashSliceBench, bench-baseline.tsv on the A22 build vs bench-after.tsv): hashCode of a fresh range 16 units atom 259 ns -> 42 (flat 18), 256: 2,608 -> 70 (flat 33), 2048: 21,706 -> 322 (flat 212), UTF-16 2048: 23,219 -> 562 (flat 277); tuples alike; 16384-unit ranges cycling through the 4-slot facts cache 641 -> 2,243 (flat 2,015: the cache is no longer populated by hashing); whole fresh owner 97 ns unchanged",
+    "g8RuntimeRecipe": "PASS_WINDOWS supersession model, no upstream change; apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3HashRangeRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3HashRangeTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the hash of a range is the stock String.hashCode polynomial over its UTF-16 units, folded from 4096-unit bulk windows; it equals the facts' javaHash whenever the facts exist",
+    "hashing no longer prepares range facts: a repeatedly hashed range coordinate pays the flat substring's cost per String instance instead of a 4-slot cache hit (String.hash still caches per instance); gates keep consulting factsIfPrepared and compute nothing",
+    "a whole owner keeps its admission-time javaHash (O(1))",
+    "stacked on A22: merge after #567 and the Synexia crate PR (#10012 first, content-bearing merges)"
+  ]
+}
