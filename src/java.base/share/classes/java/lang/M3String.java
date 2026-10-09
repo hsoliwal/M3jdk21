@@ -22,6 +22,7 @@ import java.util.Spliterator;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
+import jdk.internal.util.ArraysSupport;
 import sun.nio.cs.ArrayEncoder;
 
 /**
@@ -595,7 +596,39 @@ final class M3String implements CharSequence {
     }
 
     int hashCodeValue() {
-        return isWholeOwner() ? owner.javaHash : facts().javaHash;
+        if (isWholeOwner()) return owner.javaHash;
+        M3StringFacts prepared = factsIfPrepared();
+        return prepared != null ? prepared.javaHash : bulkJavaHash();
+    }
+
+    /** Units per window when the Java hash is folded from a bulk read. */
+    private static final int HASH_WINDOW = 4096;
+
+    /**
+     * The String.hashCode polynomial over this range's units read in bulk windows (A23): the
+     * facts are not computed for the hash alone, and the consumers that need them prepare them
+     * later. The value equals the facts' javaHash and a flat String's hashCode of the same
+     * spelling (the stock StringLatin1/StringUTF16 folds).
+     */
+    private int bulkJavaHash() {
+        int length = length();
+        int hash = 0;
+        if (coder() == String.LATIN1) {
+            byte[] window = new byte[Math.min(length, HASH_WINDOW)];
+            for (int from = 0; from < length; from += window.length) {
+                int count = Math.min(window.length, length - from);
+                getBytes(window, from, 0, String.LATIN1, count);
+                hash = ArraysSupport.vectorizedHashCode(window, 0, count, hash, ArraysSupport.T_BOOLEAN);
+            }
+            return hash;
+        }
+        char[] window = new char[Math.min(length, HASH_WINDOW)];
+        for (int from = 0; from < length; from += window.length) {
+            int count = Math.min(window.length, length - from);
+            getChars(from, from + count, window, 0);
+            hash = ArraysSupport.vectorizedHashCode(window, 0, count, hash, ArraysSupport.T_CHAR);
+        }
+        return hash;
     }
 
     /**
