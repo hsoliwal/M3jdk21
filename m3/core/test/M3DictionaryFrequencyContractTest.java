@@ -19,10 +19,10 @@ public final class M3DictionaryFrequencyContractTest {
 
     private static String[] row(String manifest, String sourceId) {
         return Arrays.stream(manifest.split("\\n", -1))
-                .filter(line -> line.startsWith(sourceId + "\\t"))
+                .filter(line -> line.startsWith(sourceId + "\t"))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError(sourceId + " manifest row missing"))
-                .split("\\t", -1);
+                .split("\t", -1);
     }
 
     public static void main(String[] args) throws Exception {
