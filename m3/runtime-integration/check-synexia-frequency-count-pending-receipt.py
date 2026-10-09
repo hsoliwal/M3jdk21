@@ -113,7 +113,7 @@ def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
         SourceCheck("recipeMappingRecipe", _SOURCE_MAPPING_RECIPE_PATH in recipe and _SOURCE_MAPPING_RECIPE_BLOB in recipe),
         SourceCheck("recipeMappingOpen", "state: OPEN" in recipe and "remains OPEN" in recipe),
         SourceCheck("recipeNoPromotion", "BLOCKED_UNTIL_SOURCE_PR_ACCEPTED" in recipe and "remain blocked until Synexia PR #10047 is accepted" in recipe),
-        SourceCheck("recipeMarker", "M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=44/44" in recipe),
+        SourceCheck("recipeMarker", "M3_FREQUENCY_COUNT_PENDING_SOURCE_PASS checks=45/45" in recipe),
     )
 
 
