@@ -4138,7 +4138,7 @@ public final class String
     public String toLowerCase(Locale locale) {
         Objects.requireNonNull(locale);
         M3String storage = m3();
-        if (storage != null && asciiCaseMappingLocale(locale)) {
+        if (storage != null && locale.equals(Locale.ROOT)) {
             M3StringFacts prepared = storage.facts();
             if (prepared.ascii) {
                 M3String mapped = storage.asciiCase(false);
@@ -4148,17 +4148,6 @@ public final class String
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.toLowerCase(this, currentValue, locale)
                           : StringUTF16.toLowerCase(this, currentValue, locale);
-    }
-
-    /**
-     * Locales whose case mapping of ASCII text is the plain ASCII mapping: every language except
-     * Turkish, Azeri and Lithuanian, the same languages {@code StringLatin1} routes to the
-     * locale-dependent mapping. Lets M3 Strings with ASCII facts map in place for the default
-     * locale instead of materializing a byte shadow.
-     */
-    private static boolean asciiCaseMappingLocale(Locale locale) {
-        String lang = locale.getLanguage();
-        return lang != "tr" && lang != "az" && lang != "lt";
     }
 
     /**
@@ -4239,7 +4228,7 @@ public final class String
     public String toUpperCase(Locale locale) {
         Objects.requireNonNull(locale);
         M3String storage = m3();
-        if (storage != null && asciiCaseMappingLocale(locale)) {
+        if (storage != null && locale.equals(Locale.ROOT)) {
             M3StringFacts prepared = storage.facts();
             if (prepared.ascii) {
                 M3String mapped = storage.asciiCase(true);
