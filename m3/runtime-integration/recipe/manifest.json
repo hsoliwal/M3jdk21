@@ -2,7 +2,7 @@
   "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
-  "target_commit": "057e92ecb3945b2953bd324a715b5edb4fc21274",
+  "target_commit": "85b27faba2d759155596d24d32a4c4523cf6a3df",
   "patch_sha256": "9e42a3f7e2bb1fb6fc9c2698285876adb1bd92c0a5eb88e2235eb7b09a455957",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
@@ -93,7 +93,8 @@
         "f88c545538e250c057809d86cb0727cbeb07bed69508b0c85197b0084247fa5c",
         "24ac1f87c1b2022b08d695ae6b116e9376dad59ed0ffb86f52da0003dd3e036d",
         "9f51f5ef71c86e0f98a6e0ad7d1efbb24df49a43b2a026ef55457cdc921cba08",
-        "3480c1d89c6137e771049ec9e9a66f6dd58c2efa3a1f608d49a8be6a3818c3e6"
+        "3480c1d89c6137e771049ec9e9a66f6dd58c2efa3a1f608d49a8be6a3818c3e6",
+        "bb34e805a81e01eb098721b30e34182f823ebd3396046aba05afcf38f38cf6bf"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringAtom.java": {
@@ -101,7 +102,8 @@
       "after": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f",
       "superseded": [
         "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f",
-        "f0bda25831e87d6b1339e8b8931cb2ac0ce7a543f4fd9ef7ea02e6837fc62d7e"
+        "f0bda25831e87d6b1339e8b8931cb2ac0ce7a543f4fd9ef7ea02e6837fc62d7e",
+        "b742092ca0d9453df581fc7d4605627e886dcae0c7ac72dbac32b0dc3cde315e"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java": {
@@ -124,7 +126,8 @@
       "after": "57c50151826d2b1e04964a0a573cfd4046e868637dec8f3d428c9b8e33762697",
       "superseded": [
         "57c50151826d2b1e04964a0a573cfd4046e868637dec8f3d428c9b8e33762697",
-        "39d1e0b1a98be4129ad206823922b51838daecb71069a14dde8f54a4f98e0515"
+        "39d1e0b1a98be4129ad206823922b51838daecb71069a14dde8f54a4f98e0515",
+        "2e3ee9d888fb426703dea98216a204632fb084ecda04a9d4ee4dd92c2552094e"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringOwner.java": {
