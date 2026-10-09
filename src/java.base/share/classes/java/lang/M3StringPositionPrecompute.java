@@ -18,8 +18,8 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
  * {@link M3StringFacts}. Negative block tests may skip exact work; positive blocks always perform
  * exact UTF-16 comparison. Entries weakly key canonical owner+coordinate and retain only primitive
  * block masks: an exact block keys each mask by the block-relative offset of a unit's first
- * occurrence and reads that unit back from the canonical text, so no code unit is stored twice
- * (invariant 6: no second spelling store).</p>
+ * occurrence and retains only the bounded sorted unit table, offsets and masks; it never retains
+ * a full second spelling array (invariant 6: no second full-text spelling store).</p>
  */
 final class M3StringPositionPrecompute {
     private static final int BLOCK_SHIFT = 6;
@@ -30,6 +30,8 @@ final class M3StringPositionPrecompute {
     private static final int SLOT_MASK = SLOTS - 1;
     private static final int MIN_SOURCE_UNITS = 256;
     private static final int MAX_SOURCE_UNITS = 32_768;
+    private static final long EXACT_BLOCK_BYTES =
+            MAX_SOURCE_UNITS * (Character.BYTES + Long.BYTES);
 
     private static final AtomicReferenceArray<Entry> CACHE =
             new AtomicReferenceArray<>(SLOTS);
@@ -128,7 +130,7 @@ final class M3StringPositionPrecompute {
                 (MAX_SOURCE_UNITS + BLOCK_MASK) >>> BLOCK_SHIFT;
         long signalBytes = (long) SLOTS * blocksPerEntry * Long.BYTES;
         long exactBytes =
-                (long) SLOTS * MAX_SOURCE_UNITS * (Byte.BYTES + Long.BYTES);
+                (long) SLOTS * (EXACT_BLOCK_BYTES + MAX_SOURCE_UNITS * Byte.BYTES);
         return Math.addExact(signalBytes, exactBytes);
     }
 
