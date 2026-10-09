@@ -9,15 +9,16 @@ import java.util.Objects;
  * Composes one concrete backport packet into the canonical M3 lifecycle DAG.
  *
  * <p>The generic canonical {@code recipe-crate} node is replaced by the packet's immutable recipe
- * atoms. Packet roots depend on {@code a3-preparation}, which itself follows exact file-delta
- * inventory; packet-local dependencies remain packet-local;
+ * atoms. Packet roots depend on {@code a3-fixed-point-proof}, which follows exact file-delta
+ * inventory and the canonical A3 atomization -> pattern/IOP -> documentation proof chain;
+ * packet-local dependencies remain packet-local;
  * all terminal packet atoms rejoin at {@code recipe-junit}. Every later canonical verification and
  * the single serial promotion node are preserved.</p>
  */
 public final class M3PacketDagComposer {
     private static final String GENERIC_RECIPE = "recipe-crate";
     private static final String FILE_DELTA = "file-delta";
-    private static final String A3_PREPARATION = "a3-preparation";
+    private static final String A3_FIXED_POINT = "a3-fixed-point-proof";
     private static final String RECIPE_JUNIT = "recipe-junit";
 
     private M3PacketDagComposer() {}
@@ -43,7 +44,7 @@ public final class M3PacketDagComposer {
         M3BackportPacket checkedPacket = Objects.requireNonNull(packet, "packet");
         checkedDag.require(GENERIC_RECIPE);
         checkedDag.require(FILE_DELTA);
-        checkedDag.require(A3_PREPARATION);
+        checkedDag.require(A3_FIXED_POINT);
         checkedDag.require(RECIPE_JUNIT);
 
         ArrayList<M3DagNode> nodes = new ArrayList<>();
@@ -93,7 +94,7 @@ public final class M3PacketDagComposer {
                             atom.scopePromotionApproved(),
                             atom.workRef(),
                             atom.dependsOn().isEmpty()
-                                    ? List.of(A3_PREPARATION)
+                                    ? List.of(A3_FIXED_POINT)
                                     : atom.dependsOn().stream()
                                             .map(M3PacketDagComposer::nodeId)
                                             .toList()));
