@@ -51,7 +51,23 @@ public final class AcronymSidecarCatalogTest {
                     + "\tAPI\tduplicate\tcomputing\n").getBytes(UTF_8));
             expectIllegal(() -> AcronymSidecarCatalog.open(directory), "checksum drift");
 
-            System.out.println("M3_ACRONYM_SIDECAR_CATALOG_PASS rows=2 checks=6");
+            byte[] malformedPrefix = (header + "dictlang.acronyms\tAPI\tsynexia-acronym-1\t"
+                    + owner + "\tAPI\t").getBytes(UTF_8);
+            byte[] malformedSuffix = new byte[] {(byte) 0xc3, (byte) 0x28, (byte) '\t', 'x', (byte) '\n'};
+            byte[] malformed = new byte[malformedPrefix.length + malformedSuffix.length];
+            System.arraycopy(malformedPrefix, 0, malformed, 0, malformedPrefix.length);
+            System.arraycopy(malformedSuffix, 0, malformed, malformedPrefix.length,
+                    malformedSuffix.length);
+            Files.write(directory.resolve(AcronymSidecarCatalog.DATA_FILE), malformed);
+            Files.writeString(directory.resolve(AcronymSidecarCatalog.INDEX_FILE),
+                    "schema_version\tfile\trows\tsha256\n"
+                            + "m3lex-acronym-v1\tsynexia.acronyms.tsv\t1\t"
+                            + HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256")
+                                    .digest(malformed)) + "\n",
+                    UTF_8);
+            expectIllegal(() -> AcronymSidecarCatalog.open(directory), "malformed UTF-8");
+
+            System.out.println("M3_ACRONYM_SIDECAR_CATALOG_PASS rows=2 checks=7");
         } finally {
             Files.walk(directory)
                     .sorted(java.util.Comparator.reverseOrder())
