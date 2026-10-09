@@ -376,7 +376,53 @@ final class M3StringAtom extends M3StringOwner {
             return mismatchBytes(address + ((long) start << 1), flat,
                     BYTE_BASE + ((long) flatOffset << 1), count, 1);
         }
+        if (count >= BULK && (storageWidth == 1 || bigEndian == NATIVE_BIG_ENDIAN)) {
+            // The other coder (A30): the flat window is brought into the storage coder by the
+            // stock inflate or compress intrinsic and compared in place by the vectorized
+            // mismatch; a flat UTF-16 window holding a unit above 0xff keeps the per-unit loop
+            // for that window (such a unit never equals a Latin-1 storage byte).
+            return storageWidth == 1
+                    ? mismatchNarrowAgainstUtf16(start, flat, flatOffset, count)
+                    : mismatchWideAgainstLatin1(start, flat, flatOffset, count);
+        }
         return super.mismatchUnits(start, flat, flatOffset, flatCoder, count);
+    }
+
+    /** Latin-1 storage against a UTF-16 flat value: each flat window compressed, then in place. */
+    private int mismatchNarrowAgainstUtf16(int start, byte[] flat, int flatOffset, int count) {
+        byte[] narrow = new byte[Math.min(count, WINDOW)];
+        long source = address + start;
+        for (int done = 0; done < count; ) {
+            int chunk = Math.min(narrow.length, count - done);
+            int flatBase = flatOffset + done;
+            if (StringUTF16.compress(flat, flatBase, narrow, 0, chunk) == chunk) {
+                int index = mismatchBytes(source + done, narrow, BYTE_BASE, chunk, 0);
+                if (index >= 0) return done + index;
+            } else {
+                for (int index = 0; index < chunk; index++) {
+                    if ((UNSAFE.getByte(source + done + index) & 0xff) != StringUTF16.getChar(flat, flatBase + index)) {
+                        return done + index;
+                    }
+                }
+            }
+            done += chunk;
+        }
+        return -1;
+    }
+
+    /** UTF-16 storage (native byte order) against a Latin-1 flat value: each flat window inflated, then in place. */
+    private int mismatchWideAgainstLatin1(int start, byte[] flat, int flatOffset, int count) {
+        byte[] wide = new byte[Math.min(count << 1, WINDOW)];
+        int perWindow = wide.length >> 1;
+        long source = address + ((long) start << 1);
+        for (int done = 0; done < count; ) {
+            int chunk = Math.min(perWindow, count - done);
+            StringLatin1.inflate(flat, flatOffset + done, wide, 0, chunk);
+            int index = mismatchBytes(source + ((long) done << 1), wide, BYTE_BASE, chunk, 1);
+            if (index >= 0) return done + index;
+            done += chunk;
+        }
+        return -1;
     }
 
     /** {@code ArraysSupport.mismatch} shape over an absolute address and a heap array. */
