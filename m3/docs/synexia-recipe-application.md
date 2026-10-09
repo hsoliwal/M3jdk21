@@ -311,3 +311,34 @@ The target-local `M3StringHistoryConvergence` descriptor, hash-pinned Java/text 
 fixed-point recipe test are absent from M3JDK21. M3JDK21 retains only the applied product,
 target-native verification and this receipt. Runtime ownership remains M3JDK21; recipe ownership
 remains Synexia; runtime dependency on Synexia remains false.
+
+
+## Consolidated focused String recipe custody — Synexia PR #10004
+
+The focused String recipes that had been stranded on side branches / older recipe layouts are now
+consolidated on the current Synexia A19 recipe line.
+
+Canonical Synexia handoff:
+
+- repository: `hsoliwal/com.synexia`
+- PR: https://github.com/hsoliwal/com.synexia/pull/10004
+- branch: `codex/m3-string-recipe-custody-consolidation-20261009`
+- base: `codex/m3-tq-facts-radix-20261009` (A19)
+- runtime owner remains: **M3JDK21**
+- runtime dependency on Synexia: **false**
+
+Restored canonical recipe families:
+
+- `m3-translate-escapes`
+- `m3-valueof-char`
+- `m3-deprecated-getbytes-bulk`
+- `m3jdk21-string-adaptive-search`
+- `m3jdk21-string-position-masks`
+
+The consolidation also reconciles the current String-history convergence postimages and registry.
+M3JDK21 retains the applied runtime implementation and target-native tests only. Reusable recipe
+evolution remains in `com.synexia/synexia-openrewrite-recipes`.
+
+The locale language value-equality repair remains separately fail-closed under Synexia PR #9981
+because it is pinned to a different target preimage; it must not be silently folded across that
+source seal.
