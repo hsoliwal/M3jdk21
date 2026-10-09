@@ -25,7 +25,7 @@ def main() -> int:
     assert all(row["admission"] == "REFERENCE_ONLY" for row in rows)
     assert all(row["target_status"] == "TARGET_CONTRACT_OPEN_NO_PAYLOAD" for row in rows)
     assert all(row["source_pr"] == "10054" for row in rows)
-    assert all(row["source_head"] == "f902c48e0e9300a345a679b856950387f7b8cbf9" for row in rows)
+    assert all(row["source_head"] == "b1cbc312d6644b6c886f84b3baac2ed0fbc3aa72" for row in rows)
     assert all(row["target_map_path"] == "m3/lexicon/synexia-instance-target-map.tsv"
                for row in rows)
     assert all(row["target_map_blob"] == "5ea190d703ebfe37f91ec63a076e820ccae350e4"
