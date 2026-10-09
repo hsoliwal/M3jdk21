@@ -219,12 +219,12 @@ class SynexiaExportTest(unittest.TestCase):
     def test_reviewed_source_manifest_has_explicit_owner_field_coverage(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
         self.assertEqual(10, len(sources))
-        self.assertEqual(12, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
-        self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
-        self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
+        self.assertEqual(13, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
+        self.assertEqual(16, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
+        self.assertEqual(24, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
-        self.assertEqual("", sources["translate.rows"]["precompute_fields"])
-        self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        self.assertEqual("translation_grammar_supported", sources["translate.rows"]["precompute_fields"])
+        self.assertEqual(8, len(sources["dictlang.numbers.0-10000"]["precompute_fields"].split(",")))
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
@@ -232,7 +232,7 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8", newline="") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
         mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
-        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]"}
+        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]", "byte[]", "String"}
         field_types: dict[str, str] = {}
         for row in rows:
             self.assertIn(row["donor_java_type"], allowed_types)
@@ -244,8 +244,20 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("double", field_types["si_offset"])
         self.assertEqual("boolean", field_types["si_prefixable"])
         self.assertTrue(all(field_types.values()))
+        self.assertEqual("String", field_types["source_revision"])
+        self.assertEqual("String", field_types["lexeme"])
+        self.assertEqual("int", field_types["min_value"])
+        self.assertEqual("boolean", field_types["shared_utf16_storage"])
+        rich_map = ROOT / "m3/lexicon/synexia-nonprimitive-precompute-field-map.tsv"
+        with rich_map.open(encoding="utf-8", newline="") as stream:
+            rich_rows = list(csv.DictReader(stream, delimiter="\t"))
+        self.assertTrue(any(row["donor_java_type"] == "Map<String,int[]>" for row in rich_rows))
+        self.assertTrue(any(row["donor_java_type"] == "byte[]" for row in rich_rows))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
-                          "dictlang.thesaurus", "dictlang.antonyms"):
+                          "dictlang.thesaurus", "dictlang.antonyms",
+                          "dictlang.huggingface", "unicodex.langdex.lexemes",
+                          "translate.rows", "dictlang.si-units",
+                          "dictlang.numbers.0-10000"):
             required = set(sources[source_id]["precompute_fields"].split(","))
             self.assertTrue(required.issubset(mapped), source_id)
 
@@ -261,28 +273,42 @@ class SynexiaExportTest(unittest.TestCase):
                 "\t".join(EXPORT.MANIFEST_COLUMNS_V2) + "\n"
                 + "\t".join((source_id, "LangDex lexemes", source_path, "lexeme_id",
                               "glottocode,lemma,source,concept_id",
-                              "M3StringFacts + LangDexCoordinate", "CC-BY-SA-3.0",
+                              "M3LangDexPrecompute.Entry + M3LangDexPrecompute.TranslationIdentity + M3LangDexPrecompute.Translation", "CC-BY-SA-3.0",
                               "fixture", requirement)) + "\n",
                 encoding="utf-8",
             )
             payload = {
+                "langdex_canonical_bytes": [98, 111, 110, 106, 111, 117, 114],
+                "langdex_canonical_digest": "0" * 64,
+                "langdex_canonical_schema": "fixture-v1",
                 "langdex_concept_id": 42,
                 "langdex_confidence_permille": 950,
+                "langdex_domain": "CONCEPT",
                 "langdex_evidence_mask": 3,
                 "langdex_feature_bits": 7,
                 "langdex_flags": 1,
                 "langdex_frequency": 9,
+                "langdex_glottocode": "fra",
                 "langdex_lexical_class_mask": 1,
+                "langdex_record_id": "17",
                 "langdex_semantic_class_mask": 2,
+                "langdex_source_glottocode": "fra",
+                "langdex_source_id": "unicodex.langdex.lexemes",
+                "langdex_source_revision": "fixture-v1",
+                "langdex_source_surface": "bonjour",
                 "langdex_subject_id": 4,
+                "langdex_surface": "bonjour",
+                "langdex_target_glottocode": "eng",
                 "langdex_target_lexeme_id": 77,
+                "langdex_target_surface": "hello",
+                "lemma": "bonjour",
             }
             records = root / "records.tsv"
             records.write_text(
                 "\t".join(EXPORT.RECORD_COLUMNS_V2) + "\n"
                 + "\t".join((source_id, source_path, "lexeme", "x-glotto-abcd1234",
                               "17", "bonjour", "concept:42", "BONJOUR", "-",
-                              "M3StringFacts + LangDexCoordinate",
+                              "M3LangDexPrecompute.Entry + M3LangDexPrecompute.TranslationIdentity + M3LangDexPrecompute.Translation",
                               json.dumps(payload, separators=(",", ":")))) + "\n",
                 encoding="utf-8",
             )
@@ -294,7 +320,7 @@ class SynexiaExportTest(unittest.TestCase):
                 delimiter="\t"))[0]
             self.assertEqual(payload, json.loads(mapping["precompute_payload"]))
             export_manifest = json.loads((output / "synexia.export.json").read_text(encoding="utf-8"))
-            self.assertEqual(10, len(export_manifest["source"]["precompute_fields"][source_id]))
+            self.assertEqual(24, len(export_manifest["source"]["precompute_fields"][source_id]))
             self.assertEqual("long", export_manifest["source"]["precompute_field_types"]["langdex_concept_id"])
             self.assertEqual("int", export_manifest["source"]["precompute_field_types"]["langdex_flags"])
             VERIFY.verify(output)
