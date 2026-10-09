@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.StringMatchesJavadocRepair
+displayName: Repair String.matches Javadoc ownership
+description: >
+  Exact FILE-local repair that restores the existing String.matches Javadoc after the private
+  conservative-regex helper without changing method bodies, API, or runtime behavior.
+recipeList:
+  - com.m3.rewrite.backport.M3StringMatchesJavadocRepairRecipe
