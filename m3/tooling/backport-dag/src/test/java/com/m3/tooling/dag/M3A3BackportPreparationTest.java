@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.tooling.dag;
 
+import com.synexia.rewrite.M3RecipeMasteryPortableReceipt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -41,7 +42,8 @@ final class M3A3BackportPreparationTest {
                         root.resolve("m3/build/backport-preparation"),
                         List.of(
                                 "src/hotspot/share/example/native.cpp",
-                                "src/java.base/share/classes/example/Converged.java"));
+                                "src/java.base/share/classes/example/Converged.java"),
+                        mastery());
 
         assertEquals(2, receipt.rows().size());
         assertEquals(1, receipt.javaFiles());
@@ -90,7 +92,8 @@ final class M3A3BackportPreparationTest {
                         M3A3BackportPreparation.prepare(
                                 root,
                                 root.resolve("m3/build/out"),
-                                List.of()));
+                                List.of(),
+                                mastery()));
 
         assertThrows(
                 IllegalArgumentException.class,
@@ -98,7 +101,8 @@ final class M3A3BackportPreparationTest {
                         M3A3BackportPreparation.prepare(
                                 root,
                                 root.resolve("m3/build/out"),
-                                List.of("../escape.java")));
+                                List.of("../escape.java"),
+                                mastery()));
 
         assertThrows(
                 java.io.IOException.class,
@@ -106,7 +110,35 @@ final class M3A3BackportPreparationTest {
                         M3A3BackportPreparation.prepare(
                                 root,
                                 root.resolve("m3/build/out"),
-                                List.of("src/java.base/share/classes/example/Missing.java")));
+                                List.of("src/java.base/share/classes/example/Missing.java"),
+                                mastery()));
+    }
+
+    @Test
+    void preparationRequiresVerifiedMasteryEvidenceBeforeAnyJavaCandidate() throws Exception {
+        Path root = Files.createTempDirectory("m3-a3-backport-mastery-required-");
+        Path java = root.resolve("src/java.base/share/classes/example/Converged.java");
+        Files.createDirectories(java.getParent());
+        Files.writeString(
+                java,
+                """
+                package example;
+                final class Converged {
+                    private static int compute(int a, int b) {
+                        return (a + b) * 31;
+                    }
+                }
+                """);
+
+        assertThrows(
+                NullPointerException.class,
+                () ->
+                        M3A3BackportPreparation.prepare(
+                                root,
+                                root.resolve("m3/build/out"),
+                                List.of("src/java.base/share/classes/example/Converged.java"),
+                                null));
+        assertFalse(Files.exists(root.resolve("m3/build/out/a3/candidate")));
     }
 
     @Test
@@ -159,4 +191,18 @@ final class M3A3BackportPreparationTest {
                 IllegalArgumentException.class,
                 () -> new M3A3BackportPreparation.Receipt(List.of(b, a)));
     }
+    private static M3RecipeMasteryPortableReceipt.Verified mastery() {
+        return new M3RecipeMasteryPortableReceipt.Verified(
+                "1".repeat(64),
+                "2".repeat(64),
+                "3".repeat(64),
+                "EXHAUSTIVE",
+                3,
+                1,
+                1,
+                10_000,
+                false,
+                0);
+    }
+
 }
