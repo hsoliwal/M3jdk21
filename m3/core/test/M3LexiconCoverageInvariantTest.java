@@ -31,6 +31,13 @@ public final class M3LexiconCoverageInvariantTest {
             "translate.index-phrases",
             "unicodex.instance-index");
 
+    private static final Set<String> REQUIRED_FAMILY_SIDECARS = Set.of(
+            "prefix-counts",
+            "spell-index",
+            "token-frequency",
+            "token-hash-precompute",
+            "translation-projection");
+
     private static final Set<String> REQUIRED_TYPED_FAMILIES = Set.of(
             "IndexWordFacts",
             "IndexWordSignal",
@@ -56,8 +63,10 @@ public final class M3LexiconCoverageInvariantTest {
     public static void main(String[] args) throws Exception {
         Path sourceManifest = Path.of("lexicon", "synexia-source-manifest.tsv");
         Path fieldMap = Path.of("lexicon", "synexia-precompute-field-map.tsv");
+        Path familyMap = Path.of("lexicon", "synexia-precompute-family-map.tsv");
         Set<String> sourceIds = firstColumn(sourceManifest);
         Set<String> mappedFamilies = mappedFamilies(fieldMap);
+        Set<String> sidecarFamilies = secondColumn(familyMap);
 
         check(sourceIds.containsAll(REQUIRED_SOURCE_IDS),
                 "source manifest is missing admitted families: "
@@ -65,6 +74,9 @@ public final class M3LexiconCoverageInvariantTest {
         check(mappedFamilies.containsAll(REQUIRED_TYPED_FAMILIES),
                 "precompute field map is missing typed families: "
                         + difference(REQUIRED_TYPED_FAMILIES, mappedFamilies));
+        check(sidecarFamilies.containsAll(REQUIRED_FAMILY_SIDECARS),
+                "precompute family map is missing sidecars: "
+                        + difference(REQUIRED_FAMILY_SIDECARS, sidecarFamilies));
 
         System.out.println("M3JDK_LEXICON_PRECOMPUTE_COVERAGE_PASS "
                 + "source_families=" + REQUIRED_SOURCE_IDS.size()
@@ -78,6 +90,20 @@ public final class M3LexiconCoverageInvariantTest {
                 continue;
             }
             values.add(line.split("\\t", -1)[0]);
+        }
+        return values;
+    }
+
+    private static Set<String> secondColumn(Path path) throws Exception {
+        Set<String> values = new HashSet<>();
+        for (String line : Files.readAllLines(path, StandardCharsets.UTF_8)) {
+            if (line.isBlank() || line.startsWith("schema_version\t")) {
+                continue;
+            }
+            String[] fields = line.split("\\t", -1);
+            if (fields.length >= 2) {
+                values.add(fields[1]);
+            }
         }
         return values;
     }
