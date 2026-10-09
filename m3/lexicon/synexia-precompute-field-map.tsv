@@ -42,10 +42,10 @@ LangDexLexicalProfile	featureBits	int	langdex_feature_bits	synexia.records.tsv:p
 LangDexLexicalProfile	evidenceMask	int	langdex_evidence_mask	synexia.records.tsv:precompute_payload	MAPPED	profile-level evidence bits share the LangDex canonical type
 LangDexLexicalProfile	confidencePermille	int	langdex_confidence_permille	synexia.records.tsv:precompute_payload	MAPPED	profile-level confidence shares the LangDex canonical type and bound
 LangDexTranslation	targetLexemeId	long	langdex_target_lexeme_id	synexia.records.tsv:precompute_payload	MAPPED	target lexeme coordinate remains donor-owned and is not substituted with image_row
-SiUnit	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_payload	MAPPED	SI decimal exponent remains bounded donor metadata in the inclusive -100..100 range
+M3LexiconPrecompute.SiUnitPrecompute	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_payload	MAPPED	SI decimal exponent remains bounded donor metadata in the inclusive -100..100 range
 M3LexiconPrecompute.SiUnitPrecompute	dimensionPacked	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains owned by the immutable SI-unit receiver
-SiUnit	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
-SiUnit	prefixable	boolean	si_prefixable	synexia.records.tsv:precompute_payload	MAPPED	SI prefixability remains an explicit donor boolean
+M3LexiconPrecompute.SiUnitPrecompute	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
+M3LexiconPrecompute.SiUnitPrecompute	prefixable	boolean	si_prefixable	synexia.records.tsv:precompute_payload	MAPPED	SI prefixability remains an explicit donor boolean
 M3LexiconPrecompute.PrefixCounts	prefixCounts	long[]	prefix_counts	m3lex-family-v2:synexia.prefix-counts.tsv	MAPPED	value-scoped owner keyed by source scope, coordinate, token ID, and value fingerprint
 M3LexiconPrecompute.SpellIndex	deleteToTokenIds	Map<String,int[]>	deleteToTokenIds	m3lex-family-v2:synexia.spell.tsv	MAPPED	sorted delete-key map remains typed and scoped by lexicon, language, configuration, and source fingerprint
 M3LexiconPrecompute.SpellIndex	frequencies	Map<Integer,Long>	frequencies	m3lex-family-v2:synexia.spell.tsv	MAPPED	spell frequencies remain sorted metadata owned by the originating immutable lexicon

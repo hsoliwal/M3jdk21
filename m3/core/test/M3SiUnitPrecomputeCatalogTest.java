@@ -29,7 +29,10 @@ public final class M3SiUnitPrecomputeCatalogTest {
                 .siUnit(identity, ampere)
                 .build();
         check(catalog.siUnitAt(identity).orElseThrow() == ampere);
+        check(catalog.siUnitAt(identity).orElseThrow().decimalExponent() == -6);
         check(catalog.siUnitAt(identity).orElseThrow().dimensionPacked() == 42L);
+        check(catalog.siUnitAt(identity).orElseThrow().offset() == 0.0d);
+        check(catalog.siUnitAt(identity).orElseThrow().prefixable());
         check(catalog.siUnitAt(new SharedLexiconPrecomputeCatalog.SiUnitIdentity(
                 "dictlang.si-units", "missing")).isEmpty());
         expect(IllegalArgumentException.class, () ->
