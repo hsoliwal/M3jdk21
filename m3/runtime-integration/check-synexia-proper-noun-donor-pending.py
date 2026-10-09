@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 RECEIPT = ROOT / "synexia-proper-noun-donor-pending-receipt.tsv"
 RECIPE = ROOT / "synexia-proper-noun-donor-pending-recipe-20261009.yaml"
+TARGET_MAP = ROOT.parent.parent / "lexicon" / "synexia-instance-target-map.tsv"
 
 def main() -> int:
     lines = RECEIPT.read_text(encoding="utf-8").splitlines()
@@ -21,6 +22,10 @@ def main() -> int:
     assert all(row["source_pr"] == "10054" for row in rows)
     assert all(row["source_head"] == "7a8d48ff57466dafab4ef7fb6072f3915edef142" for row in rows)
     recipe = RECIPE.read_text(encoding="utf-8")
+    target_map = TARGET_MAP.read_text(encoding="utf-8")
+    assert "M3InstanceIndex" in target_map
+    assert target_map.count("TARGET_CONTRACT_OPEN_NO_PAYLOAD") == 2
+    assert target_map.count("REFERENCE_ONLY_PAYLOAD_NOT_ADMITTED") == 2
     for marker in (
         "target-contract-open-no-payload",
         "donor-data-and-code-must-not-be-copied",
@@ -28,7 +33,7 @@ def main() -> int:
         "TARGET_CONTRACT_OPEN_NO_PAYLOAD",
     ):
         assert marker in recipe
-    print("M3_PROPER_NOUN_DONOR_TARGET_CONTRACT_PASS checks=28/28")
+    print("M3_PROPER_NOUN_TARGET_MAP_PASS checks=32/32")
     return 0
 
 if __name__ == "__main__":
