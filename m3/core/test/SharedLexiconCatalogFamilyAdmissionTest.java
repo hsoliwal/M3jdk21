@@ -44,7 +44,8 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
             SharedLexiconCatalog closed = SharedLexiconCatalog.open(complete);
             closed.close();
             expectIllegalState(closed::familyPrecompute, "close fences family getter");
-            System.out.println("M3JDK_CATALOG_FAMILY_ADMISSION_PASS checks=" + checks + " families=5");
+            System.out.println("M3JDK_CATALOG_FAMILY_ADMISSION_PASS checks=" + checks
+                    + " families=5 relations=2");
         } finally {
             deleteTree(complete);
         }
@@ -77,6 +78,14 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
                     scope, new SharedLexiconCatalog.Coordinate(0, 0), "prefix-1", "value-a", 7);
             check(family.prefixAt(prefixKey).orElseThrow().rangeCount(0, 1) == 1,
                     mode + " prefix counts retained");
+            var relations = catalog.relatedLexemes().orElseThrow()
+                    .findAll("source-a", "record-a");
+            check(relations.size() == 2
+                            && relations.get(0).lexeme().equals("alpha")
+                            && relations.get(0).relatedLexeme().equals("omega")
+                            && relations.get(1).relatedLexeme().equals("zeta")
+                            && relations.get(0).coordinate().equals(new SharedLexiconCatalog.Coordinate(0, 0)),
+                    mode + " directed related lexemes retained");
         } finally {
             catalog.close();
         }
@@ -99,7 +108,18 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
         write(root, "synexia.precompute-index.tsv",
                 "precompute_profile\tsource_records\timage_records\tsha256\n"
                         + "fixture\t1\t1\t" + sha256("fixture\t1\t1\n") + "\n");
-        if (withFamily) writeFamily(root);
+        if (withFamily) {
+            writeFamily(root);
+            writeRelated(root);
+        }
+    }
+
+    private static void writeRelated(Path root) throws Exception {
+        write(root, "synexia.related-sources.tsv", "source_id\nsource-a\n");
+        write(root, "synexia.related.tsv",
+                "source_id\trecord_id\tlexeme\trelated_lexeme\tshard_id\timage_row\n"
+                        + "source-a\trecord-a\talpha\tomega\t0\t0\n"
+                        + "source-a\trecord-a\talpha\tzeta\t0\t0\n");
     }
 
     private static void writeFamily(Path root) throws Exception {

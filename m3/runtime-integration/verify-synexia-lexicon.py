@@ -26,6 +26,8 @@ SHARD_COLUMNS = ("shard_id", "file", "first_lexeme", "last_lexeme", "image_recor
 MAPPING_COLUMNS = ("source_id", "source_path", "source_kind", "language_tag", "record_id", "lexeme",
                    "shard_id", "image_row", "mapping_id", "mapping_name", "translation_profile",
                    "precompute_profile", "precompute_payload")
+RELATION_COLUMNS = ("source_id", "record_id", "lexeme", "related_lexeme", "shard_id", "image_row")
+RELATION_SOURCE_COLUMNS = ("source_id",)
 FACT_COLUMNS = ("shard_id", "image_row", "utf16_units", "java_hash", "code_points",
                 "unpaired_surrogates", "non_bmp_code_points", "ascii", "latin1",
                 "contains_whitespace", "precompute_profile")
@@ -36,6 +38,10 @@ ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "l
 
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def utf16_key(value: str) -> bytes:
+    return value.encode("utf-16-be", "surrogatepass")
 
 
 def _reject_json_constant(value: str) -> None:
@@ -175,7 +181,7 @@ def read_image(path: pathlib.Path) -> tuple[list[str], list[int], int]:
         raise ValueError(f"{path.name}: image checksum mismatch")
     values: list[str] = []
     hashes: list[int] = []
-    previous: str | None = None
+    previous: bytes | None = None
     for row in range(count):
         offset, length, stored_hash = struct.unpack_from(">III", data, HEADER + 12 * row)
         if offset + length > units:
@@ -184,9 +190,10 @@ def read_image(path: pathlib.Path) -> tuple[list[str], list[int], int]:
         text = raw.decode("utf-16-le", "surrogatepass")
         if java_hash(text) != stored_hash:
             raise ValueError(f"{path.name}: Java hash mismatch at row {row}")
-        if previous is not None and previous >= text:
+        current_key = utf16_key(text)
+        if previous is not None and previous >= current_key:
             raise ValueError(f"{path.name}: records are not strictly UTF-16 sorted")
-        previous = text
+        previous = current_key
         values.append(text)
         hashes.append(stored_hash)
     if sum(len(value.encode("utf-16-le", "surrogatepass")) // 2 for value in values) != units:
@@ -264,6 +271,7 @@ def verify(output: pathlib.Path) -> dict[str, int]:
     profile_sources: dict[str, set[tuple[str, str]]] = {}
     profile_coordinates: dict[str, set[tuple[int, int]]] = {}
     mapping_profiles: dict[tuple[int, int], set[str]] = {}
+    mapping_by_identity: dict[tuple[str, str], tuple[str, tuple[int, int]]] = {}
     for row in mapping_rows:
         identity = (row["source_id"], row["record_id"])
         if identity in identities:
@@ -293,8 +301,74 @@ def verify(output: pathlib.Path) -> dict[str, int]:
         profile_sources.setdefault(profile, set()).add(identity)
         profile_coordinates.setdefault(profile, set()).add(key)
         mapping_profiles.setdefault(key, set()).add(profile)
+        mapping_by_identity[identity] = (unescape_sidecar_text(row["lexeme"]), key)
     if len(mapping_rows) != int(manifest["counts"]["source_records"]):
         raise ValueError("source record count mismatch")
+
+    source_metadata = manifest.get("source", {})
+    relation_sources = source_metadata.get("relation_sources", [])
+    if (not isinstance(relation_sources, list)
+            or any(not isinstance(source_id, str) for source_id in relation_sources)
+            or relation_sources != sorted(set(relation_sources), key=utf16_key)):
+        raise ValueError("invalid related-lexeme source catalog")
+    relations_sha256 = source_metadata.get("relations_sha256")
+    relation_policy = source_metadata.get("relation_policy")
+    relation_sidecar = target.get("relation_sidecar")
+    relation_sources_sidecar = target.get("relation_sources_sidecar")
+    relation_rows: list[dict[str, str]] = []
+    if relation_sources:
+        if not isinstance(relation_policy, str) or not relation_policy.strip():
+            raise ValueError("related-lexeme extraction policy is missing")
+        if (not isinstance(relations_sha256, str)
+                or re.fullmatch(r"[0-9a-f]{64}", relations_sha256) is None):
+            raise ValueError("related-lexeme input hash is missing")
+        if not isinstance(relation_sidecar, str):
+            raise ValueError("related-lexeme sidecar is missing")
+        if not isinstance(relation_sources_sidecar, str):
+            raise ValueError("related-lexeme source sidecar is missing")
+        declared_sources = read_tsv(
+            output / safe_filename(relation_sources_sidecar), RELATION_SOURCE_COLUMNS
+        )
+        declared_source_ids = [row["source_id"] for row in declared_sources]
+        if declared_source_ids != relation_sources:
+            raise ValueError("related-lexeme source sidecar mismatch")
+        relation_rows = read_tsv(output / safe_filename(relation_sidecar), RELATION_COLUMNS)
+        previous_relation_key: tuple[bytes, bytes, bytes, bytes] | None = None
+        relation_identities: set[tuple[str, str]] = set()
+        relation_pairs: set[tuple[str, str, str]] = set()
+        for row in relation_rows:
+            identity = (row["source_id"], row["record_id"])
+            if row["source_id"] not in relation_sources:
+                raise ValueError("related-lexeme source family is not admitted")
+            mapped = mapping_by_identity.get(identity)
+            if mapped is None:
+                raise ValueError("related-lexeme source identity is not mapped")
+            lexeme = unescape_sidecar_text(row["lexeme"])
+            related_lexeme = unescape_sidecar_text(row["related_lexeme"])
+            if not related_lexeme:
+                raise ValueError("related_lexeme must not be empty")
+            relation_key = tuple(
+                utf16_key(value)
+                for value in (row["source_id"], row["record_id"], lexeme, related_lexeme)
+            )
+            if previous_relation_key is not None and relation_key <= previous_relation_key:
+                raise ValueError("related-lexeme rows are not strictly UTF-16 sorted")
+            previous_relation_key = relation_key
+            pair = (identity[0], identity[1], related_lexeme)
+            if pair in relation_pairs:
+                raise ValueError("duplicate related-lexeme relation")
+            relation_pairs.add(pair)
+            relation_identities.add(identity)
+            if lexeme != mapped[0] or (int(row["shard_id"]), int(row["image_row"])) != mapped[1]:
+                raise ValueError("related-lexeme mapping mismatch")
+        expected_relation_identities = {
+            identity for identity in mapping_by_identity if identity[0] in relation_sources
+        }
+        if relation_identities != expected_relation_identities:
+            raise ValueError("related-lexeme coverage mismatch")
+    elif (relation_sidecar is not None or relation_sources_sidecar is not None
+          or relations_sha256 is not None or relation_policy is not None):
+        raise ValueError("unexpected related-lexeme metadata")
 
     fact_rows = read_tsv(output / "synexia.precompute.tsv", FACT_COLUMNS)
     fact_keys: set[tuple[int, int]] = set()
@@ -338,9 +412,12 @@ def verify(output: pathlib.Path) -> dict[str, int]:
         raise ValueError("precompute profile coverage mismatch")
     if len(profile_rows) != int(manifest["counts"]["precompute_profiles"]):
         raise ValueError("precompute profile count mismatch")
-    return {"source_records": len(mapping_rows), "image_records": len(images),
-            "shards": len(shard_rows), "precompute_profiles": len(profile_rows),
-            "utf16_units": total_units}
+    result = {"source_records": len(mapping_rows), "image_records": len(images),
+              "shards": len(shard_rows), "precompute_profiles": len(profile_rows),
+              "utf16_units": total_units}
+    if relation_sources:
+        result["relation_records"] = len(relation_rows)
+    return result
 
 
 def main(argv: list[str] | None = None) -> int:
