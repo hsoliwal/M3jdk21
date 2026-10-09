@@ -70,6 +70,10 @@ jobs:
           grep -F "$DAG_ROOT" target/m3-projection-smoke/out/M3BackportRoutes.java
           grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_dag.py
           grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_rules.drl
+          grep -F "a3-atomization-proof" target/m3-projection-smoke/out/M3BackportRoutes.java
+          grep -F "a3-pattern-iop-proof" target/m3-projection-smoke/out/m3_backport_dag.py
+          grep -F "a3-documentation-proof" target/m3-projection-smoke/out/m3_backport_rules.drl
+          grep -F "a3-fixed-point-proof" target/m3-projection-smoke/out/M3BackportRoutes.java
 
       - name: Emit backport programme status
         run: |
