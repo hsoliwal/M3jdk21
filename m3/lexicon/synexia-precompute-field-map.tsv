@@ -43,7 +43,7 @@ LangDexLexicalProfile	evidenceMask	int	langdex_evidence_mask	synexia.records.tsv
 LangDexLexicalProfile	confidencePermille	int	langdex_confidence_permille	synexia.records.tsv:precompute_payload	MAPPED	profile-level confidence shares the LangDex canonical type and bound
 LangDexTranslation	targetLexemeId	long	langdex_target_lexeme_id	synexia.records.tsv:precompute_payload	MAPPED	target lexeme coordinate remains donor-owned and is not substituted with image_row
 SiUnit	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_payload	MAPPED	SI decimal exponent remains bounded donor metadata in the inclusive -100..100 range
-SiDimension	packed	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains donor-owned
+M3LexiconPrecompute.SiUnitPrecompute	dimensionPacked	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains owned by the immutable SI-unit receiver
 SiUnit	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
 SiUnit	prefixable	boolean	si_prefixable	synexia.records.tsv:precompute_payload	MAPPED	SI prefixability remains an explicit donor boolean
 M3LexiconPrecompute.PrefixCounts	prefixCounts	long[]	prefix_counts	m3lex-family-v2:synexia.prefix-counts.tsv	MAPPED	value-scoped owner keyed by source scope, coordinate, token ID, and value fingerprint
@@ -74,3 +74,4 @@ M3NumberSpace	storageIdentity	StorageIdentity	shared_utf16_storage	m3number-fami
 AcronymPrecompute	acronym	String	acronym	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	acronym identity is preserved as the sidecar record key and is never reconstructed from expansion text
 AcronymPrecompute	expansion	String	expansion	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	expansion text remains source-authored sidecar content and is not folded into the generic numeric payload
 AcronymPrecompute	domain	String	domain	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	domain classification remains source-authored metadata and is not inferred from the acronym
+M3LanguageGrammarSupport	supports	boolean	translation_grammar_supported	synexia.records.tsv:precompute_payload	MAPPED	grammar support is a bounded language projection and remains separate from translation token identity
