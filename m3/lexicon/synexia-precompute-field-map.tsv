@@ -94,3 +94,6 @@ SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceLanguage	String	source_
 SharedLexiconPrecomputeCatalog.TranslationIdentity	targetLanguage	String	target_language	m3lex-family-v2:synexia.translation.tsv	MAPPED	target language profile identity remains bound to the projection
 SharedLexiconPrecomputeCatalog.TranslationIdentity	lexiconFingerprint	String	lexicon_fingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation reuse is rejected across frozen lexicon fingerprints
 SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceFingerprint	String	source_fingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation reuse is rejected across source snapshot fingerprints
+AcronymPrecompute	acronym	String	acronym	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	canonical acronym identity is preserved exactly and remains separate from token identity
+AcronymPrecompute	expansion	String	expansion	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	canonical expansion text is preserved exactly under the source manifest scope
+AcronymPrecompute	domain	String	domain	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	domain is retained as source-owned metadata and never used as token identity
