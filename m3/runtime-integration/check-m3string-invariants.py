@@ -846,6 +846,17 @@ for surface, marker in critical_surfaces.items():
     if marker not in string:
         fail(f"critical String surface lost M3 route: {surface}")
 
+# The CharSequence replacement route must cover both an already-admitted M3 receiver and
+# a non-M3 receiver whose operands are canonically admitted for the operation.  This keeps
+# the structural gate from accepting a route that only works for storage != null.
+for replacement_fragment in [
+    "M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);",
+    "if (targetM3 == null) targetM3 = M3String.canonicalize(trgtStr);",
+    "if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);",
+]:
+    if replacement_fragment not in string:
+        fail(f"CharSequence replacement canonicalization boundary missing: {replacement_fragment}")
+
 # Recovered indexed regex replacement is a conservative literal atom, not a regex engine.
 literal_history = read("m3/history/string-literal-replacement-lineage.tsv")
 literal_test = read("test/jdk/java/lang/String/M3StringRegexReplacementTest.java")
