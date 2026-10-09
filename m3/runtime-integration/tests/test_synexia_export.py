@@ -368,10 +368,20 @@ class SynexiaExportTest(unittest.TestCase):
             field_types["frequencies"],
         )
         self.assertTrue(all(field_types.values()))
-        for source_id in ("dictlang.dictionary", "dictlang.frequency",
-                          "dictlang.thesaurus", "dictlang.antonyms"):
-            required = set(sources[source_id]["precompute_fields"].split(","))
+        for source_id, source in sources.items():
+            declared = source["precompute_fields"]
+            if declared == "-":
+                continue
+            required = set(declared.split(","))
             self.assertTrue(required.issubset(mapped), source_id)
+        self.assertEqual({"boolean"}, field_types["translation_grammar_supported"])
+        self.assertEqual({"String"}, field_types["canonical_decimal_spelling"])
+        self.assertEqual({"int"}, field_types["min_value"])
+        self.assertEqual({"int"}, field_types["max_value"])
+        self.assertEqual({"int"}, field_types["precomputed_value_count"])
+        self.assertEqual({"String"}, field_types["source_id"])
+        self.assertEqual({"String"}, field_types["record_id"])
+        self.assertEqual({"boolean"}, field_types["shared_utf16_storage"])
 
     def test_composite_owner_shapes_and_overloaded_field_types_are_admitted(self):
         field_map = EXPORT.read_field_map(
