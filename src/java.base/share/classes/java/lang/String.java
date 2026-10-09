@@ -4138,7 +4138,7 @@ public final class String
     public String toLowerCase(Locale locale) {
         Objects.requireNonNull(locale);
         M3String storage = m3();
-        if (storage != null && asciiCaseMappingLocale(locale)) {
+        if (storage != null && locale.equals(Locale.ROOT) && asciiCaseMappingLocale(locale)) {
             M3StringFacts prepared = storage.facts();
             if (prepared.ascii) {
                 M3String mapped = storage.asciiCase(false);
@@ -4239,7 +4239,7 @@ public final class String
     public String toUpperCase(Locale locale) {
         Objects.requireNonNull(locale);
         M3String storage = m3();
-        if (storage != null && asciiCaseMappingLocale(locale)) {
+        if (storage != null && locale.equals(Locale.ROOT) && asciiCaseMappingLocale(locale)) {
             M3StringFacts prepared = storage.facts();
             if (prepared.ascii) {
                 M3String mapped = storage.asciiCase(true);
