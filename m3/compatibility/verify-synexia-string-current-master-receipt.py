@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
+# SPDX-License-Identifier: Apache-2.0
 """Fail-closed checker for the Synexia String current-master receipt."""
 
 from __future__ import annotations
