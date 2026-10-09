@@ -102,3 +102,16 @@ SharedLexiconPrecomputeCatalog.TranslationIdentity	lexiconFingerprint	String	lex
 SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceFingerprint	String	source_fingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation reuse is rejected across source snapshot fingerprints
 SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceRevision	String	source_revision	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation identity pins the source revision
 SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceBlobSha	String	source_blob_sha	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation identity pins the source owner blob
+SiUnit	dimensionPacked	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed SI base-dimension vector remains source-owned metadata
+SiUnit	sourceRevision	String	source_revision	synexia.records.tsv:precompute_payload	MAPPED	SI source revision pins the immutable unit snapshot
+SiUnit	sourceBlobSha	String	source_blob_sha	synexia.records.tsv:precompute_payload	MAPPED	SI source blob pins the exact owner content
+M3LexiconPrecompute.SiUnitPrecompute	decimalExponent	int	si_decimal_exponent	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	SI exponent is admitted only with the matching source identity
+M3LexiconPrecompute.SiUnitPrecompute	dimensionPacked	long	si_dimension_packed	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	packed SI dimensions remain source-owned and are not reinterpreted
+M3LexiconPrecompute.SiUnitPrecompute	offset	double	si_offset	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	finite SI offset is preserved without conversion
+M3LexiconPrecompute.SiUnitPrecompute	prefixable	boolean	si_prefixable	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	prefixability remains an explicit source boolean
+M3LexiconPrecompute.SiUnitPrecompute	sourceRevision	String	source_revision	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	value provenance must match the SI source identity revision
+M3LexiconPrecompute.SiUnitPrecompute	sourceBlobSha	String	source_blob_sha	SharedLexiconPrecomputeCatalog.SiUnitIdentity -> siUnitAt	MAPPED	value provenance must match the SI source identity blob
+SharedLexiconPrecomputeCatalog.SiUnitIdentity	sourceId	String	source_id	m3lex-family-v2:synexia.si-units.tsv	MAPPED	SI identity preserves the canonical source family
+SharedLexiconPrecomputeCatalog.SiUnitIdentity	recordId	String	record_id	m3lex-family-v2:synexia.si-units.tsv	MAPPED	SI identity preserves the canonical unit record
+SharedLexiconPrecomputeCatalog.SiUnitIdentity	sourceRevision	String	source_revision	m3lex-family-v2:synexia.si-units.tsv	MAPPED	SI identity pins the immutable source revision
+SharedLexiconPrecomputeCatalog.SiUnitIdentity	sourceBlobSha	String	source_blob_sha	m3lex-family-v2:synexia.si-units.tsv	MAPPED	SI identity pins the exact source blob
