@@ -1231,7 +1231,96 @@ final class M3String implements CharSequence {
         if (!isLiteralRegex(regex) || replacement == null) return false;
         for (int index = 0; index < replacement.length(); index++) {
             char unit = replacement.charAt(index);
-            if (unit == '$' || unit == '\\') return false;
+            // Keep surrogate-containing replacements on the stock Matcher path; the
+            // indexed fast path is deliberately restricted to complete BMP literals.
+            if (Character.isSurrogate(unit) || unit == '
+        return true;
+    }
+
+    String replaceLiteralRegex(String original, String regex, String replacement, boolean firstOnly) {
+        M3String target = canonicalize(regex);
+        int found = indexOf(target, 0);
+        if (found < 0) return original;
+        // A match must produce a String even when composition aliases an input descriptor.
+        return new String(replaceMatches(target, canonicalize(replacement), found, firstOnly));
+    }
+
+    M3String replace(M3String target, M3String replacement) {
+        M3String checkedTarget = Objects.requireNonNull(target, "target");
+        M3String checkedReplacement = Objects.requireNonNull(replacement, "replacement");
+        if (checkedTarget.length() == 0) {
+            throw new IllegalArgumentException("empty literal target handled by String compatibility path");
+        }
+
+        int found = indexOf(checkedTarget, 0);
+        if (found < 0) return this;
+        return replaceMatches(checkedTarget, checkedReplacement, found, false);
+    }
+
+    private M3String replaceMatches(M3String checkedTarget, M3String checkedReplacement,
+                                    int found, boolean firstOnly) {
+        ArrayList<M3String> pieces = new ArrayList<>();
+        long outputLength = 0L;
+        int cursor = 0;
+        while (found >= 0) {
+            if (cursor < found) {
+                M3String prefix = slice(cursor, found);
+                pieces.add(prefix);
+                outputLength += prefix.length();
+            }
+            if (checkedReplacement.length() != 0) {
+                pieces.add(checkedReplacement);
+                outputLength += checkedReplacement.length();
+            }
+            if (outputLength > Integer.MAX_VALUE) {
+                throw new OutOfMemoryError("Required length exceeds implementation limit");
+            }
+            cursor = found + checkedTarget.length();
+            found = !firstOnly && cursor <= length() - checkedTarget.length()
+                    ? indexOf(checkedTarget, cursor)
+                    : -1;
+        }
+        if (cursor < length()) {
+            M3String suffix = slice(cursor, length());
+            pieces.add(suffix);
+            outputLength += suffix.length();
+        }
+        if (outputLength > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("Required length exceeds implementation limit");
+        }
+        return joinValues(pieces);
+    }
+
+    static int pow31(int length) {
+        int result = 1;
+        int base = 31;
+        for (int remaining = length; remaining != 0; remaining >>>= 1) {
+            if ((remaining & 1) != 0) result *= base;
+            base *= base;
+        }
+        return result;
+    }
+
+    private static long span(int start, int length) {
+        if (start < 0 || length < 0) throw new IllegalArgumentException("negative M3 range");
+        return ((long) start << SPAN_SHIFT) | (length & SPAN_MASK);
+    }
+
+    private static int start(long coordinate) {
+        return (int) (coordinate >>> SPAN_SHIFT);
+    }
+
+    private static int count(long coordinate) {
+        return (int) (coordinate & SPAN_MASK);
+    }
+
+    private static native byte[] nativeByteShadow(
+            M3String value, int start, int length, byte coder);
+
+    private static native char[] nativeCharShadow(
+            M3String value, int start, int length);
+}
+ || unit == '\\') return false;
         }
         return true;
     }
