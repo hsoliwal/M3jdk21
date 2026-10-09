@@ -15,7 +15,7 @@ final class M3RecipeDagTest {
     @Test
     void canonicalDagIsDeterministicAndPromotionIsLast() {
         M3RecipeDag dag = M3RecipeDag.canonical();
-        assertEquals(17, dag.size());
+        assertEquals(21, dag.size());
         assertEquals("review-code-signal", dag.topologicalOrder().getFirst().id());
         assertEquals(
                 List.of(
@@ -35,7 +35,32 @@ final class M3RecipeDagTest {
         assertEquals(
                 "com.m3.tooling.dag.M3A3BackportPreparation",
                 dag.require("a3-preparation").workRef());
-        assertEquals(List.of("a3-preparation"), dag.require("recipe-crate").dependsOn());
+        assertEquals(
+                List.of("a3-preparation"),
+                dag.require("a3-atomization-proof").dependsOn());
+        assertEquals(
+                List.of("a3-atomization-proof"),
+                dag.require("a3-pattern-iop-proof").dependsOn());
+        assertEquals(
+                List.of("a3-pattern-iop-proof"),
+                dag.require("a3-documentation-proof").dependsOn());
+        assertEquals(
+                List.of("a3-documentation-proof"),
+                dag.require("a3-fixed-point-proof").dependsOn());
+        assertEquals(
+                List.of("a3-fixed-point-proof"),
+                dag.require("recipe-crate").dependsOn());
+        assertEquals(
+                List.of(
+                        "com.m3.tooling.dag.M3A3BackportPreparation:ATOMIZATION",
+                        "com.m3.tooling.dag.M3A3BackportPreparation:PATTERN_IOP",
+                        "com.m3.tooling.dag.M3A3BackportPreparation:DOCUMENTATION",
+                        "com.m3.tooling.dag.M3A3BackportPreparation:FIXED_POINT"),
+                List.of(
+                        dag.require("a3-atomization-proof").workRef(),
+                        dag.require("a3-pattern-iop-proof").workRef(),
+                        dag.require("a3-documentation-proof").workRef(),
+                        dag.require("a3-fixed-point-proof").workRef()));
         assertEquals("promote", dag.topologicalOrder().getLast().id());
         assertTrue(dag.require("promote").serialPromotion());
         assertThrows(IllegalArgumentException.class, () -> dag.require("missing"));
