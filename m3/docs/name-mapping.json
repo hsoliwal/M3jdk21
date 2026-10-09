@@ -8014,15 +8014,17 @@
       "rule": "Do not attach whole-corpus images to java.lang.String or java.util collections without a concrete bounded JDK consumer."
     },
     {
-      "source_family": "Synexia BulkTask/BulkExecutor/M3BulkExecutor + TornadoVM verified RV32IM bulk provider",
+      "source_family": "Synexia bulk executor/provider/scheduler + TornadoVM verified RV32IM provider",
       "target_family": "M3 internal bulk scheduler",
       "public_api": "none; internal jdk.internal.vm.parallel candidate",
       "target_owners": [
         "jdk.internal.vm.parallel.BulkTask",
         "jdk.internal.vm.parallel.BulkExecutor",
-        "jdk.internal.vm.parallel.BulkExecution"
+        "jdk.internal.vm.parallel.BulkExecution",
+        "jdk.internal.vm.parallel.BulkExecutorProvider",
+        "jdk.internal.vm.parallel.BulkScheduler"
       ],
-      "rule": "Reviewed operation identity plus bounded work geometry; arbitrary Runnable is not accelerator admission; providers stay outside java.base and accelerated admission requires provider-specific proof including CPU parity where applicable."
+      "rule": "One reviewed operation over bounded independent work items; deterministic provider order is priority descending then provider ID; arbitrary Runnable is not accelerator admission; providers remain outside java.base and accelerated success requires provider-specific proof."
     }
 
   ],
