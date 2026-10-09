@@ -79,9 +79,9 @@ public final class SharedRelatedLexemeCatalogTest {
 
     private static void writeFixture(Path root) throws Exception {
         String records = MAPPING_HEADER + "\n"
-                + mapping("dictlang.antonyms", "antonyms.txt", "ant-1", "cold", 0, 0,
+                + mapping("dictlang.antonyms", "antonyms.txt", "cold", "cold", 0, 0,
                         "map-ant-1") + "\n"
-                + mapping("dictlang.thesaurus", "thesaurus.txt", "th-1", "big", 0, 1,
+                + mapping("dictlang.thesaurus", "thesaurus.txt", "big", "big", 0, 1,
                         "map-th-1") + "\n";
         Files.writeString(root.resolve("synexia.records.tsv"), records,
                 StandardCharsets.UTF_8);
