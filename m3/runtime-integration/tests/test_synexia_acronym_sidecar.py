@@ -1,6 +1,7 @@
 """Proof for the dedicated m3lex-acronym-v1 string sidecar."""
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import unittest
 from pathlib import Path
@@ -44,6 +45,17 @@ class AcronymSidecarTest(unittest.TestCase):
             with self.subTest(field=field):
                 with self.assertRaises(ValueError):
                     SIDECAR.render([row])
+
+    def test_empty_sidecar_fails_closed(self):
+        with self.assertRaises(ValueError):
+            SIDECAR.render([])
+        content = ("\\t".join(SIDECAR.COLUMNS) + "\\n").encode("utf-8")
+        index = SIDECAR._tsv(
+            SIDECAR.INDEX_COLUMNS,
+            [(SIDECAR.SCHEMA_VERSION, SIDECAR.DATA_FILE, "0", hashlib.sha256(content).hexdigest())],
+        )
+        with self.assertRaises(ValueError):
+            SIDECAR.verify({SIDECAR.DATA_FILE: content, SIDECAR.INDEX_FILE: index})
 
     def test_order_duplicate_and_checksum_fail_closed(self):
         with self.assertRaises(ValueError):
