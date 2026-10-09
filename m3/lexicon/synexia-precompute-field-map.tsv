@@ -54,6 +54,8 @@ M3LexiconPrecompute.SpellIndex	sourceFingerprint	String	sourceFingerprint	m3lex-
 M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTokenIds	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
 M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
 M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
+M3LexiconPrecompute.TranslationProjection	sourceRevision	String	source_revision	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation source revision pins the source snapshot
+M3LexiconPrecompute.TranslationProjection	sourceBlobSha	String	source_blob_sha	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation source blob pins the source owner
 SynexiaRecordMetadata	sourceId	String	source_id	synexia.records.tsv:record_metadata	MAPPED	source record identity is preserved as UTF-16 text and is never synthesized by the exporter
 SynexiaRecordMetadata	recordId	String	record_id	synexia.records.tsv:record_metadata	MAPPED	source record coordinate is preserved as UTF-16 text and is never renumbered
 SynexiaRecordMetadata	lexeme	String	lexeme	synexia.records.tsv:record_metadata	MAPPED	source lexeme text remains source-owned UTF-16 data
@@ -98,3 +100,5 @@ SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceLanguage	String	source_
 SharedLexiconPrecomputeCatalog.TranslationIdentity	targetLanguage	String	target_language	m3lex-family-v2:synexia.translation.tsv	MAPPED	target language profile identity remains bound to the projection
 SharedLexiconPrecomputeCatalog.TranslationIdentity	lexiconFingerprint	String	lexicon_fingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation reuse is rejected across frozen lexicon fingerprints
 SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceFingerprint	String	source_fingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation reuse is rejected across source snapshot fingerprints
+SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceRevision	String	source_revision	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation identity pins the source revision
+SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceBlobSha	String	source_blob_sha	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation identity pins the source owner blob
