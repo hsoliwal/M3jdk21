@@ -2909,16 +2909,8 @@ public final class String
             // Flat needle (for example a literal): prepared facts can prove absence first.
             M3StringFacts prepared = sourceM3.factsIfPrepared();
             if (prepared != null && !prepared.mayContain(str)) return -1;
-            int limit = sourceM3.length() - targetLength;
-            char first = str.charAt(0);
-            for (int start = from; start <= limit; start++) {
-                if (sourceM3.charAt(start) != first) continue;
-                int index = 1;
-                while (index < targetLength
-                        && sourceM3.charAt(start + index) == str.charAt(index)) index++;
-                if (index == targetLength) return start;
-            }
-            return -1;
+            return M3StringWindowSearch.indexOf(sourceM3, from, sourceM3.length(), str.value(),
+                    targetLength, str.coder());
         }
         return indexOf(value(), coder(), length(), str, fromIndex);
     }
@@ -2965,16 +2957,8 @@ public final class String
             // Flat needle (for example a literal): prepared facts can prove absence first.
             M3StringFacts prepared = sourceM3.factsIfPrepared();
             if (prepared != null && !prepared.mayContain(str)) return -1;
-            int limit = endIndex - targetLength;
-            char first = str.charAt(0);
-            for (int start = beginIndex; start <= limit; start++) {
-                if (sourceM3.charAt(start) != first) continue;
-                int index = 1;
-                while (index < targetLength
-                        && sourceM3.charAt(start + index) == str.charAt(index)) index++;
-                if (index == targetLength) return start;
-            }
-            return -1;
+            return M3StringWindowSearch.indexOf(sourceM3, beginIndex, endIndex, str.value(),
+                    targetLength, str.coder());
         }
         return indexOf(value(), coder(), endIndex, str, beginIndex);
     }
@@ -3070,13 +3054,8 @@ public final class String
             // Flat needle (for example a literal): prepared facts can prove absence first.
             M3StringFacts prepared = storage.factsIfPrepared();
             if (prepared != null && !prepared.mayContain(str)) return -1;
-            for (int candidate = start; candidate >= 0; candidate--) {
-                int index = 0;
-                while (index < targetLength
-                        && storage.charAt(candidate + index) == str.charAt(index)) index++;
-                if (index == targetLength) return candidate;
-            }
-            return -1;
+            return M3StringWindowSearch.lastIndexOf(storage, start, str.value(), targetLength,
+                    str.coder());
         }
         return lastIndexOf(value(), coder(), length(), str, fromIndex);
     }
