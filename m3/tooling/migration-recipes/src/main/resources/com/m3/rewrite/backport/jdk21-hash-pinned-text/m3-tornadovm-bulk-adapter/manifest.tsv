@@ -1,0 +1,5 @@
+.github/workflows/m3-tornadovm-bulk-adapter.yml	ABSENT	06773ff574ef883d7c34446d2a5ecff1bc884fb95c8dcbf192f6ada64d51cbdb	workflow.yml.txt
+m3/compatibility/synexia-tornadovm-bulk-adapter-20261009.tsv	ABSENT	fb67d6d0afcd15ad110d103c5d5600d14844a0b2ac1362e5fcc915b0d1360807	receipt.tsv.txt
+m3/pom.xml	8e3a87961ece487ba9891f884b108e0e1b6522d22413acee6a1c9c51802a9dfe	f1f120d02d2cda62ecfa3b8b8f306e894a6b1d421c82b0eb1b9186822493ff39	m3-pom.xml.txt
+m3/ports/tornadovm-bulk/pom.xml	ABSENT	94a67d4c9d7d64dac176f7d63265407c72b7994590947b2111cbe0d8b964df15	pom.xml.txt
+m3/ports/tornadovm-bulk/README.md	ABSENT	65a7b1c0fd6df23e4f5e857a766291eb06766b5dfb0aa9606174695468d77c38	README.md.txt
