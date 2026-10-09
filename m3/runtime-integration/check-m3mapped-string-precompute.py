@@ -6,12 +6,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 mapped = (
-    ROOT / "src.java.base/share/classes/jdk.internal/mindex/M3MappedStringBacking.java"
+    ROOT / "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java"
 ).read_text(encoding="utf-8")
-pool = (ROOT / "src/java.base/share/classes/java.lang/M3StringPool.java").read_text(
+pool = (ROOT / "src/java.base/share/classes/java/lang/M3StringPool.java").read_text(
     encoding="utf-8"
 )
-m3 = (ROOT / "src/java.base/share/classes/java.lang/M3String.java").read_text(
+m3 = (ROOT / "src/java.base/share/classes/java/lang/M3String.java").read_text(
     encoding="utf-8"
 )
 
@@ -23,17 +23,6 @@ def require(label: str, source: str, fragment: str) -> None:
         raise SystemExit(f"M3_MAPPED_PRECOMPUTE_SOURCE_FAIL|{label}|missing={fragment}")
     checks.append(label)
 
-
-# The paths above are normalized below so this script is also readable in a copied fixture.
-mapped = (ROOT / "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java").read_text(
-    encoding="utf-8"
-)
-pool = (ROOT / "src/java.base/share/classes/java/lang/M3StringPool.java").read_text(
-    encoding="utf-8"
-)
-m3 = (ROOT / "src/java.base/share/classes/java/lang/M3String.java").read_text(
-    encoding="utf-8"
-)
 
 for fragment in [
     "public final class M3MappedStringBacking implements M3StringBacking",
@@ -51,9 +40,9 @@ for fragment in [
     "if (byteStore.length(utf8Handle) != utf8Length)",
     "verifyTextPayload(cursor, charOffset, utf16Length)",
     "verifyTextUtf8(cursor, charOffset, utf16Length, utf8Handle, encoder, scratch)",
-    "throw corrupt("text payload alias facts at " + cursor)",
+    'throw corrupt("text payload alias facts at " + cursor)',
     "private int row(long id)",
-    "throw new IllegalArgumentException("unknown MIndex String id: "",
+    'throw new IllegalArgumentException("unknown MIndex String id: "',
 ]:
     require("mapped:" + fragment, mapped, fragment)
 
