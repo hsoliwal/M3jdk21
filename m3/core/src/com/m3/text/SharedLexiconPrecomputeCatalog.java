@@ -77,6 +77,16 @@ public final class SharedLexiconPrecomputeCatalog {
         }
     }
 
+    /** Exact source identity for the canonical Synexia SI-unit family. */
+    public record SiUnitIdentity(String sourceId, String recordId) {
+        public SiUnitIdentity {
+            sourceId = text(sourceId, "sourceId");
+            recordId = text(recordId, "recordId");
+            if (!"dictlang.si-units".equals(sourceId))
+                throw new IllegalArgumentException("SI-unit identity has the wrong source family");
+        }
+    }
+
     /** Exact source identity for the canonical Synexia acronym family. */
     public record AcronymIdentity(String sourceId, String recordId) {
         public AcronymIdentity {
@@ -104,6 +114,7 @@ public final class SharedLexiconPrecomputeCatalog {
     private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes;
     private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts;
     private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies;
+    private final Map<SiUnitIdentity, M3LexiconPrecompute.SiUnitPrecompute> siUnits;
     private final Map<AcronymIdentity, M3LexiconPrecompute.AcronymPrecompute> acronyms;
     private final Map<WordIdentity, M3LexiconPrecompute.IndexWordFacts> wordFacts;
     private final Map<WordIdentity, M3LexiconPrecompute.IndexWordSignal> wordSignals;
@@ -114,6 +125,7 @@ public final class SharedLexiconPrecomputeCatalog {
         tokenHashes = Map.copyOf(builder.tokenHashes);
         prefixCounts = Map.copyOf(builder.prefixCounts);
         tokenFrequencies = Map.copyOf(builder.tokenFrequencies);
+        siUnits = Map.copyOf(builder.siUnits);
         acronyms = Map.copyOf(builder.acronyms);
         wordFacts = Map.copyOf(builder.wordFacts);
         wordSignals = Map.copyOf(builder.wordSignals);
@@ -137,6 +149,10 @@ public final class SharedLexiconPrecomputeCatalog {
         return Optional.ofNullable(tokenFrequencies.get(Objects.requireNonNull(scope, "scope")));
     }
 
+    public Optional<M3LexiconPrecompute.SiUnitPrecompute> siUnitAt(SiUnitIdentity identity) {
+        return Optional.ofNullable(siUnits.get(Objects.requireNonNull(identity, "identity")));
+    }
+
 
     public Optional<M3LexiconPrecompute.AcronymPrecompute> acronymAt(AcronymIdentity identity) {
         return Optional.ofNullable(acronyms.get(Objects.requireNonNull(identity, "acronym key")));
@@ -155,6 +171,7 @@ public final class SharedLexiconPrecomputeCatalog {
         private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes = new HashMap<>();
         private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts = new HashMap<>();
         private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies = new HashMap<>();
+        private final Map<SiUnitIdentity, M3LexiconPrecompute.SiUnitPrecompute> siUnits = new HashMap<>();
         private final Map<AcronymIdentity, M3LexiconPrecompute.AcronymPrecompute> acronyms = new HashMap<>();
         private final Map<WordIdentity, M3LexiconPrecompute.IndexWordFacts> wordFacts = new HashMap<>();
         private final Map<WordIdentity, M3LexiconPrecompute.IndexWordSignal> wordSignals = new HashMap<>();
@@ -181,6 +198,11 @@ public final class SharedLexiconPrecomputeCatalog {
         }
         public Builder tokenFrequency(ValueScope scope, M3LexiconPrecompute.TokenFrequency value) {
             put(tokenFrequencies, scope, value, "token frequency"); return this;
+        }
+
+        public Builder siUnit(SiUnitIdentity identity, M3LexiconPrecompute.SiUnitPrecompute value) {
+            put(siUnits, identity, value, "SI unit");
+            return this;
         }
 
         public Builder acronym(AcronymIdentity identity, M3LexiconPrecompute.AcronymPrecompute value) {
