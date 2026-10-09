@@ -25,4 +25,4 @@ Run:
 
 Expected proof:
 
-    M3LEXICONS_RECEIVER_MATRIX_PASS rows=21
+    M3LEXICONS_RECEIVER_MATRIX_PASS rows=21 acronym_fields=3
