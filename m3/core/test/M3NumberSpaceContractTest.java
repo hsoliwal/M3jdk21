@@ -40,8 +40,8 @@ public final class M3NumberSpaceContractTest {
         String[] columns = row.split("\\t", -1);
         check(columns.length == 9);
         check(columns[8].equals(
-                "source_id,record_id,min_value,max_value,precomputed_value_count,"
-                        + "shared_utf16_storage,canonical_decimal_spelling"));
+                "canonical_decimal_spelling,max_value,min_value,precomputed_value_count,"
+                        + "record_id,shared_utf16_storage,source_id"));
         System.out.println("M3JDK_NUMBER_CONTRACT_PASS checks=" + checks + " fields=7");
     }
 
