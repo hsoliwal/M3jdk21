@@ -372,7 +372,8 @@ class SynexiaExportTest(unittest.TestCase):
             relations = root / "relations.tsv"
             relations.write_text(
                 "\t".join(EXPORT.RELATION_COLUMNS) + "\n"
-                + "\t".join((source_id, "cold", "cold", "warm")) + "\n",
+                + "\t".join((source_id, "cold", "cold", "warm")) + "\n"
+                + "\t".join((source_id, "cold", "cold", "hot")) + "\n",
                 encoding="utf-8",
             )
             output = root / "output"
@@ -380,17 +381,21 @@ class SynexiaExportTest(unittest.TestCase):
                 manifest, records, output, "fixture", "0" * 40,
                 relations_path=relations,
             )
-            self.assertEqual(1, result["counts"]["relation_records"])
+            self.assertEqual(2, result["counts"]["relation_records"])
             self.assertEqual(
-                "dictlang.antonyms\tcold\tcold\twarm\t0\t0\n",
-                (output / "synexia.related.tsv").read_text(encoding="utf-8").splitlines()[1] + "\n",
+                [
+                    "dictlang.antonyms\tcold\tcold\thot\t0\t0",
+                    "dictlang.antonyms\tcold\tcold\twarm\t0\t0",
+                ],
+                (output / "synexia.related.tsv").read_text(encoding="utf-8").splitlines()[1:],
             )
             export_manifest = json.loads(
                 (output / "synexia.export.json").read_text(encoding="utf-8")
             )
             self.assertEqual([source_id], export_manifest["source"]["relation_sources"])
+            self.assertEqual("normalized-directed-v1", export_manifest["source"]["relation_policy"])
             self.assertEqual("synexia.related.tsv", export_manifest["target"]["relation_sidecar"])
-            self.assertEqual(1, VERIFY.verify(output)["relation_records"])
+            self.assertEqual(2, VERIFY.verify(output)["relation_records"])
             with self.assertRaisesRegex(ValueError, "related-lexeme input is required"):
                 EXPORT.export(
                     manifest, records, root / "missing-output", "fixture", "0" * 40,

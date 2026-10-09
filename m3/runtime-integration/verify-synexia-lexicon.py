@@ -310,9 +310,12 @@ def verify(output: pathlib.Path) -> dict[str, int]:
             or relation_sources != sorted(set(relation_sources), key=utf16_key)):
         raise ValueError("invalid related-lexeme source catalog")
     relations_sha256 = source_metadata.get("relations_sha256")
+    relation_policy = source_metadata.get("relation_policy")
     relation_sidecar = target.get("relation_sidecar")
     relation_rows: list[dict[str, str]] = []
     if relation_sources:
+        if not isinstance(relation_policy, str) or not relation_policy.strip():
+            raise ValueError("related-lexeme extraction policy is missing")
         if (not isinstance(relations_sha256, str)
                 or re.fullmatch(r"[0-9a-f]{64}", relations_sha256) is None):
             raise ValueError("related-lexeme input hash is missing")
@@ -321,18 +324,9 @@ def verify(output: pathlib.Path) -> dict[str, int]:
         relation_rows = read_tsv(output / safe_filename(relation_sidecar), RELATION_COLUMNS)
         previous_relation_key: tuple[bytes, bytes, bytes, bytes] | None = None
         relation_identities: set[tuple[str, str]] = set()
+        relation_pairs: set[tuple[str, str, str]] = set()
         for row in relation_rows:
-            relation_key = tuple(
-                utf16_key(row[field])
-                for field in ("source_id", "record_id", "lexeme", "related_lexeme")
-            )
-            if previous_relation_key is not None and relation_key <= previous_relation_key:
-                raise ValueError("related-lexeme rows are not strictly UTF-16 sorted")
-            previous_relation_key = relation_key
             identity = (row["source_id"], row["record_id"])
-            if identity in relation_identities:
-                raise ValueError("duplicate related-lexeme source identity")
-            relation_identities.add(identity)
             if row["source_id"] not in relation_sources:
                 raise ValueError("related-lexeme source family is not admitted")
             mapped = mapping_by_identity.get(identity)
@@ -342,6 +336,18 @@ def verify(output: pathlib.Path) -> dict[str, int]:
             related_lexeme = unescape_sidecar_text(row["related_lexeme"])
             if not related_lexeme:
                 raise ValueError("related_lexeme must not be empty")
+            relation_key = tuple(
+                utf16_key(value)
+                for value in (row["source_id"], row["record_id"], lexeme, related_lexeme)
+            )
+            if previous_relation_key is not None and relation_key <= previous_relation_key:
+                raise ValueError("related-lexeme rows are not strictly UTF-16 sorted")
+            previous_relation_key = relation_key
+            pair = (identity[0], identity[1], related_lexeme)
+            if pair in relation_pairs:
+                raise ValueError("duplicate related-lexeme relation")
+            relation_pairs.add(pair)
+            relation_identities.add(identity)
             if lexeme != mapped[0] or (int(row["shard_id"]), int(row["image_row"])) != mapped[1]:
                 raise ValueError("related-lexeme mapping mismatch")
         expected_relation_identities = {
@@ -349,7 +355,7 @@ def verify(output: pathlib.Path) -> dict[str, int]:
         }
         if relation_identities != expected_relation_identities:
             raise ValueError("related-lexeme coverage mismatch")
-    elif relation_sidecar is not None or relations_sha256 is not None:
+    elif relation_sidecar is not None or relations_sha256 is not None or relation_policy is not None:
         raise ValueError("unexpected related-lexeme metadata")
 
     fact_rows = read_tsv(output / "synexia.precompute.tsv", FACT_COLUMNS)

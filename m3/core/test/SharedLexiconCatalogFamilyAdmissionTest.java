@@ -45,7 +45,7 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
             closed.close();
             expectIllegalState(closed::familyPrecompute, "close fences family getter");
             System.out.println("M3JDK_CATALOG_FAMILY_ADMISSION_PASS checks=" + checks
-                    + " families=5 relations=1");
+                    + " families=5 relations=2");
         } finally {
             deleteTree(complete);
         }
@@ -78,12 +78,14 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
                     scope, new SharedLexiconCatalog.Coordinate(0, 0), "prefix-1", "value-a", 7);
             check(family.prefixAt(prefixKey).orElseThrow().rangeCount(0, 1) == 1,
                     mode + " prefix counts retained");
-            var relation = catalog.relatedLexemes().orElseThrow()
-                    .find("source-a", "record-a").orElseThrow();
-            check(relation.lexeme().equals("alpha")
-                            && relation.relatedLexeme().equals("omega")
-                            && relation.coordinate().equals(new SharedLexiconCatalog.Coordinate(0, 0)),
-                    mode + " directed related lexeme retained");
+            var relations = catalog.relatedLexemes().orElseThrow()
+                    .findAll("source-a", "record-a");
+            check(relations.size() == 2
+                            && relations.get(0).lexeme().equals("alpha")
+                            && relations.get(0).relatedLexeme().equals("omega")
+                            && relations.get(1).relatedLexeme().equals("zeta")
+                            && relations.get(0).coordinate().equals(new SharedLexiconCatalog.Coordinate(0, 0)),
+                    mode + " directed related lexemes retained");
         } finally {
             catalog.close();
         }
@@ -114,10 +116,9 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
 
     private static void writeRelated(Path root) throws Exception {
         write(root, "synexia.related.tsv",
-                "source_id	record_id	lexeme	related_lexeme	shard_id	image_row
-"
-                        + "source-a	record-a	alpha	omega	0	0
-");
+                "source_id\trecord_id\tlexeme\trelated_lexeme\tshard_id\timage_row\n"
+                        + "source-a\trecord-a\talpha\tomega\t0\t0\n"
+                        + "source-a\trecord-a\talpha\tzeta\t0\t0\n");
     }
 
     private static void writeFamily(Path root) throws Exception {

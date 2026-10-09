@@ -317,15 +317,12 @@ def load_relations(path: pathlib.Path | None, sources: dict[str, dict[str, str]]
         (record["source_id"], record["record_id"]): record for record in records
     }
     result: list[dict[str, str]] = []
-    seen: set[tuple[str, str]] = set()
+    seen_pairs: set[tuple[str, str, str]] = set()
+    relation_identities: set[tuple[str, str]] = set()
     for row in rows:
         identity = (row["source_id"], row["record_id"])
         if row["source_id"] not in required_sources:
             raise ValueError("related-lexeme source family is not admitted: " + row["source_id"])
-        if identity in seen:
-            raise ValueError("duplicate related-lexeme source/record identity: "
-                             + f"{identity[0]}:{identity[1]}")
-        seen.add(identity)
         record = records_by_identity.get(identity)
         if record is None:
             raise ValueError("related-lexeme references unknown source/record identity: "
@@ -335,11 +332,17 @@ def load_relations(path: pathlib.Path | None, sources: dict[str, dict[str, str]]
                              + f"{identity[0]}:{identity[1]}")
         if row["related_lexeme"] == "":
             raise ValueError("related_lexeme must not be empty")
+        pair = (identity[0], identity[1], row["related_lexeme"])
+        if pair in seen_pairs:
+            raise ValueError("duplicate related-lexeme relation: "
+                             + f"{identity[0]}:{identity[1]}:{row['related_lexeme']}")
+        seen_pairs.add(pair)
+        relation_identities.add(identity)
         result.append(dict(row))
     expected = {
         identity for identity in records_by_identity if identity[0] in required_sources
     }
-    actual = set(seen)
+    actual = relation_identities
     if actual != expected:
         missing = sorted(expected - actual,
                          key=lambda identity: tuple(utf16_units(value) for value in identity))
@@ -420,7 +423,8 @@ def write_tsv(path: pathlib.Path, columns: tuple[str, ...], rows: list[dict[str,
 def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pathlib.Path,
            source_repo: str, source_commit: str,
            field_map: pathlib.Path | None = None,
-           relations_path: pathlib.Path | None = None) -> dict[str, object]:
+           relations_path: pathlib.Path | None = None,
+           relation_policy: str = "normalized-directed-v1") -> dict[str, object]:
     sources, source_manifest_bytes = read_manifest(source_manifest)
     field_map_path = field_map or source_manifest.with_name("synexia-precompute-field-map.tsv")
     field_types = read_field_map(field_map_path) if field_map_path.is_file() else {}
@@ -428,6 +432,8 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
     records, records_bytes = load_records(records_path, sources, field_types)
     relations, relations_bytes = load_relations(relations_path, sources, records)
     related_source_ids = relation_source_ids(sources)
+    if related_source_ids and not relation_policy.strip():
+        raise ValueError("relation policy is required for related-lexeme input")
     if output.exists() and any(output.iterdir()):
         raise FileExistsError(f"output directory is not empty: {output}")
     output.mkdir(parents=True, exist_ok=True)
@@ -514,6 +520,7 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                    "records_sha256": sha256_bytes(records_bytes),
                    "relations_sha256":
                        sha256_bytes(relations_bytes) if relations_bytes is not None else None,
+                   "relation_policy": relation_policy if related_source_ids else None,
                    "relation_sources": sorted(related_source_ids, key=utf16_units),
                    "precompute_fields": {
                        source_id: [field for field in source["precompute_fields"].split(",") if field]
@@ -556,9 +563,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--source-commit", required=True)
     parser.add_argument("--field-map", type=pathlib.Path)
     parser.add_argument("--relations", type=pathlib.Path)
+    parser.add_argument("--relation-policy", default="normalized-directed-v1")
     args = parser.parse_args(argv)
     result = export(args.source_manifest, args.records, args.output,
-                    args.source_repository, args.source_commit, args.field_map, args.relations)
+                    args.source_repository, args.source_commit, args.field_map, args.relations,
+                    args.relation_policy)
     print("SYNEXIA_M3JDK_LEXICON_EXPORT_PASS " + json.dumps(result["counts"], sort_keys=True))
     return 0
 

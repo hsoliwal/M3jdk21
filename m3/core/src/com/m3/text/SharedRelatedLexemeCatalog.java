@@ -31,7 +31,7 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
                     + "precompute_profile\tprecompute_payload";
 
     private final List<Relation> relations;
-    private final Map<SharedLexiconCatalog.SourceIdentity, Relation> byIdentity;
+    private final Map<SharedLexiconCatalog.SourceIdentity, List<Relation>> byIdentity;
     private volatile boolean closed;
 
     public record Relation(String sourceId, String recordId, String lexeme,
@@ -71,18 +71,18 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
         if (lines.isEmpty() || !HEADER.equals(lines.getFirst()))
             throw new IOException("invalid related sidecar header");
         List<Relation> result = new ArrayList<>();
-        Map<SharedLexiconCatalog.SourceIdentity, Relation> byIdentity = new HashMap<>();
+        Map<SharedLexiconCatalog.SourceIdentity, List<Relation>> byIdentity = new HashMap<>();
         Relation previous = null;
         for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
-            String[] cells = lines.get(lineNumber).split("\t", -1);
-            if (cells.length != 6) throw malformed(lineNumber, "wrong field count");
-            String sourceId = cells[0];
-            String recordId = cells[1];
-            String lexeme = decodeSidecarText(cells[2], lineNumber);
-            String related = decodeSidecarText(cells[3], lineNumber);
+            List<String> cells = parseTsvLine(lines.get(lineNumber), lineNumber);
+            if (cells.size() != 6) throw malformed(lineNumber, "wrong field count");
+            String sourceId = cells.get(0);
+            String recordId = cells.get(1);
+            String lexeme = decodeSidecarText(cells.get(2), lineNumber);
+            String related = decodeSidecarText(cells.get(3), lineNumber);
             SharedLexiconCatalog.Coordinate coordinate = new SharedLexiconCatalog.Coordinate(
-                    parseNonNegative(cells[4], lineNumber, "shard_id"),
-                    parseNonNegative(cells[5], lineNumber, "image_row"));
+                    parseNonNegative(cells.get(4), lineNumber, "shard_id"),
+                    parseNonNegative(cells.get(5), lineNumber, "image_row"));
             Relation relation = new Relation(sourceId, recordId, lexeme, related, coordinate);
             if (previous != null && compare(previous, relation) >= 0)
                 throw malformed(lineNumber, "relations are not sorted or are duplicated");
@@ -90,19 +90,19 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
             if (mapping == null) throw malformed(lineNumber, "relation identity is not mapped");
             if (!mapping.lexeme().equals(lexeme) || !mapping.coordinate().equals(coordinate))
                 throw malformed(lineNumber, "relation mapping mismatch");
-            if (byIdentity.put(relation.identity(), relation) != null)
-                throw malformed(lineNumber, "duplicate relation identity");
+            byIdentity.computeIfAbsent(relation.identity(), ignored -> new ArrayList<>()).add(relation);
             result.add(relation);
             previous = relation;
         }
-        if (result.isEmpty()) throw new IOException("empty related sidecar");
         return new SharedRelatedLexemeCatalog(result, byIdentity);
     }
 
     private SharedRelatedLexemeCatalog(List<Relation> relations,
-                                       Map<SharedLexiconCatalog.SourceIdentity, Relation> byIdentity) {
+                                       Map<SharedLexiconCatalog.SourceIdentity, List<Relation>> byIdentity) {
         this.relations = List.copyOf(relations);
-        this.byIdentity = Map.copyOf(byIdentity);
+        Map<SharedLexiconCatalog.SourceIdentity, List<Relation>> copied = new HashMap<>();
+        byIdentity.forEach((identity, values) -> copied.put(identity, List.copyOf(values)));
+        this.byIdentity = Map.copyOf(copied);
     }
 
     public List<Relation> relations() {
@@ -110,11 +110,21 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
         return relations;
     }
 
+    /**
+     * Returns the single relation for an identity when the normalized source has
+     * exactly one target. Multi-target records must use {@link #findAll}.
+     */
     public Optional<Relation> find(String sourceId, String recordId) {
         ensureOpen();
-        return Optional.ofNullable(byIdentity.get(
-                new SharedLexiconCatalog.SourceIdentity(
-                        Objects.requireNonNull(sourceId), Objects.requireNonNull(recordId))));
+        List<Relation> values = findAll(sourceId, recordId);
+        return values.size() == 1 ? Optional.of(values.getFirst()) : Optional.empty();
+    }
+
+    public List<Relation> findAll(String sourceId, String recordId) {
+        ensureOpen();
+        List<Relation> values = byIdentity.get(new SharedLexiconCatalog.SourceIdentity(
+                Objects.requireNonNull(sourceId), Objects.requireNonNull(recordId)));
+        return values == null ? List.of() : values;
     }
 
     public List<Relation> findBySource(String sourceId) {
@@ -132,6 +142,44 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
         if (closed) throw new IllegalStateException("related catalog closed");
     }
 
+    private static List<String> parseTsvLine(String line, int lineNumber) throws IOException {
+        List<String> cells = new ArrayList<>();
+        StringBuilder field = new StringBuilder();
+        boolean quoted = false;
+        boolean closed = false;
+        for (int at = 0; at < line.length(); at++) {
+            char current = line.charAt(at);
+            if (quoted) {
+                if (current == '"') {
+                    if (at + 1 < line.length() && line.charAt(at + 1) == '"') {
+                        field.append('"');
+                        at++;
+                    } else {
+                        quoted = false;
+                        closed = true;
+                    }
+                } else {
+                    field.append(current);
+                }
+            } else if (closed) {
+                if (current != '	') throw malformed(lineNumber, "invalid quoted TSV field");
+                cells.add(field.toString());
+                field.setLength(0);
+                closed = false;
+            } else if (current == '	') {
+                cells.add(field.toString());
+                field.setLength(0);
+            } else if (current == '"' && field.isEmpty()) {
+                quoted = true;
+            } else {
+                field.append(current);
+            }
+        }
+        if (quoted) throw malformed(lineNumber, "unterminated quoted TSV field");
+        cells.add(field.toString());
+        return List.copyOf(cells);
+    }
+
     private static Map<SharedLexiconCatalog.SourceIdentity, Mapping> readMappings(Path path)
             throws IOException {
         if (!Files.isRegularFile(path)) throw new IOException("mapping sidecar missing");
@@ -140,14 +188,14 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
             throw new IOException("invalid mapping sidecar header");
         Map<SharedLexiconCatalog.SourceIdentity, Mapping> result = new HashMap<>();
         for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
-            String[] cells = lines.get(lineNumber).split("\t", -1);
-            if (cells.length != 13) throw malformed(lineNumber, "mapping field count");
+            List<String> cells = parseTsvLine(lines.get(lineNumber), lineNumber);
+            if (cells.size() != 13) throw malformed(lineNumber, "mapping field count");
             SharedLexiconCatalog.SourceIdentity identity =
-                    new SharedLexiconCatalog.SourceIdentity(cells[0], cells[4]);
-            Mapping mapping = new Mapping(decodeSidecarText(cells[5], lineNumber),
+                    new SharedLexiconCatalog.SourceIdentity(cells.get(0), cells.get(4));
+            Mapping mapping = new Mapping(decodeSidecarText(cells.get(5), lineNumber),
                     new SharedLexiconCatalog.Coordinate(
-                            parseNonNegative(cells[6], lineNumber, "shard_id"),
-                            parseNonNegative(cells[7], lineNumber, "image_row")));
+                            parseNonNegative(cells.get(6), lineNumber, "shard_id"),
+                            parseNonNegative(cells.get(7), lineNumber, "image_row")));
             if (result.put(identity, mapping) != null)
                 throw malformed(lineNumber, "duplicate mapping identity");
         }

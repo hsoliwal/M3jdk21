@@ -75,7 +75,8 @@ python3 m3/runtime-integration/export-synexia-lexicon.py \
   --output /operator/m3jdk-lexicon/export \
   --source-repository https://github.com/hsoliwal/com.synexia \
   --source-commit 3e85c872adf556901a341a9eb1c3b59864918da1 \
-  --relations /operator/synexia-snapshot/related.tsv
+  --relations /operator/synexia-snapshot/related.tsv \
+  --relation-policy gutenberg-antonyms-v1
 ```
 
 The output is:
@@ -94,7 +95,8 @@ The output is:
   whitespace facts plus the Synexia precompute profile;
 - `synexia.related.tsv` (when the source manifest admits `related_lexeme`):
   sorted directed source/record/lexeme/related-lexeme rows with the physical
-  M3LEX coordinate;
+  M3LEX coordinate; multiple target rows for one source record are allowed,
+  while duplicate directed pairs are rejected;
 - `synexia.export.json`: source pins, input/output hashes, counts, policy and,
   when available, the canonical precompute field-type map and its SHA-256.
 
@@ -116,6 +118,17 @@ unsorted, non-matching or incomplete directed relation rows. The source-blind
 verifier and `SharedRelatedLexemeCatalog` repeat identity, direction, UTF-16,
 coordinate and order checks. Relation data remains outside `java.lang.String`
 identity and is never reversed or synthesized.
+
+When the source manifest declares `related_lexeme`, the operator must provide
+an explicit normalized directed-relation snapshot with a pinned `--relation-policy`
+label. This is important for grouped Gutenberg-style antonym/thesaurus sources:
+the exporter does not parse or guess raw prose, and it does not synthesize reverse
+relations. It rejects missing, duplicate, unsorted, non-matching or incomplete
+relation rows. Multiple related targets may share one source record; the exact
+(source_id, record_id, related_lexeme) pair remains unique. The source-blind
+verifier and `SharedRelatedLexemeCatalog` repeat identity, direction, UTF-16,
+coordinate and order checks. Relation data remains outside `java.lang.String`
+identity.
 
 The image is suitable for the existing `-Djdk.mindex.lexicon=/absolute/file`
 boundary. The sidecars remain language-layer metadata; they are not fields of
