@@ -4,7 +4,7 @@
 # source_mapping_path=m3/docs/name-mapping.json
 # source_mapping_blob=c29a64eaea0ca614d551ad4bcd3fa2695f0fdc9e
 # purpose=bounded audit of legacy source-to-target rows; this file adds no target promotion
-# proof=M3JDK_SYNEXIA_LEGACY_MAPPING_AUDIT_PASS rows=47 unpinned_rows=47
+# proof=M3JDK_SYNEXIA_LEGACY_MAPPING_AUDIT_PASS rows=47 receipt_unpinned_rows=47
 mapping_index	source	target	status	source_commit	target_receipt_state	disposition
 0	com.synexia.indexstring.IndexStringTuple	java.lang.M3StringTuple	adapted canonical balanced persistent composition owner	9963cc08ff13922b92a0e3db7c30f56fddacba7d	UNPINNED	REQUIRES_EXACT_TARGET_RECEIPT
 1	com.synexia.indexstring.LocalM3StringPiece	com.m3.text.LocalM3StringPiece	separate provisional byte-format prototype; NOT an API-compatible replacement	9c36c18a7778e6096148a3bbee8f2af7575138b4	REVIEW_REQUIRED	REQUIRES_TARGET_CONSUMER_REVIEW
