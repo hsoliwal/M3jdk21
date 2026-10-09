@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "com.synexia.indexstring.MIndexTextPrecomputedFacts.compile(int, IntUnaryOperator): single loop over units (Synexia develop 541a079cffd)",
+      "source_commit": "541a079cffd",
+      "target": "java.lang.M3StringFacts.scan(M3String): one streaming pass over bulk-read SCAN_WINDOW (1024) units via M3String.getChars, with the M3-only code-point (one-unit surrogate delay), strip and trim lanes fused in; LATIN1_UNIT_SIGNAL table for the code-unit signal",
+      "status": "implemented-locally-verified (G7; differential dump identical to the previous three-pass scan over 14,842 fact rows; oracle jtreg 329,909 checks); flag-on jtreg PENDING_LINUX",
+      "target_rule": "facts stay fixed-size and payload-free (lineage invariants 5-8); the window is transient scratch, never a retained shadow; no output changes"
+    }
+  ]
+}
