@@ -7,6 +7,7 @@ package java.lang;
 import java.util.Objects;
 
 import jdk.internal.misc.Unsafe;
+import jdk.internal.util.ArraysSupport;
 
 /**
  * Canonical scalar M3String owner.
@@ -16,6 +17,16 @@ import jdk.internal.misc.Unsafe;
  */
 final class M3StringAtom extends M3StringOwner {
     private static final Unsafe UNSAFE = Unsafe.getUnsafe();
+    /**
+     * Local width-2 atoms are written in the host byte order so admission and reads are bulk
+     * copies (A11); the flag stays per atom and every reader (Java, HotSpot, SA) follows it, so
+     * mapped lexicon atoms keep their recorded order.
+     */
+    private static final boolean NATIVE_BIG_ENDIAN = UNSAFE.isBigEndian();
+    private static final long BYTE_BASE = Unsafe.ARRAY_BYTE_BASE_OFFSET;
+    private static final long CHAR_BASE = Unsafe.ARRAY_CHAR_BASE_OFFSET;
+    /** Bulk copies (a runtime call) pay only from this many units; below, the plain loops win. */
+    private static final int BULK = 64;
 
     /** Retains mapped ownership. VM-local native blocks are lifetime-managed by M3StringPool. */
     final Object payloadOwner;
@@ -56,20 +67,19 @@ final class M3StringAtom extends M3StringOwner {
         long address = UNSAFE.allocateMemory(bytes);
         if (length == 0) {
             UNSAFE.putByte(address, (byte) 0);
+        } else if (length >= BULK) {
+            UNSAFE.copyMemory(compactValue, BYTE_BASE, null, address, (long) length * width);
         } else if (width == 1) {
             for (int index = 0; index < length; index++) {
                 UNSAFE.putByte(address + index, compactValue[index]);
             }
         } else {
             for (int index = 0; index < length; index++) {
-                char unit = StringUTF16.charAt(compactValue, index);
-                long at = address + ((long) index << 1);
-                UNSAFE.putByte(at, (byte) (unit >>> 8));
-                UNSAFE.putByte(at + 1L, (byte) unit);
+                UNSAFE.putChar(address + ((long) index << 1), StringUTF16.charAt(compactValue, index));
             }
         }
-        return new M3StringAtom(
-                null, address, width, true, length, coder, javaHash, canonicalId, structuralHash64);
+        return new M3StringAtom(null, address, width, NATIVE_BIG_ENDIAN, length, coder, javaHash,
+                canonicalId, structuralHash64);
     }
 
     static M3StringAtom localCodePoints(
@@ -120,7 +130,7 @@ final class M3StringAtom extends M3StringOwner {
                 null,
                 address,
                 width,
-                true,
+                NATIVE_BIG_ENDIAN,
                 utf16Length,
                 coder,
                 javaHash,
@@ -132,11 +142,11 @@ final class M3StringAtom extends M3StringOwner {
         if (width == 1) {
             UNSAFE.putByte(address + index, (byte) unit);
         } else {
-            long at = address + ((long) index << 1);
-            UNSAFE.putByte(at, (byte) (unit >>> 8));
-            UNSAFE.putByte(at + 1L, (byte) unit);
+            UNSAFE.putChar(address + ((long) index << 1), unit);
         }
     }
+
+
 
     static M3StringAtom localCompactBytes(
             byte[] source,
@@ -169,19 +179,13 @@ final class M3StringAtom extends M3StringOwner {
                 throw new IllegalArgumentException("Latin1 unit out of range");
             }
             javaHash = 31 * javaHash + unit;
-            if (width == 1) {
-                UNSAFE.putByte(address + index, (byte) unit);
-            } else {
-                long at = address + ((long) index << 1);
-                UNSAFE.putByte(at, (byte) (unit >>> 8));
-                UNSAFE.putByte(at + 1L, (byte) unit);
-            }
+            putUnit(address, width, index, unit);
         }
         return new M3StringAtom(
                 null,
                 address,
                 width,
-                true,
+                NATIVE_BIG_ENDIAN,
                 length,
                 targetCoder,
                 javaHash,
@@ -208,19 +212,13 @@ final class M3StringAtom extends M3StringOwner {
         for (int index = 0; index < length; index++) {
             char unit = (char) (source[offset + index] & 0xff);
             javaHash = 31 * javaHash + unit;
-            if (width == 1) {
-                UNSAFE.putByte(address + index, (byte) unit);
-            } else {
-                long at = address + ((long) index << 1);
-                UNSAFE.putByte(at, (byte) 0);
-                UNSAFE.putByte(at + 1L, (byte) unit);
-            }
+            putUnit(address, width, index, unit);
         }
         return new M3StringAtom(
                 null,
                 address,
                 width,
-                true,
+                NATIVE_BIG_ENDIAN,
                 length,
                 coder,
                 javaHash,
@@ -251,19 +249,13 @@ final class M3StringAtom extends M3StringOwner {
                 throw new IllegalArgumentException("Latin1 unit out of range");
             }
             javaHash = 31 * javaHash + unit;
-            if (width == 1) {
-                UNSAFE.putByte(address + index, (byte) unit);
-            } else {
-                long at = address + ((long) index << 1);
-                UNSAFE.putByte(at, (byte) (unit >>> 8));
-                UNSAFE.putByte(at + 1L, (byte) unit);
-            }
+            putUnit(address, width, index, unit);
         }
         return new M3StringAtom(
                 null,
                 address,
                 width,
-                true,
+                NATIVE_BIG_ENDIAN,
                 length,
                 coder,
                 javaHash,
@@ -281,17 +273,12 @@ final class M3StringAtom extends M3StringOwner {
         }
         byte width = coder == String.LATIN1 ? (byte) 1 : (byte) 2;
         long address = UNSAFE.allocateMemory(width);
-        if (width == 1) {
-            UNSAFE.putByte(address, (byte) unit);
-        } else {
-            UNSAFE.putByte(address, (byte) (unit >>> 8));
-            UNSAFE.putByte(address + 1L, (byte) unit);
-        }
+        putUnit(address, width, 0, unit);
         return new M3StringAtom(
                 null,
                 address,
                 width,
-                true,
+                NATIVE_BIG_ENDIAN,
                 1,
                 coder,
                 unit,
@@ -325,18 +312,15 @@ final class M3StringAtom extends M3StringOwner {
     char charAt(int index) {
         Objects.checkIndex(index, length);
         if (storageWidth == 1) return (char) (UNSAFE.getByte(address + index) & 0xff);
-        long at = address + ((long) index << 1);
-        int first = UNSAFE.getByte(at) & 0xff;
-        int second = UNSAFE.getByte(at + 1L) & 0xff;
-        return bigEndian
-                ? (char) ((first << 8) | second)
-                : (char) (first | (second << 8));
+        char unit = UNSAFE.getChar(address + ((long) index << 1));
+        return bigEndian == NATIVE_BIG_ENDIAN ? unit : Character.reverseBytes(unit);
     }
 
     @Override
     void getChars(int start, int end, char[] destination, int destinationStart) {
         Objects.checkFromToIndex(start, end, length);
         Objects.checkFromIndexSize(destinationStart, end - start, destination.length);
+        int count = end - start;
         if (storageWidth == 1) {
             long source = address + start;
             for (int target = destinationStart; start < end; start++, target++, source++) {
@@ -345,13 +329,61 @@ final class M3StringAtom extends M3StringOwner {
             return;
         }
         long source = address + ((long) start << 1);
-        for (int target = destinationStart; start < end; start++, target++, source += 2L) {
-            int first = UNSAFE.getByte(source) & 0xff;
-            int second = UNSAFE.getByte(source + 1L) & 0xff;
-            destination[target] = bigEndian
-                    ? (char) ((first << 8) | second)
-                    : (char) (first | (second << 8));
+        if (count < BULK) {
+            boolean swap = bigEndian != NATIVE_BIG_ENDIAN;
+            for (int target = destinationStart; start < end; start++, target++, source += 2L) {
+                char unit = UNSAFE.getChar(source);
+                destination[target] = swap ? Character.reverseBytes(unit) : unit;
+            }
+            return;
         }
+        long target = CHAR_BASE + ((long) destinationStart << 1);
+        if (bigEndian == NATIVE_BIG_ENDIAN) {
+            UNSAFE.copyMemory(null, source, destination, target, (long) count << 1);
+        } else {
+            UNSAFE.copySwapMemory(null, source, destination, target, (long) count << 1, 2L);
+        }
+    }
+
+    /**
+     * First index in {@code [start, start + count)} whose unit differs from the flat compact
+     * value at {@code flatOffset}, {@code -1} when none: the vectorized off-heap mismatch when the
+     * widths agree (Latin-1 atom against a Latin-1 value, native-order UTF-16 atom against a
+     * UTF-16 value), the window loop otherwise.
+     */
+    @Override
+    int mismatchUnits(int start, byte[] flat, int flatOffset, byte flatCoder, int count) {
+        Objects.checkFromIndexSize(start, count, length);
+        Objects.checkFromIndexSize(flatOffset, count, flat.length >> flatCoder);
+        if (storageWidth == 1 && flatCoder == String.LATIN1) {
+            return mismatchBytes(address + start, flat, BYTE_BASE + flatOffset, count, 0);
+        }
+        if (storageWidth == 2 && flatCoder == String.UTF16 && bigEndian == NATIVE_BIG_ENDIAN) {
+            return mismatchBytes(address + ((long) start << 1), flat,
+                    BYTE_BASE + ((long) flatOffset << 1), count, 1);
+        }
+        return super.mismatchUnits(start, flat, flatOffset, flatCoder, count);
+    }
+
+    /** {@code ArraysSupport.mismatch} shape over an absolute address and a heap array. */
+    private static int mismatchBytes(long source, byte[] flat, long flatOffset, int count, int log2Scale) {
+        int index = 0;
+        if (count > 7) {
+            index = ArraysSupport.vectorizedMismatch(null, source, flat, flatOffset, count, log2Scale);
+            if (index >= 0) return index;
+            index = count - ~index;
+        }
+        if (log2Scale == 0) {
+            for (; index < count; index++) {
+                if (UNSAFE.getByte(source + index) != UNSAFE.getByte(flat, flatOffset + index)) return index;
+            }
+            return -1;
+        }
+        for (; index < count; index++) {
+            long at = (long) index << 1;
+            if (UNSAFE.getChar(source + at) != UNSAFE.getChar(flat, flatOffset + at)) return index;
+        }
+        return -1;
     }
 
     @Override
@@ -369,9 +401,23 @@ final class M3StringAtom extends M3StringOwner {
                 destination.length);
 
         if (storageWidth == 1 && destinationCoder == String.LATIN1) {
+            if (count >= BULK) {
+                UNSAFE.copyMemory(null, address + start, destination, BYTE_BASE + destinationStart, count);
+                return;
+            }
             long source = address + start;
             for (int target = destinationStart; start < end; start++, target++, source++) {
                 destination[target] = UNSAFE.getByte(source);
+            }
+            return;
+        }
+        if (storageWidth == 2 && destinationCoder == String.UTF16 && count >= BULK) {
+            long source = address + ((long) start << 1);
+            long target = BYTE_BASE + ((long) destinationStart << 1);
+            if (bigEndian == NATIVE_BIG_ENDIAN) {
+                UNSAFE.copyMemory(null, source, destination, target, (long) count << 1);
+            } else {
+                UNSAFE.copySwapMemory(null, source, destination, target, (long) count << 1, 2L);
             }
             return;
         }
@@ -382,11 +428,8 @@ final class M3StringAtom extends M3StringOwner {
             if (storageWidth == 1) {
                 unit = (char) (UNSAFE.getByte(source++) & 0xff);
             } else {
-                int first = UNSAFE.getByte(source) & 0xff;
-                int second = UNSAFE.getByte(source + 1L) & 0xff;
-                unit = bigEndian
-                        ? (char) ((first << 8) | second)
-                        : (char) (first | (second << 8));
+                unit = UNSAFE.getChar(source);
+                if (bigEndian != NATIVE_BIG_ENDIAN) unit = Character.reverseBytes(unit);
                 source += 2L;
             }
             if (destinationCoder == String.LATIN1) {

@@ -2373,10 +2373,7 @@ public final class String
                     return false;
                 }
             }
-            for (int index = 0; index < len; index++) {
-                if (charAt(toffset + index) != other.charAt(ooffset + index)) return false;
-            }
-            return true;
+            return M3StringMixedCompare.regionMatchesUnits(this, toffset, other, ooffset, len);
         }
         byte[] tv = value();
         byte[] ov = other.value();
@@ -2532,10 +2529,7 @@ public final class String
                     return false;
                 }
             }
-            for (int index = 0; index < prefix.length(); index++) {
-                if (sourceM3.charAt(toffset + index) != prefix.charAt(index)) return false;
-            }
-            return true;
+            return M3StringMixedCompare.regionMatchesUnits(this, toffset, prefix, 0, prefix.length());
         }
         byte[] ta = value();
         byte[] pa = prefix.value();

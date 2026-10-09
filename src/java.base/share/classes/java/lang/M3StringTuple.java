@@ -39,6 +39,23 @@ final class M3StringTuple extends M3StringOwner {
     }
 
     @Override
+    int mismatchUnits(int start, byte[] flat, int flatOffset, byte flatCoder, int count) {
+        Objects.checkFromIndexSize(start, count, length);
+        int leftLength = left.length();
+        if (start + count <= leftLength) {
+            return left.mismatchUnits(start, flat, flatOffset, flatCoder, count);
+        }
+        if (start >= leftLength) {
+            return right.mismatchUnits(start - leftLength, flat, flatOffset, flatCoder, count);
+        }
+        int leftCount = leftLength - start;
+        int index = left.mismatchUnits(start, flat, flatOffset, flatCoder, leftCount);
+        if (index >= 0) return index;
+        index = right.mismatchUnits(0, flat, flatOffset + leftCount, flatCoder, count - leftCount);
+        return index < 0 ? -1 : leftCount + index;
+    }
+
+    @Override
     void getChars(int start, int end, char[] destination, int destinationStart) {
         Objects.checkFromToIndex(start, end, length);
         Objects.checkFromIndexSize(destinationStart, end - start, destination.length);

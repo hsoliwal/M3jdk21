@@ -723,6 +723,15 @@ final class M3String implements CharSequence {
         return M3StringMixedCompare.unitsEqual(this, other);
     }
 
+    /**
+     * First index in {@code [from, from + count)} whose unit differs from the flat compact value
+     * at {@code flatOffset}, {@code -1} when none; the owner compares in place where it can.
+     */
+    int mismatchUnits(int from, byte[] flat, int flatOffset, byte flatCoder, int count) {
+        Objects.checkFromIndexSize(from, count, length());
+        return owner.mismatchUnits(Math.addExact(start(), from), flat, flatOffset, flatCoder, count);
+    }
+
     void getChars(int sourceBegin, int sourceEnd, char[] destination, int destinationBegin) {
         String.checkBoundsBeginEnd(sourceBegin, sourceEnd, length());
         Objects.checkFromIndexSize(destinationBegin, sourceEnd - sourceBegin, destination.length);

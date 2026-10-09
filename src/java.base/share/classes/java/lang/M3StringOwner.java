@@ -46,6 +46,29 @@ abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple {
         }
     }
 
+    /**
+     * First index in {@code [start, start + count)} whose UTF-16 unit differs from the flat
+     * compact value {@code flat} (coder {@code flatCoder}) at {@code flatOffset}, {@code -1}
+     * when the ranges agree. The default folds bulk-read windows against the value array; an
+     * atom compares its native bytes in place (A11).
+     */
+    int mismatchUnits(int start, byte[] flat, int flatOffset, byte flatCoder, int count) {
+        Objects.checkFromIndexSize(start, count, length);
+        Objects.checkFromIndexSize(flatOffset, count, flat.length >> flatCoder);
+        char[] window = new char[Math.min(count, 256)];
+        for (int base = 0; base < count; base += window.length) {
+            int chunk = Math.min(window.length, count - base);
+            getChars(start + base, start + base + chunk, window, 0);
+            for (int index = 0; index < chunk; index++) {
+                char unit = flatCoder == String.LATIN1
+                        ? StringLatin1.getChar(flat, flatOffset + base + index)
+                        : StringUTF16.getChar(flat, flatOffset + base + index);
+                if (window[index] != unit) return base + index;
+            }
+        }
+        return -1;
+    }
+
     void getBytes(
             int start,
             int end,

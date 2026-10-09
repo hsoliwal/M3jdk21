@@ -54,6 +54,10 @@ final class M3StringMixedCompare {
         int leftLength = left.length();
         int rightLength = right.length();
         int limit = Math.min(leftLength, rightLength);
+        int decided = mismatchInPlace(left, 0, right, 0, limit);
+        if (decided != UNDECIDED) {
+            return decided < 0 ? leftLength - rightLength : left.charAt(decided) - right.charAt(decided);
+        }
         if (limit <= SHORT) {
             for (int index = 0; index < limit; index++) {
                 int difference = left.charAt(index) - right.charAt(index);
@@ -76,6 +80,9 @@ final class M3StringMixedCompare {
     /** Unit equality of {@code storage} against {@code other} of the same length. */
     static boolean unitsEqual(M3String storage, String other) {
         int length = storage.length();
+        if (other.m3() == null) {
+            return storage.mismatchUnits(0, other.value(), 0, other.coder(), length) < 0;
+        }
         if (length <= SHORT) {
             for (int index = 0; index < length; index++) {
                 if (storage.charAt(index) != other.charAt(index)) return false;
@@ -88,6 +95,48 @@ final class M3StringMixedCompare {
             int count = Math.min(a.length, length - base);
             storage.getChars(base, base + count, a, 0);
             other.getChars(base, base + count, b, 0);
+            if (ArraysSupport.mismatch(a, b, count) >= 0) return false;
+        }
+        return true;
+    }
+
+    /** Sentinel of {@link #mismatchInPlace}: neither side is flat, fall back to windows. */
+    private static final int UNDECIDED = Integer.MIN_VALUE;
+
+    /**
+     * Mismatch index of {@code left[leftFrom, leftFrom + count)} against
+     * {@code right[rightFrom, rightFrom + count)} when exactly one side is flat: the M3 side
+     * compares its units in place against the flat compact value (no copy); {@code -1} when the
+     * regions agree, {@link #UNDECIDED} when both sides carry storage or both are flat.
+     */
+    private static int mismatchInPlace(String left, int leftFrom, String right, int rightFrom, int count) {
+        M3String leftStorage = left.m3();
+        M3String rightStorage = right.m3();
+        if (leftStorage != null && rightStorage == null) {
+            return leftStorage.mismatchUnits(leftFrom, right.value(), rightFrom, right.coder(), count);
+        }
+        if (leftStorage == null && rightStorage != null) {
+            return rightStorage.mismatchUnits(rightFrom, left.value(), leftFrom, left.coder(), count);
+        }
+        return UNDECIDED;
+    }
+
+    /** {@code left.regionMatches(toffset, right, ooffset, len)} with the bounds checked. */
+    static boolean regionMatchesUnits(String left, int toffset, String right, int ooffset, int len) {
+        int index = mismatchInPlace(left, toffset, right, ooffset, len);
+        if (index != UNDECIDED) return index < 0;
+        if (len <= SHORT) {
+            for (int offset = 0; offset < len; offset++) {
+                if (left.charAt(toffset + offset) != right.charAt(ooffset + offset)) return false;
+            }
+            return true;
+        }
+        char[] a = new char[Math.min(len, WINDOW)];
+        char[] b = new char[a.length];
+        for (int base = 0; base < len; base += a.length) {
+            int count = Math.min(a.length, len - base);
+            left.getChars(toffset + base, toffset + base + count, a, 0);
+            right.getChars(ooffset + base, ooffset + base + count, b, 0);
             if (ArraysSupport.mismatch(a, b, count) >= 0) return false;
         }
         return true;
