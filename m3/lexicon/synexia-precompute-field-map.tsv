@@ -55,3 +55,9 @@ M3LexiconPrecompute.TokenFrequency	frequencies	Map<Integer,Integer>	frequencies	
 M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTokenIds	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
 M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
 M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
+M3PhrasePrecompute.Scope	sourceId	String	source_id	m3phrase-v1:synexia.phrases.tsv	MAPPED	source family remains explicit and is not inferred from token IDs
+M3PhrasePrecompute.Scope	recordId	String	record_id	m3phrase-v1:synexia.phrases.tsv	MAPPED	source record identity remains stable across reloads
+M3PhrasePrecompute.Scope	sourceRevision	String	source_revision	m3phrase-v1:synexia.phrases.tsv	MAPPED	source revision is part of the reusable scope
+M3PhrasePrecompute.Scope	vocabularyFingerprint	String	vocabulary_fingerprint	m3phrase-v1:synexia.phrases.tsv	MAPPED	phrase token IDs are never reused across a different vocabulary fingerprint
+M3PhrasePrecompute.Phrase	sourceTokenIds	int[]	source_token_ids	m3phrase-v1:synexia.phrases.tsv	MAPPED	source token order and non-empty phrase boundary are preserved
+M3PhrasePrecompute.Phrase	replacementTokenIds	int[]	replacement_token_ids	m3phrase-v1:synexia.phrases.tsv	MAPPED	replacement token order, including an empty replacement, is preserved
