@@ -267,7 +267,7 @@
   "guards": [
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "7c11497c0183d04e66baa41ee5391de682175360"
+      "sha256": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
@@ -290,5 +290,5 @@
       "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
     }
   ],
-  "plan_sha256": "21211ea105bb6b1f7021207b4b392b697c26e5d5f88dc60e2af2d7d726ab4f1b"
+  "plan_sha256": "7fec4155f8737bc00be1d831c940332b32e7f3e95e8174f161fb9918bc9f33d3"
 }
