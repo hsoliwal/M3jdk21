@@ -151,6 +151,160 @@ public final class M3LexiconPrecompute {
         }
     }
 
+
+    /** Immutable dictionary-level facts keyed by one source record and lexeme. */
+    public static final class IndexWordFacts {
+        private final int languageId;
+        private final int wordCount;
+        private final long lexiconFingerprint;
+        private final long totalCorpusTokens;
+        private final long totalDocuments;
+        private final int flags;
+        private final long corpusCount;
+        private final int documentFrequency;
+        private final int[] memberships;
+        private final long[] conceptIds;
+        private final long[] subjects;
+        private final long[] expansionWordIds;
+
+        public IndexWordFacts(int languageId, int wordCount, long lexiconFingerprint,
+                              long totalCorpusTokens, long totalDocuments, int flags,
+                              long corpusCount, int documentFrequency, int[] memberships,
+                              long[] conceptIds, long[] subjects, long[] expansionWordIds) {
+            if (languageId < 0 || wordCount < 0 || totalCorpusTokens < 0
+                    || totalDocuments < 0 || corpusCount < 0 || documentFrequency < 0)
+                throw new IllegalArgumentException("negative dictionary fact");
+            this.languageId = languageId;
+            this.wordCount = wordCount;
+            this.lexiconFingerprint = lexiconFingerprint;
+            this.totalCorpusTokens = totalCorpusTokens;
+            this.totalDocuments = totalDocuments;
+            this.flags = flags;
+            this.corpusCount = corpusCount;
+            this.documentFrequency = documentFrequency;
+            this.memberships = copy(memberships, "memberships");
+            this.conceptIds = copy(conceptIds, "conceptIds");
+            this.subjects = copy(subjects, "subjects");
+            this.expansionWordIds = copy(expansionWordIds, "expansionWordIds");
+        }
+
+        public int languageId() { return languageId; }
+        public int wordCount() { return wordCount; }
+        public long lexiconFingerprint() { return lexiconFingerprint; }
+        public long totalCorpusTokens() { return totalCorpusTokens; }
+        public long totalDocuments() { return totalDocuments; }
+        public int flags() { return flags; }
+        public long corpusCount() { return corpusCount; }
+        public int documentFrequency() { return documentFrequency; }
+
+        public int[] memberships() { return memberships.clone(); }
+        public int membershipCount() { return memberships.length; }
+        public int membershipAt(int index) {
+            return memberships[Objects.checkIndex(index, memberships.length)];
+        }
+
+        public long[] conceptIds() { return conceptIds.clone(); }
+        public int conceptCount() { return conceptIds.length; }
+        public long conceptAt(int index) {
+            return conceptIds[Objects.checkIndex(index, conceptIds.length)];
+        }
+
+        public long[] subjects() { return subjects.clone(); }
+        public int subjectCount() { return subjects.length; }
+        public long subjectAt(int index) {
+            return subjects[Objects.checkIndex(index, subjects.length)];
+        }
+
+        public long[] expansionWordIds() { return expansionWordIds.clone(); }
+        public int expansionSize() { return expansionWordIds.length; }
+        public long expansionWordIdAt(int index) {
+            return expansionWordIds[Objects.checkIndex(index, expansionWordIds.length)];
+        }
+
+        public boolean appliesTo(int language, long fingerprint) {
+            return languageId == language && lexiconFingerprint == fingerprint;
+        }
+
+        private static int[] copy(int[] value, String name) {
+            return Objects.requireNonNull(value, name).clone();
+        }
+
+        private static long[] copy(long[] value, String name) {
+            return Objects.requireNonNull(value, name).clone();
+        }
+    }
+
+    /** Immutable dictionary signal profile, including frequency and lexical ranks. */
+    public static final class IndexWordSignal {
+        private final int utf16Length;
+        private final int codePointLength;
+        private final int firstCodePoint;
+        private final int lastCodePoint;
+        private final int flags;
+        private final int frequencyRank;
+        private final long lemmaId;
+        private final int lexicalRank;
+        private final int morphologyMask;
+        private final long phoneticId;
+        private final int posMask;
+        private final long presence64;
+        private final int scriptOrdinal;
+        private final long simHash64;
+        private final long stemId;
+
+        public IndexWordSignal(int utf16Length, int codePointLength, int firstCodePoint,
+                               int lastCodePoint, int flags, int frequencyRank, long lemmaId,
+                               int lexicalRank, int morphologyMask, long phoneticId,
+                               int posMask, long presence64, int scriptOrdinal,
+                               long simHash64, long stemId) {
+            if (utf16Length < 0 || codePointLength < 0 || codePointLength > utf16Length
+                    || frequencyRank < 0 || lexicalRank < 0 || scriptOrdinal < 0)
+                throw new IllegalArgumentException("invalid dictionary signal length or rank");
+            if (!validBoundary(firstCodePoint) || !validBoundary(lastCodePoint)
+                    || (codePointLength == 0
+                        ? firstCodePoint != -1 || lastCodePoint != -1
+                        : firstCodePoint < 0 || lastCodePoint < 0))
+                throw new IllegalArgumentException("invalid dictionary signal boundary");
+            if (lemmaId < -1 || phoneticId < -1 || stemId < -1)
+                throw new IllegalArgumentException("invalid optional dictionary signal id");
+            this.utf16Length = utf16Length;
+            this.codePointLength = codePointLength;
+            this.firstCodePoint = firstCodePoint;
+            this.lastCodePoint = lastCodePoint;
+            this.flags = flags;
+            this.frequencyRank = frequencyRank;
+            this.lemmaId = lemmaId;
+            this.lexicalRank = lexicalRank;
+            this.morphologyMask = morphologyMask;
+            this.phoneticId = phoneticId;
+            this.posMask = posMask;
+            this.presence64 = presence64;
+            this.scriptOrdinal = scriptOrdinal;
+            this.simHash64 = simHash64;
+            this.stemId = stemId;
+        }
+
+        public int utf16Length() { return utf16Length; }
+        public int codePointLength() { return codePointLength; }
+        public int firstCodePoint() { return firstCodePoint; }
+        public int lastCodePoint() { return lastCodePoint; }
+        public int flags() { return flags; }
+        public int frequencyRank() { return frequencyRank; }
+        public long lemmaId() { return lemmaId; }
+        public int lexicalRank() { return lexicalRank; }
+        public int morphologyMask() { return morphologyMask; }
+        public long phoneticId() { return phoneticId; }
+        public int posMask() { return posMask; }
+        public long presence64() { return presence64; }
+        public int scriptOrdinal() { return scriptOrdinal; }
+        public long simHash64() { return simHash64; }
+        public long stemId() { return stemId; }
+
+        private static boolean validBoundary(int codePoint) {
+            return codePoint == -1 || Character.isValidCodePoint(codePoint);
+        }
+    }
+
     public record RangeFingerprint(long first, long second, int length) {
         public RangeFingerprint {
             if (length < 0) throw new IllegalArgumentException("negative range length");
