@@ -1204,6 +1204,28 @@ for fragment in [
     if fragment not in recipe_authority:
         fail(f"Synexia String recipe authority receipt missing: {fragment}")
 
+# Current active A21 recipe authority is additive to the historical canonical-DAG receipt.
+# Synexia owns the exact stacked recipe semantics; M3JDK21 owns the applied runtime.
+for fragment in [
+    "current_recipe_id\tsynexia.m3jdk.string.a21-current.20261009",
+    "current_authority_repo\thsoliwal/com.synexia",
+    "current_authority_path\tsynexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-string-a21-current-convergence.yml",
+    "current_authority_tracking_ref\trefs/heads/m3/m3jdk21-string-a21-current-aggregate-20261009",
+    "current_authority_pr\thsoliwal/com.synexia#10011",
+    "current_authority_commit\td8193d921353e803a0755ac51ad54d8d27a202bd",
+    "current_authority_blob\t08c590bcec7e49ce676e2c0da74213c8b78ca84e",
+    "current_portable_recipe\tcom.synexia.m3.M3Jdk21StringA21CurrentConvergence",
+    "current_target_pr\thsoliwal/M3jdk21#563",
+    "current_target_branch\tm3/precompute-builder-m3-args-20261009",
+    "current_target_revision\t0aed554123226ce9263e3f24ab646b312fc73b8f",
+    "current_stack_role\tACTIVE_A21_AGGREGATE",
+    "current_runtime_owner\tM3JDK",
+    "current_recipe_owner\tSynexia",
+    "current_runtime_dependency_on_synexia\tfalse",
+]:
+    if fragment not in recipe_authority:
+        fail(f"current Synexia A21 String recipe authority missing: {fragment}")
+
 # Reusable M3 String history-convergence recipe custody is Synexia-only. M3JDK21 is a
 # thin receiver/runtime owner and must not recreate a second local recipe descriptor, crate or test.
 for forbidden_recipe_path in [
