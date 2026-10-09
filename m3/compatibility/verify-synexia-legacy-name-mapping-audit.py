@@ -17,7 +17,7 @@ EXPECTED_PROOF = "M3JDK_SYNEXIA_LEGACY_MAPPING_AUDIT_PASS rows=47 receipt_unpinn
 
 
 def git_blob_sha1(payload: bytes) -> str:
-    header = f"blob {len(payload)}\\0".encode("ascii")
+    header = f"blob {len(payload)}\0".encode("ascii")
     return hashlib.sha1(header + payload).hexdigest()
 
 
@@ -70,7 +70,7 @@ def main() -> int:
         "target_receipt_state",
         "disposition",
     ]
-    rows = list(csv.reader(data_lines, delimiter="\\t"))
+    rows = list(csv.reader(data_lines, delimiter="\t"))
     if not rows or rows[0] != expected_header:
         fail("audit header drift")
     audit_rows = rows[1:]
