@@ -5,7 +5,7 @@ displayName: M3 Synexia PR9042 precompute handoff
 description: >-
   Installs the target-owned lineage receipt, verifier, documentation and CI gate for the
   Synexia PR #9042 code-text/regex precompute capability. The receiver remains isolated from
-  java.base and grants no semantic or bootstrap promotion authority.
+  JDK bootstrap modules and grants no semantic or bootstrap promotion authority.
 recipeList:
   - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
       crateName: synexia-pr9042-precompute-handoff
