@@ -123,5 +123,3 @@ public final class M3Lexicons implements AutoCloseable {
         catalog.close();
     }
 }
-
-
