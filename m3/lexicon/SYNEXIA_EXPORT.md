@@ -141,6 +141,24 @@ boundary. The sidecars remain language-layer metadata; they are not fields of
 `java.lang.String`, and they do not make Synexia resolver IDs interchangeable
 with VM-local M3 IDs.
 
+## Compute-boundary receipt
+
+Lexical precompute belongs in the M3JDK export contract above. Native or GPU
+working sets that are not lexical owner facts must remain separately mapped.
+The companion `m3/lexicon/synexia-compute-boundary.tsv` is the auditable bridge
+for those candidates: it preserves the Synexia source commit, recipe, PR and
+contract while recording whether M3JDK has an admitted target owner.
+
+The current distance-scorer candidate is intentionally
+`RETAIN_IN_SYNEXIA_UNTIL_M3JDK_OWNER_IS_ADMITTED`. Its immutable
+`int[]`/`long[]` lanes and bounded JNI score image are not
+`M3StringFacts`, `LangDexCoordinate`, or `java.lang.String` payload fields.
+The entry remains `proof=NOT_RUN`, `performance=NOT_MEASURED`, and
+`platform_scope=NONE_CLAIMED`. It may be remapped only after the Java/native
+contract, fresh-output and lease invariants, differential tests, and claimed
+platform measurements are admitted. This prevents a successful lexical export
+from silently carrying an unproven native optimization.
+
 The repository contains only the schema, source map and synthetic proof. Full
 LangDex/Hugging Face/Kaggle/WordNet/Wikipedia or operator-owned dictionary data
 must be supplied under its exact revision and license custody. No network
