@@ -65,7 +65,7 @@ final class M3SynexiaFullDeliveryA3RecipeTest {
                                         + "SynexiaImportPlanTest.java")
                         .contains("plansFullDeltaAndStagesOnlyChangedCandidates"));
 
-        assertTrue(applyText(recipe, after).isEmpty());
+        assertTrue(apply(recipe, after).isEmpty());
     }
 
     @Test
@@ -108,7 +108,7 @@ final class M3SynexiaFullDeliveryA3RecipeTest {
         assertTrue(document.contains("REPLACE"));
         assertTrue(document.contains("STALE"));
         assertTrue(document.contains("OpenRewrite"));
-        assertTrue(apply(recipe, after).isEmpty());
+        assertTrue(applyText(recipe, after).isEmpty());
     }
 
     @Test
