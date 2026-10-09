@@ -3467,7 +3467,8 @@ public final class String
     public String replaceFirst(String regex, String replacement) {
         M3String storage = m3();
         if (storage != null && M3String.isLiteralRegexReplacement(regex, replacement)) {
-            return storage.replaceLiteralRegex(this, regex, replacement, true);
+            String replaced = storage.replaceLiteralRegex(this, regex, replacement, true);
+            if (replaced != null) return replaced;
         }
         return Pattern.compile(regex).matcher(this).replaceFirst(replacement);
     }
@@ -3515,7 +3516,8 @@ public final class String
     public String replaceAll(String regex, String replacement) {
         M3String storage = m3();
         if (storage != null && M3String.isLiteralRegexReplacement(regex, replacement)) {
-            return storage.replaceLiteralRegex(this, regex, replacement, false);
+            String replaced = storage.replaceLiteralRegex(this, regex, replacement, false);
+            if (replaced != null) return replaced;
         }
         return Pattern.compile(regex).matcher(this).replaceAll(replacement);
     }
@@ -3548,14 +3550,8 @@ public final class String
             M3String targetM3 = trgtStr.m3();
             M3String replacementM3 = replStr.m3();
             if (storage != null || targetM3 != null || replacementM3 != null) {
-                // A flat target that cannot occur (prepared facts) or does not occur leaves
-                // this String unchanged without admitting the target or the replacement.
-                if (storage != null && targetM3 == null && indexOf(trgtStr) < 0) return this;
-                M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
-                if (targetM3 == null) targetM3 = M3String.canonicalize(trgtStr);
-                if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);
-                M3String replaced = sourceM3.replace(targetM3, replacementM3);
-                return replaced == sourceM3 ? this : new String(replaced);
+                String replaced = m3Replace(storage, trgtStr, targetM3, replStr, replacementM3);
+                if (replaced != null) return replaced;
             }
 
             boolean thisIsLatin1 = this.isLatin1();
@@ -3587,7 +3583,10 @@ public final class String
             if (storage != null || replacementM3 != null) {
                 M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
                 if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);
-                return new String(sourceM3.replaceEmptyTarget(replacementM3));
+                // A refused admission (pool budget) leaves the flat path below to build the result.
+                if (sourceM3 != null && replacementM3 != null) {
+                    return new String(sourceM3.replaceEmptyTarget(replacementM3));
+                }
             }
 
             StringBuilder sb = new StringBuilder(resultLen);
@@ -3597,6 +3596,27 @@ public final class String
             }
             return sb.toString();
         }
+    }
+
+    /**
+     * M3 lane of {@link #replace(CharSequence, CharSequence)} for a non-empty target. The match
+     * is located through the mixed-side search before anything is admitted, so an absent target
+     * keeps this String's identity without admitting the target or the replacement; a flat
+     * target is never admitted (transient: it only drives the search); the replacement joins the
+     * result. Returns {@code null} when the pool refuses an admission (budget), in which case the
+     * flat compatibility path computes the same result.
+     */
+    private String m3Replace(M3String storage, String trgtStr, M3String targetM3,
+                             String replStr, M3String replacementM3) {
+        int found = indexOf(trgtStr);
+        if (found < 0) return this;
+        M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
+        if (sourceM3 == null) return null;
+        M3String replacement = replacementM3 != null ? replacementM3 : M3String.canonicalize(replStr);
+        if (replacement == null) return null;
+        return new String(targetM3 != null
+                ? sourceM3.replaceAt(targetM3, replacement, found)
+                : sourceM3.replaceFlatTarget(this, trgtStr, replacement, found));
     }
 
     /**
@@ -4040,7 +4060,8 @@ public final class String
         byte coder = (byte) icoder;
         if (m3JoinedStringsEnabled()) {
             M3String storage = M3String.joinDesignated(prefix, suffix, delimiter, elements, size);
-            return new String(storage);
+            // null: the pool refused a flat piece (budget); the flat path below builds the result.
+            if (storage != null) return new String(storage);
         }
         // long len overflow check, char -> byte length, int len overflow check
         if (len < 0L || (len <<= coder) != (int) len) {

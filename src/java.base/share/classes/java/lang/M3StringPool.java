@@ -23,7 +23,10 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.zip.CRC32C;
+import jdk.internal.access.JavaLangRefAccess;
+import jdk.internal.access.SharedSecrets;
 import jdk.internal.misc.Unsafe;
+import jdk.internal.misc.VM;
 import sun.nio.ch.DirectBuffer;
 
 /**
@@ -32,6 +35,20 @@ import sun.nio.ch.DirectBuffer;
  * <p>Scalar payload is either read-only mapped storage or weakly interned VM-local native memory. Java
  * byte[]/char[] values are admission or compatibility shadows only and are never retained here.
  * Tuple nodes retain only child M3 coordinates and form a persistent immutable DAG.</p>
+ *
+ * <p>Bounds. The native bytes retained by VM-local scalar owners are capped by
+ * {@code -Dm3.string.pool.maxBytes} (default {@code Runtime.maxMemory()}, the MaxDirectMemorySize
+ * default); every multi-unit admission reserves its bytes before allocating and a reclaimed block
+ * returns them through the local reference queue. On exhaustion the admission takes the
+ * {@code java.nio.Bits.reserveMemory} route (drain the queue, wait for reference processing, one
+ * {@code System.gc()}, bounded back-off retries) and, if the budget is still short, it is refused:
+ * the intern methods return {@code null} and the String keeps its flat spelling (lineage invariant
+ * 8: precompute absence never changes semantics; no OutOfMemoryError is introduced). A refused
+ * cycle holds further GC-assisted cycles off for one second so sustained pressure stays cheap. The
+ * single-unit lane is bounded by construction (at most 65,536 atoms, 128 KiB) and never refuses.
+ * Canonical tuple retention is capped by {@code -Dm3.string.pool.maxTuples} (default 1,048,576
+ * registered entries); beyond the cap a composition still forms its tuple, only without canonical
+ * reuse. A lexicon that fails to open is reported once on {@code System.err}, never per call.</p>
  */
 final class M3StringPool {
     private static final long LEXICON_MAGIC = 0x4d334c4558303031L;
@@ -39,9 +56,23 @@ final class M3StringPool {
     private static final int MAX_LEXICON_BYTES = 1 << 30;
     private static final Unsafe UNSAFE = Unsafe.getUnsafe();
 
+    static final String MAX_LOCAL_BYTES_PROPERTY = "m3.string.pool.maxBytes";
+    static final String MAX_RETAINED_TUPLES_PROPERTY = "m3.string.pool.maxTuples";
+    static final long DEFAULT_MAX_RETAINED_TUPLES = 1L << 20;
+    /** Native byte budget of the VM-local scalar lane; {@code 0} admits no multi-unit local atom. */
+    static final long MAX_LOCAL_BYTES =
+            bound(MAX_LOCAL_BYTES_PROPERTY, Runtime.getRuntime().maxMemory());
+    /** Registered canonical tuple entries (live or awaiting expunge) the pool keeps at most. */
+    static final long MAX_RETAINED_TUPLES =
+            bound(MAX_RETAINED_TUPLES_PROPERTY, DEFAULT_MAX_RETAINED_TUPLES);
+    /** Bits.reserveMemory uses 9 (about 0.5 s); String admission refuses after 1+2+4+8 ms. */
+    private static final int MAX_SLEEPS = 4;
+    private static final long SLOW_RESERVE_HOLDOFF_NANOS = 1_000_000_000L;
+
     private static final AtomicLong NEXT_LOCAL_ID = new AtomicLong(1L);
     private static final AtomicLong NEXT_TUPLE_ID = new AtomicLong(1L << 40);
     private static final AtomicLong LOCAL_NATIVE_BYTES = new AtomicLong();
+    private static final AtomicLong RETAINED_TUPLES = new AtomicLong();
 
     private static final ConcurrentHashMap<Fingerprint, LocalBucket> LOCAL =
             new ConcurrentHashMap<>();
@@ -51,6 +82,10 @@ final class M3StringPool {
     private static final ReferenceQueue<M3StringTuple> TUPLE_QUEUE = new ReferenceQueue<>();
 
     private static volatile Lexicon lexicon;
+    /** Guarded by the class lock: the lexicon failure report is emitted once per VM. */
+    private static boolean lexiconFailureReported;
+    /** Deadline before which a budget miss is refused without another GC-assisted cycle. */
+    private static volatile long nextSlowReserveNanos = System.nanoTime();
 
     private M3StringPool() {}
 
@@ -62,7 +97,34 @@ final class M3StringPool {
                 lexicon = Lexicon.open(Path.of(file));
             } catch (IOException | RuntimeException failure) {
                 lexicon = Lexicon.unavailable();
+                reportLexiconFailure(file, failure);
             }
+        }
+    }
+
+    /** Once per VM (class lock held): a missing or corrupt lexicon is a degraded mode, not an error. */
+    private static void reportLexiconFailure(String file, Exception failure) {
+        if (lexiconFailureReported) return;
+        lexiconFailureReported = true;
+        java.io.PrintStream err = System.err;
+        if (err != null) {
+            err.println("M3StringPool: lexicon " + file + " unavailable, continuing without it: "
+                    + failure);
+        }
+    }
+
+    /** Saved-property bound; absent, negative or unparsable values fall back (as MaxDirectMemorySize). */
+    static long bound(String property, long fallback) {
+        return parseBound(VM.initLevel() >= 1 ? VM.getSavedProperty(property) : null, fallback);
+    }
+
+    static long parseBound(String value, long fallback) {
+        if (value == null) return fallback;
+        try {
+            long parsed = Long.parseLong(value);
+            return parsed < 0L ? fallback : parsed;
+        } catch (NumberFormatException invalid) {
+            return fallback;
         }
     }
 
@@ -129,6 +191,7 @@ final class M3StringPool {
         Fingerprint fingerprint = new Fingerprint(coder, byteLength, hash64);
 
         expungeLocals();
+        long reserved = 0L;
         for (;;) {
             LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
             synchronized (bucket) {
@@ -141,19 +204,24 @@ final class M3StringPool {
                         reference.releaseNative();
                     } else if (existing.contentEqualsCodePoints(
                             source, offset, count, utf16Length, coder)) {
-                        return M3String.whole(existing);
+                        return found(existing, reserved);
                     }
                 }
 
-                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-                M3StringAtom created =
-                        M3StringAtom.localCodePoints(
+                if (reserved != 0L || tryReserve(byteLength)) {
+                    M3StringAtom created = null;
+                    try {
+                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                        created = M3StringAtom.localCodePoints(
                                 source, offset, count, utf16Length, coder, id, hash64);
-                long retainedBytes = created.nativePayloadBytes();
-                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
-                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
-                return M3String.whole(created);
+                    } finally {
+                        if (created == null) release(byteLength);
+                    }
+                    return retain(bucket, fingerprint, created, byteLength);
+                }
             }
+            reserved = reserveSlow(byteLength);
+            if (reserved == 0L) return null;
         }
     }
 
@@ -201,6 +269,7 @@ final class M3StringPool {
         Fingerprint fingerprint = new Fingerprint(targetCoder, byteLength, hash64);
 
         expungeLocals();
+        long reserved = 0L;
         for (;;) {
             LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
             synchronized (bucket) {
@@ -213,25 +282,24 @@ final class M3StringPool {
                         reference.releaseNative();
                     } else if (existing.contentEqualsCompactBytes(
                             source, sourceOffset, length, sourceCoder, targetCoder)) {
-                        return M3String.whole(existing);
+                        return found(existing, reserved);
                     }
                 }
 
-                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-                M3StringAtom created =
-                        M3StringAtom.localCompactBytes(
-                                source,
-                                sourceOffset,
-                                length,
-                                sourceCoder,
-                                targetCoder,
-                                id,
-                                hash64);
-                long retainedBytes = created.nativePayloadBytes();
-                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
-                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
-                return M3String.whole(created);
+                if (reserved != 0L || tryReserve(byteLength)) {
+                    M3StringAtom created = null;
+                    try {
+                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                        created = M3StringAtom.localCompactBytes(
+                                source, sourceOffset, length, sourceCoder, targetCoder, id, hash64);
+                    } finally {
+                        if (created == null) release(byteLength);
+                    }
+                    return retain(bucket, fingerprint, created, byteLength);
+                }
             }
+            reserved = reserveSlow(byteLength);
+            if (reserved == 0L) return null;
         }
     }
 
@@ -262,6 +330,7 @@ final class M3StringPool {
         Fingerprint fingerprint = new Fingerprint(coder, byteLength, hash64);
 
         expungeLocals();
+        long reserved = 0L;
         for (;;) {
             LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
             synchronized (bucket) {
@@ -274,19 +343,24 @@ final class M3StringPool {
                         reference.releaseNative();
                     } else if (existing.contentEqualsLatin1Bytes(
                             source, offset, length, coder)) {
-                        return M3String.whole(existing);
+                        return found(existing, reserved);
                     }
                 }
 
-                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-                M3StringAtom created =
-                        M3StringAtom.localLatin1Bytes(
+                if (reserved != 0L || tryReserve(byteLength)) {
+                    M3StringAtom created = null;
+                    try {
+                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                        created = M3StringAtom.localLatin1Bytes(
                                 source, offset, length, coder, id, hash64);
-                long retainedBytes = created.nativePayloadBytes();
-                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
-                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
-                return M3String.whole(created);
+                    } finally {
+                        if (created == null) release(byteLength);
+                    }
+                    return retain(bucket, fingerprint, created, byteLength);
+                }
             }
+            reserved = reserveSlow(byteLength);
+            if (reserved == 0L) return null;
         }
     }
 
@@ -326,6 +400,7 @@ final class M3StringPool {
         Fingerprint fingerprint = new Fingerprint(coder, byteLength, hash64);
 
         expungeLocals();
+        long reserved = 0L;
         for (;;) {
             LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
             synchronized (bucket) {
@@ -337,21 +412,30 @@ final class M3StringPool {
                         iterator.remove();
                         reference.releaseNative();
                     } else if (existing.contentEquals(source, offset, length, coder)) {
-                        return M3String.whole(existing);
+                        return found(existing, reserved);
                     }
                 }
 
-                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-                M3StringAtom created =
-                        M3StringAtom.localChars(source, offset, length, coder, id, hash64);
-                long retainedBytes = created.nativePayloadBytes();
-                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
-                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
-                return M3String.whole(created);
+                if (reserved != 0L || tryReserve(byteLength)) {
+                    M3StringAtom created = null;
+                    try {
+                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                        created = M3StringAtom.localChars(source, offset, length, coder, id, hash64);
+                    } finally {
+                        if (created == null) release(byteLength);
+                    }
+                    return retain(bucket, fingerprint, created, byteLength);
+                }
             }
+            reserved = reserveSlow(byteLength);
+            if (reserved == 0L) return null;
         }
     }
 
+    /**
+     * Single-unit lane: bounded by construction (at most 65,536 distinct atoms, 128 KiB), so it is
+     * accounted but never refused; the callers inside M3String compositions rely on a non-null result.
+     */
     static M3String internUnit(char unit) {
         Lexicon active = lexicon;
         if (active != null && active.available()) {
@@ -480,6 +564,7 @@ final class M3StringPool {
                     M3StringTuple existing = reference.get();
                     if (existing == null) {
                         iterator.remove();
+                        RETAINED_TUPLES.decrementAndGet();
                     } else if (existing.length == totalLength
                             && existing.coder == coder
                             && existing.javaHash == javaHash
@@ -489,7 +574,12 @@ final class M3StringPool {
                 }
                 long id = nextId(NEXT_TUPLE_ID, "M3 tuple ID");
                 M3StringTuple created = new M3StringTuple(left, right, id, routeKey);
-                bucket.values.add(new TupleRef(created, routeKey, bucket));
+                // Retention cap: past it the tuple composes and lives with its String, uncanonical.
+                if (RETAINED_TUPLES.incrementAndGet() <= MAX_RETAINED_TUPLES) {
+                    bucket.values.add(new TupleRef(created, routeKey, bucket));
+                } else {
+                    RETAINED_TUPLES.decrementAndGet();
+                }
                 return M3String.whole(created);
             }
         }
@@ -514,7 +604,7 @@ final class M3StringPool {
         while ((reference = (TupleRef) TUPLE_QUEUE.poll()) != null) {
             TupleBucket bucket = reference.bucket;
             synchronized (bucket) {
-                bucket.values.remove(reference);
+                if (bucket.values.remove(reference)) RETAINED_TUPLES.decrementAndGet();
                 if (bucket.values.isEmpty() && TUPLES.remove(reference.hash64, bucket)) {
                     bucket.retired = true;
                 }
@@ -525,6 +615,85 @@ final class M3StringPool {
     static long localNativeBytes() {
         expungeLocals();
         return LOCAL_NATIVE_BYTES.get();
+    }
+
+    static long retainedTuples() {
+        expungeTuples();
+        return RETAINED_TUPLES.get();
+    }
+
+    /** Fast budget reservation (CAS); the caller allocates only after it succeeds. */
+    private static boolean tryReserve(long bytes) {
+        for (;;) {
+            long current = LOCAL_NATIVE_BYTES.get();
+            if (bytes > MAX_LOCAL_BYTES - current) return false;
+            if (LOCAL_NATIVE_BYTES.compareAndSet(current, current + bytes)) return true;
+        }
+    }
+
+    private static void release(long bytes) {
+        LOCAL_NATIVE_BYTES.addAndGet(-bytes);
+    }
+
+    /** A bucket hit while a slow-path reservation is held hands the reservation back. */
+    private static M3String found(M3StringAtom existing, long reserved) {
+        if (reserved != 0L) release(reserved);
+        return M3String.whole(existing);
+    }
+
+    /** Publishes a freshly allocated local atom whose bytes are already reserved (bucket lock held). */
+    private static M3String retain(
+            LocalBucket bucket, Fingerprint fingerprint, M3StringAtom created, long bytes) {
+        bucket.values.add(new LocalRef(created, fingerprint, bucket, bytes));
+        return M3String.whole(created);
+    }
+
+    private static boolean reserveAfterDrain(long bytes) {
+        expungeLocals();
+        return tryReserve(bytes);
+    }
+
+    /**
+     * Back-pressure in the shape of {@code java.nio.Bits.reserveMemory} (adapted: no bucket lock is
+     * held, and the terminal step refuses with {@code 0} instead of throwing OutOfMemoryError).
+     * Drains the local queue, waits for pending reference processing, triggers one collection and
+     * retries with bounded exponential back-off. A failed cycle arms a one-second hold-off during
+     * which further misses are refused without another collection. Interrupts are deferred.
+     *
+     * @return the reserved byte count, or {@code 0} when admission is refused
+     */
+    private static long reserveSlow(long bytes) {
+        if (System.nanoTime() - nextSlowReserveNanos < 0L) return 0L;
+        JavaLangRefAccess references = SharedSecrets.getJavaLangRefAccess();
+        boolean interrupted = false;
+        try {
+            for (boolean active = true; active;) {
+                try {
+                    active = references.waitForReferenceProcessing();
+                } catch (InterruptedException deferred) {
+                    interrupted = true;
+                }
+                if (reserveAfterDrain(bytes)) return bytes;
+            }
+            System.gc();
+            for (int sleeps = 0, sleep = 1;;) {
+                if (reserveAfterDrain(bytes)) return bytes;
+                if (sleeps >= MAX_SLEEPS) break;
+                try {
+                    if (!references.waitForReferenceProcessing()) {
+                        Thread.sleep(sleep);
+                        sleep <<= 1;
+                        sleeps++;
+                    }
+                } catch (InterruptedException deferred) {
+                    interrupted = true;
+                }
+            }
+            nextSlowReserveNanos = System.nanoTime() + SLOW_RESERVE_HOLDOFF_NANOS;
+            return 0L;
+        } finally {
+            if (interrupted) Thread.currentThread().interrupt();
+        }
     }
 
     private static long nextId(AtomicLong sequence, String label) {
@@ -623,7 +792,7 @@ final class M3StringPool {
             if (!released) {
                 released = true;
                 if (address != 0L) UNSAFE.freeMemory(address);
-                LOCAL_NATIVE_BYTES.addAndGet(-retainedBytes);
+                release(retainedBytes);
             }
         }
     }
