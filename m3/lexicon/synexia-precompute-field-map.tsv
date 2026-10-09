@@ -61,3 +61,10 @@ M3InstanceIndexPrecompute.InstanceRecord	instanceOfX	long	instance_of_x	m3lex-in
 M3InstanceIndexPrecompute.InstanceRecord	metadata	Map<String,String>	instance_metadata	m3lex-instance-v1:synexia-instance-index.tsv	MAPPED	Metadata remains an immutable sorted map and is never inferred from the name.
 M3InstanceIndexPrecompute	normalizationVersion	String	normalization_version	m3lex-instance-v1:synexia-instance-index.tsv	MAPPED	Reload identity includes the exact locale-independent normalization revision.
 M3InstanceIndexPrecompute	sourceFingerprint	String	source_fingerprint	m3lex-instance-v1:synexia-instance-index.tsv	MAPPED	Source fingerprint guards instance-index reuse and rejects stale payloads.
+AcronymLexicon.Entry	acronym	String	acronym	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	Exact source acronym spelling remains the lookup identity and is case-sensitive.
+AcronymLexicon.Entry	expansion	String	expansion	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	Exact source expansion text remains the reverse-lookup identity after Locale.ROOT folding.
+AcronymLexicon.Entry	domain	String	acronym_domain	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED_OPTIONAL	Domain is optional derived metadata and never replaces acronym or expansion identity.
+M3AcronymPrecompute.Entry	acronymUtf16Length	int	acronym_utf16_length	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	UTF-16 length is derived from the immutable acronym spelling.
+M3AcronymPrecompute.Entry	expansionUtf16Length	int	expansion_utf16_length	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	UTF-16 length is derived from the immutable expansion spelling.
+M3AcronymPrecompute.Entry	acronymJavaHash	int	acronym_java_hash	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	Java String hash is derived metadata and is not a replacement for source identity.
+M3AcronymPrecompute.Entry	expansionJavaHash	int	expansion_java_hash	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	Java String hash is derived metadata and is not a replacement for source identity.
