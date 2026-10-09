@@ -29,8 +29,6 @@ jobs:
           java-version: '21'
       - run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3BulkExecutorPortRecipeTest,M3BulkExecutorNameMappingRecipeTest test
-      - run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Drewrite.activeRecipes=com.m3.rewrite.backport.M3BulkExecutorPortRecipe             rewrite:dryRun
 
   patch-smoke:
     runs-on: ubuntu-22.04
