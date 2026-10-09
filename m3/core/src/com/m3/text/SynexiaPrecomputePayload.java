@@ -20,9 +20,10 @@ import java.util.TreeMap;
  * <p>The exporter owns the field map and source meaning. This class owns only
  * the lossless, bounded JSON value model needed by the JDK receiver. It never
  * turns an image coordinate into a source identity and it accepts no nested,
- * string, null, or non-finite values because the admitted Synexia field map is
- * limited to boolean, double, int, long, int[] and long[]. Unknown field names
- * remain readable with their JSON value kind, which keeps the receiver
+ * null, or non-finite values. Bounded scalar strings are admitted for source,
+ * record, spelling, and other identity fields; known field names still require
+ * the exact type declared by the Synexia field map. Unknown field names remain
+ * readable with their JSON value kind, which keeps the receiver
  * forward-compatible without silently changing a known field's type.</p>
  */
 public final class SynexiaPrecomputePayload {
