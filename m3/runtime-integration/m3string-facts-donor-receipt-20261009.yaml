@@ -1,0 +1,42 @@
+schema: m3-recipe/v1
+id: m3string-facts-donor-receipt-20261009
+pattern: pinned-cross-repository-fact-owner-receipt
+purpose: Bind current M3JDK fact owners to the exact Synexia donor source without copying donor bodies or lexicon payloads.
+
+inputs:
+  - donor_receipt: m3/docs/synexia-m3string-facts-donor-receipt.tsv
+  - m3_facts: src/java.base/share/classes/java/lang/M3StringFacts.java
+  - m3_owner: src/java.base/share/classes/java/lang/M3StringOwner.java
+  - m3_tuple: src/java.base/share/classes/java/lang/M3StringTuple.java
+  - synexia_source_proof: M3_STRING_FACTS_OWNER_SOURCE_PASS checks=100/100
+
+phases:
+  - SEARCH: use the pinned Synexia commit and exact source blobs before accepting a target mapping.
+  - INVENTORY: retain donor path/blob, M3 target owner, status, and preservation rule for all five fact surfaces.
+  - CLASSIFY: ADAPT_COMPOSE; reuse current M3 owners and do not copy Synexia source bodies, spelling payloads, lexicon records, or runtime dependencies.
+  - TRANSFORM: map metrics/text facts to M3StringFacts, canonical facts to M3StringOwner/M3StringTuple, range facts to bounded owner coordinates, and vocabulary precomputation to caller-owned M3 services.
+  - FILTER: reject semantic/lexical metadata on java.lang.String, unbounded caches, candidate-filter-as-proof, and source-hash-only equivalence claims.
+  - PROVE: run the source discriminator; runtime/JTReg/JNI/benchmark lanes remain separate.
+  - CHECKPOINT: retain this receipt and link it to the Synexia donor PR and target mapping ledgers.
+
+invariants:
+  - Donor commit and every donor blob are pinned.
+  - No Synexia source body is copied into M3JDK.
+  - Exact UTF-16 verification remains authoritative after any candidate fact filter.
+  - Range facts are bounded and owner-local.
+  - Vocabulary, translation, SI, acronym, number, proper-name, title, and semantic metadata stay outside java.lang.String facts.
+  - No public M3String ABI or persisted image format changes.
+  - Source proof does not claim runtime or performance completion.
+
+verification:
+  source_discriminator_command: python m3/runtime-integration/check-m3string-facts-donor-receipt.py --repo-root .
+  source_discriminator: M3_STRING_FACTS_DONOR_RECEIPT_SOURCE_PASS checks=42/42|runtime=NOT_RUN
+  runtime: NOT_RUN
+  jtreg: NOT_RUN
+  jni: NOT_RUN
+  benchmark: NOT_MEASURED
+  hosted_ci: NOT_CLAIMED
+
+storage:
+  hosted_artifact_limit: 512MiB
+  minimum_free_after_output: 8GiB
