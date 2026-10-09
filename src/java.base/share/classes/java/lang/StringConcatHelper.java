@@ -452,7 +452,7 @@ final class StringConcatHelper {
      * a typed stringify gateway in StringConcatFactory (no boxing; references use
      * stringOf, so the JLS null/toString rules hold and no piece is null).
      */
-    static String m3Concat(String[] constants, String[] args) {
+    static String m3Concat(String[] constants, Object[] args) {
         M3String result = M3String.empty();
         for (int index = 0; index < args.length; index++) {
             String constant = constants[index];
@@ -461,7 +461,7 @@ final class StringConcatHelper {
                 result = result.length() == 0 ? piece : result.concat(piece);
             }
 
-            String argument = args[index];
+            String argument = stringOf(args[index]);
             if (!argument.isEmpty()) {
                 M3String piece = M3String.canonicalize(argument);
                 result = result.length() == 0 ? piece : result.concat(piece);
