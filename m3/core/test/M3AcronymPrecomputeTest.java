@@ -36,7 +36,7 @@ public final class M3AcronymPrecomputeTest {
         M3AcronymPrecompute.Entry api = precompute.findByAcronym("API").orElseThrow();
         check(api.domain().equals(Optional.of("computing")));
         check(api.acronymUtf16Length() == 3);
-        check(api.expansionUtf16Length() == 35);
+        check(api.expansionUtf16Length() == 33);
         check(api.acronymJavaHash() == javaHash("API"));
         check(api.expansionJavaHash() == javaHash("application programming interface"));
         check(precompute.entries().get(0) == api);
