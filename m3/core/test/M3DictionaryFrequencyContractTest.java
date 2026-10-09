@@ -30,7 +30,10 @@ public final class M3DictionaryFrequencyContractTest {
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
         String[] dictionary = row(manifest, "dictlang.dictionary");
         String[] frequency = row(manifest, "dictlang.frequency");
+        String[] thesaurus = row(manifest, "dictlang.thesaurus");
+        String[] antonyms = row(manifest, "dictlang.antonyms");
         check(dictionary.length == 9 && frequency.length == 9);
+        check(thesaurus.length == 9 && antonyms.length == 9);
         check(dictionary[5].equals("M3LexiconPrecompute.IndexWordFacts"));
         check(frequency[5].equals("M3LexiconPrecompute.IndexWordSignal"));
         check(dictionary[8].equals(
@@ -41,6 +44,12 @@ public final class M3DictionaryFrequencyContractTest {
                 "code_point_length,first_code_point,flags,frequency_rank,last_code_point,"
                         + "lemma_id,lexical_rank,morphology_mask,phonetic_id,pos_mask,presence64,"
                         + "script_ordinal,sim_hash64,stem_id,utf16_length"));
+        check(thesaurus[5].equals("M3StringFacts")
+                && thesaurus[8].equals("lexeme,related_lexeme"));
+        check(antonyms[5].equals("M3StringFacts")
+                && antonyms[8].equals("lexeme,related_lexeme"));
+        check(!thesaurus[5].contains("IndexWordFacts")
+                && !antonyms[5].contains("IndexWordFacts"));
 
         String fieldMap = Files.readString(
                 Path.of("lexicon/synexia-precompute-field-map.tsv"), StandardCharsets.UTF_8);
