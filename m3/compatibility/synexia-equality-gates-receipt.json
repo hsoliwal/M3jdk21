@@ -42,7 +42,12 @@
       }
     ],
     "license": "first-party M3 owner",
-    "disposition": "ADAPT: gates prove inequality only; owner javaHash equals String.hashCode (probe parity); JDK semantics unchanged"
+    "disposition": "ADAPT: gates prove inequality only; owner javaHash equals String.hashCode (probe parity); JDK semantics unchanged",
+    "reapplied": {
+      "branch": "codex/m3-precompute-stack-reapply-20261009",
+      "commit": "adf21526919",
+      "note": "the original PR merges reached develop/master as zero-file superset merges; crate commits cherry-picked onto develop on 2026-10-09"
+    }
   },
   "target": {
     "repository": "hsoliwal/M3jdk21",
@@ -53,15 +58,16 @@
       "java.lang.M3StringFacts"
     ],
     "publicJdkApiChange": false,
-    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed against 86c8a71d41: 66 targets, three after-images updated; apply.py --check state=after; test_recipe.py 8/8"
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed against 86c8a71d41: 66 targets, three after-images updated; apply.py --check state=after; test_recipe.py 8/8",
+    "reappliedBase": "master 5f68880c6f (A8 owner a37bf443f1, A9 owner c66aacba5f, A6 owner aec42c5a02, refusal-safe binary join 3c3d66694a); original base: m3/facts-scan-fused-20261008 (A8, #499) on m3/facts-thick-20261008 (A4, #486) on master da6084c4ef"
   },
   "runtimeDependencyOnSynexia": false,
   "publicJdkReplacement": false,
   "targets": [
     {
       "path": "src/java.base/share/classes/java/lang/M3String.java",
-      "before": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b",
-      "after": "200d7c811692ef0369933577a0c18d8821ca2b9c9887e5bcab9130793524a7cf",
+      "before": "f88c545538e250c057809d86cb0727cbeb07bed69508b0c85197b0084247fa5c",
+      "after": "011fc704dde55f44d3980d5f21871d3b509e6d093dd6c20b27ec152101b6f663",
       "resource": "00-M3String.java.txt",
       "step": "hash-pinned-java"
     },
