@@ -4,7 +4,10 @@
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 
 /** Contract proof for dictionary/frequency source rows and typed M3JDK receivers. */
 public final class M3DictionaryFrequencyContractTest {
@@ -17,21 +20,69 @@ public final class M3DictionaryFrequencyContractTest {
         }
     }
 
-    private static String[] row(String manifest, String sourceId) {
-        return Arrays.stream(manifest.split("\\n", -1))
-                .filter(line -> line.startsWith(sourceId + "\t"))
-                .findFirst()
-                .orElseThrow(() -> new AssertionError(sourceId + " manifest row missing"))
-                .split("\t", -1);
+    private static final String MANIFEST_HEADER =
+            "source_id\tcanonical_name\tsynexia_path\trecord_id_field"
+                    + "\tmapping_fields\tprecompute_target\tdata_license"
+                    + "\tdata_policy\tprecompute_fields";
+
+    private static Map<String, String[]> parseManifest(String manifest) {
+        String[] lines = manifest.split("\\n", -1);
+        if (lines.length < 2 || !MANIFEST_HEADER.equals(lines[0])
+                || !lines[lines.length - 1].isEmpty()) {
+            throw new IllegalArgumentException("manifest header/termination");
+        }
+        Map<String, String[]> rows = new LinkedHashMap<>();
+        for (int line = 1; line < lines.length - 1; line++) {
+            String[] fields = lines[line].split("\\t", -1);
+            if (fields.length != 9 || fields[0].isEmpty()
+                    || rows.putIfAbsent(fields[0], fields) != null) {
+                throw new IllegalArgumentException("manifest row shape or duplicate source");
+            }
+        }
+        return rows;
+    }
+
+    private static String[] row(Map<String, String[]> rows, String sourceId) {
+        String[] value = rows.get(sourceId);
+        if (value == null) throw new AssertionError(sourceId + " manifest row missing");
+        return value;
+    }
+
+    private static Map<String, Set<String>> parseFieldMap(String fieldMap) {
+        String[] lines = fieldMap.split("\\n", -1);
+        String header = "donor_type\tdonor_field\tdonor_java_type"
+                + "\tcanonical_payload_field\tm3jdk_storage\tstatus\tpreservation_rule";
+        if (lines.length < 2 || !header.equals(lines[0]) || !lines[lines.length - 1].isEmpty()) {
+            throw new IllegalArgumentException("field map header/termination");
+        }
+        Map<String, Set<String>> fields = new LinkedHashMap<>();
+        for (int line = 1; line < lines.length - 1; line++) {
+            String[] columns = lines[line].split("\\t", -1);
+            if (columns.length != 7 || !"MAPPED".equals(columns[5])) {
+                throw new IllegalArgumentException("field map row shape/status");
+            }
+            Set<String> owner = fields.computeIfAbsent(columns[0], ignored -> new LinkedHashSet<>());
+            if (!owner.add(columns[1])) {
+                throw new IllegalArgumentException("duplicate donor field");
+            }
+        }
+        return fields;
     }
 
     public static void main(String[] args) throws Exception {
         String manifest = Files.readString(
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
-        String[] dictionary = row(manifest, "dictlang.dictionary");
-        String[] frequency = row(manifest, "dictlang.frequency");
-        String[] thesaurus = row(manifest, "dictlang.thesaurus");
-        String[] antonyms = row(manifest, "dictlang.antonyms");
+        Map<String, String[]> manifestRows = parseManifest(manifest);
+        String[] dictionary = row(manifestRows, "dictlang.dictionary");
+        String[] frequency = row(manifestRows, "dictlang.frequency");
+        String[] thesaurus = row(manifestRows, "dictlang.thesaurus");
+        String[] antonyms = row(manifestRows, "dictlang.antonyms");
+        expect(IllegalArgumentException.class, () -> parseManifest(
+                MANIFEST_HEADER + "\n" + String.join("\t", dictionary) + "\n"
+                        + String.join("\t", dictionary) + "\n"));
+        expect(IllegalArgumentException.class, () -> parseManifest(
+                MANIFEST_HEADER + "\n" + String.join("\t", dictionary)
+                        + "\textra\n"));
         check(dictionary.length == 9 && frequency.length == 9);
         check(thesaurus.length == 9 && antonyms.length == 9);
         check(dictionary[5].equals("M3LexiconPrecompute.IndexWordFacts"));
@@ -53,11 +104,18 @@ public final class M3DictionaryFrequencyContractTest {
 
         String fieldMap = Files.readString(
                 Path.of("lexicon/synexia-precompute-field-map.tsv"), StandardCharsets.UTF_8);
-        check(fieldMap.contains("IndexWordFacts\tlanguageId\tint\tlanguage_id"));
-        check(fieldMap.contains("IndexWordFacts\tconceptCount/conceptAt\tlong[]\tconcept_ids"));
-        check(fieldMap.contains("IndexWordSignal\tfrequencyRank\tint\tfrequency_rank"));
-        check(fieldMap.contains("IndexWordSignal\tstemId\tlong\tstem_id"));
-        check(!fieldMap.contains("IndexWordSignalProfile"));
+        Map<String, Set<String>> fieldRows = parseFieldMap(fieldMap);
+        check(fieldRows.get("IndexWordFacts").equals(Set.of(
+                "languageId", "wordCount", "lexiconFingerprint", "totalCorpusTokens",
+                "totalDocuments", "flags", "corpusCount", "documentFrequency",
+                "membershipCount/membershipAt", "conceptCount/conceptAt",
+                "subjectCount/subjectAt", "expansionSize/expansionWordIdAt")));
+        check(fieldRows.get("IndexWordSignal").equals(Set.of(
+                "stemId", "lemmaId", "phoneticId", "posMask", "morphologyMask",
+                "lexicalRank", "utf16Length", "codePointLength", "firstCodePoint",
+                "lastCodePoint", "scriptOrdinal", "presence64", "simHash64",
+                "frequencyRank", "EMPTY/ASCII/LATIN1/...")));
+        check(!fieldRows.containsKey("IndexWordSignalProfile"));
         System.out.println("M3JDK_DICTIONARY_FREQUENCY_CONTRACT_PASS checks=" + checks);
     }
 }
