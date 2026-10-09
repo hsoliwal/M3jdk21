@@ -28,11 +28,11 @@ _BUILD = Path("m3/build.sh")
 _COMMIT = "c6d128572825cc11f4bbb05d78bcbebb5b3aa67a"
 _DONOR_BLOB = "a06f5493c9ac07de3f881dbef701c72255141eb9"
 _TARGET_BLOBS = {
-    "manifest": "0ab05ad3f890035c15747d6f641ce31d5eaf2e11",
-    "field_map": "25f248060e6490fba5a088b34c1be83f83a3da4c",
-    "owner": "d5b46507a2a7d693ab02adfc8299211283823b7d",
-    "test": "3bf9528136193f5298666d411b9df0e088b00d99",
-    "build": "5db3dcaf033af0efabb6e31acdf6bb8a65ad1564",
+    "manifest": "f00804fe35759e2a44be7ae9ee6d43bbc43437e8",
+    "field_map": "b62e90876aab11164ce5468068fc451fc9dfc10c",
+    "owner": "4c91f0f7b3ff02668b49d5bfbb911df20794f8ce",
+    "test": "f11e48ac03b344645cd329f8691ad1a28e06e8b9",
+    "build": "4966190e61ac786b3c31fe6a2aaee53d88c3249a",
 }
 _RECIPE_MANIFEST = Path("m3/recipes/manifest.json")
 _RECIPE_MANIFEST_BLOB = "5bc51b2dc42a9b8ce509d4a6c1208631842734e8"
@@ -82,7 +82,7 @@ def inspect_source(root: Path) -> tuple[SourceCheck, ...]:
         SourceCheck("fieldPhrase", "M3PhrasePrecompute.Phrase\tsourceTokenIds" in field_map and "M3PhrasePrecompute.Phrase\ttargetTokenIds" in field_map),
         SourceCheck("fieldMapped", all("MAPPED" in line for line in field_map.splitlines() if "M3PhrasePrecompute." in line or "IndexPhraseTable\tspace" in line)),
         SourceCheck("ownerScope", "record Scope" in owner and "vocabularyFingerprint" in owner),
-        SourceCheck("ownerPhrase", "record Phrase" in owner and "targetTokenIds" in owner),
+        SourceCheck("ownerPhrase", "public static final class Phrase" in owner and "targetTokenIds" in owner),
         SourceCheck("ownerLongest", "longestMatchAt" in owner),
         SourceCheck("ownerScopedLookup", "Scope scope" in owner),
         SourceCheck("testScopeIsolation", "foreign" in test or "other" in test),
