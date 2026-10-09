@@ -21,13 +21,13 @@ final class M3PacketDagComposerTest {
 
         M3RecipeDag dag = M3PacketDagComposer.compose(packet);
 
-        assertEquals(18, dag.size());
+        assertEquals(22, dag.size());
         assertThrows(IllegalArgumentException.class, () -> dag.require("recipe-crate"));
         assertEquals(
-                List.of("a3-preparation"),
+                List.of("a3-fixed-point-proof"),
                 dag.require("packet-java").dependsOn());
         assertEquals(
-                List.of("a3-preparation"),
+                List.of("a3-fixed-point-proof"),
                 dag.require("packet-text").dependsOn());
         assertEquals(
                 List.of("packet-java", "packet-text"),
@@ -36,7 +36,7 @@ final class M3PacketDagComposerTest {
                 List.of("packet-java", "packet-text"),
                 layerContaining(dag, "packet-java").stream().map(M3DagNode::id).toList());
         assertTrue(
-                layerIndex(dag, "a3-preparation")
+                layerIndex(dag, "a3-fixed-point-proof")
                         < layerIndex(dag, "packet-java"));
         assertEquals("promote", dag.topologicalOrder().getLast().id());
         assertEquals(M3EditScope.FILE, dag.require("promote").scope());
