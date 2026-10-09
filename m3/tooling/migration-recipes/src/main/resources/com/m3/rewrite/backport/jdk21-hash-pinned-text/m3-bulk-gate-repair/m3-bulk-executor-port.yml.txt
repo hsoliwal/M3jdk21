@@ -27,7 +27,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - run: |
+      - name: Run receiver and live fixed-point tests
+        run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3BulkExecutorPortRecipeTest,M3BulkExecutorNameMappingRecipeTest test
 
   patch-smoke:
