@@ -29,6 +29,12 @@
         <module>collections</module>
       </modules>
     </profile>
+    <profile>
+      <id>m3-tornado</id>
+      <modules>
+        <module>ports/tornadovm-bulk</module>
+      </modules>
+    </profile>
   </profiles>
 
   <build>
