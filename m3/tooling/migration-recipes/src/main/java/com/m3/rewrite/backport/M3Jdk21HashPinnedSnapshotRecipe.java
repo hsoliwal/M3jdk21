@@ -218,9 +218,20 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
             if (inventory.candidates != null) {
                 return;
             }
+
+            /*
+             * A converged target is already proven by its postimage hash and must not be reparsed.
+             * This matters for JDK sources such as String.java whose Javadoc can exceed the
+             * currently selected OpenRewrite parser's lossless-comment surface. Parse only a donor
+             * that will actually be emitted. Preimages and ABSENT targets still receive the full
+             * Java 21 parse/round-trip proof before mutation or generation.
+             */
             Map<String, SourceFile> prepared = new HashMap<>();
             for (Target target : inventory.targets) {
-                prepared.put(target.path(), parse(target, context));
+                String observed = inventory.seen.get(target.path());
+                if (observed == null || observed.equals(target.before())) {
+                    prepared.put(target.path(), parse(target, context));
+                }
             }
             inventory.candidates = Map.copyOf(prepared);
         }
