@@ -250,7 +250,7 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("boolean", field_types["shared_utf16_storage"])
         rich_map = ROOT / "m3/lexicon/synexia-nonprimitive-precompute-field-map.tsv"
         with rich_map.open(encoding="utf-8", newline="") as stream:
-            rich_rows = list(csv.DictReader(stream, delimiter="\\t"))
+            rich_rows = list(csv.DictReader(stream, delimiter="\t"))
         self.assertTrue(any(row["donor_java_type"] == "Map<String,int[]>" for row in rich_rows))
         self.assertTrue(any(row["donor_java_type"] == "byte[]" for row in rich_rows))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
