@@ -34,6 +34,20 @@ FACT_COLUMNS = ("shard_id", "image_row", "utf16_units", "java_hash", "code_point
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
 ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]", "byte[]", "String"))
+SOURCE_MANIFEST_COLUMNS = (
+    "source_id", "canonical_name", "synexia_path", "record_id_field",
+    "mapping_fields", "precompute_target", "data_license", "data_policy",
+)
+SOURCE_MANIFEST_COLUMNS_V2 = SOURCE_MANIFEST_COLUMNS + ("precompute_fields",)
+FIELD_MAP_COLUMNS = (
+    "donor_type", "donor_field", "donor_java_type", "canonical_payload_field",
+    "m3jdk_storage", "status", "preservation_rule",
+)
+IDENTITY_MAP_COLUMNS = (
+    "target_type", "target_field", "java_type", "canonical_source_field",
+    "required", "storage_scope", "preservation_rule",
+)
+IDENTITY_TARGET_PATTERN = re.compile(r"M3LangDexPrecompute\.[A-Za-z0-9_]+")
 
 
 def digest(data: bytes) -> str:
@@ -136,6 +150,86 @@ def read_tsv(path: pathlib.Path, columns: tuple[str, ...]) -> list[dict[str, str
     if any(None in row or any(value is None for value in row.values()) for row in rows):
         raise ValueError(f"{path.name}: malformed field count")
     return rows
+
+
+
+
+
+def read_source_manifest_contract(path: pathlib.Path) -> dict[str, dict[str, object]]:
+    with path.open("r", encoding="utf-8", errors="surrogatepass", newline="") as stream:
+        reader = csv.DictReader(stream, delimiter="\t")
+        columns = tuple(reader.fieldnames or ())
+        if columns not in (SOURCE_MANIFEST_COLUMNS, SOURCE_MANIFEST_COLUMNS_V2):
+            raise ValueError(f"{path.name}: unexpected source manifest columns")
+        rows = list(reader)
+    result: dict[str, dict[str, object]] = {}
+    for row in rows:
+        source_id = row["source_id"]
+        if not source_id or source_id in result:
+            raise ValueError("source manifest identity is duplicated or empty")
+        value = row.get("precompute_fields", "")
+        fields = [] if value in ("", "-") else value.split(",")
+        if fields != sorted(set(fields)):
+            raise ValueError("source manifest precompute fields are not sorted")
+        result[source_id] = {
+            "precompute_target": row["precompute_target"],
+            "precompute_fields": fields,
+        }
+    if not result:
+        raise ValueError("source manifest is empty")
+    return result
+
+
+def read_field_map_contract(path: pathlib.Path) -> dict[str, str]:
+    rows = read_tsv(path, FIELD_MAP_COLUMNS)
+    result: dict[str, str] = {}
+    for row in rows:
+        if row["status"] != "MAPPED":
+            continue
+        donor_type = row["donor_java_type"]
+        if donor_type not in ALLOWED_DONOR_TYPES:
+            raise ValueError("unsupported donor field type: " + donor_type)
+        field = row["canonical_payload_field"]
+        previous = result.setdefault(field, donor_type)
+        if previous != donor_type:
+            raise ValueError("conflicting donor field types for " + field)
+    return dict(sorted(result.items()))
+
+
+def read_identity_map_contract(path: pathlib.Path) -> dict[str, dict[str, str]]:
+    rows = read_tsv(path, IDENTITY_MAP_COLUMNS)
+    result: dict[str, dict[str, str]] = {}
+    for row in rows:
+        if row["required"].lower() != "true":
+            continue
+        target = row["target_type"]
+        field = row["canonical_source_field"]
+        if IDENTITY_TARGET_PATTERN.fullmatch(target) is None:
+            raise ValueError("unsupported identity target type: " + target)
+        previous = result.setdefault(target, {}).setdefault(field, row["java_type"])
+        if previous != row["java_type"]:
+            raise ValueError("conflicting identity field types for " + field)
+    return {
+        target: dict(sorted(fields.items()))
+        for target, fields in sorted(result.items())
+    }
+
+
+def identity_requirements_contract(
+        sources: dict[str, dict[str, object]],
+        identity_fields: dict[str, dict[str, str]]) -> dict[str, list[str]]:
+    result: dict[str, list[str]] = {}
+    for source_id, source in sources.items():
+        targets = IDENTITY_TARGET_PATTERN.findall(str(source["precompute_target"]))
+        fields = sorted({
+            field for target in targets for field in identity_fields.get(target, {})
+        })
+        declared = set(source["precompute_fields"])
+        if not set(fields).issubset(declared):
+            raise ValueError("identity fields are missing from source manifest: " + source_id)
+        if fields:
+            result[source_id] = fields
+    return result
 
 
 def java_hash(text: str) -> int:
@@ -249,6 +343,35 @@ def verify(output: pathlib.Path) -> dict[str, int]:
             raise ValueError("source input hash is missing: " + field)
         if filename not in outputs or digest((output / filename).read_bytes()) != expected:
             raise ValueError("source input hash mismatch: " + field)
+    copied_manifest = output / "synexia.source-manifest.tsv"
+    if not copied_manifest.is_file():
+        raise ValueError("copied source manifest is missing")
+    contract_sources = read_source_manifest_contract(copied_manifest)
+    computed_payload_fields = {
+        source_id: list(source["precompute_fields"])
+        for source_id, source in sorted(contract_sources.items())
+    }
+    if source_metadata.get("precompute_fields") != computed_payload_fields:
+        raise ValueError("source precompute fields do not match copied manifest")
+    copied_field_map = output / "synexia.precompute-field-map.tsv"
+    computed_field_types = (
+        read_field_map_contract(copied_field_map)
+        if copied_field_map.is_file() else {}
+    )
+    if source_metadata.get("precompute_field_types", {}) != computed_field_types:
+        raise ValueError("source precompute types do not match copied field map")
+    copied_identity_map = output / "synexia.langdex-identity-field-map.tsv"
+    computed_identity_fields = (
+        read_identity_map_contract(copied_identity_map)
+        if copied_identity_map.is_file() else {}
+    )
+    if source_metadata.get("identity_fields", {}) != computed_identity_fields:
+        raise ValueError("source identity fields do not match copied identity map")
+    computed_identity_requirements = identity_requirements_contract(
+        contract_sources, computed_identity_fields)
+    if source_metadata.get("identity_requirements", {}) != computed_identity_requirements:
+        raise ValueError("source identity coverage does not match copied inputs")
+
     field_map_digest = source_metadata.get("precompute_field_map_sha256")
     if field_map_digest is not None:
         if (not isinstance(field_map_digest, str) or re.fullmatch(r"[0-9a-f]{64}", field_map_digest) is None
