@@ -1,0 +1,10 @@
+{
+  "schema": "M3JDK21_BULK_GATE_REPAIR_SOURCE_LOCK_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 9980,
+  "canonical_recipe_revision": "5b5ee9012397f5fab90b39a7fb65c3d3b17d9a24",
+  "canonical_recipe": "com.synexia.rewrite.M3Jdk21BulkExecutorGateRepairRecipe",
+  "intake_mode": "EXTERNAL_RECIPE_TOOL",
+  "runtime_dependency": "NONE",
+  "promotion_authority": false
+}
