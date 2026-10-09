@@ -55,6 +55,7 @@ public final class M3LexiconCoverageInvariantTest {
             "M3LexiconPrecompute.TokenFrequency",
             "M3LexiconPrecompute.TranslationProjection",
             "M3InstanceIndexPrecompute.InstanceRecord",
+            "M3InstanceIndexPrecompute",
             "M3PhrasePrecompute.Scope",
             "M3PhrasePrecompute.Phrase",
             "SharedLexiconPrecomputeCatalog.TranslationIdentity",
