@@ -192,7 +192,7 @@ final class M3PacketDagComposerTest {
                 "packet-java",
                 layerContaining(evidenceDag, "packet-java").getFirst().id());
         assertTrue(
-                layerIndex(evidenceDag, "a3-preparation")
+                layerIndex(evidenceDag, "a3-fixed-point-proof")
                         < layerIndex(evidenceDag, "packet-java"));
 
         M3BackportPacketEvidence missing =
