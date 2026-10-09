@@ -140,5 +140,3 @@ public final class M3LexiconsFacadeTest {
         void run() throws Exception;
     }
 }
-
-
