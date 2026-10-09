@@ -48,10 +48,18 @@ public final class M3PhrasePrecomputeTest {
 
         M3PhrasePrecompute.Scope foreignScope = new M3PhrasePrecompute.Scope(
                 "translate.index-phrases", "phrases-1", "synexia-r1", "other-lexicon");
+        M3PhrasePrecompute.Scope sameFingerprintDifferentRecord =
+                new M3PhrasePrecompute.Scope(
+                        "translate.index-phrases", "phrases-other", "synexia-r1", "lexicon-sha");
         expect(IllegalArgumentException.class, () -> catalog.rewrite(
                 foreignScope, new int[]{1, 2, 3}));
         expect(IllegalArgumentException.class, () -> catalog.longestMatchAt(
                 foreignScope, new int[]{1, 2, 3}, 0));
+        expect(IllegalArgumentException.class, () -> catalog.rewrite(
+                sameFingerprintDifferentRecord, new int[]{1, 2, 3}));
+        expect(IllegalArgumentException.class, () -> M3PhrasePrecompute.builder(scope)
+                .put(new M3PhrasePrecompute.Phrase(sameFingerprintDifferentRecord,
+                        new int[]{10}, new int[]{11})));
         expect(IllegalArgumentException.class, () -> M3PhrasePrecompute.builder(scope)
                 .put(new M3PhrasePrecompute.Phrase(foreignScope,
                         new int[]{10}, new int[]{11})));
