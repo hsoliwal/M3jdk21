@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# purpose=metadata-only custody receipt for the current Synexia proper-name receiver chain
+# promotion_authority=NONE; runtime_admission=NONE; payload_admission=NONE
+# policy=record source identity and typed receiver heads; never copy payload or promote runtime
+schema_version	capability	source_repo	source_audit_head	source_pr	source_head	target_repo	owner_pr	owner_head	facade_pr	facade_head	owner_type	facade_type	target_status	hosted_status	runtime_status	payload_policy
+m3-proper-name-instance-v2	proper-nouns-and-book-titles	hsoliwal/com.synexia	fcac99acae04558e03105bc3145d59060093a1dd	10090	b6d3038a256e2c7783a606284b24a7cbc9de4142	hsoliwal/M3jdk21	634	ffd2432d513ebd2e88b5303b3c072d4023e9ef1e	635	05db1657eb580fdaf65097bcec946806a59bd9a8	com.m3.text.M3InstanceIndexPrecompute	com.m3.text.M3Lexicons	OPEN_DRAFT	NOT_CLAIMED	NOT_RUN	NO_PAYLOAD_NO_SECOND_INTERNER
