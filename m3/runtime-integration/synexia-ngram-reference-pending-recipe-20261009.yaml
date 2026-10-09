@@ -1,0 +1,65 @@
+schema: m3-recipe/v1
+id: synexia-ngram-reference-pending-20261009
+pattern: external-dataset-reference-boundary
+purpose: Carry the Synexia n-gram donor mapping into M3JDK without fabricating a receiver or copying external corpus bytes.
+
+inputs:
+  - source_receipt: m3/runtime-integration/synexia-ngram-reference-pending-receipt.tsv
+  - synexia_receipt: cognix-nlp/docs/SYNEXIA_NGRAM_REFERENCE_RECEIPT_20261009.tsv
+  - mapping: cognix-nlp/docs/SYNEXIA_TO_M3JDK_MAPPING.tsv
+  - synexia_recipe: synexia-m3-recipe/recipes/m3-ngram-reference-boundary-20261009.yaml
+  - target_manifest: m3/lexicon/synexia-source-manifest.tsv
+  - target_field_map: m3/lexicon/synexia-precompute-field-map.tsv
+
+source:
+  repository: hsoliwal/com.synexia
+  pull_request: 10050
+  branch: codex/m3-ngram-reference-boundary-20261009
+  commit: e838ee73303a61b9f797427c95b9e79f5fc2f384
+  receipt_blob: 7bb50a8dd7feea23aeec12a91edd7d6de1779115
+  mapping_commit: c6d128572825cc11f4bbb05d78bcbebb5b3aa67a
+  mapping_blob: dad67bb0fb4ea7141f6f26536ab20e5ec082ddd6
+
+reference_donor:
+  repository: taiwan-corpora/twngrams
+  url: https://huggingface.co/datasets/taiwan-corpora/twngrams
+  license: CC0-1.0
+  revision: 0.1.0
+  schema: hosts+token_1gram..token_4gram
+  rows: 1033916
+  count_semantics: distinct-hosts-not-occurrences
+  admission: REFERENCE_ONLY
+
+classification:
+  source_role: external-reference-only
+  target_status: NO_NGRAM_RECEIVER
+  target_identity: no M3JDK n-gram identity is admitted
+  target_payload: no external n-gram bytes are copied
+
+phases:
+  - SEARCH: retain the pinned donor URL, revision, rights, schema, row count, and count semantics.
+  - INVENTORY: retain Synexia receipt and mapping blob identities.
+  - CLASSIFY: EXTERNAL_REFERENCE_ONLY; do not infer a canonical lexicon owner.
+  - FILTER: reject downloader execution, unpinned corpus bytes, and occurrence-frequency substitution.
+  - PROVE: run the source discriminator and independent replay against the pinned source receipt.
+  - CHECKPOINT: require an explicit typed n-gram receiver contract before any target promotion.
+
+invariants:
+  - Distinct-host counts are not occurrence frequencies.
+  - The donor remains reference-only until rights and data proof are separately admitted.
+  - No n-gram bytes enter Java String storage, MIndex identity, or M3JDK lexicon identity.
+  - No n-gram receiver is claimed.
+  - Runtime: NOT_RUN
+  - Hosted CI: NOT_CLAIMED
+  - Benchmark: NOT_MEASURED
+
+verification:
+  source_discriminator_command: python m3/runtime-integration/check-synexia-ngram-reference-pending-receipt.py --repo-root .
+  source_discriminator: M3_NGRAM_REFERENCE_PENDING_SOURCE_PASS checks=26/26
+  runtime: NOT_RUN
+  hosted_ci: NOT_CLAIMED
+  benchmark: NOT_MEASURED
+
+storage:
+  minimum_free_after_output: 8GiB
+  hosted_artifact_limit: 512MiB
