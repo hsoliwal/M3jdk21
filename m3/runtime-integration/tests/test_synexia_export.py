@@ -236,10 +236,6 @@ class SynexiaExportTest(unittest.TestCase):
             result = VERIFY.verify(root / "output")
             self.assertEqual(5, result["family_sidecar_families"])
             self.assertEqual(5, result["family_sidecar_rows"])
-            family_files = {
-                name: (root / "family" / name).read_bytes()
-                for name in (set(FAMILY.FAMILY_SPECS.values().__iter__()) if False else [])
-            }
             partial = root / "partial"
             partial.mkdir()
             (partial / FAMILY.INDEX_FILE).write_bytes(
