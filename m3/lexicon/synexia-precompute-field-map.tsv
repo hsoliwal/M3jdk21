@@ -1,4 +1,13 @@
 donor_type	donor_field	donor_java_type	canonical_payload_field	m3jdk_storage	status	preservation_rule
+M3LangDexPrecompute.Identity	sourceId	String	langdex_source_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical source family identity is preserved without reinterpretation
+M3LangDexPrecompute.Identity	recordId	String	langdex_record_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical source record coordinate is preserved without renumbering
+M3LangDexPrecompute.Identity	glottocode	String	langdex_glottocode	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	normalized glottocode remains the donor language coordinate
+M3LangDexPrecompute.Identity	surface	String	langdex_surface	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical surface identity remains source-owned UTF-16 text
+M3LangDexPrecompute.Identity	sourceRevision	String	langdex_source_revision	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	source revision remains part of the immutable identity key
+M3LangDexPrecompute.Identity	domain	InternDomainV1	langdex_domain	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	InternDomainV1.CONCEPT is required and cannot drift
+M3LangDexPrecompute.Identity	canonicalSchema	String	langdex_canonical_schema	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical identity schema is preserved as source metadata
+M3LangDexPrecompute.Identity	canonicalBytes	byte[]	langdex_canonical_bytes	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	canonical identity bytes are defensively copied and never synthesized at admission
+M3LangDexPrecompute.Identity	canonicalDigest	String	langdex_canonical_digest	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	SHA-256 digest is verified against canonical identity bytes
 IndexWordFacts	languageId	int	language_id	synexia.records.tsv:precompute_payload	MAPPED	operator-supplied value is preserved at source_id+record_id; no String semantic
 IndexWordFacts	wordCount	int	word_count	synexia.records.tsv:precompute_payload	MAPPED	operator-supplied value is preserved without recomputation
 IndexWordFacts	lexiconFingerprint	long	lexicon_fingerprint	synexia.records.tsv:precompute_payload	MAPPED	fingerprint remains donor-owned and opaque
