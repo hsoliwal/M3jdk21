@@ -862,14 +862,26 @@ for pin in [
 ]:
     if pin not in literal_history:
         fail(f"indexed literal replacement history lost donor pin: {pin}")
-literal_start = m3.find("    static boolean isLiteralRegexReplacement(")
+# The reusable literal-regex classifier now owns syntax and surrogate admission.
+# Replacement must call it; requiring the surrogate test inside the replacement method
+# itself would incorrectly reject this stronger shared-guard design.
+literal_classifier_start = m3.find("    static boolean isLiteralRegex(String regex)")
+literal_start = m3.find("    static boolean isLiteralRegexReplacement(", literal_classifier_start)
 literal_end = m3.find("    static int pow31(", literal_start)
-if literal_start < 0 or literal_end < 0:
-    fail("indexed literal replacement owner atom is absent")
+if literal_classifier_start < 0 or literal_start < 0 or literal_end < 0:
+    fail("indexed literal regex classifier/replacement owner atom is absent")
+literal_classifier = m3[literal_classifier_start:literal_start]
+for marker in [
+    "if (regex == null || regex.isEmpty()) return false;",
+    "Character.isSurrogate(unit)",
+    '".indexOf(unit) >= 0) return false;',
+]:
+    if marker not in literal_classifier:
+        fail(f"indexed literal regex classifier lost surrogate/syntax guard: {marker}")
 literal_atom = m3[literal_start:literal_end]
 for marker in [
     "static boolean isLiteralRegexReplacement(String regex, String replacement)",
-    "Character.isSurrogate(unit)",
+    "if (!isLiteralRegex(regex) || replacement == null) return false;",
     "if (found < 0) return original;",
     "return new String(replaceMatches(target, canonicalize(replacement), found, firstOnly));",
     "found = !firstOnly && cursor <= length() - checkedTarget.length()",
