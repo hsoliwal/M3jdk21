@@ -6,6 +6,8 @@
  */
 package java.lang;
 
+import jdk.internal.util.ArraysSupport;
+
 /**
  * Internal, fixed-size precompute facts for one canonical M3 String owner/range.
  *
@@ -112,6 +114,9 @@ final class M3StringFacts {
      */
     private static final long[] LATIN1_UNIT_SIGNAL = latin1UnitSignals();
 
+    /** {@link Character#isWhitespace(char)} for every Latin-1 unit (the strip rule). */
+    private static final boolean[] LATIN1_WHITESPACE = latin1Whitespace();
+
     /**
      * Folds every fact in one streaming pass over bulk-read windows. The code-point lane keeps a
      * one-unit delay so a high surrogate is resolved by its successor (or at the end), which keeps
@@ -120,6 +125,99 @@ final class M3StringFacts {
      * strip and trim lanes that are M3JDK-only.
      */
     static M3StringFacts scan(M3String value) {
+        return value.coder() == String.LATIN1 ? scanLatin1(value) : scanUnits(value);
+    }
+
+    /**
+     * The Latin-1 lane (A15): the units are bytes read once in bulk, the polynomial hashes come
+     * from the vectorized hash, the title hash is derived exactly from the lower hash, ascii and
+     * the UTF-8 length from the count of positive bytes, trim and strip from front and back scans,
+     * and only the n-gram mixing folds every unit. Every fact is bit-identical to
+     * {@link #scanUnits}; the two byte arrays are transient scratch of the owner's size.
+     */
+    static M3StringFacts scanLatin1(M3String value) {
+        int length = value.length();
+        if (length == 0) return scanUnits(value);
+        byte[] bytes = new byte[length];
+        value.getBytes(bytes, 0, 0, String.LATIN1, length);
+        int positives = StringCoding.countPositives(bytes, 0, length);
+        boolean ascii = positives == length;
+        int utf8 = length;
+        for (int index = positives; index < length; index++) {
+            if (bytes[index] < 0) utf8++;
+        }
+        int hash = ArraysSupport.vectorizedHashCode(bytes, 0, length, 0, ArraysSupport.T_BOOLEAN);
+        byte[] folded = new byte[length];
+        for (int index = 0; index < length; index++) {
+            int unit = bytes[index] & 0xff;
+            folded[index] = (byte) (unit >= 'A' && unit <= 'Z' ? unit | 0x20 : unit);
+        }
+        int lowerHash = ArraysSupport.vectorizedHashCode(folded, 0, length, 0, ArraysSupport.T_BOOLEAN);
+        for (int index = 0; index < length; index++) {
+            int unit = bytes[index] & 0xff;
+            folded[index] = (byte) (unit >= 'a' && unit <= 'z' ? unit & ~0x20 : unit);
+        }
+        int upperHash = ArraysSupport.vectorizedHashCode(folded, 0, length, 0, ArraysSupport.T_BOOLEAN);
+        char first = (char) (bytes[0] & 0xff);
+        int titleHash = lowerHash + pow31(length - 1) * (asciiUpper(first) - asciiLower(first));
+        long signal = 0L;
+        long bigrams = 0L;
+        long trigrams = 0L;
+        int previous2 = 0;
+        int previous1 = 0;
+        for (int index = 0; index < length; index++) {
+            int unit = bytes[index] & 0xff;
+            signal |= LATIN1_UNIT_SIGNAL[unit];
+            if (index >= 1) bigrams = addBigramSignal(bigrams, (char) previous1, (char) unit);
+            if (index >= 2) {
+                trigrams = addTrigramSignal(trigrams, (char) previous2, (char) previous1, (char) unit);
+            }
+            previous2 = previous1;
+            previous1 = unit;
+        }
+        long prefix = 0L;
+        for (int index = 0; index < Math.min(4, length); index++) {
+            prefix |= (long) (bytes[index] & 0xff) << (48 - (index << 4));
+        }
+        long suffix = 0L;
+        for (int index = Math.max(0, length - 4); index < length; index++) {
+            suffix = (suffix << 16) | (bytes[index] & 0xff);
+        }
+        int trimStart = 0;
+        while (trimStart < length && (bytes[trimStart] & 0xff) <= ' ') trimStart++;
+        int trimEnd = length;
+        while (trimEnd > 0 && (bytes[trimEnd - 1] & 0xff) <= ' ') trimEnd--;
+        int stripStart = 0;
+        while (stripStart < length && LATIN1_WHITESPACE[bytes[stripStart] & 0xff]) stripStart++;
+        int stripEnd = length;
+        while (stripEnd > 0 && LATIN1_WHITESPACE[bytes[stripEnd - 1] & 0xff]) stripEnd--;
+        return new M3StringFacts(
+                length,
+                utf8,
+                length,
+                0,
+                hash,
+                pow31(length),
+                first,
+                (char) (bytes[length - 1] & 0xff),
+                signal,
+                ascii,
+                true,
+                upperHash,
+                lowerHash,
+                titleHash,
+                prefix,
+                suffix,
+                bigrams,
+                trigrams,
+                trimStart,
+                trimEnd,
+                stripStart,
+                stripEnd);
+    }
+
+    /** The A8 single pass over UTF-16 unit windows, every coder; the lane's exactness oracle. */
+    static M3StringFacts scanUnits(M3String value) {
         int length = value.length();
         int hash = 0;
         int utf8 = 0;
@@ -434,6 +532,14 @@ final class M3StringFacts {
         long[] table = new long[0x100];
         for (int unit = 0; unit < table.length; unit++) {
             table[unit] = addSignal(0L, (char) unit);
+        }
+        return table;
+    }
+
+    private static boolean[] latin1Whitespace() {
+        boolean[] table = new boolean[0x100];
+        for (int unit = 0; unit < table.length; unit++) {
+            table[unit] = Character.isWhitespace((char) unit);
         }
         return table;
     }
