@@ -25,8 +25,12 @@ import org.openrewrite.ScanningRecipe;
 import org.openrewrite.SourceFile;
 import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
+import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.JavaParser;
+import org.openrewrite.java.tree.Comment;
 import org.openrewrite.java.tree.J;
+import org.openrewrite.java.tree.Space;
+import org.openrewrite.java.tree.TextComment;
 
 /**
  * Hash-pinned OpenJDK21-to-donor Java recipe crate.
@@ -253,21 +257,143 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
     }
 
     private static SourceFile parse(Target target, ExecutionContext context) {
+        return parseJava21(Path.of(target.path()), target.text(), context);
+    }
+
+    /*
+     * OpenRewrite 8.17.1 can fail while converting a valid JDK class Javadoc into its semantic
+     * Javadoc tree (notably on String.java). This recipe is a hash-pinned source replacement, so
+     * it needs a lossless Java compilation unit but does not inspect Javadoc semantics. Mask only
+     * Javadoc delimiters while parsing, restore them as ordinary lossless comments, and retain the
+     * exact printAll() assertion below. The Java source/type boundary is therefore unchanged.
+     */
+    static SourceFile parseJava21(
+            Path path, String source, ExecutionContext context) {
+        String masked = maskJavadocs(source);
         List<SourceFile> parsed = JavaParser.fromJavaVersion()
                 .build()
                 .parseInputs(
-                        List.of(Parser.Input.fromString(
-                                Path.of(target.path()), target.text())),
+                        List.of(Parser.Input.fromString(path, masked)),
                         null,
                         context)
                 .toList();
         if (parsed.size() != 1
-                || !(parsed.getFirst() instanceof J.CompilationUnit)
-                || !target.text().equals(parsed.getFirst().printAll())) {
+                || !(parsed.getFirst() instanceof J.CompilationUnit)) {
             throw new IllegalStateException(
-                    "Java21 donor parse/roundtrip drift: " + target.path());
+                    "Java21 donor parse did not produce a compilation unit: " + path);
         }
-        return parsed.getFirst();
+
+        SourceFile restored = restoreJavadocs(parsed.getFirst(), context);
+        if (!source.equals(restored.printAll())) {
+            throw new IllegalStateException(
+                    "Java21 donor parse/roundtrip drift: " + path);
+        }
+        return restored;
+    }
+
+    private static final String JAVADOC_SENTINEL =
+            "M3_JAVADOC_DELIMITER_SENTINEL_20261009";
+
+    private static String maskJavadocs(String source) {
+        StringBuilder masked = new StringBuilder(source.length());
+        int state = 0; // 0=code, 1=line comment, 2=block comment, 3=string, 4=char, 5=text block
+        for (int i = 0; i < source.length(); i++) {
+            char c = source.charAt(i);
+            if (state == 0) {
+                if (c == '/' && i + 2 < source.length()
+                        && source.charAt(i + 1) == '*'
+                        && source.charAt(i + 2) == '*') {
+                    masked.append("/*").append(JAVADOC_SENTINEL);
+                    i += 2;
+                    state = 2;
+                } else if (c == '/' && i + 1 < source.length()
+                        && source.charAt(i + 1) == '/') {
+                    masked.append("//");
+                    i++;
+                    state = 1;
+                } else if (c == '/' && i + 1 < source.length()
+                        && source.charAt(i + 1) == '*') {
+                    masked.append("/*");
+                    i++;
+                    state = 2;
+                } else if (c == '"' && i + 2 < source.length()
+                        && source.charAt(i + 1) == '"'
+                        && source.charAt(i + 2) == '"') {
+                    masked.append("\"\"\"");
+                    i += 2;
+                    state = 5;
+                } else if (c == '"') {
+                    masked.append(c);
+                    state = 3;
+                } else if (c == '\'') {
+                    masked.append(c);
+                    state = 4;
+                } else {
+                    masked.append(c);
+                }
+            } else if (state == 1) {
+                masked.append(c);
+                if (c == '\n' || c == '\r') {
+                    state = 0;
+                }
+            } else if (state == 2) {
+                masked.append(c);
+                if (c == '*' && i + 1 < source.length()
+                        && source.charAt(i + 1) == '/') {
+                    masked.append('/');
+                    i++;
+                    state = 0;
+                }
+            } else if (state == 3) {
+                masked.append(c);
+                if (c == '\\' && i + 1 < source.length()) {
+                    masked.append(source.charAt(++i));
+                } else if (c == '"') {
+                    state = 0;
+                }
+            } else if (state == 4) {
+                masked.append(c);
+                if (c == '\\' && i + 1 < source.length()) {
+                    masked.append(source.charAt(++i));
+                } else if (c == '\'') {
+                    state = 0;
+                }
+            } else {
+                masked.append(c);
+                if (c == '"' && i + 2 < source.length()
+                        && source.charAt(i + 1) == '"'
+                        && source.charAt(i + 2) == '"') {
+                    masked.append("\"\"\"");
+                    i += 2;
+                    state = 0;
+                }
+            }
+        }
+        return masked.toString();
+    }
+
+    private static SourceFile restoreJavadocs(
+            SourceFile source, ExecutionContext context) {
+        return (SourceFile) new JavaIsoVisitor<ExecutionContext>() {
+            @Override
+            public Space visitSpace(
+                    Space space, Space.Location loc, ExecutionContext ctx) {
+                List<Comment> comments = new ArrayList<>(space.getComments().size());
+                boolean changed = false;
+                for (Comment comment : space.getComments()) {
+                    if (comment instanceof TextComment text
+                            && text.getText().startsWith(JAVADOC_SENTINEL)) {
+                        comments.add(text.withText(
+                                "*" + text.getText().substring(JAVADOC_SENTINEL.length())));
+                        changed = true;
+                    } else {
+                        comments.add(comment);
+                    }
+                }
+                Space restored = changed ? space.withComments(comments) : space;
+                return super.visitSpace(restored, loc, ctx);
+            }
+        }.visit(source, context);
     }
 
     private List<Target> targets() {
