@@ -271,7 +271,7 @@
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a"
     },
     {
       "path": "m3/migration/recipe.py",
@@ -290,5 +290,6 @@
       "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
     }
   ],
-  "plan_sha256": "67bff641417198b41efa2f1e91f5630413775f24ab8950061689113500ad6908"
+  "plan_sha256": "6d648a78fb5fe27a8f8ba5ed0e017fcbd564778a45ff2f924beda1f8a0446f85"
 }
+
