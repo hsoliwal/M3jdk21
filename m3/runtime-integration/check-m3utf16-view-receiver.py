@@ -11,6 +11,12 @@ view = (ROOT / "m3/arrays/src/main/java/com/m3/arrays/M3Utf16ArrayView.java").re
 facts = (ROOT / "m3/arrays/src/main/java/com/m3/arrays/M3Utf16Facts.java").read_text(
     encoding="utf-8"
 )
+tests = (ROOT / "m3/arrays/src/test/java/com/m3/arrays/M3ArraysTest.java").read_text(
+    encoding="utf-8"
+)
+native_tests = (ROOT / "m3/arrays/src/test/java/com/m3/arrays/M3ArrayNativeTest.java").read_text(
+    encoding="utf-8"
+)
 
 checks = []
 
@@ -42,6 +48,21 @@ for fragment in [
     "default char[] copy()",
 ]:
     require("view:" + fragment, view, fragment)
+
+for fragment in [
+    "utf16JoinKeepsExactHashAndCodePointFactsAcrossSurrogateSeam",
+    "assertEquals(expected.hashCode(), joined.javaHashCode());",
+    "slicesAndJoinsRemainCoordinateExactWithoutFlattening",
+    "precomputedFactCompositionMatchesDirectComputation",
+    "charView.asReadOnlyCharBuffers()[0].put(0, 'q')",
+]:
+    require("java-test:" + fragment, tests, fragment)
+
+require(
+    "native-differential-test",
+    native_tests,
+    "optionalNativeProviderMatchesJavaAcrossChunkAndUnicodeBoundaries",
+)
 
 for fragment in [
     "public record M3Utf16Facts(",
