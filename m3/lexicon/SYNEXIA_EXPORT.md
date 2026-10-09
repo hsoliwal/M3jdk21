@@ -156,3 +156,27 @@ mapping rows, directed antonym/thesaurus relation rows, rich owner payloads,
 lineage, legacy-input compatibility, deterministic replay, M3LEX001 version 2
 metadata, precompute sidecars, conflict refusal before output creation, and
 source-blind rejection of a post-export mutation.
+
+## Dedicated acronym sidecar (staged)
+
+Acronym text is not placed in the generic numeric/boolean
+`precompute_payload`. The target branch carries a separate
+`m3lex-acronym-v1` renderer at
+`m3/runtime-integration/synexia-acronym-sidecar.py`.
+
+It emits exactly two UTF-8 TSV files:
+
+- `synexia.acronyms.tsv`: `source_id`, `record_id`,
+  `source_manifest_revision`, `owner_fingerprint`, `acronym`,
+  `expansion`, `domain`;
+- `synexia.acronyms.index.tsv`: schema, filename, row count and SHA-256.
+
+The sidecar requires `source_id=dictlang.acronyms` and
+`record_id=acronym), preserves text without case or Unicode normalization,
+rejects controls, duplicates, foreign source IDs and checksum/row-count drift,
+and requires the source manifest revision plus a 64-character owner fingerprint.
+The current target map is
+`m3/lexicon/synexia-acronym-target-map.tsv`, bound to
+`AcronymLexicon.java` and its Apache-2.0 source blob. The sidecar is staged until its Java receiver, pinned 40-entry snapshot, hosted
+CI proof and source-side receipts are synchronized; staged is not an admission
+claim.
