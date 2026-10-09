@@ -66,6 +66,6 @@ public final class M3InstanceIndexTest {
                 List.of(einsteinRecord), List.of(title)));
         expect(IllegalArgumentException.class, () -> new M3InstanceIndex.InstanceRecord(
                 einstein, "en", "", "PERSON", 10500, List.of(), Map.of(), "source"));
-        System.out.println("M3_INSTANCE_INDEX_CONTRACT_PASS checks=" + checks + "/13");
+        System.out.println("M3_INSTANCE_INDEX_CONTRACT_PASS checks=" + checks + "/14");
     }
 }
