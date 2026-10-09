@@ -1,0 +1,4 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3String.java	5c1f10bc2110aef3f5e8dd32be5b5128f5a9d54b5adc4764025221f4869c1cb1	4c3926f5506b1861fd119ae1ed006bf6fb545ff6774f64d975f6a4276c1e23e8	00-M3String.java.txt
+src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java	9735b094abb84bb203d40e20269534f979b8c18ae2348c4061b2b1a52561de17	c76a92c44bd2e48d2e1c9d2db88e38195528d3456a1913de0370134b16cb778b	01-M3StringSearchPrecompute.java.txt
+test/jdk/java/lang/String/M3NeedleArgTest.java	ABSENT	5c415c9a9dcb8d9e1db0768ccd05877ef36baf7cc0e053d3ed8a0c954781fa32	02-M3NeedleArgTest.java.txt

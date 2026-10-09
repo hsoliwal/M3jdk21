@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.NeedleBulk
+displayName: M3JDK21 M3 needles read once for flat receivers
+description: >-
+  A flat String or StringBuilder searched for an M3-backed needle ran the search precompute's
+  byte-haystack plan with an owner dispatch per needle unit (20x..90x slower than a flat needle),
+  and startsWith/endsWith with an M3 prefix over a flat receiver materialized the needle's byte
+  shadow. String.indexOf(byte[], ...) reads the M3 needle once into its compact value and takes the
+  flat needle's vectorized search; lastIndexOf does the same below 16 units and keeps the reverse
+  skip search above it over the needle's bulk-read units; startsWith compares in place. Java step:
+  M3String (compactValue/units opened to the package), M3StringSearchPrecompute (byte-haystack loops
+  over char[]) and the jtreg proof; text step: String.java. Stacks on crate m3-regex-subject-view
+  (its postimages are these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-needle-bulk
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-needle-bulk
