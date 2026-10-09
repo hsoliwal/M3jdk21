@@ -1,0 +1,20 @@
+recipe: synexia-proper-noun-donor-pending-20261009
+version: 1
+source_repo: hsoliwal/com.synexia
+source_pr: 10054
+source_head: 051fecfcd7b2ad1bdfb1666b2faa0e0a52820168
+receipt: m3/runtime-integration/synexia-proper-noun-donor-pending-receipt.tsv
+mode: pending-reference-only
+laws:
+  - source-head-and-blob-pins-must-match
+  - donor-data-and-code-must-not-be-copied
+  - domain-donor-must-not-become-general-token-identity
+  - no-target-receiver-without-typed-contract
+  - deterministic-row-order
+target:
+  source_manifest: m3/lexicon/synexia-source-manifest.tsv
+  source_manifest_status: no-proper-name-or-title-family
+  receiver_status: NO_TYPED_RECEIVER
+verification:
+  checker: m3/runtime-integration/check-synexia-proper-noun-donor-pending.py
+  test: m3/runtime-integration/test_synexia_proper_noun_donor_pending.py
