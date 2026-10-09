@@ -71,3 +71,6 @@ SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceFingerprint	String	sour
 M3NumberSpace	languageTag	String	language_tag	m3number-family-v1:synexia.number.tsv	MAPPED	language coordinate is explicit projection metadata and never changes canonical numeric identity
 M3NumberSpace	precomputedValueCount	int	precomputed_value_count	m3number-family-v1:synexia.number.tsv	MAPPED	10,001 canonical values remain bounded and source-scoped
 M3NumberSpace	storageIdentity	StorageIdentity	shared_utf16_storage	m3number-family-v1:synexia.number.tsv	MAPPED	language views share one immutable UTF-16 backing owner
+AcronymPrecompute	acronym	String	acronym	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	acronym identity is preserved as the sidecar record key and is never reconstructed from expansion text
+AcronymPrecompute	expansion	String	expansion	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	expansion text remains source-authored sidecar content and is not folded into the generic numeric payload
+AcronymPrecompute	domain	String	domain	m3lex-acronym-v1:synexia.acronyms.tsv	MAPPED	domain classification remains source-authored metadata and is not inferred from the acronym
