@@ -1,0 +1,31 @@
+schema: m3-recipe/v1
+id: synexia-rapidex-gap-20261010
+pattern: fail-closed-cross-repository-gap-receipt
+purpose: Carry the unresolved Rapidex donor state into the M3JDK admission queue without fabricating an owner or target field.
+
+source:
+  repository: hsoliwal/com.synexia
+  pull_request: 10041
+  commit: b2db7b868435f1dc9217061a3610eb74a228de04
+  coverage_path: cognix-nlp/docs/SYNEXIA_DONOR_COVERAGE.tsv
+  coverage_blob: 164ea23596f692a8a105234f465affe851632ba2
+  source_proof: M3LEXICON_DONOR_GAP_SOURCE_PASS checks=26/26
+
+target:
+  repository: hsoliwal/M3jdk21
+  target_status: NO_CANONICAL_OWNER
+  target_surface: none
+  target_owner: none
+  payload: NOT_ADMITTED
+
+laws:
+  - no Rapidex owner, field, payload, or precompute class may be inferred
+  - external frequency mentions are not Rapidex ownership evidence
+  - existing mapped families remain unchanged
+  - revisit only after a pinned canonical owner and semantics are proven
+
+verification:
+  checker: m3/runtime-integration/check-synexia-rapidex-gap.py
+  test: m3/runtime-integration/test_synexia_rapidex_gap.py
+  runtime: NOT_RUN
+  hosted_ci: NOT_CLAIMED
