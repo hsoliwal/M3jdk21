@@ -224,6 +224,13 @@ final class M3StringSearchPrecompute {
         return -1;
     }
 
+    /**
+     * An M3 needle of this many units and up runs the reverse skip search for lastIndexOf over
+     * a flat haystack; a shorter one, and every needle for indexOf, is read once in bulk in
+     * String and takes the flat needle's search (A21).
+     */
+    static final int LONG_NEEDLE = 16;
+
     static int indexOf(
             byte[] source,
             byte sourceCoder,
@@ -234,8 +241,10 @@ final class M3StringSearchPrecompute {
         int patternLength = pattern.length();
         if (patternLength == 0) return from;
         if (patternLength > sourceCount - from) return -1;
+        // The needle is read once in bulk (A21): the loops compare array units, not dispatches.
+        char[] needle = pattern.units();
         if (patternLength == 1) {
-            char wanted = pattern.charAt(0);
+            char wanted = needle[0];
             for (int index = from; index < sourceCount; index++) {
                 if (sourceUnit(source, sourceCoder, index) == wanted) return index;
             }
@@ -245,17 +254,17 @@ final class M3StringSearchPrecompute {
         Plan plan = prepare(pattern);
         if (plan != null) {
             return plan.patternLength >= 8
-                    ? adaptiveBmh(source, sourceCoder, sourceCount, pattern, plan, from)
-                    : kmp(source, sourceCoder, sourceCount, pattern, plan, from);
+                    ? adaptiveBmh(source, sourceCoder, sourceCount, needle, plan, from)
+                    : kmp(source, sourceCoder, sourceCount, needle, plan, from);
         }
 
         int limit = sourceCount - patternLength;
-        char first = pattern.charAt(0);
+        char first = needle[0];
         for (int candidate = from; candidate <= limit; candidate++) {
             if (sourceUnit(source, sourceCoder, candidate) != first) continue;
             int index = 1;
             while (index < patternLength
-                    && sourceUnit(source, sourceCoder, candidate + index) == pattern.charAt(index)) {
+                    && sourceUnit(source, sourceCoder, candidate + index) == needle[index]) {
                 index++;
             }
             if (index == patternLength) return candidate;
@@ -267,16 +276,16 @@ final class M3StringSearchPrecompute {
             byte[] source,
             byte sourceCoder,
             int sourceCount,
-            M3String pattern,
+            char[] needle,
             Plan plan,
             int fromIndex) {
         int matched = 0;
         for (int index = fromIndex; index < sourceCount; index++) {
             char unit = sourceUnit(source, sourceCoder, index);
-            while (matched > 0 && unit != pattern.charAt(matched)) {
+            while (matched > 0 && unit != needle[matched]) {
                 matched = plan.prefix[matched - 1];
             }
-            if (unit == pattern.charAt(matched)) matched++;
+            if (unit == needle[matched]) matched++;
             if (matched == plan.patternLength) {
                 return index - plan.patternLength + 1;
             }
@@ -288,7 +297,7 @@ final class M3StringSearchPrecompute {
             byte[] source,
             byte sourceCoder,
             int sourceCount,
-            M3String pattern,
+            char[] needle,
             Plan plan,
             int fromIndex) {
         int maximumStart = sourceCount - plan.patternLength;
@@ -297,7 +306,7 @@ final class M3StringSearchPrecompute {
         while (at <= maximumStart) {
             int index = plan.patternLength - 1;
             while (index >= 0
-                    && pattern.charAt(index)
+                    && needle[index]
                             == sourceUnit(source, sourceCoder, at + index)) {
                 index--;
             }
@@ -312,7 +321,7 @@ final class M3StringSearchPrecompute {
             failedComparisonWork += plan.patternLength - index;
             if (failedComparisonWork
                     > (long) plan.patternLength + 2L * (at - fromIndex)) {
-                return kmp(source, sourceCoder, sourceCount, pattern, plan, at);
+                return kmp(source, sourceCoder, sourceCount, needle, plan, at);
             }
         }
         return -1;
@@ -328,8 +337,9 @@ final class M3StringSearchPrecompute {
         int maximumStart = Math.min(fromIndex, sourceCount - patternLength);
         if (maximumStart < 0) return -1;
         if (patternLength == 0) return maximumStart;
+        char[] needle = pattern.units();
         if (patternLength == 1) {
-            char wanted = pattern.charAt(0);
+            char wanted = needle[0];
             for (int index = maximumStart; index >= 0; index--) {
                 if (sourceUnit(source, sourceCoder, index) == wanted) return index;
             }
@@ -342,21 +352,21 @@ final class M3StringSearchPrecompute {
             int scanStart = maximumStart + plan.patternLength - 1;
             for (int index = scanStart; index >= 0; index--) {
                 char unit = sourceUnit(source, sourceCoder, index);
-                while (matched > 0 && unit != reverseUnit(pattern, matched)) {
+                while (matched > 0 && unit != needle[patternLength - 1 - matched]) {
                     matched = plan.reversePrefix[matched - 1];
                 }
-                if (unit == reverseUnit(pattern, matched)) matched++;
+                if (unit == needle[patternLength - 1 - matched]) matched++;
                 if (matched == plan.patternLength) return index;
             }
             return -1;
         }
 
-        char first = pattern.charAt(0);
+        char first = needle[0];
         for (int candidate = maximumStart; candidate >= 0; candidate--) {
             if (sourceUnit(source, sourceCoder, candidate) != first) continue;
             int index = 1;
             while (index < patternLength
-                    && sourceUnit(source, sourceCoder, candidate + index) == pattern.charAt(index)) {
+                    && sourceUnit(source, sourceCoder, candidate + index) == needle[index]) {
                 index++;
             }
             if (index == patternLength) return candidate;

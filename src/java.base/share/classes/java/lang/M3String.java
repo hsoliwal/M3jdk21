@@ -543,7 +543,7 @@ final class M3String implements CharSequence {
      * spliterators fold the array with the characteristics a flat String has. Transient scratch
      * of the range's size.
      */
-    private byte[] compactValue() {
+    byte[] compactValue() {
         byte coder = coder();
         int length = length();
         byte[] out = new byte[length << coder];
@@ -696,7 +696,7 @@ final class M3String implements CharSequence {
      * unchanged byte rules instead of dispatching to the owner per unit. Transient scratch of the
      * same order as the output they allocate.
      */
-    private char[] units() {
+    char[] units() {
         char[] out = new char[length()];
         getChars(0, out.length, out, 0);
         return out;

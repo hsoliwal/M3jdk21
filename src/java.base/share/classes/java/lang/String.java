@@ -2527,6 +2527,10 @@ public final class String
             }
             return M3StringMixedCompare.regionMatchesUnits(this, toffset, prefix, 0, prefix.length());
         }
+        if (prefix.m3() != null) {
+            // An M3 prefix against a flat receiver compares in place (A21).
+            return M3StringMixedCompare.regionMatchesUnits(this, toffset, prefix, 0, prefix.length());
+        }
         byte[] ta = value();
         byte[] pa = prefix.value();
         int po = 0;
@@ -2997,14 +3001,12 @@ public final class String
             return fromIndex;
         }
 
+        // An M3 needle is read once in bulk and takes the flat needle's intrinsic (A21); its
+        // compact value carries the coder a flat String of the same spelling has. Measured: the
+        // vectorized searches beat the skip search over a flat haystack at every needle length.
         M3String target = tgtStr.m3();
-        if (target != null) {
-            return M3StringSearchPrecompute.indexOf(
-                    src, srcCoder, srcCount, target, fromIndex);
-        }
-
-        byte[] tgt = tgtStr.value();
-        byte tgtCoder = tgtStr.coder();
+        byte[] tgt = target == null ? tgtStr.value() : target.compactValue();
+        byte tgtCoder = target == null ? tgtStr.coder() : tgt.length == tgtCount ? LATIN1 : UTF16;
         if (srcCoder == tgtCoder) {
             return srcCoder == LATIN1
                 ? StringLatin1.indexOf(src, srcCount, tgt, tgtCount, fromIndex)
@@ -3108,13 +3110,15 @@ public final class String
         }
 
         M3String target = tgtStr.m3();
-        if (target != null) {
+        if (target != null && tgtCount >= M3StringSearchPrecompute.LONG_NEEDLE) {
             return M3StringSearchPrecompute.lastIndexOf(
                     src, srcCoder, srcCount, target, fromIndex);
         }
 
-        byte[] tgt = tgtStr.value();
-        byte tgtCoder = tgtStr.coder();
+        // A shorter M3 needle is read once in bulk and takes the flat needle's loop (A21); the
+        // reverse skip search keeps winning for long needles.
+        byte[] tgt = target == null ? tgtStr.value() : target.compactValue();
+        byte tgtCoder = target == null ? tgtStr.coder() : tgt.length == tgtCount ? LATIN1 : UTF16;
         if (srcCoder == tgtCoder) {
             return srcCoder == LATIN1
                 ? StringLatin1.lastIndexOf(src, srcCount, tgt, tgtCount, fromIndex)
