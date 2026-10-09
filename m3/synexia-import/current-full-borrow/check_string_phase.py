@@ -11,7 +11,7 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 MAP = Path(__file__).with_name("string-source-target-map.tsv")
 ESTATE = Path(__file__).with_name("synexia-estate.tsv")
 NAME_MAP = ROOT / "m3/docs/name-mapping.json"
