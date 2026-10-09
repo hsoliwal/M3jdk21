@@ -39,6 +39,16 @@ class CharArrayCopyRecipeTest(unittest.TestCase):
             for name in MANIFEST["files"]
         }
 
+
+    def test_recipe_resolves_checkout_root_not_m3_directory(self):
+        self.assertEqual(HERE.parents[3], RECIPE.ROOT)
+        self.assertTrue(
+            (RECIPE.ROOT / "src/java.base/share/classes/java/lang/M3String.java").is_file()
+        )
+        self.assertFalse(
+            (HERE.parents[2] / "src/java.base/share/classes/java/lang/M3String.java").is_file()
+        )
+
     def test_current_canonical_tree_is_sealed_superseding_fixed_point(self):
         with tempfile.TemporaryDirectory() as folder:
             target = Path(folder)

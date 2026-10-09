@@ -22,6 +22,7 @@ import org.openrewrite.Recipe;
 import org.openrewrite.SourceFile;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
+import org.openrewrite.text.PlainText;
 
 final class M3SynexiaFullDeliveryA3RecipeTest {
     private static final String IMPORTER =
@@ -153,17 +154,28 @@ final class M3SynexiaFullDeliveryA3RecipeTest {
     private static List<SourceFile> parse(
             Map<String, String> sources,
             InMemoryExecutionContext context) {
-        List<Parser.Input> inputs = new ArrayList<>(sources.size());
+        List<Parser.Input> javaInputs = new ArrayList<>();
+        List<SourceFile> parsed = new ArrayList<>();
         sources.forEach(
-                (path, source) ->
-                        inputs.add(
-                                Parser.Input.fromString(
-                                        Path.of(path), source)));
-        if (inputs.isEmpty()) return List.of();
-        return JavaParser.fromJavaVersion()
-                .build()
-                .parseInputs(inputs, null, context)
-                .toList();
+                (path, source) -> {
+                    if (path.endsWith(".java")) {
+                        javaInputs.add(Parser.Input.fromString(Path.of(path), source));
+                    } else {
+                        parsed.add(
+                                PlainText.builder()
+                                        .sourcePath(Path.of(path))
+                                        .text(source)
+                                        .build());
+                    }
+                });
+        if (!javaInputs.isEmpty()) {
+            parsed.addAll(
+                    JavaParser.fromJavaVersion()
+                            .build()
+                            .parseInputs(javaInputs, null, context)
+                            .toList());
+        }
+        return parsed;
     }
 
     private static String resource(String path) {

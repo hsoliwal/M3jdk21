@@ -18,8 +18,8 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
  * {@link M3StringFacts}. Negative block tests may skip exact work; positive blocks always perform
  * exact UTF-16 comparison. Entries weakly key canonical owner+coordinate and retain only primitive
  * block masks: an exact block keys each mask by the block-relative offset of a unit's first
- * occurrence and reads that unit back from the canonical text, so no code unit is stored twice
- * (invariant 6: no second spelling store).</p>
+ * occurrence and retains only the bounded sorted unit table, offsets and masks; it never retains
+ * a full second spelling array (invariant 6: no second full-text spelling store).</p>
  */
 final class M3StringPositionPrecompute {
     private static final int BLOCK_SHIFT = 6;
@@ -30,6 +30,8 @@ final class M3StringPositionPrecompute {
     private static final int SLOT_MASK = SLOTS - 1;
     private static final int MIN_SOURCE_UNITS = 256;
     private static final int MAX_SOURCE_UNITS = 32_768;
+    private static final long EXACT_BLOCK_BYTES =
+            MAX_SOURCE_UNITS * (Character.BYTES + Long.BYTES);
 
     private static final AtomicReferenceArray<Entry> CACHE =
             new AtomicReferenceArray<>(SLOTS);
@@ -128,7 +130,7 @@ final class M3StringPositionPrecompute {
                 (MAX_SOURCE_UNITS + BLOCK_MASK) >>> BLOCK_SHIFT;
         long signalBytes = (long) SLOTS * blocksPerEntry * Long.BYTES;
         long exactBytes =
-                (long) SLOTS * MAX_SOURCE_UNITS * (Byte.BYTES + Long.BYTES);
+                (long) SLOTS * (EXACT_BLOCK_BYTES + MAX_SOURCE_UNITS * Byte.BYTES);
         return Math.addExact(signalBytes, exactBytes);
     }
 
@@ -214,6 +216,7 @@ final class M3StringPositionPrecompute {
         }
 
         ExactBlock computed = new ExactBlock(
+                Arrays.copyOf(units, count),
                 Arrays.copyOf(offsets, count),
                 Arrays.copyOf(masks, count));
         if (blocks.exact.compareAndSet(block, null, computed)) return computed;
@@ -255,35 +258,25 @@ final class M3StringPositionPrecompute {
     }
 
     /**
-     * Masks keyed by coordinate, not by spelling: {@code firstOffsets[i]} is the block-relative
-     * offset of the first occurrence of the i-th distinct unit in unit order, and lookups read
-     * that unit back from the canonical source. Retained lanes are one byte and one long per
+     * Masks keyed by coordinate and unit order: {@code units[i]} is the i-th distinct unit,
+     * {@code firstOffsets[i]} is its block-relative first-occurrence offset, and {@code masks[i]}
+     * contains the exact positions. The retained lanes are two bytes, one byte and one long per
      * distinct unit.
      */
     private static final class ExactBlock {
+        final char[] units;
         final byte[] firstOffsets;
         final long[] masks;
 
-        ExactBlock(byte[] firstOffsets, long[] masks) {
+        ExactBlock(char[] units, byte[] firstOffsets, long[] masks) {
+            this.units = units;
             this.firstOffsets = firstOffsets;
             this.masks = masks;
         }
 
         long mask(M3String source, int blockStart, char unit) {
-            int low = 0;
-            int high = firstOffsets.length - 1;
-            while (low <= high) {
-                int mid = (low + high) >>> 1;
-                char candidate = source.charAt(blockStart + firstOffsets[mid]);
-                if (candidate < unit) {
-                    low = mid + 1;
-                } else if (candidate > unit) {
-                    high = mid - 1;
-                } else {
-                    return masks[mid];
-                }
-            }
-            return 0L;
+            int at = Arrays.binarySearch(units, unit);
+            return at < 0 ? 0L : masks[at];
         }
     }
 

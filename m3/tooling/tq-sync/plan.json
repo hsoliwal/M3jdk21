@@ -267,11 +267,11 @@
   "guards": [
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72"
+      "sha256": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a"
     },
     {
       "path": "m3/migration/recipe.py",
@@ -279,7 +279,7 @@
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
-      "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155"
+      "sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4"
     },
     {
       "path": "src/hotspot/share/runtime/arguments.cpp",
@@ -290,5 +290,5 @@
       "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
     }
   ],
-  "plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096"
+  "plan_sha256": "ee82fd6857763605a7f9d3736bbe83bd7d0d24bd31e3ef0a673b56a852aeff53"
 }
