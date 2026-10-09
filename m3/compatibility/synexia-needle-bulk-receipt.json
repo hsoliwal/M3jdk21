@@ -1,0 +1,105 @@
+{
+  "schema": "M3JDK21_SYNEXIA_NEEDLE_BULK_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-needle-bulk-20261009",
+    "pullRequest": null,
+    "commit": "b91857224ce",
+    "stackedOn": [
+      {
+        "pullRequest": 10005,
+        "crate": "m3-regex-subject-view"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.NeedleBulk",
+    "crate": "m3-needle-bulk",
+    "fossReuseDecisionRow": "string.needle.bulk-flat-receiver",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "commit": "890adb6410",
+        "target": "java.lang.String.indexOf/lastIndexOf(byte[], ...), startsWith",
+        "mechanics": "the flat needle's StringLatin1/StringUTF16 searches over the M3 needle's compact value; the mixed compare in place"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "commit": "3017fbc32b",
+        "target": "java.lang.M3StringSearchPrecompute (byte-haystack loops)",
+        "mechanics": "the reverse skip search for long lastIndexOf needles over a bulk-read char[] needle"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "commit": "3017fbc32b",
+        "target": "java.lang.M3String.compactValue/units",
+        "mechanics": "the A17/A13 bulk reads opened to the package"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owners",
+    "disposition": "ADAPT: results equal the flat-needle results; no gate removed; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-regex-subject-bulk-20261009 (#558, A20) on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.String",
+      "java.lang.M3String",
+      "java.lang.M3StringSearchPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed under the supersession model: String.java after-image and hunks regenerated from a synthetic after-state tree; M3String.java and M3StringSearchPrecompute.java owners recorded as superseded; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "5c1f10bc2110aef3f5e8dd32be5b5128f5a9d54b5adc4764025221f4869c1cb1",
+      "after": "4c3926f5506b1861fd119ae1ed006bf6fb545ff6774f64d975f6a4276c1e23e8",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+      "before": "9735b094abb84bb203d40e20269534f979b8c18ae2348c4061b2b1a52561de17",
+      "after": "c76a92c44bd2e48d2e1c9d2db88e38195528d3456a1913de0370134b16cb778b",
+      "resource": "01-M3StringSearchPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3NeedleArgTest.java",
+      "before": "ABSENT",
+      "after": "5c415c9a9dcb8d9e1db0768ccd05877ef36baf7cc0e053d3ed8a0c954781fa32",
+      "resource": "02-M3NeedleArgTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "d1b4a4e4a608a247ad5bea0b01d0ebfbfdc116ce6b57b6dd5455b95d596bdb77",
+      "after": "28f97eb3b7358c14b9bc7934c0544f7d20244a34e4e362f3a1e54ac56a69325a",
+      "resource": "00-String.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 151 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3NeedleArgTest flag-off: 73,440 checks (indexOf/lastIndexOf/contains on String and StringBuilder with and without from-index incl. negative and past-the-end, startsWith, endsWith, equals; needles of 0..40 units across the 16-unit threshold, either coder, present and absent, as atoms, nested tuples and slices of padded owners incl. Latin-1 spellings inside UTF-16 owners; haystacks of 0..5000 units of both coders)",
+    "regressions": "PASS_WINDOWS M3RegexSubjectViewTest 9,567; M3TQFactsBuildTest 23,595; M3RegexLiteralGateTest 29,376; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,920; A6 204 + 29",
+    "timing": "flag-off (a21/probe/NeedleArgBench, bench-baseline.tsv on the A20 build vs bench-after3.tsv): 16384 Latin-1 units, absent 3-unit needle: indexOf atom 123,086 ns -> 2,108, tuple 192,240 -> 2,111 (flat 2,214); contains 126,960 -> 2,549; sb.indexOf 128,604 -> 2,316; lastIndexOf 51,648 -> 6,679 (flat 4,844); 8-unit: indexOf 18,168 -> 2,660; 32-unit: indexOf 50,502 -> 2,950 (flat 2,938), lastIndexOf 53,440 -> 2,246 (flat 5,482); UTF-16 3-unit indexOf 117,214 -> 2,976 (flat 3,172)",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets under the supersession model; apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3NeedleBulkRecipeTest 3/3 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3NeedleArgTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "an M3 needle over a flat haystack is read once into its compact value and searched by the stock vectorized intrinsic for indexOf at every length: measured, the intrinsic beats the skip search over a flat haystack for Latin-1 (5x at 32 units) and UTF-16 (1.3x at 32 units) alike",
+    "lastIndexOf keeps the reverse skip search from 16 units (the stock reverse search is a plain loop: the plan wins 2.5x at 32 Latin-1 units), its loops reading the needle's bulk units",
+    "startsWith with an M3 prefix over a flat receiver compares in place; endsWith follows; regionMatches already did both ways",
+    "the needle's compact value is transient per call; nothing is retained",
+    "replace(CharSequence, CharSequence) with M3 arguments is proven only flag-on: its M3 result materializes through the JNI shadow",
+    "stacked on A20: merge after #558 and the Synexia crate PR (#10005 first, content-bearing merges); A14 (#545) touches String.indexOf's M3-haystack branches, not these static helpers"
+  ]
+}
