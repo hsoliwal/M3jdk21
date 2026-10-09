@@ -14,7 +14,7 @@ if ! "$M3_JDK/bin/javac" --release 21 --module-path build/com.m3.text.jar --add-
   core/test/SynexiaPrecomputePayloadTest.java core/test/SynexiaPrecomputeReceiverTest.java \
   core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SynexiaSiUnitDecoderTest.java \
   core/test/M3NumberSpaceTest.java core/test/M3NumberSpaceContractTest.java \
-  core/test/M3LanguageGrammarSupportTest.java; then
+  core/test/M3LanguageGrammarSupportTest.java > build/logs/test-compile.log 2>&1; then
   cat build/logs/test-compile.log >&2
   exit 1
 fi
