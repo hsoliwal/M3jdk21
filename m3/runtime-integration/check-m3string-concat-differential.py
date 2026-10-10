@@ -226,7 +226,7 @@ def main() -> None:
          "exact-leaf-identity"),
         ("left.hashCodeValue() * M3String.pow31(right.length()) + right.hashCodeValue()",
          "composed-java-hash"),
-        ("M3StringFacts compose(left.facts(), right.facts())",
+        ("M3StringFacts.compose(left.facts(), right.facts())",
          "composed-facts"),
         ("M3StringPool.concat(canonicalize(first), canonicalize(second))",
          "canonical-concat-owner"),
