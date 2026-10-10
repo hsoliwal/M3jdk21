@@ -109,7 +109,10 @@ public final class M3LangDexPrecomputeTest {
                 && "M3StringFacts + M3LangDexPrecompute.Identity".equals(huggingFace[5])
                 && ("language_tag,lexeme,source_revision,canonical_schema,canonical_bytes,"
                         + "canonical_digest,domain").equals(huggingFace[4])
-                && "-".equals(huggingFace[8]));
+                && ("langdex_canonical_bytes,langdex_canonical_digest,langdex_canonical_schema,"
+                        + "langdex_domain,langdex_glottocode,langdex_record_id,"
+                        + "langdex_source_id,langdex_source_revision,langdex_surface")
+                        .equals(huggingFace[8]));
 
         Map<String, Set<String>> fieldMap = parseFieldMap(Files.readString(
                 Path.of("lexicon/synexia-precompute-field-map.tsv"),
