@@ -123,6 +123,8 @@ def main() -> None:
         "## Proper-name donor boundary",
         "not copied into the M3LEX image",
         "Synexia remains the canonical source owner",
+        "src/main/cpp/include/synexia/instance_index_v1.hpp",
+        "src/main/cpp/docs/UNICODEX_INSTANCE_INDEX_V1.md",
     ):
         if marker not in export_doc:
             fail(f"export_boundary_marker={marker}")
@@ -131,7 +133,7 @@ def main() -> None:
         "SYNEXIA_LEXICON_PROVENANCE_PASS"
         f"|rows={matched}|gutenberg={gutenberg}|mit={mit}|"
         "source_manifest=true|stale_markers=false|bulk_data=false|"
-        "proper_name_reference_only=true"
+        "proper_name_reference_only=true|proper_name_source_contract=true"
     )
 
 
