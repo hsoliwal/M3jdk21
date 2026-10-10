@@ -73,3 +73,7 @@ Regenerated against 85b27faba2: no upstream target changed, so `runtime.patch` a
 ## 2026-10-09 re-seal (A13 encode from bulk-read units)
 
 Regenerated against 2e2cda5dc9: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3String.java` records its new owner as a reviewed `superseded` hash. 67 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-09 re-seal (A15 Latin-1 facts lane)
+
+Regenerated against af88abc6c2: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3StringFacts.java` records its new owner as a reviewed `superseded` hash. 67 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.

@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3StringFacts.java	f1cc0ec9d4fd0bbc15d9c684e80b9907b60321cb15ad4fd7fa39f3cf973fc4cd	0958aadf5ea5536af742a17b97ab0c97af4bb5989fca0f77863a3b286688437e	00-M3StringFacts.java.txt
+test/jdk/java/lang/String/M3StringFactsLatin1LaneTest.java	ABSENT	3840400b50e1dd46bfb641b23c9b4a55832b908cef8848fc65dc746dd8205d0a	01-M3StringFactsLatin1LaneTest.java.txt
