@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ReverseForwardLane
+displayName: M3JDK21 reverse single-unit lane tested with the forward intrinsic
+description: >-
+  The reverse linear lane of the position precompute ran the stock reverse single-unit search
+  over every window, a scalar loop (the flat String's own lastIndexOf(char) over 16384 units costs
+  6..15 us), while the forward lane runs an intrinsic. Each reverse window is now first tested
+  with the forward intrinsic and only a window holding the unit is walked back from its end to
+  the last occurrence, at most the window's length; the reverse block walk hands off to the lane
+  like the forward one (the A37 rule). Java step: M3StringPositionPrecompute and the jtreg proof;
+  no upstream file changed. Stacks on crate m3-char-dense-linear (branch order); the
+  M3StringPositionPrecompute preimage is the A37 postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-reverse-forward-lane

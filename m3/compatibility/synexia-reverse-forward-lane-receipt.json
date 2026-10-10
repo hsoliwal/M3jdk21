@@ -1,0 +1,75 @@
+{
+  "schema": "M3JDK21_SYNEXIA_REVERSE_FORWARD_LANE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-reverse-forward-lane-20261010",
+    "pullRequest": null,
+    "commit": "090018192d27c81f932660d7688cf17779e69e9e",
+    "stackedOn": [
+      {
+        "pullRequest": 10135,
+        "crate": "m3-char-dense-linear"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.ReverseForwardLane",
+    "crate": "m3-reverse-forward-lane",
+    "fossReuseDecisionRow": "string.search.reverse-forward-lane",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+        "commit": "e11ce98800",
+        "target": "java.lang.M3StringPositionPrecompute.linearLastIndexOf / lastIndexOf",
+        "mechanics": "per window, StringLatin1/StringUTF16.indexOf (intrinsic) tests presence, then the stock reverse search walks back from the window's end only inside a window holding the unit; the reverse walk counts blocks walked and lookups and returns the lane past DENSE_LOOKUPS with lookups at least half of the blocks walked"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same index as the flat String for every unit over every source; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-char-dense-linear-20261010 (#662, A37) on #661 on #660 on #657 on #654 on #653 on #610 on #609 on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringPositionPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3StringPositionPrecompute.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+      "before": "276a755da3428a96fdc7f34eb69a89c5f7a7f3f4a267f08b9d0fda2e53695b38",
+      "after": "20858764e4b2ba848f96a6ff09f37d00eed1408d57d8d286e8edf388e9e3c7be",
+      "resource": "00-M3StringPositionPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3ReverseLaneTest.java",
+      "before": "ABSENT",
+      "after": "4d52d2586b1c531be67100bbf8e76843fc53ea953a9c50a44b5e6be46a7e7777",
+      "resource": "01-M3ReverseLaneTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3ReverseLaneTest flag-off: 350,200 checks (lastIndexOf(char) and lastIndexOf(char, from) with units at every k-th position (1, 2, 7, 64, 65, 1000), only at the start, only at the end, only in the middle, absent, the first, the last and random units, from indexes at and around the 64/256/1024/4096-unit window edges from the end, over atoms, tuples and slices of texts over a sparse alphabet, a dense ASCII alphabet, the full Latin-1 range, a CJK-mixed and a dense BMP alphabet, of 0..40000 units on both sides of the 256..32768 block band, each search run three times; indexOf(char) over the same cases; against the flat String on every call)",
+    "regressions": "PASS_WINDOWS M3CharDenseLinearTest 62,120; M3NeedlePlanBandTest 122,823; M3NeedleLaneTest 997,980; M3TrigramRepeatTest 13,068; M3NeedleArgTest 73,440; M3RegexLiteralGateTest 29,376; M3TQFactsBuildTest 23,595; M3StringM3OnM3Test 121,574; M3IndexOfFlatNeedleTest 137,948; M3RegexSubjectViewTest 9,567; M3GradedWindowsTest 56,591; M3CharSearchRepeatTest 25,380; M3CharSearchWindowsTest 61,650; M3StringPositionInvariant6Test 13; M3StringLiteralSplitTest 53,378; M3MixedCoderCompareTest 30,620; M3ContentEqualsTest 7,980; M3IgnoreCaseWindowsTest 188,512; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,919; A6 204 + 29",
+    "timing": "flag-off (a38/probe/ReverseSearchBench, the minimum of three runs per build, bench-a37-r*.tsv on the A37 build vs bench-a38-r*.tsv on this one, bench-compare-min3.txt; hot, blocks built; flat in parentheses): lastIndexOf(char miss) over 128-unit sources outside the block band (the lane alone): letters atom 49 ns -> 39 (21), dense ASCII 97 -> 36 (25), CJK-mixed 85 -> 44 (20), dense BMP 132 -> 54 (18), tuples 61 -> 47, 106 -> 46, 125 -> 56 and 154 -> 77, a unit only at index 0: letters 102 -> 68 (69), CJK-mixed 141 -> 97 (46), dense BMP 141 -> 106 (86); 16384 dense ASCII units 5,241 -> 1,161 (11,685), tuple 9,159 -> 1,442, the control unit 1,987 -> 943 (7,286) and 8,428 -> 1,293; 16384 dense BMP units 6,756 -> 2,080 (2,097), tuple 12,310 -> 2,013, the control unit 4,015 -> 2,183 (2,314) and 9,155 -> 2,509, a unit only at index 0 4,956 -> 3,655 (7,528) and 9,701 -> 3,356; 16384 CJK-mixed units 914 -> 567 (2,338), the control unit 2,658 -> 1,333 (3,721); 2048 dense ASCII 665 -> 432 (1,214), tuple 1,198 -> 551, the control unit 638 -> 311 and 1,325 -> 578; 2048 dense BMP 629 -> 557 (495), tuple 935 -> 682, the control unit 715 -> 555 and 1,450 -> 845; losses where the hand-off fires on a walk that was cheap: 16384 letters 457 -> 648 (7,694) and the control unit 194 -> 542 (11,284), 16384 CJK-mixed a unit only at index 0 1,130 -> 1,634 (6,056) and the control unit for a tuple 3,066 -> 4,186, 2048 CJK-mixed 71 -> 129 (245); frequent units (every 8th position) and hits unchanged or better (16384 dense BMP every 8th 44 -> 19, from the middle 68 -> 29); indexOf rows unchanged",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3StringPositionPrecompute.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3ReverseForwardLaneRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3ReverseLaneTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the stock reverse single-unit search is a scalar loop (the flat String's own lastIndexOf(char) over 16384 units costs 6..15 us) while the forward one is an intrinsic: a window is first tested forward, and only a window holding the unit is walked back, at most the window's length; the graded windows from the end keep a frequent unit's walk-back short",
+    "the reverse block walk now hands off like the forward one under the A37 rule (eight lookups in at most sixteen walked blocks); the lane it hands to is now cheaper than the walk it leaves, which the A37 measurement of the scalar lane was not",
+    "hits found through the exact masks inside the first blocks are unchanged; a hit after the hand-off is found by the graded windows from that point",
+    "stacked on A37: merge after #662 and the Synexia crate PR (#10135 first, content-bearing merges); the owner commit is a0eae21b39"
+  ]
+}
