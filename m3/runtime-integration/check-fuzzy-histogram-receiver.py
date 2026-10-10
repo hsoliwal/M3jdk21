@@ -67,10 +67,12 @@ def main() -> int:
         fail("target owner drift")
     if row["target_disposition"] != "PENDING_BENCHMARK":
         fail("mapping self-promoted")
-    if row["benchmark_pr"] != "10112" or row["benchmark_run"] != "38015055434":
+    if row["benchmark_pr"] != "10112" or row["benchmark_run"] != "38015310607":
         fail("benchmark identity drift")
-    if row["benchmark_job"] != "114103360841":
+    if row["benchmark_job"] != "114104156633":
         fail("benchmark job drift")
+    if row["benchmark_head"] != "bb6eeba0558b2ce4171eba921603c6b471f0d3f0":
+        fail("benchmark head drift")
     if row["benchmark_status"] != "QUEUED_NO_LOGS":
         fail("benchmark status changed without terminal evidence")
     if row["target_gate"] != "JAVA_JNI_PARITY_AND_NATIVE_BENCHMARK_REQUIRED":
@@ -88,7 +90,9 @@ def main() -> int:
         fail("name-mapping self-promoted")
     if entry.get("receiver_manifest") != EXPECTED_MANIFEST:
         fail("name-mapping manifest drift")
-    if entry.get("benchmark_run") != 38015055434 or entry.get("benchmark_job") != 114103360841:
+    if entry.get("benchmark_head") != "bb6eeba0558b2ce4171eba921603c6b471f0d3f0":
+        fail("name-mapping benchmark head drift")
+    if entry.get("benchmark_run") != 38015310607 or entry.get("benchmark_job") != 114104156633:
         fail("name-mapping benchmark identity drift")
 
     print(
