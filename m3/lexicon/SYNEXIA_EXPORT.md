@@ -157,7 +157,7 @@ lineage, legacy-input compatibility, deterministic replay, M3LEX001 version 2
 metadata, precompute sidecars, conflict refusal before output creation, and
 source-blind rejection of a post-export mutation.
 
-## Dedicated acronym sidecar (staged)
+## Typed number-space receiver (admitted)\n\nThe bounded Synexia number vocabulary is admitted through the existing\n`com.m3.text.M3NumberSpace` receiver. It precomputes every canonical decimal\nvalue from `0` through `10000` over one immutable UTF-16 backing piece; repeated\nlookup returns the same view, and parsing consumes `CharSequence.length()` and\n`charAt(int)` without requiring `toString()`.\n\nThe typed metadata boundary remains\n`M3LexiconPrecompute.NumberPrecompute`, keyed by value and language tag. The\nsource identity and target API are pinned in\n`m3/lexicon/synexia-number-target-map.tsv`; the Synexia proof remains the\ncanonical donor receipt. This is a typed receiver admission, not a claim that\nall external number-word datasets or all language lexicons are checked into\nM3JDK.\n\n## Dedicated acronym sidecar (staged)
 
 Acronym text is not placed in the generic numeric/boolean
 `precompute_payload`. The target branch carries a separate
