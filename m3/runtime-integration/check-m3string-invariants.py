@@ -1113,8 +1113,9 @@ for fragment in [
 # between surrogate halves. M3 preserves that exact contract without StringBuilder flattening.
 for fragment in [
     "M3String replaceEmptyTarget(M3String replacement)",
+    "M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);",
     "pieces.add(slice(index, index + 1));",
-    "return new String(storage.replaceEmptyTarget(replacementM3));",
+    "return new String(sourceM3.replaceEmptyTarget(replacementM3));",
 ]:
     if fragment not in (m3 + string):
         fail(f"M3 empty-target replacement route missing: {fragment}")
