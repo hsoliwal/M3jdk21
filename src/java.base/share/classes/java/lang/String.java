@@ -3551,9 +3551,9 @@ public final class String
             M3String storage = m3();
             M3String replacementM3 = replStr.m3();
             if (storage != null || replacementM3 != null) {
-                M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
+                storage = storage != null ? storage : M3String.canonicalize(this);
                 if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);
-                return new String(sourceM3.replaceEmptyTarget(replacementM3));
+                return new String(storage.replaceEmptyTarget(replacementM3));
             }
 
             StringBuilder sb = new StringBuilder(resultLen);
@@ -4138,7 +4138,7 @@ public final class String
     public String toLowerCase(Locale locale) {
         Objects.requireNonNull(locale);
         M3String storage = m3();
-        if (storage != null && asciiCaseMappingLocale(locale)) {
+        if (storage != null && locale.equals(Locale.ROOT) && asciiCaseMappingLocale(locale)) {
             M3StringFacts prepared = storage.facts();
             if (prepared.ascii) {
                 M3String mapped = storage.asciiCase(false);
@@ -4239,7 +4239,7 @@ public final class String
     public String toUpperCase(Locale locale) {
         Objects.requireNonNull(locale);
         M3String storage = m3();
-        if (storage != null && asciiCaseMappingLocale(locale)) {
+        if (storage != null && locale.equals(Locale.ROOT) && asciiCaseMappingLocale(locale)) {
             M3StringFacts prepared = storage.facts();
             if (prepared.ascii) {
                 M3String mapped = storage.asciiCase(true);

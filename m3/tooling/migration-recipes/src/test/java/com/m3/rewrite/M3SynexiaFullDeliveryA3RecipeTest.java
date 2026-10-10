@@ -22,6 +22,7 @@ import org.openrewrite.Recipe;
 import org.openrewrite.SourceFile;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
+import org.openrewrite.text.PlainTextParser;
 
 final class M3SynexiaFullDeliveryA3RecipeTest {
     private static final String IMPORTER =
@@ -99,7 +100,7 @@ final class M3SynexiaFullDeliveryA3RecipeTest {
         Recipe recipe =
                 new M3Jdk21HashPinnedTextSnapshotRecipe(
                         "synexia-full-delivery-a3-doc");
-        Map<String, String> after = apply(recipe, Map.of());
+        Map<String, String> after = applyText(recipe, Map.of());
 
         assertEquals(1, after.size());
         String document = after.get("m3/docs/synexia-full-delivery-a3.md");
@@ -107,7 +108,7 @@ final class M3SynexiaFullDeliveryA3RecipeTest {
         assertTrue(document.contains("REPLACE"));
         assertTrue(document.contains("STALE"));
         assertTrue(document.contains("OpenRewrite"));
-        assertTrue(apply(recipe, after).isEmpty());
+        assertTrue(applyText(recipe, after).isEmpty());
     }
 
     @Test
@@ -148,6 +149,52 @@ final class M3SynexiaFullDeliveryA3RecipeTest {
                                     after.printAll());
                         });
         return output;
+    }
+
+    private static Map<String, String> applyText(
+            Recipe recipe, Map<String, String> sources) {
+        var context =
+                new InMemoryExecutionContext(
+                        error -> {
+                            throw new AssertionError(error);
+                        });
+        List<SourceFile> parsed = parseText(sources, context);
+        var run =
+                recipe.run(
+                        new InMemoryLargeSourceSet(parsed),
+                        context,
+                        8);
+        Map<String, String> output = new LinkedHashMap<>();
+        run.getChangeset()
+                .getAllResults()
+                .forEach(
+                        result -> {
+                            SourceFile after =
+                                    Objects.requireNonNull(
+                                            result.getAfter(), "after");
+                            output.put(
+                                    after.getSourcePath()
+                                            .toString()
+                                            .replace('\\', '/'),
+                                    after.printAll());
+                        });
+        return output;
+    }
+
+    private static List<SourceFile> parseText(
+            Map<String, String> sources,
+            InMemoryExecutionContext context) {
+        List<Parser.Input> inputs = new ArrayList<>(sources.size());
+        sources.forEach(
+                (path, source) ->
+                        inputs.add(
+                                Parser.Input.fromString(
+                                        Path.of(path), source)));
+        if (inputs.isEmpty()) return List.of();
+        return PlainTextParser.builder()
+                .build()
+                .parseInputs(inputs, null, context)
+                .toList();
     }
 
     private static List<SourceFile> parse(

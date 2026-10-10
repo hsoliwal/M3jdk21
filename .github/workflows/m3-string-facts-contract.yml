@@ -1,0 +1,43 @@
+name: M3 string facts receiver contract
+
+on:
+  push:
+    branches:
+      - codex/m3jdk-precompute-coverage-invariant-20261010
+
+  pull_request:
+    branches:
+      - codex/m3jdk-related-lexeme-current-base-final-20261010
+
+permissions:
+  contents: read
+
+jobs:
+  string-facts-receiver:
+    name: M3StringFactsReceiverContract
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Compile and run patched java.base receiver
+        working-directory: m3
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf build/m3-string-facts-patch
+          mkdir -p build/m3-string-facts-patch
+          javac --release 21 \
+            --patch-module java.base=../src/java.base \
+            -d build/m3-string-facts-patch \
+            ../src/java.base/share/classes/java/lang/M3StringFacts.java \
+            core/test/M3StringFactsContractTest.java
+          java --patch-module java.base=build/m3-string-facts-patch \
+            -ea java.lang.M3StringFactsContractTest

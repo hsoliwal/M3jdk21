@@ -167,11 +167,11 @@
   "guards": [
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72"
+      "sha256": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a"
     },
     {
       "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java",
@@ -198,5 +198,5 @@
       "sha256": "13ff8e34221af4f6c2ff814dee1a9abdab848519788d22df66060407321a58e4"
     }
   ],
-  "plan_sha256": "efb0fbadcf62a8ab82371dfbe14b95f81429ba5b2ceac061a964ae35da811a9f"
+  "plan_sha256": "cb90e92b03a9e9af509d06ccd772366528d8a8fa5746c9b7bf8670f508561d52"
 }

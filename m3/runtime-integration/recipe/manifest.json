@@ -90,7 +90,10 @@
       "before": null,
       "after": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b",
       "superseded": [
-        "f88c545538e250c057809d86cb0727cbeb07bed69508b0c85197b0084247fa5c"
+        "f88c545538e250c057809d86cb0727cbeb07bed69508b0c85197b0084247fa5c",
+        "2ce9cfb71dffc06718d466ce51daf6bbe6a994bda3d0c3825aad4d12a05abb52",
+        "0e114e041bab46c3439e36f6ae8a4d7b82e4d454d38f1e009bfdf5072b35398b",
+        "885a347b1522f8922d74a213c47d2d6291dd8c6f65d5412644166bb1eddba106"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringAtom.java": {
@@ -151,7 +154,12 @@
     },
     "src/java.base/share/classes/java/lang/String.java": {
       "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
-      "after": "c16fd68b3a0402352569908ba9c99a17dc2853ba7dbb6cbbcb5c3ea6ea4efc8f"
+      "after": "c16fd68b3a0402352569908ba9c99a17dc2853ba7dbb6cbbcb5c3ea6ea4efc8f",
+      "superseded": [
+        "7125d6758bd7b5ae6febcc522736829e2c618d178bb20d6a83363262eab0384b",
+        "8dbdd9bb1f128327bea433a9947cfa484b2cff454360eac2f37326fbb240ebe8",
+        "66331eff35b643997088ddce0c991f743165928417f1354efd834e2de4432b39"
+      ]
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
       "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",

@@ -1229,6 +1229,10 @@ final class M3String implements CharSequence {
     /** Conservative BMP literal subset; all regex/replacement syntax stays in Matcher. */
     static boolean isLiteralRegexReplacement(String regex, String replacement) {
         if (!isLiteralRegex(regex) || replacement == null) return false;
+        for (int index = 0; index < regex.length(); index++) {
+            char unit = regex.charAt(index);
+            if (Character.isSurrogate(unit)) return false;
+        }
         for (int index = 0; index < replacement.length(); index++) {
             char unit = replacement.charAt(index);
             if (unit == '$' || unit == '\\') return false;

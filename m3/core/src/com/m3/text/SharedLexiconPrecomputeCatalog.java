@@ -99,13 +99,12 @@ public final class SharedLexiconPrecomputeCatalog {
         }
     }
 
-    private final Map<TranslationIdentity    private final Map<TranslationIdentity, M3LexiconPrecompute.TranslationProjection> translations;
+    private final Map<TranslationIdentity, M3LexiconPrecompute.TranslationProjection> translations;
     private final Map<SpellScope, M3LexiconPrecompute.SpellIndex> spellIndexes;
     private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes;
     private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts;
     private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies;
     private final Map<AcronymIdentity, M3LexiconPrecompute.AcronymPrecompute> acronyms;
-    private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies;
     private final Map<WordIdentity, M3LexiconPrecompute.IndexWordFacts> wordFacts;
     private final Map<WordIdentity, M3LexiconPrecompute.IndexWordSignal> wordSignals;
 
