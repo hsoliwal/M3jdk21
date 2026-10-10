@@ -121,15 +121,17 @@ boundary, with a new proof gate. An LLM cannot infer broader edit authority for 
 ## Retirement of copied Synexia recipe sources
 
 The canonical Synexia owner audit and the M3JDK21 exact Git-blob freeze must be reconciled against
-one pinned Synexia commit before any copied recipe sources are deleted. The current pinned snapshot
-has 17 copied `com.synexia.*` Java files: 11 byte-identical canonical mirrors, two divergent
-versions requiring API/behavior/resource parity (hash-pinned Java and segmented-lane native), and
-four `com.synexia.rewrite.scope.*` paths without a same-path canonical owner at that pinned commit.
+one pinned Synexia commit before any copied recipe sources are deleted. The pinned handoff still tracks 17 copied `com.synexia.*` Java files, but the canonical source
+state has advanced: 15 are byte-identical canonical mirrors, one is a deliberate newer Synexia
+superset (`M3HashPinnedJavaSnapshotRecipe`) requiring external-consumer API/behavior/resource
+parity, one (`M3SegmentedLaneNativeRecipe`) is now explicitly classified as a target-specific JNI
+receiver adaptation, and zero canonical package APIs are missing. The historical
+`com.synexia.rewrite.scope.*` compatibility package now lives canonically in Synexia and is
+behavior-checked against Synexia's newer root scope owners.
 
-These are typed migration residues, **not** proof of semantic equivalence. Synexia's canonical
-recipe-parity manifest records each exact path and Git blob. Do not reintroduce the four missing
-packages as duplicate algorithms merely to make the consumer compile. Map them to existing
-Synexia scope owners through separately tested adapters or explicit contract-preserving migration.
+The reusable `m3-collection-lanes` Java recipe crate also lives canonically in Synexia. M3JDK's
+`M3BitLane28` JNI installer is intentionally target-specific because its native symbol differs
+from Synexia's `SegmentedBitLane28` owner. Do not copy that receiver symbol back upstream.
 
 Consumer retirement requires an exact canonical Git commit/blob pin, an externally resolved
 Synexia Maven/OpenRewrite artifact, Java 21 JUnit behavior/contract parity, fixed-point
