@@ -1196,15 +1196,19 @@ final class M3String implements CharSequence {
         if (checked.length() == 1) return indexOf(checked.charAt(0), from, end);
         if (from > end - checked.length() || !mayContain(checked)) return -1;
 
-        M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
-        if (plan != null) {
-            if (!M3StringSearchPrecompute.mayContain(this, plan)) return -1;
+        // The needle's plan serves only the trigram gate here, which only a source inside the
+        // facts band can use, so it is asked for such a source alone (A36); when the gate
+        // answers, it proves absence.
+        M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.planFor(this, checked);
+        if (plan != null && !M3StringSearchPrecompute.mayContain(this, plan)) return -1;
+        byte coder = coder();
+        if (searchWindow(end - from, checked.length(), coder) >= 0) {
             // The needle comes out once in its compact value and the haystack takes the flat
             // needle's window lane (A35): the stock vectorized search over bulk windows beats the
             // per-unit skip search over the owner at every size.
             byte[] units = checked.compactValue();
             byte unitsCoder = units.length == checked.length() ? String.LATIN1 : String.UTF16;
-            if (coder() == String.LATIN1 && unitsCoder == String.UTF16) return -1;
+            if (coder == String.LATIN1 && unitsCoder == String.UTF16) return -1;
             return indexOfUnits(units, unitsCoder, checked.length(), from, end);
         }
 
@@ -1228,13 +1232,14 @@ final class M3String implements CharSequence {
         if (checked.length() == 1) return lastIndexOf(checked.charAt(0), maximumStart);
         if (!mayContain(checked)) return -1;
 
-        M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
-        if (plan != null) {
-            if (!M3StringSearchPrecompute.mayContain(this, plan)) return -1;
+        M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.planFor(this, checked);
+        if (plan != null && !M3StringSearchPrecompute.mayContain(this, plan)) return -1;
+        byte coder = coder();
+        if (searchWindow(maximumStart + checked.length(), checked.length(), coder) >= 0) {
             // The needle's compact value and the reverse window lane (A35), as for indexOf.
             byte[] units = checked.compactValue();
             byte unitsCoder = units.length == checked.length() ? String.LATIN1 : String.UTF16;
-            if (coder() == String.LATIN1 && unitsCoder == String.UTF16) return -1;
+            if (coder == String.LATIN1 && unitsCoder == String.UTF16) return -1;
             return lastIndexOfUnits(units, unitsCoder, checked.length(), maximumStart);
         }
 

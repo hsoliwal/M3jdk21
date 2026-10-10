@@ -7,7 +7,6 @@
 package java.lang;
 
 import java.lang.ref.WeakReference;
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import jdk.internal.mindex.M3TQ;
 
@@ -40,12 +39,20 @@ final class M3StringSearchPrecompute {
      */
     static long maximumRetainedPrimitiveBytes() {
         long patternBytes =
-                (long) SLOTS * (
-                        (long) MAX_PATTERN_UNITS * (2L * Integer.BYTES + Long.BYTES)
-                                + 256L * Integer.BYTES);
+                (long) SLOTS * MAX_PATTERN_UNITS * (Integer.BYTES + Long.BYTES);
         long sourceBytes =
                 (long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES;
         return Math.addExact(patternBytes, sourceBytes);
+    }
+
+    /**
+     * The needle's plan for a search over {@code source} (A36): {@code null} when the source is
+     * outside the trigram band, where the plan would serve nothing.
+     */
+    static Plan planFor(M3String source, M3String pattern) {
+        int length = source.length();
+        if (length < MIN_TRIGRAM_SOURCE_UNITS || length > MAX_TRIGRAM_SOURCE_UNITS) return null;
+        return prepare(pattern);
     }
 
     static Plan prepare(M3String pattern) {
@@ -73,17 +80,9 @@ final class M3StringSearchPrecompute {
             return entry.plan;
         }
 
-        int[] prefix = new int[length];
-        for (int index = 1; index < length; index++) {
-            int matched = prefix[index - 1];
-            char unit = pattern.charAt(index);
-            while (matched > 0 && unit != pattern.charAt(matched)) {
-                matched = prefix[matched - 1];
-            }
-            if (unit == pattern.charAt(matched)) matched++;
-            prefix[index] = matched;
-        }
-
+        // The plan carries the reverse KMP table (the flat haystack's reverse search of a long
+        // needle, A21) and the needle's trigram facts (the gate over an M3 source); the forward
+        // tables, unused since A21 and A35, are no longer built (A36).
         int[] reversePrefix = new int[length];
         for (int index = 1; index < length; index++) {
             int matched = reversePrefix[index - 1];
@@ -95,14 +94,8 @@ final class M3StringSearchPrecompute {
             reversePrefix[index] = matched;
         }
 
-        int[] skip256 = new int[256];
-        Arrays.fill(skip256, Math.max(1, length));
-        for (int index = 0; index < length - 1; index++) {
-            skip256[pattern.charAt(index) & 255] = length - 1 - index;
-        }
-
         M3TQ.Facts trigrams = length >= 3 ? M3TQ.precompute(pattern, MAX_PATTERN_UNITS) : null;
-        Plan plan = new Plan(length, prefix, reversePrefix, skip256, trigrams);
+        Plan plan = new Plan(length, reversePrefix, trigrams);
         CACHE.set(slot, new Entry(new WeakReference<>(owner), coordinate, plan));
         return plan;
     }
@@ -117,7 +110,7 @@ final class M3StringSearchPrecompute {
             M3TQ.Facts facts = sourceFacts(source);
             return facts == null || facts.containsAll(plan.trigrams);
         } catch (OutOfMemoryError unavailable) {
-            // Exact trigram facts are optional. KMP remains authoritative.
+            // Exact trigram facts are optional. The exact search remains authoritative.
             return true;
         }
     }
@@ -173,168 +166,12 @@ final class M3StringSearchPrecompute {
         return null;
     }
 
-    static int indexOf(
-            M3String source,
-            M3String pattern,
-            Plan plan,
-            int fromIndex,
-            int endIndex) {
-        if (plan.patternLength >= 8) {
-            return adaptiveBmh(source, pattern, plan, fromIndex, endIndex);
-        }
-        return kmp(source, pattern, plan, fromIndex, endIndex);
-    }
-
-    private static int kmp(
-            M3String source,
-            M3String pattern,
-            Plan plan,
-            int fromIndex,
-            int endIndex) {
-        int matched = 0;
-        for (int index = fromIndex; index < endIndex; index++) {
-            char unit = source.charAt(index);
-            while (matched > 0 && unit != pattern.charAt(matched)) {
-                matched = plan.prefix[matched - 1];
-            }
-            if (unit == pattern.charAt(matched)) matched++;
-            if (matched == plan.patternLength) {
-                return index - plan.patternLength + 1;
-            }
-        }
-        return -1;
-    }
-
-    private static int adaptiveBmh(
-            M3String source,
-            M3String pattern,
-            Plan plan,
-            int fromIndex,
-            int endIndex) {
-        int maximumStart = endIndex - plan.patternLength;
-        int at = fromIndex;
-        long failedComparisonWork = 0L;
-        while (at <= maximumStart) {
-            int index = plan.patternLength - 1;
-            while (index >= 0 && pattern.charAt(index) == source.charAt(at + index)) {
-                index--;
-            }
-            if (index < 0) return at;
-
-            int shift = plan.skip256[source.charAt(at + plan.patternLength - 1) & 255];
-            if (shift > maximumStart - at) return -1;
-            at += shift;
-
-            failedComparisonWork += plan.patternLength - index;
-            if (failedComparisonWork > (long) plan.patternLength + 2L * (at - fromIndex)) {
-                return kmp(source, pattern, plan, at, endIndex);
-            }
-        }
-        return -1;
-    }
-
     /**
      * An M3 needle of this many units and up runs the reverse skip search for lastIndexOf over
      * a flat haystack; a shorter one, and every needle for indexOf, is read once in bulk in
      * String and takes the flat needle's search (A21).
      */
     static final int LONG_NEEDLE = 16;
-
-    static int indexOf(
-            byte[] source,
-            byte sourceCoder,
-            int sourceCount,
-            M3String pattern,
-            int fromIndex) {
-        int from = Math.clamp(fromIndex, 0, sourceCount);
-        int patternLength = pattern.length();
-        if (patternLength == 0) return from;
-        if (patternLength > sourceCount - from) return -1;
-        // The needle is read once in bulk (A21): the loops compare array units, not dispatches.
-        char[] needle = pattern.units();
-        if (patternLength == 1) {
-            char wanted = needle[0];
-            for (int index = from; index < sourceCount; index++) {
-                if (sourceUnit(source, sourceCoder, index) == wanted) return index;
-            }
-            return -1;
-        }
-
-        Plan plan = prepare(pattern);
-        if (plan != null) {
-            return plan.patternLength >= 8
-                    ? adaptiveBmh(source, sourceCoder, sourceCount, needle, plan, from)
-                    : kmp(source, sourceCoder, sourceCount, needle, plan, from);
-        }
-
-        int limit = sourceCount - patternLength;
-        char first = needle[0];
-        for (int candidate = from; candidate <= limit; candidate++) {
-            if (sourceUnit(source, sourceCoder, candidate) != first) continue;
-            int index = 1;
-            while (index < patternLength
-                    && sourceUnit(source, sourceCoder, candidate + index) == needle[index]) {
-                index++;
-            }
-            if (index == patternLength) return candidate;
-        }
-        return -1;
-    }
-
-    private static int kmp(
-            byte[] source,
-            byte sourceCoder,
-            int sourceCount,
-            char[] needle,
-            Plan plan,
-            int fromIndex) {
-        int matched = 0;
-        for (int index = fromIndex; index < sourceCount; index++) {
-            char unit = sourceUnit(source, sourceCoder, index);
-            while (matched > 0 && unit != needle[matched]) {
-                matched = plan.prefix[matched - 1];
-            }
-            if (unit == needle[matched]) matched++;
-            if (matched == plan.patternLength) {
-                return index - plan.patternLength + 1;
-            }
-        }
-        return -1;
-    }
-
-    private static int adaptiveBmh(
-            byte[] source,
-            byte sourceCoder,
-            int sourceCount,
-            char[] needle,
-            Plan plan,
-            int fromIndex) {
-        int maximumStart = sourceCount - plan.patternLength;
-        int at = fromIndex;
-        long failedComparisonWork = 0L;
-        while (at <= maximumStart) {
-            int index = plan.patternLength - 1;
-            while (index >= 0
-                    && needle[index]
-                            == sourceUnit(source, sourceCoder, at + index)) {
-                index--;
-            }
-            if (index < 0) return at;
-
-            int shift =
-                    plan.skip256[
-                            sourceUnit(source, sourceCoder, at + plan.patternLength - 1) & 255];
-            if (shift > maximumStart - at) return -1;
-            at += shift;
-
-            failedComparisonWork += plan.patternLength - index;
-            if (failedComparisonWork
-                    > (long) plan.patternLength + 2L * (at - fromIndex)) {
-                return kmp(source, sourceCoder, sourceCount, needle, plan, at);
-            }
-        }
-        return -1;
-    }
 
     static int lastIndexOf(
             byte[] source,
@@ -389,26 +226,6 @@ final class M3StringSearchPrecompute {
                 : StringUTF16.charAt(source, index);
     }
 
-    static int lastIndexOf(
-            M3String source,
-            M3String pattern,
-            Plan plan,
-            int maximumStart) {
-        int matched = 0;
-        int scanStart = maximumStart + plan.patternLength - 1;
-        for (int index = scanStart; index >= 0; index--) {
-            char unit = source.charAt(index);
-            while (matched > 0 && unit != reverseUnit(pattern, matched)) {
-                matched = plan.reversePrefix[matched - 1];
-            }
-            if (unit == reverseUnit(pattern, matched)) matched++;
-            if (matched == plan.patternLength) {
-                return index;
-            }
-        }
-        return -1;
-    }
-
     private static char reverseUnit(M3String pattern, int reverseIndex) {
         return pattern.charAt(pattern.length() - 1 - reverseIndex);
     }
@@ -423,28 +240,20 @@ final class M3StringSearchPrecompute {
         return ((int) mixed) & SLOT_MASK;
     }
 
+    /** A needle's reverse KMP table and trigram facts (A36: no forward tables). */
     static final class Plan {
         final int patternLength;
-        final int[] prefix;
         final int[] reversePrefix;
-        final int[] skip256;
         final M3TQ.Facts trigrams;
 
-        Plan(
-                int patternLength,
-                int[] prefix,
-                int[] reversePrefix,
-                int[] skip256,
-                M3TQ.Facts trigrams) {
+        Plan(int patternLength, int[] reversePrefix, M3TQ.Facts trigrams) {
             this.patternLength = patternLength;
-            this.prefix = prefix;
             this.reversePrefix = reversePrefix;
-            this.skip256 = skip256;
             this.trigrams = trigrams;
         }
 
         long retainedPrimitiveBytes() {
-            return (long) (prefix.length + reversePrefix.length + skip256.length) * Integer.BYTES
+            return (long) reversePrefix.length * Integer.BYTES
                     + (trigrams == null ? 0L : (long) trigrams.keyCount() * Long.BYTES);
         }
     }
