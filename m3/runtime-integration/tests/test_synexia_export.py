@@ -221,7 +221,7 @@ class SynexiaExportTest(unittest.TestCase):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
         self.assertEqual(10, len(sources))
         self.assertEqual(13, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
-        self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
+        self.assertEqual(16, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
         self.assertEqual("", sources["translate.rows"]["precompute_fields"])
