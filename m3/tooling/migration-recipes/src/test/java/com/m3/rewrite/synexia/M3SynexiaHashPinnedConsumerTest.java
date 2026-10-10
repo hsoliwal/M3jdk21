@@ -28,8 +28,12 @@ final class M3SynexiaHashPinnedConsumerTest {
         AtomicInteger canonicalUses = new AtomicInteger();
 
         for (Path start : new Path[] {
-                root.resolve("m3/tooling/migration-recipes"),
-                root.resolve("m3/collections/recipe")
+                root.resolve("m3/tooling/migration-recipes/src/main/java"),
+                root.resolve("m3/tooling/migration-recipes/src/main/resources"),
+                root.resolve("m3/tooling/migration-recipes/src/test/java"),
+                root.resolve("m3/collections/recipe/src/main/java"),
+                root.resolve("m3/collections/recipe/src/main/resources"),
+                root.resolve("m3/collections/recipe/src/test/java")
         }) {
             if (!Files.exists(start)) continue;
             try (var files = Files.walk(start)) {
