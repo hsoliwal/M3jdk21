@@ -18,6 +18,13 @@
   </properties>
 
   <dependencies>
+    <!-- OpenRewrite's Recipe initializes LoggerFactory; the host chooses the logging provider. -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.9</version>
+      <scope>runtime</scope>
+    </dependency>
     <dependency>
       <groupId>org.openrewrite</groupId>
       <artifactId>rewrite-core</artifactId>
