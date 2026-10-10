@@ -23,6 +23,8 @@ public final class M3CodeTextPrecomputeCoverageTest {
     private static final String SOURCE_PR = "10124";
     private static final String SOURCE_HEAD =
             "700208dda3c0ba970fcac6c1e17c1830a986b42b";
+    private static final String RECEIVER_SOURCE_HEAD =
+            "97e9f3712eea2f17d6ba04cebe867e71d91a6016";
     private static final String TARGET_REF =
             "codex/m3jdk-precompute-coverage-invariant-20261010";
     private static final Set<String> REQUIRED_FIELDS = Set.of(
@@ -134,7 +136,7 @@ public final class M3CodeTextPrecomputeCoverageTest {
         check(columns.length == 15, "target receiver receipt row is malformed");
         check(columns[1].equals(SOURCE_REPO)
                         && columns[2].equals(SOURCE_PR)
-                        && columns[3].equals(SOURCE_HEAD)
+                        && columns[3].equals(RECEIVER_SOURCE_HEAD)
                         && columns[4].equals(
                                 "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexCodeTextSignals.java")
                         && columns[5].equals(
