@@ -62,7 +62,8 @@ public final class M3LexiconCoverageInvariantTest {
             "M3PhrasePrecompute.Scope",
             "M3PhrasePrecompute.Phrase",
             "SharedLexiconPrecomputeCatalog.TranslationIdentity",
-            "AcronymPrecompute");
+            "AcronymPrecompute",
+            "M3StringFacts");
 
     private static final Set<String> REQUIRED_RELATION_SOURCES = Set.of(
             "dictlang.antonyms",
