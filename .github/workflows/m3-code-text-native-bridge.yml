@@ -13,6 +13,7 @@ on:
       - 'src/java.base/share/classes/java/lang/M3CodeTextNativeBridge.java'
       - 'm3/core/test/M3CodeTextPrecomputeCoverageTest.java'
       - 'm3/core/test/java/lang/M3CodeTextNativeBridgeTest.java'
+      - 'm3/core/test/java/lang/M3CodeTextFactsReceiverTest.java'
       - 'm3/lexicon/synexia-code-text-*.tsv'
       - '.github/workflows/m3-code-text-native-bridge.yml'
   workflow_dispatch:
@@ -49,6 +50,7 @@ jobs:
             src/java.base/share/classes/java/lang/M3CodeTextNativeContract.java \
             src/java.base/share/classes/java/lang/M3CodeTextNativeBridge.java \
             m3/core/test/java/lang/M3CodeTextNativeBridgeTest.java
+            m3/core/test/java/lang/M3CodeTextFactsReceiverTest.java
 
       - name: Run host-Java fallback and validation proof
         shell: bash
@@ -56,6 +58,14 @@ jobs:
           set -euo pipefail
           java --patch-module java.base=m3/build/m3-code-text-native-bridge \
             -ea java.lang.M3CodeTextNativeBridgeTest
+
+      - name: Run typed precomputed facts receiver proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          java --patch-module java.base=m3/build/m3-code-text-native-bridge \
+            -ea java.lang.M3CodeTextFactsReceiverTest
+
 
       - name: Run source and receipt coverage gate
         shell: bash
