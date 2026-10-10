@@ -206,11 +206,18 @@ final class M3StringSearchPrecompute {
     }
 
     /**
-     * An M3 needle of this many units and up runs the reverse skip search for lastIndexOf over
+     * An M3 needle of this many units and up runs the reverse search below for lastIndexOf over
      * a flat haystack; a shorter one, and every needle for indexOf, is read once in bulk in
      * String and takes the flat needle's search (A21).
      */
     static final int LONG_NEEDLE = 16;
+    /**
+     * Candidates of the reverse search (its needle's last unit found) before the scan may hand
+     * the rest to the reverse KMP (A43): the hand-off fires once the units verified at the
+     * candidates reach the units walked, the sign of a text whose candidates verify long and
+     * often, where the stock shape degrades and the KMP never does.
+     */
+    private static final int DENSE_CANDIDATES = 8;
 
     static int lastIndexOf(
             byte[] source,
@@ -223,46 +230,88 @@ final class M3StringSearchPrecompute {
         if (maximumStart < 0) return -1;
         if (patternLength == 0) return maximumStart;
         char[] needle = pattern.units();
-        if (patternLength == 1) {
-            char wanted = needle[0];
-            for (int index = maximumStart; index >= 0; index--) {
-                if (sourceUnit(source, sourceCoder, index) == wanted) return index;
-            }
-            return -1;
-        }
+        if (sourceCoder == String.LATIN1 && !latin1(needle)) return -1;
+        if (patternLength == 1) return seekBackwards(source, sourceCoder, maximumStart, 0, needle[0]);
 
-        Plan plan = prepare(pattern);
-        if (plan != null) {
-            int matched = 0;
-            int scanStart = maximumStart + plan.patternLength - 1;
-            for (int index = scanStart; index >= 0; index--) {
-                char unit = sourceUnit(source, sourceCoder, index);
-                while (matched > 0 && unit != needle[patternLength - 1 - matched]) {
-                    matched = plan.reversePrefix[matched - 1];
+        // The stock reverse search's shape (A43): the needle's last unit sought backwards in a
+        // tight loop per coder, each candidate verified backwards, the source read raw inside the
+        // bounds the arguments fix. A text whose candidates verify long and often hands the rest
+        // of the scan to the reverse KMP of the plan (A21), which never degrades; it continues
+        // below the failed candidate with nothing matched, every match ending above it ruled out.
+        int last = patternLength - 1;
+        char lastUnit = needle[last];
+        int scanStart = maximumStart + last;
+        int compares = 0;
+        int candidates = 0;
+        boolean watching = true;
+        for (int index = scanStart; ; index--) {
+            index = seekBackwards(source, sourceCoder, index, last, lastUnit);
+            if (index < 0) return -1;
+            int matched = 1;
+            while (matched < patternLength
+                    && sourceUnit(source, sourceCoder, index - matched) == needle[last - matched]) {
+                matched++;
+            }
+            if (matched == patternLength) return index - last;
+            if (watching) {
+                compares += matched;
+                if (++candidates >= DENSE_CANDIDATES && compares >= scanStart - index + 1) {
+                    Plan plan = prepare(pattern);
+                    if (plan == null) {
+                        watching = false;
+                        continue;
+                    }
+                    return reverseSkipSearch(source, sourceCoder, needle, plan, index - 1);
                 }
-                if (unit == needle[patternLength - 1 - matched]) matched++;
-                if (matched == plan.patternLength) return index;
             }
-            return -1;
         }
+    }
 
-        char first = needle[0];
-        for (int candidate = maximumStart; candidate >= 0; candidate--) {
-            if (sourceUnit(source, sourceCoder, candidate) != first) continue;
-            int index = 1;
-            while (index < patternLength
-                    && sourceUnit(source, sourceCoder, candidate + index) == needle[index]) {
-                index++;
+    /** Whether every unit fits Latin-1: a needle with a wider unit is absent from a Latin-1 source. */
+    private static boolean latin1(char[] units) {
+        for (char unit : units) {
+            if (unit > 0xff) return false;
+        }
+        return true;
+    }
+
+    /**
+     * The highest index in {@code [floor, index]} holding {@code unit}, or -1 (A43): the stock
+     * reverse search's seek loop, tight per coder, reading the source raw.
+     */
+    private static int seekBackwards(byte[] source, byte sourceCoder, int index, int floor, char unit) {
+        if (sourceCoder == String.LATIN1) {
+            while (index >= floor && (source[index] & 0xff) != unit) index--;
+        } else {
+            while (index >= floor && StringUTF16.getChar(source, index) != unit) index--;
+        }
+        return index >= floor ? index : -1;
+    }
+
+    /**
+     * The reverse KMP of the plan over {@code [0, scanStart]} of the source (A21): the index of
+     * the rightmost match of the needle whose last unit is at or below {@code scanStart}, or -1.
+     */
+    private static int reverseSkipSearch(byte[] source, byte sourceCoder, char[] needle, Plan plan,
+            int scanStart) {
+        int patternLength = needle.length;
+        int matched = 0;
+        for (int index = scanStart; index >= 0; index--) {
+            char unit = sourceUnit(source, sourceCoder, index);
+            while (matched > 0 && unit != needle[patternLength - 1 - matched]) {
+                matched = plan.reversePrefix[matched - 1];
             }
-            if (index == patternLength) return candidate;
+            if (unit == needle[patternLength - 1 - matched]) matched++;
+            if (matched == patternLength) return index;
         }
         return -1;
     }
 
+    /** A unit of the flat source read raw (A43): the callers keep {@code index} inside the source. */
     private static char sourceUnit(byte[] source, byte sourceCoder, int index) {
         return sourceCoder == String.LATIN1
-                ? StringLatin1.charAt(source, index)
-                : StringUTF16.charAt(source, index);
+                ? (char) (source[index] & 0xff)
+                : StringUTF16.getChar(source, index);
     }
 
     private static char reverseUnit(M3String pattern, int reverseIndex) {
