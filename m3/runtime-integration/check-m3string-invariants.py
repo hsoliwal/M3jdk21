@@ -990,7 +990,8 @@ if "for (int index = 0; index < len; index++)" not in string:
 # Case conversion is canonical only for ASCII + Locale.ROOT. Locale-sensitive and non-ASCII
 # transformations must continue through the stock JDK case engine.
 for fragment in [
-    "storage != null && locale.equals(Locale.ROOT)",
+    "storage != null && asciiCaseMappingLocale(locale)",
+    'return !"tr".equals(lang) && !"az".equals(lang) && !"lt".equals(lang);',
     "M3StringFacts prepared = storage.facts();",
     "if (prepared.ascii) {",
     "storage.asciiCase(false)",
