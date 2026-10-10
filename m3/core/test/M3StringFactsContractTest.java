@@ -69,7 +69,7 @@ public final class M3StringFactsContractTest {
         check(columns[2].contains("MindexStringView.java"));
         check(columns[3].equals("TextFacts"));
         check(columns[5].contains("contains_whitespace"));
-        check(columns[6].equals("com.m3.text.M3StringFacts"));
+        check(columns[6].equals("java.lang.M3StringFacts"));
         check(columns[8].equals("Apache-2.0"));
         check(columns[9].equals("ADMITTED_TYPED_RECEIVER"));
 
