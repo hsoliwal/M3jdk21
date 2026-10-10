@@ -79,7 +79,7 @@ def main() -> None:
                 fail(f"columns|crate={crate}|line={line_number}")
             path, before, after, template = cells
             if (
-                not valid_java_path(path)
+                not valid_target_path(path)
                 or path in seen
                 or (previous and previous >= path)
                 or (before != "ABSENT" and not HEX.fullmatch(before))
