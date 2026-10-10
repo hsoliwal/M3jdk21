@@ -66,9 +66,7 @@ final class M3SynexiaCollectionLaneConsumerTest {
     @Test
     void externalNamedRecipeResolvesWithoutAnyLocalCanonicalCopy() {
         var named =
-                Environment.builder()
-                        .scanRuntimeClasspath("com.synexia")
-                        .build()
+                Environment.builder().scanYamlResources().build()
                         .activateRecipes("com.synexia.rewrite.M3CollectionLanes");
 
         assertEquals(1, named.getRecipeList().size());
