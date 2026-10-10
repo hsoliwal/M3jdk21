@@ -17,7 +17,7 @@ public final class M3PositionMaskFactsReceiverTest {
     public static void main(String[] args) {
         int checks = 0;
         M3PositionMaskFacts facts = M3PositionMaskFacts.fromPrecomputed(
-                "7d005c8488a1dcfbf4ca30ea43d55764d8c6d765",
+                "ab4edcbd7eb475a3c9abb12d4a0fc14703a826ec",
                 8192,
                 128,
                 4096,
