@@ -224,8 +224,8 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual(16, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
-        self.assertEqual("", sources["translate.rows"]["precompute_fields"])
-        self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        self.assertEqual("translation_grammar_supported", sources["translate.rows"]["precompute_fields"])
+        self.assertEqual("canonical_decimal_spelling,max_value,min_value,precomputed_value_count,record_id,shared_utf16_storage,source_id,source_revision", sources["dictlang.numbers.0-10000"]["precompute_fields"])
         self.assertEqual("", sources["dictlang.thesaurus"]["precompute_fields"])
         self.assertEqual("", sources["dictlang.antonyms"]["precompute_fields"])
 
