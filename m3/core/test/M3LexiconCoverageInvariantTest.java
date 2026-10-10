@@ -94,6 +94,7 @@ public final class M3LexiconCoverageInvariantTest {
         Path instanceTargetMap = Path.of("lexicon", "synexia-instance-target-map.tsv");
         Path relationTargetMap = Path.of("lexicon", "synexia-related-lexeme-target-map.tsv");
         Set<String> sourceIds = firstColumn(sourceManifest);
+        Set<String> sourceTargets = sourceTargetDeclarations(sourceManifest);
         Set<String> mappedFamilies = mappedFamilies(fieldMap);
         Set<String> mappedPayloadFields = mappedPayloadFields(fieldMap);
         Set<String> requiredPayloadFields = precomputeFields(sourceManifest);
@@ -108,6 +109,8 @@ public final class M3LexiconCoverageInvariantTest {
         check(sourceIds.containsAll(REQUIRED_SOURCE_IDS),
                 "source manifest is missing admitted families: "
                         + difference(REQUIRED_SOURCE_IDS, sourceIds));
+        check(sourceTargets.contains("unicodex.langdex.lexemes\tM3LangDexPrecompute.Identity"),
+                "LangDex source manifest does not bind its canonical identity receiver");
         check(mappedFamilies.containsAll(REQUIRED_TYPED_FAMILIES),
                 "precompute field map is missing typed families: "
                         + difference(REQUIRED_TYPED_FAMILIES, mappedFamilies));
@@ -127,8 +130,12 @@ public final class M3LexiconCoverageInvariantTest {
         check(relationTargets.contains("dictlang.antonyms\tcom.m3.text.SharedRelatedLexemeCatalog\tADMITTED_TYPED_RELATION_SIDECAR")
                         && relationTargets.contains("dictlang.thesaurus\tcom.m3.text.SharedRelatedLexemeCatalog\tADMITTED_TYPED_RELATION_SIDECAR"),
                 "related-lexeme target map is incomplete");
-        check(numberTargets.contains("dictlang.numbers.0-10000\tcom.m3.text.M3NumberSpace\tADMITTED_TYPED_RECEIVER"),
-                "number target map is not admitted to M3NumberSpace");
+        check(numberTargets.contains(
+                        "dictlang.numbers.0-10000\tcom.m3.text.M3NumberSpace\tADMITTED_TYPED_RECEIVER\t"
+                                + "value,source_id,record_id,spelling,language_tag,source_revision\t"
+                                + "source_id,record_id,min_value,max_value,precomputed_value_count,"
+                                + "shared_utf16_storage,canonical_decimal_spelling,source_revision"),
+                "number target map does not preserve source identity and bounded precompute fields");
         check(acronymTargets.contains("dictlang.acronyms\tM3LexiconPrecompute.AcronymPrecompute\tSTAGED_PROVEN\t40"),
                 "acronym target map is not source-pinned");
         check(instanceTargets.contains("proper-nouns\tcom.m3.text.M3InstanceIndex\tTARGET_CONTRACT_OPEN_NO_PAYLOAD\tREFERENCE_ONLY_PAYLOAD_NOT_ADMITTED")
@@ -224,6 +231,25 @@ public final class M3LexiconCoverageInvariantTest {
         return values;
     }
 
+    private static Set<String> sourceTargetDeclarations(Path path) throws Exception {
+        Set<String> values = new HashSet<>();
+        for (String line : Files.readAllLines(path, StandardCharsets.UTF_8)) {
+            if (line.isBlank() || line.startsWith("source_id\t")) {
+                continue;
+            }
+            String[] fields = line.split("\\t", -1);
+            if (fields.length < 6) {
+                throw new AssertionError("source manifest target row is malformed: " + line);
+            }
+            for (String target : fields[5].split(" \\+ ", -1)) {
+                if (!target.isBlank()) {
+                    values.add(fields[0] + "\t" + target.trim());
+                }
+            }
+        }
+        return values;
+    }
+
     private static Set<String> sourceRelationMappings(Path path) throws Exception {
         Set<String> values = new HashSet<>();
         for (String line : Files.readAllLines(path, StandardCharsets.UTF_8)) {
@@ -267,7 +293,8 @@ public final class M3LexiconCoverageInvariantTest {
             if (fields.length < 11) {
                 throw new AssertionError("number target row is malformed: " + line);
             }
-            values.add(fields[1] + "\t" + fields[6] + "\t" + fields[9]);
+            values.add(fields[1] + "\t" + fields[6] + "\t" + fields[9]
+                    + "\t" + fields[4] + "\t" + fields[5]);
         }
         return values;
     }
