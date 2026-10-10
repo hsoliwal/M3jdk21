@@ -1,0 +1,73 @@
+{
+  "schema": "SYNEXIA_REGEX_BULK_LANES_INTAKE_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_commit": "8918f154e38da11a788e4b108048bcb47da44ee0",
+  "canonical_recipe": "com.synexia.m3.RegexV7BulkLanes20261010",
+  "canonical_task_path": "synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/bulk-20261010",
+  "artifact_root": "6b224edfcc5b61a1f78a57f60f4021236b91c40a3536380a4f552912ede44ac2",
+  "receiver_parent": "57a2bdafd0acd0779663e438f82f8a295f4c2170",
+  "owner": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgramImageCodec.java",
+  "before_sha256": "c7f17a7b60b8e90c5bc8730c6a5c222dd3598474ea126377ecdf89cb0bcc6d8e",
+  "after_sha256": "39cc631f1274b8f2dd88959b6679315abc4ecec82e11b3c421520caea3118297",
+  "after_git_blob": "468550f78761d10ad18c2f12f967e6d849acd683",
+  "materialization": "EXACT_OPENREWRITE_SDK_POSTIMAGE",
+  "source_proof": {
+    "scope": "BOUNDED_COMPLETE_FILE_MATCHER_CLOSURE",
+    "source_revision": "b37358882b0f25afa9eb9b6cefdfdb15880da332",
+    "source_files": 578,
+    "recipe": "com.synexia.m3.RegexV7BulkLanes20261010",
+    "sdk": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "runtime": {
+      "baseline": {
+        "tests": 33,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "candidate": {
+        "tests": 33,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "jdk_matrix": {
+      "expressions": 16,
+      "samples": 139,
+      "restored_variants": 8,
+      "receiver_kinds": 4,
+      "warm_passes": 2,
+      "jdk_comparisons": 427008
+    },
+    "jni": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "jni_scope": "existing search kernel, forced minimumRows=1, Linux x86_64, -Xcheck:jni; default-threshold refusal retained",
+    "public_codec_api": "EXACT_EQUAL",
+    "negative_controls": [
+      "nested-version EXPECTED_ASSERTION_FAILURE",
+      "bulk-cursor EXPECTED_ASSERTION_FAILURE"
+    ],
+    "cost": "five alternating VM trials; cold preparation and warm decode wall/CPU/Java allocation; not retained heap or native/process memory",
+    "annotation_processing": "DISABLED; exact annotation declaration only; generated logger unqualified",
+    "not_run": [
+      "full MIndexRegexProgramTest ContextOS closure",
+      "canonical serial catalogue/full reactor review",
+      "java.base complete closure and matched JDK/jtreg",
+      "GPU and other OS/architecture backends"
+    ],
+    "promotion": "NOT_ADMITTED"
+  },
+  "receiver_qualification": "CODEC_BYTES_MATCH_DONOR; FULL_RECEIVING_PROGRAM_AND_JDK_NOT_RUN",
+  "promotion": "NOT_ADMITTED",
+  "performance": "Complete-image results are mixed; temporary allocation increases; no general speedup established",
+  "license": "Eligible first-party Apache-2.0; preserve per-file upstream rights"
+}

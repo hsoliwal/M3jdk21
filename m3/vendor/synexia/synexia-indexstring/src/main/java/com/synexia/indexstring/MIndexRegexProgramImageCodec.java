@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026 Hitesh Soliwal and contributors: bulk validated primitive image lanes.
 package com.synexia.indexstring;
 
 import java.io.ByteArrayOutputStream;
@@ -278,7 +279,7 @@ public final class MIndexRegexProgramImageCodec {
     if (size < HEADER_BYTES || size > MAX_IMAGE_BYTES) {
       throw new IllegalArgumentException("regex image file byte geometry");
     }
-    return decode(Files.readAllBytes(source));
+    return decode(ByteBuffer.wrap(Files.readAllBytes(source)));
   }
 
   /**
@@ -305,7 +306,7 @@ public final class MIndexRegexProgramImageCodec {
     if (size < HEADER_BYTES || size > MAX_EXECUTION_IMAGE_BYTES) {
       throw new IllegalArgumentException("regex accelerated image file byte geometry");
     }
-    return decodeAccelerated(Files.readAllBytes(source));
+    return decodeAccelerated(ByteBuffer.wrap(Files.readAllBytes(source)));
   }
 
   public static MIndexRegexAcceleratedImage readAcceleratedMapped(Path path)
@@ -326,7 +327,7 @@ public final class MIndexRegexProgramImageCodec {
     if (size < HEADER_BYTES || size > MAX_EXECUTION_IMAGE_BYTES) {
       throw new IllegalArgumentException("regex execution image file byte geometry");
     }
-    return decodeExecution(Files.readAllBytes(source));
+    return decodeExecution(ByteBuffer.wrap(Files.readAllBytes(source)));
   }
 
   public static MIndexRegexProgram.ExecutionImage readExecutionMapped(Path path)
@@ -556,8 +557,13 @@ public final class MIndexRegexProgramImageCodec {
         input, Math.multiplyExact(transitionCount, Short.BYTES),
         lane + " compact DFA transitions");
     short[] transitions = new short[transitionCount];
-    for (int index = 0; index < transitionCount; index++) {
-      transitions[index] = input.getShort();
+    if (transitionCount < 64) {
+      for (int index = 0; index < transitionCount; index++) {
+        transitions[index] = input.getShort();
+      }
+    } else {
+      input.asShortBuffer().get(transitions);
+      input.position(input.position() + transitionCount * Short.BYTES);
     }
     int acceptingCount =
         boundedCount(input, lane + " compact DFA accepting", MAX_EXECUTION_IMAGE_BYTES);
@@ -615,8 +621,13 @@ public final class MIndexRegexProgramImageCodec {
     requireRemaining(
         input, Math.multiplyExact(transitionCount, Short.BYTES), lane + " DFA transitions");
     short[] transitions = new short[transitionCount];
-    for (int index = 0; index < transitionCount; index++) {
-      transitions[index] = input.getShort();
+    if (transitionCount < 64) {
+      for (int index = 0; index < transitionCount; index++) {
+        transitions[index] = input.getShort();
+      }
+    } else {
+      input.asShortBuffer().get(transitions);
+      input.position(input.position() + transitionCount * Short.BYTES);
     }
     int acceptingCount =
         boundedCount(input, lane + " DFA accepting", MAX_EXECUTION_IMAGE_BYTES);
@@ -629,21 +640,36 @@ public final class MIndexRegexProgramImageCodec {
   private static int[] readInts(ByteBuffer input, int count, String lane) {
     requireRemaining(input, Math.multiplyExact(count, Integer.BYTES), lane);
     int[] result = new int[count];
-    for (int index = 0; index < count; index++) result[index] = input.getInt();
+    if (count < 64) {
+      for (int index = 0; index < count; index++) result[index] = input.getInt();
+    } else {
+      input.asIntBuffer().get(result);
+      input.position(input.position() + count * Integer.BYTES);
+    }
     return result;
   }
 
   private static long[] readLongs(ByteBuffer input, int count, String lane) {
     requireRemaining(input, Math.multiplyExact(count, Long.BYTES), lane);
     long[] result = new long[count];
-    for (int index = 0; index < count; index++) result[index] = input.getLong();
+    if (count < 64) {
+      for (int index = 0; index < count; index++) result[index] = input.getLong();
+    } else {
+      input.asLongBuffer().get(result);
+      input.position(input.position() + count * Long.BYTES);
+    }
     return result;
   }
 
   private static char[] readChars(ByteBuffer input, int count, String lane) {
     requireRemaining(input, Math.multiplyExact(count, Character.BYTES), lane);
     char[] result = new char[count];
-    for (int index = 0; index < count; index++) result[index] = input.getChar();
+    if (count < 64) {
+      for (int index = 0; index < count; index++) result[index] = input.getChar();
+    } else {
+      input.asCharBuffer().get(result);
+      input.position(input.position() + count * Character.BYTES);
+    }
     return result;
   }
 

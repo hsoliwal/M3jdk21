@@ -1,0 +1,48 @@
+{
+  "schema": "M3_PURE_INT_CUSTODY_RUNTIME_HANDOFF_V1",
+  "license": "Apache-2.0",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalRevision": "bafdc906150c307971f893ecf452db5fff8003bd",
+  "recipe": "com.synexia.m3.PureIntCustodyRuntime20261010",
+  "recipePath": "synexia-openrewrite-recipes/tasks/pure-int-custody-runtime-20261010",
+  "artifactRoot": "9d89f74359fd4fc23fc942295f0beb4160526232aca0caecd9bf1a1dccc1b6ee",
+  "targetPreimageRevision": "968ec9f045269136f21ca577a5bcf4b90b87e60e",
+  "targetPath": "m3/synexia-import/pure-int-recipe-custody/pom.xml",
+  "beforeSha256": "8e307c59f5598869e6271e712186ee31b782fb00532c5d8f5ce6a1d04d32c33f",
+  "afterSha256": "2834e74b7230c697050ac40e26d0374b059d34e6ecd3f5898beb784179fa52bd",
+  "evidencePath": "synexia-openrewrite-recipes/tasks/pure-int-custody-runtime-20261010/evidence/qualified/receipt.json",
+  "evidenceSha256": "7afff044465c0499678cf350df17c8c59668c7cb23f3814799dc00ca21781702",
+  "baseline": {
+    "exitCode": 1,
+    "tests": 4,
+    "failures": 0,
+    "errors": 3,
+    "skipped": 0
+  },
+  "recipeJUnit": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "receiverJUnit": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "receiverGoal": "verify",
+  "freshCompilation": true,
+  "preservedOriginalInputs": 10,
+  "sourceCustody": "All six recipe sources and their existing SOURCE.tsv blob pins are unchanged.",
+  "scope": "Existing external recipe custody module only; no JDK runtime source change.",
+  "namingMapDisposition": "EXCLUDED: external recipe build dependency maintenance; no type/package/symbol or runtime ownership change.",
+  "disclosureDisposition": "Routine maintenance of already-public material; no new invention-specific disclosure.",
+  "remainingGates": [
+    "Full Synexia reactor",
+    "Full M3JDK21 reactor and ownership classification",
+    "Matched JDK build/jtreg/runtime qualification",
+    "Hosted CI at delivered heads"
+  ]
+}
