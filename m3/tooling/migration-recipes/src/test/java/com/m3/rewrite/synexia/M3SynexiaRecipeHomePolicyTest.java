@@ -60,6 +60,13 @@ final class M3SynexiaRecipeHomePolicyTest {
                 "com.synexia:synexia-m3index-db",
                 rows.get("m3/indexdb/**")[5]);
         assertEquals(
+                "com.synexia:synexia-openrewrite-recipes",
+                rows.get("m3/tooling/migration-recipes/src/main/java/com/synexia/**")[5]);
+        assertEquals(
+                "MIGRATION_RESIDUE_NOT_CANONICAL",
+                rows.get("m3/tooling/migration-recipes/src/main/java/com/synexia/**")[4]);
+
+        assertEquals(
                 "com.synexia:synexia-m3index-jdk-bridge",
                 rows.get("m3/ports/**")[5]);
         assertEquals(
@@ -116,7 +123,7 @@ final class M3SynexiaRecipeHomePolicyTest {
         Path root = repositoryRoot();
         List<PolicyRow> policy = policyRows();
         Path recipeRoot =
-                root.resolve("m3/tooling/migration-recipes/src/main/java/com/m3/rewrite");
+                root.resolve("m3/tooling/migration-recipes/src/main/java");
 
         List<String> sourcePaths;
         try (var files = Files.walk(recipeRoot)) {
@@ -205,6 +212,7 @@ final class M3SynexiaRecipeHomePolicyTest {
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic",
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3",
+                "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite",
                 "m3/indexdb/src/main/java")) {
             Path start = root.resolve(directory);
             if (!Files.isDirectory(start)) {
