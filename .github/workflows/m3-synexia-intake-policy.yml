@@ -25,6 +25,8 @@ on:
       - "m3/docs/synexia-intake-policy.tsv"
       - "m3/docs/synexia-direct-copy-review.tsv"
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - "m3/runtime-integration/check-fuzzy-histogram-receiver.py"
+      - "m3/runtime-integration/synexia-fuzzy-histogram-receiver.tsv"
       - "m3/runtime-integration/verify-synexia-intake.py"
       - "m3/tooling/migration-recipes/**"
       - ".github/workflows/m3-synexia-intake-policy.yml"
