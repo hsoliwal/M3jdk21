@@ -132,12 +132,10 @@ public final class M3PositionMaskFacts {
     }
 
     private static String text(String value, String name) {
-        return Objects.requireNonNull(value, name + " is null").isEmpty()
-                ? throwEmpty(name)
-                : value;
-    }
-
-    private static String throwEmpty(String name) {
-        throw new IllegalArgumentException(name + " is empty");
+        String checked = Objects.requireNonNull(value, name + " is null");
+        if (checked.isEmpty()) {
+            throw new IllegalArgumentException(name + " is empty");
+        }
+        return checked;
     }
 }
