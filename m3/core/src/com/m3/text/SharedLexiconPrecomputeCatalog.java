@@ -80,12 +80,34 @@ public final class SharedLexiconPrecomputeCatalog {
     private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes;
     private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts;
     /** Exact source identity for the canonical Synexia acronym family. */
-    public record AcronymIdentity(String sourceId, String recordId) {
+    public record AcronymIdentity(String sourceId, String recordId,
+                                  String sourceRevision, String sourceBlobSha,
+                                  String snapshotSha256) {
+        private static final String UNPINNED = "UNPINNED";
+
+        public AcronymIdentity(String sourceId, String recordId) {
+            this(sourceId, recordId, UNPINNED, UNPINNED, UNPINNED);
+        }
+
         public AcronymIdentity {
             sourceId = text(sourceId, "sourceId");
             recordId = text(recordId, "recordId");
+            sourceRevision = provenance(sourceRevision, "sourceRevision", 40);
+            sourceBlobSha = provenance(sourceBlobSha, "sourceBlobSha", 40);
+            snapshotSha256 = provenance(snapshotSha256, "snapshotSha256", 64);
             if (!"dictlang.acronyms".equals(sourceId))
                 throw new IllegalArgumentException("acronym identity has the wrong source family");
+        }
+
+        private static String provenance(String value, String name, int hexLength) {
+            text(value, name);
+            if (UNPINNED.equals(value)) return value;
+            if (value.length() != hexLength
+                    || !value.matches("[0-9a-f]{" + hexLength + "}")) {
+                throw new IllegalArgumentException(name + " must be lowercase " + hexLength
+                        + "-hex provenance");
+            }
+            return value;
         }
     }
 
@@ -158,8 +180,15 @@ public final class SharedLexiconPrecomputeCatalog {
         public Builder acronym(AcronymIdentity identity, M3LexiconPrecompute.AcronymPrecompute value) {
             Objects.requireNonNull(identity, "acronym key");
             Objects.requireNonNull(value, "acronym value");
-            if (!identity.recordId().equals(value.acronym()))
-                throw new IllegalArgumentException("acronym identity does not match precompute");
+            if (!identity.recordId().equals(value.acronym())
+                    || "UNPINNED".equals(identity.sourceRevision())
+                    || "UNPINNED".equals(identity.sourceBlobSha())
+                    || "UNPINNED".equals(identity.snapshotSha256())
+                    || !identity.sourceRevision().equals(value.sourceRevision())
+                    || !identity.sourceBlobSha().equals(value.sourceBlobSha())
+                    || !identity.snapshotSha256().equals(value.snapshotSha256())) {
+                throw new IllegalArgumentException("acronym identity does not match source-bound precompute");
+            }
             put(acronyms, identity, value, "acronym"); return this;
         }
         public SharedLexiconPrecomputeCatalog build() { return new SharedLexiconPrecomputeCatalog(this); }

@@ -33,20 +33,47 @@ public final class M3LexiconPrecompute {
     }
 
     /** Immutable source-owned acronym metadata; the generic numeric payload remains separate. */
-    public record AcronymPrecompute(String acronym, String expansion, String domain) {
+    public record AcronymPrecompute(String acronym, String expansion, String domain,
+                                    String sourceRevision, String sourceBlobSha,
+                                    String snapshotSha256) {
         private static final String ACRONYM_PATTERN = "[A-Za-z][A-Za-z0-9+.-]{0,31}";
         private static final String DOMAIN_PATTERN = "[a-z][a-z0-9._-]*";
+        private static final String UNPINNED = "UNPINNED";
+
+        public AcronymPrecompute(String acronym, String expansion, String domain) {
+            this(acronym, expansion, domain, UNPINNED, UNPINNED, UNPINNED);
+        }
 
         public AcronymPrecompute {
             acronym = text(acronym, "acronym");
             expansion = text(expansion, "expansion");
             domain = text(domain, "domain");
+            sourceRevision = provenance(sourceRevision, "sourceRevision", 40);
+            sourceBlobSha = provenance(sourceBlobSha, "sourceBlobSha", 40);
+            snapshotSha256 = provenance(snapshotSha256, "snapshotSha256", 64);
             if (!acronym.matches(ACRONYM_PATTERN))
                 throw new IllegalArgumentException("invalid acronym");
             if (expansion.isBlank())
                 throw new IllegalArgumentException("blank acronym expansion");
             if (!domain.matches(DOMAIN_PATTERN))
                 throw new IllegalArgumentException("invalid acronym domain");
+        }
+
+        public boolean sourceBound() {
+            return !UNPINNED.equals(sourceRevision)
+                    && !UNPINNED.equals(sourceBlobSha)
+                    && !UNPINNED.equals(snapshotSha256);
+        }
+
+        private static String provenance(String value, String name, int hexLength) {
+            text(value, name);
+            if (UNPINNED.equals(value)) return value;
+            if (value.length() != hexLength
+                    || !value.matches("[0-9a-f]{" + hexLength + "}")) {
+                throw new IllegalArgumentException(name + " must be lowercase " + hexLength
+                        + "-hex provenance");
+            }
+            return value;
         }
     }
 

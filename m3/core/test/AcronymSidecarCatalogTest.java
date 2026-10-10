@@ -11,15 +11,19 @@ import java.security.MessageDigest;
 import java.util.HexFormat;
 
 public final class AcronymSidecarCatalogTest {
+    private static final String SOURCE_REVISION = "9a990b710bf173258c29474083383d4c6b1e7d4e";
+    private static final String SOURCE_BLOB_SHA = "5bb16c13b6be693153a0656b8beb61af860cb52f";
+    private static final String SNAPSHOT_SHA256 = "4dd2d943eff28044362f843d9e42988e036d5e649910471949ae90666b29e27a";
+
     public static void main(String[] args) throws Exception {
         Path directory = Files.createTempDirectory("m3-acronym-sidecar-");
         try {
             String owner = "0123456789abcdef".repeat(4);
             String header = "source_id\trecord_id\tsource_manifest_revision\towner_fingerprint"
                     + "\tacronym\texpansion\tdomain\n";
-            String rows = "dictlang.acronyms\tAPI\tsynexia-acronym-1\t" + owner
+            String rows = "dictlang.acronyms\tAPI\t9a990b710bf173258c29474083383d4c6b1e7d4e\t" + owner
                     + "\tAPI\tapplication programming interface\tcomputing\n"
-                    + "dictlang.acronyms\tHTTP\tsynexia-acronym-1\t" + owner
+                    + "dictlang.acronyms\tHTTP\t9a990b710bf173258c29474083383d4c6b1e7d4e\t" + owner
                     + "\tHTTP\thypertext transfer protocol\tnetworking\n";
             byte[] data = (header + rows).getBytes(UTF_8);
             Files.write(directory.resolve(AcronymSidecarCatalog.DATA_FILE), data);
@@ -30,12 +34,18 @@ public final class AcronymSidecarCatalogTest {
             Files.writeString(directory.resolve(AcronymSidecarCatalog.INDEX_FILE), indexText, UTF_8);
 
             AcronymSidecarCatalog catalog = AcronymSidecarCatalog.open(directory);
+            AcronymSidecarCatalog bound = AcronymSidecarCatalog.open(
+                    directory, SOURCE_REVISION, SOURCE_BLOB_SHA, SNAPSHOT_SHA256);
             check(catalog.size() == 2, "row count");
+            check(bound.find("API").orElseThrow().value().sourceBound(),
+                    "bound sidecar value");
+            check(bound.find("API").orElseThrow().value().snapshotSha256().equals(SNAPSHOT_SHA256),
+                    "bound sidecar snapshot");
             check(catalog.find("API").orElseThrow().value().equals(
                     new M3LexiconPrecompute.AcronymPrecompute(
                             "API", "application programming interface", "computing")),
                     "lookup");
-            check(catalog.scope().sourceManifestRevision().equals("synexia-acronym-1"),
+            check(catalog.scope().sourceManifestRevision().equals(SOURCE_REVISION),
                     "scope");
             check(catalog.find("MISSING").isEmpty(), "missing lookup");
 
@@ -47,11 +57,11 @@ public final class AcronymSidecarCatalogTest {
             Files.writeString(directory.resolve(AcronymSidecarCatalog.INDEX_FILE), indexText, UTF_8);
 
             Files.write(directory.resolve(AcronymSidecarCatalog.DATA_FILE), (header + rows
-                    + "dictlang.acronyms\tAPI\tsynexia-acronym-1\t" + owner
+                    + "dictlang.acronyms\tAPI\t9a990b710bf173258c29474083383d4c6b1e7d4e\t" + owner
                     + "\tAPI\tduplicate\tcomputing\n").getBytes(UTF_8));
             expectIllegal(() -> AcronymSidecarCatalog.open(directory), "checksum drift");
 
-            byte[] malformedPrefix = (header + "dictlang.acronyms\tAPI\tsynexia-acronym-1\t"
+            byte[] malformedPrefix = (header + "dictlang.acronyms\tAPI\t9a990b710bf173258c29474083383d4c6b1e7d4e\t"
                     + owner + "\tAPI\t").getBytes(UTF_8);
             byte[] malformedSuffix = new byte[] {(byte) 0xc3, (byte) 0x28, (byte) '\t', 'x', (byte) '\n'};
             byte[] malformed = new byte[malformedPrefix.length + malformedSuffix.length];

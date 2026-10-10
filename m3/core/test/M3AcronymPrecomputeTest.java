@@ -11,13 +11,22 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public final class M3AcronymPrecomputeTest {
+    private static final String SOURCE_REVISION = "9a990b710bf173258c29474083383d4c6b1e7d4e";
+    private static final String SOURCE_BLOB_SHA = "5bb16c13b6be693153a0656b8beb61af860cb52f";
+    private static final String SNAPSHOT_SHA256 = "4dd2d943eff28044362f843d9e42988e036d5e649910471949ae90666b29e27a";
+
     public static void main(String[] args) throws Exception {
         M3LexiconPrecompute.AcronymPrecompute http =
                 new M3LexiconPrecompute.AcronymPrecompute(
-                        "HTTP", "Hypertext Transfer Protocol", "networking");
+                        "HTTP", "Hypertext Transfer Protocol", "networking",
+                        SOURCE_REVISION, SOURCE_BLOB_SHA, SNAPSHOT_SHA256);
         check("HTTP".equals(http.acronym()), "acronym identity");
         check("Hypertext Transfer Protocol".equals(http.expansion()), "expansion preservation");
         check("networking".equals(http.domain()), "domain preservation");
+        check(SOURCE_REVISION.equals(http.sourceRevision()), "source revision");
+        check(SOURCE_BLOB_SHA.equals(http.sourceBlobSha()), "source blob");
+        check(SNAPSHOT_SHA256.equals(http.snapshotSha256()), "snapshot digest");
+        check(http.sourceBound(), "source bound");
 
         String manifest = Files.readString(
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
@@ -29,12 +38,13 @@ public final class M3AcronymPrecomputeTest {
         check(columns.length == 9, "acronym manifest shape");
         check("M3LexiconPrecompute.AcronymPrecompute".equals(columns[5]),
                 "acronym manifest owner");
-        check("acronym,domain,expansion".equals(columns[8]),
+        check("acronym,domain,expansion,source_revision,source_blob_sha,snapshot_sha256".equals(columns[8]),
                 "acronym manifest precompute fields");
 
         SharedLexiconPrecomputeCatalog.AcronymIdentity identity =
                 new SharedLexiconPrecomputeCatalog.AcronymIdentity(
-                        "dictlang.acronyms", "HTTP");
+                        "dictlang.acronyms", "HTTP", SOURCE_REVISION,
+                        SOURCE_BLOB_SHA, SNAPSHOT_SHA256);
         SharedLexiconPrecomputeCatalog catalog =
                 SharedLexiconPrecomputeCatalog.builder().acronym(identity, http).build();
         check(catalog.acronymAt(identity).orElseThrow().equals(http), "catalog lookup");
@@ -52,15 +62,26 @@ public final class M3AcronymPrecomputeTest {
                 "dictlang.dictionary", "HTTP"),
                 "wrong source family");
         expectIllegal(() -> SharedLexiconPrecomputeCatalog.builder().acronym(
+                new SharedLexiconPrecomputeCatalog.AcronymIdentity(
+                        "dictlang.acronyms", "HTTP"), http),
+                "unpinned identity");
+        expectIllegal(() -> new M3LexiconPrecompute.AcronymPrecompute(
+                "HTTP", "Hypertext Transfer Protocol", "networking",
+                SOURCE_REVISION, "000000000000000000000000000000000000000A",
+                SNAPSHOT_SHA256),
+                "invalid source blob");
+        expectIllegal(() -> SharedLexiconPrecomputeCatalog.builder().acronym(
                 identity,
                 new M3LexiconPrecompute.AcronymPrecompute(
-                        "TLS", "Transport Layer Security", "networking")),
+                        "TLS", "Transport Layer Security", "networking",
+                    SOURCE_REVISION, SOURCE_BLOB_SHA, SNAPSHOT_SHA256)),
                 "identity mismatch");
         expectIllegal(() -> SharedLexiconPrecomputeCatalog.builder().acronym(identity, http).acronym(identity, http),
                 "duplicate identity");
 
         check(catalog.acronymAt(new SharedLexiconPrecomputeCatalog.AcronymIdentity(
-                "dictlang.acronyms", "TLS")).equals(Optional.empty()),
+                "dictlang.acronyms", "TLS", SOURCE_REVISION,
+                SOURCE_BLOB_SHA, SNAPSHOT_SHA256)).equals(Optional.empty()),
                 "missing acronym is empty");
         System.out.println("M3_ACRONYM_PRECOMPUTE_PASS source=dictlang.acronyms entries=1");
     }

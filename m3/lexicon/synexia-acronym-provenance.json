@@ -18,5 +18,12 @@
     "standards": 3
   },
   "status": "STAGED_PROVEN",
+  "target_identity_fields": [
+    "source_id",
+    "record_id",
+    "source_revision",
+    "source_blob_sha",
+    "snapshot_sha256"
+  ],
   "admission_rule": "promote only after hosted target checks and synchronized Synexia receipts"
 }
