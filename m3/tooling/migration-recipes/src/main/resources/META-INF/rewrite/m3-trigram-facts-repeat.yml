@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.TrigramFactsRepeat
+displayName: M3JDK21 trigram facts of a search source built on the repeat use
+description: >-
+  M3StringSearchPrecompute.sourceFacts built the trigram facts of a 256..32768-unit source on its
+  first use (the first indexOf with an M3 needle, the first regex literal gate), a precompute that
+  pays back only on repeat use: cold, a first indexOf with an M3 needle over 16384 units cost
+  432 us against 3 flat, 2048 units 46 us against 0.4. A first use now registers the source
+  without facts and answers may-contain so the exact search runs; the next use of the same source
+  builds the facts, which the gates then serve; sources outside the band never register. Java step:
+  M3StringSearchPrecompute and the jtreg proof; no upstream file changed. Stacks on crate
+  m3-graded-windows (branch order); the M3StringSearchPrecompute preimage is the A21 postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-trigram-facts-repeat

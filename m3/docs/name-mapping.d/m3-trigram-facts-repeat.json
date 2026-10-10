@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.M3StringSearchPrecompute.sourceFacts: the first use of a 256..32768-unit source (the first indexOf with an M3 needle, the first regex literal gate) built its trigram facts, and every use of a source that lost its cache slot rebuilt them (A14/A18 lineage, carried to A33 8bd83bda61)",
+      "source_commit": "8bd83bda61",
+      "target": "a first use registers the source without facts and answers may-contain so the exact search runs; the next use of the same source builds the facts, which the gates then serve; sources outside the band never register; a source that keeps losing its slot keeps running exact",
+      "status": "implemented-locally-verified (G7; flag-off: M3TrigramRepeatTest 13,068 checks against the flat String on every call; cold M3-needle searches and regex literal gates 20x..40x faster on 256..16384-unit sources; hot searches unchanged)",
+      "target_rule": "the same index and the same match as the flat String on the first and on every repeat use"
+    }
+  ]
+}
