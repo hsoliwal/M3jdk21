@@ -41,7 +41,7 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: Run exact Git-tree retention proof
+      - name: Verify Synexia lexicon provenance\n        run: python3 m3/runtime-integration/check-synexia-lexicon-provenance.py\n\n      - name: Run exact Git-tree retention proof
         shell: bash
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
