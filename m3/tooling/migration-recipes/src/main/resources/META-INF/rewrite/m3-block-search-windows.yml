@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.BlockSearchWindows
+displayName: M3JDK21 single-unit search block index built on the repeat search
+description: >-
+  M3StringPositionPrecompute built its block index on the first search of a 256..32768-unit
+  source (a Blocks allocation, then a 64-unit signal per block and an O(64^2) exact mask per
+  positive block, lazily), which only pays back when the same source is searched again: a first
+  indexOf(char) over a fresh 2048-unit UTF-16 source cost 36 us against 0.12 flat, 32768 units
+  651 us against 3.7. A first search now registers the source without blocks and scans it
+  through the A31 window lane; the next search of the same source allocates the blocks, which
+  fill lazily as before; sources outside the block range never register. Java step:
+  M3StringPositionPrecompute and the jtreg proof; no upstream file changed. Stacks on crate
+  m3-char-search-windows (its M3StringPositionPrecompute postimage is this preimage).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-block-search-windows

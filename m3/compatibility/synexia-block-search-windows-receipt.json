@@ -1,0 +1,75 @@
+{
+  "schema": "M3JDK21_SYNEXIA_BLOCK_SEARCH_WINDOWS_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-block-search-windows-20261010",
+    "pullRequest": null,
+    "commit": "c6ef3d5cf28d3c9739e7545705291b8cc3c98983",
+    "stackedOn": [
+      {
+        "pullRequest": 10063,
+        "crate": "m3-char-search-windows"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.BlockSearchWindows",
+    "crate": "m3-block-search-windows",
+    "fossReuseDecisionRow": "string.indexof.block-index-on-repeat",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+        "commit": "2b2a3ac616",
+        "target": "java.lang.M3StringPositionPrecompute.prepare",
+        "mechanics": "the A7 block signals and exact masks, now allocated on the repeat search; the A31 window lane serves the first search"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same index as the flat String on the first and on every repeat search; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-char-search-windows-20261009 (#610, A31) on #609 on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringPositionPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3StringPositionPrecompute.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+      "before": "8cefde51395f11a84eef731a215a5ea3822cb15ce1fa6edff3442699fd190e28",
+      "after": "bbd59125af34715d04c24f6448fb3c1fdfda484a7676751d14b24c59552fe335",
+      "resource": "00-M3StringPositionPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3CharSearchRepeatTest.java",
+      "before": "ABSENT",
+      "after": "46991aa4c503f33463cb496ee8279bdd0bd864817bc126190af872ecc928ed4b",
+      "resource": "01-M3CharSearchRepeatTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3CharSearchRepeatTest flag-off: 25,380 checks (the same source searched five times, the first search scanning and the later ones indexing; three hundred distinct 1000-unit sources searched in three rotating passes so the cache thrashes; indexOf(int), indexOf(int, from), lastIndexOf(int), lastIndexOf(int, from) with units present, absent and above 0xff; atoms, tuples and slices of 256..32768 units, both coders; against the flat String on every call)",
+    "regressions": "PASS_WINDOWS M3CharSearchWindowsTest 61,650; M3StringPositionInvariant6Test 13; M3StringLiteralSplitTest 53,378; M3MixedCoderCompareTest 30,620; M3ContentEqualsTest 7,980; M3IgnoreCaseWindowsTest 188,512; M3IndexOfFlatNeedleTest 137,948; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3NeedleArgTest 73,440; M3RegexSubjectViewTest 9,567; M3TQFactsBuildTest 23,595; M3RegexLiteralGateTest 29,376; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,920; A6 204 + 29",
+    "timing": "flag-off (a32/probe/IndexOfCharColdBench, bench-baseline.tsv on the A31 build vs bench-after.tsv; cold rows = 256 distinct sources in rotation; flat in parentheses): indexOf(char miss) UTF-16 atom 256 units 3,860 ns -> 65 (14), 1024: 20,570 -> 210 (45), 2048: 36,066 -> 297 (63), 4096: 74,497 -> 664 (161), 16384: 286,306 -> 1,932 (780), 32768: 651,089 -> 3,224 (1,494), tuples alike; Latin-1 256: 294 -> 145 (29), 1024: 1,968 -> 116 (26), 2048: 2,862 -> 268 (55), 4096: 6,271 -> 405 (100), 16384: 20,137 -> 981 (430), 32768: 50,904 -> 1,627 (887); indexOf(char, hit at end) UTF-16 2048: 12,363 -> 232 (15); lastIndexOf(char miss) UTF-16 2048: 40,399 -> 544 (257); hot rows within noise",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3StringPositionPrecompute.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3BlockSearchWindowsRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3CharSearchRepeatTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the index is a bet on repetition, so it is placed on the second search: a source searched once pays one bulk scan and one small cache entry, a source searched again pays the index once more than before, with the same lazy fills",
+    "a source that keeps losing its 64-slot cache position keeps scanning (before, every such search rebuilt the index)",
+    "the retained lanes, invariant 6 (no second spelling store) and the retained-bytes bound are unchanged: an entry without blocks retains only the weak owner key, the coordinate and the length",
+    "stacked on A31: merge after #610 and the Synexia crate PR (#10063 first, content-bearing merges); the owner commit is acd17998b6"
+  ]
+}

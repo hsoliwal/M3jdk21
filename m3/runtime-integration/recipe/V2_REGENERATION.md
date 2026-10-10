@@ -129,3 +129,7 @@ Regenerated against 0b114a9b55: no upstream target changed, so `runtime.patch` a
 ## 2026-10-09 re-seal (A31 single-unit search windows outside the block range)
 
 Regenerated against e03a8ebfa6: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3StringPositionPrecompute.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-10 re-seal (A32 single-unit search block index on the repeat search)
+
+Regenerated against bbf344e829: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3StringPositionPrecompute.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
