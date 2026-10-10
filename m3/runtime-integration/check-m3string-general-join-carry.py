@@ -43,8 +43,12 @@ def verify_source(source):
             "general array null-check removed")
     require("if (parts.length == 0) return EMPTY;" in general,
             "general empty join contract removed")
+    require("Objects.requireNonNull(part, \"part\")" in general,
+            "original array element null-check changed")
     require("if (!joinAddDesignated(levels, part)) return null;" in general,
             "pool budget refusal or empty-piece admission changed")
+    require("if (values.size() == 1) return values.getFirst();" in values,
+            "historical singleton-value identity behavior changed")
     require("Objects.requireNonNull(value, \"M3 join value\")" in values,
             "internal canonical value check removed")
     require("carry = M3StringPool.concat(previous, carry);" in values,
@@ -92,6 +96,8 @@ def main():
                     "            }\n            if (!placed)", 1),
                 java.replace("return foldJoinLevels(levels);",
                              "return EMPTY;", 1),
+                java.replace("        if (values.size() == 1) return values.getFirst();\n",
+                             "", 1),
             ]
             for index, mutant in enumerate(hostile):
                 try:
@@ -102,7 +108,7 @@ def main():
     except (OSError, ValueError) as error:
         raise SystemExit("M3_GENERAL_JOIN_CARRY_FAIL|" + str(error)) from error
     print("M3_GENERAL_JOIN_CARRY_PASS|source=1|jitreg=1|mutants=" +
-          ("3" if args.self_test else "0"))
+          ("4" if args.self_test else "0"))
 
 
 if __name__ == "__main__":
