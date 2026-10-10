@@ -52,6 +52,21 @@ public final class M3PositionMaskFactsReceiverTest {
         checks++;
         expectIllegal(() -> facts.autoNativeHistogramCandidate(-1), "negative selection");
         checks++;
+        expectIllegal(() -> M3PositionMaskFacts.fromPrecomputed(
+                "source", 1, 1, 1, 1L, ROOT, 0, 128), "zero native cutoff");
+        checks++;
+        expectIllegal(() -> M3PositionMaskFacts.fromPrecomputed(
+                "source", 1, 1, 1, 1L, ROOT, 64, 0), "zero native slab");
+        checks++;
+        expectIllegal(() -> M3PositionMaskFacts.fromPrecomputed(
+                "source", 1, 1, 1, 1L, ROOT.toUpperCase(), 64, 128), "uppercase digest");
+        checks++;
+        expectNull(() -> M3PositionMaskFacts.fromPrecomputed(
+                null, 1, 1, 1, 1L, ROOT, 64, 128), "null revision");
+        checks++;
+        expectNull(() -> M3PositionMaskFacts.fromPrecomputed(
+                "source", 1, 1, 1, 1L, null, 64, 128), "null digest");
+        checks++;
         System.out.println("M3_POSITION_MASK_FACTS_RECEIVER_PASS checks=" + checks
                 + " metadata_only=" + facts.metadataOnly());
     }
@@ -61,6 +76,15 @@ public final class M3PositionMaskFactsReceiverTest {
             action.run();
             throw new AssertionError(label + " accepted");
         } catch (IllegalArgumentException expected) {
+            // expected
+        }
+    }
+
+    private static void expectNull(Runnable action, String label) {
+        try {
+            action.run();
+            throw new AssertionError(label + " accepted");
+        } catch (NullPointerException expected) {
             // expected
         }
     }
