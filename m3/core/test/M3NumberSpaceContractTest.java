@@ -63,7 +63,7 @@ public final class M3NumberSpaceContractTest {
         String[] targetColumns = targetRow.split("\\t", -1);
         check(targetColumns.length == 11);
         check(targetColumns[1].equals(M3NumberSpace.SOURCE_ID));
-        check(targetColumns[2].equals(M3NumberSpace.RECORD_ID));
+        check(targetColumns[3].equals(M3NumberSpace.RECORD_ID));
         check(targetColumns[6].contains("com.m3.text.M3NumberSpace"));
         check(targetColumns[9].equals("ADMITTED_TYPED_RECEIVER"));
         check(targetColumns[10].equals(M3NumberSpace.SOURCE_REVISION));
