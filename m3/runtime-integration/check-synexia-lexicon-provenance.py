@@ -59,6 +59,9 @@ def main() -> None:
     ]
     if not source_rows:
         fail("no_dictlang_resource_rows")
+    source_paths = [row["synexia_path"] for row in source_rows]
+    if len(set(source_paths)) != len(source_paths):
+        fail("duplicate_manifest_path")
 
     matched = 0
     gutenberg = 0
@@ -82,13 +85,12 @@ def main() -> None:
 
         manifest_license = source["data_license"]
         provenance_license = row["data_license"]
+        for license_marker in ("Public domain", "Project Gutenberg", "MIT"):
+            if license_marker in manifest_license and license_marker not in provenance_license:
+                fail(f"license_mismatch={path}|marker={license_marker}")
         if "Project Gutenberg" in manifest_license:
-            if "Project Gutenberg" not in provenance_license:
-                fail(f"license_mismatch={path}")
             gutenberg += 1
         if "MIT" in manifest_license:
-            if "MIT" not in provenance_license:
-                fail(f"license_mismatch={path}")
             mit += 1
         matched += 1
 
