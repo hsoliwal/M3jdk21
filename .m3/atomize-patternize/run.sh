@@ -6,19 +6,6 @@ here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo="$(cd "$here/../.." && pwd)"
 target="$repo/.m3/target/atomize-patternize"
 inventory="$here/inventory.tsv"
-mode="${M3_ATOM_PATTERN_MODE:-public}"
-
-case "$mode" in
-  public)
-    exec bash "$here/public-verify.sh"
-    ;;
-  maintainer)
-    ;;
-  *)
-    printf 'M3_ATOM_PATTERN_MODE_INVALID:%s\n' "$mode" >&2
-    exit 4
-    ;;
-esac
 manifest="$target/source-files.tsv"
 receipt="$target/execution-receipt.tsv"
 recipe="${SYNEXIA_ATOM_PATTERN_RECIPE:-com.synexia.m3.EveryModuleAtomPatternMastery}"
