@@ -81,6 +81,7 @@ public class M3StringGeneralJoinCarryTest {
         }
         compare(longArray);
         expectNullPieceRejected();
+        expectSingletonNullPreserved();
         System.out.println("M3_GENERAL_JOIN_CARRY_PASS|checks=" + checks);
     }
 
@@ -147,6 +148,13 @@ public class M3StringGeneralJoinCarryTest {
                 operation + " changed canonical owner");
         check(COORDINATE.getLong(actual) == COORDINATE.getLong(expected),
                 operation + " changed canonical UTF-16 coordinate");
+    }
+
+    private static void expectSingletonNullPreserved() throws Exception {
+        ArrayList<Object> values = new ArrayList<>();
+        values.add(null);
+        check(VALUE_JOIN.invoke(null, values) == null,
+                "single-value private fold must preserve the original null result");
     }
 
     private static void expectNullPieceRejected() throws Exception {
