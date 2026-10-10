@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CharDenseLinear
+displayName: M3JDK21 block walk of indexOf(char) that keeps looking up handed to the linear lane
+description: >-
+  The position precompute walks 64-unit blocks with a two-bit-per-unit signal and, where the
+  signal cannot reject, looks the unit up in the block's exact masks through the canonical text.
+  On a dense alphabet the signals pass almost every unit, and on a mid-density one they pass a
+  given unit on most blocks when its bits fall among the alphabet's: indexOf of an absent unit
+  over 16384 dense ASCII units cost 3,344 ns for an atom and 8,859 for a tuple against 221 flat.
+  A forward walk that has looked into eight blocks and found the signal passing in at least half
+  of the blocks it walked now hands the rest of its range to the linear lane (bulk windows and
+  the stock single-unit search, A31/A33), which beats a lookup per block; the reverse walk keeps
+  its blocks, the stock reverse single-unit search being scalar. Java step:
+  M3StringPositionPrecompute and the jtreg proof; no upstream file changed. Stacks on crate
+  m3-needle-plan-band (branch order); the M3StringPositionPrecompute preimage is the A33 postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-char-dense-linear
