@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-fast structural verifier for hash-pinned Java recipe crates.
+"""Fail-fast structural verifier for hash-pinned recipe crates.
 
 The Java recipe remains the admission authority. This source-bound gate catches
 manifest shape, ordering, sentinel, resource existence, and postimage-hash
@@ -18,7 +18,7 @@ HEX = re.compile(r"^[0-9a-f]{64}$")
 TEMPLATE = re.compile(r"^[A-Za-z0-9_.-]+$")
 PART = re.compile(r"^[A-Za-z0-9_$.-]+$")
 HEADER = "# path\tbefore\tafter\ttemplate"
-JAVA_PREFIXES = (
+TARGET_PREFIXES = (
     "src/",
     "test/",
     "m3/ports/",
@@ -35,12 +35,11 @@ def fail(message: str) -> None:
     raise SystemExit(f"M3JDK_JAVA_MANIFEST_FAIL|{message}")
 
 
-def valid_java_path(value: str) -> bool:
+def valid_target_path(value: str) -> bool:
     if (
-        not value.endswith(".java")
-        or "\\" in value
+        "\\" in value
         or len(value) > 4096
-        or not value.startswith(JAVA_PREFIXES)
+        or not value.startswith(TARGET_PREFIXES)
         or any(part in {".", ".."} or not PART.fullmatch(part)
                for part in value.split("/"))
     ):
