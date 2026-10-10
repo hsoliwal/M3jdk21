@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "the bulk-window lanes of M3String (contentIsLatin1, indexOf/lastIndexOf with a flat needle), M3StringMixedCompare (compareIgnoreCase, regionMatchesIgnoreCase), M3StringAtom (cross-coder mismatchUnits), M3StringPositionPrecompute (linearIndexOf/linearLastIndexOf) and String.contentEquals(CharSequence): a 1024- or 4096-unit first window read before the first comparison (A22..A32 lineage, carried to A32 ed79b07acd)",
+      "source_commit": "ed79b07acd",
+      "target": "M3String.windowUnits grades every window 64, 256, 1024, 4096 units; each lane allocates a window only as large as its next read; the flat-needle lanes keep windows of at least twice the needle; full scans keep their steady-state windows",
+      "status": "implemented-locally-verified (G7; flag-off: M3GradedWindowsTest 56,591 checks against the flat String; early differences and early hits 5x..25x faster, within 1.3x..5x of flat; full scans unchanged)",
+      "target_rule": "the same results as the flat String for every window edge"
+    }
+  ]
+}

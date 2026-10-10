@@ -2,8 +2,8 @@
   "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
-  "target_commit": "bbf344e8297b8b8d7a07a5ae28bd27e483f0554d",
-  "patch_sha256": "292204421687f6c972c4f6458f865da3ce9cae783255d83d85f4e6a84142a7f8",
+  "target_commit": "0f48926fc30288c772576f31ad071b7721d605d2",
+  "patch_sha256": "44fb82a231fd89b8b4da7a883ebb2a6375264f5d5e78c8a4db1858a77873acc6",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
     "src/hotspot/share/cds/archiveHeapWriter.cpp": {
@@ -101,7 +101,8 @@
         "c437c18fd0aef8044d8086993d09e6b2e7c689e44564c02ef2cd4da9feaf2dd9",
         "6121d4d26970790bad079f252d020cf448ec8b9ab9b0821d7a53f9f404a6e119",
         "98c0030c0c4df9883315c0bf8e71b8a65ff01287762c335fb02b47d2ba6861b8",
-        "20b548ac0ab2c8aba25e24f9bd4ec5087a8720f4b8082b15863fb42f4d99ff1c"
+        "20b548ac0ab2c8aba25e24f9bd4ec5087a8720f4b8082b15863fb42f4d99ff1c",
+        "da5897b1b8bf375692fe5a545cb64d336b2859954470e2340b1406eada3ec8d6"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringAtom.java": {
@@ -114,7 +115,8 @@
         "7f5a04f4e60429b28f389493a36fd708c3f8da3da8f8559a887ccf871da24431",
         "755aadd90dce399163eaaba5c3b2d4616555e794e24207dc390a37f414b57027",
         "771072177021392542e9d5a1fc576c6bdab169d6410bdd24585d9d2932e090bc",
-        "c295351793b0bbbdee165e8133bda373f16aa57c0edc60a56634eb56b4d1a29f"
+        "c295351793b0bbbdee165e8133bda373f16aa57c0edc60a56634eb56b4d1a29f",
+        "c1c544f067b599fbfd2cc98261dfaf8ccd0f7d7e86eca23c6ca989ec28d7b192"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java": {
@@ -147,7 +149,8 @@
         "57c50151826d2b1e04964a0a573cfd4046e868637dec8f3d428c9b8e33762697",
         "39d1e0b1a98be4129ad206823922b51838daecb71069a14dde8f54a4f98e0515",
         "2e3ee9d888fb426703dea98216a204632fb084ecda04a9d4ee4dd92c2552094e",
-        "24679bf549c97ff149dc882057ee9bb62152a951b9eb86d30bf7c79b2a7bc942"
+        "24679bf549c97ff149dc882057ee9bb62152a951b9eb86d30bf7c79b2a7bc942",
+        "4bbe774e2ca28f81c87d6f71a07b4ec9084952ef82dbca846f7912be4ef5ff8e"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringOwner.java": {
@@ -172,7 +175,8 @@
       "superseded": [
         "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b",
         "8cefde51395f11a84eef731a215a5ea3822cb15ce1fa6edff3442699fd190e28",
-        "bbd59125af34715d04c24f6448fb3c1fdfda484a7676751d14b24c59552fe335"
+        "bbd59125af34715d04c24f6448fb3c1fdfda484a7676751d14b24c59552fe335",
+        "9f97c5a11757689906854d426907d150a472ff0b9e7232fd70bf7558b3e6544c"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java": {
@@ -194,7 +198,7 @@
     },
     "src/java.base/share/classes/java/lang/String.java": {
       "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
-      "after": "43f51d518f5afe15044c9db6cdc212eb08c2e7a6d26ef2b151cc6a3087b48e6e"
+      "after": "ac1f4aa218017a98347485dd1c408b69618b2d694ec40e5d8c71cee07bc893ff"
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
       "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",

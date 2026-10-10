@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.GradedWindows
+displayName: M3JDK21 bulk-window lanes read graded windows so early exits stay cheap
+description: >-
+  The bulk-window lanes of A22 (content coder scan), A27 (flat needles), A28 (case-insensitive
+  folds), A29 (contentEquals), A30 (cross-coder compares) and A31 (single-unit search outside the
+  block range) read a 1024- or 4096-unit first window before looking, so a comparison that differs
+  at the first unit or a search that hits near the start paid a 4..8 KiB copy (a UTF-16
+  compareToIgnoreCase differing at unit 0 over 16384 units: 2.1 us against 0.02 flat). Windows
+  are now graded through M3String.windowUnits (64 units first, then 256, 1024 and 4096), so an
+  early exit reads one small window and a long scan keeps its wide windows. Java step: M3String,
+  M3StringAtom, M3StringMixedCompare, M3StringPositionPrecompute and the jtreg proof; text step:
+  String.java. Stacks on crate m3-block-search-windows (branch order); the preimages are the A32
+  (M3StringPositionPrecompute), A30 (M3StringAtom), A29 (String.java), A28
+  (M3StringMixedCompare) and A27 (M3String) postimages.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-graded-windows
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-graded-windows
