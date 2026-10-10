@@ -21,16 +21,16 @@ import java.util.TreeMap;
  * the lossless, bounded JSON value model needed by the JDK receiver. It never
  * turns an image coordinate into a source identity and it accepts no nested,
  * string, null, or non-finite values because the admitted Synexia field map is
- * limited to boolean, double, int, long, int[] and long[]. Unknown field names
+ * limited to boolean, double, int, long, String, int[] and long[]. Unknown field names
  * remain readable with their JSON value kind, which keeps the receiver
  * forward-compatible without silently changing a known field's type.</p>
  */
 public final class SynexiaPrecomputePayload {
-    public enum Kind { BOOLEAN, INTEGER, DECIMAL, INTEGER_ARRAY }
+    public enum Kind { BOOLEAN, INTEGER, DECIMAL, STRING, INTEGER_ARRAY }
 
     /** One immutable scalar or integer-array payload field. */
     public record Field(Kind kind, boolean booleanValue, long integerValue,
-                        double decimalValue, long[] integerArrayValue) {
+                        double decimalValue, long[] integerArrayValue, String stringValue) {
         public Field {
             Objects.requireNonNull(kind, "kind");
             if (kind == Kind.INTEGER_ARRAY) {
@@ -39,10 +39,17 @@ public final class SynexiaPrecomputePayload {
             } else if (integerArrayValue != null) {
                 throw new IllegalArgumentException("array value on scalar field");
             }
+            if (kind == Kind.STRING) Objects.requireNonNull(stringValue, "stringValue");
+            else if (stringValue != null) throw new IllegalArgumentException("string value on non-string field");
             if (kind != Kind.DECIMAL && decimalValue != 0.0d)
                 throw new IllegalArgumentException("decimal value on non-decimal field");
             if (kind != Kind.INTEGER && kind != Kind.INTEGER_ARRAY && integerValue != 0L)
                 throw new IllegalArgumentException("integer value on non-integer field");
+        }
+
+        public Field(Kind kind, boolean booleanValue, long integerValue,
+                     double decimalValue, long[] integerArrayValue) {
+            this(kind, booleanValue, integerValue, decimalValue, integerArrayValue, null);
         }
 
         public long[] integerArrayValue() {
@@ -56,17 +63,19 @@ public final class SynexiaPrecomputePayload {
             return kind == value.kind && booleanValue == value.booleanValue
                     && integerValue == value.integerValue
                     && Double.doubleToLongBits(decimalValue) == Double.doubleToLongBits(value.decimalValue)
-                    && Arrays.equals(integerArrayValue, value.integerArrayValue);
+                    && Arrays.equals(integerArrayValue, value.integerArrayValue)
+                    && Objects.equals(stringValue, value.stringValue);
         }
 
         @Override
         public int hashCode() {
             int result = Objects.hash(kind, booleanValue, integerValue, decimalValue);
-            return 31 * result + Arrays.hashCode(integerArrayValue);
+            return 31 * (31 * result + Arrays.hashCode(integerArrayValue))
+                    + Objects.hashCode(stringValue);
         }
     }
 
-    private enum Expected { BOOLEAN, DOUBLE, INT, LONG, INT_ARRAY, LONG_ARRAY }
+    private enum Expected { BOOLEAN, DOUBLE, INT, LONG, STRING, INT_ARRAY, LONG_ARRAY }
 
     private static final Map<String, Expected> FIELD_TYPES = fieldTypes();
     private final Map<String, Field> fields;
@@ -104,6 +113,7 @@ public final class SynexiaPrecomputePayload {
         return field.kind() == Kind.INTEGER ? field.integerValue() : field.decimalValue();
     }
     public boolean requireBoolean(String name) { return require(name, Kind.BOOLEAN).booleanValue(); }
+    public String requireString(String name) { return require(name, Kind.STRING).stringValue(); }
 
     public int[] requireIntArray(String name) {
         long[] values = require(name, Kind.INTEGER_ARRAY).integerArrayValue();
@@ -146,6 +156,7 @@ public final class SynexiaPrecomputePayload {
             case BOOLEAN -> out.append(field.booleanValue());
             case INTEGER -> out.append(field.integerValue());
             case DECIMAL -> out.append(Double.toString(field.decimalValue()));
+            case STRING -> appendString(out, field.stringValue());
             case INTEGER_ARRAY -> {
                 out.append('[');
                 long[] values = field.integerArrayValue();
@@ -193,6 +204,7 @@ public final class SynexiaPrecomputePayload {
             result.put(name, Expected.LONG);
         result.put("si_offset", Expected.DOUBLE);
         result.put("si_prefixable", Expected.BOOLEAN);
+        result.put("source_revision", Expected.STRING);
         for (String name : List.of("memberships")) result.put(name, Expected.INT_ARRAY);
         for (String name : List.of("concept_ids", "subjects", "expansion_word_ids")) result.put(name, Expected.LONG_ARRAY);
         return Map.copyOf(result);
@@ -230,6 +242,7 @@ public final class SynexiaPrecomputePayload {
             char current = peek();
             Field field;
             if (current == 't' || current == 'f') field = booleanValue();
+            else if (current == '"') field = new Field(Kind.STRING, false, 0L, 0.0d, null, string());
             else if (current == '[') field = array(name);
             else field = number(name);
             validate(name, field);
@@ -289,6 +302,7 @@ public final class SynexiaPrecomputePayload {
             boolean valid = switch (expected) {
                 case BOOLEAN -> field.kind() == Kind.BOOLEAN;
                 case DOUBLE -> field.kind() == Kind.INTEGER || field.kind() == Kind.DECIMAL;
+                case STRING -> field.kind() == Kind.STRING;
                 case INT -> field.kind() == Kind.INTEGER && field.integerValue() >= Integer.MIN_VALUE
                         && field.integerValue() <= Integer.MAX_VALUE;
                 case LONG -> field.kind() == Kind.INTEGER;
