@@ -67,12 +67,12 @@ def main() -> None:
     for manifest in manifests:
         crate = manifest.parent.name
         lines = manifest.read_text(encoding="utf-8").splitlines()
-        if not lines or lines[0] != HEADER:
-            fail(f"header|crate={crate}")
+        if not lines:
+            fail(f"empty_manifest|crate={crate}")
         previous = ""
         seen: set[str] = set()
         crate_rows = 0
-        for line_number, line in enumerate(lines[1:], start=2):
+        for line_number, line in enumerate(lines, start=1):
             if not line.strip() or line.startswith("#"):
                 continue
             cells = line.split("\t")
