@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.RegexLiteralGate
+displayName: M3JDK21 regex literal-absence gate consuming the subject's precompute
+description: >-
+  Matcher.m3TqAllowsSearch computed exact trigram facts of the subject per matcher (M3TQ.precompute,
+  a sorted long[] of every trigram) for every String subject with literal constraints, flat ones
+  included: 9x..70x slower than the stock JDK for find() with a quoted literal. The gate now
+  consumes the subject's own precompute through JavaLangAccess.m3TrigramFacts (System.java
+  implementation over M3StringSearchPrecompute.trigramFacts, the per-owner source trigram cache the
+  mixed indexOf paths share, band 256..32768 units); a flat String, a sub-region or a length outside
+  the band runs the exact engine, as the stock matcher. Java step: M3StringSearchPrecompute,
+  Matcher, JavaLangAccess and the jtreg proof; text step: System.java (Javadoc the pinned Java
+  parser cannot convert). Stacks on crate m3-streams-builder (its postimages are these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-regex-literal-gate
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-regex-literal-gate

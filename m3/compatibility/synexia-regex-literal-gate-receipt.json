@@ -1,0 +1,114 @@
+{
+  "schema": "M3JDK21_SYNEXIA_REGEX_LITERAL_GATE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-regex-literal-gate-20261009",
+    "pullRequest": null,
+    "commit": "e58e8a015f3",
+    "stackedOn": [
+      {
+        "pullRequest": 10000,
+        "crate": "m3-streams-builder"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.RegexLiteralGate",
+    "crate": "m3-regex-literal-gate",
+    "fossReuseDecisionRow": "regex.literal-gate.cached-facts",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+        "commit": "32cdc05494",
+        "target": "java.util.regex.Matcher.m3TqAllowsSearch",
+        "mechanics": "the A1 M3TQ gate, now fed by the subject's precompute instead of a per-matcher M3TQ.precompute"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "commit": "32cdc05494",
+        "target": "java.lang.M3StringSearchPrecompute.trigramFacts",
+        "mechanics": "the A8/A9 per-owner source trigram cache (sourceFacts) behind a whole-String, band-checked entry"
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java",
+        "commit": "890adb6410",
+        "target": "jdk.internal.access.JavaLangAccess.m3TrigramFacts",
+        "mechanics": "the SharedSecrets accessor java.util.regex uses to reach java.lang package-private state, implemented in System.java"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owners",
+    "disposition": "ADAPT: results equal the stock engine's; refusal only on exact-fact absence; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-streams-builder-20261009 (#553, A17) on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.util.regex.Matcher",
+      "jdk.internal.access.JavaLangAccess",
+      "java.lang.System",
+      "java.lang.M3StringSearchPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed under the supersession model: System.java, Matcher.java and JavaLangAccess.java after-images and hunks regenerated from a synthetic after-state tree; M3StringSearchPrecompute.java owner recorded as superseded; 67 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+      "before": "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4",
+      "after": "9735b094abb84bb203d40e20269534f979b8c18ae2348c4061b2b1a52561de17",
+      "resource": "00-M3StringSearchPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+      "before": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+      "after": "707acfa7f38325eb132657cc9604460703b3a3107882a0d688a11f6fd805ed4b",
+      "resource": "01-Matcher.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java",
+      "before": "b096377681dbc135d90f26abc972769557ae7c271d48ad59d241e149658438e3",
+      "after": "c46439ad9143a19d71003ca51fa65f5da8a33172dd724d6d949a5867b4ba3fff",
+      "resource": "02-JavaLangAccess.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/util/regex/M3RegexLiteralGateTest.java",
+      "before": "ABSENT",
+      "after": "7d041f0da37b782407bede77eeef1fb12858d24ca6d2c45a08cf0836a4fcc5d8",
+      "resource": "03-M3RegexLiteralGateTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/System.java",
+      "before": "4dcf8f1efbfe1b6ee1e9c5417fa3df50647bb55dc636411d783c844aa5e0847c",
+      "after": "e92aaa681e47d851d412c1c995fd573bfcf1ce04347e2cd8bbf4fc46c8960479",
+      "resource": "00-System.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (43 files, 150 classes; sources include System, JavaLangAccess, Matcher, Pattern, M3PatternQuery)",
+    "gateTestLocal": "PASS_WINDOWS M3RegexLiteralGateTest flag-off: 29,376 checks (quoted literals of 1..8 units present and absent, quantified and alternated; derived patterns incl. anchored, multiline, case-insensitive, alternations, classes; find sequences, hitEnd, requireEnd, matches, lookingAt, static matches, regions with transparent and anchoring bounds, find(from), reused and reset matchers over atoms, nested tuples and slices of 0..40000 units, cold and warm per-owner cache, against flat results)",
+    "regressions": "PASS_WINDOWS M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,912; A6 204 + 29",
+    "timing": "flag-off (a18/probe RegexBench + FlatRegexBench, A17 build vs A18 build vs stock JDK 21.0.9): flat quoted-literal find() 16384 units 725 us -> 17 (stock 16), 2048: 35 us -> 2.1 (stock 2.1), 256: 6.8 us -> 0.58 (stock 0.78); M3 absent literal with cached owner facts 1,062 us -> 0.065 at 16384 units, present literal 1,088 us -> 19; fresh owner per matcher 1,180 us -> 1,157 (the once-per-owner precompute); other patterns within noise",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 67 targets under the supersession model; apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3RegexLiteralGateRecipeTest 3/3 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3RegexLiteralGateTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the gate refuses a search only when exact trigram facts of the whole subject prove absence; the facts are the same M3TQ.Facts the per-matcher precompute produced, now the per-owner cache entry",
+    "a flat String subject never pays a facts computation: the stock exact engine runs (the measured 9x..70x regression against stock is removed)",
+    "a sub-region (region(from, to) narrower than the text) or a length outside the 256..32768 band runs the exact engine; no partial facts are computed",
+    "the per-owner facts are computed on the first use inside the band, as the mixed indexOf paths already do (about 70 ns per unit, M3TQ.scanFacts sorts a long[] of every trigram); a one-shot regex over a fresh owner keeps that cost, which the next leaf measures and cuts (facts built as a set instead of a sort)",
+    "SharedSecrets.getJavaLangAccess() may be null before System.initPhase1: the gate then runs the exact engine",
+    "the hitEnd/requireEnd observables of a refused search are unchanged from A1 and equal the flat results in the parity test, anchored patterns included",
+    "stacked on A17: merge after #553 and the Synexia crate PR (#10000 first, content-bearing merges)"
+  ]
+}

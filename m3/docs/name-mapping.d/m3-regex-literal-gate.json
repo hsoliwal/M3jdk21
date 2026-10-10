@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.util.regex.Matcher.m3TqAllowsSearch: M3TQ.precompute of the subject per matcher (a sorted long[] of every trigram) for every String subject with literal constraints, flat Strings included (A1 gate, carried to A17 32cdc05494)",
+      "source_commit": "32cdc05494",
+      "target": "the gate asks JavaLangAccess.m3TrigramFacts(subject) for an M3-backed String whose whole text is the region and refuses the search only when those facts prove absence; a flat String, a sub-region or a length outside the 256..32768 band has no facts and runs the exact engine as the stock matcher; the per-matcher facts fields are removed",
+      "status": "implemented-locally-verified (G7; flag-off: M3RegexLiteralGateTest 29,376 checks against flat results; flat quoted-literal find() back at stock cost, 9x..70x regression removed; absent literal over a cached M3 owner 65 ns)",
+      "target_rule": "find/matches/lookingAt/hitEnd/requireEnd results equal the stock engine's on the same spellings; refusal only on exact-fact absence"
+    },
+    {
+      "source": "java.lang.M3StringSearchPrecompute.sourceFacts(M3String): the per-owner source trigram cache the mixed indexOf paths consult (A8/A9, carried to 32cdc05494)",
+      "source_commit": "32cdc05494",
+      "target": "M3StringSearchPrecompute.trigramFacts(String): the whole-String entry into that cache (null for a flat String, outside the band, or on OutOfMemoryError), exposed through JavaLangAccess.m3TrigramFacts implemented in System.java",
+      "status": "implemented-locally-verified (the facts are computed once per owner on first use, as for indexOf: a fresh owner per matcher keeps the pre-existing cost, 1.16 ms at 16384 units; later matchers and indexOf share them)",
+      "target_rule": "one cache, one computation per owner; the regex gate never computes facts per matcher"
+    }
+  ]
+}
