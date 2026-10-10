@@ -25,6 +25,16 @@ final class M3StringPositionPrecompute {
     private static final int BLOCK_SHIFT = 6;
     private static final int BLOCK_SIZE = 1 << BLOCK_SHIFT;
     private static final int BLOCK_MASK = BLOCK_SIZE - 1;
+    /**
+     * Lookups a forward walk may make before it judges its signals (A37): a walk that has looked
+     * into this many blocks and found the signal passing in at least half of the blocks it walked
+     * is paying a lookup through the canonical text per block, more than the vectorized forward
+     * scan costs per block, and hands the rest of its range to the linear lane. The two-bit-per-
+     * unit signals pass almost every unit on a dense alphabet, and pass a given unit on most
+     * blocks of a mid-density one when its bits fall among the alphabet's. The reverse walk keeps
+     * its blocks: the stock reverse single-unit search is scalar.
+     */
+    private static final int DENSE_LOOKUPS = 8;
 
     private static final int SLOTS = 64;
     private static final int SLOT_MASK = SLOTS - 1;
@@ -53,12 +63,18 @@ final class M3StringPositionPrecompute {
 
         long required = M3StringFacts.codeUnitSignal(unit);
         int index = from;
+        int walked = 0;
+        int lookups = 0;
         while (index < end) {
             int block = index >>> BLOCK_SHIFT;
             int blockEnd = Math.min(end, (block + 1) << BLOCK_SHIFT);
+            walked++;
             if ((blockSignal(source, blocks, block) & required) != required) {
                 index = blockEnd;
                 continue;
+            }
+            if (++lookups >= DENSE_LOOKUPS && lookups * 2 >= walked) {
+                return linearIndexOf(source, unit, index, end);
             }
             long positions;
             try {
@@ -231,10 +247,10 @@ final class M3StringPositionPrecompute {
 
     /**
      * Sources outside the block range (shorter than {@link #MIN_SOURCE_UNITS}, longer than
-     * {@link #MAX_SOURCE_UNITS}, or without a block entry): the units come out in bulk windows in
-     * the source coder (graded through {@link M3String#windowUnits}, A33) and the stock
-     * single-unit search runs over each window (A31); a unit above 0xff is never in Latin-1
-     * storage.
+     * {@link #MAX_SOURCE_UNITS}, or without a block entry) and the rest of a forward walk whose
+     * signals kept passing (A37): the units come out in bulk windows in the source coder (graded
+     * through {@link M3String#windowUnits}, A33) and the stock single-unit search runs over each
+     * window (A31); a unit above 0xff is never in Latin-1 storage.
      */
     private static int linearIndexOf(M3String source, char unit, int from, int end) {
         byte coder = source.coder();
