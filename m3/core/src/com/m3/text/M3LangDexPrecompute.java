@@ -29,7 +29,7 @@ public final class M3LangDexPrecompute {
         public Identity {
             sourceId = text(sourceId, "sourceId");
             recordId = text(recordId, "recordId");
-            glottocode = glottocode(glottocode);
+            glottocode = M3LangDexPrecompute.glottocode(glottocode);
             surface = text(surface, "surface");
             sourceRevision = text(sourceRevision, "sourceRevision");
             domain = Objects.requireNonNull(domain, "domain");
@@ -77,7 +77,7 @@ public final class M3LangDexPrecompute {
     public record Entry(String glottocode, String surface, long conceptId,
                         long frequency, int flags, String lemma) {
         public Entry {
-            glottocode = glottocode(glottocode);
+            glottocode = M3LangDexPrecompute.glottocode(glottocode);
             surface = text(surface, "surface");
             lemma = text(lemma, "lemma");
             if (conceptId <= 0) throw new IllegalArgumentException("conceptId must be positive");
