@@ -22,7 +22,7 @@ public final class M3FuzzyHistogramReceiverCoverageTest {
         int checks = 0;
         check(mapText.contains("synexia_pr\t10126"), "source PR");
         checks++;
-        check(mapText.contains("synexia_head\t7d005c8488a1dcfbf4ca30ea43d55764d8c6d765"),
+        check(mapText.contains("synexia_head\tab4edcbd7eb475a3c9abb12d4a0fc14703a826ec"),
                 "source head");
         checks++;
         check(mapText.contains("target_owner\tcom.m3.text.M3PositionMaskFacts"),
@@ -36,13 +36,13 @@ public final class M3FuzzyHistogramReceiverCoverageTest {
         check(mapText.contains("source_payload_policy\tNO_MASK_IMAGE_BYTES_COPIED"),
                 "payload policy");
         checks++;
-        check(receiptText.contains("receiver_blob\t85e3b64f1bdc6589aae24480778354149b06ee46"),
+        check(receiptText.contains("receiver_blob\t53cf28f7e40f4f8760a8263c0c4cc670fb403188"),
                 "receiver blob");
         checks++;
-        check(receiptText.contains("receiver_test_blob\t70abf688071709c5ab49eb5ac48fb3df5e731976"),
+        check(receiptText.contains("receiver_test_blob\t77d056490e6ce8cee577aa1e4fcafbf6c5c4edd4"),
                 "receiver test blob");
         checks++;
-        check(receiptText.contains("mapping_blob\t4019891ac797b75d2b2a3753d30bf6006e01a9dd"),
+        check(receiptText.contains("mapping_blob\tc1aff08504d7c11541463d2b9925c081e8e4abd0"),
                 "mapping blob");
         checks++;
         check(receiptText.contains("status\tTARGET_METADATA_CONTRACT_ONLY"),
