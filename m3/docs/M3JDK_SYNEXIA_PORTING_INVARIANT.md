@@ -107,10 +107,34 @@ representation is not accepted if it changes public or supported internal behavi
 
 ## Scope discipline
 
-Default transformation scope is the smallest sealed contract boundary, normally FILE. Promotion to
-PACKAGE, MODULE, PROJECT or repository scope must be caused by an observed contract dependency and
-must be recorded in the recipe packet. Independent files/atoms may fan out in parallel; canonical
-promotion/fan-in remains serial and proof-gated.
+Default transformation scope is the smallest sealed contract boundary, normally FILE. The exact
+authority order is:
+
+    FILE -> VISIBILITY -> PACKAGE -> MODULE -> MULTI_MODULE -> LIBRARY_API
+
+The FILE pass may atomize/patternize repeatedly until its recipe reaches a tested fixed point,
+provided the interface, observable behavior and contract remain unchanged. Separate FILE workers
+may fan out independently; passes inside one file remain serial and deterministic. Promotion only
+occurs when an observed visibility/package/module/reactor/API dependency actually crosses that
+boundary, with a new proof gate. An LLM cannot infer broader edit authority for convenience.
+
+## Retirement of copied Synexia recipe sources
+
+The canonical Synexia owner audit and the M3JDK21 exact Git-blob freeze must be reconciled against
+one pinned Synexia commit before any copied recipe sources are deleted. The current pinned snapshot
+has 17 copied `com.synexia.*` Java files: 11 byte-identical canonical mirrors, two divergent
+versions requiring API/behavior/resource parity (hash-pinned Java and segmented-lane native), and
+four `com.synexia.rewrite.scope.*` paths without a same-path canonical owner at that pinned commit.
+
+These are typed migration residues, **not** proof of semantic equivalence. Synexia's canonical
+recipe-parity manifest records each exact path and Git blob. Do not reintroduce the four missing
+packages as duplicate algorithms merely to make the consumer compile. Map them to existing
+Synexia scope owners through separately tested adapters or explicit contract-preserving migration.
+
+Consumer retirement requires an exact canonical Git commit/blob pin, an externally resolved
+Synexia Maven/OpenRewrite artifact, Java 21 JUnit behavior/contract parity, fixed-point
+receipt, and affected target/JDK tests. Until these pass on the exact head, copies remain frozen
+and their retention must not be reported as completed removal.
 
 ## Donors
 
