@@ -29,24 +29,37 @@ final class M3StringCodePointPrecompute {
     private static final int SLOTS = 64;
     private static final int SLOT_MASK = SLOTS - 1;
     private static final int MAX_SOURCE_UNITS = 32_768;
+    /** Under this many units a range is not registered: its bulk count costs less (A39). */
+    private static final int MIN_REPEAT_UNITS = 1024;
     private static final AtomicReferenceArray<Entry> CACHE =
             new AtomicReferenceArray<>(SLOTS);
 
     private M3StringCodePointPrecompute() {}
 
-    /** The geometry already cached for this range, or null without building one (A24). */
+    /**
+     * The geometry cached for this range, built on the range's repeat use (A39): a first use
+     * registers the range and returns null, so the caller counts in bulk once; the next use
+     * builds the geometry (A24), which every later use answers from. Outside the band, null; a
+     * range under {@link #MIN_REPEAT_UNITS} is counted in bulk without registering, the bulk
+     * count costing less than the registration.
+     */
     static Geometry prepared(M3String source) {
         int length = source.length();
         if (length == 0 || length > MAX_SOURCE_UNITS) return null;
         M3StringOwner owner = source.owner();
         long coordinate = source.coordinate();
-        Entry entry = CACHE.get(slot(owner, coordinate));
-        return entry != null
+        int slot = slot(owner, coordinate);
+        Entry entry = CACHE.get(slot);
+        if (entry != null
                 && entry.owner.get() == owner
                 && entry.coordinate == coordinate
-                && entry.geometry.utf16Length == length
-                ? entry.geometry
-                : null;
+                && entry.utf16Length == length) {
+            return entry.geometry != null ? entry.geometry : prepare(source);
+        }
+        if (length >= MIN_REPEAT_UNITS) {
+            CACHE.set(slot, new Entry(new WeakReference<>(owner), coordinate, length, null));
+        }
+        return null;
     }
 
     static Geometry prepare(M3String source) {
@@ -60,7 +73,8 @@ final class M3StringCodePointPrecompute {
             if (entry != null
                     && entry.owner.get() == owner
                     && entry.coordinate == coordinate
-                    && entry.geometry.utf16Length == length) {
+                    && entry.utf16Length == length
+                    && entry.geometry != null) {
                 return entry.geometry;
             }
 
@@ -84,7 +98,7 @@ final class M3StringCodePointPrecompute {
 
             Geometry geometry =
                     new Geometry(length, count == scratch.length ? scratch : Arrays.copyOf(scratch, count));
-            CACHE.set(slot, new Entry(new WeakReference<>(owner), coordinate, geometry));
+            CACHE.set(slot, new Entry(new WeakReference<>(owner), coordinate, length, geometry));
             return geometry;
         } catch (OutOfMemoryError unavailable) {
             return null;
@@ -177,14 +191,17 @@ final class M3StringCodePointPrecompute {
         return low;
     }
 
+    /** A registered range; {@code geometry} is null until its repeat use builds it (A39). */
     private static final class Entry {
         final WeakReference<M3StringOwner> owner;
         final long coordinate;
+        final int utf16Length;
         final Geometry geometry;
 
-        Entry(WeakReference<M3StringOwner> owner, long coordinate, Geometry geometry) {
+        Entry(WeakReference<M3StringOwner> owner, long coordinate, int utf16Length, Geometry geometry) {
             this.owner = owner;
             this.coordinate = coordinate;
+            this.utf16Length = utf16Length;
             this.geometry = geometry;
         }
     }
