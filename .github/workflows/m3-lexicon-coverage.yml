@@ -25,7 +25,7 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - name: Compile and run coverage invariant
+      - name: Compile and run manifest coverage invariant
         working-directory: m3
         shell: bash
         run: |
@@ -35,3 +35,18 @@ jobs:
           javac --release 21 -d build/lexicon-coverage-gate \
             core/test/M3LexiconCoverageInvariantTest.java
           java -ea -cp build/lexicon-coverage-gate M3LexiconCoverageInvariantTest
+
+      - name: Compile and run number receiver contract
+        working-directory: m3
+        shell: bash
+        run: |
+          set -euo pipefail
+          javac --release 21 -d build/lexicon-coverage-gate \
+            core/src/com/m3/text/M3StringPiece.java \
+            core/src/com/m3/text/JoinedM3StringPiece.java \
+            core/src/com/m3/text/StorageIdentity.java \
+            core/src/com/m3/text/LocalM3Arena.java \
+            core/src/com/m3/text/LocalM3StringPiece.java \
+            core/src/com/m3/text/M3NumberSpace.java \
+            core/test/M3NumberSpaceContractTest.java
+          java -ea -cp build/lexicon-coverage-gate M3NumberSpaceContractTest
