@@ -1,4 +1,4 @@
 # path	before	after	template
-src/java.base/share/classes/java/lang/M3String.java	a585b7945b5d3dfb999a732e7f6d7044ed13884611bea91a42361ec3b0b2ec	2cc43ff897427f87b248e216eba6a0a9523171e805d422216e3aa9674769fbc8	00-M3String.java.txt
+src/java.base/share/classes/java/lang/M3String.java	ABSENT	2cc43ff897427f87b248e216eba6a0a9523171e805d422216e3aa9674769fbc8	00-M3String.java.txt
 src/java.base/share/classes/java/lang/String.java	cedec979daa3f4871fb378306d664d40f5704e66c24ff22d4e8c57d586b00b02	a4ed726a7348da2c6f624c9783138c57677d93c8b4f9ea4b2f4aadb22d017dc6	01-String.java.txt
 test/jdk/java/lang/String/M3StringStreamsTest.java	ABSENT	87171fe234c449b6db03333d7040a54407926809076dc6fd826ea1e452f86b1b	02-M3StringStreamsTest.java.txt
