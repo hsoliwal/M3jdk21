@@ -20,6 +20,8 @@ on:
       - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
       - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
       - "m3/compatibility/test_synexia_recipe_home_policy.py"
+      - "m3/compatibility/verify_synexia_recipe_pin.py"
+      - "m3/compatibility/test_verify_synexia_recipe_pin.py"
       - "m3/compatibility/synexia-string-focused-recipe-receipt-20261008.tsv"
       - "m3/compatibility/synexia-string-focused-estate-binding-20261008.tsv"
       - "m3/compatibility/test_synexia_string_focused_recipe_receipt.py"
@@ -46,6 +48,8 @@ on:
       - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
       - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
       - "m3/compatibility/test_synexia_recipe_home_policy.py"
+      - "m3/compatibility/verify_synexia_recipe_pin.py"
+      - "m3/compatibility/test_verify_synexia_recipe_pin.py"
       - "m3/compatibility/synexia-string-focused-recipe-receipt-20261008.tsv"
       - "m3/compatibility/synexia-string-focused-estate-binding-20261008.tsv"
       - "m3/compatibility/test_synexia_string_focused_recipe_receipt.py"
@@ -94,10 +98,13 @@ jobs:
           set -euo pipefail
           base="$(git merge-base origin/master HEAD)"
           git diff --check "$base"...HEAD
+      - name: Verify pinned external Synexia revision and exact Git blobs
+        run: python m3/compatibility/verify_synexia_recipe_pin.py .canonical-synexia
       - name: Receiver policy unit test
         run: >
           python -m unittest
           m3/compatibility/test_synexia_recipe_home_policy.py
+          m3/compatibility/test_verify_synexia_recipe_pin.py
           m3/compatibility/test_synexia_a3_regex_memory_receipt.py
           m3/compatibility/test_synexia_m3index_ownership_policy.py
           m3/compatibility/test_synexia_string_focused_recipe_receipt.py
