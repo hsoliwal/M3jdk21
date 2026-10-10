@@ -175,6 +175,8 @@ public final class M3CodeTextPrecomputeCoverageTest {
                                 "Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange"),
                 "native JNI ABI contract is incomplete");
         check(bridge.contains("m3.code.text.native.path")
+                        && bridge.contains("m3.code.text.native.required")
+                        && bridge.contains("no native path is configured")
                         && bridge.contains("M3CodeTextSignalBatch.validate")
                         && bridge.contains("M3CodeTextSignalBatch.analyze")
                         && bridge.contains("nativeAnalyzeRange")
