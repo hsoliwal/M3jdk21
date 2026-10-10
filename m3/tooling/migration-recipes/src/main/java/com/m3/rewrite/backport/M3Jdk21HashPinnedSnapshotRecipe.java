@@ -265,7 +265,9 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
         Set<String> paths = new HashSet<>();
         String previous = "";
 
+        int lineNumber = 0;
         for (String line : resource(root + "manifest.tsv").lines().toList()) {
+            lineNumber++;
             if (line.isBlank() || line.startsWith("#")) {
                 continue;
             }
@@ -278,7 +280,15 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
                     || !("ABSENT".equals(cells[1]) || sha(cells[1]))
                     || !sha(cells[2])
                     || !cells[3].matches("[A-Za-z0-9_.-]+")) {
-                throw new IllegalStateException("invalid M3JDK21 crate manifest row");
+                throw new IllegalStateException(
+                        "invalid M3JDK21 crate manifest row: root="
+                                + root
+                                + " line="
+                                + lineNumber
+                                + " row="
+                                + String.join("<TAB>", cells)
+                                + " previous="
+                                + previous);
             }
             previous = cells[0];
             String text = resource(root + cells[3]);
