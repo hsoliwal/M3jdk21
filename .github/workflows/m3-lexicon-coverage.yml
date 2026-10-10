@@ -9,6 +9,7 @@ on:
   push:
     branches:
       - develop
+      - codex/m3jdk-precompute-coverage-invariant-20261010
     paths:
       - "m3/core/test/M3LexiconCoverageInvariantTest.java"
       - "m3/lexicon/**"
