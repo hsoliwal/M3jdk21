@@ -1,9 +1,19 @@
 name: M3 language n-gram contract
 
 on:
+  pull_request:
+    paths:
+      - "m3/core/src/com/m3/text/M3LanguageNgramPrecompute.java"
+      - "m3/core/test/M3LanguageNgramPrecomputeTest.java"
+      - ".github/workflows/m3-language-ngram.yml"
   push:
     branches:
+      - develop
       - codex/language-pack-ngram-contract-20261010
+    paths:
+      - "m3/core/src/com/m3/text/M3LanguageNgramPrecompute.java"
+      - "m3/core/test/M3LanguageNgramPrecomputeTest.java"
+      - ".github/workflows/m3-language-ngram.yml"
 
 permissions:
   contents: read
