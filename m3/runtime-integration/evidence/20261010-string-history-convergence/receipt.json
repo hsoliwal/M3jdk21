@@ -1,0 +1,29 @@
+{
+  "schema": "M3_STRING_HISTORY_CONVERGENCE_RECEIVER_V1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_pr": 10161,
+  "source_revision": "3f17e745439946c4defed3749d0854e1378d946c",
+  "source_crate": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-history/overflow-ci",
+  "recipe": "com.synexia.rewrite.M3StringOverflowCiSuccessor",
+  "target_preimage_revision": "3a6bf8dbd955e504ec2b274f0f07e7711148f6a3",
+  "target_predecessors": [670, 668],
+  "status": "DRAFT_CANDIDATE_NOT_ADMITTED",
+  "execution": "SEALED_POSTIMAGE_STAGING_SDK_NOT_RUN",
+  "source_ownership": "Synexia",
+  "runtime_ownership": "M3JDK21",
+  "changed_runtime_code": false,
+  "selected_tests": 34,
+  "preserved_invariant_blob": "7626033a0fcd43bf285f0bac42422077d924e5c2",
+  "product_postimages": {
+    "test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java": {"git_blob":"04a62436389a02d735ec1a210052757818eef592","sha256":"587f7f63fb419970ffdc889bca05335eb3f49ebcc97d3810906b3587ff9e7ab4"},
+    ".github/workflows/mindex-string-backing.yml": {"git_blob":"6951b8c70c6908ee940fb8dbfd28acf8d66e0230","sha256":"bd8b7c7565548bc2528dbd11bf8b509fba149cb19a37006bc626b445e82d3e6c"},
+    "m3/runtime-integration/check-m3string-concat-overflow.py": {"git_blob":"b929015123a858afe27e5b263e1fffb0db36e91c","sha256":"d14814a19dc363951de5a4e74dbe9cd04dc9824f993d57e66dd61a02014045f2"}
+  },
+  "executed_source_proofs": {"python_test_methods":7,"selector_removal_cases":34,"java21_test_compile":"PASS","stock_guard_and_compiler_ast":"RED_BEFORE_GREEN_AFTER"},
+  "sdk_replay": "NOT_RUN_MAVEN_UNAVAILABLE",
+  "full_synexia_reactor": "NOT_RUN",
+  "full_target_source_invariants": "NOT_RUN",
+  "matched_image_jtreg_hotspot_jni": "NOT_RUN",
+  "runtime_family_promotion": false,
+  "notes": "Source-contract observations only. Before promotion run the source crate's real SDK verify, compare its three generated receiver files with these exact postimages, and execute the matching M3JDK image/jtreg/JNI gates. Existing per-file rights and all runtime owners are unchanged."
+}

@@ -48,17 +48,27 @@ public class M3StringConcatLengthOverflowTest {
                 "String.join with delimiter");
 
         StringJoiner joiner = new StringJoiner(":", "[", "]");
-        joiner.add(billion).add(billion);
-        expectLogicalLengthLimit(joiner::toString, "StringJoiner");
+        joiner.add(billion);
+        check(joiner.length() == billion.length() + 2,
+                "legal StringJoiner length includes prefix and suffix");
+        // StringJoiner rejects the second element at add(), before toString() is reachable.
+        // Its existing size-limit diagnostic is distinct from the M3 pool boundary.
+        expectOutOfMemory(() -> joiner.add(billion), "StringJoiner.add",
+                "Requested array size exceeds VM limit");
         System.out.println("M3_STRING_CONCAT_LENGTH_OVERFLOW_PASS|checks=" + checks);
     }
 
     private static void expectLogicalLengthLimit(Runnable operation, String label) {
+        expectOutOfMemory(operation, label, "Required length exceeds implementation limit");
+    }
+
+    private static void expectOutOfMemory(
+            Runnable operation, String label, String expectedMessage) {
         checks++;
         try {
             operation.run();
         } catch (OutOfMemoryError expected) {
-            if (!"Required length exceeds implementation limit".equals(expected.getMessage())) {
+            if (!expectedMessage.equals(expected.getMessage())) {
                 throw new AssertionError("unrelated OOME instead of logical length guard: " + label,
                         expected);
             }
