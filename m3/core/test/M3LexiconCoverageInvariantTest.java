@@ -64,15 +64,33 @@ public final class M3LexiconCoverageInvariantTest {
             "SharedLexiconPrecomputeCatalog.TranslationIdentity",
             "AcronymPrecompute");
 
+    private static final Set<String> REQUIRED_LANGDEX_IDENTITY_FIELDS = Set.of(
+            "langdex_source_id",
+            "langdex_record_id",
+            "langdex_glottocode",
+            "langdex_surface",
+            "langdex_source_revision",
+            "langdex_domain",
+            "langdex_canonical_schema",
+            "langdex_canonical_bytes",
+            "langdex_canonical_digest",
+            "langdex_concept_id",
+            "langdex_source_glottocode",
+            "langdex_source_surface",
+            "langdex_target_glottocode",
+            "langdex_target_surface");
+
     public static void main(String[] args) throws Exception {
         Path sourceManifest = Path.of("lexicon", "synexia-source-manifest.tsv");
         Path fieldMap = Path.of("lexicon", "synexia-precompute-field-map.tsv");
         Path familyMap = Path.of("lexicon", "synexia-precompute-family-map.tsv");
+        Path langDexIdentityMap = Path.of("lexicon", "synexia-langdex-identity-field-map.tsv");
         Set<String> sourceIds = firstColumn(sourceManifest);
         Set<String> mappedFamilies = mappedFamilies(fieldMap);
         Set<String> mappedPayloadFields = mappedPayloadFields(fieldMap);
         Set<String> requiredPayloadFields = precomputeFields(sourceManifest);
         Set<String> sidecarFamilies = secondColumn(familyMap);
+        Set<String> mappedLangDexIdentityFields = langDexIdentityFields(langDexIdentityMap);
 
         check(sourceIds.containsAll(REQUIRED_SOURCE_IDS),
                 "source manifest is missing admitted families: "
@@ -86,11 +104,15 @@ public final class M3LexiconCoverageInvariantTest {
         check(sidecarFamilies.containsAll(REQUIRED_FAMILY_SIDECARS),
                 "precompute family map is missing sidecars: "
                         + difference(REQUIRED_FAMILY_SIDECARS, sidecarFamilies));
+        check(mappedLangDexIdentityFields.containsAll(REQUIRED_LANGDEX_IDENTITY_FIELDS),
+                "LangDex identity map is missing canonical fields: "
+                        + difference(REQUIRED_LANGDEX_IDENTITY_FIELDS, mappedLangDexIdentityFields));
 
         System.out.println("M3JDK_LEXICON_PRECOMPUTE_COVERAGE_PASS "
                 + "source_families=" + REQUIRED_SOURCE_IDS.size()
                 + " typed_families=" + REQUIRED_TYPED_FAMILIES.size()
-                + " payload_fields=" + requiredPayloadFields.size());
+                + " payload_fields=" + requiredPayloadFields.size()
+                + " langdex_identity_fields=" + REQUIRED_LANGDEX_IDENTITY_FIELDS.size());
     }
 
     private static Set<String> firstColumn(Path path) throws Exception {
@@ -150,6 +172,25 @@ public final class M3LexiconCoverageInvariantTest {
             if (fields[5].equals("MAPPED")) {
                 values.add(fields[3]);
             }
+        }
+        return values;
+    }
+
+    private static Set<String> langDexIdentityFields(Path path) throws Exception {
+        Set<String> values = new HashSet<>();
+        for (String line : Files.readAllLines(path, StandardCharsets.UTF_8)) {
+            if (line.isBlank() || line.startsWith("target_type\t")) {
+                continue;
+            }
+            String[] fields = line.split("\\t", -1);
+            if (fields.length < 7
+                    || !fields[4].equals("true")
+                    || !fields[5].equals("m3langdex-family-v1:synexia.langdex.tsv")
+                    || !(fields[0].equals("M3LangDexPrecompute.Identity")
+                        || fields[0].equals("M3LangDexPrecompute.TranslationIdentity"))) {
+                throw new AssertionError("invalid LangDex identity-map row: " + line);
+            }
+            values.add(fields[3]);
         }
         return values;
     }
