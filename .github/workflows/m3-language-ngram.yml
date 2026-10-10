@@ -1,0 +1,46 @@
+name: M3 language n-gram contract
+
+on:
+  pull_request:
+    paths:
+      - "m3/core/src/com/m3/text/M3LanguageNgramPrecompute.java"
+      - "m3/core/test/M3LanguageNgramPrecomputeTest.java"
+      - ".github/workflows/m3-language-ngram.yml"
+  push:
+    branches:
+      - develop
+      - codex/language-pack-ngram-contract-20261010
+    paths:
+      - "m3/core/src/com/m3/text/M3LanguageNgramPrecompute.java"
+      - "m3/core/test/M3LanguageNgramPrecomputeTest.java"
+      - ".github/workflows/m3-language-ngram.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  language-ngram-contract:
+    name: M3LanguageNgramPrecomputeTest
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Compile and run contract
+        working-directory: m3
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf build/language-ngram-contract
+          mkdir -p build/language-ngram-contract
+          javac --release 21 -d build/language-ngram-contract \
+            core/src/com/m3/text/M3LanguageNgramPrecompute.java \
+            core/test/M3LanguageNgramPrecomputeTest.java
+          java -ea -cp build/language-ngram-contract M3LanguageNgramPrecomputeTest
