@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.M3StringPositionPrecompute.indexOf: the forward block walk looked a unit up in every block whose two-bit-per-unit signal could not reject, through the canonical text; on a dense alphabet the signals pass almost every unit, and on a mid-density one they pass a given unit on most blocks (A31/A32 lineage, carried to A36 d959f89448)",
+      "source_commit": "d959f89448",
+      "target": "a forward walk that has looked into eight blocks and found the signal passing in at least half of the blocks it walked hands the rest of its range to the linear lane (bulk windows and the stock single-unit search, A31/A33); a walk that mostly rejects keeps its blocks; hits inside the first blocks keep the exact masks; the reverse walk keeps its blocks (the stock reverse single-unit search is scalar)",
+      "status": "implemented-locally-verified (G7; flag-off: M3CharDenseLinearTest 62,120 checks against the flat String on every call; indexOf(char miss) over 16384 dense ASCII units, atom 3,344 ns -> 823 (221), tuple 8,859 -> 1,095, the control unit 4,429 -> 858 (370) and 4,977 -> 875)",
+      "target_rule": "the same index as the flat String for every unit over every source"
+    }
+  ]
+}

@@ -149,3 +149,7 @@ Regenerated against 6fef93347e: no upstream target changed, so `runtime.patch` a
 ## 2026-10-10 re-seal (A36 needle plan band)
 
 Regenerated against 5aee4dc806: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3String.java` and `M3StringSearchPrecompute.java` record their new owners as reviewed `superseded` hashes. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-10 re-seal (A37 dense char walk to the linear lane)
+
+Regenerated against 68804b36e1: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3StringPositionPrecompute.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.

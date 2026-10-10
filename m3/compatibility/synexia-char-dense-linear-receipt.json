@@ -1,0 +1,77 @@
+{
+  "schema": "M3JDK21_SYNEXIA_CHAR_DENSE_LINEAR_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-char-dense-linear-20261010",
+    "pullRequest": null,
+    "commit": "100334476fd6fcdeae6d63c72dda2593deac9b04",
+    "stackedOn": [
+      {
+        "pullRequest": 10133,
+        "crate": "m3-needle-plan-band"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.CharDenseLinear",
+    "crate": "m3-char-dense-linear",
+    "fossReuseDecisionRow": "string.search.char-dense-linear",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+        "commit": "d959f89448",
+        "target": "java.lang.M3StringPositionPrecompute.indexOf / DENSE_LOOKUPS",
+        "mechanics": "two per-call counters, blocks walked and lookups made; once DENSE_LOOKUPS lookups were made and they are at least half of the blocks walked, the forward walk returns the A31/A33 linear lane over the rest of the range; lastIndexOf keeps its walk"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same index as the flat String for every unit over every source; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-needle-plan-band-20261010 (#661, A36) on #660 on #657 on #654 on #653 on #610 on #609 on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringPositionPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3StringPositionPrecompute.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+      "before": "9f97c5a11757689906854d426907d150a472ff0b9e7232fd70bf7558b3e6544c",
+      "after": "276a755da3428a96fdc7f34eb69a89c5f7a7f3f4a267f08b9d0fda2e53695b38",
+      "resource": "00-M3StringPositionPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3CharDenseLinearTest.java",
+      "before": "ABSENT",
+      "after": "f8263667db7cae4e156ee56010bc91516a287013811174a3641522732766cc1b",
+      "resource": "01-M3CharDenseLinearTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3CharDenseLinearTest flag-off: 62,120 checks (indexOf(char), indexOf(char, from), indexOf(char, begin, end), lastIndexOf(char) and lastIndexOf(char, from) with the first, the last, a middle, an absent and random units, over atoms, tuples and slices of texts over a sparse alphabet, a dense ASCII alphabet, the full Latin-1 range, a CJK-mixed and a dense BMP alphabet, of 0..40000 units on both sides of the 256..32768 block band, each search run three times, the blocks built on the repeat use; against the flat String on every call)",
+    "regressions": "PASS_WINDOWS M3NeedlePlanBandTest 122,823; M3NeedleLaneTest 997,980; M3TrigramRepeatTest 13,068; M3NeedleArgTest 73,440; M3RegexLiteralGateTest 29,376; M3TQFactsBuildTest 23,595; M3StringM3OnM3Test 121,574; M3IndexOfFlatNeedleTest 137,948; M3RegexSubjectViewTest 9,567; M3GradedWindowsTest 56,591; M3CharSearchRepeatTest 25,380; M3CharSearchWindowsTest 61,650; M3StringPositionInvariant6Test 13; M3StringLiteralSplitTest 53,378; M3MixedCoderCompareTest 30,620; M3ContentEqualsTest 7,980; M3IgnoreCaseWindowsTest 188,512; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,919; A6 204 + 29",
+    "timing": "flag-off (a37/probe/CharSearchBench, the minimum of three runs per build on a loaded box, bench-a36*.tsv on the A36 build vs bench-a37*.tsv on this one, bench-compare-min3.txt; hot, blocks built; flat in parentheses): indexOf(char miss) over 16384 dense ASCII units, atom 3,344 ns -> 823 (221), tuple 8,859 -> 1,095, the control unit 4,429 -> 858 (370) and 4,977 -> 875; 16384 dense BMP units 4,361 -> 1,774 (513), tuple 10,437 -> 2,708, the control unit 7,103 -> 2,182 (455) and 10,876 -> 1,768; 16384 CJK-mixed units 1,037 -> 640 (391), tuple 1,858 -> 849, the control unit 2,548 -> 1,589 (368) and 3,216 -> 2,758; 2048 dense ASCII tuple 685 -> 362 (30), atom 298 -> 358 and 318 -> 235; 2048 dense BMP 392 -> 334 (59), tuple 914 -> 494, the control unit 636 -> 384 and 1,317 -> 561; sparse (letters) text at 16384 units within noise for atoms (299 -> 336 and 267 -> 333; flat 265) with one loss for tuples (the control unit 287 -> 508); 256-unit sources, 2048-unit letters and hits at 3, 100, the middle and the end at 256 and 2048 units unchanged (the 16384-unit hit rows moved 21..34 -> 49..80 for atoms between runs that share the block-0 path, a JIT-state swing seen the other way in earlier runs); lastIndexOf rows unchanged (the reverse walk kept)",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3StringPositionPrecompute.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3CharDenseLinearRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3CharDenseLinearTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the signals carry two bits per unit in 64: a dense alphabet sets almost every bit, and a mid-density one sets the bits of some units in most blocks, so a walk may pay a lookup through the canonical text per block, which costs more than the vectorized forward scan costs per block; eight lookups in at most sixteen walked blocks are the sign that the walk is paying",
+    "the judgement is per call and per unit: a unit the signals mostly reject keeps the walk (the walk then costs a signal read per block), a unit they mostly pass takes the lane; no field is added, so the invariant-6 lanes of the block structure are untouched",
+    "hits found through the exact masks inside the first blocks are unchanged; a hit after the hand-off is found by the graded windows from that point",
+    "measured and dropped: a run of consecutive non-rejecting blocks (two, eight or sixteen) fired on sparse text by chance or watered the dense gains down, and a count of saturated block signals (sixty of sixty-four bits) never fired on mid-density text, where the walk loses most",
+    "measured and kept out: the same hand-off in lastIndexOf lost (16384 dense ASCII units: 2,193 ns to 7,167, the flat String 6,177), because the stock reverse single-unit search is a scalar loop while the forward one is an intrinsic; a reverse lane built on the forward intrinsic is the next leaf",
+    "stacked on A36: merge after #661 and the Synexia crate PR (#10133 first, content-bearing merges); the owner commit is 97f76d912b"
+  ]
+}
