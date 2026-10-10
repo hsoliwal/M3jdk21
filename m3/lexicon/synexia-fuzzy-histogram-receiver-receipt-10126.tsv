@@ -1,0 +1,24 @@
+schema_version	M3JDK_FUZZY_HISTOGRAM_RECEIVER_RECEIPT_V1
+synexia_repository	hsoliwal/com.synexia
+synexia_pr	10126
+synexia_head	ab4edcbd7eb475a3c9abb12d4a0fc14703a826ec
+synexia_source_path	synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexPositionMasks.java
+synexia_recipe_root	2ef0b23481b8d73d9ee331f4a23138a8ff82765238504b5a1bea21958d6dd7d5
+synexia_foss_decision	mindex-fuzzy-histogram-auto-native-crossover-20261010=NO_FIT
+m3jdk_repository	hsoliwal/M3jdk21
+m3jdk_branch	codex/m3jdk-fuzzy-histogram-receiver-20261010
+m3jdk_head	6d5dd13aabf3eced4d936926c516a5fab4288e3c
+receiver_path	m3/core/src/com/m3/text/M3PositionMaskFacts.java
+receiver_blob	53cf28f7e40f4f8760a8263c0c4cc670fb403188
+receiver_test_path	m3/core/test/M3PositionMaskFactsReceiverTest.java
+receiver_test_blob	77d056490e6ce8cee577aa1e4fcafbf6c5c4edd4
+mapping_path	m3/lexicon/synexia-fuzzy-histogram-target-map-10126.tsv
+mapping_blob	c1aff08504d7c11541463d2b9925c081e8e4abd0
+precompute_fields	row_count,block_count,entry_count,primitive_payload_bytes,root_hash,auto_native_histogram_max_rows,native_slab_rows,source_revision
+route_policy	0=JAVA;1..64=NATIVE_CANDIDATE;65+=JAVA
+source_payload	NOT_COPIED
+native_execution	NOT_CLAIMED
+full_search_performance	NOT_CLAIMED
+status	TARGET_METADATA_CONTRACT_ONLY
+ownership	Synexia implementation and payload owner; M3JDK receiver metadata
+license	Apache-2.0

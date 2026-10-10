@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
+name: M3 fuzzy histogram receiver
+
+on:
+  pull_request:
+    paths:
+      - 'm3/core/src/com/m3/text/M3PositionMaskFacts.java'
+      - 'm3/core/test/M3PositionMaskFactsReceiverTest.java'
+      - 'm3/core/test/M3FuzzyHistogramReceiverCoverageTest.java'
+      - 'm3/lexicon/synexia-fuzzy-histogram-*.tsv'
+      - '.github/workflows/m3-fuzzy-histogram-receiver.yml'
+  push:
+    branches:
+      - codex/m3jdk-fuzzy-histogram-receiver-20261010
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  receiver:
+    name: Java 21 receiver and custody proof
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Compile receiver and proofs
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf m3/build/m3-fuzzy-histogram-receiver
+          mkdir -p m3/build/m3-fuzzy-histogram-receiver
+          javac --release 21 -Xlint:all -Werror             -d m3/build/m3-fuzzy-histogram-receiver             m3/core/src/com/m3/text/M3PositionMaskFacts.java             m3/core/test/M3PositionMaskFactsReceiverTest.java             m3/core/test/M3FuzzyHistogramReceiverCoverageTest.java
+
+      - name: Run receiver proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -cp m3/build/m3-fuzzy-histogram-receiver             M3PositionMaskFactsReceiverTest
+
+      - name: Run receipt coverage proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -cp m3/build/m3-fuzzy-histogram-receiver             M3FuzzyHistogramReceiverCoverageTest
