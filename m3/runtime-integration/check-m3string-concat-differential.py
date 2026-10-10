@@ -231,9 +231,14 @@ def main() -> None:
         ("M3StringPool.concat(canonicalize(first), canonicalize(second))",
          "canonical-concat-owner"),
     ]:
-        require(pool if label not in {"composed-java-hash", "composed-facts"} else tuple_source
-                if label == "composed-java-hash"
-                else m3, fragment, label)
+        source = (
+            tuple_source
+            if label in {"composed-java-hash", "composed-facts"}
+            else m3
+            if label == "canonical-concat-owner"
+            else pool
+        )
+        require(source, fragment, label)
 
     rng = random.Random(20261010)
     alphabet = ("", "a", "z", "é", "Ā", "\ud800", "\udfff", "😀", "ab", "é\ud800")
