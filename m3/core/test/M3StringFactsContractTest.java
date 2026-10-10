@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 
-/** Contract proof for the Synexia TextFacts to M3StringFacts target map. */
+/** Contract proof for the Synexia TextFacts to the canonical M3String receiver. */
 public final class M3StringFactsContractTest {
     private static int checks;
 
@@ -20,41 +20,50 @@ public final class M3StringFactsContractTest {
         }
     }
 
+    private static void sameFacts(M3StringFacts left, M3StringFacts right) {
+        check(left.utf16Length == right.utf16Length);
+        check(left.codePointCount == right.codePointCount);
+        check(left.unpairedSurrogateCount == right.unpairedSurrogateCount);
+        check(left.nonBmpCodePointCount == right.nonBmpCodePointCount);
+        check(left.javaHashCode == right.javaHashCode);
+        check(left.ascii == right.ascii);
+        check(left.latin1 == right.latin1);
+        check(left.containsWhitespace == right.containsWhitespace);
+    }
+
     public static void main(String[] args) throws Exception {
         String expected = "A\ud83d\ude00\ud800\u00ff\u2003";
-        M3StringFacts facts = M3StringFacts.of(new HiddenSequence(expected));
-        check(facts.utf16Length() == expected.length());
-        check(facts.codePointCount() == expected.codePointCount(0, expected.length()));
-        check(facts.unpairedSurrogateCount() == 1);
-        check(facts.nonBmpCodePointCount() == 1);
-        check(facts.javaHashCode() == expected.hashCode());
-        check(!facts.ascii());
-        check(!facts.latin1());
-        check(facts.containsWhitespace());
+        M3StringFacts facts = M3String.canonicalize(expected).facts();
+        check(facts.utf16Length == expected.length());
+        check(facts.codePointCount == expected.codePointCount(0, expected.length()));
+        check(facts.unpairedSurrogateCount == 1);
+        check(facts.nonBmpCodePointCount == 1);
+        check(facts.javaHashCode == expected.hashCode());
+        check(facts.javaHash == facts.javaHashCode);
+        check(!facts.ascii);
+        check(!facts.latin1);
+        check(facts.containsWhitespace);
 
-        M3StringFacts left = M3StringFacts.of(new HiddenSequence("x\ud83d"));
-        M3StringFacts right = M3StringFacts.of(new HiddenSequence("\ude00y"));
-        M3StringFacts joined = M3StringFacts.compose(left, right, '\ud83d', '\ude00');
-        check(joined.javaHashCode() == "x\ud83d\ude00y".hashCode());
-        check(joined.codePointCount() == 3);
-        check(joined.unpairedSurrogateCount() == 0);
-        check(joined.nonBmpCodePointCount() == 1);
-        check(joined.ascii());
-        check(joined.latin1());
-        check(!joined.containsWhitespace());
+        M3StringFacts left = M3String.canonicalize("x\ud83d").facts();
+        M3StringFacts right = M3String.canonicalize("\ude00y").facts();
+        M3StringFacts joined = M3StringFacts.compose(left, right);
+        check(joined.javaHashCode == "x\ud83d\ude00y".hashCode());
+        check(joined.codePointCount == 3);
+        check(joined.unpairedSurrogateCount == 0);
+        check(joined.nonBmpCodePointCount == 1);
+        check(!joined.ascii);
+        check(!joined.latin1);
+        check(!joined.containsWhitespace);
 
-        M3StringFacts rightFacts = M3StringFacts.of(new HiddenSequence("\u00e9\u2003"));
-        M3StringFacts associativeLeft = M3StringFacts.compose(left, right, '\ud83d', '\ude00');
-        M3StringFacts associative = M3StringFacts.compose(
-                associativeLeft, rightFacts, 'y', '\u00e9');
-        M3StringFacts direct = M3StringFacts.of(
-                new HiddenSequence("x\ud83d\ude00y\u00e9\u2003"));
-        check(associative.equals(direct));
+        M3StringFacts rightFacts = M3String.canonicalize("\u00e9\u2003").facts();
+        M3StringFacts associativeLeft = M3StringFacts.compose(left, right);
+        M3StringFacts associative = M3StringFacts.compose(associativeLeft, rightFacts);
+        M3StringFacts direct = M3String.canonicalize("x\ud83d\ude00y\u00e9\u2003").facts();
+        sameFacts(associative, direct);
 
-        M3StringFacts empty = M3StringFacts.of(new HiddenSequence(""));
-        M3StringFacts emptyJoin = M3StringFacts.compose(empty, joined, 'x', 'x');
-        check(emptyJoin.equals(joined));
-        check(M3StringFacts.compose(joined, empty, 'y', 'x').equals(joined));
+        M3StringFacts empty = M3String.empty().facts();
+        sameFacts(M3StringFacts.compose(empty, joined), joined);
+        sameFacts(M3StringFacts.compose(joined, empty), joined);
 
         String map = Files.readString(
                 Path.of("lexicon", "synexia-string-facts-target-map.tsv"),
@@ -70,38 +79,12 @@ public final class M3StringFactsContractTest {
         check(columns[3].equals("TextFacts"));
         check(columns[5].contains("contains_whitespace"));
         check(columns[6].equals("java.lang.M3StringFacts"));
+        check(columns[7].contains("scan(M3String)"));
+        check(columns[7].contains("compose(M3StringFacts,M3StringFacts)"));
         check(columns[8].equals("Apache-2.0"));
         check(columns[9].equals("ADMITTED_TYPED_RECEIVER"));
 
         System.out.println("M3JDK_STRING_FACTS_CONTRACT_PASS checks=" + checks
                 + " fields=8 composition=PASS materialization=NONE");
-    }
-
-    private static final class HiddenSequence implements CharSequence {
-        private final String value;
-
-        HiddenSequence(String value) {
-            this.value = value;
-        }
-
-        @Override
-        public int length() {
-            return value.length();
-        }
-
-        @Override
-        public char charAt(int index) {
-            return value.charAt(index);
-        }
-
-        @Override
-        public CharSequence subSequence(int start, int end) {
-            return new HiddenSequence(value.substring(start, end));
-        }
-
-        @Override
-        public String toString() {
-            throw new AssertionError("M3StringFacts materialized the CharSequence");
-        }
     }
 }
