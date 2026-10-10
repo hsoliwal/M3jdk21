@@ -19,4 +19,4 @@ M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/tooling/
 M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml	TARGET_PRODUCT_ADAPTER	com.synexia.rewrite.M3A3RegexMemoryLab	Apache-2.0	true
 M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml	TARGET_PRODUCT_ADAPTER	com.synexia.rewrite.M3JdkHandoff	Apache-2.0	true
 M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/tooling/migration-recipes/src/main/java/com/synexia/**	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-openrewrite-recipes	Apache-2.0	true
-M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/collections/recipe/**	TARGET_PRODUCT_ADAPTER	com.synexia.rewrite.M3CollectionLanes;com.synexia.rewrite.M3SegmentedLaneNativeRecipe	Apache-2.0	true
+M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/collections/recipe/**	TARGET_PRODUCT_ADAPTER	com.synexia.rewrite.M3CollectionLanes	Apache-2.0	true
