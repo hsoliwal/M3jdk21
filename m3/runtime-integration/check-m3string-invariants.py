@@ -822,7 +822,7 @@ critical_surfaces = {
     "lastIndexOf(String)": "M3String storage = m3();",
     "prepared reverse search": "return storage.lastIndexOf(target, fromIndex);",
     "replace(char,char)": "M3String replaced = storage.replace(oldChar, newChar);",
-    "replace(CharSequence,CharSequence)": "M3String replaced = storage.replace(targetM3, replacementM3);",
+    "replace(CharSequence,CharSequence)": "M3String replaced = sourceM3.replace(targetM3, replacementM3);",
     "replaceFirst(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, true);",
     "replaceAll(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, false);",
     "substring": "return new String(storage.slice(beginIndex, endIndex));",
@@ -845,6 +845,14 @@ critical_surfaces = {
 for surface, marker in critical_surfaces.items():
     if marker not in string:
         fail(f"critical String surface lost M3 route: {surface}")
+
+for marker in [
+    "M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);",
+    "if (targetM3 == null) targetM3 = M3String.canonicalize(trgtStr);",
+    "if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);",
+]:
+    if marker not in string:
+        fail(f"CharSequence replacement canonical fallback missing: {marker}")
 
 # Recovered indexed regex replacement is a conservative literal atom, not a regex engine.
 literal_history = read("m3/history/string-literal-replacement-lineage.tsv")
