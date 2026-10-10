@@ -6,7 +6,7 @@ helper = (ROOT / "src/java.base/share/classes/java/lang/StringConcatHelper.java"
 pool = (ROOT / "src/java.base/share/classes/java/lang/M3StringPool.java").read_text(encoding="utf-8")
 m3 = (ROOT / "src/java.base/share/classes/java/lang/M3String.java").read_text(encoding="utf-8")
 
-start = helper.find("static String m3Concat(String[] constants, Object[] args)")
+start = helper.find("static String m3Concat(String[] constants, String[] args)")
 if start < 0:
     raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|missing m3Concat")
 end = helper.find("\n    /**", start)
