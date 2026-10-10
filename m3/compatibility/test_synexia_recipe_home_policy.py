@@ -42,10 +42,10 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        # The three A3/JNI receiver rows were admitted after the original 16-row freeze.
-        # Keep exact cardinality and reject duplicate surfaces; do not relax ownership rules.
-        self.assertEqual(19, len(rows))
-        self.assertEqual(19, len({row["local_surface"] for row in rows}))
+        # Canonical copied-Synexia residue is now explicitly classified in addition to the
+        # earlier target/residue surfaces. Keep exact cardinality and reject duplicate surfaces.
+        self.assertEqual(20, len(rows))
+        self.assertEqual(20, len({row["local_surface"] for row in rows}))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
@@ -59,6 +59,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**",
             "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/**",
             "m3/indexdb/**",
+            "m3/tooling/migration-recipes/src/main/java/com/synexia/**",
         ):
             self.assertEqual(
                 "MIGRATION_RESIDUE_NOT_CANONICAL",
@@ -147,9 +148,9 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with RESIDUE.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(22, len(rows))
+        self.assertEqual(39, len(rows))
         frozen = {row["path"]: row for row in rows}
-        self.assertEqual(22, len(frozen))
+        self.assertEqual(39, len(frozen))
 
         actual: set[str] = set()
         for exact in (
@@ -164,6 +165,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/a3",
+            "tooling/migration-recipes/src/main/java/com/synexia/rewrite",
             "indexdb/src/main/java/com/m3",
         ):
             start = ROOT / directory
