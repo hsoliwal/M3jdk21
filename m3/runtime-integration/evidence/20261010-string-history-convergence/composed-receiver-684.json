@@ -1,0 +1,25 @@
+{
+  "schema": "M3JDK21_STRING_COMPOSED_RECEIVER_V1",
+  "observed_master": "e617717424bd0af23881fb383777ae14dc7c8bb4",
+  "receiver_pr": 684,
+  "receiver_branch": "m3/string-overflow-general-join-carry-convergence-20261010",
+  "source_authority": "Synexia",
+  "source_recipes": [
+    {"synexia_pr": 10158, "recipe": "com.synexia.rewrite.M3Jdk21StringConcatOverflowCurrent"},
+    {"synexia_pr": 10161, "recipe": "com.synexia.rewrite.M3StringOverflowCiSuccessor"},
+    {"synexia_pr": 10162, "recipe": "com.synexia.rewrite.M3Jdk21StringGeneralJoinCarry"}
+  ],
+  "target_authority": "M3JDK21",
+  "selector_count": 35,
+  "blobs": {
+    "src/java.base/share/classes/java/lang/M3StringPool.java": "514247a2e6c3704e03a9b47682f74e481f66585f",
+    "src/java.base/share/classes/java/lang/M3String.java": "1eee603f1fddcaf07c0277cc92939fbba9663560",
+    "test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java": "04a62436389a02d735ec1a210052757818eef592",
+    "test/jdk/java/lang/String/M3StringGeneralJoinCarryTest.java": "42b71ca21c4b7bef795133858a46d1a34b09b1f3",
+    "m3/runtime-integration/check-m3string-concat-overflow.py": "b929015123a858afe27e5b263e1fffb0db36e91c",
+    "m3/runtime-integration/check-m3string-general-join-carry.py": "37600e1cfefadd8fa784935de3fb7a78a0a6bea1",
+    ".github/workflows/mindex-string-backing.yml": "3be5a25a96963c928caf51d420a67f7a124ca50a"
+  },
+  "state": "DRAFT_PENDING_MATCHING_IMAGE_JTREG_HOTSPOT_JNI_AND_SOURCE_RECIPE_GATES",
+  "runtime_dependency_on_synexia": false
+}
