@@ -188,6 +188,7 @@ final class M3String implements CharSequence {
         M3String[] levels =
                 new M3String[Integer.SIZE - Integer.numberOfLeadingZeros(parts.length)];
         for (String part : parts) {
+            Objects.requireNonNull(part, "part");
             if (!joinAddDesignated(levels, part)) return null;
         }
         return foldJoinLevels(levels);
@@ -275,6 +276,7 @@ final class M3String implements CharSequence {
      */
     private static M3String joinValues(ArrayList<M3String> values) {
         if (values.isEmpty()) return EMPTY;
+        if (values.size() == 1) return values.getFirst();
         M3String[] levels =
                 new M3String[Integer.SIZE - Integer.numberOfLeadingZeros(values.size())];
         for (M3String value : values) {
