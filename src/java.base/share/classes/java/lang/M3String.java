@@ -1199,7 +1199,13 @@ final class M3String implements CharSequence {
         M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
         if (plan != null) {
             if (!M3StringSearchPrecompute.mayContain(this, plan)) return -1;
-            return M3StringSearchPrecompute.indexOf(this, checked, plan, from, end);
+            // The needle comes out once in its compact value and the haystack takes the flat
+            // needle's window lane (A35): the stock vectorized search over bulk windows beats the
+            // per-unit skip search over the owner at every size.
+            byte[] units = checked.compactValue();
+            byte unitsCoder = units.length == checked.length() ? String.LATIN1 : String.UTF16;
+            if (coder() == String.LATIN1 && unitsCoder == String.UTF16) return -1;
+            return indexOfUnits(units, unitsCoder, checked.length(), from, end);
         }
 
         int limit = end - checked.length();
@@ -1225,7 +1231,11 @@ final class M3String implements CharSequence {
         M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
         if (plan != null) {
             if (!M3StringSearchPrecompute.mayContain(this, plan)) return -1;
-            return M3StringSearchPrecompute.lastIndexOf(this, checked, plan, maximumStart);
+            // The needle's compact value and the reverse window lane (A35), as for indexOf.
+            byte[] units = checked.compactValue();
+            byte unitsCoder = units.length == checked.length() ? String.LATIN1 : String.UTF16;
+            if (coder() == String.LATIN1 && unitsCoder == String.UTF16) return -1;
+            return lastIndexOfUnits(units, unitsCoder, checked.length(), maximumStart);
         }
 
         char first = checked.charAt(0);
@@ -1273,7 +1283,8 @@ final class M3String implements CharSequence {
      * {@link #windowUnits}, never shorter than twice the needle) and the stock vectorized search
      * runs over each window; consecutive windows overlap by the needle's length minus one, so a
      * match straddling a window edge is seen by the next window.
-     * Prepared facts prove absence first; a UTF-16 needle is never in a Latin-1 haystack.
+     * Prepared facts prove absence first; a UTF-16 needle is never in a Latin-1 haystack. An
+     * M3 needle takes its own lane (A35), which shares the window loop.
      */
     int indexOf(String needle, int fromIndex, int endIndex) {
         int end = Math.min(length(), endIndex);
@@ -1282,11 +1293,23 @@ final class M3String implements CharSequence {
         if (needleLength == 0) return Math.min(from, end);
         if (needleLength == 1) return indexOf(needle.charAt(0), from, end);
         if (from > end - needleLength) return -1;
+        M3String target = needle.m3();
+        if (target != null) return indexOf(target, from, end);
         M3StringFacts prepared = factsIfPrepared();
         if (prepared != null && !prepared.mayContain(needle)) return -1;
         byte coder = coder();
         if (coder == String.LATIN1 && !needle.isLatin1()) return -1;
         if (searchWindow(end - from, needleLength, coder) < 0) return indexOfPerUnit(needle, from, end);
+        return indexOfUnits(needle.value(), needle.coder(), needleLength, from, end);
+    }
+
+    /**
+     * Index in {@code [from, end)} of a needle given as its compact value (a flat String's value,
+     * or an M3 needle's {@link #compactValue}) with the coder that value has, or -1: the window
+     * loop of the flat needle's lane (A27, graded by A33), shared with the M3 needle's lane (A35).
+     */
+    private int indexOfUnits(byte[] units, byte unitsCoder, int needleLength, int from, int end) {
+        byte coder = coder();
         int floor = (int) Math.min(end - from, 2L * needleLength);
         byte[] window = null;
         for (int start = from, done = 0; ; ) {
@@ -1294,7 +1317,7 @@ final class M3String implements CharSequence {
             int count = Math.min(remaining, Math.max(windowUnits(done, remaining), floor));
             if (window == null || window.length < count << coder) window = new byte[count << coder];
             getBytes(window, start, 0, coder, count);
-            int found = String.indexOf(window, coder, count, needle, 0);
+            int found = windowIndexOf(window, coder, count, units, unitsCoder, needleLength);
             if (found >= 0) return start + found;
             if (count == remaining) return -1;
             int step = count - needleLength + 1;
@@ -1306,7 +1329,8 @@ final class M3String implements CharSequence {
     /**
      * Last index of a flat needle starting at or before {@code maximumStart}, or -1 (A27): bulk
      * windows walked from the end, each overlapping the previous by the needle's length minus
-     * one, searched by the stock reverse search.
+     * one, searched by the stock reverse search. An M3 needle takes its own lane (A35), which
+     * shares the window loop.
      */
     int lastIndexOf(String needle, int maximumStart) {
         int needleLength = needle.length();
@@ -1314,12 +1338,25 @@ final class M3String implements CharSequence {
         if (start < 0) return -1;
         if (needleLength == 0) return start;
         if (needleLength == 1) return lastIndexOf(needle.charAt(0), start);
+        M3String target = needle.m3();
+        if (target != null) return lastIndexOf(target, start);
         M3StringFacts prepared = factsIfPrepared();
         if (prepared != null && !prepared.mayContain(needle)) return -1;
         byte coder = coder();
         if (coder == String.LATIN1 && !needle.isLatin1()) return -1;
         int end = start + needleLength;
         if (searchWindow(end, needleLength, coder) < 0) return lastIndexOfPerUnit(needle, start);
+        return lastIndexOfUnits(needle.value(), needle.coder(), needleLength, start);
+    }
+
+    /**
+     * Last index at or before {@code maximumStart} of a needle given as its compact value with
+     * the coder that value has, or -1: the reverse window loop of the flat needle's lane (A27,
+     * graded by A33), shared with the M3 needle's lane (A35).
+     */
+    private int lastIndexOfUnits(byte[] units, byte unitsCoder, int needleLength, int maximumStart) {
+        byte coder = coder();
+        int end = maximumStart + needleLength;
         int floor = (int) Math.min(end, 2L * needleLength);
         byte[] window = null;
         for (int stop = end, done = 0; ; ) {
@@ -1327,7 +1364,7 @@ final class M3String implements CharSequence {
             int begin = stop - count;
             if (window == null || window.length < count << coder) window = new byte[count << coder];
             getBytes(window, begin, 0, coder, count);
-            int found = String.lastIndexOf(window, coder, count, needle, count - needleLength);
+            int found = windowLastIndexOf(window, coder, count, units, unitsCoder, needleLength);
             if (found >= 0) return begin + found;
             if (begin == 0) return -1;
             int step = count - needleLength + 1;
@@ -1343,6 +1380,31 @@ final class M3String implements CharSequence {
     private static int searchWindow(int span, int needleLength, byte coder) {
         long units = Math.min(span, Math.max(SEARCH_WINDOW, 2L * needleLength));
         return (units << coder) > Integer.MAX_VALUE - 8 ? -1 : (int) units;
+    }
+
+    /** The stock forward search of a needle's compact value over one window, as String dispatches it. */
+    private static int windowIndexOf(byte[] window, byte coder, int count, byte[] units,
+            byte unitsCoder, int needleLength) {
+        if (coder == unitsCoder) {
+            return coder == String.LATIN1
+                    ? StringLatin1.indexOf(window, count, units, needleLength, 0)
+                    : StringUTF16.indexOf(window, count, units, needleLength, 0);
+        }
+        if (coder == String.LATIN1) return -1;
+        return StringUTF16.indexOfLatin1(window, count, units, needleLength, 0);
+    }
+
+    /** The stock reverse search of a needle's compact value over one window, as String dispatches it. */
+    private static int windowLastIndexOf(byte[] window, byte coder, int count, byte[] units,
+            byte unitsCoder, int needleLength) {
+        int from = count - needleLength;
+        if (coder == unitsCoder) {
+            return coder == String.LATIN1
+                    ? StringLatin1.lastIndexOf(window, count, units, needleLength, from)
+                    : StringUTF16.lastIndexOf(window, count, units, needleLength, from);
+        }
+        if (coder == String.LATIN1) return -1;
+        return StringUTF16.lastIndexOfLatin1(window, count, units, needleLength, from);
     }
 
     private int indexOfPerUnit(String needle, int from, int end) {
