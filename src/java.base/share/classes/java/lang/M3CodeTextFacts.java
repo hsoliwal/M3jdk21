@@ -83,6 +83,42 @@ final class M3CodeTextFacts {
         this.minHash = minHash.clone();
     }
 
+    static M3CodeTextFacts fromPrecomputed(
+            int utf16Length,
+            int codePointCount,
+            int textFlags,
+            long contentHash64,
+            long presence64,
+            long simHash64,
+            long lexicalPacked,
+            int javaKeywordHits,
+            int codeScore,
+            int regexScore,
+            long[] minHash) {
+        Objects.requireNonNull(minHash, "minHash");
+        if (utf16Length < 0
+                || codePointCount < 0
+                || codePointCount > utf16Length
+                || javaKeywordHits < 0
+                || codeScore < 0
+                || regexScore < 0
+                || minHash.length != MIN_HASH_LANES) {
+            throw new IllegalArgumentException("invalid precomputed code-text facts");
+        }
+        return new M3CodeTextFacts(
+                utf16Length,
+                codePointCount,
+                textFlags,
+                contentHash64,
+                presence64,
+                simHash64,
+                lexicalPacked,
+                javaKeywordHits,
+                codeScore,
+                regexScore,
+                minHash);
+    }
+
     static M3CodeTextFacts scan(CharSequence source) {
         Objects.requireNonNull(source, "source");
         char[] units = new char[source.length()];
