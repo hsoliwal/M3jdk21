@@ -1079,7 +1079,7 @@ for fragment in [
 for fragment in [
     "M3String replaceEmptyTarget(M3String replacement)",
     "pieces.add(slice(index, index + 1));",
-    "return new String(storage.replaceEmptyTarget(replacementM3));",
+    "return replaced == sourceM3 ? this : new String(replaced);",
 ]:
     if fragment not in (m3 + string):
         fail(f"M3 empty-target replacement route missing: {fragment}")

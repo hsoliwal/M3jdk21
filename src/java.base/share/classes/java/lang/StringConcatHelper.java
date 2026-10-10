@@ -476,6 +476,30 @@ final class StringConcatHelper {
         return new String(result);
     }
 
+    static String m3Concat(String[] constants, Object[] args) {
+        M3String result = M3String.empty();
+        for (int index = 0; index < args.length; index++) {
+            String constant = constants[index];
+            if (constant != null && !constant.isEmpty()) {
+                M3String piece = M3String.canonicalize(constant);
+                result = result.length() == 0 ? piece : result.concat(piece);
+            }
+
+            String argument = stringOf(args[index]);
+            if (!argument.isEmpty()) {
+                M3String piece = M3String.canonicalize(argument);
+                result = result.length() == 0 ? piece : result.concat(piece);
+            }
+        }
+
+        String suffix = constants[args.length];
+        if (suffix != null && !suffix.isEmpty()) {
+            M3String piece = M3String.canonicalize(suffix);
+            result = result.length() == 0 ? piece : result.concat(piece);
+        }
+        return new String(result);
+    }
+
     /**
      * Produce a String from a concatenation of single argument, which we
      * end up using for trivial concatenations like {@code "" + arg}.

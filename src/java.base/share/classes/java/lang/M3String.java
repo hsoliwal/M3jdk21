@@ -1231,7 +1231,7 @@ final class M3String implements CharSequence {
         if (!isLiteralRegex(regex) || replacement == null) return false;
         for (int index = 0; index < replacement.length(); index++) {
             char unit = replacement.charAt(index);
-            if (unit == '$' || unit == '\\') return false;
+            if (Character.isSurrogate(unit) || unit == '$' || unit == '\\') return false;
         }
         return true;
     }

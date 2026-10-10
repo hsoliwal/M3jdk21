@@ -96,6 +96,16 @@ public final class SharedLexiconPrecomputeCatalog {
         }
     }
 
+    /** Exact source identity for the canonical Synexia acronym family. */
+    public record AcronymIdentity(String sourceId, String recordId) {
+        public AcronymIdentity {
+            sourceId = text(sourceId, "sourceId");
+            recordId = text(recordId, "recordId");
+            if (!"dictlang.acronyms".equals(sourceId))
+                throw new IllegalArgumentException("acronym identity has the wrong source family");
+        }
+    }
+
     private final Map<TranslationIdentity, M3LexiconPrecompute.TranslationProjection> translations;
     private final Map<SpellScope, M3LexiconPrecompute.SpellIndex> spellIndexes;
     private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes;
@@ -103,6 +113,7 @@ public final class SharedLexiconPrecomputeCatalog {
     private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies;
     private final Map<NumberIdentity, M3LexiconPrecompute.NumberPrecompute> numbers;
     private final Map<SiUnitIdentity, M3LexiconPrecompute.SiUnitPrecompute> siUnits;
+    private final Map<AcronymIdentity, M3LexiconPrecompute.AcronymPrecompute> acronyms;
 
     private SharedLexiconPrecomputeCatalog(Builder builder) {
         translations = Map.copyOf(builder.translations);
@@ -112,6 +123,7 @@ public final class SharedLexiconPrecomputeCatalog {
         tokenFrequencies = Map.copyOf(builder.tokenFrequencies);
         numbers = Map.copyOf(builder.numbers);
         siUnits = Map.copyOf(builder.siUnits);
+        acronyms = Map.copyOf(builder.acronyms);
     }
 
     public static Builder builder() { return new Builder(); }
@@ -122,6 +134,10 @@ public final class SharedLexiconPrecomputeCatalog {
 
     public Optional<M3LexiconPrecompute.SiUnitPrecompute> siUnitAt(SiUnitIdentity identity) {
         return Optional.ofNullable(siUnits.get(Objects.requireNonNull(identity, "identity")));
+    }
+
+    public Optional<M3LexiconPrecompute.AcronymPrecompute> acronymAt(AcronymIdentity identity) {
+        return Optional.ofNullable(acronyms.get(Objects.requireNonNull(identity, "identity")));
     }
 
     public Optional<M3LexiconPrecompute.TranslationProjection> translationAt(TranslationIdentity identity) {
@@ -148,6 +164,7 @@ public final class SharedLexiconPrecomputeCatalog {
         private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies = new HashMap<>();
         private final Map<NumberIdentity, M3LexiconPrecompute.NumberPrecompute> numbers = new HashMap<>();
         private final Map<SiUnitIdentity, M3LexiconPrecompute.SiUnitPrecompute> siUnits = new HashMap<>();
+        private final Map<AcronymIdentity, M3LexiconPrecompute.AcronymPrecompute> acronyms = new HashMap<>();
 
         public Builder number(NumberIdentity identity, M3LexiconPrecompute.NumberPrecompute value) {
             Objects.requireNonNull(identity, "number key");
@@ -161,6 +178,15 @@ public final class SharedLexiconPrecomputeCatalog {
 
         public Builder siUnit(SiUnitIdentity identity, M3LexiconPrecompute.SiUnitPrecompute value) {
             put(siUnits, identity, value, "SI unit");
+            return this;
+        }
+
+        public Builder acronym(AcronymIdentity identity, M3LexiconPrecompute.AcronymPrecompute value) {
+            Objects.requireNonNull(identity, "acronym key");
+            Objects.requireNonNull(value, "acronym value");
+            if (!identity.recordId().equals(value.acronym()))
+                throw new IllegalArgumentException("acronym identity does not match precompute");
+            put(acronyms, identity, value, "acronym");
             return this;
         }
 

@@ -312,7 +312,7 @@ public final class String
      * @param  count
      *         The length
      *
-     * @throws  IndexOutOfBoundsException
+     * @exception  IndexOutOfBoundsException
      *          If {@code offset} is negative, {@code count} is negative, or
      *          {@code offset} is greater than {@code value.length - count}
      */
@@ -343,11 +343,11 @@ public final class String
      * @param  count
      *         The length
      *
-     * @throws  IllegalArgumentException
+     * @exception  IllegalArgumentException
      *          If any invalid Unicode code point is found in {@code
      *          codePoints}
      *
-     * @throws  IndexOutOfBoundsException
+     * @exception  IndexOutOfBoundsException
      *          If {@code offset} is negative, {@code count} is negative, or
      *          {@code offset} is greater than {@code codePoints.length - count}
      *
@@ -413,7 +413,7 @@ public final class String
      * @param  count
      *         The length
      *
-     * @throws  IndexOutOfBoundsException
+     * @exception  IndexOutOfBoundsException
      *          If {@code offset} is negative, {@code count} is negative, or
      *          {@code offset} is greater than {@code ascii.length - count}
      *
@@ -511,10 +511,10 @@ public final class String
      *         The name of a supported {@linkplain java.nio.charset.Charset
      *         charset}
      *
-     * @throws  UnsupportedEncodingException
+     * @exception  UnsupportedEncodingException
      *          If the named charset is not supported
      *
-     * @throws  IndexOutOfBoundsException
+     * @exception  IndexOutOfBoundsException
      *          If {@code offset} is negative, {@code length} is negative, or
      *          {@code offset} is greater than {@code bytes.length - length}
      *
@@ -549,7 +549,7 @@ public final class String
      *         The {@linkplain java.nio.charset.Charset charset} to be used to
      *         decode the {@code bytes}
      *
-     * @throws  IndexOutOfBoundsException
+     * @exception  IndexOutOfBoundsException
      *          If {@code offset} is negative, {@code length} is negative, or
      *          {@code offset} is greater than {@code bytes.length - length}
      *
@@ -1462,7 +1462,7 @@ public final class String
      *         The name of a supported {@linkplain java.nio.charset.Charset
      *         charset}
      *
-     * @throws  UnsupportedEncodingException
+     * @exception  UnsupportedEncodingException
      *          If the named charset is not supported
      *
      * @since  1.1
@@ -1516,7 +1516,7 @@ public final class String
      * @param  length
      *         The number of bytes to decode
      *
-     * @throws  IndexOutOfBoundsException
+     * @exception  IndexOutOfBoundsException
      *          If {@code offset} is negative, {@code length} is negative, or
      *          {@code offset} is greater than {@code bytes.length - length}
      *
@@ -1619,7 +1619,7 @@ public final class String
      * @param      index   the index of the {@code char} value.
      * @return     the {@code char} value at the specified index of this string.
      *             The first {@code char} value is at index {@code 0}.
-     * @throws     IndexOutOfBoundsException  if the {@code index}
+     * @exception     IndexOutOfBoundsException  if the {@code index}
      *             argument is negative or not less than the length of this
      *             string.
      */
@@ -1652,7 +1652,7 @@ public final class String
      * @param      index the index to the {@code char} values
      * @return     the code point value of the character at the
      *             {@code index}
-     * @throws     IndexOutOfBoundsException  if the {@code index}
+     * @exception     IndexOutOfBoundsException  if the {@code index}
      *             argument is negative or not less than the length of this
      *             string.
      * @since      1.5
@@ -1695,7 +1695,7 @@ public final class String
      *
      * @param     index the index following the code point that should be returned
      * @return    the Unicode code point value before the given index.
-     * @throws    IndexOutOfBoundsException if the {@code index}
+     * @exception    IndexOutOfBoundsException if the {@code index}
      *            argument is less than 1 or greater than the length
      *            of this string.
      * @since     1.5
@@ -1734,7 +1734,7 @@ public final class String
      * the text range.
      * @return the number of Unicode code points in the specified text
      * range
-     * @throws    IndexOutOfBoundsException if the
+     * @exception    IndexOutOfBoundsException if the
      * {@code beginIndex} is negative, or {@code endIndex}
      * is larger than the length of this {@code String}, or
      * {@code beginIndex} is larger than {@code endIndex}.
@@ -1762,7 +1762,7 @@ public final class String
      * @param index the index to be offset
      * @param codePointOffset the offset in code points
      * @return the index within this {@code String}
-     * @throws    IndexOutOfBoundsException if {@code index}
+     * @exception    IndexOutOfBoundsException if {@code index}
      *   is negative or larger than the length of this
      *   {@code String}, or if {@code codePointOffset} is positive
      *   and the substring starting with {@code index} has fewer
@@ -1810,7 +1810,7 @@ public final class String
      *                        to copy.
      * @param      dst        the destination array.
      * @param      dstBegin   the start offset in the destination array.
-     * @throws    IndexOutOfBoundsException If any of the following
+     * @exception    IndexOutOfBoundsException If any of the following
      *            is true:
      *            <ul><li>{@code srcBegin} is negative.
      *            <li>{@code srcBegin} is greater than {@code srcEnd}
@@ -1866,7 +1866,7 @@ public final class String
      * @param  dstBegin
      *         The start offset in the destination array
      *
-     * @throws  IndexOutOfBoundsException
+     * @exception  IndexOutOfBoundsException
      *          If any of the following is true:
      *          <ul>
      *            <li> {@code srcBegin} is negative
@@ -1907,7 +1907,7 @@ public final class String
      *
      * @return  The resultant byte array
      *
-     * @throws  UnsupportedEncodingException
+     * @exception  UnsupportedEncodingException
      *          If the named charset is not supported
      *
      * @since  1.1
@@ -2765,7 +2765,7 @@ public final class String
      *          character sequence represented by this object that is greater
      *          than or equal to {@code beginIndex} and less than {@code endIndex},
      *          or {@code -1} if the character does not occur.
-     * @throws  StringIndexOutOfBoundsException if {@code beginIndex}
+     * @exception  StringIndexOutOfBoundsException if {@code beginIndex}
      *          is negative, or {@code endIndex} is larger than the length of
      *          this {@code String} object, or {@code beginIndex} is larger than
      *          {@code endIndex}.
@@ -2949,7 +2949,7 @@ public final class String
      * @return  the index of the first occurrence of the specified substring
      *          within the specified index range,
      *          or {@code -1} if there is no such occurrence.
-     * @throws  StringIndexOutOfBoundsException if {@code beginIndex}
+     * @exception  StringIndexOutOfBoundsException if {@code beginIndex}
      *          is negative, or {@code endIndex} is larger than the length of
      *          this {@code String} object, or {@code beginIndex} is larger than
      *          {@code endIndex}.
@@ -3133,7 +3133,7 @@ public final class String
      *
      * @param      beginIndex   the beginning index, inclusive.
      * @return     the specified substring.
-     * @throws     IndexOutOfBoundsException  if
+     * @exception     IndexOutOfBoundsException  if
      *             {@code beginIndex} is negative or larger than the
      *             length of this {@code String} object.
      */
@@ -3156,7 +3156,7 @@ public final class String
      * @param      beginIndex   the beginning index, inclusive.
      * @param      endIndex     the ending index, exclusive.
      * @return     the specified substring.
-     * @throws     IndexOutOfBoundsException  if the
+     * @exception     IndexOutOfBoundsException  if the
      *             {@code beginIndex} is negative, or
      *             {@code endIndex} is larger than the length of
      *             this {@code String} object, or
@@ -3203,7 +3203,7 @@ public final class String
      * @param   endIndex     the end index, exclusive.
      * @return  the specified subsequence.
      *
-     * @throws  IndexOutOfBoundsException
+     * @exception  IndexOutOfBoundsException
      *          if {@code beginIndex} or {@code endIndex} is negative,
      *          if {@code endIndex} is greater than {@code length()},
      *          or if {@code beginIndex} is greater than {@code endIndex}
@@ -3312,7 +3312,7 @@ public final class String
      * @return  {@code true} if, and only if, this string matches the
      *          given regular expression
      *
-     * @throws  PatternSyntaxException
+     * @exception  PatternSyntaxException
      *          if the regular expression's syntax is invalid
      *
      * @see java.util.regex.Pattern
@@ -3368,7 +3368,7 @@ public final class String
      *
      * @return  The resulting {@code String}
      *
-     * @throws  PatternSyntaxException
+     * @exception  PatternSyntaxException
      *          if the regular expression's syntax is invalid
      *
      * @see java.util.regex.Pattern
@@ -3416,7 +3416,7 @@ public final class String
      *
      * @return  The resulting {@code String}
      *
-     * @throws  PatternSyntaxException
+     * @exception  PatternSyntaxException
      *          if the regular expression's syntax is invalid
      *
      * @see java.util.regex.Pattern
@@ -3594,7 +3594,7 @@ public final class String
      * @return  the array of strings computed by splitting this string
      *          around matches of the given regular expression
      *
-     * @throws  PatternSyntaxException
+     * @exception  PatternSyntaxException
      *          if the regular expression's syntax is invalid
      *
      * @see java.util.regex.Pattern
@@ -3812,7 +3812,7 @@ public final class String
      * @return  the array of strings computed by splitting this string
      *          around matches of the given regular expression
      *
-     * @throws  PatternSyntaxException
+     * @exception  PatternSyntaxException
      *          if the regular expression's syntax is invalid
      *
      * @see java.util.regex.Pattern
@@ -3842,7 +3842,7 @@ public final class String
      * @return a new {@code String} that is composed of the {@code elements}
      *         separated by the {@code delimiter}
      *
-     * @throws NullPointerException If {@code delimiter} or {@code elements}
+     * @exception NullPointerException If {@code delimiter} or {@code elements}
      *         is {@code null}
      *
      * @see java.util.StringJoiner
@@ -3957,7 +3957,7 @@ public final class String
      * @return a new {@code String} that is composed from the {@code elements}
      *         argument
      *
-     * @throws NullPointerException If {@code delimiter} or {@code elements}
+     * @exception NullPointerException If {@code delimiter} or {@code elements}
      *         is {@code null}
      *
      * @see    #join(CharSequence,CharSequence...)
@@ -4692,7 +4692,7 @@ public final class String
      * Unicode escapes are translated by the Java compiler when reading input characters and
      * are not part of the string literal specification.
      *
-     * @throws IllegalArgumentException when an escape sequence is malformed.
+     * @exception IllegalArgumentException when an escape sequence is malformed.
      *
      * @return String with escape sequences translated.
      *
@@ -4892,7 +4892,7 @@ public final class String
      *         {@code null} argument depends on the <a
      *         href="../util/Formatter.html#syntax">conversion</a>.
      *
-     * @throws  java.util.IllegalFormatException
+     * @exception  java.util.IllegalFormatException
      *          If a format string contains an illegal syntax, a format
      *          specifier that is incompatible with the given arguments,
      *          insufficient arguments given the format string, or other
@@ -4933,7 +4933,7 @@ public final class String
      *         {@code null} argument depends on the
      *         <a href="../util/Formatter.html#syntax">conversion</a>.
      *
-     * @throws  java.util.IllegalFormatException
+     * @exception  java.util.IllegalFormatException
      *          If a format string contains an illegal syntax, a format
      *          specifier that is incompatible with the given arguments,
      *          insufficient arguments given the format string, or other
@@ -5014,7 +5014,7 @@ public final class String
      * @param   count    length of the subarray.
      * @return  a {@code String} that contains the characters of the
      *          specified subarray of the character array.
-     * @throws    IndexOutOfBoundsException if {@code offset} is
+     * @exception    IndexOutOfBoundsException if {@code offset} is
      *          negative, or {@code count} is negative, or
      *          {@code offset+count} is larger than
      *          {@code data.length}.
@@ -5031,7 +5031,7 @@ public final class String
      * @param   count    length of the subarray.
      * @return  a {@code String} that contains the characters of the
      *          specified subarray of the character array.
-     * @throws    IndexOutOfBoundsException if {@code offset} is
+     * @exception    IndexOutOfBoundsException if {@code offset} is
      *          negative, or {@code count} is negative, or
      *          {@code offset+count} is larger than
      *          {@code data.length}.
@@ -5175,7 +5175,7 @@ public final class String
      *          {@code count} times or the empty string if this
      *          string is empty or count is zero
      *
-     * @throws  IllegalArgumentException if the {@code count} is
+     * @exception  IllegalArgumentException if the {@code count} is
      *          negative.
      *
      * @since 11
@@ -5506,7 +5506,7 @@ public final class String
      * bounds.
      *
      * @return  {@code offset} if the sub-range within bounds of the range
-     * @throws  StringIndexOutOfBoundsException
+     * @exception  StringIndexOutOfBoundsException
      *          If {@code offset} is negative, {@code count} is negative,
      *          or {@code offset} is greater than {@code length - count}
      */
@@ -5518,7 +5518,7 @@ public final class String
      * Check {@code begin}, {@code end} against {@code 0} and {@code length}
      * bounds.
      *
-     * @throws  StringIndexOutOfBoundsException
+     * @exception  StringIndexOutOfBoundsException
      *          If {@code begin} is negative, {@code begin} is greater than
      *          {@code end}, or {@code end} is greater than {@code length}.
      */
@@ -5533,7 +5533,7 @@ public final class String
      * @param   codePoint a {@code codePoint}.
      * @return  a string of length {@code 1} or {@code 2} containing
      *          as its single character the argument {@code codePoint}.
-     * @throws IllegalArgumentException if the specified
+     * @exception IllegalArgumentException if the specified
      *          {@code codePoint} is not a {@linkplain Character#isValidCodePoint
      *          valid Unicode code point}.
      */
