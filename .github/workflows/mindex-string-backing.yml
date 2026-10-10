@@ -59,6 +59,7 @@ on:
       - 'test/jdk/java/lang/String/M3StringCodePointGeometryTest.java'
       - 'test/jdk/java/lang/String/M3StringLiteralMatchesTest.java'
       - 'test/jdk/java/lang/String/M3StringBuilderRangeBulkTest.java'
+      - 'test/jdk/java/lang/String/M3StringBuilderInteropDifferentialTest.java'
       - 'test/jdk/java/lang/String/M3StringByteSourceNeedleTest.java'
       - 'test/jdk/java/lang/String/M3StringMixedLiteralReplaceTest.java'
       - 'test/jdk/java/lang/String/M3StringRegexSplitHistoryTest.java'
