@@ -5,6 +5,13 @@
  * GPLv2 with the Classpath exception.
  */
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Mechanical receipt gate for the Synexia PR #10124 code-text handoff.
  *
