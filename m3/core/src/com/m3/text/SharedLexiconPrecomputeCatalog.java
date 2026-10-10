@@ -20,6 +20,8 @@ import java.util.Optional;
  * decodes the ordinary opaque per-record JSON payload.</p>
  */
 public final class SharedLexiconPrecomputeCatalog {
+    private static final String DICTIONARY_WORD_FACTS_SOURCE = "dictlang.dictionary";
+    private static final String FREQUENCY_WORD_SIGNAL_SOURCE = "dictlang.frequency";
     public record TranslationIdentity(String sourceId, String recordId,
                                       String sourceLanguage, String targetLanguage,
                                       String lexiconFingerprint, String sourceFingerprint) {
@@ -75,11 +77,25 @@ public final class SharedLexiconPrecomputeCatalog {
         }
     }
 
+
+    /** Exact source record and lexeme identity for dictionary-derived metadata. */
+    public record WordIdentity(String sourceId, String recordId, String lexeme,
+                               String sourceRevision) {
+        public WordIdentity {
+            sourceId = text(sourceId, "sourceId");
+            recordId = text(recordId, "recordId");
+            lexeme = text(lexeme, "lexeme");
+            sourceRevision = text(sourceRevision, "sourceRevision");
+        }
+    }
+
     private final Map<TranslationIdentity, M3LexiconPrecompute.TranslationProjection> translations;
     private final Map<SpellScope, M3LexiconPrecompute.SpellIndex> spellIndexes;
     private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes;
     private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts;
     private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies;
+    private final Map<WordIdentity, M3LexiconPrecompute.IndexWordFacts> wordFacts;
+    private final Map<WordIdentity, M3LexiconPrecompute.IndexWordSignal> wordSignals;
 
     private SharedLexiconPrecomputeCatalog(Builder builder) {
         translations = Map.copyOf(builder.translations);
@@ -87,6 +103,8 @@ public final class SharedLexiconPrecomputeCatalog {
         tokenHashes = Map.copyOf(builder.tokenHashes);
         prefixCounts = Map.copyOf(builder.prefixCounts);
         tokenFrequencies = Map.copyOf(builder.tokenFrequencies);
+        wordFacts = Map.copyOf(builder.wordFacts);
+        wordSignals = Map.copyOf(builder.wordSignals);
     }
 
     public static Builder builder() { return new Builder(); }
@@ -107,12 +125,22 @@ public final class SharedLexiconPrecomputeCatalog {
         return Optional.ofNullable(tokenFrequencies.get(Objects.requireNonNull(scope, "scope")));
     }
 
+
+    public Optional<M3LexiconPrecompute.IndexWordFacts> wordFactsAt(WordIdentity identity) {
+        return Optional.ofNullable(wordFacts.get(Objects.requireNonNull(identity, "word facts key")));
+    }
+    public Optional<M3LexiconPrecompute.IndexWordSignal> wordSignalAt(WordIdentity identity) {
+        return Optional.ofNullable(wordSignals.get(Objects.requireNonNull(identity, "word signal key")));
+    }
+
     public static final class Builder {
         private final Map<TranslationIdentity, M3LexiconPrecompute.TranslationProjection> translations = new HashMap<>();
         private final Map<SpellScope, M3LexiconPrecompute.SpellIndex> spellIndexes = new HashMap<>();
         private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes = new HashMap<>();
         private final Map<ValueToken, M3LexiconPrecompute.PrefixCounts> prefixCounts = new HashMap<>();
         private final Map<ValueScope, M3LexiconPrecompute.TokenFrequency> tokenFrequencies = new HashMap<>();
+        private final Map<WordIdentity, M3LexiconPrecompute.IndexWordFacts> wordFacts = new HashMap<>();
+        private final Map<WordIdentity, M3LexiconPrecompute.IndexWordSignal> wordSignals = new HashMap<>();
 
         public Builder translation(TranslationIdentity identity, M3LexiconPrecompute.TranslationProjection value) {
             Objects.requireNonNull(identity, "translation key");
@@ -136,6 +164,29 @@ public final class SharedLexiconPrecomputeCatalog {
         }
         public Builder tokenFrequency(ValueScope scope, M3LexiconPrecompute.TokenFrequency value) {
             put(tokenFrequencies, scope, value, "token frequency"); return this;
+        }
+
+        public Builder wordFacts(WordIdentity identity, M3LexiconPrecompute.IndexWordFacts value) {
+            Objects.requireNonNull(identity, "word facts key");
+            if (!DICTIONARY_WORD_FACTS_SOURCE.equals(identity.sourceId())) {
+                throw new IllegalArgumentException("word facts source family");
+            }
+            Objects.requireNonNull(value, "word facts value");
+            if (!identity.sourceRevision().equals(value.sourceRevision())) {
+                throw new IllegalArgumentException("word facts source revision");
+            }
+            put(wordFacts, identity, value, "word facts"); return this;
+        }
+        public Builder wordSignal(WordIdentity identity, M3LexiconPrecompute.IndexWordSignal value) {
+            Objects.requireNonNull(identity, "word signal key");
+            if (!FREQUENCY_WORD_SIGNAL_SOURCE.equals(identity.sourceId())) {
+                throw new IllegalArgumentException("word signal source family");
+            }
+            Objects.requireNonNull(value, "word signal value");
+            if (!identity.sourceRevision().equals(value.sourceRevision())) {
+                throw new IllegalArgumentException("word signal source revision");
+            }
+            put(wordSignals, identity, value, "word signal"); return this;
         }
         public SharedLexiconPrecomputeCatalog build() { return new SharedLexiconPrecomputeCatalog(this); }
 

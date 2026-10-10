@@ -11,6 +11,8 @@ import java.util.Map;
 
 public final class M3LexiconPrecomputeTest {
     private static int checks;
+    private static final String SOURCE_REVISION =
+            "64a2ea61c73b548413fed6686a9daeeb0b9b0564";
 
     private static void check(boolean value) {
         checks++;
@@ -143,6 +145,61 @@ public final class M3LexiconPrecomputeTest {
         check(catalog.tokenFrequencyAt(new SharedLexiconPrecomputeCatalog.ValueScope(
                 coordinate, "value-1")).orElseThrow().frequencyAt(2) == 2);
         expect(IllegalArgumentException.class, () -> catalogBuilder.translation(source, translation));
+
+        M3LexiconPrecompute.IndexWordFacts wordFacts = new M3LexiconPrecompute.IndexWordFacts(
+                SOURCE_REVISION, 7, 3, 0x1234L, 90L, 11L, 5, 44L, 8,
+                new int[]{2, 4}, new long[]{101L, 103L}, new long[]{9L},
+                new long[]{501L, 503L});
+        int[] memberships = wordFacts.memberships();
+        memberships[0] = 99;
+        check(wordFacts.membershipAt(0) == 2 && wordFacts.membershipCount() == 2);
+        check(wordFacts.conceptAt(1) == 103L && wordFacts.subjectAt(0) == 9L);
+        check(wordFacts.expansionWordIdAt(1) == 503L);
+        check(wordFacts.appliesTo(7, 0x1234L) && !wordFacts.appliesTo(8, 0x1234L));
+        expect(IllegalArgumentException.class, () -> new M3LexiconPrecompute.IndexWordFacts(
+                SOURCE_REVISION, 7, 3, 0x1234L, -1L, 11L, 5, 44L, 8,
+                new int[0], new long[0], new long[0], new long[0]));
+
+        M3LexiconPrecompute.IndexWordSignal wordSignal = new M3LexiconPrecompute.IndexWordSignal(
+                SOURCE_REVISION, 5, 4, 0x00e9, 0x0065, 3, 12, -1L, 8, 16, 17L,
+                32, 0x55L, 4, 0x77L, 19L);
+        check(wordSignal.utf16Length() == 5 && wordSignal.codePointLength() == 4);
+        check(wordSignal.frequencyRank() == 12 && wordSignal.lexicalRank() == 8);
+        check(wordSignal.lemmaId() == -1L && wordSignal.phoneticId() == 17L
+                && wordSignal.stemId() == 19L);
+        expect(IllegalArgumentException.class, () -> new M3LexiconPrecompute.IndexWordSignal(
+                SOURCE_REVISION, 1, 1, -1, -1, 0, 0, -1L, 0, 0, -1L, 0, 0L, 0, 0L, -1L));
+
+        SharedLexiconPrecomputeCatalog.WordIdentity wordKey =
+                new SharedLexiconPrecomputeCatalog.WordIdentity(
+                        "dictlang.dictionary", "7", "café", SOURCE_REVISION);
+        SharedLexiconPrecomputeCatalog.WordIdentity signalKey =
+                new SharedLexiconPrecomputeCatalog.WordIdentity(
+                        "dictlang.frequency", "7", "café", SOURCE_REVISION);
+        SharedLexiconPrecomputeCatalog wordCatalog = SharedLexiconPrecomputeCatalog.builder()
+                .wordFacts(wordKey, wordFacts)
+                .wordSignal(signalKey, wordSignal)
+                .build();
+        check(wordCatalog.wordFactsAt(wordKey).orElseThrow().wordCount() == 3);
+        check(wordCatalog.wordFactsAt(wordKey).orElseThrow().sourceRevision()
+                .equals(SOURCE_REVISION));
+        check(wordCatalog.wordSignalAt(signalKey).orElseThrow().frequencyRank() == 12);
+        check(wordCatalog.wordSignalAt(signalKey).orElseThrow().sourceRevision()
+                .equals(SOURCE_REVISION));
+        check(wordCatalog.wordFactsAt(signalKey).isEmpty());
+        expect(IllegalArgumentException.class, () -> SharedLexiconPrecomputeCatalog.builder()
+                .wordFacts(wordKey, wordFacts).wordFacts(wordKey, wordFacts));
+        expect(IllegalArgumentException.class, () -> SharedLexiconPrecomputeCatalog.builder()
+                .wordFacts(signalKey, wordFacts));
+        expect(IllegalArgumentException.class, () -> SharedLexiconPrecomputeCatalog.builder()
+                .wordSignal(wordKey, wordSignal));
+        expect(IllegalArgumentException.class, () -> SharedLexiconPrecomputeCatalog.builder()
+                .wordFacts(new SharedLexiconPrecomputeCatalog.WordIdentity(
+                        "dictlang.dictionary", "7", "café", "other-revision"), wordFacts));
+        expect(IllegalArgumentException.class, () -> SharedLexiconPrecomputeCatalog.builder()
+                .wordSignal(new SharedLexiconPrecomputeCatalog.WordIdentity(
+                        "dictlang.frequency", "7", "café", "other-revision"), wordSignal));
+
         System.out.println("M3JDK_TYPED_PRECOMPUTE_PASS checks=" + checks);
     }
 }
