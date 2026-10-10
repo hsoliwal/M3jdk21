@@ -81,6 +81,22 @@ public final class M3LangDexPrecomputeTest {
         return fields;
     }
 
+    private static Map<String, Set<String>> parseIdentityFieldMap(String text) {
+        String[] lines = text.split("\n", -1);
+        Map<String, Set<String>> fields = new LinkedHashMap<>();
+        for (int i = 1; i < lines.length - 1; i++) {
+            String[] columns = lines[i].split("\t", -1);
+            check(columns.length == 7);
+            if (columns[0].startsWith("M3LangDexPrecompute.")) {
+                check("true".equals(columns[4]));
+                fields.computeIfAbsent(columns[0], ignored -> new java.util.LinkedHashSet<>())
+                        .add(columns[1]);
+                check("m3langdex-family-v1:synexia.langdex.tsv".equals(columns[5]));
+            }
+        }
+        return fields;
+    }
+
     public static void main(String[] args) throws Exception {
         String manifest = Files.readString(
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
@@ -117,7 +133,7 @@ public final class M3LangDexPrecomputeTest {
         Map<String, Set<String>> fieldMap = parseFieldMap(Files.readString(
                 Path.of("lexicon/synexia-precompute-field-map.tsv"),
                 StandardCharsets.UTF_8));
-        Map<String, Set<String>> identityFieldMap = parseFieldMap(Files.readString(
+        Map<String, Set<String>> identityFieldMap = parseIdentityFieldMap(Files.readString(
                 Path.of("lexicon/synexia-langdex-identity-field-map.tsv"),
                 StandardCharsets.UTF_8));
         check(fieldMap.get("M3LangDexPrecompute.Identity").equals(Set.of(
