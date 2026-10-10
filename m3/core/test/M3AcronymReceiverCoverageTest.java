@@ -50,11 +50,11 @@ public final class M3AcronymReceiverCoverageTest {
         }
         check(identities.size() == 40);
 
-        check(provenance.contains(""source_commit": "9a990b710bf173258c29474083383d4c6b1e7d4e""));
-        check(provenance.contains(""source_blob": "5bb16c13b6be693153a0656b8beb61af860cb52f""));
-        check(provenance.contains(""snapshot_sha256": "4dd2d943eff28044362f843d9e42988e036d5e649910471949ae90666b29e27a""));
-        check(provenance.contains(""record_count": 40"));
-        check(provenance.contains(""status": "STAGED_PROVEN""));
+        check(provenance.contains("\"source_commit\": \"9a990b710bf173258c29474083383d4c6b1e7d4e\""));
+        check(provenance.contains("\"source_blob\": \"5bb16c13b6be693153a0656b8beb61af860cb52f\""));
+        check(provenance.contains("\"snapshot_sha256\": \"4dd2d943eff28044362f843d9e42988e036d5e649910471949ae90666b29e27a\""));
+        check(provenance.contains("\"record_count\": 40"));
+        check(provenance.contains("\"status\": \"STAGED_PROVEN\""));
 
         check(receipt.contains("schema\tM3JDK_ACRONYM_TARGET_RECEIVER_RECEIPT_V1"));
         check(receipt.contains("source_id\tdictlang.acronyms"));
