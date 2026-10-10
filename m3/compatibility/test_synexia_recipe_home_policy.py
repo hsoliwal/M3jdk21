@@ -144,6 +144,57 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             compatibility["canonical_owner"],
         )
 
+    def test_recipe_ownership_catalogue_is_well_formed_and_covers_frozen_recipes(self) -> None:
+        """A literal escaped newline must never merge two ownership records."""
+        classification = ROOT / "docs" / "synexia-recipe-ownership-classification.tsv"
+        with classification.open(encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            self.assertEqual(
+                [
+                    "schema",
+                    "local_path",
+                    "classification",
+                    "canonical_synexia_owner",
+                    "target_reason",
+                ],
+                reader.fieldnames,
+            )
+            records = list(reader)
+
+        self.assertTrue(records)
+        by_path: dict[str, dict[str, str]] = {}
+        for record in records:
+            self.assertNotIn(None, record, "malformed TSV columns")
+            self.assertTrue(all(value is not None for value in record.values()))
+            self.assertEqual("M3JDK21_RECIPE_OWNERSHIP_V1", record["schema"])
+            path = record["local_path"]
+            self.assertTrue(path.startswith("m3/"), path)
+            self.assertTrue(path.endswith(".java"), path)
+            self.assertNotIn("\\n", record["target_reason"], path)
+            self.assertNotIn("\\r", record["target_reason"], path)
+            self.assertNotIn(path, by_path, "duplicate ownership classification")
+            self.assertIn(
+                record["classification"],
+                {"TARGET_ADAPTER_ONLY", "SYNEXIA_CANONICAL_RESIDUE", "JDK_TARGET_SPECIFIC"},
+            )
+            self.assertTrue(record["canonical_synexia_owner"].strip(), path)
+            self.assertTrue(record["target_reason"].strip(), path)
+            by_path[path] = record
+
+        with RESIDUE.open(encoding="utf-8", newline="") as handle:
+            frozen = list(csv.DictReader(handle, delimiter="\t"))
+        frozen_recipe_paths = {
+            row["path"] for row in frozen
+            if row["path"].startswith("m3/tooling/migration-recipes/")
+        }
+        self.assertTrue(frozen_recipe_paths)
+        self.assertTrue(frozen_recipe_paths.issubset(by_path.keys()))
+        for path in frozen_recipe_paths:
+            self.assertEqual(
+                "SYNEXIA_CANONICAL_RESIDUE",
+                by_path[path]["classification"],
+            )
+
     def test_full_reusable_residue_set_is_git_blob_frozen(self) -> None:
         with RESIDUE.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
