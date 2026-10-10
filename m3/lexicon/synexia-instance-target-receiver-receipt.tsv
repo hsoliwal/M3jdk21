@@ -10,7 +10,7 @@ receiver_blob	94eb4af45d14a91a90d9e837c6012ff5f4dde8ca
 test_path	m3/core/test/M3InstanceIndexTest.java
 test_blob	fefd760bb3e1be640473bfca7bf0a9f352667e01
 coverage_test_path	m3/core/test/M3InstanceIndexReceiverCoverageTest.java
-coverage_test_blob	6103dc038b372e43964150a4ec44b1dcfc9e603c
+coverage_test_blob	470d81de2410b13b06d58386c1030b805ef2b336
 target_map_path	m3/lexicon/synexia-instance-target-map.tsv
 target_map_blob	db79edb4d2e98f99f4ed837d8d0f68d3ce915775
 foss_decision_path	m3/lexicon/FOSS_REUSE_DECISION.tsv
