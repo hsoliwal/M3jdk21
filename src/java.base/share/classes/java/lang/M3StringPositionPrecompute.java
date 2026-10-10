@@ -132,6 +132,13 @@ final class M3StringPositionPrecompute {
         return Math.addExact(signalBytes, exactBytes);
     }
 
+    /**
+     * The block index of a source searched before, or {@code null} when this search should scan
+     * (A32): a first search registers the source without blocks and scans it through the window
+     * lane, the next search of the same source allocates the blocks (their signals and exact
+     * masks still fill lazily), so a source searched once never pays the index and a source
+     * searched again pays it once. Sources outside the block range never register.
+     */
     private static Blocks prepare(M3String source) {
         int length = source.length();
         if (length < MIN_SOURCE_UNITS || length > MAX_SOURCE_UNITS) return null;
@@ -144,18 +151,20 @@ final class M3StringPositionPrecompute {
                 && entry.owner.get() == owner
                 && entry.coordinate == coordinate
                 && entry.length == length) {
-            return entry.blocks;
+            if (entry.blocks != null) return entry.blocks;
+            Blocks blocks = new Blocks((length + BLOCK_MASK) >>> BLOCK_SHIFT);
+            CACHE.set(slot, new Entry(entry.owner, coordinate, length, blocks));
+            return blocks;
         }
 
-        Blocks blocks = new Blocks((length + BLOCK_MASK) >>> BLOCK_SHIFT);
         CACHE.set(
                 slot,
                 new Entry(
                         new WeakReference<>(owner),
                         coordinate,
                         length,
-                        blocks));
-        return blocks;
+                        null));
+        return null;
     }
 
     private static long blockSignal(M3String source, Blocks blocks, int block) {
