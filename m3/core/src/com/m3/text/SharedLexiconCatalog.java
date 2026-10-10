@@ -30,7 +30,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * The manifest is checked before publication so a path, checksum, ordering or
  * sidecar encoding mistake cannot become a live lookup owner.</p>
  */
-public final class SharedLexiconCatalog {
+public final class SharedLexiconCatalog implements AutoCloseable {
     private static final String[] HEADER = {
             "shard_id", "file", "first_lexeme", "last_lexeme", "image_records",
             "utf16_units", "sha256"
@@ -231,6 +231,7 @@ public final class SharedLexiconCatalog {
     }
 
     /** Fences future lookups and drops published mapped-image references. */
+    @Override
     public void close() {
         lifecycle.writeLock().lock();
         try {
