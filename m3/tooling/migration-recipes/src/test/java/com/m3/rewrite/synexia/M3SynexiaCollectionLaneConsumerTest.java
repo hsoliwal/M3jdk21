@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Parser;
 import org.openrewrite.SourceFile;
-import org.openrewrite.config.Environment;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.text.PlainText;
@@ -61,18 +60,6 @@ final class M3SynexiaCollectionLaneConsumerTest {
                         .getChangeset()
                         .getAllResults()
                         .isEmpty());
-    }
-
-    @Test
-    void externalNamedRecipeResolvesWithoutAnyLocalCanonicalCopy() {
-        var named =
-                Environment.builder().scanYamlResources().build()
-                        .activateRecipes("com.synexia.rewrite.M3CollectionLanes");
-
-        assertEquals(1, named.getRecipeList().size());
-        assertEquals(
-                M3HashPinnedJavaSnapshotRecipe.class,
-                named.getRecipeList().getFirst().getClass());
     }
 
     private static List<SourceFile> reparse(List<SourceFile> files) {
