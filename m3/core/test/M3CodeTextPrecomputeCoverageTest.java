@@ -51,8 +51,8 @@ public final class M3CodeTextPrecomputeCoverageTest {
                             && columns[2].equals(SOURCE_PR)
                             && columns[3].equals(SOURCE_HEAD),
                     "field map source pin drift: " + line);
-            check(columns[8].equals("hsoliwal/M3jdk21")
-                            && columns[9].equals(TARGET_REF)
+            check(columns[7].equals("hsoliwal/M3jdk21")
+                            && columns[8].equals(TARGET_REF)
                             && columns[10].equals(
                                     "src/java.base/share/classes/java/lang/M3CodeTextFacts.java")
                             && columns[11].equals("java.lang.M3CodeTextFacts")
