@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "jdk.internal.mindex.M3TQ.scanFacts and uniqueTrigrams: java.util.Arrays.sort over a long[] of every trigram (A1 exact trigram facts, carried to A18 aa3a9ae00a)",
+      "source_commit": "aa3a9ae00a",
+      "target": "M3TQ.sortTrigramKeys: least-significant-digit counting sort over the six 8-bit digits of the 48-bit keys (scatterDigit), a digit on which every key agrees skipped; Arrays.sort kept below 256 keys and for texts below 8192 keys over a tiny alphabet (distinctDigits: at most 8 distinct low bytes of the last unit)",
+      "status": "implemented-locally-verified (G7; flag-off: M3TQFactsBuildTest 23,595 checks bit-identical to a comparison-sorted reference; M3TQ.precompute 1.8x..2.6x faster at 2048 units, 2.3x..4.4x at 16384, 2.9x..5.2x at 32768; tiny alphabets at par below 8192 keys)",
+      "target_rule": "the key values, their order and every Facts field (keys, keyCount, utf16Length, prefix, suffix) are unchanged; every consumer (test, containsAll, mergeFactKeys, keys()) sees the same arrays"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.TqFactsRadix
+displayName: M3JDK21 exact trigram facts built with a counting sort
+description: >-
+  M3TQ.scanFacts and uniqueTrigrams sorted a long[] of every trigram with Arrays.sort (45..66 ns
+  per unit at 16384..32768 units), the whole cost of the per-owner facts the mixed indexOf paths
+  and the regex literal gate consume. sortTrigramKeys runs a least-significant-digit counting sort
+  over the six 8-bit digits of the 48-bit keys, skipping digits on which every key agrees; arrays
+  below 256 keys and tiny-alphabet texts below 8192 keys keep Arrays.sort. Key values, order and
+  every Facts field are unchanged. Java step only: M3TQ and the jtreg proof. Stacks on crate
+  m3-regex-literal-gate (its postimages are these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-tq-facts-radix

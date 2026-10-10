@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/jdk/internal/mindex/M3TQ.java	78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4	b00733e17787e1eaa7787e0412da84e43d0b2ad9ffab2752653721733dabf1a0	00-M3TQ.java.txt
+test/jdk/java/lang/String/M3TQFactsBuildTest.java	ABSENT	f530df8f580ed4aff75907f68530ab7a9031cb2c844be1f9f00b5eb58813a947	01-M3TQFactsBuildTest.java.txt
