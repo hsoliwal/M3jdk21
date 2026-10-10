@@ -33,6 +33,10 @@ final class M3CodeTextNativeBridge {
             attempted = true;
             String path = System.getProperty("m3.code.text.native.path");
             if (path == null || path.isBlank()) {
+                if (Boolean.getBoolean("m3.code.text.native.required")) {
+                    throw new UnsatisfiedLinkError(
+                            "m3.code.text.native.required but no native path is configured");
+                }
                 return false;
             }
             try {
