@@ -1,0 +1,32 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FACTS_SCAN_LATIN1_DERIVED_UPPER_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-facts-scan-latin1-derived-upper-20261009",
+    "pullRequest": 9997,
+    "commit": "b1826a0d9e1926c9c229d18e642caeb42042e5a2",
+    "declarativeRecipe": "com.synexia.m3.FactsScanLatin1DerivedUpper",
+    "crate": "m3-facts-scan-latin1-derived-upper",
+    "recipeDescriptorBlob": "03d889cd4c5d05818785c998379e758410bb4ee6",
+    "license": "Apache-2.0 recipe/provenance; target source remains GPLv2 with Classpath exception",
+    "disposition": "TARGET_OWNED_PORT_HASH_PINNED"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "basePullRequest": 551,
+    "beforeSha256": "18d653055ed6feb8c92de9f6e482765d238d54dc62e9e3632842ddeb0aed8221",
+    "afterSha256": "855c00e8af9072a75da730ec0ff68ba52194d5621ba7c7c1d991228b2b33119f",
+    "owner": "java.lang.M3StringFacts",
+    "publicJdkApiChange": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "semanticContract": [
+    "A15/A16/A17 M3StringFacts values remain bit-identical",
+    "scanLatin1 retains exactly one owner-sized byte scratch",
+    "scanLatin1 retains exactly one full-length raw/lower-fold loop",
+    "upperHash is derived exactly as lowerHash plus the Java polynomial of per-unit ASCII mapping deltas",
+    "UTF-16 owners and scanUnits are unchanged",
+    "M3StringFactsLatin1LaneTest remains the field-by-field semantic oracle"
+  ]
+}

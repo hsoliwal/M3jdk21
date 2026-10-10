@@ -602,41 +602,41 @@ if "prepared.utf8Length" not in m3 or "prepared.codePointCount" not in m3:
 if "final int utf8Length;" not in facts or "final boolean ascii;" not in facts or "final boolean latin1;" not in facts:
     fail("M3StringFacts lost byte-encoding geometry")
 
-# A17 FACTS-SCAN-LATIN1-FUSED: one owner-sized Latin-1 scratch, one raw/fold pass and one
-# upper-fold pass. UTF-8 length, signals, prefix/suffix and whitespace boundaries are captured
-# before each raw byte is lower-folded in place.
+# A18 FACTS-SCAN-LATIN1-DERIVED-UPPER: one owner-sized Latin-1 scratch and one full-length
+# raw/lower-fold loop. The exact upper-case Java polynomial is derived from the lower hash plus
+# the polynomial of per-unit ASCII mapping deltas (-32 for letters, 0 otherwise).
 latin_scan_start = facts.find("    static M3StringFacts scanLatin1(M3String value) {")
 latin_scan_end = facts.find("    /** The A8 single pass", latin_scan_start)
 if latin_scan_start < 0 or latin_scan_end < latin_scan_start:
-    fail("A17 Latin-1 facts lane missing")
+    fail("A18 Latin-1 facts lane missing")
 latin_scan = facts[latin_scan_start:latin_scan_end]
 if latin_scan.count("new byte[length]") != 1:
-    fail("A17 Latin-1 facts lane must allocate exactly one owner-sized byte scratch")
+    fail("A18 Latin-1 facts lane must allocate exactly one owner-sized byte scratch")
 if "byte[] folded" in latin_scan:
-    fail("A17 Latin-1 facts lane reintroduced second folded spelling scratch")
-if latin_scan.count("for (int index = 0; index < length; index++)") != 2:
-    fail("A17 Latin-1 facts lane must retain exactly raw/lower and upper full-length loops")
+    fail("A18 Latin-1 facts lane reintroduced second folded spelling scratch")
+if latin_scan.count("for (int index = 0; index < length; index++)") != 1:
+    fail("A18 Latin-1 facts lane must retain exactly one full-length loop")
 for forbidden in [
+    "unit >= 'a' && unit <= 'z' ? unit & ~0x20",
     "while (trimStart < length",
     "for (int index = 0; index < Math.min(4, length); index++)",
 ]:
     if forbidden in latin_scan:
-        fail(f"A17 Latin-1 facts lane retained standalone raw scan: {forbidden}")
+        fail(f"A18 Latin-1 facts lane retained superseded pass: {forbidden}")
 for fragment in [
-    "Capture every original-byte fact and lower-fold the same scratch byte before advancing",
+    "int upperDelta = 0;",
+    "upperDelta = 31 * upperDelta + (asciiLetter ? -('a' - 'A') : 0);",
+    "int lowerHash = ArraysSupport.vectorizedHashCode(bytes",
+    "int upperHash = lowerHash + upperDelta;",
     "if (bytes[index] < 0) utf8++;",
     "signal |= LATIN1_UNIT_SIGNAL[unit];",
     "if (index < 4) prefix |=",
-    "suffix = (suffix << 16) | unit;",
     "if (leadingTrim)",
     "if (leadingStrip)",
-    "bytes[index] = (byte) (unit >= 'A' && unit <= 'Z' ? unit | 0x20 : unit);",
-    "int lowerHash = ArraysSupport.vectorizedHashCode(bytes",
-    "bytes[index] = (byte) (unit >= 'a' && unit <= 'z' ? unit & ~0x20 : unit);",
-    "int upperHash = ArraysSupport.vectorizedHashCode(bytes",
 ]:
     if fragment not in latin_scan:
-        fail(f"A17 fused Latin-1 facts lane missing: {fragment}")
+        fail(f"A18 derived-upper Latin-1 facts lane missing: {fragment}")
+
 
 for fragment in [
     "int found = indexOf(oldChar, 0, length());",
