@@ -1,7 +1,7 @@
 schema_version	M3JDK_FUZZY_HISTOGRAM_RECEIVER_MAP_V1
 synexia_repository	hsoliwal/com.synexia
 synexia_pr	10126
-synexia_head	7d005c8488a1dcfbf4ca30ea43d55764d8c6d765
+synexia_head	ab4edcbd7eb475a3c9abb12d4a0fc14703a826ec
 source_path	synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexPositionMasks.java
 source_recipe	synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/fuzzyhistogram/M3FuzzyHistogramAutoRouteCandidateRecipe.java
 source_recipe_root	2ef0b23481b8d73d9ee331f4a23138a8ff82765238504b5a1bea21958d6dd7d5
