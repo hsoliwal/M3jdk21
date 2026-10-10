@@ -121,7 +121,8 @@ def main() -> None:
     export_doc = EXPORT_DOC.read_text(encoding="utf-8")
     for marker in (
         "## Proper-name donor boundary",
-        "not copied into the M3LEX image",
+        "Its rows therefore are not copied",
+        "into the M3LEX image",
         "Synexia remains the canonical source owner",
         "src/main/cpp/include/synexia/instance_index_v1.hpp",
         "src/main/cpp/docs/UNICODEX_INSTANCE_INDEX_V1.md",
