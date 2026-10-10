@@ -1,7 +1,7 @@
 name: M3 lexicon coverage gate
 
 on:
-  pull_request:
+  pull_request: {}
   push:
     branches:
       - develop
