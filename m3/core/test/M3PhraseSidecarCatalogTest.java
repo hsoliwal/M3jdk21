@@ -13,12 +13,12 @@ public final class M3PhraseSidecarCatalogTest {
     public static void main(String[] args) throws Exception {
         Path root = Files.createTempDirectory("m3phrase-sidecar-");
         try {
-            String header = "source_id\trecord_id\tsource_revision\tvocabulary_fingerprint"
-                    + "\tsource_token_ids\ttarget_token_ids\n";
+            String header = "schema_version\tsource_id\trecord_id\tsource_revision"
+                    + "\tvocabulary_fingerprint\tsource_token_ids\ttarget_token_ids\n";
             String content = header
-                    + "translate.index-phrases\tphrases-1\tsynexia-r1\tlexicon-a\t1,2\t8\n"
-                    + "translate.index-phrases\tphrases-1\tsynexia-r1\tlexicon-a\t4\t-\n"
-                    + "translate.index-phrases\tphrases-2\tsynexia-r1\tlexicon-b\t1\t7\n";
+                    + "m3phrase-v1\ttranslate.index-phrases\tphrases-1\tsynexia-r1\tlexicon-a\t1,2\t8\n"
+                    + "m3phrase-v1\ttranslate.index-phrases\tphrases-1\tsynexia-r1\tlexicon-a\t4\t-\n"
+                    + "m3phrase-v1\ttranslate.index-phrases\tphrases-2\tsynexia-r1\tlexicon-b\t1\t7\n";
             Files.writeString(root.resolve(M3PhraseSidecarCatalog.FILE_NAME), content,
                     StandardCharsets.UTF_8);
             M3PhraseSidecarCatalog sidecar = M3PhraseSidecarCatalog.open(root);
