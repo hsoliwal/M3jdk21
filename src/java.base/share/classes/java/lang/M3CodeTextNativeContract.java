@@ -16,11 +16,15 @@ final class M3CodeTextNativeContract {
     static final String SOURCE_REPOSITORY = "hsoliwal/com.synexia";
     static final int SOURCE_PULL_REQUEST = 10124;
     static final String SOURCE_HEAD =
-            "0c7112bbc7adf96e306377eca7c418cfc8e31d51";
+            "4a9897b9327c26e348ff78fd40731f5bfdcbe473";
     static final String SOURCE_PATH =
-            "synexia-indexstring/src/main/native/indexstring_jni.c";
+            "synexia-indexstring/native/src/mindex_code_text_signal_jni.c";
     static final String SOURCE_BLOB =
-            "4577a462879c1f28723e69307398107c2908c394";
+            "152b0c2b4062e5a83afafcdc06106ab874cf40e5";
+    static final String COMPANION_SIGNAL_BLOB =
+            "27b6f34ab44b00e82ec814660f249f0b6bfd7cbd";
+    static final String COMPANION_HEADER_BLOB =
+            "6b1e4a5716aacfa71c33aedf5ed249f4af4a325d";
 
     static final String JNI_OWNER =
             "com.synexia.indexstring.JniMIndexCodeTextSignalBatch";
