@@ -31,8 +31,8 @@ final class M3StringPositionPrecompute {
      * is paying a lookup through the canonical text per block, more than the vectorized forward
      * scan costs per block, and hands the rest of its range to the linear lane. The two-bit-per-
      * unit signals pass almost every unit on a dense alphabet, and pass a given unit on most
-     * blocks of a mid-density one when its bits fall among the alphabet's. The reverse walk keeps
-     * its blocks: the stock reverse single-unit search is scalar.
+     * blocks of a mid-density one when its bits fall among the alphabet's. The reverse walk hands
+     * off the same way (A38): its lane tests each window with the forward intrinsic.
      */
     private static final int DENSE_LOOKUPS = 8;
 
@@ -113,12 +113,18 @@ final class M3StringPositionPrecompute {
 
         long required = M3StringFacts.codeUnitSignal(unit);
         int index = from;
+        int walked = 0;
+        int lookups = 0;
         while (index >= 0) {
             int block = index >>> BLOCK_SHIFT;
             int blockStart = block << BLOCK_SHIFT;
+            walked++;
             if ((blockSignal(source, blocks, block) & required) != required) {
                 index = blockStart - 1;
                 continue;
+            }
+            if (++lookups >= DENSE_LOOKUPS && lookups * 2 >= walked) {
+                return linearLastIndexOf(source, unit, index);
             }
             long positions;
             try {
@@ -269,7 +275,12 @@ final class M3StringPositionPrecompute {
         return -1;
     }
 
-    /** The reverse of {@link #linearIndexOf}: windows walked from {@code from} down to the start. */
+    /**
+     * The reverse of {@link #linearIndexOf}: windows walked from {@code from} down to the start.
+     * The stock reverse single-unit search is a scalar loop while the forward one is an intrinsic,
+     * so each window is first tested forward (A38); only a window holding the unit is then walked
+     * back from its end to the last occurrence, at most the window's length.
+     */
     private static int linearLastIndexOf(M3String source, char unit, int from) {
         byte coder = source.coder();
         if (coder == String.LATIN1 && unit > 0xff) return -1;
@@ -279,10 +290,13 @@ final class M3StringPositionPrecompute {
             int base = stop - count;
             if (window == null || window.length < count << coder) window = new byte[count << coder];
             source.getBytes(window, base, 0, coder, count);
-            int index = coder == String.LATIN1
-                    ? StringLatin1.lastIndexOf(window, unit, count - 1)
-                    : StringUTF16.lastIndexOf(window, unit, count - 1);
-            if (index >= 0) return base + index;
+            if (coder == String.LATIN1) {
+                if (StringLatin1.indexOf(window, unit, 0, count) >= 0) {
+                    return base + StringLatin1.lastIndexOf(window, unit, count - 1);
+                }
+            } else if (StringUTF16.indexOf(window, unit, 0, count) >= 0) {
+                return base + StringUTF16.lastIndexOf(window, unit, count - 1);
+            }
             stop -= count;
         }
         return -1;
