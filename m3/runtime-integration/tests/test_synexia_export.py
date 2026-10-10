@@ -154,6 +154,7 @@ class SynexiaExportTest(unittest.TestCase):
                              export_manifest["source"]["precompute_fields"]["numbers"])
             self.assertIn("concept_ids", export_manifest["source"]["precompute_fields"]["translations"])
             self.assertEqual("long[]", export_manifest["source"]["precompute_field_types"]["concept_ids"])
+            self.assertEqual("String", export_manifest["source"]["precompute_field_types"]["source_revision"])
             self.assertRegex(export_manifest["source"]["precompute_field_map_sha256"], r"^[0-9a-f]{64}$")
             image = (root / "first/synexia.m3lex").read_bytes()
             magic, version, count, payload, units = struct.unpack_from(">QIIQQ", image)
@@ -219,12 +220,14 @@ class SynexiaExportTest(unittest.TestCase):
     def test_reviewed_source_manifest_has_explicit_owner_field_coverage(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
         self.assertEqual(10, len(sources))
-        self.assertEqual(12, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
-        self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
+        self.assertEqual(13, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
+        self.assertEqual(16, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
-        self.assertEqual("", sources["translate.rows"]["precompute_fields"])
-        self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        self.assertEqual("translation_grammar_supported", sources["translate.rows"]["precompute_fields"])
+        self.assertEqual("canonical_decimal_spelling,max_value,min_value,precomputed_value_count,record_id,shared_utf16_storage,source_id,source_revision", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        self.assertEqual("", sources["dictlang.thesaurus"]["precompute_fields"])
+        self.assertEqual("", sources["dictlang.antonyms"]["precompute_fields"])
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
@@ -232,12 +235,23 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8", newline="") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
         mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
-        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]"}
+        payload_types = {"boolean", "double", "int", "long", "int[]", "long[]", "String"}
+        declared_types = payload_types | {
+            "byte[]", "byte[][]", "Map<Integer,Integer>", "Map<Integer,Long>",
+            "Map<String,int[]>", "RangeFingerprint", "SharedLexiconCatalog.Coordinate",
+        }
         field_types: dict[str, str] = {}
         for row in rows:
-            self.assertIn(row["donor_java_type"], allowed_types)
-            previous = field_types.setdefault(row["canonical_payload_field"], row["donor_java_type"])
-            self.assertEqual(previous, row["donor_java_type"], row["canonical_payload_field"])
+            self.assertIn(row["donor_java_type"], declared_types)
+            if row["m3jdk_storage"] == "synexia.records.tsv:precompute_payload":
+                self.assertIn(row["donor_java_type"], payload_types)
+                previous = field_types.setdefault(row["canonical_payload_field"],
+                                                  row["donor_java_type"])
+                self.assertEqual(previous, row["donor_java_type"],
+                                 row["canonical_payload_field"])
+        self.assertNotIn("source_id", field_types)
+        self.assertNotIn("related_lexeme", field_types)
+        self.assertNotIn("shard_id,image_row", field_types)
         self.assertEqual("long[]", field_types["concept_ids"])
         self.assertEqual("int[]", field_types["memberships"])
         self.assertEqual("long", field_types["lexicon_fingerprint"])
@@ -246,7 +260,7 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertTrue(all(field_types.values()))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
                           "dictlang.thesaurus", "dictlang.antonyms"):
-            required = set(sources[source_id]["precompute_fields"].split(","))
+            required = {field for field in sources[source_id]["precompute_fields"].split(",") if field}
             self.assertTrue(required.issubset(mapped), source_id)
 
     def test_langdex_owner_payload_round_trips_with_admitted_shapes(self):

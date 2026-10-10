@@ -44,17 +44,21 @@ survive without being falsely presented as `java.lang.String` facts. Duplicate
 keys, non-object values, non-finite numbers and payloads over 1 MiB are
 rejected. Legacy input receives the explicit canonical payload `{}`.
 The field-level donor mapping is maintained in
-`m3/lexicon/synexia-precompute-field-map.tsv`; it covers the `IndexWordFacts`,
-`IndexWordSignalEnrichment`, `IndexWordSignalProfile`, `IndexWordSignalFlags`,
-and reviewed LangDex primitive profile families without making their values part
-of `java.lang.String`. Its
-`donor_java_type` column records the inspected scalar or relation-array shape
-(`boolean`, `double`, `int`, `long`, `int[]`, or `long[]`) so future validators can reject shape
-drift without interpreting the language metadata as String semantics. When
-that field map is present beside the source manifest (or is supplied with
+`m3/lexicon/synexia-precompute-field-map.tsv`. Rows whose
+`m3jdk_storage` is `synexia.records.tsv:precompute_payload` are the owner
+payload contract for the `IndexWordFacts`, `IndexWordSignal`, LangDex and
+SI-unit primitive families; rows for family sidecars and relation metadata are
+catalogued there but are not interpreted as JSON payload fields. The payload
+contract admits `boolean`, `double`, `int`, `long`, `String`, `int[]`
+and `long[]`. Its `donor_java_type` column lets the exporter and verifier
+reject shape drift without interpreting language metadata as String identity.
+When that field map is present beside the source manifest (or is supplied with
 `--field-map`), the exporter enforces those shapes and Java `int`/`long`
 bounds; the source-blind verifier repeats the same check from the exported
-type map, while the export manifest carries the field-map hash for provenance.
+type map, while the export manifest carries the full field-map hash for
+provenance. Relation source families therefore use `-` in the manifest's
+owner-payload `precompute_fields` column; their directed fields are validated
+by the separate relation sidecars.
 
 `source_id + record_id` is the immutable source identity. The exporter rejects
 duplicates, unknown source families, source-path drift, empty fields and
