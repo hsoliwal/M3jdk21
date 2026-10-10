@@ -81,6 +81,15 @@ public final class M3TranslationProvenanceTest {
                         "translate.rows", "row-1", "en", "hi", "lex-1", "src-1",
                         SOURCE_REVISION, "not-a-blob"));
 
+        expect(IllegalArgumentException.class, () ->
+                new M3LexiconPrecompute.TranslationProjection(
+                        "lex-1", "en", "hi", "src-1", new int[]{7}, 1,
+                        "UNPINNED", SOURCE_BLOB_SHA));
+        expect(IllegalArgumentException.class, () ->
+                new SharedLexiconPrecomputeCatalog.TranslationIdentity(
+                        "translate.rows", "row-partial", "en", "hi", "lex-1", "src-1",
+                        "UNPINNED", SOURCE_BLOB_SHA));
+
         M3LexiconPrecompute.TranslationProjection legacy =
                 new M3LexiconPrecompute.TranslationProjection(
                         "lex-1", "en", "hi", "src-1", new int[]{7});
