@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CodePointCountRepeat
+displayName: M3JDK21 code point geometry built on the repeat use
+description: >-
+  codePointCount over an M3 range never built the code point geometry: a single count counted
+  in bulk every time, with a per-unit loop over char windows (16384 UTF-16 units 5,515 ns against
+  1,832 flat on every repeat). A first count now registers the range (1024 units and up) and counts in bulk; the next
+  count builds the geometry (A24), which every later count answers from in a few reads. Java
+  step: M3StringCodePointPrecompute and the jtreg proof; no upstream file changed. Stacks on
+  crate m3-reverse-forward-lane (branch order); the M3StringCodePointPrecompute preimage is the
+  A24 postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-codepoint-count-repeat

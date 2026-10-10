@@ -1,0 +1,75 @@
+{
+  "schema": "M3JDK21_SYNEXIA_CODEPOINT_COUNT_REPEAT_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-codepoint-count-repeat-20261010",
+    "pullRequest": null,
+    "commit": "686a350c1ee089e02ac34cd2cf1ae9966b6f16b1",
+    "stackedOn": [
+      {
+        "pullRequest": 10139,
+        "crate": "m3-reverse-forward-lane"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.CodePointCountRepeat",
+    "crate": "m3-codepoint-count-repeat",
+    "fossReuseDecisionRow": "string.codepoint.count-on-repeat",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java",
+        "commit": "826e3062db",
+        "target": "java.lang.M3StringCodePointPrecompute.prepared / prepare / Entry",
+        "mechanics": "the A32 register-on-first-use model: prepared registers a range of MIN_REPEAT_UNITS (1024) units and up on its first use (Entry carries the length, the geometry null) and builds through prepare on the repeat use; shorter ranges count in bulk without registering"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same count and the same offset as the flat String on the first and on every repeat use; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-reverse-forward-lane-20261010 (#663, A38) on #662 on #661 on #660 on #657 on #654 on #653 on #610 on #609 on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringCodePointPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3StringCodePointPrecompute.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java",
+      "before": "0e8f47864ecfc877fd20ff2d13b9948e827c5e15843e865d6f5e6227e56085c2",
+      "after": "50a6dc46c44e896d4a6b524448cda222c53c655c0549157a56489c8a7568e578",
+      "resource": "00-M3StringCodePointPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3CodePointCountRepeatTest.java",
+      "before": "ABSENT",
+      "after": "6609800ef428026d215a826512b98daba5561c5d18dc0b0bcf2b51f4c97e8ddc",
+      "resource": "01-M3CodePointCountRepeatTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3CodePointCountRepeatTest flag-off: 14,004 checks (codePointCount(begin, end), codePointCount over the whole range and offsetByCodePoints with paired surrogates, lone high and lone low surrogates, pairs straddling the 64/256/1024/4096-unit window edges and the range ends, over atoms, tuples and slices of UTF-16 texts of 1..40000 units on both sides of the 32768-unit band, each range counted three times, the first in bulk, the second building the geometry, the third served by it; three hundred distinct ranges in two rotating passes, the 64-slot cache thrashing; against the flat String on every call)",
+    "regressions": "PASS_WINDOWS M3ReverseLaneTest 350,200; M3CharDenseLinearTest 62,120; M3NeedlePlanBandTest 122,823; M3NeedleLaneTest 997,980; M3TrigramRepeatTest 13,068; M3NeedleArgTest 73,440; M3RegexLiteralGateTest 29,376; M3TQFactsBuildTest 23,595; M3StringM3OnM3Test 121,574; M3IndexOfFlatNeedleTest 137,948; M3RegexSubjectViewTest 9,567; M3GradedWindowsTest 56,591; M3CharSearchRepeatTest 25,380; M3CharSearchWindowsTest 61,650; M3StringPositionInvariant6Test 13; M3StringLiteralSplitTest 53,378; M3MixedCoderCompareTest 30,620; M3ContentEqualsTest 7,980; M3IgnoreCaseWindowsTest 188,512; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,919; A6 204 + 29",
+    "timing": "flag-off (a33/probe/ColdPrecomputeBench, the minimum of three runs per build, a39/probe/bench-a38-r*.tsv on the A38 build vs bench-a39-r*.tsv on this one, bench-compare-min3.txt; hot = one source repeatedly, cold = 256 distinct sources in rotation; flat in parentheses): hot codePointCount(0, len) over a 16384-unit UTF-16 range, atom 3,143 ns -> 17 (4,196), tuple 3,306 -> 17; 2048 units 375 -> 41 (240), tuple 367 -> 38; 256 units, under the registration floor, 75 -> 69 (49), tuple 80 -> 82; cold (256 distinct ranges in rotation, every count a first use) 16384 units 6,103 -> 5,331 (2,600), tuple 6,210 -> 5,079; 2048 units 768 -> 723 (512), tuple 347 -> 454; 256 units 77 -> 78 (48); Latin-1 ranges unchanged (3..8 ns, one unit per code point); codePointAt rows unchanged",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3StringCodePointPrecompute.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3CodePointCountRepeatRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3CodePointCountRepeatTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the geometry is a bet on repetition and costs a scan plus an int lane: a range counted once pays the bulk count and a small cache entry, a range counted again pays the geometry once and answers every later count in a few reads (the A32 model, as for the position blocks and the trigram facts)",
+    "measured and dropped: a bulk-count lane over byte windows with the stock UTF-16 count, which reads two bytes per unit and was no faster than the per-unit loop over char windows (cold 2048 units 399 ns to 1,063 for an atom); the bulk count is unchanged",
+    "offsetByCodePoints keeps building the geometry on its first use: it answers by binary search over counts and would otherwise scan several times",
+    "stacked on A38: merge after #663 and the Synexia crate PR (#10139 first, content-bearing merges); the owner commit is 6f44741eb2"
+  ]
+}
