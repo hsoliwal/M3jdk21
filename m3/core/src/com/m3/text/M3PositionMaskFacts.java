@@ -70,6 +70,15 @@ public final class M3PositionMaskFacts {
         if (autoNativeHistogramMaxRows <= 0 || nativeSlabRows <= 0) {
             throw new IllegalArgumentException("non-positive route geometry");
         }
+        long expectedPayloadBytes = 68L
+                + 8L * rowCount
+                + 4L * blockCount
+                + 10L * entryCount;
+        if (entryCount > 64L * blockCount
+                || primitivePayloadBytes != expectedPayloadBytes
+                || expectedPayloadBytes > Integer.MAX_VALUE - 8L) {
+            throw new IllegalArgumentException("inconsistent position-mask image geometry");
+        }
         return new M3PositionMaskFacts(
                 revision,
                 rowCount,
