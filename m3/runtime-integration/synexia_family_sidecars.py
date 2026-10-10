@@ -6,7 +6,7 @@
 
 The existing ``synexia.records.tsv:precompute_payload`` remains opaque.  This
 module defines the separate index-shaped sidecars needed by translation,
-spelling, token-range hashes, prefix counts, token frequencies, and indexed phrase rewrites.
+spelling, token-range hashes, prefix counts, and token frequencies.
 """
 
 from __future__ import annotations
@@ -28,13 +28,6 @@ LEGACY_FIXED_FILES = frozenset({
     "synexia.precompute-index.tsv", "synexia.precompute.tsv",
 })
 FAMILY_SPECS = {
-    "phrase-rewrite": {
-        "file": "synexia.phrases.tsv",
-        "columns": COMMON_SCOPE_COLUMNS + (
-            "source_token_ids", "target_token_ids",
-        ),
-        "key_columns": COMMON_SCOPE_COLUMNS + ("source_token_ids",),
-    },
     "prefix-counts": {
         "file": "synexia.prefix-counts.tsv",
         "columns": COMMON_SCOPE_COLUMNS + (
@@ -169,18 +162,6 @@ def _key(family: str, row: Mapping[str, str]) -> tuple[str, ...]:
 
 
 def _normalize_row(family: str, raw: Mapping[str, object]) -> tuple[tuple[object, ...], dict[str, str]]:
-    if family == "phrase-rewrite":
-        source = _ints(raw.get("source_token_ids"), "source_token_ids")
-        target = _ints(raw.get("target_token_ids"), "target_token_ids")
-        if not source:
-            raise ValueError("source_token_ids must not be empty")
-        row = {
-            **_scope(raw),
-            "source_token_ids": _encode_list(source),
-            "target_token_ids": _encode_list(target),
-        }
-        return _key(family, row), row
-
     if family == "translation-projection":
         ids = _ints(raw.get("translated_token_ids"), "translated_token_ids")
         count = _integer(raw.get("mapped_token_count"), "mapped_token_count")
@@ -272,18 +253,10 @@ def render_bundle(families: Mapping[str, Iterable[Mapping[str, object]]]) -> dic
     files: dict[str, bytes] = {}
     index_rows = []
     for family in sorted(FAMILY_SPECS):
-        if family == "phrase-rewrite":
-            # IndexPhraseTable is last-write-wins for duplicate source phrases.
-            latest = {}
-            for row in families[family]:
-                key, normalized = _normalize_row(family, row)
-                latest[key] = normalized
-            keys_and_rows = sorted(latest.items())
-        else:
-            keys_and_rows = [_normalize_row(family, row) for row in families[family]]
-            keys = [item[0] for item in keys_and_rows]
-            if keys != sorted(keys) or len(keys) != len(set(keys)):
-                raise ValueError(f"{family} rows must be sorted and unique")
+        keys_and_rows = [_normalize_row(family, row) for row in families[family]]
+        keys = [item[0] for item in keys_and_rows]
+        if keys != sorted(keys) or len(keys) != len(set(keys)):
+            raise ValueError(f"{family} rows must be sorted and unique")
         spec = FAMILY_SPECS[family]
         content = _csv_bytes(spec["columns"], (item[1] for item in keys_and_rows))
         file_name = spec["file"]
@@ -383,10 +356,7 @@ def _parse_map(value: str, name: str) -> dict[int, int]:
 
 def _normalize_serialized_row(family: str, row: Mapping[str, str]) -> tuple[tuple[object, ...], dict[str, str]]:
     value = dict(row)
-    if family == "phrase-rewrite":
-        value["source_token_ids"] = _parse_int_list(value["source_token_ids"], "source_token_ids")
-        value["target_token_ids"] = _parse_int_list(value["target_token_ids"], "target_token_ids")
-    elif family == "translation-projection":
+    if family == "translation-projection":
         value["translated_token_ids"] = _parse_int_list(value["translated_token_ids"], "translated_token_ids")
         value["mapped_token_count"] = int(value["mapped_token_count"])
     elif family == "spell-index":
@@ -417,11 +387,6 @@ def self_test() -> int:
         "source_manifest_revision": "manifest-r1", "owner_fingerprint": "owner-f1",
     }
     families = {
-        "phrase-rewrite": [
-            {**scope, "source_token_ids": [1, 2], "target_token_ids": [9]},
-            {**scope, "source_token_ids": [1, 2], "target_token_ids": [8]},
-            {**scope, "source_token_ids": [4], "target_token_ids": []},
-        ],
         "translation-projection": [{
             **scope, "source_language": "en",
             "target_language": "hi", "lexicon_fingerprint": "lex-1", "source_fingerprint": "src-1",
@@ -457,11 +422,6 @@ def self_test() -> int:
     if first != second:
         raise AssertionError("sidecar rendering is not deterministic")
     stats = verify_optional_bundle(first)
-    if stats["families"] != 6:
-        raise AssertionError("phrase family was not published")
-    phrase_bytes = first["synexia.phrases.tsv"]
-    if b"\t1,2\t8\n" not in phrase_bytes or b"\t4\t-\n" not in phrase_bytes:
-        raise AssertionError("phrase ordering, duplicate policy, or empty replacement changed")
     checks = int(stats["families"]) + int(stats["rows"])
     legacy = verify_optional_bundle({"synexia.shards.tsv": b"legacy\n"})
     if legacy != {"legacy": True, "families": 0, "rows": 0}:
