@@ -1,0 +1,85 @@
+{
+  "schema": "M3JDK21_SYNEXIA_ENCODE_BULK_UNITS_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-encode-bulk-units-20261009",
+    "pullRequest": null,
+    "commit": "24584344485",
+    "stackedOn": [
+      {
+        "pullRequest": 9974,
+        "crate": "m3-m3-on-m3-compare"
+      },
+      {
+        "pullRequest": 9973,
+        "crate": "m3-atom-bulk-io"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.EncodeBulkUnits",
+    "crate": "m3-encode-bulk-units",
+    "fossReuseDecisionRow": "string.encode.bulk-units",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3String",
+        "mechanics": "encodeUTF8/encode8859_1/encodeASCII loop shapes over an array: replacement '?' for unmappable units and lone surrogates, no-replacement refusal through unmappable(offset, length)"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringAtom.java",
+        "commit": "2e8b713b01",
+        "target": "java.lang.M3String",
+        "mechanics": "the A11 bulk getChars behind units()"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: bytes identical to a flat String; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-m3-on-m3-compare-20261009 (#535, A12) on m3/precompute-atom-bulk-read-20261009 (#534) on m3/precompute-ignorecase-mixed-facts-20261009 (#532) on m3/precompute-stack-reapply-20261009 (#531) on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3String"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed against eb16272d8a under the supersession model: no upstream target changed; M3String owner recorded as superseded; 67 targets, runtime.patch unchanged"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "bb34e805a81e01eb098721b30e34182f823ebd3396046aba05afcf38f38cf6bf",
+      "after": "24b8ba668ca03c13701ad1fe4c3c65cc1d1e356781d366ed4d6837661f021e5a",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringEncodeBulkTest.java",
+      "before": "ABSENT",
+      "after": "5198c86517d820f0042781b014a6373a027b4c520bc3ed732e1ee062e2a4e173",
+      "resource": "01-M3StringEncodeBulkTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (43 files, 152 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3StringEncodeBulkTest flag-off: 18,279 checks (UTF-8, ISO-8859-1, US-ASCII, UTF-16BE/LE, UTF-16, windows-1252 over atoms, nested tuples and slices with ASCII, Latin-1, BMP, surrogate pairs and lone surrogates, lengths 0..4099, byte-identical to flat; getBytes() and getBytes(String); String.getBytesNoRepl same bytes and same refusal class)",
+    "regressions": "PASS_WINDOWS M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,920; A6 204 + 29",
+    "timing": "flag-off (a13/probe/EncodeBench, bench-baseline.tsv vs bench-after.tsv): ISO-8859-1 replacement on UTF-16 content 7x..14x faster from 256 units, UTF-16BE generic encoder 4x..10x, non-ASCII UTF-8 1.5x..4.6x; ASCII/Latin-1 single-byte and 32 units at par",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 67 targets under the supersession model (no upstream change); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3EncodeBulkUnitsRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3StringEncodeBulkTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the encoders read every unit once in bulk and fold the array; the transient array is of the same order as the output they allocate",
+    "the ASCII and Latin-1 single-byte paths keep the A11 bulk copy; the ISO-8859-1 no-replacement refusal loop is an error path and stays",
+    "String.getBytesNoRepl unwraps the IllegalArgumentException cause on both sides, so refusal classes stay identical",
+    "stacked on A12: merge after #535 and the Synexia crate PR, or regenerate the runtime re-seal"
+  ]
+}
