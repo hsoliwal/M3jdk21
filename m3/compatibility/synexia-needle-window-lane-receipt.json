@@ -1,0 +1,76 @@
+{
+  "schema": "M3JDK21_SYNEXIA_NEEDLE_WINDOW_LANE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-needle-window-lane-20261010",
+    "pullRequest": null,
+    "commit": "d5a6855fafc03a3e9441a4685c3ef61cebe94d1b",
+    "stackedOn": [
+      {
+        "pullRequest": 10123,
+        "crate": "m3-trigram-facts-repeat"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.NeedleWindowLane",
+    "crate": "m3-needle-window-lane",
+    "fossReuseDecisionRow": "string.search.m3-needle-window-lane",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "commit": "5c106facc2",
+        "target": "java.lang.M3String.indexOf / lastIndexOf (M3 needle), indexOfUnits / lastIndexOfUnits, windowIndexOf / windowLastIndexOf",
+        "mechanics": "the A27 flat-needle window lane (graded by A33) now shared with the M3 needle's lane through the needle's compact value (A21); the per-window dispatch to the stock StringLatin1/StringUTF16 searches as String dispatches it"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same index and the same match as the flat String for every M3 needle over every M3 haystack; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-trigram-facts-repeat-20261010 (#657, A34) on #654 on #653 on #610 on #609 on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3String"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3String.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "da5897b1b8bf375692fe5a545cb64d336b2859954470e2340b1406eada3ec8d6",
+      "after": "cc70590edf677e6a5f0f433e4898e328507b07061b865af592df36f45f5b197a",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3NeedleLaneTest.java",
+      "before": "ABSENT",
+      "after": "728dd928664fdb21059c0146b8d2d8ae2b80f860c4e04556bf09056f8d7f33da",
+      "resource": "01-M3NeedleLaneTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3NeedleLaneTest flag-off: 997,980 checks (indexOf, indexOf(from), indexOf(begin, end), lastIndexOf, lastIndexOf(from) and contains with M3 needles of 2..8193 units, over and under the 8192-unit plan bound, present at the start, the end, the middle and across the 64/256/1024/4096-unit window edges, absent by one unit of either coder, empty, longer than the text, the whole text, shaped as atoms, nested tuples and slices of padded owners of either coder, over atoms, nested tuples and slices of ASCII, Latin-1, mixed UTF-16 and periodic texts of 0..20000 units, each search run twice; the same M3 needles over the flat text; against the flat String on every call)",
+    "regressions": "PASS_WINDOWS M3TrigramRepeatTest 13,068; M3NeedleArgTest 73,440; M3RegexLiteralGateTest 29,376; M3TQFactsBuildTest 23,595; M3StringM3OnM3Test 121,574; M3IndexOfFlatNeedleTest 137,948; M3RegexSubjectViewTest 9,567; M3GradedWindowsTest 56,591; M3CharSearchRepeatTest 25,380; M3CharSearchWindowsTest 61,650; M3StringPositionInvariant6Test 13; M3StringLiteralSplitTest 53,378; M3MixedCoderCompareTest 30,620; M3ContentEqualsTest 7,980; M3IgnoreCaseWindowsTest 188,512; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,919; A6 204 + 29",
+    "timing": "flag-off (a35/probe/NeedleLaneBench, bench-before.tsv on the A34 build vs bench-after.tsv on this one; cold = 256 distinct sources in rotation; flat in parentheses): indexOf(M3 needle 8 at end) Latin-1 atom 256 units 228 ns -> 128 (91), 2048: 2,685 -> 424 (218), 16384: 17,481 -> 1,854 (1,333); UTF-16 256: 274 -> 192 (65), 2048: 1,512 -> 599 (409), 16384: 18,909 -> 6,784 (8,888); indexOf(M3 needle 8 at mid) Latin-1 2048: 1,446 -> 244 (107), 16384: 9,271 -> 1,151 (648), UTF-16 16384: 11,244 -> 3,988 (5,477); lastIndexOf(M3 needle 8 at start) Latin-1 2048: 10,332 -> 1,020 (807), 16384: 95,677 -> 9,384 (9,001), UTF-16 2048: 12,090 -> 938 (945), 16384: 87,539 -> 11,232 (12,697); cold indexOf(M3 needle miss) Latin-1 256: 236 -> 110 (158), 2048: 2,337 -> 307 (387), 16384: 19,058 -> 2,037 (5,614), UTF-16 2048: 2,748 -> 506 (353), 16384: 21,715 -> 18,481 (3,692); cold lastIndexOf(M3 needle miss) Latin-1 2048: 11,581 -> 1,335 (1,110), 16384: 90,570 -> 17,227 (10,463), UTF-16 16384: 97,933 -> 18,575 (13,835); tuples alike; hot misses the facts reject unchanged (20..60 ns); the flat needle's lane through the shared loop, hot Latin-1 16384: 6,483 -> 1,534 (4,601); residual: a 32-unit M3 needle at the end of a 16384-unit UTF-16 source, hot 4,455 -> 5,480 (2,624) and cold 8,090 -> 17,160 (10,241), where the skip search read fewer units; the UTF-16 rows at 16384 units stay 2x..5x over flat (the bulk UTF-16 read)",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3String.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3NeedleWindowLaneRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3NeedleLaneTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the needle's compact value is transient scratch of the needle's size (as the A21 flat-haystack lane already reads it); no precompute stores it, so invariant 6 (no second spelling store) holds",
+    "the trigram gates stay in front of the lane: a hot miss the facts reject never reads a window; a cold source or a needle sharing the text's trigrams runs the lane, which is what the exact search now is",
+    "the per-unit skip and KMP searches over an M3 source in M3StringSearchPrecompute are no longer reached from String (the flat-haystack lanes still use the plans); their removal is a separate cleanup leaf",
+    "a flat needle still takes its own entry (the facts gate, the coder gate, the per-unit guard) and the same window loop; an M3 needle handed to that entry is routed to its lane",
+    "stacked on A34: merge after #657 and the Synexia crate PR (#10123 first, content-bearing merges); the owner commit is 9143a5e757"
+  ]
+}
