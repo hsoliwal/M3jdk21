@@ -49,6 +49,21 @@ public final class M3CodeTextPrecomputeCoverageTest {
                         && Files.exists(nativeContract),
                 "code-text receiver files are missing");
 
+        String factsText = Files.readString(facts, StandardCharsets.UTF_8);
+        check(factsText.contains("fromPrecomputed")
+                        && factsText.contains("utf16Length")
+                        && factsText.contains("codePointCount")
+                        && factsText.contains("textFlags")
+                        && factsText.contains("contentHash64")
+                        && factsText.contains("presence64")
+                        && factsText.contains("simHash64")
+                        && factsText.contains("lexicalPacked")
+                        && factsText.contains("javaKeywordHits")
+                        && factsText.contains("codeScore")
+                        && factsText.contains("regexScore")
+                        && factsText.contains("minHash"),
+                "typed precomputed facts receiver is incomplete");
+
         List<String> mapLines = Files.readAllLines(map, StandardCharsets.UTF_8);
         check(mapLines.size() == REQUIRED_FIELDS.size() + 1, "field map row count changed");
         Set<String> fields = new HashSet<>();
