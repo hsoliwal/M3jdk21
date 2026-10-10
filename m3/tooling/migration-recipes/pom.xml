@@ -102,6 +102,47 @@
     </profile>
 
     <profile>
+      <id>m3-synexia-consumer-retirement-proof</id>
+      <dependencies>
+        <dependency>
+          <groupId>com.synexia</groupId>
+          <artifactId>synexia-openrewrite-recipes</artifactId>
+          <version>${m3.synexia.version}</version>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.13.0</version>
+            <configuration>
+              <excludes>
+                <exclude>com/synexia/**</exclude>
+              </excludes>
+              <testExcludes>
+                <testExclude>com/synexia/**</testExclude>
+              </testExcludes>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.5</version>
+            <configuration>
+              <useModulePath>false</useModulePath>
+              <includes>
+                <include>**/com/m3/rewrite/synexia/*ConsumerTest.java</include>
+                <include>**/com/m3/rewrite/synexia/M3SynexiaRecipeHomePolicyTest.java</include>
+              </includes>
+              <failIfNoTests>true</failIfNoTests>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
       <id>m3-synexia-canonical-recipes</id>
       <build>
         <plugins>
