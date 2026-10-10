@@ -1,0 +1,77 @@
+{
+  "schema": "M3JDK21_SYNEXIA_IGNORECASE_IN_PLACE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 tests",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-ignorecase-in-place-20261010",
+    "pullRequest": null,
+    "commit": "ced3afe17d3c9ee1fc45241582b596bffd28db7a",
+    "stackedOn": [
+      {
+        "pullRequest": 10146,
+        "crate": "m3-block-signal-256"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.IgnoreCaseInPlace",
+    "crate": "m3-ignorecase-in-place",
+    "fossReuseDecisionRow": "string.compare.ignorecase-in-place",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringMixedCompare.java",
+        "commit": "c9905c7f30",
+        "target": "java.lang.M3StringMixedCompare.compareIgnoreCase / regionMatchesIgnoreCase / fill / unsplitCut / windowMatchesIgnoreCase / windowDifferenceIgnoreCase / window",
+        "mechanics": "a flat side's value read in place at its offset; an M3 side's bytes into one buffer per side, grown with the graded windows and reused; ArraysSupport.mismatch over the window bytes of two sides of one coder, then the stock regionMatchesCI family from the first differing unit (one unit earlier after a high surrogate); the stock compareToCI family over exact-length copies of the first window that differs; the cut of a UTF-16 window moved back past surrogate pairs on either side"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same word as the flat String for every pair of sides; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-block-signal-256-20261010 (#665, A40) on #664 on #663 on #662 on #661 on #660 on #657 on #654 on #653 on #610 on #609 on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringMixedCompare"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3StringMixedCompare.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringMixedCompare.java",
+      "before": "4bbe774e2ca28f81c87d6f71a07b4ec9084952ef82dbca846f7912be4ef5ff8e",
+      "after": "75cf291849a592f6a4b756d1f612a37e7060d28deb38ff33e5afac295c2cb87f",
+      "resource": "00-M3StringMixedCompare.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3IgnoreCaseInPlaceTest.java",
+      "before": "ABSENT",
+      "after": "596aac29da95ba32a913622f2112c4ef34097df18ffb919d9e7c6e25d4f1fae9",
+      "resource": "01-M3IgnoreCaseInPlaceTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3IgnoreCaseInPlaceTest flag-off: 658,151 checks (compareToIgnoreCase and CASE_INSENSITIVE_ORDER with an M3 side, a flat side or both M3 in both orders, equalsIgnoreCase and regionMatches(ignoreCase) at random and edge offsets, over atoms, tuples and slices of wide owners, against identical, case-swapped, prefix-sharing and single-unit-different texts of five alphabets, the differences at random places, at the first and the last unit and at the 64..16384 window edges, Deseret pairs whose low unit alone differs, pairs and lone surrogates at the edges and across the end of the shorter side, 0..20000 units; against the flat String on every call); the same test on the A40 build fails at a window cut that split the other side's surrogate pair (jtreg-local/run-M3IgnoreCaseInPlaceTest-a40.log)",
+    "regressions": "PASS_WINDOWS M3IgnoreCaseWindowsTest 188,512; M3MixedCoderCompareTest 30,620; M3StringMixedCompareTest 262,675; M3StringM3OnM3Test 121,574; M3BlockSignalTest 68,520; M3StringPositionInvariant6Test 13; M3CodePointCountRepeatTest 14,004; M3ReverseLaneTest 350,200; M3CharDenseLinearTest 62,120; M3NeedlePlanBandTest 122,823; M3NeedleLaneTest 997,980; M3TrigramRepeatTest 13,068; M3NeedleArgTest 73,440; M3RegexLiteralGateTest 29,376; M3TQFactsBuildTest 23,595; M3IndexOfFlatNeedleTest 137,948; M3RegexSubjectViewTest 9,567; M3GradedWindowsTest 56,591; M3CharSearchRepeatTest 25,380; M3CharSearchWindowsTest 61,650; M3StringLiteralSplitTest 53,378; M3ContentEqualsTest 7,980; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringAtomBulkTest 100,779; A4 90,118; A8 329,909; A9 46,919; A6 204 + 29",
+    "timing": "flag-off (a41/probe/IgnoreCaseBench, the minimum of three runs per build, a41/probe/ic-a40-r*.tsv on the A40 build vs ic-a41-r*.tsv on this one, ic-compare-min3.txt; hot; flat in parentheses): compareToIgnoreCase(flat copy) over 2048 Latin-1 units, atom 571 ns -> 162 (445), tuple 604 -> 204; compareToIgnoreCase(flat copy) over 16384 Latin-1 units, atom 4,764 ns -> 519 (7,867), tuple 5,225 -> 524; compareToIgnoreCase(flat copy) over 2048 UTF-16 units, atom 1,268 ns -> 269 (331), tuple 1,221 -> 318; compareToIgnoreCase(flat copy) over 16384 UTF-16 units, atom 9,562 ns -> 1,404 (5,961), tuple 15,216 -> 1,768; compareToIgnoreCase(flat copy) over 2048 UTF-16 with Deseret pairs units, atom 1,153 ns -> 253 (313), tuple 1,205 -> 295; compareToIgnoreCase(flat copy) over 16384 UTF-16 with Deseret pairs units, atom 10,154 ns -> 1,586 (4,084), tuple 10,119 -> 1,649; compareToIgnoreCase(flat case-swapped) over 2048 Latin-1 units, atom 2,846 ns -> 1,239 (2,903), tuple 2,740 -> 1,534; compareToIgnoreCase(flat case-swapped) over 16384 Latin-1 units, atom 70,544 ns -> 8,171 (66,380), tuple 74,891 -> 9,527; compareToIgnoreCase(flat case-swapped) over 16384 UTF-16 units, atom 125,951 ns -> 121,285 (83,830), tuple 145,918 -> 150,248; compareToIgnoreCase(flat differs at end) over 16384 Latin-1 units, atom 4,963 ns -> 1,888 (2,861), tuple 5,454 -> 2,045; compareToIgnoreCase(flat differs at end) over 2048 UTF-16 units, atom 1,804 ns -> 715 (922), tuple 1,821 -> 702; compareToIgnoreCase(flat differs at end) over 16384 UTF-16 units, atom 10,203 ns -> 3,024 (5,517), tuple 10,478 -> 3,060; compareToIgnoreCase(M3 atom copy) over 16384 Latin-1 units, atom 4,927 ns -> 1,295 (615), tuple 5,939 -> 1,167; compareToIgnoreCase(M3 atom copy) over 16384 UTF-16 units, atom 10,777 ns -> 2,236 (1,430), tuple 12,021 -> 2,657; CASE_INSENSITIVE_ORDER(flat left) over 2048 Latin-1 units, atom 610 ns -> 140 (860), tuple 630 -> 233; CASE_INSENSITIVE_ORDER(flat left) over 16384 Latin-1 units, atom 6,791 ns -> 543 (3,072), tuple 5,428 -> 612; CASE_INSENSITIVE_ORDER(flat left) over 16384 UTF-16 units, atom 10,831 ns -> 1,773 (7,368), tuple 9,198 -> 1,515; equalsIgnoreCase(flat copy) over 2048 Latin-1 units, atom 828 ns -> 181 (558), tuple 613 -> 224; equalsIgnoreCase(flat copy) over 16384 Latin-1 units, atom 4,088 ns -> 557 (4,275), tuple 4,422 -> 601; equalsIgnoreCase(flat copy) over 2048 UTF-16 units, atom 1,035 ns -> 252 (680), tuple 1,152 -> 309; equalsIgnoreCase(flat copy) over 16384 UTF-16 units, atom 7,293 ns -> 1,345 (7,005), tuple 7,942 -> 1,486; regionMatches(true, flat copy) over 16384 Latin-1 units, atom 4,256 ns -> 602 (8,936), tuple 4,436 -> 674; regionMatches(true, flat copy) over 16384 UTF-16 units, atom 7,466 ns -> 1,535 (6,525), tuple 6,980 -> 1,537; compareToIgnoreCase(UTF16 flat, CJK at end) over 2048 Latin-1 units, atom 698 ns -> 877 (359), tuple 689 -> 869; compareToIgnoreCase(UTF16 flat, CJK at end) over 16384 Latin-1 units, atom 10,272 ns -> 5,147 (3,040), tuple 5,704 -> 4,910; compareToIgnoreCase(flat differs at 0) over 16 Latin-1 units, atom 23 ns -> 35 (3), tuple 36 -> 61; compareToIgnoreCase(flat differs at 0) over 2048 Latin-1 units, atom 26 ns -> 48 (4), tuple 31 -> 60; compareToIgnoreCase(flat differs at 0) over 16384 Latin-1 units, atom 29 ns -> 45 (4), tuple 35 -> 61; compareToIgnoreCase(flat differs at end) over 16 Latin-1 units, atom 29 ns -> 42 (7), tuple 42 -> 66; compareToIgnoreCase(flat differs at end) over 16 UTF-16 with Deseret pairs units, atom 142 ns -> 135 (32), tuple 209 -> 191",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3StringMixedCompare.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3IgnoreCaseInPlaceRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3IgnoreCaseInPlaceTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the stock lanes alone decide: the regionMatchesCI family says whether a window matches and the compareToCI family words the first window that differs; the mismatch front is exact because the stock rule folds from the first differing unit on, a Latin-1 unit on its own and a low surrogate together with the high surrogate before it, equal on both sides, where the fold restarts one unit earlier",
+    "a window of two UTF-16 sides is cut where neither side has a high surrogate before the cut and a low surrogate after it, the unit after the window fetched for that; A28 moved the cut back once when a side ended with a high surrogate, which could split the other side's pair and fold its low unit alone (the new test fails on the A40 build at a 256-unit Deseret text, compareToIgnoreCase -10239 against the flat 1); when every cut of a window splits a pair (pairs misaligned by one unit on both sides, both ways), the window takes the rest of the range as one, bounded by the strings",
+    "a residual of the stock code-point rule stays: against a lone high surrogate followed by a pair on one side and a pair on the other, the stock loop folds the shared high twice and continues one unit apart on the two sides; a window reproduces that within itself and a later window restarts the two sides together, which can differ from the stock word only when the two texts, one unit apart, stay equal across a whole window",
+    "an M3 side keeps one transient window per side, grown with the graded windows (64, 256, 1024, 4096 units) and reused; a flat side is never copied except as the exact-length tail of the window that differs",
+    "mixed coders keep the stock regionMatchesCI_UTF16 / regionMatchesCI_Latin1 loops over the window, whose per-unit equality test is their own fast path",
+    "stacked on A40: merge after #665 and the Synexia crate PR (#10146 first, content-bearing merges); the owner commit is 239b047856"
+  ]
+}

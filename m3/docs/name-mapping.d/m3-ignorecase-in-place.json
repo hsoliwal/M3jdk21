@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.M3StringMixedCompare.compareIgnoreCase: both sides copied into fresh arrays per bulk window (a flat side through Arrays.copyOfRange) and handed to the stock compareToCI family; regionMatchesIgnoreCase reading the flat side in place; a window of two UTF-16 sides cut back once at a high surrogate (A28 lineage, carried to A40 c9905c7f30)",
+      "source_commit": "c9905c7f30",
+      "target": "a flat side read in place and an M3 side through one transient window per side reused across the scan; two sides of one coder skip their equal prefix through the mismatch intrinsic before the stock regionMatchesCI rule, in both ignore-case lanes; only the first window that differs is copied, exact-length, for the stock compareToCI word; a window of two UTF-16 sides is cut where neither side has a surrogate pair across the cut (unsplitCut), the whole rest of the range when every cut splits one",
+      "status": "implemented-locally-verified (G7; flag-off: M3IgnoreCaseInPlaceTest 658,151 checks against the flat String on every call; compareToIgnoreCase(flat copy) over 2048 Latin-1 units, atom 571 ns -> 162 (445), tuple 604 -> 204)",
+      "target_rule": "the same word as the flat String's compareToIgnoreCase, equalsIgnoreCase and regionMatches(ignoreCase) for every pair of sides"
+    }
+  ]
+}
