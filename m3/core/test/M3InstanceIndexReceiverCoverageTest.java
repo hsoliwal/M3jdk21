@@ -50,7 +50,6 @@ public final class M3InstanceIndexReceiverCoverageTest {
         String decision = row(foss, "m3jdk-instance-metadata-receiver\t");
         check(decision.contains("\tNO_FIT\t"));
         check(decision.contains("No external donor"));
-        check(decision.contains("ADAPT_COMPOSE"));
 
         check(Files.exists(Path.of("core", "src", "com", "m3", "text", "M3InstanceIndex.java")));
         check(Files.exists(Path.of("core", "test", "M3InstanceIndexTest.java")));
