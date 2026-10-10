@@ -101,12 +101,14 @@ public final class M3CodeTextPrecomputeCoverageTest {
     }
 
     private static void checkNativeReceipt(Path receipt, Path nativeContract) throws Exception {
-        final String nativeHead = "0c7112bbc7adf96e306377eca7c418cfc8e31d51";
-        final String nativeBlob = "4577a462879c1f28723e69307398107c2908c394";
-        final String targetBlob = "14cf9d555a2444b6b5ab8fc2c4db515150c310e0";
+        final String nativeHead = "4a9897b9327c26e348ff78fd40731f5bfdcbe473";
+        final String nativeBlob = "152b0c2b4062e5a83afafcdc06106ab874cf40e5";
+        final String targetBlob = "7ac7cedf4e351e27a3eaf2e5b99bce6854db4e1a";
         String contract = Files.readString(nativeContract, StandardCharsets.UTF_8);
         check(contract.contains("nativeAnalyzeRange")
                         && contract.contains("([C[I[III)[J")
+                        && contract.contains("27b6f34ab44b00e82ec814660f249f0b6bfd7cbd")
+                        && contract.contains("6b1e4a5716aacfa71c33aedf5ed249f4af4a325d")
                         && contract.contains("Java_com_synexia_indexstring_JniMIndexCodeTextSignalBatch_nativeAnalyzeRange"),
                 "native JNI ABI contract is incomplete");
         List<String> lines = Files.readAllLines(receipt, StandardCharsets.UTF_8);
@@ -116,6 +118,7 @@ public final class M3CodeTextPrecomputeCoverageTest {
         check(columns[1].equals(SOURCE_REPO)
                         && columns[2].equals(SOURCE_PR)
                         && columns[3].equals(nativeHead)
+                        && columns[4].equals("synexia-indexstring/native/src/mindex_code_text_signal_jni.c")
                         && columns[5].equals(nativeBlob)
                         && columns[7].equals("hsoliwal/M3jdk21")
                         && columns[8].equals(TARGET_REF)
