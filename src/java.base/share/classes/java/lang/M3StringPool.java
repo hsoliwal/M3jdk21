@@ -585,6 +585,11 @@ final class M3StringPool {
                     bucket.values.add(new TupleRef(created, routeKey, bucket));
                 } else {
                     RETAINED_TUPLES.decrementAndGet();
+                    // Unretained tuples must not leave empty route buckets in TUPLES.
+                    // There will be no TupleRef to enqueue later and reclaim this key.
+                    if (bucket.values.isEmpty() && TUPLES.remove(routeKey, bucket)) {
+                        bucket.retired = true;
+                    }
                 }
                 return M3String.whole(created);
             }
