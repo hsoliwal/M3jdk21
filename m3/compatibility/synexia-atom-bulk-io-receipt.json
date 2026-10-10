@@ -1,0 +1,133 @@
+{
+  "schema": "M3JDK21_SYNEXIA_ATOM_BULK_IO_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-atom-bulk-io-20261009",
+    "pullRequest": null,
+    "commit": "aba251dc7f9",
+    "stackedOn": [
+      {
+        "pullRequest": 9972,
+        "crate": "m3-mixed-compare"
+      },
+      {
+        "pullRequest": 9971,
+        "crate": "m3-pool-bounds"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.AtomBulkIo",
+    "crate": "m3-atom-bulk-io",
+    "fossReuseDecisionRow": "string.atom.bulk-io",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/jdk/internal/util/ArraysSupport.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringAtom",
+        "mechanics": "vectorizedMismatch over an absolute address and a heap array with the mismatch tail idiom (first unit, stub, remaining tail by scalar loads)"
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/misc/Unsafe.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringAtom",
+        "mechanics": "copyMemory / copySwapMemory for reads of 64 units and up; isBigEndian for the native-order layout of local width-2 atoms"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringMixedCompare.java",
+        "commit": "89961d6acb",
+        "target": "java.lang.M3StringMixedCompare",
+        "mechanics": "mismatchInPlace asks the storage side when exactly one side is flat; regionMatchesUnits serves regionMatches(false) and startsWith"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: byte-identical results; layout stays flag-driven for every reader; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-ignorecase-mixed-facts-20261009 (#532, A10) on m3/precompute-stack-reapply-20261009 (#531) on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringAtom",
+      "java.lang.M3StringOwner",
+      "java.lang.M3StringTuple",
+      "java.lang.M3String",
+      "java.lang.M3StringMixedCompare",
+      "java.lang.String"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed against 16ce01f5da under the supersession model: String.java after-image and hunks regenerated from a synthetic after-state tree; M3String, M3StringAtom, M3StringOwner, M3StringTuple, M3StringMixedCompare owners recorded as superseded; 67 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "9f51f5ef71c86e0f98a6e0ad7d1efbb24df49a43b2a026ef55457cdc921cba08",
+      "after": "3480c1d89c6137e771049ec9e9a66f6dd58c2efa3a1f608d49a8be6a3818c3e6",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringAtom.java",
+      "before": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f",
+      "after": "f0bda25831e87d6b1339e8b8931cb2ac0ce7a543f4fd9ef7ea02e6837fc62d7e",
+      "resource": "01-M3StringAtom.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringMixedCompare.java",
+      "before": "57c50151826d2b1e04964a0a573cfd4046e868637dec8f3d428c9b8e33762697",
+      "after": "39d1e0b1a98be4129ad206823922b51838daecb71069a14dde8f54a4f98e0515",
+      "resource": "02-M3StringMixedCompare.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringOwner.java",
+      "before": "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74",
+      "after": "9922ee41d15dfccca2f5b8251adfcb67969ca78511bd13ba0362acf2d8b250f5",
+      "resource": "03-M3StringOwner.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringTuple.java",
+      "before": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9",
+      "after": "f74211508fc99e6568649f0f41d1f3e8edc60905b9b7e2626cd7f43304386f5d",
+      "resource": "04-M3StringTuple.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringAtomBulkTest.java",
+      "before": "ABSENT",
+      "after": "19ec3123e6dfd2fa97344b76e3f57b71926cc31a11784649651d078f0fb59d66",
+      "resource": "05-M3StringAtomBulkTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "4696d49313ec8be619ad1cb074d4c281f1bccc7eb883ed1a9f064b9fefe6833a",
+      "after": "86264e9634d2585a7ca5ddb4385c8df51c14cffa16635f11efa8adebc9137eb2",
+      "resource": "00-String.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (43 files, 151 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3StringAtomBulkTest flag-off: 100,779 checks (every admission constructor, both widths, lengths 0..4097 across the bulk threshold and the vectorized tail; mismatchUnits at every position for atoms, tuples and slices against Latin-1 and UTF-16 values; mixed equals/compareTo/regionMatches/startsWith/endsWith against stock)",
+    "regressions": "PASS_WINDOWS M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,926 (varies by GC timing); A6 204 + 29",
+    "timing": "flag-off (a11/probe/AtomBulkBench, bench-baseline.tsv vs bench-after2.tsv): mixed equals/compareTo 6x..23x faster from 256 units (2048 Latin-1: 43/51 ns vs flat 37/44); getBytes 3.5x..26x; UTF-16 getChars 6x..12x; short lengths and admission at par",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 67 targets under the supersession model; apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3AtomBulkIoRecipeTest 3/3 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3StringAtomBulkTest and the HotSpot reader over native-order atoms under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "an atom compares in place only when the widths agree (Latin-1 atom vs Latin-1 value, native-order UTF-16 atom vs UTF-16 value); every other shape folds windows, so results never depend on the layout",
+    "local width-2 atoms are written in the host byte order; the per-atom flag stays and every reader follows it, so mapped lexicon atoms (recorded big-endian) and foreign-order atoms keep working through copySwapMemory/reverseBytes",
+    "bulk copies start at 64 units: copyMemory is a runtime call whose fixed cost loses below that (bench 32 vs 256)",
+    "admission keeps its validating per-unit hash loops: the structural mix hash dominates admission and bulk writes with temporary arrays measured slower on short inputs",
+    "the Latin-1 getChars loop stays as it was: C2 vectorizes it, an eight-units-per-load unpack measured slower",
+    "stacked on A10: merge after #532 and Synexia #9972, or regenerate the runtime re-seal"
+  ]
+}

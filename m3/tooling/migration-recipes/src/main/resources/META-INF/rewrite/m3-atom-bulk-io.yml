@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.AtomBulkIo
+displayName: M3JDK21 atoms compared in place against flat Strings and read in bulk
+description: >-
+  Every mixed comparison copied both sides into windows and every atom read was a per-unit
+  Unsafe loop. M3StringOwner.mismatchUnits (M3String wrapper, tuple descent) lets the compare
+  helper ask the storage side for the first differing unit against the flat side's compact value:
+  an atom answers with ArraysSupport.vectorizedMismatch over its native bytes (Latin-1 atom against
+  a Latin-1 value, native-order UTF-16 atom against a UTF-16 value), no copy; other shapes fold
+  windows. equals verification, compareTo, regionMatches(false) and startsWith with one flat side
+  route through it. Local width-2 atoms are written in the host byte order (every reader follows
+  the per-atom flag), so getChars/getBytes copy 64 units and up in bulk and charAt is one load.
+  Admission keeps its validating hash loops. Java step: M3String, M3StringAtom,
+  M3StringMixedCompare, M3StringOwner, M3StringTuple, the jtreg proof; text step: String.java.
+  Stacks on crate m3-mixed-compare (its postimages are these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-atom-bulk-io
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-atom-bulk-io
