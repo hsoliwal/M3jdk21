@@ -2,11 +2,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+package java.lang;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import com.m3.text.M3StringFacts;
 
 /** Contract proof for the Synexia TextFacts to M3StringFacts target map. */
 public final class M3StringFactsContractTest {
