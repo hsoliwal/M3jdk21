@@ -12,12 +12,20 @@ from collections.abc import Iterable, Mapping
 SCHEMA_VERSION = "m3phrase-v1"
 FILE_NAME = "synexia.phrases.tsv"
 COLUMNS = (
+    "schema_version",
     "source_id",
     "record_id",
     "source_revision",
     "vocabulary_fingerprint",
     "source_token_ids",
     "target_token_ids",
+)
+KEY_COLUMNS = (
+    "source_id",
+    "record_id",
+    "source_revision",
+    "vocabulary_fingerprint",
+    "source_token_ids",
 )
 
 
@@ -61,6 +69,7 @@ def _normalize(raw: Mapping[str, object]) -> tuple[tuple[str, ...], dict[str, st
     source = _ints(raw.get("source_token_ids"), "source_token_ids", allow_empty=False)
     target = _ints(raw.get("target_token_ids"), "target_token_ids")
     row = {
+        "schema_version": SCHEMA_VERSION,
         "source_id": _text(raw.get("source_id"), "source_id"),
         "record_id": _text(raw.get("record_id"), "record_id"),
         "source_revision": _text(raw.get("source_revision"), "source_revision"),
@@ -70,7 +79,7 @@ def _normalize(raw: Mapping[str, object]) -> tuple[tuple[str, ...], dict[str, st
         "source_token_ids": _encode(source),
         "target_token_ids": _encode(target),
     }
-    return tuple(row[column] for column in COLUMNS[:5]), row
+    return tuple(row[column] for column in KEY_COLUMNS), row
 
 
 def render(rows: Iterable[Mapping[str, object]]) -> bytes:
@@ -101,6 +110,8 @@ def verify(content: bytes) -> int:
         for column in COLUMNS:
             if raw.get(column) is None:
                 raise ValueError("phrase sidecar field missing")
+        if raw["schema_version"] != SCHEMA_VERSION:
+            raise ValueError("phrase sidecar schema mismatch")
         key, normalized = _normalize({
             **raw,
             "source_token_ids": _decode(raw["source_token_ids"], "source_token_ids", False),
