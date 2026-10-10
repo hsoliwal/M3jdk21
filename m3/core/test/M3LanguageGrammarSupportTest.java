@@ -38,7 +38,7 @@ public final class M3LanguageGrammarSupportTest {
                 .orElseThrow(() -> new AssertionError("translation manifest row missing"));
         String[] columns = row.split("\\t", -1);
         check(columns.length == 9);
-        check(columns[5].equals("M3StringFacts + TranslationMapping + GrammarSupport"));
+        check(columns[5].equals("M3StringFacts + M3LexiconPrecompute.TranslationProjection + SharedLexiconPrecomputeCatalog.TranslationIdentity + M3LanguageGrammarSupport"));
         check(columns[8].equals("translation_grammar_supported"));
         System.out.println("M3JDK_GRAMMAR_SUPPORT_PASS checks=" + checks + " languages=16");
     }
