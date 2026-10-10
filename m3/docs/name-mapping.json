@@ -430,7 +430,7 @@
       "receiver_manifest": "m3/runtime-integration/synexia-fuzzy-histogram-receiver.tsv",
       "benchmark_repository": "hsoliwal/com.synexia",
       "benchmark_pr": 10112,
-      "benchmark_head": "5dd626fde4da2318ca947e05f1b25f371c17e28c",
+      "benchmark_head": "bb6eeba0558b2ce4171eba921603c6b471f0d3f0",
       "benchmark_run": 38015055434,
       "benchmark_job": 114103360841
     }
