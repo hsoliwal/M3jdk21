@@ -1,0 +1,7 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.collections.M3SegmentedLaneNative
+displayName: M3JDK optional segmented bitmap JNI
+description: Target-specific sealed JNI candidate for com.m3.collections.M3BitLane28; reusable Java lane recipes remain canonical in Synexia.
+recipeList:
+  - com.m3.rewrite.collections.M3SegmentedLaneNativeRecipe
