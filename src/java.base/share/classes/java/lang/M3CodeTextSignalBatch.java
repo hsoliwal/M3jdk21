@@ -102,7 +102,7 @@ final class M3CodeTextSignalBatch {
                     semicolons++;
                     punctuation++;
                 }
-                case '\\\\' -> {
+                case '\\' -> {
                     flags |= M3CodeTextFacts.HAS_BACKSLASH;
                     backslashes++;
                     punctuation++;
