@@ -82,7 +82,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: hsoliwal/com.synexia
-          ref: 691359578799ec5ce15079c70557375a231870fa
+          ref: 929a228b703947dfb2151e4ca90efcfe209a6a80
           path: .canonical-synexia
           fetch-depth: 1
       - uses: actions/setup-java@v4
