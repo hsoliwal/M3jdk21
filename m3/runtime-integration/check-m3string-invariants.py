@@ -863,6 +863,13 @@ for pin in [
 ]:
     if pin not in literal_history:
         fail(f"indexed literal replacement history lost donor pin: {pin}")
+literal_regex_start = m3.find("    static boolean isLiteralRegex(String regex)")
+literal_regex_end = m3.find("    /** Conservative BMP literal subset;", literal_regex_start)
+if literal_regex_start < 0 or literal_regex_end < 0:
+    fail("indexed literal regex guard atom is absent")
+literal_regex = m3[literal_regex_start:literal_regex_end]
+if "Character.isSurrogate(unit)" not in literal_regex:
+    fail("indexed literal regex owner lost surrogate guard")
 literal_start = m3.find("    static boolean isLiteralRegexReplacement(")
 literal_end = m3.find("    static int pow31(", literal_start)
 if literal_start < 0 or literal_end < 0:
@@ -870,7 +877,6 @@ if literal_start < 0 or literal_end < 0:
 literal_atom = m3[literal_start:literal_end]
 for marker in [
     "static boolean isLiteralRegexReplacement(String regex, String replacement)",
-    "Character.isSurrogate(unit)",
     "if (found < 0) return original;",
     "return new String(replaceMatches(target, canonicalize(replacement), found, firstOnly));",
     "found = !firstOnly && cursor <= length() - checkedTarget.length()",
