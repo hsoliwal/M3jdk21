@@ -1,0 +1,90 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FLAT_NEEDLE_GATE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 tests",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-flat-needle-gate-20261010",
+    "pullRequest": null,
+    "commit": "dc99f0b83af487dc934659cadb7b2c2632a313ca",
+    "stackedOn": [
+      {
+        "pullRequest": 10147,
+        "crate": "m3-ignorecase-in-place"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.FlatNeedleGate",
+    "crate": "m3-flat-needle-gate",
+    "fossReuseDecisionRow": "string.search.flat-needle-trigram-gate",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "commit": "77a000d14f",
+        "target": "java.lang.M3StringSearchPrecompute.mayContain(M3String, String) / trigramKey / FLAT_NEEDLE_GATE_UNITS",
+        "mechanics": "the source facts of the existing 64-slot SOURCE_CACHE (register on the first use, build on the repeat use, A34) probed through M3TQ.Facts.test with the needle's trigram keys packed as M3TQ packs them; no new cache, no retained bytes"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "commit": "77a000d14f",
+        "target": "java.lang.M3String.indexOf(String, int, int) / lastIndexOf(String, int)",
+        "mechanics": "the gate consulted after the 64-bit facts gate and the coder check, before the window lane"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same index as the flat String for every needle over every source; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-ignorecase-in-place-20261010 (#667, A41) on #665 on #664 on #663 on #662 on #661 on #660 on #657 on #654 on #653 on #610 on #609 on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringSearchPrecompute",
+      "java.lang.M3String"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3String.java and M3StringSearchPrecompute.java owners recorded as reviewed superseded hashes; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "75bdefa275e2990a3319eb0282147a2f3105cb9fa44fa29195ed95d753675e49",
+      "after": "a1f746a6e8cac16384932720adf4aa6ca573d3ba0eaec1a0485f08c0817a740d",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+      "before": "f813486ef6537458aebad7fef0dd3799ee2fe6d2c4f2440a6c979b90eccabd46",
+      "after": "db06fa74cbd86cdba849d9a124d53a1b456faa8319d1eabcceb0a464bcecfa2e",
+      "resource": "01-M3StringSearchPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3FlatNeedleGateTest.java",
+      "before": "ABSENT",
+      "after": "16f8f7ef9d786e224581366407868b24409278e4f38844e72afd7af17107d617",
+      "resource": "02-M3FlatNeedleGateTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3FlatNeedleGateTest flag-off: 172,125 checks (indexOf(String), indexOf(String, from), lastIndexOf(String), lastIndexOf(String, from) and contains over atoms, tuples and slices of texts over five alphabets of 0..40000 units on both sides of the 2048..32768 gate band, with present needles at random places, at the first and the last unit, of 3..40 units, absent needles, needles whose end trigrams are present and whose middle one is not and the other way round, needles of 0..2 units, needles with surrogates; every search three times on the same source, the first use registering it, the second building its trigram facts, the third probing them; against the flat String on every call); the same test passes on the A41 build (semantics unchanged)",
+    "regressions": "PASS_WINDOWS M3IgnoreCaseInPlaceTest 658,151; M3IgnoreCaseWindowsTest 188,512; M3MixedCoderCompareTest 30,620; M3StringMixedCompareTest 262,675; M3StringM3OnM3Test 121,574; M3BlockSignalTest 68,520; M3StringPositionInvariant6Test 13; M3CodePointCountRepeatTest 14,004; M3ReverseLaneTest 350,200; M3CharDenseLinearTest 62,120; M3NeedlePlanBandTest 122,823; M3NeedleLaneTest 997,980; M3TrigramRepeatTest 13,068; M3NeedleArgTest 73,440; M3RegexLiteralGateTest 29,376; M3TQFactsBuildTest 23,595; M3IndexOfFlatNeedleTest 137,948; M3RegexSubjectViewTest 9,567; M3GradedWindowsTest 56,591; M3CharSearchRepeatTest 25,380; M3CharSearchWindowsTest 61,650; M3StringLiteralSplitTest 53,378; M3ContentEqualsTest 7,980; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringAtomBulkTest 100,779; A4 90,118; A8 329,909; A9 46,920; A6 204 + 29",
+    "timing": "flag-off (a42/probe/FlatNeedleGateBench, the minimum of three runs per build, a42/probe/fn-a41-r*.tsv on the A41 build vs fn-a42-r*.tsv on this one, fn-compare-min3.txt; hot, facts built; flat in parentheses): indexOf(absent 8) over 2048 letters units, atom 313 ns -> 82 (185), tuple 350 -> 81; indexOf(absent 8) over 16384 letters units, atom 1,429 ns -> 21 (1,212), tuple 1,493 -> 21; indexOf(absent 8) over 2048 CJK-mixed units, atom 496 ns -> 25 (334), tuple 545 -> 20; indexOf(absent 8) over 16384 CJK-mixed units, atom 3,882 ns -> 49 (3,198), tuple 5,208 -> 49; indexOf(absent 3) over 2048 letters units, atom 245 ns -> 85 (194), tuple 303 -> 89; indexOf(absent 3) over 16384 CJK-mixed units, atom 3,794 ns -> 34 (2,819), tuple 3,657 -> 33; indexOf(absent 8, end trigrams present) over 2048 letters units, atom 267 ns -> 89 (199), tuple 288 -> 91; indexOf(absent 8, end trigrams present) over 16384 CJK-mixed units, atom 3,429 ns -> 50 (9,274), tuple 4,176 -> 50; lastIndexOf(absent 8) over 2048 letters units, atom 1,042 ns -> 31 (948), tuple 1,110 -> 22; lastIndexOf(absent 8) over 16384 letters units, atom 8,737 ns -> 36 (7,545), tuple 9,156 -> 36; lastIndexOf(absent 8) over 16384 CJK-mixed units, atom 9,703 ns -> 24 (6,208), tuple 9,026 -> 24; contains(absent 8) over 2048 letters units, atom 251 ns -> 19 (163), tuple 269 -> 19; contains(absent 8) over 2048 CJK-mixed units, atom 524 ns -> 22 (356), tuple 1,094 -> 21; indexOf(present head8) over 2048 letters units, atom 21 ns -> 170 (15), tuple 25 -> 256; indexOf(present head8) over 16384 letters units, atom 21 ns -> 37 (7), tuple 27 -> 48; indexOf(present head8) over 16384 CJK-mixed units, atom 19 ns -> 98 (15), tuple 24 -> 54; indexOf(present tail8) over 2048 letters units, atom 266 ns -> 595 (267), tuple 284 -> 423; indexOf(present tail8) over 16384 letters units, atom 1,783 ns -> 1,448 (1,596), tuple 1,475 -> 1,730; indexOf(present tail8) over 2048 CJK-mixed units, atom 508 ns -> 484 (342), tuple 521 -> 539; lastIndexOf(present head8) over 2048 letters units, atom 1,017 ns -> 1,061 (758), tuple 1,057 -> 1,035; lastIndexOf(present head8) over 16384 CJK-mixed units, atom 8,781 ns -> 8,294 (8,713), tuple 8,490 -> 9,031; single-use source indexOf(absent 8) over 2048 letters units, atom 232 ns -> 295 (177), tuple 268 -> 283; single-use source indexOf(absent 8) over 16384 CJK-mixed units, atom 5,291 ns -> 5,850 (3,026), tuple 5,096 -> 5,385; indexOf(absent 8) over 1024 letters units, atom 207 ns -> 187 (83), tuple 243 -> 207; indexOf(present tail8) over 1024 letters units, atom 151 ns -> 152 (89), tuple 180 -> 184; indexOf(absent 8) over 256 letters units, atom 82 ns -> 77 (32), tuple 80 -> 77; steady state (GateHitProbe, the same row measured again, min of two runs): indexOf(present head8), steady state over 2048 letters units 26 ns -> 84 (9); indexOf(present head8), steady state over 4096 letters units 22 ns -> 43 (7); indexOf(present head8), steady state over 16384 letters units 22 ns -> 50 (7); indexOf(present head8), steady state over 2048 CJK-mixed units 22 ns -> 44 (6); indexOf(present head8), steady state over 4096 CJK-mixed units 21 ns -> 51 (7); indexOf(present head8), steady state over 16384 CJK-mixed units 20 ns -> 52 (8); indexOf(present tail8) over 2048 letters units 338 ns -> 341 (192); indexOf(present tail8) over 4096 letters units 571 ns -> 569 (329); indexOf(present tail8) over 16384 letters units 1,565 ns -> 1,636 (1,379); indexOf(present tail8) over 2048 CJK-mixed units 522 ns -> 591 (400); indexOf(present tail8) over 4096 CJK-mixed units 1,235 ns -> 1,202 (756); indexOf(present tail8) over 16384 CJK-mixed units 3,793 ns -> 3,478 (3,195); indexOf(absent 8) over 4096 letters units 526 ns -> 21 (361); indexOf(absent 8) over 4096 CJK-mixed units 1,156 ns -> 25 (730)",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3String.java and M3StringSearchPrecompute.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3FlatNeedleGateRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3FlatNeedleGateTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the gate is a necessary condition only: a trigram the source lacks proves the needle absent; a needle whose probed trigrams are all present runs the exact search as before, so every positive stays exact",
+    "two probes, the middle trigram and then the first (the last, for a four-unit needle): an absent needle rarely shares both with the source, a needle joined from two present pieces fails at its middle, and a present needle pays two binary searches at most; needles under three units and sources under 2048 units take no gate, where the stock search over the whole source costs about what the probes do (three probes over a 1024-unit floor, measured first, cost present needles over 1024-unit sources up to 200 ns)",
+    "the source facts are the existing ones of the M3 needle's lane: a source searched once never pays them, a source searched again pays them once (A34), whichever needle kind searched it; no new cache and no new retained bytes, so the retained-bytes ceiling and invariant 12 stand",
+    "the facts cover the whole source and the gate answers for any range of it: absence from the whole proves absence from the range",
+    "stacked on A41: merge after #667 and the Synexia crate PR (#10147 first, content-bearing merges); the owner commit is a8d478e4bc"
+  ]
+}

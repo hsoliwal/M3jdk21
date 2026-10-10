@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FlatNeedleGate
+displayName: M3JDK21 flat needles over M3 sources gated by exact trigrams
+description: >-
+  A flat needle (a literal, the common needle) searched over an M3 source passed only the 64-bit
+  facts signals, which saturate on dense text, so an absent needle scanned the whole source (an
+  absent 8-unit needle over 2048 CJK-mixed units 554 ns against an atom, 3,756 over 16384); the
+  M3 needle's lane has had the exact-trigram gate of the source's repeat use since A34.
+  M3StringSearchPrecompute.mayContain(M3String, String) now probes the source's trigram facts
+  (register-then-build, shared with the M3 needle's lane) with the needle's middle and then
+  its first trigram key packed on the fly, without allocation, for sources of 2048..32768 units;
+  a missing key proves absence and indexOf, lastIndexOf and contains answer without a scan.
+  Java step: M3StringSearchPrecompute, M3String and the jtreg proof; no upstream file changed.
+  Stacks on crate m3-ignorecase-in-place (branch order); the M3String and
+  M3StringSearchPrecompute preimages are the m3-needle-plan-band (A36) postimages.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-flat-needle-gate
