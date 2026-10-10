@@ -3,7 +3,7 @@
 User directives (2026-10-10): "pull all thriepart code and inline ands refactor it", then "inline and refactor all
 third party code ... jdk cannot have downstream dependency".
 
-The Synexia crate (`.m3/task-crates/dependency-source-inline-20261010` in hsoliwal/com.synexia, PR (draft, number pending))
+The Synexia crate (`.m3/task-crates/dependency-source-inline-20261010` in hsoliwal/com.synexia, PR hsoliwal/com.synexia#10193)
 is canonical: inventories, locks, donor-superset receipts, FOSS ledger, the CPU atomize/patternize projection.
 This receiver vendors the third-party artifacts the M3jdk21 tooling pins directly into `m3/vendor/third_party/`
 (9 source-built modules, `<version>-m3-source-1`, standalone Maven gate 9/9) and

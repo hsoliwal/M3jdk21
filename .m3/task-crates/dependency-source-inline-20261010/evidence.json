@@ -10,7 +10,7 @@
     "modules": 9,
     "switched": 18
   },
-  "generated": "2026-10-10T13:08:32Z",
+  "generated": "2026-10-10T13:15:15Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {
@@ -27,7 +27,7 @@
     "evidence_sha256": "742c6caf87dffb14070618edafb83e927f1e75b991f98d83b1c0a3bc0328c5de",
     "path": ".m3/task-crates/dependency-source-inline-20261010 (hsoliwal/com.synexia)"
   },
-  "synexia_pr": "(draft, number pending)",
+  "synexia_pr": "hsoliwal/com.synexia#10193",
   "user_directives": [
     "pull all thriepart code and inline ands refactor it",
     "inline and refactor all third party code ... jdk cannot have downstream dependency"
