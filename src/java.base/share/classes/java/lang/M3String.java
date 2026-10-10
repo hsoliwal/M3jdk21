@@ -1304,6 +1304,8 @@ final class M3String implements CharSequence {
         if (prepared != null && !prepared.mayContain(needle)) return -1;
         byte coder = coder();
         if (coder == String.LATIN1 && !needle.isLatin1()) return -1;
+        // The exact-trigram gate of the source's repeat use (A42): absence answers without a scan.
+        if (!M3StringSearchPrecompute.mayContain(this, needle)) return -1;
         if (searchWindow(end - from, needleLength, coder) < 0) return indexOfPerUnit(needle, from, end);
         return indexOfUnits(needle.value(), needle.coder(), needleLength, from, end);
     }
@@ -1349,6 +1351,8 @@ final class M3String implements CharSequence {
         if (prepared != null && !prepared.mayContain(needle)) return -1;
         byte coder = coder();
         if (coder == String.LATIN1 && !needle.isLatin1()) return -1;
+        // The exact-trigram gate of the source's repeat use (A42): absence answers without a scan.
+        if (!M3StringSearchPrecompute.mayContain(this, needle)) return -1;
         int end = start + needleLength;
         if (searchWindow(end, needleLength, coder) < 0) return lastIndexOfPerUnit(needle, start);
         return lastIndexOfUnits(needle.value(), needle.coder(), needleLength, start);

@@ -25,6 +25,11 @@ final class M3StringSearchPrecompute {
     private static final int SOURCE_SLOT_MASK = SOURCE_SLOTS - 1;
     private static final int MIN_TRIGRAM_SOURCE_UNITS = 256;
     private static final int MAX_TRIGRAM_SOURCE_UNITS = 32_768;
+    /**
+     * A flat needle's exact-trigram gate (A42) serves sources of this many units and up: below,
+     * the stock search over the whole source costs about what the probes do.
+     */
+    private static final int FLAT_NEEDLE_GATE_UNITS = 2048;
 
     private static final AtomicReferenceArray<Entry> CACHE =
             new AtomicReferenceArray<>(SLOTS);
@@ -113,6 +118,40 @@ final class M3StringSearchPrecompute {
             // Exact trigram facts are optional. The exact search remains authoritative.
             return true;
         }
+    }
+
+    /**
+     * Exact-trigram absence gate for a flat needle over {@code source} (A42): the source's
+     * trigram facts, built on its repeat use as for an M3 needle (A34), are probed with the
+     * needle's middle trigram key and then its first (its last, for a four-unit needle), packed
+     * on the fly without allocation; a key the source lacks proves the needle absent. {@code true} for a needle under three units, a
+     * source outside the gate's band or a source searched for the first time, and whenever the
+     * facts are unavailable: the exact search remains authoritative.
+     */
+    static boolean mayContain(M3String source, String needle) {
+        int needleLength = needle.length();
+        int length = source.length();
+        if (needleLength < 3 || length < FLAT_NEEDLE_GATE_UNITS || length > MAX_TRIGRAM_SOURCE_UNITS) {
+            return true;
+        }
+        M3TQ.Facts facts;
+        try {
+            facts = sourceFacts(source);
+        } catch (OutOfMemoryError unavailable) {
+            return true;
+        }
+        if (facts == null) return true;
+        int last = needleLength - 3;
+        int middle = last >>> 1;
+        return facts.test(trigramKey(needle, middle))
+                && (last == 0 || facts.test(trigramKey(needle, middle == 0 ? last : 0)));
+    }
+
+    /** The packed 48-bit key of the trigram of {@code needle} at {@code at}, as {@link M3TQ} packs it. */
+    private static long trigramKey(String needle, int at) {
+        return ((long) needle.charAt(at) << 32)
+                | ((long) needle.charAt(at + 1) << 16)
+                | needle.charAt(at + 2);
     }
 
     /**
