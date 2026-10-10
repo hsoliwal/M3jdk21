@@ -150,12 +150,13 @@ current reviewed Synexia source manifest on this branch does not contain a
 proper-name payload row, so no proper-name records are admitted or renumbered
 by this export.
 
-A typed receiver contract does exist in the pending M3JDK chain: PR #629
-(M3InstanceIndexPrecompute and m3/lexicon/synexia-instance-index-contract.tsv),
-facade PR #630, and custody receipt PR #641. Those changes preserve UTF-8
-instance names, normalization-version/source identity, instance types,
-metadata, frozen concept coordinates, reverse lookup, and separation from
-lexical token identity, but their contract-only/payload-not-bundled and
+A typed receiver contract does exist in the pending current-base M3JDK
+chain: PR #634 (M3InstanceIndexPrecompute and
+m3/lexicon/synexia-instance-index-contract.tsv), facade PR #635, and custody
+receipt PR #641; PRs #629/#630 are their older predecessors. Those changes
+preserve UTF-8 instance names, normalization-version/source identity, instance
+types, metadata, frozen concept coordinates, reverse lookup, and separation
+from lexical token identity, but their contract-only/payload-not-bundled and
 hosted-admission boundaries remain in force. This provenance PR does not claim
 those pending PRs are merged or runtime-admitted.
 
