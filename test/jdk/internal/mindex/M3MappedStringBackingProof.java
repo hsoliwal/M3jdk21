@@ -196,6 +196,10 @@ public final class M3MappedStringBackingProof {
             long first = (7L << 32) | 1L;
             long alias = (7L << 32) | 2L;
             check(backing.size() == 2);
+            check(backing instanceof M3StringBacking);
+            long firstUtf8Handle = backing.utf8Handle(first);
+            long aliasUtf8Handle = backing.utf8Handle(alias);
+            check(firstUtf8Handle > 0L && firstUtf8Handle == aliasUtf8Handle);
             check(backing.languageId(first) == 7 && backing.languageId(alias) == 7);
             check(backing.length(first) == scalar.length());
             check(backing.utf8Length(first) == utf8(scalar).length);
