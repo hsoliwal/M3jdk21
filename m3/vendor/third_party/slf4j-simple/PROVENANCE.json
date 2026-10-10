@@ -1,0 +1,116 @@
+{
+  "artifact": "slf4j-simple",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "M3jdk21 m3/tooling (test)",
+  "coordinate": "org.slf4j:slf4j-simple:2.0.13-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "dependencies": [
+    {
+      "artifact": "slf4j-api",
+      "form": "source module",
+      "group": "org.slf4j",
+      "optional": false,
+      "scope": "compile",
+      "version": "2.0.12-m3-source-1"
+    }
+  ],
+  "donor": "slf4j-simple-2.0.13",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/slf4j-simple/src/main/resources/META-INF/LICENSE.txt",
+      "sha256": "4e7f90c86ab51278228bce153122f1d8df30149d13ce9ef524c8444a84c32dcc",
+      "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/slf4j-simple/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "31f06c9999bfd523e192864178cfe4a9873d336884cf59a0d698e520895caeaa",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/slf4j-simple/upstream-excluded/META-INF/maven/org.slf4j/slf4j-simple/pom.properties",
+      "sha256": "70ea18550c57b80976f5b519307b3759136099a4ce14df487ece4b109f66cbb2",
+      "upstream": "META-INF/maven/org.slf4j/slf4j-simple/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/slf4j-simple/upstream-excluded/META-INF/maven/org.slf4j/slf4j-simple/pom.xml",
+      "sha256": "4a4d4bb24cf8abe2cb874a836f5e743d3485b7db04fcff6fc071495253b5cfa8",
+      "upstream": "META-INF/maven/org.slf4j/slf4j-simple/pom.xml"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/slf4j-simple/src/main/resources/META-INF/services/org.slf4j.spi.SLF4JServiceProvider",
+      "sha256": "9145e6a7fcc79bdf91cb5926138ca4fbbc3b41fb806e2f4bdb575232bf8baa6a",
+      "upstream": "META-INF/services/org.slf4j.spi.SLF4JServiceProvider"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-simple/src/main/java/org/slf4j/simple/OutputChoice.java",
+      "sha256": "e0abba0ac4c29c86d87bf8452bdfa7e802548a0ce9d333fe7a6bf233834f91f4",
+      "upstream": "org/slf4j/simple/OutputChoice.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-simple/src/main/java/org/slf4j/simple/SimpleLogger.java",
+      "sha256": "c2229a736ec9779bf3fda44670b36e5d48441f310ce08df60a627871ba7abfa2",
+      "upstream": "org/slf4j/simple/SimpleLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-simple/src/main/java/org/slf4j/simple/SimpleLoggerConfiguration.java",
+      "sha256": "1963810f3786b9d2447e72d9279d724fc1c7f0e1b4f88f7da5867ab53b7f9ba1",
+      "upstream": "org/slf4j/simple/SimpleLoggerConfiguration.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-simple/src/main/java/org/slf4j/simple/SimpleLoggerFactory.java",
+      "sha256": "63d0f7e51d8f3b55247b0322190cf388d8a937fc4f2649dfbe25cac7254c78ab",
+      "upstream": "org/slf4j/simple/SimpleLoggerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-simple/src/main/java/org/slf4j/simple/SimpleServiceProvider.java",
+      "sha256": "430d76674682c477949d327adda3a1bbfbd19af48d7971394a0288f8bfcab4e8",
+      "upstream": "org/slf4j/simple/SimpleServiceProvider.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/slf4j-simple/SOURCES_MANIFEST.tsv",
+      "sha256": "a47a193585a747cf1d6576197e37edee6b971b0f2e95e0ef52ae140241bc2905",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/slf4j-simple/LICENSE",
+      "sha256": "4e7f90c86ab51278228bce153122f1d8df30149d13ce9ef524c8444a84c32dcc",
+      "upstream": "META-INF/LICENSE.txt"
+    }
+  ],
+  "group": "org.slf4j",
+  "kind": "MODULE",
+  "license": "UNDECLARED (see LICENSE)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "parent": "org.slf4j:slf4j-parent:2.0.13",
+  "pom": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.pom",
+  "receipt": {
+    "buildRoot": "21992ca30c3ead7db1ce1b7e2f17e76bbd2facc4bd665d69751aedb344da62ac",
+    "distributionSha256": "181af2c1590ec20e2b8985eb20eb862c1ee6dac6150cf5336b524e1c0a7b0625",
+    "lock": "33ab049867c1c736c65dececbbb9f9d42697fd3336cf178946c3c43ba55336ff",
+    "message": "",
+    "sourceRoot": "3b1efc546cc330991a000c6947cb7bba5af94fcfbe88c0877ceeb725922fcb9f",
+    "status": "PASS"
+  },
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13-sources.jar",
+  "sources_jar_sha1": "3d41ed2d64c1d54887fd01a1c1242f400768d52e",
+  "sources_jar_sha256": "320ef6bf6ab8567e1e92c26b4fe81ecf9602867ac9d7a0e7a8061ff697dd9d56",
+  "status": "PASS",
+  "upstream": "http://www.slf4j.org",
+  "version": "2.0.13"
+}

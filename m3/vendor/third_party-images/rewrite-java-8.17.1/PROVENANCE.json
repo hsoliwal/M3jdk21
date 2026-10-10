@@ -1,0 +1,1793 @@
+{
+  "artifact": "rewrite-java",
+  "automatic_module_name": "",
+  "build": "none",
+  "build_reason": "LOMBOK_AT_SOURCE_LEVEL",
+  "consumers": "synexia-openrewrite-recipes, M3jdk21 m3/tooling",
+  "coordinate": "org.openrewrite:rewrite-java:8.17.1",
+  "decision": "DIRECT_IMPORT",
+  "dependencies": [],
+  "donor": "rewrite-java-8.17.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/META-INF/MANIFEST.MF",
+      "sha256": "41b4828b642b7e001d84ab3666c3631422078779bbc7247df0f17a3781e42a82",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/META-INF/rewrite-java.properties",
+      "sha256": "17709d8abcd84a2cf053dbef6c7da4f5056cfa90fd50e1058f4e34cc59a6f1a2",
+      "upstream": "META-INF/rewrite-java.properties"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/META-INF/rewrite/apache-license-header.yml",
+      "sha256": "1b96b7dbacd5840600d123c9e822fa9a1a363bd3e3210be720030c02d13c2228",
+      "upstream": "META-INF/rewrite/apache-license-header.yml"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/META-INF/rewrite/eureka.yml",
+      "sha256": "9c003e3e61781c9903f69dfee0d40dfe192fb4988e118fce4932a869edec3e5e",
+      "upstream": "META-INF/rewrite/eureka.yml"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/META-INF/rewrite/find-plaintext-secrets.yml",
+      "sha256": "e4b53e488fd2d15b00f86ce4fd3abb4a00760309ce1b0509d52c63cbc4b5c978",
+      "upstream": "META-INF/rewrite/find-plaintext-secrets.yml"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/META-INF/rewrite/genie.yml",
+      "sha256": "f5ebd7fb06d48cb838b477d69ef76a327d02736bbcd73170bcce214e9336b5bc",
+      "upstream": "META-INF/rewrite/genie.yml"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/META-INF/rewrite/google-java-format.yml",
+      "sha256": "0635ac1a2c5e64966e7331e3dfc7fd4e9a1bc43a0206ba7afe9ffed8f54b9c88",
+      "upstream": "META-INF/rewrite/google-java-format.yml"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/META-INF/rewrite/java-categories.yml",
+      "sha256": "7a8517b321bae8c40de64483bd4e25d0d92b0a37e2dbf0dab22e7cf3d7c4c07c",
+      "upstream": "META-INF/rewrite/java-categories.yml"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/META-INF/rewrite/spring.yml",
+      "sha256": "bef6bc1d8a8c1f849b88e96f64cb257cc858d7a9c5617e529af5d6f55267aee9",
+      "upstream": "META-INF/rewrite/spring.yml"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/AddImport.java",
+      "sha256": "f8ddcfae56209a7349896a05ca87bec50055886cc8ea5161df1fb5bef27cb058",
+      "upstream": "org/openrewrite/java/AddImport.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/AddLicenseHeader.java",
+      "sha256": "295ab6c66755a8da4cae64efb6d60cc6d22523144874d835571198c00ca355c1",
+      "upstream": "org/openrewrite/java/AddLicenseHeader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/AddOrUpdateAnnotationAttribute.java",
+      "sha256": "8f51ed940b5eabee01be9d97123e4f54a271526f9621bfa60e5184bf915c5cc9",
+      "upstream": "org/openrewrite/java/AddOrUpdateAnnotationAttribute.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/AnnotationMatcher.java",
+      "sha256": "2eb9eda8fc55bd82b99512000bb28a8180a9162cf1b29451742e1a358f15afe6",
+      "upstream": "org/openrewrite/java/AnnotationMatcher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/Assertions.java",
+      "sha256": "b990de06d811ba8b57acd3afe62f3967c56aaae8539147cd1daafc2f24320b00",
+      "upstream": "org/openrewrite/java/Assertions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangeAnnotationAttributeName.java",
+      "sha256": "5e34587c5e94df294f14616b6b13002002f83791c62f11c3b8d9f8d097d2d618",
+      "upstream": "org/openrewrite/java/ChangeAnnotationAttributeName.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangeFieldName.java",
+      "sha256": "9bbbfa7670752f98caea39151717a240d41cf3874ee33d76a645685df42cb9ff",
+      "upstream": "org/openrewrite/java/ChangeFieldName.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangeFieldType.java",
+      "sha256": "42f35835bf12b843a26ab655a1c17a7ba3c55ede73ee22a6391f58aefe554ef4",
+      "upstream": "org/openrewrite/java/ChangeFieldType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangeLiteral.java",
+      "sha256": "59907087de35abcfe341e067189724313ff7e937e227dfe19416a16e332b8f28",
+      "upstream": "org/openrewrite/java/ChangeLiteral.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangeMethodAccessLevel.java",
+      "sha256": "f8484b57f665d651590f2fd1ac389743884c68d8a5cf394fd591431a83f39aa4",
+      "upstream": "org/openrewrite/java/ChangeMethodAccessLevel.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangeMethodAccessLevelVisitor.java",
+      "sha256": "0dfdf374f6e79607040b9a38c40a7baaa7ec1ab64b4ca3a4fc7bb2d93abfc603",
+      "upstream": "org/openrewrite/java/ChangeMethodAccessLevelVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangeMethodName.java",
+      "sha256": "c97a7e9bb8a19fb5045b3c539ea93804bb987973cf97d0ed885349bf989a7767",
+      "upstream": "org/openrewrite/java/ChangeMethodName.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangeMethodTargetToStatic.java",
+      "sha256": "824c2cbe7f81f9e9b91ad8a6f1d718f4779a0c73aeb8f06071e0e9065044b6cb",
+      "upstream": "org/openrewrite/java/ChangeMethodTargetToStatic.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangeMethodTargetToVariable.java",
+      "sha256": "c72b4d5ab3739c3d0f18975157324f098ae3336a3da47b4007bc7b0c3e9b2eb5",
+      "upstream": "org/openrewrite/java/ChangeMethodTargetToVariable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangePackage.java",
+      "sha256": "7b8d951963b7dc72ede94fc644ce9d1152004d987f78e32a28471945613400fe",
+      "upstream": "org/openrewrite/java/ChangePackage.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangeStaticFieldToMethod.java",
+      "sha256": "b921be00280f29e6d89782fe244b8fe2570a6a3b953db773c026b78ffa7d7c8a",
+      "upstream": "org/openrewrite/java/ChangeStaticFieldToMethod.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ChangeType.java",
+      "sha256": "b777e88104bfb58f5279d34fc6cae0abf24e68503c46ebe409b25d2a1817739e",
+      "upstream": "org/openrewrite/java/ChangeType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/CountLinesVisitor.java",
+      "sha256": "e49b6252170a6bf529d673d12f592d1f77bfedef2620dc335ece96c21c49fac0",
+      "upstream": "org/openrewrite/java/CountLinesVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/CreateEmptyJavaClass.java",
+      "sha256": "506050d9e4cb57acf1b94b1e94c0a411e575dbec96d725e8561c292f4d546b05",
+      "upstream": "org/openrewrite/java/CreateEmptyJavaClass.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/DeimplementInterface.java",
+      "sha256": "593c91544d369c0d1ec058d088d56ab54bc7c61e9350ec1981507b26efb3bdda",
+      "upstream": "org/openrewrite/java/DeimplementInterface.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/DeleteMethodArgument.java",
+      "sha256": "319df26afce765743cb4b40ab43491073125535ab9b11ba5d803c7a914736dfa",
+      "upstream": "org/openrewrite/java/DeleteMethodArgument.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/DeleteStatement.java",
+      "sha256": "e3dc0df822b0b041b512a3bf1bf1e5029671c368c6283233eab75f6d84c2c35f",
+      "upstream": "org/openrewrite/java/DeleteStatement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ExtractField.java",
+      "sha256": "78b22b1a84ab7cb1098b3b113891de56557dbafc9e9af8ddecff4451c2fb360d",
+      "upstream": "org/openrewrite/java/ExtractField.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ExtractInterface.java",
+      "sha256": "2664b6018f62f156fa729e18918cc33c0bf843c65838d6fb311fd79bbe4d2fe5",
+      "upstream": "org/openrewrite/java/ExtractInterface.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/GenerateGetterAndSetterVisitor.java",
+      "sha256": "44703d67393f4716b2bad6c3707de3aac077ac7408f7350c79f188da6e8f72fd",
+      "upstream": "org/openrewrite/java/GenerateGetterAndSetterVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ImplementInterface.java",
+      "sha256": "b9001d622e2137abc78d37149040d45c5dec4055e4205ca2cf686d390d432c6f",
+      "upstream": "org/openrewrite/java/ImplementInterface.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/InvertCondition.java",
+      "sha256": "ed66937ca14b81147388c4ecf8722fceeca4aa74ce912e213fd600143aabdddd",
+      "upstream": "org/openrewrite/java/InvertCondition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaIsoVisitor.java",
+      "sha256": "24fbb4e5a3e2e6b84bf9b5fea1e0e945eaf0683eebbd0d4e2ed5e63400f73c7c",
+      "upstream": "org/openrewrite/java/JavaIsoVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaParser.java",
+      "sha256": "030d647d1ea36af524759ef7016d82ee846c1351acb535ae7becd5e79a9ad638",
+      "upstream": "org/openrewrite/java/JavaParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaParserExecutionContextView.java",
+      "sha256": "b10dd4b770984938aa66f1509b7b5df86552bede0d904148acdd2cc022475904",
+      "upstream": "org/openrewrite/java/JavaParserExecutionContextView.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaParsingException.java",
+      "sha256": "269953920c675fe8eac736f4714ac7b1b42000dbfc9a022778a612c5305de45f",
+      "upstream": "org/openrewrite/java/JavaParsingException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaPrinter.java",
+      "sha256": "e5dbc6f2eb7a22047565cf8fca618513d4c72d5b1bb3143f86333c44dfc36cd6",
+      "upstream": "org/openrewrite/java/JavaPrinter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaStyle.java",
+      "sha256": "353f7eab54535e2393ae419a3a4606c1eaf676dcae3dfa558966323b05e1e4e7",
+      "upstream": "org/openrewrite/java/JavaStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaTemplate.java",
+      "sha256": "72eb8d53efbbf5c42782ab9f3404d24c02c90c192f38fce37240c1bb151d9e7d",
+      "upstream": "org/openrewrite/java/JavaTemplate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaTemplateSemanticallyEqual.java",
+      "sha256": "aa800a9314d78b728d8c7332590106e48716cd54935ccdc09413034b7565c338",
+      "upstream": "org/openrewrite/java/JavaTemplateSemanticallyEqual.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaTypeMapping.java",
+      "sha256": "06b78b768b9c82fcce9284187f0ea7bac6e194dddba20e4bc6f5a13a7803eb90",
+      "upstream": "org/openrewrite/java/JavaTypeMapping.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaTypeSignatureBuilder.java",
+      "sha256": "caee29b3d40dce6feb2a3698773640ac060464c32d58f681ead767f435616e0f",
+      "upstream": "org/openrewrite/java/JavaTypeSignatureBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaTypeVisitor.java",
+      "sha256": "a41a29d87fd6d6c1edee1fc21a1819b3a65e9cd16f71b327b4e1ea2ae3c6772f",
+      "upstream": "org/openrewrite/java/JavaTypeVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaUnrestrictedClassLoader.java",
+      "sha256": "330039d7b34b906060139fda6aca432f16678bff3d21f519da336427b030e3da",
+      "upstream": "org/openrewrite/java/JavaUnrestrictedClassLoader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavaVisitor.java",
+      "sha256": "544ef5f181003a9062ccf73a65e81f53026556297db50eebea38c4e23d37bafb",
+      "upstream": "org/openrewrite/java/JavaVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavadocPrinter.java",
+      "sha256": "f07e1a9a9c17396880b9042381485a310a5ad448296e8353c2202384d54b09d2",
+      "upstream": "org/openrewrite/java/JavadocPrinter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/JavadocVisitor.java",
+      "sha256": "82f94221c562db876bb61c4261081527cd71ae370b3aa75bcdc74aec2c793bb5",
+      "upstream": "org/openrewrite/java/JavadocVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/LineCounter.java",
+      "sha256": "0da69fdae40fc917672b660a1d4524bce5a814ff2f31a0b60d8bfde36e18cd1e",
+      "upstream": "org/openrewrite/java/LineCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/MethodMatcher.java",
+      "sha256": "b2b81c58d63a8fba8d97bcb91da7f00d418a716da0a391d901cfa6cf73256abc",
+      "upstream": "org/openrewrite/java/MethodMatcher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/NoMissingTypes.java",
+      "sha256": "416f9821448917e63ccdef7ae1ec50321adce0adb6578832e0ed02e06657e382",
+      "upstream": "org/openrewrite/java/NoMissingTypes.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/NoStaticImport.java",
+      "sha256": "e4da7b2c2098ed6d164bcfdf4eba5ad6996ca298b8ddf9aa1089001518d5d2b1",
+      "upstream": "org/openrewrite/java/NoStaticImport.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/OrderImports.java",
+      "sha256": "1dcf45baddb15d889410f629199bbcdec5fbba986f6695526276724d1663c7e2",
+      "upstream": "org/openrewrite/java/OrderImports.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/QualifyThisVisitor.java",
+      "sha256": "860b9c334327f9f469f4f6dc01cc62b14ec887372894edb6d1045abbb896415d",
+      "upstream": "org/openrewrite/java/QualifyThisVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/RandomizeId.java",
+      "sha256": "12b78bf893ef0d64fbe5425208a77d5810728148fd1d69815d628e85e65a7bc5",
+      "upstream": "org/openrewrite/java/RandomizeId.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/RandomizeIdVisitor.java",
+      "sha256": "e263986ba5ad19be55ee264157391b126467ba1575d87dacc62e40230e5351ba",
+      "upstream": "org/openrewrite/java/RandomizeIdVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/RecipeMarkupDemonstration.java",
+      "sha256": "95418c31d76f80e71232ef37d7c5d13a9bc65d24e7eee74ce2537f0839fdccbf",
+      "upstream": "org/openrewrite/java/RecipeMarkupDemonstration.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/RemoveAnnotation.java",
+      "sha256": "0f288e147fd86f461bf02fe8c78c3b21b2741fbb9c98338d4e9eff095e5d8e1b",
+      "upstream": "org/openrewrite/java/RemoveAnnotation.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/RemoveAnnotationAttribute.java",
+      "sha256": "8a2d8776f9a582a48c5f73c53885baa0e9db6ddc61db4ac376420ddee12add7b",
+      "upstream": "org/openrewrite/java/RemoveAnnotationAttribute.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/RemoveAnnotationVisitor.java",
+      "sha256": "ce640a7aef633e697154fdc7e0bc35c349fe944c89308793bc52659a1fe96b7c",
+      "upstream": "org/openrewrite/java/RemoveAnnotationVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/RemoveImplements.java",
+      "sha256": "2a028369ef317caffb05317775681ef18cb89d1b55f44ae25f3fca3e59eaddc6",
+      "upstream": "org/openrewrite/java/RemoveImplements.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/RemoveImport.java",
+      "sha256": "46ab4483d93cf6aa635bc1201db0cd8b061d3823f0cb5a645496d41448070419",
+      "upstream": "org/openrewrite/java/RemoveImport.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/RemoveObjectsIsNull.java",
+      "sha256": "d0ed4328710e42822006906d971c0cfad69f120c7d1b50a87e23b77602a793cf",
+      "upstream": "org/openrewrite/java/RemoveObjectsIsNull.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/RemoveUnusedImports.java",
+      "sha256": "2104c51a8da093b4fcf758b01d37db17bf55fce6777f1ae8697d6034169ed20c",
+      "upstream": "org/openrewrite/java/RemoveUnusedImports.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/RenameVariable.java",
+      "sha256": "4db7cd404b83d9f63db3922e906bcbb3484951e0efc12fd2eaf100d63d61cb77",
+      "upstream": "org/openrewrite/java/RenameVariable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ReorderMethodArguments.java",
+      "sha256": "89f1ce3fb0fe88d8e4670736b7c695649ed91cf96ec1293148c45a6df57ea019",
+      "upstream": "org/openrewrite/java/ReorderMethodArguments.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ReplaceConstant.java",
+      "sha256": "e5908203d3c5763a1c40c5abbe2d39ebc3a8ca872972a630804c235f08e360f8",
+      "upstream": "org/openrewrite/java/ReplaceConstant.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ReplaceConstantWithAnotherConstant.java",
+      "sha256": "10b30153ae1dec026d760abb8052cfc6d1cc9f0569117558354e1072525439a4",
+      "upstream": "org/openrewrite/java/ReplaceConstantWithAnotherConstant.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ReplaceStringLiteralWithConstant.java",
+      "sha256": "b9a628255f10deba3efe3451049f24eba0e66b44b9ebb4f5a48a595566c42ca3",
+      "upstream": "org/openrewrite/java/ReplaceStringLiteralWithConstant.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ShortenFullyQualifiedTypeReferences.java",
+      "sha256": "f26857f99c865632f4e43a0a1f71ca3fa62bcc06e1ca305c64a9dc2f8af95ad2",
+      "upstream": "org/openrewrite/java/ShortenFullyQualifiedTypeReferences.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/SimplifyMethodChain.java",
+      "sha256": "b4d2bf21399a53ed3acba7910be4a3cea95a6cc3809e099fde84e3b136fa13f7",
+      "upstream": "org/openrewrite/java/SimplifyMethodChain.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/TreeVisitingPrinter.java",
+      "sha256": "8ce71a80f05274cbf2f36a110c4d63a129a8e78edb82599fc8f63b60e336584f",
+      "upstream": "org/openrewrite/java/TreeVisitingPrinter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/TypeMatcher.java",
+      "sha256": "96ff156ae19f0983d0cbc41613555bb61da16a460a63b3fc65a3ee23b816e167",
+      "upstream": "org/openrewrite/java/TypeMatcher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/UnsafeJavaTypeVisitor.java",
+      "sha256": "6bd22c0e1c24e303e34fcb88b2f9bd37a6efbc65e0c0e195c56812ad2e490cf6",
+      "upstream": "org/openrewrite/java/UnsafeJavaTypeVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/UnsafeReplaceJavaType.java",
+      "sha256": "941b53257b1f86348c7d26460510b1769056cefddee49896b5fbaced01c251e8",
+      "upstream": "org/openrewrite/java/UnsafeReplaceJavaType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/UnwrapParentheses.java",
+      "sha256": "27a2b03f2ed423a071347617e6a7ebb29ccc537deee76a2b7f3bdda1c99003f8",
+      "upstream": "org/openrewrite/java/UnwrapParentheses.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/UpdateSourcePositions.java",
+      "sha256": "ca03cd52af8a82ad5560971c4cc98b208829ad42f8ff71434c564cbc22faf071",
+      "upstream": "org/openrewrite/java/UpdateSourcePositions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/UseStaticImport.java",
+      "sha256": "cae97bcd51e33aa3964aa8701561e614d1db84277a6f677987e2b94012b48bf0",
+      "upstream": "org/openrewrite/java/UseStaticImport.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/VariableNameUtils.java",
+      "sha256": "4a4888869474f1df059102c119b5303e5c65551a3fa9626797589e5662d937d0",
+      "upstream": "org/openrewrite/java/VariableNameUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ai/ClassDefinitionLength.java",
+      "sha256": "ac7bf7027d7d5ecb21da3afd28781a622c142c608aa84b112d464ce3be8d708e",
+      "upstream": "org/openrewrite/java/ai/ClassDefinitionLength.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ai/JavaAIEditor.java",
+      "sha256": "580bfc5715093897b379e6f52e81e0dbcf9d3c67fe3e9e93875e0fc845b9cb10",
+      "upstream": "org/openrewrite/java/ai/JavaAIEditor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ai/MethodDefinitionLength.java",
+      "sha256": "a586a68e22c2af1b91f4b993bf46f14b6e9fc729949620aad4aec42de9593abb",
+      "upstream": "org/openrewrite/java/ai/MethodDefinitionLength.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/ai/package-info.java",
+      "sha256": "9cc8b3814f3794fbdd47ce73b0be28208108c33f4dd1786827b8489bdf6426b7",
+      "upstream": "org/openrewrite/java/ai/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/cleanup/RenameJavaDocParamNameVisitor.java",
+      "sha256": "99c272adf71d363b19c09ad5e626495462385f4bf6414ddd164b4b56a0e9e98b",
+      "upstream": "org/openrewrite/java/cleanup/RenameJavaDocParamNameVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/cleanup/SimplifyBooleanExpressionVisitor.java",
+      "sha256": "41b6796dbe82bcf4c6931f80e7ae4c33961364fd48dd3dd90dc127a76b16c2d4",
+      "upstream": "org/openrewrite/java/cleanup/SimplifyBooleanExpressionVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/cleanup/UnnecessaryParenthesesVisitor.java",
+      "sha256": "b29948f26acc8ec74b5afb84fe22ef6958901a3292f1c2b8b2ef030a4e3c48c9",
+      "upstream": "org/openrewrite/java/cleanup/UnnecessaryParenthesesVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/cleanup/package-info.java",
+      "sha256": "de201df17ea5af4a32c49a17128e81a51679ffcdea3383d076623f15c3ce507b",
+      "upstream": "org/openrewrite/java/cleanup/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/filter/package-info.java",
+      "sha256": "a2c42388bd9ec1c6564f20657207552421668e2e409b9b7e76f4413b8551efef",
+      "upstream": "org/openrewrite/java/filter/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/AutoFormat.java",
+      "sha256": "9fea089415afe3999d5fef06f682aaa01eef44ea854536ea805bf63c9f9468b4",
+      "upstream": "org/openrewrite/java/format/AutoFormat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/AutoFormatVisitor.java",
+      "sha256": "ed74ac86ff5de1599b7cbdd0532fc549415bfc432c10baeb9c0c432cb8074624",
+      "upstream": "org/openrewrite/java/format/AutoFormatVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/AutodetectGeneralFormatStyle.java",
+      "sha256": "0f454ac4ab84c5e9358a3b6e9ac6c576820a43a6c1d6dd6d0fe39ce8630a24b3",
+      "upstream": "org/openrewrite/java/format/AutodetectGeneralFormatStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/BlankLines.java",
+      "sha256": "51f9559048ccc860604ea6a2cf9e2cc0220ad1506316a6c0d9f716eb00b7cbd5",
+      "upstream": "org/openrewrite/java/format/BlankLines.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/BlankLinesVisitor.java",
+      "sha256": "c604d17e9dc1c2827d9f9fb2ec50f526152080dd7391566d0354cbae48e24f8f",
+      "upstream": "org/openrewrite/java/format/BlankLinesVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/EmptyNewlineAtEndOfFile.java",
+      "sha256": "58b889be0775755df27a9f1c2850f53c119f8b068a01d5b85609e4dadd380913",
+      "upstream": "org/openrewrite/java/format/EmptyNewlineAtEndOfFile.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/MethodParamPad.java",
+      "sha256": "e314ca22958bf8a70a3fc8244ced33ac2ac293d40b9ab858f08a36967c228aa9",
+      "upstream": "org/openrewrite/java/format/MethodParamPad.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/MinimumViableSpacingVisitor.java",
+      "sha256": "6d4e010fd0c8a3f3e1aa56b12415bdb734766496fe2769c4620af5bdf791dff1",
+      "upstream": "org/openrewrite/java/format/MinimumViableSpacingVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/NoWhitespaceAfter.java",
+      "sha256": "0429bab4c44bccbdbb6c0bbce951583e77acd7ef327f0cb2411ee41eba5eca52",
+      "upstream": "org/openrewrite/java/format/NoWhitespaceAfter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/NoWhitespaceBefore.java",
+      "sha256": "2035773002305a0cb57418ffa45b7fc6f7ee0651693945011ef1a6063d96d028",
+      "upstream": "org/openrewrite/java/format/NoWhitespaceBefore.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/NormalizeFormat.java",
+      "sha256": "d89edf8b660dfc6c6f5d299b58cec36c0984765a2a3ecada3cd7ac2b964bf023",
+      "upstream": "org/openrewrite/java/format/NormalizeFormat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/NormalizeFormatVisitor.java",
+      "sha256": "635572ddd14193ed201806589bdd56284a2e9e43736e55aa2b14afc137da5e67",
+      "upstream": "org/openrewrite/java/format/NormalizeFormatVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/NormalizeLineBreaks.java",
+      "sha256": "093f23e3578fe7bf171385758b3ff5797b3da00330271cd233b27dfe9ba88f54",
+      "upstream": "org/openrewrite/java/format/NormalizeLineBreaks.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/NormalizeLineBreaksVisitor.java",
+      "sha256": "6ea0b5458ba0668de6eaa81c8caeff686cb16d56cd38a82613113d869b069407",
+      "upstream": "org/openrewrite/java/format/NormalizeLineBreaksVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/NormalizeTabsOrSpaces.java",
+      "sha256": "f7eb779c9dc510df6baa194771fff30d21e7a1df56ecbc597998e3c9da5288d2",
+      "upstream": "org/openrewrite/java/format/NormalizeTabsOrSpaces.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/NormalizeTabsOrSpacesVisitor.java",
+      "sha256": "1fd979ff036b76252355758c55c577c62608c05facb9db0a15b37648acc7dc56",
+      "upstream": "org/openrewrite/java/format/NormalizeTabsOrSpacesVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/OperatorWrap.java",
+      "sha256": "bc9fb47a0d5fb2f921509a67bbb742b2b9095a4afd810f69ea84cbf89c35d1f5",
+      "upstream": "org/openrewrite/java/format/OperatorWrap.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/PadEmptyForLoopComponents.java",
+      "sha256": "8b106500942ed4c4105c4da54a9a6eeee3a861205bba620864a0913ee03e1bdf",
+      "upstream": "org/openrewrite/java/format/PadEmptyForLoopComponents.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/RemoveTrailingWhitespace.java",
+      "sha256": "f3d3e3a8c2abbcd44811b5af9ca4435c76612cce404dc52830641251460e2fd5",
+      "upstream": "org/openrewrite/java/format/RemoveTrailingWhitespace.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/RemoveTrailingWhitespaceVisitor.java",
+      "sha256": "36320feefcc22311062ed281df0bdca74e88c36d21f22ccaeff2462864b26429",
+      "upstream": "org/openrewrite/java/format/RemoveTrailingWhitespaceVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/ShiftFormat.java",
+      "sha256": "a37e25a875a22613bcaefc4f92e64130deef3f607d9559ff7dc07cb0bbf5562f",
+      "upstream": "org/openrewrite/java/format/ShiftFormat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/SingleLineComments.java",
+      "sha256": "a62a24ee3a7c604e25ecb82fd13e0631a1e8711d905c2248b8db8dec85d2f5c5",
+      "upstream": "org/openrewrite/java/format/SingleLineComments.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/Spaces.java",
+      "sha256": "25947ecc3e05ee0c6e19f61acdf668b76a1252570269f957b12bf0d86237341d",
+      "upstream": "org/openrewrite/java/format/Spaces.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/SpacesVisitor.java",
+      "sha256": "167a6cbcc29ec4b58de2052654ac85c730bac01c04033c01f2435545b0ef18ff",
+      "upstream": "org/openrewrite/java/format/SpacesVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/TabsAndIndents.java",
+      "sha256": "15dbd27e3f78d43b7461ef0ba8b254c6e8c182fc4d09c875e988d1217c8affbe",
+      "upstream": "org/openrewrite/java/format/TabsAndIndents.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/TabsAndIndentsVisitor.java",
+      "sha256": "d0788b3e414f68ef88cc666af4001ca7b398d18fcdf96824ae4afa7d0ad2379d",
+      "upstream": "org/openrewrite/java/format/TabsAndIndentsVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/TypecastParenPad.java",
+      "sha256": "e6567b729c6dcb1c2d0ffbac83e8f507c4b7fbf0dc291bca40743d05ec889709",
+      "upstream": "org/openrewrite/java/format/TypecastParenPad.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/WrappingAndBraces.java",
+      "sha256": "3047d5db70d8dca334b50309dbcb17265e27a73cb228e6149e7caa4cbfb4cf12",
+      "upstream": "org/openrewrite/java/format/WrappingAndBraces.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/WrappingAndBracesVisitor.java",
+      "sha256": "6f9cbd5146f1d213ea4628a40424f1aa7a7bf3de041a2f7780dff280082b9e3b",
+      "upstream": "org/openrewrite/java/format/WrappingAndBracesVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/format/package-info.java",
+      "sha256": "a0057d94a1e57cd5c705579124b3ad79b4db2318a54229f2e49238cdb65c5410",
+      "upstream": "org/openrewrite/java/format/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/ClassIdResolver.java",
+      "sha256": "5ad2d0a3ab82446a1db71df4e4cc68378084ef845aa58179b169b072f472e14b",
+      "upstream": "org/openrewrite/java/internal/ClassIdResolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/DefaultJavaTypeSignatureBuilder.java",
+      "sha256": "f31e3e7973cebc004ad437bcde6181b9bb851cefac4eb09d2f7052702c924755",
+      "upstream": "org/openrewrite/java/internal/DefaultJavaTypeSignatureBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/FormatFirstClassPrefix.java",
+      "sha256": "753206edd1e0d7d4920451a63eb4aeecab196cba8bbb20903dda7e2f0555b8e5",
+      "upstream": "org/openrewrite/java/internal/FormatFirstClassPrefix.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/JavaReflectionTypeMapping.java",
+      "sha256": "0360b661f270d28bdc41a72d55a010c9e150957d561e307ddf98659f04593347",
+      "upstream": "org/openrewrite/java/internal/JavaReflectionTypeMapping.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/JavaReflectionTypeSignatureBuilder.java",
+      "sha256": "061b1c6f8f3ea40dace65df92dee85fdb1a00c66501a850385d1e31d095cde6d",
+      "upstream": "org/openrewrite/java/internal/JavaReflectionTypeSignatureBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/JavaTypeCache.java",
+      "sha256": "f3b114e6bf748ea80a0568d616e9ff827983e974218677421bd56ff8a4edd0e6",
+      "upstream": "org/openrewrite/java/internal/JavaTypeCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/JavaWhitespaceValidationService.java",
+      "sha256": "98d80e7b612937c7130ed43a65934c8bb7b46e3cdd00a3c1eff5b300484b4aa3",
+      "upstream": "org/openrewrite/java/internal/JavaWhitespaceValidationService.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/TypesInUse.java",
+      "sha256": "bb95d320113c4985a24c68dd431c14f2d2a99d97f75df184a11dc6b9a9218113",
+      "upstream": "org/openrewrite/java/internal/TypesInUse.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.interp",
+      "sha256": "e2ce4625cb95d815ae015ff3c584976fbb49dc9fd0d740bcc1c59e317623233a",
+      "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.interp"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.java",
+      "sha256": "7e3340e1432fdfcf0d7d300496279b73796d483fadd583b5f5f55f30373e8b27",
+      "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.tokens",
+      "sha256": "fa9f1a1cb534d96c4ff895d6ffbecde29e8e992e88deb6c5beb57c8896987bfd",
+      "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.tokens"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/AnnotationSignatureParser.interp",
+      "sha256": "658f90ccfcc870684a04aa303ff44747a99eb805c24871d05a557da5035a5039",
+      "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureParser.interp"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/AnnotationSignatureParser.java",
+      "sha256": "ca89d78ea7c09a699bbd2b22de5b69d8b9e0850c0cbc107f55e8439c9955950e",
+      "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureParser.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/AnnotationSignatureParser.tokens",
+      "sha256": "fa9f1a1cb534d96c4ff895d6ffbecde29e8e992e88deb6c5beb57c8896987bfd",
+      "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureParser.tokens"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/AnnotationSignatureParserBaseListener.java",
+      "sha256": "0febcda81af928f552a4bd6f6481e0682bfcce726bfe169146c7380e068b0874",
+      "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureParserBaseListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/AnnotationSignatureParserBaseVisitor.java",
+      "sha256": "82dfba7fac5fbfeafe4a03702a0d11319de0089a20ffc9007382b47ead9a042f",
+      "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureParserBaseVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/AnnotationSignatureParserListener.java",
+      "sha256": "0b37524bc54934fbf20fbd652d148adc8617521fc4f01feb383f50f49d43ad42",
+      "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureParserListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/AnnotationSignatureParserVisitor.java",
+      "sha256": "71bd72ee58bbefe030c55cb475860ad55e48ff11e582248f4e81fe9f27b463e7",
+      "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureParserVisitor.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/MethodSignatureLexer.interp",
+      "sha256": "d98caf994251e3163c25d064443216cffe1686cab09f812d54e3a398a1eb1059",
+      "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureLexer.interp"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/MethodSignatureLexer.java",
+      "sha256": "add82f6f34d9127e5e34c8078c23649d731c51269179f2267d2ff7af562d0809",
+      "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureLexer.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/MethodSignatureLexer.tokens",
+      "sha256": "60b39d576881093fbd7398d560f39d87187e8df11730919185fe396f2651976c",
+      "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureLexer.tokens"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/MethodSignatureParser.interp",
+      "sha256": "4490be1fac04476bc8faafaf384bd354205661f9da5c4635e980fab7787a49b9",
+      "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureParser.interp"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/MethodSignatureParser.java",
+      "sha256": "81787dc99f97b9fca256cdf2d0608c4ea98ae74523cb8696e24f91c7d6ca9b7e",
+      "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureParser.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/MethodSignatureParser.tokens",
+      "sha256": "60b39d576881093fbd7398d560f39d87187e8df11730919185fe396f2651976c",
+      "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureParser.tokens"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/MethodSignatureParserBaseListener.java",
+      "sha256": "8f39ac43b20fd3b7da2b867cf48f9f48c096ea3306a91293ff9395913dd67b1a",
+      "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureParserBaseListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/MethodSignatureParserBaseVisitor.java",
+      "sha256": "9e122de40d7d3af9c443539bfb2fd34479108a42954014b58fa131b870a87f22",
+      "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureParserBaseVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/MethodSignatureParserListener.java",
+      "sha256": "065ca4c1f60ce405118e0e274e9474519fcb2e00cce573c380eb6a31be850d0f",
+      "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureParserListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/MethodSignatureParserVisitor.java",
+      "sha256": "a87f142d23c9ea871071b356168f472089345e89f404f563fcbb2fa444f990c9",
+      "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureParserVisitor.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/TemplateParameterLexer.interp",
+      "sha256": "daf7195fd07e8ed5c065ca691ab9a4db006bbf655af5d68beed159d03716179f",
+      "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterLexer.interp"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/TemplateParameterLexer.java",
+      "sha256": "9bc30ba860f9c95e9984adea80e7989c43ef58d7a75c1ba36a2c98639575728f",
+      "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterLexer.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/TemplateParameterLexer.tokens",
+      "sha256": "3844b3213118d34a89870bf9feb10734f4c1bba7ac8cb8fd874a61a4525b363b",
+      "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterLexer.tokens"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/TemplateParameterParser.interp",
+      "sha256": "e70fac0d7e3cbb4c78dbb7e9f6aeea0c18574fd423d9a6e05d263e93229c4fab",
+      "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterParser.interp"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/TemplateParameterParser.java",
+      "sha256": "44e33bef69ba5d44b032cccb1a2f776e5cd0610a724f4325c05505465fcdc5a2",
+      "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterParser.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/TemplateParameterParser.tokens",
+      "sha256": "3844b3213118d34a89870bf9feb10734f4c1bba7ac8cb8fd874a61a4525b363b",
+      "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterParser.tokens"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/TemplateParameterParserBaseListener.java",
+      "sha256": "d263d8dec8fe45c21cf79208a05179c9972d93e016f7e89621e100b2a236ff37",
+      "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterParserBaseListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/TemplateParameterParserBaseVisitor.java",
+      "sha256": "a3f32b13855f6deeac4ece15442bbacbe37600e277def0af29fae4df5f8f21c7",
+      "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterParserBaseVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/TemplateParameterParserListener.java",
+      "sha256": "9f6adaab941e862f1b523f55e4cbed97b0e7a58fabf56da929dae44926e072ed",
+      "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterParserListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/grammar/TemplateParameterParserVisitor.java",
+      "sha256": "076ec9985a5088e9f87594b63c39cbcf97d0cfb66a2b28ac823c7c1e006c8dbb",
+      "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterParserVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/package-info.java",
+      "sha256": "b4b338c0473adf304c2a736a0930b460b6bd805a37ac85a9ecb00cab220f5e4c",
+      "upstream": "org/openrewrite/java/internal/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/template/AnnotationTemplateGenerator.java",
+      "sha256": "f784d319dfff62d68ae89e530e8a9b6b8b9c7022e9c868750945317c409da3d2",
+      "upstream": "org/openrewrite/java/internal/template/AnnotationTemplateGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/template/BlockStatementTemplateGenerator.java",
+      "sha256": "d10d3d0977a790285cb3601af4de4310493f1c4146a11e20239997bf595f8664",
+      "upstream": "org/openrewrite/java/internal/template/BlockStatementTemplateGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/template/JavaTemplateJavaExtension.java",
+      "sha256": "6c91dfe95096998f473646b2b5364a6107deb1b1006323f97fd0ad6b3c4204e3",
+      "upstream": "org/openrewrite/java/internal/template/JavaTemplateJavaExtension.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/template/JavaTemplateLanguageExtension.java",
+      "sha256": "684340fda37e951edc17fa8c2ec2525d23a82ed90e422172e3eda7364bea26d9",
+      "upstream": "org/openrewrite/java/internal/template/JavaTemplateLanguageExtension.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/template/JavaTemplateParser.java",
+      "sha256": "d1166add58ffe2e0034dcf6440842f258997cd3005d00c2ee3a888eb39db2f0a",
+      "upstream": "org/openrewrite/java/internal/template/JavaTemplateParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/template/PatternVariables.java",
+      "sha256": "72b2630d46634bc4697ebb6d1a8b1acd135082ff01289db017852e446c867862",
+      "upstream": "org/openrewrite/java/internal/template/PatternVariables.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/template/Substitutions.java",
+      "sha256": "13bbd26bd893217d33496669c2bc84e71dfcb3a990b9c0d7abab8c91c1e14db8",
+      "upstream": "org/openrewrite/java/internal/template/Substitutions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/template/TemplateParameter.java",
+      "sha256": "ec9f8d93379969cff5bb3c772d7d790fe2c7024c4979349ab907f384fe9ca5d2",
+      "upstream": "org/openrewrite/java/internal/template/TemplateParameter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/template/TypeParameter.java",
+      "sha256": "53ea612fd16b083b667c469247cfa2e817862d7db37033470a80c801c79d15d6",
+      "upstream": "org/openrewrite/java/internal/template/TypeParameter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/internal/template/package-info.java",
+      "sha256": "97730f59f5fd292b91e2361600157db020c26bff647c926620aebe5e93bfae2f",
+      "upstream": "org/openrewrite/java/internal/template/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/marker/CompactConstructor.java",
+      "sha256": "beba3d38bce0576b6013b17e2d63e8d108c793e11beb2d52760116a32b551101",
+      "upstream": "org/openrewrite/java/marker/CompactConstructor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/marker/ImplicitReturn.java",
+      "sha256": "c1e75eb44a439f11e73512ded6d55a8d2093eb7264b4a6c3f934a8b49a1ca931",
+      "upstream": "org/openrewrite/java/marker/ImplicitReturn.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/marker/JavaProject.java",
+      "sha256": "3574ea1570666d09de2ea641c76dd591eae936bb88ec8931f2f071e5533a0475",
+      "upstream": "org/openrewrite/java/marker/JavaProject.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/marker/JavaSourceSet.java",
+      "sha256": "6242fb2b38fc5a06f755ac04ce27010a152317cfe0d3ab8a82e5386444a792cd",
+      "upstream": "org/openrewrite/java/marker/JavaSourceSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/marker/JavaVersion.java",
+      "sha256": "7e0e714afca13cf9f3dae0f3675559040298739bf3c3744770004d195ec9661e",
+      "upstream": "org/openrewrite/java/marker/JavaVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/marker/LeadingBrace.java",
+      "sha256": "a1aebb4484f49a02ee067eaf69734f575ca2c36d3cb2e15b22cd5c1957f7c09e",
+      "upstream": "org/openrewrite/java/marker/LeadingBrace.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/marker/OmitParentheses.java",
+      "sha256": "076c7b3f61bd12925f8428d0addabef493d5ddb93d6b543e1969ba320c19274c",
+      "upstream": "org/openrewrite/java/marker/OmitParentheses.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/marker/Quoted.java",
+      "sha256": "9b6170f6c7f32253f0a468cb8875a816bc6e2a306558238f5ba3b0a52f391669",
+      "upstream": "org/openrewrite/java/marker/Quoted.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/marker/Semicolon.java",
+      "sha256": "81e9b8122add307e650ead40122d330a2bd8f9061732748b408c93cb48347e37",
+      "upstream": "org/openrewrite/java/marker/Semicolon.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/marker/TrailingComma.java",
+      "sha256": "721ca0ae7c94fa8bb1fa47cf953dad3893272ccd577f388c42a2606269ec1fc8",
+      "upstream": "org/openrewrite/java/marker/TrailingComma.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/marker/package-info.java",
+      "sha256": "2c7f87bacab085020a304ca2814df6a71b053b88ad33fc8c250bfdb8b2e0418a",
+      "upstream": "org/openrewrite/java/marker/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/package-info.java",
+      "sha256": "48125dbb65f383967cf627712a7e83044eba5e113d017fb6bd74c097dbb658d7",
+      "upstream": "org/openrewrite/java/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/recipes/ExecutionContextParameterName.java",
+      "sha256": "01c70ca51d0d9a5295599bcbb4c1640c599eb678ed617f581054ea2204c53759",
+      "upstream": "org/openrewrite/java/recipes/ExecutionContextParameterName.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/recipes/FindRecipes.java",
+      "sha256": "d3c8925f13be9e2fbfa2cebfa51c72e016348bfd99b78907e1ca66902bb4c530",
+      "upstream": "org/openrewrite/java/recipes/FindRecipes.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/recipes/MissingOptionExample.java",
+      "sha256": "0cbc3384f8ad9584008c48b9995b0bb1417dd5be9fdead1361e9b433e992c1c9",
+      "upstream": "org/openrewrite/java/recipes/MissingOptionExample.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/recipes/RecipeEqualsAndHashCodeCallSuper.java",
+      "sha256": "cc5211a9e981952ef258cbc8a7772317507c4e29f027536ea4051b1229cd4498",
+      "upstream": "org/openrewrite/java/recipes/RecipeEqualsAndHashCodeCallSuper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/recipes/RewriteTestClassesShouldNotBePublic.java",
+      "sha256": "59cb117cabf3baf32137df093a1793f24650f4f40b4ad3e4268059203213a1b5",
+      "upstream": "org/openrewrite/java/recipes/RewriteTestClassesShouldNotBePublic.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/recipes/SelectRecipeExamples.java",
+      "sha256": "1f0f20da02c654d87163f0452aff2870c6889654d34fe24b8cc034e1fbfac972",
+      "upstream": "org/openrewrite/java/recipes/SelectRecipeExamples.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/recipes/SetDefaultEstimatedEffortPerOccurrence.java",
+      "sha256": "142bb8e919ca7ae872e25f65c709b72cefd13191578ceed6ebd2c00bfe8914fb",
+      "upstream": "org/openrewrite/java/recipes/SetDefaultEstimatedEffortPerOccurrence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/recipes/SourceSpecTextBlockIndentation.java",
+      "sha256": "a92416afacd2bb601c50b9cd676f0bd2c17d1a686ae2b7b18466b7e4277ab2f6",
+      "upstream": "org/openrewrite/java/recipes/SourceSpecTextBlockIndentation.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/recipes/UseTreeRandomId.java",
+      "sha256": "dfccc1ea473226c3c3da67e79f93dc3d25871ee3b05bb111560f5bb1e8706c27",
+      "upstream": "org/openrewrite/java/recipes/UseTreeRandomId.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/recipes/package-info.java",
+      "sha256": "5f0cb9c35595dc376678efd4eebf13a2647ffcaba4d726bd646c49a3a8fb707b",
+      "upstream": "org/openrewrite/java/recipes/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/DeclaresMethod.java",
+      "sha256": "83ddec6d334d38b55417fb2e5b002c1f0842cb88fff0446884fad817cd7b7684",
+      "upstream": "org/openrewrite/java/search/DeclaresMethod.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/DeclaresType.java",
+      "sha256": "015b964a24eb877edcb3ea0362ca36632f94fdb107b4b10ad0996b89a082e445",
+      "upstream": "org/openrewrite/java/search/DeclaresType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindAnnotations.java",
+      "sha256": "7f38e0bfd90481905d73f2bcff103fd96a749b712f6482501a7bb146bc473798",
+      "upstream": "org/openrewrite/java/search/FindAnnotations.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindClassHierarchy.java",
+      "sha256": "805ca545d8eee9e5f487f36ce78ded10359562197253c8a57bfce16f20e10fe0",
+      "upstream": "org/openrewrite/java/search/FindClassHierarchy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindComments.java",
+      "sha256": "08920f31e6688833de1ea5c5d934d9d3168e1f6d9b85e16c44044104b3def1eb",
+      "upstream": "org/openrewrite/java/search/FindComments.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindDeprecatedClasses.java",
+      "sha256": "e7e2a1dec295c044447784ffad81da3768a6ba77fb3a80d530f86ef5ad535280",
+      "upstream": "org/openrewrite/java/search/FindDeprecatedClasses.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindDeprecatedFields.java",
+      "sha256": "7b479e82e4b3889bcd0afe9e61b7ca2715f31439031865b742be850deee4484b",
+      "upstream": "org/openrewrite/java/search/FindDeprecatedFields.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindDeprecatedMethods.java",
+      "sha256": "8e84e6b07abe4f42f4fef5a4490fe2b778945007f0f1c454d8e0597f358d0e88",
+      "upstream": "org/openrewrite/java/search/FindDeprecatedMethods.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindDeprecatedUses.java",
+      "sha256": "c7982a9b3393a2445080f483e6d452c9b989c31030f5909c3118c4f63f3f2ccd",
+      "upstream": "org/openrewrite/java/search/FindDeprecatedUses.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindEmptyClasses.java",
+      "sha256": "e79e22dbdec555d893092343f05a0de1eef593a912eca89e1bf81cfc63e3c53f",
+      "upstream": "org/openrewrite/java/search/FindEmptyClasses.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindEmptyMethods.java",
+      "sha256": "e5196d279c19dde442c025c1ffea68f5dade3f82318d736e3916b0e663f359e1",
+      "upstream": "org/openrewrite/java/search/FindEmptyMethods.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindFields.java",
+      "sha256": "c8f5efe10cad05264bfaa64e93bd91da23f0fa6a974363b4b588b0c593c2a696",
+      "upstream": "org/openrewrite/java/search/FindFields.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindFieldsOfType.java",
+      "sha256": "866edf5d34f2fcb3a06f4618f66ad8ee0af9badea46d3bc23dfd9fd2236d62a6",
+      "upstream": "org/openrewrite/java/search/FindFieldsOfType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindImplementations.java",
+      "sha256": "40dad1655d2deebdb438ef300c1a7062c3706d590c699e1adb5f100e26c29615",
+      "upstream": "org/openrewrite/java/search/FindImplementations.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindImports.java",
+      "sha256": "493e81ae89e99a68ca2ea227a5b3ef2f82e8c31a6789985cf18d5cd07c190ccd",
+      "upstream": "org/openrewrite/java/search/FindImports.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindInheritedFields.java",
+      "sha256": "96a05e2df6f9575763aade09a291f8f7c6049a3d563306567e43afaaa06e3d83",
+      "upstream": "org/openrewrite/java/search/FindInheritedFields.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindLiterals.java",
+      "sha256": "74b6d872683e301ca49544a69586929eae4f7acafd1d5a6395c32198c8d3cd05",
+      "upstream": "org/openrewrite/java/search/FindLiterals.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindMethodDeclaration.java",
+      "sha256": "9ff963a278f2c03ca08013416390972f8e8aed80e830ff03fab8d16c5dc01c06",
+      "upstream": "org/openrewrite/java/search/FindMethodDeclaration.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindMethods.java",
+      "sha256": "5b844486a16f240342d991c43a36fe1b5f92803304f8ed7ae84fb0c02e72a3bc",
+      "upstream": "org/openrewrite/java/search/FindMethods.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindMissingTypes.java",
+      "sha256": "d295dfbada6f364c2dc0dd350a22696ca4b133ea4ee95e351da6f25434eb5e80",
+      "upstream": "org/openrewrite/java/search/FindMissingTypes.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindReferencedTypes.java",
+      "sha256": "ed84b5be2c98cafcacb677ff9196b2e51ae75e362e983768536456adf6156f5f",
+      "upstream": "org/openrewrite/java/search/FindReferencedTypes.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindRepeatableAnnotations.java",
+      "sha256": "2e7d5fb15308bcaa071a2d0d7120e890df6596b7fccfc07d49b552bcbe7b9c88",
+      "upstream": "org/openrewrite/java/search/FindRepeatableAnnotations.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindTypeMappings.java",
+      "sha256": "8beeb1ce6b2670e41a1ad2b3ca7cc2f8bbe994e9120891d084787f9fcba905b8",
+      "upstream": "org/openrewrite/java/search/FindTypeMappings.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/FindTypes.java",
+      "sha256": "6831878fcd7703fd202441b62953b958a336e9715e3f15006a494b125b198eb9",
+      "upstream": "org/openrewrite/java/search/FindTypes.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/HasJavaVersion.java",
+      "sha256": "cd6e43973b4b0d10bbe54f7c73fc99f250b62e359cbdfdce47329ef12cfffcb0",
+      "upstream": "org/openrewrite/java/search/HasJavaVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/HasSourceSet.java",
+      "sha256": "bf0746d8201f34193b6c58f4a2516ecb9503926447f608346f101da2f2ca43a1",
+      "upstream": "org/openrewrite/java/search/HasSourceSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/HasTypeOnClasspathSourceSet.java",
+      "sha256": "5f74889ecee5b93f1ec799baaf14c7875466e55b0489c87c760c9b610d0449da",
+      "upstream": "org/openrewrite/java/search/HasTypeOnClasspathSourceSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/InJavaSourceSet.java",
+      "sha256": "74bb959d5aaa6a09eecef746aeceeef82f1f6f56f72b31e2e7ef0afd5667da4a",
+      "upstream": "org/openrewrite/java/search/InJavaSourceSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/IsLikelyNotTest.java",
+      "sha256": "3ae12180c46fbba24c0fde72690b53200d07f66c397af30e20d1a1e352ac5875",
+      "upstream": "org/openrewrite/java/search/IsLikelyNotTest.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/IsLikelyTest.java",
+      "sha256": "cf5894f34956324f20520b84fea374d827533ef4c94aa060b59678a0a5f325cf",
+      "upstream": "org/openrewrite/java/search/IsLikelyTest.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/MaybeUsesImport.java",
+      "sha256": "39689db479762bd489e4efff457d22a4b8aba2fe35b939654dd234272b7c6dd4",
+      "upstream": "org/openrewrite/java/search/MaybeUsesImport.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/ResultOfMethodCallIgnored.java",
+      "sha256": "f4d6d6a931fd790e4a98ea62f153e37d8f57680340783d6544b82afb48c50ea4",
+      "upstream": "org/openrewrite/java/search/ResultOfMethodCallIgnored.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/SemanticallyEqual.java",
+      "sha256": "b39f47b34ce05377aa0e6f7a37cb9cd727084765160695a0f78b809ce0d19b3e",
+      "upstream": "org/openrewrite/java/search/SemanticallyEqual.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/UsesAllMethods.java",
+      "sha256": "909bee9ecc62bfee192b7f0f95b283fbb434765798e087920dec8661ad471599",
+      "upstream": "org/openrewrite/java/search/UsesAllMethods.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/UsesField.java",
+      "sha256": "3825e30f06f6b72135a2917382f3e950eb9d58644c0cd297793bada49bb67766",
+      "upstream": "org/openrewrite/java/search/UsesField.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/UsesJavaVersion.java",
+      "sha256": "da15a300b4946107edd54bca81dda1485528d936fdb365bfee0ced0764e1065d",
+      "upstream": "org/openrewrite/java/search/UsesJavaVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/UsesMethod.java",
+      "sha256": "1b86b83e17d3a5d8528e43654cbe7759e28729478419c6ac696504be0f4e0141",
+      "upstream": "org/openrewrite/java/search/UsesMethod.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/UsesType.java",
+      "sha256": "4d6c30d752c19b08b936d2d821778f8d8fbd7c4cb81e0acdc80fe1521730b260",
+      "upstream": "org/openrewrite/java/search/UsesType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/search/package-info.java",
+      "sha256": "f1fc20693305d3e874c04ee949e3466d6c673b4303c8b1725e3e8aec60810b06",
+      "upstream": "org/openrewrite/java/search/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/service/AnnotationService.java",
+      "sha256": "3bf7a6536fcb37a104d69d4df02cf33d8d02f5236eebd1784e763dd3f1cb9499",
+      "upstream": "org/openrewrite/java/service/AnnotationService.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/service/AutoFormatService.java",
+      "sha256": "32e787f5f7b4220aedc8720a68e295bd908d4b47ecdece6398e9a1348c9d2697",
+      "upstream": "org/openrewrite/java/service/AutoFormatService.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/service/ImportService.java",
+      "sha256": "2ace643cb4797d3041d522d4d0e604a2fe6679f1c7c034b4111aa4bec5ac0c9f",
+      "upstream": "org/openrewrite/java/service/ImportService.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/service/package-info.java",
+      "sha256": "e7f911d83f2baa735a83b3d4ea6d22e5d8fad1ebf4c0a05d394728f96f5d9d2f",
+      "upstream": "org/openrewrite/java/service/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/Autodetect.java",
+      "sha256": "ebee7a64a5f9e555e7244f15f61fd2a9373bb8d302c7d296518079a0f91ac9f9",
+      "upstream": "org/openrewrite/java/style/Autodetect.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/BlankLinesStyle.java",
+      "sha256": "62cc9e3942edf307f30ca9bb82d030f886670541eb64195d95e5d74cc569fb28",
+      "upstream": "org/openrewrite/java/style/BlankLinesStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/Checkstyle.java",
+      "sha256": "caca46ad13a0f46c0fe05247af399ca4ec45dcb8c7ad99efdfc02c285d73f881",
+      "upstream": "org/openrewrite/java/style/Checkstyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/CheckstyleConfigLoader.java",
+      "sha256": "17fb5500449859acbd804e0f51ba378aff9640dbbbd38ba0a5458ff11b49b7a5",
+      "upstream": "org/openrewrite/java/style/CheckstyleConfigLoader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/DefaultComesLastStyle.java",
+      "sha256": "f53c259d1b79c05494511af99072c14cf9d8df3c82d23badf5b7c7d27a8d762e",
+      "upstream": "org/openrewrite/java/style/DefaultComesLastStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/EmptyBlockStyle.java",
+      "sha256": "a1ea2ebac9506f7c76894b11ad56c80aff63ac05ab01f37460c4718c3d553b2b",
+      "upstream": "org/openrewrite/java/style/EmptyBlockStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/EmptyForInitializerPadStyle.java",
+      "sha256": "c5c31a6b5b5b9f257bb4c445ccf029bef515d63cdf3642d07d845989dcff8316",
+      "upstream": "org/openrewrite/java/style/EmptyForInitializerPadStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/EmptyForIteratorPadStyle.java",
+      "sha256": "720b61a8f879375215e639ac0e66027a828499b64dbb315afaad7033d3e02e75",
+      "upstream": "org/openrewrite/java/style/EmptyForIteratorPadStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/EqualsAvoidsNullStyle.java",
+      "sha256": "3af0caaa972d9aa014d482f4c9a00590f260b914214d10218314998903bb5a28",
+      "upstream": "org/openrewrite/java/style/EqualsAvoidsNullStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/ExplicitInitializationStyle.java",
+      "sha256": "2d6097483aefc15c1c956d64c69ab30458170782262de445e953b5c6eaf82d36",
+      "upstream": "org/openrewrite/java/style/ExplicitInitializationStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/FallThroughStyle.java",
+      "sha256": "fb841377b2b786feb05f3772b2e253c298a0913a9f4d00d1bc0d79f030f08e5d",
+      "upstream": "org/openrewrite/java/style/FallThroughStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/HiddenFieldStyle.java",
+      "sha256": "6e24ea7247ed1527ad478375a3c103da5dcc634a30d039129a128883201c988d",
+      "upstream": "org/openrewrite/java/style/HiddenFieldStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/HideUtilityClassConstructorStyle.java",
+      "sha256": "ab77e2cb9bd3b9a9ed0bbf735e1205e0715ac085f997859e26b36ca862320916",
+      "upstream": "org/openrewrite/java/style/HideUtilityClassConstructorStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/ImportLayoutStyle.java",
+      "sha256": "b00480d03fad3cfdf40e8e2cdbc87e39de85179397ae4d8eca568acdb6ddfcc7",
+      "upstream": "org/openrewrite/java/style/ImportLayoutStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/IntelliJ.java",
+      "sha256": "910567ac1281deb8fffed165737796e2ce3c1751cc86ac4948b2021f7f2458d3",
+      "upstream": "org/openrewrite/java/style/IntelliJ.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/MethodParamPadStyle.java",
+      "sha256": "aa684481f7027b3806f50f5b27286f0d96531268498ddf179403469fedc03fce",
+      "upstream": "org/openrewrite/java/style/MethodParamPadStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/NeedBracesStyle.java",
+      "sha256": "289774b5fabf4224a4ef8f389c7fe4d594376a386f82ead5c2d7cdb9af2feb59",
+      "upstream": "org/openrewrite/java/style/NeedBracesStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/NoWhitespaceAfterStyle.java",
+      "sha256": "c5e6ee07cc429d7fd11c3fc5aae3c706e559ed0d677707515c05cac94f010197",
+      "upstream": "org/openrewrite/java/style/NoWhitespaceAfterStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/NoWhitespaceBeforeStyle.java",
+      "sha256": "26593a2a27ec0172a18c8bdd4c5a9b00dceedcbe5dd3686af42ee0de8a19e138",
+      "upstream": "org/openrewrite/java/style/NoWhitespaceBeforeStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/OperatorWrapStyle.java",
+      "sha256": "b1b9606132d727a2f2a644336022220441982a43922e00e8ac0a122d3ac6f39b",
+      "upstream": "org/openrewrite/java/style/OperatorWrapStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/SpacesStyle.java",
+      "sha256": "0b08a08413fd9adaf3e230e5b1a4661b9dec6e07bd218dffcd9d9256acc9083b",
+      "upstream": "org/openrewrite/java/style/SpacesStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/TabsAndIndentsStyle.java",
+      "sha256": "76a4da6f5d08cdddaf73d5ed408657a7260595f77e53ba14858a3bcbfe86c138",
+      "upstream": "org/openrewrite/java/style/TabsAndIndentsStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/TypecastParenPadStyle.java",
+      "sha256": "dc9c8abcd9ac1c094104c6c37e28361f651de0c048219f5c4fcf9ee673149370",
+      "upstream": "org/openrewrite/java/style/TypecastParenPadStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/UnnecessaryParenthesesStyle.java",
+      "sha256": "1faeac9a70ad744faf7674bf1a3a49d717965d782b92750fd4ccc891f0df3d69",
+      "upstream": "org/openrewrite/java/style/UnnecessaryParenthesesStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/WrappingAndBracesStyle.java",
+      "sha256": "7760b01048668ebebce8deb2eb9c51055a3fef1f13e7c808c255cffa08cea838",
+      "upstream": "org/openrewrite/java/style/WrappingAndBracesStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/style/package-info.java",
+      "sha256": "828af870512a346ccb90ea53a6ea336ebcf6114733333f34aafdf34b4c1a5c22",
+      "upstream": "org/openrewrite/java/style/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/table/ClassHierarchy.java",
+      "sha256": "e03085d1fc8bee0a2f55262600d39754aef605c206af534c324ad05a7a10e276",
+      "upstream": "org/openrewrite/java/table/ClassHierarchy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/table/MethodCalls.java",
+      "sha256": "8549da15ee7471637986379294ce2f4af408e34bc45a00801c1b03a60fb29555",
+      "upstream": "org/openrewrite/java/table/MethodCalls.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/table/TokenCount.java",
+      "sha256": "956a5dea6959561c5ce8eef45a136aa9f42a1324d32bda0ba7af9a33d236903e",
+      "upstream": "org/openrewrite/java/table/TokenCount.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/table/TypeMappings.java",
+      "sha256": "6ca8595176dd0eafcd72f4e741b534b28190c9fe0b9e58958ded46166de40680",
+      "upstream": "org/openrewrite/java/table/TypeMappings.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/table/package-info.java",
+      "sha256": "c906ec6045f758906c53576f0be49a30e95e116f6f77c2fdc940ff701a382e80",
+      "upstream": "org/openrewrite/java/table/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/Comment.java",
+      "sha256": "8aed623ffaa218d8d7cf849544df91aa97f7ef77768c7454dabb352651f243b3",
+      "upstream": "org/openrewrite/java/tree/Comment.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/CoordinateBuilder.java",
+      "sha256": "a203d3646d4fbaa74a77e34e5ac10215188cf64d625c774a5c611dc167cf5203",
+      "upstream": "org/openrewrite/java/tree/CoordinateBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/Expression.java",
+      "sha256": "1135b7c5dbbc3432a31082c06680352c12e3e51a25787b6171798d80d8001739",
+      "upstream": "org/openrewrite/java/tree/Expression.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/Flag.java",
+      "sha256": "810f0975696b0402e05f89cd1e37965c2371282abdbdb4dfb021b62b108ba7c8",
+      "upstream": "org/openrewrite/java/tree/Flag.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/J.java",
+      "sha256": "cabb28429d40066f1df767f03f044e56ea5e7a61e185360f2b2b8560c4f13d47",
+      "upstream": "org/openrewrite/java/tree/J.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/JContainer.java",
+      "sha256": "087abcb46c84955bb5f429ada8ad909292a8e731371b876992aabcbc34cfe6eb",
+      "upstream": "org/openrewrite/java/tree/JContainer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/JLeftPadded.java",
+      "sha256": "b074bffb460951ca3f788f294b029205b9012186b8f85599b87386d1ab70cc61",
+      "upstream": "org/openrewrite/java/tree/JLeftPadded.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/JRightPadded.java",
+      "sha256": "fec8e9d58d6d8fd3f6b54c1dcd845d47c95e509827479c38db15a08abf6cf8d8",
+      "upstream": "org/openrewrite/java/tree/JRightPadded.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/JavaCoordinates.java",
+      "sha256": "adbb53b2f54c3ec54e01c0da4f40119a1eab6fca8e94aba17b8e04753ad931b2",
+      "upstream": "org/openrewrite/java/tree/JavaCoordinates.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/JavaSourceFile.java",
+      "sha256": "8b7783ca2343ea9fa130db312c1fc1212fba4f848a598f40196e19c8284645a4",
+      "upstream": "org/openrewrite/java/tree/JavaSourceFile.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/JavaType.java",
+      "sha256": "1761797c20342c03d0bd94dbb8381a67c32ae0ddf3cc137b9e3acbcdedc55842",
+      "upstream": "org/openrewrite/java/tree/JavaType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/JavaVarKeyword.java",
+      "sha256": "4188994d34156d9159db48e5792f2ea37df183c1b8bcec60e7201d5c01cdd786",
+      "upstream": "org/openrewrite/java/tree/JavaVarKeyword.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/Javadoc.java",
+      "sha256": "1c89c0e3f5bba5e162e9ae3a0d26546382950cb63e010c9dd0911e9ec5d62713",
+      "upstream": "org/openrewrite/java/tree/Javadoc.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/Loop.java",
+      "sha256": "815887720fcb494f45ca53b7f435267e07d16a2d3c67dfaf9c1e87f30e599017",
+      "upstream": "org/openrewrite/java/tree/Loop.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/MethodCall.java",
+      "sha256": "b57df37260d25162bdbd38beb66318fc8387cea1567aad3c7135966a577e7938",
+      "upstream": "org/openrewrite/java/tree/MethodCall.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/NameTree.java",
+      "sha256": "0345d22be5a2b2a56a94741ff0aaf710b870a3d195e8b781e2dee3b6c16f9e1c",
+      "upstream": "org/openrewrite/java/tree/NameTree.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/Space.java",
+      "sha256": "deea18e66f3931accb34b625957f1c7333c7c5965d6f5110ab78a4cd6ad64822",
+      "upstream": "org/openrewrite/java/tree/Space.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/Statement.java",
+      "sha256": "1429833b5416743cdd9c29387c34d6465d1a0d034d4e39c9e207f97590a66aff",
+      "upstream": "org/openrewrite/java/tree/Statement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/TextComment.java",
+      "sha256": "9d188ae825a21f056e7712e743dfc68067d0058f6fc3d6ee9759e9da2e8d0fe9",
+      "upstream": "org/openrewrite/java/tree/TextComment.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/TypeTree.java",
+      "sha256": "a6a8171888209c582a89e55403ee57ebc9cc6f406c9b39849a5a51c9cdf683d8",
+      "upstream": "org/openrewrite/java/tree/TypeTree.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/TypeUtils.java",
+      "sha256": "82f723a7b7118c9fe8261a45d07c1ca6f0ab42a6dee428233432b980a45e5377",
+      "upstream": "org/openrewrite/java/tree/TypeUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/TypedTree.java",
+      "sha256": "173d2206dc5df01fac29339d9c37f08044633d155e33a2cd247f0b4da6388fdd",
+      "upstream": "org/openrewrite/java/tree/TypedTree.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/org/openrewrite/java/tree/package-info.java",
+      "sha256": "9705d2af4f6356bdf3c66d82cd7656c2bc1c57b811e802673143a153cc000515",
+      "upstream": "org/openrewrite/java/tree/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/UPSTREAM_LICENSE.json",
+      "sha256": "ad32b4f9a97674d793ab08d9990cd11a57a8b0a4afaabe73debf362cafbfc8d7",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/UPSTREAM_LICENSE.txt",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/SOURCES_MANIFEST.tsv",
+      "sha256": "467634c48bdff97edab891018fb2932531319f9e667e7348a4832d14e741f998",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party-images/rewrite-java-8.17.1/LICENSE",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.openrewrite",
+  "kind": "IMAGE",
+  "license": "The Apache Software License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.pom",
+  "receipt": {
+    "buildRoot": "",
+    "distributionSha256": "c9bdb1e640390ed4fdbb497085f775eee30aaaf22b08441ad5f439564185fc0d",
+    "lock": "33ab049867c1c736c65dececbbb9f9d42697fd3336cf178946c3c43ba55336ff",
+    "message": "build not requested",
+    "sourceRoot": "bf673b985d671efd82be75577887c5e5f6ed3423e2e0232f6a3502adc04cb02c",
+    "status": "SOURCE_ONLY"
+  },
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1-sources.jar",
+  "sources_jar_sha1": "3e97e633ecbada1bbdd4e3875b75a9b0d2d1d57c",
+  "sources_jar_sha256": "b94fb2e5ea7903254bf804a0fa9cdc9f99184a344f10fd74b37112ea48a77426",
+  "status": "SOURCE_ONLY",
+  "upstream": "https://github.com/openrewrite/rewrite",
+  "version": "8.17.1"
+}

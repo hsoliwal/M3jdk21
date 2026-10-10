@@ -1,0 +1,10 @@
+module	result	seconds	log	first_error
+m3/vendor/third_party/annotations	PASS	18	K:\m3-work\runs\20261007-m3jdk21-apex\c6\m3-build-logs\m3_vendor_third_party_annotations.log	
+m3/vendor/third_party/fastdoubleparser-1.0.0	PASS	6	K:\m3-work\runs\20261007-m3jdk21-apex\c6\m3-build-logs\m3_vendor_third_party_fastdoubleparser-1.0.0.log	
+m3/vendor/third_party/jackson-annotations-2.16.1	PASS	6	K:\m3-work\runs\20261007-m3jdk21-apex\c6\m3-build-logs\m3_vendor_third_party_jackson-annotations-2.16.1.log	
+m3/vendor/third_party/jackson-core-2.16.1	PASS	9	K:\m3-work\runs\20261007-m3jdk21-apex\c6\m3-build-logs\m3_vendor_third_party_jackson-core-2.16.1.log	
+m3/vendor/third_party/jackson-databind-2.16.1	PASS	19	K:\m3-work\runs\20261007-m3jdk21-apex\c6\m3-build-logs\m3_vendor_third_party_jackson-databind-2.16.1.log	
+m3/vendor/third_party/slf4j-api-1.7.36	PASS	5	K:\m3-work\runs\20261007-m3jdk21-apex\c6\m3-build-logs\m3_vendor_third_party_slf4j-api-1.7.36.log	
+m3/vendor/third_party/slf4j-api-2.0.12	PASS	6	K:\m3-work\runs\20261007-m3jdk21-apex\c6\m3-build-logs\m3_vendor_third_party_slf4j-api-2.0.12.log	
+m3/vendor/third_party/slf4j-api-2.0.9	PASS	7	K:\m3-work\runs\20261007-m3jdk21-apex\c6\m3-build-logs\m3_vendor_third_party_slf4j-api-2.0.9.log	
+m3/vendor/third_party/slf4j-simple	PASS	4	K:\m3-work\runs\20261007-m3jdk21-apex\c6\m3-build-logs\m3_vendor_third_party_slf4j-simple.log	

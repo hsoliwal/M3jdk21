@@ -1,0 +1,902 @@
+{
+  "artifact": "jackson-core",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "M3jdk21 m3/tooling (recipe engine)",
+  "coordinate": "com.fasterxml.jackson.core:jackson-core:2.16.1-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "dependencies": [
+    {
+      "artifact": "fastdoubleparser",
+      "form": "source module",
+      "group": "ch.randelshofer",
+      "optional": true,
+      "scope": "compile",
+      "version": "1.0.0-m3-source-1"
+    }
+  ],
+  "donor": "jackson-core-2.16.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/resources/META-INF/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "5b9815fc3bc626f4d4fb79ce5dc470eae3c9b5f639ecb9625c1b620c6b7bc0ae",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/resources/META-INF/jackson-core-LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "META-INF/jackson-core-LICENSE"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/resources/META-INF/jackson-core-NOTICE",
+      "sha256": "0a0042db627fe915c6a1d9ef74927af5081446063e8888494be6718d692dd2b8",
+      "upstream": "META-INF/jackson-core-NOTICE"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.properties",
+      "sha256": "30234f5349c8f22511e861f3d899e1c53e053f58e1b64de7f604d141432cd657",
+      "upstream": "META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-excluded/META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.xml",
+      "sha256": "d2d300adb57d3007a7da68f95a9012a8eb0318d2cb0635fcb359573813e2858c",
+      "upstream": "META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.xml"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/resources/META-INF/services/com.fasterxml.jackson.core.JsonFactory",
+      "sha256": "8bf715fbf4c33436cce55f9269fc331eb255c322233cdedae4456297b338aaf0",
+      "upstream": "META-INF/services/com.fasterxml.jackson.core.JsonFactory"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/Base64Variant.java",
+      "sha256": "272abeb40fe545d2d58bdab665bf072f9d891a789d07df4514066bc83125767a",
+      "upstream": "com/fasterxml/jackson/core/Base64Variant.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/Base64Variants.java",
+      "sha256": "09999029eb8968312b5dcc47cd2e6deefd5ca534eb905483ef88174b541eba07",
+      "upstream": "com/fasterxml/jackson/core/Base64Variants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/ErrorReportConfiguration.java",
+      "sha256": "3b39df9622d01d18979510032fe1f8e23c14c7b2be9ed0d273a7957154fdba3c",
+      "upstream": "com/fasterxml/jackson/core/ErrorReportConfiguration.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/FormatFeature.java",
+      "sha256": "45d411be815b7acc74e304909ec2a2aeb36479db01ce9fa6043c1126e30032d4",
+      "upstream": "com/fasterxml/jackson/core/FormatFeature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/FormatSchema.java",
+      "sha256": "da2c070fda48d3f81cd0b2ce5de41fbe50178b30c756f52dfa2fbc32039412d4",
+      "upstream": "com/fasterxml/jackson/core/FormatSchema.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JacksonException.java",
+      "sha256": "76d0a637c7c64b89eae83659fa5b79562a97eb5ee9f1c0d32b81138ad244f1c6",
+      "upstream": "com/fasterxml/jackson/core/JacksonException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonEncoding.java",
+      "sha256": "5e45b25a3ef462bddea01c02d9f0344bd49d40d3e3016e2c7c4255dd9963b3a6",
+      "upstream": "com/fasterxml/jackson/core/JsonEncoding.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonFactory.java",
+      "sha256": "c0cf7e68abb53f4801ecfaf1781fce0e0cbffcd4b12f9acb5e6c745c9bf6c2ff",
+      "upstream": "com/fasterxml/jackson/core/JsonFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonFactoryBuilder.java",
+      "sha256": "f8fa62e18f4935f4250b8d3a1bd895f5d792eada24fb357300eda626c6fbc546",
+      "upstream": "com/fasterxml/jackson/core/JsonFactoryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonGenerationException.java",
+      "sha256": "b7c2fb1354690de326585fa1f96889a3d5e868b0890e236841b439bc88df4706",
+      "upstream": "com/fasterxml/jackson/core/JsonGenerationException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonGenerator.java",
+      "sha256": "b880608dbe8b3f5d052da0957016e97848bdff698a4351d570fac82f9c779dfd",
+      "upstream": "com/fasterxml/jackson/core/JsonGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonLocation.java",
+      "sha256": "c8472477bd704dbdb16b882b4436074e5039a012d76d4b1f002fcedfb5e87f33",
+      "upstream": "com/fasterxml/jackson/core/JsonLocation.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonParseException.java",
+      "sha256": "a66795e110a05f3a969682ec8082e49dc670a60eda74c98839eccc78ab1ad858",
+      "upstream": "com/fasterxml/jackson/core/JsonParseException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonParser.java",
+      "sha256": "d7a290405f7bf59ffb302c0956e35e9a8bb02fb29f289c8ca159d44904c1b9fd",
+      "upstream": "com/fasterxml/jackson/core/JsonParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonPointer.java",
+      "sha256": "042a1eb575955e4961c7ff41753aeb6ce2c6e99df2bec62e90d1abb30b82a7f2",
+      "upstream": "com/fasterxml/jackson/core/JsonPointer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonProcessingException.java",
+      "sha256": "f02b5c59c7a956ff4bbebe919b0b18857b7ff0969fcfd60b7b9de7647e8bf81b",
+      "upstream": "com/fasterxml/jackson/core/JsonProcessingException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonStreamContext.java",
+      "sha256": "e2c7e8cb1024aed6d945b4daf91da8652ef3289fed444cb1f540b010f966d74d",
+      "upstream": "com/fasterxml/jackson/core/JsonStreamContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonToken.java",
+      "sha256": "d11f209efd1171cac49f67f9c87120805f08d94509dee447cbd9dcabe9aab4b2",
+      "upstream": "com/fasterxml/jackson/core/JsonToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonTokenId.java",
+      "sha256": "78d851a9026230bbb401bc01adf51a8aa6aed9ea91f3b6e9adb4dbbaa8a8df3f",
+      "upstream": "com/fasterxml/jackson/core/JsonTokenId.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/JsonpCharacterEscapes.java",
+      "sha256": "b4db32a3bc7d803e444d1f069ef5f75346f868aa9c9bda8cdeb4121111842b20",
+      "upstream": "com/fasterxml/jackson/core/JsonpCharacterEscapes.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/ObjectCodec.java",
+      "sha256": "58521ed15d59a7eacf032e7c26fff41155ef29f40b75e6118ef4ee7d00c65378",
+      "upstream": "com/fasterxml/jackson/core/ObjectCodec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/PrettyPrinter.java",
+      "sha256": "5dc5c93798a4ec559da4e0ad92e3015893b4fc4875e05b62456ae6f04e5930a3",
+      "upstream": "com/fasterxml/jackson/core/PrettyPrinter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/SerializableString.java",
+      "sha256": "653671868f3244bc0912f02ccc66ec48725a52b5adb0dbdf6e7f3a3445fa9308",
+      "upstream": "com/fasterxml/jackson/core/SerializableString.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/StreamReadCapability.java",
+      "sha256": "838930eea4b197cf288cb7e7db55cd7308f74d60f4c17e1cdb39b69ea432ae97",
+      "upstream": "com/fasterxml/jackson/core/StreamReadCapability.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/StreamReadConstraints.java",
+      "sha256": "f69b1f37f6d4a6933952459f577c2ac9c2153fefe747ffcf5e27e4ee357c97f5",
+      "upstream": "com/fasterxml/jackson/core/StreamReadConstraints.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/StreamReadFeature.java",
+      "sha256": "4c774c8cc4332da9402d506a23233671d275dcfcf075f5bb13b06fe57874350f",
+      "upstream": "com/fasterxml/jackson/core/StreamReadFeature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/StreamWriteCapability.java",
+      "sha256": "16c5f7e45b9b7d2135a07dbddf5765c7c86625afa0b8b056ca10056a685bd258",
+      "upstream": "com/fasterxml/jackson/core/StreamWriteCapability.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/StreamWriteConstraints.java",
+      "sha256": "30eb839bcfa25e4271af77dcd809cb7645d9eae43b62b80b1f35ea0f7843468c",
+      "upstream": "com/fasterxml/jackson/core/StreamWriteConstraints.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/StreamWriteFeature.java",
+      "sha256": "ff56a449db43109327b9ff7d4cedc3ff3b24b4e6ef5f23393b3db8c90b8476d4",
+      "upstream": "com/fasterxml/jackson/core/StreamWriteFeature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/TSFBuilder.java",
+      "sha256": "78d9f602ebfac15fdef05a5b857774ff3946ab26cd75c357275e251d051b8c5f",
+      "upstream": "com/fasterxml/jackson/core/TSFBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/TokenStreamFactory.java",
+      "sha256": "ce9cfe62be5d85ba177e20b0d74850766d937710cb921d97cddb0dc2bc5b0283",
+      "upstream": "com/fasterxml/jackson/core/TokenStreamFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/TreeCodec.java",
+      "sha256": "10a9341c2ee89f1d457ef78a284f8c7b3de07880ca54dfca0de9ae2611f2a5f8",
+      "upstream": "com/fasterxml/jackson/core/TreeCodec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/TreeNode.java",
+      "sha256": "f548bda545b6dcc2b56373d765652ced7f9ef2f7f1712dc2891db836e9a98be3",
+      "upstream": "com/fasterxml/jackson/core/TreeNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/Version.java",
+      "sha256": "789f6bbd34b6d36b2db68d274ee49597f524f43cbc6729ff75fa249d2d31c4d7",
+      "upstream": "com/fasterxml/jackson/core/Version.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/Versioned.java",
+      "sha256": "b75535d26407079f8902847f0a15369e4211a4b04bad808ef947784c22a465c5",
+      "upstream": "com/fasterxml/jackson/core/Versioned.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/async/ByteArrayFeeder.java",
+      "sha256": "0b792a8c21048db04ecaaefd92b15880ec40f4a46385fa6afbfdbc8f644e162a",
+      "upstream": "com/fasterxml/jackson/core/async/ByteArrayFeeder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/async/ByteBufferFeeder.java",
+      "sha256": "1097ee6b65230edbe07118e0c1c51eff005c1e2f39f44fdda52abb2300c1c4c7",
+      "upstream": "com/fasterxml/jackson/core/async/ByteBufferFeeder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/async/NonBlockingInputFeeder.java",
+      "sha256": "b41abad8300149d9aad15715daac26dd60cbebb44949b8d2a2c042e8bc7fd02b",
+      "upstream": "com/fasterxml/jackson/core/async/NonBlockingInputFeeder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/async/package-info.java",
+      "sha256": "d6bd1fb0419e9c5873bc8fecbd7cef81f2a6dcb72467a5b0b5870c2b6f4637d2",
+      "upstream": "com/fasterxml/jackson/core/async/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/base/GeneratorBase.java",
+      "sha256": "bfde776f2cf6b222409bd3c97c0ac5d8d6712d491d6d6b2598f131c7e5f6fa86",
+      "upstream": "com/fasterxml/jackson/core/base/GeneratorBase.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/base/ParserBase.java",
+      "sha256": "993684a563d0caf8483b31c726714b43f2350e64bb128752fef2f8deaae1f80d",
+      "upstream": "com/fasterxml/jackson/core/base/ParserBase.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/base/ParserMinimalBase.java",
+      "sha256": "61140b0b4a0d9951c7ea0afc6af821d7cd9a135ba52cf6377a242a24a8b82798",
+      "upstream": "com/fasterxml/jackson/core/base/ParserMinimalBase.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/base/package-info.java",
+      "sha256": "9a3c9b8154cf0cd26940053900e068060b23f7e979a67a2288e45cbe479537ff",
+      "upstream": "com/fasterxml/jackson/core/base/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/exc/InputCoercionException.java",
+      "sha256": "1c950510ffc183911d0e8afbadb8e1ab00b9e531d882d44b8e2aa90ea8ea7c87",
+      "upstream": "com/fasterxml/jackson/core/exc/InputCoercionException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/exc/StreamConstraintsException.java",
+      "sha256": "49051b87dafca3d42943f99bcfc254a163e65530ebf4b46dd17f6d2ecbae4259",
+      "upstream": "com/fasterxml/jackson/core/exc/StreamConstraintsException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/exc/StreamReadException.java",
+      "sha256": "88268cebc9d963d6ede15c16a9b4813b0f7f1e4c84cd50897de0095c8caa6475",
+      "upstream": "com/fasterxml/jackson/core/exc/StreamReadException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/exc/StreamWriteException.java",
+      "sha256": "65f8910c88c2f213b9929728eb06121395901a5f46a0fae5dc28861c9aa271ac",
+      "upstream": "com/fasterxml/jackson/core/exc/StreamWriteException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/exc/package-info.java",
+      "sha256": "536612f9804ecc7bef74e901d377fb6067307e30da88c20f0c7c6cfe59ef6b9d",
+      "upstream": "com/fasterxml/jackson/core/exc/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/filter/FilteringGeneratorDelegate.java",
+      "sha256": "50cb2da4bd18c65a9b6a2d786f795c5e9bf513fe6bec692845927e32333aff07",
+      "upstream": "com/fasterxml/jackson/core/filter/FilteringGeneratorDelegate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java",
+      "sha256": "e0118d2ce49568724a58a3d481852c8c22e36851d81ad72daff5d01b0a6cd270",
+      "upstream": "com/fasterxml/jackson/core/filter/FilteringParserDelegate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/filter/JsonPointerBasedFilter.java",
+      "sha256": "2545a8dec61faea99ffa1cccaa3c52559a2ac86d7ee9df60739b4af56a4c71f2",
+      "upstream": "com/fasterxml/jackson/core/filter/JsonPointerBasedFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/filter/TokenFilter.java",
+      "sha256": "f00882cb004c3474fe4ff427ea19881c5934ca33cda9fb9d57db95956a94b8ef",
+      "upstream": "com/fasterxml/jackson/core/filter/TokenFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/filter/TokenFilterContext.java",
+      "sha256": "2fe7aa80a53dfd878e377c2f38af71ce13bf9e56590eb6c2fa94e16ac6d9b791",
+      "upstream": "com/fasterxml/jackson/core/filter/TokenFilterContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/format/DataFormatDetector.java",
+      "sha256": "3864c0b6aa20ed19eecf6b2ef141057d72c140e069849bb2494131383e4babd5",
+      "upstream": "com/fasterxml/jackson/core/format/DataFormatDetector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/format/DataFormatMatcher.java",
+      "sha256": "82f9c8c52a9d48b0e053b73dde01f56d7a39f408f6669ffd4428e7a549cff2a4",
+      "upstream": "com/fasterxml/jackson/core/format/DataFormatMatcher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/format/InputAccessor.java",
+      "sha256": "9e0a204f0a0badc55decc4e5de4eca381c51c4f1045c0a015dcc47e8de566e8f",
+      "upstream": "com/fasterxml/jackson/core/format/InputAccessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/format/MatchStrength.java",
+      "sha256": "88376c5104d0c56d883f6234d1565127786f98d5b36137bef3b51e9f0bafd066",
+      "upstream": "com/fasterxml/jackson/core/format/MatchStrength.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/format/package-info.java",
+      "sha256": "99395d4b43443d9399422110550dc4e434da9aef40de132eb00e30b26441b555",
+      "upstream": "com/fasterxml/jackson/core/format/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/BigDecimalParser.java",
+      "sha256": "25ec6c957e076d7ddf700aa97593528f4773d1fc84f3ba2e5a8c1fcb1b1fa590",
+      "upstream": "com/fasterxml/jackson/core/io/BigDecimalParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/BigIntegerParser.java",
+      "sha256": "990983cd408f48d0f2d2692907997a0aa621cc95c8cd41e6547096a09bc24cb2",
+      "upstream": "com/fasterxml/jackson/core/io/BigIntegerParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/CharTypes.java",
+      "sha256": "51b3b580984e9effb88bb8626d16bbda78da70d7e4847dbebca4a6c2c67505de",
+      "upstream": "com/fasterxml/jackson/core/io/CharTypes.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/CharacterEscapes.java",
+      "sha256": "ccfac6147a4c935f52080b86bc71d295427ec08986b94a289b9d0d7d2b561cb8",
+      "upstream": "com/fasterxml/jackson/core/io/CharacterEscapes.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/ContentReference.java",
+      "sha256": "39bf166e8aebe68b5db2871fdc6c581266cc594dab222dacf4fac1fb479ac7ee",
+      "upstream": "com/fasterxml/jackson/core/io/ContentReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/DataOutputAsStream.java",
+      "sha256": "159b4a3daa1752a285fc515b909930115e5d2fe6c6bcc5bbd0af614bf28089a0",
+      "upstream": "com/fasterxml/jackson/core/io/DataOutputAsStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+      "sha256": "25ba4c0c5dc29e393a5b9be87687f9a5db2ab563c3b310aa1eb6ad824ebf977a",
+      "upstream": "com/fasterxml/jackson/core/io/IOContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/InputDecorator.java",
+      "sha256": "b0aea13cd831558060cadc82e2d284a1371efbd87101c62a29f1ed8cccd0a705",
+      "upstream": "com/fasterxml/jackson/core/io/InputDecorator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/JsonEOFException.java",
+      "sha256": "7019bc0fbfb9f8e493655bd13ad298ab0607f63a81c960e4e68d341c9ab83aad",
+      "upstream": "com/fasterxml/jackson/core/io/JsonEOFException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/JsonStringEncoder.java",
+      "sha256": "bbe547a47fe54cd2684207eb25c46cf16f9a4fa332dbf221ab576c05f248d850",
+      "upstream": "com/fasterxml/jackson/core/io/JsonStringEncoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/MergedStream.java",
+      "sha256": "b22b3922d8fe18af7791e665b295a4ee852919d82405ab7f0c8ed4292167220a",
+      "upstream": "com/fasterxml/jackson/core/io/MergedStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/NumberInput.java",
+      "sha256": "668eddecbb6796a221a3140e5215d383dc64af889a999e8719c4835eec9996aa",
+      "upstream": "com/fasterxml/jackson/core/io/NumberInput.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/NumberOutput.java",
+      "sha256": "dda87a19daece9a49a2548f953ef0b122880e784aef0fa26556669e003919739",
+      "upstream": "com/fasterxml/jackson/core/io/NumberOutput.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/OutputDecorator.java",
+      "sha256": "029fc092cda77aed9ea245687e920af5d10b59172979f126f9831600c68bdb4c",
+      "upstream": "com/fasterxml/jackson/core/io/OutputDecorator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/SegmentedStringWriter.java",
+      "sha256": "80ce89f2e3d7d4a9fb6fdbf2bbf009cf6681ca00f6e506bd821e12a3e0389841",
+      "upstream": "com/fasterxml/jackson/core/io/SegmentedStringWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/SerializedString.java",
+      "sha256": "f9c4f9166024ef2698506201f14fb98c4d5ab1be789b8d207d31583c75e138a3",
+      "upstream": "com/fasterxml/jackson/core/io/SerializedString.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/UTF32Reader.java",
+      "sha256": "6d191ee12be10ad8ab1fabb0e4acb84e6de4e539ba3cf5e95b5ae479599b7a80",
+      "upstream": "com/fasterxml/jackson/core/io/UTF32Reader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/UTF8Writer.java",
+      "sha256": "9739c29a25387c878f4244325a037cbdb23c7a7aa1f7dd1dfc7c6681914c0572",
+      "upstream": "com/fasterxml/jackson/core/io/UTF8Writer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/schubfach/DoubleToDecimal.java",
+      "sha256": "51cda78a6fee54cdfcd728f65b39e7f03ead53bd9731b5639abfe0d16a57a439",
+      "upstream": "com/fasterxml/jackson/core/io/schubfach/DoubleToDecimal.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/schubfach/FloatToDecimal.java",
+      "sha256": "0370476f767f4ee02aabbde6edf733d92c56d2e6daa05734789474a8be3e1f84",
+      "upstream": "com/fasterxml/jackson/core/io/schubfach/FloatToDecimal.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/schubfach/MathUtils.java",
+      "sha256": "97efad4fcd6967958adaa19bce3afe61fece1063178a04622b2e17bec36526ae",
+      "upstream": "com/fasterxml/jackson/core/io/schubfach/MathUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/ByteSourceJsonBootstrapper.java",
+      "sha256": "207a142f58a2f54da0506e07c080a2f9955e3896bc1a9d0422f026293d56ff95",
+      "upstream": "com/fasterxml/jackson/core/json/ByteSourceJsonBootstrapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/DupDetector.java",
+      "sha256": "1dcdbae07fadb3d9c92fe25edbdfe445a0aa76bafb3d0c08efdc259ee318147c",
+      "upstream": "com/fasterxml/jackson/core/json/DupDetector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/JsonGeneratorImpl.java",
+      "sha256": "ff7483c95019bceb4acac2e4bcd6d277bc5f18ad22f4965ed126e045d72b680f",
+      "upstream": "com/fasterxml/jackson/core/json/JsonGeneratorImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/JsonReadContext.java",
+      "sha256": "9ab1a1b80ae8eeb4e03a271384f74f4b50a1c907e895b698febbfbf4ab647230",
+      "upstream": "com/fasterxml/jackson/core/json/JsonReadContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/JsonReadFeature.java",
+      "sha256": "648e303f36f7ebb7e45530b12706d116d25d39ed4eec8946cad1c247c01f08e9",
+      "upstream": "com/fasterxml/jackson/core/json/JsonReadFeature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/JsonWriteContext.java",
+      "sha256": "9b756627a869939b1081bdfdc83760fcedcd0887be63909098ebb7ebda3cbda8",
+      "upstream": "com/fasterxml/jackson/core/json/JsonWriteContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/JsonWriteFeature.java",
+      "sha256": "fe5cfa9bf90b62c5c7616bf0e26c0ac0da6501f4ddf11b283e0d40cb7e702997",
+      "upstream": "com/fasterxml/jackson/core/json/JsonWriteFeature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/PackageVersion.java",
+      "sha256": "67d87613559566e133c1be206a4fec1e93d87eab95e5dacaa8b74b6d6746daa7",
+      "upstream": "com/fasterxml/jackson/core/json/PackageVersion.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/resources/com/fasterxml/jackson/core/json/PackageVersion.java.in",
+      "sha256": "744babce0ed8859a38895e27c6cca1c834117791919037c5096c6bcfb9bdff03",
+      "upstream": "com/fasterxml/jackson/core/json/PackageVersion.java.in"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/ReaderBasedJsonParser.java",
+      "sha256": "1eafd3b149b38dbed916b1aa75bf4a5937ecba4bd888a896171cd92cd2870b7b",
+      "upstream": "com/fasterxml/jackson/core/json/ReaderBasedJsonParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/UTF8DataInputJsonParser.java",
+      "sha256": "922ade4f38478a9ad31b80f9a334431c725b0eb6e98f4f2c4e9f5b2ae5a5440a",
+      "upstream": "com/fasterxml/jackson/core/json/UTF8DataInputJsonParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java",
+      "sha256": "3f32208b003f0e49b58773f886c59014ceb740f428fafb7a7549dc021f7eea57",
+      "upstream": "com/fasterxml/jackson/core/json/UTF8JsonGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+      "sha256": "58835e18553e83e3fbcb2099f441b375c1ff32cf5ee99ec63663caf8af483594",
+      "upstream": "com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/WriterBasedJsonGenerator.java",
+      "sha256": "a4f796bca5dec80fb33cfb362a08e668d0929310613664728a330364e47548ef",
+      "upstream": "com/fasterxml/jackson/core/json/WriterBasedJsonGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/async/NonBlockingByteBufferJsonParser.java",
+      "sha256": "8e15f4667184bfc5d07be5201248fc87c212cebf5ce7580c9e148741e614a1cf",
+      "upstream": "com/fasterxml/jackson/core/json/async/NonBlockingByteBufferJsonParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/async/NonBlockingJsonParser.java",
+      "sha256": "ab592a197b7a532592aac546f6bd69f2627d81e663cc7776b161eb00062d8c42",
+      "upstream": "com/fasterxml/jackson/core/json/async/NonBlockingJsonParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/async/NonBlockingJsonParserBase.java",
+      "sha256": "2032caf2fbe765b0f639367ddfba1567efafa13e858a3e1aa2ab791130407822",
+      "upstream": "com/fasterxml/jackson/core/json/async/NonBlockingJsonParserBase.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/async/NonBlockingUtf8JsonParserBase.java",
+      "sha256": "a278ef15fd62ebb66db9e63c222a94181ce8b7a5e0c4bf870283b5723580a23b",
+      "upstream": "com/fasterxml/jackson/core/json/async/NonBlockingUtf8JsonParserBase.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/async/package-info.java",
+      "sha256": "f86e2678c8e4a5624198d044b05af659f03608a9fcecd72660e97ee92b43541a",
+      "upstream": "com/fasterxml/jackson/core/json/async/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/json/package-info.java",
+      "sha256": "7d5e40921d70132c623eb8fb56a66ee98ec68d54387dd49577782a4b6b1c3c96",
+      "upstream": "com/fasterxml/jackson/core/json/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/package-info.java",
+      "sha256": "bb7e6864a61f00836018675e0a83b7307e1e0dcf53bb360979e99efd7f9008ea",
+      "upstream": "com/fasterxml/jackson/core/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java",
+      "sha256": "64275393776bbfe69f6daf776b06901eaa5d595cf7eb1ed1635fdac80207a632",
+      "upstream": "com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/sym/CharsToNameCanonicalizer.java",
+      "sha256": "a114c4e3f908e8e9eb4610e4bc58dd9ee5e1e655143add3f1b9fad109428af79",
+      "upstream": "com/fasterxml/jackson/core/sym/CharsToNameCanonicalizer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/sym/Name.java",
+      "sha256": "7b85ba6ffa102c0719f1d808ecfbaec2614ceb76f9bfd105e0cf782e94dbbb01",
+      "upstream": "com/fasterxml/jackson/core/sym/Name.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/sym/Name1.java",
+      "sha256": "9c5ec721209f936dc274a5bdcbb68266e461a84e35f11e012426e367e37e4ba7",
+      "upstream": "com/fasterxml/jackson/core/sym/Name1.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/sym/Name2.java",
+      "sha256": "291e499e5a7d1f69109223e1fa9b7c2ecd8b06b11552f97314916ec7f9770d34",
+      "upstream": "com/fasterxml/jackson/core/sym/Name2.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/sym/Name3.java",
+      "sha256": "c83b11bc4e3b894b7aa4d7a3bf8227021a75a4fd436550da07894197365b2463",
+      "upstream": "com/fasterxml/jackson/core/sym/Name3.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/sym/NameN.java",
+      "sha256": "98d5313c3b66ada8df3b79b759ca4a111214e9697e99bf365aad20d239caac58",
+      "upstream": "com/fasterxml/jackson/core/sym/NameN.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/sym/package-info.java",
+      "sha256": "7d50623af5fa9e634ed2fa3707ac396c788c20224b1d861f14f7465bc2339892",
+      "upstream": "com/fasterxml/jackson/core/sym/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/type/ResolvedType.java",
+      "sha256": "aa6b81c36bf6107ba6905860b81a216b44938b6e556b2642dba4a41664a1d240",
+      "upstream": "com/fasterxml/jackson/core/type/ResolvedType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/type/TypeReference.java",
+      "sha256": "e6202e7bc4b3f19eef93edccdd634a6ec20d0318f5f73c3c4e77866118007f8f",
+      "upstream": "com/fasterxml/jackson/core/type/TypeReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/type/WritableTypeId.java",
+      "sha256": "8a59cb5b364c226b481781d2d1810a3918c1aaf1efbd734aafd31e2c5a2a1e6d",
+      "upstream": "com/fasterxml/jackson/core/type/WritableTypeId.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/type/package-info.java",
+      "sha256": "d45ca4e6c656f69b3fa55fb1ada673ada3be6425bc6a3bfa6090fc96f7346534",
+      "upstream": "com/fasterxml/jackson/core/type/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/BufferRecycler.java",
+      "sha256": "673f8a0ca4c05f08846617cf4a1624cf657c1d0459e4b1113a156158367c7a1b",
+      "upstream": "com/fasterxml/jackson/core/util/BufferRecycler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/BufferRecyclers.java",
+      "sha256": "bcb5055b54687a8cdfc6777b29666ad631275b7e49a207f163c25c4f0ae6859a",
+      "upstream": "com/fasterxml/jackson/core/util/BufferRecyclers.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/ByteArrayBuilder.java",
+      "sha256": "6f5333cbe448f519cae3ceb3b8d83f2a520bf466607a94c0657b9b1216420fbf",
+      "upstream": "com/fasterxml/jackson/core/util/ByteArrayBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/DefaultIndenter.java",
+      "sha256": "305c94e733e6f3f1c532b914e15b479da6b971de3f88fa13405ddb4950005549",
+      "upstream": "com/fasterxml/jackson/core/util/DefaultIndenter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/DefaultPrettyPrinter.java",
+      "sha256": "647ed599a84d8d2df2bc501a6a203eaf07668fbd9a970d5eb58c3347d1d5a11c",
+      "upstream": "com/fasterxml/jackson/core/util/DefaultPrettyPrinter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/Instantiatable.java",
+      "sha256": "e833a9f63dd0bda6b6152514a8d2e28a411b652a4a1f6ce0ad5dcc91e7de70bb",
+      "upstream": "com/fasterxml/jackson/core/util/Instantiatable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/InternCache.java",
+      "sha256": "bf4ed8841ad597f79ec120c0d8c6f937484730252c6a891497227d674f8a696c",
+      "upstream": "com/fasterxml/jackson/core/util/InternCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/JacksonFeature.java",
+      "sha256": "54d26eb5c20b497796f2e0bf5a8633fe181a2757b4cbd17b3863f960c5a18faa",
+      "upstream": "com/fasterxml/jackson/core/util/JacksonFeature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/JacksonFeatureSet.java",
+      "sha256": "f6794585e6eaa5fa241abcd1daab57b9dbb5f3316824a398f4d749401d1b94b4",
+      "upstream": "com/fasterxml/jackson/core/util/JacksonFeatureSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/JsonGeneratorDecorator.java",
+      "sha256": "21942f59777f2779b9b940ae2c26343554cf7e4eb02f157c83bbbca48c86e682",
+      "upstream": "com/fasterxml/jackson/core/util/JsonGeneratorDecorator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/JsonGeneratorDelegate.java",
+      "sha256": "efd51968d58b12c06f5dbce01c128ed2c9f2602d6fb1022ddffe459904d59f16",
+      "upstream": "com/fasterxml/jackson/core/util/JsonGeneratorDelegate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/JsonParserDelegate.java",
+      "sha256": "bf80051ceea590082c27a697811d19f51b2111af5b6520059fc31fd89b067f52",
+      "upstream": "com/fasterxml/jackson/core/util/JsonParserDelegate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/JsonParserSequence.java",
+      "sha256": "2d4ea2259dfbdd8db4a045c14b03e4c99340f12b3ae995592dbc98a28858d722",
+      "upstream": "com/fasterxml/jackson/core/util/JsonParserSequence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/JsonRecyclerPools.java",
+      "sha256": "39280e021f744ea43facb964852ced6c2a26cd7c2512ed488b7efa6252662796",
+      "upstream": "com/fasterxml/jackson/core/util/JsonRecyclerPools.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/MinimalPrettyPrinter.java",
+      "sha256": "6074837fa29ce106ae74607add8d99926296edc1bc81cf37ddb44e82e3b80cdc",
+      "upstream": "com/fasterxml/jackson/core/util/MinimalPrettyPrinter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/ReadConstrainedTextBuffer.java",
+      "sha256": "cda3e26522eb96367770abc42d5c45021b8162fd5a974f0e6a0de8cf0434a30e",
+      "upstream": "com/fasterxml/jackson/core/util/ReadConstrainedTextBuffer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/RecyclerPool.java",
+      "sha256": "8921722bc89bdd50fefea5c5cf7d09e8882328ca95c5b397bb0e7bc2f446df88",
+      "upstream": "com/fasterxml/jackson/core/util/RecyclerPool.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/RequestPayload.java",
+      "sha256": "71f4ded921cfb2602808e1381a19f3a8e8a7b8e3f9525c1e7eafab6e24a9f792",
+      "upstream": "com/fasterxml/jackson/core/util/RequestPayload.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/Separators.java",
+      "sha256": "c29c779c54db83d7bc6d4191cf5db89fe5747fe150c90f16ab3a5f55eb32dc25",
+      "upstream": "com/fasterxml/jackson/core/util/Separators.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java",
+      "sha256": "5331f059372519fced4757a142313aeec5e9adb3861c8fa36d59435e9ced9cf9",
+      "upstream": "com/fasterxml/jackson/core/util/TextBuffer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/ThreadLocalBufferManager.java",
+      "sha256": "486b341e7b44ba6a80dd3bb53d9014146506921a09bf08b347521f339874f028",
+      "upstream": "com/fasterxml/jackson/core/util/ThreadLocalBufferManager.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/VersionUtil.java",
+      "sha256": "3e798a5c42a53c2d7876481c58c4e4d425dd70d5e8cdc85d93a59eee19447fcc",
+      "upstream": "com/fasterxml/jackson/core/util/VersionUtil.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/util/package-info.java",
+      "sha256": "92397e2de733aefb610ac1a062944bd8eb7aa07938e8c70e26aa6c85d0645b7d",
+      "upstream": "com/fasterxml/jackson/core/util/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/SOURCES_MANIFEST.tsv",
+      "sha256": "0694d16b6071708c78180a500de1c17a78129f7fe03c6bfe1a49a4180af8774b",
+      "upstream": "(inventory)"
+    }
+  ],
+  "group": "com.fasterxml.jackson.core",
+  "kind": "MODULE",
+  "license": "The Apache Software License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "parent": "com.fasterxml.jackson:jackson-base:2.16.1",
+  "pom": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.pom",
+  "receipt": {
+    "buildRoot": "a5ff82d86ad767e5b2f64a0c63cb7b4647185b3926570da0559df043367fa5e4",
+    "distributionSha256": "5f5f7ba9294f16af17976fe44273edacb29a5fbdce70c2772fcc68807fa87604",
+    "lock": "0da6cc6a5b55b16b2850348b9aaef4c2f8fa908f26a24c806f088ae925687024",
+    "message": "",
+    "sourceRoot": "df05d1cc5e80b098a28a384759693d4b0678fda67eab7e4a34d8ffd569d2b6a2",
+    "status": "PASS"
+  },
+  "sources_jar": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1-sources.jar",
+  "sources_jar_sha1": "13883e6b942fe5991477befedf3af8a7a82b3e32",
+  "sources_jar_sha256": "1bd334b0de7d02d7f8a6591f775a28126b1cdce9cd9ae6dc260482b7bdd9a04c",
+  "status": "PASS",
+  "upstream": "https://github.com/FasterXML/jackson-core",
+  "version": "2.16.1"
+}

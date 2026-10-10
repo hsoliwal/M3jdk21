@@ -1,0 +1,2 @@
+group	artifact	version	consumers	scope	wave	sources_sha1	sources_bytes	files	java_files	licenses	legal_files	compile_deps	parent	url	scm	sources_dir	status
+org.slf4j	slf4j-api	1.7.36	M3jdk21 m3/tooling/migration-recipes verification poms (explicit pin)	compile	1	ae9c1aae0033af915cfa75d850eb9d880f21a701	57747	39	32	(none in pom; parent org.slf4j:slf4j-parent:1.7.36)			org.slf4j:slf4j-parent:1.7.36	http://www.slf4j.org		K:\m3-work\donors\maven-sources\src\slf4j-api-1.7.36	JAR_LOCAL+OK

@@ -1,0 +1,15 @@
+donor	kind	path	group	artifact	version	status	build	reason	automatic_module_name	dependencies	consumers
+annotations-24.1.0	MODULE	m3/vendor/third_party/annotations	org.jetbrains	annotations	24.1.0-m3-source-1	PASS	commands	MODULE_DESCRIPTOR_OR_MULTI_RELEASE			M3jdk21 m3/tooling (declared, unused)
+fastdoubleparser-1.0.0	MODULE	m3/vendor/third_party/fastdoubleparser-1.0.0	ch.randelshofer	fastdoubleparser	1.0.0-m3-source-1	PASS	commands	MODULE_DESCRIPTOR_OR_MULTI_RELEASE	ch.randelshofer.fastdoubleparser		shaded into jackson-core 2.16.1 (dependency-reduced pom; version from the release-tag pom.xml)
+jackson-annotations-2.16.1	MODULE	m3/vendor/third_party/jackson-annotations-2.16.1	com.fasterxml.jackson.core	jackson-annotations	2.16.1-m3-source-1	PASS	java				M3jdk21 m3/tooling (recipe engine)
+jackson-core-2.16.1	MODULE	m3/vendor/third_party/jackson-core-2.16.1	com.fasterxml.jackson.core	jackson-core	2.16.1-m3-source-1	PASS	java			ch.randelshofer:fastdoubleparser:1.0.0-m3-source-1:compile:optional	M3jdk21 m3/tooling (recipe engine)
+jackson-databind-2.16.1	MODULE	m3/vendor/third_party/jackson-databind-2.16.1	com.fasterxml.jackson.core	jackson-databind	2.16.1-m3-source-1	PASS	java			com.fasterxml.jackson.core:jackson-annotations:2.16.1-m3-source-1:compile;com.fasterxml.jackson.core:jackson-core:2.16.1-m3-source-1:compile	M3jdk21 m3/tooling (recipe engine)
+rewrite-core-8.17.1	IMAGE	m3/vendor/third_party-images/rewrite-core-8.17.1	org.openrewrite	rewrite-core	8.17.1	SOURCE_ONLY	none	LOMBOK_AT_SOURCE_LEVEL			synexia-openrewrite-recipes, M3jdk21 m3/tooling
+rewrite-java-21-8.17.1	IMAGE	m3/vendor/third_party-images/rewrite-java-21-8.17.1	org.openrewrite	rewrite-java-21	8.17.1	SOURCE_ONLY	none	LOMBOK_AT_SOURCE_LEVEL			synexia-openrewrite-recipes, M3jdk21 m3/tooling
+rewrite-java-8.17.1	IMAGE	m3/vendor/third_party-images/rewrite-java-8.17.1	org.openrewrite	rewrite-java	8.17.1	SOURCE_ONLY	none	LOMBOK_AT_SOURCE_LEVEL			synexia-openrewrite-recipes, M3jdk21 m3/tooling
+rewrite-test-8.17.1	IMAGE	m3/vendor/third_party-images/rewrite-test-8.17.1	org.openrewrite	rewrite-test	8.17.1	SOURCE_ONLY	none	LOMBOK_AT_SOURCE_LEVEL			synexia-openrewrite-recipes, M3jdk21 m3/tooling
+rewrite-xml-8.17.1	IMAGE	m3/vendor/third_party-images/rewrite-xml-8.17.1	org.openrewrite	rewrite-xml	8.17.1	SOURCE_ONLY	none	LOMBOK_AT_SOURCE_LEVEL			synexia-openrewrite-recipes
+slf4j-api-1.7.36	MODULE	m3/vendor/third_party/slf4j-api-1.7.36	org.slf4j	slf4j-api	1.7.36-m3-source-1	PASS	java		org.slf4j		M3jdk21 m3/tooling/migration-recipes verification poms (explicit pin)
+slf4j-api-2.0.12	MODULE	m3/vendor/third_party/slf4j-api-2.0.12	org.slf4j	slf4j-api	2.0.12-m3-source-1	PASS	java				synexia-bom slf4j.version
+slf4j-api-2.0.9	MODULE	m3/vendor/third_party/slf4j-api-2.0.9	org.slf4j	slf4j-api	2.0.9-m3-source-1	PASS	java				root pom slf4j.version (synexia-common, synexia-indexstring, synexia-openrewrite-recipes)
+slf4j-simple-2.0.13	MODULE	m3/vendor/third_party/slf4j-simple	org.slf4j	slf4j-simple	2.0.13-m3-source-1	PASS	java			org.slf4j:slf4j-api:2.0.12-m3-source-1:compile	M3jdk21 m3/tooling (test)

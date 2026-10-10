@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Implementation-Title: org.openrewrite#rewrite-java;8.17.1
+Implementation-Version: 8.17.1
+Built-Status: release
+Built-By: runner
+Built-OS: Linux
+Build-Timezone: Etc/UTC
+Build-Date-UTC: 2024-02-20T19:10:00.463550338Z
+Build-Date: 2024-02-20_19:10:00
+Gradle-Version: 8.6
+Module-Source: /rewrite-java
+Module-Origin: https://github.com/openrewrite/rewrite
+Change: 3bd8271
+Full-Change: 3bd8271be963c025ce0856072d0f09360e3184cd
+Branch: HEAD
+Build-Host: https://github.com
+Build-Job: __gradle_actions_2
+Build-Number: 171
+Build-Id: 7978730938
+Build-Url: https://github.com/openrewrite/rewrite/actions/runs/797873093
+ 8
+Created-By: 21.0.2+13-LTS (Eclipse Adoptium)
+Module-Owner: team@moderne.io
+Module-Email: team@moderne.io
+X-Compile-Target-JDK: 1.8
+X-Compile-Source-JDK: 1.8
+Build-Java-Version: 17
+

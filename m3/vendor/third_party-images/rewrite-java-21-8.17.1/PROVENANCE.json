@@ -1,0 +1,125 @@
+{
+  "artifact": "rewrite-java-21",
+  "automatic_module_name": "",
+  "build": "none",
+  "build_reason": "LOMBOK_AT_SOURCE_LEVEL",
+  "consumers": "synexia-openrewrite-recipes, M3jdk21 m3/tooling",
+  "coordinate": "org.openrewrite:rewrite-java-21:8.17.1",
+  "decision": "DIRECT_IMPORT",
+  "dependencies": [],
+  "donor": "rewrite-java-21-8.17.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/META-INF/MANIFEST.MF",
+      "sha256": "7d43121e61585a2c7b92808be8db260c756fbcbd7d54002b123c6d78bb84b19b",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/META-INF/rewrite-java-21.properties",
+      "sha256": "ca51ade9838707ee3f2ee65116ab435c6fcb464369dcdaba87e5f41e02ce7761",
+      "upstream": "META-INF/rewrite-java-21.properties"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/org/openrewrite/java/Java21Parser.java",
+      "sha256": "aede7cf2c9b70b6e546467c77309bd1210c1901310226d79756c628f2f049066",
+      "upstream": "org/openrewrite/java/Java21Parser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.java",
+      "sha256": "6ba33d69d5835db0185fc1fe8912ed2645a1c7d9c8564d904a1df90affc4ad40",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/org/openrewrite/java/isolated/ReloadableJava21ModifierResults.java",
+      "sha256": "008935b0882700c6aef813433e17a7383795f6dc8cfcf35bd17d27f173f682b3",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21ModifierResults.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/org/openrewrite/java/isolated/ReloadableJava21Parser.java",
+      "sha256": "a10587100b44778721630f03783eb440cd0a4602fd5b2687b92fbde67227647f",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21Parser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/org/openrewrite/java/isolated/ReloadableJava21ParserInputFileObject.java",
+      "sha256": "beb658516fdd1bf8af3eadc9a1e6dcb399bfa3f70f2a0e68583e462e73f7af7f",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21ParserInputFileObject.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java",
+      "sha256": "67a07eaea5bca000ee68aee9a8b5145acd2a641e71c772c9b66f66d3725864f9",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/org/openrewrite/java/isolated/ReloadableJava21TypeMapping.java",
+      "sha256": "07229db8223a5cd0d55e23cc4622c139191c099612c7a214e3a024ef57078f47",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21TypeMapping.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/org/openrewrite/java/isolated/ReloadableJava21TypeSignatureBuilder.java",
+      "sha256": "14a2c4bd0ed7ab61dd44af52c470a59eb62ede7bfabf2392b8501da3d4b639df",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21TypeSignatureBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/org/openrewrite/java/isolated/package-info.java",
+      "sha256": "e4c22522b74f8008b986217c1258f346a02a87aeb7a8a8cc0a731e39b7922275",
+      "upstream": "org/openrewrite/java/isolated/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/UPSTREAM_LICENSE.json",
+      "sha256": "c63f88f2127f6b279cf09c53a6cc2e2b4b900c5eb8b6a09520ed40e66a8ce772",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/UPSTREAM_LICENSE.txt",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/SOURCES_MANIFEST.tsv",
+      "sha256": "02b0d1a565e9ee4334a67ba22dcf017a0bdc8018bbf98841fa9f96c2a2f56e92",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party-images/rewrite-java-21-8.17.1/LICENSE",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.openrewrite",
+  "kind": "IMAGE",
+  "license": "The Apache Software License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.pom",
+  "receipt": {
+    "buildRoot": "",
+    "distributionSha256": "1d598463752529f7e9c21d05039a800fa1b63f5963cb1b39b32c6eadb22060c5",
+    "lock": "33ab049867c1c736c65dececbbb9f9d42697fd3336cf178946c3c43ba55336ff",
+    "message": "build not requested",
+    "sourceRoot": "52d58a85da8e6884c4859fd58211d0090fb56db32a935b8b9ce65c5530210b6f",
+    "status": "SOURCE_ONLY"
+  },
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1-sources.jar",
+  "sources_jar_sha1": "f133bd0ba96af8944d46df8997decc80fe01ef13",
+  "sources_jar_sha256": "efdacbb9f1ad6c5c3d4b6efb0599b46d05c1d6c6e6c990831678332fbd732f9b",
+  "status": "SOURCE_ONLY",
+  "upstream": "https://github.com/openrewrite/rewrite",
+  "version": "8.17.1"
+}

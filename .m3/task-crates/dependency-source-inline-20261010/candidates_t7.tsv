@@ -1,0 +1,2 @@
+# group	artifact	version	consumers	scope	wave
+org.slf4j	slf4j-api	1.7.36	M3jdk21 m3/tooling/migration-recipes verification poms (explicit pin)	compile	1

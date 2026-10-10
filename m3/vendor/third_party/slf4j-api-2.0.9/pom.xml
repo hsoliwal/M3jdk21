@@ -1,0 +1,31 @@
+<!-- SPDX-License-Identifier: Apache-2.0; build integration only, upstream source remains UNDECLARED (see LICENSE). -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>2.0.9-m3-source-1</version>
+  <name>slf4j-api 2.0.9 - unchanged upstream source build for M3jdk21</name>
+  <description>Source inclusion of the published org.slf4j:slf4j-api:2.0.9 sources jar (SHA-1 97e46b94d70f47892145e09d685461245584d596); no upstream implementation changes. See PROVENANCE.json.</description>
+  <url>http://www.slf4j.org</url>
+  <licenses><license><name>UNDECLARED (see LICENSE)</name><url>https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.pom</url><distribution>repo</distribution></license></licenses>
+  <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <dependencies>
+  </dependencies>
+  <build>
+    <resources>
+      <resource><directory>src/main/resources</directory></resource>
+      <resource><directory>${project.basedir}</directory><targetPath>META-INF/third-party/slf4j-api-2.0.9</targetPath><includes><include>LICENSE</include><include>PROVENANCE.json</include><include>THIRD_PARTY_NOTICES.md</include></includes></resource>
+    </resources>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.15.0</version>
+        <!-- Upstream bytes are compiled as published: no annotation processing, no warnings-as-errors. M3jdk21 integration is checked separately with -Werror. -->
+        <configuration><release>8</release><encoding>UTF-8</encoding><proc>none</proc><compilerArgs><arg>-Xlint:all,-options</arg></compilerArgs></configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.6</version>
+        <!-- Published sources jars carry no test suite; the compile and the consumers' own tests are the proof lane. -->
+        <configuration><skipTests>true</skipTests></configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
+        <configuration><archive><manifestEntries><M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline></manifestEntries></archive></configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

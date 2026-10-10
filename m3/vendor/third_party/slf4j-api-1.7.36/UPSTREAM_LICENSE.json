@@ -1,0 +1,8 @@
+{
+  "artifact": "slf4j-api-1.7.36",
+  "origin": "https://raw.githubusercontent.com/qos-ch/slf4j/v_1.7.36/LICENSE.txt",
+  "file": "UPSTREAM_LICENSE.txt",
+  "sha256": "6fbe2eaf44b193b8a40eed9208f52848572224ad8d7672dd09418aa174847e73",
+  "bytes": 1154,
+  "caveat": "EXACT_TAG (slf4j tags are v_X.Y.Z)"
+}

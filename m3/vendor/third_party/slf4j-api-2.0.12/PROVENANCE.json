@@ -1,0 +1,365 @@
+{
+  "artifact": "slf4j-api",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "synexia-bom slf4j.version",
+  "coordinate": "org.slf4j:slf4j-api:2.0.12-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "dependencies": [],
+  "donor": "slf4j-api-2.0.12",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/resources/META-INF/LICENSE.txt",
+      "sha256": "4e7f90c86ab51278228bce153122f1d8df30149d13ce9ef524c8444a84c32dcc",
+      "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "31f06c9999bfd523e192864178cfe4a9873d336884cf59a0d698e520895caeaa",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/upstream-excluded/META-INF/maven/org.slf4j/slf4j-api/pom.properties",
+      "sha256": "5a17e984e1643be74edd97d242deacfc0ce6a75326e818bb9c28671ad355abdd",
+      "upstream": "META-INF/maven/org.slf4j/slf4j-api/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/upstream-excluded/META-INF/maven/org.slf4j/slf4j-api/pom.xml",
+      "sha256": "51d879a5998f5822740dcf5522c0ed6971ad5c4a5ea30b70f5b546093e6b4263",
+      "upstream": "META-INF/maven/org.slf4j/slf4j-api/pom.xml"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/ILoggerFactory.java",
+      "sha256": "38e283accce8767d8df5a8a4391ae91e4e5515c8f4cd8ea0628fad44c444d669",
+      "upstream": "org/slf4j/ILoggerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/IMarkerFactory.java",
+      "sha256": "beae0140c68fdc86afb036dbb801a5bda72dd4b70b35f3f0bdbc213b30681ee4",
+      "upstream": "org/slf4j/IMarkerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/Logger.java",
+      "sha256": "e68e0271aef5cb8a597af63bd32882ff1ddf0363905f801f04b9b357c8262a25",
+      "upstream": "org/slf4j/Logger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/LoggerFactory.java",
+      "sha256": "552787dee9767fabc64c3a7de455f52b9d3b8836cd518980d287fc20920e09e7",
+      "upstream": "org/slf4j/LoggerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/LoggerFactoryFriend.java",
+      "sha256": "60b9709413ef1012fb92ff1def408bba5bc23a4eadac539d007f245a19e4949d",
+      "upstream": "org/slf4j/LoggerFactoryFriend.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/MDC.java",
+      "sha256": "89292f1eb9e82996f3a3195139d395040b12d6fdca25fb4b7898c0251840a54a",
+      "upstream": "org/slf4j/MDC.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/Marker.java",
+      "sha256": "f65d9c295f5a972c6f1e60db2c666eb440cde1701b1580652bcd70f252cffc5d",
+      "upstream": "org/slf4j/Marker.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/MarkerFactory.java",
+      "sha256": "3fbcb4d8ef52bfeeeda289966a6deead058eb8b24603222ac2352d5117ca791f",
+      "upstream": "org/slf4j/MarkerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/event/DefaultLoggingEvent.java",
+      "sha256": "a77624f6ac35674697a54fa106518c48913fdcd498d70d201839ab7a948da5b3",
+      "upstream": "org/slf4j/event/DefaultLoggingEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/event/EventConstants.java",
+      "sha256": "b7191d9783ab890b72ce3ebf66d817c205a18051dfe26f1bbebf6fc07df067d6",
+      "upstream": "org/slf4j/event/EventConstants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/event/EventRecordingLogger.java",
+      "sha256": "3c8966e5375439f0f0e7b3286bba97bb172c4eb2e22642914af858141e6b8f41",
+      "upstream": "org/slf4j/event/EventRecordingLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/event/KeyValuePair.java",
+      "sha256": "22181b64af4bd1a01551aa286800d717f4320e5d5eb0391a983e9811492d3b7d",
+      "upstream": "org/slf4j/event/KeyValuePair.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/event/Level.java",
+      "sha256": "a3928583d1c8f6cd02c603f0fa9b90b972639bc2538a2e901bb30b8443666677",
+      "upstream": "org/slf4j/event/Level.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/event/LoggingEvent.java",
+      "sha256": "35dc98fe5529a8ec063b05bc8cc920a187e182eb43167d73716af736fc0bb877",
+      "upstream": "org/slf4j/event/LoggingEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/event/SubstituteLoggingEvent.java",
+      "sha256": "69ea14a82390f63e7339dae99dc40d0380e0d1deaee00438f0b42a98f2b07882",
+      "upstream": "org/slf4j/event/SubstituteLoggingEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/AbstractLogger.java",
+      "sha256": "bfeda330fe69c031b8e24a633d08da1a18ad318a6acc4673847a442f24c6c2ff",
+      "upstream": "org/slf4j/helpers/AbstractLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/BasicMDCAdapter.java",
+      "sha256": "40ebb30d82ba287a067cfbbac865425b697fb21ac441f967b316c54d2c322a64",
+      "upstream": "org/slf4j/helpers/BasicMDCAdapter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/BasicMarker.java",
+      "sha256": "646ed56c3bcf2e1974502c9a41f6e4b04f343f89ab2c24583e88f1f66e67ec03",
+      "upstream": "org/slf4j/helpers/BasicMarker.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/BasicMarkerFactory.java",
+      "sha256": "02f6802361a78358d874ac154f39867f4e268e7d3d3e33c72086ef045f9345d8",
+      "upstream": "org/slf4j/helpers/BasicMarkerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/CheckReturnValue.java",
+      "sha256": "65ad0b4e2a82599453d279cfa2755b20110a344a76fcc2ff68f4e2987783d31b",
+      "upstream": "org/slf4j/helpers/CheckReturnValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/FormattingTuple.java",
+      "sha256": "8f9e07aafe2d793fffb00235e6ae0d9c4b8a2c9e314f77da092cae9fdaa57a47",
+      "upstream": "org/slf4j/helpers/FormattingTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/LegacyAbstractLogger.java",
+      "sha256": "27496ad096e6bdc5913ba23ad754e8e1287478a3bf146e5e97666e5fdc089fcc",
+      "upstream": "org/slf4j/helpers/LegacyAbstractLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/MarkerIgnoringBase.java",
+      "sha256": "bc263754715274ce0448c98feebe51f15e1abaadd9243da033afb7f395d8f454",
+      "upstream": "org/slf4j/helpers/MarkerIgnoringBase.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/MessageFormatter.java",
+      "sha256": "11dc69f948fc357b4ce5ca3859e9c4ef8c7e8345cfd116ee73348805917214dd",
+      "upstream": "org/slf4j/helpers/MessageFormatter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/NOPLogger.java",
+      "sha256": "34cebc258c806964761c35dd2908f0ffb33cbb7aab78957f10acb2e703cae983",
+      "upstream": "org/slf4j/helpers/NOPLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/NOPLoggerFactory.java",
+      "sha256": "f1708ed74c97cd77eb61a8065b030467998a63c300232fc27a474a276bd0a746",
+      "upstream": "org/slf4j/helpers/NOPLoggerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/NOPMDCAdapter.java",
+      "sha256": "d374d44384afd4b0fb41cf7a8827f2508416ed476499f65a6169cb9bd7604090",
+      "upstream": "org/slf4j/helpers/NOPMDCAdapter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/NOP_FallbackServiceProvider.java",
+      "sha256": "62335371f5ac357d2d5007359d2459e0fd54e0fed262542aaba731129513c502",
+      "upstream": "org/slf4j/helpers/NOP_FallbackServiceProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/NamedLoggerBase.java",
+      "sha256": "adc1dbf8152fa5cef8ac41df0b75e1a747b8824b79fc6592e628a26db7fd0306",
+      "upstream": "org/slf4j/helpers/NamedLoggerBase.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/NormalizedParameters.java",
+      "sha256": "f02536f32a34005425b3a6bb47aeea56ba0bda0d98b834d39df9be660e766bc5",
+      "upstream": "org/slf4j/helpers/NormalizedParameters.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/Reporter.java",
+      "sha256": "2b215af8356d1331a3ddd812ea5b5cf6cc9af54838a4d10b746fc4b2ea8f6378",
+      "upstream": "org/slf4j/helpers/Reporter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/SubstituteLogger.java",
+      "sha256": "ce24bf32a602e2b28dd80c1888d99268b99d38e9fe4739e3057398ea9429f1b1",
+      "upstream": "org/slf4j/helpers/SubstituteLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/SubstituteLoggerFactory.java",
+      "sha256": "18181cc7fd16df8e72c5422d5f2189b5fd95d7185726d97ba9e71d2ce96d98b3",
+      "upstream": "org/slf4j/helpers/SubstituteLoggerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/SubstituteServiceProvider.java",
+      "sha256": "cf40bfb310f805d8a77b9a2cbcf1831fad49012bde00bc5070620b2bdad0fbf1",
+      "upstream": "org/slf4j/helpers/SubstituteServiceProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/ThreadLocalMapOfStacks.java",
+      "sha256": "c49c4bf6f14b946be573bc6c9721b1d2423e623724d8f0b1601d5b77c91f96cf",
+      "upstream": "org/slf4j/helpers/ThreadLocalMapOfStacks.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/Util.java",
+      "sha256": "80db3f78b5b5216f0a0f7074572acaa031a86c9837b040a1546dbad3044c2da5",
+      "upstream": "org/slf4j/helpers/Util.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/resources/org/slf4j/helpers/package.html",
+      "sha256": "b316807f1c2637492c1be844a8d901d8538be8c7a34a5c01430e0d606596574d",
+      "upstream": "org/slf4j/helpers/package.html"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/resources/org/slf4j/package.html",
+      "sha256": "8882fabf704132e6d0ea76d67e89532d923b41abf8d9d26317838eea2d5bae66",
+      "upstream": "org/slf4j/package.html"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/spi/CallerBoundaryAware.java",
+      "sha256": "cebaac27339848f18069057020e0a98a8ba87930d6410a486d85028ef0c57aa8",
+      "upstream": "org/slf4j/spi/CallerBoundaryAware.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/spi/DefaultLoggingEventBuilder.java",
+      "sha256": "02988404254d1d14ef9b79d3963225eae4874e376badd18b595e4201ae0f453a",
+      "upstream": "org/slf4j/spi/DefaultLoggingEventBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/spi/LocationAwareLogger.java",
+      "sha256": "71674cb383d7d66fe3a68687f434028b2f1644f57e8b1fd3cabf2b758df3f4cb",
+      "upstream": "org/slf4j/spi/LocationAwareLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/spi/LoggerFactoryBinder.java",
+      "sha256": "753b989b5d5abd99d4cdf43380aa4fceb25c13596b41ddb84cbde9dcddd00309",
+      "upstream": "org/slf4j/spi/LoggerFactoryBinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/spi/LoggingEventAware.java",
+      "sha256": "e12b1d34cd406e154de973b82d0989e4dd669ab965853cf2f007816de543f513",
+      "upstream": "org/slf4j/spi/LoggingEventAware.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/spi/LoggingEventBuilder.java",
+      "sha256": "60477ecb0f03083cd0ae3c70708681d4e9e273151f5650da111ce62df191f34e",
+      "upstream": "org/slf4j/spi/LoggingEventBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/spi/MDCAdapter.java",
+      "sha256": "39c548ea27065b06b67a237f2309062287f98d66a276f09923f79602e50487ad",
+      "upstream": "org/slf4j/spi/MDCAdapter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/spi/MarkerFactoryBinder.java",
+      "sha256": "c06c4a582ce647ef7ede6b7f8eae3d6bad3a708bd85f9bbb47f08b7ec39e856b",
+      "upstream": "org/slf4j/spi/MarkerFactoryBinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/spi/NOPLoggingEventBuilder.java",
+      "sha256": "84a99633616b7022fa0c49fe58fa26f9d58fafee4800b49944137fd3fe3d04f8",
+      "upstream": "org/slf4j/spi/NOPLoggingEventBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/spi/SLF4JServiceProvider.java",
+      "sha256": "a604fdc26e5fa83e235124390dc2b9d4f16c60190e659ecfc4a25248659d9a7f",
+      "upstream": "org/slf4j/spi/SLF4JServiceProvider.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/src/main/resources/org/slf4j/spi/package.html",
+      "sha256": "b4fc0871c9c5b6e50278fc146789238b8ed779155396d1b829a6a8e9b9a4e192",
+      "upstream": "org/slf4j/spi/package.html"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/SOURCES_MANIFEST.tsv",
+      "sha256": "f3e7123799b48c02e630781ab5659c011d5f4d4f806428501497899d84c805d2",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.12/LICENSE",
+      "sha256": "4e7f90c86ab51278228bce153122f1d8df30149d13ce9ef524c8444a84c32dcc",
+      "upstream": "META-INF/LICENSE.txt"
+    }
+  ],
+  "group": "org.slf4j",
+  "kind": "MODULE",
+  "license": "UNDECLARED (see LICENSE)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "parent": "org.slf4j:slf4j-parent:2.0.12",
+  "pom": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.12/slf4j-api-2.0.12.pom",
+  "receipt": {
+    "buildRoot": "bdf16f682e52202ba37cb6a55ac2d12ef36d80b4994da569460f6cc37af98b1c",
+    "distributionSha256": "1beed7cfcbba914921c6fe2e31dac0247290c5ab979645d5e07b064577f83679",
+    "lock": "2fef50af3f31bd477baafd162dbd5e42f66032e3368618fc79cb4f9d9c0c41b7",
+    "message": "",
+    "sourceRoot": "1fefb497479d93475332d86913d13bb992825b074eb29e2ea2baad5359a5daa9",
+    "status": "PASS"
+  },
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.12/slf4j-api-2.0.12-sources.jar",
+  "sources_jar_sha1": "c2824e780c88689134cb99fb33c8a4ed3de0f406",
+  "sources_jar_sha256": "f05052e5924887edee5ba8228d210e763f85032e2b58245a37fa71e049950787",
+  "status": "PASS",
+  "upstream": "http://www.slf4j.org",
+  "version": "2.0.12"
+}

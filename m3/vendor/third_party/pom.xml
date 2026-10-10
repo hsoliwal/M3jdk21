@@ -1,0 +1,17 @@
+<!-- SPDX-License-Identifier: Apache-2.0; aggregator only, every module keeps its upstream license. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3.vendor</groupId><artifactId>third-party-sources</artifactId><version>1.0.0-SNAPSHOT</version><packaging>pom</packaging>
+  <name>M3jdk21 vendored third-party sources (build-time tooling inputs)</name>
+  <modules>
+    <module>annotations</module>
+    <module>fastdoubleparser-1.0.0</module>
+    <module>jackson-annotations-2.16.1</module>
+    <module>jackson-core-2.16.1</module>
+    <module>jackson-databind-2.16.1</module>
+    <module>slf4j-api-1.7.36</module>
+    <module>slf4j-api-2.0.12</module>
+    <module>slf4j-api-2.0.9</module>
+    <module>slf4j-simple</module>
+  </modules>
+</project>

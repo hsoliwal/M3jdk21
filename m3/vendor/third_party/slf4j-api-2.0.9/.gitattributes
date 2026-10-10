@@ -1,0 +1,5 @@
+src/** -text
+upstream-excluded/** -text
+LICENSE -text
+UPSTREAM_* -text
+SOURCES_MANIFEST.tsv -text

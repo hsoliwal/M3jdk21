@@ -1,0 +1,311 @@
+{
+  "artifact": "fastdoubleparser",
+  "automatic_module_name": "ch.randelshofer.fastdoubleparser",
+  "build": "commands",
+  "build_reason": "MODULE_DESCRIPTOR_OR_MULTI_RELEASE",
+  "consumers": "shaded into jackson-core 2.16.1 (dependency-reduced pom; version from the release-tag pom.xml)",
+  "coordinate": "ch.randelshofer:fastdoubleparser:1.0.0-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "dependencies": [],
+  "donor": "fastdoubleparser-1.0.0",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/resources/META-INF/LICENSE",
+      "sha256": "5f7260e2124be5a560d2c5ec1824475f76bb02dcb352b7f4848a1d702948007c",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "ac67479acbf384ea89aa6ab567f83af5263edf18203edfe4d4bac2dcdaa00772",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/resources/META-INF/NOTICE",
+      "sha256": "0fe84bf6f8990a28699a23353e1d30b3ed87e76ebe3db337cbe21c4dcbd68663",
+      "upstream": "META-INF/NOTICE"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/resources/META-INF/thirdparty-LICENSE",
+      "sha256": "6e0e5b6e6389568c1669163fdf40cee2143be58960be0a4e2f1428805505170d",
+      "upstream": "META-INF/thirdparty-LICENSE"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastDoubleSwar.java",
+      "sha256": "f2550fb7b4f98d451cc0450b272168bfd53838662d01d3bfbd664fd2a7b4494a",
+      "upstream": "ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastDoubleSwar.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java",
+      "sha256": "adf10d8e449d1244bf444d9b6b52c132004fc143d3c78ef1ae9becac58be616a",
+      "upstream": "ch.randelshofer.fastdoubleparser/module-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/AbstractBigDecimalParser.java",
+      "sha256": "b26fa9f69dc009f41be488ffce3fa49852cb622972e6ed35d84556fcee2b9640",
+      "upstream": "ch/randelshofer/fastdoubleparser/AbstractBigDecimalParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/AbstractBigIntegerParser.java",
+      "sha256": "9e6ee98a89625f7452ae884742921e1950afcfc236c39a5f367908e8a94fcf4a",
+      "upstream": "ch/randelshofer/fastdoubleparser/AbstractBigIntegerParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/AbstractFloatValueParser.java",
+      "sha256": "9390955fee07088743a6f76dd6a6cb51f26d6a9b8e54c4621820e6e18a548494",
+      "upstream": "ch/randelshofer/fastdoubleparser/AbstractFloatValueParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/AbstractJavaFloatingPointBitsFromByteArray.java",
+      "sha256": "0527b9a2ae5bc5636d9a30cd9f468e28ac66a746cc4952fea8e6e2a78175a3e6",
+      "upstream": "ch/randelshofer/fastdoubleparser/AbstractJavaFloatingPointBitsFromByteArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/AbstractJavaFloatingPointBitsFromCharArray.java",
+      "sha256": "b5fb965b73a9539a0b4878962968f7d5b23ba57a36af9eb4bf131991cb5db02f",
+      "upstream": "ch/randelshofer/fastdoubleparser/AbstractJavaFloatingPointBitsFromCharArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/AbstractJavaFloatingPointBitsFromCharSequence.java",
+      "sha256": "d36bf731f5b8c4d911010060ecf6817eb77e6e657a03b1a315c84a9f842e5496",
+      "upstream": "ch/randelshofer/fastdoubleparser/AbstractJavaFloatingPointBitsFromCharSequence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/AbstractJsonFloatingPointBitsFromByteArray.java",
+      "sha256": "3a0e9accc6c27dfd891e03c5246ba623392f2eb7a3853cfd47617a66f8ffdd9f",
+      "upstream": "ch/randelshofer/fastdoubleparser/AbstractJsonFloatingPointBitsFromByteArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/AbstractJsonFloatingPointBitsFromCharArray.java",
+      "sha256": "1afb76289e90cf00bc4d7382c975a9023c146db5d306a5a898fa054348132fe1",
+      "upstream": "ch/randelshofer/fastdoubleparser/AbstractJsonFloatingPointBitsFromCharArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/AbstractJsonFloatingPointBitsFromCharSequence.java",
+      "sha256": "541c0f768fd242522d634f76576333817ab3f69aa1ae8f969c01bc905bf07cc2",
+      "upstream": "ch/randelshofer/fastdoubleparser/AbstractJsonFloatingPointBitsFromCharSequence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/AbstractNumberParser.java",
+      "sha256": "dd4e9f23d8d273b468b46f1b1c947fc32a02d57ef5c0aab2c40d705b5f364785",
+      "upstream": "ch/randelshofer/fastdoubleparser/AbstractNumberParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/BigSignificand.java",
+      "sha256": "d4c8052f3976d0478bf1518a21dee253088e00689d5b6f913f6f7ccaa29382ed",
+      "upstream": "ch/randelshofer/fastdoubleparser/BigSignificand.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/FastDoubleMath.java",
+      "sha256": "c8731d6774516c763ac2da85b1f81732daaf05991eed79a59bc3cf58088b600a",
+      "upstream": "ch/randelshofer/fastdoubleparser/FastDoubleMath.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/FastFloatMath.java",
+      "sha256": "79651c667cfcefaf1b3e439f80da58c382c57184df3eaf45f40ebb802fc0dd3c",
+      "upstream": "ch/randelshofer/fastdoubleparser/FastFloatMath.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/FastIntegerMath.java",
+      "sha256": "b92c432e49b1c84c879d7072edd13ec4d288bb2d2756a29a64e715e1c14d6380",
+      "upstream": "ch/randelshofer/fastdoubleparser/FastIntegerMath.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/FftMultiplier.java",
+      "sha256": "c431249610640982e6d2df1f4b4fabcac64a0b08029944c86fd3cf586d7b4e47",
+      "upstream": "ch/randelshofer/fastdoubleparser/FftMultiplier.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaBigDecimalFromByteArray.java",
+      "sha256": "c80cca1068bf28e6d3bbff6b5d216d7c7523efb6bdd568b18aa2ae18564fa48c",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaBigDecimalFromByteArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaBigDecimalFromCharArray.java",
+      "sha256": "48c011c6f77cef47c65b7c25ea691ff7022b9345cf92a813ab9b3fd8746dd358",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaBigDecimalFromCharArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaBigDecimalFromCharSequence.java",
+      "sha256": "de1510b296c035ce5a006a6743491e75afff7a3f7c1007c50c3ff3e11cb39b43",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaBigDecimalFromCharSequence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaBigDecimalParser.java",
+      "sha256": "a130dd71830d8518222ee2e1f012d189fb19e1e9f2d9ce2c19c3622ba8da74be",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaBigDecimalParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaBigIntegerFromByteArray.java",
+      "sha256": "7c1a229c081b907928838301e265716393d6461e14c9f4096ba7e935a88559ab",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaBigIntegerFromByteArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaBigIntegerFromCharArray.java",
+      "sha256": "f6fa9be3164635cecfbe5ac755f983b2e5bcc9158e42b2f90a94c04038aef7ff",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaBigIntegerFromCharArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaBigIntegerFromCharSequence.java",
+      "sha256": "e8c9fb3bfcebf04a16d5f1a21946313d4b0f37954beae0049925ffa53d0bed06",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaBigIntegerFromCharSequence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaBigIntegerParser.java",
+      "sha256": "dc2a0e2228cd0a4b2eb09d29f5962e9df1e20b2c88a36b3af31ee0a84ebccf3c",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaBigIntegerParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaDoubleBitsFromByteArray.java",
+      "sha256": "b4e0d210050eb8a7603fcc9483cb510fa34b0c0b07da5d5f717391a81099f206",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaDoubleBitsFromByteArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaDoubleBitsFromCharArray.java",
+      "sha256": "87e9453db7b734b94698e4e5a8531ff19f034aec06b3a8a319d373a8b9bd6589",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaDoubleBitsFromCharArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaDoubleBitsFromCharSequence.java",
+      "sha256": "c0e9d6f724872b549581e480ed97831b6fafe0d66d4c57c412699be4cf83f5db",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaDoubleBitsFromCharSequence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaDoubleParser.java",
+      "sha256": "f8aa4964a585ce5e75e281ca8f93bb44bd7995c7df881cde474fdd5920050a88",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaDoubleParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaFloatBitsFromByteArray.java",
+      "sha256": "a62ba9f27021313951dd8a6c49581cd8714528113e439fa2ebcda78af056de95",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaFloatBitsFromByteArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaFloatBitsFromCharArray.java",
+      "sha256": "d93f017bf30be64750d3d0efcc75aad4afe8fcfdfeef8784b04b7d22e155faea",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaFloatBitsFromCharArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaFloatBitsFromCharSequence.java",
+      "sha256": "c9804299df7ccd72d5c4ab2359a84847a2d8f36948aa5b9550395d21d7dcd3ff",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaFloatBitsFromCharSequence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JavaFloatParser.java",
+      "sha256": "ac8787454f6874a72c7841bf3c267683ce2bec16aae21fc5d92fd0bf55eddff7",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaFloatParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JsonDoubleBitsFromByteArray.java",
+      "sha256": "5435c49ab81263a6fd6fc9915c8f5bda809a86df9a59a62e1c07bd47a74ace27",
+      "upstream": "ch/randelshofer/fastdoubleparser/JsonDoubleBitsFromByteArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JsonDoubleBitsFromCharArray.java",
+      "sha256": "2bbc4f3f981b95ba9504142312d44104045365e62b55372344a715afde2e17ba",
+      "upstream": "ch/randelshofer/fastdoubleparser/JsonDoubleBitsFromCharArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JsonDoubleBitsFromCharSequence.java",
+      "sha256": "2f328efd2a6fd1e953423fb8fcc9b715d8eea84fe798397ac57b4f913e5af6f0",
+      "upstream": "ch/randelshofer/fastdoubleparser/JsonDoubleBitsFromCharSequence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/JsonDoubleParser.java",
+      "sha256": "25199ac0a0eb5bff1dc28d8add354fbfac01ee3702acd0efedb52483c9210b43",
+      "upstream": "ch/randelshofer/fastdoubleparser/JsonDoubleParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/ParseDigitsTaskByteArray.java",
+      "sha256": "10418b474d03f022a69a61685426dc974b6f9b551c802eb39116ee31b4af5a63",
+      "upstream": "ch/randelshofer/fastdoubleparser/ParseDigitsTaskByteArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/ParseDigitsTaskCharArray.java",
+      "sha256": "0ed87bc2f3adcfff1cccf3961aaa023618df61d6e9c3df232d05a3493a8d8ce4",
+      "upstream": "ch/randelshofer/fastdoubleparser/ParseDigitsTaskCharArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/ParseDigitsTaskCharSequence.java",
+      "sha256": "b30abb090c09b27f8db77b4d3879dc48d160210fa17e627e83b7f99e8ff5947f",
+      "upstream": "ch/randelshofer/fastdoubleparser/ParseDigitsTaskCharSequence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/src/main/java/ch/randelshofer/fastdoubleparser/package-info.java",
+      "sha256": "9a540013132406e8e1a8520168665d05dff637e69e881fb3bd78d364e6d04ebf",
+      "upstream": "ch/randelshofer/fastdoubleparser/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/SOURCES_MANIFEST.tsv",
+      "sha256": "d95314167a3c8676422b8b00cb58499527952fd3c7b30e86123a173038ad83bd",
+      "upstream": "(inventory)"
+    }
+  ],
+  "group": "ch.randelshofer",
+  "kind": "MODULE",
+  "license": "MIT License",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/ch/randelshofer/fastdoubleparser/1.0.0/fastdoubleparser-1.0.0.pom",
+  "receipt": {
+    "buildRoot": "26672ca0bc0c1236610af8b41c5882092a9d52cf9abbfda58740439f2f660308",
+    "distributionSha256": "086f95dfb0550fd59f0b1c64e2bbc83868110e77f6efb86eaab3f92d98b51653",
+    "lock": "0da6cc6a5b55b16b2850348b9aaef4c2f8fa908f26a24c806f088ae925687024",
+    "message": "",
+    "sourceRoot": "fb8ac0f9142eb1b099b4a2d991a28abe17714e55aad6d1383f7c1736b7e21269",
+    "status": "PASS"
+  },
+  "sources_jar": "https://repo.maven.apache.org/maven2/ch/randelshofer/fastdoubleparser/1.0.0/fastdoubleparser-1.0.0-sources.jar",
+  "sources_jar_sha1": "71b918bd3b56a714becc39bcbad85025309033b6",
+  "sources_jar_sha256": "0c92cc5b0967698613a7bbc91be6646a9c3b77ccdcbfd809ca3a6267a586dcdc",
+  "status": "PASS",
+  "upstream": "https://github.com/wrandelshofer/FastDoubleParser/tree/master",
+  "version": "1.0.0"
+}

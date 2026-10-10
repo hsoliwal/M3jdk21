@@ -1,0 +1,253 @@
+{
+  "artifact": "annotations",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "MODULE_DESCRIPTOR_OR_MULTI_RELEASE",
+  "consumers": "M3jdk21 m3/tooling (declared, unused)",
+  "coordinate": "org.jetbrains:annotations:24.1.0-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "dependencies": [],
+  "donor": "annotations-24.1.0",
+  "excluded_from_compilation": [
+    "META-INF/versions/9/module-info.java"
+  ],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/annotations/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production-excluded-from-compilation",
+      "repository": "m3/vendor/third_party/annotations/upstream-excluded/META-INF/versions/9/module-info.java",
+      "sha256": "83abd1fc7e4bdcfca084894b4673ebea0b2438830ad886d5470715609545341c",
+      "upstream": "META-INF/versions/9/module-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/intellij/lang/annotations/Flow.java",
+      "sha256": "5d577dab3ae474662f0bade1713fdf2c89ee09ac26e27fd452eb6fc97f0a2d85",
+      "upstream": "org/intellij/lang/annotations/Flow.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/intellij/lang/annotations/Identifier.java",
+      "sha256": "32a67a47cc0d6c14094174bc68c70e707c3529a99c0e5c109a617eda18b6681e",
+      "upstream": "org/intellij/lang/annotations/Identifier.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/intellij/lang/annotations/JdkConstants.java",
+      "sha256": "15a9a5faa0eace015540c62b0284f998933947e917f76f3e372acf02c766231b",
+      "upstream": "org/intellij/lang/annotations/JdkConstants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/intellij/lang/annotations/Language.java",
+      "sha256": "025ef82f4cfa1a71f08b95e8b7774b058f10cf61ab649b4cdc375cfb7996a708",
+      "upstream": "org/intellij/lang/annotations/Language.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/intellij/lang/annotations/MagicConstant.java",
+      "sha256": "b5059f5f23a8be81227b181480cd5619572eebf13c3e8afbb410b8cfe8347b6e",
+      "upstream": "org/intellij/lang/annotations/MagicConstant.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/intellij/lang/annotations/Pattern.java",
+      "sha256": "cb4f9d8f6831e802a8bef6cd684d42c49a85bdd17f18f6d68417259865de7045",
+      "upstream": "org/intellij/lang/annotations/Pattern.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/intellij/lang/annotations/PrintFormat.java",
+      "sha256": "0dfee63df3ce7da8012f322662b7549a6c45d4729543f4fa9b3696f67609c288",
+      "upstream": "org/intellij/lang/annotations/PrintFormat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/intellij/lang/annotations/RegExp.java",
+      "sha256": "90c95a1aa7b6d9a89cd1eb2113b063c4409a2a1da6a402046536cf80d2b79b5e",
+      "upstream": "org/intellij/lang/annotations/RegExp.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/intellij/lang/annotations/Subst.java",
+      "sha256": "a074f361c05cf640a1ca48717abffeb23a1e81bcb01a6496fe8dc7584b5276d0",
+      "upstream": "org/intellij/lang/annotations/Subst.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/ApiStatus.java",
+      "sha256": "8732ced4b37c25bb966b3f3c92f3841c5d0663ad58814d5d9cbf13516b87c4c0",
+      "upstream": "org/jetbrains/annotations/ApiStatus.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/Async.java",
+      "sha256": "90343785a11855f2c3a0a7fd04f6dec87b4d3b7af97ece90e3916bd924cc69dd",
+      "upstream": "org/jetbrains/annotations/Async.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/Blocking.java",
+      "sha256": "58085868b8c0d633278c9343c0a2f48e97e263e756fc718cdcb6863cfa02acf0",
+      "upstream": "org/jetbrains/annotations/Blocking.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/BlockingExecutor.java",
+      "sha256": "42f21aec94f116f936d867299fdc8b9b5472adcad16179925838d5ac8b109f54",
+      "upstream": "org/jetbrains/annotations/BlockingExecutor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/CheckReturnValue.java",
+      "sha256": "0771f1bfed4131f02df8aa4da0eb7765ebc24c843c19624c37aa6e603320d097",
+      "upstream": "org/jetbrains/annotations/CheckReturnValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/Contract.java",
+      "sha256": "bb8aed5b42c5617da9621056fee3cb32243ce17fc8c008f7a17641b5a3f8231a",
+      "upstream": "org/jetbrains/annotations/Contract.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/Debug.java",
+      "sha256": "4b9c5997acff0795a77017c101fac0a0b83a2f10cefe9e7b42a3a4e3e35a13a3",
+      "upstream": "org/jetbrains/annotations/Debug.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/MustBeInvokedByOverriders.java",
+      "sha256": "3f5844d39cee9d9200b6dc34a2dab9883bbfdd6cfaffd651d1d8f3903c0d2f5a",
+      "upstream": "org/jetbrains/annotations/MustBeInvokedByOverriders.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/Nls.java",
+      "sha256": "a4744344fbe2d0b91d9e6934ec78a4dac556e6405308b7b89376c6a721d7958a",
+      "upstream": "org/jetbrains/annotations/Nls.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/NonBlocking.java",
+      "sha256": "be86cfb27f200b8aa537ee8693a41effd42926962428c357f398623df81e2527",
+      "upstream": "org/jetbrains/annotations/NonBlocking.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/NonBlockingExecutor.java",
+      "sha256": "bd6f1bf5bcba111993f6126f346a2e38729b2294cd35eac3b92406cfb2e3d73e",
+      "upstream": "org/jetbrains/annotations/NonBlockingExecutor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/NonNls.java",
+      "sha256": "534f79a6314c2f43922297692c881b67fd12cb9886b4f598a0e2ad93543a24cb",
+      "upstream": "org/jetbrains/annotations/NonNls.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/NotNull.java",
+      "sha256": "62f3adf3d14074e5c2a0475aac2599c03b2e9c17d570ebef496bfeec9d80dae7",
+      "upstream": "org/jetbrains/annotations/NotNull.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/Nullable.java",
+      "sha256": "89c8f93c25d1d26080b949d118b8a61d24dede8cb43378ad2669db8676e5afc8",
+      "upstream": "org/jetbrains/annotations/Nullable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/PropertyKey.java",
+      "sha256": "155b1f3ac120f22b1633d47273b7c25c28d9d9499256fc3288a065a6ff7cebd4",
+      "upstream": "org/jetbrains/annotations/PropertyKey.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/Range.java",
+      "sha256": "a4227ebace6203763afe2c9ca9d562fd6290448f0b7b87a9957c31f1b0d77d0b",
+      "upstream": "org/jetbrains/annotations/Range.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/TestOnly.java",
+      "sha256": "9916f24a67bca2d0d717ad8e2856f2d36bc5efc04a64b0d924970e301d98fe02",
+      "upstream": "org/jetbrains/annotations/TestOnly.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/UnknownNullability.java",
+      "sha256": "b978b866f5f8bb8551ce46590a7eb582091bf36df1345b93b951c9ae0a601d0e",
+      "upstream": "org/jetbrains/annotations/UnknownNullability.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/Unmodifiable.java",
+      "sha256": "cfedaa1da60ae7273469c2e063621b083cc134abf6c16e7b207ae53f81862e06",
+      "upstream": "org/jetbrains/annotations/Unmodifiable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/UnmodifiableView.java",
+      "sha256": "d0536de7e94d395a9492d2a0fdb695f1563f76942971066151f68aa080c97f2d",
+      "upstream": "org/jetbrains/annotations/UnmodifiableView.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/annotations/src/main/java/org/jetbrains/annotations/VisibleForTesting.java",
+      "sha256": "23b4685e6f66e18d2857120b4a10d4b62e15dc0bc140f9b05c8ab5f0c2afb052",
+      "upstream": "org/jetbrains/annotations/VisibleForTesting.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/annotations/UPSTREAM_LICENSE.json",
+      "sha256": "a35db5edf3f496eecc3e082c253f076969e182685ff0d233d14947401fbd2556",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/annotations/UPSTREAM_LICENSE.txt",
+      "sha256": "8c1e966c7855fb54027bcaf6ebe7a43abe4785791e8cf9148c363761d493d097",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/annotations/SOURCES_MANIFEST.tsv",
+      "sha256": "e6898ddb946c7684553c8161757189e84d6157e8a90deef61ab0a6731ecc96d2",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/annotations/LICENSE",
+      "sha256": "8c1e966c7855fb54027bcaf6ebe7a43abe4785791e8cf9148c363761d493d097",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.jetbrains",
+  "kind": "MODULE",
+  "license": "The Apache Software License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.pom",
+  "receipt": {
+    "buildRoot": "1831403cc3b69acf8ff99241fd53106e64f048c68abc87f6679eacacba8e9966",
+    "distributionSha256": "d5a5bab0535ac340d04aa742d1798e450b440082f0b0e11a35b9f6818aa2a15e",
+    "lock": "33ab049867c1c736c65dececbbb9f9d42697fd3336cf178946c3c43ba55336ff",
+    "message": "",
+    "sourceRoot": "30334e546dd7d9b72e4b020aff2a2c806ed9494aaedd62894e5504923ed684a6",
+    "status": "PASS"
+  },
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/24.1.0/annotations-24.1.0-sources.jar",
+  "sources_jar_sha1": "d90a405211798b013b8ee3d54f70edc0913a28b0",
+  "sources_jar_sha256": "0590a3ec06b522b4aae684ddb63c063cd11bd547fd9baaa5e71f6b020e2a7df4",
+  "status": "PASS",
+  "upstream": "https://github.com/JetBrains/java-annotations",
+  "version": "24.1.0"
+}

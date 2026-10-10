@@ -7,8 +7,8 @@
   <!-- Bounded candidate tooling test; the owning module's 99% coverage and JDK gates remain separate. -->
   <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><rewrite.version>8.17.1</rewrite.version></properties>
   <dependencies>
-    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36</version></dependency>
-    <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>24.1.0</version><scope>provided</scope></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36-m3-source-1</version></dependency>
+    <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>24.1.0-m3-source-1</version><scope>provided</scope></dependency>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>${rewrite.version}</version></dependency>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>${rewrite.version}</version><scope>runtime</scope></dependency>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-test</artifactId><version>${rewrite.version}</version><scope>test</scope></dependency>

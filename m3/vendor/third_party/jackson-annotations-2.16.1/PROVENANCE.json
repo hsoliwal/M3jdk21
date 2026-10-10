@@ -1,0 +1,347 @@
+{
+  "artifact": "jackson-annotations",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "M3jdk21 m3/tooling (recipe engine)",
+  "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.16.1-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "dependencies": [],
+  "donor": "jackson-annotations-2.16.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/resources/META-INF/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "be2c82b0c1b6002a5031614535899ca2efe194f9ca187a5190eebdc2b18a6191",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/resources/META-INF/NOTICE",
+      "sha256": "612b14bc77c944ce229cbba0d14919162cfea8ed802cbf06a8e865e032d03201",
+      "upstream": "META-INF/NOTICE"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/upstream-excluded/META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.properties",
+      "sha256": "7de699255fa43d0ec15c2773054f50b532826a90e12131251f9b1aa3177ecca2",
+      "upstream": "META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/upstream-excluded/META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.xml",
+      "sha256": "c6dff6a78b01498929a69af364e6cb78aef72d2a45254b92d6495b2a198ec129",
+      "upstream": "META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.xml"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JacksonAnnotation.java",
+      "sha256": "33acb0252ae6aced6b9eb4de0e01a94a8073646d36c62c44a92ab52fa5a4948d",
+      "upstream": "com/fasterxml/jackson/annotation/JacksonAnnotation.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JacksonAnnotationValue.java",
+      "sha256": "be939edc279c3d06b203cf9cb6079135646086558596a8a5f99ac4ba95130030",
+      "upstream": "com/fasterxml/jackson/annotation/JacksonAnnotationValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JacksonAnnotationsInside.java",
+      "sha256": "b1f5c4875a8237bbd35896b651fe0fff5900735c99280319daf9c55923333e42",
+      "upstream": "com/fasterxml/jackson/annotation/JacksonAnnotationsInside.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JacksonInject.java",
+      "sha256": "9e366734d666bfe4b29739fb05d2bd66a394584e5ecd3ade48339cf8471f13d7",
+      "upstream": "com/fasterxml/jackson/annotation/JacksonInject.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonAlias.java",
+      "sha256": "c5415692f3f22940cdd0d8aaea31b056d490d47efbb102106d1b830be2d22c03",
+      "upstream": "com/fasterxml/jackson/annotation/JsonAlias.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonAnyGetter.java",
+      "sha256": "96792a115cff375fc7e6fbd17d25325ee9a943bd1255076d5c3b29cddf2c87fb",
+      "upstream": "com/fasterxml/jackson/annotation/JsonAnyGetter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonAnySetter.java",
+      "sha256": "5357fa46afebf96d7dcbf2eb20d2f3fa4f020f64726677de00da3e192fa240f3",
+      "upstream": "com/fasterxml/jackson/annotation/JsonAnySetter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonAutoDetect.java",
+      "sha256": "412dc3c9701c27aa7fc093f3d20f231bda75db7c201c1b1e0080495f610002e1",
+      "upstream": "com/fasterxml/jackson/annotation/JsonAutoDetect.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonBackReference.java",
+      "sha256": "db6cd073d963943417fe0d9bebfdf73e4eb6b752b4ae98cca4fa84835ac609bf",
+      "upstream": "com/fasterxml/jackson/annotation/JsonBackReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonClassDescription.java",
+      "sha256": "07df14512b7bd038564ff812d463d29e35ea845cb9294dd97be0b5073eba25dc",
+      "upstream": "com/fasterxml/jackson/annotation/JsonClassDescription.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonCreator.java",
+      "sha256": "b12a68a206a2f0c45e79954f6d40b9f3d86d0cf0ef96ed322d4f25ff2dc6771e",
+      "upstream": "com/fasterxml/jackson/annotation/JsonCreator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonEnumDefaultValue.java",
+      "sha256": "2fa19d98dd38ad9f38198041a4b9712c620ccddf857f049a7f04422b8f7d03f9",
+      "upstream": "com/fasterxml/jackson/annotation/JsonEnumDefaultValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonFilter.java",
+      "sha256": "53050fbfc841d2a153e234df12552356b1133819c6ef716a5fb3a0e55c13e71f",
+      "upstream": "com/fasterxml/jackson/annotation/JsonFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonFormat.java",
+      "sha256": "3ab51df7e110352a66417b87c16032602c4f512994104a52c5659c6a2150fdb9",
+      "upstream": "com/fasterxml/jackson/annotation/JsonFormat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonGetter.java",
+      "sha256": "4156809652d7899343338ea1cf3c56efa73dddb97a8a59d2f8aa9c30623daa66",
+      "upstream": "com/fasterxml/jackson/annotation/JsonGetter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonIdentityInfo.java",
+      "sha256": "0ba1cc56ef60a4ebccaf1a3e1326999f6a9170801f1f311695927cb0de76ee41",
+      "upstream": "com/fasterxml/jackson/annotation/JsonIdentityInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonIdentityReference.java",
+      "sha256": "b87e3d46c52f24dc80ef8b6bcd96afe454b0308ef403871d03e6cd52a63c8274",
+      "upstream": "com/fasterxml/jackson/annotation/JsonIdentityReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonIgnore.java",
+      "sha256": "ff81ac45256f4db0a00f7540904af3859bad47a5f2e0eb9bab80cbb01774162b",
+      "upstream": "com/fasterxml/jackson/annotation/JsonIgnore.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonIgnoreProperties.java",
+      "sha256": "8e213a05d3faa5d6114d7787497af6c7adc8c3673fa2250a7a4d83897ecaea3f",
+      "upstream": "com/fasterxml/jackson/annotation/JsonIgnoreProperties.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonIgnoreType.java",
+      "sha256": "05136ead1c2d4ddcaf2b060433a6efa5d3b4e08651d293dbdef8cc7dd6ec843f",
+      "upstream": "com/fasterxml/jackson/annotation/JsonIgnoreType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonInclude.java",
+      "sha256": "e207a05a0b3196e7f359bcda2bfdfeead4d46e3cf3769b09e8411106a6c352fc",
+      "upstream": "com/fasterxml/jackson/annotation/JsonInclude.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonIncludeProperties.java",
+      "sha256": "ffec62515a0a27283f88e2efcf2c781644745c432ef7d258914e3a8178b11144",
+      "upstream": "com/fasterxml/jackson/annotation/JsonIncludeProperties.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonKey.java",
+      "sha256": "c4ffb451fe647050754bd1fabcd128a134074fe9a60781faf49191a9c2daa5ae",
+      "upstream": "com/fasterxml/jackson/annotation/JsonKey.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonManagedReference.java",
+      "sha256": "f3095c555652f6e594a41534c088983205a173fd5210299ed9fea148ad63457e",
+      "upstream": "com/fasterxml/jackson/annotation/JsonManagedReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonMerge.java",
+      "sha256": "df9d348ab6df32563ed8eaa7e5c75130f9362ce52db067cbac4dd38c097e5cc0",
+      "upstream": "com/fasterxml/jackson/annotation/JsonMerge.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonProperty.java",
+      "sha256": "38e25120b83ac0f8cb672c6db590ba9354e54483af4a7b17c0496748a9a2cf85",
+      "upstream": "com/fasterxml/jackson/annotation/JsonProperty.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonPropertyDescription.java",
+      "sha256": "ecbc8fc18d99f1050cb3fcbc21760b1bcb2d1cc6453367dd94b1ce9b89ecbad1",
+      "upstream": "com/fasterxml/jackson/annotation/JsonPropertyDescription.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonPropertyOrder.java",
+      "sha256": "a775ea90767fc339937aaf7db71d550b8f2170f6f16850ef9f427639427c30c7",
+      "upstream": "com/fasterxml/jackson/annotation/JsonPropertyOrder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonRawValue.java",
+      "sha256": "ce69d78c810e1f2b3f566bf61f329ca939822ea09111da0a2a7f4184aa60ca22",
+      "upstream": "com/fasterxml/jackson/annotation/JsonRawValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonRootName.java",
+      "sha256": "d3c517b1c1601fa0b454ab5c96996d2b37b984827e9de82f958ccbcf61075ab2",
+      "upstream": "com/fasterxml/jackson/annotation/JsonRootName.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonSetter.java",
+      "sha256": "b1736353e5a7eb3e39381e32970d21102c92f8b7e558ffb91b9ee2556f4cda4c",
+      "upstream": "com/fasterxml/jackson/annotation/JsonSetter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonSubTypes.java",
+      "sha256": "857230cc2fc7ac8bd2b747a7b22d520beab3389b887b59c2c77f2fea4045ff12",
+      "upstream": "com/fasterxml/jackson/annotation/JsonSubTypes.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonTypeId.java",
+      "sha256": "c507495bf1ed6ff4c01b612644b3f74d926d870c26c84e2dffc464fa5550671e",
+      "upstream": "com/fasterxml/jackson/annotation/JsonTypeId.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonTypeInfo.java",
+      "sha256": "1111e126290ed4113a6bbccdafe06f092278b3bf0de54ed8c579d75540171df1",
+      "upstream": "com/fasterxml/jackson/annotation/JsonTypeInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonTypeName.java",
+      "sha256": "422bbd0ab65823f0f18c237042f559b79112c249da1634acf7c2c60778693367",
+      "upstream": "com/fasterxml/jackson/annotation/JsonTypeName.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonUnwrapped.java",
+      "sha256": "3704f5273ac7038060149dd50f1480814c046daab8b5cfc955cf1505e147a540",
+      "upstream": "com/fasterxml/jackson/annotation/JsonUnwrapped.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonValue.java",
+      "sha256": "80d2aafd5c11062c0594149278c1cc3a724c55ea39e7ba162a1ad9c335af37b3",
+      "upstream": "com/fasterxml/jackson/annotation/JsonValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/JsonView.java",
+      "sha256": "4511b4a6067c9efc518b86360d1b4cfbfc673c4b9401e624fcdc044e2ce156ce",
+      "upstream": "com/fasterxml/jackson/annotation/JsonView.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/Nulls.java",
+      "sha256": "da796c6ea43c2a69d999034961ab5240279daa2a94a5e18d572374c7f3e3f014",
+      "upstream": "com/fasterxml/jackson/annotation/Nulls.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/ObjectIdGenerator.java",
+      "sha256": "d8ecd5efeb29dca76bef748667305837c804f04790065aea578d91f6890d3540",
+      "upstream": "com/fasterxml/jackson/annotation/ObjectIdGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/ObjectIdGenerators.java",
+      "sha256": "dc85ed2a0e2acc579e2df6558dbbdaabefdd6af7d30861babac254bc51f05205",
+      "upstream": "com/fasterxml/jackson/annotation/ObjectIdGenerators.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/ObjectIdResolver.java",
+      "sha256": "78384b7a684108e58fde43be625d49d6d094cf9e67285de651557bb14b286433",
+      "upstream": "com/fasterxml/jackson/annotation/ObjectIdResolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/OptBoolean.java",
+      "sha256": "c2f452c14f24cb5e7a423523043045ba4ec27b6189700e45ad93c633a723c5ba",
+      "upstream": "com/fasterxml/jackson/annotation/OptBoolean.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/PropertyAccessor.java",
+      "sha256": "1023745b526404104a9028cfe39d08eeafc964167c5d0f6f9859da17d51e8ff7",
+      "upstream": "com/fasterxml/jackson/annotation/PropertyAccessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/SimpleObjectIdResolver.java",
+      "sha256": "24de8826d873397f20a548ebdb805a9bde5df7b4b8fc25c511b717d37fa309cb",
+      "upstream": "com/fasterxml/jackson/annotation/SimpleObjectIdResolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/java/com/fasterxml/jackson/annotation/package-info.java",
+      "sha256": "963bbc0f9fd57cc0f7eadd0b75d9e7e696292304dd0820afdeb108e84e1d866d",
+      "upstream": "com/fasterxml/jackson/annotation/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/SOURCES_MANIFEST.tsv",
+      "sha256": "99abd611102aa2daaccb5108eb5b6a8769a507dddd32f223fe7ac726e573b296",
+      "upstream": "(inventory)"
+    }
+  ],
+  "group": "com.fasterxml.jackson.core",
+  "kind": "MODULE",
+  "license": "The Apache Software License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "parent": "com.fasterxml.jackson:jackson-parent:2.16",
+  "pom": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.pom",
+  "receipt": {
+    "buildRoot": "a1979e8ced4bef9bfc201636ea26c452b565cb26ab3b97bbdfb7d694ad28a21a",
+    "distributionSha256": "a8f9441e12e972fdb0e80041e15522c888fcabfa858fa83fac34ab340c8ee4ca",
+    "lock": "0da6cc6a5b55b16b2850348b9aaef4c2f8fa908f26a24c806f088ae925687024",
+    "message": "",
+    "sourceRoot": "c097e4d3ef3ca33ce778f4ce87c8eaacaa25e5d0d5add35ab314dbbc17d05ea4",
+    "status": "PASS"
+  },
+  "sources_jar": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1-sources.jar",
+  "sources_jar_sha1": "980f63c6ea050aca8c9a47f7643fb183b5d7143c",
+  "sources_jar_sha256": "cebdb714198d5b3a152efb9e940dc9eb26cb37aa688ce34431b99afb790f6be3",
+  "status": "PASS",
+  "upstream": "https://github.com/FasterXML/jackson-annotations",
+  "version": "2.16.1"
+}
