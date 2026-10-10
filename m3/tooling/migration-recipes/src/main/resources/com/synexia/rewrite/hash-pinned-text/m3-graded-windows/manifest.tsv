@@ -1,0 +1,2 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/String.java	43f51d518f5afe15044c9db6cdc212eb08c2e7a6d26ef2b151cc6a3087b48e6e	ac1f4aa218017a98347485dd1c408b69618b2d694ec40e5d8c71cee07bc893ff	00-String.java.txt
