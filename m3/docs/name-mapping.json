@@ -417,6 +417,22 @@
       "historical_evidence": "Synexia PR #9579 merged at 1a5f6c9abbf00887550f7c3d5647ebb20ef7ad99 with an owned UTF-16 address directory; that cache is absent from current develop at the pinned source revision.",
       "source_license": "Apache-2.0",
       "target_license": "GPL-2.0-with-Classpath-exception for the existing java.base files; no target source file changed by this intake"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexPositionMasks",
+      "source_commit": "f938067754ca151c688fe5192d29aab4d415f25f",
+      "source_blob_sha1": "6095c87e747497efe56d4729650f981c9373708a",
+      "target": "java.lang.M3StringPositionPrecompute",
+      "status": "receiver mapping only; benchmark pending",
+      "source_role": "Synexia bounded UTF-16 position-mask histogram lower-bound precompute",
+      "target_rule": "Map to the existing target position-precompute owner. Do not introduce a second payload owner or port JNI query-profile ownership until Java/JNI parity, cancellation, bounds, row-order, and native performance evidence are terminal.",
+      "target_disposition": "PENDING_BENCHMARK",
+      "receiver_manifest": "m3/runtime-integration/synexia-fuzzy-histogram-receiver.tsv",
+      "benchmark_repository": "hsoliwal/com.synexia",
+      "benchmark_pr": 10112,
+      "benchmark_head": "5dd626fde4da2318ca947e05f1b25f371c17e28c",
+      "benchmark_run": 38015055434,
+      "benchmark_job": 114103360841
     }
   ],
   "imported_donor_sources": [],
@@ -8024,7 +8040,6 @@
       ],
       "rule": "Reviewed operation identity plus bounded work geometry; arbitrary Runnable is not accelerator admission; providers stay outside java.base and accelerated admission requires provider-specific proof including CPU parity where applicable."
     }
-
   ],
   "recipe_authority": {
     "recipe_id": "synexia.m3jdk.string.canonical-dag.20261006",
