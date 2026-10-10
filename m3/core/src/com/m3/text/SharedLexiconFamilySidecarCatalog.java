@@ -28,20 +28,18 @@ import java.util.TreeMap;
  * Receiver for the optional {@code m3lex-family-v2} precompute bundle.
  *
  * <p>The legacy M3LEX image and opaque per-record payload remain unchanged.
- * This catalog is a separate, all-or-nothing bundle for the six index-shaped
+ * This catalog is a separate, all-or-nothing bundle for the five index-shaped
  * families whose values cannot be represented losslessly in one JSON scalar
- * map. The phrase family additionally preserves ordered token-ID rewrite rules.
- * Every key carries the originating Synexia source scope; physical image
+ * map. Every key carries the originating Synexia source scope; physical image
  * coordinates are never promoted to source identity.</p>
  */
 public final class SharedLexiconFamilySidecarCatalog {
     public static final String SCHEMA_VERSION = "m3lex-family-v2";
     public static final String INDEX_FILE = "synexia.precompute-family-index.tsv";
     private static final List<String> FAMILIES = List.of(
-            "phrase-rewrite", "prefix-counts", "spell-index", "token-frequency",
+            "prefix-counts", "spell-index", "token-frequency",
             "token-hash-precompute", "translation-projection");
     private static final Map<String, String> FILES = Map.of(
-            "phrase-rewrite", "synexia.phrases.tsv",
             "prefix-counts", "synexia.prefix-counts.tsv",
             "spell-index", "synexia.spell.tsv",
             "token-frequency", "synexia.token-frequency.tsv",
@@ -67,12 +65,6 @@ public final class SharedLexiconFamilySidecarCatalog {
             recordId = text(recordId, "recordId");
             sourceManifestRevision = text(sourceManifestRevision, "sourceManifestRevision");
             ownerFingerprint = text(ownerFingerprint, "ownerFingerprint");
-        }
-    }
-
-    public record PhraseKey(M3PhrasePrecompute.Scope scope) {
-        public PhraseKey {
-            scope = Objects.requireNonNull(scope, "scope");
         }
     }
 
@@ -137,7 +129,6 @@ public final class SharedLexiconFamilySidecarCatalog {
     private final Map<TokenHashKey, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes;
     private final Map<PrefixKey, M3LexiconPrecompute.PrefixCounts> prefixes;
     private final Map<FrequencyKey, M3LexiconPrecompute.TokenFrequency> frequencies;
-    private final Map<PhraseKey, M3PhrasePrecompute.Catalog> phrases;
     private final Map<String, Integer> rowCounts;
 
     private SharedLexiconFamilySidecarCatalog(
@@ -146,14 +137,12 @@ public final class SharedLexiconFamilySidecarCatalog {
             Map<TokenHashKey, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes,
             Map<PrefixKey, M3LexiconPrecompute.PrefixCounts> prefixes,
             Map<FrequencyKey, M3LexiconPrecompute.TokenFrequency> frequencies,
-            Map<PhraseKey, M3PhrasePrecompute.Catalog> phrases,
             Map<String, Integer> rowCounts) {
         this.translations = Map.copyOf(translations);
         this.spells = Map.copyOf(spells);
         this.tokenHashes = Map.copyOf(tokenHashes);
         this.prefixes = Map.copyOf(prefixes);
         this.frequencies = Map.copyOf(frequencies);
-        this.phrases = Map.copyOf(phrases);
         this.rowCounts = Map.copyOf(rowCounts);
     }
 
@@ -179,7 +168,6 @@ public final class SharedLexiconFamilySidecarCatalog {
         Map<TokenHashKey, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes = new HashMap<>();
         Map<PrefixKey, M3LexiconPrecompute.PrefixCounts> prefixes = new HashMap<>();
         Map<FrequencyKey, M3LexiconPrecompute.TokenFrequency> frequencies = new HashMap<>();
-        Map<PhraseKey, M3PhrasePrecompute.Builder> phraseGroups = new HashMap<>();
         Map<String, Integer> counts = new HashMap<>();
         for (String family : FAMILIES) {
             IndexEntry entry = index.get(family);
@@ -197,7 +185,6 @@ public final class SharedLexiconFamilySidecarCatalog {
                 previous = key;
                 try {
                     switch (family) {
-                        case "phrase-rewrite" -> accumulate(phraseGroups, phrase(row));
                         case "translation-projection" -> add(translations, translation(row), family);
                         case "spell-index" -> accumulate(spellGroups, spell(row));
                         case "token-hash-precompute" -> add(tokenHashes, tokenHash(row), family);
@@ -214,11 +201,8 @@ public final class SharedLexiconFamilySidecarCatalog {
         Map<SpellKey, M3LexiconPrecompute.SpellIndex> spells = new HashMap<>();
         for (Map.Entry<SpellKey, SpellAccumulator> entry : spellGroups.entrySet())
             spells.put(entry.getKey(), entry.getValue().build(entry.getKey()));
-        Map<PhraseKey, M3PhrasePrecompute.Catalog> phrases = new HashMap<>();
-        for (Map.Entry<PhraseKey, M3PhrasePrecompute.Builder> entry : phraseGroups.entrySet())
-            phrases.put(entry.getKey(), entry.getValue().build());
         return new SharedLexiconFamilySidecarCatalog(translations, spells, tokenHashes,
-                prefixes, frequencies, phrases, counts);
+                prefixes, frequencies, counts);
     }
 
     public Optional<M3LexiconPrecompute.TranslationProjection> translationAt(TranslationKey key) {
@@ -235,9 +219,6 @@ public final class SharedLexiconFamilySidecarCatalog {
     }
     public Optional<M3LexiconPrecompute.TokenFrequency> frequencyAt(FrequencyKey key) {
         return Optional.ofNullable(frequencies.get(Objects.requireNonNull(key, "key")));
-    }
-    public Optional<M3PhrasePrecompute.Catalog> phraseAt(PhraseKey key) {
-        return Optional.ofNullable(phrases.get(Objects.requireNonNull(key, "key")));
     }
     public Map<String, Integer> rowCounts() { return rowCounts; }
 
@@ -296,7 +277,6 @@ public final class SharedLexiconFamilySidecarCatalog {
 
     private static String[] fileHeader(String family) {
         return switch (family) {
-            case "phrase-rewrite" -> concat(COMMON, "source_token_ids", "target_token_ids");
             case "translation-projection" -> concat(COMMON, "source_language", "target_language",
                     "lexicon_fingerprint", "source_fingerprint", "translated_token_ids", "mapped_token_count");
             case "spell-index" -> concat(COMMON, "lexicon_fingerprint", "language", "max_edit_distance",
@@ -392,7 +372,6 @@ public final class SharedLexiconFamilySidecarCatalog {
 
     private static List<String> key(String family, String[] row) {
         int count = switch (family) {
-            case "phrase-rewrite" -> 5;
             case "translation-projection" -> 8;
             case "spell-index" -> 10;
             case "token-hash-precompute" -> 10;
@@ -428,18 +407,6 @@ public final class SharedLexiconFamilySidecarCatalog {
 
     private static Map.Entry<SourceScope, Integer> common(String[] row) {
         return Map.entry(new SourceScope(row[0], row[1], row[2], row[3]), 4);
-    }
-
-    private static PhraseEntry phrase(String[] row) throws IOException {
-        SourceScope source = common(row).getKey();
-        M3PhrasePrecompute.Scope scope = new M3PhrasePrecompute.Scope(
-                source.sourceId(), source.recordId(), source.sourceManifestRevision(),
-                source.ownerFingerprint());
-        int[] sourceTokenIds = intArray(row[4], "source_token_ids");
-        if (sourceTokenIds.length == 0) throw new IOException("source phrase must not be empty");
-        int[] targetTokenIds = intArray(row[5], "target_token_ids");
-        return new PhraseEntry(new PhraseKey(scope),
-                new M3PhrasePrecompute.Phrase(scope, sourceTokenIds, targetTokenIds));
     }
 
     private static TranslationEntry translation(String[] row) throws IOException {
@@ -504,7 +471,6 @@ public final class SharedLexiconFamilySidecarCatalog {
                 new M3LexiconPrecompute.TokenFrequency(value, intMap(row[8], "frequencies")));
     }
 
-    private record PhraseEntry(PhraseKey key, M3PhrasePrecompute.Phrase phrase) { }
     private record TranslationEntry(TranslationKey key, M3LexiconPrecompute.TranslationProjection value) { }
     private record SpellEntry(SpellKey key, String deleteKey, int[] tokenIds,
                               Map<Integer, Long> frequencies) { }
@@ -517,12 +483,6 @@ public final class SharedLexiconFamilySidecarCatalog {
     }
     private static void add(Map<TranslationKey, M3LexiconPrecompute.TranslationProjection> map,
                             TranslationEntry entry, String family) throws IOException { add(map, Map.entry(entry.key(), entry.value()), family); }
-    private static void accumulate(Map<PhraseKey, M3PhrasePrecompute.Builder> groups,
-                                   PhraseEntry entry) {
-        groups.computeIfAbsent(entry.key(),
-                key -> M3PhrasePrecompute.builder(key.scope())).put(entry.phrase());
-    }
-
     private static void accumulate(Map<SpellKey, SpellAccumulator> groups, SpellEntry entry)
             throws IOException {
         SpellAccumulator accumulator = groups.computeIfAbsent(entry.key(), ignored -> new SpellAccumulator());
