@@ -1,0 +1,118 @@
+// SPDX-License-Identifier: Apache-2.0
+#include <jni.h>
+#include <algorithm>
+#include <cstdint>
+#include <new>
+#include <vector>
+
+namespace {
+void fail(JNIEnv* env, const char* type, const char* message) {
+    if (env->ExceptionCheck()) return;
+    jclass clazz = env->FindClass(type);
+    if (clazz != nullptr) { env->ThrowNew(clazz, message); env->DeleteLocalRef(clazz); }
+}
+class Array {
+    JNIEnv* env_;
+    jintArray array_;
+public:
+    jint* data;
+    jsize size;
+    Array(JNIEnv* env, jintArray array) : env_(env), array_(array), data(nullptr), size(0) {
+        if (array == nullptr) { fail(env, "java/lang/NullPointerException", "posting"); return; }
+        size = env->GetArrayLength(array);
+        if (size != 0) data = env->GetIntArrayElements(array, nullptr);
+    }
+    ~Array() { if (data != nullptr) env_->ReleaseIntArrayElements(array_, data, JNI_ABORT); }
+    Array(const Array&) = delete;
+    Array& operator=(const Array&) = delete;
+};
+class Monitor {
+    JNIEnv* env_;
+    jobject canceled_;
+    jobject progress_;
+    jmethodID cancel_method_ = nullptr;
+    jmethodID progress_method_ = nullptr;
+public:
+    Monitor(JNIEnv* env, jobject canceled, jobject progress)
+        : env_(env), canceled_(canceled), progress_(progress) {
+        if (canceled != nullptr) {
+            jclass clazz = env->GetObjectClass(canceled);
+            if (clazz != nullptr) {
+                cancel_method_ = env->GetMethodID(clazz, "getAsBoolean", "()Z");
+                env->DeleteLocalRef(clazz);
+            }
+        }
+        if (!env->ExceptionCheck() && progress != nullptr) {
+            jclass clazz = env->GetObjectClass(progress);
+            if (clazz != nullptr) {
+                progress_method_ = env->GetMethodID(clazz, "accept", "(J)V");
+                env->DeleteLocalRef(clazz);
+            }
+        }
+    }
+    bool check() {
+        if (env_->ExceptionCheck()) return false;
+        if (canceled_ != nullptr && env_->CallBooleanMethod(canceled_, cancel_method_))
+            fail(env_, "java/util/concurrent/CancellationException", "patternizer canceled");
+        return !env_->ExceptionCheck();
+    }
+    bool progress(jlong work) {
+        // Match the Java oracle: deliver progress before the final cancellation poll.
+        // A pending JNI exception still forbids invoking another Java callback.
+        if (env_->ExceptionCheck()) return false;
+        if (progress_ != nullptr) env_->CallVoidMethod(progress_, progress_method_, work);
+        return check();
+    }
+};
+bool valid(JNIEnv* env, const Array& array, Monitor& monitor) {
+    jint previous = -1;
+    for (jsize i = 0; i < array.size; i++) {
+        if ((i & 4095) == 0 && !monitor.check()) return false;
+        if (array.data[i] <= previous) {
+            fail(env, "java/lang/IllegalArgumentException", "posting must be sorted unique nonnegative");
+            return false;
+        }
+        previous = array.data[i];
+    }
+    return true;
+}
+}
+extern "C" JNIEXPORT jint JNICALL
+Java_com_synexia_rewrite_pattern_M3PatternizerJoins_abi(JNIEnv*, jclass) { return 1; }
+
+extern "C" JNIEXPORT jintArray JNICALL
+Java_com_synexia_rewrite_pattern_M3PatternizerJoins_intersect0(
+        JNIEnv* env, jclass, jintArray left, jintArray right, jobject canceled, jobject progress) {
+    Monitor monitor(env, canceled, progress);
+    // nativeBackend already performs the entry cancellation poll in Java.
+    // Preserve callback observations; only guard constructor/JNI failures here.
+    if (env->ExceptionCheck()) return nullptr;
+    Array a(env, left);
+    if (env->ExceptionCheck() || (a.size != 0 && a.data == nullptr)) return nullptr;
+    if (!valid(env, a, monitor)) return nullptr;
+    Array b(env, right);
+    if (env->ExceptionCheck() || (b.size != 0 && b.data == nullptr)) return nullptr;
+    if (!valid(env, b, monitor)) return nullptr;
+    try {
+        std::vector<jint> result;
+        result.reserve(static_cast<std::size_t>(std::min(a.size, b.size)));
+        jsize i = 0, j = 0;
+        jlong work = 0;
+        while (i < a.size && j < b.size) {
+            if ((work++ & 4095) == 0 && !monitor.check()) return nullptr;
+            if (a.data[i] < b.data[j]) ++i;
+            else if (a.data[i] > b.data[j]) ++j;
+            else { result.push_back(a.data[i++]); ++j; }
+        }
+        if (!monitor.progress(work)) return nullptr;
+        jintArray out = env->NewIntArray(static_cast<jsize>(result.size()));
+        if (out != nullptr && !result.empty())
+            env->SetIntArrayRegion(out, 0, static_cast<jsize>(result.size()), result.data());
+        return env->ExceptionCheck() ? nullptr : out;
+    } catch (const std::bad_alloc&) {
+        fail(env, "java/lang/OutOfMemoryError", "pattern join allocation");
+    } catch (...) {
+        fail(env, "java/lang/IllegalStateException", "native pattern join failed");
+    }
+    return nullptr;
+}

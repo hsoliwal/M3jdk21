@@ -1,0 +1,8 @@
+Synexia callback parity authoring/proof intake
+Canonical owner: hsoliwal/com.synexia
+Source work: Synexia PR #9526; unchanged Java oracle and Java proof drivers.
+The native postimage fixes only callback checkpoints relative to the Java oracle.
+These first-party source/proof files retain their Apache-2.0 SPDX headers.
+M3JDK21's existing m3/LICENSE and m3/NOTICE remain applicable and are not replaced.
+No third-party solution/editorial body or JDK runtime source is included.
+This intake does not change OpenJDK licensing or grant runtime admission.
