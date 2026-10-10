@@ -66,6 +66,12 @@ final class M3SynexiaRecipeHomePolicyTest {
                 "MIGRATION_RESIDUE_NOT_CANONICAL",
                 rows.get("m3/tooling/migration-recipes/src/main/java/com/synexia/**")[4]);
 
+        String[] collectionReceiver = rows.get("m3/collections/recipe/**");
+        assertNotNull(collectionReceiver);
+        assertEquals("TARGET_PRODUCT_ADAPTER", collectionReceiver[4]);
+        assertEquals("com.synexia.rewrite.M3CollectionLanes", collectionReceiver[5]);
+        assertEquals("true", collectionReceiver[7]);
+
         assertEquals(
                 "com.synexia:synexia-m3index-jdk-bridge",
                 rows.get("m3/ports/**")[5]);
