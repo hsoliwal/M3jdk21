@@ -143,6 +143,23 @@ must be supplied under its exact revision and license custody. No network
 download is performed by the exporter, and no claim is made that a bulk corpus
 has been checked into this public JDK repository.
 
+## Proper-name donor boundary
+
+Synexia remains the canonical source owner for the proper-name family. The
+current reviewed Synexia source manifest does not contain a proper-name source
+path or record-identity contract, so no proper-name rows are admitted or
+renumbered by this export.
+
+The pinned OpenHinglish repository
+(`shankarmishra/openhinglish@0019fe84d1e98c4eaaed6e3a8d21a63b21ab90ea`)
+is recorded in `m3/ports/precompute/DONOR_REVIEW.tsv` as a reference-only
+donor for gazetteer shape and fixture ideas. Its repository code and declared
+current data are MIT, but that does not establish Synexia source identity,
+coverage, language scope, or an M3JDK mapping contract. Its rows therefore are
+not copied into the M3LEX image. A future admission requires an explicit
+Synexia proper-name snapshot, source pin, mapping fields, precompute owner, and
+license/provenance proof before the source manifest can grow.
+
 ## Proof
 
 ```text
