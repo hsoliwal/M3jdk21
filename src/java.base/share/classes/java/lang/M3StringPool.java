@@ -401,6 +401,13 @@ final class M3StringPool {
         Objects.requireNonNull(right, "right");
         if (left.length() == 0) return right;
         if (right.length() == 0) return left;
+        // M3's no-copy DAG can reach the String logical-length limit without allocating
+        // an equally large byte array. Preserve the JDK's size-failure exception
+        // instead of letting Math.addExact in the tuple/adjacent-range paths leak
+        // ArithmeticException when the resulting String cannot have an int length.
+        if ((long) left.length() + right.length() > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("Required length exceeds implementation limit");
+        }
         if (left.owner() == right.owner() && left.end() == right.start()) {
             return M3String.range(
                     left.owner(), left.start(), Math.addExact(left.length(), right.length()));
