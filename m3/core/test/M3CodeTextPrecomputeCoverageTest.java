@@ -159,7 +159,7 @@ public final class M3CodeTextPrecomputeCoverageTest {
 
     private static void checkNativeReceipt(
             Path receipt, Path nativeContract, Path nativeBridge) throws Exception {
-        final String nativeHead = "f446bc7f9978aca24103cfab0220500d265e41ab";
+        final String nativeHead = "ff3329e06763820930f98d5d30123b1c37a44b34";
         final String nativeBlob = "34f247f4f2b74862997d6e82f2938b4310bbc5a2";
         final String targetBlob = "b2e00337be3be4fbe83452b88ec6fe336646475f";
         String contract = Files.readString(nativeContract, StandardCharsets.UTF_8);
@@ -201,6 +201,7 @@ public final class M3CodeTextPrecomputeCoverageTest {
                         && columns[13].contains(
                                 "Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange")
                         && columns[13].contains("M3_CODE_TEXT_NATIVE_BRIDGE_PASS")
+                        && columns[13].contains("M3_CODE_TEXT_NATIVE_BRIDGE_NATIVE_PASS loaded=true")
                         && columns[13].contains("host Java fallback authoritative"),
                 "native JNI receipt drift");
     }
