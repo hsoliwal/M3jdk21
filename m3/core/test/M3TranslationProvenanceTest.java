@@ -10,7 +10,7 @@ public final class M3TranslationProvenanceTest {
     private static final String SOURCE_REVISION =
             "64a2ea61c73b548413fed6686a9daeeb0b9b0564";
     private static final String SOURCE_BLOB_SHA =
-            "bb72c00e36f1835d824a34ab398b1fe5aadb1cb3";
+            "6e5193209c821c3dd50b5b959ca2c1ac58e0a3ac";
     private static int checks;
 
     private static void check(boolean value) {
