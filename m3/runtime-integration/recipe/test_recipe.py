@@ -34,7 +34,7 @@ class RecipeTest(unittest.TestCase):
     def test_manifest_is_upstream_to_master_v2(self):
         self.assertEqual("M3_RUNTIME_INTEGRATION_RECIPE_V2", manifest["schema"])
         self.assertEqual(manifest["base_commit"], manifest["upstream_commit"])
-        self.assertEqual(66, len(manifest["files"]))
+        self.assertEqual(67, len(manifest["files"]))
         for name, hashes in manifest["files"].items():
             self.assertIsNotNone(hashes["after"], name)
             superseded = hashes.get("superseded", [])

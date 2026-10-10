@@ -1,0 +1,4 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3String.java	24ac1f87c1b2022b08d695ae6b116e9376dad59ed0ffb86f52da0003dd3e036d	9f51f5ef71c86e0f98a6e0ad7d1efbb24df49a43b2a026ef55457cdc921cba08	00-M3String.java.txt
+src/java.base/share/classes/java/lang/M3StringMixedCompare.java	ABSENT	57c50151826d2b1e04964a0a573cfd4046e868637dec8f3d428c9b8e33762697	01-M3StringMixedCompare.java.txt
+test/jdk/java/lang/String/M3StringMixedCompareTest.java	ABSENT	58d33c622b08994034378ff9c38488bd14a679cf302ab9e1a5c0555182c63108	02-M3StringMixedCompareTest.java.txt

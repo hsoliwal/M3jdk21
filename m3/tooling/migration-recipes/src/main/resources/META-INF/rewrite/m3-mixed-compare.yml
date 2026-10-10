@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.MixedCompare
+displayName: M3JDK21 mixed-side String comparisons over bulk-read windows
+description: >-
+  Consumers with one M3 side (equals verification in M3String.contentEquals, String.compareTo,
+  CASE_INSENSITIVE_ORDER/compareToIgnoreCase, regionMatches(ignoreCase)/equalsIgnoreCase) compared
+  unit by unit through owner dispatch, 3x..139x slower than two flat Strings. The new
+  java.lang.M3StringMixedCompare reads both sides through bulk getChars windows (the A8 scan shape),
+  decides equality and ordering with ArraysSupport.mismatch and mirrors the stock coder-dependent
+  case rules exactly (per-unit rule when either side is Latin-1, code-point rule when both are
+  UTF-16); below 16 units the direct unit loop stays. M3String.factsIfPrepared(begin, end) finds a
+  recorded range fact without allocating the range, so the A9 ASCII fold gate covers prepared
+  sub-ranges. Java step: M3String, the new M3StringMixedCompare, the jtreg proof; text step:
+  String.java (Javadoc the pinned Java parser cannot parse). Stacks on crate m3-pool-bounds as
+  re-applied on master (its postimages are these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-mixed-compare
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-mixed-compare

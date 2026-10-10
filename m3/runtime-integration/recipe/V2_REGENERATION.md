@@ -57,3 +57,7 @@ Regenerated after `M3StringFacts.java` and `String.java` changed (`target_commit
 ## 2026-10-09 re-seal (A8 fused facts scan, A9 equality gates, A6 pool bounds re-applied on master)
 
 The three leaves had reached master only as zero-file superset merges (62153d40f3f, 9660212fce), so their owner and receiver commits were cherry-picked onto master and the binary `M3String.join(String, String)` made refusal-safe (`target_commit` 3c3d66694a). Upstream files stay strictly sealed: the `String.java` and `StringConcatHelper.java` after-images and their `runtime.patch` hunks were regenerated from a synthetic tree (v2 after-state of the other 64 targets plus those two files from the target), so every other hunk is byte-identical to the previous seal. The M3-owned `M3String.java`, `M3StringFacts.java` and `M3StringPool.java` keep their v2 after-images and record the new owners as reviewed `superseded` hashes (`JNI_SUPERSESSION.md`). 66 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-09 re-seal (A10 mixed-side comparison windows)
+
+Regenerated against 1b68815ddb: `java/lang/M3StringMixedCompare.java` joins the scope (67 targets, `before` null, recorded as its own `superseded` owner per the supersession rule); the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); the M3-owned `M3String.java` keeps its v2 after-image and records the new owner as a reviewed `superseded` hash. `apply.py --check` state=superseded; `test_recipe.py` 6/6 (target count 67).
