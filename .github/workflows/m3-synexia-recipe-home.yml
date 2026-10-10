@@ -5,8 +5,13 @@ on:
   push:
     branches:
       - "m3/synexia-consumer-only-*"
+      - "m3/synexia-canonical-recipe-residue-freeze-*"
     paths:
       - "m3/compatibility/synexia-recipe-home-policy.tsv"
+      - "m3/compatibility/synexia-canonical-residue-gitblobs.tsv"
+      - "m3/docs/synexia-recipe-ownership-classification.tsv"
+      - "m3/docs/M3JDK_SYNEXIA_PORTING_INVARIANT.md"
+      - "m3/docs/m3jdk-synexia-porting-policy.tsv"
       - "m3/compatibility/synexia-a3-regex-memory-recipe-receipt-20261008.tsv"
       - "m3/compatibility/test_synexia_a3_regex_memory_receipt.py"
       - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
@@ -67,6 +72,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Checkout canonical Synexia recipe workspace
+        uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/com.synexia
+          ref: develop
+          path: .canonical-synexia
+          fetch-depth: 1
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -94,4 +106,19 @@ jobs:
           mvn -B -ntp
           -f m3/tooling/migration-recipes/pom.xml
           -Dtest=M3SynexiaRecipeHomePolicyTest
+          test
+      - name: Install canonical Synexia OpenRewrite artifact
+        working-directory: .canonical-synexia
+        run: >
+          mvn -B -ntp
+          -pl synexia-openrewrite-recipes -am
+          -DskipTests
+          install
+      - name: Prove M3JDK21 consumers without copied Synexia main sources
+        run: >
+          mvn -B -ntp
+          -f m3/tooling/migration-recipes/pom.xml
+          -P m3-synexia-consumer-retirement-proof
+          -Dtest=M3SynexiaCanonicalRecipeConsumerTest,M3SynexiaScopeKernelConsumerTest,M3SynexiaSemanticFingerprintConsumerTest,M3SynexiaRecipeHomePolicyTest
+          -Dsurefire.failIfNoSpecifiedTests=false
           test
