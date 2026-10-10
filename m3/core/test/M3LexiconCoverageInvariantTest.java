@@ -64,6 +64,10 @@ public final class M3LexiconCoverageInvariantTest {
             "SharedLexiconPrecomputeCatalog.TranslationIdentity",
             "AcronymPrecompute");
 
+    private static final Set<String> REQUIRED_RELATION_SOURCES = Set.of(
+            "dictlang.antonyms",
+            "dictlang.thesaurus");
+
     private static final Set<String> REQUIRED_LANGDEX_IDENTITY_FIELDS = Set.of(
             "langdex_source_id",
             "langdex_record_id",
@@ -88,6 +92,7 @@ public final class M3LexiconCoverageInvariantTest {
         Path numberTargetMap = Path.of("lexicon", "synexia-number-target-map.tsv");
         Path acronymTargetMap = Path.of("lexicon", "synexia-acronym-target-map.tsv");
         Path instanceTargetMap = Path.of("lexicon", "synexia-instance-target-map.tsv");
+        Path relationTargetMap = Path.of("lexicon", "synexia-related-lexeme-target-map.tsv");
         Set<String> sourceIds = firstColumn(sourceManifest);
         Set<String> mappedFamilies = mappedFamilies(fieldMap);
         Set<String> mappedPayloadFields = mappedPayloadFields(fieldMap);
@@ -97,6 +102,8 @@ public final class M3LexiconCoverageInvariantTest {
         Set<String> numberTargets = numberTargetRows(numberTargetMap);
         Set<String> acronymTargets = acronymTargetRows(acronymTargetMap);
         Set<String> instanceTargets = instanceTargetRows(instanceTargetMap);
+        Set<String> sourceRelationMappings = sourceRelationMappings(sourceManifest);
+        Set<String> relationTargets = relationTargetRows(relationTargetMap);
 
         check(sourceIds.containsAll(REQUIRED_SOURCE_IDS),
                 "source manifest is missing admitted families: "
@@ -113,6 +120,13 @@ public final class M3LexiconCoverageInvariantTest {
         check(mappedLangDexIdentityFields.containsAll(REQUIRED_LANGDEX_IDENTITY_FIELDS),
                 "LangDex identity map is missing canonical fields: "
                         + difference(REQUIRED_LANGDEX_IDENTITY_FIELDS, mappedLangDexIdentityFields));
+        check(sourceRelationMappings.containsAll(Set.of(
+                "dictlang.antonyms\tlexeme,related_lexeme",
+                "dictlang.thesaurus\tlexeme,related_lexeme")),
+                "source relation mappings are incomplete");
+        check(relationTargets.contains("dictlang.antonyms\tcom.m3.text.SharedRelatedLexemeCatalog\tADMITTED_TYPED_RELATION_SIDECAR")
+                        && relationTargets.contains("dictlang.thesaurus\tcom.m3.text.SharedRelatedLexemeCatalog\tADMITTED_TYPED_RELATION_SIDECAR"),
+                "related-lexeme target map is incomplete");
         check(numberTargets.contains("dictlang.numbers.0-10000\tcom.m3.text.M3NumberSpace\tADMITTED_TYPED_RECEIVER"),
                 "number target map is not admitted to M3NumberSpace");
         check(acronymTargets.contains("dictlang.acronyms\tM3LexiconPrecompute.AcronymPrecompute\tSTAGED_PROVEN\t40"),
@@ -126,7 +140,8 @@ public final class M3LexiconCoverageInvariantTest {
                 + " typed_families=" + REQUIRED_TYPED_FAMILIES.size()
                 + " payload_fields=" + requiredPayloadFields.size()
                 + " langdex_identity_fields=" + REQUIRED_LANGDEX_IDENTITY_FIELDS.size()
-                + " target_maps=3");
+                + " target_maps=4"
+                + " relation_sources=" + REQUIRED_RELATION_SOURCES.size());
     }
 
     private static Set<String> firstColumn(Path path) throws Exception {
@@ -205,6 +220,39 @@ public final class M3LexiconCoverageInvariantTest {
                 throw new AssertionError("invalid LangDex identity-map row: " + line);
             }
             values.add(fields[3]);
+        }
+        return values;
+    }
+
+    private static Set<String> sourceRelationMappings(Path path) throws Exception {
+        Set<String> values = new HashSet<>();
+        for (String line : Files.readAllLines(path, StandardCharsets.UTF_8)) {
+            if (line.isBlank() || line.startsWith("source_id\t")) {
+                continue;
+            }
+            String[] fields = line.split("\\t", -1);
+            if (fields.length >= 5 && REQUIRED_RELATION_SOURCES.contains(fields[0])) {
+                values.add(fields[0] + "\t" + fields[4]);
+            }
+        }
+        return values;
+    }
+
+    private static Set<String> relationTargetRows(Path path) throws Exception {
+        Set<String> values = new HashSet<>();
+        for (String line : Files.readAllLines(path, StandardCharsets.UTF_8)) {
+            if (line.isBlank() || line.startsWith("schema\t")) {
+                continue;
+            }
+            String[] fields = line.split("\\t", -1);
+            if (fields.length < 8
+                    || !REQUIRED_RELATION_SOURCES.contains(fields[1])
+                    || !fields[3].equals("lexeme,related_lexeme")
+                    || !fields[5].startsWith("directed-")
+                    || !fields[7].equals("ADMITTED_TYPED_RELATION_SIDECAR")) {
+                throw new AssertionError("invalid relation target row: " + line);
+            }
+            values.add(fields[1] + "\t" + fields[4] + "\t" + fields[7]);
         }
         return values;
     }
