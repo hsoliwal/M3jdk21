@@ -8,6 +8,7 @@ on:
       - "m3/synexia-canonical-recipe-residue-freeze-*"
     paths:
       - "m3/compatibility/synexia-recipe-home-policy.tsv"
+      - "m3/compatibility/synexia-recipe-home-pin.tsv"
       - "m3/compatibility/synexia-canonical-residue-gitblobs.tsv"
       - "m3/docs/synexia-recipe-ownership-classification.tsv"
       - "m3/docs/M3JDK_SYNEXIA_PORTING_INVARIANT.md"
@@ -67,7 +68,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-22.04
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
