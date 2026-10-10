@@ -46,7 +46,7 @@ public final class M3NumberSpaceContractTest {
         String[] columns = row.split("\\t", -1);
         check(columns.length == 9);
         check(columns[0].equals(M3NumberSpace.SOURCE_ID));
-        check(columns[3].equals(M3NumberSpace.SOURCE_REVISION));
+        check(columns[3].equals(M3NumberSpace.RECORD_ID));
         check(columns[8].equals(
                 "source_id,record_id,min_value,max_value,precomputed_value_count,"
                         + "shared_utf16_storage,canonical_decimal_spelling,source_revision"));
