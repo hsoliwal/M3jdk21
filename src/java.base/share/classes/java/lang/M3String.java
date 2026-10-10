@@ -175,32 +175,23 @@ final class M3String implements CharSequence {
         return M3StringPool.concat(left, right);
     }
 
-    /** The composition, or {@code null} when the pool refuses a flat part (the caller stays flat). */
+    /**
+     * General array join without a linear staging list or per-reduction-level ArrayLists.
+     *
+     * <p>The existing admission/refusal helper still handles one source at a time, in the
+     * original iteration order. Nonempty pieces enter the same adjacent pairwise reduction,
+     * with O(log N) temporary M3 references rather than O(N) temporary references.</p>
+     */
     static M3String join(String[] parts) {
         Objects.requireNonNull(parts, "parts");
-        ArrayList<M3String> level = new ArrayList<>(parts.length);
+        if (parts.length == 0) return EMPTY;
+        M3String[] levels =
+                new M3String[Integer.SIZE - Integer.numberOfLeadingZeros(parts.length)];
         for (String part : parts) {
-            String checked = Objects.requireNonNull(part, "part");
-            M3String storage = checked.m3();
-            if (storage == null && checked.length() != 0) {
-                // Legacy/bootstrap wrapper stays flat. Admit its immutable spelling into the
-                // canonical M3 owner only for this composition; do not attach duplicate storage
-                // back to the old String object.
-                storage = M3String.admit(checked.value(), checked.coder());
-                if (storage == null) return null;
-            }
-            if (storage != null && storage.length() != 0) level.add(storage);
+            Objects.requireNonNull(part, "part");
+            if (!joinAddDesignated(levels, part)) return null;
         }
-        if (level.isEmpty()) return EMPTY;
-        while (level.size() > 1) {
-            ArrayList<M3String> next = new ArrayList<>((level.size() + 1) >>> 1);
-            for (int index = 0; index < level.size(); index += 2) {
-                if (index + 1 == level.size()) next.add(level.get(index));
-                else next.add(M3StringPool.concat(level.get(index), level.get(index + 1)));
-            }
-            level = next;
-        }
-        return level.getFirst();
+        return foldJoinLevels(levels);
     }
 
     /**
@@ -279,18 +270,42 @@ final class M3String implements CharSequence {
         return admit(checked.value(), checked.coder());
     }
 
+    /**
+     * Reduces the already-canonical value sequence without allocating an ArrayList per level.
+     * Explicit EMPTY values still occupy leaves of the historical pairwise geometry.
+     */
     private static M3String joinValues(ArrayList<M3String> values) {
         if (values.isEmpty()) return EMPTY;
-        ArrayList<M3String> level = values;
-        while (level.size() > 1) {
-            ArrayList<M3String> next = new ArrayList<>((level.size() + 1) >>> 1);
-            for (int index = 0; index < level.size(); index += 2) {
-                if (index + 1 == level.size()) next.add(level.get(index));
-                else next.add(M3StringPool.concat(level.get(index), level.get(index + 1)));
+        if (values.size() == 1) return values.getFirst();
+        M3String[] levels =
+                new M3String[Integer.SIZE - Integer.numberOfLeadingZeros(values.size())];
+        for (M3String value : values) {
+            M3String carry = Objects.requireNonNull(value, "M3 join value");
+            boolean placed = false;
+            for (int level = 0; level < levels.length; level++) {
+                M3String previous = levels[level];
+                if (previous == null) {
+                    levels[level] = carry;
+                    placed = true;
+                    break;
+                }
+                levels[level] = null;
+                carry = M3StringPool.concat(previous, carry);
             }
-            level = next;
+            if (!placed) throw new InternalError("M3 join value carry level exhausted");
         }
-        return level.getFirst();
+        return foldJoinLevels(levels);
+    }
+
+    /** High adjacent groups fold over the low remainder: the original pairwise tree order. */
+    private static M3String foldJoinLevels(M3String[] levels) {
+        M3String result = EMPTY;
+        for (M3String value : levels) {
+            if (value != null) {
+                result = result.length() == 0 ? value : M3StringPool.concat(value, result);
+            }
+        }
+        return result;
     }
 
     static M3String sliceOf(String source, int beginIndex, int endIndex) {
