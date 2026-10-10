@@ -1,0 +1,44 @@
+name: M3 lexicon coverage gate
+
+on:
+  pull_request:
+    paths:
+      - "m3/core/test/M3LexiconCoverageInvariantTest.java"
+      - "m3/lexicon/**"
+      - ".github/workflows/m3-lexicon-coverage.yml"
+  push:
+    branches:
+      - develop
+    paths:
+      - "m3/core/test/M3LexiconCoverageInvariantTest.java"
+      - "m3/lexicon/**"
+      - ".github/workflows/m3-lexicon-coverage.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  lexicon-coverage:
+    name: M3LexiconCoverageInvariantTest
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Compile and run coverage invariant
+        working-directory: m3
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf build/lexicon-coverage-gate
+          mkdir -p build/lexicon-coverage-gate
+          javac --release 21 -d build/lexicon-coverage-gate \
+            core/test/M3LexiconCoverageInvariantTest.java
+          java -ea -cp build/lexicon-coverage-gate M3LexiconCoverageInvariantTest
