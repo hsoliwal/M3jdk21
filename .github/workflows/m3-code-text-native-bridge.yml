@@ -55,8 +55,17 @@ jobs:
           set -euo pipefail
           donor=m3/build/synexia-donor/synexia-indexstring/native
           mkdir -p m3/build/m3-code-text-native
-          gcc -std=c11 -Wall -Wextra -Wpedantic -fPIC -shared -O2             -I "$JAVA_HOME/include"             -I "$JAVA_HOME/include/linux"             -I "$donor/include"             "$donor/src/mindex_code_text_signal.c"             "$donor/src/mindex_code_text_signal_jni.c"             -o m3/build/m3-code-text-native/libsynexia_m3bridge.so
-          nm -D --defined-only m3/build/m3-code-text-native/libsynexia_m3bridge.so             | grep -Fx '0000000000000000 T Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange'             || nm -D --defined-only m3/build/m3-code-text-native/libsynexia_m3bridge.so             | grep -F 'Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange'
+          gcc -std=c11 -Wall -Wextra -Wpedantic -fPIC -shared -O2 \
+            -I "$JAVA_HOME/include" \
+            -I "$JAVA_HOME/include/linux" \
+            -I "$donor/include" \
+            "$donor/src/mindex_code_text_signal.c" \
+            "$donor/src/mindex_code_text_signal_jni.c" \
+            -o m3/build/m3-code-text-native/libsynexia_m3bridge.so
+          nm -D --defined-only m3/build/m3-code-text-native/libsynexia_m3bridge.so \
+            | grep -Fx '0000000000000000 T Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange' \
+            || nm -D --defined-only m3/build/m3-code-text-native/libsynexia_m3bridge.so \
+            | grep -F 'Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange'
 
       - name: Compile patched java.base bridge
         shell: bash
@@ -86,7 +95,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          java             -Dm3.code.text.native.path="$PWD/m3/build/m3-code-text-native/libsynexia_m3bridge.so"             -Dm3.code.text.native.required=true             -Dm3.code.text.native.verify=true             --patch-module java.base=m3/build/m3-code-text-native-bridge             -ea java.lang.M3CodeTextNativeBridgeNativeTest
+          java \
+            -Dm3.code.text.native.path="$PWD/m3/build/m3-code-text-native/libsynexia_m3bridge.so" \
+            -Dm3.code.text.native.required=true \
+            -Dm3.code.text.native.verify=true \
+            --patch-module java.base=m3/build/m3-code-text-native-bridge \
+            -ea java.lang.M3CodeTextNativeBridgeNativeTest
 
       - name: Run typed precomputed facts receiver proof
         shell: bash
