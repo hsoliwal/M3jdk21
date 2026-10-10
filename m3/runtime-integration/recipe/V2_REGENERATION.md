@@ -173,3 +173,7 @@ Regenerated against 969a4a3f89: no upstream target changed, so `runtime.patch` a
 ## 2026-10-10 re-seal (A42 flat-needle trigram gate)
 
 Regenerated against 795dea8392: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3String.java` and `M3StringSearchPrecompute.java` record their new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-10 re-seal (A43 reverse needle stock lane)
+
+Regenerated against c9593deb36: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3StringSearchPrecompute.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
