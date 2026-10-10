@@ -68,6 +68,8 @@ public final class M3LexiconPrecompute {
             this.sourceFingerprint = text(sourceFingerprint, "sourceFingerprint");
             this.sourceRevision = provenance(sourceRevision, "sourceRevision");
             this.sourceBlobSha = provenance(sourceBlobSha, "sourceBlobSha");
+            if (UNPINNED.equals(this.sourceRevision) != UNPINNED.equals(this.sourceBlobSha))
+                throw new IllegalArgumentException("source provenance must be both pinned or both UNPINNED");
             Objects.requireNonNull(translatedTokenIds, "translatedTokenIds");
             this.translatedTokenIds = translatedTokenIds.clone();
             for (int tokenId : this.translatedTokenIds) nonNegative(tokenId, "translated token id");

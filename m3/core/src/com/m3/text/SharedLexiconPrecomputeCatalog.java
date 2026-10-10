@@ -42,6 +42,8 @@ public final class SharedLexiconPrecomputeCatalog {
             sourceFingerprint = text(sourceFingerprint, "sourceFingerprint");
             sourceRevision = provenance(sourceRevision, "sourceRevision");
             sourceBlobSha = provenance(sourceBlobSha, "sourceBlobSha");
+            if (UNPINNED.equals(sourceRevision) != UNPINNED.equals(sourceBlobSha))
+                throw new IllegalArgumentException("source provenance must be both pinned or both UNPINNED");
         }
 
         private static String provenance(String value, String name) {
