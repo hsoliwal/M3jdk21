@@ -1,0 +1,37 @@
+{
+  "schema": "M3_RECEIVER_OWNERSHIP_HANDOFF_V1",
+  "license": "Apache-2.0",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalRevision": "bd27bedcba51274c6db5a0bc4688f804fa8627a4",
+  "recipe": "com.synexia.m3.ReceiverOwnership20261010",
+  "recipePath": "synexia-openrewrite-recipes/tasks/receiver-ownership-20261010",
+  "artifactRoot": "0f90e3086d7d672627ee2015dde7acabce4d38ffde5bd6e9822a27f87dc47b56",
+  "targetPreimageRevision": "b35890adcbcbe3b3a5f0e4e3dcf3ee4d1417ea4a",
+  "targetPath": "m3/docs/synexia-recipe-ownership-classification.tsv",
+  "beforeSha256": "38f7773137614f7855cf6b5c5a923c3a2f3481e6b472ada81d3666bb0ae59da9",
+  "afterSha256": "9fdbbd54c70e90aba9caae801a4cf2b5412b036df360726e6776b618f8be22a7",
+  "evidencePath": "synexia-openrewrite-recipes/tasks/receiver-ownership-20261010/evidence/qualified/receipt.json",
+  "evidenceSha256": "69479841b9b0a98a98cb8de0f5f479365e2928115fd6167ae85ff1199c9cc410",
+  "recipeJUnit": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "receiverExitCode": 0,
+  "receiverJavaFiles": 46,
+  "existingRowsPreserved": 41,
+  "newRows": 5,
+  "negativeControlsRejected": 10,
+  "unchangedInputFiles": 48,
+  "checkerUnchanged": true,
+  "scope": "Complete com/m3/rewrite Java namespace ownership classification only; no source or runtime change.",
+  "namingMapDisposition": "EXCLUDED: existing target classes are classified under the existing policy; no type, package, symbol, API or runtime ownership change.",
+  "remainingGates": [
+    "Import inventory and frozen source custody",
+    "Full Synexia and M3JDK21 reactors",
+    "Matched JDK build/jtreg/runtime acceptance",
+    "Hosted CI at delivered heads"
+  ]
+}
