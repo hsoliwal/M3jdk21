@@ -49,7 +49,7 @@ jobs:
             src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java \
             src/java.base/share/classes/java/lang/M3CodeTextNativeContract.java \
             src/java.base/share/classes/java/lang/M3CodeTextNativeBridge.java \
-            m3/core/test/java/lang/M3CodeTextNativeBridgeTest.java
+            m3/core/test/java/lang/M3CodeTextNativeBridgeTest.java \
             m3/core/test/java/lang/M3CodeTextFactsReceiverTest.java
 
       - name: Run host-Java fallback and validation proof
