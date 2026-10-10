@@ -1,0 +1,39 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FACTS_SCAN_LATIN1_INPLACE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-facts-scan-latin1-inplace-20261009",
+    "pullRequest": 9995,
+    "commit": "6ae1cd6f994075d78b6ab9c70a00842a3ccc9112",
+    "declarativeRecipe": "com.synexia.m3.FactsScanLatin1InPlace",
+    "crate": "m3-facts-scan-latin1-inplace",
+    "recipeDescriptorBlob": "24d0413b6895cf2373d71000c7f79ba2aa8ce453",
+    "license": "Apache-2.0 recipe/provenance; target source remains GPLv2 with Classpath exception",
+    "disposition": "TARGET_OWNED_PORT_HASH_PINNED"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "basePullRequest": 548,
+    "baseHead": "cbdedfd9cbd018157a928913da5830c63dfed8f6",
+    "owner": "java.lang.M3StringFacts",
+    "beforeSha256": "0958aadf5ea5536af742a17b97ab0c97af4bb5989fca0f77863a3b286688437e",
+    "afterSha256": "9907798a24d16560394c7e44cfcab1e453c027298d1b47a12f752de49c0c2087",
+    "publicJdkApiChange": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "semanticContract": [
+    "A15 M3StringFacts values remain bit-identical",
+    "scanLatin1 allocates one owner-sized byte scratch instead of two",
+    "all raw-byte-dependent facts are captured before in-place case folding",
+    "the same scratch is folded lower then upper for vectorized polynomial hashes",
+    "UTF-16 owners and scanUnits are unchanged",
+    "A15 M3StringFactsLatin1LaneTest remains the semantic oracle"
+  ],
+  "gates": {
+    "sourceInvariant": "A16 one-scratch and no-folded-buffer checks added to check-m3string-invariants.py",
+    "semanticOracle": "test/jdk/java/lang/String/M3StringFactsLatin1LaneTest.java",
+    "flagOnDifferential": "PENDING_LINUX",
+    "ci": "PENDING_CI"
+  }
+}

@@ -140,6 +140,7 @@ final class M3StringFacts {
         if (length == 0) return scanUnits(value);
         byte[] bytes = new byte[length];
         value.getBytes(bytes, 0, 0, String.LATIN1, length);
+
         int positives = StringCoding.countPositives(bytes, 0, length);
         boolean ascii = positives == length;
         int utf8 = length;
@@ -147,19 +148,9 @@ final class M3StringFacts {
             if (bytes[index] < 0) utf8++;
         }
         int hash = ArraysSupport.vectorizedHashCode(bytes, 0, length, 0, ArraysSupport.T_BOOLEAN);
-        byte[] folded = new byte[length];
-        for (int index = 0; index < length; index++) {
-            int unit = bytes[index] & 0xff;
-            folded[index] = (byte) (unit >= 'A' && unit <= 'Z' ? unit | 0x20 : unit);
-        }
-        int lowerHash = ArraysSupport.vectorizedHashCode(folded, 0, length, 0, ArraysSupport.T_BOOLEAN);
-        for (int index = 0; index < length; index++) {
-            int unit = bytes[index] & 0xff;
-            folded[index] = (byte) (unit >= 'a' && unit <= 'z' ? unit & ~0x20 : unit);
-        }
-        int upperHash = ArraysSupport.vectorizedHashCode(folded, 0, length, 0, ArraysSupport.T_BOOLEAN);
+
         char first = (char) (bytes[0] & 0xff);
-        int titleHash = lowerHash + pow31(length - 1) * (asciiUpper(first) - asciiLower(first));
+        char last = (char) (bytes[length - 1] & 0xff);
         long signal = 0L;
         long bigrams = 0L;
         long trigrams = 0L;
@@ -175,6 +166,7 @@ final class M3StringFacts {
             previous2 = previous1;
             previous1 = unit;
         }
+
         long prefix = 0L;
         for (int index = 0; index < Math.min(4, length); index++) {
             prefix |= (long) (bytes[index] & 0xff) << (48 - (index << 4));
@@ -183,6 +175,7 @@ final class M3StringFacts {
         for (int index = Math.max(0, length - 4); index < length; index++) {
             suffix = (suffix << 16) | (bytes[index] & 0xff);
         }
+
         int trimStart = 0;
         while (trimStart < length && (bytes[trimStart] & 0xff) <= ' ') trimStart++;
         int trimEnd = length;
@@ -191,6 +184,21 @@ final class M3StringFacts {
         while (stripStart < length && LATIN1_WHITESPACE[bytes[stripStart] & 0xff]) stripStart++;
         int stripEnd = length;
         while (stripEnd > 0 && LATIN1_WHITESPACE[bytes[stripEnd - 1] & 0xff]) stripEnd--;
+
+        // Every fact that depends on the original spelling is captured above. Reuse the one
+        // owner-sized scratch array for both ASCII case-folded polynomial hashes.
+        for (int index = 0; index < length; index++) {
+            int unit = bytes[index] & 0xff;
+            bytes[index] = (byte) (unit >= 'A' && unit <= 'Z' ? unit | 0x20 : unit);
+        }
+        int lowerHash = ArraysSupport.vectorizedHashCode(bytes, 0, length, 0, ArraysSupport.T_BOOLEAN);
+        for (int index = 0; index < length; index++) {
+            int unit = bytes[index] & 0xff;
+            bytes[index] = (byte) (unit >= 'a' && unit <= 'z' ? unit & ~0x20 : unit);
+        }
+        int upperHash = ArraysSupport.vectorizedHashCode(bytes, 0, length, 0, ArraysSupport.T_BOOLEAN);
+        int titleHash = lowerHash + pow31(length - 1) * (asciiUpper(first) - asciiLower(first));
+
         return new M3StringFacts(
                 length,
                 utf8,
@@ -199,7 +207,7 @@ final class M3StringFacts {
                 hash,
                 pow31(length),
                 first,
-                (char) (bytes[length - 1] & 0xff),
+                last,
                 signal,
                 ascii,
                 true,

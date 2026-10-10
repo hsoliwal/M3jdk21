@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "A16 recipe-first successor to A15; Synexia owns recipe/provenance, M3JDK21 owns runtime.",
+  "mappings": [
+    {
+      "source": "Synexia com.synexia.m3.FactsScanLatin1InPlace (PR #9995)",
+      "source_commit": "6ae1cd6f994075d78b6ab9c70a00842a3ccc9112",
+      "target": "java.lang.M3StringFacts.scanLatin1",
+      "status": "receiver-applied",
+      "target_rule": "capture every original-byte fact before mutation; reuse the sole owner-sized byte[] scratch for lower/upper ASCII hash folds; no second folded spelling buffer"
+    }
+  ]
+}
