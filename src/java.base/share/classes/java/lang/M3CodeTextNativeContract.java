@@ -16,11 +16,11 @@ final class M3CodeTextNativeContract {
     static final String SOURCE_REPOSITORY = "hsoliwal/com.synexia";
     static final int SOURCE_PULL_REQUEST = 10124;
     static final String SOURCE_HEAD =
-            "4a9897b9327c26e348ff78fd40731f5bfdcbe473";
+            "f446bc7f9978aca24103cfab0220500d265e41ab";
     static final String SOURCE_PATH =
             "synexia-indexstring/native/src/mindex_code_text_signal_jni.c";
     static final String SOURCE_BLOB =
-            "152b0c2b4062e5a83afafcdc06106ab874cf40e5";
+            "34f247f4f2b74862997d6e82f2938b4310bbc5a2";
     static final String COMPANION_SIGNAL_BLOB =
             "27b6f34ab44b00e82ec814660f249f0b6bfd7cbd";
     static final String COMPANION_HEADER_BLOB =
@@ -32,6 +32,13 @@ final class M3CodeTextNativeContract {
     static final String JNI_DESCRIPTOR = "([C[I[III)[J";
     static final String JNI_EXPORT =
             "Java_com_synexia_indexstring_JniMIndexCodeTextSignalBatch_nativeAnalyzeRange";
+
+    static final String TARGET_JNI_OWNER =
+            "java.lang.M3CodeTextNativeBridge";
+    static final String TARGET_JNI_METHOD = "nativeAnalyzeRange";
+    static final String TARGET_JNI_DESCRIPTOR = "([C[I[III)[J";
+    static final String TARGET_JNI_EXPORT =
+            "Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange";
 
     private M3CodeTextNativeContract() {}
 
