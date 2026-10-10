@@ -137,3 +137,7 @@ Regenerated against bbf344e829: no upstream target changed, so `runtime.patch` a
 ## 2026-10-09 re-seal (A33 graded bulk windows)
 
 Regenerated against 0f48926fc3: the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); the M3-owned `M3String.java`, `M3StringAtom.java`, `M3StringMixedCompare.java`, `M3StringPositionPrecompute.java` keep their v2 after-images and record the new owner as reviewed `superseded` hashes. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-10 re-seal (A34 trigram facts on the repeat use)
+
+Regenerated against b4748064de: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3StringSearchPrecompute.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
