@@ -49,3 +49,13 @@ jobs:
             core/src/com/m3/text/M3NumberSpace.java \
             core/test/M3NumberSpaceContractTest.java
           java -ea -cp build/lexicon-coverage-gate M3NumberSpaceContractTest
+
+      - name: Compile and run M3StringFacts receiver contract
+        working-directory: m3
+        shell: bash
+        run: |
+          set -euo pipefail
+          javac --release 21 -d build/lexicon-coverage-gate \
+            core/src/com/m3/text/M3StringFacts.java \
+            core/test/M3StringFactsContractTest.java
+          java -ea -cp build/lexicon-coverage-gate M3StringFactsContractTest
