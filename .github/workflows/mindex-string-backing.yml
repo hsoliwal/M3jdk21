@@ -96,6 +96,8 @@ jobs:
         run: python3 m3/runtime-integration/check-m3string-history-recovery.py
       - name: Check compiler concat reference DAG
         run: python3 m3/runtime-integration/check-m3string-concat-reference-dag.py
+      - name: Check independent M3 String concat differential
+        run: python3 m3/runtime-integration/check-m3string-concat-differential.py
       - name: Check bounded M3 String code-point geometry
         run: python3 m3/runtime-integration/check-m3string-codepoint-geometry.py
       - name: Check conservative literal String.matches receiver
