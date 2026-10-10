@@ -153,12 +153,17 @@ by this export.
 A typed receiver contract does exist in the pending current-base M3JDK
 chain: PR #634 (M3InstanceIndexPrecompute and
 m3/lexicon/synexia-instance-index-contract.tsv), facade PR #635, and custody
-receipt PR #641; PRs #629/#630 are their older predecessors. Those changes
-preserve UTF-8 instance names, normalization-version/source identity, instance
-types, metadata, frozen concept coordinates, reverse lookup, and separation
-from lexical token identity, but their contract-only/payload-not-bundled and
-hosted-admission boundaries remain in force. This provenance PR does not claim
-those pending PRs are merged or runtime-admitted.
+receipt PR #641; PRs #629/#630 are their older predecessors. Its canonical
+Synexia source contract is the local `synexia-unicodex` instance-index-v1
+surface: `src/main/cpp/include/synexia/instance_index_v1.hpp`,
+`src/main/cpp/src/instance_index_v1.cpp`,
+`src/main/cpp/docs/UNICODEX_INSTANCE_INDEX_V1.md`, and
+`src/main/cpp/docs/UNICODEX_SOURCE_INSTANCE_V1.md`. Those contracts preserve
+UTF-8 instance names, normalization-version/source identity, instance types,
+metadata, frozen concept coordinates, reverse lookup, and separation from
+lexical token identity. The receiver remains contract-only and payload-not-
+bundled; no source revision or runtime admission is claimed by this provenance
+PR.
 
 The pinned OpenHinglish repository
 (shankarmishra/openhinglish@0019fe84d1e98c4eaaed6e3a8d21a63b21ab90ea)
