@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3StringMixedCompare.java	4bbe774e2ca28f81c87d6f71a07b4ec9084952ef82dbca846f7912be4ef5ff8e	75cf291849a592f6a4b756d1f612a37e7060d28deb38ff33e5afac295c2cb87f	00-M3StringMixedCompare.java.txt
+test/jdk/java/lang/String/M3IgnoreCaseInPlaceTest.java	ABSENT	596aac29da95ba32a913622f2112c4ef34097df18ffb919d9e7c6e25d4f1fae9	01-M3IgnoreCaseInPlaceTest.java.txt

@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.IgnoreCaseInPlace
+displayName: M3JDK21 case-insensitive compare with a flat side read in place
+description: >-
+  compareToIgnoreCase and CASE_INSENSITIVE_ORDER with an M3 side copied both sides into fresh
+  arrays per bulk window (a flat side through Arrays.copyOfRange) and handed them to the stock
+  compareToCI family, where regionMatches(ignoreCase) read the flat side in place: an equal
+  2048-unit Latin-1 flat copy cost 489 ns against an atom and 265 flat, a 16384-unit one 8,570
+  against 3,862. M3StringMixedCompare.compareIgnoreCase now reads a flat side in place and an M3
+  side through one transient window per side reused across the scan; in both ignore-case lanes
+  two sides of one coder skip their equal prefix through the mismatch intrinsic before the stock
+  regionMatchesCI rule (a low surrogate at the first differing unit folds from the high surrogate
+  before it, as stock does); only the first window that differs is copied, exact-length, for the
+  stock compareToCI word; a window of two UTF-16 sides is cut where neither side has a surrogate
+  pair across it (A28 cut back once and could split the other side's pair). Java step:
+  M3StringMixedCompare and the jtreg proof; no upstream file changed. Stacks on crate m3-block-signal-256 (branch order); the M3StringMixedCompare preimage
+  is the m3-graded-windows (A33) postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ignorecase-in-place
