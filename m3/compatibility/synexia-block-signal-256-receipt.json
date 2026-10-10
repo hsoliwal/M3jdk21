@@ -1,0 +1,90 @@
+{
+  "schema": "M3JDK21_SYNEXIA_BLOCK_SIGNAL_256_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 tests",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-block-signal-256-20261010",
+    "pullRequest": null,
+    "commit": "5aeb69782a07db3a4460cb98942d450d402e4ad7",
+    "stackedOn": [
+      {
+        "pullRequest": 10144,
+        "crate": "m3-codepoint-count-repeat"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.BlockSignal256",
+    "crate": "m3-block-signal-256",
+    "fossReuseDecisionRow": "string.search.block-signal-256",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+        "commit": "6c8f071fb6",
+        "target": "java.lang.M3StringPositionPrecompute.blockSignal / signalWord / signalBits / Blocks / maximumRetainedPrimitiveBytes",
+        "mechanics": "four signal words per block in the existing AtomicLongArray lane; a unit's word and its two bit positions from one mixer; every word published with bit 0 set, all four stored together; the walks mask the unit's word as before"
+      },
+      {
+        "path": "test/jdk/java/lang/String/M3StringPositionInvariant6Test.java",
+        "commit": "6c8f071fb6",
+        "target": "the invariant-6 guard's retained-bytes ceiling",
+        "mechanics": "counts four signal words per block"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same index as the flat String for every unit over every source; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-codepoint-count-repeat-20261010 (#664, A39) on #663 on #662 on #661 on #660 on #657 on #654 on #653 on #610 on #609 on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringPositionPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3StringPositionPrecompute.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+      "before": "20858764e4b2ba848f96a6ff09f37d00eed1408d57d8d286e8edf388e9e3c7be",
+      "after": "ce7f4e9d6c1f64238d9af85bb05a6cfdf6f6354ccde87d6b31e486b4b3966d04",
+      "resource": "00-M3StringPositionPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3BlockSignalTest.java",
+      "before": "ABSENT",
+      "after": "35d2a5c84dbb553f54ffeb4b406c68a31d1feb5cce0157452879dc087f797d38",
+      "resource": "01-M3BlockSignalTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringPositionInvariant6Test.java",
+      "before": "12fa3fe9da681ceded6bb06215665ffa052d99c24ae6ecd891b553ba270d989d",
+      "after": "437343e1c8b53b66d1760d39f3354c36c06ee14e13582a37156c4ac4f464874b",
+      "resource": "02-M3StringPositionInvariant6Test.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3BlockSignalTest flag-off: 68,520 checks (indexOf(char), indexOf(char, from), indexOf(char, begin, end), lastIndexOf(char) and lastIndexOf(char, from) with twenty units per text, the first, the last, a middle, sixteen random present or absent units of either coder and an absent control unit, over atoms, tuples and slices of texts over a sparse alphabet, a dense ASCII alphabet, the full Latin-1 range, a CJK-mixed and a dense BMP alphabet, of 0..40000 units on both sides of the 256..32768 block band, each search run three times; against the flat String on every call); M3StringPositionInvariant6Test 13 checks with the new ceiling",
+    "regressions": "PASS_WINDOWS M3StringPositionInvariant6Test 13 (new ceiling); M3CodePointCountRepeatTest 14,004; M3ReverseLaneTest 350,200; M3CharDenseLinearTest 62,120; M3NeedlePlanBandTest 122,823; M3NeedleLaneTest 997,980; M3TrigramRepeatTest 13,068; M3NeedleArgTest 73,440; M3RegexLiteralGateTest 29,376; M3TQFactsBuildTest 23,595; M3StringM3OnM3Test 121,574; M3IndexOfFlatNeedleTest 137,948; M3RegexSubjectViewTest 9,567; M3GradedWindowsTest 56,591; M3CharSearchRepeatTest 25,380; M3CharSearchWindowsTest 61,650; M3StringLiteralSplitTest 53,378; M3MixedCoderCompareTest 30,620; M3ContentEqualsTest 7,980; M3IgnoreCaseWindowsTest 188,512; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,926; A6 204 + 29",
+    "timing": "flag-off (a37/probe/CharSearchBench and a38/probe/ReverseSearchBench, the minimum of three runs per build, a40/probe/char-a39-r*.tsv and rev-a39-r*.tsv on the A39 build vs char-a40-r*.tsv and rev-a40-r*.tsv on this one, char-compare-min3.txt and rev-compare-min3.txt; hot, blocks built; flat in parentheses): indexOf(char miss) over 2048 dense ASCII units, atom 308 ns -> 61 (27), tuple 331 -> 53, the control unit 205 -> 66 and 309 -> 70; lastIndexOf(char miss) 2048 dense ASCII 274 -> 61 (791), tuple 320 -> 50; 16384 dense ASCII indexOf 984 -> 370 (192), tuple 1,028 -> 378, lastIndexOf 731 -> 425 (6,404), tuple 995 -> 306; CJK-mixed 2048 with the control unit 175 -> 74 (55), tuple 268 -> 79, lastIndexOf 189 -> 71, tuple 294 -> 66; CJK-mixed 16384 with the control unit 1,611 -> 440 (363), tuple 4,355 -> 410, lastIndexOf 2,775 -> 440 (2,167), tuple 2,662 -> 438, a unit only at index 0 1,376 -> 461 and 2,406 -> 584; dense BMP 256 56 -> 18 (8), tuple 90 -> 18; dense BMP 2048 292 -> 120 (53), tuple 468 -> 149, lastIndexOf 326 -> 114, a unit only at index 0 631 -> 171; dense BMP 16384 the control unit 1,880 -> 885 (799), lastIndexOf 2,081 -> 1,580, a unit only at index 0 3,239 -> 1,078; sparse letter text costs the two-hash bit choice per call and the units the new words happen to pass: 256 units 12 -> 16 (10), 2048 units 40 -> 66 (27) and the control unit 35 -> 59, 16384 units 289 -> 393 (218) and lastIndexOf of an absent unit 257 -> 977 for an atom (the tuple 264 -> 351); hits and frequent units unchanged",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3StringPositionPrecompute.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3BlockSignal256RecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3BlockSignalTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the signal is still conservative: a block passes a unit only when both of the unit's bits are set, and every unit of the block sets its two bits, so no occurrence is ever missed; a false pass costs the exact-mask lookup, as before",
+    "the bits are unfolded: the whole-String facts fold A..Z onto a..z so that case-insensitive gates can share them, which costs the position index selectivity for nothing; the walks are exact; confining a unit's two bits to one word partitions the alphabet over four 63-bit filters, which rejects more than one 255-bit filter would",
+    "four words per block cost 32 bytes per 64 units, 0.5 bytes per unit, against the 8 bytes per 64 units before; the retained-bytes ceiling grows accordingly and the invariant-6 guard test pins the new figure",
+    "every word of a published signal carries bit 0, so each word stands on its own and a block test reads exactly one word, as the 64-bit signal did; two threads publishing the same block write identical words",
+    "the A37/A38 hand-off rule stays as the guard for alphabets dense enough to pass through 255 bits too; with the wider signal it fires far less often",
+    "stacked on A39: merge after #664 and the Synexia crate PR (#10144 first, content-bearing merges); the owner commit is f056c35077"
+  ]
+}
