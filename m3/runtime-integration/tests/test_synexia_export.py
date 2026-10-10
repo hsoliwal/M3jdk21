@@ -220,7 +220,7 @@ class SynexiaExportTest(unittest.TestCase):
     def test_reviewed_source_manifest_has_explicit_owner_field_coverage(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
         self.assertEqual(10, len(sources))
-        self.assertEqual(12, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
+        self.assertEqual(13, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
         self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
@@ -260,7 +260,7 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertTrue(all(field_types.values()))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
                           "dictlang.thesaurus", "dictlang.antonyms"):
-            required = set(sources[source_id]["precompute_fields"].split(","))
+            required = {field for field in sources[source_id]["precompute_fields"].split(",") if field}
             self.assertTrue(required.issubset(mapped), source_id)
 
     def test_langdex_owner_payload_round_trips_with_admitted_shapes(self):
