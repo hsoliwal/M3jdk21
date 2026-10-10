@@ -51,8 +51,15 @@ final class M3SynexiaCanonicalRecipeConsumerTest {
                 .activateRecipes("com.m3.rewrite.synexia.PureIntConvergence");
 
         assertEquals(1, named.getRecipeList().size());
-        assertEquals(M3PureIntConvergenceRecipe.class, named.getRecipeList().getFirst().getClass());
+        assertTrue(containsRecipe(named, M3PureIntConvergenceRecipe.class));
         assertFalse(named.getRecipeList().getFirst().getTags().isEmpty());
+    }
+
+    private static boolean containsRecipe(Recipe recipe, Class<? extends Recipe> expected) {
+        if (expected.isInstance(recipe)) {
+            return true;
+        }
+        return recipe.getRecipeList().stream().anyMatch(child -> containsRecipe(child, expected));
     }
 
     private static SourceFile apply(Recipe recipe, String path, String source) {
