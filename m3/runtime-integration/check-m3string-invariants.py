@@ -877,13 +877,20 @@ if literal_start < 0 or literal_end < 0:
 literal_atom = m3[literal_start:literal_end]
 for marker in [
     "static boolean isLiteralRegexReplacement(String regex, String replacement)",
-    "Character.isSurrogate(unit)",
     "if (found < 0) return original;",
     "return new String(replaceMatches(target, canonicalize(replacement), found, firstOnly));",
     "found = !firstOnly && cursor <= length() - checkedTarget.length()",
 ]:
     if marker not in literal_atom:
         fail(f"indexed literal replacement owner lost guard/composition: {marker}")
+regex_start = m3.find("    static boolean isLiteralRegex(String regex)")
+regex_end = m3.find("    static boolean isLiteralRegexReplacement(", regex_start)
+if regex_start < 0 or regex_end < 0:
+    fail("literal regex predicate owner atom is absent")
+regex_atom = m3[regex_start:regex_end]
+if "Character.isSurrogate(unit)" not in regex_atom:
+    fail("literal regex predicate lost surrogate guard")
+
 for marker in [
     "Pattern.compile(regex).matcher(this).replaceFirst(replacement)",
     "Pattern.compile(regex).matcher(this).replaceAll(replacement)",
