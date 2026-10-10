@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FactsScanLatin1
+displayName: M3JDK21 Latin-1 facts folded from one bulk-read byte array
+description: >-
+  M3StringFacts.scan, the precompute itself, folded every fact over widened char windows at
+  8..10 ns per unit. Latin-1 owners now take scanLatin1: bytes read once in bulk, the polynomial
+  hashes from ArraysSupport.vectorizedHashCode over raw and case-folded bytes, the title hash
+  derived exactly from the lower hash, ascii and the UTF-8 length from StringCoding.countPositives,
+  trim and strip bounds from front and back scans over a Character.isWhitespace table, no
+  surrogate logic, and only the n-gram signal mixing still folds every unit; every fact stays
+  bit-identical to the retained unit scan (scanUnits), which UTF-16 owners keep. Java step only:
+  M3StringFacts and the jtreg proof. Stacks on crate m3-encode-bulk-units.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-facts-scan-latin1

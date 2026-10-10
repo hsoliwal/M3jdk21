@@ -77,3 +77,13 @@ Regenerated against 2e2cda5dc9: no upstream target changed, so `runtime.patch` a
 ## 2026-10-09 re-seal (A14 window search over M3 haystacks)
 
 Regenerated against b6e7b3cd47: `java/lang/M3StringWindowSearch.java` joins the scope (68 targets, `before` null, recorded as its own `superseded` owner); the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); the M3-owned `M3String.java` keeps its v2 after-image and records the new owner as a reviewed `superseded` hash. `apply.py --check` state=superseded; `test_recipe.py` 6/6 (target count 68).
+
+## 2026-10-09 integration re-seal (A14 window search + A15 Latin-1 facts)
+
+This integration branch stacks A15 on the A14 owner without modifying either sibling PR.
+A14 remains the runtime-patch owner: 68 targets, `target_commit` `b6e7b3cd47`, and patch SHA-256
+`d7c658278bff60ff1003a7e90e75ed99acb95f48378324931ff5fba1907f55bc` stay unchanged.
+A15 changes only the M3-owned `java/lang/M3StringFacts.java`; its reviewed owner hash
+`0958aadf5ea5536af742a17b97ab0c97af4bb5989fca0f77863a3b286688437e` is appended to that
+target's `superseded` custody list. The A15 source/test, Synexia receipt, name mapping and
+hash-pinned recipe crate are carried unchanged. No A14 file or receipt is removed.
