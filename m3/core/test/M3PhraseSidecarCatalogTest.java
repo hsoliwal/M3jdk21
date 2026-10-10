@@ -40,7 +40,7 @@ public final class M3PhraseSidecarCatalogTest {
                     "phrases-1", "synexia-r1", "other")).isEmpty(), "foreign scope rejected");
 
             Files.writeString(root.resolve(M3PhraseSidecarCatalog.FILE_NAME),
-                    content.replace("1,2\\t8\\n", "1,2\\t8\\n1,2\\t9\\n"),
+                    content.replace("1,2\t8\n", "1,2\t8\n1,2\t9\n"),
                     StandardCharsets.UTF_8);
             expectIOException(() -> M3PhraseSidecarCatalog.open(root),
                     "duplicate rows rejected");
