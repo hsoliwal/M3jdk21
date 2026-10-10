@@ -114,7 +114,8 @@ final class M3StringSearchPrecompute {
             return true;
         }
         try {
-            return sourceFacts(source).containsAll(plan.trigrams);
+            M3TQ.Facts facts = sourceFacts(source);
+            return facts == null || facts.containsAll(plan.trigrams);
         } catch (OutOfMemoryError unavailable) {
             // Exact trigram facts are optional. KMP remains authoritative.
             return true;
@@ -123,9 +124,9 @@ final class M3StringSearchPrecompute {
 
     /**
      * The whole-String trigram facts of an M3-backed String inside the source band, computed
-     * once per owner and shared with the mixed indexOf paths (A18): {@code null} for a flat
-     * String, a length outside the band, or when the facts are unavailable, so the caller
-     * runs its exact search.
+     * on the repeat use of a source (A34) and shared with the mixed indexOf paths (A18):
+     * {@code null} for a flat String, a length outside the band, a first use, or when the facts
+     * are unavailable, so the caller runs its exact search.
      */
     static M3TQ.Facts trigramFacts(String text) {
         M3String source = text.m3();
@@ -141,6 +142,12 @@ final class M3StringSearchPrecompute {
         }
     }
 
+    /**
+     * The trigram facts of a source used before, or {@code null} when this use should run its
+     * exact search (A34): a first use registers the source without facts, the next use of the
+     * same source builds them, so a source searched once never pays the facts and a source
+     * searched again pays them once. A source that keeps losing its cache slot keeps scanning.
+     */
     private static M3TQ.Facts sourceFacts(M3String source) {
         M3StringOwner owner = source.owner();
         long coordinate = source.coordinate();
@@ -150,18 +157,20 @@ final class M3StringSearchPrecompute {
                 && entry.owner.get() == owner
                 && entry.coordinate == coordinate
                 && entry.utf16Length == source.length()) {
-            return entry.facts;
+            if (entry.facts != null) return entry.facts;
+            M3TQ.Facts facts = M3TQ.precompute(source, MAX_TRIGRAM_SOURCE_UNITS);
+            SOURCE_CACHE.set(slot, new SourceEntry(entry.owner, coordinate, source.length(), facts));
+            return facts;
         }
 
-        M3TQ.Facts facts = M3TQ.precompute(source, MAX_TRIGRAM_SOURCE_UNITS);
         SOURCE_CACHE.set(
                 slot,
                 new SourceEntry(
                         new WeakReference<>(owner),
                         coordinate,
                         source.length(),
-                        facts));
-        return facts;
+                        null));
+        return null;
     }
 
     static int indexOf(
