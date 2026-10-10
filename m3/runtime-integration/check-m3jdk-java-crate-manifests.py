@@ -38,7 +38,7 @@ def fail(message: str) -> None:
 def valid_java_path(value: str) -> bool:
     if (
         not value.endswith(".java")
-        or "\" in value
+        or "\\" in value
         or len(value) > 4096
         or not value.startswith(JAVA_PREFIXES)
         or any(part in {".", ".."} or not PART.fullmatch(part)
