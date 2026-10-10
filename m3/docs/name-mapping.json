@@ -8020,7 +8020,8 @@
       "target_owners": [
         "jdk.internal.vm.parallel.BulkTask",
         "jdk.internal.vm.parallel.BulkExecutor",
-        "jdk.internal.vm.parallel.BulkExecution"
+        "jdk.internal.vm.parallel.BulkExecution",
+        "com.m3.tornado.Rv32iBulkExecutorAdapter"
       ],
       "rule": "Reviewed operation identity plus bounded work geometry; arbitrary Runnable is not accelerator admission; providers stay outside java.base and accelerated admission requires provider-specific proof including CPU parity where applicable."
     }
