@@ -43,11 +43,12 @@ public class M3StringPositionInvariant6Test {
             check(type.isPrimitive() || type == java.lang.ref.WeakReference.class || type == blocks,
                     "entry lane " + field);
         }
-        // The published retained maximum counts one byte plus one long per source unit.
+        // The published retained maximum counts four signal words per block (A40) and one byte
+        // plus one long per source unit.
         Method maximum = precompute.getDeclaredMethod("maximumRetainedPrimitiveBytes");
         maximum.setAccessible(true);
-        long slots = 64, maxUnits = 32_768, blocks64 = (maxUnits + 63) >>> 6;
-        long expected = slots * blocks64 * Long.BYTES + slots * maxUnits * (Byte.BYTES + Long.BYTES);
+        long slots = 64, maxUnits = 32_768, blocks64 = (maxUnits + 63) >>> 6, signalWords = 4;
+        long expected = slots * blocks64 * Long.BYTES * signalWords + slots * maxUnits * (Byte.BYTES + Long.BYTES);
         check(expected == (long) maximum.invoke(null), "maximumRetainedPrimitiveBytes " + maximum.invoke(null));
         System.out.println("M3StringPositionInvariant6Test checks=" + checks + " lanes=" + lanes);
     }

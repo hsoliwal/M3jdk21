@@ -14,9 +14,10 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 /**
  * Separately bounded position precompute for BMP code-unit search.
  *
- * <p>Each 64-code-unit source block stores the same conservative two-bit code-unit signal used by
- * {@link M3StringFacts}. Negative block tests may skip exact work; positive blocks always perform
- * exact UTF-16 comparison. Entries weakly key canonical owner+coordinate and retain only primitive
+ * <p>Each 64-code-unit source block stores a conservative 256-bit code-unit signal in four words:
+ * a unit sets two bits inside the one word its hash picks, so a block test reads one word (A40;
+ * the whole-String facts keep their 64-bit signal). Negative block tests may skip exact work;
+ * positive blocks always perform exact UTF-16 comparison. Entries weakly key canonical owner+coordinate and retain only primitive
  * block masks: an exact block keys each mask by the block-relative offset of a unit's first
  * occurrence and reads that unit back from the canonical text, so no code unit is stored twice
  * (invariant 6: no second spelling store).</p>
@@ -29,12 +30,18 @@ final class M3StringPositionPrecompute {
      * Lookups a forward walk may make before it judges its signals (A37): a walk that has looked
      * into this many blocks and found the signal passing in at least half of the blocks it walked
      * is paying a lookup through the canonical text per block, more than the vectorized forward
-     * scan costs per block, and hands the rest of its range to the linear lane. The two-bit-per-
-     * unit signals pass almost every unit on a dense alphabet, and pass a given unit on most
-     * blocks of a mid-density one when its bits fall among the alphabet's. The reverse walk hands
-     * off the same way (A38): its lane tests each window with the forward intrinsic.
+     * scan costs per block, and hands the rest of its range to the linear lane. A signal passes
+     * a unit when both its bits fall among the block's, which grows likelier with the block's
+     * alphabet (two bits per unit in one of four 63-bit words since A40, in 64 bits before). The
+     * reverse walk hands off the same way (A38): its lane tests each window with the forward
+     * intrinsic.
      */
     private static final int DENSE_LOOKUPS = 8;
+    /** Words of 64 bits in a block signal (A40). */
+    private static final int SIGNAL_WORDS = 4;
+    private static final int SIGNAL_SHIFT = 2;
+    /** Bit 0 of every word of a published signal is set; units set bits 1..63 of their word. */
+    private static final long SIGNAL_PUBLISHED = 1L;
 
     private static final int SLOTS = 64;
     private static final int SLOT_MASK = SLOTS - 1;
@@ -61,7 +68,8 @@ final class M3StringPositionPrecompute {
             return linearIndexOf(source, unit, from, end);
         }
 
-        long required = M3StringFacts.codeUnitSignal(unit);
+        int word = signalWord(unit);
+        long required = signalBits(unit);
         int index = from;
         int walked = 0;
         int lookups = 0;
@@ -69,7 +77,7 @@ final class M3StringPositionPrecompute {
             int block = index >>> BLOCK_SHIFT;
             int blockEnd = Math.min(end, (block + 1) << BLOCK_SHIFT);
             walked++;
-            if ((blockSignal(source, blocks, block) & required) != required) {
+            if ((blockSignal(source, blocks, block, word) & required) != required) {
                 index = blockEnd;
                 continue;
             }
@@ -111,7 +119,8 @@ final class M3StringPositionPrecompute {
             return linearLastIndexOf(source, unit, from);
         }
 
-        long required = M3StringFacts.codeUnitSignal(unit);
+        int word = signalWord(unit);
+        long required = signalBits(unit);
         int index = from;
         int walked = 0;
         int lookups = 0;
@@ -119,7 +128,7 @@ final class M3StringPositionPrecompute {
             int block = index >>> BLOCK_SHIFT;
             int blockStart = block << BLOCK_SHIFT;
             walked++;
-            if ((blockSignal(source, blocks, block) & required) != required) {
+            if ((blockSignal(source, blocks, block, word) & required) != required) {
                 index = blockStart - 1;
                 continue;
             }
@@ -148,7 +157,7 @@ final class M3StringPositionPrecompute {
     static long maximumRetainedPrimitiveBytes() {
         long blocksPerEntry =
                 (MAX_SOURCE_UNITS + BLOCK_MASK) >>> BLOCK_SHIFT;
-        long signalBytes = (long) SLOTS * blocksPerEntry * Long.BYTES;
+        long signalBytes = (long) SLOTS * blocksPerEntry * Long.BYTES * SIGNAL_WORDS;
         long exactBytes =
                 (long) SLOTS * MAX_SOURCE_UNITS * (Byte.BYTES + Long.BYTES);
         return Math.addExact(signalBytes, exactBytes);
@@ -189,25 +198,53 @@ final class M3StringPositionPrecompute {
         return null;
     }
 
-    private static long blockSignal(M3String source, Blocks blocks, int block) {
-        long current = blocks.signals.get(block);
+    /**
+     * The {@code word}-th signal word of {@code block} (A40), published on first use together
+     * with the block's other words: every word of a published signal carries bit 0, so a word
+     * read as zero is unpublished.
+     */
+    private static long blockSignal(M3String source, Blocks blocks, int block, int word) {
+        int at = (block << SIGNAL_SHIFT) + word;
+        long current = blocks.signals.get(at);
         if (current != 0L) return current;
 
         int start = block << BLOCK_SHIFT;
         int end = Math.min(source.length(), start + BLOCK_SIZE);
         char[] scratch = new char[end - start];
         source.getChars(start, end, scratch, 0);
-        long computed = 0L;
+        long[] words = new long[SIGNAL_WORDS];
+        Arrays.fill(words, SIGNAL_PUBLISHED);
         for (char unit : scratch) {
-            computed |= M3StringFacts.codeUnitSignal(unit);
+            words[signalWord(unit)] |= signalBits(unit);
         }
-        if (computed == 0L) {
-            throw new InternalError("M3 position block produced empty signal");
+        // Two publishers of one block compute the same words; every word stands on its own.
+        int base = block << SIGNAL_SHIFT;
+        for (int index = 0; index < SIGNAL_WORDS; index++) {
+            blocks.signals.set(base + index, words[index]);
         }
-        if (blocks.signals.compareAndSet(block, 0L, computed)) {
-            return computed;
-        }
-        return blocks.signals.get(block);
+        return words[word];
+    }
+
+    /** The word, 0..3, a unit's two signal bits live in (A40). */
+    private static int signalWord(char unit) {
+        return mix32(unit) & (SIGNAL_WORDS - 1);
+    }
+
+    /** The two bits, in 1..63 of the unit's word, a unit sets in a block signal (A40). */
+    private static long signalBits(char unit) {
+        int mixed = mix32(unit);
+        int first = 1 + ((mixed >>> 2) & 0xffff) % 63;
+        int second = 1 + ((mixed >>> 18) & 0x3fff) % 63;
+        return (1L << first) | (1L << second);
+    }
+
+    private static int mix32(int value) {
+        int mixed = value;
+        mixed ^= mixed >>> 16;
+        mixed *= 0x7feb352d;
+        mixed ^= mixed >>> 15;
+        mixed *= 0x846ca68b;
+        return mixed ^ (mixed >>> 16);
     }
 
     private static ExactBlock exactBlock(M3String source, Blocks blocks, int block) {
@@ -317,7 +354,7 @@ final class M3StringPositionPrecompute {
         final AtomicReferenceArray<ExactBlock> exact;
 
         Blocks(int blockCount) {
-            this.signals = new AtomicLongArray(blockCount);
+            this.signals = new AtomicLongArray(blockCount << SIGNAL_SHIFT);
             this.exact = new AtomicReferenceArray<>(blockCount);
         }
     }
