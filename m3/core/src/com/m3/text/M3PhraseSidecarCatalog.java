@@ -29,8 +29,8 @@ public final class M3PhraseSidecarCatalog {
     public static final String SCHEMA_VERSION = M3PhrasePrecompute.SCHEMA_VERSION;
     public static final String FILE_NAME = "synexia.phrases.tsv";
     private static final String[] HEADER = {
-            "source_id", "record_id", "source_revision", "vocabulary_fingerprint",
-            "source_token_ids", "target_token_ids"
+            "schema_version", "source_id", "record_id", "source_revision",
+            "vocabulary_fingerprint", "source_token_ids", "target_token_ids"
     };
 
     private final Map<M3PhrasePrecompute.Scope, M3PhrasePrecompute.Catalog> catalogs;
@@ -76,14 +76,16 @@ public final class M3PhraseSidecarCatalog {
         for (int line = 1; line < last; line++) {
             String[] fields = lines[line].split("\\t", -1);
             if (fields.length != HEADER.length) throw new IOException("phrase field count mismatch");
-            String sourceId = required(fields[0], "source_id");
-            String recordId = required(fields[1], "record_id");
-            String revision = required(fields[2], "source_revision");
-            String vocabulary = required(fields[3], "vocabulary_fingerprint");
-            int[] source = intArray(fields[4], "source_token_ids");
+            if (!SCHEMA_VERSION.equals(fields[0]))
+                throw new IOException("phrase sidecar schema mismatch");
+            String sourceId = required(fields[1], "source_id");
+            String recordId = required(fields[2], "record_id");
+            String revision = required(fields[3], "source_revision");
+            String vocabulary = required(fields[4], "vocabulary_fingerprint");
+            int[] source = intArray(fields[5], "source_token_ids");
             if (source.length == 0) throw new IOException("source phrase must not be empty");
-            int[] target = intArray(fields[5], "target_token_ids");
-            List<String> key = List.of(sourceId, recordId, revision, vocabulary, fields[4]);
+            int[] target = intArray(fields[6], "target_token_ids");
+            List<String> key = List.of(sourceId, recordId, revision, vocabulary, fields[5]);
             if (previous != null && compare(previous, key) >= 0)
                 throw new IOException("phrase rows are not sorted and unique");
             previous = key;
