@@ -53,3 +53,7 @@ Regenerated after `M3StringPositionPrecompute.java` changed (65 targets; `target
 ## 2026-10-08 re-seal (A4 facts gates for mixed-side consumers)
 
 Regenerated after `M3StringFacts.java` and `String.java` changed (`target_commit` 0d0cc24b51). The same regeneration seals `java/lang/M3StringCodePointPrecompute.java`, an M3-token file that had joined master (code-point geometry receiver) without a re-seal: 66 targets; `test_recipe.py` now expects 66.
+
+## 2026-10-09 re-seal (A8 fused facts scan, A9 equality gates, A6 pool bounds re-applied on master)
+
+The three leaves had reached master only as zero-file superset merges (62153d40f3f, 9660212fce), so their owner and receiver commits were cherry-picked onto master and the binary `M3String.join(String, String)` made refusal-safe (`target_commit` 3c3d66694a). Upstream files stay strictly sealed: the `String.java` and `StringConcatHelper.java` after-images and their `runtime.patch` hunks were regenerated from a synthetic tree (v2 after-state of the other 64 targets plus those two files from the target), so every other hunk is byte-identical to the previous seal. The M3-owned `M3String.java`, `M3StringFacts.java` and `M3StringPool.java` keep their v2 after-images and record the new owners as reviewed `superseded` hashes (`JNI_SUPERSESSION.md`). 66 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.

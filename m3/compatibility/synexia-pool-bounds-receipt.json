@@ -1,0 +1,139 @@
+{
+  "schema": "M3JDK21_SYNEXIA_POOL_BOUNDS_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-pool-bounds-v2-20261009",
+    "pullRequest": 9951,
+    "commit": "32c1e256ac8",
+    "stackedOn": [
+      {
+        "pullRequest": 9932,
+        "crate": "m3-equality-gates"
+      },
+      {
+        "pullRequest": 9931,
+        "crate": "m3-facts-scan-fused"
+      },
+      {
+        "pullRequest": 9916,
+        "crate": "m3-facts-mixed-consumers"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.PoolBounds",
+    "crate": "m3-pool-bounds",
+    "fossReuseDecisionRow": "string.pool.bounds",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/nio/Bits.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringPool",
+        "mechanics": "reserveMemory shape adapted as tryReserve/reserveSlow: MaxDirectMemorySize-style budget (-Dm3.string.pool.maxBytes, default Runtime.maxMemory()) reserved by CAS before a local atom allocates; a miss drains the local reference queue, waits for reference processing, triggers one System.gc(), retries with 1+2+4+8 ms back-off, then refuses with null instead of throwing; a failed cycle arms a one-second hold-off"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+        "commit": "86c8a71d41",
+        "target": "java.lang.M3StringPool",
+        "mechanics": "retention cap -Dm3.string.pool.maxTuples (default 1,048,576 registered TupleRef entries; past it a composition forms its tuple without canonical retention); lexicon open/load failure reported once per VM on System.err under the class lock"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "commit": "86c8a71d41",
+        "target": "java.lang.M3String",
+        "mechanics": "join/joinDesignated/canonicalize return null on refusal; replaceFlatTarget/replaceAt/replaceLiteralRegex: the flat target drives the receiver's mixed-side search and never enters the pool"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "commit": "86c8a71d41",
+        "target": "java.lang.String",
+        "mechanics": "m3Replace locates the match before admitting anything (absent target keeps identity); replace/replaceAll/replaceFirst/join fall through to their flat compatibility paths on refusal"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringConcatHelper.java",
+        "commit": "86c8a71d41",
+        "target": "java.lang.StringConcatHelper",
+        "mechanics": "m3Concat folds pieces through m3Append and falls back to flatConcat (the stock one-array shape) when the pool refuses a piece"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: refusal never changes String semantics (lineage invariant 8); no new OutOfMemoryError path (A0.3 parity); JDK semantics unchanged",
+    "reapplied": {
+      "branch": "codex/m3-precompute-stack-reapply-20261009",
+      "commit": "adf21526919",
+      "note": "the original PR merges reached develop/master as zero-file superset merges; crate commits cherry-picked onto develop on 2026-10-09"
+    }
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/equality-gates-20261009 (A9, #501) on m3/facts-scan-fused-20261008 (A8, #499) on m3/facts-thick-20261008 (A4, #486) on master da6084c4ef",
+    "owners": [
+      "java.lang.M3StringPool",
+      "java.lang.M3String",
+      "java.lang.String",
+      "java.lang.StringConcatHelper"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed against c5bd7772ea: 66 targets, four after-images updated; apply.py --check state=after; test_recipe.py 8/8",
+    "reappliedBase": "master 5f68880c6f (A8 owner a37bf443f1, A9 owner c66aacba5f, A6 owner aec42c5a02, refusal-safe binary join 3c3d66694a); original base: m3/equality-gates-20261009 (A9, #501) on m3/facts-scan-fused-20261008 (A8, #499) on m3/facts-thick-20261008 (A4, #486) on master da6084c4ef"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "011fc704dde55f44d3980d5f21871d3b509e6d093dd6c20b27ec152101b6f663",
+      "after": "24ac1f87c1b2022b08d695ae6b116e9376dad59ed0ffb86f52da0003dd3e036d",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+      "before": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b",
+      "after": "10805981cf2e67607e134df4c1416a787d4c3523015e743ec3d52d47c0ed44f1",
+      "resource": "01-M3StringPool.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/StringConcatHelper.java",
+      "before": "1d41449dceb4350049689669bca5567e005d51e8440d2a88e81288d6a9f50ce7",
+      "after": "2d25592220f776f019b562f89d9386fbfe188cd3f873306c8ad971027e65d6e6",
+      "resource": "02-StringConcatHelper.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringPoolBoundsTest.java",
+      "before": "ABSENT",
+      "after": "7b45bad08d4ca21a904d69dd9b18f8e84b533ddacbaaf58052a09365411dd539",
+      "resource": "03-M3StringPoolBoundsTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "9582e2038c83735f3678ec972343ff3404bd4bf5386a26a755ae2bc911d35ad6",
+      "after": "c49e422dfe0e6b83a2d51155f0d36b5223719dfefd211a96313705bc3ee253ca",
+      "resource": "00-String.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base over the sealed M3 java.base subset (42 files, 149 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3StringPoolBoundsTest flag-off on the patched module: budget 16 MiB and tuple cap 64, 204 checks (bounds parsing; exact per-atom accounting and release through the local queue; refusal with null after the GC-assisted cycle, hold-off armed, held-off refusal untouched, oversized request refused, unit lane never refuses; the slow path reclaims a dropped atom and admits; tuple cap exact at 64 with correct uncanonical compositions and retention resuming after expunge; one System.err report for four lexicon failures; flat-target replacement admits nothing; with the budget exhausted canonicalize/join/joinDesignated refuse, m3Concat builds the flat one-array result, concat/join/replace/replaceAll keep their flat results); default budget 29 checks (refusal proofs skipped above 64 MiB headroom)",
+    "regressions": "PASS_WINDOWS A4 M3StringFactsMixedConsumersTest 90,118, A8 M3StringFactsScanWindowTest 329,909 and A9 M3StringMixedEqualityGatesTest 46,901 checks on the A6 module (the A9 count varies by GC timing: 46,912 and 46,920 on its own module)",
+    "g8RuntimeRecipe": "PASS_WINDOWS reseal 66 targets, four after-images; apply.py --check state=after; test_recipe.py 8/8",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3PoolBoundsRecipeTest 3/3 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3StringPoolBoundsTest under -XX:+UseM3StringStorage with the 16 MiB budget and tuple cap 64, and with the defaults; the public String.replace/join/concat refusal lanes run only with M3-backed receivers)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "budget default Runtime.maxMemory() mirrors MaxDirectMemorySize; 0 admits no multi-unit local atom; negative or unparsable values fall back; read from the saved properties once",
+    "bytes are reserved before the native allocation and handed back if the allocation throws; a bucket hit reserves nothing; the single-unit lane (at most 65,536 atoms, 128 KiB) is accounted but never refuses",
+    "back-pressure runs outside the bucket lock; the terminal step refuses with null (the String keeps its flat spelling) and never throws; a failed cycle arms a one-second hold-off so sustained pressure costs at most one GC-assisted cycle per second",
+    "tuple retention cap counts registered TupleRef entries (live or awaiting expunge) exactly; beyond it the composition is correct but not canonical",
+    "a lexicon failure is reported once per VM; the unavailable sentinel is kept so no retry happens per call",
+    "String.replace locates the match through the mixed-side search before admitting anything: an absent target keeps the receiver's identity, a flat target never enters the pool, only the replacement is admitted; every refusal falls through to the flat compatibility path with byte-identical results",
+    "no timing claim; stacked on A9: merge after #501, or regenerate the runtime re-seal"
+  ]
+}
