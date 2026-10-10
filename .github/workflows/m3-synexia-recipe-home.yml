@@ -133,6 +133,6 @@ jobs:
           mvn -B -ntp
           -f m3/tooling/migration-recipes/pom.xml
           -P m3-synexia-consumer-retirement-proof
-          -Dtest=M3SynexiaCanonicalRecipeConsumerTest,M3SynexiaCollectionLaneConsumerTest,M3SynexiaScopeKernelConsumerTest,M3SynexiaSemanticFingerprintConsumerTest,M3SynexiaRecipeHomePolicyTest
+          -Dtest=M3SynexiaCanonicalRecipeConsumerTest,M3SynexiaCollectionLaneConsumerTest,M3SynexiaHashPinnedConsumerTest,M3SynexiaScopeKernelConsumerTest,M3SynexiaSemanticFingerprintConsumerTest,M3SynexiaRecipeHomePolicyTest
           -Dsurefire.failIfNoSpecifiedTests=false
           test
