@@ -179,12 +179,16 @@ final class M3StringMixedCompare {
     }
 
     /**
-     * {@code CASE_INSENSITIVE_ORDER.compare(left, right)}: the stock {@code compareToCI} family over
-     * bulk windows of both sides in their own coders (A28); the coder pair picks the stock rule
-     * exactly as {@code String} does for two flat sides. Equal windows continue; the last word is
-     * the length difference, as stock. Two UTF-16 sides keep surrogate pairs inside one window and
-     * take their difference from windows that reach one unit past the shorter side, as the stock
-     * code-point rule does.
+     * {@code CASE_INSENSITIVE_ORDER.compare(left, right)}: the stock {@code regionMatchesCI} family
+     * over bulk windows of both sides in their own coders (A28), a flat side read in place and an
+     * M3 side through one transient window per side reused across the scan (A41; before, both
+     * sides were copied per window); two sides of one coder skip their equal prefix through the
+     * mismatch intrinsic first. Equal windows continue; the first window that differs is handed,
+     * as exact-length copies, to the stock {@code compareToCI} family, whose word is the stock
+     * one; the last word is the length difference, as stock. Two UTF-16 sides cut their windows
+     * where neither side has a surrogate pair across the cut ({@link #unsplitCut}) and take their
+     * difference from windows that reach one unit past the shorter side, as the stock code-point
+     * rule does.
      */
     static int compareIgnoreCase(String left, String right) {
         int leftLength = left.length();
@@ -193,27 +197,36 @@ final class M3StringMixedCompare {
         byte leftCoder = contentCoder(left);
         byte rightCoder = contentCoder(right);
         boolean codePoints = leftCoder == String.UTF16 && rightCoder == String.UTF16;
+        M3String leftM3 = left.m3();
+        M3String rightM3 = right.m3();
+        byte[] a = leftM3 == null ? left.value() : null;
+        byte[] b = rightM3 == null ? right.value() : null;
         for (int base = 0; base < limit; ) {
-            int count = M3String.windowUnits(base, limit - base);
-            byte[] a = window(left, base, count, leftCoder);
-            byte[] b = window(right, base, count, rightCoder);
-            if (codePoints) {
-                if (count < limit - base && (endsWithHighSurrogate(a) || endsWithHighSurrogate(b))) count--;
-                if (StringUTF16.regionMatchesCI(a, 0, b, 0, count)) {
-                    base += count;
-                    continue;
-                }
-                // The first difference lies in this window. The stock rule joins a surrogate pair
-                // within each side's own length, so across the end of the shorter side too: each
-                // side offers one unit more when it has one, and the difference is the stock one.
-                byte[] leftTail = window(left, base, Math.min(count + 1, leftLength - base), leftCoder);
-                byte[] rightTail = window(right, base, Math.min(count + 1, rightLength - base), rightCoder);
-                return StringUTF16.compareToCI(leftTail, rightTail);
+            int remaining = limit - base;
+            int count = M3String.windowUnits(base, remaining);
+            int fetch = codePoints && count < remaining ? count + 1 : count;
+            int aOffset = base;
+            int bOffset = base;
+            if (leftM3 != null) {
+                a = fill(leftM3, a, base, leftCoder, fetch);
+                aOffset = 0;
             }
-            int difference = leftCoder == rightCoder
-                    ? StringLatin1.compareToCI(a, b)
-                    : (leftCoder == String.LATIN1 ? StringLatin1.compareToCI_UTF16(a, b) : StringUTF16.compareToCI_Latin1(a, b));
-            if (difference != 0) return difference;
+            if (rightM3 != null) {
+                b = fill(rightM3, b, base, rightCoder, fetch);
+                bOffset = 0;
+            }
+            if (fetch > count) {
+                count = unsplitCut(a, aOffset, b, bOffset, count);
+                if (count == 0) {
+                    count = remaining;
+                    if (leftM3 != null) a = fill(leftM3, a, base, leftCoder, count);
+                    if (rightM3 != null) b = fill(rightM3, b, base, rightCoder, count);
+                }
+            }
+            if (!windowMatchesIgnoreCase(a, aOffset, leftCoder, b, bOffset, rightCoder, count)) {
+                int difference = windowDifferenceIgnoreCase(left, right, base, count, leftCoder, rightCoder, codePoints);
+                if (difference != 0) return difference;
+            }
             base += count;
         }
         return leftLength - rightLength;
@@ -222,8 +235,10 @@ final class M3StringMixedCompare {
     /**
      * {@code left.regionMatches(true, toffset, right, ooffset, len)} with the bounds checked: the
      * stock {@code regionMatchesCI} family over bulk windows (A28); a flat side is read in place,
-     * an M3 side through a transient window in its own coder. Two UTF-16 sides keep surrogate
-     * pairs inside one window, so the stock code-point rule sees every pair whole.
+     * an M3 side through one transient window reused across the scan in its own coder; two sides
+     * of one coder skip their equal prefix through the mismatch intrinsic first (A41). Two UTF-16
+     * sides cut their windows where neither side has a surrogate pair across the cut
+     * ({@link #unsplitCut}), so the stock code-point rule sees every pair whole.
      */
     static boolean regionMatchesIgnoreCase(String left, int toffset, String right, int ooffset,
             int len) {
@@ -235,35 +250,105 @@ final class M3StringMixedCompare {
         byte[] a = leftM3 == null ? left.value() : null;
         byte[] b = rightM3 == null ? right.value() : null;
         for (int base = 0; base < len; ) {
-            int count = M3String.windowUnits(base, len - base);
+            int remaining = len - base;
+            int count = M3String.windowUnits(base, remaining);
+            int fetch = codePoints && count < remaining ? count + 1 : count;
             int aOffset = toffset + base;
             int bOffset = ooffset + base;
             if (leftM3 != null) {
-                if (a == null || a.length < count << leftCoder) a = new byte[count << leftCoder];
-                leftM3.getBytes(a, aOffset, 0, leftCoder, count);
+                a = fill(leftM3, a, aOffset, leftCoder, fetch);
                 aOffset = 0;
             }
             if (rightM3 != null) {
-                if (b == null || b.length < count << rightCoder) b = new byte[count << rightCoder];
-                rightM3.getBytes(b, bOffset, 0, rightCoder, count);
+                b = fill(rightM3, b, bOffset, rightCoder, fetch);
                 bOffset = 0;
             }
-            if (codePoints && count < len - base
-                    && (Character.isHighSurrogate(StringUTF16.getChar(a, aOffset + count - 1))
-                            || Character.isHighSurrogate(StringUTF16.getChar(b, bOffset + count - 1)))) {
-                count--;
+            if (fetch > count) {
+                count = unsplitCut(a, aOffset, b, bOffset, count);
+                if (count == 0) {
+                    count = remaining;
+                    if (leftM3 != null) a = fill(leftM3, a, toffset + base, leftCoder, count);
+                    if (rightM3 != null) b = fill(rightM3, b, ooffset + base, rightCoder, count);
+                }
             }
-            boolean same = leftCoder == rightCoder
-                    ? (leftCoder == String.LATIN1
-                            ? StringLatin1.regionMatchesCI(a, aOffset, b, bOffset, count)
-                            : StringUTF16.regionMatchesCI(a, aOffset, b, bOffset, count))
-                    : (leftCoder == String.LATIN1
-                            ? StringLatin1.regionMatchesCI_UTF16(a, aOffset, b, bOffset, count)
-                            : StringUTF16.regionMatchesCI_Latin1(a, aOffset, b, bOffset, count));
-            if (!same) return false;
+            if (!windowMatchesIgnoreCase(a, aOffset, leftCoder, b, bOffset, rightCoder, count)) return false;
             base += count;
         }
         return true;
+    }
+
+    /**
+     * {@code units} units of {@code storage} from {@code from} in {@code coder} at the start of
+     * {@code buffer}, or of a fresh array when {@code buffer} is absent or too short (A41): the
+     * transient window of an M3 side, reused across a scan.
+     */
+    private static byte[] fill(M3String storage, byte[] buffer, int from, byte coder, int units) {
+        byte[] out = buffer != null && buffer.length >= units << coder ? buffer : new byte[units << coder];
+        storage.getBytes(out, from, 0, coder, units);
+        return out;
+    }
+
+    /**
+     * The cut of a window of {@code count} units of two UTF-16 sides, the unit after the window
+     * fetched on both (A41): moved back while a high surrogate before it and a low surrogate after
+     * it on either side would fold as two lone units what the stock rule folds as one pair (A28
+     * moved it back once, which could split the other side's pair); 0 when every cut of the window
+     * splits a pair, surrogate pairs misaligned by one unit on the two sides, so the caller takes
+     * the rest of the range as one window.
+     */
+    private static int unsplitCut(byte[] a, int aOffset, byte[] b, int bOffset, int count) {
+        int cut = count;
+        while (cut > 0 && (splitsPair(a, aOffset + cut) || splitsPair(b, bOffset + cut))) cut--;
+        return cut;
+    }
+
+    private static boolean splitsPair(byte[] utf16, int index) {
+        return Character.isHighSurrogate(StringUTF16.getChar(utf16, index - 1))
+                && Character.isLowSurrogate(StringUTF16.getChar(utf16, index));
+    }
+
+    /**
+     * The stock {@code regionMatchesCI} rule over one window of {@code count} units, each side in
+     * its own coder (A41). Two sides of one coder skip their equal prefix through the mismatch
+     * intrinsic and fold from the first differing unit on, which the stock rule folds the same
+     * way: a Latin-1 unit folds on its own; a low surrogate pairs with the high surrogate before
+     * it, equal on both sides, so the fold starts one unit earlier there.
+     */
+    private static boolean windowMatchesIgnoreCase(byte[] a, int aOffset, byte aCoder,
+            byte[] b, int bOffset, byte bCoder, int count) {
+        if (aCoder != bCoder) {
+            return aCoder == String.LATIN1
+                    ? StringLatin1.regionMatchesCI_UTF16(a, aOffset, b, bOffset, count)
+                    : StringUTF16.regionMatchesCI_Latin1(a, aOffset, b, bOffset, count);
+        }
+        int mismatch = ArraysSupport.mismatch(a, aOffset << aCoder, b, bOffset << aCoder, count << aCoder);
+        if (mismatch < 0) return true;
+        if (aCoder == String.LATIN1) {
+            return StringLatin1.regionMatchesCI(a, aOffset + mismatch, b, bOffset + mismatch, count - mismatch);
+        }
+        int unit = mismatch >> String.UTF16;
+        if (unit > 0 && Character.isHighSurrogate(StringUTF16.getChar(a, aOffset + unit - 1))) unit--;
+        return StringUTF16.regionMatchesCI(a, aOffset + unit, b, bOffset + unit, count - unit);
+    }
+
+    /**
+     * The stock {@code compareToCI} word for the window at {@code base} that differs (A41):
+     * exact-length copies of both sides in their own coders; two UTF-16 sides one unit longer when
+     * they have one, so a surrogate pair across the end of the shorter side folds as the stock
+     * code-point rule folds it.
+     */
+    private static int windowDifferenceIgnoreCase(String left, String right, int base, int count,
+            byte leftCoder, byte rightCoder, boolean codePoints) {
+        if (codePoints) {
+            byte[] leftTail = window(left, base, Math.min(count + 1, left.length() - base), leftCoder);
+            byte[] rightTail = window(right, base, Math.min(count + 1, right.length() - base), rightCoder);
+            return StringUTF16.compareToCI(leftTail, rightTail);
+        }
+        byte[] a = window(left, base, count, leftCoder);
+        byte[] b = window(right, base, count, rightCoder);
+        return leftCoder == rightCoder
+                ? StringLatin1.compareToCI(a, b)
+                : (leftCoder == String.LATIN1 ? StringLatin1.compareToCI_UTF16(a, b) : StringUTF16.compareToCI_Latin1(a, b));
     }
 
     /**
@@ -279,7 +364,11 @@ final class M3StringMixedCompare {
         return storage.contentIsLatin1() ? String.LATIN1 : String.UTF16;
     }
 
-    /** {@code count} units of {@code source} from {@code from} as a fresh array in {@code coder}. */
+    /**
+     * {@code count} units of {@code source} from {@code from} as a fresh array in {@code coder}:
+     * the exact-length copies the stock {@code compareToCI} family reads (A41: only the window
+     * that differs is copied).
+     */
     private static byte[] window(String source, int from, int count, byte coder) {
         M3String storage = source.m3();
         if (storage == null) {
@@ -288,9 +377,5 @@ final class M3StringMixedCompare {
         byte[] out = new byte[count << coder];
         storage.getBytes(out, from, 0, coder, count);
         return out;
-    }
-
-    private static boolean endsWithHighSurrogate(byte[] utf16) {
-        return Character.isHighSurrogate(StringUTF16.getChar(utf16, (utf16.length >> String.UTF16) - 1));
     }
 }
