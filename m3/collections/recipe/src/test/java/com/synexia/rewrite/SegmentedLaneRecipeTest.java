@@ -59,6 +59,10 @@ final class SegmentedLaneRecipeTest {
         var recipe = new M3SegmentedLaneNativeRecipe(); var context = context();
         var state = recipe.getInitialValue(context);
         var generated = recipe.generate(state, context).iterator().next();
+        assertTrue(generated.printAll().contains(
+                "Java_com_m3_collections_M3BitLane28_cardinality0"));
+        assertTrue(!generated.printAll().contains(
+                "Java_com_synexia_common_collections_SegmentedBitLane28_cardinality0"));
         Path path = Path.of(System.getProperty("candidate.output")).resolve(M3SegmentedLaneNativeRecipe.TARGET);
         Files.createDirectories(path.getParent()); Files.writeString(path, generated.printAll());
         var already = recipe.getInitialValue(context);
