@@ -1,4 +1,5 @@
 import com.m3.text.M3LexiconPrecompute;
+import com.m3.text.M3PhrasePrecompute;
 import com.m3.text.SharedLexiconCatalog;
 import com.m3.text.SharedLexiconFamilySidecarCatalog;
 
