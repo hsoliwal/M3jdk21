@@ -111,7 +111,7 @@ public final class M3CodeTextPrecomputeCoverageTest {
                         && contract.contains("27b6f34ab44b00e82ec814660f249f0b6bfd7cbd")
                         && contract.contains("6b1e4a5716aacfa71c33aedf5ed249f4af4a325d")
                         && contract.contains(
-                                "Java_com.synexia.indexstring.JniMIndexCodeTextSignalBatch_nativeAnalyzeRange")
+                                "Java_com_synexia_indexstring_JniMIndexCodeTextSignalBatch_nativeAnalyzeRange")
                         && contract.contains("java.lang.M3CodeTextNativeBridge")
                         && contract.contains(
                                 "Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange"),
