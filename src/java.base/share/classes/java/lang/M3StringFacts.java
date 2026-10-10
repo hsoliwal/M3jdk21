@@ -25,13 +25,19 @@ final class M3StringFacts {
     final int utf8Length;
     final int codePointCount;
     final int unpairedSurrogateCount;
+    /** Number of valid surrogate-pair code points in this range. */
+    final int nonBmpCodePointCount;
     final int javaHash;
+    /** Explicit donor-compatible spelling of {@link #javaHash}. */
+    final int javaHashCode;
     final int hash31Power;
     final char firstUtf16Unit;
     final char lastUtf16Unit;
     final long bitSignal64;
     final boolean ascii;
     final boolean latin1;
+    /** True when at least one code point in this range is whitespace. */
+    final boolean containsWhitespace;
 
     final int asciiUpperHash;
     final int asciiLowerHash;
@@ -57,6 +63,7 @@ final class M3StringFacts {
             int utf8Length,
             int codePointCount,
             int unpairedSurrogateCount,
+            int nonBmpCodePointCount,
             int javaHash,
             int hash31Power,
             char firstUtf16Unit,
@@ -64,6 +71,7 @@ final class M3StringFacts {
             long bitSignal64,
             boolean ascii,
             boolean latin1,
+            boolean containsWhitespace,
             int asciiUpperHash,
             int asciiLowerHash,
             int asciiTitleHash,
@@ -79,13 +87,16 @@ final class M3StringFacts {
         this.utf8Length = utf8Length;
         this.codePointCount = codePointCount;
         this.unpairedSurrogateCount = unpairedSurrogateCount;
+        this.nonBmpCodePointCount = nonBmpCodePointCount;
         this.javaHash = javaHash;
+        this.javaHashCode = javaHash;
         this.hash31Power = hash31Power;
         this.firstUtf16Unit = firstUtf16Unit;
         this.lastUtf16Unit = lastUtf16Unit;
         this.bitSignal64 = bitSignal64;
         this.ascii = ascii;
         this.latin1 = latin1;
+        this.containsWhitespace = containsWhitespace;
         this.asciiUpperHash = asciiUpperHash;
         this.asciiLowerHash = asciiLowerHash;
         this.asciiTitleHash = asciiTitleHash;
@@ -105,9 +116,11 @@ final class M3StringFacts {
         int utf8 = 0;
         int codePoints = 0;
         int unpaired = 0;
+        int nonBmp = 0;
         long signal = 0L;
         boolean ascii = true;
         boolean latin1 = true;
+        boolean containsWhitespace = false;
         long prefix = 0L;
         long suffix = 0L;
         long bigrams = 0L;
@@ -153,6 +166,7 @@ final class M3StringFacts {
                     && Character.isLowSurrogate(value.charAt(index + 1))) {
                 codePoint = Character.toCodePoint(unit, value.charAt(index + 1));
                 width = 2;
+                nonBmp++;
                 utf8 = Math.addExact(utf8, 4);
             } else if (Character.isSurrogate(unit)) {
                 unpaired++;
@@ -163,6 +177,7 @@ final class M3StringFacts {
             codePoints++;
 
             boolean whitespace = Character.isWhitespace(codePoint);
+            containsWhitespace |= whitespace;
             if (leadingStrip) {
                 if (whitespace) stripStart = codePointStart + width;
                 else leadingStrip = false;
@@ -188,6 +203,7 @@ final class M3StringFacts {
                 utf8,
                 codePoints,
                 unpaired,
+                nonBmp,
                 hash,
                 pow31(length),
                 first,
@@ -195,6 +211,7 @@ final class M3StringFacts {
                 signal,
                 ascii,
                 latin1,
+                containsWhitespace,
                 upperHash,
                 lowerHash,
                 titleHash,
@@ -271,6 +288,8 @@ final class M3StringFacts {
                 Math.addExact(left.codePointCount, right.codePointCount) - (seamPair ? 1 : 0),
                 Math.addExact(left.unpairedSurrogateCount, right.unpairedSurrogateCount)
                         - (seamPair ? 2 : 0),
+                Math.addExact(left.nonBmpCodePointCount, right.nonBmpCodePointCount)
+                        + (seamPair ? 1 : 0),
                 left.javaHash * right.hash31Power + right.javaHash,
                 left.hash31Power * right.hash31Power,
                 left.firstUtf16Unit,
@@ -278,6 +297,7 @@ final class M3StringFacts {
                 left.bitSignal64 | right.bitSignal64,
                 left.ascii && right.ascii,
                 left.latin1 && right.latin1,
+                left.containsWhitespace || right.containsWhitespace,
                 left.asciiUpperHash * right.hash31Power + right.asciiUpperHash,
                 left.asciiLowerHash * right.hash31Power + right.asciiLowerHash,
                 left.asciiTitleHash * right.hash31Power + right.asciiLowerHash,
