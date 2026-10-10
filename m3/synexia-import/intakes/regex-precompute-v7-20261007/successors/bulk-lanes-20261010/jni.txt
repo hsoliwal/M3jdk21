@@ -1,0 +1,4 @@
+provider=jni
+available=true
+minimumRows=1
+jvm=[-Xmx1g, -XX:ActiveProcessorCount=4, -Xcheck:jni]

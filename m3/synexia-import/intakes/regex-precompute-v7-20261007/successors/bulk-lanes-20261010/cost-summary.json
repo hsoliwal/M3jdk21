@@ -1,0 +1,485 @@
+{
+  "scope": "five alternating VM forks; whole image restore only, no universal speedup",
+  "rows": [
+    {
+      "expression_units": 1,
+      "format": "v2",
+      "buffer": "heap",
+      "encoded_bytes": 2314,
+      "baseline": {
+        "wall_ns": {
+          "median": 130062,
+          "minimum": 97594,
+          "maximum": 139876
+        },
+        "cpu_ns": {
+          "median": 129162,
+          "minimum": 95969,
+          "maximum": 139892
+        },
+        "allocated_bytes": {
+          "median": 10450,
+          "minimum": 10450,
+          "maximum": 10451
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 111448,
+          "minimum": 102055,
+          "maximum": 142581
+        },
+        "cpu_ns": {
+          "median": 110550,
+          "minimum": 101724,
+          "maximum": 142448
+        },
+        "allocated_bytes": {
+          "median": 10621,
+          "minimum": 10619,
+          "maximum": 10621
+        }
+      }
+    },
+    {
+      "expression_units": 1,
+      "format": "v2",
+      "buffer": "direct",
+      "encoded_bytes": 2314,
+      "baseline": {
+        "wall_ns": {
+          "median": 64240,
+          "minimum": 62708,
+          "maximum": 92459
+        },
+        "cpu_ns": {
+          "median": 63708,
+          "minimum": 62357,
+          "maximum": 90108
+        },
+        "allocated_bytes": {
+          "median": 10464,
+          "minimum": 10096,
+          "maximum": 10464
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 52127,
+          "minimum": 49330,
+          "maximum": 67858
+        },
+        "cpu_ns": {
+          "median": 51947,
+          "minimum": 49374,
+          "maximum": 66426
+        },
+        "allocated_bytes": {
+          "median": 10088,
+          "minimum": 10088,
+          "maximum": 10481
+        }
+      }
+    },
+    {
+      "expression_units": 1,
+      "format": "v7",
+      "buffer": "heap",
+      "encoded_bytes": 2382,
+      "baseline": {
+        "wall_ns": {
+          "median": 51236,
+          "minimum": 39098,
+          "maximum": 53530
+        },
+        "cpu_ns": {
+          "median": 49361,
+          "minimum": 39149,
+          "maximum": 53416
+        },
+        "allocated_bytes": {
+          "median": 13696,
+          "minimum": 13696,
+          "maximum": 13702
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 31445,
+          "minimum": 31252,
+          "maximum": 44078
+        },
+        "cpu_ns": {
+          "median": 31322,
+          "minimum": 31087,
+          "maximum": 44127
+        },
+        "allocated_bytes": {
+          "median": 13694,
+          "minimum": 13053,
+          "maximum": 13864
+        }
+      }
+    },
+    {
+      "expression_units": 1,
+      "format": "v7",
+      "buffer": "direct",
+      "encoded_bytes": 2382,
+      "baseline": {
+        "wall_ns": {
+          "median": 41985,
+          "minimum": 33633,
+          "maximum": 47824
+        },
+        "cpu_ns": {
+          "median": 41851,
+          "minimum": 33532,
+          "maximum": 47638
+        },
+        "allocated_bytes": {
+          "median": 13765,
+          "minimum": 13760,
+          "maximum": 13765
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 29447,
+          "minimum": 28656,
+          "maximum": 35379
+        },
+        "cpu_ns": {
+          "median": 28867,
+          "minimum": 28320,
+          "maximum": 34988
+        },
+        "allocated_bytes": {
+          "median": 13928,
+          "minimum": 13928,
+          "maximum": 13928
+        }
+      }
+    },
+    {
+      "expression_units": 16,
+      "format": "v2",
+      "buffer": "heap",
+      "encoded_bytes": 796759,
+      "baseline": {
+        "wall_ns": {
+          "median": 750139,
+          "minimum": 723539,
+          "maximum": 903217
+        },
+        "cpu_ns": {
+          "median": 695001,
+          "minimum": 674676,
+          "maximum": 857918
+        },
+        "allocated_bytes": {
+          "median": 1601355,
+          "minimum": 1601329,
+          "maximum": 1601586
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 742090,
+          "minimum": 717337,
+          "maximum": 889510
+        },
+        "cpu_ns": {
+          "median": 694915,
+          "minimum": 675629,
+          "maximum": 788178
+        },
+        "allocated_bytes": {
+          "median": 1601833,
+          "minimum": 1601833,
+          "maximum": 1601833
+        }
+      }
+    },
+    {
+      "expression_units": 16,
+      "format": "v2",
+      "buffer": "direct",
+      "encoded_bytes": 796759,
+      "baseline": {
+        "wall_ns": {
+          "median": 744687,
+          "minimum": 724537,
+          "maximum": 794216
+        },
+        "cpu_ns": {
+          "median": 709037,
+          "minimum": 692211,
+          "maximum": 766390
+        },
+        "allocated_bytes": {
+          "median": 1601436,
+          "minimum": 1601413,
+          "maximum": 1601440
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 719090,
+          "minimum": 714378,
+          "maximum": 735036
+        },
+        "cpu_ns": {
+          "median": 684722,
+          "minimum": 679092,
+          "maximum": 700108
+        },
+        "allocated_bytes": {
+          "median": 1601864,
+          "minimum": 1601864,
+          "maximum": 1601864
+        }
+      }
+    },
+    {
+      "expression_units": 16,
+      "format": "v7",
+      "buffer": "heap",
+      "encoded_bytes": 796827,
+      "baseline": {
+        "wall_ns": {
+          "median": 1217492,
+          "minimum": 1195853,
+          "maximum": 1265460
+        },
+        "cpu_ns": {
+          "median": 1178374,
+          "minimum": 1163692,
+          "maximum": 1223740
+        },
+        "allocated_bytes": {
+          "median": 1606352,
+          "minimum": 1606352,
+          "maximum": 1606352
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 1209863,
+          "minimum": 1190424,
+          "maximum": 1383326
+        },
+        "cpu_ns": {
+          "median": 1176478,
+          "minimum": 1151182,
+          "maximum": 1348143
+        },
+        "allocated_bytes": {
+          "median": 1606864,
+          "minimum": 1606864,
+          "maximum": 1606864
+        }
+      }
+    },
+    {
+      "expression_units": 16,
+      "format": "v7",
+      "buffer": "direct",
+      "encoded_bytes": 796827,
+      "baseline": {
+        "wall_ns": {
+          "median": 1211025,
+          "minimum": 1200726,
+          "maximum": 1247417
+        },
+        "cpu_ns": {
+          "median": 1180889,
+          "minimum": 1174050,
+          "maximum": 1216736
+        },
+        "allocated_bytes": {
+          "median": 1606418,
+          "minimum": 1606418,
+          "maximum": 1606418
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 1192174,
+          "minimum": 1176692,
+          "maximum": 1268289
+        },
+        "cpu_ns": {
+          "median": 1173492,
+          "minimum": 1155095,
+          "maximum": 1194804
+        },
+        "allocated_bytes": {
+          "median": 1606930,
+          "minimum": 1606930,
+          "maximum": 1606930
+        }
+      }
+    },
+    {
+      "expression_units": 128,
+      "format": "v2",
+      "buffer": "heap",
+      "encoded_bytes": 1693991,
+      "baseline": {
+        "wall_ns": {
+          "median": 1502237,
+          "minimum": 1492158,
+          "maximum": 1509845
+        },
+        "cpu_ns": {
+          "median": 1449245,
+          "minimum": 1438797,
+          "maximum": 1456434
+        },
+        "allocated_bytes": {
+          "median": 3399144,
+          "minimum": 3399144,
+          "maximum": 3399144
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 1476632,
+          "minimum": 1449740,
+          "maximum": 1515797
+        },
+        "cpu_ns": {
+          "median": 1425352,
+          "minimum": 1399544,
+          "maximum": 1462790
+        },
+        "allocated_bytes": {
+          "median": 3399880,
+          "minimum": 3399880,
+          "maximum": 3399880
+        }
+      }
+    },
+    {
+      "expression_units": 128,
+      "format": "v2",
+      "buffer": "direct",
+      "encoded_bytes": 1693991,
+      "baseline": {
+        "wall_ns": {
+          "median": 1502313,
+          "minimum": 1494289,
+          "maximum": 1687682
+        },
+        "cpu_ns": {
+          "median": 1451933,
+          "minimum": 1440319,
+          "maximum": 1640599
+        },
+        "allocated_bytes": {
+          "median": 3399176,
+          "minimum": 3399176,
+          "maximum": 3399176
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 1463914,
+          "minimum": 1459842,
+          "maximum": 1510784
+        },
+        "cpu_ns": {
+          "median": 1422217,
+          "minimum": 1415292,
+          "maximum": 1462291
+        },
+        "allocated_bytes": {
+          "median": 3399912,
+          "minimum": 3399912,
+          "maximum": 3399912
+        }
+      }
+    },
+    {
+      "expression_units": 128,
+      "format": "v7",
+      "buffer": "heap",
+      "encoded_bytes": 1694059,
+      "baseline": {
+        "wall_ns": {
+          "median": 2592963,
+          "minimum": 2545513,
+          "maximum": 2643274
+        },
+        "cpu_ns": {
+          "median": 2540899,
+          "minimum": 2498957,
+          "maximum": 2559414
+        },
+        "allocated_bytes": {
+          "median": 3404288,
+          "minimum": 3404288,
+          "maximum": 3404288
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 2554745,
+          "minimum": 2506560,
+          "maximum": 2616490
+        },
+        "cpu_ns": {
+          "median": 2490405,
+          "minimum": 2466055,
+          "maximum": 2564410
+        },
+        "allocated_bytes": {
+          "median": 3405024,
+          "minimum": 3405024,
+          "maximum": 3405024
+        }
+      }
+    },
+    {
+      "expression_units": 128,
+      "format": "v7",
+      "buffer": "direct",
+      "encoded_bytes": 1694059,
+      "baseline": {
+        "wall_ns": {
+          "median": 2580784,
+          "minimum": 2558456,
+          "maximum": 2597731
+        },
+        "cpu_ns": {
+          "median": 2531340,
+          "minimum": 2517177,
+          "maximum": 2548522
+        },
+        "allocated_bytes": {
+          "median": 3404052,
+          "minimum": 3403660,
+          "maximum": 3404352
+        }
+      },
+      "candidate": {
+        "wall_ns": {
+          "median": 2581216,
+          "minimum": 2508573,
+          "maximum": 2655660
+        },
+        "cpu_ns": {
+          "median": 2533888,
+          "minimum": 2461871,
+          "maximum": 2610249
+        },
+        "allocated_bytes": {
+          "median": 3404437,
+          "minimum": 3404374,
+          "maximum": 3404813
+        }
+      }
+    }
+  ]
+}
