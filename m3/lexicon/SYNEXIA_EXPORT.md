@@ -146,19 +146,28 @@ has been checked into this public JDK repository.
 ## Proper-name donor boundary
 
 Synexia remains the canonical source owner for the proper-name family. The
-current reviewed Synexia source manifest does not contain a proper-name source
-path or record-identity contract, so no proper-name rows are admitted or
-renumbered by this export.
+current reviewed Synexia source manifest on this branch does not contain a
+proper-name payload row, so no proper-name records are admitted or renumbered
+by this export.
+
+A typed receiver contract does exist in the pending M3JDK chain: PR #629
+(M3InstanceIndexPrecompute and m3/lexicon/synexia-instance-index-contract.tsv),
+facade PR #630, and custody receipt PR #641. Those changes preserve UTF-8
+instance names, normalization-version/source identity, instance types,
+metadata, frozen concept coordinates, reverse lookup, and separation from
+lexical token identity, but their contract-only/payload-not-bundled and
+hosted-admission boundaries remain in force. This provenance PR does not claim
+those pending PRs are merged or runtime-admitted.
 
 The pinned OpenHinglish repository
-(`shankarmishra/openhinglish@0019fe84d1e98c4eaaed6e3a8d21a63b21ab90ea`)
-is recorded in `m3/ports/precompute/DONOR_REVIEW.tsv` as a reference-only
-donor for gazetteer shape and fixture ideas. Its repository code and declared
-current data are MIT, but that does not establish Synexia source identity,
-coverage, language scope, or an M3JDK mapping contract. Its rows therefore are
-not copied into the M3LEX image. A future admission requires an explicit
-Synexia proper-name snapshot, source pin, mapping fields, precompute owner, and
-license/provenance proof before the source manifest can grow.
+(shankarmishra/openhinglish@0019fe84d1e98c4eaaed6e3a8d21a63b21ab90ea)
+is recorded in m3/ports/precompute/DONOR_REVIEW.tsv as a reference-only donor
+for gazetteer shape and fixture ideas. Its repository code and declared current
+data are MIT, but that does not establish Synexia source identity, coverage,
+language scope, or an M3JDK mapping contract. Its rows therefore are not copied
+into the M3LEX image. Proper-name admission still requires the explicit Synexia
+snapshot, source pin, mapping fields, precompute owner, and license/provenance
+proof.
 
 ## Proof
 
