@@ -28,7 +28,7 @@ import java.util.TreeMap;
  * Receiver for the optional {@code m3lex-family-v2} precompute bundle.
  *
  * <p>The legacy M3LEX image and opaque per-record payload remain unchanged.
- * This catalog is a separate, all-or-nothing bundle for the five index-shaped
+ * This catalog is a separate, all-or-nothing bundle for the six index-shaped
  * families whose values cannot be represented losslessly in one JSON scalar
  * map. The phrase family additionally preserves ordered token-ID rewrite rules.
  * Every key carries the originating Synexia source scope; physical image
