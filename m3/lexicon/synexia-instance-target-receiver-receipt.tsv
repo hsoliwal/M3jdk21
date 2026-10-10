@@ -1,0 +1,24 @@
+schema	M3JDK_INSTANCE_TARGET_RECEIVER_RECEIPT_V1
+synexia_repository	hsoliwal/com.synexia
+source_ref	develop
+source_contract_path	synexia-unicodex/CONCEPTS_VS_PROPER_NOUNS.md
+source_blob	b64b5ef0033d7bf64ef7b3a6d291e7d6c9221630
+m3jdk_repository	hsoliwal/M3jdk21
+m3jdk_base_commit	8fc4564aeaec56d10bcd796af53620b2ccf8c311
+receiver_path	m3/core/src/com/m3/text/M3InstanceIndex.java
+receiver_blob	94eb4af45d14a91a90d9e837c6012ff5f4dde8ca
+test_path	m3/core/test/M3InstanceIndexTest.java
+test_blob	fefd760bb3e1be640473bfca7bf0a9f352667e01
+coverage_test_path	m3/core/test/M3InstanceIndexReceiverCoverageTest.java
+coverage_test_blob	6103dc038b372e43964150a4ec44b1dcfc9e603c
+target_map_path	m3/lexicon/synexia-instance-target-map.tsv
+target_map_blob	db79edb4d2e98f99f4ed837d8d0f68d3ce915775
+foss_decision_path	m3/lexicon/FOSS_REUSE_DECISION.tsv
+foss_decision_blob	e5ea976ccd26d0b8baa89312ec7d99b147423489
+contract_status	TARGET_METADATA_CONTRACT_PROVEN
+payload_status	REFERENCE_ONLY_PAYLOAD_NOT_ADMITTED
+capabilities	proper-nouns;titles
+ownership	Synexia source owner; M3JDK metadata receiver
+runtime_status	Java receiver semantics exercised by M3InstanceIndexTest; payload loader absent
+native_status	NOT_APPLICABLE
+hosted_status	NOT_CLAIMED
