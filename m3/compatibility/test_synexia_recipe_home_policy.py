@@ -303,6 +303,57 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             "${m3.synexia.version}", dependency.find("m:version", ns).text
         )
 
+    def test_retirement_profile_uses_external_synexia_and_excludes_copied_main_sources(self) -> None:
+        pom = ROOT / "tooling" / "migration-recipes" / "pom.xml"
+        tree = ET.parse(pom)
+        ns = {"m": "http://maven.apache.org/POM/4.0.0"}
+        root = tree.getroot()
+
+        profiles = root.findall("m:profiles/m:profile", ns)
+        profile = next(
+            p
+            for p in profiles
+            if p.find("m:id", ns) is not None
+            and p.find("m:id", ns).text == "m3-synexia-consumer-retirement-proof"
+        )
+
+        dependency = profile.find("m:dependencies/m:dependency", ns)
+        self.assertIsNotNone(dependency)
+        self.assertEqual("com.synexia", dependency.find("m:groupId", ns).text)
+        self.assertEqual(
+            "synexia-openrewrite-recipes",
+            dependency.find("m:artifactId", ns).text,
+        )
+        self.assertEqual(
+            "${m3.synexia.version}",
+            dependency.find("m:version", ns).text,
+        )
+
+        compiler = next(
+            plugin
+            for plugin in profile.findall("m:build/m:plugins/m:plugin", ns)
+            if plugin.find("m:artifactId", ns) is not None
+            and plugin.find("m:artifactId", ns).text == "maven-compiler-plugin"
+        )
+        excludes = [
+            node.text
+            for node in compiler.findall("m:configuration/m:excludes/m:exclude", ns)
+        ]
+        self.assertIn("com/synexia/**", excludes)
+
+        surefire = next(
+            plugin
+            for plugin in profile.findall("m:build/m:plugins/m:plugin", ns)
+            if plugin.find("m:artifactId", ns) is not None
+            and plugin.find("m:artifactId", ns).text == "maven-surefire-plugin"
+        )
+        includes = [
+            node.text
+            for node in surefire.findall("m:configuration/m:includes/m:include", ns)
+        ]
+        self.assertIn("**/M3Synexia*ConsumerTest.java", includes)
+        self.assertIn("**/com/m3/rewrite/synexia/M3SynexiaRecipeHomePolicyTest.java", includes)
+
     def test_m3index_db_and_jdk_bridge_are_synexia_owned(self) -> None:
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = {row["local_surface"]: row for row in csv.DictReader(handle, delimiter="\t")}
