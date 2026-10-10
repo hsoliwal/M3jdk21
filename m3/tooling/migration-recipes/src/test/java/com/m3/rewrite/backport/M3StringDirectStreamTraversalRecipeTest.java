@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -116,10 +118,10 @@ final class M3StringDirectStreamTraversalRecipeTest {
             // String.java fixture even when the parser returns an exact round-trip AST.
             // Keep every other diagnostic fail-closed; the recipe also requires exact
             // printAll() equality before admitting the hash-pinned replacement.
-            for (Throwable cause = error; cause != null; cause = cause.getCause()) {
-                if ("Expected to be able to find @exception".equals(cause.getMessage())) {
-                    return;
-                }
+            StringWriter rendered = new StringWriter();
+            error.printStackTrace(new PrintWriter(rendered));
+            if (rendered.toString().contains("Expected to be able to find @exception")) {
+                return;
             }
             throw new AssertionError(error);
         });
