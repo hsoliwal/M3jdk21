@@ -21,7 +21,7 @@ public final class M3PositionMaskFactsReceiverTest {
                 8192,
                 128,
                 4096,
-                65536L,
+                107076L,
                 ROOT,
                 64,
                 128);
@@ -29,7 +29,7 @@ public final class M3PositionMaskFactsReceiverTest {
         checks++;
         check(facts.rowCount() == 8192 && facts.blockCount() == 128, "geometry");
         checks++;
-        check(facts.entryCount() == 4096 && facts.primitivePayloadBytes() == 65536L, "payload metadata");
+        check(facts.entryCount() == 4096 && facts.primitivePayloadBytes() == 107076L, "payload metadata");
         checks++;
         check(facts.sourceRevision().equals("ab4edcbd7eb475a3c9abb12d4a0fc14703a826ec"), "source revision");
         checks++;
@@ -57,6 +57,12 @@ public final class M3PositionMaskFactsReceiverTest {
         checks++;
         expectIllegal(() -> M3PositionMaskFacts.fromPrecomputed(
                 "source", 1, 1, 1, 1L, ROOT, 64, 0), "zero native slab");
+        checks++;
+        expectIllegal(() -> M3PositionMaskFacts.fromPrecomputed(
+                "source", 1, 1, 1, 89L, ROOT, 64, 128), "payload geometry");
+        checks++;
+        expectIllegal(() -> M3PositionMaskFacts.fromPrecomputed(
+                "source", 1, 0, 1, 86L, ROOT, 64, 128), "entry geometry");
         checks++;
         expectIllegal(() -> M3PositionMaskFacts.fromPrecomputed(
                 "source", 1, 1, 1, 1L, ROOT.toUpperCase(), 64, 128), "uppercase digest");
