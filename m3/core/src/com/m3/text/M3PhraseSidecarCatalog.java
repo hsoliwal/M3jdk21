@@ -67,7 +67,7 @@ public final class M3PhraseSidecarCatalog {
         String[] lines = text.split("\\n", -1);
         int last = lines.length;
         if (last > 0 && lines[last - 1].isEmpty()) last--;
-        if (last == 0 || !String.join("\\t", HEADER).equals(lines[0]))
+        if (last == 0 || !String.join("\t", HEADER).equals(lines[0]))
             throw new IOException("phrase sidecar header mismatch");
 
         Map<M3PhrasePrecompute.Scope, M3PhrasePrecompute.Builder> builders = new HashMap<>();
