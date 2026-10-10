@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.BlockSignal256
+displayName: M3JDK21 position precompute block signal widened to 256 bits
+description: >-
+  Each 64-unit block of the position precompute kept a 64-bit signal with two case-folded bits
+  per unit, the whole-String facts' signal: above about thirty distinct units per block it
+  saturates, so a mid-density text (letters, digits, punctuation) passed most absent units into
+  the exact-mask lookup and the A37/A38 hand-offs took over at 1..3 us for 16384 units. Each block
+  now keeps a 256-bit signal in four words, a unit setting two unfolded bits inside the one word
+  its hash picks, so a block test still reads one word; every word of a published signal carries
+  bit 0; the retained-bytes ceiling counts four words per block and the invariant-6 guard test
+  pins the new ceiling. Java step:
+  M3StringPositionPrecompute, the new jtreg proof and the updated guard test; no upstream file
+  changed. Stacks on crate m3-codepoint-count-repeat (branch order); the
+  M3StringPositionPrecompute preimage is the A38 postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-block-signal-256
