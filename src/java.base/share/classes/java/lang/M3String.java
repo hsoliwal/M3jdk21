@@ -175,7 +175,6 @@ final class M3String implements CharSequence {
         return M3StringPool.concat(left, right);
     }
 
-    /** The composition, or {@code null} when the pool refuses a flat part (the caller stays flat). */
     /**
      * General array join without a linear staging list or per-reduction-level ArrayLists.
      *
