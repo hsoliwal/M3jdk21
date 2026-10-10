@@ -1,0 +1,24 @@
+schema_version	SYNEXIA_M3JDK_PRECOMPUTE_COVERAGE_RECEIPT_V1
+synexia_repository	hsoliwal/com.synexia
+synexia_pr	10150
+synexia_head	d1592bcf90ca68169384054d9dd0d76b7bf9ee33
+m3jdk_repository	hsoliwal/M3jdk21
+m3jdk_pr	652
+m3jdk_head	befd1a8b0abc267309fefc32e67b0282be2c7614
+target_manifest_blob	bd38ff40a27ea0036643b2000a3450d1da7a8f0a
+target_field_map_blob	b0955642e8a8c90ee0c3edc3f3bae097014cd726
+source_manifest_snapshot_sha256	6f7eb3d91009213c6029414f8ddb2d54ebfa7f4cf50a6f2aa1de237e3e14a819
+source_families	12
+field_values	95
+field_map_rows	121
+mapped_canonical_fields	93
+platform_rows	8
+self_test	true
+contract_status	PROVEN
+runtime_payload_admission	NOT_CLAIMED
+host_java_execution	NOT_CLAIMED
+jni_android_arm64	NOT_ADMITTED
+jni_esp32	NOT_ADMITTED
+jni_rp2040_pico	NOT_ADMITTED
+ownership	Synexia source owner; M3JDK target projection
+license	Apache-2.0
