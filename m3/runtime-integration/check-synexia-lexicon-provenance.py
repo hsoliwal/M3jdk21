@@ -16,6 +16,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "m3/lexicon/synexia-source-manifest.tsv"
 PROVENANCE = ROOT / "m3/lexicon/synexia-dictlang-DATA_PROVENANCE.tsv"
+DONOR_REVIEW = ROOT / "m3/ports/precompute/DONOR_REVIEW.tsv"
+EXPORT_DOC = ROOT / "m3/lexicon/SYNEXIA_EXPORT.md"
 
 MANIFEST_COLUMNS = (
     "source_id", "canonical_name", "synexia_path", "record_id_field",
@@ -26,6 +28,9 @@ PROVENANCE_COLUMNS = (
     "resource", "synexia_path", "bytes", "lines", "sha256", "origin",
     "origin_id", "data_license", "obligations", "synexia_manifest_correction",
 )
+DONOR_COLUMNS = ("repository", "commit", "metadata_license", "role", "disposition")
+OPENHINGLISH_REPOSITORY = "shankarmishra/openhinglish"
+OPENHINGLISH_COMMIT = "0019fe84d1e98c4eaaed6e3a8d21a63b21ab90ea"
 STALE_MARKERS = ("WRONG", "manifest says operator-supplied", "refine to")
 
 
@@ -97,10 +102,36 @@ def main() -> None:
     if matched != len(provenance):
         fail(f"unmapped_provenance_rows={len(provenance) - matched}")
 
+    donor_rows = read_rows(DONOR_REVIEW, DONOR_COLUMNS)
+    proper_name_rows = [
+        row for row in donor_rows
+        if row["repository"] == OPENHINGLISH_REPOSITORY
+    ]
+    if len(proper_name_rows) != 1:
+        fail("openhinglish_donor_row")
+    proper_name = proper_name_rows[0]
+    if (
+        proper_name["commit"] != OPENHINGLISH_COMMIT
+        or proper_name["disposition"] != "REFERENCE_ONLY_NO_SOURCE_COPY"
+        or "proper-name" not in proper_name["role"]
+    ):
+        fail("openhinglish_donor_boundary")
+    if not EXPORT_DOC.is_file():
+        fail("missing_export_boundary_doc")
+    export_doc = EXPORT_DOC.read_text(encoding="utf-8")
+    for marker in (
+        "## Proper-name donor boundary",
+        "not copied into the M3LEX image",
+        "Synexia remains the canonical source owner",
+    ):
+        if marker not in export_doc:
+            fail(f"export_boundary_marker={marker}")
+
     print(
         "SYNEXIA_LEXICON_PROVENANCE_PASS"
         f"|rows={matched}|gutenberg={gutenberg}|mit={mit}|"
-        "source_manifest=true|stale_markers=false|bulk_data=false"
+        "source_manifest=true|stale_markers=false|bulk_data=false|"
+        "proper_name_reference_only=true"
     )
 
 
