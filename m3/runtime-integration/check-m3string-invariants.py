@@ -979,19 +979,22 @@ for fragment in [
 if "for (int index = 0; index < len; index++)" not in string:
     fail("exact region comparison loop missing after precompute filter")
 
-# Case conversion is canonical only for ASCII + Locale.ROOT. Locale-sensitive and non-ASCII
-# transformations must continue through the stock JDK case engine.
+# ASCII case mapping is safe only for locales whose JDK mapping is plain ASCII.
+# Turkish, Azeri and Lithuanian remain on the stock locale-sensitive path; non-ASCII
+# transformations remain authoritative in the JDK case engine.
 for fragment in [
-    "storage != null && locale.equals(Locale.ROOT)",
+    "storage != null && asciiCaseMappingLocale(locale)",
+    "private static boolean asciiCaseMappingLocale(Locale locale)",
+    "return !\"tr\".equals(lang) && !\"az\".equals(lang) && !\"lt\".equals(lang);",
     "M3StringFacts prepared = storage.facts();",
     "if (prepared.ascii) {",
     "storage.asciiCase(false)",
     "storage.asciiCase(true)",
 ]:
     if fragment not in string:
-        fail(f"M3 ROOT ASCII case boundary missing: {fragment}")
+        fail(f"M3 ASCII case boundary missing: {fragment}")
 if "M3String asciiCase(boolean upper)" not in m3:
-    fail("M3String ROOT ASCII canonical case mapper missing")
+    fail("M3 ASCII canonical case mapper missing")
 
 # Builder coder selection may use exact M3 range facts locally. This does not change the
 # String/HotSpot coder; it only avoids inflating a Latin1 builder for a Latin1-only M3 range.
