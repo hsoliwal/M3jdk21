@@ -108,10 +108,10 @@ public final class M3AcronymSnapshotReplayTest {
         Path directory = Files.createTempDirectory("m3-acronym-replay-");
         try {
             Files.write(directory.resolve(AcronymSidecarCatalog.DATA_FILE), snapshotBytes);
-            String index = "schema_version\\tfile\\trows\\tsha256\\n"
-                    + AcronymSidecarCatalog.SCHEMA_VERSION + "\\t"
-                    + AcronymSidecarCatalog.DATA_FILE + "\\t" + EXPECTED_ROWS + "\\t"
-                    + sha256(snapshotBytes) + "\\n";
+            String index = "schema_version\tfile\trows\tsha256\n"
+                    + AcronymSidecarCatalog.SCHEMA_VERSION + "\t"
+                    + AcronymSidecarCatalog.DATA_FILE + "\t" + EXPECTED_ROWS + "\t"
+                    + sha256(snapshotBytes) + "\n";
             Files.writeString(directory.resolve(AcronymSidecarCatalog.INDEX_FILE), index,
                     StandardCharsets.UTF_8);
 
@@ -207,10 +207,10 @@ public final class M3AcronymSnapshotReplayTest {
         check(columns.length == 9, "acronym manifest columns");
         check(columns[3].equals("acronym_id"), "acronym manifest identity");
         check(columns[4].equals("expansion"), "acronym manifest mapping");
-        check(columns[5].equals("M3StringFacts + AcronymPrecompute"),
+        check(columns[5].equals("M3LexiconPrecompute.AcronymPrecompute"),
                 "acronym manifest owner");
         check(columns[6].equals("Apache-2.0"), "acronym manifest license");
-        check(columns[8].equals("expansion"), "acronym manifest precompute");
+        check(columns[8].equals("acronym,domain,expansion"), "acronym manifest precompute");
     }
 
     private static String sha256(byte[] bytes) throws Exception {
