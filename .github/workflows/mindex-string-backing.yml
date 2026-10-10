@@ -113,6 +113,8 @@ jobs:
         run: python3 m3/runtime-integration/check-m3string-builder-range-bulk.py
       - name: Check Synexia builder interop differential receiver
         run: python3 m3/runtime-integration/check-m3string-builder-interop.py --self-test
+      - name: Prove 35-to-36 additive String receiver union
+        run: python3 m3/runtime-integration/check-m3string-receiver-union.py --self-test
       - name: Check byte-source canonical M3 needle receiver
         run: python3 m3/runtime-integration/check-m3string-byte-source-needle.py
       - name: Check mixed canonical literal replacement receiver
