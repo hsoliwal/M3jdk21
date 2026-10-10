@@ -67,7 +67,7 @@ public final class M3PhrasePrecomputeTest {
         M3PhrasePrecompute.Catalog emptyReplacement = M3PhrasePrecompute.builder(scope)
                 .put(new M3PhrasePrecompute.Phrase(new int[]{6, 7}, new int[0]))
                 .build();
-        check(Arrays.equals(emptyReplacement.rewrite(new int[]{6, 7, 4}), new int[]{7}));
+        check(Arrays.equals(emptyReplacement.rewrite(new int[]{6, 7, 4}), new int[]{4}));
         check(emptyReplacement.longestMatchAt(new int[]{6, 7}, 0).orElseThrow()
                 .replacementTokenIds().length == 0);
 
