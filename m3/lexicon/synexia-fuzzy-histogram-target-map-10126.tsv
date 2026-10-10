@@ -17,3 +17,4 @@ native_execution	NOT_CLAIMED
 full_search_performance	NOT_CLAIMED
 status	TARGET_METADATA_CONTRACT_ONLY
 license	Apache-2.0
+focused_proof	M3_POSITION_MASK_FACTS_RECEIVER_PASS checks=17 metadata_only=true
