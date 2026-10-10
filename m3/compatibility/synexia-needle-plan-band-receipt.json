@@ -1,0 +1,90 @@
+{
+  "schema": "M3JDK21_SYNEXIA_NEEDLE_PLAN_BAND_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-needle-plan-band-20261010",
+    "pullRequest": null,
+    "commit": "e220a3fadf066e40351ad0ccdd87ecd61502e732",
+    "stackedOn": [
+      {
+        "pullRequest": 10131,
+        "crate": "m3-needle-window-lane"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.NeedlePlanBand",
+    "crate": "m3-needle-plan-band",
+    "fossReuseDecisionRow": "string.search.needle-plan-in-band",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "commit": "20941bc18b",
+        "target": "java.lang.M3String.indexOf / lastIndexOf (M3 needle)",
+        "mechanics": "the plan asked through planFor (band-gated); the A35 window lane taken by every M3 needle; the per-unit loop kept as the guard"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "commit": "20941bc18b",
+        "target": "java.lang.M3StringSearchPrecompute.planFor / prepare / Plan / maximumRetainedPrimitiveBytes",
+        "mechanics": "planFor gates the plan on the source band; the plan keeps the reverse KMP table (the A21 flat-haystack reverse search of a long needle) and the trigram facts (the gate), the forward KMP and skip tables are no longer built; the per-unit searches over an M3 source and the flat-haystack forward search removed; the retained-bytes ceiling follows"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same index and the same match as the flat String for every M3 needle over every source; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-needle-window-lane-20261010 (#660, A35) on #657 on #654 on #653 on #610 on #609 on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3String",
+      "java.lang.M3StringSearchPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3String.java and M3StringSearchPrecompute.java owners recorded as reviewed superseded hashes; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "cc70590edf677e6a5f0f433e4898e328507b07061b865af592df36f45f5b197a",
+      "after": "75bdefa275e2990a3319eb0282147a2f3105cb9fa44fa29195ed95d753675e49",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+      "before": "3499318405092e1bd7b37ae59495effd5e5200908ad3ea04492534aaf2d51801",
+      "after": "f813486ef6537458aebad7fef0dd3799ee2fe6d2c4f2440a6c979b90eccabd46",
+      "resource": "01-M3StringSearchPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3NeedlePlanBandTest.java",
+      "before": "ABSENT",
+      "after": "2680e97ecf7d7acf6b8215c32b71a89e5736ed48df6c5b1e74cff10a79e89786",
+      "resource": "02-M3NeedlePlanBandTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3NeedlePlanBandTest flag-off: 122,823 checks (indexOf, indexOf(from), indexOf(begin, end), lastIndexOf, lastIndexOf(from) and contains with M3 needles of 2..8193 units, present, absent by one unit of either coder and random, shaped as atoms, tuples and slices, over atoms, tuples and slices of 0..40000 units on both sides of the 256..32768-unit band and of both coders, each needle used three times; three hundred distinct needles in two rotating passes over 200, 1000 and 20000-unit sources, the plan cache thrashing; the same M3 needles over the flat text, the reverse search of needles of 16 units and up keeping its plan; against the flat String on every call)",
+    "regressions": "PASS_WINDOWS M3NeedleLaneTest 997,980; M3TrigramRepeatTest 13,068; M3NeedleArgTest 73,440; M3RegexLiteralGateTest 29,376; M3TQFactsBuildTest 23,595; M3StringM3OnM3Test 121,574; M3IndexOfFlatNeedleTest 137,948; M3RegexSubjectViewTest 9,567; M3GradedWindowsTest 56,591; M3CharSearchRepeatTest 25,380; M3CharSearchWindowsTest 61,650; M3StringPositionInvariant6Test 13; M3StringLiteralSplitTest 53,378; M3MixedCoderCompareTest 30,620; M3ContentEqualsTest 7,980; M3IgnoreCaseWindowsTest 188,512; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,919; A6 204 + 29",
+    "timing": "flag-off (a36/probe/ColdNeedleBench, bench-a35.tsv on the A35 build vs bench-a36.tsv on this one; one hot source, 256 distinct needles in rotation; flat in parentheses): cold-needle indexOf(M3 needle 8 miss) over a 100-unit Latin-1 source, outside the band, 1,012 ns -> 181 (31), a 32-unit needle 1,418 -> 196 (35), lastIndexOf 524 -> 149 (187); UTF-16 100 units: a 32-unit needle 352 -> 61 (31), lastIndexOf 223 -> 109 (70); inside the band the first use of a needle builds the slimmer plan (256 Latin-1 units: 363 with the gate, against the 1,012 the former plan cost at 100 units; the before row at 256, 141, served plans the 100-unit rows had cached) and the later uses are gated: 2048 units 101 -> 61 (190), 16384: 84 -> 58 (1,410), UTF-16 2048: 91 -> 59 (392), 16384: 86 -> 60 (2,911); lastIndexOf(M3 needle 8 miss) 16384 Latin-1 84 -> 57 (5,572), UTF-16 2048: 86 -> 64 (673); hot same-needle rows unchanged (20..90 ns); the flat needle's lane unchanged within noise",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3String.java and M3StringSearchPrecompute.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3NeedlePlanBandRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3NeedlePlanBandTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "a source outside the trigram band cannot use the gate the plan feeds, so no plan is asked for it: short sources, the common case, never touch the plan cache",
+    "inside the band the plan is still built on the needle's first use: measured, a plan built on the repeat use instead lost the gate whenever the 256-slot cache thrashed, which on 16384-unit sources cost more than the plan (1,159 ns against 102); the plan is cheaper now, not later",
+    "the plan drops its forward tables: since A21 the flat-haystack forward search and since A35 the M3-source searches are not reached, so only the reverse table (the A21 reverse search of a long needle) and the trigram facts (the gate) remain; the retained-bytes ceiling follows",
+    "the per-unit searches over an M3 source and the flat-haystack forward search are removed rather than kept dead",
+    "stacked on A35: merge after #660 and the Synexia crate PR (#10131 first, content-bearing merges); the owner commit is 2a17d54dc7"
+  ]
+}
