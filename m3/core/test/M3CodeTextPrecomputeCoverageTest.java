@@ -5,13 +5,6 @@
  * GPLv2 with the Classpath exception.
  */
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 /**
  * Mechanical receipt gate for the Synexia PR #10124 code-text handoff.
  *
@@ -39,17 +32,21 @@ public final class M3CodeTextPrecomputeCoverageTest {
         Path nativeReceipt = root.resolve("m3/lexicon/synexia-code-text-native-jni-receipt-10124.tsv");
         Path facts = root.resolve("src/java.base/share/classes/java/lang/M3CodeTextFacts.java");
         Path batch = root.resolve("src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java");
-        Path nativeContract = root.resolve("src/java.base/share/classes/java/lang/M3CodeTextNativeContract.java");
+        Path nativeBridge = root.resolve(
+                "src/java.base/share/classes/java/lang/M3CodeTextNativeBridge.java");
+        Path nativeContract = root.resolve(
+                "src/java.base/share/classes/java/lang/M3CodeTextNativeContract.java");
         check(Files.exists(map) && Files.exists(receipt) && Files.exists(nativeReceipt),
                 "code-text receipt files are missing");
-        check(Files.exists(facts) && Files.exists(batch) && Files.exists(nativeContract),
+        check(Files.exists(facts) && Files.exists(batch) && Files.exists(nativeBridge)
+                        && Files.exists(nativeContract),
                 "code-text receiver files are missing");
 
         List<String> mapLines = Files.readAllLines(map, StandardCharsets.UTF_8);
         check(mapLines.size() == REQUIRED_FIELDS.size() + 1, "field map row count changed");
         Set<String> fields = new HashSet<>();
         for (String line : mapLines.subList(1, mapLines.size())) {
-            String[] columns = line.split("\t", -1);
+            String[] columns = line.split("\\t", -1);
             check(columns.length == 15, "field map row is malformed: " + line);
             check(columns[1].equals(SOURCE_REPO)
                             && columns[2].equals(SOURCE_PR)
@@ -71,7 +68,7 @@ public final class M3CodeTextPrecomputeCoverageTest {
         Set<String> statuses = new HashSet<>();
         boolean corpusBound = false;
         for (String line : receiptLines.subList(1, receiptLines.size())) {
-            String[] columns = line.split("\t", -1);
+            String[] columns = line.split("\\t", -1);
             check(columns.length == 14, "receipt row is malformed: " + line);
             check(columns[1].equals(SOURCE_REPO)
                             && columns[2].equals(SOURCE_PR)
@@ -82,7 +79,8 @@ public final class M3CodeTextPrecomputeCoverageTest {
             statuses.add(columns[12]);
             if (columns[6].equals("v6")) {
                 corpusBound = columns[13].contains("9702 pairs")
-                        && columns[13].contains("11b5b883594988f3d85212ae6da0c016411ba149f49d46838d913be025e16359")
+                        && columns[13].contains(
+                                "11b5b883594988f3d85212ae6da0c016411ba149f49d46838d913be025e16359")
                         && columns[13].contains("not claimed");
             }
         }
@@ -93,24 +91,37 @@ public final class M3CodeTextPrecomputeCoverageTest {
                         && statuses.contains("TEST_CORPUS_RECEIPT_BOUND"),
                 "receipt status coverage changed: " + statuses);
         check(corpusBound, "V6 corpus receipt is not bound");
-        checkNativeReceipt(nativeReceipt, nativeContract);
+        checkNativeReceipt(nativeReceipt, nativeContract, nativeBridge);
 
         System.out.println("M3JDK_CODE_TEXT_PRECOMPUTE_COVERAGE_PASS fields="
                 + fields.size() + " receipt_rows=" + (receiptLines.size() - 1)
-                + " native_jni=1 source_pr=" + SOURCE_PR + " target_ref=" + TARGET_REF);
+                + " native_jni=1 native_bridge=1 source_pr=" + SOURCE_PR
+                + " target_ref=" + TARGET_REF);
     }
 
-    private static void checkNativeReceipt(Path receipt, Path nativeContract) throws Exception {
-        final String nativeHead = "4a9897b9327c26e348ff78fd40731f5bfdcbe473";
-        final String nativeBlob = "152b0c2b4062e5a83afafcdc06106ab874cf40e5";
-        final String targetBlob = "7ac7cedf4e351e27a3eaf2e5b99bce6854db4e1a";
+    private static void checkNativeReceipt(
+            Path receipt, Path nativeContract, Path nativeBridge) throws Exception {
+        final String nativeHead = "f446bc7f9978aca24103cfab0220500d265e41ab";
+        final String nativeBlob = "34f247f4f2b74862997d6e82f2938b4310bbc5a2";
+        final String targetBlob = "b2e00337be3be4fbe83452b88ec6fe336646475f";
         String contract = Files.readString(nativeContract, StandardCharsets.UTF_8);
+        String bridge = Files.readString(nativeBridge, StandardCharsets.UTF_8);
         check(contract.contains("nativeAnalyzeRange")
                         && contract.contains("([C[I[III)[J")
                         && contract.contains("27b6f34ab44b00e82ec814660f249f0b6bfd7cbd")
                         && contract.contains("6b1e4a5716aacfa71c33aedf5ed249f4af4a325d")
-                        && contract.contains("Java_com_synexia_indexstring_JniMIndexCodeTextSignalBatch_nativeAnalyzeRange"),
+                        && contract.contains(
+                                "Java_com.synexia.indexstring.JniMIndexCodeTextSignalBatch_nativeAnalyzeRange")
+                        && contract.contains("java.lang.M3CodeTextNativeBridge")
+                        && contract.contains(
+                                "Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange"),
                 "native JNI ABI contract is incomplete");
+        check(bridge.contains("m3.code.text.native.path")
+                        && bridge.contains("M3CodeTextSignalBatch.validate")
+                        && bridge.contains("M3CodeTextSignalBatch.analyze")
+                        && bridge.contains("nativeAnalyzeRange")
+                        && bridge.contains("host Java"),
+                "optional native bridge fallback contract is incomplete");
         List<String> lines = Files.readAllLines(receipt, StandardCharsets.UTF_8);
         check(lines.size() == 2, "native JNI receipt row count changed");
         String[] columns = lines.get(1).split("\\t", -1);
@@ -118,13 +129,19 @@ public final class M3CodeTextPrecomputeCoverageTest {
         check(columns[1].equals(SOURCE_REPO)
                         && columns[2].equals(SOURCE_PR)
                         && columns[3].equals(nativeHead)
-                        && columns[4].equals("synexia-indexstring/native/src/mindex_code_text_signal_jni.c")
+                        && columns[4].equals(
+                                "synexia-indexstring/native/src/mindex_code_text_signal_jni.c")
                         && columns[5].equals(nativeBlob)
                         && columns[7].equals("hsoliwal/M3jdk21")
                         && columns[8].equals(TARGET_REF)
                         && columns[10].equals(targetBlob)
+                        && columns[11].equals("java.lang.M3CodeTextNativeBridge")
                         && columns[12].equals("ADMITTED_NATIVE_JNI_PROOF")
-                        && columns[13].contains("SYNEXIA_CODE_TEXT_NATIVE_JNI_PASS"),
+                        && columns[13].contains("SYNEXIA_CODE_TEXT_NATIVE_JNI_PASS")
+                        && columns[13].contains(
+                                "Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange")
+                        && columns[13].contains("M3_CODE_TEXT_NATIVE_BRIDGE_PASS")
+                        && columns[13].contains("host Java fallback authoritative"),
                 "native JNI receipt drift");
     }
 
