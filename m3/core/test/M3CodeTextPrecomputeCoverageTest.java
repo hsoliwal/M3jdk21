@@ -37,13 +37,16 @@ public final class M3CodeTextPrecomputeCoverageTest {
         Path map = root.resolve("m3/lexicon/synexia-code-text-precompute-field-map.tsv");
         Path receipt = root.resolve("m3/lexicon/synexia-code-text-precompute-receipt-10124.tsv");
         Path nativeReceipt = root.resolve("m3/lexicon/synexia-code-text-native-jni-receipt-10124.tsv");
+        Path receiverReceipt = root.resolve(
+                "m3/lexicon/synexia-code-text-target-receiver-receipt-10124.tsv");
         Path facts = root.resolve("src/java.base/share/classes/java/lang/M3CodeTextFacts.java");
         Path batch = root.resolve("src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java");
         Path nativeBridge = root.resolve(
                 "src/java.base/share/classes/java/lang/M3CodeTextNativeBridge.java");
         Path nativeContract = root.resolve(
                 "src/java.base/share/classes/java/lang/M3CodeTextNativeContract.java");
-        check(Files.exists(map) && Files.exists(receipt) && Files.exists(nativeReceipt),
+        check(Files.exists(map) && Files.exists(receipt) && Files.exists(nativeReceipt)
+                        && Files.exists(receiverReceipt),
                 "code-text receipt files are missing");
         check(Files.exists(facts) && Files.exists(batch) && Files.exists(nativeBridge)
                         && Files.exists(nativeContract),
@@ -113,12 +116,43 @@ public final class M3CodeTextPrecomputeCoverageTest {
                         && statuses.contains("TEST_CORPUS_RECEIPT_BOUND"),
                 "receipt status coverage changed: " + statuses);
         check(corpusBound, "V6 corpus receipt is not bound");
+        checkTargetReceiverReceipt(receiverReceipt, facts);
         checkNativeReceipt(nativeReceipt, nativeContract, nativeBridge);
 
         System.out.println("M3JDK_CODE_TEXT_PRECOMPUTE_COVERAGE_PASS fields="
                 + fields.size() + " receipt_rows=" + (receiptLines.size() - 1)
-                + " native_jni=1 native_bridge=1 source_pr=" + SOURCE_PR
+                + " native_jni=1 native_bridge=1 receiver_receipt=1 source_pr=" + SOURCE_PR
                 + " target_ref=" + TARGET_REF);
+    }
+
+    private static void checkTargetReceiverReceipt(Path receipt, Path facts) throws Exception {
+        final String receiverBlob = "a24c1a7d9a3b73d4693b390387b7d9734f5423d8";
+        final String fieldMapBlob = "0b6abd16db0aa85c842691cce8013dccc4781b50";
+        List<String> lines = Files.readAllLines(receipt, StandardCharsets.UTF_8);
+        check(lines.size() == 2, "target receiver receipt row count changed");
+        String[] columns = lines.get(1).split("\\t", -1);
+        check(columns.length == 15, "target receiver receipt row is malformed");
+        check(columns[1].equals(SOURCE_REPO)
+                        && columns[2].equals(SOURCE_PR)
+                        && columns[3].equals(SOURCE_HEAD)
+                        && columns[4].equals(
+                                "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexCodeTextSignals.java")
+                        && columns[5].equals(
+                                "b428585474531bb5244627b94b549847b19896b8")
+                        && columns[6].equals("hsoliwal/M3jdk21")
+                        && columns[7].equals(TARGET_REF)
+                        && columns[8].equals(
+                                "src/java.base/share/classes/java/lang/M3CodeTextFacts.java")
+                        && columns[9].equals("java.lang.M3CodeTextFacts")
+                        && columns[10].equals(receiverBlob)
+                        && columns[11].equals(
+                                "m3/lexicon/synexia-code-text-precompute-field-map.tsv")
+                        && columns[12].equals(fieldMapBlob)
+                        && columns[13].equals("ADMITTED_TYPED_RECEIVER")
+                        && columns[14].contains("fromPrecomputed validates all 11 mapped fields"),
+                "typed receiver custody receipt drift");
+        check(Files.readString(facts, StandardCharsets.UTF_8).contains("fromPrecomputed"),
+                "typed receiver source is not present");
     }
 
     private static void checkNativeReceipt(
