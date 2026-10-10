@@ -108,6 +108,8 @@ jobs:
         run: python3 m3/runtime-integration/check-m3string-byte-source-needle.py
       - name: Check mixed canonical literal replacement receiver
         run: python3 m3/runtime-integration/check-m3string-mixed-literal-replace.py
+      - name: Validate hash-pinned Java crate manifests
+        run: python3 m3/runtime-integration/check-m3jdk-java-crate-manifests.py
       - name: Prove canonical DAG master-repair recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
       - name: Prove direct M3 String stream traversal recipe
