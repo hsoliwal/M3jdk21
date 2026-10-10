@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.M3StringSearchPrecompute.lastIndexOf(byte[], byte, int, M3String, int): the reverse KMP of the needle's plan per source unit through bounds-checked accessors for M3 needles of LONG_NEEDLE units and up over a flat haystack (A21 lineage, carried to A42 fd9a6ec3b4), 2.3x..5x the stock reverse search at every needle length",
+      "source_commit": "fd9a6ec3b4",
+      "target": "the stock reverse search's shape over the needle's bulk-read units with raw source reads (the needle's last unit sought backwards in a tight loop per coder, each candidate verified backwards; a needle with a unit above 0xff absent from a Latin-1 source at once), handing the rest of the scan to the reverse KMP of the plan (reverseSkipSearch) once eight candidates verified as many units as were walked (DENSE_CANDIDATES), so a degenerate text never costs more than the KMP did",
+      "status": "implemented-locally-verified (G7; flag-off: M3ReverseNeedleTest 428,544 checks against the flat needle on every call; lastIndexOf(needle 16 at start) over 16384 letters units, String 33,765 ns -> 14,801 (12,391), StringBuilder 36,702 -> 7,178)",
+      "target_rule": "the same index as the flat needle for every needle over every haystack and from-index"
+    }
+  ]
+}

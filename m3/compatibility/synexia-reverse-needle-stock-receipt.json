@@ -1,0 +1,78 @@
+{
+  "schema": "M3JDK21_SYNEXIA_REVERSE_NEEDLE_STOCK_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 tests",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-reverse-needle-stock-20261010",
+    "pullRequest": null,
+    "commit": "60b8a31d7c09bc073deb2c879ad8b64a80661067",
+    "stackedOn": [
+      {
+        "pullRequest": 10163,
+        "crate": "m3-flat-needle-gate"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.ReverseNeedleStock",
+    "crate": "m3-reverse-needle-stock",
+    "fossReuseDecisionRow": "string.search.reverse-needle-stock-lane",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "commit": "fd9a6ec3b4",
+        "target": "java.lang.M3StringSearchPrecompute.lastIndexOf / seekBackwards / latin1 / reverseSkipSearch / sourceUnit / DENSE_CANDIDATES",
+        "mechanics": "the shape of the in-tree StringLatin1.lastIndexOf and StringUTF16.lastIndexOf loops (jdk-21+35) over the needle's char[] units with the raw source reads those loops make; the A21 reverse KMP kept as the hand-off lane; the hand-off counters of the A37/A38 rule"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same index as the flat needle for every needle over every haystack and from-index; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-flat-needle-gate-20261010 (#673, A42) on #667 on #665 on #664 on #663 on #662 on #661 on #660 on #657 on #654 on #653 on #610 on #609 on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringSearchPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3StringSearchPrecompute.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+      "before": "db06fa74cbd86cdba849d9a124d53a1b456faa8319d1eabcceb0a464bcecfa2e",
+      "after": "5eb93fcc26966b87554e5de9c4e36e6c5f64c6a1e13b7be31282007fbb9b062e",
+      "resource": "00-M3StringSearchPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3ReverseNeedleTest.java",
+      "before": "ABSENT",
+      "after": "360b40db932ff12f1e371cb9ac8af08f15dee042112ca69d2708ee2671d3905a",
+      "resource": "01-M3ReverseNeedleTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3ReverseNeedleTest flag-off: 428,544 checks (String and StringBuilder lastIndexOf with and without a from-index, every from-index shape, with M3 needles of 1..4097 units across the 16-unit lane threshold shaped as atoms, tuples and slices, present at the start, the end and the middle, absent, absent with the text's commonest unit at their end and periodic over periodic texts, the hand-off cases, over texts of letters, the full Latin-1 range, CJK-mixed, periodic, single-unit and surrogate alphabets of 0..20000 units; against the flat needle on every call); the same test passes on the A42 build (semantics unchanged)",
+    "regressions": "PASS_WINDOWS M3FlatNeedleGateTest 172,125; M3IgnoreCaseInPlaceTest 658,151; M3IgnoreCaseWindowsTest 188,512; M3MixedCoderCompareTest 30,620; M3StringMixedCompareTest 262,675; M3StringM3OnM3Test 121,574; M3BlockSignalTest 68,520; M3StringPositionInvariant6Test 13; M3CodePointCountRepeatTest 14,004; M3ReverseLaneTest 350,200; M3CharDenseLinearTest 62,120; M3NeedlePlanBandTest 122,823; M3NeedleLaneTest 997,980; M3TrigramRepeatTest 13,068; M3NeedleArgTest 73,440; M3RegexLiteralGateTest 29,376; M3TQFactsBuildTest 23,595; M3IndexOfFlatNeedleTest 137,948; M3RegexSubjectViewTest 9,567; M3GradedWindowsTest 56,591; M3CharSearchRepeatTest 25,380; M3CharSearchWindowsTest 61,650; M3StringLiteralSplitTest 53,378; M3ContentEqualsTest 7,980; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringAtomBulkTest 100,779; A4 90,118; A8 329,909; A9 46,920; A6 204 + 29",
+    "timing": "flag-off (a43/probe/ReverseNeedleBench, the minimum of three runs per build, a43/probe/rn-a42-r*.tsv on the A42 build vs rn-a43-r*.tsv on this one, rn-compare-min3.txt; hot; the flat needle's stock lane in parentheses): lastIndexOf(needle 16 at start) over 16384 letters units, String 33,765 ns -> 14,801 (12,391), StringBuilder 36,702 -> 7,178; lastIndexOf(needle 64 absent) over 16384 letters units, String 25,164 ns -> 12,740 (12,536), StringBuilder 38,767 -> 9,456; lastIndexOf(needle 256 at end) over 16384 letters units, String 920 ns -> 210 (75), StringBuilder 803 -> 203; lastIndexOf(needle 2048 absent) over 16384 letters units, String 27,834 ns -> 8,767 (8,869), StringBuilder 31,559 -> 10,845; lastIndexOf(needle 64 dense) over 16384 letters units, String 35,316 ns -> 12,803 (9,336), StringBuilder 20,970 -> 11,766; lastIndexOf(needle 16 absent) over 2048 letters units, String 1,665 ns -> 571 (858), StringBuilder 1,785 -> 452; lastIndexOf(needle 64 at end) over 2048 letters units, String 179 ns -> 219 (32), StringBuilder 164 -> 231; lastIndexOf(needle 64 at start) over 2048 letters units, String 1,981 ns -> 733 (1,009), StringBuilder 1,663 -> 569; lastIndexOf(needle 64 at start) over 16384 CJK-mixed units, String 24,224 ns -> 12,449 (5,546), StringBuilder 27,180 -> 10,741; lastIndexOf(needle 256 absent) over 16384 CJK-mixed units, String 39,349 ns -> 10,628 (5,833), StringBuilder 40,142 -> 12,321; lastIndexOf(needle 16 absent) over 2048 CJK-mixed units, String 2,228 ns -> 649 (293), StringBuilder 2,138 -> 571; lastIndexOf(needle 2048 at end) over 16384 CJK-mixed units, String 2,861 ns -> 732 (519), StringBuilder 2,642 -> 983; lastIndexOf(needle 64 absent) over 16384 periodic ab units, String 36,611 ns -> 45,437 (242,201), StringBuilder 36,434 -> 24,033; lastIndexOf(needle 256 at start) over 16384 periodic ab units, String 332 ns -> 207 (150), StringBuilder 332 -> 181; lastIndexOf(needle 64 dense) over 16384 periodic ab units, String 34,384 ns -> 26,853 (313,045), StringBuilder 53,822 -> 51,212; lastIndexOf(needle 2048 dense) over 16384 periodic ab units, String 29,453 ns -> 44,221 (7,280,436), StringBuilder 48,754 -> 31,675; lastIndexOf(needle 16 at start) over 16384 a single unit units, String 69 ns -> 50 (22), StringBuilder 67 -> 49; lastIndexOf(needle 64 absent) over 16384 a single unit units, String 22,788 ns -> 6,609 (5,477), StringBuilder 16,014 -> 6,369; lastIndexOf(needle 64 dense) over 16384 a single unit units, String 59,921 ns -> 57,350 (501,266), StringBuilder 68,755 -> 41,847; lastIndexOf(needle 256 dense) over 16384 a single unit units, String 32,019 ns -> 43,744 (2,081,941), StringBuilder 51,024 -> 32,356; lastIndexOf(needle 2048 dense) over 2048 a single unit units, String 4,756 ns -> 1,933 (591), StringBuilder 3,957 -> 2,084",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3StringSearchPrecompute.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3ReverseNeedleStockRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3ReverseNeedleTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the stock shape finds the rightmost match first, as the stock loops do: the needle's last unit is sought backwards from the highest start the from-index allows and every candidate is verified backwards; the first candidate that verifies is the answer",
+    "the hand-off to the reverse KMP continues below the failed candidate with nothing matched: every match whose last unit lies above it was already ruled out, and the KMP's answer for the rest is the rightmost match there, so the word is the stock one on either path",
+    "the hand-off fires after eight candidates once the units verified reach the units walked, the sign of a text whose candidates verify long and often (a single-unit text against a needle ending in that unit); random text never fires it; when the plan is unavailable (a needle over the plan bound, or memory pressure) the stock shape runs to the end, as the stock loops would",
+    "the source is read raw, as the stock loops read it, the seek loop tight per coder (seekBackwards): the arguments fix every index inside the source (the highest start is at most the source length less the needle length; a verify never reads below the candidate's start)",
+    "a needle with a unit above 0xff is absent from a Latin-1 source at once (latin1), as the stock lane answers by coder; the KMP lane scanned the whole source for it",
+    "the needle's units come out once in bulk (A13), as before; LONG_NEEDLE stays 16, so shorter needles keep the compact-value lane of A21",
+    "stacked on A42: merge after #673 and the Synexia crate PR (#10163 first, content-bearing merges); the owner commit is 16026d56e6"
+  ]
+}
