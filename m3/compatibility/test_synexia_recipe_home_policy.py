@@ -44,8 +44,8 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
 
         # Canonical copied-Synexia residue is now explicitly classified in addition to the
         # earlier target/residue surfaces. Keep exact cardinality and reject duplicate surfaces.
-        self.assertEqual(20, len(rows))
-        self.assertEqual(20, len({row["local_surface"] for row in rows}))
+        self.assertEqual(21, len(rows))
+        self.assertEqual(21, len({row["local_surface"] for row in rows}))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
@@ -106,6 +106,14 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             ]["canonical_owner"],
         )
 
+        self.assertEqual(
+            "TARGET_PRODUCT_ADAPTER",
+            by_surface["m3/collections/recipe/**"]["disposition"],
+        )
+        self.assertIn(
+            "com.synexia.rewrite.M3CollectionLanes",
+            by_surface["m3/collections/recipe/**"]["canonical_owner"],
+        )
         self.assertEqual(
             "JDK_TARGET_SPECIFIC",
             by_surface[
@@ -300,7 +308,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_PIN_V1", row["schema"])
         self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
         self.assertEqual(
-            "cd7d4f2c841e862389392d93018ea2a5ded89a51",
+            "929a228b703947dfb2151e4ca90efcfe209a6a80",
             row["canonical_revision"],
         )
         self.assertEqual(
@@ -308,7 +316,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             row["canonical_manifest_path"],
         )
         self.assertEqual(
-            "e8bfef17234e231a053dda7bee2e3175144647e6",
+            "7744ec1c6de43a1f8a673229cdb34c52e0b404d0",
             row["canonical_manifest_git_blob"],
         )
         self.assertEqual(
@@ -391,6 +399,14 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             for node in compiler.findall("m:configuration/m:excludes/m:exclude", ns)
         ]
         self.assertIn("com/synexia/**", excludes)
+
+        resource_excludes = [
+            node.text
+            for node in profile.findall(
+                "m:build/m:resources/m:resource/m:excludes/m:exclude", ns
+            )
+        ]
+        self.assertIn("com/synexia/**", resource_excludes)
 
         surefire = next(
             plugin
