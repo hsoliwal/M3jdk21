@@ -34,6 +34,7 @@ for mode in jit int nocompact c2; do
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3TranslationReceiverMapTest | tee "build/logs/translation-receiver-map-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests AcronymSidecarCatalogTest | tee "build/logs/acronym-sidecar-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3AcronymPrecomputeTest | tee "build/logs/acronym-precompute-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3AcronymReceiverCoverageTest | tee "build/logs/acronym-receiver-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputePayloadTest | tee "build/logs/synexia-payload-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputeReceiverTest | tee "build/logs/synexia-receiver-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconFamilySidecarCatalogTest | tee "build/logs/synexia-family-sidecar-$mode.log"
