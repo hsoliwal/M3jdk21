@@ -6,9 +6,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.Map;
 
-/** Executable proof for the lossless five-family M3JDK sidecar receiver. */
+/** Executable proof for the lossless six-family M3JDK sidecar receiver. */
 public final class SharedLexiconFamilySidecarCatalogTest {
     private static int checks;
     private static final String DIGEST_A = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -51,9 +52,18 @@ public final class SharedLexiconFamilySidecarCatalogTest {
                     scope, coordinate, "freq-1", "value-a");
             check(catalog.frequencyAt(frequencyKey).orElseThrow().frequencyAt(2) == 2,
                     "token frequencies retained");
+            M3PhrasePrecompute.Scope phraseScope =
+                    new M3PhrasePrecompute.Scope("source-a", "record-a", "rev-1", "owner-a");
+            M3PhrasePrecompute.Catalog phrases = catalog.phraseAt(
+                    new SharedLexiconFamilySidecarCatalog.PhraseKey(phraseScope)).orElseThrow();
+            check(Arrays.equals(phrases.longestMatchAt(new int[]{1, 2, 4}, 0).orElseThrow()
+                    .targetTokenIds(), new int[]{8}), "phrase target IDs retained");
+            check(Arrays.equals(phrases.rewrite(new int[]{1, 2, 4}), new int[]{8}),
+                    "empty phrase replacement retained");
             check(catalog.rowCounts().equals(Map.of(
-                    "prefix-counts", 1, "spell-index", 2, "token-frequency", 1,
-                    "token-hash-precompute", 1, "translation-projection", 1)),
+                    "phrase-rewrite", 2, "prefix-counts", 1, "spell-index", 2,
+                    "token-frequency", 1, "token-hash-precompute", 1,
+                    "translation-projection", 1)),
                     "row counts");
 
             String records = Files.readString(root.resolve("synexia.records.tsv"),
@@ -117,7 +127,8 @@ public final class SharedLexiconFamilySidecarCatalogTest {
                             + "tampered");
             expectIOException(() -> SharedLexiconFamilySidecarCatalog.open(root),
                     "checksum drift rejected");
-            System.out.println("M3JDK_FAMILY_SIDECAR_PASS checks=" + checks + " families=5 spell_rows=2");
+            System.out.println("M3JDK_FAMILY_SIDECAR_PASS checks=" + checks
+                    + " families=6 phrase_rows=2 spell_rows=2");
         } finally {
             deleteTree(root);
         }
@@ -145,6 +156,11 @@ public final class SharedLexiconFamilySidecarCatalogTest {
                 "source_language", "target_language", "lexicon_fingerprint", "source_fingerprint",
                 "translated_token_ids", "mapped_token_count")
                 + scope + "en\thi\tlex-a\tsrc-a\t0,3,7\t2\n";
+        String phrases = row("source_id", "record_id", "source_manifest_revision", "owner_fingerprint",
+                "source_token_ids", "target_token_ids")
+                + scope + "1,2\\t8\\n"
+                + scope + "4\\t-\\n";
+        writeFamily(root, "synexia.phrases.tsv", phrases);
         writeFamily(root, "synexia.prefix-counts.tsv", prefix);
         writeFamily(root, "synexia.spell.tsv", spell);
         writeFamily(root, "synexia.token-frequency.tsv", frequency);
@@ -157,6 +173,7 @@ public final class SharedLexiconFamilySidecarCatalogTest {
                         "1", "2", "mapping-a", "name-a", "profile-a", "profile-a", "{}");
         Files.writeString(root.resolve("synexia.records.tsv"), records, StandardCharsets.UTF_8);
         String index = row("schema_version", "family", "file", "rows", "sha256")
+                + indexLine("phrase-rewrite", "synexia.phrases.tsv", phrases, 2)
                 + indexLine("prefix-counts", "synexia.prefix-counts.tsv", prefix, 1)
                 + indexLine("spell-index", "synexia.spell.tsv", spell, 2)
                 + indexLine("token-frequency", "synexia.token-frequency.tsv", frequency, 1)
