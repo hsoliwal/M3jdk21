@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.NeedlePlanBand
+displayName: M3JDK21 needle plans asked only for sources inside the trigram band, without forward tables
+description: >-
+  The plan of an M3 needle (forward and reverse KMP tables, a 256-entry skip table, trigram facts)
+  was built on the needle's first use over every M3 source, short ones included, although since
+  A35 it serves only the trigram gate on M3 sources, which a 256..32768-unit source alone can use,
+  and the reverse search of a long needle over a flat haystack: a one-shot 8-unit needle over a
+  100-unit Latin-1 source paid the plan. The plan is now asked only for sources inside the band
+  and carries only the reverse table and the facts; every M3 needle takes the A35 window lane; the
+  searches no longer reached (the per-unit searches over an M3 source, the flat-haystack forward
+  search) are removed. Java step: M3String, M3StringSearchPrecompute and the jtreg proof; no
+  upstream file changed. Stacks on crate m3-needle-window-lane (branch order); the M3String
+  preimage is the A35 postimage and the M3StringSearchPrecompute preimage the A34 postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-needle-plan-band

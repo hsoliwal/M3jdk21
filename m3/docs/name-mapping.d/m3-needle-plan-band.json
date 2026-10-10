@@ -1,0 +1,13 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.M3StringSearchPrecompute.prepare: the plan of an M3 needle (forward and reverse KMP tables, a 256-entry skip table, trigram facts) was built on the needle's first use over every M3 source, short ones included, and the per-unit searches over an M3 source and the flat-haystack forward search were kept although unreachable since A35 and A21 (A14 lineage, carried to A35 20941bc18b)",
+      "source_commit": "20941bc18b",
+      "target": "the plan is asked only for sources inside the 256..32768-unit trigram band, where its gate can answer, and carries only the reverse table and the facts; every M3 needle takes the A35 window lane; the unreachable searches removed",
+      "status": "implemented-locally-verified (G7; flag-off: M3NeedlePlanBandTest 122,823 checks against the flat String on every call; cold-needle indexOf(M3 needle 8 miss) over a 100-unit Latin-1 source, outside the band, 1,012 ns -> 181 (31), a 32-unit needle 1,418 -> 196 (35), lastIndexOf 524 -> 149 (187))",
+      "target_rule": "the same index and the same match as the flat String for every M3 needle over every source"
+    }
+  ]
+}
