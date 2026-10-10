@@ -32,6 +32,7 @@ public final class M3LexiconCoverageInvariantTest {
             "unicodex.instance-index");
 
     private static final Set<String> REQUIRED_FAMILY_SIDECARS = Set.of(
+            "phrase-rewrite",
             "prefix-counts",
             "spell-index",
             "token-frequency",
