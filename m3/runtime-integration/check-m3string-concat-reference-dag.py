@@ -16,7 +16,7 @@ body = helper[start:end]
 
 for fragment in [
     "M3String result = M3String.empty();",
-    "String argument = stringOf(args[index]);",
+    "String argument = args[index];",
     "M3String.canonicalize(constant)",
     "M3String.canonicalize(argument)",
     "result.concat(piece)",
