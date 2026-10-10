@@ -2,6 +2,7 @@
  * SPDX-License-Identifier: Apache-2.0 */
 package com.synexia.rewrite;
 
+import com.m3.rewrite.collections.M3SegmentedLaneNativeRecipe;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
