@@ -248,17 +248,26 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         row = rows[0]
         self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_PIN_V1", row["schema"])
         self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
-        self.assertRegex(row["canonical_revision"], r"^[0-9a-f]{40}$")
+        self.assertEqual(
+            "cd7d4f2c841e862389392d93018ea2a5ded89a51",
+            row["canonical_revision"],
+        )
         self.assertEqual(
             "synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv",
             row["canonical_manifest_path"],
         )
-        self.assertRegex(row["canonical_manifest_git_blob"], r"^[0-9a-f]{40}$")
+        self.assertEqual(
+            "e8bfef17234e231a053dda7bee2e3175144647e6",
+            row["canonical_manifest_git_blob"],
+        )
         self.assertEqual(
             "docs/M3-SCALE/invariants/SYNEXIA-PUBLIC-TARGET-CONVERGENCE-1.json",
             row["convergence_invariant_path"],
         )
-        self.assertRegex(row["convergence_invariant_git_blob"], r"^[0-9a-f]{40}$")
+        self.assertEqual(
+            "7fe4ff7a9a7e436416cc836f76ea1dd3ed34408c",
+            row["convergence_invariant_git_blob"],
+        )
         self.assertEqual("Apache-2.0", row["license"])
         self.assertEqual("PINNED_CANONICAL_SOURCE", row["state"])
 
