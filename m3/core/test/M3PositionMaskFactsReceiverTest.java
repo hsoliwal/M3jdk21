@@ -31,7 +31,7 @@ public final class M3PositionMaskFactsReceiverTest {
         checks++;
         check(facts.entryCount() == 4096 && facts.primitivePayloadBytes() == 65536L, "payload metadata");
         checks++;
-        check(facts.sourceRevision().startsWith("7d005c8"), "source revision");
+        check(facts.sourceRevision().equals("ab4edcbd7eb475a3c9abb12d4a0fc14703a826ec"), "source revision");
         checks++;
         check(facts.rootHash().equals(ROOT) && facts.metadataOnly(), "identity");
         checks++;
