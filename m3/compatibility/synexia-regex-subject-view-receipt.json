@@ -1,0 +1,113 @@
+{
+  "schema": "M3JDK21_SYNEXIA_REGEX_SUBJECT_VIEW_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-regex-subject-view-20261009",
+    "pullRequest": null,
+    "commit": "caa37ed838b",
+    "stackedOn": [
+      {
+        "pullRequest": 10003,
+        "crate": "m3-tq-facts-radix"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.RegexSubjectView",
+    "crate": "m3-regex-subject-view",
+    "fossReuseDecisionRow": "regex.subject.block-view",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+        "commit": "890adb6410",
+        "target": "java.util.regex.Matcher.subject",
+        "mechanics": "search and match hand the nodes a view instead of the text"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "commit": "3347766985",
+        "target": "java.lang.M3StringMatchText",
+        "mechanics": "the A11 bulk getChars fills each 1024-unit block on first touch"
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java",
+        "commit": "890adb6410",
+        "target": "jdk.internal.access.JavaLangAccess.m3MatchText",
+        "mechanics": "the SharedSecrets accessor java.util.regex uses to reach java.lang package-private state, implemented in System.java"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owners",
+    "disposition": "ADAPT: the nodes read the same units in the same order; every observable comes from the String; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-tq-facts-build-20261009 (#555, A19) on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringMatchText",
+      "java.util.regex.Matcher",
+      "jdk.internal.access.JavaLangAccess",
+      "java.lang.System"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed under the supersession model: System.java, Matcher.java and JavaLangAccess.java after-images and hunks regenerated from a synthetic after-state tree; M3StringMatchText.java joins the scope as its own superseded owner; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringMatchText.java",
+      "before": "ABSENT",
+      "after": "167c7173033015c7b07a2e12debc0981542d1e300b8c97cd0181499635b6fcbe",
+      "resource": "00-M3StringMatchText.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+      "before": "707acfa7f38325eb132657cc9604460703b3a3107882a0d688a11f6fd805ed4b",
+      "after": "85f8a5ebdcf3ce2d27f2cf59eb308d6da49f81fc0f0c8a8046a656d2fbfcde07",
+      "resource": "01-Matcher.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java",
+      "before": "c46439ad9143a19d71003ca51fa65f5da8a33172dd724d6d949a5867b4ba3fff",
+      "after": "7b17f3f4f708c8c7e65580302e982ec061def8e19470e4c1da6959b948197bd9",
+      "resource": "02-JavaLangAccess.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/util/regex/M3RegexSubjectViewTest.java",
+      "before": "ABSENT",
+      "after": "3cace6de649eba48d9b19493ceb0344d34a909fbb8573fbf6fa8dbecc345ff91",
+      "resource": "03-M3RegexSubjectViewTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/System.java",
+      "before": "e92aaa681e47d851d412c1c995fd573bfcf1ce04347e2cd8bbf4fc46c8960479",
+      "after": "8302abd95f1b0936bcc530c936b88d325ed3104df294c8e8b38c7542c709e4d6",
+      "resource": "00-System.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 151 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3RegexSubjectViewTest flag-off: 9,567 checks (27 patterns incl. lookaround, backreferences, canonical equivalence, multiline, case-insensitive, a quantifier spanning block edges; find sequences, hitEnd, requireEnd, matches, lookingAt, regions at 1024-unit block edges with transparent bounds, find(from), reset, usePattern, reset to flat, M3 and builder subjects over atoms, nested tuples and slices of 0..300000 units, against flat)",
+    "regressions": "PASS_WINDOWS M3TQFactsBuildTest 23,595; M3RegexLiteralGateTest 29,376; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringM3OnM3Test 121,574; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,919; A6 204 + 29",
+    "timing": "flag-off (a20/probe/RegexSubjectBench, bench-a19.tsv vs bench-a20b.tsv): (?s).* matches 16384 Latin-1 atom 134 us -> 41, tuple 161 -> 41 (flat 23); 2048 atom 14.1 us -> 2.6; 262144 UTF-16 tuple 2.73 ms -> 0.40 (flat 1.29); class/alternation/backreference/word-boundary scans 1.1x..3.6x; early failures and lookingAt 41..50 ns -> 160..790 ns per matcher (one block)",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets under the supersession model; apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3RegexSubjectViewRecipeTest 3/3 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3RegexSubjectViewTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the nodes read a view whose charAt, length and toString return the subject's units; every subsequence, append, group and MatchResult still comes from Matcher.text",
+    "blocks of 1024 units are allocated and filled on first touch: an early failure or a short lookingAt pays one block (0.2..0.8 us per matcher), a full scan pays one bulk read per block; the first build's eager flat array made early failures O(n) and was rejected",
+    "a String above 16M units has no view and is read directly, as before; a non-String CharSequence is read directly, as before",
+    "the view is built on the first search or match and dropped by reset(CharSequence) when the text changes; usePattern and region keep it",
+    "SharedSecrets.getJavaLangAccess() may be null before System.initPhase1: the nodes then read the text",
+    "stacked on A19: merge after #555 and the Synexia crate PR (#10003 first, content-bearing merges)"
+  ]
+}

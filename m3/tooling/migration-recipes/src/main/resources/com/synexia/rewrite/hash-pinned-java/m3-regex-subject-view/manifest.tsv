@@ -1,0 +1,5 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3StringMatchText.java	ABSENT	167c7173033015c7b07a2e12debc0981542d1e300b8c97cd0181499635b6fcbe	00-M3StringMatchText.java.txt
+src/java.base/share/classes/java/util/regex/Matcher.java	707acfa7f38325eb132657cc9604460703b3a3107882a0d688a11f6fd805ed4b	85f8a5ebdcf3ce2d27f2cf59eb308d6da49f81fc0f0c8a8046a656d2fbfcde07	01-Matcher.java.txt
+src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java	c46439ad9143a19d71003ca51fa65f5da8a33172dd724d6d949a5867b4ba3fff	7b17f3f4f708c8c7e65580302e982ec061def8e19470e4c1da6959b948197bd9	02-JavaLangAccess.java.txt
+test/jdk/java/util/regex/M3RegexSubjectViewTest.java	ABSENT	3cace6de649eba48d9b19493ceb0344d34a909fbb8573fbf6fa8dbecc345ff91	03-M3RegexSubjectViewTest.java.txt
