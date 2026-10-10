@@ -1,0 +1,75 @@
+{
+  "schema": "M3JDK21_SYNEXIA_TRIGRAM_FACTS_REPEAT_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimage (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-trigram-facts-repeat-20261010",
+    "pullRequest": null,
+    "commit": "7aa2cdbb998f35ba146e6ceb3d89d0038ca4cb32",
+    "stackedOn": [
+      {
+        "pullRequest": 10108,
+        "crate": "m3-graded-windows"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.TrigramFactsRepeat",
+    "crate": "m3-trigram-facts-repeat",
+    "fossReuseDecisionRow": "string.search.trigram-facts-on-repeat",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "commit": "8bd83bda61",
+        "target": "java.lang.M3StringSearchPrecompute.sourceFacts / mayContain / trigramFacts",
+        "mechanics": "the A14/A18 source facts cache now registering on the first use and building on the repeat use (the A32 model); the gates answer may-contain without facts"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same index and the same match as the flat String on the first and on every repeat use; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-graded-windows-20261010 (#654, A33) on #653 on #610 on #609 on #608 on #606 on #602 on #594 on #579 on #570 on #567 on #563 on #558 on #555 on #554 on #553 on #536 on #535 on #534 on #532 on #531 on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringSearchPrecompute"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: no upstream target changed, runtime.patch and every after image untouched; the M3StringSearchPrecompute.java owner recorded as a reviewed superseded hash; 68 targets"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+      "before": "c76a92c44bd2e48d2e1c9d2db88e38195528d3456a1913de0370134b16cb778b",
+      "after": "3499318405092e1bd7b37ae59495effd5e5200908ad3ea04492534aaf2d51801",
+      "resource": "00-M3StringSearchPrecompute.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3TrigramRepeatTest.java",
+      "before": "ABSENT",
+      "after": "ac4f3aaf760d43f5d6bfd637aba5ed3cd6a58c8f4262544f7e6e070a86e10907",
+      "resource": "01-M3TrigramRepeatTest.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (44 files, 150 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3TrigramRepeatTest flag-off: 13,068 checks (indexOf, lastIndexOf and contains with M3 needles present, absent and sharing trigrams with the text but absent, indexOf with the same flat needles, regex literal find and matches; fresh sources of 255..32769 units used four times, the first use exact and the later ones gated; three hundred distinct 1000-unit sources in three rotating passes; atoms, tuples and slices; both coders; against the flat String on every call)",
+    "regressions": "PASS_WINDOWS M3NeedleArgTest 73,440; M3RegexLiteralGateTest 29,376; M3TQFactsBuildTest 23,595; M3StringM3OnM3Test 121,574; M3IndexOfFlatNeedleTest 137,948; M3RegexSubjectViewTest 9,567; M3GradedWindowsTest 56,591; M3CharSearchRepeatTest 25,380; M3CharSearchWindowsTest 61,650; M3StringPositionInvariant6Test 13; M3StringLiteralSplitTest 53,378; M3MixedCoderCompareTest 30,620; M3ContentEqualsTest 7,980; M3IgnoreCaseWindowsTest 188,512; M3AtomGetCharsTest 1,572; M3FactsLaneTest 8,932; M3HashRangeTest 920; M3BuilderAppendTest 3,042; M3StringStreamsBuilderTest 160,335; M3StringEncodeBulkTest 18,279; M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,920; A6 204 + 29",
+    "timing": "flag-off (a33/probe/ColdPrecomputeBench, bench-a32.tsv on the A33 build vs a34/probe/bench-after.tsv; cold = 256 distinct sources in rotation; flat in parentheses): indexOf(M3 needle miss) Latin-1 atom 256 units 8,459 ns -> 227 (72), 2048: 46,409 -> 1,296 (231), 16384: 431,880 -> 20,655 (5,266); UTF-16 256: 10,113 -> 234 (68), 2048: 66,399 -> 1,685 (1,376), 16384: 482,651 -> 20,435 (10,978); tuples alike; regex literal find miss Latin-1 256: 7,762 -> 300 (180), 2048: 51,453 -> 2,109 (1,275), 16384: 429,519 -> 22,182 (13,160); UTF-16 16384: 474,387 -> 21,262 (13,624); hot rows unchanged within noise (16384 Latin-1: M3 needle miss 44 ns, regex literal miss 64, against 5,011 and 12,222 flat)",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 68 targets (no upstream target changed; M3StringSearchPrecompute.java superseded); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3TrigramFactsRepeatRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3TrigramRepeatTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the facts are a bet on repetition, so they are built on the second use: a source searched once pays the exact search and a small cache entry, a source searched again pays the facts once more than before",
+    "the gates answer may-contain when the facts are absent, which is what they already answered for sources outside the band and when the facts were unavailable: the exact search stays authoritative",
+    "the cold residual over flat is the A14 plan search running without facts; routing a first search over a source without facts through the A27 window lane is the next candidate",
+    "stacked on A33: merge after #654 and the Synexia crate PR (#10108 first, content-bearing merges); the owner commit is e8ca0867c0"
+  ]
+}
