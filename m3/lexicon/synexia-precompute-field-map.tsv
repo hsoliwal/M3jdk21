@@ -57,3 +57,8 @@ M3LexiconPrecompute.TokenFrequency	frequencies	Map<Integer,Integer>	frequencies	
 M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTokenIds	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
 M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
 M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
+SharedRelatedLexemeCatalog.Relation	sourceId	String	source_id	m3lex-family-v2:synexia.related.tsv	MAPPED	source family remains an admitted relation identity and is never inferred
+SharedRelatedLexemeCatalog.Relation	recordId	String	record_id	m3lex-family-v2:synexia.related.tsv	MAPPED	record identity remains joined to the canonical Synexia mapping
+SharedRelatedLexemeCatalog.Relation	lexeme	String	lexeme	m3lex-family-v2:synexia.related.tsv	MAPPED	exact UTF-16 source lexeme is preserved byte-for-byte at the sidecar boundary
+SharedRelatedLexemeCatalog.Relation	relatedLexeme	String	related_lexeme	m3lex-family-v2:synexia.related.tsv	MAPPED	relation target is preserved and never reversed or synthesized
+SharedRelatedLexemeCatalog.Relation	coordinate	SharedLexiconCatalog.Coordinate	shard_id,image_row	m3lex-family-v2:synexia.related.tsv	MAPPED	physical M3LEX coordinate remains bound to the canonical source record
