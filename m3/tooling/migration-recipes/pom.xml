@@ -132,7 +132,7 @@
             <configuration>
               <useModulePath>false</useModulePath>
               <includes>
-                <include>**/com/m3/rewrite/synexia/*ConsumerTest.java</include>
+                <include>**/M3Synexia*ConsumerTest.java</include>
                 <include>**/com/m3/rewrite/synexia/M3SynexiaRecipeHomePolicyTest.java</include>
               </includes>
               <failIfNoTests>true</failIfNoTests>
