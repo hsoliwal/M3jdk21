@@ -1,0 +1,46 @@
+name: M3 instance metadata receiver
+
+on:
+  pull_request:
+    branches:
+      - codex/m3jdk-precompute-coverage-invariant-20261010
+    paths:
+      - m3/core/src/com/m3/text/M3InstanceIndex.java
+      - m3/core/test/M3InstanceIndexTest.java
+      - m3/core/test/M3InstanceIndexReceiverCoverageTest.java
+      - m3/core/test/M3LexiconCoverageInvariantTest.java
+      - m3/lexicon/synexia-instance-target-map.tsv
+      - m3/lexicon/synexia-instance-target-receiver-receipt.tsv
+      - m3/lexicon/FOSS_REUSE_DECISION.tsv
+      - m3/build.sh
+      - .github/workflows/m3-instance-metadata-receiver.yml
+  push:
+    branches:
+      - codex/m3jdk-instance-metadata-receiver-20261010
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  instance-metadata:
+    name: Java 21 instance/title receiver and custody proof
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Compile and execute M3 instance receiver
+        shell: bash
+        run: |
+          set -euo pipefail
+          export M3_JDK="$JAVA_HOME"
+          bash m3/build.sh
+          grep -R --fixed-strings             "M3_INSTANCE_INDEX_RECEIVER_COVERAGE_PASS"             m3/build/logs/instance-index-receiver-jit.log

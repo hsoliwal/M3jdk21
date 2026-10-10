@@ -139,8 +139,8 @@ public final class M3LexiconCoverageInvariantTest {
                 "number target map does not preserve source identity and bounded precompute fields");
         check(acronymTargets.contains("dictlang.acronyms\tM3LexiconPrecompute.AcronymPrecompute\tSTAGED_PROVEN\t40"),
                 "acronym target map is not source-pinned");
-        check(instanceTargets.contains("proper-nouns\tcom.m3.text.M3InstanceIndex\tTARGET_CONTRACT_OPEN_NO_PAYLOAD\tREFERENCE_ONLY_PAYLOAD_NOT_ADMITTED")
-                        && instanceTargets.contains("titles\tcom.m3.text.M3InstanceIndex\tTARGET_CONTRACT_OPEN_NO_PAYLOAD\tREFERENCE_ONLY_PAYLOAD_NOT_ADMITTED"),
+        check(instanceTargets.contains("proper-nouns\tcom.m3.text.M3InstanceIndex\tTARGET_METADATA_CONTRACT_PROVEN\tREFERENCE_ONLY_PAYLOAD_NOT_ADMITTED")
+                        && instanceTargets.contains("titles\tcom.m3.text.M3InstanceIndex\tTARGET_METADATA_CONTRACT_PROVEN\tREFERENCE_ONLY_PAYLOAD_NOT_ADMITTED"),
                 "proper-name/title target map does not preserve reference-only status");
 
         System.out.println("M3JDK_LEXICON_PRECOMPUTE_COVERAGE_PASS "
