@@ -1,79 +1,80 @@
-# M3 atomize/patternize receiver
+# M3 atomize/patternize analysis
 
-M3JDK21 is a **public target repository**. Reusable atomize/patternize/mastery machinery is
-canonically developed in Synexia; this directory is the public receiver and verification surface.
+This directory is a non-destructive repository-analysis entry point. It does **not** replace the
+repository's native build.
 
-## Public mode — default
-
-A fresh public clone can verify the checked-in Apache-2.0 receiver packet without access to
-Synexia, a private Maven repository, or OpenRewrite:
-
-```sh
-bash .m3/atomize-patternize/run.sh
-```
-
-This dispatches to `public-verify.sh`, which:
-
-1. compiles the existing JDK-only `m3/synexia-import` verifier with Java 21 warnings-as-errors;
-2. parses and recomputes the root of `m3/synexia-import/synexia-seed-export.tsv`;
-3. verifies every checked-in `m3/vendor/synexia/**` file against its declared SHA-256;
-4. emits `.m3/target/atomize-patternize/public-receiver/receipt.tsv`.
-
-Public verification proves integrity/provenance of the checked-in receiver packet. It does **not**
-claim the private/current Synexia mastery campaign was rerun against this checkout.
-
-## Maintainer refresh mode
-
-Maintainers with the exact reviewed Synexia recipe artifact may run the full content-bound mastery
-analysis explicitly:
-
-```sh
-M3_ATOM_PATTERN_MODE=maintainer \
-SYNEXIA_RECIPE_VERSION=<reviewed-version> \
-bash .m3/atomize-patternize/run.sh
-```
-
-Maintainer mode defaults to:
+By default it runs the mastered read-only composite:
 
 `com.synexia.m3.EveryModuleAtomPatternMastery`
 
 That composite performs strict FILE -> PACKAGE -> MODULE -> PROJECT -> REPOSITORY atom/pattern
-coverage and reuses the deterministic regex/String permutation campaign, compiler/JUnit/Java-JNI
-mastery evidence, current mastery fan-in and heavy-campaign binding.
+coverage and then reuses the canonical regex/String permutation campaign, compiler/JUnit/Java-JNI
+mastery evidence and current V6 fan-in. It has no mutation, source-copy, replacement, merge, or
+promotion authority.
 
-For the lighter inventory-only lane:
+For the lighter inventory-only lane, set:
 
 ```sh
 export SYNEXIA_ATOM_PATTERN_RECIPE=com.synexia.m3.EveryModuleAtomPatternApplication
 ```
 
-## Bootstrap a maintainer analysis snapshot
+## Bootstrap an unbound repository
 
-Maintainer mode is content-bound. When a rollout branch intentionally has no `inventory.tsv`, bind
-the current ordinary Java/POM bytes first:
+A rollout branch may intentionally contain only the shared runner/readme/bootstrap scripts and no
+`inventory.tsv` yet. Bind that repository's current ordinary Java/POM bytes first:
 
 ```sh
 bash .m3/atomize-patternize/bootstrap.sh
 ```
 
-Rebinding is explicit:
+The bootstrap does **not** invoke Maven or OpenRewrite. It creates only
+`.m3/atomize-patternize/inventory.tsv` plus transient evidence under `.m3/target`.
+
+If the repository changes later, rebinding is explicit:
 
 ```sh
 SYNEXIA_REBIND_INVENTORY=1 bash .m3/atomize-patternize/bootstrap.sh
 ```
 
-The bootstrap does not invoke Maven or OpenRewrite. Generated evidence stays under `.m3/target`.
+A normal run still fails closed when source/POM bytes drift from the bound inventory.
 
-## Authority boundary
+## Content-bound execution
 
-Neither mode grants source-copy, replacement, merge, semantic-equivalence or promotion authority.
+`inventory.tsv` binds the generated envelope to the exact ordinary Java and `pom.xml` bytes seen
+when the envelope was created. Before Maven or OpenRewrite is invoked, `run.sh` rebuilds a sorted
+`source-files.tsv`, hashes it, and refuses with `M3_SOURCE_CONTENT_DRIFT` or
+`M3_SOURCE_FILE_SET_DRIFT` if the repository no longer matches that inventory.
 
-- Synexia owns reusable recipes, donor catalogues, static precompute observers, regex/String
-  permutation mastery and Java/JNI mastery machinery.
-- M3JDK21 owns its public product source, JDK-specific adapters/backports, public Apache receiver
-  snapshots, OpenJDK build/jtreg/runtime gates, and promotion.
-- Repeatable M3JDK21 defects are fed back into Synexia recipes first, then received through pinned
-  public-safe outputs or thin target receivers.
+The execution snapshot is retained under `.m3/target/atomize-patternize/`:
 
-OpenJDK product promotion remains a separate `configure -> make -> jtreg -> runtime/benchmark`
-decision.
+- `source-files.tsv` — exact kind/path/byte-count/SHA-256 rows,
+- `execution-receipt.tsv` — structural/content/bound roots and selected recipe artifact,
+- OpenRewrite/Maven output — analysis evidence only.
+
+Generated/build/vendor trees remain excluded. File names containing tab, CR, or LF are refused by
+the generator because this evidence format is deliberately line-oriented and exact.
+
+## Prerequisite
+
+Install the matching `com.synexia:synexia-openrewrite-recipes` artifact into the Maven repository
+visible to this project, then set:
+
+```sh
+export SYNEXIA_RECIPE_VERSION=<installed-version>
+```
+
+A repository with no Java source is content-verified first and then exits cleanly with
+`NO_JAVA_SOURCE_ROOTS`; it does not require Maven or a recipe artifact.
+
+## Run
+
+```sh
+bash .m3/atomize-patternize/run.sh
+```
+
+Existing Maven reactors are used directly. Repositories without Maven build files use a temporary
+POM under `.m3/target/atomize-patternize/` and the Java roots from the verified source manifest.
+
+OpenRewrite DataTables are analysis evidence only. Any content drift, parse/dependency/build
+failure, or recipe failure is explicit residue to resolve; it is not permission to copy or mutate
+donor source.
