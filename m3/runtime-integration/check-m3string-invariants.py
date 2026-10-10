@@ -1271,6 +1271,71 @@ if any(re.match(r"^\s*-\s*['\"]test/jdk/", line)
 if "M3StringHistoryConvergenceRecipeTest" in workflow:
     fail("M3 String workflow must not restore Synexia-owned history recipe proof locally")
 
+# Copyright 2026 Hitesh Soliwal and contributors: workflow coverage additions.
+def check_string_jtreg_schedule(workflow: str) -> None:
+    """Require actual make-test selectors, not merely mentions in path filters."""
+    import shlex
+
+    commands = re.findall(r'^\s+run: (make test TEST=.*)$', workflow, flags=re.MULTILINE)
+    if len(commands) != 1:
+        fail("M3 String workflow must have one explicit matched-image jtreg command")
+    try:
+        tokens = shlex.split(commands[0])
+    except ValueError as error:
+        fail(f"M3 String jtreg command has invalid quoting: {error}")
+    if len(tokens) != 3 or tokens[:2] != ["make", "test"] or not tokens[2].startswith("TEST="):
+        fail("M3 String jtreg command changed its explicit make-test contract")
+    selected = tokens[2][len("TEST="):].split()
+    if len(selected) != len(set(selected)):
+        fail("M3 String jtreg command contains duplicate tests")
+    required = {
+        'test/jdk/java/lang/String/M3MappedStringBackingTest.java',
+        'test/jdk/java/lang/String/MapGuardTest.java',
+        'test/jdk/java/lang/String/MapFactsTest.java',
+        'test/jdk/java/lang/String/MapUtfTest.java',
+        'test/jdk/java/lang/String/M3StringFactsCompositionTest.java',
+        'test/jdk/java/lang/String/M3StringCanonicalDagTest.java',
+        'test/jdk/java/lang/String/M3StringStreamsTest.java',
+        'test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java',
+        'test/jdk/java/lang/String/M3StringRegexReplacementTest.java',
+        'test/jdk/java/lang/String/M3StringInternTest.java',
+        'test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java',
+        'test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java',
+        'test/jdk/java/lang/String/M3StringJoinCarryTest.java',
+        'test/jdk/java/lang/String/M3StringBinaryConcatTest.java',
+        'test/jdk/java/lang/String/M3StringCodePointGeometryTest.java',
+        'test/jdk/java/lang/String/M3StringLiteralMatchesTest.java',
+        'test/jdk/java/lang/String/M3StringBuilderRangeBulkTest.java',
+        'test/jdk/java/lang/String/M3StringByteSourceNeedleTest.java',
+        'test/jdk/java/lang/String/M3StringMixedLiteralReplaceTest.java',
+        'test/jdk/java/lang/String/M3StringRegexSplitHistoryTest.java',
+        'test/jdk/jdk/internal/mindex/M3TQFactsTest.java',
+        'test/jdk/java/util/regex/M3RegexLiteralTQTest.java',
+        'test/jdk/java/util/regex/M3RegexReuseTest.java',
+        'test/jdk/java/lang/String/M3StringConcatTupleTest.java',
+        'test/jdk/java/lang/String/M3StringFactsMixedConsumersTest.java',
+        'test/jdk/java/lang/String/M3StringJniShadowLifetimeTest.java',
+        'test/jdk/java/lang/String/M3StringLiteralSplitTest.java',
+        'test/jdk/java/lang/String/M3StringOwnerRangeLifetimeTest.java',
+        'test/jdk/java/lang/String/M3StringPositionInvariant6Test.java',
+        'test/jdk/java/lang/String/M3StringRegexSplitCurrentTest.java',
+        'test/jdk/java/lang/String/M3StringUtf16DifferentialTest.java',
+        'test/jdk/java/lang/String/M3TQSparseContainmentTest.java',
+        'test/jdk/java/lang/String/M3TQTest.java',
+    }
+    missing = required - set(selected)
+    if missing:
+        fail("M3 String jtreg coverage lost: " + ", ".join(sorted(missing)))
+    for trigger in ["test/jdk/java/lang/String/M3*.java", "test/jdk/java/lang/String/libM3TQTest.cpp"]:
+        if not re.search(r"^\s+- ['\"]" + re.escape(trigger) + r"['\"]\s*$", workflow, re.MULTILINE):
+            fail(f"M3 String workflow lost source/support trigger: {trigger}")
+    if not re.search(r'^\s+run: python3 m3/runtime-integration/check-m3string-regex-split-current\.py\s*$',
+                     workflow, re.MULTILINE):
+        fail("M3 String workflow lost current regex-split source check")
+
+
+check_string_jtreg_schedule(workflow)
+
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
