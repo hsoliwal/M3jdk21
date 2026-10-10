@@ -33,13 +33,13 @@ public final class M3LanguageGrammarSupportTest {
         String manifest = Files.readString(
                 Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
         String row = Arrays.stream(manifest.split("\\n", -1))
-                .filter(line -> line.startsWith("translate.rows\\t"))
+                .filter(line -> line.startsWith("translate.rows\t"))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("translation manifest row missing"));
         String[] columns = row.split("\\t", -1);
         check(columns.length == 9);
-        check(columns[5].equals("M3StringFacts + TranslationMapping + GrammarSupport"));
-        check(columns[8].equals("translation_grammar_supported"));
+        check(columns[5].equals("M3StringFacts + M3LexiconPrecompute.TranslationProjection + SharedLexiconPrecomputeCatalog.TranslationIdentity + M3LanguageGrammarSupport"));
+        check(columns[8].equals("source_id,record_id,source_language,target_language,lexicon_fingerprint,source_fingerprint,translated_token_ids,mapped_token_count,translation_grammar_supported,source_revision,source_blob_sha"));
         System.out.println("M3JDK_GRAMMAR_SUPPORT_PASS checks=" + checks + " languages=16");
     }
 }
