@@ -4158,7 +4158,7 @@ public final class String
      */
     private static boolean asciiCaseMappingLocale(Locale locale) {
         String lang = locale.getLanguage();
-        return lang != "tr" && lang != "az" && lang != "lt";
+        return !"tr".equals(lang) && !"az".equals(lang) && !"lt".equals(lang);
     }
 
     /**
