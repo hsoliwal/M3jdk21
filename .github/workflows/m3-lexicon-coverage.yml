@@ -2,20 +2,10 @@ name: M3 lexicon coverage gate
 
 on:
   pull_request:
-    paths:
-      - "m3/core/test/M3LexiconCoverageInvariantTest.java"
-      - "m3/core/test/M3NumberSpaceContractTest.java"
-      - "m3/lexicon/**"
-      - ".github/workflows/m3-lexicon-coverage.yml"
   push:
     branches:
       - develop
       - codex/m3jdk-precompute-coverage-invariant-20261010
-    paths:
-      - "m3/core/test/M3LexiconCoverageInvariantTest.java"
-      - "m3/core/test/M3NumberSpaceContractTest.java"
-      - "m3/lexicon/**"
-      - ".github/workflows/m3-lexicon-coverage.yml"
 
 permissions:
   contents: read
