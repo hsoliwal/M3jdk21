@@ -22,6 +22,7 @@ import org.openrewrite.Recipe;
 import org.openrewrite.SourceFile;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
+import org.openrewrite.text.PlainTextParser;
 
 final class M3SynexiaFullDeliveryA3RecipeTest {
     private static final String IMPORTER =
@@ -153,17 +154,31 @@ final class M3SynexiaFullDeliveryA3RecipeTest {
     private static List<SourceFile> parse(
             Map<String, String> sources,
             InMemoryExecutionContext context) {
-        List<Parser.Input> inputs = new ArrayList<>(sources.size());
+        List<Parser.Input> javaInputs = new ArrayList<>(sources.size());
+        List<Parser.Input> textInputs = new ArrayList<>(sources.size());
         sources.forEach(
-                (path, source) ->
-                        inputs.add(
-                                Parser.Input.fromString(
-                                        Path.of(path), source)));
-        if (inputs.isEmpty()) return List.of();
-        return JavaParser.fromJavaVersion()
-                .build()
-                .parseInputs(inputs, null, context)
-                .toList();
+                (path, source) -> {
+                    Parser.Input input = Parser.Input.fromString(Path.of(path), source);
+                    if (path.endsWith(".java")) {
+                        javaInputs.add(input);
+                    } else {
+                        textInputs.add(input);
+                    }
+                });
+        List<SourceFile> parsed = new ArrayList<>(sources.size());
+        if (!javaInputs.isEmpty()) {
+            try (var stream = JavaParser.fromJavaVersion().build()
+                    .parseInputs(javaInputs, null, context)) {
+                parsed.addAll(stream.toList());
+            }
+        }
+        if (!textInputs.isEmpty()) {
+            try (var stream = PlainTextParser.builder().build()
+                    .parseInputs(textInputs, null, context)) {
+                parsed.addAll(stream.toList());
+            }
+        }
+        return List.copyOf(parsed);
     }
 
     private static String resource(String path) {
