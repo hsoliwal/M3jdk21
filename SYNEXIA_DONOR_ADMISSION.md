@@ -6,7 +6,9 @@
 
 ## Required direction
 
-Synexia is the donor convergence workspace. M3JDK21 should discover and freely evaluate the reusable Synexia catalogue, and should receive polished outputs only after source-side recipe convergence and evidence sealing. This includes implementation ideas and reusable engineering assets—not only runtime Java classes. Recipes, Maven task crates, DAGs, templates, tests, fixtures, indexes, donor comparisons, benchmarks, docs, and verification tools all belong in the catalogue.
+Synexia is the donor convergence workspace. M3JDK21 should freely discover, evaluate, reuse, and receive qualified Synexia material under the applicable license. Synexia is where reusable ideas are compared, recipes are corrected, implementations are converged, and evidence is sealed. M3 is a receiving project/target, not a competing canonical owner for the same reusable capability.
+
+This covers implementation ideas and engineering assets—not only runtime Java classes. Recipes, Maven task crates, DAGs, templates, tests, fixtures, indexes, donor comparisons, benchmarks, docs, and verification tools all belong in the catalogue. Recipes are first-class deliverables and must not be omitted from donor reuse merely because they are build-time assets.
 
 The default flow is:
 
@@ -16,31 +18,31 @@ M3 target need
   -> identify donor + license + exact source revision
   -> improve/replay the canonical Synexia recipe
   -> seal source hashes + test/build/runtime receipts
-  -> evaluate target compatibility and license boundary
-  -> receive the verified output with provenance
+  -> import/reuse under preserved license and provenance
   -> run M3-specific verification
   -> report gaps back to Synexia
 ```
 
 Do not hand-edit repeated target files when a canonical recipe can generate the same transformation. Do not invent a second canonical owner for a capability already converged in Synexia. Do not claim a recipe ran, a test passed, or a target is polished without an actual receipt.
 
-## License boundary (mandatory)
+## License and repository metadata
 
-Synexia-owned material is intended to be Apache-2.0 reusable. Preserve its license, notices, source commit, source path, and artifact hashes on receipt. Ideas and behavior can inform independent implementations, but source-code copying must follow the actual donor license.
+Synexia-owned material is intended to be reusable under Apache License 2.0. M3 should borrow that material—including recipes—while preserving applicable copyright/license notices, NOTICE obligations, source commit, source path, artifact hashes, and other required provenance. Reuse remains subject to the actual license of each file and donor; public availability alone is not a license grant.
 
-This repository currently declares GPL-2.0 in its repository metadata. Apache-2.0 is **not automatically compatible with GPL-2.0-only** for combining and redistributing code. Therefore this policy authorizes discovery, evaluation, and provenance tracking immediately, but does not silently authorize importing Apache-2.0 source into a GPL-2.0-only combined work. Before each source import, record the actual target licensing terms and choose a documented compatible boundary: for example, a separately maintained component where legally appropriate, a valid applicable exception/dual-license grant, or an explicitly reviewed licensing decision. Never strip Apache notices or relabel Synexia code as GPL-only by assumption.
+**Inventory finding requiring reconciliation:** the M3JDK21 GitHub repository metadata endpoint reports `GPL-2.0`, while the repository's root `LICENSE` file and README describe Apache-2.0. Those signals conflict. This PR does not resolve or silently override that conflict. Until the canonical license declaration is reconciled, each import must preserve its upstream license and notices, and maintainers must verify the applicable repository/file terms before combining or redistributing the result. Do not infer GPL-only from API metadata or infer that all historical files are Apache-2.0 from the README alone.
 
-Recipes are first-class licensed artifacts. A recipe's transformation logic, fixtures, templates, and generated outputs each need provenance and license review; do not assume that calling a recipe removes the source-license obligations of copied/generated code.
+Recipes are first-class licensed artifacts. Review recipe source, fixtures, templates, and generated output provenance separately where needed; executing a recipe does not automatically erase source-license obligations. Never strip notices or silently relicense Synexia material.
 
 ## Admission checklist
 
 - [ ] Existing target owner and API contract inventoried; duplicate implementation avoided.
 - [ ] Synexia donor commit, path, artifact SHA-256, recipe identity, and license recorded.
 - [ ] Donor's own license/version/provenance reviewed; public availability is not treated as permission.
+- [ ] Target license declaration reconciled; applicable terms checked before combining/redistributing.
 - [ ] Preimage/postimage hashes recorded for every modified target file.
 - [ ] Recipe refusal, replay, and fixed-point behavior verified where applicable.
 - [ ] Format/static checks -> compile -> tests -> JNI/native runtime -> target runtime executed in order.
 - [ ] Logs and receipts retained; unexecuted stages remain OPEN.
 - [ ] Target-specific adaptations and unresolved gaps recorded and fed back to Synexia.
 
-This document does not change M3JDK21's declared license, alter public APIs, or authorize an unreviewed source import. It establishes the required donor-convergence and admission workflow.
+This document does not change the target's license. It establishes the required donor-convergence, provenance, and admission workflow.
