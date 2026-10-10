@@ -116,10 +116,10 @@ final class M3StringDirectStreamTraversalRecipeTest {
             // String.java fixture even when the parser returns an exact round-trip AST.
             // Keep every other diagnostic fail-closed; the recipe also requires exact
             // printAll() equality before admitting the hash-pinned replacement.
-            String diagnostic = String.valueOf(error);
-            if (diagnostic.contains("org.openrewrite.java.JavaParsingException")
-                    && diagnostic.contains("Expected to be able to find @exception")) {
-                return;
+            for (Throwable cause = error; cause != null; cause = cause.getCause()) {
+                if ("Expected to be able to find @exception".equals(cause.getMessage())) {
+                    return;
+                }
             }
             throw new AssertionError(error);
         });
