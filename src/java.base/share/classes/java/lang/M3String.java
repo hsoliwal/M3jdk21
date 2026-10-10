@@ -517,13 +517,15 @@ final class M3String implements CharSequence {
     boolean contentIsLatin1() {
         if (coder() == String.LATIN1) return true;
         int length = length();
-        char[] window = new char[Math.min(length, LATIN1_SCAN_WINDOW)];
-        for (int from = 0; from < length; from += window.length) {
-            int count = Math.min(window.length, length - from);
+        char[] window = null;
+        for (int from = 0; from < length; ) {
+            int count = windowUnits(from, length - from);
+            if (window == null || window.length < count) window = new char[count];
             getChars(from, from + count, window, 0);
             for (int index = 0; index < count; index++) {
                 if (window[index] > 0xff) return false;
             }
+            from += count;
         }
         return true;
     }
@@ -1237,14 +1239,40 @@ final class M3String implements CharSequence {
         return -1;
     }
 
+    /** The first bulk window of a scan (A33): an early exit pays a small read. */
+    static final int FIRST_WINDOW_UNITS = 64;
+
+    /** The second bulk window of a scan (A33). */
+    static final int SECOND_WINDOW_UNITS = 256;
+
+    /** The third bulk window of a scan (A33). */
+    static final int THIRD_WINDOW_UNITS = 1024;
+
+    /** The steady-state bulk window of a scan (A33). */
+    static final int MAX_WINDOW_UNITS = 4096;
+
+    /**
+     * Units of the next bulk window of a scan that has consumed {@code done} units and has
+     * {@code remaining} to go (A33): 64 first, then 256, 1024 and 4096, so a comparison that
+     * differs early or a search that hits early reads little and a long scan keeps its wide
+     * windows.
+     */
+    static int windowUnits(int done, int remaining) {
+        int units = done == 0 ? FIRST_WINDOW_UNITS
+                : done < SECOND_WINDOW_UNITS ? SECOND_WINDOW_UNITS
+                : done < THIRD_WINDOW_UNITS ? THIRD_WINDOW_UNITS : MAX_WINDOW_UNITS;
+        return Math.min(units, remaining);
+    }
+
     /** Units per bulk window when a flat needle is searched (A27). */
     private static final int SEARCH_WINDOW = 4096;
 
     /**
      * Index of a flat needle (for example a literal) in {@code [fromIndex, endIndex)}, or -1
-     * (A27): the haystack range comes out in bulk windows in its own coder and the stock
-     * vectorized search runs over each window; consecutive windows overlap by the needle's
-     * length minus one, so a match straddling a window edge is seen by the next window.
+     * (A27): the haystack range comes out in bulk windows in its own coder (graded through
+     * {@link #windowUnits}, never shorter than twice the needle) and the stock vectorized search
+     * runs over each window; consecutive windows overlap by the needle's length minus one, so a
+     * match straddling a window edge is seen by the next window.
      * Prepared facts prove absence first; a UTF-16 needle is never in a Latin-1 haystack.
      */
     int indexOf(String needle, int fromIndex, int endIndex) {
@@ -1258,15 +1286,20 @@ final class M3String implements CharSequence {
         if (prepared != null && !prepared.mayContain(needle)) return -1;
         byte coder = coder();
         if (coder == String.LATIN1 && !needle.isLatin1()) return -1;
-        int windowUnits = searchWindow(end - from, needleLength, coder);
-        if (windowUnits < 0) return indexOfPerUnit(needle, from, end);
-        byte[] window = new byte[windowUnits << coder];
-        for (int start = from; ; start += windowUnits - needleLength + 1) {
-            int count = Math.min(windowUnits, end - start);
+        if (searchWindow(end - from, needleLength, coder) < 0) return indexOfPerUnit(needle, from, end);
+        int floor = (int) Math.min(end - from, 2L * needleLength);
+        byte[] window = null;
+        for (int start = from, done = 0; ; ) {
+            int remaining = end - start;
+            int count = Math.min(remaining, Math.max(windowUnits(done, remaining), floor));
+            if (window == null || window.length < count << coder) window = new byte[count << coder];
             getBytes(window, start, 0, coder, count);
             int found = String.indexOf(window, coder, count, needle, 0);
             if (found >= 0) return start + found;
-            if (start + count == end) return -1;
+            if (count == remaining) return -1;
+            int step = count - needleLength + 1;
+            start += step;
+            done += step;
         }
     }
 
@@ -1286,16 +1319,20 @@ final class M3String implements CharSequence {
         byte coder = coder();
         if (coder == String.LATIN1 && !needle.isLatin1()) return -1;
         int end = start + needleLength;
-        int windowUnits = searchWindow(end, needleLength, coder);
-        if (windowUnits < 0) return lastIndexOfPerUnit(needle, start);
-        byte[] window = new byte[windowUnits << coder];
-        for (int stop = end; ; stop -= windowUnits - needleLength + 1) {
-            int count = Math.min(windowUnits, stop);
+        if (searchWindow(end, needleLength, coder) < 0) return lastIndexOfPerUnit(needle, start);
+        int floor = (int) Math.min(end, 2L * needleLength);
+        byte[] window = null;
+        for (int stop = end, done = 0; ; ) {
+            int count = Math.min(stop, Math.max(windowUnits(done, stop), floor));
             int begin = stop - count;
+            if (window == null || window.length < count << coder) window = new byte[count << coder];
             getBytes(window, begin, 0, coder, count);
             int found = String.lastIndexOf(window, coder, count, needle, count - needleLength);
             if (found >= 0) return begin + found;
             if (begin == 0) return -1;
+            int step = count - needleLength + 1;
+            stop -= step;
+            done += step;
         }
     }
 

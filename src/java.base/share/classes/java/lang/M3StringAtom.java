@@ -390,10 +390,11 @@ final class M3StringAtom extends M3StringOwner {
 
     /** Latin-1 storage against a UTF-16 flat value: each flat window compressed, then in place. */
     private int mismatchNarrowAgainstUtf16(int start, byte[] flat, int flatOffset, int count) {
-        byte[] narrow = new byte[Math.min(count, WINDOW)];
+        byte[] narrow = null;
         long source = address + start;
         for (int done = 0; done < count; ) {
-            int chunk = Math.min(narrow.length, count - done);
+            int chunk = M3String.windowUnits(done, count - done);
+            if (narrow == null || narrow.length < chunk) narrow = new byte[chunk];
             int flatBase = flatOffset + done;
             if (StringUTF16.compress(flat, flatBase, narrow, 0, chunk) == chunk) {
                 int index = mismatchBytes(source + done, narrow, BYTE_BASE, chunk, 0);
@@ -412,11 +413,11 @@ final class M3StringAtom extends M3StringOwner {
 
     /** UTF-16 storage (native byte order) against a Latin-1 flat value: each flat window inflated, then in place. */
     private int mismatchWideAgainstLatin1(int start, byte[] flat, int flatOffset, int count) {
-        byte[] wide = new byte[Math.min(count << 1, WINDOW)];
-        int perWindow = wide.length >> 1;
+        byte[] wide = null;
         long source = address + ((long) start << 1);
         for (int done = 0; done < count; ) {
-            int chunk = Math.min(perWindow, count - done);
+            int chunk = M3String.windowUnits(done, count - done);
+            if (wide == null || wide.length < chunk << 1) wide = new byte[chunk << 1];
             StringLatin1.inflate(flat, flatOffset + done, wide, 0, chunk);
             int index = mismatchBytes(source + ((long) done << 1), wide, BYTE_BASE, chunk, 1);
             if (index >= 0) return done + index;

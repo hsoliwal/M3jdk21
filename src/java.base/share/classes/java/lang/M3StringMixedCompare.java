@@ -37,8 +37,9 @@ import jdk.internal.util.ArraysSupport;
  * flat sides: the {@code StringLatin1.compareToCI}/{@code regionMatchesCI} family when either side
  * is Latin-1 and the code-point rule of {@code StringUTF16.compareToCIImpl} when both sides are
  * UTF-16. Since A28 the stock helpers themselves run over bulk windows in each side's own coder
- * ({@link #CASE_WINDOW} units; two UTF-16 sides keep surrogate pairs inside one window), so a
- * differing unit pair costs what it costs a flat String. Equality and ordering use the vectorized
+ * (graded through {@link M3String#windowUnits}; two UTF-16 sides keep surrogate pairs inside one
+ * window), so a differing unit pair costs what it costs a flat String and an early difference
+ * costs one small read (A33). Equality and ordering use the vectorized
  * {@link ArraysSupport#mismatch(char[], char[], int)}.
  */
 final class M3StringMixedCompare {
@@ -177,9 +178,6 @@ final class M3StringMixedCompare {
         return true;
     }
 
-    /** Units per window side for the case-insensitive lanes (A28): the stock folds run per window. */
-    static final int CASE_WINDOW = 4096;
-
     /**
      * {@code CASE_INSENSITIVE_ORDER.compare(left, right)}: the stock {@code compareToCI} family over
      * bulk windows of both sides in their own coders (A28); the coder pair picks the stock rule
@@ -196,7 +194,7 @@ final class M3StringMixedCompare {
         byte rightCoder = contentCoder(right);
         boolean codePoints = leftCoder == String.UTF16 && rightCoder == String.UTF16;
         for (int base = 0; base < limit; ) {
-            int count = Math.min(CASE_WINDOW, limit - base);
+            int count = M3String.windowUnits(base, limit - base);
             byte[] a = window(left, base, count, leftCoder);
             byte[] b = window(right, base, count, rightCoder);
             if (codePoints) {
@@ -234,17 +232,19 @@ final class M3StringMixedCompare {
         boolean codePoints = leftCoder == String.UTF16 && rightCoder == String.UTF16;
         M3String leftM3 = left.m3();
         M3String rightM3 = right.m3();
-        byte[] a = leftM3 == null ? left.value() : new byte[Math.min(CASE_WINDOW, len) << leftCoder];
-        byte[] b = rightM3 == null ? right.value() : new byte[Math.min(CASE_WINDOW, len) << rightCoder];
+        byte[] a = leftM3 == null ? left.value() : null;
+        byte[] b = rightM3 == null ? right.value() : null;
         for (int base = 0; base < len; ) {
-            int count = Math.min(CASE_WINDOW, len - base);
+            int count = M3String.windowUnits(base, len - base);
             int aOffset = toffset + base;
             int bOffset = ooffset + base;
             if (leftM3 != null) {
+                if (a == null || a.length < count << leftCoder) a = new byte[count << leftCoder];
                 leftM3.getBytes(a, aOffset, 0, leftCoder, count);
                 aOffset = 0;
             }
             if (rightM3 != null) {
+                if (b == null || b.length < count << rightCoder) b = new byte[count << rightCoder];
                 rightM3.getBytes(b, bOffset, 0, rightCoder, count);
                 bOffset = 0;
             }

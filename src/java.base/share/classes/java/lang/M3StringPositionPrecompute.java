@@ -229,27 +229,26 @@ final class M3StringPositionPrecompute {
         return blocks.exact.get(block);
     }
 
-    /** Units per bulk window when a source outside the block range is scanned (A31). */
-    private static final int WINDOW_UNITS = 4096;
-
     /**
      * Sources outside the block range (shorter than {@link #MIN_SOURCE_UNITS}, longer than
      * {@link #MAX_SOURCE_UNITS}, or without a block entry): the units come out in bulk windows in
-     * the source coder and the stock single-unit search runs over each window (A31); a unit
-     * above 0xff is never in Latin-1 storage.
+     * the source coder (graded through {@link M3String#windowUnits}, A33) and the stock
+     * single-unit search runs over each window (A31); a unit above 0xff is never in Latin-1
+     * storage.
      */
     private static int linearIndexOf(M3String source, char unit, int from, int end) {
         byte coder = source.coder();
         if (coder == String.LATIN1 && unit > 0xff) return -1;
-        byte[] window = new byte[Math.min(end - from, WINDOW_UNITS) << coder];
-        int perWindow = window.length >> coder;
-        for (int base = from; base < end; base += perWindow) {
-            int count = Math.min(perWindow, end - base);
+        byte[] window = null;
+        for (int base = from; base < end; ) {
+            int count = M3String.windowUnits(base - from, end - base);
+            if (window == null || window.length < count << coder) window = new byte[count << coder];
             source.getBytes(window, base, 0, coder, count);
             int index = coder == String.LATIN1
                     ? StringLatin1.indexOf(window, unit, 0, count)
                     : StringUTF16.indexOf(window, unit, 0, count);
             if (index >= 0) return base + index;
+            base += count;
         }
         return -1;
     }
@@ -258,16 +257,17 @@ final class M3StringPositionPrecompute {
     private static int linearLastIndexOf(M3String source, char unit, int from) {
         byte coder = source.coder();
         if (coder == String.LATIN1 && unit > 0xff) return -1;
-        byte[] window = new byte[Math.min(from + 1, WINDOW_UNITS) << coder];
-        int perWindow = window.length >> coder;
-        for (int stop = from + 1; stop > 0; stop -= perWindow) {
-            int count = Math.min(perWindow, stop);
+        byte[] window = null;
+        for (int stop = from + 1; stop > 0; ) {
+            int count = M3String.windowUnits(from + 1 - stop, stop);
             int base = stop - count;
+            if (window == null || window.length < count << coder) window = new byte[count << coder];
             source.getBytes(window, base, 0, coder, count);
             int index = coder == String.LATIN1
                     ? StringLatin1.lastIndexOf(window, unit, count - 1)
                     : StringUTF16.lastIndexOf(window, unit, count - 1);
             if (index >= 0) return base + index;
+            stop -= count;
         }
         return -1;
     }

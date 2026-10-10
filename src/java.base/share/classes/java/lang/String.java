@@ -2115,15 +2115,17 @@ public final class String
         if (storage != null) {
             // The receiver's units come out in bulk windows and each window is compared against
             // the sequence (A29); the sequence itself is read as before.
-            char[] window = new char[Math.min(n, 4096)];
-            for (int base = 0; base < n; base += window.length) {
-                int count = Math.min(window.length, n - base);
+            char[] window = null;
+            for (int base = 0; base < n; ) {
+                int count = M3String.windowUnits(base, n - base);
+                if (window == null || window.length < count) window = new char[count];
                 storage.getChars(base, base + count, window, 0);
                 for (int i = 0; i < count; i++) {
                     if (window[i] != cs.charAt(base + i)) {
                         return false;
                     }
                 }
+                base += count;
             }
             return true;
         }
