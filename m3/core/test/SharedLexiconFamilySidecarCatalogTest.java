@@ -158,7 +158,7 @@ public final class SharedLexiconFamilySidecarCatalogTest {
                 + scope + "en\thi\tlex-a\tsrc-a\t0,3,7\t2\n";
         String phrases = row("source_id", "record_id", "source_manifest_revision", "owner_fingerprint",
                 "source_token_ids", "target_token_ids")
-                + scope + "1,2\\t8\\n"
+                + scope + "1,2\t8\n"
                 + scope + "4\\t-\\n";
         writeFamily(root, "synexia.phrases.tsv", phrases);
         writeFamily(root, "synexia.prefix-counts.tsv", prefix);
