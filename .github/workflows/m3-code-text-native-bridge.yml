@@ -14,6 +14,7 @@ on:
       - 'm3/core/test/M3CodeTextPrecomputeCoverageTest.java'
       - 'm3/core/test/java/lang/M3CodeTextNativeBridgeTest.java'
       - 'm3/core/test/java/lang/M3CodeTextFactsReceiverTest.java'
+      - 'm3/core/test/java/lang/M3CodeTextNativeBridgeNativeTest.java'
       - 'm3/lexicon/synexia-code-text-*.tsv'
       - '.github/workflows/m3-code-text-native-bridge.yml'
   workflow_dispatch:
@@ -36,6 +37,27 @@ jobs:
           distribution: temurin
           java-version: '21'
 
+      - name: Check out pinned Synexia JNI donor
+        uses: actions/checkout@v5
+        with:
+          repository: hsoliwal/com.synexia
+          ref: ff3329e06763820930f98d5d30123b1c37a44b34
+          path: m3/build/synexia-donor
+          sparse-checkout: |
+            synexia-indexstring/native/include/mindex_code_text_signal.h
+            synexia-indexstring/native/src/mindex_code_text_signal.c
+            synexia-indexstring/native/src/mindex_code_text_signal_jni.c
+          sparse-checkout-cone-mode: false
+
+      - name: Build pinned Synexia JNI donor
+        shell: bash
+        run: |
+          set -euo pipefail
+          donor=m3/build/synexia-donor/synexia-indexstring/native
+          mkdir -p m3/build/m3-code-text-native
+          gcc -std=c11 -Wall -Wextra -Wpedantic -fPIC -shared -O2             -I "$JAVA_HOME/include"             -I "$JAVA_HOME/include/linux"             -I "$donor/include"             "$donor/src/mindex_code_text_signal.c"             "$donor/src/mindex_code_text_signal_jni.c"             -o m3/build/m3-code-text-native/libsynexia_m3bridge.so
+          nm -D --defined-only m3/build/m3-code-text-native/libsynexia_m3bridge.so             | grep -Fx '0000000000000000 T Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange'             || nm -D --defined-only m3/build/m3-code-text-native/libsynexia_m3bridge.so             | grep -F 'Java_java_lang_M3CodeTextNativeBridge_nativeAnalyzeRange'
+
       - name: Compile patched java.base bridge
         shell: bash
         run: |
@@ -50,7 +72,8 @@ jobs:
             src/java.base/share/classes/java/lang/M3CodeTextNativeContract.java \
             src/java.base/share/classes/java/lang/M3CodeTextNativeBridge.java \
             m3/core/test/java/lang/M3CodeTextNativeBridgeTest.java \
-            m3/core/test/java/lang/M3CodeTextFactsReceiverTest.java
+            m3/core/test/java/lang/M3CodeTextFactsReceiverTest.java \
+            m3/core/test/java/lang/M3CodeTextNativeBridgeNativeTest.java
 
       - name: Run host-Java fallback and validation proof
         shell: bash
@@ -58,6 +81,12 @@ jobs:
           set -euo pipefail
           java --patch-module java.base=m3/build/m3-code-text-native-bridge \
             -ea java.lang.M3CodeTextNativeBridgeTest
+
+      - name: Run loaded native bridge proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          java             -Dm3.code.text.native.path="$PWD/m3/build/m3-code-text-native/libsynexia_m3bridge.so"             -Dm3.code.text.native.required=true             -Dm3.code.text.native.verify=true             --patch-module java.base=m3/build/m3-code-text-native-bridge             -ea java.lang.M3CodeTextNativeBridgeNativeTest
 
       - name: Run typed precomputed facts receiver proof
         shell: bash
