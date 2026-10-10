@@ -113,3 +113,11 @@ M3LexiconPrecompute.SiUnitPrecompute	decimalExponent	int	si_decimal_exponent	syn
 M3LexiconPrecompute.SiUnitPrecompute	dimensionPacked	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains donor-owned
 M3LexiconPrecompute.SiUnitPrecompute	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
 M3LexiconPrecompute.SiUnitPrecompute	prefixable	boolean	si_prefixable	synexia.records.tsv:precompute_payload	MAPPED	SI prefixability remains an explicit donor boolean
+M3StringFacts	utf16Length	int	utf16_length	m3string.text-facts:derived	MAPPED	UTF-16 code-unit length is derived from the immutable source range and remains the exact Java boundary
+M3StringFacts	codePointCount	int	code_point_count	m3string.text-facts:derived	MAPPED	code-point count preserves split surrogate seam semantics without changing source token identity
+M3StringFacts	unpairedSurrogateCount	int	unpaired_surrogate_count	m3string.text-facts:derived	MAPPED	unpaired UTF-16 units remain observable facts, including isolated seam halves
+M3StringFacts	nonBmpCodePointCount	int	non_bmp_code_point_count	m3string.text-facts:derived	MAPPED	non-BMP count is derived only from valid surrogate pairs in the immutable visible range
+M3StringFacts	javaHashCode	int	java_hash_code	m3string.text-facts:derived	MAPPED	Java 31-polynomial hash uses UTF-16 units and composes with normal int overflow
+M3StringFacts	ascii	boolean	ascii	m3string.text-facts:derived	MAPPED	ASCII classification is a conservative code-unit projection and never rewrites the source
+M3StringFacts	latin1	boolean	latin1	m3string.text-facts:derived	MAPPED	Latin-1 classification is a conservative code-unit projection and never rewrites the source
+M3StringFacts	containsWhitespace	boolean	contains_whitespace	m3string.text-facts:derived	MAPPED	whitespace is evaluated by Java Character code-point semantics, including surrogate seams
