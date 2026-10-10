@@ -1,0 +1,27 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "jdk.internal.util.ArraysSupport.vectorizedMismatch over two absolute addresses (memory-segment use) with the ArraysSupport.mismatch tail idiom, jdk-21+35 in-tree",
+      "source_commit": "890adb6410",
+      "target": "java.lang.M3StringAtom.mismatchAtom/mismatchNative: two atoms compared native-to-native when width and byte order agree, by units otherwise",
+      "status": "implemented-locally-verified (G7; flag-off: M3StringM3OnM3Test 121,574 checks, difference found at every position incl. the vectorized tail)",
+      "target_rule": "an answer of -1 means byte-identical units; a width or order mismatch falls back to the unit loop"
+    },
+    {
+      "source": "java.lang.M3StringMixedCompare windows for both-storage equals/compareTo/regionMatches; M3String.startsWith(M3String) per-unit loop (A11, b14284ab6e)",
+      "source_commit": "b14284ab6e",
+      "target": "M3StringMixedCompare.mismatchStorages: a leaf cursor per side (tuple halves descend, slices carry their start) and each pair of leaf segments compared in place; mismatchInPlace covers both-storage pairs; startsWith(M3String) routes through it",
+      "status": "implemented-locally-verified (tuple-on-tuple equals/compareTo 9x..24x faster from 2048 Latin-1 units, 2x..2.5x UTF-16; identical atoms stay identity-fast)",
+      "target_rule": "results byte-identical to two flat Strings"
+    },
+    {
+      "source": "java.lang.M3StringAtom.contentEquals(byte[], coder) / contentEqualsCompactBytes / contentEquals(char[]) pool lookups, per-unit charAt loops (b14284ab6e)",
+      "source_commit": "b14284ab6e",
+      "target": "the same lookups through mismatchUnits (same coder) and a native-order char-array mismatch (width-2 atoms); a Latin-1 atom against a char[] keeps its unit loop",
+      "status": "implemented-locally-verified (pool returns the same atom for an equal spelling and refuses every differing candidate; contentEquals(byte[]) 6x..17x)",
+      "target_rule": "a lookup never admits a candidate whose units differ"
+    }
+  ]
+}

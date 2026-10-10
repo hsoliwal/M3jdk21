@@ -1,0 +1,102 @@
+{
+  "schema": "M3JDK21_SYNEXIA_M3_ON_M3_COMPARE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-m3-on-m3-compare-20261009",
+    "pullRequest": null,
+    "commit": "fdcebacccba",
+    "stackedOn": [
+      {
+        "pullRequest": 9973,
+        "crate": "m3-atom-bulk-io"
+      },
+      {
+        "pullRequest": 9972,
+        "crate": "m3-mixed-compare"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.M3OnM3Compare",
+    "crate": "m3-m3-on-m3-compare",
+    "fossReuseDecisionRow": "string.compare.m3-on-m3",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/jdk/internal/util/ArraysSupport.java",
+        "commit": "890adb6410",
+        "target": "java.lang.M3StringAtom",
+        "mechanics": "vectorizedMismatch over two absolute addresses with the mismatch tail idiom (mismatchNative); the char-array variant for native-order width-2 atoms (mismatchChars)"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringMixedCompare.java",
+        "commit": "b14284ab6e",
+        "target": "java.lang.M3StringMixedCompare",
+        "mechanics": "mismatchStorages with a Leaf cursor per side; mismatchInPlace covers both-storage pairs"
+      }
+    ],
+    "license": "in-tree JDK donor (GPLv2+CPE) and first-party M3 owner",
+    "disposition": "ADAPT: byte-identical results; width or order mismatches fall back to unit loops; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-atom-bulk-read-20261009 (#534, A11) on m3/precompute-ignorecase-mixed-facts-20261009 (#532) on m3/precompute-stack-reapply-20261009 (#531) on master 5f68880c6f",
+    "owners": [
+      "java.lang.M3StringAtom",
+      "java.lang.M3StringMixedCompare",
+      "java.lang.M3String"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed against 10c6c6e358 under the supersession model: no upstream target changed; M3String, M3StringAtom and M3StringMixedCompare owners recorded as superseded; 67 targets, runtime.patch unchanged"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "3480c1d89c6137e771049ec9e9a66f6dd58c2efa3a1f608d49a8be6a3818c3e6",
+      "after": "bb34e805a81e01eb098721b30e34182f823ebd3396046aba05afcf38f38cf6bf",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringAtom.java",
+      "before": "f0bda25831e87d6b1339e8b8931cb2ac0ce7a543f4fd9ef7ea02e6837fc62d7e",
+      "after": "b742092ca0d9453df581fc7d4605627e886dcae0c7ac72dbac32b0dc3cde315e",
+      "resource": "01-M3StringAtom.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringMixedCompare.java",
+      "before": "39d1e0b1a98be4129ad206823922b51838daecb71069a14dde8f54a4f98e0515",
+      "after": "2e3ee9d888fb426703dea98216a204632fb084ecda04a9d4ee4dd92c2552094e",
+      "resource": "02-M3StringMixedCompare.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringM3OnM3Test.java",
+      "before": "ABSENT",
+      "after": "a72d06504c8d97a4a3d61d70383d50f31d4f3c8dc6ce6b0752c1477d6d0a221b",
+      "resource": "03-M3StringM3OnM3Test.java.txt",
+      "step": "hash-pinned-java"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (43 files, 152 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3StringM3OnM3Test flag-off: 121,574 checks (random shapes on both sides: atoms, nested tuples of mixed widths, slices; every consumer against the stock result; mismatchStorages/mismatchAtom at every position incl. the vectorized tail; pool lookups find their atoms and refuse every differing candidate)",
+    "regressions": "PASS_WINDOWS M3StringAtomBulkTest 100,779; M3StringMixedCompareTest 262,675; A4 90,118; A8 329,909; A9 46,920; A6 204 + 29",
+    "timing": "flag-off (a12/probe/M3OnM3Bench, bench-baseline.tsv vs bench-after.tsv): tuple-on-tuple/tuple-on-atom equals and compareTo 9x..24x faster from 2048 Latin-1 units (104 ns vs 952), 2x..2.5x UTF-16; pool contentEquals(byte[]) 6x..17x; identical atoms identity-fast as before",
+    "g8RuntimeRecipe": "PASS_WINDOWS re-seal 67 targets under the supersession model (no upstream change); apply.py --check state=superseded; test_recipe.py 6/6",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3M3OnM3CompareRecipeTest 2/2 (mvn -o test)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3StringM3OnM3Test under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "two atoms compare in place only when width and byte order agree; every other pair compares by units, so results never depend on the layout",
+    "a tuple is never materialized: both ranges are walked leaf atom by leaf atom and each pair of leaf segments is compared in place",
+    "identical-content atoms were already identity-fast through canonical reuse; this leaf changes nothing there",
+    "the admission structural hash (sequential mix per unit) is left alone: changing it alters fingerprints and the lexicon format, a user decision",
+    "stacked on A11: merge after #534 and Synexia #9973, or regenerate the runtime re-seal"
+  ]
+}

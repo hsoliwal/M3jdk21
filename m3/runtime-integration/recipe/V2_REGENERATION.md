@@ -65,3 +65,7 @@ Regenerated against 1b68815ddb: `java/lang/M3StringMixedCompare.java` joins the 
 ## 2026-10-09 re-seal (A11 atom bulk I/O)
 
 Regenerated against 057e92ecb3: the upstream `String.java` after-image and hunks were regenerated from a synthetic after-state tree (every other hunk byte-identical); the M3-owned `M3String.java`, `M3StringAtom.java`, `M3StringOwner.java`, `M3StringTuple.java` and `M3StringMixedCompare.java` keep their v2 after-images and record the new owners as reviewed `superseded` hashes. 67 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-09 re-seal (A12 M3-on-M3 in-place comparison)
+
+Regenerated against 85b27faba2: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3String.java`, `M3StringAtom.java` and `M3StringMixedCompare.java` record their new owners as reviewed `superseded` hashes. 67 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
