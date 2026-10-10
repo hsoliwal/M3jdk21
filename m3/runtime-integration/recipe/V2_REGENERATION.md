@@ -141,3 +141,7 @@ Regenerated against 0f48926fc3: the upstream `String.java` after-image and hunks
 ## 2026-10-10 re-seal (A34 trigram facts on the repeat use)
 
 Regenerated against b4748064de: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3StringSearchPrecompute.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-10 re-seal (A35 M3-needle window lane)
+
+Regenerated against 6fef93347e: no upstream target changed, so `runtime.patch` and every `after` image are untouched; the M3-owned `M3String.java` records its new owner as a reviewed `superseded` hash. 68 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
