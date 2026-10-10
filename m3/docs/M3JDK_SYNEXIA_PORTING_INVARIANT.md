@@ -4,14 +4,20 @@ Status: canonical M3JDK engineering policy.
 
 ## Authority split
 
-**Synexia is the experimental convergence workspace. M3JDK is the canonical target.**
+**Synexia is the canonical donor-convergence and reusable M3 recipe workspace. M3JDK is the canonical JDK product/runtime target.**
 
-Synexia may aggressively explore MIndex/MatIndex layouts, JNI kernels, search indexes,
-precompute images, collections, compiler recipes and algorithm donors. An implementation being
-useful or passing inside Synexia does **not** make its package name, API, storage model, native ABI,
-or object graph part of M3JDK.
+Synexia owns reusable Maven/OpenRewrite recipes, recipe/atom contracts, donor convergence,
+algorithm/problem catalogues, M3Index/MIndex reusable implementations, and reusable JNI/Java
+transformation logic. M3JDK may consume those assets under their reviewed Apache-2.0/provenance
+contract, but it must not evolve a competing reusable implementation.
 
-M3JDK receives capabilities only through an explicit adaptation packet.
+M3JDK remains authoritative for JDK product/build/runtime promotion, target-specific OpenJDK
+backports, target naming, bootstrap/runtime integration, jtreg compatibility and final release
+decisions.
+
+M3JDK receives reusable capabilities only through an explicit proof-bound handoff/adaptation packet.
+Any copied canonical Synexia implementation that still exists in M3JDK is frozen migration residue:
+improve the Synexia owner first, then refresh the target handoff; never patch the residue directly.
 
 ## Mandatory rule for every LLM/source-changing task
 
