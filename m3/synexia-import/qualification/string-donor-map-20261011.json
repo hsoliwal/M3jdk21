@@ -1,0 +1,56 @@
+{
+  "schema": "M3_STRING_DONOR_MAP_QUALIFICATION_V1",
+  "execution": "SDK_EXECUTION",
+  "sourceRevision": "2be201d6ff52ac563bee1f6848ff8d2d436fe5c8",
+  "targetRevision": "8abcc511e3f18b2bf369d2015cfac6ad549f5417",
+  "recipe": "com.synexia.m3.StringDonorMap20261011",
+  "candidateOnly": true,
+  "sourceSdkTests": 5,
+  "receiverTests": 4,
+  "postimageInputPermutations": 24,
+  "receiverRefusals": {
+    "sourceDrift": 4,
+    "missing": 4,
+    "duplicate": 4,
+    "wrongParserKind": 4
+  },
+  "detectedMutants": [
+    "duplicate-admission",
+    "parser-kind-admission"
+  ],
+  "changedFiles": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-mechanical-donor-map/manifest.tsv",
+      "beforeSha256": "38e2074e26f45c86b63075c62425dc2ef2d334856e8eda610f5bae10849d715f",
+      "afterSha256": "f6c6b48aaccb9caf86368eab0888660cb34b47f8c5ba1f21228c92d26e60f160"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3StringMechanicalDonorMapRecipeTest.java",
+      "beforeSha256": "7caddf012194c3e60f9bea8d86a27d09222854a806d9cd81568ca6cf6137b495",
+      "afterSha256": "ee2f63febc595f6872964ac37e9258a56d6b7bdc6a757c72c66791196fed8283"
+    }
+  ],
+  "fixedPoint": "two-stage no-change SDK replay",
+  "atomicity": "Each atom validates its own inputs; no cross-recipe transaction claim.",
+  "unchanged": "All four templates, all four target pre/post seals, receiver engine, product runtime, JNI, public interfaces.",
+  "gates": {
+    "boundedSdkAndReceiver": "PASSED",
+    "canonicalRepositoryEntry": "BLOCKED: rewrite-maven-plugin 5.23.1 unavailable in offline cache",
+    "fullSourceReactor": "NOT_RUN",
+    "fullTargetMigrationModule": "NOT_RUN",
+    "jdkBuildJtregJni": "NOT_RUN; no product source change",
+    "hostedCi": "PENDING",
+    "repositoryPromotion": "HOLD"
+  },
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "6977ef5d95edbb634a68574c3e3482063eda96da",
+    "pullRequest": 10308,
+    "recipe": "com.synexia.m3.StringDonorMap20261011",
+    "packet": "synexia-openrewrite-recipes/tasks/string-donor-map-20261011",
+    "artifactRoot": "4b91ccd0e904691f7e643f3299bc70fd1b7f3eca1827fd62cbeb13d40b5748c0",
+    "evidenceSha256": "91cd84ad217aa7ebf1758a0b7ee046de220cfc950eba693f33fa5da0e89ffac5"
+  },
+  "license": "Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors; original upstream rights preserved",
+  "targetScope": "Draft continuation of target PR724 only; PR597 runtime work is not replaced or rebased."
+}
