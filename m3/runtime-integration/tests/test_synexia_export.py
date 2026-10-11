@@ -48,7 +48,7 @@ class SynexiaExportTest(unittest.TestCase):
         number_row = ("numbers", "Numbers", "synexia-dictlang/src/main/java/com/synexia/dictlang/NumberLexicon.java",
                       "number", "value,spelling", "M3StringFacts + NumberPrecompute", "Apache-2.0", "fixture")
         translation_row = ("translations", "Translations", "synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java",
-                           "translation_id", "source_language,target_language,source_token,target_token", "M3StringFacts + TranslationMapping",
+                           "translation_id", "source_language,target_language,source_token,target_token", "M3StringFacts + TranslationMapping + M3LexiconPrecompute.TranslationProjection + SharedLexiconPrecomputeCatalog.TranslationIdentity",
                            "Apache-2.0", "fixture")
         if with_requirements:
             number_row += (number_requirement,)
@@ -224,8 +224,8 @@ class SynexiaExportTest(unittest.TestCase):
     def test_reviewed_source_manifest_has_explicit_owner_field_coverage(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
         self.assertEqual(10, len(sources))
-        self.assertEqual(12, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
-        self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
+        self.assertEqual(13, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
+        self.assertEqual(16, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
         translation = sources["translate.rows"]
@@ -238,27 +238,30 @@ class SynexiaExportTest(unittest.TestCase):
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
-        with (ROOT / "m3/lexicon/synexia-precompute-field-map.tsv").open(
-                encoding="utf-8", newline="") as stream:
-            rows = list(csv.DictReader(stream, delimiter="\t"))
-        mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
+        field_types = EXPORT.read_field_map(
+            ROOT / "m3/lexicon/synexia-precompute-field-map.tsv", sources)
         allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]", "String"}
-        field_types: dict[str, str] = {}
-        for row in rows:
-            self.assertIn(row["donor_java_type"], allowed_types)
-            previous = field_types.setdefault(row["canonical_payload_field"], row["donor_java_type"])
-            self.assertEqual(previous, row["donor_java_type"], row["canonical_payload_field"])
-        self.assertEqual("long[]", field_types["concept_ids"])
-        self.assertEqual("int[]", field_types["memberships"])
-        self.assertEqual("long", field_types["lexicon_fingerprint"])
-        self.assertEqual("String", field_types["source_revision"])
-        self.assertEqual("double", field_types["si_offset"])
-        self.assertEqual("boolean", field_types["si_prefixable"])
-        self.assertTrue(all(field_types.values()))
-        for source_id in ("dictlang.dictionary", "dictlang.frequency",
-                          "dictlang.thesaurus", "dictlang.antonyms"):
-            required = set(sources[source_id]["precompute_fields"].split(","))
-            self.assertTrue(required.issubset(mapped), source_id)
+        for source_id, source in sources.items():
+            required = {
+                field for field in source["precompute_fields"].split(",") if field
+            }
+            self.assertEqual(required, set(field_types[source_id]), source_id)
+            self.assertTrue(
+                all(donor_type in allowed_types
+                    for donor_type in field_types[source_id].values()),
+                source_id,
+            )
+        self.assertEqual("long[]", field_types["unicodex.langdex.lexemes"]["langdex_target_lexeme_id"]
+                         if "langdex_target_lexeme_id" in field_types["unicodex.langdex.lexemes"]
+                         else field_types["unicodex.langdex.lexemes"]["langdex_concept_id"])
+        self.assertEqual("long", field_types["dictlang.dictionary"]["lexicon_fingerprint"])
+        self.assertEqual("String", field_types["translate.rows"]["lexicon_fingerprint"])
+        self.assertEqual("String", field_types["dictlang.dictionary"]["source_revision"])
+        self.assertEqual("double", field_types["dictlang.si-units"]["si_offset"])
+        self.assertEqual("boolean", field_types["dictlang.si-units"]["si_prefixable"])
+        self.assertEqual("", sources["dictlang.thesaurus"]["precompute_fields"])
+        self.assertEqual("", sources["dictlang.antonyms"]["precompute_fields"])
+
 
     def test_langdex_owner_payload_round_trips_with_admitted_shapes(self):
         with tempfile.TemporaryDirectory() as directory:
