@@ -2,6 +2,8 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 : "${M3_JDK:?Set M3_JDK to an isolated JDK 21 directory}"
+# A proof run must not inherit stale classes, jars, images, or receipts from an earlier source tree.
+rm -rf build
 mkdir -p build/classes build/tests build/logs
 mapfile -t sources < <(find core/src -name '*.java' | sort)
 if ! "$M3_JDK/bin/javac" --release 21 -Xlint:all,-module -d build/classes "${sources[@]}" > build/logs/compile.log 2>&1; then
