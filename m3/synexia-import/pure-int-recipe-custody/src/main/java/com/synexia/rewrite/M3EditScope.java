@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.rewrite.scope;
+package com.synexia.rewrite;
 
 /**
- * Maximum mutation boundary required by an M3 refactoring recipe.
+ * Maximum authority required by one M3 recipe/pass.
  *
- * <p>Scope promotion is monotonic. A recipe that can be proven at FILE scope must not request a
- * broader boundary merely for convenience. Visibility and package authority are intentionally
- * separate: changing one declaration's visibility is not the same authority as coordinating
- * multiple files in a package.</p>
+ * <p>Promotion is monotonic. VISIBILITY is intentionally distinct from PACKAGE: changing one
+ * declaration's accessibility is not equivalent to coordinating multiple files in one package.
  */
 public enum M3EditScope {
     FILE(0),
@@ -23,17 +21,14 @@ public enum M3EditScope {
         this.level = level;
     }
 
-    /** Returns true when this granted scope is broad enough for the required scope. */
     public boolean permits(M3EditScope required) {
         return level >= required.level;
     }
 
-    /** Returns the narrowest scope that contains both boundaries. */
     public M3EditScope promote(M3EditScope other) {
         return level >= other.level ? this : other;
     }
 
-    /** Returns the immediately broader boundary, or LIBRARY_API at the top. */
     public M3EditScope next() {
         return switch (this) {
             case FILE -> VISIBILITY;

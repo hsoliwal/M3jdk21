@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.synexia.rewrite.atom.M3PureIntConvergenceRecipe;
+import com.synexia.rewrite.M3PureIntConvergenceRecipe;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -93,17 +93,8 @@ final class M3ScopeCoverageClosureTest {
 
     @Test
     void registryCoversKnownUnknownNullAndClassLookupPaths() {
-        List<String> names = List.of(
-                "org.openrewrite.java.RemoveUnusedImports",
-                "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe",
-                "com.synexia.rewrite.M3SegmentedLaneNativeRecipe",
+        List<String> targetNames = List.of(
                 "com.m3.rewrite.InstallIndexStringCompatibility",
-                "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
-                "com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe",
-                "com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates",
-                "com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe",
-                "com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe",
-                "com.synexia.rewrite.atom.M3PureIntConvergenceRecipe",
                 "com.m3.rewrite.M3Java21ConvergenceRecipe",
                 "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
                 "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
@@ -120,8 +111,17 @@ final class M3ScopeCoverageClosureTest {
                 "com.m3.rewrite.backport.M3ReleaseJepAuthorityRepairRecipe",
                 "com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe");
 
-        assertEquals(names.size(), M3RecipeScopeRegistry.size());
-        for (String name : names) {
+        assertEquals(15, com.synexia.rewrite.M3RecipeScopeRegistry.size());
+        assertEquals(targetNames.size(), M3RecipeScopeRegistry.targetOverlaySize());
+        assertEquals(
+                com.synexia.rewrite.M3RecipeScopeRegistry.size() + targetNames.size(),
+                M3RecipeScopeRegistry.size());
+
+        for (String name : com.synexia.rewrite.M3RecipeScopeRegistry.policies().keySet()) {
+            assertTrue(M3RecipeScopeRegistry.registered(name), name);
+            assertNotNull(M3RecipeScopeRegistry.require(name), name);
+        }
+        for (String name : targetNames) {
             assertTrue(M3RecipeScopeRegistry.registered(name), name);
             assertNotNull(M3RecipeScopeRegistry.require(name), name);
         }
@@ -157,7 +157,7 @@ final class M3ScopeCoverageClosureTest {
                         "src/main/java/p/A.java",
                         "src/main/java/p/B.java")));
         assertEquals(
-                M3EditScope.MODULE,
+                M3EditScope.PACKAGE,
                 M3ScopeInference.forPaths(List.of(
                         "src/main/java/p/A.java",
                         "src/test/java/p/ATest.java")));

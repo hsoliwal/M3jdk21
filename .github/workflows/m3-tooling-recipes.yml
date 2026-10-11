@@ -7,6 +7,7 @@ on:
       - "m3/**"
     paths:
       - "m3/tooling/migration-recipes/**"
+      - "m3/synexia-import/pure-int-recipe-custody/**"
       - "m3/docs/synexia-apache2-borrowing-contract.md"
       - "m3/compatibility/synexia-canonical-residue-gitblobs.tsv"
       - "m3/compatibility/test_synexia_recipe_home_policy.py"
@@ -90,6 +91,7 @@ jobs:
           set -euo pipefail
           java -version
           mvn -version
+          mvn -B -ntp -f "$REPO/m3/synexia-import/pure-int-recipe-custody/pom.xml" clean install
           mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" clean verify
 
       - name: Emit M3 convergence proof artifacts
