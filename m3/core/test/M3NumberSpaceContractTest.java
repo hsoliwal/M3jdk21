@@ -49,9 +49,20 @@ public final class M3NumberSpaceContractTest {
                 .orElseThrow(() -> new AssertionError("number manifest row missing"));
         String[] columns = row.split("\\t", -1);
         check(columns.length == 9);
-        check(columns[8].equals(
-                "source_id,record_id,min_value,max_value,precomputed_value_count,"
-                        + "shared_utf16_storage,canonical_decimal_spelling,source_revision"));
+        String[] fields = columns[8].split(",", -1);
+        String[] sortedFields = fields.clone();
+        Arrays.sort(sortedFields);
+        check(Arrays.equals(fields, sortedFields));
+        check(Arrays.equals(fields, new String[] {
+                "canonical_decimal_spelling",
+                "max_value",
+                "min_value",
+                "precomputed_value_count",
+                "record_id",
+                "shared_utf16_storage",
+                "source_id",
+                "source_revision"
+        }));
         String targetMap = Files.readString(
                 Path.of("lexicon/synexia-number-target-map.tsv"), StandardCharsets.UTF_8);
         String[] targetLines = targetMap.split("\\n", -1);
@@ -68,7 +79,7 @@ public final class M3NumberSpaceContractTest {
         check(targetColumns[6].contains("com.m3.text.M3NumberSpace"));
         check(targetColumns[9].equals("ADMITTED_TYPED_RECEIVER"));
         check(targetColumns[10].equals(M3NumberSpace.SOURCE_REVISION));
-        System.out.println("M3JDK_NUMBER_CONTRACT_PASS checks=" + checks + " fields=7");
+        System.out.println("M3JDK_NUMBER_CONTRACT_PASS checks=" + checks + " fields=" + fields.length);
     }
 
     private static void expect(Class<? extends Throwable> type, Runnable action) {
