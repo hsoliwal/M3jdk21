@@ -110,3 +110,12 @@ not define public JDK ABI.
 This receiver never creates a Synexia runtime service or Maven dependency behind java.base,
 HotSpot, JNI or ordinary String. Qualified source/mechanics are materialized into target-owned
 runtime boundaries and independently verified there.
+
+
+## Current recipe-workspace custody (partial)
+
+A versioned subset of first-party Apache-2.0 recipe/mastery assets is held at:
+
+`m3/synexia-import/intakes/donor-convergence-workspace-20261011/`
+
+Its `TARGET_MAP.tsv` maps each copied artifact to the existing `OPENREWRITE_RECIPES` estate family. This is partial source custody only: the estate family's status remains `SOURCE_PIN_ONLY`; the complete recipe tree and dependency closure are not accepted or claimed as received. The current pinned snapshot also records a stale source registry owner hash as HOLD until the Synexia Maven task in PR #10263 is merged and the successor snapshot is verified.

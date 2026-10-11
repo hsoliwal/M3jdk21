@@ -62,6 +62,8 @@ def main() -> int:
     mapping = read_tsv(TARGET_MAP)
     if len(mapping) != 3 or {row.get("target_path") for row in mapping} != targets:
         raise ValueError("target map and source provenance do not cover the same exact paths")
+    if any(row.get("estate_family") != "OPENREWRITE_RECIPES" for row in mapping):
+        raise ValueError("recipe custody must map to the existing OPENREWRITE_RECIPES estate family")
     catalogue = ROOT / "m3/vendor/synexia/synexia-openrewrite-recipes/snapshots/20261011/CANONICAL_RECIPE_HOME.tsv"
     workspace = ROOT / "m3/vendor/synexia/synexia-openrewrite-recipes/snapshots/20261011/M3DonorConvergenceWorkspaceProgramRecipe.java"
     text = catalogue.read_text(encoding="utf-8")

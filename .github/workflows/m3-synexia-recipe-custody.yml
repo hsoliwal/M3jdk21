@@ -6,6 +6,7 @@ on:
       - "m3/vendor/synexia/README.md"
       - "m3/vendor/synexia/synexia-openrewrite-recipes/snapshots/20261011/**"
       - "m3/synexia-import/intakes/donor-convergence-workspace-20261011/**"
+      - "m3/synexia-import/current-full-borrow/README.md"
       - ".github/workflows/m3-synexia-recipe-custody.yml"
   push:
     paths:

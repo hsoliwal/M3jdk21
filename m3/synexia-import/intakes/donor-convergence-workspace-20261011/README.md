@@ -17,6 +17,10 @@ This intake makes the canonical recipe/mastery source and registry visible to th
 
 The packet contains the canonical recipe-home index and two source entrypoints: recipe mastery and the read-only donor-convergence workspace program. Both Java files retain their `SPDX-License-Identifier: Apache-2.0` header. The shared vendor `LICENSE` and `NOTICE` are retained.
 
+## Full-estate mapping
+
+All three custody rows bind to the existing `OPENREWRITE_RECIPES` family in `m3/synexia-import/current-full-borrow/synexia-estate.tsv`. This is a partial materialization of that family; the estate row remains `SOURCE_PIN_ONLY` until its complete export and receiving obligations are satisfied. No second family or canonical owner is created.
+
 ## Deliberate limits
 
 - This is not the full 34k+ observed recipe tree.
