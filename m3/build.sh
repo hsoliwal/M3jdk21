@@ -19,6 +19,7 @@ for mode in jit int nocompact c2; do
  flags=();case "$mode" in int)flags=(-Xint);; nocompact)flags=(-XX:-CompactStrings);; c2)flags=(-Xbatch -XX:-TieredCompilation);; esac
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests FoundationTest | tee "build/logs/test-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LexiconPrecomputeTest | tee "build/logs/typed-precompute-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3InstanceIndexPrecomputeTest | tee "build/logs/instance-index-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3DictionaryFrequencyContractTest | tee "build/logs/dictionary-frequency-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3TranslationReceiverMapTest | tee "build/logs/translation-receiver-map-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputePayloadTest | tee "build/logs/synexia-payload-$mode.log"
@@ -28,7 +29,6 @@ for mode in jit int nocompact c2; do
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceTest | tee "build/logs/number-space-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceContractTest | tee "build/logs/number-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LanguageGrammarSupportTest | tee "build/logs/grammar-support-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3InstanceIndexPrecomputeTest | tee "build/logs/instance-index-$mode.log"
 done
 # Build in a private temporary directory, then publish a complete content-addressed file.
 lexicon_tmp=$(mktemp -d build/lexicon.XXXXXX)

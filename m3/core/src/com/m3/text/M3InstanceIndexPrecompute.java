@@ -17,12 +17,14 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
- * Immutable M3JDK receiver for Synexia's concept-external instance index.
+ * Immutable M3JDK target-side proposal guided by Synexia's documented
+ * concept/instance distinction.
  *
- * <p>Proper names remain entity instances, not lexical token identities or
- * X-spine concepts. The operator supplies records and frozen concept
- * coordinates; this owner validates, copies, and exposes deterministic name
- * and reverse-concept views without bundling payload data.</p>
+ * <p>The Synexia semantic reference keeps proper-name instances outside the
+ * X-spine. This M3-owned prototype validates operator-supplied records and
+ * exposes deterministic lookup views without bundling payload data. Its
+ * identity, field schema, UTF-8 validation, ASCII-only folding, and lookup
+ * behavior are target-specific proposals, not a Synexia runtime API.</p>
  */
 public final class M3InstanceIndexPrecompute {
     private static final Comparator<String> UTF8_ORDER =
