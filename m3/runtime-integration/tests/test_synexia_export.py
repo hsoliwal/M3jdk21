@@ -204,6 +204,11 @@ class SynexiaExportTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "missing required fields"):
                 EXPORT.export(manifest, records, root / "output", "fixture", "0" * 40)
 
+    def test_java_string_precompute_fields_preserve_string_shape(self):
+        self.assertTrue(EXPORT._fits_donor_type("synexia-revision-7", "String"))
+        self.assertFalse(EXPORT._fits_donor_type(7, "String"))
+        self.assertFalse(EXPORT._fits_donor_type(True, "String"))
+
     def test_admitted_field_map_rejects_wrong_owner_shape(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -237,7 +242,7 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8", newline="") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
         mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
-        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]"}
+        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]", "String"}
         field_types: dict[str, str] = {}
         for row in rows:
             self.assertIn(row["donor_java_type"], allowed_types)
@@ -246,6 +251,7 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("long[]", field_types["concept_ids"])
         self.assertEqual("int[]", field_types["memberships"])
         self.assertEqual("long", field_types["lexicon_fingerprint"])
+        self.assertEqual("String", field_types["source_revision"])
         self.assertEqual("double", field_types["si_offset"])
         self.assertEqual("boolean", field_types["si_prefixable"])
         self.assertTrue(all(field_types.values()))
