@@ -45,7 +45,7 @@ class StringTargetSuccessorTest(unittest.TestCase):
             with path.open("w", encoding="utf-8", newline="") as handle:
                 writer = csv.DictWriter(
                     handle, fieldnames=phase.SUCCESSOR_HISTORY_HEADER,
-                    delimiter="\\t", lineterminator="\\n")
+                    delimiter="\t", lineterminator="\n")
                 writer.writeheader()
                 writer.writerows(changed)
             with patch.object(phase, "SUCCESSOR_HISTORY", path):
