@@ -28,6 +28,7 @@ public class M3StringPrecomputeSearchTest {
     public static void main(String[] args) throws Exception {
         deterministic();
         randomizedCompositions();
+        randomizedAtomComparisons();
         System.out.println("M3_STRING_PRECOMPUTE_SEARCH_PASS|checks=" + checks);
     }
 
@@ -460,6 +461,24 @@ public class M3StringPrecomputeSearchTest {
         check(rangeRepeated.equals("ababababab"),
                 "repeat preserves existing M3 range independent of join gate");
 
+        String atomLatinLeft = new String("alpha".toCharArray());
+        String atomLatinRight = new String("alphb".toCharArray());
+        check(Integer.signum(atomLatinLeft.compareTo(atomLatinRight))
+                        == Integer.signum(naiveCompare(chars(atomLatinLeft), chars(atomLatinRight))),
+                "atom Latin1 compare");
+        String atomUtfLeft = new String(new char[] {'a', '\u0100', 'z'});
+        String atomUtfRight = new String(new char[] {'a', '\u00ff', 'z'});
+        check(Integer.signum(atomUtfLeft.compareTo(atomUtfRight))
+                        == Integer.signum(naiveCompare(chars(atomUtfLeft), chars(atomUtfRight))),
+                "atom mixed-width compare");
+        String atomRangeBase = new String("xxalphaYYalphbzz".toCharArray());
+        String atomRangeLeft = atomRangeBase.substring(2, 7);
+        String atomRangeRight = atomRangeBase.substring(9, 14);
+        check(Integer.signum(atomRangeLeft.compareTo(atomRangeRight))
+                        == Integer.signum(naiveCompare(chars(atomRangeLeft), chars(atomRangeRight))),
+                "atom range compare");
+        check(atomRangeLeft.compareTo(atomRangeLeft) == 0, "same coordinate compare");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
@@ -663,6 +682,52 @@ public class M3StringPrecomputeSearchTest {
                     label + " exception=" + failure.getClass()
                             + " expected=" + expectedFailure.getClass());
         }
+    }
+
+    private static void randomizedAtomComparisons() {
+        Random random = new Random(0x4d33434f4d504152L);
+        char[] alphabet = {
+                0, 'a', 'b', 'c', 'X', 'Z', '\u00ff', '\u0100',
+                '\ud83d', '\ude42', '\uffff'
+        };
+        for (int trial = 0; trial < 5_000; trial++) {
+            char[] leftChars = new char[random.nextInt(48)];
+            char[] rightChars = new char[random.nextInt(48)];
+            for (int index = 0; index < leftChars.length; index++) {
+                leftChars[index] = alphabet[random.nextInt(alphabet.length)];
+            }
+            for (int index = 0; index < rightChars.length; index++) {
+                rightChars[index] = alphabet[random.nextInt(alphabet.length)];
+            }
+            String left = new String(leftChars);
+            String right = new String(rightChars);
+            check(Integer.signum(left.compareTo(right))
+                            == Integer.signum(naiveCompare(leftChars, rightChars)),
+                    "random atom compare " + trial);
+
+            if (leftChars.length != 0 && rightChars.length != 0) {
+                int leftStart = random.nextInt(leftChars.length + 1);
+                int leftEnd = leftStart + random.nextInt(leftChars.length - leftStart + 1);
+                int rightStart = random.nextInt(rightChars.length + 1);
+                int rightEnd = rightStart + random.nextInt(rightChars.length - rightStart + 1);
+                String leftRange = left.substring(leftStart, leftEnd);
+                String rightRange = right.substring(rightStart, rightEnd);
+                char[] leftOracle = copyRange(leftChars, leftStart, leftEnd);
+                char[] rightOracle = copyRange(rightChars, rightStart, rightEnd);
+                check(Integer.signum(leftRange.compareTo(rightRange))
+                                == Integer.signum(naiveCompare(leftOracle, rightOracle)),
+                        "random atom range compare " + trial);
+            }
+        }
+    }
+
+    private static int naiveCompare(char[] left, char[] right) {
+        int limit = Math.min(left.length, right.length);
+        for (int index = 0; index < limit; index++) {
+            int difference = left[index] - right[index];
+            if (difference != 0) return difference;
+        }
+        return left.length - right.length;
     }
 
     private static int naiveIndexOf(char[] source, char[] target, int fromIndex) {
