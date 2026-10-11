@@ -39,7 +39,7 @@ final class TQSyncTest {
 
     @Test void exactBytesAndFixedPoint() throws Exception {
         var after = apply(before());
-        assertEquals(24, after.size());
+        assertEquals(25, after.size());
         assertTrue(apply(after).isEmpty());
         for (String line : Files.readAllLines(RES.resolve("manifest.tsv"))) {
             if (line.startsWith("#") || line.isBlank()) continue;
@@ -66,7 +66,7 @@ final class TQSyncTest {
     @Test void retainsUnrelatedFiles() throws Exception {
         var files = before();
         files.add(PlainText.builder().sourcePath(Path.of("unrelated.txt")).text("retained\n").build());
-        assertEquals(24, apply(files).size());
+        assertEquals(25, apply(files).size());
         assertTrue(apply(files).stream().noneMatch(f -> f.getSourcePath().toString().equals("unrelated.txt")));
     }
 }

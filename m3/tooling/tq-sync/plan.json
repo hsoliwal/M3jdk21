@@ -36,11 +36,11 @@
       "path": "m3/docs/name-mapping.json",
       "before": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt.before",
-        "sha256": "22ce39ac68e6f5efab18e9bbf6d3da45af585067d88848f1eb7ce8a76987df87"
+        "sha256": "23fc59289fc088b21b26e8a3d1aab9dbbc6f1ab7d6a708e6cc727621e2f203d7"
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt",
-        "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+        "sha256": "4ebbbd2c38e7680170df620cd640037614321d3981d5ecd537e7453d575abf22"
       }
     },
     {
@@ -117,7 +117,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/10-pins.json.txt",
-        "sha256": "a7c4ba68ec1c51febf7a75d3539b857713b4efb2101f6cdea90ddb724e0f841f"
+        "sha256": "6d1c204e5261572bbf0308f3cc4cc1142c1f9b3df973aa01fcb68faffd8ba15f"
       }
     },
     {
@@ -128,7 +128,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
-        "sha256": "8e6db1b290e9ee55bc028ce51e4aae85773cb8be167b7193ee721b031f46be4b"
+        "sha256": "7ad70f998f3ef7a7546b6f566b2fa184e7a16af0137c56c9400424889763a154"
       }
     },
     {
@@ -194,7 +194,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/17-M3TQ.java.txt.txt",
-        "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155"
+        "sha256": "28bdfc7bd39fbd19a816ca2570384c695bdd4b3e1bad19b8eb6d96188111babc"
       }
     },
     {
@@ -216,7 +216,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/19-manifest.tsv.txt",
-        "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338"
+        "sha256": "74b424532635d57fb7dfb27b2b2e24794ac4a039a64df048ceee764e1b0adb7a"
       }
     },
     {
@@ -262,16 +262,24 @@
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/23-M3TQTest.java.txt",
         "sha256": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f"
       }
+    },
+    {
+      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQImageTest.java.txt",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/24-M3TQImageTest.java.txt",
+        "sha256": "72165571d95faebb1199ec65d3525b411d0b47d62ff5b3dfd88d824182df6186"
+      }
     }
   ],
   "guards": [
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72"
+      "sha256": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a"
     },
     {
       "path": "m3/migration/recipe.py",
@@ -279,7 +287,7 @@
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
-      "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155"
+      "sha256": "28bdfc7bd39fbd19a816ca2570384c695bdd4b3e1bad19b8eb6d96188111babc"
     },
     {
       "path": "src/hotspot/share/runtime/arguments.cpp",
@@ -290,5 +298,5 @@
       "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
     }
   ],
-  "plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096"
+  "plan_sha256": "ef90a685e4589414d5bfaf48fc10e7ce85149b17769c31825c70ee7c887a2478"
 }

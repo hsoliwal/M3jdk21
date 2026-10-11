@@ -41,7 +41,7 @@ for row in rows:
 for row in rows:
     assert (CRATE / 'target/generated' / row['path']).read_bytes() == row['after']
 
-# Only the existing TQ record may advance; preserve the other 51 records and
+# Only the existing TQ record may advance; preserve the other 55 records and
 # every top-level authority field, including all 20 gates. No status promotion.
 mapping = next(row for row in rows if row['path'] == 'm3/docs/name-mapping.json')
 before_map = json.loads(mapping['before'])
@@ -52,7 +52,7 @@ for document in (before_map, after_map):
     assert record['status'] == 'implemented-unverified'
     document['migration']['records'].remove(record)
 assert before_map == after_map, 'Unrelated mapping authority changed'
-assert len(after_map['migration']['records']) == 51
+assert len(after_map['migration']['records']) == 55
 assert len(after_map['migration']['gates']) == 20
 kernel = 'src/java.base/share/classes/jdk/internal/mindex/M3TQ.java'
 assert kernel in {guard['path'] for guard in plan['guards']}
