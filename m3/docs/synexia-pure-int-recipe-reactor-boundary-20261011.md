@@ -42,3 +42,16 @@ All seven paths are under
 3. Existing source-snapshot SHA pins and unknown-drift refusal tests remain unchanged.
 4. Full canonical Synexia profile activation still fails closed unless its actual upstream reactor/artifact is installed.
 5. No target JDK source file or public API is changed by this dependency repair.
+
+## Adjacent ownership-check failure discovered in CI
+
+The same CI batch fails the existing Synexia recipe-ownership checker on
+`M3ContractMode.java`. History review shows the pinned legacy blob
+`c43764ebe0e42d2cf3d61e9eda4de4fe3624d60e` is the exact parent version before
+commit `d2c1fb3ffd8f2fe5a8d91a6f309b769d74531edd`. That later commit adds only
+the package-private reverse adapter `fromCanonical(M3ContractMode)`; the
+canonical enum values, constructor, and outward vocabulary are unchanged.
+Update the ledger's live target-adapter blob pin to the exact reviewed current
+blob `3ee8dd184d5c382391f6f9590fb9c773044bfaa5`, retaining the original commit
+history and the pending-adapter state. Do not retire or promote the adapter
+as part of this hash reconciliation.
