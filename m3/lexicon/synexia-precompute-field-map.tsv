@@ -43,7 +43,6 @@ M3LexiconPrecompute.TokenFrequency	frequencies	Map<Integer,Integer>	frequencies	
 M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTokenIds	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
 M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
 M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
-
 M3LangDexPrecompute.Entry	conceptId	long	langdex_concept_id	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated nonzero LangDex concept coordinate remains donor-owned and is not renumbered
 M3LangDexPrecompute.Entry	frequency	long	langdex_frequency	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated nonnegative LangDex frequency remains source metadata
 M3LangDexPrecompute.Entry	flags	int	langdex_flags	m3langdex-family-v1:synexia.langdex.tsv	MAPPED	validated unsigned-16-bit LangDex entry flags remain opaque
