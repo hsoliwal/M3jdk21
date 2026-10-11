@@ -44,8 +44,8 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
 
         # The three A3/JNI receiver rows were admitted after the original 16-row freeze.
         # Keep exact cardinality and reject duplicate surfaces; do not relax ownership rules.
-        self.assertEqual(20, len(rows))
-        self.assertEqual(20, len({row["local_surface"] for row in rows}))
+        self.assertEqual(23, len(rows))
+        self.assertEqual(23, len({row["local_surface"] for row in rows}))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
@@ -54,8 +54,6 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
 
         by_surface = {row["local_surface"]: row for row in rows}
         for surface in (
-            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/**",
-            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/**",
             "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**",
             "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/**",
             "m3/indexdb/**",
@@ -73,6 +71,28 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**"
             ]["canonical_owner"],
         )
+
+        scope_expectations = {
+            "M3EditScope.java":
+                ("RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3EditScope", "true"),
+            "M3ScopeInference.java":
+                ("TARGET_PRODUCT_ADAPTER", "com.synexia.rewrite.M3ScopeInference", "true"),
+            "M3ContractMode.java":
+                ("RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3ContractMode", "true"),
+            "M3RecipeScopePolicy.java":
+                ("TARGET_PRODUCT_ADAPTER", "com.synexia.rewrite.M3RecipeFirstInvariant", "true"),
+            "M3RecipeScopeRegistry.java":
+                ("JDK_TARGET_SPECIFIC", "com.synexia.rewrite.M3Jdk21CanonicalBorrowingPolicy", "false"),
+        }
+        for file_name, expected in scope_expectations.items():
+            surface = (
+                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/"
+                + file_name
+            )
+            row = by_surface[surface]
+            self.assertEqual(expected[0], row["disposition"], surface)
+            self.assertEqual(expected[1], row["canonical_owner"], surface)
+            self.assertEqual(expected[2], row["handoff_required"], surface)
 
         self.assertEqual(
             "RECEIVER_ADAPTER_ONLY",
@@ -147,9 +167,9 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with RESIDUE.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(22, len(rows))
+        self.assertEqual(17, len(rows))
         frozen = {row["path"]: row for row in rows}
-        self.assertEqual(22, len(frozen))
+        self.assertEqual(17, len(frozen))
 
         actual: set[str] = set()
         for exact in (
@@ -160,7 +180,6 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
                 actual.add("m3/" + exact)
 
         for directory in (
-            "tooling/migration-recipes/src/main/java/com/m3/rewrite/scope",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/a3",
