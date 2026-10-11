@@ -20,3 +20,39 @@ on:
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
       - "m3/lexicon/SYNEXIA_EXPORT.md"
       - ".github/workflows/m3-acronym-precompute-current-base.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  receiver:
+    name: M3AcronymPrecompute
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Run deterministic Python sidecar proofs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -B m3/runtime-integration/synexia-acronym-sidecar.py self-test
+          python3 -B -m unittest discover -s m3/runtime-integration/tests -p 'test_synexia_acronym*.py'
+      - name: Compile and run Java receiver proofs
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf m3/build/acronym-precompute-current-base
+          mkdir -p m3/build/acronym-precompute-current-base/classes m3/build/acronym-precompute-current-base/tests
+          javac --release 21 -Xlint:all -Werror             -d m3/build/acronym-precompute-current-base/classes             m3/core/src/com/m3/text/M3LexiconPrecompute.java             m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java             m3/core/src/com/m3/text/AcronymSidecarCatalog.java
+          javac --release 21 -Xlint:all -Werror             -cp m3/build/acronym-precompute-current-base/classes             -d m3/build/acronym-precompute-current-base/tests             m3/core/test/M3AcronymPrecomputeTest.java             m3/core/test/AcronymSidecarCatalogTest.java
+          (cd m3 && java -ea -cp build/acronym-precompute-current-base/classes:build/acronym-precompute-current-base/tests M3AcronymPrecomputeTest)
+          (cd m3 && java -ea -cp build/acronym-precompute-current-base/classes:build/acronym-precompute-current-base/tests AcronymSidecarCatalogTest)
+          grep -F 'dictlang.acronyms' m3/lexicon/synexia-source-manifest.tsv
+          grep -F 'AcronymPrecompute' m3/lexicon/synexia-precompute-field-map.tsv
+          grep -F 'synexia-acronym-precompute-receiver' m3/runtime-integration/FOSS_REUSE_DECISION.tsv
