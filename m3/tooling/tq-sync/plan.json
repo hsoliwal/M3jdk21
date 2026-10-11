@@ -267,7 +267,7 @@
       "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQImageTest.java.txt",
       "before": null,
       "after": {
-        "resource": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/24-M3TQImageTest.java.txt",
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/24-M3TQImageTest.java.txt",
         "sha256": "72165571d95faebb1199ec65d3525b411d0b47d62ff5b3dfd88d824182df6186"
       }
     }
@@ -298,5 +298,5 @@
       "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
     }
   ],
-  "plan_sha256": "bd25844225947478f6e7aa2c5211181c2d4cee1fd35dae8d48e6f0f1d20fc1a0"
+  "plan_sha256": "3e6435e190dabff7e8ae781404232c8c0b55517fd168107225caeec4ac44f33e"
 }
