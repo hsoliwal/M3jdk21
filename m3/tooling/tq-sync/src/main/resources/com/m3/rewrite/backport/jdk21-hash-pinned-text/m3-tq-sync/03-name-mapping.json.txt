@@ -6364,8 +6364,8 @@
               "Facts Facts.concat(Facts,int)",
               "boolean Facts.containsAll(Facts)"
             ],
-            "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
-            "git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+            "sha256": "28bdfc7bd39fbd19a816ca2570384c695bdd4b3e1bad19b8eb6d96188111babc",
+            "git_blob_sha1": "45ebd84d43857d550d1cba075dcdd873a67bd5bf",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -6413,7 +6413,7 @@
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-tq",
           "version": "2-current-owner-custody",
           "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
-          "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+          "sha256": "74b424532635d57fb7dfb27b2b2e24794ac4a039a64df048ceee764e1b0adb7a",
           "preconditions": [
             "Explicit ABSENT Java targets, exact template hashes, pinned existing recipe and backing owners.",
             "Actual Java and text recipes execute fixed-point/refusal gates before sealed-install materialization."
@@ -8024,7 +8024,6 @@
       ],
       "rule": "Reviewed operation identity plus bounded work geometry; arbitrary Runnable is not accelerator admission; providers stay outside java.base and accelerated admission requires provider-specific proof including CPU parity where applicable."
     }
-
   ],
   "recipe_authority": {
     "recipe_id": "synexia.m3jdk.string.canonical-dag.20261006",
