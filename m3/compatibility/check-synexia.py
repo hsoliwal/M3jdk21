@@ -13,6 +13,9 @@ def main() -> None:
     root = pathlib.Path(__file__).resolve().parents[1]
     jdk = pathlib.Path(os.environ["M3_JDK"])
     paths = [str(path) for path in pinned_sources(root / "compatibility/reference-src")]
+    # FrozenBytes declares this unrelated API. A fail-fast test seam keeps the
+    # compatibility oracle isolated; SynexiaContractTest never invokes it.
+    addressed_view_seam = root / "compatibility/test-support/com/synexia/indexstring/MIndexAddressedView.java"
     classes = root / "build/reference-test-classes/64a2ea61c73b548413fed6686a9daeeb0b9b0564"
     classes.mkdir(parents=True, exist_ok=True)
     subprocess.run(
@@ -23,6 +26,7 @@ def main() -> None:
             "--add-modules", "com.m3.text",
             "-d", str(classes),
             *paths,
+            str(addressed_view_seam),
             str(root / "compatibility/SynexiaContractTest.java"),
         ],
         check=True,

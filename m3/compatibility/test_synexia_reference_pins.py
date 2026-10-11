@@ -8,6 +8,8 @@ import unittest
 from synexia_reference import (
     LICENSE_BLOB_SHA,
     LICENSE_FILE,
+    NOTICE_BLOB_SHA,
+    NOTICE_FILE,
     SOURCE_BLOBS,
     SYNEXIA_COMMIT,
     git_blob_sha,
@@ -23,6 +25,7 @@ class SynexiaReferencePinTests(unittest.TestCase):
         paths = pinned_sources(REFERENCE_ROOT)
         self.assertEqual(set(path.name for path in paths), set(SOURCE_BLOBS))
         self.assertEqual(git_blob_sha((REFERENCE_ROOT / LICENSE_FILE).read_bytes()), LICENSE_BLOB_SHA)
+        self.assertEqual(git_blob_sha((REFERENCE_ROOT / NOTICE_FILE).read_bytes()), NOTICE_BLOB_SHA)
 
     def test_modified_source_is_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -30,6 +33,7 @@ class SynexiaReferencePinTests(unittest.TestCase):
             source_root = root / SYNEXIA_COMMIT / "com/synexia/indexstring"
             source_root.mkdir(parents=True)
             (root / LICENSE_FILE).write_bytes((REFERENCE_ROOT / LICENSE_FILE).read_bytes())
+            (root / NOTICE_FILE).write_bytes((REFERENCE_ROOT / NOTICE_FILE).read_bytes())
             for source in pinned_sources(REFERENCE_ROOT):
                 target = source_root / source.name
                 target.write_bytes(source.read_bytes())
@@ -39,6 +43,14 @@ class SynexiaReferencePinTests(unittest.TestCase):
                 pinned_sources(root)
 
     def test_missing_source_fails_closed(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / LICENSE_FILE).write_bytes((REFERENCE_ROOT / LICENSE_FILE).read_bytes())
+            (root / NOTICE_FILE).write_bytes((REFERENCE_ROOT / NOTICE_FILE).read_bytes())
+            with self.assertRaises(FileNotFoundError):
+                pinned_sources(root)
+
+    def test_missing_upstream_notice_fails_closed(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             (root / LICENSE_FILE).write_bytes((REFERENCE_ROOT / LICENSE_FILE).read_bytes())
