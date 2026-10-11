@@ -65,6 +65,12 @@ families behind umbrella custody.
 The mirrored dependency DAG must cover every estate family exactly once and remain acyclic.
 Inventory may execute independently; family promotion remains serial and proof-gated.
 
+## OpenRewrite recipe mirror coverage — explicit gap
+
+The source estate's `OPENREWRITE_RECIPES` family is a source inventory, not evidence that the entire recipe module has been copied or accepted. A recursive GitHub tree comparison at the pinned source snapshot returned a **truncated** source tree response: 34,388 source blobs were observed, while the target's `m3/vendor/synexia/synexia-openrewrite-recipes` tree contains 15 blobs. Thirteen relative paths have identical Git blob IDs; two existing files differ. At least 34,373 observed source blobs are absent from the target mirror; because the source response was truncated, this is a lower bound, not a complete missing-file count.
+
+The two known divergences are recorded in `recipe-mirror-divergences.tsv`. Their target adaptations are not overwritten or declared equivalent here. The family remains `SOURCE_PIN_ONLY`; the receiver must use the canonical Synexia recipe/qualified output pipeline, and any selected mirror or generated output needs its own exact provenance and target tests. Do not bulk-copy the entire 34k+ observed recipe module into the JDK tree.
+
 ## Receiving states
 
 A target row may be only one of:
