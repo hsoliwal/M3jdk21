@@ -126,6 +126,18 @@ class StringTargetSuccessorTest(unittest.TestCase):
             phase.validate_successor_source(
                 path, contents.replace("static M3String joinDesignated(", "static M3String lost("))
 
+    def test_binary_concat_pool_refusal_fallback_loss_refuses(self):
+        path = "src/java.base/share/classes/java/lang/M3String.java"
+        contents = (phase.ROOT / path).read_text(encoding="utf-8")
+        for marker in (
+            "if (left == null) return null;",
+            "if (right == null) return null;",
+        ):
+            with self.subTest(marker=marker):
+                corrupted = contents.replace(marker, "/* refusal gate removed */", 1)
+                with self.assertRaisesRegex(ValueError, "responsibility lost"):
+                    phase.validate_successor_source(path, corrupted)
+
     def test_flat_needle_candidate_facts_loss_refuses(self):
         path = "src/java.base/share/classes/java/lang/M3StringFacts.java"
         contents = (phase.ROOT / path).read_text(encoding="utf-8")
