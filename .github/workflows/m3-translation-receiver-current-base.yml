@@ -11,6 +11,8 @@ on:
       - "m3/lexicon/synexia-precompute-field-map.tsv"
       - "m3/lexicon/synexia-source-manifest.tsv"
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - "m3/runtime-integration/tests/test_synexia_export.py"
+      - "m3/lexicon/SYNEXIA_EXPORT.md"
       - ".github/workflows/m3-translation-receiver-current-base.yml"
   push:
     branches:
@@ -23,6 +25,8 @@ on:
       - "m3/lexicon/synexia-precompute-field-map.tsv"
       - "m3/lexicon/synexia-source-manifest.tsv"
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - "m3/runtime-integration/tests/test_synexia_export.py"
+      - "m3/lexicon/SYNEXIA_EXPORT.md"
       - ".github/workflows/m3-translation-receiver-current-base.yml"
 
 permissions:
@@ -52,3 +56,5 @@ jobs:
           javac --release 21 -Xlint:all,-module             -d build/translation-receiver-current-base/classes "${sources[@]}"
           javac --release 21 -Xlint:all,-module -Werror             -cp build/translation-receiver-current-base/classes             -d build/translation-receiver-current-base/tests             core/test/M3TranslationReceiverMapTest.java
           java -ea             -cp build/translation-receiver-current-base/classes:build/translation-receiver-current-base/tests             M3TranslationReceiverMapTest
+      - name: Verify Synexia export source-manifest contracts
+        run: python -B m3/runtime-integration/tests/test_synexia_export.py
