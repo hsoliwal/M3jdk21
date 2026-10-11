@@ -7,6 +7,7 @@
  * @run main/othervm M3TQImageTest
  */
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import jdk.internal.mindex.M3TQ;
@@ -71,6 +72,23 @@ public class M3TQImageTest {
             return false;
         }), "deep evaluation rejects before callback allocation");
         check(callbackCalls[0] == 0, "depth rejection invokes no callback");
+
+        ArrayList<Long> rejectedVisits = new ArrayList<>();
+        check(!shared.test(value -> {
+            rejectedVisits.add(value);
+            return false;
+        }), "shared query preserves false result");
+        check(rejectedVisits.size() == 2 && rejectedVisits.get(0).equals(abc)
+                && rejectedVisits.get(1).equals(abc),
+                "shared query preserves duplicate callback visits");
+
+        ArrayList<Long> acceptedVisits = new ArrayList<>();
+        check(shared.test(value -> {
+            acceptedVisits.add(value);
+            return value == abc;
+        }), "shared query preserves true result");
+        check(acceptedVisits.size() == 1 && acceptedVisits.get(0).equals(abc),
+                "shared query preserves short-circuit order");
 
         expectUnsupported(() -> root.image(new M3TQ.ImageLimits(1, 0, 0, 17)),
                 "tight image limits reject before admission");
