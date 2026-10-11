@@ -37,9 +37,14 @@ public final class M3TQ {
 
   private M3TQ(
       Op op, long[] trigrams, List<M3TQ> subqueries) {
+    this(op, trigrams, subqueries, false);
+  }
+
+  private M3TQ(
+      Op op, long[] trigrams, List<M3TQ> subqueries, boolean presorted) {
     this.op = Objects.requireNonNull(op, "op");
     this.trigrams = Objects.requireNonNull(trigrams, "trigrams").clone();
-    Arrays.sort(this.trigrams);
+    if (!presorted) Arrays.sort(this.trigrams);
     this.subqueries = List.copyOf(Objects.requireNonNull(subqueries, "subqueries"));
   }
 
