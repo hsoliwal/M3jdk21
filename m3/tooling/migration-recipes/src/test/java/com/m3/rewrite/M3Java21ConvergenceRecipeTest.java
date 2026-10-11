@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe;
-import com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe;
-import com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates;
-import com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe;
+import com.synexia.rewrite.M3PureIntAtomizeRecipe;
+import com.synexia.rewrite.M3PureIntDocumentationRecipe;
+import com.synexia.rewrite.M3PureIntInventoryRecipe;
+import com.synexia.rewrite.M3PureIntPatternizeRecipe;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -32,10 +32,10 @@ final class M3Java21ConvergenceRecipeTest {
         List<Recipe> children = recipe.getRecipeList();
 
         assertEquals(5, children.size());
-        assertEquals(M3InventoryPureIntAtomCandidates.class, children.get(0).getClass());
-        assertEquals(M3AtomizePureIntReturnRecipe.class, children.get(1).getClass());
-        assertEquals(M3PatternizePureIntAtomRecipe.class, children.get(2).getClass());
-        assertEquals(M3DocumentPureIntAtomRecipe.class, children.get(3).getClass());
+        assertEquals(M3PureIntInventoryRecipe.class, children.get(0).getClass());
+        assertEquals(M3PureIntAtomizeRecipe.class, children.get(1).getClass());
+        assertEquals(M3PureIntPatternizeRecipe.class, children.get(2).getClass());
+        assertEquals(M3PureIntDocumentationRecipe.class, children.get(3).getClass());
         assertEquals(RemoveUnusedImports.class, children.get(4).getClass());
 
         assertTrue(recipe.getTags().contains("multi-pass"));
