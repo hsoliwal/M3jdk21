@@ -18,6 +18,16 @@ NAME_MAP = ROOT / "m3/docs/name-mapping.json"
 WORK = Path(__file__).with_name("string-phase-work-orders.tsv")
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 SUCCESSORS = Path(__file__).with_name("string-target-successors.tsv")
+SUCCESSOR_HISTORY = Path(__file__).with_name("string-target-successor-history.tsv")
+SUCCESSOR_HISTORY_HEADER = [
+    "schema",
+    "target_path",
+    "predecessor_git_blob",
+    "successor_git_blob",
+    "successor_commit",
+    "change_summary",
+    "state",
+]
 SUCCESSOR_HEADER = [
     "schema",
     "target_path",
@@ -38,7 +48,9 @@ SUCCESSOR_MARKERS = {
         "private final M3StringOwner owner;",
         "private final long value;",
         "static M3String joinDesignated(",
-        "return M3StringPool.concat(canonicalize(first), canonicalize(second));",
+        "if (left == null) return null;",
+        "if (right == null) return null;",
+        "return M3StringPool.concat(left, right);",
         "static boolean isLiteralRegex(String regex)",
     ),
     "src/java.base/share/classes/java/lang/M3StringFacts.java": (
@@ -144,8 +156,50 @@ def approved_successors(mapping_rows: list[dict[str, str]]) -> dict[str, dict[st
             + " unexpected="
             + repr(sorted(set(received) - EXPECTED_SUCCESSOR_PATHS))
         )
+    validate_successor_history(received)
     return received
 
+
+def validate_successor_history(receipts: dict[str, dict[str, str]]) -> None:
+    """Validate the append-only chain of reviewed postimages before accepting its tip."""
+    rows = load_tsv(SUCCESSOR_HISTORY, SUCCESSOR_HISTORY_HEADER)
+    chains: dict[str, list[dict[str, str]]] = {}
+    seen: set[tuple[str, str]] = set()
+    for physical, row in enumerate(rows, start=2):
+        if any(not row[field] for field in SUCCESSOR_HISTORY_HEADER):
+            raise ValueError(f"blank successor history field at row {physical}")
+        if row["schema"] != "M3JDK21_STRING_SUCCESSOR_HISTORY_V1":
+            raise ValueError(f"invalid successor history schema at row {physical}")
+        path = row["target_path"]
+        if path not in {
+            "src/java.base/share/classes/java/lang/M3String.java",
+            "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        }:
+            raise ValueError(f"unqualified successor history owner: {path}")
+        for field in ("predecessor_git_blob", "successor_git_blob", "successor_commit"):
+            if not HEX40.fullmatch(row[field]):
+                raise ValueError(f"unsealed successor history {field} at row {physical}")
+        if row["predecessor_git_blob"] == row["successor_git_blob"]:
+            raise ValueError(f"successor history did not advance at row {physical}")
+        if row["state"] != "HISTORY_PRESERVING_SUCCESSOR":
+            raise ValueError(f"successor history policy drift at row {physical}")
+        identity = (path, row["successor_git_blob"])
+        if identity in seen:
+            raise ValueError(f"duplicate successor history postimage: {path}")
+        seen.add(identity)
+        chains.setdefault(path, []).append(row)
+    expected_paths = {
+        "src/java.base/share/classes/java/lang/M3String.java",
+        "src/java.base/share/classes/java/lang/M3StringFacts.java",
+    }
+    if set(chains) != expected_paths:
+        raise ValueError("successor history inventory drift")
+    for path, chain in chains.items():
+        for previous, current in zip(chain, chain[1:]):
+            if current["predecessor_git_blob"] != previous["successor_git_blob"]:
+                raise ValueError(f"broken successor history chain: {path}")
+        if chain[-1]["successor_git_blob"] != receipts[path]["successor_git_blob"]:
+            raise ValueError(f"successor history tip/receipt mismatch: {path}")
 
 def validate_successor_source(path: str, source: str) -> None:
     for fragment in SUCCESSOR_MARKERS[path]:
