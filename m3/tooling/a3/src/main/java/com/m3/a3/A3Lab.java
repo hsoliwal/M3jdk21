@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.a3;
 
-import com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe;
-import com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe;
+import com.synexia.rewrite.M3PureIntAtomizeRecipe;
+import com.synexia.rewrite.M3PureIntPatternizeRecipe;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -221,8 +221,8 @@ public final class A3Lab {
 
     private static Recipe recipe(String atom) {
         return switch (atom) {
-            case "A" -> new M3AtomizePureIntReturnRecipe();
-            case "P" -> new M3PatternizePureIntAtomRecipe();
+            case "A" -> new M3PureIntAtomizeRecipe();
+            case "P" -> new M3PureIntPatternizeRecipe();
             default -> throw new IllegalArgumentException("unknown A3Lab atom: " + atom);
         };
     }
