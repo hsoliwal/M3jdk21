@@ -39,6 +39,41 @@ class StringTargetSuccessorTest(unittest.TestCase):
             with patch.object(phase, "SUCCESSORS", path):
                 callback()
 
+    def with_history_rows(self, changed, callback):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "string-target-successor-history.tsv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(
+                    handle, fieldnames=phase.SUCCESSOR_HISTORY_HEADER,
+                    delimiter="\\t", lineterminator="\\n")
+                writer.writeheader()
+                writer.writerows(changed)
+            with patch.object(phase, "SUCCESSOR_HISTORY", path):
+                callback()
+
+    def test_successor_history_binds_exact_current_tips(self):
+        receipts = phase.approved_successors(self.mapping())
+        phase.validate_successor_history(receipts)
+        history = phase.load_tsv(
+            phase.SUCCESSOR_HISTORY, phase.SUCCESSOR_HISTORY_HEADER)
+        self.assertEqual(4, len(history))
+
+    def test_successor_history_gap_refuses(self):
+        rows = phase.load_tsv(
+            phase.SUCCESSOR_HISTORY, phase.SUCCESSOR_HISTORY_HEADER)
+        rows[1]["predecessor_git_blob"] = "0" * 40
+        self.with_history_rows(rows, lambda: self.assertRaisesRegex(
+            ValueError, "broken successor history chain",
+            phase.approved_successors, self.mapping()))
+
+    def test_successor_history_tip_mutation_refuses(self):
+        rows = phase.load_tsv(
+            phase.SUCCESSOR_HISTORY, phase.SUCCESSOR_HISTORY_HEADER)
+        rows[-1]["successor_git_blob"] = "0" * 40
+        self.with_history_rows(rows, lambda: self.assertRaisesRegex(
+            ValueError, "successor history tip/receipt mismatch",
+            phase.approved_successors, self.mapping()))
+
     def test_exact_three_successors_and_repeated_historical_relation(self):
         mapping = self.mapping()
         mapping.append(mapping[0].copy())
