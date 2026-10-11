@@ -1,0 +1,16 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.NoStaticImport"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 61
+- name: "Cimballi"
+  email: "cimballi@cimballi.net"
+  lineCount: 25
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 10
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 6

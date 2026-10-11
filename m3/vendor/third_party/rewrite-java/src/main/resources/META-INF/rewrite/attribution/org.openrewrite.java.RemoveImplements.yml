@@ -1,0 +1,19 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.RemoveImplements"
+contributors:
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 81
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 18
+- name: "Knut Wannheden"
+  email: "knut@moderne.io"
+  lineCount: 13
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 7
+- name: "traceyyoshima"
+  email: "tracey.yoshima@gmail.com"
+  lineCount: 5

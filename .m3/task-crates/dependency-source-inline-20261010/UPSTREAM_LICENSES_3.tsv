@@ -1,0 +1,19 @@
+donor	url	status
+java-object-diff-1.0.1	https://raw.githubusercontent.com/openrewrite/java-object-diff/v1.0.1/LICENSE	OK:cfc7749b96f6 EXACT_TAG v1.0.1
+gizmo-1.0.11.Final	https://raw.githubusercontent.com/quarkusio/gizmo/1.0.11.Final/LICENSE.txt	OK:cfc7749b96f6 EXACT_TAG 1.0.11.Final
+jandex-2.4.2.Final	http://www.apache.org/licenses/LICENSE-2.0.txt	OK:cfc7749b96f6 POM_LICENSE_URL
+jna-platform-5.14.0	https://raw.githubusercontent.com/java-native-access/jna/5.14.0/LICENSE	OK:521bb271ac56 EXACT_TAG 5.14.0
+micrometer-core-1.9.17	https://raw.githubusercontent.com/micrometer-metrics/micrometer/v1.9.17/LICENSE	OK:62fb8a3a9621 EXACT_TAG v1.9.17
+HdrHistogram-2.1.12	https://raw.githubusercontent.com/HdrHistogram/HdrHistogram/HdrHistogram-2.1.12/LICENSE.txt	OK:ba550515c77c EXACT_TAG HdrHistogram-2.1.12
+LatencyUtils-2.0.3	https://raw.githubusercontent.com/LatencyUtils/LatencyUtils/LatencyUtils-2.0.3/LICENSE	OK:50b43424ea5a EXACT_TAG LatencyUtils-2.0.3
+classgraph-4.8.165	-	LICENSE_FETCH_FAILED (77 urls tried; pom: The MIT License (MIT) <http://opensource.org/licenses/MIT>)
+snappy-java-1.1.10.5	https://raw.githubusercontent.com/xerial/snappy-java/v1.1.10.5/LICENSE	OK:3ddf9be5c28f EXACT_TAG v1.1.10.5
+fastfilter-1.0.2	-	LICENSE_FETCH_FAILED (0 urls tried; pom: (none in pom; parent io.github.fastfilter:fastfilter_java:1.)
+asm-9.6	-	LICENSE_FETCH_FAILED (0 urls tried; pom: BSD-3-Clause <https://asm.ow2.io/license.html>)
+asm-util-9.6	-	LICENSE_FETCH_FAILED (0 urls tried; pom: BSD-3-Clause <https://asm.ow2.io/license.html>)
+asm-tree-9.6	-	LICENSE_FETCH_FAILED (0 urls tried; pom: BSD-3-Clause <https://asm.ow2.io/license.html>)
+asm-analysis-9.6	-	LICENSE_FETCH_FAILED (0 urls tried; pom: BSD-3-Clause <https://asm.ow2.io/license.html>)
+opentest4j-1.3.0	https://raw.githubusercontent.com/ota4j-team/opentest4j/r1.3.0/LICENSE	OK:c6596eb7be85 EXACT_TAG r1.3.0
+assertj-core-3.25.3	https://www.apache.org/licenses/LICENSE-2.0.txt	OK:cfc7749b96f6 POM_LICENSE_URL
+org.eclipse.jgit-5.13.3.202401111512-r	-	LICENSE_FETCH_FAILED (0 urls tried; pom: (none in pom; parent org.eclipse.jgit:org.eclipse.jgit-paren)
+JavaEWAH-1.1.13	https://raw.githubusercontent.com/lemire/javaewah/JavaEWAH-1.1.13/LICENSE	OK:1848e985e358 EXACT_TAG JavaEWAH-1.1.13

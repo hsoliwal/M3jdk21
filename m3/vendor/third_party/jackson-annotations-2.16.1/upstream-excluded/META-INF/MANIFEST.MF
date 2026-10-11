@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: Jackson-annotations
+Implementation-Version: 2.16.1
+X-Compile-Target-JDK: 1.6
+Specification-Vendor: FasterXML
+Specification-Title: Jackson-annotations
+X-Compile-Source-JDK: 1.6
+Created-By: Maven Source Plugin 3.3.0
+Specification-Version: 2.16
+Implementation-Vendor: FasterXML
+

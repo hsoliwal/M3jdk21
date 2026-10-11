@@ -1,0 +1,159 @@
+{
+  "artifact": "dec",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "transitive compile input of commons-compress 1.27.1 (optional)",
+  "coordinate": "org.brotli:dec:0.1.2-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "dec-0.1.2",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/dec/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "2107843590d512354cb09c221d4af405c9c9e48fc932b29b06ccbc7343c07ffe",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/BitReader.java",
+      "sha256": "92e21fed7b081b21821c95ed60e2f0f8253aa71e87ac3a4f3fbc945d17cbe029",
+      "upstream": "org/brotli/dec/BitReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/BrotliInputStream.java",
+      "sha256": "c0f9bd2b89e5c055a663a9bbf2e62d97e2b6e6f79387e20bca152d596ac7700a",
+      "upstream": "org/brotli/dec/BrotliInputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/BrotliRuntimeException.java",
+      "sha256": "6f81b032c60eda39177f73c9805677962770a1519796c492b5f367270a8a4aa8",
+      "upstream": "org/brotli/dec/BrotliRuntimeException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/Context.java",
+      "sha256": "7edf3c19e5aa5f972674dd3a8a67fac86dfc1e81437c96d7ef04f0ed6ac90978",
+      "upstream": "org/brotli/dec/Context.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/Decode.java",
+      "sha256": "f737593a4b03d0210c42e085e1673f49f52f3a1da1f4a1ecbaf50b87f20d7a4f",
+      "upstream": "org/brotli/dec/Decode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/Dictionary.java",
+      "sha256": "ab4e375e3d99a430e8431bb17cb8d3845686dc92462d50875e1f3e03e47cf6df",
+      "upstream": "org/brotli/dec/Dictionary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/Huffman.java",
+      "sha256": "35513a587a1e6645338b36f17f7d71837c743ade346166c6743d21a72ef9f2e9",
+      "upstream": "org/brotli/dec/Huffman.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/HuffmanTreeGroup.java",
+      "sha256": "a686c080dba5aa9feb0561cc9bac457df78b2a256f22df4c83aa2df9b1ac00d6",
+      "upstream": "org/brotli/dec/HuffmanTreeGroup.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/IntReader.java",
+      "sha256": "2c4ee842a4c581353ef0cc6ab723a07764b3d78adf9f2af26207308bec6de229",
+      "upstream": "org/brotli/dec/IntReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/Prefix.java",
+      "sha256": "a4909eaba3b4c067d76a18ee9647cb5191d436f641fae787827d54f354af729f",
+      "upstream": "org/brotli/dec/Prefix.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/RunningState.java",
+      "sha256": "b31889aa7955d7fc77309babd838a002980e6801eaae9e1ccad9469c2d9a6c1c",
+      "upstream": "org/brotli/dec/RunningState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/State.java",
+      "sha256": "1586d368dba9eabc6af04078dc58cf1ee411195c6ccde6ec2f71822e42cad109",
+      "upstream": "org/brotli/dec/State.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/Transform.java",
+      "sha256": "096e4de48c2e96287b7be2546ba2d458bfe250d21d84b7563421f86f36c3e78c",
+      "upstream": "org/brotli/dec/Transform.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/Utils.java",
+      "sha256": "17dc02ec7663dafbdfac74b6b9f92af140eef8097e915f3140a8012989f363be",
+      "upstream": "org/brotli/dec/Utils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/dec/src/main/java/org/brotli/dec/WordTransformType.java",
+      "sha256": "54f69a75d4161fefe44c03a3f487f688adb72271388d5d6d1b45bc319b2db1d7",
+      "upstream": "org/brotli/dec/WordTransformType.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/dec/UPSTREAM_LICENSE.json",
+      "sha256": "5808f4671aae43fb80787bb7b4b912e2b1cccc1a559dfff1902aec2f1d96f4b1",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/dec/UPSTREAM_LICENSE.txt",
+      "sha256": "3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/dec/SOURCES_MANIFEST.tsv",
+      "sha256": "c3ebef24fad7b560ee9e7a1991a6b92f3df64522a71e7d3349accd174b7da286",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/dec/LICENSE",
+      "sha256": "3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.brotli",
+  "kind": "MODULE",
+  "license": "UNDECLARED (see LICENSE)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "org.brotli:parent:0.1.2",
+  "pom": "https://repo.maven.apache.org/maven2/org/brotli/dec/0.1.2/dec-0.1.2.pom",
+  "receipt": {
+    "buildRoot": "3ec71afde40bdff5c47999599a029f13311a4271e91272ec1c7bb841d7ea3151",
+    "distributionSha256": "ab033453dd4435a7fde6f9ba49e4e92471864783e0c67f1783b69b4379b1aa09",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "c00fe63bb609cb22231f38fb2793392c8efb56b4acfee5f1e3cc782dd1de2226",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/brotli/dec/0.1.2/dec-0.1.2-sources.jar",
+  "sources_jar_sha1": "c04c22a0f5a84e985bd04d2129638e590c1e5edc",
+  "sources_jar_sha256": "064ac1e41f475c1fd0479b6505f44b6e3bb044b948bddc75d56a496ebb85fbc3",
+  "status": "PASS",
+  "upstream": "",
+  "version": "0.1.2"
+}

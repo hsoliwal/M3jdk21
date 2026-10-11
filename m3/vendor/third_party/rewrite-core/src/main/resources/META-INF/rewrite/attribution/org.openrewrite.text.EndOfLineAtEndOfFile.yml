@@ -1,0 +1,10 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.text.EndOfLineAtEndOfFile"
+contributors:
+- name: "Jonathan Leitschuh"
+  email: "jonathan.leitschuh@gmail.com"
+  lineCount: 56
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 6

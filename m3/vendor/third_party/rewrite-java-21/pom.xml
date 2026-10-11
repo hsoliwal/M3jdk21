@@ -1,0 +1,38 @@
+<!-- SPDX-License-Identifier: Apache-2.0; build integration only, upstream source remains The Apache Software License, Version 2.0. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>8.17.1-m3-source-1</version>
+  <name>rewrite-java-21 8.17.1 - unchanged upstream source build for M3jdk21</name>
+  <description>Source inclusion of the published org.openrewrite:rewrite-java-21:8.17.1 sources jar (SHA-1 f133bd0ba96af8944d46df8997decc80fe01ef13); no upstream implementation changes. See PROVENANCE.json.</description>
+  <url>https://github.com/openrewrite/rewrite</url>
+  <licenses><license><name>The Apache Software License, Version 2.0</name><url>https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.pom</url><distribution>repo</distribution></license></licenses>
+  <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <dependencies>
+    <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>24.1.0-m3-source-1</version><!-- source module --></dependency>
+    <dependency><groupId>org.ow2.asm</groupId><artifactId>asm</artifactId><version>9.6-m3-source-1</version><!-- source module --></dependency>
+    <dependency><groupId>io.github.classgraph</groupId><artifactId>classgraph</artifactId><version>4.8.165-m3-source-1</version><!-- source module --></dependency>
+    <dependency><groupId>io.micrometer</groupId><artifactId>micrometer-core</artifactId><version>1.9.17-m3-source-1</version><!-- source module --></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1-m3-source-1</version><!-- source module --></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>8.17.1-m3-source-1</version><!-- source module --></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36-m3-source-1</version><scope>provided</scope><optional>true</optional><!-- fully qualified reference in code (not an import); compile-only --></dependency>
+  </dependencies>
+  <build>
+    <resources>
+      <resource><directory>src/main/resources</directory></resource>
+      <resource><directory>${project.basedir}</directory><targetPath>META-INF/third-party/rewrite-java-21</targetPath><includes><include>LICENSE</include><include>PROVENANCE.json</include><include>THIRD_PARTY_NOTICES.md</include></includes></resource>
+    </resources>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.15.0</version>
+        <!-- Upstream bytes are compiled as published: no annotation processing, no warnings-as-errors. M3jdk21 integration is checked separately with -Werror. -->
+        <configuration><source>21</source><target>21</target><encoding>UTF-8</encoding><proc>none</proc><compilerArgs><arg>-Xlint:all,-options</arg><arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg><arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg><arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg><arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED</arg><arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED</arg><arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg><arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg><arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg><arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg><arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED</arg><arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg></compilerArgs></configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.6</version>
+        <!-- Published sources jars carry no test suite; the compile and the consumers' own tests are the proof lane. -->
+        <configuration><skipTests>true</skipTests></configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
+        <configuration><excludes><exclude>**/.no-default-excludes</exclude></excludes><archive><manifestEntries><M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline></manifestEntries></archive></configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

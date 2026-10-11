@@ -1,0 +1,393 @@
+{
+  "artifact": "HdrHistogram",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "NOT_IN_LOCK",
+  "consumers": "OpenRewrite 8.17.1 runtime closure (mvn dependency:list of rewrite-core/java/java-21/test/xml)",
+  "coordinate": "org.hdrhistogram:HdrHistogram:2.1.12-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "hdrhistogram-2.1.12",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/HdrHistogram/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "aba72fec79d5adeefe217f9aff97b75009405afa70da0cae0d23380823702549",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/AbstractHistogram.java",
+      "sha256": "80748555e45975615bf870c5bb6e93c716cd5fd46c40767507dad33e130813e2",
+      "upstream": "org/HdrHistogram/AbstractHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/AbstractHistogramIterator.java",
+      "sha256": "91a84c601a4d216b9c377cffeaa5239969335cb878e83965e709ac7434c5faea",
+      "upstream": "org/HdrHistogram/AbstractHistogramIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/AllValuesIterator.java",
+      "sha256": "2b28207bcac134566aa6548750ca4823f8f9d75d8d5edacf3beb5cee7ad2690d",
+      "upstream": "org/HdrHistogram/AllValuesIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/AtomicHistogram.java",
+      "sha256": "4f4cad4db9ee5a51f2764cf105d8ec3d4dcd173910151f45919a0630a88cb3aa",
+      "upstream": "org/HdrHistogram/AtomicHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/Base64Helper.java",
+      "sha256": "9d74dae48f852cf2d7e7bb217c3ffb9716c5b74f9a4fd20817b256a167ec1d80",
+      "upstream": "org/HdrHistogram/Base64Helper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/ConcurrentDoubleHistogram.java",
+      "sha256": "aaa61e1179f3c4e32503d6ed6fe894a79bef242af750fb722cf1dc2d6006094e",
+      "upstream": "org/HdrHistogram/ConcurrentDoubleHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/ConcurrentHistogram.java",
+      "sha256": "b2ca352a747cf4f464c1818cc81d239f531ab687ead8286d3fb5765f214ed88c",
+      "upstream": "org/HdrHistogram/ConcurrentHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/DoubleAllValuesIterator.java",
+      "sha256": "7491e4f95f6012cb2d35331c4aa571026a857ab91f6f4ede1d7df700ad34dd41",
+      "upstream": "org/HdrHistogram/DoubleAllValuesIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/DoubleHistogram.java",
+      "sha256": "ba29bc9efba9a460f2a11430b99f6924290177e910e0fbd6c87a71d197fcdec5",
+      "upstream": "org/HdrHistogram/DoubleHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/DoubleHistogramIterationValue.java",
+      "sha256": "56a0cacd4f9de95b032ce2fb3ba169273dee197b56a06b1553fc75a59300e91f",
+      "upstream": "org/HdrHistogram/DoubleHistogramIterationValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/DoubleLinearIterator.java",
+      "sha256": "3b492a06123e8c54a4c72ffbc2bb3d7246b74469737019167cf91f8f4f660356",
+      "upstream": "org/HdrHistogram/DoubleLinearIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/DoubleLogarithmicIterator.java",
+      "sha256": "48bffd96e2a99c6165b71f001e2790fd3e361d9daf146fb0f87a7ef6623bddcd",
+      "upstream": "org/HdrHistogram/DoubleLogarithmicIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/DoublePercentileIterator.java",
+      "sha256": "525aee7749197ea36327ca2f78cd19afd4bc5ed58b62971e43d0c6a19854e1cd",
+      "upstream": "org/HdrHistogram/DoublePercentileIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/DoubleRecordedValuesIterator.java",
+      "sha256": "65a906cb9caf85f63905323cf1e59aabad3ab54bde117c486f4c209015267a1b",
+      "upstream": "org/HdrHistogram/DoubleRecordedValuesIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/DoubleRecorder.java",
+      "sha256": "d5b29e58f42ce3fd81eb509b5f81fc4b495f8ee3b52ef3e99f152ddb3af56f24",
+      "upstream": "org/HdrHistogram/DoubleRecorder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/DoubleValueRecorder.java",
+      "sha256": "d6df2d37b723167a61986825b36f9997519c9de16c68aecf2a2a7ee72c205ef1",
+      "upstream": "org/HdrHistogram/DoubleValueRecorder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/EncodableHistogram.java",
+      "sha256": "076caa73a099744c954aa4ea91a624bfe76c8bec33489384b0bfae7ae4b6d9a2",
+      "upstream": "org/HdrHistogram/EncodableHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/Histogram.java",
+      "sha256": "2d4bd6a141c4e9ccf8d6acee1d00f35351698392ea6ec83ba5b40c732bc1a174",
+      "upstream": "org/HdrHistogram/Histogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/HistogramIterationValue.java",
+      "sha256": "8d4a26ce09a968a57ef84832a6712b03fc77fccdcbb61ce8fd5f9c189ac03811",
+      "upstream": "org/HdrHistogram/HistogramIterationValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/HistogramLogProcessor.java",
+      "sha256": "90bf706d36cb4facf48d1af0f59738df48d6044728cbe7718c9528139338847c",
+      "upstream": "org/HdrHistogram/HistogramLogProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/HistogramLogReader.java",
+      "sha256": "e7756aa8429f232ccaf2bb3a8fe28c1a625542b55c0892928b6672ed6e092885",
+      "upstream": "org/HdrHistogram/HistogramLogReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/HistogramLogScanner.java",
+      "sha256": "a8e54d258ae0ce6190c5aa4d52d4376a12089417dd01025e80890b4af8bced43",
+      "upstream": "org/HdrHistogram/HistogramLogScanner.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/HistogramLogWriter.java",
+      "sha256": "194914f056fcedc8ef019ac6d4525e8c8766699d89011ea5c9c778155b95bdd9",
+      "upstream": "org/HdrHistogram/HistogramLogWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/IntCountsHistogram.java",
+      "sha256": "55183703f65bbb73951f5adca5ac56b5c905b605461f8b594e4719e305e691bf",
+      "upstream": "org/HdrHistogram/IntCountsHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/LinearIterator.java",
+      "sha256": "d336824e6addbb5b49a12f9e505cd9f23e604007f3c6cacddcadefea21516c34",
+      "upstream": "org/HdrHistogram/LinearIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/LogarithmicIterator.java",
+      "sha256": "dcacbd1dba60c98157b1841042a4d2065f7fbee5bf03488f4432e1e48915d81b",
+      "upstream": "org/HdrHistogram/LogarithmicIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/PackedConcurrentDoubleHistogram.java",
+      "sha256": "800aa8214240e84314259eb8d53d0787283b8255452df8f35bf37afdcc8958eb",
+      "upstream": "org/HdrHistogram/PackedConcurrentDoubleHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/PackedConcurrentHistogram.java",
+      "sha256": "5baa95ef1cd7cb1e62960dedc81083de9f8c660aea796c1e58c5296dd3748a0a",
+      "upstream": "org/HdrHistogram/PackedConcurrentHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/PackedDoubleHistogram.java",
+      "sha256": "0e8b6a080951c7c5abd9a4a8a7062d7c88921ac758c9be5778f5cda8284bc709",
+      "upstream": "org/HdrHistogram/PackedDoubleHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/PackedHistogram.java",
+      "sha256": "f969258d763fb2895b0508c58e71d6f8e889bd7dbaec2dee92edfd89c813a425",
+      "upstream": "org/HdrHistogram/PackedHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/PercentileIterator.java",
+      "sha256": "5b3e4c62074e554e89bb1b86f11d69cc90dd00fc9de38b4100279ec683db0277",
+      "upstream": "org/HdrHistogram/PercentileIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/RecordedValuesIterator.java",
+      "sha256": "0da92c5f0fc2e013404d6eb028cada6e06ef2e7326944bbe1323512be05bb5d2",
+      "upstream": "org/HdrHistogram/RecordedValuesIterator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/Recorder.java",
+      "sha256": "0a3c5ebba5250c20572cd9799b20b0e4eb7fabaf44f19855b054c98d91fa05ad",
+      "upstream": "org/HdrHistogram/Recorder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/ShortCountsHistogram.java",
+      "sha256": "fb3443cb670abedf8efec3f0b52a41b90d94016d84ea3f1fcec4c8ffe097f851",
+      "upstream": "org/HdrHistogram/ShortCountsHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/SingleWriterDoubleRecorder.java",
+      "sha256": "dcc95a702709bfc461a9fbee5692e4ab45ba447ce9bbb0ef66034912aaa2bf60",
+      "upstream": "org/HdrHistogram/SingleWriterDoubleRecorder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/SingleWriterRecorder.java",
+      "sha256": "a2004b4a080b6334ce62fa380af227e7454c9fd04e7299cd801069f04631db57",
+      "upstream": "org/HdrHistogram/SingleWriterRecorder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/SynchronizedDoubleHistogram.java",
+      "sha256": "11183ca81831879b59e56563923b900a4398be2b9c02b3720a42aa33b9123d02",
+      "upstream": "org/HdrHistogram/SynchronizedDoubleHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/SynchronizedHistogram.java",
+      "sha256": "59bde2c1df551de143a303e2d424e983d1d01f8fea2e6761e55bc437ffb5f649",
+      "upstream": "org/HdrHistogram/SynchronizedHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/ValueRecorder.java",
+      "sha256": "bc893844f18ce129086102fb3e8f6de4ad4eb02867b5378f8c1414bd24a3a309",
+      "upstream": "org/HdrHistogram/ValueRecorder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/Version.java",
+      "sha256": "25a51951cc3cda44034fe41523fefe2f9556729ba2581473dc1b15b8e2c4941f",
+      "upstream": "org/HdrHistogram/Version.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/resources/org/HdrHistogram/Version.java.template",
+      "sha256": "f58f76cf8921177b2a5f0d7478c9b98f70c6514d00f6c82da20d08abb4ce5c93",
+      "upstream": "org/HdrHistogram/Version.java.template"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/WriterReaderPhaser.java",
+      "sha256": "4580f0b02d4c97669e71502c460bffc9bc4dfbd62fb36477e1f03ba782f81f0f",
+      "upstream": "org/HdrHistogram/WriterReaderPhaser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/ZigZagEncoding.java",
+      "sha256": "f06debca874ab8c684e8ee10c96902bdcfa2adc6035ef5be3683654d776ae932",
+      "upstream": "org/HdrHistogram/ZigZagEncoding.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/package-info.java",
+      "sha256": "12ae44218f288e8d30012d18146a210d459c8c108a8c6781d1e513d380546196",
+      "upstream": "org/HdrHistogram/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/packedarray/AbstractPackedArrayContext.java",
+      "sha256": "2296a3902a805a8b632f3c04351110a81e792e6081d7799a1ce7fb7c05ee1d02",
+      "upstream": "org/HdrHistogram/packedarray/AbstractPackedArrayContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/packedarray/AbstractPackedLongArray.java",
+      "sha256": "4d0b0caf14cbc7dd42e805653494bb2afe07564b55b5c5010a9e99dc03a2b994",
+      "upstream": "org/HdrHistogram/packedarray/AbstractPackedLongArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/packedarray/ConcurrentPackedArrayContext.java",
+      "sha256": "84db7cd4a157f23e3612755cd34ad3aba614658df7fd6075fd08fafe6793b744",
+      "upstream": "org/HdrHistogram/packedarray/ConcurrentPackedArrayContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/packedarray/ConcurrentPackedLongArray.java",
+      "sha256": "a94fa4ee593ea6dce1196a8d87d3930b6f3e6ec6c8571907ae43578988f64f35",
+      "upstream": "org/HdrHistogram/packedarray/ConcurrentPackedLongArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/packedarray/IterationValue.java",
+      "sha256": "ed76aa56e94f5807cb6b2d34310e13cfc3dfac9dfbeb8064da553dd20beae6fe",
+      "upstream": "org/HdrHistogram/packedarray/IterationValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/packedarray/PackedArrayContext.java",
+      "sha256": "51ab9a7b657e02e705a986c86e5e2bd8404bba7648b96d43599526cbdd5a441c",
+      "upstream": "org/HdrHistogram/packedarray/PackedArrayContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/packedarray/PackedArrayRecorder.java",
+      "sha256": "e39d0d53c8c26c8f182c70176cccd50c87245942d9f996a764ec4fb845370e4e",
+      "upstream": "org/HdrHistogram/packedarray/PackedArrayRecorder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/packedarray/PackedArraySingleWriterRecorder.java",
+      "sha256": "1f85eae8871a624c179bb3ca6fb65e454569d945f48984a7ef105ebdf80f9b7e",
+      "upstream": "org/HdrHistogram/packedarray/PackedArraySingleWriterRecorder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/packedarray/PackedLongArray.java",
+      "sha256": "72027b9d5b6391a984f1760e1a461a18cd631f8ae73a05818e2ae911619c6092",
+      "upstream": "org/HdrHistogram/packedarray/PackedLongArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/HdrHistogram/src/main/java/org/HdrHistogram/packedarray/ResizeException.java",
+      "sha256": "d89b6e6233c5ef9b41546142306c32fc5b8712f3d8907baba306430cdf8feb45",
+      "upstream": "org/HdrHistogram/packedarray/ResizeException.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/HdrHistogram/UPSTREAM_LICENSE.json",
+      "sha256": "c490f68e146ebe057bbe61df9c5db39473a8caa452fd6873fb68645945ec2e67",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/HdrHistogram/UPSTREAM_LICENSE.txt",
+      "sha256": "ba550515c77c9e6f8b6a400381eacd3c47569297f8f27884801a95dff5309483",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/HdrHistogram/SOURCES_MANIFEST.tsv",
+      "sha256": "d4d1dee26792bf70c1d91f258c8fda8b41a1c08aaf5878fb21ed82fa6a546566",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/HdrHistogram/LICENSE",
+      "sha256": "ba550515c77c9e6f8b6a400381eacd3c47569297f8f27884801a95dff5309483",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.hdrhistogram",
+  "kind": "MODULE",
+  "license": "Public Domain, per Creative Commons CC0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.pom",
+  "receipt": {
+    "buildRoot": "aaf02dcb0d1859c7104dff88884df898911d7d3e6fa297d77e63a8ddc556c90d",
+    "distributionSha256": "f6bba776bdbd12c8b498733683984ac5d5694649e45b0d6abb58d645e1b0ddb4",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "b48a884bbf7be556bc5b0566890eb57fcdaa3076acdae4a31985c8e17fae2b93",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12-sources.jar",
+  "sources_jar_sha1": "d8cf7bad79ef75fd41395c5f464ea38777463d95",
+  "sources_jar_sha256": "694ba8e66af54ae338a36eef6d1e0bbbeb85f6773965841dd449f669643ae8ba",
+  "status": "PASS",
+  "upstream": "scm:git:git://github.com/HdrHistogram/HdrHistogram.git",
+  "version": "2.1.12"
+}

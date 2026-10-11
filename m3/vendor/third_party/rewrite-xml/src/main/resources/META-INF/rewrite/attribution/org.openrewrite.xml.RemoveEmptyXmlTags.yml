@@ -1,0 +1,10 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.xml.RemoveEmptyXmlTags"
+contributors:
+- name: "Kushagra Nigam"
+  email: "93257324+TheMarvelFan@users.noreply.github.com"
+  lineCount: 46
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 2

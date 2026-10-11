@@ -1,0 +1,243 @@
+{
+  "artifact": "fastfilter",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "NOT_IN_LOCK",
+  "consumers": "OpenRewrite 8.17.1 runtime closure (mvn dependency:list of rewrite-core/java/java-21/test/xml)",
+  "coordinate": "io.github.fastfilter:fastfilter:1.0.2-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "fastfilter-1.0.2",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/fastfilter/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "5818cb4cf42e8dba65850528dbd35e1ac3a1dc2f9a34fa44712703c51fec157d",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/Filter.java",
+      "sha256": "93851fce06b3330e0c8170c8f66f5245d921b2cdf5806c063497e03ec3dedcc1",
+      "upstream": "org/fastfilter/Filter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/FilterType.java",
+      "sha256": "3855bf82a9243a07c7c8b41dfbb11ca2a41d95854e57d63840b3b5024e3cb875",
+      "upstream": "org/fastfilter/FilterType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/bloom/BlockedBloom.java",
+      "sha256": "16ac67eea49b047f37e564f302b44554042d53342607233877d7fd64cbd0f25b",
+      "upstream": "org/fastfilter/bloom/BlockedBloom.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/bloom/Bloom.java",
+      "sha256": "a336b68c8198dec5e36731201944750eabc9a607731c39c9b15f8ff8ed1f81de",
+      "upstream": "org/fastfilter/bloom/Bloom.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/bloom/count/CountingBloom.java",
+      "sha256": "e9535a14f6c0d01518cb01d31bcea42a86e2f020962f6e009dc2695ca3a1299c",
+      "upstream": "org/fastfilter/bloom/count/CountingBloom.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/bloom/count/Select.java",
+      "sha256": "a817e04de3f7872ecb83b8c976f0403ff2a9f993659f0f8294a0b5e3ac8c9574",
+      "upstream": "org/fastfilter/bloom/count/Select.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/bloom/count/SuccinctCountingBlockedBloom.java",
+      "sha256": "85b7c780f3ecd7c83926ff8029629c0727737b4562e6211ce59893c0950fccb2",
+      "upstream": "org/fastfilter/bloom/count/SuccinctCountingBlockedBloom.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/bloom/count/SuccinctCountingBlockedBloomRanked.java",
+      "sha256": "187c8681a753fc95400c541575d96f5d74faf193f0cb51a82466be379d546e8e",
+      "upstream": "org/fastfilter/bloom/count/SuccinctCountingBlockedBloomRanked.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/bloom/count/SuccinctCountingBloom.java",
+      "sha256": "6b290966cf815b1a608bb66ae66be9c3b40ddcd924460af9e0eae7d7f945358d",
+      "upstream": "org/fastfilter/bloom/count/SuccinctCountingBloom.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/bloom/count/SuccinctCountingBloomRanked.java",
+      "sha256": "4d7766983dec4063a65b4187c78588e143ca888c8f1f64bc9221e2d0f408488e",
+      "upstream": "org/fastfilter/bloom/count/SuccinctCountingBloomRanked.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/cuckoo/Cuckoo16.java",
+      "sha256": "c97b476e6b4d6ebc38ef981a110af2998ebf1c012a7d9f5c800d8cd3d0d56429",
+      "upstream": "org/fastfilter/cuckoo/Cuckoo16.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/cuckoo/Cuckoo8.java",
+      "sha256": "4a49d5cea53684f4ead984d2521498161367b959abf25ee9e038dec59ab8a285",
+      "upstream": "org/fastfilter/cuckoo/Cuckoo8.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/cuckoo/CuckooPlus16.java",
+      "sha256": "48f45dfb7cca72ed26815d2854b9b7e22e9ba3111c06df95c3836ee691afdb85",
+      "upstream": "org/fastfilter/cuckoo/CuckooPlus16.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/cuckoo/CuckooPlus8.java",
+      "sha256": "678308a863d23cee14b9f2df440b058d7c149fc5a9b12bf052cc388f378b7d71",
+      "upstream": "org/fastfilter/cuckoo/CuckooPlus8.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/gcs/BitBuffer.java",
+      "sha256": "88c31ab17d915dbb2a085d58b299215b01a504b537491b0719d9490d14e6b8f5",
+      "upstream": "org/fastfilter/gcs/BitBuffer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/gcs/GolombCompressedSet.java",
+      "sha256": "68881a59074cb53d2d15bc7d9b1c6a8fb168e9c65c11d91de40e3104c64b3cda",
+      "upstream": "org/fastfilter/gcs/GolombCompressedSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/gcs/MonotoneList.java",
+      "sha256": "98c469b83c1bcdb8737e4c45822832986d84fc41abecab19c5dc0b278a0a71b9",
+      "upstream": "org/fastfilter/gcs/MonotoneList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/gcs/Sort.java",
+      "sha256": "2e6adeccc2802cc60c60464a46fb2604b27a128fc009ce0db6efdef722d783bd",
+      "upstream": "org/fastfilter/gcs/Sort.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/tools/BuildFilterFile.java",
+      "sha256": "bc2d51c5d4e36a35067d58ec59fd16bbddb461a89826dc7e1504aec582505e95",
+      "upstream": "org/fastfilter/tools/BuildFilterFile.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/tools/PasswordLookup.java",
+      "sha256": "34882e24a77f801bf5d2885137af31663a4bd9d76d231efd0b5191161f7028c7",
+      "upstream": "org/fastfilter/tools/PasswordLookup.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/utils/Hash.java",
+      "sha256": "401fd6f51a2e5d7aa2eb4a29c88b364ce64a0a8d935bee149476cd357afa6d86",
+      "upstream": "org/fastfilter/utils/Hash.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/utils/StringUtils.java",
+      "sha256": "7c47ece2af582b226efd62b2028ab9f0c7320abc944632e400a69bd1e9551b6c",
+      "upstream": "org/fastfilter/utils/StringUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/xor/Xor16.java",
+      "sha256": "2e6e6429ac64a9df3692c68148597c47c0cd0a3aa4f1608d95e73f78ee448a58",
+      "upstream": "org/fastfilter/xor/Xor16.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/xor/Xor8.java",
+      "sha256": "e676a2ff364940dd17076946ed9ecb9bb10b6a4fe0c134e0829d811eb09d6a3a",
+      "upstream": "org/fastfilter/xor/Xor8.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/xor/XorFuse8.java",
+      "sha256": "f158e40eb786765d186ab92bc75f76656a5fe22dfd1ed08be0290789ec50f1e6",
+      "upstream": "org/fastfilter/xor/XorFuse8.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/xor/XorSimple.java",
+      "sha256": "cc79065005640b9d64f6b4041cacb3011545b861e2cfe40b0b04e6bfb8997e54",
+      "upstream": "org/fastfilter/xor/XorSimple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/xor/XorSimple2.java",
+      "sha256": "f7f7eddf22ecae7360a2cc417ef4675d6d0c456c9267be4f54e3ea9278720f0b",
+      "upstream": "org/fastfilter/xor/XorSimple2.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/xorplus/Rank9.java",
+      "sha256": "45a34f2ffc21d887a4b224951c05898c6b6250129d87d09c39b9c5edc0e135be",
+      "upstream": "org/fastfilter/xorplus/Rank9.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/fastfilter/src/main/java/org/fastfilter/xorplus/XorPlus8.java",
+      "sha256": "5fed929f9e398e3fb9de374e029daa2e7dbf16cc687216f33f3be20f0ae13ed1",
+      "upstream": "org/fastfilter/xorplus/XorPlus8.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/fastfilter/UPSTREAM_LICENSE.json",
+      "sha256": "fa5b46981687a2ede3cb20437dc66fd4309e103a4884f606d8a45f7cb9ceb837",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/fastfilter/UPSTREAM_LICENSE.txt",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/fastfilter/SOURCES_MANIFEST.tsv",
+      "sha256": "ec421f40c773faf3fbf95767ddcdab50ede2674690ff6397b4336880cabef350",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/fastfilter/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "io.github.fastfilter",
+  "kind": "MODULE",
+  "license": "Apache License, Version 2.0 (from the license text; pom declares none)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "io.github.fastfilter:fastfilter_java:1.0.2",
+  "pom": "https://repo.maven.apache.org/maven2/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.pom",
+  "receipt": {
+    "buildRoot": "647f5cbdd240c9ebfa271c9b5685a8df0de8363c7f6eab74d2a27d4a3e2fc51e",
+    "distributionSha256": "2c9f18470fc722789d8bcb0ea2615d263a88d3b52a93a2dd62422ea7cdf0a110",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "56e6397494a645e69b9da0dcbd31121a78aba3fa4c458334df70d3fcbe68be88",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2-sources.jar",
+  "sources_jar_sha1": "45ba1e73d20a1e00808a9f559f64375e7e11b5ae",
+  "sources_jar_sha256": "190372596cc62edba2e371d1dbded0c28fb839a77193ec6803284bd8e316480b",
+  "status": "PASS",
+  "upstream": "",
+  "version": "1.0.2"
+}

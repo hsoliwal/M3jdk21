@@ -1,0 +1,8 @@
+{
+  "artifact": "annotations",
+  "version": "24.1.0",
+  "origin": "https://raw.githubusercontent.com/JetBrains/java-annotations/24.1.0/LICENSE.txt",
+  "sha256": "8c1e966c7855fb54027bcaf6ebe7a43abe4785791e8cf9148c363761d493d097",
+  "bytes": 11352,
+  "pom_license": "The Apache Software License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0.txt>"
+}

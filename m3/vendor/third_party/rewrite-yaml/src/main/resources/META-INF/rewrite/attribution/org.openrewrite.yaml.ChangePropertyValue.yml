@@ -1,0 +1,19 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.yaml.ChangePropertyValue"
+contributors:
+- name: "Nick McKinney"
+  email: "mckinneynicholas@gmail.com"
+  lineCount: 130
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 10
+- name: "Jenson3210"
+  email: "jentesondervorst@gmail.com"
+  lineCount: 4
+- name: "Mike Solomon"
+  email: "mike@moderne.io"
+  lineCount: 2
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

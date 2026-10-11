@@ -1,0 +1,132 @@
+{
+  "artifact": "LatencyUtils",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "NOT_IN_LOCK",
+  "consumers": "OpenRewrite 8.17.1 runtime closure (mvn dependency:list of rewrite-core/java/java-21/test/xml)",
+  "coordinate": "org.latencyutils:LatencyUtils:2.0.3-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "HdrHistogram",
+      "form": "source module",
+      "group": "org.hdrhistogram",
+      "optional": false,
+      "scope": "compile",
+      "version": "2.1.12-m3-source-1"
+    }
+  ],
+  "donor": "latencyutils-2.0.3",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/LatencyUtils/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "b0b689481019b33fc42ea50f7f4e159d6b68c264032fbd1879e73196208da899",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/LatencyUtils/src/main/java/org/LatencyUtils/IntervalEstimator.java",
+      "sha256": "292586ceed4e5a9427db86982d57290bd94f629ffa9b1dee0f9b1cd2dcef1a03",
+      "upstream": "org/LatencyUtils/IntervalEstimator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/LatencyUtils/src/main/java/org/LatencyUtils/LatencyStats.java",
+      "sha256": "df2dba1c9a86bdfc3eb254dd204cc2e96eb722d4ba96c11b383ff78b4a0f9da2",
+      "upstream": "org/LatencyUtils/LatencyStats.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/LatencyUtils/src/main/java/org/LatencyUtils/MovingAverageIntervalEstimator.java",
+      "sha256": "ce65397badaf0c94aac89c0ac9997027cac98c909a9249cdc33e331e79739b98",
+      "upstream": "org/LatencyUtils/MovingAverageIntervalEstimator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/LatencyUtils/src/main/java/org/LatencyUtils/PauseDetector.java",
+      "sha256": "55a784b1bac95d90523e14dda9ed3f7b389c886804b6dd50ea4a151a95be2634",
+      "upstream": "org/LatencyUtils/PauseDetector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/LatencyUtils/src/main/java/org/LatencyUtils/PauseDetectorListener.java",
+      "sha256": "23fe5cb31be3ad7669ac9e546bfdac03b1bc61b35e293146a62a9fe681ac68c3",
+      "upstream": "org/LatencyUtils/PauseDetectorListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/LatencyUtils/src/main/java/org/LatencyUtils/SimplePauseDetector.java",
+      "sha256": "b8c677ad1d09dc6e55bd0640e521b0d3ef90cee62ed09f138efeb0f59f6b9e13",
+      "upstream": "org/LatencyUtils/SimplePauseDetector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/LatencyUtils/src/main/java/org/LatencyUtils/TimeCappedMovingAverageIntervalEstimator.java",
+      "sha256": "a552ce83747f25ad71602c29b8ca21d204ca55343ec79c3c1c1f4e49ef5c1f2b",
+      "upstream": "org/LatencyUtils/TimeCappedMovingAverageIntervalEstimator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/LatencyUtils/src/main/java/org/LatencyUtils/TimeServices.java",
+      "sha256": "069f51dee20b03a98b8dacd4034f79570e9a50c4b602ffcc3e5dfb524f500fca",
+      "upstream": "org/LatencyUtils/TimeServices.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/LatencyUtils/src/main/java/org/LatencyUtils/package-info.java",
+      "sha256": "3e698b68b6e7c9425051cf5d7333fc442eeea995cd2b588b2c04b3f712e9e20a",
+      "upstream": "org/LatencyUtils/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/LatencyUtils/UPSTREAM_LICENSE.json",
+      "sha256": "8dc2870e8713fabb0288cec4a0f06fa6759a9dfb8f6aa2fb0fc3220b42a3fa44",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/LatencyUtils/UPSTREAM_LICENSE.txt",
+      "sha256": "50b43424ea5a8855c49f89e4d3a00fd55fb572ecd0c872f4215f63f654983c6c",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/LatencyUtils/SOURCES_MANIFEST.tsv",
+      "sha256": "5c5740d465ef2e78a4e6efd75dc22796fbcab0266f5dbc1b4fcdcd3f3d985d7c",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/LatencyUtils/LICENSE",
+      "sha256": "50b43424ea5a8855c49f89e4d3a00fd55fb572ecd0c872f4215f63f654983c6c",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.latencyutils",
+  "kind": "MODULE",
+  "license": "Public Domain, per Creative Commons CC0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "org.sonatype.oss:oss-parent:7",
+  "pom": "https://repo.maven.apache.org/maven2/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.pom",
+  "receipt": {
+    "buildRoot": "3e3591533853966d33dfd3aac16bd71183798b67d1a936333328fe63269ec40b",
+    "distributionSha256": "e3ef1b05ca26fd2884d1995094f1136e28d3ef87e7d87d47371e64940f2dd307",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "c80c97af6002f857233f1adc1e470487b1eb38bd7c4dcef5a1443d91ff61da7a",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3-sources.jar",
+  "sources_jar_sha1": "fbc38259e2077a428984637d811dac542a6a913e",
+  "sources_jar_sha256": "717e271b5d67c190afba092795d79bba496434256aca7151cf6a02f83564e724",
+  "status": "PASS",
+  "upstream": "scm:git:git://github.com/LatencyUtils/LatencyUtils.git",
+  "version": "2.0.3"
+}

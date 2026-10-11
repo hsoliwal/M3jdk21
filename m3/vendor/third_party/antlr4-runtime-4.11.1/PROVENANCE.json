@@ -1,0 +1,1263 @@
+{
+  "artifact": "antlr4-runtime",
+  "automatic_module_name": "org.antlr.antlr4.runtime",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "transitive compile input of tomlj 1.1.1",
+  "coordinate": "org.antlr:antlr4-runtime:4.11.1-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "antlr4-runtime-4.11.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "31f06c9999bfd523e192864178cfe4a9873d336884cf59a0d698e520895caeaa",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-excluded/META-INF/maven/org.antlr/antlr4-runtime/pom.properties",
+      "sha256": "1c35c886363eab9a6c2c27df9371038a9f4d74edd5d8acf5b095c486a598c849",
+      "upstream": "META-INF/maven/org.antlr/antlr4-runtime/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-excluded/META-INF/maven/org.antlr/antlr4-runtime/pom.xml",
+      "sha256": "c456ec2959078c591fbd7ef69ad9400a727920068d746989c74ab804ed681b34",
+      "upstream": "META-INF/maven/org.antlr/antlr4-runtime/pom.xml"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_DiffTopDiffPar.dot",
+      "sha256": "7fef3447cb81923553dcf63483f5cf0c04260915d99a31227e7fa313d65253bf",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_DiffTopDiffPar.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_EqualTop.dot",
+      "sha256": "efa30ddcdfb756bf39b9ca49bb89dd2a337fe4c70fcb6e8aa70232a2f4381fa8",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_EqualTop.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopDiffPar.dot",
+      "sha256": "6ea0f696804e268b220df27e2fa582ce33ccf7b97a0be15e4c61aba381cec37e",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopDiffPar.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopSamePar.dot",
+      "sha256": "cd45c789ed29628def51ce7e324820e930afaff87b9bddec69dd62f133f322ce",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopSamePar.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopSharePar.dot",
+      "sha256": "a069fe94944e66572cac711a4f543281ea05aa983109cdc3d9838d92cf0de9e2",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopSharePar.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/Block.dot",
+      "sha256": "aadb7179c9aa03b81ccb8221eb5bd9b2b79cc04e92def56911f7d2c27c8e9cbb",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/Block.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ClosureGreedy.dot",
+      "sha256": "170cdf3a5d7ba217d373d9517af87985e5dd337401f9cd14b560a57ce8071c7f",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ClosureGreedy.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ClosureNonGreedy.dot",
+      "sha256": "e4886342113691e4552455c42fa7fa9295b7d0b70ada2600bb151e39d99ec9e9",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ClosureNonGreedy.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/FullMerge_EmptyRoot.dot",
+      "sha256": "1b9ba6a60ddcfe03236e89c042eae4d22735e48fe310ac6d5f42ebdf34448385",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/FullMerge_EmptyRoot.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/FullMerge_EmptyRoots.dot",
+      "sha256": "5c9f11c5693d53d355783003a3b22eb3f95de675972ba79e173a1b32a3d2d8fa",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/FullMerge_EmptyRoots.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/FullMerge_SameRoot.dot",
+      "sha256": "0db80cce1113cb1f32252fd5f079174e30c442dfe049f57fb1cfb2afe10a66f4",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/FullMerge_SameRoot.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_DiffRoots.dot",
+      "sha256": "6a9f5757540d0f9c575fa88994fe7779dcd8af2d7d8a3358ef96dd58e39655b4",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_DiffRoots.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_EmptyParent.dot",
+      "sha256": "2e3e8810adf6a5545901d51c793cb75b029af929cfd9abd73b46536b05686dbb",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_EmptyParent.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_EmptyRoot.dot",
+      "sha256": "a35beae9c138ba1f3a7e156e1b1552240c3a6c114e2b1c50a477451047ac8a81",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_EmptyRoot.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/OptionalGreedy.dot",
+      "sha256": "51a62357c2bdd0095c16627c84d2c4811941f75a9ec4c355fdb59d9179bb5f1e",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/OptionalGreedy.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/OptionalNonGreedy.dot",
+      "sha256": "133389500ec980f7fdbcb5f276fe2ceaef7910c6957d155e9734320af7d28be5",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/OptionalNonGreedy.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/PositiveClosureGreedy.dot",
+      "sha256": "3721255ad40c6d00a56b886e66383f35e1a976b7b1af55a9e6d806e979d885a7",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/PositiveClosureGreedy.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/PositiveClosureNonGreedy.dot",
+      "sha256": "a741ffca85e948765d30dd8bd911d6397da94fc46a210695a6d140c5ff00251f",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/PositiveClosureNonGreedy.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/Rule.dot",
+      "sha256": "55573c2c5c916956988aedbbf1b06d9ee3dfc0df01f307bacce3355b13c71ebb",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/Rule.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_DiffRootDiffPar.dot",
+      "sha256": "2d97a4133034debf94774d630911f614db68bc46c2951e2d54f088220068fcfb",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_DiffRootDiffPar.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_DiffRootSamePar.dot",
+      "sha256": "477679029dde331e4ae28baa7d3d065be75138d9ec9bfccb4d4dfc1b98cc5b02",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_DiffRootSamePar.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_SameRootDiffPar.dot",
+      "sha256": "47a1bf782db16ced2c07a6daf4aec7503e643c1ad995169846773c9e2feafe13",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_SameRootDiffPar.dot"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_SameRootSamePar.dot",
+      "sha256": "f433782d6d0c235492271a555cc99741f7ad91998438eae1129abcdb7f1b3b7d",
+      "upstream": "main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_SameRootSamePar.dot"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/ANTLRErrorListener.java",
+      "sha256": "05ac4dd6528e42315126752537cd225577c555c734fde85feba887b08ed49472",
+      "upstream": "org/antlr/v4/runtime/ANTLRErrorListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/ANTLRErrorStrategy.java",
+      "sha256": "b4b69a810e9f6da9795fc58269cea6654893f361b91140b7b1b9ea8da8130fa9",
+      "upstream": "org/antlr/v4/runtime/ANTLRErrorStrategy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/ANTLRFileStream.java",
+      "sha256": "9b0e921a334efd775a184bf92fd4ac21eb30d4d77fe4b7da5d0808718abf5cfb",
+      "upstream": "org/antlr/v4/runtime/ANTLRFileStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/ANTLRInputStream.java",
+      "sha256": "d2fc960e5c1652d886d9753022a19bdbb4025539ae1f461582a7b7eecc010a7b",
+      "upstream": "org/antlr/v4/runtime/ANTLRInputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/BailErrorStrategy.java",
+      "sha256": "b74e89fb6a7ee9042bf433b56598363d015880f6c5b2b00a7514b1a405378b2a",
+      "upstream": "org/antlr/v4/runtime/BailErrorStrategy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/BaseErrorListener.java",
+      "sha256": "64b70612e446d9fc213badd35d25031bfbfea51362dd6ab819712294355c609e",
+      "upstream": "org/antlr/v4/runtime/BaseErrorListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/BufferedTokenStream.java",
+      "sha256": "e8914a408d193f4d6b44a63818758079710f30a26ca4dd22c5aa8d31832f7599",
+      "upstream": "org/antlr/v4/runtime/BufferedTokenStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/CharStream.java",
+      "sha256": "cf9f9501ac849f5e637d7bb93976185fd74455b349a6f166a871d5cc3c88dfec",
+      "upstream": "org/antlr/v4/runtime/CharStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/CharStreams.java",
+      "sha256": "7d5f4d4a77cb4b258fae33417d7ca188bf913680c117952e7f1761ef3c893736",
+      "upstream": "org/antlr/v4/runtime/CharStreams.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/CodePointBuffer.java",
+      "sha256": "7e6bb9792fc731d69126aea76ba06d215af20be4ad9c050e9f9bda8e493ef075",
+      "upstream": "org/antlr/v4/runtime/CodePointBuffer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/CodePointCharStream.java",
+      "sha256": "5b71ef24d02d8b4431899ad3dae30499fe9a949b068f658eb347e1d0de5ad65d",
+      "upstream": "org/antlr/v4/runtime/CodePointCharStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/CommonToken.java",
+      "sha256": "2f9f1c430969fa9a96bc69582280e19a70e8ff892087ca88f59beb7b39f494c8",
+      "upstream": "org/antlr/v4/runtime/CommonToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/CommonTokenFactory.java",
+      "sha256": "309d5c918cd67d701db46924f3916386eb00d26a5d3ec538b50f3c49a2880a93",
+      "upstream": "org/antlr/v4/runtime/CommonTokenFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/CommonTokenStream.java",
+      "sha256": "480fe2f828c56636805db4a3bd5170d8f7f08e8e07b8ebef9df6ba6879778e6e",
+      "upstream": "org/antlr/v4/runtime/CommonTokenStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/ConsoleErrorListener.java",
+      "sha256": "72765feb6cf024126b67d2d9e6baf7273bd8dac5c2104b0393cc91409ac000fa",
+      "upstream": "org/antlr/v4/runtime/ConsoleErrorListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/DefaultErrorStrategy.java",
+      "sha256": "f8c0c1e724b45214376948206d564fae0ce3c9536059a3d56f113bc9fbfcdeaf",
+      "upstream": "org/antlr/v4/runtime/DefaultErrorStrategy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/DiagnosticErrorListener.java",
+      "sha256": "06f82acddb5acd6767697a0331f8021955afe7d8384c6ef26893ab613c5a6273",
+      "upstream": "org/antlr/v4/runtime/DiagnosticErrorListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/FailedPredicateException.java",
+      "sha256": "aba63871f8bfe63b9f340526cb6085067075ea056562482aa39cf04cc8c7ce40",
+      "upstream": "org/antlr/v4/runtime/FailedPredicateException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/InputMismatchException.java",
+      "sha256": "b3e982ce671dacc901ecb30063460b8fed70a6eff6c3304ee10f62caf669e0a4",
+      "upstream": "org/antlr/v4/runtime/InputMismatchException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/IntStream.java",
+      "sha256": "d4aa4e2c72bdfc818e205e3d705d13b30b3e401cb241da5f19c624965c22fc4c",
+      "upstream": "org/antlr/v4/runtime/IntStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/InterpreterRuleContext.java",
+      "sha256": "effb5859600625665b0d4a9f3f59e50d2186b12b184550dc68fbbb8bda01d415",
+      "upstream": "org/antlr/v4/runtime/InterpreterRuleContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/Lexer.java",
+      "sha256": "9b548b34f6906463fbe5f5541d93d8476e4ceaeb8667ec847044ff48b4fde278",
+      "upstream": "org/antlr/v4/runtime/Lexer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/LexerInterpreter.java",
+      "sha256": "c09af0a1b48708d1a79791de5abd415ace6aa77e559d6863d582d4035b5c969f",
+      "upstream": "org/antlr/v4/runtime/LexerInterpreter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/LexerNoViableAltException.java",
+      "sha256": "c29ff6432825ad94067fbefdebaea626079865ea0d50cf053d88790789410196",
+      "upstream": "org/antlr/v4/runtime/LexerNoViableAltException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/ListTokenSource.java",
+      "sha256": "c3c1be29119a761d219dc2fd88552f0e564ba8dff0124f39a468e067a70e4caf",
+      "upstream": "org/antlr/v4/runtime/ListTokenSource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/NoViableAltException.java",
+      "sha256": "e9c406bb8be28a80c396f868ab202ba08677df964e96b8c93299feda78674096",
+      "upstream": "org/antlr/v4/runtime/NoViableAltException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/Parser.java",
+      "sha256": "ab6bc39813b663efe9744daf87f404764878cc7130f24113b170593f83e27d3e",
+      "upstream": "org/antlr/v4/runtime/Parser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/ParserInterpreter.java",
+      "sha256": "af8e32d4e91c5cbbd253f337a75b86b63c8f0800c75463d20cc92118c962788f",
+      "upstream": "org/antlr/v4/runtime/ParserInterpreter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/ParserRuleContext.java",
+      "sha256": "9b8780f4d6cee7a8108bbd5d0b0ad99e2a69d417e05b11ac384c54ad898d2114",
+      "upstream": "org/antlr/v4/runtime/ParserRuleContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/ProxyErrorListener.java",
+      "sha256": "df888d3cc8a2bf2ba3edbc92f67b8c1ea98e01100d55572773d1ea0478ec7e85",
+      "upstream": "org/antlr/v4/runtime/ProxyErrorListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/RecognitionException.java",
+      "sha256": "d648890eb025ae8cfbd1d7f430b54b22d695d805b0e4610b729e1267c9241c08",
+      "upstream": "org/antlr/v4/runtime/RecognitionException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/Recognizer.java",
+      "sha256": "125fe54ea24213ee9c6e04d85f18ff5668fbeb266e41a8135e383b3542dbd558",
+      "upstream": "org/antlr/v4/runtime/Recognizer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/RuleContext.java",
+      "sha256": "2168e3bec7f645132d6c0310b9f2c789f86cdc2440906e3df269a52e19e438f3",
+      "upstream": "org/antlr/v4/runtime/RuleContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/RuleContextWithAltNum.java",
+      "sha256": "413e696e9a443c1843e4bede1e386f9f366f86faec8f795dab409c6e4e2d4d76",
+      "upstream": "org/antlr/v4/runtime/RuleContextWithAltNum.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/RuntimeMetaData.java",
+      "sha256": "f37bf5cade1f97b4a7019daf0afc16962c13276f40b76f4b36ad917f3f731976",
+      "upstream": "org/antlr/v4/runtime/RuntimeMetaData.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/Token.java",
+      "sha256": "ee7cc20d90709b912c56dbf83905f0f4bf873d122a2167f4b1f2adc82d2a81b8",
+      "upstream": "org/antlr/v4/runtime/Token.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/TokenFactory.java",
+      "sha256": "405c961da2e10313b7a14a04759607f995b5b41676e24ad7a2986fbd4ade725d",
+      "upstream": "org/antlr/v4/runtime/TokenFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/TokenSource.java",
+      "sha256": "274d5ba034b44167bdfe35d726b2ed7d55f4a964f3e41448fc153663ca33e11c",
+      "upstream": "org/antlr/v4/runtime/TokenSource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/TokenStream.java",
+      "sha256": "5ce41d9e7760cc41c9d9cd4e8c94920e94b07dbddb12c5eabc0f9556c722f9c6",
+      "upstream": "org/antlr/v4/runtime/TokenStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/TokenStreamRewriter.java",
+      "sha256": "9adc7d43f76c39b4eb3ab5d5031ea309def55d886cf32913506820d950e47634",
+      "upstream": "org/antlr/v4/runtime/TokenStreamRewriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/UnbufferedCharStream.java",
+      "sha256": "4f67b78aac0dc1e972c28306671cad62e7f73eed80254c5b6938e5e58264b2fd",
+      "upstream": "org/antlr/v4/runtime/UnbufferedCharStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/UnbufferedTokenStream.java",
+      "sha256": "b35bfb1eb41ab0c6560e3c3dc6b85688743938b831a78b467767dacc53587505",
+      "upstream": "org/antlr/v4/runtime/UnbufferedTokenStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/Vocabulary.java",
+      "sha256": "88c215071727eb8aed233facb7b2590c71e17cf2830b359686e88ad1ad003ec1",
+      "upstream": "org/antlr/v4/runtime/Vocabulary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/VocabularyImpl.java",
+      "sha256": "ac8addb69eaf2efacabf362b230868db30ddb4dbfc39c815ecb31748be8908a6",
+      "upstream": "org/antlr/v4/runtime/VocabularyImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/WritableToken.java",
+      "sha256": "2a19b15ce66be0262681e3c0fce7a55e8d4b182808a5794fe49dd5ebf64d7825",
+      "upstream": "org/antlr/v4/runtime/WritableToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ATN.java",
+      "sha256": "c1a59f44da2ff7843cce4532e999b4e5bb0c7aa829587763bf07556488426343",
+      "upstream": "org/antlr/v4/runtime/atn/ATN.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ATNConfig.java",
+      "sha256": "077e41382b431c4e30d90e617a54e888c0af0beb5f4c376292c8cf5610b9e2be",
+      "upstream": "org/antlr/v4/runtime/atn/ATNConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ATNConfigSet.java",
+      "sha256": "803f19259f6b6ae6fe844edd651af034f179cb6a835f10449b35183ed3f44777",
+      "upstream": "org/antlr/v4/runtime/atn/ATNConfigSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ATNDeserializationOptions.java",
+      "sha256": "12308f7f14ca64c0f83d0d5137534b5efafe4029f7b4715fa16677da9d951153",
+      "upstream": "org/antlr/v4/runtime/atn/ATNDeserializationOptions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ATNDeserializer.java",
+      "sha256": "696e4b89613c6ad47ba5264c755ed77120897679bb1e4f961c3e3e799e38e7cf",
+      "upstream": "org/antlr/v4/runtime/atn/ATNDeserializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ATNSerializer.java",
+      "sha256": "33d65a10a809531b0a35487b4f63858dd017dbcda432bdcbba9ebeb1f508261b",
+      "upstream": "org/antlr/v4/runtime/atn/ATNSerializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ATNSimulator.java",
+      "sha256": "4c6ef2cf2492b649d25a2b7fafc03ac0a30fa0d207baea4717021ffac10c22cb",
+      "upstream": "org/antlr/v4/runtime/atn/ATNSimulator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ATNState.java",
+      "sha256": "825c020effdac6ecb0ab5f64fef810478b60020ebd215482863b59276b2f0600",
+      "upstream": "org/antlr/v4/runtime/atn/ATNState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ATNType.java",
+      "sha256": "ff84d9713a004c94c432fa609eb1bb4104fbfa05ee4c166060ef68d47e04f9b9",
+      "upstream": "org/antlr/v4/runtime/atn/ATNType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/AbstractPredicateTransition.java",
+      "sha256": "4c4434bba2fdb996e64b8e4f62d3568ac6c92f68bd8a7c04c4492d6dff03e9a2",
+      "upstream": "org/antlr/v4/runtime/atn/AbstractPredicateTransition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ActionTransition.java",
+      "sha256": "5465054eb4f0ff20dc9c9bb0f75573ee932929e925a1a2c8a6fb7a7cab4a35c0",
+      "upstream": "org/antlr/v4/runtime/atn/ActionTransition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/AmbiguityInfo.java",
+      "sha256": "ff441955b83f14d51597f493c1347597157fb3f619cd81fd28ac61efe6610fd9",
+      "upstream": "org/antlr/v4/runtime/atn/AmbiguityInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ArrayPredictionContext.java",
+      "sha256": "388806c3269dc7b8d03c05d57328ce77f41c416418790ef6fd603c57728bc0e1",
+      "upstream": "org/antlr/v4/runtime/atn/ArrayPredictionContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/AtomTransition.java",
+      "sha256": "47bd3a0ab67dea59716351a3c3a0ea26322d76b4b442665816422f46bd15d1ac",
+      "upstream": "org/antlr/v4/runtime/atn/AtomTransition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/BasicBlockStartState.java",
+      "sha256": "3890b89717121c69bd01c7aeb07d146e8c5858b662fd31d7745617645420f3f8",
+      "upstream": "org/antlr/v4/runtime/atn/BasicBlockStartState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/BasicState.java",
+      "sha256": "f0d0ce08b7c2a27d2ff367f764036b711e156f26d4742a69d67a8bb426001165",
+      "upstream": "org/antlr/v4/runtime/atn/BasicState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/BlockEndState.java",
+      "sha256": "9fc1f986f4f1ba0b25f718d7efaa784e4b4155ff58f2d38de79425843de113bd",
+      "upstream": "org/antlr/v4/runtime/atn/BlockEndState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/BlockStartState.java",
+      "sha256": "8d75038620f717fa3af372516fa497bd316ba69233ce6d9bc95e3970c17f4c45",
+      "upstream": "org/antlr/v4/runtime/atn/BlockStartState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/CodePointTransitions.java",
+      "sha256": "fd0c71b8fbecec8dd3de0ba4faa15ac938ed435037a5f50323776e1e23ea4d58",
+      "upstream": "org/antlr/v4/runtime/atn/CodePointTransitions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ContextSensitivityInfo.java",
+      "sha256": "bd95797aa38440eb76c29c9a7f2af98e8069517097894b1cea2d39256528f116",
+      "upstream": "org/antlr/v4/runtime/atn/ContextSensitivityInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/DecisionEventInfo.java",
+      "sha256": "19c48f53520f9c5ff36b6f54843b5c3f151df9bb680cd5bd271f136b41e40d14",
+      "upstream": "org/antlr/v4/runtime/atn/DecisionEventInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/DecisionInfo.java",
+      "sha256": "0bb7cc08b81eb1dd8d27c2a6496de06111f3005551e881b25061e2851f24a31c",
+      "upstream": "org/antlr/v4/runtime/atn/DecisionInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/DecisionState.java",
+      "sha256": "86ebd702f1e96b5d53ee72847ae1cd9ce2d8bd6d05e9b8ecb380a11d51486acc",
+      "upstream": "org/antlr/v4/runtime/atn/DecisionState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/EmptyPredictionContext.java",
+      "sha256": "950278da93427419b0a1425d4a4a3fdd2e7a177e9ef2078557b2b674e303bd1e",
+      "upstream": "org/antlr/v4/runtime/atn/EmptyPredictionContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/EpsilonTransition.java",
+      "sha256": "f3af8f03555bd09c5864f7f6323662a0d6e61379a4159cc4f82b2754c49710fb",
+      "upstream": "org/antlr/v4/runtime/atn/EpsilonTransition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ErrorInfo.java",
+      "sha256": "3169417c5684b9f18a1b8d71e221b3f7f3731e770b12dbadb731afe61e7908d4",
+      "upstream": "org/antlr/v4/runtime/atn/ErrorInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LL1Analyzer.java",
+      "sha256": "71d849df3d2071217e50574d002f43ed9e1b8252c9df94607a1fa33220b9a6c2",
+      "upstream": "org/antlr/v4/runtime/atn/LL1Analyzer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerATNConfig.java",
+      "sha256": "2690db9cc3be4f910c3196b406962cc0bcab3ca201639b8d3b8eb6b06944bd2a",
+      "upstream": "org/antlr/v4/runtime/atn/LexerATNConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerATNSimulator.java",
+      "sha256": "927d27dc6681b50da5c1804e848d830b90f6da0f2aea586765265dc1cd75b08c",
+      "upstream": "org/antlr/v4/runtime/atn/LexerATNSimulator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerAction.java",
+      "sha256": "5d1cdf283a3f6a4cdaa2266926a4325157f63d43e8ec2669b3bb3982c0cffe91",
+      "upstream": "org/antlr/v4/runtime/atn/LexerAction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerActionExecutor.java",
+      "sha256": "266b74b97a850b3e68fb8c088d43f1646c7d72f74c95a467fc6c43f72612d908",
+      "upstream": "org/antlr/v4/runtime/atn/LexerActionExecutor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerActionType.java",
+      "sha256": "a6e98ca17ae7728d5d3f62c5d5c12398335a8ed74122019a4294b070d0782701",
+      "upstream": "org/antlr/v4/runtime/atn/LexerActionType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerChannelAction.java",
+      "sha256": "c154c751549113a60d20f4835bc743ab977d9368ba31084c443fc86073a8f028",
+      "upstream": "org/antlr/v4/runtime/atn/LexerChannelAction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerCustomAction.java",
+      "sha256": "6ce9d7f4acf7cc613e525623c11d9ab44700e9b793462ed911b181bc22901bd6",
+      "upstream": "org/antlr/v4/runtime/atn/LexerCustomAction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerIndexedCustomAction.java",
+      "sha256": "ff609de83f9ff96b30b0369121ece25d49325981dd4bd83484893056619c64e1",
+      "upstream": "org/antlr/v4/runtime/atn/LexerIndexedCustomAction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerModeAction.java",
+      "sha256": "17fabcc0254a284a6b1495c4f32e2860bff4525dc63feb98f8f05e4b6ae171eb",
+      "upstream": "org/antlr/v4/runtime/atn/LexerModeAction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerMoreAction.java",
+      "sha256": "2cfe7b620d2f8c88f39f70532ac93bf6abb52dacc6f1183e6289c45be80c9d05",
+      "upstream": "org/antlr/v4/runtime/atn/LexerMoreAction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerPopModeAction.java",
+      "sha256": "efaccf8725bdbe5d7abda5ba4921a98ed4f94aab64939c6e0556d1fc197fdf6c",
+      "upstream": "org/antlr/v4/runtime/atn/LexerPopModeAction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerPushModeAction.java",
+      "sha256": "94a2d1654fe8e2e6e1542eedcc2094dd03e06436ec72b039e5a2afab6c6883fe",
+      "upstream": "org/antlr/v4/runtime/atn/LexerPushModeAction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerSkipAction.java",
+      "sha256": "2f554e18fb4c1e4542aa6916e263ddb50f48e4e77737fa66cd2b7e9cae351ce9",
+      "upstream": "org/antlr/v4/runtime/atn/LexerSkipAction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LexerTypeAction.java",
+      "sha256": "04ddac2120ec232760889f98e611381e5cdcce23dd1c89058be3406eb8643812",
+      "upstream": "org/antlr/v4/runtime/atn/LexerTypeAction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LookaheadEventInfo.java",
+      "sha256": "0e5d4a70f1c2c949bb22d5e41ab95f5ce4252b291a233d37462efd79a50b869c",
+      "upstream": "org/antlr/v4/runtime/atn/LookaheadEventInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/LoopEndState.java",
+      "sha256": "b631d2bea702f6b6eb3c11446e2d2a6e24c47a45e80a7e7f53671c6d1663bf20",
+      "upstream": "org/antlr/v4/runtime/atn/LoopEndState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/NotSetTransition.java",
+      "sha256": "bb75b1734d7a2a0203290903cf5381c7d551feaaf08165f0c32a329c47316276",
+      "upstream": "org/antlr/v4/runtime/atn/NotSetTransition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/OrderedATNConfigSet.java",
+      "sha256": "ebe9f87f68f1b7a0c85916a459fa2f703dcce2279ff7eaf98263ba1aaf58d0e8",
+      "upstream": "org/antlr/v4/runtime/atn/OrderedATNConfigSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ParseInfo.java",
+      "sha256": "ec0ea6dd03a584e0d6ae11a1c8810784033d3d38388ec8f2bd126385989eb5b4",
+      "upstream": "org/antlr/v4/runtime/atn/ParseInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ParserATNSimulator.java",
+      "sha256": "0c2cdc4df7850eb29edc9ec48bbb68b92085f0223094170e7ee499149af1ccbf",
+      "upstream": "org/antlr/v4/runtime/atn/ParserATNSimulator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/PlusBlockStartState.java",
+      "sha256": "6dbdc200d11b741829608cb964b285b732f20b5bf61ea27d1f660a6a7dd766b7",
+      "upstream": "org/antlr/v4/runtime/atn/PlusBlockStartState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/PlusLoopbackState.java",
+      "sha256": "9e6a9dd6de23420d3a902eff7693db12efaaa6a087abde9e2fbbbf4b683c6371",
+      "upstream": "org/antlr/v4/runtime/atn/PlusLoopbackState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/PrecedencePredicateTransition.java",
+      "sha256": "bf9b3ebae0c3024454a793d60f4791e361c940f7eb0d574be0851d4ab9a4d175",
+      "upstream": "org/antlr/v4/runtime/atn/PrecedencePredicateTransition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/PredicateEvalInfo.java",
+      "sha256": "59e6a29a328f991de6ca05db177c7f5274496b3eeccf94c8412feea939ee7d3b",
+      "upstream": "org/antlr/v4/runtime/atn/PredicateEvalInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/PredicateTransition.java",
+      "sha256": "ab15924d559d787ca955939c9d3e0295395791d8b8d24a1442e17d8e1c42ab7a",
+      "upstream": "org/antlr/v4/runtime/atn/PredicateTransition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/PredictionContext.java",
+      "sha256": "13343df47be172fff9554aed8b5602bd1fddaf8f087604d2ef0185be6321d561",
+      "upstream": "org/antlr/v4/runtime/atn/PredictionContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/PredictionContextCache.java",
+      "sha256": "d82f36d1f7924699a97051019a694461eef1952e3f17ebfcc4f378bcea97babc",
+      "upstream": "org/antlr/v4/runtime/atn/PredictionContextCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/PredictionMode.java",
+      "sha256": "0f741f18234b692e0ed815741c80d1ff14a7ee7bf20c6ae756d3f9519716697d",
+      "upstream": "org/antlr/v4/runtime/atn/PredictionMode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/ProfilingATNSimulator.java",
+      "sha256": "e21cfdf1f5c1a3a068a9b11db7e603490453aeba397ee163ab5caeddb0e7e2f1",
+      "upstream": "org/antlr/v4/runtime/atn/ProfilingATNSimulator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/RangeTransition.java",
+      "sha256": "8c86b5ab2a0e1a52d2b10632d9dec5f779b70c5ca2693578698f8fa40a905b9b",
+      "upstream": "org/antlr/v4/runtime/atn/RangeTransition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/RuleStartState.java",
+      "sha256": "f92ce4462643dd303eb37f9c43c1a07867f1373c14fcaa3e22c700a4dfe7dec0",
+      "upstream": "org/antlr/v4/runtime/atn/RuleStartState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/RuleStopState.java",
+      "sha256": "e97c8ab8d8d3891618a20bb8a27158123e534d642ed31b4569651d6d68a59df5",
+      "upstream": "org/antlr/v4/runtime/atn/RuleStopState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/RuleTransition.java",
+      "sha256": "00bc5e209178fa3e6ef30497067eb2e510e6c4775f97c5ce4b2b1cfc99174dad",
+      "upstream": "org/antlr/v4/runtime/atn/RuleTransition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/SemanticContext.java",
+      "sha256": "73cd6eb4531a493f3571bb61e646a50d3548b750e3d50cf009f68ad94c5655ce",
+      "upstream": "org/antlr/v4/runtime/atn/SemanticContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/SetTransition.java",
+      "sha256": "e221bf03db9ae5dae784de70e9c1d8e21c53f36beec8c2733cd803d9a844d55d",
+      "upstream": "org/antlr/v4/runtime/atn/SetTransition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/SingletonPredictionContext.java",
+      "sha256": "6473a3fdb2e32680644fea0df5efa9b437fd0224e13040f906afecff32d3ada3",
+      "upstream": "org/antlr/v4/runtime/atn/SingletonPredictionContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/StarBlockStartState.java",
+      "sha256": "70114da908db4e3b318bd0fa8ba1afb8ad5ad411085c734a31187176950af71d",
+      "upstream": "org/antlr/v4/runtime/atn/StarBlockStartState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/StarLoopEntryState.java",
+      "sha256": "1915a39bc0fec3842f8afca4aaf074f9dc8114e6649b7334668784a9827a31ca",
+      "upstream": "org/antlr/v4/runtime/atn/StarLoopEntryState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/StarLoopbackState.java",
+      "sha256": "dbf2ac17339205e9fc372ebb00d3a0a6f7e7be13b6faf00759913979e8d1b44d",
+      "upstream": "org/antlr/v4/runtime/atn/StarLoopbackState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/TokensStartState.java",
+      "sha256": "ddbaf2e4937816d98cdd8c3ea3d4b1039749fbb975e8ed57752309b3d26c052c",
+      "upstream": "org/antlr/v4/runtime/atn/TokensStartState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/Transition.java",
+      "sha256": "fed529b006069d6c56e4dca88dcd31b386de5619020b40aaaf1437b6e42e2e21",
+      "upstream": "org/antlr/v4/runtime/atn/Transition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/atn/WildcardTransition.java",
+      "sha256": "2d4b1b35b97fa85098c65c9033bc2fa6c6a95b8dbaff8f318500afbb7aad345d",
+      "upstream": "org/antlr/v4/runtime/atn/WildcardTransition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/dfa/DFA.java",
+      "sha256": "6f119a06edf323f67fb0b4de10dd9b178ef38eb2bac2aea486447b97f1584621",
+      "upstream": "org/antlr/v4/runtime/dfa/DFA.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/dfa/DFASerializer.java",
+      "sha256": "91ca5b4772089aa09a3931932f5639cd02dd71463f5485441aa23fc769ebd9bb",
+      "upstream": "org/antlr/v4/runtime/dfa/DFASerializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/dfa/DFAState.java",
+      "sha256": "98430af9dc1884161ddf877ab0ca9b912c1aa14db93aa6a868e5b9126063e310",
+      "upstream": "org/antlr/v4/runtime/dfa/DFAState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/dfa/LexerDFASerializer.java",
+      "sha256": "e8474962ff256742bbff7d5ab05253f081b79514ced73433669358a3b0ac6694",
+      "upstream": "org/antlr/v4/runtime/dfa/LexerDFASerializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/AbstractEqualityComparator.java",
+      "sha256": "47bb6c8f7a734882f866560dfabfa200e67abb8fbfd791a68f96bff30556e1ff",
+      "upstream": "org/antlr/v4/runtime/misc/AbstractEqualityComparator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/Array2DHashSet.java",
+      "sha256": "b76949bebc9dce6e6e100af77f90cbc4b5e6fec25c51d99e5871b2e2175d0877",
+      "upstream": "org/antlr/v4/runtime/misc/Array2DHashSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/DoubleKeyMap.java",
+      "sha256": "61e9600a7ce6f6af6da6e6a30d84dc6d53e78a76dc3a7d76fcca0718f3636f1b",
+      "upstream": "org/antlr/v4/runtime/misc/DoubleKeyMap.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/EqualityComparator.java",
+      "sha256": "f0f88c2f03409fc47dee76ac8bd8711c490cd1ab6650a58eb2dc662fb3ce2367",
+      "upstream": "org/antlr/v4/runtime/misc/EqualityComparator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/FlexibleHashMap.java",
+      "sha256": "ee74948c05e025af84eb025a031c711b8b1322b44654f114e849aac740504b38",
+      "upstream": "org/antlr/v4/runtime/misc/FlexibleHashMap.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/IntSet.java",
+      "sha256": "72cd1251e3371e7e0543a475b9eb676c9b4650d12e22fecb0c0178b93a79b836",
+      "upstream": "org/antlr/v4/runtime/misc/IntSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/IntegerList.java",
+      "sha256": "8acefc5f29d63b426df1cd122f1c14ecb432300edcb598008d3bec69787caf87",
+      "upstream": "org/antlr/v4/runtime/misc/IntegerList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/IntegerStack.java",
+      "sha256": "e15f13d1b2eed18f858c4491818c78a1f98fee8d25910fa4084426116616388f",
+      "upstream": "org/antlr/v4/runtime/misc/IntegerStack.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/InterpreterDataReader.java",
+      "sha256": "4ffe5248a095b84d1b21212fcca61156255aabc3767329174dd8350ea2794835",
+      "upstream": "org/antlr/v4/runtime/misc/InterpreterDataReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/Interval.java",
+      "sha256": "f47a5a668d0fc6a4270e0b13552297acdc853860353880bbd7bbed275c70af7b",
+      "upstream": "org/antlr/v4/runtime/misc/Interval.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/IntervalSet.java",
+      "sha256": "8c8a88f5fa5ebf5fb7c765913f210067768aee5bd686b8123a9aae08c099f439",
+      "upstream": "org/antlr/v4/runtime/misc/IntervalSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/LogManager.java",
+      "sha256": "141bf25a904a8826f95cbd2e9a648679c7c746f11c80d4c8685458656634002c",
+      "upstream": "org/antlr/v4/runtime/misc/LogManager.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/MultiMap.java",
+      "sha256": "078be0daa760d0a1f421db9141b404f09fe980f5b09f73848e4feaef513730b5",
+      "upstream": "org/antlr/v4/runtime/misc/MultiMap.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/MurmurHash.java",
+      "sha256": "baf1ae863ce343f4a3812e80c4ab9b0d1c661c833efc18fba3473334979353b0",
+      "upstream": "org/antlr/v4/runtime/misc/MurmurHash.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/NotNull.java",
+      "sha256": "7ccce3b135905f1ddb1321042577c224827fc6a944bd9529d3761a99bd810c07",
+      "upstream": "org/antlr/v4/runtime/misc/NotNull.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/ObjectEqualityComparator.java",
+      "sha256": "5914f4c3e04a2fe2f97c00d4efe450e75b8f0dc2919cb31857f353e5163eef21",
+      "upstream": "org/antlr/v4/runtime/misc/ObjectEqualityComparator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/OrderedHashSet.java",
+      "sha256": "da483fd2fc7e4f5610c19ceb2637c9ba8d2e09bb9186901c33bbd72abe3f5e5e",
+      "upstream": "org/antlr/v4/runtime/misc/OrderedHashSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/Pair.java",
+      "sha256": "7ce9bb7d66903ec1d1b273ee6a8129543eff5a656634e0a025bef678c66bdd9e",
+      "upstream": "org/antlr/v4/runtime/misc/Pair.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/ParseCancellationException.java",
+      "sha256": "851be683c3ea9e4ffdfce929715765bb5ade3f20b1cf1929caa32b8514b546a6",
+      "upstream": "org/antlr/v4/runtime/misc/ParseCancellationException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/Predicate.java",
+      "sha256": "9d01cb27641c7d9174b61138d89cf9c76cae5ef6adb2e446730f5cf15bb8e5ef",
+      "upstream": "org/antlr/v4/runtime/misc/Predicate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/TestRig.java",
+      "sha256": "28dbe37a72415cbfe288317410a87609b9efc84b98afab06f97817df3a294429",
+      "upstream": "org/antlr/v4/runtime/misc/TestRig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/Triple.java",
+      "sha256": "0a9900b8a9bbf48db93806609f21116ea9cd6f7b2a8ef784efd6c8f70f60f445",
+      "upstream": "org/antlr/v4/runtime/misc/Triple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/misc/Utils.java",
+      "sha256": "8244629597346e35cd183f47535995f8ebaa07fe03fa9e5a7f39beadc62e9bfe",
+      "upstream": "org/antlr/v4/runtime/misc/Utils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.java",
+      "sha256": "23fb556d96d19841191e519fcc396f6a444e919548de55e09e3384bc4ec6650f",
+      "upstream": "org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/ErrorNode.java",
+      "sha256": "e8dcdca2420b7e2526cb280fceff3d2857d91a421ef28593994a9f5a8dda7878",
+      "upstream": "org/antlr/v4/runtime/tree/ErrorNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/ErrorNodeImpl.java",
+      "sha256": "0c6b0dd82d47c77e8be7ac659a0d4110275a29345d3ab669302e8e9f8f487c4e",
+      "upstream": "org/antlr/v4/runtime/tree/ErrorNodeImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/IterativeParseTreeWalker.java",
+      "sha256": "5134449fd585f69641a50a681b1293d318681dd9f2a12efbf2728a523d7dde26",
+      "upstream": "org/antlr/v4/runtime/tree/IterativeParseTreeWalker.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/ParseTree.java",
+      "sha256": "df7e3250e9d568ebaab9916dd0e18b54be74dfc14bf92f94440c27780759b07b",
+      "upstream": "org/antlr/v4/runtime/tree/ParseTree.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/ParseTreeListener.java",
+      "sha256": "1b195696055ef6aa212f530c4b2c2d32d5ecfe8c0f0a37989ce5ee052adcb153",
+      "upstream": "org/antlr/v4/runtime/tree/ParseTreeListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/ParseTreeProperty.java",
+      "sha256": "93b8dec112ba64a516b92d5c90d62b1a0eb1feee6730343a1acb7483a0529576",
+      "upstream": "org/antlr/v4/runtime/tree/ParseTreeProperty.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/ParseTreeVisitor.java",
+      "sha256": "af54d8ede3fa748cee09405c5aad9327b6df6df063a65c3adc4e06783ea08700",
+      "upstream": "org/antlr/v4/runtime/tree/ParseTreeVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/ParseTreeWalker.java",
+      "sha256": "99ebcbae28ba732d828ff0f0683af1a6bc91ab0237d39c44e5e5733533b78c61",
+      "upstream": "org/antlr/v4/runtime/tree/ParseTreeWalker.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/RuleNode.java",
+      "sha256": "43766e17d3fde437a95b36b09112fdbb379337eeae99762fbfba1e7deed7c6f0",
+      "upstream": "org/antlr/v4/runtime/tree/RuleNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/SyntaxTree.java",
+      "sha256": "2e6c1a218c0c47fb2348f09e657410aa54f81ac1dad2c2442bf39b3be5de413e",
+      "upstream": "org/antlr/v4/runtime/tree/SyntaxTree.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/TerminalNode.java",
+      "sha256": "ac330e14370865320487820f0ead96c5e4a26d381768262f13570aa4e3c9abe0",
+      "upstream": "org/antlr/v4/runtime/tree/TerminalNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/TerminalNodeImpl.java",
+      "sha256": "0e4f0509738a054e6285e83995be02c7fbd077a49310a449850a83dba9f03766",
+      "upstream": "org/antlr/v4/runtime/tree/TerminalNodeImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/Tree.java",
+      "sha256": "0f01fae4d6b7b963ad4681710a6d5e1be6afebaa654ef25f0c30e9172e263790",
+      "upstream": "org/antlr/v4/runtime/tree/Tree.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/Trees.java",
+      "sha256": "fa0b80cd4128af12c14238e44efb6bdbb704d2c058a8791195535fe9fca4ac20",
+      "upstream": "org/antlr/v4/runtime/tree/Trees.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/pattern/Chunk.java",
+      "sha256": "c0304505f5d726bc5c41c9272426c3e57ab3daa1ebb5a634d534929d435a40cd",
+      "upstream": "org/antlr/v4/runtime/tree/pattern/Chunk.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/pattern/ParseTreeMatch.java",
+      "sha256": "136557ab3ebdcfa858f38d33a656d9b666982924998742acf0bad7febfcf35a3",
+      "upstream": "org/antlr/v4/runtime/tree/pattern/ParseTreeMatch.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/pattern/ParseTreePattern.java",
+      "sha256": "0e29849501cc0376263b82df29f73243ddcbc2c335e8daf03b9fc5740d086f1d",
+      "upstream": "org/antlr/v4/runtime/tree/pattern/ParseTreePattern.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/pattern/ParseTreePatternMatcher.java",
+      "sha256": "11ab4f494ad1ef8cabdd64c76836fff10ed8fa5603984f1e41a62f79e7ae709a",
+      "upstream": "org/antlr/v4/runtime/tree/pattern/ParseTreePatternMatcher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/pattern/RuleTagToken.java",
+      "sha256": "7c838a8ea94765567e7a150f67c54ff6a9b1e6e4303816629723dbaf7c8d4aff",
+      "upstream": "org/antlr/v4/runtime/tree/pattern/RuleTagToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/pattern/TagChunk.java",
+      "sha256": "e0a236620cbef853bb8ab7a1df1ba304040728ab76fcb43ad343de00878eaf2f",
+      "upstream": "org/antlr/v4/runtime/tree/pattern/TagChunk.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/pattern/TextChunk.java",
+      "sha256": "a11b6ae98a453185de363c8db0e418ff5364fb33dc712101818d2c09b9fcdcfd",
+      "upstream": "org/antlr/v4/runtime/tree/pattern/TextChunk.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/pattern/TokenTagToken.java",
+      "sha256": "3c469efe214d707fc84c44a6605e6cbef160460a8649c7aae4c19b494fb3cd49",
+      "upstream": "org/antlr/v4/runtime/tree/pattern/TokenTagToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/xpath/XPath.java",
+      "sha256": "102372c9c9a25ab7d8a8ed3cb46f69044d3c4b03f9a3e1122899b10883fdff2d",
+      "upstream": "org/antlr/v4/runtime/tree/xpath/XPath.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/xpath/XPathElement.java",
+      "sha256": "a9bdc666fcebbd4bdd41960b0ac60ee43c537f318c7f33931bf56d0ddfacb922",
+      "upstream": "org/antlr/v4/runtime/tree/xpath/XPathElement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/xpath/XPathLexer.java",
+      "sha256": "6a6542bea7c3983eb702337e6f695d3b41d9747cc0914746c40daee9763b142b",
+      "upstream": "org/antlr/v4/runtime/tree/xpath/XPathLexer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/xpath/XPathLexerErrorListener.java",
+      "sha256": "c49db5f3385b58a415c50c5cabf1fe4ecdf5318afebc51e7fdeb4188a5629b33",
+      "upstream": "org/antlr/v4/runtime/tree/xpath/XPathLexerErrorListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/xpath/XPathRuleAnywhereElement.java",
+      "sha256": "65579c23a36c42db63ca956645de4469109fec0532f641f5b56c1f429378625d",
+      "upstream": "org/antlr/v4/runtime/tree/xpath/XPathRuleAnywhereElement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/xpath/XPathRuleElement.java",
+      "sha256": "82d9f1aa7f1ef2a17b49954eb6c6fe8bdd4f1d9697043acbdaa3d0a94a5c9289",
+      "upstream": "org/antlr/v4/runtime/tree/xpath/XPathRuleElement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/xpath/XPathTokenAnywhereElement.java",
+      "sha256": "755fb59dcddc9a84c661faa4065aa3f8a61bcaf1cf54c0b30ff1da82a20b5027",
+      "upstream": "org/antlr/v4/runtime/tree/xpath/XPathTokenAnywhereElement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/xpath/XPathTokenElement.java",
+      "sha256": "e5ead92677ac95e6dce1ad7a6a90b4ddbf220c6e20d19d7fb73daa88c315320e",
+      "upstream": "org/antlr/v4/runtime/tree/xpath/XPathTokenElement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/xpath/XPathWildcardAnywhereElement.java",
+      "sha256": "eb6e625d5a38662537ebca4afb33133fe200cb1af55dbdaf9cbf8064746a22cb",
+      "upstream": "org/antlr/v4/runtime/tree/xpath/XPathWildcardAnywhereElement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/java/org/antlr/v4/runtime/tree/xpath/XPathWildcardElement.java",
+      "sha256": "2b5b482f40798290ca1c33bab0b2c8b1a8d1171c16e2b51a0ae2cb94346b5342",
+      "upstream": "org/antlr/v4/runtime/tree/xpath/XPathWildcardElement.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/UPSTREAM_LICENSE.json",
+      "sha256": "efbb8063f39cb10f079539144cbb63ccbfd9186fd179845993313accdb782000",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/UPSTREAM_LICENSE.txt",
+      "sha256": "3db1fb3ee79a4b4f9918fc4d0f6133bf18a3cf787f126cd22f8aa9b862281c0c",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/SOURCES_MANIFEST.tsv",
+      "sha256": "8dfc1df0c2ca453db893d5bcdafef321b50ded32db1f0f9700028e77dd50e479",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/LICENSE",
+      "sha256": "3db1fb3ee79a4b4f9918fc4d0f6133bf18a3cf787f126cd22f8aa9b862281c0c",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.antlr",
+  "kind": "MODULE",
+  "license": "UNDECLARED (see LICENSE)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "org.antlr:antlr4-master:4.11.1",
+  "pom": "https://repo.maven.apache.org/maven2/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.pom",
+  "receipt": {
+    "buildRoot": "9625db1effe3b94b84396b7d1b65623b9091320e4cb77d3a46db58193029efb4",
+    "distributionSha256": "8686ed5fe3eeeb63ab1bd58f901f09d57a910e5bb15c5c1cca0ea98b79f7b05d",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "73d92c779003f1c1dc369577288d3686280ca2f86c8eb3ad9c376e539886ecbb",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1-sources.jar",
+  "sources_jar_sha1": "2b1e7885e03030615026af6ffb9de75d38a7b47b",
+  "sources_jar_sha256": "6fa0efb711a152842ecda1d41ceab94fb2049f833e00e360e161ac0e7a3819fe",
+  "status": "PASS",
+  "upstream": "",
+  "version": "4.11.1"
+}
