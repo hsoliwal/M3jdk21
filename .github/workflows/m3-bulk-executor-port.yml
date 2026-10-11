@@ -27,6 +27,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Install bounded Synexia recipe custody
+        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Run receiver and live fixed-point tests
         run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3BulkExecutorPortRecipeTest,M3BulkExecutorNameMappingRecipeTest test
