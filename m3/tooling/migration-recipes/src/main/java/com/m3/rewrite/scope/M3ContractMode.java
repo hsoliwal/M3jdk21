@@ -21,6 +21,10 @@ public enum M3ContractMode {
         this.canonical = Objects.requireNonNull(canonical, "canonical");
     }
 
+    static M3ContractMode fromCanonical(com.synexia.rewrite.M3ContractMode mode) {
+        return valueOf(Objects.requireNonNull(mode, "mode").name());
+    }
+
     com.synexia.rewrite.M3ContractMode canonical() {
         return canonical;
     }
