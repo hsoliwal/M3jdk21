@@ -113,13 +113,10 @@ class JepResidueTest(unittest.TestCase):
             ]
             by_jep = {item.jep: item for item in self.r.queue(root, catalogue, [])}
 
-        self.assertEqual("PACKET_EVIDENCE", by_jep[423].evidence_state)
-        self.assertEqual("PACKET_EVIDENCE", by_jep[484].evidence_state)
-        self.assertEqual("PACKET_EVIDENCE", by_jep[485].evidence_state)
-        self.assertEqual("PACKET_EVIDENCE", by_jep[523].evidence_state)
+        self.assertEqual({458, 485}, set(by_jep))
         self.assertEqual("MATERIALIZED_PACKET", by_jep[458].evidence_state)
         self.assertIn("jep-458-current", by_jep[458].evidence_paths)
-        self.assertEqual("PACKET_READY", by_jep[458].receipt_state)
+        self.assertEqual("REVIEWED_POSTIMAGES_ALREADY_PRESENT", by_jep[458].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[458].promotion)
         self.assertEqual(
             "GENERATE_FILE_ATOMIC_CRATES",
@@ -206,8 +203,12 @@ class JepResidueTest(unittest.TestCase):
         )
         self.assertEqual("NOT_AUTHORIZED", by_jep[458].promotion)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[467].evidence_state)
-        self.assertEqual("PACKET_READY", by_jep[467].receipt_state)
+        self.assertEqual("PROOF_REPAIR_REQUESTED", by_jep[467].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[467].promotion)
+        self.assertEqual(
+            "RUN_REPAIRED_250_FILE_ATOMS_PLUS_DELETION_EVIDENCE_THEN_BUILD_LANGTOOLS_FIXED_POINT",
+            by_jep[467].receipt_next_action,
+        )
         self.assertEqual("MATERIALIZED_PACKET", by_jep[493].evidence_state)
         self.assertEqual("PACKET_READY", by_jep[493].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[493].promotion)
