@@ -11,12 +11,13 @@ on:
       - "m3/lexicon/synexia-precompute-field-map.tsv"
       - "m3/lexicon/synexia-source-manifest.tsv"
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - "m3/runtime-integration/export-synexia-lexicon.py"
       - "m3/runtime-integration/tests/test_synexia_export.py"
       - "m3/lexicon/SYNEXIA_EXPORT.md"
       - ".github/workflows/m3-translation-receiver-current-base.yml"
   push:
     branches:
-      - codex/m3-translation-export-current-base-20261011
+      - codex/m3-translation-row-owner-map-20261011
     paths:
       - "m3/core/src/com/m3/text/M3LexiconPrecompute.java"
       - "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java"
@@ -25,6 +26,7 @@ on:
       - "m3/lexicon/synexia-precompute-field-map.tsv"
       - "m3/lexicon/synexia-source-manifest.tsv"
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - "m3/runtime-integration/export-synexia-lexicon.py"
       - "m3/runtime-integration/tests/test_synexia_export.py"
       - "m3/lexicon/SYNEXIA_EXPORT.md"
       - ".github/workflows/m3-translation-receiver-current-base.yml"
