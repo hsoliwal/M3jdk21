@@ -251,9 +251,8 @@ class SynexiaExportTest(unittest.TestCase):
                     for donor_type in field_types[source_id].values()),
                 source_id,
             )
-        self.assertEqual("long[]", field_types["unicodex.langdex.lexemes"]["langdex_target_lexeme_id"]
-                         if "langdex_target_lexeme_id" in field_types["unicodex.langdex.lexemes"]
-                         else field_types["unicodex.langdex.lexemes"]["langdex_concept_id"])
+        self.assertEqual("long", field_types["unicodex.langdex.lexemes"]["langdex_concept_id"])
+        self.assertEqual("long", field_types["unicodex.langdex.lexemes"]["langdex_target_lexeme_id"])
         self.assertEqual("long", field_types["dictlang.dictionary"]["lexicon_fingerprint"])
         self.assertEqual("String", field_types["translate.rows"]["lexicon_fingerprint"])
         self.assertEqual("String", field_types["dictlang.dictionary"]["source_revision"])
