@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 proper-name instance receiver
+
+on:
+  pull_request:
+    paths:
+      - "m3/core/src/com/m3/text/M3InstanceIndex.java"
+      - "m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java"
+      - "m3/core/test/M3InstanceIndexTest.java"
+      - "m3/core/test/M3InstanceIndexPrecomputeTest.java"
+      - "m3/lexicon/synexia-instance-index-contract.tsv"
+      - "m3/lexicon/synexia-instance-target-map.tsv"
+      - "m3/lexicon/synexia-source-manifest.tsv"
+      - "m3/lexicon/synexia-precompute-field-map.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - ".github/workflows/m3-proper-name-instance-current-base.yml"
+  push:
+    branches:
+      - codex/m3-proper-name-instance-current-base-20261011
+    paths:
+      - "m3/core/src/com/m3/text/M3InstanceIndex.java"
+      - "m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java"
+      - "m3/core/test/M3InstanceIndexTest.java"
+      - "m3/core/test/M3InstanceIndexPrecomputeTest.java"
+      - "m3/lexicon/synexia-instance-index-contract.tsv"
+      - "m3/lexicon/synexia-instance-target-map.tsv"
+      - "m3/lexicon/synexia-source-manifest.tsv"
+      - "m3/lexicon/synexia-precompute-field-map.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - ".github/workflows/m3-proper-name-instance-current-base.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  receiver:
+    name: Java 21 proper-name receiver
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Compile core and execute receiver proofs
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf m3/build/instance-index-current-base
+          mkdir -p m3/build/instance-index-current-base/classes m3/build/instance-index-current-base/tests
+          find m3/core/src -name '*.java' | sort > m3/build/instance-index-current-base/sources.txt
+          javac --release 21 -Xlint:all -Werror -d m3/build/instance-index-current-base/classes @m3/build/instance-index-current-base/sources.txt
+          javac --release 21 -Xlint:all -Werror -cp m3/build/instance-index-current-base/classes -d m3/build/instance-index-current-base/tests \
+            m3/core/test/M3InstanceIndexTest.java m3/core/test/M3InstanceIndexPrecomputeTest.java
+          java -ea -cp m3/build/instance-index-current-base/classes:m3/build/instance-index-current-base/tests M3InstanceIndexTest
+          java -ea -cp m3/build/instance-index-current-base/classes:m3/build/instance-index-current-base/tests M3InstanceIndexPrecomputeTest
+          grep -F 'proper-name-instance-index' m3/lexicon/synexia-instance-index-contract.tsv
+          grep -F 'unicodex.instance-index' m3/lexicon/synexia-source-manifest.tsv
+          grep -F 'synexia-proper-name-instance-receiver' m3/runtime-integration/FOSS_REUSE_DECISION.tsv
