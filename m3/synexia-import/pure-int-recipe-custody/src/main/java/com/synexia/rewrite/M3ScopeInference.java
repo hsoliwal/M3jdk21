@@ -68,6 +68,7 @@ public final class M3ScopeInference {
 
         if (path.startsWith("test/")) {
             String[] parts = path.split("/", -1);
+            // startsWith("test/") guarantees the family slot, including an empty slot.
             String testFamily = parts[1];
             module = "<jdk-test:" + testFamily + ">";
             relative = parts.length > 2
@@ -134,6 +135,8 @@ public final class M3ScopeInference {
             String module,
             String relative,
             String original) {
+        // Private validated domain: every caller retains the public .java suffix and
+        // at least that filename while extracting its layout-specific relative path.
         int slash = relative.lastIndexOf('/');
         String packageName = slash < 0
                 ? "<default>"
