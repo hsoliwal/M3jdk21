@@ -75,6 +75,29 @@ final class SynexiaIntakePolicyRecipeTest {
     }
 
     @Test
+    void donorAndReceiverLicenseAnnotationsAreNotConflated() {
+        String root = "/com/m3/rewrite/backport/jdk21-hash-pinned-text/synexia-intake-license-v2/";
+        var recipe = new M3Jdk21HashPinnedTextSnapshotRecipe("synexia-intake-license-v2");
+        var before = PlainText.builder()
+                .sourcePath(Path.of(VERIFY))
+                .text(resourceAt(root, "pre-05-verifier.py.txt"))
+                .build();
+        var first = recipe.run(
+                new InMemoryLargeSourceSet(List.of(before)), context(), 1);
+        assertEquals(1, first.getChangeset().getAllResults().size());
+        SourceFile after = first.getChangeset().getAllResults().get(0).getAfter();
+        assertNotNull(after);
+        assertEquals(resourceAt(root, "05-verifier.py.txt"), after.printAll());
+
+        assertTrue(after.printAll().contains(
+                "donor_license = row.get(\\"license\\", \\"\\").split(\\";\\", 1)[0].strip()"));
+        assertTrue(after.printAll().contains(
+                "require(\\"Apache-2.0\\" in donor_license"));
+        assertTrue(recipe.run(new InMemoryLargeSourceSet(List.of(after)), context(), 1)
+                .getChangeset().getAllResults().isEmpty());
+    }
+
+    @Test
     void policyPostimageNamesAllRequiredIntakeModes() {
         String policy = resource("03-policy.tsv.txt");
         for (String mode : List.of(
@@ -99,6 +122,15 @@ final class SynexiaIntakePolicyRecipeTest {
 
     private static String resource(String name) {
         try (var stream = SynexiaIntakePolicyRecipeTest.class.getResourceAsStream(ROOT + name)) {
+            assertNotNull(stream, name);
+            return new String(stream.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException failure) {
+            throw new IllegalStateException(failure);
+        }
+    }
+
+    private static String resourceAt(String root, String name) {
+        try (var stream = SynexiaIntakePolicyRecipeTest.class.getResourceAsStream(root + name)) {
             assertNotNull(stream, name);
             return new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException failure) {
