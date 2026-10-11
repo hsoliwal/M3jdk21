@@ -888,6 +888,23 @@ for marker in ["InMemoryJavaCompiler", "ByteCodeLoader", "Pattern.compile", "sur
 if workflow.count("test/jdk/java/lang/String/M3StringRegexReplacementTest.java") != 2:
     fail("indexed literal replacement jtreg test must trigger and run in the existing workflow")
 
+# Canonical M3-to-M3 compare must use direct scalar atom ranges when both coordinates are
+# atom-backed; tuple/mixed paths retain exact UTF-16 fallback.
+for fragment in [
+    "int compareRange(",
+    "unitAtUnchecked(leftStart + index) - other.unitAtUnchecked(rightStart + index)",
+]:
+    if fragment not in atom:
+        fail(f"M3 atom-range comparator missing: {fragment}")
+for fragment in [
+    "int compareTo(M3String other)",
+    "leftAtom.compareRange(start(), rightAtom, checked.start(), limit)",
+]:
+    if fragment not in m3:
+        fail(f"M3 canonical compare dispatch missing: {fragment}")
+if "return leftM3.compareTo(rightM3);" not in string:
+    fail("String.compareTo lost M3-to-M3 canonical compare route")
+
 # Current compare/region owners bind both M3 values before testing the route.
 # Require the exact comparison after coordinate/hash candidate shortcuts.
 for fragment in [
