@@ -724,6 +724,10 @@ final class M3String implements CharSequence {
                     return false;
                 }
             }
+            if (owner instanceof M3StringAtom leftAtom
+                    && that.owner instanceof M3StringAtom rightAtom) {
+                return leftAtom.compareRange(start(), rightAtom, that.start(), length()) == 0;
+            }
         } else if (other.length() != length()) {
             return false;
         }
