@@ -3,41 +3,53 @@ package com.m3.rewrite.scope;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * Conservative physical locality inference for Maven and OpenJDK repository paths.
+ * M3JDK21 target-path scope adapter.
  *
- * <p>Path locality can infer FILE/PACKAGE/MODULE/MULTI_MODULE only. VISIBILITY and LIBRARY_API
- * remain explicit semantic authorities and are never inferred from filenames.</p>
+ * <p>Java-source scope inference delegates to canonical Synexia. M3JDK21 retains only the
+ * target-specific inference required for non-Java OpenJDK build/resources paths such as make
+ * fragments, completion files and documentation.</p>
  */
 public final class M3ScopeInference {
     private M3ScopeInference() {}
 
-    /** Strict Java-source compatibility API. */
+    /** Canonical Java-source scope inference supplied by Synexia. */
     public static M3EditScope forJavaPaths(Collection<String> paths) {
         Objects.requireNonNull(paths, "paths");
         if (paths.isEmpty()) {
             throw new IllegalArgumentException("at least one Java target is required");
         }
-        for (String path : paths) {
-            String normalized = normalizedPath(path);
-            if (!normalized.endsWith(".java")) {
-                throw new IllegalArgumentException("not a Java source path: " + path);
-            }
+        List<String> normalized = paths.stream().map(M3ScopeInference::normalizedPath).toList();
+        if (normalized.stream().anyMatch(path -> !path.endsWith(".java"))) {
+            throw new IllegalArgumentException("all targets must be Java source paths");
         }
-        return forPaths(paths);
+        return M3EditScope.fromCanonical(
+                com.synexia.rewrite.M3ScopeInference.inferJavaTargets(normalized));
     }
 
-    /** Infer the narrowest physical boundary for exact repository-relative targets. */
+    /**
+     * Infer the narrowest physical boundary for exact repository-relative targets.
+     *
+     * <p>All-Java batches delegate to Synexia. Mixed/non-Java target batches stay here because
+     * OpenJDK build/layout files are a target-repository concern rather than a reusable Java recipe
+     * rule.</p>
+     */
     public static M3EditScope forPaths(Collection<String> paths) {
         Objects.requireNonNull(paths, "paths");
         if (paths.isEmpty()) {
             throw new IllegalArgumentException("at least one target is required");
         }
 
-        Iterator<String> iterator = paths.iterator();
-        Location first = location(normalizedPath(iterator.next()));
+        List<String> normalized = paths.stream().map(M3ScopeInference::normalizedPath).toList();
+        if (normalized.stream().allMatch(path -> path.endsWith(".java"))) {
+            return forJavaPaths(normalized);
+        }
+
+        Iterator<String> iterator = normalized.iterator();
+        Location first = location(iterator.next());
         if (!iterator.hasNext()) {
             return M3EditScope.FILE;
         }
@@ -45,7 +57,7 @@ public final class M3ScopeInference {
         boolean sameModule = true;
         boolean samePackageBoundary = true;
         while (iterator.hasNext()) {
-            Location next = location(normalizedPath(iterator.next()));
+            Location next = location(iterator.next());
             if (!first.module().equals(next.module())) {
                 sameModule = false;
                 samePackageBoundary = false;
@@ -81,49 +93,14 @@ public final class M3ScopeInference {
     }
 
     private static Location location(String path) {
-        if (path.startsWith("src/main/java/")) {
-            return fromRelative("<current>", "src/main/java/", path.substring("src/main/java/".length()));
-        }
-        if (path.startsWith("src/test/java/")) {
-            return fromRelative("<current>", "src/test/java/", path.substring("src/test/java/".length()));
-        }
-
-        if (path.startsWith("src/")) {
-            String[] parts = path.split("/", -1);
-            if (parts.length >= 5 && "classes".equals(parts[3])) {
-                String module = parts[1];
-                String root = "src/" + parts[1] + "/" + parts[2] + "/classes/";
-                if (path.length() <= root.length()) {
-                    throw new IllegalArgumentException("target path must name a file");
-                }
-                String relative = path.substring(root.length());
-                return fromRelative(module, root, relative);
-            }
-            if (!parts[1].isBlank()) {
-                String module = parts[1];
-                String root = "src/" + module + "/";
-                if (path.length() <= root.length()) {
-                    throw new IllegalArgumentException("target path must name a file");
-                }
-                return fromRelative(module, root, path.substring(root.length()));
-            }
-            throw new IllegalArgumentException("target path must name a file");
-        }
-
-        if (path.startsWith("test/")) {
-            String[] parts = path.split("/", -1);
-            String family = parts[1].isBlank() ? "test" : parts[1];
-            String root = "test/" + family + "/";
-            String relative = path.length() > root.length() ? path.substring(root.length()) : "";
-            return fromRelative("<jdk-test:" + family + ">", root, relative);
-        }
-
         if (path.startsWith("make/modules/")) {
             String[] parts = path.split("/", -1);
-            String module = parts[2].isBlank() ? "<build>" : parts[2];
+            if (parts.length < 4 || parts[2].isBlank()) {
+                throw new IllegalArgumentException("target path must name a module build file");
+            }
+            String module = parts[2];
             String root = "make/modules/" + module + "/";
-            String relative = path.length() > root.length() ? path.substring(root.length()) : "";
-            return fromRelative(module, root, relative);
+            return fromRelative(module, root, path.substring(root.length()));
         }
 
         if (path.startsWith("make/")) {
