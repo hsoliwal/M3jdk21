@@ -54,9 +54,9 @@ M3LexiconPrecompute.TokenHashPrecompute	tokenSha256	byte[][]	tokenSha256	m3lex-f
 M3LexiconPrecompute.TokenHashPrecompute	rangeFingerprint	RangeFingerprint	rangeFingerprint	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	typed rolling tuple remains a candidate fingerprint and is never token identity
 M3LexiconPrecompute.TokenHashPrecompute	rangeSha256	byte[]	rangeSha256	m3lex-family-v2:synexia.token-hash.tsv	MAPPED	exact range digest remains an explicitly encoded byte value
 M3LexiconPrecompute.TokenFrequency	frequencies	Map<Integer,Integer>	frequencies	m3lex-family-v2:synexia.token-frequency.tsv	MAPPED	sorted frequency fold remains value-scoped derived metadata, never token identity
-M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTokenIds	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
-M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
-M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
+M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translated_token_ids	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
+M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mapped_token_count	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
+M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	source_fingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
 SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceId	String	source_id	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation source family identity is preserved without renumbering
 SharedLexiconPrecomputeCatalog.TranslationIdentity	recordId	String	record_id	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation row identity is preserved without renumbering
 SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceLanguage	String	source_language	m3lex-family-v2:synexia.translation.tsv	MAPPED	source language profile identity remains bound to the projection
