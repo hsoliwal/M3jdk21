@@ -26,6 +26,9 @@ public final class M3TranslationReceiverMapTest {
                 .orElseThrow();
         String[] columns = manifestRow.split("\\t", -1);
         check(columns.length >= 9);
+        check(columns[2].equals("synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java"));
+        check(columns[3].equals("translation_id"));
+        check(columns[4].equals("source_language,target_language,source_token,target_token"));
         check(columns[5].equals(
                 "M3StringFacts + M3LexiconPrecompute.TranslationProjection"
                         + " + SharedLexiconPrecomputeCatalog.TranslationIdentity"
@@ -53,7 +56,7 @@ public final class M3TranslationReceiverMapTest {
         for (String row : List.of(
                 "M3LexiconPrecompute.TranslationProjection\ttranslatedTokenIds\tint[]\ttranslated_token_ids\t",
                 "M3LexiconPrecompute.TranslationProjection\tmappedTokenCount\tint\tmapped_token_count\t",
-                "M3LexiconPrecompute.TranslationProjection\tsourceFingerprint\tString\tsource_fingerprint\t",
+                "M3LexiconPrecompute.TranslationProjection\tsourceFingerprint\tString\tsource_fingerprint\t")) {
             check(fieldMap.stream().anyMatch(line -> line.startsWith(row)));
         }
         System.out.println("M3JDK_TRANSLATION_RECEIVER_MAP_PASS checks=" + checks);
