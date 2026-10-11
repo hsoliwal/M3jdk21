@@ -40,15 +40,9 @@ public final class M3TQ {
     this.op = Objects.requireNonNull(op, "op");
     this.trigrams = Objects.requireNonNull(trigrams, "trigrams").clone();
     Arrays.sort(this.trigrams);
-    this.subqueries = List.copyOf(Objects.requireNonNull  /**
-   * Immutable, source-only ordered DAG. Node zero is the root; operation bytes use {@link Op}
-   * ordinals. Keys are packed UTF-16 trigrams, sorted and unique within each node. Children retain
-   * their exact order and shared node identity. No normalization is performed at this boundary.
-   *
-   * <p>The five primitive lanes are deliberately independent of a corpus/postings owner. The
-   * existing program codec can carry them in an additive envelope without changing its v1-v7
-   * payload or {@code PrecomputedImage} record contract. This image does not verify a regex match.</p>
-   */
+    this.subqueries = List.copyOf(Objects.requireNonNull(subqueries, "subqueries"));
+  }
+
   public record ImageLimits(int maxNodes, int maxEdges, int maxTerms, long maxPrimitiveBytes) {
     public static final ImageLimits DEFAULT = new ImageLimits(4096, 65536, 65536, 4L << 20);
 
@@ -61,7 +55,15 @@ public final class M3TQ {
     }
   }
 
-
+  /**
+   * Immutable, source-only ordered DAG. Node zero is the root; operation bytes use {@link Op}
+   * ordinals. Keys are packed UTF-16 trigrams, sorted and unique within each node. Children retain
+   * their exact order and shared node identity. No normalization is performed at this boundary.
+   *
+   * <p>The five primitive lanes are deliberately independent of a corpus/postings owner. The
+   * existing program codec can carry them in an additive envelope without changing its v1-v7
+   * payload or {@code PrecomputedImage} record contract. This image does not verify a regex match.</p>
+   */
   public record Image(
       byte[] operations, int[] termOffsets, long[] trigrams, int[] childOffsets, int[] children) {
     public Image {
@@ -269,9 +271,6 @@ public final class M3TQ {
   }
 
 
-
-(subqueries, "subqueries"));
-  }
 
   public static M3TQ all() {
     return ALL;
