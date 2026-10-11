@@ -324,6 +324,27 @@ final class M3StringAtom extends M3StringOwner {
     @Override
     char charAt(int index) {
         Objects.checkIndex(index, length);
+        return unitAtUnchecked(index);
+    }
+
+    int compareRange(
+            int leftStart,
+            M3StringAtom other,
+            int rightStart,
+            int count) {
+        Objects.requireNonNull(other, "other");
+        Objects.checkFromIndexSize(leftStart, count, length);
+        Objects.checkFromIndexSize(rightStart, count, other.length);
+        if (this == other && leftStart == rightStart) return 0;
+        for (int index = 0; index < count; index++) {
+            int difference =
+                    unitAtUnchecked(leftStart + index) - other.unitAtUnchecked(rightStart + index);
+            if (difference != 0) return difference;
+        }
+        return 0;
+    }
+
+    private char unitAtUnchecked(int index) {
         if (storageWidth == 1) return (char) (UNSAFE.getByte(address + index) & 0xff);
         long at = address + ((long) index << 1);
         int first = UNSAFE.getByte(at) & 0xff;
