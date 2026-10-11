@@ -40,6 +40,9 @@ class SynexiaExportTest(unittest.TestCase):
         manifest_columns = (EXPORT.MANIFEST_COLUMNS_V2 if with_requirements
                             else EXPORT.MANIFEST_COLUMNS)
         number_requirement = "frequency_rank" if with_requirements else "-"
+        translation_owner_profile = ("M3StringFacts + TranslationMapping + "
+                                    "M3LexiconPrecompute.TranslationProjection + "
+                                    "SharedLexiconPrecomputeCatalog.TranslationIdentity")
         translation_requirement = (
             "code_point_length,concept_ids,corpus_count,document_frequency,expansion_word_ids,"
             "first_code_point,last_code_point,lemma_id,lexical_rank,"
@@ -48,7 +51,7 @@ class SynexiaExportTest(unittest.TestCase):
         number_row = ("numbers", "Numbers", "synexia-dictlang/src/main/java/com/synexia/dictlang/NumberLexicon.java",
                       "number", "value,spelling", "M3StringFacts + NumberPrecompute", "Apache-2.0", "fixture")
         translation_row = ("translations", "Translations", "synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java",
-                           "translation_id", "source_language,target_language,source_token,target_token", "M3StringFacts + TranslationMapping + M3LexiconPrecompute.TranslationProjection + SharedLexiconPrecomputeCatalog.TranslationIdentity",
+                           "translation_id", "source_language,target_language,source_token,target_token", translation_owner_profile,
                            "Apache-2.0", "fixture")
         if with_requirements:
             number_row += (number_requirement,)
@@ -64,7 +67,7 @@ class SynexiaExportTest(unittest.TestCase):
             rows.append(("numbers", "synexia-dictlang/src/main/java/com/synexia/dictlang/NumberLexicon.java",
                          "number", "und", str(number), str(number), str(number), f"NUMBER_{number}", "-", "M3StringFacts + NumberPrecompute"))
         rows.extend(("translations", "synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java",
-                     "translation", language, identity, word, identity, name, profile, "M3StringFacts + TranslationMapping")
+                     "translation", language, identity, word, identity, name, profile, translation_owner_profile)
                     for language, identity, word, name, profile in (
                         ("en", "en:common.proper_name.london", "London", "LONDON", "en->hi"),
                         ("hi", "hi:common.proper_name.london", "लंदन", "LONDON", "hi->en"),
