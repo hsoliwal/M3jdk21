@@ -104,8 +104,8 @@
       "upstream": "com/fasterxml/jackson/datatype/jsr310/PackageVersion.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jackson-datatype-jsr310-2.16.1/src/main/resources/com/fasterxml/jackson/datatype/jsr310/PackageVersion.java.in",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jackson-datatype-jsr310-2.16.1/upstream-source-only/com/fasterxml/jackson/datatype/jsr310/PackageVersion.java.in",
       "sha256": "f9c03f6f0168def02f0c36d539233c6184a390eba03de758701bbfeb470cb411",
       "upstream": "com/fasterxml/jackson/datatype/jsr310/PackageVersion.java.in"
     },

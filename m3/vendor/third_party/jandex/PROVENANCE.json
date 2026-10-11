@@ -22,8 +22,8 @@
   "excluded_from_compilation": [],
   "files": [
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jandex/src/main/resources/META-INF/INDEX.LIST",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jandex/upstream-source-only/META-INF/INDEX.LIST",
       "sha256": "4d615de4f1c63a6748edc5611bcca49d4ce7700eca1c7e720348828cb2ea093e",
       "upstream": "META-INF/INDEX.LIST"
     },

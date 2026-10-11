@@ -108,6 +108,8 @@ def kotlin_plugin(cfg):
             "<configuration><sourceDirs><sourceDir>${project.basedir}/src/main/kotlin</sourceDir><sourceDir>${project.basedir}/src/main/java</sourceDir></sourceDirs></configuration></execution></executions>"
             "<configuration><jvmTarget>%s</jvmTarget><apiVersion>%s</apiVersion><languageVersion>%s</languageVersion></configuration>\n      </plugin>\n") % (ver, jvm, api_, lang)
 
+IMAGE_ROOT_ATTRS = "# byte-for-byte upstream images (SHA-256 pinned); whitespace is upstream's\n* -whitespace\n"
+
 
 def sha256(p: Path) -> str:
     h = hashlib.sha256()
@@ -250,6 +252,8 @@ def main() -> int:
             kind = "MODULE"
         else:
             mdir = args.repo / args.image_root / did
+            (args.repo / args.image_root).mkdir(parents=True, exist_ok=True)
+            (args.repo / args.image_root / ".gitattributes").write_text(IMAGE_ROOT_ATTRS, encoding="utf-8", newline="\n")
             kind = "IMAGE"
         if mdir.exists():
             shutil.rmtree(mdir)
@@ -336,6 +340,17 @@ def main() -> int:
                     completed += 1
                     files.append({"kind": fkind, "repository": (mdir.relative_to(args.repo) / "src/main/resources" / name).as_posix(), "sha256": hashlib.sha256(data).hexdigest(), "upstream": name,
                                   "published_jar": "%s:%s:%s (sha256 %s)" % (r["group"], r["artifact"], r["version"], pj_sha)})
+        if kind == "MODULE" and published_jar.is_file():  # source-only resources: upstream does not package them
+            with zipfile.ZipFile(published_jar) as pz:
+                pub_names = set(pz.namelist())
+            res_prefix = (mdir.relative_to(args.repo) / "src/main/resources").as_posix() + "/"
+            for f_ in files:
+                if f_["repository"].startswith(res_prefix) and f_["kind"] in ("unmodified-resource", "unmodified-legal-or-build-reference") and f_["upstream"] not in pub_names:
+                    keep = mdir / "upstream-source-only" / f_["upstream"]
+                    keep.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.move(str(mdir / "src/main/resources" / f_["upstream"]), str(keep))
+                    f_["repository"] = keep.relative_to(args.repo).as_posix()
+                    f_["kind"] = "unmodified-source-only-not-packaged-upstream"
         natives = sum(1 for f_ in files if f_["repository"].lower().endswith(NATIVE_SUFFIXES) and "/src/main/resources/" in f_["repository"])
         for x in legal + ["SOURCES_MANIFEST.tsv"]:
             shutil.copyfile(image / x, mdir / x)
@@ -447,7 +462,7 @@ def main() -> int:
         <configuration><skipTests>true</skipTests></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
-        <configuration>{"<excludes>" + "".join("<exclude>%s</exclude>" % e for e in (sum([ex for (a_, v_), ex in PACKAGING_EXCLUDES.items() if a_ == r["artifact"] and r["version"].startswith(v_)], []) or ["**/.no-default-excludes"])) + "</excludes>"}<archive><manifestEntries>{("<Automatic-Module-Name>%s</Automatic-Module-Name>" % xml(amn)) if amn else "<Synexia-Source-Inline>no upstream Automatic-Module-Name</Synexia-Source-Inline>"}</manifestEntries></archive></configuration>
+        <configuration>{"<excludes>" + "".join("<exclude>%s</exclude>" % e for e in (sum([ex for (a_, v_), ex in PACKAGING_EXCLUDES.items() if a_ == r["artifact"] and r["version"].startswith(v_)], []) + ["META-INF/jpms.args"])) + "</excludes>"}<archive><manifestEntries>{("<Automatic-Module-Name>%s</Automatic-Module-Name>" % xml(amn)) if amn else "<Synexia-Source-Inline>no upstream Automatic-Module-Name</Synexia-Source-Inline>"}</manifestEntries></archive></configuration>
       </plugin>
 {extra_plugins}    </plugins>
   </build>
@@ -456,7 +471,8 @@ def main() -> int:
             (mdir / "pom.xml").write_text(pom, encoding="utf-8", newline="\n")
             verify = verify_template.replace('"META-INF/third-party/re2j/"', '"META-INF/third-party/%s/"' % module_dir(r)).replace('"Automatic-Module-Name: re2j"', '"Automatic-Module-Name: %s"' % amn if amn else '"Synexia-Source-Inline: no upstream Automatic-Module-Name"')
             (mdir / "verify_source.py").write_text(verify, encoding="utf-8", newline="\n")
-            (mdir / ".gitattributes").write_text("src/** -text\nupstream-excluded/** -text\nLICENSE -text\nUPSTREAM_* -text\nSOURCES_MANIFEST.tsv -text\n", encoding="utf-8", newline="\n")
+            (mdir / ".gitattributes").write_text("src/** -text\nupstream-excluded/** -text\nLICENSE -text\nUPSTREAM_* -text\nSOURCES_MANIFEST.tsv -text\n"
+                                                 "# upstream bytes are SHA-256 pinned in PROVENANCE.json; their whitespace is upstream's\n* -whitespace\n", encoding="utf-8", newline="\n")
         notices = f"""# {r["artifact"]} {r["version"]} source inclusion
 
 {r["artifact"]} is the work of its upstream authors and contributors. Copyright remains with the copyright

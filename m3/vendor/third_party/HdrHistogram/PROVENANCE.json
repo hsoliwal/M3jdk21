@@ -259,8 +259,8 @@
       "upstream": "org/HdrHistogram/Version.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/HdrHistogram/src/main/resources/org/HdrHistogram/Version.java.template",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/HdrHistogram/upstream-source-only/org/HdrHistogram/Version.java.template",
       "sha256": "f58f76cf8921177b2a5f0d7478c9b98f70c6514d00f6c82da20d08abb4ce5c93",
       "upstream": "org/HdrHistogram/Version.java.template"
     },

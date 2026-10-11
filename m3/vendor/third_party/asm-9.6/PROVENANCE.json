@@ -211,8 +211,8 @@
       "upstream": "org/objectweb/asm/TypeReference.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/asm-9.6/src/main/resources/org/objectweb/asm/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/asm-9.6/upstream-source-only/org/objectweb/asm/package.html",
       "sha256": "9df8b952fb4a6434d607828e04581840268677939daf228553187d641caffb3c",
       "upstream": "org/objectweb/asm/package.html"
     },
@@ -235,8 +235,8 @@
       "upstream": "org/objectweb/asm/signature/SignatureWriter.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/asm-9.6/src/main/resources/org/objectweb/asm/signature/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/asm-9.6/upstream-source-only/org/objectweb/asm/signature/package.html",
       "sha256": "12d2d3c52371618d9261d7cb05e95b1a5885248352a539b6bbf700a434638f5d",
       "upstream": "org/objectweb/asm/signature/package.html"
     },

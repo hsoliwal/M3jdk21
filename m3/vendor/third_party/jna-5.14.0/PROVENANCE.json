@@ -315,20 +315,20 @@
       "upstream": "com/sun/jna/internal/ReflectionUtils.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jna-5.14.0/src/main/resources/com/sun/jna/internal/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jna-5.14.0/upstream-source-only/com/sun/jna/internal/package.html",
       "sha256": "3a965fae9033994c9ab90baaaa5f84d1634a2ff82a5048715ae9fb9b83837738",
       "upstream": "com/sun/jna/internal/package.html"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jna-5.14.0/src/main/resources/com/sun/jna/overview.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jna-5.14.0/upstream-source-only/com/sun/jna/overview.html",
       "sha256": "d818159331bbc85984f4dd35960708bc1e47dd3382e92237438b532f4055ecbe",
       "upstream": "com/sun/jna/overview.html"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jna-5.14.0/src/main/resources/com/sun/jna/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jna-5.14.0/upstream-source-only/com/sun/jna/package.html",
       "sha256": "7b4cd199177cafe1ff9aa6f89c2e3fc652c97863b613c52e6f639097dd87a874",
       "upstream": "com/sun/jna/package.html"
     },
@@ -387,8 +387,8 @@
       "upstream": "com/sun/jna/ptr/ShortByReference.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jna-5.14.0/src/main/resources/com/sun/jna/ptr/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jna-5.14.0/upstream-source-only/com/sun/jna/ptr/package.html",
       "sha256": "38857ba4df3ad2db3b0ff3e7ad4bfbe13a3259902fb0b2ee9fb252f9213c0c3f",
       "upstream": "com/sun/jna/ptr/package.html"
     },
@@ -435,8 +435,8 @@
       "upstream": "com/sun/jna/win32/W32APITypeMapper.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jna-5.14.0/src/main/resources/com/sun/jna/win32/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jna-5.14.0/upstream-source-only/com/sun/jna/win32/package.html",
       "sha256": "3c6a18b53217d6b19940d63cd54c34fd65d62bac9abb44297b7c7cd6cec1393e",
       "upstream": "com/sun/jna/win32/package.html"
     },

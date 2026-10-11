@@ -32,7 +32,7 @@ gen() {  # $1 = extra args
   if [ -f "$C/${P}THIRD_PARTY_MODULES.tsv" ]; then
     cut -f3 "$C/${P}THIRD_PARTY_MODULES.tsv" | tail -n +2 | grep -v "^third_party/re2j$" | while read -r d; do [ -n "$d" ] && rm -rf "$W/$d"; done
   fi
-  python -I "$C/gen_third_party.py" --inventory $INV --plan "$C/LOCK_PLAN.tsv" --status $STATUS --receipts $RECEIPTS --build-inputs "$C/BUILD_INPUTS.tsv" \
+  python -I "$C/run_traced.py" "$C/gen_third_party.py" --inventory $INV --plan "$C/LOCK_PLAN.tsv" --status $STATUS --receipts $RECEIPTS --build-inputs "$C/BUILD_INPUTS.tsv" \
     --store K:/m3-work/donors/maven-sources/store --repo "$WK" --out "$K/${P}THIRD_PARTY_MODULES.tsv" --template K:/m3-work/wt/synexia-c6/third_party/re2j --pom-classpath $K/POM_CLASSPATH.tsv $GENOPT $ONLY $1 2> "$C/${P}gen.log" | tail -1
   awk -F'\t' 'NR>1 {c[$2" "$7]++} END {for (k in c) printf "%s=%d; ", k, c[k]; print ""}' "$C/${P}THIRD_PARTY_MODULES.tsv"
 }
@@ -64,7 +64,7 @@ for step in $steps; do
       if [ "$SIDE" = "synexia" ]; then
         python -I "$C/make_crate.py" --repo "$WK" --c6 "$K" --baseline "$(git -C "$W" rev-parse $BASE)" --runs $RECEIPTS --atoms "$K/atoms" | tail -1
       else
-        python -I "$C/m3_crate.py" --repo "$WK" --c6 "$K" --synexia-crate K:/m3-work/wt/synexia-c6/.m3/task-crates/dependency-source-inline-20261010 --synexia-pr "hsoliwal/com.synexia#10193" --baseline "$(git -C "$W" rev-parse $BASE)" --consumers "$K/m3_consumer_poms.txt" | tail -1
+        python -I "$C/m3_crate.py" --repo "$WK" --c6 "$K" --synexia-crate K:/m3-work/wt/synexia-c6/.m3/task-crates/dependency-source-inline-20261010 --synexia-pr "hsoliwal/com.synexia#10339" --baseline "$(git -C "$W" rev-parse $BASE)" --consumers "$K/m3_consumer_poms.txt" | tail -1
       fi ;;
     verify)
       (cd "$W" && python -I .m3/task-crates/dependency-source-inline-20261010/verify_crate.py | tail -1) ;;

@@ -1507,8 +1507,8 @@
       "upstream": "org/apache/commons/io/output/package-info.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/commons-io-2.15.1/src/main/resources/org/apache/commons/io/overview.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/commons-io-2.15.1/upstream-source-only/org/apache/commons/io/overview.html",
       "sha256": "58fd7ebd77c56b8ff4995fe7998e4d9993720ff65cf1f552dfd453bf24fd9f67",
       "upstream": "org/apache/commons/io/overview.html"
     },

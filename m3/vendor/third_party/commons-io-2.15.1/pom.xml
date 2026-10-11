@@ -24,7 +24,7 @@
         <configuration><skipTests>true</skipTests></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
-        <configuration><excludes><exclude>**/.no-default-excludes</exclude></excludes><archive><manifestEntries><Automatic-Module-Name>org.apache.commons.io</Automatic-Module-Name></manifestEntries></archive></configuration>
+        <configuration><excludes><exclude>META-INF/jpms.args</exclude></excludes><archive><manifestEntries><Automatic-Module-Name>org.apache.commons.io</Automatic-Module-Name></manifestEntries></archive></configuration>
       </plugin>
     </plugins>
   </build>

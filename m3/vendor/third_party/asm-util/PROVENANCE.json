@@ -164,8 +164,8 @@
       "upstream": "org/objectweb/asm/util/TraceSignatureVisitor.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/asm-util/src/main/resources/org/objectweb/asm/util/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/asm-util/upstream-source-only/org/objectweb/asm/util/package.html",
       "sha256": "8209592833d56f5af340f3aa254f8370dede94aa466d6b56723da1ba9837741d",
       "upstream": "org/objectweb/asm/util/package.html"
     },

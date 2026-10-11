@@ -247,14 +247,14 @@
       "upstream": "org/slf4j/helpers/Util.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/slf4j-api-2.0.9/src/main/resources/org/slf4j/helpers/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.9/upstream-source-only/org/slf4j/helpers/package.html",
       "sha256": "b316807f1c2637492c1be844a8d901d8538be8c7a34a5c01430e0d606596574d",
       "upstream": "org/slf4j/helpers/package.html"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/slf4j-api-2.0.9/src/main/resources/org/slf4j/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.9/upstream-source-only/org/slf4j/package.html",
       "sha256": "8882fabf704132e6d0ea76d67e89532d923b41abf8d9d26317838eea2d5bae66",
       "upstream": "org/slf4j/package.html"
     },
@@ -319,8 +319,8 @@
       "upstream": "org/slf4j/spi/SLF4JServiceProvider.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/slf4j-api-2.0.9/src/main/resources/org/slf4j/spi/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.9/upstream-source-only/org/slf4j/spi/package.html",
       "sha256": "b4fc0871c9c5b6e50278fc146789238b8ed779155396d1b829a6a8e9b9a4e192",
       "upstream": "org/slf4j/spi/package.html"
     },

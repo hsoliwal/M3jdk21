@@ -34,14 +34,14 @@
       "upstream": "META-INF/MANIFEST.MF"
     },
     {
-      "kind": "unmodified-legal-or-build-reference",
-      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/resources/META-INF/jackson-core-LICENSE",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-source-only/META-INF/jackson-core-LICENSE",
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "upstream": "META-INF/jackson-core-LICENSE"
     },
     {
-      "kind": "unmodified-legal-or-build-reference",
-      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/resources/META-INF/jackson-core-NOTICE",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-source-only/META-INF/jackson-core-NOTICE",
       "sha256": "0a0042db627fe915c6a1d9ef74927af5081446063e8888494be6718d692dd2b8",
       "upstream": "META-INF/jackson-core-NOTICE"
     },
@@ -586,8 +586,8 @@
       "upstream": "com/fasterxml/jackson/core/json/PackageVersion.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/resources/com/fasterxml/jackson/core/json/PackageVersion.java.in",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-source-only/com/fasterxml/jackson/core/json/PackageVersion.java.in",
       "sha256": "744babce0ed8859a38895e27c6cca1c834117791919037c5096c6bcfb9bdff03",
       "upstream": "com/fasterxml/jackson/core/json/PackageVersion.java.in"
     },

@@ -3,7 +3,7 @@
 User directives (2026-10-10/11): "pull all thriepart code and inline ands refactor it", "inline and refactor all
 third party code ... jdk cannot have downstream dependency", "commit to github using pr".
 
-The Synexia crate (`.m3/task-crates/dependency-source-inline-20261010` in hsoliwal/com.synexia, PR hsoliwal/com.synexia#10193)
+The Synexia crate (`.m3/task-crates/dependency-source-inline-20261010` in hsoliwal/com.synexia, PR hsoliwal/com.synexia#10339)
 is canonical: inventories, locks, donor-superset receipts, FOSS ledger, the CPU atomize/patternize projection.
 This receiver vendors every third-party artifact the M3jdk21 build-time tooling resolves, including the complete
 OpenRewrite 8.17.1 runtime closure, into `m3/vendor/third_party/` (55 modules, `<version>-m3-source-1`,

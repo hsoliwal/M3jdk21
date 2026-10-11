@@ -244,8 +244,8 @@
       "upstream": "org/objectweb/asm/tree/VarInsnNode.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/asm-tree/src/main/resources/org/objectweb/asm/tree/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/asm-tree/upstream-source-only/org/objectweb/asm/tree/package.html",
       "sha256": "43d3ae3b0089dd02e05842547d1f9c9f81fc987fe11a18f281d5f89f5b3b3132",
       "upstream": "org/objectweb/asm/tree/package.html"
     },

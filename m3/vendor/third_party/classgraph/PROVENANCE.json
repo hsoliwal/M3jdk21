@@ -445,8 +445,8 @@
       "upstream": "nonapi/io/github/classgraph/classloaderhandler/QuarkusClassLoaderHandler.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/classgraph/src/main/resources/nonapi/io/github/classgraph/classloaderhandler/README",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/classgraph/upstream-source-only/nonapi/io/github/classgraph/classloaderhandler/README",
       "sha256": "9d6bdd1c9a0ee94c0a2396091a1b6d0684dfadcdfdc9ac1bbda3ba28e79f097c",
       "upstream": "nonapi/io/github/classgraph/classloaderhandler/README"
     },

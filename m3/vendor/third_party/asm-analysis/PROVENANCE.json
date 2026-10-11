@@ -114,8 +114,8 @@
       "upstream": "org/objectweb/asm/tree/analysis/Value.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/asm-analysis/src/main/resources/org/objectweb/asm/tree/analysis/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/asm-analysis/upstream-source-only/org/objectweb/asm/tree/analysis/package.html",
       "sha256": "b94edae40a0e0725c6c858acbb28bb89d60e0422416445c4c9a5c72b635074c2",
       "upstream": "org/objectweb/asm/tree/analysis/package.html"
     },

@@ -10,6 +10,7 @@ import argparse, csv, hashlib, io, json, re, shutil, sys, time
 from pathlib import Path
 
 CRATE = ".m3/task-crates/dependency-source-inline-20261010"
+KEEP_HAND_WRITTEN = ("CORRECTIONS.md", "API_SURFACE_RUNNER.tsv")
 SUFFIX = "-m3-source-1"
 DEP_RE = re.compile(r"<dependency>(.*?)</dependency>", re.S)
 
@@ -36,9 +37,12 @@ def main() -> int:
     ap.add_argument("--consumers", type=Path, required=True, help="file listing the consumer pom paths (repo-relative)")
     args = ap.parse_args()
     crate = args.repo / CRATE
+    keep = {n: (crate / n).read_bytes() for n in KEEP_HAND_WRITTEN if (crate / n).is_file()}  # hand-written evidence
     if crate.exists():
         shutil.rmtree(crate)
     crate.mkdir(parents=True)
+    for n, b in keep.items():
+        (crate / n).write_bytes(b)
     mods = tsv(args.c6 / "M3_THIRD_PARTY_MODULES.tsv")
     api = {g["donor"]: g for g in tsv(args.c6 / "M3_API_SURFACE.tsv")} if (args.c6 / "M3_API_SURFACE.tsv").exists() else {}
     prov = {}

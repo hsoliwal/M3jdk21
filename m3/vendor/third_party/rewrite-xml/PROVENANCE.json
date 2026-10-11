@@ -438,8 +438,8 @@
       "upstream": "org/openrewrite/xml/internal/XmlWhitespaceValidationService.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-xml/src/main/resources/org/openrewrite/xml/internal/grammar/XMLLexer.interp",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-xml/upstream-source-only/org/openrewrite/xml/internal/grammar/XMLLexer.interp",
       "sha256": "d0e0c47dab4197758f85f7d7d7a34b97c738916a724bc113837a5010ab9a5015",
       "upstream": "org/openrewrite/xml/internal/grammar/XMLLexer.interp"
     },
@@ -450,14 +450,14 @@
       "upstream": "org/openrewrite/xml/internal/grammar/XMLLexer.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-xml/src/main/resources/org/openrewrite/xml/internal/grammar/XMLLexer.tokens",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-xml/upstream-source-only/org/openrewrite/xml/internal/grammar/XMLLexer.tokens",
       "sha256": "f34be6323d402d5021a4a6149e02cfcb827072bb6f96e52e8f6487c4391f26e7",
       "upstream": "org/openrewrite/xml/internal/grammar/XMLLexer.tokens"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-xml/src/main/resources/org/openrewrite/xml/internal/grammar/XMLParser.interp",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-xml/upstream-source-only/org/openrewrite/xml/internal/grammar/XMLParser.interp",
       "sha256": "56dc47ec12b46f908127274eaf91df2016bce5897fa268b601478ab98e88bff7",
       "upstream": "org/openrewrite/xml/internal/grammar/XMLParser.interp"
     },
@@ -468,8 +468,8 @@
       "upstream": "org/openrewrite/xml/internal/grammar/XMLParser.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-xml/src/main/resources/org/openrewrite/xml/internal/grammar/XMLParser.tokens",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-xml/upstream-source-only/org/openrewrite/xml/internal/grammar/XMLParser.tokens",
       "sha256": "f34be6323d402d5021a4a6149e02cfcb827072bb6f96e52e8f6487c4391f26e7",
       "upstream": "org/openrewrite/xml/internal/grammar/XMLParser.tokens"
     },

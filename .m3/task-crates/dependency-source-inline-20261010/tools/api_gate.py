@@ -19,7 +19,7 @@ Verdicts:
                                generated properties, service files) -> never admitted
 Writes API_SURFACE.tsv and per-donor diff files. CPU only."""
 from __future__ import annotations
-import argparse, csv, io, os, subprocess, sys, zipfile
+import argparse, csv, io, os, subprocess, sys, time, zipfile
 from pathlib import Path
 
 SHADED_PREFIXES = {  # published jars that relocate another artifact's classes into their own namespace
@@ -102,6 +102,19 @@ def main() -> int:
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--java", default=r"C:\Program Files\Java\jdk-21\bin\java.exe")
     args = ap.parse_args()
+    classes = args.diffs / ".classes"
+    classes.mkdir(parents=True, exist_ok=True)
+    javac = str(Path(args.java).with_name("javac.exe" if args.java.lower().endswith(".exe") else "javac"))
+    subprocess.run([javac, "-nowarn", "-cp", str(args.asm), "-d", str(classes), str(args.tool)], check=True)
+    tool_cp = str(args.asm) + os.pathsep + str(classes)
+
+    def run_tool(pub, jar, diff, view):
+        for attempt in range(3):
+            proc = subprocess.run([args.java, "-cp", tool_cp, "ApiSurface", str(pub), str(jar), str(diff), view], capture_output=True, text=True)
+            if proc.returncode == 0 or proc.stderr.replace("Picked up JAVA_TOOL_OPTIONS", "").strip():
+                return proc
+            time.sleep(10)  # no output: the JVM did not start (memory pressure); retry
+        return proc
     rows = {}
     for inv in args.inventory:
         for r in csv.DictReader(io.open(inv, encoding="utf-8", newline=""), delimiter="\t"):
@@ -135,9 +148,9 @@ def main() -> int:
         err = ""
         for view in (("base", "mr21") if multi else ("base",)):
             diff = args.diffs / ("%s.%s.tsv" % (did, view))
-            proc = subprocess.run([args.java, "-cp", str(args.asm), str(args.tool), str(pub), str(built[did]), str(diff), view], capture_output=True, text=True)
+            proc = run_tool(pub, built[did], diff, view)
             if proc.returncode != 0:
-                err = proc.stderr.strip()[-200:].replace("\t", " ").replace("\n", " ")
+                err = ("exit %d: " % proc.returncode) + proc.stderr.strip()[-200:].replace("\t", " ").replace("\n", " ")
                 continue
             kv = dict(x.split("=", 1) for x in proc.stdout.split() if "=" in x)
             res = classify(diff, r["artifact"])

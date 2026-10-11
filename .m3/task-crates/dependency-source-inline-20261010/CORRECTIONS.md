@@ -40,3 +40,14 @@ Known residue (not yet fixed): 78 resources in 24 built jars that the published 
 (`package.html`/`overview.html`/doc-files, Jackson `PackageVersion.java.in` templates, ANTLR `.tokens`/`.interp`
 files, the classgraph `README`, jackson-core's copies of LICENSE/NOTICE under `META-INF/jackson-core-*`). No class
 differs. Next commit: the upstream packaging excludes for those paths and a gate re-run.
+
+# Residue resolved: every Maven-built jar holds exactly the published resource set (2026-10-11)
+
+- Source-only resources: 79 non-Java files of the sources jars that the published jars do not contain (doc
+  `package.html`/`overview.html`/doc-files, Jackson `PackageVersion.java.in`, ANTLR `.tokens`/`.interp`,
+  the classgraph `README`, jackson-core's `META-INF/jackson-core-*` copies) move to `<module>/upstream-source-only/`.
+  They are kept byte-for-byte and are not packaged, as upstream does.
+- `META-INF/jpms.args` (written by maven-compiler-plugin when javac receives `--add-exports`, rewrite-java-21) is
+  excluded from every jar; no published jar carries it.
+- Gate re-run on the rebuilt jars: 33 IDENTICAL, 21 EQUIVALENT_MODULO_COMPILER, 1 IDENTICAL_EXCEPT_SHADED; resources
+  0 missing, 0 differing, 0 built-only across all 55 modules. Shade closure: 45 artifacts, 0 downstream binaries.
