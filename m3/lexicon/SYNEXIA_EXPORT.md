@@ -184,3 +184,7 @@ mapping rows, directed antonym/thesaurus relation rows, rich owner payloads,
 lineage, legacy-input compatibility, deterministic replay, M3LEX001 version 2
 metadata, precompute sidecars, conflict refusal before output creation, and
 source-blind rejection of a post-export mutation.
+
+## Proper-name instance-index contract
+
+The contract-only source mapping is `m3/lexicon/synexia-instance-index-contract.tsv`. It maps Synexia's Apache-2.0 `InstanceIndex`/`InstanceRecord` interface to `com.m3.text.M3InstanceIndexPrecompute`, preserving UTF-8 names, explicit instance types, frozen concept coordinates, metadata, normalized-name lookup, reverse-concept lookup, and source identity. It admits no proper-name payload, no second lexical interner, and no title catalog; title support requires a separate canonical source, pinned revision, license, and identity contract.
