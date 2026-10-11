@@ -906,15 +906,19 @@ if "return leftM3.compareTo(rightM3);" not in string:
     fail("String.compareTo lost M3-to-M3 canonical compare route")
 
 # Current compare/region owners bind both M3 values before testing the route.
-# Require the exact comparison after coordinate/hash candidate shortcuts.
+# M3-to-M3 identity now belongs inside M3String.compareTo; the one-M3 fallback and region
+# comparison remain exact String-level UTF-16 loops.
 for fragment in [
+    "if (leftM3 != null && rightM3 != null)",
+    "return leftM3.compareTo(rightM3);",
     "if (leftM3 != null || rightM3 != null)",
-    "leftM3.sameCoordinate(rightM3)",
     "int difference = charAt(index) - anotherString.charAt(index);",
     "if (charAt(toffset + index) != other.charAt(ooffset + index)) return false;",
 ]:
     if fragment not in string:
         fail(f"M3 exact comparison route missing: {fragment}")
+if "if (sameCoordinate(checked)) return 0;" not in m3:
+    fail("M3 compare identity check escaped canonical M3String owner")
 
 # M3 direct stream traversal must remain array-free and exact.
 for fragment in [
