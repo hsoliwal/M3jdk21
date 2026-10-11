@@ -55,7 +55,7 @@ public final class M3PhraseSidecarCatalogTest {
     private static void assertSourceManifestPhraseFields() throws Exception {
         String row = Files.readAllLines(Path.of("m3/lexicon/synexia-source-manifest.tsv"),
                         StandardCharsets.UTF_8).stream()
-                .filter(line -> line.startsWith("translate.index-phrases\\t"))
+                .filter(line -> line.startsWith("translate.index-phrases\t"))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("phrase source manifest row missing"));
         String[] fields = row.split("\\t", -1);
