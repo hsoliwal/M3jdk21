@@ -28,3 +28,21 @@ found during target qualification is repaired in Synexia first, resealed, and th
 
 No vendored source is refreshed merely by adding this intake. Materialization is a later,
 proof-gated phase and must preserve original licenses/notices and exact source revision custody.
+
+
+## Canonical-master receiver law
+
+This intake cannot transfer generic reusable ownership.
+
+Machine-required values in `pin.tsv` are:
+
+- `canonical_invariant=SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1`;
+- `generic_ownership_transfer=false`;
+- `target_generic_reusable_owner=false`;
+- `reusable_change_return_path=TARGET_DISCOVERY_TO_SYNEXIA_MASTER_THEN_RESEALED_TARGET`;
+- `target_specific_authority=OPENJDK_INTEGRATION_JTREG_RUNTIME_AND_FINAL_PROMOTION`.
+
+Therefore a reusable defect/improvement discovered during M3JDK21 qualification returns to
+`hsoliwal/com.synexia` for canonical implementation/recipe proof before a new exact handoff is
+received. M3JDK21 keeps target adapters and OpenJDK/HotSpot/JIT/GC/CDS/JNI/JVMTI/jtreg/runtime
+qualification plus final product promotion.
