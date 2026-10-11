@@ -41,7 +41,9 @@ final class M3PureIntCustodyTest {
                     "M3ScopeInference.java",
                     "2768fe5846c2c67c52e872a97f735a0fb4d0d69a",
                     "M3CanonicalMultiPassPlan.java",
-                    "897a218c5489c851c1906fd91a2cd64174d19d70");
+                    "897a218c5489c851c1906fd91a2cd64174d19d70",
+                    "M3ContractMode.java",
+                    "e95d8dba0229ef3d56677639c796e619e9d8d0b7");
 
     @Test
     void custodySourcesRemainExactSynexiaGitBlobs() throws Exception {
@@ -112,6 +114,11 @@ final class M3PureIntCustodyTest {
                         .map(M3CanonicalMultiPassPlan.Pass::id)
                         .toList());
         assertEquals(64, M3CanonicalMultiPassPlan.root().length());
+        assertEquals(
+                List.of(
+                        M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
+                        M3ContractMode.EXPLICIT_CONTRACT_CHANGE),
+                List.of(M3ContractMode.values()));
     }
 
     @Test
