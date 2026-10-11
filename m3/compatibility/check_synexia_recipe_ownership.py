@@ -96,7 +96,6 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
     )
     canonical_roots = (
         "m3/synexia-import/pure-int-recipe-custody/src/main/java/com/synexia/rewrite/",
-        "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/scope/",
         "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/semantic/",
     )
     for physical, row in enumerate(rows, start=2):
@@ -148,7 +147,6 @@ def reusable_residue_paths() -> set[str]:
             result.add(exact)
 
     for directory in (
-        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope",
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic",
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3",
