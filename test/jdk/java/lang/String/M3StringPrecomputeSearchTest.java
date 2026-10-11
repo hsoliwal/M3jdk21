@@ -478,6 +478,11 @@ public class M3StringPrecomputeSearchTest {
                         == Integer.signum(naiveCompare(chars(atomRangeLeft), chars(atomRangeRight))),
                 "atom range compare");
         check(atomRangeLeft.compareTo(atomRangeLeft) == 0, "same coordinate compare");
+        check(atomLatinLeft.equals(new String("alpha".toCharArray())),
+                "atom Latin1 equality");
+        check(!atomLatinLeft.equals(atomLatinRight), "atom Latin1 inequality");
+        check(atomRangeLeft.equals(new String("alpha".toCharArray())),
+                "atom range equality");
 
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
@@ -704,6 +709,8 @@ public class M3StringPrecomputeSearchTest {
             check(Integer.signum(left.compareTo(right))
                             == Integer.signum(naiveCompare(leftChars, rightChars)),
                     "random atom compare " + trial);
+            check(left.equals(right) == Arrays.equals(leftChars, rightChars),
+                    "random atom equality " + trial);
 
             if (leftChars.length != 0 && rightChars.length != 0) {
                 int leftStart = random.nextInt(leftChars.length + 1);
@@ -717,6 +724,8 @@ public class M3StringPrecomputeSearchTest {
                 check(Integer.signum(leftRange.compareTo(rightRange))
                                 == Integer.signum(naiveCompare(leftOracle, rightOracle)),
                         "random atom range compare " + trial);
+                check(leftRange.equals(rightRange) == Arrays.equals(leftOracle, rightOracle),
+                        "random atom range equality " + trial);
             }
         }
     }
