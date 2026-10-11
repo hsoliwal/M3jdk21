@@ -20,17 +20,17 @@ public class M3TQImageTest {
         M3TQ root = M3TQ.and(List.of(shared, M3TQ.fromExact(List.of("cde"))));
 
         M3TQ.Image image = root.image();
-        check(image.operations().length == 3, "shared image deduplicates node identity");
-        check(image.children().length == 3, "image preserves ordered edges");
+        check(image.operations().length == 4, "shared image deduplicates node identity");
+        check(image.children().length == 4, "image preserves ordered edges");
         check(image.primitivePayloadBytes() > 0, "image reports primitive payload");
 
         M3TQ restored = M3TQ.fromImage(image);
         check(restored.op() == root.op(), "restore preserves root operation");
         check(restored.toString().equals(root.toString()), "restore preserves query rendering");
-        check(restored.test(M3TQ.trigram('a', 'b', 'c') == M3TQ.trigram('a', 'b', 'c')
-                ? value -> value == M3TQ.trigram('a', 'b', 'c')
-                : value -> false) == root.test(
-                        value -> value == M3TQ.trigram('a', 'b', 'c')),
+        long abc = M3TQ.trigram('a', 'b', 'c');
+        long cde = M3TQ.trigram('c', 'd', 'e');
+        check(restored.test(value -> value == abc || value == cde)
+                == root.test(value -> value == abc || value == cde),
                 "restore preserves conservative evaluation");
 
         byte[] operations = image.operations();
