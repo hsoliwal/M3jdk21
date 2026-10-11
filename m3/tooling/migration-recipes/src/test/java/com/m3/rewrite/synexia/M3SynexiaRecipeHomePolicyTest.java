@@ -43,8 +43,6 @@ final class M3SynexiaRecipeHomePolicyTest {
         }
 
         for (String surface : List.of(
-                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/**",
-                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/**",
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**",
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/**",
                 "m3/indexdb/**",
@@ -55,6 +53,37 @@ final class M3SynexiaRecipeHomePolicyTest {
             assertEquals("MIGRATION_RESIDUE_NOT_CANONICAL", row[4], surface);
             assertEquals("true", row[7], surface);
         }
+
+        assertScopeRow(
+                rows,
+                "M3EditScope.java",
+                "RECEIVER_ADAPTER_ONLY",
+                "com.synexia.rewrite.M3EditScope",
+                "true");
+        assertScopeRow(
+                rows,
+                "M3ScopeInference.java",
+                "TARGET_PRODUCT_ADAPTER",
+                "com.synexia.rewrite.M3ScopeInference",
+                "true");
+        assertScopeRow(
+                rows,
+                "M3ContractMode.java",
+                "RECEIVER_ADAPTER_ONLY",
+                "com.synexia.rewrite.M3ContractMode",
+                "true");
+        assertScopeRow(
+                rows,
+                "M3RecipeScopePolicy.java",
+                "TARGET_PRODUCT_ADAPTER",
+                "com.synexia.rewrite.M3RecipeFirstInvariant",
+                "true");
+        assertScopeRow(
+                rows,
+                "M3RecipeScopeRegistry.java",
+                "JDK_TARGET_SPECIFIC",
+                "com.synexia.rewrite.M3Jdk21CanonicalBorrowingPolicy",
+                "false");
 
         assertEquals(
                 "com.synexia:synexia-m3index-db",
@@ -264,6 +293,21 @@ final class M3SynexiaRecipeHomePolicyTest {
             result.put(columns[3], columns);
         }
         return result;
+    }
+
+    private static void assertScopeRow(
+            Map<String, String[]> rows,
+            String file,
+            String disposition,
+            String owner,
+            String handoff) {
+        String surface =
+                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/" + file;
+        String[] row = rows.get(surface);
+        assertNotNull(row, surface);
+        assertEquals(disposition, row[4], surface);
+        assertEquals(owner, row[5], surface);
+        assertEquals(handoff, row[7], surface);
     }
 
     private static Path repositoryRoot() {
