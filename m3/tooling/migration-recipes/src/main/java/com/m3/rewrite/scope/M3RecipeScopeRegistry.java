@@ -29,19 +29,19 @@ public final class M3RecipeScopeRegistry {
                     "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
                     inferred()),
             Map.entry(
-                    "com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe",
+                    "com.synexia.rewrite.M3PureIntAtomizeRecipe",
                     fixed(M3EditScope.FILE)),
             Map.entry(
-                    "com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates",
+                    "com.synexia.rewrite.M3PureIntInventoryRecipe",
                     fixed(M3EditScope.FILE)),
             Map.entry(
-                    "com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe",
+                    "com.synexia.rewrite.M3PureIntPatternizeRecipe",
                     fixed(M3EditScope.FILE)),
             Map.entry(
-                    "com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe",
+                    "com.synexia.rewrite.M3PureIntDocumentationRecipe",
                     fixed(M3EditScope.FILE)),
             Map.entry(
-                    "com.synexia.rewrite.atom.M3PureIntConvergenceRecipe",
+                    "com.synexia.rewrite.M3PureIntConvergenceRecipe",
                     fixed(M3EditScope.FILE)),
             Map.entry(
                     "com.m3.rewrite.M3Java21ConvergenceRecipe",
