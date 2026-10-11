@@ -196,6 +196,19 @@ def read_field_map(path: pathlib.Path,
     return result
 
 
+def unambiguous_field_types(field_types_by_source: dict[str, dict[str, str]]) -> dict[str, str]:
+    """Return the legacy flat type map only for fields whose owners agree."""
+    types_by_field: dict[str, set[str]] = {}
+    for source_types in field_types_by_source.values():
+        for field, donor_type in source_types.items():
+            types_by_field.setdefault(field, set()).add(donor_type)
+    return {
+        field: next(iter(types))
+        for field, types in sorted(types_by_field.items())
+        if len(types) == 1
+    }
+
+
 def _fits_donor_type(value: object, donor_type: str) -> bool:
     if donor_type == "String":
         return isinstance(value, str)
@@ -560,7 +573,8 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                    "precompute_fields": {
                        source_id: [field for field in source["precompute_fields"].split(",") if field]
                        for source_id, source in sorted(sources.items())},
-                   "precompute_field_types": field_types,
+                   "precompute_field_types": unambiguous_field_types(field_types),
+                   "precompute_field_types_by_source": field_types,
                    "precompute_field_map_sha256":
                        sha256_bytes(field_map_bytes) if field_map_bytes is not None else None},
         "target": {"repository": "https://github.com/hsoliwal/M3jdk21",
