@@ -610,8 +610,25 @@ for fragment in [
         fail(f"M3 char replacement lost position-precompute reuse: {fragment}")
 if "M3String replace(char oldChar, char newChar)" not in m3:
     fail("M3String canonical char replacement path missing")
-if "M3String replace(M3String target, M3String replacement)" not in m3:
-    fail("M3String canonical literal replacement path missing")
+# Literal replacement is deliberately split into bounded atoms: the JDK caller
+# searches the mixed-side target first, then chooses an admitted M3 needle or a
+# transient flat String needle. Do not require the removed monolithic overload.
+for fragment in [
+    "M3String replaceAt(M3String target, M3String replacement, int found)",
+    "M3String replaceFlatTarget(String receiver, String target, M3String replacement, int found)",
+    "private M3String replaceMatches(M3String target, String receiver, String flatTarget,",
+    "found = !firstOnly && cursor <= length() - targetLength",
+]:
+    if fragment not in m3:
+        fail(f"M3String literal replacement atom missing: {fragment}")
+for fragment in [
+    "sourceM3.replaceAt(targetM3, replacement, found)",
+    "sourceM3.replaceFlatTarget(this, trgtStr, replacement, found)",
+    "int found = indexOf(trgtStr);",
+    "if (found < 0) return this;",
+]:
+    if fragment not in string:
+        fail(f"String literal replacement dispatch contract missing: {fragment}")
 if "Required length exceeds implementation limit" not in m3:
     fail("M3String literal replacement lost expansion OOME contract")
 if "M3StringSearchPrecompute.prepare(checked)" not in m3:
@@ -870,9 +887,13 @@ literal_atom = m3[literal_start:literal_end]
 for marker in [
     "static boolean isLiteralRegexReplacement(String regex, String replacement)",
     "Character.isSurrogate(unit)",
+    "String replaceLiteralRegex(String original, String regex, String replacement, boolean firstOnly)",
+    "int found = original.indexOf(regex);",
     "if (found < 0) return original;",
-    "return new String(replaceMatches(target, canonicalize(replacement), found, firstOnly));",
-    "found = !firstOnly && cursor <= length() - checkedTarget.length()",
+    "M3String admitted = canonicalize(replacement);",
+    "if (admitted == null) return null;",
+    "return new String(replaceMatches(null, original, regex, admitted, found, firstOnly));",
+    "found = !firstOnly && cursor <= length() - targetLength",
 ]:
     if marker not in literal_atom:
         fail(f"indexed literal replacement owner lost guard/composition: {marker}")
