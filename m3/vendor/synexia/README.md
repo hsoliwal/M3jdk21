@@ -77,3 +77,20 @@ recorded in the intake map; OpenJDK `java.base` files are not relicensed.
 ### Third-party JNI ownership license
 
 The mirrored `shared_arrays.cpp` references the external `jni/ownership.hpp` wrapper. This intake does not copy that header. It preserves the exact upstream ISC license from `mapbox/jni.hpp@57ca9ed4bbeb22ed8d20a55063dcaa217ba47f42` at `m3/vendor/synexia/third-party/mapbox-jni-ownership/LICENSE.txt`; the pinned provenance is in the JNI intake manifest. This native source slice remains custody-only and is not standalone-buildable.
+
+## Current donor-convergence recipe custody snapshot — 2026-10-11
+
+This snapshot is additive and versioned; prior source exports remain unchanged.
+
+- Source repository: `hsoliwal/com.synexia`
+- Source commit: `2be201d6ff52ac563bee1f6848ff8d2d436fe5c8`
+- Source recipe tree at that commit: `f24f249896ec3b569a4a4a73e04c0423d7412650`
+- Source policy restoration: [Synexia PR #10260](https://github.com/hsoliwal/com.synexia/pull/10260) (open draft at snapshot creation)
+- Intake manifest: `m3/synexia-import/intakes/donor-convergence-workspace-20261011/SOURCE_PROVENANCE.tsv`
+- Target map: `m3/synexia-import/intakes/donor-convergence-workspace-20261011/TARGET_MAP.tsv`
+
+The current canonical recipe-home index is copied byte-for-byte, along with the mastery and donor-convergence entrypoint source files. They remain source-custody snapshots, not a compilable module: the full recipe dependency closure has not been mirrored or built here. Do not add them to the JDK runtime or claim target runtime acceptance.
+
+**Known hold:** the copied canonical index currently records `M3DonorConvergenceWorkspaceProgramRecipe` with owner blob `ac32ad07c9624cb953066fbe06ecb84144a009a9`, while the source file at this pinned commit is blob `b1d0f992e0af861633a37065ab3a5f0a93f9dcde`. The discrepancy is recorded in the target map; the index is not treated as fully current until Synexia repairs and republishes it.
+
+The vendor-level `LICENSE` and `NOTICE` apply to these eligible first-party Apache-2.0 snapshots. Per-file donor and OpenJDK licenses remain separate; no source license is silently changed.

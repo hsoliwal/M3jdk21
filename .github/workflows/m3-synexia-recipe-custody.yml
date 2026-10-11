@@ -1,0 +1,29 @@
+name: M3 Synexia recipe source custody
+
+on:
+  pull_request:
+    paths:
+      - "m3/vendor/synexia/README.md"
+      - "m3/vendor/synexia/synexia-openrewrite-recipes/snapshots/20261011/**"
+      - "m3/synexia-import/intakes/donor-convergence-workspace-20261011/**"
+      - ".github/workflows/m3-synexia-recipe-custody.yml"
+  push:
+    paths:
+      - "m3/vendor/synexia/README.md"
+      - "m3/vendor/synexia/synexia-openrewrite-recipes/snapshots/20261011/**"
+      - "m3/synexia-import/intakes/donor-convergence-workspace-20261011/**"
+      - ".github/workflows/m3-synexia-recipe-custody.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  source-custody:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Verify exact source blobs and known hold
+        run: python -m unittest discover -s m3/synexia-import/intakes/donor-convergence-workspace-20261011 -p 'test_*.py' -v
