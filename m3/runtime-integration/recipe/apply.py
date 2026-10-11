@@ -22,7 +22,7 @@ def apply(target,reverse=False,check=False):
         if actual==hashes['before']:states.add('before')
         elif actual==hashes['after']:states.add('after')
         elif actual in hashes.get('superseded',[]):states.add('superseded')
-        else:raise ValueError('source drift: '+name)
+        else:raise ValueError('source drift: '+name+' actual='+str(actual)+' allowed='+','.join(filter(None,[hashes.get('before'),hashes.get('after'),*hashes.get('superseded',[])])))
     if states=={'before'}:current='before'
     elif states and states.issubset({'after','superseded'}):
         current='superseded' if 'superseded' in states else 'after'

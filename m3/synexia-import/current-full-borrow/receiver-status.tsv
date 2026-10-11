@@ -27,7 +27,7 @@ MAT_INDEX_STRING_HISTORY	993fa6caae8aa436ce800ee4571c79ae3bc240b6	SOURCE_PIN_ONL
 NATIVE_INTEROP	ebb32c5f38457740763c845010ca510e56f7f900	SOURCE_PIN_ONLY	m3 native/JNI adapters	NONE
 FAST_SEARCH	22dc56c084f0c414abac2ae64ab429397365f6f6	SOURCE_PIN_ONLY	m3 search/fuzzy/precompute receiver	NONE
 OPENREWRITE_RECIPES	bb1935e5b0412717b5d9af6a8715993fbfa70a4d	SOURCE_PIN_ONLY	m3 tooling/receipts/materialized outputs	NONE
-MINDEX_STRING_RUNTIME	1840f12a3ea64750d829f6dd2bda7916fc25d9f5	TARGET_MAPPING_PINNED	m3/ports/indexstring + java.lang.M3String* runtime adapter	m3/synexia-import/current-full-borrow/string-source-target-map.tsv
+MINDEX_STRING_RUNTIME	1840f12a3ea64750d829f6dd2bda7916fc25d9f5	SOURCE_PIN_ONLY	m3/ports/indexstring + java.lang.M3String* runtime adapter	NONE
 MINDEX_AST_RUNTIME	87032ae60d2ce2a849ff56dc9abaff9d267ebe2e	SOURCE_PIN_ONLY	m3 AST/precompute + compiler tooling	NONE
 DAG	ea7dc0fc4fd628a8e5efdaa0d9d7beb3be0a3521	SOURCE_PIN_ONLY	m3 DAG/data-structure receiver	NONE
 OBJECT	0c6b14ff17e96fc6e802b7059ffb6a05466556b9	SOURCE_PIN_ONLY	m3 object/context receiver	NONE
