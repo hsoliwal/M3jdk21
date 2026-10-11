@@ -38,7 +38,9 @@ SUCCESSOR_MARKERS = {
         "private final M3StringOwner owner;",
         "private final long value;",
         "static M3String joinDesignated(",
-        "return M3StringPool.concat(canonicalize(first), canonicalize(second));",
+        "M3String left = canonicalize(first);",
+        "M3String right = canonicalize(second);",
+        "return M3StringPool.concat(left, right);",
         "static boolean isLiteralRegex(String regex)",
     ),
     "src/java.base/share/classes/java/lang/M3StringFacts.java": (
