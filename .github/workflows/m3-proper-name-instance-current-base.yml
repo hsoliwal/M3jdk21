@@ -6,8 +6,10 @@ on:
     paths:
       - "m3/core/src/com/m3/text/M3InstanceIndex.java"
       - "m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java"
+      - "m3/core/src/com/m3/text/M3Lexicons.java"
       - "m3/core/test/M3InstanceIndexTest.java"
       - "m3/core/test/M3InstanceIndexPrecomputeTest.java"
+      - "m3/core/test/M3LexiconsTest.java"
       - "m3/lexicon/synexia-instance-index-contract.tsv"
       - "m3/lexicon/synexia-instance-target-map.tsv"
       - "m3/lexicon/synexia-source-manifest.tsv"
@@ -20,8 +22,10 @@ on:
     paths:
       - "m3/core/src/com/m3/text/M3InstanceIndex.java"
       - "m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java"
+      - "m3/core/src/com/m3/text/M3Lexicons.java"
       - "m3/core/test/M3InstanceIndexTest.java"
       - "m3/core/test/M3InstanceIndexPrecomputeTest.java"
+      - "m3/core/test/M3LexiconsTest.java"
       - "m3/lexicon/synexia-instance-index-contract.tsv"
       - "m3/lexicon/synexia-instance-target-map.tsv"
       - "m3/lexicon/synexia-source-manifest.tsv"
@@ -53,10 +57,10 @@ jobs:
           mkdir -p m3/build/instance-index-current-base/classes m3/build/instance-index-current-base/tests
           find m3/core/src -name '*.java' | sort > m3/build/instance-index-current-base/sources.txt
           javac --release 21 -Xlint:all -Werror -d m3/build/instance-index-current-base/classes @m3/build/instance-index-current-base/sources.txt
-          javac --release 21 -Xlint:all -Werror -cp m3/build/instance-index-current-base/classes -d m3/build/instance-index-current-base/tests \
-            m3/core/test/M3InstanceIndexTest.java m3/core/test/M3InstanceIndexPrecomputeTest.java
+          javac --release 21 -Xlint:all -Werror -cp m3/build/instance-index-current-base/classes -d m3/build/instance-index-current-base/tests             m3/core/test/M3InstanceIndexTest.java m3/core/test/M3InstanceIndexPrecomputeTest.java m3/core/test/M3LexiconsTest.java
           java -ea -cp m3/build/instance-index-current-base/classes:m3/build/instance-index-current-base/tests M3InstanceIndexTest
           java -ea -cp m3/build/instance-index-current-base/classes:m3/build/instance-index-current-base/tests M3InstanceIndexPrecomputeTest
+          java -ea -cp m3/build/instance-index-current-base/classes:m3/build/instance-index-current-base/tests M3LexiconsTest
           grep -F 'proper-name-instance-index' m3/lexicon/synexia-instance-index-contract.tsv
           grep -F 'unicodex.instance-index' m3/lexicon/synexia-source-manifest.tsv
           grep -F 'synexia-proper-name-instance-receiver' m3/runtime-integration/FOSS_REUSE_DECISION.tsv
