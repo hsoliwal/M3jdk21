@@ -56,6 +56,11 @@ jobs:
           rm -rf m3/build/instance-index-current-base
           mkdir -p m3/build/instance-index-current-base/classes m3/build/instance-index-current-base/tests
           javac --release 21 -Xlint:all -Werror -d m3/build/instance-index-current-base/classes \
+            m3/core/src/com/m3/text/M3LexiconPrecompute.java \
+            m3/core/src/com/m3/text/SynexiaPrecomputePayload.java \
+            m3/core/src/com/m3/text/SharedLexiconImage.java \
+            m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java \
+            m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java \
             m3/core/src/com/m3/text/SharedLexiconCatalog.java \
             m3/core/src/com/m3/text/M3InstanceIndex.java \
             m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java \
