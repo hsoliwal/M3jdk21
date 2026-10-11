@@ -14,6 +14,7 @@ on:
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
       - "m3/runtime-integration/export-synexia-lexicon.py"
       - "m3/runtime-integration/tests/test_synexia_export.py"
+      - "m3/runtime-integration/verify-synexia-lexicon.py"
       - "m3/lexicon/SYNEXIA_EXPORT.md"
       - ".github/workflows/m3-translation-receiver-current-base.yml"
   push:
@@ -30,6 +31,7 @@ on:
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
       - "m3/runtime-integration/export-synexia-lexicon.py"
       - "m3/runtime-integration/tests/test_synexia_export.py"
+      - "m3/runtime-integration/verify-synexia-lexicon.py"
       - "m3/lexicon/SYNEXIA_EXPORT.md"
       - ".github/workflows/m3-translation-receiver-current-base.yml"
 
