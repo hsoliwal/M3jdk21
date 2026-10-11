@@ -20,8 +20,8 @@ public class M3TQImageTest {
         M3TQ root = M3TQ.and(List.of(shared, M3TQ.fromExact(List.of("cde"))));
 
         M3TQ.Image image = root.image();
-        check(image.operations().length == 4, "shared image deduplicates node identity");
-        check(image.children().length == 4, "image preserves ordered edges");
+        check(image.operations().length == 3, "shared image deduplicates node identity");
+        check(image.children().length == 3, "image preserves ordered edges");
         check(image.primitivePayloadBytes() > 0, "image reports primitive payload");
 
         M3TQ restored = M3TQ.fromImage(image);
