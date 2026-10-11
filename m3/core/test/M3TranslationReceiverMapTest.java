@@ -50,6 +50,12 @@ public final class M3TranslationReceiverMapTest {
             check(fieldMap.stream().anyMatch(line -> line.startsWith(
                     "SharedLexiconPrecomputeCatalog.TranslationIdentity\t" + field + "\t")));
         }
+        for (String row : List.of(
+                "M3LexiconPrecompute.TranslationProjection\\ttranslatedTokenIds\\tint[]\\ttranslated_token_ids\\t",
+                "M3LexiconPrecompute.TranslationProjection\\tmappedTokenCount\\tint\\tmapped_token_count\\t",
+                "M3LexiconPrecompute.TranslationProjection\\tsourceFingerprint\\tString\\tsource_fingerprint\\t")) {
+            check(fieldMap.stream().anyMatch(line -> line.startsWith(row)));
+        }
         System.out.println("M3JDK_TRANSLATION_RECEIVER_MAP_PASS checks=" + checks);
     }
 }
