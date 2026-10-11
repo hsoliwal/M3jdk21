@@ -1,0 +1,31 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.yaml.DeleteProperty"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 103
+- name: "Kun Li"
+  email: "kun@moderne.io"
+  lineCount: 65
+- name: "Patrick"
+  email: "patway99@gmail.com"
+  lineCount: 13
+- name: "Aaron Gershman"
+  email: "aegershman@gmail.com"
+  lineCount: 1
+- name: "Patrick Way"
+  email: "pway99@users.noreply.github.com"
+  lineCount: 7
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 4
+- name: "Mike Solomon"
+  email: "mike@moderne.io"
+  lineCount: 1
+- name: "Aurélien Mino"
+  email: "aurelien.mino@gmail.com"
+  lineCount: 1
+- name: "traceyyoshima"
+  email: "tracey.yoshima@gmail.com"
+  lineCount: 1

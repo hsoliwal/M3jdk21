@@ -24,7 +24,7 @@
         <configuration><skipTests>true</skipTests></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
-        <configuration><archive><manifestEntries><M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline></manifestEntries></archive></configuration>
+        <configuration><excludes><exclude>**/.no-default-excludes</exclude></excludes><archive><manifestEntries><M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline></manifestEntries></archive></configuration>
       </plugin>
     </plugins>
   </build>

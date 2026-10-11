@@ -1,0 +1,10 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.format.PadEmptyForLoopComponents"
+contributors:
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 103
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 2

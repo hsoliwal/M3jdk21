@@ -1,0 +1,13 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.xml.ChangeTagName"
+contributors:
+- name: "Nick McKinney"
+  email: "mckinneynicholas@gmail.com"
+  lineCount: 49
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 16
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 3

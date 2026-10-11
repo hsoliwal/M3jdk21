@@ -1,0 +1,7 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.recipes.MissingOptionExample"
+contributors:
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 70

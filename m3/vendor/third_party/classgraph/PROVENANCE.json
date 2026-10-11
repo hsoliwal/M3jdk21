@@ -1,0 +1,934 @@
+{
+  "artifact": "classgraph",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "NOT_IN_LOCK",
+  "consumers": "OpenRewrite 8.17.1 runtime closure (mvn dependency:list of rewrite-core/java/java-21/test/xml)",
+  "coordinate": "io.github.classgraph:classgraph:4.8.165-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "classgraph-4.8.165",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/classgraph/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "74c7241effb7d9e7ce80288bcb8d3488de418942395b6d667e40b21930b428a4",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/classgraph/upstream-excluded/META-INF/maven/io.github.classgraph/classgraph/pom.properties",
+      "sha256": "ed9e5335faa4702fa134b10309dabcc1950b6301be87dee249176d7464ca83e5",
+      "upstream": "META-INF/maven/io.github.classgraph/classgraph/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/classgraph/upstream-excluded/META-INF/maven/io.github.classgraph/classgraph/pom.xml",
+      "sha256": "c226cac479b19285da7ca004e192f1cff1d36361fa36dd0033f0b0cf84fbcd6b",
+      "upstream": "META-INF/maven/io.github.classgraph/classgraph/pom.xml"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/AnnotationClassRef.java",
+      "sha256": "01205033998837c05adadf9a0d42cd9644fca69d1ccab2aea878e4cd1861466c",
+      "upstream": "io/github/classgraph/AnnotationClassRef.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/AnnotationEnumValue.java",
+      "sha256": "e24f3f49f814f9872918297ee1169c79dd70cb4dfa1be2eba56eb441f2afe2bb",
+      "upstream": "io/github/classgraph/AnnotationEnumValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/AnnotationInfo.java",
+      "sha256": "8a15da41747040e905a503b12b31eb2570df2919a73730305787ba646ea794fb",
+      "upstream": "io/github/classgraph/AnnotationInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/AnnotationInfoList.java",
+      "sha256": "1953680924c8cb28eb1b1c23de9cb5110e154f0ba3349144132082e568428700",
+      "upstream": "io/github/classgraph/AnnotationInfoList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/AnnotationParameterValue.java",
+      "sha256": "124aeb7b4854c9203d005fbabc0b52fe999ca63e9d0f1fb7b577e1385822c748",
+      "upstream": "io/github/classgraph/AnnotationParameterValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/AnnotationParameterValueList.java",
+      "sha256": "0dcd7b3b87a7128983b2086987c613a28450e57572759e539a29ed26208e2f48",
+      "upstream": "io/github/classgraph/AnnotationParameterValueList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ArrayClassInfo.java",
+      "sha256": "d1dc68133fd736c4ffac0677191bfd56e1da29003e47c2f23e13f8c61f1df3b0",
+      "upstream": "io/github/classgraph/ArrayClassInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ArrayTypeSignature.java",
+      "sha256": "65dac00369f7485ef13151a6a5654a2531d44e63c36905f32c18f140b33ab2ba",
+      "upstream": "io/github/classgraph/ArrayTypeSignature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/BaseTypeSignature.java",
+      "sha256": "e9307775bd82196e5d963060f21eb39d6d9ef3c8b35ddb04ad3f22a998bb7eb7",
+      "upstream": "io/github/classgraph/BaseTypeSignature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClassGraph.java",
+      "sha256": "e82e915a772858dbd6575a34ad33bc9005974c4c599746da16be33125295e72c",
+      "upstream": "io/github/classgraph/ClassGraph.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClassGraphClassLoader.java",
+      "sha256": "78b772b276e6339628f78004926c13691ec5e62008ed232e6821ee4a2dfa29ca",
+      "upstream": "io/github/classgraph/ClassGraphClassLoader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClassGraphException.java",
+      "sha256": "7919e497f5094602f84d19f5298db7ed1564e83103a1c2909529b05d1198a291",
+      "upstream": "io/github/classgraph/ClassGraphException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClassInfo.java",
+      "sha256": "4e14f138a99db1a69b81e4df80267eaf38f77102a9ae5c9722e90a782e9d5398",
+      "upstream": "io/github/classgraph/ClassInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClassInfoList.java",
+      "sha256": "f9858a46f28bb16723045d9675f879341de6cb3344ed674ebd6a40d4c493fc3b",
+      "upstream": "io/github/classgraph/ClassInfoList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClassMemberInfo.java",
+      "sha256": "a1a609ced0eb2e0178153b08120ec57faee2f87c5cd7110e587ac3914b00d95e",
+      "upstream": "io/github/classgraph/ClassMemberInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClassRefOrTypeVariableSignature.java",
+      "sha256": "6435f8ef9eb48eaefb1eed0dff102bce25fd11f58097a7ca06ba1a1edb7d3ebc",
+      "upstream": "io/github/classgraph/ClassRefOrTypeVariableSignature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClassRefTypeSignature.java",
+      "sha256": "f9395d5c1392f05cd01bb1f91e3fcfc6f38e8d141ffd193b6865cce8a84a7cb0",
+      "upstream": "io/github/classgraph/ClassRefTypeSignature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClassTypeSignature.java",
+      "sha256": "a44a200092c5c581c62b6de9656c58d934869d532d3079f3373195098b1fc96d",
+      "upstream": "io/github/classgraph/ClassTypeSignature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/Classfile.java",
+      "sha256": "c00a68756a508e98a9afc14307f7e4242db55bcbdf5697d678f6077948e0eba2",
+      "upstream": "io/github/classgraph/Classfile.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClasspathElement.java",
+      "sha256": "7ae67d3c1838063a346255ce395c8fe500a8cfa89c7e96fb4fb2db19b181ce15",
+      "upstream": "io/github/classgraph/ClasspathElement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClasspathElementDir.java",
+      "sha256": "7561bd3e1e7c65493f6eb9c0f7294e2e43dc4f2753b088a67ce9b6015df3b9c5",
+      "upstream": "io/github/classgraph/ClasspathElementDir.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClasspathElementModule.java",
+      "sha256": "f3e2e202e486ae3b10ef6eea0e8d6593a3883f9d4e13ac85d5138c97f3aa702b",
+      "upstream": "io/github/classgraph/ClasspathElementModule.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ClasspathElementZip.java",
+      "sha256": "afc8dd307bab9664a1bbb7740ea4d072e3196ad4ee125b4f05e57e74c942a087",
+      "upstream": "io/github/classgraph/ClasspathElementZip.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/CloseableByteBuffer.java",
+      "sha256": "6a51015e1346199edca6efd245cc32f061410344e5d14667639b31e764378079",
+      "upstream": "io/github/classgraph/CloseableByteBuffer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/FieldInfo.java",
+      "sha256": "0decc8ad3163495ad1fac7ecb5021e3eaeaa51421da73cc95d06bbc89d1d3e9a",
+      "upstream": "io/github/classgraph/FieldInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/FieldInfoList.java",
+      "sha256": "cf456adbaf2cd4224dadc9e20e2c36ebdf15d8e14599cc9936ecc88a389ce5b7",
+      "upstream": "io/github/classgraph/FieldInfoList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/GraphvizDotfileGenerator.java",
+      "sha256": "2fd99d531151dc45803f60bd32f64bb423547bfbf740acefaf974ef4bd755531",
+      "upstream": "io/github/classgraph/GraphvizDotfileGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/HasName.java",
+      "sha256": "ea8d761f95b7a87c95ddca60a2017b8c6922e0499b640cb781901a1df6ed89a0",
+      "upstream": "io/github/classgraph/HasName.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/HierarchicalTypeSignature.java",
+      "sha256": "e558b5753d021390eae962f8495424354d14ac6a06d495acd3e55ced4671e35d",
+      "upstream": "io/github/classgraph/HierarchicalTypeSignature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/InfoList.java",
+      "sha256": "fa1ff5dc994801f1601aa455fba6321f041ef60b077277868a3e9a5bafb0b192",
+      "upstream": "io/github/classgraph/InfoList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/MappableInfoList.java",
+      "sha256": "ee91b8e78555a6db02872e24018bd58079246a4e3c4cfd78e692561f00f4018b",
+      "upstream": "io/github/classgraph/MappableInfoList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/MethodInfo.java",
+      "sha256": "0504975d58b5b6e9163d03c6c6626d1706a57e9e3f1e5672d1b860f1ff9a4a17",
+      "upstream": "io/github/classgraph/MethodInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/MethodInfoList.java",
+      "sha256": "28a5b7484fef4ee7e8e87ff0bc05ce7ea87140693127e6f488c3290347f021b0",
+      "upstream": "io/github/classgraph/MethodInfoList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/MethodParameterInfo.java",
+      "sha256": "488f888fbc4b3a8807e1033fb1615d113f359a33629d95c39986c5d4a2244132",
+      "upstream": "io/github/classgraph/MethodParameterInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/MethodTypeSignature.java",
+      "sha256": "fc44036da775aa240f95acbce7c7720b3051f13b6d93a21e7973575c84e3b8d3",
+      "upstream": "io/github/classgraph/MethodTypeSignature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ModuleInfo.java",
+      "sha256": "63ef371e3aec36f347b21d39795ac5027ee30a2ee41c1d5a92a6d3fcb6eea556",
+      "upstream": "io/github/classgraph/ModuleInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ModuleInfoList.java",
+      "sha256": "60c05a4782a0b7457cd70d63c305439ba1fca876a5257886c586ca69c6498d65",
+      "upstream": "io/github/classgraph/ModuleInfoList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ModulePathInfo.java",
+      "sha256": "024b1d00ae8d0eff1e5a6df32e8707afbafdf0ac306cde0b52b9f09cc633aef0",
+      "upstream": "io/github/classgraph/ModulePathInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ModuleReaderProxy.java",
+      "sha256": "46385ba64af275f31158bc0dd1075637d1f2317a38db0c3e92557550e9bf1d9f",
+      "upstream": "io/github/classgraph/ModuleReaderProxy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ModuleRef.java",
+      "sha256": "938ada123b1bb3fe10187e6435d87a4da723a419a5f67652f3478f7e76acf394",
+      "upstream": "io/github/classgraph/ModuleRef.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ObjectTypedValueWrapper.java",
+      "sha256": "0f56b5787f449fb5da4a0d1d491fc3f6ce9e60b2e7d376c2f25ddb150a44f80b",
+      "upstream": "io/github/classgraph/ObjectTypedValueWrapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/PackageInfo.java",
+      "sha256": "0d650c55ff9f1cf0a008f69a2a2672f380e19b31c11265438d8f8977d6222721",
+      "upstream": "io/github/classgraph/PackageInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/PackageInfoList.java",
+      "sha256": "13bfab2435755899cc15458d7e98fc683244f70aaa126d3fd0148bc1877baf84",
+      "upstream": "io/github/classgraph/PackageInfoList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/PotentiallyUnmodifiableList.java",
+      "sha256": "65747f005f7d2095c88fc6f9b15ca0af5d3947cab0665b27e5d717399b750c5b",
+      "upstream": "io/github/classgraph/PotentiallyUnmodifiableList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ReferenceTypeSignature.java",
+      "sha256": "0c1f75c5d64eda8c461100ac936fe4277e33075ac07f588c1e432bf63c4b4df8",
+      "upstream": "io/github/classgraph/ReferenceTypeSignature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/Resource.java",
+      "sha256": "b26a3fa1bbb83939c55cccec8ec520955da076f89801729c629389adf0674563",
+      "upstream": "io/github/classgraph/Resource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ResourceList.java",
+      "sha256": "cf0c3922ccb6f4313346003bf4a02edb7e74714506b2fc0746367116339a7529",
+      "upstream": "io/github/classgraph/ResourceList.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ScanResult.java",
+      "sha256": "bdb86d58e038e65f07e91e4d22b648bc6f99b558a20857ae1d4663927bf61ea9",
+      "upstream": "io/github/classgraph/ScanResult.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/ScanResultObject.java",
+      "sha256": "b122e0eadbe005290e018fc69aa356fda7655b4cdde2f9ccbb6ddd574845a144",
+      "upstream": "io/github/classgraph/ScanResultObject.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/Scanner.java",
+      "sha256": "8bafc3d6767cc664ff928d4516607cb26849e63946c3f3e98bcb8cffb62df817",
+      "upstream": "io/github/classgraph/Scanner.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/TypeArgument.java",
+      "sha256": "0a903caf523504c6076efbf7ba697da5963e89aa74c4a26568d73e20c9d0d40f",
+      "upstream": "io/github/classgraph/TypeArgument.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/TypeParameter.java",
+      "sha256": "71cee616fca2206db03123bae3d13e2dbf509b3f85fb4dd71784bd08f3081114",
+      "upstream": "io/github/classgraph/TypeParameter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/TypeSignature.java",
+      "sha256": "8c97eb8aa1357d471625e8099fdd9a75be4e1c143af71b3fd12f82784c77607d",
+      "upstream": "io/github/classgraph/TypeSignature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/io/github/classgraph/TypeVariableSignature.java",
+      "sha256": "044393cd7303865b89163526367e321bf20e70430eaa0432ffb7768a2f85a011",
+      "upstream": "io/github/classgraph/TypeVariableSignature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/AntClassLoaderHandler.java",
+      "sha256": "58f2cd95259ef16d3d59f361692a14c5d4d8eff53a8c6b4e79df82949d7813b2",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/AntClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/ClassGraphClassLoaderHandler.java",
+      "sha256": "3dfd16bbd0c072699427a2387bcfa5be09170ba108d35ffbd48d8fb0f9e376c0",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/ClassGraphClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/ClassLoaderHandler.java",
+      "sha256": "8ce9ef34098055df6343212ce539770303ff741038492413cbf53862aa5436c5",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/ClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/ClassLoaderHandlerRegistry.java",
+      "sha256": "c99eb6733a8220c88e0b3beb04b7966312c6dd6e0b9396b7f4a0096563e83f67",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/ClassLoaderHandlerRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/CxfContainerClassLoaderHandler.java",
+      "sha256": "fade05063a28993a8182f30c6e8d5c6c4e0402b432eb84024684e0a20a59dc9a",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/CxfContainerClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/EquinoxClassLoaderHandler.java",
+      "sha256": "af508a561731991020fec164f9bbb31c9c445f6ed0f05e0cdfb30ea7824af44c",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/EquinoxClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/EquinoxContextFinderClassLoaderHandler.java",
+      "sha256": "94e7228cba6a29840fb66e59da6e3a416660b3f2e5ef13d32c744c24f3c37ad4",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/EquinoxContextFinderClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/FallbackClassLoaderHandler.java",
+      "sha256": "8162ec1485e0de7b6180441256ffd15f35ebb87b18ddb244d3435c0f55dda546",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/FallbackClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/FelixClassLoaderHandler.java",
+      "sha256": "af82331885406f69b41e5546d32cc2be7f866ac212424cc6ff87973f0418179c",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/FelixClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/JBossClassLoaderHandler.java",
+      "sha256": "0141ec483cc2794852c3526dd4edcd3f28a3e8fb6b0fda3ef6954295b95088fd",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/JBossClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/JPMSClassLoaderHandler.java",
+      "sha256": "6e2640e7f48314ca6b4c29e3b61f8ed7b11ad41317fb775082d2c1719f05bc7f",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/JPMSClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/OSGiDefaultClassLoaderHandler.java",
+      "sha256": "9b9566c9d7313be87b4030cc28cd474de9e15adf79ee75da6f4dffea2fcccd19",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/OSGiDefaultClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/ParentLastDelegationOrderTestClassLoaderHandler.java",
+      "sha256": "8b720e1176934e361e30c1d3aac78df2c58076fc8cffbe9a0a92e85c6b31ad9f",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/ParentLastDelegationOrderTestClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/PlexusClassWorldsClassRealmClassLoaderHandler.java",
+      "sha256": "f3002aa8eefd71d8f33a797a481ceab717a8147c94dd19da2b36a9319e2ad357",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/PlexusClassWorldsClassRealmClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/QuarkusClassLoaderHandler.java",
+      "sha256": "e9e5a423664ff0e5f5b6bc4d67f2ec8471c5d3df1486f2585147d532da80383e",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/QuarkusClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/classgraph/src/main/resources/nonapi/io/github/classgraph/classloaderhandler/README",
+      "sha256": "9d6bdd1c9a0ee94c0a2396091a1b6d0684dfadcdfdc9ac1bbda3ba28e79f097c",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/README"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/SpringBootRestartClassLoaderHandler.java",
+      "sha256": "577e581ce2bf8a5929014d02a1e336ac065d21eb6ae25fc2563f4ada579dfadd",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/SpringBootRestartClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/TomcatWebappClassLoaderBaseHandler.java",
+      "sha256": "3aa1dd40e5391dff876fef186c0169dec699c9c22afaf5c6fbbf39e47df38f8d",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/TomcatWebappClassLoaderBaseHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/URLClassLoaderHandler.java",
+      "sha256": "0ffd221b1897c296b91013409c2afe9a8ec8ec8e4bb9c7bb8e24aba68f44f1f5",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/URLClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/UnoOneJarClassLoaderHandler.java",
+      "sha256": "aaf96ff2042619f686ea856c157abee947eb93d9c768bdd78250dabe53393722",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/UnoOneJarClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/WeblogicClassLoaderHandler.java",
+      "sha256": "f267e41a96b7d2decf5df87d58e93e2a67ab859f53f78551aefd74a1f02feddf",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/WeblogicClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/WebsphereLibertyClassLoaderHandler.java",
+      "sha256": "da06129579c96c4d99429741a16a85b7709ab812753cae85091b314742e71c0c",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/WebsphereLibertyClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classloaderhandler/WebsphereTraditionalClassLoaderHandler.java",
+      "sha256": "99923079d659c315829d64dd9517faa27c0a80c30a2a26fd9b13a214003b98bc",
+      "upstream": "nonapi/io/github/classgraph/classloaderhandler/WebsphereTraditionalClassLoaderHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classpath/CallStackReader.java",
+      "sha256": "eda5bf57d77052659bb28e5abf36097d1696f2f305290d90afed23d01d79afcb",
+      "upstream": "nonapi/io/github/classgraph/classpath/CallStackReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classpath/ClassLoaderFinder.java",
+      "sha256": "4ac3bb0308061ff45da13ca62b1a5a68ee5fffe9d7ea646039f9adaa522b0f79",
+      "upstream": "nonapi/io/github/classgraph/classpath/ClassLoaderFinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classpath/ClassLoaderOrder.java",
+      "sha256": "db162aad2e51855431cba4cfb41b9ed6a4ccb31394f5252e92385c6009a5b6b6",
+      "upstream": "nonapi/io/github/classgraph/classpath/ClassLoaderOrder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classpath/ClasspathFinder.java",
+      "sha256": "76fccf3a060c615dc8e5a4b8122388493f45e45be1605fe41c3864fb976ed397",
+      "upstream": "nonapi/io/github/classgraph/classpath/ClasspathFinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classpath/ClasspathOrder.java",
+      "sha256": "3652af0b1e5c83adf0e90f35e34bfa9c01453f66bc54c52c8c82e5defb0a0838",
+      "upstream": "nonapi/io/github/classgraph/classpath/ClasspathOrder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classpath/ModuleFinder.java",
+      "sha256": "bf2e23a2ec95aa103dfbb0a416fff7143ab874b2c0246e898ea1e0e5f4476928",
+      "upstream": "nonapi/io/github/classgraph/classpath/ModuleFinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/classpath/SystemJarFinder.java",
+      "sha256": "bee1484e0fb29fc9ed4504f888b9134b726c1fc366aa7484488d4a6c1b34b265",
+      "upstream": "nonapi/io/github/classgraph/classpath/SystemJarFinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/concurrency/AutoCloseableExecutorService.java",
+      "sha256": "f4fbbdc6b238bf7b5608b5ad18a6765de9c100b2b632e81234952c865c7847aa",
+      "upstream": "nonapi/io/github/classgraph/concurrency/AutoCloseableExecutorService.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/concurrency/InterruptionChecker.java",
+      "sha256": "72228604458d1375d580c6645f6bc161ad9b525cd5757614ffd473dafc8f0594",
+      "upstream": "nonapi/io/github/classgraph/concurrency/InterruptionChecker.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/concurrency/SimpleThreadFactory.java",
+      "sha256": "c9484a369c1ce29590017e03f4530c96f1cb86a7d16c94ef8c071080a3ddb5a5",
+      "upstream": "nonapi/io/github/classgraph/concurrency/SimpleThreadFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/concurrency/SingletonMap.java",
+      "sha256": "f18124704500261f5b98220e532d28c66288b4dfe4eb98abfb2c118064a2053e",
+      "upstream": "nonapi/io/github/classgraph/concurrency/SingletonMap.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/concurrency/WorkQueue.java",
+      "sha256": "6b44786651fb4db45971408f5bfd98ac4766bb8617063144950f841d1dc4277f",
+      "upstream": "nonapi/io/github/classgraph/concurrency/WorkQueue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fastzipfilereader/FastZipEntry.java",
+      "sha256": "11330c94cb0521ee52051b7263b16913cd7694f301eb0d0a35a18775da845690",
+      "upstream": "nonapi/io/github/classgraph/fastzipfilereader/FastZipEntry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fastzipfilereader/LogicalZipFile.java",
+      "sha256": "d8bd3db6533e5e171577ace65bb81b1e83be767bc1b8ca19f57fc76113a34370",
+      "upstream": "nonapi/io/github/classgraph/fastzipfilereader/LogicalZipFile.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fastzipfilereader/NestedJarHandler.java",
+      "sha256": "2cdc893c7ee6de333fa3886b48d08a5972fac58b8d2b2b97641dae4243c1d41f",
+      "upstream": "nonapi/io/github/classgraph/fastzipfilereader/NestedJarHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fastzipfilereader/PhysicalZipFile.java",
+      "sha256": "cb18bfa6cbd3bb704b8ec92d059d2c828a3c0083d47dde8c9047fed2b13cc0d8",
+      "upstream": "nonapi/io/github/classgraph/fastzipfilereader/PhysicalZipFile.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fastzipfilereader/ZipFileSlice.java",
+      "sha256": "0e03a392e2e92b126f2c71d4b332aa3f76f9a1fa74f30975085043747d2764e1",
+      "upstream": "nonapi/io/github/classgraph/fastzipfilereader/ZipFileSlice.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fileslice/ArraySlice.java",
+      "sha256": "2a3b6eb794befa98e10d6ee6911e42824f659c5cda5333f8c0855bd2e8d4d10f",
+      "upstream": "nonapi/io/github/classgraph/fileslice/ArraySlice.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fileslice/FileSlice.java",
+      "sha256": "0b2203cf85a22fb845825d50fc4e99d3aa7b9e67ff71925062975819a17c194f",
+      "upstream": "nonapi/io/github/classgraph/fileslice/FileSlice.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fileslice/PathSlice.java",
+      "sha256": "c9e1babd47c846480954781683410809a33e259a8a7cf09b97d13a2432966691",
+      "upstream": "nonapi/io/github/classgraph/fileslice/PathSlice.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fileslice/Slice.java",
+      "sha256": "4f32dfa01578fbe52118e7418311a0d27be34f13972bc4c35314fe40b52a03a3",
+      "upstream": "nonapi/io/github/classgraph/fileslice/Slice.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fileslice/reader/ClassfileReader.java",
+      "sha256": "eb040d6eddb7b62e69e3451e5acab9eb5a88b94495109177e03d71eef6abf854",
+      "upstream": "nonapi/io/github/classgraph/fileslice/reader/ClassfileReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fileslice/reader/RandomAccessArrayReader.java",
+      "sha256": "26dbebe4fc4fb58ad251533f25c6f2b05373eda93b7cbdd6b22180c324e31d36",
+      "upstream": "nonapi/io/github/classgraph/fileslice/reader/RandomAccessArrayReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fileslice/reader/RandomAccessByteBufferReader.java",
+      "sha256": "23b765082bffb10a348ec4ef752394ad253d9fe88de764e65f4aaf880aea7bf8",
+      "upstream": "nonapi/io/github/classgraph/fileslice/reader/RandomAccessByteBufferReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fileslice/reader/RandomAccessFileChannelReader.java",
+      "sha256": "ce00aebb2381749ae6cb9a862db90b8b45567cc4bfa672e19c99688070b27dc0",
+      "upstream": "nonapi/io/github/classgraph/fileslice/reader/RandomAccessFileChannelReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fileslice/reader/RandomAccessReader.java",
+      "sha256": "1dbf5a6b9c64c11fe1ed2cbb7b63e9411325169d5d5fd7b4945267fda50b1d3e",
+      "upstream": "nonapi/io/github/classgraph/fileslice/reader/RandomAccessReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/fileslice/reader/SequentialReader.java",
+      "sha256": "93e7bc584615c5b1748a9bb349c4c540a080e9959705488f0b0df0635eb305fe",
+      "upstream": "nonapi/io/github/classgraph/fileslice/reader/SequentialReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/ClassFieldCache.java",
+      "sha256": "1e54a8b8df1e9c659c5cac9f805aa5d9411624b6523502a78041f01b4620f917",
+      "upstream": "nonapi/io/github/classgraph/json/ClassFieldCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/ClassFields.java",
+      "sha256": "6f1055a67c5fa9b905ba1e04b9c2aea41138d23794a76f57798712cbe9877046",
+      "upstream": "nonapi/io/github/classgraph/json/ClassFields.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/FieldTypeInfo.java",
+      "sha256": "e6e1fab26a4c5383ccc986fb65f9854b9b8d98a02e019d52010d9d4bfa121e44",
+      "upstream": "nonapi/io/github/classgraph/json/FieldTypeInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/Id.java",
+      "sha256": "75e3138bbc93ae699bc17ec4de57581ebc778b177c9f031b306bf96163545c40",
+      "upstream": "nonapi/io/github/classgraph/json/Id.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/JSONArray.java",
+      "sha256": "8fb0b0f4fc2959804cfa433f22f7775d2cbf3529f43a84b7d7a5c682627c8fbe",
+      "upstream": "nonapi/io/github/classgraph/json/JSONArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/JSONDeserializer.java",
+      "sha256": "86632c50ddcf38a695232ec477b7c096ed75485db530ce83d6f38e23a319e257",
+      "upstream": "nonapi/io/github/classgraph/json/JSONDeserializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/JSONObject.java",
+      "sha256": "e543187e2a7c0882b791774f888a5e1ba4d262a4a68a5b9b2af5dfa1eedf5d7d",
+      "upstream": "nonapi/io/github/classgraph/json/JSONObject.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/JSONParser.java",
+      "sha256": "4b58aaae4b9b48fc00504e2e45ea5a3b500373a4bcc2aefb0da39aba391935fb",
+      "upstream": "nonapi/io/github/classgraph/json/JSONParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/JSONReference.java",
+      "sha256": "9731f7c9af74aba52875e39c553839723b3d1a914d2f1c2f664ac39bd90db9d8",
+      "upstream": "nonapi/io/github/classgraph/json/JSONReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/JSONSerializer.java",
+      "sha256": "d54c2cff8e43f58f3a4756e17d0e25b843851f65bac3b5202af4d5d5dcd1e350",
+      "upstream": "nonapi/io/github/classgraph/json/JSONSerializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/JSONUtils.java",
+      "sha256": "cceb9bccba5b918dfa047f5a60aaf9c6b522688826eea3f35052531eba65ebc5",
+      "upstream": "nonapi/io/github/classgraph/json/JSONUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/ParameterizedTypeImpl.java",
+      "sha256": "ec0580e897af66f73008b2cedc6beaf324d6d2ddec260a48e184de98660b0e21",
+      "upstream": "nonapi/io/github/classgraph/json/ParameterizedTypeImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/ReferenceEqualityKey.java",
+      "sha256": "6e5c642ddaf0e659857128214109926cf2ecbffe40dddcaecd34176b2ac75540",
+      "upstream": "nonapi/io/github/classgraph/json/ReferenceEqualityKey.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/json/TypeResolutions.java",
+      "sha256": "e640cb5cc779032c2414057d996cad0d82fe04c7d5f89f694c9fd7122a70b9a7",
+      "upstream": "nonapi/io/github/classgraph/json/TypeResolutions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/recycler/RecycleOnClose.java",
+      "sha256": "f7d8fb501f5e59e688fd3dd076ceb67f31ccd64ba972581a064b76dc3e08bee3",
+      "upstream": "nonapi/io/github/classgraph/recycler/RecycleOnClose.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/recycler/Recycler.java",
+      "sha256": "d4c1484bc9d02f1fafdd11fe9edcc3aee1dabb2c737f782f1af92318f71ba53e",
+      "upstream": "nonapi/io/github/classgraph/recycler/Recycler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/recycler/Resettable.java",
+      "sha256": "79a9270fd3067a5d28c05dc4b310f3fac756d1a7bbf134738e22f5bbd9cc9a76",
+      "upstream": "nonapi/io/github/classgraph/recycler/Resettable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/reflection/JVMDriverReflectionDriver.java",
+      "sha256": "165418dfc2fc80ab44d4da0f991031f4a26eca840e609df9a6a5ecc513708c5e",
+      "upstream": "nonapi/io/github/classgraph/reflection/JVMDriverReflectionDriver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/reflection/NarcissusReflectionDriver.java",
+      "sha256": "0db8517ef5fbc82c9df29337422b5a058795f5c50d1a95996a0bf115a3f63a46",
+      "upstream": "nonapi/io/github/classgraph/reflection/NarcissusReflectionDriver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/reflection/ReflectionDriver.java",
+      "sha256": "43749974c24c918308141ddfd349ef88edfe3a9b31114456908fa7a156db11dc",
+      "upstream": "nonapi/io/github/classgraph/reflection/ReflectionDriver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/reflection/ReflectionUtils.java",
+      "sha256": "d0d52e326932d4536d707640e26faed920ca70a5207ef34581594737bb7c4e0d",
+      "upstream": "nonapi/io/github/classgraph/reflection/ReflectionUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/reflection/StandardReflectionDriver.java",
+      "sha256": "10d155975e3299b008848ba85cc7e7df6e371c2c8416b398555a85119b382d14",
+      "upstream": "nonapi/io/github/classgraph/reflection/StandardReflectionDriver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/scanspec/AcceptReject.java",
+      "sha256": "44acc064ccdd296a7fbec4d70b241e19025db72d3b77fabf707e6ce1250458b3",
+      "upstream": "nonapi/io/github/classgraph/scanspec/AcceptReject.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/scanspec/ScanSpec.java",
+      "sha256": "b78043807a87063312c38be529ec23dd3cc6afe4c71ce9854e02ce7adddf0f29",
+      "upstream": "nonapi/io/github/classgraph/scanspec/ScanSpec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/types/ParseException.java",
+      "sha256": "1a4c26add9c0f7747ca2aa77e5d232e3cf32ac2789cd9de545178c46c36f2b78",
+      "upstream": "nonapi/io/github/classgraph/types/ParseException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/types/Parser.java",
+      "sha256": "b1cc7e55f472af439db4b0a69b30d6881b2b38a1e263789208d2f7212b29bfd6",
+      "upstream": "nonapi/io/github/classgraph/types/Parser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/types/TypeUtils.java",
+      "sha256": "829f3d8b27c16368cd52e45c211839ee011b1f9e9943a859d8e76eabc61ce2c1",
+      "upstream": "nonapi/io/github/classgraph/types/TypeUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/utils/Assert.java",
+      "sha256": "fd39cb6bde23d4774f74f6d9ea95df72b234e0ee05a9a729bba92684349b5037",
+      "upstream": "nonapi/io/github/classgraph/utils/Assert.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/utils/CollectionUtils.java",
+      "sha256": "b7505ac08f0713e54722aaea7b203a19ff4633f575912bd1ec793950c5c31e97",
+      "upstream": "nonapi/io/github/classgraph/utils/CollectionUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/utils/FastPathResolver.java",
+      "sha256": "05cc7ad0b3ff5f4643a9c0fefa67e4b1dfda2e2cd434d76937c467bd61f2cb2f",
+      "upstream": "nonapi/io/github/classgraph/utils/FastPathResolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/utils/FileUtils.java",
+      "sha256": "3beca0ec17cdd5b14d2380fbdff8d088d1527d3f9f1b94ee8dc17040ea58438a",
+      "upstream": "nonapi/io/github/classgraph/utils/FileUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/utils/JarUtils.java",
+      "sha256": "8a2b51926b74ba76b9c578e20bf6d5ef14db1860af82337f0789c5b8e908fc2f",
+      "upstream": "nonapi/io/github/classgraph/utils/JarUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/utils/LogNode.java",
+      "sha256": "64578b7ab533f5ae6dfb009fcd681555252f3c213bcf90c1d714105cd458d90f",
+      "upstream": "nonapi/io/github/classgraph/utils/LogNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/utils/ProxyingInputStream.java",
+      "sha256": "8d3c3795cc70fea91e65bb424c6c8031c87d3a5b6fb7d60eef94c6a72bd1aa01",
+      "upstream": "nonapi/io/github/classgraph/utils/ProxyingInputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/utils/StringUtils.java",
+      "sha256": "7d68dde3a60d44008dc59fdbeb2ab66743cffc1642c184066a2fb4520cfc5da8",
+      "upstream": "nonapi/io/github/classgraph/utils/StringUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/utils/URLPathEncoder.java",
+      "sha256": "c0db5aedc7ce912031ca452ffd7e9bcd022dc7133ac828d89203d2ac44ff8e72",
+      "upstream": "nonapi/io/github/classgraph/utils/URLPathEncoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/classgraph/src/main/java/nonapi/io/github/classgraph/utils/VersionFinder.java",
+      "sha256": "a3de90bdcf9f3e9ddd3fb0125fd354120051b3e14065b8d72af72eb281e21215",
+      "upstream": "nonapi/io/github/classgraph/utils/VersionFinder.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "io.github.classgraph:classgraph:4.8.165 (sha256 5258d9218fc6413f4d14218a5a6e784528e349f60f48883b77de74bb478ebafd)",
+      "repository": "m3/vendor/third_party/classgraph/src/main/resources/LICENSE-ClassGraph.txt",
+      "sha256": "4107216e853eee237beca89fe7d460271baf03eb70713f796bea46226b568944",
+      "upstream": "LICENSE-ClassGraph.txt"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/classgraph/UPSTREAM_LICENSE.json",
+      "sha256": "4e5e12ba7cf5d43d4b6e7f7fed74e353863eeea14f3bc92f87d8f02a141d974c",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/classgraph/UPSTREAM_LICENSE.txt",
+      "sha256": "4107216e853eee237beca89fe7d460271baf03eb70713f796bea46226b568944",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/classgraph/SOURCES_MANIFEST.tsv",
+      "sha256": "4e55ce96f9f428c83ece2c3314f64ad0b33c61d8596fa74a0bd396a1caaddee7",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/classgraph/LICENSE",
+      "sha256": "4107216e853eee237beca89fe7d460271baf03eb70713f796bea46226b568944",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "io.github.classgraph",
+  "kind": "MODULE",
+  "license": "The MIT License (MIT)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.pom",
+  "receipt": {
+    "buildRoot": "53e213e7fcc8e3052e0c6fdd7f79f0c6974831cf9d7b881705b395c5da1734ca",
+    "distributionSha256": "d573320681851503b2b9487b4cf3bb877d0a34d6f3c82c5a4c3e471625e93f58",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "e868a4a16c1bc3cb65140b54034e9c9d25e9286f7597efd9552d9f47c2b3ed62",
+    "status": "PASS"
+  },
+  "resources_completed": 1,
+  "sources_jar": "https://repo.maven.apache.org/maven2/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165-sources.jar",
+  "sources_jar_sha1": "aba0976f5bc61bc90efd2f0f14c1c62373415308",
+  "sources_jar_sha256": "246048be091c92ca4df9ab4f46b314a284bb1d601c85b8af99bbab773c73ee7a",
+  "status": "PASS",
+  "upstream": "https://github.com/classgraph/classgraph",
+  "version": "4.8.165"
+}

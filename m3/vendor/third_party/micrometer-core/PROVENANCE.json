@@ -1,0 +1,2002 @@
+{
+  "artifact": "micrometer-core",
+  "automatic_module_name": "micrometer.core",
+  "build": "commands",
+  "build_reason": "NOT_IN_LOCK",
+  "consumers": "OpenRewrite 8.17.1 runtime closure (mvn dependency:list of rewrite-core/java/java-21/test/xml)",
+  "coordinate": "io.micrometer:micrometer-core:1.9.17-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "HdrHistogram",
+      "form": "source module",
+      "group": "org.hdrhistogram",
+      "optional": false,
+      "scope": "compile",
+      "version": "2.1.12-m3-source-1"
+    },
+    {
+      "artifact": "LatencyUtils",
+      "form": "source module",
+      "group": "org.latencyutils",
+      "optional": false,
+      "scope": "compile",
+      "version": "2.0.3-m3-source-1"
+    },
+    {
+      "artifact": "jsr305",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "com.google.code.findbugs",
+      "optional": true,
+      "scope": "provided",
+      "version": "3.0.2"
+    },
+    {
+      "artifact": "aspectjweaver",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.aspectj",
+      "optional": true,
+      "scope": "provided",
+      "version": "1.8.14"
+    },
+    {
+      "artifact": "metrics-core",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "io.dropwizard.metrics",
+      "optional": true,
+      "scope": "provided",
+      "version": "4.2.22"
+    },
+    {
+      "artifact": "guava",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "com.google.guava",
+      "optional": true,
+      "scope": "provided",
+      "version": "31.1-jre"
+    },
+    {
+      "artifact": "caffeine",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "com.github.ben-manes.caffeine",
+      "optional": true,
+      "scope": "provided",
+      "version": "2.9.3"
+    },
+    {
+      "artifact": "ehcache",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "net.sf.ehcache",
+      "optional": true,
+      "scope": "provided",
+      "version": "2.10.9.2"
+    },
+    {
+      "artifact": "cache-api",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "javax.cache",
+      "optional": true,
+      "scope": "provided",
+      "version": "1.1.1"
+    },
+    {
+      "artifact": "hazelcast",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "com.hazelcast",
+      "optional": true,
+      "scope": "provided",
+      "version": "5.1.1"
+    },
+    {
+      "artifact": "hibernate-entitymanager",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.hibernate",
+      "optional": true,
+      "scope": "provided",
+      "version": "5.6.15.Final"
+    },
+    {
+      "artifact": "jetty-server",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.eclipse.jetty",
+      "optional": true,
+      "scope": "provided",
+      "version": "9.4.53.v20231009"
+    },
+    {
+      "artifact": "jetty-client",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.eclipse.jetty",
+      "optional": true,
+      "scope": "provided",
+      "version": "9.4.53.v20231009"
+    },
+    {
+      "artifact": "tomcat-embed-core",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.apache.tomcat.embed",
+      "optional": true,
+      "scope": "provided",
+      "version": "8.5.95"
+    },
+    {
+      "artifact": "jersey-server",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.glassfish.jersey.core",
+      "optional": true,
+      "scope": "provided",
+      "version": "2.37"
+    },
+    {
+      "artifact": "grpc-api",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "io.grpc",
+      "optional": true,
+      "scope": "provided",
+      "version": "1.45.1"
+    },
+    {
+      "artifact": "httpclient",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.apache.httpcomponents",
+      "optional": true,
+      "scope": "provided",
+      "version": "4.5.14"
+    },
+    {
+      "artifact": "httpasyncclient",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.apache.httpcomponents",
+      "optional": true,
+      "scope": "provided",
+      "version": "4.1.5"
+    },
+    {
+      "artifact": "hystrix-core",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "com.netflix.hystrix",
+      "optional": true,
+      "scope": "provided",
+      "version": "1.5.12"
+    },
+    {
+      "artifact": "logback-classic",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "ch.qos.logback",
+      "optional": true,
+      "scope": "provided",
+      "version": "1.2.12"
+    },
+    {
+      "artifact": "log4j-core",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.apache.logging.log4j",
+      "optional": true,
+      "scope": "provided",
+      "version": "2.17.2"
+    },
+    {
+      "artifact": "okhttp",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "com.squareup.okhttp3",
+      "optional": true,
+      "scope": "provided",
+      "version": "5.0.0-alpha.11"
+    },
+    {
+      "artifact": "mongodb-driver-sync",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.mongodb",
+      "optional": true,
+      "scope": "provided",
+      "version": "4.6.1"
+    },
+    {
+      "artifact": "jooq",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.jooq",
+      "optional": true,
+      "scope": "provided",
+      "version": "3.14.16"
+    },
+    {
+      "artifact": "kafka-clients",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.apache.kafka",
+      "optional": true,
+      "scope": "provided",
+      "version": "2.8.2"
+    },
+    {
+      "artifact": "kafka-streams",
+      "form": "published-pom compile input (compile, optional), binary, never shipped",
+      "group": "org.apache.kafka",
+      "optional": true,
+      "scope": "provided",
+      "version": "2.8.2"
+    }
+  ],
+  "donor": "micrometer-core-1.9.17",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/micrometer-core/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "bea1f8f6edc8f62b73727c9c53573f3dfc150484ab984423bf5e83d23395465a",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/resources/META-INF/micrometer-core.properties",
+      "sha256": "0fa051b3eded704a5a09bfbc7bbe48d20fd3c43629b1c2a09c80257c9da1047a",
+      "upstream": "META-INF/micrometer-core.properties"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/resources/META-INF/native-image/io.micrometer/micrometer-core/native-image.properties",
+      "sha256": "83fd4265fe65c2a3ab7c4f86550e620d367831dff0f5ffcd4e48383d9eaacf35",
+      "upstream": "META-INF/native-image/io.micrometer/micrometer-core/native-image.properties"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/resources/META-INF/native-image/io.micrometer/micrometer-core/reflect-config.json",
+      "sha256": "dbe3cb9985da731cb90f80af8f12481dcf7e3f3b37d130269cdc388fa0ac490f",
+      "upstream": "META-INF/native-image/io.micrometer/micrometer-core/reflect-config.json"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/annotation/Counted.java",
+      "sha256": "1ea9bfa8bb9d4a0a4c2ce2bdb2555ac67ccd1a3b2264340c7c0a7669ee5042e1",
+      "upstream": "io/micrometer/core/annotation/Counted.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/annotation/Incubating.java",
+      "sha256": "248a2d29ae9edb789791631d52e93fe8329bd707a058785c6d25c8245412ad86",
+      "upstream": "io/micrometer/core/annotation/Incubating.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/annotation/Timed.java",
+      "sha256": "a73f27c827bb041f0f99b3c414b32371fa85df71ad1445f76b2464db2faf81a8",
+      "upstream": "io/micrometer/core/annotation/Timed.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/annotation/TimedSet.java",
+      "sha256": "a40142a15c681719a6097854681804a291cf14184d06f320846dc7742cdf588f",
+      "upstream": "io/micrometer/core/annotation/TimedSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/annotation/package-info.java",
+      "sha256": "37683781eb5b2a12dc6230c47ed0e0e7d00ef490c4413796f90013f0a1788ae2",
+      "upstream": "io/micrometer/core/annotation/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/aop/CountedAspect.java",
+      "sha256": "fbc8d62b37aa8d3552dfc2d639751430ac2b74385c71583d8f8fed052a288549",
+      "upstream": "io/micrometer/core/aop/CountedAspect.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/aop/TimedAspect.java",
+      "sha256": "a8253f86d877b06be37a649971d38fcb081c02c4829f1e00b02bc422eb07ac74",
+      "upstream": "io/micrometer/core/aop/TimedAspect.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/aop/package-info.java",
+      "sha256": "c0247d25e1ec51edded8e83391608be34423222c7754edfb428dcb7bcec90524",
+      "upstream": "io/micrometer/core/aop/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/AbstractDistributionSummary.java",
+      "sha256": "e6f5360a4c20b3194595cd201e1ab3ae785a095b508513cbee035157b8c2c9fd",
+      "upstream": "io/micrometer/core/instrument/AbstractDistributionSummary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/AbstractMeter.java",
+      "sha256": "9a75d6255c0c51a2833338c357fd42296b5789b08f9058ee4927c73306097dd3",
+      "upstream": "io/micrometer/core/instrument/AbstractMeter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/AbstractTimer.java",
+      "sha256": "23864bbfa6db2696f7032fc8d46914411fb1b0ee225ac052b6fc41f8843d7ecd",
+      "upstream": "io/micrometer/core/instrument/AbstractTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/AbstractTimerBuilder.java",
+      "sha256": "0fbe6339467221557154b52992d8f07c36bd88f75432153c7e0cc6972cd8abe0",
+      "upstream": "io/micrometer/core/instrument/AbstractTimerBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/Clock.java",
+      "sha256": "883e57efde7fe91ce2be6f692c4083d82a7fc2fb9d6c4783e36afdb03d9ed91b",
+      "upstream": "io/micrometer/core/instrument/Clock.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/Counter.java",
+      "sha256": "267910268902b8457589d0c147ff115a66c8b86dea2f3c1bbcdc404a4b2cd95f",
+      "upstream": "io/micrometer/core/instrument/Counter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/DistributionSummary.java",
+      "sha256": "7b85edabe2e00bbe398e9c0ff1273831c95d6afa5aa6b595059b5d2c879b95ae",
+      "upstream": "io/micrometer/core/instrument/DistributionSummary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/FunctionCounter.java",
+      "sha256": "db0f1fff157629b12454cdb1cb28de45edd3948000dfc40a44c14cf1b796de2c",
+      "upstream": "io/micrometer/core/instrument/FunctionCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/FunctionTimer.java",
+      "sha256": "90f80564f37b36f681b2e9de7a27549d328106528a26cbf3bba83fdbb87e3758",
+      "upstream": "io/micrometer/core/instrument/FunctionTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/Gauge.java",
+      "sha256": "1ca07e3349b9e047e23a9ef8e74a06570d8daeef7ee6e63988e0e38a41e963bd",
+      "upstream": "io/micrometer/core/instrument/Gauge.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/ImmutableTag.java",
+      "sha256": "c22f5e35890252f8044da899017dddc55ba54831261ba847c5d0486d53298ad6",
+      "upstream": "io/micrometer/core/instrument/ImmutableTag.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/LongTaskTimer.java",
+      "sha256": "05fc3db18d18299dc707324dada50d2f3314a9a5cff3569270585f3a5e00f742",
+      "upstream": "io/micrometer/core/instrument/LongTaskTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/Measurement.java",
+      "sha256": "d11a3e4a8882e4afdc859bc887c19802094c0797748d3c98806159c51bd3ea14",
+      "upstream": "io/micrometer/core/instrument/Measurement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/Meter.java",
+      "sha256": "2c1c6faee51c6a19bd59495b4d09f43d2dfb3fb5a064f351833fda9348cc9282",
+      "upstream": "io/micrometer/core/instrument/Meter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/MeterRegistry.java",
+      "sha256": "05e1369b08097cb78f0bc5c49f91a69cb707a5f618588fc7d50217bc06bea9d9",
+      "upstream": "io/micrometer/core/instrument/MeterRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/Metrics.java",
+      "sha256": "b0ac3baa535da578abe3261706c1d652688e8492f02ec7251d736e34d348757a",
+      "upstream": "io/micrometer/core/instrument/Metrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/MockClock.java",
+      "sha256": "6c65208261d2b307bd36ec6e0207ccf5e128af6c5b514a04a8787a86ab21c8cd",
+      "upstream": "io/micrometer/core/instrument/MockClock.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/MultiGauge.java",
+      "sha256": "088a54141b0c534970f423225e953f3015de19c8b58a6f64d0f2acd76f0e7287",
+      "upstream": "io/micrometer/core/instrument/MultiGauge.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/Statistic.java",
+      "sha256": "2dff5e49e01e36cf2cd40dba75b0f281cb84f1b227920a708bed78709a4cbecb",
+      "upstream": "io/micrometer/core/instrument/Statistic.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/StrongReferenceGaugeFunction.java",
+      "sha256": "50d50e36b1ea1b69562cbbb387b3e8c0741669cb0e9a30428c61d5b584a80655",
+      "upstream": "io/micrometer/core/instrument/StrongReferenceGaugeFunction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/Tag.java",
+      "sha256": "48fca4c09aab0fa4d52296a8f6a5be72e4478fa65a24575c597b3a32339bf214",
+      "upstream": "io/micrometer/core/instrument/Tag.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/Tags.java",
+      "sha256": "168fbe3a1e4cc5a6e54cc4872db2d8240cde0d1f4627617d23e6e4e25d413093",
+      "upstream": "io/micrometer/core/instrument/Tags.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/TimeGauge.java",
+      "sha256": "9f291c9668cfc7fdc59437f4852eb14bcb1e1d0200e7543144b6d591a760c073",
+      "upstream": "io/micrometer/core/instrument/TimeGauge.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/Timer.java",
+      "sha256": "5b1a859d1738355adba9057411894ccb3b09092b4e79aab48eec4d32b3432d53",
+      "upstream": "io/micrometer/core/instrument/Timer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/BaseUnits.java",
+      "sha256": "88c9349083ee85f0de5c66d39d7e0db2101de86dcc226e57431e6213e6e777e5",
+      "upstream": "io/micrometer/core/instrument/binder/BaseUnits.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/MeterBinder.java",
+      "sha256": "6049fb8f558e2515d5af0355ce5871e7f23f017cf67b23d266cf6180bb42497e",
+      "upstream": "io/micrometer/core/instrument/binder/MeterBinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/cache/CacheMeterBinder.java",
+      "sha256": "eca3af6adf4a30aac332243c56c719ebb55de214be89a1002d21860d1c8d9baa",
+      "upstream": "io/micrometer/core/instrument/binder/cache/CacheMeterBinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/cache/CaffeineCacheMetrics.java",
+      "sha256": "ff8e5bc483c7cd1ee2d46c0e1069aa2d4cddbbfb38e486a5674aac8f8a8fd6fa",
+      "upstream": "io/micrometer/core/instrument/binder/cache/CaffeineCacheMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/cache/CaffeineStatsCounter.java",
+      "sha256": "2d8e51b22623cdd3c5521dc11a1f5007eaf3ab8c9b0575f37812b3760a55b45b",
+      "upstream": "io/micrometer/core/instrument/binder/cache/CaffeineStatsCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/cache/EhCache2Metrics.java",
+      "sha256": "1402c73048fd21519eef2239921bfd9f9b64ae97f58bb033ff68eebedbb4b2bb",
+      "upstream": "io/micrometer/core/instrument/binder/cache/EhCache2Metrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/cache/GuavaCacheMetrics.java",
+      "sha256": "cd69efd7f9d2bc774cb4058507025c780108e5ad9f94174d4c43486a32f46d23",
+      "upstream": "io/micrometer/core/instrument/binder/cache/GuavaCacheMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/cache/HazelcastCacheMetrics.java",
+      "sha256": "41ec77ff4b2f93394bf57bf0444bbc0e4a5bb2eef8bf0d723900328b42ab4e98",
+      "upstream": "io/micrometer/core/instrument/binder/cache/HazelcastCacheMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/cache/HazelcastIMapAdapter.java",
+      "sha256": "9d4b704a4c109d0f94b6f38a4e310bc8d8998b2761e80f01efac7f0f320f8db8",
+      "upstream": "io/micrometer/core/instrument/binder/cache/HazelcastIMapAdapter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/cache/JCacheMetrics.java",
+      "sha256": "5eda6cbcd6b4e3b1a2f83cfb57b15a7cff50542976c4fbaa15e02960da3b813e",
+      "upstream": "io/micrometer/core/instrument/binder/cache/JCacheMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/cache/package-info.java",
+      "sha256": "10eb035e95efb634c78d11e2899f7c9cf85a694e8ff8c4733f438428d09d2baf",
+      "upstream": "io/micrometer/core/instrument/binder/cache/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/commonspool2/CommonsObjectPool2Metrics.java",
+      "sha256": "50f0c7a7e9ea90066fd3eea0fde917d07a3d945c46e149c7fb3a78ca74997a19",
+      "upstream": "io/micrometer/core/instrument/binder/commonspool2/CommonsObjectPool2Metrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/commonspool2/package-info.java",
+      "sha256": "bafa5a164ae8174b6434cb3ae1f0d509a0faab597b3dbd99af1640f46ec6e369",
+      "upstream": "io/micrometer/core/instrument/binder/commonspool2/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/db/DatabaseTableMetrics.java",
+      "sha256": "e479f945ad427b678aa3eca4a51d35eb26bbaddb218d7dfe3831319f796519b0",
+      "upstream": "io/micrometer/core/instrument/binder/db/DatabaseTableMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/db/JooqExecuteListener.java",
+      "sha256": "997376faee429846b4df90a1741683f0c602812b75025cce8f64edcc4680c9d8",
+      "upstream": "io/micrometer/core/instrument/binder/db/JooqExecuteListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/db/MetricsDSLContext.java",
+      "sha256": "29fb655f0903f7067d5a335343f1306e2ccda7a6882aac1897e55bc3c19e69d7",
+      "upstream": "io/micrometer/core/instrument/binder/db/MetricsDSLContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/db/PostgreSQLDatabaseMetrics.java",
+      "sha256": "0aa5f44760b7d118a6db06fd1451d5d8948fd77a825c7901a990002aa7e0a66c",
+      "upstream": "io/micrometer/core/instrument/binder/db/PostgreSQLDatabaseMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/db/package-info.java",
+      "sha256": "d509464b35e8df02481e5b5c0d833271ab0c187b6dba8806b0e32defe9e14d83",
+      "upstream": "io/micrometer/core/instrument/binder/db/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/grpc/AbstractMetricCollectingInterceptor.java",
+      "sha256": "1f56fbad9677925edae1aa0460d44bfcc1b28423b777a3ee1f6f149af7ac6790",
+      "upstream": "io/micrometer/core/instrument/binder/grpc/AbstractMetricCollectingInterceptor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/grpc/MetricCollectingClientCall.java",
+      "sha256": "124e57bff0d58d70344091e4c4d0fbd008730996da8935155f5d9c1980398a7c",
+      "upstream": "io/micrometer/core/instrument/binder/grpc/MetricCollectingClientCall.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/grpc/MetricCollectingClientCallListener.java",
+      "sha256": "77ca284bdf425d9bac380e18a6611ef5d61f527f7e3d2367c738cd414a251f82",
+      "upstream": "io/micrometer/core/instrument/binder/grpc/MetricCollectingClientCallListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/grpc/MetricCollectingClientInterceptor.java",
+      "sha256": "3f5940944d85ed47682dc641fe3041b6a2ee99d45ad8fa2004cc05d4ef545b40",
+      "upstream": "io/micrometer/core/instrument/binder/grpc/MetricCollectingClientInterceptor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/grpc/MetricCollectingServerCall.java",
+      "sha256": "f1fc6ea1251c5523475410e6b40d6908d904499bf71607ecc5c84bf2bd5b1b80",
+      "upstream": "io/micrometer/core/instrument/binder/grpc/MetricCollectingServerCall.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/grpc/MetricCollectingServerCallListener.java",
+      "sha256": "3008425c219cb1799739ec0744a94c8fe81f5c85e1e9a0f25c6f9e70dc23b643",
+      "upstream": "io/micrometer/core/instrument/binder/grpc/MetricCollectingServerCallListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/grpc/MetricCollectingServerInterceptor.java",
+      "sha256": "473074a720946d3b636f137949c455da8837c5ba92425620a8da27973c5fcdc2",
+      "upstream": "io/micrometer/core/instrument/binder/grpc/MetricCollectingServerInterceptor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/grpc/package-info.java",
+      "sha256": "0ad35087892b08725b003a5668ac70d209618c146aca1f8dcbd16db73fe907e1",
+      "upstream": "io/micrometer/core/instrument/binder/grpc/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/http/DefaultHttpServletRequestTagsProvider.java",
+      "sha256": "f37b21ab71557f7460098b8caf1a1cef2827ed2955b9c51954c7ed6b8713866e",
+      "upstream": "io/micrometer/core/instrument/binder/http/DefaultHttpServletRequestTagsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/http/HttpRequestTags.java",
+      "sha256": "f65fe1dea2cb22efc588f2b4e5c3bb97ae01fa224095d216b4749780cbb18df9",
+      "upstream": "io/micrometer/core/instrument/binder/http/HttpRequestTags.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/http/HttpServletRequestTagsProvider.java",
+      "sha256": "afa37f9a2549586bc4bb3bdd2a91b9d32c9f311c602cf032c39c54fc3027f9d4",
+      "upstream": "io/micrometer/core/instrument/binder/http/HttpServletRequestTagsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/http/Outcome.java",
+      "sha256": "96025c3250784e3c06239f149ed16e2b1d8e89af91e3878ebe2fea1cb7772de8",
+      "upstream": "io/micrometer/core/instrument/binder/http/Outcome.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/http/package-info.java",
+      "sha256": "72ee9643dd6ac2cdd31ae3a55faa33fcee8ee1870750da0642dcf1e94517fe17",
+      "upstream": "io/micrometer/core/instrument/binder/http/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/httpcomponents/DefaultUriMapper.java",
+      "sha256": "2ac85077d8c6ac0f09787898e120b0f493167e53867756d54f7ace98020e06d7",
+      "upstream": "io/micrometer/core/instrument/binder/httpcomponents/DefaultUriMapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/httpcomponents/HttpContextUtils.java",
+      "sha256": "b20274001d6b7b68cb72986d02405107e54106948f1c049aee86006ddf4f6c3f",
+      "upstream": "io/micrometer/core/instrument/binder/httpcomponents/HttpContextUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/httpcomponents/MicrometerHttpClientInterceptor.java",
+      "sha256": "951d121137a9eb0c78fb0587959322c7c96e5599ad1ae4c13d8c085ba8aaeb1d",
+      "upstream": "io/micrometer/core/instrument/binder/httpcomponents/MicrometerHttpClientInterceptor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/httpcomponents/MicrometerHttpRequestExecutor.java",
+      "sha256": "36ed99994f5f8ffa553e04ba2e6091f1289835f6828e70eb605ec53a043a2358",
+      "upstream": "io/micrometer/core/instrument/binder/httpcomponents/MicrometerHttpRequestExecutor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/httpcomponents/PoolingHttpClientConnectionManagerMetricsBinder.java",
+      "sha256": "ade56c69d49dca385ffa28d704ec413771ea46d37836d4c67d5edf63ec4fffb2",
+      "upstream": "io/micrometer/core/instrument/binder/httpcomponents/PoolingHttpClientConnectionManagerMetricsBinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/httpcomponents/package-info.java",
+      "sha256": "afdd4f337f1d770e60c53a825ccfe5f1aabbae8ae7314dc94b0ab5e6d92be95a",
+      "upstream": "io/micrometer/core/instrument/binder/httpcomponents/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/hystrix/HystrixMetricsBinder.java",
+      "sha256": "84d8e4b6078fdf6542992100dea3cd17c621373b9049dad58a876410272d6ac0",
+      "upstream": "io/micrometer/core/instrument/binder/hystrix/HystrixMetricsBinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/hystrix/MicrometerMetricsPublisher.java",
+      "sha256": "d0fae04a096bbb81acc279786f0ca2494c74452c04077f0f139fbc7e8c81c00a",
+      "upstream": "io/micrometer/core/instrument/binder/hystrix/MicrometerMetricsPublisher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/hystrix/MicrometerMetricsPublisherCommand.java",
+      "sha256": "3a2d2d6f72f353b9e041e713262b5ad9f7bc70a4c25ee03a9edc1e98a0420fc5",
+      "upstream": "io/micrometer/core/instrument/binder/hystrix/MicrometerMetricsPublisherCommand.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/hystrix/MicrometerMetricsPublisherThreadPool.java",
+      "sha256": "b230cdc0ce2eeaf67d5e0b5eba0c98c3498b74f7050a3b1bef40449168ce84ef",
+      "upstream": "io/micrometer/core/instrument/binder/hystrix/MicrometerMetricsPublisherThreadPool.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/hystrix/package-info.java",
+      "sha256": "225204d50b6d278e21b3cae12ed6c414442495b553e839b85850333d3c0f0127",
+      "upstream": "io/micrometer/core/instrument/binder/hystrix/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jersey/server/AnnotationFinder.java",
+      "sha256": "b0bb3a6fda71411bdbc3082c0ddca83a5f788f62dc75fdecb413aade564d25d5",
+      "upstream": "io/micrometer/core/instrument/binder/jersey/server/AnnotationFinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jersey/server/DefaultJerseyTagsProvider.java",
+      "sha256": "6493fa3716faccc8880d17f413dc4422314d49220c48e7c6d6496712c11f22b3",
+      "upstream": "io/micrometer/core/instrument/binder/jersey/server/DefaultJerseyTagsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jersey/server/JerseyTags.java",
+      "sha256": "27096270b1fecd701ab2942a16fe1613b3201c834b8f096369529099351bef4b",
+      "upstream": "io/micrometer/core/instrument/binder/jersey/server/JerseyTags.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jersey/server/JerseyTagsProvider.java",
+      "sha256": "27e5f8f6cf5100e83926ce32ef72b57d07d85bc4354dc012d180a168780d44ee",
+      "upstream": "io/micrometer/core/instrument/binder/jersey/server/JerseyTagsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jersey/server/MetricsApplicationEventListener.java",
+      "sha256": "47e6abeee0ac6c986d6513df3f8ed05c17f7d9177004feff6d40275f076320fb",
+      "upstream": "io/micrometer/core/instrument/binder/jersey/server/MetricsApplicationEventListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jersey/server/MetricsRequestEventListener.java",
+      "sha256": "ca82b99346ec5494ee86f6443e45172851493eed2220a9189e1fb69d4b653bf6",
+      "upstream": "io/micrometer/core/instrument/binder/jersey/server/MetricsRequestEventListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jersey/server/TimedFinder.java",
+      "sha256": "041c8dfe41f554dbbfb6557dac8ee6c510b7b066c54b603dd6976f36aa42f347",
+      "upstream": "io/micrometer/core/instrument/binder/jersey/server/TimedFinder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jersey/server/package-info.java",
+      "sha256": "c5796bb83677cf2820f374c47a155a5f617518685b0369bb5e01885c824f8f8c",
+      "upstream": "io/micrometer/core/instrument/binder/jersey/server/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jetty/InstrumentedQueuedThreadPool.java",
+      "sha256": "5c8ad264814daec49b9892ac9ea74d63fdf41cdd30820c8fcd33da24883f76b0",
+      "upstream": "io/micrometer/core/instrument/binder/jetty/InstrumentedQueuedThreadPool.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jetty/JettyClientMetrics.java",
+      "sha256": "37d549cd9080ea3da2ea4353e4ecc5039db7f7b044dc0dfccade6c3f69cb1312",
+      "upstream": "io/micrometer/core/instrument/binder/jetty/JettyClientMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jetty/JettyClientTags.java",
+      "sha256": "45286f2bd4847212c2525aa1f17df17f9b6d9168dce059e2fe66cf6ea19f6f11",
+      "upstream": "io/micrometer/core/instrument/binder/jetty/JettyClientTags.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jetty/JettyClientTagsProvider.java",
+      "sha256": "30b2e31e805aaa5eebe08d53d35fda6f3ac16011b45c00627fbe8cf631d3cb69",
+      "upstream": "io/micrometer/core/instrument/binder/jetty/JettyClientTagsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jetty/JettyConnectionMetrics.java",
+      "sha256": "5e42c7d76172012bf9e7221c27df95180882695b2c2c1ebc4887f9808c0dd398",
+      "upstream": "io/micrometer/core/instrument/binder/jetty/JettyConnectionMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jetty/JettyServerThreadPoolMetrics.java",
+      "sha256": "da36a4dd43717416118699dbca7b03384671ee5a27e25a5dc3b5a2feae7e3e37",
+      "upstream": "io/micrometer/core/instrument/binder/jetty/JettyServerThreadPoolMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jetty/JettySslHandshakeMetrics.java",
+      "sha256": "e167c08c58e6c6a1da0b7fcce4ea472b5f996399a16210db9d048c0aac8cdf0a",
+      "upstream": "io/micrometer/core/instrument/binder/jetty/JettySslHandshakeMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jetty/JettyStatisticsMetrics.java",
+      "sha256": "624257489e43b39a451aed4c757e59f726e90bdf38d9c1b27383922491bcd156",
+      "upstream": "io/micrometer/core/instrument/binder/jetty/JettyStatisticsMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jetty/OnCompletionAsyncListener.java",
+      "sha256": "77acce11f677755653b5387ea22e022be342b774a00189f954ac2660749a8a2b",
+      "upstream": "io/micrometer/core/instrument/binder/jetty/OnCompletionAsyncListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jetty/TimedHandler.java",
+      "sha256": "9c2c4f32b3b39f849cbe29c5a74b34266845abf02e13325dab3dbd36aa654f1b",
+      "upstream": "io/micrometer/core/instrument/binder/jetty/TimedHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jetty/package-info.java",
+      "sha256": "e10450d378bff571cb0de8cfd884cf7b8a4f6d4c212518895c7d74f7b9a992ed",
+      "upstream": "io/micrometer/core/instrument/binder/jetty/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jpa/HibernateMetrics.java",
+      "sha256": "10b5edae06a265eaa7de39caf3584de76e2b0478a419bbfb75166552d055f634",
+      "upstream": "io/micrometer/core/instrument/binder/jpa/HibernateMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jpa/HibernateQueryMetrics.java",
+      "sha256": "7f2ef33f06ee9c8194baab4a811718901b37e2c9617dc97a06d358d0def2debb",
+      "upstream": "io/micrometer/core/instrument/binder/jpa/HibernateQueryMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jpa/package-info.java",
+      "sha256": "3f40aaf7f4d0e861b4d47bacd2c6e4286f70ccb93391af58353fc9281cf9f30d",
+      "upstream": "io/micrometer/core/instrument/binder/jpa/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jvm/ClassLoaderMetrics.java",
+      "sha256": "91178f96a29c1eb6933b1c2e8540b4536ab3e3708e7a16561010d76aa2300b4a",
+      "upstream": "io/micrometer/core/instrument/binder/jvm/ClassLoaderMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jvm/DiskSpaceMetrics.java",
+      "sha256": "3f7f82de38daae881bdea1a0fc38c0855ef08f3ce1a2a60cfbdfbb930a95138c",
+      "upstream": "io/micrometer/core/instrument/binder/jvm/DiskSpaceMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jvm/ExecutorServiceMetrics.java",
+      "sha256": "a6c7be5efe21b91d7fc351ece148303c94ccefb83148d0467b8413c5002999bf",
+      "upstream": "io/micrometer/core/instrument/binder/jvm/ExecutorServiceMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jvm/JvmCompilationMetrics.java",
+      "sha256": "21f5d96680a48fe01f341abd5bcbd83faa21116c1e47724d3375e05174053df4",
+      "upstream": "io/micrometer/core/instrument/binder/jvm/JvmCompilationMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jvm/JvmGcMetrics.java",
+      "sha256": "0324e45660e6c1397d3d7b20af7d6567409f4bc18ceacaa4166d143dd735ada4",
+      "upstream": "io/micrometer/core/instrument/binder/jvm/JvmGcMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jvm/JvmHeapPressureMetrics.java",
+      "sha256": "c7ae5163ff0f9600ba84cdeff42f7c2864341b6ae30fd48bf4d82a10eed07e43",
+      "upstream": "io/micrometer/core/instrument/binder/jvm/JvmHeapPressureMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jvm/JvmInfoMetrics.java",
+      "sha256": "60b0db674b0007b4ce0bd2a10f8a72937ce7b6887d8e2cb4a0868948a0891270",
+      "upstream": "io/micrometer/core/instrument/binder/jvm/JvmInfoMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jvm/JvmMemory.java",
+      "sha256": "fcb5cc2ac5785d665eaeba5cd5d7670d7e118f8f13aa54e45f7d619104fed9af",
+      "upstream": "io/micrometer/core/instrument/binder/jvm/JvmMemory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jvm/JvmMemoryMetrics.java",
+      "sha256": "f7a111373b9d8fe42cebd4a0fb1fef7038a3cbc01786fef150beb06d1d973ab4",
+      "upstream": "io/micrometer/core/instrument/binder/jvm/JvmMemoryMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jvm/JvmThreadMetrics.java",
+      "sha256": "c3e9d1d066a3eb6c82665735eda9a7354b0e50670ba58d37f9ad5b7589bc8d91",
+      "upstream": "io/micrometer/core/instrument/binder/jvm/JvmThreadMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/jvm/package-info.java",
+      "sha256": "5226f3a71b35d6253e633a9a6257ab42cef995b3e0b71608f74dd4ab980228a9",
+      "upstream": "io/micrometer/core/instrument/binder/jvm/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/kafka/KafkaClientMetrics.java",
+      "sha256": "025cc1b7bd6b8c0b279c9790bcd5b485d13398087193cdbdec2ff0f1408709f4",
+      "upstream": "io/micrometer/core/instrument/binder/kafka/KafkaClientMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/kafka/KafkaConsumerMetrics.java",
+      "sha256": "3677a2f4e88bbc7a403ee98324d3317272af875c6e21cc39fe1698b77f636f66",
+      "upstream": "io/micrometer/core/instrument/binder/kafka/KafkaConsumerMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/kafka/KafkaMetrics.java",
+      "sha256": "2e3772043829ecd195e77a6abd38930360baed52c8c0ded77da8b598dce651ad",
+      "upstream": "io/micrometer/core/instrument/binder/kafka/KafkaMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/kafka/KafkaStreamsMetrics.java",
+      "sha256": "cc254593c25b373fd4608b296e498f44dbc8940287a5bfcc33c048b7404de5e8",
+      "upstream": "io/micrometer/core/instrument/binder/kafka/KafkaStreamsMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/kafka/package-info.java",
+      "sha256": "6de5456736cf7d2559a9a14216be3cc516a30fe10d5869a3d88e6527722d9619",
+      "upstream": "io/micrometer/core/instrument/binder/kafka/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/logging/Log4j2Metrics.java",
+      "sha256": "e1e4afd107591b06679b1196d38331e9c64dd49c62c9f19a6c9db54facdc4724",
+      "upstream": "io/micrometer/core/instrument/binder/logging/Log4j2Metrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/logging/LogbackMetrics.java",
+      "sha256": "beb31fd411cd021f81d23fc5ae862b8df6d926828b0174c25c1bab05d3bd553d",
+      "upstream": "io/micrometer/core/instrument/binder/logging/LogbackMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/logging/package-info.java",
+      "sha256": "6442cef798a8e3041f90a41e383e9df105cf273d778e940100a478702d7cd30d",
+      "upstream": "io/micrometer/core/instrument/binder/logging/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/mongodb/DefaultMongoCommandTagsProvider.java",
+      "sha256": "40b47dfd6827df5d0dafcff5c79a9784591c3649c7a76088dba3b436fb6fb08a",
+      "upstream": "io/micrometer/core/instrument/binder/mongodb/DefaultMongoCommandTagsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/mongodb/DefaultMongoConnectionPoolTagsProvider.java",
+      "sha256": "105a830a264e46134e0152e1fd2f8d17ef0649cf88eb93b5596f6e69efdc00f7",
+      "upstream": "io/micrometer/core/instrument/binder/mongodb/DefaultMongoConnectionPoolTagsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/mongodb/MongoCommandTagsProvider.java",
+      "sha256": "6a1365a0ca4de02e8e67a20d8d9eee2177def8c997594e9502d16a1f70806553",
+      "upstream": "io/micrometer/core/instrument/binder/mongodb/MongoCommandTagsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/mongodb/MongoConnectionPoolTagsProvider.java",
+      "sha256": "0b36a5cc61beb153333be6bcfb5cd939d7f266f1078af02341901185e3e90df9",
+      "upstream": "io/micrometer/core/instrument/binder/mongodb/MongoConnectionPoolTagsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/mongodb/MongoMetricsCommandListener.java",
+      "sha256": "ed1d457d5a57dc2cd082ebc7fb6eb094485a25ddb62b11e7fcbfa001bf075658",
+      "upstream": "io/micrometer/core/instrument/binder/mongodb/MongoMetricsCommandListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/mongodb/MongoMetricsConnectionPoolListener.java",
+      "sha256": "5d491fdec76211dece4c0b67cd51b8b144d3528ca8744f2bbca3a82b3f40caff",
+      "upstream": "io/micrometer/core/instrument/binder/mongodb/MongoMetricsConnectionPoolListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/mongodb/package-info.java",
+      "sha256": "0ebae1ff64d6a53f8c8e5d8c5f696d5fb3e08ee357259b5c5ae125a31ae98880",
+      "upstream": "io/micrometer/core/instrument/binder/mongodb/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/okhttp3/OkHttpConnectionPoolMetrics.java",
+      "sha256": "81152405338a9f04588e6b949ce1d08eeec0d3de994456d6737251449d369c66",
+      "upstream": "io/micrometer/core/instrument/binder/okhttp3/OkHttpConnectionPoolMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/okhttp3/OkHttpMetricsEventListener.java",
+      "sha256": "320303f90d6c18c2a370b11f6e3f808e8660bde6542f7af1d46ad475872fd2fa",
+      "upstream": "io/micrometer/core/instrument/binder/okhttp3/OkHttpMetricsEventListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/okhttp3/package-info.java",
+      "sha256": "9fd8f379d7038fd73f009d9ef72aa9274a4eed8fa485d26be68d33b38603093d",
+      "upstream": "io/micrometer/core/instrument/binder/okhttp3/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/package-info.java",
+      "sha256": "06650950958a704d7ac22fbe600eb4679d16ebceb28116c7c5338e5ccd1b0468",
+      "upstream": "io/micrometer/core/instrument/binder/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/system/DiskSpaceMetrics.java",
+      "sha256": "9321d2bc789bc348db553bb6d202ecf4b5dc2d20e68937ff931f97d36e4fdbe5",
+      "upstream": "io/micrometer/core/instrument/binder/system/DiskSpaceMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/system/FileDescriptorMetrics.java",
+      "sha256": "7554515ff037f8d2b67704616637dc4906b253a5a390874bfbca721a7860d2d8",
+      "upstream": "io/micrometer/core/instrument/binder/system/FileDescriptorMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/system/ProcessorMetrics.java",
+      "sha256": "db95fda8cee7c54ae2f7eee9c443aa4a2c68af1029f2eaee217f95f20d4a70b9",
+      "upstream": "io/micrometer/core/instrument/binder/system/ProcessorMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/system/UptimeMetrics.java",
+      "sha256": "5ee87c91de55efb11c452e73b5f082f85c3dfacbe8a6b577a15032dec136fea1",
+      "upstream": "io/micrometer/core/instrument/binder/system/UptimeMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/system/package-info.java",
+      "sha256": "6ca57d1211b4d93aa4cd0d0bb415d0b602906b67adb7e226a93b6106e85ccda8",
+      "upstream": "io/micrometer/core/instrument/binder/system/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/tomcat/TomcatMetrics.java",
+      "sha256": "eb32e05687baa2ca67e5c5f79bc5380998005cdaf9a1c7f97b929e49134d04cb",
+      "upstream": "io/micrometer/core/instrument/binder/tomcat/TomcatMetrics.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/tomcat/package-info.java",
+      "sha256": "892ca63348dea9d8aeacebd39c07296699510930a1a5e4bd2d68d56a19916a0c",
+      "upstream": "io/micrometer/core/instrument/binder/tomcat/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/AbstractCompositeMeter.java",
+      "sha256": "6fe3ce807cbf946be62d43a88859a4e808447950f528167266d81aa1cef85013",
+      "upstream": "io/micrometer/core/instrument/composite/AbstractCompositeMeter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/CompositeCounter.java",
+      "sha256": "b1470032506f5fb1f2db3af2742504f102a00821cc92777a999743428257de98",
+      "upstream": "io/micrometer/core/instrument/composite/CompositeCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/CompositeCustomMeter.java",
+      "sha256": "c4f9b56f5146a4de934526458897de64483afda54d859b28652f7934f2c86604",
+      "upstream": "io/micrometer/core/instrument/composite/CompositeCustomMeter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/CompositeDistributionSummary.java",
+      "sha256": "d28982fe75da0f1e312f8f974fbd9a6e608543f65868c52d1c89a6c2943b2a45",
+      "upstream": "io/micrometer/core/instrument/composite/CompositeDistributionSummary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/CompositeFunctionCounter.java",
+      "sha256": "b639930f39b14d3a4bb521159a17182c04a717a7fde9836f157a90ce4c11976e",
+      "upstream": "io/micrometer/core/instrument/composite/CompositeFunctionCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/CompositeFunctionTimer.java",
+      "sha256": "5eac0ddda55224c95b949ceaff10da2df45409a5930218a1fd99ad0eff963eba",
+      "upstream": "io/micrometer/core/instrument/composite/CompositeFunctionTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/CompositeGauge.java",
+      "sha256": "a357a004c72d53018e39007e4895cc6919f9229d7215bffcf586e820297439dc",
+      "upstream": "io/micrometer/core/instrument/composite/CompositeGauge.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/CompositeLongTaskTimer.java",
+      "sha256": "6832e4bc51835551f6cca2717bf39fb61f42b1ff6f0f2d5f5128799d37fcbaf9",
+      "upstream": "io/micrometer/core/instrument/composite/CompositeLongTaskTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/CompositeMeter.java",
+      "sha256": "645704eadfbb808fbc584d7f3d21e012c61e3c37f82f3993b139f6f431a90e03",
+      "upstream": "io/micrometer/core/instrument/composite/CompositeMeter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/CompositeMeterRegistry.java",
+      "sha256": "b7d3f03529f9287dfaeb50074ba165086c245397f34890b628be485f59aeddd5",
+      "upstream": "io/micrometer/core/instrument/composite/CompositeMeterRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/CompositeTimeGauge.java",
+      "sha256": "f4255393bc5a05912446873426c6974a8a9be43fdf6e19314e0cd05826a6e502",
+      "upstream": "io/micrometer/core/instrument/composite/CompositeTimeGauge.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/CompositeTimer.java",
+      "sha256": "e0a8373f82749866fae60cb8c56c9cf249fdef5e25d0c57731f2b8449bc9fc84",
+      "upstream": "io/micrometer/core/instrument/composite/CompositeTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/composite/package-info.java",
+      "sha256": "cdde1c4648f598fd45c409a74af94b4156d0210335737ab987ebbfded8af016c",
+      "upstream": "io/micrometer/core/instrument/composite/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/InvalidConfigurationException.java",
+      "sha256": "aa08bca4205377ba07d16ec44eaa738a94a693402709d95f6297e2bc0bcd38d8",
+      "upstream": "io/micrometer/core/instrument/config/InvalidConfigurationException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/MeterFilter.java",
+      "sha256": "c1dee8fd1d29c88a015af0f1bfb0824227d49503f11c402edcb3c7a6db292bf7",
+      "upstream": "io/micrometer/core/instrument/config/MeterFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/MeterFilterReply.java",
+      "sha256": "f0b41eec173bf6437911b377e7f7b2b1431fedd328e562ad07184d857ede1b5f",
+      "upstream": "io/micrometer/core/instrument/config/MeterFilterReply.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/MeterRegistryConfig.java",
+      "sha256": "aeefb8096374834d66b3a8bb2ca051a99de20bdbb9c379252f05691d35701795",
+      "upstream": "io/micrometer/core/instrument/config/MeterRegistryConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/MeterRegistryConfigValidator.java",
+      "sha256": "3e0c00830f643995a6f0b4d8ab265deed0e0a5a3bdce664f5feddb3c253fdda5",
+      "upstream": "io/micrometer/core/instrument/config/MeterRegistryConfigValidator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/MissingRequiredConfigurationException.java",
+      "sha256": "8da5d1ff1c24e17697703a123e6c9d352c60ba53bbd98ee4aeee2d67a9af4641",
+      "upstream": "io/micrometer/core/instrument/config/MissingRequiredConfigurationException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/NamingConvention.java",
+      "sha256": "c28ca43589fd60b42ebbd14a7ca117f8ae0ec483095ea264bee9f2346c7af7ec",
+      "upstream": "io/micrometer/core/instrument/config/NamingConvention.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/package-info.java",
+      "sha256": "d4e08e2e0d211ebd30063cd22c4b9eb05f68204aba66d780c319dee213063b0c",
+      "upstream": "io/micrometer/core/instrument/config/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/validate/DurationValidator.java",
+      "sha256": "c9f829e2d8a55c07902a41835b519214ffe1b3d50fac288e2ae000b9d083cf01",
+      "upstream": "io/micrometer/core/instrument/config/validate/DurationValidator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/validate/InvalidReason.java",
+      "sha256": "ceeb742bc8e73d58070e512a2f283b333917da500ed5bd940211fc3a5c90f005",
+      "upstream": "io/micrometer/core/instrument/config/validate/InvalidReason.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/validate/PropertyValidator.java",
+      "sha256": "13c783512bbb967774d2b72e2da3fdbbbce3c875c6662cf2d50259d81a3c5619",
+      "upstream": "io/micrometer/core/instrument/config/validate/PropertyValidator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/validate/Validated.java",
+      "sha256": "f76f677dde5421fd72ba6bd5c4e3d10a10a8889cebda0fca3b570dcfb10e8b0f",
+      "upstream": "io/micrometer/core/instrument/config/validate/Validated.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/validate/ValidationException.java",
+      "sha256": "2d4fd0a9d37f8c9183ed4cf98ee38d179dc63c0ba7937227f896adc45824b0e5",
+      "upstream": "io/micrometer/core/instrument/config/validate/ValidationException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/config/validate/package-info.java",
+      "sha256": "94fcc50792dcd4233ffb9603687ab4b640dccad0ea2b2634859704b418b7f0d1",
+      "upstream": "io/micrometer/core/instrument/config/validate/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/cumulative/CumulativeCounter.java",
+      "sha256": "7645e3b4a361b2e45c00d0d8e945cd42514754c1fb472c53be416adc04a31229",
+      "upstream": "io/micrometer/core/instrument/cumulative/CumulativeCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/cumulative/CumulativeDistributionSummary.java",
+      "sha256": "9612d5810d11adfbc825836d4565bcfebf7d30d1d4d14928cc0e4195ac5b8b16",
+      "upstream": "io/micrometer/core/instrument/cumulative/CumulativeDistributionSummary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/cumulative/CumulativeFunctionCounter.java",
+      "sha256": "bca6af34e93c66a0cc4dc36dff819d9220c69a04083fdbf2dfef47df9ef722c3",
+      "upstream": "io/micrometer/core/instrument/cumulative/CumulativeFunctionCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/cumulative/CumulativeFunctionTimer.java",
+      "sha256": "e7082d0a45c49b53b7f479f07384297ea771754c0d39366bc8e5e47653598368",
+      "upstream": "io/micrometer/core/instrument/cumulative/CumulativeFunctionTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/cumulative/CumulativeTimer.java",
+      "sha256": "75611223a30953a65487efe606c40634a39d555727461fb6d08d96e22090bc5f",
+      "upstream": "io/micrometer/core/instrument/cumulative/CumulativeTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/cumulative/package-info.java",
+      "sha256": "a5c0c56d2222bdc2d449c7fd4444b2a6fab91262d73300f02c2e74c0fa6735c9",
+      "upstream": "io/micrometer/core/instrument/cumulative/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/AbstractTimeWindowHistogram.java",
+      "sha256": "657c5c365d3366f835664c7a2456a575f8d61d9607cbf961202a787eb80ef819",
+      "upstream": "io/micrometer/core/instrument/distribution/AbstractTimeWindowHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/CountAtBucket.java",
+      "sha256": "8d64f3c537492f99700c8845a4296daa3796b33fb926eb8b48c244f20cf7246d",
+      "upstream": "io/micrometer/core/instrument/distribution/CountAtBucket.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/DistributionStatisticConfig.java",
+      "sha256": "3b1104fb629e188dfe0bbc74eb604f3d823bd481e9f70ebdfb4b0a9257592786",
+      "upstream": "io/micrometer/core/instrument/distribution/DistributionStatisticConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/FixedBoundaryVictoriaMetricsHistogram.java",
+      "sha256": "e32da368c4a1718546308ca416e9b18f4f74c32fd0aec48b6a95fccb81273c87",
+      "upstream": "io/micrometer/core/instrument/distribution/FixedBoundaryVictoriaMetricsHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/Histogram.java",
+      "sha256": "3d740e8c96c540c91a0ddd0080bb887cb7037d3ffd304bbf0b6dffd4c547c92a",
+      "upstream": "io/micrometer/core/instrument/distribution/Histogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/HistogramGauges.java",
+      "sha256": "4d436a2eefd0181488c86a58c55ce5657e96e5a13d35409165d533ab1ecff340",
+      "upstream": "io/micrometer/core/instrument/distribution/HistogramGauges.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/HistogramSnapshot.java",
+      "sha256": "16fe6ea972cd4953dd960129f577b9694bc77b5413a0ff020e8b67c30935cbe7",
+      "upstream": "io/micrometer/core/instrument/distribution/HistogramSnapshot.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/HistogramSupport.java",
+      "sha256": "cccf4131d8223ecafd03fb56c5c9ab4cd567f602bdd78e5c63cb8afff79f0d06",
+      "upstream": "io/micrometer/core/instrument/distribution/HistogramSupport.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/NoopHistogram.java",
+      "sha256": "64c7fd6bd2db66edd44c534f981ea7587ce85cebe19b6f3bc22f4f51f9eafaaa",
+      "upstream": "io/micrometer/core/instrument/distribution/NoopHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/PercentileHistogramBuckets.java",
+      "sha256": "85d6c29d75a87155a8c20985c4bc1edc3a7fca6761d450c5b1ec6f2aeaf3c469",
+      "upstream": "io/micrometer/core/instrument/distribution/PercentileHistogramBuckets.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/TimeWindowFixedBoundaryHistogram.java",
+      "sha256": "bb34993f2fd4a140382adf55b75ef4c458fefbe42907c8c40ab9c8d59236a789",
+      "upstream": "io/micrometer/core/instrument/distribution/TimeWindowFixedBoundaryHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/TimeWindowMax.java",
+      "sha256": "9a86812ea7719d5aebed76260921ca5b67003b05c1f219b9015abc0319de3df0",
+      "upstream": "io/micrometer/core/instrument/distribution/TimeWindowMax.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/TimeWindowPercentileHistogram.java",
+      "sha256": "c20c7188cc97283382c365d00bb9edfa1dfeb828844c584eabed98f67bcd4652",
+      "upstream": "io/micrometer/core/instrument/distribution/TimeWindowPercentileHistogram.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/TimeWindowSum.java",
+      "sha256": "abf3026a5922bb65f758eae287f3b5ed78ce6131c17251f69d52b2458d142cb5",
+      "upstream": "io/micrometer/core/instrument/distribution/TimeWindowSum.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/ValueAtPercentile.java",
+      "sha256": "a4483591d077c97d2c61796858b4c200550ae7beb8943416d78929cbe6bbaf81",
+      "upstream": "io/micrometer/core/instrument/distribution/ValueAtPercentile.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/package-info.java",
+      "sha256": "3a9449960e14fc955c98d1fd946f24cbc5161006d3047cfd9ac1123bbd3c3a71",
+      "upstream": "io/micrometer/core/instrument/distribution/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/pause/ClockDriftPauseDetector.java",
+      "sha256": "1061d03f123a6e4da2d9cf5094d5527844a85344675a7bf96e13338a0551406d",
+      "upstream": "io/micrometer/core/instrument/distribution/pause/ClockDriftPauseDetector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/pause/NoPauseDetector.java",
+      "sha256": "c670a7d751a30d1bd16cd27696dcf0e1d5e6d9c45d29e24399914e7c7b447b60",
+      "upstream": "io/micrometer/core/instrument/distribution/pause/NoPauseDetector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/pause/PauseDetector.java",
+      "sha256": "f3ca1c6d83d47650552eddc5539523ea2b5684a737232beb350483d0259e3938",
+      "upstream": "io/micrometer/core/instrument/distribution/pause/PauseDetector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/distribution/pause/package-info.java",
+      "sha256": "2c2efceb945868d78fc055c1d3e79ab0cd2e4c29f1dd58e2aca756aef3db6f14",
+      "upstream": "io/micrometer/core/instrument/distribution/pause/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/dropwizard/DropwizardClock.java",
+      "sha256": "75f091839b478ec83f5d998c92c4c662d58e910a6626d07b3101deee35a3d784",
+      "upstream": "io/micrometer/core/instrument/dropwizard/DropwizardClock.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/dropwizard/DropwizardConfig.java",
+      "sha256": "1b9027b8429289e6e991d032b378f92c5b2ee02cd5a6825ac3af04f763d99e37",
+      "upstream": "io/micrometer/core/instrument/dropwizard/DropwizardConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/dropwizard/DropwizardCounter.java",
+      "sha256": "8c76782251a256a7053119341fb698caf20ec45d9bc8047773278c1c6d7a0f8d",
+      "upstream": "io/micrometer/core/instrument/dropwizard/DropwizardCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/dropwizard/DropwizardDistributionSummary.java",
+      "sha256": "bb03af71917208d90263fdcfe1ec985dc965edc0b7c1b15ce0529c1121ad1bae",
+      "upstream": "io/micrometer/core/instrument/dropwizard/DropwizardDistributionSummary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/dropwizard/DropwizardFunctionCounter.java",
+      "sha256": "314c6cc1947c225dbe935dad57d80a5ccf75c347abe28cc2a8fc74eef0e9cfb8",
+      "upstream": "io/micrometer/core/instrument/dropwizard/DropwizardFunctionCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/dropwizard/DropwizardFunctionTimer.java",
+      "sha256": "aecf853902dc51fbd1ff9ff2183c62059da570eb67f7c0f89da0d5e9b5c346fe",
+      "upstream": "io/micrometer/core/instrument/dropwizard/DropwizardFunctionTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/dropwizard/DropwizardGauge.java",
+      "sha256": "d1448eb12b4601bbeca54b64cbe286b851e2dae6a963091884504c46663604e5",
+      "upstream": "io/micrometer/core/instrument/dropwizard/DropwizardGauge.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/dropwizard/DropwizardMeterRegistry.java",
+      "sha256": "c65269a0de241f69db36eca82b5930112926f398575c746eaba43fafb1c68992",
+      "upstream": "io/micrometer/core/instrument/dropwizard/DropwizardMeterRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/dropwizard/DropwizardRate.java",
+      "sha256": "e891a350e85bdde2c29b4ac394c7e8b8dfab79fb64aeefa4bbd5c681e391538f",
+      "upstream": "io/micrometer/core/instrument/dropwizard/DropwizardRate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/dropwizard/DropwizardTimer.java",
+      "sha256": "60ad9071dc069a873ff97010a2c69b1317c172ca7dba390109a92af9cce1ac3c",
+      "upstream": "io/micrometer/core/instrument/dropwizard/DropwizardTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/dropwizard/package-info.java",
+      "sha256": "9703cbec03b8b1f30155ac11cf76f43b833e9673a00cabfa0d113f1fdcf758dc",
+      "upstream": "io/micrometer/core/instrument/dropwizard/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/CumulativeHistogramLongTaskTimer.java",
+      "sha256": "44ff12478c77adaa85d3489a7be37d66135b3dea279b2806e5c930226ad175f9",
+      "upstream": "io/micrometer/core/instrument/internal/CumulativeHistogramLongTaskTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/DefaultGauge.java",
+      "sha256": "b802a00b6c0646fa12f1a5e5e94ecb954e4fc58479d05fb2f378bfbd8bcb5ccb",
+      "upstream": "io/micrometer/core/instrument/internal/DefaultGauge.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/DefaultLongTaskTimer.java",
+      "sha256": "3fc1f2040fba4ac5639da74cc194cf39ea846e02e65421ad2adbda0ab7584ca7",
+      "upstream": "io/micrometer/core/instrument/internal/DefaultLongTaskTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/DefaultMeter.java",
+      "sha256": "4d60caf8efe79065380f296d01eb43e6d44c3309afdf63bc7113703482da2127",
+      "upstream": "io/micrometer/core/instrument/internal/DefaultMeter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/Mergeable.java",
+      "sha256": "3b2c43b3a075686025be798eb10b3600e39d3350bddb87bf78293fd996118a22",
+      "upstream": "io/micrometer/core/instrument/internal/Mergeable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/OnlyOnceLoggingDenyMeterFilter.java",
+      "sha256": "ba806dbdd5c6aa357bfe4518157bf6641d26e778bf04049c3a065286ef74c3b5",
+      "upstream": "io/micrometer/core/instrument/internal/OnlyOnceLoggingDenyMeterFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/TimedCallable.java",
+      "sha256": "a7fb077ce16a5c7879c59e665ce6347a5aafed946ad731128bcf0f90e5e60466",
+      "upstream": "io/micrometer/core/instrument/internal/TimedCallable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/TimedExecutor.java",
+      "sha256": "99ef88bf3ba7ccdd98eb8a7d2ec3084929520dff99f0cb8563b1ff04af26cb72",
+      "upstream": "io/micrometer/core/instrument/internal/TimedExecutor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/TimedExecutorService.java",
+      "sha256": "af8cb25c9b7244ad20d38af255245a3a56990b52fd348a63c6b2bfe8c66e3388",
+      "upstream": "io/micrometer/core/instrument/internal/TimedExecutorService.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/TimedRunnable.java",
+      "sha256": "678ca3d2c9e0fae333a99af4e2659eef219309fb18a001317bbc43d6901575c4",
+      "upstream": "io/micrometer/core/instrument/internal/TimedRunnable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/TimedScheduledExecutorService.java",
+      "sha256": "914fed241e1303eba944d7dfb7314b765f6f4687043d852d4a4de488ff5a80a9",
+      "upstream": "io/micrometer/core/instrument/internal/TimedScheduledExecutorService.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/internal/package-info.java",
+      "sha256": "6d3957870ea17f4381419d7cec7ad431e4509b4702ea009f80fc3c77c96b644f",
+      "upstream": "io/micrometer/core/instrument/internal/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/logging/LoggingMeterRegistry.java",
+      "sha256": "a9838e1d8285b7c8a69e211056b3f58cd8bdfc9c5de2b1d1f1b9d5068eb19c7e",
+      "upstream": "io/micrometer/core/instrument/logging/LoggingMeterRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/logging/LoggingRegistryConfig.java",
+      "sha256": "6952d261d940d8ce21471e7ab3991321442066e9854f1d3381eac2f9b17dd7ee",
+      "upstream": "io/micrometer/core/instrument/logging/LoggingRegistryConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/logging/package-info.java",
+      "sha256": "887c00c9fc5ee609ac6dfcc4fb58b39b26e79966143b061f961134b9899f5ea3",
+      "upstream": "io/micrometer/core/instrument/logging/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/noop/NoopCounter.java",
+      "sha256": "e9eb52691cc4ec2512776888c5b99832b78686d38facb11a32e64272a4a79198",
+      "upstream": "io/micrometer/core/instrument/noop/NoopCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/noop/NoopDistributionSummary.java",
+      "sha256": "7d4b18c2ce59a7c53cccd2b670190d76319efaf72911f0c469a1ebbed3d15cd7",
+      "upstream": "io/micrometer/core/instrument/noop/NoopDistributionSummary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/noop/NoopFunctionCounter.java",
+      "sha256": "0fc13315a41cc6de116b7d870c3b38edd3ed8331041f3ef229c8e4c0aeaf4ef3",
+      "upstream": "io/micrometer/core/instrument/noop/NoopFunctionCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/noop/NoopFunctionTimer.java",
+      "sha256": "360c2a0f148f3de9234066a199a6b0f20ea96d91d958297f7e5149e805aa317e",
+      "upstream": "io/micrometer/core/instrument/noop/NoopFunctionTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/noop/NoopGauge.java",
+      "sha256": "b9100cb3963679ee98e81a1c7f639b047ade833b98611a2b2002b4a56e8e6c22",
+      "upstream": "io/micrometer/core/instrument/noop/NoopGauge.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/noop/NoopLongTaskTimer.java",
+      "sha256": "6242934838b37c15e620c7a42254a500aa1e414c83bf3f68edb3fbc1c2e71404",
+      "upstream": "io/micrometer/core/instrument/noop/NoopLongTaskTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/noop/NoopMeter.java",
+      "sha256": "89d9b8cd2a81e038e043d8938a42f5ac7a9324c6d00098a46ff47ec88646d721",
+      "upstream": "io/micrometer/core/instrument/noop/NoopMeter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/noop/NoopTimeGauge.java",
+      "sha256": "a876119177fe20fe5e7de1481be50cf58d5befda40fbb672347ac915b297212b",
+      "upstream": "io/micrometer/core/instrument/noop/NoopTimeGauge.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/noop/NoopTimer.java",
+      "sha256": "e822fdc5910adb52ebf394660f1868d86061f9d3aa4c17637a1379bfcbea5d34",
+      "upstream": "io/micrometer/core/instrument/noop/NoopTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/noop/package-info.java",
+      "sha256": "ef11759e7fc0be4359d363720ea43282bb292a24d9a0c2ab36a1ee04915bc8b5",
+      "upstream": "io/micrometer/core/instrument/noop/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/package-info.java",
+      "sha256": "fcfd51c00e7362fd7ec2fc43984e11da3b290aedfffa0b48c9f54e6ca70e9c96",
+      "upstream": "io/micrometer/core/instrument/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/push/PushMeterRegistry.java",
+      "sha256": "8cffab1a539a3d79ccaa3baff47b637f64927ad575cb7e369d78f45916eb197c",
+      "upstream": "io/micrometer/core/instrument/push/PushMeterRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/push/PushRegistryConfig.java",
+      "sha256": "13f81166b53378edbbce5ad0b6a33685a7473e6ad85aed0792d858125818d350",
+      "upstream": "io/micrometer/core/instrument/push/PushRegistryConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/push/package-info.java",
+      "sha256": "49f2427b74be09f001d1fba881cb3654f40e7f0fe504806151d893610fd6e285",
+      "upstream": "io/micrometer/core/instrument/push/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/search/MeterNotFoundException.java",
+      "sha256": "679020dee01bd13bb96765ac399eeaa4daf6c499d1987bd8bbbf6917defe33e2",
+      "upstream": "io/micrometer/core/instrument/search/MeterNotFoundException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/search/RequiredSearch.java",
+      "sha256": "37ab13261f670933bdd9736fe6b59fd0f7ef1a1acb2a434d7f0e0566e5faffad",
+      "upstream": "io/micrometer/core/instrument/search/RequiredSearch.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/search/Search.java",
+      "sha256": "be6e6374c573f4d3840e9963766c56a112abf2fd21ad007d611612d275d507cf",
+      "upstream": "io/micrometer/core/instrument/search/Search.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/search/package-info.java",
+      "sha256": "b18fd62ccf1cc9931a7e0c70595b180ff43168679ea6b0d45acdec4507a3cbe6",
+      "upstream": "io/micrometer/core/instrument/search/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/simple/CountingMode.java",
+      "sha256": "89f36a996ffa5e532f5d7c4eb857f91df27d6d4f7a11afb9e408597aadfa8efa",
+      "upstream": "io/micrometer/core/instrument/simple/CountingMode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/simple/SimpleConfig.java",
+      "sha256": "12ee9bddd7f7de504c730ec5dfe95948d7bc0db4b6838c205fdc8ca38236fdc4",
+      "upstream": "io/micrometer/core/instrument/simple/SimpleConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/simple/SimpleMeterRegistry.java",
+      "sha256": "1a68edae9424e060bad3916becc9e635d0e87fc1e81627206f2d44dfa1e1b450",
+      "upstream": "io/micrometer/core/instrument/simple/SimpleMeterRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/simple/package-info.java",
+      "sha256": "dfa2ce108ba5f060970b0129e94efb978b4eb91257cd0eccca1efd520baf268c",
+      "upstream": "io/micrometer/core/instrument/simple/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepCounter.java",
+      "sha256": "4958dc4614a740cb50bf0c6ea962c03bb4e3895c0fc7810b82982de434de3f3f",
+      "upstream": "io/micrometer/core/instrument/step/StepCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepDistributionSummary.java",
+      "sha256": "ff7b53aa39cd2cfb3f26d6fe27200ace4be4a13b2d8e4cd8822b400a711759b3",
+      "upstream": "io/micrometer/core/instrument/step/StepDistributionSummary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepDouble.java",
+      "sha256": "e8f86c296681e278b3464b231778d0796eb99e7b365aec128c01a4f39f799b9b",
+      "upstream": "io/micrometer/core/instrument/step/StepDouble.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepFunctionCounter.java",
+      "sha256": "6b5a88e88e5f7d96d049528ec7ebb731dd1bacad2376f6f70495fff0bf045ff6",
+      "upstream": "io/micrometer/core/instrument/step/StepFunctionCounter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepFunctionTimer.java",
+      "sha256": "67fe38f80e8589b4b6a8b5b5b02f576000ba55f2d40601f15bbb2f11f4043ebe",
+      "upstream": "io/micrometer/core/instrument/step/StepFunctionTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepLong.java",
+      "sha256": "071f6c32e969ae28f4a7fd033b6e4d3cfbdec5c235dcbed93ef1f67299ad5451",
+      "upstream": "io/micrometer/core/instrument/step/StepLong.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepMeasurement.java",
+      "sha256": "dc5c305772ee846cadd45507a4eb31a3ff7683d43b7d5d9d929d1833f967ee14",
+      "upstream": "io/micrometer/core/instrument/step/StepMeasurement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepMeter.java",
+      "sha256": "251f6a2098d561c9164064461c2c6695796f5cb5eab82f414346b4c513248db2",
+      "upstream": "io/micrometer/core/instrument/step/StepMeter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepMeterRegistry.java",
+      "sha256": "84900454f3cdf6fbb58c8e1fe460ea3288a2e118566810c782cce33e9a9993f0",
+      "upstream": "io/micrometer/core/instrument/step/StepMeterRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepRegistryConfig.java",
+      "sha256": "f82c2cdbc493f71ac6b80276bdc0edbfde1eb0ff23f5d08f8606a56c81b05ad0",
+      "upstream": "io/micrometer/core/instrument/step/StepRegistryConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepTimer.java",
+      "sha256": "9cdc23b3b504578327150cccec2a91d600e7c4c1121d79c678864143a7ec886b",
+      "upstream": "io/micrometer/core/instrument/step/StepTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepTuple2.java",
+      "sha256": "20522c81030a5270685aff9fb72ca72f16b9f58e7781c7b4e311c37c07dac212",
+      "upstream": "io/micrometer/core/instrument/step/StepTuple2.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/StepValue.java",
+      "sha256": "7569293a7d01a5b926703a0438207bb892365d5a21155c33a6f4e1e04a648119",
+      "upstream": "io/micrometer/core/instrument/step/StepValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/step/package-info.java",
+      "sha256": "ed8c4db89eac10c72a8a6df75f675af07247bfc11a1c42151b7af2cc6b9b40a6",
+      "upstream": "io/micrometer/core/instrument/step/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/util/AbstractPartition.java",
+      "sha256": "4d8b7ea8bdaac9fb8c3f7767f488696bd185bd843d6ce773212e46d4f3b74c2d",
+      "upstream": "io/micrometer/core/instrument/util/AbstractPartition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/util/DoubleFormat.java",
+      "sha256": "49a7c881e7294211bb33dd4d30cecab22378bc5e880a280060ae25518aaff36a",
+      "upstream": "io/micrometer/core/instrument/util/DoubleFormat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/util/HierarchicalNameMapper.java",
+      "sha256": "8b9b56086fb976eab8c2cfe7eb0ff7a5bcd350960fef8ff54500575e8e0c92f2",
+      "upstream": "io/micrometer/core/instrument/util/HierarchicalNameMapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/util/IOUtils.java",
+      "sha256": "7c6e7dc0be809816e0ab34c378447956fbf0d30bdad9bf9b82304df61f0535d1",
+      "upstream": "io/micrometer/core/instrument/util/IOUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/util/MeterEquivalence.java",
+      "sha256": "e7f01298dea0628c6bf99e11f70349612f57d3c357c60cabf091a4f540240d15",
+      "upstream": "io/micrometer/core/instrument/util/MeterEquivalence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/util/MeterPartition.java",
+      "sha256": "c7852dc939bada5a01bf53f4368845e9070c264e9a46ac1c00b8a5a85e638540",
+      "upstream": "io/micrometer/core/instrument/util/MeterPartition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/util/NamedThreadFactory.java",
+      "sha256": "80c3f68bb8b159069ab471f0f13930b7609cbb8d6a09015a6d4033fbb4df30c0",
+      "upstream": "io/micrometer/core/instrument/util/NamedThreadFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/util/StringEscapeUtils.java",
+      "sha256": "7dfb0ccb40c87d59fbb9092fc2c7aba263f0f59e89e07dccc5f7b31d1dca9db6",
+      "upstream": "io/micrometer/core/instrument/util/StringEscapeUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/util/StringUtils.java",
+      "sha256": "f48c3ff94025db046813a3a6086547ce909a411d618a08c23c63e9720a5b0681",
+      "upstream": "io/micrometer/core/instrument/util/StringUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/util/TimeUtils.java",
+      "sha256": "4f11e481ead2b871cf949ab61a2d8bd1213d67b25f84b8b29ddbb16d80cb5c7e",
+      "upstream": "io/micrometer/core/instrument/util/TimeUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/instrument/util/package-info.java",
+      "sha256": "fc5b547df749b0788c06d4d49cecef3244b7f225c55b7c75974e707e6ae0a6ba",
+      "upstream": "io/micrometer/core/instrument/util/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/ipc/http/HttpSender.java",
+      "sha256": "4ff4fd6240164fffcc5d2cca0d115dc7f39f7912be26fa687d9ed3f57f54be47",
+      "upstream": "io/micrometer/core/ipc/http/HttpSender.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/ipc/http/HttpStatusClass.java",
+      "sha256": "58731773f3d1ead56cb7b13ccf91aeaa2a15e80e5ae7955682ed71211acc2193",
+      "upstream": "io/micrometer/core/ipc/http/HttpStatusClass.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/ipc/http/HttpUrlConnectionSender.java",
+      "sha256": "71b12e3832c91c820192a50129f22b251e8b2874f999b5f89dce3bec11a6c3aa",
+      "upstream": "io/micrometer/core/ipc/http/HttpUrlConnectionSender.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/ipc/http/OkHttpSender.java",
+      "sha256": "4fd74269ca2fa084a101b6e00fd2926e5a046d759e1323c9b78278439267644e",
+      "upstream": "io/micrometer/core/ipc/http/OkHttpSender.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/ipc/http/package-info.java",
+      "sha256": "839e12c36522cbc8218475741183f2f15892d13ab15ec32a5c2eb7927a5f2a0e",
+      "upstream": "io/micrometer/core/ipc/http/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/lang/NonNull.java",
+      "sha256": "b0a8ca395a16279cb0e7c6ee7a91f1a8235d03ae5452a9a0a03f0aae4b431fe1",
+      "upstream": "io/micrometer/core/lang/NonNull.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/lang/NonNullApi.java",
+      "sha256": "78d7622ad28ff18f99527c02721c5f0f1fd3df4716333dd0be7dc80d3acf69c2",
+      "upstream": "io/micrometer/core/lang/NonNullApi.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/lang/NonNullFields.java",
+      "sha256": "ab3bfb87f1be58005399fb1c2b6df9faaddad6f415b5938bce4160e8755364e9",
+      "upstream": "io/micrometer/core/lang/NonNullFields.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/lang/Nullable.java",
+      "sha256": "93add185c59cc70df7b63a1c0db4d88896b7340cf30be9b2805e72e23c145826",
+      "upstream": "io/micrometer/core/lang/Nullable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/lang/package-info.java",
+      "sha256": "28ec5cfe24425efa37ad1afb9a3c0b82e89778cf9828217cd66f15033409a219",
+      "upstream": "io/micrometer/core/lang/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/AbstractInternalLogger.java",
+      "sha256": "b7a442a2b4e0793e988d608d981197c02c62b9b9c35b870a75a20526a2764257",
+      "upstream": "io/micrometer/core/util/internal/logging/AbstractInternalLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/FormattingTuple.java",
+      "sha256": "7d49ad8afe12be3f392b84e21ff316c9f57e38378733ca5b2095864c17fde5a8",
+      "upstream": "io/micrometer/core/util/internal/logging/FormattingTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/InternalLogLevel.java",
+      "sha256": "219921005de8e250091da5ba94b1237720d595474a390e21e8fbe8707415d33f",
+      "upstream": "io/micrometer/core/util/internal/logging/InternalLogLevel.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/InternalLogger.java",
+      "sha256": "535ff0dc0ca919e4024b94f34f48dbe43e9fb0f25aed2c8fa2164a7483224f20",
+      "upstream": "io/micrometer/core/util/internal/logging/InternalLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/InternalLoggerFactory.java",
+      "sha256": "8c5ac1e5b75f06404d0232ef1a64d51dd12eac7f0c899e2700ed4d48d4a064ca",
+      "upstream": "io/micrometer/core/util/internal/logging/InternalLoggerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/JdkLogger.java",
+      "sha256": "efc1466170dcd319085a3c4a84b4c574b3c00bad05f908af931bcab021f61f26",
+      "upstream": "io/micrometer/core/util/internal/logging/JdkLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/JdkLoggerFactory.java",
+      "sha256": "b6d73b070fef734643cbc620909360b92eba85d2c2d7be554ac6f3fc0284ccd1",
+      "upstream": "io/micrometer/core/util/internal/logging/JdkLoggerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/LocationAwareSlf4JLogger.java",
+      "sha256": "086eb9dc41d2ba6de8097eee0b16ebb527d492627df42beb6ec34b8c8b01a84c",
+      "upstream": "io/micrometer/core/util/internal/logging/LocationAwareSlf4JLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/MessageFormatter.java",
+      "sha256": "4ba2ef9753119836b75b67a2a01720134691fcc3c00c078a79f064f1426e9043",
+      "upstream": "io/micrometer/core/util/internal/logging/MessageFormatter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/Slf4JLogger.java",
+      "sha256": "bd8a17f2491e5e63cc2cc3b7d504f304cd2cc4a6c500ef0ab484f4daa55d1ad0",
+      "upstream": "io/micrometer/core/util/internal/logging/Slf4JLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/Slf4JLoggerFactory.java",
+      "sha256": "3bb85f9c86e96c60b6d0323211cb977146f504e2dbdd5276014838a2c6a7ff31",
+      "upstream": "io/micrometer/core/util/internal/logging/Slf4JLoggerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/WarnThenDebugLogger.java",
+      "sha256": "02efdbd95a1de95964cd8174e9a7d12caaefa8a0f727af687eb2da1ab16a1e97",
+      "upstream": "io/micrometer/core/util/internal/logging/WarnThenDebugLogger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/java/io/micrometer/core/util/internal/logging/package-info.java",
+      "sha256": "7fc5464d48acdaa81aa1aa3b0a4de6565ce8a0e0a7262e94cf215589e42278cb",
+      "upstream": "io/micrometer/core/util/internal/logging/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "io.micrometer:micrometer-core:1.9.17 (sha256 c350cfdc76c08356f12a60e840f2dbeaeea7540712d58b54becd6c302a86147a)",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/resources/META-INF/LICENSE",
+      "sha256": "62fb8a3a9621dc2388174caaabe9c2317b694bb9a1d46c98bcf5655b68f51be3",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "io.micrometer:micrometer-core:1.9.17 (sha256 c350cfdc76c08356f12a60e840f2dbeaeea7540712d58b54becd6c302a86147a)",
+      "repository": "m3/vendor/third_party/micrometer-core/src/main/resources/META-INF/NOTICE",
+      "sha256": "df207ca1a2ea3794caf112d7c1f024c87b4ddfe91d3f243977ad1d3cd085d538",
+      "upstream": "META-INF/NOTICE"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/micrometer-core/UPSTREAM_LICENSE.json",
+      "sha256": "04dc0f8c264e494e1a286a618988d392635edc685ed88a2e980a0d881aeb6221",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/micrometer-core/UPSTREAM_LICENSE.txt",
+      "sha256": "62fb8a3a9621dc2388174caaabe9c2317b694bb9a1d46c98bcf5655b68f51be3",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/micrometer-core/SOURCES_MANIFEST.tsv",
+      "sha256": "99151b4123dce29afa5b23d2c08844bde9c37db6cb89061d7ad1807d2a7980b0",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/micrometer-core/LICENSE",
+      "sha256": "62fb8a3a9621dc2388174caaabe9c2317b694bb9a1d46c98bcf5655b68f51be3",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "io.micrometer",
+  "kind": "MODULE",
+  "license": "The Apache Software License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.pom",
+  "receipt": {
+    "buildRoot": "6be5a5e20324bfccc9209cfe5de6591ad9b94bfd5e1c22837adf0b3f1db96fb5",
+    "distributionSha256": "7887f3d35e484ac7520ca9745e7d1c91a577e4d454a219acab86a7ab8af86974",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "6be274b7ebba6fa510141303028704867476bbf8af7739dd696ba2eb09c25cd0",
+    "status": "PASS"
+  },
+  "resources_completed": 2,
+  "sources_jar": "https://repo.maven.apache.org/maven2/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17-sources.jar",
+  "sources_jar_sha1": "c77fa0305e75290685d2c04c2e531c425b4dd98b",
+  "sources_jar_sha256": "526e63391584b254cb2b891d0eca66b29197dac7cd9c1c42de116b54bd441a1a",
+  "status": "PASS",
+  "upstream": "git@github.com:micrometer-metrics/micrometer.git",
+  "version": "1.9.17"
+}

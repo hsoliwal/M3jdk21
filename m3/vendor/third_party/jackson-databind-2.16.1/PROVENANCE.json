@@ -6,6 +6,8 @@
   "consumers": "M3jdk21 m3/tooling (recipe engine)",
   "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.16.1-m3-source-1",
   "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
   "dependencies": [
     {
       "artifact": "jackson-annotations",
@@ -2931,16 +2933,18 @@
   "license": "The Apache Software License, Version 2.0",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
   "parent": "com.fasterxml.jackson:jackson-base:2.16.1",
   "pom": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.pom",
   "receipt": {
-    "buildRoot": "f93866a4dd9c48ea3321fa3f02bbdb412f54b642efb3066456e1ca04914e4596",
-    "distributionSha256": "32709bfb440ff0a689cfec1374f88da0090d11991d70b1c832b3d8f12bd971a2",
-    "lock": "0da6cc6a5b55b16b2850348b9aaef4c2f8fa908f26a24c806f088ae925687024",
+    "buildRoot": "ac175d7c75d688e6d763c85706cc02e1f8644dceb283d1116abcbb43e1b4a0b8",
+    "distributionSha256": "76d16bab8f66c6db0e70c3cb068b039803cd54a88211c930c86f7f1f8698a61b",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
     "message": "",
     "sourceRoot": "68eb228597d9ad5fb496f4a05525db219a0a5b81177aca43bc2f506ad75eb78b",
     "status": "PASS"
   },
+  "resources_completed": 0,
   "sources_jar": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1-sources.jar",
   "sources_jar_sha1": "49d81b4832bc388e38901b9d6cf0f8a170820849",
   "sources_jar_sha256": "91390204018cbeb9c5ed6e60c2624b63c8221082af9b0e94ce7f2d926ec48e2c",

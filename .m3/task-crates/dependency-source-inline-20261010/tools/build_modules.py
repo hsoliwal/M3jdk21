@@ -13,6 +13,7 @@ SUFFIX = "-synexia-source-1"
 
 
 def main() -> int:
+    global SUFFIX
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--repo", type=Path, required=True)
     ap.add_argument("--modules", type=Path, required=True, help="THIRD_PARTY_MODULES.tsv")
@@ -21,7 +22,10 @@ def main() -> int:
     ap.add_argument("--java-home", default=r"C:\Program Files\Java\jdk-21")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--only", default="")
+    ap.add_argument("--suffix", default=SUFFIX)
+    ap.add_argument("--repo-local", default="")
     args = ap.parse_args()
+    SUFFIX = args.suffix
     mods = [m for m in csv.DictReader(io.open(args.modules, encoding="utf-8", newline=""), delimiter="\t") if m["kind"] == "MODULE"]
     by_coord = {"%s:%s:%s" % (m["group"], m["artifact"], m["version"]): m for m in mods}
     # topological order on source-module dependencies
@@ -43,15 +47,18 @@ def main() -> int:
     for m in mods:
         visit(m)
     previous = {}
-    if args.out.exists() and not args.force:
+    if args.out.exists() and (not args.force or args.only):
         previous = {r["module"]: r for r in csv.DictReader(io.open(args.out, encoding="utf-8", newline=""), delimiter="\t")}
     only = set(x for x in args.only.split(",") if x)
     args.logs.mkdir(parents=True, exist_ok=True)
     rows = []
-    env = dict(os.environ, JAVA_HOME=args.java_home, MAVEN_OPTS="-Xmx1g")
+    env = dict(os.environ, JAVA_HOME=args.java_home, MAVEN_OPTS="-Xmx1g" + (" -Dmaven.repo.local=" + args.repo_local if args.repo_local else ""))
     for m in order:
         path = m["path"]
         if only and path not in only:
+            if path in previous:
+                pr = previous[path]
+                rows.append((path, pr["result"], pr["seconds"], pr["log"], pr.get("first_error", "")))
             continue
         prev = previous.get(path)
         if prev and prev["result"] == "PASS" and not args.force:

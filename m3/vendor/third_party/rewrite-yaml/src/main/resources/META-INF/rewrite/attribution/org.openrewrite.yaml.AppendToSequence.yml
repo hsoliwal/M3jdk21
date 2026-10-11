@@ -1,0 +1,19 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.yaml.AppendToSequence"
+contributors:
+- name: "sullis"
+  email: "github@seansullivan.com"
+  lineCount: 61
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 11
+- name: "Mike Solomon"
+  email: "mike@moderne.io"
+  lineCount: 3
+- name: "Jonathan Leitschuh"
+  email: "jonathan.leitschuh@gmail.com"
+  lineCount: 1
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

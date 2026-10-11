@@ -1,0 +1,170 @@
+{
+  "artifact": "asm-analysis",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "NOT_IN_LOCK",
+  "consumers": "OpenRewrite 8.17.1 runtime closure (mvn dependency:list of rewrite-core/java/java-21/test/xml)",
+  "coordinate": "org.ow2.asm:asm-analysis:9.6-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "asm",
+      "form": "source module",
+      "group": "org.ow2.asm",
+      "optional": true,
+      "scope": "compile",
+      "version": "9.6-m3-source-1"
+    },
+    {
+      "artifact": "asm-tree",
+      "form": "source module",
+      "group": "org.ow2.asm",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.6-m3-source-1"
+    }
+  ],
+  "donor": "asm-analysis-9.6",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/asm-analysis/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/Analyzer.java",
+      "sha256": "bab682bd9902381453e8af2fb64e263be58ef7309fa7f990a263a2970aa84f02",
+      "upstream": "org/objectweb/asm/tree/analysis/Analyzer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/AnalyzerException.java",
+      "sha256": "cd73f390a7cecc58666249c42e8c913d6db4d56755562d59baa17f3f332da6ce",
+      "upstream": "org/objectweb/asm/tree/analysis/AnalyzerException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/BasicInterpreter.java",
+      "sha256": "f3b4bb88b013b75113a88c253d33828fbbb88a997669610217f8e83a3b7b180e",
+      "upstream": "org/objectweb/asm/tree/analysis/BasicInterpreter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/BasicValue.java",
+      "sha256": "04e8fdb51cb9e0a4540c79f6d537b4fdbb23f84f42353c1dceca4f178ee73f04",
+      "upstream": "org/objectweb/asm/tree/analysis/BasicValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/BasicVerifier.java",
+      "sha256": "ccb3212500c6de38a643f8d9b8d706120a31bcafb372a6283b7f314f42268544",
+      "upstream": "org/objectweb/asm/tree/analysis/BasicVerifier.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/Frame.java",
+      "sha256": "8f63bb07bda6fad7d0368971ec49f39ee5e11d385a1408752111a894a0d341c0",
+      "upstream": "org/objectweb/asm/tree/analysis/Frame.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/Interpreter.java",
+      "sha256": "5709fb286e3f047f5274515fc778bd07dbcf8005bcb77a4b699170733ab2c5de",
+      "upstream": "org/objectweb/asm/tree/analysis/Interpreter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/SimpleVerifier.java",
+      "sha256": "3d92295a85ed08744961475e295e6953f2d212e464d875c96d72c84e87a963d6",
+      "upstream": "org/objectweb/asm/tree/analysis/SimpleVerifier.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/SmallSet.java",
+      "sha256": "e9abde6528bfb7a088c63a0d5b66fa6f10b8e6818ac3406f9e12ddf16425debf",
+      "upstream": "org/objectweb/asm/tree/analysis/SmallSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/SourceInterpreter.java",
+      "sha256": "9431f8cb8965b45e9a27dacf7da2cd628a77ddbc6f4a899e4cde3ce834ec0a79",
+      "upstream": "org/objectweb/asm/tree/analysis/SourceInterpreter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/SourceValue.java",
+      "sha256": "f2cebc2bdc06c8dedb95c0b79422ac6eb1b72bc0591035326f323e91f75a4943",
+      "upstream": "org/objectweb/asm/tree/analysis/SourceValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/Subroutine.java",
+      "sha256": "0ab72184920665f8c7c55dfb5fdb25c3b21ccb1f427c6a1256fc7376788efd59",
+      "upstream": "org/objectweb/asm/tree/analysis/Subroutine.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/java/org/objectweb/asm/tree/analysis/Value.java",
+      "sha256": "1e10a1ba1a1ec69a314acaed2caf05780794ebb0b51d968cd4ed2a8cf42332c4",
+      "upstream": "org/objectweb/asm/tree/analysis/Value.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/resources/org/objectweb/asm/tree/analysis/package.html",
+      "sha256": "b94edae40a0e0725c6c858acbb28bb89d60e0422416445c4c9a5c72b635074c2",
+      "upstream": "org/objectweb/asm/tree/analysis/package.html"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/asm-analysis/UPSTREAM_LICENSE.json",
+      "sha256": "4e9a27551fb8f3215e3de99930fef20ef21b72a1974f60d67d3d4f2e11f3d2c9",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/asm-analysis/UPSTREAM_LICENSE.txt",
+      "sha256": "293b6af371eee28b0ff16f0334ea19e20a3d5522143faa4b95b346855507879a",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/asm-analysis/SOURCES_MANIFEST.tsv",
+      "sha256": "fea5bf5a4d65a4ddb679d952614bdc6179ab0fcf4bcdd9d1aaad655281206419",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/asm-analysis/LICENSE",
+      "sha256": "293b6af371eee28b0ff16f0334ea19e20a3d5522143faa4b95b346855507879a",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.ow2.asm",
+  "kind": "MODULE",
+  "license": "BSD-3-Clause",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "org.ow2:ow2:1.5.1",
+  "pom": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.pom",
+  "receipt": {
+    "buildRoot": "777c181f6457da516d043c8ff12a5284b4b33602ea186326b2d6d14e15ae9e0a",
+    "distributionSha256": "e7e83f13e8cf501481b48c380533eb96c786854dd791563a4901dba07b002ffe",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "a633d818132ecbd1eb527c6fc13ae4b8c3c9e68b5f9effcda348badb60d9cc9b",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6-sources.jar",
+  "sources_jar_sha1": "2a0c33a19c1b594fee4eb539e3cd51eb3dd80903",
+  "sources_jar_sha256": "79429deea30525444879c827bd85c2aca1a1bedd8fddae3096f47e029f356dc4",
+  "status": "PASS",
+  "upstream": "https://gitlab.ow2.org/asm/asm/",
+  "version": "9.6"
+}

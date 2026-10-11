@@ -1,0 +1,34 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.config.DeclarativeRecipe"
+contributors:
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 221
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 54
+- name: "Knut Wannheden"
+  email: "knut@moderne.io"
+  lineCount: 27
+- name: "Nick McKinney"
+  email: "mckinneynicholas@gmail.com"
+  lineCount: 12
+- name: "Joan Viladrosa"
+  email: "joan@moderne.io"
+  lineCount: 10
+- name: "Alex Boyko"
+  email: "aboyko@vmware.com"
+  lineCount: 7
+- name: "Greg Adams"
+  email: "greg@moderne.io"
+  lineCount: 6
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 4
+- name: "Kun Li"
+  email: "122563761+kunli2@users.noreply.github.com"
+  lineCount: 2
+- name: "Jonathan Leitschuh"
+  email: "jonathan.leitschuh@gmail.com"
+  lineCount: 2

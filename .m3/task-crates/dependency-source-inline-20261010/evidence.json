@@ -1,16 +1,24 @@
 {
   "baseline": "e617717424bd0af23881fb383777ae14dc7c8bb4",
   "counts": {
-    "downstream_binary_still_resolved": 34,
+    "api_surface": {
+      "EQUIVALENT_MODULO_COMPILER": 21,
+      "IDENTICAL": 33,
+      "IDENTICAL_EXCEPT_SHADED": 1
+    },
+    "build_plugin_rows": 55,
+    "delomboked_files": 269,
+    "downstream_binary_still_resolved": 0,
     "downstream_not_vendored": 0,
-    "downstream_rows": 52,
-    "gate": 9,
-    "gate_pass": 9,
-    "images": 5,
-    "modules": 9,
-    "switched": 18
+    "downstream_rows": 107,
+    "gate": 55,
+    "gate_pass": 55,
+    "images": 0,
+    "modules": 55,
+    "native_binaries": 47,
+    "switched": 52
   },
-  "generated": "2026-10-10T13:15:15Z",
+  "generated": "2026-10-11T05:06:02Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {

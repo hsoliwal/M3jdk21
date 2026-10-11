@@ -6,6 +6,8 @@
   "consumers": "synexia-bom slf4j.version",
   "coordinate": "org.slf4j:slf4j-api:2.0.12-m3-source-1",
   "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
   "dependencies": [],
   "donor": "slf4j-api-2.0.12",
   "excluded_from_compilation": [],
@@ -346,6 +348,7 @@
   "license": "UNDECLARED (see LICENSE)",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
   "parent": "org.slf4j:slf4j-parent:2.0.12",
   "pom": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.12/slf4j-api-2.0.12.pom",
   "receipt": {
@@ -356,6 +359,7 @@
     "sourceRoot": "1fefb497479d93475332d86913d13bb992825b074eb29e2ea2baad5359a5daa9",
     "status": "PASS"
   },
+  "resources_completed": 0,
   "sources_jar": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.12/slf4j-api-2.0.12-sources.jar",
   "sources_jar_sha1": "c2824e780c88689134cb99fb33c8a4ed3de0f406",
   "sources_jar_sha256": "f05052e5924887edee5ba8228d210e763f85032e2b58245a37fa71e049950787",

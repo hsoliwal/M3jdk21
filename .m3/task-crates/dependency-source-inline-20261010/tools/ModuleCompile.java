@@ -18,17 +18,71 @@ import java.util.stream.Stream;
 
 public final class ModuleCompile {
     public static void main(String[] args) throws Exception {
-        Path source = Path.of(args[0]).toAbsolutePath();
-        Path output = Path.of(args[1]).toAbsolutePath();
-        String release = args[2];
-        String encoding = args[3];
+        List<String> positional = new ArrayList<>();
+        List<String> javacArgs = new ArrayList<>();
+        String lombok = null;
+        String lombokConfig = null;
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].equals("--delombok")) lombok = args[++i];
+            else if (args[i].equals("--javac-arg")) javacArgs.add(args[++i]);
+            else if (args[i].equals("--lombok-config")) lombokConfig = args[++i];
+            else positional.add(args[i]);
+        }
+        Path upstream = Path.of(positional.get(0)).toAbsolutePath();
+        Path output = Path.of(positional.get(1)).toAbsolutePath();
+        String release = positional.get(2);
+        String encoding = positional.get(3);
         StringBuilder cp = new StringBuilder();
-        for (int i = 4; i < args.length; i++) {
-            if (args[i].isBlank()) continue;
+        for (int i = 4; i < positional.size(); i++) {
+            if (positional.get(i).isBlank()) continue;
             if (cp.length() > 0) cp.append(java.io.File.pathSeparatorChar);
-            cp.append(args[i]);
+            cp.append(positional.get(i));
         }
         String classpath = cp.toString();
+        Path source = upstream;
+        if (lombok != null) {
+            Path delombok = Files.createDirectories(output.resolve("delombok"));
+            Path input = upstream;
+            if (lombokConfig != null) {
+                input = Files.createDirectories(output.resolve("delombok-input"));
+                try (Stream<Path> walk = Files.walk(upstream)) {
+                    for (Path p : walk.filter(Files::isRegularFile).sorted().toList()) {
+                        if (!p.toString().endsWith(".java")) continue;
+                        Path t = input.resolve(upstream.relativize(p).toString());
+                        Files.createDirectories(t.getParent());
+                        Files.copy(p, t);
+                    }
+                }
+                Files.copy(upstream.resolve(lombokConfig), input.resolve("lombok.config"));
+            }
+            List<String> cmd = new ArrayList<>(List.of(Path.of(System.getProperty("java.home"), "bin", "java" + (System.getProperty("os.name").startsWith("Windows") ? ".exe" : "")).toString(),
+                    "-jar", lombok, "delombok", input.toString(), "-d", delombok.toString(), "--encoding", encoding, "-f", "pretty"));
+            cmd.add("--classpath"); cmd.add(classpath.isBlank() ? lombok : lombok + java.io.File.pathSeparator + classpath);
+            Process proc = new ProcessBuilder(cmd).redirectErrorStream(true).redirectOutput(output.resolve("delombok.log").toFile()).start();
+            int drc = proc.waitFor();
+            if (drc != 0) throw new IOException("DELOMBOK_EXIT_" + drc);
+            // non-Java resources are packaged from the upstream tree; Java is compiled from the delomboked tree
+            source = delombok;
+            List<String> residue = new ArrayList<>();
+            try (Stream<Path> walk = Files.walk(delombok)) {
+                for (Path f : walk.filter(x -> x.toString().endsWith(".java")).sorted().toList()) {
+                    List<String> lines = Files.readAllLines(f, java.nio.charset.Charset.forName(encoding));
+                    List<String> kept = new ArrayList<>();
+                    boolean changed = false;
+                    for (String line : lines) {
+                        String t = line.trim();
+                        if (t.startsWith("import lombok.") || t.startsWith("import static lombok.")) { changed = true; continue; }
+                        if (t.equals("@NonFinal") || t.equals("@lombok.experimental.NonFinal")) { changed = true; continue; }
+                        if (t.startsWith("@NonFinal ")) { line = line.replaceFirst("@NonFinal ", ""); changed = true; }
+                        if (t.startsWith("import lombok") || t.startsWith("import static lombok") || t.startsWith("@lombok.")) residue.add(delombok.relativize(f) + "\t" + t);
+                        kept.add(line);
+                    }
+                    if (changed) Files.write(f, kept, java.nio.charset.Charset.forName(encoding));
+                }
+            }
+            Files.writeString(output.resolve("delombok-residue.tsv"), "file\tline\n" + String.join("\n", residue) + (residue.isEmpty() ? "" : "\n"));
+            if (!residue.isEmpty()) throw new IOException("DELOMBOK_RESIDUE " + residue.size());
+        }
         List<Path> files = new ArrayList<>();
         List<String> excluded = new ArrayList<>();
         try (Stream<Path> walk = Files.walk(source)) {
@@ -58,6 +112,7 @@ public final class ModuleCompile {
         if (release.startsWith("legacy:")) argv.addAll(List.of("-source", release.substring(7), "-target", release.substring(7), "-Xlint:-options"));
         else argv.addAll(List.of("--release", release));
         argv.addAll(List.of("-proc:none", "-encoding", encoding, "-d", classes.toString()));
+        argv.addAll(javacArgs);
         if (!classpath.isBlank()) { argv.add("-classpath"); argv.add(classpath); }
         argv.add("@" + argFile);
         javax.tools.JavaCompiler javac = javax.tools.ToolProvider.getSystemJavaCompiler();
@@ -69,10 +124,10 @@ public final class ModuleCompile {
         try (JarOutputStream jar = new JarOutputStream(Files.newOutputStream(output.resolve("donor.jar"), StandardOpenOption.CREATE_NEW));
              Stream<Path> paths = Files.walk(classes)) {
             for (Path p : paths.filter(Files::isRegularFile).sorted().toList()) put(jar, classes.relativize(p).toString().replace('\\', '/'), p);
-            try (Stream<Path> resources = Files.walk(source)) {
+            try (Stream<Path> resources = Files.walk(upstream)) {
                 for (Path p : resources.filter(Files::isRegularFile).sorted().toList()) {
                     if (p.toString().endsWith(".java")) continue;
-                    String name = source.relativize(p).toString().replace('\\', '/');
+                    String name = upstream.relativize(p).toString().replace('\\', '/');
                     if (name.startsWith("META-INF/") && (name.endsWith(".SF") || name.endsWith(".RSA") || name.endsWith(".DSA") || name.endsWith(".EC"))) { excluded.add(name + "\tSIGNATURE_FILE_NOT_REPACKAGED"); continue; }
                     put(jar, name, p);
                 }

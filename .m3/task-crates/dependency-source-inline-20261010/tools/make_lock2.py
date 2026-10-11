@@ -25,10 +25,10 @@ from pathlib import Path
 CENTRAL = "https://repo.maven.apache.org/maven2/"
 LEGAL_RE = re.compile(r"(?i)(.*[-_.])?(license|licence|notice|copying|copyright)([._-].*)?$")  # superset of the runner rule: also *-LICENSE
 JDK_PACKAGES = set(io.open(Path(__file__).with_name("jdk21_packages.txt"), encoding="utf-8").read().split())
-RELEASE = {"caffeine": 11, "tomlj": 11, "antlr4-runtime": 11, "snakeyaml-engine": 11, "ecj": 17, "commonmark": 11, "fastdoubleparser": 21, "jackson-core": 21, "jackson-databind": 21, "jackson-dataformat-yaml": 21, "jackson-datatype-jsr310": 21, "lucene-core": 11, "lucene-queries": 11, "lucene-sandbox": 11,
+RELEASE = {"caffeine": 11, "tomlj": 11, "antlr4-runtime": 11, "snakeyaml-engine": 11, "ecj": 17, "commonmark": 11, "fastdoubleparser": 21, "jackson-core": 21, "jackson-databind": 21, "jackson-dataformat-yaml": 21, "jackson-datatype-jsr310": 21, "lucene-core": 11, "lucene-queries": 11, "lucene-sandbox": 11, "rewrite-core": 17, "rewrite-java": 17, "rewrite-java-21": 21, "rewrite-test": 17, "rewrite-xml": 17, "rewrite-yaml": 17, "micrometer-core": 8, "classgraph": 8, "gizmo": 11, "jandex": 8, "fastfilter": 11,
            "lucene-analysis-common": 11, "lucene-queryparser": 11}
 LEGACY = {  # sun.misc.Unsafe / sun.misc.Signal / sun.nio.ch.DirectBuffer are not visible under --release 8 on JDK 21
-    "zero-allocation-hashing": "legacy:8", "guava": "legacy:8", "eclipse-collections": "legacy:8", "agrona": "legacy:8", "lz4-java": "legacy:8", "asm": "legacy:8", "jspecify": "legacy:8"}  # jspecify: ElementType.MODULE is Java 9 API  # asm: @Deprecated(forRemoval) is Java 9 API
+    "zero-allocation-hashing": "legacy:8", "guava": "legacy:8", "eclipse-collections": "legacy:8", "agrona": "legacy:8", "lz4-java": "legacy:8", "asm": "legacy:8", "jspecify": "legacy:8", "rewrite-java-21": "legacy:21"}  # jspecify: ElementType.MODULE is Java 9 API  # asm: @Deprecated(forRemoval) is Java 9 API
 TIMEOUT = {"eclipse-collections": 1800, "eclipse-collections-api": 1800, "lucene-core": 1200, "jackson-databind": 900, "guava": 900, "ecj": 1200}
 EXTRA_BINARY_CLASSPATH = {  # donor id -> store-relative BINARY build inputs for optional/provided adapters (BUILD_INPUTS.tsv; never inlined)
     "ecj-3.46.100": ["org/apache/ant/ant/1.10.14/ant-1.10.14.jar"],
@@ -37,10 +37,16 @@ EXTRA_BINARY_CLASSPATH = {  # donor id -> store-relative BINARY build inputs for
                               "org/apache/logging/log4j/log4j-api/2.23.1/log4j-api-2.23.1.jar", "org/apache/logging/log4j/log4j-1.2-api/2.23.1/log4j-1.2-api-2.23.1.jar",
                               "javax/servlet/javax.servlet-api/4.0.1/javax.servlet-api-4.0.1.jar"],
     "org.osgi.core-6.0.0": ["org/osgi/org.osgi.annotation/6.0.0/org.osgi.annotation-6.0.0.jar"],
-    "commons-compress-1.27.1": ["com/github/luben/zstd-jni/1.5.6-4/zstd-jni-1.5.6-4.jar"],  # zstd-jni cannot build from its sources jar (generated ZstdVersion); optional codec input stays binary
+    "commons-compress-1.27.1": ["com/github/luben/zstd-jni/1.5.6-4/zstd-jni-1.5.6-4.jar"],
+    "commons-compress-1.26.0": ["com/github/luben/zstd-jni/1.5.6-4/zstd-jni-1.5.6-4.jar"],  # zstd-jni cannot build from its sources jar (generated ZstdVersion); optional codec input stays binary
+    "rewrite-core-8.17.1": ["com/squareup/okhttp3/okhttp/4.9.3/okhttp-4.9.3.jar", "com/squareup/okio/okio/2.8.0/okio-2.8.0.jar", "org/jetbrains/kotlin/kotlin-stdlib/1.4.10/kotlin-stdlib-1.4.10.jar"],  # compileOnly upstream (OkHttpSender); Kotlin, never inlined
+    "rewrite-java-8.17.1": ["com/puppycrawl/tools/checkstyle/9.3/checkstyle-9.3.jar"],  # compileOnly upstream (CheckstyleConfigLoader); LGPL, never inlined
 }
-REQUIRES_DROP = {"commons-compress-1.27.1": {"zstd-jni-1.5.6-4"}}  # served by EXTRA_BINARY_CLASSPATH instead
-ENCODING = {"commons-compress": "ISO-8859-1"}  # one Latin-1 comment byte (TarArchiveOutputStream.java); every other file is ASCII-safe under both charsets
+DELOMBOK = "org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar"  # build tool for Lombok-at-source donors (delombok); never shipped
+JAVAC_ARGS = {"rewrite-java-21": ["--add-exports", "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED", "--add-exports", "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED", "--add-exports", "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED", "--add-exports", "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED", "--add-exports", "jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED", "--add-exports", "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED", "--add-exports", "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED", "--add-exports", "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED", "--add-exports", "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED", "--add-exports", "jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED", "--add-exports", "jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED"]}
+
+REQUIRES_DROP = {"commons-compress-1.27.1": {"zstd-jni-1.5.6-4"}, "commons-compress-1.26.0": {"zstd-jni-1.5.6-4"}}  # served by EXTRA_BINARY_CLASSPATH instead
+ENCODING = {"commons-compress": "ISO-8859-1", "commons-text": "ISO-8859-1"}  # one Latin-1 comment byte (TarArchiveOutputStream.java); every other file is ASCII-safe under both charsets
 REQUIRES_OVERRIDE = {  # requirer -> {(group, artifact): donor id}; shaded inputs whose version the reduced pom no longer states
     "jackson-core-2.15.3": {("ch.randelshofer", "fastdoubleparser"): "fastdoubleparser-0.9.0"},
     "jackson-core-2.16.1": {("ch.randelshofer", "fastdoubleparser"): "fastdoubleparser-1.0.0"},
@@ -63,7 +69,7 @@ def vkey(v: str):
 
 
 def donor_id(a: str, v: str) -> str:
-    return (a + "-" + v).replace("_", "-")
+    return (a + "-" + v).replace("_", "-").lower()
 
 
 def manifest(image: Path) -> dict:
@@ -168,7 +174,20 @@ def main() -> int:
     ap.add_argument("--max-files", type=int, default=20000)
     ap.add_argument("--max-bytes", type=int, default=512 * 1024 * 1024)
     ap.add_argument("--only", default="", help="comma-separated donor ids; the lock keeps them plus their requires closure")
+    ap.add_argument("--prefer-versions", type=Path, help="g:a:v per line (mvn dependency:list output accepted); preferred by pick()")
+    ap.add_argument("--pom-classpath", type=Path, help="POM_CLASSPATH.tsv from pom_classpath.py")
     args = ap.parse_args()
+    prefer = {}
+    if args.prefer_versions:
+        for line in io.open(args.prefer_versions, encoding="utf-8"):
+            m = re.match(r"\s*([^:\s]+):([^:\s]+):(?:jar:)?([^:\s]+)", line)
+            if m:
+                prefer[(m.group(1), m.group(2))] = m.group(3)
+    pomcp = {}
+    if args.pom_classpath:
+        for row in csv.DictReader(io.open(args.pom_classpath, encoding="utf-8", newline=""), delimiter="\t"):
+            if row["coordinate"] != "-":
+                pomcp.setdefault(row["donor"].lower(), []).append(row)
     args.composed.mkdir(parents=True, exist_ok=True)
     rows = []
     for inv in args.inventory:
@@ -187,6 +206,11 @@ def main() -> int:
         by_ga.setdefault((r["group"], r["artifact"]), []).append(did)
 
     def pick(cands: list, requirer: dict) -> str:
+        pv = prefer.get((ids[cands[0]]["group"], ids[cands[0]]["artifact"])) if cands else None
+        if pv:
+            for c in cands:
+                if ids[c]["version"] == pv:
+                    return c
         forced = REQUIRES_OVERRIDE.get(donor_id(requirer["artifact"], requirer["version"]), {})
         for c in cands:
             if forced.get((ids[c]["group"], ids[c]["artifact"])) == c:
@@ -207,7 +231,7 @@ def main() -> int:
         image = Path(r["sources_dir"])
         man = manifest(image)
         legal = sorted(p for p in man if LEGAL_RE.match(p.rsplit("/", 1)[-1]))
-        upstream_files = sorted(p for p in os.listdir(image) if p.startswith("UPSTREAM_") and not p.endswith(".json"))
+        upstream_files = sorted(p for p in os.listdir(image) if p.startswith("UPSTREAM_") and not p.endswith(".json") and ("LICENSE" in p.upper() or "NOTICE" in p.upper()))
         in_jar_license = [p for p in legal if re.search(r"(?i)^(META-INF/)?(LICENSE|COPYING)", p)]
         composed = not in_jar_license
         if composed:
@@ -262,20 +286,38 @@ def main() -> int:
         req -= REQUIRES_DROP.get(did, set())
         for dep in r["compile_deps"].split(";"):
             parts = dep.split(":")
+            if len(parts) >= 4 and parts[3] == "provided":
+                continue
             if len(parts) >= 3 and (parts[0], parts[1]) in by_ga:
                 cands = [c for c in by_ga[(parts[0], parts[1])] if c != did]
                 if cands:
                     req.add(pick(cands, r))
         req -= REQUIRES_DROP.get(did, set())
-        lombok = any(io.open(image / f, encoding="utf-8", errors="replace").read().find("import lombok") >= 0 for f in list(java_files(image))[:400]) if r["artifact"].startswith("rewrite") else False
+        pom_binary = []
+        if did in pomcp:
+            req = set()
+            for dep in r["compile_deps"].split(";"):
+                parts = dep.split(":")
+                if len(parts) >= 4 and parts[3] in ("compile", "runtime") and not dep.endswith(":optional") and (parts[0], parts[1]) in by_ga:
+                    exact = [c for c in by_ga[(parts[0], parts[1])] if ids[c]["version"] == parts[2]]
+                    req.add(exact[0] if exact else pick([c for c in by_ga[(parts[0], parts[1])] if c != did], r))
+            req_coords = set("%s:%s" % (ids[x]["group"], ids[x]["artifact"]) for x in req)
+            for row in pomcp[did]:
+                ga = ":".join(row["coordinate"].split(":")[:2])
+                if ga in req_coords or ga == "%s:%s" % (r["group"], r["artifact"]):
+                    continue
+                pom_binary.append(row["path"])
+        lombok = any(io.open(image / f, encoding="utf-8", errors="replace").read().find("import lombok") >= 0 for f in java_files(image))
         has_module = any(f.endswith("module-info.java") or f.startswith("META-INF/versions/") for f in java_files(image))
         signed = any(x.startswith("META-INF/") and x.endswith((".SF", ".RSA", ".DSA", ".EC")) for x in man)
         release = RELEASE.get(r["artifact"], 8)
         legacy = LEGACY.get(r["artifact"])
-        extra_cp = EXTRA_BINARY_CLASSPATH.get(did, [])
-        if lombok or r["artifact"] in BUILD_NONE:
-            build, reason = "none", BUILD_NONE.get(r["artifact"], "LOMBOK_AT_SOURCE_LEVEL")
+        extra_cp = EXTRA_BINARY_CLASSPATH.get(did, []) + pom_binary
+        if r["artifact"] in BUILD_NONE:
+            build, reason = "none", BUILD_NONE[r["artifact"]]
             req = set()
+        elif lombok:
+            build, reason = "commands", "LOMBOK_AT_SOURCE_LEVEL_DELOMBOKED" + (";MODULE_DESCRIPTOR_OR_MULTI_RELEASE" if has_module else "")
         elif has_module or legacy or extra_cp or signed:
             build, reason = "commands", ";".join(x for x in ("MODULE_DESCRIPTOR_OR_MULTI_RELEASE" if has_module else "", "LEGACY_SOURCE_LEVEL" if legacy else "", "EXTRA_BINARY_CLASSPATH" if extra_cp else "", "SIGNED_SOURCES_JAR" if signed else "") if x)
         else:
@@ -298,12 +340,32 @@ def main() -> int:
         if r["artifact"] in ENCODING:
             lines.append("donor.%s.encoding=%s" % (did, ENCODING[r["artifact"]]))
         if build == "commands":
-            argv = ["${java}", str(args.helper.resolve()), "${source}", "${output}", legacy or str(release), ENCODING.get(r["artifact"], "UTF-8"), "${dependencies}"] + [str((args.store / p).resolve()) for p in extra_cp]
+            argv = ["${java}", str(args.helper.resolve())]
+            if lombok:
+                argv += ["--delombok", str((args.store / DELOMBOK).resolve())]
+                if (image / "UPSTREAM_LOMBOK.config").exists():
+                    argv += ["--lombok-config", "UPSTREAM_LOMBOK.config"]
+            for ja in JAVAC_ARGS.get(r["artifact"], []):
+                argv += ["--javac-arg", ja]
+            argv += ["${source}", "${output}", legacy or str(release), ENCODING.get(r["artifact"], "UTF-8"), "${dependencies}"] + [str((args.store / p).resolve()) for p in extra_cp]
             lines += ["donor.%s.steps=1" % did, "donor.%s.step.0.argc=%d" % (did, len(argv))]
             lines += ["donor.%s.step.0.arg.%d=%s" % (did, i, a.replace("\\", "\\\\").replace(":", "\\:")) for i, a in enumerate(argv)]
             lines += ["donor.%s.artifacts=donor.jar" % did]
         ledger.append((did, "LOCKED", build, reason, "composed" if composed else "central", ",".join(sorted(req))))
     donors = [l[0] for l in ledger if l[1] == "LOCKED"]
+    graph = {l[0]: [x for x in l[5].split(",") if x] for l in ledger if l[1] == "LOCKED"}
+    state = {}
+    def visit(n, stack):
+        if state.get(n) == 2:
+            return
+        if state.get(n) == 1:
+            raise SystemExit("REQUIRES_CYCLE: " + " -> ".join(stack[stack.index(n):] + [n]))
+        state[n] = 1
+        for m in graph.get(n, []):
+            visit(m, stack + [n])
+        state[n] = 2
+    for n in graph:
+        visit(n, [])
     if args.only:
         req_of = {l[0]: [x for x in l[5].split(",") if x] for l in ledger}
         keep, pending = set(), [x.strip() for x in args.only.split(",") if x.strip()]

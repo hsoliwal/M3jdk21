@@ -1,0 +1,40 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.RemoveUnusedImports"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 170
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 116
+- name: "Thomas Zub"
+  email: "thomas.zub@outlook.de"
+  lineCount: 32
+- name: "tclayton-newr"
+  email: "87031785+tclayton-newr@users.noreply.github.com"
+  lineCount: 29
+- name: "Greg Adams"
+  email: "greg@moderne.io"
+  lineCount: 15
+- name: "traceyyoshima"
+  email: "tracey.yoshima@gmail.com"
+  lineCount: 12
+- name: "Knut Wannheden"
+  email: "knut@moderne.io"
+  lineCount: 10
+- name: "Patrick Way"
+  email: "pway99@users.noreply.github.com"
+  lineCount: 9
+- name: "Tyler Van Gorder"
+  email: "tkvangorder@users.noreply.github.com"
+  lineCount: 5
+- name: "Scott Jungling"
+  email: "scott.jungling@gmail.com"
+  lineCount: 5
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 5
+- name: "Aaron Gershman"
+  email: "aegershman@gmail.com"
+  lineCount: 5

@@ -1,0 +1,232 @@
+{
+  "artifact": "jackson-dataformat-csv",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "NOT_IN_LOCK",
+  "consumers": "OpenRewrite 8.17.1 runtime closure (mvn dependency:list of rewrite-core/java/java-21/test/xml)",
+  "coordinate": "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.16.1-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "jackson-annotations",
+      "form": "source module",
+      "group": "com.fasterxml.jackson.core",
+      "optional": false,
+      "scope": "compile",
+      "version": "2.16.1-m3-source-1"
+    },
+    {
+      "artifact": "jackson-core",
+      "form": "source module",
+      "group": "com.fasterxml.jackson.core",
+      "optional": true,
+      "scope": "compile",
+      "version": "2.16.1-m3-source-1"
+    },
+    {
+      "artifact": "jackson-databind",
+      "form": "source module",
+      "group": "com.fasterxml.jackson.core",
+      "optional": false,
+      "scope": "compile",
+      "version": "2.16.1-m3-source-1"
+    }
+  ],
+  "donor": "jackson-dataformat-csv-2.16.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/resources/META-INF/LICENSE",
+      "sha256": "a2f23537829a1fb07b38461edc08e5417c09c5b5d6a30c9c7bae6324d8aead51",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "cb9b4aa2c8c30a0b88d57f3aa8b3a070904cd16b7f569e8d1afc964cde42ed0c",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/resources/META-INF/NOTICE",
+      "sha256": "5828ffe74ea0ee4bf896654026f05fed1ead1d22acd577cc1eec9be0bc0de1ed",
+      "upstream": "META-INF/NOTICE"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/upstream-excluded/META-INF/maven/com.fasterxml.jackson.dataformat/jackson-dataformat-csv/pom.properties",
+      "sha256": "e0d2c6ca8484ae15249864f91f81ec1974b29d7c83a1cc6dcbe6bf6981625a84",
+      "upstream": "META-INF/maven/com.fasterxml.jackson.dataformat/jackson-dataformat-csv/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/upstream-excluded/META-INF/maven/com.fasterxml.jackson.dataformat/jackson-dataformat-csv/pom.xml",
+      "sha256": "9ec1e03d41d7936fffdcb804d2c1d05c2c83ba5ee7a6f5d85b09b43e4987f45b",
+      "upstream": "META-INF/maven/com.fasterxml.jackson.dataformat/jackson-dataformat-csv/pom.xml"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/resources/META-INF/services/com.fasterxml.jackson.core.JsonFactory",
+      "sha256": "8fc3e4a9a818d4670c5b7deb4295183f6f516cf5d0c83bb99b88914adc407e13",
+      "upstream": "META-INF/services/com.fasterxml.jackson.core.JsonFactory"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/resources/META-INF/services/com.fasterxml.jackson.core.ObjectCodec",
+      "sha256": "ed004054bcdb65d7beb24304176d5f03def61d55562b476c65306195d0f02efc",
+      "upstream": "META-INF/services/com.fasterxml.jackson.core.ObjectCodec"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/CsvCharacterEscapes.java",
+      "sha256": "9ee88d724c4ed2954cb87b67a8ea7097b81694fafd6e02f379c10b7f9f08aec6",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/CsvCharacterEscapes.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/CsvFactory.java",
+      "sha256": "fb893abf5b6aaa80f4f35c9ab3b80112317828fee8e20deaae0ab6c6b3a7c507",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/CsvFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/CsvFactoryBuilder.java",
+      "sha256": "292a85f92ff2b7e4030af811a231af8063bc5013b0494afc8e9f75bc973ac54c",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/CsvFactoryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/CsvGenerator.java",
+      "sha256": "5765a02da291c27ffd7531a3489cb8369117519b95e0429c0d7b57e10b179dcf",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/CsvGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/CsvMapper.java",
+      "sha256": "0c122aed92fea11be69712b3ccae12015f0c9a75379e3f32e4459f7044a60044",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/CsvMapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/CsvMappingException.java",
+      "sha256": "226cdb8ba2701a562a1bc202c80c51ca143eda3e82974369303ec064f5ad04b9",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/CsvMappingException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/CsvParser.java",
+      "sha256": "83b4a29a8638a5c18c121ae789c5d4586eae3c6f9567ed81945a77029e7f7cdc",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/CsvParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/CsvReadException.java",
+      "sha256": "7017348dadbf1853f16d929a7a1604da11fae18429e9b4beee8405ab5c4d20c4",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/CsvReadException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/CsvSchema.java",
+      "sha256": "b6a0310be62873911b039cb68b8606f83bfd58c27cc5d2675664919b910e05d4",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/CsvSchema.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/CsvWriteException.java",
+      "sha256": "546c930183f697e16280eae4d59f8516b3925058c44982d0e75861e77a0b996b",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/CsvWriteException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/PackageVersion.java",
+      "sha256": "01f8ac242c4dee02c1d4bd63dce26341b719bbf9fc7e3d8c26a6a7fe5522d269",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/PackageVersion.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/resources/com/fasterxml/jackson/dataformat/csv/PackageVersion.java.in",
+      "sha256": "744babce0ed8859a38895e27c6cca1c834117791919037c5096c6bcfb9bdff03",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/PackageVersion.java.in"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/impl/BufferedValue.java",
+      "sha256": "097a19e7d1d003ab10e813c24dd593a5af9790bfd9d7c8c4642fcf1878e73034",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/impl/BufferedValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/impl/CsvDecoder.java",
+      "sha256": "2e439e5566a25c96191836fcb1c7f78cd6636a5d02e9e3e96136e6f85c160f00",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/impl/CsvDecoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/impl/CsvEncoder.java",
+      "sha256": "5e45c7a42e48d3eabd1947a4e804f3140935cbfb3ea2fe9900b69f43ec460985",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/impl/CsvEncoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/impl/CsvParserBootstrapper.java",
+      "sha256": "9e4c4d1b082cc449b86771e2565a11b1875fd0783dd6b7ed63182c65fe1dee53",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/impl/CsvParserBootstrapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/impl/LRUMap.java",
+      "sha256": "ec5993e4985efb987d21c42273e2aa1790928b564e296939b308b7f419fa8fbb",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/impl/LRUMap.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/impl/SimpleTokenWriteContext.java",
+      "sha256": "34df5def4670710b00ab31ba5bc2f096822fc22c3f6283ae39d7e2928360e23b",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/impl/SimpleTokenWriteContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/impl/UTF8Reader.java",
+      "sha256": "6fa34a0f2d7796dd805fcafcb3283f16f11888a40a764622dc622c52cb87cbab",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/impl/UTF8Reader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/java/com/fasterxml/jackson/dataformat/csv/impl/UTF8Writer.java",
+      "sha256": "753285215d22ab79af163f860d394a158784d30ec4035b94d0204cd2a7e1694f",
+      "upstream": "com/fasterxml/jackson/dataformat/csv/impl/UTF8Writer.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/SOURCES_MANIFEST.tsv",
+      "sha256": "ee18772b6cf402aa306fbc6e964c631e6fa70592580f21232d4d070e35c14d14",
+      "upstream": "(inventory)"
+    }
+  ],
+  "group": "com.fasterxml.jackson.dataformat",
+  "kind": "MODULE",
+  "license": "The Apache Software License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "com.fasterxml.jackson.dataformat:jackson-dataformats-text:2.16.1",
+  "pom": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-csv/2.16.1/jackson-dataformat-csv-2.16.1.pom",
+  "receipt": {
+    "buildRoot": "0040d1a7a1a8a51fc47155d97d81ec368b8deb98e330b20d0ea02cf8afa96664",
+    "distributionSha256": "022fa1b92c61d5cd6f3d93072f2f44bc44436aff3f820b4a787ec929a02268cc",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "99139e52e2e9723ce1a927ffafa738c119a6c97447fe8d2536dac1947c28763e",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-csv/2.16.1/jackson-dataformat-csv-2.16.1-sources.jar",
+  "sources_jar_sha1": "4b8cd69fb5cab8e2c709ea3d53173302bca5f6c8",
+  "sources_jar_sha256": "78def0f5b5ff8a45a5b0d1951cb610aa2c8930f38537af417fe08f9d80a5b162",
+  "status": "PASS",
+  "upstream": "https://github.com/FasterXML/jackson-dataformats-text",
+  "version": "2.16.1"
+}

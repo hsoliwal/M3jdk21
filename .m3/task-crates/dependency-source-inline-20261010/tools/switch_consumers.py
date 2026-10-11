@@ -19,7 +19,7 @@ import argparse, csv, io, re, subprocess, sys
 from pathlib import Path
 
 SUFFIX = "-synexia-source-1"
-NATIVE_IN_BINARY = {"sqlite-jdbc", "jna", "zstd-jni"}
+NATIVE_IN_BINARY = set()  # the equivalence gate decides; native libraries are completed byte-for-byte from the published jar and compared by SHA-256
 # (pom path, group, artifact, version) -> how the pin is expressed; "bom" = managed entry under dependencyManagement
 TARGETS = [
     ("synexia-bom/pom.xml", "bom"),
@@ -50,6 +50,7 @@ def main() -> int:
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--targets", type=Path, help="optional file: one <pom path><TAB><mode> per line (default: the Synexia list)")
     ap.add_argument("--suffix", default=SUFFIX)
+    ap.add_argument("--default-props", default="", help="k=v,... used when a pom inherits a version property")
     args = ap.parse_args()
     SUFFIX = args.suffix
     targets = TARGETS if not args.targets else [tuple(l.rstrip(chr(10)).split(chr(9))[:2]) for l in io.open(args.targets, encoding="utf-8") if l.strip()]
@@ -67,7 +68,8 @@ def main() -> int:
         except subprocess.CalledProcessError:
             rows.append((path, "", "", "", "", "POM_NOT_FOUND")); continue
         text = original
-        props = dict(re.findall(r"<([A-Za-z0-9._-]+\.version)>([^<]*)</\1>", original))
+        props = dict(x.split("=", 1) for x in args.default_props.split(",") if "=" in x)
+        props.update(dict(re.findall(r"<([A-Za-z0-9._-]+\.version)>([^<]*)</\1>", original)))
 
         def resolve(v: str) -> str:
             m = re.fullmatch(r"\$\{([^}]+)\}", v.strip())
@@ -103,7 +105,7 @@ def main() -> int:
             return block.replace("<version>%s</version>" % raw, "<version>%s</version>" % new_v, 1)
 
         text = DEP_RE.sub(repl, text)
-        if text != original:
+        if True:  # write even when equal to base: undoes earlier switches that are now reverted
             if args.apply:
                 blob = git(args.repo, "hash-object", "-w", "--stdin", data=text.encode("utf-8")).decode().strip()
                 git(args.repo, "update-index", "--add", "--cacheinfo", "100644,%s,%s" % (blob, path))

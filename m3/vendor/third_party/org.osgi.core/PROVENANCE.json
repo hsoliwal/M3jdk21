@@ -1,0 +1,2029 @@
+{
+  "artifact": "org.osgi.core",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "EXTRA_BINARY_CLASSPATH",
+  "consumers": "transitive compile input of commons-compress 1.27.1 (provided; OsgiUtils)",
+  "coordinate": "org.osgi:org.osgi.core:6.0.0-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "org.osgi.annotation",
+      "form": "binary build input for an optional adapter (BUILD_INPUTS.tsv)",
+      "group": "org.osgi",
+      "optional": true,
+      "scope": "provided",
+      "version": "6.0.0"
+    }
+  ],
+  "donor": "org.osgi.core-6.0.0",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "LICENSE"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/about.html",
+      "sha256": "be73c670897e9dc848a6c211a9aa4ed7fad2f49c4468db73589f7a0199fcf4a4",
+      "upstream": "about.html"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/dto/DTO.java",
+      "sha256": "817ea9e94bf6f12248e0944763c430eca575e91c9781889f620e7cf60befb638",
+      "upstream": "org/osgi/dto/DTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/dto/package-info.java",
+      "sha256": "0c203c829f85ec228ad7c83f5ad4f413b630d943edc33d4e98e5b83c8c660199",
+      "upstream": "org/osgi/dto/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/dto/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "org/osgi/dto/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/AdaptPermission.java",
+      "sha256": "efbb66ae90327795dceaaae0c0c8e8a5aea29c30651d9537093d579a2ec5ff4b",
+      "upstream": "org/osgi/framework/AdaptPermission.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/AdminPermission.java",
+      "sha256": "73ddc570c8c005457017b2f1d2b7cf245868f9fe3f21dd76bd40059fd2478362",
+      "upstream": "org/osgi/framework/AdminPermission.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/AllServiceListener.java",
+      "sha256": "af3437e7647c2b23b38191699586391b8887d1be29e406b221c2195ecdbf13d1",
+      "upstream": "org/osgi/framework/AllServiceListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/Bundle.java",
+      "sha256": "66ae4739ac03f833c9b052f2f1b65e5745b3534d6be642c0e7e82faef84897a3",
+      "upstream": "org/osgi/framework/Bundle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/BundleActivator.java",
+      "sha256": "03e4481a71a4a7c1274ea88733a7fd37215151d87d23166e6b7927a2d7b5fc17",
+      "upstream": "org/osgi/framework/BundleActivator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/BundleContext.java",
+      "sha256": "a14c95e9774ef978642a134fa31e954170492b67ecfaddaae84a2b0351774684",
+      "upstream": "org/osgi/framework/BundleContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/BundleEvent.java",
+      "sha256": "157adbfa88bd70cba71dba043c3198c6fbf81c3e9b1657fc7c81bf38e1a1994c",
+      "upstream": "org/osgi/framework/BundleEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/BundleException.java",
+      "sha256": "31dc72e3032b24f494ae8f44463e2b650ceb23763a27c6609e798db06ae8f129",
+      "upstream": "org/osgi/framework/BundleException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/BundleListener.java",
+      "sha256": "0fb7821d407e49b1f636dded4bf25293cd49f98c2c214946f2df36d388455721",
+      "upstream": "org/osgi/framework/BundleListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/BundlePermission.java",
+      "sha256": "dca1075393ae14b716fbb0a5a69bc4d7eed41c40500cb92d42d78019449f5442",
+      "upstream": "org/osgi/framework/BundlePermission.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/BundleReference.java",
+      "sha256": "f4262d9e22eb67e7ef1e7185872767258f828649db8e20ad08732e433993085b",
+      "upstream": "org/osgi/framework/BundleReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/CapabilityPermission.java",
+      "sha256": "923e3b0a16e268fea5f62a08911ba0b7f6998b7e950268ca4d8349bd5eb087dc",
+      "upstream": "org/osgi/framework/CapabilityPermission.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/Configurable.java",
+      "sha256": "67db4e2a7fb696dfd21abcda21b761f47646157fa7dad9318b3f071db8e4ce3b",
+      "upstream": "org/osgi/framework/Configurable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/Constants.java",
+      "sha256": "6ba71bd4a9cf22f272ffd5b1dfc9c4faddbab8cd94ea2368d63e5f1a2f0bb2db",
+      "upstream": "org/osgi/framework/Constants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/Filter.java",
+      "sha256": "5080bfc864922941acdeb95929753b6521fb233124aa4baa421445767e1af491",
+      "upstream": "org/osgi/framework/Filter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/FrameworkEvent.java",
+      "sha256": "6c808852517cf18d4305cd73546499bbee2290e4d18306b1b340ac597ef48ea9",
+      "upstream": "org/osgi/framework/FrameworkEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/FrameworkListener.java",
+      "sha256": "57b183078708c9fb91e20b339c9e6ec24f2a6b390dcc9f7809cb645126768308",
+      "upstream": "org/osgi/framework/FrameworkListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/FrameworkUtil.java",
+      "sha256": "eb042b8423b647c6d0f242e5b76732d851d9d73cf1fe455574a876b66549c262",
+      "upstream": "org/osgi/framework/FrameworkUtil.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/InvalidSyntaxException.java",
+      "sha256": "5880666c908b5e04a94c36bfaea79249e969e8f849d038f4792f3cb8507defc5",
+      "upstream": "org/osgi/framework/InvalidSyntaxException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/PackagePermission.java",
+      "sha256": "95a05b01aefe0148b56ffeb67a401d8d71f6e9217d09c24425e873c1fcb516e3",
+      "upstream": "org/osgi/framework/PackagePermission.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/PrototypeServiceFactory.java",
+      "sha256": "4839a25e6c8364a98bbeecffc3c17c183dc08bc633465a12ce7968e3162fc3c0",
+      "upstream": "org/osgi/framework/PrototypeServiceFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/ServiceEvent.java",
+      "sha256": "fd67ff7dcffe9c24fe2ac114f138ccbc6a9c8ac4551cee6bd60a13968f419820",
+      "upstream": "org/osgi/framework/ServiceEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/ServiceException.java",
+      "sha256": "59748dc67f5fb2f4b6a95064a1e0eac9ee514bbcf4496aa98fb59bb6c82238b2",
+      "upstream": "org/osgi/framework/ServiceException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/ServiceFactory.java",
+      "sha256": "51e48f2c1083b6692d715964f798c48e79addd4f9f382b34d11ea80f83de1995",
+      "upstream": "org/osgi/framework/ServiceFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/ServiceListener.java",
+      "sha256": "15f1a6648dd3e272ce13ea2a6cd509dd29f94d1aa935188cca84a9c7bdd9902b",
+      "upstream": "org/osgi/framework/ServiceListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/ServiceObjects.java",
+      "sha256": "5f852e78d88f19709282d7c260deeed2313635099ebf2d392eedd2d4d993587e",
+      "upstream": "org/osgi/framework/ServiceObjects.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/ServicePermission.java",
+      "sha256": "5d61945bb4ac18ec92c0ca4828f28365ab9e3754a5a553563458d21b24217eff",
+      "upstream": "org/osgi/framework/ServicePermission.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/ServiceReference.java",
+      "sha256": "c8824b9d8af4f7646053b16702e1e942dd66a8a1c95b4b288c5feb4fd96e2ffc",
+      "upstream": "org/osgi/framework/ServiceReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/ServiceRegistration.java",
+      "sha256": "765e094ee71acb0dc4966add6d86ab72e9b0660a0cd4c494d23f0a4635e38a1a",
+      "upstream": "org/osgi/framework/ServiceRegistration.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/SignerProperty.java",
+      "sha256": "fabfbefeee3c3adc4b0822e854131cc9e47b740b7dd943231516c7168eba04c0",
+      "upstream": "org/osgi/framework/SignerProperty.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/SynchronousBundleListener.java",
+      "sha256": "bcd568d2467b1b84d7b6612a21eb0804250b31d6c60d8354f5bba207984a7d46",
+      "upstream": "org/osgi/framework/SynchronousBundleListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/UnfilteredServiceListener.java",
+      "sha256": "86e9f6dcdf8c46f2ba3b5f52c51a585697924e3c57b1fa95f3f66908a895cb56",
+      "upstream": "org/osgi/framework/UnfilteredServiceListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/Version.java",
+      "sha256": "23ab1607e36e56ffb9c934694fe4cf69da6ad2b9dd3961d2066e0d7bb2054433",
+      "upstream": "org/osgi/framework/Version.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/VersionRange.java",
+      "sha256": "57742c2054e24d617064b99c0ffd62cb713426f6c7f66f46091a7dc856731460",
+      "upstream": "org/osgi/framework/VersionRange.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/dto/BundleDTO.java",
+      "sha256": "075ca76ed2ac811cc92f4c4104b9ac97eaef323e827bfc21fa848ffcc02cf7b7",
+      "upstream": "org/osgi/framework/dto/BundleDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/dto/FrameworkDTO.java",
+      "sha256": "5f8137f38f17852a0740f86dad5a74c12da1475bdc9cf7e9d599fb3c13dfb3a1",
+      "upstream": "org/osgi/framework/dto/FrameworkDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/dto/ServiceReferenceDTO.java",
+      "sha256": "268e849838fe34282575e644bc8211c1843994bc041f72d499a4a8555f48414f",
+      "upstream": "org/osgi/framework/dto/ServiceReferenceDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/dto/package-info.java",
+      "sha256": "6833101568229a2b724745c94182bb23ceb7c6c6c2f6f6e0e5bbc0eda73752b8",
+      "upstream": "org/osgi/framework/dto/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/dto/packageinfo",
+      "sha256": "bf67602b908e5dc043ee5e775e7db503e15369e196e13cd2fc7471d957c463d9",
+      "upstream": "org/osgi/framework/dto/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/bundle/CollisionHook.java",
+      "sha256": "554a0b04bf1efe795377bc782d475b2ce8b7c610eee303bb26a1344969a7545f",
+      "upstream": "org/osgi/framework/hooks/bundle/CollisionHook.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/bundle/EventHook.java",
+      "sha256": "0b94aaca368411fffdbbddf6711d3906388098ad067fffb677c495ee94a7ac90",
+      "upstream": "org/osgi/framework/hooks/bundle/EventHook.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/bundle/FindHook.java",
+      "sha256": "1757970b5b8d028a0f39e9f90d804966f1355a4c3a7e2e698f715c023c180d8f",
+      "upstream": "org/osgi/framework/hooks/bundle/FindHook.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/bundle/package-info.java",
+      "sha256": "09648357f1d190e14783b638bd7b2b53fa3d76fe6cb156ccee83f138dc9039db",
+      "upstream": "org/osgi/framework/hooks/bundle/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/hooks/bundle/packageinfo",
+      "sha256": "f60ecb21ad43c8f7e3e5910d6d2737e75ae92665875d84e9c11a6926429ffb82",
+      "upstream": "org/osgi/framework/hooks/bundle/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/resolver/ResolverHook.java",
+      "sha256": "c9de3cb49f4be5c0b6080f925aef240f8106f6cda1c809671e8734505462a925",
+      "upstream": "org/osgi/framework/hooks/resolver/ResolverHook.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/resolver/ResolverHookFactory.java",
+      "sha256": "3d628dce2a3dbbf2fdcbec018d7d35f264361438f2a5b89321f761f779ce424a",
+      "upstream": "org/osgi/framework/hooks/resolver/ResolverHookFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/resolver/package-info.java",
+      "sha256": "e810af3b76734f21c2b1554b95dbaf5af7a7e847004674e854e9286e6a68c2de",
+      "upstream": "org/osgi/framework/hooks/resolver/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/hooks/resolver/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "org/osgi/framework/hooks/resolver/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/service/EventHook.java",
+      "sha256": "4764c0215695b350ef1356f330800a8b918995e08d51a3e6ceda5734cfecd600",
+      "upstream": "org/osgi/framework/hooks/service/EventHook.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/service/EventListenerHook.java",
+      "sha256": "a6ddc83c7d92d17130e703ad6a24270b996e68523e5b7e43333b74dbb75993d5",
+      "upstream": "org/osgi/framework/hooks/service/EventListenerHook.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/service/FindHook.java",
+      "sha256": "1acd56b9d13c44c85aebeb9b4e1bf27b5e3e10a9575fdfa6b23ee4c38f84041d",
+      "upstream": "org/osgi/framework/hooks/service/FindHook.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/service/ListenerHook.java",
+      "sha256": "9188e31a2ad203dd83d366fddba4e8dca284ba871343e01721d30151bac30cfe",
+      "upstream": "org/osgi/framework/hooks/service/ListenerHook.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/service/package-info.java",
+      "sha256": "e3ef5594440928601fc051511d30b509ac772b5dd50750efede7189fdcf46b2a",
+      "upstream": "org/osgi/framework/hooks/service/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/hooks/service/packageinfo",
+      "sha256": "f60ecb21ad43c8f7e3e5910d6d2737e75ae92665875d84e9c11a6926429ffb82",
+      "upstream": "org/osgi/framework/hooks/service/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/weaving/WeavingException.java",
+      "sha256": "5f2bdb5fddaca6adf8566a507a80c0aefaf8e1f5f90ecd08fb26196e6d384441",
+      "upstream": "org/osgi/framework/hooks/weaving/WeavingException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/weaving/WeavingHook.java",
+      "sha256": "9453dc3eb1933659c0f0f3e80e46868808508f755dbf2c3bb9391f5db7e03d73",
+      "upstream": "org/osgi/framework/hooks/weaving/WeavingHook.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/weaving/WovenClass.java",
+      "sha256": "35fe6f0180c24a51ea52624d651a78aac93beb6b3b97cc0c3b4e29e2b9a164ae",
+      "upstream": "org/osgi/framework/hooks/weaving/WovenClass.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/weaving/WovenClassListener.java",
+      "sha256": "318a467a6d05aa3a1e8a0be3d290fcaabe7dd040458f3e2a829185c6721082be",
+      "upstream": "org/osgi/framework/hooks/weaving/WovenClassListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/hooks/weaving/package-info.java",
+      "sha256": "4108ae47a1d1e938d11f72d38f7595cf959ffd83a03c5ed756b7d1f3b3ca631b",
+      "upstream": "org/osgi/framework/hooks/weaving/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/hooks/weaving/packageinfo",
+      "sha256": "f60ecb21ad43c8f7e3e5910d6d2737e75ae92665875d84e9c11a6926429ffb82",
+      "upstream": "org/osgi/framework/hooks/weaving/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/launch/Framework.java",
+      "sha256": "33a6d469416173f9f4327082dbd39951324b3f30d0eb0abc15c4cf9f74d98899",
+      "upstream": "org/osgi/framework/launch/Framework.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/launch/FrameworkFactory.java",
+      "sha256": "4cecaba5fff596e00b48a1c9fa6919a49293eff641aff672075251036a9944c9",
+      "upstream": "org/osgi/framework/launch/FrameworkFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/launch/package-info.java",
+      "sha256": "7fa4ff4ac58014c96f7bf455a7dc099313fcae0ab782fbf38f5cdd40a6349546",
+      "upstream": "org/osgi/framework/launch/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/launch/packageinfo",
+      "sha256": "de6ecef09060bd9ec86f537fde992bef152dd12accab0e611720a297f5542e18",
+      "upstream": "org/osgi/framework/launch/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/namespace/AbstractWiringNamespace.java",
+      "sha256": "60336c95ee83d443fa35d391be30f96043bbbc174a95daeee5ead089e49380a4",
+      "upstream": "org/osgi/framework/namespace/AbstractWiringNamespace.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/namespace/BundleNamespace.java",
+      "sha256": "8d1b326f8225284dd222544528c43f0d9ad53ad6eae0ef4ac440b436ba440e8c",
+      "upstream": "org/osgi/framework/namespace/BundleNamespace.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/namespace/ExecutionEnvironmentNamespace.java",
+      "sha256": "1d64620a98cfe2fa29516b6b3949a812e358aad98affb80d42c9d3dacad416e4",
+      "upstream": "org/osgi/framework/namespace/ExecutionEnvironmentNamespace.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/namespace/HostNamespace.java",
+      "sha256": "0a51574b82cbc0475b5780ba74a50accb0ee3d605fa56365b50e60bac3943460",
+      "upstream": "org/osgi/framework/namespace/HostNamespace.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/namespace/IdentityNamespace.java",
+      "sha256": "4a407367d59e34005ab752b2c6313a0595a0dd32d770ec37f5f70ea03a9d5279",
+      "upstream": "org/osgi/framework/namespace/IdentityNamespace.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/namespace/NativeNamespace.java",
+      "sha256": "67d61b6bd2bb7dd5a0668f593656a42f7cd6c8356713d8a7bad46a755ffb6c4b",
+      "upstream": "org/osgi/framework/namespace/NativeNamespace.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/namespace/PackageNamespace.java",
+      "sha256": "129d414bd5402fc1a7a912481d8e3de875e07d1b39912f3b00f3fd285a2e216d",
+      "upstream": "org/osgi/framework/namespace/PackageNamespace.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/namespace/package-info.java",
+      "sha256": "1059dd35b14a5d59ed4686f8d5aebc02a6a857ff974b98bdabe016dc610fbf79",
+      "upstream": "org/osgi/framework/namespace/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/namespace/packageinfo",
+      "sha256": "f60ecb21ad43c8f7e3e5910d6d2737e75ae92665875d84e9c11a6926429ffb82",
+      "upstream": "org/osgi/framework/namespace/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/package-info.java",
+      "sha256": "b83660078569112e94f367a53cb8dfcab0e229c762ecacb5adb05ce01b0e71d3",
+      "upstream": "org/osgi/framework/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/packageinfo",
+      "sha256": "bf67602b908e5dc043ee5e775e7db503e15369e196e13cd2fc7471d957c463d9",
+      "upstream": "org/osgi/framework/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/startlevel/BundleStartLevel.java",
+      "sha256": "b95c7c79e90e82eeaba1540fff6913467976510a2b369279b4bcc4539834a608",
+      "upstream": "org/osgi/framework/startlevel/BundleStartLevel.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/startlevel/FrameworkStartLevel.java",
+      "sha256": "f67f4c0bde6c51e29fdb3888a850b21da9abae4180eb3e406277cef9dee582b1",
+      "upstream": "org/osgi/framework/startlevel/FrameworkStartLevel.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/startlevel/dto/BundleStartLevelDTO.java",
+      "sha256": "7c4aa751e2959eb2493939ed1b04bd87c87d6b07db0971c3c75fdeef3c082979",
+      "upstream": "org/osgi/framework/startlevel/dto/BundleStartLevelDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/startlevel/dto/FrameworkStartLevelDTO.java",
+      "sha256": "00fbc9374838ed116f63a75f8cdd35c2ad995e49611ccc1c4e43c23d309460f1",
+      "upstream": "org/osgi/framework/startlevel/dto/FrameworkStartLevelDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/startlevel/dto/package-info.java",
+      "sha256": "165a699714e8993ac9ff7e3b07e3ed658f6dacd4ae54d87ed8febff1c9c33ab7",
+      "upstream": "org/osgi/framework/startlevel/dto/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/startlevel/dto/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "org/osgi/framework/startlevel/dto/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/startlevel/package-info.java",
+      "sha256": "dd0bfe766491265b85d1e2bce8459e2f10c5555680ad77621ec7791badfbdcbe",
+      "upstream": "org/osgi/framework/startlevel/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/startlevel/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "org/osgi/framework/startlevel/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/BundleCapability.java",
+      "sha256": "085acb8a3a4b75ce8c4969589598b79d160fb8dd5deda67479b75881472a116f",
+      "upstream": "org/osgi/framework/wiring/BundleCapability.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/BundleRequirement.java",
+      "sha256": "46f06a7bca751cdb5583ce307000e2f64bec5cbe3492cfe9ff95938cd8824392",
+      "upstream": "org/osgi/framework/wiring/BundleRequirement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/BundleRevision.java",
+      "sha256": "740e82652cf24966f3615e0b08fa424dac17e0caa05a80974691a0999f6ecc21",
+      "upstream": "org/osgi/framework/wiring/BundleRevision.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/BundleRevisions.java",
+      "sha256": "5a1885340059d6aea6521e4f6f6df92a6a8e89b065637a98e5edf7eb80660bf1",
+      "upstream": "org/osgi/framework/wiring/BundleRevisions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/BundleWire.java",
+      "sha256": "ff0f0ddd3c5212e899893aaace435b56a2f72dc33eeccf61ecc34c5e00000bf4",
+      "upstream": "org/osgi/framework/wiring/BundleWire.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/BundleWiring.java",
+      "sha256": "eda06b36f4ae364434f79a2687fdc9758c493119b73db9497768ba9ca8097281",
+      "upstream": "org/osgi/framework/wiring/BundleWiring.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/FrameworkWiring.java",
+      "sha256": "0f9713d63c2c2e2993c555a8931de2b6e713b89af0a89c5de676fffbd003e876",
+      "upstream": "org/osgi/framework/wiring/FrameworkWiring.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/dto/BundleRevisionDTO.java",
+      "sha256": "43dfaaf349fe2a2166900c2b28a47614fb08ce80a0640a30886d10dca37dbc9f",
+      "upstream": "org/osgi/framework/wiring/dto/BundleRevisionDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/dto/BundleWireDTO.java",
+      "sha256": "5e7b4a58b3d9385cf9fb418f274dc2eee904d3f8928977bba2dfcf8ced250b55",
+      "upstream": "org/osgi/framework/wiring/dto/BundleWireDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/dto/BundleWiringDTO.java",
+      "sha256": "8f5019ee52274f9850ad7493b628ef6d9781342e3bcba9bce0a57b2375138ea4",
+      "upstream": "org/osgi/framework/wiring/dto/BundleWiringDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/dto/package-info.java",
+      "sha256": "4ce12025d30fdb9d8ced434396af66f6c70c55d2edee0cb352216f2dc319e93e",
+      "upstream": "org/osgi/framework/wiring/dto/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/wiring/dto/packageinfo",
+      "sha256": "de6ecef09060bd9ec86f537fde992bef152dd12accab0e611720a297f5542e18",
+      "upstream": "org/osgi/framework/wiring/dto/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/framework/wiring/package-info.java",
+      "sha256": "a08435e55f2d267212cada2150c2197435a26f561827fa7be1884b91c1b043cf",
+      "upstream": "org/osgi/framework/wiring/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/framework/wiring/packageinfo",
+      "sha256": "de6ecef09060bd9ec86f537fde992bef152dd12accab0e611720a297f5542e18",
+      "upstream": "org/osgi/framework/wiring/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/Capability.java",
+      "sha256": "92a70304fbf21cfe126ae33a74505ac133f3a013e039e9af26839e2fccfd112a",
+      "upstream": "org/osgi/resource/Capability.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/Namespace.java",
+      "sha256": "7fa39afabaf2a4c76792b8e59b2f104d4521b2b9a5d5da75ed38e5fd4f7fac53",
+      "upstream": "org/osgi/resource/Namespace.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/Requirement.java",
+      "sha256": "f8c4639dd3e7b5da8f9586e50496e1acb31329153c0b1ae4494574b52089397b",
+      "upstream": "org/osgi/resource/Requirement.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/Resource.java",
+      "sha256": "db6139aad21e33d59128b131edfde0048e94abae1997e64111f3f1b5fc5fd078",
+      "upstream": "org/osgi/resource/Resource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/Wire.java",
+      "sha256": "e50c27840a90e2e9836d5c0170c3afeb28ace02ec6b802106dbd90df2cb41ea5",
+      "upstream": "org/osgi/resource/Wire.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/Wiring.java",
+      "sha256": "e1a3a7a98580f9de709a5af82a66993031346ca2096d1454519d393a772ee781",
+      "upstream": "org/osgi/resource/Wiring.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/dto/CapabilityDTO.java",
+      "sha256": "e3da44f0e96da28155c0fd3a5340b28901ae19aef3c88a776436e9f9a9bce03f",
+      "upstream": "org/osgi/resource/dto/CapabilityDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/dto/CapabilityRefDTO.java",
+      "sha256": "7becd6d5ae98e9fdb213906b8e375eba2ae7aa40a0faf8c737462422ac8602e8",
+      "upstream": "org/osgi/resource/dto/CapabilityRefDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/dto/RequirementDTO.java",
+      "sha256": "6f287e41dbfa8cfa75c3bee3de35c6c7ef5cd6004cd14b89c7ce9dc2d7358d68",
+      "upstream": "org/osgi/resource/dto/RequirementDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/dto/RequirementRefDTO.java",
+      "sha256": "c4d9115dbfec06bd5444332c805e2fa463d3ebe8f64450321c0ff1f8ffd08400",
+      "upstream": "org/osgi/resource/dto/RequirementRefDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/dto/ResourceDTO.java",
+      "sha256": "fd927d9cc28ff768ac0f66ee89eaac82ea002292ef25d16a0910fc2beb0037d3",
+      "upstream": "org/osgi/resource/dto/ResourceDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/dto/WireDTO.java",
+      "sha256": "1ea5c74bf6f161fdc291004bf8a7fb6188e5f55e5c6ce31dec1591aaa58d1de4",
+      "upstream": "org/osgi/resource/dto/WireDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/dto/WiringDTO.java",
+      "sha256": "46382e914208de5c55994837e55a7e4e3c816be067825555be127d415315912c",
+      "upstream": "org/osgi/resource/dto/WiringDTO.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/dto/package-info.java",
+      "sha256": "a5e150dc27e015996c2154c0ec085a342ee1158fadab2e84dbd594d5317aa3f6",
+      "upstream": "org/osgi/resource/dto/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/resource/dto/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "org/osgi/resource/dto/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/resource/package-info.java",
+      "sha256": "4c0518c52689add025efe000ff9508d0bbcfbbab67bd62739a6bfbcb570b3197",
+      "upstream": "org/osgi/resource/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/resource/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "org/osgi/resource/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/condpermadmin/BundleLocationCondition.java",
+      "sha256": "3de1bb1a5e12769eb4f366eb0b56eb1ff17f0de390ec0c846e8994441d042ff7",
+      "upstream": "org/osgi/service/condpermadmin/BundleLocationCondition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/condpermadmin/BundleSignerCondition.java",
+      "sha256": "e2397ac51e889e6343d2acda27b909ea02f513cb08834c0731dcb3f49df44cc7",
+      "upstream": "org/osgi/service/condpermadmin/BundleSignerCondition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/condpermadmin/Condition.java",
+      "sha256": "64ddb30ab9e62b67875d16072b7da801f8a5f86ee709bcfa623f2cac3a9c0ada",
+      "upstream": "org/osgi/service/condpermadmin/Condition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/condpermadmin/ConditionInfo.java",
+      "sha256": "0474f847a66fa2034072b18dfd9bf90181518a6042f0fc14db00b5de987715b0",
+      "upstream": "org/osgi/service/condpermadmin/ConditionInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/condpermadmin/ConditionalPermissionAdmin.java",
+      "sha256": "339f7b8046876ac528e18c01909b5bb706a0df2c1c67c047fc7af76c3b752b85",
+      "upstream": "org/osgi/service/condpermadmin/ConditionalPermissionAdmin.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/condpermadmin/ConditionalPermissionInfo.java",
+      "sha256": "daea55db544c94cef8d0c084ec1cd393ee5db92b56566211eeaee2abd0011ab1",
+      "upstream": "org/osgi/service/condpermadmin/ConditionalPermissionInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/condpermadmin/ConditionalPermissionUpdate.java",
+      "sha256": "1949a08f92fba90f15d6a43553a71c9ebf882f70f22555644c90cda9c6428ed8",
+      "upstream": "org/osgi/service/condpermadmin/ConditionalPermissionUpdate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/condpermadmin/package-info.java",
+      "sha256": "d4dd793b787dde3a2c44bbeacb11938c5892ae6136306b7f8cf6687e4ecdf302",
+      "upstream": "org/osgi/service/condpermadmin/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/service/condpermadmin/packageinfo",
+      "sha256": "a5108c24bcbd27ed90b9e81f4d3eb3d7c0646fd1774db8845e5a7fe38be40ac5",
+      "upstream": "org/osgi/service/condpermadmin/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/packageadmin/ExportedPackage.java",
+      "sha256": "037c52b55969a3d6cbf21787f0238a59757236f4d9dc7c8ef2bd5f4142716108",
+      "upstream": "org/osgi/service/packageadmin/ExportedPackage.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/packageadmin/PackageAdmin.java",
+      "sha256": "6cea78f6bf2faf68c0b3695656fc015fac8337fbda75bb4f2cb29242d11bb375",
+      "upstream": "org/osgi/service/packageadmin/PackageAdmin.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/packageadmin/RequiredBundle.java",
+      "sha256": "2cd8052b88d6a25d9515ee7512b779ef130d6439f1d4456f21b9174f50fbe0b1",
+      "upstream": "org/osgi/service/packageadmin/RequiredBundle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/packageadmin/package-info.java",
+      "sha256": "89c47e4e58b3cc5f3f652cd9cc9ea3d961b15e70db50e1ee5334a7202377bdb0",
+      "upstream": "org/osgi/service/packageadmin/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/service/packageadmin/packageinfo",
+      "sha256": "de6ecef09060bd9ec86f537fde992bef152dd12accab0e611720a297f5542e18",
+      "upstream": "org/osgi/service/packageadmin/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/permissionadmin/PermissionAdmin.java",
+      "sha256": "86079c6f277a787b8a2ca2064d0b3dc5ebc174e2ac381e176201931102182c3f",
+      "upstream": "org/osgi/service/permissionadmin/PermissionAdmin.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/permissionadmin/PermissionInfo.java",
+      "sha256": "022fea13bbbe683555743b4aa9b64b29566e89d55f1fa32b2b07ccf5d44c7198",
+      "upstream": "org/osgi/service/permissionadmin/PermissionInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/permissionadmin/package-info.java",
+      "sha256": "ec099a8b0abc7eb667706585c2131a956062bc0fc1337e2c7c6c85d2de8d2a32",
+      "upstream": "org/osgi/service/permissionadmin/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/service/permissionadmin/packageinfo",
+      "sha256": "de6ecef09060bd9ec86f537fde992bef152dd12accab0e611720a297f5542e18",
+      "upstream": "org/osgi/service/permissionadmin/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/startlevel/StartLevel.java",
+      "sha256": "29d04c08a51dc8a68c1829b240ba1bb3aabd026b5c5f629cc944775329e3298a",
+      "upstream": "org/osgi/service/startlevel/StartLevel.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/startlevel/package-info.java",
+      "sha256": "9dc6f96226d77bda2e200838e736cbac83e33a689ef618e1898ad9a99db48829",
+      "upstream": "org/osgi/service/startlevel/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/service/startlevel/packageinfo",
+      "sha256": "f60ecb21ad43c8f7e3e5910d6d2737e75ae92665875d84e9c11a6926429ffb82",
+      "upstream": "org/osgi/service/startlevel/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/url/AbstractURLStreamHandlerService.java",
+      "sha256": "a610824290c0b1a190708e13938fcf94ad2533de2f510bf81c9ba4f58f6298f6",
+      "upstream": "org/osgi/service/url/AbstractURLStreamHandlerService.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/url/URLConstants.java",
+      "sha256": "065598eee1bbe32657ce400edd300799c8bf655a95525049e119619fd9bbdb69",
+      "upstream": "org/osgi/service/url/URLConstants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/url/URLStreamHandlerService.java",
+      "sha256": "1933904ca9d2afb6d124334f2ed7ae8e2e06c8d90729e3865b2757a2aa360b9b",
+      "upstream": "org/osgi/service/url/URLStreamHandlerService.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/url/URLStreamHandlerSetter.java",
+      "sha256": "81118160f6c7b951e8a8acd62b8da319902f8046474fde87fcfc324b5d1e209b",
+      "upstream": "org/osgi/service/url/URLStreamHandlerSetter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/service/url/package-info.java",
+      "sha256": "0c26e81cbbad650a7359e70018bc6e82d749a8cd9d5138cfce0c4f53e387bf8b",
+      "upstream": "org/osgi/service/url/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/service/url/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "org/osgi/service/url/packageinfo"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/util/tracker/AbstractTracked.java",
+      "sha256": "b7bc37880fe37d4dbf9a539eff559ab60b878a37589a11a58fa9ab2746c61799",
+      "upstream": "org/osgi/util/tracker/AbstractTracked.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/util/tracker/BundleTracker.java",
+      "sha256": "4c3756ac3485889bca68e80e6496b2dd5aac588034bc0d0867566fe5466bd9f4",
+      "upstream": "org/osgi/util/tracker/BundleTracker.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/util/tracker/BundleTrackerCustomizer.java",
+      "sha256": "35c1f3f9d144a1d82cfed147190017ab9a0f646ccdc04c63d7f6a041c1f873b8",
+      "upstream": "org/osgi/util/tracker/BundleTrackerCustomizer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/util/tracker/ServiceTracker.java",
+      "sha256": "a21082af1bfbfe681166ac509afcef63e2e86b80dc4a6212d1da227ca58c6b15",
+      "upstream": "org/osgi/util/tracker/ServiceTracker.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/util/tracker/ServiceTrackerCustomizer.java",
+      "sha256": "954de68929cb8da645372514e82b4c9e9d707edab138adb68a165479464af8e5",
+      "upstream": "org/osgi/util/tracker/ServiceTrackerCustomizer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/java/org/osgi/util/tracker/package-info.java",
+      "sha256": "cedab97faba74dbe6daa60ef6cb18f0822d5be8fee84d7d07a07f5920483cbb0",
+      "upstream": "org/osgi/util/tracker/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/org/osgi/util/tracker/packageinfo",
+      "sha256": "832fe624fb1bde365cf85e98e553017c2237741041c8a65ec016d7806d213f0f",
+      "upstream": "org/osgi/util/tracker/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/dto/DTO.java",
+      "sha256": "817ea9e94bf6f12248e0944763c430eca575e91c9781889f620e7cf60befb638",
+      "upstream": "OSGI-OPT/src/org/osgi/dto/DTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/dto/package-info.java",
+      "sha256": "0c203c829f85ec228ad7c83f5ad4f413b630d943edc33d4e98e5b83c8c660199",
+      "upstream": "OSGI-OPT/src/org/osgi/dto/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/dto/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "OSGI-OPT/src/org/osgi/dto/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/AdaptPermission.java",
+      "sha256": "efbb66ae90327795dceaaae0c0c8e8a5aea29c30651d9537093d579a2ec5ff4b",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/AdaptPermission.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/AdminPermission.java",
+      "sha256": "73ddc570c8c005457017b2f1d2b7cf245868f9fe3f21dd76bd40059fd2478362",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/AdminPermission.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/AllServiceListener.java",
+      "sha256": "af3437e7647c2b23b38191699586391b8887d1be29e406b221c2195ecdbf13d1",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/AllServiceListener.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/Bundle.java",
+      "sha256": "66ae4739ac03f833c9b052f2f1b65e5745b3534d6be642c0e7e82faef84897a3",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/Bundle.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/BundleActivator.java",
+      "sha256": "03e4481a71a4a7c1274ea88733a7fd37215151d87d23166e6b7927a2d7b5fc17",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/BundleActivator.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/BundleContext.java",
+      "sha256": "a14c95e9774ef978642a134fa31e954170492b67ecfaddaae84a2b0351774684",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/BundleContext.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/BundleEvent.java",
+      "sha256": "157adbfa88bd70cba71dba043c3198c6fbf81c3e9b1657fc7c81bf38e1a1994c",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/BundleEvent.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/BundleException.java",
+      "sha256": "31dc72e3032b24f494ae8f44463e2b650ceb23763a27c6609e798db06ae8f129",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/BundleException.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/BundleListener.java",
+      "sha256": "0fb7821d407e49b1f636dded4bf25293cd49f98c2c214946f2df36d388455721",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/BundleListener.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/BundlePermission.java",
+      "sha256": "dca1075393ae14b716fbb0a5a69bc4d7eed41c40500cb92d42d78019449f5442",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/BundlePermission.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/BundleReference.java",
+      "sha256": "f4262d9e22eb67e7ef1e7185872767258f828649db8e20ad08732e433993085b",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/BundleReference.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/CapabilityPermission.java",
+      "sha256": "923e3b0a16e268fea5f62a08911ba0b7f6998b7e950268ca4d8349bd5eb087dc",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/CapabilityPermission.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/Configurable.java",
+      "sha256": "67db4e2a7fb696dfd21abcda21b761f47646157fa7dad9318b3f071db8e4ce3b",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/Configurable.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/Constants.java",
+      "sha256": "6ba71bd4a9cf22f272ffd5b1dfc9c4faddbab8cd94ea2368d63e5f1a2f0bb2db",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/Constants.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/Filter.java",
+      "sha256": "5080bfc864922941acdeb95929753b6521fb233124aa4baa421445767e1af491",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/Filter.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/FrameworkEvent.java",
+      "sha256": "6c808852517cf18d4305cd73546499bbee2290e4d18306b1b340ac597ef48ea9",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/FrameworkEvent.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/FrameworkListener.java",
+      "sha256": "57b183078708c9fb91e20b339c9e6ec24f2a6b390dcc9f7809cb645126768308",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/FrameworkListener.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/FrameworkUtil.java",
+      "sha256": "eb042b8423b647c6d0f242e5b76732d851d9d73cf1fe455574a876b66549c262",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/FrameworkUtil.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/InvalidSyntaxException.java",
+      "sha256": "5880666c908b5e04a94c36bfaea79249e969e8f849d038f4792f3cb8507defc5",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/InvalidSyntaxException.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/PackagePermission.java",
+      "sha256": "95a05b01aefe0148b56ffeb67a401d8d71f6e9217d09c24425e873c1fcb516e3",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/PackagePermission.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/PrototypeServiceFactory.java",
+      "sha256": "4839a25e6c8364a98bbeecffc3c17c183dc08bc633465a12ce7968e3162fc3c0",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/PrototypeServiceFactory.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/ServiceEvent.java",
+      "sha256": "fd67ff7dcffe9c24fe2ac114f138ccbc6a9c8ac4551cee6bd60a13968f419820",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/ServiceEvent.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/ServiceException.java",
+      "sha256": "59748dc67f5fb2f4b6a95064a1e0eac9ee514bbcf4496aa98fb59bb6c82238b2",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/ServiceException.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/ServiceFactory.java",
+      "sha256": "51e48f2c1083b6692d715964f798c48e79addd4f9f382b34d11ea80f83de1995",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/ServiceFactory.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/ServiceListener.java",
+      "sha256": "15f1a6648dd3e272ce13ea2a6cd509dd29f94d1aa935188cca84a9c7bdd9902b",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/ServiceListener.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/ServiceObjects.java",
+      "sha256": "5f852e78d88f19709282d7c260deeed2313635099ebf2d392eedd2d4d993587e",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/ServiceObjects.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/ServicePermission.java",
+      "sha256": "5d61945bb4ac18ec92c0ca4828f28365ab9e3754a5a553563458d21b24217eff",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/ServicePermission.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/ServiceReference.java",
+      "sha256": "c8824b9d8af4f7646053b16702e1e942dd66a8a1c95b4b288c5feb4fd96e2ffc",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/ServiceReference.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/ServiceRegistration.java",
+      "sha256": "765e094ee71acb0dc4966add6d86ab72e9b0660a0cd4c494d23f0a4635e38a1a",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/ServiceRegistration.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/SignerProperty.java",
+      "sha256": "fabfbefeee3c3adc4b0822e854131cc9e47b740b7dd943231516c7168eba04c0",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/SignerProperty.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/SynchronousBundleListener.java",
+      "sha256": "bcd568d2467b1b84d7b6612a21eb0804250b31d6c60d8354f5bba207984a7d46",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/SynchronousBundleListener.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/UnfilteredServiceListener.java",
+      "sha256": "86e9f6dcdf8c46f2ba3b5f52c51a585697924e3c57b1fa95f3f66908a895cb56",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/UnfilteredServiceListener.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/Version.java",
+      "sha256": "23ab1607e36e56ffb9c934694fe4cf69da6ad2b9dd3961d2066e0d7bb2054433",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/Version.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/VersionRange.java",
+      "sha256": "57742c2054e24d617064b99c0ffd62cb713426f6c7f66f46091a7dc856731460",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/VersionRange.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/dto/BundleDTO.java",
+      "sha256": "075ca76ed2ac811cc92f4c4104b9ac97eaef323e827bfc21fa848ffcc02cf7b7",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/dto/BundleDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/dto/FrameworkDTO.java",
+      "sha256": "5f8137f38f17852a0740f86dad5a74c12da1475bdc9cf7e9d599fb3c13dfb3a1",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/dto/FrameworkDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/dto/ServiceReferenceDTO.java",
+      "sha256": "268e849838fe34282575e644bc8211c1843994bc041f72d499a4a8555f48414f",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/dto/ServiceReferenceDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/dto/package-info.java",
+      "sha256": "6833101568229a2b724745c94182bb23ceb7c6c6c2f6f6e0e5bbc0eda73752b8",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/dto/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/dto/packageinfo",
+      "sha256": "bf67602b908e5dc043ee5e775e7db503e15369e196e13cd2fc7471d957c463d9",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/dto/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/bundle/CollisionHook.java",
+      "sha256": "554a0b04bf1efe795377bc782d475b2ce8b7c610eee303bb26a1344969a7545f",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/bundle/CollisionHook.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/bundle/EventHook.java",
+      "sha256": "0b94aaca368411fffdbbddf6711d3906388098ad067fffb677c495ee94a7ac90",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/bundle/EventHook.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/bundle/FindHook.java",
+      "sha256": "1757970b5b8d028a0f39e9f90d804966f1355a4c3a7e2e698f715c023c180d8f",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/bundle/FindHook.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/bundle/package-info.java",
+      "sha256": "09648357f1d190e14783b638bd7b2b53fa3d76fe6cb156ccee83f138dc9039db",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/bundle/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/bundle/packageinfo",
+      "sha256": "f60ecb21ad43c8f7e3e5910d6d2737e75ae92665875d84e9c11a6926429ffb82",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/bundle/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/resolver/ResolverHook.java",
+      "sha256": "c9de3cb49f4be5c0b6080f925aef240f8106f6cda1c809671e8734505462a925",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/resolver/ResolverHook.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/resolver/ResolverHookFactory.java",
+      "sha256": "3d628dce2a3dbbf2fdcbec018d7d35f264361438f2a5b89321f761f779ce424a",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/resolver/ResolverHookFactory.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/resolver/package-info.java",
+      "sha256": "e810af3b76734f21c2b1554b95dbaf5af7a7e847004674e854e9286e6a68c2de",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/resolver/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/resolver/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/resolver/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/service/EventHook.java",
+      "sha256": "4764c0215695b350ef1356f330800a8b918995e08d51a3e6ceda5734cfecd600",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/service/EventHook.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/service/EventListenerHook.java",
+      "sha256": "a6ddc83c7d92d17130e703ad6a24270b996e68523e5b7e43333b74dbb75993d5",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/service/EventListenerHook.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/service/FindHook.java",
+      "sha256": "1acd56b9d13c44c85aebeb9b4e1bf27b5e3e10a9575fdfa6b23ee4c38f84041d",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/service/FindHook.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/service/ListenerHook.java",
+      "sha256": "9188e31a2ad203dd83d366fddba4e8dca284ba871343e01721d30151bac30cfe",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/service/ListenerHook.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/service/package-info.java",
+      "sha256": "e3ef5594440928601fc051511d30b509ac772b5dd50750efede7189fdcf46b2a",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/service/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/service/packageinfo",
+      "sha256": "f60ecb21ad43c8f7e3e5910d6d2737e75ae92665875d84e9c11a6926429ffb82",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/service/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/weaving/WeavingException.java",
+      "sha256": "5f2bdb5fddaca6adf8566a507a80c0aefaf8e1f5f90ecd08fb26196e6d384441",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/weaving/WeavingException.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/weaving/WeavingHook.java",
+      "sha256": "9453dc3eb1933659c0f0f3e80e46868808508f755dbf2c3bb9391f5db7e03d73",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/weaving/WeavingHook.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/weaving/WovenClass.java",
+      "sha256": "35fe6f0180c24a51ea52624d651a78aac93beb6b3b97cc0c3b4e29e2b9a164ae",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/weaving/WovenClass.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/weaving/WovenClassListener.java",
+      "sha256": "318a467a6d05aa3a1e8a0be3d290fcaabe7dd040458f3e2a829185c6721082be",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/weaving/WovenClassListener.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/weaving/package-info.java",
+      "sha256": "4108ae47a1d1e938d11f72d38f7595cf959ffd83a03c5ed756b7d1f3b3ca631b",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/weaving/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/hooks/weaving/packageinfo",
+      "sha256": "f60ecb21ad43c8f7e3e5910d6d2737e75ae92665875d84e9c11a6926429ffb82",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/hooks/weaving/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/launch/Framework.java",
+      "sha256": "33a6d469416173f9f4327082dbd39951324b3f30d0eb0abc15c4cf9f74d98899",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/launch/Framework.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/launch/FrameworkFactory.java",
+      "sha256": "4cecaba5fff596e00b48a1c9fa6919a49293eff641aff672075251036a9944c9",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/launch/FrameworkFactory.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/launch/package-info.java",
+      "sha256": "7fa4ff4ac58014c96f7bf455a7dc099313fcae0ab782fbf38f5cdd40a6349546",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/launch/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/launch/packageinfo",
+      "sha256": "de6ecef09060bd9ec86f537fde992bef152dd12accab0e611720a297f5542e18",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/launch/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/namespace/AbstractWiringNamespace.java",
+      "sha256": "60336c95ee83d443fa35d391be30f96043bbbc174a95daeee5ead089e49380a4",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/namespace/AbstractWiringNamespace.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/namespace/BundleNamespace.java",
+      "sha256": "8d1b326f8225284dd222544528c43f0d9ad53ad6eae0ef4ac440b436ba440e8c",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/namespace/BundleNamespace.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/namespace/ExecutionEnvironmentNamespace.java",
+      "sha256": "1d64620a98cfe2fa29516b6b3949a812e358aad98affb80d42c9d3dacad416e4",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/namespace/ExecutionEnvironmentNamespace.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/namespace/HostNamespace.java",
+      "sha256": "0a51574b82cbc0475b5780ba74a50accb0ee3d605fa56365b50e60bac3943460",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/namespace/HostNamespace.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/namespace/IdentityNamespace.java",
+      "sha256": "4a407367d59e34005ab752b2c6313a0595a0dd32d770ec37f5f70ea03a9d5279",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/namespace/IdentityNamespace.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/namespace/NativeNamespace.java",
+      "sha256": "67d61b6bd2bb7dd5a0668f593656a42f7cd6c8356713d8a7bad46a755ffb6c4b",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/namespace/NativeNamespace.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/namespace/PackageNamespace.java",
+      "sha256": "129d414bd5402fc1a7a912481d8e3de875e07d1b39912f3b00f3fd285a2e216d",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/namespace/PackageNamespace.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/namespace/package-info.java",
+      "sha256": "1059dd35b14a5d59ed4686f8d5aebc02a6a857ff974b98bdabe016dc610fbf79",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/namespace/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/namespace/packageinfo",
+      "sha256": "f60ecb21ad43c8f7e3e5910d6d2737e75ae92665875d84e9c11a6926429ffb82",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/namespace/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/package-info.java",
+      "sha256": "b83660078569112e94f367a53cb8dfcab0e229c762ecacb5adb05ce01b0e71d3",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/packageinfo",
+      "sha256": "bf67602b908e5dc043ee5e775e7db503e15369e196e13cd2fc7471d957c463d9",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/startlevel/BundleStartLevel.java",
+      "sha256": "b95c7c79e90e82eeaba1540fff6913467976510a2b369279b4bcc4539834a608",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/startlevel/BundleStartLevel.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/startlevel/FrameworkStartLevel.java",
+      "sha256": "f67f4c0bde6c51e29fdb3888a850b21da9abae4180eb3e406277cef9dee582b1",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/startlevel/FrameworkStartLevel.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/startlevel/dto/BundleStartLevelDTO.java",
+      "sha256": "7c4aa751e2959eb2493939ed1b04bd87c87d6b07db0971c3c75fdeef3c082979",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/startlevel/dto/BundleStartLevelDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/startlevel/dto/FrameworkStartLevelDTO.java",
+      "sha256": "00fbc9374838ed116f63a75f8cdd35c2ad995e49611ccc1c4e43c23d309460f1",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/startlevel/dto/FrameworkStartLevelDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/startlevel/dto/package-info.java",
+      "sha256": "165a699714e8993ac9ff7e3b07e3ed658f6dacd4ae54d87ed8febff1c9c33ab7",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/startlevel/dto/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/startlevel/dto/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/startlevel/dto/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/startlevel/package-info.java",
+      "sha256": "dd0bfe766491265b85d1e2bce8459e2f10c5555680ad77621ec7791badfbdcbe",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/startlevel/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/startlevel/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/startlevel/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/BundleCapability.java",
+      "sha256": "085acb8a3a4b75ce8c4969589598b79d160fb8dd5deda67479b75881472a116f",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/BundleCapability.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/BundleRequirement.java",
+      "sha256": "46f06a7bca751cdb5583ce307000e2f64bec5cbe3492cfe9ff95938cd8824392",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/BundleRequirement.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/BundleRevision.java",
+      "sha256": "740e82652cf24966f3615e0b08fa424dac17e0caa05a80974691a0999f6ecc21",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/BundleRevision.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/BundleRevisions.java",
+      "sha256": "5a1885340059d6aea6521e4f6f6df92a6a8e89b065637a98e5edf7eb80660bf1",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/BundleRevisions.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/BundleWire.java",
+      "sha256": "ff0f0ddd3c5212e899893aaace435b56a2f72dc33eeccf61ecc34c5e00000bf4",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/BundleWire.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/BundleWiring.java",
+      "sha256": "eda06b36f4ae364434f79a2687fdc9758c493119b73db9497768ba9ca8097281",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/BundleWiring.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/FrameworkWiring.java",
+      "sha256": "0f9713d63c2c2e2993c555a8931de2b6e713b89af0a89c5de676fffbd003e876",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/FrameworkWiring.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/dto/BundleRevisionDTO.java",
+      "sha256": "43dfaaf349fe2a2166900c2b28a47614fb08ce80a0640a30886d10dca37dbc9f",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/dto/BundleRevisionDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/dto/BundleWireDTO.java",
+      "sha256": "5e7b4a58b3d9385cf9fb418f274dc2eee904d3f8928977bba2dfcf8ced250b55",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/dto/BundleWireDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/dto/BundleWiringDTO.java",
+      "sha256": "8f5019ee52274f9850ad7493b628ef6d9781342e3bcba9bce0a57b2375138ea4",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/dto/BundleWiringDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/dto/package-info.java",
+      "sha256": "4ce12025d30fdb9d8ced434396af66f6c70c55d2edee0cb352216f2dc319e93e",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/dto/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/dto/packageinfo",
+      "sha256": "de6ecef09060bd9ec86f537fde992bef152dd12accab0e611720a297f5542e18",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/dto/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/package-info.java",
+      "sha256": "a08435e55f2d267212cada2150c2197435a26f561827fa7be1884b91c1b043cf",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/framework/wiring/packageinfo",
+      "sha256": "de6ecef09060bd9ec86f537fde992bef152dd12accab0e611720a297f5542e18",
+      "upstream": "OSGI-OPT/src/org/osgi/framework/wiring/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/Capability.java",
+      "sha256": "92a70304fbf21cfe126ae33a74505ac133f3a013e039e9af26839e2fccfd112a",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/Capability.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/Namespace.java",
+      "sha256": "7fa39afabaf2a4c76792b8e59b2f104d4521b2b9a5d5da75ed38e5fd4f7fac53",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/Namespace.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/Requirement.java",
+      "sha256": "f8c4639dd3e7b5da8f9586e50496e1acb31329153c0b1ae4494574b52089397b",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/Requirement.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/Resource.java",
+      "sha256": "db6139aad21e33d59128b131edfde0048e94abae1997e64111f3f1b5fc5fd078",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/Resource.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/Wire.java",
+      "sha256": "e50c27840a90e2e9836d5c0170c3afeb28ace02ec6b802106dbd90df2cb41ea5",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/Wire.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/Wiring.java",
+      "sha256": "e1a3a7a98580f9de709a5af82a66993031346ca2096d1454519d393a772ee781",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/Wiring.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/dto/CapabilityDTO.java",
+      "sha256": "e3da44f0e96da28155c0fd3a5340b28901ae19aef3c88a776436e9f9a9bce03f",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/dto/CapabilityDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/dto/CapabilityRefDTO.java",
+      "sha256": "7becd6d5ae98e9fdb213906b8e375eba2ae7aa40a0faf8c737462422ac8602e8",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/dto/CapabilityRefDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/dto/RequirementDTO.java",
+      "sha256": "6f287e41dbfa8cfa75c3bee3de35c6c7ef5cd6004cd14b89c7ce9dc2d7358d68",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/dto/RequirementDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/dto/RequirementRefDTO.java",
+      "sha256": "c4d9115dbfec06bd5444332c805e2fa463d3ebe8f64450321c0ff1f8ffd08400",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/dto/RequirementRefDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/dto/ResourceDTO.java",
+      "sha256": "fd927d9cc28ff768ac0f66ee89eaac82ea002292ef25d16a0910fc2beb0037d3",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/dto/ResourceDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/dto/WireDTO.java",
+      "sha256": "1ea5c74bf6f161fdc291004bf8a7fb6188e5f55e5c6ce31dec1591aaa58d1de4",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/dto/WireDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/dto/WiringDTO.java",
+      "sha256": "46382e914208de5c55994837e55a7e4e3c816be067825555be127d415315912c",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/dto/WiringDTO.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/dto/package-info.java",
+      "sha256": "a5e150dc27e015996c2154c0ec085a342ee1158fadab2e84dbd594d5317aa3f6",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/dto/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/dto/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/dto/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/package-info.java",
+      "sha256": "4c0518c52689add025efe000ff9508d0bbcfbbab67bd62739a6bfbcb570b3197",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/resource/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "OSGI-OPT/src/org/osgi/resource/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/condpermadmin/BundleLocationCondition.java",
+      "sha256": "3de1bb1a5e12769eb4f366eb0b56eb1ff17f0de390ec0c846e8994441d042ff7",
+      "upstream": "OSGI-OPT/src/org/osgi/service/condpermadmin/BundleLocationCondition.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/condpermadmin/BundleSignerCondition.java",
+      "sha256": "e2397ac51e889e6343d2acda27b909ea02f513cb08834c0731dcb3f49df44cc7",
+      "upstream": "OSGI-OPT/src/org/osgi/service/condpermadmin/BundleSignerCondition.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/condpermadmin/Condition.java",
+      "sha256": "64ddb30ab9e62b67875d16072b7da801f8a5f86ee709bcfa623f2cac3a9c0ada",
+      "upstream": "OSGI-OPT/src/org/osgi/service/condpermadmin/Condition.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionInfo.java",
+      "sha256": "0474f847a66fa2034072b18dfd9bf90181518a6042f0fc14db00b5de987715b0",
+      "upstream": "OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionInfo.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionalPermissionAdmin.java",
+      "sha256": "339f7b8046876ac528e18c01909b5bb706a0df2c1c67c047fc7af76c3b752b85",
+      "upstream": "OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionalPermissionAdmin.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionalPermissionInfo.java",
+      "sha256": "daea55db544c94cef8d0c084ec1cd393ee5db92b56566211eeaee2abd0011ab1",
+      "upstream": "OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionalPermissionInfo.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionalPermissionUpdate.java",
+      "sha256": "1949a08f92fba90f15d6a43553a71c9ebf882f70f22555644c90cda9c6428ed8",
+      "upstream": "OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionalPermissionUpdate.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/condpermadmin/package-info.java",
+      "sha256": "d4dd793b787dde3a2c44bbeacb11938c5892ae6136306b7f8cf6687e4ecdf302",
+      "upstream": "OSGI-OPT/src/org/osgi/service/condpermadmin/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/condpermadmin/packageinfo",
+      "sha256": "a5108c24bcbd27ed90b9e81f4d3eb3d7c0646fd1774db8845e5a7fe38be40ac5",
+      "upstream": "OSGI-OPT/src/org/osgi/service/condpermadmin/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/packageadmin/ExportedPackage.java",
+      "sha256": "037c52b55969a3d6cbf21787f0238a59757236f4d9dc7c8ef2bd5f4142716108",
+      "upstream": "OSGI-OPT/src/org/osgi/service/packageadmin/ExportedPackage.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/packageadmin/PackageAdmin.java",
+      "sha256": "6cea78f6bf2faf68c0b3695656fc015fac8337fbda75bb4f2cb29242d11bb375",
+      "upstream": "OSGI-OPT/src/org/osgi/service/packageadmin/PackageAdmin.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/packageadmin/RequiredBundle.java",
+      "sha256": "2cd8052b88d6a25d9515ee7512b779ef130d6439f1d4456f21b9174f50fbe0b1",
+      "upstream": "OSGI-OPT/src/org/osgi/service/packageadmin/RequiredBundle.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/packageadmin/package-info.java",
+      "sha256": "89c47e4e58b3cc5f3f652cd9cc9ea3d961b15e70db50e1ee5334a7202377bdb0",
+      "upstream": "OSGI-OPT/src/org/osgi/service/packageadmin/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/packageadmin/packageinfo",
+      "sha256": "de6ecef09060bd9ec86f537fde992bef152dd12accab0e611720a297f5542e18",
+      "upstream": "OSGI-OPT/src/org/osgi/service/packageadmin/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/permissionadmin/PermissionAdmin.java",
+      "sha256": "86079c6f277a787b8a2ca2064d0b3dc5ebc174e2ac381e176201931102182c3f",
+      "upstream": "OSGI-OPT/src/org/osgi/service/permissionadmin/PermissionAdmin.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/permissionadmin/PermissionInfo.java",
+      "sha256": "022fea13bbbe683555743b4aa9b64b29566e89d55f1fa32b2b07ccf5d44c7198",
+      "upstream": "OSGI-OPT/src/org/osgi/service/permissionadmin/PermissionInfo.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/permissionadmin/package-info.java",
+      "sha256": "ec099a8b0abc7eb667706585c2131a956062bc0fc1337e2c7c6c85d2de8d2a32",
+      "upstream": "OSGI-OPT/src/org/osgi/service/permissionadmin/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/permissionadmin/packageinfo",
+      "sha256": "de6ecef09060bd9ec86f537fde992bef152dd12accab0e611720a297f5542e18",
+      "upstream": "OSGI-OPT/src/org/osgi/service/permissionadmin/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/startlevel/StartLevel.java",
+      "sha256": "29d04c08a51dc8a68c1829b240ba1bb3aabd026b5c5f629cc944775329e3298a",
+      "upstream": "OSGI-OPT/src/org/osgi/service/startlevel/StartLevel.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/startlevel/package-info.java",
+      "sha256": "9dc6f96226d77bda2e200838e736cbac83e33a689ef618e1898ad9a99db48829",
+      "upstream": "OSGI-OPT/src/org/osgi/service/startlevel/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/startlevel/packageinfo",
+      "sha256": "f60ecb21ad43c8f7e3e5910d6d2737e75ae92665875d84e9c11a6926429ffb82",
+      "upstream": "OSGI-OPT/src/org/osgi/service/startlevel/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/url/AbstractURLStreamHandlerService.java",
+      "sha256": "a610824290c0b1a190708e13938fcf94ad2533de2f510bf81c9ba4f58f6298f6",
+      "upstream": "OSGI-OPT/src/org/osgi/service/url/AbstractURLStreamHandlerService.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/url/URLConstants.java",
+      "sha256": "065598eee1bbe32657ce400edd300799c8bf655a95525049e119619fd9bbdb69",
+      "upstream": "OSGI-OPT/src/org/osgi/service/url/URLConstants.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/url/URLStreamHandlerService.java",
+      "sha256": "1933904ca9d2afb6d124334f2ed7ae8e2e06c8d90729e3865b2757a2aa360b9b",
+      "upstream": "OSGI-OPT/src/org/osgi/service/url/URLStreamHandlerService.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/url/URLStreamHandlerSetter.java",
+      "sha256": "81118160f6c7b951e8a8acd62b8da319902f8046474fde87fcfc324b5d1e209b",
+      "upstream": "OSGI-OPT/src/org/osgi/service/url/URLStreamHandlerSetter.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/url/package-info.java",
+      "sha256": "0c26e81cbbad650a7359e70018bc6e82d749a8cd9d5138cfce0c4f53e387bf8b",
+      "upstream": "OSGI-OPT/src/org/osgi/service/url/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/service/url/packageinfo",
+      "sha256": "53c0495104423a2e7010940dfcb928c7e8243efb655aa148782f251f416bd1b6",
+      "upstream": "OSGI-OPT/src/org/osgi/service/url/packageinfo"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/util/tracker/AbstractTracked.java",
+      "sha256": "b7bc37880fe37d4dbf9a539eff559ab60b878a37589a11a58fa9ab2746c61799",
+      "upstream": "OSGI-OPT/src/org/osgi/util/tracker/AbstractTracked.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/util/tracker/BundleTracker.java",
+      "sha256": "4c3756ac3485889bca68e80e6496b2dd5aac588034bc0d0867566fe5466bd9f4",
+      "upstream": "OSGI-OPT/src/org/osgi/util/tracker/BundleTracker.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/util/tracker/BundleTrackerCustomizer.java",
+      "sha256": "35c1f3f9d144a1d82cfed147190017ab9a0f646ccdc04c63d7f6a041c1f873b8",
+      "upstream": "OSGI-OPT/src/org/osgi/util/tracker/BundleTrackerCustomizer.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/util/tracker/ServiceTracker.java",
+      "sha256": "a21082af1bfbfe681166ac509afcef63e2e86b80dc4a6212d1da227ca58c6b15",
+      "upstream": "OSGI-OPT/src/org/osgi/util/tracker/ServiceTracker.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/util/tracker/ServiceTrackerCustomizer.java",
+      "sha256": "954de68929cb8da645372514e82b4c9e9d707edab138adb68a165479464af8e5",
+      "upstream": "OSGI-OPT/src/org/osgi/util/tracker/ServiceTrackerCustomizer.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/util/tracker/package-info.java",
+      "sha256": "cedab97faba74dbe6daa60ef6cb18f0822d5be8fee84d7d07a07f5920483cbb0",
+      "upstream": "OSGI-OPT/src/org/osgi/util/tracker/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.osgi:org.osgi.core:6.0.0 (sha256 1c1bb435eb34cbf1f743653da38f604d45d53fbc95979053768cd3fc293cb931)",
+      "repository": "m3/vendor/third_party/org.osgi.core/src/main/resources/OSGI-OPT/src/org/osgi/util/tracker/packageinfo",
+      "sha256": "832fe624fb1bde365cf85e98e553017c2237741041c8a65ec016d7806d213f0f",
+      "upstream": "OSGI-OPT/src/org/osgi/util/tracker/packageinfo"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/org.osgi.core/SOURCES_MANIFEST.tsv",
+      "sha256": "808085cdf4f2f9bd720b46deb424dd10a6be4a3047f3c266cd162c66e2e111c8",
+      "upstream": "(inventory)"
+    }
+  ],
+  "group": "org.osgi",
+  "kind": "MODULE",
+  "license": "Apache License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/osgi/org.osgi.core/6.0.0/org.osgi.core-6.0.0.pom",
+  "receipt": {
+    "buildRoot": "bbc09c6656d96bd1d33940ce4c7828e0cf837a2b9e07a8340e802e37780c6d24",
+    "distributionSha256": "8839b17ecc6653784d8e05be6866b4356f31fa8f8b1b012c08c86e54b1f16dbb",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "67987ed17a05bac130538d4170d54104b793a111df4e161979d2fd4e6f4d495c",
+    "status": "PASS"
+  },
+  "resources_completed": 151,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/osgi/org.osgi.core/6.0.0/org.osgi.core-6.0.0-sources.jar",
+  "sources_jar_sha1": "347531f45363ed10e222b03231d49bb7df016a4d",
+  "sources_jar_sha256": "7ba9e87b75b85ffc163fb3a60b78a5eeec82cbb011fa97d049588ad1657177a5",
+  "status": "PASS",
+  "upstream": "private",
+  "version": "6.0.0"
+}

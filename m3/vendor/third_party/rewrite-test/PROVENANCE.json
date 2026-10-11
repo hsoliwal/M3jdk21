@@ -1,0 +1,351 @@
+{
+  "artifact": "rewrite-test",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "LOMBOK_AT_SOURCE_LEVEL",
+  "consumers": "synexia-openrewrite-recipes, M3jdk21 m3/tooling",
+  "coordinate": "org.openrewrite:rewrite-test:8.17.1-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": true,
+  "delomboked_files": 7,
+  "dependencies": [
+    {
+      "artifact": "annotations",
+      "form": "source module",
+      "group": "org.jetbrains",
+      "optional": false,
+      "scope": "compile",
+      "version": "24.1.0-m3-source-1"
+    },
+    {
+      "artifact": "assertj-core",
+      "form": "source module",
+      "group": "org.assertj",
+      "optional": false,
+      "scope": "compile",
+      "version": "3.25.3-m3-source-1"
+    },
+    {
+      "artifact": "jackson-databind",
+      "form": "source module",
+      "group": "com.fasterxml.jackson.core",
+      "optional": true,
+      "scope": "compile",
+      "version": "2.16.1-m3-source-1"
+    },
+    {
+      "artifact": "jackson-dataformat-csv",
+      "form": "source module",
+      "group": "com.fasterxml.jackson.dataformat",
+      "optional": false,
+      "scope": "compile",
+      "version": "2.16.1-m3-source-1"
+    },
+    {
+      "artifact": "junit-jupiter-api",
+      "form": "source module",
+      "group": "org.junit.jupiter",
+      "optional": false,
+      "scope": "compile",
+      "version": "5.10.2-m3-source-1"
+    },
+    {
+      "artifact": "junit-jupiter-params",
+      "form": "source module",
+      "group": "org.junit.jupiter",
+      "optional": false,
+      "scope": "compile",
+      "version": "5.10.2-m3-source-1"
+    },
+    {
+      "artifact": "micrometer-core",
+      "form": "source module",
+      "group": "io.micrometer",
+      "optional": true,
+      "scope": "compile",
+      "version": "1.9.17-m3-source-1"
+    },
+    {
+      "artifact": "org.eclipse.jgit",
+      "form": "source module",
+      "group": "org.eclipse.jgit",
+      "optional": false,
+      "scope": "compile",
+      "version": "5.13.3.202401111512-r-m3-source-1"
+    },
+    {
+      "artifact": "rewrite-core",
+      "form": "source module",
+      "group": "org.openrewrite",
+      "optional": false,
+      "scope": "compile",
+      "version": "8.17.1-m3-source-1"
+    },
+    {
+      "artifact": "slf4j-api",
+      "form": "source module",
+      "group": "org.slf4j",
+      "optional": false,
+      "scope": "compile",
+      "version": "1.7.36-m3-source-1"
+    }
+  ],
+  "donor": "rewrite-test-8.17.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/rewrite-test/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "470a126bf2c657943422240c63f1436af8213cfd8c1a239b0764caf4fe7662c1",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/resources/META-INF/rewrite-test.properties",
+      "sha256": "a686718bf4b8d1822f4b72e2d0d419b9f309bf0be8245381e0b5114add392c82",
+      "upstream": "META-INF/rewrite-test.properties"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/DebugOnly.java",
+      "sha256": "da0c0d1e3a8fe04831e65275be5c961626e1e01f27949bd7ebf34cbbe1bbf94a",
+      "upstream": "org/openrewrite/DebugOnly.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/Example.java",
+      "sha256": "c27916f4ec88742846ba834d04a71507eaf7d114ced99bc0facb07bc7cf1a29c",
+      "upstream": "org/openrewrite/Example.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/Issue.java",
+      "sha256": "01a0e3728137b335a1d0ffff14deefaf4c860b797bc7e57bfa52c9db21dc2475",
+      "upstream": "org/openrewrite/Issue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/MetricsExtension.java",
+      "sha256": "d2d823f9de542e865a2de059c78316bb4c1a2130a3307584c27791b22113cfbc",
+      "upstream": "org/openrewrite/MetricsExtension.java"
+    },
+    {
+      "derived_from": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/AdHocRecipe.java",
+      "kind": "delomboked-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/AdHocRecipe.java",
+      "sha256": "a8ccfdd6a5bd4a22a50df05085ba71e6de9b8300cdf72d9f3fb4b78d8d81003d",
+      "tool": "lombok 1.18.30 delombok -f pretty, upstream lombok.config (UPSTREAM_LOMBOK.config) + one notice line",
+      "upstream": "org/openrewrite/test/AdHocRecipe.java"
+    },
+    {
+      "kind": "unmodified-production-lombok-source",
+      "repository": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/AdHocRecipe.java",
+      "sha256": "a796c48471e7a4477e9226e531efd754cdbc99ab3a10257e97ccaa31a87f5517",
+      "upstream": "org/openrewrite/test/AdHocRecipe.java"
+    },
+    {
+      "derived_from": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/AdHocScanningRecipe.java",
+      "kind": "delomboked-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/AdHocScanningRecipe.java",
+      "sha256": "3fe6f461e14ec4779d9794c8d0675588b5aee18f124a6b7c99c2d022eeba0f4b",
+      "tool": "lombok 1.18.30 delombok -f pretty, upstream lombok.config (UPSTREAM_LOMBOK.config) + one notice line",
+      "upstream": "org/openrewrite/test/AdHocScanningRecipe.java"
+    },
+    {
+      "kind": "unmodified-production-lombok-source",
+      "repository": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/AdHocScanningRecipe.java",
+      "sha256": "d0b6494c1595a3e13a40d3e12c2862295b5ba3271ca694a9e3110b5c2edc03a1",
+      "upstream": "org/openrewrite/test/AdHocScanningRecipe.java"
+    },
+    {
+      "derived_from": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/Dir.java",
+      "kind": "delomboked-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/Dir.java",
+      "sha256": "3c2dc3ab84883525c0c33b328cabbaf68114145cb77832db3347c18997ece4ec",
+      "tool": "lombok 1.18.30 delombok -f pretty, upstream lombok.config (UPSTREAM_LOMBOK.config) + one notice line",
+      "upstream": "org/openrewrite/test/Dir.java"
+    },
+    {
+      "kind": "unmodified-production-lombok-source",
+      "repository": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/Dir.java",
+      "sha256": "1162bebcaa30bf16c6140cab6de45b29f0cc611c061ce057266e1e24d5ae2e2c",
+      "upstream": "org/openrewrite/test/Dir.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/LargeSourceSetCheckingExpectedCycles.java",
+      "sha256": "ea3252896caf39aa4bb3b11685bb9e7af72cfe4eaaf5214dbe1872a1f43cbafb",
+      "upstream": "org/openrewrite/test/LargeSourceSetCheckingExpectedCycles.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/MockHttpSender.java",
+      "sha256": "7eb10aa33075635a2c5b7526bd83250d9943e1511c805a36c43a44f70a36b8a3",
+      "upstream": "org/openrewrite/test/MockHttpSender.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/ParserType.java",
+      "sha256": "6f4f319e55805a22e7b60b7ec13f1bdbbfd105173d3536229682ebc1f21485de",
+      "upstream": "org/openrewrite/test/ParserType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/RecipePrinter.java",
+      "sha256": "ca57180dea815751aa432c18b241f36b68f45cd139e8af7152aa010006fbcd7a",
+      "upstream": "org/openrewrite/test/RecipePrinter.java"
+    },
+    {
+      "derived_from": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/RecipeSpec.java",
+      "kind": "delomboked-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/RecipeSpec.java",
+      "sha256": "2274b94fbc7488e7f4678d5ae6bc98ab785109b2758538172fac4b622ed579c5",
+      "tool": "lombok 1.18.30 delombok -f pretty, upstream lombok.config (UPSTREAM_LOMBOK.config) + one notice line",
+      "upstream": "org/openrewrite/test/RecipeSpec.java"
+    },
+    {
+      "kind": "unmodified-production-lombok-source",
+      "repository": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/RecipeSpec.java",
+      "sha256": "c9f2ed93ff596003d03ea23aabf49af120f64dafa182fddc871d07fea6a163ac",
+      "upstream": "org/openrewrite/test/RecipeSpec.java"
+    },
+    {
+      "derived_from": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/RewriteTest.java",
+      "kind": "delomboked-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/RewriteTest.java",
+      "sha256": "93d99d262620f5c82586a39c5e2b048f8e61ec1d6b0df8d0462a8bea4ec8b68a",
+      "tool": "lombok 1.18.30 delombok -f pretty, upstream lombok.config (UPSTREAM_LOMBOK.config) + one notice line",
+      "upstream": "org/openrewrite/test/RewriteTest.java"
+    },
+    {
+      "kind": "unmodified-production-lombok-source",
+      "repository": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/RewriteTest.java",
+      "sha256": "8fcd18934218f14c45ff1f233a1fb5b1cf5783380dd6869bb2918a239f2377e2",
+      "upstream": "org/openrewrite/test/RewriteTest.java"
+    },
+    {
+      "derived_from": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/SourceSpec.java",
+      "kind": "delomboked-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/SourceSpec.java",
+      "sha256": "b3a2e30a5bcf9c80853bef997d76b0efad23cf1cf0d3af1375819b7949df71c9",
+      "tool": "lombok 1.18.30 delombok -f pretty, upstream lombok.config (UPSTREAM_LOMBOK.config) + one notice line",
+      "upstream": "org/openrewrite/test/SourceSpec.java"
+    },
+    {
+      "kind": "unmodified-production-lombok-source",
+      "repository": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/SourceSpec.java",
+      "sha256": "0d6cb6c904197f5a2400926acf21191eb6e56e841e7cb53931a73cb2ead513b8",
+      "upstream": "org/openrewrite/test/SourceSpec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/SourceSpecs.java",
+      "sha256": "19be75f5cd4dede932634f210baf8045484e3e285a1eb0c9be15f83006b6363e",
+      "upstream": "org/openrewrite/test/SourceSpecs.java"
+    },
+    {
+      "derived_from": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/TypeValidation.java",
+      "kind": "delomboked-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/TypeValidation.java",
+      "sha256": "3d498afb5128de47a25fa8428e33351ac47fc7d141049b08ab3403d64ace3298",
+      "tool": "lombok 1.18.30 delombok -f pretty, upstream lombok.config (UPSTREAM_LOMBOK.config) + one notice line",
+      "upstream": "org/openrewrite/test/TypeValidation.java"
+    },
+    {
+      "kind": "unmodified-production-lombok-source",
+      "repository": "m3/vendor/third_party/rewrite-test/upstream-lombok/org/openrewrite/test/TypeValidation.java",
+      "sha256": "77e0f4735091be43cf8df3efe62b13d2e89941cfc350e0808a5910ab24af0225",
+      "upstream": "org/openrewrite/test/TypeValidation.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/UncheckedConsumer.java",
+      "sha256": "b84535c239d3823164c3bdbedd582c19b9e395bbe72e4f0a187aa58313ab5322",
+      "upstream": "org/openrewrite/test/UncheckedConsumer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/UncheckedSupplier.java",
+      "sha256": "a21c65c62c82158d0eb948dfa5959692fb76680277fb66b4b20f06d55b6fb8d5",
+      "upstream": "org/openrewrite/test/UncheckedSupplier.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/internal/ThrowingUnaryOperator.java",
+      "sha256": "9c8498e78761a4e3c613ed1eb2b42b5ec20b27643519dfa85e893f96eb52d12d",
+      "upstream": "org/openrewrite/test/internal/ThrowingUnaryOperator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/java/org/openrewrite/test/package-info.java",
+      "sha256": "3eecde49fc73d2c810a9fa6d2b591f5d37cd4cb9b06d316ae35155a2f767055a",
+      "upstream": "org/openrewrite/test/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.openrewrite:rewrite-test:8.17.1 (sha256 6c58b829706adfd3f561d7f199b365f8642a0ed3609070ee8bd3bda4dc808e29)",
+      "repository": "m3/vendor/third_party/rewrite-test/src/main/resources/META-INF/rewrite/attribution/org.openrewrite.test.AdHocRecipe.yml",
+      "sha256": "d5dbe794ade8e56512dd551db5b289fe393cb4f6813482a9e1f1677171f9f4e3",
+      "upstream": "META-INF/rewrite/attribution/org.openrewrite.test.AdHocRecipe.yml"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/rewrite-test/UPSTREAM_LICENSE.json",
+      "sha256": "bd696b77cb3a110825e52cef56848867148a4888433f8296bc654b4a77e48102",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/rewrite-test/UPSTREAM_LICENSE.txt",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/rewrite-test/UPSTREAM_LOMBOK.config",
+      "sha256": "7a7eb5e33aaf354f59875207a37f97df1d3593910e8c3018aa3975b09e8e1b01",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/rewrite-test/UPSTREAM_LOMBOK.json",
+      "sha256": "c81aae5d561befbd898860064c2666460fa66b4c61f04a19d66b2620c30a99f5",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/rewrite-test/SOURCES_MANIFEST.tsv",
+      "sha256": "7e7fd01372faab94b14b65f495641d76659e3ffdf2172ccaec548e5b469a1d69",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/rewrite-test/LICENSE",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.openrewrite",
+  "kind": "MODULE",
+  "license": "The Apache Software License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-test/8.17.1/rewrite-test-8.17.1.pom",
+  "receipt": {
+    "buildRoot": "f512ea9d94379d75974f80b82adb2896e4e7eb341ae491b24e3aeb0ee3407ffc",
+    "distributionSha256": "e629cd71349bfd78f3b4822bee63dc341c82966c0b0171374f549c622d0e757a",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "c00e8274698d3969e9094254452028d147244952e2612584e8fb1d1cc396ff25",
+    "status": "PASS"
+  },
+  "resources_completed": 1,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-test/8.17.1/rewrite-test-8.17.1-sources.jar",
+  "sources_jar_sha1": "220562903ffbbe4bc1581dd377bcce5de16cd53d",
+  "sources_jar_sha256": "b429412aff5e429d4c4aa12c36707751dc6f21fdc4e5f79dc6a5cea0af792fa5",
+  "status": "PASS",
+  "upstream": "https://github.com/openrewrite/rewrite",
+  "version": "8.17.1"
+}

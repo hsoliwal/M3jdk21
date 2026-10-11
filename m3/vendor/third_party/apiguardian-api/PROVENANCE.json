@@ -1,0 +1,71 @@
+{
+  "artifact": "apiguardian-api",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "NOT_IN_LOCK",
+  "consumers": "OpenRewrite 8.17.1 runtime closure (mvn dependency:list of rewrite-core/java/java-21/test/xml)",
+  "coordinate": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "apiguardian-api-1.1.2",
+  "excluded_from_compilation": [
+    "module-info.java"
+  ],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/apiguardian-api/src/main/resources/META-INF/LICENSE",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/apiguardian-api/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production-excluded-from-compilation",
+      "repository": "m3/vendor/third_party/apiguardian-api/upstream-excluded/module-info.java",
+      "sha256": "37fd7c4b855e192294d9f39896177740061c4cef96ec0c4c585f5fb231f2201f",
+      "upstream": "module-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/apiguardian-api/src/main/java/org/apiguardian/api/API.java",
+      "sha256": "6c482a8571f451482d2ca59579b570641541681431decf5409ebd9bcbc3f279a",
+      "upstream": "org/apiguardian/api/API.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/apiguardian-api/SOURCES_MANIFEST.tsv",
+      "sha256": "8888f67a8120402cde8ad39b5d7d926f814a6116b9dfe89f42ad664bae690688",
+      "upstream": "(inventory)"
+    }
+  ],
+  "group": "org.apiguardian",
+  "kind": "MODULE",
+  "license": "The Apache License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.pom",
+  "receipt": {
+    "buildRoot": "91f8c153a6229c17bc9f9201836d88710f02f50690164f7c379d94303e6d2150",
+    "distributionSha256": "2fd2a077ba9f8bfca0a84651492de01d3b2477f9c28da45b5aabe37f6248e918",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "",
+    "sourceRoot": "2194db4416c07f3b5f8d4aa4e35b408c9e6fcebfc1d623e70204db574da41551",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2-sources.jar",
+  "sources_jar_sha1": "e0787a997746ac32639e0bf3cb27af8dce8a3428",
+  "sources_jar_sha256": "277a7a4315412817beb6655b324dc7276621e95ebff00b8bf65e17a27b685e2d",
+  "status": "PASS",
+  "upstream": "https://github.com/apiguardian-team/apiguardian",
+  "version": "1.1.2"
+}

@@ -1,0 +1,16 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.text.ChangeText"
+contributors:
+- name: "Jonathan Leitschuh"
+  email: "jonathan.leitschuh@gmail.com"
+  lineCount: 42
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 17
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 3
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 2

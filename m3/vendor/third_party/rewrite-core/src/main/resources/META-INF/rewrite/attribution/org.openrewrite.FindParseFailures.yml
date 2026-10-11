@@ -1,0 +1,22 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.FindParseFailures"
+contributors:
+- name: "Shannon Pamperl"
+  email: "shanman190@gmail.com"
+  lineCount: 37
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 28
+- name: "Tracey Yoshima"
+  email: "tracey.yoshima@gmail.com"
+  lineCount: 15
+- name: "Knut Wannheden"
+  email: "knut@moderne.io"
+  lineCount: 3
+- name: "Mike Solomon"
+  email: "mike@moderne.io"
+  lineCount: 1
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

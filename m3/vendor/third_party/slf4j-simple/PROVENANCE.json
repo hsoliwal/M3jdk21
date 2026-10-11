@@ -6,6 +6,8 @@
   "consumers": "M3jdk21 m3/tooling (test)",
   "coordinate": "org.slf4j:slf4j-simple:2.0.13-m3-source-1",
   "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
   "dependencies": [
     {
       "artifact": "slf4j-api",
@@ -97,6 +99,7 @@
   "license": "UNDECLARED (see LICENSE)",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
   "parent": "org.slf4j:slf4j-parent:2.0.13",
   "pom": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.pom",
   "receipt": {
@@ -107,6 +110,7 @@
     "sourceRoot": "3b1efc546cc330991a000c6947cb7bba5af94fcfbe88c0877ceeb725922fcb9f",
     "status": "PASS"
   },
+  "resources_completed": 0,
   "sources_jar": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13-sources.jar",
   "sources_jar_sha1": "3d41ed2d64c1d54887fd01a1c1242f400768d52e",
   "sources_jar_sha256": "320ef6bf6ab8567e1e92c26b4fe81ecf9602867ac9d7a0e7a8061ff697dd9d56",

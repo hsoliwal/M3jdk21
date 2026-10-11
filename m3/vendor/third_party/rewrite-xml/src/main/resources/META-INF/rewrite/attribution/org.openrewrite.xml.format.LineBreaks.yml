@@ -1,0 +1,16 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.xml.format.LineBreaks"
+contributors:
+- name: "Greg Adams"
+  email: "greg@moderne.io"
+  lineCount: 28
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 5
+- name: "Tyler Van Gorder"
+  email: "tkvangorder@users.noreply.github.com"
+  lineCount: 2
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 1

@@ -1,0 +1,214 @@
+{
+  "artifact": "rewrite-java-21",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "LOMBOK_AT_SOURCE_LEVEL;COMPILED_EXPORT_OVER_BUDGET (runner compile passed; attributed distribution exceeded the export budget)",
+  "consumers": "synexia-openrewrite-recipes, M3jdk21 m3/tooling",
+  "coordinate": "org.openrewrite:rewrite-java-21:8.17.1-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": true,
+  "delomboked_files": 2,
+  "dependencies": [
+    {
+      "artifact": "annotations",
+      "form": "source module",
+      "group": "org.jetbrains",
+      "optional": false,
+      "scope": "compile",
+      "version": "24.1.0-m3-source-1"
+    },
+    {
+      "artifact": "asm",
+      "form": "source module",
+      "group": "org.ow2.asm",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.6-m3-source-1"
+    },
+    {
+      "artifact": "classgraph",
+      "form": "source module",
+      "group": "io.github.classgraph",
+      "optional": false,
+      "scope": "compile",
+      "version": "4.8.165-m3-source-1"
+    },
+    {
+      "artifact": "micrometer-core",
+      "form": "source module",
+      "group": "io.micrometer",
+      "optional": false,
+      "scope": "compile",
+      "version": "1.9.17-m3-source-1"
+    },
+    {
+      "artifact": "rewrite-core",
+      "form": "source module",
+      "group": "org.openrewrite",
+      "optional": false,
+      "scope": "compile",
+      "version": "8.17.1-m3-source-1"
+    },
+    {
+      "artifact": "rewrite-java",
+      "form": "source module",
+      "group": "org.openrewrite",
+      "optional": false,
+      "scope": "compile",
+      "version": "8.17.1-m3-source-1"
+    },
+    {
+      "artifact": "slf4j-api",
+      "form": "fully qualified reference in code (not an import); compile-only",
+      "group": "org.slf4j",
+      "optional": true,
+      "scope": "provided",
+      "version": "1.7.36-m3-source-1"
+    }
+  ],
+  "donor": "rewrite-java-21-8.17.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/rewrite-java-21/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "7d43121e61585a2c7b92808be8db260c756fbcbd7d54002b123c6d78bb84b19b",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/rewrite-java-21/src/main/resources/META-INF/rewrite-java-21.properties",
+      "sha256": "ca51ade9838707ee3f2ee65116ab435c6fcb464369dcdaba87e5f41e02ce7761",
+      "upstream": "META-INF/rewrite-java-21.properties"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-java-21/src/main/java/org/openrewrite/java/Java21Parser.java",
+      "sha256": "aede7cf2c9b70b6e546467c77309bd1210c1901310226d79756c628f2f049066",
+      "upstream": "org/openrewrite/java/Java21Parser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-java-21/src/main/java/org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.java",
+      "sha256": "6ba33d69d5835db0185fc1fe8912ed2645a1c7d9c8564d904a1df90affc4ad40",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-java-21/src/main/java/org/openrewrite/java/isolated/ReloadableJava21ModifierResults.java",
+      "sha256": "008935b0882700c6aef813433e17a7383795f6dc8cfcf35bd17d27f173f682b3",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21ModifierResults.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-java-21/src/main/java/org/openrewrite/java/isolated/ReloadableJava21Parser.java",
+      "sha256": "a10587100b44778721630f03783eb440cd0a4602fd5b2687b92fbde67227647f",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21Parser.java"
+    },
+    {
+      "derived_from": "m3/vendor/third_party/rewrite-java-21/upstream-lombok/org/openrewrite/java/isolated/ReloadableJava21ParserInputFileObject.java",
+      "kind": "delomboked-production",
+      "repository": "m3/vendor/third_party/rewrite-java-21/src/main/java/org/openrewrite/java/isolated/ReloadableJava21ParserInputFileObject.java",
+      "sha256": "f6caa67d5be5b248cba60d5bc759a1fb58d801c6e8accb2686d70c078cc19598",
+      "tool": "lombok 1.18.30 delombok -f pretty, upstream lombok.config (UPSTREAM_LOMBOK.config) + one notice line",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21ParserInputFileObject.java"
+    },
+    {
+      "kind": "unmodified-production-lombok-source",
+      "repository": "m3/vendor/third_party/rewrite-java-21/upstream-lombok/org/openrewrite/java/isolated/ReloadableJava21ParserInputFileObject.java",
+      "sha256": "beb658516fdd1bf8af3eadc9a1e6dcb399bfa3f70f2a0e68583e462e73f7af7f",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21ParserInputFileObject.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-java-21/src/main/java/org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java",
+      "sha256": "67a07eaea5bca000ee68aee9a8b5145acd2a641e71c772c9b66f66d3725864f9",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java"
+    },
+    {
+      "derived_from": "m3/vendor/third_party/rewrite-java-21/upstream-lombok/org/openrewrite/java/isolated/ReloadableJava21TypeMapping.java",
+      "kind": "delomboked-production",
+      "repository": "m3/vendor/third_party/rewrite-java-21/src/main/java/org/openrewrite/java/isolated/ReloadableJava21TypeMapping.java",
+      "sha256": "25b217cd5626dabd3a1ff388ad7196ca085d486595c0745fb9ca760e0552dcbd",
+      "tool": "lombok 1.18.30 delombok -f pretty, upstream lombok.config (UPSTREAM_LOMBOK.config) + one notice line",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21TypeMapping.java"
+    },
+    {
+      "kind": "unmodified-production-lombok-source",
+      "repository": "m3/vendor/third_party/rewrite-java-21/upstream-lombok/org/openrewrite/java/isolated/ReloadableJava21TypeMapping.java",
+      "sha256": "07229db8223a5cd0d55e23cc4622c139191c099612c7a214e3a024ef57078f47",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21TypeMapping.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-java-21/src/main/java/org/openrewrite/java/isolated/ReloadableJava21TypeSignatureBuilder.java",
+      "sha256": "14a2c4bd0ed7ab61dd44af52c470a59eb62ede7bfabf2392b8501da3d4b639df",
+      "upstream": "org/openrewrite/java/isolated/ReloadableJava21TypeSignatureBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/rewrite-java-21/src/main/java/org/openrewrite/java/isolated/package-info.java",
+      "sha256": "e4c22522b74f8008b986217c1258f346a02a87aeb7a8a8cc0a731e39b7922275",
+      "upstream": "org/openrewrite/java/isolated/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/rewrite-java-21/UPSTREAM_LICENSE.json",
+      "sha256": "c63f88f2127f6b279cf09c53a6cc2e2b4b900c5eb8b6a09520ed40e66a8ce772",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/rewrite-java-21/UPSTREAM_LICENSE.txt",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/rewrite-java-21/UPSTREAM_LOMBOK.config",
+      "sha256": "7a7eb5e33aaf354f59875207a37f97df1d3593910e8c3018aa3975b09e8e1b01",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/rewrite-java-21/UPSTREAM_LOMBOK.json",
+      "sha256": "cb3774d0d0442eb7d6312b67ab82ac4262821ff55d38e03c91ecada461512fba",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/rewrite-java-21/SOURCES_MANIFEST.tsv",
+      "sha256": "02b0d1a565e9ee4334a67ba22dcf017a0bdc8018bbf98841fa9f96c2a2f56e92",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/rewrite-java-21/LICENSE",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.openrewrite",
+  "kind": "MODULE",
+  "license": "The Apache Software License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.pom",
+  "receipt": {
+    "buildRoot": "",
+    "distributionSha256": "",
+    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "message": "IOException: DISTRIBUTION_BUDGET",
+    "sourceRoot": "4bb28fd026aafbf8512a2aea00c33f20ff080c535a6f198bac2a4c64d271cc6f",
+    "status": "FAILED"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1-sources.jar",
+  "sources_jar_sha1": "f133bd0ba96af8944d46df8997decc80fe01ef13",
+  "sources_jar_sha256": "efdacbb9f1ad6c5c3d4b6efb0599b46d05c1d6c6e6c990831678332fbd732f9b",
+  "status": "PASS",
+  "upstream": "https://github.com/openrewrite/rewrite",
+  "version": "8.17.1"
+}

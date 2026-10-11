@@ -1,0 +1,9 @@
+{
+  "artifact": "gizmo-1.0.11.Final",
+  "origin": "https://raw.githubusercontent.com/quarkusio/gizmo/1.0.11.Final/LICENSE.txt",
+  "file": "UPSTREAM_LICENSE.txt",
+  "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "bytes": 11358,
+  "caveat": "EXACT_TAG 1.0.11.Final",
+  "pom_license": "The Apache Software License, Version 2.0 <http://www.apache.org/licenses/LICENSE-2.0.txt>"
+}

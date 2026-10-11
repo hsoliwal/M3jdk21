@@ -1,0 +1,10 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.search.FindRepeatableAnnotations"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 61
+- name: "Patrick"
+  email: "patway99@gmail.com"
+  lineCount: 1
