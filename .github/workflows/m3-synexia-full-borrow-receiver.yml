@@ -6,8 +6,10 @@ on:
       - "AGENTS.md"
       - "m3/compatibility/check_synexia_full_family.py"
       - "m3/compatibility/check_synexia_full_borrow_receiver.py"
+      - "m3/compatibility/check_synexia_full_borrow_intake_20261011.py"
       - "m3/synexia-import/M3_CANONICAL_FAMILY_RECEIVER.md"
       - "m3/synexia-import/current-full-borrow/**"
+      - "m3/synexia-import/intakes/full-borrow-20261011/**"
       - ".github/workflows/m3-synexia-full-borrow-receiver.yml"
   workflow_dispatch:
 
@@ -46,6 +48,12 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
+
+      - name: Validate current Synexia successor intake
+        run: |
+          set -euo pipefail
+          python3 -m py_compile m3/compatibility/check_synexia_full_borrow_intake_20261011.py
+          python3 m3/compatibility/check_synexia_full_borrow_intake_20261011.py
 
       - name: Verify receiver module
         run: |
