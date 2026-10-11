@@ -128,7 +128,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
-        "sha256": "8a8c55032189273d53d3f6bc98c6f813be3812bc6e9adac88c901fb8095dd792"
+        "sha256": "7ad70f998f3ef7a7546b6f566b2fa184e7a16af0137c56c9400424889763a154"
       }
     },
     {
@@ -298,5 +298,5 @@
       "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
     }
   ],
-  "plan_sha256": "5bbcd80da4535e1de5ba4a06cfadcaefc32885b62778b5ba65c5b0f106f3d0a7"
+  "plan_sha256": "ef90a685e4589414d5bfaf48fc10e7ce85149b17769c31825c70ee7c887a2478"
 }
