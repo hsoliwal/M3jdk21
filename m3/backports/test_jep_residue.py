@@ -116,7 +116,7 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual({458, 485}, set(by_jep))
         self.assertEqual("MATERIALIZED_PACKET", by_jep[458].evidence_state)
         self.assertIn("jep-458-current", by_jep[458].evidence_paths)
-        self.assertEqual("REVIEWED_POSTIMAGES_ALREADY_PRESENT", by_jep[458].receipt_state)
+        self.assertEqual("PACKET_READY", by_jep[458].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[458].promotion)
         self.assertEqual(
             "GENERATE_FILE_ATOMIC_CRATES",
