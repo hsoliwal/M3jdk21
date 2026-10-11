@@ -47,8 +47,8 @@ class SynexiaExportTest(unittest.TestCase):
             "sim_hash64,stem_id,subjects,utf16_length")
         number_row = ("numbers", "Numbers", "synexia-dictlang/src/main/java/com/synexia/dictlang/NumberLexicon.java",
                       "number", "value,spelling", "M3StringFacts + NumberPrecompute", "Apache-2.0", "fixture")
-        translation_row = ("translations", "Translations", "synexia-translate/src/main/java/com/synexia/translate/Language.java",
-                           "translation_id", "language_tag,source_id,target_id", "M3StringFacts + TranslationMapping",
+        translation_row = ("translations", "Translations", "synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java",
+                           "translation_id", "source_language,target_language,source_token,target_token", "M3StringFacts + TranslationMapping",
                            "Apache-2.0", "fixture")
         if with_requirements:
             number_row += (number_requirement,)
@@ -63,7 +63,7 @@ class SynexiaExportTest(unittest.TestCase):
         for number in range(10001):
             rows.append(("numbers", "synexia-dictlang/src/main/java/com/synexia/dictlang/NumberLexicon.java",
                          "number", "und", str(number), str(number), str(number), f"NUMBER_{number}", "-", "M3StringFacts + NumberPrecompute"))
-        rows.extend(("translations", "synexia-translate/src/main/java/com/synexia/translate/Language.java",
+        rows.extend(("translations", "synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java",
                      "translation", language, identity, word, identity, name, profile, "M3StringFacts + TranslationMapping")
                     for language, identity, word, name, profile in (
                         ("en", "en:common.proper_name.london", "London", "LONDON", "en->hi"),
@@ -117,7 +117,7 @@ class SynexiaExportTest(unittest.TestCase):
         manifest, records = self.write_inputs(root, conflict, with_payload,
                                               with_requirements=with_payload)
         return EXPORT.export(manifest, records, output, "https://github.com/hsoliwal/com.synexia",
-                             "3e85c872adf556901a341a9eb1c3b59864918da1",
+                             "a13b5fa8be2d47c9650d159671e3120f31270ced",
                              ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
 
     def test_preserves_ids_mappings_numbers_and_precompute(self):
@@ -223,8 +223,13 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
-        self.assertEqual("", sources["translate.rows"]["precompute_fields"])
-        self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        translation = sources["translate.rows"]
+        self.assertEqual("synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java", translation["synexia_path"])
+        self.assertEqual("source_language,target_language,source_token,target_token",
+                         translation["mapping_fields"])
+        self.assertIn("source_id and record_id", translation["data_policy"])
+        self.assertEqual(9, len(sources["translate.rows"]["precompute_fields"].split(",")))
+        self.assertEqual(8, len(sources["dictlang.numbers.0-10000"]["precompute_fields"].split(",")))
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
@@ -287,7 +292,7 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8",
             )
             output = root / "output"
-            EXPORT.export(manifest, records, output, "fixture", "3e85c872adf556901a341a9eb1c3b59864918da1",
+            EXPORT.export(manifest, records, output, "fixture", "a13b5fa8be2d47c9650d159671e3120f31270ced",
                           ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
             mapping = list(csv.DictReader(
                 (output / "synexia.records.tsv").read_text(encoding="utf-8").splitlines(),
@@ -329,7 +334,7 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8",
             )
             output = root / "output"
-            EXPORT.export(manifest, records, output, "fixture", "3e85c872adf556901a341a9eb1c3b59864918da1",
+            EXPORT.export(manifest, records, output, "fixture", "a13b5fa8be2d47c9650d159671e3120f31270ced",
                           ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
             mapping = list(csv.DictReader(
                 (output / "synexia.records.tsv").read_text(encoding="utf-8").splitlines(),
@@ -346,7 +351,7 @@ class SynexiaExportTest(unittest.TestCase):
             )
             with self.assertRaisesRegex(ValueError, "field si_prefixable is not boolean"):
                 EXPORT.export(manifest, records, root / "bad-output", "fixture",
-                              "3e85c872adf556901a341a9eb1c3b59864918da1",
+                              "a13b5fa8be2d47c9650d159671e3120f31270ced",
                               ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
 
     def test_directed_related_lexeme_sidecar_round_trips_and_requires_input(self):
@@ -436,7 +441,7 @@ class SynexiaExportTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "precompute profile mismatch"):
                 EXPORT.export(manifest, records, root / "output",
                               "https://github.com/hsoliwal/com.synexia",
-                              "3e85c872adf556901a341a9eb1c3b59864918da1")
+                              "a13b5fa8be2d47c9650d159671e3120f31270ced")
             self.assertFalse((root / "output").exists())
 
     def test_unpaired_utf16_surrogate_round_trips_through_utf8_sidecars(self):
@@ -508,7 +513,7 @@ class SynexiaExportTest(unittest.TestCase):
                         f"NUMBER_{number}", "-", "M3StringFacts + NumberPrecompute")) + "\n")
             result = EXPORT.export(manifest, records, root / "output",
                                    "https://github.com/hsoliwal/com.synexia",
-                                   "3e85c872adf556901a341a9eb1c3b59864918da1")
+                                   "a13b5fa8be2d47c9650d159671e3120f31270ced")
             self.assertEqual(2, result["counts"]["shards"])
             self.assertTrue((root / "output/synexia-000001.m3lex").exists())
             mapping = (root / "output/synexia.records.tsv").read_text(encoding="utf-8")
