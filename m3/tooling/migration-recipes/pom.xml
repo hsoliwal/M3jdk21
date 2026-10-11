@@ -16,8 +16,9 @@
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>${rewrite.version}</version><scope>runtime</scope></dependency>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-test</artifactId><version>${rewrite.version}</version><scope>test</scope></dependency>
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
-    <!-- Canonical reusable recipe implementation is supplied by the provenance-pinned Synexia custody module in this reactor. -->
-    <dependency><groupId>com.synexia</groupId><artifactId>synexia-openrewrite-recipes</artifactId><version>${m3.synexia.version}</version></dependency>
+    <!-- The default receiver reactor consumes only the hash-inventoried pure-int recipe subset.
+         The full canonical Synexia recipe pack remains opt-in in the profiles below. -->
+    <dependency><groupId>com.synexia</groupId><artifactId>synexia-openrewrite-pure-int-recipes</artifactId><version>${m3.synexia.version}</version></dependency>
   </dependencies>
   <build><plugins>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version></plugin>
