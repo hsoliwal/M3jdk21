@@ -53,6 +53,24 @@ public class M3TQImageTest {
         M3TQ.Facts absent = M3TQ.precompute("axc", 3);
         check(!exact.testPrecomputed(absent), "candidate facts reject absent trigram");
 
+        M3TQ repeated = M3TQ.or(List.of(leaf, leaf));
+        check(repeated.termCount() == leaf.termCount() * 2,
+                "term count preserves repeated shared edges");
+
+        M3TQ deep = leaf;
+        for (int index = 0; index < 4096; index++) {
+            M3TQ extra = M3TQ.fromExact(List.of("abc"));
+            deep = (index & 1) == 0
+                    ? M3TQ.or(List.of(deep, extra))
+                    : M3TQ.and(List.of(deep, extra));
+        }
+        int[] callbackCalls = {0};
+        expectUnsupported(() -> deep.test(value -> {
+            callbackCalls[0]++;
+            return false;
+        }), "deep evaluation rejects before callback allocation");
+        check(callbackCalls[0] == 0, "depth rejection invokes no callback");
+
         expectUnsupported(() -> root.image(new M3TQ.ImageLimits(1, 0, 0, 17)),
                 "tight image limits reject before admission");
         expectUnsupported(() -> M3TQ.fromImage(image, new M3TQ.ImageLimits(1, 0, 0, 17)),
