@@ -64,8 +64,9 @@ public class M3TQImageTest {
                     ? M3TQ.or(List.of(deep, extra))
                     : M3TQ.and(List.of(deep, extra));
         }
+        M3TQ admittedDeep = deep;
         int[] callbackCalls = {0};
-        expectUnsupported(() -> deep.test(value -> {
+        expectUnsupported(() -> admittedDeep.test(value -> {
             callbackCalls[0]++;
             return false;
         }), "deep evaluation rejects before callback allocation");
