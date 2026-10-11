@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
+name: M3 translation receiver map
+
+on:
+  pull_request:
+    paths:
+      - "m3/core/src/com/m3/text/M3LexiconPrecompute.java"
+      - "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java"
+      - "m3/core/src/com/m3/text/M3LanguageGrammarSupport.java"
+      - "m3/core/test/M3TranslationReceiverMapTest.java"
+      - "m3/lexicon/synexia-precompute-field-map.tsv"
+      - "m3/lexicon/synexia-source-manifest.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - ".github/workflows/m3-translation-receiver-current-base.yml"
+  push:
+    branches:
+      - codex/m3-translation-export-current-base-20261011
+    paths:
+      - "m3/core/src/com/m3/text/M3LexiconPrecompute.java"
+      - "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java"
+      - "m3/core/src/com/m3/text/M3LanguageGrammarSupport.java"
+      - "m3/core/test/M3TranslationReceiverMapTest.java"
+      - "m3/lexicon/synexia-precompute-field-map.tsv"
+      - "m3/lexicon/synexia-source-manifest.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - ".github/workflows/m3-translation-receiver-current-base.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  translation:
+    name: Translation receiver map
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Compile and execute translation receiver proof
+        working-directory: m3
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf build/translation-receiver-current-base
+          mkdir -p build/translation-receiver-current-base/classes build/translation-receiver-current-base/tests
+          mapfile -t sources < <(find core/src -name '*.java' | sort)
+          javac --release 21 -Xlint:all,-module             -d build/translation-receiver-current-base/classes "${sources[@]}"
+          javac --release 21 -Xlint:all,-module -Werror             -cp build/translation-receiver-current-base/classes             -d build/translation-receiver-current-base/tests             core/test/M3TranslationReceiverMapTest.java
+          java -ea             -cp build/translation-receiver-current-base/classes:build/translation-receiver-current-base/tests             M3TranslationReceiverMapTest
