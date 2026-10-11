@@ -919,6 +919,8 @@ for fragment in [
         fail(f"M3 exact comparison route missing: {fragment}")
 if "if (sameCoordinate(checked)) return 0;" not in m3:
     fail("M3 compare identity check escaped canonical M3String owner")
+if "return leftAtom.compareRange(start(), rightAtom, that.start(), length()) == 0;" not in m3:
+    fail("M3 atom-range equality path missing")
 
 # M3 direct stream traversal must remain array-free and exact.
 for fragment in [
