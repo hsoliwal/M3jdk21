@@ -49,6 +49,19 @@ public final class M3TQ {
    * existing program codec can carry them in an additive envelope without changing its v1-v7
    * payload or {@code PrecomputedImage} record contract. This image does not verify a regex match.</p>
    */
+  public record ImageLimits(int maxNodes, int maxEdges, int maxTerms, long maxPrimitiveBytes) {
+    public static final ImageLimits DEFAULT = new ImageLimits(4096, 65536, 65536, 4L << 20);
+
+    public ImageLimits {
+      if (maxNodes < 1 || maxNodes > 4096 || maxEdges < 0 || maxEdges > 65536
+          || maxTerms < 0 || maxTerms > 65536 || maxPrimitiveBytes < 17
+          || maxPrimitiveBytes > (4L << 20)) {
+        throw new IllegalArgumentException("trigram image limits");
+      }
+    }
+  }
+
+
   public record Image(
       byte[] operations, int[] termOffsets, long[] trigrams, int[] childOffsets, int[] children) {
     public Image {
