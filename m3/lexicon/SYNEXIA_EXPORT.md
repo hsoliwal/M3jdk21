@@ -10,6 +10,12 @@ precompute owner visible. Its final `precompute_fields` column is the v2
 requirement map for owner payloads. It is a catalog, not a license to
 redistribute the bulk datasets named by it.
 
+The number row is an explicit generated projection, not a Synexia corpus
+snapshot. The pinned `NumberValue` source contributes a numeric scalar and an
+inherited decimal `id`; its integer cache covers only -128..127. M3 generates
+the inclusive 0..10000 domain and canonical decimal spellings, with no
+`language_tag` field or imported number rows.
+
 The source manifest's legacy eight-column form remains accepted. The v2 form
 appends `precompute_fields`, a sorted, unique comma-separated list of required
 snake_case keys, or `-` when that source family has no inspected owner-field
