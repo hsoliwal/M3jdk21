@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.m3.rewrite.InstallIndexStringCompatibility;
 import com.m3.rewrite.M3Java21ConvergenceRecipe;
-import com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe;
-import com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates;
-import com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe;
-import com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe;
-import com.synexia.rewrite.atom.M3PureIntConvergenceRecipe;
+import com.synexia.rewrite.M3PureIntAtomizeRecipe;
+import com.synexia.rewrite.M3PureIntInventoryRecipe;
+import com.synexia.rewrite.M3PureIntPatternizeRecipe;
+import com.synexia.rewrite.M3PureIntDocumentationRecipe;
+import com.synexia.rewrite.M3PureIntConvergenceRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe;
 import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
@@ -42,10 +42,10 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3HashPinnedJavaSnapshotRecipe.class.getName()));
-        assertTrue(M3RecipeScopeRegistry.registered(M3AtomizePureIntReturnRecipe.class.getName()));
-        assertTrue(M3RecipeScopeRegistry.registered(M3InventoryPureIntAtomCandidates.class.getName()));
-        assertTrue(M3RecipeScopeRegistry.registered(M3PatternizePureIntAtomRecipe.class.getName()));
-        assertTrue(M3RecipeScopeRegistry.registered(M3DocumentPureIntAtomRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3PureIntAtomizeRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3PureIntInventoryRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3PureIntPatternizeRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3PureIntDocumentationRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3PureIntConvergenceRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Java21ConvergenceRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedSnapshotRecipe.class.getName()));
@@ -117,17 +117,17 @@ final class M3RecipeScopeDeclarationTest {
         assertEquals(M3EditScope.MODULE, modulePolicy.resolve(List.of("src/main/java/a/A.java")));
         assertFalse(modulePolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
 
-        var atomPolicy = M3RecipeScopeRegistry.require(M3AtomizePureIntReturnRecipe.class);
+        var atomPolicy = M3RecipeScopeRegistry.require(M3PureIntAtomizeRecipe.class);
         assertEquals(M3EditScope.FILE, atomPolicy.resolve(List.of("src/main/java/a/A.java")));
         assertTrue(atomPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
 
-        var inventoryPolicy = M3RecipeScopeRegistry.require(M3InventoryPureIntAtomCandidates.class);
+        var inventoryPolicy = M3RecipeScopeRegistry.require(M3PureIntInventoryRecipe.class);
         assertEquals(M3EditScope.FILE, inventoryPolicy.resolve(List.of("src/main/java/a/A.java")));
         assertTrue(inventoryPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
 
         for (Class<?> recipe : List.of(
-                M3PatternizePureIntAtomRecipe.class,
-                M3DocumentPureIntAtomRecipe.class,
+                M3PureIntPatternizeRecipe.class,
+                M3PureIntDocumentationRecipe.class,
                 M3PureIntConvergenceRecipe.class,
                 M3Java21ConvergenceRecipe.class,
                 M3Jdk21HashPinnedSnapshotRecipe.class,
@@ -184,10 +184,10 @@ final class M3RecipeScopeDeclarationTest {
                 M3SegmentedLaneNativeRecipe.class,
                 InstallIndexStringCompatibility.class,
                 M3HashPinnedJavaSnapshotRecipe.class,
-                M3AtomizePureIntReturnRecipe.class,
-                M3InventoryPureIntAtomCandidates.class,
-                M3PatternizePureIntAtomRecipe.class,
-                M3DocumentPureIntAtomRecipe.class,
+                M3PureIntAtomizeRecipe.class,
+                M3PureIntInventoryRecipe.class,
+                M3PureIntPatternizeRecipe.class,
+                M3PureIntDocumentationRecipe.class,
                 M3PureIntConvergenceRecipe.class,
                 M3Java21ConvergenceRecipe.class,
                 M3ReleaseJepAuthorityRepairRecipe.class,
