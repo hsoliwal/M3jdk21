@@ -1,0 +1,53 @@
+name: M3 proper-name instance index contract
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/m3-instance-index-contract.yml"
+      - "m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java"
+      - "m3/core/test/M3InstanceIndexPrecomputeTest.java"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  instance-index-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TEMP: ${{ runner.temp }}
+      TMP: ${{ runner.temp }}
+      TMPDIR: ${{ runner.temp }}
+    steps:
+      - name: Checkout only the owner and contract test
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java
+            /m3/core/test/M3InstanceIndexPrecomputeTest.java
+
+      - name: Set up Java 21
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Compile and execute the isolated owner contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$TEMP" = "$RUNNER_TEMP"
+          test "$TMP" = "$RUNNER_TEMP"
+          printf 'TEMP=%s\nTMP=%s\n' "$TEMP" "$TMP"
+          classes="$RUNNER_TEMP/m3-instance-index-contract"
+          mkdir -p "$classes"
+          javac --release 17 -Xlint:all -Werror -d "$classes" \
+            m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java \
+            m3/core/test/M3InstanceIndexPrecomputeTest.java
+          output="$(java -ea -cp "$classes" M3InstanceIndexPrecomputeTest)"
+          printf '%s\n' "$output"
+          test "$output" = "M3JDK_INSTANCE_INDEX_PRECOMPUTE_PASS checks=25"
