@@ -60,9 +60,20 @@ public final class M3PhraseSidecarCatalogTest {
                 .orElseThrow(() -> new AssertionError("phrase source manifest row missing"));
         String[] fields = row.split("\\t", -1);
         check(fields.length == 9, "phrase source manifest column count");
-        check(fields[8].equals("source_id,record_id,source_revision,vocabulary_fingerprint,"
+        String expected = Files.readAllLines(
+                        Path.of("m3/lexicon/synexia-precompute-field-map.tsv"),
+                        StandardCharsets.UTF_8).stream()
+                .map(line -> line.split("\\t", -1))
+                .filter(cells -> cells.length >= 6
+                        && (cells[0].equals("M3PhrasePrecompute.Scope")
+                        || cells[0].equals("M3PhrasePrecompute.Phrase"))
+                        && cells[5].equals("MAPPED"))
+                .map(cells -> cells[3])
+                .collect(java.util.stream.Collectors.joining(","));
+        check(expected.equals("source_id,record_id,source_revision,vocabulary_fingerprint,"
                         + "source_token_ids,target_token_ids"),
-                "phrase scope and token fields remain complete");
+                "phrase field-map union remains complete");
+        check(fields[8].equals(expected), "phrase manifest follows field-map union");
     }
 
     private static void check(boolean condition, String message) {
