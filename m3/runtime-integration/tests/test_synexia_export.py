@@ -123,6 +123,53 @@ class SynexiaExportTest(unittest.TestCase):
                              "a13b5fa8be2d47c9650d159671e3120f31270ced",
                              ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
 
+    def test_translation_payload_verifies_using_source_scoped_string_type(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source_id = "translate.rows"
+            source_path = "synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java"
+            sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
+            source = sources[source_id]
+            required_fields = set(source["precompute_fields"].split(","))
+            payload = {
+                "lexicon_fingerprint": "lex-7",
+                "mapped_token_count": 1,
+                "record_id": "translation-17",
+                "source_fingerprint": "source-7",
+                "source_id": source_id,
+                "source_language": "en",
+                "target_language": "hi",
+                "translated_token_ids": [42],
+                "translation_grammar_supported": True,
+            }
+            self.assertEqual(required_fields, set(payload))
+            records = root / "records.tsv"
+            row = (
+                source_id, source_path, "translation", "en", "translation-17",
+                "hello", "hello", "नमस्ते", "en->hi", source["precompute_target"],
+                json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
+            )
+            separator = chr(9)
+            records.write_text(
+                separator.join(EXPORT.RECORD_COLUMNS_V2) + chr(10)
+                + separator.join(row) + chr(10),
+                encoding="utf-8",
+            )
+            output = root / "output"
+            EXPORT.export(
+                ROOT / "m3/lexicon/synexia-source-manifest.tsv", records, output,
+                "https://github.com/hsoliwal/com.synexia",
+                "a13b5fa8be2d47c9650d159671e3120f31270ced",
+                ROOT / "m3/lexicon/synexia-precompute-field-map.tsv",
+            )
+            export_manifest = json.loads(
+                (output / "synexia.export.json").read_text(encoding="utf-8")
+            )
+            scoped_types = export_manifest["source"]["precompute_field_types_by_source"]
+            self.assertEqual("String", scoped_types[source_id]["lexicon_fingerprint"])
+            self.assertNotIn("lexicon_fingerprint", export_manifest["source"]["precompute_field_types"])
+            self.assertEqual(1, VERIFY.verify(output)["source_records"])
+
     def test_preserves_ids_mappings_numbers_and_precompute(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

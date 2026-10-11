@@ -75,6 +75,8 @@ def canonical_precompute_payload(value: str) -> str:
 
 
 def _fits_donor_type(value: object, donor_type: str) -> bool:
+    if donor_type == "String":
+        return isinstance(value, str)
     if donor_type == "boolean":
         return isinstance(value, bool)
     if donor_type == "double":
@@ -316,9 +318,14 @@ def verify(output: pathlib.Path) -> dict[str, int]:
                    if field not in payload_keys]
         if missing:
             raise ValueError("precompute payload field coverage mismatch")
-        if source_field_types:
+        if source_field_types or scoped_field_types is not None:
+            row_field_types = (
+                scoped_field_types[row["source_id"]]
+                if scoped_field_types is not None
+                else source_field_types
+            )
             for field in source_payload_fields[row["source_id"]]:
-                donor_type = source_field_types.get(field)
+                donor_type = row_field_types.get(field)
                 if donor_type is None or not _fits_donor_type(payload[field], donor_type):
                     raise ValueError("precompute payload field type mismatch")
         profile = row["precompute_profile"]
