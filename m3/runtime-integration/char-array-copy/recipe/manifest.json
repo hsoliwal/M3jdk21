@@ -9,7 +9,7 @@
       ],
       "superseded_by": {
         "path": "src/java.base/share/classes/java/lang/M3String.java",
-        "git_blob": "2e1239e157650dda20d4fd1d95e6fe35d1fe4c5a"
+        "git_blob": "70d1d03c109126fdda36c54da21b484bbe368fd9"
       }
     },
     "m3/runtime-integration/tests/MIndexStringInvariant.java": {
