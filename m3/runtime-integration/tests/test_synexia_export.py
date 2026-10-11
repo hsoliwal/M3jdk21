@@ -255,6 +255,9 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("long", field_types["unicodex.langdex.lexemes"]["langdex_target_lexeme_id"])
         self.assertEqual("long", field_types["dictlang.dictionary"]["lexicon_fingerprint"])
         self.assertEqual("String", field_types["translate.rows"]["lexicon_fingerprint"])
+        legacy_types = EXPORT.unambiguous_field_types(field_types)
+        self.assertNotIn("lexicon_fingerprint", legacy_types)
+        self.assertEqual("long[]", legacy_types["concept_ids"])
         self.assertEqual("String", field_types["dictlang.dictionary"]["source_revision"])
         self.assertEqual("double", field_types["dictlang.si-units"]["si_offset"])
         self.assertEqual("boolean", field_types["dictlang.si-units"]["si_prefixable"])
@@ -309,6 +312,10 @@ class SynexiaExportTest(unittest.TestCase):
             export_manifest = json.loads((output / "synexia.export.json").read_text(encoding="utf-8"))
             self.assertEqual(10, len(export_manifest["source"]["precompute_fields"][source_id]))
             self.assertEqual("long", export_manifest["source"]["precompute_field_types"]["langdex_concept_id"])
+            self.assertEqual(
+                "long",
+                export_manifest["source"]["precompute_field_types_by_source"][source_id]["langdex_concept_id"],
+            )
             self.assertEqual("int", export_manifest["source"]["precompute_field_types"]["langdex_flags"])
             VERIFY.verify(output)
 
@@ -350,6 +357,10 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertEqual(payload, json.loads(mapping["precompute_payload"]))
             export_manifest = json.loads((output / "synexia.export.json").read_text(encoding="utf-8"))
             self.assertEqual("double", export_manifest["source"]["precompute_field_types"]["si_offset"])
+            self.assertEqual(
+                "double",
+                export_manifest["source"]["precompute_field_types_by_source"][source_id]["si_offset"],
+            )
             self.assertEqual("boolean", export_manifest["source"]["precompute_field_types"]["si_prefixable"])
             VERIFY.verify(output)
             records.write_text(
