@@ -1,5 +1,5 @@
 {
-  "baseline": "e617717424bd0af23881fb383777ae14dc7c8bb4",
+  "baseline": "30c507d2eb1528647484d0971f4c52627b362e3a",
   "counts": {
     "api_surface": {
       "EQUIVALENT_MODULO_COMPILER": 21,
@@ -18,7 +18,7 @@
     "native_binaries": 47,
     "switched": 52
   },
-  "generated": "2026-10-11T05:06:02Z",
+  "generated": "2026-10-11T05:13:57Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {
