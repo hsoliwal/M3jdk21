@@ -26,6 +26,9 @@ public final class M3TranslationReceiverMapTest {
                 .orElseThrow();
         String[] columns = manifestRow.split("\\t", -1);
         check(columns.length >= 9);
+        check(columns[2].equals("synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java"));
+        check(columns[3].equals("translation_id"));
+        check(columns[4].equals("source_language,target_language,source_token,target_token"));
         check(columns[5].equals(
                 "M3StringFacts + M3LexiconPrecompute.TranslationProjection"
                         + " + SharedLexiconPrecomputeCatalog.TranslationIdentity"
@@ -56,6 +59,36 @@ public final class M3TranslationReceiverMapTest {
                 "M3LexiconPrecompute.TranslationProjection\tsourceFingerprint\tString\tsource_fingerprint\t")) {
             check(fieldMap.stream().anyMatch(line -> line.startsWith(row)));
         }
+        com.m3.text.SynexiaPrecomputePayload translationPayload =
+                com.m3.text.SynexiaPrecomputePayload.parse(
+                        "{\"lexicon_fingerprint\":\"fp-é\","
+                                + "\"source_id\":\"translate.rows\","
+                                + "\"source_revision\":\"rev-7\"}");
+        check(translationPayload.requireString("lexicon_fingerprint").equals("fp-é"));
+        check(translationPayload.requireString("source_id").equals("translate.rows"));
+        check(translationPayload.canonicalJson().contains("\\u00e9"));
+        check(com.m3.text.SynexiaPrecomputePayload.parse(translationPayload.canonicalJson())
+                .requireString("lexicon_fingerprint").equals("fp-é"));
+        check(com.m3.text.SynexiaPrecomputePayload.parse(
+                "{\"lexicon_fingerprint\":7}").requireLong("lexicon_fingerprint") == 7L);
+
+        boolean rejectedControlCharacter = false;
+        try {
+            com.m3.text.SynexiaPrecomputePayload.parse(
+                    "{\"source_id\":\"bad" + (char) 1 + "\"}");
+        } catch (IllegalArgumentException expected) {
+            rejectedControlCharacter = true;
+        }
+        check(rejectedControlCharacter);
+        boolean rejectedNonAsciiDigit = false;
+        try {
+            com.m3.text.SynexiaPrecomputePayload.parse(
+                    "{\"lexicon_fingerprint\":" + (char) 0x0661 + "}");
+        } catch (IllegalArgumentException expected) {
+            rejectedNonAsciiDigit = true;
+        }
+        check(rejectedNonAsciiDigit);
+
         System.out.println("M3JDK_TRANSLATION_RECEIVER_MAP_PASS checks=" + checks);
     }
 }

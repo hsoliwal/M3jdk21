@@ -40,6 +40,9 @@ class SynexiaExportTest(unittest.TestCase):
         manifest_columns = (EXPORT.MANIFEST_COLUMNS_V2 if with_requirements
                             else EXPORT.MANIFEST_COLUMNS)
         number_requirement = "frequency_rank" if with_requirements else "-"
+        translation_owner_profile = ("M3StringFacts + TranslationMapping + "
+                                    "M3LexiconPrecompute.TranslationProjection + "
+                                    "SharedLexiconPrecomputeCatalog.TranslationIdentity")
         translation_requirement = (
             "code_point_length,concept_ids,corpus_count,document_frequency,expansion_word_ids,"
             "first_code_point,last_code_point,lemma_id,lexical_rank,"
@@ -47,8 +50,8 @@ class SynexiaExportTest(unittest.TestCase):
             "sim_hash64,stem_id,subjects,utf16_length")
         number_row = ("numbers", "Numbers", "synexia-dictlang/src/main/java/com/synexia/dictlang/NumberLexicon.java",
                       "number", "value,spelling", "M3StringFacts + NumberPrecompute", "Apache-2.0", "fixture")
-        translation_row = ("translations", "Translations", "synexia-translate/src/main/java/com/synexia/translate/Language.java",
-                           "translation_id", "language_tag,source_id,target_id", "M3StringFacts + TranslationMapping",
+        translation_row = ("translations", "Translations", "synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java",
+                           "translation_id", "source_language,target_language,source_token,target_token", translation_owner_profile,
                            "Apache-2.0", "fixture")
         if with_requirements:
             number_row += (number_requirement,)
@@ -63,8 +66,8 @@ class SynexiaExportTest(unittest.TestCase):
         for number in range(10001):
             rows.append(("numbers", "synexia-dictlang/src/main/java/com/synexia/dictlang/NumberLexicon.java",
                          "number", "und", str(number), str(number), str(number), f"NUMBER_{number}", "-", "M3StringFacts + NumberPrecompute"))
-        rows.extend(("translations", "synexia-translate/src/main/java/com/synexia/translate/Language.java",
-                     "translation", language, identity, word, identity, name, profile, "M3StringFacts + TranslationMapping")
+        rows.extend(("translations", "synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java",
+                     "translation", language, identity, word, identity, name, profile, translation_owner_profile)
                     for language, identity, word, name, profile in (
                         ("en", "en:common.proper_name.london", "London", "LONDON", "en->hi"),
                         ("hi", "hi:common.proper_name.london", "लंदन", "LONDON", "hi->en"),
@@ -117,8 +120,81 @@ class SynexiaExportTest(unittest.TestCase):
         manifest, records = self.write_inputs(root, conflict, with_payload,
                                               with_requirements=with_payload)
         return EXPORT.export(manifest, records, output, "https://github.com/hsoliwal/com.synexia",
-                             "3e85c872adf556901a341a9eb1c3b59864918da1",
+                             "a13b5fa8be2d47c9650d159671e3120f31270ced",
                              ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
+
+    def test_translation_payload_verifies_using_source_scoped_string_type(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source_id = "translate.rows"
+            source_manifest = ROOT / "m3/lexicon/synexia-source-manifest.tsv"
+            source_path = "synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java"
+            sources, _ = EXPORT.read_manifest(source_manifest)
+            source = sources[source_id]
+            source_line = next(
+                line for line in source_manifest.read_text(encoding="utf-8").splitlines()
+                if line.startswith(source_id + "\t")
+            )
+            required_fields = set(source["precompute_fields"].split(","))
+            payload = {
+                "lexicon_fingerprint": "lex-7",
+                "mapped_token_count": 1,
+                "record_id": "translation-17",
+                "source_fingerprint": "source-7",
+                "source_id": source_id,
+                "source_language": "en",
+                "target_language": "hi",
+                "translated_token_ids": [42],
+                "translation_grammar_supported": True,
+            }
+            self.assertEqual(required_fields, set(payload))
+            fixture_source = (
+                "fixture.long-fingerprint", "Long fingerprint donor", "fixture/fingerprint.tsv",
+                "id", "lexeme", "M3LexiconPrecompute.IndexWordFacts", "Apache-2.0",
+                "local type-ambiguity fixture", "lexicon_fingerprint",
+            )
+            manifest = root / "sources.tsv"
+            separator = chr(9)
+            manifest.write_text(
+                separator.join(EXPORT.MANIFEST_COLUMNS_V2) + chr(10)
+                + source_line + chr(10)
+                + separator.join(fixture_source) + chr(10),
+                encoding="utf-8",
+            )
+            translation_row = (
+                source_id, source_path, "translation", "en", "translation-17",
+                "hello", "hello", "नमस्ते", "en->hi", source["precompute_target"],
+                json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
+            )
+            fingerprint_payload = {"lexicon_fingerprint": 7}
+            fingerprint_row = (
+                "fixture.long-fingerprint", "fixture/fingerprint.tsv", "fixture", "und",
+                "fixture-1", "fixture", "fixture-1", "FIXTURE", "-",
+                "M3LexiconPrecompute.IndexWordFacts",
+                json.dumps(fingerprint_payload, separators=(",", ":")),
+            )
+            records = root / "records.tsv"
+            records.write_text(
+                separator.join(EXPORT.RECORD_COLUMNS_V2) + chr(10)
+                + separator.join(translation_row) + chr(10)
+                + separator.join(fingerprint_row) + chr(10),
+                encoding="utf-8",
+            )
+            output = root / "output"
+            EXPORT.export(
+                manifest, records, output,
+                "https://github.com/hsoliwal/com.synexia",
+                "a13b5fa8be2d47c9650d159671e3120f31270ced",
+                ROOT / "m3/lexicon/synexia-precompute-field-map.tsv",
+            )
+            export_manifest = json.loads(
+                (output / "synexia.export.json").read_text(encoding="utf-8")
+            )
+            scoped_types = export_manifest["source"]["precompute_field_types_by_source"]
+            self.assertEqual("String", scoped_types[source_id]["lexicon_fingerprint"])
+            self.assertEqual("long", scoped_types["fixture.long-fingerprint"]["lexicon_fingerprint"])
+            self.assertNotIn("lexicon_fingerprint", export_manifest["source"]["precompute_field_types"])
+            self.assertEqual(2, VERIFY.verify(output)["source_records"])
 
     def test_preserves_ids_mappings_numbers_and_precompute(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -204,6 +280,11 @@ class SynexiaExportTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "missing required fields"):
                 EXPORT.export(manifest, records, root / "output", "fixture", "0" * 40)
 
+    def test_java_string_precompute_fields_preserve_string_shape(self):
+        self.assertTrue(EXPORT._fits_donor_type("synexia-revision-7", "String"))
+        self.assertFalse(EXPORT._fits_donor_type(7, "String"))
+        self.assertFalse(EXPORT._fits_donor_type(True, "String"))
+
     def test_admitted_field_map_rejects_wrong_owner_shape(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -219,35 +300,46 @@ class SynexiaExportTest(unittest.TestCase):
     def test_reviewed_source_manifest_has_explicit_owner_field_coverage(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
         self.assertEqual(10, len(sources))
-        self.assertEqual(12, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
-        self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
+        self.assertEqual(13, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
+        self.assertEqual(16, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
-        self.assertEqual("", sources["translate.rows"]["precompute_fields"])
-        self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        translation = sources["translate.rows"]
+        self.assertEqual("synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java", translation["synexia_path"])
+        self.assertEqual("source_language,target_language,source_token,target_token",
+                         translation["mapping_fields"])
+        self.assertIn("source_id and record_id", translation["data_policy"])
+        self.assertEqual(9, len(sources["translate.rows"]["precompute_fields"].split(",")))
+        self.assertEqual(8, len(sources["dictlang.numbers.0-10000"]["precompute_fields"].split(",")))
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
-        with (ROOT / "m3/lexicon/synexia-precompute-field-map.tsv").open(
-                encoding="utf-8", newline="") as stream:
-            rows = list(csv.DictReader(stream, delimiter="\t"))
-        mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
-        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]"}
-        field_types: dict[str, str] = {}
-        for row in rows:
-            self.assertIn(row["donor_java_type"], allowed_types)
-            previous = field_types.setdefault(row["canonical_payload_field"], row["donor_java_type"])
-            self.assertEqual(previous, row["donor_java_type"], row["canonical_payload_field"])
-        self.assertEqual("long[]", field_types["concept_ids"])
-        self.assertEqual("int[]", field_types["memberships"])
-        self.assertEqual("long", field_types["lexicon_fingerprint"])
-        self.assertEqual("double", field_types["si_offset"])
-        self.assertEqual("boolean", field_types["si_prefixable"])
-        self.assertTrue(all(field_types.values()))
-        for source_id in ("dictlang.dictionary", "dictlang.frequency",
-                          "dictlang.thesaurus", "dictlang.antonyms"):
-            required = set(sources[source_id]["precompute_fields"].split(","))
-            self.assertTrue(required.issubset(mapped), source_id)
+        field_types = EXPORT.read_field_map(
+            ROOT / "m3/lexicon/synexia-precompute-field-map.tsv", sources)
+        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]", "String"}
+        for source_id, source in sources.items():
+            required = {
+                field for field in source["precompute_fields"].split(",") if field
+            }
+            self.assertEqual(required, set(field_types[source_id]), source_id)
+            self.assertTrue(
+                all(donor_type in allowed_types
+                    for donor_type in field_types[source_id].values()),
+                source_id,
+            )
+        self.assertEqual("long", field_types["unicodex.langdex.lexemes"]["langdex_concept_id"])
+        self.assertEqual("long", field_types["unicodex.langdex.lexemes"]["langdex_target_lexeme_id"])
+        self.assertEqual("long", field_types["dictlang.dictionary"]["lexicon_fingerprint"])
+        self.assertEqual("String", field_types["translate.rows"]["lexicon_fingerprint"])
+        legacy_types = EXPORT.unambiguous_field_types(field_types)
+        self.assertNotIn("lexicon_fingerprint", legacy_types)
+        self.assertEqual("long[]", legacy_types["concept_ids"])
+        self.assertEqual("String", field_types["dictlang.dictionary"]["source_revision"])
+        self.assertEqual("double", field_types["dictlang.si-units"]["si_offset"])
+        self.assertEqual("boolean", field_types["dictlang.si-units"]["si_prefixable"])
+        self.assertEqual("", sources["dictlang.thesaurus"]["precompute_fields"])
+        self.assertEqual("", sources["dictlang.antonyms"]["precompute_fields"])
+
 
     def test_langdex_owner_payload_round_trips_with_admitted_shapes(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -287,7 +379,7 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8",
             )
             output = root / "output"
-            EXPORT.export(manifest, records, output, "fixture", "3e85c872adf556901a341a9eb1c3b59864918da1",
+            EXPORT.export(manifest, records, output, "fixture", "a13b5fa8be2d47c9650d159671e3120f31270ced",
                           ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
             mapping = list(csv.DictReader(
                 (output / "synexia.records.tsv").read_text(encoding="utf-8").splitlines(),
@@ -296,6 +388,10 @@ class SynexiaExportTest(unittest.TestCase):
             export_manifest = json.loads((output / "synexia.export.json").read_text(encoding="utf-8"))
             self.assertEqual(10, len(export_manifest["source"]["precompute_fields"][source_id]))
             self.assertEqual("long", export_manifest["source"]["precompute_field_types"]["langdex_concept_id"])
+            self.assertEqual(
+                "long",
+                export_manifest["source"]["precompute_field_types_by_source"][source_id]["langdex_concept_id"],
+            )
             self.assertEqual("int", export_manifest["source"]["precompute_field_types"]["langdex_flags"])
             VERIFY.verify(output)
 
@@ -329,7 +425,7 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8",
             )
             output = root / "output"
-            EXPORT.export(manifest, records, output, "fixture", "3e85c872adf556901a341a9eb1c3b59864918da1",
+            EXPORT.export(manifest, records, output, "fixture", "a13b5fa8be2d47c9650d159671e3120f31270ced",
                           ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
             mapping = list(csv.DictReader(
                 (output / "synexia.records.tsv").read_text(encoding="utf-8").splitlines(),
@@ -337,6 +433,10 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertEqual(payload, json.loads(mapping["precompute_payload"]))
             export_manifest = json.loads((output / "synexia.export.json").read_text(encoding="utf-8"))
             self.assertEqual("double", export_manifest["source"]["precompute_field_types"]["si_offset"])
+            self.assertEqual(
+                "double",
+                export_manifest["source"]["precompute_field_types_by_source"][source_id]["si_offset"],
+            )
             self.assertEqual("boolean", export_manifest["source"]["precompute_field_types"]["si_prefixable"])
             VERIFY.verify(output)
             records.write_text(
@@ -346,7 +446,7 @@ class SynexiaExportTest(unittest.TestCase):
             )
             with self.assertRaisesRegex(ValueError, "field si_prefixable is not boolean"):
                 EXPORT.export(manifest, records, root / "bad-output", "fixture",
-                              "3e85c872adf556901a341a9eb1c3b59864918da1",
+                              "a13b5fa8be2d47c9650d159671e3120f31270ced",
                               ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
 
     def test_directed_related_lexeme_sidecar_round_trips_and_requires_input(self):
@@ -436,7 +536,7 @@ class SynexiaExportTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "precompute profile mismatch"):
                 EXPORT.export(manifest, records, root / "output",
                               "https://github.com/hsoliwal/com.synexia",
-                              "3e85c872adf556901a341a9eb1c3b59864918da1")
+                              "a13b5fa8be2d47c9650d159671e3120f31270ced")
             self.assertFalse((root / "output").exists())
 
     def test_unpaired_utf16_surrogate_round_trips_through_utf8_sidecars(self):
@@ -508,7 +608,7 @@ class SynexiaExportTest(unittest.TestCase):
                         f"NUMBER_{number}", "-", "M3StringFacts + NumberPrecompute")) + "\n")
             result = EXPORT.export(manifest, records, root / "output",
                                    "https://github.com/hsoliwal/com.synexia",
-                                   "3e85c872adf556901a341a9eb1c3b59864918da1")
+                                   "a13b5fa8be2d47c9650d159671e3120f31270ced")
             self.assertEqual(2, result["counts"]["shards"])
             self.assertTrue((root / "output/synexia-000001.m3lex").exists())
             mapping = (root / "output/synexia.records.tsv").read_text(encoding="utf-8")

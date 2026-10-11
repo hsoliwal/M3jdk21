@@ -18,6 +18,24 @@ canonical `precompute_payload` omits a required key. The source-blind verifier
 rechecks the same requirement map from `synexia.export.json`, so the mapping
 cannot silently lose an owner precompute field between export and consumption.
 
+
+## Translation source boundary
+
+The `translate.rows` source-family entry points to Synexia's
+`TranslationTsvImporter`, which consumes
+`source_language,target_language,source_token,target_token`. The
+`Language.java` enum is a separate grammar-support source; it is not the
+lexical-row importer. Export snapshots must supply their own opaque
+`source_id` and `record_id`; the importer does not invent or renumber those
+identities. Preserve the exact source/target language pair, token mapping,
+source revision, dataset license, and attribution. This mapping does not bundle
+translation corpora.
+
+Lexicon categories such as proper names, titles, locations, phrases, and
+acronyms describe supported namespaces, not complete licensed datasets. Their
+records remain unadmitted until each source snapshot has an exact revision,
+content hash, license, mapping identity, and target payload contract. The
+checked-in map therefore does not claim that all lexicons have already moved.
 ## Export contract
 
 The operator supplies a UTF-8 TSV snapshot. The original ten-column form remains
