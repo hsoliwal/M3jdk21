@@ -687,6 +687,27 @@ final class M3String implements CharSequence {
         return start() == 0 && length() == owner.length;
     }
 
+    int compareTo(M3String other) {
+        M3String checked = Objects.requireNonNull(other, "other");
+        if (sameCoordinate(checked)) return 0;
+
+        int leftLength = length();
+        int rightLength = checked.length();
+        int limit = Math.min(leftLength, rightLength);
+        if (owner instanceof M3StringAtom leftAtom
+                && checked.owner instanceof M3StringAtom rightAtom) {
+            int difference =
+                    leftAtom.compareRange(start(), rightAtom, checked.start(), limit);
+            return difference != 0 ? difference : leftLength - rightLength;
+        }
+
+        for (int index = 0; index < limit; index++) {
+            int difference = charAt(index) - checked.charAt(index);
+            if (difference != 0) return difference;
+        }
+        return leftLength - rightLength;
+    }
+
     boolean contentEquals(String other) {
         Objects.requireNonNull(other, "other");
         M3String that = other.m3();
