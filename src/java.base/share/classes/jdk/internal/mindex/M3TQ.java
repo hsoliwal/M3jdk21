@@ -4,6 +4,7 @@ package jdk.internal.mindex;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.IdentityHashMap;
 import java.util.Objects;
 import java.util.function.LongPredicate;
 
@@ -39,7 +40,224 @@ public final class M3TQ {
     this.op = Objects.requireNonNull(op, "op");
     this.trigrams = Objects.requireNonNull(trigrams, "trigrams").clone();
     Arrays.sort(this.trigrams);
-    this.subqueries = List.copyOf(Objects.requireNonNull(subqueries, "subqueries"));
+    this.subqueries = List.copyOf(Objects.requireNonNull  /**
+   * Immutable, source-only ordered DAG. Node zero is the root; operation bytes use {@link Op}
+   * ordinals. Keys are packed UTF-16 trigrams, sorted and unique within each node. Children retain
+   * their exact order and shared node identity. No normalization is performed at this boundary.
+   *
+   * <p>The five primitive lanes are deliberately independent of a corpus/postings owner. The
+   * existing program codec can carry them in an additive envelope without changing its v1-v7
+   * payload or {@code PrecomputedImage} record contract. This image does not verify a regex match.</p>
+   */
+  public record Image(
+      byte[] operations, int[] termOffsets, long[] trigrams, int[] childOffsets, int[] children) {
+    public Image {
+      admitImageInputs(operations, termOffsets, trigrams, childOffsets, children, ImageLimits.DEFAULT);
+      operations = operations.clone();
+      termOffsets = termOffsets.clone();
+      trigrams = trigrams.clone();
+      childOffsets = childOffsets.clone();
+      children = children.clone();
+      validateImage(operations, termOffsets, trigrams, childOffsets, children);
+    }
+
+    /** Refuse the caller's tighter budget before making immutable copies. */
+    public Image(byte[] operations, int[] termOffsets, long[] trigrams, int[] childOffsets,
+        int[] children, ImageLimits limits) {
+      this(admitImageInputs(operations, termOffsets, trigrams, childOffsets, children, limits),
+          termOffsets, trigrams, childOffsets, children);
+    }
+
+    @Override public byte[] operations() { return operations.clone(); }
+    @Override public int[] termOffsets() { return termOffsets.clone(); }
+    @Override public long[] trigrams() { return trigrams.clone(); }
+    @Override public int[] childOffsets() { return childOffsets.clone(); }
+    @Override public int[] children() { return children.clone(); }
+
+    public long primitivePayloadBytes() {
+      return imagePrimitiveBytes(operations.length, trigrams.length, children.length);
+    }
+  }
+
+  /** Snapshot this exact query structure once, without visiting regex syntax or postings. */
+  public Image image() {
+    return image(ImageLimits.DEFAULT);
+  }
+
+  /** Snapshot iteratively with bounds checked before growing each inventory lane. */
+  public Image image(ImageLimits limits) {
+    Objects.requireNonNull(limits, "limits");
+    ArrayList<M3TQ> nodes = new ArrayList<>();
+    IdentityHashMap<M3TQ, Integer> identities = new IdentityHashMap<>();
+    admitImageCounts(1, 0, 0, limits);
+    nodes.add(this);
+    identities.put(this, 0);
+    int terms = 0;
+    int edges = 0;
+    for (int cursor = 0; cursor < nodes.size(); cursor++) {
+      M3TQ node = nodes.get(cursor);
+      terms = Math.addExact(terms, node.trigrams.length);
+      edges = Math.addExact(edges, node.subqueries.size());
+      admitImageCounts(nodes.size(), edges, terms, limits);
+      for (M3TQ child : node.subqueries) {
+        if (!identities.containsKey(child)) {
+          admitImageCounts(Math.addExact(nodes.size(), 1), edges, terms, limits);
+          identities.put(child, nodes.size());
+          nodes.add(child);
+        }
+      }
+    }
+    byte[] operations = new byte[nodes.size()];
+    int[] termOffsets = new int[nodes.size() + 1];
+    long[] keys = new long[terms];
+    int[] childOffsets = new int[nodes.size() + 1];
+    int[] children = new int[edges];
+    int keyOffset = 0;
+    int childOffset = 0;
+    for (int i = 0; i < nodes.size(); i++) {
+      M3TQ node = nodes.get(i);
+      operations[i] = (byte) node.op.ordinal();
+      termOffsets[i] = keyOffset;
+      System.arraycopy(node.trigrams, 0, keys, keyOffset, node.trigrams.length);
+      keyOffset += node.trigrams.length;
+      childOffsets[i] = childOffset;
+      for (M3TQ child : node.subqueries) {
+        children[childOffset++] = identities.get(child);
+      }
+    }
+    termOffsets[nodes.size()] = keyOffset;
+    childOffsets[nodes.size()] = childOffset;
+    return new Image(operations, termOffsets, keys, childOffsets, children, limits);
+  }
+
+  /** Restore immutable nodes directly: no regex parser, sorting, or query simplification. */
+  public static M3TQ fromImage(Image image) {
+    return fromImage(image, ImageLimits.DEFAULT);
+  }
+
+  /** Restore the validated DAG in postorder, preserving its root and ordered shared children. */
+  public static M3TQ fromImage(Image image, ImageLimits limits) {
+    Objects.requireNonNull(image, "image");
+    admitImageCounts(image.operations.length, image.children.length, image.trigrams.length, limits);
+    int[] order = imagePostorder(image.childOffsets, image.children);
+    M3TQ[] restored = new M3TQ[image.operations.length];
+    for (int id : order) {
+      Op operation = Op.values()[image.operations[id]];
+      ArrayList<M3TQ> children =
+          new ArrayList<>(image.childOffsets[id + 1] - image.childOffsets[id]);
+      for (int edge = image.childOffsets[id]; edge < image.childOffsets[id + 1]; edge++) {
+        children.add(restored[image.children[edge]]);
+      }
+      long[] keys = Arrays.copyOfRange(image.trigrams, image.termOffsets[id], image.termOffsets[id + 1]);
+      restored[id] = new M3TQ(operation, keys, children, true);
+    }
+    return restored[0];
+  }
+
+  private static byte[] admitImageInputs(byte[] operations, int[] termOffsets, long[] trigrams,
+      int[] childOffsets, int[] children, ImageLimits limits) {
+    Objects.requireNonNull(operations, "operations");
+    Objects.requireNonNull(termOffsets, "termOffsets");
+    Objects.requireNonNull(trigrams, "trigrams");
+    Objects.requireNonNull(childOffsets, "childOffsets");
+    Objects.requireNonNull(children, "children");
+    if (operations.length == 0 || termOffsets.length != (long) operations.length + 1
+        || childOffsets.length != (long) operations.length + 1) {
+      throw new IllegalArgumentException("trigram image geometry");
+    }
+    admitImageCounts(operations.length, children.length, trigrams.length, limits);
+    return operations;
+  }
+
+  private static long imagePrimitiveBytes(int nodes, int terms, int edges) {
+    return nodes + 8L * (nodes + 1L) + 8L * terms + 4L * edges;
+  }
+
+  private static void admitImageCounts(int nodes, int edges, int terms, ImageLimits limits) {
+    Objects.requireNonNull(limits, "limits");
+    if (nodes > limits.maxNodes || edges > limits.maxEdges || terms > limits.maxTerms
+        || imagePrimitiveBytes(nodes, terms, edges) > limits.maxPrimitiveBytes) {
+      throw new UnsupportedOperationException("trigram image budget");
+    }
+  }
+
+  private static void validateImage(byte[] operations, int[] termOffsets, long[] trigrams,
+      int[] childOffsets, int[] children) {
+    validateOffsets(termOffsets, trigrams.length);
+    validateOffsets(childOffsets, children.length);
+    for (int id = 0; id < operations.length; id++) {
+      int operation = operations[id];
+      if (operation < 0 || operation >= Op.values().length) {
+        throw new IllegalArgumentException("trigram image operation");
+      }
+      if (operation <= Op.NONE.ordinal()
+          && (termOffsets[id] != termOffsets[id + 1] || childOffsets[id] != childOffsets[id + 1])) {
+        throw new IllegalArgumentException("trigram image constant payload");
+      }
+      long previous = -1;
+      for (int term = termOffsets[id]; term < termOffsets[id + 1]; term++) {
+        long key = trigrams[term];
+        if (key < 0 || key > 0xffffffffffffL || key <= previous) {
+          throw new IllegalArgumentException("trigram image key order or domain");
+        }
+        previous = key;
+      }
+    }
+    imagePostorder(childOffsets, children);
+  }
+
+  private static void validateOffsets(int[] offsets, int laneLength) {
+    if (offsets[0] != 0 || offsets[offsets.length - 1] != laneLength) {
+      throw new IllegalArgumentException("trigram image offsets");
+    }
+    int previous = 0;
+    for (int offset : offsets) {
+      if (offset < previous || offset > laneLength) {
+        throw new IllegalArgumentException("trigram image offsets");
+      }
+      previous = offset;
+    }
+  }
+
+  /** Iterative colored traversal borrowed from the prepared-query bounded DAG evaluator. */
+  private static int[] imagePostorder(int[] offsets, int[] children) {
+    int nodes = offsets.length - 1;
+    for (int child : children) {
+      if (child < 0 || child >= nodes) {
+        throw new IllegalArgumentException("trigram image child index");
+      }
+    }
+    byte[] states = new byte[nodes];
+    int[] stack = new int[nodes];
+    int[] nextChild = new int[nodes];
+    int[] order = new int[nodes];
+    int emitted = 0;
+    int depth = 0;
+    states[0] = 1;
+    nextChild[0] = offsets[0];
+    while (depth >= 0) {
+      int id = stack[depth];
+      if (nextChild[id] < offsets[id + 1]) {
+        int child = children[nextChild[id]++];
+        if (states[child] == 1) throw new IllegalArgumentException("trigram image cycle");
+        if (states[child] == 0) {
+          states[child] = 1;
+          nextChild[child] = offsets[child];
+          stack[++depth] = child;
+        }
+      } else {
+        states[id] = 2;
+        order[emitted++] = id;
+        depth--;
+      }
+    }
+    if (emitted != nodes) throw new IllegalArgumentException("trigram image unreachable node");
+    return order;
+  }
+
+
+
+(subqueries, "subqueries"));
   }
 
   public static M3TQ all() {
