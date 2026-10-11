@@ -26,6 +26,10 @@ public final class M3TQ {
     OR
   }
 
+  private static final int MAX_EVALUATION_DEPTH = 4096;
+  private static final long MAX_EVALUATION_WORK = 1_000_000L;
+  private static final long TERM_COUNT_OVERFLOW = (long) Integer.MAX_VALUE + 1L;
+
   private static final M3TQ ALL =
       new M3TQ(Op.ALL, new long[0], List.of());
   private static final M3TQ NONE =
@@ -34,6 +38,9 @@ public final class M3TQ {
   private final Op op;
   private final long[] trigrams;
   private final List<M3TQ> subqueries;
+  private final long expandedTermCount;
+  private final long evaluationWork;
+  private final int evaluationDepth;
 
   private M3TQ(
       Op op, long[] trigrams, List<M3TQ> subqueries) {
@@ -46,6 +53,25 @@ public final class M3TQ {
     this.trigrams = Objects.requireNonNull(trigrams, "trigrams").clone();
     if (!presorted) Arrays.sort(this.trigrams);
     this.subqueries = List.copyOf(Objects.requireNonNull(subqueries, "subqueries"));
+    long terms = this.trigrams.length;
+    long work = Math.min(MAX_EVALUATION_WORK + 1L, 1L + this.trigrams.length);
+    int depth = 1;
+    for (M3TQ child : this.subqueries) {
+      terms = cappedAdd(terms, child.expandedTermCount, TERM_COUNT_OVERFLOW);
+      work = cappedAdd(
+          work,
+          cappedAdd(1L, child.evaluationWork, MAX_EVALUATION_WORK + 1L),
+          MAX_EVALUATION_WORK + 1L);
+      depth = Math.max(depth, Math.min(MAX_EVALUATION_DEPTH + 1, child.evaluationDepth + 1));
+    }
+    expandedTermCount = terms;
+    evaluationWork = work;
+    evaluationDepth = depth;
+  }
+
+  /** Saturate only private admission facts; construction and source-image inspection still work. */
+  private static long cappedAdd(long left, long right, long cap) {
+    return left >= cap - right ? cap : left + right;
   }
 
   public record ImageLimits(int maxNodes, int maxEdges, int maxTerms, long maxPrimitiveBytes) {
@@ -378,16 +404,60 @@ public final class M3TQ {
   }
 
   public int termCount() {
-    int count = trigrams.length;
-    for (M3TQ subquery : subqueries) {
-      count = Math.addExact(count, subquery.termCount());
-    }
-    return count;
+    return Math.toIntExact(expandedTermCount);
   }
 
-  /** Evaluate only the conservative trigram condition. */
+  /**
+   * Evaluate the conservative condition in the original term/child order without Java recursion.
+   *
+   * <p>Worst-case unfolded work is one visit per node, one per direct term and one per child
+   * edge, including repeated edges. Depth is measured in nodes. Work above 1,000,000 or depth
+   * above 4096 is refused before allocating evaluation stacks or invoking the predicate. The
+   * bound deliberately does not assume a callback result or a short circuit. Construction and
+   * query inspection remain available independently of evaluation admission.</p>
+   *
+   * <p>Callbacks are never memoized, even when a node is shared. Their order, duplicate calls,
+   * short circuits and thrown exception identity are retained.</p>
+   *
+   * @throws UnsupportedOperationException if the unfolded evaluation budget is exceeded
+   */
   public boolean test(LongPredicate containsTrigram) {
     Objects.requireNonNull(containsTrigram, "containsTrigram");
+    if (evaluationWork > MAX_EVALUATION_WORK || evaluationDepth > MAX_EVALUATION_DEPTH) {
+      throw new UnsupportedOperationException("trigram evaluation budget");
+    }
+    boolean rootValue = testDirect(containsTrigram);
+    if (terminal(rootValue) || subqueries.isEmpty()) return rootValue;
+    // Ordered continuations borrow the prepared-query evaluator; repeated edges stay distinct.
+    M3TQ[] stack = new M3TQ[evaluationDepth];
+    int[] nextChild = new int[evaluationDepth];
+    boolean[] values = new boolean[evaluationDepth];
+    int depth = 0;
+    stack[0] = this;
+    values[0] = rootValue;
+    while (true) {
+      M3TQ node = stack[depth];
+      if (node.terminal(values[depth]) || nextChild[depth] == node.subqueries.size()) {
+        boolean value = values[depth];
+        if (depth == 0) return value;
+        stack[depth--] = null;
+        values[depth] = stack[depth].op == Op.AND
+            ? values[depth] && value : values[depth] || value;
+      } else {
+        M3TQ child = node.subqueries.get(nextChild[depth]++);
+        stack[++depth] = child;
+        nextChild[depth] = 0;
+        values[depth] = child.testDirect(containsTrigram);
+      }
+    }
+  }
+
+  private boolean terminal(boolean value) {
+    return op == Op.ALL || op == Op.NONE
+        || (op == Op.AND && !value) || (op == Op.OR && value);
+  }
+
+  private boolean testDirect(LongPredicate containsTrigram) {
     return switch (op) {
       case ALL -> true;
       case NONE -> false;
@@ -395,17 +465,11 @@ public final class M3TQ {
         for (long gram : trigrams) {
           if (!containsTrigram.test(gram)) yield false;
         }
-        for (M3TQ subquery : subqueries) {
-          if (!subquery.test(containsTrigram)) yield false;
-        }
         yield true;
       }
       case OR -> {
         for (long gram : trigrams) {
           if (containsTrigram.test(gram)) yield true;
-        }
-        for (M3TQ subquery : subqueries) {
-          if (subquery.test(containsTrigram)) yield true;
         }
         yield false;
       }
