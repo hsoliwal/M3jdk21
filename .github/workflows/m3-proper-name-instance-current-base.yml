@@ -55,8 +55,11 @@ jobs:
           set -euo pipefail
           rm -rf m3/build/instance-index-current-base
           mkdir -p m3/build/instance-index-current-base/classes m3/build/instance-index-current-base/tests
-          find m3/core/src -name '*.java' | sort > m3/build/instance-index-current-base/sources.txt
-          javac --release 21 -Xlint:all -Werror -d m3/build/instance-index-current-base/classes @m3/build/instance-index-current-base/sources.txt
+          javac --release 21 -Xlint:all -Werror -d m3/build/instance-index-current-base/classes \
+            m3/core/src/com/m3/text/SharedLexiconCatalog.java \
+            m3/core/src/com/m3/text/M3InstanceIndex.java \
+            m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java \
+            m3/core/src/com/m3/text/M3Lexicons.java
           javac --release 21 -Xlint:all -Werror -cp m3/build/instance-index-current-base/classes -d m3/build/instance-index-current-base/tests             m3/core/test/M3InstanceIndexTest.java m3/core/test/M3InstanceIndexPrecomputeTest.java m3/core/test/M3LexiconsTest.java
           java -ea -cp m3/build/instance-index-current-base/classes:m3/build/instance-index-current-base/tests M3InstanceIndexTest
           java -ea -cp m3/build/instance-index-current-base/classes:m3/build/instance-index-current-base/tests M3InstanceIndexPrecomputeTest
