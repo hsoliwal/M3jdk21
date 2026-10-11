@@ -65,6 +65,15 @@ final class M3SynexiaRecipeHomePolicyTest {
         assertEquals(
                 "RECEIVER_ADAPTER_ONLY",
                 rows.get("m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/InstallIndexStringCompatibility.java")[4]);
+
+        String[] pureIntReceiver = rows.get(
+                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-synexia-pure-int.yml");
+        assertNotNull(pureIntReceiver);
+        assertEquals("RECEIVER_ADAPTER_ONLY", pureIntReceiver[4]);
+        assertEquals(
+                "com.synexia.rewrite.M3PureIntConvergenceRecipe",
+                pureIntReceiver[5]);
+        assertEquals("true", pureIntReceiver[7]);
     }
 
     @Test
