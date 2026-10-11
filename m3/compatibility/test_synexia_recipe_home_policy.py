@@ -80,9 +80,9 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             "M3ContractMode.java":
                 ("RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3ContractMode", "true"),
             "M3RecipeScopePolicy.java":
-                ("TARGET_PRODUCT_ADAPTER", "com.synexia.rewrite.M3RecipeFirstInvariant", "true"),
+                ("TARGET_PRODUCT_ADAPTER", "com.synexia.rewrite.M3RecipeScopePolicy", "true"),
             "M3RecipeScopeRegistry.java":
-                ("JDK_TARGET_SPECIFIC", "com.synexia.rewrite.M3Jdk21CanonicalBorrowingPolicy", "false"),
+                ("TARGET_PRODUCT_ADAPTER", "com.synexia.rewrite.M3RecipeScopeRegistry", "true"),
         }
         for file_name, expected in scope_expectations.items():
             surface = (
