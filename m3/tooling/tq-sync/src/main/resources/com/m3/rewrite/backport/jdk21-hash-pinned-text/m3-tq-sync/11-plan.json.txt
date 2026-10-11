@@ -7,7 +7,7 @@
       "before": null,
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQ.java.txt",
-        "sha256": "de8b98b05dd7ae7a13dd8b4f65112ab10238f7ffcc2e01f1002e45b09454458b"
+        "sha256": "28bdfc7bd39fbd19a816ca2570384c695bdd4b3e1bad19b8eb6d96188111babc"
       }
     },
     {
@@ -80,7 +80,7 @@
       "before": null,
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQImageTest.java.txt",
-        "sha256": "5c46854ed73f7168350d2fa65e2cc3ac4bfb727065b6b5ee4c3f862e3f7d98c6"
+        "sha256": "72165571d95faebb1199ec65d3525b411d0b47d62ff5b3dfd88d824182df6186"
       }
     }
   ],
@@ -122,5 +122,5 @@
       "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
     }
   ],
-  "plan_sha256": "8e7895130845e2cc6a1720bb10a8c5573feac5f87b2f805d2b51b26cb9b761a2"
+  "plan_sha256": "8a1c97e3c63bb786650654db065858b3816bfe2733b1df1c24de3fedb4376c7d"
 }
