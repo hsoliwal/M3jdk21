@@ -61,16 +61,16 @@ public final class M3TranslationReceiverMapTest {
         }
         com.m3.text.SynexiaPrecomputePayload translationPayload =
                 com.m3.text.SynexiaPrecomputePayload.parse(
-                        "{\\"lexicon_fingerprint\\":\\"fp-é\\","
-                                + "\\"source_id\\":\\"translate.rows\\","
-                                + "\\"source_revision\\":\\"rev-7\\"}");
+                        "{\"lexicon_fingerprint\":\"fp-é\","
+                                + "\"source_id\":\"translate.rows\","
+                                + "\"source_revision\":\"rev-7\"}");
         check(translationPayload.requireString("lexicon_fingerprint").equals("fp-é"));
         check(translationPayload.requireString("source_id").equals("translate.rows"));
-        check(translationPayload.canonicalJson().contains("\\\\u00e9"));
+        check(translationPayload.canonicalJson().contains("\\u00e9"));
         check(com.m3.text.SynexiaPrecomputePayload.parse(translationPayload.canonicalJson())
                 .requireString("lexicon_fingerprint").equals("fp-é"));
         check(com.m3.text.SynexiaPrecomputePayload.parse(
-                "{\\"lexicon_fingerprint\\":7}").requireLong("lexicon_fingerprint") == 7L);
+                "{\"lexicon_fingerprint\":7}").requireLong("lexicon_fingerprint") == 7L);
 
         System.out.println("M3JDK_TRANSLATION_RECEIVER_MAP_PASS checks=" + checks);
     }
