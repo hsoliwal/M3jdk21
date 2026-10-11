@@ -17,6 +17,7 @@ PIN = BASE / "pin.tsv"
 ESTATE = BASE / "synexia-estate.tsv"
 DAG = BASE / "synexia-dag.tsv"
 STATUS = BASE / "receiver-status.tsv"
+HISTORICAL = BASE / "historical-evidence.tsv"
 PHASES = BASE / "promotion-phases.tsv"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
@@ -364,6 +365,39 @@ def load_status(estate: dict[str, dict[str, str]]) -> None:
         raise ValueError(f"receiver-status missing families: {sorted(set(estate)-seen)}")
 
 
+def load_historical_evidence(estate: dict[str, dict[str, str]]) -> None:
+    expected_header = [
+        "family",
+        "source_tree_or_blob",
+        "evidence_path",
+        "evidence_state",
+    ]
+    with HISTORICAL.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        if reader.fieldnames != expected_header:
+            raise ValueError("invalid historical-evidence header")
+        rows = list(reader)
+
+    seen: set[str] = set()
+    for physical, row in enumerate(rows, start=2):
+        if any(not row[field] for field in expected_header):
+            raise ValueError(f"blank historical-evidence field at row {physical}")
+        family = row["family"]
+        if family in seen or family not in estate:
+            raise ValueError(f"duplicate/unknown historical-evidence family: {family}")
+        seen.add(family)
+        if row["source_tree_or_blob"] != estate[family]["source_tree_or_blob"]:
+            raise ValueError(f"historical evidence source identity drift: {family}")
+        if row["evidence_state"] != "HISTORICAL_MAPPING_NOT_CURRENT_ACCEPTANCE":
+            raise ValueError(f"historical evidence self-promoted: {family}")
+        path = row["evidence_path"]
+        if path.startswith("/") or ".." in Path(path).parts or not path.startswith("m3/"):
+            raise ValueError(f"invalid historical evidence path: {path}")
+        evidence = ROOT / path
+        if not evidence.is_file():
+            raise ValueError(f"missing historical evidence path: {path}")
+
+
 def main(argv: list[str]) -> int:
     if len(argv) != 1:
         print("usage: check_synexia_full_borrow_receiver.py", file=sys.stderr)
@@ -373,6 +407,7 @@ def main(argv: list[str]) -> int:
     load_dag(pin, estate)
     load_phases(pin, estate)
     load_status(estate)
+    load_historical_evidence(estate)
     mixed = sum(
         row["copyright_class"] == MIXED_COPYRIGHT for row in estate.values()
     )
@@ -381,7 +416,7 @@ def main(argv: list[str]) -> int:
         f"families={len(estate)} source={pin['source_revision']} "
         f"state=SOURCE_PIN_ONLY mixed_review_rows={mixed} dag=acyclic "
         "phases=STRING>ARRAYS>COLLECTIONS>AST_COMPILER>REMAINING_FAMILIES "
-        "completion=false"
+        "completion=false historical_mapping_evidence=preserved_not_accepted"
     )
     return 0
 
