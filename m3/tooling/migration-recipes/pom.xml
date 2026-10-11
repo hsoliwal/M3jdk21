@@ -44,7 +44,6 @@
           <configuration>
             <includes>
               <include>com/m3/rewrite/scope/*</include>
-              <include>com/synexia/rewrite/atom/*</include>
             </includes>
             <rules>
               <rule>
