@@ -38,6 +38,45 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             self.assertTrue((ROOT.parent / row["legacy_path"]).is_file(), row["legacy_path"])
             self.assertTrue((ROOT.parent / row["canonical_path"]).is_file(), row["canonical_path"])
 
+    def test_pending_synexia_scope_migration_is_pinned_but_not_claimed_borrowed(self) -> None:
+        ownership = ROOT / "compatibility" / "synexia-recipe-ownership.tsv"
+        with ownership.open(encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle, delimiter="\t"))
+
+        pending = [
+            row for row in rows
+            if row["state"].startswith("SYNEXIA_CANONICAL_PENDING_MERGE")
+        ]
+        self.assertEqual(8, len(pending))
+        self.assertEqual(
+            {
+                "scope-contract-mode",
+                "scope-policy",
+                "scope-registry",
+                "file-fixed-point",
+                "visibility-level",
+                "visibility-inventory",
+                "verification-plan",
+                "multipass-planner",
+            },
+            {row["family"] for row in pending},
+        )
+        for row in pending:
+            self.assertEqual(
+                "9c8dfa4529c05b75f56a604385bf6b4715fcd3da",
+                row["synexia_revision"],
+            )
+            self.assertTrue(
+                row["canonical_path"].startswith(
+                    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/"
+                )
+            )
+            self.assertEqual(40, len(row["synexia_git_blob"]))
+            self.assertFalse(
+                (ROOT.parent / row["canonical_path"]).exists(),
+                "pending external canonical path must not masquerade as local borrowed custody",
+            )
+
     def test_policy_is_consumer_only_for_reusable_m3_surfaces(self) -> None:
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
