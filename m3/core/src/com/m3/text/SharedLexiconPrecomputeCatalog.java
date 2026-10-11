@@ -24,7 +24,17 @@ public final class SharedLexiconPrecomputeCatalog {
     private static final String FREQUENCY_WORD_SIGNAL_SOURCE = "dictlang.frequency";
     public record TranslationIdentity(String sourceId, String recordId,
                                       String sourceLanguage, String targetLanguage,
-                                      String lexiconFingerprint, String sourceFingerprint) {
+                                      String lexiconFingerprint, String sourceFingerprint,
+                                      String sourceRevision, String sourceBlobSha) {
+        private static final String UNPINNED = "UNPINNED";
+
+        public TranslationIdentity(String sourceId, String recordId,
+                                   String sourceLanguage, String targetLanguage,
+                                   String lexiconFingerprint, String sourceFingerprint) {
+            this(sourceId, recordId, sourceLanguage, targetLanguage, lexiconFingerprint,
+                    sourceFingerprint, UNPINNED, UNPINNED);
+        }
+
         public TranslationIdentity {
             sourceId = text(sourceId, "sourceId");
             recordId = text(recordId, "recordId");
@@ -32,6 +42,18 @@ public final class SharedLexiconPrecomputeCatalog {
             targetLanguage = text(targetLanguage, "targetLanguage");
             lexiconFingerprint = text(lexiconFingerprint, "lexiconFingerprint");
             sourceFingerprint = text(sourceFingerprint, "sourceFingerprint");
+            sourceRevision = provenance(sourceRevision, "sourceRevision");
+            sourceBlobSha = provenance(sourceBlobSha, "sourceBlobSha");
+            if (UNPINNED.equals(sourceRevision) != UNPINNED.equals(sourceBlobSha))
+                throw new IllegalArgumentException("source provenance must be both pinned or both UNPINNED");
+        }
+
+        private static String provenance(String value, String name) {
+            text(value, name);
+            if (UNPINNED.equals(value)) return value;
+            if (!value.matches("[0-9a-f]{40}"))
+                throw new IllegalArgumentException(name + " must be lowercase 40-hex provenance");
+            return value;
         }
     }
 
@@ -148,7 +170,9 @@ public final class SharedLexiconPrecomputeCatalog {
             if (!identity.sourceLanguage().equals(value.sourceLanguage())
                     || !identity.targetLanguage().equals(value.targetLanguage())
                     || !identity.lexiconFingerprint().equals(value.lexiconFingerprint())
-                    || !identity.sourceFingerprint().equals(value.sourceFingerprint())) {
+                    || !identity.sourceFingerprint().equals(value.sourceFingerprint())
+                    || !identity.sourceRevision().equals(value.sourceRevision())
+                    || !identity.sourceBlobSha().equals(value.sourceBlobSha())) {
                 throw new IllegalArgumentException("translation identity does not match projection");
             }
             put(translations, identity, value, "translation"); return this;

@@ -57,3 +57,7 @@ M3LexiconPrecompute.TokenFrequency	frequencies	Map<Integer,Integer>	frequencies	
 M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTokenIds	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
 M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
 M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
+M3LexiconPrecompute.TranslationProjection	sourceRevision	String	source_revision	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation source revision pins the source snapshot
+M3LexiconPrecompute.TranslationProjection	sourceBlobSha	String	source_blob_sha	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation source blob pins the source owner
+SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceRevision	String	source_revision	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation identity pins the source revision
+SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceBlobSha	String	source_blob_sha	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation identity pins the source owner

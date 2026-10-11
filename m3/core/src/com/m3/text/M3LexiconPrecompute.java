@@ -33,27 +33,43 @@ public final class M3LexiconPrecompute {
     }
 
     public static final class TranslationProjection {
+        private static final String UNPINNED = "UNPINNED";
         private final String lexiconFingerprint;
         private final String sourceLanguage;
         private final String targetLanguage;
         private final String sourceFingerprint;
         private final int[] translatedTokenIds;
         private final int mappedTokenCount;
+        private final String sourceRevision;
+        private final String sourceBlobSha;
 
         public TranslationProjection(String lexiconFingerprint, String sourceLanguage,
                                      String targetLanguage, String sourceFingerprint,
                                      int[] translatedTokenIds) {
             this(lexiconFingerprint, sourceLanguage, targetLanguage, sourceFingerprint,
-                    translatedTokenIds, translatedTokenIds == null ? 0 : translatedTokenIds.length);
+                    translatedTokenIds, translatedTokenIds == null ? 0 : translatedTokenIds.length,
+                    UNPINNED, UNPINNED);
         }
 
         public TranslationProjection(String lexiconFingerprint, String sourceLanguage,
                                      String targetLanguage, String sourceFingerprint,
                                      int[] translatedTokenIds, int mappedTokenCount) {
+            this(lexiconFingerprint, sourceLanguage, targetLanguage, sourceFingerprint,
+                    translatedTokenIds, mappedTokenCount, UNPINNED, UNPINNED);
+        }
+
+        public TranslationProjection(String lexiconFingerprint, String sourceLanguage,
+                                     String targetLanguage, String sourceFingerprint,
+                                     int[] translatedTokenIds, int mappedTokenCount,
+                                     String sourceRevision, String sourceBlobSha) {
             this.lexiconFingerprint = text(lexiconFingerprint, "lexiconFingerprint");
             this.sourceLanguage = text(sourceLanguage, "sourceLanguage");
             this.targetLanguage = text(targetLanguage, "targetLanguage");
             this.sourceFingerprint = text(sourceFingerprint, "sourceFingerprint");
+            this.sourceRevision = provenance(sourceRevision, "sourceRevision");
+            this.sourceBlobSha = provenance(sourceBlobSha, "sourceBlobSha");
+            if (UNPINNED.equals(this.sourceRevision) != UNPINNED.equals(this.sourceBlobSha))
+                throw new IllegalArgumentException("source provenance must be both pinned or both UNPINNED");
             Objects.requireNonNull(translatedTokenIds, "translatedTokenIds");
             this.translatedTokenIds = translatedTokenIds.clone();
             for (int tokenId : this.translatedTokenIds) nonNegative(tokenId, "translated token id");
@@ -66,6 +82,11 @@ public final class M3LexiconPrecompute {
         public String sourceLanguage() { return sourceLanguage; }
         public String targetLanguage() { return targetLanguage; }
         public String sourceFingerprint() { return sourceFingerprint; }
+        public String sourceRevision() { return sourceRevision; }
+        public String sourceBlobSha() { return sourceBlobSha; }
+        public boolean sourceBound() {
+            return !UNPINNED.equals(sourceRevision) && !UNPINNED.equals(sourceBlobSha);
+        }
         public int mappedTokenCount() { return mappedTokenCount; }
         public int translatedTokenIdAt(int index) {
             return translatedTokenIds[Objects.checkIndex(index, translatedTokenIds.length)];
@@ -75,6 +96,20 @@ public final class M3LexiconPrecompute {
         public boolean appliesTo(String lexicon, String source, String target, String fingerprint) {
             return lexiconFingerprint.equals(lexicon) && sourceLanguage.equals(source)
                     && targetLanguage.equals(target) && sourceFingerprint.equals(fingerprint);
+        }
+
+        public boolean appliesTo(String lexicon, String source, String target, String fingerprint,
+                                 String revision, String blobSha) {
+            return appliesTo(lexicon, source, target, fingerprint)
+                    && sourceRevision.equals(revision) && sourceBlobSha.equals(blobSha);
+        }
+
+        private static String provenance(String value, String name) {
+            text(value, name);
+            if (UNPINNED.equals(value)) return value;
+            if (!value.matches("[0-9a-f]{40}"))
+                throw new IllegalArgumentException(name + " must be lowercase 40-hex provenance");
+            return value;
         }
     }
 
