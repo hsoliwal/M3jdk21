@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.SynexiaFullBorrowInitialStatus
+displayName: Keep initial Synexia full-borrow status source-only
+description: >-
+  Applies the exact reviewed receiver-status postimage through the existing Synexia-derived
+  hash-pinned text recipe. A target map is not target acceptance.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: synexia-full-borrow-initial-status
