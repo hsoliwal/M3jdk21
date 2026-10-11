@@ -24,42 +24,42 @@
   },
   "dependencies": {
     "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": {
-      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72",
-      "git_blob": "33783749e46474f2bdc68103e189fe2907a61fa9"
+      "sha256": "793765ce73c2fe9ae5618b20c9b8e5325bdd90a6d47e09d565071fe3ac347127",
+      "git_blob": "7c11497c0183d04e66baa41ee5391de682175360"
     },
     "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": {
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
-      "git_blob": "a2e8c916208b563517e51b738744a05357e633aa"
+      "sha256": "865ba39e7253e66a191d1b2ed98312fa607d756ef4aad3ddf7eaa1ef4d08d18b",
+      "git_blob": "4a38e39d0755462d40c2b22548b87abde938ea0b"
     },
     ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java": {
-      "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462",
+      "sha256": "7fe6098e588038ae53f41b452e8fb8efb49ebb0dad6ef5446ce590432a940e44",
       "git_blob": "cfb9fb8befe2c5ccde5035e96ae7c99b89b5f490"
     },
     ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java": {
-      "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5",
+      "sha256": "a34dafed922c3f7287a42591dff8e6b1903d505151a6108c0c8f80f445ca19e6",
       "git_blob": "8f1018a1bcfa203420253d59a8473ef5a18e19b6"
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java": {
-      "sha256": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
+      "sha256": "93e6e461a3ed3ed4aa6c288ef173ecc24898708ed6ad5343058e0a63a4854585",
       "git_blob": "5daedbe16dfc9377783b52d932e548cc44f0b335"
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java": {
-      "sha256": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01",
+      "sha256": "0b130c547e71fdf1b011b31cb1f53709f88c73d530121ba8646e90cb8ee02bb8",
       "git_blob": "c2dc2371c730aa758ccc45e06ba4ab95661e5593"
     },
     "test/jdk/java/lang/String/M3MappedStringBackingTest.java": {
-      "sha256": "9f42d1bdd6e174f5eac44e72afae2154ac140c9773c540b3073a06a8c2da827d",
+      "sha256": "ea8fd726758c0c1b6bceef987b400842822347483836e5df5b52a0c8cf87f51f",
       "git_blob": "b1f69174a1c8c521f94759a9e046a0b63028e022"
     },
     "test/jdk/java/lang/String/MapFactsTest.java": {
-      "sha256": "07f1de47de88624740a0b4e0e7fb30a05627f37054cbd11dad0e3c3298401059",
+      "sha256": "577b976600e2c3c2725a1d4464dfb52fd1599e2a3a486ad2a9fa42b9468864fd",
       "git_blob": "b427cca8342bea336686db1f5904364ac4ee17b5"
     }
   },
   "successor": {
     "parent": "1c389e31805fb4faf5d9fe256c8dc6797a2eadff",
     "recipe": "m3/tooling/tq-sync",
-    "retained_owner_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+    "retained_owner_sha256": "de8b98b05dd7ae7a13dd8b4f65112ab10238f7ffcc2e01f1002e45b09454458b",
     "history": [
       "b68391863561ce80169663cd2b49c2845e084b74",
       "bb0461ea8adc5b93771596a0fc8e8981a1e9e328",
