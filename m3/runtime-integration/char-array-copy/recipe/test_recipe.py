@@ -98,6 +98,13 @@ class CharArrayCopyRecipeTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "symlink path"):
                 RECIPE.apply(target)
 
+    def test_git_blob_uses_the_repository_nul_framing(self):
+        source = RECIPE.ROOT / "src/java.base/share/classes/java/lang/M3String.java"
+        self.assertEqual(
+            "70d1d03c109126fdda36c54da21b484bbe368fd9",
+            RECIPE.git_blob(source.read_bytes()),
+        )
+
     def test_manifest_superseded_hashes_are_current_exact_sources(self):
         for name, hashes in MANIFEST["files"].items():
             source = RECIPE.ROOT / name
