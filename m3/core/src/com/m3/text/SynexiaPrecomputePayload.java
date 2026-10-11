@@ -326,6 +326,7 @@ public final class SynexiaPrecomputePayload {
             while (!atEnd()) {
                 char current = input.charAt(at++);
                 if (current == '"') return result.toString();
+                if (current < 0x20) throw error("unescaped control character");
                 if (current != '\\') { result.append(current); continue; }
                 if (atEnd()) throw error("unterminated escape");
                 char escaped = input.charAt(at++);
