@@ -25,6 +25,7 @@ public class M3StringBuilderRangeBulkTest {
         coldLatin1Range();
         nonLatin1RangeInflates();
         utf16Destination();
+        latin1SourceIntoUtf16Destination();
         System.out.println("M3_STRING_BUILDER_RANGE_BULK_PASS|checks=" + checks);
     }
 
@@ -66,6 +67,18 @@ public class M3StringBuilderRangeBulkTest {
         builder.append(source, 1, 11);
         check(builder.toString().equals("\u0100bulk-ascii"), "UTF16 destination content");
         check(coder(builder) == 1, "UTF16 destination remains UTF16");
+    }
+
+    private static void latin1SourceIntoUtf16Destination() throws Exception {
+        String source = String.join("", "prefix-", "café", "-suffix");
+        StringBuilder builder = new StringBuilder("\u0100");
+        builder.append(source, 7, 11);
+        check(builder.toString().equals("\u0100café"),
+                "M3 Latin1 source bulk-inflates into UTF16 destination");
+        check(coder(builder) == 1, "UTF16 destination coder preserved");
+        builder.append(source, 0, 7);
+        check(builder.toString().equals("\u0100caféprefix-"),
+                "multiple M3 bulk ranges preserve order");
     }
 
     private static int coder(StringBuilder builder) throws IllegalAccessException {
