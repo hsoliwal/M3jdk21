@@ -22,6 +22,7 @@ import org.openrewrite.Recipe;
 import org.openrewrite.SourceFile;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
+import org.openrewrite.text.PlainTextParser;
 
 final class M3SynexiaFullDeliveryA3RecipeTest {
     private static final String IMPORTER =
@@ -153,17 +154,29 @@ final class M3SynexiaFullDeliveryA3RecipeTest {
     private static List<SourceFile> parse(
             Map<String, String> sources,
             InMemoryExecutionContext context) {
-        List<Parser.Input> inputs = new ArrayList<>(sources.size());
+        List<Parser.Input> javaInputs = new ArrayList<>();
+        List<Parser.Input> textInputs = new ArrayList<>();
         sources.forEach(
-                (path, source) ->
-                        inputs.add(
-                                Parser.Input.fromString(
-                                        Path.of(path), source)));
-        if (inputs.isEmpty()) return List.of();
-        return JavaParser.fromJavaVersion()
-                .build()
-                .parseInputs(inputs, null, context)
-                .toList();
+                (path, source) -> {
+                    Parser.Input input = Parser.Input.fromString(Path.of(path), source);
+                    if (path.endsWith(".java")) {
+                        javaInputs.add(input);
+                    } else if (path.endsWith(".md")) {
+                        textInputs.add(input);
+                    } else {
+                        throw new IllegalArgumentException("unsupported in-memory source type: " + path);
+                    }
+                });
+        List<SourceFile> parsed = new ArrayList<>();
+        if (!javaInputs.isEmpty()) {
+            parsed.addAll(JavaParser.fromJavaVersion().build()
+                    .parseInputs(javaInputs, null, context).toList());
+        }
+        if (!textInputs.isEmpty()) {
+            parsed.addAll(PlainTextParser.builder().build()
+                    .parseInputs(textInputs, null, context).toList());
+        }
+        return List.copyOf(parsed);
     }
 
     private static String resource(String path) {
