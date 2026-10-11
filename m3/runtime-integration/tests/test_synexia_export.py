@@ -136,14 +136,27 @@ class SynexiaExportTest(unittest.TestCase):
                 if line.startswith(source_id + "\t")
             )
             required_fields = set(source["precompute_fields"].split(","))
+            translation_record_id = EXPORT.canonical_translation_record_id(
+                "EN", "HI", "hello")
+            self.assertEqual('["en","hi","hello"]', translation_record_id)
+            self.assertNotEqual(
+                translation_record_id,
+                EXPORT.canonical_translation_record_id("en", "hi", "Hello"),
+            )
+            self.assertNotEqual(
+                translation_record_id,
+                EXPORT.canonical_translation_record_id("en", "bn", "hello"),
+            )
+            with self.assertRaisesRegex(ValueError, "NUL separator"):
+                EXPORT.canonical_translation_record_id("en\x00x", "hi", "hello")
             payload = {
                 "lexicon_fingerprint": "lex-7",
                 "mapped_token_count": 1,
-                "record_id": "translation-17",
+                "record_id": translation_record_id,
                 "source_fingerprint": "source-7",
                 "source_id": source_id,
-                "source_language": "en",
-                "target_language": "hi",
+                "source_language": "EN",
+                "target_language": "HI",
                 "translated_token_ids": [42],
                 "translation_grammar_supported": True,
             }
@@ -162,8 +175,8 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8",
             )
             translation_row = (
-                source_id, source_path, "translation", "en", "translation-17",
-                "hello", "hello", "नमस्ते", "en->hi", source["precompute_target"],
+                source_id, source_path, "translation", "EN", translation_record_id,
+                "hello", "hello", "नमस्ते", "EN->HI", source["precompute_target"],
                 json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
             )
             fingerprint_payload = {"lexicon_fingerprint": 7}
@@ -187,6 +200,20 @@ class SynexiaExportTest(unittest.TestCase):
                 "a13b5fa8be2d47c9650d159671e3120f31270ced",
                 ROOT / "m3/lexicon/synexia-precompute-field-map.tsv",
             )
+            mapping_rows = list(csv.DictReader(
+                (output / "synexia.records.tsv").read_text(encoding="utf-8").splitlines(),
+                delimiter="\t",
+            ))
+            translation_mapping = next(
+                row for row in mapping_rows if row["source_id"] == source_id
+            )
+            self.assertEqual(["en", "hi", "hello"], json.loads(translation_record_id))
+            self.assertEqual(translation_record_id, translation_mapping["record_id"])
+            self.assertEqual("नमस्ते", translation_mapping["mapping_name"])
+            self.assertEqual(
+                translation_record_id,
+                json.loads(translation_mapping["precompute_payload"])["record_id"],
+            )
             export_manifest = json.loads(
                 (output / "synexia.export.json").read_text(encoding="utf-8")
             )
@@ -195,6 +222,25 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertEqual("long", scoped_types["fixture.long-fingerprint"]["lexicon_fingerprint"])
             self.assertNotIn("lexicon_fingerprint", export_manifest["source"]["precompute_field_types"])
             self.assertEqual(2, VERIFY.verify(output)["source_records"])
+
+            bad_rows, _ = EXPORT.read_tsv(records, EXPORT.RECORD_COLUMNS_V2)
+            bad_rows[0]["record_id"] = "translation-17"
+            bad_records = root / "bad-records.tsv"
+            with bad_records.open("w", encoding="utf-8", newline="") as stream:
+                writer = csv.DictWriter(
+                    stream, fieldnames=EXPORT.RECORD_COLUMNS_V2,
+                    delimiter="\t", lineterminator="\n")
+                writer.writeheader()
+                writer.writerows(bad_rows)
+            with self.assertRaisesRegex(
+                    ValueError, "translation record_id does not match importer identity"):
+                EXPORT.export(
+                    manifest, bad_records, root / "bad-output",
+                    "https://github.com/hsoliwal/com.synexia",
+                    "a13b5fa8be2d47c9650d159671e3120f31270ced",
+                    ROOT / "m3/lexicon/synexia-precompute-field-map.tsv",
+                )
+            self.assertFalse((root / "bad-output").exists())
 
     def test_preserves_ids_mappings_numbers_and_precompute(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -308,7 +354,9 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java", translation["synexia_path"])
         self.assertEqual("source_language,target_language,source_token,target_token",
                          translation["mapping_fields"])
-        self.assertIn("source_id and record_id", translation["data_policy"])
+        self.assertEqual("source_language,target_language,source_token",
+                         translation["record_id_field"])
+        self.assertIn("compact ASCII JSON", translation["data_policy"])
         self.assertEqual(9, len(sources["translate.rows"]["precompute_fields"].split(",")))
         self.assertEqual(8, len(sources["dictlang.numbers.0-10000"]["precompute_fields"].split(",")))
 
