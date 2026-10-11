@@ -324,6 +324,13 @@ def validate_translation_record_identity(row: dict[str, str], source: dict[str, 
         raise ValueError("translation identity languages must be strings")
     if row["language_tag"] != source_language:
         raise ValueError("translation source language does not match language_tag")
+    profile_parts = row["translation_profile"].split("->")
+    if len(profile_parts) != 2:
+        raise ValueError("translation profile must be source->target")
+    if profile_parts[0] != source_language:
+        raise ValueError("translation profile source language does not match payload")
+    if profile_parts[1] != target_language:
+        raise ValueError("translation profile target language does not match payload")
     expected = canonical_translation_record_id(
         source_language, target_language, row["lexeme"])
     if row["record_id"] != expected:
