@@ -143,6 +143,16 @@ must be supplied under its exact revision and license custody. No network
 download is performed by the exporter, and no claim is made that a bulk corpus
 has been checked into this public JDK repository.
 
+## Dedicated acronym sidecar (staged)
+
+Acronym text is carried separately from the generic numeric/boolean
+precompute payload through the `m3lex-acronym-v1` sidecar. The receiver
+requires the pinned source identity, owner scope, sorted 40-row snapshot,
+UTF-8 bytes, and checksum before exposing an entry. The Java record and
+catalog preserve acronym, expansion, and domain separately; the source
+snapshot remains staged until hosted target checks and synchronized Synexia
+receipts admit it.
+
 ## Proof
 
 ```text
