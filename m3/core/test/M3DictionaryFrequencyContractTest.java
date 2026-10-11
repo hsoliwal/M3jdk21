@@ -142,9 +142,11 @@ public final class M3DictionaryFrequencyContractTest {
                         + "lemma_id,lexical_rank,morphology_mask,phonetic_id,pos_mask,presence64,"
                         + "script_ordinal,sim_hash64,source_revision,stem_id,utf16_length"));
         check(thesaurus[5].equals("M3StringFacts")
-                && thesaurus[8].equals("lexeme,related_lexeme"));
+                && thesaurus[4].equals("lexeme,related_lexeme")
+                && thesaurus[8].equals("-"));
         check(antonyms[5].equals("M3StringFacts")
-                && antonyms[8].equals("lexeme,related_lexeme"));
+                && antonyms[4].equals("lexeme,related_lexeme")
+                && antonyms[8].equals("-"));
         check(!thesaurus[5].contains("IndexWordFacts")
                 && !antonyms[5].contains("IndexWordFacts"));
 
