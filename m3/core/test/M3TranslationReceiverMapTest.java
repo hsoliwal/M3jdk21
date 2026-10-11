@@ -75,7 +75,7 @@ public final class M3TranslationReceiverMapTest {
         boolean rejectedControlCharacter = false;
         try {
             com.m3.text.SynexiaPrecomputePayload.parse(
-                    "{\\"source_id\\":\\"bad" + (char) 1 + "\\"}");
+                    "{\"source_id\":\"bad" + (char) 1 + "\"}");
         } catch (IllegalArgumentException expected) {
             rejectedControlCharacter = true;
         }
