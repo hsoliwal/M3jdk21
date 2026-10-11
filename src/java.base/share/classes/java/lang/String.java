@@ -2233,8 +2233,8 @@ public final class String
     public int compareTo(String anotherString) {
         M3String leftM3 = m3();
         M3String rightM3 = anotherString.m3();
-        if (leftM3 != null && leftM3.sameCoordinate(rightM3)) {
-            return 0;
+        if (leftM3 != null && rightM3 != null) {
+            return leftM3.compareTo(rightM3);
         }
         if (leftM3 != null || rightM3 != null) {
             int length1 = length();
