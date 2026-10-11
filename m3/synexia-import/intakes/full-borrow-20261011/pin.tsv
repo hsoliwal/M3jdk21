@@ -1,2 +1,29 @@
-schema	source_repository	source_revision	source_handoff_commit	source_pr	target_repository	target_branch	license_policy	canonical_owner	receiver_role	state
-M3JDK21_SYNEXIA_FULL_BORROW_INTAKE_V1	hsoliwal/com.synexia	37e4edabea6af918a4dc9a7eabd45fbdcf101881	3a87d17df7e5d825aa1b071c5fb05c64b854c798	10336	hsoliwal/M3jdk21	master	APACHE_ONLY	hsoliwal/com.synexia	TARGET_RECEIVER_ONLY	SOURCE_PIN_ONLY
+field	value
+schema	M3JDK21_SYNEXIA_FULL_BORROW_INTAKE_V1
+source_repository	hsoliwal/com.synexia
+source_pr	10336
+source_revision	37e4edabea6af918a4dc9a7eabd45fbdcf101881
+source_handoff_commit	3a87d17df7e5d825aa1b071c5fb05c64b854c798
+source_estate_path	.m3/m3jdk21-full-borrow-estate.tsv
+source_estate_git_blob	ddcec769cb1833fab5f224a41c7f6ab86295d262
+source_dag_path	.m3/m3jdk21-full-borrow-dag.tsv
+source_dag_git_blob	3e6c56b8555231fb36d0ac620ab112aa5970d45a
+source_phase_path	.m3/m3jdk21-promotion-phases.tsv
+source_phase_git_blob	c4e8582f99caba32d718b2c1e86dae0854cdce3d
+source_family_count	32
+target_repository	hsoliwal/M3jdk21
+target_baseline	985aadda29756c0fe988d7b70c8240d4eb554dc7
+target_branch	master
+target_estate_copy	m3/synexia-import/intakes/full-borrow-20261011/synexia-estate.tsv
+target_dag_copy	m3/synexia-import/intakes/full-borrow-20261011/synexia-dag.tsv
+target_phase_copy	m3/synexia-import/intakes/full-borrow-20261011/promotion-phases.tsv
+copyright_notice	Copyright 2026 Hitesh Soliwal and contributors
+first_party_license	Apache-2.0
+openjdk_policy	PRESERVE_EXISTING_OPENJDK_LICENSE_NOTICE
+third_party_policy	SEPARATE_ARTIFACT_LICENSE_REVIEW
+canonical_owner	hsoliwal/com.synexia
+receiver_role	TARGET_RECEIVER_ONLY
+initial_target_state	SOURCE_PIN_ONLY
+automatic_application	false
+promotion_authority	false
+repository_completion	false
