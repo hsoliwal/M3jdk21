@@ -29,8 +29,19 @@ public final class M3AcronymPrecomputeTest {
         check(columns.length == 9, "acronym manifest shape");
         check("M3LexiconPrecompute.AcronymPrecompute".equals(columns[5]),
                 "acronym manifest owner");
+        check("acronym".equals(columns[3]),
+                "acronym donor identity field");
         check("acronym,domain,expansion".equals(columns[8]),
                 "acronym manifest precompute fields");
+
+        String targetMap = Files.readString(
+                Path.of("lexicon/synexia-acronym-target-map.tsv"), StandardCharsets.UTF_8);
+        String targetRow = Arrays.stream(targetMap.split("\\n", -1))
+                .filter(line -> line.startsWith("dictlang.acronyms\\t"))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("acronym target-map row missing"));
+        check(targetRow.split("\\t", -1)[3].equals(columns[3]),
+                "acronym target-map identity field");
 
         SharedLexiconPrecomputeCatalog.AcronymIdentity identity =
                 new SharedLexiconPrecomputeCatalog.AcronymIdentity(
