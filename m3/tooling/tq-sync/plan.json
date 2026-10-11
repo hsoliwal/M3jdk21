@@ -36,11 +36,11 @@
       "path": "m3/docs/name-mapping.json",
       "before": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt.before",
-        "sha256": "22ce39ac68e6f5efab18e9bbf6d3da45af585067d88848f1eb7ce8a76987df87"
+        "sha256": "23fc59289fc088b21b26e8a3d1aab9dbbc6f1ab7d6a708e6cc727621e2f203d7"
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt",
-        "sha256": "23fc59289fc088b21b26e8a3d1aab9dbbc6f1ab7d6a708e6cc727621e2f203d7"
+        "sha256": "4ebbbd2c38e7680170df620cd640037614321d3981d5ecd537e7453d575abf22"
       }
     },
     {
@@ -298,5 +298,5 @@
       "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
     }
   ],
-  "plan_sha256": "1216578cce6e143c2a4eeb29bf5c2415d9ee53d9dae9a9f5591627a76c16ba6e"
+  "plan_sha256": "5bbcd80da4535e1de5ba4a06cfadcaefc32885b62778b5ba65c5b0f106f3d0a7"
 }
