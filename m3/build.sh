@@ -18,14 +18,15 @@ for mode in jit int nocompact c2; do
  flags=();case "$mode" in int)flags=(-Xint);; nocompact)flags=(-XX:-CompactStrings);; c2)flags=(-Xbatch -XX:-TieredCompilation);; esac
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests FoundationTest | tee "build/logs/test-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LexiconPrecomputeTest | tee "build/logs/typed-precompute-$mode.log"
+# Run numeric ownership/mapping proofs before the independent dictionary-frequency gate.
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceTest | tee "build/logs/number-space-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceContractTest | tee "build/logs/number-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3DictionaryFrequencyContractTest | tee "build/logs/dictionary-frequency-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3TranslationReceiverMapTest | tee "build/logs/translation-receiver-map-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputePayloadTest | tee "build/logs/synexia-payload-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputeReceiverTest | tee "build/logs/synexia-receiver-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconFamilySidecarCatalogTest | tee "build/logs/synexia-family-sidecar-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaSiUnitDecoderTest | tee "build/logs/synexia-si-unit-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceTest | tee "build/logs/number-space-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceContractTest | tee "build/logs/number-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LanguageGrammarSupportTest | tee "build/logs/grammar-support-$mode.log"
 done
 # Build in a private temporary directory, then publish a complete content-addressed file.

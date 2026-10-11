@@ -8,48 +8,6 @@ on:
 permissions:
   contents: read
 jobs:
-  number-space-contract:
-    name: M3 number-space manifest contract
-    runs-on: ubuntu-22.04
-    timeout-minutes: 10
-    env:
-      TEMP: ${{ runner.temp }}
-      TMP: ${{ runner.temp }}
-      TMPDIR: ${{ runner.temp }}
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          persist-credentials: false
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /m3/core/src
-            /m3/core/test/M3NumberSpaceTest.java
-            /m3/core/test/M3NumberSpaceContractTest.java
-            /m3/lexicon/synexia-source-manifest.tsv
-            /m3/lexicon/synexia-number-target-map.tsv
-      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
-        with:
-          distribution: temurin
-          java-version: "21"
-      - name: Compile the existing M3 core and run the focused number-space contracts
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "$TEMP" = "$RUNNER_TEMP"
-          test "$TMP" = "$RUNNER_TEMP"
-          printf 'TEMP=%s TMP=%s\n' "$TEMP" "$TMP"
-          work="$RUNNER_TEMP/m3-number-space"
-          mkdir -p "$work/classes" "$work/tests"
-          mapfile -t sources < <(find m3/core/src -name '*.java' -print | LC_ALL=C sort)
-          javac --release 21 -Xlint:all,-module -d "$work/classes" "${sources[@]}"
-          jar --create --file "$work/com.m3.text.jar" -C "$work/classes" .
-          javac --release 21 --module-path "$work/com.m3.text.jar" --add-modules com.m3.text -d "$work/tests" m3/core/test/M3NumberSpaceTest.java m3/core/test/M3NumberSpaceContractTest.java
-          (
-            cd m3
-            java -ea -esa --module-path "$work/com.m3.text.jar" --add-modules com.m3.text -cp "$work/tests" M3NumberSpaceTest
-            java -ea -esa --module-path "$work/com.m3.text.jar" --add-modules com.m3.text -cp "$work/tests" M3NumberSpaceContractTest
-          )
   foundation:
     runs-on: ubuntu-22.04
     timeout-minutes: 15
