@@ -80,6 +80,14 @@ public final class M3TranslationReceiverMapTest {
             rejectedControlCharacter = true;
         }
         check(rejectedControlCharacter);
+        boolean rejectedNonAsciiDigit = false;
+        try {
+            com.m3.text.SynexiaPrecomputePayload.parse(
+                    "{\"lexicon_fingerprint\":" + (char) 0x0661 + "}");
+        } catch (IllegalArgumentException expected) {
+            rejectedNonAsciiDigit = true;
+        }
+        check(rejectedNonAsciiDigit);
 
         System.out.println("M3JDK_TRANSLATION_RECEIVER_MAP_PASS checks=" + checks);
     }
