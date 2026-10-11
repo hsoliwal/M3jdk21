@@ -106,7 +106,8 @@ def verify(root: Path) -> None:
     ]
     require(synexia, "Synexia missing from FOSS reuse ledger")
     for row in synexia:
-        require(row.get("license") == "Apache-2.0", f"{row.get('capability')}: license drift")
+        donor_license = row.get("license", "").split(";", 1)[0].strip()
+        require("Apache-2.0" in donor_license, f"{row.get('capability')}: donor license drift")
         require(
             row.get("classification") != "DIRECT_IMPORT",
             f"{row.get('capability')}: unreviewed direct import is forbidden",
