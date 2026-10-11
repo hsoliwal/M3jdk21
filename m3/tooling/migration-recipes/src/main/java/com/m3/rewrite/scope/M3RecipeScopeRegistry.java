@@ -5,44 +5,18 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * External scope authority for retained OpenRewrite recipes.
+ * M3JDK21 target-only recipe-scope overlay.
  *
- * <p>The registry deliberately does not modify recipe classes. Existing recipe public contracts
- * remain sealed while orchestration can still reject an invocation whose requested write boundary
- * is broader than its evidence.
+ * <p>Portable reusable recipe scope is canonical in
+ * {@link com.synexia.rewrite.M3RecipeScopeRegistry}. This class owns only OpenJDK/JEP/receiver
+ * mappings that are genuinely target-specific and converts portable canonical policies into the
+ * retained target compatibility value type.</p>
  */
 public final class M3RecipeScopeRegistry {
-    private static final Map<String, M3RecipeScopePolicy> POLICIES = Map.ofEntries(
-            Map.entry(
-                    "org.openrewrite.java.RemoveUnusedImports",
-                    fixed(M3EditScope.FILE)),
-            Map.entry(
-                    "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe",
-                    fixed(M3EditScope.MODULE)),
-            Map.entry(
-                    "com.synexia.rewrite.M3SegmentedLaneNativeRecipe",
-                    fixed(M3EditScope.FILE)),
+    private static final Map<String, M3RecipeScopePolicy> TARGET_POLICIES = Map.ofEntries(
             Map.entry(
                     "com.m3.rewrite.InstallIndexStringCompatibility",
                     fixed(M3EditScope.MODULE)),
-            Map.entry(
-                    "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
-                    inferred()),
-            Map.entry(
-                    "com.synexia.rewrite.M3PureIntAtomizeRecipe",
-                    fixed(M3EditScope.FILE)),
-            Map.entry(
-                    "com.synexia.rewrite.M3PureIntInventoryRecipe",
-                    fixed(M3EditScope.FILE)),
-            Map.entry(
-                    "com.synexia.rewrite.M3PureIntPatternizeRecipe",
-                    fixed(M3EditScope.FILE)),
-            Map.entry(
-                    "com.synexia.rewrite.M3PureIntDocumentationRecipe",
-                    fixed(M3EditScope.FILE)),
-            Map.entry(
-                    "com.synexia.rewrite.M3PureIntConvergenceRecipe",
-                    fixed(M3EditScope.FILE)),
             Map.entry(
                     "com.m3.rewrite.M3Java21ConvergenceRecipe",
                     fixed(M3EditScope.FILE)),
@@ -92,25 +66,36 @@ public final class M3RecipeScopeRegistry {
     private M3RecipeScopeRegistry() {}
 
     public static M3RecipeScopePolicy require(String recipeClassName) {
-        Objects.requireNonNull(recipeClassName, "recipeClassName");
-        M3RecipeScopePolicy policy = POLICIES.get(recipeClassName);
-        if (policy == null) {
-            throw new IllegalArgumentException("unregistered M3 recipe: " + recipeClassName);
+        String checked = Objects.requireNonNull(recipeClassName, "recipeClassName");
+        M3RecipeScopePolicy local = TARGET_POLICIES.get(checked);
+        if (local != null) {
+            return local;
         }
-        return policy;
+        if (com.synexia.rewrite.M3RecipeScopeRegistry.registered(checked)) {
+            return M3RecipeScopePolicy.fromCanonical(
+                    com.synexia.rewrite.M3RecipeScopeRegistry.require(checked));
+        }
+        throw new IllegalArgumentException("unregistered M3 recipe: " + checked);
     }
 
     public static M3RecipeScopePolicy require(Class<?> recipeType) {
-        Objects.requireNonNull(recipeType, "recipeType");
-        return require(recipeType.getName());
+        return require(Objects.requireNonNull(recipeType, "recipeType").getName());
     }
 
     public static boolean registered(String recipeClassName) {
-        return recipeClassName != null && POLICIES.containsKey(recipeClassName);
+        return recipeClassName != null
+                && (TARGET_POLICIES.containsKey(recipeClassName)
+                        || com.synexia.rewrite.M3RecipeScopeRegistry.registered(recipeClassName));
     }
 
+    /** Portable Synexia registrations plus target-only OpenJDK receiver registrations. */
     public static int size() {
-        return POLICIES.size();
+        return com.synexia.rewrite.M3RecipeScopeRegistry.size() + TARGET_POLICIES.size();
+    }
+
+    /** Target-only overlay cardinality; useful for receiver proof without copying canonical names. */
+    static int targetOverlaySize() {
+        return TARGET_POLICIES.size();
     }
 
     private static M3RecipeScopePolicy fixed(M3EditScope scope) {
