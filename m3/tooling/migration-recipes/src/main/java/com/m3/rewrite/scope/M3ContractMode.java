@@ -1,11 +1,27 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite.scope;
 
-/** Contract authority declared by an M3 recipe. */
-public enum M3ContractMode {
-    /** Public/external contract and observable behavior remain locked. */
-    BEHAVIOR_AND_CONTRACT_PRESERVING,
+import java.util.Objects;
 
-    /** Contract change is intentional and requires explicit LIBRARY_API authority. */
-    EXPLICIT_CONTRACT_CHANGE
+/**
+ * M3JDK21 compatibility vocabulary for Synexia's canonical contract modes.
+ *
+ * <p>This target enum is a thin adapter only; reusable meaning is owned by
+ * {@link com.synexia.rewrite.M3ContractMode}.</p>
+ */
+public enum M3ContractMode {
+    BEHAVIOR_AND_CONTRACT_PRESERVING(
+            com.synexia.rewrite.M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING),
+    EXPLICIT_CONTRACT_CHANGE(
+            com.synexia.rewrite.M3ContractMode.EXPLICIT_CONTRACT_CHANGE);
+
+    private final com.synexia.rewrite.M3ContractMode canonical;
+
+    M3ContractMode(com.synexia.rewrite.M3ContractMode canonical) {
+        this.canonical = Objects.requireNonNull(canonical, "canonical");
+    }
+
+    com.synexia.rewrite.M3ContractMode canonical() {
+        return canonical;
+    }
 }
