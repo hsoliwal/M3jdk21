@@ -55,7 +55,7 @@ jobs:
       - name: Install bounded pure-int recipe crate from the pinned vendor source
         run: |
           mvn -B -ntp -f m3/pom.xml \
-            -pl vendor/synexia/synexia-openrewrite-pure-int-recipes -am clean install
+            -pl tooling/synexia-pure-int-recipes -am clean install
 
       - name: Compile and execute canonical recipe consumer
         run: |
