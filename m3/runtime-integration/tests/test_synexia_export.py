@@ -127,9 +127,14 @@ class SynexiaExportTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             source_id = "translate.rows"
+            source_manifest = ROOT / "m3/lexicon/synexia-source-manifest.tsv"
             source_path = "synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java"
-            sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
+            sources, _ = EXPORT.read_manifest(source_manifest)
             source = sources[source_id]
+            source_line = next(
+                line for line in source_manifest.read_text(encoding="utf-8").splitlines()
+                if line.startswith(source_id + "\t")
+            )
             required_fields = set(source["precompute_fields"].split(","))
             payload = {
                 "lexicon_fingerprint": "lex-7",
@@ -143,21 +148,41 @@ class SynexiaExportTest(unittest.TestCase):
                 "translation_grammar_supported": True,
             }
             self.assertEqual(required_fields, set(payload))
-            records = root / "records.tsv"
-            row = (
+            fixture_source = (
+                "fixture.long-fingerprint", "Long fingerprint donor", "fixture/fingerprint.tsv",
+                "id", "lexeme", "M3LexiconPrecompute.IndexWordFacts", "Apache-2.0",
+                "local type-ambiguity fixture", "lexicon_fingerprint",
+            )
+            manifest = root / "sources.tsv"
+            separator = chr(9)
+            manifest.write_text(
+                separator.join(EXPORT.MANIFEST_COLUMNS_V2) + chr(10)
+                + source_line + chr(10)
+                + separator.join(fixture_source) + chr(10),
+                encoding="utf-8",
+            )
+            translation_row = (
                 source_id, source_path, "translation", "en", "translation-17",
                 "hello", "hello", "नमस्ते", "en->hi", source["precompute_target"],
                 json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
             )
-            separator = chr(9)
+            fingerprint_payload = {"lexicon_fingerprint": 7}
+            fingerprint_row = (
+                "fixture.long-fingerprint", "fixture/fingerprint.tsv", "fixture", "und",
+                "fixture-1", "fixture", "fixture-1", "FIXTURE", "-",
+                "M3LexiconPrecompute.IndexWordFacts",
+                json.dumps(fingerprint_payload, separators=(",", ":")),
+            )
+            records = root / "records.tsv"
             records.write_text(
                 separator.join(EXPORT.RECORD_COLUMNS_V2) + chr(10)
-                + separator.join(row) + chr(10),
+                + separator.join(translation_row) + chr(10)
+                + separator.join(fingerprint_row) + chr(10),
                 encoding="utf-8",
             )
             output = root / "output"
             EXPORT.export(
-                ROOT / "m3/lexicon/synexia-source-manifest.tsv", records, output,
+                manifest, records, output,
                 "https://github.com/hsoliwal/com.synexia",
                 "a13b5fa8be2d47c9650d159671e3120f31270ced",
                 ROOT / "m3/lexicon/synexia-precompute-field-map.tsv",
@@ -167,8 +192,9 @@ class SynexiaExportTest(unittest.TestCase):
             )
             scoped_types = export_manifest["source"]["precompute_field_types_by_source"]
             self.assertEqual("String", scoped_types[source_id]["lexicon_fingerprint"])
+            self.assertEqual("long", scoped_types["fixture.long-fingerprint"]["lexicon_fingerprint"])
             self.assertNotIn("lexicon_fingerprint", export_manifest["source"]["precompute_field_types"])
-            self.assertEqual(1, VERIFY.verify(output)["source_records"])
+            self.assertEqual(2, VERIFY.verify(output)["source_records"])
 
     def test_preserves_ids_mappings_numbers_and_precompute(self):
         with tempfile.TemporaryDirectory() as directory:
