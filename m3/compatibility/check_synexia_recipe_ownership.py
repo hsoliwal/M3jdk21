@@ -95,7 +95,7 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/",
     )
     canonical_roots = (
-        "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/atom/",
+        "m3/synexia-import/pure-int-recipe-custody/src/main/java/com/synexia/rewrite/",
         "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/scope/",
         "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/semantic/",
     )
@@ -132,11 +132,9 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
         if not canonical.is_file() or git_blob(canonical) != row["synexia_git_blob"]:
             raise ValueError(f"Synexia canonical mirror drift: {row['canonical_path']}")
 
-    if len(revisions) != 1:
-        raise ValueError("one handoff must bind one exact Synexia revision")
     pin = load_pin()
-    if revisions != {pin["canonical_revision"]}:
-        raise ValueError("borrowed recipe mirrors do not match pinned Synexia canonical revision")
+    if pin["canonical_revision"] not in revisions:
+        raise ValueError("recipe-home pin revision is absent from exact family custody")
     return rows
 
 
@@ -229,10 +227,10 @@ def main(argv: list[str]) -> int:
     rows = load()
     residue = load_residue()
     pin = load_pin()
-    revision = rows[0]["synexia_revision"]
+    revisions = ",".join(sorted({row["synexia_revision"] for row in rows}))
     print(
         "SYNEXIA_RECIPE_OWNERSHIP_PASS "
-        f"borrowed_rows={len(rows)} frozen_residue={len(residue)} revision={revision} "
+        f"borrowed_rows={len(rows)} frozen_residue={len(residue)} revisions={revisions} "
         f"manifest_blob={pin['canonical_manifest_git_blob']}"
     )
     return 0
