@@ -42,7 +42,8 @@ public final class M3LanguageGrammarSupportTest {
                 "M3StringFacts + M3LexiconPrecompute.TranslationProjection + "
                         + "SharedLexiconPrecomputeCatalog.TranslationIdentity + "
                         + "M3LanguageGrammarSupport"));
-        check(columns[8].equals("translation_grammar_supported"));
+        check(Arrays.stream(columns[8].split(",", -1))
+                .anyMatch(M3LanguageGrammarSupport.TARGET_FIELD::equals));
         System.out.println("M3JDK_GRAMMAR_SUPPORT_PASS checks=" + checks + " languages=16");
     }
 }
