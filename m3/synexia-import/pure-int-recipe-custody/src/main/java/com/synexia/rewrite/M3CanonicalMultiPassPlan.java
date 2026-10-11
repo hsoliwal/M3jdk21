@@ -18,27 +18,71 @@ import java.util.Objects;
  */
 public final class M3CanonicalMultiPassPlan {
     private static final List<Pass> PASSES = List.of(
-            new Pass(0, "INVENTORY", M3EditScope.FILE, false,
+            new Pass(
+                    0,
+                    "INVENTORY",
+                    M3EditScope.FILE,
+                    false,
                     "inventory/hash/catalogue stable for unchanged preimages"),
-            new Pass(1, "FILE_ATOMIZATION", M3EditScope.FILE, true,
+            new Pass(
+                    1,
+                    "FILE_ATOMIZATION",
+                    M3EditScope.FILE,
+                    true,
                     "every admitted atomization recipe preserves the sealed file contract"),
-            new Pass(2, "FILE_PATTERNIZATION", M3EditScope.FILE, true,
+            new Pass(
+                    2,
+                    "FILE_PATTERNIZATION",
+                    M3EditScope.FILE,
+                    true,
                     "every behavioral leaf has admitted pattern/IOP identity or typed residue"),
-            new Pass(3, "FILE_DOCUMENTATION", M3EditScope.FILE, true,
+            new Pass(
+                    3,
+                    "FILE_DOCUMENTATION",
+                    M3EditScope.FILE,
+                    true,
                     "derivable Javadoc/semantic documentation converges without behavior drift"),
-            new Pass(4, "FILE_FIXED_POINT", M3EditScope.FILE, false,
+            new Pass(
+                    4,
+                    "FILE_FIXED_POINT",
+                    M3EditScope.FILE,
+                    false,
                     "the complete FILE recipe DAG is unchanged on the next pass"),
-            new Pass(5, "VISIBILITY", M3EditScope.VISIBILITY, false,
+            new Pass(
+                    5,
+                    "VISIBILITY",
+                    M3EditScope.VISIBILITY,
+                    false,
                     "every accessibility concern is classified before any visibility mutation"),
-            new Pass(6, "PACKAGE", M3EditScope.PACKAGE, false,
+            new Pass(
+                    6,
+                    "PACKAGE",
+                    M3EditScope.PACKAGE,
+                    false,
                     "package/default/protected participant relationships converge"),
-            new Pass(7, "MODULE", M3EditScope.MODULE, false,
+            new Pass(
+                    7,
+                    "MODULE",
+                    M3EditScope.MODULE,
+                    false,
                     "module-local symbol/type/recipe relationships converge"),
-            new Pass(8, "MULTI_MODULE", M3EditScope.MULTI_MODULE, false,
+            new Pass(
+                    8,
+                    "MULTI_MODULE",
+                    M3EditScope.MULTI_MODULE,
+                    false,
                     "reactor-wide fan-in roots and recipe/donor catalogues are stable"),
-            new Pass(9, "LIBRARY_API", M3EditScope.LIBRARY_API, false,
+            new Pass(
+                    9,
+                    "LIBRARY_API",
+                    M3EditScope.LIBRARY_API,
+                    false,
                     "exported API deltas are explicitly approved or typed exclusions"),
-            new Pass(10, "PROOF", M3EditScope.LIBRARY_API, false,
+            new Pass(
+                    10,
+                    "PROOF",
+                    M3EditScope.LIBRARY_API,
+                    false,
                     "diff -> lint/static analysis -> compile -> tests -> runtime -> Java/JNI parity -> fixed point"));
 
     private M3CanonicalMultiPassPlan() {}
@@ -47,6 +91,7 @@ public final class M3CanonicalMultiPassPlan {
         return PASSES;
     }
 
+    /** FILE-local convergence frontier that must seal before any scope promotion. */
     public static List<Pass> fileConvergencePasses() {
         return PASSES.subList(0, 5);
     }
@@ -55,6 +100,7 @@ public final class M3CanonicalMultiPassPlan {
         return PASSES.get(Objects.checkIndex(ordinal, PASSES.size()));
     }
 
+    /** Content-addressed identity of the exact ordered scope-aware pass programme. */
     public static String root() {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
