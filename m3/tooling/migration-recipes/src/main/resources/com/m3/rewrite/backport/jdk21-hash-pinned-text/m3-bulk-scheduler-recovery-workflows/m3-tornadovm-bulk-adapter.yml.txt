@@ -30,6 +30,8 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - name: Install bounded Synexia recipe custody
+        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Receiver and mapping recipe tests
         run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
