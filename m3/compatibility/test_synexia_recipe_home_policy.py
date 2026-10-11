@@ -63,7 +63,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         )
         for row in pending:
             self.assertEqual(
-                "9c8dfa4529c05b75f56a604385bf6b4715fcd3da",
+                "700cc1765c959a85b5a05249e2c2a08c571616ca",
                 row["synexia_revision"],
             )
             self.assertTrue(
