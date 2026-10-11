@@ -63,3 +63,6 @@ SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceLanguage	String	source_
 SharedLexiconPrecomputeCatalog.TranslationIdentity	targetLanguage	String	target_language	m3lex-family-v2:synexia.translation.tsv	MAPPED	target language profile identity remains bound to the projection
 SharedLexiconPrecomputeCatalog.TranslationIdentity	lexiconFingerprint	String	lexicon_fingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation reuse is rejected across frozen lexicon fingerprints
 SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceFingerprint	String	source_fingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation reuse is rejected across source snapshot fingerprints
+M3LexiconPrecompute.TranslationProjection	sourceLanguage	String	source_language	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation source language remains bound to the typed projection identity
+M3LexiconPrecompute.TranslationProjection	targetLanguage	String	target_language	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation target language remains bound to the typed projection identity
+M3LanguageGrammarSupport	supports	boolean	translation_grammar_supported	synexia.records.tsv:precompute_payload	MAPPED	grammar support is a source-owned boolean signal and is not inferred from token text
