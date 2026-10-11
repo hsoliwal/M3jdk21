@@ -24,6 +24,8 @@ jobs:
           echo "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+      - name: Verify offline pinned Synexia source references
+        run: python3 -B m3/compatibility/test_synexia_reference_pins.py
       - name: Verify layered source-bound recipes
         run: |
           python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
@@ -43,6 +45,6 @@ jobs:
       - name: Build and exercise immutable foundation
         run: bash ./m3/build.sh
       - name: Compare pinned Synexia content and range contract
-        run: python3 m3/compatibility/check-synexia.py
+        run: python3 -B m3/compatibility/check-synexia.py
       - name: Verify two-process read-only image mapping
         run: python3 m3/verify-shared-mapping.py
