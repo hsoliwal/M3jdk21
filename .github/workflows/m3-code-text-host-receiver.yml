@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
+name: M3 code-text host receiver
+
+on:
+  push:
+    branches:
+      - codex/m3-code-text-receiver-current-base-20261011
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/lang/M3CodeTextFacts.java'
+      - 'src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java'
+      - 'm3/core/test/java/lang/M3CodeTextFactsReceiverTest.java'
+      - 'm3/core/test/java/lang/M3CodeTextSignalBatchTest.java'
+      - 'm3/lexicon/synexia-code-text-precompute-field-map.tsv'
+      - 'm3/lexicon/synexia-code-text-target-receiver-receipt-10124.tsv'
+      - '.github/workflows/m3-code-text-host-receiver.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  receiver:
+    name: Java 21 host receiver
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile patched java.base receiver
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf m3/build/m3-code-text-host
+          mkdir -p m3/build/m3-code-text-host
+          javac --release 21 --patch-module java.base=src/java.base             -d m3/build/m3-code-text-host             src/java.base/share/classes/java/lang/M3CodeTextFacts.java             src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java             m3/core/test/java/lang/M3CodeTextFactsReceiverTest.java             m3/core/test/java/lang/M3CodeTextSignalBatchTest.java
+      - name: Run deterministic receiver proofs
+        shell: bash
+        run: |
+          set -euo pipefail
+          java --patch-module java.base=m3/build/m3-code-text-host             -ea java.lang.M3CodeTextFactsReceiverTest
+          java --patch-module java.base=m3/build/m3-code-text-host             -ea java.lang.M3CodeTextSignalBatchTest
+          test "$(wc -l < m3/lexicon/synexia-code-text-precompute-field-map.tsv)" -eq 12
+          grep -F $'M3JDK_CODE_TEXT_PRECOMPUTE_TARGET_RECEIVER_V1'             m3/lexicon/synexia-code-text-target-receiver-receipt-10124.tsv
