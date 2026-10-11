@@ -68,7 +68,7 @@ def load_pin(path: Path = PIN) -> dict[str, str]:
 
 
 def load(path: Path = LEDGER) -> list[dict[str, str]]:
-    """Validate the already-borrowed pure-int mirror ledger."""
+    """Validate borrowed and source-pinned pending Synexia recipe ownership rows."""
     with path.open("r", encoding="utf-8", newline="") as stream:
         reader = csv.DictReader(stream, delimiter="\t")
         expected = [
@@ -92,22 +92,33 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
     legacy_roots = (
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/",
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/",
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/pass/",
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/",
     )
     canonical_roots = (
         "m3/synexia-import/pure-int-recipe-custody/src/main/java/com/synexia/rewrite/",
         "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/semantic/",
     )
+    pending_canonical_root = (
+        "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/"
+    )
+    borrowed_states = {
+        "BORROWED_CANONICAL_WITH_FROZEN_LEGACY",
+        "BORROWED_CANONICAL_LEGACY_RETIRED",
+    }
+    pending_states = {
+        "SYNEXIA_CANONICAL_PENDING_MERGE_TARGET_ADAPTER_RETAINED",
+        "SYNEXIA_CANONICAL_PENDING_MERGE_TARGET_OVERLAY_RETAINED",
+        "SYNEXIA_CANONICAL_PENDING_MERGE_LEGACY_RETIRED",
+    }
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in expected):
             raise ValueError(f"blank ownership field at row {physical}")
         if row["family"] in families:
             raise ValueError(f"duplicate recipe family {row['family']}")
         families.add(row["family"])
-        if row["state"] not in {
-            "BORROWED_CANONICAL_WITH_FROZEN_LEGACY",
-            "BORROWED_CANONICAL_LEGACY_RETIRED",
-        }:
+        state = row["state"]
+        if state not in borrowed_states | pending_states:
             raise ValueError(f"invalid recipe ownership state at row {physical}")
         if not HEX40.fullmatch(row["synexia_revision"]):
             raise ValueError(f"invalid Synexia revision at row {physical}")
@@ -117,19 +128,31 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
                 raise ValueError(f"invalid Git blob {field} at row {physical}")
         if not row["legacy_path"].startswith(legacy_roots):
             raise ValueError(f"legacy recipe escaped frozen namespace at row {physical}")
-        if not row["canonical_path"].startswith(canonical_roots):
+        pending = state in pending_states
+        if pending:
+            if not row["canonical_path"].startswith(pending_canonical_root):
+                raise ValueError(f"pending canonical path escaped Synexia namespace at row {physical}")
+        elif not row["canonical_path"].startswith(canonical_roots):
             raise ValueError(f"canonical recipe escaped borrowed namespace at row {physical}")
 
         legacy = ROOT / row["legacy_path"]
-        canonical = ROOT / row["canonical_path"]
-        if row["state"] == "BORROWED_CANONICAL_WITH_FROZEN_LEGACY":
+        if state == "BORROWED_CANONICAL_WITH_FROZEN_LEGACY":
             if not legacy.is_file() or git_blob(legacy) != row["legacy_git_blob"]:
                 raise ValueError(f"frozen legacy recipe drift: {row['legacy_path']}")
+        elif state in {
+            "SYNEXIA_CANONICAL_PENDING_MERGE_TARGET_ADAPTER_RETAINED",
+            "SYNEXIA_CANONICAL_PENDING_MERGE_TARGET_OVERLAY_RETAINED",
+        }:
+            if not legacy.is_file() or git_blob(legacy) != row["legacy_git_blob"]:
+                raise ValueError(f"retained target adapter drift: {row['legacy_path']}")
         else:
             if legacy.exists():
                 raise ValueError(f"retired legacy recipe reintroduced: {row['legacy_path']}")
-        if not canonical.is_file() or git_blob(canonical) != row["synexia_git_blob"]:
-            raise ValueError(f"Synexia canonical mirror drift: {row['canonical_path']}")
+
+        if not pending:
+            canonical = ROOT / row["canonical_path"]
+            if not canonical.is_file() or git_blob(canonical) != row["synexia_git_blob"]:
+                raise ValueError(f"Synexia canonical mirror drift: {row['canonical_path']}")
 
     pin = load_pin()
     if pin["canonical_revision"] not in revisions:
