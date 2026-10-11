@@ -1,0 +1,18 @@
+target_type	target_field	java_type	canonical_source_field	required	storage_scope	preservation_rule
+M3LangDexPrecompute.Identity	sourceId	String	langdex_source_id	true	m3langdex-family-v1:synexia.langdex.tsv	canonical source family identity is preserved without reinterpretation
+M3LangDexPrecompute.Identity	recordId	String	langdex_record_id	true	m3langdex-family-v1:synexia.langdex.tsv	canonical source record coordinate is preserved without renumbering
+M3LangDexPrecompute.Identity	glottocode	String	langdex_glottocode	true	m3langdex-family-v1:synexia.langdex.tsv	normalized glottocode remains the donor language coordinate
+M3LangDexPrecompute.Identity	surface	String	langdex_surface	true	m3langdex-family-v1:synexia.langdex.tsv	canonical surface identity remains source-owned UTF-16 text
+M3LangDexPrecompute.Identity	sourceRevision	String	langdex_source_revision	true	m3langdex-family-v1:synexia.langdex.tsv	source revision remains part of the immutable identity key
+M3LangDexPrecompute.Identity	domain	InternDomainV1	langdex_domain	true	m3langdex-family-v1:synexia.langdex.tsv	InternDomainV1.CONCEPT is required and cannot drift
+M3LangDexPrecompute.Identity	canonicalSchema	String	langdex_canonical_schema	true	m3langdex-family-v1:synexia.langdex.tsv	canonical identity schema is preserved as source metadata
+M3LangDexPrecompute.Identity	canonicalBytes	byte[]	langdex_canonical_bytes	true	m3langdex-family-v1:synexia.langdex.tsv	canonical identity bytes are defensively copied and never synthesized at admission
+M3LangDexPrecompute.Identity	canonicalDigest	String	langdex_canonical_digest	true	m3langdex-family-v1:synexia.langdex.tsv	SHA-256 digest is verified against canonical identity bytes
+M3LangDexPrecompute.TranslationIdentity	sourceId	String	langdex_source_id	true	m3langdex-family-v1:synexia.langdex.tsv	translation source family identity is preserved
+M3LangDexPrecompute.TranslationIdentity	recordId	String	langdex_record_id	true	m3langdex-family-v1:synexia.langdex.tsv	translation source record identity is preserved
+M3LangDexPrecompute.TranslationIdentity	conceptId	long	langdex_concept_id	true	m3langdex-family-v1:synexia.langdex.tsv	translation concept coordinate is preserved
+M3LangDexPrecompute.TranslationIdentity	sourceGlottocode	String	langdex_source_glottocode	true	m3langdex-family-v1:synexia.langdex.tsv	translation source language coordinate is preserved
+M3LangDexPrecompute.TranslationIdentity	sourceSurface	String	langdex_source_surface	true	m3langdex-family-v1:synexia.langdex.tsv	translation source surface is preserved
+M3LangDexPrecompute.TranslationIdentity	targetGlottocode	String	langdex_target_glottocode	true	m3langdex-family-v1:synexia.langdex.tsv	translation target language coordinate is preserved
+M3LangDexPrecompute.TranslationIdentity	targetSurface	String	langdex_target_surface	true	m3langdex-family-v1:synexia.langdex.tsv	translation target surface is preserved
+M3LangDexPrecompute.TranslationIdentity	sourceRevision	String	langdex_source_revision	true	m3langdex-family-v1:synexia.langdex.tsv	translation source revision is preserved

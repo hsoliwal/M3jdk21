@@ -1,0 +1,58 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 LangDex precompute current-base
+
+on:
+  pull_request:
+    paths:
+      - "m3/core/src/com/m3/text/InternDomainV1.java"
+      - "m3/core/src/com/m3/text/M3LangDexPrecompute.java"
+      - "m3/core/src/com/m3/text/SharedLangDexPrecomputeCatalog.java"
+      - "m3/core/test/M3LangDexPrecomputeTest.java"
+      - "m3/lexicon/synexia-langdex-identity-field-map.tsv"
+      - "m3/lexicon/synexia-precompute-field-map.tsv"
+      - "m3/lexicon/synexia-source-manifest.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - ".github/workflows/m3-langdex-precompute-current-base.yml"
+  push:
+    branches:
+      - codex/m3-langdex-precompute-current-base-20261011
+    paths:
+      - "m3/core/src/com/m3/text/InternDomainV1.java"
+      - "m3/core/src/com/m3/text/M3LangDexPrecompute.java"
+      - "m3/core/src/com/m3/text/SharedLangDexPrecomputeCatalog.java"
+      - "m3/core/test/M3LangDexPrecomputeTest.java"
+      - "m3/lexicon/synexia-langdex-identity-field-map.tsv"
+      - "m3/lexicon/synexia-precompute-field-map.tsv"
+      - "m3/lexicon/synexia-source-manifest.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - ".github/workflows/m3-langdex-precompute-current-base.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  receiver:
+    name: M3LangDexPrecompute
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Compile and run LangDex receiver proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf m3/build/langdex-precompute-current-base
+          mkdir -p m3/build/langdex-precompute-current-base/classes m3/build/langdex-precompute-current-base/tests
+          javac --release 21 -Xlint:all -Werror             -d m3/build/langdex-precompute-current-base/classes             m3/core/src/com/m3/text/InternDomainV1.java             m3/core/src/com/m3/text/M3LangDexPrecompute.java             m3/core/src/com/m3/text/SharedLangDexPrecomputeCatalog.java
+          javac --release 21 -Xlint:all -Werror             -cp m3/build/langdex-precompute-current-base/classes             -d m3/build/langdex-precompute-current-base/tests             m3/core/test/M3LangDexPrecomputeTest.java
+          (cd m3 && java -ea -cp build/langdex-precompute-current-base/classes:build/langdex-precompute-current-base/tests M3LangDexPrecomputeTest)
+          grep -F 'M3LangDexPrecompute.Identity' m3/lexicon/synexia-langdex-identity-field-map.tsv
+          grep -F 'M3LangDexPrecompute.Entry' m3/lexicon/synexia-precompute-field-map.tsv
+          grep -F 'M3LangDexPrecompute.Identity' m3/lexicon/synexia-source-manifest.tsv
+          grep -F 'langdex-typed-precompute-receiver' m3/runtime-integration/FOSS_REUSE_DECISION.tsv
