@@ -152,22 +152,48 @@ def canonical_required_fields(value: str) -> str:
     return ",".join(fields)
 
 
-def read_field_map(path: pathlib.Path) -> dict[str, str]:
+def read_field_map(path: pathlib.Path,
+                   sources: dict[str, dict[str, str]]) -> dict[str, dict[str, str]]:
+    """Resolve mapped JSON shapes per source owner, not by globally ambiguous field name."""
     rows, _ = read_tsv(path, FIELD_MAP_COLUMNS)
-    result: dict[str, str] = {}
-    for row in rows:
-        if row["status"] != "MAPPED":
-            continue
-        field = row["canonical_payload_field"]
-        donor_type = row["donor_java_type"]
-        if donor_type not in ALLOWED_DONOR_TYPES:
-            raise ValueError(f"unsupported donor field type: {donor_type}")
-        previous = result.setdefault(field, donor_type)
-        if previous != donor_type:
-            raise ValueError(f"conflicting donor field types for {field}")
-    if not result:
-        raise ValueError("precompute field map has no mapped fields")
-    return dict(sorted(result.items()))
+    mapped_rows = [row for row in rows if row["status"] == "MAPPED"]
+    result: dict[str, dict[str, str]] = {}
+    for source_id, source in sources.items():
+        owner_names = {
+            owner.strip().rsplit(".", 1)[-1]
+            for owner in source["precompute_target"].split("+")
+            if owner.strip()
+        }
+        required = [
+            field for field in source["precompute_fields"].split(",")
+            if field
+        ]
+        source_types: dict[str, str] = {}
+        for field in required:
+            candidates = [
+                row for row in mapped_rows
+                if row["canonical_payload_field"] == field
+            ]
+            if not candidates:
+                raise ValueError(
+                    f"precompute field has no mapped donor type: {source_id}:{field}")
+            owner_matches = [
+                row for row in candidates
+                if row["donor_type"].rsplit(".", 1)[-1] in owner_names
+            ]
+            selected = owner_matches or candidates
+            types = {row["donor_java_type"] for row in selected}
+            unsupported = types - ALLOWED_DONOR_TYPES
+            if unsupported:
+                donor_type = sorted(unsupported)[0]
+                raise ValueError(
+                    f"unsupported donor field type for {source_id}:{field}: {donor_type}")
+            if len(types) != 1:
+                raise ValueError(
+                    f"conflicting donor field types for {source_id}:{field}")
+            source_types[field] = next(iter(types))
+        result[source_id] = dict(sorted(source_types.items()))
+    return result
 
 
 def _fits_donor_type(value: object, donor_type: str) -> bool:
@@ -256,7 +282,7 @@ def canonical_precompute_payload(value: str) -> str:
 
 
 def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
-                 field_types: dict[str, str] | None = None) -> tuple[list[Record], bytes]:
+                 field_types: dict[str, dict[str, str]] | None = None) -> tuple[list[Record], bytes]:
     raw = path.read_bytes()
     with path.open("r", encoding="utf-8", errors="surrogatepass", newline="") as stream:
         columns = tuple(csv.DictReader(stream, delimiter="\t").fieldnames or ())
@@ -287,7 +313,7 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
         if missing:
             raise ValueError("precompute payload missing required fields: " + ",".join(missing))
         if field_types:
-            validate_payload_shapes(payload, required_fields, field_types)
+            validate_payload_shapes(payload, required_fields, field_types.get(row["source_id"], {}))
         result.append(Record(normalized))
     if not result:
         raise ValueError("lexicon records are empty")
@@ -430,8 +456,8 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
            relation_policy: str = "normalized-directed-v1") -> dict[str, object]:
     sources, source_manifest_bytes = read_manifest(source_manifest)
     field_map_path = field_map or source_manifest.with_name("synexia-precompute-field-map.tsv")
-    field_types = read_field_map(field_map_path) if field_map_path.is_file() else {}
-    field_map_bytes = field_map_path.read_bytes() if field_types else None
+    field_types = read_field_map(field_map_path, sources) if field_map_path.is_file() else {}
+    field_map_bytes = field_map_path.read_bytes() if any(field_types.values()) else None
     records, records_bytes = load_records(records_path, sources, field_types)
     relations, relations_bytes = load_relations(relations_path, sources, records)
     related_source_ids = relation_source_ids(sources)
