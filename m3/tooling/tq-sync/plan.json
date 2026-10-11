@@ -117,7 +117,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/10-pins.json.txt",
-        "sha256": "a7c4ba68ec1c51febf7a75d3539b857713b4efb2101f6cdea90ddb724e0f841f"
+        "sha256": "6d1c204e5261572bbf0308f3cc4cc1142c1f9b3df973aa01fcb68faffd8ba15f"
       }
     },
     {
@@ -298,5 +298,5 @@
       "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
     }
   ],
-  "plan_sha256": "3d659c4bedd1a41a5503c53a49e6a1fa42feb7a9953fa7f613caa57dd6191ba6"
+  "plan_sha256": "1216578cce6e143c2a4eeb29bf5c2415d9ee53d9dae9a9f5591627a76c16ba6e"
 }
