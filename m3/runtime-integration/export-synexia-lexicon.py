@@ -348,6 +348,9 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
     result: list[Record] = []
     field_types = field_types or {}
     for row in rows:
+        key = (row["source_id"], row["record_id"])
+        if key in seen:
+            raise ValueError(f"duplicate source/record identity: {key[0]}:{key[1]}")
         if row["source_id"] not in sources:
             raise ValueError(f"record references unknown source_id: {row['source_id']}")
         if row["source_path"] != sources[row["source_id"]]["synexia_path"]:
@@ -367,9 +370,6 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
             validate_payload_shapes(payload, required_fields, field_types.get(row["source_id"], {}))
         validate_translation_record_identity(
             normalized, sources[row["source_id"]], payload)
-        key = (normalized["source_id"], normalized["record_id"])
-        if key in seen:
-            raise ValueError(f"duplicate source/record identity: {key[0]}:{key[1]}")
         seen.add(key)
         result.append(Record(normalized))
     if not result:
