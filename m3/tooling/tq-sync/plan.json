@@ -128,7 +128,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
-        "sha256": "0bc0285440e0852f428142a4f3af413cba13f66df928233f586049da59059012"
+        "sha256": "8a8c55032189273d53d3f6bc98c6f813be3812bc6e9adac88c901fb8095dd792"
       }
     },
     {
@@ -194,7 +194,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/17-M3TQ.java.txt.txt",
-        "sha256": "de8b98b05dd7ae7a13dd8b4f65112ab10238f7ffcc2e01f1002e45b09454458b"
+        "sha256": "28bdfc7bd39fbd19a816ca2570384c695bdd4b3e1bad19b8eb6d96188111babc"
       }
     },
     {
@@ -216,7 +216,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/19-manifest.tsv.txt",
-        "sha256": "be434369a7b15e90f3027122204502447c23d1a4fb0dfdf75b449a3b0c919143"
+        "sha256": "74b424532635d57fb7dfb27b2b2e24794ac4a039a64df048ceee764e1b0adb7a"
       }
     },
     {
@@ -268,35 +268,35 @@
       "before": null,
       "after": {
         "resource": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/24-M3TQImageTest.java.txt",
-        "sha256": "5c46854ed73f7168350d2fa65e2cc3ac4bfb727065b6b5ee4c3f862e3f7d98c6"
+        "sha256": "72165571d95faebb1199ec65d3525b411d0b47d62ff5b3dfd88d824182df6186"
       }
     }
   ],
   "guards": [
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "793765ce73c2fe9ae5618b20c9b8e5325bdd90a6d47e09d565071fe3ac347127"
+      "sha256": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "865ba39e7253e66a191d1b2ed98312fa607d756ef4aad3ddf7eaa1ef4d08d18b"
+      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a"
     },
     {
       "path": "m3/migration/recipe.py",
-      "sha256": "fb2965fb978e4fa1d5c909ae4adafb8991bb16bafa8885ede181a805bde61977"
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
-      "sha256": "de8b98b05dd7ae7a13dd8b4f65112ab10238f7ffcc2e01f1002e45b09454458b"
+      "sha256": "28bdfc7bd39fbd19a816ca2570384c695bdd4b3e1bad19b8eb6d96188111babc"
     },
     {
       "path": "src/hotspot/share/runtime/arguments.cpp",
-      "sha256": "f0e948596509693258ecfb89f459320e9992516a4ce31ae4382fec13e033410f"
+      "sha256": "cde11381b3d49642dee5988d0188e6f3ffc0dcd3a7789b3abec12a00eb832dc5"
     },
     {
       "path": "m3/tooling/lane28/check-log.py",
-      "sha256": "cc5a35cdfc428b44328b3e5f580c532367a2022c146a5e0c0ea76c1a7f2711bf"
+      "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
     }
   ],
-  "plan_sha256": "cc62c993dc4b8460673aa136cc1ad989cd45ff286f2f69bb69e59dda657ee269"
+  "plan_sha256": "bd25844225947478f6e7aa2c5211181c2d4cee1fd35dae8d48e6f0f1d20fc1a0"
 }
