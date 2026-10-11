@@ -254,7 +254,7 @@ class SynexiaExportTest(unittest.TestCase):
             with mismatched_records.open("w", encoding="utf-8", newline="") as stream:
                 writer = csv.DictWriter(
                     stream, fieldnames=EXPORT.RECORD_COLUMNS_V2,
-                    delimiter="\\t", lineterminator="\\n")
+                    delimiter=separator, lineterminator=chr(10))
                 writer.writeheader()
                 writer.writerows(mismatched_rows)
             with self.assertRaisesRegex(
