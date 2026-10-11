@@ -14,11 +14,15 @@ Controlling Synexia ownership remains:
 
 Synexia source revision:
 
-`296323958b1019edd59b60b9c05cb148d024cfe5`
+`ecfc155eea38b9d4c85e644761a3b2fd2d2f9d1f`
 
 Synexia estate source blob:
 
-`292bc31a96cd3d20c36d617045c6b01a7a7c8faf`
+`2ae93e0bd4fd03760df5aa5d99b90aafb36f1ba0`
+
+Estate publication commit:
+
+`897b05a4798f514a82b9939851209d2b271926b2`
 
 Source PR:
 
