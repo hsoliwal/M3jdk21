@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 language n-gram contract
+
+on:
+  pull_request:
+    paths:
+      - "m3/core/src/com/m3/text/M3LanguageNgramPrecompute.java"
+      - "m3/core/test/M3LanguageNgramPrecomputeTest.java"
+      - "m3/lexicon/synexia-language-pack-contract.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - ".github/workflows/m3-language-ngram-current-base.yml"
+  push:
+    branches:
+      - codex/m3-language-ngram-current-base-20261011
+    paths:
+      - "m3/core/src/com/m3/text/M3LanguageNgramPrecompute.java"
+      - "m3/core/test/M3LanguageNgramPrecomputeTest.java"
+      - "m3/lexicon/synexia-language-pack-contract.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - ".github/workflows/m3-language-ngram-current-base.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  language-ngram-contract:
+    name: M3LanguageNgramPrecomputeTest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Compile and run contract
+        working-directory: m3
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf build/language-ngram-contract
+          mkdir -p build/language-ngram-contract
+          javac --release 21 -Xlint:all -Werror -d build/language-ngram-contract             core/src/com/m3/text/M3LanguageNgramPrecompute.java             core/test/M3LanguageNgramPrecomputeTest.java
+          java -ea -cp build/language-ngram-contract M3LanguageNgramPrecomputeTest
+          test "$(awk 'END { print NR }' lexicon/synexia-language-pack-contract.tsv)" -eq 2
+          grep -F "CONTRACT_ONLY" lexicon/synexia-language-pack-contract.tsv
+          grep -F "synexia-language-ngram-contract" ../m3/runtime-integration/FOSS_REUSE_DECISION.tsv
