@@ -51,7 +51,7 @@ jobs:
           mkdir -p m3/build/langdex-precompute-current-base/classes m3/build/langdex-precompute-current-base/tests
           javac --release 21 -Xlint:all -Werror             -d m3/build/langdex-precompute-current-base/classes             m3/core/src/com/m3/text/InternDomainV1.java             m3/core/src/com/m3/text/M3LangDexPrecompute.java             m3/core/src/com/m3/text/SharedLangDexPrecomputeCatalog.java
           javac --release 21 -Xlint:all -Werror             -cp m3/build/langdex-precompute-current-base/classes             -d m3/build/langdex-precompute-current-base/tests             m3/core/test/M3LangDexPrecomputeTest.java
-          java -ea -cp m3/build/langdex-precompute-current-base/classes:m3/build/langdex-precompute-current-base/tests M3LangDexPrecomputeTest
+          (cd m3 && java -ea -cp build/langdex-precompute-current-base/classes:build/langdex-precompute-current-base/tests M3LangDexPrecomputeTest)
           grep -F 'M3LangDexPrecompute.Identity' m3/lexicon/synexia-langdex-identity-field-map.tsv
           grep -F 'M3LangDexPrecompute.Entry' m3/lexicon/synexia-precompute-field-map.tsv
           grep -F 'M3LangDexPrecompute.Identity' m3/lexicon/synexia-source-manifest.tsv
