@@ -44,8 +44,8 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
 
         # The three A3/JNI receiver rows were admitted after the original 16-row freeze.
         # Keep exact cardinality and reject duplicate surfaces; do not relax ownership rules.
-        self.assertEqual(19, len(rows))
-        self.assertEqual(19, len({row["local_surface"] for row in rows}))
+        self.assertEqual(20, len(rows))
+        self.assertEqual(20, len({row["local_surface"] for row in rows}))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
@@ -196,7 +196,10 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
 
         a3 = rows["m3/tooling/a3/src/main/java/com/m3/a3/A3Lab.java"]
         self.assertEqual("TARGET_PROOF_CONSUMER", a3["disposition"])
-        self.assertEqual("com.synexia.rewrite.atom", a3["canonical_owner"])
+        self.assertEqual(
+            "com.synexia.rewrite.M3PureIntConvergenceRecipe",
+            a3["canonical_owner"],
+        )
         self.assertEqual("true", a3["handoff_required"])
 
         lab = (
@@ -212,10 +215,10 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             / "A3Lab.java"
         ).read_text(encoding="utf-8")
         self.assertIn(
-            "import com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe;", lab
+            "import com.synexia.rewrite.M3PureIntAtomizeRecipe;", lab
         )
         self.assertIn(
-            "import com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe;", lab
+            "import com.synexia.rewrite.M3PureIntPatternizeRecipe;", lab
         )
         self.assertNotIn(
             "import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;", lab
@@ -228,14 +231,15 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             encoding="utf-8"
         )
         for owner in (
-            "M3AtomizePureIntReturnRecipe",
-            "M3InventoryPureIntAtomCandidates",
-            "M3PatternizePureIntAtomRecipe",
-            "M3DocumentPureIntAtomRecipe",
+            "M3PureIntAtomizeRecipe",
+            "M3PureIntInventoryRecipe",
+            "M3PureIntPatternizeRecipe",
+            "M3PureIntDocumentationRecipe",
             "M3PureIntConvergenceRecipe",
         ):
-            self.assertIn(f"com.synexia.rewrite.atom.{owner}", catalogue)
-            self.assertNotIn(f"com.m3.rewrite.atom.{owner}", catalogue)
+            self.assertIn(f"com.synexia.rewrite.{owner}", catalogue)
+        self.assertNotIn("com.synexia.rewrite.atom.", catalogue)
+        self.assertNotIn("com.m3.rewrite.atom.", catalogue)
 
 
     def test_canonical_home_pin_binds_exact_synexia_manifest(self) -> None:
