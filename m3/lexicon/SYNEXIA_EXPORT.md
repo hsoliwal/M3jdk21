@@ -25,11 +25,21 @@ The `translate.rows` source-family entry points to Synexia's
 `TranslationTsvImporter`, which consumes
 `source_language,target_language,source_token,target_token`. The
 `Language.java` enum is a separate grammar-support source; it is not the
-lexical-row importer. Export snapshots must supply their own opaque
-`source_id` and `record_id`; the importer does not invent or renumber those
-identities. Preserve the exact source/target language pair, token mapping,
-source revision, dataset license, and attribution. This mapping does not bundle
-translation corpora.
+lexical-row importer. The importer has no `translation_id` column. Its duplicate
+key is the ordered tuple `(lower(source_language), lower(target_language),
+source_token)`: it lowercases both language tags with `Locale.ROOT`, preserves
+the source token exactly, and rejects conflicting target tokens for a duplicate
+key. The manifest names the composite identity fields as
+`source_language,target_language,source_token`. M3 records preserve the
+operator-supplied `source_id` as the source-snapshot identity and encode the
+normalized tuple as `record_id` using compact ASCII JSON, for example
+`["en","hi","hello"]`. This is a deterministic serialization of the importer
+key, not an allocated or renumbered row ID. Identity components containing NUL
+are rejected because the importer uses NUL-delimited keys. If an upstream
+dataset has its own identifier, keep it as separate source metadata; the
+`TranslationTsvImporter` does not consume one. Preserve the target-token
+mapping, source revision, dataset license, and attribution. No translation
+corpus is bundled.
 
 Lexicon categories such as proper names, titles, locations, phrases, and
 acronyms describe supported namespaces, not complete licensed datasets. Their

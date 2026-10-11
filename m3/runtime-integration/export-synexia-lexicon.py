@@ -51,6 +51,8 @@ MANIFEST_COLUMNS = (
 MANIFEST_COLUMNS_V2 = MANIFEST_COLUMNS + ("precompute_fields",)
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
+TRANSLATION_SOURCE_ID = "translate.rows"
+TRANSLATION_IDENTITY_FIELDS = "source_language,target_language,source_token"
 FIELD_MAP_COLUMNS = (
     "donor_type", "donor_field", "donor_java_type", "canonical_payload_field",
     "m3jdk_storage", "status", "preservation_rule",
@@ -294,6 +296,46 @@ def canonical_precompute_payload(value: str) -> str:
     return canonical
 
 
+def canonical_translation_record_id(source_language: str, target_language: str,
+                                   source_token: str) -> str:
+    """Serialize the donor translation key without delimiter collisions."""
+    if not source_language.strip() or not target_language.strip():
+        raise ValueError("translation identity language must not be blank")
+    if "\x00" in source_language or "\x00" in target_language or "\x00" in source_token:
+        raise ValueError("translation identity contains the donor NUL separator")
+    return json.dumps(
+        [source_language.lower(), target_language.lower(), source_token],
+        ensure_ascii=True,
+        separators=(",", ":"),
+    )
+
+
+def validate_translation_record_identity(row: dict[str, str], source: dict[str, str],
+                                         payload: dict[str, object]) -> None:
+    if row["source_id"] != TRANSLATION_SOURCE_ID:
+        return
+    if (source["record_id_field"] != TRANSLATION_IDENTITY_FIELDS
+            or source["mapping_fields"] !=
+            "source_language,target_language,source_token,target_token"):
+        raise ValueError("translation manifest identity fields do not match donor contract")
+    source_language = payload.get("source_language")
+    target_language = payload.get("target_language")
+    if not isinstance(source_language, str) or not isinstance(target_language, str):
+        raise ValueError("translation identity languages must be strings")
+    if row["language_tag"] != source_language:
+        raise ValueError("translation source language does not match language_tag")
+    profile_parts = row["translation_profile"].split("->")
+    if len(profile_parts) != 2:
+        raise ValueError("translation profile must be source->target")
+    if profile_parts[0] != source_language:
+        raise ValueError("translation profile source language does not match payload")
+    if profile_parts[1] != target_language:
+        raise ValueError("translation profile target language does not match payload")
+    expected = canonical_translation_record_id(
+        source_language, target_language, row["lexeme"])
+    if row["record_id"] != expected:
+        raise ValueError("translation record_id does not match importer identity")
+
 def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
                  field_types: dict[str, dict[str, str]] | None = None) -> tuple[list[Record], bytes]:
     raw = path.read_bytes()
@@ -306,12 +348,8 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
     result: list[Record] = []
     field_types = field_types or {}
     for row in rows:
-        key = (row["source_id"], row["record_id"])
         if row["source_id"] not in sources:
             raise ValueError(f"record references unknown source_id: {row['source_id']}")
-        if key in seen:
-            raise ValueError(f"duplicate source/record identity: {key[0]}:{key[1]}")
-        seen.add(key)
         if row["source_path"] != sources[row["source_id"]]["synexia_path"]:
             raise ValueError(f"source path mismatch for {row['source_id']}")
         if row["precompute_profile"] != sources[row["source_id"]]["precompute_target"]:
@@ -327,6 +365,12 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
             raise ValueError("precompute payload missing required fields: " + ",".join(missing))
         if field_types:
             validate_payload_shapes(payload, required_fields, field_types.get(row["source_id"], {}))
+        validate_translation_record_identity(
+            normalized, sources[row["source_id"]], payload)
+        key = (normalized["source_id"], normalized["record_id"])
+        if key in seen:
+            raise ValueError(f"duplicate source/record identity: {key[0]}:{key[1]}")
+        seen.add(key)
         result.append(Record(normalized))
     if not result:
         raise ValueError("lexicon records are empty")

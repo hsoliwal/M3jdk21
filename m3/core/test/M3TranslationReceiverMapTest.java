@@ -27,7 +27,8 @@ public final class M3TranslationReceiverMapTest {
         String[] columns = manifestRow.split("\\t", -1);
         check(columns.length >= 9);
         check(columns[2].equals("synexia-interned-language/src/main/java/com/synexia/language/TranslationTsvImporter.java"));
-        check(columns[3].equals("translation_id"));
+        check(columns[3].equals("source_language,target_language,source_token"));
+        check(columns[7].contains("compact ASCII JSON"));
         check(columns[4].equals("source_language,target_language,source_token,target_token"));
         check(columns[5].equals(
                 "M3StringFacts + M3LexiconPrecompute.TranslationProjection"
