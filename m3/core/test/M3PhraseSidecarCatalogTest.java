@@ -11,6 +11,7 @@ public final class M3PhraseSidecarCatalogTest {
     private static int checks;
 
     public static void main(String[] args) throws Exception {
+        assertSourceManifestPhraseFields();
         Path root = Files.createTempDirectory("m3phrase-sidecar-");
         try {
             String header = "schema_version\tsource_id\trecord_id\tsource_revision"
@@ -48,6 +49,20 @@ public final class M3PhraseSidecarCatalogTest {
         } finally {
             deleteTree(root);
         }
+    }
+
+
+    private static void assertSourceManifestPhraseFields() throws Exception {
+        String row = Files.readAllLines(Path.of("m3/lexicon/synexia-source-manifest.tsv"),
+                        StandardCharsets.UTF_8).stream()
+                .filter(line -> line.startsWith("translate.index-phrases\\t"))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("phrase source manifest row missing"));
+        String[] fields = row.split("\\t", -1);
+        check(fields.length == 9, "phrase source manifest column count");
+        check(fields[8].equals("source_id,record_id,source_revision,vocabulary_fingerprint,"
+                        + "source_token_ids,target_token_ids"),
+                "phrase scope and token fields remain complete");
     }
 
     private static void check(boolean condition, String message) {
