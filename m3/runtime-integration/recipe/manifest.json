@@ -84,7 +84,10 @@
     },
     "src/java.base/share/classes/java/lang/AbstractStringBuilder.java": {
       "before": "13f92a675d002851095aca8464e30c52c2a27a2d585b4da6c7263a787c11242d",
-      "after": "a5e7213ca951fab21d6db842804a8abd79e90f924ec672de6c4c455cdebb47d5"
+      "after": "a5e7213ca951fab21d6db842804a8abd79e90f924ec672de6c4c455cdebb47d5",
+      "superseded": [
+        "d83328e987776e47de2875415d5f0fb62ff4b24e2d74ba60ea0357239cdef6dc"
+      ]
     },
     "src/java.base/share/classes/java/lang/M3String.java": {
       "before": null,
