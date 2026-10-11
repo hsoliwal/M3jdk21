@@ -52,11 +52,6 @@ jobs:
         run: |
           mvn -B -ntp -f m3/synexia-import/pure-int-recipe-custody/pom.xml clean install
 
-      - name: Install bounded pure-int recipe crate from the pinned vendor source
-        run: |
-          mvn -B -ntp -f m3/pom.xml \
-            -pl tooling/synexia-pure-int-recipes -am clean install
-
       - name: Compile and execute canonical recipe consumer
         run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3SynexiaCanonicalRecipeConsumerTest,M3SynexiaScopeKernelConsumerTest,M3SynexiaSemanticFingerprintConsumerTest,M3RecipeScopeDeclarationTest             test
