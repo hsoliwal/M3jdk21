@@ -370,7 +370,7 @@ class SynexiaExportTest(unittest.TestCase):
 
     def test_reviewed_source_manifest_has_explicit_owner_field_coverage(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
-        self.assertEqual(10, len(sources))
+        self.assertEqual(11, len(sources))
         self.assertEqual(13, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
         self.assertEqual(16, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
@@ -384,6 +384,11 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertIn("compact ASCII JSON", translation["data_policy"])
         self.assertEqual(9, len(sources["translate.rows"]["precompute_fields"].split(",")))
         self.assertEqual(8, len(sources["dictlang.numbers.0-10000"]["precompute_fields"].split(",")))
+        instance = sources["unicodex.instance-index"]
+        self.assertEqual("synexia-unicodex/CONCEPTS_VS_PROPER_NOUNS.md", instance["synexia_path"])
+        self.assertEqual("", instance["precompute_fields"])
+        self.assertEqual("-", instance["record_id_field"])
+        self.assertEqual("name,type,instanceOfX,metadata", instance["mapping_fields"])
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
