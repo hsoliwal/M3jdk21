@@ -9,7 +9,7 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
 "$M3_JDK/bin/javac" --release 21 --module-path build/com.m3.text.jar --add-modules com.m3.text -d build/tests \
   core/test/FoundationTest.java core/test/M3LexiconPrecomputeTest.java \
   core/test/M3DictionaryFrequencyContractTest.java \
-  core/test/M3TranslationReceiverMapTest.java
+  core/test/M3TranslationReceiverMapTest.java \
   core/test/SynexiaPrecomputePayloadTest.java core/test/SynexiaPrecomputeReceiverTest.java \
   core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SynexiaSiUnitDecoderTest.java \
   core/test/M3NumberSpaceTest.java core/test/M3NumberSpaceContractTest.java \
