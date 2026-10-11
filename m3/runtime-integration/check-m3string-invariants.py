@@ -887,9 +887,13 @@ literal_atom = m3[literal_start:literal_end]
 for marker in [
     "static boolean isLiteralRegexReplacement(String regex, String replacement)",
     "Character.isSurrogate(unit)",
+    "String replaceLiteralRegex(String original, String regex, String replacement, boolean firstOnly)",
+    "int found = original.indexOf(regex);",
     "if (found < 0) return original;",
-    "return new String(replaceMatches(target, canonicalize(replacement), found, firstOnly));",
-    "found = !firstOnly && cursor <= length() - checkedTarget.length()",
+    "M3String admitted = canonicalize(replacement);",
+    "if (admitted == null) return null;",
+    "return new String(replaceMatches(null, original, regex, admitted, found, firstOnly));",
+    "found = !firstOnly && cursor <= length() - targetLength",
 ]:
     if marker not in literal_atom:
         fail(f"indexed literal replacement owner lost guard/composition: {marker}")
