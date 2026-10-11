@@ -57,3 +57,9 @@ M3LexiconPrecompute.TokenFrequency	frequencies	Map<Integer,Integer>	frequencies	
 M3LexiconPrecompute.TranslationProjection	translatedTokenIds	int[]	translatedTokenIds	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation IDs are valid only for the originating frozen lexicon and language pair
 M3LexiconPrecompute.TranslationProjection	mappedTokenCount	int	mappedTokenCount	m3lex-family-v2:synexia.translation.tsv	MAPPED	derived count cannot replace the canonical translation table
 M3LexiconPrecompute.TranslationProjection	sourceFingerprint	String	sourceFingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	reload guard binds the originating source record and immutable translation projection
+SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceId	String	source_id	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation source family identity is preserved without renumbering
+SharedLexiconPrecomputeCatalog.TranslationIdentity	recordId	String	record_id	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation row identity is preserved without renumbering
+SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceLanguage	String	source_language	m3lex-family-v2:synexia.translation.tsv	MAPPED	source language profile identity remains bound to the projection
+SharedLexiconPrecomputeCatalog.TranslationIdentity	targetLanguage	String	target_language	m3lex-family-v2:synexia.translation.tsv	MAPPED	target language profile identity remains bound to the projection
+SharedLexiconPrecomputeCatalog.TranslationIdentity	lexiconFingerprint	String	lexicon_fingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation reuse is rejected across frozen lexicon fingerprints
+SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceFingerprint	String	source_fingerprint	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation reuse is rejected across source snapshot fingerprints

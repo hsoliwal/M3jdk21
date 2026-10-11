@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
+name: M3 translation receiver map
+
+on:
+  pull_request:
+    paths:
+      - "m3/build.sh"
+      - "m3/core/test/M3TranslationReceiverMapTest.java"
+      - "m3/lexicon/synexia-precompute-field-map.tsv"
+      - "m3/lexicon/synexia-source-manifest.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - ".github/workflows/m3-translation-receiver-current-base.yml"
+  push:
+    branches:
+      - codex/m3-translation-export-current-base-20261011
+    paths:
+      - "m3/build.sh"
+      - "m3/core/test/M3TranslationReceiverMapTest.java"
+      - "m3/lexicon/synexia-precompute-field-map.tsv"
+      - "m3/lexicon/synexia-source-manifest.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - ".github/workflows/m3-translation-receiver-current-base.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  translation:
+    name: Translation receiver map and four-mode M3 build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Build and execute translation map
+        shell: bash
+        run: |
+          set -euo pipefail
+          export M3_JDK="$JAVA_HOME"
+          bash m3/build.sh
+          grep -F "M3JDK_TRANSLATION_RECEIVER_MAP_PASS" m3/build/logs/translation-receiver-map-jit.log
