@@ -470,7 +470,7 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
     sources, source_manifest_bytes = read_manifest(source_manifest)
     field_map_path = field_map or source_manifest.with_name("synexia-precompute-field-map.tsv")
     field_types = read_field_map(field_map_path, sources) if field_map_path.is_file() else {}
-    field_map_bytes = field_map_path.read_bytes() if any(field_types.values()) else None
+    field_map_bytes = field_map_path.read_bytes() if field_map_path.is_file() else None
     records, records_bytes = load_records(records_path, sources, field_types)
     relations, relations_bytes = load_relations(relations_path, sources, records)
     related_source_ids = relation_source_ids(sources)
