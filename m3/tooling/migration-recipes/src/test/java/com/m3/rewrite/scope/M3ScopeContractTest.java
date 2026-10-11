@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 final class M3ScopeContractTest {
     @Test
-    void scopeOrderingPromotionAndNextAreMechanical() {
+    void scopeOrderingPromotionAndNextAreCanonicalSynexiaSemantics() {
         M3EditScope[] values = M3EditScope.values();
         for (M3EditScope granted : values) {
             for (M3EditScope required : values) {
@@ -29,7 +29,7 @@ final class M3ScopeContractTest {
     }
 
     @Test
-    void sourcePathInferenceKeepsIndependentFilesAtTheNarrowestBoundary() {
+    void javaPathInferenceDelegatesToCanonicalSynexiaBoundary() {
         assertEquals(
                 M3EditScope.FILE,
                 M3ScopeInference.forJavaPaths(List.of("src/main/java/com/acme/Foo.java")));
@@ -47,10 +47,40 @@ final class M3ScopeContractTest {
                         "src/main/java/com/acme/Foo.java",
                         "src/main/java/com/acme/internal/Bar.java")));
         assertEquals(
-                M3EditScope.MODULE,
+                M3EditScope.PACKAGE,
                 M3ScopeInference.forJavaPaths(List.of(
                         "src/main/java/com/acme/Foo.java",
                         "src/test/java/com/acme/FooTest.java")));
+        assertEquals(
+                M3EditScope.PACKAGE,
+                M3ScopeInference.forJavaPaths(List.of(
+                        "src/java.base/share/classes/java/lang/String.java",
+                        "src/java.base/linux/classes/java/lang/Linux.java")));
+        assertEquals(
+                M3EditScope.MULTI_MODULE,
+                M3ScopeInference.forJavaPaths(List.of(
+                        "src/java.base/share/classes/java/lang/String.java",
+                        "src/java.logging/share/classes/java/util/logging/Logger.java")));
+    }
+
+    @Test
+    void targetSpecificNonJavaPathsRemainLocal() {
+        assertEquals(
+                M3EditScope.PACKAGE,
+                M3ScopeInference.forPaths(List.of(
+                        "make/modules/java.base/A.gmk",
+                        "make/modules/java.base/B.gmk")));
+        assertEquals(
+                M3EditScope.MULTI_MODULE,
+                M3ScopeInference.forPaths(List.of(
+                        "make/modules/java.base/A.gmk",
+                        "make/modules/jdk.jcmd/B.gmk")));
+        assertEquals(
+                M3EditScope.PACKAGE,
+                M3ScopeInference.forPaths(List.of(
+                        "docs/internal/A.md",
+                        "docs/internal/B.md")));
+        assertEquals(M3EditScope.FILE, M3ScopeInference.forPaths(List.of("README.md")));
     }
 
     @Test
@@ -68,9 +98,8 @@ final class M3ScopeContractTest {
                 () -> M3ScopeInference.forJavaPaths(List.of("src/main/java/com/acme/../Foo.java")));
         assertThrows(
                 IllegalArgumentException.class,
-                () ->
-                        M3ScopeInference.forJavaPaths(
-                                List.of("src/main/java/com/acme/" + (char) 0 + "Foo.java")));
+                () -> M3ScopeInference.forJavaPaths(
+                        List.of("src/main/java/com/acme/" + (char) 0 + "Foo.java")));
         assertThrows(
                 IllegalArgumentException.class,
                 () -> M3ScopeInference.forJavaPaths(List.of("C:\\src\\Foo.java")));
