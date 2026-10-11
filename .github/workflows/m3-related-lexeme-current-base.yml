@@ -37,7 +37,7 @@ jobs:
           set -euo pipefail
           rm -rf m3/build/related-lexeme-current-base
           mkdir -p m3/build/related-lexeme-current-base/classes m3/build/related-lexeme-current-base/tests
-          javac --release 21 -Xlint:all -Werror             -d m3/build/related-lexeme-current-base/classes             m3/core/src/com/m3/text/SharedLexiconCatalog.java             m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java             m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java
+          javac --release 21 -Xlint:all -Werror             -d m3/build/related-lexeme-current-base/classes             m3/core/src/com/m3/text/M3LexiconPrecompute.java             m3/core/src/com/m3/text/SynexiaPrecomputePayload.java             m3/core/src/com/m3/text/SharedLexiconImage.java             m3/core/src/com/m3/text/SharedLexiconCatalog.java             m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java             m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java
           javac --release 21 -Xlint:all -Werror             -cp m3/build/related-lexeme-current-base/classes             -d m3/build/related-lexeme-current-base/tests             m3/core/test/SharedRelatedLexemeCatalogTest.java
           (cd m3 && java -ea -cp build/related-lexeme-current-base/classes:build/related-lexeme-current-base/tests SharedRelatedLexemeCatalogTest)
           grep -F 'SharedLexiconCatalog + SharedRelatedLexemeCatalog' m3/lexicon/synexia-source-manifest.tsv
