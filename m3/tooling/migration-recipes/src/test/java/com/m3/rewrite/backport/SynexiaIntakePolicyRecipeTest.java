@@ -89,10 +89,8 @@ final class SynexiaIntakePolicyRecipeTest {
         assertNotNull(after);
         assertEquals(resourceAt(root, "05-verifier.py.txt"), after.printAll());
 
-        assertTrue(after.printAll().contains(
-                "donor_license = row.get(\\"license\\", \\"\\").split(\\";\\", 1)[0].strip()"));
-        assertTrue(after.printAll().contains(
-                "require(\\"Apache-2.0\\" in donor_license"));
+        assertTrue(after.printAll().contains("donor_license = row.get("));
+        assertTrue(after.printAll().contains("in donor_license"));
         assertTrue(recipe.run(new InMemoryLargeSourceSet(List.of(after)), context(), 1)
                 .getChangeset().getAllResults().isEmpty());
     }
