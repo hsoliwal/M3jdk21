@@ -72,6 +72,15 @@ public final class M3TranslationReceiverMapTest {
         check(com.m3.text.SynexiaPrecomputePayload.parse(
                 "{\"lexicon_fingerprint\":7}").requireLong("lexicon_fingerprint") == 7L);
 
+        boolean rejectedControlCharacter = false;
+        try {
+            com.m3.text.SynexiaPrecomputePayload.parse(
+                    "{\\"source_id\\":\\"bad" + (char) 1 + "\\"}");
+        } catch (IllegalArgumentException expected) {
+            rejectedControlCharacter = true;
+        }
+        check(rejectedControlCharacter);
+
         System.out.println("M3JDK_TRANSLATION_RECEIVER_MAP_PASS checks=" + checks);
     }
 }
