@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.A3PlainTextParserHarness
+displayName: Parse in-memory Java and Markdown with their matching parsers
+description: >-
+  Repairs the A3 recipe test harness so Markdown fixtures are parsed as OpenRewrite PlainText
+  rather than Java compilation units.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: a3-plaintext-parser-harness
