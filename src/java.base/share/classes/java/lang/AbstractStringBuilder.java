@@ -1743,6 +1743,31 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         }
     }
 
+    /**
+     * A UTF-16 owner can contain a Latin-1-only selected range. Reuse an already prepared
+     * canonical range fact, without eagerly preparing metadata or flattening the source.
+     * Cold ranges and non-M3 Strings retain the established whole-source admission.
+     */
+    private void inflateIfNeededFor(String input, int from, int to) {
+        if (!COMPACT_STRINGS || !isLatin1()) {
+            return;
+        }
+        M3String storage = input.m3();
+        if (storage != null) {
+            if (from == to) {
+                return;
+            }
+            M3StringFacts prepared = storage.slice(from, to).factsIfPrepared();
+            if (prepared != null) {
+                if (!prepared.latin1) {
+                    inflate();
+                }
+                return;
+            }
+        }
+        inflateIfNeededFor(input);
+    }
+
     private void inflateIfNeededFor(AbstractStringBuilder input) {
         if (COMPACT_STRINGS && (coder != input.getCoder())) {
             inflate();
@@ -1750,7 +1775,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
     }
 
     private void putStringAt(int index, String str, int off, int end) {
-        inflateIfNeededFor(str);
+        inflateIfNeededFor(str, off, end);
         str.getBytes(value, off, index, coder, end - off);
     }
 
