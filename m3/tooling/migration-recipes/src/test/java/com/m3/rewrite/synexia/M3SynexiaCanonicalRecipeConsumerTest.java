@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.m3.rewrite.scope.M3EditScope;
 import com.m3.rewrite.scope.M3RecipeScopeRegistry;
-import com.synexia.rewrite.atom.M3PureIntConvergenceRecipe;
+import com.synexia.rewrite.M3PureIntConvergenceRecipe;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.Test;
