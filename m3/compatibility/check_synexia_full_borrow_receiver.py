@@ -416,7 +416,8 @@ def main(argv: list[str]) -> int:
         f"families={len(estate)} source={pin['source_revision']} "
         f"state=SOURCE_PIN_ONLY mixed_review_rows={mixed} dag=acyclic "
         "phases=STRING>ARRAYS>COLLECTIONS>AST_COMPILER>REMAINING_FAMILIES "
-        "completion=false historical_mapping_evidence=preserved_not_accepted"\n    )
+        "completion=false historical_mapping_evidence=preserved_not_accepted"
+    )
     return 0
 
 
