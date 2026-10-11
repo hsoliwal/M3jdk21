@@ -30,7 +30,7 @@ final class M3SynexiaFullBorrowInitialStatusRecipeTest {
         String before = resource("before-receiver-status.tsv.txt");
         String expected = resource("receiver-status.tsv.txt");
         assertEquals(Map.of(PATH, expected), apply(before));
-        assertTrue(expected.contains("MINDEX_STRING_RUNTIME\\t1840f12a3ea64750d829f6dd2bda7916fc25d9f5\\tSOURCE_PIN_ONLY\\tm3/ports/indexstring + java.lang.M3String* runtime adapter\\tNONE"));
+        assertTrue(expected.contains("MINDEX_STRING_RUNTIME\t1840f12a3ea64750d829f6dd2bda7916fc25d9f5\tSOURCE_PIN_ONLY\tm3/ports/indexstring + java.lang.M3String* runtime adapter\tNONE"));
         assertTrue(apply(expected).isEmpty());
         assertThrows(RuntimeException.class, () -> apply(before.replace("TARGET_MAPPING_PINNED", "SOURCE_PIN_ONLY")));
     }
@@ -45,7 +45,7 @@ final class M3SynexiaFullBorrowInitialStatusRecipeTest {
         Map<String, String> output = new LinkedHashMap<>();
         run.getChangeset().getAllResults().forEach(change -> {
             SourceFile after = Objects.requireNonNull(change.getAfter(), "after");
-            output.put(after.getSourcePath().toString().replace('\\\\', '/'), after.printAll());
+            output.put(after.getSourcePath().toString().replace('\\', '/'), after.printAll());
         });
         return output;
     }
