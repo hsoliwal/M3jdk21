@@ -36,7 +36,9 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(25, M3RecipeScopeRegistry.size());
+        assertEquals(15, com.synexia.rewrite.M3RecipeScopeRegistry.size());
+        assertEquals(16, M3RecipeScopeRegistry.targetOverlaySize());
+        assertEquals(31, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -107,8 +109,14 @@ final class M3RecipeScopeDeclarationTest {
     @Test
     void fixedAndTargetInferredScopesFollowTheM3PromotionOrder() {
         var filePolicy = M3RecipeScopeRegistry.require(M3MIndexJoinedCharsViewRecipe.class);
-        assertEquals(M3EditScope.MODULE, filePolicy.resolve(List.of("src/main/java/a/A.java")));
-        assertFalse(filePolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+        assertEquals(M3EditScope.FILE, filePolicy.resolve(List.of("src/main/java/a/A.java")));
+        assertTrue(filePolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+        assertEquals(
+                com.synexia.rewrite.M3RecipeScopeRegistry
+                        .require(M3MIndexJoinedCharsViewRecipe.class)
+                        .minimumScope()
+                        .name(),
+                filePolicy.minimumScope().name());
 
         var nativePolicy = M3RecipeScopeRegistry.require(M3SegmentedLaneNativeRecipe.class);
         assertEquals(M3EditScope.FILE, nativePolicy.resolve(List.of("src/main/java/a/A.java")));
