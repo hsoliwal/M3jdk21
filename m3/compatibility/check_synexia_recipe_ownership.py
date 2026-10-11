@@ -249,9 +249,12 @@ def main(argv: list[str]) -> int:
     residue = load_residue()
     pin = load_pin()
     revisions = ",".join(sorted({row["synexia_revision"] for row in rows}))
+    borrowed = sum(1 for row in rows if row["state"].startswith("BORROWED_CANONICAL_"))
+    pending = sum(1 for row in rows if row["state"].startswith("SYNEXIA_CANONICAL_PENDING_"))
     print(
         "SYNEXIA_RECIPE_OWNERSHIP_PASS "
-        f"borrowed_rows={len(rows)} frozen_residue={len(residue)} revisions={revisions} "
+        f"borrowed_rows={borrowed} pending_rows={pending} total_rows={len(rows)} "
+        f"frozen_residue={len(residue)} revisions={revisions} "
         f"manifest_blob={pin['canonical_manifest_git_blob']}"
     )
     return 0
