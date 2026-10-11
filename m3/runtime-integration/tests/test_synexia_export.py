@@ -241,6 +241,31 @@ class SynexiaExportTest(unittest.TestCase):
                     ROOT / "m3/lexicon/synexia-precompute-field-map.tsv",
                 )
             self.assertFalse((root / "bad-output").exists())
+            mismatched_rows, _ = EXPORT.read_tsv(records, EXPORT.RECORD_COLUMNS_V2)
+            mismatched_payload = json.loads(mismatched_rows[0]["precompute_payload"])
+            mismatched_payload["target_language"] = "BN"
+            mismatched_record_id = EXPORT.canonical_translation_record_id(
+                "EN", "BN", "hello")
+            mismatched_rows[0]["record_id"] = mismatched_record_id
+            mismatched_payload["record_id"] = mismatched_record_id
+            mismatched_rows[0]["precompute_payload"] = json.dumps(
+                mismatched_payload, ensure_ascii=False, separators=(",", ":"))
+            mismatched_records = root / "mismatched-target-records.tsv"
+            with mismatched_records.open("w", encoding="utf-8", newline="") as stream:
+                writer = csv.DictWriter(
+                    stream, fieldnames=EXPORT.RECORD_COLUMNS_V2,
+                    delimiter="\\t", lineterminator="\\n")
+                writer.writeheader()
+                writer.writerows(mismatched_rows)
+            with self.assertRaisesRegex(
+                    ValueError, "translation profile target language does not match payload"):
+                EXPORT.export(
+                    manifest, mismatched_records, root / "mismatched-target-output",
+                    "https://github.com/hsoliwal/com.synexia",
+                    "a13b5fa8be2d47c9650d159671e3120f31270ced",
+                    ROOT / "m3/lexicon/synexia-precompute-field-map.tsv",
+                )
+            self.assertFalse((root / "mismatched-target-output").exists())
 
     def test_preserves_ids_mappings_numbers_and_precompute(self):
         with tempfile.TemporaryDirectory() as directory:
