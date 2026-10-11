@@ -357,7 +357,7 @@ public final class SynexiaPrecomputePayload {
 
         private void digits() {
             int begin = at;
-            while (!atEnd() && Character.isDigit(input.charAt(at))) at++;
+            while (!atEnd() && input.charAt(at) >= '0' && input.charAt(at) <= '9') at++;
             if (begin == at) throw error("digits required");
         }
 
