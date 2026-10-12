@@ -14,6 +14,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import jdk.internal.vm.parallel.BulkExecution;
+import jdk.internal.vm.parallel.BulkScheduler;
 import jdk.internal.vm.parallel.BulkTask;
 
 final class Rv32iBulkExecutorAdapterTest {
@@ -44,6 +45,28 @@ final class Rv32iBulkExecutorAdapterTest {
         assertTrue(Arrays.equals(beforeMemory, input.snapshotMemory()));
         assertEquals("cpu-rv32im", execution.provider());
         assertTrue(execution.receiptRoot().matches("[0-9a-f]{64}"));
+    }
+
+    @Test
+    void participatesInDeterministicProviderScheduling() {
+        var cpu = new Rv32iBulkExecutorAdapter(Rv32iBulkExecutorAdapter.Mode.CPU);
+        var tornado = new Rv32iBulkExecutorAdapter(Rv32iBulkExecutorAdapter.Mode.TORNADO_VERIFIED);
+        assertEquals("cpu-rv32im", cpu.id());
+        assertEquals("tornado-rv32im", tornado.id());
+        assertTrue(tornado.priority() > cpu.priority());
+        assertTrue(cpu.supports(task(4, 0)));
+        assertTrue(tornado.supports(task(4, 64)));
+        assertTrue(!tornado.supports(task(4, 0)));
+        BulkScheduler scheduler = new BulkScheduler(List.of(cpu, tornado));
+        assertEquals(List.of("tornado-rv32im", "cpu-rv32im"), scheduler.providerIds());
+        assertEquals(cpu, scheduler.select(task(4, 0)));
+        Rv32iBatch input = batch(4);
+        BulkExecution result = scheduler.execute(task(4, 0), Map.of(
+                Rv32iBulkExecutorAdapter.INPUT_BATCH, input,
+                Rv32iBulkExecutorAdapter.INPUT_BUDGET, 1024));
+        assertEquals("cpu-rv32im", result.provider());
+        assertEquals(5050, ((Rv32iBatch) result.outputs().get(
+                Rv32iBulkExecutorAdapter.OUTPUT_BATCH)).exitCode(0));
     }
 
     @Test

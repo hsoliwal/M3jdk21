@@ -30,15 +30,17 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - name: Install bounded Synexia recipe custody
+        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Receiver and mapping recipe tests
         run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3TornadoBulkAdapterPortRecipeTest,M3TornadoBulkAdapterMappingRecipeTest
+          -Dtest=M3TornadoBulkAdapterPortRecipeTest,M3TornadoBulkAdapterMappingRecipeTest,M3BulkSchedulerProviderRecoveryRecipeTest,M3BulkSchedulerRecoveryNameMappingRecipeTest,M3TornadoProviderUpgradeReceiverRecipeTest
           test
       - name: Exact receiver fixed point
         run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Drewrite.activeRecipes=com.m3.rewrite.backport.M3TornadoBulkAdapterPortRecipe
+          -Drewrite.activeRecipes=com.m3.rewrite.backport.M3TornadoBulkAdapterPortRecipe,com.m3.rewrite.backport.M3BulkSchedulerProviderRecoveryRecipe,com.m3.rewrite.backport.M3TornadoProviderUpgradeReceiverRecipe
           rewrite:dryRun
 
   cpu-adapter:

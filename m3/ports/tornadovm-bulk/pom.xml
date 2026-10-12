@@ -46,6 +46,8 @@
                     <include name="BulkTask.java"/>
                     <include name="BulkExecutor.java"/>
                     <include name="BulkExecution.java"/>
+                    <include name="BulkExecutorProvider.java"/>
+                    <include name="BulkScheduler.java"/>
                   </fileset>
                 </copy>
                 <javac
