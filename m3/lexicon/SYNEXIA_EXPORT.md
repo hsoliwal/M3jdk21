@@ -190,3 +190,22 @@ mapping rows, directed antonym/thesaurus relation rows, rich owner payloads,
 lineage, legacy-input compatibility, deterministic replay, M3LEX001 version 2
 metadata, precompute sidecars, conflict refusal before output creation, and
 source-blind rejection of a post-export mutation.
+
+## LangDex source-envelope intake boundary
+
+M3JDK's `SynexiaLangDexSourceEnvelope` verifies the pinned Synexia
+`#M3-LANGDEX-SOURCE-1` wire format and an independently supplied producer
+receipt (dataset revision, lexeme/link row counts, and exact SHA-256). It accepts
+only the producer's ASCII/LF envelope, canonical signed-64-bit decimal IDs,
+canonical standard Base64, and valid UTF-8. The receiver returns a receipt only;
+it does not expose rows, deduplicate repeated source IDs, normalize raw fields,
+resolve concept links, assign M3 record/image coordinates, or invent owner
+precompute payloads. A successful receipt is not catalog admission.
+
+The receiver bounds each line at 16 MiB to keep validation memory bounded. That
+receiver limit is an explicit M3 intake policy, not a claim that Synexia's writer
+imposes the same limit. The source revision in the receipt identifies the data
+snapshot; it must not be confused with the Synexia code commit pin in
+`m3/runtime-integration/FOSS_REUSE_DECISION.tsv`. The SHA-256 comparison establishes byte integrity only relative to the supplied receipt;
+it does not authenticate the producer or receipt. Obtain the expected receipt through a trusted,
+authenticated channel or verify a producer signature separately before relying on provenance.
