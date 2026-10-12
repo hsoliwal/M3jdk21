@@ -117,7 +117,7 @@
     "m3/core/src/module-info.java": "2b6c29db60f536419e3755cdf1a83d21388a2e2bd602838d8cebe516f940964c",
     "m3/core/test/FoundationTest.java": "0f8c4e89a3d3228b51095faa29b14e35daba46726e6a3ae89dbd6b1e69652cd0",
     "m3/core/test/LangDexProjectionReceiverTest.java": "9960f6d0ddddab6e7dbcc1234c8d1dac43e3b8b851c91d89781d5e1ffad8ba7b",
-    "m3/core/test/LangDexSourceEnvelopeTest.java": "5a79ce91badfe10c9c6352fc89157377c7c019f701e8388d993b8f79ca935589",
+    "m3/core/test/LangDexSourceEnvelopeTest.java": "afe3ac134cb089c4faeb2d360cbb0fd91c01d00927165869069d903211d46851",
     "m3/core/test/M3DictionaryFrequencyContractTest.java": "1e3f2824ffd1bbcc48e453d60d0f989d8858e6fb6be70b958c868bc33ab806c3",
     "m3/core/test/M3LanguageGrammarSupportTest.java": "be95f39b1c516e0523ec0c9499032f1b01157085be8d979f79cf8cb4fdbed947",
     "m3/core/test/M3LexiconPrecomputeTest.java": "fdc8f742adc96d93a6ab3e332c293d7dfdea97b458d9e8442694c8e11e511e7a",
