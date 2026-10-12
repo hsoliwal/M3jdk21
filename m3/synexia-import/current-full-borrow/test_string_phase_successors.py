@@ -39,12 +39,12 @@ class StringTargetSuccessorTest(unittest.TestCase):
             with patch.object(phase, "SUCCESSORS", path):
                 callback()
 
-    def test_exact_three_successors_and_repeated_historical_relation(self):
+    def test_exact_four_successors_and_repeated_historical_relation(self):
         mapping = self.mapping()
         mapping.append(mapping[0].copy())
         result = phase.approved_successors(mapping)
         self.assertEqual(phase.EXPECTED_SUCCESSOR_PATHS, set(result))
-        self.assertEqual(3, len(result))
+        self.assertEqual(4, len(result))
 
     def test_actual_owner_sources_match_exact_receipts(self):
         receipts = phase.approved_successors(self.mapping())
@@ -140,6 +140,29 @@ class StringTargetSuccessorTest(unittest.TestCase):
         self.assertIn(marker, contents)
         corrupted = contents.replace(marker, marker + "\n        final char[] units;\n")
         with self.assertRaisesRegex(ValueError, "retained char\\[\\] spelling"):
+            phase.validate_successor_source(path, corrupted)
+
+    def test_pool_concat_length_guard_loss_refuses(self):
+        path = "src/java.base/share/classes/java/lang/M3StringPool.java"
+        contents = (phase.ROOT / path).read_text(encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "responsibility lost"):
+            phase.validate_successor_source(
+                path,
+                contents.replace(
+                    'throw new OutOfMemoryError("Required length exceeds implementation limit");',
+                    'throw new ArithmeticException("overflow");',
+                ),
+            )
+
+    def test_pool_concat_length_guard_reordering_refuses(self):
+        path = "src/java.base/share/classes/java/lang/M3StringPool.java"
+        contents = (phase.ROOT / path).read_text(encoding="utf-8")
+        guard = 'if ((long) left.length() + right.length() > Integer.MAX_VALUE) {'
+        owner = 'if (left.owner() == right.owner() && left.end() == right.start()) {'
+        self.assertLess(contents.index(guard), contents.index(owner))
+        corrupted = contents.replace(guard, "/* moved guard */", 1)
+        corrupted = corrupted.replace(owner, owner + "\n        " + guard, 1)
+        with self.assertRaisesRegex(ValueError, "guard order drift"):
             phase.validate_successor_source(path, corrupted)
 
 
