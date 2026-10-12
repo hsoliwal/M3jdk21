@@ -418,6 +418,32 @@
       "source_license": "Apache-2.0",
       "target_license": "GPL-2.0-with-Classpath-exception for the existing java.base files; no target source file changed by this intake"
     }
+  ,
+    {
+      "source": "com.synexia.indexstring.MIndexTupleReferences.Node.textMetrics / Node.bitSignal64",
+      "source_commit": "e8f16525b04d26c80973b08aaf01df0068a797c6",
+      "target": "java.lang.M3StringTuple.computeFacts / java.lang.M3StringFacts",
+      "status": "source pin only; target reentrancy not demonstrated; no runtime port admitted",
+      "source_role": "Synexia Apache-2.0 recipe/tooling donor and mixed-license production reference",
+      "target_rule": "Do not mechanically copy the resolver-scoped Derived record. The inspected M3StringTuple.computeFacts path composes target-owned child facts without the external resolver callback that triggers the donor defect. Run a target-owned reentrancy test if such a callback is later introduced; otherwise retain source-only applicability record. No Synexia runtime dependency.",
+      "lineage": {
+        "donor_repo": "hsoliwal/com.synexia",
+        "source_pr": 10406,
+        "merge_commit": "b57663033e5de3d21dcdcbcc6b5b35f6142bd88d",
+        "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexTupleReferences.java",
+        "source_blob": "d1030ade51d01121e30977f37e6241bc95b71b61",
+        "recipe": "com.synexia.rewrite.M3StringDerivedCacheRecipe",
+        "recipe_blob": "403fbbf278405a9452db0d5a1c33e43aa3c6f66a",
+        "recipe_manifest_blob": "0bd222a8566d0be10c04d7f3475a2a795770c2a3",
+        "source_regression_blob": "6b6276bedf9adc6ecd46f097c7714ac14f73c16b",
+        "recipe_regression_blob": "07d7df2af3c09d1d8eb3a4cc413491f5f116aa17",
+        "target_owner_blob": "0d4cfb75317e68d54244588a474eba98bf7df27b",
+        "target_facts_blob": "fcd108ab6181fec11d16eda811b29d18298f3fb1",
+        "target_disposition": "SOURCE_PIN_ONLY",
+        "license": "Apache-2.0 for recipe/tooling; mixed Apache-2.0 AND BSD-3-Clause for production donor",
+        "target_runtime_dependency": false
+      }
+    }
   ],
   "imported_donor_sources": [],
   "reviewed_synexia_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
@@ -8041,7 +8067,8 @@
       "JDK compatibility",
       "build/runtime/JNI tests",
       "final promotion"
-    ],
+    
+  ],
     "portable_semantics_owner": "Synexia",
     "source_origin_commit": "1b954f886f0a40684c84bac443851d9fe4af1764",
     "source_pr_status": "hsoliwal/com.synexia#9489 closed historical review; canonical packet is present on develop",
