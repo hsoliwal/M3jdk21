@@ -110,6 +110,12 @@
       "upstream": "(inventory)"
     },
     {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-module-parameter-names/LICENSE",
+      "sha256": "a09ba3adcfdcac2d7e31b89e8e7799cec96d7303dc82c0bb3d38d8a352d41d19",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
       "kind": "descriptor-from-published-jar",
       "published_jar": "com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1 (sha256 9b333e7e69053807f42a9d92fc1e5da405938ecc4683146b8b1eb9c6967fea8e)",
       "repository": "m3/vendor/third_party/jackson-module-parameter-names/src/main/descriptor/9/module-info.java",

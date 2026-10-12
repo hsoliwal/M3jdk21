@@ -168,6 +168,12 @@
       "upstream": "(inventory)"
     },
     {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-dataformat-smile/LICENSE",
+      "sha256": "ea1a8d852d6882b5e12da586aba6eb22ad0b6063d60c6c41ad9c2656f7b9ab51",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
       "kind": "descriptor-from-published-jar",
       "published_jar": "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.16.1 (sha256 3767744f2e37e6e672c3a98174e68567907d18ea5c451b203a19e7b0ad934354)",
       "repository": "m3/vendor/third_party/jackson-dataformat-smile/src/main/descriptor/9/module-info.java",

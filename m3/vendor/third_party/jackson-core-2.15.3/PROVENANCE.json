@@ -878,6 +878,12 @@
       "upstream": "(inventory)"
     },
     {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-core-2.15.3/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
       "kind": "descriptor-from-published-jar",
       "published_jar": "com.fasterxml.jackson.core:jackson-core:2.15.3 (sha256 51fab7aad51ed588482edc507fd542747936c5094d1ab76ed21ddb63b96b610d)",
       "repository": "m3/vendor/third_party/jackson-core-2.15.3/src/main/descriptor/9/module-info.java",

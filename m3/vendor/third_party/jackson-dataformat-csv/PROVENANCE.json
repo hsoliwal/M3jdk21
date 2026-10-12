@@ -206,6 +206,12 @@
       "upstream": "(inventory)"
     },
     {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/LICENSE",
+      "sha256": "a2f23537829a1fb07b38461edc08e5417c09c5b5d6a30c9c7bae6324d8aead51",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
       "kind": "descriptor-from-published-jar",
       "published_jar": "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.16.1 (sha256 eda05b1ea4e20f369a7e73d519b03c485497ec7cc924362268f06fbd7af7a1bd)",
       "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/descriptor/9/module-info.java",

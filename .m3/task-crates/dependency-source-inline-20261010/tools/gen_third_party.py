@@ -500,7 +500,7 @@ def main() -> int:
         for x in legal + ["SOURCES_MANIFEST.tsv"]:
             shutil.copyfile(image / x, mdir / x)
             files.append({"kind": "retained-provenance" if x.endswith((".json", ".tsv")) else "unmodified-legal-or-build-reference", "repository": (mdir.relative_to(args.repo) / x).as_posix(), "sha256": sha256(image / x), "upstream": "(fetched: see UPSTREAM_LICENSE.json)" if x.startswith("UPSTREAM_") else "(inventory)"})
-        if license_src is not None and license_src.name != "LICENSE":
+        if license_src is not None:  # in-jar META-INF/LICENSE or LICENSE lands under src/main/resources, never at the module root
             shutil.copyfile(license_src, mdir / "LICENSE")
             files.append({"kind": "unmodified-legal-or-build-reference", "repository": (mdir.relative_to(args.repo) / "LICENSE").as_posix(), "sha256": sha256(license_src), "upstream": license_src.name if license_src.name.startswith("UPSTREAM_") else str(license_src.relative_to(image)).replace("\\", "/")})
         jar = args.store / r["group"].replace(".", "/") / r["artifact"] / r["version"] / (r["artifact"] + "-" + r["version"] + "-sources.jar")

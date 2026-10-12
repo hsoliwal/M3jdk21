@@ -291,6 +291,12 @@
       "upstream": "(inventory)"
     },
     {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/LICENSE",
+      "sha256": "81d823fe15b2f9dc51ae0fd8b19a77cea1e0ca3abf7b0252a2de410521fff05e",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
       "commit": "d53bd9539decc1f5beeed2828117e6de2feddfdc",
       "kind": "upstream-overlay-source-at-tag",
       "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/versions/11/ch/randelshofer/fastdoubleparser/BigSignificand.java",

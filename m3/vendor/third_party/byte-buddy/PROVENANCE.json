@@ -2371,6 +2371,12 @@
       "upstream": "(inventory)"
     },
     {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/byte-buddy/LICENSE",
+      "sha256": "5e1a7d78769f704050cf9122a95cbaa754a7f342f91f92d972545b2e43a2ea30",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
       "kind": "descriptor-from-published-jar",
       "published_jar": "net.bytebuddy:byte-buddy:1.14.11 (sha256 62ae28187ed2b062813da6a9d567bfee733c341582699b62dd980230729a0313)",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/descriptor/9/module-info.java",

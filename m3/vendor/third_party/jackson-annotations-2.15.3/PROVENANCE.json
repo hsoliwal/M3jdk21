@@ -325,6 +325,12 @@
       "upstream": "(inventory)"
     },
     {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.15.3/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
       "kind": "descriptor-from-published-jar",
       "published_jar": "com.fasterxml.jackson.core:jackson-annotations:2.15.3 (sha256 aae865c3d88256d61b11523cb1e88bd48d5b9ad5855fa1fc859504fd2204708a)",
       "repository": "m3/vendor/third_party/jackson-annotations-2.15.3/src/main/descriptor/root/module-info.java",

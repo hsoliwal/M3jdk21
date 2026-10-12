@@ -2001,6 +2001,12 @@
       "repository": "m3/vendor/third_party/org.osgi.core/SOURCES_MANIFEST.tsv",
       "sha256": "808085cdf4f2f9bd720b46deb424dd10a6be4a3047f3c266cd162c66e2e111c8",
       "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/org.osgi.core/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "LICENSE"
     }
   ],
   "group": "org.osgi",

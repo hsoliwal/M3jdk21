@@ -398,6 +398,12 @@
       "upstream": "(inventory)"
     },
     {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-datatype-jsr310-2.16.1/LICENSE",
+      "sha256": "66ea9c8987b1674aababbcc24f61c83ab4fb7baf3af1d701caf0a3aaea97fa92",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
       "kind": "descriptor-from-published-jar",
       "published_jar": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1 (sha256 6281970682a8da3ddbac54bb203c9badf1c26f507f3ecaa48ef10318579bc9ad)",
       "repository": "m3/vendor/third_party/jackson-datatype-jsr310-2.16.1/src/main/descriptor/9/module-info.java",

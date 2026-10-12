@@ -17,27 +17,25 @@
     "native_binaries": 128,
     "switched": 125
   },
-  "generated": "2026-10-12T10:15:18Z",
+  "generated": "2026-10-12T11:24:55Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {
       "api_surface": {
-        "DIFFERS_MISSING_CLASSES": 2,
-        "EQUIVALENT_MODULO_COMPILER": 54,
+        "EQUIVALENT_MODULO_COMPILER": 56,
         "IDENTICAL": 63
       },
       "donors": 120,
-      "images": 13,
-      "modules": 117,
+      "images": 11,
+      "modules": 119,
       "status": {
-        "API_SURFACE_DIFFERS_MISSING_CLASSES": 2,
         "FAILED": 2,
-        "PASS": 118,
+        "PASS": 120,
         "SOURCE_ONLY": 9
       },
-      "switched": 57
+      "switched": 5
     },
-    "evidence_sha256": "b14d583660dfa8b736372b582ea4e23ddb766e063a90af6c5c862f766691fe7d",
+    "evidence_sha256": "ad4aaa619fd2ecbe61eef435eb9d4a02f4f91fe46e4d76377b0324ddb1205c99",
     "path": ".m3/task-crates/dependency-source-inline-20261010 (hsoliwal/com.synexia)"
   },
   "synexia_pr": "hsoliwal/com.synexia#10339",
