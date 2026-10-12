@@ -73,6 +73,7 @@
         <configuration>
           <source>21</source>
           <target>21</target>
+          <enablePreview>true</enablePreview>
           <compilerArgs>
             <arg>--patch-module</arg>
             <arg>java.base=${project.build.directory}/bulk-patch-classes</arg>
@@ -88,7 +89,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.5.2</version>
         <configuration>
-          <argLine>--patch-module java.base=${project.build.directory}/bulk-patch-classes --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED</argLine>
+          <argLine>--enable-preview --patch-module java.base=${project.build.directory}/bulk-patch-classes --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED</argLine>
           <systemPropertyVariables>
             <m3.gpu>${m3.gpu}</m3.gpu>
           </systemPropertyVariables>
