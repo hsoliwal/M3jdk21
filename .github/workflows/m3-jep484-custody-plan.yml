@@ -51,6 +51,7 @@ jobs:
         run: |
           python3 m3/backports/recipes/jep-484-classfile-api/test_path_map.py
           python3 m3/backports/recipes/jep-484-classfile-api/test_custody_plan.py
+          python3 m3/backports/recipes/jep-484-classfile-api/test_scope_plan.py
 
       - name: Fetch exact OpenJDK JDK21 and JDK24 donor refs
         run: |
@@ -98,6 +99,47 @@ jobs:
           if unknown:
               raise SystemExit(f"unknown custody states: {unknown}")
           print("JEP484_CUSTODY",dict(sorted(counts.items())))
+          PY
+          git diff --exit-code
+          test -z "$(git status --porcelain | grep -v '^?? target/' || true)"
+
+      - name: Scope-separate internal mechanics from public API and version holds
+        run: |
+          set -euo pipefail
+          python3 m3/backports/recipes/jep-484-classfile-api/scope_plan.py             --map-dir target/j484/map             --custody-dir target/j484/custody             --out target/j484/scope
+          python3 - <<'PY'
+          import csv
+          from collections import Counter
+
+          rows=list(csv.DictReader(
+              open("target/j484/scope/SCOPE_PLAN.tsv",encoding="utf-8"),
+              delimiter="\t"))
+          if len(rows) != 248:
+              raise SystemExit(f"scope denominator: expected 248, got {len(rows)}")
+          if any(row["mutation_authority"] != "false" for row in rows):
+              raise SystemExit("scope planner granted mutation authority")
+          if any(row["promotion_authority"] != "false" for row in rows):
+              raise SystemExit("scope planner granted promotion authority")
+
+          counts=Counter(row["disposition"] for row in rows)
+          allowed={
+              "FILE_CANDIDATE",
+              "MODULE_CANDIDATE",
+              "LIBRARY_API_HOLD",
+              "VERSION_ADAPTATION_HOLD",
+              "CURRENT_TREE_HOLD",
+              "RETAIN_JDK21_SOURCE",
+              "ALREADY_PRESENT_PROOF",
+          }
+          unknown=sorted(set(counts)-allowed)
+          if unknown:
+              raise SystemExit(f"unknown JEP484 scope states: {unknown}")
+
+          for row in rows:
+              if row["donor_plane"] == "JDK24_PUBLIC" and row["state"] != "ALREADY_PRESENT":
+                  if row["disposition"] != "LIBRARY_API_HOLD":
+                      raise SystemExit("public Class-File API escaped LIBRARY_API hold")
+          print("JEP484_SCOPE", dict(sorted(counts.items())))
           PY
           git diff --exit-code
           test -z "$(git status --porcelain | grep -v '^?? target/' || true)"
