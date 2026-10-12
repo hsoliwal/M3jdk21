@@ -6,7 +6,9 @@ on:
     branches: ['m3/string-replacement-guard-20261012']
     paths:
       - '.github/workflows/m3-string-replacement-guard-proof.yml'
+      - 'm3/runtime-integration/**'
       - 'm3/vendor/synexia/synexia-openrewrite-recipes/**'
+      - 'src/java.base/share/classes/java/lang/String.java'
   pull_request:
     paths:
       - '.github/workflows/m3-string-replacement-guard-proof.yml'
@@ -17,56 +19,7 @@ on:
 permissions:
   contents: read
 jobs:
-  apply-reviewed-recipe:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/m3/string-replacement-guard-20261012'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '21'
-      - name: Verify exact Synexia proof-tooling custody
-        run: sha256sum -c m3/runtime-integration/string-replacement-guard-sha256.txt
-      - name: Execute sealed recipe and prove fixed point
-        shell: bash
-        run: |
-          set -euo pipefail
-          crate=m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-string-replacement-guard
-          bash "$crate/verify.sh" --apply "$PWD"
-          bash "$crate/verify.sh" --check "$PWD"
-      - name: Prove replacement-route refusals on exact runtime source
-        run: python3 m3/runtime-integration/test_string_replacement_routes.py
-      - name: Commit only the four admitted proof targets to this repair branch
-        shell: bash
-        run: |
-          set -euo pipefail
-          git diff --check
-          git diff --exit-code -- src/
-          git add -- m3/runtime-integration/check-m3string-invariants.py m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java m3/runtime-integration/test_string_replacement_routes.py m3/runtime-integration/string-replacement-guard-receipt.tsv
-          python3 - <<'PY'
-          import subprocess
-          allowed = {'m3/runtime-integration/check-m3string-invariants.py', 'm3/runtime-integration/src/main/java/M3StringReplacementRoutes.java', 'm3/runtime-integration/test_string_replacement_routes.py', 'm3/runtime-integration/string-replacement-guard-receipt.tsv'}
-          actual = set(filter(None, subprocess.check_output(['git', 'diff', '--cached', '--name-only', '-z']).decode().split('\0')))
-          if actual and actual != allowed:
-              raise SystemExit('refusing unexpected generated path set: ' + repr(actual))
-          PY
-          if git diff --cached --quiet; then
-            echo 'Recipe is already at fixed point; no commit.'
-            exit 0
-          fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'fix(m3): apply Synexia replacement guard recipe [m3-string-guard-applied]'
-          git push origin HEAD:refs/heads/m3/string-replacement-guard-20261012
-          git rev-parse HEAD
-      - name: Run complete M3 String source invariant gate without bypass
-        run: python3 m3/runtime-integration/check-m3string-invariants.py
   route-regressions:
-    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -77,11 +30,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Verify exact proof-tooling mirror
+      - name: Verify exact Synexia proof-tooling custody
         run: sha256sum -c m3/runtime-integration/string-replacement-guard-sha256.txt
-      - name: Verify recipe fixed point
+      - name: Verify recipe refusal tests and fixed point
         run: bash m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-string-replacement-guard/verify.sh --check "$PWD"
-      - name: Run replacement route mutation tests
+      - name: Run replacement route mutation tests on exact String source
         run: python3 m3/runtime-integration/test_string_replacement_routes.py
-      - name: Run complete M3 String source invariants
+      - name: Run complete M3 String source invariants without bypass
         run: python3 m3/runtime-integration/check-m3string-invariants.py
