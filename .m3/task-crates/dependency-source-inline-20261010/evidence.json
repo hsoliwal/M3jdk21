@@ -2,42 +2,43 @@
   "baseline": "30c507d2eb1528647484d0971f4c52627b362e3a",
   "counts": {
     "api_surface": {
-      "EQUIVALENT_MODULO_COMPILER": 30,
-      "IDENTICAL": 36
+      "DIFFERS_MISSING_CLASSES": 2,
+      "EQUIVALENT_MODULO_COMPILER": 55,
+      "IDENTICAL": 63
     },
     "build_plugin_rows": 129,
     "delomboked_files": 269,
     "downstream_binary_still_resolved": 0,
-    "downstream_not_vendored": 3,
+    "downstream_not_vendored": 0,
     "downstream_rows": 304,
-    "gate": 66,
-    "gate_pass": 66,
-    "images": 0,
-    "modules": 66,
-    "native_binaries": 47,
+    "gate": 120,
+    "gate_pass": 120,
+    "images": 13,
+    "modules": 118,
+    "native_binaries": 120,
     "switched": 172
   },
-  "generated": "2026-10-12T03:26:31Z",
+  "generated": "2026-10-12T05:25:05Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {
       "api_surface": {
-        "DIFFERS_MISSING_CLASSES": 3,
-        "EQUIVALENT_MODULO_COMPILER": 53,
+        "DIFFERS_MISSING_CLASSES": 2,
+        "EQUIVALENT_MODULO_COMPILER": 54,
         "IDENTICAL": 63
       },
       "donors": 120,
-      "images": 14,
-      "modules": 116,
+      "images": 13,
+      "modules": 117,
       "status": {
-        "API_SURFACE_DIFFERS_MISSING_CLASSES": 3,
+        "API_SURFACE_DIFFERS_MISSING_CLASSES": 2,
         "FAILED": 2,
-        "PASS": 117,
+        "PASS": 118,
         "SOURCE_ONLY": 9
       },
-      "switched": 56
+      "switched": 57
     },
-    "evidence_sha256": "3e9c99e0d581b918c1cb071fa422b08e610643f562bcdfe06eeedcfd673c3dc7",
+    "evidence_sha256": "b14d583660dfa8b736372b582ea4e23ddb766e063a90af6c5c862f766691fe7d",
     "path": ".m3/task-crates/dependency-source-inline-20261010 (hsoliwal/com.synexia)"
   },
   "synexia_pr": "hsoliwal/com.synexia#10339",

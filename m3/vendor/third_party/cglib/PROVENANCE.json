@@ -1,0 +1,871 @@
+{
+  "artifact": "cglib",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "EXTRA_BINARY_CLASSPATH",
+  "consumers": "transitive compile input of commons-pool2 2.12.0 (optional proxy package)",
+  "coordinate": "cglib:cglib:3.3.0-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "asm",
+      "form": "source module",
+      "group": "org.ow2.asm",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.10.1-m3-source-1"
+    },
+    {
+      "artifact": "ant",
+      "form": "binary build input for an optional adapter (BUILD_INPUTS.tsv)",
+      "group": "org.apache.ant",
+      "optional": true,
+      "scope": "provided",
+      "version": "1.10.14"
+    }
+  ],
+  "donor": "cglib-3.3.0",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/cglib/src/main/resources/META-INF/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/cglib/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "cc7e6d97217e32079c4a5d7667c82ad73d5894dc8973ed4f7cdd7d4f0fab8d76",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/cglib/src/main/resources/META-INF/NOTICE",
+      "sha256": "c53634c960163f00ba0b0147cc3dee5caf0e6a47bc9909a2fe94b7adcf5d983e",
+      "upstream": "META-INF/NOTICE"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/beans/BeanCopier.java",
+      "sha256": "3cfabf939de9970d050d5fc90fc7958c16ace6a41b1d7785680ee7797eb7df48",
+      "upstream": "net/sf/cglib/beans/BeanCopier.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/beans/BeanGenerator.java",
+      "sha256": "121c7de257a1ccbf0f4dad51c1a6c068f78d81c9f994d846aef8f217a76ac53a",
+      "upstream": "net/sf/cglib/beans/BeanGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/beans/BeanMap.java",
+      "sha256": "daea6f8e30311edc0ffda33c8d31fcf4f35a42f91240bb4f9a61c18846f361a8",
+      "upstream": "net/sf/cglib/beans/BeanMap.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/beans/BeanMapEmitter.java",
+      "sha256": "90af8635c6bd3c915effe8bb3d73ca690b20ff175043d1dfc174fd2f0bc0e126",
+      "upstream": "net/sf/cglib/beans/BeanMapEmitter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/beans/BulkBean.java",
+      "sha256": "093c3713afb8607a90239b7406798165d06bbf1ef436ab9cbfe810126cc4406e",
+      "upstream": "net/sf/cglib/beans/BulkBean.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/beans/BulkBeanEmitter.java",
+      "sha256": "d13e357ce235961b65e1af093f7b3f7d61c9407d550dd27399bb06bd0605d64a",
+      "upstream": "net/sf/cglib/beans/BulkBeanEmitter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/beans/BulkBeanException.java",
+      "sha256": "efbf8dee5b7044b6654542ef059aef00f57731c086570c807998d0d5d209368e",
+      "upstream": "net/sf/cglib/beans/BulkBeanException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/beans/FixedKeySet.java",
+      "sha256": "bd566dc8a5318f3cc5c5e57f0835c6170afc5794b246f0e422b4efe634f0b9e2",
+      "upstream": "net/sf/cglib/beans/FixedKeySet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/beans/ImmutableBean.java",
+      "sha256": "cd7bf0d820155bcf1ccbdbe31e15a06c7694cbc6a7ce0184060a6c35de39b99b",
+      "upstream": "net/sf/cglib/beans/ImmutableBean.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/AbstractClassGenerator.java",
+      "sha256": "c40dd9b5b6e5d79ae5913585e40cb5964690fa2cf6d7c5585e3fc1d01d922df8",
+      "upstream": "net/sf/cglib/core/AbstractClassGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/AsmApi.java",
+      "sha256": "5954d4d4c8eac861ca762edf6851bfebafe780580e2d0b03c66cfc568f22f8da",
+      "upstream": "net/sf/cglib/core/AsmApi.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/Block.java",
+      "sha256": "86628632482c6f524fc259778f015b050e49a456b63d5636f681c8d16f2c3187",
+      "upstream": "net/sf/cglib/core/Block.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/ClassEmitter.java",
+      "sha256": "9a1914b45ec2d35e3f43ae97aa6212219f1a1bbd6ec501454a4060a126e1c865",
+      "upstream": "net/sf/cglib/core/ClassEmitter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/ClassGenerator.java",
+      "sha256": "f28f700c8da7c21f680134e96e0f2f3c0c1262f896f1f29275dc1b9cf89bb3d9",
+      "upstream": "net/sf/cglib/core/ClassGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/ClassInfo.java",
+      "sha256": "f5aad5714171593dcc2e707ce08fcf2c1e8d073777d3df064f574ed48e9eec23",
+      "upstream": "net/sf/cglib/core/ClassInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/ClassNameReader.java",
+      "sha256": "0f2ff3cba9372246078be5d411c74bd6a9a058e3248334901ee8effda9678725",
+      "upstream": "net/sf/cglib/core/ClassNameReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/ClassesKey.java",
+      "sha256": "08e09c06057a41d041414763d7e01979c5ec5f19ddadb1b244f09b20ce3323a3",
+      "upstream": "net/sf/cglib/core/ClassesKey.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/CodeEmitter.java",
+      "sha256": "0de80ea5af583cf1c0b086062835ed90eb41970e1e6f6f697d916cc7ae0dcca6",
+      "upstream": "net/sf/cglib/core/CodeEmitter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/CodeGenerationException.java",
+      "sha256": "da734a3cb8e7ad73082a01eff050560d26b18b6c0f4515a1f0f8bd33fbccf717",
+      "upstream": "net/sf/cglib/core/CodeGenerationException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/CollectionUtils.java",
+      "sha256": "9a059f24179327adaeb767fb518e0ee0cdf9b97e8f79e2cd253da550a21b3091",
+      "upstream": "net/sf/cglib/core/CollectionUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/Constants.java",
+      "sha256": "494c00bea4e4ae60ec9e69e8918cfa3205b2748184950dcebed1936b4a53da11",
+      "upstream": "net/sf/cglib/core/Constants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/Converter.java",
+      "sha256": "3b8db381fe972499aacaca2d7e25aac7acc278703fe12801e787172b2622abf0",
+      "upstream": "net/sf/cglib/core/Converter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/Customizer.java",
+      "sha256": "e07e9e8f157b6960c8ed7251bd43ec50097148891f98769601a15da81cd471fb",
+      "upstream": "net/sf/cglib/core/Customizer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/DebuggingClassWriter.java",
+      "sha256": "d14641113a90b3bd22b6ea0649d73d47afd5bb97ad4369438d5965169c825092",
+      "upstream": "net/sf/cglib/core/DebuggingClassWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/DefaultGeneratorStrategy.java",
+      "sha256": "54359eb60106b5c8a6be7f882e525cf26d6ad52c6d2c49a87172d570e31eef6a",
+      "upstream": "net/sf/cglib/core/DefaultGeneratorStrategy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/DefaultNamingPolicy.java",
+      "sha256": "b85e28795d68e6b42063ba21c4f6963163fb47f3dfb806051dde18defc3e8fd7",
+      "upstream": "net/sf/cglib/core/DefaultNamingPolicy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/DuplicatesPredicate.java",
+      "sha256": "52a057c7d10aff147674761ad480e1940f7671ddd54c78e319e74c2f432438e2",
+      "upstream": "net/sf/cglib/core/DuplicatesPredicate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/EmitUtils.java",
+      "sha256": "09828873f41cfa6b910ce9f46bb9713bdc165b3bcee6df8bebfb2360e3419870",
+      "upstream": "net/sf/cglib/core/EmitUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/FieldTypeCustomizer.java",
+      "sha256": "c55dcaa0cf61fc219e75abdd53f2897cd80bc08f9cf770392cbb6242369137a4",
+      "upstream": "net/sf/cglib/core/FieldTypeCustomizer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/GeneratorStrategy.java",
+      "sha256": "62faac654840b63b9d981d2aee1e37e3b90dd2d931ecb4bb718df9456d2aa277",
+      "upstream": "net/sf/cglib/core/GeneratorStrategy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/HashCodeCustomizer.java",
+      "sha256": "22ab667e7b7509caa20312932230146d52bbc6cce3990b701f32b9a301dee907",
+      "upstream": "net/sf/cglib/core/HashCodeCustomizer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/KeyFactory.java",
+      "sha256": "604cdafb984830b3492dc4de3bb12d56f2af0926fc9ef59c0b589d9c27d3a867",
+      "upstream": "net/sf/cglib/core/KeyFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/KeyFactoryCustomizer.java",
+      "sha256": "dd725262601176968581ff176ed97a88194be9ff9578c8caa1c066f3388220cb",
+      "upstream": "net/sf/cglib/core/KeyFactoryCustomizer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/Local.java",
+      "sha256": "2ae58af9c999306b06b88bbcdbdc69c09428f1ddb6206025b1baf0c00048a49e",
+      "upstream": "net/sf/cglib/core/Local.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/LocalVariablesSorter.java",
+      "sha256": "cff43935a16760d3ff256ab886b9aefa98e1771d479852b996945ceca61e3365",
+      "upstream": "net/sf/cglib/core/LocalVariablesSorter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/MethodInfo.java",
+      "sha256": "b3e175b9f75c21d0231ff9101885d438fc2ee349e124b20df3f0bf3a93e52117",
+      "upstream": "net/sf/cglib/core/MethodInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/MethodInfoTransformer.java",
+      "sha256": "39c24bb511fdd7d8904f4e644062baea0c369a943d518da619ff2bed3cbe46ab",
+      "upstream": "net/sf/cglib/core/MethodInfoTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/MethodWrapper.java",
+      "sha256": "b0758580931f48ecc5d9fe7a7cc721e0d4f106c4e2f68e44e601e8d7582e0d27",
+      "upstream": "net/sf/cglib/core/MethodWrapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/NamingPolicy.java",
+      "sha256": "3b9b67bb9e1d199ffcc15256d0afd1d5e2605f39fcc852cd15dff7330b188169",
+      "upstream": "net/sf/cglib/core/NamingPolicy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/ObjectSwitchCallback.java",
+      "sha256": "6b0719822c32bd6a6ca3cd4c071dc6d27d0497211c72ac76a7fbe8b4ee0d957b",
+      "upstream": "net/sf/cglib/core/ObjectSwitchCallback.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/Predicate.java",
+      "sha256": "194aeaed1154728fb9dad80350c75915ef0dc0320324a8a9f77a93c25cdc7e55",
+      "upstream": "net/sf/cglib/core/Predicate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/ProcessArrayCallback.java",
+      "sha256": "8c526868f6caa386e24aa031cf25dbd5849716b2e0f387ed89c9a870de1d075a",
+      "upstream": "net/sf/cglib/core/ProcessArrayCallback.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/ProcessSwitchCallback.java",
+      "sha256": "d62fde1667f26000df8c2889dbe2ad67fcd5c3b8f279f4acd53435016b144d73",
+      "upstream": "net/sf/cglib/core/ProcessSwitchCallback.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/ReflectUtils.java",
+      "sha256": "91b0ec0c73036f09fba6076079537629c5f67ba56b6715727c3b3c231ac5f6ff",
+      "upstream": "net/sf/cglib/core/ReflectUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/RejectModifierPredicate.java",
+      "sha256": "ee2a757196df0c207dcb42ddcc1f3ede457b0604647b2d027bf156fded168c56",
+      "upstream": "net/sf/cglib/core/RejectModifierPredicate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/Signature.java",
+      "sha256": "d35312155135b8379384ff81ee7aabb15bc72d163f243ad4e2d2e2805e3e0348",
+      "upstream": "net/sf/cglib/core/Signature.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/TinyBitSet.java",
+      "sha256": "a9e46f97b1e7543ddc9d80b0291da039bd2e3684b96ce02b2c9b61e7dd0731a1",
+      "upstream": "net/sf/cglib/core/TinyBitSet.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/Transformer.java",
+      "sha256": "a6c9d712dc1c2283cdee5d86c4e7c75e4ae87d8b752b941ad0c7a841f1f788ed",
+      "upstream": "net/sf/cglib/core/Transformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/TypeUtils.java",
+      "sha256": "ec68100fb4578ce6c362024f85b19e36cffe34e07b0f44da352ba7c64ccc0c47",
+      "upstream": "net/sf/cglib/core/TypeUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/VisibilityPredicate.java",
+      "sha256": "095f64ce2d5dc5c4ef4df712bb0c5bd721acc93352bea5315f71e5604955b3d2",
+      "upstream": "net/sf/cglib/core/VisibilityPredicate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/WeakCacheKey.java",
+      "sha256": "cbab5db363a1c581885421071a82a3240e8053d743476932173b78a128c38b8e",
+      "upstream": "net/sf/cglib/core/WeakCacheKey.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/internal/CustomizerRegistry.java",
+      "sha256": "43a0728b224b319931a63c1cd91e7b98e6aa093cab9cde2b288fe64870b814f0",
+      "upstream": "net/sf/cglib/core/internal/CustomizerRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/internal/Function.java",
+      "sha256": "91d5a3e4620ca8ff43420ff200b28a9271a5c357ebc7d682ecb154766b878228",
+      "upstream": "net/sf/cglib/core/internal/Function.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/core/internal/LoadingCache.java",
+      "sha256": "b5deea2223757214e14e6c53e63a288bbd060a9d2c0a4f8b069d0b83c862cc7e",
+      "upstream": "net/sf/cglib/core/internal/LoadingCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/BridgeMethodResolver.java",
+      "sha256": "469376643f3d0a1450fa39fea500d5447c69aacb2fa05829ea8b24a9030651d7",
+      "upstream": "net/sf/cglib/proxy/BridgeMethodResolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/Callback.java",
+      "sha256": "cb5d4a6fa184241d282b9b9cfe07b1aedd9d99ee87f35d2ee09736429fe1da10",
+      "upstream": "net/sf/cglib/proxy/Callback.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/CallbackFilter.java",
+      "sha256": "b65bd9a01db189e96b2de7558f0bc90988348db2c7ddf1b61d3894d7d1bcc7d4",
+      "upstream": "net/sf/cglib/proxy/CallbackFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/CallbackGenerator.java",
+      "sha256": "f900cae6d638732e45f37973ed1a6064d556d445927d8720c319b308d2a92733",
+      "upstream": "net/sf/cglib/proxy/CallbackGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/CallbackHelper.java",
+      "sha256": "f5dee3fb7499cf6dd7270606b0a16a14d48bc92340f92446d7ea4f98ef9c0ea1",
+      "upstream": "net/sf/cglib/proxy/CallbackHelper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/CallbackInfo.java",
+      "sha256": "e37477e83e3c20dc085f92ab8cde042586590b7e6d4e4958927d9d68280c300a",
+      "upstream": "net/sf/cglib/proxy/CallbackInfo.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/Dispatcher.java",
+      "sha256": "6771c7f35fa8a77770dba7143c5e2cbdcf20baf9ace4902aa4e1218637b5e3d1",
+      "upstream": "net/sf/cglib/proxy/Dispatcher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/DispatcherGenerator.java",
+      "sha256": "fa7f5bfe4980ae1689a2621e4bd981650ce1e4f303c055a8a5abcc9eec5ea36d",
+      "upstream": "net/sf/cglib/proxy/DispatcherGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/Enhancer.java",
+      "sha256": "4acf19d78e4a3118dfb6192ecd64660bae505a6b05ecd399449a6380e4e42cbc",
+      "upstream": "net/sf/cglib/proxy/Enhancer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/Factory.java",
+      "sha256": "f6a28884562bf1e0255e2a378dbc2630158689b022c8be745d8a9612e31bf0e8",
+      "upstream": "net/sf/cglib/proxy/Factory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/FixedValue.java",
+      "sha256": "4edee4325c236bfc62da879a89356f53621327f72232226e7670de20794e4f96",
+      "upstream": "net/sf/cglib/proxy/FixedValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/FixedValueGenerator.java",
+      "sha256": "b60acef361a9ed7ba8f0e941d9c64492da5a9c19d5bc3afb66b1100bc78f3958",
+      "upstream": "net/sf/cglib/proxy/FixedValueGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/InterfaceMaker.java",
+      "sha256": "6faedab5a48335e4def2da35def9d8e73f46131bbc2e1ec291d39b0d853a9dfc",
+      "upstream": "net/sf/cglib/proxy/InterfaceMaker.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/InvocationHandler.java",
+      "sha256": "6275618c73f9275bc9bdc547f52a712bf3f8a55d19985e39a520fa2dc2fc2925",
+      "upstream": "net/sf/cglib/proxy/InvocationHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/InvocationHandlerGenerator.java",
+      "sha256": "cbfd263a135ee9396dcaeaf92e7130fd07f9484a2459dac2eb59d4bff783e75f",
+      "upstream": "net/sf/cglib/proxy/InvocationHandlerGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/LazyLoader.java",
+      "sha256": "cd9e26df3004b5cd0a43fa76ca4be10255a44de635a6ffa456a9cb50dee130f0",
+      "upstream": "net/sf/cglib/proxy/LazyLoader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/LazyLoaderGenerator.java",
+      "sha256": "9e5b39d236cb5830511036233d1e570536ea20f70be1b713e258222ed253d797",
+      "upstream": "net/sf/cglib/proxy/LazyLoaderGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/MethodInterceptor.java",
+      "sha256": "8013a8c2f4ae0ebc8277e42faf715fb10b9fe599348a88afdf4001dab0fe7893",
+      "upstream": "net/sf/cglib/proxy/MethodInterceptor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/MethodInterceptorGenerator.java",
+      "sha256": "e3bd44ab8d3347e8ec8a417180713614619490d89b6b465a2c75de65ad7d7ff6",
+      "upstream": "net/sf/cglib/proxy/MethodInterceptorGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/MethodProxy.java",
+      "sha256": "8f319e17617d004c3f3387712c957046855fc508887950774eb0d9e0fd4b0350",
+      "upstream": "net/sf/cglib/proxy/MethodProxy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/Mixin.java",
+      "sha256": "8012edba60ed953851990403b70048dbc43cec4eb77712bb15675d8dd664b7f2",
+      "upstream": "net/sf/cglib/proxy/Mixin.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/MixinBeanEmitter.java",
+      "sha256": "cef83ee060724bf0b94b0e38b8e62e90f958788f9687f0bd4886d54cff50909b",
+      "upstream": "net/sf/cglib/proxy/MixinBeanEmitter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/MixinEmitter.java",
+      "sha256": "60be3ab28ea272307183e46beaa46458feaa2f21dd5fa8c2e86870dafac629cf",
+      "upstream": "net/sf/cglib/proxy/MixinEmitter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/MixinEverythingEmitter.java",
+      "sha256": "84db4b0afee77d70ffa9ef7bd2c3d5a14043c902580f08866f10ea022ddfef55",
+      "upstream": "net/sf/cglib/proxy/MixinEverythingEmitter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/NoOp.java",
+      "sha256": "9aa8af18f86468153daabfed19dc49b0036e4a871a62a914b6759d84ed6a96ec",
+      "upstream": "net/sf/cglib/proxy/NoOp.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/NoOpGenerator.java",
+      "sha256": "c7b8d8c1de21e90ae811343200bc3233b2f811eaa0d409aa4676dda4d2134e65",
+      "upstream": "net/sf/cglib/proxy/NoOpGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/Proxy.java",
+      "sha256": "88afe65c994104bf571de129d0f83c74d4d5508a1738afd12d220588911f7861",
+      "upstream": "net/sf/cglib/proxy/Proxy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/ProxyRefDispatcher.java",
+      "sha256": "86d0ef42f549cb3bee893ee130b945684c47c4b3b61c3b1134020a517a176b3c",
+      "upstream": "net/sf/cglib/proxy/ProxyRefDispatcher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/proxy/UndeclaredThrowableException.java",
+      "sha256": "d40f1d4215c21f12e21b82ef47fbec4aad0b79f7c8651ba032db8f09f6536edd",
+      "upstream": "net/sf/cglib/proxy/UndeclaredThrowableException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/reflect/ConstructorDelegate.java",
+      "sha256": "d47e7116dba893e0fc9e3e889b6fc89fe7460da94a6873f401f6d7dafa95776f",
+      "upstream": "net/sf/cglib/reflect/ConstructorDelegate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/reflect/FastClass.java",
+      "sha256": "acc708e9412d969b91d5b00fc7dbe9590ad7ba64795fd8a80034862070bcb1f0",
+      "upstream": "net/sf/cglib/reflect/FastClass.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/reflect/FastClassEmitter.java",
+      "sha256": "86324c08eec4d845291a76abc3394fbda152b8a792899602be9a21d60d61da7b",
+      "upstream": "net/sf/cglib/reflect/FastClassEmitter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/reflect/FastConstructor.java",
+      "sha256": "17e60be8f535cf86564f79b1d5d7adf873eb0f0bcb553a9b60c0578a7af9483e",
+      "upstream": "net/sf/cglib/reflect/FastConstructor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/reflect/FastMember.java",
+      "sha256": "8796334d1423451c71f1ececae1edf621b99e6697f8678d21d8ddd061b0284d3",
+      "upstream": "net/sf/cglib/reflect/FastMember.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/reflect/FastMethod.java",
+      "sha256": "8e9afd97273c91da665dc4be2aab0c673b5b0daf1fb9b99097369f9732d8a616",
+      "upstream": "net/sf/cglib/reflect/FastMethod.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/reflect/MethodDelegate.java",
+      "sha256": "d33eacc9ce682c263965741ddcb2d829e4841e701cc7e86954a04c6540ed20df",
+      "upstream": "net/sf/cglib/reflect/MethodDelegate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/reflect/MulticastDelegate.java",
+      "sha256": "5471e394dbbc17e57c6fbb9c6dfcac4a90a2069abb831258c8d0d6fbce34b059",
+      "upstream": "net/sf/cglib/reflect/MulticastDelegate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractClassFilterTransformer.java",
+      "sha256": "70741de1ab12d8a4f97a07f08e823380352578372ce682b831da0b2697cbab8f",
+      "upstream": "net/sf/cglib/transform/AbstractClassFilterTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractClassLoader.java",
+      "sha256": "0dc4a44636bf6e8da01a4ca9e6e27e0cadfc673f0d2b9a53be00d7d9fbfd99dd",
+      "upstream": "net/sf/cglib/transform/AbstractClassLoader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractClassTransformer.java",
+      "sha256": "d371ad437f21a004bfaee968f724b50bee82cb3ebdfc782a87d632559dcf3f71",
+      "upstream": "net/sf/cglib/transform/AbstractClassTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java",
+      "sha256": "53b57ee07d4615ca20efde6640b253a69fa20bf43ecada34c75b3340c3473b74",
+      "upstream": "net/sf/cglib/transform/AbstractProcessTask.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractTransformTask.java",
+      "sha256": "d46ca3a8b5469ea2e15f7abaec02baa2399551f2ae0ed48dc67ef613822bad2f",
+      "upstream": "net/sf/cglib/transform/AbstractTransformTask.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AnnotationVisitorTee.java",
+      "sha256": "c7576ae5eee37c2bb4bf6dbfe7d948fff48896180730e503caed816b24a47b5a",
+      "upstream": "net/sf/cglib/transform/AnnotationVisitorTee.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/ClassEmitterTransformer.java",
+      "sha256": "2fddda5b0e5a89e602d603b534b47fc0ce219563c49cfc4aad8f939e9810304b",
+      "upstream": "net/sf/cglib/transform/ClassEmitterTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/ClassFilter.java",
+      "sha256": "5fa737a4a534e816afb453fe5bfe28e986b66f62c061d73458f4d48a26f30e0a",
+      "upstream": "net/sf/cglib/transform/ClassFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/ClassFilterTransformer.java",
+      "sha256": "5d0886448b65eef6edba23be2977868450fd174435eae2c11444c078582ec53c",
+      "upstream": "net/sf/cglib/transform/ClassFilterTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/ClassReaderGenerator.java",
+      "sha256": "69333c30f9b223419b51199a5ab059da602b153da49cc50eb1198bc4018f351f",
+      "upstream": "net/sf/cglib/transform/ClassReaderGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/ClassTransformer.java",
+      "sha256": "bd537c48e742adb813cde3ad06aa11cf9b83f0c88e87ff591992a099152986b8",
+      "upstream": "net/sf/cglib/transform/ClassTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/ClassTransformerChain.java",
+      "sha256": "bdb5cb4fce6eee94f5a5dcca6b32cd54e49c04aebcd08a3f7dd03c477d27bba7",
+      "upstream": "net/sf/cglib/transform/ClassTransformerChain.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/ClassTransformerFactory.java",
+      "sha256": "10297091a5feb958d707349c4beffa6b5942d27851888432f86f68cf9cc81a0d",
+      "upstream": "net/sf/cglib/transform/ClassTransformerFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/ClassTransformerTee.java",
+      "sha256": "c5fdaee83543438e55e6b06e980927beb9e56344af493e3ee3f9cc3c0022980a",
+      "upstream": "net/sf/cglib/transform/ClassTransformerTee.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/ClassVisitorTee.java",
+      "sha256": "7d4d10132e28317fb08b5dc346d876e7009f6e8b064c8e58e042ae06caf8b891",
+      "upstream": "net/sf/cglib/transform/ClassVisitorTee.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/FieldVisitorTee.java",
+      "sha256": "db553ef2e53d07bf4ae42b2d63bca6f8c5938a823ce7b7b012cbcb64deffb94e",
+      "upstream": "net/sf/cglib/transform/FieldVisitorTee.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/MethodFilter.java",
+      "sha256": "c167e39926716d22cad5d156b9a5c7c84c60f011e929238d332216762eb5dcb5",
+      "upstream": "net/sf/cglib/transform/MethodFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/MethodFilterTransformer.java",
+      "sha256": "504152ffce89493fdbdb65146af41a36a9bbd3edb0ebb57f67c1d92f8da8e03c",
+      "upstream": "net/sf/cglib/transform/MethodFilterTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/MethodVisitorTee.java",
+      "sha256": "64fa5bd125ba2cfbaf64fbe87e14d922581bea6b7f7b6a8f82697189c0c3341c",
+      "upstream": "net/sf/cglib/transform/MethodVisitorTee.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/TransformingClassGenerator.java",
+      "sha256": "ce762762e388ef5da8b32f5b229de7d4ae59ecb666ae5a3e037a158a48f7808d",
+      "upstream": "net/sf/cglib/transform/TransformingClassGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/TransformingClassLoader.java",
+      "sha256": "d11cff432c9a91249de2b5eecd14265496d3f366b1d90c6e38e0d773b5d352e0",
+      "upstream": "net/sf/cglib/transform/TransformingClassLoader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/AbstractInterceptFieldCallback.java",
+      "sha256": "aacb2793f9d50432bb8425c5c39befcc6c575d7cffdae6f23c0bdae518d68e24",
+      "upstream": "net/sf/cglib/transform/impl/AbstractInterceptFieldCallback.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/AccessFieldTransformer.java",
+      "sha256": "c7043e9b92247983c81e578f2a3d512c5c952620206abe8c76c0459219c6aaf8",
+      "upstream": "net/sf/cglib/transform/impl/AccessFieldTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/AddDelegateTransformer.java",
+      "sha256": "f8d403ad9a161b78459c3daa953d91b2c8d1237ea2eff60590bcf8e931f1c115",
+      "upstream": "net/sf/cglib/transform/impl/AddDelegateTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/AddInitTransformer.java",
+      "sha256": "ab3bc956471dbd989639719c23eb5f422de8f720f77a01c65d66689c6e90216a",
+      "upstream": "net/sf/cglib/transform/impl/AddInitTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/AddPropertyTransformer.java",
+      "sha256": "94251ac9f8194f78abf38d83093a749697d1d1ba0781056885f93e6b1f505317",
+      "upstream": "net/sf/cglib/transform/impl/AddPropertyTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/AddStaticInitTransformer.java",
+      "sha256": "925c6ca81bb2c81d9108ea19830a9e7f3ba86f91e936f03ad1d835e3817a8373",
+      "upstream": "net/sf/cglib/transform/impl/AddStaticInitTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/FieldProvider.java",
+      "sha256": "9bd3e47645ae4e8265b6a51270b8f2cf8751278efce683e1e55a60dcb494ba31",
+      "upstream": "net/sf/cglib/transform/impl/FieldProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/FieldProviderTransformer.java",
+      "sha256": "20c57b3131db7952b08889c5260fdba50e627b15fddae3d7867788a3faa70169",
+      "upstream": "net/sf/cglib/transform/impl/FieldProviderTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/InterceptFieldCallback.java",
+      "sha256": "6a50967992e1bcc40155df862fa827efea5e66aaa37a68e07c6ee995a80662e2",
+      "upstream": "net/sf/cglib/transform/impl/InterceptFieldCallback.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/InterceptFieldEnabled.java",
+      "sha256": "b504226e7ad2150ba245de3dd4147c8cc5a0433b4553c67e6d4fe7deb4daf47b",
+      "upstream": "net/sf/cglib/transform/impl/InterceptFieldEnabled.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/InterceptFieldFilter.java",
+      "sha256": "571f183839a17485f30b9a26a97514ddfc77a09b455dec4d76e016e5de258c0f",
+      "upstream": "net/sf/cglib/transform/impl/InterceptFieldFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/InterceptFieldTransformer.java",
+      "sha256": "0f1614218a5fd2a7294082db7393cfc8836c9c166c04326cead1051c7344b800",
+      "upstream": "net/sf/cglib/transform/impl/InterceptFieldTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/UndeclaredThrowableStrategy.java",
+      "sha256": "368ecbc3866284448c4a220373d997ec8ccf0d00928b05dcf721b0f627f7ecbe",
+      "upstream": "net/sf/cglib/transform/impl/UndeclaredThrowableStrategy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/impl/UndeclaredThrowableTransformer.java",
+      "sha256": "085852948b0de8662c1b6a6d27e327cc9423ee7dccbc23533d39701c23c621b7",
+      "upstream": "net/sf/cglib/transform/impl/UndeclaredThrowableTransformer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/util/ParallelSorter.java",
+      "sha256": "ffea4dde52bd5ccc947caca09b1a142384b40baac334522fdcabce7f54321c00",
+      "upstream": "net/sf/cglib/util/ParallelSorter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/util/ParallelSorterEmitter.java",
+      "sha256": "3b7955788b2cbfe81dc3780dabcb2e6ab74f1be774876ebcbfe056049e1c48db",
+      "upstream": "net/sf/cglib/util/ParallelSorterEmitter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/util/SorterTemplate.java",
+      "sha256": "9f58be37f66dd4ec9413d185e011be8cf4c44c742e8022911864c58d37ff0776",
+      "upstream": "net/sf/cglib/util/SorterTemplate.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/util/StringSwitcher.java",
+      "sha256": "f68ae24e9d990e912a07e3fbb4b7f44a42c7749796571143d51f79782f402155",
+      "upstream": "net/sf/cglib/util/StringSwitcher.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/cglib/src/main/resources/net/sf/cglib/util/words.txt",
+      "sha256": "6503d53d13bb738f22b04fb611eef0d858db29f12a1e53613cccab7c1a759b2c",
+      "upstream": "net/sf/cglib/util/words.txt"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/cglib/SOURCES_MANIFEST.tsv",
+      "sha256": "54906a40b367dfb1c6e251e5d4f1524c7c716c0bd4877eda4a64cd7d7d6102b2",
+      "upstream": "(inventory)"
+    }
+  ],
+  "group": "cglib",
+  "kind": "MODULE",
+  "license": "Apache License, Version 2.0 (from the license text; pom declares none)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "cglib:cglib-parent:3.3.0",
+  "pom": "https://repo.maven.apache.org/maven2/cglib/cglib/3.3.0/cglib-3.3.0.pom",
+  "receipt": {
+    "buildRoot": "b722200f62f2c2f3011ec8c9c1dafc52b03f2a7cab097237f0c87dc30e0605f6",
+    "distributionSha256": "2e93e0bad17c3b661d903e77a4ec7372ab7de5aa5ce2cd7efbb8a081e8337fa2",
+    "lock": "1a5d341c0745d61ddd6606d5dffa3d2c8af11a81e0e86ab2e2a1b9d7a747b35b",
+    "message": "",
+    "sourceRoot": "f4befd00ca71c2167788c426da2fca9020d05f04c491f6f6ce1671c23af02077",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/cglib/cglib/3.3.0/cglib-3.3.0-sources.jar",
+  "sources_jar_sha1": "b9b848fda50c0ca9b80d5422f021d0755044d2d6",
+  "sources_jar_sha256": "78fc78ab0d67bd19875443d3e197e059ebbef2affffd898cab812be26ff6f176",
+  "status": "PASS",
+  "upstream": "",
+  "version": "3.3.0"
+}

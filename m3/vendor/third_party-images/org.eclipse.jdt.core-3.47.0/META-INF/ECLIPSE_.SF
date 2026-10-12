@@ -1,0 +1,3520 @@
+Signature-Version: 1.0
+Created-By: 11.0.31 (Eclipse Adoptium)
+SHA-256-Digest-Manifest: KV8AObM4ZG7QBvgos8zNjGk5wfpmHoxHaXRq164v0BA=
+SHA-256-Digest-Manifest-Main-Attributes: Vp4DJE9s4J1mNOI+M10gZUTZsXzaPHA
+ q2hYyt/zchM4=
+
+Name: org/eclipse/jdt/internal/core/search/HierarchyScope.java
+SHA-256-Digest: ERerll9cWV4UwS+qPZwBC2PzTB0TOgX2fOrwb9SNTYs=
+
+Name: org/eclipse/jdt/internal/core/search/matching/DeclarationOfReferen
+ cedTypesPattern.java
+SHA-256-Digest: CUUfDxn/75AIl/7E57hoIr4ct7k7JrCYqcmqa/t2wyg=
+
+Name: org/eclipse/jdt/core/util/IRuntimeInvisibleTypeAnnotationsAttribut
+ e.java
+SHA-256-Digest: Yo7CAaRroDr65+Mapb6/Yx1T6bsl/LC9nah8ua0PTEE=
+
+Name: org/eclipse/jdt/core/dom/RecoveredVariableBinding.java
+SHA-256-Digest: 6QPVMXId3gqVvrqCz04dMtRYz/uCgyqBm0L6lOxCVKs=
+
+Name: org/eclipse/jdt/core/util/IInnerClassesAttribute.java
+SHA-256-Digest: Ud+C3R5W0/pqQ3Mha8at6aawvel9jGtm1LMwiTSl9dg=
+
+Name: org/eclipse/jdt/internal/core/search/JavaSearchParticipant.java
+SHA-256-Digest: fVrdIaPvAI+m9FRyH/Z3B2TTq3NUVh7hOCr/9D0lIgg=
+
+Name: org/eclipse/jdt/internal/core/hierarchy/IndexBasedHierarchyBuilder
+ .java
+SHA-256-Digest: no9hVFsmiqDra70pxWNM3/fysSoQdNBSaRqidW7BCsw=
+
+Name: org/eclipse/jdt/core/jdom/IDOMPackage.java
+SHA-256-Digest: +m2vQ2sYrstI30n4EVA4e87my7DVb4GlgTjNyEgIfCY=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionJavadoc.java
+SHA-256-Digest: 5JXGuwIqn+K09EtBYzGU8lnHVukrtyhOIbVCmKbgU4U=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnMarkerAnn
+ otationName.java
+SHA-256-Digest: y68UvY7VGGaCAF4BQxqxhOuWizqM4UeaLoeROBPbGK8=
+
+Name: org/eclipse/jdt/internal/core/InitializerWithChildrenInfo.java
+SHA-256-Digest: GsuOiAHm7rrmDVoJSrlj7YmO/Hd4c7ML77sqMle+sEg=
+
+Name: org/eclipse/jdt/core/WorkingCopyOwner.java
+SHA-256-Digest: sB5E0G+3n7ZRYp6eHTGbSvKgo6TTy/OEzqOMryQry1k=
+
+Name: org/eclipse/jdt/core/IPackageFragmentRoot.java
+SHA-256-Digest: znOBZ1z7eb5K0/TeDzduTQQ2+QLg/7h6DnQ/RKwmoys=
+
+Name: org/eclipse/jdt/internal/core/util/ConstantPool.java
+SHA-256-Digest: vKl+fLHF8EGsOaQUfDZw4HfLuJudOT1Cm9jGbGGlNzA=
+
+Name: org/eclipse/jdt/core/dom/BindingComparator.java
+SHA-256-Digest: FccJmLNPtPf7wdIBOdWdvtKjiWTQCfdaQqbSPzk4LeQ=
+
+Name: org/eclipse/jdt/internal/compiler/SourceJavadocParser.java
+SHA-256-Digest: LfWUmhQS1MiVLNaf4FUt1t1Kl3ups+TOU2VBLRMVpDo=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ImportComment.ja
+ va
+SHA-256-Digest: NxJ+n32Cwcuc9E5GMXN7BUpEjeGdtDG3UjAyzl2JEDM=
+
+Name: org/eclipse/jdt/internal/core/search/matching/SuperTypeReferencePa
+ ttern.java
+SHA-256-Digest: FW9TZyjuHmdCK8Ub9146mo1qOI72rHtISuYX8bhuzhY=
+
+Name: org/eclipse/jdt/core/CompletionProposal.java
+SHA-256-Digest: JJxkx7JQZjmu46b3mqBfmyieqPl7inmZj1fNJLeMqQg=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetMessageSend.java
+SHA-256-Digest: Og+kzXI9U1JqodvNETD6Hki9QrjBTYJBstcVa422Aso=
+
+Name: org/eclipse/jdt/internal/core/ElementCache.java
+SHA-256-Digest: vlvrty9Fj2aSNuj1QFJFGX0wqqua7FyI1j88Ysm+a8E=
+
+Name: org/eclipse/jdt/core/dom/Statement.java
+SHA-256-Digest: w9P91RbVYeUxelDDIKhlIuiTwQfreguAHIx8M1bH4fs=
+
+Name: org/eclipse/jdt/internal/codeassist/InternalCompletionContext.java
+SHA-256-Digest: oMAe3IA8lu3P719njQkFA+dvJaOKguIOVYWchFrvJu8=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/IIndexConstants.java
+SHA-256-Digest: FBM0ivMNnzNrLwdel7SjmaZ+VXwssTlkLQsvLvvvTZM=
+
+Name: org/eclipse/jdt/internal/core/search/processing/JobManager.java
+SHA-256-Digest: k/EgysbDaDOKnJlamfRcAD+QAASDMMgRzGSAjNIbhRw=
+
+Name: org/eclipse/jdt/internal/formatter/linewrap/WrapPreparator.java
+SHA-256-Digest: mk7M5y/5VkjZBkQDHIjsoA4DZxuAeEEMp1tUK7+McPA=
+
+Name: org/eclipse/jdt/core/dom/ThrowStatement.java
+SHA-256-Digest: oTxOJAigbfNTJNtw38G1E6Yv/FtF00DfKBJoVZpdHuo=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ImportComparator
+ .java
+SHA-256-Digest: FgFDEowj5wSFyEYcG6/w6Lw3wUwTnfmR04YqnozJyTA=
+
+Name: org/eclipse/jdt/core/IWorkingCopy.java
+SHA-256-Digest: UZr6VFxZ9191yAku5YU/0zmJmVVcuifBIObD1BPmJUI=
+
+Name: org/eclipse/jdt/internal/core/util/ResourceCompilationUnit.java
+SHA-256-Digest: WPeJxT71wxeUxt6H/U7i1ngEy8Xo1aN6gpFD9QWPvgM=
+
+Name: org/eclipse/jdt/internal/core/util/CharArrayBuffer.java
+SHA-256-Digest: Z/vHsWeoUGiVlfR3LicltJ017jlpb09j61qd5qWYGbc=
+
+Name: org/eclipse/jdt/core/dom/CharacterLiteral.java
+SHA-256-Digest: Zs/BZeKpCT7DHNR6w6iGu9WrLCeoFVkntaHRBXhR7Vc=
+
+Name: org/eclipse/jdt/core/search/package.html
+SHA-256-Digest: XxvyyNT7kDgxYq72HEvV/OgRMaoMe1Xk4hfNmz+urXI=
+
+Name: org/eclipse/jdt/core/util/ClassFileBytesDisassembler.java
+SHA-256-Digest: c5vHBeCSkiCPZ2mYR1/oTH9S7wRX95RCPPNtdw/WIsA=
+
+Name: org/eclipse/jdt/internal/core/TypeParameter.java
+SHA-256-Digest: p6WYNvuIHaJ+rKsgftYK3uqzYcZOox7N92+3Td9yyjw=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/InvalidCursorLocation
+ .java
+SHA-256-Digest: 9/TUYkIzWSLTEX3yRZ+dH4Ht0LKwQYIBxEIj/CXOp1w=
+
+Name: org/eclipse/jdt/core/dom/IVariableBinding.java
+SHA-256-Digest: Zut8CjrjOYGBHQaJL8dhjLWoR2l9FbV80hZ11VRcXME=
+
+Name: org/eclipse/jdt/internal/core/search/matching/AndLocator.java
+SHA-256-Digest: 7cQr2gaGR0go9HSduIHzzc6nPZcGRhM8k86s9fZS5rM=
+
+Name: org/eclipse/jdt/internal/core/search/matching/MatchLocator.java
+SHA-256-Digest: rAKNbIuU9KhuQYo7f4Q+k74Rud56/ganYre2fu+M5hg=
+
+Name: org/eclipse/jdt/core/dom/YieldStatement.java
+SHA-256-Digest: N8wYCatPCcqfHze0fuSnl6+I7Pz8YZogiEzNTLJIBvI=
+
+Name: org/eclipse/jdt/core/IField.java
+SHA-256-Digest: F3jNaN/3b+0xnnh7DwK0TA5mccWzbTJjsu3wZHTpz10=
+
+Name: org/eclipse/jdt/core/dom/JavaDocTextElement.java
+SHA-256-Digest: /T3XONTolH7JeVgn/Tsv89x01/mcojBp1E+m4GkWMs4=
+
+Name: org/eclipse/jdt/internal/core/util/RuntimeVisibleTypeAnnotationsAt
+ tribute.java
+SHA-256-Digest: RaRuRL/s6QpwKKtpCKG7uE1JJjQjGfah+XphrccWogU=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnParameter
+ izedQualifiedTypeReference.java
+SHA-256-Digest: H7CMo1gDYUswFIHGrLTrDFLyerCnmOO+e6AJqwF2R5E=
+
+Name: org/eclipse/jdt/core/dom/WhileStatement.java
+SHA-256-Digest: lVk9u8+OlAcl6eP0+vnPYXEUA+7TWYbvCXaz3uP71xE=
+
+Name: org/eclipse/jdt/internal/formatter/old/CodeFormatter.java
+SHA-256-Digest: SnBuGJPezp72Bn1KiB8bFJ5a1oXfSoODUHVFpV1Sgso=
+
+Name: org/eclipse/jdt/internal/core/search/IRestrictedAccessMethodReques
+ tor.java
+SHA-256-Digest: ntwuqH8+q+JKS/zOJONPJWbayRdpZq56gqmvsOAaq1g=
+
+Name: org/eclipse/jdt/internal/core/AnnotationInfo.java
+SHA-256-Digest: RfmzB+gYcGHAWMqZ+sJi2zJW0lrKfOm8KU3UsiXm27U=
+
+Name: org/eclipse/jdt/internal/core/hierarchy/BindingMap.java
+SHA-256-Digest: StV9UhgA+AbvDA6Ty0xcifnbJXY7mW5owhzVZglb1M0=
+
+Name: jdtCompilerAdaptersrc/org/eclipse/jdt/core/BuildJarIndex.java
+SHA-256-Digest: dbrWyE4oMxx4T2sAxSpLEHysVBpKP3/4/mKst+sSoRY=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetSuperReference.java
+SHA-256-Digest: 01aC+KiuG2RuxymfxvKSnP94gHw2+VMeR37fg0EZ7xY=
+
+Name: org/eclipse/jdt/internal/core/NonJavaResource.java
+SHA-256-Digest: CAQSoSkGfdIKxwg76B6Vd61RJtWJ2l8fSP8icdl4UFE=
+
+Name: org/eclipse/jdt/internal/core/CompletionEngineProviderDiscovery.ja
+ va
+SHA-256-Digest: yAuG0JJwPOEfg7aGcqoriEXLUpmuQwC0+ck2gkendl8=
+
+Name: org/eclipse/jdt/internal/core/builder/ClasspathJMod.java
+SHA-256-Digest: 1CvkJKExUQsDdVlnfi1NATBYZEdV24VuKxH750jnB+8=
+
+Name: org/eclipse/jdt/internal/core/eval/GlobalVariableWrapper.java
+SHA-256-Digest: XMmQUEIGPDk5IRCXCjg1uGwAgXeCfuusnpA+KN4WPVo=
+
+Name: org/eclipse/jdt/core/dom/SwitchStatement.java
+SHA-256-Digest: N0tR3hioNOXdvErUgEakhX02Yc+4CGbtYzq0RDiAVZs=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnJavadocTa
+ g.java
+SHA-256-Digest: t7BbMAR95G5Zf183PmNq3pnHzuWn3LNg2qQq68yzLE4=
+
+Name: org/eclipse/jdt/internal/core/BinaryLambdaExpression.java
+SHA-256-Digest: gjd37i/PheXCn1QK/mmszIJ5jz5xCXFhyCaa7ZBuM08=
+
+Name: org/eclipse/jdt/core/search/SearchParticipant.java
+SHA-256-Digest: hyD24jhScQF3B7GgQZjnS3Hqb3sEXLADvCUWZU+JHTE=
+
+Name: org/eclipse/jdt/internal/core/search/matching/ClassFileMatchLocato
+ r.java
+SHA-256-Digest: eKg1s9XgQ0ijd7uOKlD9zYQ/ibADdu0736wynu8bByM=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/SaveIndex.java
+SHA-256-Digest: xU+w7j+pZS+vSDvpOgD81d2mxpOefsjbm98NfQIfa4Q=
+
+Name: org/eclipse/jdt/internal/core/ImportDeclaration.java
+SHA-256-Digest: DxoA/x00qpanXiac5SCKzm4Cbn3rwZ1/rP8+ezjPAyo=
+
+Name: org/eclipse/jdt/core/util/ILocalVariableTypeTableAttribute.java
+SHA-256-Digest: qAz2b8uQEcn0fcLfEiu5CoXX/PCq4Q9Z7iLiNSN2qIA=
+
+Name: org/eclipse/jdt/internal/core/util/VerificationInfo.java
+SHA-256-Digest: kMry7VyhWWQIF31zr0rQYwzH31fOtj1gn3gpie2oB3M=
+
+Name: org/eclipse/jdt/core/dom/NumberLiteral.java
+SHA-256-Digest: +wlUAfDI6x4r2d5sOi0laAkfOM+r6DhdYeqhuYFhgGQ=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnFieldReferen
+ ce.java
+SHA-256-Digest: zQDzIMrOWOcvgFsVkmOChMrQi8roeXsnYwv7AVsU7LI=
+
+Name: org/eclipse/jdt/core/index/JavaIndexerApplication.java
+SHA-256-Digest: c/SZDvQL+Q967j6GIBAsUkI0n5bKgBZ3RdN4Q0kJL/I=
+
+Name: org/eclipse/jdt/core/jdom/DOMException.java
+SHA-256-Digest: z8EXemfc+4pAghT+GpaDJ32vwBuIY+lqqKSCerfy8/w=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetTypeDeclaration.java
+SHA-256-Digest: xzlSWes/seE3Ok3h11xntQpFuw+UiKd45qNYSk4KUMU=
+
+Name: org/eclipse/jdt/core/JavaModelException.java
+SHA-256-Digest: 81MELe6Tskt9uAZJa/5o/ICfVoMdCAK54kBEKac+x2Q=
+
+Name: org/eclipse/jdt/core/compiler/ITerminalSymbols.java
+SHA-256-Digest: ScJE2UgEtA2uVGMSZR9HhSY3xlLZEKmFTOuE+DjmrPM=
+
+Name: org/eclipse/jdt/internal/core/RenameResourceElementsOperation.java
+SHA-256-Digest: QacqyUX1bwTvHzs/LQeYnJGKaaCkbbqQOn5Fi3IpgvU=
+
+Name: org/eclipse/jdt/internal/core/index/DiskIndex.java
+SHA-256-Digest: 8wV8gKXAi/9BS5xi8OR78BP4/tQnn1MxV/lygxFp9Vo=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnBreakStat
+ ement.java
+SHA-256-Digest: MDnlngtloGq92kSa332ImGAwk2R9Z1zgeiadrRCDTgw=
+
+Name: org/eclipse/jdt/internal/core/util/ClassFileStruct.java
+SHA-256-Digest: p+9W30EUWHDw4UPiq50y6Fmyb0e0CBUt+kp0z7/eju0=
+
+Name: org/eclipse/jdt/core/dom/AbstractTagElement.java
+SHA-256-Digest: KvYw+6aI0umcaSyqY4CfFBsC2NEUuFyBt13ZLVmZ0ek=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnJavadocQu
+ alifiedTypeReference.java
+SHA-256-Digest: CzJxUcUeobgMgUOTc/sdEHb80vYH2nqIYC2/bh5q/Vw=
+
+Name: org/eclipse/jdt/core/dom/PrimitiveType.java
+SHA-256-Digest: WcP4qZYNEZYw9VgqKaYzSUWRqNFSSNp9dKR7WGK8XJA=
+
+Name: org/eclipse/jdt/internal/core/builder/MissingSourceFileException.j
+ ava
+SHA-256-Digest: cSIU7Exzfp7XdMIr1xUSO677/wdLW+v1lU+tZyAIZaI=
+
+Name: org/eclipse/jdt/core/ElementChangedEvent.java
+SHA-256-Digest: Ac2nxCwJ8KJm7TKAHfSODFnsBqfIUPnxwdYX1bDNSk4=
+
+Name: org/eclipse/jdt/internal/core/search/IndexQueryRequestor.java
+SHA-256-Digest: W+I8WYxnsagbJAVyY2AL7qfcW6NDa02xlfrvbYlwbqI=
+
+Name: org/eclipse/jdt/internal/core/CompilationUnitElementInfo.java
+SHA-256-Digest: e2spUJQWynRgllaobzRvZNE44ae3VvlxlIELMIJeGWs=
+
+Name: org/eclipse/jdt/core/dom/rewrite/ASTRewrite.java
+SHA-256-Digest: o7b9q9BRnufU+u0WBxP3BJGiaAQCMkD5DRCqRWRmtj8=
+
+Name: org/eclipse/jdt/core/dom/AbstractTypeDeclaration.java
+SHA-256-Digest: SFF5QY4k4aau1jj4M7rGTf3ku33sruv15S9CgqKaHR0=
+
+Name: org/eclipse/jdt/internal/core/index/IndexLocation.java
+SHA-256-Digest: 9BWx6xfILVSD5CwTxPnKDpXonONh412C5DU/4a3oGac=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionParser.java
+SHA-256-Digest: xrnpIiOVryJeg43lE+ee+ZrQLe7ts901Zy46XP1bqUI=
+
+Name: schema/compilationUnitResolver.exsd
+SHA-256-Digest: 7zz4uvPJmaCLynS3GGjQfmPkrY8alUyEAVQG66igviM=
+
+Name: org/eclipse/jdt/internal/core/BasicCompilationUnit.java
+SHA-256-Digest: k1WAHOIGB2lVSEQb/WLyrU4QW4z15enjyyaxadd1Aqg=
+
+Name: org/eclipse/jdt/internal/codeassist/ISearchRequestor.java
+SHA-256-Digest: kw08W6NU5g90+ytvP8hOE+PE6gAw2SCDotrN7CLsO0k=
+
+Name: org/eclipse/jdt/internal/core/search/matching/AndPattern.java
+SHA-256-Digest: UWIySNtO6Ec0jK6w4uxS/45Ag/ariDF1sTCZ2c1eEok=
+
+Name: org/eclipse/jdt/core/BufferChangedEvent.java
+SHA-256-Digest: qZ7U41/dhFRCNSKgV1956bgAWwHYmFoo8iysOoO/yMc=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ImportGroupCompa
+ rator.java
+SHA-256-Digest: LW/TGtnH9jneLPXVrqak0M2rLAhYZoyiThPPXaSpeqI=
+
+Name: org/eclipse/jdt/internal/core/SingleTypeRequestor.java
+SHA-256-Digest: nbw7tN3YccbbnJV2grFz9VmBplL22/wnOxmm4GBJ3+A=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnReference
+ ExpressionName.java
+SHA-256-Digest: 287Rk+t2nnfXMyGjf5n/De16crug8qorn3OYitZ2J1I=
+
+Name: org/eclipse/jdt/core/dom/ASTRequestor.java
+SHA-256-Digest: BX+JXcJRREmU3LfHF1DZUQEoxOlpRiTJDGmoqKLwre8=
+
+Name: org/eclipse/jdt/core/dom/SingleMemberAnnotation.java
+SHA-256-Digest: 0vg08AzXbanDgk0aIs42l940f2TkDbUhXNMTolcqkYk=
+
+Name: org/eclipse/jdt/core/util/IStackMapFrame.java
+SHA-256-Digest: yVF5zj1T+T7SCT3qP0ah+t8sSx8BIBHMry9eBxKa8d4=
+
+Name: org/eclipse/jdt/core/dom/UnionType.java
+SHA-256-Digest: avHeQ9DTWvDeg60cd7UepxcTtTTnJR2286wEhfjwGW8=
+
+Name: org/eclipse/jdt/internal/core/CreateMethodOperation.java
+SHA-256-Digest: vUpWcysvT2/u1YzLhyXUk8oaz++8kMzvhPdo4ndbQS8=
+
+Name: org/eclipse/jdt/internal/core/nd/java/model/BinaryModuleDescriptor
+ .java
+SHA-256-Digest: LWLepXJ4BGLPZi8l/wVRCNzgXPgXnjscE9jzAI6OXXA=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/OriginalImportEn
+ try.java
+SHA-256-Digest: HKldVMpPrGl76uUraNUsTxyr/9qs1O0WQXtl3PQkkUk=
+
+Name: org/eclipse/jdt/internal/core/util/ModuleAttribute.java
+SHA-256-Digest: gimTQV5saZfNJfWqdApaRDVd96uuswd/iqkYFycIJ5o=
+
+Name: org/eclipse/jdt/core/jdom/IDOMMember.java
+SHA-256-Digest: a4V9rvcrO7uZtDJrCZWtsnd9zNAUnDhmb0zw1HKeonQ=
+
+Name: org/eclipse/jdt/internal/core/hierarchy/HierarchyResolver.java
+SHA-256-Digest: kzB858kkGKqEqaVXzi19v2qYjwupLeO/27aSAErdJD0=
+
+Name: org/eclipse/jdt/core/IClasspathAttribute.java
+SHA-256-Digest: XFWj0F2hBqxlyabvymqRrjZX8+B16Rq8dFB6l8d22AM=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnSingleTyp
+ eReference.java
+SHA-256-Digest: p8WRWYWhck7jQjz8jFb/PcdADXcAyP8z1XNHCVC3u0k=
+
+Name: org/eclipse/jdt/core/dom/RecoveredTypeBinding.java
+SHA-256-Digest: su2zg0VInpZ+R+VlO/teiVXeO5D0Kom1CLsfxm9lsf0=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ImportRewriteCon
+ figuration.java
+SHA-256-Digest: d8peyNpz7dGVC9GVzkF8J3+r8FlzIVpTU8MKIBj4MzE=
+
+Name: org/eclipse/jdt/core/ICodeCompletionRequestor.java
+SHA-256-Digest: avb1/ME5Ci3m7xXJOA5vc7pr2Eggg2ZFUIt4KpDvqqw=
+
+Name: org/eclipse/jdt/core/index/package.html
+SHA-256-Digest: xtbt2UvIBbYTh83NL5iWW9m4vjhuGyc2iUixpX9hHV0=
+
+Name: org/eclipse/jdt/internal/core/jdom/DOMInitializer.java
+SHA-256-Digest: xoH7AibFq18/rDz9S+Pm3XOTeQBlEkX3HLvIAwX4P6A=
+
+Name: org/eclipse/jdt/core/CorrectionEngine.java
+SHA-256-Digest: 7it/MnXSbL3h/7Cb5kpaD7MvDFhOCu6yTJHm5tDa5NE=
+
+Name: org/eclipse/jdt/internal/compiler/parser/SourceTypeConverter.java
+SHA-256-Digest: UIWbiv5T+a1O24EvCKMrlfIz8d4wWhTgAE464kYS140=
+
+Name: org/eclipse/jdt/core/util/IStackMapTableAttribute.java
+SHA-256-Digest: I8W9f8Uevk0MPKP1c9wQml6OmP6yVmRRvBsyGm8Cr4Q=
+
+Name: org/eclipse/jdt/internal/core/util/CodeAttribute.java
+SHA-256-Digest: vi43cRybiPlCkX2mfSCkxmFFP8N3mrwko3ritMieQUA=
+
+Name: org/eclipse/jdt/internal/formatter/TokenTraverser.java
+SHA-256-Digest: vqO2FBmCZm0g7kH3ro5jQWT4+E36xkW+ze0Q365xTIk=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetClassFile.java
+SHA-256-Digest: DbwfvtqhqmRMvbpnDOYcvs1lZxMV1J+3+xe8URL2jmI=
+
+Name: org/eclipse/jdt/internal/core/ResolvedSourceMethod.java
+SHA-256-Digest: kFR9zosml8WIlRkCiT7a4I1qGcx2loa2kQcuazjf3a8=
+
+Name: org/eclipse/jdt/core/dom/BreakStatement.java
+SHA-256-Digest: 3l68zlDTGZrcQ/jsPMQxWRktHRi/hrEHKUULZx6UCbY=
+
+Name: org/eclipse/jdt/core/IElementChangedListener.java
+SHA-256-Digest: aVmdhNvo15q8CpnLdZVjqJ9bzREvuPuz+VH3pNI2mWE=
+
+Name: org/eclipse/jdt/internal/core/util/KeyToSignature.java
+SHA-256-Digest: 1CZlo8iYmcFXeyZHQfU8yNdqSniw5YYLVyE5SPJ/GkA=
+
+Name: org/eclipse/jdt/internal/core/util/RuntimeInvisibleAnnotationsAttr
+ ibute.java
+SHA-256-Digest: GdyTHdTlDOVqg4EkCkl7yDd1ouSneGejzGN5YghG5Zo=
+
+Name: org/eclipse/jdt/internal/core/BinaryLambdaMethod.java
+SHA-256-Digest: GFvRwQolebUtNvfhFuQP2rQbRFkAuYCeZeTYvUaFYuA=
+
+Name: org/eclipse/jdt/internal/core/builder/ClasspathDirectory.java
+SHA-256-Digest: h4I/joACABnNTg38JEmkPnm3p6xrmQCVGw17Aqv8iKs=
+
+Name: org/eclipse/jdt/internal/core/search/processing/IJob.java
+SHA-256-Digest: DvHbeB+v9M2oJDdE2uABfvPXNWvL1SKLrb5GU53begM=
+
+Name: org/eclipse/jdt/core/dom/SuperConstructorInvocation.java
+SHA-256-Digest: 1felKebMRjrCA3hNUaEz4t9S8+xXKqy54WYG/JY4xMM=
+
+Name: org/eclipse/jdt/core/IJavaModelStatus.java
+SHA-256-Digest: DE5/rGF5iNS3yZUqmTNKATdYw9a5NoC6d4Rho1ygQ0c=
+
+Name: org/eclipse/jdt/internal/core/builder/AbortIncrementalBuildExcepti
+ on.java
+SHA-256-Digest: JFRTZJ9T4eHd5UdcIJFMjR3BhNryigEvzNuca8KyThY=
+
+Name: org/eclipse/jdt/internal/formatter/DefaultCodeFormatterOptions.jav
+ a
+SHA-256-Digest: WjPLSOmO6G4CcA0WmONZbiJQvAOGSKyTUqf49mbCcIs=
+
+Name: org/eclipse/jdt/internal/core/UserLibraryClasspathContainer.java
+SHA-256-Digest: 9Rau44ZS6718deT6Mox2W+3bNHHYwbd8sNMFzsotyps=
+
+Name: org/eclipse/jdt/internal/core/util/RequiresInfo.java
+SHA-256-Digest: ny/CDZcF3L3DN8Y2l1tVimQ6bw10E1+nTvUER3XyM2A=
+
+Name: org/eclipse/jdt/core/dom/TypeDeclaration.java
+SHA-256-Digest: K84V8xRhL6Z9twBcblLHqlT/CQe4oDSYOA9IszynSkk=
+
+Name: org/eclipse/jdt/internal/core/builder/CompressedWriter.java
+SHA-256-Digest: +x7ZMelC68DlL37qUC5ZtvRZQi81RepRmCHlLck8Sq0=
+
+Name: org/eclipse/jdt/internal/core/util/ILRUCacheable.java
+SHA-256-Digest: k1HIDqs/P7WaHWyMFLE//mV3R20kDPVlWWm18tB5gBQ=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnLocalName.ja
+ va
+SHA-256-Digest: UyQcgRf1XpctYgqhE9thoHd7P4pAKEDeN0PifCDpbQ8=
+
+Name: org/eclipse/jdt/core/dom/CaseDefaultExpression.java
+SHA-256-Digest: hWsj21z43NfrXEeWma7M0oLsOQnAHYvHwCExQXsq9BY=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnQualifiedTyp
+ eReference.java
+SHA-256-Digest: MaV4XOA1O7Au9INb6HogWAl/z2PgDx2dRElXPpiwKag=
+
+Name: org/eclipse/jdt/internal/core/util/ClassFileAttribute.java
+SHA-256-Digest: 4n8+7lmXzzrI73bSMmbkuwWqqlPA2n0hG+ztOm/cdE8=
+
+Name: org/eclipse/jdt/core/search/SearchMatch.java
+SHA-256-Digest: cKHUvr+JV31dLAXecM5YmAiBglDBGBsW/0QLL8n+6J0=
+
+Name: org/eclipse/jdt/core/dom/BooleanLiteral.java
+SHA-256-Digest: pGqt/rhX1uM+IMu7FuFKvJD7YfCOAzG2IY8AcWg2hGw=
+
+Name: org/eclipse/jdt/core/dom/rewrite/ImportRewrite.java
+SHA-256-Digest: Jfm2PvHca3wdojmU8j83B4WP9seKE22Jpo5QOYsCsAg=
+
+Name: org/eclipse/jdt/internal/core/CopyElementsOperation.java
+SHA-256-Digest: ECTuwSEkBl+hdnT8r2pbKQedOdw7S2RAanKJJu2guIs=
+
+Name: org/eclipse/jdt/internal/core/builder/IncrementalImageBuilder.java
+SHA-256-Digest: p9L7IGCziZOTsOdSQ8d3XkdCDX1mfNNLBQA6SZp6kLI=
+
+Name: org/eclipse/jdt/core/search/MethodNameRequestor.java
+SHA-256-Digest: 5vqLimBrsyx7kr4bY2b7D7eHiEWvqRn4fiE2Bh53MBI=
+
+Name: org/eclipse/jdt/core/IOpenable.java
+SHA-256-Digest: pS2dtkgNNl1r/vD2NBaYFnEGTM52+8eFKUYTB1XY3NM=
+
+Name: org/eclipse/jdt/core/dom/Type.java
+SHA-256-Digest: YjVdt/cfosi/Lg0u08U2FvrebAHFqeGrQeJ2oUp/uEc=
+
+Name: org/eclipse/jdt/internal/core/MoveElementsOperation.java
+SHA-256-Digest: 7XSOwjqE1dRTQ5qQ6Mn/pX6aBoX2ivkWdxitkeru0ag=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnMethodNam
+ e.java
+SHA-256-Digest: 4FaBE9J9P/enWRSAkeM1zO6neDWWSYIrmrBiXYW8xzc=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/IndexRequest.java
+SHA-256-Digest: SaAwRap8/IO554EaA6ck/DOJ6MJkUrdUw0+4f/6yzAc=
+
+Name: org/eclipse/jdt/internal/compiler/parser/TypeConverter.java
+SHA-256-Digest: 77QsV8Aq6GklBI01Snt2giPjFWpXRmaa+NFUoHZRPwc=
+
+Name: org/eclipse/jdt/internal/core/search/AbstractSearchScope.java
+SHA-256-Digest: e2RPMv0VD8fxbK7srSaP8XVXo1L0/ZNmRnC3rqGnn8U=
+
+Name: org/eclipse/jdt/internal/core/index/IndexQualifier.java
+SHA-256-Digest: u0v7Dum1U3CjsSy61DXSFvh3Rbs1FtT6K06Fup2jDDo=
+
+Name: org/eclipse/jdt/core/dom/ModuleQualifiedName.java
+SHA-256-Digest: YjIrKWOnPfYkfhLs3Oni59Mw6DfWys/rt9FMSEOgoXg=
+
+Name: org/eclipse/jdt/core/dom/Pattern.java
+SHA-256-Digest: ArXjF7IxkKW4G/iyHHljqhlfX7L95Wp/dLFifpWLB3s=
+
+Name: org/eclipse/jdt/internal/core/ResolvedBinaryMethod.java
+SHA-256-Digest: fhAsFjkwXHqU3idsSQdgamGBhkgH9Kohjalo+I2ZKFM=
+
+Name: org/eclipse/jdt/internal/core/util/PublicScanner.java
+SHA-256-Digest: 2AUc9AisArsaLlJf6FdYCSiPkeEN+bFpOBZWhvHPQ9o=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/AddFolderToIndex.jav
+ a
+SHA-256-Digest: vxgXKGwjb2w7uj0r6kcL+NyCgFahYYP+xKBvfEZpo/M=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnSingleNameRe
+ ference.java
+SHA-256-Digest: bI6XPwP5Bj3OskzTKqunja3rhPZBtvvIL5eC0GKfBCM=
+
+Name: org/eclipse/jdt/internal/core/util/NestMembersAttribute.java
+SHA-256-Digest: rVbKntGbaZZpjnoZpzlrn+lNhHk1Gtddx0BTsJvHWCc=
+
+Name: org/eclipse/jdt/internal/core/XMLWriter.java
+SHA-256-Digest: TZbZ9I38aQnO0m2s9MXN8v7Thd9/QS79ZCNNVrZbilI=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetEnvironment.java
+SHA-256-Digest: yxDDeE0FpgBGANVdV0xvJ3UvQSnAB9FTj94FS1eheno=
+
+Name: org/eclipse/jdt/core/dom/ParenthesizedExpression.java
+SHA-256-Digest: qrD2p5flohOcckj8aLnc9oumOWohkWaGXB/k/7fUZg8=
+
+Name: org/eclipse/jdt/core/dom/rewrite/ITrackedNodePosition.java
+SHA-256-Digest: F2d2EVETI3oJVJoXAaX0so/LTUUi0Jn91W5QH/nBr+w=
+
+Name: org/eclipse/jdt/internal/core/ModelUpdater.java
+SHA-256-Digest: H38AW4llH0hSVa/8bGsQqFPbMTJfXzyNICGaSLSioaE=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnProvidesI
+ nterfacesQualifiedTypeReference.java
+SHA-256-Digest: qyPGVIdqd5p95oemVZ30Pi7rQFq0L42bg3wC5Rzbttg=
+
+Name: org/eclipse/jdt/core/SourceRange.java
+SHA-256-Digest: PI9m1LdPjFb6ayeXOollcxjLQAbVGDlKlk0Wsm4qrYM=
+
+Name: org/eclipse/jdt/core/util/package.html
+SHA-256-Digest: 3ty3M6m0xpAmXJMXnbXj76K13G8+Gy6VlQ/PO8QcMwA=
+
+Name: org/eclipse/jdt/internal/core/util/ConstantPoolEntry.java
+SHA-256-Digest: KvGHNlDCT2hI/CJiskgpu/rR+MTwCVc3+AElOglcWCE=
+
+Name: org/eclipse/jdt/core/IBufferChangedListener.java
+SHA-256-Digest: zy2uhNgy1VrvuEE5urc9Runc5WO8noZZ5T6h7SCkVlc=
+
+Name: org/eclipse/jdt/core/dom/ArrayCreation.java
+SHA-256-Digest: ooOnKDgx2MV+Cip70atwWd4OXAXFKGBj03LilqDoAJU=
+
+Name: org/eclipse/jdt/core/util/ILocalVariableReferenceInfo.java
+SHA-256-Digest: hipcp/4ivUiezmA8xSxLuYnfNThifedw/w2hxjCLjMo=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnMethodRet
+ urnType.java
+SHA-256-Digest: hMM2OuIPtFjPw7SxqPuRv2L220jfbnK86zvYAKJEEUQ=
+
+Name: org/eclipse/jdt/internal/core/search/matching/MethodDeclarationPat
+ tern.java
+SHA-256-Digest: ulGQzlXDog6JwSl3SfKy99IbOMNoi1GBAdDKDfAe7tw=
+
+Name: org/eclipse/jdt/core/IJarEntryResource.java
+SHA-256-Digest: h36iP0F/RovPmJ/zjOMIiLAdUe2asCfsqjZ0w4B0dmY=
+
+Name: org/eclipse/jdt/internal/core/util/BindingKeyParser.java
+SHA-256-Digest: xOM+kuHY5jPo5cR14Zy3VTfmpaBxGXZjEufyAzKplXY=
+
+Name: org/eclipse/jdt/core/IClasspathAttributeDelta.java
+SHA-256-Digest: qqoPRLMTFavA1zLLKyyjzTHUvgvnC+nAdIcmemLSwgM=
+
+Name: org/eclipse/jdt/core/ILocalVariable.java
+SHA-256-Digest: hhkbR55IMT7uDUayVXfysilRkdLi93qkgJRIc2u26vU=
+
+Name: org/eclipse/jdt/internal/core/util/RuntimeVisibleAnnotationsAttrib
+ ute.java
+SHA-256-Digest: 7356aqo8/+iktLrZXwDzXsUdmc1wwRe6OppHETurU5o=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/NodeInfoStore.java
+SHA-256-Digest: XDG7Bg8PZVxPERIwFuro2af5gqsR29Q2FoYTGAX8rCc=
+
+Name: org/eclipse/jdt/internal/core/search/matching/DeclarationOfAccesse
+ dFieldsPattern.java
+SHA-256-Digest: cmwQDzDfZULFr1rVXsrwa2mqtn4EKTp+Zg1CXm/tcPw=
+
+Name: org/eclipse/jdt/core/util/IMethodInfo.java
+SHA-256-Digest: N1unjKidB5DJb8etzefg/+B5S9oX1hPmWou5pI58xv4=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnJavadocAl
+ locationExpression.java
+SHA-256-Digest: tV5r5bFQ6UJ9S+qcmFaCrFrv1+5GvY8PGFIoRkRP++g=
+
+Name: org/eclipse/jdt/internal/core/util/FieldInfo.java
+SHA-256-Digest: Rgzcm4puGh2FwK+DuPhL0xJq3JSBwQpz3QmWiQmWciE=
+
+Name: org/eclipse/jdt/internal/core/Annotation.java
+SHA-256-Digest: mV+OuBXWgb9ht3EjzDDmcP19PORcvIR9Uw6Yw70mG18=
+
+Name: org/eclipse/jdt/internal/core/search/TypeNameMatchRequestorWrapper
+ .java
+SHA-256-Digest: NSAcjT1rSS3iTu2MBlq4akME/sYCCHXYM5dpPXhz8kg=
+
+Name: org/eclipse/jdt/internal/core/ResolvedLambdaExpression.java
+SHA-256-Digest: IjN5H9frufEg3qvzYv68EJr1rOUoJG8S4+3PVQH+wA4=
+
+Name: org/eclipse/jdt/internal/core/util/ModulePackagesAttribute.java
+SHA-256-Digest: 7F3x477ps3wqpd1gbawb1Ki+AEZmUul+VpfY+88LZB4=
+
+Name: org/eclipse/jdt/internal/core/util/StackMapAttribute.java
+SHA-256-Digest: 6oiULzv9U3d6FZfFzwEhAqgXGl9Kh0WzwqslPNjhe6g=
+
+Name: org/eclipse/jdt/internal/core/util/LocalVariableReferenceInfo.java
+SHA-256-Digest: rj7MKL3fslJlh9D9dZ5VOW59c60uNRUuOkdi5gHUD2k=
+
+Name: org/eclipse/jdt/internal/core/JavaNature.java
+SHA-256-Digest: LObWmwVGv1VTIFswNcub2TZmm+n3ggPCKhuHQBn63HI=
+
+Name: org/eclipse/jdt/core/dom/ArrayAccess.java
+SHA-256-Digest: CDMp4mqqDRcDFk5c482gvHLJ2zjESKMWNhQSBaDr//8=
+
+Name: org/eclipse/jdt/internal/core/util/LineNumberAttribute.java
+SHA-256-Digest: yofoXQdC273GdBGh6cHdiTDhwx7a6O6ZRUCPkAcWHK4=
+
+Name: org/eclipse/jdt/core/util/INestMembersAttribute.java
+SHA-256-Digest: YANrNSWk6WMs3JFWC7Ta7GL9MafSAFir3TxArXSRQF4=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnMemberVal
+ ueName.java
+SHA-256-Digest: ZWpWq92HEL3tNvwGfUOJUm8V9G1WquL25YGIoead7z0=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ConflictIdentifi
+ er.java
+SHA-256-Digest: 8yD2Ptk96z5lpwma8zWl/NOTerKbS1jxgj87MQI6va4=
+
+Name: org/eclipse/jdt/internal/core/hierarchy/TypeHierarchy.java
+SHA-256-Digest: w3yIr6w59O417Nz0OoOepIe4yUZesv2FLHm/50x+DxQ=
+
+Name: org/eclipse/jdt/core/dom/ModulePackageAccess.java
+SHA-256-Digest: 7Dg3X+o562GsxDv78BiORsUPWkFLwKvsSWf0EAFO3VU=
+
+Name: org/eclipse/jdt/internal/core/CompilationUnit.java
+SHA-256-Digest: zYLBa8rBL30iA/4KM36rQjtcNDJ9oSmWkrUlBq/Pavc=
+
+Name: org/eclipse/jdt/core/dom/RecoveredPackageBinding.java
+SHA-256-Digest: y70tqNk/csiSdlUcWeDog+CrnZ7VUQ7Shx98jjpWvek=
+
+Name: schema/annotationProcessorManager.exsd
+SHA-256-Digest: KPo0UazATIxGFn1VbEAV/v523cxYnD3lP2jG+A7wL2s=
+
+Name: org/eclipse/jdt/internal/eval/EvaluationConstants.java
+SHA-256-Digest: q05/TdlFPXrI2N5tEH/gU8+pnvCDxm/lKsXbW8U4M9s=
+
+Name: org/eclipse/jdt/core/util/IConstantPool.java
+SHA-256-Digest: cmO1KGqf6uD4OZ8X5rf1CWXQ3pDYJ1wLNTlZSdqU8q4=
+
+Name: org/eclipse/jdt/internal/codeassist/MissingTypesGuesser.java
+SHA-256-Digest: aQS3qCx/2wHZrfCG+kDbljKPTDXPQsbAw4vM/LrjKy0=
+
+Name: org/eclipse/jdt/core/formatter/CodeFormatter.java
+SHA-256-Digest: 4gnPRuI+FCm+2SorIFj2DKqNzmIlCSyswDxoywwPwPg=
+
+Name: org/eclipse/jdt/internal/core/util/AnnotationComponentValue.java
+SHA-256-Digest: RSDmjd6LoYS2sSPGqUWbWP/HMBFLsWmKBxE/R4y1cYA=
+
+Name: org/eclipse/jdt/core/search/MethodNameMatch.java
+SHA-256-Digest: sPUVf+YX4H4bNyvScZb0YB6kXKzch7z+R5gOn0Y2gHc=
+
+Name: org/eclipse/jdt/core/dom/IDocElement.java
+SHA-256-Digest: AjxQd+KjrVia6wshLNrl1JHvjP7CZPA2EZgSQGLekBw=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnKeywordMo
+ duleDeclaration.java
+SHA-256-Digest: 2URe0FTCAThdfnaXyy2A/31z8J8mM7ncWY9RaF7eC1M=
+
+Name: org/eclipse/jdt/core/dom/Javadoc.java
+SHA-256-Digest: wZCKiPDTymnFeaylLlyIS3Z2hapqTQoy5qNqaUMO4bI=
+
+Name: org/eclipse/jdt/core/dom/PrefixExpression.java
+SHA-256-Digest: Lm06bhxW3Ssfzvb7KYuqC0SF/Crf+R7A4163kN/Al/Q=
+
+Name: org/eclipse/jdt/internal/codeassist/CompletionElementNotifier.java
+SHA-256-Digest: cKCmFwqxkR5J3z3NyrYrQW5WxqE0oqOFjeQATGfw+vY=
+
+Name: org/eclipse/jdt/core/dom/QualifiedName.java
+SHA-256-Digest: QhAXDtSQloZ91v9vacqVvUS+rvva5EgTkTvjUGzyq/Y=
+
+Name: org/eclipse/jdt/internal/core/util/LocalVariableTableEntry.java
+SHA-256-Digest: HbFoWalJ/vFZMsBVFZ7JKO0BnhlNY6mwz7ktECIyKrw=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionNodeDetecto
+ r.java
+SHA-256-Digest: 7yZpKOmXV5bp31tS3kb8GfGqplv3bA7hZOwLniEOGL0=
+
+Name: org/eclipse/jdt/internal/core/util/SourceFileAttribute.java
+SHA-256-Digest: FiaBcM935wL7ldHSmPiUisY+HvIYjYzrXGePmfimk6M=
+
+Name: org/eclipse/jdt/core/util/IRequiresInfo.java
+SHA-256-Digest: jIqeDo3SCWPludqCnQtKqZuj8uzT/I4c3rTf2ZAPk84=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnFieldType
+ .java
+SHA-256-Digest: cUyXDxePhio5WryQuoXBF3z1OSe3PbPsMS2fAdsTqjc=
+
+Name: org/eclipse/jdt/internal/core/ModularClassFile.java
+SHA-256-Digest: U1ecY4YnQ9LlpVjoGkiq7Honz0IR9snN9S3y1pcIpcs=
+
+Name: org/eclipse/jdt/internal/core/JavaElementRequestor.java
+SHA-256-Digest: JtlQ9XCv7l+2kJiBrvTCfGmuoosNbVBQ2HmvWdIQqXs=
+
+Name: org/eclipse/jdt/core/dom/TagProperty.java
+SHA-256-Digest: 2M+hEt30+/B3FlxSliIMj3lociPGl4IBAvtemsd5DK4=
+
+Name: org/eclipse/jdt/core/CompletionRequestor.java
+SHA-256-Digest: J82XpIycK7wzXn6lEXtYZesykEdBnecFeLiKulA0OGg=
+
+Name: org/eclipse/jdt/core/search/PackageDeclarationMatch.java
+SHA-256-Digest: ovqX14yFC0EmdUARNB/f4iyBJH5AG/aOte45dnE02P8=
+
+Name: org/eclipse/jdt/core/util/IExtendedAnnotationConstants.java
+SHA-256-Digest: 3dKYT45ohVcdvPX8pUR6UkwDJYn7sctPqEBB4mrfbng=
+
+Name: org/eclipse/jdt/internal/core/NamedMember.java
+SHA-256-Digest: 27rSGYw891fWZvDTzfAS0Wdr5TQC6faukr0H4mcS73I=
+
+Name: org/eclipse/jdt/internal/core/builder/WorkQueue.java
+SHA-256-Digest: /jrT+rD+13NqQ5WM/mbWHoFw1FZuiVswgdjTp+rAUcI=
+
+Name: org/eclipse/jdt/internal/codeassist/ThrownExceptionFinder.java
+SHA-256-Digest: Ds1w5RLmcNOJ4rh+cig7s7eUEEINSq/ZMlVRoZOahqo=
+
+Name: org/eclipse/jdt/core/search/FieldReferenceMatch.java
+SHA-256-Digest: KJXjl4sFb6S7fmNuFPEBKWRy4m41HQScmrGke2QbcTI=
+
+Name: org/eclipse/jdt/core/dom/IMemberValuePairBinding.java
+SHA-256-Digest: UePT17ixLiyfIKPCkIrAUmCEMLnyMa+NfdkN4iHgd54=
+
+Name: org/eclipse/jdt/internal/formatter/LineBreaksPreparator.java
+SHA-256-Digest: tFFUNoOb4IkRWNsiLCQVawguUwsMgWeN8BB8Sk2n86k=
+
+Name: org/eclipse/jdt/internal/core/PackageFragmentInfo.java
+SHA-256-Digest: NymOIZvGsKg4T0SQgQYWQQHALAwZOJO3Ab30JsmmN5s=
+
+Name: org/eclipse/jdt/core/dom/CompilationUnitResolverDiscovery.java
+SHA-256-Digest: hTw+nkmVh3EkvHkL0gSe4XNLpaLiCa8IvDDtKrvo+Yc=
+
+Name: org/eclipse/jdt/internal/codeassist/ISelectionRequestor.java
+SHA-256-Digest: oB1n+e3ELQOLa/ewRkfJLylW2VHR7edrSheZsdHN9PE=
+
+Name: org/eclipse/jdt/core/dom/NodeSearcher.java
+SHA-256-Digest: sECJylXbfFT9XDKZICQg8zQBETG0tTQf8QYY7IBDLJs=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetSkeleton.java
+SHA-256-Digest: VDghDQz+CJvaTZSXg9ucBgSvfdvSf3J76Q9AzG7Gvh4=
+
+Name: org/eclipse/jdt/core/dom/DefaultValuePairBinding.java
+SHA-256-Digest: +ZY8DgDprhG8BJ3vv+GC94McnQNUshcbVSxxUbdNNRg=
+
+Name: org/eclipse/jdt/core/util/CompilationUnitSorter.java
+SHA-256-Digest: F6kqokuc5h9c1Urv6GZ63lLfdt6pW0JfQbLWLBe7FDw=
+
+Name: org/eclipse/jdt/internal/core/jdom/DOMNode.java
+SHA-256-Digest: xTvn1SjJ1B6/DroEq97RZbMGCXS/7tZUNrPgmHKP3is=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnExportRef
+ erence.java
+SHA-256-Digest: 54nXo3c8wH/XVaauZhDXvgiAfDCSccY54GNa93hdxCY=
+
+Name: org/eclipse/jdt/core/util/IProvidesInfo.java
+SHA-256-Digest: oWpwyMqovUnwZajlJuMi5rrvplK8jEIxDZYJoYY7uok=
+
+Name: org/eclipse/jdt/internal/core/util/ToStringSorter.java
+SHA-256-Digest: ZrXgTAAhPjkN8DYWYp3Ldwiu+wDDVZuYGAZh4Beky2g=
+
+Name: org/eclipse/jdt/core/CompletionRequestorAdapter.java
+SHA-256-Digest: rCN0my8M8eFDnyDBHbDAftQunlShudleizbKgGaekO8=
+
+Name: org/eclipse/jdt/core/dom/CatchClause.java
+SHA-256-Digest: x4KxeL5O3ay7BPDuf+8YbaJT9WXvtQSZzio+ajiM/OE=
+
+Name: org/eclipse/jdt/core/search/FieldDeclarationMatch.java
+SHA-256-Digest: foPCb5Bfa3Lvd9LruEK/lx8V3Zbn4IwKao5qD2anqvE=
+
+Name: org/eclipse/jdt/core/dom/ASTParser.java
+SHA-256-Digest: 5nXvuqLjOSB3f9WFab87NOkPzma6Vt2OfKJHNhh52F0=
+
+Name: org/eclipse/jdt/internal/core/search/PathCollector.java
+SHA-256-Digest: QlcN/lOgAMO2Jm+n5awCQaNSSc+9gPZ4y9iOdXr15zY=
+
+Name: org/eclipse/jdt/core/util/IConstantValueAttribute.java
+SHA-256-Digest: xUR5+3X7L1ccbuNxCO9k2z0qPlYjxRo6rsex4hBO5gk=
+
+Name: org/eclipse/jdt/internal/core/CommitWorkingCopyOperation.java
+SHA-256-Digest: 3BeL/qGW7zqq01Bd0hQ58hjq7dT74H7Bmp4ZBWUkn3M=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistAnnotation.java
+SHA-256-Digest: r5IW6TK/z/dSRXmxa2a9jNhNT+q9faDbHbDkp34H0EI=
+
+Name: org/eclipse/jdt/core/dom/Block.java
+SHA-256-Digest: pwmoCdkbySXwgPGt8HRM82/4sePSLT2Rcw6dwjCchzc=
+
+Name: org/eclipse/jdt/internal/core/ExternalFoldersManager.java
+SHA-256-Digest: UOMRRxr7Ck2Roep154K5a1Spj0V1rZrwtnhQCcK/H8Q=
+
+Name: org/eclipse/jdt/core/util/IOpcodeMnemonics.java
+SHA-256-Digest: Baj+NwBU1TeRZ6kLe/RtaWHnlaVYvB13Z8tdHjvIYiY=
+
+Name: org/eclipse/jdt/internal/core/JavaElementDelta.java
+SHA-256-Digest: HzcwBdXEDRMY5CRM8TaBDNZUMaVIuXZo8CIq+BQ6VVo=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/PackageAndContai
+ ningTypeImportComparator.java
+SHA-256-Digest: K8wyeR+Rtpp+2UlZvMmcNMN/cbU38y9hYXshQKpPe8M=
+
+Name: org/eclipse/jdt/core/IAnnotatable.java
+SHA-256-Digest: arIYCqNAVXnm0zFMBKpToZOZMmHa8h1LZPcwKQDtPug=
+
+Name: org/eclipse/jdt/core/JavaConventions.java
+SHA-256-Digest: vyuJB6Gkvra3bqvSX/2eHDy41TVIpmUd1vW6US7VM3g=
+
+Name: org/eclipse/jdt/internal/core/search/matching/ImportMatchLocatorPa
+ rser.java
+SHA-256-Digest: 2iqjYJBWJdOLmFoszSv8cgcN23qe5zvYrb9u9cKs3oY=
+
+Name: org/eclipse/jdt/core/util/IExceptionAttribute.java
+SHA-256-Digest: xZNWVadP+U9gopKunmEhRAg8Gl/Y/m+3g6+gwM9c8PM=
+
+Name: org/eclipse/jdt/internal/core/MemberValuePair.java
+SHA-256-Digest: uz3OIjkvIbCWdwKJqmPgHBgfK/EclL3pOEcFeG0wDNY=
+
+Name: org/eclipse/jdt/internal/core/util/LocalVariableAttribute.java
+SHA-256-Digest: uWuCndof/WH7zzUqExsKnzkwfOgrFCpMaVUAljULR/c=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ImportName.java
+SHA-256-Digest: Qegm7vEj8b1rQ6dKII2BqNCUXtwhgWt0+VlP8/5QxtM=
+
+Name: org/eclipse/jdt/internal/core/DeleteResourceElementsOperation.java
+SHA-256-Digest: DmPFhgzClKmQVQd9LzDpI2Rp5+BK4JBSuSPpPdGe6xA=
+
+Name: org/eclipse/jdt/internal/eval/EvaluationContext.java
+SHA-256-Digest: vmKmU0HcIfN1WRl3cUkEhLoLZk+e+oUJTCBO9s647FM=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/QualifierQuery.java
+SHA-256-Digest: OCeXZxNJaXUNRZAgykSuCnoQ6PK6MJiafR94ey9RrDI=
+
+Name: org/eclipse/jdt/internal/core/search/matching/SuperTypeReferenceLo
+ cator.java
+SHA-256-Digest: wm2R04qY6WY7++7dt/bve6JbTDmddJ0B1hh0w9fpByo=
+
+Name: org/eclipse/jdt/core/eval/package.html
+SHA-256-Digest: yWtN4dlkX2rxRbNIYreeyzh3aIZes6/j8twOou+b/Jw=
+
+Name: org/eclipse/jdt/internal/core/ExternalAnnotationTracker.java
+SHA-256-Digest: I7idZwPEQa1aA+t4/Vc5J8OgXuWJSZFs2/YB1lK48A8=
+
+Name: org/eclipse/jdt/core/dom/NodeEventHandler.java
+SHA-256-Digest: 5683mCwxTK8NMlW5DZZbGIOLntEzZtlpybFwfUVs0sk=
+
+Name: org/eclipse/jdt/internal/codeassist/ICompletionEngineProvider.java
+SHA-256-Digest: UmfYfK4RZdIV6pCor2j6yz6bfUyNlepyhyIsfwZvVLg=
+
+Name: org/eclipse/jdt/core/dom/CastExpression.java
+SHA-256-Digest: WO32PWH2qMylP9Mj/pRzfLxhqhtlS+lVxMVlmS1O3FE=
+
+Name: org/eclipse/jdt/core/IRegion.java
+SHA-256-Digest: EfPc6+WLRbFf7q7pcrDlcqR5S1Wq3zLcsiz8WnRx8G8=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnExplicitC
+ onstructorCall.java
+SHA-256-Digest: qssEMH5A5rQ5L1MRkFycZpS9ovB72CEez/0jLdKbbX0=
+
+Name: org/eclipse/jdt/core/formatter/package.html
+SHA-256-Digest: irD3beKVv3+L/+JFOSILp4l32uLJMiZb4vXKcVQuWxg=
+
+Name: org/eclipse/jdt/core/util/IPackageVisibilityInfo.java
+SHA-256-Digest: c+Pl9ekMHYLNCWLIfilWFaCRRCzRDghPa1MsWrQpzZQ=
+
+Name: org/eclipse/jdt/core/ClasspathContainerInitializer.java
+SHA-256-Digest: DsdcFnOn4dPOVFirnDdjR5j6XsI/qc+NB3m/WMn8gFE=
+
+Name: org/eclipse/jdt/internal/core/util/InnerClassesAttributeEntry.java
+SHA-256-Digest: SxXok8xPQrCZhVmCjc7Cll6NQCywrkSrSiBMhkWlI/M=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistInitializer.java
+SHA-256-Digest: ir+qEucWutm2xQbSQaCUUkDvuwcg7pWPhV9N4jHTjlQ=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnProvidesI
+ mplementationsSingleTypeReference.java
+SHA-256-Digest: R7qLcGMfK79COjUojyjIUrUNOHYTdvP8N0EanYXF5gY=
+
+Name: org/eclipse/jdt/core/jdom/IDOMImport.java
+SHA-256-Digest: bUVyecNRR4ZIz1GIkWT2YOva0wxP4oO02091XffoUlo=
+
+Name: org/eclipse/jdt/core/util/IModuleMainClassAttribute.java
+SHA-256-Digest: uJvzIKBduQ/GzSyyDiA+BNIZbL0Pr+uNWN9Rld/pubY=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnFieldType.ja
+ va
+SHA-256-Digest: cft749AZaoPdCYODxdAJ9PSUn/AhxmltSFEFsC6X/kY=
+
+Name: org/eclipse/jdt/internal/core/JavaElementDeltaBuilder.java
+SHA-256-Digest: dvKXAYqAxDO9v8wtBOd0+04sNGIGDIdaZghPt3urm4s=
+
+Name: org/eclipse/jdt/core/dom/ChildPropertyDescriptor.java
+SHA-256-Digest: S39xuL++kaC0c7pPGSaKgohEI3MBUKaMdapNKQnvy9M=
+
+Name: org/eclipse/jdt/internal/core/BufferManager.java
+SHA-256-Digest: oX7LlPtMab62cfarjG4Sb2OQ8AkZtcn1sIW217QB5S0=
+
+Name: org/eclipse/jdt/core/util/ByteCodeVisitorAdapter.java
+SHA-256-Digest: Xc0so3MpAc+q8pEOvsY5IgOPTfuKsKY9wKIbHMRsWVA=
+
+Name: org/eclipse/jdt/core/dom/ThisExpression.java
+SHA-256-Digest: ue9ICOFxLKwxzp2M9By8rOPa2U3qQWC3h2Z1JpMIH68=
+
+Name: org/eclipse/jdt/internal/core/JarPackageFragmentInfo.java
+SHA-256-Digest: VTrxk29TDwFukMtaVRaShN1v3aHRmG6jJsoQimE1SJo=
+
+Name: org/eclipse/jdt/internal/core/ModulePathContainer.java
+SHA-256-Digest: BEukn4WIYMbUxB/KNvkzQuYJWsABLnJ2DshsuTxmiIU=
+
+Name: org/eclipse/jdt/internal/core/SelectionRequestor.java
+SHA-256-Digest: 4V5BuNkf0yAetp6EyO6P9gTuoMwOWWIZMPHNk1zdeC0=
+
+Name: org/eclipse/jdt/internal/core/MultiOperation.java
+SHA-256-Digest: ZgoC1yJ+ZhQNfjHQjVaJ1w3JZ+1TsUDASF3oX1T7gSU=
+
+Name: org/eclipse/jdt/core/util/IRuntimeVisibleTypeAnnotationsAttribute.
+ java
+SHA-256-Digest: /QWVpBYtgLG/QnVF1CiRCHctpMepvnLuUc6OfxAIUb0=
+
+Name: org/eclipse/jdt/core/IMemberValuePair.java
+SHA-256-Digest: GVXbjSiEVnWg3GjYwaPpCe+Fqw6aeEgk/CZFX/4Zhxk=
+
+Name: org/eclipse/jdt/core/formatter/DefaultCodeFormatterConstants.java
+SHA-256-Digest: 0N8H5zdBCEiOLXFZrsU5MNbJKIHksJO3Dw5taOa9qpU=
+
+Name: org/eclipse/jdt/internal/core/InitializerElementInfo.java
+SHA-256-Digest: yj12IoCqSvagYPDJJa1smRGoB0aMhOl65AF6/tWoqfg=
+
+Name: org/eclipse/jdt/internal/core/util/RuntimeInvisibleTypeAnnotations
+ Attribute.java
+SHA-256-Digest: FZ1phDJn2Sa3gGGggHY6WQFb1ylyR0QqB5OV/wyxgOg=
+
+Name: org/eclipse/jdt/core/dom/AbstractTextElement.java
+SHA-256-Digest: QwDNMm3eKtnhRjeQMWvCLLK2Fe0qB3ystf3fr5OCgr4=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnClassLite
+ ralAccess.java
+SHA-256-Digest: GVdxR6XaVqQHiiENwN/HxWD0pfQEcztwVqjm+bWO9bE=
+
+Name: org/eclipse/jdt/core/ClasspathVariableInitializer.java
+SHA-256-Digest: SBh3bqPLfFfDVODhmCXWGoDY40sVTtGZaHvUfTND7Q4=
+
+Name: org/eclipse/jdt/internal/core/Initializer.java
+SHA-256-Digest: gpzj40T5SAbwJj8zr8fZ5zYDaVCB4Z6W97bv7uWQpZs=
+
+Name: org/eclipse/jdt/core/jdom/IDOMFactory.java
+SHA-256-Digest: 6LUlLvAEiQHyzviwkMxj/gvidJa6ty8B5sVgWAWaad4=
+
+Name: org/eclipse/jdt/core/search/TypeParameterReferenceMatch.java
+SHA-256-Digest: jPG3iDu2ViAvpNGn0zVhtKeZ77P6+y/z/spS/WUx/VA=
+
+Name: org/eclipse/jdt/internal/core/search/PatternSearchJob.java
+SHA-256-Digest: hdhbTDiERU6MW3IXriI2D484I8P/bokcRGTkHNMRSn8=
+
+Name: org/eclipse/jdt/internal/core/util/StackMapFrame.java
+SHA-256-Digest: /siqNecj3R+oHZooWlOIx+nvlPiliP20A9ziiVVB2OQ=
+
+Name: org/eclipse/jdt/internal/core/search/matching/MatchingNodeSet.java
+SHA-256-Digest: +o5mMgSW/eLf8Rom6h5JFXtygE3JmMOkDzYo6G9gJnk=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionJavadocPars
+ er.java
+SHA-256-Digest: UHK7/guHMDdF9/yxI6pFliXB/+BWcbeAjHhkwLmVox4=
+
+Name: org/eclipse/jdt/core/dom/rewrite/ListRewrite.java
+SHA-256-Digest: 3pyCrWyD5eivqf3mF0vc5nTAbxBoTQiwWnLOt4Cc8+U=
+
+Name: org/eclipse/jdt/internal/core/jdom/DOMType.java
+SHA-256-Digest: nGvdrsrAmES7TyfvafIVyMo6l9oogzneCV2o7mTDyOM=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnStringLit
+ eral.java
+SHA-256-Digest: I3GAnfNsOkJmZgdXf/rsiuiwzwqH/pCkwmqHXdlkkE8=
+
+Name: org/eclipse/jdt/internal/core/ClassFileWorkingCopy.java
+SHA-256-Digest: OTUFxJGlz1jwNRXedi+GGGRaO6DCiP0UX7Uqe/z5Xx0=
+
+Name: org/eclipse/jdt/internal/core/ExternalJavadocSupport.java
+SHA-256-Digest: w6r1NqAYa7o+9dNrfETioWG2hHBOdYMKMffJht/E1iM=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnImportRefere
+ nce.java
+SHA-256-Digest: uTx00w85fyfSCaqhPVmVGAL//NhYq0gcJGyRs4lSHY4=
+
+Name: org/eclipse/jdt/internal/core/ImportContainer.java
+SHA-256-Digest: PpUPDCH0wMj/vL80gF8o93nEMV1/r2Zj8KEdGEM97g0=
+
+Name: org/eclipse/jdt/internal/core/util/LocalVariableTypeTableEntry.jav
+ a
+SHA-256-Digest: 2oDRxKpsP/ivC1XyJoFhSZeeRJSFxXQxsa/N046jyEE=
+
+Name: org/eclipse/jdt/core/CompletionFlags.java
+SHA-256-Digest: Vm81ASAqOcUQB443dpOzWiOd52HL1sTE7qpxl8Cw/gE=
+
+Name: org/eclipse/jdt/internal/core/BinaryType.java
+SHA-256-Digest: HGwORGMiCxMAk5X9XCCp54TSCyjCd/T4f6mXg23vJMQ=
+
+Name: org/eclipse/jdt/core/dom/MethodRefParameter.java
+SHA-256-Digest: MhWZR/ketCrMN7B2frWVKdWTucYG3h44CCm+Lh1ufXM=
+
+Name: org/eclipse/jdt/internal/core/DynamicProjectReferences.java
+SHA-256-Digest: 6dNJJQ913D6dAN6ziWJfRXx7RyjFrkZpDD0Kw5IYUcc=
+
+Name: org/eclipse/jdt/internal/core/INamingRequestor.java
+SHA-256-Digest: D1bqPIHKK6a/+2RN+Mt1w8zKJfN4kML52+Xoccklyjc=
+
+Name: org/eclipse/jdt/internal/core/builder/ClasspathJrtWithReleaseOptio
+ n.java
+SHA-256-Digest: dtselG1GrgTRgDwobNTBTjOH1vX1wqS5QLMon/Vt7iQ=
+
+Name: org/eclipse/jdt/internal/core/util/NestMembersAttributeEntry.java
+SHA-256-Digest: rOxeCqOpNUoj2ryXYSulIhW6uoQ7YsTn+o4hl2Mhp/k=
+
+Name: org/eclipse/jdt/internal/core/search/matching/TypeParameterLocator
+ .java
+SHA-256-Digest: xXbKszGvmrGjtEAE2z65sc+mn1lxpzRTo1BAqubX390=
+
+Name: org/eclipse/jdt/core/search/MethodNameMatchRequestor.java
+SHA-256-Digest: ybo5U9Una+h+ApWO0pYRjNrvkSnVZVq2d3UM6d1ls4I=
+
+Name: org/eclipse/jdt/internal/compiler/ICompilerFactory.java
+SHA-256-Digest: QI0PSMdAjHVyurJ7ekvsFFk8N5+fyQdadgU7nugGgFE=
+
+Name: org/eclipse/jdt/core/dom/CreationReference.java
+SHA-256-Digest: GTtlhEG4G32s0yZUFhcbM/KKaxWi9iK3H/q9AH9jTcY=
+
+Name: org/eclipse/jdt/core/util/ILocalVariableTableEntry.java
+SHA-256-Digest: QmBVAJEkpkO0kxdRjPlqdp08lv7lOVa72AMyKe/wHw4=
+
+Name: org/eclipse/jdt/internal/core/UserLibraryClasspathContainerInitial
+ izer.java
+SHA-256-Digest: kuUl17g5x1pfvPG2ORHTfK5ye+UsBlhcPeSYAh7nYj8=
+
+Name: org/eclipse/jdt/internal/codeassist/CompletionUnitStructureRequest
+ or.java
+SHA-256-Digest: wNG4+1OEWoJ5YvffL+eup1xUUzIoAFL2rjOIDK0z72A=
+
+Name: org/eclipse/jdt/core/IJavaModelMarker.java
+SHA-256-Digest: E+0c8uIrv7ERENmAJ9ujPoH3gFcHouYSShpmU9h5AWo=
+
+Name: org/eclipse/jdt/internal/core/ModulePathContainerInitializer.java
+SHA-256-Digest: NqyuqPBCo1QLVoCzPkwLZDwX+OPUqZAagu2RAe3e2k0=
+
+Name: org/eclipse/jdt/core/IBuffer.java
+SHA-256-Digest: Lydkc2BlTIAfb9q1jqcLjjpPhS+uqQzxGkryATdVUr0=
+
+Name: org/eclipse/jdt/internal/core/hierarchy/HierarchyBuilder.java
+SHA-256-Digest: nKdXBx8wvue5iCDL3dPDLg1xNMIlksR1sK2kTJ72YVI=
+
+Name: org/eclipse/jdt/internal/core/builder/BatchImageBuilder.java
+SHA-256-Digest: CU/RkSvIW/Bfo+hdGol8/ZsCpX9Cwfi+1KjC9XCs0K4=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/StaticConflictin
+ gSimpleNameFinder.java
+SHA-256-Digest: yUhzVB6PyqfPEwkIDyhzMUHvChKmlxxbvxxya2cZLFo=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetScope.java
+SHA-256-Digest: i1p+HGQwD/+7GKSHtgi/u6gNhqY6vSibGpZ4wJvxJd8=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/Keywords.java
+SHA-256-Digest: VXI3VtgaGMW7F9svwaxwUpgonrVuC4hapWGerg79Agc=
+
+Name: org/eclipse/jdt/internal/core/dom/util/DOMASTUtil.java
+SHA-256-Digest: YP3fUFGCh2z0Zml+oWVqBEGrlT94WX19V9qa+jtUip8=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/SourceModifier.java
+SHA-256-Digest: SsqKFqv+MmshLDZ8NTBDZ/IwPb8SWOGUsZWpTf74ARU=
+
+Name: org/eclipse/jdt/core/dom/PatternInstanceofExpression.java
+SHA-256-Digest: 7PJy9ERd0M/aNDiBb3AqLqYupzgn2GMnvF76/yNwCRI=
+
+Name: org/eclipse/jdt/internal/formatter/TextBlockReplacePreparator.java
+SHA-256-Digest: QC7ROK+dUEh/7yGotrxtMpLyrDbmvx6ruoVuS4wfaKk=
+
+Name: org/eclipse/jdt/core/dom/DefaultASTVisitor.java
+SHA-256-Digest: gDAoICkDEGR5za25dgqoBC5NLLX6kAjukHWXqIneSBQ=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnSingleTypeRe
+ ference.java
+SHA-256-Digest: SE2O+cCsdzUpeTHdt6CgIwbCGno44Bk7ZhE1306rFks=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ImportsDelta.jav
+ a
+SHA-256-Digest: w5WyL8k4UTmWAGzZKLUEsob2rhNc7k5zFczTVoj1R/M=
+
+Name: org/eclipse/jdt/internal/core/index/MetaIndex.java
+SHA-256-Digest: 8ZJaHg5CPbY2XtZHyF5dWQRL+hREIy5MkUiImTqAKYw=
+
+Name: org/eclipse/jdt/internal/formatter/TokenManager.java
+SHA-256-Digest: t8psbIrqXMWxrgtL0ptvIzBUYapbeyrqJ6dxw30+THE=
+
+Name: org/eclipse/jdt/internal/core/PackageFragment.java
+SHA-256-Digest: yOSFkUH05h7vuP3qsBevSXU59OnFwlg5q+D2EFEWhmE=
+
+Name: org/eclipse/jdt/internal/core/search/JavaWorkspaceScope.java
+SHA-256-Digest: S221DOlPNl7YPH6Zff2OoKbKuU87MRr0b8dgS/qH1fY=
+
+Name: org/eclipse/jdt/internal/core/JarPackageFragmentRootInfo.java
+SHA-256-Digest: E4i/FpIJ3rINg/L2mZF1uTiKSYQxlIGVEh9fCDVs9S4=
+
+Name: org/eclipse/jdt/internal/core/SourceModule.java
+SHA-256-Digest: lZyMBokXer/X2MgmEyXIWKKuFEjqGX7PwN/lqptXEs8=
+
+Name: org/eclipse/jdt/internal/core/search/JavaSearchMethodNameMatch.jav
+ a
+SHA-256-Digest: 63TLlCpGfXzAevYCTW7YQD+FJnFJY/Myw+0PfsysKZ4=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/AddJarFileToIndex.ja
+ va
+SHA-256-Digest: sgnGtXjzvQ0CvmvFL7gafJZVAN8GSw3jvDpoIlKVB3U=
+
+Name: org/eclipse/jdt/internal/core/Member.java
+SHA-256-Digest: XILWboo+2uTDnukv0oQ6KU2YQw0LURbefWTb3ypThd8=
+
+Name: org/eclipse/jdt/internal/core/jdom/CompilationUnit.java
+SHA-256-Digest: uqDWCYM+fYF9+TAuZ5SVdfG/Lk7ZR7CQpNo8YJQRIRw=
+
+Name: org/eclipse/jdt/internal/core/search/matching/TypeDeclarationPatte
+ rn.java
+SHA-256-Digest: oOtq0v+6pQOW0GKd2NoTLlI8gjyPs3GtBxlrKpu0rsc=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetParser.java
+SHA-256-Digest: /yInmhwNTvLGOKjpw8k/6PgQplZBarEd2+v9eH2WpOo=
+
+Name: org/eclipse/jdt/core/ISourceReference.java
+SHA-256-Digest: CRSqRazW9bEy/GgzTYAJef02U/cr+Gyf1TTChAYd+0M=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetAllocationExpression.java
+SHA-256-Digest: vH/rrrsxbIlSRFFElHerHAt3YvjNLyWVBuzP32x98bM=
+
+Name: org/eclipse/jdt/core/dom/SimpleName.java
+SHA-256-Digest: Zi6Ofck8k6e3jZCdoPIE04JdEku646GaTiPEMbiWYWQ=
+
+Name: org/eclipse/jdt/internal/core/util/StackMapTableAttribute.java
+SHA-256-Digest: XRbarjtd+yvYpo4plqSHpkxoohANKzWVt5zWVQCBi+I=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/OnDemandReductio
+ n.java
+SHA-256-Digest: 8dpNpRGYgzs0nHPbj/pfDsRurIw3blvNSgCzo1sgCQs=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/AddJrtToIndex.java
+SHA-256-Digest: 5VbIzUf2u7tX9+WWj2MFyHCtNeGPxB5W9or0di09cRM=
+
+Name: org/eclipse/jdt/internal/core/LambdaFactory.java
+SHA-256-Digest: bJNoEVvFjF7HZ1nH2PaJjcnoy/68XgQyEi7jSXwp+tU=
+
+Name: org/eclipse/jdt/core/dom/FileASTRequestor.java
+SHA-256-Digest: tChJ1UcSSawW4pB4Izp2U7+fHzC6sd+1QnD0uVQOBpg=
+
+Name: org/eclipse/jdt/internal/core/search/AbstractJavaSearchScope.java
+SHA-256-Digest: LfIw8cUJonqS6BlTrLdu1rwfOPsT6CtCP699DufKz3c=
+
+Name: org/eclipse/jdt/internal/core/util/NestHostAttribute.java
+SHA-256-Digest: qOjbBdqVzY8ZMsKCqUrkKpeASuwLyv9xOz8iD4fMMpk=
+
+Name: org/eclipse/jdt/internal/core/PackageDeclaration.java
+SHA-256-Digest: o5x0sWSjRWwcJTyEdYiPCarR9ZTjJMd+21A1QBWqyxM=
+
+Name: org/eclipse/jdt/internal/core/builder/ClasspathMultiReleaseJar.jav
+ a
+SHA-256-Digest: Zx9Jt8V+V8H3j751N9wYWRf3RX4DHsAHQz1KmhAAM5Q=
+
+Name: org/eclipse/jdt/core/util/INestMemberAttributeEntry.java
+SHA-256-Digest: oQk/2VQxJerg4VTJXg6t9w/vj1KJ/FYjPNMB3xrAKdE=
+
+Name: org/eclipse/jdt/core/dom/ASTConverter.java
+SHA-256-Digest: MEcV2iGDTH0EF0kuPORHs5HTgRVLBaxJ5iyknMxNMhY=
+
+Name: org/eclipse/jdt/internal/core/builder/ClasspathJrt.java
+SHA-256-Digest: tJ/XlwWWxt7Xr8tJwBpF7qRuH+igKgjcPExNlNvFUDw=
+
+Name: org/eclipse/jdt/internal/core/search/matching/JavaSearchPattern.ja
+ va
+SHA-256-Digest: DtMNAQsAEhoRpaJQxgz8f6Qg7PFuuOuSj7QpaBEga5U=
+
+Name: org/eclipse/jdt/internal/core/JavaCorePreferenceModifyListener.jav
+ a
+SHA-256-Digest: TUzHT5feu41dYi7i1y0qmWK4Km2+8noYjiwlczAy1m4=
+
+Name: org/eclipse/jdt/internal/core/util/ExceptionTableEntry.java
+SHA-256-Digest: 0IRCvKUccgxNhl95ZjZsJ/aoPgTk0EYBeHW0rnRjM9M=
+
+Name: org/eclipse/jdt/internal/core/ASTHolderCUInfo.java
+SHA-256-Digest: A55paEQa2BalyycZEQ/9JK1e75Q0DwujmVNAVO5nF8w=
+
+Name: org/eclipse/jdt/internal/core/CancelableNameEnvironment.java
+SHA-256-Digest: 7e3gMh3Vw5Rt07pO64BplRTXr552PKz9zH1GXWYobho=
+
+Name: org/eclipse/jdt/internal/formatter/linewrap/CommentWrapExecutor.ja
+ va
+SHA-256-Digest: NrVBVxlpM1T+FzaJ7gxe0PzhLAgIlbwRnwrpllnKST8=
+
+Name: org/eclipse/jdt/core/dom/SuperFieldAccess.java
+SHA-256-Digest: dtNPdY4/cRB/KEq1feGq6Rp5VhUaITTDvUeg5DPl028=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/ASTRewriteFormatter.java
+SHA-256-Digest: ztjPjE4YaJlfyqQrQmGwmio6s9PmKsy4sz+gwvDk0pg=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnQualified
+ NameReference.java
+SHA-256-Digest: 7C76yzRlyXxKGwMCjPSY9nZqw8sstEBzSVr0SuObZYo=
+
+Name: org/eclipse/jdt/core/dom/rewrite/package.html
+SHA-256-Digest: t4bMgRxSMb7uIx9DIfLUc9+WW6x4D9foShCHTCnGofU=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/BinaryContainer.java
+SHA-256-Digest: 4PQufah8NC12gqrk746wvCL+L5riLnufaSU+uEfrP90=
+
+Name: org/eclipse/jdt/internal/core/SortElementsOperation.java
+SHA-256-Digest: KwUobQQpqZgLqj/+ix7sxy5wwqBQOVHfYqr0fXH9WyA=
+
+Name: org/eclipse/jdt/internal/core/InternalNamingConventions.java
+SHA-256-Digest: 6dWxNcrnF3W8Jsz061R6Zmp1FPTlwBbSqpbacv/14no=
+
+Name: org/eclipse/jdt/internal/core/util/messages.properties
+SHA-256-Digest: EAY50GLPxF2Rs2S+gbq2RXJHnexcd7sRmyuybdbxrCI=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/RestrictedIdentifiers.jav
+ a
+SHA-256-Digest: ZPeH42X4Lih+jr54e/YGh3P9oFBSfYLM8cMti6Wj4fI=
+
+Name: org/eclipse/jdt/internal/core/util/Util.java
+SHA-256-Digest: TSvWPpizyfOkdneINsH/Y9CX+TB89c8OCTqjT1SjDzA=
+
+Name: org/eclipse/jdt/internal/core/PackageFragmentRoot.java
+SHA-256-Digest: KWdpw0NTrgr7B9lL9O3Hzx79eBxDNNU+2w0dzfCUl8o=
+
+Name: org/eclipse/jdt/internal/core/SourceConstructorInfo.java
+SHA-256-Digest: ggROGpyVWpJyqSFUq3VqhzJTitettMDciqbiw+/v1oA=
+
+Name: org/eclipse/jdt/core/dom/OpensDirective.java
+SHA-256-Digest: b/JiIfqlbUbXKjdaUZ/Vs/ScEY1Zg6EKJbeJF8Xo298=
+
+Name: org/eclipse/jdt/core/util/IBytecodeVisitor.java
+SHA-256-Digest: +jV2Gou5eeGFYwDxLpYUcZTUbeJyJeKnI3yBvccLig4=
+
+Name: org/eclipse/jdt/core/dom/GuardedPattern.java
+SHA-256-Digest: WucVZu2GDn/6+d3H0ZNT1+OGonOH7PMBz1do2NkJdvk=
+
+Name: org/eclipse/jdt/internal/core/util/BootstrapMethodsAttribute.java
+SHA-256-Digest: CAmhMYRXGxFGlZxEKySyIdCaG2C2/T8gn3A46NtQwhY=
+
+Name: org/eclipse/jdt/internal/core/SimpleDelta.java
+SHA-256-Digest: dlFEuiTZ8nD97Z3tKkR7Pgcqf2nwhr4C9ROggvQTG3k=
+
+Name: org/eclipse/jdt/core/search/SearchDocument.java
+SHA-256-Digest: rRkETmfZQZKcHlEtfM6lAtrvWqB+pRmxplFcD7zNPwI=
+
+Name: org/eclipse/jdt/core/dom/ASTVisitor.java
+SHA-256-Digest: OG9bcWyUzkGPD2nD0x09VTw8V1uu6RqMGZf5ZltR3RQ=
+
+Name: org/eclipse/jdt/core/dom/MethodRef.java
+SHA-256-Digest: mekfoPH4AywBzXK4G78bJXHk1vAyv1RJcjBc7q2DqoQ=
+
+Name: org/eclipse/jdt/core/util/IConstantPoolConstant.java
+SHA-256-Digest: P/sIXllGAsnOSE3X2kMKSWQm9oGikSKXLKomBPyM7WI=
+
+Name: org/eclipse/jdt/internal/codeassist/CompletionRequestorWrapper.jav
+ a
+SHA-256-Digest: dJZN36nDS48/RBhsBlyo378CzXjkt0LrYYEFdpbOsf8=
+
+Name: org/eclipse/jdt/core/dom/ASTNode.java
+SHA-256-Digest: Gj8WDXrM/m6m1SjCLchS/G4s4Nn9BgpEqUqBvkWMZwg=
+
+Name: org/eclipse/jdt/internal/core/dom/NaiveASTFlattener.java
+SHA-256-Digest: aNhSJz9rgtuNznkde6bfn2evp36TY11HcYJRx6BVyeA=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnAnnotatio
+ nOfType.java
+SHA-256-Digest: rNPtrsvoGglAsCbggcUKntBGyW7JSsAP0VjXh4uX65M=
+
+Name: org/eclipse/jdt/core/dom/SimpleType.java
+SHA-256-Digest: r+ETQUYXHX+5Ceg7HAGSl49VtBc+RcSRX+ZaDPH3LvE=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetFieldReference.java
+SHA-256-Digest: ysbn7cFKGlmYscqzW9fyE0OaJryjV1rIgxURA5vM1Sg=
+
+Name: org/eclipse/jdt/internal/core/ResolvedSourceType.java
+SHA-256-Digest: yA+RTrl5h9woBhS3kRyXVqDtuWsgA/SeVXrgNAp0vwo=
+
+Name: org/eclipse/jdt/internal/core/CompilationUnitProblemFinder.java
+SHA-256-Digest: o8yCEgkKuNTnLIsMrjJKA/yD4Vp13MzbvPLXeV09RwY=
+
+Name: org/eclipse/jdt/core/dom/TypeBinding.java
+SHA-256-Digest: XOOzzGr6PqsxVCGvaYaChjf8OgGjmMwbijCmyku4WXU=
+
+Name: org/eclipse/jdt/internal/core/util/Messages.java
+SHA-256-Digest: 3HPtDJ+Ctp0YXooo3Uu5jUp1G002DG4haSlZ8Y42Rz0=
+
+Name: org/eclipse/jdt/core/provisional/JavaModelAccess.java
+SHA-256-Digest: xJN3d6thHmD5J/K1KKlNzuVmZ2GXSBHaVGxJsKHL8aE=
+
+Name: org/eclipse/jdt/internal/core/Module.java
+SHA-256-Digest: J7N1QMdp/WZr+NlvbzeryMeTIHaheoWa2N1Yd/ZAMIs=
+
+Name: org/eclipse/jdt/core/search/ModuleReferenceMatch.java
+SHA-256-Digest: mZRpM26tcJ6OlT+DPR1Q0NfOYINblsMfIx/lyGi5XUk=
+
+Name: org/eclipse/jdt/internal/core/SearchableEnvironmentRequestor.java
+SHA-256-Digest: /rTE7siG++O9Y3ZRThbMeFIWBUqC2QaWdpOCO2ATZRU=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnReferenceExp
+ ressionName.java
+SHA-256-Digest: SGxXXjwwKWt7CYbck5aYceQ/h1YcbKstcVQZBOWx0bo=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ImportRewriteAna
+ lyzer.java
+SHA-256-Digest: 3dCSWfu4NoES1TfGSYnZOgh5BEzzspO1VPDqZGLqbog=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/BinaryIndexer.java
+SHA-256-Digest: w/jYccOWe91lUd3iUknqWowofK4SlAK7+T+3QUdlISk=
+
+Name: org/eclipse/jdt/core/IModuleDescription.java
+SHA-256-Digest: +E5jlN88c30GzFRJeGAH9cKdDnJFL1OWiJ0Sqzdxbd8=
+
+Name: org/eclipse/jdt/internal/core/MoveResourceElementsOperation.java
+SHA-256-Digest: DLgvaF9bfarmBne43tHv5jucJ5y8bNCFZUeYULFvB6w=
+
+Name: org/eclipse/jdt/internal/formatter/SpacePreparator.java
+SHA-256-Digest: GxwsqL2CvobrsF0h2r7quihkF3Y2BsfxsKBJ/ZoEVWE=
+
+Name: org/eclipse/jdt/internal/core/util/ConstantValueAttribute.java
+SHA-256-Digest: +9DeI295Z3XmpmPEEQlV/69A+HSr7MKjNs5Rg7uA8t4=
+
+Name: org/eclipse/jdt/core/dom/SynchronizedStatement.java
+SHA-256-Digest: 0nS8q/ClNzxcgmK2sVxZ9GmNFbKUZ1AeNFo9ATpTUCg=
+
+Name: org/eclipse/jdt/internal/core/search/matching/DeclarationOfReferen
+ cedMethodsPattern.java
+SHA-256-Digest: v3EUxatNpkdORimRCLejeNQf3yhzSAyeg3JK+9gE38M=
+
+Name: org/eclipse/jdt/core/IAccessRule.java
+SHA-256-Digest: 24zpamkZ7SFT+Q7yWwmZF2k/3Q308LNjfb9geF5kv/Q=
+
+Name: org/eclipse/jdt/core/IPackageDeclaration.java
+SHA-256-Digest: 6qV/8E5x+96PZxV5mV6WnS2swdkOS/Krvr9sQAgPRds=
+
+Name: org/eclipse/jdt/core/util/IModulePackagesAttribute.java
+SHA-256-Digest: n6mWZUjhQhR17rlR/6Rz/iVfsMdKfiG7R0NvGBf+HZU=
+
+Name: org/eclipse/jdt/core/dom/TypeDeclarationStatement.java
+SHA-256-Digest: DLvaqmDF/hqRMeufYelLS8IKlsjQPK0hjJ56bjMMZac=
+
+Name: org/eclipse/jdt/internal/core/jdom/SimpleDOMBuilder.java
+SHA-256-Digest: tCviqSFlpiHyk1oLz6atKsqZREFJU5urTMqQWGVeFpE=
+
+Name: org/eclipse/jdt/core/dom/SingleVariableDeclaration.java
+SHA-256-Digest: 3P3mKNWeaIzZud3zA5nCZ4sSUIdA62hH21CfnKgIS/M=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnProvidesI
+ mplementationsQualifiedTypeReference.java
+SHA-256-Digest: dcv+TvZ+BdLYtMeNzlz6+572TlxkRS0vcBj4iatuZr0=
+
+Name: org/eclipse/jdt/internal/core/util/ModuleMainClassAttribute.java
+SHA-256-Digest: dLC0WPzoCh8vDrW/1JFRmTENDQJ9o0fcv5/1ZsimHTg=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnJavadocPa
+ ramNameReference.java
+SHA-256-Digest: xWfHFj2lzkH6LKEMz+hAIr0Bv3ctbd2Dn0jO2OBqJJ4=
+
+Name: org/eclipse/jdt/core/util/OpcodeStringValues.java
+SHA-256-Digest: Kjl7rW5nICCWQvl0Au8Xq0dTt7AA3BlK+ew6/0iBObk=
+
+Name: schema/codeFormatter.exsd
+SHA-256-Digest: 2GxPQlheSMGjHJAH4Rl1rwZwWpJ+OHxZ+e6KDYCPVFE=
+
+Name: org/eclipse/jdt/internal/core/SourceMethodInfo.java
+SHA-256-Digest: PHCw3RphGsNpZ13viQoanWlGJ0ICp5auLNHhh4O7CpE=
+
+Name: org/eclipse/jdt/core/JavaCore.java
+SHA-256-Digest: nfQfEiHY7HROz0yLDYC2cdbmsafHwSfjwyXtw75igXU=
+
+Name: org/eclipse/jdt/core/jdom/IDOMCompilationUnit.java
+SHA-256-Digest: YxXYsSunw+CsdV2uFqdT2JTiqm5ZDfD1OKOnUWjnVS0=
+
+Name: org/eclipse/jdt/internal/core/JarPackageFragment.java
+SHA-256-Digest: PHvznJMhRfhRtdiiTgrbc/Xbj0TW9FGOJz3ZNPlhGjc=
+
+Name: org/eclipse/jdt/core/dom/MemberValuePairBinding.java
+SHA-256-Digest: e8r0uiYrQmtol7IKjKDNNuO1CWY0Tc2CRZpaTRwHNbE=
+
+Name: org/eclipse/jdt/internal/core/search/matching/MemberDeclarationVis
+ itor.java
+SHA-256-Digest: XUg9ulA0bSHMB2zpDQZeN2bcx8n67hV7/0OvZVmI3Yk=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnModuleRef
+ erence.java
+SHA-256-Digest: wLucnVZKhhI98Q+XuxW71iOSXzTMjV2KfISzboQhOoI=
+
+Name: org/eclipse/jdt/core/dom/Annotation.java
+SHA-256-Digest: n3qGRRy0W624uTLWigNFD44zMcV8rdzY5gMbYMZYUgU=
+
+Name: org/eclipse/jdt/internal/core/search/matching/JavaSearchNameEnviro
+ nment.java
+SHA-256-Digest: OCwnn4l0upVHTUMVuaxuz6OSh7VMWahFoFheJOuQFt0=
+
+Name: org/eclipse/jdt/internal/core/index/MemoryIndex.java
+SHA-256-Digest: vkVwImy/xlD5BPgb0eD2jauaCpiKnXEe0T7+m3UfUmY=
+
+Name: org/eclipse/jdt/internal/core/util/SignatureAttribute.java
+SHA-256-Digest: whAmHR7Kh1jv3XzM+OXa6PHF5/kKZvuHSoCGTPHhS3k=
+
+Name: org/eclipse/jdt/core/dom/StructuralPropertyDescriptor.java
+SHA-256-Digest: IsaotQ6aMnoymkA7wtjrllOmicO22UGJv+oZ1y/FD+s=
+
+Name: org/eclipse/jdt/internal/core/ProjectEntry.java
+SHA-256-Digest: lIfJqx7rgvQXKPU23WopHEyCfaAqwhFPO0jm1Lig630=
+
+Name: org/eclipse/jdt/internal/core/hierarchy/RegionBasedHierarchyBuilde
+ r.java
+SHA-256-Digest: AmTUemtSi+m08NGkK+RVoauLOjofkXqV2YnFz/X9s2Y=
+
+Name: org/eclipse/jdt/core/util/IComponentInfo.java
+SHA-256-Digest: OlWwx5jk7xOA0TZCMPBDNikZ8fGOMIy6g6gcdoM0QEg=
+
+Name: org/eclipse/jdt/internal/core/JModPackageFragmentRoot.java
+SHA-256-Digest: kmbgMfskkuOUgIb3XUq24kdmbfdxDvBjZsiZjM+eIEM=
+
+Name: org/eclipse/jdt/core/dom/QualifiedType.java
+SHA-256-Digest: u2sMptwImWj1Z0pKGciJ8n7Jw1LaGBFylK2mvOjF4P8=
+
+Name: org/eclipse/jdt/internal/eval/VariablesEvaluator.java
+SHA-256-Digest: z3ICCnkv9oe/4L5U4QiFXt3HDAxIQEKLnT389NLmqXw=
+
+Name: org/eclipse/jdt/internal/core/IJavadocContents.java
+SHA-256-Digest: KUluBEWwX+pxBgc5Nbn6dd1V+2/qZwTDafHuuj6c8n4=
+
+Name: org/eclipse/jdt/core/search/ModuleDeclarationMatch.java
+SHA-256-Digest: 6ekk1Dsk2bPSt3j93VO7ca6xoo6dqwmUB3YX8b3wH6E=
+
+Name: org/eclipse/jdt/core/dom/FieldDeclaration.java
+SHA-256-Digest: 7a2muyk6wUtv35IcnuL8kCpvQia8/JoSHXD1RlbpxKY=
+
+Name: org/eclipse/jdt/internal/core/SourceFieldWithChildrenInfo.java
+SHA-256-Digest: K+uG+iAL2YsBsO+3VsCE5nEM0WhUwdVoqVyNXY4F6Ys=
+
+Name: org/eclipse/jdt/internal/core/JavaModelCache.java
+SHA-256-Digest: WyLmk+x7HJwabNT/IPhsL0wwavCxxiyoaA1E7ukg/wE=
+
+Name: org/eclipse/jdt/internal/core/SourceRefElementInfo.java
+SHA-256-Digest: JL+Ep85Aty6YKpKPbnwbFvHsOMfJsFZ8s1LMCOdH9Gs=
+
+Name: org/eclipse/jdt/internal/core/JavaCorePreferenceInitializer.java
+SHA-256-Digest: gTwqePoFkQAk7ff1Ce+DAIOLXR+cJKhiZJ40BXERCxo=
+
+Name: org/eclipse/jdt/internal/compiler/SourceElementRequestorAdapter.ja
+ va
+SHA-256-Digest: weUIJd1j8Ohr94hs3HXLXJEsrZdhw5THW3W551F6NPE=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/RemovedImportCom
+ mentReassigner.java
+SHA-256-Digest: jMFRcktgLzQ1HllQxFeg1FQ+sJ9l15GQG9jR6wlD7Z8=
+
+Name: org/eclipse/jdt/internal/formatter/Token.java
+SHA-256-Digest: n7gCH3HpaObBjgq5kxf9+gQqwVsxSZbIivq1PFJU3qg=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/IndexNamesRegistry.j
+ ava
+SHA-256-Digest: 48oHZeRoaSJKaph/OfmljZJ1gGasxV05ELQTXNqSVJs=
+
+Name: org/eclipse/jdt/core/dom/MemberRef.java
+SHA-256-Digest: AVPCH74a/w/eJOnERZ10IYiBAPmMG6GI7bn7JlueH1o=
+
+Name: org/eclipse/jdt/internal/core/JavaProjectElementInfo.java
+SHA-256-Digest: KTlmSAmYCJBwsqcR9RZ+JTf7uFU1bHkK7IqVi5lTIk4=
+
+Name: schema/derivedSourceSearchParticipant.exsd
+SHA-256-Digest: JxyGqqe/d+FEwJC0A2tOv+2dWw2bcxdZojllNA0tN6s=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnMessageSe
+ ndName.java
+SHA-256-Digest: c85bA0wJbvwDzHpFZ6ha1oqK2eBBxYcNNRDXdjvgtCc=
+
+Name: org/eclipse/jdt/internal/core/CreateImportOperation.java
+SHA-256-Digest: ZvqfQMjKZ+tWk4X2NdzVIWBrwFwq27c1rVOU63uZxgM=
+
+Name: org/eclipse/jdt/internal/core/util/HashtableOfArrayToObject.java
+SHA-256-Digest: mob/8R0nxQaNiuLh5bBDkopTMnsUmu4UTAmerFRYb0U=
+
+Name: org/eclipse/jdt/core/dom/Dimension.java
+SHA-256-Digest: ebCm6M3tWpCeK46tGs5xF957HFuyOGjh5Zov5ycelX0=
+
+Name: org/eclipse/jdt/core/util/IClassFileReader.java
+SHA-256-Digest: ciRby76PPad23EMEg1jNOcOWgZHK0nzuskuJatRFb3c=
+
+Name: org/eclipse/jdt/core/ISourceManipulation.java
+SHA-256-Digest: hy6nzcCTPwo4oPLGX3RlK6wGGenSwDY+lKEbVHHtDug=
+
+Name: org/eclipse/jdt/core/jdom/IDOMMethod.java
+SHA-256-Digest: 0trGC5JCvFwyCFGYTM1j0TgXj3m73wsTYe/NB8oA4VI=
+
+Name: org/eclipse/jdt/internal/core/util/ExceptionAttribute.java
+SHA-256-Digest: ItwUeqFRBFoaV5iltuXRJaqRW9H3k4+ZQEs/OLlMBBY=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/IndexAllProject.java
+SHA-256-Digest: ACtF+nF4k81sRLKDOucR12JiLzvVKLvfTN3trXSVh9I=
+
+Name: org/eclipse/jdt/internal/core/ImportDeclarationElementInfo.java
+SHA-256-Digest: JdLVfVtMgZpg/P0dRLZUtEm48yv3sQcqcMfhPaHctkk=
+
+Name: org/eclipse/jdt/core/dom/LambdaExpression.java
+SHA-256-Digest: 6dOu8y6LlgmaUCmu5tpEPdYcp68bbNXleBy7YyZ376I=
+
+Name: org/eclipse/jdt/internal/core/search/matching/SecondaryTypeDeclara
+ tionPattern.java
+SHA-256-Digest: tpsMkkZmEATsRXtsIjOLZM3iXy9wzeKFLXuX16+oTIQ=
+
+Name: org/eclipse/jdt/internal/core/SourceFieldElementInfo.java
+SHA-256-Digest: 7eGyJUqo4hfH06XSI6ocxOBwSdBghthsuqAu2tkKPP4=
+
+Name: org/eclipse/jdt/core/dom/AssertStatement.java
+SHA-256-Digest: P2Fxc/nQKUhTIB+rJRlnGRyhkOYPUs7Jph4fyPsjz9c=
+
+Name: org/eclipse/jdt/internal/core/search/matching/PackageReferenceLoca
+ tor.java
+SHA-256-Digest: 67/IAh4TfQvbGwiDUrcMfeG3BF0zU0P74UeKAboxNmU=
+
+Name: org/eclipse/jdt/internal/core/search/IndexSelector.java
+SHA-256-Digest: xW2r68noy8LMt4zp3HqVRT5b6TW+adHVhODiGYILQL8=
+
+Name: org/eclipse/jdt/internal/core/util/EnclosingMethodAttribute.java
+SHA-256-Digest: /1KBq+XmWG1+p8lrPJuSNV3SHUYrNqaHmSkoeJkVHUE=
+
+Name: org/eclipse/jdt/core/compiler/BuildContext.java
+SHA-256-Digest: pW6wQGQyYnhq1/Hw+9Yz0AmiheHojQEJwzVMolHslmI=
+
+Name: org/eclipse/jdt/core/IClasspathEntry.java
+SHA-256-Digest: 46h3oJjP44KgzST+UUUf+d0sj5mRWgQ+7IzZOkHOwiU=
+
+Name: schema/javaSearchDelegate.exsd
+SHA-256-Digest: raa2WmoOnV+pVjH+RvYYb4UAGoyPrRo7opwX9Dc6HMs=
+
+Name: org/eclipse/jdt/internal/core/AbstractClassFile.java
+SHA-256-Digest: NzVRCMAq0DkLhA8CrLzBzAIuaPJFLkA4iDUXWtHEEUI=
+
+Name: org/eclipse/jdt/internal/core/DeleteElementsOperation.java
+SHA-256-Digest: rlpogFtJZoLZBHbke+yF+22qOsnfgjqhcGsz1T6wUN0=
+
+Name: org/eclipse/jdt/core/dom/IAnnotationBinding.java
+SHA-256-Digest: gQ9TkQcDUDDlvAFQOiyqkor9q36wluY1vYC2Egb5Nbo=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnReferenceExp
+ ression.java
+SHA-256-Digest: 7LsMRHceyDJUdSCBBbthPvg9DXMiPnH3MqCdbH1UMe4=
+
+Name: org/eclipse/jdt/internal/core/CreateElementInCUOperation.java
+SHA-256-Digest: h4/wHzLeNNNIGpuQsvg/jzSutzWOrmtCQM9o9T7dpYw=
+
+Name: org/eclipse/jdt/core/util/IRecordAttribute.java
+SHA-256-Digest: 9bpxGSj2ekT0FPyG8rs/taiIfEy/XwL7d7b1VJ3VKMs=
+
+Name: org/eclipse/jdt/core/IModularClassFile.java
+SHA-256-Digest: qpShFEmnSeHoNz6HYi+BBSxPk6kLbj1KuVJFkzBGaRk=
+
+Name: org/eclipse/jdt/internal/core/builder/ClasspathLocation.java
+SHA-256-Digest: Y+Ujd0fzvb6rSEu0c6+BKz/mCzo7KmHly+P2DjglntU=
+
+Name: org/eclipse/jdt/internal/core/DiscardWorkingCopyOperation.java
+SHA-256-Digest: jVnEpWmsz6/xLvCbre8ShaaRzOaafzEJE+ov2Hhpqgw=
+
+Name: org/eclipse/jdt/internal/eval/InstallException.java
+SHA-256-Digest: ViptGpK82Fkths96cGHoBHK2tHLLjl/Vo4DjoiCFv8M=
+
+Name: org/eclipse/jdt/core/dom/LabeledStatement.java
+SHA-256-Digest: E/5uoJAAOyyOc4Ps0PNktimOb9BUBYBrPzjSoRWvCzA=
+
+Name: org/eclipse/jdt/core/dom/IfStatement.java
+SHA-256-Digest: gSNZaLT1h2usqaXh49NTdLdfu7ovGP+D177c/IPayrc=
+
+Name: org/eclipse/jdt/internal/core/util/SimpleWordSet.java
+SHA-256-Digest: mqvvhFijRRs1svQ1fCqCOsJNNVDBU/yyGDN4AsPaisk=
+
+Name: org/eclipse/jdt/core/dom/ExportsDirective.java
+SHA-256-Digest: APm+WwS6uD8B87b7DYH8jV/a69RbkC2jhklEfPyjv90=
+
+Name: org/eclipse/jdt/core/search/LocalVariableDeclarationMatch.java
+SHA-256-Digest: 9AzEkEj/DS8YkeXVjvtSG5xdvfvEao/sHiGEbVXtwk4=
+
+Name: org/eclipse/jdt/internal/core/index/Index.java
+SHA-256-Digest: Gf4NVSUBMasj7GGfu750t2DXCvh5GTb4h491XLrc0vI=
+
+Name: org/eclipse/jdt/core/util/IConstantPoolEntry3.java
+SHA-256-Digest: 3S36/8BN9LSd9rt22PGDUgLYJ0cdyJTaVIx0KqbKy1I=
+
+Name: org/eclipse/jdt/internal/core/ImportContainerInfo.java
+SHA-256-Digest: XUM+wLhoUU4KjA9GJB24+dwB/AU1+dwXMm7mYWdkrYE=
+
+Name: org/eclipse/jdt/internal/core/util/CodeSnippetParsingUtil.java
+SHA-256-Digest: 1CRL1xAfcgQs0+rbI8WTlj0sdbNyZs/Ls/NyHQXmxbc=
+
+Name: org/eclipse/jdt/internal/core/BinaryMethod.java
+SHA-256-Digest: Wj9q+OLqCaPn3hsrRPakecfpOQKw5GrW1+RNDm280dw=
+
+Name: org/eclipse/jdt/core/dom/DoStatement.java
+SHA-256-Digest: 0UITulY6EFtzTY5D+YxERUdjeG7RJyJ5/R+36D5bn6Q=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnMessageSend.
+ java
+SHA-256-Digest: danQPN+gvzfSqPFKv+Lsn3IDLp46T+v33cF5pLsTS9Y=
+
+Name: org/eclipse/jdt/internal/core/ReconcileWorkingCopyOperation.java
+SHA-256-Digest: aqbNFFBAqJjp0yYgK06buxp6AG2RxD27CTwGDuVrwRk=
+
+Name: org/eclipse/jdt/core/dom/ASTSyntaxErrorPropagator.java
+SHA-256-Digest: Z3G8palpxY7FtegncT5AsN6hbJmoeGq8GEiaKxchZvw=
+
+Name: org/eclipse/jdt/internal/core/LRUCacheEnumerator.java
+SHA-256-Digest: Cj2rPA8RN3oCRSuG1qC94/MqfVfxG9HW9KF8RYCGX0A=
+
+Name: org/eclipse/jdt/core/dom/EitherOrMultiPattern.java
+SHA-256-Digest: u7cltmWgXCZ9cakVcnUgoXD4TEjhchSS0izuUv5vUWo=
+
+Name: org/eclipse/jdt/core/dom/PackageBinding.java
+SHA-256-Digest: RXABGsTQL/y4bUehiTNuGXTN081yTlXjSrew4HZiRx8=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnParameterize
+ dSingleTypeReference.java
+SHA-256-Digest: JMPIKtXPDuVYITrbj4+PnxSssyA1Eo+VmaQ2/MSRWXA=
+
+Name: org/eclipse/jdt/core/util/ILocalVariableAttribute.java
+SHA-256-Digest: OEiOgrG5V2fQDk9Thcji/+Lc8PwvWx1TPq85y3tvU2w=
+
+Name: org/eclipse/jdt/internal/core/jdom/ILineStartFinder.java
+SHA-256-Digest: ahLwRBhA3F0ZQMWf2eQuNufRpP0ibDI6XmuT/4S1RX8=
+
+Name: org/eclipse/jdt/internal/core/search/matching/OrPattern.java
+SHA-256-Digest: CwOXR/2j7lykAZ30zZcccF95kImz4ar3XpkbXJxBYg4=
+
+Name: org/eclipse/jdt/internal/core/CopyPackageFragmentRootOperation.jav
+ a
+SHA-256-Digest: oQZs8CvozWwZedPG+o6eExHnbDRiXBSv3IjcR29SR8Q=
+
+Name: org/eclipse/jdt/internal/core/util/ParameterAnnotation.java
+SHA-256-Digest: rr0MZakXcfdvD+0As0whBA915aBLY8qHZo1/66lFP1w=
+
+Name: org/eclipse/jdt/internal/formatter/linewrap/Aligner.java
+SHA-256-Digest: /P45qbpchIpwCVrKfTYAGnR0Bkalzr1CRKkJ5ikdsKo=
+
+Name: org/eclipse/jdt/internal/core/search/UnindexedSearchScope.java
+SHA-256-Digest: ZMoKOmj+/a+dnGh0wMjDV2fVTT354boKTDUF2G6zkv4=
+
+Name: org/eclipse/jdt/internal/core/JavaProject.java
+SHA-256-Digest: C6GRZxVMoBMKbMiaXDm1TWY4Fjsf+x6ilrkxt/xXCtw=
+
+Name: org/eclipse/jdt/core/dom/MarkerAnnotation.java
+SHA-256-Digest: 62bdjpIAReFAkFX0RK0imTYvVAOMDM4/dVd4S5vPzDw=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistTypeParameter.java
+SHA-256-Digest: thNWIuR7dO77dSMrk83+KtW6jc+9NGZGroRz+FVsvak=
+
+Name: org/eclipse/jdt/core/dom/DocCommentParser.java
+SHA-256-Digest: Wr/4n/WY1IHjzAHphTZNYDZ0ioQlce2ub/uHVf7a73o=
+
+Name: org/eclipse/jdt/internal/core/util/Annotation.java
+SHA-256-Digest: 6A/4VV6Cl5fSyHIU5GM7kmCocimCgtXwqOzUojdMV7w=
+
+Name: org/eclipse/jdt/core/dom/AnnotationBinding.java
+SHA-256-Digest: BScXZsmW6RQOIgIDLmgT/MhjmZ+RKuk8smr9jmctb9k=
+
+Name: org/eclipse/jdt/internal/core/builder/State.java
+SHA-256-Digest: RnCtXEuZCV18IOL/xvxZF6W1K/1kVjv2TdV8wNIR/fk=
+
+Name: org/eclipse/jdt/core/dom/EnumDeclaration.java
+SHA-256-Digest: Luu1h3EGDMsBDih+/Xhn7RGtCShkBfrXe7XPx0Ovsmo=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnQualified
+ AllocationExpression.java
+SHA-256-Digest: GWrqhxaznSUiWXGRJc+1Yj4m/uGez4zudrDAxUpN+Bw=
+
+Name: org/eclipse/jdt/internal/core/SourceAnnotationMethodInfo.java
+SHA-256-Digest: VasV2BtdbQpMyBLA97ST8CSvGJ3XwVpTiHf48UgCIqU=
+
+Name: org/eclipse/jdt/core/util/IParameterAnnotation.java
+SHA-256-Digest: QjzuktPElkhQhbLJrGxSXpdfl/v924cnIkFrgzqLLd8=
+
+Name: org/eclipse/jdt/internal/core/jdom/DOMField.java
+SHA-256-Digest: 7KgYJ9LDrdCuelzdrKROYShM8cs34eww772Wnb0NaJk=
+
+Name: org/eclipse/jdt/internal/core/JavaModelOperation.java
+SHA-256-Digest: Gm85SUxNsIwUpitqV6oxC97ZA8PesV8EFM6EFzj89Wo=
+
+Name: org/eclipse/jdt/internal/core/search/matching/MatchLocatorParser.j
+ ava
+SHA-256-Digest: /9MclEggisZxKzD10AygGQbWA+bg4JPWW9zksmq6KCU=
+
+Name: org/eclipse/jdt/internal/core/search/IRestrictedAccessConstructorR
+ equestor.java
+SHA-256-Digest: blmxtSAtdigFWBWKTbymMRxoECAkvl/yUEu/Ck6pElo=
+
+Name: org/eclipse/jdt/core/dom/ModuleModifier.java
+SHA-256-Digest: XrmM73s47mcz+INltmvocfCsNwfFu5g0K1uqkfzfOWg=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistSourceType.java
+SHA-256-Digest: V715IOREmnUTOxM8nSHkIdCCPf7alJQfxuQMujDkTk8=
+
+Name: org/eclipse/jdt/core/ICorrectionRequestor.java
+SHA-256-Digest: jYxSyZ8qLUe1EBC58eUTfcda9cQDHIvWki+sgwjDagg=
+
+Name: org/eclipse/jdt/internal/core/Buffer.java
+SHA-256-Digest: ihKsTbA17SWtkJJpBChQIY2LBJfE5CCTKMddtkAf/qg=
+
+Name: org/eclipse/jdt/core/dom/ExpressionStatement.java
+SHA-256-Digest: isM8lcDmIewh4pVXnr4rTCSig4nn9ZoJtaalVtYueag=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/NodeRewriteEvent.java
+SHA-256-Digest: UkYYsJYgfaRJm36tleE2EQ2NfyJ2RNtn1Vmu0gQFvGU=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnKeyword3.
+ java
+SHA-256-Digest: xTySBiSSQfLumqAnXq6lHSzQ0xQ4sGKK802WiK9S45M=
+
+Name: org/eclipse/jdt/internal/core/util/MethodParametersAttribute.java
+SHA-256-Digest: EqFlnbcO6wdHy0v1B4ULCXQHT393igUOnpLSkb1LksQ=
+
+Name: org/eclipse/jdt/core/NamingConventions.java
+SHA-256-Digest: Rb6LyA1YWb+OVhmLYzBETv++t6F8WHhGcLKEdti8CJ4=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistSourceMethod.java
+SHA-256-Digest: EN+HvItTwb+csgGQtTw6CtVurFTS7Yx1OYNhPIjWwdA=
+
+Name: org/eclipse/jdt/core/IParent.java
+SHA-256-Digest: FI0bVSMLl6dEYANAhd4SqVnRJt8TWXvy2KI+tVc2NSw=
+
+Name: org/eclipse/jdt/core/util/IAnnotationComponentValue.java
+SHA-256-Digest: 7JvHS0hV6+GwTwDsSQOgddLoEXU7TDmfBPqPiX0RhQI=
+
+Name: org/eclipse/jdt/internal/core/JavaElement.java
+SHA-256-Digest: J1FoDFMdmr2hRyf7Lule+VPF6SgKIqwrLRpLuMShlXU=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnJavadocMe
+ ssageSend.java
+SHA-256-Digest: ATYJ9mTPLfx1NtzgTRxBAKkLxD10HiLma+4pamLz8Qs=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetSingleNameReference.java
+SHA-256-Digest: /dbjkc8UyPv3N1Zt8eK00ed/5J3TpyikBF9osT2OprM=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetCompiler.java
+SHA-256-Digest: rhr0eldyDz56bQj/MaHT33wAHiFmQg1ZByqS4xVyos4=
+
+Name: org/eclipse/jdt/core/dom/rewrite/TargetSourceRangeComputer.java
+SHA-256-Digest: rT2yGHRzmtzJdS/oUrfG7zS+BcAtO8Z4kqAT39CCz/8=
+
+Name: org/eclipse/jdt/internal/core/search/matching/ConstructorDeclarati
+ onPattern.java
+SHA-256-Digest: NJ1qqn1OjkJ9ScbIcJBeJ8rruSocC4+vFFzGtSDKHLA=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/IndexingParser.java
+SHA-256-Digest: Rr6SqzO9C+YQqKPkPv8p/za7SzKfarsltFwNWd0GkFo=
+
+Name: org/eclipse/jdt/core/ITypeHierarchy.java
+SHA-256-Digest: 3ghg7GLi+/m+lOUfKJ96A27DbfbM9kZH7TgEwZLrI9s=
+
+Name: org/eclipse/jdt/core/util/IAnnotation.java
+SHA-256-Digest: /nSZyriljZv5FHoBHijE91LSzayw7lpYiSam63Lopcc=
+
+Name: org/eclipse/jdt/core/util/IBootstrapMethodsEntry.java
+SHA-256-Digest: BoyUKtXm3s+HPAOIxQ5Hhiui0bde0AUV8R/5ldVNn6E=
+
+Name: org/eclipse/jdt/internal/core/SourceMapper.java
+SHA-256-Digest: +Nj00WhuKZvGNZ/yu6qFFpLlbleqaQ/EIFehgAgf+zs=
+
+Name: org/eclipse/jdt/core/util/IRuntimeInvisibleParameterAnnotationsAtt
+ ribute.java
+SHA-256-Digest: HerEGZ4ZV/U740Neaf+Bs16TeLRxUbfqRFRvMEP7yFI=
+
+Name: org/eclipse/jdt/internal/core/builder/ClasspathJar.java
+SHA-256-Digest: to7WJYCdCFkwi4EFS/HUx1XyN/On1Af5bkoNFRDrU0o=
+
+Name: org/eclipse/jdt/internal/core/util/CommentRecorderParser.java
+SHA-256-Digest: R02VeIbrzxe+U0J0iU+1/ratm4ECTYGauc7bswqlIP0=
+
+Name: org/eclipse/jdt/core/util/IConstantPoolEntry.java
+SHA-256-Digest: TkVrysX09ZHc28L6aCLcJI1qpp2xj8LQOjTAqvxqiIg=
+
+Name: org/eclipse/jdt/core/IClasspathContainer.java
+SHA-256-Digest: RFcMezn5b57CskcsZBKEEUrSuWnOrBMurcU5OsoN0Lw=
+
+Name: schema/compiler.dtd
+SHA-256-Digest: j9rFajjlI7N6HPoxTys5G4bhzHVs0LRTc29AbR+3iu8=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetThisReference.java
+SHA-256-Digest: IB3taz6b/Fj3m7+dEyxGZ3Hk1Ui9gtCAvKsxxEsQSI0=
+
+Name: org/eclipse/jdt/core/ICodeAssist.java
+SHA-256-Digest: osvnefOy3YieiJP64Vg9+fj2ctol/gZp/tjQvWjC+Dc=
+
+Name: org/eclipse/jdt/internal/core/util/MementoTokenizer.java
+SHA-256-Digest: QcPI4oxaW6Ul1Gqw4/aqGwGe4yCBRAwKFSkIN/4qW44=
+
+Name: org/eclipse/jdt/internal/core/search/matching/PossibleMatch.java
+SHA-256-Digest: XZrLAUZ2oqR//nn0mhlvFavPst/SHQVN3VDEnM2JljA=
+
+Name: org/eclipse/jdt/core/util/IRuntimeVisibleParameterAnnotationsAttri
+ bute.java
+SHA-256-Digest: 14v4QnKLlH4RTBAhgE8d4zxBl5Fg5XNXfpJpHTsKaEg=
+
+Name: org/eclipse/jdt/core/dom/RequiresDirective.java
+SHA-256-Digest: mmfFQR76XD5aFMDM+KZmAunKOoiucQEhRdN4fJIBlBw=
+
+Name: org/eclipse/jdt/internal/core/builder/NameSet.java
+SHA-256-Digest: F74NGhyOzr2g3M59XKHlttRkjWlO//yOel6X0UqD70M=
+
+Name: org/eclipse/jdt/internal/core/util/LRUCache.java
+SHA-256-Digest: gJVLsqytJYDqDSvU8c9sYzW+rbX3SHPbGUPwke1xMIw=
+
+Name: org/eclipse/jdt/internal/core/SourceTypeElementInfo.java
+SHA-256-Digest: rqnXZOLDQgPMYnCD4hG1TwNkKzc5ZIX4P8EBVMTJX04=
+
+Name: org/eclipse/jdt/core/util/ExternalAnnotationUtil.java
+SHA-256-Digest: z2RZHGSV4651DWXAXWdoOaA4fa8N4lfeEFq7nsLzsdQ=
+
+Name: org/eclipse/jdt/internal/compiler/ISourceElementRequestor.java
+SHA-256-Digest: GrrUQBagcIt5LhCBH+8hsvDWchqlXEBsGzrwmWg/LKw=
+
+Name: org/eclipse/jdt/internal/core/DeltaProcessor.java
+SHA-256-Digest: 1XpF8dMbIEEJkPY6bQZLW0e7oE9uo0UXLWaH+fhyGqk=
+
+Name: org/eclipse/jdt/core/dom/AnnotationTypeMemberDeclaration.java
+SHA-256-Digest: hdPlDXCWpueFpBa+qtlDXLzyHj30Xqp4yo7NEJ1qvls=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/SourceIndexerRequest
+ or.java
+SHA-256-Digest: CHM/RCxtoM4hTJmhSkbbd+7ennayRc2Z7w7xwKvvgH4=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistParser.java
+SHA-256-Digest: ed7t5IdpzU8ifCDpQ/d8yrBCqDMlPs2kNSiiwwN9TQY=
+
+Name: org/eclipse/jdt/core/jdom/IDOMType.java
+SHA-256-Digest: n3AR5N2Vzp+qPOYObiOavZ1my57KoVuYemSdFv/2poA=
+
+Name: org/eclipse/jdt/internal/core/LambdaExpression.java
+SHA-256-Digest: mS3xOITY13kjqnOiG4YHD6DYGKe5ji8gnFKQWCjkMNg=
+
+Name: org/eclipse/jdt/internal/core/CreateFieldOperation.java
+SHA-256-Digest: mAXx4wx3nZxfQfM9o6HIvpwVg79XBQ9rBzwq4Wgcfzw=
+
+Name: org/eclipse/jdt/core/IJavaModel.java
+SHA-256-Digest: uwc23fEWHCM1rdizzNdWb2gFhD6f/f3JL4IGiSNXBIY=
+
+Name: org/eclipse/jdt/internal/core/util/BindingKeyResolver.java
+SHA-256-Digest: 6iatrGlVkIa6SErYFTmu9u/CwEctRlLdpr1ksEfc3mQ=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnQualified
+ TypeReference.java
+SHA-256-Digest: YUQRSzuRmaorFpSd86UG0nuRhCAeMiD1xBAzo7RBX/w=
+
+Name: org/eclipse/jdt/internal/core/util/LocalVariableTypeAttribute.java
+SHA-256-Digest: NYAHOJhZ922plhp8utOp01LfPVcNB73Rxr3ZRNhskJQ=
+
+Name: org/eclipse/jdt/internal/core/builder/BuildNotifier.java
+SHA-256-Digest: GBVHtKiLv0m/qAh6o6oNL2QvPblrzY9BYlWwgtNJLME=
+
+Name: org/eclipse/jdt/internal/core/SourceMethod.java
+SHA-256-Digest: wSB9j1hKfmn6MXrfIpSb3vuidxppFXf/ijW5OstrcZI=
+
+Name: schema/classpathVariableInitializer.exsd
+SHA-256-Digest: XlQwCw6SqwqFzWlr7sfnfXeMyR37Hu7MsWTyU/lwcvk=
+
+Name: OSGI-INF/l10n/bundle-src.properties
+SHA-256-Digest: ncx0OmVvS8/9Fd0nj2vWpu/OZch3XjQxDmKY/Lay+ZM=
+
+Name: org/eclipse/jdt/core/dom/StringLiteral.java
+SHA-256-Digest: XeJqetTsUMkuljNO4IEbUua/kLJ6i1S/owwQdH6yGBs=
+
+Name: org/eclipse/jdt/internal/core/builder/ClasspathMultiDirectory.java
+SHA-256-Digest: uO4U7tXkQ6W3ise16XbqHm1oMojX9CXKqb9a6KOry7A=
+
+Name: org/eclipse/jdt/core/dom/Modifier.java
+SHA-256-Digest: KWQRuE7hKVU/2g3pyCre5Uw/RgPVRkOftY/nC5KZJZM=
+
+Name: org/eclipse/jdt/core/dom/ContinueStatement.java
+SHA-256-Digest: R8TNv5x2OTbC6kq9doYYd6bL/V1jaiZ/ZC2q3cDUogk=
+
+Name: org/eclipse/jdt/core/util/IModifierConstants.java
+SHA-256-Digest: l7AFpndrOoycw5cjC2ki3IW0XmKWEqf4uiZEVm9IGyM=
+
+Name: org/eclipse/jdt/internal/core/jdom/DOMMethod.java
+SHA-256-Digest: qi6cvsAs0miqeHFx1CHkVuyCv1rtr+1f4UTi07UAvWg=
+
+Name: schema/classpathContainerInitializer.exsd
+SHA-256-Digest: KcwjUmauRQk8TzlBfk3NE9vOBFd+yLAORJ2fRGAztVA=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnPackageRefer
+ ence.java
+SHA-256-Digest: u4Bx1uiMeNOok3VwP+Yj+yCMCkLsScVilIcFj5r6UrA=
+
+Name: org/eclipse/jdt/internal/core/jdom/DOMCompilationUnit.java
+SHA-256-Digest: b5XYDIAWDWO4HwRwJojyBg6SlA+dYtrVwrp8kfkc19A=
+
+Name: org/eclipse/jdt/core/search/TypeReferenceMatch.java
+SHA-256-Digest: qyYp6YhZyxI3rBbf30IFsQUcO2diJouWm2M1mNuksrQ=
+
+Name: org/eclipse/jdt/internal/core/hierarchy/RegionBasedTypeHierarchy.j
+ ava
+SHA-256-Digest: EKmXzDqQrrlLjgR60QdHIXAY1wx0eV5WpuMhohoE68Y=
+
+Name: org/eclipse/jdt/core/dom/TagElement.java
+SHA-256-Digest: P8gS0qmvVOt3ZHEXvJhHLUnSbVHiie+MJ1rPMUy2pfM=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnUsesQuali
+ fiedTypeReference.java
+SHA-256-Digest: 89QzI09TE8M3S8QNXbtzpVxiJOIjLklTMmlmzCDIdpQ=
+
+Name: org/eclipse/jdt/internal/core/ChangeClasspathOperation.java
+SHA-256-Digest: +JamY7XU72mZwvD4DB5Mwa/YKbguUg2BivwVFiw0t6o=
+
+Name: org/eclipse/jdt/core/util/ClassFormatException.java
+SHA-256-Digest: YxRaJlGXZVUut+dbQGXBjpNk4bBx+ozSBnzvHAMDEtI=
+
+Name: org/eclipse/jdt/internal/core/CreatePackageFragmentOperation.java
+SHA-256-Digest: B1EgSq68Zv8adCatUG1Yd6vqg9hjD6iFpwYRhXrYuV8=
+
+Name: org/eclipse/jdt/core/dom/EnumConstantDeclaration.java
+SHA-256-Digest: uUfil59uauFalksRZL9OwPKG66gJS/8+gpLCD5Hz9ZQ=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ImportEntry.java
+SHA-256-Digest: 7VyQOv5XpOZcnFtXeB169NFiKRwHDfxpoVsK3mdt9cw=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ImportDeclaratio
+ nWriter.java
+SHA-256-Digest: AhM9h/PX+5UZM04NNbxuaRndwxprPV8l583PD+PKqTc=
+
+Name: org/eclipse/jdt/internal/core/CreateTypeMemberOperation.java
+SHA-256-Digest: 1y3yw/RLiL5ZqyVL3jkmSeAAAhm1J75oTxIjT1j2HEk=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/RewriteEvent.java
+SHA-256-Digest: ly1EiKk6wrvqMlWopixaFUqpix/IPV/Q7F90Z54OQXQ=
+
+Name: org/eclipse/jdt/internal/core/nd/util/CharArrayUtils.java
+SHA-256-Digest: XCPzLh0GT9BEf4jR3ekN8Umy4HSplzEhGiEztLHQR9E=
+
+Name: org/eclipse/jdt/core/dom/AnonymousClassDeclaration.java
+SHA-256-Digest: ELtqW+dDPag5aclwIkBB9darnzfjY4dIGuzQQx4ss80=
+
+Name: org/eclipse/jdt/internal/core/CompilationGroup.java
+SHA-256-Digest: i5K3fxR3epl0BC6xUy1SBfMBm+u8Q3iLCrKt+e9Lrkc=
+
+Name: org/eclipse/jdt/internal/core/ClasspathAccessRule.java
+SHA-256-Digest: plsKQbIpA1FH7mL/JPLyeKDvSFUlHhxD4Nj65qZACwk=
+
+Name: org/eclipse/jdt/internal/core/DOMToModelPopulator.java
+SHA-256-Digest: O04OcA7vu08/+XSxEDnrtVDVKllAgibh0E9ahGlXIc4=
+
+Name: org/eclipse/jdt/core/util/ILocalVariableTypeTableEntry.java
+SHA-256-Digest: CjL0+ixuWMZbdtYPxaFRxMINMYECofDzlsPPkUDtWV8=
+
+Name: org/eclipse/jdt/core/dom/IntersectionType.java
+SHA-256-Digest: A6n37KhqAMWh6bNxj8HGNE7op/DYiQvR0/oFBQygGG8=
+
+Name: org/eclipse/jdt/internal/core/CopyResourceElementsOperation.java
+SHA-256-Digest: HT0V583ytaJ0Nglg8CDdtYLx96Hgh6JdQS8/lCVa+P8=
+
+Name: org/eclipse/jdt/internal/formatter/DefaultCodeFormatter.java
+SHA-256-Digest: SF1FIsK0ZqWSp5wYaAUIpEkzyLqj5Rt3ih1NJnyR5F4=
+
+Name: org/eclipse/jdt/core/search/TypeDeclarationMatch.java
+SHA-256-Digest: Yerau2Fs1bh6Dqr44bFUe11tEZAO7BH24EGDII5WGGw=
+
+Name: org/eclipse/jdt/internal/core/BinaryField.java
+SHA-256-Digest: jYnHJZRAuKFmkSBLm5BwVKOSmG8pv0NvuzXityBj1ZI=
+
+Name: org/eclipse/jdt/core/IProblemRequestor.java
+SHA-256-Digest: ocMv7bsIxOdzth/nME158CgrEEVhPEgLO607yi7uKhk=
+
+Name: org/eclipse/jdt/core/util/ISignatureAttribute.java
+SHA-256-Digest: qtNrogTrx9Xp5Dj588PfsVmebldHGoeyVpgZmvGV6B4=
+
+Name: org/eclipse/jdt/internal/core/jdom/DOMMember.java
+SHA-256-Digest: eQcPIRH5m3evQY+vV0uqOYbSZcMwgdycFsvZwORGKD4=
+
+Name: org/eclipse/jdt/core/IClassFile.java
+SHA-256-Digest: Id282Zfmq7XK02L9gyv2Z78dSuK+GY3+L6CnpYcodPk=
+
+Name: org/eclipse/jdt/internal/core/BinaryModule.java
+SHA-256-Digest: FvhLn8Ctj+eWS93UbS5UItxC4jY5WfgS5ElGCsYLeKY=
+
+Name: org/eclipse/jdt/internal/compiler/DocumentElementParser.java
+SHA-256-Digest: DAyW3u/msXOPqgqg9C68eItltLX0V27g96+keD8IliA=
+
+Name: org/eclipse/jdt/internal/core/builder/StringSet.java
+SHA-256-Digest: QlqHIzxazoGYIP0oFanmeT2lqJRpg2nhG/jPbji2vnE=
+
+Name: org/eclipse/jdt/core/dom/NullPattern.java
+SHA-256-Digest: v2EoT7Ebq9PlAYbYP36xBx+Q8NCJEJaeNSibZf2JQFw=
+
+Name: org/eclipse/jdt/core/util/IPermittedSubclassesAttributeEntry.java
+SHA-256-Digest: Z8akflinh6PpK3s8j8uUT7jylxZPz4J73o0f/mo2saU=
+
+Name: org/eclipse/jdt/core/search/IJavaSearchConstants.java
+SHA-256-Digest: 5rmN/RXWWbOGmZuDUIoKL8FhbvazJOezUEJpKv9/ykw=
+
+Name: org/eclipse/jdt/internal/core/search/MethodNameMatchRequestorWrapp
+ er.java
+SHA-256-Digest: BHFDgTw0ZQuQPr1XOfnR2cSLP2tX7vYpDvjm5HTIlbc=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnKeyword1.
+ java
+SHA-256-Digest: d2VVQPGKCpNQL4dIMUygcJkyrzsN6WdZbzjk3d6R/28=
+
+Name: org/eclipse/jdt/internal/core/util/HandleFactory.java
+SHA-256-Digest: tKiY98qN5SZuLRx6c3kIr6d09nF4ef0np8nPqIr106E=
+
+Name: org/eclipse/jdt/internal/core/builder/AdditionalTypeCollection.jav
+ a
+SHA-256-Digest: HcCzpZr9B6CcaBpxVZaR4ZrjZ1KPnTIGtck58rcJDeY=
+
+Name: org/eclipse/jdt/core/dom/SwitchExpression.java
+SHA-256-Digest: 92GUufdpOvqr3P364d8oqYCOV+wZbIbIYt/cRgNYsKI=
+
+Name: org/eclipse/jdt/core/jdom/package.html
+SHA-256-Digest: PrZGWIAdThyxRgpa91B8jklXPkK6q/Y163MdQkK8zQk=
+
+Name: org/eclipse/jdt/internal/core/TypeParameterElementInfo.java
+SHA-256-Digest: RDRWoe+2eT8PNg9xE5mCik22pPg19Uej46fSqyRwnxA=
+
+Name: org/eclipse/jdt/internal/core/util/ICacheEnumeration.java
+SHA-256-Digest: 6A8I2ZpsadlZ46trYM52dG/QPyqnodRO5aOm3PWyEK0=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ImportEditor.jav
+ a
+SHA-256-Digest: kGuXYGw3I5oG+XtUkLJeLHrrqChF2WQrOL1J49aia0g=
+
+Name: jdtCompilerAdaptersrc/META-INF/eclipse.inf
+SHA-256-Digest: +EVEUC/I6CwvyhFP9JbAiHDX3KkGf1TX4/+j3xTFgJ8=
+
+Name: org/eclipse/jdt/core/dom/Expression.java
+SHA-256-Digest: X0jXdiOVjdswaFQvYqHuFrANOM3m5vDJiR9Ncgn4Rtc=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnArgumentN
+ ame.java
+SHA-256-Digest: DtPhU7cr+dGFMw9mgLQCacNaWoXMVhcMUlsYPJk0U7k=
+
+Name: org/eclipse/jdt/internal/core/SourceMethodWithChildrenInfo.java
+SHA-256-Digest: vz8mJS6xCRHJMlHIr7a425Tyz0nwUe+Dbmzz6spfLRM=
+
+Name: org/eclipse/jdt/internal/core/search/matching/MethodPattern.java
+SHA-256-Digest: 6f02TdS2QSzArM5kFXS0btxa3WEYP4VwVgPGnlVAtAM=
+
+Name: org/eclipse/jdt/internal/core/ExternalFolderChange.java
+SHA-256-Digest: 5/m+SAojGisf1Wctn/ijHunmtutd17V3c43np73DnZQ=
+
+Name: org/eclipse/jdt/internal/core/JavaElementInfo.java
+SHA-256-Digest: czeUJp320lpr0nR3smvmc2PUN1tMJ1iqHbqPOxQdp4M=
+
+Name: org/eclipse/jdt/core/dom/FieldAccess.java
+SHA-256-Digest: ttq9IncdoK6ihXQAyZ3Jnk2peSGI1UH9PJeZYxm+VNE=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnPackageVi
+ sibilityReference.java
+SHA-256-Digest: ZCiQvGR7vtXFWkt7KwhyqD5rQ87XgpZlnFsIA25miGc=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetToCuMapper.java
+SHA-256-Digest: U7gqPtXomMkazabUDgR260ZXWCe0spQgwaNKETMOA9g=
+
+Name: org/eclipse/jdt/core/dom/VariableDeclaration.java
+SHA-256-Digest: QJVuzA6CWlfjDz1wk8h4rL8vkgaWP11iDMQUxyFghbw=
+
+Name: org/eclipse/jdt/internal/core/JavaModelStatus.java
+SHA-256-Digest: ccyuJwxmWLgNxXaNg18lv34kyVd7pjbO9FxLZyl8Xfk=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnRecordCom
+ ponentName.java
+SHA-256-Digest: xA7qjmp039G5qGiOMB8JZCbGt4MRkFuIR0uBOamaG4g=
+
+Name: org/eclipse/jdt/internal/core/util/HashSetOfArray.java
+SHA-256-Digest: 67OhYuk438gKrBhRUV9Zpt+DwngfsmpNJm9oHPyfBHk=
+
+Name: org/eclipse/jdt/internal/formatter/TokenTextBlock.java
+SHA-256-Digest: rDTmth11I+TGMBhEz2biQlK93u+aXDEzvflAZztQRDA=
+
+Name: org/eclipse/jdt/core/dom/TextBlock.java
+SHA-256-Digest: zjs4PBKnn+m24imjYBkpBJBI66Usr0q5PTrf0yWUzcc=
+
+Name: org/eclipse/jdt/internal/core/JarEntryResource.java
+SHA-256-Digest: xDdFO9kfepkTzwRqe5yJKmWRPfA2zO3Reo5M1bRJ6hk=
+
+Name: org/eclipse/jdt/internal/core/search/matching/PackageDeclarationPa
+ ttern.java
+SHA-256-Digest: sYP3ze+OqASQ88ZUVCFConTIJ4XcdmxfLk/tOWg6BeU=
+
+Name: org/eclipse/jdt/internal/core/CreatePackageDeclarationOperation.ja
+ va
+SHA-256-Digest: FhG2xeXe8oQx1PD5//Xmsbe0HK+QjUntBWaq9l2TGFk=
+
+Name: org/eclipse/jdt/internal/core/builder/ProblemFactory.java
+SHA-256-Digest: G3QnviCLTl/PfsskUxeO9dzkR3b3rsShD9plMG/egco=
+
+Name: org/eclipse/jdt/internal/core/ModuleUpdater.java
+SHA-256-Digest: eJW5Impd1C9D+ZKuesvpNRvwy5rOpYgm1EdU5KJB52I=
+
+Name: org/eclipse/jdt/internal/core/util/AnnotationDefaultAttribute.java
+SHA-256-Digest: oqJs1nQacK76kKmKAFKjQkDHg9MNPvqw73z8B8HbU1Y=
+
+Name: org/eclipse/jdt/internal/eval/GlobalVariable.java
+SHA-256-Digest: FWTDeXWrbd6hgK6II21nKGwYC3VMT98agpkAVq/+nD4=
+
+Name: org/eclipse/jdt/core/dom/Comment.java
+SHA-256-Digest: yCUovVsd6qDY0o26+Q5PwjCXoCDDRenWmi0+uiwbytI=
+
+Name: org/eclipse/jdt/core/dom/ImportDeclaration.java
+SHA-256-Digest: ME1KXxWh6IfFFCNABzquR2yICsgNX/4dGI7QObqzENE=
+
+Name: org/eclipse/jdt/internal/core/util/ClassFileReader.java
+SHA-256-Digest: He5poW/EsIi0bwyHLJc50kKTSCL7n0MfmQ1sAoH8Dkg=
+
+Name: org/eclipse/jdt/internal/core/CreateCompilationUnitOperation.java
+SHA-256-Digest: U0iOdsUtvWu+yx7S6gq8ESx07PDD4O/41zsfDe9kY7M=
+
+Name: org/eclipse/jdt/internal/core/JarPackageFragmentRoot.java
+SHA-256-Digest: ai8mhBaMsUuMib38yi2IICdFhudWfYP74AfI8D6ayAM=
+
+Name: org/eclipse/jdt/core/dom/AnnotatableType.java
+SHA-256-Digest: ijvdZbEfOzj7xubYhqqlZTf8h2/KisN1u3kR5tYm3qM=
+
+Name: org/eclipse/jdt/internal/core/builder/TypeLocators.java
+SHA-256-Digest: DDJ0khOi3W1a7LN63Rvjh/pnkviGgCc6KJLPqGSs4Z0=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnJavadocFi
+ eldReference.java
+SHA-256-Digest: gjpgj/dynvSkQn2itfmkHk5GVo0uUSvZuMuP+S3KfX8=
+
+Name: org/eclipse/jdt/internal/core/builder/ModuleInfoBuilder.java
+SHA-256-Digest: KrS/n3nd4F0MfjIaiqCQ+vMIooZwfJNBsRKYuQUfdHU=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetReturnStatement.java
+SHA-256-Digest: bk6AreyManzROY6HzCND5mBKfO4LwkFqa1NbT5WnMdY=
+
+Name: org/eclipse/jdt/internal/core/search/matching/JavaSearchDelegateDi
+ scovery.java
+SHA-256-Digest: 7ShtyGZ7oFmWPPUlMvEGtfUVRctTJGs8jaK8BPEKzBE=
+
+Name: org/eclipse/jdt/core/dom/Name.java
+SHA-256-Digest: VSgCOs5DioheyP45wGQHtru7ulJojf/EEo5StdGpHLE=
+
+Name: org/eclipse/jdt/core/IPackageFragment.java
+SHA-256-Digest: Umiv4o2OKCop6NNizT9mXLd9qtwTN/4SlbEa/0HR2TY=
+
+Name: org/eclipse/jdt/internal/core/NullBuffer.java
+SHA-256-Digest: 6Q0rh6thcMLab+C3/f2TVN3LEpTLORg7ITLbpX6X8qY=
+
+Name: org/eclipse/jdt/internal/eval/EvaluationResult.java
+SHA-256-Digest: bz7el9Hu+7DMqiU6B+zhfETAU95cqzN4yilHbAQCpFg=
+
+Name: org/eclipse/jdt/core/ITypeRoot.java
+SHA-256-Digest: 6zlY5Ks5rX+Fm+XaG8hwHXCXKCofgkU4C17UHgnIC6o=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnProvidesI
+ nterfacesSingleTypeReference.java
+SHA-256-Digest: K+m+H8cXzuZahU77GtpZxnZbMdGSEE/76e0hgcF3JE4=
+
+Name: org/eclipse/jdt/internal/core/search/matching/FieldLocator.java
+SHA-256-Digest: EV3ffLf5Ae1dOunnht30Y2J87cEkfkN+3SJWyedaxWI=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/TrackedNodePosition.java
+SHA-256-Digest: RDORk0GAd3zgfHT0cU9PyzpNxkbrNO9FdvrPPzDeu/c=
+
+Name: org/eclipse/jdt/internal/core/ExternalJavaProject.java
+SHA-256-Digest: E4V6s+mUDHxHAyO/SXdG2ZV7IeaApOi9B8ApztY4nYI=
+
+Name: org/eclipse/jdt/internal/core/ClasspathChange.java
+SHA-256-Digest: zz8aQAvkMXmdcAnyScF1sC5ZKt2w5SkEcPVH7j1laU8=
+
+Name: org/eclipse/jdt/internal/core/util/HashSetOfCharArrayArray.java
+SHA-256-Digest: fmLFHUJkM6IxeSRcvGfTXkxv7c69u06KcBhk5geljcU=
+
+Name: org/eclipse/jdt/internal/core/search/matching/ClasspathSourceDirec
+ tory.java
+SHA-256-Digest: LDyjXN8nrhigOiCJnPGFStIozQztSTbSAADuHHMJlnk=
+
+Name: org/eclipse/jdt/core/util/IVerificationTypeInfo.java
+SHA-256-Digest: mtZ8j89ppC+UWPyRKIISBDrSNfkgtPUMQo2mFksLsw8=
+
+Name: org/eclipse/jdt/core/index/JavaIndexer.java
+SHA-256-Digest: iqJmHPK8+OIQ6jKrGy7Nz1JkfMsiPqhW9zix3JxKMuY=
+
+Name: org/eclipse/jdt/internal/core/search/matching/LocalVariableLocator
+ .java
+SHA-256-Digest: unqoYkVyywySz4ByuldRprwbIIIyjmpg9g/k0SKnv8s=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/DefaultJavaIndexer.j
+ ava
+SHA-256-Digest: 3e5o9LGX0LvtqLu1QBhnAHPd44IhFHhKbVwmnOXPhrM=
+
+Name: org/eclipse/jdt/internal/compiler/ExtraFlags.java
+SHA-256-Digest: YM5piW4vlIDAWYUcj8++6gX1k3hv4/F03StbvLdrht8=
+
+Name: org/eclipse/jdt/core/compiler/IScanner.java
+SHA-256-Digest: /zqQN4Fe0gn3W9dBT2gQBQX5T+bUd7n1pMtgh+jRktc=
+
+Name: org/eclipse/jdt/internal/core/util/BootstrapMethodsEntry.java
+SHA-256-Digest: 9jx7a5/cnmmMtdUKay9oVpITMLPY+x2R5nATf7GrPNQ=
+
+Name: org/eclipse/jdt/core/IType.java
+SHA-256-Digest: P4GOEFkzfsfUyro6BJcViA7JXEY624mpD0D4zy9uQhE=
+
+Name: org/eclipse/jdt/internal/core/util/ReferenceInfoAdapter.java
+SHA-256-Digest: e/UkC81wLR/7FxPFInwBdve/VMgrXQMI5oc0WHAMQJo=
+
+Name: org/eclipse/jdt/internal/core/DeletePackageFragmentRootOperation.j
+ ava
+SHA-256-Digest: oRAqQR+1GQUQkgMIb4qb6EFPX4SVE7R6kM9tFAadTp4=
+
+Name: org/eclipse/jdt/internal/core/LambdaMethod.java
+SHA-256-Digest: vMA99g6+pn2Wa0qJdCOhbADkHGTdlv8sJiKG8n/L4x0=
+
+Name: org/eclipse/jdt/internal/core/ModuleSourcePathManager.java
+SHA-256-Digest: cP2AoNcj04OeF9CO9x/sxLtI1U0qbg4owepFk3783l4=
+
+Name: org/eclipse/jdt/internal/core/search/matching/OrLocator.java
+SHA-256-Digest: FmgMi7dbdhAGvtKXG5KqS6KPIUNH4dErEIAjr07z+Ds=
+
+Name: org/eclipse/jdt/internal/core/search/MethodNameRequestorWrapper.ja
+ va
+SHA-256-Digest: NRwnoRBcaLpLv4Y8Cc2GgjN9NyI6Kz7Vcjg7mcX/PXo=
+
+Name: org/eclipse/jdt/internal/core/JavaModelInfo.java
+SHA-256-Digest: +ctX4ncE+PzVLCOGnOPENHoeBxz3h+1sh5WSN+VeE2Q=
+
+Name: org/eclipse/jdt/internal/codeassist/RelevanceConstants.java
+SHA-256-Digest: YVwF0uUTrsaZe/wKsMN4sOW+LQS5rSVgORMS8yawZ8o=
+
+Name: org/eclipse/jdt/core/util/INestHostAttribute.java
+SHA-256-Digest: Z094YIOjfm58HcJBO7kuZSqmXuioGRDP0qKAGJhRyQw=
+
+Name: org/eclipse/jdt/internal/core/search/matching/TypeReferencePattern
+ .java
+SHA-256-Digest: M6gpfalMHi8j85qWQv86RBK/+q5W1pzIjFedqN/A8zY=
+
+Name: org/eclipse/jdt/core/search/LocalVariableReferenceMatch.java
+SHA-256-Digest: vN2aKQ1JVxb37M/hF79TRrtNsUZcpkbMhTXoLJrKLyw=
+
+Name: org/eclipse/jdt/internal/core/util/KeyKind.java
+SHA-256-Digest: I9cwmWY7+AXlVHH0hBzVt5sh/SXD6U0lxC6db/GBydk=
+
+Name: org/eclipse/jdt/internal/core/util/ModuleUtil.java
+SHA-256-Digest: a35llSLUT4vDQjA9jwlp0wdEt9HJ6wEf+DHE7qexUjY=
+
+Name: org/eclipse/jdt/internal/core/SourceConstructorWithChildrenInfo.ja
+ va
+SHA-256-Digest: K2HY67orSeNrcKnXQFtcWepXCkVns/3vFkQwJbWOkgM=
+
+Name: org/eclipse/jdt/core/dom/InternalASTRewrite.java
+SHA-256-Digest: 9V9kz9WDTYMoZpcZaB9sJTMCElNzs+iT5xfC9KhSwZY=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/RewriteEventStore.java
+SHA-256-Digest: Io1t2hJJJYdrma1eMbKIU8xHkW+2UCpenuCFXbz/a9Y=
+
+Name: org/eclipse/jdt/internal/codeassist/UnresolvedReferenceNameFinder.
+ java
+SHA-256-Digest: yhiDYt0lDbw9s05hFD9uZHxvnlIxxdB0oPx7b232me8=
+
+Name: org/eclipse/jdt/core/jdom/IDOMField.java
+SHA-256-Digest: IAMN4aEawvLhvP9lWPT29vvzr2uJlgtnu3hyfqE8it4=
+
+Name: org/eclipse/jdt/core/formatter/CodeFormatterApplication.java
+SHA-256-Digest: OAw+cfKypyitjMbhETrWYeiIrET8EWWf/y2KGlOxpbA=
+
+Name: org/eclipse/jdt/core/dom/EnhancedForStatement.java
+SHA-256-Digest: 5Wr7LVpm3akZxw0ckDRBM7NW5i8QHK9gjWJefrl/FLE=
+
+Name: org/eclipse/jdt/internal/core/util/DeduplicationUtil.java
+SHA-256-Digest: Gi3+NS2VPpzBycOpVYL9KLDzPpzq+NPASHEjL0uVxA4=
+
+Name: org/eclipse/jdt/internal/core/SearchableEnvironment.java
+SHA-256-Digest: mw/JVO+lHhWrfJJ4wpCudEJQYZTrKBeqBRuHXdDLRVU=
+
+Name: org/eclipse/jdt/core/search/IJavaSearchDelegate.java
+SHA-256-Digest: ay9/j2eGEMION5qmjaWgJoiy98twOolVGBRYMDjkUYw=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/Engine.java
+SHA-256-Digest: 7DcBM+iUUHEFK5qoAoQULYofsdqa5+TS34e9I3XkP4k=
+
+Name: org/eclipse/jdt/internal/core/BufferFactoryWrapper.java
+SHA-256-Digest: ThtT+y+2kU+oWKfKKLoDpIL2DEueWkGPZww/evjD098=
+
+Name: org/eclipse/jdt/core/ICompletionRequestor.java
+SHA-256-Digest: U06tAfhOlHO1vVgn8RvKRkybo/V/ME+Zsq+3T5p9oIM=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/IndexManager.java
+SHA-256-Digest: 4Is0pzXx9R7nNCPqWTTvXQ1LQoozC4Jb6ZN5r14MIzI=
+
+Name: schema/javaFormatter.exsd
+SHA-256-Digest: RJvywT4kCbyQctcAipvGraWsTcpTaGBd35kNot1E7Mg=
+
+Name: org/eclipse/jdt/internal/core/util/AnnotationComponent.java
+SHA-256-Digest: xH0fRg8Prpj6Bh4d+5E4GMRzeDv68Mde7AokRkFG3Wc=
+
+Name: org/eclipse/jdt/internal/core/hierarchy/HierarchyBinaryType.java
+SHA-256-Digest: dE8EXSN8uklx6OmQIH6aK/Q3dPSHzlvsI6vlGrfmcQc=
+
+Name: org/eclipse/jdt/core/dom/VariableBinding.java
+SHA-256-Digest: rC5wDa7xJY8nuJDOd4c74bbYvLFQqjWptHKgtvvU6+0=
+
+Name: org/eclipse/jdt/internal/core/util/ComponentInfo.java
+SHA-256-Digest: 7IFsz0s/3fSjmEmdVUW8zlFgm00htCd8JrVzf9Z1GdU=
+
+Name: org/eclipse/jdt/internal/core/jdom/DOMImport.java
+SHA-256-Digest: IswXX/EnKIif2V6F56Vm7dOoRsFojGHTU/9GYnSsLrI=
+
+Name: org/eclipse/jdt/core/index/messages.properties
+SHA-256-Digest: KQEWJVTSkF1ITd3UO+bg0KT4nyxiblKXTLC+5Go7BGI=
+
+Name: org/eclipse/jdt/internal/core/search/matching/TypeReferenceLocator
+ .java
+SHA-256-Digest: sV8e6s/cJF6OSsNoIsSLM02yhOuSEeS2NzULIampSZ0=
+
+Name: org/eclipse/jdt/core/util/IModuleAttribute.java
+SHA-256-Digest: +8EEXBpKkyTO6UNX7U0oJE88BUUPnz8vxNoBL8OLPq8=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistImportDeclaration.j
+ ava
+SHA-256-Digest: PiNp3xxoR9DsygJu/LBIvEc+uytCjbnePp5S55lqAWo=
+
+Name: org/eclipse/jdt/internal/core/util/ProvidesInfo.java
+SHA-256-Digest: NBDbJh5H7fnJCH00jrtVftU83SgRbmit3eLPMlzxp4I=
+
+Name: org/eclipse/jdt/internal/core/INameEnvironmentWithProgress.java
+SHA-256-Digest: bXUxeYr3FkdW+kUZnXWi4f/cQFCKTPqHaaQG0ZYS/3A=
+
+Name: org/eclipse/jdt/core/dom/DefaultBindingResolver.java
+SHA-256-Digest: VIFswltmyZVf9yP/WrtUy1BySIaLL2uHi6bKkYX/TW8=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/ASTRewriteAnalyzer.java
+SHA-256-Digest: p+QbuJP233bTE0h80QLl0AQDV5vhR4q2yv4oDWRWLYA=
+
+Name: org/eclipse/jdt/internal/core/util/MethodInfo.java
+SHA-256-Digest: xaqHn1ydP/MTJLt6RxtrDmSYBpc5uXF/8d6I16LP2fM=
+
+Name: org/eclipse/jdt/internal/core/search/matching/ConstructorLocator.j
+ ava
+SHA-256-Digest: Eerf7FUQOltERYXA7d3alhAQP1sTMjukOlg9NCu/Cns=
+
+Name: org/eclipse/jdt/core/util/ILineNumberAttribute.java
+SHA-256-Digest: Qj8mBXXBYpXww6rSr9YAMlxk+Um89TDu5dUgvbpRz4Y=
+
+Name: org/eclipse/jdt/internal/core/util/JavaElementFinder.java
+SHA-256-Digest: UJxvh0TOlQkZvOh+G0I+hxlNPqP5+qNT44E2Jci50fU=
+
+Name: org/eclipse/jdt/internal/core/SourceMethodElementInfo.java
+SHA-256-Digest: emZRmI5iY8Ztg3wk+RODZu0yx8NWTMYojdCDcDpyXP4=
+
+Name: org/eclipse/jdt/internal/core/search/matching/MethodLocator.java
+SHA-256-Digest: FntfCqXMcH+9k2wmBxUzxY/KVVAk50GNrIG5YgdM8uU=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/TypeConflictingS
+ impleNameFinder.java
+SHA-256-Digest: 3+a2xRkxSuNe1M9DX5VEbgpJjvHbOCbVDiKclFBi8t8=
+
+Name: org/eclipse/jdt/internal/core/Region.java
+SHA-256-Digest: jTd2//0u363AKiLyU50FdbAM7f8+LgWTYEiVEr/JmBs=
+
+Name: org/eclipse/jdt/internal/core/JarEntryFile.java
+SHA-256-Digest: +tsB73yU+o/eI2Ilyddif9uid8rbj/oy1/N/juhpfRY=
+
+Name: org/eclipse/jdt/core/dom/IMethodBinding.java
+SHA-256-Digest: 7ZkFe9hG8pIs5Fdk/Gg1SfSk3DyN7ntKCvZ7H5fS2g8=
+
+Name: org/eclipse/jdt/core/ITypeHierarchyChangedListener.java
+SHA-256-Digest: J3eV7Ly1FRWt07D7MrmaUBBuASaa5wKGp0ePVhIqG+s=
+
+Name: org/eclipse/jdt/internal/core/builder/ModuleEntryProcessor.java
+SHA-256-Digest: BCZg9L0Al2aNmyyZvqH2OVwQnvglY+Wc79swzH/kTPo=
+
+Name: org/eclipse/jdt/core/jdom/IDOMInitializer.java
+SHA-256-Digest: XrCXXP9Y/1X8/k+hSfKkCo+ipa3uQzUXpwWdJ7oR3tw=
+
+Name: org/eclipse/jdt/internal/core/util/InnerClassesAttribute.java
+SHA-256-Digest: i95wF5QtXFCzecCkmVZNnBdonfM/IQSS3Q2/baTr0Hw=
+
+Name: org/eclipse/jdt/internal/core/util/WeakHashSet.java
+SHA-256-Digest: pytqAhsiyPaCjNZPdDfM2Hf4K/+P0m5Tpx8sHEGZeoo=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnKeyword.j
+ ava
+SHA-256-Digest: orgFH18S6F7XSsaHWUSb5DB79/WvMF2kT4BDSqZhMb4=
+
+Name: org/eclipse/jdt/core/dom/SuperMethodReference.java
+SHA-256-Digest: iELpb6eQ2juY6DI+vBy56N/jNZhDsWVKEHbLDKfuhSM=
+
+Name: org/eclipse/jdt/internal/core/search/IRestrictedAccessTypeRequesto
+ r.java
+SHA-256-Digest: gpiRoRZmKqoRJG01XbUP5/VL0cxMvaaha1dCbgZARD8=
+
+Name: org/eclipse/jdt/internal/core/search/matching/SuperTypeNamesCollec
+ tor.java
+SHA-256-Digest: qR4nG9elr6NrwUiAHdBhKcDCc3HIvCWVpLlQ2GM9ozA=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ConflictingSimpl
+ eNameFinder.java
+SHA-256-Digest: lD23i+9YwwC910yiFdR0y/d0K/vZtkTpL3EEvmZHtvQ=
+
+Name: org/eclipse/jdt/internal/core/util/RuntimeVisibleParameterAnnotati
+ onsAttribute.java
+SHA-256-Digest: /p1D3qMdZVqlMg+bu4v7Mlk0Qih4wEj6WierTjeicMk=
+
+Name: org/eclipse/jdt/core/dom/ReturnStatement.java
+SHA-256-Digest: veGMiOPyYt3bd+enLHVZTYiogYjrJgQVMxkcYvaYvEU=
+
+Name: org/eclipse/jdt/core/util/IExceptionTableEntry.java
+SHA-256-Digest: CpTt/YgAxY7Ue+2uWGbo0cQA2XVNdRp9tLwtL/zh2GA=
+
+Name: org/eclipse/jdt/core/eval/IGlobalVariable.java
+SHA-256-Digest: 1y9JytQDEyrrH/GnS9S2GpDlVv3hAlod8haoBA49ZCo=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/ASTRewriteFlattener.java
+SHA-256-Digest: HD1tCjRr6Y0NUxqG80SX2HYdHfp2ns/lxVQHUGYkXkA=
+
+Name: org/eclipse/jdt/core/dom/ChildListPropertyDescriptor.java
+SHA-256-Digest: Wlp1XYtJWBkM8Sjjlps3ylEppJDmelElBSNiKC3f85Q=
+
+Name: org/eclipse/jdt/core/compiler/ReconcileContext.java
+SHA-256-Digest: G/7EcFItlymyl/QBrh++DkgnRjvqpiS+naLg3lgVWpk=
+
+Name: org/eclipse/jdt/internal/core/SourceField.java
+SHA-256-Digest: UfsH8KHPYfWeYsSuMcOnDwdyHlTPlpwJ9QKrTbCAv44=
+
+Name: org/eclipse/jdt/core/dom/ProvidesDirective.java
+SHA-256-Digest: 41P3TEiYWEd0Gh+LvLEOlcssefgjbcRlMhry3I8eiZQ=
+
+Name: org/eclipse/jdt/internal/formatter/OneLineEnforcer.java
+SHA-256-Digest: I+iBuDnbSYPCeysxoRAd6dQV3TVANvdEFyS6DIpBVxc=
+
+Name: org/eclipse/jdt/internal/core/hierarchy/ChangeCollector.java
+SHA-256-Digest: 2zwKAujm7TFY6KwNs/EVs4q4BMKj+TNN2s6xwwTL0aE=
+
+Name: org/eclipse/jdt/internal/codeassist/CompletionEngine.java
+SHA-256-Digest: tVTwuUABGlcwi9AXrbgE66Nkn8w3HWisNZm5oEl2/6w=
+
+Name: org/eclipse/jdt/internal/core/JarEntryDirectory.java
+SHA-256-Digest: McFeEZOaZGWgeIP6p2Z1L1aV+Zw6OgkgYDmw5l95UhY=
+
+Name: org/eclipse/jdt/core/util/ISourceAttribute.java
+SHA-256-Digest: Iy1Y8YDiUh7XySdUn/n+Dy3sicnUo8yebHCEWKyG090=
+
+Name: org/eclipse/jdt/internal/eval/VariablesInfo.java
+SHA-256-Digest: a03uQC7E4g/xCjKsY/hM1JRssnQQpLnt9hhTRYJgDK0=
+
+Name: org/eclipse/jdt/core/dom/MethodBinding.java
+SHA-256-Digest: 4Gsecvx5PfJzHrRJd8pEcsJVupFUU+KhvNW+Hb0Ih0c=
+
+Name: org/eclipse/jdt/core/dom/InfixExpression.java
+SHA-256-Digest: 7A3XiDsO53tJcjNsLhZU8vGx7vimiU+4vG9dbkuo6S8=
+
+Name: org/eclipse/jdt/core/dom/CompilationUnit.java
+SHA-256-Digest: 2OC3A2oOby7tKWSYUl54APsbHyAbta8hExEOw/1k2bU=
+
+Name: org/eclipse/jdt/internal/core/ResolvedBinaryType.java
+SHA-256-Digest: OxKGJeKHQ4RjDQX6weOXWjzgWxYNSKHQKeXLeF4r530=
+
+Name: org/eclipse/jdt/core/compiler/CompilationParticipant.java
+SHA-256-Digest: dCKY24VWjQK6ucUp/OT5K/DnxMRKfJg3fbviyQwudFc=
+
+Name: org/eclipse/jdt/core/dom/PostfixExpression.java
+SHA-256-Digest: EPEUBeZ/ZyppQC/+Rqxxxy5ruA2W+5Jgs8b2f1syoq8=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/AbstractIndexer.java
+SHA-256-Digest: JP0ZxbCEQj0J17dP8ya+6rO2bZOaEy81qMCBLLnRB+o=
+
+Name: org/eclipse/jdt/core/dom/DefaultCommentMapper.java
+SHA-256-Digest: EfSGTMaJWG9//YTqyiN/CccWnCHc4mZ9Wh6mcmQhGwY=
+
+Name: org/eclipse/jdt/core/IMethod.java
+SHA-256-Digest: I1bXY9bX0sw2Kj8p2rhRCNy9Xts22hPkp4fLG2XnctM=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnExplicitCons
+ tructorCall.java
+SHA-256-Digest: DTyIm6OW4Pg5j8ora/7CLsbFbIi/mVxwyL/eNlLZbzY=
+
+Name: org/eclipse/jdt/internal/core/search/matching/ModuleLocator.java
+SHA-256-Digest: nR0nzF0cyGuYJdu3SUSIdzCmjO64JdgGqfPmeKgeoUA=
+
+Name: org/eclipse/jdt/internal/core/util/SimpleDocument.java
+SHA-256-Digest: KMg01mPRmieHOMx07BNrGD2HIUJcavIHLKRIGiD+Pp0=
+
+Name: org/eclipse/jdt/internal/core/util/ASTNodeFinder.java
+SHA-256-Digest: 3gC5arU6DtscRCPLmIEv4zmXU3MhgNI6jOXx+b7+aL0=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnModuleRefere
+ nce.java
+SHA-256-Digest: HVFjC5GT1Ap06/hcwp9XPjbEyNYRJjjDNLxzvkLv52M=
+
+Name: org/eclipse/jdt/core/package.html
+SHA-256-Digest: fV5krWFoKPDn5iApJ1DDxcShPV0uhORrYRiS1sL5lmk=
+
+Name: org/eclipse/jdt/core/dom/MemberValuePair.java
+SHA-256-Digest: VCGDxfj3aD39Amh6T2HmAAKTMJkfDTHD84UUc8gMepU=
+
+Name: org/eclipse/jdt/internal/core/JrtPackageFragmentRoot.java
+SHA-256-Digest: Xrv+3vScdlS9eFQNgBS9Lgsc87woyDaAMZyb6YUV7F8=
+
+Name: org/eclipse/jdt/core/dom/BlockComment.java
+SHA-256-Digest: 0p0H4hvKBxnRaBI1DBn00mL0zQCNrp+isyeQLZ5R5aQ=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/DerivedSourceSearchP
+ articipantRegistry.java
+SHA-256-Digest: b/ljzVydW5svm8q7yHyivqZMp4SNMG9jeyXs2c28QUc=
+
+Name: org/eclipse/jdt/core/util/IInnerClassesAttributeEntry.java
+SHA-256-Digest: 8v6N0qJSdUE+BNjaKxCCSjmnW24RGKiENpSfpRwJtD0=
+
+Name: org/eclipse/jdt/core/jdom/IDOMNode.java
+SHA-256-Digest: ghQNUkcqatiqmsYi2KCpOGLSPSuzv8cjTUstnlqRnSc=
+
+Name: org/eclipse/jdt/internal/core/builder/ReferenceCollection.java
+SHA-256-Digest: mxLo5joTf1FEi6HoPqOpgPbMRDHifhXO0o+7FDHYpLw=
+
+Name: org/eclipse/jdt/internal/codeassist/InternalCompletionProposal.jav
+ a
+SHA-256-Digest: X2cyvE/Biv3cZVAxArrylo5oa+ybSoNTwLnNfLSCc2o=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnKeywordMo
+ dule2.java
+SHA-256-Digest: fTFj0ht7ZJtn+yEjGKpl94vTkv6eTuyAn/cjeffRPxs=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/IndexBinaryFolder.ja
+ va
+SHA-256-Digest: fLEtq+y2Ejd00qoyFgIZ9yNbweaKg8FDWfGSFFRFHiU=
+
+Name: org/eclipse/jdt/core/IBufferFactory.java
+SHA-256-Digest: w9JCIGY3fQ5Dyc8f0UTZnUZv2VzYBQOtF/BlVG3bunk=
+
+Name: org/eclipse/jdt/internal/core/builder/CompilationParticipantResult
+ .java
+SHA-256-Digest: Lt8UL5feXz37qsjh3XpKwuySjgTqdqAZsDDatTrwwrM=
+
+Name: org/eclipse/jdt/core/dom/Assignment.java
+SHA-256-Digest: OorKX404u0M4ZJZPI2WGNb/ZNf+noLxIgA9cl+JzFiU=
+
+Name: org/eclipse/jdt/internal/core/builder/SourceFile.java
+SHA-256-Digest: O5bkwvbLa683YozUx8zOZkcSAFVIVgnnfRai6bbgqa4=
+
+Name: org/eclipse/jdt/core/dom/TypeParameter.java
+SHA-256-Digest: pyt8WJeQQbd/cHRFhyXHYBWoisZo2GihWdFQYfehZ1I=
+
+Name: org/eclipse/jdt/core/util/IPermittedSubclassesAttribute.java
+SHA-256-Digest: 8Mb5qlXKrkB5ePU8Xkzs0UQWcS1vh2J2iib1lZLBWSs=
+
+Name: org/eclipse/jdt/core/dom/SwitchCase.java
+SHA-256-Digest: +R+BDpZJGyJZmlI1mnHNxiOwOUUKMP44HgZSv8Dkmk0=
+
+Name: org/eclipse/jdt/core/dom/ClassInstanceCreation.java
+SHA-256-Digest: DHXKWrF5qtNv0KrNYQ+pgIyj1H6H0riNdtHA2AveDOg=
+
+Name: org/eclipse/jdt/core/dom/ConstructorInvocation.java
+SHA-256-Digest: 1b9/GnISmjw8fH4HP4kPr7VKqGOM8ihmLGhzKwSlLAk=
+
+Name: org/eclipse/jdt/core/search/IJavaSearchResultCollector.java
+SHA-256-Digest: ury1ypggkOpUqQ7jDvZponVMQ7hksvdqAyYzaXVVNxs=
+
+Name: org/eclipse/jdt/core/dom/EmptyStatement.java
+SHA-256-Digest: yZtKVudRkqV8QBALEK4JznK5JuU5y6e3o+4EcQ/C+Ds=
+
+Name: org/eclipse/jdt/core/util/IExtendedAnnotation.java
+SHA-256-Digest: jVbQSYi+oNA3zBRfV4B4TiFQWzJLgvyu0yNSMqHE01g=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnKeyword2.
+ java
+SHA-256-Digest: y+C4Td6RO1uXxsHWOznN4RpTOo78P/xMceR/l9WYAD8=
+
+Name: org/eclipse/jdt/internal/core/BatchOperation.java
+SHA-256-Digest: FE4NW92dqvHLLPzIjjciXdLARmELXEct9qz7azjXTYQ=
+
+Name: org/eclipse/jdt/core/IMember.java
+SHA-256-Digest: aY4qkQXH5B3WI7li8RpoSr3UWUXWhqFzm0wlTL+eE7g=
+
+Name: org/eclipse/jdt/internal/core/index/JarIndexLocation.java
+SHA-256-Digest: XxU7dSGh5uAUC9EfUHAiW3oXQ5ngDaGdFdzoKS4C0W0=
+
+Name: org/eclipse/jdt/internal/core/jdom/DOMBuilder.java
+SHA-256-Digest: e0y0Nvzb0h7UdCkDO54q/bhNbET2UlSVGqiVAEfWyUo=
+
+Name: org/eclipse/jdt/core/dom/AST.java
+SHA-256-Digest: 9BRygZdpWpPJvLW5loy32t3JzsQDvjbJp4w/c+InhHA=
+
+Name: org/eclipse/jdt/core/dom/IModuleBinding.java
+SHA-256-Digest: 1hYd3uVDu1D3y8zLk0R4L3diuxvqc4PNPuazJm/90Ac=
+
+Name: org/eclipse/jdt/core/dom/PackageDeclaration.java
+SHA-256-Digest: 3/bd8HfQLVYLXcBWT8TjXNp23E2LMCqSEdd6YHokUMw=
+
+Name: org/eclipse/jdt/internal/core/LocalVariable.java
+SHA-256-Digest: x7XiQSKNDAZLqVcGy6vVkxtMAglfW+TDAF4533/CEx0=
+
+Name: org/eclipse/jdt/internal/core/builder/QualifiedNameSet.java
+SHA-256-Digest: 6S/Tyy3p7wiWkDoXqI5GqaXFNbBVdan6KQwr2x4SpdY=
+
+Name: org/eclipse/jdt/core/dom/ModuleBinding.java
+SHA-256-Digest: LzW5935QYGar7IB+UhhLZV/MM4LN3nK73mXPkvwqEDw=
+
+Name: org/eclipse/jdt/internal/core/CreateInitializerOperation.java
+SHA-256-Digest: Q3K60T6aE6A9qEXnoHPjBGWEBTPL1g/BEkPuoq8Rfs8=
+
+Name: org/eclipse/jdt/internal/core/nd/java/model/BinaryModuleFactory.ja
+ va
+SHA-256-Digest: zLNSTqzBRaNUqu7e+VpR2AfiaG62I6eUU/hgE8soMwQ=
+
+Name: org/eclipse/jdt/core/util/IAttributeNamesConstants.java
+SHA-256-Digest: g8paDXJLGep66IqypGU+FhIgZooE/i299JBBmR/fExA=
+
+Name: org/eclipse/jdt/internal/core/ClassFile.java
+SHA-256-Digest: 3Kr3MWbiTLoBfqtVaquGiKgMscta6OBSgnJESHvLNAo=
+
+Name: org/eclipse/jdt/core/dom/ConditionalExpression.java
+SHA-256-Digest: tyx5P+bD7IXLUWZW7WYm+nmCRgKu7XYprJ/XaqvM/LU=
+
+Name: org/eclipse/jdt/internal/core/BecomeWorkingCopyOperation.java
+SHA-256-Digest: jplNi6VIMbEAsU7XIcvtX8kXRtm4IsFwMJHO8iLU9VY=
+
+Name: org/eclipse/jdt/core/util/IClassFileDisassembler.java
+SHA-256-Digest: reDEzafYLtNvVpcDrGh9by3RwWGm16Kbi8glpUK8T2s=
+
+Name: org/eclipse/jdt/internal/core/eval/EvaluationContextWrapper.java
+SHA-256-Digest: ovGZ/JhpIilnhBvMQyqmAugGZxeWRvlW+lRYrvFElNk=
+
+Name: org/eclipse/jdt/internal/core/MovePackageFragmentRootOperation.jav
+ a
+SHA-256-Digest: fu/2rLUy76kFrJ8JQPZgR5ABjYLGows2PzxRxcMOMPA=
+
+Name: org/eclipse/jdt/core/util/IConstantPoolEntry2.java
+SHA-256-Digest: rjyDvC7+o0o2AuvLQFe+ZCfB/Icv2F2LYpod38gC8B4=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ImportAdder.java
+SHA-256-Digest: V/E/fh9OMRm9Vt6NDl7AbNxjcYoEy3G4yR053Arv1sg=
+
+Name: org/eclipse/jdt/core/IJavaModelStatusConstants.java
+SHA-256-Digest: aJ/f+gk9nZoWpE/OzsihDdvurhVxqFavQB/jNDfTpIA=
+
+Name: org/eclipse/jdt/core/ITypeParameter.java
+SHA-256-Digest: l1yekIf6wm841MgMQN67/R+Ya3Ip8Dcchx6LgQeYT8k=
+
+Name: org/eclipse/jdt/core/util/IEnclosingMethodAttribute.java
+SHA-256-Digest: Lr7IWmWv6iOtw5rMYhlWoXdFlTaBPr/+4vuN+0U3V8o=
+
+Name: org/eclipse/jdt/core/dom/ParameterizedType.java
+SHA-256-Digest: sNbVtVnvWFJpMbqjRpjf8qaDVJH+ZkZX5f8GYuBvyKU=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnMethodTyp
+ eParameter.java
+SHA-256-Digest: rp+qsIZT6Ykb161jFciELb3Qm8NsuYhY+yZuCqQIDCg=
+
+Name: org/eclipse/jdt/internal/core/search/matching/PatternLocator.java
+SHA-256-Digest: eecYXm6KL+zCkUz+rAqDyvO3uSWXmBHMT5i/490ceqA=
+
+Name: org/eclipse/jdt/internal/core/ExternalPackageFragmentRoot.java
+SHA-256-Digest: PZo+2YX/9mXXUbYevQAJ2Dh/TF/O/NykjpuE9k3/CAs=
+
+Name: org/eclipse/jdt/core/search/SearchRequestor.java
+SHA-256-Digest: IM+b/55zS7GH2r1Zj7wdhxJ8HqM9m6si86fJSgf7psU=
+
+Name: org/eclipse/jdt/core/dom/NameEnvironmentWithProgress.java
+SHA-256-Digest: g8DAnvuSd/Ixv4pe9fukuWZb1Cvp7AZIPJEthoh+eqo=
+
+Name: org/eclipse/jdt/core/search/ITypeNameRequestor.java
+SHA-256-Digest: 1zYDk4EHYiQ4EXGFn3z3fyysAfeW3j3kFqUX4ZSs5KI=
+
+Name: org/eclipse/jdt/internal/core/DocumentAdapter.java
+SHA-256-Digest: kl78/qukdWm/0ku22wgIa00DFn6gQkvYysO7ozSJj+E=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistPackageDeclaration.
+ java
+SHA-256-Digest: j/BiZKNWI0/MxAaWWiaM696c6+pd/Bjf6QykTmIehpQ=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnQualifiedAll
+ ocationExpression.java
+SHA-256-Digest: XyYp/r6ml/DhjLYirjGNJzhp/XRRTcNV7tOI+I8cr48=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnJavadocTy
+ peParamReference.java
+SHA-256-Digest: IS8uOIkcdQ/OgrAD8mEAACmnkF/U9bQB4PmuHeKn59Q=
+
+Name: org/eclipse/jdt/internal/core/SetClasspathOperation.java
+SHA-256-Digest: MxFM8KyiyOUOouUIp/5MWi5sh7gKteloDcY4G6CFU08=
+
+Name: org/eclipse/jdt/core/util/ICodeAttribute.java
+SHA-256-Digest: AvO6xmK6UUrd1QYfMJckxd4hrOIdlJ551ThrJNhYrpc=
+
+Name: org/eclipse/jdt/internal/core/eval/RequestorWrapper.java
+SHA-256-Digest: NVsoT+/YsYlhItWjNyGBx1a0QLIVqN1UcH0R/VJ4EDM=
+
+Name: org/eclipse/jdt/internal/core/JavadocContents.java
+SHA-256-Digest: HBbGtUTQeL6hyW3bFbjEBRAy/8k4FQp/wD12RKGLXKA=
+
+Name: org/eclipse/jdt/internal/core/dom/ICompilationUnitResolver.java
+SHA-256-Digest: e5e99xL95sIooWA/IBJGR0W74zV4uDsHEKPOHJzmQts=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistCompilationUnit.jav
+ a
+SHA-256-Digest: vChcGZEJEbO9FV2+J7epUmSO1lwPSP7InM3gCmYjdNk=
+
+Name: org/eclipse/jdt/internal/core/builder/JavaBuilder.java
+SHA-256-Digest: Hp8OYs83FtalY50bSBIy5/rcWC2j9LJ9uGgibiROXlg=
+
+Name: org/eclipse/jdt/internal/core/search/matching/TypeDeclarationLocat
+ or.java
+SHA-256-Digest: aDMYaXeMeBk4hbIvuFO1mCHxwCILUVpL09NgrDkf3X0=
+
+Name: org/eclipse/jdt/core/ICompilationUnit.java
+SHA-256-Digest: Zi5AOudvNqPE6f67MDpo62MDRXxds8q1bGPTZVFw+To=
+
+Name: jdtCompilerAdaptersrc/org/eclipse/jdt/core/CheckDebugAttributes.ja
+ va
+SHA-256-Digest: CLKx2YcsjQ5BvKkK2p986H46bkBB8Uk/tquPSxd4wG8=
+
+Name: schema/completionEngineProvider.exsd
+SHA-256-Digest: 6CVyB70+ElRpoiI6HI1rooPEa2y7v9lp7DYYNrna068=
+
+Name: org/eclipse/jdt/internal/compiler/SourceElementNotifier.java
+SHA-256-Digest: 0KMQFAGRu8jjQsvBO5s1C5AmQND83IAluhwknYFOucM=
+
+Name: org/eclipse/jdt/internal/core/DefaultWorkingCopyOwner.java
+SHA-256-Digest: VBzMhb8ibPYJpmXzSUDzIM19SSGH4ucf/zNqiE1L6kQ=
+
+Name: org/eclipse/jdt/internal/core/search/matching/VariablePattern.java
+SHA-256-Digest: SWop+qNBn9pLdcrF8uznv1tv8Kh6cptKu9V496yMS90=
+
+Name: org/eclipse/jdt/internal/core/search/matching/IntersectingPattern.
+ java
+SHA-256-Digest: PaLq1TokyADGX+V/TSJVxMw+1k1rNcJofV7Hz+AcXpM=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/RemoveFolderFromInde
+ x.java
+SHA-256-Digest: CHlP902rpWBNza8IhMqGpE6hjkc+GmfEiwFMfae4l5A=
+
+Name: org/eclipse/jdt/internal/core/builder/ICompilationUnitLocator.java
+SHA-256-Digest: IejUMveSor90/96UedIHnAYVGKKEcSGMa6HEzNM5VxQ=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnAnnotatio
+ nMemberValuePair.java
+SHA-256-Digest: wB1SI0ztsKWQNFY4xy5nP3b5BLjG4PH90smuRSq/7I8=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnParameterize
+ dQualifiedTypeReference.java
+SHA-256-Digest: qZ8mVUVI8ZeVlhkt0xPyI/GboYQP7HUB/WQQhdDiDJw=
+
+Name: org/eclipse/jdt/core/search/DerivedSourceSearchParticipant.java
+SHA-256-Digest: dZNpIBvWpcCooPBFl47fr+DBw9Z/Wbeuzq5eus9U+Ds=
+
+Name: org/eclipse/jdt/core/formatter/messages.properties
+SHA-256-Digest: VpT3N/Kr83DMh5CU+eaCG4pEUny9IrrsAO4quZheAyM=
+
+Name: org/eclipse/jdt/internal/core/search/JavaSearchDocument.java
+SHA-256-Digest: IaGYvlnb7JDs1tRTDqrwmxGUCg4R0+RZz3WP2Ermfa4=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnArgumentName
+ .java
+SHA-256-Digest: 3u5DXLTzD7hW/0UhtQXRgZG+RCyc8Dzn2dFfPpyIEmM=
+
+Name: org/eclipse/jdt/core/ToolFactory.java
+SHA-256-Digest: R/iL7av5e3AlT+jhlmvgcSW5C1BfYDRqiEjOtyZADJs=
+
+Name: org/eclipse/jdt/internal/core/ResolvedSourceField.java
+SHA-256-Digest: GpB/6dgv+hThwWlzw/VG9HXP6Y+M6H8+eHn5UPZWzTc=
+
+Name: org/eclipse/jdt/core/dom/IExtendedModifier.java
+SHA-256-Digest: VAfWi1G4Fpe43PP9RLfNsKOphUMGsr2vgVdntxtrMpY=
+
+Name: org/eclipse/jdt/internal/core/util/Disassembler.java
+SHA-256-Digest: uZB6UiOMV88A57RhXeyBHjdjYjjIexdEqwizUhLv4zg=
+
+Name: org/eclipse/jdt/core/search/TypeNameRequestor.java
+SHA-256-Digest: KWQqYCdeQ9DwEF2Vek1La39453XGBzvGdVet4IL2Sxw=
+
+Name: org/eclipse/jdt/internal/core/search/NameMatchRequestorWrapper.jav
+ a
+SHA-256-Digest: VpnapNrVtYjkxrU35IwlpOJEwe0mDZs3KYm+/LETwNI=
+
+Name: org/eclipse/jdt/core/Signature.java
+SHA-256-Digest: ItBi9SeKYwT6gqjCAUJc2zB9CzNZfnymjIBGMKFMvD8=
+
+Name: org/eclipse/jdt/internal/core/UserLibraryManager.java
+SHA-256-Digest: hFqfztD+N+vDjkahyRkS2wVDgmAj3FZK7QIvTgULi8E=
+
+Name: org/eclipse/jdt/core/util/IAnnotationComponent.java
+SHA-256-Digest: r0XMX0p4li4YhzZKrO/9lyhvwfWdAoSuZL/+NBiWWg0=
+
+Name: org/eclipse/jdt/internal/core/index/EntryResult.java
+SHA-256-Digest: 20fbA5+5DiSzjQMdlJYvoofcB+z3PW+hrbD3Yh7wtFI=
+
+Name: org/eclipse/jdt/internal/core/search/matching/ConstructorPattern.j
+ ava
+SHA-256-Digest: l4+rHCiiQgclTWguyaUx1BOCTRvpd7gRtLRi2GxVj/Q=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnImportRef
+ erence.java
+SHA-256-Digest: ltddrC30WnXq8fwUVT2SemPxIxeNzC3ttoc4wf5hcgQ=
+
+Name: org/eclipse/jdt/core/dom/MethodDeclaration.java
+SHA-256-Digest: Dw6iJ5Okk4GOpySmj6jgxMbw7/dwP7yCZk+06n2uw5A=
+
+Name: org/eclipse/jdt/internal/core/search/matching/PackageReferencePatt
+ ern.java
+SHA-256-Digest: g4T2zz8iEAlftq/AkqO8+lzw6zvVHk/fZPxnO3xSW10=
+
+Name: org/eclipse/jdt/internal/core/PackageFragmentRootInfo.java
+SHA-256-Digest: 8grX/03pL0ETU8kmjfChPgf4ZQ7eb07/Qg+vIyglJTk=
+
+Name: org/eclipse/jdt/core/dom/ASTMatcher.java
+SHA-256-Digest: VA8hAogEBWu8wsSulsyZvZbPpOKO623Y7VC6BLo4we8=
+
+Name: org/eclipse/jdt/internal/core/CreateTypeOperation.java
+SHA-256-Digest: vFxiClWObVKIpglulZ5kBnQr7DPGRfidb7LZzlg5Tdo=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnSingleNam
+ eReference.java
+SHA-256-Digest: kHzFTcsze8xMhWEnbYcXo2pnxjhHm1OcjLeMrEQfG3Q=
+
+Name: org/eclipse/jdt/core/dom/TypePattern.java
+SHA-256-Digest: da4GIHotOiI190RcC/mCbpMESbF2vI4IhrFTaZf+tV0=
+
+Name: org/eclipse/jdt/core/dom/NormalAnnotation.java
+SHA-256-Digest: R9Lz3q3NJ86IdsryIT4xgeYffjhsijMhjZepUHF+2Gk=
+
+Name: org/eclipse/jdt/core/search/IParallelizable.java
+SHA-256-Digest: q7aYfe+qwUvx/V/BhsoQi0OaaFxijuVnx+mkGT7qVRs=
+
+Name: org/eclipse/jdt/internal/core/jdom/SiblingEnumeration.java
+SHA-256-Digest: zY3Ayb+l9YR/U7pS+2t8mos6+V1vn5oAM75dL/aE+qs=
+
+Name: org/eclipse/jdt/core/IInitializer.java
+SHA-256-Digest: 3AX9KOOxtxEjNfXRgQ+T6ZFGYyZr4rHy0CZRQheletE=
+
+Name: org/eclipse/jdt/core/ICodeFormatter.java
+SHA-256-Digest: A0Vv+ZjgRL2HWkjJBwQxKQZxX7aJr9IhYV2xthBQtdc=
+
+Name: org/eclipse/jdt/core/eval/ICodeSnippetRequestor.java
+SHA-256-Digest: /Dr3l7DkfoYAUJqP9aIrWwtt8qGGMXDOG/djJtSwpQI=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnJavadocMo
+ duleReference.java
+SHA-256-Digest: hgJXxhG7epfTwUUJYJwhbTe6Smapkvrtky84u38nV3E=
+
+Name: org/eclipse/jdt/core/dom/TypeMethodReference.java
+SHA-256-Digest: qrh0gyqlZrq3dOKtQWR7RyQQ7X5rln0d/zQuKyWXASY=
+
+Name: org/eclipse/jdt/internal/core/search/matching/PossibleMatchSet.jav
+ a
+SHA-256-Digest: 5CbYMjzV0nB1JpunHAJa8crskjOca9pcgPePGWdIbpw=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnJavadoc.j
+ ava
+SHA-256-Digest: Z06jm9qRqsn+hjrr2eHLrovaI0vKcQFN6S5s9WRuDfM=
+
+Name: org/eclipse/jdt/internal/core/search/matching/TypeParameterPattern
+ .java
+SHA-256-Digest: zcOq+Dq4pTCy8er3bzDhSUskUnyk3tonvvhbNFZlpSo=
+
+Name: org/eclipse/jdt/core/IAnnotation.java
+SHA-256-Digest: eKjR26BMyuJbsmn2ZhZZcvayvULHhyQ/TD0dzaSPCpU=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnQualifiedNam
+ eReference.java
+SHA-256-Digest: Gntc7/IS/hr+66AHNsQy0Ydma+GYqjEQu+qdIQLOW0E=
+
+Name: org/eclipse/jdt/core/dom/MethodInvocation.java
+SHA-256-Digest: yrx9CSzg90qHIIND1h1eSIHXGIPn1xSn3x8jbbJBWA0=
+
+Name: org/eclipse/jdt/core/dom/MethodReference.java
+SHA-256-Digest: BB0eMLe3J2/vrF3jb1eEA5wZcz7rBrf5RXQLW2k9H5g=
+
+Name: org/eclipse/jdt/internal/core/builder/ModulePathEntry.java
+SHA-256-Digest: yH1DeOt0U1GPSlJ6mZRe4sF+c70iYZTaiPZanaMSCz0=
+
+Name: org/eclipse/jdt/core/dom/BindingResolver.java
+SHA-256-Digest: iX3opYry/1zhrVktG8PAfFjlbHYLlAe38cQDltr3eoU=
+
+Name: org/eclipse/jdt/internal/core/OverflowingLRUCache.java
+SHA-256-Digest: dFH9lpPGhwZLCVnmJsqA9ewFQzpplz+2hJfH+LqG+7c=
+
+Name: org/eclipse/jdt/internal/core/nd/java/model/BinaryTypeFactory.java
+SHA-256-Digest: tovRjoNLlWuAoG67wQ32HQHaFJxXpcNEan7fh6vdETU=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnKeywordMo
+ duleInfo.java
+SHA-256-Digest: 6htSi8FzB6bZWKqaz6w/LSZ2OXCSUtTFgv4NYqjMkZQ=
+
+Name: org/eclipse/jdt/internal/core/search/TypeNameRequestorWrapper.java
+SHA-256-Digest: AExt/eDytBlgacYe/FvI+7/4EFvgYH54je2Zlwvb/Kg=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/DOMToIndexVisitor.ja
+ va
+SHA-256-Digest: IPbem05Rb4IlEl7i/bF8Bm2K8TYfotKskP+vvHZ0R38=
+
+Name: org/eclipse/jdt/core/search/IJavaSearchScope.java
+SHA-256-Digest: NuxnrKlMrPefSFOUXpHDea4wCf0mkZXE8bKB0Nh6RwQ=
+
+Name: org/eclipse/jdt/internal/core/util/DefaultStackMapFrame.java
+SHA-256-Digest: fRDK/DhwzC4PKsEKZQY/GgqzNVlvJlwnC/KU67X56D8=
+
+Name: org/eclipse/jdt/core/dom/ImplicitTypeDeclaration.java
+SHA-256-Digest: dHbVF2DsvwJHrV3mg50X4sEH1Y1pjiLjPEP/F10ZaGw=
+
+Name: org/eclipse/jdt/core/dom/SimplePropertyDescriptor.java
+SHA-256-Digest: COaOKOlIQHDSCYoQ5nLQ3JAtcKIDOUEhhzgbgQ2iNnU=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/OnDemandComputer
+ .java
+SHA-256-Digest: 6eYOrFsYGly9Sm/X/BLJ1bPQ7QgD26SxxW11Fl9kPew=
+
+Name: org/eclipse/jdt/internal/core/search/matching/VariableLocator.java
+SHA-256-Digest: QO2v0j5meSnqyzDyP1mejVPUj+7zB/rEyAlYP5Zj8x0=
+
+Name: org/eclipse/jdt/internal/core/builder/AbstractImageBuilder.java
+SHA-256-Digest: ttEwrLC2cNWkJW0vmJo9lg2PtMkKefdyXk7KkI+2V7k=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetQualifiedNameReference.ja
+ va
+SHA-256-Digest: r8KV1QzIbJbZ3msX5ZnOnu8GAolPHaEjOlrgYy9fxwg=
+
+Name: org/eclipse/jdt/internal/core/search/JavaSearchTypeNameMatch.java
+SHA-256-Digest: MUXMNQOBHBAl/ed5Zzh0B19SAANX0wPzkEHanxE7nZk=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnContinueS
+ tatement.java
+SHA-256-Digest: BcBEOKcL6r1W2hsr06S2UhlipJcdJFVQ50ZTVgYpJas=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/NewImportEntry.j
+ ava
+SHA-256-Digest: WN1p/L/4JRLs+1EIXOZsQgmW/Iywb2mVWZPL3uIdsKc=
+
+Name: org/eclipse/jdt/internal/core/IPathRequestor.java
+SHA-256-Digest: E7DOyMyeq8fRS8yjWTzYynPUI+YFzQ1bAFnaVQ3S0ok=
+
+Name: org/eclipse/jdt/internal/compiler/CompilerConfiguration.java
+SHA-256-Digest: 4jkhBGZsA2YMoCspa0dp+vQURWaFhkRPx6tEIVZk9JI=
+
+Name: org/eclipse/jdt/internal/codeassist/ICompletionEngine.java
+SHA-256-Digest: 0jNyDV+D3bwO5ffvNLCkv1usF4n46Pt1cmAi2jbb69I=
+
+Name: org/eclipse/jdt/internal/codeassist/DOMCodeSelector.java
+SHA-256-Digest: g0xPKUvbFrMmpCneJIb6fl3lqxuuBnZbBdY79vvhios=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnModuleDeclar
+ ation.java
+SHA-256-Digest: Gp9jlQwqJrcUFPoYZ+5IVjccZvdg6BUwBGwFwxn5/ns=
+
+Name: org/eclipse/jdt/core/IImportDeclaration.java
+SHA-256-Digest: a3Ubzvvf2MMJuFpfpcB9ZWVRyrKMQn9d8NeuhcPuDH0=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnUsesSingl
+ eTypeReference.java
+SHA-256-Digest: hlXLo1nOaCXF0paCIYkufUAXK+xcN8mSbPoFqeAIPjM=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnSuperReferen
+ ce.java
+SHA-256-Digest: rowcQIfYH/cQrN96UfAVXgTSZvoeu06EYknVARMlhQQ=
+
+Name: org/eclipse/jdt/core/dom/AnnotationTypeDeclaration.java
+SHA-256-Digest: I6Gu+R5fkXmW55sIRm+/XZHO/Apgdsv9Sh4vw8cn7fA=
+
+Name: org/eclipse/jdt/core/dom/IPackageBinding.java
+SHA-256-Digest: kylG+GeoDZ3Xz8zl7XEDUbAvmgGeXLV/kkeubhOE3Is=
+
+Name: org/eclipse/jdt/core/dom/IBinding.java
+SHA-256-Digest: 3L3J7lqDFYYds/EHlhK5+oRqcYISoApPWPYHfTO5EFA=
+
+Name: org/eclipse/jdt/core/dom/InstanceofExpression.java
+SHA-256-Digest: DvsFqdFwQ4CqX8EiC72B+5+wAWqGrsjcTq7o1b0+/So=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionScanner.jav
+ a
+SHA-256-Digest: a7kNF1K/WoMOZ0TW/gvEB9JrBKEXQz7DH7Tga1+bv9c=
+
+Name: org/eclipse/jdt/core/IJavaElement.java
+SHA-256-Digest: 6Qz1U6F1B5ShSNUc1LWjtfMM5H3IgYJ8zmHcPzEFzPI=
+
+Name: org/eclipse/jdt/internal/core/CompilationUnitStructureRequestor.ja
+ va
+SHA-256-Digest: 0rWOGv8KoynsE3z0K8KVuewCZoJele2S58KciY9POnM=
+
+Name: org/eclipse/jdt/core/search/ReferenceMatch.java
+SHA-256-Digest: Sj7P+1NIMwhgGakRoIz4DK6C9v6MQQmirr1iaUWfsvA=
+
+Name: org/eclipse/jdt/core/CompletionContext.java
+SHA-256-Digest: ivvXLbHZ3UPc0Uv5sVMQclWUKTMDM60uSlKcgyYNBkA=
+
+Name: org/eclipse/jdt/internal/core/dom/SourceRangeVerifier.java
+SHA-256-Digest: Ux2YHH3abn1AjGlfJ6LlbV0OY+ciUs/5VfII/pvd7Hk=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/ManifestIndexer.java
+SHA-256-Digest: UAINWJ+/yEKtG+OtJyHndrK9o1lOOArs6UUEbV2KGC4=
+
+Name: org/eclipse/jdt/core/IJavaProject.java
+SHA-256-Digest: IBwpp4dbLYVZTdja0/WNPG/d7Wiiz3UXd3y/+c8YogY=
+
+Name: org/eclipse/jdt/internal/core/util/RecordAttribute.java
+SHA-256-Digest: pl8x3j0AmRYMtdCUvTqRSN/4K5I7eC80BZhHvEO/gpw=
+
+Name: org/eclipse/jdt/core/dom/ArrayType.java
+SHA-256-Digest: /wLwqNOEFfN34YNXmRCgejTtH3SldRduM06pFF/jpEg=
+
+Name: org/eclipse/jdt/core/dom/VariableDeclarationExpression.java
+SHA-256-Digest: SkC+C+DXAvp4t9SUqNLxDz7R29cEYHct5hx19yP0jJI=
+
+Name: org/eclipse/jdt/core/search/MethodReferenceMatch.java
+SHA-256-Digest: CFrcdqVWIENr+5BkIM/9AnAbX1ISS/C79Pktp/X4OvY=
+
+Name: org/eclipse/jdt/core/util/IBootstrapMethodsAttribute.java
+SHA-256-Digest: 7s8A2zmJonXNL9939enyXCnPD898DgOXLcr+EsMwXsk=
+
+Name: org/eclipse/jdt/internal/core/ClassFileInfo.java
+SHA-256-Digest: nU0REkVyTgsK6AF6Q8obBMli2pBijA/xdZHV8F1UJ7Q=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/RewriteSite.java
+SHA-256-Digest: kH847+GMfXDHRi3XyhjRxjVBLevOmfnORV+aupGnR5k=
+
+Name: org/eclipse/jdt/core/search/TypeParameterDeclarationMatch.java
+SHA-256-Digest: eC+zLe44V/TL7IW07hu5S7k6BJzsGubn/RPAuKtLVHA=
+
+Name: org/eclipse/jdt/internal/core/DeltaProcessingState.java
+SHA-256-Digest: FyYpXOIivoB1b89QFKeixWMXSDs9jCGYSfz3VSMgbSI=
+
+Name: org/eclipse/jdt/core/dom/RecordPattern.java
+SHA-256-Digest: PkDeRjaT64JISlDkB/xQA84D7xtnqEgYX3etotV179w=
+
+Name: schema/compilationParticipant.exsd
+SHA-256-Digest: zjxeVXE0hN4AFULZizwoKJXmeEbOIc8ca8skwFQDqgE=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnMessageSe
+ nd.java
+SHA-256-Digest: HP2FnC2bzr2cjw8OX7wxy/dD5q3YqYbWOE8HaOKXBTU=
+
+Name: org/eclipse/jdt/internal/core/util/DefaultBytecodeVisitor.java
+SHA-256-Digest: D6s9XPCjAUMgoFPt/weFoq8NMP7C8BZGfTpVjOsBxPQ=
+
+Name: org/eclipse/jdt/internal/formatter/TextEditsBuilder.java
+SHA-256-Digest: M9hXYLqVmG3KaJgY4UjK+hdjM9O6TuEvUM2N2m51jRw=
+
+Name: org/eclipse/jdt/core/eval/IEvaluationContext.java
+SHA-256-Digest: ZtTO+dGDPjZgeQrUCeRD3/QExENxFl5Cg5A/0jWi5JA=
+
+Name: org/eclipse/jdt/internal/core/ClasspathValidation.java
+SHA-256-Digest: I1vwE+SWA263Iiimgk8v9tuL5MIujm95LLz5PiAeIPg=
+
+Name: org/eclipse/jdt/internal/core/search/matching/ModulePattern.java
+SHA-256-Digest: dQAzmZUPNBX701mI0BRsEcHcZGsYsC6EsiXPE2HKxMU=
+
+Name: org/eclipse/jdt/internal/core/OpenableElementInfo.java
+SHA-256-Digest: cvjfKer7fMOHYK0oAnI6sXb0KJzQe7P2Q00FILX+Byw=
+
+Name: org/eclipse/jdt/core/dom/LineComment.java
+SHA-256-Digest: kSSuSYQRCvzeuoDCr9P6g9ScX14dD7fdeiTsUYVv1GM=
+
+Name: org/eclipse/jdt/internal/core/util/PackageVisibilityInfo.java
+SHA-256-Digest: qed09X9UPKecK7xcVApc87A96zhpvcGqJ23lWfM99kE=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnMemberAcc
+ ess.java
+SHA-256-Digest: 1DKQq7L7bX/vqnl4ICM+PuomrpkE7A6221jH5o0bapg=
+
+Name: org/eclipse/jdt/internal/core/AbstractModule.java
+SHA-256-Digest: lwOZ+/BfViRp0MSBlYJkb4Tiqab/XOi/vzWdb4j+idg=
+
+Name: org/eclipse/jdt/internal/core/JavaModelManager.java
+SHA-256-Digest: 3lYQTZcfXCfNCO0+a91L/tVFkfxnueLmzyd+M1Sd/rw=
+
+Name: org/eclipse/jdt/internal/compiler/SourceElementParser.java
+SHA-256-Digest: V03kaZIhNI+e+G0vIq6Yor4mp8865nSLcKIHh7N1MBw=
+
+Name: org/eclipse/jdt/core/dom/ASTRecoveryPropagator.java
+SHA-256-Digest: aSNAVzku2rJaAsZ2t8GZZDx4+zEVjfCZDDfNv2UncDw=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/ListRewriteEvent.java
+SHA-256-Digest: H6a0EPFCVYb4j6ocjWVRr0wwrXokiOAJnzRNG7G+gJs=
+
+Name: org/eclipse/jdt/internal/compiler/IDocumentElementRequestor.java
+SHA-256-Digest: 4zXHrrOZVFVrGt8tYN7nbTxTcaPY+qVlSJWzkIJ81o8=
+
+Name: org/eclipse/jdt/internal/core/ClasspathEntry.java
+SHA-256-Digest: G1Z5DlFgEJWG6d7dNTtszJispycEQ1dtOeuII+aaOIA=
+
+Name: org/eclipse/jdt/internal/core/ResolvedBinaryField.java
+SHA-256-Digest: UAgFF2p6xDafUxrJJt09EkHM+qmm32eG1fvgIUwPGH4=
+
+Name: org/eclipse/jdt/internal/core/util/PermittedSubclassesAttribute.ja
+ va
+SHA-256-Digest: omHKbKOF99u4EerAPCbldpKel3TeXOA5aFSf4a6L8EE=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/ReadWriteMonitor.jav
+ a
+SHA-256-Digest: oO7VxsZIxJwx/vsxV/uG5iPS7PywaWyrSTXXuYWS7os=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistImportContainer.jav
+ a
+SHA-256-Digest: Y3ZnpVE3fLJ7TQDswRD/oFzslNsNnITooDtzMUrTuKs=
+
+Name: org/eclipse/jdt/core/search/TypeNameMatch.java
+SHA-256-Digest: jTl6GwYkZejxJP0ZPfBFKEvhfGZLqkHOOmYlsBq2FKc=
+
+Name: org/eclipse/jdt/core/util/IFieldInfo.java
+SHA-256-Digest: ScLkXIalrodgQW5Mso0uFFJSGwnCdBoSpadiDmP14ak=
+
+Name: org/eclipse/jdt/internal/core/search/JavaSearchScope.java
+SHA-256-Digest: mBwHlisoeSBU5U5R2kO3CSVm4zeMziO6XvHWmzxdGmk=
+
+Name: org/eclipse/jdt/core/IJavaElementDelta.java
+SHA-256-Digest: N9EqERhZOyBLKVtNQyk6HayRZSnQK+6oJnYxY5m4qbY=
+
+Name: org/eclipse/jdt/internal/compiler/DefaultCompilerFactory.java
+SHA-256-Digest: BNnizDn5WzNlx2ETfMBSXPARFkfUz4CPQKxwkuTox3E=
+
+Name: org/eclipse/jdt/internal/eval/CodeSnippetEvaluator.java
+SHA-256-Digest: YYDsIHPmmVyt917yZxjuw5af323Gr/cdBklfbNdU/Nk=
+
+Name: org/eclipse/jdt/internal/core/search/matching/ModularClassFileMatc
+ hLocator.java
+SHA-256-Digest: Py2rVunS+UcUUNJdLdhe6s0QGwG5Em8nyZRLge/bszA=
+
+Name: org/eclipse/jdt/core/dom/NodeFinder.java
+SHA-256-Digest: 70VLiz0YoTQfF5twHdNwRCJvlJi+UdLDRjoQFQw0biQ=
+
+Name: org/eclipse/jdt/core/IImportContainer.java
+SHA-256-Digest: eZwvjF0HsXbziuvjoHUClZpQ8wcdLEXqn0Q/KPuGJ2U=
+
+Name: org/eclipse/jdt/internal/core/util/RecordedParsingInformation.java
+SHA-256-Digest: 6ZxX/FHXJCXFGPJAse0vtrNhuT4jBh/fU692gqt6rJE=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnPackageVisib
+ ilityReference.java
+SHA-256-Digest: dD1wRXpNn5euzWIEHequ6lxEsRacRtbLLYujfDPjtnY=
+
+Name: org/eclipse/jdt/core/ISourceRange.java
+SHA-256-Digest: YIob0KBQ200Vj0ue5OnKZAwK76gVaK3gCRO0Tz+tGNY=
+
+Name: org/eclipse/jdt/core/formatter/IndentManipulation.java
+SHA-256-Digest: WCTT4eKfFAUyVZVo4crYo7znesZX9uIJ7+kUIwvAulo=
+
+Name: org/eclipse/jdt/core/search/ISearchPattern.java
+SHA-256-Digest: OJ1hxcCeftiQBmaY0pSlxf07qYkypuQ62W0C3YYXW7U=
+
+Name: org/eclipse/jdt/core/dom/Initializer.java
+SHA-256-Digest: KyrMsyIBIoToU50TK0gR5hW4Y5JjwmLOgj4JC2wHc1Y=
+
+Name: org/eclipse/jdt/internal/codeassist/IExtendedCompletionRequestor.j
+ ava
+SHA-256-Digest: RKLp/r2RYS4WcxDDEqDimw83hJbtNdJ/anJRTjfoP/I=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionScanner.java
+SHA-256-Digest: MqRXZlrWGYD6E9bxbHgCvo3GW9FdVtYnl75lsHXdxVg=
+
+Name: org/eclipse/jdt/core/dom/CompilationUnitResolver.java
+SHA-256-Digest: DQ1tJuYlk3e9zNpJG/FM+dJNotUUUZWxwk8uKfIVQYU=
+
+Name: org/eclipse/jdt/internal/core/SetContainerOperation.java
+SHA-256-Digest: cOtugwwQmWhRxdz2mrTP263TddrlLcbtE5XsgtsFIKU=
+
+Name: org/eclipse/jdt/core/util/IStackMapAttribute.java
+SHA-256-Digest: 0LiA8ejQ4ODiqSJ31bfinl3IHeLl6Ae6gdvbioVIe38=
+
+Name: org/eclipse/jdt/internal/core/jdom/AbstractDOMBuilder.java
+SHA-256-Digest: 7Ne/krc3q+t4dlriaPKv413ikcRlNOrm5usnYIqDOMc=
+
+Name: org/eclipse/jdt/internal/eval/IRequestor.java
+SHA-256-Digest: kXmQFSiJnFxg44hKTKSxUoHmijqN4AvFMmHP76iSdns=
+
+Name: org/eclipse/jdt/internal/core/ClasspathAttributeDelta.java
+SHA-256-Digest: Sx9te5vQn6U87ZRdetZVFQ0n4p+y/wphr1RhfOCvEpg=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/LineCommentEndOffsets.ja
+ va
+SHA-256-Digest: oCbB1XuxoorPKHGBSb0dizVizLRdIWPP4VMVdfD50Mo=
+
+Name: org/eclipse/jdt/internal/core/builder/CompressedReader.java
+SHA-256-Digest: yrrdgqAtbMuAmmq+cPRny0IJ+M4lXVNrnK2sHAia7YQ=
+
+Name: org/eclipse/jdt/core/dom/ModuleDirective.java
+SHA-256-Digest: uAlaW8uTlloEO0etCXLr9LRqZspUDI/DlQewiriopRg=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnModuleDec
+ laration.java
+SHA-256-Digest: FOI3JBdJ25w0p2njv0EVNRFyd4qeuZSWc+ZYKd1QKSo=
+
+Name: org/eclipse/jdt/internal/core/util/ConstantPoolEntry2.java
+SHA-256-Digest: wpvgHlMSbenikXWFF5E3kchRE5aSniEnNre7YOz03Wc=
+
+Name: org/eclipse/jdt/internal/core/search/matching/QualifiedTypeDeclara
+ tionPattern.java
+SHA-256-Digest: 3gfqmRbQrt0Fg3EImlUMPqpP3EgPVWMkucUA4sHJLOQ=
+
+Name: org/eclipse/jdt/internal/core/builder/ImageBuilderInternalExceptio
+ n.java
+SHA-256-Digest: gywm2/b+RGaghBMGJGibmVPHPzTYLxPcGmXanqZiexc=
+
+Name: org/eclipse/jdt/core/search/TypeNameMatchRequestor.java
+SHA-256-Digest: 4+Vy1Nd+/AeCCjYgSbeUKVlglFBnVIBRqIQsTUXnTYA=
+
+Name: org/eclipse/jdt/internal/core/search/StringOperation.java
+SHA-256-Digest: nTD9gjnMLToeYQm0uZC17mHPhPiGPyWQQXtBuk/3N1E=
+
+Name: org/eclipse/jdt/core/dom/NameQualifiedType.java
+SHA-256-Digest: jAaAAsrpnYAWtwKhrTIAkj/tzQaPxO64DcreX5HZyQQ=
+
+Name: org/eclipse/jdt/internal/core/search/BasicSearchEngine.java
+SHA-256-Digest: WjuRSOoebaln6PxTyCIzdsL/Do20VkuY7AGgbtIQ2RM=
+
+Name: org/eclipse/jdt/core/dom/ArrayInitializer.java
+SHA-256-Digest: Gu9aF895zlJYjrUiv6iHRNiF9Dy25fDUpzbxBKJg+uA=
+
+Name: org/eclipse/jdt/internal/codeassist/InternalExtendedCompletionCont
+ ext.java
+SHA-256-Digest: DmOkCr8hKctwGbX0cZb7CEo2HlPj/VSnHFIW84OnZYs=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionNode.java
+SHA-256-Digest: eijBiiVgx/m2muDsgycr7B4ueC+6BMjkcnsCC+ZUL/c=
+
+Name: org/eclipse/jdt/internal/core/SourceType.java
+SHA-256-Digest: 17B1aEtXnAipCQs+54Gdsajd53O5Gv59kXhq4ZXCkLc=
+
+Name: org/eclipse/jdt/internal/core/util/RuntimeInvisibleParameterAnnota
+ tionsAttribute.java
+SHA-256-Digest: fTsU2wWV7QATJ1yTn2bg+XESVwy5Al91TUXQMKQb7qs=
+
+Name: org/eclipse/jdt/internal/core/BinaryTypeConverter.java
+SHA-256-Digest: NgMpJ8/1r7Y1N9KN4Q6VS0KAXhIUwd6jPUG8Syh4EGU=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/ReorderingImport
+ Adder.java
+SHA-256-Digest: KpaBdtkWrftV5CSydQWBpaiWl9rbD8Ikqo5JtmfKT78=
+
+Name: org/eclipse/jdt/core/dom/ModuleDeclaration.java
+SHA-256-Digest: 56T8eQuk2UJVFbwWomld3cvCkqg9OmCSIHN1KwKDrA8=
+
+Name: org/eclipse/jdt/core/dom/TryStatement.java
+SHA-256-Digest: 3Zj+mClA/dHq6oklC6aVkNwFkNFRHExcFwwM+UO1374=
+
+Name: org/eclipse/jdt/core/util/IMethodParametersAttribute.java
+SHA-256-Digest: mfu4gUytA+ikkWj0hfuHY82FYZsM8+dqTazTI7KGj48=
+
+Name: org/eclipse/jdt/internal/core/search/SubTypeSearchJob.java
+SHA-256-Digest: 97+EWLf15RSoUNdTEgUhGQsQW9ANH+DWGDbhr1QddmM=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionParser.java
+SHA-256-Digest: orH2txfN8pD7wSlI3yzJN26O6gcDZhdVsPW4bdduK4E=
+
+Name: org/eclipse/jdt/core/Flags.java
+SHA-256-Digest: ss9dWrOLH+AYCXkl+qOFrWfaIcZKy66DC7ewCD8qZXk=
+
+Name: org/eclipse/jdt/internal/core/util/WeakHashSetOfCharArray.java
+SHA-256-Digest: 0OoxnZQLl1Sel+H+032SpeO7z11SqdDPaKyYPVEtvbo=
+
+Name: org/eclipse/jdt/internal/core/index/FileIndexLocation.java
+SHA-256-Digest: mTZVQgDbszKyBy6OiN/Lrcmb7+tMeStMHTYAcbSIDvc=
+
+Name: org/eclipse/jdt/internal/core/util/PermittedSubclassesAttributeEnt
+ ry.java
+SHA-256-Digest: kCL6OYjBT4CD023dSXDQM0x+1mY49TXwrm8icdrqYbk=
+
+Name: org/eclipse/jdt/internal/core/BufferCache.java
+SHA-256-Digest: hCfb46Df/p19BV040lPU2TadgcvhnqHaIpbhMK5VgQw=
+
+Name: org/eclipse/jdt/core/dom/ITypeBinding.java
+SHA-256-Digest: 7crfurFRkCXZq5Ua/7ir5aifjqNZ/kdLQj5IDsrKvH8=
+
+Name: org/eclipse/jdt/internal/core/JavadocContents17.java
+SHA-256-Digest: Q4YMqJOYWNr3WrKTHaFXxozgZ2+TQZyV2EUjenVY7q8=
+
+Name: org/eclipse/jdt/core/search/MethodDeclarationMatch.java
+SHA-256-Digest: SBICEf0rVgHdeBBElO678RzBYYQnobrkIFEUSU+TDeA=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionNodeFound.j
+ ava
+SHA-256-Digest: 2BdvK33B4c9VsqEbfgYEjigmTo1LcvXezq9vmRoH+8U=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionJavadoc.jav
+ a
+SHA-256-Digest: Q3UVnhUhbblUxoKo4OZBBZRuuvYDScF9jD/mXHtRoqM=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/RemoveFromIndex.java
+SHA-256-Digest: bgaxk4KcE5gho/acAufsJOaifEnDdkqJtfZ/wx7pDzQ=
+
+Name: org/eclipse/jdt/internal/core/ClasspathAttribute.java
+SHA-256-Digest: aRhW8wz0Mv5bVSdJO+MMESuuAUA3JIQxVI9U+4Vzwi0=
+
+Name: org/eclipse/jdt/internal/core/search/matching/MultiTypeDeclaration
+ Pattern.java
+SHA-256-Digest: KwEUz1FBxcvaN9l4G69Fq/q6LdSnHdWb05v9wvhKqQo=
+
+Name: org/eclipse/jdt/core/util/IAnnotationDefaultAttribute.java
+SHA-256-Digest: kz7jnQIdG3lHViy4JKxtPjIooJm4VYyZdYNnun0seUA=
+
+Name: org/eclipse/jdt/core/dom/package.html
+SHA-256-Digest: v69CFId5y6w1kOZhrW8khJznn/B3v1Mgf41MGL4c92U=
+
+Name: org/eclipse/jdt/internal/core/util/ExtendedAnnotation.java
+SHA-256-Digest: 1midMU7D6EQkEeAnHNRny7H+sulm0TD27ZVQ77kDBQo=
+
+Name: org/eclipse/jdt/internal/core/util/DOMFinder.java
+SHA-256-Digest: Yma6BsSL8hMAHH+Jpr0uQh1rEEgt4bdoasohjgadjAw=
+
+Name: org/eclipse/jdt/core/jdom/DOMFactory.java
+SHA-256-Digest: D8jgVR98HPZ3HWdJGmRim6rd3JtiXFBlpd6UEGLC8fg=
+
+Name: org/eclipse/jdt/internal/core/RenameElementsOperation.java
+SHA-256-Digest: fujrbLvirlkedP1+F+E+V5kd+4TTvRb/xN03roSc30Y=
+
+Name: org/eclipse/jdt/core/search/SearchPattern.java
+SHA-256-Digest: W8t0uR2j740S1ZdYmqxUtmK7ns7rGnGsQzInLf4HUI8=
+
+Name: org/eclipse/jdt/internal/core/BinaryMember.java
+SHA-256-Digest: syu/yCpHBEMuzcGAMiBMOo1SJJxlaUajwda8NLbp4nw=
+
+Name: org/eclipse/jdt/core/dom/UsesDirective.java
+SHA-256-Digest: AEsptBH5rSYnawMGFez5rgmgzgTxx0zZVS2ZkJScYH4=
+
+Name: org/eclipse/jdt/core/dom/JavaDocRegion.java
+SHA-256-Digest: 159L7BHdVVUFMPuigxVwyZ1OlBLpSP07saqIeykG4dI=
+
+Name: org/eclipse/jdt/core/search/PackageReferenceMatch.java
+SHA-256-Digest: NsHst9M+ybjqoeLuBxu0TpbCjoIo7fDtRkUfzphzalM=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/LineInformation.java
+SHA-256-Digest: KKQg+NcnFuhR+91qZ99U92qESsf9H6Xb4xRFuZT6e9Y=
+
+Name: org/eclipse/jdt/core/util/IRuntimeInvisibleAnnotationsAttribute.ja
+ va
+SHA-256-Digest: gG0DOJx8mnJnYyOlfqH5+zVaA1xAkQT6JKETRv9UwGg=
+
+Name: org/eclipse/jdt/internal/core/UserLibrary.java
+SHA-256-Digest: QtNWqeDm9FUXjyoetVTL1xDHN7+DsswZFX75m5NQwfY=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/AssistNodeParentAnnot
+ ationArrayInitializer.java
+SHA-256-Digest: 0XgOD/bfMT62hetvFGHbVUrGQeHYo5OXby5Gz52xgsE=
+
+Name: org/eclipse/jdt/internal/core/NameLookup.java
+SHA-256-Digest: pU/FRKG/JgLZBro/lOft5rAX6hK6YJPKfrsmPlVs/KY=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnLambdaExpres
+ sion.java
+SHA-256-Digest: XppqhXc0zuXjnWABMl9YK/4zMt2nARN6EY/t/bzZsrU=
+
+Name: org/eclipse/jdt/internal/core/CreateTypeHierarchyOperation.java
+SHA-256-Digest: cgVD2Tkxq7heNc4/bHr5KGeUBCSc1wZ1q+gP4BE9o3Y=
+
+Name: org/eclipse/jdt/internal/core/Openable.java
+SHA-256-Digest: q51h6ePIkmGAGgMPDZl8UebbvJ36gqL8BLYWC/Q2Qcs=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/TokenScanner.java
+SHA-256-Digest: 9TtAqkpwOyCHFqjpn/MjWsKg36HfQzLVWF7hJERb5gY=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/PackageImportCom
+ parator.java
+SHA-256-Digest: 11/5nHxEBHMs3/2y/6cItXeCxSir6zPRFwDyJXqLd8o=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistOptions.java
+SHA-256-Digest: ckezB6haLH00CqUo/Z9+fZxXmdPP3gl1ueqiDNpfJFY=
+
+Name: org/eclipse/jdt/internal/core/MemberElementInfo.java
+SHA-256-Digest: za8qJMkKG5VWYRSJ6nPI0NPu867JTIqXZXbS3xKUVwQ=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnExpressio
+ nOfType.java
+SHA-256-Digest: Ua5dpLzSZ8Gjx2hq7+AOF2GfH3J7OLUZaZFNVlKL/oM=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnQualifiedSup
+ erReference.java
+SHA-256-Digest: GSQkkIYEp5LhwuEgP+dBF+iaymcZMSpDh5b46BZoQ+o=
+
+Name: org/eclipse/jdt/core/dom/TextElement.java
+SHA-256-Digest: a3czDSUE3TFspPbAH+Yk6urmLr/hCQFAHhoWRJbeCMo=
+
+Name: org/eclipse/jdt/core/dom/VariableDeclarationFragment.java
+SHA-256-Digest: bYtFWZIDrQPj+VBONysdym1YHC0Bm75b/COL72dDrIY=
+
+Name: org/eclipse/jdt/internal/core/BatchInitializationMonitor.java
+SHA-256-Digest: hI/j1B9EVLIgwW279ZDXLAtmSXT3wWQTYgXrXNLZ+uA=
+
+Name: org/eclipse/jdt/internal/core/jdom/DOMPackage.java
+SHA-256-Digest: zUPeS71I39zOyM2n+B07jrZIngpsAQIOqlLS4UX/wZU=
+
+Name: org/eclipse/jdt/core/util/IRuntimeVisibleAnnotationsAttribute.java
+SHA-256-Digest: 7RUFLEMX1at4j14QIlFcMspW6lXTEdEzILJDtfwiqqs=
+
+Name: org/eclipse/jdt/internal/core/hierarchy/HierarchyType.java
+SHA-256-Digest: 2LFZBigsvlRjH5oiIILznKLdneHmPwuXOeCD0UQefvc=
+
+Name: org/eclipse/jdt/internal/core/AnnotatableInfo.java
+SHA-256-Digest: qYL7ZiyEXWQJoehJ4X5t7jgETJXwTBt1SncJojOqxho=
+
+Name: org/eclipse/jdt/internal/formatter/CommentsPreparator.java
+SHA-256-Digest: mBBj2kMY3y9Mm2LZ+etyAL1a8B+SG1BPul9qM/Glb1c=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnLocalName
+ .java
+SHA-256-Digest: 4BdOpRoDWSKrCxAdTgnWx1YPsRtDMRUrvAks+ZlSuxI=
+
+Name: org/eclipse/jdt/internal/codeassist/impl/AssistSourceField.java
+SHA-256-Digest: S7pbsyRcR70CEcU+c7qfx3r05zVwwcbqDukABm0MVCg=
+
+Name: org/eclipse/jdt/internal/core/SourceRefElement.java
+SHA-256-Digest: gUoK6Cva1XtLFU73DAiOgCsPf3k+S5QFc9PAJn9DMZQ=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionOnNameOfMember
+ ValuePair.java
+SHA-256-Digest: ZHdhE94E6sGbtj4cW7564LLBHn21wEddnt+iJBKws5w=
+
+Name: org/eclipse/jdt/core/dom/VariableDeclarationStatement.java
+SHA-256-Digest: v1MpkFaK/Oyx4XANkqDG2gW0+g/TSk+c9tegYJ7mBVA=
+
+Name: org/eclipse/jdt/core/util/IClassFileAttribute.java
+SHA-256-Digest: fbnh7IkrD1LXloIWfMnHLXBN2BFXUmAjVIlfyVlkBCU=
+
+Name: org/eclipse/jdt/internal/core/VerboseElementCache.java
+SHA-256-Digest: VCtKTd4K6pFjoeC1cnLMONp42UIswoeqzp0haKhmjc4=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnFieldName
+ .java
+SHA-256-Digest: Xv51bRQ18cbs9J6xyPkyiZeA1B86IA7LDn5DNkqa0oI=
+
+Name: org/eclipse/jdt/core/dom/BodyDeclaration.java
+SHA-256-Digest: uD/OFavV6VuInB2ZkwUIoJPEezXG4b+Rj9yCcXWrxjU=
+
+Name: org/eclipse/jdt/core/dom/ExpressionMethodReference.java
+SHA-256-Digest: yFjQmnanvxKSg+zGQo+P8EwwX7zwr/pSYF2k5Z9sBaU=
+
+Name: org/eclipse/jdt/internal/core/search/matching/PackageDeclarationLo
+ cator.java
+SHA-256-Digest: SnJ1jlsXsSHacRE6Sy81B5T3id78llKol1l2WVhPPik=
+
+Name: org/eclipse/jdt/internal/core/ModuleDescriptionInfo.java
+SHA-256-Digest: lLP2uJ1bDowYPqNiYWwyK9QnsXOWG6T1I5KcfJB4r3E=
+
+Name: org/eclipse/jdt/core/dom/Message.java
+SHA-256-Digest: vD1EympWvl+gOgqZ8OX8RofcY2/s1k8SVBZLYF0b09w=
+
+Name: org/eclipse/jdt/core/IOrdinaryClassFile.java
+SHA-256-Digest: 5tS3YznWgXxA9aVBeZZ1pKikz2WqjNsax8EB57fFUS0=
+
+Name: org/eclipse/jdt/internal/core/search/indexing/SourceIndexer.java
+SHA-256-Digest: qA5XWYK08mlsOaN4/Acq9ZW3WLf86CMECJZkp4IXMtI=
+
+Name: org/eclipse/jdt/core/dom/ForStatement.java
+SHA-256-Digest: 40pvVqC3DvoebPUOenS+h2Iwjy9//63YiAfza9ZaYEk=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionJavadocParser.
+ java
+SHA-256-Digest: gKr0HBHtcb+uOHSHHPMG1aA8/LcApudco+ZWK0UOHEk=
+
+Name: org/eclipse/jdt/core/dom/TypeLiteral.java
+SHA-256-Digest: KldbRybEvCUux4i9B6RWD/UI1xIioq0iAzHaBl+T+OQ=
+
+Name: org/eclipse/jdt/internal/core/dom/rewrite/imports/OrderPreservingI
+ mportAdder.java
+SHA-256-Digest: tGNGLhh5DQrQloh5h/WmtM2k4mH/gCHkKIlzk8QhYtw=
+
+Name: org/eclipse/jdt/internal/core/IJavaElementRequestor.java
+SHA-256-Digest: 7mDNWi8rQpQKXV5vwyrKprm/8ztwLQppvETG+BLMt64=
+
+Name: org/eclipse/jdt/internal/codeassist/select/SelectionNodeFound.java
+SHA-256-Digest: V8pETKYPTmti18mkQCcdNDtYPKzwY3hinXyRqpLsUk0=
+
+Name: org/eclipse/jdt/core/dom/NullLiteral.java
+SHA-256-Digest: Gs1p3iMd6ItDcy9eHcfd+/mw1QwxHXZTqeHqW2Nuozc=
+
+Name: org/eclipse/jdt/internal/formatter/linewrap/WrapExecutor.java
+SHA-256-Digest: lYYQad7D0DgB12XlMLK9R3dbUzAlLbgVuQObNaqBzXE=
+
+Name: about.html
+SHA-256-Digest: +2kzKZtbjYJhy4CirRQbiWuR2nXRWKj0pjt5oJEEAqY=
+
+Name: org/eclipse/jdt/core/dom/WildcardType.java
+SHA-256-Digest: 0EtV5iDCL5Q9z4omZtwzROD2yKaCQnxWJZxZPhaNJc8=
+
+Name: org/eclipse/jdt/internal/core/nd/java/model/BinaryTypeDescriptor.j
+ ava
+SHA-256-Digest: +FFSbqekkh+XQ8/H+1ZiHELcvFVBdiN+bb2oELfEWJY=
+
+Name: org/eclipse/jdt/core/search/SearchEngine.java
+SHA-256-Digest: Co7WLp6c5GiBZ9adv9JrlDhZVv4pqTmjvMvGmnuPcXg=
+
+Name: org/eclipse/jdt/core/BindingKey.java
+SHA-256-Digest: 2rnmUDSnlzC/8zgyMboq7WVGREn/mcK5zZh2rwoVw0E=
+
+Name: org/eclipse/jdt/core/dom/RecordDeclaration.java
+SHA-256-Digest: ryokyJfFA854wI7//GmleoKy8OJYf8TvTFjEE5zCGS4=
+
+Name: org/eclipse/jdt/internal/core/JavaModel.java
+SHA-256-Digest: Wvb3eI5bejHWQDLX/T414uGUL7NtqLMudnZ4q5Snsgs=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnJavadocSi
+ ngleTypeReference.java
+SHA-256-Digest: gmPxszIZPNlgfKLufGNbL237iTHzoOg3nHnRmXMHgas=
+
+Name: org/eclipse/jdt/internal/core/builder/NameEnvironment.java
+SHA-256-Digest: ANazJwmv0xXBTlOa8/R6DxOFon36Wev4ElKrqztZ8vY=
+
+Name: org/eclipse/jdt/internal/eval/Evaluator.java
+SHA-256-Digest: Kx0VqnKzfJxzT0whDSJJ0opSnhV7YsFcEaxObgw6A+k=
+
+Name: org/eclipse/jdt/internal/codeassist/SelectionEngine.java
+SHA-256-Digest: YbVKvq++X+Jd6wNQhhfUqvx16gEDlSdEaMXTl+hfJso=
+
+Name: org/eclipse/jdt/internal/core/search/matching/LocalVariablePattern
+ .java
+SHA-256-Digest: 1LtGTh7ivinr4rb8jAXhekuvzbh7VgSLkiZ5wuKPkfc=
+
+Name: org/eclipse/jdt/internal/core/SetVariablesOperation.java
+SHA-256-Digest: 0vJhfzcLyu+RdOcBjgKzVCY9N5iW7viSs3tbU0WQsvs=
+
+Name: org/eclipse/jdt/internal/codeassist/complete/CompletionOnPackageRe
+ ference.java
+SHA-256-Digest: SESOmfwygW/NLeRMmzphB2kBOdAsu3TeGpWxvow1KcI=
+
+Name: org/eclipse/jdt/core/dom/SuperMethodInvocation.java
+SHA-256-Digest: QGU0wLSlEMxqPuxJ8tgUJw/5hBBN5UK68Yy2/UjbnPY=
+
+Name: org/eclipse/jdt/internal/core/CancelableProblemFactory.java
+SHA-256-Digest: z4851ZM06xV8CKvElV/Q2/rRal8ElX9tV1tSkGhE1lE=
+
+Name: org/eclipse/jdt/internal/core/search/matching/FieldPattern.java
+SHA-256-Digest: KfxJibz5b/OZCp65UTUY8myqE10U5McP/CSe7bsimVY=
+

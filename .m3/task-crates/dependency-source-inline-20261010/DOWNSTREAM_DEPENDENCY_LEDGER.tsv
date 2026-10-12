@@ -41,7 +41,7 @@ m3/tooling/a3/pom.xml	org.apache.maven.plugins	maven-surefire-plugin	3.2.5	BUILD
 m3/tooling/a3/pom.xml	org.codehaus.mojo	exec-maven-plugin	3.5.0	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
 m3/tooling/a3/pom.xml	org.openrewrite.maven	rewrite-maven-plugin	5.23.1	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
 m3/tooling/a3/pom.xml	org.openrewrite.maven	rewrite-maven-plugin	5.23.1	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
-m3/tooling/a3/pom.xml	com.synexia	synexia-jdk-a3-recipes	1.0.0-SNAPSHOT	NOT_VENDORED	-	inventory + vendor in a follow-up pass
+m3/tooling/a3/pom.xml	com.synexia	synexia-jdk-a3-recipes	1.0.0-SNAPSHOT	IN_REPO_MODULE	m3/tooling/synexia-jdk-a3-recipes/pom.xml	-
 m3/tooling/a3/pom.xml	org.junit.jupiter	junit-jupiter	5.10.2-m3-source-1	VENDORED_SOURCE_BUILD+SWITCHED API_SURFACE=IDENTICAL	m3/vendor/third_party/junit-jupiter-5.10.2	-
 m3/tooling/backport-dag/pom.xml	org.apache.maven.plugins	maven-compiler-plugin	3.13.0	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
 m3/tooling/backport-dag/pom.xml	org.apache.maven.plugins	maven-surefire-plugin	3.2.5	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
@@ -255,7 +255,7 @@ m3/tooling/migration-recipes/verification/jni/pom.xml	org.slf4j	slf4j-api	1.7.36
 m3/tooling/migration-recipes/verification/jni/pom.xml	org.jetbrains	annotations	24.1.0-m3-source-1	VENDORED_SOURCE_BUILD+SWITCHED API_SURFACE=IDENTICAL	m3/vendor/third_party/annotations	-
 m3/tooling/migration-recipes/verification/jni/pom.xml	org.openrewrite	rewrite-core	8.17.1-m3-source-1	VENDORED_SOURCE_BUILD+SWITCHED API_SURFACE=EQUIVALENT_MODULO_COMPILER	m3/vendor/third_party/rewrite-core	-
 m3/tooling/migration-recipes/verification/jni/pom.xml	org.junit.jupiter	junit-jupiter	5.10.2-m3-source-1	VENDORED_SOURCE_BUILD+SWITCHED API_SURFACE=IDENTICAL	m3/vendor/third_party/junit-jupiter-5.10.2	-
-m3/tooling/module-packs/kernel/pom.xml	org.junit.jupiter	junit-jupiter	-	NOT_VENDORED	-	inventory + vendor in a follow-up pass
+m3/tooling/module-packs/kernel/pom.xml	org.junit.jupiter	junit-jupiter	-	VENDORED_SOURCE_BUILD+MANAGED (version from a parent dependencyManagement)	m3/vendor/third_party/junit-jupiter-5.11.4	-
 m3/tooling/module-packs/pom.xml	org.apache.maven.plugins	maven-compiler-plugin	3.13.0	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
 m3/tooling/module-packs/pom.xml	org.apache.maven.plugins	maven-surefire-plugin	3.2.5	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
 m3/tooling/module-packs/pom.xml	org.apache.maven.plugins	maven-jar-plugin	3.4.2	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
@@ -265,7 +265,7 @@ m3/tooling/module-packs/pom.xml	org.junit.jupiter	junit-jupiter	5.10.2-m3-source
 m3/tooling/module-packs/recipes/pom.xml	org.openrewrite.maven	rewrite-maven-plugin	5.23.1	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
 m3/tooling/module-packs/recipes/pom.xml	org.openrewrite	rewrite-xml	8.17.1-m3-source-1	VENDORED_SOURCE_BUILD+SWITCHED API_SURFACE=IDENTICAL	m3/vendor/third_party/rewrite-xml	-
 m3/tooling/module-packs/recipes/pom.xml	org.openrewrite	rewrite-test	8.17.1-m3-source-1	VENDORED_SOURCE_BUILD+SWITCHED API_SURFACE=IDENTICAL	m3/vendor/third_party/rewrite-test	-
-m3/tooling/module-packs/recipes/pom.xml	org.junit.jupiter	junit-jupiter	-	NOT_VENDORED	-	inventory + vendor in a follow-up pass
+m3/tooling/module-packs/recipes/pom.xml	org.junit.jupiter	junit-jupiter	-	VENDORED_SOURCE_BUILD+MANAGED (version from a parent dependencyManagement)	m3/vendor/third_party/junit-jupiter-5.11.4	-
 m3/tooling/mr/pom.xml	org.apache.maven.plugins	maven-resources-plugin	3.3.1	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
 m3/tooling/mr/pom.xml	org.apache.maven.plugins	maven-compiler-plugin	3.13.0	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
 m3/tooling/mr/pom.xml	org.apache.maven.plugins	maven-surefire-plugin	3.2.5	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency

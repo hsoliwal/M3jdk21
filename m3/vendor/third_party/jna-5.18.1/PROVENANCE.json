@@ -1,0 +1,713 @@
+{
+  "artifact": "jna",
+  "automatic_module_name": "com.sun.jna",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "synexia-indexstring (explicit pin; bundles natives)",
+  "coordinate": "net.java.dev.jna:jna:5.18.1-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "jna-5.18.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/AltCallingConvention.java",
+      "sha256": "2e7176908d426b426ea45fc53a50012e777b4f15c86ccf9db954aed1c96db6ea",
+      "upstream": "com/sun/jna/AltCallingConvention.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/Callback.java",
+      "sha256": "130c07352519633ada7c55dfb38e288bc0a69f9d61ab33fbd6723fba494d9bdc",
+      "upstream": "com/sun/jna/Callback.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/CallbackParameterContext.java",
+      "sha256": "9294f7c61ffb8f676edc055ec592883c4584562f2639b51ac3958388a7dc8d82",
+      "upstream": "com/sun/jna/CallbackParameterContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/CallbackProxy.java",
+      "sha256": "035f57f597bd4b11aeadd4d73f4c4cb2a10ca5d062138013d784377770aca1f0",
+      "upstream": "com/sun/jna/CallbackProxy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/CallbackReference.java",
+      "sha256": "71d818e1c3144717038dab0b13fdcea53310bc3a7b3a55030f642d6481a60388",
+      "upstream": "com/sun/jna/CallbackReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/CallbackResultContext.java",
+      "sha256": "090f7dd598aa13999b0c0076e4e35bf9215069b110fbcdbbd634e2f01190c17d",
+      "upstream": "com/sun/jna/CallbackResultContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/CallbackThreadInitializer.java",
+      "sha256": "9d6c5bd13d7a9fbfc9fdcb2c7f30f9bceb3a09889df550af8d864b4960a41472",
+      "upstream": "com/sun/jna/CallbackThreadInitializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/DefaultTypeMapper.java",
+      "sha256": "8a952d6d29b199dba74fe8ac86f081a76c4faa6b691a85057f422cb6b8a6e6e6",
+      "upstream": "com/sun/jna/DefaultTypeMapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ELFAnalyser.java",
+      "sha256": "2090a0348590ce7f1f182f25c885d3d0a3462b9d05489614cdd2fedbc49d81b0",
+      "upstream": "com/sun/jna/ELFAnalyser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/FromNativeContext.java",
+      "sha256": "0e3385dc886a3ac697143833201cdb1ca586345996b672fea5bcc6c8d0235c7b",
+      "upstream": "com/sun/jna/FromNativeContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/FromNativeConverter.java",
+      "sha256": "cf3d6920d8f55c725bbbaf72e6d1f135354ad097e4b8bf15cad81ba1a5493ea6",
+      "upstream": "com/sun/jna/FromNativeConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/Function.java",
+      "sha256": "4c76e06668b5e0ce837a896db8ce9a29034b7f845f20c27946a292330dad9f77",
+      "upstream": "com/sun/jna/Function.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/FunctionMapper.java",
+      "sha256": "07e80969421a05b3a47d69826f64ffd0ff247c5060410188a3c96ae7ae9f3d4d",
+      "upstream": "com/sun/jna/FunctionMapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/FunctionParameterContext.java",
+      "sha256": "eeef80069e55a96b4b76d604fe6c9467137082217dc50ab6a6e29b7b6a78ea47",
+      "upstream": "com/sun/jna/FunctionParameterContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/FunctionResultContext.java",
+      "sha256": "e2280ab5432ac22c93cba8f315113b33cda23aa72e190705ef354792214445d1",
+      "upstream": "com/sun/jna/FunctionResultContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/IntegerType.java",
+      "sha256": "f3556c3a2cacf04288c5d9fefc05bfc78ea9f822fb22607c1fa92f2c4da0e14f",
+      "upstream": "com/sun/jna/IntegerType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/InvocationMapper.java",
+      "sha256": "75a55f49afe25c4c4bbe8210d71d1df430d8f440f13f3b158d2c8f27b916669e",
+      "upstream": "com/sun/jna/InvocationMapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/JNIEnv.java",
+      "sha256": "7abf41bcc0a0ba450626a6fabd1d7163aef7d434ad36e6a4d068b19a17340fe2",
+      "upstream": "com/sun/jna/JNIEnv.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/Klass.java",
+      "sha256": "26c4ddc1c7eae3e4aff06f3a11771b283ec8d9dcd4a2db15a866a37bfd7c0963",
+      "upstream": "com/sun/jna/Klass.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/LastErrorException.java",
+      "sha256": "e53d0954d172f24eb663b83a13350a5322dc6ac71d351cf7647456efc504beca",
+      "upstream": "com/sun/jna/LastErrorException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/Library.java",
+      "sha256": "ec3afe5c17dda88b0c43c80321216f3a3f6bbc26ba88127bb126322066d2eb78",
+      "upstream": "com/sun/jna/Library.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/Memory.java",
+      "sha256": "064ed80bb84beeb3856de28d48a06d131d5e6597887db7b4be3b114fe1ff8448",
+      "upstream": "com/sun/jna/Memory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/MethodParameterContext.java",
+      "sha256": "3c9ef08fdc61c30c41eb47f9a247b701294172b7807b6089b965e042a0817ef9",
+      "upstream": "com/sun/jna/MethodParameterContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/MethodResultContext.java",
+      "sha256": "0c8baee07e631ba875e89d26f9c8c5f95d36d1132262e9badf5b6414a6c2dadb",
+      "upstream": "com/sun/jna/MethodResultContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/Native.java",
+      "sha256": "3d8a0598206583e90d76f9a3bd0c8709aed03cbc07d8520cdefd81e6535b619e",
+      "upstream": "com/sun/jna/Native.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/NativeLibrary.java",
+      "sha256": "82dfc8d778a44b892841d0c727aaa78fd4a7f0beecc9e90c429cff0278b0a3a8",
+      "upstream": "com/sun/jna/NativeLibrary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/NativeLong.java",
+      "sha256": "e139a931b1dac1c1439c0980f719726d7ed5de78fad37e80791b10a1acb08cea",
+      "upstream": "com/sun/jna/NativeLong.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/NativeMapped.java",
+      "sha256": "95ceecb8a55deb12b8d3405468b28d679bf61ed22be75460dec15fcbd5cc2397",
+      "upstream": "com/sun/jna/NativeMapped.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/NativeMappedConverter.java",
+      "sha256": "9e457dc09d82c56fcad0707b04f6bb43152f3becc7d5b507bc8d787dda0527da",
+      "upstream": "com/sun/jna/NativeMappedConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/NativeString.java",
+      "sha256": "0c1ce66330f3292500d61b376a30222b39675d2cfdfbfbcd4aaabab46be2bc06",
+      "upstream": "com/sun/jna/NativeString.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/Platform.java",
+      "sha256": "6de9eb7754f886f03ca290712efb1286dd21c6a43bf9689d0c8604b1b1aa8386",
+      "upstream": "com/sun/jna/Platform.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/Pointer.java",
+      "sha256": "4709f7b52b0972807207ee0325d1271ca2d1cf63ddeea52b05f76633bbf8cabd",
+      "upstream": "com/sun/jna/Pointer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/PointerType.java",
+      "sha256": "1e4e6813dcb25d29d35a7557cc5887af03969e510f54d6fdb3d365bf195afc63",
+      "upstream": "com/sun/jna/PointerType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/StringArray.java",
+      "sha256": "d111ec27cc51fb3f7365caf0ca064c350b54d8f1f35e3e30b351d9a34a2a168f",
+      "upstream": "com/sun/jna/StringArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/Structure.java",
+      "sha256": "fcf9a91cd184055bed0c1d2ea7503caa93a0caee15ba4fc19d158e8136521324",
+      "upstream": "com/sun/jna/Structure.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/StructureReadContext.java",
+      "sha256": "73855dd049819678d80a4635d76c27ba99ffbaa28fe15cf6e53f35a8e054e2e3",
+      "upstream": "com/sun/jna/StructureReadContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/StructureWriteContext.java",
+      "sha256": "dc712859e9f8676a1bbc453a49b2df2b523457018ee789f2c3c949f110c4924b",
+      "upstream": "com/sun/jna/StructureWriteContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/SymbolProvider.java",
+      "sha256": "3d70abedfb927b2785f72618b9533add9b5ce6b443a783ce771b8796046f4c73",
+      "upstream": "com/sun/jna/SymbolProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ToNativeContext.java",
+      "sha256": "2c9154bdae1482adc70c6ad897c17e499bb478801ebe729172dea6638f57674a",
+      "upstream": "com/sun/jna/ToNativeContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ToNativeConverter.java",
+      "sha256": "a6287548f01ac69265ea5d067780310de82679117ac579f43d8570fca3d19d46",
+      "upstream": "com/sun/jna/ToNativeConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/TypeConverter.java",
+      "sha256": "34b4d32f26d2e1910a9e595a34566ef49db90e97eac2065fb3dfb46edf8ba793",
+      "upstream": "com/sun/jna/TypeConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/TypeMapper.java",
+      "sha256": "cfe569073eb544ea39e8fe87fb8c27eaab7de574dd4ec2e7588df7057260fa9a",
+      "upstream": "com/sun/jna/TypeMapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/Union.java",
+      "sha256": "6f1741fb792e7b34e58f3a17ee6e7a8180bc03c666bce78f02937c079dd97fd2",
+      "upstream": "com/sun/jna/Union.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/VarArgsChecker.java",
+      "sha256": "ee897e2463e012733f6993509dd2d09eb16ed6882bd1de361cf999eb0aaef411",
+      "upstream": "com/sun/jna/VarArgsChecker.java"
+    },
+    {
+      "derived_from": "m3/vendor/third_party/jna-5.18.1/upstream-excluded/com/sun/jna/Version.java",
+      "kind": "build-filtered-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/Version.java",
+      "sha256": "d7951b55d89bb05bc5284f3c2215addc8bd776626ae5c5e312ed47632c94dc2b",
+      "tool": "version tokens {\"VERSION\": \"5.18.1\", \"VERSION_NATIVE\": \"7.0.4\"} read with javap -constants from the published jar",
+      "upstream": "com/sun/jna/Version.java"
+    },
+    {
+      "kind": "unmodified-production-build-filtered-below",
+      "repository": "m3/vendor/third_party/jna-5.18.1/upstream-excluded/com/sun/jna/Version.java",
+      "sha256": "f23b15f8c34f9366188dca41db5a978f9f367c40c9d6b6d2de3910ab9bdb12f9",
+      "upstream": "com/sun/jna/Version.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/WString.java",
+      "sha256": "434e3cd441edfe4841085566e64df739cfa1276aa65c6dad55486204fd67177c",
+      "upstream": "com/sun/jna/WString.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/WeakMemoryHolder.java",
+      "sha256": "b1d74287ce86b4210ed2f5f7e5b565ca66d0e661994d50221b06bf09d352e9a5",
+      "upstream": "com/sun/jna/WeakMemoryHolder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/internal/Cleaner.java",
+      "sha256": "82681b5ef030222f32cdc107404168a9be3e7f96a17da863e7faa2d86e6be0be",
+      "upstream": "com/sun/jna/internal/Cleaner.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/internal/ReflectionUtils.java",
+      "sha256": "d5481dd9460a19e3a1d0aa328c774c8734a51919e75445fe358b3cbe94013503",
+      "upstream": "com/sun/jna/internal/ReflectionUtils.java"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jna-5.18.1/upstream-source-only/com/sun/jna/internal/package.html",
+      "sha256": "3a965fae9033994c9ab90baaaa5f84d1634a2ff82a5048715ae9fb9b83837738",
+      "upstream": "com/sun/jna/internal/package.html"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jna-5.18.1/upstream-source-only/com/sun/jna/overview.html",
+      "sha256": "3bccc8833ac38c6d64819a7569a5b202ed05ef2bb38a134a8d26ebe5f4a52b7e",
+      "upstream": "com/sun/jna/overview.html"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jna-5.18.1/upstream-source-only/com/sun/jna/package.html",
+      "sha256": "7b4cd199177cafe1ff9aa6f89c2e3fc652c97863b613c52e6f639097dd87a874",
+      "upstream": "com/sun/jna/package.html"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ptr/ByReference.java",
+      "sha256": "26d58d08135065a6e05fc778ef0f1119cbeeec2297450eab86b851a53ba5a89d",
+      "upstream": "com/sun/jna/ptr/ByReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ptr/ByteByReference.java",
+      "sha256": "334ff066c8c28171485ff69d408cd5059d3180f79efc185dcf18fc83c18125ee",
+      "upstream": "com/sun/jna/ptr/ByteByReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ptr/DoubleByReference.java",
+      "sha256": "a568bb5fb8dc2aceeb0963f49cd95095f1428f187f2fda429ebd9874b6a88c22",
+      "upstream": "com/sun/jna/ptr/DoubleByReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ptr/FloatByReference.java",
+      "sha256": "d8739f7453bd78e368e0d54def224d4ed955e6e06ec2c18624a94952892e9124",
+      "upstream": "com/sun/jna/ptr/FloatByReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ptr/IntByReference.java",
+      "sha256": "21f3167353e25a92079dd3e6246de19154e1f63566df55c741d0737a9532665d",
+      "upstream": "com/sun/jna/ptr/IntByReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ptr/LongByReference.java",
+      "sha256": "41bffc24583858fa89bbb93cc2b1c82bb8edfc9e27bc37d0df72a78b4805435e",
+      "upstream": "com/sun/jna/ptr/LongByReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ptr/NativeLongByReference.java",
+      "sha256": "89201e161e38f57cfa3d42e3deea9152701ee8a3a9496b43d48c9787c1678f6e",
+      "upstream": "com/sun/jna/ptr/NativeLongByReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ptr/PointerByReference.java",
+      "sha256": "e3667455eec69c760fa703f1644abcd82652f42d200620f28de80d2706d47155",
+      "upstream": "com/sun/jna/ptr/PointerByReference.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/ptr/ShortByReference.java",
+      "sha256": "4d458ce7537177d009f13ab36ca517200241612b85bb1cdc4c87c09b824b4175",
+      "upstream": "com/sun/jna/ptr/ShortByReference.java"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jna-5.18.1/upstream-source-only/com/sun/jna/ptr/package.html",
+      "sha256": "38857ba4df3ad2db3b0ff3e7ad4bfbe13a3259902fb0b2ee9fb252f9213c0c3f",
+      "upstream": "com/sun/jna/ptr/package.html"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/win32/DLLCallback.java",
+      "sha256": "048a850762931cd37f5b490200064ace3d9d549dea7b26b131ed0a58ccfdd695",
+      "upstream": "com/sun/jna/win32/DLLCallback.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/win32/StdCall.java",
+      "sha256": "b0e0ed6619f22301bcf7edbc5e0bfe772935d9d2875943c9556b1e6cca818ed4",
+      "upstream": "com/sun/jna/win32/StdCall.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/win32/StdCallFunctionMapper.java",
+      "sha256": "d2d19c47244a5edd0bb0f9c6a555929723e98e198f667005d88ff0d05b8c3ab1",
+      "upstream": "com/sun/jna/win32/StdCallFunctionMapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/win32/StdCallLibrary.java",
+      "sha256": "64fd6f9b1293ffe9684c9157a421b3dd24f17a90018a00163bd6dc84f39d3ad9",
+      "upstream": "com/sun/jna/win32/StdCallLibrary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/win32/W32APIFunctionMapper.java",
+      "sha256": "8c1e9906aa188bb5f2703ccad03711c3a4721f51a7c342d015d3cdf1b71ca0ea",
+      "upstream": "com/sun/jna/win32/W32APIFunctionMapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/win32/W32APIOptions.java",
+      "sha256": "f696a53598d1a5b5a193ca544cc96f11955028ecc019d4ee187e1f6f3f17c218",
+      "upstream": "com/sun/jna/win32/W32APIOptions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/java/com/sun/jna/win32/W32APITypeMapper.java",
+      "sha256": "061dc611340fbf7cff932772aec04a88d65aa4b3a7a8bfb9b25564d85e11b992",
+      "upstream": "com/sun/jna/win32/W32APITypeMapper.java"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jna-5.18.1/upstream-source-only/com/sun/jna/win32/package.html",
+      "sha256": "3c6a18b53217d6b19940d63cd54c34fd65d62bac9abb44297b7c7cd6cec1393e",
+      "upstream": "com/sun/jna/win32/package.html"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/META-INF/AL2.0",
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "upstream": "META-INF/AL2.0"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/META-INF/LGPL2.1",
+      "sha256": "eea173a556abac0370461e57e12aab266894ea6be3874c2be05fd87871f75449",
+      "upstream": "META-INF/LGPL2.1"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/META-INF/LICENSE",
+      "sha256": "07c938b23950ab7d47a24ef35f9f5da3a05ae164278dc959ad6994135ed59ff1",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/aix-ppc/libjnidispatch.a",
+      "sha256": "f33d3b4c2ca35fac8befc502b408e5b5851f8850c397d59f0094459fe455d0c1",
+      "upstream": "com/sun/jna/aix-ppc/libjnidispatch.a"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/aix-ppc64/libjnidispatch.a",
+      "sha256": "be8a1c6a282c637cf0ce217c331ee82a3643c59ef166fdbaabf1f27c3d7fd0dc",
+      "upstream": "com/sun/jna/aix-ppc64/libjnidispatch.a"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/darwin-aarch64/libjnidispatch.jnilib",
+      "sha256": "70c9af22ba3ce12128881b4654422ce69a6f96fc238333731cf718601b536245",
+      "upstream": "com/sun/jna/darwin-aarch64/libjnidispatch.jnilib"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/darwin-x86-64/libjnidispatch.jnilib",
+      "sha256": "69cca8bbe2f0ff3fc412481e73333d5b49fc3a1ba2ff564a0af9495d7e6b531d",
+      "upstream": "com/sun/jna/darwin-x86-64/libjnidispatch.jnilib"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/dragonflybsd-x86-64/libjnidispatch.so",
+      "sha256": "c0c6e64b476d726d86e996af1397491bbff9ccadcba1e0c4639a8f1ae5454062",
+      "upstream": "com/sun/jna/dragonflybsd-x86-64/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/freebsd-aarch64/libjnidispatch.so",
+      "sha256": "bca4aece4b834fd04301d5896482f657d06d6860e2d03089c0cc78eea65dd492",
+      "upstream": "com/sun/jna/freebsd-aarch64/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/freebsd-x86-64/libjnidispatch.so",
+      "sha256": "3c4d14c74bb6798c76b43cad4395b8bdaa9181a7991e160a376f87bb1ab13ced",
+      "upstream": "com/sun/jna/freebsd-x86-64/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/freebsd-x86/libjnidispatch.so",
+      "sha256": "784b2a955b1504dec96fa8b87972bcb2815ecfa818fe5c2e57ed9073cab0592c",
+      "upstream": "com/sun/jna/freebsd-x86/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/linux-aarch64/libjnidispatch.so",
+      "sha256": "f18fa2c973b2b9ea2dfa6d36d397e0bb743aa2aa09876e2a3b8c87a5e67bf8b6",
+      "upstream": "com/sun/jna/linux-aarch64/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/linux-arm/libjnidispatch.so",
+      "sha256": "b2a32135dea251fde4027f536345420001bc921e21baf82b2e01ce2753da2097",
+      "upstream": "com/sun/jna/linux-arm/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/linux-armel/libjnidispatch.so",
+      "sha256": "d9db010b0336cdbf643c38921c1c04519f811bee0f45824b6872661a25d64ed2",
+      "upstream": "com/sun/jna/linux-armel/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/linux-loongarch64/libjnidispatch.so",
+      "sha256": "6c55d9ec3efaaee1843795648246b3fe52de09d3990984c5b8a580cc803c6bc9",
+      "upstream": "com/sun/jna/linux-loongarch64/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/linux-mips64el/libjnidispatch.so",
+      "sha256": "0025cd4345faec5a7d9fc8c88f187016dbaf4a6ef411cd6c8907e199d952528d",
+      "upstream": "com/sun/jna/linux-mips64el/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/linux-ppc/libjnidispatch.so",
+      "sha256": "fbde8c5b108934e75c7008562e95b209535bf4996b3bc246ec5e425a0757a903",
+      "upstream": "com/sun/jna/linux-ppc/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/linux-ppc64le/libjnidispatch.so",
+      "sha256": "aaa31a2220e270f69259d930540c5682b1bd662a6d774918605e62cd562d5d11",
+      "upstream": "com/sun/jna/linux-ppc64le/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/linux-riscv64/libjnidispatch.so",
+      "sha256": "f817ac611184e31fd84ac2d223ff8f9312300fbc025adfb5cadbfefb8d1a2c13",
+      "upstream": "com/sun/jna/linux-riscv64/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/linux-s390x/libjnidispatch.so",
+      "sha256": "b31df7050aa22907e5caae2ef81db83e2900b7b6e683080f6f5681373a71e400",
+      "upstream": "com/sun/jna/linux-s390x/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/linux-x86-64/libjnidispatch.so",
+      "sha256": "ca07953d595210082339753d9e818a1fdb40509a17a41914d9a2cb0d2df6b6af",
+      "upstream": "com/sun/jna/linux-x86-64/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/linux-x86/libjnidispatch.so",
+      "sha256": "546ec7cc6548de411cc52a1069295301308437080be014cda2346ccd0f99bf55",
+      "upstream": "com/sun/jna/linux-x86/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/openbsd-x86-64/libjnidispatch.so",
+      "sha256": "d0eda029037f25c4b3d63923a3875345ecd1922de1e6e5df4162cc5631dc0deb",
+      "upstream": "com/sun/jna/openbsd-x86-64/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/openbsd-x86/libjnidispatch.so",
+      "sha256": "c1837623157a7b51d586423b2500554634150d17a0b3f369ca9333af1189f9d4",
+      "upstream": "com/sun/jna/openbsd-x86/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/sunos-sparc/libjnidispatch.so",
+      "sha256": "5ae26c1d50dd6836d0bafb1af2a6c39eb4084be42f0a05da0645d31feed1efad",
+      "upstream": "com/sun/jna/sunos-sparc/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/sunos-sparcv9/libjnidispatch.so",
+      "sha256": "ccd720895968a885d423facf63615c7f16490f94d946ecb5fefdd4951c62297c",
+      "upstream": "com/sun/jna/sunos-sparcv9/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/sunos-x86-64/libjnidispatch.so",
+      "sha256": "4a0b0b11369d4f88437700e8ee3557cb518ec017bfe2df3bd49faf82e60e8f8e",
+      "upstream": "com/sun/jna/sunos-x86-64/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/sunos-x86/libjnidispatch.so",
+      "sha256": "fdba3f2f4220fb407c7841b2f49efd4fe1c06dca26c9768513e13461ed1520c5",
+      "upstream": "com/sun/jna/sunos-x86/libjnidispatch.so"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/win32-aarch64/jnidispatch.dll",
+      "sha256": "b8f98be314234cf12b5b46c29652f70c0f6abb93ae19b63d3fe2692062aa699d",
+      "upstream": "com/sun/jna/win32-aarch64/jnidispatch.dll"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/win32-x86-64/jnidispatch.dll",
+      "sha256": "5a7ff949f6d93d86491eb5b26b1cfc60051168a60622650224b89995ac420023",
+      "upstream": "com/sun/jna/win32-x86-64/jnidispatch.dll"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "net.java.dev.jna:jna:5.18.1 (sha256 260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557)",
+      "repository": "m3/vendor/third_party/jna-5.18.1/src/main/resources/com/sun/jna/win32-x86/jnidispatch.dll",
+      "sha256": "752d597cee7e95cb517327146bf42f124c0d6c0bc48b3ecc3b1b3b0531a52f44",
+      "upstream": "com/sun/jna/win32-x86/jnidispatch.dll"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/jna-5.18.1/UPSTREAM_LICENSE.json",
+      "sha256": "b5576d27094f808b10bbda10a18d528cfd5a22295596c8e312b9dbefd93fb566",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jna-5.18.1/UPSTREAM_LICENSE.txt",
+      "sha256": "07c938b23950ab7d47a24ef35f9f5da3a05ae164278dc959ad6994135ed59ff1",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/jna-5.18.1/SOURCES_MANIFEST.tsv",
+      "sha256": "f72495622719a69a967bbf1c5c40891adf1aa34269521b1082eea2875442f53d",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jna-5.18.1/LICENSE",
+      "sha256": "07c938b23950ab7d47a24ef35f9f5da3a05ae164278dc959ad6994135ed59ff1",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "net.java.dev.jna",
+  "kind": "MODULE",
+  "license": "LGPL-2.1-or-later",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 26,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.18.1/jna-5.18.1.pom",
+  "receipt": {
+    "buildRoot": "236de13bba36d8d0d0c537ee06794f22eb5e0ab3e4b5d1226527a026eaae1d64",
+    "distributionSha256": "be357a1de6a338f9d7f5efe23f0f33ebe9d130b7aa66ea9f0a4ad71b61a8ed40",
+    "lock": "33ab049867c1c736c65dececbbb9f9d42697fd3336cf178946c3c43ba55336ff",
+    "message": "",
+    "sourceRoot": "450cc28473dd7f65050e7b966c16b1e0642ef1f5d56497dfd8e4134177924e7c",
+    "status": "PASS"
+  },
+  "resources_completed": 31,
+  "sources_jar": "https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.18.1/jna-5.18.1-sources.jar",
+  "sources_jar_sha1": "4bd8a21c9bfd90ed0b4d8780308b67e0ace998a3",
+  "sources_jar_sha256": "0b9224e215b3c6a464959e3f994ddd64c14d46fb4014facd6afa1cc18e469466",
+  "status": "PASS",
+  "upstream": "https://github.com/java-native-access/jna",
+  "version": "5.18.1"
+}

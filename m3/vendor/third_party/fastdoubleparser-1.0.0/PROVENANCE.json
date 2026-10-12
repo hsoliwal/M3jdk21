@@ -383,7 +383,7 @@
     {
       "kind": "retained-provenance",
       "repository": "m3/vendor/third_party/fastdoubleparser-1.0.0/OVERLAY_SOURCES.json",
-      "sha256": "081d4a6b9a3a7a0cbf42176be64a5e7d16c6815740ba53397c890ada7a6f0db5",
+      "sha256": "dbc09433d68b819c6981800bc88c438b4a385338ff8a7533ecb95d4a03543b77",
       "upstream": "fetch_overlays.py"
     },
     {

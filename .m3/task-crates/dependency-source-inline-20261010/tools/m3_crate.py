@@ -69,6 +69,16 @@ def main() -> int:
     for m in mods:
         v = m["version"][:-len(SUFFIX)] if m["version"].endswith(SUFFIX) else m["version"]
         by_coord[(m["group"], m["artifact"], v)] = m
+    in_repo = {}  # group:artifact -> pom path of every module the repository builds itself
+    import subprocess as _sp
+    for _p in [x for x in _sp.run(["git", "-C", str(args.repo), "ls-tree", "-r", "--name-only", "HEAD"], capture_output=True, text=True).stdout.splitlines() if x.endswith("pom.xml") and "/src/test/resources/" not in x]:
+        _t = _sp.run(["git", "-C", str(args.repo), "show", "HEAD:" + _p], capture_output=True, text=True, encoding="utf-8", errors="replace").stdout
+        _t = re.sub(r"<parent>.*?</parent>", "", re.sub(r"<!--.*?-->", "", _t, flags=re.S), count=1, flags=re.S)
+        _t = re.sub(r"<(dependencies|dependencyManagement|build|profiles|plugins)>.*", "", _t, flags=re.S)
+        _g = re.search(r"<groupId>([^<]+)</groupId>", _t); _a = re.search(r"<artifactId>([^<]+)</artifactId>", _t)
+        if _a:
+            in_repo.setdefault(((_g.group(1) if _g else "").strip(), _a.group(1).strip()), _p)
+    vendored_ga = {(m["group"], m["artifact"]): m for m in mods if m["kind"] == "MODULE"}
     rows = []
     for rel in [l.strip() for l in args.consumers.read_text(encoding="utf-8").splitlines() if l.strip()]:
         pom = args.repo / rel
@@ -95,7 +105,11 @@ def main() -> int:
             eff = re.sub(r"\$\{([^}]+)\}", lambda k: props.get(k.group(1), k.group(0)), raw)
             eff_plain = eff[:-len(SUFFIX)] if eff.endswith(SUFFIX) else eff
             mod = by_coord.get((gv, av, eff_plain))
-            if mod is None:
+            if mod is None and not eff and (gv, av) in vendored_ga:
+                status, path = "VENDORED_SOURCE_BUILD+MANAGED (version from a parent dependencyManagement)", vendored_ga[(gv, av)]["path"]
+            elif mod is None and any(k_[1] == av and (k_[0] == gv or not k_[0]) for k_ in in_repo):
+                status, path = "IN_REPO_MODULE", next(v_ for k_, v_ in in_repo.items() if k_[1] == av and (k_[0] == gv or not k_[0]))
+            elif mod is None:
                 status, path = "NOT_VENDORED", ""
             elif mod["kind"] == "MODULE":
                 status, path = ("VENDORED_SOURCE_BUILD" + ("+SWITCHED" if eff.endswith(SUFFIX) else "+BINARY_STILL_RESOLVED") + " API_SURFACE=" + api.get(mod["donor"], {}).get("verdict", "NOT_RUN")), mod["path"]

@@ -559,6 +559,22 @@ def main() -> int:
             if a == "lombok":
                 continue  # delombok tool only; the delomboked sources do not reference Lombok
             deps.append((g, a, v, BINARY_INPUT_SCOPE, True, "binary build input for an optional adapter (BUILD_INPUTS.tsv)"))
+        if kind == "MODULE" and (OVERLAY_ROOT / did / "GENERATED_SOURCES.json").is_file():  # upstream build-generated sources
+            gen_info = json.loads((OVERLAY_ROOT / did / "GENERATED_SOURCES.json").read_text(encoding="utf-8"))
+            gen_root = OVERLAY_ROOT / did / "generated"
+            for gsrc in sorted(gen_root.rglob("*.java")):
+                rel_ = gsrc.relative_to(gen_root).as_posix()
+                gdst = mdir / "src/main/java" / rel_
+                if gdst.exists():
+                    raise SystemExit("generated source collides with a sources-jar file: %s %s" % (did, rel_))
+                gdst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(gsrc, gdst)
+                files.append({"kind": "upstream-generated-source-at-tag", "repository": gdst.relative_to(args.repo).as_posix(), "sha256": sha256(gdst), "upstream": "generated/" + rel_,
+                              "repository_upstream": gen_info.get("repository", ""), "tag": gen_info.get("tag", ""), "commit": gen_info.get("commit", "")})
+            for keep_ in ("GENERATED_SOURCES.json", "regenerate.sh"):
+                if (OVERLAY_ROOT / did / keep_).is_file():
+                    shutil.copyfile(OVERLAY_ROOT / did / keep_, mdir / keep_)
+                    files.append({"kind": "retained-provenance", "repository": (mdir / keep_).relative_to(args.repo).as_posix(), "sha256": sha256(mdir / keep_), "upstream": keep_})
         overlay_info = {}
         if kind == "MODULE" and (OVERLAY_ROOT / did / "OVERLAY_SOURCES.json").is_file():
             overlay_info = json.loads((OVERLAY_ROOT / did / "OVERLAY_SOURCES.json").read_text(encoding="utf-8"))

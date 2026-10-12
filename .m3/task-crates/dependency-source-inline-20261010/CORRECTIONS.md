@@ -110,3 +110,40 @@ Consumer pins: 172 switched, the JUnit 5 test pins included. Still downstream: `
 User decision (2026-10-12): the inlined libraries use M3String transparently. On M3jdk21 every `java.lang.String`
 they create is M3String-backed under `-XX:+UseM3StringStorage`, and `java.lang.M3String` is package-private.
 Sources stay unchanged. A runtime proof lane (flag on/off) follows the first master JDK build.
+
+# M3jdk21 as the SDK superset: the full third-party set; inline -> atomize -> patternize -> reuse (2026-10-12)
+
+User direction: M3jdk21 is an SDK, a superset of JDK 21, that "is going to have it all". The vendored tree now
+carries the full set Synexia carries: 131 donors, 118 Maven-built source modules and 13 images. Gate on the rebuilt
+jars: 63 IDENTICAL, 55 EQUIVALENT_MODULO_COMPILER. 120/120 built.
+
+Images:
+- caffeine 3.1.8 and lz4-java 1.8.0: build-generated classes. Their sources have now been reproduced by running
+  upstream's own generators at the release tags (caffeine: JavaPoet generators, 528 files, clock pinned to the
+  release instant for the copyright line; lz4-java: MVEL templates, 16 files). They land as modules in the next
+  commit.
+- ecj 3.46 and zstd-jni: FAILED.
+- Nine OpenRewrite language modules and jdt.core: SOURCE_ONLY.
+
+Ledger corrections:
+- `com.synexia:synexia-jdk-a3-recipes` is built in-reactor from `m3/vendor/synexia` (IN_REPO_MODULE).
+- Two `junit-jupiter` pins inherit their version from a parent's dependencyManagement and are vendored (MANAGED).
+- Still external: `com.synexia.m3:cpu-gpu-rv32im` (hsoliwal/synexia-tornadovm). Its `tornado-api` dependency will not
+  be vendored: tornado-api 6.1.0 contains a GPL-2.0-only file. Per the user, TornadoVM becomes a donor for a new M3
+  parallel API and a JNI vCPU layer (CPU / Intel / CUDA / AMD backends). The design document comes first.
+
+Atomize and patternize over all 131 donors (CPU projection, `reuse/ATOMIZE_PROOF.json`): 21,717 Java files, 360,050
+leaves, 144,155 exact classes, 26,367 cross-donor exact classes. No representative outside the donor sources.
+
+Reuse (`reuse/REUSE_*`, proposal-only): 1,478 exact patterns shared across different artifacts and 15,077 across
+versions of one artifact. Top pairs:
+- asm and byte-buddy (byte-buddy embeds a relocated ASM; 363 patterns, 114k tokens);
+- the OpenRewrite language modules (rewrite-hcl/json/yaml/protobuf);
+- commons-lang3 and commons-text;
+- jgit and rewrite-core (shaded jgit);
+- snakeyaml and snakeyaml-engine.
+
+Refactor tracks:
+- R1, shade instead of copy: build byte-buddy from the vendored asm plus shading, as upstream does.
+- R2, converge to one version per library, proven by building the consumers.
+- R3, a recipe-driven refactored layer, proven against upstream test suites.

@@ -1,0 +1,902 @@
+{
+  "artifact": "snakeyaml-engine",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "MODULE_DESCRIPTOR_OR_MULTI_RELEASE",
+  "consumers": "synexia-indexstring, synexia-mindex",
+  "coordinate": "org.snakeyaml:snakeyaml-engine:3.1.1-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "snakeyaml-engine-3.1.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "c688647aba2a741588a28eda790599fc1b8859be4494800e88c91e93e4d1e3c9",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/upstream-excluded/META-INF/maven/org.snakeyaml/snakeyaml-engine/pom.properties",
+      "sha256": "2bd8af78f5e73372e3cf9d92ba890be63c256194ee2e8a11fc447679bcb45402",
+      "upstream": "META-INF/maven/org.snakeyaml/snakeyaml-engine/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/upstream-excluded/META-INF/maven/org.snakeyaml/snakeyaml-engine/pom.xml",
+      "sha256": "8ec0716898c6985b0a09a5f1c384023226964a4f5ab7b18b2bcddee9df45d979",
+      "upstream": "META-INF/maven/org.snakeyaml/snakeyaml-engine/pom.xml"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/module-info.java",
+      "sha256": "5c10b19a8130980dfd148c9a926a0f0f8421e78f6efcbc3bfea7daab159ab31a",
+      "upstream": "module-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/external/com/google/gdata/util/common/base/Escaper.java",
+      "sha256": "4b0a0ecec8a7e04973684513c4469cc08746ed04604d6c8c35228354d0257584",
+      "upstream": "org/snakeyaml/engine/external/com/google/gdata/util/common/base/Escaper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/external/com/google/gdata/util/common/base/PercentEscaper.java",
+      "sha256": "0b5cb32b08fd441100d310cce221a88a20c5204edb97ac4ca150f882f8f7ecdf",
+      "upstream": "org/snakeyaml/engine/external/com/google/gdata/util/common/base/PercentEscaper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/external/com/google/gdata/util/common/base/UnicodeEscaper.java",
+      "sha256": "d7810434b66fa9f7ba4fbc1ebf3231e1eccdd7ba02a7b5ab7dc61ae15cb84939",
+      "upstream": "org/snakeyaml/engine/external/com/google/gdata/util/common/base/UnicodeEscaper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/ConstructNode.java",
+      "sha256": "199b21fb09e4a2d44835eae83b56d5e431c09a8d38f480ed6a0bb35e4f55d1d5",
+      "upstream": "org/snakeyaml/engine/v2/api/ConstructNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/Dump.java",
+      "sha256": "f284e26e86835a259724ca5189fe7604a978f7be8a6d527c312956b382fc7291",
+      "upstream": "org/snakeyaml/engine/v2/api/Dump.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/DumpSettings.java",
+      "sha256": "3ff0acc2e49a9f673a162787ce89c66454363638715312a014385ad73f47250f",
+      "upstream": "org/snakeyaml/engine/v2/api/DumpSettings.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/DumpSettingsBuilder.java",
+      "sha256": "39c61ac8f9e4f7703f6fbdfbc1b039b9ec3e1ad7a19078a5f69075f6b333fdcb",
+      "upstream": "org/snakeyaml/engine/v2/api/DumpSettingsBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/Load.java",
+      "sha256": "9f9d209b5252bdbc0c00f66e7e93e0029b83ef7c82dc4f486df54de246effae5",
+      "upstream": "org/snakeyaml/engine/v2/api/Load.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/LoadSettings.java",
+      "sha256": "13b80d0ae844373a8952ba1e0897fdd674b1a373bdffe62c5aeb1af7e876c0ba",
+      "upstream": "org/snakeyaml/engine/v2/api/LoadSettings.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/LoadSettingsBuilder.java",
+      "sha256": "02c40aff67c8f179167c4b78d17e56357453b148dc81f05145fb3e87b4e40309",
+      "upstream": "org/snakeyaml/engine/v2/api/LoadSettingsBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/RepresentToNode.java",
+      "sha256": "47a9bc8d0a26d5129cfc2417fe3234d7218f0fe43318f3fb02021d0c5649cc46",
+      "upstream": "org/snakeyaml/engine/v2/api/RepresentToNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/SettingKey.java",
+      "sha256": "fdab5531125f7e00e7166b3a13d761352ebf736df4665bfccebfc2dbf59b364d",
+      "upstream": "org/snakeyaml/engine/v2/api/SettingKey.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/StreamDataWriter.java",
+      "sha256": "f9e73582658c258097ad89dae9b79e0fa251dcf69e4e5332d3515ac6e912252f",
+      "upstream": "org/snakeyaml/engine/v2/api/StreamDataWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/YamlOutputStreamWriter.java",
+      "sha256": "1153150f144bdf091ebf80f1e854678a5940dde6c9d56a50c6f1bf36deada6c5",
+      "upstream": "org/snakeyaml/engine/v2/api/YamlOutputStreamWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/YamlUnicodeReader.java",
+      "sha256": "2eedd276a05a3e184cf00710dbb2db479c066b58dba940f6448f3e0d71a0e24d",
+      "upstream": "org/snakeyaml/engine/v2/api/YamlUnicodeReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/lowlevel/Compose.java",
+      "sha256": "c8492a55ea9ae3db3ee62e8a2540a3e9a03b97725b00b771ea3b91bd1ed36cb3",
+      "upstream": "org/snakeyaml/engine/v2/api/lowlevel/Compose.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/lowlevel/Parse.java",
+      "sha256": "3a7ff0782a1de3c0385d98ca9d4a94a879f9d1c7d7129810b18d8bbb4f65d64e",
+      "upstream": "org/snakeyaml/engine/v2/api/lowlevel/Parse.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/lowlevel/Present.java",
+      "sha256": "bc66b2623a51040c2b3729358b22ca86a5971c799d77d87e8d30596bb0f6bdea",
+      "upstream": "org/snakeyaml/engine/v2/api/lowlevel/Present.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/api/lowlevel/Serialize.java",
+      "sha256": "db6a37f417655b83eb336be1a8b1522b92eaf330df049b4da3d6df168d196277",
+      "upstream": "org/snakeyaml/engine/v2/api/lowlevel/Serialize.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/comments/CommentEventsCollector.java",
+      "sha256": "adeea576cf0342aee2da8d9b836edda6ac72c7650254148db9972e29c85006e2",
+      "upstream": "org/snakeyaml/engine/v2/comments/CommentEventsCollector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/comments/CommentLine.java",
+      "sha256": "6eafe1d4cd05431d73c3028beb4055ad9ed78430f657453092d4692594942e6c",
+      "upstream": "org/snakeyaml/engine/v2/comments/CommentLine.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/comments/CommentType.java",
+      "sha256": "a6f99d185c0e066f614ee6ac0b0f6efdd2ee68eb4665c90c80690b6dc805da9f",
+      "upstream": "org/snakeyaml/engine/v2/comments/CommentType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/common/Anchor.java",
+      "sha256": "64121d44e0444c8ed92b65c1dc1b07957bc30de68820b044ef0328067e4765aa",
+      "upstream": "org/snakeyaml/engine/v2/common/Anchor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/common/ArrayStack.java",
+      "sha256": "89aaae7c4f2a6b9d22ca5bbe1fd7fafee3ce321af57815ff4db6d1ef33b35212",
+      "upstream": "org/snakeyaml/engine/v2/common/ArrayStack.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/common/CharConstants.java",
+      "sha256": "53f06a11d9a4882d7dd779177b7df75518a094421eaa3ce35033e53357cfff60",
+      "upstream": "org/snakeyaml/engine/v2/common/CharConstants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/common/FlowStyle.java",
+      "sha256": "c39024cff36a847a2c81eb5ff30c76cb0e997f548059695104bf174525d8946f",
+      "upstream": "org/snakeyaml/engine/v2/common/FlowStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/common/NonPrintableStyle.java",
+      "sha256": "3a6d4b978dd5969dc1ea5cf226a5ed120bfb71c93a441a2eb0a3d22f86dc214b",
+      "upstream": "org/snakeyaml/engine/v2/common/NonPrintableStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/common/ScalarStyle.java",
+      "sha256": "962cdb75bb3769a32362a052625b8b22cd3c7747965796f9b328ad62284d9f18",
+      "upstream": "org/snakeyaml/engine/v2/common/ScalarStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/common/SpecVersion.java",
+      "sha256": "9592f004c21fb1f36f13ea93aebda894230276959e228de1596aa92f058a8e11",
+      "upstream": "org/snakeyaml/engine/v2/common/SpecVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/common/UriEncoder.java",
+      "sha256": "4769130927217a9e92ce00eff441503490dba9d33aa3b47ca2ba05082ededa64",
+      "upstream": "org/snakeyaml/engine/v2/common/UriEncoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/composer/Composer.java",
+      "sha256": "6001e7fbca78369c591bb69860c663bf4d117022d828a344cdecd0122644dc8d",
+      "upstream": "org/snakeyaml/engine/v2/composer/Composer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/BaseConstructor.java",
+      "sha256": "4b70edb9503abc2e182707dce11e22ae4a5096c868e6b80f039b6259a8065d52",
+      "upstream": "org/snakeyaml/engine/v2/constructor/BaseConstructor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/ConstructScalar.java",
+      "sha256": "9d0f4ae2c1172d7b56bd5082aa59e1ed52eb56bf1097aa0e9f2940242c9b1bb8",
+      "upstream": "org/snakeyaml/engine/v2/constructor/ConstructScalar.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/ConstructYamlNull.java",
+      "sha256": "6b3c3cce21b4ac97d12c0b06f56388015124b76bf12df53f5c1d020e3f4329fe",
+      "upstream": "org/snakeyaml/engine/v2/constructor/ConstructYamlNull.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/StandardConstructor.java",
+      "sha256": "7b07d2913663d69d6d94c0c72ef770ab907af0c32e7e8d1be7935391c08cd15d",
+      "upstream": "org/snakeyaml/engine/v2/constructor/StandardConstructor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/core/ConstructYamlCoreBool.java",
+      "sha256": "24bf73ed3e54f5a95b314fd024908605b21fa3578f7d34dae4e8a768e880004a",
+      "upstream": "org/snakeyaml/engine/v2/constructor/core/ConstructYamlCoreBool.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/core/ConstructYamlCoreFloat.java",
+      "sha256": "8c51f2f3de36e3d32e8cb2f34757f656b19a9228765796981c5efa2b2130297a",
+      "upstream": "org/snakeyaml/engine/v2/constructor/core/ConstructYamlCoreFloat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/core/ConstructYamlCoreInt.java",
+      "sha256": "5ace7466f478f73d421891fa01bb6926d58144382adbdb2c3f5388c78961af94",
+      "upstream": "org/snakeyaml/engine/v2/constructor/core/ConstructYamlCoreInt.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/json/ConstructOptionalClass.java",
+      "sha256": "de944a6c8aebbdbff8cc0a919a539ef63b64e7158acb3711efcb53450beb8709",
+      "upstream": "org/snakeyaml/engine/v2/constructor/json/ConstructOptionalClass.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/json/ConstructUuidClass.java",
+      "sha256": "f1cf45d5c1b6787798077c0f82f4dd006a7e5ea51c2792f794836252c72397bf",
+      "upstream": "org/snakeyaml/engine/v2/constructor/json/ConstructUuidClass.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/json/ConstructYamlBinary.java",
+      "sha256": "76736cfba07e97f840b43553ed20ffde6ce405650fdd1cb2042020b3d5e5eaf2",
+      "upstream": "org/snakeyaml/engine/v2/constructor/json/ConstructYamlBinary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/json/ConstructYamlJsonBool.java",
+      "sha256": "b41f72670cebb1d3fb1673eb7c707640435e42932568fa0198a6e6a2b80f11c8",
+      "upstream": "org/snakeyaml/engine/v2/constructor/json/ConstructYamlJsonBool.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/json/ConstructYamlJsonFloat.java",
+      "sha256": "95aa72223e8e80a9dc27375b9823d730d94652b3e65df2a8803f0be83a64a2b3",
+      "upstream": "org/snakeyaml/engine/v2/constructor/json/ConstructYamlJsonFloat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/constructor/json/ConstructYamlJsonInt.java",
+      "sha256": "1484f51a72acc47f372b05a4c295fbea21807bac76ba5c537967ed82557b1951",
+      "upstream": "org/snakeyaml/engine/v2/constructor/json/ConstructYamlJsonInt.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/emitter/Emitable.java",
+      "sha256": "6576c2d184934a46f784690a32de8124fa64211e20c173b25a73c82dad1460db",
+      "upstream": "org/snakeyaml/engine/v2/emitter/Emitable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/emitter/Emitter.java",
+      "sha256": "a76148a761e4b2bfeee3ec6a63b5768d3fe98deef02753b09c02105bd632891e",
+      "upstream": "org/snakeyaml/engine/v2/emitter/Emitter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/emitter/EmitterState.java",
+      "sha256": "e69bdf574e6319d765b9ff1cbd12d0158b8586bd78a185e84f707b79b1a2c427",
+      "upstream": "org/snakeyaml/engine/v2/emitter/EmitterState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/emitter/ScalarAnalysis.java",
+      "sha256": "680d0772494a16b2c6594c2f42749f34182f3d46d0a325944a5e48fd1f30d732",
+      "upstream": "org/snakeyaml/engine/v2/emitter/ScalarAnalysis.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/env/EnvConfig.java",
+      "sha256": "16f86bf9c979e11e67d119154d4bdbee9e3346394f2185684cbddd5eb56bd449",
+      "upstream": "org/snakeyaml/engine/v2/env/EnvConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/AliasEvent.java",
+      "sha256": "80f045ce90bab1ff6a33b22d966f81728793820ba860e71bed8cde79725c5394",
+      "upstream": "org/snakeyaml/engine/v2/events/AliasEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/CollectionEndEvent.java",
+      "sha256": "cd21e4547b0f179afae24c2a6cf56c2d31f2aa095ff04fe857e4e7aff9c3864c",
+      "upstream": "org/snakeyaml/engine/v2/events/CollectionEndEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/CollectionStartEvent.java",
+      "sha256": "fd875447a55bb2fa2c656950a75b0e3f91b176c0ebb61a7be804a018373eab1c",
+      "upstream": "org/snakeyaml/engine/v2/events/CollectionStartEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/CommentEvent.java",
+      "sha256": "af91b76d88793231059adf15cf8b8c171f19f47ccb508bd89d502bc16f194bc7",
+      "upstream": "org/snakeyaml/engine/v2/events/CommentEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/DocumentEndEvent.java",
+      "sha256": "d0cdd03967f8ab53be6a0c7907a4624cdc6c0bf87eb688ec3b8803ea1c95f43a",
+      "upstream": "org/snakeyaml/engine/v2/events/DocumentEndEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/DocumentStartEvent.java",
+      "sha256": "cc4943caa550e5f693582ad1b1d1109ce9f3c86d1c7b49118c2f1b5ad322bd6e",
+      "upstream": "org/snakeyaml/engine/v2/events/DocumentStartEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/Event.java",
+      "sha256": "adb8cbca921e2832f86aa4b08d2d6946c624f83af68f3868b2446990e345f899",
+      "upstream": "org/snakeyaml/engine/v2/events/Event.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/ImplicitTuple.java",
+      "sha256": "13794957a070c611f9c024775974bc0e7bff071da2e674b10d905e3bf6687976",
+      "upstream": "org/snakeyaml/engine/v2/events/ImplicitTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/MappingEndEvent.java",
+      "sha256": "bfb2c2f0f2ddd5ed83d79ef3bb3d91aaa49affad7ec4c3d3058132a68433f9d4",
+      "upstream": "org/snakeyaml/engine/v2/events/MappingEndEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/MappingStartEvent.java",
+      "sha256": "71bbd435af30c571235fc0dac7d1791abcab44e3530cd7b43f7c1c1a85368e05",
+      "upstream": "org/snakeyaml/engine/v2/events/MappingStartEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/NodeEvent.java",
+      "sha256": "0bd70995cca2aaa0fbf90dde8d310159941bd8f90ef866e3840a9d492fd86366",
+      "upstream": "org/snakeyaml/engine/v2/events/NodeEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/ScalarEvent.java",
+      "sha256": "4ff5c76670330c5235cf2a919495595992f09fe1946c873d1a7842f9dbe0f5c0",
+      "upstream": "org/snakeyaml/engine/v2/events/ScalarEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/SequenceEndEvent.java",
+      "sha256": "6de39e6c2d89ba7fb3d88406d1514ac41af123352a4180631ade71337621913b",
+      "upstream": "org/snakeyaml/engine/v2/events/SequenceEndEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/SequenceStartEvent.java",
+      "sha256": "487d6b1b627fdd14dfe75c034bd2276ea2a3e824b4988a6cc8f1c95a2ab66504",
+      "upstream": "org/snakeyaml/engine/v2/events/SequenceStartEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/StreamEndEvent.java",
+      "sha256": "cdd7a17658209ee34cae8a980de7df0f9d63cdd5a3a5bca1bb8b3eba75eb4590",
+      "upstream": "org/snakeyaml/engine/v2/events/StreamEndEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/events/StreamStartEvent.java",
+      "sha256": "7219e0f62e6f8e87d98120146641d0e853bee5a3567d88cbb0d853d188c42e1a",
+      "upstream": "org/snakeyaml/engine/v2/events/StreamStartEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/ComposerException.java",
+      "sha256": "10b99298c255abd9754fd41da8956e8066fe99294ce11f11a04f5f81a53f9588",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/ComposerException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/ConstructorException.java",
+      "sha256": "2526125e0d61c1e695eac45820f4522cc00b7d49ac5a141031c3b84a441f6850",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/ConstructorException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/DuplicateKeyException.java",
+      "sha256": "1073826643d977769bfbb10d5c2dbe504ee3d16233ee254bebd166d75bd39116",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/DuplicateKeyException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/EmitterException.java",
+      "sha256": "84c279dc9e9b98b03a224fca17fe4653c14bc03a56bf6150c046556f9e1f066a",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/EmitterException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/Mark.java",
+      "sha256": "bb0ff004fccadde7fc66c95de84c2cfc92bda8091b7a1f2c87bdf9fce295fa9e",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/Mark.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/MarkedYamlEngineException.java",
+      "sha256": "122c3fc2bff72a5b5e7be1a072c1f32ab069106e031ad008e7f0a0aaebb89572",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/MarkedYamlEngineException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/MissingEnvironmentVariableException.java",
+      "sha256": "9f76b6ed1a5e3095dcbebb49847f79e15f53a293576d622eb5cf864bca8313d8",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/MissingEnvironmentVariableException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/ParserException.java",
+      "sha256": "22cb1e233101047cdb57d6a006fc381c992a2b203ee2e7c9760522a3dbe5cdb4",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/ParserException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/ReaderException.java",
+      "sha256": "9906cd75370d6f40e153d42324ab92bbcd6bf879ec8846b4dfcfe60bc6114cce",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/ReaderException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/RepresenterException.java",
+      "sha256": "5b18632f806e873d055443538016c1151f73ccae3d6e0f20030660ab80efd0b4",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/RepresenterException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/ScannerException.java",
+      "sha256": "155d86d61a78acc7663eb1f3824e8aca01300e2c8fdca274d62158bc5ddcd802",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/ScannerException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/YamlEngineException.java",
+      "sha256": "078646e31a4915dce888de0a03313fd4ea4e9a68dbccb212b506a9aa55649c81",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/YamlEngineException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/exceptions/YamlVersionException.java",
+      "sha256": "2cbc325ad524bdefe86a688b7433b63804c7b378b0a30ef8c79ac6c516e98ee8",
+      "upstream": "org/snakeyaml/engine/v2/exceptions/YamlVersionException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/nodes/AnchorNode.java",
+      "sha256": "2d5078afadd687e29c2ca7f5462a88376eb1452edbf3ae6211a2fac53a7cc1f3",
+      "upstream": "org/snakeyaml/engine/v2/nodes/AnchorNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/nodes/CollectionNode.java",
+      "sha256": "22e6d6b0a8ea4edab9f162a9d98d7a222fce0743e8b0c9e8417230af40a67cd2",
+      "upstream": "org/snakeyaml/engine/v2/nodes/CollectionNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/nodes/MappingNode.java",
+      "sha256": "550b0936240a9a5ce1d7af8b799688737890b97cb83e5a5e8f14ac74072d8532",
+      "upstream": "org/snakeyaml/engine/v2/nodes/MappingNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/nodes/Node.java",
+      "sha256": "6a7f219bfdcb4743c78480ffb5dbca1b869ff001128e06862e156700dee64a07",
+      "upstream": "org/snakeyaml/engine/v2/nodes/Node.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/nodes/NodeTuple.java",
+      "sha256": "824fe250b963f2192b8d74351592279ed62f20b69ef2acf65f1f8b65b7e40954",
+      "upstream": "org/snakeyaml/engine/v2/nodes/NodeTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/nodes/NodeType.java",
+      "sha256": "51185ab7123ecea63bcd57d3d154cb46d9f51d979a16abde30c976d34659b614",
+      "upstream": "org/snakeyaml/engine/v2/nodes/NodeType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/nodes/ScalarNode.java",
+      "sha256": "ecc350fe136c45d4b82b983b6ad678cd1549e2e18ad3f8aca30c53b5a5d0a490",
+      "upstream": "org/snakeyaml/engine/v2/nodes/ScalarNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/nodes/SequenceNode.java",
+      "sha256": "4c7a86953de9c004cfc1fb4c9a2a480c3c962bb72ae13185dd479851487ebe88",
+      "upstream": "org/snakeyaml/engine/v2/nodes/SequenceNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/nodes/Tag.java",
+      "sha256": "2c089e57174dcb4ccc9b08d87ddfa1cc3ec5a8dfc5ae0a175c190430c493608e",
+      "upstream": "org/snakeyaml/engine/v2/nodes/Tag.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/parser/Parser.java",
+      "sha256": "d26113ec4b6677f1bb25b987c4a143559e93b63e25074ae7b6783f203642dbc6",
+      "upstream": "org/snakeyaml/engine/v2/parser/Parser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/parser/ParserImpl.java",
+      "sha256": "5ef771f34e26e5083c1e97408fd1b79c18bbc9389706f861c4f2fb4f49f8d797",
+      "upstream": "org/snakeyaml/engine/v2/parser/ParserImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/parser/Production.java",
+      "sha256": "470e42b8923d4a6b88e93bcabdc339e18c2e84cf34df3a488dbb60121f9c3bcd",
+      "upstream": "org/snakeyaml/engine/v2/parser/Production.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/parser/VersionTagsTuple.java",
+      "sha256": "c890a0632b297050c0a36f9a00a05c570be7bf19aca75f0133e31df7142e76de",
+      "upstream": "org/snakeyaml/engine/v2/parser/VersionTagsTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/representer/BaseRepresenter.java",
+      "sha256": "85ee5260e106d338055353c42aba26df042a90a92e837fcaeb2c684b539b9bf4",
+      "upstream": "org/snakeyaml/engine/v2/representer/BaseRepresenter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/representer/StandardRepresenter.java",
+      "sha256": "535e80e5e540baf3aa2cc6b7a2d958db9ead33727b6592cb98957164579a54ea",
+      "upstream": "org/snakeyaml/engine/v2/representer/StandardRepresenter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/resolver/BaseScalarResolver.java",
+      "sha256": "d3671ecc6d4df92de22fa66d397e860ec4df9d92d100c41ec06f840aaa525bad",
+      "upstream": "org/snakeyaml/engine/v2/resolver/BaseScalarResolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/resolver/CoreScalarResolver.java",
+      "sha256": "36d12808088044e4c3c6f45e675af5c34dd65f64657b705804eeacd9c86d6325",
+      "upstream": "org/snakeyaml/engine/v2/resolver/CoreScalarResolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/resolver/FailsafeScalarResolver.java",
+      "sha256": "5da31dacf8e223ce6d2fca6684c906c5064633ef1cfa08debd71f818775b0e9e",
+      "upstream": "org/snakeyaml/engine/v2/resolver/FailsafeScalarResolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/resolver/JsonScalarResolver.java",
+      "sha256": "ec93b44f6309458e1cdb8a3773cc24b70af5824c7322a4d9217f82f64fcface3",
+      "upstream": "org/snakeyaml/engine/v2/resolver/JsonScalarResolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/resolver/ResolverTuple.java",
+      "sha256": "3332a3f731ff4ab75dc77d2757a29e60371176b09c501aa409c777aad68a9fb8",
+      "upstream": "org/snakeyaml/engine/v2/resolver/ResolverTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/resolver/ScalarResolver.java",
+      "sha256": "e98e1378a1ffad6866da2252b7e5a61a7db163098c622e8505bc74025f68e2cd",
+      "upstream": "org/snakeyaml/engine/v2/resolver/ScalarResolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/scanner/Scanner.java",
+      "sha256": "855d8d311d675608599dcc6feb7a6b3048498d07427c204bbfc082a4c280b161",
+      "upstream": "org/snakeyaml/engine/v2/scanner/Scanner.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/scanner/ScannerImpl.java",
+      "sha256": "604ff0e5b970c33b19783b7eb8382c6107b28983bbfc664597c690b3b29711e0",
+      "upstream": "org/snakeyaml/engine/v2/scanner/ScannerImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/scanner/SimpleKey.java",
+      "sha256": "f2145c77479f9c1054daddc6a75af32d359ad966bba985fa51ff9106192c196b",
+      "upstream": "org/snakeyaml/engine/v2/scanner/SimpleKey.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/scanner/StreamReader.java",
+      "sha256": "c6b9cd7d3dc07bf94d8a4e5fd55bde91c1ff140dcf0ef80c74ad5337b5a5d3d5",
+      "upstream": "org/snakeyaml/engine/v2/scanner/StreamReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/schema/CoreSchema.java",
+      "sha256": "a699d8545e325f316a617a403cb672854bc7e633eba65abe21d7cda525f749b9",
+      "upstream": "org/snakeyaml/engine/v2/schema/CoreSchema.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/schema/FailsafeSchema.java",
+      "sha256": "599a48c9ee27830003abe21d9cfa1498ee5a624498faf078767a6e957f7a4723",
+      "upstream": "org/snakeyaml/engine/v2/schema/FailsafeSchema.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/schema/JsonSchema.java",
+      "sha256": "00a69b122b0f940d229eea785434704aa29bad296e7e1159cee6427225b4d095",
+      "upstream": "org/snakeyaml/engine/v2/schema/JsonSchema.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/schema/Schema.java",
+      "sha256": "636bcac03dc169a251c4515288042d2ba388c4344b561bc2c00223e2becc7ecd",
+      "upstream": "org/snakeyaml/engine/v2/schema/Schema.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/serializer/AnchorGenerator.java",
+      "sha256": "11c9cc81150673609ac6bd42d4edde43c8b2fb8bbc1d21b0bcad1227901d50fb",
+      "upstream": "org/snakeyaml/engine/v2/serializer/AnchorGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/serializer/NumberAnchorGenerator.java",
+      "sha256": "67ab57b780f090954c542fd2f97f3437b489cf6435ef9245ea82cfb1c1e7a160",
+      "upstream": "org/snakeyaml/engine/v2/serializer/NumberAnchorGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/serializer/Serializer.java",
+      "sha256": "188dc9ec3e16cc9bd13816c48f0698e2944b55b33ceda4981a362ae1bcfbcf46",
+      "upstream": "org/snakeyaml/engine/v2/serializer/Serializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/AliasToken.java",
+      "sha256": "43b20001f4b61c9dbd300d4938a729346ccff7310ce0c11e96940cfadf92da6b",
+      "upstream": "org/snakeyaml/engine/v2/tokens/AliasToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/AnchorToken.java",
+      "sha256": "2af019569a4b95a0e0e9879a0c94f49374d91af0e47c1ede366ff8756f3cae0b",
+      "upstream": "org/snakeyaml/engine/v2/tokens/AnchorToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/BlockEndToken.java",
+      "sha256": "8eeb1f0cc82a20ca9263f6ad33cc15bd92b11851ca70ebfc19d592a706b4024f",
+      "upstream": "org/snakeyaml/engine/v2/tokens/BlockEndToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/BlockEntryToken.java",
+      "sha256": "969f7a624d1041a0231e6cc7644cc74cf6a94f4f4ea243e0511782e079347ad1",
+      "upstream": "org/snakeyaml/engine/v2/tokens/BlockEntryToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/BlockMappingStartToken.java",
+      "sha256": "4323d5aa6657a7aeb1e28898f880fd2be56c90843b7e356e614b2b212305f70d",
+      "upstream": "org/snakeyaml/engine/v2/tokens/BlockMappingStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/BlockSequenceStartToken.java",
+      "sha256": "9530a061777c0351a9cf11792a3865598499ac33533fb2f34fd69abaa9a217c2",
+      "upstream": "org/snakeyaml/engine/v2/tokens/BlockSequenceStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/CommentToken.java",
+      "sha256": "3253f775aed96496e92f224ebecc20c3a9eb0b54c12960238c3493839304736a",
+      "upstream": "org/snakeyaml/engine/v2/tokens/CommentToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/DirectiveToken.java",
+      "sha256": "1ae28435e766639507380f0455eb21b39b755ca8427df7cece22e51d033ab765",
+      "upstream": "org/snakeyaml/engine/v2/tokens/DirectiveToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/DocumentEndToken.java",
+      "sha256": "34e76c10d68a2e042bfc5806709ac23557cba1a81d2961081756232ea6be893e",
+      "upstream": "org/snakeyaml/engine/v2/tokens/DocumentEndToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/DocumentStartToken.java",
+      "sha256": "b29d05d0a31130800a28a2b54667420b02b4c0ebda60b8deaa42274a86a211f5",
+      "upstream": "org/snakeyaml/engine/v2/tokens/DocumentStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/FlowEntryToken.java",
+      "sha256": "77bfcaf9945d3b6b30b8e5111b4d1e6148ae4fff1e5979636e3d4ec0d0fc94e5",
+      "upstream": "org/snakeyaml/engine/v2/tokens/FlowEntryToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/FlowMappingEndToken.java",
+      "sha256": "aa438ec9278ae9a6575beb7c3cd72cbefe8e417d4549e4a1fe165fa5ed464e78",
+      "upstream": "org/snakeyaml/engine/v2/tokens/FlowMappingEndToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/FlowMappingStartToken.java",
+      "sha256": "ed1685dab415b27765c7eb5fac441b9dfab862a39b394e8b5417be8314e3508d",
+      "upstream": "org/snakeyaml/engine/v2/tokens/FlowMappingStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/FlowSequenceEndToken.java",
+      "sha256": "6a238b12583b83f62c4179dff6e3486a32490b4359aba76e8fed7e1242986360",
+      "upstream": "org/snakeyaml/engine/v2/tokens/FlowSequenceEndToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/FlowSequenceStartToken.java",
+      "sha256": "7a1a2b5933ceef6b5dcf00d86a3ee15f3f37baae877e90d0e87290fe852066a7",
+      "upstream": "org/snakeyaml/engine/v2/tokens/FlowSequenceStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/KeyToken.java",
+      "sha256": "700290c6ecf719c3f93fdb27a8cc33cac63ff5d7e63e8731d2322fde11f2b248",
+      "upstream": "org/snakeyaml/engine/v2/tokens/KeyToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/ScalarToken.java",
+      "sha256": "4e038c8341d66a6ec605e994457715384d335570d13149d9dc53ee8ed1d06f3a",
+      "upstream": "org/snakeyaml/engine/v2/tokens/ScalarToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/StreamEndToken.java",
+      "sha256": "6ff433d56944ec8656c817c2b8f7b38e103fe1bcec8bfa7b071bfc836fc53077",
+      "upstream": "org/snakeyaml/engine/v2/tokens/StreamEndToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/StreamStartToken.java",
+      "sha256": "d24abeaf6fdebc43c41463b5152cd128d729e292d8acae3f7a4e6a81b1b59cfa",
+      "upstream": "org/snakeyaml/engine/v2/tokens/StreamStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/TagToken.java",
+      "sha256": "5159bec5e7450963696feb663904c3f0f0b2193ef06adf09900c04693eb33cdf",
+      "upstream": "org/snakeyaml/engine/v2/tokens/TagToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/TagTuple.java",
+      "sha256": "2076a8d4593501346d0b6e70e1e379ddd3d80329974233f50bf4aaa75c9501cf",
+      "upstream": "org/snakeyaml/engine/v2/tokens/TagTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/Token.java",
+      "sha256": "a96a18edc0926d1e1e2a9c1155a2cd5914186f26447c7263053425469f56c974",
+      "upstream": "org/snakeyaml/engine/v2/tokens/Token.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/tokens/ValueToken.java",
+      "sha256": "eb3cfffbcdbfe75a620a780b240c355ac38f12281cd8b4a189c6585a3102b50b",
+      "upstream": "org/snakeyaml/engine/v2/tokens/ValueToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/util/MergeUtils.java",
+      "sha256": "3a1855442a776c4e052346df3302ec21c116ae052e01a374d7da24582e614393",
+      "upstream": "org/snakeyaml/engine/v2/util/MergeUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/src/main/java/org/snakeyaml/engine/v2/util/Tuple.java",
+      "sha256": "9681e0112a556b7700c25555f0c3e0787539f65920d964b412c3e369b47bf162",
+      "upstream": "org/snakeyaml/engine/v2/util/Tuple.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/UPSTREAM_LICENSE.json",
+      "sha256": "0d8174803291dbde30eb391fd386dd5e5c4d6a4c0f9e67a3ce4c41cf38ddf140",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/UPSTREAM_LICENSE.txt",
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/SOURCES_MANIFEST.tsv",
+      "sha256": "e2245f9b5c7733f9fe3a3c0ead8c4988e1cfd601061c7c7711f9fecfc7e771e1",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/snakeyaml-engine/LICENSE",
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.snakeyaml",
+  "kind": "MODULE",
+  "license": "Apache License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.pom",
+  "receipt": {
+    "buildRoot": "5777a934a66c9ac331da6944f9bcddad0059331b6318a4b59f7bd777f1d5e143",
+    "distributionSha256": "37a69357e71fec6f61274b5e130b910d9531b8db8f30db2a57166be88002afe3",
+    "lock": "1a5d341c0745d61ddd6606d5dffa3d2c8af11a81e0e86ab2e2a1b9d7a747b35b",
+    "message": "",
+    "sourceRoot": "200546a6d5acc5eb56040696790748b9c39f61e4ac9e23beeb1fce72e369b44a",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1-sources.jar",
+  "sources_jar_sha1": "91b8ad1beb60d778c6d184c8482974579ef559c6",
+  "sources_jar_sha256": "2896d52c792259f648d0f0ef23cf87ee7bbd1c37837e46ad0d27d12041b6a39c",
+  "status": "PASS",
+  "upstream": "https://codeberg.org/snakeyaml/snakeyaml-engine/src",
+  "version": "3.1.1"
+}

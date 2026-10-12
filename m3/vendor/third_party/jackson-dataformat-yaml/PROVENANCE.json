@@ -1,0 +1,226 @@
+{
+  "artifact": "jackson-dataformat-yaml",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "synexia-common (synexia-bom jackson.version)",
+  "coordinate": "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.3-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "jackson-core",
+      "form": "source module",
+      "group": "com.fasterxml.jackson.core",
+      "optional": true,
+      "scope": "compile",
+      "version": "2.15.3-m3-source-1"
+    },
+    {
+      "artifact": "jackson-databind",
+      "form": "source module",
+      "group": "com.fasterxml.jackson.core",
+      "optional": false,
+      "scope": "compile",
+      "version": "2.15.3-m3-source-1"
+    },
+    {
+      "artifact": "snakeyaml",
+      "form": "source module",
+      "group": "org.yaml",
+      "optional": false,
+      "scope": "compile",
+      "version": "2.1-m3-source-1"
+    }
+  ],
+  "donor": "jackson-dataformat-yaml-2.15.3",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/resources/META-INF/LICENSE",
+      "sha256": "9e255394eb9f8cfdcdf599dd150d9ca3e922ab4d31cb5e83519479a91e1d3072",
+      "upstream": "META-INF/LICENSE"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "6655f7a03f87ca6e48dd9bad8f60ae240de38016a8c0c07e6034105d332283d0",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/resources/META-INF/NOTICE",
+      "sha256": "5828ffe74ea0ee4bf896654026f05fed1ead1d22acd577cc1eec9be0bc0de1ed",
+      "upstream": "META-INF/NOTICE"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/upstream-excluded/META-INF/maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/pom.properties",
+      "sha256": "7495e40461608597850a2cbb5074215a41064128888f562b5bce8bb20cdddaa4",
+      "upstream": "META-INF/maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/upstream-excluded/META-INF/maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/pom.xml",
+      "sha256": "e478c2a69e4283d8b5ef6145d1c461ecb85451e577588c600dd997e2ff27c747",
+      "upstream": "META-INF/maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/pom.xml"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/resources/META-INF/services/com.fasterxml.jackson.core.JsonFactory",
+      "sha256": "6d4681a7e931eb8682e37b404762decb4f2d2872c065137665d064cae5793034",
+      "upstream": "META-INF/services/com.fasterxml.jackson.core.JsonFactory"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/resources/META-INF/services/com.fasterxml.jackson.core.ObjectCodec",
+      "sha256": "d52dd5e1e07abdc4ea3ece5de02e0a47032a70919c95ae04d6062c3cf5af3915",
+      "upstream": "META-INF/services/com.fasterxml.jackson.core.ObjectCodec"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/JacksonYAMLParseException.java",
+      "sha256": "9182d12d11e76a6226391671fe8e67c01597e9c1875a56a96c245bdc4cee8aae",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/JacksonYAMLParseException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/PackageVersion.java",
+      "sha256": "d25a418ef506300bc16391d31b542f4da78530f474c4480a4a75a404cc3c938e",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/PackageVersion.java"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/upstream-source-only/com/fasterxml/jackson/dataformat/yaml/PackageVersion.java.in",
+      "sha256": "744babce0ed8859a38895e27c6cca1c834117791919037c5096c6bcfb9bdff03",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/PackageVersion.java.in"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/UTF8Reader.java",
+      "sha256": "57671d5f39adf368823baf5cecb6386ddce9617d30d6e6853b3f7286588e3d19",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/UTF8Reader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/UTF8Writer.java",
+      "sha256": "17bc119e57145789ed74c860c3709661f3e346fb56178529aa8530ac5f13b313",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/UTF8Writer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/YAMLFactory.java",
+      "sha256": "d45c8acabdcda9b9addc7bdf7ddeaf34b27bef374f94fd849acd309eac0188f5",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/YAMLFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/YAMLFactoryBuilder.java",
+      "sha256": "af8f7cec89c2d5dbd80271ba7ea567d7d5de0caea85e9a7e41625869e674830d",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/YAMLFactoryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/YAMLGenerator.java",
+      "sha256": "8ca5ac58b4e5641a2e712cd28a6ec6ea3687d734ea5b43ed7a15d8772cd96e6e",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/YAMLGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/YAMLMapper.java",
+      "sha256": "e28e4bd3899ad05b13524005daa360c14110cb68f15ba336cc4978a451fb31ac",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/YAMLMapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/YAMLParser.java",
+      "sha256": "7217aa8d212ddf7ec2682a569c2367b6d9704b684fd05d32953f6c94a182fb72",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/YAMLParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/package-info.java",
+      "sha256": "dcc12ef2b8cf7698bb764a346a7f2b7d85dbac4d83137f9f23b3d4ea9a328a36",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/snakeyaml/error/Mark.java",
+      "sha256": "102d233ceed51a84229fcdda2983b75017d8a063b5da923b64b163cef7c54f09",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/snakeyaml/error/Mark.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/snakeyaml/error/MarkedYAMLException.java",
+      "sha256": "34e6433004841edc68a5fcfdd412d18495316d5e2696104166339503e3d15b48",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/snakeyaml/error/MarkedYAMLException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/snakeyaml/error/YAMLException.java",
+      "sha256": "881a0ee0001bb205d028e8d91fa6ae1bdcbcdf92e56088ca33fe8aeee3b16593",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/snakeyaml/error/YAMLException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/snakeyaml/error/package-info.java",
+      "sha256": "5ffb8cdcd0a1dc161c48440bc69be8768cc260e586d2f532df191ebb25b3a626",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/snakeyaml/error/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/util/StringQuotingChecker.java",
+      "sha256": "d6f81d280370d8e167bfa03a9be01bd2648bab452f979f4f9eb10f99ac40b434",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/util/StringQuotingChecker.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/java/com/fasterxml/jackson/dataformat/yaml/util/package-info.java",
+      "sha256": "82dd268716635dc87aca8a965c7791b58a07277dac8d8be22b67be51198685c4",
+      "upstream": "com/fasterxml/jackson/dataformat/yaml/util/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/SOURCES_MANIFEST.tsv",
+      "sha256": "e4d9d4f22efb5bb86063bd71fd404c8eaececfdfee50b5d9adad5f698d55b53e",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.3 (sha256 2dd70a080e8542dc5ee727387abed963fc24122cd784ab38355f87d0e08d9772)",
+      "repository": "m3/vendor/third_party/jackson-dataformat-yaml/src/main/descriptor/9/module-info.java",
+      "sha256": "adab48b73517dd01ad00309a1545554226be7cae6eacd0fa902b6d7e05ef7457",
+      "upstream": "META-INF/versions/9/module-info.class"
+    }
+  ],
+  "group": "com.fasterxml.jackson.dataformat",
+  "kind": "MODULE",
+  "license": "UNDECLARED (see LICENSE)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "com.fasterxml.jackson.dataformat:jackson-dataformats-text:2.15.3",
+  "pom": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.15.3/jackson-dataformat-yaml-2.15.3.pom",
+  "receipt": {
+    "buildRoot": "2b1cac5c28a15b2ff0d88158ccc65dc970dab6faf6cdc7790a0c9b184d2b378e",
+    "distributionSha256": "f37f3a41cc4d4d189ff6fa8d4a58e21d0d93c31dd367728f82882f922ea94dd0",
+    "lock": "0da6cc6a5b55b16b2850348b9aaef4c2f8fa908f26a24c806f088ae925687024",
+    "message": "",
+    "sourceRoot": "6fab902eaf69ae2b7a9dce1e9345806d6c0516885fefa895d16341038dbd80bc",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.15.3/jackson-dataformat-yaml-2.15.3-sources.jar",
+  "sources_jar_sha1": "de1de71e6b362918867ae876e824a9702493759e",
+  "sources_jar_sha256": "25889879ca0a0612fa94711cca7e49137069984c979dab51dda9e736d1a1c881",
+  "status": "PASS",
+  "upstream": "https://github.com/FasterXML/jackson-dataformats-text",
+  "version": "2.15.3"
+}
