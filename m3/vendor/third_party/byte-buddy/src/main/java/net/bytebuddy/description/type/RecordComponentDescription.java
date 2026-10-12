@@ -27,7 +27,7 @@ import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 import net.bytebuddy.utility.dispatcher.JavaDispatcher;
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.signature.SignatureWriter;
+import org.objectweb.asm.signature.SignatureWriter;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.AnnotatedElement;

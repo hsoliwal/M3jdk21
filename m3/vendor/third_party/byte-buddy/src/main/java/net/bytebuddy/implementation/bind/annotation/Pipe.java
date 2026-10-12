@@ -46,7 +46,7 @@ import net.bytebuddy.implementation.bytecode.member.MethodReturn;
 import net.bytebuddy.implementation.bytecode.member.MethodVariableAccess;
 import net.bytebuddy.matcher.ElementMatchers;
 import net.bytebuddy.utility.RandomString;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import java.io.Serializable;
 import java.lang.annotation.*;

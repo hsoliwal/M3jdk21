@@ -25,7 +25,7 @@ import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 import net.bytebuddy.matcher.FilterableList;
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 
 import java.util.*;
 

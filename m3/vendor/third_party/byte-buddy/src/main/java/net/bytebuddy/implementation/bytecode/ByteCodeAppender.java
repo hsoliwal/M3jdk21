@@ -18,7 +18,7 @@ package net.bytebuddy.implementation.bytecode;
 import net.bytebuddy.build.HashCodeAndEqualsPlugin;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.implementation.Implementation;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,11 +26,11 @@ import java.util.List;
 
 /**
  * An appender that generates the byte code for a given method. This is done by writing the byte code instructions to
- * the given ASM {@link net.bytebuddy.jar.asm.MethodVisitor}.
+ * the given ASM {@link org.objectweb.asm.MethodVisitor}.
  * <p>&nbsp;</p>
  * The {@code ByteCodeAppender} is not allowed to write
- * annotations to the method or call the {@link net.bytebuddy.jar.asm.MethodVisitor#visitCode()},
- * {@link net.bytebuddy.jar.asm.MethodVisitor#visitMaxs(int, int)} or {@link net.bytebuddy.jar.asm.MethodVisitor#visitEnd()}
+ * annotations to the method or call the {@link org.objectweb.asm.MethodVisitor#visitCode()},
+ * {@link org.objectweb.asm.MethodVisitor#visitMaxs(int, int)} or {@link org.objectweb.asm.MethodVisitor#visitEnd()}
  * methods which is both done by the entity delegating the call to the {@code ByteCodeAppender}. This is done in order
  * to allow for the concatenation of several byte code appenders and therefore a more modular description of method
  * implementations.

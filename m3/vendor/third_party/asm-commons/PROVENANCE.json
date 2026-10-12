@@ -1,0 +1,248 @@
+{
+  "artifact": "asm-commons",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "NOT_IN_LOCK",
+  "consumers": "shaded into net.bytebuddy:byte-buddy:1.14.11 (upstream byte-buddy shade input: 10 remapper classes relocated to net.bytebuddy.jar.asm.commons)",
+  "coordinate": "org.ow2.asm:asm-commons:9.6-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "asm",
+      "form": "source module",
+      "group": "org.ow2.asm",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.6-m3-source-1"
+    },
+    {
+      "artifact": "asm-tree",
+      "form": "source module",
+      "group": "org.ow2.asm",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.6-m3-source-1"
+    }
+  ],
+  "donor": "asm-commons-9.6",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/asm-commons/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/AdviceAdapter.java",
+      "sha256": "a7025839651fc36efca4c05616d222b060c425884f2b9fe005e4acdfa4b7bca9",
+      "upstream": "org/objectweb/asm/commons/AdviceAdapter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/AnalyzerAdapter.java",
+      "sha256": "d06583aac63777fce81824721149b3e509880cac45dfbf26ba4ce396063994c1",
+      "upstream": "org/objectweb/asm/commons/AnalyzerAdapter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/AnnotationRemapper.java",
+      "sha256": "493dff020725b65fd7f6a1cce11a0ee794296ed7e27ea69914918925f9cf32cf",
+      "upstream": "org/objectweb/asm/commons/AnnotationRemapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/ClassRemapper.java",
+      "sha256": "5d6de4de40fe460870c2637eda23ff4022cc38f8e0382dff5f36f54991395a81",
+      "upstream": "org/objectweb/asm/commons/ClassRemapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/CodeSizeEvaluator.java",
+      "sha256": "4fb08fd8d35e1eb82b8279bfeb9b36393a96e0166bef23f28186365ae97bfc0d",
+      "upstream": "org/objectweb/asm/commons/CodeSizeEvaluator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/FieldRemapper.java",
+      "sha256": "6747cf96dbd9ef6eb8a14802096847ac457f872f3784fd4e57b85fd2f2529234",
+      "upstream": "org/objectweb/asm/commons/FieldRemapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/GeneratorAdapter.java",
+      "sha256": "f0212b1671908cf390e1ac6ef06985d513f932b265dfdb661afd167a18161102",
+      "upstream": "org/objectweb/asm/commons/GeneratorAdapter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/InstructionAdapter.java",
+      "sha256": "4fc6662680843e552444324f534b5c8f1bb49b8346ee86fd5e0df738a281324d",
+      "upstream": "org/objectweb/asm/commons/InstructionAdapter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/JSRInlinerAdapter.java",
+      "sha256": "a389206520cfa6db8bdf6329b80062c022c4555b67eed3d0d6e38189f1682eea",
+      "upstream": "org/objectweb/asm/commons/JSRInlinerAdapter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/LocalVariablesSorter.java",
+      "sha256": "fa40c105220156c7018f9beb7552c268d5ed049219aa7478cb0b15670c18b382",
+      "upstream": "org/objectweb/asm/commons/LocalVariablesSorter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/Method.java",
+      "sha256": "8a66c34629406d1bca650023c5c50e6d65e9851b653e84713c5cb5505a3b4248",
+      "upstream": "org/objectweb/asm/commons/Method.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/MethodRemapper.java",
+      "sha256": "0b5a58283f60f6a4648488d73bd8337539abfe24ea717677e0cf283732963c79",
+      "upstream": "org/objectweb/asm/commons/MethodRemapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/ModuleHashesAttribute.java",
+      "sha256": "c771608065eb06497cef030133a2102b63e7f0449fec1aef308d81b9005ed532",
+      "upstream": "org/objectweb/asm/commons/ModuleHashesAttribute.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/ModuleRemapper.java",
+      "sha256": "6c19695a092d667d9609347ccba8715cef46196239dfc5322d0189a228198613",
+      "upstream": "org/objectweb/asm/commons/ModuleRemapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/ModuleResolutionAttribute.java",
+      "sha256": "c07a1c558886be961879645ab0439e5002fdc01872bc8dd7f9f2fdc0221792a5",
+      "upstream": "org/objectweb/asm/commons/ModuleResolutionAttribute.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/ModuleTargetAttribute.java",
+      "sha256": "cad1c8bdc4657468d25f2e517cc5d03ac4621302a6653c60688cb2e1225d4724",
+      "upstream": "org/objectweb/asm/commons/ModuleTargetAttribute.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/RecordComponentRemapper.java",
+      "sha256": "78e2354466e2717d82359a78ef2838eb324d4944bae9d206ef8335b4e1d04710",
+      "upstream": "org/objectweb/asm/commons/RecordComponentRemapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/Remapper.java",
+      "sha256": "a475cdc04fb77128b366b94004a64475e8df7e1a94c1db08041c5768544ae586",
+      "upstream": "org/objectweb/asm/commons/Remapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/SerialVersionUIDAdder.java",
+      "sha256": "e479b1be01fb49bb94c62a3b4f2be0cbedd7ce844ebcd265a0b10c2881b781e2",
+      "upstream": "org/objectweb/asm/commons/SerialVersionUIDAdder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/SignatureRemapper.java",
+      "sha256": "5ce0a121404c42cbe0eef67c29df5ad177a049f7e36f1f6cbb287cb9f3c248e3",
+      "upstream": "org/objectweb/asm/commons/SignatureRemapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/SimpleRemapper.java",
+      "sha256": "2df326f709b7c596c05ac9eb5e068a2e363edca2490c71362b4cbd184535ec41",
+      "upstream": "org/objectweb/asm/commons/SimpleRemapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/StaticInitMerger.java",
+      "sha256": "8f0e2567d5f328434ca9bbc5c33056994a57c849cb85e65ae0202c1307483a31",
+      "upstream": "org/objectweb/asm/commons/StaticInitMerger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/TableSwitchGenerator.java",
+      "sha256": "28a436c4fe16da40b8221fb43bdf61ab076e8de4616e32a57a0fa93fdece62a8",
+      "upstream": "org/objectweb/asm/commons/TableSwitchGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/java/org/objectweb/asm/commons/TryCatchBlockSorter.java",
+      "sha256": "79f8ed59ca2aae794143faf69737915631069f7d1e7cb54289d6bbe9f75e5f9d",
+      "upstream": "org/objectweb/asm/commons/TryCatchBlockSorter.java"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/asm-commons/upstream-source-only/org/objectweb/asm/commons/package.html",
+      "sha256": "2193ad54de6d831dce165377b68b3656c1b243cbde3e5f8bf9ebde2fdebee615",
+      "upstream": "org/objectweb/asm/commons/package.html"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/asm-commons/UPSTREAM_LICENSE.json",
+      "sha256": "edd2d4bcea6337a525662cfdcc072eee546b89176b7298473796596ef143f744",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/asm-commons/UPSTREAM_LICENSE.txt",
+      "sha256": "293b6af371eee28b0ff16f0334ea19e20a3d5522143faa4b95b346855507879a",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/asm-commons/SOURCES_MANIFEST.tsv",
+      "sha256": "42f15b10010cb59dc608f8acfe5bae2156cecdddc8ec9c7a6bdaa17d73594db7",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/asm-commons/LICENSE",
+      "sha256": "293b6af371eee28b0ff16f0334ea19e20a3d5522143faa4b95b346855507879a",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "org.ow2.asm:asm-commons:9.6 (sha256 7aefd0d5c0901701c69f7513feda765fb6be33af2ce7aa17c5781fc87657c511)",
+      "repository": "m3/vendor/third_party/asm-commons/src/main/descriptor/root/module-info.java",
+      "sha256": "d101cc4f865ec625be15b78c9a2a016c3928a60b0ceac55331d9acd7b35d2477",
+      "upstream": "module-info.class"
+    }
+  ],
+  "group": "org.ow2.asm",
+  "kind": "MODULE",
+  "license": "BSD-3-Clause",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "org.ow2:ow2:1.5.1",
+  "pom": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.6/asm-commons-9.6.pom",
+  "receipt": {
+    "buildRoot": "b1f7c86b60078da79cf88fcafed1c7c789975b40f361b882eb5943f2e25e2a72",
+    "distributionSha256": "6312a838e9b7d33292871d827395c7d04e5314a102998ca269224e2ca79e0be2",
+    "lock": "929c7b2b37931da0bde36292cb97bda271d477a3cd343c4251ca8694444e93d2",
+    "message": "",
+    "sourceRoot": "31390ba99e46ba7796ce18201cd835bb2b3be0860408c6302cd689522180d168",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.6/asm-commons-9.6-sources.jar",
+  "sources_jar_sha1": "446c8ca5fffad2e50b5a7ab4c25fc901c7f38ab9",
+  "sources_jar_sha256": "e757070145ab04c7c6874042933b7d8600456b5fdbcf2d022a6cd0a86e5a44a1",
+  "status": "PASS",
+  "upstream": "https://gitlab.ow2.org/asm/asm/",
+  "version": "9.6"
+}

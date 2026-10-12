@@ -17,8 +17,8 @@ package net.bytebuddy.implementation.bytecode.collection;
 
 import net.bytebuddy.implementation.Implementation.Context;
 import net.bytebuddy.implementation.bytecode.StackManipulation;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * Allows accessing the length of the array.

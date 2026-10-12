@@ -14,6 +14,7 @@ any donor. Nothing here enters src/** (GPLv2+CPE); these are build-time tooling 
 | org.ow2.asm:asm:9.10.1-m3-source-1 | BSD-3-Clause | PASS | m3/vendor/third_party/asm-9.10.1 |
 | org.ow2.asm:asm:9.6-m3-source-1 | BSD-3-Clause | PASS | m3/vendor/third_party/asm-9.6 |
 | org.ow2.asm:asm-analysis:9.6-m3-source-1 | BSD-3-Clause | PASS | m3/vendor/third_party/asm-analysis |
+| org.ow2.asm:asm-commons:9.6-m3-source-1 | BSD-3-Clause | PASS | m3/vendor/third_party/asm-commons |
 | org.ow2.asm:asm-tree:9.6-m3-source-1 | BSD-3-Clause | PASS | m3/vendor/third_party/asm-tree |
 | org.ow2.asm:asm-util:9.6-m3-source-1 | BSD-3-Clause | PASS | m3/vendor/third_party/asm-util |
 | org.assertj:assertj-core:3.25.3-m3-source-1 | Apache License, Version 2.0 | PASS | m3/vendor/third_party/assertj-core |

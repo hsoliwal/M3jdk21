@@ -21,10 +21,10 @@ import net.bytebuddy.implementation.Implementation;
 import net.bytebuddy.implementation.bytecode.StackManipulation;
 import net.bytebuddy.utility.ConstantValue;
 import net.bytebuddy.utility.JavaConstant;
-import net.bytebuddy.jar.asm.ConstantDynamic;
-import net.bytebuddy.jar.asm.Handle;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Type;
+import org.objectweb.asm.ConstantDynamic;
+import org.objectweb.asm.Handle;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Type;
 
 /**
  * A constant representing a {@link JavaConstant}. By using this stack manipulation, a value is always

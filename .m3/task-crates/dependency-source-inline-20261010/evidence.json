@@ -3,21 +3,21 @@
   "counts": {
     "api_surface": {
       "EQUIVALENT_MODULO_COMPILER": 57,
-      "IDENTICAL": 63
+      "IDENTICAL": 64
     },
     "build_plugin_rows": 129,
     "delomboked_files": 269,
     "downstream_binary_still_resolved": 0,
     "downstream_not_vendored": 0,
     "downstream_rows": 305,
-    "gate": 120,
-    "gate_pass": 120,
+    "gate": 121,
+    "gate_pass": 121,
     "images": 11,
-    "modules": 120,
+    "modules": 121,
     "native_binaries": 128,
     "switched": 125
   },
-  "generated": "2026-10-12T11:24:55Z",
+  "generated": "2026-10-12T12:16:10Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {

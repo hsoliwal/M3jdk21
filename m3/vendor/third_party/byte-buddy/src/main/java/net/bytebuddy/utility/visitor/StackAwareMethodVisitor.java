@@ -23,7 +23,7 @@ import net.bytebuddy.utility.CompoundList;
 import net.bytebuddy.utility.OpenedClassReader;
 import net.bytebuddy.utility.nullability.MaybeNull;
 import net.bytebuddy.utility.privilege.GetSystemPropertyAction;
-import net.bytebuddy.jar.asm.*;
+import org.objectweb.asm.*;
 
 import java.security.PrivilegedAction;
 import java.util.*;
@@ -72,7 +72,7 @@ public class StackAwareMethodVisitor extends MethodVisitor {
 
     /**
      * An array mapping any opcode to its size impact onto the operand stack. This mapping is taken from
-     * {@link net.bytebuddy.jar.asm.Frame} with the difference that the {@link Opcodes#JSR} instruction is
+     * {@link org.objectweb.asm.Frame} with the difference that the {@link Opcodes#JSR} instruction is
      * mapped to a size of {@code 0} as it does not impact the stack after returning from the instruction.
      */
     private static final int[] SIZE_CHANGE;

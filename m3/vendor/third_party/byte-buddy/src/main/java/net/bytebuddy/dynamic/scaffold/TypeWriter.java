@@ -57,10 +57,10 @@ import net.bytebuddy.utility.nullability.UnknownNull;
 import net.bytebuddy.utility.privilege.GetSystemPropertyAction;
 import net.bytebuddy.utility.visitor.ContextClassVisitor;
 import net.bytebuddy.utility.visitor.MetadataAwareClassVisitor;
-import net.bytebuddy.jar.asm.*;
-import net.bytebuddy.jar.asm.commons.ClassRemapper;
-import net.bytebuddy.jar.asm.commons.Remapper;
-import net.bytebuddy.jar.asm.commons.SimpleRemapper;
+import org.objectweb.asm.*;
+import org.objectweb.asm.commons.ClassRemapper;
+import org.objectweb.asm.commons.Remapper;
+import org.objectweb.asm.commons.SimpleRemapper;
 
 import javax.annotation.Nonnull;
 import java.io.File;

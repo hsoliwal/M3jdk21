@@ -16,7 +16,7 @@
 package net.bytebuddy.utility.visitor;
 
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.*;
+import org.objectweb.asm.*;
 
 /**
  * A class visitor that traces invocations of visitation methods and notifies if a nest host or outer class was not visited.

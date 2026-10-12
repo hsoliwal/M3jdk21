@@ -40,6 +40,22 @@
       "optional": true,
       "scope": "provided",
       "version": "3.0.2"
+    },
+    {
+      "artifact": "asm",
+      "form": "source module, shaded into this jar by the upstream shade step (org.objectweb.asm -> net.bytebuddy.jar.asm)",
+      "group": "org.ow2.asm",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.6-m3-source-1"
+    },
+    {
+      "artifact": "asm-commons",
+      "form": "source module, shaded into this jar by the upstream shade step (org.objectweb.asm -> net.bytebuddy.jar.asm); exclusions org.ow2.asm:asm-analysis, org.ow2.asm:asm-tree",
+      "group": "org.ow2.asm",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.6-m3-source-1"
     }
   ],
   "donor": "byte-buddy-1.14.11",
@@ -52,15 +68,27 @@
       "upstream": "META-INF/MANIFEST.MF"
     },
     {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/byte-buddy/upstream-excluded/META-INF/maven/net.bytebuddy/byte-buddy-dep/pom.properties",
+      "sha256": "e19457d3235a89ca6571a9375a0f09ca352dbc9e6c33edb08428b60fb06d5cb7",
+      "upstream": "META-INF/maven/net.bytebuddy/byte-buddy-dep/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/byte-buddy/upstream-excluded/META-INF/maven/net.bytebuddy/byte-buddy-dep/pom.xml",
+      "sha256": "15f7c3892dde1f421f643d79be2f9891d04832805b05ada0b0a74f274299c503",
+      "upstream": "META-INF/maven/net.bytebuddy/byte-buddy-dep/pom.xml"
+    },
+    {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/ByteBuddy.java",
-      "sha256": "25821feb5d86429678461887d521dce3e7a526912593ce4f822d1d77ca981a7e",
+      "sha256": "19f5ef198e6095fb9ed1efd14ec1ece7c2b80ea8a97bc4493d824753a21aad48",
       "upstream": "net/bytebuddy/ByteBuddy.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/ClassFileVersion.java",
-      "sha256": "d115b31c40b8106bad2425fb985456cc7f1982d24b9e55570241f19cfffa9e80",
+      "sha256": "427819e15ff9c18e267508934e2ff228fa8d38ea2b269f39909591ab35883547",
       "upstream": "net/bytebuddy/ClassFileVersion.java"
     },
     {
@@ -78,7 +106,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/agent/builder/AgentBuilder.java",
-      "sha256": "4aa0fe18dbab68af868fede4e6f8ddfc60baf2ffd897dfcc5769472af729f47c",
+      "sha256": "f50afc7f958ff0818507498b0bd3d475b8012c9630164008190e57f128283390",
       "upstream": "net/bytebuddy/agent/builder/AgentBuilder.java"
     },
     {
@@ -102,55 +130,55 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/asm/Advice.java",
-      "sha256": "2bf6acf872ba7af4ab29a34a8660a958ae6fa628f7c52ee81cbf0c3dd8f692b7",
+      "sha256": "762e07ec5bd281e01b81db1475b77eed402b99d31b344133f03369edbec7d3de",
       "upstream": "net/bytebuddy/asm/Advice.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/asm/AsmVisitorWrapper.java",
-      "sha256": "ebd2c7501e82bd7bb57826603fdcbb2604a29274df9b7ae3f0da0e726e8791d4",
+      "sha256": "6537f23385229f5e48e5e684e44ad6bb3778ab5b3794651563248b353cbb8d34",
       "upstream": "net/bytebuddy/asm/AsmVisitorWrapper.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/asm/ClassVisitorFactory.java",
-      "sha256": "6c7e44c1e2f21b5723591884d2336b7dca953af2f87c3bbcd36451860598ca36",
+      "sha256": "b10975c6086effed0268de3eb317e468b1e8d83adc289793247da8c57f50b7b8",
       "upstream": "net/bytebuddy/asm/ClassVisitorFactory.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/asm/MemberAttributeExtension.java",
-      "sha256": "e35e6cfb0b28df38bb7567c23cc058ba4f3aebeece9e204a592fc10f880691a1",
+      "sha256": "3d26d1f891d48d5ad72e4dcf0b35c53987f10c59eac30d1082f5828bfd053996",
       "upstream": "net/bytebuddy/asm/MemberAttributeExtension.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/asm/MemberRemoval.java",
-      "sha256": "b186b2649bc26962eaac3a93b50ff62dc3aabf5951999d0cbcc2845bdc5733f1",
+      "sha256": "34b9f487ab2cd246c7cce8d1455bd807f323641a5d288f3a798ba9be47683491",
       "upstream": "net/bytebuddy/asm/MemberRemoval.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/asm/MemberSubstitution.java",
-      "sha256": "6fbdc02e647c348e52519e9446625af921a504fa79163eb037d8085fec6200ea",
+      "sha256": "50579464e02c3a2140a2b1f279998c41b3d2c59bd5efd209d7aa0c648b7c95fc",
       "upstream": "net/bytebuddy/asm/MemberSubstitution.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/asm/ModifierAdjustment.java",
-      "sha256": "19620abc183eb12f60efe75cb916ec33ca94e9bbc56cacbb8f30312b7b58746c",
+      "sha256": "95d4f83ea2c1344c36a11289e5674b6ac324693843438f75f11239dfbea971ae",
       "upstream": "net/bytebuddy/asm/ModifierAdjustment.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/asm/TypeConstantAdjustment.java",
-      "sha256": "bacf5d50af4d93bd60681b2b9836d7244284828d251e2710c453cc851cec20ad",
+      "sha256": "4096444a8a6647316b3d0af3bae4f47ded47364c789a5c1dd8620a5b77ab583a",
       "upstream": "net/bytebuddy/asm/TypeConstantAdjustment.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/asm/TypeReferenceAdjustment.java",
-      "sha256": "ec6b93e88cd4d51428a587369456d84fb656c1dd2ed1ccb8941c2e0a1efe836a",
+      "sha256": "4c562ced53082866149c709c2c29cdad73d6bc05c60f0781d49925a72e13a249",
       "upstream": "net/bytebuddy/asm/TypeReferenceAdjustment.java"
     },
     {
@@ -162,7 +190,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/build/AccessControllerPlugin.java",
-      "sha256": "fca2c0a37a21950181bca2bae1b062dd834342c928d30ddc5b1a8a99446ca737",
+      "sha256": "79ec8585c556cd32a4044b14037a60b53d3ccf060cd71ea1276537c4a738dce8",
       "upstream": "net/bytebuddy/build/AccessControllerPlugin.java"
     },
     {
@@ -240,7 +268,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/build/DispatcherAnnotationPlugin.java",
-      "sha256": "2de8c849186ce5e9ad4dfad355e425fd7084fb11a9f10006ea48016694fb0f3e",
+      "sha256": "aa6f0b0a113846f95dc1d77dbf917b616c8bdb7dbbfdf3e787c467e09b13e580",
       "upstream": "net/bytebuddy/build/DispatcherAnnotationPlugin.java"
     },
     {
@@ -252,7 +280,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/build/HashCodeAndEqualsPlugin.java",
-      "sha256": "0130809b3189d0c7a60b6bc98e847741a7e76a80bcb3729beb48948336550d4b",
+      "sha256": "981aa2cb479a81ed4dbe63a15758afc0ee4e7a96fabef3c9c6ae8d8e3e6817bd",
       "upstream": "net/bytebuddy/build/HashCodeAndEqualsPlugin.java"
     },
     {
@@ -264,13 +292,13 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/build/RenamingPlugin.java",
-      "sha256": "dde85b93f5cf237c17539e5016055de082847e3ad122f9dce48d1d8ee58490c7",
+      "sha256": "c42172bca0fb10aa642e5f79355249c2b59e75986a75e48c5deca0a63ad8c1fa",
       "upstream": "net/bytebuddy/build/RenamingPlugin.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/build/RepeatedAnnotationPlugin.java",
-      "sha256": "0487a0296ea5ff567da017f6d8b2fa827f33a11b5c2c3481ee5642ebba2c6e89",
+      "sha256": "ee0ef236bf7746fb2d0dbf541d020d404238413bf66271f80128d332a1d4c638",
       "upstream": "net/bytebuddy/build/RepeatedAnnotationPlugin.java"
     },
     {
@@ -300,7 +328,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/ModifierReviewable.java",
-      "sha256": "a05f3517110125459429e0986d3a4f04c6c9b5f043600a5ccd24b8269003693b",
+      "sha256": "bbc9edafd8cf36f35042a8b6de76976188d78a3db172d63eb0c9fdb5b1aaf3c1",
       "upstream": "net/bytebuddy/description/ModifierReviewable.java"
     },
     {
@@ -360,7 +388,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/field/FieldDescription.java",
-      "sha256": "7986596fdc9b4e46410af65c950472487b78655195f6d5d69aecd69041c03eb7",
+      "sha256": "8f207ba0222fa7dd27ec4fca166a46c7c4a028c211ab306a851a17fd76fff6f7",
       "upstream": "net/bytebuddy/description/field/FieldDescription.java"
     },
     {
@@ -378,7 +406,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/method/MethodDescription.java",
-      "sha256": "34001706c742df8a10f9825602958f050b00b145a10545424adb2ce3330552bf",
+      "sha256": "ca5f7b464007c93d4cd24e4b86440312bf3a64b3e7b14dd1e124af9965272612",
       "upstream": "net/bytebuddy/description/method/MethodDescription.java"
     },
     {
@@ -408,91 +436,91 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/EnumerationState.java",
-      "sha256": "9bad6aa190f0df2a90912ceb13bb6380a7eae42ac32ebdda0cb342da96da03b0",
+      "sha256": "7b96eb465408729dd41d7070b2317c5d91e5240f58e256c53d5160b1919e82b7",
       "upstream": "net/bytebuddy/description/modifier/EnumerationState.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/FieldManifestation.java",
-      "sha256": "c9eb5a16f996d21896291274c4028af39b9e8fbf83fdf0804f98f5713ce8a253",
+      "sha256": "6d77c946d95ec092f19554d6b40b7043ed8d17de8fd22dbfae411b48ffd03449",
       "upstream": "net/bytebuddy/description/modifier/FieldManifestation.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/FieldPersistence.java",
-      "sha256": "bb10a51b1cbe0091e995d02e2711a4386672741e8d790d278681bcdce9588ee6",
+      "sha256": "992a9f85aec4eabd73bed161e362be4254851c9c51e6da60187be5394d3ec0f4",
       "upstream": "net/bytebuddy/description/modifier/FieldPersistence.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/Mandate.java",
-      "sha256": "6689a010e7c58f2e836934d055e5cd5d7d9e87b212b17dcbb4e35b95847bb354",
+      "sha256": "929d043081e21a90e60b0f4bf97bb5f6605c93d4b0092cdfac0cb71deab71dee",
       "upstream": "net/bytebuddy/description/modifier/Mandate.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/MethodArguments.java",
-      "sha256": "3b56bb8aaca79e7ec4b44bc83ee9371fa2dcb0f2c667c32e6bd5189e1d9f64e1",
+      "sha256": "37b21a4b8e9232a508d28dcf7c905bcd7b4997cfa5beae7bfec829922b4218cf",
       "upstream": "net/bytebuddy/description/modifier/MethodArguments.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/MethodManifestation.java",
-      "sha256": "045da68d5c0567a7a16551316c7cb4c94df836fd5ae4a40ca38ef792e5f7189a",
+      "sha256": "6069913d5d0a702b251dc00b6fa83db8970c384c0a0cc324eaaed63376642e1d",
       "upstream": "net/bytebuddy/description/modifier/MethodManifestation.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/MethodStrictness.java",
-      "sha256": "f8c2a510990ae1bad244339ee4abbef77ea529daba0e41e66a75ff1162a479ba",
+      "sha256": "ee8e6a8ea433f51ae3b3256ad9d3369d764f1359c8d75e84cee860ca4bb4fcf1",
       "upstream": "net/bytebuddy/description/modifier/MethodStrictness.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/ModifierContributor.java",
-      "sha256": "e1de812fdd2868a4fa368754bc8cd6a51ccde5a30f21b4f35dcf90e9636972e7",
+      "sha256": "308991a73b47cccaf33bb00250b3962a888379539ac96a3daf743b6d667b395f",
       "upstream": "net/bytebuddy/description/modifier/ModifierContributor.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/Ownership.java",
-      "sha256": "b2ca4264eefc990c83da89eb3365fe12d6ccdbcd209560f80bc89b05850d6ed4",
+      "sha256": "490aa2dfbd3c8209bae6f36026c130ccf5f45c7121b017ab3fa25c3192bfc165",
       "upstream": "net/bytebuddy/description/modifier/Ownership.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/ParameterManifestation.java",
-      "sha256": "7d96ac8767e551dcf15f3cc27fe6370273d3626ede4337ab771c44fcd7dad0fc",
+      "sha256": "1c7ad49f8bf2aa56fd6d08bdfd32e2f26a1ca32c4bed6096565bd46d83b33ddc",
       "upstream": "net/bytebuddy/description/modifier/ParameterManifestation.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/ProvisioningState.java",
-      "sha256": "941b0b5ea9bf9d90e14c55c1875312b5804c8c33d6a507f8a0c660e28f40cf47",
+      "sha256": "2f2ae42f02ad533e8592223113f0b566b0c14bb6f7ec62a76290d7b680bb9998",
       "upstream": "net/bytebuddy/description/modifier/ProvisioningState.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/SynchronizationState.java",
-      "sha256": "0bebd5e1b7a2bb1cd3370002bf039e32889795e7b68ded99c81f3b0ed67401c4",
+      "sha256": "6694c9d16ca86e981ae8889fcad624c4769772b3be6a9318545b46d906434055",
       "upstream": "net/bytebuddy/description/modifier/SynchronizationState.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/SyntheticState.java",
-      "sha256": "a6857077ceee8ee69b09c64a9bed2323a1b16f7f1a451bcf631d14e455016b10",
+      "sha256": "33e4de4a8ff9d4ea1f91733809f6485de542b0ae89f20fa8f33483c738e5e046",
       "upstream": "net/bytebuddy/description/modifier/SyntheticState.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/TypeManifestation.java",
-      "sha256": "a50c757a8dec57f314969797f8c6a53981ee10e00a6f274e640b0e65c7bc171d",
+      "sha256": "1b4f7f8ddccbc845f11e921db5ef8aa5e745c89ec7179ef6565445072487e0a1",
       "upstream": "net/bytebuddy/description/modifier/TypeManifestation.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/modifier/Visibility.java",
-      "sha256": "0443fde143f18093544cbf42539f1db2568bbb9eb08266ecbd281c899b6478cb",
+      "sha256": "0eff737539b9d7dc7cad03b76f24dd81d212cae62895534b3a765a6cf0a7a1ee",
       "upstream": "net/bytebuddy/description/modifier/Visibility.java"
     },
     {
@@ -510,13 +538,13 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/type/PackageDescription.java",
-      "sha256": "d6ad52fad1c26e8fb76ab062cbb4b6cb729cbe901f7139509c03d4469078b0f4",
+      "sha256": "74a80ee087266a09e3f1f06a7379ccf9dba68f7c8c04b2744a8481045257956f",
       "upstream": "net/bytebuddy/description/type/PackageDescription.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/type/RecordComponentDescription.java",
-      "sha256": "80ff944de4b55eed9dca36d70db611ea3092304d20d039dc643d303b75d8b422",
+      "sha256": "f2c007372c64d03fd005b60b1824572cda3d2f578a9d031656faefbd12d3ae3c",
       "upstream": "net/bytebuddy/description/type/RecordComponentDescription.java"
     },
     {
@@ -534,13 +562,13 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/type/TypeDescription.java",
-      "sha256": "3656e4bb1f35cae5441515b1cd7fc98c1c07f44c048a1693131a993af20422d6",
+      "sha256": "ed47fef0d2cce557e3970ee19f01e7761a5f20ec59aeec273d5a3c9c976fceab",
       "upstream": "net/bytebuddy/description/type/TypeDescription.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/description/type/TypeList.java",
-      "sha256": "31f6a34b76e64403aa5fa9648491a4a09629416e60e5dfe848421f1e62f6c69f",
+      "sha256": "215b0246c7b8def3244449beee28a14913cc95f913459de691481a714f9848a3",
       "upstream": "net/bytebuddy/description/type/TypeList.java"
     },
     {
@@ -564,7 +592,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/dynamic/DynamicType.java",
-      "sha256": "5cf74ba76c6ceba9292ffbca630beba42bdfdb2eecc460619cea2651bdcf3247",
+      "sha256": "73318625f94493e4e8816d82bce9673f3cfe760b8fd87e165bbfd57ed5f27a13",
       "upstream": "net/bytebuddy/dynamic/DynamicType.java"
     },
     {
@@ -576,7 +604,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/dynamic/NexusAccessor.java",
-      "sha256": "d30e072655e134cd12aee011f01d94346d775e78e4c3d3b72fe457b0bfc5ca69",
+      "sha256": "e8f265350749721dd526f84907b7b07a5937974b2fd12e241566ffdae6009a6a",
       "upstream": "net/bytebuddy/dynamic/NexusAccessor.java"
     },
     {
@@ -666,7 +694,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/dynamic/scaffold/ClassWriterStrategy.java",
-      "sha256": "1a99998c23b7374cc5c12796cc28767fbfb843e97780046707d8739589d0e5d1",
+      "sha256": "2f16b44096af8612cae6181655aca3f21ea60119dc63df2d50fe6b2dfef97492",
       "upstream": "net/bytebuddy/dynamic/scaffold/ClassWriterStrategy.java"
     },
     {
@@ -690,7 +718,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/dynamic/scaffold/MethodGraph.java",
-      "sha256": "4194a86f26076eb9198087833dd07821aedb908f98721e0b6f8540666e817c0d",
+      "sha256": "c9c7e74be60a55798f1e31b8fbc33b83724dc54f6d9c3b8b1aaa82d1becc8abf",
       "upstream": "net/bytebuddy/dynamic/scaffold/MethodGraph.java"
     },
     {
@@ -708,7 +736,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/dynamic/scaffold/TypeInitializer.java",
-      "sha256": "8b10871a11c934a6f4ce1065ca9be6f2d4f9aa495e4767d40136b10d5db9ef42",
+      "sha256": "4796b231a8f60d487a6593bcb8e765f59a5dcc49379376342831901390e92deb",
       "upstream": "net/bytebuddy/dynamic/scaffold/TypeInitializer.java"
     },
     {
@@ -720,7 +748,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/dynamic/scaffold/TypeWriter.java",
-      "sha256": "cd080fba5489b754a34248a51ff8486d7893a2a2c2743a40b10cb856eb2a5fd5",
+      "sha256": "831b4ea2d80575c9ab0334cb87b5ac347fac2b60d283271e098cb0922a867538",
       "upstream": "net/bytebuddy/dynamic/scaffold/TypeWriter.java"
     },
     {
@@ -750,7 +778,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/dynamic/scaffold/inline/MethodRebaseResolver.java",
-      "sha256": "1acdb6e290439693314b8fa940db28aa1962aa0ba4d01dd44891833e54fbe0fc",
+      "sha256": "dae2bb09d21b545c86666fb436b90d15276b7bdf06280238ebd9e687ea0eab5b",
       "upstream": "net/bytebuddy/dynamic/scaffold/inline/MethodRebaseResolver.java"
     },
     {
@@ -762,7 +790,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/dynamic/scaffold/inline/RebaseImplementationTarget.java",
-      "sha256": "4f20098f9df1f68be23201edddbffd35db9e720bf32e6075fff7dbb3b615e8e5",
+      "sha256": "d8d78045a65e37291a0378ab891a7342c451e380e739d2e1e7432681779e0dec",
       "upstream": "net/bytebuddy/dynamic/scaffold/inline/RebaseImplementationTarget.java"
     },
     {
@@ -786,7 +814,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/dynamic/scaffold/subclass/ConstructorStrategy.java",
-      "sha256": "37d566a22c571cdd0bebaf07f590657f6168728221fe4dba8b41be8d2aee2710",
+      "sha256": "3879d0819676c8f98d9b4c46f371bb339b23bccf73f44cd79af325d6e039cc02",
       "upstream": "net/bytebuddy/dynamic/scaffold/subclass/ConstructorStrategy.java"
     },
     {
@@ -810,55 +838,55 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/DefaultMethodCall.java",
-      "sha256": "ba31d7b35d3e3841d59ef6011e685a4e39183351ede0e82047f350d4651e5de1",
+      "sha256": "901cc00956b3223b2a43c9022102bc15cc3bec19600897c27a2c6c4780fde8eb",
       "upstream": "net/bytebuddy/implementation/DefaultMethodCall.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/EqualsMethod.java",
-      "sha256": "6b875272a03e964bcd8b6eff6f161e7908b4fedb3cd44ed72389680e2b8ede70",
+      "sha256": "3b27f7ddc7d4295f0e343b18efc4b54c50e0e372a8efb3a3ac70626f8c946f88",
       "upstream": "net/bytebuddy/implementation/EqualsMethod.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/ExceptionMethod.java",
-      "sha256": "8fc1c973baf97521e588f755b2a800cb48417985a34ee97f1e1c3ee3394d3606",
+      "sha256": "f3133705de4d7a6acaec00d4d00aeda49bfafd65990e3da6b318236dfe5fb06c",
       "upstream": "net/bytebuddy/implementation/ExceptionMethod.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/FieldAccessor.java",
-      "sha256": "6d2dfd46376d6be506cb139a60af1aa1328ca7166040478e0ff29a7ca3b61406",
+      "sha256": "0c47b5e915e959e05a75ddf0dd90682bcb885e3e899d31e4a349978b60c1667b",
       "upstream": "net/bytebuddy/implementation/FieldAccessor.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/FixedValue.java",
-      "sha256": "8c668fc808a4fc4e8322a3e9db04e34a3680618e3947fd8d8f01dc7174685136",
+      "sha256": "2e408339661c95be7ae78dac85b1d85f259fe7dd8c8a9c5a3a74236b9fecf100",
       "upstream": "net/bytebuddy/implementation/FixedValue.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/HashCodeMethod.java",
-      "sha256": "ea27758e4815052c7d0b4a83b2adc9b49c1efdf580bc97ab98564c92074fb9b1",
+      "sha256": "2ecb7c9804b83bb6a0e32b61a35ea957bbaf000fe71cd805dc6260fa4c074832",
       "upstream": "net/bytebuddy/implementation/HashCodeMethod.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/Implementation.java",
-      "sha256": "d242b8779b7e69f5e71dc19cedcc863f5f5959aeb970b42308b1687255221dad",
+      "sha256": "da2686862edbcd96e1268d71aa13a2b63a8ff0c13d61a67b8547679ca05c309c",
       "upstream": "net/bytebuddy/implementation/Implementation.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/InvocationHandlerAdapter.java",
-      "sha256": "e49150a6bff4309cf72f63aff3a22f19c390f36133ce66f72cee8c6695b66eed",
+      "sha256": "f756f4c13354bf9cb2d8a2929124c12c485def2f03e96a946a92f4636e15b3ce",
       "upstream": "net/bytebuddy/implementation/InvocationHandlerAdapter.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/InvokeDynamic.java",
-      "sha256": "26b5fc39b154281360c20063b4dae6a8f0d1ef756b88253825bbf9d4271e88fc",
+      "sha256": "20b04bf40457c9efa90e5ddde202afdce46e1e029c3d0d5f6a3b108136ea7cff",
       "upstream": "net/bytebuddy/implementation/InvokeDynamic.java"
     },
     {
@@ -876,37 +904,37 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/MethodCall.java",
-      "sha256": "56018f211862984877d0bdc98ce51e3dea90908baaff9d6d1e2341ef51fa4ebc",
+      "sha256": "532a611cc4b9a8106e96565c61c9944cb7d1500a220d113b88eddfbf6a9a8704",
       "upstream": "net/bytebuddy/implementation/MethodCall.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/MethodDelegation.java",
-      "sha256": "08b56af5271235ef826e7fb1a8a772d3ff895049190c7e4392536afb64f43ef7",
+      "sha256": "baad7c4b79b04a8ffc6494de30fc3879c52129bef8e50870715e3ec2b2f0ba48",
       "upstream": "net/bytebuddy/implementation/MethodDelegation.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/StubMethod.java",
-      "sha256": "bd2fbe0a7bb7850bdadc5c76add9cc897d02d32ae3be71ae8d90a69369dee1e8",
+      "sha256": "92033d012e451b467368a1f6f7cb43db908002b4d8fd6ff69b7fd69f5575ab7b",
       "upstream": "net/bytebuddy/implementation/StubMethod.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/SuperMethodCall.java",
-      "sha256": "631a64e033b5ebd138d9c283b690c4fed1dec89a8703280509bb29baf78ec94b",
+      "sha256": "4b533b60ed22aefe778f18abbc5c8e198e354fae4f14fe132559dc7f80520248",
       "upstream": "net/bytebuddy/implementation/SuperMethodCall.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/ToStringMethod.java",
-      "sha256": "1277e4176d00502d677edd3e7bea5627ba57065f992c1a7278bf7674fbae60e5",
+      "sha256": "19940d34ef32a7f4c63d287bcaadb169fa76b565990c639cd820d89cb52e2a69",
       "upstream": "net/bytebuddy/implementation/ToStringMethod.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/attribute/AnnotationAppender.java",
-      "sha256": "fa766265bea3661345c506ec773ef42ac54fae838254d0c9802e08331406315b",
+      "sha256": "9d4c4af2573943f7191cbbb49b8e8947ccc8523938efc5a8a37b2f6f72cb4f3c",
       "upstream": "net/bytebuddy/implementation/attribute/AnnotationAppender.java"
     },
     {
@@ -924,25 +952,25 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/attribute/FieldAttributeAppender.java",
-      "sha256": "d277d40534bb02d822816c12966984f11b4f9c1e616c40e6fcf3eef2e72b0a1f",
+      "sha256": "3347a0c77c5890dda64ecca2d961b76ef73d7dd85f74b4ce2b30813d54d00db4",
       "upstream": "net/bytebuddy/implementation/attribute/FieldAttributeAppender.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/attribute/MethodAttributeAppender.java",
-      "sha256": "2affe71fd435a9d2da5b13e86248cda57fe002d4e97e9acbd6b724aa4c563321",
+      "sha256": "38830b028ae9b7a997d83ac51f66e2639167b7f1b2f9505453bdf3727c1ff2de",
       "upstream": "net/bytebuddy/implementation/attribute/MethodAttributeAppender.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/attribute/RecordComponentAttributeAppender.java",
-      "sha256": "ecb9e8394f7019635a1fd956303bb797e138bd574eff8d244e40ace8702ebe7d",
+      "sha256": "48ef044ab5345faa00d61b97a1d8737f4930f9333a094c312206ec6bab4f3c0e",
       "upstream": "net/bytebuddy/implementation/attribute/RecordComponentAttributeAppender.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/attribute/TypeAttributeAppender.java",
-      "sha256": "84be7f9a678052f2ec4327dcda4c1c1abf17ee62b4125460085ec6cadda7dc82",
+      "sha256": "375fa199eb993db22a49c7a0d326aa2348da322241369354a9793697234bde34",
       "upstream": "net/bytebuddy/implementation/attribute/TypeAttributeAppender.java"
     },
     {
@@ -960,7 +988,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/auxiliary/MethodCallProxy.java",
-      "sha256": "16b108d8bf2daa5443f28d0f792136af93c327fe7c9132fe1c9db7d799c930ca",
+      "sha256": "e83e279ffa1b6d9a52d5923ed6efee6615e1cf1ab71a2580f7d65becaa0b20b4",
       "upstream": "net/bytebuddy/implementation/auxiliary/MethodCallProxy.java"
     },
     {
@@ -978,7 +1006,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/auxiliary/TypeProxy.java",
-      "sha256": "62b94b6ca6aadbb60780d1d1729739cf8473e7dbb206bf712e77a3c09eff5373",
+      "sha256": "53553977396af88f1f99dcd0099736ad9a80081498ac85016c149e0d034f2bfe",
       "upstream": "net/bytebuddy/implementation/auxiliary/TypeProxy.java"
     },
     {
@@ -1002,7 +1030,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bind/MethodDelegationBinder.java",
-      "sha256": "83e4a8e9140ec6f36edd7c4a0db1c28c30aa83f95161d32ed9d5c810026052de",
+      "sha256": "b5424286c7d1087f491f12c98f07c7f651e81aab92c1fe2e495b254fa9d5c74d",
       "upstream": "net/bytebuddy/implementation/bind/MethodDelegationBinder.java"
     },
     {
@@ -1050,13 +1078,13 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bind/annotation/DefaultCallHandle.java",
-      "sha256": "c8674c0a231794d1e670eb8705fb42d1f2185b9fe57331b4a7811bc523d7792f",
+      "sha256": "ee346d63c460e41075a646edf0a226eb1b9df67764717c05089a329396ffe679",
       "upstream": "net/bytebuddy/implementation/bind/annotation/DefaultCallHandle.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bind/annotation/DefaultMethod.java",
-      "sha256": "89e0028b98f071744402df08de7586cba65503aa2bbf600ac107ccd0c5069e12",
+      "sha256": "233f21f73d21210599f5de7ed4dbaec97530dfcbcf9e9ba098c0a253ec64728c",
       "upstream": "net/bytebuddy/implementation/bind/annotation/DefaultMethod.java"
     },
     {
@@ -1074,19 +1102,19 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bind/annotation/FieldGetterHandle.java",
-      "sha256": "351950d42a8905703a5f0f56c794ecdb990709f4ee472c3b2196c47270349f6d",
+      "sha256": "6e7e14066d8d129e94b5cbf5163a9e6b9a974e033e784a4babf7f766da1a9117",
       "upstream": "net/bytebuddy/implementation/bind/annotation/FieldGetterHandle.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bind/annotation/FieldProxy.java",
-      "sha256": "f146d8ba1f7b8273e466834f529311ee4d49e4ee601eabb0c9065103576a1d41",
+      "sha256": "935d43ab828c5878b64c3569e3666120c984bc560ba659a4d92a849cd1fb9af7",
       "upstream": "net/bytebuddy/implementation/bind/annotation/FieldProxy.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bind/annotation/FieldSetterHandle.java",
-      "sha256": "9145b47718e05794f01ad4aa752dcc8d875b8c59706c2d73de4d0e3296dddf85",
+      "sha256": "2c5db687ba65ad0af8f1cca5f7f5cf4bf069d11101a3baded47cb49e91586496",
       "upstream": "net/bytebuddy/implementation/bind/annotation/FieldSetterHandle.java"
     },
     {
@@ -1104,7 +1132,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bind/annotation/Morph.java",
-      "sha256": "913611d69e6a9be6819b2a9fe1775c0774de1cc279d4e3996156fccf86519b1a",
+      "sha256": "6842c2821b25c653fc448573e55356f015f7090b4695f055bc4b9ef453599afe",
       "upstream": "net/bytebuddy/implementation/bind/annotation/Morph.java"
     },
     {
@@ -1116,7 +1144,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bind/annotation/Pipe.java",
-      "sha256": "0d10daaac70b13701e5ca90a5e9dade8346697aa32fdffb0221bee3e51b0d2ed",
+      "sha256": "63bf7f067d9f6fe33cd5e132388efb66b8be800b23ebc09e030eed1104993297",
       "upstream": "net/bytebuddy/implementation/bind/annotation/Pipe.java"
     },
     {
@@ -1146,13 +1174,13 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bind/annotation/SuperCallHandle.java",
-      "sha256": "73d7c194e7a2b57b15ae2b3960fea04e42df55bca0415b41812336899606b8e7",
+      "sha256": "d2e85120812e6b4741156de3b9f736a09435fb4c33baab934ec9fa68ace183f6",
       "upstream": "net/bytebuddy/implementation/bind/annotation/SuperCallHandle.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bind/annotation/SuperMethod.java",
-      "sha256": "e41d01b4a79a7ca35a979d143d772a6c09a59d1d5be83f674cbcf7aa55f470ff",
+      "sha256": "43de9000e4d77883afab3b6fc14710cdab24dbbc169957fe3dc929d84e6c6148",
       "upstream": "net/bytebuddy/implementation/bind/annotation/SuperMethod.java"
     },
     {
@@ -1188,61 +1216,61 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/Addition.java",
-      "sha256": "2a8e6b88a9ed8ccf0139f463fad28f92b2d4f01c697209490d2eaa28052f1983",
+      "sha256": "d4a979d80fbc8b32ed5e77ba8e2ad116cba3d15ead49c580eab9a46d52db3e2b",
       "upstream": "net/bytebuddy/implementation/bytecode/Addition.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/ByteCodeAppender.java",
-      "sha256": "476d3636eb9e216410689bb7dd8a5d253c4f30f3aa8f9ba4bf84622089dc8386",
+      "sha256": "58d1da7ac5f8e9d80d56f7894ff052cf4c36e46014a30b6e1f9a9fa23a6c8844",
       "upstream": "net/bytebuddy/implementation/bytecode/ByteCodeAppender.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/Division.java",
-      "sha256": "825b52c8a233ffd420d12b44ef36b691c07d711f16b57a51d59304fd6fab20d5",
+      "sha256": "501293e40e7eb51cdff638e442a6102518ac6323bc66caa3bce8d39f0f5413b2",
       "upstream": "net/bytebuddy/implementation/bytecode/Division.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/Duplication.java",
-      "sha256": "c1b0a1d98970bc1a9da8f26930f3da1d4d4b1e2f9e3422be2f5671910aa1bddb",
+      "sha256": "7ef18886393df0586b5da1634b1dd9efc6bf94a99d80bfeae70a01d20435ce3f",
       "upstream": "net/bytebuddy/implementation/bytecode/Duplication.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/Multiplication.java",
-      "sha256": "3c6fdbec61bef1ca44aabf982431eb82f875ef94a4d9e0216ccf88121585cbf1",
+      "sha256": "4bb3768f4bb086e7b2ba9b0b9b0d8f954a26796114fc225fc9ad676d7a138782",
       "upstream": "net/bytebuddy/implementation/bytecode/Multiplication.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/Remainder.java",
-      "sha256": "349bd7934ae6b67023f4305ca1b4f52df584373cbe671110658fd5653acddb4a",
+      "sha256": "8ff7af54ee48ec51fad4363abc5fb13323cebdcd14617e66a6326eb977ab3f2b",
       "upstream": "net/bytebuddy/implementation/bytecode/Remainder.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/Removal.java",
-      "sha256": "62ec7379bb4beb475500e6e26f10b117cb0f28ac91004dd3f3406fb55453ef33",
+      "sha256": "4314707a4f43ee29692b75fd9ca149a2ffa4b052378eb90d362ddc5647f80e07",
       "upstream": "net/bytebuddy/implementation/bytecode/Removal.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/ShiftLeft.java",
-      "sha256": "bfba654cd828d5cb02dc645053525efd51231a9d768a654f515200d003671b28",
+      "sha256": "e5a552189170625ad9e429028080f869880a6feca70c4487519f3c25c204fce5",
       "upstream": "net/bytebuddy/implementation/bytecode/ShiftLeft.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/ShiftRight.java",
-      "sha256": "2cc4c3435dfc3f000bd8a49fb4471489f65c9b00da1b7ba6ca38aa012cf42f4d",
+      "sha256": "dc80b64e2f3c21e244fecc83be8df84c312609fe966f4d0400cc7a01e5fd15d6",
       "upstream": "net/bytebuddy/implementation/bytecode/ShiftRight.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/StackManipulation.java",
-      "sha256": "c6ccfdde7aaf25113877abab202c4c2cde63b9aedba44577316c375e6ff95749",
+      "sha256": "c0298786216b68c528c35143ce8136747b13cc9b05d6279f5192301cd06e5019",
       "upstream": "net/bytebuddy/implementation/bytecode/StackManipulation.java"
     },
     {
@@ -1254,19 +1282,19 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/Subtraction.java",
-      "sha256": "b2d13f842f49b722b23155f02f624ed2c1ef54e856a6200ee75197e78b3739c0",
+      "sha256": "c0360b7479e7880cac095e30b927d33ddc19393a813fbeac44c1403649c231cc",
       "upstream": "net/bytebuddy/implementation/bytecode/Subtraction.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/Throw.java",
-      "sha256": "8d8574211a63aaeb5bd425bad9ae2666fa4c01849b37b144add87c6eaf242db4",
+      "sha256": "8e33eb91abbdbfc1cf99a2b557927f134ad2009d8753221f2abd403349fada08",
       "upstream": "net/bytebuddy/implementation/bytecode/Throw.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/TypeCreation.java",
-      "sha256": "adc7c8b7cd019928882b59eaa0c566986c66d504dccb3466750355a22d7ac577",
+      "sha256": "bb393b50ab6468fd4daecfe9365df75eeae0462a9b5d7b8f525be5c0d326fa00",
       "upstream": "net/bytebuddy/implementation/bytecode/TypeCreation.java"
     },
     {
@@ -1278,13 +1306,13 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/assign/InstanceCheck.java",
-      "sha256": "98910bedbee2d166ae95f425a6aeffa714b9efa368048be2b30b9e419e9e37bb",
+      "sha256": "85b921a91736c6bf237eb4f9a390e5e123666d8b21e44d9df5733b1375071a14",
       "upstream": "net/bytebuddy/implementation/bytecode/assign/InstanceCheck.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/assign/TypeCasting.java",
-      "sha256": "0898095927549d9c22be17114e189e74f97142900c69778db8e51f1d60999768",
+      "sha256": "64f9cd105801c474935e8236cc0e0100eb87db8263f9d36a8f25734cccb44986",
       "upstream": "net/bytebuddy/implementation/bytecode/assign/TypeCasting.java"
     },
     {
@@ -1296,7 +1324,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/assign/primitive/PrimitiveBoxingDelegate.java",
-      "sha256": "f736b62eec500ebd999dcf0a5d20c30e2d36892aada0000a9f24219c06c0e81e",
+      "sha256": "bbff1155e31522fd9863eae8ce044378a12fbd53085a22ce9d96dbd9821424d7",
       "upstream": "net/bytebuddy/implementation/bytecode/assign/primitive/PrimitiveBoxingDelegate.java"
     },
     {
@@ -1308,13 +1336,13 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/assign/primitive/PrimitiveUnboxingDelegate.java",
-      "sha256": "db2531d13ba47b5bcdfdadb5bd59a3fc429171207114b098216b3c9429fbf277",
+      "sha256": "1e75795157b2752b73392b25f532b13b4be0cc4078cd09fa1898bd8c82f854ad",
       "upstream": "net/bytebuddy/implementation/bytecode/assign/primitive/PrimitiveUnboxingDelegate.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/assign/primitive/PrimitiveWideningDelegate.java",
-      "sha256": "935de6b7a10d84c94d133abcc9f731a736bec20aacfe10aa40c4e1ac0367910e",
+      "sha256": "ff7c4c3944d3808e67c796849240799dd2ee9419f0438ece0d4e427d7e94bf10",
       "upstream": "net/bytebuddy/implementation/bytecode/assign/primitive/PrimitiveWideningDelegate.java"
     },
     {
@@ -1350,19 +1378,19 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/collection/ArrayAccess.java",
-      "sha256": "ac886344079764cefa8c64eca8833eaa940149d4430448fc96f2206fb0ebd9d6",
+      "sha256": "45f9255674c49c3faaa370f93f5d285f993726b0cc0d4bad356cd5a6a0757a27",
       "upstream": "net/bytebuddy/implementation/bytecode/collection/ArrayAccess.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/collection/ArrayFactory.java",
-      "sha256": "a228bc0b18617f0af628302c2572839a96962c4a181db1497b25f30a626523d1",
+      "sha256": "5c6bf0f3a832cb14a738b617e13d5ce6f59e32900c49f7366b567dc22ff03d6c",
       "upstream": "net/bytebuddy/implementation/bytecode/collection/ArrayFactory.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/collection/ArrayLength.java",
-      "sha256": "895bdd379546b35a6cab192bbb627d263507ffde1b22200b1f8363af6e0a9e0c",
+      "sha256": "4869495d06267373a52cb97465d6a1b3b3639920ed33b9c0ce4bc4863540c670",
       "upstream": "net/bytebuddy/implementation/bytecode/collection/ArrayLength.java"
     },
     {
@@ -1380,73 +1408,73 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/ClassConstant.java",
-      "sha256": "03137f82c94db68d7e9c6bd051eae21872605fb553933435c170a781dbc70acc",
+      "sha256": "4e731001dd40bb7268ffbad77308fb9585628b56110e9f9417b7770e1f9bfdd6",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/ClassConstant.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/DefaultValue.java",
-      "sha256": "a78eaf20b57daace79b0365e5eeff7696e9410edd76a3ce7efda6a1ef4710599",
+      "sha256": "b097a4f0626fa43628acf2d05b06ecfacd0c2055576b908552e33cabe4270642",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/DefaultValue.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/DoubleConstant.java",
-      "sha256": "96b40a0cd030a62ac8148bc414e3e7d04909a0b9097bf169321328fa3fda133d",
+      "sha256": "b39dfccbbe2dd56b04b9f19f26807133d6e6c34c862d5ae42d09cf5235ee7bc7",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/DoubleConstant.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/FieldConstant.java",
-      "sha256": "97f95d40760a425aee9822937df033b188ea4cdff7b5b1109c93eef232cadbd5",
+      "sha256": "882a2d4c3a65a6fe32e990d52791c8616fa18997be5456146d5a5b9557b5621a",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/FieldConstant.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/FloatConstant.java",
-      "sha256": "c795a70f73538a46d5e2b30d39d440559db5b793366e47236f5cf42b5a83495f",
+      "sha256": "b4da2395136f036c3032609054dcf832fe84b7aee2f9b656ad9aa007476b6cf5",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/FloatConstant.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/IntegerConstant.java",
-      "sha256": "88951dba1d147b1709b253defe61e87d5533c5c4eca0553f1abb261d121f71e4",
+      "sha256": "20708b33681d1e1e05a52c29449158d3303d5877680b377264ec8955ca9c3a3e",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/IntegerConstant.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/JavaConstantValue.java",
-      "sha256": "b3fb65bd9f74ed3bad5496c8894dd813efebb995dc0d4d2e1d94dcb47ceb34e0",
+      "sha256": "0d592655b631150e2b78ca63874a6d3a80ef991d5f83b552bf378b1c4f2832a1",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/JavaConstantValue.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/LongConstant.java",
-      "sha256": "25ff64026d87d7ca7a4b88492d03535627b501e7084966c599918f970b906387",
+      "sha256": "8d56f80c3a0eb3f24016b79f2ddf6afbf7f9062141015178ca94bc6550dd59d1",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/LongConstant.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/MethodConstant.java",
-      "sha256": "f60729cf098d5ae013fee1fd4491b12e02631786ea92d4097e95d494266416bd",
+      "sha256": "022189ded19b1c570027ac63e9fd278e158bed1311cb857fc295dc3f2a10acbe",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/MethodConstant.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/NullConstant.java",
-      "sha256": "5d72a145e6f048fbf57b5bd9b9b198cd6ab2dcaa535b034e5537597b31f1865a",
+      "sha256": "6d1c7365af288d33cf80613f5b5f3929868761d5871a8d58c9b0d5a81f04becd",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/NullConstant.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/SerializedConstant.java",
-      "sha256": "0363eba5d8e0caa512df144b461eeb9bc96e9c2044db66d48f3d8f45bc04f527",
+      "sha256": "5243b45e8f2bcb7e1fb98edd44f34c11c0d0401e93b1efdc6de58505a883e76c",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/SerializedConstant.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/constant/TextConstant.java",
-      "sha256": "eebaa0a36e3ff6f1bd614bbb5e82644f7e3f7f9e1ab7c23351343ff8ff5e9198",
+      "sha256": "3e1b37b437bf8a6657ce5ed15751a1565a8dd8c372c946ddb5463aef82ae3a79",
       "upstream": "net/bytebuddy/implementation/bytecode/constant/TextConstant.java"
     },
     {
@@ -1458,31 +1486,31 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/member/FieldAccess.java",
-      "sha256": "a9bbeb6b7860809e7115aa3fa6806e8fa535ec7a699304384a2d24ef0566b026",
+      "sha256": "57def9936da3a0cf63b0b5ffe382526e2ab0d857bfc656aa94c44ad150a377e8",
       "upstream": "net/bytebuddy/implementation/bytecode/member/FieldAccess.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/member/HandleInvocation.java",
-      "sha256": "763a06e4cfd4ede1a9953681f219165cd05792ebbc36d27a80eeced17a40272b",
+      "sha256": "a64f602f71a2e21d72025654ea2cf81a30eebd1d76b4d5124916b0a51e2e13d4",
       "upstream": "net/bytebuddy/implementation/bytecode/member/HandleInvocation.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/member/MethodInvocation.java",
-      "sha256": "8d01f862933d1eb1fa466046af8a4e36b1f746b4fbf998cd893edb5389b0710c",
+      "sha256": "c2cbb49d90ded1aa5036d0dc696219b94692afd67cceb1a55e279a24ac989061",
       "upstream": "net/bytebuddy/implementation/bytecode/member/MethodInvocation.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/member/MethodReturn.java",
-      "sha256": "a888c837abf3025fd768eec81d72128fe4f500c246ba54e38766fef355702919",
+      "sha256": "f12d0a477453da1fe1d723b291d5ea8ae114d7cc49c49e7843f7722d64592e6a",
       "upstream": "net/bytebuddy/implementation/bytecode/member/MethodReturn.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/bytecode/member/MethodVariableAccess.java",
-      "sha256": "b2c8fa1ca5317e3f737ff72aab0ef2de131c9b392bc31438b98c1c9c44f8437c",
+      "sha256": "50cb06e3b469bba3aeb059c80fbdcb879413a9e7fb9f50d1d101ca5db612defe",
       "upstream": "net/bytebuddy/implementation/bytecode/member/MethodVariableAccess.java"
     },
     {
@@ -1502,288 +1530,6 @@
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/implementation/package-info.java",
       "sha256": "4826798dfce37d5a540ae470c2bcd8c22ddcd2d5af9a4c98c76ecfac38fc66bd",
       "upstream": "net/bytebuddy/implementation/package-info.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/AnnotationVisitor.java",
-      "sha256": "b6ef1362ad4d3962cc0b22a3b3179a849e16c1ad714960a42feff79d184de33c",
-      "upstream": "net/bytebuddy/jar/asm/AnnotationVisitor.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/AnnotationWriter.java",
-      "sha256": "69e2d6407d6e5f8824d899c07f37b1ddc6c02f8ac22a795a8c89171601084e72",
-      "upstream": "net/bytebuddy/jar/asm/AnnotationWriter.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/Attribute.java",
-      "sha256": "20e6f9b2cd2794af09e98775bed25db2a7e313daa9d05534934d32623a86670f",
-      "upstream": "net/bytebuddy/jar/asm/Attribute.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/ByteVector.java",
-      "sha256": "95f1804cc47817632a48ca7abb391cc1ab640e4a3a70aa1ad424941d2f021e45",
-      "upstream": "net/bytebuddy/jar/asm/ByteVector.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/ClassReader.java",
-      "sha256": "3503551d38e324ed06587a510aae364851f565a606a52f5ae1afa5f1b034b690",
-      "upstream": "net/bytebuddy/jar/asm/ClassReader.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/ClassTooLargeException.java",
-      "sha256": "40c9b4e31e446a1a2161deeeca40587a3e1f3ff1b96c03bbad93c83c7273d1fe",
-      "upstream": "net/bytebuddy/jar/asm/ClassTooLargeException.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/ClassVisitor.java",
-      "sha256": "7211b3d9e19ab7fc49fdfc166016d5e291cf075e3a1bb445b60afb606555825c",
-      "upstream": "net/bytebuddy/jar/asm/ClassVisitor.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/ClassWriter.java",
-      "sha256": "626050315fb1200189a4a19116a102839dc379177d01e73f553b692d8fd670f6",
-      "upstream": "net/bytebuddy/jar/asm/ClassWriter.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/ConstantDynamic.java",
-      "sha256": "cb045d65b561a7902abf910208b2ddc8508f6be97309aacea2204558ddd34943",
-      "upstream": "net/bytebuddy/jar/asm/ConstantDynamic.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/Constants.java",
-      "sha256": "0156cd77cb88acd7e1bcc88419ec71c807782dda98a35683fdc1d497502438b8",
-      "upstream": "net/bytebuddy/jar/asm/Constants.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/Context.java",
-      "sha256": "e8fd257fdb06a0f72ff178d83e88ab49c7c9dbf19ba6d8c907224b9ab54efc14",
-      "upstream": "net/bytebuddy/jar/asm/Context.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/CurrentFrame.java",
-      "sha256": "54975c6e707afc6149fb1beec0865e6118ee72b61d7dce66505a49908c2d7ff9",
-      "upstream": "net/bytebuddy/jar/asm/CurrentFrame.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/Edge.java",
-      "sha256": "2a53f9ca04bf1360fd087c00cdb5acc367d33a4f852f1558482f69a3ed4e5e88",
-      "upstream": "net/bytebuddy/jar/asm/Edge.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/FieldVisitor.java",
-      "sha256": "8817ddc9103d77ca709d3411e51a5237015fe75e24b04bee927e3d834cc77705",
-      "upstream": "net/bytebuddy/jar/asm/FieldVisitor.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/FieldWriter.java",
-      "sha256": "897a74cbca88d4425aaec1a39c12f98dc90485d0e163e608aed385aa66607459",
-      "upstream": "net/bytebuddy/jar/asm/FieldWriter.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/Frame.java",
-      "sha256": "4db1434ebd968541afb99cfe44fa1834315671d17984b9c124ddc9d020054a86",
-      "upstream": "net/bytebuddy/jar/asm/Frame.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/Handle.java",
-      "sha256": "21fcd2b49d8edf53d1efe367f2d3892d5ae8d9308c6b44ec855f317070015f8a",
-      "upstream": "net/bytebuddy/jar/asm/Handle.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/Handler.java",
-      "sha256": "44c98894fbe5402ec6244c36de475ba1bc02251482709b85d59be504d817d881",
-      "upstream": "net/bytebuddy/jar/asm/Handler.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/Label.java",
-      "sha256": "c8c5e2f82bb0d9469c0cfa8676bad65be2c662e0e770235aaac2e1ebd3e2d1cf",
-      "upstream": "net/bytebuddy/jar/asm/Label.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/MethodTooLargeException.java",
-      "sha256": "ca650f7fffe175f64b392562537a9967ba326d6f00c19f4d96a6879191d3ffc0",
-      "upstream": "net/bytebuddy/jar/asm/MethodTooLargeException.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/MethodVisitor.java",
-      "sha256": "471bf4d816dd9c29b79d200ae90ed99f925edf90dcb548aa8a6436a45905e049",
-      "upstream": "net/bytebuddy/jar/asm/MethodVisitor.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/MethodWriter.java",
-      "sha256": "89b94eea2f2919561b4d95fc9f2dd13a2a2c627743c49c2ebe839c0a2c3c8eb5",
-      "upstream": "net/bytebuddy/jar/asm/MethodWriter.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/ModuleVisitor.java",
-      "sha256": "acc71d0fc6c46cc89eae7d8c8dde31afa931901d9241ba5dee896ca429744c67",
-      "upstream": "net/bytebuddy/jar/asm/ModuleVisitor.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/ModuleWriter.java",
-      "sha256": "b564e8013a190b64e83ce733a386d986022386c853a73202c8237123f52e1fa2",
-      "upstream": "net/bytebuddy/jar/asm/ModuleWriter.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/Opcodes.java",
-      "sha256": "ea5d77f3b2f311fd1bcfedd7c12b3e734e93ff2e919015072cbfa6f9be336322",
-      "upstream": "net/bytebuddy/jar/asm/Opcodes.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/RecordComponentVisitor.java",
-      "sha256": "386e178e356ca5d58f07c4c91cad87722047b3d4a5840688f5f639c90c0ad1db",
-      "upstream": "net/bytebuddy/jar/asm/RecordComponentVisitor.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/RecordComponentWriter.java",
-      "sha256": "ad51b7ed962ce0874ef295e5a83ffb55d26ff725280a49cf336b886f69e14e33",
-      "upstream": "net/bytebuddy/jar/asm/RecordComponentWriter.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/Symbol.java",
-      "sha256": "d721a6d32d7202de17c9b095a077501929794791ed50c9366ca84561d7a52b41",
-      "upstream": "net/bytebuddy/jar/asm/Symbol.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/SymbolTable.java",
-      "sha256": "f0ac804b0c69915ed6446fa9d7e8d0aeb94a7841ee623d4f56d4667eef584ae8",
-      "upstream": "net/bytebuddy/jar/asm/SymbolTable.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/Type.java",
-      "sha256": "e21b27bbed95a7d5ece44ef38c8b4e92d25a29fe949e3e94d38216d1211d4515",
-      "upstream": "net/bytebuddy/jar/asm/Type.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/TypePath.java",
-      "sha256": "46f6e4cc3882962d0c63f7c1bd6b6c3086fab10bce98fe205326a1217e57bf4e",
-      "upstream": "net/bytebuddy/jar/asm/TypePath.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/TypeReference.java",
-      "sha256": "f8847013b8423cb5908030d97b79162377b2da53d08e3fd14af7011b590fe53a",
-      "upstream": "net/bytebuddy/jar/asm/TypeReference.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/commons/AnnotationRemapper.java",
-      "sha256": "a378627930f3ad09becf9d4faf8b718ddf860cb7ea937517ee63546c8ac2dc49",
-      "upstream": "net/bytebuddy/jar/asm/commons/AnnotationRemapper.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/commons/ClassRemapper.java",
-      "sha256": "f532b8bebf927937c94327e8c3b12ef3a1a470dfdce614b7c542f29539d2f0e9",
-      "upstream": "net/bytebuddy/jar/asm/commons/ClassRemapper.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/commons/FieldRemapper.java",
-      "sha256": "96f41752f1cb6ecdbb3497f5eff617f92ad46f98341fcabb3782d27a85b60db8",
-      "upstream": "net/bytebuddy/jar/asm/commons/FieldRemapper.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/commons/MethodRemapper.java",
-      "sha256": "a662ceb049adc670fc76b6d71f9055ba02f0441366e849815289f934e5857880",
-      "upstream": "net/bytebuddy/jar/asm/commons/MethodRemapper.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/commons/ModuleHashesAttribute.java",
-      "sha256": "fb7c03703004c5a5c9c568ea312076bbdca886f6d46c56c0a19281dc1eef70d1",
-      "upstream": "net/bytebuddy/jar/asm/commons/ModuleHashesAttribute.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/commons/ModuleRemapper.java",
-      "sha256": "514bf71f3a3763144d77882f668f568c156a81b18f6ed31869de2a4c93de6a72",
-      "upstream": "net/bytebuddy/jar/asm/commons/ModuleRemapper.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/commons/RecordComponentRemapper.java",
-      "sha256": "e961090c583166f07fdb9233974c62c51ca2f43efd97bf0c948bdfe76b9e5f09",
-      "upstream": "net/bytebuddy/jar/asm/commons/RecordComponentRemapper.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/commons/Remapper.java",
-      "sha256": "16268f6d8bb38cc4f727eaf3953673eec363e20d24009c5a69571043d7d59f93",
-      "upstream": "net/bytebuddy/jar/asm/commons/Remapper.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/commons/SignatureRemapper.java",
-      "sha256": "ea0f35f797bacbcd6b4531c368a9cff47ee992121721992e6d2a913eb3147468",
-      "upstream": "net/bytebuddy/jar/asm/commons/SignatureRemapper.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/commons/SimpleRemapper.java",
-      "sha256": "df315c44a5e51bd371edb60607c3b07d3f622e1531994704dc3070eb2aef34b6",
-      "upstream": "net/bytebuddy/jar/asm/commons/SimpleRemapper.java"
-    },
-    {
-      "kind": "unmodified-source-only-not-packaged-upstream",
-      "repository": "m3/vendor/third_party/byte-buddy/upstream-source-only/net/bytebuddy/jar/asm/package.html",
-      "sha256": "9df8b952fb4a6434d607828e04581840268677939daf228553187d641caffb3c",
-      "upstream": "net/bytebuddy/jar/asm/package.html"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/signature/SignatureReader.java",
-      "sha256": "1ddddd50250a1e24630c1ed624db620613dfb14445ce6a71a0d3960139669525",
-      "upstream": "net/bytebuddy/jar/asm/signature/SignatureReader.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/signature/SignatureVisitor.java",
-      "sha256": "d9dc61b4fe2319a7d7f414a4adf49b07cf1c3b78e3a0f84410ce410fa53f3f13",
-      "upstream": "net/bytebuddy/jar/asm/signature/SignatureVisitor.java"
-    },
-    {
-      "kind": "unmodified-production",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/jar/asm/signature/SignatureWriter.java",
-      "sha256": "a27d0bdfa1c50164757503720f1bc78b4c2e624411af2c8b69e6f8a9b3f2ddfa",
-      "upstream": "net/bytebuddy/jar/asm/signature/SignatureWriter.java"
-    },
-    {
-      "kind": "unmodified-source-only-not-packaged-upstream",
-      "repository": "m3/vendor/third_party/byte-buddy/upstream-source-only/net/bytebuddy/jar/asm/signature/package.html",
-      "sha256": "12d2d3c52371618d9261d7cb05e95b1a5885248352a539b6bbf700a434638f5d",
-      "upstream": "net/bytebuddy/jar/asm/signature/package.html"
     },
     {
       "kind": "unmodified-production",
@@ -2028,7 +1774,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/matcher/ModifierMatcher.java",
-      "sha256": "0ed5efb9df399da09cfa30b535f32fcb57dcb6a85686b54dd8325ae190bdcd6f",
+      "sha256": "1c70caa655ebed7d7651cdf760cac667f74025102b9015d4aa0544a05a1c5715",
       "upstream": "net/bytebuddy/matcher/ModifierMatcher.java"
     },
     {
@@ -2118,7 +1864,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/pool/TypePool.java",
-      "sha256": "7afd8d7e2671e27387bf71b2496d7430bfd24038bfae6b8e40ce0edbbfa36aa1",
+      "sha256": "5fd7dd99fdbbf81b33c67f7641eac29750c104eb09b76caa44a0ab56b8cac26e",
       "upstream": "net/bytebuddy/pool/TypePool.java"
     },
     {
@@ -2172,7 +1918,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/utility/JavaConstant.java",
-      "sha256": "05a7fb44ba4ccae47d40dba7de1c7348a10047e45467fa289145b76fd11cf9e6",
+      "sha256": "af46661deca02bed473d52c5ea71a9f0ace742b3f4092ede656d512ad4dc0e99",
       "upstream": "net/bytebuddy/utility/JavaConstant.java"
     },
     {
@@ -2184,7 +1930,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/utility/JavaType.java",
-      "sha256": "8acc42bb5ce46f6ebf2a5cdeff084ec11f593da2a33da4a43baf65af1ae51a4b",
+      "sha256": "c2f152faca71963a5ac5c9ef2adf6d12ef38a1ba36dba7c785bcb2f48a3cc291",
       "upstream": "net/bytebuddy/utility/JavaType.java"
     },
     {
@@ -2196,7 +1942,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/utility/OpenedClassReader.java",
-      "sha256": "925051e2418661a7da7519cb9ca8c68505dd12898b69a8285c95cdc71f7d7653",
+      "sha256": "2483d44d78cb723380d25ceca8026f4421a6ece01a0b81b9012d3d1b23f15a5e",
       "upstream": "net/bytebuddy/utility/OpenedClassReader.java"
     },
     {
@@ -2220,7 +1966,7 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/utility/dispatcher/JavaDispatcher.java",
-      "sha256": "c73d34a7b56ac40935c590ba3d58220aae881782a96ef23230faae8003622704",
+      "sha256": "aed4c908cfd47ce847b6d200f7bb6bc9696e3a0ae07eff4a4d096367cc2c22e9",
       "upstream": "net/bytebuddy/utility/dispatcher/JavaDispatcher.java"
     },
     {
@@ -2292,37 +2038,37 @@
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/utility/visitor/ContextClassVisitor.java",
-      "sha256": "4dae995d45ed23dd90559a64892878ec3562e802ebf0b9ddb84b6c4cc4e10047",
+      "sha256": "c9eb10c4ffc1dfeeedee5929929b0ea6e56920438f2cc6c069d18b269ea07f56",
       "upstream": "net/bytebuddy/utility/visitor/ContextClassVisitor.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/utility/visitor/ExceptionTableSensitiveMethodVisitor.java",
-      "sha256": "03e7bf8b92061bf4e668c8e7366b0872bedb3ad3b18c1f0c570c0024dc6fc3a2",
+      "sha256": "c23e7b5b52f973843096c99b2173831de7d8d6f2b4b96827b80ba91eeffa9464",
       "upstream": "net/bytebuddy/utility/visitor/ExceptionTableSensitiveMethodVisitor.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/utility/visitor/LineNumberPrependingMethodVisitor.java",
-      "sha256": "5a381abbc0bb01f6f0920b8be0efe532214b9abb98192140645e6193939566a7",
+      "sha256": "37db582323b2f2e0c7b885b5222e7b2e998e66879c44310f7540db2979786c30",
       "upstream": "net/bytebuddy/utility/visitor/LineNumberPrependingMethodVisitor.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/utility/visitor/LocalVariableAwareMethodVisitor.java",
-      "sha256": "1d9d9e2370d50b3d5ba92564a886972a929ba0daed1719530072dd4c4fd47fdf",
+      "sha256": "29e7c82f759650ec21540c9ad8b9873717b51d8a3cb11d4ae7cc23b6f4b74a7a",
       "upstream": "net/bytebuddy/utility/visitor/LocalVariableAwareMethodVisitor.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/utility/visitor/MetadataAwareClassVisitor.java",
-      "sha256": "6c35d08ad630f1a9b5d6582c26aea5abc879222e8870e3c6fb0b07dd8adc3a7c",
+      "sha256": "e4db945810aef0c23df2a11e3a895402871402b52c8c796987447f174b4c5ce0",
       "upstream": "net/bytebuddy/utility/visitor/MetadataAwareClassVisitor.java"
     },
     {
       "kind": "unmodified-production",
       "repository": "m3/vendor/third_party/byte-buddy/src/main/java/net/bytebuddy/utility/visitor/StackAwareMethodVisitor.java",
-      "sha256": "bbd5a7759355bc4639492c11916e3d8e2069172a024a24b3068acf4625b481cc",
+      "sha256": "0b8cc7b50a50a99209b9c64c10e39e6d1885c3f595e5182f4740a8ac6cacaa26",
       "upstream": "net/bytebuddy/utility/visitor/StackAwareMethodVisitor.java"
     },
     {
@@ -2334,7 +2080,7 @@
     {
       "kind": "unmodified-resource-superseded-by-published",
       "repository": "m3/vendor/third_party/byte-buddy/upstream-excluded/META-INF/LICENSE",
-      "sha256": "5e1a7d78769f704050cf9122a95cbaa754a7f342f91f92d972545b2e43a2ea30",
+      "sha256": "bb28c48e3e078166e91cfc2b6db7ffebb8a0973b9e23b3df060561292d8d69ec",
       "upstream": "META-INF/LICENSE"
     },
     {
@@ -2367,13 +2113,13 @@
     {
       "kind": "retained-provenance",
       "repository": "m3/vendor/third_party/byte-buddy/SOURCES_MANIFEST.tsv",
-      "sha256": "98d3f2d873bed761551bb15bbdeec4df282455614aa0ffd28834b9958bf581d2",
+      "sha256": "f3db85181c3c7506863dc1f42885799127a3dd5a9dbac4aa2b63618e167305d0",
       "upstream": "(inventory)"
     },
     {
       "kind": "unmodified-legal-or-build-reference",
       "repository": "m3/vendor/third_party/byte-buddy/LICENSE",
-      "sha256": "5e1a7d78769f704050cf9122a95cbaa754a7f342f91f92d972545b2e43a2ea30",
+      "sha256": "bb28c48e3e078166e91cfc2b6db7ffebb8a0973b9e23b3df060561292d8d69ec",
       "upstream": "META-INF/LICENSE"
     },
     {
@@ -2406,9 +2152,26 @@
     "status": "PASS"
   },
   "resources_completed": 3,
-  "sources_jar": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.14.11/byte-buddy-1.14.11-sources.jar",
-  "sources_jar_sha1": "67010508a95b30eff7fc6f8ffe16b6d03fc57b99",
-  "sources_jar_sha256": "17a6bd3e51149baf144cc380d64445f95f0f6cff3bdeee644ca1a19c6a36f990",
+  "shade": {
+    "deviations": "META-INF/maven/** also excluded from the ASM modules (Maven-built here, Gradle-built upstream); no AppendingTransformer (META-INF/LICENSE is the published, already appended text); no shaded sources jar; reduced pom under target/",
+    "inputs": [
+      "asm-9.6",
+      "asm-commons-9.6"
+    ],
+    "origin": "https://github.com/raphw/byte-buddy/blob/byte-buddy-1.14.11/byte-buddy/pom.xml (sha256 f779579ac9fd188247678234b2cfb3a3d2cd51fb5a60fa32575c258d96507791), profile shade-current",
+    "relocations": [
+      "org.objectweb.asm -> net.bytebuddy.jar.asm"
+    ]
+  },
+  "source_artifact": {
+    "coordinate": "net.bytebuddy:byte-buddy-dep:1.14.11",
+    "reason": "the published net.bytebuddy:byte-buddy:1.14.11 is built upstream from these sources plus a shade step; its own sources jar carries the relocated copy of the shaded inputs",
+    "sources_jar": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-dep/1.14.11/byte-buddy-dep-1.14.11-sources.jar",
+    "sources_jar_sha1": "2590c8c1573731296f7cc796285c0281e7f151eb"
+  },
+  "sources_jar": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-dep/1.14.11/byte-buddy-dep-1.14.11-sources.jar",
+  "sources_jar_sha1": "2590c8c1573731296f7cc796285c0281e7f151eb",
+  "sources_jar_sha256": "aa2b71d8e01f543b67ae4ea14645b3e1dd5120d2d95229f78d5befcfe1d7b6ef",
   "status": "PASS",
   "upstream": "",
   "version": "1.14.11"

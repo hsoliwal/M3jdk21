@@ -29,7 +29,7 @@ import net.bytebuddy.implementation.bytecode.assign.Assigner;
 import net.bytebuddy.implementation.bytecode.constant.MethodConstant;
 import net.bytebuddy.implementation.bytecode.constant.NullConstant;
 import net.bytebuddy.implementation.bytecode.member.FieldAccess;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import java.lang.annotation.*;
 import java.lang.reflect.Method;

@@ -7,6 +7,7 @@ apiguardian-api-1.1.2	2	2	2	0	0	0	0	IDENTICAL	apiguardian-api-1.1.2.base.tsv	0	b
 asm-9.10.1	38	38	38	0	0	0	0	IDENTICAL	asm-9.10.1.base.tsv	0	base	{49=38}	{52=38}	0	0	0	0
 asm-9.6	38	38	38	0	0	0	0	IDENTICAL	asm-9.6.base.tsv	0	base	{49=38}	{52=38}	0	0	0	0
 asm-analysis-9.6	14	14	14	0	0	0	0	IDENTICAL	asm-analysis-9.6.base.tsv	0	base	{49=14}	{52=14}	0	0	0	0
+asm-commons-9.6	27	27	27	0	0	0	0	IDENTICAL	asm-commons-9.6.base.tsv	0	base	{49=27}	{52=27}	0	0	0	0
 asm-tree-9.6	38	38	38	0	0	0	0	IDENTICAL	asm-tree-9.6.base.tsv	0	base	{49=38}	{52=38}	0	0	0	0
 asm-util-9.6	26	26	26	0	0	0	0	IDENTICAL	asm-util-9.6.base.tsv	0	base	{49=26}	{52=26}	0	0	0	0
 assertj-core-3.25.3	822	822	822	0	0	0	0	IDENTICAL	assertj-core-3.25.3.base.tsv	0	base	{52=822}	{52=822}	0	0	0	0

@@ -15,7 +15,7 @@
  */
 package net.bytebuddy.description.modifier;
 
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 
 /**
  * Describes the persistence of a field, i.e. if it is {@code transient}.

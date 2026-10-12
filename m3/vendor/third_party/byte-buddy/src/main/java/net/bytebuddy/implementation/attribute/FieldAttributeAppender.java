@@ -19,14 +19,14 @@ import net.bytebuddy.build.HashCodeAndEqualsPlugin;
 import net.bytebuddy.description.annotation.AnnotationDescription;
 import net.bytebuddy.description.field.FieldDescription;
 import net.bytebuddy.description.type.TypeDescription;
-import net.bytebuddy.jar.asm.FieldVisitor;
+import org.objectweb.asm.FieldVisitor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * An appender that writes attributes or annotations to a given ASM {@link net.bytebuddy.jar.asm.FieldVisitor}.
+ * An appender that writes attributes or annotations to a given ASM {@link org.objectweb.asm.FieldVisitor}.
  */
 public interface FieldAttributeAppender {
 

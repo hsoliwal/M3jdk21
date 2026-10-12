@@ -16,7 +16,7 @@
 package net.bytebuddy.description;
 
 import net.bytebuddy.description.modifier.*;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 
 /**
  * Implementations of this interface can be described in terms of a Java modifier.

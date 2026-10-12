@@ -27,9 +27,9 @@ import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
 import net.bytebuddy.implementation.bytecode.constant.JavaConstantValue;
 import net.bytebuddy.utility.JavaConstant;
 import net.bytebuddy.utility.JavaType;
-import net.bytebuddy.jar.asm.Handle;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Handle;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 import java.util.List;
 

@@ -28,9 +28,9 @@ import net.bytebuddy.pool.TypePool;
 import net.bytebuddy.utility.CompoundList;
 import net.bytebuddy.utility.OpenedClassReader;
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.ClassVisitor;
-import net.bytebuddy.jar.asm.FieldVisitor;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import java.util.*;
 

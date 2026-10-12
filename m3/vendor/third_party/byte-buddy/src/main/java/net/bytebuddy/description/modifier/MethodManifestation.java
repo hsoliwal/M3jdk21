@@ -15,7 +15,7 @@
  */
 package net.bytebuddy.description.modifier;
 
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 
 /**
  * Describes the manifestation of a method, i.e. if a method is final, abstract or native.

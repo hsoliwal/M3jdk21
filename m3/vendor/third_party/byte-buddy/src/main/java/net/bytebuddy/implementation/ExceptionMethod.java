@@ -22,7 +22,7 @@ import net.bytebuddy.dynamic.scaffold.InstrumentedType;
 import net.bytebuddy.implementation.bytecode.*;
 import net.bytebuddy.implementation.bytecode.constant.TextConstant;
 import net.bytebuddy.implementation.bytecode.member.MethodInvocation;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import static net.bytebuddy.matcher.ElementMatchers.isConstructor;
 import static net.bytebuddy.matcher.ElementMatchers.takesArguments;

@@ -15,7 +15,7 @@
  */
 package net.bytebuddy.description.modifier;
 
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 
 /**
  * Describes a type's manifestation, i.e. if a type is final, abstract, an interface or neither.

@@ -16,8 +16,8 @@
 package net.bytebuddy.implementation.bytecode;
 
 import net.bytebuddy.implementation.Implementation;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * A stack manipulation that subtracts two numbers on the operand stack.

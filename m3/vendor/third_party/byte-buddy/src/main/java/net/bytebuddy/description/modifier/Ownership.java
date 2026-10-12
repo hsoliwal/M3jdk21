@@ -15,7 +15,7 @@
  */
 package net.bytebuddy.description.modifier;
 
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 
 /**
  * Determines the ownership of a field or method, i.e. if a member is defined in as {@code static}

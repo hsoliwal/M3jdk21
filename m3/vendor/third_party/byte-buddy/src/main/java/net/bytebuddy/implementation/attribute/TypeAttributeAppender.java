@@ -20,14 +20,14 @@ import net.bytebuddy.description.annotation.AnnotationDescription;
 import net.bytebuddy.description.annotation.AnnotationList;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.description.type.TypeList;
-import net.bytebuddy.jar.asm.ClassVisitor;
+import org.objectweb.asm.ClassVisitor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * An appender that writes attributes or annotations to a given ASM {@link net.bytebuddy.jar.asm.ClassVisitor}.
+ * An appender that writes attributes or annotations to a given ASM {@link org.objectweb.asm.ClassVisitor}.
  */
 public interface TypeAttributeAppender {
 

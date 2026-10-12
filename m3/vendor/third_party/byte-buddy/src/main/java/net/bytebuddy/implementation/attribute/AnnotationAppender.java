@@ -24,7 +24,7 @@ import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.description.type.TypeList;
 import net.bytebuddy.utility.nullability.AlwaysNull;
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.*;
+import org.objectweb.asm.*;
 
 import java.lang.reflect.Array;
 import java.util.List;
@@ -282,7 +282,7 @@ public interface AnnotationAppender {
 
     /**
      * A default implementation for an annotation appender that writes annotations to a given byte consumer
-     * represented by an ASM {@link net.bytebuddy.jar.asm.AnnotationVisitor}.
+     * represented by an ASM {@link org.objectweb.asm.AnnotationVisitor}.
      */
     @HashCodeAndEqualsPlugin.Enhance
     class Default implements AnnotationAppender {

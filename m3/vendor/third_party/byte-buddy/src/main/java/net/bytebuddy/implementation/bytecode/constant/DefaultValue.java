@@ -18,7 +18,7 @@ package net.bytebuddy.implementation.bytecode.constant;
 import net.bytebuddy.description.type.TypeDefinition;
 import net.bytebuddy.implementation.Implementation;
 import net.bytebuddy.implementation.bytecode.StackManipulation;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 /**
  * Represents a stack assignment that loads the default value of a given type onto the stack.

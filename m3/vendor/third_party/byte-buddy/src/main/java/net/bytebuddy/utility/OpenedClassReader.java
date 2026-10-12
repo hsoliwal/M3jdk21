@@ -18,8 +18,8 @@ package net.bytebuddy.utility;
 import net.bytebuddy.ClassFileVersion;
 import net.bytebuddy.build.AccessControllerPlugin;
 import net.bytebuddy.utility.privilege.GetSystemPropertyAction;
-import net.bytebuddy.jar.asm.ClassReader;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.Opcodes;
 
 import java.security.PrivilegedAction;
 

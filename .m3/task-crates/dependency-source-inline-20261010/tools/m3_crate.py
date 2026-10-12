@@ -52,7 +52,7 @@ def main() -> int:
         prov[m["donor"]] = json.loads(pj.read_text(encoding="utf-8")) if pj.exists() else {}
     gate = tsv(args.c6 / "M3_BUILD_GATE.tsv") if (args.c6 / "M3_BUILD_GATE.tsv").exists() else []
     switch = tsv(args.c6 / "M3_CONSUMER_SWITCH.tsv") if (args.c6 / "M3_CONSUMER_SWITCH.tsv").exists() else []
-    for n in ("M3_THIRD_PARTY_MODULES.tsv", "M3_BUILD_GATE.tsv", "M3_CONSUMER_SWITCH.tsv", "M3_API_SURFACE.tsv", "candidates_t7.tsv", "DEPENDENCY_INVENTORY_T7.tsv", "candidates_t8.tsv", "DEPENDENCY_INVENTORY_T8.tsv", "POM_CLASSPATH.tsv", "UPSTREAM_LICENSES_3.tsv", "UNRESOLVED_IMPORTS.tsv", "BUILD_INPUTS.tsv"):
+    for n in ("M3_THIRD_PARTY_MODULES.tsv", "M3_BUILD_GATE.tsv", "M3_CONSUMER_SWITCH.tsv", "M3_API_SURFACE.tsv", "candidates_t7.tsv", "DEPENDENCY_INVENTORY_T7.tsv", "candidates_t8.tsv", "DEPENDENCY_INVENTORY_T8.tsv", "candidates_t10.tsv", "DEPENDENCY_INVENTORY_T10.tsv", "UPSTREAM_LICENSES_T10.tsv", "POM_CLASSPATH.tsv", "UPSTREAM_LICENSES_3.tsv", "UNRESOLVED_IMPORTS.tsv", "BUILD_INPUTS.tsv"):
         if (args.c6 / n).exists():
             shutil.copyfile(args.c6 / n, crate / n.replace("M3_", ""))
     (crate / "tools").mkdir(exist_ok=True)
@@ -135,8 +135,10 @@ def main() -> int:
         decision = "VENDOR_BYTE_FOR_BYTE+SOURCE_BUILD" if m["kind"] == "MODULE" else "VENDOR_BYTE_FOR_BYTE_IMAGE"
         if prov.get(m["donor"], {}).get("delomboked_files"):
             decision = "ADAPT (delombok: %d files are the Lombok 1.18.30 expansion of the retained upstream files)" % prov[m["donor"]]["delomboked_files"]
+        if prov.get(m["donor"], {}).get("shade"):  # built as upstream builds it: another artifact's sources + the release-tag shade step
+            decision += "+UPSTREAM_SHADE (%s)" % ", ".join(prov[m["donor"]]["shade"]["inputs"])
         fit = ("PROVEN_COMPILE_FROM_SOURCE (donor-superset %s; standalone Maven gate %s) + API_SURFACE %s (%s view)" % (m["status"], next((g["result"] for g in gate if g["module"] == m["path"]), "-"), api.get(m["donor"], {}).get("verdict", "NOT_RUN"), api.get(m["donor"], {}).get("view", "-"))) if m["kind"] == "MODULE" else "UNPROVEN (%s)" % m["status"]
-        frows.append(("m3-tooling.dependency-source-inline." + m["artifact"] + "." + v, central + m["artifact"] + "-" + v + "-sources.jar", "sources-jar (SHA-1 in PROVENANCE.json)", m["path"] + "/**", lic + ":CODE_REUSE_ALLOWED_WITH_ATTRIBUTION", fit, decision, m["reason"], m["path"] + "/PROVENANCE.json", m["path"] + "/THIRD_PARTY_NOTICES.md"))
+        frows.append(("m3-tooling.dependency-source-inline." + m["artifact"] + "." + v, prov.get(m["donor"], {}).get("source_artifact", {}).get("sources_jar") or (central + m["artifact"] + "-" + v + "-sources.jar"), "sources-jar (SHA-1 in PROVENANCE.json)", m["path"] + "/**", lic + ":CODE_REUSE_ALLOWED_WITH_ATTRIBUTION", fit, decision, m["reason"], m["path"] + "/PROVENANCE.json", m["path"] + "/THIRD_PARTY_NOTICES.md"))
     (crate / "FOSS_REUSE_DECISION.tsv").write_text("\n".join(["capability\tcandidate_repo\tcommit\tsource_paths\tlicense\tcontract_fit\tdecision\trejected_reason\tadapted_hashes\tnotice_path"] + ["\t".join(r) for r in frows]) + "\n", encoding="utf-8", newline="\n")
     notices = ["# Third-party notices: vendored tooling dependencies (m3/vendor/third_party, 2026-10-10)", "",
                "Every directory below retains the unchanged published sources of the named artifact with its upstream license and a", "PROVENANCE.json pinning each file by SHA-256. The Maven descriptors are M3jdk21 composition (Apache-2.0) and do not relicense",

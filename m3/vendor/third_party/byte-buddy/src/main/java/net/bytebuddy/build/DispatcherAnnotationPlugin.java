@@ -23,9 +23,9 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.attribute.AnnotationValueFilter;
 import net.bytebuddy.implementation.attribute.MethodAttributeAppender;
 import net.bytebuddy.utility.dispatcher.JavaDispatcher;
-import net.bytebuddy.jar.asm.AnnotationVisitor;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Type;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Type;
 
 import static net.bytebuddy.matcher.ElementMatchers.*;
 

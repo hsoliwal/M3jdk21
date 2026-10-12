@@ -17,8 +17,8 @@ package net.bytebuddy.implementation.bytecode.constant;
 
 import net.bytebuddy.implementation.Implementation;
 import net.bytebuddy.implementation.bytecode.StackManipulation;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * Represents a stack manipulation to load a {@code null} pointer onto the operand stack.

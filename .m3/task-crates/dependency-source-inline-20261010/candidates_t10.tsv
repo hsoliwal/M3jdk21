@@ -1,0 +1,3 @@
+# group	artifact	version	consumers	scope	wave
+org.ow2.asm	asm-commons	9.6	shaded into net.bytebuddy:byte-buddy:1.14.11 (upstream byte-buddy shade input: 10 remapper classes relocated to net.bytebuddy.jar.asm.commons)	runtime	10
+net.bytebuddy	byte-buddy-dep	1.14.11	source artifact of net.bytebuddy:byte-buddy:1.14.11 (upstream builds byte-buddy from byte-buddy-dep + shaded ASM; never a module of its own)	build-source	10

@@ -30,7 +30,7 @@ import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
 import net.bytebuddy.implementation.auxiliary.TrivialType;
 import net.bytebuddy.utility.CompoundList;
 import net.bytebuddy.utility.nullability.AlwaysNull;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 
 import javax.annotation.Nonnull;
 import java.util.*;

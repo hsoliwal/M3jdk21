@@ -15,7 +15,7 @@
  */
 package net.bytebuddy.description.modifier;
 
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 
 /**
  * Indicates whether a parameter was denoted as {@code final} or not.

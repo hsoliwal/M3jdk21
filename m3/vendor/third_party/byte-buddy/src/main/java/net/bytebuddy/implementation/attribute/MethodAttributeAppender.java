@@ -21,7 +21,7 @@ import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.method.ParameterDescription;
 import net.bytebuddy.description.method.ParameterList;
 import net.bytebuddy.description.type.TypeDescription;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +30,7 @@ import java.util.List;
 import static net.bytebuddy.matcher.ElementMatchers.*;
 
 /**
- * An appender that writes attributes or annotations to a given ASM {@link net.bytebuddy.jar.asm.MethodVisitor}.
+ * An appender that writes attributes or annotations to a given ASM {@link org.objectweb.asm.MethodVisitor}.
  */
 public interface MethodAttributeAppender {
 

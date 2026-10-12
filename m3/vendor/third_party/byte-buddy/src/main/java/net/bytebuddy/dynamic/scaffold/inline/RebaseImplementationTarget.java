@@ -27,7 +27,7 @@ import net.bytebuddy.implementation.bytecode.constant.DefaultValue;
 import net.bytebuddy.implementation.bytecode.member.MethodInvocation;
 import net.bytebuddy.utility.CompoundList;
 import net.bytebuddy.utility.JavaConstant;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import java.util.ArrayList;
 import java.util.List;

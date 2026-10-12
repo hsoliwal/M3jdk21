@@ -17,8 +17,8 @@ package net.bytebuddy.dynamic.scaffold;
 
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.pool.TypePool;
-import net.bytebuddy.jar.asm.ClassReader;
-import net.bytebuddy.jar.asm.ClassWriter;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
 
 /**
  * A class writer strategy is responsible for the creation of a {@link ClassWriter} when creating a type.

@@ -18,8 +18,8 @@ package net.bytebuddy.utility.visitor;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.utility.OpenedClassReader;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * A method visitor that traces the amount of used local variable slots.

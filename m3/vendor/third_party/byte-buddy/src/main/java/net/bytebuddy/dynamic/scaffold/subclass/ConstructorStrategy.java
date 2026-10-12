@@ -26,7 +26,7 @@ import net.bytebuddy.implementation.SuperMethodCall;
 import net.bytebuddy.implementation.attribute.MethodAttributeAppender;
 import net.bytebuddy.matcher.ElementMatcher;
 import net.bytebuddy.matcher.LatentMatcher;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 
 import java.util.ArrayList;
 import java.util.Collections;

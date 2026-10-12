@@ -19,7 +19,7 @@ import net.bytebuddy.build.HashCodeAndEqualsPlugin;
 import net.bytebuddy.description.annotation.AnnotationDescription;
 import net.bytebuddy.description.type.RecordComponentDescription;
 import net.bytebuddy.description.type.TypeDescription;
-import net.bytebuddy.jar.asm.RecordComponentVisitor;
+import org.objectweb.asm.RecordComponentVisitor;
 
 import java.util.ArrayList;
 import java.util.Arrays;

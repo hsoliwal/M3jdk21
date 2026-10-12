@@ -21,7 +21,7 @@ import net.bytebuddy.implementation.bytecode.ByteCodeAppender;
 import net.bytebuddy.implementation.bytecode.StackManipulation;
 import net.bytebuddy.implementation.bytecode.constant.DefaultValue;
 import net.bytebuddy.implementation.bytecode.member.MethodReturn;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 /**
  * This implementation creates a method stub which does nothing but returning the default value of the return

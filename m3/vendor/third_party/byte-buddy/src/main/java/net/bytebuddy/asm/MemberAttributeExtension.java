@@ -28,8 +28,8 @@ import net.bytebuddy.implementation.attribute.MethodAttributeAppender;
 import net.bytebuddy.matcher.ElementMatcher;
 import net.bytebuddy.pool.TypePool;
 import net.bytebuddy.utility.OpenedClassReader;
-import net.bytebuddy.jar.asm.FieldVisitor;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;

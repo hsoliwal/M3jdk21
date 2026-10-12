@@ -18,7 +18,7 @@ package net.bytebuddy.utility.visitor;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.LoadedTypeInitializer;
 import net.bytebuddy.utility.OpenedClassReader;
-import net.bytebuddy.jar.asm.ClassVisitor;
+import org.objectweb.asm.ClassVisitor;
 
 import java.util.List;
 

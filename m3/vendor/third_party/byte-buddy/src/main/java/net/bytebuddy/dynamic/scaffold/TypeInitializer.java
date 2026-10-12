@@ -21,8 +21,8 @@ import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.implementation.Implementation;
 import net.bytebuddy.implementation.attribute.AnnotationValueFilter;
 import net.bytebuddy.implementation.bytecode.ByteCodeAppender;
-import net.bytebuddy.jar.asm.ClassVisitor;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 /**
  * A type initializer is responsible for defining a type's static initialization block.

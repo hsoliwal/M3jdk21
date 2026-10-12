@@ -27,9 +27,9 @@ import net.bytebuddy.pool.TypePool;
 import net.bytebuddy.utility.CompoundList;
 import net.bytebuddy.utility.OpenedClassReader;
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.ClassVisitor;
-import net.bytebuddy.jar.asm.FieldVisitor;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import java.util.*;
 
@@ -37,7 +37,7 @@ import static net.bytebuddy.matcher.ElementMatchers.isConstructor;
 import static net.bytebuddy.matcher.ElementMatchers.isMethod;
 
 /**
- * A class visitor wrapper is used in order to register an intermediate ASM {@link net.bytebuddy.jar.asm.ClassVisitor} which
+ * A class visitor wrapper is used in order to register an intermediate ASM {@link org.objectweb.asm.ClassVisitor} which
  * is applied to the main type created by a {@link net.bytebuddy.dynamic.DynamicType.Builder} but not
  * to any {@link net.bytebuddy.implementation.auxiliary.AuxiliaryType}s, if any.
  */
@@ -78,8 +78,8 @@ public interface AsmVisitorWrapper {
      * @param typePool              The type pool that was provided for the class creation.
      * @param fields                The instrumented type's fields.
      * @param methods               The instrumented type's methods non-ignored declared and virtually inherited methods.
-     * @param writerFlags           The ASM {@link net.bytebuddy.jar.asm.ClassWriter} flags to consider.
-     * @param readerFlags           The ASM {@link net.bytebuddy.jar.asm.ClassReader} flags to consider.
+     * @param writerFlags           The ASM {@link org.objectweb.asm.ClassWriter} flags to consider.
+     * @param readerFlags           The ASM {@link org.objectweb.asm.ClassReader} flags to consider.
      * @return A new {@code ClassVisitor} that usually delegates to the {@code ClassVisitor} delivered in the argument.
      */
     ClassVisitor wrap(TypeDescription instrumentedType,
@@ -444,9 +444,9 @@ public interface AsmVisitorWrapper {
         }
 
         /**
-         * Sets flags for the {@link net.bytebuddy.jar.asm.ClassWriter} this wrapper is applied to.
+         * Sets flags for the {@link org.objectweb.asm.ClassWriter} this wrapper is applied to.
          *
-         * @param flags The flags to set for the {@link net.bytebuddy.jar.asm.ClassWriter}.
+         * @param flags The flags to set for the {@link org.objectweb.asm.ClassWriter}.
          * @return A new ASM visitor wrapper that sets the supplied writer flags.
          */
         public ForDeclaredMethods writerFlags(int flags) {
@@ -454,9 +454,9 @@ public interface AsmVisitorWrapper {
         }
 
         /**
-         * Sets flags for the {@link net.bytebuddy.jar.asm.ClassReader} this wrapper is applied to.
+         * Sets flags for the {@link org.objectweb.asm.ClassReader} this wrapper is applied to.
          *
-         * @param flags The flags to set for the {@link net.bytebuddy.jar.asm.ClassReader}.
+         * @param flags The flags to set for the {@link org.objectweb.asm.ClassReader}.
          * @return A new ASM visitor wrapper that sets the supplied reader flags.
          */
         public ForDeclaredMethods readerFlags(int flags) {
@@ -514,8 +514,8 @@ public interface AsmVisitorWrapper {
              * @param methodVisitor         The original field visitor that defines the given method.
              * @param implementationContext The implementation context to use.
              * @param typePool              The type pool to use.
-             * @param writerFlags           The ASM {@link net.bytebuddy.jar.asm.ClassWriter} reader flags to consider.
-             * @param readerFlags           The ASM {@link net.bytebuddy.jar.asm.ClassReader} reader flags to consider.
+             * @param writerFlags           The ASM {@link org.objectweb.asm.ClassWriter} reader flags to consider.
+             * @param readerFlags           The ASM {@link org.objectweb.asm.ClassReader} reader flags to consider.
              * @return The wrapped method visitor.
              */
             MethodVisitor wrap(TypeDescription instrumentedType,
@@ -605,12 +605,12 @@ public interface AsmVisitorWrapper {
             private final TypePool typePool;
 
             /**
-             * The ASM {@link net.bytebuddy.jar.asm.ClassWriter} reader flags to consider.
+             * The ASM {@link org.objectweb.asm.ClassWriter} reader flags to consider.
              */
             private final int writerFlags;
 
             /**
-             * The ASM {@link net.bytebuddy.jar.asm.ClassReader} reader flags to consider.
+             * The ASM {@link org.objectweb.asm.ClassReader} reader flags to consider.
              */
             private final int readerFlags;
 
@@ -627,8 +627,8 @@ public interface AsmVisitorWrapper {
              * @param implementationContext The implementation context to use.
              * @param typePool              The type pool to use.
              * @param methods               The methods that are declared by the instrumented type or virtually inherited.
-             * @param writerFlags           The ASM {@link net.bytebuddy.jar.asm.ClassWriter} flags to consider.
-             * @param readerFlags           The ASM {@link net.bytebuddy.jar.asm.ClassReader} flags to consider.
+             * @param writerFlags           The ASM {@link org.objectweb.asm.ClassWriter} flags to consider.
+             * @param readerFlags           The ASM {@link org.objectweb.asm.ClassReader} flags to consider.
              */
             protected DispatchingVisitor(ClassVisitor classVisitor,
                                          TypeDescription instrumentedType,
@@ -686,7 +686,7 @@ public interface AsmVisitorWrapper {
          *
          * @param asmVisitorWrapper An array of {@link AsmVisitorWrapper}s where elements
          *                          at the beginning of the list are applied first, i.e. will be at the bottom of the generated
-         *                          {@link net.bytebuddy.jar.asm.ClassVisitor}.
+         *                          {@link org.objectweb.asm.ClassVisitor}.
          */
         public Compound(AsmVisitorWrapper... asmVisitorWrapper) {
             this(Arrays.asList(asmVisitorWrapper));
@@ -698,7 +698,7 @@ public interface AsmVisitorWrapper {
          *
          * @param asmVisitorWrappers A list of {@link AsmVisitorWrapper}s where elements
          *                           at the beginning of the list are applied first, i.e. will be at the bottom of the generated
-         *                           {@link net.bytebuddy.jar.asm.ClassVisitor}.
+         *                           {@link org.objectweb.asm.ClassVisitor}.
          */
         public Compound(List<? extends AsmVisitorWrapper> asmVisitorWrappers) {
             this.asmVisitorWrappers = new ArrayList<AsmVisitorWrapper>();

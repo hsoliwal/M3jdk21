@@ -22,9 +22,9 @@ import net.bytebuddy.dynamic.ClassFileLocator;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.attribute.AnnotationValueFilter;
 import net.bytebuddy.implementation.attribute.TypeAttributeAppender;
-import net.bytebuddy.jar.asm.AnnotationVisitor;
-import net.bytebuddy.jar.asm.ClassVisitor;
-import net.bytebuddy.jar.asm.Type;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Type;
 
 import java.lang.annotation.*;
 

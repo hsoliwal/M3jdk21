@@ -32,10 +32,10 @@ import net.bytebuddy.pool.TypePool;
 import net.bytebuddy.utility.JavaType;
 import net.bytebuddy.utility.OpenedClassReader;
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.Label;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
-import net.bytebuddy.jar.asm.Type;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 import java.lang.annotation.*;
 import java.security.Permission;

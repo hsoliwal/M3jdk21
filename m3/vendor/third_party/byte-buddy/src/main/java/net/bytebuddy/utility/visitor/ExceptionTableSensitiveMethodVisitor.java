@@ -15,9 +15,9 @@
  */
 package net.bytebuddy.utility.visitor;
 
-import net.bytebuddy.jar.asm.Handle;
-import net.bytebuddy.jar.asm.Label;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.Handle;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.MethodVisitor;
 
 /**
  * A {@link MethodVisitor} that adds a callback after visiting the exception table of a method.

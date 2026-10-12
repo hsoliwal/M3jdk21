@@ -27,7 +27,7 @@ import net.bytebuddy.pool.TypePool;
 import net.bytebuddy.utility.OpenedClassReader;
 import net.bytebuddy.utility.nullability.AlwaysNull;
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.*;
+import org.objectweb.asm.*;
 
 import java.util.Arrays;
 import java.util.HashSet;

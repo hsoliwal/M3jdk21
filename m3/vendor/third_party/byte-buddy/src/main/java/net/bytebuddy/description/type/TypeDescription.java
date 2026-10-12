@@ -43,10 +43,10 @@ import net.bytebuddy.utility.dispatcher.JavaDispatcher;
 import net.bytebuddy.utility.nullability.AlwaysNull;
 import net.bytebuddy.utility.nullability.MaybeNull;
 import net.bytebuddy.utility.privilege.GetSystemPropertyAction;
-import net.bytebuddy.jar.asm.Opcodes;
-import net.bytebuddy.jar.asm.Type;
-import net.bytebuddy.jar.asm.signature.SignatureVisitor;
-import net.bytebuddy.jar.asm.signature.SignatureWriter;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.signature.SignatureVisitor;
+import org.objectweb.asm.signature.SignatureWriter;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;

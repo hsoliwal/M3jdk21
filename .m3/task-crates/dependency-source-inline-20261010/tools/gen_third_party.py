@@ -88,6 +88,45 @@ BYTE_BUDDY_TRANSFORM = """      <plugin><groupId>net.bytebuddy</groupId><artifac
       </plugin>
 """
 BUILD_PLUGINS = {"byte-buddy": BYTE_BUDDY_TRANSFORM}
+SOURCE_ARTIFACT = {  # donor id -> donor id of the upstream module whose published sources build the published artifact
+    "byte-buddy-1.14.11": "byte-buddy-dep-1.14.11",  # upstream byte-buddy/pom.xml: byte-buddy = byte-buddy-dep + ASM shaded into net.bytebuddy.jar.asm
+}
+SOURCE_ONLY = set(SOURCE_ARTIFACT.values())  # inventoried as a source artifact only: never a module or image of its own
+_BB_REMAPPERS = ("AnnotationRemapper", "ClassRemapper", "FieldRemapper", "MethodRemapper", "ModuleHashesAttribute", "ModuleRemapper",
+                 "RecordComponentRemapper", "Remapper", "SignatureRemapper", "SimpleRemapper")
+UPSTREAM_SHADE = {  # donor id -> the shade step of the upstream release-tag pom (the published reduced pom drops <transformer implementation=>)
+    "byte-buddy-1.14.11": {
+        "origin": "https://github.com/raphw/byte-buddy/blob/byte-buddy-1.14.11/byte-buddy/pom.xml (sha256 f779579ac9fd188247678234b2cfb3a3d2cd51fb5a60fa32575c258d96507791), profile shade-current",
+        "inputs": [("asm-9.6", ()), ("asm-commons-9.6", ("org.ow2.asm:asm-analysis", "org.ow2.asm:asm-tree"))],  # byte-buddy-dep pom: dependencies and exclusions
+        "relocations": [("org.objectweb.asm", "net.bytebuddy.jar.asm")],
+        "filters": [("org.ow2.asm:*", (), ("META-INF/MANIFEST.MF", "**/module-info.class", "**/LICENSE", "**/NOTICE", "META-INF/maven/**")),
+                    ("org.ow2.asm:asm-commons", tuple("org/objectweb/asm/commons/%s.**" % c_ for c_ in _BB_REMAPPERS), ())],
+        "transformers": [("org.apache.maven.plugins.shade.resource.ManifestResourceTransformer", "<mainClass>net.bytebuddy.build.Plugin$Engine$Default</mainClass>")],
+        "deviations": "META-INF/maven/** also excluded from the ASM modules (Maven-built here, Gradle-built upstream); no AppendingTransformer (META-INF/LICENSE is the published, already appended text); no shaded sources jar; reduced pom under target/",
+    },
+}
+
+
+def check_transformers(xml_text: str, origin: str) -> None:
+    """Fail closed: a shade <transformer> without implementation= cannot be instantiated (dependency-reduced poms drop the attribute)."""
+    bad = re.findall(r"<transformer(?=[\s>/])(?![^>]*\bimplementation\s*=)[^>]*>", xml_text)
+    if bad:
+        raise SystemExit("SHADE_TRANSFORMER_WITHOUT_IMPLEMENTATION in %s: %d transformer(s) %s; take the shade step from the release-tag pom (UPSTREAM_SHADE)" % (origin, len(bad), bad[:2]))
+
+
+def upstream_shade_plugin(spec: dict) -> str:
+    rel = "".join("<relocation><pattern>%s</pattern><shadedPattern>%s</shadedPattern></relocation>" % r_ for r_ in spec["relocations"])
+    flt = "".join("<filter><artifact>%s</artifact>%s%s</filter>" % (a_, ("<includes>" + "".join("<include>%s</include>" % i_ for i_ in inc) + "</includes>") if inc else "",
+                                                                   ("<excludes>" + "".join("<exclude>%s</exclude>" % e_ for e_ in exc) + "</excludes>") if exc else "") for a_, inc, exc in spec["filters"])
+    trf = "".join("<transformer implementation=\"%s\">%s</transformer>" % tr_ for tr_ in spec["transformers"])
+    body = ("<executions><execution><phase>package</phase><goals><goal>shade</goal></goals><configuration>"
+            "<shadedArtifactAttached>false</shadedArtifactAttached><createDependencyReducedPom>true</createDependencyReducedPom>"
+            "<dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>"
+            "<relocations>" + rel + "</relocations><filters>" + flt + "</filters><transformers>" + trf + "</transformers></configuration></execution></executions>")
+    check_transformers(body, spec["origin"])
+    return ("      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><version>3.6.0</version>\n"
+            "        <!-- upstream shade step reproduced from " + spec["origin"] + ". Deviations: " + spec["deviations"] + ". Runs before moditect, which re-adds the descriptor to the shaded jar. -->\n"
+            "        " + body + "\n      </plugin>\n")
 KOTLIN = {"junit-jupiter-api": ("1.8.22", "1.3", "1.3", "1.8"), "junit-jupiter-params": ("1.8.22", "1.3", "1.3", "1.8")}  # kotlin compiler, apiVersion, languageVersion, jvmTarget (upstream junit 5.10.2)
 KOTLIN_BY_VERSION = {  # (artifact, version) -> (compiler, apiVersion, languageVersion, jvmTarget, extra args); upstream r5.11.4
     ("junit-jupiter-api", "5.11.4"): ("1.9.23", "1.6", "1.6", "1.8", ("-opt-in=kotlin.RequiresOptIn",)),
@@ -231,6 +270,7 @@ def published_shade_configuration(pom: Path) -> str:
         props.update({k: v.strip() for k, v in re.findall(r"<([A-Za-z0-9._-]+)>([^<]*)</\1>", pm.group(1))})
     props.update({"project.version": ver, "project.version.underscore": ver.replace(".", "_").replace("-", "_")})  # published coordinates win
     body = re.sub(r"\$\{([^}]+)\}", lambda k: props.get(k.group(1), k.group(0)), body)  # upstream build properties, published values
+    check_transformers(body, str(pom))
     return re.sub(r"\s+", " ", body).strip()
 
 
@@ -354,7 +394,13 @@ def main() -> int:
     for did, r in sorted(rows.items()):
         if only and did not in only:
             continue
-        image = Path(r["sources_dir"])
+        if did in SOURCE_ONLY:
+            print("SOURCE_ARTIFACT", did, "(sources of", ",".join(k_ for k_, v_ in SOURCE_ARTIFACT.items() if v_ == did) + ")", file=sys.stderr)
+            continue
+        if did in SOURCE_ARTIFACT and SOURCE_ARTIFACT[did] not in rows:
+            raise SystemExit("SOURCE_ARTIFACT %s of %s is not inventoried" % (SOURCE_ARTIFACT[did], did))
+        sr = rows[SOURCE_ARTIFACT[did]] if did in SOURCE_ARTIFACT else r  # the inventory row whose published sources jar is vendored
+        image = Path(sr["sources_dir"])
         st = status.get(did, "NOT_RUN")
         if r["artifact"] in EXISTING_MODULES and args.owner == "Synexia":
             ledger.append((did, "EXISTING_MODULE", EXISTING_MODULES[r["artifact"]], r["group"], r["artifact"], r["version"] + SUFFIX, st, "existing", "hand-made source module from the upstream tag (same coordinate); runner status recorded only", "", "", r["consumers"]))
@@ -503,12 +549,14 @@ def main() -> int:
         if license_src is not None:  # in-jar META-INF/LICENSE or LICENSE lands under src/main/resources, never at the module root
             shutil.copyfile(license_src, mdir / "LICENSE")
             files.append({"kind": "unmodified-legal-or-build-reference", "repository": (mdir.relative_to(args.repo) / "LICENSE").as_posix(), "sha256": sha256(license_src), "upstream": license_src.name if license_src.name.startswith("UPSTREAM_") else str(license_src.relative_to(image)).replace("\\", "/")})
-        jar = args.store / r["group"].replace(".", "/") / r["artifact"] / r["version"] / (r["artifact"] + "-" + r["version"] + "-sources.jar")
+        jar = args.store / sr["group"].replace(".", "/") / sr["artifact"] / sr["version"] / (sr["artifact"] + "-" + sr["version"] + "-sources.jar")
         binary = args.m2 / r["group"].replace(".", "/") / r["artifact"] / r["version"] / (r["artifact"] + "-" + r["version"] + ".jar")
         if not binary.is_file():
             binary = args.store / r["group"].replace(".", "/") / r["artifact"] / r["version"] / (r["artifact"] + "-" + r["version"] + ".jar")
         amn = automatic_module_name(binary)
         central = CENTRAL + r["group"].replace(".", "/") + "/" + r["artifact"] + "/" + r["version"] + "/"
+        src_central = CENTRAL + sr["group"].replace(".", "/") + "/" + sr["artifact"] + "/" + sr["version"] + "/"
+        shade_spec = UPSTREAM_SHADE.get(did, {})
         lic_name = r["licenses"].split(";")[0].split(" <")[0].strip() if not r["licenses"].startswith("(none") else ""
         if not lic_name and license_src is not None:
             head = io.open(license_src, encoding="utf-8", errors="replace").read(600).lower()
@@ -554,6 +602,14 @@ def main() -> int:
             deps.append((g_, a_, v_, BINARY_INPUT_SCOPE, True, "published-pom compile input (%s%s), binary, never shipped" % (row["scope"], ", optional" if row["optional"] == "true" else "")))
         if kcfg(r):
             deps.append(("org.jetbrains.kotlin", "kotlin-stdlib", kcfg(r)[0], "provided", True, "Kotlin standard library for the Kotlin facade, compile-only"))
+        for sdid, _excl in shade_spec.get("inputs", []):
+            sdr = rows.get(sdid)
+            gate_ = api.get(sdid)
+            if kind == "MODULE" and (sdr is None or status.get(sdid) != "PASS" or (gate_ is not None and gate_["verdict"] not in ADMISSIBLE)):
+                raise SystemExit("UPSTREAM_SHADE input %s of %s is not an admitted source module (status %s, gate %s)" % (sdid, did, status.get(sdid, "NOT_RUN"), gate_["verdict"] if gate_ else "-"))
+            if sdr is not None and (sdr["group"], sdr["artifact"]) not in req_ga:
+                req_ga.add((sdr["group"], sdr["artifact"]))
+                deps.append((sdr["group"], sdr["artifact"], sdr["version"] + SUFFIX, "compile", False, "source module, shaded into this jar by the upstream shade step (" + ", ".join("%s -> %s" % r_ for r_ in shade_spec["relocations"]) + ")" + ("; exclusions " + ", ".join(_excl) if _excl else "")))
         for b in build_inputs.get(did, []):
             g, a, v = b["coordinate"].split(":")
             if a == "lombok":
@@ -660,7 +716,7 @@ def main() -> int:
                 tag_desc = next((x_ for x_ in overlay_info.get("descriptors", []) if x_["release"] == slot), None)
                 ddst = mdir / "src/main/descriptor" / slot / "module-info.java"
                 ddst.parent.mkdir(parents=True, exist_ok=True)
-                shaded_module = r["artifact"] in SHADE_RULES or r["artifact"] in SHADE_FROM_PUBLISHED_POM
+                shaded_module = r["artifact"] in SHADE_RULES or r["artifact"] in SHADE_FROM_PUBLISHED_POM or did in UPSTREAM_SHADE
                 if not dsrc and tag_desc:  # upstream module-info.java at the release tag (overlay root)
                     shutil.copyfile(OVERLAY_ROOT / did / slot / "module-info.java", ddst)
                     files.append({"kind": "upstream-descriptor-source-at-tag", "repository": ddst.relative_to(args.repo).as_posix(), "sha256": tag_desc["sha256"],
@@ -693,8 +749,8 @@ def main() -> int:
             "donor": did, "group": r["group"], "artifact": r["artifact"], "version": r["version"],
             "coordinate": "%s:%s:%s" % (r["group"], r["artifact"], r["version"] + SUFFIX if kind == "MODULE" else r["version"]),
             "kind": kind, "status": st, "build": p["build"], "build_reason": p["reason"],
-            "sources_jar": central + r["artifact"] + "-" + r["version"] + "-sources.jar",
-            "sources_jar_sha1": r["sources_sha1"], "sources_jar_sha256": sha256(jar) if jar.is_file() else "",
+            "sources_jar": src_central + sr["artifact"] + "-" + sr["version"] + "-sources.jar",
+            "sources_jar_sha1": sr["sources_sha1"], "sources_jar_sha256": sha256(jar) if jar.is_file() else "",
             "pom": central + r["artifact"] + "-" + r["version"] + ".pom",
             "license": lic_name, "license_file": "LICENSE", "upstream": r["scm"] or r["url"], "parent": r["parent"],
             "automatic_module_name": amn, "excluded_from_compilation": excluded, "delomboked": delombok_dir is not None, "delomboked_files": len(delomboked), "resources_completed": completed, "native_binaries": natives,
@@ -703,6 +759,11 @@ def main() -> int:
             "modifications": "No upstream source changes; Maven descriptor and provenance files are Synexia composition (Apache-2.0) and do not relicense the donor.",
             "consumers": r["consumers"], "files": files, "module_descriptors": descriptor_notes or "reproduced (see src/main/descriptor)" if descriptor_execs else descriptor_notes, "multi_release_overlays": {"releases": overlay_releases, "not_reproduced": overlay_info.get("not_reproduced", [])},
         }
+        if sr is not r:
+            provenance["source_artifact"] = {"coordinate": "%s:%s:%s" % (sr["group"], sr["artifact"], sr["version"]), "sources_jar": provenance["sources_jar"], "sources_jar_sha1": sr["sources_sha1"],
+                                             "reason": "the published %s:%s:%s is built upstream from these sources plus a shade step; its own sources jar carries the relocated copy of the shaded inputs" % (r["group"], r["artifact"], r["version"])}
+        if shade_spec:
+            provenance["shade"] = {"origin": shade_spec["origin"], "inputs": [x_[0] for x_ in shade_spec["inputs"]], "relocations": ["%s -> %s" % r_ for r_ in shade_spec["relocations"]], "deviations": shade_spec["deviations"]}
         (mdir / "PROVENANCE.json").write_text(json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
         if kind == "MODULE":
             release = published_base_release(published_jar) or RELEASE.get(r["artifact"], 8)  # the published target, not a manual override
@@ -711,9 +772,11 @@ def main() -> int:
                     aggregate_release = parse_descriptor(pz.read("module-info.class"))["major"] - 44 if "module-info.class" in pz.namelist() else BUILD_JDK_RELEASE
                 release = aggregate_release
             legacy = LEGACY.get(r["artifact"])
+            dep_excl = {(rows[x_[0]]["group"], rows[x_[0]]["artifact"]): x_[1] for x_ in shade_spec.get("inputs", []) if x_[0] in rows and x_[1]}
             dep_xml = "".join(
-                "    <dependency><groupId>%s</groupId><artifactId>%s</artifactId><version>%s</version>%s%s<!-- %s --></dependency>\n"
-                % (xml(g), xml(a), xml(v), "<scope>%s</scope>" % s if s != "compile" else "", "<optional>true</optional>" if o else "", xml(f))
+                "    <dependency><groupId>%s</groupId><artifactId>%s</artifactId><version>%s</version>%s%s<!-- %s -->%s</dependency>\n"
+                % (xml(g), xml(a), xml(v), "<scope>%s</scope>" % s if s != "compile" else "", "<optional>true</optional>" if o else "", xml(f),
+                   ("<exclusions>" + "".join("<exclusion><groupId>%s</groupId><artifactId>%s</artifactId></exclusion>" % tuple(e_.split(":")) for e_ in dep_excl[(g, a)]) + "</exclusions>") if (g, a) in dep_excl else "")
                 for g, a, v, s, o, f in deps)
             compiler_cfg = ("<source>%d</source><target>%d</target>" % (legacy, legacy) if legacy else "<release>%d</release>" % release) + "<encoding>%s</encoding>" % ENCODING.get(r["artifact"], "UTF-8")
             extra_args = "".join("<arg>%s</arg>" % xml(a) for a in JAVAC_ARGS.get(r["artifact"], []))
@@ -729,13 +792,13 @@ def main() -> int:
             extra_plugins = shade_verbatim + (kotlin_plugin(kcfg(r)) if kcfg(r) else "") + ((
                 "      <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version>\n"
                 "        <!-- upstream core-mrjar.gradle: javaN overlays compiled against the JDK N apijar (patched java.base) -->\n"
-                "        <executions>" + "".join(apijar_execs) + "</executions>\n      </plugin>\n") if apijar_execs else "") + BUILD_PLUGINS.get(r["artifact"], "") + (shade_plugin(SHADE_RULES[r["artifact"]]) if r["artifact"] in SHADE_RULES else "")
+                "        <executions>" + "".join(apijar_execs) + "</executions>\n      </plugin>\n") if apijar_execs else "") + BUILD_PLUGINS.get(r["artifact"], "") + (shade_plugin(SHADE_RULES[r["artifact"]]) if r["artifact"] in SHADE_RULES else "") + (upstream_shade_plugin(shade_spec) if shade_spec else "")
             pom = f"""<!-- SPDX-License-Identifier: Apache-2.0; build integration only, upstream source remains {xml(lic_name)}. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>{xml(r["group"])}</groupId><artifactId>{xml(r["artifact"])}</artifactId><version>{xml(r["version"])}{SUFFIX}</version>
   <name>{xml(r["artifact"])} {xml(r["version"])} - unchanged upstream source build for Synexia</name>
-  <description>Source inclusion of the published {xml(r["group"])}:{xml(r["artifact"])}:{xml(r["version"])} sources jar (SHA-1 {xml(r["sources_sha1"])}); no upstream implementation changes. See PROVENANCE.json.</description>
+  <description>Source inclusion of the published {xml(sr["group"])}:{xml(sr["artifact"])}:{xml(sr["version"])} sources jar (SHA-1 {xml(sr["sources_sha1"])}){("; built as upstream builds " + xml(r["group"]) + ":" + xml(r["artifact"]) + ":" + xml(r["version"]) + " (those sources plus the shade step of the release-tag pom over the in-repo source modules)") if sr is not r else ""}; no upstream implementation changes. See PROVENANCE.json.</description>
   <url>{xml(r["url"] or central)}</url>
   <licenses><license><name>{xml(lic_name)}</name><url>{xml(central + r["artifact"] + "-" + r["version"] + ".pom")}</url><distribution>repo</distribution></license></licenses>
   <properties><project.build.sourceEncoding>{ENCODING.get(r["artifact"], "UTF-8")}</project.build.sourceEncoding></properties>
@@ -767,6 +830,7 @@ def main() -> int:
             (mdir / "verify_source.py").write_text(verify, encoding="utf-8", newline="\n")
             (mdir / ".gitattributes").write_text("src/** -text\nupstream-excluded/** -text\nLICENSE -text\nUPSTREAM_* -text\nSOURCES_MANIFEST.tsv -text\n"
                                                  "# upstream bytes are SHA-256 pinned in PROVENANCE.json; their whitespace is upstream's\n* -whitespace\n", encoding="utf-8", newline="\n")
+        shade_note = ("The jar is assembled the way upstream assembles it (" + shade_spec["origin"] + "): the shade step relocates " + ", ".join("%s to %s" % r_ for r_ in shade_spec["relocations"]) + " from the in-repo source modules " + ", ".join(x_[0] for x_ in shade_spec["inputs"]) + ", which keep their own upstream licenses and notices. No relocated copy of those sources is carried here.\n") if shade_spec and kind == "MODULE" else ""
         notices = f"""# {r["artifact"]} {r["version"]} source inclusion
 
 {r["artifact"]} is the work of its upstream authors and contributors. Copyright remains with the copyright
@@ -774,18 +838,18 @@ holders named in each unchanged source file and in the retained legal texts. Thi
 relabel upstream implementation as Synexia-original.
 
 Upstream: {r["scm"] or r["url"] or central}
-Published sources jar: {central}{r["artifact"]}-{r["version"]}-sources.jar (SHA-1 {r["sources_sha1"]})
+Published sources jar: {src_central}{sr["artifact"]}-{sr["version"]}-sources.jar (SHA-1 {sr["sources_sha1"]}){(" - the upstream source module of " + r["group"] + ":" + r["artifact"] + ":" + r["version"]) if sr is not r else ""}
 License as declared by the published pom: {lic_name}
 
 The complete upstream license text is retained in `LICENSE` ({"from the sources jar" if in_jar_license else "fetched from the upstream tag; see UPSTREAM_LICENSE.json"}){" and packaged with the source-built JAR under META-INF/third-party/" + module_dir(r) if kind == "MODULE" else ""},
 alongside this notice and `PROVENANCE.json`. Every file listed in `SOURCES_MANIFEST.tsv` retains its exact
 upstream bytes and header{(" except the " + str(len(delomboked)) + " files under src/main/java that Lombok uses: those are the Lombok 1.18.30 delombok expansion (with the upstream lombok.config kept as UPSTREAM_LOMBOK.config), each marked by a notice line, with the unchanged upstream file kept under upstream-lombok/") if delomboked else ""}. {"The Maven build descriptor and integration metadata are Synexia composition, licensed Apache-2.0; that license does not relicense the donor implementation." if kind == "MODULE" else "No build descriptor is generated: donor-superset status " + st + " (" + p["reason"] + ")."}
 {("Consumers use `" + r["group"] + ":" + r["artifact"] + ":" + r["version"] + SUFFIX + "`, compiled from these files." + (" Native libraries are not part of the published sources; consumers that need them keep the published binary." if r["artifact"] in NATIVE_IN_BINARY else "")) if kind == "MODULE" else ""}
-"""
+{shade_note}"""
         (mdir / "THIRD_PARTY_NOTICES.md").write_text(notices, encoding="utf-8", newline="\n")
         readme = f"""# {r["artifact"]} {r["version"]} source reference
 
-{"This directory compiles the unchanged " + r["artifact"] + " " + r["version"] + " sources from the published sources jar." if kind == "MODULE" else "This directory retains the unchanged " + r["artifact"] + " " + r["version"] + " published sources byte-for-byte without a build (status " + st + ": " + p["reason"] + ")."}
+{"This directory compiles the unchanged " + r["artifact"] + " " + r["version"] + " sources from the published sources jar" + ((" of " + sr["artifact"] + " " + sr["version"] + " (its upstream source module) and shades " + ", ".join(x_[0] for x_ in shade_spec["inputs"]) + " as the upstream build does") if sr is not r else "") + "." if kind == "MODULE" else "This directory retains the unchanged " + r["artifact"] + " " + r["version"] + " published sources byte-for-byte without a build (status " + st + ": " + p["reason"] + ")."}
 Donor-superset lane: build kind `{p["build"]}`{" (" + p["reason"] + ")" if p["reason"] else ""}, status `{st}`.
 {"Excluded from compilation (retained under upstream-excluded/): " + ", ".join(excluded) if excluded else ""}
 

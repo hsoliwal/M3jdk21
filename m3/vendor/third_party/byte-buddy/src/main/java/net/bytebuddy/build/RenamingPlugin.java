@@ -25,9 +25,9 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.Implementation;
 import net.bytebuddy.matcher.ElementMatcher;
 import net.bytebuddy.pool.TypePool;
-import net.bytebuddy.jar.asm.ClassVisitor;
-import net.bytebuddy.jar.asm.commons.ClassRemapper;
-import net.bytebuddy.jar.asm.commons.Remapper;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.commons.ClassRemapper;
+import org.objectweb.asm.commons.Remapper;
 
 import java.util.*;
 import java.util.regex.Matcher;

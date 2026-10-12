@@ -35,7 +35,7 @@ import net.bytebuddy.implementation.bytecode.constant.TextConstant;
 import net.bytebuddy.implementation.bytecode.member.MethodInvocation;
 import net.bytebuddy.utility.JavaModule;
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;

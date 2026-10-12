@@ -1,6 +1,6 @@
 # byte-buddy 1.14.11 source reference
 
-This directory compiles the unchanged byte-buddy 1.14.11 sources from the published sources jar.
+This directory compiles the unchanged byte-buddy 1.14.11 sources from the published sources jar of byte-buddy-dep 1.14.11 (its upstream source module) and shades asm-9.6, asm-commons-9.6 as the upstream build does.
 Donor-superset lane: build kind `commands` (NOT_IN_LOCK), status `PASS`.
 
 

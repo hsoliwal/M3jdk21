@@ -49,8 +49,8 @@ import net.bytebuddy.pool.TypePool;
 import net.bytebuddy.utility.*;
 import net.bytebuddy.utility.nullability.MaybeNull;
 import net.bytebuddy.utility.visitor.LocalVariableAwareMethodVisitor;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 import java.io.Serializable;
 import java.lang.annotation.*;

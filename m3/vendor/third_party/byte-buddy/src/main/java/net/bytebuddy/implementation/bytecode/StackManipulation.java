@@ -17,7 +17,7 @@ package net.bytebuddy.implementation.bytecode;
 
 import net.bytebuddy.build.HashCodeAndEqualsPlugin;
 import net.bytebuddy.implementation.Implementation;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -17,8 +17,8 @@ package net.bytebuddy.implementation.bytecode;
 
 import net.bytebuddy.description.type.TypeDefinition;
 import net.bytebuddy.implementation.Implementation;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * Duplicates a value that is lying on top of the stack.

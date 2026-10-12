@@ -8,9 +8,10 @@ m3/vendor/third_party/asm-9.10.1	PASS	4	K:\m3-work\runs\20261007-m3jdk21-apex\c6
 m3/vendor/third_party/asm-9.6	PASS	6	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_asm-9.6.log	-
 m3/vendor/third_party/asm-tree	PASS	5	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_asm-tree.log	-
 m3/vendor/third_party/asm-analysis	PASS	4	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_asm-analysis.log	-
+m3/vendor/third_party/asm-commons	PASS	17	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_asm-commons.log	-
 m3/vendor/third_party/asm-util	PASS	5	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_asm-util.log	-
-m3/vendor/third_party/byte-buddy	PASS	30	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_byte-buddy.log	-
-m3/vendor/third_party/assertj-core	PASS	20	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_assertj-core.log	-
+m3/vendor/third_party/byte-buddy	PASS	83	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_byte-buddy.log	-
+m3/vendor/third_party/assertj-core	PASS	53	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_assertj-core.log	-
 m3/vendor/third_party/checker-qual-3.37.0	PASS	6	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_checker-qual-3.37.0.log	-
 m3/vendor/third_party/error_prone_annotations	PASS	4	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_error_prone_annotations.log	-
 m3/vendor/third_party/caffeine	PASS	36	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_caffeine.log	-

@@ -45,10 +45,10 @@ import net.bytebuddy.utility.CompoundList;
 import net.bytebuddy.utility.JavaConstant;
 import net.bytebuddy.utility.RandomString;
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.ClassVisitor;
-import net.bytebuddy.jar.asm.FieldVisitor;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -516,8 +516,8 @@ public interface Implementation extends InstrumentedType.Prepareable {
     /**
      * The context for an implementation application. An implementation context represents a mutable data structure
      * where any registration is irrevocable. Calling methods on an implementation context should be considered equally
-     * sensitive as calling a {@link net.bytebuddy.jar.asm.MethodVisitor}. As such, an implementation context and a
-     * {@link net.bytebuddy.jar.asm.MethodVisitor} are complementary for creating an new Java type.
+     * sensitive as calling a {@link org.objectweb.asm.MethodVisitor}. As such, an implementation context and a
+     * {@link org.objectweb.asm.MethodVisitor} are complementary for creating an new Java type.
      */
     interface Context extends MethodAccessorFactory {
 

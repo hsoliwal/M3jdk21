@@ -26,10 +26,10 @@ import net.bytebuddy.utility.Invoker;
 import net.bytebuddy.utility.MethodComparator;
 import net.bytebuddy.utility.nullability.MaybeNull;
 import net.bytebuddy.utility.privilege.GetSystemPropertyAction;
-import net.bytebuddy.jar.asm.ClassWriter;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
-import net.bytebuddy.jar.asm.Type;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -46,7 +46,7 @@ import net.bytebuddy.matcher.ElementMatchers;
 import net.bytebuddy.utility.CompoundList;
 import net.bytebuddy.utility.OpenedClassReader;
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.*;
+import org.objectweb.asm.*;
 
 import java.lang.reflect.Method;
 import java.security.PrivilegedAction;

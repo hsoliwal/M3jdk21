@@ -16,7 +16,7 @@
 package net.bytebuddy.description.modifier;
 
 import net.bytebuddy.build.HashCodeAndEqualsPlugin;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 
 import java.util.Arrays;
 import java.util.Collection;

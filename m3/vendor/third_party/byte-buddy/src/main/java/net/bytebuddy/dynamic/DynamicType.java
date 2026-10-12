@@ -42,8 +42,8 @@ import net.bytebuddy.utility.CompoundList;
 import net.bytebuddy.utility.FileSystem;
 import net.bytebuddy.utility.nullability.MaybeNull;
 import net.bytebuddy.utility.visitor.ContextClassVisitor;
-import net.bytebuddy.jar.asm.ClassVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 
 import java.io.*;
 import java.lang.annotation.Annotation;
@@ -205,7 +205,7 @@ public interface DynamicType extends ClassFileLocator {
     interface Builder<T> {
 
         /**
-         * Applies the supplied {@link AsmVisitorWrapper} onto the {@link net.bytebuddy.jar.asm.ClassVisitor} during building a dynamic type.
+         * Applies the supplied {@link AsmVisitorWrapper} onto the {@link org.objectweb.asm.ClassVisitor} during building a dynamic type.
          * Using an ASM visitor, it is possible to manipulate byte code directly. Byte Buddy does not validate directly created byte code
          * and it remains the responsibility of the visitor's implementor to generate legal byte code. If several ASM visitor wrappers
          * are registered, they are applied on top of another in their registration order.

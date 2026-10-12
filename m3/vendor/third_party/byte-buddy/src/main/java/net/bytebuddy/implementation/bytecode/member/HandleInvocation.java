@@ -19,8 +19,8 @@ import net.bytebuddy.build.HashCodeAndEqualsPlugin;
 import net.bytebuddy.implementation.Implementation;
 import net.bytebuddy.implementation.bytecode.StackManipulation;
 import net.bytebuddy.utility.JavaConstant;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * An exact invocation of a method handle with a polymorphic signature.

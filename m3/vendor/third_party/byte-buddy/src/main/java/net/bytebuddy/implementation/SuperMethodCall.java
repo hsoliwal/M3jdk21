@@ -23,7 +23,7 @@ import net.bytebuddy.implementation.bytecode.Removal;
 import net.bytebuddy.implementation.bytecode.StackManipulation;
 import net.bytebuddy.implementation.bytecode.member.MethodReturn;
 import net.bytebuddy.implementation.bytecode.member.MethodVariableAccess;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 /**
  * This implementation will create a new method which simply calls its super method. If no such method is defined,

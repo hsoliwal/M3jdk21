@@ -16,8 +16,8 @@
 package net.bytebuddy.implementation.bytecode;
 
 import net.bytebuddy.implementation.Implementation;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * Throws a {@link java.lang.Throwable} which must lie on top of the stack when this stack manipulation is called.

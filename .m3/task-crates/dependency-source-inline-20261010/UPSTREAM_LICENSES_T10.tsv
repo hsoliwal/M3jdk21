@@ -1,0 +1,2 @@
+donor	url	status
+asm-commons-9.6	https://gitlab.ow2.org/asm/asm/-/raw/ASM_9_6/LICENSE.txt	OK:293b6af371ee EXACT_TAG ASM_9_6 (same repository as asm)

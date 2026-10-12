@@ -57,8 +57,8 @@ import net.bytebuddy.matcher.LatentMatcher;
 import net.bytebuddy.utility.*;
 import net.bytebuddy.utility.nullability.MaybeNull;
 import net.bytebuddy.utility.privilege.GetSystemPropertyAction;
-import net.bytebuddy.jar.asm.MethodVisitor;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;

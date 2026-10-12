@@ -17,7 +17,7 @@ package net.bytebuddy.matcher;
 
 import net.bytebuddy.build.HashCodeAndEqualsPlugin;
 import net.bytebuddy.description.ModifierReviewable;
-import net.bytebuddy.jar.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 
 /**
  * An element matcher that matches a byte code element by its modifiers.

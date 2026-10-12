@@ -29,7 +29,7 @@ import net.bytebuddy.matcher.FilterableList;
 import net.bytebuddy.utility.JavaConstant;
 import net.bytebuddy.utility.nullability.AlwaysNull;
 import net.bytebuddy.utility.nullability.MaybeNull;
-import net.bytebuddy.jar.asm.Type;
+import org.objectweb.asm.Type;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.GenericDeclaration;

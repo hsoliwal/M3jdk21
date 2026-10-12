@@ -16,8 +16,8 @@
 package net.bytebuddy.utility.visitor;
 
 import net.bytebuddy.utility.OpenedClassReader;
-import net.bytebuddy.jar.asm.Label;
-import net.bytebuddy.jar.asm.MethodVisitor;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.MethodVisitor;
 
 /**
  * A method visitor that maps the first available line number information, if available, to the beginning of the method.
