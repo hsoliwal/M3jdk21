@@ -14,7 +14,7 @@ final class M3SynexiaCanonicalDagBindingTest {
         M3SynexiaCanonicalDagBinding.requireExactCandidate(
                 "hsoliwal/com.synexia",
                 "m3/canonical-recipe-dag-orchestrators-20261012",
-                "7c6dc007de99fde071624d4291ff872390ce5040af",
+                "7c6dc007de99fdeac14dd86f4fdc594bf05953fd",
                 10630,
                 "com.synexia.rewrite.M3RecipeDagManifest",
                 "com.synexia.rewrite.M3RecipeOrchestratorPlans",
