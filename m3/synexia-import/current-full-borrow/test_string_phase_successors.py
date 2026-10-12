@@ -39,12 +39,12 @@ class StringTargetSuccessorTest(unittest.TestCase):
             with patch.object(phase, "SUCCESSORS", path):
                 callback()
 
-    def test_exact_three_successors_and_repeated_historical_relation(self):
+    def test_exact_four_successors_and_repeated_historical_relation(self):
         mapping = self.mapping()
         mapping.append(mapping[0].copy())
         result = phase.approved_successors(mapping)
         self.assertEqual(phase.EXPECTED_SUCCESSOR_PATHS, set(result))
-        self.assertEqual(3, len(result))
+        self.assertEqual(4, len(result))
 
     def test_actual_owner_sources_match_exact_receipts(self):
         receipts = phase.approved_successors(self.mapping())
@@ -53,6 +53,34 @@ class StringTargetSuccessorTest(unittest.TestCase):
             self.assertTrue(path.is_file(), target)
             self.assertEqual(row["successor_git_blob"], phase.git_blob(path), target)
             phase.validate_successor_source(target, path.read_text(encoding="utf-8"))
+
+    def test_pool_concat_guard_is_required_and_precedes_coalescing(self):
+        path = "src/java.base/share/classes/java/lang/M3StringPool.java"
+        source = (phase.ROOT / path).read_text(encoding="utf-8")
+        phase.validate_successor_source(path, source)
+
+        guard = (
+            "        if ((long) left.length() + right.length() > Integer.MAX_VALUE) {\n"
+            '            throw new OutOfMemoryError("Required length exceeds implementation limit");\n'
+            "        }\n"
+        )
+        coalesce = (
+            "        if (left.owner() == right.owner() && left.end() == right.start()) {\n"
+            "            return M3String.range(\n"
+            "                    left.owner(), left.start(), Math.addExact(left.length(), right.length()));\n"
+            "        }\n"
+        )
+        self.assertEqual(1, source.count(guard))
+        self.assertEqual(1, source.count(coalesce))
+
+        removed = source.replace(guard, "", 1)
+        with self.assertRaisesRegex(ValueError, "responsibility lost|oversize guard"):
+            phase.validate_successor_source(path, removed)
+
+        moved = source.replace(guard + coalesce, coalesce + guard, 1)
+        self.assertNotEqual(source, moved)
+        with self.assertRaisesRegex(ValueError, "oversize guard"):
+            phase.validate_successor_source(path, moved)
 
     def test_duplicate_successor_refuses(self):
         rows = self.read_rows()

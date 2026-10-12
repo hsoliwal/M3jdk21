@@ -32,6 +32,7 @@ EXPECTED_SUCCESSOR_PATHS = {
     "src/java.base/share/classes/java/lang/M3String.java",
     "src/java.base/share/classes/java/lang/M3StringFacts.java",
     "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+    "src/java.base/share/classes/java/lang/M3StringPool.java",
 }
 SUCCESSOR_MARKERS = {
     "src/java.base/share/classes/java/lang/M3String.java": (
@@ -56,6 +57,15 @@ SUCCESSOR_MARKERS = {
         "final long[] masks;",
         "char candidate = source.charAt(blockStart + firstOffsets[mid]);",
         "MAX_SOURCE_UNITS * (Byte.BYTES + Long.BYTES)",
+    ),
+    "src/java.base/share/classes/java/lang/M3StringPool.java": (
+        "static M3String concat(M3String left, M3String right) {",
+        "if (left.length() == 0) return right;",
+        "if (right.length() == 0) return left;",
+        "if ((long) left.length() + right.length() > Integer.MAX_VALUE) {",
+        'throw new OutOfMemoryError("Required length exceeds implementation limit");',
+        "if (left.owner() == right.owner() && left.end() == right.start()) {",
+        "return concatBalanced(left, right);",
     ),
 }
 
@@ -162,6 +172,33 @@ def validate_successor_source(path: str, source: str) -> None:
         exact = block[1].split("private static final class Entry {", 1)[0]
         if re.search(r"(?m)^\s*(?:final\s+)?char\s*\[\s*\]\s+\w+\s*;", exact):
             raise ValueError("position-mask successor reintroduced retained char[] spelling")
+
+    if path.endswith("M3StringPool.java"):
+        signature = "    static M3String concat(M3String left, M3String right) {"
+        if source.count(signature) != 1:
+            raise ValueError("M3StringPool concat owner missing or duplicated")
+        block = source.split(signature, 1)[1].split(
+            "    private static M3String concatBalanced(", 1
+        )
+        if len(block) != 2:
+            raise ValueError("M3StringPool concat boundary missing")
+        concat = block[0]
+        required_order = (
+            "if (left.length() == 0) return right;",
+            "if (right.length() == 0) return left;",
+            "if ((long) left.length() + right.length() > Integer.MAX_VALUE) {",
+            'throw new OutOfMemoryError("Required length exceeds implementation limit");',
+            "if (left.owner() == right.owner() && left.end() == right.start()) {",
+            "return concatBalanced(left, right);",
+        )
+        if any(concat.count(fragment) != 1 for fragment in required_order):
+            raise ValueError("M3StringPool concat oversize guard missing or duplicated")
+        positions = [concat.index(fragment) for fragment in required_order]
+        if positions != sorted(positions):
+            raise ValueError(
+                "M3StringPool concat oversize guard must remain after empty fast paths "
+                "and before range coalescing or tuple fallback"
+            )
 
 
 def estate_snapshot() -> tuple[str, str]:
