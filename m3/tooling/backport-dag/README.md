@@ -114,6 +114,24 @@ emits `atom-evidence.tsv` beside the framework projections.
 
 These files intentionally have no authority to accept a backport by themselves.
 
+## Synexia canonical DAG custody
+
+The local M3JDK21 DAG remains the richer product-side compatibility/build/promotion authority.
+
+`M3SynexiaCanonicalDagBinding` records the exact upstream Synexia portable-DAG candidate and
+required invariant laws. The current binding points at Synexia PR #10630 and is intentionally
+non-executable while that PR remains draft/pending unified proof.
+
+Until a later receipt changes both upstream flags to proven values:
+
+- no local DAG dependency is added;
+- no JDK source mutation is authorized;
+- no semantic-equivalence decision is inferred;
+- no promotion authority is granted.
+
+This keeps portable recipe/orchestrator ownership in Synexia without weakening M3JDK21's existing
+scope, packet, build, jtreg or serial-promotion gates.
+
 ## Coverage
 
 The semantic DAG kernel is gated at 99% line and branch coverage. Tests prove cycle rejection,

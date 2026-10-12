@@ -297,6 +297,23 @@ scheduler projections of the same DAG; Drools/KIE remains admission/rule evidenc
 The upstream GitHub Actions DAG run was created but produced no jobs. The custody receipt therefore
 records `UPSTREAM_MERGED_ACTIONS_STARTUP_BLOCKED_NO_JOBS`; no hosted green-build claim is inferred.
 
+## Synexia canonical small-recipe DAG custody
+
+M3JDK21 keeps its richer product-side backport DAG as local build/promotion authority, but portable
+small-recipe DAG/orchestrator semantics are canonically owned in Synexia.
+
+`m3/tooling/backport-dag/M3SynexiaCanonicalDagBinding` binds the exact Synexia candidate PR/commit
+and required laws. Until that upstream candidate is merged and its unified proof is green, the
+binding is pre-admission evidence only and returns:
+
+- `executableBackportDependency=false`;
+- `sourceMutationAuthority=false`;
+- `semanticEquivalenceAuthority=false`;
+- `promotionAuthority=false`.
+
+This prevents an unproven scheduler/control-plane handoff from silently entering JDK source
+backport execution.
+
 ## Backport packet
 
 Each actual backport must record:
