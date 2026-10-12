@@ -1,0 +1,352 @@
+name: M3 JEP 423 current materialization
+
+on:
+  push:
+    branches:
+      - "m3/jep423-materialize-current-*"
+    paths:
+      - "m3/backports/**"
+      - "m3/tooling/backport-dag/**"
+      - ".github/workflows/m3-jep423-current-materialize.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  materialize-and-prove:
+    if: \${{ !contains(github.event.head_commit.message || '', '[m3-jep423-materialized]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: 1 - Diff hygiene and unit proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 -m py_compile \
+            m3/backports/current_tree_preimage_inventory.py \
+            m3/backports/file_delta_inventory.py \
+            m3/backports/generate_recipe_crates.py \
+            m3/backports/materialize_generated_crates.py \
+            m3/backports/recipes/jep-423-region-pinning/validate_lineage.py \
+            m3/backports/recipes/jep-423-region-pinning/validate_current_admission.py
+          (
+            cd m3/backports
+            python3 -m unittest -v \
+              test_current_tree_preimage_inventory.py \
+              test_file_delta_inventory.py \
+              test_generate_recipe_crates.py \
+              test_materialize_generated_crates.py \
+              test_jep423_lineage.py \
+              test_jep423_current_admission.py
+          )
+
+      - name: 2 - Fetch exact JDK21 baseline and full JEP423 repair lineage
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP/upstream-jdk" init -q
+          git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch \
+            --filter=blob:none --no-tags origin \
+            "refs/tags/jdk-21+35:refs/tags/jdk-21+35" \
+            "refs/tags/jdk-22+36:refs/tags/jdk-22+36" \
+            "38cfb220ddadbb401cc15f313aadb8234f626210" \
+            "8643cc21333c6b51242ed3b9295b25f372244755" \
+            "0d5f5e15d43f94a79c6133baecd5af217365d176"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+
+      - name: 3 - Validate lineage and current-tree admission
+        shell: bash
+        run: |
+          set -euo pipefail
+          packet=m3/backports/recipes/jep-423-region-pinning
+          python3 "$packet/validate_lineage.py"
+          mkdir -p "$RUNNER_TEMP/jep423"
+          python3 m3/backports/current_tree_preimage_inventory.py \
+            --root . \
+            --paths-file "$packet/CUMULATIVE_ADMIT_PATHS.txt" \
+            --out "$RUNNER_TEMP/jep423/CURRENT_PREIMAGES.tsv" \
+            --baseline-git "$UPSTREAM" \
+            --baseline-ref jdk-21+35 \
+            --admission-out "$RUNNER_TEMP/jep423/CURRENT_TREE_FILE_ADMISSION.tsv" \
+            --mechanical-paths-out "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt"
+          python3 "$packet/validate_current_admission.py" \
+            --packet "$packet" \
+            --admission "$RUNNER_TEMP/jep423/CURRENT_TREE_FILE_ADMISSION.tsv"
+
+      - name: 4 - Generate one source-sealed FILE crate per admitted path
+        shell: bash
+        run: |
+          set -euo pipefail
+          packet=m3/backports/recipes/jep-423-region-pinning
+          python3 m3/backports/file_delta_inventory.py \
+            --repo "$UPSTREAM" \
+            --release 22 \
+            --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176 \
+            --out "$RUNNER_TEMP/jep423/JDK21_TO_JEP423_FINAL.tsv"
+          python3 m3/backports/generate_recipe_crates.py \
+            --repo "$UPSTREAM" \
+            --release 22 \
+            --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176 \
+            --paths-file "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt" \
+            --donor-map "$packet/PATH_DONOR_OVERRIDES.tsv" \
+            --crate-size 1 \
+            --include-native \
+            --include-text \
+            --out "$RUNNER_TEMP/jep423/file-atoms"
+          python3 "$packet/validate_current_admission.py" \
+            --packet "$packet" \
+            --runner "$RUNNER_TEMP/jep423"
+
+      - name: 5 - Prove scoped recipe DAG before source mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv" \
+            exec:java
+
+      - name: 6 - Check exact preimages then materialize recipe output
+        shell: bash
+        run: |
+          set -euo pipefail
+          generated="$RUNNER_TEMP/jep423/file-atoms"
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$generated" \
+            --mode check \
+            --require-one-target-per-crate \
+            --receipt "$RUNNER_TEMP/jep423/preimage.tsv"
+          test -z "$(git status --porcelain=v1 -uall)"
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$generated" \
+            --mode apply \
+            --require-one-target-per-crate \
+            --receipt "$RUNNER_TEMP/jep423/apply.tsv"
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$generated" \
+            --mode verify-post \
+            --require-one-target-per-crate \
+            --receipt "$RUNNER_TEMP/jep423/postimage.tsv"
+          before="$(git diff --binary | sha256sum | awk '{print $1}')"
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$generated" \
+            --mode apply \
+            --require-one-target-per-crate
+          after="$(git diff --binary | sha256sum | awk '{print $1}')"
+          test "$before" = "$after"
+          git diff --check
+
+      - name: 7 - Prove exactly the generated 62 FILE targets changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os
+          import subprocess
+          from pathlib import Path
+
+          generated = Path(os.environ["RUNNER_TEMP"]) / "jep423" / "file-atoms"
+          expected = set()
+          for root in (
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned",
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text",
+          ):
+              if not root.exists():
+                  continue
+              for manifest in root.glob("*/manifest.tsv"):
+                  for line in manifest.read_text(encoding="utf-8").splitlines():
+                      if line and not line.startswith("#"):
+                          expected.add(line.split("\t", 1)[0])
+
+          actual = {
+              line[3:]
+              for line in subprocess.check_output(
+                  ["git", "status", "--porcelain=v1", "-uall"], text=True
+              ).splitlines()
+              if line
+          }
+          if actual != expected:
+              raise SystemExit(
+                  "JEP423 changed-path fence failed\n"
+                  f"expected={sorted(expected)}\nactual={sorted(actual)}"
+              )
+          if len(actual) != 62:
+              raise SystemExit(f"JEP423 expected 62 changes, got {len(actual)}")
+          print("JEP423_CHANGED_PATHS=62")
+          PY
+
+      - name: 8 - Install focused OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf make gcc g++ zip unzip \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+
+      - name: 9 - Configure and build fastdebug JDK image
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure \
+            --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=fastdebug \
+            --with-jvm-variants=server \
+            --disable-warnings-as-errors
+          make JOBS=2 images
+
+      - name: 10 - Run pinned-object G1 JNI and JFR regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="\
+          test/hotspot/jtreg/gc/g1/pinnedobjs \
+          test/hotspot/jtreg/gc/g1/plab/TestPLABEvacuationFailure.java \
+          test/hotspot/jtreg/gc/g1/TestGCLogMessages.java \
+          test/hotspot/jtreg/gc/stress/gclocker/TestExcessGCLockerCollections.java \
+          test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/TestJNIBlockFullGC.java \
+          test/jdk/jdk/jfr/event/gc/collection/TestG1ParallelPhases.java \
+          test/jdk/jdk/jfr/event/gc/collection/TestGCCauseWithG1ConcurrentMark.java \
+          test/jdk/jdk/jfr/event/gc/collection/TestGCCauseWithG1FullCollection.java \
+          test/jdk/jdk/jfr/event/gc/detailed/TestGCLockerEvent.java"
+
+      - name: 11 - Write proof receipt after all gates pass
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt=m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+          post_root="$(sha256sum "$RUNNER_TEMP/jep423/postimage.tsv" | awk '{print $1}')"
+          {
+            printf 'field\tvalue\n'
+            printf 'jep\t423\n'
+            printf 'title\tRegion Pinning for G1\n'
+            printf 'classification\tCOMPATIBLE_RUNTIME\n'
+            printf 'proof_base\t%s\n' "$GITHUB_SHA"
+            printf 'implementation_commit\t38cfb220ddadbb401cc15f313aadb8234f626210\n'
+            printf 'followup_commit_1\t8643cc21333c6b51242ed3b9295b25f372244755\n'
+            printf 'followup_commit_2\t0d5f5e15d43f94a79c6133baecd5af217365d176\n'
+            printf 'source_materialized\ttrue\n'
+            printf 'materialized_paths\t62\n'
+            printf 'preserved_java21_deletions\t2\n'
+            printf 'recipe_scope\tFILE_THEN_MODULE_MULTI_MODULE_PROOF\n'
+            printf 'recipe_replay_fixed_point\tPASS\n'
+            printf 'openjdk_fastdebug_build\tPASS\n'
+            printf 'focused_g1_jni_jfr_jtreg\tPASS\n'
+            printf 'postimage_receipt_sha256\t%s\n' "$post_root"
+            printf 'workflow_run\t%s\n' "$GITHUB_RUN_ID"
+            printf 'workflow_attempt\t%s\n' "$GITHUB_RUN_ATTEMPT"
+            printf 'canonical_readback\tPENDING_POST_COMMIT_RUN\n'
+            printf 'promotion\tNOT_AUTHORIZED\n'
+            printf 'next_action\tPOST_COMMIT_READBACK_THEN_MODULE_MULTI_MODULE_ACCEPTANCE_REVIEW\n'
+          } > "$receipt"
+
+      - name: 12 - Commit only proven recipe output and receipt
+        shell: bash
+        env:
+          BRANCH_NAME: \${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          git add -A
+          git diff --cached --check
+          git config user.name "m3-recipe-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git commit -m "m3: materialize JEP423 recipe output [m3-jep423-materialized]"
+          git push origin "HEAD:\$BRANCH_NAME"
+
+      - name: 13 - Upload materialization proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jep423-current-materialization-\${{ github.run_id }}
+          path: |
+            \${{ runner.temp }}/jep423
+            build/*/test-results/**
+          if-no-files-found: warn
+          retention-days: 30
+
+  canonical-readback:
+    if: \${{ contains(github.event.head_commit.message || '', '[m3-jep423-materialized]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: 1 - Require materialization receipt
+        run: test -s m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+
+      - name: 2 - Fetch exact lineage donor
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP/upstream-jdk" init -q
+          git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch \
+            --filter=blob:none --no-tags origin \
+            "0d5f5e15d43f94a79c6133baecd5af217365d176" \
+            "38cfb220ddadbb401cc15f313aadb8234f626210"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+
+      - name: 3 - Regenerate FILE crates and verify committed postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          packet=m3/backports/recipes/jep-423-region-pinning
+          mkdir -p "$RUNNER_TEMP/jep423"
+          cp "$packet/CUMULATIVE_ADMIT_PATHS.txt" "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt"
+          python3 m3/backports/generate_recipe_crates.py \
+            --repo "$UPSTREAM" \
+            --release 22 \
+            --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176 \
+            --paths-file "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt" \
+            --donor-map "$packet/PATH_DONOR_OVERRIDES.tsv" \
+            --crate-size 1 \
+            --include-native \
+            --include-text \
+            --out "$RUNNER_TEMP/jep423/file-atoms"
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$RUNNER_TEMP/jep423/file-atoms" \
+            --mode verify-post \
+            --require-one-target-per-crate \
+            --receipt "$RUNNER_TEMP/jep423/readback.tsv"
+          git diff --check
+          test -z "$(git status --porcelain=v1 -uall)"
+
+      - name: 4 - Confirm proof receipt remains non-promoting
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F $'source_materialized\ttrue' m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'recipe_replay_fixed_point\tPASS' m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'openjdk_fastdebug_build\tPASS' m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'focused_g1_jni_jfr_jtreg\tPASS' m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_RECEIPT.tsv

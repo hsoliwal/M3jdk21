@@ -38,14 +38,53 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             self.assertTrue((ROOT.parent / row["legacy_path"]).is_file(), row["legacy_path"])
             self.assertTrue((ROOT.parent / row["canonical_path"]).is_file(), row["canonical_path"])
 
+    def test_pending_synexia_scope_migration_is_pinned_but_not_claimed_borrowed(self) -> None:
+        ownership = ROOT / "compatibility" / "synexia-recipe-ownership.tsv"
+        with ownership.open(encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle, delimiter="\t"))
+
+        pending = [
+            row for row in rows
+            if row["state"].startswith("SYNEXIA_CANONICAL_PENDING_MERGE")
+        ]
+        self.assertEqual(8, len(pending))
+        self.assertEqual(
+            {
+                "scope-contract-mode",
+                "scope-policy",
+                "scope-registry",
+                "file-fixed-point",
+                "visibility-level",
+                "visibility-inventory",
+                "verification-plan",
+                "multipass-planner",
+            },
+            {row["family"] for row in pending},
+        )
+        for row in pending:
+            self.assertEqual(
+                "700cc1765c959a85b5a05249e2c2a08c571616ca",
+                row["synexia_revision"],
+            )
+            self.assertTrue(
+                row["canonical_path"].startswith(
+                    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/"
+                )
+            )
+            self.assertEqual(40, len(row["synexia_git_blob"]))
+            self.assertFalse(
+                (ROOT.parent / row["canonical_path"]).exists(),
+                "pending external canonical path must not masquerade as local borrowed custody",
+            )
+
     def test_policy_is_consumer_only_for_reusable_m3_surfaces(self) -> None:
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
         # The three A3/JNI receiver rows were admitted after the original 16-row freeze.
         # Keep exact cardinality and reject duplicate surfaces; do not relax ownership rules.
-        self.assertEqual(19, len(rows))
-        self.assertEqual(19, len({row["local_surface"] for row in rows}))
+        self.assertEqual(23, len(rows))
+        self.assertEqual(23, len({row["local_surface"] for row in rows}))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
@@ -54,8 +93,6 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
 
         by_surface = {row["local_surface"]: row for row in rows}
         for surface in (
-            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/**",
-            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/**",
             "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**",
             "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/**",
             "m3/indexdb/**",
@@ -73,6 +110,28 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**"
             ]["canonical_owner"],
         )
+
+        scope_expectations = {
+            "M3EditScope.java":
+                ("RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3EditScope", "true"),
+            "M3ScopeInference.java":
+                ("TARGET_PRODUCT_ADAPTER", "com.synexia.rewrite.M3ScopeInference", "true"),
+            "M3ContractMode.java":
+                ("RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3ContractMode", "true"),
+            "M3RecipeScopePolicy.java":
+                ("TARGET_PRODUCT_ADAPTER", "com.synexia.rewrite.M3RecipeScopePolicy", "true"),
+            "M3RecipeScopeRegistry.java":
+                ("TARGET_PRODUCT_ADAPTER", "com.synexia.rewrite.M3RecipeScopeRegistry", "true"),
+        }
+        for file_name, expected in scope_expectations.items():
+            surface = (
+                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/"
+                + file_name
+            )
+            row = by_surface[surface]
+            self.assertEqual(expected[0], row["disposition"], surface)
+            self.assertEqual(expected[1], row["canonical_owner"], surface)
+            self.assertEqual(expected[2], row["handoff_required"], surface)
 
         self.assertEqual(
             "RECEIVER_ADAPTER_ONLY",
@@ -147,9 +206,9 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with RESIDUE.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(22, len(rows))
+        self.assertEqual(17, len(rows))
         frozen = {row["path"]: row for row in rows}
-        self.assertEqual(22, len(frozen))
+        self.assertEqual(17, len(frozen))
 
         actual: set[str] = set()
         for exact in (
@@ -160,7 +219,6 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
                 actual.add("m3/" + exact)
 
         for directory in (
-            "tooling/migration-recipes/src/main/java/com/m3/rewrite/scope",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/a3",
@@ -196,7 +254,10 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
 
         a3 = rows["m3/tooling/a3/src/main/java/com/m3/a3/A3Lab.java"]
         self.assertEqual("TARGET_PROOF_CONSUMER", a3["disposition"])
-        self.assertEqual("com.synexia.rewrite.atom", a3["canonical_owner"])
+        self.assertEqual(
+            "com.synexia.rewrite.M3PureIntConvergenceRecipe",
+            a3["canonical_owner"],
+        )
         self.assertEqual("true", a3["handoff_required"])
 
         lab = (
@@ -212,10 +273,10 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             / "A3Lab.java"
         ).read_text(encoding="utf-8")
         self.assertIn(
-            "import com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe;", lab
+            "import com.synexia.rewrite.M3PureIntAtomizeRecipe;", lab
         )
         self.assertIn(
-            "import com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe;", lab
+            "import com.synexia.rewrite.M3PureIntPatternizeRecipe;", lab
         )
         self.assertNotIn(
             "import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;", lab
@@ -228,14 +289,15 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             encoding="utf-8"
         )
         for owner in (
-            "M3AtomizePureIntReturnRecipe",
-            "M3InventoryPureIntAtomCandidates",
-            "M3PatternizePureIntAtomRecipe",
-            "M3DocumentPureIntAtomRecipe",
+            "M3PureIntAtomizeRecipe",
+            "M3PureIntInventoryRecipe",
+            "M3PureIntPatternizeRecipe",
+            "M3PureIntDocumentationRecipe",
             "M3PureIntConvergenceRecipe",
         ):
-            self.assertIn(f"com.synexia.rewrite.atom.{owner}", catalogue)
-            self.assertNotIn(f"com.m3.rewrite.atom.{owner}", catalogue)
+            self.assertIn(f"com.synexia.rewrite.{owner}", catalogue)
+        self.assertNotIn("com.synexia.rewrite.atom.", catalogue)
+        self.assertNotIn("com.m3.rewrite.atom.", catalogue)
 
 
     def test_canonical_home_pin_binds_exact_synexia_manifest(self) -> None:

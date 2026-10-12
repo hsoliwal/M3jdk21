@@ -33,7 +33,7 @@ FACT_COLUMNS = ("shard_id", "image_row", "utf16_units", "java_hash", "code_point
                 "contains_whitespace", "precompute_profile")
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
-ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]"))
+ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "int[]", "long", "long[]", "String"))
 
 
 def digest(data: bytes) -> str:
@@ -75,6 +75,8 @@ def canonical_precompute_payload(value: str) -> str:
 
 
 def _fits_donor_type(value: object, donor_type: str) -> bool:
+    if donor_type == "String":
+        return isinstance(value, str)
     if donor_type == "boolean":
         return isinstance(value, bool)
     if donor_type == "double":
@@ -228,12 +230,36 @@ def verify(output: pathlib.Path) -> dict[str, int]:
                        or re.fullmatch(r"[a-z][a-z0-9_]*", field) is None for field in fields)
                 or fields != sorted(set(fields))):
             raise ValueError("invalid source precompute field requirements")
-    source_field_types = manifest.get("source", {}).get("precompute_field_types", {})
+    source_metadata = manifest.get("source", {})
+    source_field_types = source_metadata.get("precompute_field_types", {})
     if not isinstance(source_field_types, dict) or any(
             not isinstance(field, str) or not isinstance(donor_type, str)
             or donor_type not in ALLOWED_DONOR_TYPES
             for field, donor_type in source_field_types.items()):
         raise ValueError("invalid source precompute field types")
+    scoped_field_types = source_metadata.get("precompute_field_types_by_source")
+    if scoped_field_types is not None:
+        if (not isinstance(scoped_field_types, dict)
+                or set(scoped_field_types) != set(source_payload_fields)):
+            raise ValueError("invalid source-scoped precompute field types")
+        observed_types: dict[str, set[str]] = {}
+        for source_id, required_fields in source_payload_fields.items():
+            scoped = scoped_field_types[source_id]
+            if (not isinstance(scoped, dict)
+                    or set(scoped) != set(required_fields)
+                    or any(not isinstance(field, str) or not isinstance(donor_type, str)
+                           or donor_type not in ALLOWED_DONOR_TYPES
+                           for field, donor_type in scoped.items())):
+                raise ValueError("invalid source-scoped precompute field types")
+            for field, donor_type in scoped.items():
+                observed_types.setdefault(field, set()).add(donor_type)
+        unambiguous_types = {
+            field: next(iter(types))
+            for field, types in sorted(observed_types.items())
+            if len(types) == 1
+        }
+        if source_field_types != unambiguous_types:
+            raise ValueError("source precompute type summary disagrees with scoped types")
     field_map_digest = manifest.get("source", {}).get("precompute_field_map_sha256")
     if (field_map_digest is not None
             and (not isinstance(field_map_digest, str)
@@ -292,9 +318,14 @@ def verify(output: pathlib.Path) -> dict[str, int]:
                    if field not in payload_keys]
         if missing:
             raise ValueError("precompute payload field coverage mismatch")
-        if source_field_types:
+        if source_field_types or scoped_field_types is not None:
+            row_field_types = (
+                scoped_field_types[row["source_id"]]
+                if scoped_field_types is not None
+                else source_field_types
+            )
             for field in source_payload_fields[row["source_id"]]:
-                donor_type = source_field_types.get(field)
+                donor_type = row_field_types.get(field)
                 if donor_type is None or not _fits_donor_type(payload[field], donor_type):
                     raise ValueError("precompute payload field type mismatch")
         profile = row["precompute_profile"]

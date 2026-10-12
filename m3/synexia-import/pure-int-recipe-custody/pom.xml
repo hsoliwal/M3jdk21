@@ -7,8 +7,8 @@
   <groupId>com.synexia</groupId>
   <artifactId>synexia-openrewrite-recipes</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <name>M3JDK21 public custody :: Synexia pure-int recipe</name>
-  <description>Public provenance-pinned custody mirror of the Nebula-proven Synexia pure-int OpenRewrite recipe closure.</description>
+  <name>M3JDK21 public custody :: Synexia canonical recipes</name>
+  <description>Public provenance-pinned custody mirror of canonical Synexia OpenRewrite recipe and scope kernels consumed by M3JDK21.</description>
 
   <properties>
     <maven.compiler.release>21</maven.compiler.release>

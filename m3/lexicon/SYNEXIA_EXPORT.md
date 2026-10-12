@@ -10,6 +10,12 @@ precompute owner visible. Its final `precompute_fields` column is the v2
 requirement map for owner payloads. It is a catalog, not a license to
 redistribute the bulk datasets named by it.
 
+The number row is an explicit generated projection, not a Synexia corpus
+snapshot. The pinned `NumberValue` source contributes a numeric scalar and an
+inherited decimal `id`; its integer cache covers only -128..127. M3 generates
+the inclusive 0..10000 domain and canonical decimal spellings, with no
+`language_tag` field or imported number rows.
+
 The source manifest's legacy eight-column form remains accepted. The v2 form
 appends `precompute_fields`, a sorted, unique comma-separated list of required
 snake_case keys, or `-` when that source family has no inspected owner-field
@@ -18,6 +24,34 @@ canonical `precompute_payload` omits a required key. The source-blind verifier
 rechecks the same requirement map from `synexia.export.json`, so the mapping
 cannot silently lose an owner precompute field between export and consumption.
 
+
+## Translation source boundary
+
+The `translate.rows` source-family entry points to Synexia's
+`TranslationTsvImporter`, which consumes
+`source_language,target_language,source_token,target_token`. The
+`Language.java` enum is a separate grammar-support source; it is not the
+lexical-row importer. The importer has no `translation_id` column. Its duplicate
+key is the ordered tuple `(lower(source_language), lower(target_language),
+source_token)`: it lowercases both language tags with `Locale.ROOT`, preserves
+the source token exactly, and rejects conflicting target tokens for a duplicate
+key. The manifest names the composite identity fields as
+`source_language,target_language,source_token`. M3 records preserve the
+operator-supplied `source_id` as the source-snapshot identity and encode the
+normalized tuple as `record_id` using compact ASCII JSON, for example
+`["en","hi","hello"]`. This is a deterministic serialization of the importer
+key, not an allocated or renumbered row ID. Identity components containing NUL
+are rejected because the importer uses NUL-delimited keys. If an upstream
+dataset has its own identifier, keep it as separate source metadata; the
+`TranslationTsvImporter` does not consume one. Preserve the target-token
+mapping, source revision, dataset license, and attribution. No translation
+corpus is bundled.
+
+Lexicon categories such as proper names, titles, locations, phrases, and
+acronyms describe supported namespaces, not complete licensed datasets. Their
+records remain unadmitted until each source snapshot has an exact revision,
+content hash, license, mapping identity, and target payload contract. The
+checked-in map therefore does not claim that all lexicons have already moved.
 ## Export contract
 
 The operator supplies a UTF-8 TSV snapshot. The original ten-column form remains

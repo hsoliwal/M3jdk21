@@ -9,7 +9,9 @@ on:
       - "m3/compatibility/nebula-proven-recipe-transfer.tsv"
       - "m3/compatibility/test_nebula_proven_recipe_transfer.py"
       - "m3/compatibility/check_synexia_recipe_ownership.py"
-      - "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/atom/**"
+      - "m3/synexia-import/pure-int-recipe-custody/**"
+      - "m3/tooling/migration-recipes/pom.xml"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-synexia-pure-int.yml"
       - "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/scope/**"
       - "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/semantic/**"
       - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
@@ -45,6 +47,10 @@ jobs:
 
       - name: Verify Nebula proving-ground transfer receipt
         run: python3 m3/compatibility/test_nebula_proven_recipe_transfer.py
+
+      - name: Install provenance-pinned Synexia custody artifact
+        run: |
+          mvn -B -ntp -f m3/synexia-import/pure-int-recipe-custody/pom.xml clean install
 
       - name: Compile and execute canonical recipe consumer
         run: |

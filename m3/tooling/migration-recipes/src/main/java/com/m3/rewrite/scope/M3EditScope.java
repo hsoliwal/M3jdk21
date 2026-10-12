@@ -1,46 +1,45 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite.scope;
 
+import java.util.Objects;
+
 /**
- * Maximum mutation boundary required by an M3 refactoring recipe.
+ * M3JDK21 compatibility vocabulary for Synexia's canonical edit-scope lattice.
  *
- * <p>Scope promotion is monotonic. A recipe that can be proven at FILE scope must not request a
- * broader boundary merely for convenience. Visibility and package authority are intentionally
- * separate: changing one declaration's visibility is not the same authority as coordinating
- * multiple files in a package.
+ * <p>This enum is a thin target adapter only. Ordering/promotion semantics are delegated to the
+ * provenance-pinned Apache-2.0 {@link com.synexia.rewrite.M3EditScope} owner.</p>
  */
 public enum M3EditScope {
-    FILE(0),
-    VISIBILITY(1),
-    PACKAGE(2),
-    MODULE(3),
-    MULTI_MODULE(4),
-    LIBRARY_API(5);
+    FILE(com.synexia.rewrite.M3EditScope.FILE),
+    VISIBILITY(com.synexia.rewrite.M3EditScope.VISIBILITY),
+    PACKAGE(com.synexia.rewrite.M3EditScope.PACKAGE),
+    MODULE(com.synexia.rewrite.M3EditScope.MODULE),
+    MULTI_MODULE(com.synexia.rewrite.M3EditScope.MULTI_MODULE),
+    LIBRARY_API(com.synexia.rewrite.M3EditScope.LIBRARY_API);
 
-    private final int level;
+    private final com.synexia.rewrite.M3EditScope canonical;
 
-    M3EditScope(int level) {
-        this.level = level;
+    M3EditScope(com.synexia.rewrite.M3EditScope canonical) {
+        this.canonical = Objects.requireNonNull(canonical, "canonical");
     }
 
-    /** Returns true when this granted scope is broad enough for the required scope. */
     public boolean permits(M3EditScope required) {
-        return level >= required.level;
+        return canonical.permits(Objects.requireNonNull(required, "required").canonical);
     }
 
-    /** Returns the narrowest scope that contains both boundaries. */
     public M3EditScope promote(M3EditScope other) {
-        return level >= other.level ? this : other;
+        return fromCanonical(canonical.promote(Objects.requireNonNull(other, "other").canonical));
     }
 
-    /** Returns the immediately broader boundary, or LIBRARY_API at the top. */
     public M3EditScope next() {
-        return switch (this) {
-            case FILE -> VISIBILITY;
-            case VISIBILITY -> PACKAGE;
-            case PACKAGE -> MODULE;
-            case MODULE -> MULTI_MODULE;
-            case MULTI_MODULE, LIBRARY_API -> LIBRARY_API;
-        };
+        return fromCanonical(canonical.next());
+    }
+
+    static M3EditScope fromCanonical(com.synexia.rewrite.M3EditScope scope) {
+        return valueOf(Objects.requireNonNull(scope, "scope").name());
+    }
+
+    com.synexia.rewrite.M3EditScope canonical() {
+        return canonical;
     }
 }

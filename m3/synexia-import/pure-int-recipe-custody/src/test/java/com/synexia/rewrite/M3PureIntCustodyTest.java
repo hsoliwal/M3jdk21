@@ -35,7 +35,15 @@ final class M3PureIntCustodyTest {
                     "M3PureIntLeaf.java",
                     "e1f7fc04156b745f5d312ec2647fdb65f424f386",
                     "M3PureIntPatternizeRecipe.java",
-                    "fd5882aa092629c3a389e754aafb1e0b1bc5f6d8");
+                    "fd5882aa092629c3a389e754aafb1e0b1bc5f6d8",
+                    "M3EditScope.java",
+                    "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+                    "M3ScopeInference.java",
+                    "2768fe5846c2c67c52e872a97f735a0fb4d0d69a",
+                    "M3CanonicalMultiPassPlan.java",
+                    "897a218c5489c851c1906fd91a2cd64174d19d70",
+                    "M3ContractMode.java",
+                    "e95d8dba0229ef3d56677639c796e619e9d8d0b7");
 
     @Test
     void custodySourcesRemainExactSynexiaGitBlobs() throws Exception {
@@ -62,6 +70,55 @@ final class M3PureIntCustodyTest {
                         M3PureIntPatternizeRecipe.class,
                         M3PureIntDocumentationRecipe.class),
                 recipe.getRecipeList().stream().map(Object::getClass).toList());
+    }
+
+    @Test
+    void scopeAndMultipassCustodyRetainsCanonicalSynexiaBehavior() {
+        assertTrue(M3EditScope.MODULE.permits(M3EditScope.FILE));
+        assertFalse(M3EditScope.FILE.permits(M3EditScope.PACKAGE));
+        assertEquals(M3EditScope.VISIBILITY, M3EditScope.FILE.next());
+        assertEquals(M3EditScope.LIBRARY_API, M3EditScope.MULTI_MODULE.next());
+
+        assertEquals(
+                M3EditScope.FILE,
+                M3ScopeInference.inferJavaTargets(
+                        List.of("src/main/java/p/A.java")));
+        assertEquals(
+                M3EditScope.PACKAGE,
+                M3ScopeInference.inferJavaTargets(
+                        List.of(
+                                "src/main/java/p/A.java",
+                                "src/test/java/p/ATest.java")));
+        assertEquals(
+                M3EditScope.MODULE,
+                M3ScopeInference.inferJavaTargets(
+                        List.of(
+                                "src/java.base/share/classes/java/lang/String.java",
+                                "src/java.base/share/classes/java/util/List.java")));
+        assertEquals(
+                M3EditScope.MULTI_MODULE,
+                M3ScopeInference.inferJavaTargets(
+                        List.of(
+                                "src/java.base/share/classes/java/lang/String.java",
+                                "src/java.logging/share/classes/java/util/logging/Logger.java")));
+
+        assertEquals(11, M3CanonicalMultiPassPlan.passes().size());
+        assertEquals(
+                List.of(
+                        "INVENTORY",
+                        "FILE_ATOMIZATION",
+                        "FILE_PATTERNIZATION",
+                        "FILE_DOCUMENTATION",
+                        "FILE_FIXED_POINT"),
+                M3CanonicalMultiPassPlan.fileConvergencePasses().stream()
+                        .map(M3CanonicalMultiPassPlan.Pass::id)
+                        .toList());
+        assertEquals(64, M3CanonicalMultiPassPlan.root().length());
+        assertEquals(
+                List.of(
+                        M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
+                        M3ContractMode.EXPLICIT_CONTRACT_CHANGE),
+                List.of(M3ContractMode.values()));
     }
 
     @Test

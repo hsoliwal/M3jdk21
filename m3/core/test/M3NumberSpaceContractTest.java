@@ -24,15 +24,18 @@ public final class M3NumberSpaceContractTest {
         check(M3NumberSpace.SOURCE_ID.equals("dictlang.numbers.0-10000"));
         check(M3NumberSpace.SOURCE_REVISION.equals("64a2ea61c73b548413fed6686a9daeeb0b9b0564"));
         check(M3NumberSpace.RECORD_ID.equals("number"));
+        check(M3NumberSpace.SOURCE_RECORD_ID_FIELD.equals("id"));
         check(M3NumberSpace.MIN_VALUE == 0);
         check(M3NumberSpace.MAX_VALUE == 10_000);
         check(space.precomputedValueCount() == 10_001);
-        check(space.number(0).storageIdentity().equals(space.number(10_000).storageIdentity()));
+        var sharedStorage = space.number(M3NumberSpace.MIN_VALUE).storageIdentity();
         check(space.number(0).encoding() == LocalM3StringPiece.Encoding.UTF16_LE);
         check(space.spelling(10_000).equals("10000"));
         check(space.parse(new View("10000")) == space.number(10_000));
         for (int value = M3NumberSpace.MIN_VALUE; value <= M3NumberSpace.MAX_VALUE; value++) {
             String canonical = Integer.toString(value);
+            check(sharedStorage.equals(space.number(value).storageIdentity()));
+            check(space.sourceRecordId(value).equals(canonical));
             check(space.parse(new View(canonical)) == space.number(value));
         }
         expect(IndexOutOfBoundsException.class, () -> space.number(-1));
@@ -49,9 +52,24 @@ public final class M3NumberSpaceContractTest {
                 .orElseThrow(() -> new AssertionError("number manifest row missing"));
         String[] columns = row.split("\\t", -1);
         check(columns.length == 9);
-        check(columns[8].equals(
-                "source_id,record_id,min_value,max_value,precomputed_value_count,"
-                        + "shared_utf16_storage,canonical_decimal_spelling,source_revision"));
+        check(columns[2].equals("synexia-dictlang/src/main/java/com/dictlang/values/NumberValue.java"));
+        check(columns[3].equals(M3NumberSpace.SOURCE_RECORD_ID_FIELD));
+        check(columns[4].equals("value"));
+        check(columns[7].contains("M3 generates the inclusive 0..10000 domain"));
+        String[] fields = columns[8].split(",", -1);
+        String[] sortedFields = fields.clone();
+        Arrays.sort(sortedFields);
+        check(Arrays.equals(fields, sortedFields));
+        check(Arrays.equals(fields, new String[] {
+                "canonical_decimal_spelling",
+                "max_value",
+                "min_value",
+                "precomputed_value_count",
+                "record_id",
+                "shared_utf16_storage",
+                "source_id",
+                "source_revision"
+        }));
         String targetMap = Files.readString(
                 Path.of("lexicon/synexia-number-target-map.tsv"), StandardCharsets.UTF_8);
         String[] targetLines = targetMap.split("\\n", -1);
@@ -65,10 +83,22 @@ public final class M3NumberSpaceContractTest {
         String[] targetColumns = targetRow.split("\\t", -1);
         check(targetColumns.length == 11);
         check(targetColumns[1].equals(M3NumberSpace.SOURCE_ID));
+        check(targetColumns[2].equals(columns[2]));
+        check(targetColumns[3].equals(M3NumberSpace.SOURCE_RECORD_ID_FIELD));
+        check(targetColumns[4].equals("value"));
         check(targetColumns[6].contains("com.m3.text.M3NumberSpace"));
+        check(targetColumns[7].contains("sourceRecordId(value)"));
         check(targetColumns[9].equals("ADMITTED_TYPED_RECEIVER"));
         check(targetColumns[10].equals(M3NumberSpace.SOURCE_REVISION));
-        System.out.println("M3JDK_NUMBER_CONTRACT_PASS checks=" + checks + " fields=7");
+        String fieldMap = Files.readString(
+                Path.of("lexicon/synexia-precompute-field-map.tsv"), StandardCharsets.UTF_8);
+        String recordIdMap = Arrays.stream(fieldMap.split("\\n", -1))
+                .filter(line -> line.startsWith("M3NumberSpace\tsourceRecordId(value)\t"))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("number record-id field map missing"));
+        String[] recordIdColumns = recordIdMap.split("\\t", -1);
+        check(recordIdColumns.length == 7 && recordIdColumns[3].equals("record_id"));
+        System.out.println("M3JDK_NUMBER_CONTRACT_PASS checks=" + checks + " fields=" + fields.length);
     }
 
     private static void expect(Class<? extends Throwable> type, Runnable action) {

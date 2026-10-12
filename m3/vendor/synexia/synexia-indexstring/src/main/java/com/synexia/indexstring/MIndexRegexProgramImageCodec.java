@@ -278,7 +278,7 @@ public final class MIndexRegexProgramImageCodec {
     if (size < HEADER_BYTES || size > MAX_IMAGE_BYTES) {
       throw new IllegalArgumentException("regex image file byte geometry");
     }
-    return decode(Files.readAllBytes(source));
+    return decode(ByteBuffer.wrap(Files.readAllBytes(source)));
   }
 
   /**
@@ -305,7 +305,7 @@ public final class MIndexRegexProgramImageCodec {
     if (size < HEADER_BYTES || size > MAX_EXECUTION_IMAGE_BYTES) {
       throw new IllegalArgumentException("regex accelerated image file byte geometry");
     }
-    return decodeAccelerated(Files.readAllBytes(source));
+    return decodeAccelerated(ByteBuffer.wrap(Files.readAllBytes(source)));
   }
 
   public static MIndexRegexAcceleratedImage readAcceleratedMapped(Path path)
@@ -326,7 +326,7 @@ public final class MIndexRegexProgramImageCodec {
     if (size < HEADER_BYTES || size > MAX_EXECUTION_IMAGE_BYTES) {
       throw new IllegalArgumentException("regex execution image file byte geometry");
     }
-    return decodeExecution(Files.readAllBytes(source));
+    return decodeExecution(ByteBuffer.wrap(Files.readAllBytes(source)));
   }
 
   public static MIndexRegexProgram.ExecutionImage readExecutionMapped(Path path)
@@ -345,9 +345,10 @@ public final class MIndexRegexProgramImageCodec {
       ByteBuffer input, boolean utf16) {
     int baseLength = boundedCount(input, "nested v1 image", MAX_IMAGE_BYTES);
     requireRemaining(input, baseLength, "nested v1 image");
-    byte[] base = new byte[baseLength];
-    input.get(base);
-    requireNestedVersion(ByteBuffer.wrap(base), utf16 ? UTF16_VERSION : VERSION);
+    ByteBuffer base = input.slice().order(ByteOrder.BIG_ENDIAN);
+    base.limit(baseLength);
+    input.position(Math.addExact(input.position(), baseLength));
+    requireNestedVersion(base, utf16 ? UTF16_VERSION : VERSION);
     MIndexRegexProgram.Image program = decode(base);
 
     long[] asciiStateMasks = readCountedLongs(input, "execution ASCII state masks");

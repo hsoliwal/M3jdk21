@@ -66,3 +66,11 @@ SharedLexiconPrecomputeCatalog.TranslationIdentity	sourceFingerprint	String	sour
 M3LexiconPrecompute.TranslationProjection	sourceLanguage	String	source_language	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation source language remains bound to the typed projection identity
 M3LexiconPrecompute.TranslationProjection	targetLanguage	String	target_language	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation target language remains bound to the typed projection identity
 M3LanguageGrammarSupport	supports	boolean	translation_grammar_supported	synexia.records.tsv:precompute_payload	MAPPED	grammar support is a source-owned boolean signal and is not inferred from token text
+M3NumberSpace	SOURCE_ID	String	source_id	synexia.records.tsv:precompute_payload	MAPPED	M3NumberSpace source family identity is retained exactly.
+M3NumberSpace	sourceRecordId(value)	String	record_id	synexia.records.tsv:precompute_payload	MAPPED	Canonical decimal source identity matches the inherited NumberValue id for each generated integer; range and spelling are M3-derived.
+M3NumberSpace	MIN_VALUE	int	min_value	synexia.records.tsv:precompute_payload	MAPPED	Inclusive lower bound is retained as the Java int constant.
+M3NumberSpace	MAX_VALUE	int	max_value	synexia.records.tsv:precompute_payload	MAPPED	Inclusive upper bound is retained as the Java int constant.
+M3NumberSpace	precomputedValueCount()	int	precomputed_value_count	synexia.records.tsv:precompute_payload	MAPPED	Precomputed view count is the owner's exact integer result.
+M3NumberSpace	number(i).storageIdentity() == number(0).storageIdentity() for 0..10000	boolean	shared_utf16_storage	synexia.records.tsv:precompute_payload	MAPPED	True only when every cached number view is verified against the same immutable UTF-16 backing identity.
+M3NumberSpace	spelling(value)	String	canonical_decimal_spelling	synexia.records.tsv:precompute_payload	MAPPED	Canonical decimal spelling is preserved as exact Java String content.
+M3NumberSpace	SOURCE_REVISION	String	source_revision	synexia.records.tsv:precompute_payload	MAPPED	Source revision pins the number-space implementation snapshot.
