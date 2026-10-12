@@ -1,5 +1,6 @@
 {
   "commit": "6430ba4f653f6ae42f326cd0731b259ee699c719",
+  "descriptors": [],
   "donor": "junit-platform-commons-1.11.4",
   "files": [
     {

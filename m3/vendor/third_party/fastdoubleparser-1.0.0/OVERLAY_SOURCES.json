@@ -1,5 +1,25 @@
 {
   "commit": "6080865ed6ba7a3dfa3264bdeffc7d997f1a9934",
+  "descriptors": [
+    {
+      "release": "11",
+      "sha256": "adf10d8e449d1244bf444d9b6b52c132004fc143d3c78ef1ae9becac58be616a",
+      "upstream_path": "fastdoubleparser-java11/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/6080865ed6ba7a3dfa3264bdeffc7d997f1a9934/fastdoubleparser-java11/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java"
+    },
+    {
+      "release": "17",
+      "sha256": "adf10d8e449d1244bf444d9b6b52c132004fc143d3c78ef1ae9becac58be616a",
+      "upstream_path": "fastdoubleparser-java17/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/6080865ed6ba7a3dfa3264bdeffc7d997f1a9934/fastdoubleparser-java17/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java"
+    },
+    {
+      "release": "21",
+      "sha256": "adf10d8e449d1244bf444d9b6b52c132004fc143d3c78ef1ae9becac58be616a",
+      "upstream_path": "fastdoubleparser-java21/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/6080865ed6ba7a3dfa3264bdeffc7d997f1a9934/fastdoubleparser-java21/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java"
+    }
+  ],
   "donor": "fastdoubleparser-1.0.0",
   "files": [
     {

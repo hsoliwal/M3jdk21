@@ -17,28 +17,27 @@
     "native_binaries": 47,
     "switched": 172
   },
-  "generated": "2026-10-12T02:22:49Z",
+  "generated": "2026-10-12T03:26:31Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {
       "api_surface": {
-        "DIFFERS_MISSING_CLASSES": 2,
-        "EQUIVALENT_MODULO_COMPILER": 45,
-        "IDENTICAL": 58,
-        "IDENTICAL_EXCEPT_SHADED": 3
+        "DIFFERS_MISSING_CLASSES": 3,
+        "EQUIVALENT_MODULO_COMPILER": 53,
+        "IDENTICAL": 63
       },
       "donors": 120,
-      "images": 13,
-      "modules": 106,
+      "images": 14,
+      "modules": 116,
       "status": {
-        "API_SURFACE_DIFFERS_MISSING_CLASSES": 2,
+        "API_SURFACE_DIFFERS_MISSING_CLASSES": 3,
         "FAILED": 2,
-        "PASS": 107,
+        "PASS": 117,
         "SOURCE_ONLY": 9
       },
-      "switched": 54
+      "switched": 56
     },
-    "evidence_sha256": "f4a3df43b0019dfc99f582e9cc331d6fa27cde0969a26c71f1c2987b55b7c478",
+    "evidence_sha256": "3e9c99e0d581b918c1cb071fa422b08e610643f562bcdfe06eeedcfd673c3dc7",
     "path": ".m3/task-crates/dependency-source-inline-20261010 (hsoliwal/com.synexia)"
   },
   "synexia_pr": "hsoliwal/com.synexia#10339",

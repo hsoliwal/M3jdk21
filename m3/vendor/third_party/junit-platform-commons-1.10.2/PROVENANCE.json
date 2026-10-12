@@ -317,7 +317,7 @@
     {
       "kind": "retained-provenance",
       "repository": "m3/vendor/third_party/junit-platform-commons-1.10.2/OVERLAY_SOURCES.json",
-      "sha256": "8ef85a067cf467bb3636ab9e98dd1b35ccef4441d301573f096b0e408e6ede37",
+      "sha256": "0ba4e42446508ff1ef50615f7836b27cd67615c486b4db728518586767c9b660",
       "upstream": "fetch_overlays.py"
     },
     {

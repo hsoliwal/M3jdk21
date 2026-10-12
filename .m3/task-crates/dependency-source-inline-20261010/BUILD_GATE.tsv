@@ -54,7 +54,7 @@ m3/vendor/third_party/micrometer-core	PASS	16	K:\m3-work\runs\20261007-m3jdk21-a
 m3/vendor/third_party/slf4j-api-1.7.36	PASS	4	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_slf4j-api-1.7.36.log	-
 m3/vendor/third_party/org.eclipse.jgit	PASS	14	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_org.eclipse.jgit.log	-
 m3/vendor/third_party/org.osgi.core	PASS	5	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_org.osgi.core.log	-
-m3/vendor/third_party/snakeyaml-2.2	PASS	6	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_snakeyaml-2.2.log	-
+m3/vendor/third_party/snakeyaml-2.2	PASS	10	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_snakeyaml-2.2.log	-
 m3/vendor/third_party/rewrite-core	PASS	9	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_rewrite-core.log	-
 m3/vendor/third_party/rewrite-test	PASS	4	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_rewrite-test.log	-
 m3/vendor/third_party/rewrite-xml	PASS	5	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_rewrite-xml.log	-

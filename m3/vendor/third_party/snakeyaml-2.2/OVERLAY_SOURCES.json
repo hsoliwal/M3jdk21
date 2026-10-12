@@ -1,5 +1,13 @@
 {
   "commit": "a34989252e6f59e36a3aaf788a903b7a37a73d33",
+  "descriptors": [
+    {
+      "release": "9",
+      "sha256": "a66ce7ac83f6f07641f45515e18a9c33c83f267430c4a473fec40daaf0dbbb90",
+      "upstream_path": "src/main/java9/module-info.java",
+      "url": "https://bitbucket.org/snakeyaml/snakeyaml/raw/a34989252e6f59e36a3aaf788a903b7a37a73d33/src/main/java9/module-info.java"
+    }
+  ],
   "donor": "snakeyaml-2.2",
   "files": [
     {
