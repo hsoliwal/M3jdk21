@@ -485,6 +485,12 @@ final class M3StringPool {
         Objects.requireNonNull(right, "right");
         if (left.length() == 0) return right;
         if (right.length() == 0) return left;
+        // An M3 DAG may represent the largest legal logical String without a flat byte array.
+        // Reject an unrepresentable combined length with the JDK-compatible size failure
+        // before either adjacent-range coalescing or tuple Math.addExact can overflow.
+        if ((long) left.length() + right.length() > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("Required length exceeds implementation limit");
+        }
         if (left.owner() == right.owner() && left.end() == right.start()) {
             return M3String.range(
                     left.owner(), left.start(), Math.addExact(left.length(), right.length()));
