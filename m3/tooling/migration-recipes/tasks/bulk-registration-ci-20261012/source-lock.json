@@ -1,0 +1,17 @@
+{
+  "schema": "M3JDK21_BULK_REGISTRATION_CI_BOOTSTRAP_LOCK_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 10618,
+  "canonical_recipe": "com.synexia.rewrite.M3Jdk21BulkRegistrationCiRecipe",
+  "canonical_branch_head": "83169548a72c7537eab8014fec7893b0e532481f",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_workflow": ".github/workflows/m3-bulk-registration-live-recovery.yml",
+  "target_preimage_sha256": "7fbbd79f33c5359b550d3fc0a5f7c22ca3a41784c3a7ba76ad1437aebb4fd605",
+  "target_postimage_sha256": "552c1fe26f293f0d84e0847663e1e05273487fb129fb364066b9a8d4f457fd58",
+  "failure_workflow_run": 38235482915,
+  "failure_job": 114764994367,
+  "failure_reason": "Missing preinstalled com.synexia:synexia-openrewrite-recipes:1.0.0-SNAPSHOT in recipe-fixed-point job",
+  "proof_owner": "M3JDK21",
+  "promotion_authority": false,
+  "runtime_dependency_added": false
+}
