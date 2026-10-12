@@ -22,7 +22,7 @@ public final class LangDexProjectionReceiverTest {
     private static final String SOURCE_ID = "unicodex.langdex.lexemes";
     private static final String RECORD_ID = "70001";
     private static final String LEXEME = "water";
-    private static final String PAYLOAD = "{\"langdex_concept_id\":701,"
+    private static final String LEGACY_PAYLOAD = "{\"langdex_concept_id\":701,"
             + "\"langdex_confidence_permille\":1000,"
             + "\"langdex_evidence_mask\":1073741825,"
             + "\"langdex_feature_bits\":2147483647,"
@@ -32,10 +32,31 @@ public final class LangDexProjectionReceiverTest {
             + "\"langdex_semantic_class_mask\":2305843009213693953,"
             + "\"langdex_subject_id\":17,"
             + "\"langdex_target_lexeme_id\":70002}";
-    private static final List<String> EXPECTED_FIELDS = List.of(
+    private static final String PAYLOAD = "{\"langdex_concept_id\":701,"
+            + "\"langdex_confidence_permille\":1000,"
+            + "\"langdex_evidence_mask\":1073741825,"
+            + "\"langdex_feature_bits\":2147483647,"
+            + "\"langdex_flags\":65535,"
+            + "\"langdex_frequency\":123456789,"
+            + "\"langdex_lexical_class_mask\":4611686018427387905,"
+            + "\"langdex_lexical_profile_confidence_permille\":735,"
+            + "\"langdex_lexical_profile_evidence_mask\":17,"
+            + "\"langdex_lexical_profile_feature_bits\":4660,"
+            + "\"langdex_lexical_profile_lexical_class_mask\":12,"
+            + "\"langdex_semantic_class_mask\":2305843009213693953,"
+            + "\"langdex_subject_id\":17,"
+            + "\"langdex_target_lexeme_id\":70002}";
+    private static final List<String> REQUIRED_FIELDS = List.of(
             "langdex_concept_id", "langdex_confidence_permille", "langdex_evidence_mask",
             "langdex_feature_bits", "langdex_flags", "langdex_frequency",
             "langdex_lexical_class_mask", "langdex_semantic_class_mask",
+            "langdex_subject_id", "langdex_target_lexeme_id");
+    private static final List<String> EXPECTED_FIELDS = List.of(
+            "langdex_concept_id", "langdex_confidence_permille", "langdex_evidence_mask",
+            "langdex_feature_bits", "langdex_flags", "langdex_frequency",
+            "langdex_lexical_class_mask", "langdex_lexical_profile_confidence_permille",
+            "langdex_lexical_profile_evidence_mask", "langdex_lexical_profile_feature_bits",
+            "langdex_lexical_profile_lexical_class_mask", "langdex_semantic_class_mask",
             "langdex_subject_id", "langdex_target_lexeme_id");
     private static final Map<String, String> EXPECTED_TYPES = Map.ofEntries(
             Map.entry("langdex_concept_id", "long"),
@@ -45,6 +66,10 @@ public final class LangDexProjectionReceiverTest {
             Map.entry("langdex_flags", "int"),
             Map.entry("langdex_frequency", "long"),
             Map.entry("langdex_lexical_class_mask", "long"),
+            Map.entry("langdex_lexical_profile_confidence_permille", "int"),
+            Map.entry("langdex_lexical_profile_evidence_mask", "int"),
+            Map.entry("langdex_lexical_profile_feature_bits", "int"),
+            Map.entry("langdex_lexical_profile_lexical_class_mask", "long"),
             Map.entry("langdex_semantic_class_mask", "long"),
             Map.entry("langdex_subject_id", "int"),
             Map.entry("langdex_target_lexeme_id", "long"));
@@ -105,11 +130,12 @@ public final class LangDexProjectionReceiverTest {
         check(row[5].equals("M3StringFacts + LangDexCoordinate"));
         check(row[6].contains("CC-BY-SA-3.0"));
         check(row[7].equals("schema/source pin only unless the exact licensed snapshot is supplied"));
-        check(List.of(row[8].split(",")).equals(EXPECTED_FIELDS));
+        check(List.of(row[8].split(",")).equals(REQUIRED_FIELDS));
 
         List<String> fieldMap = Files.readAllLines(
                 Path.of("lexicon", "synexia-precompute-field-map.tsv"), StandardCharsets.UTF_8);
         Map<String, String> actualTypes = new java.util.TreeMap<>();
+        Map<String, String> ownerTargets = new java.util.TreeMap<>();
         int mappedRows = 0;
         int targetLexemeRows = 0;
         for (String line : fieldMap) {
@@ -121,6 +147,9 @@ public final class LangDexProjectionReceiverTest {
             check(!columns[3].equals("image_row"));
             String prior = actualTypes.putIfAbsent(columns[3], columns[2]);
             check(prior == null || prior.equals(columns[2]));
+            String ownerField = columns[0] + "." + columns[1];
+            String priorOwnerTarget = ownerTargets.putIfAbsent(ownerField, columns[3]);
+            check(priorOwnerTarget == null || priorOwnerTarget.equals(columns[3]));
             if (columns[1].equals("targetLexemeId")) {
                 targetLexemeRows++;
                 check(columns[0].equals("LangDexTranslation"));
@@ -131,6 +160,21 @@ public final class LangDexProjectionReceiverTest {
         check(mappedRows == 14);
         check(targetLexemeRows == 1);
         check(actualTypes.equals(EXPECTED_TYPES));
+        check(ownerTargets.size() == 14);
+        check(ownerTargets.get("LangDexWordProfile.lexicalClassMask")
+                .equals("langdex_lexical_class_mask"));
+        check(ownerTargets.get("LangDexWordProfile.featureBits").equals("langdex_feature_bits"));
+        check(ownerTargets.get("LangDexWordProfile.evidenceMask").equals("langdex_evidence_mask"));
+        check(ownerTargets.get("LangDexWordProfile.confidencePermille")
+                .equals("langdex_confidence_permille"));
+        check(ownerTargets.get("LangDexLexicalProfile.lexicalClassMask")
+                .equals("langdex_lexical_profile_lexical_class_mask"));
+        check(ownerTargets.get("LangDexLexicalProfile.featureBits")
+                .equals("langdex_lexical_profile_feature_bits"));
+        check(ownerTargets.get("LangDexLexicalProfile.evidenceMask")
+                .equals("langdex_lexical_profile_evidence_mask"));
+        check(ownerTargets.get("LangDexLexicalProfile.confidencePermille")
+                .equals("langdex_lexical_profile_confidence_permille"));
     }
 
     private static void writeExport(Path directory) throws Exception {
@@ -190,7 +234,14 @@ public final class LangDexProjectionReceiverTest {
                 check(payload.requireInt("langdex_flags") == 65535);
                 check(payload.requireLong("langdex_frequency") == 123456789L);
                 check(payload.requireLong("langdex_lexical_class_mask") == 4611686018427387905L);
+                check(payload.requireInt("langdex_lexical_profile_confidence_permille") == 735);
+                check(payload.requireInt("langdex_lexical_profile_evidence_mask") == 17);
+                check(payload.requireInt("langdex_lexical_profile_feature_bits") == 4660);
+                check(payload.requireLong("langdex_lexical_profile_lexical_class_mask") == 12L);
                 check(payload.requireLong("langdex_semantic_class_mask") == 2305843009213693953L);
+                SynexiaPrecomputePayload legacy = SynexiaPrecomputePayload.parse(LEGACY_PAYLOAD);
+                check(legacy.fieldNames().equals(new TreeSet<>(REQUIRED_FIELDS)));
+                check(legacy.field("langdex_lexical_profile_feature_bits").isEmpty());
                 check(payload.requireInt("langdex_subject_id") == 17);
                 check(payload.requireLong("langdex_target_lexeme_id") == 70002L);
                 check(catalog.findPrecomputePayload(SOURCE_ID, RECORD_ID).orElseThrow() == payload);
