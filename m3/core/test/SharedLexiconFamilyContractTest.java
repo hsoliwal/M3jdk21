@@ -29,9 +29,17 @@ public final class SharedLexiconFamilyContractTest {
                 "M3LexiconPrecompute.TokenHashPrecompute|rangeFingerprint|RangeFingerprint|rangeFingerprint|m3lex-family-v2:synexia.token-hash.tsv",
                 "M3LexiconPrecompute.TokenHashPrecompute|rangeSha256|byte[]|rangeSha256|m3lex-family-v2:synexia.token-hash.tsv",
                 "M3LexiconPrecompute.TokenFrequency|frequencies|Map<Integer,Integer>|frequencies|m3lex-family-v2:synexia.token-frequency.tsv",
-                "M3LexiconPrecompute.TranslationProjection|translatedTokenIds|int[]|translatedTokenIds|m3lex-family-v2:synexia.translation.tsv",
-                "M3LexiconPrecompute.TranslationProjection|mappedTokenCount|int|mappedTokenCount|m3lex-family-v2:synexia.translation.tsv",
-                "M3LexiconPrecompute.TranslationProjection|sourceFingerprint|String|sourceFingerprint|m3lex-family-v2:synexia.translation.tsv");
+                "M3LexiconPrecompute.TranslationProjection|translatedTokenIds|int[]|translated_token_ids|m3lex-family-v2:synexia.translation.tsv",
+                "M3LexiconPrecompute.TranslationProjection|mappedTokenCount|int|mapped_token_count|m3lex-family-v2:synexia.translation.tsv",
+                "M3LexiconPrecompute.TranslationProjection|sourceFingerprint|String|source_fingerprint|m3lex-family-v2:synexia.translation.tsv",
+                "M3LexiconPrecompute.TranslationProjection|sourceLanguage|String|source_language|m3lex-family-v2:synexia.translation.tsv",
+                "M3LexiconPrecompute.TranslationProjection|targetLanguage|String|target_language|m3lex-family-v2:synexia.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|sourceId|String|source_id|m3lex-family-v2:synexia.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|recordId|String|record_id|m3lex-family-v2:synexia.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|sourceLanguage|String|source_language|m3lex-family-v2:synexia.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|targetLanguage|String|target_language|m3lex-family-v2:synexia.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|lexiconFingerprint|String|lexicon_fingerprint|m3lex-family-v2:synexia.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|sourceFingerprint|String|source_fingerprint|m3lex-family-v2:synexia.translation.tsv");
         Set<String> found = new HashSet<>();
         for (String line : lines.subList(1, lines.size())) {
             String[] fields = line.split("\\t", -1);
