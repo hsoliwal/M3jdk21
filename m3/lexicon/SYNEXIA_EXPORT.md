@@ -206,4 +206,6 @@ The receiver bounds each line at 16 MiB to keep validation memory bounded. That
 receiver limit is an explicit M3 intake policy, not a claim that Synexia's writer
 imposes the same limit. The source revision in the receipt identifies the data
 snapshot; it must not be confused with the Synexia code commit pin in
-`m3/runtime-integration/FOSS_REUSE_DECISION.tsv`.
+`m3/runtime-integration/FOSS_REUSE_DECISION.tsv`. The SHA-256 comparison establishes byte integrity only relative to the supplied receipt;
+it does not authenticate the producer or receipt. Obtain the expected receipt through a trusted,
+authenticated channel or verify a producer signature separately before relying on provenance.

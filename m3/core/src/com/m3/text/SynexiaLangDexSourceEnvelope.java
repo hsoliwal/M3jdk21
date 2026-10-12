@@ -22,7 +22,10 @@ import java.util.regex.Pattern;
  * <p>The receiver consumes the original wire bytes, validates their grammar,
  * and returns only the source receipt. It intentionally does not expose parsed
  * rows, normalize source fields, resolve concept links, or synthesize precompute
- * payloads. Callers must not treat a successful receipt as catalog admission.</p>
+ * payloads. Callers must not treat a successful receipt as catalog admission. The digest establishes
+ * byte integrity only relative to the expected receipt; this class does not authenticate the
+ * receipt or producer. Callers must trust the receipt's provenance or verify a producer signature
+ * through a separate authenticated mechanism.</p>
  *
  * <p>Input is the ASCII-only UTF-8/LF format emitted by the pinned Synexia
  * producer. Lines are capped at 16 MiB to bound per-row validation memory. The
