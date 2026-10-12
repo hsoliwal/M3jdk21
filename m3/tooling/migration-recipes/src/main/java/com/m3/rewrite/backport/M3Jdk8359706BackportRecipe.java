@@ -65,6 +65,6 @@ public final class M3Jdk8359706BackportRecipe extends Recipe {
                 new M3Jdk21HashPinnedTextSnapshotRecipe(
                         "jdk21u-open-fds-8359706-text"),
                 new M3Jdk21HashPinnedSnapshotRecipe(
-                        "jdk21u-open-fds-8359706-java"));
+                        "m3-jdk21u-open-fds-8359706-java"));
     }
 }
