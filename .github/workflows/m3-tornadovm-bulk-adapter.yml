@@ -30,6 +30,11 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - name: Install source-built rewrite and JUnit 5.10.2 toolchain
+        run: >
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml
+          -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2
+          -am -DskipTests install
       - name: Install bounded Synexia recipe custody
         run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Receiver and mapping recipe tests
@@ -37,9 +42,14 @@ jobs:
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
           -Dtest=M3TornadoBulkAdapterPortRecipeTest,M3TornadoBulkAdapterMappingRecipeTest,M3BulkSchedulerProviderRecoveryRecipeTest,M3BulkSchedulerRecoveryNameMappingRecipeTest,M3TornadoProviderUpgradeReceiverRecipeTest
           test
+      - name: Install receiver recipe artifact for plugin discovery
+        run: >
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          -DskipTests install
       - name: Exact receiver fixed point
         run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          -Drewrite.recipeArtifactCoordinates=com.m3.tooling:migration-recipes:0.1.0-SNAPSHOT
           -Drewrite.activeRecipes=com.m3.rewrite.backport.M3TornadoBulkAdapterPortRecipe,com.m3.rewrite.backport.M3BulkSchedulerProviderRecoveryRecipe,com.m3.rewrite.backport.M3TornadoProviderUpgradeReceiverRecipe
           rewrite:dryRun
 
@@ -58,11 +68,15 @@ jobs:
           repository: hsoliwal/synexia-tornadovm
           ref: 3bf826714a48d7fdf346ffde8a0fc25c525572c5
           path: target/synexia-tornadovm
-      - name: Install pinned RV32IM provider
+      - name: Install pinned RV32IM provider with Java 21 preview ABI
         run: >
           mvn -B -ntp -f target/synexia-tornadovm/m3/cpu-gpu/pom.xml
-          -DskipTests install
+          -Dmaven.compiler.enablePreview=true -DskipTests install
+      - name: Install source-built JUnit 5.11.4 test runtime
+        run: >
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml
+          -pl junit-jupiter-5.11.4 -am -DskipTests install
       - name: CPU adapter contracts
         run: >
           mvn -B -ntp -f m3/ports/tornadovm-bulk/pom.xml
-          -Dm3.gpu=false test
+          -Dmaven.compiler.enablePreview=true -Dm3.gpu=false test
