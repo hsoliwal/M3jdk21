@@ -49,6 +49,7 @@ for step in $steps; do
     gate)
       rm -rf "$C/${P}api-diffs"
       python -I "$C/api_gate.py" --inventory $INV --modules "$K/${P}THIRD_PARTY_MODULES.tsv" --repo "$WK" --store K:/m3-work/donors/maven-sources/store --asm "$ASM" --built-m2 K:/m3-work/m2-build --tool "$K/ApiSurface.java" --diffs "$K/${P}api-diffs" --out "$K/${P}API_SURFACE.tsv" 2>&1 | tail -1
+      python -I "$C/gate_retry.py" --api "$K/${P}API_SURFACE.tsv" --modules "$K/${P}THIRD_PARTY_MODULES.tsv" -- --inventory $INV --repo "$WK" --store K:/m3-work/donors/maven-sources/store --asm "$ASM" --built-m2 K:/m3-work/m2-build --tool "$K/ApiSurface.java" --diffs "$K/${P}api-diffs" 2>&1 | grep 'gate-retry'
       awk -F'\t' 'NR>1 && $9!="IDENTICAL" && $9!="EQUIVALENT_MODULO_COMPILER" && $9!="IDENTICAL_EXCEPT_SHADED" {print "  "$1"\t"$9"\tmissing="$5"\treal="$7"/"$8"\tres_missing="$16"\tres_differ="$17}' "$C/${P}API_SURFACE.tsv" ;;
     gen2) gen "--api-surface $K/${P}API_SURFACE.tsv" ;;
     switch)

@@ -11,7 +11,7 @@ asm-tree-9.6	38	38	38	0	0	0	0	IDENTICAL	asm-tree-9.6.base.tsv	0	base	{49=38}	{52
 asm-util-9.6	26	26	26	0	0	0	0	IDENTICAL	asm-util-9.6.base.tsv	0	base	{49=26}	{52=26}	0	0	0	0
 assertj-core-3.25.3	822	822	822	0	0	0	0	IDENTICAL	assertj-core-3.25.3.base.tsv	0	base	{52=822}	{52=822}	0	0	0	0
 byte-buddy-1.14.11	2830	2830	2830	0	0	0	0	IDENTICAL	byte-buddy-1.14.11.base.tsv	0	base	{49=2821,50=9}	{50=9,52=2821}	3	0	0	0
-caffeine-3.1.8	703	175	172	528	0	0	0	DIFFERS_MISSING_CLASSES	caffeine-3.1.8.base.tsv	3	base	{55=703}	{55=175}	1	0	0	0
+caffeine-3.1.8	703	703	700	0	0	0	0	EQUIVALENT_MODULO_COMPILER	caffeine-3.1.8.base.tsv	3	base	{55=703}	{55=703}	1	0	0	0
 cglib-3.3.0	247	247	194	0	0	0	0	EQUIVALENT_MODULO_COMPILER	cglib-3.3.0.base.tsv	68	base	{49=247}	{52=247}	3	0	0	0
 checker-qual-3.37.0	359	361	359	0	0	0	0	EQUIVALENT_MODULO_COMPILER	checker-qual-3.37.0.base.tsv	2	base	{52=359}	{52=361}	1	0	0	0
 checker-qual-3.55.1	385	387	385	0	0	0	0	EQUIVALENT_MODULO_COMPILER	checker-qual-3.55.1.base.tsv	2	base	{52=385}	{52=387}	1	0	0	0
@@ -90,7 +90,7 @@ lucene-core-9.10.0	2329	2363	2272	0	0	0	0	EQUIVALENT_MODULO_COMPILER	lucene-core
 lucene-queries-9.10.0	367	375	361	0	0	0	0	EQUIVALENT_MODULO_COMPILER	lucene-queries-9.10.0.base.tsv	14	base	{55=367}	{55=375}	2	0	0	0
 lucene-queryparser-9.10.0	246	274	244	0	0	0	0	EQUIVALENT_MODULO_COMPILER	lucene-queryparser-9.10.0.base.tsv	30	base	{55=246}	{55=274}	5	0	0	0
 lucene-sandbox-9.10.0	119	125	116	0	0	0	0	EQUIVALENT_MODULO_COMPILER	lucene-sandbox-9.10.0.base.tsv	9	base	{55=119}	{55=125}	3	0	0	0
-lz4-java-1.8.0	79	57	56	22	0	0	0	DIFFERS_MISSING_CLASSES	lz4-java-1.8.0.base.tsv	1	base	{51=79}	{52=57}	8	0	0	0
+lz4-java-1.8.0	79	79	78	0	0	0	0	EQUIVALENT_MODULO_COMPILER	lz4-java-1.8.0.base.tsv	1	base	{51=79}	{52=79}	8	0	0	0
 micrometer-core-1.9.17	343	366	343	0	0	0	0	EQUIVALENT_MODULO_COMPILER	micrometer-core-1.9.17.base.tsv	23	base	{52=343}	{52=366}	5	0	0	0
 opentest4j-1.3.0	8	9	8	0	0	0	0	EQUIVALENT_MODULO_COMPILER	opentest4j-1.3.0.base.tsv	1	base	{50=8}	{52=9}	2	0	0	0
 org.eclipse.jgit-5.13.3.202401111512-r	1501	1501	1351	0	0	0	0	EQUIVALENT_MODULO_COMPILER	org.eclipse.jgit-5.13.3.202401111512-r.base.tsv	150	base	{52=1501}	{52=1501}	7	0	0	0

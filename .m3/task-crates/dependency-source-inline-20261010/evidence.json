@@ -2,8 +2,7 @@
   "baseline": "30c507d2eb1528647484d0971f4c52627b362e3a",
   "counts": {
     "api_surface": {
-      "DIFFERS_MISSING_CLASSES": 2,
-      "EQUIVALENT_MODULO_COMPILER": 55,
+      "EQUIVALENT_MODULO_COMPILER": 57,
       "IDENTICAL": 63
     },
     "build_plugin_rows": 129,
@@ -13,12 +12,12 @@
     "downstream_rows": 304,
     "gate": 120,
     "gate_pass": 120,
-    "images": 13,
-    "modules": 118,
-    "native_binaries": 120,
+    "images": 11,
+    "modules": 120,
+    "native_binaries": 128,
     "switched": 172
   },
-  "generated": "2026-10-12T05:25:05Z",
+  "generated": "2026-10-12T07:21:51Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {

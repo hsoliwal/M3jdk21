@@ -110,6 +110,9 @@ Build matrix, with content-addressed outputs in the kernel bundle:
 
 AMD runs through OpenCL in v1. A native HIP backend is v3 and needs an AMD GPU runner to validate.
 
+**Owner decision (2026-10-12): OpenCL is the primary GPU backend**, one portable path for Intel, AMD and NVIDIA. CUDA
+(PTX) is an optional NVIDIA fast path delivered after OpenCL. Leaf order: P2 CPU -> P3 OpenCL -> P4 CUDA.
+
 ## 4. Where it lives
 
 | Path | Content | Policy (`m3/docs/synexia-intake-policy.tsv`) |

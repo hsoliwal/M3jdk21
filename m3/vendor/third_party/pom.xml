@@ -19,6 +19,7 @@
     <module>asm-util</module>
     <module>assertj-core</module>
     <module>byte-buddy</module>
+    <module>caffeine</module>
     <module>cglib</module>
     <module>checker-qual-3.37.0</module>
     <module>checker-qual-3.55.1</module>
@@ -94,6 +95,7 @@
     <module>lucene-queries</module>
     <module>lucene-queryparser</module>
     <module>lucene-sandbox</module>
+    <module>lz4-java</module>
     <module>micrometer-core</module>
     <module>opentest4j</module>
     <module>org.eclipse.jgit</module>

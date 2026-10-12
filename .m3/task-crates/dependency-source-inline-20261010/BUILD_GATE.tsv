@@ -13,7 +13,7 @@ m3/vendor/third_party/byte-buddy	PASS	30	K:\m3-work\runs\20261007-m3jdk21-apex\c
 m3/vendor/third_party/assertj-core	PASS	20	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_assertj-core.log	-
 m3/vendor/third_party/checker-qual-3.37.0	PASS	6	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_checker-qual-3.37.0.log	-
 m3/vendor/third_party/error_prone_annotations	PASS	4	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_error_prone_annotations.log	-
-m3/vendor/third_party/caffeine	PASS	7	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_caffeine.log	-
+m3/vendor/third_party/caffeine	PASS	36	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_caffeine.log	-
 m3/vendor/third_party/cglib	PASS	6	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_cglib.log	-
 m3/vendor/third_party/checker-qual-3.55.1	PASS	7	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_checker-qual-3.55.1.log	-
 m3/vendor/third_party/classgraph	PASS	9	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_classgraph.log	-
@@ -97,7 +97,7 @@ m3/vendor/third_party/lucene-analysis-common	PASS	14	K:\m3-work\runs\20261007-m3
 m3/vendor/third_party/lucene-queries	PASS	7	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_lucene-queries.log	-
 m3/vendor/third_party/lucene-sandbox	PASS	6	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_lucene-sandbox.log	-
 m3/vendor/third_party/lucene-queryparser	PASS	8	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_lucene-queryparser.log	-
-m3/vendor/third_party/lz4-java	PASS	4	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_lz4-java.log	-
+m3/vendor/third_party/lz4-java	PASS	41	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_lz4-java.log	-
 m3/vendor/third_party/micrometer-core	PASS	18	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_micrometer-core.log	-
 m3/vendor/third_party/slf4j-api-1.7.36	PASS	4	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_slf4j-api-1.7.36.log	-
 m3/vendor/third_party/org.eclipse.jgit	PASS	16	K:\m3-work\runs\20261007-m3jdk21-apex\c6\M3_build-logs\m3_vendor_third_party_org.eclipse.jgit.log	-

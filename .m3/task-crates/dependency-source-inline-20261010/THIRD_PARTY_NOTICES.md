@@ -18,7 +18,7 @@ any donor. Nothing here enters src/** (GPLv2+CPE); these are build-time tooling 
 | org.ow2.asm:asm-util:9.6-m3-source-1 | BSD-3-Clause | PASS | m3/vendor/third_party/asm-util |
 | org.assertj:assertj-core:3.25.3-m3-source-1 | Apache License, Version 2.0 | PASS | m3/vendor/third_party/assertj-core |
 | net.bytebuddy:byte-buddy:1.14.11-m3-source-1 | Apache License, Version 2.0 (from the license text; pom declares none) | PASS | m3/vendor/third_party/byte-buddy |
-| com.github.ben-manes.caffeine:caffeine:3.1.8 | Apache License, Version 2.0 | API_SURFACE_DIFFERS_MISSING_CLASSES | m3/vendor/third_party-images/caffeine-3.1.8 |
+| com.github.ben-manes.caffeine:caffeine:3.1.8-m3-source-1 | Apache License, Version 2.0 | PASS | m3/vendor/third_party/caffeine |
 | cglib:cglib:3.3.0-m3-source-1 | Apache License, Version 2.0 (from the license text; pom declares none) | PASS | m3/vendor/third_party/cglib |
 | org.checkerframework:checker-qual:3.37.0-m3-source-1 | The MIT License | PASS | m3/vendor/third_party/checker-qual-3.37.0 |
 | org.checkerframework:checker-qual:3.55.1-m3-source-1 | The MIT License | PASS | m3/vendor/third_party/checker-qual-3.55.1 |
@@ -98,7 +98,7 @@ any donor. Nothing here enters src/** (GPLv2+CPE); these are build-time tooling 
 | org.apache.lucene:lucene-queries:9.10.0-m3-source-1 | Apache 2 | PASS | m3/vendor/third_party/lucene-queries |
 | org.apache.lucene:lucene-queryparser:9.10.0-m3-source-1 | Apache 2 | PASS | m3/vendor/third_party/lucene-queryparser |
 | org.apache.lucene:lucene-sandbox:9.10.0-m3-source-1 | Apache 2 | PASS | m3/vendor/third_party/lucene-sandbox |
-| org.lz4:lz4-java:1.8.0 | The Apache Software License, Version 2.0 | API_SURFACE_DIFFERS_MISSING_CLASSES | m3/vendor/third_party-images/lz4-java-1.8.0 |
+| org.lz4:lz4-java:1.8.0-m3-source-1 | The Apache Software License, Version 2.0 | PASS | m3/vendor/third_party/lz4-java |
 | io.micrometer:micrometer-core:1.9.17-m3-source-1 | The Apache Software License, Version 2.0 | PASS | m3/vendor/third_party/micrometer-core |
 | org.opentest4j:opentest4j:1.3.0-m3-source-1 | The Apache License, Version 2.0 | PASS | m3/vendor/third_party/opentest4j |
 | org.eclipse.jdt:org.eclipse.jdt.core:3.47.0 | EPL-2.0 | SOURCE_ONLY | m3/vendor/third_party-images/org.eclipse.jdt.core-3.47.0 |

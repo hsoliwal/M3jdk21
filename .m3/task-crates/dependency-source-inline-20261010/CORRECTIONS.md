@@ -147,3 +147,22 @@ Refactor tracks:
 - R1, shade instead of copy: build byte-buddy from the vendored asm plus shading, as upstream does.
 - R2, converge to one version per library, proven by building the consumers.
 - R3, a recipe-driven refactored layer, proven against upstream test suites.
+
+# caffeine and lz4-java built from upstream generator output (2026-10-12)
+
+The last two images that were missing build-generated classes are now Maven-built source modules:
+- **caffeine 3.1.8.** The 528 generated sources come from upstream's JavaPoet generators
+  (`LocalCacheFactoryGenerator`, `NodeFactoryGenerator`) run at tag v3.1.8, commit b0723da5, with the generator
+  dependencies pinned to the tag's libs.versions.toml. The generators stamp the current year into each file's
+  copyright line, so the clock is pinned to the release instant (2023-08-09).
+- **lz4-java 1.8.0.** 16 generated sources come from upstream's MVEL templates (`src/build/gen_sources.mvel`) run at
+  tag 1.8.0, commit 78eae489, with mvel2 2.3.2.Final. The generator needs `java.lang.Compiler`, so it runs on JDK 17;
+  a JDK 21 run with a one-class stand-in produced byte-identical output.
+
+Both modules keep `GENERATED_SOURCES.json` and `regenerate.sh` (which checks every output hash) at the module root.
+Provenance kind: upstream-generated-source-at-tag.
+
+Gate, all 120 modules: 63 IDENTICAL and 57 EQUIVALENT_MODULO_COMPILER, with caffeine and lz4-java both
+EQUIVALENT_MODULO_COMPILER (0 missing classes). Images left: ecj and zstd-jni (FAILED), and the nine OpenRewrite
+language modules plus jdt.core (SOURCE_ONLY). 172 pins switched; shade closure 0 downstream binaries; crate
+131 entries, drift 0.
