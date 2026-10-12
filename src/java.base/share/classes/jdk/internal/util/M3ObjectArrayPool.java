@@ -17,15 +17,15 @@ import java.util.concurrent.atomic.AtomicLong;
  * A lease must never escape the owning operation, and callers must not retain
  * its array after close. This contract cannot be enforced for raw Object[].
  *
- * <p>Exact lengths 1..32 are supported, plus 64, 128 and 256.
- * Each thread caches at most one array of each length, with a 4 KiB
+ * <p>Exact lengths 1..32 are supported, plus 64, 128, 256, 512, 1024, 2048 and 4096.
+ * Each thread caches at most one array of each length, with a 64 KiB
  * estimated retained-memory budget and least-recently-stored eviction. No JNI object-address
  * assumptions, no global locks, and no references retained after release.
  */
 public final class M3ObjectArrayPool {
     private static final int SMALL_LIMIT = 32;
-    private static final int BUCKETS = SMALL_LIMIT + 3;
-    private static final long DEFAULT_MAX_CACHED_BYTES = 4096;
+    private static final int BUCKETS = SMALL_LIMIT + 7;
+    private static final long DEFAULT_MAX_CACHED_BYTES = 64 * 1024;
     private static final AtomicLong PRESSURE_EPOCH = new AtomicLong();
     private static volatile boolean cachingEnabled = true;
     private static final ThreadLocal<Cache> LOCAL =
@@ -97,6 +97,10 @@ public final class M3ObjectArrayPool {
         if (length == 64) return SMALL_LIMIT;
         if (length == 128) return SMALL_LIMIT + 1;
         if (length == 256) return SMALL_LIMIT + 2;
+        if (length == 512) return SMALL_LIMIT + 3;
+        if (length == 1024) return SMALL_LIMIT + 4;
+        if (length == 2048) return SMALL_LIMIT + 5;
+        if (length == 4096) return SMALL_LIMIT + 6;
         return -1;
     }
 
