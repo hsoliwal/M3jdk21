@@ -47,8 +47,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p build/m3-object-pool/module build/m3-object-pool/test
-          javac --release 21 -proc:none -encoding UTF-8 -Xlint:all -Werror             --patch-module java.base=src/java.base/share/classes             -d build/m3-object-pool/module             src/java.base/share/classes/jdk/internal/util/M3ObjectArrayPool.java
+          mkdir -p build/m3-object-pool/src/jdk/internal/util build/m3-object-pool/module build/m3-object-pool/test
+          cp src/java.base/share/classes/jdk/internal/util/M3ObjectArrayPool.java build/m3-object-pool/src/jdk/internal/util/
+          javac --release 21 -proc:none -encoding UTF-8 -Xlint:all -Werror             --patch-module java.base=build/m3-object-pool/src             -d build/m3-object-pool/module             build/m3-object-pool/src/jdk/internal/util/M3ObjectArrayPool.java
       - name: Compile focused test
         shell: bash
         run: |
