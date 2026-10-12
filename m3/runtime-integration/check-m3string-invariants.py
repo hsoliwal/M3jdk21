@@ -300,6 +300,23 @@ def check_m3string_layout() -> None:
 
 check_m3string_layout()
 
+# Compiler-parsed replacement routes supplement the cheap spelling markers below.
+# This proves source structure only; runtime/jtreg remain semantic authority.
+def check_m3string_replacement_routes() -> None:
+    java = str(Path(os.environ["JAVA_HOME"]) / "bin/java") if os.environ.get("JAVA_HOME") else "java"
+    command = [java, "--source", "21",
+               str(ROOT / "m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java"),
+               str(ROOT / "src/java.base/share/classes/java/lang/String.java")]
+    try:
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=45)
+    except (OSError, subprocess.TimeoutExpired) as error:
+        fail(f"M3 replacement route compiler unavailable or timed out: {error}")
+    if result.returncode != 0 or result.stdout.strip() != "M3_STRING_REPLACEMENT_ROUTES_OK":
+        fail(f"M3 replacement route check failed: {result.stderr.strip()} {result.stdout.strip()}")
+
+
+check_m3string_replacement_routes()
+
 # Canonical value/owners/facts may not retain array payload.
 for path, text in [
     ("M3String.java", m3),
@@ -839,9 +856,9 @@ critical_surfaces = {
     "lastIndexOf(String)": "M3String storage = m3();",
     "prepared reverse search": "return storage.lastIndexOf(target, fromIndex);",
     "replace(char,char)": "M3String replaced = storage.replace(oldChar, newChar);",
-    "replace(CharSequence,CharSequence)": "M3String replaced = sourceM3.replace(targetM3, replacementM3);",
-    "replaceFirst(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, true);",
-    "replaceAll(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, false);",
+    "replace(CharSequence,CharSequence)": "String replaced = m3Replace(storage, trgtStr, targetM3, replStr, replacementM3);",
+    "replaceFirst(String,String)": "String replaced = storage.replaceLiteralRegex(this, regex, replacement, true);",
+    "replaceAll(String,String)": "String replaced = storage.replaceLiteralRegex(this, regex, replacement, false);",
     "substring": "return new String(storage.slice(beginIndex, endIndex));",
     "concat": "m3Concat(this, str)",
     "trim": "M3StringFacts facts = storage.facts();",
@@ -1119,7 +1136,7 @@ for fragment in [
 for fragment in [
     "M3String replaceEmptyTarget(M3String replacement)",
     "pieces.add(slice(index, index + 1));",
-    "return new String(storage.replaceEmptyTarget(replacementM3));",
+    "return new String(sourceM3.replaceEmptyTarget(replacementM3));",
 ]:
     if fragment not in (m3 + string):
         fail(f"M3 empty-target replacement route missing: {fragment}")
