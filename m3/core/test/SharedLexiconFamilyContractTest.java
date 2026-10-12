@@ -46,7 +46,8 @@ public final class SharedLexiconFamilyContractTest {
             if (fields.length != 7) throw new AssertionError("field-map row width");
             if (fields[4].startsWith("m3lex-family-v2:")) {
                 check(fields[5].equals("MAPPED"), "family field is admitted");
-                found.add(String.join("|", fields[0], fields[1], fields[2], fields[3], fields[4]));
+                check(found.add(String.join("|", fields[0], fields[1], fields[2], fields[3], fields[4])),
+                        "family field mapping is unique");
             }
         }
         check(found.equals(expected), "all typed family fields are declared exactly once");
