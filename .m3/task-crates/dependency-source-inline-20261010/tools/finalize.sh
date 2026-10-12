@@ -34,6 +34,8 @@ gen() {  # $1 = extra args
   fi
   python -I "$C/run_traced.py" "$C/gen_third_party.py" --inventory $INV --plan "$C/LOCK_PLAN.tsv" --status $STATUS --receipts $RECEIPTS --build-inputs "$C/BUILD_INPUTS.tsv" \
     --store K:/m3-work/donors/maven-sources/store --repo "$WK" --out "$K/${P}THIRD_PARTY_MODULES.tsv" --template K:/m3-work/wt/synexia-c6/third_party/re2j --pom-classpath $K/POM_CLASSPATH.tsv $GENOPT $ONLY $1 2> "$C/${P}gen.log" | tail -1
+  rc=${PIPESTATUS[0]}
+  if [ "$rc" != 0 ]; then echo "GEN_FAILED rc=$rc (tree is partial; stopping the lane)"; tail -3 "$C/${P}gen.log"; exit 3; fi
   awk -F'\t' 'NR>1 {c[$2" "$7]++} END {for (k in c) printf "%s=%d; ", k, c[k]; print ""}' "$C/${P}THIRD_PARTY_MODULES.tsv"
 }
 steps="$*"; [ "$steps" = "all" ] && steps="gen build gate gen2 switch insert crate verify prbody"

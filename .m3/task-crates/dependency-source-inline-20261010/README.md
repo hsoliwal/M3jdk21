@@ -17,8 +17,8 @@ published sources jars omit (SPI registrations, jar-level legal files, build-fil
 47 files) are completed byte-for-byte from the published jar and pinned in PROVENANCE.json.
 
 `DOWNSTREAM_DEPENDENCY_LEDGER.tsv` lists every remaining downstream dependency of the tooling poms
-(107 rows: 0 still resolve a published binary,
-0 not vendored, 55 Maven build plugins). Nothing here enters
+(257 rows: 0 still resolve a published binary,
+0 not vendored, 129 Maven build plugins). Nothing here enters
 `src/**` (GPLv2+CPE); the JDK runtime itself has no third-party dependency.
 
 Shaded jar (maven-shade-plugin): `m3/vendor/third_party/m3-tooling-shaded` merges the vendored OpenRewrite stack into one

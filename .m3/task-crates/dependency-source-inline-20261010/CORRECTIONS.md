@@ -51,3 +51,22 @@ differs. Next commit: the upstream packaging excludes for those paths and a gate
   excluded from every jar; no published jar carries it.
 - Gate re-run on the rebuilt jars: 33 IDENTICAL, 21 EQUIVALENT_MODULO_COMPILER, 1 IDENTICAL_EXCEPT_SHADED; resources
   0 missing, 0 differing, 0 built-only across all 55 modules. Shade closure: 45 artifacts, 0 downstream binaries.
+
+# Consumer coverage extended to every m3 pom on master (2026-10-12)
+
+A whole-repository scan of master (`M3_POM_SCAN.tsv`, every pom.xml read from git) found 33 tooling poms added since
+the first inventory. 71 of their pins (rewrite-core/-java/-java-21/-test 8.17.1, slf4j-api 1.7.36, jetbrains
+annotations 24.1.0) are vendored modules and are now switched: 123 pins in 51 poms (`CONSUMER_SWITCH.tsv`). Recipe
+test fixtures under `src/test/resources/` are input data and stay unchanged.
+
+Still downstream after this commit:
+- `org.junit.jupiter:junit-jupiter` 5.10.2 / 5.11.4 (test scope, 51 poms). The vendored junit-jupiter-api/-params do
+  not include the engine and launcher that surefire loads.
+- `com.synexia:synexia-jdk-a3-recipes` and `com.synexia.m3:cpu-gpu-rv32im` (1.0.0-SNAPSHOT): first-party Synexia
+  artifacts.
+- Compile-only (`provided`) inputs of the vendored modules: micrometer-core's optional binder APIs (hazelcast,
+  kafka, hibernate, jetty, mongodb and others), plus byte-buddy and assertj optional APIs. They are never on a
+  runtime classpath.
+- Maven build plugins (129 rows): build tools, resolved from the plugin repository.
+- `src/utils/IdealGraphVisualizer` and `src/utils/LogCompilation`: upstream OpenJDK developer utilities, not part
+  of the JDK build.

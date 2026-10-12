@@ -165,6 +165,12 @@ def main() -> int:
             verdict = "DIFFERS_RESOURCES"
         out.append((did, kv["published_classes"], kv["built_classes"], kv["identical_classes"], str(missing), str(extra), str(rp), str(rb), verdict, diff.name, str(benign), view, kv.get("published_versions", ""), kv.get("built_versions", ""), kv.get("resources_published", ""), str(res_missing), str(res_diff), kv.get("resources_built_only", "")))
         print(did, verdict, view, file=sys.stderr)
+    if args.out.exists():  # previous non-admissible verdicts of donors not evaluated this run are carried forward
+        seen = set(x[0] for x in out)
+        for prev in csv.DictReader(io.open(args.out, encoding="utf-8", newline=""), delimiter="\t"):
+            if prev["donor"] not in seen and prev["verdict"] not in ADMISSIBLE and prev["verdict"] not in ("TOOL_FAILED", "NO_BUILT_JAR", "NO_PUBLISHED_JAR"):
+                out.append(tuple(prev[k] or "" for k in prev))
+                print(prev["donor"], prev["verdict"], "carried forward (image; not re-gated)", file=sys.stderr)
     args.out.write_text("\n".join(["donor\tpublished_classes\tbuilt_classes\tidentical_classes\tmissing_classes\tbuilt_only_classes\treal_published_only_lines\treal_built_only_lines\tverdict\tdiff\tcompiler_artifact_lines\tview\tpublished_class_versions\tbuilt_class_versions\tresources_published\tresources_missing\tresources_differ\tresources_built_only"] + ["\t".join(x) for x in out]) + "\n", encoding="utf-8", newline="\n")
     counts = {}
     for x in out:

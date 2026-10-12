@@ -6,19 +6,19 @@
       "IDENTICAL": 33,
       "IDENTICAL_EXCEPT_SHADED": 1
     },
-    "build_plugin_rows": 55,
+    "build_plugin_rows": 129,
     "delomboked_files": 269,
     "downstream_binary_still_resolved": 0,
     "downstream_not_vendored": 0,
-    "downstream_rows": 107,
+    "downstream_rows": 257,
     "gate": 55,
     "gate_pass": 55,
     "images": 0,
     "modules": 55,
     "native_binaries": 47,
-    "switched": 52
+    "switched": 123
   },
-  "generated": "2026-10-11T07:54:59Z",
+  "generated": "2026-10-12T00:16:50Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {
@@ -39,7 +39,7 @@
       },
       "switched": 54
     },
-    "evidence_sha256": "6922b079f4ad920ce55b4b418c29f400e11d7883f231802c689db56b01d6d923",
+    "evidence_sha256": "f4a3df43b0019dfc99f582e9cc331d6fa27cde0969a26c71f1c2987b55b7c478",
     "path": ".m3/task-crates/dependency-source-inline-20261010 (hsoliwal/com.synexia)"
   },
   "synexia_pr": "hsoliwal/com.synexia#10339",
