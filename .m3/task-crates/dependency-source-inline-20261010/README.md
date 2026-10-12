@@ -17,7 +17,7 @@ published sources jars omit (SPI registrations, jar-level legal files, build-fil
 128 files) are completed byte-for-byte from the published jar and pinned in PROVENANCE.json.
 
 `DOWNSTREAM_DEPENDENCY_LEDGER.tsv` lists every remaining downstream dependency of the tooling poms
-(304 rows: 0 still resolve a published binary,
+(305 rows: 0 still resolve a published binary,
 0 not vendored, 129 Maven build plugins). Nothing here enters
 `src/**` (GPLv2+CPE); the JDK runtime itself has no third-party dependency.
 

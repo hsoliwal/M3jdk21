@@ -80,6 +80,7 @@ m3/tooling/migration-recipes/pom.xml	org.openrewrite	rewrite-java	8.17.1-m3-sour
 m3/tooling/migration-recipes/pom.xml	org.openrewrite	rewrite-java-21	8.17.1-m3-source-1	VENDORED_SOURCE_BUILD+SWITCHED API_SURFACE=IDENTICAL	m3/vendor/third_party/rewrite-java-21	-
 m3/tooling/migration-recipes/pom.xml	org.openrewrite	rewrite-test	8.17.1-m3-source-1	VENDORED_SOURCE_BUILD+SWITCHED API_SURFACE=IDENTICAL	m3/vendor/third_party/rewrite-test	-
 m3/tooling/migration-recipes/pom.xml	org.junit.jupiter	junit-jupiter	5.10.2-m3-source-1	VENDORED_SOURCE_BUILD+SWITCHED API_SURFACE=IDENTICAL	m3/vendor/third_party/junit-jupiter-5.10.2	-
+m3/tooling/migration-recipes/pom.xml	com.synexia	synexia-openrewrite-recipes	1.0.0-SNAPSHOT	IN_REPO_MODULE	m3/synexia-import/pure-int-recipe-custody/pom.xml	-
 m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml	org.apache.maven.plugins	maven-compiler-plugin	3.13.0	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
 m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml	org.apache.maven.plugins	maven-surefire-plugin	3.2.5	BUILD_PLUGIN	-	Maven build tool, resolved from a plugin repository at build time; not a JDK runtime dependency
 m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml	org.openrewrite	rewrite-java	8.17.1-m3-source-1	VENDORED_SOURCE_BUILD+SWITCHED API_SURFACE=IDENTICAL	m3/vendor/third_party/rewrite-java	-

@@ -1,5 +1,5 @@
 {
-  "baseline": "30c507d2eb1528647484d0971f4c52627b362e3a",
+  "baseline": "f415c0732f73b03aa537e3ed4759319ab0ee7c22",
   "counts": {
     "api_surface": {
       "EQUIVALENT_MODULO_COMPILER": 57,
@@ -9,15 +9,15 @@
     "delomboked_files": 269,
     "downstream_binary_still_resolved": 0,
     "downstream_not_vendored": 0,
-    "downstream_rows": 304,
+    "downstream_rows": 305,
     "gate": 120,
     "gate_pass": 120,
     "images": 11,
     "modules": 120,
     "native_binaries": 128,
-    "switched": 172
+    "switched": 125
   },
-  "generated": "2026-10-12T07:21:51Z",
+  "generated": "2026-10-12T10:15:18Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {

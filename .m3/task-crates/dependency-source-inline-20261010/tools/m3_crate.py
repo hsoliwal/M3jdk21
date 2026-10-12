@@ -10,7 +10,7 @@ import argparse, csv, hashlib, io, json, re, shutil, sys, time
 from pathlib import Path
 
 CRATE = ".m3/task-crates/dependency-source-inline-20261010"
-KEEP_HAND_WRITTEN = ("CORRECTIONS.md", "API_SURFACE_RUNNER.tsv")
+KEEP_HAND_WRITTEN = ("CORRECTIONS.md", "API_SURFACE_RUNNER.tsv", "reuse/REUSE_PAIRS.tsv", "reuse/REUSE_SUMMARY.json", "reuse/REUSE_CATALOG.tsv.gz", "reuse/ATOMIZE_PROOF.json", "tools/reuse_catalog.py")
 SUFFIX = "-m3-source-1"
 DEP_RE = re.compile(r"<dependency>(.*?)</dependency>", re.S)
 
@@ -42,6 +42,7 @@ def main() -> int:
         shutil.rmtree(crate)
     crate.mkdir(parents=True)
     for n, b in keep.items():
+        (crate / n).parent.mkdir(parents=True, exist_ok=True)
         (crate / n).write_bytes(b)
     mods = tsv(args.c6 / "M3_THIRD_PARTY_MODULES.tsv")
     api = {g["donor"]: g for g in tsv(args.c6 / "M3_API_SURFACE.tsv")} if (args.c6 / "M3_API_SURFACE.tsv").exists() else {}
@@ -54,7 +55,7 @@ def main() -> int:
     for n in ("M3_THIRD_PARTY_MODULES.tsv", "M3_BUILD_GATE.tsv", "M3_CONSUMER_SWITCH.tsv", "M3_API_SURFACE.tsv", "candidates_t7.tsv", "DEPENDENCY_INVENTORY_T7.tsv", "candidates_t8.tsv", "DEPENDENCY_INVENTORY_T8.tsv", "POM_CLASSPATH.tsv", "UPSTREAM_LICENSES_3.tsv", "UNRESOLVED_IMPORTS.tsv", "BUILD_INPUTS.tsv"):
         if (args.c6 / n).exists():
             shutil.copyfile(args.c6 / n, crate / n.replace("M3_", ""))
-    (crate / "tools").mkdir()
+    (crate / "tools").mkdir(exist_ok=True)
     if (args.c6 / "closure" / "runtime-list.txt").exists():
         listing = (args.c6 / "closure" / "runtime-list.txt").read_text(encoding="utf-8").splitlines()
         (crate / "OPENREWRITE_8_17_1_RUNTIME_CLOSURE.txt").write_text("\n".join(ln.rstrip() for ln in listing if ln.strip()) + "\n", encoding="utf-8", newline="\n")
