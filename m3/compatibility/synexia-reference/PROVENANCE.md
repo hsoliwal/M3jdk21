@@ -9,6 +9,8 @@ applicable attribution in `NOTICE.md` accompany them.
 |---|---|
 | `synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java` | `75264c85b4da2cd7d9193d8e245364efb53aa936` |
 | `synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java` | `0e249745d0e96a1d9a8754a075f33cdf42e8fc0b` |
+| `LICENSE` | `29f81d812f3e768fa89638d1f72920dbfd1413a8` |
+| `NOTICE` (applicable attribution source) | `97bb5d49f8bd3bc573c19afe4ea2392a3d02704e` |
 
 `check-synexia.py` recomputes each Git blob hash before compiling. The local
 fixture removes a network dependency on unauthenticated raw URLs to a private

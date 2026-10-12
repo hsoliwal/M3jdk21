@@ -21,9 +21,9 @@ for name,expected in pins.items():
     if git_blob_sha(data)!=expected:raise ValueError('Reference source blob pin mismatch: '+name)
     if not data.startswith(b'// SPDX-License-Identifier: Apache-2.0'):raise ValueError('Reference license marker changed')
     paths.append(str(path))
-license_text=(fixture/'LICENSE-2.0.txt').read_text(encoding='utf-8')
-if 'Apache License' not in license_text or 'Version 2.0' not in license_text:
-    raise ValueError('Synexia Apache-2.0 license copy missing or invalid')
+license_bytes=(fixture/'LICENSE-2.0.txt').read_bytes()
+if git_blob_sha(license_bytes)!='29f81d812f3e768fa89638d1f72920dbfd1413a8':
+    raise ValueError('Synexia Apache-2.0 license blob pin mismatch')
 shim=source_dir/'MIndexAddressedView.java'
 mapped_test=source_dir/'SynexiaMappedStorageTest.java'
 classes=root/'build/reference-test-classes'/commit
