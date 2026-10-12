@@ -11,7 +11,7 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
   core/test/M3DictionaryFrequencyContractTest.java \
   core/test/M3TranslationReceiverMapTest.java \
   core/test/SynexiaPrecomputePayloadTest.java core/test/SynexiaPrecomputeReceiverTest.java \
-  core/test/LangDexProjectionReceiverTest.java \
+  core/test/LangDexProjectionReceiverTest.java core/test/LangDexSourceEnvelopeTest.java \
   core/test/SharedLexiconFamilySidecarCatalogTest.java \
   core/test/SharedLexiconCatalogFamilyAdmissionTest.java \
   core/test/SharedLexiconFamilyContractTest.java core/test/SynexiaSiUnitDecoderTest.java \
@@ -29,6 +29,7 @@ for mode in jit int nocompact c2; do
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputePayloadTest | tee "build/logs/synexia-payload-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputeReceiverTest | tee "build/logs/synexia-receiver-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests LangDexProjectionReceiverTest | tee "build/logs/langdex-receiver-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests LangDexSourceEnvelopeTest | tee "build/logs/langdex-source-envelope-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconFamilySidecarCatalogTest | tee "build/logs/synexia-family-sidecar-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconCatalogFamilyAdmissionTest | tee "build/logs/synexia-family-admission-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconFamilyContractTest | tee "build/logs/synexia-family-contract-$mode.log"
