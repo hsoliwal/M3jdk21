@@ -45,6 +45,11 @@ class RecipeTest(unittest.TestCase):
                 self.assertNotIn(hashes["before"], superseded, name)
                 self.assertNotIn(hashes["after"], superseded, name)
 
+    def test_current_m3_string_pool_image_has_exact_superseded_receipt(self):
+        name = "src/java.base/share/classes/java/lang/M3StringPool.java"
+        actual = recipe.digest((ROOT / name).read_bytes())
+        self.assertIn(actual, manifest["files"][name]["superseded"])
+
     def test_current_tree_is_exact_superseded_fixed_point(self):
         with tempfile.TemporaryDirectory() as folder:
             target = Path(folder)
