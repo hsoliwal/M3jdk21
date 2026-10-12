@@ -1,0 +1,62 @@
+name: M3 Bulk Registration Live Recovery
+
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/vm/parallel/BulkScheduler.java'
+      - 'test/jdk/jdk/internal/vm/parallel/BulkProviderStableIdentityTest.java'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3BulkLiveRegistrationRecoveryRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-live-registration-recovery/**'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3BulkLiveRegistrationRecoveryRecipeTest.java'
+      - 'm3/synexia-import/pure-int-recipe-custody/**'
+      - 'm3/tooling/migration-recipes/pom.xml'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3BulkRegistrationCiBootstrapRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3BulkRegistrationCiBootstrapRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bulk-registration-ci-20261012/**'
+      - 'm3/tooling/migration-recipes/tasks/bulk-registration-ci-20261012/**'
+      - '.github/workflows/m3-bulk-registration-live-recovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recipe-fixed-point:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install pinned Synexia recipe custody
+        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+      - run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3BulkLiveRegistrationRecoveryRecipeTest test
+      - run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Drewrite.activeRecipes=com.m3.rewrite.backport.M3BulkLiveRegistrationRecoveryRecipe             rewrite:dryRun
+
+  isolated-patch:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile only the five internal JDK classes and test execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          src="$RUNNER_TEMP/m3-bulk-source"
+          out="$RUNNER_TEMP/m3-bulk-classes"
+          tests="$RUNNER_TEMP/m3-bulk-tests"
+          mkdir -p "$src/jdk/internal/vm/parallel" "$out" "$tests"
+          for name in BulkTask BulkExecutor BulkExecution BulkExecutorProvider BulkScheduler; do
+            cp "src/java.base/share/classes/jdk/internal/vm/parallel/$name.java" "$src/jdk/internal/vm/parallel/"
+          done
+          javac -Xlint:all -Werror --patch-module "java.base=$src"             -d "$out" "$src"/jdk/internal/vm/parallel/*.java
+          javac -Xlint:all -Werror --patch-module "java.base=$out"             --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED             -d "$tests"             test/jdk/jdk/internal/vm/parallel/BulkExecutorTest.java             test/jdk/jdk/internal/vm/parallel/BulkSchedulerTest.java             test/jdk/jdk/internal/vm/parallel/BulkProviderStableIdentityTest.java
+          for main in BulkExecutorTest BulkSchedulerTest BulkProviderStableIdentityTest; do
+            java --patch-module "java.base=$out"               --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED               -cp "$tests" "$main"
+          done
