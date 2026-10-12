@@ -26,36 +26,54 @@ import java.util.Objects;
 import java.util.Set;
 
 public final class BulkScheduler implements BulkExecutor {
-    private static final Comparator<BulkExecutorProvider> ORDER =
-            Comparator.comparingInt(BulkExecutorProvider::priority)
-                    .reversed()
-                    .thenComparing(BulkExecutorProvider::id);
+    /** Provider identity and priority are immutable scheduler registration facts. */
+    private record Registration(BulkExecutorProvider provider, String id, int priority) {
+        void requireStable() {
+            if (!id.equals(provider.id()) || priority != provider.priority()) {
+                throw new IllegalStateException("bulk provider registration changed: " + id);
+            }
+        }
+    }
 
-    private final List<BulkExecutorProvider> providers;
+    private static final Comparator<Registration> ORDER =
+            Comparator.comparingInt(Registration::priority)
+                    .reversed()
+                    .thenComparing(Registration::id);
+
+    private final List<Registration> registrations;
 
     public BulkScheduler(List<? extends BulkExecutorProvider> providers) {
         Objects.requireNonNull(providers, "providers");
-        ArrayList<BulkExecutorProvider> copy = new ArrayList<>(providers.size());
+        ArrayList<Registration> copy = new ArrayList<>(providers.size());
         HashSet<String> ids = new HashSet<>();
         for (BulkExecutorProvider provider : providers) {
             BulkExecutorProvider checked = Objects.requireNonNull(provider, "provider");
             String id = BulkTask.identifier(checked.id(), "provider");
+            int priority = checked.priority();
             if (!ids.add(id)) throw new IllegalArgumentException("duplicate provider: " + id);
-            copy.add(checked);
+            copy.add(new Registration(checked, id, priority));
         }
         if (copy.isEmpty()) throw new IllegalArgumentException("providers");
         copy.sort(ORDER);
-        this.providers = List.copyOf(copy);
+        this.registrations = List.copyOf(copy);
     }
 
     public List<String> providerIds() {
-        return providers.stream().map(BulkExecutorProvider::id).toList();
+        return registrations.stream().map(Registration::id).toList();
     }
 
     public BulkExecutorProvider select(BulkTask task) {
+        return registration(task).provider();
+    }
+
+    private Registration registration(BulkTask task) {
         Objects.requireNonNull(task, "task");
-        for (BulkExecutorProvider provider : providers) {
-            if (provider.supports(task)) return provider;
+        for (Registration item : registrations) {
+            item.requireStable();
+            if (item.provider().supports(task)) {
+                item.requireStable();
+                return item;
+            }
         }
         throw new IllegalStateException("no provider supports: " + task.operationId());
     }
@@ -68,10 +86,11 @@ public final class BulkScheduler implements BulkExecutor {
                 throw new IllegalArgumentException("missing input: " + input);
             }
         }
-        BulkExecutorProvider provider = select(task);
+        Registration item = registration(task);
         BulkExecution execution =
-                Objects.requireNonNull(provider.execute(task, values), "provider result");
-        if (!provider.id().equals(execution.provider())) {
+                Objects.requireNonNull(item.provider().execute(task, values), "provider result");
+        item.requireStable();
+        if (!item.id().equals(execution.provider())) {
             throw new IllegalStateException("provider identity mismatch");
         }
         Set<String> expected = Set.copyOf(task.outputs());
