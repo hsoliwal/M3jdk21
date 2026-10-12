@@ -345,10 +345,11 @@ public final class MIndexRegexProgramImageCodec {
       ByteBuffer input, boolean utf16) {
     int baseLength = boundedCount(input, "nested v1 image", MAX_IMAGE_BYTES);
     requireRemaining(input, baseLength, "nested v1 image");
-    byte[] base = new byte[baseLength];
-    input.get(base);
-    requireNestedVersion(ByteBuffer.wrap(base), utf16 ? UTF16_VERSION : VERSION);
-    MIndexRegexProgram.Image program = decode(ByteBuffer.wrap(base));
+    ByteBuffer base = input.slice().order(ByteOrder.BIG_ENDIAN);
+    base.limit(baseLength);
+    input.position(Math.addExact(input.position(), baseLength));
+    requireNestedVersion(base, utf16 ? UTF16_VERSION : VERSION);
+    MIndexRegexProgram.Image program = decode(base);
 
     long[] asciiStateMasks = readCountedLongs(input, "execution ASCII state masks");
     int epsilonWordsPerRow = getInt(input, "execution epsilon words");
