@@ -68,7 +68,8 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
                     mode + " frequency retained");
             var spellKey = new SharedLexiconFamilySidecarCatalog.SpellKey(
                     scope, "lex-a", "en", 2, 4, "spell-a");
-            check(family.spellAt(spellKey).orElseThrow().tokenIdsForDelete("a")[1] == 1,
+            int[] spellCandidates = family.spellAt(spellKey).orElseThrow().tokenIdsForDelete("a");
+            check(spellCandidates.length == 1 && spellCandidates[0] == 1,
                     mode + " spell index retained");
             var tokenHashKey = new SharedLexiconFamilySidecarCatalog.TokenHashKey(
                     scope, new SharedLexiconCatalog.Coordinate(0, 0), "value-a", "tok-1", 0, 1);
