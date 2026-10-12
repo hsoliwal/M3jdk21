@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+name: M3 String replacement guard proof
+on:
+  push:
+    branches: ['m3/string-replacement-guard-20261012']
+    paths:
+      - '.github/workflows/m3-string-replacement-guard-proof.yml'
+      - 'm3/runtime-integration/**'
+      - 'm3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-string-replacement-guard/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-seals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Record exact repair input identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          for path in m3/runtime-integration/check-m3string-invariants.py .github/workflows/mindex-string-backing.yml src/java.base/share/classes/java/lang/String.java; do
+            printf 'GIT_BLOB %s ' "$path"
+            git hash-object "$path"
+            sha256sum "$path"
+          done
+          printf 'SOURCE_ONLY_QUALIFICATION; NO_RUNTIME_PASS_CLAIM\n'
