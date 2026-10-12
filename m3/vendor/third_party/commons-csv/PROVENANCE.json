@@ -1,0 +1,182 @@
+{
+  "artifact": "commons-csv",
+  "automatic_module_name": "org.apache.commons.csv",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "synexia-common (synexia-bom)",
+  "coordinate": "org.apache.commons:commons-csv:1.12.0-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "commons-codec",
+      "form": "source module",
+      "group": "commons-codec",
+      "optional": false,
+      "scope": "compile",
+      "version": "1.17.1-m3-source-1"
+    },
+    {
+      "artifact": "commons-io",
+      "form": "source module",
+      "group": "commons-io",
+      "optional": false,
+      "scope": "compile",
+      "version": "2.18.0-m3-source-1"
+    }
+  ],
+  "donor": "commons-csv-1.12.0",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/resources/META-INF/LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/commons-csv/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "df3cdf0967800faa21704307e81342c5d34d25c1ac6dc410ffae996e398a7582",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/resources/META-INF/NOTICE.txt",
+      "sha256": "c981decfd3e077985edc1e4b2f71c3529604098c9bfc663ac4083ae0d57f9f53",
+      "upstream": "META-INF/NOTICE.txt"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/commons-csv/upstream-excluded/META-INF/maven/org.apache.commons/commons-csv/pom.properties",
+      "sha256": "4d775a266748b2e39827cd3f9beb177790051d95381207a1240929127b66140c",
+      "upstream": "META-INF/maven/org.apache.commons/commons-csv/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/commons-csv/upstream-excluded/META-INF/maven/org.apache.commons/commons-csv/pom.xml",
+      "sha256": "2326a8760ac8b8d832d90cccf74c12442b304bdcbe8e665a7f7c90a0a4f9e689",
+      "upstream": "META-INF/maven/org.apache.commons/commons-csv/pom.xml"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/CSVException.java",
+      "sha256": "d5d236a7d0c525d53fe3370508159c8f3772030b66e502ec2a7ba9ba21e1c94a",
+      "upstream": "org/apache/commons/csv/CSVException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/CSVFormat.java",
+      "sha256": "bdfd7bd8ab64dec7190c7dd87d1e4218cc58a0255eded320e8f996484536fdc2",
+      "upstream": "org/apache/commons/csv/CSVFormat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/CSVParser.java",
+      "sha256": "1fa861009f0e5daffd8641603195c35bf30a4e8de1c214b023500b69a190546e",
+      "upstream": "org/apache/commons/csv/CSVParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/CSVPrinter.java",
+      "sha256": "726936b86de7b90b15d70ec61e02b141836b265ea9195394fd958ac396832696",
+      "upstream": "org/apache/commons/csv/CSVPrinter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/CSVRecord.java",
+      "sha256": "39379e389b9ce195f186371979ed225631218d6d33af608046d3b8d948ecc1fb",
+      "upstream": "org/apache/commons/csv/CSVRecord.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/Constants.java",
+      "sha256": "65744c2043fd5ac363f3368103c1ee4a4a2952d3edda6b3846ea20d168412c63",
+      "upstream": "org/apache/commons/csv/Constants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/DuplicateHeaderMode.java",
+      "sha256": "36eabfad7650d413c8a6f41558b8021520775d2d39f0e0666fa64d1131ae6c60",
+      "upstream": "org/apache/commons/csv/DuplicateHeaderMode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java",
+      "sha256": "be2184623e1d540f15c9802f8fa6bd5b553935aee34f597f42766016c95625e5",
+      "upstream": "org/apache/commons/csv/ExtendedBufferedReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/Lexer.java",
+      "sha256": "ba00328b8fe1026460e15492d5e51bd46e935d58ee7f256b2daa42ce5f7836bc",
+      "upstream": "org/apache/commons/csv/Lexer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/QuoteMode.java",
+      "sha256": "859c7f7b6b77a469dd69e72095139ad317eb104cfe1c5224773561c0eee520ef",
+      "upstream": "org/apache/commons/csv/QuoteMode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/Token.java",
+      "sha256": "050f77ca5bbc34dde27002e6f5018096da8be4f9912a77c38c8d49f63b45a25b",
+      "upstream": "org/apache/commons/csv/Token.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/java/org/apache/commons/csv/package-info.java",
+      "sha256": "1e291d9bd039cceafb6928693ab1452741299560fcb359649b4c1008517bd8b7",
+      "upstream": "org/apache/commons/csv/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/commons-csv/SOURCES_MANIFEST.tsv",
+      "sha256": "f6da8bdca54a0ae6e81a04c318350fafe48d189e88e2df6dc7afe4a9eb083593",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/commons-csv/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "org.apache.commons:commons-csv:1.12.0 (sha256 e11a33d65e5f2e92769c0b13c548e0c2da01e37c1581417ea3fd7d5d9474fee6)",
+      "repository": "m3/vendor/third_party/commons-csv/src/main/descriptor/9/module-info.java",
+      "sha256": "ff68202c7a637a41dc67ca0d318a137ec1a79bf280cb73cee253a83a07f515f0",
+      "upstream": "META-INF/versions/9/module-info.class"
+    }
+  ],
+  "group": "org.apache.commons",
+  "kind": "MODULE",
+  "license": "Apache License, Version 2.0 (from the license text; pom declares none)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "org.apache.commons:commons-parent:75",
+  "pom": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-csv/1.12.0/commons-csv-1.12.0.pom",
+  "receipt": {
+    "buildRoot": "8e4fdb2fd83f079e6352e2571763a031b106b11793ea915f88099038bb7ea2d2",
+    "distributionSha256": "9fe70e1cde33d93175753cce97fdc08df69dbb764f3b59e983a63ae2e5e77771",
+    "lock": "33ab049867c1c736c65dececbbb9f9d42697fd3336cf178946c3c43ba55336ff",
+    "message": "",
+    "sourceRoot": "e441705543380213b1cf965215c8aa553ec0d01f482610b53ee90ae54d61bfa1",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-csv/1.12.0/commons-csv-1.12.0-sources.jar",
+  "sources_jar_sha1": "7eb930a37d962fd72cba1f48fc1d2f816c441245",
+  "sources_jar_sha256": "f6c3bdc5c21e31ea1009f6da051386978a91c860679f44ad705bbec9643c8f6f",
+  "status": "PASS",
+  "upstream": "https://gitbox.apache.org/repos/asf?p=commons-csv.git",
+  "version": "1.12.0"
+}

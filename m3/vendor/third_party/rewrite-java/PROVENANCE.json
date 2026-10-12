@@ -1324,8 +1324,8 @@
       "upstream": "org/openrewrite/java/internal/TypesInUse.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.interp",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.interp",
       "sha256": "e2ce4625cb95d815ae015ff3c584976fbb49dc9fd0d740bcc1c59e317623233a",
       "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.interp"
     },
@@ -1336,14 +1336,14 @@
       "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.tokens",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.tokens",
       "sha256": "fa9f1a1cb534d96c4ff895d6ffbecde29e8e992e88deb6c5beb57c8896987bfd",
       "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureLexer.tokens"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/AnnotationSignatureParser.interp",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/AnnotationSignatureParser.interp",
       "sha256": "658f90ccfcc870684a04aa303ff44747a99eb805c24871d05a557da5035a5039",
       "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureParser.interp"
     },
@@ -1354,8 +1354,8 @@
       "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureParser.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/AnnotationSignatureParser.tokens",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/AnnotationSignatureParser.tokens",
       "sha256": "fa9f1a1cb534d96c4ff895d6ffbecde29e8e992e88deb6c5beb57c8896987bfd",
       "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureParser.tokens"
     },
@@ -1384,8 +1384,8 @@
       "upstream": "org/openrewrite/java/internal/grammar/AnnotationSignatureParserVisitor.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/MethodSignatureLexer.interp",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/MethodSignatureLexer.interp",
       "sha256": "d98caf994251e3163c25d064443216cffe1686cab09f812d54e3a398a1eb1059",
       "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureLexer.interp"
     },
@@ -1396,14 +1396,14 @@
       "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureLexer.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/MethodSignatureLexer.tokens",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/MethodSignatureLexer.tokens",
       "sha256": "60b39d576881093fbd7398d560f39d87187e8df11730919185fe396f2651976c",
       "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureLexer.tokens"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/MethodSignatureParser.interp",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/MethodSignatureParser.interp",
       "sha256": "4490be1fac04476bc8faafaf384bd354205661f9da5c4635e980fab7787a49b9",
       "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureParser.interp"
     },
@@ -1414,8 +1414,8 @@
       "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureParser.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/MethodSignatureParser.tokens",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/MethodSignatureParser.tokens",
       "sha256": "60b39d576881093fbd7398d560f39d87187e8df11730919185fe396f2651976c",
       "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureParser.tokens"
     },
@@ -1444,8 +1444,8 @@
       "upstream": "org/openrewrite/java/internal/grammar/MethodSignatureParserVisitor.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/TemplateParameterLexer.interp",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/TemplateParameterLexer.interp",
       "sha256": "daf7195fd07e8ed5c065ca691ab9a4db006bbf655af5d68beed159d03716179f",
       "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterLexer.interp"
     },
@@ -1456,14 +1456,14 @@
       "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterLexer.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/TemplateParameterLexer.tokens",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/TemplateParameterLexer.tokens",
       "sha256": "3844b3213118d34a89870bf9feb10734f4c1bba7ac8cb8fd874a61a4525b363b",
       "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterLexer.tokens"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/TemplateParameterParser.interp",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/TemplateParameterParser.interp",
       "sha256": "e70fac0d7e3cbb4c78dbb7e9f6aeea0c18574fd423d9a6e05d263e93229c4fab",
       "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterParser.interp"
     },
@@ -1474,8 +1474,8 @@
       "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterParser.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-java/src/main/resources/org/openrewrite/java/internal/grammar/TemplateParameterParser.tokens",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-java/upstream-source-only/org/openrewrite/java/internal/grammar/TemplateParameterParser.tokens",
       "sha256": "3844b3213118d34a89870bf9feb10734f4c1bba7ac8cb8fd874a61a4525b363b",
       "upstream": "org/openrewrite/java/internal/grammar/TemplateParameterParser.tokens"
     },
@@ -3509,6 +3509,11 @@
   "license": "The Apache Software License, Version 2.0",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "::",
   "pom": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.pom",

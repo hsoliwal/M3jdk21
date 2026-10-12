@@ -1344,13 +1344,18 @@
   "license": "Apache 2",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "::",
   "pom": "https://repo.maven.apache.org/maven2/com/univocity/univocity-parsers/2.9.1/univocity-parsers-2.9.1.pom",
   "receipt": {
-    "buildRoot": "30d5d248ac8b9411688676e15e2b84c6bd2f76b806f51c95071079e5a443d0ff",
-    "distributionSha256": "58ed1b51e86075857423d5af97aa3319d844ee007807cecd901d6c8e8313df78",
-    "lock": "97c6cae8f916753ee4ecb5277afee2550370ca7426854f2201219f060dfd585e",
+    "buildRoot": "ac7e4ecf917646aba1a2c7ce732a1d9e50384d3c37e09423419c6b62cbf82d9f",
+    "distributionSha256": "906d85e507c32f2539aace1017bdaa3a46013c47c532b2c6b481e5218db79912",
+    "lock": "e487f448edb18bc7aba04fecfaa28982d675b5a077c386d0957ab66504e02a37",
     "message": "",
     "sourceRoot": "e34e4398cefb2bf16966e2cee9e7e30ae6d84d55cc7871bd6a1ab2b0b283027b",
     "status": "PASS"

@@ -138,6 +138,11 @@
   "license": "UNDECLARED (see LICENSE)",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "org.brotli:parent:0.1.2",
   "pom": "https://repo.maven.apache.org/maven2/org/brotli/dec/0.1.2/dec-0.1.2.pom",

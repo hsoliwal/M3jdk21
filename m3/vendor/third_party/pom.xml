@@ -7,44 +7,101 @@
     <module>HdrHistogram</module>
     <module>JavaEWAH</module>
     <module>LatencyUtils</module>
+    <module>agrona</module>
     <module>annotations</module>
     <module>antlr4-runtime-4.11.1</module>
+    <module>antlr4-runtime-4.13.2</module>
     <module>apiguardian-api</module>
+    <module>asm-9.10.1</module>
     <module>asm-9.6</module>
     <module>asm-analysis</module>
     <module>asm-tree</module>
     <module>asm-util</module>
     <module>assertj-core</module>
     <module>byte-buddy</module>
+    <module>caffeine</module>
+    <module>cglib</module>
+    <module>checker-qual-3.37.0</module>
+    <module>checker-qual-3.55.1</module>
     <module>classgraph</module>
+    <module>commonmark</module>
+    <module>commons-codec-1.17.1</module>
     <module>commons-codec-1.22.1</module>
     <module>commons-compress-1.26.0</module>
+    <module>commons-compress-1.27.1</module>
+    <module>commons-csv</module>
     <module>commons-io-2.15.1</module>
+    <module>commons-io-2.18.0</module>
+    <module>commons-jexl3</module>
     <module>commons-lang3-3.14.0</module>
+    <module>commons-lang3-3.17.0</module>
+    <module>commons-logging</module>
+    <module>commons-net</module>
+    <module>commons-pool2</module>
     <module>commons-text</module>
     <module>dec</module>
+    <module>eclipse-collections</module>
+    <module>eclipse-collections-api</module>
+    <module>error_prone_annotations</module>
+    <module>failureaccess</module>
+    <module>fastdoubleparser-0.9.0</module>
     <module>fastdoubleparser-1.0.0</module>
+    <module>fastdoubleparser-1.0.90</module>
     <module>fastfilter</module>
     <module>gizmo</module>
+    <module>guava</module>
+    <module>j2objc-annotations</module>
+    <module>jackson-annotations-2.15.3</module>
     <module>jackson-annotations-2.16.1</module>
+    <module>jackson-annotations-2.19.2</module>
+    <module>jackson-core-2.15.3</module>
     <module>jackson-core-2.16.1</module>
+    <module>jackson-core-2.19.2</module>
+    <module>jackson-databind-2.15.3</module>
     <module>jackson-databind-2.16.1</module>
+    <module>jackson-databind-2.19.2</module>
     <module>jackson-dataformat-csv</module>
     <module>jackson-dataformat-smile</module>
+    <module>jackson-dataformat-yaml</module>
+    <module>jackson-datatype-jsr310-2.15.3</module>
     <module>jackson-datatype-jsr310-2.16.1</module>
     <module>jackson-module-parameter-names</module>
     <module>jandex</module>
     <module>java-object-diff</module>
     <module>jna-5.14.0</module>
+    <module>jna-5.18.1</module>
     <module>jna-platform</module>
+    <module>jsoup-1.17.2</module>
+    <module>jsoup-1.23.2</module>
+    <module>jspecify-0.3.0</module>
+    <module>jspecify-1.0.1</module>
     <module>jsr305</module>
-    <module>junit-jupiter-api</module>
-    <module>junit-jupiter-params</module>
-    <module>junit-platform-commons</module>
+    <module>junit-jupiter-5.10.2</module>
+    <module>junit-jupiter-5.11.4</module>
+    <module>junit-jupiter-api-5.10.2</module>
+    <module>junit-jupiter-api-5.11.4</module>
+    <module>junit-jupiter-engine-5.10.2</module>
+    <module>junit-jupiter-engine-5.11.4</module>
+    <module>junit-jupiter-params-5.10.2</module>
+    <module>junit-jupiter-params-5.11.4</module>
+    <module>junit-platform-commons-1.10.2</module>
+    <module>junit-platform-commons-1.11.4</module>
+    <module>junit-platform-engine-1.10.2</module>
+    <module>junit-platform-engine-1.11.4</module>
+    <module>junit-platform-launcher-1.10.2</module>
+    <module>junit-platform-launcher-1.11.4</module>
+    <module>lucene-analysis-common</module>
+    <module>lucene-core</module>
+    <module>lucene-queries</module>
+    <module>lucene-queryparser</module>
+    <module>lucene-sandbox</module>
+    <module>lz4-java</module>
     <module>micrometer-core</module>
     <module>opentest4j</module>
     <module>org.eclipse.jgit</module>
     <module>org.osgi.core</module>
+    <module>picocli</module>
+    <module>re2j</module>
     <module>rewrite-core</module>
     <module>rewrite-java</module>
     <module>rewrite-java-21</module>
@@ -55,10 +112,18 @@
     <module>slf4j-api-2.0.12</module>
     <module>slf4j-api-2.0.9</module>
     <module>slf4j-simple</module>
+    <module>snakeyaml-2.1</module>
     <module>snakeyaml-2.2</module>
+    <module>snakeyaml-2.6</module>
+    <module>snakeyaml-engine</module>
     <module>snappy-java</module>
+    <module>sqlite-jdbc-3.45.1.0</module>
+    <module>sqlite-jdbc-3.51.1.1</module>
+    <module>tomlj-1.1.1</module>
+    <module>tomlj-1.3.0</module>
     <module>univocity-parsers</module>
     <module>xz</module>
+    <module>zero-allocation-hashing</module>
     <module>m3-tooling-shaded</module>
   </modules>
 </project>

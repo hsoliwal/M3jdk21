@@ -11,13 +11,7 @@
   "dependencies": [],
   "donor": "xz-1.10",
   "excluded_from_compilation": [
-    "META-INF/versions/9/module-info.java",
-    "META-INF/versions/9/org/tukaani/xz/check/CRC64.java",
-    "META-INF/versions/9/org/tukaani/xz/common/ByteArrayView.java",
-    "META-INF/versions/9/org/tukaani/xz/lz/BasicMatchLengthFinder.java",
-    "META-INF/versions/9/org/tukaani/xz/lz/MatchLength.java",
-    "META-INF/versions/9/org/tukaani/xz/lz/MatchLengthFinder.java",
-    "META-INF/versions/9/org/tukaani/xz/lz/UnalignedLongLEMatchLengthFinder.java"
+    "META-INF/versions/9/module-info.java"
   ],
   "files": [
     {
@@ -33,38 +27,38 @@
       "upstream": "META-INF/versions/9/module-info.java"
     },
     {
-      "kind": "unmodified-production-excluded-from-compilation",
-      "repository": "m3/vendor/third_party/xz/upstream-excluded/META-INF/versions/9/org/tukaani/xz/check/CRC64.java",
+      "kind": "unmodified-production-overlay",
+      "repository": "m3/vendor/third_party/xz/src/main/versions/9/org/tukaani/xz/check/CRC64.java",
       "sha256": "bf95610b407ca6a7911feecf29fe1e78153f4e46d0a3f0c536e33163af92dd50",
       "upstream": "META-INF/versions/9/org/tukaani/xz/check/CRC64.java"
     },
     {
-      "kind": "unmodified-production-excluded-from-compilation",
-      "repository": "m3/vendor/third_party/xz/upstream-excluded/META-INF/versions/9/org/tukaani/xz/common/ByteArrayView.java",
+      "kind": "unmodified-production-overlay",
+      "repository": "m3/vendor/third_party/xz/src/main/versions/9/org/tukaani/xz/common/ByteArrayView.java",
       "sha256": "66f072c6f7c75ebf37afaca1cf200d0d38cd78ab745bc6185684f0c1fa856bc2",
       "upstream": "META-INF/versions/9/org/tukaani/xz/common/ByteArrayView.java"
     },
     {
-      "kind": "unmodified-production-excluded-from-compilation",
-      "repository": "m3/vendor/third_party/xz/upstream-excluded/META-INF/versions/9/org/tukaani/xz/lz/BasicMatchLengthFinder.java",
+      "kind": "unmodified-production-overlay",
+      "repository": "m3/vendor/third_party/xz/src/main/versions/9/org/tukaani/xz/lz/BasicMatchLengthFinder.java",
       "sha256": "d38a508be93019927faaf510164aeaf717a7a560f1a41e907358b49000a814a7",
       "upstream": "META-INF/versions/9/org/tukaani/xz/lz/BasicMatchLengthFinder.java"
     },
     {
-      "kind": "unmodified-production-excluded-from-compilation",
-      "repository": "m3/vendor/third_party/xz/upstream-excluded/META-INF/versions/9/org/tukaani/xz/lz/MatchLength.java",
+      "kind": "unmodified-production-overlay",
+      "repository": "m3/vendor/third_party/xz/src/main/versions/9/org/tukaani/xz/lz/MatchLength.java",
       "sha256": "a5a6eb4683e136b954447ffeab2fd5b6711d345f039dad08c92db0a0d2f1a075",
       "upstream": "META-INF/versions/9/org/tukaani/xz/lz/MatchLength.java"
     },
     {
-      "kind": "unmodified-production-excluded-from-compilation",
-      "repository": "m3/vendor/third_party/xz/upstream-excluded/META-INF/versions/9/org/tukaani/xz/lz/MatchLengthFinder.java",
+      "kind": "unmodified-production-overlay",
+      "repository": "m3/vendor/third_party/xz/src/main/versions/9/org/tukaani/xz/lz/MatchLengthFinder.java",
       "sha256": "2c3f51d454ad76af15fe3d472438fedae9fc15190f9b6dd4836de371328b51d7",
       "upstream": "META-INF/versions/9/org/tukaani/xz/lz/MatchLengthFinder.java"
     },
     {
-      "kind": "unmodified-production-excluded-from-compilation",
-      "repository": "m3/vendor/third_party/xz/upstream-excluded/META-INF/versions/9/org/tukaani/xz/lz/UnalignedLongLEMatchLengthFinder.java",
+      "kind": "unmodified-production-overlay",
+      "repository": "m3/vendor/third_party/xz/src/main/versions/9/org/tukaani/xz/lz/UnalignedLongLEMatchLengthFinder.java",
       "sha256": "3173e317d614c9055b85c8a3a7c759ad5e0d31f11256c83a95c545b3fe3b5ef0",
       "upstream": "META-INF/versions/9/org/tukaani/xz/lz/UnalignedLongLEMatchLengthFinder.java"
     },
@@ -745,6 +739,12 @@
       "repository": "m3/vendor/third_party/xz/LICENSE",
       "sha256": "1e77ef26cee5216d6531e49cbf2f6111a0270dc7b322fc65477063c5aff88766",
       "upstream": "UPSTREAM_LICENSE.txt"
+    },
+    {
+      "kind": "unmodified-production-descriptor",
+      "repository": "m3/vendor/third_party/xz/src/main/descriptor/9/module-info.java",
+      "sha256": "814b4272665556fed91a588dab6e0b931c507d34fe1872f4bfb41a24aa029d66",
+      "upstream": "META-INF/versions/9/module-info.java"
     }
   ],
   "group": "org.tukaani",
@@ -752,6 +752,13 @@
   "license": "0BSD",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": "reproduced (see src/main/descriptor)",
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": [
+      "9"
+    ]
+  },
   "native_binaries": 0,
   "parent": "::",
   "pom": "https://repo.maven.apache.org/maven2/org/tukaani/xz/1.10/xz-1.10.pom",

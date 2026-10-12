@@ -12,8 +12,8 @@ set -u
 SIDE="$1"; shift
 C=/k/m3-work/runs/20261007-m3jdk21-apex/c6
 K=K:/m3-work/runs/20261007-m3jdk21-apex/c6
-INV="$C/DEPENDENCY_INVENTORY.tsv $C/DEPENDENCY_INVENTORY_T2.tsv $C/DEPENDENCY_INVENTORY_T3.tsv $C/DEPENDENCY_INVENTORY_T4.tsv $C/DEPENDENCY_INVENTORY_T5.tsv $C/DEPENDENCY_INVENTORY_T6.tsv $C/DEPENDENCY_INVENTORY_T7.tsv $C/DEPENDENCY_INVENTORY_T8.tsv"
-RUNS="$C/run/out-1 $C/run/out-1b $C/run/out-2 $C/run/out-1c $C/run/out-1d $C/run/out-1e $C/run/out-3 $C/run/out-4b $C/run/out-4d"
+INV="$C/DEPENDENCY_INVENTORY.tsv $C/DEPENDENCY_INVENTORY_T2.tsv $C/DEPENDENCY_INVENTORY_T3.tsv $C/DEPENDENCY_INVENTORY_T4.tsv $C/DEPENDENCY_INVENTORY_T5.tsv $C/DEPENDENCY_INVENTORY_T6.tsv $C/DEPENDENCY_INVENTORY_T7.tsv $C/DEPENDENCY_INVENTORY_T8.tsv $C/DEPENDENCY_INVENTORY_T9.tsv"
+RUNS="$C/run/out-1 $C/run/out-1b $C/run/out-2 $C/run/out-1c $C/run/out-1d $C/run/out-1e $C/run/out-3 $C/run/out-4b $C/run/out-4d $C/run/out-5"
 STATUS=""; for r in $RUNS; do [ -f "$r/status.tsv" ] && STATUS="$STATUS $r/status.tsv"; done
 RECEIPTS=""; for r in $RUNS; do [ -d "$r" ] && RECEIPTS="$RECEIPTS $r"; done
 export JAVA_TOOL_OPTIONS="-Xmx1536m -Djava.io.tmpdir=K:/m3-work/tmp" TMP=K:/m3-work/tmp TEMP=K:/m3-work/tmp JAVA_HOME="C:\\Program Files\\Java\\jdk-21"
@@ -32,8 +32,10 @@ gen() {  # $1 = extra args
   if [ -f "$C/${P}THIRD_PARTY_MODULES.tsv" ]; then
     cut -f3 "$C/${P}THIRD_PARTY_MODULES.tsv" | tail -n +2 | grep -v "^third_party/re2j$" | while read -r d; do [ -n "$d" ] && rm -rf "$W/$d"; done
   fi
-  python -I "$C/gen_third_party.py" --inventory $INV --plan "$C/LOCK_PLAN.tsv" --status $STATUS --receipts $RECEIPTS --build-inputs "$C/BUILD_INPUTS.tsv" \
+  python -I "$C/run_traced.py" "$C/gen_third_party.py" --inventory $INV --plan "$C/LOCK_PLAN.tsv" --status $STATUS --receipts $RECEIPTS --build-inputs "$C/BUILD_INPUTS.tsv" \
     --store K:/m3-work/donors/maven-sources/store --repo "$WK" --out "$K/${P}THIRD_PARTY_MODULES.tsv" --template K:/m3-work/wt/synexia-c6/third_party/re2j --pom-classpath $K/POM_CLASSPATH.tsv $GENOPT $ONLY $1 2> "$C/${P}gen.log" | tail -1
+  rc=${PIPESTATUS[0]}
+  if [ "$rc" != 0 ]; then echo "GEN_FAILED rc=$rc (tree is partial; stopping the lane)"; tail -3 "$C/${P}gen.log"; exit 3; fi
   awk -F'\t' 'NR>1 {c[$2" "$7]++} END {for (k in c) printf "%s=%d; ", k, c[k]; print ""}' "$C/${P}THIRD_PARTY_MODULES.tsv"
 }
 steps="$*"; [ "$steps" = "all" ] && steps="gen build gate gen2 switch insert crate verify prbody"
@@ -47,6 +49,7 @@ for step in $steps; do
     gate)
       rm -rf "$C/${P}api-diffs"
       python -I "$C/api_gate.py" --inventory $INV --modules "$K/${P}THIRD_PARTY_MODULES.tsv" --repo "$WK" --store K:/m3-work/donors/maven-sources/store --asm "$ASM" --built-m2 K:/m3-work/m2-build --tool "$K/ApiSurface.java" --diffs "$K/${P}api-diffs" --out "$K/${P}API_SURFACE.tsv" 2>&1 | tail -1
+      python -I "$C/gate_retry.py" --api "$K/${P}API_SURFACE.tsv" --modules "$K/${P}THIRD_PARTY_MODULES.tsv" -- --inventory $INV --repo "$WK" --store K:/m3-work/donors/maven-sources/store --asm "$ASM" --built-m2 K:/m3-work/m2-build --tool "$K/ApiSurface.java" --diffs "$K/${P}api-diffs" 2>&1 | grep 'gate-retry'
       awk -F'\t' 'NR>1 && $9!="IDENTICAL" && $9!="EQUIVALENT_MODULO_COMPILER" && $9!="IDENTICAL_EXCEPT_SHADED" {print "  "$1"\t"$9"\tmissing="$5"\treal="$7"/"$8"\tres_missing="$16"\tres_differ="$17}' "$C/${P}API_SURFACE.tsv" ;;
     gen2) gen "--api-surface $K/${P}API_SURFACE.tsv" ;;
     switch)
@@ -64,7 +67,7 @@ for step in $steps; do
       if [ "$SIDE" = "synexia" ]; then
         python -I "$C/make_crate.py" --repo "$WK" --c6 "$K" --baseline "$(git -C "$W" rev-parse $BASE)" --runs $RECEIPTS --atoms "$K/atoms" | tail -1
       else
-        python -I "$C/m3_crate.py" --repo "$WK" --c6 "$K" --synexia-crate K:/m3-work/wt/synexia-c6/.m3/task-crates/dependency-source-inline-20261010 --synexia-pr "hsoliwal/com.synexia#10193" --baseline "$(git -C "$W" rev-parse $BASE)" --consumers "$K/m3_consumer_poms.txt" | tail -1
+        python -I "$C/m3_crate.py" --repo "$WK" --c6 "$K" --synexia-crate K:/m3-work/wt/synexia-c6/.m3/task-crates/dependency-source-inline-20261010 --synexia-pr "hsoliwal/com.synexia#10339" --baseline "$(git -C "$W" rev-parse $BASE)" --consumers "$K/m3_consumer_poms.txt" | tail -1
       fi ;;
     verify)
       (cd "$W" && python -I .m3/task-crates/dependency-source-inline-20261010/verify_crate.py | tail -1) ;;

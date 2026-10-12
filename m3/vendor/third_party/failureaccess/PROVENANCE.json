@@ -1,0 +1,86 @@
+{
+  "artifact": "failureaccess",
+  "automatic_module_name": "com.google.common.util.concurrent.internal",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "transitive compile input of guava 33.0.0-jre",
+  "coordinate": "com.google.guava:failureaccess:1.0.2-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "failureaccess-1.0.2",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/failureaccess/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "52d37326e23d5bbc4ed842861b765956d3ac965136c9872147f19226902a670f",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/failureaccess/src/main/java/com/google/common/util/concurrent/internal/InternalFutureFailureAccess.java",
+      "sha256": "745df6c9adaf5a144bf57e17d9222919a15a129c1174fcc04966093bf3b1ec32",
+      "upstream": "com/google/common/util/concurrent/internal/InternalFutureFailureAccess.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/failureaccess/src/main/java/com/google/common/util/concurrent/internal/InternalFutures.java",
+      "sha256": "e5b7d647e394134095d8b9ff473b510dc1c34324332a13af27ad8db9a490b091",
+      "upstream": "com/google/common/util/concurrent/internal/InternalFutures.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/failureaccess/UPSTREAM_LICENSE.json",
+      "sha256": "7acd6df9bb58db6b482b07b0b20ee98aa7d8c0aef841d2489438e3ba6ba9a131",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/failureaccess/UPSTREAM_LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/failureaccess/SOURCES_MANIFEST.tsv",
+      "sha256": "dc5f77edbb636068889d354de2df8b2bcd843e9691c599361bce6a100f1f38ce",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/failureaccess/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "com.google.guava",
+  "kind": "MODULE",
+  "license": "Apache License, Version 2.0 (from the license text; pom declares none)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "com.google.guava:guava-parent:26.0-android",
+  "pom": "https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.pom",
+  "receipt": {
+    "buildRoot": "c0de21ab22741017c9ecbcd06b1e71896534dd46eb2781886b69ee86043f4688",
+    "distributionSha256": "02e0b49c771fc166b1e04b9380c2c5ac5905e9005bec50ce2776f03f832f0004",
+    "lock": "33ab049867c1c736c65dececbbb9f9d42697fd3336cf178946c3c43ba55336ff",
+    "message": "",
+    "sourceRoot": "6ea9e24144cd2f98fbfdc9c53f2a66cc8ec8333cd078fbf8e1b10131e035e2b9",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2-sources.jar",
+  "sources_jar_sha1": "6acdafcf2dfc3b548e59dd3a4b454552aeb6ff65",
+  "sources_jar_sha256": "dd3bfa5e2ec5bc5397efb2c3cef044c192313ff77089573667ff97a60c6978e0",
+  "status": "PASS",
+  "upstream": "",
+  "version": "1.0.2"
+}

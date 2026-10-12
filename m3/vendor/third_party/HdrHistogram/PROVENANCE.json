@@ -259,8 +259,8 @@
       "upstream": "org/HdrHistogram/Version.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/HdrHistogram/src/main/resources/org/HdrHistogram/Version.java.template",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/HdrHistogram/upstream-source-only/org/HdrHistogram/Version.java.template",
       "sha256": "f58f76cf8921177b2a5f0d7478c9b98f70c6514d00f6c82da20d08abb4ce5c93",
       "upstream": "org/HdrHistogram/Version.java.template"
     },
@@ -372,6 +372,11 @@
   "license": "Public Domain, per Creative Commons CC0",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "::",
   "pom": "https://repo.maven.apache.org/maven2/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.pom",

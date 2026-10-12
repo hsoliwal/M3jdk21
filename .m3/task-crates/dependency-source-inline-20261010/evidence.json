@@ -1,41 +1,46 @@
 {
-  "baseline": "30c507d2eb1528647484d0971f4c52627b362e3a",
+  "baseline": "f415c0732f73b03aa537e3ed4759319ab0ee7c22",
   "counts": {
     "api_surface": {
-      "EQUIVALENT_MODULO_COMPILER": 21,
-      "IDENTICAL": 33,
-      "IDENTICAL_EXCEPT_SHADED": 1
+      "EQUIVALENT_MODULO_COMPILER": 57,
+      "IDENTICAL": 63
     },
-    "build_plugin_rows": 55,
+    "build_plugin_rows": 129,
     "delomboked_files": 269,
     "downstream_binary_still_resolved": 0,
     "downstream_not_vendored": 0,
-    "downstream_rows": 107,
-    "gate": 55,
-    "gate_pass": 55,
-    "images": 0,
-    "modules": 55,
-    "native_binaries": 47,
-    "switched": 52
+    "downstream_rows": 305,
+    "gate": 120,
+    "gate_pass": 120,
+    "images": 11,
+    "modules": 120,
+    "native_binaries": 128,
+    "switched": 125
   },
-  "generated": "2026-10-11T05:13:57Z",
+  "generated": "2026-10-12T10:15:18Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {
-      "donors": 88,
-      "images": 17,
-      "modules": 70,
-      "status": {
-        "FAILED": 2,
-        "PASS": 71,
-        "SOURCE_ONLY": 15
+      "api_surface": {
+        "DIFFERS_MISSING_CLASSES": 2,
+        "EQUIVALENT_MODULO_COMPILER": 54,
+        "IDENTICAL": 63
       },
-      "switched": 45
+      "donors": 120,
+      "images": 13,
+      "modules": 117,
+      "status": {
+        "API_SURFACE_DIFFERS_MISSING_CLASSES": 2,
+        "FAILED": 2,
+        "PASS": 118,
+        "SOURCE_ONLY": 9
+      },
+      "switched": 57
     },
-    "evidence_sha256": "742c6caf87dffb14070618edafb83e927f1e75b991f98d83b1c0a3bc0328c5de",
+    "evidence_sha256": "b14d583660dfa8b736372b582ea4e23ddb766e063a90af6c5c862f766691fe7d",
     "path": ".m3/task-crates/dependency-source-inline-20261010 (hsoliwal/com.synexia)"
   },
-  "synexia_pr": "hsoliwal/com.synexia#10193",
+  "synexia_pr": "hsoliwal/com.synexia#10339",
   "user_directives": [
     "pull all thriepart code and inline ands refactor it",
     "inline and refactor all third party code ... jdk cannot have downstream dependency"

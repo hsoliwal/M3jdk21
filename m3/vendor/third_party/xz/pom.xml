@@ -18,13 +18,14 @@
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.15.0</version>
         <!-- Upstream bytes are compiled as published: no annotation processing, no warnings-as-errors. M3jdk21 integration is checked separately with -Werror. -->
         <configuration><release>8</release><encoding>UTF-8</encoding><proc>none</proc><compilerArgs><arg>-Xlint:all,-options</arg></compilerArgs></configuration>
+        <executions><execution><id>multi-release-9</id><phase>process-classes</phase><goals><goal>compile</goal></goals><configuration><release>9</release><compileSourceRoots><compileSourceRoot>${project.basedir}/src/main/versions/9</compileSourceRoot></compileSourceRoots><multiReleaseOutput>true</multiReleaseOutput></configuration></execution><execution><id>module-descriptor-9</id><phase>process-classes</phase><goals><goal>compile</goal></goals><configuration><release>9</release><compileSourceRoots><compileSourceRoot>${project.basedir}/src/main/descriptor/9</compileSourceRoot></compileSourceRoots><multiReleaseOutput>true</multiReleaseOutput><useModuleVersion>false</useModuleVersion><compilerArgs></compilerArgs></configuration></execution></executions>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.6</version>
         <!-- Published sources jars carry no test suite; the compile and the consumers' own tests are the proof lane. -->
         <configuration><skipTests>true</skipTests></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
-        <configuration><excludes><exclude>**/.no-default-excludes</exclude></excludes><archive><manifestEntries><M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline></manifestEntries></archive></configuration>
+        <configuration><excludes><exclude>META-INF/jpms.args</exclude></excludes><archive><manifestEntries><M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline><Multi-Release>true</Multi-Release></manifestEntries></archive></configuration>
       </plugin>
     </plugins>
   </build>

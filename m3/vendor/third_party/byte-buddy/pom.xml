@@ -28,7 +28,7 @@
         <configuration><skipTests>true</skipTests></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
-        <configuration><excludes><exclude>**/.no-default-excludes</exclude></excludes><archive><manifestEntries><M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline></manifestEntries></archive></configuration>
+        <configuration><excludes><exclude>META-INF/jpms.args</exclude></excludes><archive><manifestEntries><M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline><Multi-Release>true</Multi-Release></manifestEntries></archive></configuration>
       </plugin>
       <plugin><groupId>net.bytebuddy</groupId><artifactId>byte-buddy-maven-plugin</artifactId><version>1.14.10</version>
         <!-- upstream byte-buddy-dep build: the same five transformations, applied to the compiled classes -->
@@ -42,6 +42,10 @@
             <transformation><groupId>net.bytebuddy</groupId><artifactId>byte-buddy</artifactId><version>1.14.10</version><plugin>net.bytebuddy.build.RepeatedAnnotationPlugin</plugin></transformation>
           </transformations>
         </configuration></execution></executions>
+      </plugin>
+      <plugin><groupId>org.moditect</groupId><artifactId>moditect-maven-plugin</artifactId><version>1.2.2.Final</version>
+        <!-- descriptors upstream generates in its build, assembled from the declaration in src/main/descriptor -->
+        <executions><execution><id>add-module-info-9</id><phase>package</phase><goals><goal>add-module-info</goal></goals><configuration><jvmVersion>9</jvmVersion><overwriteExistingFiles>true</overwriteExistingFiles><failOnWarning>false</failOnWarning><version>1.14.11</version><module><moduleInfoFile>${project.basedir}/src/main/descriptor/9/module-info.java</moduleInfoFile></module></configuration></execution></executions>
       </plugin>
     </plugins>
   </build>

@@ -1,0 +1,2438 @@
+{
+  "artifact": "com.github.ben-manes.caffeine:caffeine:3.1.8",
+  "repository": "https://github.com/ben-manes/caffeine",
+  "tag": "v3.1.8",
+  "commit": "b0723da5976ebb52069f6b0cccfcf44186c3fdf3",
+  "commit_date": "2023-08-09T04:46:32Z",
+  "license": "Apache-2.0",
+  "build_definition": {
+    "file": "caffeine/build.gradle.kts",
+    "source_set": "javaPoet (src/javaPoet/java + src/javaPoet/resources)",
+    "consumer_source_set": "codeGen = build/generated-sources/local + build/generated-sources/nodes (compiled by compileCodeGenJava with options.isDebug=false, classpath main output; packaged into the main jar)",
+    "jvm_args_source": "gradle/plugins/src/main/kotlin/ProjectExtensions.kt DisableStrongEncapsulationJvmArgs",
+    "versions_source": "gradle/libs.versions.toml",
+    "upstream_toolchain": "JDK 11 (java-library-caffeine-conventions: JAVA_VERSION default 11; .github/workflows/release.yml JAVA_VERSION: 11)"
+  },
+  "generators": [
+    {
+      "gradle_task": "generateLocalCaches",
+      "main_class": "com.github.benmanes.caffeine.cache.LocalCacheFactoryGenerator",
+      "args": [
+        "build/generated-sources/local"
+      ],
+      "jvm_args": [
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED"
+      ],
+      "output_files": 384
+    },
+    {
+      "gradle_task": "generateNodes",
+      "main_class": "com.github.benmanes.caffeine.cache.NodeFactoryGenerator",
+      "args": [
+        "build/generated-sources/nodes"
+      ],
+      "jvm_args": [
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED"
+      ],
+      "output_files": 144
+    }
+  ],
+  "generator_inputs": [
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/Feature.java",
+      "sha256": "fc6773f28427cf3f644c3619095cfc216b22d4e113fc4dae33f39f7aaadc3ecf"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/LocalCacheFactoryGenerator.java",
+      "sha256": "290b13779249722143e6e3adf7986739c219161939c1e8e5bd0fb1e02e050ac9"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/NodeFactoryGenerator.java",
+      "sha256": "1fcf6bfee1dd58fb40fe527a6279d179861fa93d2d1733085392f424ca54afa6"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/Specifications.java",
+      "sha256": "086c31c2dfe04d1e6416d7e4977ab51749af1b0aa4850712547f50a77361a06b"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddConstructor.java",
+      "sha256": "d8f9e923301b95afaaf546b3e5b233e74d5724ef269670681a6e8d306720e81d"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddDeques.java",
+      "sha256": "205e79b9874d1a5239b093fe4c640d5a04091cc7b00fe368127afaf0741a797d"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddExpirationTicker.java",
+      "sha256": "0a193318683f109dd0bf05ef379160eaf57aa2a6644cc5539244742847b8c6af"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddExpireAfterAccess.java",
+      "sha256": "babe28a81b753850dbe154f9ad49e9e57aac80ecfb6b929d0b63f24cd3df9f40"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddExpireAfterWrite.java",
+      "sha256": "8edd568e15a7f69082746be1ffcf8f97864abfd0415c1446ccc238fa12dab9c0"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddFastPath.java",
+      "sha256": "dd0874873b7317fd85f844550742a216762dad6bf938eeddce1abaad2f37e3c7"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddKeyValueStrength.java",
+      "sha256": "ea4b8f4c599d86d556e80d81099f034a40264d3eb1beb7e8fd123c78224ca064"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddMaximum.java",
+      "sha256": "81540a3939514cc53514472df3a7c78bd92dbc05d61aa258b3ac0225289d06d3"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddPacer.java",
+      "sha256": "f1f76404834637207a84ab102a812083dc1832ce157d44512489bb8fed5976b0"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddRefreshAfterWrite.java",
+      "sha256": "6fa889b1b7d0623f695f2d9e10339848a9763f57150ff7be6e72eea6a9f8582e"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddRemovalListener.java",
+      "sha256": "32a42e1fd3e9af3fbd64416873d478440c0fa83b327c75e0cfe0395e48454cb0"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddStats.java",
+      "sha256": "7bedbfbf65143ad463bf18f69e909ca6dfd929ca60126fdb34e9ea98b16662a1"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/AddSubtype.java",
+      "sha256": "137c4d4e9f959ff5c793e050d87cfeacce84c4a3893a315af65c7b191a02b442"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/Finalize.java",
+      "sha256": "6f5709dd296523e490f88ffd1d89dd5e04ae9f30e17fe738f22db74235e0eb7c"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/LocalCacheContext.java",
+      "sha256": "1f663db1aaddb41979895eb14554b4a715494d286d4ec73e97dfa22180dd2bba"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/LocalCacheRule.java",
+      "sha256": "edf5e84f4971aa5de0561d9267caf03ba3e17d55aa6181f83e519dcda01d5fc3"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/local/package-info.java",
+      "sha256": "2721a6b285803aaa72d629c9758c65fd44d11be50e61ad9dfbc00937a22c7f67"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/AddConstructors.java",
+      "sha256": "cd151a91aea97881ddb0da7991030ed05e821f8f8bc905db4d1e92d9685d906b"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/AddDeques.java",
+      "sha256": "7e5b201f2608043fb71134832d3743fff3785372def1a4df31be999a1bc02d56"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/AddExpiration.java",
+      "sha256": "0890769029b688494e3b1595a8690186831312bd8e6be8b3bc79ac22377c0601"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/AddFactoryMethods.java",
+      "sha256": "ee900f5f11100115129fe7e9dd76ac29543f717e4ae3151c7b213d4af990e12e"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/AddHealth.java",
+      "sha256": "7e0e85d8bad27921670b9293b8dd6562c775f58b2db1a06a0db73d29dc7f8f39"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/AddKey.java",
+      "sha256": "48806fc751422e52f14c5ac443bc29df100eb969c73c5b34275f7e90c899ba6f"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/AddMaximum.java",
+      "sha256": "58293597e783bd789219c0b3824a860681725a89b02720176ebe6d4c655e7894"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/AddSubtype.java",
+      "sha256": "a39e330b8ab29a83e8ba0748ed9bb4612783d3767fd75276c005969a8e92fdea"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/AddValue.java",
+      "sha256": "13da1f12e8f1e736202196e598408832ed26e3d18d2c84d123cfdc14fbb980ee"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/Finalize.java",
+      "sha256": "6887e9cf759342c0605e5f30bc493cfc88a6e60a3db8ab3b645f3f1ae60f0e36"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/NodeContext.java",
+      "sha256": "840141365fc8eb852e84690abadd43359e77df91ed31c9885c04e54b3435a38b"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/NodeRule.java",
+      "sha256": "dd7360a29590ff6d3eba8de37b4d11b925b9db877ef346fb792c381dbb372b43"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/node/package-info.java",
+      "sha256": "041fff6c46bfb5f8c39bd06554bd780263ac5a7ff4a0d02f9454bfbe026dd7b0"
+    },
+    {
+      "path": "caffeine/src/javaPoet/java/com/github/benmanes/caffeine/cache/package-info.java",
+      "sha256": "d3c9e66bab87d360c9dc002f7958b6955073ae4a8310cb496dc1304bb5b00757"
+    },
+    {
+      "path": "caffeine/src/javaPoet/resources/license.txt",
+      "sha256": "b680d03dda6b7b4b10a6f580dcf3cd143551fe47f1728bd96dc7f512aa30ce3e"
+    }
+  ],
+  "generator_inputs_note": "fetched from raw.githubusercontent.com at the commit; every file's git blob SHA-1 matched the commit tree (git hash-object)",
+  "generator_dependencies": [
+    {
+      "coordinates": "com.squareup:javapoet:1.13.0",
+      "role": "javaPoetImplementation",
+      "url": "https://repo1.maven.org/maven2/com/squareup/javapoet/1.13.0/javapoet-1.13.0.jar",
+      "m2_path": "com/squareup/javapoet/1.13.0/javapoet-1.13.0.jar",
+      "sha256": "4c7517e848a71b36d069d12bb3bf46a70fd4cda3105d822b0ed2e19c00b69291"
+    },
+    {
+      "coordinates": "com.google.guava:guava:32.1.2-jre",
+      "role": "javaPoetImplementation",
+      "url": "https://repo1.maven.org/maven2/com/google/guava/guava/32.1.2-jre/guava-32.1.2-jre.jar",
+      "m2_path": "com/google/guava/guava/32.1.2-jre/guava-32.1.2-jre.jar",
+      "sha256": "bc65dea7cfd9e4dacf8419d8af0e741655857d27885bb35d943d7187fc3a8fce"
+    },
+    {
+      "coordinates": "com.google.guava:failureaccess:1.0.1",
+      "role": "guava runtime dependency",
+      "url": "https://repo1.maven.org/maven2/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar",
+      "m2_path": "com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar",
+      "sha256": "a171ee4c734dd2da837e4b16be9df4661afab72a41adaf31eb84dfdaf936ca26"
+    },
+    {
+      "coordinates": "com.google.code.findbugs:jsr305:3.0.2",
+      "role": "guava runtime dependency",
+      "url": "https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "m2_path": "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+    },
+    {
+      "coordinates": "org.checkerframework:checker-qual:3.33.0",
+      "role": "guava runtime dependency (Nullable.class used by Specifications)",
+      "url": "https://repo1.maven.org/maven2/org/checkerframework/checker-qual/3.33.0/checker-qual-3.33.0.jar",
+      "m2_path": "org/checkerframework/checker-qual/3.33.0/checker-qual-3.33.0.jar",
+      "sha256": "e316255bbfcd9fe50d165314b85abb2b33cb2a66a93c491db648e498a82c2de1"
+    },
+    {
+      "coordinates": "com.google.errorprone:error_prone_annotations:2.18.0",
+      "role": "guava runtime dependency",
+      "url": "https://repo1.maven.org/maven2/com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0.jar",
+      "m2_path": "com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0.jar",
+      "sha256": "9e6814cb71816988a4fd1b07a993a8f21bb7058d522c162b1de849e19bea54ae"
+    },
+    {
+      "coordinates": "com.google.j2objc:j2objc-annotations:2.8",
+      "role": "guava runtime dependency",
+      "url": "https://repo1.maven.org/maven2/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.jar",
+      "m2_path": "com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.jar",
+      "sha256": "f02a95fa1a5e95edb3ed859fd0fb7df709d121a35290eff8b74dce2ab7f4d6ed"
+    },
+    {
+      "coordinates": "org.apache.commons:commons-lang3:3.13.0",
+      "role": "javaPoetImplementation",
+      "url": "https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.13.0/commons-lang3-3.13.0.jar",
+      "m2_path": "org/apache/commons/commons-lang3/3.13.0/commons-lang3-3.13.0.jar",
+      "sha256": "82f528cf718c7a3c2f30fc5bc784e3c6a0a10b17605dadb9e16c82ede11e6064"
+    },
+    {
+      "coordinates": "com.google.googlejavaformat:google-java-format:1.17.0",
+      "role": "javaPoetImplementation",
+      "url": "https://repo1.maven.org/maven2/com/google/googlejavaformat/google-java-format/1.17.0/google-java-format-1.17.0.jar",
+      "m2_path": "com/google/googlejavaformat/google-java-format/1.17.0/google-java-format-1.17.0.jar",
+      "sha256": "631ba54c39f6c20df027dc1420736df2e5e43c581880efdd1e46ddb4ce050e3e"
+    }
+  ],
+  "reproduction_tooling": [
+    {
+      "coordinates": "org.ow2.asm:asm:9.5",
+      "role": "clock-pin javaagent only (not an upstream dependency; source embedded in regenerate.sh)",
+      "url": "https://repo1.maven.org/maven2/org/ow2/asm/asm/9.5/asm-9.5.jar",
+      "m2_path": "org/ow2/asm/asm/9.5/asm-9.5.jar",
+      "sha256": "b62e84b5980729751b0458c534cf1366f727542bb8d158621335682a460f0353"
+    }
+  ],
+  "jdk": {
+    "used": "Oracle JDK 21.0.9 (C:/Program Files/Java/jdk-21)",
+    "generator_compile": "javac --release 11 -encoding UTF-8",
+    "generator_run": "java -Xmx1g -XX:+UseSerialGC <jvm_args> -javaagent:pin-clock-agent.jar=2023-08-09T04:46:32Z",
+    "upstream": "JDK 11 toolchain"
+  },
+  "clock_pin": {
+    "reason": "Both generators write Year.now(ZoneId.of(\"America/Los_Angeles\")) into line 1 of every file ('// Copyright <year> Ben Manes. All Rights Reserved.'). Upstream release build ran 2023-08-09 (tag commit 2023-08-09T04:46:32Z; Maven Central jar Last-Modified Wed, 09 Aug 2023 06:13:33 GMT) => 2023.",
+    "mechanism": "javaagent rewriting only INVOKESTATIC java/time/Year.now(ZoneId) in com/github/benmanes/caffeine/cache/** to Year.now(Clock.fixed(instant, zone)); 1 call site in each generator class; no other bytecode changed",
+    "instant": "2023-08-09T04:46:32Z",
+    "control_run": "unpinned run on 2026-10-12 differs from the pinned output in exactly line 1 of all 528 files (2023 -> 2026); no other byte differs"
+  },
+  "verification": {
+    "deterministic": "two independent pinned runs produced identical sha256 manifests",
+    "published_only_classes": "528 PUBLISHED_ONLY_CLASS rows in caffeine-3.1.8.base.tsv (all top-level, no inner classes) == 528 generated top-level types; 0 missing, 0 extra",
+    "class_set": "published caffeine-3.1.8.jar (sha1 24795585df8afaf70a2cd534786904ea5889c047, 704 classes incl. module-info, all major version 55) vs javac(JDK 21) --release 11 of 50 sources-jar .java + 528 generated .java with module-path checker-qual 3.37.0 + error_prone_annotations 2.21.1: 704 == 704, diff empty",
+    "generated_class_bytecode": "javap -p -s -c of the 528 generated classes, published vs rebuilt: identical after normalizing constant-pool indices; rebuilt classes carry a SourceFile attribute that published lacks (upstream compileCodeGenJava uses -g:none)"
+  },
+  "output_encoding": "US-ASCII, LF line endings, trailing newline",
+  "files_root": "generated",
+  "file_count": 528,
+  "files": [
+    {
+      "path": "com/github/benmanes/caffeine/cache/FD.java",
+      "sha256": "38df1b92a56312fff31b07642dbf7acb985faa4228fa03008cb4f6aa9647a484"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDA.java",
+      "sha256": "844e752a472c7f93f6f4f348ab3c7a8fd15d0d55f569d5483118e1f90a41fd1c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDAMS.java",
+      "sha256": "2f3e1c2242a46da2e18953fcc2742808536ac5bca81c12be42bcce18ca233150"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDAMW.java",
+      "sha256": "8546d153b7a5e76a951948d609062215301ff5bd9a7195ba4eb8188122bca77f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDAR.java",
+      "sha256": "e64d437d7281530245a6a9355594efc54cbae9194203c30601a7bb6a8518e05a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDARMS.java",
+      "sha256": "47f8c799e3443cdc04298500e84d9bba0392e371b7dc5e60d4d2ffc21d8e917e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDARMW.java",
+      "sha256": "cecaf78b2b13908b37d78ffeaf53dc361f228bd4a8bc6ed0168aacdf4e83b89f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDAW.java",
+      "sha256": "6dd99af4a415bbb0549d31c77b24af85a99801f49fc36ab70d8a28c9ec60f534"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDAWMS.java",
+      "sha256": "33d526c5c8fc3b23ca267befb09cbe8df1172b169d230753e1d955f1046abe66"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDAWMW.java",
+      "sha256": "aa22736389f714cfb8b7b030fa7df6d5dfbeb1b992cf81b0ced3c418c0116638"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDAWR.java",
+      "sha256": "0a89a1da42eb366013d0862d4be102c681837e02bbe46b3062b5da41ec95cd33"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDAWRMS.java",
+      "sha256": "d6615bd839747d5162cd3089082de9a176d743f29f769a0a41c0f0ce9706d42b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDAWRMW.java",
+      "sha256": "5ff09fcc97a75664affe08adc12e19e5dbc49b04352b877c7fc1122aebe8bbf0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDMS.java",
+      "sha256": "68dca774c7e93e073ac9c9a5e2dd35fa5cc4015e9dc78e31a47c708064b7b0c8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDMW.java",
+      "sha256": "72e90595874fc8f4c04610042ffa34d5d4328507df453b4fb522de9e0cc39f36"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDR.java",
+      "sha256": "863122681fd23002eb5e10bc3def271a78250d13aa84eba411164304d8082197"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDRMS.java",
+      "sha256": "3cb0b80b6dae09e293953494f7fd74a41119fee700c8a85fdd96bf0ad1ade12e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDRMW.java",
+      "sha256": "d2be68441929205c353a149edcd1327cf365a2304a929b87445c2843eefdc9a4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDW.java",
+      "sha256": "3b7d5ea2dd7b344fad76c2796c2a7164901bfa02a5f5fba7c008b4e3b52e343c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDWMS.java",
+      "sha256": "7f150bfc18eb452d23c5dae10daacf8cb6bc3f5c2df1d81904d80d026fb4a085"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDWMW.java",
+      "sha256": "9a64f362e98681558a771c8b7d92e80db7b9b2c81b37636c1fbd80bb7d9b63d0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDWR.java",
+      "sha256": "eba58952c931e9bef0a6da8ea67441ad5691ceba18789f8cbf1600f3dc7afb67"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDWRMS.java",
+      "sha256": "bd845efb7a8585cc1a5a6a0dd6e49625d99a489e98016fd7acfcc3809d4a9b55"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FDWRMW.java",
+      "sha256": "91fcc371876127f32c00dd4ff4d43f2143077a7557693e5f8b29314bb1ee3f99"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FS.java",
+      "sha256": "927076ac255255d308b098cc0d32909cae4297fbe3983b002d240910307cbe25"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSA.java",
+      "sha256": "0d4597655a16bb85ec9c868ff0607118de647bbf20bc1756bc361d32543a4d96"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSAMS.java",
+      "sha256": "b59ae7baeba6b26e4eabb36e55bc11ccfca7e0f3c0dc0cc162043db65d20a86c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSAMW.java",
+      "sha256": "93a863f770c0b0bc03ffd0d3760aff76ef61e78b657a2d653c737535603f7fe8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSAR.java",
+      "sha256": "fc59eddc3d89747fc8adfe7f13c7bc86e23e150b9c6c9c4269e3d2a483b1ac3a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSARMS.java",
+      "sha256": "5d97674eb312667fcd8774eb7239aad81d2957d210d51e7d0aacc55ff803c575"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSARMW.java",
+      "sha256": "6fefe0754ec185ef7151d1dac9afc106d3fb8a34ddcc723128a3caa9fedfb7e2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSAW.java",
+      "sha256": "55b4cb469e71148c78cc0f353d186c8315a602127e16690a9505cc577025f843"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSAWMS.java",
+      "sha256": "b72e05778c7a52c9c9270474c016eeb861b4b59a920880619fc8810b282d966d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSAWMW.java",
+      "sha256": "10e6d96b5921e5329c1c6021659288bf83ebe05ad22891acde1f32f029901e9e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSAWR.java",
+      "sha256": "5219c599a87030f89e30e30305c6f93a46f294f7bc6b5c2e97f338e2d4d6c782"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSAWRMS.java",
+      "sha256": "36443deff59dac7ab6181c72669090d199f512c54543e119b3702277f534a35c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSAWRMW.java",
+      "sha256": "3a2364cad355fb354dacc12f17a3b4a4988e6827aea7418a8a134feab9784ddc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSMS.java",
+      "sha256": "2bc0b7822ba05f50572a3eeb08570fd891f0328df5d9fece51be4d35ae5188c9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSMW.java",
+      "sha256": "8118beaffb0ad75de7476e340621bacfb2108a066ff4ce57e09685b4222c4576"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSR.java",
+      "sha256": "234b0068ca8584257a1d6fe4c54afb280f8e3749db3f99dd60729655fb1d5604"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSRMS.java",
+      "sha256": "9a483a9e43e88ad649da57859dc078b6935105ed733389eff4d54bf94e0f0768"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSRMW.java",
+      "sha256": "94aa00feca2c0d23b4782be73c609a1b945a13b492816692fb2a77efa09e05e3"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSW.java",
+      "sha256": "cf2704ce9c72fa8278634cc83a7a1a0bc88c68b906b6226c4e029ab3fff2f2a1"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSWMS.java",
+      "sha256": "b87946a1d78e59c7ebe0af40ce7ca3c8849dc48a17c33c2b3230f8e4935c8e66"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSWMW.java",
+      "sha256": "ca9ec7ac1f00db77a2027e387b48b1b91d36d70d0ff22dd6f19d1d88405c63f3"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSWR.java",
+      "sha256": "15d28e4bbf246ebc57f129c05e2dd2838d0b75a0aee10115a98a78e280379e01"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSWRMS.java",
+      "sha256": "1d97db3910f5e8c0795da91736aff85d7cc37ab1844aa6a09552d3d141c164d3"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FSWRMW.java",
+      "sha256": "5ac3a1b3f214a95cdf35876ce7e4036dbfe70fb14588c92af75a75d9afd678c6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FW.java",
+      "sha256": "8a0ebb41f4434e712acf625d5cfe2466a1b978d17a262cfbfafdbc153d040ded"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWA.java",
+      "sha256": "9d9ab29bb7c50165e15af2987f0599fb5c17779550b99af1887b1e37346d2d1b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWAMS.java",
+      "sha256": "1e907731856926655d0a24d4626bc96a7a80f071af3271a32198cd6e6800ccca"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWAMW.java",
+      "sha256": "0b1c1350c0d4c703e793f9d33b151a5590cce9da66e1b7b556592569e0724a01"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWAR.java",
+      "sha256": "1a60263ee15edc3aaea4718103af06fc7fb89581461617cff25c22d435926177"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWARMS.java",
+      "sha256": "8e5206a5971239dc07e06e3ea4944e4ba161c020e11465f05080e8746d0299cd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWARMW.java",
+      "sha256": "ce7d3d0ee019da92200a8ccf97cc6951c303325100546faa0c42f97f044a8764"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWAW.java",
+      "sha256": "a5e8be9ab0a27b57c485f42f13eb384b4a55ab61168b69c67476b030fd72127c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWAWMS.java",
+      "sha256": "bee8b6bf2012ceba045516d4d5f59ca68579c28e2b1082b49238ba22186c0e42"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWAWMW.java",
+      "sha256": "34e440a63364d0513645c2510292531aaf0fce55941f30534b809b78d2d90fbd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWAWR.java",
+      "sha256": "59ed7706b1f21170f5a59675785b99c99d327d54765410803d406bed02776e7d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWAWRMS.java",
+      "sha256": "ce7853eafdda6c89dc48172e02132e0a17d144ffbbe782e2e8c265c5752becb0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWAWRMW.java",
+      "sha256": "e0fde45452a7bdd9d3a7ba00af8ae9e1333b21de9458064da9f45b3874ae4b9b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWMS.java",
+      "sha256": "b3274ad84121661c6fedc312725fd6c9e0d9c63667dea3804f2f7153ac0ca43e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWMW.java",
+      "sha256": "7935c81ed839c5c7e81eb443b6205516e835ad8aa3fd96a8d84020bed7fe696f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWR.java",
+      "sha256": "2c57e130cb19259ce4322c9653ae5895ff33effc95a3309c45b4bd3557e8a87b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWRMS.java",
+      "sha256": "b41ea6d08c502e564152d9f6ec68992922cd2891fad4c14bc62e8a40e6b17099"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWRMW.java",
+      "sha256": "8f0d214d40cbd8494ba30826a1be4d697eba78027441d7eba1c371736cd9d0c2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWW.java",
+      "sha256": "4809b41bf6968ad3a6c2cf38843eca29a9a876ca0111bd14c840a7abc450b28d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWWMS.java",
+      "sha256": "6bdd379f9b826f7db553991142f0cb2b0e5a4f976ec358bb9e79dbbf5fea7e16"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWWMW.java",
+      "sha256": "8f183195812e4a2ac1b7faa2d2a35bda846463b078cf1d55cc2bb8291a9a370f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWWR.java",
+      "sha256": "1742ff359d017ad61326d8148873a513f77f52751e19da7cfd25e48ea2bac1d4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWWRMS.java",
+      "sha256": "4ac0da2a703245931a923ccd0b5f2951613f15b2105fee753b3b7e5701133f77"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/FWWRMW.java",
+      "sha256": "6f731ce650e3e8d9b932ea7a3ef1df03fff91de85ea0eb30665eceb40808e4b5"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PD.java",
+      "sha256": "79835fb1431be7f1c3d54d75b891d17f738966e41f9cadd40018e22f3e4998eb"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDA.java",
+      "sha256": "34a67061a7623e6be8925fc85db5f7d09f143fa67648dc5d3d0395fe5d31928c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDAMS.java",
+      "sha256": "c7d4c8aa1a132f1ba465d3aa2a24b60ea1bf8fb33e98e02cc8c395e42d93d564"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDAMW.java",
+      "sha256": "66c02c7483fda221081aec08f768d9e20e05f4efce8f95c0c935d6e12bf5f75b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDAR.java",
+      "sha256": "68f340ceaee55034531e234898f7564de800abbb168a4a97c0164d680ca36b5d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDARMS.java",
+      "sha256": "6ba01bd10f5e84802d23ede9670b1011530babb1f15df58be722bf2e1623157f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDARMW.java",
+      "sha256": "2aa4188983e245fbdb780d2dfdea8f6455e85c32015ef813d3ac06fdb5f40afb"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDAW.java",
+      "sha256": "01144e76b1488c75b3d73f3d5a5b4e8147a0cd8b805e6f1ce173af17f1ad99d2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDAWMS.java",
+      "sha256": "351d972cf32dffd4992bbdbde6d0e0efbdf292daf5b0c8137469590ecfde35ac"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDAWMW.java",
+      "sha256": "eccb72f6c38eb465024557f9abd9df9f20f0c6a249a6cd68ffe4c42bdcf43c5c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDAWR.java",
+      "sha256": "c60466c8601945b2c5af02dc7229a16f05774f85c8963606639bc5c628505527"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDAWRMS.java",
+      "sha256": "07f8a7363a1c401f7214cd15e927f0d049b40563c130e81f6471f5a9106496ce"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDAWRMW.java",
+      "sha256": "2e6be5b98e50559cf0a594d90430a9f15e84078e3d6120f6bb13bb0f15178d0e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDMS.java",
+      "sha256": "876b4be44ca5ee5be7d1e275f016c055d3e68f78bc0de211a08fb54ad1e01d4f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDMW.java",
+      "sha256": "14102b6e2df80391b19a71b74093f0508853ea5353cb88c31e05177a3aef9b13"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDR.java",
+      "sha256": "474bb27d90a0524c7f4cae8d429671531e506ddd35afd122b49d42389ff03825"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDRMS.java",
+      "sha256": "d0e853577d36fdce87232ecd884f322e7b4294e137a5cd081050c7ca9ced0c57"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDRMW.java",
+      "sha256": "ce79f0866414a07c7ceb48c32a9ab674b6c85f91d1a6f9f166f02a146485bf91"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDW.java",
+      "sha256": "e72de6d5037fc9b3b23aa711e331f51442d28c39e7ca3e337c5a9f47e7ff4fab"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDWMS.java",
+      "sha256": "2132638d65751985c34d9a78f2c87d847ba4b1a6538cf7fd3ca066e40ee2e459"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDWMW.java",
+      "sha256": "d2ee266cfeea724a185d199d0e0ea2d039cf5bc586519cbb79d85c2160072a4a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDWR.java",
+      "sha256": "f01686fb86c70b30fc5a42d9873d0ea400d2dd33ffb6a97d26a92a16779a27ac"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDWRMS.java",
+      "sha256": "da86695d8b82dc7481089ed3e2f27723279396b2288db89297ef92e64b7a53d4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PDWRMW.java",
+      "sha256": "3fc6e85103a7c85514c2d2c1d6548d3f60a737b02f2ddcbe3e1745d55af662f6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PS.java",
+      "sha256": "6dd53a8bbddb019b6e4743cdf5344eb5c692e28ed55d75cf958d35d5835c665d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSA.java",
+      "sha256": "ef348501cd33c20195205eb57f8b6b1d25f7210b5dfc0fd6102a5a0258b0716b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSAMS.java",
+      "sha256": "74b015ee1ed854d9538518745c42b5a0e11e5840b8948ee9cd88f1ce7d7bb2ba"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSAMW.java",
+      "sha256": "0d204648732a04ce22d6efd60b6320f9308f94a01873047049e152a4f8d69cbc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSAR.java",
+      "sha256": "b964153b7a082879882bda71fa17ca8122a13e189fa96e1e60221b7db042ae10"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSARMS.java",
+      "sha256": "613061c8f6ccffe96972e5ca922ecc9a15ed636aab61457c3fba14d611e01af0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSARMW.java",
+      "sha256": "a24e85781397fbe4302da9d7abc760bdf19b22ea43bc3db47c76d06f8ff4f012"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSAW.java",
+      "sha256": "d50106600ca34f9e88708c1d4d3cf33578a58f1a43f514860c65f308f4b1bfa9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSAWMS.java",
+      "sha256": "d1245dd56d5338be6f59ca124ec64a4cc281844dd7ae6aa57edd3f91de2b9f90"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSAWMW.java",
+      "sha256": "56df93a449fbb2e180be76d48fa6af0bcce96f0555d7d3d2ff17eba0c5fd4f77"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSAWR.java",
+      "sha256": "cbdc6a562260291b9d6f76af47559a9933bce2aed6c6a6da6d00798dc410b721"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSAWRMS.java",
+      "sha256": "c02f6be3c0f6c3066463a0f1917aafcac18356165aa1edc4d4b7a7519eac909f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSAWRMW.java",
+      "sha256": "7659ce37f4252f031e3ccebf47389491b04e0e7f5ad6eb39cbeb3bc0bed826cf"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSMS.java",
+      "sha256": "eacff0c124e86a874c85e13c805c96d189c23acb25232475793a240adbd5ea13"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSMW.java",
+      "sha256": "5207c2d1b1ae63838390b31aedb914fd60a79e7bebe70b904e9f0ec81ca449a5"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSR.java",
+      "sha256": "4d5cbb33b1dedadb70937a2384903a0194f0f4390b9ed4c7a15f7e520e4b6d98"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSRMS.java",
+      "sha256": "1bdb79eb03a0d6be6c81f46a05c30a0ff4a4739c1f64348024b1d6d5acc1bf14"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSRMW.java",
+      "sha256": "1e1e3cad5833d7f0322ca8fab3d9dfa21b8e8120562582898ceaf538a4ac16fc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSW.java",
+      "sha256": "a0224fd62d72516a93c41567e30f42594a07646feef9bff7970ed24a15d986cc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSWMS.java",
+      "sha256": "f12f5c8587e7904b73f4b9c98e98aac25fda89de1469e7de37f20c0e1120bf8d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSWMW.java",
+      "sha256": "f6273ea7dd71f5ff318ad2cdee6e4feaa466605d8654a3570cd692e5fc21dfa0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSWR.java",
+      "sha256": "8a0d9dee9ebb9aabc4f7b91107f2052fdbe286cd825d6ebb6ebe29a909a7e495"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSWRMS.java",
+      "sha256": "49790579de584349b806e373e875b5ab92fd939ab7e440f91f883c2abe2207a0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PSWRMW.java",
+      "sha256": "47020b1d9277676fc916d643384314cf8e345910a2c151a679709021b704d3f2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PW.java",
+      "sha256": "9bd2eb23a8d47d7c8dee11d5e3788944d587ca87760d0d4a121dd735652d450a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWA.java",
+      "sha256": "84aa6930df34b3fc43e75c4afd70043d2423319a9555f50f3e466067827afc92"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWAMS.java",
+      "sha256": "38f934e92df9133d4ab0e394b0c5a0eeeb72886eacd8bff04db8195b8b9cda35"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWAMW.java",
+      "sha256": "3bdf4170351a611e10f0f1b5bff8ec8b3395eb57608b9975d6ac34d0437b201c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWAR.java",
+      "sha256": "ea732a568b7fc3f9c923d565cb9666d8d150b0b54d7f1aba1feb2a81abf356ed"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWARMS.java",
+      "sha256": "88249d01b1d8ffaa2897da630b58c649d3a9286ab5df9bb3ee7c53c359d1382e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWARMW.java",
+      "sha256": "148e16ef8c8e2bcae575691883ce9d4d3758c2021c10f541fcb3fe71fb616ed6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWAW.java",
+      "sha256": "379b0de3180c338950bd22bbe89a05c938fa1ab07d83f33f499c0b3a84fc625b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWAWMS.java",
+      "sha256": "a305b6f258fbfd7ae5fe09c336aaa444a183eb4b75d0ac492db6f61f0b341b70"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWAWMW.java",
+      "sha256": "42a689ccd8d29308b8bcdb47ef6c4255c49aa7ad5f922993e44e1f76405de0f1"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWAWR.java",
+      "sha256": "5cb55d19ce3e87f869d7c1e4e9080061ef0e764a1fbfaf64afeb6a345b20ec8b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWAWRMS.java",
+      "sha256": "8ad4559d6537a193dd99e605679c24a0dff4d626f4447deef818b06a2ba3c68c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWAWRMW.java",
+      "sha256": "1bb4be8a949ae445aef344810f1d25856719754ede529e371e95563d866177b4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWMS.java",
+      "sha256": "8f35cbeba52f330670b72d49888ac279ed64aa459e40f1b2d0357aff2df3c1ce"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWMW.java",
+      "sha256": "dd8246957d47700446e4aba077db3dc1541126f8c8269c13e66c2d8aaf33e301"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWR.java",
+      "sha256": "6e712a7baa729af6c1865971d94e07a5153c75162e248f78b4e973ad3272fc4c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWRMS.java",
+      "sha256": "7e05dbd80370af14eecf0388b3941f3b79cc7fd0878cbaa2ccfde65456195a84"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWRMW.java",
+      "sha256": "4cf394c6cc673f088a0b67671f8a15cb2a505d2483bd2e07cd551ff329ff5864"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWW.java",
+      "sha256": "aa6d95649128410ca2893b87256275371bd8d1bf499726515d86ee0f405f0555"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWWMS.java",
+      "sha256": "77c1785af916a397c89bf2d0c5d077f461573cf01c0b582c9b004c21fb07215b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWWMW.java",
+      "sha256": "01ab31adf52221b00f81f8a02a0ab8cba67c60f4dd9a0f5bacfe63d038310bea"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWWR.java",
+      "sha256": "2d636e8029bb2d3ecd5ac711fc0db3b116795f97668895bdbfba75477c44f364"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWWRMS.java",
+      "sha256": "b06f6b6315ffb680af17969658673ae5e94fa16f3aaa7b320113a67be223b109"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/PWWRMW.java",
+      "sha256": "fadcc3ff7aa934c47d130f6b8456d620dfcb616f18ea1f966f3eecaca2f0eda3"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SI.java",
+      "sha256": "6fa168495c4965d77e6eae3f23b2b1fbad3674735d27bd21d17f5b4ba90595c4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIA.java",
+      "sha256": "8314bedb1779dc27b5260c22e6fe0cc0bd94369f0feef172c4c26a8800914be8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIAR.java",
+      "sha256": "1f50344b1ba555aa3190a638a8c643da262d19e817be6ab9f19ec442fb33b20a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIAW.java",
+      "sha256": "7b408084bc07bfb127662c25c37adac376bace8d2d0df86419c065cbadf6305b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIAWR.java",
+      "sha256": "5bb7d0467751dc65318e43a580da286a5b85f6c5698b08c8da6e478aa4e10eac"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIL.java",
+      "sha256": "cb5551b266cd78670a120e49e442eea0eb2094f3ce27baa6abac11759a6c54ce"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILA.java",
+      "sha256": "81ca6a527e3fb1494124e07a7ec3cf626abc42a8dcfcff37103ebf6fa7320d93"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILAR.java",
+      "sha256": "ce2fc9f109e6fc4484d4b0d45be084d421b53be20f00dacbc2cf96f61093bed0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILAW.java",
+      "sha256": "7d6a8ea34a813f205ef4e20660cd39ea0e207e09fd8a2ed90bee630bf5fb1ecb"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILAWR.java",
+      "sha256": "a7da1f487d000e0dc905b3c1f52281c7f971e4f3d65c3a548bcbb8de3653a2b5"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMS.java",
+      "sha256": "a00ca9f7f97b07a65ca0b59bf764d5689058951ee150a18479abfcc84028fb55"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMSA.java",
+      "sha256": "eb09564037c7dd38902b349309e5fca3d151793d5af7c9a9206f75303ff9597a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMSAR.java",
+      "sha256": "d424b44aa62af922c55c26fa92592fbacb61bf9f4ed7018904dfa87219507f4d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMSAW.java",
+      "sha256": "aa79e196f62a8a7745dea2286b17d03a9b5124899cbc4565ce831cf9c15a4a09"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMSAWR.java",
+      "sha256": "aef13d733664c3716ae78188e741128bc6cc88f5b7a483f30040dce6926cc084"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMSR.java",
+      "sha256": "854442a98f36aa755b29d8f0a6448a4c111890e3b731872317e30e8e9ee2541f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMSW.java",
+      "sha256": "6641b1f1c6f747d165962ad7e8362f25f586c25c150a6c7ead05720c915432dd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMSWR.java",
+      "sha256": "e374548111c3054e46ce2ea50b0c79e95dccc3b7a18009004903b7bd46438689"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMW.java",
+      "sha256": "e0d657f49ab6953c59d750b5ac0d6e151b00c6151414fb3e577959135952a60e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMWA.java",
+      "sha256": "d8762704d04940b78f3baecd74576dcccd5149c32ef0839345e547fa182fe57a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMWAR.java",
+      "sha256": "c504d9f352639fb2d43447ec5792d67b09c7bc0218ebfad8bcfc4bb98f09f6c9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMWAW.java",
+      "sha256": "c36608631e24e45856a26512ede75e7aa895851ed3937b31b043e21ea5ce317c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMWAWR.java",
+      "sha256": "173951bb47be84b6d2429ba58b9132a9205fb13748db9037e535a21b66dbb0a0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMWR.java",
+      "sha256": "c321536495e847242919437d10405b008b64d8bc3f2c8bbaabff1e01c77991b9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMWW.java",
+      "sha256": "8ffea081ab292923a23a5891bc8a2c27b512b11c2d414ba32d9593cc34faeff7"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILMWWR.java",
+      "sha256": "fe1bf287b7767942aebc00ded4b491a6fb137caed3771e2c5c3d70dce491cf75"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILR.java",
+      "sha256": "f644171a64bd9301413d3c247fafc3504f08d27cda28cfd0d4b50843e593236f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILS.java",
+      "sha256": "986e2b3f07bada80098289e09e1ca282bae842ee2d28b483a5df4d93eb311c4d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSA.java",
+      "sha256": "f5e1249933a5d3d07cdf517c8429a0354eaf6bb65a0ca40af033e462edeb3cc6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSAR.java",
+      "sha256": "a41236aab4e23023bc2164094a3fdd9e0abfa896f48c357bd81c9b84df6a8f56"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSAW.java",
+      "sha256": "bdc4982caea3f64e38d6cebd0dec8aaf152751018df42c556641c03787ea8254"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSAWR.java",
+      "sha256": "636909f824f599646d402b33e7520e3dd841bf2688241b288ec973eb6eabf59e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMS.java",
+      "sha256": "42cf78a1e483954f0b6ba56d2f23ee81bf6ea1c739e8587ccb8d49be1a4fe887"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMSA.java",
+      "sha256": "82294f6df83737c5125e36c9de8545dba1e85bb3ec08681b54741589afe3b592"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMSAR.java",
+      "sha256": "dc8f3077d1ace0d8383293e0fb92e48acee5208610c050e8b3278465b5c47aad"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMSAW.java",
+      "sha256": "8b1b649c7b056580aaf8c1f5753e73d11b91f9a720236df35d6ad48b012c9276"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMSAWR.java",
+      "sha256": "d58954fdcf0fa4d964b99609381b1f8caaba881bfef81c89a38ff1e3feeb1e28"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMSR.java",
+      "sha256": "cc34a32a057bd9135d1252c69fabc606c0dda28e5d42edaab064a4e1409748f1"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMSW.java",
+      "sha256": "c69c656b3a3ef3357120107f73ed4dd3ee5ca64d3cfee43336374b51d9a2add6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMSWR.java",
+      "sha256": "a4dbd0161a471094ab5efd04c9e6f12fc2d9f5f0893a34f5933cf47b2e721bb6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMW.java",
+      "sha256": "92a72d474beb8f176d8c2a656b7d1eed1993fbd5918e3b0582ae6fee7091df24"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMWA.java",
+      "sha256": "c9bf7f1961c2487263d286b0d51f448a60c381ac297cff77a63ad4d9bb8b9666"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMWAR.java",
+      "sha256": "6ccf0e6c8ca7510454263233d284958eb3b81530d3f13da1e35678dd2f1273e1"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMWAW.java",
+      "sha256": "e7ac60ae19c3185f051fc19d57317f28d28d132a9ed79eda53e41c29863eb690"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMWAWR.java",
+      "sha256": "3e3a0cdc41bbc9b92faa578176a1a9ace0d3c6ac234211e993c170f3a7b0930c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMWR.java",
+      "sha256": "f7b70cae60c9848f2f149e80daf26e8cd345f6cc377c3c0a4370b93dc281111d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMWW.java",
+      "sha256": "34a74f35c478d71d8c57a4868fd3d635bcbb4a80860057e8692c78c1fcf16756"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSMWWR.java",
+      "sha256": "b8dabc706ded40c55222efed85975806b69335650605dd0d88de3d5d9317796c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSR.java",
+      "sha256": "31a1c839731a242101f4ae7088cc1bdba4919f6554ff98de48d828d912bc3b53"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSW.java",
+      "sha256": "5c9c65f7a77c508d7e2fc0d9e7370275f7769ca7662a2fdbca1007d5b2ffabc8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILSWR.java",
+      "sha256": "8c7ae0217761aea84f8a898e528e727d1d3223853baaccfb553f92ed5f7f0693"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILW.java",
+      "sha256": "91474bdff257238f7535d1ef41c2ce2faf936175201244ff17840b5f12beb089"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SILWR.java",
+      "sha256": "6acc5668fc9777395df101a92489388f6d88ecb71b9e49f7e2a8dacc6638bf32"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMS.java",
+      "sha256": "7de51e069f704b49e329acc605ad402d7a046f9c62e1a6fced3322cef9887f6c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMSA.java",
+      "sha256": "ab6a76d6a6a349b6737c44f5f2af298c6aa6e415ba206257eff40068b040357a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMSAR.java",
+      "sha256": "eab250e6aea833ba0db2193e953b642aac1a228f72bb1faafce7409bda84af5f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMSAW.java",
+      "sha256": "d24dbccf47bb4aea643ce0ee5a0b450d986edf467521839f867604b7c0077047"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMSAWR.java",
+      "sha256": "f73dc6fab6c383d46b1f2b8c1f02436245a0fc0720d0bdd87f749a259e2d4cd3"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMSR.java",
+      "sha256": "142c565ef5b7c7847367f62c5353b1c47f6ac5c5b698c1c553c595e3ccc439cd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMSW.java",
+      "sha256": "996180104a7715dbaf1084a9b59567727d47c234e5c9231fea86f9cf4adceeba"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMSWR.java",
+      "sha256": "7bb53925f432539e1da239a558d2dd8828e1600a93e01bf6f8b3b5e6310b9771"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMW.java",
+      "sha256": "52ed9fe4efe97c1d93a6f8f1fd2818e20b42815ba269b07b18b4879dc1651695"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMWA.java",
+      "sha256": "f043267aeabe64bad06e93c123e2c25410fdae299568c290c503d78d4567cc51"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMWAR.java",
+      "sha256": "b77a2714a379a453f4eef667eb900da13992fdb3c41f1797a4af1b0388f967ab"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMWAW.java",
+      "sha256": "e495d1d401617c975c9f06feb700fbce2cee276eb2e7269de6d1f14932ff43d5"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMWAWR.java",
+      "sha256": "8d1df3fac8667c10c2e205a264b0df586d37f37fe0ccd720324bd43e8864ac93"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMWR.java",
+      "sha256": "cacedb07ec7cf5e805c8d2276b0f178e110c08d527503f92ad7bc7d9b49c78b8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMWW.java",
+      "sha256": "91bc3c95e8b2a8494a66f8a720a0e0fec5659d166806a0f3cbf4c67c9f237341"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIMWWR.java",
+      "sha256": "51c0316276c9e1def9e29a2105ce6d3186c6e2d14fc96343b511304d92424974"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIR.java",
+      "sha256": "346543a99af40d3014d69a0a46eabb8738e102430b76d669c1f2d1111238bfa6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIS.java",
+      "sha256": "f180882efe8e50a68015935ef3bd8e7d25cfdfc7188c3926c9beeb154ea0320d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISA.java",
+      "sha256": "83eacfb8a07a66d731e0be9590691d3cd3df9b76e5f2e60ed882572204727ddf"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISAR.java",
+      "sha256": "84d19c3729d13287d92cd704c25dd0cb8929e5df927b2983f6eb2c4aa98229fc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISAW.java",
+      "sha256": "f9bfb4772d41aefd44d1b4a22ff32cde5a6f38302d5844afd0beb2a4aec836bc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISAWR.java",
+      "sha256": "0ce82639b4d146dca379f696bf1a8532a29b565629ea5b8984744e27c00390f9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMS.java",
+      "sha256": "0e0cf7223bde48b0cf909a55933bee4dad323d2291966c05a859bb7e46c2b07d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMSA.java",
+      "sha256": "9c8945da08ee477919d3a537c2d838ea2027c6c2d76ebf931666e413d2b64611"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMSAR.java",
+      "sha256": "ced6cb0e2998e30335cffcd7430a6a5c7333365a4e092ea54250e5fcf92673a9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMSAW.java",
+      "sha256": "368814c82af1375285ca2bbde3417e0b90e631614447382376e097e22355d2d4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMSAWR.java",
+      "sha256": "380fa9f3a5074b72cabfbf30584a444b12eea907b6e0638091895e6e090ce06c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMSR.java",
+      "sha256": "c1fdec3c96e26e2ca997b504ead6730444b23c0e35811fc622cbea5980952258"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMSW.java",
+      "sha256": "f0a615100413af9f593a26f122d6613d7efa2865642253bdc2c9689dd31aac60"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMSWR.java",
+      "sha256": "4fdaaf69d3100c9627fd2857d0cc2a7146978187b96eafef9d9c34aaec6bd357"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMW.java",
+      "sha256": "6e000ce22f46a983e1afd907729f7bf68c18336251bf5a75fb40afbda4a7f213"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMWA.java",
+      "sha256": "31b1d26774ede8f6e360493645a7f581f97b7f80e023abdfc412107c38e5a8b3"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMWAR.java",
+      "sha256": "4e758118e30c31c953c7264f154ca07b4947ab5b1d60c1d99f1512b6e08126a2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMWAW.java",
+      "sha256": "d809a13edf58a209376c69fe376bc47a683431ee2b338b6a6d28eccf858fe7c7"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMWAWR.java",
+      "sha256": "02433bf53f09f8dd05670c6f2c40c8c142ab36bec80934fad4ba1cb76c1f8ccd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMWR.java",
+      "sha256": "0117353ef24822ca744b2646a1d0309dcc6785f3f659ddd565f21a402756464d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMWW.java",
+      "sha256": "18b7d97c809d9f2466ccd1c6e16cc69902c94176580c1b2f141e7105905e2a6e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISMWWR.java",
+      "sha256": "d5debd273de39ed0505b53c2274eaf6c992853f2f6c8bd34cdbed3e1261b2667"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISR.java",
+      "sha256": "ecf45d47a37e3314c0ad64d2ea5cfaa7857c2335cb422f20822f0c40ecbf113f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISW.java",
+      "sha256": "91d92e99348ca23e1864bc004a6da5ad541a903dbf7345e453339af878baa857"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SISWR.java",
+      "sha256": "5dac14e637461bc3cff87e734080a3f0fe76450b9e6f385364996ffdad99ad4e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIW.java",
+      "sha256": "f44649e15bd3acf5003cbc8860fb313e87bdb1b314665a9b3a8924a00df323f0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SIWR.java",
+      "sha256": "c49dd3fa90941b5d4c27285894096233f402892e0e83e4e635320bd4b874743d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SS.java",
+      "sha256": "8a2e25c515414a2507a5cbc5571b9ba6ca05f4b5ff9cdf199cee5a8f6d33cf2f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSA.java",
+      "sha256": "32735e28b6c33bf62eaf7006879a5bdfe65d6ad447f51aabfc632e3988fa8409"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSAR.java",
+      "sha256": "d8593edb25a6c0d9279fa3d5278f809287e11c5215a382093396ad732fe924c9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSAW.java",
+      "sha256": "c508174c26ae5ba3402690b1a0e30a4e2e4feb9b887242e44221bb82652a6c70"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSAWR.java",
+      "sha256": "2bbf5eb677d8c14ec09caa1ad6a79c54e1edab3bf2b0f561012e6ab61b211236"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSL.java",
+      "sha256": "9f5ea67e0e3e892f3bb09c8dd8abb911beda70091d1adf5e6b02d56280a47917"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLA.java",
+      "sha256": "4e391efdb454f4b5d261dab2885392aac8eeb18c6582a6a036301127d6d9ac32"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLAR.java",
+      "sha256": "74d67ce0bfd3f225ed48741204372bcb31732d1b257087b419c5688f37682f31"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLAW.java",
+      "sha256": "13fda8456070de1804456624e3a634b4f56fd827050a75775a972bbd5255d35b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLAWR.java",
+      "sha256": "4ac09dba2dd6af4e3282be61a4b8c8877fb666e1506f9f3ea55c38ce192c51f1"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMS.java",
+      "sha256": "29946de872b944eaa2562961f1d5bde3b7e129c19818dcab34ca645a25400422"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMSA.java",
+      "sha256": "3685a13ea4bba5602374c9a9588d015d02edc99a45fbde567e59ed8af627f347"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMSAR.java",
+      "sha256": "ad928e1a2c5aab029fcb8b442e8857abc8ce55b6575b476ebd1ecc4acaddc077"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMSAW.java",
+      "sha256": "43906439b9405f2510e9710e99ceb7e8334453982c3c013869916912024a54c4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMSAWR.java",
+      "sha256": "2684b76eb5bfcf6471c4b2430bd8771b9178d373f9ec2906e8e1ab027eeed0fe"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMSR.java",
+      "sha256": "58ac2f73fd328a4f08137dad35527a2a36fbc3ea753bc89c339e7e86df7cd41f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMSW.java",
+      "sha256": "0380a3f717cd40a66ab67f2266b9e9c97e3df8e5a40302084c90b56f6c664a44"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMSWR.java",
+      "sha256": "86510a5530d33b95ade660f2734aed509e21b6f48c2beab0822c13c070fd570c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMW.java",
+      "sha256": "758cd197a8a588dbfe9658177f9ab486d21f4cd30ffe81bad7e2ef5aa489b6f9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMWA.java",
+      "sha256": "c6875da0c2d8b8bd9ebd5e30013b9218bc010c9b01653c7f0922737ad570736f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMWAR.java",
+      "sha256": "9b691b2ef07b6a15c2152eaa99f5c6453ce2cdfd3e26d9d913259e0e9e604612"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMWAW.java",
+      "sha256": "2d7c1f173aa2db5a9e1221308845a12b59bce35d91564c5f58d8c82d90e3dbe4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMWAWR.java",
+      "sha256": "0c85d816c9aafd98fdb04758cd4ac42173ecbbde9b652491a17a8c714ec1e66b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMWR.java",
+      "sha256": "32fd77dbe68e99118ca1c87509efdec42c719bc4ca752d91dce52ab9157d3306"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMWW.java",
+      "sha256": "0f49abce177c4700f9817291b9a3096b0c2071817f2a2289184841ce5a476739"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLMWWR.java",
+      "sha256": "b0f4c4ef1fc6d843ff6e92e5f0941b0dc4fd177c5ea40560aedd6e2eb2718db6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLR.java",
+      "sha256": "497769d3988eb55e041eb377b9bbf22c62c233554ecdc9a4a7046b38c2303a60"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLS.java",
+      "sha256": "7dc502dfdfaf41e8723cd1f83053e8fde6313762a803d90ca3ab3bd1eb067e43"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSA.java",
+      "sha256": "2e8b6c010cfa4a15de186d85c38671ce00b356d8b77bca7cedcdc422f4291461"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSAR.java",
+      "sha256": "10f14987c66e0d368e7d93b71e1dcf82ef1c6eadf11c62f977c5142057141cda"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSAW.java",
+      "sha256": "4332582d7d06e97817c81ce5ca299833dfe41bfb7048bdbb0508d38f15e855ea"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSAWR.java",
+      "sha256": "70175ad8dc50096c55314f20408e6054d6d9f3f9376184005dfac165a51091dc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMS.java",
+      "sha256": "7a952a9462529bd9e7088cdd3602ac7e039c747bc6a369eaf09d1a6f5067073a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMSA.java",
+      "sha256": "7e0025232c4a367257485636567da346a522f23ad9f79c068b18b4edfb2a6e10"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMSAR.java",
+      "sha256": "b6c8da0a55212f674121d53eec77dfc916698cf984b79cbf26ccef3b4e4776c1"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMSAW.java",
+      "sha256": "6047fccaf1ca915524bc0cf6d0d212e734bc10e40204abadece55895c2bb08f0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMSAWR.java",
+      "sha256": "fcb701ad559a175e19c3f3ff8be9b0bf6f4e228268847bf2c7de275520339221"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMSR.java",
+      "sha256": "740261e82137434cce9c875c9c197182c1eeedd8e79ae45874f92a8f4d090f29"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMSW.java",
+      "sha256": "e21fb26b1d9aec0b36950c3008f9f7fda430ef5d140c6cc2ec2a9325b477689c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMSWR.java",
+      "sha256": "f8f9307f71aff5436ae6191d80200270161f236f5530d574c27f46ab043df425"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMW.java",
+      "sha256": "ae4dcebd5105f179c22602ae29e64e6348964e17c8a864a38bd3beaab80493ed"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMWA.java",
+      "sha256": "1b2941fc8c248293bf3b2b79dad9477b48877df32a4d9c1a47b65e39f832c492"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMWAR.java",
+      "sha256": "aebbb1ec1d1f295c8503431e7340f759e544adb5d4da5fb7dc53d7bb0133d9a0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMWAW.java",
+      "sha256": "cc3b8e7afaad41175d5caa9bdb848912800277a484a859a54b76eb1d9f821329"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMWAWR.java",
+      "sha256": "4f64638f7710e4ac253b0d9558caaad4d787811db3c73036662f837f06d50e7e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMWR.java",
+      "sha256": "6e22087f7537afa2da650a7bd0201d51a027c9d9311f992864f30e6439c8eb94"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMWW.java",
+      "sha256": "4a4c60f4ca111cd7cd26a6dd89d9335b41bb3e13d795d5268718bd3757b70a0e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSMWWR.java",
+      "sha256": "5adeff0dc2fed72aaf005f1de4d2d1d7ad45a78b689403402a7884f85022276d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSR.java",
+      "sha256": "189583621cbf1ee8fa9a63b7b657f54967574bdd9de2ee9736121fb259412fa2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSW.java",
+      "sha256": "334182da57de7787f50f0ab35a0c9ba0dc9ea4d62fb8e342b622a6e6aadad9f5"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLSWR.java",
+      "sha256": "534c1b58d55581c208e42e2590e4252ed6fb5c150d58b6e37f571c9630329295"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLW.java",
+      "sha256": "660abc1c2f9b1a6765c544b0bfe55dbe7a32900ba77fc3e7ba1ebef5be4a4cbc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSLWR.java",
+      "sha256": "ebc65c8f6dabb71e70117e9deca66bd76d871e2311a398182b5fcd10818c8892"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMS.java",
+      "sha256": "c70a52139314f580e2070d8fa2f72dfe62226debd76266b4df0033cc6b7e0e79"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMSA.java",
+      "sha256": "7db2b9cb96c932b4b0af0c896bba0030984cde1aa1e61b89943364c8df85d713"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMSAR.java",
+      "sha256": "9d1e427c23a0b193837fe95ebe0b53f483dc5b319446f892eede1e29174bc616"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMSAW.java",
+      "sha256": "f92382eadd1978fd1ad9da926b1d1d683bd9768ea93e7dfafba3441945986fa8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMSAWR.java",
+      "sha256": "0bba7986de741f899c2f76a261c41f4441993429ff4ef27c1e9c890d06076166"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMSR.java",
+      "sha256": "4c13239649c16b22452057aa14dcf73bec83ebd4268381f24a3122ca2595659b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMSW.java",
+      "sha256": "1a4eaad4e79f52431a2b7459614fb379eac367a2fdf02dedf8cfba1dd41ba7d2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMSWR.java",
+      "sha256": "ab7b07d415c2206e435a4a30448d9ce3929b514a9d9b249afa815c8500eb9c71"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMW.java",
+      "sha256": "8f348ebd17d429b599f9b5a44889a51b4289d526dcf093e1cbc338d3dd16b1fb"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMWA.java",
+      "sha256": "890ae0eedd2f87d227fe4f18b047b4fb5ff5aa46a244f909f321f3342849fb2e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMWAR.java",
+      "sha256": "5d72dae7d4c733f27c83749f315e95b29de7eaa0222c3acfb3a8385f0f33a9cd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMWAW.java",
+      "sha256": "63250927e4e26a693213a8e4b2f405864f533e4d63bf4c21a837f8c9d0c636e0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMWAWR.java",
+      "sha256": "620c53fb81c4e1db7c18f2ac37668773f0864c50d8817160866feb11dc3df9e9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMWR.java",
+      "sha256": "5574a622ee0c55c482b69c2c8505d935680e4f5aa10aabe3f56b53fb4b0b128b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMWW.java",
+      "sha256": "0fe6498379932cba290fe13e17a9b91c0ffd1fb5299dfbe217f1cb5009bdfb45"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSMWWR.java",
+      "sha256": "af17a3f67af55bb348fb945b7e8a7ccb9880fb6033bddf7fbfe761f4a1fc24ee"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSR.java",
+      "sha256": "e386a9e8d6e021c30cad0839477965dad0de898c709f4a3a2c773f8c70e86b11"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSS.java",
+      "sha256": "108ca31701f0970da99e5f06118e4e241c2698e14b20d158259615683807a49e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSA.java",
+      "sha256": "07760510140246a4922afcb5ae0a5db8d6aac011b8807b28ecedbda86a6b33dd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSAR.java",
+      "sha256": "61ce282d31e8eb7fb69b6093f674dfb3dd5ddf209d097c4ad0fb6ba60a279ce4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSAW.java",
+      "sha256": "b847d84ceb63eb1e922bf539ae2d6ed62d329c4f724b1dde26530cbeae4c4677"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSAWR.java",
+      "sha256": "293072f47599c97997b49d5eb887ce70e7c86cb2190bd85abb0e40c40f34772b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMS.java",
+      "sha256": "b46cf091fe6668f262926bf65aa6f9d9b83f989ce9fa75722ca3acd2dd9f33f8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMSA.java",
+      "sha256": "ebcb5591a3def5ed6ebda536738ca399cf3df989185d1c182297b333730c5c4b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMSAR.java",
+      "sha256": "15bcdf2a63c470447e481dff6d9afe4c562bf0630b135504d1f4f475bef3f448"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMSAW.java",
+      "sha256": "9ef1bd4b50e3128dd314c9ef5ee729dba79104110b304f4ba095b420e6b889ee"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMSAWR.java",
+      "sha256": "7573f0319234164cdfa26d5a7993aaf5062095d6ae0500a47d2958b274ff159f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMSR.java",
+      "sha256": "33ebebabbb5f530b2a488cbb064924b8a8c2aee3c40ba5d5a3c5c13c53dfdbdc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMSW.java",
+      "sha256": "167a722654feda721d365d4e337a7ba783c91a6a79b71b15d2357b3cf3544c16"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMSWR.java",
+      "sha256": "9e0200c7da2e2def69dc3f962c9d4b46cbaff0ece09bfc52cd6ca088e5ced495"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMW.java",
+      "sha256": "ecce0ac8ad25af52d66d4dacc2da13f995a865daf118d64b4a644ff54f6b52bd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMWA.java",
+      "sha256": "32aa510dcc9646e22bae34789cf401985646fa54e725768d2d3687275bd5ba5b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMWAR.java",
+      "sha256": "811aeb325eca77203858a88eba7528833b655f53bfa5f767859c7376d0840e41"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMWAW.java",
+      "sha256": "e7418c6a894c2b356d8bc8feec5b707f6dbdc31fe24f18ee02d977c68fa66c1f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMWAWR.java",
+      "sha256": "a259c4f2a161e275d8a77f60ff6803d255e4aef67bfddc1a49f0c3ad811f7e66"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMWR.java",
+      "sha256": "f2f796c504856e4747b4214aa0caaeb7a1ec9d13628cdfd290600de858187919"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMWW.java",
+      "sha256": "ec13060d59130f5e4e4ec9291ff6c615fa99b5a332968daaddf1aa89719e2f32"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSMWWR.java",
+      "sha256": "7550d48d466ca16ff67e67986f3ffa3ccc8dce80805ffb76c6d9f566f4698a71"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSR.java",
+      "sha256": "cdb9e27ab8539563b216c796b09e49d3c78b76258fef2ffc1b0a32269dc3c240"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSW.java",
+      "sha256": "ae1118e5f580b722b0ea4c3d038d15d70eecef37d054c5358f7b14a65f265b7b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSSWR.java",
+      "sha256": "ecb25b8ba9cde78b87a20c9bbc2cdc022509727a6a2fe80be70cae2306fd8e15"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSW.java",
+      "sha256": "020ada6897419db354f7923fa08d7ca1a3c52d97bcbcea624a9cffe8c90934f7"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/SSWR.java",
+      "sha256": "080642299db79e864bce9ed2683fd827fde4082d215fb4c9bf03a36a580dbd01"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WI.java",
+      "sha256": "eb9e2f3150783ae1912296b42e19938a00dbd5e7b7d6bc16ad249e2877ede222"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIA.java",
+      "sha256": "7ae4730d4f9c2b1967683bbb89768405ed0dd99cc338eed55118c04e95c227a8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIAR.java",
+      "sha256": "57fd68be8ac9ee7d28930fa19e446dcbc59ea07b2c843cf162cd1fb205afeefa"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIAW.java",
+      "sha256": "2a027014553a99fa936ae4d8a8b4454b3fcc14e3ff03453ca5689a9ed9a9698f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIAWR.java",
+      "sha256": "478d593d4e8cbd0758296651eec08bca93cec3adac8e4db4549fcfcb8ad9d598"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIL.java",
+      "sha256": "9f5f5d6d0ee6c37816f24ef375f37bd0a303d52476928af5f84334b870efde3f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILA.java",
+      "sha256": "2d069f6bcd4514acdb7aeb2bfe142097366bbcfbcfe65e1a39c464ed093479cb"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILAR.java",
+      "sha256": "f08e40d139e946de8c8157f238da5c5fb32d7e4b6ce53a6e40ca1a0185b67fe6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILAW.java",
+      "sha256": "9588999e9dd5569a933409d036f71d170bf98af84a8688b1ed7d022a49600cf3"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILAWR.java",
+      "sha256": "95159688a04617f4661e889f09420e4dd5186ec9c4e7f01df8befb8aec04db1f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMS.java",
+      "sha256": "7951c81eaf81c0d826d543b23f583e3d03b609b0373502ea8de2123a8f02e50d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMSA.java",
+      "sha256": "388ac90d4bc67125f328b77cc308debeff56b8f6e2b5fb5486784777514fd64a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMSAR.java",
+      "sha256": "96a6524f9b6f09a8be7ee3145f8e47a044ac52fb1fdd8f239b605d84aae7a49e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMSAW.java",
+      "sha256": "af4d0f2498286b8bd060189eec3d915d9fc0c113761d186476f453f20a5e0395"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMSAWR.java",
+      "sha256": "e51f2a2291c666895c4b2dbf758a9c72abded4b42bb6e35f47d051554c19bee3"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMSR.java",
+      "sha256": "83a9edd8b58cdfe6a76f44257b47ef2ce59442e9b76e85c71aab125e32053e37"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMSW.java",
+      "sha256": "8b62502fa0aecd65a15f6667a5970c131f96714146fd06c096087a0594ef3eba"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMSWR.java",
+      "sha256": "081e008493f1108ddc3cc70e84a9c60332ee0bb137484db983fd1a3a3dd2d8b7"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMW.java",
+      "sha256": "92eb1be28d255672ec376ec2a61b9ebaa9cc83b0f988156c25cd9f086231acd9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMWA.java",
+      "sha256": "6505dd3c7c3b819642eb34b11096daf94b0d9b7e124ecbdd0842259cac0a20d8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMWAR.java",
+      "sha256": "51651e48a3777e7f105c09c18309a238134e1b3418a3ca3b91e5d615cc360425"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMWAW.java",
+      "sha256": "e3e2e5e70d7985b9eb85c9fe41e317c8e4d9597b8da54b87e4d50b3e0f24c5c2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMWAWR.java",
+      "sha256": "0704aa6a3dfca0ef6acdc7da9e0e1ce78821148a0df3440a3c072f96d7646358"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMWR.java",
+      "sha256": "a1f6737bc9b11448925b7293c2aaab452653379a9bea243c172e37ee004c708c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMWW.java",
+      "sha256": "6c32a8faf48949efda2348ec97787c91202444e2bffafb40d18e177050d32ede"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILMWWR.java",
+      "sha256": "c0e5f7ccc8f0ae913f6cb0d70c346e36a62844ca1adc1397150bfc1328b01e8e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILR.java",
+      "sha256": "43ca75f4f8b89a4a8878f0fb849eadfba7faa7e0e1dbda5fda31acb5f205f467"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILS.java",
+      "sha256": "80224e1f4431f2da72bc7d9fb31254e03de26dce5098ddf3c6531ffbabd7f4e4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSA.java",
+      "sha256": "ee15cf4bf65f87919e8b114600026ba2a394b090a38259e4516c7457c121b30a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSAR.java",
+      "sha256": "61a8e931742cd24c068d12fd6c011cab1907a0bbdb6f4bb6efe616f47c791924"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSAW.java",
+      "sha256": "4728d36abb476a5a04566eb60f2f4ae0191ac52ab76f52ff4ff8c2ecacdaa3f9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSAWR.java",
+      "sha256": "a297f375739e4e34e76436351c1d561d3243e7eb75ded3b3b38ab89dca6cc36e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMS.java",
+      "sha256": "a2f54873640a2c021151faab9e5efcfd0b5e8382ce5f0310691fb86d694bc2aa"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMSA.java",
+      "sha256": "4bf4e00a6a97e4f7546d8df0b0e952da3f032725b2669ec1edd46c121318377f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMSAR.java",
+      "sha256": "d096d2b98c0f78fe3b508850d31bc23066c4f2af04c622cc447d8e4f0978e13c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMSAW.java",
+      "sha256": "cf9da1a0a0abeb71800d49cc58b382ff7b888f0b5ee15c88e3b77da624722166"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMSAWR.java",
+      "sha256": "0078622b8a4e9e47559f8a78228c1a8016ca6f7dc37735c724c5748cc4604a1b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMSR.java",
+      "sha256": "cb144128ee681e3884a30de6ad2e9165f04d1639ccf3d986ba999e25ff4ec43b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMSW.java",
+      "sha256": "b25ebd062a5826ffab69d31b234c57078c2209802d9c52f5203a98f0e017035c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMSWR.java",
+      "sha256": "1b84ffb06b1698f684b2afdaf3e8eddb0ea6b1f7b49f00f3655fd7f41bdd4028"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMW.java",
+      "sha256": "ade50ab71a81459ec90f7a8357d8f6e48d936ed62644cbf5c7a28b1ba73f068e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMWA.java",
+      "sha256": "3788bb38f897a29a37f90b49e492cc1af5734ed99149c8234aedc5f68e096739"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMWAR.java",
+      "sha256": "828e9f4c5c29f3e042a53fe517bd08aec736b28d358dc042d36bf1447bbd7db2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMWAW.java",
+      "sha256": "b5dda8d8a1bc32efc49af5447d4a980d9f208e31d12fe3edbb513cac39d4deea"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMWAWR.java",
+      "sha256": "cd20ec37db8d6ddb547c8dcafb10137dc38b0e0f46d87e927e70d5c32008d0cd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMWR.java",
+      "sha256": "7a08cb5eded2abcd8689e19fc64e959dd04be339370256b833536ff17a1a79cd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMWW.java",
+      "sha256": "96e6dc7568b4d64db608cce983a9b1f4595fadd0001ae86ed483c98aee29af6d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSMWWR.java",
+      "sha256": "5afbe3b720adb49c3064520c24a239efe82ad499b56f1a7b529fc60b2683a4b8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSR.java",
+      "sha256": "c03cbfc2e4eddd9894f58e06d89aef1356842b831eecf99d2cd244c6e3a91278"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSW.java",
+      "sha256": "4e71b35808eb32a340ddd8b11498dfbd5c5a932c4bc0d8b9ade4ece2235322ea"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILSWR.java",
+      "sha256": "afc1576f361576ef493320a93c6a8887f51dcf3c682f46617c4da325b4a4d269"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILW.java",
+      "sha256": "0ae3f5ad259f1ae9ce9f7d7a6f2e3e2f7e682023520c6c4829fa42b880355f8c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WILWR.java",
+      "sha256": "0c2c882c7079afeae729aaa639615976bb84947677c8754878621fd425e283ee"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMS.java",
+      "sha256": "e898fade3dd32967c50419d9215fb5c08164fadc08398d957550421b584498c1"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMSA.java",
+      "sha256": "d1e9072e31dd1d1501814a3d6118e4f601709ac3c817d36efcab7efe3a20ff59"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMSAR.java",
+      "sha256": "2bf1c853d7c946504a50b526102357a4a07ee6f39582d71ed5287ec2aeb28098"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMSAW.java",
+      "sha256": "a83482fbac7dff8b8ad8052d1b7ca6fd382cbac9d81eb12ab98ab9b3cd8aa3af"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMSAWR.java",
+      "sha256": "976369e2e37e08c5c786b821f6419024f9b0a685bc8f6bcb1131586928dc7385"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMSR.java",
+      "sha256": "932d8d8e6f787cccfd4948914983b5c808220807fbd50fc470e3b098f9321346"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMSW.java",
+      "sha256": "3d1c4842f2a2dc20377ca899197c779e1eeb53c5f225c5ac82f331762bb236f6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMSWR.java",
+      "sha256": "5ff7bbfb49ed918e43bf877161a6d61751bebd494f6b66603b811adc3c2a1310"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMW.java",
+      "sha256": "43f896c0945fbd35b9b59367ed3496b3dd62f270bb25f17467e5bf593ca38110"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMWA.java",
+      "sha256": "3f1fa5142521854556c37ff8dd2a3cedfcfa444cf16ea04c8408a9cf63de9e13"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMWAR.java",
+      "sha256": "2aff132fc39d5ea8d32bbe3a3b37e94a27cf8fd0424a3ede7db23970750dd561"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMWAW.java",
+      "sha256": "eb6cf2a71b6398ea99b6007325a182079cd4de64f8d06f8fc672858a352a7736"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMWAWR.java",
+      "sha256": "40963ed190037eb0893bfcfeadf890abcd9c8c04f2a2f92660defad70391fc96"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMWR.java",
+      "sha256": "f262fc44c1bf99e1c8d19d22a74c0737d6583a12fd66064564116bfe0ca9ee04"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMWW.java",
+      "sha256": "d3f8f62f28f10a978126c70e6e0e5e8182e6e33274ad2f96457d5dfa00068ce4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIMWWR.java",
+      "sha256": "0f6d11cc6771fed0929f669bdd80b159afdc9f03f875fbb7088c24d04213b94b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIR.java",
+      "sha256": "28fe4ed5f3ed8e40f5c607775e9d3bd72573dfc24c910fde579930e40819fc85"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIS.java",
+      "sha256": "39d58f9287fcd64439a4fee0f2e0faacefe96f8e9f111faca41eca74508c7c12"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISA.java",
+      "sha256": "f961efdb9aca71f6c342e05fcfb062b3de285fe2ec88cb8aadf9f63d90babfd4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISAR.java",
+      "sha256": "5ff15d3c247269d51b710d92f5528581c3b9c598fff92f46f34560aea0005aa3"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISAW.java",
+      "sha256": "763c2ef167328b34eadbcec199f810cea851f9aeb22d73750db7e7f6ea518f62"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISAWR.java",
+      "sha256": "ae9fa7986cecd0c72aa0fd2b6ac2422b5b8e15469300386ef9b69a257b5d7696"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMS.java",
+      "sha256": "6e5975a2f7ae17b2133814f4e82a9a8911ebde4b6b615b710ca714844b568d74"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMSA.java",
+      "sha256": "9362e977ae5923eb9098c0fc5b0f5c87529ff1ff8bb46221184cbf0d80d7042d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMSAR.java",
+      "sha256": "8ab62919b4498c540b143b86c12ed1cf56adb5a33fe7812293d9da25c33838af"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMSAW.java",
+      "sha256": "f8460d8fad4c11f1bf3404079e43785bbb1b40a1b86de33af956c07803bb30e6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMSAWR.java",
+      "sha256": "04e676e7e444d4d97ba73f0851a0bb15e29734982d2ac8df67e39e6d17433a04"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMSR.java",
+      "sha256": "2bc262abdeaafabb05614c00d68eec117dbf970b0190a1753636651fe31ed9da"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMSW.java",
+      "sha256": "434a6d0ec82099380ba0867995c4a91fefac6bdc4c3f7601130e6d9bfb369b88"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMSWR.java",
+      "sha256": "9d5152071cdab04656008a407c8c552bb2ed49f77a6b0c4b266664fa6a2dc781"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMW.java",
+      "sha256": "a314eecdfa5f00e1f6a4a0605570969740f00bbe0ae12db954b7c6cb394361a7"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMWA.java",
+      "sha256": "6de2806dfc8ea1d55b7b3492d3b3d460a3ba58def1c606222a0a94a3fc813f2e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMWAR.java",
+      "sha256": "aaf189e312fbba1a8e556c8d0b1d54dd47bceed69d8dc93002cf89639b91fb8d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMWAW.java",
+      "sha256": "fb579186ccb538fe22e598e826fe0b72e9bb31c85863aafc346b862bd081d0b2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMWAWR.java",
+      "sha256": "dd9a73d1fbbeb81eef591210609e7edee94bb0fa1810f70310756daa18ca9f15"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMWR.java",
+      "sha256": "26592c42c8c912f655327d571327b5c53af7484105d1fee0835e339b7f3ab504"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMWW.java",
+      "sha256": "fffcf73eaec316d62b3be43f5752bfb00be1e3aae6a23bb90c50fc2ff8b2f451"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISMWWR.java",
+      "sha256": "d8954c3d73916022ee336ed66e4a5ccf9b984fb25ccb7f2b283aa1c41ec6c443"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISR.java",
+      "sha256": "54a06480d3fb865c0ebf1af3223c7bf37479fe97af79edadb807af3db92cc3b5"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISW.java",
+      "sha256": "0aa88d3739b633d974b3428f7099bf390a2c35db992feb46554af6892fb22019"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WISWR.java",
+      "sha256": "d82b6a1cc7dcfae06bce4b58a957e8a482324de814ea0069479b883cf9271201"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIW.java",
+      "sha256": "76615d6334036800df4c6d29e89a0c3517413973fcdb3d4c7317737b883385f8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WIWR.java",
+      "sha256": "f2b270aedd99dcab9e4e8ff01176f12d2ebd2b4dc25e3951a58f332adb15b03b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WS.java",
+      "sha256": "c85cde3fb31c82f0a035522c951a99796df6a480af310cecfbd09572c2333fa2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSA.java",
+      "sha256": "79545cba58b4484fb6e17714a4daecdf9949919ff5b08d2f1ded171eaee61aa5"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSAR.java",
+      "sha256": "a463307b411e980d08bc31e9aa7829120d3f28b186f191afbb0b025caa3370fb"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSAW.java",
+      "sha256": "de66619a110cfb3971f2d1d51a7c27f06b42acbf3afe69bb3a32f76c6458fa8b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSAWR.java",
+      "sha256": "7a03576e9145b1caa905f228206d74a7e140d5251643336a4ed00bed36412678"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSL.java",
+      "sha256": "59b0f8952c31aa6508b5cc1f037c64062db8f39908661f407688c952ad7f8b63"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLA.java",
+      "sha256": "bdb3b0d94c8d508f059a383cd36325c1ee405e9eaa865ced993fac1455fad496"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLAR.java",
+      "sha256": "87178e845acb6e93dc556705fade9b650462bf36ca976debc9f8294700156de2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLAW.java",
+      "sha256": "cdf069462724a247e185cfc02fdd877b2653ed8fbaeced3b85caddc52df5de92"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLAWR.java",
+      "sha256": "0db48054956fa13de6966e65ae3345ade4590535c10cbedc67567c27d1c56fb8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMS.java",
+      "sha256": "d7e558900169bd1640d32d396ace3c5b0fbc28942453e5b8967d42dc72f0751a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMSA.java",
+      "sha256": "8fc8e8e3b1b1db2fe44a9768ef98d32538e72c03f08bd055c722e6de9d8d49d1"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMSAR.java",
+      "sha256": "8ada7bc8f7e3e1e26785c365d257fb7c5f44cfbe4dcf2b33e1cc986218566908"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMSAW.java",
+      "sha256": "df5118d305f62ec1c6b39ccfee0e6fdf287583356f418b6b63f299face55cb4f"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMSAWR.java",
+      "sha256": "48a2c746424b1b38226649c221aadadc4afb5b428e9a0a09b322ae7c1dbb4c42"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMSR.java",
+      "sha256": "59256ba5ab634aafe9ccda20ffa1040c82cd23ea52ea610ab21f43cfb428b829"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMSW.java",
+      "sha256": "d853ef51b60603ae7107a6c23e58f0a6a3cf22578397870e49c469e1eb066bb9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMSWR.java",
+      "sha256": "edc96530795455d9bd651a5866326bb8b896d7b0ec4fe1b511755a37868910ea"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMW.java",
+      "sha256": "3b28556d0c557e64d1d06b953d3984fc4b1b04e18547bfb2c0df0c186a02e961"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMWA.java",
+      "sha256": "a4c07a94d6e69a0ed19e60f4a7e75d30f6fbc647ba4cc699c2abe0e3ed813531"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMWAR.java",
+      "sha256": "c3d19158a22e797de2219e59ca5e5bf8b542a9ca10d0739c27f5f0fb97325e1c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMWAW.java",
+      "sha256": "7b7755712ff214042f3e18115fecd849a442251f968b547fe207532e20bb0fdc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMWAWR.java",
+      "sha256": "7a40ec3fcf607595af46f6b65693589a38784e63e00765216052913addf65c79"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMWR.java",
+      "sha256": "187c6a9c21940d4e5995953709a52a46d1776e24675576e7e0f1ee48440a8dab"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMWW.java",
+      "sha256": "485ece3aec15b3c1aad7f9ed74ef1db6d097593dee65cc55f9ca9bc92d4d6811"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLMWWR.java",
+      "sha256": "79f219157347da420d74c32c6af44e2090ce1954213d6126dc00c170368856bd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLR.java",
+      "sha256": "395913defa8c7d760c24b90a7a3f35e6129add2c0454a0fff4fd79be991be8c1"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLS.java",
+      "sha256": "2dc0cb73fd5e3c51fc909848e2c68166fdec508d6aa97da737a54836a7a1cc20"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSA.java",
+      "sha256": "31b2b04f4e65b43fc2bb8238d2052191eacfc31c036b9e1452a88b058aa3ffcc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSAR.java",
+      "sha256": "0fd641717f6c0964e0a47dfe09e51e24090664d7cb7fa1ed6abddf7a92a05d14"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSAW.java",
+      "sha256": "f0fbd37a55adbeba90c43792722c2a271d566d671698b34274481ca77c43a9f6"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSAWR.java",
+      "sha256": "f6aa5146477c1628e18cfdc97ed2d537b2bd7cceae0b8f3e20c18c911389c005"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMS.java",
+      "sha256": "b5abff4a2bd75a4db8727ec95b84cb4c18d6098ae17369b78bab6a4f09f6b4e4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMSA.java",
+      "sha256": "e5bd4402046282613a6d4753042659ddb7cc55a94bc9c9de7f578651a7669290"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMSAR.java",
+      "sha256": "a8885d1b967669d1003d7fe90e56c1d10c711ff3fd6f484711c5d507ef692845"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMSAW.java",
+      "sha256": "1db3d6aab544b905ddadbfc28cf5b5d42088f61d154135d0111c985ae8f5e786"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMSAWR.java",
+      "sha256": "f92ef29f7f705ce44e18d74c4c438a26dd8439470050607b52487cf4091dbfa9"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMSR.java",
+      "sha256": "63cae8b379a6f25490e1f8c6683d79cb9da71768ac639e32279840f2ff86f8a8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMSW.java",
+      "sha256": "b8bbfad65d0be734cf5951fd942369a6a1fc7de4ff1bedd3dfb872cebb6ae225"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMSWR.java",
+      "sha256": "b79118dce9c8a8e0e46820f360ca3b32aff5d92313ec2c62f916f200f19672e0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMW.java",
+      "sha256": "c72e755299f26a7f0156d94fedf14953d17ccf87d0b4d20b2e7f9ba59d5ed9f5"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMWA.java",
+      "sha256": "511cd9dbebd9cc09b4a450bf7722187562bf8e6e5719f5d7ff0588c85ca44dbc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMWAR.java",
+      "sha256": "50d833c8b745ce565c8525c1eb799b47ef390611b44e0060cd425f1bc8da6211"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMWAW.java",
+      "sha256": "ef6f2d008866832b35ee0ddf23cd95ac4a38569867601514fe2b12399ce45d2e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMWAWR.java",
+      "sha256": "b11d73a3acddf6f6a18389178996e6283cee6a3feb39425f7b26f56b57295745"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMWR.java",
+      "sha256": "0f1eab7df3fa991900a67b8abc80b1d5b5de0229610ce92220661037c6540fa7"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMWW.java",
+      "sha256": "3d553cd52f7d54dc34a4e0099e8ab6ba76805da2de67ce819e62df78d62416ef"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSMWWR.java",
+      "sha256": "6530f612ebf08e36646eb6162a8522f022bb807787bceead40f0062acba93d8e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSR.java",
+      "sha256": "40e2c96d623ad9ff31b3e925e012b76d7252f9a7f84ac91f0ecafaa9530a9ce8"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSW.java",
+      "sha256": "d471522482fd4636b9bc7c0625bc91ca0f3a6210edf1a85e5d351f294c24e05e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLSWR.java",
+      "sha256": "e638e8524f879c62ee37f2717c2c9fc5e7b836690b374c78d189a8c58eb74206"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLW.java",
+      "sha256": "7ba6075537e81e49cfb163aaeb099be93b87807d3af8bfc5c6727262e5a61c97"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSLWR.java",
+      "sha256": "26835ed7a302cbf92da51f20f5ab9bece71776bbc8af673ed19c4eb20dca35bc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMS.java",
+      "sha256": "9ef73f3df4ef23efd980791e0ef72944defb0c069f863559ebfa18dfa7188370"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMSA.java",
+      "sha256": "14747392620d4f0749994adaf27f24e22c6d7a71c59c05324a0d95743c350035"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMSAR.java",
+      "sha256": "af960ebd6654c18e7942a33049171dee55774efa16f0e3e352bf8d074df6e10a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMSAW.java",
+      "sha256": "bc0f1fcc0dbe1b8ff3c043392c6f8effa9fd553589ee85a09314796548cf9e7d"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMSAWR.java",
+      "sha256": "ebe62dd602bde2c71af14fa3663ff39485d4285641514f07668914394a298ce7"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMSR.java",
+      "sha256": "d804b0304cccd13808ff97c6e34cb459f23f8dfd11d371aa91f64393ea573fdd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMSW.java",
+      "sha256": "f6e818a05e4d1128f0e303543ab460bdded29f4b84fd30165e5942830f890205"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMSWR.java",
+      "sha256": "a957c99184c58b21a9eeae78618cca16312985639ca6111c187749f1fc7371fc"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMW.java",
+      "sha256": "70ec37c6efa49665e93dac86dbe327f21d96a72143ff7064003929a6fdafcc73"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMWA.java",
+      "sha256": "f5bd93825a07572a64e8345e1cd23fcc6dedbe53d496d91d2e8dcaa6013b1171"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMWAR.java",
+      "sha256": "18449ed4ab8053b20a4a768175b171074b71defdbe46341bf91190eb35d8c4a2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMWAW.java",
+      "sha256": "9be9ff7b2e9a02c8a6cfb8657b53d381e0b9cbe8350090620f3c150d99389d14"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMWAWR.java",
+      "sha256": "4d766d0205c8f1f9e87a135e60cdf2740340f411bd1927cb427f21495c9c2960"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMWR.java",
+      "sha256": "e3c84d1c35a587e91eb1bf0c6b43dc5dec1653f65187f1584ea124b482e02d36"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMWW.java",
+      "sha256": "3163fc16e5cd0bd81c3dcdba5c09a1d3dafdb950fbc8fecadeba6015e2543f8a"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSMWWR.java",
+      "sha256": "724ed86fce7a90bf39367e67c18b0a234bdf719f5af8040be61a2856d92732f4"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSR.java",
+      "sha256": "96feef3568fedcaae180963b4cbd03a3c707d6b08b59ef02146792b7d09f82c5"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSS.java",
+      "sha256": "f17a5dfb7f8f24011d4980ecaa7670c85927b460f4f36a2d183eff2f4d9e5528"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSA.java",
+      "sha256": "1c37fba214607bf7ddf804c955a79aff794d2b068756f731dc10cb5c3b317895"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSAR.java",
+      "sha256": "0d003414bb8bb526656e4c722d0473841fc57aff9dbf01dc1ccd25d12763fb6c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSAW.java",
+      "sha256": "5d267f8cf6dde6978b8bdd6e244c009dcb761eb2102b9e9cb0dc73a39fac5317"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSAWR.java",
+      "sha256": "a51575a17ffbf0e79400001e7b568f4d73f7c92bec8f992c78860d5f3f4dacb0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMS.java",
+      "sha256": "fd915af5bc77e0a61d49407f4a09807ab65e7ffd8f01acc0c895dbada0db1f35"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMSA.java",
+      "sha256": "43ec2b539c5d296275b648d0b046fe523d76d6251712c046a89194fc5efd53d7"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMSAR.java",
+      "sha256": "0654a5df5fe8f847aa60004adbc92167ce9557e934a89898016bba51220136f0"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMSAW.java",
+      "sha256": "452d100041ba95fe7ddf7e8e3a2b9c04cd2671d6a4e97ab99708489c28746835"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMSAWR.java",
+      "sha256": "f3e82d7335f38a9ce7d8c98a5a9acea0d9a8868a5e990192fc1cc7fcbd69bb8c"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMSR.java",
+      "sha256": "5ceb8897ae9aece9a22d15fdfd2b6d51a16d956907c2ce1e3f780e1e0d496403"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMSW.java",
+      "sha256": "efbbd457d04ae7ab1c175215fcf85a6f8463eabe7f4b582c34615a86adec8013"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMSWR.java",
+      "sha256": "d0ac1c3b01e7a73d0521235c48ca029a8a258aef1d1f260ce3e0552ffc9420a3"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMW.java",
+      "sha256": "4c6bcac792c2688d1ddb07c12461f3e1171dbdec4995b4d2a71504101326123e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMWA.java",
+      "sha256": "5d42b616ce53217391914f54bb7d37df1ced2595c54aa87bfafa8df2ae4c7133"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMWAR.java",
+      "sha256": "3295bbd28bccbf55613c06d03d2fdb9cba4efcd14eade4d98e4035f2fddd8be2"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMWAW.java",
+      "sha256": "5fdda520bcc0b49b4aec71971af9754b591b9ae5eb007a9c21f76676a0d91abd"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMWAWR.java",
+      "sha256": "80636cb96a2f91973ab1851337447442293c01bef8aec655a1cbe4ce29ddb154"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMWR.java",
+      "sha256": "337fb07cc350e55a94c440795815faa9a3b323acd45925626ca607d7351ad0fb"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMWW.java",
+      "sha256": "64cf003fea90c2f2b2cda63707d66f95e1343ac2ad41ac7807b27a6b76a7de34"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSMWWR.java",
+      "sha256": "6788d64ae5c6dbeeb848bc8476a9a8b9c445e6aa39798876aae49f29d765625e"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSR.java",
+      "sha256": "bfbe4d51b3cc8d9967ca3db943dc1600679be1cd3c6970a709b58cf9da3d8e2b"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSW.java",
+      "sha256": "22fe83177451fdef37d33f4142b195613ce28db23f2c50f72aa65a12e21a7cdf"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSSWR.java",
+      "sha256": "f8d6470b566e84df9af59cdfc34e8259948d2d514cacf97ff182e29fc0b558ac"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSW.java",
+      "sha256": "926a8103d3db0838d3977b9f312daf446d2e195e6c737caad66fbcff48e7ec26"
+    },
+    {
+      "path": "com/github/benmanes/caffeine/cache/WSWR.java",
+      "sha256": "31c7656626f895c8664e96174bdb63b8f05e9539ad451efa6133f73913878f43"
+    }
+  ]
+}

@@ -104,8 +104,8 @@
       "upstream": "com/fasterxml/jackson/datatype/jsr310/PackageVersion.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jackson-datatype-jsr310-2.16.1/src/main/resources/com/fasterxml/jackson/datatype/jsr310/PackageVersion.java.in",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jackson-datatype-jsr310-2.16.1/upstream-source-only/com/fasterxml/jackson/datatype/jsr310/PackageVersion.java.in",
       "sha256": "f9c03f6f0168def02f0c36d539233c6184a390eba03de758701bbfeb470cb411",
       "upstream": "com/fasterxml/jackson/datatype/jsr310/PackageVersion.java.in"
     },
@@ -396,6 +396,13 @@
       "repository": "m3/vendor/third_party/jackson-datatype-jsr310-2.16.1/SOURCES_MANIFEST.tsv",
       "sha256": "93a8ce2d9a090ab9928c11503880a170e34d72dfda942c8f803fb9d86415e1d9",
       "upstream": "(inventory)"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1 (sha256 6281970682a8da3ddbac54bb203c9badf1c26f507f3ecaa48ef10318579bc9ad)",
+      "repository": "m3/vendor/third_party/jackson-datatype-jsr310-2.16.1/src/main/descriptor/9/module-info.java",
+      "sha256": "d6f7efa8a94c9f075ba713d1af070e30d9bfc13c81799dc29a5ec1f70c54d7b0",
+      "upstream": "META-INF/versions/9/module-info.class"
     }
   ],
   "group": "com.fasterxml.jackson.datatype",
@@ -403,6 +410,11 @@
   "license": "UNDECLARED (see LICENSE)",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "com.fasterxml.jackson.module:jackson-modules-java8:2.16.1",
   "pom": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.pom",

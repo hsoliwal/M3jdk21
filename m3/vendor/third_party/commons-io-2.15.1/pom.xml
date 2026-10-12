@@ -24,7 +24,11 @@
         <configuration><skipTests>true</skipTests></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
-        <configuration><excludes><exclude>**/.no-default-excludes</exclude></excludes><archive><manifestEntries><Automatic-Module-Name>org.apache.commons.io</Automatic-Module-Name></manifestEntries></archive></configuration>
+        <configuration><excludes><exclude>META-INF/jpms.args</exclude></excludes><archive><manifestEntries><Automatic-Module-Name>org.apache.commons.io</Automatic-Module-Name><Multi-Release>true</Multi-Release></manifestEntries></archive></configuration>
+      </plugin>
+      <plugin><groupId>org.moditect</groupId><artifactId>moditect-maven-plugin</artifactId><version>1.2.2.Final</version>
+        <!-- descriptors upstream generates in its build, assembled from the declaration in src/main/descriptor -->
+        <executions><execution><id>add-module-info-9</id><phase>package</phase><goals><goal>add-module-info</goal></goals><configuration><jvmVersion>9</jvmVersion><overwriteExistingFiles>true</overwriteExistingFiles><failOnWarning>false</failOnWarning><version>2.15.1</version><module><moduleInfoFile>${project.basedir}/src/main/descriptor/9/module-info.java</moduleInfoFile></module></configuration></execution></executions>
       </plugin>
     </plugins>
   </build>

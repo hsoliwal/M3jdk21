@@ -31,140 +31,140 @@
       "upstream": "META-INF/maven/org.antlr/antlr4-runtime/pom.xml"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_DiffTopDiffPar.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_DiffTopDiffPar.dot",
       "sha256": "7fef3447cb81923553dcf63483f5cf0c04260915d99a31227e7fa313d65253bf",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_DiffTopDiffPar.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_EqualTop.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_EqualTop.dot",
       "sha256": "efa30ddcdfb756bf39b9ca49bb89dd2a337fe4c70fcb6e8aa70232a2f4381fa8",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_EqualTop.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopDiffPar.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopDiffPar.dot",
       "sha256": "6ea0f696804e268b220df27e2fa582ce33ccf7b97a0be15e4c61aba381cec37e",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopDiffPar.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopSamePar.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopSamePar.dot",
       "sha256": "cd45c789ed29628def51ce7e324820e930afaff87b9bddec69dd62f133f322ce",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopSamePar.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopSharePar.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopSharePar.dot",
       "sha256": "a069fe94944e66572cac711a4f543281ea05aa983109cdc3d9838d92cf0de9e2",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ArrayMerge_ShareTopSharePar.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/Block.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/Block.dot",
       "sha256": "aadb7179c9aa03b81ccb8221eb5bd9b2b79cc04e92def56911f7d2c27c8e9cbb",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/Block.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ClosureGreedy.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/ClosureGreedy.dot",
       "sha256": "170cdf3a5d7ba217d373d9517af87985e5dd337401f9cd14b560a57ce8071c7f",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ClosureGreedy.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/ClosureNonGreedy.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/ClosureNonGreedy.dot",
       "sha256": "e4886342113691e4552455c42fa7fa9295b7d0b70ada2600bb151e39d99ec9e9",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/ClosureNonGreedy.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/FullMerge_EmptyRoot.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/FullMerge_EmptyRoot.dot",
       "sha256": "1b9ba6a60ddcfe03236e89c042eae4d22735e48fe310ac6d5f42ebdf34448385",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/FullMerge_EmptyRoot.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/FullMerge_EmptyRoots.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/FullMerge_EmptyRoots.dot",
       "sha256": "5c9f11c5693d53d355783003a3b22eb3f95de675972ba79e173a1b32a3d2d8fa",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/FullMerge_EmptyRoots.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/FullMerge_SameRoot.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/FullMerge_SameRoot.dot",
       "sha256": "0db80cce1113cb1f32252fd5f079174e30c442dfe049f57fb1cfb2afe10a66f4",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/FullMerge_SameRoot.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_DiffRoots.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_DiffRoots.dot",
       "sha256": "6a9f5757540d0f9c575fa88994fe7779dcd8af2d7d8a3358ef96dd58e39655b4",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_DiffRoots.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_EmptyParent.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_EmptyParent.dot",
       "sha256": "2e3e8810adf6a5545901d51c793cb75b029af929cfd9abd73b46536b05686dbb",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_EmptyParent.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_EmptyRoot.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_EmptyRoot.dot",
       "sha256": "a35beae9c138ba1f3a7e156e1b1552240c3a6c114e2b1c50a477451047ac8a81",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/LocalMerge_EmptyRoot.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/OptionalGreedy.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/OptionalGreedy.dot",
       "sha256": "51a62357c2bdd0095c16627c84d2c4811941f75a9ec4c355fdb59d9179bb5f1e",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/OptionalGreedy.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/OptionalNonGreedy.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/OptionalNonGreedy.dot",
       "sha256": "133389500ec980f7fdbcb5f276fe2ceaef7910c6957d155e9734320af7d28be5",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/OptionalNonGreedy.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/PositiveClosureGreedy.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/PositiveClosureGreedy.dot",
       "sha256": "3721255ad40c6d00a56b886e66383f35e1a976b7b1af55a9e6d806e979d885a7",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/PositiveClosureGreedy.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/PositiveClosureNonGreedy.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/PositiveClosureNonGreedy.dot",
       "sha256": "a741ffca85e948765d30dd8bd911d6397da94fc46a210695a6d140c5ff00251f",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/PositiveClosureNonGreedy.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/Rule.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/Rule.dot",
       "sha256": "55573c2c5c916956988aedbbf1b06d9ee3dfc0df01f307bacce3355b13c71ebb",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/Rule.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_DiffRootDiffPar.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_DiffRootDiffPar.dot",
       "sha256": "2d97a4133034debf94774d630911f614db68bc46c2951e2d54f088220068fcfb",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_DiffRootDiffPar.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_DiffRootSamePar.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_DiffRootSamePar.dot",
       "sha256": "477679029dde331e4ae28baa7d3d065be75138d9ec9bfccb4d4dfc1b98cc5b02",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_DiffRootSamePar.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_SameRootDiffPar.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_SameRootDiffPar.dot",
       "sha256": "47a1bf782db16ced2c07a6daf4aec7503e643c1ad995169846773c9e2feafe13",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_SameRootDiffPar.dot"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/src/main/resources/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_SameRootSamePar.dot",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/antlr4-runtime-4.11.1/upstream-source-only/main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_SameRootSamePar.dot",
       "sha256": "f433782d6d0c235492271a555cc99741f7ad91998438eae1129abcdb7f1b3b7d",
       "upstream": "main/dot/org/antlr/v4/runtime/atn/images/SingletonMerge_SameRootSamePar.dot"
     },
@@ -1242,6 +1242,11 @@
   "license": "UNDECLARED (see LICENSE)",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "org.antlr:antlr4-master:4.11.1",
   "pom": "https://repo.maven.apache.org/maven2/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.pom",

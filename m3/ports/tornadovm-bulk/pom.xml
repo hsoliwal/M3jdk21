@@ -23,7 +23,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>${junit.version}</version>
+      <version>${junit.version}-m3-source-1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

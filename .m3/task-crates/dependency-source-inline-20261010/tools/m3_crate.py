@@ -10,6 +10,7 @@ import argparse, csv, hashlib, io, json, re, shutil, sys, time
 from pathlib import Path
 
 CRATE = ".m3/task-crates/dependency-source-inline-20261010"
+KEEP_HAND_WRITTEN = ("CORRECTIONS.md", "API_SURFACE_RUNNER.tsv", "reuse/REUSE_PAIRS.tsv", "reuse/REUSE_SUMMARY.json", "reuse/REUSE_CATALOG.tsv.gz", "reuse/ATOMIZE_PROOF.json", "tools/reuse_catalog.py")
 SUFFIX = "-m3-source-1"
 DEP_RE = re.compile(r"<dependency>(.*?)</dependency>", re.S)
 
@@ -36,9 +37,13 @@ def main() -> int:
     ap.add_argument("--consumers", type=Path, required=True, help="file listing the consumer pom paths (repo-relative)")
     args = ap.parse_args()
     crate = args.repo / CRATE
+    keep = {n: (crate / n).read_bytes() for n in KEEP_HAND_WRITTEN if (crate / n).is_file()}  # hand-written evidence
     if crate.exists():
         shutil.rmtree(crate)
     crate.mkdir(parents=True)
+    for n, b in keep.items():
+        (crate / n).parent.mkdir(parents=True, exist_ok=True)
+        (crate / n).write_bytes(b)
     mods = tsv(args.c6 / "M3_THIRD_PARTY_MODULES.tsv")
     api = {g["donor"]: g for g in tsv(args.c6 / "M3_API_SURFACE.tsv")} if (args.c6 / "M3_API_SURFACE.tsv").exists() else {}
     prov = {}
@@ -50,7 +55,7 @@ def main() -> int:
     for n in ("M3_THIRD_PARTY_MODULES.tsv", "M3_BUILD_GATE.tsv", "M3_CONSUMER_SWITCH.tsv", "M3_API_SURFACE.tsv", "candidates_t7.tsv", "DEPENDENCY_INVENTORY_T7.tsv", "candidates_t8.tsv", "DEPENDENCY_INVENTORY_T8.tsv", "POM_CLASSPATH.tsv", "UPSTREAM_LICENSES_3.tsv", "UNRESOLVED_IMPORTS.tsv", "BUILD_INPUTS.tsv"):
         if (args.c6 / n).exists():
             shutil.copyfile(args.c6 / n, crate / n.replace("M3_", ""))
-    (crate / "tools").mkdir()
+    (crate / "tools").mkdir(exist_ok=True)
     if (args.c6 / "closure" / "runtime-list.txt").exists():
         listing = (args.c6 / "closure" / "runtime-list.txt").read_text(encoding="utf-8").splitlines()
         (crate / "OPENREWRITE_8_17_1_RUNTIME_CLOSURE.txt").write_text("\n".join(ln.rstrip() for ln in listing if ln.strip()) + "\n", encoding="utf-8", newline="\n")
@@ -65,6 +70,16 @@ def main() -> int:
     for m in mods:
         v = m["version"][:-len(SUFFIX)] if m["version"].endswith(SUFFIX) else m["version"]
         by_coord[(m["group"], m["artifact"], v)] = m
+    in_repo = {}  # group:artifact -> pom path of every module the repository builds itself
+    import subprocess as _sp
+    for _p in [x for x in _sp.run(["git", "-C", str(args.repo), "ls-tree", "-r", "--name-only", "HEAD"], capture_output=True, text=True).stdout.splitlines() if x.endswith("pom.xml") and "/src/test/resources/" not in x]:
+        _t = _sp.run(["git", "-C", str(args.repo), "show", "HEAD:" + _p], capture_output=True, text=True, encoding="utf-8", errors="replace").stdout
+        _t = re.sub(r"<parent>.*?</parent>", "", re.sub(r"<!--.*?-->", "", _t, flags=re.S), count=1, flags=re.S)
+        _t = re.sub(r"<(dependencies|dependencyManagement|build|profiles|plugins)>.*", "", _t, flags=re.S)
+        _g = re.search(r"<groupId>([^<]+)</groupId>", _t); _a = re.search(r"<artifactId>([^<]+)</artifactId>", _t)
+        if _a:
+            in_repo.setdefault(((_g.group(1) if _g else "").strip(), _a.group(1).strip()), _p)
+    vendored_ga = {(m["group"], m["artifact"]): m for m in mods if m["kind"] == "MODULE"}
     rows = []
     for rel in [l.strip() for l in args.consumers.read_text(encoding="utf-8").splitlines() if l.strip()]:
         pom = args.repo / rel
@@ -85,13 +100,17 @@ def main() -> int:
             if not (g and a):
                 continue
             gv, av = g.group(1).strip(), a.group(1).strip()
-            if gv.startswith("com.m3") or gv.startswith("com.synexia") or "junit" in gv or "opentest4j" in gv or gv == "org.assertj" or gv == "org.hamcrest":
+            if gv.startswith("com.m3"):  # every third-party pin is reported (JUnit/assertj/opentest4j are vendored now); com.synexia pins show as NOT_VENDORED
                 continue
             raw = v.group(1).strip() if v else ""
             eff = re.sub(r"\$\{([^}]+)\}", lambda k: props.get(k.group(1), k.group(0)), raw)
             eff_plain = eff[:-len(SUFFIX)] if eff.endswith(SUFFIX) else eff
             mod = by_coord.get((gv, av, eff_plain))
-            if mod is None:
+            if mod is None and not eff and (gv, av) in vendored_ga:
+                status, path = "VENDORED_SOURCE_BUILD+MANAGED (version from a parent dependencyManagement)", vendored_ga[(gv, av)]["path"]
+            elif mod is None and any(k_[1] == av and (k_[0] == gv or not k_[0]) for k_ in in_repo):
+                status, path = "IN_REPO_MODULE", next(v_ for k_, v_ in in_repo.items() if k_[1] == av and (k_[0] == gv or not k_[0]))
+            elif mod is None:
                 status, path = "NOT_VENDORED", ""
             elif mod["kind"] == "MODULE":
                 status, path = ("VENDORED_SOURCE_BUILD" + ("+SWITCHED" if eff.endswith(SUFFIX) else "+BINARY_STILL_RESOLVED") + " API_SURFACE=" + api.get(mod["donor"], {}).get("verdict", "NOT_RUN")), mod["path"]
