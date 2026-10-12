@@ -18,6 +18,7 @@
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.15.0</version>
         <!-- Upstream bytes are compiled as published: no annotation processing, no warnings-as-errors. M3jdk21 integration is checked separately with -Werror. -->
         <configuration><release>8</release><encoding>UTF-8</encoding><proc>none</proc><compilerArgs><arg>-Xlint:all,-options</arg></compilerArgs></configuration>
+        <executions><execution><id>module-descriptor-root</id><phase>process-classes</phase><goals><goal>compile</goal></goals><configuration><release>9</release><compileSourceRoots><compileSourceRoot>${project.basedir}/src/main/descriptor/root</compileSourceRoot></compileSourceRoots><multiReleaseOutput>false</multiReleaseOutput><moduleVersion>1.1.2</moduleVersion><compilerArgs><arg>--patch-module</arg><arg>org.apiguardian.api=${project.build.outputDirectory}</arg></compilerArgs></configuration></execution></executions>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.6</version>
         <!-- Published sources jars carry no test suite; the compile and the consumers' own tests are the proof lane. -->

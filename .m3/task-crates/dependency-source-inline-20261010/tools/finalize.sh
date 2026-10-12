@@ -12,8 +12,8 @@ set -u
 SIDE="$1"; shift
 C=/k/m3-work/runs/20261007-m3jdk21-apex/c6
 K=K:/m3-work/runs/20261007-m3jdk21-apex/c6
-INV="$C/DEPENDENCY_INVENTORY.tsv $C/DEPENDENCY_INVENTORY_T2.tsv $C/DEPENDENCY_INVENTORY_T3.tsv $C/DEPENDENCY_INVENTORY_T4.tsv $C/DEPENDENCY_INVENTORY_T5.tsv $C/DEPENDENCY_INVENTORY_T6.tsv $C/DEPENDENCY_INVENTORY_T7.tsv $C/DEPENDENCY_INVENTORY_T8.tsv"
-RUNS="$C/run/out-1 $C/run/out-1b $C/run/out-2 $C/run/out-1c $C/run/out-1d $C/run/out-1e $C/run/out-3 $C/run/out-4b $C/run/out-4d"
+INV="$C/DEPENDENCY_INVENTORY.tsv $C/DEPENDENCY_INVENTORY_T2.tsv $C/DEPENDENCY_INVENTORY_T3.tsv $C/DEPENDENCY_INVENTORY_T4.tsv $C/DEPENDENCY_INVENTORY_T5.tsv $C/DEPENDENCY_INVENTORY_T6.tsv $C/DEPENDENCY_INVENTORY_T7.tsv $C/DEPENDENCY_INVENTORY_T8.tsv $C/DEPENDENCY_INVENTORY_T9.tsv"
+RUNS="$C/run/out-1 $C/run/out-1b $C/run/out-2 $C/run/out-1c $C/run/out-1d $C/run/out-1e $C/run/out-3 $C/run/out-4b $C/run/out-4d $C/run/out-5"
 STATUS=""; for r in $RUNS; do [ -f "$r/status.tsv" ] && STATUS="$STATUS $r/status.tsv"; done
 RECEIPTS=""; for r in $RUNS; do [ -d "$r" ] && RECEIPTS="$RECEIPTS $r"; done
 export JAVA_TOOL_OPTIONS="-Xmx1536m -Djava.io.tmpdir=K:/m3-work/tmp" TMP=K:/m3-work/tmp TEMP=K:/m3-work/tmp JAVA_HOME="C:\\Program Files\\Java\\jdk-21"

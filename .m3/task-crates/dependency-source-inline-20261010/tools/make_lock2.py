@@ -52,6 +52,15 @@ REQUIRES_OVERRIDE = {  # requirer -> {(group, artifact): donor id}; shaded input
     "jackson-core-2.16.1": {("ch.randelshofer", "fastdoubleparser"): "fastdoubleparser-1.0.0"},
     "jackson-core-2.19.2": {("ch.randelshofer", "fastdoubleparser"): "fastdoubleparser-1.0.90"},
 }
+JUNIT_TRAINS = ("5.10.2", "5.11.4")  # Jupiter X.Y.Z <-> Platform 1.Y.Z, one upstream release train
+for _jv in JUNIT_TRAINS:
+    _pv = "1." + _jv.split(".", 1)[1]
+    _train = {("org.junit.jupiter", a): "%s-%s" % (a, _jv) for a in ("junit-jupiter-api", "junit-jupiter-params", "junit-jupiter-engine")}
+    _train.update({("org.junit.platform", a): "%s-%s" % (a, _pv) for a in ("junit-platform-commons", "junit-platform-engine", "junit-platform-launcher")})
+    for _a in ("junit-jupiter", "junit-jupiter-api", "junit-jupiter-params", "junit-jupiter-engine"):
+        REQUIRES_OVERRIDE["%s-%s" % (_a, _jv)] = dict(_train)
+    for _a in ("junit-platform-commons", "junit-platform-engine", "junit-platform-launcher"):
+        REQUIRES_OVERRIDE["%s-%s" % (_a, _pv)] = dict(_train)
 BUILD_NONE = {  # artifact -> reason: retained as SOURCE_ONLY (no compile lane without its platform)
     "org.eclipse.jdt.core": "ECLIPSE_PLATFORM_DEPENDENCIES (org.eclipse.core.resources/runtime/text etc. are not inventoried)",
 }

@@ -1565,6 +1565,13 @@
       "repository": "m3/vendor/third_party/commons-io-2.15.1/LICENSE",
       "sha256": "8c6db340475136df3c1201d458fa5755698eace76e510471ecc9d857d6083dac",
       "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "commons-io:commons-io:2.15.1 (sha256 a58af12ee1b68cfd2ebb0c27caef164f084381a00ec81a48cc275fd7ea54e154)",
+      "repository": "m3/vendor/third_party/commons-io-2.15.1/src/main/descriptor/9/module-info.java",
+      "sha256": "8623bffd03e308ad380f7b41121983424e8b6880a4b8be390d357d71a574a0c7",
+      "upstream": "META-INF/versions/9/module-info.class"
     }
   ],
   "group": "commons-io",
@@ -1572,6 +1579,11 @@
   "license": "Apache License, Version 2.0 (from the license text; pom declares none)",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "org.apache.commons:commons-parent:65",
   "pom": "https://repo.maven.apache.org/maven2/commons-io/commons-io/2.15.1/commons-io-2.15.1.pom",

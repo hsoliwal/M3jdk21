@@ -335,6 +335,13 @@
       "repository": "m3/vendor/third_party/slf4j-api-2.0.9/LICENSE",
       "sha256": "4e7f90c86ab51278228bce153122f1d8df30149d13ce9ef524c8444a84c32dcc",
       "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "org.slf4j:slf4j-api:2.0.9 (sha256 0818930dc8d7debb403204611691da58e49d42c50b6ffcfdce02dadb7c3c2b6c)",
+      "repository": "m3/vendor/third_party/slf4j-api-2.0.9/src/main/descriptor/9/module-info.java",
+      "sha256": "79991156fcb20bdf886221098f6e6caf92c5f0e303caf4c92462a5cbc8cc6203",
+      "upstream": "META-INF/versions/9/module-info.class"
     }
   ],
   "group": "org.slf4j",
@@ -342,6 +349,11 @@
   "license": "UNDECLARED (see LICENSE)",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "org.slf4j:slf4j-parent:2.0.9",
   "pom": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.pom",

@@ -1,0 +1,25 @@
+{
+  "commit": "6430ba4f653f6ae42f326cd0731b259ee699c719",
+  "donor": "junit-platform-commons-1.11.4",
+  "files": [
+    {
+      "class": "org/junit/platform/commons/util/ModuleUtils",
+      "release": "9",
+      "sha256": "3eb9f90e3dfa38403d4d99b1930c5c2ff8db9d59382988c14f148f3fb05a19b4",
+      "upstream_path": "junit-platform-commons/src/main/java9/org/junit/platform/commons/util/ModuleUtils.java",
+      "url": "https://raw.githubusercontent.com/junit-team/junit5/6430ba4f653f6ae42f326cd0731b259ee699c719/junit-platform-commons/src/main/java9/org/junit/platform/commons/util/ModuleUtils.java"
+    },
+    {
+      "class": "org/junit/platform/commons/util/PackageNameUtils",
+      "release": "9",
+      "sha256": "1427a5abb6fc886a6605387e0a21fe663e44484f361c670aacca6a88ee429aed",
+      "upstream_path": "junit-platform-commons/src/main/java9/org/junit/platform/commons/util/PackageNameUtils.java",
+      "url": "https://raw.githubusercontent.com/junit-team/junit5/6430ba4f653f6ae42f326cd0731b259ee699c719/junit-platform-commons/src/main/java9/org/junit/platform/commons/util/PackageNameUtils.java"
+    }
+  ],
+  "not_reproduced": [],
+  "published_jar": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar",
+  "published_jar_sha256": "9edd969b0d0670c54105bc91ae79bd1c6f503e12115faba82073b84c86bbc334",
+  "repository": "github:junit-team/junit5",
+  "tag": "r5.11.4"
+}

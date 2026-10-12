@@ -12,7 +12,7 @@
   <developers><developer><name>Hitesh Soliwal</name><email>hsoliwal@gmail.com</email></developer></developers>
   <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
   <dependencies>
-    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2-m3-source-1</version><scope>test</scope></dependency>
   </dependencies>
   <build>
     <resources><resource><directory>${project.basedir}</directory><targetPath>META-INF</targetPath>

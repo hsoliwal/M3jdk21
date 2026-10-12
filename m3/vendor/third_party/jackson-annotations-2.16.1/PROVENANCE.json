@@ -323,6 +323,13 @@
       "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/SOURCES_MANIFEST.tsv",
       "sha256": "99abd611102aa2daaccb5108eb5b6a8769a507dddd32f223fe7ac726e573b296",
       "upstream": "(inventory)"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "com.fasterxml.jackson.core:jackson-annotations:2.16.1 (sha256 a4730771e6a495dd3793a42cdb8ce6bddb96c77e15f40c98fd8d9a7ae09e7286)",
+      "repository": "m3/vendor/third_party/jackson-annotations-2.16.1/src/main/descriptor/root/module-info.java",
+      "sha256": "3eb55dddd8adf4f68b0206bd84cda7b2de1bf6ff162c74a1594860cd0d699bd9",
+      "upstream": "module-info.class"
     }
   ],
   "group": "com.fasterxml.jackson.core",
@@ -330,6 +337,11 @@
   "license": "The Apache Software License, Version 2.0",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "com.fasterxml.jackson:jackson-parent:2.16",
   "pom": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.pom",

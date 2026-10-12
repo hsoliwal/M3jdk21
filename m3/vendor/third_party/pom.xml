@@ -38,9 +38,20 @@
     <module>jna-5.14.0</module>
     <module>jna-platform</module>
     <module>jsr305</module>
-    <module>junit-jupiter-api</module>
-    <module>junit-jupiter-params</module>
-    <module>junit-platform-commons</module>
+    <module>junit-jupiter-5.10.2</module>
+    <module>junit-jupiter-5.11.4</module>
+    <module>junit-jupiter-api-5.10.2</module>
+    <module>junit-jupiter-api-5.11.4</module>
+    <module>junit-jupiter-engine-5.10.2</module>
+    <module>junit-jupiter-engine-5.11.4</module>
+    <module>junit-jupiter-params-5.10.2</module>
+    <module>junit-jupiter-params-5.11.4</module>
+    <module>junit-platform-commons-1.10.2</module>
+    <module>junit-platform-commons-1.11.4</module>
+    <module>junit-platform-engine-1.10.2</module>
+    <module>junit-platform-engine-1.11.4</module>
+    <module>junit-platform-launcher-1.10.2</module>
+    <module>junit-platform-launcher-1.11.4</module>
     <module>micrometer-core</module>
     <module>opentest4j</module>
     <module>org.eclipse.jgit</module>

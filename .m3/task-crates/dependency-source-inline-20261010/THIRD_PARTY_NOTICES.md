@@ -39,9 +39,20 @@ any donor. Nothing here enters src/** (GPLv2+CPE); these are build-time tooling 
 | net.java.dev.jna:jna:5.14.0-m3-source-1 | LGPL-2.1-or-later | PASS | m3/vendor/third_party/jna-5.14.0 |
 | net.java.dev.jna:jna-platform:5.14.0-m3-source-1 | LGPL-2.1-or-later | PASS | m3/vendor/third_party/jna-platform |
 | com.google.code.findbugs:jsr305:3.0.2-m3-source-1 | The Apache Software License, Version 2.0 | PASS | m3/vendor/third_party/jsr305 |
-| org.junit.jupiter:junit-jupiter-api:5.10.2-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-jupiter-api |
-| org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-jupiter-params |
-| org.junit.platform:junit-platform-commons:1.10.2-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-platform-commons |
+| org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-jupiter-5.10.2 |
+| org.junit.jupiter:junit-jupiter:5.11.4-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-jupiter-5.11.4 |
+| org.junit.jupiter:junit-jupiter-api:5.10.2-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-jupiter-api-5.10.2 |
+| org.junit.jupiter:junit-jupiter-api:5.11.4-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-jupiter-api-5.11.4 |
+| org.junit.jupiter:junit-jupiter-engine:5.10.2-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-jupiter-engine-5.10.2 |
+| org.junit.jupiter:junit-jupiter-engine:5.11.4-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-jupiter-engine-5.11.4 |
+| org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-jupiter-params-5.10.2 |
+| org.junit.jupiter:junit-jupiter-params:5.11.4-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-jupiter-params-5.11.4 |
+| org.junit.platform:junit-platform-commons:1.10.2-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-platform-commons-1.10.2 |
+| org.junit.platform:junit-platform-commons:1.11.4-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-platform-commons-1.11.4 |
+| org.junit.platform:junit-platform-engine:1.10.2-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-platform-engine-1.10.2 |
+| org.junit.platform:junit-platform-engine:1.11.4-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-platform-engine-1.11.4 |
+| org.junit.platform:junit-platform-launcher:1.10.2-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-platform-launcher-1.10.2 |
+| org.junit.platform:junit-platform-launcher:1.11.4-m3-source-1 | Eclipse Public License v2.0 | PASS | m3/vendor/third_party/junit-platform-launcher-1.11.4 |
 | org.latencyutils:LatencyUtils:2.0.3-m3-source-1 | Public Domain, per Creative Commons CC0 | PASS | m3/vendor/third_party/LatencyUtils |
 | io.micrometer:micrometer-core:1.9.17-m3-source-1 | The Apache Software License, Version 2.0 | PASS | m3/vendor/third_party/micrometer-core |
 | org.opentest4j:opentest4j:1.3.0-m3-source-1 | The Apache License, Version 2.0 | PASS | m3/vendor/third_party/opentest4j |

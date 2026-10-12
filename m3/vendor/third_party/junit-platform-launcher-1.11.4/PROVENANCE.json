@@ -1,0 +1,599 @@
+{
+  "artifact": "junit-platform-launcher",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "NOT_IN_LOCK",
+  "consumers": "JUnit 5 test runtime of the M3jdk21 tooling poms (junit-jupiter + platform launcher closure)",
+  "coordinate": "org.junit.platform:junit-platform-launcher:1.11.4-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "apiguardian-api",
+      "form": "source module",
+      "group": "org.apiguardian",
+      "optional": false,
+      "scope": "compile",
+      "version": "1.1.2-m3-source-1"
+    },
+    {
+      "artifact": "junit-platform-commons",
+      "form": "source module",
+      "group": "org.junit.platform",
+      "optional": true,
+      "scope": "compile",
+      "version": "1.11.4-m3-source-1"
+    },
+    {
+      "artifact": "junit-platform-engine",
+      "form": "source module",
+      "group": "org.junit.platform",
+      "optional": false,
+      "scope": "compile",
+      "version": "1.11.4-m3-source-1"
+    }
+  ],
+  "donor": "junit-platform-launcher-1.11.4",
+  "excluded_from_compilation": [
+    "module-info.java"
+  ],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/resources/META-INF/LICENSE-notice.md",
+      "sha256": "c7d843e0faf8a251278c9220f6b5326a42a01f08b855c1ec871bcef6211a7e2a",
+      "upstream": "META-INF/LICENSE-notice.md"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/resources/META-INF/LICENSE.md",
+      "sha256": "5aa4cd44c111add178d1c2e2fe36d58a484012c80167df925f826cd64d411bf0",
+      "upstream": "META-INF/LICENSE.md"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/resources/META-INF/services/org.junit.platform.launcher.TestExecutionListener",
+      "sha256": "14c5589d902919e61fa37e626f799d38ab5a051ffc68b59bf79f8b7766ad3634",
+      "upstream": "META-INF/services/org.junit.platform.launcher.TestExecutionListener"
+    },
+    {
+      "kind": "unmodified-production-excluded-from-compilation",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/upstream-excluded/module-info.java",
+      "sha256": "ebbe15f138d6178bebaffa449ec0da004ed20f8d61aeb909ea69a49a3a36bdce",
+      "upstream": "module-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/EngineDiscoveryResult.java",
+      "sha256": "6ecf3dc46f153b804bd9a9bd87e1028f20851bccc62259fdb3c6de1c650bedf7",
+      "upstream": "org/junit/platform/launcher/EngineDiscoveryResult.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/EngineFilter.java",
+      "sha256": "d13665d61da98327c14d279c6514180b0f6ef3c4b67efc419eb1c60d7d274919",
+      "upstream": "org/junit/platform/launcher/EngineFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/Launcher.java",
+      "sha256": "640d7a649b1ef315d8cfe31eb3cb458785e7743bae1e282c752d2adffea4c07e",
+      "upstream": "org/junit/platform/launcher/Launcher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/LauncherConstants.java",
+      "sha256": "628b62122b224a7be441256319b72be0befb79901d21d57dd122793596783ab0",
+      "upstream": "org/junit/platform/launcher/LauncherConstants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/LauncherDiscoveryListener.java",
+      "sha256": "e9433fa21dd80355808caec243a8476cc3d7ee0b9b76cdb1b6d02a74c5dd95b0",
+      "upstream": "org/junit/platform/launcher/LauncherDiscoveryListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/LauncherDiscoveryRequest.java",
+      "sha256": "99eec3d6ba5d3ed20057d4c60606d40ac6a2ed2e994e02234a0a0c923d26661c",
+      "upstream": "org/junit/platform/launcher/LauncherDiscoveryRequest.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/LauncherInterceptor.java",
+      "sha256": "97b2865a60dc865101e094d7c91a4c50f23fc2b78e21b378e2f1f6409b0a558a",
+      "upstream": "org/junit/platform/launcher/LauncherInterceptor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/LauncherSession.java",
+      "sha256": "abfdc9ae2c5cbe258eca6015bb092eae70091e952960fa73f4626094e97e8971",
+      "upstream": "org/junit/platform/launcher/LauncherSession.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/LauncherSessionListener.java",
+      "sha256": "1ca4cd9e7a3bfb95c30629b590787ff6adbe6a89a9e478dda0961e194814715b",
+      "upstream": "org/junit/platform/launcher/LauncherSessionListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/PostDiscoveryFilter.java",
+      "sha256": "fc71d37e072bb6edcf016b8bea724357ff6a4496d39a37ca807058357d0535d0",
+      "upstream": "org/junit/platform/launcher/PostDiscoveryFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/TagFilter.java",
+      "sha256": "db71c0a8ed8852d4414515e0f2ce96b13c30a490cd7cebe082ae1eec40fe5b92",
+      "upstream": "org/junit/platform/launcher/TagFilter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/TestExecutionListener.java",
+      "sha256": "c56c18e051c18098e77afea85a5fc175bba243a3140d18389990043bce90cf21",
+      "upstream": "org/junit/platform/launcher/TestExecutionListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/TestIdentifier.java",
+      "sha256": "ff8e4e02bc55519b24fb2c7f17d373ee891e63fcbc09cd9439e5d6b3afafb607",
+      "upstream": "org/junit/platform/launcher/TestIdentifier.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/TestPlan.java",
+      "sha256": "256754d85a8853f1ebb934e7d0c176189e68dd662eacc99d00b3f08c818087e7",
+      "upstream": "org/junit/platform/launcher/TestPlan.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/CompositeEngineExecutionListener.java",
+      "sha256": "e649e0ce22723d375e34d8e82068b5e4c375f44ff7f0fee7c221cee9d6685155",
+      "upstream": "org/junit/platform/launcher/core/CompositeEngineExecutionListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/CompositeTestExecutionListener.java",
+      "sha256": "435f9be501181db741998554692343dbbf0546bd736091dcf44b03107cfdc777",
+      "upstream": "org/junit/platform/launcher/core/CompositeTestExecutionListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/DefaultDiscoveryRequest.java",
+      "sha256": "9071e1dafc3ea842d7e55d352cd70ec8cb472a6f5dc7789e2982a5b4f9a2315e",
+      "upstream": "org/junit/platform/launcher/core/DefaultDiscoveryRequest.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/DefaultLauncher.java",
+      "sha256": "49f6c01a19badd56f2a7fd2b9a4d4a5be056719e7f12fe9f464350922833da80",
+      "upstream": "org/junit/platform/launcher/core/DefaultLauncher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/DefaultLauncherConfig.java",
+      "sha256": "f2600ee48a0757e524f66c1cd013d1f0683d6d880bd530d86d9c9baee9bde58f",
+      "upstream": "org/junit/platform/launcher/core/DefaultLauncherConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/DefaultLauncherSession.java",
+      "sha256": "594e52ca210047d1686c7e50ebe8832f74e51c476b0e9442a37502e7cf5ac159",
+      "upstream": "org/junit/platform/launcher/core/DefaultLauncherSession.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/DelegatingEngineExecutionListener.java",
+      "sha256": "49b9dc768dbc8266a77dcb3a738930c73e157eeaea35c65963cc18592b782ff2",
+      "upstream": "org/junit/platform/launcher/core/DelegatingEngineExecutionListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/DelegatingLauncher.java",
+      "sha256": "64c18646b386fbbcbaa3a095c80bd1bfe0e67dfdef532ecd61fb70864c76ac28",
+      "upstream": "org/junit/platform/launcher/core/DelegatingLauncher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/EngineDiscoveryErrorDescriptor.java",
+      "sha256": "2952a22dc5923ea8744401c8c1d1e0563c74f4e8a0c8471f3e1c69279394c42f",
+      "upstream": "org/junit/platform/launcher/core/EngineDiscoveryErrorDescriptor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/EngineDiscoveryOrchestrator.java",
+      "sha256": "44cc2d16cfef7c9842ee7ef05e312af2291ea17169493c640641d01a8cce408f",
+      "upstream": "org/junit/platform/launcher/core/EngineDiscoveryOrchestrator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/EngineDiscoveryResultValidator.java",
+      "sha256": "14f3e6d3f5beee41d271541e74d71b014b9f80918425f0dd652dc08051fdcb33",
+      "upstream": "org/junit/platform/launcher/core/EngineDiscoveryResultValidator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/EngineExecutionOrchestrator.java",
+      "sha256": "7571d9995f4e2f7155bff21c2a3b015e2389d56372ff30ae16fc0537cf854c4d",
+      "upstream": "org/junit/platform/launcher/core/EngineExecutionOrchestrator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/EngineFilterer.java",
+      "sha256": "86141bbf115309c1d8bca5c0ba2254e38425fdf1e720337284d8450d54f177b1",
+      "upstream": "org/junit/platform/launcher/core/EngineFilterer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/EngineIdValidator.java",
+      "sha256": "27b134952adc657c9e59bd87a0b12f0209165ac3d9b49068b5bf69afd5aacd6f",
+      "upstream": "org/junit/platform/launcher/core/EngineIdValidator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/ExecutionListenerAdapter.java",
+      "sha256": "eb090719b583bc063783d0d5d4a3dc57122230d322c65694dcb6d9f632f43a4b",
+      "upstream": "org/junit/platform/launcher/core/ExecutionListenerAdapter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/InterceptingLauncher.java",
+      "sha256": "d0476afd6e7820a1a58637ae1d3779a7c7c7794edbb11b4e18ea7c1a09188b99",
+      "upstream": "org/junit/platform/launcher/core/InterceptingLauncher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/InternalTestPlan.java",
+      "sha256": "b29d4fe7ff33a4c3c233d969aa07d04393091ea6a54aca96205356313a0e5620",
+      "upstream": "org/junit/platform/launcher/core/InternalTestPlan.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/IterationOrder.java",
+      "sha256": "ced74993d3528faff6dd1f8dbe7ae3a20722476be49fc16ca380b619c8a8aa9c",
+      "upstream": "org/junit/platform/launcher/core/IterationOrder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/LauncherConfig.java",
+      "sha256": "5d48728d140c59485757ccac50335a7a261992bc3d13781991d3eb7ccc9e960e",
+      "upstream": "org/junit/platform/launcher/core/LauncherConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/LauncherConfigurationParameters.java",
+      "sha256": "a8493bd919239f84fa44e79883f8165bd130d5b406925ade47939b216666bd91",
+      "upstream": "org/junit/platform/launcher/core/LauncherConfigurationParameters.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/LauncherDiscoveryRequestBuilder.java",
+      "sha256": "fe8edaeecebd2fad66ea0a4f0b10e1b01a963e97b9972e7d43fd1d7e7e1c0d05",
+      "upstream": "org/junit/platform/launcher/core/LauncherDiscoveryRequestBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/LauncherDiscoveryResult.java",
+      "sha256": "8795ab50dbc10dac3cd71ad9854fd0254c69787a51eb952e3ceffd8b7d4e6f38",
+      "upstream": "org/junit/platform/launcher/core/LauncherDiscoveryResult.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/LauncherFactory.java",
+      "sha256": "2497ca502f93547c1326ab10bd40c73f1ffc83b85b832a43aa8783b607eb1534",
+      "upstream": "org/junit/platform/launcher/core/LauncherFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/LauncherListenerRegistry.java",
+      "sha256": "82a24e82ed00308d130d8af3e8dfbd787ec2ba5f7c5e7562bca4550fd86d0634",
+      "upstream": "org/junit/platform/launcher/core/LauncherListenerRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/ListenerRegistry.java",
+      "sha256": "47d49514d01cccd20a37a7578670c376a58cf528fc6e69f245b7bc6bc62b8b14",
+      "upstream": "org/junit/platform/launcher/core/ListenerRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/OutcomeDelayingEngineExecutionListener.java",
+      "sha256": "660a223df24fd274a4559b0c43cabed98ff80a9d5c9483b35063ece2795e119a",
+      "upstream": "org/junit/platform/launcher/core/OutcomeDelayingEngineExecutionListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/ServiceLoaderRegistry.java",
+      "sha256": "3febaf1c3714eeb13db365ad37f9cf5e929538d7b1a5c9b8ddc108f56da646ad",
+      "upstream": "org/junit/platform/launcher/core/ServiceLoaderRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/ServiceLoaderTestEngineRegistry.java",
+      "sha256": "a033c80da0826a54ace8d27884a83876cbb95c98b56cd8b6227e41641ccea7ff",
+      "upstream": "org/junit/platform/launcher/core/ServiceLoaderTestEngineRegistry.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/SessionPerRequestLauncher.java",
+      "sha256": "21efd5bb968017d3f23a0a879e838debeb29a9743fe2b1ef11900a14e4f7a7eb",
+      "upstream": "org/junit/platform/launcher/core/SessionPerRequestLauncher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/StackTracePruningEngineExecutionListener.java",
+      "sha256": "3c288a666db02a1197ec5aee12df4aad2179d18e57cdbf180fcdf20ed44f3ed9",
+      "upstream": "org/junit/platform/launcher/core/StackTracePruningEngineExecutionListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/StreamInterceptingTestExecutionListener.java",
+      "sha256": "437df70e9a6e9b0f3cc5d4caf6f94a3101dc78cb81572a93a4a6d333ff65a0b4",
+      "upstream": "org/junit/platform/launcher/core/StreamInterceptingTestExecutionListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/StreamInterceptor.java",
+      "sha256": "9e007a435dd2a40184cfa002dbc9120511eba6b7d23d822829ddb47e5692463c",
+      "upstream": "org/junit/platform/launcher/core/StreamInterceptor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/TestEngineFormatter.java",
+      "sha256": "cfca93e345ee26b797ef753661635564dbeabd8f547e2e8d8ec8fff1dee5c35c",
+      "upstream": "org/junit/platform/launcher/core/TestEngineFormatter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/core/package-info.java",
+      "sha256": "fd3ae058e03ecc1f6a96f34ed0abc328d3b8f6a9ec307f04e8debf676f755ad3",
+      "upstream": "org/junit/platform/launcher/core/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/LegacyReportingUtils.java",
+      "sha256": "945d400075dc12393559a99018e6e8889b6bb580e9cec5bb036f9f9e53be35dc",
+      "upstream": "org/junit/platform/launcher/listeners/LegacyReportingUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/LoggingListener.java",
+      "sha256": "c53a400dbdb378ed1d50e6dd321ed1e08d14942ce3e33648a4c8c224e05b06cd",
+      "upstream": "org/junit/platform/launcher/listeners/LoggingListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/MutableTestExecutionSummary.java",
+      "sha256": "56c0a58c690380d758217c378d340dafc594ff262cb5f90c6a82647f247e5544",
+      "upstream": "org/junit/platform/launcher/listeners/MutableTestExecutionSummary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/OutputDir.java",
+      "sha256": "63fa80a9855299145e7efe5b06ebf05de77eda9450600b55b6034442909ed830",
+      "upstream": "org/junit/platform/launcher/listeners/OutputDir.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/SummaryGeneratingListener.java",
+      "sha256": "f1342ea3181dd7b871a18583d21227a26e84c428f13d05479f228d0f98648038",
+      "upstream": "org/junit/platform/launcher/listeners/SummaryGeneratingListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/TestExecutionSummary.java",
+      "sha256": "4079b33929bc4c1b7fba8d539ce32e6daebf29f299fcba00da76d40398cc9a49",
+      "upstream": "org/junit/platform/launcher/listeners/TestExecutionSummary.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/UniqueIdTrackingListener.java",
+      "sha256": "76d416db9250f2ea5daeb0528456dd207fcebf4009bc54765b80842609895234",
+      "upstream": "org/junit/platform/launcher/listeners/UniqueIdTrackingListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/discovery/AbortOnFailureLauncherDiscoveryListener.java",
+      "sha256": "f05bc6afefee855105ffa1a4db65585fe2aca7f3a1fd468e059988f21c07ab72",
+      "upstream": "org/junit/platform/launcher/listeners/discovery/AbortOnFailureLauncherDiscoveryListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/discovery/CompositeLauncherDiscoveryListener.java",
+      "sha256": "ac1dd1e4348057b6eaa7ecf626a7407f5c7e24c2957cabbb9dedafac850997da",
+      "upstream": "org/junit/platform/launcher/listeners/discovery/CompositeLauncherDiscoveryListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/discovery/LauncherDiscoveryListeners.java",
+      "sha256": "1c56c839241ba1b8d051ba2162b95ecb1fc52bb4aa1f008153bd6540c91c2c78",
+      "upstream": "org/junit/platform/launcher/listeners/discovery/LauncherDiscoveryListeners.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/discovery/LoggingLauncherDiscoveryListener.java",
+      "sha256": "20b9bd53ab14019bd4c89bcb92d3a632632b5e78e051952808c56ccdf20e125a",
+      "upstream": "org/junit/platform/launcher/listeners/discovery/LoggingLauncherDiscoveryListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/discovery/package-info.java",
+      "sha256": "7e043db600e41ac350b207b3494941d856c58f9d3a8c7c2132f0d9c31d002a34",
+      "upstream": "org/junit/platform/launcher/listeners/discovery/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/package-info.java",
+      "sha256": "ff32d969d85f82dafd50da776f9096aa3174eb67913195711e2c8ff6f556feb8",
+      "upstream": "org/junit/platform/launcher/listeners/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/session/CompositeLauncherSessionListener.java",
+      "sha256": "959299fac979ec65efc6add03c83d0adbeb44dae3c61ab2c99fe4edfc9bbb197",
+      "upstream": "org/junit/platform/launcher/listeners/session/CompositeLauncherSessionListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/session/LauncherSessionListeners.java",
+      "sha256": "f259a1542fb3145a02dd84e2f3931c2c0da88abcd55c90d40fae81b213c5284d",
+      "upstream": "org/junit/platform/launcher/listeners/session/LauncherSessionListeners.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/listeners/session/package-info.java",
+      "sha256": "3654b8f2743438d8c98dd86e26839c60cd87ae02c8664f3ab3506ba69be19fef",
+      "upstream": "org/junit/platform/launcher/listeners/session/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/package-info.java",
+      "sha256": "a2a1be6f1872c6f20f0faceb8892cdeaea468cfe93cfb1fea81c508c344757dc",
+      "upstream": "org/junit/platform/launcher/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/DequeStack.java",
+      "sha256": "f8c04c82c90ff11945fffd90bd76a0d3fcba07b1efab18dd45b2f8b778f6f7de",
+      "upstream": "org/junit/platform/launcher/tagexpression/DequeStack.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/Operator.java",
+      "sha256": "70419dd78a5c1d18cd8598a16116397353c102ad772f6fe411e140d0fdf21857",
+      "upstream": "org/junit/platform/launcher/tagexpression/Operator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/Operators.java",
+      "sha256": "f05004813287a8db8dfb4400fa4c726b7d6054c3460a3b812757e8a03664fbdc",
+      "upstream": "org/junit/platform/launcher/tagexpression/Operators.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/ParseResult.java",
+      "sha256": "80b1f607927f117d77e8ff954278df980870890d6c8992c4e07179b008b78879",
+      "upstream": "org/junit/platform/launcher/tagexpression/ParseResult.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/ParseResults.java",
+      "sha256": "094dedc510252132bf79f830d65f551be22d904482ec0b2f0ef1f414efebf353",
+      "upstream": "org/junit/platform/launcher/tagexpression/ParseResults.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/ParseStatus.java",
+      "sha256": "4ff1669cbee03d6f1b4791343252df33e2c0bceb2636b0d5a7df32e06d51f356",
+      "upstream": "org/junit/platform/launcher/tagexpression/ParseStatus.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/Parser.java",
+      "sha256": "43a4874ea62a6da2fc4a03997ac314770220a30bcb6c53b932b498a2acb120f5",
+      "upstream": "org/junit/platform/launcher/tagexpression/Parser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/ShuntingYard.java",
+      "sha256": "5844d83af721409d48da90a72d935abdb1dfee18caa2665b50bd10c24672038f",
+      "upstream": "org/junit/platform/launcher/tagexpression/ShuntingYard.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/Stack.java",
+      "sha256": "e518be87062e1dd9641f37deec6c74cc449242acd18b2d930d0b4ad77cacbf46",
+      "upstream": "org/junit/platform/launcher/tagexpression/Stack.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/TagExpression.java",
+      "sha256": "557bb5163195b36ef3cd0b28161bdbb900708e0ccaa6570f8cd14b0647f6744f",
+      "upstream": "org/junit/platform/launcher/tagexpression/TagExpression.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/TagExpressions.java",
+      "sha256": "24bf05ddd1dce39756476a331984fa6561cf8f42ba08abef0bb72940fd16886e",
+      "upstream": "org/junit/platform/launcher/tagexpression/TagExpressions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/Token.java",
+      "sha256": "493beaa32ef49d5b010be12fb8af65a890042a7aa00521900a4f8c9c159b75a1",
+      "upstream": "org/junit/platform/launcher/tagexpression/Token.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/TokenWith.java",
+      "sha256": "e13549175687933e947ab2bd2743f16f19e3daa8e3ef4a0cec94e1927eab9f33",
+      "upstream": "org/junit/platform/launcher/tagexpression/TokenWith.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/Tokenizer.java",
+      "sha256": "e9247b4cb32e84c05ba4ad4105822bed298e2278179e73505b0879c4704aeb68",
+      "upstream": "org/junit/platform/launcher/tagexpression/Tokenizer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/java/org/junit/platform/launcher/tagexpression/package-info.java",
+      "sha256": "39e0463567d1df5281fa2b9e3ab3ffcabf53469b747633ad2c09cc026b27ffe7",
+      "upstream": "org/junit/platform/launcher/tagexpression/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/SOURCES_MANIFEST.tsv",
+      "sha256": "0f067d21c6d2e6a2b1fc5de2f61c4feef93ce2a1c507358d8ab564d51fb5a922",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/LICENSE",
+      "sha256": "c7d843e0faf8a251278c9220f6b5326a42a01f08b855c1ec871bcef6211a7e2a",
+      "upstream": "META-INF/LICENSE-notice.md"
+    },
+    {
+      "kind": "unmodified-production-descriptor",
+      "repository": "m3/vendor/third_party/junit-platform-launcher-1.11.4/src/main/descriptor/root/module-info.java",
+      "sha256": "ebbe15f138d6178bebaffa449ec0da004ed20f8d61aeb909ea69a49a3a36bdce",
+      "upstream": "module-info.java"
+    }
+  ],
+  "group": "org.junit.platform",
+  "kind": "MODULE",
+  "license": "Eclipse Public License v2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": "reproduced (see src/main/descriptor)",
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-launcher/1.11.4/junit-platform-launcher-1.11.4.pom",
+  "receipt": {
+    "buildRoot": "02dca1a273af586519a7b7f277344424c4223ab1dc70f7aa6cfce111414a51ad",
+    "distributionSha256": "29d5f43ea074044302eedaf42d5aa1cd6167ccc431d2be8330b5705043e59080",
+    "lock": "e487f448edb18bc7aba04fecfaa28982d675b5a077c386d0957ab66504e02a37",
+    "message": "",
+    "sourceRoot": "e63a70ec3628230ffa14cb3482f6a37321eec06975d9e85a7d8f2e771edf24ff",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-launcher/1.11.4/junit-platform-launcher-1.11.4-sources.jar",
+  "sources_jar_sha1": "d705f6b0d147036b7d84dca5eaad35b41d64592a",
+  "sources_jar_sha256": "e560e5e7bc6eed184774f75a7b36b824e20ec818be4b991213c0d31aff4260c5",
+  "status": "PASS",
+  "upstream": "https://github.com/junit-team/junit5",
+  "version": "1.11.4"
+}

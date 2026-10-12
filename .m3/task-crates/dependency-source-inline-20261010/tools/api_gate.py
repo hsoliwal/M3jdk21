@@ -19,7 +19,7 @@ Verdicts:
                                generated properties, service files) -> never admitted
 Writes API_SURFACE.tsv and per-donor diff files. CPU only."""
 from __future__ import annotations
-import argparse, csv, io, os, subprocess, sys, time, zipfile
+import argparse, csv, io, os, re, subprocess, sys, time, zipfile
 from pathlib import Path
 
 SHADED_PREFIXES = {  # published jars that relocate another artifact's classes into their own namespace
@@ -155,7 +155,7 @@ def main() -> int:
             kv = dict(x.split("=", 1) for x in proc.stdout.split() if "=" in x)
             res = classify(diff, r["artifact"])
             score = (res[1] + res[2]) * 100000 + res[3] + res[4]
-            if best is None or score < best[0]:
+            if best is None or score > best[0]:  # every view must match: the worst view decides (multi-release overlays count)
                 best = (score, res, kv, diff, view)
         if best is None:
             out.append((did, "-", "-", "-", "-", "-", "-", "-", "TOOL_FAILED", err, "", "", "", "")); continue
@@ -163,6 +163,19 @@ def main() -> int:
         res_missing, res_diff = int(kv.get("resources_published_only", "0")), int(kv.get("resources_differ", "0"))
         if verdict in ADMISSIBLE and (res_missing or res_diff):
             verdict = "DIFFERS_RESOURCES"
+        desc_missing, desc_diff = int(kv.get("descriptors_published_only", "0")), int(kv.get("descriptors_differ", "0"))
+        if desc_diff:  # version-only descriptor differences are compiler artifacts (ModuleDescriptor.rawVersion)
+            vonly = 0
+            for dl in io.open(diff, encoding="utf-8").read().splitlines():
+                if dl.startswith("DESCRIPTOR_DIFFERS\t"):
+                    a_, b_ = dl.split("\t", 2)[2].split(" || ", 1)
+                    if re.sub(r" version=\S+", "", a_) == re.sub(r" version=\S+", "", b_):
+                        vonly += 1
+            desc_diff -= vonly
+            if vonly and verdict == "IDENTICAL":
+                verdict = "EQUIVALENT_MODULO_COMPILER"  # version-only descriptor difference
+        if verdict in ADMISSIBLE and (desc_missing or desc_diff):
+            verdict = "DIFFERS_MODULE_DESCRIPTOR"
         out.append((did, kv["published_classes"], kv["built_classes"], kv["identical_classes"], str(missing), str(extra), str(rp), str(rb), verdict, diff.name, str(benign), view, kv.get("published_versions", ""), kv.get("built_versions", ""), kv.get("resources_published", ""), str(res_missing), str(res_diff), kv.get("resources_built_only", "")))
         print(did, verdict, view, file=sys.stderr)
     if args.out.exists():  # previous non-admissible verdicts of donors not evaluated this run are carried forward

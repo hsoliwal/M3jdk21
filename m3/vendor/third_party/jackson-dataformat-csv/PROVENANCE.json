@@ -204,6 +204,13 @@
       "repository": "m3/vendor/third_party/jackson-dataformat-csv/SOURCES_MANIFEST.tsv",
       "sha256": "ee18772b6cf402aa306fbc6e964c631e6fa70592580f21232d4d070e35c14d14",
       "upstream": "(inventory)"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.16.1 (sha256 eda05b1ea4e20f369a7e73d519b03c485497ec7cc924362268f06fbd7af7a1bd)",
+      "repository": "m3/vendor/third_party/jackson-dataformat-csv/src/main/descriptor/9/module-info.java",
+      "sha256": "8f89d7f410aeec931ba59338fe6cfcd8a5881f56f7f84226ac1b73dd8928f18a",
+      "upstream": "META-INF/versions/9/module-info.class"
     }
   ],
   "group": "com.fasterxml.jackson.dataformat",
@@ -211,6 +218,11 @@
   "license": "The Apache Software License, Version 2.0",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "com.fasterxml.jackson.dataformat:jackson-dataformats-text:2.16.1",
   "pom": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-csv/2.16.1/jackson-dataformat-csv-2.16.1.pom",

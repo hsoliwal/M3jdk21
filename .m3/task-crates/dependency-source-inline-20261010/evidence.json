@@ -2,23 +2,22 @@
   "baseline": "30c507d2eb1528647484d0971f4c52627b362e3a",
   "counts": {
     "api_surface": {
-      "EQUIVALENT_MODULO_COMPILER": 21,
-      "IDENTICAL": 33,
-      "IDENTICAL_EXCEPT_SHADED": 1
+      "EQUIVALENT_MODULO_COMPILER": 30,
+      "IDENTICAL": 36
     },
     "build_plugin_rows": 129,
     "delomboked_files": 269,
     "downstream_binary_still_resolved": 0,
-    "downstream_not_vendored": 0,
-    "downstream_rows": 257,
-    "gate": 55,
-    "gate_pass": 55,
+    "downstream_not_vendored": 3,
+    "downstream_rows": 304,
+    "gate": 66,
+    "gate_pass": 66,
     "images": 0,
-    "modules": 55,
+    "modules": 66,
     "native_binaries": 47,
-    "switched": 123
+    "switched": 172
   },
-  "generated": "2026-10-12T00:16:50Z",
+  "generated": "2026-10-12T02:22:49Z",
   "schema": "m3.dependency-source-inline.receiver.v1",
   "synexia_crate": {
     "counts": {

@@ -779,6 +779,28 @@
       "repository": "m3/vendor/third_party/snakeyaml-2.2/LICENSE",
       "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
       "upstream": "UPSTREAM_LICENSE.txt"
+    },
+    {
+      "commit": "a34989252e6f59e36a3aaf788a903b7a37a73d33",
+      "kind": "upstream-overlay-source-at-tag",
+      "repository": "m3/vendor/third_party/snakeyaml-2.2/src/main/versions/9/org/yaml/snakeyaml/internal/Logger.java",
+      "sha256": "f08f830449ac95d95a8e6ae39a298a3f717e436d995dbbf1c2f94d5c12d11865",
+      "tag": "snakeyaml-2.2",
+      "upstream": "src/main/java9/org/yaml/snakeyaml/internal/Logger.java",
+      "url": "https://bitbucket.org/snakeyaml/snakeyaml/raw/a34989252e6f59e36a3aaf788a903b7a37a73d33/src/main/java9/org/yaml/snakeyaml/internal/Logger.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/snakeyaml-2.2/OVERLAY_SOURCES.json",
+      "sha256": "b9a7c82ede1e8b7c3324b7b9193765f598d245d55e0596996d469c316b08f2a7",
+      "upstream": "fetch_overlays.py"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "org.yaml:snakeyaml:2.2 (sha256 1467931448a0817696ae2805b7b8b20bfb082652bf9c4efaed528930dc49389b)",
+      "repository": "m3/vendor/third_party/snakeyaml-2.2/src/main/descriptor/9/module-info.java",
+      "sha256": "03095474857193bd5ad4571d5d2ed458930f726da1b243885844e9b0a6f22b4f",
+      "upstream": "META-INF/versions/9/module-info.class"
     }
   ],
   "group": "org.yaml",
@@ -786,6 +808,13 @@
   "license": "Apache License, Version 2.0",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": [
+      "9"
+    ]
+  },
   "native_binaries": 0,
   "parent": "::",
   "pom": "https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/2.2/snakeyaml-2.2.pom",

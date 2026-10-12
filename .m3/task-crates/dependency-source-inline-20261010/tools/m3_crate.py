@@ -89,7 +89,7 @@ def main() -> int:
             if not (g and a):
                 continue
             gv, av = g.group(1).strip(), a.group(1).strip()
-            if gv.startswith("com.m3") or gv.startswith("com.synexia") or "junit" in gv or "opentest4j" in gv or gv == "org.assertj" or gv == "org.hamcrest":
+            if gv.startswith("com.m3"):  # every third-party pin is reported (JUnit/assertj/opentest4j are vendored now); com.synexia pins show as NOT_VENDORED
                 continue
             raw = v.group(1).strip() if v else ""
             eff = re.sub(r"\$\{([^}]+)\}", lambda k: props.get(k.group(1), k.group(0)), raw)

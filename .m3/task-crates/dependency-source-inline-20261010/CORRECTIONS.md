@@ -70,3 +70,43 @@ Still downstream after this commit:
 - Maven build plugins (129 rows): build tools, resolved from the plugin repository.
 - `src/utils/IdealGraphVisualizer` and `src/utils/LogCompilation`: upstream OpenJDK developer utilities, not part
   of the JDK build.
+
+# Fidelity audit fixed: descriptors, multi-release overlays, shading, class versions; JUnit 5 runtime (2026-10-12)
+
+The gate had two blind spots. It skipped `module-info.class`, and for multi-release jars it scored the better of the
+base and JDK 21 views. Both are closed. Descriptors are compared on name, open, requires and modifiers,
+exports/opens and targets, uses, provides, main class, class version and placement. Every view must match.
+
+Build changes, each reproducing what upstream does:
+- **Descriptors.** Where the sources jar ships `module-info.java`, javac compiles it at the published class version
+  (maven-compiler-plugin execution, `--patch-module`, published `moduleVersion`). Otherwise moditect 1.2.2.Final
+  (upstream's tool) assembles the declaration, generated from the published Module attribute
+  (`src/main/descriptor/<root|N>/`).
+- **Multi-release overlays.** `META-INF/versions/N` sources come from the sources jar (xz), or from the upstream
+  release tag with the commit pinned (`OVERLAY_SOURCES.json`): junit-platform-commons 1.10.2/1.11.4, snakeyaml 2.2,
+  FastDoubleParser 1.0.0. They are compiled at release N into `META-INF/versions/N`, with `Multi-Release: true`.
+  FastDoubleParser's published base classes come from `fastdoubleparser-java8` at v1.0.0; the sources jar ships the
+  JDK 11+ variants.
+- **jackson-core** shades FastDoubleParser with the published pom's shade plugin block, verbatim (relocations of
+  classes, multi-release entries and legal files, and `minimizeJar`).
+- **Class versions.** The main compile targets the published base class version (minus 44, floor 8); manual
+  overrides had raised jackson to 21 and rewrite to 17.
+- **JUnit 5 test runtime** is vendored as 11 more modules: Jupiter/Platform 5.10.2/1.10.2 and 5.11.4/1.11.4, aligned
+  per release train, with the `junit-jupiter` descriptor-only aggregates. The 5.11.4 Kotlin facades use Kotlin
+  1.9.23 with API 1.6, as upstream.
+
+Gate on the rebuilt jars, 66 modules: 36 IDENTICAL, 30 EQUIVALENT_MODULO_COMPILER. Resources: 0 missing, 0 differing,
+0 built-only. Descriptors: 0 missing; classgraph differs only in module version (moditect cannot omit it; it is
+informational and not used in resolution).
+
+Not reproduced on the JDK 21 toolchain: FastDoubleParser `META-INF/versions/22` (2 classes and the descriptor),
+which a JDK 21 runtime never reads. Class versions below 52 (asm, jsr305 and others published for Java 5/6/7)
+compile at 52, the JDK 21 javac floor.
+
+Consumer pins: 172 switched, the JUnit 5 test pins included. Still downstream: `com.synexia:synexia-jdk-a3-recipes`
+(first-party snapshot), and two `junit-jupiter` pins whose version is inherited from a parent's dependencyManagement
+(the ledger cannot resolve it). Maven build plugins (129 rows) are build tools.
+
+User decision (2026-10-12): the inlined libraries use M3String transparently. On M3jdk21 every `java.lang.String`
+they create is M3String-backed under `-XX:+UseM3StringStorage`, and `java.lang.M3String` is package-private.
+Sources stay unchanged. A runtime proof lane (flag on/off) follows the first master JDK build.
