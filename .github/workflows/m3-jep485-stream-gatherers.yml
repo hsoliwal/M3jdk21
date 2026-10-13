@@ -33,6 +33,7 @@ permissions:
 
 jobs:
   recipe-dag-proof:
+    if: ${{ !contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 25
     steps:
@@ -129,6 +130,7 @@ jobs:
           retention-days: 30
 
   openjdk-proof:
+    if: ${{ !contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 100
     steps:
@@ -235,3 +237,120 @@ jobs:
           path: build/*/test-results/**
           if-no-files-found: warn
           retention-days: 14
+
+
+  current-tree-receipt:
+    if: \${{ github.event_name == 'push' && !contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
+    needs:
+      - recipe-dag-proof
+      - openjdk-proof
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Re-read sealed current product before receipt update
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v m3/backports/recipes/j485/test_verify_current.py
+          python3 m3/backports/recipes/j485/verify_current.py "$GITHUB_WORKSPACE"
+
+      - name: Ratify parallel proof jobs into current-tree receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv")
+          rows = []
+          seen = set()
+          updates = {
+              "recipe_replay_source_delta": "0",
+              "openjdk_image_build": "PASS",
+              "focused_jtreg": "PASS",
+              "existing_stream_regressions": "PASS",
+              "api_runtime_smoke": "PASS",
+              "fixed_point": "PASS",
+              "promotion": "NOT_AUTHORIZED",
+              "next_action": "CURRENT_MASTER_CANONICAL_READBACK_AND_LIBRARY_API_ACCEPTANCE_REVIEW",
+              "proof_head": __import__("os").environ["GITHUB_SHA"],
+              "proof_run": __import__("os").environ["GITHUB_RUN_ID"],
+              "proof_attempt": __import__("os").environ["GITHUB_RUN_ATTEMPT"],
+          }
+          for line in path.read_text(encoding="utf-8").splitlines():
+              if not line:
+                  continue
+              key, value = line.split("\t", 1)
+              if key in updates:
+                  value = updates[key]
+                  seen.add(key)
+              rows.append((key, value))
+          for key in ("proof_head", "proof_run", "proof_attempt"):
+              if key not in seen:
+                  rows.append((key, updates[key]))
+          path.write_text(
+              "".join(f"{key}\t{value}\n" for key, value in rows),
+              encoding="utf-8")
+          PY
+          git diff --check
+          grep -F $'openjdk_image_build\tPASS' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'focused_jtreg\tPASS' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'existing_stream_regressions\tPASS' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'api_runtime_smoke\tPASS' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'fixed_point\tPASS' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+
+      - name: Commit proof receipt only
+        shell: bash
+        env:
+          BRANCH_NAME: \${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          git add m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          git diff --cached --check
+          git config user.name "m3-recipe-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git commit -m "m3: ratify JEP485 current proof [m3-jep485-proofed]"
+          git push origin "HEAD:$BRANCH_NAME"
+
+  canonical-readback:
+    if: \${{ contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Verify current product and ratified receipt without mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v m3/backports/recipes/j485/test_verify_current.py
+          python3 m3/backports/recipes/j485/verify_current.py "$GITHUB_WORKSPACE"
+          grep -F $'recipe_replay_source_delta\t0' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'openjdk_image_build\tPASS' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'focused_jtreg\tPASS' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'existing_stream_regressions\tPASS' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'api_runtime_smoke\tPASS' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'fixed_point\tPASS' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
+          git diff --exit-code
+          test -z "$(git status --porcelain=v1 -uall)"

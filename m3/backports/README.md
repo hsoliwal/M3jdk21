@@ -297,6 +297,23 @@ scheduler projections of the same DAG; Drools/KIE remains admission/rule evidenc
 The upstream GitHub Actions DAG run was created but produced no jobs. The custody receipt therefore
 records `UPSTREAM_MERGED_ACTIONS_STARTUP_BLOCKED_NO_JOBS`; no hosted green-build claim is inferred.
 
+## Synexia canonical small-recipe DAG custody
+
+M3JDK21 keeps its richer product-side backport DAG as local build/promotion authority, but portable
+small-recipe DAG/orchestrator semantics are canonically owned in Synexia.
+
+`m3/tooling/backport-dag/M3SynexiaCanonicalDagBinding` binds the exact Synexia candidate PR/commit
+and required laws. Until that upstream candidate is merged and its unified proof is green, the
+binding is pre-admission evidence only and returns:
+
+- `executableBackportDependency=false`;
+- `sourceMutationAuthority=false`;
+- `semanticEquivalenceAuthority=false`;
+- `promotionAuthority=false`.
+
+This prevents an unproven scheduler/control-plane handoff from silently entering JDK source
+backport execution.
+
 ## Backport packet
 
 Each actual backport must record:
@@ -344,6 +361,29 @@ The M3 adaptation imports recursive copying by default and wildcard exclusion, b
 retains Java 21's accepted `-docfilessubdirs` option processing. The packet is owned by
 `M3Jdk8347112BackportRecipe` and remains `candidate-adapted` until focused javadoc build/jtreg and
 recipe fixed-point CI pass. See `recipes/jdk-8347112/`.
+
+## Java-21 update-line serviceability candidate — JDK-8359706
+
+JDK-8359706, **VM.info and hs_err_pid Logs Now Report Current Open File Descriptors**, is
+materialized from the actual OpenJDK 21 update-line backport rather than re-derived from JDK 27:
+
+```text
+openjdk/jdk21u-dev@3da873b1aa23c64e47a5da3352b7b48e8c2c74cd
+  Backport-of: openjdk/jdk@b0831572e2cd9dbff9ee2abcdf81a493ddcecc7e
+```
+
+The packet dependency-closure includes the mandatory macOS repair:
+
+```text
+openjdk/jdk21u-dev@f696cb16462f0201a10540ca36049472a79eba94
+  JDK-8380236
+  Backport-of: openjdk/jdk@3a109f49feb19f313632be6a2aa24ba7d9b7269b
+```
+
+`M3Jdk8359706BackportRecipe` owns seven hash-pinned HotSpot/native text targets and one
+structured Java jtreg target. Current-tree postimages are materialized but promotion remains
+`NOT_AUTHORIZED` until recipe JUnit, Linux image/jtreg, macOS image and fixed-point proof pass.
+See `recipes/jdk-8359706/`.
 
 ## Next adapted serviceability candidate
 

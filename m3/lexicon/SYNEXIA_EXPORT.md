@@ -10,6 +10,12 @@ precompute owner visible. Its final `precompute_fields` column is the v2
 requirement map for owner payloads. It is a catalog, not a license to
 redistribute the bulk datasets named by it.
 
+The number row is an explicit generated projection, not a Synexia corpus
+snapshot. The pinned `NumberValue` source contributes a numeric scalar and an
+inherited decimal `id`; its integer cache covers only -128..127. M3 generates
+the inclusive 0..10000 domain and canonical decimal spellings, with no
+`language_tag` field or imported number rows.
+
 The source manifest's legacy eight-column form remains accepted. The v2 form
 appends `precompute_fields`, a sorted, unique comma-separated list of required
 snake_case keys, or `-` when that source family has no inspected owner-field
@@ -188,3 +194,22 @@ source-blind rejection of a post-export mutation.
 ## Proper-name instance-index contract
 
 The source mapping is `m3/lexicon/synexia-instance-index-contract.tsv`. At Synexia pin `8dda47de4613d1206bef3c175a0f7edf3335ecbc`, `synexia-unicodex/CONCEPTS_VS_PROPER_NOUNS.md` documents the semantic distinction: proper-name instances sit outside the X-spine and can reference concepts. The cited C++ paths and an executable Synexia `InstanceIndex`/`InstanceRecord` API are absent at that pin; no proper-name dataset is supplied. `M3InstanceIndexPrecompute` is an M3-owned target proposal, not a port of a Synexia runtime contract. Its record identity, `nameUtf8` field, UTF-8 checks, ASCII-only A–Z folding, metadata handling, duplicate policy, and forward/reverse lookup behavior require an exact operator dataset and separate review. Proper-name records and owner precompute fields are not currently admitted to the generic Synexia lexicon export; add them only under a pinned operator source, license, and reviewed serialization contract. No second lexical interner or title catalog is admitted; title support requires a separately pinned canonical source, license, and identity contract.
+
+## LangDex source-envelope intake boundary
+
+M3JDK's `SynexiaLangDexSourceEnvelope` verifies the pinned Synexia
+`#M3-LANGDEX-SOURCE-1` wire format and an independently supplied producer
+receipt (dataset revision, lexeme/link row counts, and exact SHA-256). It accepts
+only the producer's ASCII/LF envelope, canonical signed-64-bit decimal IDs,
+canonical standard Base64, and valid UTF-8. The receiver returns a receipt only;
+it does not expose rows, deduplicate repeated source IDs, normalize raw fields,
+resolve concept links, assign M3 record/image coordinates, or invent owner
+precompute payloads. A successful receipt is not catalog admission.
+
+The receiver bounds each line at 16 MiB to keep validation memory bounded. That
+receiver limit is an explicit M3 intake policy, not a claim that Synexia's writer
+imposes the same limit. The source revision in the receipt identifies the data
+snapshot; it must not be confused with the Synexia code commit pin in
+`m3/runtime-integration/FOSS_REUSE_DECISION.tsv`. The SHA-256 comparison establishes byte integrity only relative to the supplied receipt;
+it does not authenticate the producer or receipt. Obtain the expected receipt through a trusted,
+authenticated channel or verify a producer signature separately before relying on provenance.

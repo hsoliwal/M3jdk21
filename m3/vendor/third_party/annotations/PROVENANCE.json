@@ -229,6 +229,12 @@
       "repository": "m3/vendor/third_party/annotations/LICENSE",
       "sha256": "8c1e966c7855fb54027bcaf6ebe7a43abe4785791e8cf9148c363761d493d097",
       "upstream": "UPSTREAM_LICENSE.txt"
+    },
+    {
+      "kind": "unmodified-production-descriptor",
+      "repository": "m3/vendor/third_party/annotations/src/main/descriptor/9/module-info.java",
+      "sha256": "83abd1fc7e4bdcfca084894b4673ebea0b2438830ad886d5470715609545341c",
+      "upstream": "META-INF/versions/9/module-info.java"
     }
   ],
   "group": "org.jetbrains",
@@ -236,6 +242,11 @@
   "license": "The Apache Software License, Version 2.0",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": "reproduced (see src/main/descriptor)",
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "::",
   "pom": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.pom",

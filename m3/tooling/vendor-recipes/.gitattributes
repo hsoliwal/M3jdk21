@@ -1,0 +1,3 @@
+# TSV evidence keeps empty trailing columns (tab-terminated lines are data)
+*.tsv -whitespace
+evidence/** -whitespace

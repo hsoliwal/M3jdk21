@@ -586,8 +586,8 @@
       "upstream": "com/fasterxml/jackson/core/json/PackageVersion.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/resources/com/fasterxml/jackson/core/json/PackageVersion.java.in",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/upstream-source-only/com/fasterxml/jackson/core/json/PackageVersion.java.in",
       "sha256": "744babce0ed8859a38895e27c6cca1c834117791919037c5096c6bcfb9bdff03",
       "upstream": "com/fasterxml/jackson/core/json/PackageVersion.java.in"
     },
@@ -906,6 +906,13 @@
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/SOURCES_MANIFEST.tsv",
       "sha256": "0694d16b6071708c78180a500de1c17a78129f7fe03c6bfe1a49a4180af8774b",
       "upstream": "(inventory)"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "com.fasterxml.jackson.core:jackson-core:2.16.1 (sha256 f5f8ef90609e64fec82eb908e497dc7d81b2eb983fe509b870292a193cde4dfb)",
+      "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/descriptor/9/module-info.java",
+      "sha256": "4aee5dff8fb49e90f8a0c79ad0b27feba83e13c6106acedc5b41a9275736e0b5",
+      "upstream": "META-INF/versions/9/module-info.class"
     }
   ],
   "group": "com.fasterxml.jackson.core",
@@ -913,6 +920,11 @@
   "license": "The Apache Software License, Version 2.0",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "com.fasterxml.jackson:jackson-base:2.16.1",
   "pom": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.pom",

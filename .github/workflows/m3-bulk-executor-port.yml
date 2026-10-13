@@ -27,6 +27,10 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Check source-built OpenRewrite coordinates
+        run: python3 -S m3/synexia-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
+      - name: Install bounded Synexia recipe custody
+        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Run receiver and live fixed-point tests
         run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3BulkExecutorPortRecipeTest,M3BulkExecutorNameMappingRecipeTest test
@@ -50,9 +54,13 @@ jobs:
           cp src/java.base/share/classes/jdk/internal/vm/parallel/BulkTask.java "$src/jdk/internal/vm/parallel/"
           cp src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecutor.java "$src/jdk/internal/vm/parallel/"
           cp src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecution.java "$src/jdk/internal/vm/parallel/"
-          javac -Xlint:all -Werror             --patch-module "java.base=$src"             -d "$out"             "$src/jdk/internal/vm/parallel/BulkTask.java"             "$src/jdk/internal/vm/parallel/BulkExecutor.java"             "$src/jdk/internal/vm/parallel/BulkExecution.java"
-          javac -Xlint:all -Werror             --patch-module "java.base=$out"             --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED             -d "$tests"             test/jdk/jdk/internal/vm/parallel/BulkExecutorTest.java
+          cp src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecutorProvider.java "$src/jdk/internal/vm/parallel/"
+          cp src/java.base/share/classes/jdk/internal/vm/parallel/BulkScheduler.java "$src/jdk/internal/vm/parallel/"
+          javac -Xlint:all -Werror             --patch-module "java.base=$src"             -d "$out"             "$src"/jdk/internal/vm/parallel/*.java
+          javac -Xlint:all -Werror             --patch-module "java.base=$out"             --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED             -d "$tests"             test/jdk/jdk/internal/vm/parallel/BulkExecutorTest.java \
+            test/jdk/jdk/internal/vm/parallel/BulkSchedulerTest.java
           java             --patch-module "java.base=$out"             --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED             -cp "$tests"             BulkExecutorTest
+          java             --patch-module "java.base=$out"             --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED             -cp "$tests"             BulkSchedulerTest
 
   jdk-build-jtreg:
     runs-on: ubuntu-22.04
@@ -79,4 +87,4 @@ jobs:
         run: make CONF=linux-x64-bulk images
       - name: Run focused jtreg
         run: |
-          make CONF=linux-x64-bulk test             TEST="test/jdk/jdk/internal/vm/parallel/BulkExecutorTest.java"
+          make CONF=linux-x64-bulk test             TEST="test/jdk/jdk/internal/vm/parallel/BulkExecutorTest.java test/jdk/jdk/internal/vm/parallel/BulkSchedulerTest.java"

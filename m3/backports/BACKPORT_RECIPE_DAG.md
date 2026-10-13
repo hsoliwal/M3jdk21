@@ -82,8 +82,17 @@ The generator projects the already-classified domain into the minimum orchestrat
 - library/security/tool/javadoc/javac/jlink/launcher -> `MODULE`;
 - otherwise -> `FILE`.
 
-A packet rooted above FILE sets explicit scope-promotion approval. Repository size alone never
-changes scope.
+Packet generation now emits `scope_promotion_approved=false` for **every atom**, including
+MODULE and MULTI_MODULE candidates. Physical scope classification specifies a review floor; it is
+never approval. An independently reviewed packet may subsequently record explicit approval and
+must still pass the canonical Java DAG, recipe-JUnit, compile/jtreg/runtime, fixed-point and serial
+promotion gates.
+
+`M3BackportPacketBatchMain` parses every generated packet. It composes FILE-safe packets and
+reports broader packets lacking explicit approval as
+`M3_BACKPORT_PACKET_SCOPE_HOLD`; its summary distinguishes validated DAGs from scope holds.
+A batch schema/proof-planning pass is not a Java-21 compatibility or promotion verdict.
+Repository size alone never changes scope.
 
 The existing `M3RecipeDag` remains the enforcement oracle for silent scope escalation.
 
@@ -126,6 +135,43 @@ The generated packet is parsed by `M3BackportPacketLoader`, composed by
 
 The existing orchestration projector remains responsible for Camel/Airflow/Drools projections.
 Those projections do not become semantic or promotion authority.
+
+## Proven Synexia/Nebula recipe-DAG handoff
+
+The target-side backport DAG now has an explicit proof-bound custody receipt:
+
+`SYNEXIA_NEBULA_RECIPE_DAG_HANDOFF.tsv`.
+
+It binds the reusable Apache-2.0 Synexia owners:
+
+- `RecipeDag`;
+- `OpenRewriteRecipeDagPlan`;
+- `M3RecipeFirstInvariant`;
+
+to their exact canonical Synexia source commit and SHA-256 identities. It also records:
+
+- the Synexia target policy for `hsoliwal/M3jdk21` as `PROVEN_RECIPE_DAG_ONLY`;
+- the Nebula proven-transfer document as proving/reference evidence only.
+
+`recipe_dag_handoff.py` validates this receipt before the backport DAG is compiled. The handoff
+cannot grant source-mutation or promotion authority. M3JDK21 continues to execute its own
+target-specific packet compiler, OpenRewrite receiver, OpenJDK build, jtreg, runtime/VM/JNI proof,
+fixed point and serial promotion.
+
+This keeps recipe custody singular:
+
+```text
+Nebula proving ground
+ -> reusable recipe/DAG proof
+ -> canonical Synexia Apache-2.0 ownership
+ -> pinned handoff receipt
+ -> M3JDK21 target packet DAG
+ -> target build/jtreg/runtime proof
+ -> target-owned promotion
+```
+
+Camel/Airflow/Drools remain projections of the same canonical DAG root; they may schedule/read
+dependency readiness but never edit JDK sources or promote a backport.
 
 ## Maven evidence
 

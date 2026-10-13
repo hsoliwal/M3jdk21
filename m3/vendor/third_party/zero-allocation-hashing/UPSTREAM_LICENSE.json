@@ -1,0 +1,8 @@
+{
+  "artifact": "zero-allocation-hashing",
+  "version": "0.16",
+  "origin": "https://raw.githubusercontent.com/OpenHFT/Zero-Allocation-Hashing/zero-allocation-hashing-0.16/LICENSE",
+  "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "bytes": 11357,
+  "pom_license": "(none in pom; parent net.openhft:java-parent-pom:1.1.28)"
+}

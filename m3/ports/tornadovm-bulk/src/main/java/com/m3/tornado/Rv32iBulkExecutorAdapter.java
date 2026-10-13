@@ -9,31 +9,37 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import jdk.internal.vm.parallel.BulkExecution;
-import jdk.internal.vm.parallel.BulkExecutor;
+import jdk.internal.vm.parallel.BulkExecutorProvider;
 import jdk.internal.vm.parallel.BulkTask;
 
 /**
  * Optional M3JDK adapter from the internal bulk scheduler contract to the verified TornadoVM
  * RV32IM provider. The input batch is never mutated; execution happens on a private copy.
  */
-public final class Rv32iBulkExecutorAdapter implements BulkExecutor {
+public final class Rv32iBulkExecutorAdapter implements BulkExecutorProvider {
     public static final String OPERATION_ID = "m3.rv32im.slice";
     public static final String INPUT_BATCH = "batch";
     public static final String INPUT_BUDGET = "instructionBudget";
     public static final String OUTPUT_BATCH = "batch";
 
     public enum Mode {
-        CPU("cpu-rv32im"),
-        TORNADO_VERIFIED("tornado-rv32im");
+        CPU("cpu-rv32im", 10),
+        TORNADO_VERIFIED("tornado-rv32im", 100);
 
         private final String provider;
+        private final int priority;
 
-        Mode(String provider) {
+        Mode(String provider, int priority) {
             this.provider = provider;
+            this.priority = priority;
         }
 
         String provider() {
             return provider;
+        }
+
+        int priority() {
+            return priority;
         }
     }
 
@@ -50,15 +56,34 @@ public final class Rv32iBulkExecutorAdapter implements BulkExecutor {
     }
 
     @Override
+    public String id() {
+        return mode.provider();
+    }
+
+    @Override
+    public int priority() {
+        return mode.priority();
+    }
+
+    @Override
+    public boolean supports(BulkTask task) {
+        Objects.requireNonNull(task, "task");
+        return OPERATION_ID.equals(task.operationId())
+                && task.inputs().equals(List.of(INPUT_BATCH, INPUT_BUDGET))
+                && task.outputs().equals(List.of(OUTPUT_BATCH))
+                && (mode == Mode.CPU
+                        ? task.localWork() == 0
+                        : task.localWork() >= 1 && task.localWork() <= Integer.MAX_VALUE);
+    }
+
+    @Override
     public BulkExecution execute(BulkTask task, Map<String, Object> values) {
         Objects.requireNonNull(task, "task");
         Objects.requireNonNull(values, "values");
-        if (!OPERATION_ID.equals(task.operationId())) {
-            throw new IllegalArgumentException("unsupported operationId");
+        if (!supports(task)) {
+            throw new IllegalArgumentException("unsupported RV32IM bulk task");
         }
-        if (!task.inputs().equals(List.of(INPUT_BATCH, INPUT_BUDGET))
-                || !task.outputs().equals(List.of(OUTPUT_BATCH))
-                || !values.keySet().equals(Set.of(INPUT_BATCH, INPUT_BUDGET))) {
+        if (!values.keySet().equals(Set.of(INPUT_BATCH, INPUT_BUDGET))) {
             throw new IllegalArgumentException("RV32IM bulk schema");
         }
         Object batchValue = values.get(INPUT_BATCH);

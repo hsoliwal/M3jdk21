@@ -57,3 +57,7 @@ Regenerated after `M3StringFacts.java` and `String.java` changed (`target_commit
 ## 2026-10-09 re-seal (A8 fused facts scan, A9 equality gates, A6 pool bounds re-applied on master)
 
 The three leaves had reached master only as zero-file superset merges (62153d40f3f, 9660212fce), so their owner and receiver commits were cherry-picked onto master and the binary `M3String.join(String, String)` made refusal-safe (`target_commit` 3c3d66694a). Upstream files stay strictly sealed: the `String.java` and `StringConcatHelper.java` after-images and their `runtime.patch` hunks were regenerated from a synthetic tree (v2 after-state of the other 64 targets plus those two files from the target), so every other hunk is byte-identical to the previous seal. The M3-owned `M3String.java`, `M3StringFacts.java` and `M3StringPool.java` keep their v2 after-images and record the new owners as reviewed `superseded` hashes (`JNI_SUPERSESSION.md`). 66 targets; `apply.py --check` state=superseded; `test_recipe.py` 6/6.
+
+## 2026-10-12 reseal (logical concat length guard)
+
+Master commit 2442a6b242953f4ec8bd63d52ac48708d0383782 adds the checked logical-length/OOME guard to M3StringPool.java. This is an additive six-line change over the v2 recipe state; the source is pinned as an exact superseded SHA-256 (f8bac45d1623d25470e1b79beffa276f271db10e297ef5b434d5335c9d4c908b) in manifest.json. The recipe remains refusal-safe: it recognizes this state as already superseded and does not apply or reverse the older patch over it. Unknown source states remain rejected.

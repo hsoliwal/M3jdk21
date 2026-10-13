@@ -85,7 +85,10 @@ def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...], dict[s
     if recipes.is_dir():
         prefixes = (f"jep-{jep}", f"j{jep}")
         for candidate in sorted(recipes.iterdir()):
-            if candidate.is_dir() and candidate.name.startswith(prefixes):
+            if candidate.is_dir() and any(
+                candidate.name == prefix or candidate.name.startswith(prefix + "-")
+                for prefix in prefixes
+            ):
                 evidence.append(candidate.relative_to(root).as_posix())
                 candidate_receipt = _receipt(candidate)
                 if candidate_receipt:
@@ -129,7 +132,12 @@ def queue(
     priority_rows: Iterable[Mapping[str, str]],
 ) -> list[Residue]:
     root = root.resolve()
-    priority_by_jep = {int(row["jep"]): row for row in priority_rows}
+    priority_by_jep: dict[int, Mapping[str, str]] = {}
+    for priority_row in priority_rows:
+        priority_jep = int(priority_row["jep"])
+        if priority_jep in priority_by_jep:
+            raise ValueError(f"duplicate priority JEP row: {priority_jep}")
+        priority_by_jep[priority_jep] = priority_row
     pending: list[tuple[int, int, int, Mapping[str, str], str, tuple[str, ...]]] = []
 
     seen: set[int] = set()
@@ -159,6 +167,8 @@ def queue(
     result: list[Residue] = []
     for order, (priority, release, jep, row, state, evidence, receipt) in enumerate(pending):
         priority_row = priority_by_jep.get(jep, {})
+        if priority_row and int(priority_row["release"]) != release:
+            raise ValueError(f"priority release mismatch for JEP {jep}")
         result.append(
             Residue(
                 order=order,

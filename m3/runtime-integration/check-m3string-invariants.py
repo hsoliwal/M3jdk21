@@ -300,6 +300,23 @@ def check_m3string_layout() -> None:
 
 check_m3string_layout()
 
+# Compiler-parsed replacement routes supplement the cheap spelling markers below.
+# This proves source structure only; runtime/jtreg remain semantic authority.
+def check_m3string_replacement_routes() -> None:
+    java = str(Path(os.environ["JAVA_HOME"]) / "bin/java") if os.environ.get("JAVA_HOME") else "java"
+    command = [java, "--source", "21",
+               str(ROOT / "m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java"),
+               str(ROOT / "src/java.base/share/classes/java/lang/String.java")]
+    try:
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=45)
+    except (OSError, subprocess.TimeoutExpired) as error:
+        fail(f"M3 replacement route compiler unavailable or timed out: {error}")
+    if result.returncode != 0 or result.stdout.strip() != "M3_STRING_REPLACEMENT_ROUTES_OK":
+        fail(f"M3 replacement route check failed: {result.stderr.strip()} {result.stdout.strip()}")
+
+
+check_m3string_replacement_routes()
+
 # Canonical value/owners/facts may not retain array payload.
 for path, text in [
     ("M3String.java", m3),
@@ -839,9 +856,9 @@ critical_surfaces = {
     "lastIndexOf(String)": "M3String storage = m3();",
     "prepared reverse search": "return storage.lastIndexOf(target, fromIndex);",
     "replace(char,char)": "M3String replaced = storage.replace(oldChar, newChar);",
-    "replace(CharSequence,CharSequence)": "M3String replaced = sourceM3.replace(targetM3, replacementM3);",
-    "replaceFirst(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, true);",
-    "replaceAll(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, false);",
+    "replace(CharSequence,CharSequence)": "String replaced = m3Replace(storage, trgtStr, targetM3, replStr, replacementM3);",
+    "replaceFirst(String,String)": "String replaced = storage.replaceLiteralRegex(this, regex, replacement, true);",
+    "replaceAll(String,String)": "String replaced = storage.replaceLiteralRegex(this, regex, replacement, false);",
     "substring": "return new String(storage.slice(beginIndex, endIndex));",
     "concat": "m3Concat(this, str)",
     "trim": "M3StringFacts facts = storage.facts();",
@@ -879,12 +896,13 @@ for pin in [
 ]:
     if pin not in literal_history:
         fail(f"indexed literal replacement history lost donor pin: {pin}")
-literal_start = m3.find("    static boolean isLiteralRegexReplacement(")
+literal_start = m3.find("    static boolean isLiteralRegex(String regex)")
 literal_end = m3.find("    static int pow31(", literal_start)
 if literal_start < 0 or literal_end < 0:
     fail("indexed literal replacement owner atom is absent")
 literal_atom = m3[literal_start:literal_end]
 for marker in [
+    "static boolean isLiteralRegex(String regex)",
     "static boolean isLiteralRegexReplacement(String regex, String replacement)",
     "Character.isSurrogate(unit)",
     "String replaceLiteralRegex(String original, String regex, String replacement, boolean firstOnly)",
@@ -993,19 +1011,35 @@ for fragment in [
 if "for (int index = 0; index < len; index++)" not in string:
     fail("exact region comparison loop missing after precompute filter")
 
-# Case conversion is canonical only for ASCII + Locale.ROOT. Locale-sensitive and non-ASCII
-# transformations must continue through the stock JDK case engine.
+# ASCII case conversion uses the M3 mapper only for ASCII text and locales whose
+# JDK mappings have no Turkish, Azeri, or Lithuanian special handling.
+for signature, ascii_mapper in [
+    ("public String toLowerCase(Locale locale) {", "storage.asciiCase(false)"),
+    ("public String toUpperCase(Locale locale) {", "storage.asciiCase(true)"),
+]:
+    start = string.find(signature)
+    next_method = string.find("\n    public String ", start + len(signature)) if start >= 0 else -1
+    if start < 0 or next_method < 0:
+        fail(f"M3 ASCII locale-case method boundary missing: {signature}")
+    method = string[start:next_method]
+    for fragment in [
+        "storage != null && asciiCaseMappingLocale(locale)",
+        "M3StringFacts prepared = storage.facts();",
+        "if (prepared.ascii) {",
+        ascii_mapper,
+    ]:
+        if fragment not in method:
+            fail(f"M3 ASCII locale-case boundary missing in {signature}: {fragment}")
+if "private static boolean asciiCaseMappingLocale(Locale locale)" not in string:
+    fail("M3 ASCII locale helper missing")
 for fragment in [
-    "storage != null && locale.equals(Locale.ROOT)",
-    "M3StringFacts prepared = storage.facts();",
-    "if (prepared.ascii) {",
-    "storage.asciiCase(false)",
-    "storage.asciiCase(true)",
+    "String lang = locale.getLanguage();",
+    'lang != "tr" && lang != "az" && lang != "lt"',
 ]:
     if fragment not in string:
-        fail(f"M3 ROOT ASCII case boundary missing: {fragment}")
+        fail(f"M3 ASCII locale exclusion missing: {fragment}")
 if "M3String asciiCase(boolean upper)" not in m3:
-    fail("M3String ROOT ASCII canonical case mapper missing")
+    fail("M3 ASCII case mapper missing")
 
 # Builder coder selection may use exact M3 range facts locally. This does not change the
 # String/HotSpot coder; it only avoids inflating a Latin1 builder for a Latin1-only M3 range.
@@ -1119,7 +1153,7 @@ for fragment in [
 for fragment in [
     "M3String replaceEmptyTarget(M3String replacement)",
     "pieces.add(slice(index, index + 1));",
-    "return new String(storage.replaceEmptyTarget(replacementM3));",
+    "return new String(sourceM3.replaceEmptyTarget(replacementM3));",
 ]:
     if fragment not in (m3 + string):
         fail(f"M3 empty-target replacement route missing: {fragment}")
@@ -1151,22 +1185,254 @@ for fragment in [
 if "canonicalize(String.valueOf(mapped))" in m3 or "canonicalize(String.valueOf(newChar))" in m3:
     fail("M3 canonical single-unit transform reintroduced one-char String churn")
 
-# VM-local native atoms must not be retained forever by the canonical lookup table.
-# Live M3String/Tuple owners provide the strong lifetime. The pool keeps weak refs and frees
-# the native block when the owner becomes unreachable.
+# VM-local native atoms are weakly indexed and released exactly once when their owners die.
+# Mask Java comments and literals before checking token/brace structure so prose cannot satisfy
+# a lifecycle invariant and braces in strings cannot forge a monitor scope.
+def java_mask_non_code(source: str) -> str:
+    if re.search(r"\\u+[0-9a-fA-F]{4}", source):
+        fail("VM-local M3 pool uses Java Unicode escapes; lifecycle review required")
+    chars = list(source)
+    state = "code"
+    index = 0
+
+    def blank(position: int) -> None:
+        if chars[position] not in "\r\n":
+            chars[position] = " "
+
+    while index < len(source):
+        char = source[index]
+        pair = source[index:index + 2]
+        if state == "line_comment":
+            blank(index)
+            if char == "\n":
+                state = "code"
+            index += 1
+        elif state == "block_comment":
+            blank(index)
+            if pair == "*/":
+                blank(index + 1)
+                state = "code"
+                index += 2
+            else:
+                index += 1
+        elif state in ("string", "character"):
+            blank(index)
+            if char == "\\":
+                if index + 1 < len(source):
+                    blank(index + 1)
+                index += 2
+            elif (state == "string" and char == '"') or (state == "character" and char == "'"):
+                state = "code"
+                index += 1
+            else:
+                index += 1
+        elif state == "text_block":
+            blank(index)
+            if char == "\\":
+                if index + 1 < len(source):
+                    blank(index + 1)
+                index += 2
+            elif source.startswith('"""', index):
+                blank(index + 1)
+                blank(index + 2)
+                state = "code"
+                index += 3
+            else:
+                index += 1
+        elif pair == "//":
+            blank(index)
+            blank(index + 1)
+            state = "line_comment"
+            index += 2
+        elif pair == "/*":
+            blank(index)
+            blank(index + 1)
+            state = "block_comment"
+            index += 2
+        elif source.startswith('"""', index):
+            blank(index)
+            blank(index + 1)
+            blank(index + 2)
+            state = "text_block"
+            index += 3
+        elif char == '"':
+            blank(index)
+            state = "string"
+            index += 1
+        elif char == "'":
+            blank(index)
+            state = "character"
+            index += 1
+        else:
+            index += 1
+    if state in ("block_comment", "string", "character", "text_block"):
+        fail("VM-local M3 pool has unterminated Java comment or literal")
+    return "".join(chars)
+
+pool_code = java_mask_non_code(pool)
 for fragment in [
     "ReferenceQueue<M3StringAtom> LOCAL_QUEUE",
     "ArrayList<LocalRef> values",
     "extends WeakReference<M3StringAtom>",
-    "UNSAFE.freeMemory(address)",
     "AtomicLong LOCAL_NATIVE_BYTES",
-    "LOCAL_NATIVE_BYTES.addAndGet(-retainedBytes)",
+    "final long retainedBytes;",
     "created.nativePayloadBytes()",
+    "private boolean released;",
 ]:
-    if fragment not in pool:
+    if fragment not in pool_code:
         fail(f"VM-local M3 atom lifecycle missing: {fragment}")
-if "ArrayList<M3StringAtom> values" in pool:
+if "ArrayList<M3StringAtom> values" in pool_code:
     fail("VM-local M3 atom pool strongly retains native atoms")
+
+def java_block_end(code: str, opening: int) -> int:
+    depth = 0
+    for index in range(opening, len(code)):
+        if code[index] == "{":
+            depth += 1
+        elif code[index] == "}":
+            depth -= 1
+            if depth == 0:
+                return index
+    return -1
+
+local_release_start = pool_code.find("void releaseNative()")
+local_release_open = pool_code.find("{", local_release_start)
+local_release_end = java_block_end(pool_code, local_release_open)
+if local_release_start < 0 or local_release_open < 0 or local_release_end < 0:
+    fail("VM-local M3 atom native release method missing")
+local_release = pool_code[local_release_start:local_release_end + 1]
+if re.sub(r"\s+", "", local_release) != (
+        "voidreleaseNative(){if(!released){released=true;"
+        "if(address!=0L)UNSAFE.freeMemory(address);release(retainedBytes);}}"):
+    fail("VM-local M3 release method control flow changed")
+
+accounting_start = pool_code.find("private static void release(long bytes)")
+accounting_open = pool_code.find("{", accounting_start)
+accounting_end = java_block_end(pool_code, accounting_open)
+if accounting_start < 0 or accounting_open < 0 or accounting_end < 0:
+    fail("VM-local M3 native budget release helper missing")
+accounting = pool_code[accounting_start:accounting_end + 1]
+if re.sub(r"\s+", "", accounting) != (
+        "privatestaticvoidrelease(longbytes){LOCAL_NATIVE_BYTES.addAndGet(-bytes);}"):
+    fail("VM-local M3 native budget release control flow changed")
+
+# Constructor ownership must match both ways each LocalRef enters its bucket.
+if pool_code.count("new LocalRef(") != 2:
+    fail("VM-local M3 LocalRef construction paths changed")
+retain_start = pool_code.find("private static M3String retain(")
+retain_open = pool_code.find("{", retain_start)
+retain_end = java_block_end(pool_code, retain_open)
+if retain_start < 0 or retain_open < 0 or retain_end < 0:
+    fail("VM-local M3 LocalRef retain path missing")
+retain_method = pool_code[retain_start:retain_end + 1]
+if re.sub(r"\s+", "", retain_method) != (
+        "privatestaticM3Stringretain(LocalBucketbucket,Fingerprintfingerprint,"
+        "M3StringAtomcreated,longbytes){bucket.values.add(newLocalRef(created,"
+        "fingerprint,bucket,bytes));returnM3String.whole(created);}"):
+    fail("VM-local M3 retain path does not store the owning bucket")
+local_ref_class = pool_code.find("static final class LocalRef extends WeakReference<M3StringAtom>")
+constructor_start = pool_code.find("LocalRef(", local_ref_class)
+constructor_open = pool_code.find("{", constructor_start)
+constructor_end = java_block_end(pool_code, constructor_open)
+if local_ref_class < 0 or constructor_start < 0 or constructor_open < 0 or constructor_end < 0:
+    fail("VM-local M3 LocalRef constructor ownership missing")
+constructor = pool_code[constructor_start:constructor_end + 1]
+if re.sub(r"\s+", "", constructor) != (
+        "LocalRef(M3StringAtomvalue,Fingerprintfingerprint,LocalBucketbucket,"
+        "longretainedBytes){super(value,LOCAL_QUEUE);this.fingerprint=fingerprint;"
+        "this.bucket=bucket;this.address=value.address;this.retainedBytes=retainedBytes;}"):
+    fail("VM-local M3 LocalRef constructor no longer binds its owning bucket")
+if pool_code.count(
+        "bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));") != 1:
+    fail("VM-local M3 direct LocalRef publication lost bucket ownership")
+
+# Every call must remain a direct invocation; an escaping bound method reference is unsafe.
+if re.search(r"::\s*releaseNative\b", pool_code):
+    fail("VM-local M3 native release method reference escaped its monitor")
+release_calls = list(re.finditer(r"\breference\.releaseNative\(\)\s*;", pool_code))
+release_invocations = list(re.finditer(r"\.\s*releaseNative\s*\(\s*\)\s*;", pool_code))
+if len(release_calls) != 6 or len(release_invocations) != len(release_calls):
+    fail("VM-local M3 native release call sites changed or use another receiver")
+bucket_monitors = []
+for monitor in re.finditer(r"\bsynchronized\s*\(\s*bucket\s*\)\s*\{", pool_code):
+    opening = pool_code.find("{", monitor.start())
+    closing = java_block_end(pool_code, opening)
+    if closing < 0:
+        fail("VM-local M3 bucket monitor has unbalanced Java braces")
+    bucket_monitors.append((monitor.start(), opening, closing))
+def require_bucket_locked_owner(position: int, label: str) -> None:
+    enclosing = [scope for scope in bucket_monitors
+                 if scope[1] < position < scope[2]]
+    if not enclosing:
+        fail(f"VM-local M3 {label} escaped its LocalBucket monitor")
+    monitor_start, _, _ = max(enclosing, key=lambda scope: scope[0])
+    canonical_bucket = (
+        "LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());"
+    )
+    declaration_start = pool_code.rfind(
+        "LocalBucket bucket", max(0, monitor_start - 512), monitor_start)
+    if declaration_start < 0 or not pool_code.startswith(canonical_bucket, declaration_start):
+        fail(f"VM-local M3 {label} is not under its canonical bucket")
+    declaration_end = declaration_start + len(canonical_bucket)
+    if pool_code[declaration_end:monitor_start].strip():
+        fail(f"VM-local M3 {label} bucket is not locked immediately after canonical lookup")
+    body_before_owner_use = pool_code[monitor_start:position]
+    if re.search(r"\bbucket\s*=(?!=)", body_before_owner_use):
+        fail(f"VM-local M3 {label} reassigns the locked bucket")
+    if re.search(r"->|\bnew\b|\bclass\b", body_before_owner_use):
+        fail(f"VM-local M3 {label} is deferred or nested")
+
+retain_calls = list(re.finditer(
+    r"\bretain\(bucket, fingerprint, created, byteLength\)", pool_code))
+if len(retain_calls) != 4:
+    fail(f"VM-local M3 retain call count changed: {len(retain_calls)}")
+for retain_call in retain_calls:
+    require_bucket_locked_owner(retain_call.start(), "retain call")
+inline_publications = list(re.finditer(
+    r"bucket\.values\.add\(new LocalRef\(created, fingerprint, bucket, retainedBytes\)\);",
+    pool_code))
+if len(inline_publications) != 1:
+    fail("VM-local M3 inline LocalRef publication count changed")
+for publication in inline_publications:
+    require_bucket_locked_owner(publication.start(), "inline LocalRef publication")
+
+canonical_release_calls = 0
+queued_release_calls = 0
+for call in release_calls:
+    enclosing = [scope for scope in bucket_monitors
+                 if scope[1] < call.start() < scope[2]]
+    if not enclosing:
+        fail("VM-local M3 native release call escaped its LocalBucket monitor")
+    monitor_start, _, _ = max(enclosing, key=lambda scope: scope[0])
+    prefix = pool_code[max(0, monitor_start - 512):monitor_start]
+    body_before_call = pool_code[monitor_start:call.start()]
+    normalized_body = re.sub(r"\s+", "", body_before_call)
+    iterated_bucket_ref = (
+        "LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());" in prefix
+        and normalized_body == (
+            "synchronized(bucket){if(bucket.retired)continue;"
+            "for(Iterator<LocalRef>iterator=bucket.values.iterator();iterator.hasNext();){"
+            "LocalRefreference=iterator.next();M3StringAtomexisting=reference.get();"
+            "if(existing==null){iterator.remove();"
+        )
+        and len(re.findall(r"\breference\s*=(?!=)", body_before_call)) == 1
+    )
+    queue_loop = pool_code.rfind(
+        "while ((reference = (LocalRef) LOCAL_QUEUE.poll()) != null)", 0, monitor_start)
+    queued_bucket_ref = (
+        queue_loop >= 0
+        and "LocalBucket bucket = reference.bucket;" in prefix
+        and normalized_body == "synchronized(bucket){bucket.values.remove(reference);"
+        and len(re.findall(r"\breference\s*=(?!=)", pool_code[queue_loop:call.start()])) == 1
+    )
+    if iterated_bucket_ref:
+        canonical_release_calls += 1
+    elif queued_bucket_ref:
+        queued_release_calls += 1
+    else:
+        fail("VM-local M3 release is not protected by its LocalRef-owning bucket")
+if canonical_release_calls != 5 or queued_release_calls != 1:
+    fail("VM-local M3 owner-to-bucket release paths changed")
 
 for required_mechanical_name_mapping in [
     '"source": "com.synexia.indexstring.precompute.MIndexRe2MechanicalFacts"',

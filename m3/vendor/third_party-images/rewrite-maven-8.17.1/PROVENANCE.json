@@ -1,0 +1,932 @@
+{
+  "artifact": "rewrite-maven",
+  "automatic_module_name": "",
+  "build": "none",
+  "build_reason": "LOMBOK_AT_SOURCE_LEVEL",
+  "consumers": "synexia-openrewrite-recipes",
+  "coordinate": "org.openrewrite:rewrite-maven:8.17.1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "rewrite-maven-8.17.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/META-INF/MANIFEST.MF",
+      "sha256": "909d6e585fa8dbaeb3a0f9e1ae800e786063ee3b66cda4f800161b12781e3270",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/META-INF/rewrite-maven.properties",
+      "sha256": "0e5dfd7a84ddd1b504097c6e554d0fb29cdc7cc5519eae3f752bf32cdb4a576b",
+      "upstream": "META-INF/rewrite-maven.properties"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/META-INF/rewrite/maven.yml",
+      "sha256": "9cea7068d7b2a235b376b65f6f6e7e77a38b7fe7198ae2b6b6136143febd7204",
+      "upstream": "META-INF/rewrite/maven.yml"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/AddCommentToMavenDependency.java",
+      "sha256": "618623c3f1630046eef20c0bc35594487ef597d786c163e832e219a4d6c9eb4c",
+      "upstream": "org/openrewrite/maven/AddCommentToMavenDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/AddDependency.java",
+      "sha256": "40d0949ebc4d51113ed401de3c689ebcac4386c3a5b7fb315420f3202395c90b",
+      "upstream": "org/openrewrite/maven/AddDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/AddDependencyVisitor.java",
+      "sha256": "33122f072578b0e3f14d9b10bd72fab6badbdbdce57cbb4ce8ffd68e8349a5e2",
+      "upstream": "org/openrewrite/maven/AddDependencyVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/AddDevelocityMavenExtension.java",
+      "sha256": "7a9a9115f4069aee5a8197c88503f9d919f92249b4a97f313d873e092e55c46d",
+      "upstream": "org/openrewrite/maven/AddDevelocityMavenExtension.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/AddManagedDependency.java",
+      "sha256": "c9362a8c41e2675e650ee59417dc274109f1854ded630c687710902346f733aa",
+      "upstream": "org/openrewrite/maven/AddManagedDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/AddManagedDependencyVisitor.java",
+      "sha256": "b1d1d690bfa4676e188edaeea8d98cc6504900d825cc6185fffd3931d5f9bb68",
+      "upstream": "org/openrewrite/maven/AddManagedDependencyVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/AddPlugin.java",
+      "sha256": "a508704b7941401eec5689d2cfa50f9e1db075d0abfc267a782f30e661226de5",
+      "upstream": "org/openrewrite/maven/AddPlugin.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/AddPluginDependency.java",
+      "sha256": "8486b2833790695b829193c6ba10834eaea5a1c67465b1977119b703874f3ae0",
+      "upstream": "org/openrewrite/maven/AddPluginDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/AddProfile.java",
+      "sha256": "5145e82076737c1100345fd29bd8449c562a525fb7185e9b8eef1910518944fd",
+      "upstream": "org/openrewrite/maven/AddProfile.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/AddProperty.java",
+      "sha256": "ef2514391d6c9c3065c5cb10c2bcf762595ea908233f5e28b508dd99fa76ae38",
+      "upstream": "org/openrewrite/maven/AddProperty.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/AddRepository.java",
+      "sha256": "efad4a6e03f66801fdae084fed22e2d9d182e4a7727ec29374d850493a9a5e16",
+      "upstream": "org/openrewrite/maven/AddRepository.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/Assertions.java",
+      "sha256": "f9b03daf96e77462fa3ac40925e583e7e13170ca581d6b802bd40e4b338cc7e0",
+      "upstream": "org/openrewrite/maven/Assertions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangeDependencyClassifier.java",
+      "sha256": "5ecccdacd8b0ec2c656db9f4763034f5dceb55571da08dded8df8e56cd68a6d6",
+      "upstream": "org/openrewrite/maven/ChangeDependencyClassifier.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangeDependencyGroupIdAndArtifactId.java",
+      "sha256": "4342eb78173be2822e972c3c5ffc39ce27118ea3d4a860aac6d3cf8deafdb0c6",
+      "upstream": "org/openrewrite/maven/ChangeDependencyGroupIdAndArtifactId.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangeDependencyScope.java",
+      "sha256": "5af0a48c99452fc7cd1cbb89d1c00059365b597cf9dbd916014278e38cc25c37",
+      "upstream": "org/openrewrite/maven/ChangeDependencyScope.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangeManagedDependencyGroupIdAndArtifactId.java",
+      "sha256": "1127653c99d9aaefaafbb8e9cfc301e2b0f666bbede8c2bc197a7b3061ac2c94",
+      "upstream": "org/openrewrite/maven/ChangeManagedDependencyGroupIdAndArtifactId.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangePackaging.java",
+      "sha256": "fcfbb42d62f88d103f960e3194692d7909e698a8f714c905ab8b2ceb432acaee",
+      "upstream": "org/openrewrite/maven/ChangePackaging.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangeParentPom.java",
+      "sha256": "2cef65ccc98c6433f618fea78f35b7063f1c111222343527c28c1d0803f2d83b",
+      "upstream": "org/openrewrite/maven/ChangeParentPom.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangePluginConfiguration.java",
+      "sha256": "4b6ac73a814ba9b3350b17e4d8a47adebc12526ed91981f7db87dced98756674",
+      "upstream": "org/openrewrite/maven/ChangePluginConfiguration.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangePluginDependencies.java",
+      "sha256": "e6d52e82d978dd380b1f2757669abc8f73c52824396220af57838088cafc1353",
+      "upstream": "org/openrewrite/maven/ChangePluginDependencies.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangePluginExecutions.java",
+      "sha256": "30f8abcb598936664bea64e2d68930c0e45693d09c1a6605ddaa8fc3fe385035",
+      "upstream": "org/openrewrite/maven/ChangePluginExecutions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangePluginGroupIdAndArtifactId.java",
+      "sha256": "49121da7079824ccceb1f471a8fb055615652379520f5b5ccd9cde4219847440",
+      "upstream": "org/openrewrite/maven/ChangePluginGroupIdAndArtifactId.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangeProjectVersion.java",
+      "sha256": "4f6adc10f851e760e226f31bdec581a0f062a868ae4ed1fab9946f43029f8daa",
+      "upstream": "org/openrewrite/maven/ChangeProjectVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ChangePropertyValue.java",
+      "sha256": "b9d6213f5e519e65a5e3286bea5a021cad67f12a5b8f558cbba974afcfcb6653",
+      "upstream": "org/openrewrite/maven/ChangePropertyValue.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ExcludeDependency.java",
+      "sha256": "0b118783da8e1d2f3c95a0c441e69c2cb79b21d2e499ade44779ec8037fd7a9d",
+      "upstream": "org/openrewrite/maven/ExcludeDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/IncrementProjectVersion.java",
+      "sha256": "c810f8573802f02e4e9ff8e48154ef95e54e872a06c1d4a4a27a35081e560a52",
+      "upstream": "org/openrewrite/maven/IncrementProjectVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/ManageDependencies.java",
+      "sha256": "885a2cc034ed8aad97fa7917d6fbccf37e5c19147d3fcf6090a668d25d3689c6",
+      "upstream": "org/openrewrite/maven/ManageDependencies.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/MavenDownloadingException.java",
+      "sha256": "4be53bf95a57984c68dd24d9d4e5084685169461216f0e9178891f970668b5af",
+      "upstream": "org/openrewrite/maven/MavenDownloadingException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/MavenDownloadingExceptions.java",
+      "sha256": "666fb4afac6dbc4783cb156a4922f8397d1e83d3345c2a1ac7d35f2fe77ab451",
+      "upstream": "org/openrewrite/maven/MavenDownloadingExceptions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/MavenExecutionContextView.java",
+      "sha256": "42ae5ff501b871e39176abc24fae7b74218d98c976a25662819fb7ab648b21d6",
+      "upstream": "org/openrewrite/maven/MavenExecutionContextView.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/MavenIsoVisitor.java",
+      "sha256": "8dbb9e2bfb828cb4a458c5a66d840aa976ef368e96291b93b2f4f700449719b0",
+      "upstream": "org/openrewrite/maven/MavenIsoVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/MavenParser.java",
+      "sha256": "fd7e9381c53d74baef6d083dc65f0e4a6cf7570f346d418915f254dd37598452",
+      "upstream": "org/openrewrite/maven/MavenParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/MavenSettings.java",
+      "sha256": "b480a07974ec3b708e0f132477a6d4274cada9233cfeda2e8efd277475cdf88e",
+      "upstream": "org/openrewrite/maven/MavenSettings.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/MavenTagInsertionComparator.java",
+      "sha256": "202d2d845d12c69f4a9771a9f7fd776f7534c4fb5e2903c25ca7b5edcec9913f",
+      "upstream": "org/openrewrite/maven/MavenTagInsertionComparator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/MavenVisitor.java",
+      "sha256": "0184eee34e457cb4cbbe023590902f0c33a965f7944ffd2ffe07083e6fbda8c7",
+      "upstream": "org/openrewrite/maven/MavenVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/OrderPomElements.java",
+      "sha256": "b3a57fb6dabfe5fc534b577cd7c5b38749dc667cf5a6f97b499f5fd27f0c96fb",
+      "upstream": "org/openrewrite/maven/OrderPomElements.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/RemoveDependency.java",
+      "sha256": "e5daf1d156c5ede4a3b47e72a1ad8da220759bc32b191b9c725d2ac497913de9",
+      "upstream": "org/openrewrite/maven/RemoveDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/RemoveDuplicateDependencies.java",
+      "sha256": "e6f3c9782ab30a2057855534b4b71b8a9cd6cdbb8b718ad89a6ab0659ecfefe3",
+      "upstream": "org/openrewrite/maven/RemoveDuplicateDependencies.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/RemoveExclusion.java",
+      "sha256": "f4282291cfdb8ceedfe85f4bb01fd14400a658dc728677887b82fe1e3a01584f",
+      "upstream": "org/openrewrite/maven/RemoveExclusion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/RemoveManagedDependency.java",
+      "sha256": "63188dc6f612a42527cad7388b161131b77d452b2da58d0c75bc0b9824e74ebc",
+      "upstream": "org/openrewrite/maven/RemoveManagedDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/RemovePlugin.java",
+      "sha256": "93f6f7efbbfb12d25033fd7f3e20fc60b6d9bea891c435154b12843521ee7978",
+      "upstream": "org/openrewrite/maven/RemovePlugin.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/RemovePluginDependency.java",
+      "sha256": "b108c001f41bd47edbf93e6d8757c5c4337f6845a63d9056396767f7ba412b57",
+      "upstream": "org/openrewrite/maven/RemovePluginDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/RemoveProperty.java",
+      "sha256": "cadc11273219b3b11d828afbead123db92fcb2f6830750cda7325e3e8441698a",
+      "upstream": "org/openrewrite/maven/RemoveProperty.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/RemoveRedundantDependencyVersions.java",
+      "sha256": "6844529ee7a7c9261db8bcc0a346be41b7ac61203e0087929c2a5dfd0d3d7080",
+      "upstream": "org/openrewrite/maven/RemoveRedundantDependencyVersions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/RemoveRepository.java",
+      "sha256": "8ec28a08170c61c799ae11aee83346ba3bd8db53e53ac31285b7a7c8f8663093",
+      "upstream": "org/openrewrite/maven/RemoveRepository.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/RenamePropertyKey.java",
+      "sha256": "d8e2c05723d2ba679d9d97299fb7f4c815448607b4164525a32ba1e9fed6d73f",
+      "upstream": "org/openrewrite/maven/RenamePropertyKey.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/UpdateMavenModel.java",
+      "sha256": "c190226ada3a69fbf8f2863bacb2f34187b0196a9820786e87a9ccce1178d0a6",
+      "upstream": "org/openrewrite/maven/UpdateMavenModel.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/UpdateMavenWrapper.java",
+      "sha256": "bda515b545ef177e9bf0fc88397532c7e4b4cbc8ab4447f3def4a404dbbd3ad7",
+      "upstream": "org/openrewrite/maven/UpdateMavenWrapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/UpgradeDependencyVersion.java",
+      "sha256": "abf29fd41b3373011742cc6f3d005a8040adf90b43290ce5cbfbd1a17226453d",
+      "upstream": "org/openrewrite/maven/UpgradeDependencyVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/UpgradeParentVersion.java",
+      "sha256": "aee24b05aaefea169f1bb13a58532583d6b3142668cac913886f3784ada80b95",
+      "upstream": "org/openrewrite/maven/UpgradeParentVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/UpgradePluginVersion.java",
+      "sha256": "03dbbbcf9ed1cc23e4106e7770cbbe1a0534d28f4f36b25d65eb8434452103dd",
+      "upstream": "org/openrewrite/maven/UpgradePluginVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/cache/CompositeMavenPomCache.java",
+      "sha256": "060bb2f025dbfa1e51c0dd050e0752867ed2249607a035f3bc93a84da294d645",
+      "upstream": "org/openrewrite/maven/cache/CompositeMavenPomCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/cache/InMemoryMavenPomCache.java",
+      "sha256": "cc814377350480234698d28e0e0f8f8cceb370e6b739ffcfeb83b6a31ac91f91",
+      "upstream": "org/openrewrite/maven/cache/InMemoryMavenPomCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/cache/LocalMavenArtifactCache.java",
+      "sha256": "8e9f53f829cfc6de5cde8f1d82929995aa9fd1a613a39a3d302c84259de800d3",
+      "upstream": "org/openrewrite/maven/cache/LocalMavenArtifactCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/cache/MavenArtifactCache.java",
+      "sha256": "eead0d07c1b4763fba42741ed72a67e83b5ce4483874f12f151698a8f95d4691",
+      "upstream": "org/openrewrite/maven/cache/MavenArtifactCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/cache/MavenPomCache.java",
+      "sha256": "84760c09c3fa91123191c219c3d6088f529689edbdad4f5a02bdc87a518476cc",
+      "upstream": "org/openrewrite/maven/cache/MavenPomCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/cache/ReadOnlyLocalMavenArtifactCache.java",
+      "sha256": "9b7b9b594028f38097c42a61249a4a1163a79bc0b1b617a21c7cb06e80425bcc",
+      "upstream": "org/openrewrite/maven/cache/ReadOnlyLocalMavenArtifactCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/cache/RocksdbMavenPomCache.java",
+      "sha256": "1bfa54989428ff340a2dec6cf984069a158b1d3060dde482deca12ae1c3c7302",
+      "upstream": "org/openrewrite/maven/cache/RocksdbMavenPomCache.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/cleanup/DependencyManagementDependencyRequiresVersion.java",
+      "sha256": "5e01c09242f03e0fa6163262e0d641614ae8f547f4735c9e95fa8b5267d0def1",
+      "upstream": "org/openrewrite/maven/cleanup/DependencyManagementDependencyRequiresVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/cleanup/ExplicitPluginGroupId.java",
+      "sha256": "67100c97a4fb77fc10ff3a4e0eb3d29b7643291a1ae4aab3cbf4e505caedd2a4",
+      "upstream": "org/openrewrite/maven/cleanup/ExplicitPluginGroupId.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/cleanup/ExplicitPluginVersion.java",
+      "sha256": "6b1be6b06df5df588d66e4f5fce26e5f33c93eb7ebe61a86c322e70f9e469dba",
+      "upstream": "org/openrewrite/maven/cleanup/ExplicitPluginVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/cleanup/package-info.java",
+      "sha256": "e999ab44c1feefb25930483fca612af667334816f590c001f7a43f50aea7c771",
+      "upstream": "org/openrewrite/maven/cleanup/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/DownloadOperation.java",
+      "sha256": "863d126bcfc7acaa50c2c0f8fabde52a45a5079c30fb6437f7e838a19d61630b",
+      "upstream": "org/openrewrite/maven/internal/DownloadOperation.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/InsertDependencyComparator.java",
+      "sha256": "a189fb62f49d955102746326a65a7e4729ec28f114e6669d008e40b0c34a600e",
+      "upstream": "org/openrewrite/maven/internal/InsertDependencyComparator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/MavenParsingException.java",
+      "sha256": "57f7b37049cc14fecebaa97bd163f992b1fa1f7d4e7030bf42bffcf674795fed",
+      "upstream": "org/openrewrite/maven/internal/MavenParsingException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/MavenPomDownloader.java",
+      "sha256": "c0e3a576efd05b380c1fcf0169807ebbdc7437d0e74e0df64508cce06432bb63",
+      "upstream": "org/openrewrite/maven/internal/MavenPomDownloader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/MavenXmlMapper.java",
+      "sha256": "caf5b458bb759806f21a76a04405dd280f4d6b1eea6cf8969b0f140fcbdf2d55",
+      "upstream": "org/openrewrite/maven/internal/MavenXmlMapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/PomDownloadResult.java",
+      "sha256": "0350fe4344a7749f6db82d1f3b268b55f56f91c7a8326d32ef6335fab2a5f534",
+      "upstream": "org/openrewrite/maven/internal/PomDownloadResult.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/RawPom.java",
+      "sha256": "e97ee9264ca4ddeb6a65ee1467e234dda4ae7f03b388310f8470bdd02f62d032",
+      "upstream": "org/openrewrite/maven/internal/RawPom.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/RawRepositories.java",
+      "sha256": "0d472e50c8be4c73b53959c801df8dc7cc30d608ec7d1113f8f3e7910f1dc56a",
+      "upstream": "org/openrewrite/maven/internal/RawRepositories.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/VersionRequirement.java",
+      "sha256": "7da0946557992a0b4bbd73ed5c729abc396d069cab22b4c7583652e88fa00c43",
+      "upstream": "org/openrewrite/maven/internal/VersionRequirement.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/grammar/VersionRangeLexer.interp",
+      "sha256": "a46e12eb1626aa480f7b1ee1dfdd524da38c23d6927aec3c125ec3cb906b391d",
+      "upstream": "org/openrewrite/maven/internal/grammar/VersionRangeLexer.interp"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/grammar/VersionRangeLexer.java",
+      "sha256": "31b8963794deeec75c054bf2044194ecd346fc2504b7b02861fa0ace79d43617",
+      "upstream": "org/openrewrite/maven/internal/grammar/VersionRangeLexer.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/grammar/VersionRangeLexer.tokens",
+      "sha256": "9f5149883ba1f21091bf7986189bb30f5c5f1de73137dbc7bcaf3d5da5abed68",
+      "upstream": "org/openrewrite/maven/internal/grammar/VersionRangeLexer.tokens"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/grammar/VersionRangeParser.interp",
+      "sha256": "64a38f44cdf7966c58f5e69bd66682e40215099fc3f003b3157498bfcae63caa",
+      "upstream": "org/openrewrite/maven/internal/grammar/VersionRangeParser.interp"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/grammar/VersionRangeParser.java",
+      "sha256": "102ec3ec3ca403ede892516c78d6a8e2885e9e6f29845f1cfa59ce0b131daf6c",
+      "upstream": "org/openrewrite/maven/internal/grammar/VersionRangeParser.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/grammar/VersionRangeParser.tokens",
+      "sha256": "9f5149883ba1f21091bf7986189bb30f5c5f1de73137dbc7bcaf3d5da5abed68",
+      "upstream": "org/openrewrite/maven/internal/grammar/VersionRangeParser.tokens"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/grammar/VersionRangeParserBaseListener.java",
+      "sha256": "7fbda4de83f1d0b9fba803988e3ceef52fc16c4cb89f38a573ffe86467673a7c",
+      "upstream": "org/openrewrite/maven/internal/grammar/VersionRangeParserBaseListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/grammar/VersionRangeParserBaseVisitor.java",
+      "sha256": "14b5b1bb7fc7347b8caa0da10c6f223b092b1f9b4679a5c3a7f20c8ee94bb077",
+      "upstream": "org/openrewrite/maven/internal/grammar/VersionRangeParserBaseVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/grammar/VersionRangeParserListener.java",
+      "sha256": "a890121dbb2e1b180a026f012cb8b5764f797b5c9691eb56916c1d19b6ad19c6",
+      "upstream": "org/openrewrite/maven/internal/grammar/VersionRangeParserListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/grammar/VersionRangeParserVisitor.java",
+      "sha256": "fb681ba23859ed69dcbadbe36d82c50fab085ae3e349f5de6b72b36c12fc6a98",
+      "upstream": "org/openrewrite/maven/internal/grammar/VersionRangeParserVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/internal/package-info.java",
+      "sha256": "6a9680d57243fdca82de7f02adb899dd736ec0e485c9383d840268d8c0d4983d",
+      "upstream": "org/openrewrite/maven/internal/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/marker/AlreadyIncremented.java",
+      "sha256": "8a4aecdfb584b5c20f2ef43a87a08a7ab9d4835990b232e97c430f423a0a4438",
+      "upstream": "org/openrewrite/maven/marker/AlreadyIncremented.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/package-info.java",
+      "sha256": "cbf47ad7e065f1cd8b367203711a82e7b4a7b402ee5137d1a5c3d2b8405e7162",
+      "upstream": "org/openrewrite/maven/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/DependencyInsight.java",
+      "sha256": "58f752b2685ecb5043c0ecd64e59673cd0a1c7484ad319a412c26bb2a7e9a199",
+      "upstream": "org/openrewrite/maven/search/DependencyInsight.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/DoesNotIncludeDependency.java",
+      "sha256": "95a3ccb74bead5a33c5885a0cf520ee73f234516f2f28e0d90f503b2a7fe58bd",
+      "upstream": "org/openrewrite/maven/search/DoesNotIncludeDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/EffectiveDependencies.java",
+      "sha256": "e0cce994335b8cf0a698da9e114c30bb371e67ef1d1349cb40a3c6eb41f2c8be",
+      "upstream": "org/openrewrite/maven/search/EffectiveDependencies.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/EffectiveManagedDependencies.java",
+      "sha256": "cf2e8e8ec88ac9a379e3d29341635bc32bee21695cca0743f48c8e96b321c3cb",
+      "upstream": "org/openrewrite/maven/search/EffectiveManagedDependencies.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/EffectiveMavenRepositories.java",
+      "sha256": "35372a4d6292bc13d52eca266b002aba4d6ace63330f89f889772895e6da52a0",
+      "upstream": "org/openrewrite/maven/search/EffectiveMavenRepositories.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/EffectiveMavenRepositoriesTable.java",
+      "sha256": "3ba1074035975dd86f1b9c13cc762d339485e5045f35422831d3612ed078b364",
+      "upstream": "org/openrewrite/maven/search/EffectiveMavenRepositoriesTable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/FindDependency.java",
+      "sha256": "f3af30ade810f9d6947f9f6a0a900a94859c8a1c52e39d818e0c449d520c84e4",
+      "upstream": "org/openrewrite/maven/search/FindDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/FindManagedDependency.java",
+      "sha256": "b3d75a23c25a8d903748f397bef3889b6ef7a5190d442360e5cca35d08651073",
+      "upstream": "org/openrewrite/maven/search/FindManagedDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/FindMavenSettings.java",
+      "sha256": "aec34841ae3d60cdd08dd65310d81c7b166bf1c6673f7ff1402539fb6bf33713",
+      "upstream": "org/openrewrite/maven/search/FindMavenSettings.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/FindPlugin.java",
+      "sha256": "18540175502d297b6b5764dad6322b0a4417754b7ee1379b3b64347c2251415a",
+      "upstream": "org/openrewrite/maven/search/FindPlugin.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/FindProperties.java",
+      "sha256": "6e5a55b47ade8f5047a4154ef59b7cff43f380bf6faec748efdca17dcf5adbf8",
+      "upstream": "org/openrewrite/maven/search/FindProperties.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/FindRepositoryOrder.java",
+      "sha256": "67ca0365ea5ea10b5087f848f26dc0fc4916f0ab5ad04897faf1d693db7f17a0",
+      "upstream": "org/openrewrite/maven/search/FindRepositoryOrder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/ParentPomInsight.java",
+      "sha256": "5ba27c8536296fbcad27dfa0bdea08064d76d6711b26885920c863870d83252f",
+      "upstream": "org/openrewrite/maven/search/ParentPomInsight.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/search/package-info.java",
+      "sha256": "d6d6ba075e61ee5218062e9f7f11b40281abb625422d0456ee5ce8966d070b9f",
+      "upstream": "org/openrewrite/maven/search/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/security/UseHttpsForRepositories.java",
+      "sha256": "c25e0bf3cb9b1c189fa2bdb272c9f33f716b674d010cbcf93557cd515c6da181",
+      "upstream": "org/openrewrite/maven/security/UseHttpsForRepositories.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/security/package-info.java",
+      "sha256": "677a1d8c7325f85eeb4edc16bccf62529ad20fedab33b56ecac6f9fb1aec44ad",
+      "upstream": "org/openrewrite/maven/security/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/table/DependenciesInUse.java",
+      "sha256": "73c735ee37964337760ea28be8aa1a1f89496dd090e412abae751c473e0f9b3b",
+      "upstream": "org/openrewrite/maven/table/DependenciesInUse.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/table/DependencyGraph.java",
+      "sha256": "d0f40343ecf39829a039f5887301bb84ee0bd6eea8ebc48e4cf644b80cd5a069",
+      "upstream": "org/openrewrite/maven/table/DependencyGraph.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/table/DependencyResolutions.java",
+      "sha256": "ed8913e09d259885c7e83e1d00bdbdb5aea6f09770a9620ff0a58d2a08c28cdc",
+      "upstream": "org/openrewrite/maven/table/DependencyResolutions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/table/EffectiveMavenSettings.java",
+      "sha256": "3d80e8761d7362cfcb466990fc3dcfdcbf3ef0bf068bc2603af86634fb452f0a",
+      "upstream": "org/openrewrite/maven/table/EffectiveMavenSettings.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/table/ManagedDependencyGraph.java",
+      "sha256": "db0e74a6a4bdea6142b6f5ed219933e6b988b3a356cd739ff4201a833d5ae3ae",
+      "upstream": "org/openrewrite/maven/table/ManagedDependencyGraph.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/table/MavenMetadataFailures.java",
+      "sha256": "cc8782ff3ab28e6a3e33a92759ed8e9305ac4f3f9da35558bbe33795fbec5914",
+      "upstream": "org/openrewrite/maven/table/MavenMetadataFailures.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/table/MavenRepositoryOrder.java",
+      "sha256": "46a29d7850561224783ac5b67f61177ccada3a2223aa8e0fa802ad9c61b6014b",
+      "upstream": "org/openrewrite/maven/table/MavenRepositoryOrder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/table/ParentPomsInUse.java",
+      "sha256": "1c8a633c9cd872e18b4c93171619d76056910828d42e5c4d5c7a70aae0185712",
+      "upstream": "org/openrewrite/maven/table/ParentPomsInUse.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/Dependency.java",
+      "sha256": "401c3ee6b0b5d43ff1b0a9419e1e39608c82ad638ccbfd99212ced92f85f0b11",
+      "upstream": "org/openrewrite/maven/tree/Dependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/GraphvizResolutionEventListener.java",
+      "sha256": "67a36bf283f4c15868ef4c8684ffc03c9d27ae77405d6eeec303b18ca57e42c0",
+      "upstream": "org/openrewrite/maven/tree/GraphvizResolutionEventListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/GroupArtifact.java",
+      "sha256": "d9af5b6df03adb30f1799ae0ed2a46a76f5da54b7e2a07563771b881e6693703",
+      "upstream": "org/openrewrite/maven/tree/GroupArtifact.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/GroupArtifactVersion.java",
+      "sha256": "1f11af309025e1308ed5476f825e53df2de0ea3cb02cb20cfa0d79a2925f0ac9",
+      "upstream": "org/openrewrite/maven/tree/GroupArtifactVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/License.java",
+      "sha256": "5f4742d441ee909d96fab13c029048cbf3ae6b6bf6f588f7c2deb1dfa873259f",
+      "upstream": "org/openrewrite/maven/tree/License.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/ManagedDependency.java",
+      "sha256": "61b99a30e83875600af01b8e95e820688e383e8f37fcc38b4afd945f8b6a1450",
+      "upstream": "org/openrewrite/maven/tree/ManagedDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/MavenMetadata.java",
+      "sha256": "1d1f572f2988c2b09205c51b891773f48c084122efd5bdde501f5a8adc5cf314",
+      "upstream": "org/openrewrite/maven/tree/MavenMetadata.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/MavenRepository.java",
+      "sha256": "d77f293c96cb9c4ec8d124d371bedb796939344e752092b693967e0ebae367c7",
+      "upstream": "org/openrewrite/maven/tree/MavenRepository.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/MavenRepositoryCredentials.java",
+      "sha256": "e84e20cc4fcf53083764d1497368920d016c9f29ccf90abfa290c9576a71bc22",
+      "upstream": "org/openrewrite/maven/tree/MavenRepositoryCredentials.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/MavenRepositoryMirror.java",
+      "sha256": "fa6d609712dd4dd6d50ab119eb62bb1052a407795ffde4049e71b42dc520bcde",
+      "upstream": "org/openrewrite/maven/tree/MavenRepositoryMirror.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/MavenResolutionResult.java",
+      "sha256": "4aeac80f0e75ce8fe9b14038f0cd6ab4688e8452b82fe99812f72015d97e79db",
+      "upstream": "org/openrewrite/maven/tree/MavenResolutionResult.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/Parent.java",
+      "sha256": "55c5afad2483e18627ed8d3a6397cdae58b0f597ff358c12e865ac247a3dbd5a",
+      "upstream": "org/openrewrite/maven/tree/Parent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/Plugin.java",
+      "sha256": "1b90128eaaffc61c6896d147151ab3b00a43af633ae8dcced085b5f3c52f760d",
+      "upstream": "org/openrewrite/maven/tree/Plugin.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/Pom.java",
+      "sha256": "fdfa2fd9e0ff2b293857115584ab2f82e8572e34e8bf03e51c7aa3ac3944f39a",
+      "upstream": "org/openrewrite/maven/tree/Pom.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/Profile.java",
+      "sha256": "297c4f2561a812180255e39053a0a0f782dfd392511561695e4cbb983541dc40",
+      "upstream": "org/openrewrite/maven/tree/Profile.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/ProfileActivation.java",
+      "sha256": "000c2e08f91cc26de166d6b26d490fc4a6081503fefdb3861ea0fb1ff261633b",
+      "upstream": "org/openrewrite/maven/tree/ProfileActivation.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/ResolutionEventListener.java",
+      "sha256": "187936fad5773476ae190fcc4c644388318d6d0704296b599cc8b1b42e228b57",
+      "upstream": "org/openrewrite/maven/tree/ResolutionEventListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/ResolvedDependency.java",
+      "sha256": "5a326ba5a45952f785412290a899b3a0b3c9dd1404d2f0ec9730d5d4a2fbedca",
+      "upstream": "org/openrewrite/maven/tree/ResolvedDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/ResolvedGroupArtifactVersion.java",
+      "sha256": "60607fb600dfeb9faf4297d15a3dffe7b5f5c7375156c7dc64c587d176cdf29f",
+      "upstream": "org/openrewrite/maven/tree/ResolvedGroupArtifactVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/ResolvedManagedDependency.java",
+      "sha256": "81932c9201eed33d45318a9c03320fad78b5824089ac758ecc91280732c78a5d",
+      "upstream": "org/openrewrite/maven/tree/ResolvedManagedDependency.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/ResolvedPom.java",
+      "sha256": "b7ba6d56f33e58fc3acdad9be9188d4a27aee5ea9a4698f073e718aa872a50ef",
+      "upstream": "org/openrewrite/maven/tree/ResolvedPom.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/Scope.java",
+      "sha256": "5310246a3451bf8e1524ff323663ba9e2f79b26245f5814d893c99e906eb940f",
+      "upstream": "org/openrewrite/maven/tree/Scope.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/Version.java",
+      "sha256": "a1c05f284f273bb767cdf87a1e26f31c477e48c49bdb20fba35cb94b652a763b",
+      "upstream": "org/openrewrite/maven/tree/Version.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/tree/package-info.java",
+      "sha256": "672f246d397cdadef1f5542ed48957dea44d4533e02156ce47011b1d197c5101",
+      "upstream": "org/openrewrite/maven/tree/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/utilities/MavenArtifactDownloader.java",
+      "sha256": "9a7d604895023ba11efd77169f9d71fa1b2730d0aeb3484337666ca0fb63b883",
+      "upstream": "org/openrewrite/maven/utilities/MavenArtifactDownloader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/utilities/MavenWrapper.java",
+      "sha256": "aa8ffe427d570cf6bd117ddae826015ac9df15fb5a2fc6f4a4fa11d4a51b18f8",
+      "upstream": "org/openrewrite/maven/utilities/MavenWrapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/utilities/PrintMavenAsCycloneDxBom.java",
+      "sha256": "6918b59895a35ce91c3d79400e4c9b9833b34052a95bb45c031e27476ce1d5f1",
+      "upstream": "org/openrewrite/maven/utilities/PrintMavenAsCycloneDxBom.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/utilities/PrintMavenAsDot.java",
+      "sha256": "a6357576fa7e31ca5703a8365c3d3aa9b8c76ee17678fc590b41664130a9743b",
+      "upstream": "org/openrewrite/maven/utilities/PrintMavenAsDot.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/utilities/RetainVersions.java",
+      "sha256": "2a7df17f8ec2a216ae12ca5607107f7ae0aa1026c43296f708b1fed8b00cdc98",
+      "upstream": "org/openrewrite/maven/utilities/RetainVersions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/org/openrewrite/maven/utilities/package-info.java",
+      "sha256": "bb5026ae3cf96f8c8f5f6a2b65b5c946f65fe89ee4c5cb7dda0874234a7c45ec",
+      "upstream": "org/openrewrite/maven/utilities/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/unresolvable.txt",
+      "sha256": "22388236cb93b4f4e89a824f6fbdc5af2267760954d946913a189b435314fb02",
+      "upstream": "unresolvable.txt"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/UPSTREAM_LICENSE.json",
+      "sha256": "6b741fd72923dbca9fe8ffb05b0661e3a86f521607779d9569239da981d34bb3",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/UPSTREAM_LICENSE.txt",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/UPSTREAM_LOMBOK.config",
+      "sha256": "7a7eb5e33aaf354f59875207a37f97df1d3593910e8c3018aa3975b09e8e1b01",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/UPSTREAM_LOMBOK.json",
+      "sha256": "d74872fb89140dfc453e98ee3ded0420728258cace051291244824e4670ad133",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/SOURCES_MANIFEST.tsv",
+      "sha256": "e3c192f90208440e6dbf5f59dd3796d524786c4eb47096801f01f843d92e72d2",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party-images/rewrite-maven-8.17.1/LICENSE",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.openrewrite",
+  "kind": "IMAGE",
+  "license": "The Apache Software License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-maven/8.17.1/rewrite-maven-8.17.1.pom",
+  "receipt": {
+    "buildRoot": "",
+    "distributionSha256": "d0b2fb4797aa88950370f94c1591314a74a8859b8e24adfae2a695552f8ebb25",
+    "lock": "33ab049867c1c736c65dececbbb9f9d42697fd3336cf178946c3c43ba55336ff",
+    "message": "build not requested",
+    "sourceRoot": "4fc81e0d6fb8ac83102a1c0f6ac4c65df66e9a38888e6a776268ce07717a118e",
+    "status": "SOURCE_ONLY"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-maven/8.17.1/rewrite-maven-8.17.1-sources.jar",
+  "sources_jar_sha1": "48e1ab45e7f558ef524fa8b5ed3e60ad2f092e94",
+  "sources_jar_sha256": "0b80c4535e4e301f6ef0c2d50358e8df9f4955af723607e0b5b3abe598d934b4",
+  "status": "SOURCE_ONLY",
+  "upstream": "https://github.com/openrewrite/rewrite",
+  "version": "8.17.1"
+}

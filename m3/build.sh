@@ -11,7 +11,10 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
   core/test/M3DictionaryFrequencyContractTest.java \
   core/test/M3TranslationReceiverMapTest.java \
   core/test/SynexiaPrecomputePayloadTest.java core/test/SynexiaPrecomputeReceiverTest.java \
-  core/test/SharedLexiconFamilySidecarCatalogTest.java core/test/SynexiaSiUnitDecoderTest.java \
+  core/test/LangDexProjectionReceiverTest.java core/test/LangDexSourceEnvelopeTest.java \
+  core/test/SharedLexiconFamilySidecarCatalogTest.java \
+  core/test/SharedLexiconCatalogFamilyAdmissionTest.java \
+  core/test/SharedLexiconFamilyContractTest.java core/test/SynexiaSiUnitDecoderTest.java \
   core/test/M3NumberSpaceTest.java core/test/M3NumberSpaceContractTest.java \
   core/test/M3LanguageGrammarSupportTest.java \
   core/test/M3InstanceIndexPrecomputeTest.java
@@ -20,14 +23,19 @@ for mode in jit int nocompact c2; do
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests FoundationTest | tee "build/logs/test-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LexiconPrecomputeTest | tee "build/logs/typed-precompute-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3InstanceIndexPrecomputeTest | tee "build/logs/instance-index-$mode.log"
+# Run numeric ownership/mapping proofs before the independent dictionary-frequency gate.
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceTest | tee "build/logs/number-space-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceContractTest | tee "build/logs/number-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3DictionaryFrequencyContractTest | tee "build/logs/dictionary-frequency-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3TranslationReceiverMapTest | tee "build/logs/translation-receiver-map-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputePayloadTest | tee "build/logs/synexia-payload-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaPrecomputeReceiverTest | tee "build/logs/synexia-receiver-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests LangDexProjectionReceiverTest | tee "build/logs/langdex-receiver-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests LangDexSourceEnvelopeTest | tee "build/logs/langdex-source-envelope-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconFamilySidecarCatalogTest | tee "build/logs/synexia-family-sidecar-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconCatalogFamilyAdmissionTest | tee "build/logs/synexia-family-admission-$mode.log"
+ "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SharedLexiconFamilyContractTest | tee "build/logs/synexia-family-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests SynexiaSiUnitDecoderTest | tee "build/logs/synexia-si-unit-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceTest | tee "build/logs/number-space-$mode.log"
- "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3NumberSpaceContractTest | tee "build/logs/number-contract-$mode.log"
  "$M3_JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/com.m3.text.jar --add-modules com.m3.text -cp build/tests M3LanguageGrammarSupportTest | tee "build/logs/grammar-support-$mode.log"
 done
 # Build in a private temporary directory, then publish a complete content-addressed file.

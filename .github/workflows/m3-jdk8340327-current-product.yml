@@ -1,6 +1,13 @@
 name: M3 JDK-8340327 current product proof
 
 on:
+  push:
+    branches:
+      - "m3/jdk8340327-proof-receipt-*"
+    paths:
+      - 'm3/backports/recipes/jdk-8340327-java21-internal/**'
+      - 'm3/tooling/migration-recipes/**'
+      - '.github/workflows/m3-jdk8340327-current-product.yml'
   pull_request:
     paths:
       - 'src/java.base/share/classes/sun/security/pkcs/NamedPKCS8Key.java'
@@ -23,6 +30,7 @@ permissions:
 
 jobs:
   verify:
+    if: ${{ !contains(github.event.head_commit.message || '', '[m3-jdk8340327-proofed]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
@@ -77,3 +85,112 @@ jobs:
           make test
           TEST="test/jdk/sun/security/provider/NamedKeyFactoryTest.java test/jdk/sun/security/provider/NamedEdDSA.java"
           JOBS=2
+
+
+  current-tree-receipt:
+    if: \${{ github.event_name == 'push' && !contains(github.event.head_commit.message || '', '[m3-jdk8340327-proofed]') }}
+    needs:
+      - verify
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Ratify named-key proof into current-tree receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+
+          path = Path("m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv")
+          updates = {
+              "current_tree_state": "CANDIDATE_MATERIALIZED_PROVED",
+              "promotion": "NOT_AUTHORIZED",
+              "next_action": "CANONICAL_READBACK_THEN_ALLOW_DEPENDENT_SECURITY_PACKETS",
+              "recipe_fixed_point": "PASS",
+              "java21_api_fence": "PASS",
+              "openjdk_image_build": "PASS",
+              "named_key_jtreg": "PASS",
+              "proof_head": os.environ["GITHUB_SHA"],
+              "proof_run": os.environ["GITHUB_RUN_ID"],
+              "proof_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
+          }
+          rows=[]
+          seen=set()
+          for line in path.read_text(encoding="utf-8").splitlines():
+              if not line:
+                  continue
+              key,value=line.split("\t",1)
+              if key in updates:
+                  value=updates[key]
+                  seen.add(key)
+              rows.append((key,value))
+          for key in (
+              "recipe_fixed_point",
+              "java21_api_fence",
+              "openjdk_image_build",
+              "named_key_jtreg",
+              "proof_head",
+              "proof_run",
+              "proof_attempt",
+          ):
+              if key not in seen:
+                  rows.append((key,updates[key]))
+          path.write_text(
+              "".join(f"{key}\t{value}\n" for key,value in rows),
+              encoding="utf-8")
+          PY
+          git diff --check
+          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'recipe_fixed_point\tPASS' m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'java21_api_fence\tPASS' m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'openjdk_image_build\tPASS' m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'named_key_jtreg\tPASS' m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
+
+      - name: Commit receipt only
+        shell: bash
+        env:
+          BRANCH_NAME: \${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          git add m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
+          git diff --cached --check
+          git config user.name "m3-recipe-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git commit -m "m3: ratify named-key proof [m3-jdk8340327-proofed]"
+          git push origin "HEAD:$BRANCH_NAME"
+
+  canonical-readback:
+    if: \${{ contains(github.event.head_commit.message || '', '[m3-jdk8340327-proofed]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Reprove fixed point and receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/recipes/jdk-8340327-java21-internal/test_materialize.py
+          python3 m3/backports/recipes/jdk-8340327-java21-internal/materialize.py \
+            --root . \
+            --manifest m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/jdk-8340327-java21-internal/manifest.tsv \
+            --receipt m3/build/jdk8340327/readback.tsv
+          git diff --exit-code -- src test
+          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
+          git diff --exit-code

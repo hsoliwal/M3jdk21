@@ -1756,8 +1756,8 @@
       "upstream": "net/bytebuddy/jar/asm/commons/SimpleRemapper.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/resources/net/bytebuddy/jar/asm/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/byte-buddy/upstream-source-only/net/bytebuddy/jar/asm/package.html",
       "sha256": "9df8b952fb4a6434d607828e04581840268677939daf228553187d641caffb3c",
       "upstream": "net/bytebuddy/jar/asm/package.html"
     },
@@ -1780,8 +1780,8 @@
       "upstream": "net/bytebuddy/jar/asm/signature/SignatureWriter.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/byte-buddy/src/main/resources/net/bytebuddy/jar/asm/signature/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/byte-buddy/upstream-source-only/net/bytebuddy/jar/asm/signature/package.html",
       "sha256": "12d2d3c52371618d9261d7cb05e95b1a5885248352a539b6bbf700a434638f5d",
       "upstream": "net/bytebuddy/jar/asm/signature/package.html"
     },
@@ -2369,6 +2369,13 @@
       "repository": "m3/vendor/third_party/byte-buddy/SOURCES_MANIFEST.tsv",
       "sha256": "98d3f2d873bed761551bb15bbdeec4df282455614aa0ffd28834b9958bf581d2",
       "upstream": "(inventory)"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "net.bytebuddy:byte-buddy:1.14.11 (sha256 62ae28187ed2b062813da6a9d567bfee733c341582699b62dd980230729a0313)",
+      "repository": "m3/vendor/third_party/byte-buddy/src/main/descriptor/9/module-info.java",
+      "sha256": "67fd3a4ad96541eed1eb56af5f29bc2739ea86e4169ef063d6c6f318c8fff1af",
+      "upstream": "META-INF/versions/9/module-info.class"
     }
   ],
   "group": "net.bytebuddy",
@@ -2376,6 +2383,11 @@
   "license": "Apache License, Version 2.0 (from the license text; pom declares none)",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "net.bytebuddy:byte-buddy-parent:1.14.11",
   "pom": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.14.11/byte-buddy-1.14.11.pom",

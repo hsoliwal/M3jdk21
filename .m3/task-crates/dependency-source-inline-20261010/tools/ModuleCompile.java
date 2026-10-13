@@ -100,6 +100,12 @@ public final class ModuleCompile {
                 else files.add(p);
             }
         }
+        boolean descriptorOnly = files.isEmpty() && Files.isRegularFile(source.resolve("module-info.java"));
+        if (descriptorOnly) {  // aggregate artifact: the published jar holds module-info.class only
+            files.add(source.resolve("module-info.java"));
+            excluded.removeIf(x -> x.startsWith("module-info.java\t"));
+            excluded.add("module-info.java\tDESCRIPTOR_ONLY_ARTIFACT_COMPILED");
+        }
         if (files.isEmpty()) throw new IOException("NO_JAVA_SOURCES");
         Path classes = Files.createDirectories(output.resolve("classes"));
         StringBuilder arguments = new StringBuilder();
@@ -109,11 +115,12 @@ public final class ModuleCompile {
         Files.writeString(argFile, arguments.toString());
         Files.writeString(output.resolve("compile-exclusions.tsv"), "path\treason\n" + String.join("\n", excluded) + (excluded.isEmpty() ? "" : "\n"));
         List<String> argv = new ArrayList<>();
-        if (release.startsWith("legacy:")) argv.addAll(List.of("-source", release.substring(7), "-target", release.substring(7), "-Xlint:-options"));
+        if (descriptorOnly) argv.addAll(List.of("--release", String.valueOf(Runtime.version().feature())));  // upstream compiles the descriptor with its build JDK (published class version 65 = 21)
+        else if (release.startsWith("legacy:")) argv.addAll(List.of("-source", release.substring(7), "-target", release.substring(7), "-Xlint:-options"));
         else argv.addAll(List.of("--release", release));
         argv.addAll(List.of("-proc:none", "-encoding", encoding, "-d", classes.toString()));
         argv.addAll(javacArgs);
-        if (!classpath.isBlank()) { argv.add("-classpath"); argv.add(classpath); }
+        if (!classpath.isBlank()) { argv.add(descriptorOnly ? "--module-path" : "-classpath"); argv.add(classpath); }
         argv.add("@" + argFile);
         javax.tools.JavaCompiler javac = javax.tools.ToolProvider.getSystemJavaCompiler();
         int rc;

@@ -1,12 +1,18 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.tooling.dag;
 
+import com.m3.rewrite.scope.M3EditScope;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
 
-/** Validates and composes every generated M3 backport packet in one JVM. */
+/**
+ * Validates all generated packet schemas and composes only explicitly scope-approved DAG packets.
+ *
+ * <p>Unapproved broader-scope packets remain HOLD planning evidence rather than acquiring
+ * scope-promotion authority from their domain/path classification.</p>
+ */
 public final class M3BackportPacketBatchMain {
     private M3BackportPacketBatchMain() {}
 
@@ -33,11 +39,30 @@ public final class M3BackportPacketBatchMain {
 
         int atoms = 0;
         int maximumDagNodes = 0;
+        int validatedDags = 0;
+        int heldScopePackets = 0;
         for (Path path : packets) {
             M3BackportPacket packet =
                     M3BackportPacketLoader.parse(Files.readString(path));
-            M3RecipeDag dag = M3PacketDagComposer.compose(packet);
             atoms += packet.atoms().size();
+
+            // Generated packets are planning evidence. Broad physical scope is not a license
+            // to mutate or a substitute for independently reviewed scope promotion.
+            boolean requiresScopeApproval = packet.atoms().stream()
+                    .anyMatch(atom -> atom.scope() != M3EditScope.FILE
+                            && !atom.scopePromotionApproved());
+            if (requiresScopeApproval) {
+                heldScopePackets++;
+                System.out.println(
+                        "M3_BACKPORT_PACKET_SCOPE_HOLD packet="
+                                + packet.packetId()
+                                + " scope="
+                                + packet.maximumScope()
+                                + " reason=EXPLICIT_SCOPE_PROMOTION_APPROVAL_REQUIRED");
+                continue;
+            }
+            M3RecipeDag dag = M3PacketDagComposer.compose(packet);
+            validatedDags++;
             maximumDagNodes = Math.max(maximumDagNodes, dag.size());
             System.out.println(
                     "M3_BACKPORT_PACKET_OK packet="
@@ -55,7 +80,12 @@ public final class M3BackportPacketBatchMain {
                         + packets.size()
                         + " atoms="
                         + atoms
+                        + " validatedDags="
+                        + validatedDags
+                        + " heldScopePackets="
+                        + heldScopePackets
                         + " maxDagNodes="
-                        + maximumDagNodes);
+                        + maximumDagNodes
+                        + " sourcePromotionAuthority=false");
     }
 }

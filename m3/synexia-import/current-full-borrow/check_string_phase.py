@@ -32,6 +32,7 @@ EXPECTED_SUCCESSOR_PATHS = {
     "src/java.base/share/classes/java/lang/M3String.java",
     "src/java.base/share/classes/java/lang/M3StringFacts.java",
     "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+    "src/java.base/share/classes/java/lang/M3StringPool.java",
 }
 SUCCESSOR_MARKERS = {
     "src/java.base/share/classes/java/lang/M3String.java": (
@@ -56,6 +57,14 @@ SUCCESSOR_MARKERS = {
         "final long[] masks;",
         "char candidate = source.charAt(blockStart + firstOffsets[mid]);",
         "MAX_SOURCE_UNITS * (Byte.BYTES + Long.BYTES)",
+    ),
+    "src/java.base/share/classes/java/lang/M3StringPool.java": (
+        "if (left.length() == 0) return right;",
+        "if (right.length() == 0) return left;",
+        "if ((long) left.length() + right.length() > Integer.MAX_VALUE) {",
+        "throw new OutOfMemoryError(\"Required length exceeds implementation limit\");",
+        "if (left.owner() == right.owner() && left.end() == right.start()) {",
+        "return M3String.range(",
     ),
 }
 
@@ -162,6 +171,19 @@ def validate_successor_source(path: str, source: str) -> None:
         exact = block[1].split("private static final class Entry {", 1)[0]
         if re.search(r"(?m)^\s*(?:final\s+)?char\s*\[\s*\]\s+\w+\s*;", exact):
             raise ValueError("position-mask successor reintroduced retained char[] spelling")
+
+    if path.endswith("M3StringPool.java"):
+        ordered = (
+            "if (left.length() == 0) return right;",
+            "if (right.length() == 0) return left;",
+            "if ((long) left.length() + right.length() > Integer.MAX_VALUE) {",
+            "throw new OutOfMemoryError(\"Required length exceeds implementation limit\");",
+            "if (left.owner() == right.owner() && left.end() == right.start()) {",
+            "M3StringTuple tuple = new M3StringTuple(left, right);",
+        )
+        positions = [source.find(fragment) for fragment in ordered]
+        if any(position < 0 for position in positions) or positions != sorted(positions):
+            raise ValueError("M3StringPool concat length successor guard order drift")
 
 
 def estate_snapshot() -> tuple[str, str]:

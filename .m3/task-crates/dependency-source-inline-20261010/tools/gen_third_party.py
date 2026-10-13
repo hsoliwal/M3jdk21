@@ -32,6 +32,10 @@ ENCODING = {"commons-compress": "ISO-8859-1", "commons-text": "ISO-8859-1"}
 EXCLUDE_MODULE_INFO = set()  # artifacts whose module descriptor must stay uncompiled (filled after the first reactor build)
 NATIVE_IN_BINARY = set()  # the equivalence gate decides; native libraries are completed byte-for-byte from the published jar and compared by SHA-256
 BINARY_INPUT_SCOPE = "provided"
+OVERLAY_COMPILE_INPUTS = {  # donor -> [(group, artifact, version)]: provided inputs of a multi-release overlay (published pom)
+    "sqlite-jdbc-3.45.1.0": [("org.graalvm.sdk", "nativeimage", "23.1.2")],
+    "sqlite-jdbc-3.51.1.1": [("org.graalvm.sdk", "nativeimage", "25.0.2")],
+}
 EXTRA_COMPILE_DEPS = {  # donor id -> [(group, artifact, version)]: fully qualified references the import closure misses
     "rewrite-java-21-8.17.1": [("org.slf4j", "slf4j-api", "1.7.36")],
 }
@@ -85,6 +89,15 @@ BYTE_BUDDY_TRANSFORM = """      <plugin><groupId>net.bytebuddy</groupId><artifac
 """
 BUILD_PLUGINS = {"byte-buddy": BYTE_BUDDY_TRANSFORM}
 KOTLIN = {"junit-jupiter-api": ("1.8.22", "1.3", "1.3", "1.8"), "junit-jupiter-params": ("1.8.22", "1.3", "1.3", "1.8")}  # kotlin compiler, apiVersion, languageVersion, jvmTarget (upstream junit 5.10.2)
+KOTLIN_BY_VERSION = {  # (artifact, version) -> (compiler, apiVersion, languageVersion, jvmTarget, extra args); upstream r5.11.4
+    ("junit-jupiter-api", "5.11.4"): ("1.9.23", "1.6", "1.6", "1.8", ("-opt-in=kotlin.RequiresOptIn",)),
+    ("junit-jupiter-params", "5.11.4"): ("1.9.23", "1.6", "1.6", "1.8", ("-opt-in=kotlin.RequiresOptIn",)),
+}
+
+
+def kcfg(r):
+    v = r["version"][:-len(SUFFIX)] if SUFFIX and r["version"].endswith(SUFFIX) else r["version"]
+    return KOTLIN_BY_VERSION.get((r["artifact"], v), KOTLIN.get(r["artifact"]))
 
 
 def shade_plugin(rule):
@@ -96,17 +109,142 @@ def shade_plugin(rule):
             "        <executions><execution><phase>package</phase><goals><goal>shade</goal></goals><configuration>"
             "<createDependencyReducedPom>true</createDependencyReducedPom><artifactSet><includes>" + inc + "</includes></artifactSet>"
             "<relocations>" + rel + "</relocations>"
-            "<filters><filter><artifact>*:*</artifact><excludes><exclude>META-INF/*.SF</exclude><exclude>META-INF/*.RSA</exclude><exclude>META-INF/*.DSA</exclude><exclude>META-INF/maven/**</exclude><exclude>module-info.class</exclude></excludes></filter></filters>"
+            "<filters>" + "".join("<filter><artifact>%s</artifact><excludes><exclude>META-INF/*.SF</exclude><exclude>META-INF/*.RSA</exclude><exclude>META-INF/*.DSA</exclude><exclude>META-INF/maven/**</exclude><exclude>module-info.class</exclude><exclude>META-INF/versions/*/module-info.class</exclude></excludes></filter>" % i_ for i_ in includes) + "</filters>"
             "</configuration></execution></executions>\n      </plugin>\n")
 
 
 def kotlin_plugin(cfg):
-    ver, api_, lang, jvm = cfg
+    ver, api_, lang, jvm = cfg[:4]
+    kargs = "".join("<arg>%s</arg>" % a for a in (cfg[4] if len(cfg) > 4 else ()))
     return ("      <plugin><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-plugin</artifactId><version>%s</version>\n"
             "        <!-- upstream compiles the Kotlin facade (Assertions.kt) with the same API/language level -->\n"
             "        <executions><execution><id>kotlin-compile</id><phase>process-sources</phase><goals><goal>compile</goal></goals>"
             "<configuration><sourceDirs><sourceDir>${project.basedir}/src/main/kotlin</sourceDir><sourceDir>${project.basedir}/src/main/java</sourceDir></sourceDirs></configuration></execution></executions>"
-            "<configuration><jvmTarget>%s</jvmTarget><apiVersion>%s</apiVersion><languageVersion>%s</languageVersion></configuration>\n      </plugin>\n") % (ver, jvm, api_, lang)
+            "<configuration><jvmTarget>%s</jvmTarget><apiVersion>%s</apiVersion><languageVersion>%s</languageVersion>%s</configuration>\n      </plugin>\n") % (ver, jvm, api_, lang, ("<args>" + kargs + "</args>") if kargs else "")
+
+IMAGE_ROOT_ATTRS = "# byte-for-byte upstream images (SHA-256 pinned); whitespace is upstream's\n* -whitespace\n"
+
+BUILD_JDK_RELEASE = 21  # JDK 21 toolchain (JAVA_HOME of every gate)
+
+
+def parse_descriptor(data: bytes) -> dict:
+    """Module attribute of a module-info.class (JVMS 4.7.25) plus ModuleMainClass; no third-party parser."""
+    import struct
+    u2 = lambda b, o: struct.unpack(">H", b[o:o + 2])[0]
+    n, pos, cp, i = u2(data, 8), 10, {}, 1
+    while i < n:
+        tag = data[pos]; pos += 1
+        if tag == 1:
+            ln = u2(data, pos); cp[i] = data[pos + 2:pos + 2 + ln].decode("utf-8", "replace"); pos += 2 + ln
+        elif tag in (7, 8, 16, 19, 20):
+            cp[i] = ("ref", u2(data, pos)); pos += 2
+        elif tag in (3, 4, 9, 10, 11, 12, 17, 18):
+            pos += 4
+        elif tag in (5, 6):
+            pos += 8; i += 1
+        elif tag == 15:
+            pos += 3
+        else:
+            raise ValueError("constant pool tag %d" % tag)
+        i += 1
+    name = lambda k: cp[cp[k][1]] if isinstance(cp[k], tuple) else cp[k]
+    pos += 6
+    pos += 2 + 2 * u2(data, pos)  # interfaces
+    for _ in range(2):  # fields, methods (none in a descriptor)
+        assert u2(data, pos) == 0, "module-info with members"
+        pos += 2
+    out = {"major": u2(data, 6), "name": "", "open": False, "version": "", "requires": [], "exports": [], "opens": [], "uses": [], "provides": [], "main": ""}
+    ac = u2(data, pos); pos += 2
+    for _ in range(ac):
+        an = cp[u2(data, pos)]; al = struct.unpack(">I", data[pos + 2:pos + 6])[0]; b = data[pos + 6:pos + 6 + al]; pos += 6 + al
+        if an == "ModuleMainClass":
+            out["main"] = name(u2(b, 0)).replace("/", ".")
+        if an != "Module":
+            continue
+        out["name"], out["open"] = name(u2(b, 0)), bool(u2(b, 2) & 0x20)
+        out["version"] = cp[u2(b, 4)] if u2(b, 4) else ""
+        o = 6
+        for _r in range(u2(b, o)):
+            mod, fl = name(u2(b, o + 2)), u2(b, o + 4)
+            if mod != "java.base":
+                out["requires"].append((mod, bool(fl & 0x20), bool(fl & 0x40)))
+            o += 6
+        o += 2
+        for key in ("exports", "opens"):
+            cnt = u2(b, o); o += 2
+            for _e in range(cnt):
+                pkg, tc = name(u2(b, o)).replace("/", "."), u2(b, o + 4)
+                out[key].append((pkg, [name(u2(b, o + 6 + 2 * t)) for t in range(tc)]))
+                o += 6 + 2 * tc
+        cnt = u2(b, o); o += 2
+        out["uses"] = [name(u2(b, o + 2 * t)).replace("/", ".").replace("$", ".") for t in range(cnt)]
+        o += 2 * cnt
+        cnt = u2(b, o); o += 2
+        for _p in range(cnt):
+            svc, wc = name(u2(b, o)).replace("/", ".").replace("$", "."), u2(b, o + 2)
+            out["provides"].append((svc, [name(u2(b, o + 4 + 2 * w)).replace("/", ".").replace("$", ".") for w in range(wc)]))
+            o += 4 + 2 * wc
+    return out
+
+
+def descriptor_source(d: dict, origin: str) -> str:
+    lines = ["// NOTICE: declaration generated from the published %s (class version %d); the published sources jar" % (origin, d["major"]),
+             "// carries no module-info.java (upstream generates the descriptor in its build). No other content.",
+             "%smodule %s {" % ("open " if d["open"] else "", d["name"])]
+    lines += ["    requires %s%s%s;" % ("static " if st else "", "transitive " if tr else "", m) for m, tr, st in d["requires"]]
+    lines += ["    exports %s%s;" % (pk, (" to " + ", ".join(to)) if to else "") for pk, to in d["exports"]]
+    lines += ["    opens %s%s;" % (pk, (" to " + ", ".join(to)) if to else "") for pk, to in d["opens"]]
+    lines += ["    uses %s;" % u for u in d["uses"]]
+    lines += ["    provides %s with %s;" % (sv, ", ".join(w)) for sv, w in d["provides"]]
+    return "\n".join(lines + ["}", ""])
+
+
+MODITECT_EXEC = ("<execution><id>add-module-info-%s</id><phase>package</phase><goals><goal>add-module-info</goal></goals><configuration>"
+                 "<jvmVersion>%s</jvmVersion><overwriteExistingFiles>true</overwriteExistingFiles><failOnWarning>false</failOnWarning>%s"
+                 "<module><moduleInfoFile>${project.basedir}/src/main/descriptor/%s/module-info.java</moduleInfoFile></module></configuration></execution>")
+DESCRIPTOR_EXEC = ("<execution><id>module-descriptor-%s</id><phase>process-classes</phase><goals><goal>compile</goal></goals><configuration>"
+                   "<release>%d</release><compileSourceRoots><compileSourceRoot>${project.basedir}/src/main/descriptor/%s</compileSourceRoot></compileSourceRoots>"
+                   "<multiReleaseOutput>%s</multiReleaseOutput><compilerArgs>%s</compilerArgs></configuration></execution>")
+
+
+OVERLAY_ROOT = Path("K:/m3-work/donors/overlays")  # fetch_overlays.py output
+OVERLAY_EXEC = ("<execution><id>multi-release-%s</id><phase>process-classes</phase><goals><goal>compile</goal></goals><configuration>"
+                "<release>%s</release><compileSourceRoots><compileSourceRoot>${project.basedir}/src/main/versions/%s</compileSourceRoot></compileSourceRoots>"
+                "<multiReleaseOutput>true</multiReleaseOutput></configuration></execution>")
+APIJAR_EXEC = ("<execution><id>multi-release-%s-apijar</id><phase>process-classes</phase><goals><goal>exec</goal></goals><configuration>"
+               "<executable>${java.home}/bin/javac</executable><arguments>%s</arguments></configuration></execution>")
+SHADE_FROM_PUBLISHED_POM = {"jackson-core"}  # artifact -> shade <configuration> copied from the published pom
+
+
+def published_shade_configuration(pom: Path) -> str:
+    if not pom.is_file():
+        return ""
+    text = pom.read_text(encoding="utf-8", errors="replace")
+    m = re.search(r"<artifactId>maven-shade-plugin</artifactId>(.*?)</plugin>", text, re.S)
+    if not m:
+        return ""
+    body = re.sub(r"<version>[^<]*</version>", "", m.group(1), count=1)  # the version is pinned by the generator
+    ver = pom.parent.name  # Maven layout: <group>/<artifact>/<version>/<artifact>-<version>.pom
+    props = {}
+    pm = re.search(r"<properties>(.*?)</properties>", text, re.S)
+    if pm:
+        props.update({k: v.strip() for k, v in re.findall(r"<([A-Za-z0-9._-]+)>([^<]*)</\1>", pm.group(1))})
+    props.update({"project.version": ver, "project.version.underscore": ver.replace(".", "_").replace("-", "_")})  # published coordinates win
+    body = re.sub(r"\$\{([^}]+)\}", lambda k: props.get(k.group(1), k.group(0)), body)  # upstream build properties, published values
+    return re.sub(r"\s+", " ", body).strip()
+
+
+def published_base_release(jar: Path) -> int:
+    """release = highest class version of the published base classes - 44 (floor 8); 0 when unknown."""
+    if not jar.is_file():
+        return 0
+    top = 0
+    with zipfile.ZipFile(jar) as z:
+        for n in z.namelist():
+            if n.endswith(".class") and not n.startswith("META-INF/") and not n.endswith("module-info.class"):
+                b = z.read(n)[6:8]
+                top = max(top, (b[0] << 8) | b[1])
+    return max(8, top - 44) if top else 0
 
 
 def sha256(p: Path) -> str:
@@ -245,11 +383,16 @@ def main() -> int:
         if st == "PASS" and gate is not None and gate["verdict"] not in ADMISSIBLE:
             st = "API_SURFACE_" + gate["verdict"]
             p = dict(p, reason="API_SURFACE_%s vs the published jar (missing classes %s, differing members %s/%s; diff %s)" % (gate["verdict"], gate["missing_classes"], gate["real_published_only_lines"], gate["real_built_only_lines"], gate["diff"]))
+        if st == "FAILED" and [x for x in manifest if x.endswith(".java")] == ["module-info.java"] and p.get("requires") and all(status.get(d_) == "PASS" for d_ in p["requires"].split(",") if d_):
+            st = "PASS"
+            p = dict(p, reason=(p.get("reason", "") + ";DESCRIPTOR_ONLY_AGGREGATE (runner jars carry no module names; proven by the Maven module build and the descriptor gate)").lstrip(";"))
         if st == "PASS":
             mdir = args.repo / args.module_root / module_dir(r)
             kind = "MODULE"
         else:
             mdir = args.repo / args.image_root / did
+            (args.repo / args.image_root).mkdir(parents=True, exist_ok=True)
+            (args.repo / args.image_root / ".gitattributes").write_text(IMAGE_ROOT_ATTRS, encoding="utf-8", newline="\n")
             kind = "IMAGE"
         if mdir.exists():
             shutil.rmtree(mdir)
@@ -264,16 +407,20 @@ def main() -> int:
             delombok_dir = receipts[did][1].parent / DELOMBOK_BUILD_DIR
         elif kind == "MODULE" and alt_build is not None and (alt_build / "delombok").is_dir():
             delombok_dir = alt_build / "delombok"
+        descriptor_only = kind == "MODULE" and [x for x in manifest if x.endswith(".java")] == ["module-info.java"]  # aggregate artifact
         for path, (nbytes, digest) in sorted(manifest.items()):
             src = image / path
             if path in ("META-INF/MANIFEST.MF",) or path.startswith("META-INF/maven/") or (path.startswith("META-INF/") and path.endswith((".SF", ".RSA", ".DSA", ".EC"))):
                 target_rel = "upstream-excluded/" + path if kind == "MODULE" else path
                 fk = "unmodified-build-metadata"
-            elif path.endswith(".kt") and kind == "MODULE" and r["artifact"] in KOTLIN:
+            elif path.endswith(".kt") and kind == "MODULE" and kcfg(r):
                 target_rel = "src/main/kotlin/" + path
                 fk = "unmodified-production-kotlin"
             elif path.endswith(".java"):
-                if kind == "MODULE" and (path.startswith("META-INF/versions/") or path.startswith("java/") or (path.endswith("module-info.java") and (r["artifact"] in EXCLUDE_MODULE_INFO or LEGACY.get(r["artifact"], RELEASE.get(r["artifact"], 8)) < 9))):
+                if kind == "MODULE" and re.match(r"META-INF/versions/\d+/.+\.java$", path) and not path.endswith("module-info.java") and int(path.split("/")[2]) <= BUILD_JDK_RELEASE:
+                    target_rel = "src/main/versions/" + path.split("/", 2)[2]
+                    fk = "unmodified-production-overlay"
+                elif kind == "MODULE" and (path.startswith("META-INF/versions/") or path.startswith("java/") or (path.endswith("module-info.java") and not descriptor_only and (r["artifact"] in EXCLUDE_MODULE_INFO or LEGACY.get(r["artifact"], published_base_release(published_jar) or RELEASE.get(r["artifact"], 8)) < 9))):
                     target_rel = "upstream-excluded/" + path
                     fk = "unmodified-production-excluded-from-compilation"
                     excluded.append(path)
@@ -336,6 +483,19 @@ def main() -> int:
                     completed += 1
                     files.append({"kind": fkind, "repository": (mdir.relative_to(args.repo) / "src/main/resources" / name).as_posix(), "sha256": hashlib.sha256(data).hexdigest(), "upstream": name,
                                   "published_jar": "%s:%s:%s (sha256 %s)" % (r["group"], r["artifact"], r["version"], pj_sha)})
+        shade_patterns = re.findall(r"<pattern>([^<]+)</pattern>", published_shade_configuration(args.store / r["group"].replace(".", "/") / r["artifact"] / r["version"] / (r["artifact"] + "-" + r["version"] + ".pom"))) if r["artifact"] in SHADE_FROM_PUBLISHED_POM else []
+        if kind == "MODULE" and published_jar.is_file():  # source-only resources: upstream does not package them
+            with zipfile.ZipFile(published_jar) as pz:
+                pub_names = set(pz.namelist())
+            res_prefix = (mdir.relative_to(args.repo) / "src/main/resources").as_posix() + "/"
+            for f_ in files:
+                if f_["repository"].startswith(res_prefix) and f_["kind"] in ("unmodified-resource", "unmodified-legal-or-build-reference") and f_["upstream"] not in pub_names \
+                        and not any(f_["upstream"].startswith(pt_) for pt_ in shade_patterns):
+                    keep = mdir / "upstream-source-only" / f_["upstream"]
+                    keep.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.move(str(mdir / "src/main/resources" / f_["upstream"]), str(keep))
+                    f_["repository"] = keep.relative_to(args.repo).as_posix()
+                    f_["kind"] = "unmodified-source-only-not-packaged-upstream"
         natives = sum(1 for f_ in files if f_["repository"].lower().endswith(NATIVE_SUFFIXES) and "/src/main/resources/" in f_["repository"])
         for x in legal + ["SOURCES_MANIFEST.tsv"]:
             shutil.copyfile(image / x, mdir / x)
@@ -382,19 +542,152 @@ def main() -> int:
                 req_ga.add((g_, a_))
                 src_ok = status.get(donor_id(a_, v_)) == "PASS"
                 deps.append((g_, a_, v_ + SUFFIX if src_ok else v_, "provided", True, "fully qualified reference in code (not an import); compile-only"))
+        for g_, a_, v_ in OVERLAY_COMPILE_INPUTS.get(did, []):
+            if (g_, a_) not in req_ga:
+                req_ga.add((g_, a_))
+                deps.append((g_, a_, v_, "provided", True, "published-pom provided input of the multi-release overlay (GraalVM native-image Feature); binary, never shipped"))
         for row in pomcp.get(did, []):
             g_, a_, v_ = row["coordinate"].split(":")[:3]
             if (g_, a_) in req_ga or (g_, a_) == (r["group"], r["artifact"]):
                 continue
             req_ga.add((g_, a_))
             deps.append((g_, a_, v_, BINARY_INPUT_SCOPE, True, "published-pom compile input (%s%s), binary, never shipped" % (row["scope"], ", optional" if row["optional"] == "true" else "")))
-        if r["artifact"] in KOTLIN:
-            deps.append(("org.jetbrains.kotlin", "kotlin-stdlib", KOTLIN[r["artifact"]][0], "provided", True, "Kotlin standard library for the Kotlin facade, compile-only"))
+        if kcfg(r):
+            deps.append(("org.jetbrains.kotlin", "kotlin-stdlib", kcfg(r)[0], "provided", True, "Kotlin standard library for the Kotlin facade, compile-only"))
         for b in build_inputs.get(did, []):
             g, a, v = b["coordinate"].split(":")
             if a == "lombok":
                 continue  # delombok tool only; the delomboked sources do not reference Lombok
             deps.append((g, a, v, BINARY_INPUT_SCOPE, True, "binary build input for an optional adapter (BUILD_INPUTS.tsv)"))
+        if kind == "MODULE" and (OVERLAY_ROOT / did / "GENERATED_SOURCES.json").is_file():  # upstream build-generated sources
+            gen_info = json.loads((OVERLAY_ROOT / did / "GENERATED_SOURCES.json").read_text(encoding="utf-8"))
+            gen_root = OVERLAY_ROOT / did / "generated"
+            for gsrc in sorted(gen_root.rglob("*.java")):
+                rel_ = gsrc.relative_to(gen_root).as_posix()
+                gdst = mdir / "src/main/java" / rel_
+                if gdst.exists():
+                    raise SystemExit("generated source collides with a sources-jar file: %s %s" % (did, rel_))
+                gdst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(gsrc, gdst)
+                files.append({"kind": "upstream-generated-source-at-tag", "repository": gdst.relative_to(args.repo).as_posix(), "sha256": sha256(gdst), "upstream": "generated/" + rel_,
+                              "repository_upstream": gen_info.get("repository", ""), "tag": gen_info.get("tag", ""), "commit": gen_info.get("commit", "")})
+            for keep_ in ("GENERATED_SOURCES.json", "regenerate.sh"):
+                if (OVERLAY_ROOT / did / keep_).is_file():
+                    shutil.copyfile(OVERLAY_ROOT / did / keep_, mdir / keep_)
+                    files.append({"kind": "retained-provenance", "repository": (mdir / keep_).relative_to(args.repo).as_posix(), "sha256": sha256(mdir / keep_), "upstream": keep_})
+        overlay_info = {}
+        if kind == "MODULE" and (OVERLAY_ROOT / did / "OVERLAY_SOURCES.json").is_file():
+            overlay_info = json.loads((OVERLAY_ROOT / did / "OVERLAY_SOURCES.json").read_text(encoding="utf-8"))
+            for of in overlay_info["files"]:
+                if of["release"] == "base":  # supersedes the sources-jar variant in the main compile
+                    bdst = mdir / "src/main/java" / (of["class"] + ".java")
+                    for vdup in sorted((mdir / "src/main/java").glob("*.*/" + of["class"] + ".java")):  # module-source-variant copy
+                        vkeep = mdir / "upstream-excluded" / vdup.relative_to(mdir / "src/main/java")
+                        vkeep.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.move(str(vdup), str(vkeep))
+                        for f_ in files:
+                            if f_["repository"] == vdup.relative_to(args.repo).as_posix():
+                                f_["repository"], f_["kind"] = vkeep.relative_to(args.repo).as_posix(), "unmodified-production-superseded-by-upstream-tag"
+                    if bdst.is_file():
+                        bkeep = mdir / "upstream-excluded" / (of["class"] + ".java")
+                        bkeep.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.move(str(bdst), str(bkeep))
+                        for f_ in files:
+                            if f_["repository"] == bdst.relative_to(args.repo).as_posix():
+                                f_["repository"], f_["kind"] = bkeep.relative_to(args.repo).as_posix(), "unmodified-production-superseded-by-upstream-tag"
+                    bdst.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(OVERLAY_ROOT / did / "base" / (of["class"] + ".java"), bdst)
+                    files.append({"kind": "upstream-base-source-at-tag", "repository": bdst.relative_to(args.repo).as_posix(), "sha256": of["sha256"],
+                                  "upstream": of["upstream_path"], "url": of["url"], "commit": overlay_info["commit"], "tag": overlay_info["tag"]})
+                    continue
+                odst = mdir / "src/main/versions" / of["release"] / (of["class"] + ".java")
+                odst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(OVERLAY_ROOT / did / of["release"] / (of["class"] + ".java"), odst)
+                files.append({"kind": "upstream-overlay-source-at-tag", "repository": odst.relative_to(args.repo).as_posix(), "sha256": of["sha256"],
+                              "upstream": of["upstream_path"], "url": of["url"], "commit": overlay_info["commit"], "tag": overlay_info["tag"]})
+            shutil.copyfile(OVERLAY_ROOT / did / "OVERLAY_SOURCES.json", mdir / "OVERLAY_SOURCES.json")
+            files.append({"kind": "retained-provenance", "repository": (mdir / "OVERLAY_SOURCES.json").relative_to(args.repo).as_posix(), "sha256": sha256(mdir / "OVERLAY_SOURCES.json"), "upstream": "fetch_overlays.py"})
+        overlay_releases = sorted((d_.name for d_ in (mdir / "src/main/versions").iterdir() if d_.is_dir()), key=int) if kind == "MODULE" and (mdir / "src/main/versions").is_dir() else []
+        apijar_rel = {}
+        for bi in overlay_info.get("build_inputs", []):  # upstream build inputs at the tag (apijar API stubs)
+            bdst2 = mdir / "build-inputs" / bi["file"].rsplit("/", 1)[1]
+            bdst2.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(OVERLAY_ROOT / did / bi["file"], bdst2)
+            files.append({"kind": "upstream-build-input-at-tag", "repository": bdst2.relative_to(args.repo).as_posix(), "sha256": bi["sha256"],
+                          "upstream": bi["upstream_path"], "url": bi["url"], "commit": overlay_info["commit"], "tag": overlay_info["tag"]})
+            apijar_rel[bi["release"]] = bdst2.name
+        overlay_execs = [OVERLAY_EXEC % (n_, n_, n_) for n_ in overlay_releases if n_ not in apijar_rel]
+        apijar_execs = []
+        if apijar_rel and published_jar.is_file():
+            with zipfile.ZipFile(published_jar) as pz:
+                ov_major = {n_.split("/")[2]: (pz.read(n_)[6] << 8) | pz.read(n_)[7] for n_ in pz.namelist() if re.match(r"META-INF/versions/\d+/.+\.class$", n_) and not n_.endswith("module-info.class")}
+            for n_ in overlay_releases:
+                if n_ in apijar_rel:
+                    tgt = str(ov_major.get(n_, 55) - 44)
+                    srcs = sorted(x_.relative_to(mdir).as_posix() for x_ in (mdir / "src/main/versions" / n_).rglob("*.java"))
+                    argv = ["-source", tgt, "-target", tgt, "-Xlint:-options", "-proc:none", "-encoding", "UTF-8",
+                            "--patch-module", "java.base=${project.basedir}/build-inputs/" + apijar_rel[n_],
+                            "--add-exports", "java.base/java.lang.foreign=ALL-UNNAMED", "--add-exports", "java.base/jdk.incubator.vector=ALL-UNNAMED",
+                            "-classpath", "${project.build.outputDirectory}", "-d", "${project.build.outputDirectory}/META-INF/versions/" + n_] + ["${project.basedir}/" + x_ for x_ in srcs]
+                    apijar_execs.append(APIJAR_EXEC % (n_, "".join("<argument>%s</argument>" % xml(a_) for a_ in argv)))
+        descriptor_execs, descriptor_notes, versioned_descriptor = [], [], False
+        moditect_execs = []
+        main_mver = ""
+        if kind == "MODULE" and published_jar.is_file():
+            with zipfile.ZipFile(published_jar) as pz:
+                pub_desc = {n_: parse_descriptor(pz.read(n_)) for n_ in pz.namelist() if n_.endswith("module-info.class")}
+            main_root = mdir / "src/main/java/module-info.java"
+            if main_root.is_file() and "module-info.class" not in pub_desc and pub_desc:
+                keep = mdir / "upstream-excluded" / "module-info.java"
+                keep.parent.mkdir(parents=True, exist_ok=True)
+                shutil.move(str(main_root), str(keep))
+                for f_ in files:
+                    if f_["repository"] == main_root.relative_to(args.repo).as_posix():
+                        f_["repository"], f_["kind"] = keep.relative_to(args.repo).as_posix(), "unmodified-production-excluded"
+                excluded.append("module-info.java\tPUBLISHED_DESCRIPTOR_IS_VERSIONED")
+            if main_root.is_file() and "module-info.class" in pub_desc:  # descriptor produced by the main compile: published module version
+                main_mver = ("<moduleVersion>%s</moduleVersion>" % xml(pub_desc["module-info.class"]["version"])) if pub_desc["module-info.class"]["version"] else "<useModuleVersion>false</useModuleVersion>"
+            for dpath, d in sorted(pub_desc.items()):
+                rel_ = d["major"] - 44
+                if dpath == "module-info.class" and main_root.is_file():
+                    continue  # produced by the main compile
+                if rel_ > BUILD_JDK_RELEASE:
+                    descriptor_notes.append("%s: class version %d needs JDK %d (toolchain is JDK %d); not reproduced" % (dpath, d["major"], rel_, BUILD_JDK_RELEASE))
+                    continue
+                slot = "root" if dpath == "module-info.class" else dpath.split("/")[2]
+                cands = (["module-info.java"] if slot == "root" else ["META-INF/versions/%s/module-info.java" % slot]) + ["%s/module-info.java" % d["name"]]
+                dsrc = next((c_ for c_ in cands if c_ in manifest), None)
+                tag_desc = next((x_ for x_ in overlay_info.get("descriptors", []) if x_["release"] == slot), None)
+                ddst = mdir / "src/main/descriptor" / slot / "module-info.java"
+                ddst.parent.mkdir(parents=True, exist_ok=True)
+                shaded_module = r["artifact"] in SHADE_RULES or r["artifact"] in SHADE_FROM_PUBLISHED_POM
+                if not dsrc and tag_desc:  # upstream module-info.java at the release tag (overlay root)
+                    shutil.copyfile(OVERLAY_ROOT / did / slot / "module-info.java", ddst)
+                    files.append({"kind": "upstream-descriptor-source-at-tag", "repository": ddst.relative_to(args.repo).as_posix(), "sha256": tag_desc["sha256"],
+                                  "upstream": tag_desc["upstream_path"], "url": tag_desc["url"], "commit": overlay_info["commit"], "tag": overlay_info["tag"]})
+                    dsrc = "tag:" + tag_desc["upstream_path"]
+                    if shaded_module:
+                        moditect_execs.append(MODITECT_EXEC % (slot, "base" if slot == "root" else slot, "<version>%s</version>" % xml(d["version"]) if d["version"] else "<version></version>", slot))
+                        versioned_descriptor = versioned_descriptor or slot != "root"
+                elif dsrc:
+                    shutil.copyfile(image / dsrc, ddst)
+                    if shaded_module:  # shade drops module-info.class: moditect re-adds it after the shade step
+                        moditect_execs.append(MODITECT_EXEC % (slot, "base" if slot == "root" else slot, "<version>%s</version>" % xml(d["version"]) if d["version"] else "<version></version>", slot))
+                        versioned_descriptor = versioned_descriptor or slot != "root"
+                    files.append({"kind": "unmodified-production-descriptor", "repository": ddst.relative_to(args.repo).as_posix(), "sha256": manifest[dsrc][1], "upstream": dsrc})
+                else:  # upstream generates this descriptor in its build: moditect assembles it from the declaration
+                    ddst.write_text(descriptor_source(d, dpath), encoding="utf-8", newline="\n")
+                    moditect_execs.append(MODITECT_EXEC % (slot, "base" if slot == "root" else slot, "<version>%s</version>" % xml(d["version"]) if d["version"] else "<version></version>", slot))
+                    versioned_descriptor = versioned_descriptor or slot != "root"
+                    files.append({"kind": "descriptor-from-published-jar", "repository": ddst.relative_to(args.repo).as_posix(), "sha256": sha256(ddst), "upstream": dpath,
+                                  "published_jar": "%s:%s:%s (sha256 %s)" % (r["group"], r["artifact"], r["version"], sha256(published_jar))})
+                dargs = ("<arg>--patch-module</arg><arg>%s=${project.build.outputDirectory}</arg>" % xml(d["name"]) if slot == "root" else "")
+                mver = ("<moduleVersion>%s</moduleVersion>" % xml(d["version"])) if d["version"] else "<useModuleVersion>false</useModuleVersion>"  # the published descriptor's version, not the project version
+                if dsrc and not shaded_module:
+                    descriptor_execs.append((DESCRIPTOR_EXEC % (slot, rel_, slot, "false" if slot == "root" else "true", dargs)).replace("<compilerArgs>", mver + "<compilerArgs>", 1))
+                versioned_descriptor = versioned_descriptor or slot != "root"
+                if d["main"]:
+                    descriptor_notes.append("%s: ModuleMainClass %s is written by the jar tool, not javac" % (dpath, d["main"]))
         provenance = {
             "decision": "DIRECT_IMPORT",
             "donor": did, "group": r["group"], "artifact": r["artifact"], "version": r["version"],
@@ -408,11 +701,15 @@ def main() -> int:
             "dependencies": [{"group": g, "artifact": a, "version": v, "scope": s, "optional": o, "form": f} for g, a, v, s, o, f in deps],
             "receipt": {k: rec.get(k, "") for k in ("status", "lock", "sourceRoot", "buildRoot", "distributionSha256", "message") if k in rec},
             "modifications": "No upstream source changes; Maven descriptor and provenance files are Synexia composition (Apache-2.0) and do not relicense the donor.",
-            "consumers": r["consumers"], "files": files,
+            "consumers": r["consumers"], "files": files, "module_descriptors": descriptor_notes or "reproduced (see src/main/descriptor)" if descriptor_execs else descriptor_notes, "multi_release_overlays": {"releases": overlay_releases, "not_reproduced": overlay_info.get("not_reproduced", [])},
         }
         (mdir / "PROVENANCE.json").write_text(json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
         if kind == "MODULE":
-            release = RELEASE.get(r["artifact"], 8)
+            release = published_base_release(published_jar) or RELEASE.get(r["artifact"], 8)  # the published target, not a manual override
+            if descriptor_only:  # the published descriptor's class version decides (junit-jupiter: 53 -> release 9)
+                with zipfile.ZipFile(published_jar) as pz:
+                    aggregate_release = parse_descriptor(pz.read("module-info.class"))["major"] - 44 if "module-info.class" in pz.namelist() else BUILD_JDK_RELEASE
+                release = aggregate_release
             legacy = LEGACY.get(r["artifact"])
             dep_xml = "".join(
                 "    <dependency><groupId>%s</groupId><artifactId>%s</artifactId><version>%s</version>%s%s<!-- %s --></dependency>\n"
@@ -420,7 +717,19 @@ def main() -> int:
                 for g, a, v, s, o, f in deps)
             compiler_cfg = ("<source>%d</source><target>%d</target>" % (legacy, legacy) if legacy else "<release>%d</release>" % release) + "<encoding>%s</encoding>" % ENCODING.get(r["artifact"], "UTF-8")
             extra_args = "".join("<arg>%s</arg>" % xml(a) for a in JAVAC_ARGS.get(r["artifact"], []))
-            extra_plugins = (kotlin_plugin(KOTLIN[r["artifact"]]) if r["artifact"] in KOTLIN else "") + BUILD_PLUGINS.get(r["artifact"], "") + (shade_plugin(SHADE_RULES[r["artifact"]]) if r["artifact"] in SHADE_RULES else "")
+            pub_shade = published_shade_configuration(args.store / r["group"].replace(".", "/") / r["artifact"] / r["version"] / (r["artifact"] + "-" + r["version"] + ".pom")) if r["artifact"] in SHADE_FROM_PUBLISHED_POM else ""
+            if r["artifact"] in SHADE_FROM_PUBLISHED_POM and not pub_shade:
+                pub_shade = published_shade_configuration(args.m2 / r["group"].replace(".", "/") / r["artifact"] / r["version"] / (r["artifact"] + "-" + r["version"] + ".pom"))
+            shade_verbatim = ("      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><version>3.6.0</version>\n"
+                              "        <!-- the published pom's shade configuration, verbatim -->\n"
+                              "        " + pub_shade + "\n      </plugin>\n") if pub_shade else ""
+            moditect_plugin = ("      <plugin><groupId>org.moditect</groupId><artifactId>moditect-maven-plugin</artifactId><version>1.2.2.Final</version>\n"
+                               "        <!-- descriptors upstream generates in its build, assembled from the declaration in src/main/descriptor -->\n"
+                               "        <executions>" + "".join(moditect_execs) + "</executions>\n      </plugin>\n") if moditect_execs else ""
+            extra_plugins = shade_verbatim + (kotlin_plugin(kcfg(r)) if kcfg(r) else "") + ((
+                "      <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version>\n"
+                "        <!-- upstream core-mrjar.gradle: javaN overlays compiled against the JDK N apijar (patched java.base) -->\n"
+                "        <executions>" + "".join(apijar_execs) + "</executions>\n      </plugin>\n") if apijar_execs else "") + BUILD_PLUGINS.get(r["artifact"], "") + (shade_plugin(SHADE_RULES[r["artifact"]]) if r["artifact"] in SHADE_RULES else "")
             pom = f"""<!-- SPDX-License-Identifier: Apache-2.0; build integration only, upstream source remains {xml(lic_name)}. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -440,23 +749,24 @@ def main() -> int:
     <plugins>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.15.0</version>
         <!-- Upstream bytes are compiled as published: no annotation processing, no warnings-as-errors. Synexia integration is checked separately with -Werror. -->
-        <configuration>{compiler_cfg}<proc>none</proc><compilerArgs><arg>-Xlint:all,-options</arg>{extra_args}</compilerArgs></configuration>
-      </plugin>
+        <configuration>{compiler_cfg}{main_mver}<proc>none</proc><compilerArgs><arg>-Xlint:all,-options</arg>{extra_args}</compilerArgs></configuration>
+{("        <executions>" + "".join(overlay_execs + descriptor_execs) + "</executions>\n") if (overlay_execs or descriptor_execs) else ""}      </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.6</version>
         <!-- Published sources jars carry no test suite; the compile and the consumers' own tests are the proof lane. -->
         <configuration><skipTests>true</skipTests></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
-        <configuration>{"<excludes>" + "".join("<exclude>%s</exclude>" % e for e in (sum([ex for (a_, v_), ex in PACKAGING_EXCLUDES.items() if a_ == r["artifact"] and r["version"].startswith(v_)], []) or ["**/.no-default-excludes"])) + "</excludes>"}<archive><manifestEntries>{("<Automatic-Module-Name>%s</Automatic-Module-Name>" % xml(amn)) if amn else "<Synexia-Source-Inline>no upstream Automatic-Module-Name</Synexia-Source-Inline>"}</manifestEntries></archive></configuration>
+        <configuration>{"<excludes>" + "".join("<exclude>%s</exclude>" % e for e in (sum([ex for (a_, v_), ex in PACKAGING_EXCLUDES.items() if a_ == r["artifact"] and r["version"].startswith(v_)], []) + ["META-INF/jpms.args"])) + "</excludes>"}<archive><manifestEntries>{("<Automatic-Module-Name>%s</Automatic-Module-Name>" % xml(amn)) if amn else "<Synexia-Source-Inline>no upstream Automatic-Module-Name</Synexia-Source-Inline>"}{"<Multi-Release>true</Multi-Release>" if (versioned_descriptor or overlay_execs or apijar_execs) else ""}</manifestEntries></archive></configuration>
       </plugin>
-{extra_plugins}    </plugins>
+{extra_plugins}{moditect_plugin}    </plugins>
   </build>
 </project>
 """
             (mdir / "pom.xml").write_text(pom, encoding="utf-8", newline="\n")
             verify = verify_template.replace('"META-INF/third-party/re2j/"', '"META-INF/third-party/%s/"' % module_dir(r)).replace('"Automatic-Module-Name: re2j"', '"Automatic-Module-Name: %s"' % amn if amn else '"Synexia-Source-Inline: no upstream Automatic-Module-Name"')
             (mdir / "verify_source.py").write_text(verify, encoding="utf-8", newline="\n")
-            (mdir / ".gitattributes").write_text("src/** -text\nupstream-excluded/** -text\nLICENSE -text\nUPSTREAM_* -text\nSOURCES_MANIFEST.tsv -text\n", encoding="utf-8", newline="\n")
+            (mdir / ".gitattributes").write_text("src/** -text\nupstream-excluded/** -text\nLICENSE -text\nUPSTREAM_* -text\nSOURCES_MANIFEST.tsv -text\n"
+                                                 "# upstream bytes are SHA-256 pinned in PROVENANCE.json; their whitespace is upstream's\n* -whitespace\n", encoding="utf-8", newline="\n")
         notices = f"""# {r["artifact"]} {r["version"]} source inclusion
 
 {r["artifact"]} is the work of its upstream authors and contributors. Copyright remains with the copyright
