@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 final class M3ObjectResidencyTest {
@@ -28,16 +27,16 @@ final class M3ObjectResidencyTest {
     }
     private static final M3ObjectResidency.Codec<Value> CODEC = new M3ObjectResidency.Codec<>() {
         @Override public byte[] encode(Value value) {
-            return (value.canonicalId + "\n" + value.text).getBytes(StandardCharsets.UTF_8);
+            return (value.canonicalId + "\\n" + value.text).getBytes(StandardCharsets.UTF_8);
         }
         @Override public Value decode(int slot, byte[] bytes) {
-            String[] fields = new String(bytes, StandardCharsets.UTF_8).split("\n", 2);
+            String[] fields = new String(bytes, StandardCharsets.UTF_8).split("\\\\n", 2);
             return new Value(Integer.parseInt(fields[0]), fields[1]);
         }
     };
 
     @Test void lazyCreateAndStableIntegerSlot() {
-        AtomicInteger creates = new AtomicInteger();
+        java.util.concurrent.atomic.AtomicInteger creates = new java.util.concurrent.atomic.AtomicInteger();
         var arena = new M3ObjectResidency<Value>(2,
                 M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU | M3ObjectResidency.PRESSURE_AWARE,
                 1024, 0, slot -> { creates.incrementAndGet(); return new Value(slot, "v" + slot); },
@@ -82,5 +81,27 @@ final class M3ObjectResidencyTest {
         assertThrows(IllegalArgumentException.class, () ->
                 new M3ObjectResidency<Object>(1, M3ObjectResidency.SWAP_SECONDARY,
                         128, 0, slot -> new Object(), null, null));
+    }
+
+    @Test void lruDoesNotSpinWhenNoEvictionStrategyIsConfigured() {
+        var arena = new M3ObjectResidency<String>(2,
+                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU,
+                16, 0, slot -> "slot-" + slot, null, null);
+        arena.use(0, 8, value -> value.length());
+        assertThrows(M3ObjectResidency.BudgetExceededException.class,
+                () -> arena.use(1, 16, value -> value.length()));
+    }
+
+    @Test void residencyAnnotationIsClassRetainedAndExplicit() throws Exception {
+        var annotation = AnnotatedProjection.class.getAnnotation(M3Residency.class);
+        assertNull(annotation, "CLASS retention must not add reflective runtime lookup");
+        assertEquals(M3Residency.Strategy.SWAP, AnnotatedProjection.class
+                .getDeclaredField("marker").getAnnotation(M3Residency.class).strategy());
+    }
+
+    static final class AnnotatedProjection {
+        @M3Residency(flags = M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.SWAP_SECONDARY,
+                estimatedBytes = 128, parent = "owner", strategy = M3Residency.Strategy.SWAP)
+        Object marker;
     }
 }

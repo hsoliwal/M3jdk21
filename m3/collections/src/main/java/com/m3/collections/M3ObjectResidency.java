@@ -143,7 +143,7 @@ public final class M3ObjectResidency<T> {
     private void ensureResident(int slot, long estimatedBytes) {
         State before = stateAt(slot);
         if (before == State.RESIDENT) {
-            if ((flags & PRESSURE_AWARE) != 0) enforceBudget(slot, estimatedBytes);
+            if ((flags & PRESSURE_AWARE) != 0) enforceBudget(slot, 0L);
             return;
         }
         if (before == State.CREATING || before == State.RESTORING || before == State.SWAPPING) {
@@ -236,7 +236,7 @@ public final class M3ObjectResidency<T> {
         int victim = -1;
         long oldest = Long.MAX_VALUE;
         for (int i = 0; i < resident.length; i++) {
-            if (i == excluded || resident[i] == null || active[i] != 0) continue;
+            if (i == excluded || resident[i] == null || active[i] != 0) continue;\n            if ((flags & (SWAP_SECONDARY | RECREATE)) == 0) continue;
             if (touched[i] < oldest) { oldest = touched[i]; victim = i; }
         }
         return victim;
@@ -273,7 +273,7 @@ public final class M3ObjectResidency<T> {
     }
 
     private State stateAtOrAbsent(int slot) { return slot < 0 ? State.ABSENT : stateAt(slot); }
-    private State stateAt(int slot) { return State.values()[Byte.toUnsignedInt(states[slot])]; }
+    private State stateAt(int slot) {\n        return switch (Byte.toUnsignedInt(states[slot])) {\n            case 0 -> State.ABSENT;\n            case 1 -> State.CREATING;\n            case 2 -> State.RESIDENT;\n            case 3 -> State.SWAPPING;\n            case 4 -> State.SWAPPED;\n            case 5 -> State.RESTORING;\n            default -> throw new IllegalStateException("invalid residency state lane");\n        };\n    }
     private void setState(int slot, State state) { states[slot] = (byte) state.ordinal(); }
     private void decision(int slot, State before, State after, String reason) {
         lastDecision = new Decision(slot, before, after, residentBytes, maxResidentBytes, reason);
