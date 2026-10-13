@@ -1,0 +1,43 @@
+name: M3 source-built launcher closure
+
+on:
+  pull_request:
+    paths:
+      - 'm3/synexia-import/pure-int-recipe-custody/install.sh'
+      - 'm3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py'
+      - 'm3/synexia-import/pure-int-recipe-custody/source-launcher-closure-lock.json'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3SourceLauncherClosureRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3SourceLauncherClosureRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-source-launcher-closure-20261013/**'
+      - '.github/workflows/m3-source-launcher-closure.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-installer-regression:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check shell syntax
+        run: bash -n m3/synexia-import/pure-int-recipe-custody/install.sh
+      - name: Run isolated source-launcher refusal tests
+        run: python3 -S m3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py -v
+
+  actual-vendored-closure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install complete pinned source-built test and recipe toolchain
+        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+      - name: Compile and test existing recipe receiver plus launcher closure
+        run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3SourceLauncherClosureRecipeTest \
+            -Dsurefire.failIfNoSpecifiedTests=false test
