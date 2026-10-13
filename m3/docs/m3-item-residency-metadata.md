@@ -65,7 +65,7 @@ Behaviour-only callees (seed): receiver calls on the handle itself, `String.valu
   `kind_word = mask << 2 | class`. Key: FNV-1a 32 over the UTF-16 units of `owner.name+desc@bci`, the same
   function as `ItemResidency.siteKey`. Colliding keys merge conservatively (any non-behaviour site wins).
 
-## Run and counts (executed 2026-10-13)
+## Run and counts (executed 2026-10-13, rerun with SWT snippets)
 
 `M3ItemReferenceScan --jdk --label universe=... --label swt-examples=... --label swt=... --label jface=... --label nebula=...`
 
@@ -73,41 +73,42 @@ Behaviour-only callees (seed): receiver calls on the handle itself, `String.valu
 - **Inputs, hashed in `m3/ports/compiletime/item-residency/ITEM_REFERENCE_INPUTS.tsv`:**
   - all of `jrt:/`;
   - the 121 vendored universe jars of #814's input manifest;
-  - SWT fork `a02236c` `org.eclipse.swt.examples`, 185 sources compiled against SWT 3.135.0 win32;
+  - SWT fork `a02236c` sources compiled against SWT 3.135.0 win32: `org.eclipse.swt.examples` (185 of 185) and
+    `org.eclipse.swt.snippets` (379 of 383);
   - SWT 3.135.0 itself;
   - JFace 3.40.0, JFace Text and `org.eclipse.ui`;
   - 72 Nebula jars.
-- **Coverage:** 69,865 classes scanned; 1,217 methods with sites. There were 0 analysis failures, 0 methods over the
-  frame budget, and 0 bytecode-offset mismatches (every site key carries its exact offset).
-- **Sidecar:** 32 transient types. `item-reference-sites.m3irs` holds 2,348 keys with no collisions.
-  Its SHA-256 is `2266c6759cffee2a3bb14c659ba605ad2af76e195cdd9220e402fbe7d38cf651`.
+- **Excluded snippets:** Snippet174, 195, 209 and 341 need OpenGL, LWJGL or other external jars, so they are left out.
+- **Coverage:** 70,371 classes scanned; 1,428 methods with sites. There were 0 analysis failures, 0 methods over the
+  frame budget, and 0 bytecode-offset mismatches.
+- **Sidecar:** 32 transient types. `item-reference-sites.m3irs` holds 2,876 keys with no collisions.
+  Its SHA-256 is `757caa885155e10e0a844795d5589c69edcafeeb2bbd123460bbd3a4853a7d1d`.
 
 | Corpus | Sites | Behaviour-only | Retains | Unknown (pinned) |
 |---|---:|---:|---:|---:|
-| **all** | 2,348 | 1,113 (47.4%) | 649 (27.6%) | 586 (25.0%) |
-| all, caller scope (outside the item owner's package) | 1,613 | 834 (51.7%) | 335 | 444 |
-| SWT examples (callers) | 622 | 473 (76.0%) | 87 | 62 |
-| SWT examples, `TableItem` | 157 | 128 | 17 | 12 |
-| SWT examples, `TreeItem` | 68 | 26 | 12 | 30 |
+| **all** | 2,876 | 1,511 (52.5%) | 701 (24.4%) | 664 (23.1%) |
+| all, caller scope (outside the item owner's package) | 2,141 | 1,232 (57.5%) | 387 | 522 |
+| SWT examples + snippets | 1,171 | 888 (75.8%) | 142 | 141 |
+| SWT examples only | 643 | 490 (76.2%) | 90 | 63 |
+| SWT snippets only | 528 | 398 (75.4%) | 52 | 78 |
+| SWT examples + snippets, `TableItem` | 253 | 210 | 24 | 19 |
+| SWT examples + snippets, `TreeItem` | 217 | 99 | 31 | 87 |
 | JFace (callers) | 270 | 93 | 83 | 94 |
 | Nebula | 921 | 412 | 290 | 219 |
-| Nebula, caller scope | 420 | 222 | 82 | 116 |
 | SWT 3.135.0 (owner internals plus custom) | 247 | 89 | 103 | 55 |
 | JDK, `javax/swing/tree/TreePath` | 267 | 29 | 83 | 155 |
 | vendored universe (121 jars) | 0 | 0 | 0 | 0 |
 
-By obtaining instruction: `invoke` gives 1,740 sites (704 / 541 / 495) and `new` gives 608 (409 / 108 / 91).
+By obtaining instruction: `invoke` gives 1,884 sites (805 / 567 / 512) and `new` gives 992 (706 / 134 / 152).
 
 Answer to "half the time the user wants just the behaviour":
 
-- 47.4% of all obtaining sites are proven behaviour-only.
-- 51.7% of caller sites are, and 76.0% in the SWT examples.
+- 52.5% of all item-obtaining sites are proven behaviour-only.
+- 57.5% of caller sites are, and about 76% in SWT's own examples and snippets.
 - Every other site keeps a pinned handle.
 - The 121 universe jars are non-UI libraries and obtain no item handles.
 
 **NOT_RUN:**
 
-- SWT snippets: the compile left 0 classes, because Snippet174 and Snippet195 need OpenGL/LWJGL jars and the
-  exclusion step did not match the failing paths. This is queued in SWT #122 `TESTS_TO_RUN.md` #5.
 - Annotated (`@M3Transient`) corpora: none were in the inputs, so `annotated=0`; the seeds drove the run.
 - A Maven build of the module: the tests ran with `javac -Xlint:all -Werror` plus junit-platform-console, 2/2 pass.

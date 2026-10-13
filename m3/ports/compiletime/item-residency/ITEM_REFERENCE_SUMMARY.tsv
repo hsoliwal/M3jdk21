@@ -1,8 +1,8 @@
 bucket	behaviour_only	retains	unknown	total
-ALL	1113	649	586	2348
-OBTAIN	invoke	704	541	495	1740
-OBTAIN	new	409	108	91	608
-SCOPE	caller	834	335	444	1613
+ALL	1511	701	664	2876
+OBTAIN	invoke	805	567	512	1884
+OBTAIN	new	706	134	152	992
+SCOPE	caller	1232	387	522	2141
 SCOPE	internal	279	314	142	735
 jdk	29	83	155	267
 jdk	SCOPE	caller	20	51	131	202
@@ -58,21 +58,22 @@ swt	org/eclipse/swt/widgets/TaskItem	2	1	0	3
 swt	org/eclipse/swt/widgets/ToolItem	4	10	1	15
 swt	org/eclipse/swt/widgets/TreeColumn	5	0	8	13
 swt	org/eclipse/swt/widgets/TreeItem	21	57	30	108
-swt-examples	490	90	63	643
-swt-examples	SCOPE	caller	473	87	62	622
+swt-examples	888	142	141	1171
+swt-examples	SCOPE	caller	871	139	140	1150
 swt-examples	SCOPE	internal	17	3	1	21
-swt-examples	org/eclipse/swt/custom/CTabItem	17	1	0	18
+swt-examples	org/eclipse/swt/custom/CTabItem	32	2	0	34
 swt-examples	org/eclipse/swt/examples/accessibility/CTableColumn	13	2	1	16
 swt-examples	org/eclipse/swt/examples/accessibility/CTableItem	4	1	0	5
-swt-examples	org/eclipse/swt/widgets/CoolItem	13	6	0	19
-swt-examples	org/eclipse/swt/widgets/ExpandItem	2	0	0	2
+swt-examples	org/eclipse/swt/widgets/CoolItem	20	7	0	27
+swt-examples	org/eclipse/swt/widgets/ExpandItem	7	1	0	8
 swt-examples	org/eclipse/swt/widgets/Item	0	0	1	1
-swt-examples	org/eclipse/swt/widgets/MenuItem	137	19	6	162
-swt-examples	org/eclipse/swt/widgets/TabItem	8	3	2	13
-swt-examples	org/eclipse/swt/widgets/TableColumn	35	1	4	40
-swt-examples	org/eclipse/swt/widgets/TableItem	128	17	12	157
-swt-examples	org/eclipse/swt/widgets/ToolItem	91	26	3	120
-swt-examples	org/eclipse/swt/widgets/TrayItem	0	1	0	1
-swt-examples	org/eclipse/swt/widgets/TreeColumn	16	1	4	21
-swt-examples	org/eclipse/swt/widgets/TreeItem	26	12	30	68
-META	classes_with_sites_scanned=69865	methods_with_sites=1217	analysis_failed=0	over_budget=0	offset_mismatch_methods=0	transient_types=32
+swt-examples	org/eclipse/swt/widgets/MenuItem	218	29	8	255
+swt-examples	org/eclipse/swt/widgets/TabItem	23	3	2	28
+swt-examples	org/eclipse/swt/widgets/TableColumn	93	8	10	111
+swt-examples	org/eclipse/swt/widgets/TableItem	210	24	19	253
+swt-examples	org/eclipse/swt/widgets/TaskItem	5	2	0	7
+swt-examples	org/eclipse/swt/widgets/ToolItem	121	30	3	154
+swt-examples	org/eclipse/swt/widgets/TrayItem	2	1	0	3
+swt-examples	org/eclipse/swt/widgets/TreeColumn	41	1	10	52
+swt-examples	org/eclipse/swt/widgets/TreeItem	99	31	87	217
+META	classes_with_sites_scanned=70371	methods_with_sites=1428	analysis_failed=0	over_budget=0	offset_mismatch_methods=0	transient_types=32

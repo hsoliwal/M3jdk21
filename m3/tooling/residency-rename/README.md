@@ -46,8 +46,10 @@ Copies into `java.desktop` internals are an explicit relicence, recorded in
 - A source that does not match its pinned hash exits 4.
 - A transform that does not reproduce the expected bytes exits 5.
 
-**Run status.**
+**Run status (2026-10-13, JDK 21.0.9).**
 
-- The sealer ran (CPU).
-- The Java applier has not been run yet; it is held by the test pause (`TESTS_TO_RUN.md` #8 on SWT #122).
-- The Swing/AWT agent applies the rename into `m3/ports/swing-viewport` and owns that module.
+- Source: SWT worktree at `c978f5d3` (`core.autocrlf=false`). Its engine files are byte-identical to `136df9c6`.
+- First run: `CHANGED 21 OF 21`. Second run: `CHANGED 0 OF 21` (fixed point).
+- 0 residual `org.eclipse.swt` references remain.
+- The renamed tree compiles standalone (`javac --release 21 -Xlint:all`, 52 classes, clean).
+- The Swing/AWT agent owns `m3/ports/swing-viewport` and receives the applied tree; this recipe does not write into that module on this branch.
