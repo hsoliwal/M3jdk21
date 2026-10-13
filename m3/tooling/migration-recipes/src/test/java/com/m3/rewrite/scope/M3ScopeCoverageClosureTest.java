@@ -109,9 +109,10 @@ final class M3ScopeCoverageClosureTest {
                 "com.m3.rewrite.backport.M3Jep510KdfSecurityTestsRecipe",
                 "com.m3.rewrite.backport.M3Jep510KdfCandidateRecipe",
                 "com.m3.rewrite.backport.M3ReleaseJepAuthorityRepairRecipe",
-                "com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe");
+                "com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe",
+                "com.m3.rewrite.semantic.M3SemanticHashRecipe");
 
-        assertEquals(15, com.synexia.rewrite.M3RecipeScopeRegistry.size());
+        assertEquals(16, com.synexia.rewrite.M3RecipeScopeRegistry.size());
         assertEquals(targetNames.size(), M3RecipeScopeRegistry.targetOverlaySize());
         assertEquals(
                 com.synexia.rewrite.M3RecipeScopeRegistry.size() + targetNames.size(),

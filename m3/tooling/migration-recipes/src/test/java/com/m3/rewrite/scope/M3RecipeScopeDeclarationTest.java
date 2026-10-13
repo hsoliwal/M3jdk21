@@ -27,6 +27,7 @@ import com.m3.rewrite.backport.M3Jep510KdfSecurityTestsRecipe;
 import com.m3.rewrite.backport.M3Jep510KdfCandidateRecipe;
 import com.m3.rewrite.backport.M3ReleaseJepAuthorityRepairRecipe;
 import com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe;
+import com.m3.rewrite.semantic.M3SemanticHashRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
@@ -36,9 +37,9 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(15, com.synexia.rewrite.M3RecipeScopeRegistry.size());
-        assertEquals(16, M3RecipeScopeRegistry.targetOverlaySize());
-        assertEquals(31, M3RecipeScopeRegistry.size());
+        assertEquals(16, com.synexia.rewrite.M3RecipeScopeRegistry.size());
+        assertEquals(17, M3RecipeScopeRegistry.targetOverlaySize());
+        assertEquals(33, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -64,6 +65,7 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep510KdfCandidateRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3ReleaseJepAuthorityRepairRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SynexiaImportInventoryRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3SemanticHashRecipe.class.getName()));
         var synexiaImport = M3RecipeScopeRegistry.require(M3SynexiaImportInventoryRecipe.class);
         assertEquals(M3EditScope.MULTI_MODULE, synexiaImport.minimumScope());
         assertEquals(M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING, synexiaImport.contractMode());
@@ -200,7 +202,8 @@ final class M3RecipeScopeDeclarationTest {
                 M3Java21ConvergenceRecipe.class,
                 M3ReleaseJepAuthorityRepairRecipe.class,
                 M3Jdk8357439JcmdCompletionBackportRecipe.class,
-                M3SynexiaImportInventoryRecipe.class)) {
+                M3SynexiaImportInventoryRecipe.class,
+                M3SemanticHashRecipe.class)) {
             assertEquals(
                     M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
                     M3RecipeScopeRegistry.require(recipe).contractMode());
