@@ -123,7 +123,7 @@ final class M3Jep474ProofRefreshRecipeTest {
         String workflow = M3Jep474ProofRefreshRecipe.after(WORKFLOW);
         String receipt = M3Jep474ProofRefreshRecipe.after(RECEIPT);
 
-        assertTrue(workflow.contains("m3/jep474-proof-refresh-20261007"));
+        assertTrue(workflow.contains("m3/jep474-proof-refresh-20261013"));
         assertTrue(workflow.contains("actions/checkout@v5"));
         assertTrue(workflow.contains("actions/setup-java@v5"));
         assertTrue(
@@ -138,11 +138,15 @@ final class M3Jep474ProofRefreshRecipeTest {
 
         assertTrue(
                 receipt.contains(
-                        "proof_refresh_base\t80b8534ad1e45002185fb3eeab233f98d3a7c0bd"));
-        assertTrue(receipt.contains("previous_failed_run\t37409218603"));
+                        "proof_refresh_base\\t3799df0b88d169064b610481400ec4edacec1d2e"));
+        assertTrue(receipt.contains("previous_failed_run\t37581791325"));
         assertTrue(
                 receipt.contains(
-                        "previous_failure\tGITHUB_ENV_LITERAL_BACKSLASH_N_PATH"));
+                        "previous_failure\tSTALE_STRING_MINDEX_BOOTSTRAP_NO_SUCH_FIELD_FIXED_BY_MERGED_STRING_M3_STARTUP_REPAIR"));
+        assertTrue(
+                workflow.contains(
+                        "BASE_SHA=\"3799df0b88d169064b610481400ec4edacec1d2e\""));
+        assertTrue(workflow.contains("M3Jep474ProofRefreshRecipeTest"));
     }
 
     @Test
