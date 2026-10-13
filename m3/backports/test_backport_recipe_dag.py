@@ -254,7 +254,7 @@ class BackportRecipeDagTest(unittest.TestCase):
             saw_broad_scope = False
             for _work_id, _state, packet_path in packets:
                 with packet_path.open("r", encoding="utf-8", newline="") as handle:
-                    rows = list(csv.DictReader(handle, delimiter="\\t"))
+                    rows = list(csv.DictReader(handle, delimiter="\t"))
                 for row in rows:
                     self.assertEqual("false", row["scope_promotion_approved"])
                     if row["scope"] != "FILE":
