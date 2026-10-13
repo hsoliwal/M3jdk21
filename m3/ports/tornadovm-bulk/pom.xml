@@ -79,7 +79,7 @@
             <arg>java.base=${project.build.directory}/bulk-patch-classes</arg>
             <arg>--add-exports</arg>
             <arg>java.base/jdk.internal.vm.parallel=ALL-UNNAMED</arg>
-            <arg>-Xlint:all</arg>
+            <arg>-Xlint:all,-preview</arg>
             <arg>-Werror</arg>
           </compilerArgs>
         </configuration>
