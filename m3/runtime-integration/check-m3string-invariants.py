@@ -1316,6 +1316,36 @@ if re.sub(r"\s+", "", accounting) != (
         "privatestaticvoidrelease(longbytes){LOCAL_NATIVE_BYTES.addAndGet(-bytes);}"):
     fail("VM-local M3 native budget release control flow changed")
 
+# Constructor ownership must match both ways each LocalRef enters its bucket.
+if pool_code.count("new LocalRef(") != 2:
+    fail("VM-local M3 LocalRef construction paths changed")
+retain_start = pool_code.find("private static M3String retain(")
+retain_open = pool_code.find("{", retain_start)
+retain_end = java_block_end(pool_code, retain_open)
+if retain_start < 0 or retain_open < 0 or retain_end < 0:
+    fail("VM-local M3 LocalRef retain path missing")
+retain_method = pool_code[retain_start:retain_end + 1]
+if re.sub(r"\s+", "", retain_method) != (
+        "privatestaticM3Stringretain(LocalBucketbucket,Fingerprintfingerprint,"
+        "M3StringAtomcreated,longbytes){bucket.values.add(newLocalRef(created,"
+        "fingerprint,bucket,bytes));returnM3String.whole(created);}"):
+    fail("VM-local M3 retain path does not store the owning bucket")
+local_ref_class = pool_code.find("static final class LocalRef extends WeakReference<M3StringAtom>")
+constructor_start = pool_code.find("LocalRef(", local_ref_class)
+constructor_open = pool_code.find("{", constructor_start)
+constructor_end = java_block_end(pool_code, constructor_open)
+if local_ref_class < 0 or constructor_start < 0 or constructor_open < 0 or constructor_end < 0:
+    fail("VM-local M3 LocalRef constructor ownership missing")
+constructor = pool_code[constructor_start:constructor_end + 1]
+if re.sub(r"\s+", "", constructor) != (
+        "LocalRef(M3StringAtomvalue,Fingerprintfingerprint,LocalBucketbucket,"
+        "longretainedBytes){super(value,LOCAL_QUEUE);this.fingerprint=fingerprint;"
+        "this.bucket=bucket;this.address=value.address;this.retainedBytes=retainedBytes;}"):
+    fail("VM-local M3 LocalRef constructor no longer binds its owning bucket")
+if pool_code.count(
+        "bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));") != 1:
+    fail("VM-local M3 direct LocalRef publication lost bucket ownership")
+
 # Every call must remain a direct invocation; an escaping bound method reference is unsafe.
 if re.search(r"::\s*releaseNative\b", pool_code):
     fail("VM-local M3 native release method reference escaped its monitor")
