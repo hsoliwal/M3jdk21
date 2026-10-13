@@ -111,7 +111,7 @@ jobs:
 
 
   current-tree-receipt:
-    if: \${{ github.event_name == 'push' && !contains(github.event.head_commit.message || '', '[m3-shake-proofed]') }}
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message || '', '[m3-shake-proofed]') }}
     needs:
       - recipe-and-residue-proof
       - jdk-shake-proof
@@ -188,7 +188,7 @@ jobs:
       - name: Commit only the proven dependency receipt
         shell: bash
         env:
-          BRANCH_NAME: \${{ github.ref_name }}
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           set -euo pipefail
           git add m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
@@ -199,7 +199,7 @@ jobs:
           git push origin "HEAD:$BRANCH_NAME"
 
   canonical-readback:
-    if: \${{ contains(github.event.head_commit.message || '', '[m3-shake-proofed]') }}
+    if: ${{ contains(github.event.head_commit.message || '', '[m3-shake-proofed]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
