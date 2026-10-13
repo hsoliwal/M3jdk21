@@ -159,7 +159,7 @@ class BackportRecipeDagTest(unittest.TestCase):
             self.assertTrue(j423)
             self.assertTrue(all(atom.state == "MATERIALIZED_RECIPE" for atom in j423))
             self.assertEqual(
-                ["INVENTORY", "RECIPE", "COMPILE", "TEST", "RUNTIME_PARITY", "FIXED_POINT"],
+                ["INVENTORY", "A3_ATOMIZE", "A3_PATTERNIZE", "A3_DOCUMENT", "A3_FIXED_POINT", "RECIPE", "COMPILE", "TEST", "RUNTIME_PARITY", "FIXED_POINT"],
                 [atom.phase for atom in j423],
             )
             self.assertEqual("MULTI_MODULE", j423[0].scope)
@@ -218,18 +218,22 @@ class BackportRecipeDagTest(unittest.TestCase):
             )
             parsed = [line.split("\t") for line in j423[1:]]
             self.assertEqual(
-                ["inventory", "recipe", "compile", "test", "runtime-parity", "fixed-point"],
+                ["inventory", "a3-atomize", "a3-patternize", "a3-document", "a3-fixed-point", "recipe", "compile", "test", "runtime-parity", "fixed-point"],
                 [row[1] for row in parsed],
             )
             self.assertTrue(all(row[2] == "MULTI_MODULE" for row in parsed))
             self.assertTrue(all(row[3] == "false" for row in parsed))
             self.assertEqual("", parsed[0][5])
             self.assertEqual("inventory", parsed[1][5])
-            self.assertEqual("recipe", parsed[2][5])
+            self.assertEqual("a3-atomize", parsed[2][5])
+            self.assertEqual("a3-patternize", parsed[3][5])
+            self.assertEqual("a3-document", parsed[4][5])
+            self.assertEqual("a3-fixed-point", parsed[5][5])
             self.assertEqual(
                 "m3/backports/recipes/jep-423-region-pinning",
-                parsed[1][4],
+                parsed[5][4],
             )
+            self.assertTrue(parsed[1][4].startswith("A3:JEP-423:A3_ATOMIZE"))
 
             j484 = (packet_dir / "jep-484.tsv").read_text(encoding="utf-8").splitlines()
             recipe_row = [line.split("\t") for line in j484[1:] if "\trecipe\t" in line][0]
