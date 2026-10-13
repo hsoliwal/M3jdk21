@@ -55,7 +55,9 @@ final class Rv32iBulkExecutorAdapterTest {
         assertEquals("tornado-rv32im", tornado.id());
         assertTrue(tornado.priority() > cpu.priority());
         assertTrue(cpu.supports(task(4, 0)));
-        assertTrue(tornado.supports(task(4, 64)));
+        assertTrue(tornado.supports(task(4, 4)));
+        assertTrue(tornado.supports(task(64, 64)));
+        assertTrue(!cpu.supports(task(4, 4)));
         assertTrue(!tornado.supports(task(4, 0)));
         BulkScheduler scheduler = new BulkScheduler(List.of(cpu, tornado));
         assertEquals(List.of("tornado-rv32im", "cpu-rv32im"), scheduler.providerIds());
@@ -67,6 +69,23 @@ final class Rv32iBulkExecutorAdapterTest {
         assertEquals("cpu-rv32im", result.provider());
         assertEquals(5050, ((Rv32iBatch) result.outputs().get(
                 Rv32iBulkExecutorAdapter.OUTPUT_BATCH)).exitCode(0));
+    }
+
+    @Test
+    void localWorkCannotExceedIndependentWorkItems() {
+        assertThrows(IllegalArgumentException.class, () -> task(4, 64));
+        assertThrows(IllegalArgumentException.class, () -> task(4, 5));
+        assertThrows(IllegalArgumentException.class, () -> task(0, 0));
+        assertThrows(IllegalArgumentException.class, () -> task(4, -1));
+
+        var cpu = new Rv32iBulkExecutorAdapter(Rv32iBulkExecutorAdapter.Mode.CPU);
+        var tornado = new Rv32iBulkExecutorAdapter(
+                Rv32iBulkExecutorAdapter.Mode.TORNADO_VERIFIED);
+        for (int count : new int[] {1, 2, 3, 4, 8, 63, 64, 65}) {
+            assertTrue(cpu.supports(task(count, 0)), "CPU " + count);
+            assertTrue(tornado.supports(task(count, count)), "Tornado " + count);
+            assertTrue(!tornado.supports(task(count, 0)), "missing local work " + count);
+        }
     }
 
     @Test
