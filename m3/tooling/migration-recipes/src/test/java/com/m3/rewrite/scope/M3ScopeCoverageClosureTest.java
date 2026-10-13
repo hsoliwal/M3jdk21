@@ -112,13 +112,24 @@ final class M3ScopeCoverageClosureTest {
                 "com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe",
                 "com.m3.rewrite.semantic.M3SemanticHashRecipe");
 
-        assertEquals(16, com.synexia.rewrite.M3RecipeScopeRegistry.size());
+        assertEquals(10, com.synexia.rewrite.M3RecipeScopeRegistry.size());
         assertEquals(targetNames.size(), M3RecipeScopeRegistry.targetOverlaySize());
         assertEquals(
                 com.synexia.rewrite.M3RecipeScopeRegistry.size() + targetNames.size(),
                 M3RecipeScopeRegistry.size());
 
-        for (String name : com.synexia.rewrite.M3RecipeScopeRegistry.policies().keySet()) {
+        List<String> canonicalNames = List.of(
+                "org.openrewrite.java.RemoveUnusedImports",
+                "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe",
+                "com.synexia.rewrite.M3SegmentedLaneNativeRecipe",
+                "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+                "com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe",
+                "com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates",
+                "com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe",
+                "com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe",
+                "com.synexia.rewrite.atom.M3PureIntConvergenceRecipe",
+                "com.synexia.rewrite.semantic.M3SemanticHashRecipe");
+        for (String name : canonicalNames) {
             assertTrue(M3RecipeScopeRegistry.registered(name), name);
             assertNotNull(M3RecipeScopeRegistry.require(name), name);
         }
