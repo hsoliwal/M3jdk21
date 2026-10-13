@@ -75,7 +75,7 @@ jobs:
         run: |
           mvn -B -ntp -f m3/backports/pom.xml verify
 
-      - name: Validate every generated executable packet through canonical Java DAG
+      - name: Parse every packet; validate approved DAGs and report unapproved scope holds
         shell: bash
         run: |
           set -euo pipefail

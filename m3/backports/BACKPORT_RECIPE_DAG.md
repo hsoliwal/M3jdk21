@@ -82,8 +82,17 @@ The generator projects the already-classified domain into the minimum orchestrat
 - library/security/tool/javadoc/javac/jlink/launcher -> `MODULE`;
 - otherwise -> `FILE`.
 
-A packet rooted above FILE sets explicit scope-promotion approval. Repository size alone never
-changes scope.
+Packet generation now emits `scope_promotion_approved=false` for **every atom**, including
+MODULE and MULTI_MODULE candidates. Physical scope classification specifies a review floor; it is
+never approval. An independently reviewed packet may subsequently record explicit approval and
+must still pass the canonical Java DAG, recipe-JUnit, compile/jtreg/runtime, fixed-point and serial
+promotion gates.
+
+`M3BackportPacketBatchMain` parses every generated packet. It composes FILE-safe packets and
+reports broader packets lacking explicit approval as
+`M3_BACKPORT_PACKET_SCOPE_HOLD`; its summary distinguishes validated DAGs from scope holds.
+A batch schema/proof-planning pass is not a Java-21 compatibility or promotion verdict.
+Repository size alone never changes scope.
 
 The existing `M3RecipeDag` remains the enforcement oracle for silent scope escalation.
 
