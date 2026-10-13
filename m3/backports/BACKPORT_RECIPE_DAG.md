@@ -53,10 +53,17 @@ means “author/test the source-pinned reusable recipe first”.
 
 ## Small packet atoms
 
-Each executable JEP/JDK work item receives one bounded packet:
+Each executable JEP/JDK work item receives one bounded packet. The A3 frontier is mandatory for
+both an existing materialized recipe and an `AUTHOR_RECIPE` item; authoring a recipe never bypasses
+current-tree atomization/patternization/document convergence:
+
 
 ```text
 inventory
+ -> a3-atomize
+ -> a3-patternize / IOP
+ -> a3-document
+ -> a3-fixed-point
  -> recipe
  -> compile
  -> test
