@@ -21,8 +21,9 @@ import java.util.Map;
  */
 public final class M3StringGuardRepair {
     static final String MANIFEST_SHA = "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999";
-    static final String BEFORE = "2fd7473ef17d0e4d32b0f7e96f82f8436279c5c18f88295a993c566113a26d4f";
+    static final String BEFORE = "7e74fa0660657e0d08799d6ef72f635a2f08f3e4a4bf7b6d907b45ec3c09a8d6";
     static final String STRING_SHA = "eed88205feda9f64b03515603e5807e3f83961ddeb99dae4ef84bd2034d6f568";
+    static final String RECEIPT_BEFORE_SHA = "afcf8bfed80d74640c16300cc474f2596dc8e1b41717b08a0474499222a20be6";
     static final String CHECKER = "m3/runtime-integration/check-m3string-invariants.py";
     static final String JAVA_TARGET = "m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java";
     static final String PY_TARGET = "m3/runtime-integration/test_string_replacement_routes.py";
@@ -66,7 +67,7 @@ public final class M3StringGuardRepair {
         desired.put(RECEIPT, "key\tvalue\n"
                 + "canonical_repository\thsoliwal/com.synexia\n"
                 + "canonical_crate\tsynexia-openrewrite-recipes/crates/m3-string-replacement-guard\n"
-                + "target_preimage_revision\t63bef2829d762110ad9322504acc0d3b3e391a94\n"
+                + "target_preimage_revision\t2554bdea3ae51671d7a7bd1b5f520f2568315061\n"
                 + "checker_before_sha256\t" + BEFORE + "\n"
                 + "checker_after_sha256\t" + sha256(repaired) + "\n"
                 + "runtime_String_unchanged_sha256\t" + STRING_SHA + "\n"
@@ -85,8 +86,9 @@ public final class M3StringGuardRepair {
         for (var entry : desired.entrySet()) {
             String resource = "post-" + templateIndex++ + ".txt";
             resources.put(prefix + resource, entry.getValue());
-            rows.append(entry.getKey()).append('\t')
-                    .append(entry.getKey().equals(CHECKER) ? BEFORE : "ABSENT").append('\t')
+            String before = entry.getKey().equals(CHECKER) ? BEFORE
+                    : entry.getKey().equals(RECEIPT) ? RECEIPT_BEFORE_SHA : "ABSENT";
+            rows.append(entry.getKey()).append('\t').append(before).append('\t')
                     .append(sha256(entry.getValue())).append('\t').append(resource).append('\n');
         }
         String runtimePath = "src/java.base/share/classes/java/lang/String.java";
