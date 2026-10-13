@@ -20,6 +20,14 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - name: Check exact recipe-owned target bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          source=m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-source-launcher-closure-20261013
+          target=m3/synexia-import/pure-int-recipe-custody
+          cmp "$source/install.sh.txt" "$target/install.sh"
+          cmp "$source/test_source_bootstrap.py.txt" "$target/test_source_bootstrap.py"
       - name: Check shell syntax
         run: bash -n m3/synexia-import/pure-int-recipe-custody/install.sh
       - name: Run isolated source-launcher refusal tests
