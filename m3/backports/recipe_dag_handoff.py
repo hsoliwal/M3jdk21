@@ -47,6 +47,12 @@ REQUIRED_ASSETS = {
 }
 SYNEXIA_ASSET_COMMIT = "850f5b0c2546ee6f645d91e3c341fd744d883480"
 TARGET = "hsoliwal/M3jdk21"
+NEBULA_RECEIVER_SCHEMA = "M3_NEBULA_MASTERED_DAG_RECEIVER_V2"
+NEBULA_RECEIVER_PATH = (
+    Path(__file__).resolve().parents[1]
+    / "synexia-import"
+    / "nebula-mastered-dag-receiver-v2.tsv"
+)
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:
@@ -156,6 +162,34 @@ def canonical_root(rows: Sequence[Mapping[str, str]]) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def validate_nebula_receiver(path: Path = NEBULA_RECEIVER_PATH) -> dict[str, str]:
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        rows = list(reader)
+    if len(rows) != 1:
+        raise ValueError("Nebula successor receiver must contain exactly one row")
+    row = rows[0]
+    expected = {
+        "schema": NEBULA_RECEIVER_SCHEMA,
+        "proof_repository": "hsoliwal/nebula",
+        "proof_ref": "master",
+        "proof_commit": "7b36ce9e3e0c8d1e91324589b38b9d9d5a164356",
+        "recipe_dag_transfer": "ADMITTED",
+        "recipe_custody": "CANONICAL_SYNEXIA_APACHE_HANDOFF",
+        "runtime_source_equivalence": "GREEN_ZERO_DRIFT_FROM_QUALIFIED_RUNTIME",
+        "native_current_head": "PENDING_EXTERNAL_CI",
+        "target_repository": TARGET,
+        "application_policy": "PROVEN_RECIPE_DAG_ONLY",
+        "source_mutation": "false",
+        "semantic_equivalence": "false",
+        "compatibility_authority": "false",
+        "promotion": "false",
+    }
+    if row != expected:
+        raise ValueError(f"Nebula successor receiver drift: {row}")
+    return row
+
+
 def summary(rows: Sequence[Mapping[str, str]]) -> dict[str, object]:
     return {
         "schema": SCHEMA,
@@ -184,7 +218,10 @@ def _args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 def main(argv: Sequence[str] | None = None) -> int:
     args = _args(argv)
     rows = validate(read_rows(args.receipt))
+    nebula = validate_nebula_receiver()
     payload = summary(rows)
+    payload["nebulaReceiverSchema"] = nebula["schema"]
+    payload["nebulaNativeCurrentHead"] = nebula["native_current_head"]
     if args.out is not None:
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(
