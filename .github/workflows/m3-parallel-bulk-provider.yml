@@ -4,7 +4,10 @@ on:
   pull_request:
     paths:
       - 'm3/ports/parallel-bulk/**'
+      - 'm3/docs/name-mapping.json'
       - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3ParallelBulkBridgeReceiverRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3ParallelBulkBridgeNameMappingRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3ParallelBulkBridgeNameMappingRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3ParallelBulkBridgeReceiverRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-parallel-bulk-bridge/**'
       - 'm3/tooling/migration-recipes/tasks/parallel-bulk-bridge/**'
@@ -68,5 +71,13 @@ jobs:
       - name: Receiver hash-pinned materialization and fixed point
         run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3ParallelBulkBridgeReceiverRecipeTest
+          -Dtest=M3ParallelBulkBridgeReceiverRecipeTest,M3ParallelBulkBridgeNameMappingRecipeTest
           test
+      - name: Install receiver artifact for recipe classpath
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -DskipTests install
+      - name: Exact recipe replay must reach fixed point
+        run: >
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          -Drewrite.recipeArtifactCoordinates=com.m3.tooling:migration-recipes:0.1.0-SNAPSHOT
+          -Drewrite.activeRecipes=com.m3.rewrite.backport.M3ParallelBulkBridgeReceiverRecipe,com.m3.rewrite.backport.M3ParallelBulkBridgeNameMappingRecipe
+          rewrite:dryRun
