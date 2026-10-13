@@ -59,12 +59,14 @@ public final class M3ParallelBulkBridgeNameMappingRecipe extends Recipe {
                     return text;
                 }
                 int offset = source.indexOf(ANCHOR);
+                String prefix = offset < 0 ? "" : source.substring(0, offset);
+                String trimmed = prefix.stripTrailing();
                 if (offset < 4 || offset != source.lastIndexOf(ANCHOR)
-                        || !source.substring(0, offset).endsWith("    }")) {
+                        || !trimmed.endsWith("    }")) {
                     throw new IllegalStateException("M3 parallel bulk map anchor drift");
                 }
-                return text.withText(source.substring(0, offset) + ",\n"
-                        + ENTRY + source.substring(offset));
+                return text.withText(trimmed + ",\n" + ENTRY
+                        + prefix.substring(trimmed.length()) + source.substring(offset));
             }
         };
     }
