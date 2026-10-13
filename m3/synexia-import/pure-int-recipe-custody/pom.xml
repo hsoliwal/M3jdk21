@@ -13,7 +13,7 @@
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <openrewrite.version>8.17.1</openrewrite.version>
+    <openrewrite.version>8.17.1-m3-source-1</openrewrite.version>
     <junit.version>5.10.2</junit.version>
   </properties>
 
