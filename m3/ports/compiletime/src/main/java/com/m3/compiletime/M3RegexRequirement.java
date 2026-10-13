@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.compiletime;
 
+import com.m3.precompute.M3RegexShape;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -116,9 +117,32 @@ public final class M3RegexRequirement {
         if (pure != null && !pure.isEmpty() && !hasSurrogate(pure)) {
             return new Analysis(Kind.PURE_LITERAL, Req.lit(pure), matcherState, "slice");
         }
+        String single = singleCharLiteral(compiled, nodes, matchRoot);
+        if (single != null) {
+            return new Analysis(Kind.PURE_LITERAL, Req.lit(single), matcherState, "char");
+        }
         Req requirement = new Walker(nodes).sequence(matchRoot, null);
         Kind kind = requirement.op() == Req.Op.ALL ? Kind.UNCONSTRAINED : Kind.REQUIRED;
         return new Analysis(kind, requirement, matcherState, "walk");
+    }
+
+    /**
+     * A one-character literal compiles to a single {@code CharProperty}, not a {@code Slice}.
+     * It is admitted only when the existing fail-closed {@link M3RegexShape} decodes the source
+     * to exactly that one non-surrogate character, no flag can widen the predicate, and the
+     * stock engine matches the decoded character.
+     */
+    private static String singleCharLiteral(Pattern compiled, M3PatternNodes nodes, Object matchRoot) {
+        int widening = Pattern.CASE_INSENSITIVE | Pattern.COMMENTS | Pattern.CANON_EQ | Pattern.LITERAL;
+        if ((compiled.flags() & widening) != 0 || !nodes.singleCharThenAccept(matchRoot)) {
+            return null;
+        }
+        M3RegexShape shape = M3RegexShape.analyze(compiled.pattern());
+        if (shape.kind() != M3RegexShape.Kind.LITERAL || shape.literal().length() != 1
+                || hasSurrogate(shape.literal()) || !compiled.matcher(shape.literal()).matches()) {
+            return null;
+        }
+        return shape.literal();
     }
 
     static boolean hasSurrogate(String text) {

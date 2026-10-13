@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
  * </pre>
  */
 public final class M3ConstantRegexHarvester {
-    private static final int ROUNDS = 7;
+    private static final int DEFAULT_ROUNDS = 101;
     private static final int MAX_INPUT_UNITS = 256;
 
     private M3ConstantRegexHarvester() {}
@@ -42,6 +42,8 @@ public final class M3ConstantRegexHarvester {
         String jars = M3CompileTimeStringInventory.arg(args, "--jars", null);
         boolean jdk = List.of(args).contains("--jdk");
         int sampleMod = Integer.parseInt(M3CompileTimeStringInventory.arg(args, "--sample-mod", "128"));
+        int rounds = Integer.parseInt(M3CompileTimeStringInventory.arg(args, "--rounds",
+                Integer.toString(DEFAULT_ROUNDS)));
         ThreadMXBean mx = ManagementFactory.getThreadMXBean();
         Map<String, Long> receipt = new TreeMap<>();
         M3InventoryState state = new M3InventoryState();
@@ -58,7 +60,7 @@ public final class M3ConstantRegexHarvester {
         receipt.put("harvest_classes", state.totals.get(0).getOrDefault("all\tclasses", 0L)
                 + state.totals.get(1).getOrDefault("all\tclasses", 0L));
         List<M3InventoryState.RegexKey> keys = new ArrayList<>(state.regex.values());
-        long[][] costs = measure(keys, mx, receipt);
+        long[][] costs = measure(keys, mx, receipt, rounds);
         String manifest = manifest(jdk, jarList);
         Files.writeString(out.resolve("INPUT_SET_MANIFEST.tsv"), manifest);
         byte[] image = M3ConstantRegexImageWriter.write(keys.stream()
@@ -76,17 +78,17 @@ public final class M3ConstantRegexHarvester {
     }
 
     /**
-     * Per key: median wall ns (of {@value #ROUNDS} rounds) of stock compile and of compile+walk.
+     * Per key: median wall ns (of {@code rounds} rounds) of stock compile and of compile+walk.
      * Thread CPU is read once around each whole pass, so the aggregate is exact up to the
      * platform CPU-clock granularity per pass.
      */
     private static long[][] measure(List<M3InventoryState.RegexKey> keys, ThreadMXBean mx,
-            Map<String, Long> receipt) {
-        long[][] compile = new long[keys.size()][ROUNDS];
-        long[][] analyze = new long[keys.size()][ROUNDS];
+            Map<String, Long> receipt, int rounds) {
+        long[][] compile = new long[keys.size()][rounds];
+        long[][] analyze = new long[keys.size()][rounds];
         long cpuCompile = 0;
         long cpuAnalyze = 0;
-        for (int r = 0; r < ROUNDS; r++) {
+        for (int r = 0; r < rounds; r++) {
             long c0 = mx.getCurrentThreadCpuTime();
             for (int i = 0; i < keys.size(); i++) {
                 long t0 = System.nanoTime();
@@ -106,8 +108,8 @@ public final class M3ConstantRegexHarvester {
         for (int i = 0; i < keys.size(); i++) {
             costs[i] = new long[] {median(compile[i]), median(analyze[i])};
         }
-        long n = (long) keys.size() * ROUNDS;
-        receipt.put("measure_rounds", (long) ROUNDS);
+        long n = (long) keys.size() * rounds;
+        receipt.put("measure_rounds", (long) rounds);
         receipt.put("measure_total_thread_cpu_ns_stock_compile", cpuCompile);
         receipt.put("measure_total_thread_cpu_ns_compile_plus_walk", cpuAnalyze);
         receipt.put("measure_mean_thread_cpu_ns_per_key_stock_compile", n == 0 ? 0 : cpuCompile / n);

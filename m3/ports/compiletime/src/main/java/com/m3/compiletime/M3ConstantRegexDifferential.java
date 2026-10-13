@@ -35,6 +35,9 @@ public final class M3ConstantRegexDifferential {
     private static final com.sun.management.ThreadMXBean MX =
             (com.sun.management.ThreadMXBean) ManagementFactory.getThreadMXBean();
 
+    /** Repetitions of the whole key x input sweep inside one measured pass. */
+    private static int reps = 8;
+
     private M3ConstantRegexDifferential() {}
 
     /** One measured pass. */
@@ -43,6 +46,7 @@ public final class M3ConstantRegexDifferential {
     public static void main(String[] args) throws IOException {
         Path dir = Path.of(M3CompileTimeStringInventory.arg(args, "--harvest", "target/constant-regex"));
         int rounds = Integer.parseInt(M3CompileTimeStringInventory.arg(args, "--rounds", "5"));
+        reps = Integer.parseInt(M3CompileTimeStringInventory.arg(args, "--reps", "8"));
         Map<String, String> receipt = new TreeMap<>();
         M3ConstantRegexImage image = M3ConstantRegexImage.open(dir.resolve("constant-regex.m3ctrx"));
         List<String> inputs = Files.readAllLines(dir.resolve("INPUT_SAMPLE.tsv")).stream().map(M3Tsv::unescape).toList();
@@ -132,6 +136,7 @@ public final class M3ConstantRegexDifferential {
         put(receipt, name, "stock", a);
         put(receipt, name, "gated", b);
         receipt.put(name + "_calls_per_pass", Long.toString(a[0].calls()));
+        receipt.put(name + "_reps_per_pass", Integer.toString(reps));
     }
 
     private static void put(Map<String, String> receipt, String name, String side, Pass[] passes) {
@@ -153,10 +158,12 @@ public final class M3ConstantRegexDifferential {
         long alloc0 = MX.getCurrentThreadAllocatedBytes();
         long cpu0 = MX.getCurrentThreadCpuTime();
         long wall0 = System.nanoTime();
-        for (M3ConstantRegexGate g : gates) {
-            for (String s : inputs) {
-                calls++;
-                hits += op.test(g, s) ? 1 : 0;
+        for (int rep = 0; rep < reps; rep++) {
+            for (M3ConstantRegexGate g : gates) {
+                for (String s : inputs) {
+                    calls++;
+                    hits += op.test(g, s) ? 1 : 0;
+                }
             }
         }
         long wall = System.nanoTime() - wall0;

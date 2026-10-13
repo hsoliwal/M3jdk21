@@ -53,6 +53,7 @@ final class M3PatternNodes {
     private final Class<?> notBehind;
     private final Class<?> start;
     private final Class<?> bnm;
+    private final Class<?> charProperty;
     private final Class<?>[] connectors;
     private final Object accept;
     private final Object lastAccept;
@@ -95,6 +96,7 @@ final class M3PatternNodes {
         notBehind = type("NotBehind");
         start = type("Start");
         bnm = type("BnM");
+        charProperty = type("CharProperty");
         connectors = new Class<?>[] {type("GroupHead"), type("GroupTail"), type("BranchConn")};
         MethodHandles.Lookup p = MethodHandles.privateLookupIn(Pattern.class, lookup);
         accept = p.findStaticVarHandle(Pattern.class, "accept", node).get();
@@ -232,6 +234,11 @@ final class M3PatternNodes {
         StringBuilder text = new StringBuilder(units.length);
         Arrays.stream(units).forEach(text::appendCodePoint);
         return text.toString();
+    }
+
+    /** True when the tree is exactly one single-position character predicate. */
+    boolean singleCharThenAccept(Object matchRoot) {
+        return charProperty.isInstance(matchRoot) && next(matchRoot) == lastAccept;
     }
 
     /** Closed-class admission over every reachable node, bounded by {@code maxNodes}. */

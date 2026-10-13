@@ -28,6 +28,17 @@ class M3RegexRequirementTest {
     }
 
     @Test
+    void oneCharacterLiteralsNeedTheShapeCrossCheck() {
+        assertEquals(new M3RegexRequirement.Analysis(Kind.PURE_LITERAL, Req.lit("."), true, "char"),
+                a("\\.", 0));
+        assertEquals(Req.lit("'"), a("'", 0).requirement());
+        assertEquals(Kind.UNCONSTRAINED, a(".", 0).kind());
+        assertEquals(Kind.UNCONSTRAINED, a("a", Pattern.CASE_INSENSITIVE).kind());
+        assertEquals(Kind.UNCONSTRAINED, a("#", Pattern.COMMENTS).kind());
+        assertEquals(Kind.UNCONSTRAINED, a("\\d", 0).kind());
+    }
+
+    @Test
     void walkerFollowsTheConservativeRules() {
         assertEquals(Req.and(List.of(Req.lit("foo"), Req.lit("bar"))), a("foo\\d+bar", 0).requirement());
         assertEquals(Req.or(List.of(Req.lit("cat"), Req.lit("dog"))), a("cat|dog", 0).requirement());
