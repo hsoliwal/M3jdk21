@@ -21,8 +21,9 @@ import java.util.Map;
  */
 public final class M3StringGuardRepair {
     static final String MANIFEST_SHA = "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999";
-    static final String BEFORE = "2fd7473ef17d0e4d32b0f7e96f82f8436279c5c18f88295a993c566113a26d4f";
+    static final String BEFORE = "0eaa95f80d96be8040aa9584b0ddf3eee3d1e2da40d1bb9d5beef11f3a7e61bb";
     static final String STRING_SHA = "eed88205feda9f64b03515603e5807e3f83961ddeb99dae4ef84bd2034d6f568";
+    static final String RECEIPT_BEFORE_SHA = "22cc4f60884a25f57a341b99f3332b92ae3dca4d83f5ef13d34d77904174011d";
     static final String CHECKER = "m3/runtime-integration/check-m3string-invariants.py";
     static final String JAVA_TARGET = "m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java";
     static final String PY_TARGET = "m3/runtime-integration/test_string_replacement_routes.py";
@@ -31,11 +32,7 @@ public final class M3StringGuardRepair {
     static final String PY_SHA = "1f4fa3977092afd5b44b2df231828497ed954bd3cc777c905550294b9bac7af3";
     record Atom(String before, String after) {}
     private static final List<Atom> ATOMS = List.of(
-        new Atom("\"replace(CharSequence,CharSequence)\": \"M3String replaced = sourceM3.replace(targetM3, replacementM3);\",", "\"replace(CharSequence,CharSequence)\": \"String replaced = m3Replace(storage, trgtStr, targetM3, replStr, replacementM3);\","),
-        new Atom("\"replaceFirst(String,String)\": \"return storage.replaceLiteralRegex(this, regex, replacement, true);\",", "\"replaceFirst(String,String)\": \"String replaced = storage.replaceLiteralRegex(this, regex, replacement, true);\","),
-        new Atom("\"replaceAll(String,String)\": \"return storage.replaceLiteralRegex(this, regex, replacement, false);\",", "\"replaceAll(String,String)\": \"String replaced = storage.replaceLiteralRegex(this, regex, replacement, false);\","),
-        new Atom("\"return new String(storage.replaceEmptyTarget(replacementM3));\",", "\"return new String(sourceM3.replaceEmptyTarget(replacementM3));\","),
-        new Atom("\ncheck_m3string_layout()\n", "\ncheck_m3string_layout()\n\n# Compiler-parsed replacement routes supplement the cheap spelling markers below.\n# This proves source structure only; runtime/jtreg remain semantic authority.\ndef check_m3string_replacement_routes() -> None:\n    java = str(Path(os.environ[\"JAVA_HOME\"]) / \"bin/java\") if os.environ.get(\"JAVA_HOME\") else \"java\"\n    command = [java, \"--source\", \"21\",\n               str(ROOT / \"m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java\"),\n               str(ROOT / \"src/java.base/share/classes/java/lang/String.java\")]\n    try:\n        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=45)\n    except (OSError, subprocess.TimeoutExpired) as error:\n        fail(f\"M3 replacement route compiler unavailable or timed out: {error}\")\n    if result.returncode != 0 or result.stdout.strip() != \"M3_STRING_REPLACEMENT_ROUTES_OK\":\n        fail(f\"M3 replacement route check failed: {result.stderr.strip()} {result.stdout.strip()}\")\n\n\ncheck_m3string_replacement_routes()\n")
+        new Atom("    \"LOCAL_NATIVE_BYTES.addAndGet(-retainedBytes)\",", "    \"AtomicLong LOCAL_NATIVE_BYTES\",\n    \"final long retainedBytes;\",\n    \"reference.releaseNative()\",\n    \"created.nativePayloadBytes()\",\n]:\n    if fragment not in pool:\n        fail(f\"VM-local M3 atom lifecycle missing: {fragment}\")\nif \"ArrayList<M3StringAtom> values\" in pool:\n    fail(\"VM-local M3 atom pool strongly retains native atoms\")\n\nlocal_release_start = pool.find(\"void releaseNative()\")\nlocal_release_end = pool.find(\"\\n        }\", local_release_start)\nif local_release_start < 0 or local_release_end < 0:\n    fail(\"VM-local M3 atom native release method missing\")\nlocal_release = pool[local_release_start:local_release_end]\nfor fragment in [\n    \"if (!released) {\",\n    \"released = true;\",\n    \"if (address != 0L) UNSAFE.freeMemory(address);\",\n    \"release(retainedBytes);\",\n]:\n    if fragment not in local_release:\n        fail(f\"VM-local M3 atom release path missing: {fragment}\")\nif (local_release.count(\"if (!released) {\") != 1\n        or local_release.count(\"released = true;\") != 1\n        or local_release.count(\"UNSAFE.freeMemory(address)\") != 1\n        or local_release.count(\"release(retainedBytes);\") != 1):\n    fail(\"VM-local M3 atom must free and release native payload exactly once\")\nif not (local_release.find(\"released = true;\")\n        < local_release.find(\"UNSAFE.freeMemory(address)\")\n        < local_release.find(\"release(retainedBytes);\")):\n    fail(\"VM-local M3 atom release order is unsafe\")\n\naccounting_start = pool.find(\"private static void release(long bytes)\")\naccounting_end = pool.find(\"\\n    }\", accounting_start)\nif accounting_start < 0 or accounting_end < 0:\n    fail(\"VM-local M3 native budget release helper missing\")\naccounting = pool[accounting_start:accounting_end]\nif accounting.count(\"LOCAL_NATIVE_BYTES.addAndGet(-bytes);\") != 1:\n    fail(\"VM-local M3 native budget release accounting missing or duplicated\")")
     );
     private M3StringGuardRepair() {}
 
@@ -66,7 +63,7 @@ public final class M3StringGuardRepair {
         desired.put(RECEIPT, "key\tvalue\n"
                 + "canonical_repository\thsoliwal/com.synexia\n"
                 + "canonical_crate\tsynexia-openrewrite-recipes/crates/m3-string-replacement-guard\n"
-                + "target_preimage_revision\t63bef2829d762110ad9322504acc0d3b3e391a94\n"
+                + "target_preimage_revision\t2554bdea3ae51671d7a7bd1b5f520f2568315061\n"
                 + "checker_before_sha256\t" + BEFORE + "\n"
                 + "checker_after_sha256\t" + sha256(repaired) + "\n"
                 + "runtime_String_unchanged_sha256\t" + STRING_SHA + "\n"
@@ -85,8 +82,9 @@ public final class M3StringGuardRepair {
         for (var entry : desired.entrySet()) {
             String resource = "post-" + templateIndex++ + ".txt";
             resources.put(prefix + resource, entry.getValue());
-            rows.append(entry.getKey()).append('\t')
-                    .append(entry.getKey().equals(CHECKER) ? BEFORE : "ABSENT").append('\t')
+            String before = entry.getKey().equals(CHECKER) ? BEFORE
+                    : entry.getKey().equals(RECEIPT) ? RECEIPT_BEFORE_SHA : "ABSENT";
+            rows.append(entry.getKey()).append('\t').append(before).append('\t')
                     .append(sha256(entry.getValue())).append('\t').append(resource).append('\n');
         }
         String runtimePath = "src/java.base/share/classes/java/lang/String.java";

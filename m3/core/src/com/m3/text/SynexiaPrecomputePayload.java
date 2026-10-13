@@ -195,11 +195,14 @@ public final class SynexiaPrecomputePayload {
                 "pos_mask", "morphology_mask", "lexical_rank", "utf16_length", "code_point_length",
                 "first_code_point", "last_code_point", "script_ordinal", "frequency_rank",
                 "langdex_flags", "langdex_subject_id", "langdex_feature_bits", "langdex_evidence_mask",
-                "langdex_confidence_permille", "si_decimal_exponent")) result.put(name, Expected.INT);
+                "langdex_confidence_permille", "langdex_lexical_profile_feature_bits",
+                "langdex_lexical_profile_evidence_mask", "langdex_lexical_profile_confidence_permille",
+                "si_decimal_exponent")) result.put(name, Expected.INT);
         for (String name : List.of("total_corpus_tokens", "total_documents",
                 "corpus_count", "stem_id", "lemma_id", "phonetic_id", "presence64", "sim_hash64",
                 "langdex_concept_id", "langdex_frequency", "langdex_lexical_class_mask",
-                "langdex_semantic_class_mask", "langdex_target_lexeme_id", "si_dimension_packed"))
+                "langdex_semantic_class_mask", "langdex_target_lexeme_id",
+                "langdex_lexical_profile_lexical_class_mask", "si_dimension_packed"))
             result.put(name, Expected.LONG);
         result.put("lexicon_fingerprint", Expected.STRING_OR_LONG);
         for (String name : List.of("source_id", "record_id", "source_language", "target_language",
