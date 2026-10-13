@@ -83,7 +83,7 @@ jobs:
       - name: Prove recipe replay scope registration and fixed point
         run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jep485StreamGatherersBackportRecipeTest,J485CurrentRecipeTest,M3RecipeScopeDeclarationTest \
+            -Dtest=M3Jep485StreamGatherersBackportRecipeTest,M3Jep485ProofRefreshRecipeTest,J485CurrentRecipeTest,M3RecipeScopeDeclarationTest \
             test
 
       - name: Prove current J485 Java21 patched module
@@ -240,7 +240,7 @@ jobs:
 
 
   current-tree-receipt:
-    if: \${{ github.event_name == 'push' && !contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
     needs:
       - recipe-dag-proof
       - openjdk-proof
@@ -314,7 +314,7 @@ jobs:
       - name: Commit proof receipt only
         shell: bash
         env:
-          BRANCH_NAME: \${{ github.ref_name }}
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           set -euo pipefail
           git add m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
@@ -325,7 +325,7 @@ jobs:
           git push origin "HEAD:$BRANCH_NAME"
 
   canonical-readback:
-    if: \${{ contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
+    if: ${{ contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
