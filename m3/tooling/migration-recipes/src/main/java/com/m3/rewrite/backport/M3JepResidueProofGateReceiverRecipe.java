@@ -21,7 +21,7 @@ public final class M3JepResidueProofGateReceiverRecipe extends Recipe {
 
     @Override
     public String getDescription() {
-        return "Replays two Python backport-gate atoms from the reviewed exact preimages, "
+        return "Replays three Python/TSV backport-gate atoms from the reviewed exact preimages, "
                 + "rejecting drift and preserving the Java 21 backport acceptance boundary.";
     }
 
