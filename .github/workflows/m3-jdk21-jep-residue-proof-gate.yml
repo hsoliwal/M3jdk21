@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 JDK21 JEP residue proof-gate repair
+
+on:
+  pull_request:
+    paths:
+      - 'm3/backports/jep_residue.py'
+      - 'm3/backports/test_jep_residue.py'
+      - 'm3/backports/recipes/jep-residue-proof-gate/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk21-jep-residue-proof/**'
+      - 'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jep-residue-proof/**'
+      - '.github/workflows/m3-jdk21-jep-residue-proof-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python-gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Diff and Python syntax
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 -m py_compile m3/backports/jep_residue.py m3/backports/test_jep_residue.py
+      - name: Released-JEP residue tests
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v m3/backports/test_jep_residue.py
+          python3 m3/backports/jep_residue.py --root . --out /tmp/m3-jep-residue.tsv
+          cmp /tmp/m3-jep-residue.tsv m3/backports/JEP_RESIDUE_QUEUE.tsv
+
+  java21-recipe-gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Java21 Maven/OpenRewrite receiver replay
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3JepResidueProofGateReceiverRecipeTest \
+            test
