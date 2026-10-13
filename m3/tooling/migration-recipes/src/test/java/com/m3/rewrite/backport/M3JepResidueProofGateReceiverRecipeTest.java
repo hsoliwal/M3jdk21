@@ -19,6 +19,7 @@ import org.openrewrite.text.PlainText;
 
 /** JUnit acceptance gate for the exact Synexia-to-M3JDK21 text receiver. */
 final class M3JepResidueProofGateReceiverRecipeTest {
+    private static final String QUEUE = "m3/backports/JEP_RESIDUE_QUEUE.tsv";
     private static final String SOURCE = "m3/backports/jep_residue.py";
     private static final String TEST = "m3/backports/test_jep_residue.py";
     private static final String PRE =
@@ -31,15 +32,16 @@ final class M3JepResidueProofGateReceiverRecipeTest {
         assertEquals(1, wrapper.getRecipeList().size());
         var receiver = (M3Jdk21HashPinnedTextSnapshotRecipe) wrapper.getRecipeList().getFirst();
         assertEquals("jdk21-jep-residue-proof", receiver.getCrateName());
-        assertEquals(List.of(SOURCE, TEST), receiver.targetPaths());
+        assertEquals(List.of(QUEUE, SOURCE, TEST), receiver.targetPaths());
 
         var ctx = context();
         var before = List.<SourceFile>of(
+                file(QUEUE, resource(PRE + "JEP_RESIDUE_QUEUE.tsv.txt")),
                 file(SOURCE, resource(PRE + "jep_residue.py.txt")),
                 file(TEST, resource(PRE + "test_jep_residue.py.txt")));
         var first = wrapper.run(new InMemoryLargeSourceSet(before), ctx, 1);
         var changes = first.getChangeset().getAllResults();
-        assertEquals(2, changes.size());
+        assertEquals(3, changes.size());
         assertTrue(changes.stream().allMatch(change -> change.getBefore() != null));
         List<SourceFile> after = changes.stream().map(change -> {
             assertNotNull(change.getAfter());
@@ -61,14 +63,15 @@ final class M3JepResidueProofGateReceiverRecipeTest {
 
         var changes = wrapper.run(new InMemoryLargeSourceSet(passed), context(), 1)
                 .getChangeset().getAllResults();
-        assertEquals(2, changes.size());
+        assertEquals(3, changes.size());
         assertTrue(changes.stream().noneMatch(result ->
                 unrelated.getSourcePath().equals(result.getAfter().getSourcePath())));
 
         assertThrows(RuntimeException.class, () -> wrapper.run(
                 new InMemoryLargeSourceSet(List.of(
+                        before.getFirst(),
                         file(SOURCE, resource(PRE + "jep_residue.py.txt") + "# drift\n"),
-                        before.get(1))), context(), 1).getChangeset().getAllResults());
+                        before.get(2))), context(), 1).getChangeset().getAllResults());
         assertThrows(RuntimeException.class, () -> wrapper.run(
                 new InMemoryLargeSourceSet(List.of(before.getFirst())), context(), 1)
                 .getChangeset().getAllResults());
