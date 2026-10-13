@@ -17,12 +17,14 @@
 
 package jdk.internal.vm.parallel;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/** An execution envelope whose one-dimensional primitive result arrays are isolated. */
 public record BulkExecution(Map<String, Object> outputs, String provider, String receiptRoot) {
     public BulkExecution {
-        outputs = Map.copyOf(Objects.requireNonNull(outputs, "outputs"));
+        outputs = snapshot(Objects.requireNonNull(outputs, "outputs"));
         provider = BulkTask.identifier(provider, "provider");
         String root = Objects.requireNonNull(receiptRoot, "receiptRoot");
         if (root.length() != 64) throw new IllegalArgumentException("receiptRoot");
@@ -33,5 +35,30 @@ public record BulkExecution(Map<String, Object> outputs, String provider, String
             }
         }
         receiptRoot = root;
+    }
+
+    /** Returns defensive primitive-array views without transferring canonical result ownership. */
+    @Override
+    public Map<String, Object> outputs() {
+        return snapshot(outputs);
+    }
+
+    private static Map<String, Object> snapshot(Map<String, Object> values) {
+        HashMap<String, Object> copies = new HashMap<>();
+        values.forEach((name, value) -> copies.put(name, copyPrimitiveArray(value)));
+        return Map.copyOf(copies);
+    }
+
+    /** Other reference-valued outputs preserve the existing non-array reference contract. */
+    private static Object copyPrimitiveArray(Object value) {
+        if (value instanceof boolean[] array) return array.clone();
+        if (value instanceof byte[] array) return array.clone();
+        if (value instanceof short[] array) return array.clone();
+        if (value instanceof char[] array) return array.clone();
+        if (value instanceof int[] array) return array.clone();
+        if (value instanceof long[] array) return array.clone();
+        if (value instanceof float[] array) return array.clone();
+        if (value instanceof double[] array) return array.clone();
+        return value;
     }
 }
