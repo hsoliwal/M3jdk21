@@ -37,6 +37,21 @@ final class M3ObjectResidencyTest {
         }
     };
 
+    @Test void parentBitsRemainCanonicalAcrossProjectionRecreation() {
+        var arena = new M3ObjectResidency<String>(2,
+                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU | M3ObjectResidency.RECREATE,
+                8, 0, slot -> "projection-" + slot, null, null);
+        arena.writeParentBits(0, 0b0010L);
+        assertEquals(0b0110L, arena.updateParentBits(0, bits -> bits | 0b0100L));
+        assertEquals(0b0110L, arena.readParentBits(0));
+        arena.use(0, 8, value -> value.length());
+        arena.use(1, 8, value -> value.length()); // LRU releases slot 0 projection.
+        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals(0b0110L, arena.readParentBits(0));
+        assertEquals("projection-0", arena.use(0, 8, value -> value));
+        assertEquals(0b0110L, arena.readParentBits(0));
+    }
+
     @Test void lazyCreateAndStableIntegerSlot() {
         java.util.concurrent.atomic.AtomicInteger creates = new java.util.concurrent.atomic.AtomicInteger();
         var arena = new M3ObjectResidency<Value>(2,

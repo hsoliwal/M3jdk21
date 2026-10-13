@@ -4,13 +4,13 @@ Status: design contract; implementation is opt-in and additive. Existing JDK/Swi
 
 ## Objective
 
-Ordinary object-oriented APIs often allocate short-lived wrapper/view/widget objects for data already represented in a parent, packed lane, tree, or index. M3 should keep canonical state in the parent-owned flat representation and treat expensive child objects as disposable projections. The caller requests behavior; M3 chooses whether to materialize, retain, swap, or recreate the projection.
+Ordinary object-oriented APIs often allocate short-lived wrapper/view/widget objects for data already represented in a parent, packed lane, tree, or index. M3 should keep canonical state in the parent-owned flat representation and treat expensive child objects as disposable projections. The caller requests behavior; M3 chooses whether to materialize, retain, swap, or recreate the projection. Mutations intended to survive projection eviction must update the parent's canonical bit/word lanes (or a declared checkpoint), not only fields on the transient object.
 
 This is not a promise that arbitrary Java object references can be transparently evicted. If a raw child reference escapes and is retained by caller code, the GC must keep that object alive. Transparent eviction therefore requires an M3-owned stable handle/access boundary or a compiler-proven call-site rewrite that does not expose the transient object beyond a bounded use scope.
 
 ## Invariants
 
-1. Canonical state wins. Mutable logical state is stored in parent-owned primitive/reference lanes or a declared checkpoint. A transient projection is not the sole owner of state if it may be destroyed.
+1. Canonical state wins. Mutable logical state is stored in parent-owned primitive/reference lanes or a declared checkpoint. `M3ObjectResidency` exposes a canonical 64-bit `readParentBits`/`writeParentBits`/`updateParentBits` lane per logical slot; projection state is not canonical merely because it is stored in the arena. A transient projection is not the sole owner of state if it may be destroyed.
 2. Stable identity is the handle, not the projection. The handle remains valid across materialize/swap/recreate transitions. Projection identity is not promised unless the opted-in contract explicitly requires it.
 3. Behavior and public contracts stay locked. Existing Swing/SWT/JDK methods are not changed by default. New behavior is opt-in by construction flags and recipe-generated internal metadata.
 4. No hidden escape. A projection cannot be evicted while a scoped operation is active. Raw-reference escape disables eviction for that slot or fails closed.

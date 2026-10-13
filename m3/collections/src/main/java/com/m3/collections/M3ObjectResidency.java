@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.LongUnaryOperator;
 
 /**
  * Parent-owned flat residency arena for disposable child projections.
@@ -59,6 +60,8 @@ public final class M3ObjectResidency<T> {
     private final Codec<T> codec;
     private final SpillStore spill;
     private final Object[] resident;
+    /** Canonical caller-visible mutable bit/word state, independent of projection residency. */
+    private final long[] parentBits;
     private final byte[] states;
     private final long[] weights;
     private final long[] touched;
@@ -85,6 +88,7 @@ public final class M3ObjectResidency<T> {
         this.codec = codec;
         this.spill = spill;
         this.resident = new Object[slots];
+        this.parentBits = new long[slots];
         this.states = new byte[slots];
         this.weights = new long[slots];
         this.touched = new long[slots];
@@ -93,6 +97,31 @@ public final class M3ObjectResidency<T> {
     }
 
     public int slots() { return resident.length; }
+
+    /**
+     * Read the canonical 64-bit parent-owned state word for a logical child slot.
+     * This word survives projection release and is not part of the projection's residency weight.
+     */
+    public synchronized long readParentBits(int slot) {
+        checkSlot(slot);
+        return parentBits[slot];
+    }
+
+    /** Replace the canonical parent-owned state word. Mutations must target this lane, not a disposable projection. */
+    public synchronized void writeParentBits(int slot, long value) {
+        checkSlot(slot);
+        parentBits[slot] = value;
+    }
+
+    /** Atomically transform the canonical parent-owned state word under the arena monitor. */
+    public synchronized long updateParentBits(int slot, LongUnaryOperator update) {
+        checkSlot(slot);
+        Objects.requireNonNull(update, "update");
+        long next = update.applyAsLong(parentBits[slot]);
+        parentBits[slot] = next;
+        return next;
+    }
+
     public synchronized long residentBytes() { return residentBytes; }
     public synchronized State state(int slot) { checkSlot(slot); return stateAt(slot); }
     public synchronized Decision lastDecision() { return lastDecision; }
