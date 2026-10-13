@@ -10,7 +10,7 @@ mkdir -p "$BUILD/patch-src/jdk/internal/vm/parallel" "$BUILD/patch" "$BUILD/clas
 for name in BulkTask BulkExecutor BulkExecution BulkExecutorProvider BulkScheduler; do
   cp "$ROOT/src/java.base/share/classes/jdk/internal/vm/parallel/$name.java" "$BUILD/patch-src/jdk/internal/vm/parallel/"
 done
-javac --release 21 -proc:none -Xlint:all,-module -Werror \
+javac -source 21 -target 21 -proc:none -Xlint:all,-module -Werror \
   --patch-module "java.base=$BUILD/patch-src" -d "$BUILD/patch" \
   "$BUILD"/patch-src/jdk/internal/vm/parallel/*.java
 mapfile -d '' SOURCES < <(find "$PARALLEL/src/main/java/com" -name '*.java' -print0 | sort -z)
