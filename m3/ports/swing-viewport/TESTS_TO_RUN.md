@@ -8,3 +8,4 @@ Status per row: RUN (with result), NOT_RUN, or PENDING_LINUX. Memory gate before
 |---|---|---|---|
 | 1 | Residency rename recipe (#826) applied, then re-run for the fixed point | `java ResidencyRename.java RENAME_MANIFEST.tsv <swt@136df9c6> <M3jdk21 root>` | RUN: `CHANGED 21 OF 21`, then `CHANGED 0 OF 21` |
 | 2 | Engine compile, `javac --release 21 -Xlint:all` | `run-tests.sh compile` | RUN: clean |
+| 3 | List and table differential tests (`M3PackedListModelDiffTest`: 40 seeds x 600 ops; `M3PackedTableModelDiffTest`: 30 seeds x 400 ops; batch coalescing; kind promotion) | `run-tests.sh test` | RUN 2026-10-13: 6/6 pass (JDK 21.0.9, JUnit console 1.11.4) |
