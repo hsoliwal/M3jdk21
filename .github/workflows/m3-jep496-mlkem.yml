@@ -4,7 +4,8 @@ name: M3 JEP 496 ML-KEM candidate
 on:
   push:
     branches:
-      - 'm3/materialize-jep496-mlkem-20261007'
+      - 'm3/materialize-jep496-mlkem-*'
+      - 'm3/jep496-*'
     paths:
       - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM.java'
       - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM_Impls.java'
@@ -18,14 +19,7 @@ on:
       - 'm3/backports/recipes/j496/**'
       - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
       - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep496MlKemBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep496MlKemBackportRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep496-mlkem.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep496-mlkem/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep496-mlkem-vectors/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java'
-      - 'm3/tooling/recipe-catalogue.tsv'
+      - 'm3/tooling/migration-recipes/**'
       - '.github/workflows/m3-jep496-mlkem.yml'
   pull_request:
     paths:
@@ -52,6 +46,7 @@ jobs:
   dependency-gate:
     if: ${{ !contains(github.event.head_commit.message || '', '[m3-jep496-proofed]') }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
         with:
@@ -62,881 +57,14 @@ jobs:
           set -euo pipefail
           named=m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv
           shake=m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
-          grep -F 
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-
-      - name: 1 - Diff hygiene
-        run: git diff --check
-
-      - name: 2 - SHAKE and JEP 496 recipe proofs
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
-
-      - name: 3 - Released JEP residue stays derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
-
-  jdk-proof:
-    needs: dependency-gate
-    if: ${{ !contains(github.event.head_commit.message || '', '[m3-jep496-proofed]') }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Install focused OpenJDK build prerequisites
-        shell: bash
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            autoconf make gcc g++ zip unzip \
-            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
-
-      - name: Configure Java 21 receiver
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash configure \
-            --with-boot-jdk="$JAVA_HOME" \
-            --with-debug-level=release \
-            --with-jvm-variants=server \
-            --disable-warnings-as-errors
-
-      - name: Build JDK image
-        run: make JOBS=2 images
-
-      - name: Prove SHAKE prerequisite
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
-
-      - name: Prove FIPS 203 ML-KEM vectors
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java"
-
-      - name: Prove ML-KEM provider names OIDs and opt-in API constants
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
-
-      - name: Existing KEM API regression
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/javax/crypto/KEM/KemTest.java"
-
-      - name: Named-key prerequisite regressions
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
-
-      - name: Built image provider smoke
-        shell: bash
-        run: |
-          set -euo pipefail
-          JDK="$(find build -type f -path '*/images/jdk/bin/java' -print -quit)"
-          test -n "$JDK"
-          "$JDK" -version
-          "$JDK" --list-modules >/dev/null
-
-      - name: Candidate tree remains clean after proof
-        run: |
-          git diff --check
-          git diff --exit-code
-current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' "$named"
-          grep -F 
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-
-      - name: 1 - Diff hygiene
-        run: git diff --check
-
-      - name: 2 - SHAKE and JEP 496 recipe proofs
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
-
-      - name: 3 - Released JEP residue stays derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
-
-  jdk-proof:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Install focused OpenJDK build prerequisites
-        shell: bash
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            autoconf make gcc g++ zip unzip \
-            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
-
-      - name: Configure Java 21 receiver
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash configure \
-            --with-boot-jdk="$JAVA_HOME" \
-            --with-debug-level=release \
-            --with-jvm-variants=server \
-            --disable-warnings-as-errors
-
-      - name: Build JDK image
-        run: make JOBS=2 images
-
-      - name: Prove SHAKE prerequisite
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
-
-      - name: Prove FIPS 203 ML-KEM vectors
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java"
-
-      - name: Prove ML-KEM provider names OIDs and opt-in API constants
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
-
-      - name: Existing KEM API regression
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/javax/crypto/KEM/KemTest.java"
-
-      - name: Named-key prerequisite regressions
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
-
-      - name: Built image provider smoke
-        shell: bash
-        run: |
-          set -euo pipefail
-          JDK="$(find build -type f -path '*/images/jdk/bin/java' -print -quit)"
-          test -n "$JDK"
-          "$JDK" -version
-          "$JDK" --list-modules >/dev/null
-
-      - name: Candidate tree remains clean after proof
-        run: |
-          git diff --check
-          git diff --exit-code
-recipe_fixed_point\tPASS' "$named"
-          grep -F 
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-
-      - name: 1 - Diff hygiene
-        run: git diff --check
-
-      - name: 2 - SHAKE and JEP 496 recipe proofs
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
-
-      - name: 3 - Released JEP residue stays derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
-
-  jdk-proof:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Install focused OpenJDK build prerequisites
-        shell: bash
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            autoconf make gcc g++ zip unzip \
-            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
-
-      - name: Configure Java 21 receiver
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash configure \
-            --with-boot-jdk="$JAVA_HOME" \
-            --with-debug-level=release \
-            --with-jvm-variants=server \
-            --disable-warnings-as-errors
-
-      - name: Build JDK image
-        run: make JOBS=2 images
-
-      - name: Prove SHAKE prerequisite
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
-
-      - name: Prove FIPS 203 ML-KEM vectors
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java"
-
-      - name: Prove ML-KEM provider names OIDs and opt-in API constants
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
-
-      - name: Existing KEM API regression
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/javax/crypto/KEM/KemTest.java"
-
-      - name: Named-key prerequisite regressions
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
-
-      - name: Built image provider smoke
-        shell: bash
-        run: |
-          set -euo pipefail
-          JDK="$(find build -type f -path '*/images/jdk/bin/java' -print -quit)"
-          test -n "$JDK"
-          "$JDK" -version
-          "$JDK" --list-modules >/dev/null
-
-      - name: Candidate tree remains clean after proof
-        run: |
-          git diff --check
-          git diff --exit-code
-named_key_jtreg\tPASS' "$named"
-          grep -F 
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-
-      - name: 1 - Diff hygiene
-        run: git diff --check
-
-      - name: 2 - SHAKE and JEP 496 recipe proofs
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
-
-      - name: 3 - Released JEP residue stays derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
-
-  jdk-proof:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Install focused OpenJDK build prerequisites
-        shell: bash
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            autoconf make gcc g++ zip unzip \
-            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
-
-      - name: Configure Java 21 receiver
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash configure \
-            --with-boot-jdk="$JAVA_HOME" \
-            --with-debug-level=release \
-            --with-jvm-variants=server \
-            --disable-warnings-as-errors
-
-      - name: Build JDK image
-        run: make JOBS=2 images
-
-      - name: Prove SHAKE prerequisite
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
-
-      - name: Prove FIPS 203 ML-KEM vectors
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java"
-
-      - name: Prove ML-KEM provider names OIDs and opt-in API constants
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
-
-      - name: Existing KEM API regression
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/javax/crypto/KEM/KemTest.java"
-
-      - name: Named-key prerequisite regressions
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
-
-      - name: Built image provider smoke
-        shell: bash
-        run: |
-          set -euo pipefail
-          JDK="$(find build -type f -path '*/images/jdk/bin/java' -print -quit)"
-          test -n "$JDK"
-          "$JDK" -version
-          "$JDK" --list-modules >/dev/null
-
-      - name: Candidate tree remains clean after proof
-        run: |
-          git diff --check
-          git diff --exit-code
-promotion\tNOT_AUTHORIZED' "$named"
-          grep -F 
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-
-      - name: 1 - Diff hygiene
-        run: git diff --check
-
-      - name: 2 - SHAKE and JEP 496 recipe proofs
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
-
-      - name: 3 - Released JEP residue stays derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
-
-  jdk-proof:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Install focused OpenJDK build prerequisites
-        shell: bash
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            autoconf make gcc g++ zip unzip \
-            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
-
-      - name: Configure Java 21 receiver
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash configure \
-            --with-boot-jdk="$JAVA_HOME" \
-            --with-debug-level=release \
-            --with-jvm-variants=server \
-            --disable-warnings-as-errors
-
-      - name: Build JDK image
-        run: make JOBS=2 images
-
-      - name: Prove SHAKE prerequisite
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
-
-      - name: Prove FIPS 203 ML-KEM vectors
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java"
-
-      - name: Prove ML-KEM provider names OIDs and opt-in API constants
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
-
-      - name: Existing KEM API regression
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/javax/crypto/KEM/KemTest.java"
-
-      - name: Named-key prerequisite regressions
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
-
-      - name: Built image provider smoke
-        shell: bash
-        run: |
-          set -euo pipefail
-          JDK="$(find build -type f -path '*/images/jdk/bin/java' -print -quit)"
-          test -n "$JDK"
-          "$JDK" -version
-          "$JDK" --list-modules >/dev/null
-
-      - name: Candidate tree remains clean after proof
-        run: |
-          git diff --check
-          git diff --exit-code
-current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' "$shake"
-          grep -F 
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-
-      - name: 1 - Diff hygiene
-        run: git diff --check
-
-      - name: 2 - SHAKE and JEP 496 recipe proofs
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
-
-      - name: 3 - Released JEP residue stays derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
-
-  jdk-proof:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Install focused OpenJDK build prerequisites
-        shell: bash
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            autoconf make gcc g++ zip unzip \
-            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
-
-      - name: Configure Java 21 receiver
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash configure \
-            --with-boot-jdk="$JAVA_HOME" \
-            --with-debug-level=release \
-            --with-jvm-variants=server \
-            --disable-warnings-as-errors
-
-      - name: Build JDK image
-        run: make JOBS=2 images
-
-      - name: Prove SHAKE prerequisite
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
-
-      - name: Prove FIPS 203 ML-KEM vectors
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java"
-
-      - name: Prove ML-KEM provider names OIDs and opt-in API constants
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
-
-      - name: Existing KEM API regression
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/javax/crypto/KEM/KemTest.java"
-
-      - name: Named-key prerequisite regressions
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
-
-      - name: Built image provider smoke
-        shell: bash
-        run: |
-          set -euo pipefail
-          JDK="$(find build -type f -path '*/images/jdk/bin/java' -print -quit)"
-          test -n "$JDK"
-          "$JDK" -version
-          "$JDK" --list-modules >/dev/null
-
-      - name: Candidate tree remains clean after proof
-        run: |
-          git diff --check
-          git diff --exit-code
-recipe_junit\tPASS' "$shake"
-          grep -F 
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-
-      - name: 1 - Diff hygiene
-        run: git diff --check
-
-      - name: 2 - SHAKE and JEP 496 recipe proofs
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
-
-      - name: 3 - Released JEP residue stays derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
-
-  jdk-proof:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Install focused OpenJDK build prerequisites
-        shell: bash
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            autoconf make gcc g++ zip unzip \
-            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
-
-      - name: Configure Java 21 receiver
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash configure \
-            --with-boot-jdk="$JAVA_HOME" \
-            --with-debug-level=release \
-            --with-jvm-variants=server \
-            --disable-warnings-as-errors
-
-      - name: Build JDK image
-        run: make JOBS=2 images
-
-      - name: Prove SHAKE prerequisite
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
-
-      - name: Prove FIPS 203 ML-KEM vectors
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java"
-
-      - name: Prove ML-KEM provider names OIDs and opt-in API constants
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
-
-      - name: Existing KEM API regression
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/javax/crypto/KEM/KemTest.java"
-
-      - name: Named-key prerequisite regressions
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
-
-      - name: Built image provider smoke
-        shell: bash
-        run: |
-          set -euo pipefail
-          JDK="$(find build -type f -path '*/images/jdk/bin/java' -print -quit)"
-          test -n "$JDK"
-          "$JDK" -version
-          "$JDK" --list-modules >/dev/null
-
-      - name: Candidate tree remains clean after proof
-        run: |
-          git diff --check
-          git diff --exit-code
-shake_jtreg\tPASS' "$shake"
-          grep -F 
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-
-      - name: 1 - Diff hygiene
-        run: git diff --check
-
-      - name: 2 - SHAKE and JEP 496 recipe proofs
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
-
-      - name: 3 - Released JEP residue stays derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
-
-  jdk-proof:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Install focused OpenJDK build prerequisites
-        shell: bash
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            autoconf make gcc g++ zip unzip \
-            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
-
-      - name: Configure Java 21 receiver
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash configure \
-            --with-boot-jdk="$JAVA_HOME" \
-            --with-debug-level=release \
-            --with-jvm-variants=server \
-            --disable-warnings-as-errors
-
-      - name: Build JDK image
-        run: make JOBS=2 images
-
-      - name: Prove SHAKE prerequisite
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
-
-      - name: Prove FIPS 203 ML-KEM vectors
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java"
-
-      - name: Prove ML-KEM provider names OIDs and opt-in API constants
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
-
-      - name: Existing KEM API regression
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/javax/crypto/KEM/KemTest.java"
-
-      - name: Named-key prerequisite regressions
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
-
-      - name: Built image provider smoke
-        shell: bash
-        run: |
-          set -euo pipefail
-          JDK="$(find build -type f -path '*/images/jdk/bin/java' -print -quit)"
-          test -n "$JDK"
-          "$JDK" -version
-          "$JDK" --list-modules >/dev/null
-
-      - name: Candidate tree remains clean after proof
-        run: |
-          git diff --check
-          git diff --exit-code
-fixed_point\tPASS' "$shake"
-          grep -F 
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-
-      - name: 1 - Diff hygiene
-        run: git diff --check
-
-      - name: 2 - SHAKE and JEP 496 recipe proofs
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
-
-      - name: 3 - Released JEP residue stays derived
-        run: python3 -m unittest m3/backports/test_jep_residue.py
-
-  jdk-proof:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Install focused OpenJDK build prerequisites
-        shell: bash
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            autoconf make gcc g++ zip unzip \
-            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
-
-      - name: Configure Java 21 receiver
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash configure \
-            --with-boot-jdk="$JAVA_HOME" \
-            --with-debug-level=release \
-            --with-jvm-variants=server \
-            --disable-warnings-as-errors
-
-      - name: Build JDK image
-        run: make JOBS=2 images
-
-      - name: Prove SHAKE prerequisite
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
-
-      - name: Prove FIPS 203 ML-KEM vectors
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java"
-
-      - name: Prove ML-KEM provider names OIDs and opt-in API constants
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
-
-      - name: Existing KEM API regression
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/javax/crypto/KEM/KemTest.java"
-
-      - name: Named-key prerequisite regressions
-        run: >-
-          make JOBS=2 test
-          TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
-
-      - name: Built image provider smoke
-        shell: bash
-        run: |
-          set -euo pipefail
-          JDK="$(find build -type f -path '*/images/jdk/bin/java' -print -quit)"
-          test -n "$JDK"
-          "$JDK" -version
-          "$JDK" --list-modules >/dev/null
-
-      - name: Candidate tree remains clean after proof
-        run: |
-          git diff --check
-          git diff --exit-code
-promotion\tNOT_AUTHORIZED' "$shake"
+          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' "$named"
+          grep -F $'recipe_fixed_point\tPASS' "$named"
+          grep -F $'named_key_jtreg\tPASS' "$named"
+          grep -F $'promotion\tNOT_AUTHORIZED' "$named"
+          grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' "$shake"
+          grep -F $'recipe_fixed_point\tPASS' "$shake"
+          grep -F $'shake_jtreg\tPASS' "$shake"
+          grep -F $'promotion\tNOT_AUTHORIZED' "$shake"
 
   recipe-proof:
     needs: dependency-gate
@@ -950,22 +78,21 @@ promotion\tNOT_AUTHORIZED' "$shake"
           distribution: temurin
           java-version: '21'
           cache: maven
-
-      - name: 1 - Diff hygiene
+      - name: Diff hygiene
         run: git diff --check
-
-      - name: 2 - SHAKE and JEP 496 recipe proofs
+      - name: SHAKE and JEP 496 recipe proofs
         run: >-
           mvn -B -ntp
           -f m3/tooling/migration-recipes/pom.xml
           -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest
           -Dsurefire.failIfNoSpecifiedTests=false
           test
-
-      - name: 3 - Released JEP residue stays derived
+      - name: Released JEP residue stays derived
         run: python3 -m unittest m3/backports/test_jep_residue.py
 
   jdk-proof:
+    needs: dependency-gate
+    if: ${{ !contains(github.event.head_commit.message || '', '[m3-jep496-proofed]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     steps:
@@ -974,55 +101,39 @@ promotion\tNOT_AUTHORIZED' "$shake"
         with:
           distribution: temurin
           java-version: '21'
-
       - name: Install focused OpenJDK build prerequisites
         shell: bash
         run: |
           set -euo pipefail
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            autoconf make gcc g++ zip unzip \
-            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
-
+          sudo apt-get install -y --no-install-recommends             autoconf make gcc g++ zip unzip             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
       - name: Configure Java 21 receiver
         shell: bash
         run: |
           set -euo pipefail
-          bash configure \
-            --with-boot-jdk="$JAVA_HOME" \
-            --with-debug-level=release \
-            --with-jvm-variants=server \
-            --disable-warnings-as-errors
-
+          bash configure             --with-boot-jdk="$JAVA_HOME"             --with-debug-level=release             --with-jvm-variants=server             --disable-warnings-as-errors
       - name: Build JDK image
         run: make JOBS=2 images
-
       - name: Prove SHAKE prerequisite
         run: >-
           make JOBS=2 test
           TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
-
       - name: Prove FIPS 203 ML-KEM vectors
         run: >-
           make JOBS=2 test
           TEST="test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java"
-
       - name: Prove ML-KEM provider names OIDs and opt-in API constants
         run: >-
           make JOBS=2 test
           TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
-
       - name: Existing KEM API regression
         run: >-
           make JOBS=2 test
           TEST="test/jdk/javax/crypto/KEM/KemTest.java"
-
       - name: Named-key prerequisite regressions
         run: >-
           make JOBS=2 test
           TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
-
       - name: Built image provider smoke
         shell: bash
         run: |
@@ -1031,15 +142,13 @@ promotion\tNOT_AUTHORIZED' "$shake"
           test -n "$JDK"
           "$JDK" -version
           "$JDK" --list-modules >/dev/null
-
       - name: Candidate tree remains clean after proof
         run: |
           git diff --check
           git diff --exit-code
 
-
   current-tree-receipt:
-    if: \${{ github.event_name == 'push' && !contains(github.event.head_commit.message || '', '[m3-jep496-proofed]') }}
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message || '', '[m3-jep496-proofed]') }}
     needs:
       - dependency-gate
       - recipe-proof
@@ -1052,7 +161,6 @@ promotion\tNOT_AUTHORIZED' "$shake"
         with:
           fetch-depth: 0
           persist-credentials: true
-
       - name: Ratify ML-KEM proof into current-tree receipt
         shell: bash
         run: |
@@ -1080,16 +188,16 @@ promotion\tNOT_AUTHORIZED' "$shake"
               "proof_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
           }
 
-          rows=[]
-          seen=set()
+          rows = []
+          seen = set()
           for line in receipt.read_text(encoding="utf-8").splitlines():
               if not line:
                   continue
-              key,value=line.split("\t",1)
+              key, value = line.split("\t", 1)
               if key in updates:
-                  value=updates[key]
+                  value = updates[key]
                   seen.add(key)
-              rows.append((key,value))
+              rows.append((key, value))
           for key in (
               "recipe_fixed_point",
               "openjdk_image_build",
@@ -1103,16 +211,16 @@ promotion\tNOT_AUTHORIZED' "$shake"
               "proof_attempt",
           ):
               if key not in seen:
-                  rows.append((key,updates[key]))
+                  rows.append((key, updates[key]))
           receipt.write_text(
-              "".join(f"{key}\t{value}\n" for key,value in rows),
+              "".join(f"{key}\t{value}\n" for key, value in rows),
               encoding="utf-8")
 
-          dep_rows=[]
+          dep_rows = []
           for line in dependency.read_text(encoding="utf-8").splitlines():
               if not line:
                   continue
-              cells=line.split("\t")
+              cells = line.split("\t")
               if cells[0] == "JDK-8338587 SHAKE/XOF":
                   cells[1] = "CANDIDATE_MATERIALIZED_PROVED"
                   cells[3] = "REUSE_PROVEN_CURRENT_PRODUCT"
@@ -1125,23 +233,19 @@ promotion\tNOT_AUTHORIZED' "$shake"
               dep_rows.append("\t".join(cells))
           dependency.write_text("\n".join(dep_rows) + "\n", encoding="utf-8")
           PY
-
           git diff --check
           grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
           grep -F $'blocking_dependency\tNONE' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
           grep -F $'fips203_jtreg\tPASS' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
           grep -F $'provider_oid_api_smoke\tPASS' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
           grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
-
       - name: Commit only security proof receipts
         shell: bash
         env:
-          BRANCH_NAME: \${{ github.ref_name }}
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           set -euo pipefail
-          git add \
-            m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv \
-            m3/backports/recipes/j496/CURRENT_DEPENDENCY_STATE.tsv
+          git add             m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv             m3/backports/recipes/j496/CURRENT_DEPENDENCY_STATE.tsv
           git diff --cached --check
           git config user.name "m3-recipe-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -1149,7 +253,7 @@ promotion\tNOT_AUTHORIZED' "$shake"
           git push origin "HEAD:$BRANCH_NAME"
 
   canonical-readback:
-    if: \${{ contains(github.event.head_commit.message || '', '[m3-jep496-proofed]') }}
+    if: ${{ contains(github.event.head_commit.message || '', '[m3-jep496-proofed]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
@@ -1160,17 +264,13 @@ promotion\tNOT_AUTHORIZED' "$shake"
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: "21"
+          java-version: '21'
           cache: maven
       - name: Re-prove source-bound recipe and non-promoting receipt
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp \
-            -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest \
-            -Dsurefire.failIfNoSpecifiedTests=false \
-            test
+          mvn -B -ntp             -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest             -Dsurefire.failIfNoSpecifiedTests=false             test
           grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
           grep -F $'blocking_dependency\tNONE' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
           grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/j496/CURRENT_TREE_RECEIPT.tsv
