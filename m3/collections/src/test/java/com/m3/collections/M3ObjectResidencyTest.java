@@ -94,6 +94,41 @@ final class M3ObjectResidencyTest {
                 () -> arena.use(1, 16, value -> value.length()));
     }
 
+    @Test void recreatesOnlyFromCanonicalParentState() {
+        String[] parentState = {"initial", "other"};
+        var arena = new M3ObjectResidency<String>(2,
+                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU | M3ObjectResidency.RECREATE,
+                8, 0, slot -> parentState[slot], null, null);
+        assertEquals("initial", arena.use(0, 8, value -> value));
+        parentState[0] = "updated-in-parent";
+        arena.use(1, 8, value -> value.length());
+        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals("updated-in-parent", arena.use(0, 8, value -> value));
+    }
+
+    @Test void failedSwapLeavesOriginalProjectionResident() {
+        M3ObjectResidency.SpillStore failing = new M3ObjectResidency.SpillStore() {
+            @Override public void write(int slot, byte[] bytes) throws IOException {
+                throw new IOException("disk full");
+            }
+            @Override public byte[] read(int slot) throws IOException { throw new IOException("missing"); }
+            @Override public void delete(int slot) { }
+        };
+        var arena = new M3ObjectResidency<String>(2,
+                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU | M3ObjectResidency.SWAP_SECONDARY,
+                8, 0, slot -> "v" + slot, new M3ObjectResidency.Codec<>() {
+                    @Override public byte[] encode(String value) { return value.getBytes(StandardCharsets.UTF_8); }
+                    @Override public String decode(int slot, byte[] bytes) {
+                        return new String(bytes, StandardCharsets.UTF_8);
+                    }
+                }, failing);
+        arena.use(0, 8, value -> value.length());
+        assertThrows(M3ObjectResidency.ResidencyException.class,
+                () -> arena.use(1, 8, value -> value.length()));
+        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
+        assertEquals("v0", arena.use(0, 8, value -> value));
+    }
+
     @Test void residencyAnnotationIsClassRetainedAndExplicit() throws Exception {
         assertNull(AnnotatedProjection.class.getAnnotation(M3Residency.class),
                 "CLASS retention must not add reflective runtime lookup");
