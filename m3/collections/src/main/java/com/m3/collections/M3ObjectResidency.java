@@ -236,7 +236,8 @@ public final class M3ObjectResidency<T> {
         int victim = -1;
         long oldest = Long.MAX_VALUE;
         for (int i = 0; i < resident.length; i++) {
-            if (i == excluded || resident[i] == null || active[i] != 0) continue;\n            if ((flags & (SWAP_SECONDARY | RECREATE)) == 0) continue;
+            if (i == excluded || resident[i] == null || active[i] != 0) continue;
+            if ((flags & (SWAP_SECONDARY | RECREATE)) == 0) continue;
             if (touched[i] < oldest) { oldest = touched[i]; victim = i; }
         }
         return victim;
@@ -273,7 +274,17 @@ public final class M3ObjectResidency<T> {
     }
 
     private State stateAtOrAbsent(int slot) { return slot < 0 ? State.ABSENT : stateAt(slot); }
-    private State stateAt(int slot) {\n        return switch (Byte.toUnsignedInt(states[slot])) {\n            case 0 -> State.ABSENT;\n            case 1 -> State.CREATING;\n            case 2 -> State.RESIDENT;\n            case 3 -> State.SWAPPING;\n            case 4 -> State.SWAPPED;\n            case 5 -> State.RESTORING;\n            default -> throw new IllegalStateException("invalid residency state lane");\n        };\n    }
+    private State stateAt(int slot) {
+        return switch (Byte.toUnsignedInt(states[slot])) {
+            case 0 -> State.ABSENT;
+            case 1 -> State.CREATING;
+            case 2 -> State.RESIDENT;
+            case 3 -> State.SWAPPING;
+            case 4 -> State.SWAPPED;
+            case 5 -> State.RESTORING;
+            default -> throw new IllegalStateException("invalid residency state lane");
+        };
+    }
     private void setState(int slot, State state) { states[slot] = (byte) state.ordinal(); }
     private void decision(int slot, State before, State after, String reason) {
         lastDecision = new Decision(slot, before, after, residentBytes, maxResidentBytes, reason);

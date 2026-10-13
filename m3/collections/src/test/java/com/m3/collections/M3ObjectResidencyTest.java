@@ -27,10 +27,10 @@ final class M3ObjectResidencyTest {
     }
     private static final M3ObjectResidency.Codec<Value> CODEC = new M3ObjectResidency.Codec<>() {
         @Override public byte[] encode(Value value) {
-            return (value.canonicalId + "\\n" + value.text).getBytes(StandardCharsets.UTF_8);
+            return (value.canonicalId + "\n" + value.text).getBytes(StandardCharsets.UTF_8);
         }
         @Override public Value decode(int slot, byte[] bytes) {
-            String[] fields = new String(bytes, StandardCharsets.UTF_8).split("\\\\n", 2);
+            String[] fields = new String(bytes, StandardCharsets.UTF_8).split("\\\n", 2);
             return new Value(Integer.parseInt(fields[0]), fields[1]);
         }
     };
@@ -93,10 +93,15 @@ final class M3ObjectResidencyTest {
     }
 
     @Test void residencyAnnotationIsClassRetainedAndExplicit() throws Exception {
-        var annotation = AnnotatedProjection.class.getAnnotation(M3Residency.class);
-        assertNull(annotation, "CLASS retention must not add reflective runtime lookup");
-        assertEquals(M3Residency.Strategy.SWAP, AnnotatedProjection.class
-                .getDeclaredField("marker").getAnnotation(M3Residency.class).strategy());
+        assertNull(AnnotatedProjection.class.getAnnotation(M3Residency.class),
+                "CLASS retention must not add reflective runtime lookup");
+        try (var stream = M3ObjectResidencyTest.class.getResourceAsStream(
+                "M3ObjectResidencyTest$AnnotatedProjection.class")) {
+            assertNotNull(stream);
+            String bytecode = new String(stream.readAllBytes(), StandardCharsets.ISO_8859_1);
+            assertTrue(bytecode.contains("Lcom/m3/collections/M3Residency;"),
+                    "class file retains compile-time metadata");
+        }
     }
 
     static final class AnnotatedProjection {
