@@ -1,36 +1,31 @@
-# Contract-mode adapter custody refresh — 2026-10-13
+# Canonical scope adapter custody refresh — 2026-10-13
 
-## Exact failure
+## Exact failure and scope
 
-The M3 Synexia recipe ownership gate failed at:
+The M3 Synexia recipe ownership gate reported retained target adapter drift. The ownership ledger had pinned three target-side compatibility adapters to earlier Git blobs, while their current source reflects the already-merged migration to Synexia-canonical scope semantics.
 
-`retained target adapter drift: m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ContractMode.java`
+| Target path | Historical ledger pin | Current verified blob | Existing source change |
+|---|---|---|---|
+| `m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ContractMode.java` | `c43764ebe0e42d2cf3d61e9eda4de4fe3624d60e` | `3ee8dd184d5c382391f6f9590fb9c773044bfaa5` | [`d2c1fb3ffd8f2fe5a8d91a6f309b769d74531edd`](https://github.com/hsoliwal/M3jdk21/commit/d2c1fb3ffd8f2fe5a8d91a6f309b769d74531edd) adds package-private reverse conversion `fromCanonical(...)`. |
+| `m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopePolicy.java` | `e835666e5adc321e9f7ef8db47d8f2e652f89721` | `a2c62ee105d0fcf31de67bafb86bc4d8c1eebf6c` | Current adapter converts the canonical policy; target-only path inference remains local. |
+| `m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java` | `7b77af510300f56950c85259f87e87123adf591b` | `4e888371f5a7d4c2c2084352cd84674f219f160b` | Current overlay delegates portable recipe scope to Synexia and retains target-specific mappings. |
 
-The ledger still pinned the target adapter to Git blob `c43764ebe0e42d2cf3d61e9eda4de4fe3624d60e`, but the current target file is Git blob `3ee8dd184d5c382391f6f9590fb9c773044bfaa5`.
+The three current hashes were read from the exact `master` files. Historical blobs were fetched and compared. The observed differences match the already-present target-adapter evolution; this PR updates only the expected blob values in the custody ledger.
 
-## Provenance and semantic scope
+## Ownership and compatibility
 
-The delta was introduced by the already-merged M3JDK21 commit
-[`d2c1fb3ffd8f2fe5a8d91a6f309b769d74531edd`](https://github.com/hsoliwal/M3jdk21/commit/d2c1fb3ffd8f2fe5a8d91a6f309b769d74531edd),
-`m3: make contract mode a bidirectional Synexia adapter`. Its exact patch adds only package-private
-`static M3ContractMode fromCanonical(com.synexia.rewrite.M3ContractMode mode)`, mapping by enum name
-and rejecting null. The existing public enum constants, constructor visibility, and public surface are unchanged.
+- Synexia remains canonical for reusable scope semantics and Apache-2.0 recipes.
+- M3JDK21 retains target-only OpenJDK/JEP mappings and compatibility adapter types.
+- Public enum constants and public API are unchanged by these ledger updates.
+- No production Java, workflow, build, runtime, license, or Git history changes are made by this PR.
+- The original target source and ledger history remain available through Git ancestry.
 
-The new blob was fetched from the current `master` file and independently compared to the commit's
-recorded target path. The ledger update changes only the expected Git blob for the existing
-`scope-contract-mode` row; it does not change the target adapter or canonical Synexia implementation.
+## Dependent canonical source
 
-## Ownership boundary
+[Synexia PR #10698](https://github.com/hsoliwal/com.synexia/pull/10698) restores the canonical `M3RecipeScopePolicy` and `M3RecipeScopeRegistry` sources lost from current `develop`. This ledger correction does not substitute for merging and receiving those exact Apache-2.0 source blobs.
 
-- Synexia remains the canonical owner of reusable contract-mode semantics and Apache-2.0 recipes.
-- M3JDK21 retains only its target-side adapter and JDK-specific integration.
-- This is a custody-ledger reconciliation, not source promotion or a runtime behavior change.
-- Canonical scope-policy/registry restoration is tracked separately in
-  [Synexia PR #10698](https://github.com/hsoliwal/com.synexia/pull/10698); that PR must merge and its
-  exact source receipt must be received before the dependent migration-recipe build can be accepted.
+## Verification
 
-## Verification status
+Remote file reads confirmed all three current hashes and the revised ledger rows. The first CI attempt then exposed the next stale row (`M3RecipeScopePolicy`); this revision reconciles all three known adapter rows together rather than iterating one failure at a time. CI must rerun the ownership checker and receiver compile/JUnit.
 
-The ownership checker previously failed on the stale blob pin. This PR's CI must rerun the checker
-and the receiving migration-recipe tests. No local Maven execution is claimed for this ledger-only
-change. Full JDK build, jtreg, and runtime acceptance remain separate gates.
+Not claimed: local Maven execution, full JDK build, jtreg, runtime acceptance, or source promotion.
