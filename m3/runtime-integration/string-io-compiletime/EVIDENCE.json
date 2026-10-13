@@ -1,0 +1,22 @@
+{
+  "schema": "M3_STRING_IO_COMPILETIME_LOCAL_EVIDENCE_1",
+  "java": "Debian OpenJDK 21.0.12.1 Linux x86_64",
+  "source_compile": "PASS -Xlint:all -Werror --patch-module java.base",
+  "tests_compile": "PASS --release 21 -Xlint:all -Werror",
+  "baseline_io_checks": 23641,
+  "candidate_io_checks": 23641,
+  "compiler_fact_checks": 20,
+  "constants": 7,
+  "nonconstants": 4,
+  "snapshot_kernel_targets": 3,
+  "snapshot_kernel_fixed_point_changes": 0,
+  "snapshot_kernel_refusals": 6,
+  "source_built_m3jdk_runtime": "NOT_RUN",
+  "openrewrite_sdk": "NOT_RUN",
+  "performance": "NOT_MEASURED",
+  "postimage_sha256": {
+    "src/java.base/share/classes/sun/nio/cs/StreamEncoder.java": "2853e106c3ed0fd0f5b8d14c85e539e5493005bc424c0d6ce780f1c29b623a56",
+    "test/jdk/java/io/OutputStreamWriter/M3StringIOTest.java": "d95b4378215254e8ac1a0c57b5bd47c68542d306fd238d27a75984d49ab0884f",
+    "test/langtools/tools/javac/m3/M3ComputeConstantFactsTest.java": "a5e90e643156c3f26713e2caa28e63f78735ca7b7ab4f02398172ee0ea631915"
+  }
+}
