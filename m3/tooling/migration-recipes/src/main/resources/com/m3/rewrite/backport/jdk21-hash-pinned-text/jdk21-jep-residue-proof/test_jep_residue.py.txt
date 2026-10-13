@@ -235,6 +235,19 @@ class JepResidueTest(unittest.TestCase):
         self.assertIn("receipt_next_action", text)
         self.assertIn("NO_RECIPE_EVIDENCE", text)
 
+    def test_checked_in_residue_queue_is_byte_exact_generator_output(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        backports = root / "m3" / "backports"
+        items = self.r.queue(
+            root,
+            self.r.read_tsv(backports / "JEP_CATALOGUE.tsv"),
+            self.r.read_tsv(backports / "POST21_PRIORITY_COMPATIBILITY.tsv"),
+        )
+        generated = io.StringIO()
+        self.r.write_tsv(items, generated)
+        checked_in = (backports / "JEP_RESIDUE_QUEUE.tsv").read_text(encoding="utf-8")
+        self.assertEqual(generated.getvalue(), checked_in)
+
     def test_live_repository_queue_matches_released_pending_denominator(self) -> None:
         root = Path(__file__).resolve().parents[2]
         backports = root / "m3" / "backports"
