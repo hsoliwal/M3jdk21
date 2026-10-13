@@ -508,7 +508,66 @@ public class RepaintManager
             delegate.addDirtyRegion(c, x, y, w, h);
             return;
         }
+        //FLLDCIM: L6 — M3 redraw-suspend construction flag; one atomic read when unused
+        if (M3_SUSPENDED.get() != 0 && m3Defer(c, x, y, w, h)) {
+            return;
+        }
         addDirtyRegion0(c, x, y, w, h);
+    }
+
+    /**
+     * M3 (TARGET_OWNED_PORT): client property that suspends repaint requests for a
+     * component subtree, the Swing analog of SWT {@code setRedraw(false)}. While a
+     * {@code JComponent} has this property set to {@code Boolean.TRUE}, every
+     * {@code addDirtyRegion(JComponent, ...)} for it or a descendant is unioned into
+     * one rectangle in its coordinates; clearing the property repaints that union once.
+     * Damage from the window system ({@code nativeAddDirtyRegion}) is not suspended.
+     */
+    static final String M3_REDRAW_SUSPENDED = "m3.redrawSuspended";
+    private static final AtomicInteger M3_SUSPENDED = new AtomicInteger();
+    private final Map<JComponent, Rectangle> m3Deferred = new WeakHashMap<>();
+
+    /** Unions the region into the nearest suspended ancestor; false when none. */
+    private boolean m3Defer(JComponent c, int x, int y, int w, int h) {
+        if (w <= 0 || h <= 0) {
+            return false;
+        }
+        Component p = c;
+        while (p instanceof JComponent jc) {
+            if (Boolean.TRUE.equals(jc.getClientProperty(M3_REDRAW_SUSPENDED))) {
+                synchronized (this) {
+                    Rectangle r = m3Deferred.get(jc);
+                    if (r == null) {
+                        m3Deferred.put(jc, new Rectangle(x, y, w, h));
+                    } else {
+                        SwingUtilities.computeUnion(x, y, w, h, r);
+                    }
+                }
+                return true;
+            }
+            x += p.getX();
+            y += p.getY();
+            p = p.getParent();
+        }
+        return false;
+    }
+
+    /** Called by {@code JComponent.putClientProperty} for {@link #M3_REDRAW_SUSPENDED}. */
+    static void m3RedrawChanged(JComponent c, Object oldValue, Object newValue) {
+        boolean was = Boolean.TRUE.equals(oldValue), now = Boolean.TRUE.equals(newValue);
+        if (now && !was) {
+            M3_SUSPENDED.incrementAndGet();
+        } else if (was && !now) {
+            M3_SUSPENDED.decrementAndGet();
+            RepaintManager rm = currentManager(c);
+            Rectangle r;
+            synchronized (rm) {
+                r = rm.m3Deferred.remove(c);
+            }
+            if (r != null) {
+                c.repaint(r.x, r.y, r.width, r.height);
+            }
+        }
     }
 
     /**
@@ -853,6 +912,12 @@ public class RepaintManager
             for (int j=0 ; j < count.get(); j++) {
                 final int i = j;
                 final Component dirtyComponent = roots.get(j);
+                //FLLDCIM: L3 — M3: a root that stopped showing paints nothing (paintImmediately
+                // and the heavyweight branch both test isShowing); skip it before building the
+                // access-control context, unless a repaint root is waiting to be serviced.
+                if (repaintRoot == null && !dirtyComponent.isShowing()) {
+                    continue;
+                }
                 @SuppressWarnings("removal")
                 AccessControlContext stack = AccessController.getContext();
                 @SuppressWarnings("removal")

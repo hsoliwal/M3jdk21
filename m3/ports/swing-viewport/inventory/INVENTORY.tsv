@@ -1,0 +1,74 @@
+id	law	kind	file	line	sha256_12	match	note
+OH01	L2-state-data	OBJECT_HEAVY	javax/swing/table/DefaultTableModel.java	74	7bef59d52863	protected Vector<Vector>    dataVector;	rows are a Vector of Vectors; every cell is a boxed Object
+OH02	L2-state-data	OBJECT_HEAVY	javax/swing/table/DefaultTableModel.java	99	7bef59d52863	Vector<E> v = new Vector<>(size);	one Vector allocated per row on add/insert/convert
+OH02	L2-state-data	OBJECT_HEAVY	javax/swing/table/DefaultTableModel.java	696	7bef59d52863	Vector<Object> v = new Vector<>(anArray.length);	one Vector allocated per row on add/insert/convert
+OH02	L2-state-data	OBJECT_HEAVY	javax/swing/table/DefaultTableModel.java	713	7bef59d52863	Vector<Vector<Object>> v = new Vector<>(anArray.length);	one Vector allocated per row on add/insert/convert
+OH03	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultMutableTreeNode.java	117	c37326e70a5f	protected Vector<TreeNode> children;	one node object plus one children Vector per tree node
+OH04	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultMutableTreeNode.java	202	c37326e70a5f	children = new Vector<>();	children Vector created on first insert
+OH05	L4-residency	OBJECT_HEAVY	javax/swing/tree/DefaultMutableTreeNode.java	640	c37326e70a5f	retNodes = new TreeNode[depth];	getPath allocates a node array per call
+OH06	L4-residency	OBJECT_HEAVY	javax/swing/tree/DefaultTreeModel.java	441	25b10bda58d0	retNodes = new TreeNode[depth];	getPathToRoot allocates a node array per event
+OH06	L4-residency	OBJECT_HEAVY	javax/swing/tree/DefaultTreeModel.java	446	25b10bda58d0	retNodes = new TreeNode[depth];	getPathToRoot allocates a node array per event
+OH07	L2-state-data	OBJECT_HEAVY	javax/swing/DefaultListModel.java	58	bb61eefef937	private Vector<E> delegate = new Vector<E>();	synchronized Vector of element objects
+OH08	L4-residency	OBJECT_HEAVY	javax/swing/tree/VariableHeightLayoutCache.java	1012	d7bc18edc6f9	private class TreeStateNode extends DefaultMutableTreeNode {	one state node object per visible node
+OH09	L4-residency	OBJECT_HEAVY	javax/swing/tree/VariableHeightLayoutCache.java	97	d7bc18edc6f9	visibleNodes = new Vector<Object>();	every visible row held as an object in a Vector
+OH10	L4-residency	OBJECT_HEAVY	javax/swing/tree/VariableHeightLayoutCache.java	1049	d7bc18edc6f9	pathByAddingChild(getUserObject());	a TreePath object kept per state node
+OH10	L4-residency	OBJECT_HEAVY	javax/swing/tree/VariableHeightLayoutCache.java	1309	d7bc18edc6f9	path = parentPath.pathByAddingChild(getUserObject());	a TreePath object kept per state node
+OH11	L4-residency	OBJECT_HEAVY	javax/swing/tree/FixedHeightLayoutCache.java	747	ca0c00539481	private class FHTreeStateNode extends DefaultMutableTreeNode {	one state node object per expanded node
+OH12	L6-redraw	PAINT_MATERIALIZES	javax/swing/tree/FixedHeightLayoutCache.java	1468	ca0c00539481	return node.getTreePath().pathByAddingChild(treeModel.getChild	a TreePath created per non-expanded row while enumerating visible rows
+OH12	L6-redraw	PAINT_MATERIALIZES	javax/swing/tree/FixedHeightLayoutCache.java	1526	ca0c00539481	retObject = parent.getTreePath().pathByAddingChild	a TreePath created per non-expanded row while enumerating visible rows
+OH13	L4-residency	OBJECT_HEAVY	javax/swing/JTree.java	249	d8bedb3cd655	private transient Hashtable<TreePath, Boolean> expandedState;	expansion stored as a hash of TreePath objects
+OH14	L4-residency	OBJECT_HEAVY	javax/swing/JTree.java	720	d8bedb3cd655	expandedStack = new Stack<Stack<TreePath>>();	TreePath stacks for expansion bookkeeping
+OH14	L4-residency	OBJECT_HEAVY	javax/swing/JTree.java	3205	d8bedb3cd655	expandedStack = new Stack<Stack<TreePath>>();	TreePath stacks for expansion bookkeeping
+OH15	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	84	950583e0e2e8	protected TreePath[]                selection;	selection stored as TreePath objects
+OH16	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	124	950583e0e2e8	uniquePaths = new Hashtable<TreePath, Boolean>();	two Hashtables of TreePath per model
+OH16	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	125	950583e0e2e8	lastPaths = new Hashtable<TreePath, Boolean>();	two Hashtables of TreePath per model
+OH16	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	1207	950583e0e2e8	clone.uniquePaths = new Hashtable<TreePath, Boolean>();	two Hashtables of TreePath per model
+OH16	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	1208	950583e0e2e8	clone.lastPaths = new Hashtable<TreePath, Boolean>();	two Hashtables of TreePath per model
+OH17	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	126	950583e0e2e8	tempPaths = new TreePath[1];	per-call TreePath arrays
+OH17	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	197	950583e0e2e8	TreePath[]          newPaths = new TreePath[1];	per-call TreePath arrays
+OH17	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	244	950583e0e2e8	paths = new TreePath[1];	per-call TreePath arrays
+OH17	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	254	950583e0e2e8	paths = new TreePath[1];	per-call TreePath arrays
+OH17	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	319	950583e0e2e8	TreePath[]            toAdd = new TreePath[1];	per-call TreePath arrays
+OH17	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	354	950583e0e2e8	TreePath[]          newPaths = new TreePath[1];	per-call TreePath arrays
+OH17	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	442	950583e0e2e8	TreePath[]             rPath = new TreePath[1];	per-call TreePath arrays
+OH17	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	949	950583e0e2e8	TreePath[]                         tempPath = new TreePath[1];	per-call TreePath arrays
+OH17	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	1004	950583e0e2e8	TreePath[]                   tempPath = new TreePath[1];	per-call TreePath arrays
+OH17	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	1058	950583e0e2e8	TreePath[]           tempPath = new TreePath[1];	per-call TreePath arrays
+OH17	L2-state-data	OBJECT_HEAVY	javax/swing/tree/DefaultTreeSelectionModel.java	1209	950583e0e2e8	clone.tempPaths = new TreePath[1];	per-call TreePath arrays
+OH18	L6-redraw	PAINT_MATERIALIZES	javax/swing/plaf/basic/BasicTreeUI.java	1354	84727c23973b	Enumeration<?>   paintingEnumerator = treeState.getVisiblePathsFrom	paint enumerates TreePath objects per visible row
+OH19	L6-redraw	PAINT_MATERIALIZES	javax/swing/plaf/basic/BasicTreeUI.java	1379	84727c23973b	Rectangle       boundsBuffer = new Rectangle();	Rectangle allocated per paint
+OH20	L6-redraw	PAINT_MATERIALIZES	javax/swing/plaf/basic/BasicTreeUI.java	1370	84727c23973b	drawingCache.put(parentPath, Boolean.TRUE);	Hashtable insert per ancestor path per paint
+OH20	L6-redraw	PAINT_MATERIALIZES	javax/swing/plaf/basic/BasicTreeUI.java	1407	84727c23973b	drawingCache.put(parentPath, Boolean.TRUE);	Hashtable insert per ancestor path per paint
+OH21	L6-redraw	PAINT_MATERIALIZES	javax/swing/JTable.java	5801	5d9e60110fd1	Object value = getValueAt(row, column);	prepareRenderer/prepareEditor fetch an Object per painted cell
+OH21	L6-redraw	PAINT_MATERIALIZES	javax/swing/JTable.java	5872	5d9e60110fd1	Object value = getValueAt(row, column);	prepareRenderer/prepareEditor fetch an Object per painted cell
+OH22	L6-redraw	PAINT_MATERIALIZES	javax/swing/plaf/basic/BasicTableUI.java	2187	7f0807b9e7e4	Component component = table.prepareRenderer(renderer, row, column);	per-cell renderer preparation in paint
+OH23	L6-redraw	PAINT_MATERIALIZES	javax/swing/plaf/basic/BasicListUI.java	270	8b7a1c3fe33d	Object value = dataModel.getElementAt(row);	paintCell fetches the element Object per painted row
+OH24	L3-visibility	SCAN_ALL_ROWS	javax/swing/plaf/basic/BasicListUI.java	1442	8b7a1c3fe33d	for(int index = 0; index < dataModelSize; index++) {	updateLayoutState measures every row (materializes every element) unless fixed cell width and height are set
+OH24	L3-visibility	SCAN_ALL_ROWS	javax/swing/plaf/basic/BasicListUI.java	1462	8b7a1c3fe33d	for(int index = 0; index < dataModelSize; index++) {	updateLayoutState measures every row (materializes every element) unless fixed cell width and height are set
+OH25	L2-state-data	OBJECT_HEAVY	javax/swing/plaf/basic/BasicListUI.java	1425	8b7a1c3fe33d	cellHeights = new int[list.getModel().getSize()];	O(rows) height array rebuilt on each layout pass
+OH25	L2-state-data	OBJECT_HEAVY	javax/swing/plaf/basic/BasicListUI.java	1460	8b7a1c3fe33d	cellHeights = new int[dataModelSize];	O(rows) height array rebuilt on each layout pass
+OH26	L2-state-data	OBJECT_HEAVY	java/awt/List.java	130	546dab8f2ae3	Vector<String>      items = new Vector<>();	AWT List keeps a String Vector and mirrors it into the native peer
+OH27	L2-state-data	HEAVYWEIGHT_PEER	java/awt/TextComponent.java	83	d46efd70329c	String text;	AWT TextArea/TextField keep the whole text as one String plus the native peer copy
+OH28	L2-state-data	HEAVYWEIGHT_PEER	java/awt/TextArea.java	315	5eb100947b95	public void insert(String str, int pos) {	insert rebuilds via the peer
+OH29	L3-visibility	HEAVYWEIGHT_PEER	java/awt/Canvas.java	147	8501d4650c5f	public void update(Graphics g) {	heavyweight Canvas clears and repaints through its peer
+WH01	L3-visibility	WORK_WHILE_HIDDEN	javax/swing/plaf/basic/BasicProgressBarUI.java	1347	d6b04ed636d6	if ((he.getChangeFlags() & HierarchyEvent.DISPLAYABILITY_CHANGED) != 0) {	indeterminate animation timer stops only when undisplayable; it keeps ticking while hidden but displayable
+WH02	L3-visibility	WORK_WHILE_HIDDEN	javax/swing/JTable.java	4435	5d9e60110fd1	public void tableChanged(TableModelEvent e) {	model events resize, revalidate and repaint regardless of showing
+WH02	L3-visibility	WORK_WHILE_HIDDEN	javax/swing/JTable.java	6924	5d9e60110fd1	public void tableChanged(TableModelEvent e) {	model events resize, revalidate and repaint regardless of showing
+WH03	L3-visibility	WORK_WHILE_HIDDEN	javax/swing/plaf/basic/BasicListUI.java	109	8b7a1c3fe33d	protected int updateLayoutStateNeeded = modelChanged;	list data events invalidate layout and revalidate regardless of showing
+WH03	L3-visibility	WORK_WHILE_HIDDEN	javax/swing/plaf/basic/BasicListUI.java	957	8b7a1c3fe33d	updateLayoutStateNeeded = modelChanged;	list data events invalidate layout and revalidate regardless of showing
+WH03	L3-visibility	WORK_WHILE_HIDDEN	javax/swing/plaf/basic/BasicListUI.java	2763	8b7a1c3fe33d	updateLayoutStateNeeded = modelChanged;	list data events invalidate layout and revalidate regardless of showing
+WH03	L3-visibility	WORK_WHILE_HIDDEN	javax/swing/plaf/basic/BasicListUI.java	2786	8b7a1c3fe33d	updateLayoutStateNeeded = modelChanged;	list data events invalidate layout and revalidate regardless of showing
+WH03	L3-visibility	WORK_WHILE_HIDDEN	javax/swing/plaf/basic/BasicListUI.java	2806	8b7a1c3fe33d	updateLayoutStateNeeded = modelChanged;	list data events invalidate layout and revalidate regardless of showing
+WH04	L3-visibility	WORK_WHILE_HIDDEN	javax/swing/RepaintManager.java	878	c406d704e1ec	((JComponent)dirtyComponent).paintImmediately(	each dirty root builds an AccessControlContext and PrivilegedAction before paintImmediately tests isShowing
+WH05	L3-visibility	WORK_WHILE_HIDDEN	javax/swing/tree/VariableHeightLayoutCache.java	371	d7bc18edc6f9	updateNodeSizes(true);	invalidateSizes re-measures every visible node through the renderer, showing or not
+WH06	L3-visibility	WORK_WHILE_HIDDEN	java/awt/Component.java	3491	e29ec22827f4	if (isVisible() && (this.peer != null) &&	heavyweight repaint tests the component's own visibility, not isShowing, before posting a PaintEvent
+EX01	L3-visibility	REUSE_ASSET	javax/swing/RepaintManager.java	944	c406d704e1ec	void collectDirtyComponents(Map<Component,Rectangle> dirtyComponents,	dirty rectangles are clipped by every ancestor: visible intersect damaged already
+EX02	L3-visibility	REUSE_ASSET	javax/swing/RepaintManager.java	461	c406d704e1ec	if (!p.isVisible() || !p.isDisplayable()) {	add-time visibility gate over all ancestors
+EX03	L6-redraw	REUSE_ASSET	javax/swing/RepaintManager.java	639	c406d704e1ec	private synchronized boolean extendDirtyRegion(	per-component dirty-region coalescing
+EX04	L4-residency	REUSE_ASSET	javax/swing/tree/FixedHeightLayoutCache.java	52	ca0c00539481	public class FixedHeightLayoutCache extends AbstractLayoutCache {	lazy layout cache: objects only for expanded nodes, rows by arithmetic
+EX05	L3-visibility	REUSE_ASSET	javax/swing/JViewport.java	191	1317f510fce1	public static final int BLIT_SCROLL_MODE = 1;	scroll by blit: only the exposed strip is damaged
+EX06	L6-redraw	REUSE_ASSET	javax/swing/CellRendererPane.java	73	2026b2712944	public class CellRendererPane extends Container implements Accessible	renderer flyweight: one component stamps every cell
+EX07	L2-state-data	REUSE_ASSET	javax/swing/SizeSequence.java	125	1d93c8c027a4	private int[] a;	packed int prefix structure for JTable variable row heights
+EX08	L3-visibility	REUSE_ASSET	javax/swing/JList.java	682	a5bb4282137d	public void setPrototypeCellValue(E prototypeCellValue) {	fixed or prototype cell size removes the all-rows measure (OH24)
+EX08	L3-visibility	REUSE_ASSET	javax/swing/JList.java	759	a5bb4282137d	public void setFixedCellHeight(int height) {	fixed or prototype cell size removes the all-rows measure (OH24)
+EX09	L4-residency	REUSE_ASSET	javax/swing/JTree.java	1079	d8bedb3cd655	public void setLargeModel(boolean newValue) {	selects FixedHeightLayoutCache
