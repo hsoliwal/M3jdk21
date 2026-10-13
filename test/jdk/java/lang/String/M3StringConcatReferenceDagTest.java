@@ -17,7 +17,7 @@ public class M3StringConcatReferenceDagTest {
     static {
         try {
             Class<?> helper = Class.forName("java.lang.StringConcatHelper");
-            CONCAT = helper.getDeclaredMethod("m3Concat", String[].class, Object[].class);
+            CONCAT = helper.getDeclaredMethod("m3Concat", String[].class, String[].class);
             CONCAT.setAccessible(true);
             STRING_M3 = String.class.getDeclaredField("m3");
             STRING_M3.setAccessible(true);
@@ -33,27 +33,28 @@ public class M3StringConcatReferenceDagTest {
     }
 
     public static void main(String[] args) throws Exception {
-        check(concat(new String[]{"alpha-", "-", "-omega"}, new Object[]{42, "beta"})
+        check(concat(new String[]{"alpha-", "-", "-omega"}, new String[]{"42", "beta"})
                 .equals("alpha-42-beta-omega"), "mixed content");
-        check(concat(new String[]{null, null, null}, new Object[]{"left", "right"})
+        check(concat(new String[]{null, null, null}, new String[]{"left", "right"})
                 .equals("leftright"), "null constants");
 
         StringBuilder trace = new StringBuilder();
-        String ordered = concat(new String[]{"<", "|", ">"},
-                new Object[]{new Probe("A", trace, false), new Probe("B", trace, true)});
+        String ordered = objectConcat(new Probe("A", trace, false),
+                new Probe("B", trace, true));
         check(ordered.equals("<A|null>"), "null toString conversion");
         check(trace.toString().equals("AB"), "left-to-right conversion");
-        check(concat(new String[]{"x", "y"}, new Object[]{null}).equals("xnully"),
-                "null argument conversion");
+        check(nullObjectConcat(null).equals("xnully"), "null argument conversion");
+        check(typedConcat((byte) 3, (short) 4, 5, 6L, 'Q', true, 1.5f, 2.25d)
+                .equals("3|4|5|6|Q|true|1.5|2.25"), "typed primitive conversion");
 
-        String empty1 = concat(new String[]{""}, new Object[0]);
-        String empty2 = concat(new String[]{""}, new Object[0]);
+        String empty1 = concat(new String[]{""}, new String[0]);
+        String empty2 = concat(new String[]{""}, new String[0]);
         check(empty1.isEmpty(), "empty content");
         check(empty1 != empty2, "fresh empty wrapper");
 
         int count = 512;
         String[] constants = new String[count + 1];
-        Object[] values = new Object[count];
+        String[] values = new String[count];
         for (int i = 0; i < count; i++) {
             constants[i] = i == 0 ? "" : "|";
             values[i] = "x";
@@ -72,8 +73,23 @@ public class M3StringConcatReferenceDagTest {
                 + "|height=" + height);
     }
 
-    private static String concat(String[] constants, Object[] args) throws Exception {
+    private static String concat(String[] constants, String[] args) throws Exception {
         return (String) CONCAT.invoke(null, constants, args);
+    }
+
+    private static String objectConcat(Probe first, Probe second) {
+        return "<" + first + "|" + second + ">";
+    }
+
+    private static String nullObjectConcat(Object value) {
+        return "x" + value + "y";
+    }
+
+    private static String typedConcat(
+            byte byteValue, short shortValue, int intValue, long longValue,
+            char charValue, boolean booleanValue, float floatValue, double doubleValue) {
+        return byteValue + "|" + shortValue + "|" + intValue + "|" + longValue
+                + "|" + charValue + "|" + booleanValue + "|" + floatValue + "|" + doubleValue;
     }
 
     private record Probe(String value, StringBuilder trace, boolean returnNull) {
