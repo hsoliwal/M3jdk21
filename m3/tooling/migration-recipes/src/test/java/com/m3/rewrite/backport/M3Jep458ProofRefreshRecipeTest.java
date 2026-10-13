@@ -137,14 +137,14 @@ final class M3Jep458ProofRefreshRecipeTest {
 
         assertTrue(
                 receipt.contains(
-                        "base_commit\tf96b9a88e040cded3a5ffb96190e2acedee6c97d"));
+                        "base_commit\t3799df0b88d169064b610481400ec4edacec1d2e"));
         assertTrue(
                 receipt.contains(
-                        "proof_refresh_base\tf96b9a88e040cded3a5ffb96190e2acedee6c97d"));
+                        "proof_refresh_base\t3799df0b88d169064b610481400ec4edacec1d2e"));
         assertTrue(
                 receipt.contains(
-                        "proof_branch\tm3/jep458-proof-refresh-20261007"));
-        assertTrue(workflow.contains("m3/jep458-proof-refresh-20261007"));
+                        "proof_branch\tm3/jep458-proof-refresh-20261013"));
+        assertTrue(workflow.contains("m3/jep458-proof-refresh-20261013"));
         assertTrue(workflow.contains("Refuse JEP 458 product-source drift in proof refresh"));
         assertTrue(workflow.contains("M3Jep458BackportRecipeTest"));
         assertTrue(workflow.contains("make JOBS=2 images"));
