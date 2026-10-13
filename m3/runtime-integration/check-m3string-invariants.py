@@ -1360,6 +1360,42 @@ for monitor in re.finditer(r"\bsynchronized\s*\(\s*bucket\s*\)\s*\{", pool_code)
     if closing < 0:
         fail("VM-local M3 bucket monitor has unbalanced Java braces")
     bucket_monitors.append((monitor.start(), opening, closing))
+def require_bucket_locked_owner(position: int, label: str) -> None:
+    enclosing = [scope for scope in bucket_monitors
+                 if scope[1] < position < scope[2]]
+    if not enclosing:
+        fail(f"VM-local M3 {label} escaped its LocalBucket monitor")
+    monitor_start, _, _ = max(enclosing, key=lambda scope: scope[0])
+    canonical_bucket = (
+        "LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());"
+    )
+    declaration_start = pool_code.rfind(
+        "LocalBucket bucket", max(0, monitor_start - 512), monitor_start)
+    if declaration_start < 0 or not pool_code.startswith(canonical_bucket, declaration_start):
+        fail(f"VM-local M3 {label} is not under its canonical bucket")
+    declaration_end = declaration_start + len(canonical_bucket)
+    if pool_code[declaration_end:monitor_start].strip():
+        fail(f"VM-local M3 {label} bucket is not locked immediately after canonical lookup")
+    body_before_owner_use = pool_code[monitor_start:position]
+    if re.search(r"\bbucket\s*=(?!=)", body_before_owner_use):
+        fail(f"VM-local M3 {label} reassigns the locked bucket")
+    if re.search(r"->|\bnew\b|\bclass\b", body_before_owner_use):
+        fail(f"VM-local M3 {label} is deferred or nested")
+
+retain_calls = list(re.finditer(
+    r"\bretain\(bucket, fingerprint, created, byteLength\)", pool_code))
+if len(retain_calls) != 4:
+    fail(f"VM-local M3 retain call count changed: {len(retain_calls)}")
+for retain_call in retain_calls:
+    require_bucket_locked_owner(retain_call.start(), "retain call")
+inline_publications = list(re.finditer(
+    r"bucket\.values\.add\(new LocalRef\(created, fingerprint, bucket, retainedBytes\)\);",
+    pool_code))
+if len(inline_publications) != 1:
+    fail("VM-local M3 inline LocalRef publication count changed")
+for publication in inline_publications:
+    require_bucket_locked_owner(publication.start(), "inline LocalRef publication")
+
 canonical_release_calls = 0
 queued_release_calls = 0
 for call in release_calls:
