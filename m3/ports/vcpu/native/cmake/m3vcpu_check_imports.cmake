@@ -13,6 +13,12 @@ set(forbidden "^nvcuda" "^opencl" "^libopencl" "^vulkan-1" "^libvulkan" "^ze_loa
 set(allowed "^kernel32\\.dll$" "^vcruntime140(_1)?d?\\.dll$" "^ucrtbased?\\.dll$" "^api-ms-win-crt-.*\\.dll$"
             "^msvcrt\\.dll$" "^m3vcpu\\.dll$" "^libm3vcpu\\.so$" "^libc\\.so" "^libdl\\.so" "^libpthread\\.so"
             "^libm\\.so" "^ld-linux")
+# Optional per-invocation extension for OS DLLs only (regexes separated by '|'); used by the
+# webgpu gate, whose statically linked Dawn imports USER32, the C++ CRT and Win32 API sets.
+if(DEFINED EXTRA_ALLOWED AND NOT EXTRA_ALLOWED STREQUAL "")
+  string(REPLACE "|" ";" extra_allowed "${EXTRA_ALLOWED}")
+  list(APPEND allowed ${extra_allowed})
+endif()
 set(failures 0)
 foreach(f IN LISTS files)
   get_filename_component(base "${f}" NAME)
