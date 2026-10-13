@@ -1,0 +1,61 @@
+module org.eclipse.jgit {
+    requires org.slf4j;
+
+    requires transitive JavaEWAH;
+    requires transitive java.management;
+    requires transitive java.security.jgss;
+    requires transitive java.sql;
+    requires transitive java.xml;
+
+    exports org.eclipse.jgit.annotations;
+    exports org.eclipse.jgit.api;
+    exports org.eclipse.jgit.api.errors;
+    exports org.eclipse.jgit.attributes;
+    exports org.eclipse.jgit.blame;
+    exports org.eclipse.jgit.diff;
+    exports org.eclipse.jgit.dircache;
+    exports org.eclipse.jgit.errors;
+    exports org.eclipse.jgit.events;
+    exports org.eclipse.jgit.fnmatch;
+    exports org.eclipse.jgit.gitrepo;
+    exports org.eclipse.jgit.gitrepo.internal;
+    exports org.eclipse.jgit.hooks;
+    exports org.eclipse.jgit.ignore;
+    exports org.eclipse.jgit.ignore.internal;
+    exports org.eclipse.jgit.internal;
+    exports org.eclipse.jgit.internal.fsck;
+    exports org.eclipse.jgit.internal.revwalk;
+    exports org.eclipse.jgit.internal.storage.dfs;
+    exports org.eclipse.jgit.internal.storage.file;
+    exports org.eclipse.jgit.internal.storage.io;
+    exports org.eclipse.jgit.internal.storage.pack;
+    exports org.eclipse.jgit.internal.storage.reftable;
+    exports org.eclipse.jgit.internal.submodule;
+    exports org.eclipse.jgit.internal.transport.connectivity;
+    exports org.eclipse.jgit.internal.transport.http;
+    exports org.eclipse.jgit.internal.transport.parser;
+    exports org.eclipse.jgit.internal.transport.ssh;
+    exports org.eclipse.jgit.lib;
+    exports org.eclipse.jgit.lib.internal;
+    exports org.eclipse.jgit.logging;
+    exports org.eclipse.jgit.merge;
+    exports org.eclipse.jgit.nls;
+    exports org.eclipse.jgit.notes;
+    exports org.eclipse.jgit.patch;
+    exports org.eclipse.jgit.revplot;
+    exports org.eclipse.jgit.revwalk;
+    exports org.eclipse.jgit.revwalk.filter;
+    exports org.eclipse.jgit.storage.file;
+    exports org.eclipse.jgit.storage.pack;
+    exports org.eclipse.jgit.submodule;
+    exports org.eclipse.jgit.transport;
+    exports org.eclipse.jgit.transport.http;
+    exports org.eclipse.jgit.transport.resolver;
+    exports org.eclipse.jgit.treewalk;
+    exports org.eclipse.jgit.treewalk.filter;
+    exports org.eclipse.jgit.util;
+    exports org.eclipse.jgit.util.io;
+    exports org.eclipse.jgit.util.sha1;
+    exports org.eclipse.jgit.util.time;
+
+}
