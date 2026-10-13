@@ -241,6 +241,26 @@ class BackportRecipeDagTest(unittest.TestCase):
             self.assertIn("JEP-423\tMATERIALIZED_RECIPE\tjep-423.tsv", index_text)
             self.assertIn("JEP-484\tAUTHOR_RECIPE\tjep-484.tsv", index_text)
 
+    def test_generator_never_issues_implicit_scope_approval(self) -> None:
+        # Physical scope is a planning floor, not a declaration of promotion authority.
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            atoms = self.mod.compile_root(root)
+            self.mod.validate(atoms)
+            packet_dir = root / "target" / "packets"
+            packets = self.mod.write_packets(atoms, packet_dir)
+
+            saw_broad_scope = False
+            for _work_id, _state, packet_path in packets:
+                with packet_path.open("r", encoding="utf-8", newline="") as handle:
+                    rows = list(csv.DictReader(handle, delimiter="\\t"))
+                for row in rows:
+                    self.assertEqual("false", row["scope_promotion_approved"])
+                    if row["scope"] != "FILE":
+                        saw_broad_scope = True
+            self.assertTrue(saw_broad_scope, "fixture must exercise MODULE/MULTI_MODULE")
+
     def test_current_repository_packets_are_recognized_without_duplicate_authoring(self) -> None:
         root = Path(__file__).resolve().parents[2]
         atoms = self.mod.compile_root(root)
