@@ -28,7 +28,7 @@ import org.openrewrite.text.PlainText;
 public final class M3Jep474ProofRefreshRecipe
         extends ScanningRecipe<M3Jep474ProofRefreshRecipe.Inventory> {
     private static final String ROOT =
-            "/com/m3/rewrite/backport/jep474-proof-refresh-20261007/";
+            "/com/m3/rewrite/backport/jep474-proof-refresh-20261013/";
 
     private static final Map<String, Target> TARGETS =
             Map.of(
@@ -36,14 +36,14 @@ public final class M3Jep474ProofRefreshRecipe
                     new Target(
                             "workflow.before.yml",
                             "workflow.after.yml",
-                            "bfcb50091b4c0c06eb5e818b34525c633c600338",
-                            "6659d405610d1092daeb89672c03250fa6be2040"),
+                            "6659d405610d1092daeb89672c03250fa6be2040",
+                            "50bffac0533df4976bf8fd89ceb38b2117ea73fd"),
                     "m3/backports/recipes/jep-474-generational-zgc/CURRENT_TREE_RECEIPT.tsv",
                     new Target(
                             "receipt.before.tsv",
                             "receipt.after.tsv",
-                            "c3121b711494bd8c767e18ff87e6ae4763c5e96d",
-                            "39dbdb7e342859631a273c39205ca7ca379a1bf1"));
+                            "2d781e05ff977f4958a3478ddfcbbddb0f81cc0d",
+                            "42cbdb148f071dc0dda98272a924188fa5fda4ed"));
 
     static final class Inventory {
         private final java.util.Map<String, String> states = new java.util.HashMap<>();
