@@ -1,0 +1,9 @@
+atom	owner	kind	precondition	proof_required	status
+R0	m3/docs/m3-parent-owned-object-residency.md	contract	inventory existing owners	public API/behavior boundary reviewed	DOCUMENTED
+R1	m3/collections/M3ObjectResidency.java	flat runtime arena	R0	strict compile, tests, LRU/swap/pressure tests	SOURCE_ADDED_UNVERIFIED
+R2	m3/collections/M3Residency.java	CLASS-retained marker	R0	classfile metadata readback and stale hash refusal	SOURCE_ADDED_UNVERIFIED
+R3	m3/tooling/object-residency	Maven/OpenRewrite inventory recipe	R1,R2	actual recipe test, deterministic TSV, zero-diff second pass	OPEN
+R4	M3JDK compiler metadata bridge	classfile annotation decode and per-type flags	R3	classfile/source hash binding, unknown-bit refusal	OPEN
+R5	SWT TreeViewer port	behavior donor/fixture	inventory exact path and tests	identity/event-order/memory-pressure regression	OPEN
+R6	Swing/SWT/JDK target adapters	serial candidate transformation	R3,R4,R5	per-file contract, compile, runtime and fixed-point receipts	BLOCKED
+R7	JNI optimization	measured optional accelerator	Java reference parity first	-Xcheck:jni, sanitizer, differential and benchmark receipts	BLOCKED
