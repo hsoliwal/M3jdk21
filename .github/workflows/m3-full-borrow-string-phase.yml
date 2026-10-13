@@ -21,6 +21,10 @@ on:
       - "m3/compatibility/synexia-string-phase1-resources-receipt.json"
       - "m3/compatibility/synexia-string-phase-checker-successor-20261013.json"
       - "m3/compatibility/test_synexia_string_phase_checker_successor.py"
+      - "m3/compatibility/synexia-string-concat-dag-successor-20261013.json"
+      - "m3/compatibility/test_synexia_string_concat_dag_successor.py"
+      - "m3/runtime-integration/check-m3string-concat-reference-dag.py"
+      - "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java"
       - "m3/docs/name-mapping.json"
       - ".github/workflows/m3-full-borrow-string-phase.yml"
   workflow_dispatch:
@@ -50,6 +54,9 @@ jobs:
 
       - name: Verify exact Synexia String Phase checker successor receipt
         run: python3 -B m3/compatibility/test_synexia_string_phase_checker_successor.py -v
+
+      - name: Verify exact Synexia concat DAG and jtreg successor receipt
+        run: python3 -B m3/compatibility/test_synexia_string_concat_dag_successor.py -v
 
       - name: Verify pinned MIndexString to M3String mapping
         run: |
