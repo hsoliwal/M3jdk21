@@ -126,10 +126,10 @@ public final class LangDexProjectionReceiverTest {
         check(row.length == 9);
         check(row[2].equals("synexia-unicodex/docs/langdex/UPSTREAM_SCHEMA.tsv"));
         check(row[3].equals("lexeme_id"));
-        check(row[4].equals("glottocode,lemma,source,concept_id"));
+        check(row[4].equals("glottocode,lemma,source"));
         check(row[5].equals("M3StringFacts + LangDexCoordinate"));
         check(row[6].contains("CC-BY-SA-3.0"));
-        check(row[7].equals("schema/source pin only unless the exact licensed snapshot is supplied"));
+        check(row[7].equals("schema/source pin only unless the exact licensed snapshot and a lossless row-identity policy are supplied; concept-link rows are separate and unmapped by this lexeme entry"));
         check(List.of(row[8].split(",")).equals(REQUIRED_FIELDS));
 
         List<String> fieldMap = Files.readAllLines(
