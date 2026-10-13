@@ -179,7 +179,7 @@ def validate_successor_source(path: str, source: str) -> None:
             "if ((long) left.length() + right.length() > Integer.MAX_VALUE) {",
             "throw new OutOfMemoryError(\"Required length exceeds implementation limit\");",
             "if (left.owner() == right.owner() && left.end() == right.start()) {",
-            "M3StringTuple tuple = new M3StringTuple(left, right);",
+            "return concatBalanced(left, right);",
         )
         positions = [source.find(fragment) for fragment in ordered]
         if any(position < 0 for position in positions) or positions != sorted(positions):
