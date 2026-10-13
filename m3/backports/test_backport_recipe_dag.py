@@ -235,7 +235,7 @@ class BackportRecipeDagTest(unittest.TestCase):
             recipe_row = [line.split("\t") for line in j484[1:] if "\trecipe\t" in line][0]
             self.assertEqual("AUTHOR_RECIPE:JEP-484", recipe_row[4])
             self.assertEqual("MODULE", recipe_row[2])
-            self.assertEqual("true", recipe_row[3])
+            self.assertEqual("false", recipe_row[3])
 
             index_text = index.read_text(encoding="utf-8")
             self.assertIn("JEP-423\tMATERIALIZED_RECIPE\tjep-423.tsv", index_text)
