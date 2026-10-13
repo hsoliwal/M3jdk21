@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.m3.rewrite.InstallIndexStringCompatibility;
+import com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipe;
+import com.m3.rewrite.a3.M3A3SerialFileWorkRecipe;
 import com.m3.rewrite.M3Java21ConvergenceRecipe;
 import com.synexia.rewrite.M3PureIntAtomizeRecipe;
 import com.synexia.rewrite.M3PureIntInventoryRecipe;
@@ -38,8 +40,8 @@ final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
         assertEquals(16, com.synexia.rewrite.M3RecipeScopeRegistry.size());
-        assertEquals(17, M3RecipeScopeRegistry.targetOverlaySize());
-        assertEquals(33, M3RecipeScopeRegistry.size());
+        assertEquals(19, M3RecipeScopeRegistry.targetOverlaySize());
+        assertEquals(35, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -51,6 +53,8 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3PureIntDocumentationRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3PureIntConvergenceRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Java21ConvergenceRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3A3AlgorithmCatalogueRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3A3SerialFileWorkRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedTextSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3VerbatimJavaPairRecipe.class.getName()));
