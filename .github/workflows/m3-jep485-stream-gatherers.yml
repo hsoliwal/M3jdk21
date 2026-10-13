@@ -52,10 +52,13 @@ jobs:
           python3 - <<'PY'
           import csv
           from pathlib import Path
-          rows = dict(csv.reader(
-              Path("m3/backports/recipes/j485/WORKFLOW_VALIDATOR_RECEIVER.tsv")
-                  .open(encoding="utf-8", newline=""),
-              delimiter="\t"))
+          path = Path("m3/backports/recipes/j485/WORKFLOW_VALIDATOR_RECEIVER.tsv")
+          with path.open(encoding="utf-8", newline="") as handle:
+              reader = csv.reader(handle, delimiter="\t")
+              header = next(reader, None)
+              if header != ["field", "value"]:
+                  raise SystemExit(f"JEP485 workflow receiver header drift: {header}")
+              rows = dict(reader)
           expected = {
               "canonical_repository": "hsoliwal/com.synexia",
               "canonical_commit": "0f0f9965092955c15f5c32f5eb102137fd0dbf8e",
@@ -240,7 +243,7 @@ jobs:
 
 
   current-tree-receipt:
-    if: \${{ github.event_name == 'push' && !contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
     needs:
       - recipe-dag-proof
       - openjdk-proof
@@ -314,7 +317,7 @@ jobs:
       - name: Commit proof receipt only
         shell: bash
         env:
-          BRANCH_NAME: \${{ github.ref_name }}
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           set -euo pipefail
           git add m3/backports/recipes/j485/CURRENT_TREE_RECEIPT.tsv
@@ -325,7 +328,7 @@ jobs:
           git push origin "HEAD:$BRANCH_NAME"
 
   canonical-readback:
-    if: \${{ contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
+    if: ${{ contains(github.event.head_commit.message || '', '[m3-jep485-proofed]') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
