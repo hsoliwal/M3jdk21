@@ -2,9 +2,9 @@ field	value
 jep	484
 title	Class-File API
 base_branch	master
-base_commit	3799df0b88d169064b610481400ec4edacec1d2e
+base_commit	736ae65b1b9fc77396a30653a1c5d2358e2117c4
 request_date	2026-10-13
-request_branch	m3/jep484-custody-current-20261013
+request_branch	m3/jep484-custody-current-20261013-v2
 source_mutation_authority	false
 public_api_mutation_authority	false
 promotion_authority	false
