@@ -1,0 +1,1620 @@
+{
+  "artifact": "lucene-queryparser",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "MODULE_DESCRIPTOR_OR_MULTI_RELEASE",
+  "consumers": "synexia-common (synexia-bom lucene.version)",
+  "coordinate": "org.apache.lucene:lucene-queryparser:9.10.0-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "lucene-core",
+      "form": "source module",
+      "group": "org.apache.lucene",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.10.0-m3-source-1"
+    },
+    {
+      "artifact": "lucene-queries",
+      "form": "source module",
+      "group": "org.apache.lucene",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.10.0-m3-source-1"
+    },
+    {
+      "artifact": "lucene-sandbox",
+      "form": "source module",
+      "group": "org.apache.lucene",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.10.0-m3-source-1"
+    }
+  ],
+  "donor": "lucene-queryparser-9.10.0",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/resources/META-INF/LICENSE.txt",
+      "sha256": "a2521407b3209df7dcebfc12cd6d732b24bfa2fe44982ef613e269666482521d",
+      "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/lucene-queryparser/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "040878df837673f70608edd572b22e00a22e21522c7b422a85ef95f1c2f075b6",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/resources/META-INF/NOTICE.txt",
+      "sha256": "a0f11b6937bd82f7527932a2754a100b7b9ae85ed285ce5c19dddc23dbe97d09",
+      "upstream": "META-INF/NOTICE.txt"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/module-info.java",
+      "sha256": "3f8de0070c0ee2d2f45214bd0ae400cafa49adfbc6b7048d36c5313c933db411",
+      "upstream": "module-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/charstream/CharStream.java",
+      "sha256": "2d37dde6c61ce959d3193a911154f5aaf0db27cd6176f9b0edd81ef014192378",
+      "upstream": "org/apache/lucene/queryparser/charstream/CharStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/charstream/FastCharStream.java",
+      "sha256": "b7d85644c33dce5a995b9676d47a833ff30fb49d86f12003858e64fe5656194b",
+      "upstream": "org/apache/lucene/queryparser/charstream/FastCharStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/charstream/package-info.java",
+      "sha256": "f415241f26dc731d5ade71cc400dd42553dbbf83f52d60372afe4d795207745b",
+      "upstream": "org/apache/lucene/queryparser/charstream/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/classic/MultiFieldQueryParser.java",
+      "sha256": "e9e10c30d734d317e006c88ec3486a5c6984fa188dfafff2c5e823996a540681",
+      "upstream": "org/apache/lucene/queryparser/classic/MultiFieldQueryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/classic/ParseException.java",
+      "sha256": "fcb42bb121758fd03838e0ba5f9fea090955cd4983603fe72e95259635d76c7c",
+      "upstream": "org/apache/lucene/queryparser/classic/ParseException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/classic/QueryParser.java",
+      "sha256": "2799044e6c3a60cef4782db3dfb836624bb1c7db8706040ba037cd76d7447e7a",
+      "upstream": "org/apache/lucene/queryparser/classic/QueryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/classic/QueryParserBase.java",
+      "sha256": "72acabd5d49a5c181e23b7557e6ab2a3c65120b90e0cf85590355be281ef6cde",
+      "upstream": "org/apache/lucene/queryparser/classic/QueryParserBase.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/classic/QueryParserConstants.java",
+      "sha256": "7215ef4704ed83ad18b4be13b6d7545bb057d71ac2f405b01550e63ef1de982b",
+      "upstream": "org/apache/lucene/queryparser/classic/QueryParserConstants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/classic/QueryParserTokenManager.java",
+      "sha256": "9dbf530af9f3548b3ec12d8cf8fee23a5b40bcfec7ed42431acb74c23b525ad4",
+      "upstream": "org/apache/lucene/queryparser/classic/QueryParserTokenManager.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/classic/Token.java",
+      "sha256": "9580f35aeea68829af26792ac7390b915ac9a50421998e0693421a5861dc076e",
+      "upstream": "org/apache/lucene/queryparser/classic/Token.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/classic/TokenMgrError.java",
+      "sha256": "af9e34ded344186a82c755a04cddf2ba42a1b9497eaf580344c689a28bfb809d",
+      "upstream": "org/apache/lucene/queryparser/classic/TokenMgrError.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/classic/package-info.java",
+      "sha256": "b9a220f41ca1cd4ad5341abc2296ff528c0bcc476d4b887d2f9bcdc47bf07bd2",
+      "upstream": "org/apache/lucene/queryparser/classic/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/complexPhrase/ComplexPhraseQueryParser.java",
+      "sha256": "c6b850504c187499925cfa4c6f2d1a54c8789adb1ea93df8e026a413527cdb29",
+      "upstream": "org/apache/lucene/queryparser/complexPhrase/ComplexPhraseQueryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/complexPhrase/package-info.java",
+      "sha256": "840f13f73d3ce971ac75020125bc2caa08e9f6413a051aa0c4094cc317edf855",
+      "upstream": "org/apache/lucene/queryparser/complexPhrase/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/ext/ExtendableQueryParser.java",
+      "sha256": "c4ceeaef30ebedd55b842d810decaab02b576d51ba433a4623c84f5c1d61923d",
+      "upstream": "org/apache/lucene/queryparser/ext/ExtendableQueryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/ext/ExtensionQuery.java",
+      "sha256": "c7f6a3eff3dac412cb70ede9b468503691ef1943bc5ea2a816c75ae7beeee097",
+      "upstream": "org/apache/lucene/queryparser/ext/ExtensionQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/ext/Extensions.java",
+      "sha256": "c78d691d3ee1abd67a11379c287b54789a24e0a56098a0532f1e9f5aae040c4c",
+      "upstream": "org/apache/lucene/queryparser/ext/Extensions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/ext/ParserExtension.java",
+      "sha256": "3de7f84a0ed154a7094894e9a61de9e3f93abb2b2f8b04e624453a17bd36eb35",
+      "upstream": "org/apache/lucene/queryparser/ext/ParserExtension.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/ext/package-info.java",
+      "sha256": "3ed7f2f47a15396d1d5355ca71a0cf12d630850dce28cef2175bc34fe9dc5974",
+      "upstream": "org/apache/lucene/queryparser/ext/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/QueryNodeError.java",
+      "sha256": "42f94184dc8d9e5533246dfd1f2c15c227e86fec6092a8b259349c61273ccdb3",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/QueryNodeError.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/QueryNodeException.java",
+      "sha256": "dc8465bc480b41457206a9dcf780a393d8f74ba424d66a20fa27991af205f68b",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/QueryNodeException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/QueryNodeParseException.java",
+      "sha256": "0dd2ab4d494ee31fb29548bcac76cf28c25d5e1d2e6078e051e81bc1db2ebb89",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/QueryNodeParseException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/QueryParserHelper.java",
+      "sha256": "9d5c17f97f65d488e108c934ba0331b31960931d971a98b85d12be1e1eb4de70",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/QueryParserHelper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/builders/QueryBuilder.java",
+      "sha256": "ed1099fc267a478039c6f3aaef37ae38fcdc8daa7636813dc272ee6e67484faa",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/builders/QueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/builders/QueryTreeBuilder.java",
+      "sha256": "68514a8fbbe34cbe163c187487cc863a6c62c4abcba85f82fd14ee21d468c444",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/builders/QueryTreeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/builders/package-info.java",
+      "sha256": "6c362190dba065b50d9dcaeff644255987caa5ee782ce00732fc706cb37177f9",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/builders/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/config/AbstractQueryConfig.java",
+      "sha256": "15e70ce3f5f121e84b42b75fbdbc15429d21cac800669de978e534ffd769eb62",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/config/AbstractQueryConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/config/ConfigurationKey.java",
+      "sha256": "5510eb33054f1429dd115060b06f1b68d01e87f53da46185e0ffed2e0c18d4c1",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/config/ConfigurationKey.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/config/FieldConfig.java",
+      "sha256": "909cb625e219bad449ff3ecf6057942b5dffa9232866a36da8fdeb50ba92a297",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/config/FieldConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/config/FieldConfigListener.java",
+      "sha256": "c9751eac001cbd776880cc64ede8d8c2fcf1e6a1c68798750a337f7b4001db6b",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/config/FieldConfigListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.java",
+      "sha256": "ce5ac65eea32edcef036fcd8264d8a692d4e51afbbf5b24d55d57d021886b670",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/config/package-info.java",
+      "sha256": "63ea8cead953e4cb89b69f3a35df080e923db549d4577aa1eaf6dcacfe2ee313",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/config/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/messages/QueryParserMessages.java",
+      "sha256": "d62865731e9964c84cb8a26356adb80820f6a31667832e4040ed9d4578da55f0",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/messages/QueryParserMessages.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/messages/package-info.java",
+      "sha256": "95ae4b08bccb3dcc049f74a46f00ed04599342770a15028307852ac72bb73261",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/messages/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/AndQueryNode.java",
+      "sha256": "c2fe68cdafc3a5600973dceec4ad4ea7925dcaf9ce69ebaad6829c5a6fd550e3",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/AndQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/AnyQueryNode.java",
+      "sha256": "ae88a25c04d4a498039b2bbce34c2115442b2f2e804dc772387a89d81265a1b9",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/AnyQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/BooleanQueryNode.java",
+      "sha256": "66f29cd1fa1d72f21f4dc6f7ab68debf685d6d906e89e4729bfa207af3ce557d",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/BooleanQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/BoostQueryNode.java",
+      "sha256": "87d75cd6dde52b7cfd3ffc114c495e5418431ab3ad51678fa8e12c4ff0a82fde",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/BoostQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/DeletedQueryNode.java",
+      "sha256": "e3a0d13d1cd25052502519d2da6672f5d11aa9b214ca792884814b45dddc0a27",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/DeletedQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.java",
+      "sha256": "d09c0974a7e53bf506fb8e46300aff87f27136f63f44b71d3594d4669119beed",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode.java",
+      "sha256": "1a510eb9907551b220cc3f1183b37a5b82cd1f05f77a9d875ecb1bc83b664c7d",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.java",
+      "sha256": "919f50aaaf1cd2838527d5d69fff838ddc6901358b05b415d8b7e627ec1d07b7",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/FuzzyQueryNode.java",
+      "sha256": "2b188e0e0f1303642bf69649a46c6b719d2c6fae75ce0ad5ccedd48d06dc3dac",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/FuzzyQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/GroupQueryNode.java",
+      "sha256": "109fe855bf099ac1250525f5e494cafbc848911f1262b89de6ed3977d484a2c0",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/GroupQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/MatchAllDocsQueryNode.java",
+      "sha256": "1d0f712e77829e78942edadde6b034a85b1d90520e31feea8701072390ac64a2",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/MatchAllDocsQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/MatchNoDocsQueryNode.java",
+      "sha256": "a58b2bf34a254d711efdb41197ded897ca30fc4b224071ff762494538e58c7d7",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/MatchNoDocsQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/ModifierQueryNode.java",
+      "sha256": "a886ff2309f7804e167444fc8a555cd850e7d963fd832d954b323ab6ee3b4987",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/ModifierQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/NoTokenFoundQueryNode.java",
+      "sha256": "e90848e867de9e5aa88738c30e47176e5c165a8c428da5b5defb2f9ffa3c5385",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/NoTokenFoundQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/OpaqueQueryNode.java",
+      "sha256": "c4e0fff4a85652a18514fb0e45707995631c4b8c91ac88af9d8af2d4097de403",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/OpaqueQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/OrQueryNode.java",
+      "sha256": "5bc6a958be24a82533d15b1ae903fa5ff7685282785490801ab83a94fa97cf29",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/OrQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode.java",
+      "sha256": "202d1243478a7640a6b3f0a91d03274a98076bce6b70e6427a2e2143221cebec",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/PhraseSlopQueryNode.java",
+      "sha256": "b93befa5d0b19e6c30eff5178ec0cd2bfbb219e386089a24a49769bdd6c9fe03",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/PhraseSlopQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/ProximityQueryNode.java",
+      "sha256": "de930962f646d3c35a6689790103d86708d62812e56981cf36acd43d661a9fe6",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/ProximityQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.java",
+      "sha256": "e3bd5681bd7048c9536f5c698bcebacf75aa401ca1d2f99e98de6a53090e529e",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.java",
+      "sha256": "328b9b23b4b2435468b8f89cc842fdca5f6baa0237a934ea5b35f0642022317c",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/QuotedFieldQueryNode.java",
+      "sha256": "1a4d5d6b867ec0c1e369df763ac67f87e75cb6778197122717925bd8ec644188",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/QuotedFieldQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/RangeQueryNode.java",
+      "sha256": "8154e4b489a31565774c46539d87c530136db46c93f41632936ee06db14a6fe7",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/RangeQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/SlopQueryNode.java",
+      "sha256": "3b9ba52e84a1a2b45043db1299ae330395feb9c24c159eef6bc0577049f9b79f",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/SlopQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/TextableQueryNode.java",
+      "sha256": "574207e7646d419659bbd77ca2f0ab3cba62686b1c39d90c2af2a58d0f6af6fd",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/TextableQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/TokenizedPhraseQueryNode.java",
+      "sha256": "f45ee85ef6c56b509870f670343c4243b14375b2bcf9e7d30effd0ffeda374da",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/TokenizedPhraseQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/ValueQueryNode.java",
+      "sha256": "8d98970e064f92fad111c119dc21e3daf3356c55da9816a7b8d4ecb37ae9f47f",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/ValueQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/nodes/package-info.java",
+      "sha256": "3122a6f02d7cf00a8e36f00cd64525799f008182edcc52fdac5b95d3f39b3851",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/nodes/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/package-info.java",
+      "sha256": "98398294e7a17eca4a5c861a3d39a30d6aca6136df589be0b68bb8ad3d1d6b91",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.java",
+      "sha256": "06b38b4681850803348f950adf0b88cd37d1dbda4dae2b940fa84664755427c6",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/parser/SyntaxParser.java",
+      "sha256": "29a3951b962e5b0ddf0f49d64366e5d85c9e4e76b934a308b8b5febea4cd577e",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/parser/SyntaxParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/parser/package-info.java",
+      "sha256": "061dbae885b23f8cf09a89f85d938b8e41b734d7ca5d24c1490d45c5e04f2d0d",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/parser/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/processors/NoChildOptimizationQueryNodeProcessor.java",
+      "sha256": "2b8194ad65f34a95b5364d646d7fe6be4d99855ce403e2f9b110022225c1c12d",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/processors/NoChildOptimizationQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor.java",
+      "sha256": "12e80a7a93e15333199be957440df16b2c9c40cdad901f3b92b0edf0fa4e2e74",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.java",
+      "sha256": "98b48b71f88fe42a310a72c3d460f1b627cfafd31f5ff37bace9cd2d00df3a67",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorPipeline.java",
+      "sha256": "f9e662925f4ddbaf8fc9197c2c1373de685340557e3ac4744abfef0990178730",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorPipeline.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/processors/RemoveDeletedQueryNodesProcessor.java",
+      "sha256": "f128d52146270dfea0adfa8bc484b36c7f6f4b6ca94490c2848f49fab651a04c",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/processors/RemoveDeletedQueryNodesProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/processors/package-info.java",
+      "sha256": "76ab4612b317d12084c74b2461d2f0991381d62cf624852fde6e0eb96a19448a",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/processors/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/util/QueryNodeOperation.java",
+      "sha256": "af1ae7a737d82f66ec959703cbc357a340ac6d2002cbbd5b54d6ef624589b159",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/util/QueryNodeOperation.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/util/StringUtils.java",
+      "sha256": "2a8d9b26f7e7096a28b9101e3544e7a41ec4710474b89bf1330f4f92d161ef53",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/util/StringUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/util/UnescapedCharSequence.java",
+      "sha256": "209b0d20dc19f386a075f01467ddea9ae2183e5fb9dbdf56b551a73b55126c96",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/util/UnescapedCharSequence.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/core/util/package-info.java",
+      "sha256": "64ecb6a965c30998269bb02de8b466644c4612b70a0685ec3f3f07ec0fa674dc",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/util/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/messages/Message.java",
+      "sha256": "c95e4c991826b566fc32c34e88b1236375f4bc3e8459a8874ff57476de529905",
+      "upstream": "org/apache/lucene/queryparser/flexible/messages/Message.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/messages/MessageImpl.java",
+      "sha256": "209992c1711fcc0c3c99a339e44b5f6aec34d581f87b496f8b02c7ab7c85242c",
+      "upstream": "org/apache/lucene/queryparser/flexible/messages/MessageImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/messages/NLS.java",
+      "sha256": "9f3d4c9844c9130282755d6f7a11ccfa109b08639fe94f759b727ba336288886",
+      "upstream": "org/apache/lucene/queryparser/flexible/messages/NLS.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/messages/NLSException.java",
+      "sha256": "c4e159a4f7307a4002478b813a21e6862388a7948f0839d23e6dfc9757e0c93d",
+      "upstream": "org/apache/lucene/queryparser/flexible/messages/NLSException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/messages/package-info.java",
+      "sha256": "cb2952c8cc26dbd1a6fea423913e2c01879a8269978bd5bf31a503c05094ae5c",
+      "upstream": "org/apache/lucene/queryparser/flexible/messages/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/package-info.java",
+      "sha256": "d3503fb98c01ab3038dd7d1dd656a46ac924e0897f66ccec02e1d64ff57e6b9b",
+      "upstream": "org/apache/lucene/queryparser/flexible/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/precedence/PrecedenceQueryParser.java",
+      "sha256": "5549099ecde9d99cb0e0ede93df2ede5adcd4b3b7734a0521939a35bb59c8fb6",
+      "upstream": "org/apache/lucene/queryparser/flexible/precedence/PrecedenceQueryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/precedence/package-info.java",
+      "sha256": "b8d2e8edf29740b4ce0bcc58a61b0bb3a815fdbe28fba4d3fd7703396e5825e8",
+      "upstream": "org/apache/lucene/queryparser/flexible/precedence/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/precedence/processors/BooleanModifiersQueryNodeProcessor.java",
+      "sha256": "c8a765408a4a0301314ced6730fec62ab9c3a3a201f331d8b5855b99fe1260a0",
+      "upstream": "org/apache/lucene/queryparser/flexible/precedence/processors/BooleanModifiersQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/precedence/processors/PrecedenceQueryNodeProcessorPipeline.java",
+      "sha256": "94ef4add4ff87d62387d38ff345d86c56497fab5598be0a843e7a06ccbb36837",
+      "upstream": "org/apache/lucene/queryparser/flexible/precedence/processors/PrecedenceQueryNodeProcessorPipeline.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/precedence/processors/package-info.java",
+      "sha256": "b4f4167d14ffbb482cd853b4303a81f6833fd246c75ef944178fc0d1fc227d0a",
+      "upstream": "org/apache/lucene/queryparser/flexible/precedence/processors/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/CommonQueryParserConfiguration.java",
+      "sha256": "93fc79b8836792d02de22958d186a54ded2f217ef3af2f90edefbb52fb1b2d44",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/CommonQueryParserConfiguration.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/QueryParserUtil.java",
+      "sha256": "ec8829e953a9bd27f9eb35ecbcd0e3c0e822184954bfdc84a9e09c8e1f990a31",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/QueryParserUtil.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/StandardQueryParser.java",
+      "sha256": "8dfd663b13ceab764543829ba18e37eff5cd23d7f8eb5dd92d31ee9e9ae09fa0",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/StandardQueryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/AnyQueryNodeBuilder.java",
+      "sha256": "ebd63593056ec7c9a5bbeb431ec4de7b58ca84f1fe0b34aedb1e9fa4dbb3052c",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/AnyQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/BooleanQueryNodeBuilder.java",
+      "sha256": "9c725d89e6eb9ff5dc3c424a5f3ca5dd54384d63e0d23a9e91d87da876fddc3b",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/BooleanQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/BoostQueryNodeBuilder.java",
+      "sha256": "7fa3b9fdeaa6927fce9257fb9ee626e96253986026d1dc43a5de69cdb70d9283",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/BoostQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/DummyQueryNodeBuilder.java",
+      "sha256": "ecdbe875329617b6169537414361e769a25f489c63bdc82aaf41c1838097304c",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/DummyQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/FieldQueryNodeBuilder.java",
+      "sha256": "08638ed42f37f6f535518180dc298c7a294f220b35a1c1a85ecee35e1d934b83",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/FieldQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/FuzzyQueryNodeBuilder.java",
+      "sha256": "b0e24261566e995bb06d5cc97a933622fa14721f29a24e57edaa540a6a10aaff",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/FuzzyQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/GroupQueryNodeBuilder.java",
+      "sha256": "5be68a355e8be3c5b1812c21893016090bdfe5099a2d7c143943c4a35543326c",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/GroupQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/IntervalQueryNodeBuilder.java",
+      "sha256": "30eb35b5b7cd56c9a1dac7f92dda628986962607953b2fd0c6f04d8eb39f9b8e",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/IntervalQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/MatchAllDocsQueryNodeBuilder.java",
+      "sha256": "4e69d7e1d18c48cf1148abaa98a4a72bee415f939c6a38bb203ba1453ef6a9fe",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/MatchAllDocsQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/MatchNoDocsQueryNodeBuilder.java",
+      "sha256": "3eb112962a82cec1ec7607ee41da80b3a67f3daef452fb4ac7513ba432c22d51",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/MatchNoDocsQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/MinShouldMatchNodeBuilder.java",
+      "sha256": "6b4798f4ec2c1d9c49696a64b92b703f29297115f2cc0832f6f359dba1ee87ca",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/MinShouldMatchNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/ModifierQueryNodeBuilder.java",
+      "sha256": "ccc4384910e81f1da38034982b2437c7da33d444076b2ad1ed1a9a37493bf2d2",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/ModifierQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/MultiPhraseQueryNodeBuilder.java",
+      "sha256": "3bc728ea4fae1c3f2d81a8ad022aeaf271d6498fef386129f499bb34752c8dff",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/MultiPhraseQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/PhraseQueryNodeBuilder.java",
+      "sha256": "3c6f9a50adfdf6e231684bc160e6bbddad3a761a5a628d732f90e2db8737c22e",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/PhraseQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/PointRangeQueryNodeBuilder.java",
+      "sha256": "65ca81ceecdf5bf0c90c2cb5716c2a35092256ff909224b5d56c9d93b81eda38",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/PointRangeQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/PrefixWildcardQueryNodeBuilder.java",
+      "sha256": "4f1dfdc0b4dc147f3caa3d5821676caaca35bb1c31113b4d221425403ee1bc8d",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/PrefixWildcardQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/RegexpQueryNodeBuilder.java",
+      "sha256": "e425fd2418820aadc91b0a276813018f3113c1ff13e8ebd438077d143c4197fb",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/RegexpQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/SlopQueryNodeBuilder.java",
+      "sha256": "3e7902742fda6a72e02fd15dcf8c4c94cd1ab108f3b3277de6006d573be9c775",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/SlopQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/StandardQueryBuilder.java",
+      "sha256": "a412ff76d175ffce0c959765a9e96050e3058903f01b7a38d24d4ddfa0c265cb",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/StandardQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/StandardQueryTreeBuilder.java",
+      "sha256": "9fc0419f7bba04ed728ed7eddc68228dc2cb222682a67bff5c0c18bb686fc7ab",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/StandardQueryTreeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/SynonymQueryNodeBuilder.java",
+      "sha256": "d68869b4a7bf5fc4534a976fd1f8ad097a7ed63b840aa3c39bc8929d8e48f57e",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/SynonymQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/TermRangeQueryNodeBuilder.java",
+      "sha256": "c98458ce5fc02185ec6e0a3e5cfbe7838f638675b7c0f67c57b45a290219a48d",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/TermRangeQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/WildcardQueryNodeBuilder.java",
+      "sha256": "e7b1f4ad0b60025deca201206a0ddb8b5277457df2cc46764711df9e37349507",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/WildcardQueryNodeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/builders/package-info.java",
+      "sha256": "fbd5ed369042f0b90c02f1fb7ceb8830032394cc3c618c8993c2fd3aa1fb117e",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/builders/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/config/FieldBoostMapFCListener.java",
+      "sha256": "7c227bf645901e46c62e5ddd69685f64ae3811f2c940df49cb27522ffb7494d5",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/config/FieldBoostMapFCListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/config/FieldDateResolutionFCListener.java",
+      "sha256": "2a80383dbe5fd7ff783da615a6bd3c38bc47c69cb544bc1dc4cc1fbd2b38ce99",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/config/FieldDateResolutionFCListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/config/FuzzyConfig.java",
+      "sha256": "bad6414acf635b6072b8bf4f97f25ab4bdb2ea3a7b838ba7d04237e2e6169f90",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/config/FuzzyConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/config/NumberDateFormat.java",
+      "sha256": "c53853023ba9db15ccfa667d01009e0c5a7787abdc5f21d085ac58a62df63818",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/config/NumberDateFormat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/config/PointsConfig.java",
+      "sha256": "675fb279e373ea95c2bca5b5842c4798bfd108886e7f330ab60da3f338241ff1",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/config/PointsConfig.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/config/PointsConfigListener.java",
+      "sha256": "c0575b40ebd4b0c867e7a0067aaa1c3952fcfdf030d2ed340b1a3ba46fa15adc",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/config/PointsConfigListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler.java",
+      "sha256": "aa1e0c517fb03683e33d7acfbd04cae90800c74a62839ac599c7c158d42c3565",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/config/package-info.java",
+      "sha256": "f9513a6cf8ffcde97db3221b726bac5e390bcf6d8748973695ca0530cdd50199",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/config/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/AbstractRangeQueryNode.java",
+      "sha256": "f058b2256b73093078814fbef2208ed091babbd1fc22befbe6230909955117d6",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/AbstractRangeQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/BooleanModifierNode.java",
+      "sha256": "7a00d26600eff3b4cc7e9aa011b2485699a8b06150bd815167fdc92d44e94f3c",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/BooleanModifierNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/IntervalQueryNode.java",
+      "sha256": "f2205fce9b1ee4f68751ea50b8e8be67612b713e3a7dc3b74463e8f52a4f2c5c",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/IntervalQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/MinShouldMatchNode.java",
+      "sha256": "69822d92321bce3577925f755f3e9c6479608e0e242f597b36f28e2ed03af3ac",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/MinShouldMatchNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/MultiPhraseQueryNode.java",
+      "sha256": "c3f9cb31c67bedac9bfe082e924364ec8910709d644fb53379e84d1e3888f41d",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/MultiPhraseQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/PointQueryNode.java",
+      "sha256": "af6156d4d8fafd1d7339602b4c63b80992b55802dbb3864dbb1e91ce78a18cfd",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/PointQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/PointRangeQueryNode.java",
+      "sha256": "560ae0175cc824ced8479ea09817b8e429450a8bf7859990cebc825b01df50e6",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/PointRangeQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/PrefixWildcardQueryNode.java",
+      "sha256": "bfed864d3ad2537ff806c71a946e919abf60bd0102a77c44b243b7c9f590cba1",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/PrefixWildcardQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/RegexpQueryNode.java",
+      "sha256": "06ee1a6125a70a505130b650cf2d1315b472b77645e25c3730c67edfd0530e87",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/RegexpQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/SynonymQueryNode.java",
+      "sha256": "77f6ef9b1b5b4384415dd45da73425af8d1688f1b2d7456e141d642e59c7ee1b",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/SynonymQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/TermRangeQueryNode.java",
+      "sha256": "9c3d397cbd144b292340664e74b46a010b1a1de39511c8901c3f8beee4ca9741",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/TermRangeQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/WildcardQueryNode.java",
+      "sha256": "ed9029b201f5c68ad39664c5dc2235d3016dcde4e77cac11d1f477c7cb47d517",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/WildcardQueryNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/After.java",
+      "sha256": "1322a8eff86aa8c89e9fe739cada40f90aaa2d8f5f49c852930e0581e77b39f0",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/After.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/AnalyzedText.java",
+      "sha256": "938d8ca96f9edb8cd7239d14de79193812e90f2c6e1b78964b6b5b5400b2b9a1",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/AnalyzedText.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/AtLeast.java",
+      "sha256": "c95ec0fd2982bc7f31609ab402c74c48aceffcc84cc7d6e4a38d7d1d782dd629",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/AtLeast.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Before.java",
+      "sha256": "448026c3f89260c4091d108ba190e9b4ae2be2301b4681fbc7a6b69935bbb24d",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Before.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/ContainedBy.java",
+      "sha256": "080aadb68e6735fa6e08f0b6216dfc871059c4d603010f422f7232d53f0e20a0",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/ContainedBy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Containing.java",
+      "sha256": "6e57f5edc20210df4c2828290e644346d636d5df44909086e341da9d7203800c",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Containing.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Extend.java",
+      "sha256": "58bcf1a8cbc064de5df582be0b254f353a35bda6279346dbded8ee1448664b53",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Extend.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/FuzzyTerm.java",
+      "sha256": "cc0dc0e360029cc448f16dcf3672f1ec547adbb4f0210ef95fea5764777aea86",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/FuzzyTerm.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/IntervalFunction.java",
+      "sha256": "f281f952ea3777079b5ed636474df6f9ead828c9a8e5664dac0bc1a404e1c706",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/IntervalFunction.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/MaxGaps.java",
+      "sha256": "9e668f2511a21b99070de0dd1a9f71a0f360cd74c4d2bbad1b3f03f2141a5812",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/MaxGaps.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/MaxWidth.java",
+      "sha256": "f43799ada80a1b131ed6dd7aa40e621b6a3bc85fcbeb6336657091c0e98e64d4",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/MaxWidth.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/NonOverlapping.java",
+      "sha256": "64080f191b8d62400a74bf5f98573eb8bba8373784c6e595a4866fb5dd896373",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/NonOverlapping.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/NotContainedBy.java",
+      "sha256": "80d9a844994cf7afb4890d93ed41a2773177fbdfaeb2c09a6023f37d34fd9639",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/NotContainedBy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/NotContaining.java",
+      "sha256": "9eaee6c3dd121d19b2dc5539da7497cfb01691f295c9cca3e95956d69914ff3c",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/NotContaining.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/NotWithin.java",
+      "sha256": "9bde5e6c4acaa0e745bdc867d4a6544a78712beb2c3186e7e4224a78efccb28c",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/NotWithin.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Or.java",
+      "sha256": "0b3ea6fe65ae24224e37287c468a08fc6c106fcd13ec3188923cd3878784ef37",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Or.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Ordered.java",
+      "sha256": "c03e585a161c66b61ae14d8f6c86e11908fba57b22352ecd6f76d78d79702934",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Ordered.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Overlapping.java",
+      "sha256": "2104092d5e024d9badbcd2b5fee19d7c277a95554594e1c6dc2a1bc1aaff9f93",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Overlapping.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Phrase.java",
+      "sha256": "8db304a0cc8b9dd95b8ba6319d2d12ef1ac01acdc4b8c076ea8f06bbd67b517b",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Phrase.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Unordered.java",
+      "sha256": "2e3e1a3ea8e3d7ac8720d8b0d720e88f40cfd6c0bbe5a0a452d529b28245b83c",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Unordered.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/UnorderedNoOverlaps.java",
+      "sha256": "06669c3db71e29555b957c35947e3a0ddc7fc0f0851b7f4fc1f8cb7595431337",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/UnorderedNoOverlaps.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Wildcard.java",
+      "sha256": "df7dca3f7b423570ea237f9e47ac13824ce4c73fda08b47feabe3cb135221656",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Wildcard.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Within.java",
+      "sha256": "88513f2a0b436ec2b6c58eca5321dd94ce6bad0aa35250069f36905ede27a100",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/Within.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/package-info.java",
+      "sha256": "6ac862322fbf733aa6eb456a74a797ff575cdeb34019fdfd8a5f3a948de3da83",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/intervalfn/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/nodes/package-info.java",
+      "sha256": "2d316bd8f33bed5751c30512c0a2d0ff77e8c5fd6dbd1b1d24e353136fae6488",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/nodes/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/package-info.java",
+      "sha256": "7dd4cfc423681633bf9c4e2991b67b9a4a44b1495333541208c977c1d4c143f5",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/parser/EscapeQuerySyntaxImpl.java",
+      "sha256": "7dae2adc296cc7de7da2325e6f6c5fb76060e3896c908fbcefcfb8a7ef3fa11d",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/parser/EscapeQuerySyntaxImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/parser/ParseException.java",
+      "sha256": "e8a9b13ef3d307e983557a2b90c2b22257143de262391f5eeecd6a12abdb28d4",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/parser/ParseException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/parser/StandardSyntaxParser.java",
+      "sha256": "2587bbb691673d6b225ee1467739f8ddfc75e8987c5ed23aad05b8d1ee928bec",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/parser/StandardSyntaxParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/parser/StandardSyntaxParserConstants.java",
+      "sha256": "2c0ec961f9ba41c11cef45ff16a320dc58004e3605a0a249c03b1d067f97ce11",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/parser/StandardSyntaxParserConstants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/parser/StandardSyntaxParserTokenManager.java",
+      "sha256": "7b73c25fb389d50e28f508eeb6b1482ab49faa7339de5672e7d236ad06dc5ce3",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/parser/StandardSyntaxParserTokenManager.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/parser/Token.java",
+      "sha256": "9436b8a6e944b3eb867554796a0170fa7e6d2d4d15e3dbc997207338e13946f7",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/parser/Token.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/parser/TokenMgrError.java",
+      "sha256": "c56488e88cf883c5b28b337773612651ee806098a3eb658b32e603e50521db3b",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/parser/TokenMgrError.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/parser/package-info.java",
+      "sha256": "41ce598fe88006caa2904685655ac1d2ac350ef0c41aa71deee8847d9da014c2",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/parser/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/AllowLeadingWildcardProcessor.java",
+      "sha256": "6aac4790266269578c0ea05f33ee2811cd6d411441d2a6e29fc1c3a39ea4cde3",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/AllowLeadingWildcardProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java",
+      "sha256": "5b5aa986de1caabd9bb35d277cecfe3454a5c3a5f76e3c1815f9e317a01603c6",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/BooleanQuery2ModifierNodeProcessor.java",
+      "sha256": "bdc87dd0fa5ccce51ac26a3187deffc9b5eee6603cf89924a2cf90de12763541",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/BooleanQuery2ModifierNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/BooleanSingleChildOptimizationQueryNodeProcessor.java",
+      "sha256": "999e57ded8418c860ac919fdd6bebe9c1d3cefbb232d3c45a7856b1ef5fd3849",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/BooleanSingleChildOptimizationQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/BoostQueryNodeProcessor.java",
+      "sha256": "bed19b92d19043fe023ae45f46b94bb266b94f28d3fc444befdb2e233d60b7c5",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/BoostQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/DefaultPhraseSlopQueryNodeProcessor.java",
+      "sha256": "f0f0aa90b22a5401d6d8c764e8a44aebe3d865a9a64e3d7c7cb7ff2fd8f2f5c4",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/DefaultPhraseSlopQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/FuzzyQueryNodeProcessor.java",
+      "sha256": "a7d203161e69223a5932d5e2edc1c1f905a312e2f47ff0a6d9408d7b059face8",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/FuzzyQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/IntervalQueryNodeProcessor.java",
+      "sha256": "384069c3ad8ca007930fc7026212f4ef2675433350379f4368e94ec5320d643e",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/IntervalQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/MatchAllDocsQueryNodeProcessor.java",
+      "sha256": "031bef8745bfc794b77a156c52c1a96b93f661c092814847d8b2a876b4a8b148",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/MatchAllDocsQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/MultiFieldQueryNodeProcessor.java",
+      "sha256": "dafb0d3996fa14b45b7465a93830ecb9e17f2f3b2da55fb0f133f21823846e1a",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/MultiFieldQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/MultiTermRewriteMethodProcessor.java",
+      "sha256": "fa5cbf192903a0b74665937c2e9dad8f200ce1d59b61757f1263c054fc0bbe30",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/MultiTermRewriteMethodProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/OpenRangeQueryNodeProcessor.java",
+      "sha256": "1a35257bd0313023c7e786e14defc82fd9422fc916ce228a3879a6e0fda2da05",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/OpenRangeQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/PhraseSlopQueryNodeProcessor.java",
+      "sha256": "beedba91d526b9a19d80a1595871713aa9ef0191facfd278490225d96c528aaa",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/PhraseSlopQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/PointQueryNodeProcessor.java",
+      "sha256": "5aed83f3f6552507547f45e42a2251692176549cdb2184843792911843e2a427",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/PointQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/PointRangeQueryNodeProcessor.java",
+      "sha256": "1a6316b40842bc273badba0c7eee96e0163ac675fbcb35514b7d545842d71d8b",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/PointRangeQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/RegexpQueryNodeProcessor.java",
+      "sha256": "08d3732c7d7b4ab38e223a1adf6587b08a9ba4762d5fbf2c7b0aaf7a87b48ddd",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/RegexpQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/RemoveEmptyNonLeafQueryNodeProcessor.java",
+      "sha256": "fc60d1e73678b71ef149382e0bd735657cd0d6ca5120ad9e466ab57828ac39d7",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/RemoveEmptyNonLeafQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/StandardQueryNodeProcessorPipeline.java",
+      "sha256": "ac4b388bfd477e2a9015960e5fec48c1356e917de1543b03123115676b1df5ab",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/StandardQueryNodeProcessorPipeline.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/TermRangeQueryNodeProcessor.java",
+      "sha256": "542c9de217852f4c36a34e0cd5cf0b62c9195644883fc7c44107e00ebbbdab43",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/TermRangeQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/WildcardQueryNodeProcessor.java",
+      "sha256": "d0293a479a4cf41da2fd87e8f08bfdae6851ca10dc1fa5d7da0b7081e17e7eff",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/WildcardQueryNodeProcessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/flexible/standard/processors/package-info.java",
+      "sha256": "8f2f8e37724878b601a94dd295b8b2b8e132e864b3f939a623506990746d524a",
+      "upstream": "org/apache/lucene/queryparser/flexible/standard/processors/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/simple/SimpleQueryParser.java",
+      "sha256": "9690c893fdac67b5292d374b58deb7ff55e25e13a977611cd573b27d4f050bb9",
+      "upstream": "org/apache/lucene/queryparser/simple/SimpleQueryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/simple/package-info.java",
+      "sha256": "de9b6d953def0b382bf2d71aad354c008948a838bc4d82dc784170284626308d",
+      "upstream": "org/apache/lucene/queryparser/simple/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/parser/ParseException.java",
+      "sha256": "4d8c55e66cf9c4b4b4203a50934ca4e91dbe1757e280efcd130a9d026e1d7304",
+      "upstream": "org/apache/lucene/queryparser/surround/parser/ParseException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/parser/QueryParser.java",
+      "sha256": "2f5b7d218a91b49fb3ebf535bd58bebb348d796509f9dd7b12f06729d5f7439d",
+      "upstream": "org/apache/lucene/queryparser/surround/parser/QueryParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/parser/QueryParserConstants.java",
+      "sha256": "1d78c71d7f4b490bb96f8a96841f02632704c41c222544ae47a7ed25b5ef8ab1",
+      "upstream": "org/apache/lucene/queryparser/surround/parser/QueryParserConstants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/parser/QueryParserTokenManager.java",
+      "sha256": "2ca02c837a61fe533528b764660437a627b31fcad9b8a33fccb18b5afbd805fc",
+      "upstream": "org/apache/lucene/queryparser/surround/parser/QueryParserTokenManager.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/parser/Token.java",
+      "sha256": "c2ed7e4e8f0b1b3635e33b6b6867d19f7a0898af70f7dc38bc66429ad398ca77",
+      "upstream": "org/apache/lucene/queryparser/surround/parser/Token.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/parser/TokenMgrError.java",
+      "sha256": "b7e4e91ac04229e70919927c58270780e256d594f9781a20d21d3cd0ad29698b",
+      "upstream": "org/apache/lucene/queryparser/surround/parser/TokenMgrError.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/parser/package-info.java",
+      "sha256": "df01d226e84b295d5f3cd7112882ed46cced043784d754f67cd0ef5656f4b7f1",
+      "upstream": "org/apache/lucene/queryparser/surround/parser/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/AndQuery.java",
+      "sha256": "5496acee42640699e2491b9dcc4230c571ae3ad405bd920c92b44ec6d83c39de",
+      "upstream": "org/apache/lucene/queryparser/surround/query/AndQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/BasicQueryFactory.java",
+      "sha256": "7ad2888b40ac51f4b1d35acaa1841ef1e0eda0f095253d46f915b7b2919d883c",
+      "upstream": "org/apache/lucene/queryparser/surround/query/BasicQueryFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/ComposedQuery.java",
+      "sha256": "b41713f956c0e654ab6839441d212023e7b0d887a2c3aeedb5a494c3440632e4",
+      "upstream": "org/apache/lucene/queryparser/surround/query/ComposedQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/DistanceQuery.java",
+      "sha256": "5387a7eb514385740639aac468b3f8dc9bd352efd700b09d46007003c4bb8e72",
+      "upstream": "org/apache/lucene/queryparser/surround/query/DistanceQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/DistanceRewriteQuery.java",
+      "sha256": "45a8b2a1585700a28a71240362c1e0b347430121cc2812a54ca293e5cacf7655",
+      "upstream": "org/apache/lucene/queryparser/surround/query/DistanceRewriteQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/DistanceSubQuery.java",
+      "sha256": "3833fae373a7887675b4be150a25618e7f5cdc495179854fa0fa294fc8043166",
+      "upstream": "org/apache/lucene/queryparser/surround/query/DistanceSubQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/FieldsQuery.java",
+      "sha256": "1ae96b0b1b998ebe723296a0aa59a07293868d17670dee9bd75e9421cc8b146b",
+      "upstream": "org/apache/lucene/queryparser/surround/query/FieldsQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/NotQuery.java",
+      "sha256": "da743b82a0cb746f3cac697fd66030cf76d6f3c39d109b2f13e92d4578b66d38",
+      "upstream": "org/apache/lucene/queryparser/surround/query/NotQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/OrQuery.java",
+      "sha256": "00a1bb766496c211062ffcceeed7b13e036046faef5de33f2592aa374d962088",
+      "upstream": "org/apache/lucene/queryparser/surround/query/OrQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/RewriteQuery.java",
+      "sha256": "3b5e628ebb5078505bfe7fb3b951629d92b4fe850abbcf66577b3524e1fd4c6b",
+      "upstream": "org/apache/lucene/queryparser/surround/query/RewriteQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/SimpleTerm.java",
+      "sha256": "6dbaedcf3f1bf298ae8d68a75eb30c5666f924551216c6c9ebc9b11da4c6c5fc",
+      "upstream": "org/apache/lucene/queryparser/surround/query/SimpleTerm.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/SimpleTermRewriteQuery.java",
+      "sha256": "dd9f1541b4ae26d1ff8571a36dd7d62232e5922cddb304a676878dabd73f817f",
+      "upstream": "org/apache/lucene/queryparser/surround/query/SimpleTermRewriteQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/SpanNearClauseFactory.java",
+      "sha256": "9ed982273b42da180cbbdbe6213f928f5714fc6a13d003bc499ba040e5307409",
+      "upstream": "org/apache/lucene/queryparser/surround/query/SpanNearClauseFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/SrndBooleanQuery.java",
+      "sha256": "67265c632e6df99bfe3177b5cc97abf57cbaaa9b0998da63872601012e5c4c08",
+      "upstream": "org/apache/lucene/queryparser/surround/query/SrndBooleanQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/SrndPrefixQuery.java",
+      "sha256": "d0547e2da2ce0a5e0fe9c12001fe0371b9bee9809ff4f13d9ab9e30e33923bef",
+      "upstream": "org/apache/lucene/queryparser/surround/query/SrndPrefixQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/SrndQuery.java",
+      "sha256": "26c252f58ab61791f5b0128c5489b3c387489d20ca6992182dbd57bb2f43b7dc",
+      "upstream": "org/apache/lucene/queryparser/surround/query/SrndQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/SrndTermQuery.java",
+      "sha256": "a33a52a874a6661dc81b7cc54ae9747a5dcce6d3d50a279c7ccad725c8477977",
+      "upstream": "org/apache/lucene/queryparser/surround/query/SrndTermQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/SrndTruncQuery.java",
+      "sha256": "8ff700c41c30d08ecb138882111d0ee7c7a3ea3e23c87732fa18bd71bcaf2c4e",
+      "upstream": "org/apache/lucene/queryparser/surround/query/SrndTruncQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/TooManyBasicQueries.java",
+      "sha256": "04a321828c7cb1e70c07db3e6691b09bc897bb9d0b14e9b208f37279aeaef133",
+      "upstream": "org/apache/lucene/queryparser/surround/query/TooManyBasicQueries.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/surround/query/package-info.java",
+      "sha256": "ba5ad5359fff0a5bc00e1eb1ecdf5723b8df48cda52f9ae79afeb47d5be5507a",
+      "upstream": "org/apache/lucene/queryparser/surround/query/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/CoreParser.java",
+      "sha256": "1bf5dcfb3847580f146d2010207e69d1215040aba1816bcf0388953177c9c53b",
+      "upstream": "org/apache/lucene/queryparser/xml/CoreParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/CorePlusExtensionsParser.java",
+      "sha256": "982f00bc63ad91e33a917f2e0ac56b7d976cae15d05dae76d5252a7f507f892d",
+      "upstream": "org/apache/lucene/queryparser/xml/CorePlusExtensionsParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/CorePlusQueriesParser.java",
+      "sha256": "78208d53703bbc3070e8c1ac7b9d48413ef1b9a77fd09b8e897feda407387c6a",
+      "upstream": "org/apache/lucene/queryparser/xml/CorePlusQueriesParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/DOMUtils.java",
+      "sha256": "99417655759f7b314154d36b2d3292e333c16781b1e0d0396c2b89bfdd76ff7f",
+      "upstream": "org/apache/lucene/queryparser/xml/DOMUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/ParserException.java",
+      "sha256": "2c1d2fc41f498852592abf5a673df2d3b492f1ae03bb37c6a5573d01635ac47d",
+      "upstream": "org/apache/lucene/queryparser/xml/ParserException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/QueryBuilder.java",
+      "sha256": "5cc2c6e76f93f8090b08b0783365ed646e298299eb5a347b0650a8c36d6ae78d",
+      "upstream": "org/apache/lucene/queryparser/xml/QueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/QueryBuilderFactory.java",
+      "sha256": "76bdb49461b48285483362e01c0be0131dfc4df18030cea7ff89e642f3bd4730",
+      "upstream": "org/apache/lucene/queryparser/xml/QueryBuilderFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/BooleanQueryBuilder.java",
+      "sha256": "d6dacd2b1ba242ffb900d4f3cf72756fcf58a2abea527926135c2a5e9d1aec12",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/BooleanQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/BoostingTermBuilder.java",
+      "sha256": "fa4d0299588fd4e7fe68bb83420ae8039a0547d490483dab865024ba56ab6a98",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/BoostingTermBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/ConstantScoreQueryBuilder.java",
+      "sha256": "93003ee615679ee8e1190e78539486ddda9310350f3b1ae7d2bdc244ce87786a",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/ConstantScoreQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/DisjunctionMaxQueryBuilder.java",
+      "sha256": "0f65ae8ed26b7008272bffa7ba5b8865b04cf4f77ba95646b85a7506e87ed1ae",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/DisjunctionMaxQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/FuzzyLikeThisQueryBuilder.java",
+      "sha256": "78e7c83533289c28072f09dafefc8342a969ab18fe5426f45864cbc19b528eab",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/FuzzyLikeThisQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/LikeThisQueryBuilder.java",
+      "sha256": "2e3a2a9bfc738fe5b34f8863f44dbde45796c0bfdfd25595e1e6180da49dcb9a",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/LikeThisQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/MatchAllDocsQueryBuilder.java",
+      "sha256": "8a5e389fa53977321165ddd3719c09860edac522f990e6f6f0bd43a3af5544a4",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/MatchAllDocsQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/PointRangeQueryBuilder.java",
+      "sha256": "2680290ce165945d7e0b06212139556274d64892e5fddd903ce8086e5e23e537",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/PointRangeQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/RangeQueryBuilder.java",
+      "sha256": "2c96285a6e8aef7bc9f7d63684d75099c1dd62ef245b5c06cb3edb00d224839e",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/RangeQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/SpanBuilderBase.java",
+      "sha256": "2234f847922c80e2ff3de1695e3e1a92b537fb3f89c95a853b458956bf5e8c03",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/SpanBuilderBase.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/SpanFirstBuilder.java",
+      "sha256": "92a5dbc51aa7fe3679eb387ef8a324ee3766f234c58d1e8993ba86b65f539d86",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/SpanFirstBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/SpanNearBuilder.java",
+      "sha256": "fc3dbdab3cc28f02d22cfb6fa500d008d44096833b8b2453fd8a1aec76b83490",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/SpanNearBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/SpanNotBuilder.java",
+      "sha256": "e174e87dc5546fbbf31aa7c3f9d0c0ecfbbe78446277e78012bf41b40fa154a6",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/SpanNotBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/SpanOrBuilder.java",
+      "sha256": "34e2ecebf764c7c31bac3b25d5912b5a72a66749971323ae49e2f16582bfe010",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/SpanOrBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/SpanOrTermsBuilder.java",
+      "sha256": "3dc35b6c34f51d3d5b15732d827a68b14d62d6599f7d6e4328a87cdaa444b476",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/SpanOrTermsBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/SpanPositionRangeBuilder.java",
+      "sha256": "945eda36f51b9b44560329607703f7ce038ab86694ae79a19cd335a4cac8cea6",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/SpanPositionRangeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/SpanQueryBuilder.java",
+      "sha256": "6eb4d84ac7219dafbcdf23121aed21c58c5439f5da51f542afa1d83b4239f553",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/SpanQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/SpanQueryBuilderFactory.java",
+      "sha256": "c90d169f3a0e37a90e4a56412be6c91a49c34b0b786366bcfdea2bae0012f349",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/SpanQueryBuilderFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/SpanTermBuilder.java",
+      "sha256": "982c35ce4299949c209ff4567c5b334c04884d1495060bd454036ba782e54bd3",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/SpanTermBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/TermQueryBuilder.java",
+      "sha256": "2a71b767433f27b51e927c124057e94dd6f0ae1080de3852a2d3db7bd2074aa8",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/TermQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/TermsQueryBuilder.java",
+      "sha256": "a7827e84d6032ef2ad19329a42464defa603ea7299f3b80452f93733dc661cd5",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/TermsQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/UserInputQueryBuilder.java",
+      "sha256": "5c6b1f30a81ccdeab704b1dc4b19e78e448b175c9179d1600461605667a941b9",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/UserInputQueryBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/builders/package-info.java",
+      "sha256": "6388920c247cf1df1f72384ac66adb6e917853df6d9543222a36f0d2b48647ab",
+      "upstream": "org/apache/lucene/queryparser/xml/builders/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/xml/package-info.java",
+      "sha256": "85baad1c2bae745df06705b3c9b72f3577621d4c070254be32275d80d66bc407",
+      "upstream": "org/apache/lucene/queryparser/xml/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.apache.lucene:lucene-queryparser:9.10.0 (sha256 e2f0e51599b6daf65c42b850ef1b39b617d794b6176ac81d3ff8597211cbec88)",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/resources/org/apache/lucene/queryparser/flexible/core/messages/QueryParserMessages.properties",
+      "sha256": "32630f0ab074d776c1a6ee9cbceba0a4bdb104648bc3019005f25006cf12d226",
+      "upstream": "org/apache/lucene/queryparser/flexible/core/messages/QueryParserMessages.properties"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.apache.lucene:lucene-queryparser:9.10.0 (sha256 e2f0e51599b6daf65c42b850ef1b39b617d794b6176ac81d3ff8597211cbec88)",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/resources/org/apache/lucene/queryparser/xml/LuceneContribQuery.dtd",
+      "sha256": "e3184b7aad77e2d5943d5dc362555de78f5a13e84c23866f8a0ecf810e640016",
+      "upstream": "org/apache/lucene/queryparser/xml/LuceneContribQuery.dtd"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.apache.lucene:lucene-queryparser:9.10.0 (sha256 e2f0e51599b6daf65c42b850ef1b39b617d794b6176ac81d3ff8597211cbec88)",
+      "repository": "m3/vendor/third_party/lucene-queryparser/src/main/resources/org/apache/lucene/queryparser/xml/LuceneCoreQuery.dtd",
+      "sha256": "394de7502b707e6c62acae366a7eef402bda4407ca21bcbacd02615d311a144f",
+      "upstream": "org/apache/lucene/queryparser/xml/LuceneCoreQuery.dtd"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/lucene-queryparser/SOURCES_MANIFEST.tsv",
+      "sha256": "76bd27df1c36852d409af51b2033793bdd86555adabfbb3ec1b5f556771c7ef7",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/lucene-queryparser/LICENSE",
+      "sha256": "a2521407b3209df7dcebfc12cd6d732b24bfa2fe44982ef613e269666482521d",
+      "upstream": "META-INF/LICENSE.txt"
+    }
+  ],
+  "group": "org.apache.lucene",
+  "kind": "MODULE",
+  "license": "Apache 2",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-queryparser/9.10.0/lucene-queryparser-9.10.0.pom",
+  "receipt": {
+    "buildRoot": "a1bbe162d8c870fdc444a776f324b3c5a6370784bc4fb2b1489e3433b9061a2a",
+    "distributionSha256": "1ebbedbdf9e8f4fdfb7c209d466d14a8706b29b2af6edef7815ad0109fc17c8a",
+    "lock": "63d173713e70f5d3728fbfbfbb4b426604ccfbd1a82bd20f51298e1955a068c0",
+    "message": "",
+    "sourceRoot": "17dff3aa3380edb661a68ea7200e8b71a9491397d0606ccb1c749b3ff1d7c590",
+    "status": "PASS"
+  },
+  "resources_completed": 3,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-queryparser/9.10.0/lucene-queryparser-9.10.0-sources.jar",
+  "sources_jar_sha1": "3a54be38b57fbf299c44ede435d9bee3d6aa4975",
+  "sources_jar_sha256": "7911a83f8943382c3293ad43149fceb46209b43c076689139e5476006105ff2a",
+  "status": "PASS",
+  "upstream": "https://gitbox.apache.org/repos/asf?p=lucene.git",
+  "version": "9.10.0"
+}

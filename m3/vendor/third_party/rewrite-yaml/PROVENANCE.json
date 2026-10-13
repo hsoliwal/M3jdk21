@@ -434,8 +434,8 @@
       "upstream": "org/openrewrite/yaml/internal/YamlPrinter.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-yaml/src/main/resources/org/openrewrite/yaml/internal/grammar/JsonPathLexer.interp",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-yaml/upstream-source-only/org/openrewrite/yaml/internal/grammar/JsonPathLexer.interp",
       "sha256": "52b1e59d1f854e749a5bba4d15aeb6f8638c3a485144261a1f8af81c1edc6dc6",
       "upstream": "org/openrewrite/yaml/internal/grammar/JsonPathLexer.interp"
     },
@@ -446,14 +446,14 @@
       "upstream": "org/openrewrite/yaml/internal/grammar/JsonPathLexer.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-yaml/src/main/resources/org/openrewrite/yaml/internal/grammar/JsonPathLexer.tokens",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-yaml/upstream-source-only/org/openrewrite/yaml/internal/grammar/JsonPathLexer.tokens",
       "sha256": "efcfd047d889af139877630ebdcd509f91d58c1a65a1f3830254e74fadfbbc7f",
       "upstream": "org/openrewrite/yaml/internal/grammar/JsonPathLexer.tokens"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-yaml/src/main/resources/org/openrewrite/yaml/internal/grammar/JsonPathParser.interp",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-yaml/upstream-source-only/org/openrewrite/yaml/internal/grammar/JsonPathParser.interp",
       "sha256": "80df89ba7719a1687fd6ddcf2b37562a3dad9f52b87aa51507d79d3872c1377a",
       "upstream": "org/openrewrite/yaml/internal/grammar/JsonPathParser.interp"
     },
@@ -464,8 +464,8 @@
       "upstream": "org/openrewrite/yaml/internal/grammar/JsonPathParser.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/rewrite-yaml/src/main/resources/org/openrewrite/yaml/internal/grammar/JsonPathParser.tokens",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/rewrite-yaml/upstream-source-only/org/openrewrite/yaml/internal/grammar/JsonPathParser.tokens",
       "sha256": "efcfd047d889af139877630ebdcd509f91d58c1a65a1f3830254e74fadfbbc7f",
       "upstream": "org/openrewrite/yaml/internal/grammar/JsonPathParser.tokens"
     },
@@ -749,6 +749,11 @@
   "license": "The Apache Software License, Version 2.0",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "::",
   "pom": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.pom",

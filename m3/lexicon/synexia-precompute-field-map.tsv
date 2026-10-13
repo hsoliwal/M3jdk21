@@ -37,10 +37,10 @@ LangDexWordProfile	subjectId	int	langdex_subject_id	synexia.records.tsv:precompu
 LangDexWordProfile	featureBits	int	langdex_feature_bits	synexia.records.tsv:precompute_payload	MAPPED	morphology/feature bits remain donor-owned and opaque
 LangDexWordProfile	evidenceMask	int	langdex_evidence_mask	synexia.records.tsv:precompute_payload	MAPPED	evidence bits remain donor-owned and opaque
 LangDexWordProfile	confidencePermille	int	langdex_confidence_permille	synexia.records.tsv:precompute_payload	MAPPED	confidence remains bounded donor metadata in the inclusive 0..1000 range
-LangDexLexicalProfile	lexicalClassMask	long	langdex_lexical_class_mask	synexia.records.tsv:precompute_payload	MAPPED	profile-level lexical class mask shares the LangDex canonical type
-LangDexLexicalProfile	featureBits	int	langdex_feature_bits	synexia.records.tsv:precompute_payload	MAPPED	profile-level feature bits share the LangDex canonical type
-LangDexLexicalProfile	evidenceMask	int	langdex_evidence_mask	synexia.records.tsv:precompute_payload	MAPPED	profile-level evidence bits share the LangDex canonical type
-LangDexLexicalProfile	confidencePermille	int	langdex_confidence_permille	synexia.records.tsv:precompute_payload	MAPPED	profile-level confidence shares the LangDex canonical type and bound
+LangDexLexicalProfile	lexicalClassMask	long	langdex_lexical_profile_lexical_class_mask	synexia.records.tsv:precompute_payload	MAPPED	profile-level lexical class mask shares the LangDex canonical type; owner-qualified key avoids collision with LangDexWordProfile; optional when this profile is supplied
+LangDexLexicalProfile	featureBits	int	langdex_lexical_profile_feature_bits	synexia.records.tsv:precompute_payload	MAPPED	profile-level feature bits share the LangDex canonical type; owner-qualified key avoids collision with LangDexWordProfile; optional when this profile is supplied
+LangDexLexicalProfile	evidenceMask	int	langdex_lexical_profile_evidence_mask	synexia.records.tsv:precompute_payload	MAPPED	profile-level evidence bits share the LangDex canonical type; owner-qualified key avoids collision with LangDexWordProfile; optional when this profile is supplied
+LangDexLexicalProfile	confidencePermille	int	langdex_lexical_profile_confidence_permille	synexia.records.tsv:precompute_payload	MAPPED	profile-level confidence shares the LangDex canonical type and bound; owner-qualified key avoids collision with LangDexWordProfile; optional when this profile is supplied
 LangDexTranslation	targetLexemeId	long	langdex_target_lexeme_id	synexia.records.tsv:precompute_payload	MAPPED	target lexeme coordinate remains donor-owned and is not substituted with image_row
 SiUnit	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_payload	MAPPED	SI decimal exponent remains bounded donor metadata in the inclusive -100..100 range
 SiDimension	packed	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains donor-owned
@@ -67,7 +67,7 @@ M3LexiconPrecompute.TranslationProjection	sourceLanguage	String	source_language	
 M3LexiconPrecompute.TranslationProjection	targetLanguage	String	target_language	m3lex-family-v2:synexia.translation.tsv	MAPPED	translation target language remains bound to the typed projection identity
 M3LanguageGrammarSupport	supports	boolean	translation_grammar_supported	synexia.records.tsv:precompute_payload	MAPPED	grammar support is a source-owned boolean signal and is not inferred from token text
 M3NumberSpace	SOURCE_ID	String	source_id	synexia.records.tsv:precompute_payload	MAPPED	M3NumberSpace source family identity is retained exactly.
-M3NumberSpace	RECORD_ID	String	record_id	synexia.records.tsv:precompute_payload	MAPPED	Number-domain record identity remains the owner-supplied opaque string.
+M3NumberSpace	sourceRecordId(value)	String	record_id	synexia.records.tsv:precompute_payload	MAPPED	Canonical decimal source identity matches the inherited NumberValue id for each generated integer; range and spelling are M3-derived.
 M3NumberSpace	MIN_VALUE	int	min_value	synexia.records.tsv:precompute_payload	MAPPED	Inclusive lower bound is retained as the Java int constant.
 M3NumberSpace	MAX_VALUE	int	max_value	synexia.records.tsv:precompute_payload	MAPPED	Inclusive upper bound is retained as the Java int constant.
 M3NumberSpace	precomputedValueCount()	int	precomputed_value_count	synexia.records.tsv:precompute_payload	MAPPED	Precomputed view count is the owner's exact integer result.

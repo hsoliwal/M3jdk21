@@ -1,0 +1,36 @@
+<!-- SPDX-License-Identifier: Apache-2.0; build integration only, upstream source remains Apache License, Version 2.0 (from the license text; pom declares none). -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.google.guava</groupId><artifactId>guava</artifactId><version>33.0.0-jre-m3-source-1</version>
+  <name>guava 33.0.0-jre - unchanged upstream source build for M3jdk21</name>
+  <description>Source inclusion of the published com.google.guava:guava:33.0.0-jre sources jar (SHA-1 2cca40652185734d5a89349c471a54367fb98067); no upstream implementation changes. See PROVENANCE.json.</description>
+  <url>https://github.com/google/guava</url>
+  <licenses><license><name>Apache License, Version 2.0 (from the license text; pom declares none)</name><url>https://repo.maven.apache.org/maven2/com/google/guava/guava/33.0.0-jre/guava-33.0.0-jre.pom</url><distribution>repo</distribution></license></licenses>
+  <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <dependencies>
+    <dependency><groupId>org.checkerframework</groupId><artifactId>checker-qual</artifactId><version>3.37.0-m3-source-1</version><!-- source module --></dependency>
+    <dependency><groupId>com.google.errorprone</groupId><artifactId>error_prone_annotations</artifactId><version>2.21.1-m3-source-1</version><!-- source module --></dependency>
+    <dependency><groupId>com.google.guava</groupId><artifactId>failureaccess</artifactId><version>1.0.2-m3-source-1</version><!-- source module --></dependency>
+    <dependency><groupId>com.google.j2objc</groupId><artifactId>j2objc-annotations</artifactId><version>2.8-m3-source-1</version><!-- source module --></dependency>
+    <dependency><groupId>com.google.code.findbugs</groupId><artifactId>jsr305</artifactId><version>3.0.2-m3-source-1</version><!-- source module --></dependency>
+  </dependencies>
+  <build>
+    <resources>
+      <resource><directory>src/main/resources</directory></resource>
+      <resource><directory>${project.basedir}</directory><targetPath>META-INF/third-party/guava</targetPath><includes><include>LICENSE</include><include>PROVENANCE.json</include><include>THIRD_PARTY_NOTICES.md</include></includes></resource>
+    </resources>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.15.0</version>
+        <!-- Upstream bytes are compiled as published: no annotation processing, no warnings-as-errors. M3jdk21 integration is checked separately with -Werror. -->
+        <configuration><source>8</source><target>8</target><encoding>UTF-8</encoding><proc>none</proc><compilerArgs><arg>-Xlint:all,-options</arg></compilerArgs></configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.6</version>
+        <!-- Published sources jars carry no test suite; the compile and the consumers' own tests are the proof lane. -->
+        <configuration><skipTests>true</skipTests></configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
+        <configuration><excludes><exclude>META-INF/jpms.args</exclude></excludes><archive><manifestEntries><Automatic-Module-Name>com.google.common</Automatic-Module-Name></manifestEntries></archive></configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -64,13 +64,59 @@ public final class ApiSurface {
             else if (x == null) { resBuilt++; out.add("RESOURCE_BUILT_ONLY\t" + r + "\t" + y); }
             else if (!x.equals(y)) { resDiff++; out.add("RESOURCE_DIFFERS\t" + r + "\t" + x + " " + y); }
         }
+        Map<String, String> da = descriptors(Path.of(args[0])), db = descriptors(Path.of(args[1]));
+        int descPub = 0, descBuilt = 0, descDiff = 0;
+        TreeSet<String> dall = new TreeSet<>(da.keySet());
+        dall.addAll(db.keySet());
+        for (String d : dall) {
+            String x = da.get(d), y = db.get(d);
+            if (y == null) { descPub++; out.add("DESCRIPTOR_PUBLISHED_ONLY\t" + d + "\t" + x); }
+            else if (x == null) { descBuilt++; out.add("DESCRIPTOR_BUILT_ONLY\t" + d + "\t" + y); }
+            else if (!x.equals(y)) { descDiff++; out.add("DESCRIPTOR_DIFFERS\t" + d + "\t" + x + " || " + y); }
+        }
         Files.write(Path.of(args[2]), out, StandardCharsets.UTF_8);
         System.out.println("view=" + (release == 0 ? "base" : "mr" + release) + " published_multi_release=" + pub.multiRelease()
                 + " published_classes=" + pub.classes().size() + " built_classes=" + built.classes().size()
                 + " identical_classes=" + same + " published_only_classes=" + missing + " built_only_classes=" + extra
                 + " published_only_lines=" + memberPub + " built_only_lines=" + memberBuilt
                 + " resources_published=" + ra.size() + " resources_published_only=" + resPub + " resources_built_only=" + resBuilt + " resources_differ=" + resDiff
-                + " published_versions=" + pub.versions().toString().replace(" ", "") + " built_versions=" + built.versions().toString().replace(" ", ""));
+                + " published_versions=" + pub.versions().toString().replace(" ", "") + " built_versions=" + built.versions().toString().replace(" ", "")
+                + " descriptors_published=" + da.size() + " descriptors_published_only=" + descPub + " descriptors_built_only=" + descBuilt + " descriptors_differ=" + descDiff);
+    }
+
+    /** module-info.class per jar path -> canonical descriptor text (semantic content only). */
+    static Map<String, String> descriptors(Path jar) throws Exception {
+        Map<String, String> d = new TreeMap<>();
+        try (ZipFile z = new ZipFile(jar.toFile())) {
+            Enumeration<? extends ZipEntry> en = z.entries();
+            while (en.hasMoreElements()) {
+                ZipEntry e = en.nextElement();
+                if (e.isDirectory() || !e.getName().endsWith("module-info.class")) continue;
+                java.util.regex.Matcher vm = java.util.regex.Pattern.compile("META-INF/versions/(\\d+)/module-info\\.class").matcher(e.getName());
+                if (vm.matches() && Integer.parseInt(vm.group(1)) > Runtime.version().feature()) continue;  // descriptor above the gating JDK: never read by it
+                byte[] bytes;
+                try (InputStream in = z.getInputStream(e)) { bytes = in.readAllBytes(); }
+                TreeSet<String> parts = new TreeSet<>();
+                parts.add("0major=" + (((bytes[6] & 0xff) << 8) | (bytes[7] & 0xff)));
+                new ClassReader(bytes).accept(new ClassVisitor(Opcodes.ASM9) {
+                    @Override public org.objectweb.asm.ModuleVisitor visitModule(String name, int access, String version) {
+                        parts.add("1module " + name + " open=" + ((access & Opcodes.ACC_OPEN) != 0) + " version=" + version);
+                        return new org.objectweb.asm.ModuleVisitor(Opcodes.ASM9) {
+                            @Override public void visitMainClass(String c) { parts.add("2main " + c); }
+                            @Override public void visitRequire(String m, int a, String v) {
+                                if (!m.equals("java.base")) parts.add("3requires " + m + ((a & Opcodes.ACC_TRANSITIVE) != 0 ? " transitive" : "") + ((a & Opcodes.ACC_STATIC_PHASE) != 0 ? " static" : ""));
+                            }
+                            @Override public void visitExport(String p, int a, String... to) { parts.add("4exports " + p + (to == null ? "" : " to " + String.join(",", new TreeSet<>(List.of(to))))); }
+                            @Override public void visitOpen(String p, int a, String... to) { parts.add("5opens " + p + (to == null ? "" : " to " + String.join(",", new TreeSet<>(List.of(to))))); }
+                            @Override public void visitUse(String s) { parts.add("6uses " + s); }
+                            @Override public void visitProvide(String s, String... with) { parts.add("7provides " + s + " with " + String.join(",", new TreeSet<>(List.of(with)))); }
+                        };
+                    }
+                }, 0);
+                d.put(e.getName(), String.join(" ; ", parts));
+            }
+        }
+        return d;
     }
 
     static Map<String, String> resources(Path jar, boolean built) throws Exception {

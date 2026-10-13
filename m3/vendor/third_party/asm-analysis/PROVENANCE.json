@@ -114,8 +114,8 @@
       "upstream": "org/objectweb/asm/tree/analysis/Value.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/asm-analysis/src/main/resources/org/objectweb/asm/tree/analysis/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/asm-analysis/upstream-source-only/org/objectweb/asm/tree/analysis/package.html",
       "sha256": "b94edae40a0e0725c6c858acbb28bb89d60e0422416445c4c9a5c72b635074c2",
       "upstream": "org/objectweb/asm/tree/analysis/package.html"
     },
@@ -142,6 +142,13 @@
       "repository": "m3/vendor/third_party/asm-analysis/LICENSE",
       "sha256": "293b6af371eee28b0ff16f0334ea19e20a3d5522143faa4b95b346855507879a",
       "upstream": "UPSTREAM_LICENSE.txt"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "org.ow2.asm:asm-analysis:9.6 (sha256 d92832d7c37edc07c60e2559ac6118b31d642e337a6671edcb7ba9fae68edbbb)",
+      "repository": "m3/vendor/third_party/asm-analysis/src/main/descriptor/root/module-info.java",
+      "sha256": "22ad293291121199d266a5000deb2e22454f660cb59a664635bfc042b4395c1f",
+      "upstream": "module-info.class"
     }
   ],
   "group": "org.ow2.asm",
@@ -149,6 +156,11 @@
   "license": "BSD-3-Clause",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "org.ow2:ow2:1.5.1",
   "pom": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.pom",

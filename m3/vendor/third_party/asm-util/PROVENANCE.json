@@ -164,8 +164,8 @@
       "upstream": "org/objectweb/asm/util/TraceSignatureVisitor.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/asm-util/src/main/resources/org/objectweb/asm/util/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/asm-util/upstream-source-only/org/objectweb/asm/util/package.html",
       "sha256": "8209592833d56f5af340f3aa254f8370dede94aa466d6b56723da1ba9837741d",
       "upstream": "org/objectweb/asm/util/package.html"
     },
@@ -192,6 +192,13 @@
       "repository": "m3/vendor/third_party/asm-util/LICENSE",
       "sha256": "293b6af371eee28b0ff16f0334ea19e20a3d5522143faa4b95b346855507879a",
       "upstream": "UPSTREAM_LICENSE.txt"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "org.ow2.asm:asm-util:9.6 (sha256 c635a7402f4aa9bf66b2f4230cea62025a0fe1cd63e8729adefc9b1994fac4c3)",
+      "repository": "m3/vendor/third_party/asm-util/src/main/descriptor/root/module-info.java",
+      "sha256": "ff6ed463764a1e0b577ec6c1f1baf0cf10057dde9006c4b78f721fc36b82146f",
+      "upstream": "module-info.class"
     }
   ],
   "group": "org.ow2.asm",
@@ -199,6 +206,11 @@
   "license": "BSD-3-Clause",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "org.ow2:ow2:1.5.1",
   "pom": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm-util/9.6/asm-util-9.6.pom",

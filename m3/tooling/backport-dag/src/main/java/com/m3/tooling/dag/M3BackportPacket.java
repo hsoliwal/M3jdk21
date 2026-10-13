@@ -2,6 +2,7 @@
 package com.m3.tooling.dag;
 
 import com.m3.rewrite.scope.M3EditScope;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -33,6 +34,34 @@ public record M3BackportPacket(String packetId, List<M3RecipeAtom> atoms) {
                 }
             }
         }
+        requireAcyclic(indexed);
+    }
+
+    /** Validate planning-only packets as DAGs even when scope permission is on HOLD. */
+    private static void requireAcyclic(Map<String, M3RecipeAtom> nodes) {
+        Map<String, Integer> states = new HashMap<>();
+        for (M3RecipeAtom atom : nodes.values()) {
+            visit(atom, nodes, states);
+        }
+    }
+
+    private static void visit(
+            M3RecipeAtom atom,
+            Map<String, M3RecipeAtom> nodes,
+            Map<String, Integer> states) {
+        int state = states.getOrDefault(atom.id(), 0);
+        if (state == 1) {
+            throw new IllegalArgumentException(
+                    "packet dependency cycle at " + atom.id());
+        }
+        if (state == 2) {
+            return;
+        }
+        states.put(atom.id(), 1);
+        for (String dependency : atom.dependsOn()) {
+            visit(nodes.get(dependency), nodes, states);
+        }
+        states.put(atom.id(), 2);
     }
 
     public M3EditScope maximumScope() {

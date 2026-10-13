@@ -19,7 +19,7 @@ Verdicts:
                                generated properties, service files) -> never admitted
 Writes API_SURFACE.tsv and per-donor diff files. CPU only."""
 from __future__ import annotations
-import argparse, csv, io, os, subprocess, sys, zipfile
+import argparse, csv, io, os, re, subprocess, sys, time, zipfile
 from pathlib import Path
 
 SHADED_PREFIXES = {  # published jars that relocate another artifact's classes into their own namespace
@@ -102,6 +102,19 @@ def main() -> int:
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--java", default=r"C:\Program Files\Java\jdk-21\bin\java.exe")
     args = ap.parse_args()
+    classes = args.diffs / ".classes"
+    classes.mkdir(parents=True, exist_ok=True)
+    javac = str(Path(args.java).with_name("javac.exe" if args.java.lower().endswith(".exe") else "javac"))
+    subprocess.run([javac, "-nowarn", "-cp", str(args.asm), "-d", str(classes), str(args.tool)], check=True)
+    tool_cp = str(args.asm) + os.pathsep + str(classes)
+
+    def run_tool(pub, jar, diff, view):
+        for attempt in range(3):
+            proc = subprocess.run([args.java, "-cp", tool_cp, "ApiSurface", str(pub), str(jar), str(diff), view], capture_output=True, text=True)
+            if proc.returncode == 0 or proc.stderr.replace("Picked up JAVA_TOOL_OPTIONS", "").strip():
+                return proc
+            time.sleep(10)  # no output: the JVM did not start (memory pressure); retry
+        return proc
     rows = {}
     for inv in args.inventory:
         for r in csv.DictReader(io.open(inv, encoding="utf-8", newline=""), delimiter="\t"):
@@ -135,14 +148,14 @@ def main() -> int:
         err = ""
         for view in (("base", "mr21") if multi else ("base",)):
             diff = args.diffs / ("%s.%s.tsv" % (did, view))
-            proc = subprocess.run([args.java, "-cp", str(args.asm), str(args.tool), str(pub), str(built[did]), str(diff), view], capture_output=True, text=True)
+            proc = run_tool(pub, built[did], diff, view)
             if proc.returncode != 0:
-                err = proc.stderr.strip()[-200:].replace("\t", " ").replace("\n", " ")
+                err = ("exit %d: " % proc.returncode) + proc.stderr.strip()[-200:].replace("\t", " ").replace("\n", " ")
                 continue
             kv = dict(x.split("=", 1) for x in proc.stdout.split() if "=" in x)
             res = classify(diff, r["artifact"])
             score = (res[1] + res[2]) * 100000 + res[3] + res[4]
-            if best is None or score < best[0]:
+            if best is None or score > best[0]:  # every view must match: the worst view decides (multi-release overlays count)
                 best = (score, res, kv, diff, view)
         if best is None:
             out.append((did, "-", "-", "-", "-", "-", "-", "-", "TOOL_FAILED", err, "", "", "", "")); continue
@@ -150,8 +163,27 @@ def main() -> int:
         res_missing, res_diff = int(kv.get("resources_published_only", "0")), int(kv.get("resources_differ", "0"))
         if verdict in ADMISSIBLE and (res_missing or res_diff):
             verdict = "DIFFERS_RESOURCES"
+        desc_missing, desc_diff = int(kv.get("descriptors_published_only", "0")), int(kv.get("descriptors_differ", "0"))
+        if desc_diff:  # version-only descriptor differences are compiler artifacts (ModuleDescriptor.rawVersion)
+            vonly = 0
+            for dl in io.open(diff, encoding="utf-8").read().splitlines():
+                if dl.startswith("DESCRIPTOR_DIFFERS\t"):
+                    a_, b_ = dl.split("\t", 2)[2].split(" || ", 1)
+                    if re.sub(r" version=\S+", "", a_) == re.sub(r" version=\S+", "", b_):
+                        vonly += 1
+            desc_diff -= vonly
+            if vonly and verdict == "IDENTICAL":
+                verdict = "EQUIVALENT_MODULO_COMPILER"  # version-only descriptor difference
+        if verdict in ADMISSIBLE and (desc_missing or desc_diff):
+            verdict = "DIFFERS_MODULE_DESCRIPTOR"
         out.append((did, kv["published_classes"], kv["built_classes"], kv["identical_classes"], str(missing), str(extra), str(rp), str(rb), verdict, diff.name, str(benign), view, kv.get("published_versions", ""), kv.get("built_versions", ""), kv.get("resources_published", ""), str(res_missing), str(res_diff), kv.get("resources_built_only", "")))
         print(did, verdict, view, file=sys.stderr)
+    if args.out.exists():  # previous non-admissible verdicts of donors not evaluated this run are carried forward
+        seen = set(x[0] for x in out)
+        for prev in csv.DictReader(io.open(args.out, encoding="utf-8", newline=""), delimiter="\t"):
+            if prev["donor"] not in seen and prev["verdict"] not in ADMISSIBLE and prev["verdict"] not in ("TOOL_FAILED", "NO_BUILT_JAR", "NO_PUBLISHED_JAR"):
+                out.append(tuple(prev[k] or "" for k in prev))
+                print(prev["donor"], prev["verdict"], "carried forward (image; not re-gated)", file=sys.stderr)
     args.out.write_text("\n".join(["donor\tpublished_classes\tbuilt_classes\tidentical_classes\tmissing_classes\tbuilt_only_classes\treal_published_only_lines\treal_built_only_lines\tverdict\tdiff\tcompiler_artifact_lines\tview\tpublished_class_versions\tbuilt_class_versions\tresources_published\tresources_missing\tresources_differ\tresources_built_only"] + ["\t".join(x) for x in out]) + "\n", encoding="utf-8", newline="\n")
     counts = {}
     for x in out:

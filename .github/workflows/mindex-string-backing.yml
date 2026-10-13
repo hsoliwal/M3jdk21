@@ -50,6 +50,7 @@ on:
       - 'test/jdk/java/lang/String/M3StringInternTest.java'
       - 'test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java'
       - 'test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java'
+      - 'test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java'
       - 'test/jdk/java/lang/String/M3StringJoinCarryTest.java'
       - 'test/jdk/java/lang/String/M3StringBinaryConcatTest.java'
       - 'test/jdk/java/lang/String/M3StringCodePointGeometryTest.java'
@@ -112,6 +113,10 @@ jobs:
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringDirectStreamTraversalRecipeTest test
       - name: Prove immutable Matcher fact reuse
         run: mvn -B -ntp -f m3/tooling/mr/pom.xml test
+      - name: Verify current M3 String concat length and updated jtreg contract
+        run: |
+          python3 m3/runtime-integration/test_m3string_concat_overflow_current.py -v
+          python3 m3/runtime-integration/check-m3string-concat-overflow-current.py
       - name: Set up Java 20 boot JDK for OpenJDK 21 build
         uses: actions/setup-java@v4
         with:
@@ -142,4 +147,4 @@ jobs:
           if-no-files-found: error
           retention-days: 30
       - name: Run M3 String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringStreamsTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringRegexReplacementTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java test/jdk/java/lang/String/M3StringJoinCarryTest.java test/jdk/java/lang/String/M3StringBinaryConcatTest.java test/jdk/java/lang/String/M3StringCodePointGeometryTest.java test/jdk/java/lang/String/M3StringLiteralMatchesTest.java test/jdk/java/lang/String/M3StringBuilderRangeBulkTest.java test/jdk/java/lang/String/M3StringByteSourceNeedleTest.java test/jdk/java/lang/String/M3StringMixedLiteralReplaceTest.java test/jdk/java/lang/String/M3StringRegexSplitHistoryTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java test/jdk/java/util/regex/M3RegexReuseTest.java"
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringStreamsTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringRegexReplacementTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java test/jdk/java/lang/String/M3StringJoinCarryTest.java test/jdk/java/lang/String/M3StringBinaryConcatTest.java test/jdk/java/lang/String/M3StringCodePointGeometryTest.java test/jdk/java/lang/String/M3StringLiteralMatchesTest.java test/jdk/java/lang/String/M3StringBuilderRangeBulkTest.java test/jdk/java/lang/String/M3StringByteSourceNeedleTest.java test/jdk/java/lang/String/M3StringMixedLiteralReplaceTest.java test/jdk/java/lang/String/M3StringRegexSplitHistoryTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java test/jdk/java/util/regex/M3RegexReuseTest.java"

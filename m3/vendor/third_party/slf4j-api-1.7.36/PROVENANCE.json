@@ -181,8 +181,8 @@
       "upstream": "org/slf4j/helpers/Util.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/slf4j-api-1.7.36/src/main/resources/org/slf4j/helpers/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/slf4j-api-1.7.36/upstream-source-only/org/slf4j/helpers/package.html",
       "sha256": "b316807f1c2637492c1be844a8d901d8538be8c7a34a5c01430e0d606596574d",
       "upstream": "org/slf4j/helpers/package.html"
     },
@@ -205,14 +205,14 @@
       "upstream": "org/slf4j/impl/StaticMarkerBinder.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/slf4j-api-1.7.36/src/main/resources/org/slf4j/impl/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/slf4j-api-1.7.36/upstream-source-only/org/slf4j/impl/package.html",
       "sha256": "62eb31ac5bada9b0070707131016bcbe72af0a10ea1c3209f0805a8ef34a594a",
       "upstream": "org/slf4j/impl/package.html"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/slf4j-api-1.7.36/src/main/resources/org/slf4j/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/slf4j-api-1.7.36/upstream-source-only/org/slf4j/package.html",
       "sha256": "aac2564ef6df4dcc8876417b784eb2cfa43006d66c4d896ace52825ac8f68c19",
       "upstream": "org/slf4j/package.html"
     },
@@ -241,8 +241,8 @@
       "upstream": "org/slf4j/spi/MarkerFactoryBinder.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/slf4j-api-1.7.36/src/main/resources/org/slf4j/spi/package.html",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/slf4j-api-1.7.36/upstream-source-only/org/slf4j/spi/package.html",
       "sha256": "b4fc0871c9c5b6e50278fc146789238b8ed779155396d1b829a6a8e9b9a4e192",
       "upstream": "org/slf4j/spi/package.html"
     },
@@ -276,6 +276,11 @@
   "license": "UNDECLARED (see LICENSE)",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "org.slf4j:slf4j-parent:1.7.36",
   "pom": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom",

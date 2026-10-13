@@ -4786,6 +4786,13 @@
       "repository": "m3/vendor/third_party/assertj-core/LICENSE",
       "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
       "upstream": "UPSTREAM_LICENSE.txt"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "org.assertj:assertj-core:3.25.3 (sha256 7fbdffa1996d43cc08e2576e01008b07e57bbad2b4741aa6c3ab73ce8511130e)",
+      "repository": "m3/vendor/third_party/assertj-core/src/main/descriptor/9/module-info.java",
+      "sha256": "e5bcffff23606192a1b47330787509ed34b9992ef2ce4185e52facd21fbea948",
+      "upstream": "META-INF/versions/9/module-info.class"
     }
   ],
   "group": "org.assertj",
@@ -4793,6 +4800,11 @@
   "license": "Apache License, Version 2.0",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "::",
   "pom": "https://repo.maven.apache.org/maven2/org/assertj/assertj-core/3.25.3/assertj-core-3.25.3.pom",

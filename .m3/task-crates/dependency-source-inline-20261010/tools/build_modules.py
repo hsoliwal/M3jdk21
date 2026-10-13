@@ -12,6 +12,9 @@ from pathlib import Path
 SUFFIX = "-synexia-source-1"
 
 
+NATIVE_OOM_MARKERS = ("paging file is too small", "insufficient memory for the Java Runtime Environment")
+
+
 def main() -> int:
     global SUFFIX
     ap = argparse.ArgumentParser(description=__doc__)
@@ -26,7 +29,7 @@ def main() -> int:
     ap.add_argument("--repo-local", default="")
     args = ap.parse_args()
     SUFFIX = args.suffix
-    mods = [m for m in csv.DictReader(io.open(args.modules, encoding="utf-8", newline=""), delimiter="\t") if m["kind"] == "MODULE"]
+    mods = [m for m in csv.DictReader(io.open(args.modules, encoding="utf-8", newline=""), delimiter="\t") if m["kind"] in ("MODULE", "EXISTING_MODULE")]  # EXISTING_MODULE (re2j) is a prerequisite of source-built consumers
     by_coord = {"%s:%s:%s" % (m["group"], m["artifact"], m["version"]): m for m in mods}
     # topological order on source-module dependencies
     order, seen = [], set()
@@ -65,8 +68,13 @@ def main() -> int:
             rows.append((path, "PASS", prev["seconds"], prev["log"], "(previous)")); continue
         log = args.logs / (path.replace("/", "_") + ".log")
         started = time.time()
-        with open(log, "wb") as lf:
-            rc = subprocess.run(["mvn", "-B", "-ntp", "-f", str(args.repo / path / "pom.xml"), "install", "-DskipTests"], stdout=lf, stderr=subprocess.STDOUT, env=env, shell=True).returncode
+        for attempt in range(3):
+            with open(log, "wb") as lf:
+                rc = subprocess.run(["mvn", "-B", "-ntp", "-f", str(args.repo / path / "pom.xml"), "install", "-DskipTests"], stdout=lf, stderr=subprocess.STDOUT, env=env, shell=True).returncode
+            if rc == 0 or not any(k in log.read_text(encoding="utf-8", errors="replace") for k in NATIVE_OOM_MARKERS):
+                break
+            print(path, "native memory failure; retry", attempt + 1, file=sys.stderr)
+            time.sleep(30)
         seconds = "%.0f" % (time.time() - started)
         text = log.read_text(encoding="utf-8", errors="replace")
         first_error = next((l.strip()[:200] for l in text.splitlines() if "[ERROR]" in l and ("error:" in l or "ERROR] Failed" in l)), "")

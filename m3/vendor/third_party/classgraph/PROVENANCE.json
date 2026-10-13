@@ -445,8 +445,8 @@
       "upstream": "nonapi/io/github/classgraph/classloaderhandler/QuarkusClassLoaderHandler.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/classgraph/src/main/resources/nonapi/io/github/classgraph/classloaderhandler/README",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/classgraph/upstream-source-only/nonapi/io/github/classgraph/classloaderhandler/README",
       "sha256": "9d6bdd1c9a0ee94c0a2396091a1b6d0684dfadcdfdc9ac1bbda3ba28e79f097c",
       "upstream": "nonapi/io/github/classgraph/classloaderhandler/README"
     },
@@ -906,6 +906,13 @@
       "repository": "m3/vendor/third_party/classgraph/LICENSE",
       "sha256": "4107216e853eee237beca89fe7d460271baf03eb70713f796bea46226b568944",
       "upstream": "UPSTREAM_LICENSE.txt"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "io.github.classgraph:classgraph:4.8.165 (sha256 5258d9218fc6413f4d14218a5a6e784528e349f60f48883b77de74bb478ebafd)",
+      "repository": "m3/vendor/third_party/classgraph/src/main/descriptor/9/module-info.java",
+      "sha256": "da807dcb87744ec8adf6464a7f85f8ee680278ff562edf972a6eed4b25cda98f",
+      "upstream": "META-INF/versions/9/module-info.class"
     }
   ],
   "group": "io.github.classgraph",
@@ -913,6 +920,11 @@
   "license": "The MIT License (MIT)",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "::",
   "pom": "https://repo.maven.apache.org/maven2/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.pom",

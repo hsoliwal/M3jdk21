@@ -72,8 +72,8 @@
       "upstream": "com/fasterxml/jackson/dataformat/smile/PackageVersion.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jackson-dataformat-smile/src/main/resources/com/fasterxml/jackson/dataformat/smile/PackageVersion.java.in",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jackson-dataformat-smile/upstream-source-only/com/fasterxml/jackson/dataformat/smile/PackageVersion.java.in",
       "sha256": "744babce0ed8859a38895e27c6cca1c834117791919037c5096c6bcfb9bdff03",
       "upstream": "com/fasterxml/jackson/dataformat/smile/PackageVersion.java.in"
     },
@@ -166,6 +166,13 @@
       "repository": "m3/vendor/third_party/jackson-dataformat-smile/SOURCES_MANIFEST.tsv",
       "sha256": "64011578fa3e5d4fe70dbf9d8cc9b07e57f0ab17b48134352bd44bebe6d5370f",
       "upstream": "(inventory)"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.16.1 (sha256 3767744f2e37e6e672c3a98174e68567907d18ea5c451b203a19e7b0ad934354)",
+      "repository": "m3/vendor/third_party/jackson-dataformat-smile/src/main/descriptor/9/module-info.java",
+      "sha256": "fd008e217590c970a8decde461c89ba1d0cc367131aaef03c7adf76d8e6789fa",
+      "upstream": "META-INF/versions/9/module-info.class"
     }
   ],
   "group": "com.fasterxml.jackson.dataformat",
@@ -173,6 +180,11 @@
   "license": "The Apache Software License, Version 2.0",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "com.fasterxml.jackson.dataformat:jackson-dataformats-binary:2.16.1",
   "pom": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.pom",

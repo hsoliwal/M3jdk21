@@ -80,8 +80,8 @@
       "upstream": "com/fasterxml/jackson/module/paramnames/PackageVersion.java"
     },
     {
-      "kind": "unmodified-resource",
-      "repository": "m3/vendor/third_party/jackson-module-parameter-names/src/main/resources/com/fasterxml/jackson/module/paramnames/PackageVersion.java.in",
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/jackson-module-parameter-names/upstream-source-only/com/fasterxml/jackson/module/paramnames/PackageVersion.java.in",
       "sha256": "744babce0ed8859a38895e27c6cca1c834117791919037c5096c6bcfb9bdff03",
       "upstream": "com/fasterxml/jackson/module/paramnames/PackageVersion.java.in"
     },
@@ -108,6 +108,13 @@
       "repository": "m3/vendor/third_party/jackson-module-parameter-names/SOURCES_MANIFEST.tsv",
       "sha256": "cab9af56dd81897b291c86537cca0469c86940fe0edcb03f233d512dbc121aca",
       "upstream": "(inventory)"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1 (sha256 9b333e7e69053807f42a9d92fc1e5da405938ecc4683146b8b1eb9c6967fea8e)",
+      "repository": "m3/vendor/third_party/jackson-module-parameter-names/src/main/descriptor/9/module-info.java",
+      "sha256": "d968bd5ae4acbf1aef910e29c4ecf28b364dccaeced6718cb22a76d356c325d4",
+      "upstream": "META-INF/versions/9/module-info.class"
     }
   ],
   "group": "com.fasterxml.jackson.module",
@@ -115,6 +122,11 @@
   "license": "UNDECLARED (see LICENSE)",
   "license_file": "LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
   "native_binaries": 0,
   "parent": "com.fasterxml.jackson.module:jackson-modules-java8:2.16.1",
   "pom": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.pom",

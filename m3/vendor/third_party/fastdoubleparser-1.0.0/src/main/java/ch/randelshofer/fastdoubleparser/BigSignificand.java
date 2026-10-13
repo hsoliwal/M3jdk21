@@ -4,20 +4,17 @@
  */
 package ch.randelshofer.fastdoubleparser;
 
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.VarHandle;
 import java.math.BigInteger;
-import java.nio.ByteOrder;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 
 /**
  * A mutable significand with a fixed number of bits.
  */
 class BigSignificand {
     private static final long LONG_MASK = 0xffffffffL;
-    private final static VarHandle readIntBE =
-            MethodHandles.byteArrayViewVarHandle(int[].class, ByteOrder.BIG_ENDIAN);
     private final int numInts;
-    private final byte[] x;
+    private final int[] x;
     private int firstNonZeroInt;
 
     public BigSignificand(long numBits) {
@@ -26,8 +23,7 @@ class BigSignificand {
         }
         int numLongs = (int) ((numBits + 63) >>> 6) + 1;
         numInts = numLongs << 1;
-        int numBytes = numLongs << 3;
-        x = new byte[numBytes];
+        x = new int[numInts];
         firstNonZeroInt = numInts;
     }
 
@@ -75,14 +71,19 @@ class BigSignificand {
     }
 
     public BigInteger toBigInteger() {
-        return new BigInteger(x);
+        byte[] bytes = new byte[x.length << 2];
+        IntBuffer buf = ByteBuffer.wrap(bytes).asIntBuffer();
+        for (int i = 0; i < x.length; i++) {
+            buf.put(i, x[i]);
+        }
+        return new BigInteger(bytes);
     }
 
     private void x(int i, int value) {
-        readIntBE.set(x, i << 2, value);
+        x[i] = value;
     }
 
     private int x(int i) {
-        return (int) readIntBE.get(x, i << 2);
+        return x[i];
     }
 }

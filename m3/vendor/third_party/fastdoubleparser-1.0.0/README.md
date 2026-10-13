@@ -2,7 +2,7 @@
 
 This directory compiles the unchanged fastdoubleparser 1.0.0 sources from the published sources jar.
 Donor-superset lane: build kind `commands` (MODULE_DESCRIPTOR_OR_MULTI_RELEASE), status `PASS`.
-
+Excluded from compilation (retained under upstream-excluded/): ch.randelshofer.fastdoubleparser/module-info.java
 
 ```text
 mvn -f m3/vendor/third_party/fastdoubleparser-1.0.0/pom.xml clean install
