@@ -93,6 +93,20 @@ final class M3BackportPacketTest {
     }
 
     @Test
+    void cyclicPacketDependenciesAreRejectedEvenWhenScopeIsUnapproved() {
+        M3RecipeAtom first =
+                new M3RecipeAtom(
+                        "a", M3EditScope.MODULE, false, "AUTHOR_RECIPE:a", List.of("b"));
+        M3RecipeAtom second =
+                new M3RecipeAtom(
+                        "b", M3EditScope.MODULE, false, "AUTHOR_RECIPE:b", List.of("a"));
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3BackportPacket("p", List.of(first, second)));
+    }
+
+    @Test
     void loaderRejectsMalformedRowsMixedPacketsAndInvalidBooleans() {
         assertThrows(
                 IllegalArgumentException.class,
