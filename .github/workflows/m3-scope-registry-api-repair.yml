@@ -1,0 +1,28 @@
+name: M3 Scope Registry API Repair
+
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3ScopeRegistryApiRepairRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/scope-registry-api-repair/**'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3ScopeRegistryApiRepairRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3ScopeCoverageClosureTest.java'
+      - '.github/workflows/m3-scope-registry-api-repair.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-recipe-and-scope:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+      - run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3ScopeRegistryApiRepairRecipeTest,M3ScopeCoverageClosureTest test
