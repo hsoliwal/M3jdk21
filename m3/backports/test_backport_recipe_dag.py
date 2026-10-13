@@ -159,7 +159,7 @@ class BackportRecipeDagTest(unittest.TestCase):
             self.assertTrue(j423)
             self.assertTrue(all(atom.state == "MATERIALIZED_RECIPE" for atom in j423))
             self.assertEqual(
-                ["INVENTORY", "RECIPE", "COMPILE", "TEST", "RUNTIME_PARITY", "FIXED_POINT"],
+                ["INVENTORY", "A3_ATOMIZE", "A3_PATTERNIZE", "A3_DOCUMENT", "A3_FIXED_POINT", "RECIPE", "COMPILE", "TEST", "RUNTIME_PARITY", "FIXED_POINT"],
                 [atom.phase for atom in j423],
             )
             self.assertEqual("MULTI_MODULE", j423[0].scope)
@@ -218,18 +218,22 @@ class BackportRecipeDagTest(unittest.TestCase):
             )
             parsed = [line.split("\t") for line in j423[1:]]
             self.assertEqual(
-                ["inventory", "recipe", "compile", "test", "runtime-parity", "fixed-point"],
+                ["inventory", "a3-atomize", "a3-patternize", "a3-document", "a3-fixed-point", "recipe", "compile", "test", "runtime-parity", "fixed-point"],
                 [row[1] for row in parsed],
             )
             self.assertTrue(all(row[2] == "MULTI_MODULE" for row in parsed))
             self.assertTrue(all(row[3] == "false" for row in parsed))
             self.assertEqual("", parsed[0][5])
             self.assertEqual("inventory", parsed[1][5])
-            self.assertEqual("recipe", parsed[2][5])
+            self.assertEqual("a3-atomize", parsed[2][5])
+            self.assertEqual("a3-patternize", parsed[3][5])
+            self.assertEqual("a3-document", parsed[4][5])
+            self.assertEqual("a3-fixed-point", parsed[5][5])
             self.assertEqual(
                 "m3/backports/recipes/jep-423-region-pinning",
-                parsed[1][4],
+                parsed[5][4],
             )
+            self.assertTrue(parsed[1][4].startswith("A3:JEP-423:A3_ATOMIZE"))
 
             j484 = (packet_dir / "jep-484.tsv").read_text(encoding="utf-8").splitlines()
             recipe_row = [line.split("\t") for line in j484[1:] if "\trecipe\t" in line][0]
@@ -302,6 +306,31 @@ class BackportRecipeDagTest(unittest.TestCase):
         self.assertTrue(
             all(atom.state.startswith("MATERIALIZED_RECIPE") for atom in jdk8357439)
         )
+
+        expected_frontier = [
+            "INVENTORY",
+            "A3_ATOMIZE",
+            "A3_PATTERNIZE",
+            "A3_DOCUMENT",
+            "A3_FIXED_POINT",
+            "RECIPE",
+        ]
+        executable_jep_ids = sorted(
+            {
+                atom.work_id
+                for atom in atoms
+                if atom.source_kind == "JEP" and atom.executable
+            }
+        )
+        self.assertTrue(executable_jep_ids)
+        for work_id in executable_jep_ids:
+            work = [atom for atom in atoms if atom.work_id == work_id]
+            phases = [atom.phase for atom in work]
+            self.assertEqual(expected_frontier, phases[: len(expected_frontier)], work_id)
+            self.assertEqual(1, phases.count("A3_ATOMIZE"), work_id)
+            self.assertEqual(1, phases.count("A3_PATTERNIZE"), work_id)
+            self.assertEqual(1, phases.count("A3_DOCUMENT"), work_id)
+            self.assertEqual(1, phases.count("A3_FIXED_POINT"), work_id)
 
         rejected = [atom for atom in atoms if atom.work_id == "JEP-511"]
         self.assertEqual(1, len(rejected))
