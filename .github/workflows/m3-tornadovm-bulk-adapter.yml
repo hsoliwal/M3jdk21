@@ -35,6 +35,8 @@ jobs:
           mvn -B -ntp -f m3/vendor/third_party/pom.xml
           -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2
           -am -DskipTests install
+      - name: Check source-built OpenRewrite coordinates
+        run: python3 -S m3/synexia-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
       - name: Install bounded Synexia recipe custody
         run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Receiver and mapping recipe tests
