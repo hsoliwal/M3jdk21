@@ -28,11 +28,13 @@ import java.util.zip.ZipFile;
  * </pre>
  */
 public final class M3CompileTimeStringInventory {
-    private final M3InventoryState state = new M3InventoryState();
+    private final M3InventoryState state;
     private final M3ClassScan scan;
     private final BufferedWriter rows;
 
-    private M3CompileTimeStringInventory(BufferedWriter rows, boolean regexOnly) {
+    /** Scanner over {@code state}; {@code rows} may be null to skip per-unit TSV rows. */
+    M3CompileTimeStringInventory(M3InventoryState state, BufferedWriter rows, boolean regexOnly) {
+        this.state = state;
         this.rows = rows;
         this.scan = new M3ClassScan(state, regexOnly);
     }
@@ -45,7 +47,8 @@ public final class M3CompileTimeStringInventory {
         boolean regexOnly = List.of(args).contains("--regex-only");
         try (BufferedWriter w = Files.newBufferedWriter(out.resolve("COMPILETIME_STRING_INVENTORY.tsv"))) {
             w.write("corpus\tunit\tcategory\tmetric\tvalue\n");
-            M3CompileTimeStringInventory run = new M3CompileTimeStringInventory(w, regexOnly);
+            M3CompileTimeStringInventory run =
+                    new M3CompileTimeStringInventory(new M3InventoryState(), w, regexOnly);
             if (jdk) {
                 run.scanJdk();
             }
@@ -66,7 +69,7 @@ public final class M3CompileTimeStringInventory {
         return fallback;
     }
 
-    private void scanJdk() throws IOException {
+    void scanJdk() throws IOException {
         FileSystem jrt = FileSystems.getFileSystem(URI.create("jrt:/"));
         List<Path> modules;
         try (Stream<Path> s = Files.list(jrt.getPath("/modules"))) {
@@ -88,7 +91,7 @@ public final class M3CompileTimeStringInventory {
         }
     }
 
-    private void scanJars(List<String> jarList) throws IOException {
+    void scanJars(List<String> jarList) throws IOException {
         List<String> jars = new ArrayList<>(jarList.stream().map(String::trim).filter(s -> !s.isEmpty()).toList());
         Collections.sort(jars);
         log("JARS " + jars.size());
@@ -132,6 +135,10 @@ public final class M3CompileTimeStringInventory {
 
     private void flushUnit() throws IOException {
         String corpus = M3InventoryState.CORPORA[state.corpus];
+        if (rows == null) {
+            log("UNIT " + corpus + " " + state.unitName);
+            return;
+        }
         for (Map.Entry<String, Long> e : new TreeMap<>(state.unit).entrySet()) {
             rows.write(corpus + '\t' + state.unitName + '\t' + e.getKey() + '\t' + e.getValue() + '\n');
         }

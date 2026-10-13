@@ -116,10 +116,10 @@ public final class M3CallSiteCatalog {
         put("g", "search_starts_with", 0, STR, "startsWith", "(" + S + "I)Z");
         put("g", "search_ends_with", 0, STR, "endsWith", "(" + S + ")Z");
         put("g", "search_replace_literal", 0, STR, "replace", "(" + CS + CS + ")" + S);
-        put("g", "equals_ignore_case_arg_const", 0, STR, "equalsIgnoreCase", "(" + S + ")Z");
-        put("g", "string_builder_append_const", 0, "java/lang/StringBuilder", "append", "(" + S + ")Ljava/lang/StringBuilder;");
-        put("g", "string_builder_append_const", 0, "java/lang/StringBuffer", "append", "(" + S + ")Ljava/lang/StringBuffer;");
-        put("g", "string_builder_new_const", 0, "java/lang/StringBuilder", "<init>", "(" + S + ")V");
+        put("g", "equals_ignore_case_arg", 0, STR, "equalsIgnoreCase", "(" + S + ")Z");
+        put("g", "string_builder_append", 0, "java/lang/StringBuilder", "append", "(" + S + ")Ljava/lang/StringBuilder;");
+        put("g", "string_builder_append", 0, "java/lang/StringBuffer", "append", "(" + S + ")Ljava/lang/StringBuffer;");
+        put("g", "string_builder_new", 0, "java/lang/StringBuilder", "<init>", "(" + S + ")V");
     }
 
     private static void reflection() {
