@@ -55,6 +55,17 @@ public class M3VirtualTableModel extends AbstractTableModel implements M3PackedC
 		return rows.text (row, column);
 	}
 
+	/**
+	 * Caller edit: the text becomes caller-owned payload (kept, or swapped to the COLD tier under
+	 * {@code RESIDENCY_SWAP}; never discarded) and the source is not asked for this row again.
+	 */
+	@Override
+	public void setValueAt (Object value, int row, int column) {
+		rows.text (row, column);
+		rows.residency.setText (row, column, value == null ? null : value.toString ());
+		fireTableCellUpdated (row, column);
+	}
+
 	@Override
 	public int cellChars (int row, int column, char [] dst) {
 		return rows.chars (row, column, dst);

@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Swing, SwingX and AWT under the M3 viewport laws
 
-Status: design (D2C) plus leaf 1 code. Every test listed here was written but not run (fix-only mode, 2026-10-13).
-See `m3/ports/swing-viewport/TESTS_TO_RUN.md`.
+Status: design (D2C), leaf 1 code with tests and scale runs, and leaf 2 `java.desktop` changes with reproducers.
+What ran and what did not is in `m3/ports/swing-viewport/TESTS_TO_RUN.md`.
 
 The laws are the ones recorded for SWT and Nebula in Synexia PR #10921
 (`docs/M3-SCALE/runs/20261013-all-widget-viewport/CONSOLIDATION_20261013.md`). This page maps each one onto Swing
@@ -179,7 +179,7 @@ The renderer reads packed state:
 Stock `BasicTreeUI` still asks its layout cache for `TreePath`s (OH18); `M3TreeRows` returns them on request, as
 proxies. Removing that last path object per row needs the `java.desktop` change in section 8.
 
-## 7. Targets
+## 7. Targets and measured results
 
 These are the engine numbers measured on SWT #122 (`-Xmx256m -XX:+UseSerialGC`, JDK 21.0.9):
 
@@ -190,8 +190,40 @@ These are the engine numbers measured on SWT #122 (`-Xmx256m -XX:+UseSerialGC`, 
 | tree, 1,010,100 nodes | 3.6 MB | 1,212 µs (10 samples) |
 | tree, 1,001,001,000 nodes | 7.2 MB | 1,107 µs (10 samples) |
 
-The packed Swing models must match them within the Swing component overhead. Their own measurements are
-PENDING (`TESTS_TO_RUN.md`).
+**Swing results** (`evidence/SCALE_RESULTS_20261013.tsv`, `M3SwingScale`). Every run is headless: 30 frames of 800x600 at
+each of the start, middle and end, after 5 warm-up frames, on win32 x86_64 with JDK 21.0.9 and SerialGC.
+
+| Mode | Items | Heap | Heap after GC | Frame p50 / p95 | Bytes per frame | Materialized per paint |
+|---|---:|---|---:|---|---:|---:|
+| JTable, virtual (`M3VirtualTableModel`) | 1M | 256m | 5.0 MB | 0.59 / 2.16 ms | 86,448 | 0 |
+| JTable, virtual | 10M | 256m | 5.0 MB | 0.77 / 1.35 ms | 86,448 | 0 |
+| JList, virtual (`M3VirtualListModel`) | 1M / 10M / 100M | 256m | 4.8 / 4.8 / 5.0 MB | 0.48-0.90 / 1.17-1.68 ms | 37,440 | 0 |
+| JTree, virtual (`M3VirtualTreeModel`) | 1,001,000 nodes | 256m | 5.1 MB | 0.34 / 1.05 ms | 29,120 | 0 |
+| JTree, virtual | 1,001,001,000 nodes | 256m | 7.0 MB | 0.37 / 1.35 ms | 32,288 | 0 |
+| JTable, packed (`M3PackedTableModel`, int + string + boolean) | 1M / 10M | 2g | 43.6 / 318.1 MB | 0.97 / 1.82, 0.79 / 1.58 ms | 86,448 | 0 |
+| JList, packed (`M3PackedListModel`) | 1M / 10M | 2g | 62.9 / 592.5 MB | 0.49 / 1.73, 0.68 / 2.33 ms | 37,440 | 0 |
+| JTable, `DefaultTableModel` (baseline) | 1M | 2g | 131.9 MB | 0.85 / 1.66 ms | 141,152 | 114 (`getValueAt`) |
+| JList, `DefaultListModel` (baseline) | 1M | 2g | 62.9 MB | 0.57 / 2.20 ms | 50,224 | 34 (`getElementAt`) |
+| JTree, `DefaultTreeModel` (baseline) | 1,001,000 nodes | 2g | 94.9 MB | 0.51 / 2.48 ms | 53,664 | 71 (`getChild`, one `TreePath` per row) |
+
+What the numbers show:
+
+- **Flat memory.** The virtual models stay at 4.8-7.0 MB of heap after GC from 1M to 100M rows, and from 1M to 1B
+  tree nodes. This is at or below the engine targets.
+- **Swap.** The virtual JTable repeats the engine's flat swap run: 200,000 rows scrolled, every 10th caller-edited.
+  That gave 39,187 swap-outs and 19,593 swap-ins, and all 20,000 edits were reproduced. Swap-in p50 / p95 / p99 was
+  0.1 / 0.5 / 15.6 µs at 1M rows and 0.1 / 0.4 / 0.9 µs at 10M, served from the in-memory tier of `TieredSwapCache`.
+- **Paint.** The M3 models create nothing during paint. The bytes still allocated per frame come from stock Swing
+  and Java2D: `CellRendererPane.paintComponent` calls `Graphics.create` per cell, `getCellRect` allocates a
+  `Rectangle`, and the harness itself calls `createGraphics` once per frame. Removing them is a `BasicTableUI` and
+  `CellRendererPane` leaf (section 8).
+- **Packed table.** The explicit table holds 1M rows in 43.6 MB, against 131.9 MB for `DefaultTableModel`. The packed
+  list holds the same heap as `DefaultListModel`, because both keep the caller's `String` objects.
+- **The 1B-node JTree.** It shows 1,002,000 rows: depth 1 is expanded, plus the last node. Swing pixel coordinates
+  are `int`, so at 18 px a component can reach about 119 million rows. The model itself has 1,001,001,000 keys:
+  - select-all counts 1,001,001,000;
+  - every third node counts 333,667,000, exactly;
+  - collapsing the first node leaves 1,001,000 rows.
 
 ## 8. Leaf 2: `java.desktop` (GPLv2+CPE, TARGET_OWNED_PORT)
 
