@@ -34,7 +34,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA="3799df0b88d169064b610481400ec4edacec1d2e"
+          git fetch --no-tags origin master
+          BASE_SHA="$(git merge-base HEAD origin/master)"
+          test -n "$BASE_SHA"
           git diff --exit-code "$BASE_SHA...HEAD" -- $(cat m3/backports/recipes/jep-474-generational-zgc/PATHS.txt)
 
       - name: Prove proof-refresh recipe fixed point
