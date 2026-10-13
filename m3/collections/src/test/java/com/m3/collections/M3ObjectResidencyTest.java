@@ -30,8 +30,10 @@ final class M3ObjectResidencyTest {
             return (value.canonicalId + "\n" + value.text).getBytes(StandardCharsets.UTF_8);
         }
         @Override public Value decode(int slot, byte[] bytes) {
-            String[] fields = new String(bytes, StandardCharsets.UTF_8).split("\\\n", 2);
-            return new Value(Integer.parseInt(fields[0]), fields[1]);
+            String text = new String(bytes, StandardCharsets.UTF_8);
+            int separator = text.indexOf('\n');
+            return new Value(Integer.parseInt(text.substring(0, separator)),
+                    text.substring(separator + 1));
         }
     };
 
