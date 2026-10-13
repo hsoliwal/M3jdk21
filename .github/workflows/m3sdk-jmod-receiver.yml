@@ -1,0 +1,64 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3SDK JMOD Receiver Proof
+
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/jmod-recipes/**'
+      - 'm3/vendor/third_party-m3/**'
+      - '.github/workflows/m3sdk-jmod-receiver.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-custody:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: 1 - Diff hygiene
+        run: git diff --check
+      - name: 2 - Exact Git blob receiver proof
+        run: python3 m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py --repo .
+      - name: 3 - SDK receiver and preflight refusal tests
+        run: >-
+          python3 -m unittest discover
+          -s m3/tooling/jmod-recipes/tools
+          -p 'test_*.py' -v
+      - name: 4 - Java 21 vendor smoke source compiles without donor classpath
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3sdk-smoke-classes"
+          javac --release 21 -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3sdk-smoke-classes" \
+            m3/tooling/jmod-recipes/tools/fixtures/M3SdkImageSmoke.java
+      - name: 5 - Product acceptance remains independently proof-gated
+        run: |
+          set -euo pipefail
+          test -f m3/release/release-contract.json
+          echo 'SDK source and Java smoke compilation proof only; no linked image executed in this job.'
+
+  openrewrite-recipe-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Run original hash-pinned JMOD descriptor OpenRewrite JUnit
+        run: >-
+          mvn -B -ntp -f m3/tooling/jmod-recipes/pom.xml
+          -Dtest=M3ModuleDescriptorRecipeTest test
