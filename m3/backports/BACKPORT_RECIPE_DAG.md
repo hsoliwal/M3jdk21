@@ -127,6 +127,43 @@ The generated packet is parsed by `M3BackportPacketLoader`, composed by
 The existing orchestration projector remains responsible for Camel/Airflow/Drools projections.
 Those projections do not become semantic or promotion authority.
 
+## Proven Synexia/Nebula recipe-DAG handoff
+
+The target-side backport DAG now has an explicit proof-bound custody receipt:
+
+`SYNEXIA_NEBULA_RECIPE_DAG_HANDOFF.tsv`.
+
+It binds the reusable Apache-2.0 Synexia owners:
+
+- `RecipeDag`;
+- `OpenRewriteRecipeDagPlan`;
+- `M3RecipeFirstInvariant`;
+
+to their exact canonical Synexia source commit and SHA-256 identities. It also records:
+
+- the Synexia target policy for `hsoliwal/M3jdk21` as `PROVEN_RECIPE_DAG_ONLY`;
+- the Nebula proven-transfer document as proving/reference evidence only.
+
+`recipe_dag_handoff.py` validates this receipt before the backport DAG is compiled. The handoff
+cannot grant source-mutation or promotion authority. M3JDK21 continues to execute its own
+target-specific packet compiler, OpenRewrite receiver, OpenJDK build, jtreg, runtime/VM/JNI proof,
+fixed point and serial promotion.
+
+This keeps recipe custody singular:
+
+```text
+Nebula proving ground
+ -> reusable recipe/DAG proof
+ -> canonical Synexia Apache-2.0 ownership
+ -> pinned handoff receipt
+ -> M3JDK21 target packet DAG
+ -> target build/jtreg/runtime proof
+ -> target-owned promotion
+```
+
+Camel/Airflow/Drools remain projections of the same canonical DAG root; they may schedule/read
+dependency readiness but never edit JDK sources or promote a backport.
+
 ## Maven evidence
 
 `mvn -f m3/backports/pom.xml verify` now emits:
