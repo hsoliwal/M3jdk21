@@ -20,7 +20,7 @@ EXPECTED_RECEIPT = json.loads("{\n  \"schema\": \"M3JDK21_STRING_PHASE_CHECKER_S
 
 
 def git_blob(data: bytes) -> str:
-    header = b"blob " + str(len(data)).encode("ascii") + b"\\0"
+    header = b"blob " + str(len(data)).encode("ascii") + b"\0"
     return hashlib.sha1(header + data).hexdigest()
 
 
