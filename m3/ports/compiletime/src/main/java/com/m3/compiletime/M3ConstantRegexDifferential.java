@@ -84,7 +84,7 @@ public final class M3ConstantRegexDifferential {
             if (cells[2].equals("INVALID")) {
                 continue;
             }
-            out.add(M3ConstantRegexGate.of(Pattern.compile(M3Tsv.unescape(cells[0]), Integer.parseInt(cells[1])), image));
+            out.add(M3ConstantRegexGate.compile(M3Tsv.unescape(cells[0]), Integer.parseInt(cells[1]), image));
         }
         return out;
     }
@@ -186,7 +186,7 @@ public final class M3ConstantRegexDifferential {
         M3ConstantRegexImage image = M3ConstantRegexImage.verify(ByteBuffer.wrap(
                 M3ConstantRegexImageWriter.write(items, M3ConstantRegexImageWriter.sha256Ints(harness.oracleRoot()))));
         Map<String, M3ConstantRegexGate> gates = new HashMap<>();
-        items.forEach(i -> gates.put(i.pattern(), M3ConstantRegexGate.of(Pattern.compile(i.pattern()), image)));
+        items.forEach(i -> gates.put(i.pattern(), M3ConstantRegexGate.compile(i.pattern(), 0, image)));
         M3RegexOracleHarness.Report report = harness.check("m3-constant-regex-image",
                 (regex, input) -> {
                     M3ConstantRegexGate g = gates.get(regex);

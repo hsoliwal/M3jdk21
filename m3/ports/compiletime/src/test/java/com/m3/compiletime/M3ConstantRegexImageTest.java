@@ -68,11 +68,11 @@ class M3ConstantRegexImageTest {
     @Test
     void gateIsStockEquivalentAndPrunesOnlyProvenAbsence() throws Exception {
         M3ConstantRegexImage read = M3ConstantRegexImage.verify(ByteBuffer.wrap(image()));
-        M3ConstantRegexGate pure = M3ConstantRegexGate.of(Pattern.compile("hello"), read);
-        M3ConstantRegexGate req = M3ConstantRegexGate.of(Pattern.compile("foo\\d+bar"), read);
-        M3ConstantRegexGate alt = M3ConstantRegexGate.of(Pattern.compile("cat|dog"), read);
-        M3ConstantRegexGate miss = M3ConstantRegexGate.of(Pattern.compile("zzz"), read);
-        M3ConstantRegexGate none = M3ConstantRegexGate.of(Pattern.compile("hello"), null);
+        M3ConstantRegexGate pure = M3ConstantRegexGate.compile("hello", 0, read);
+        M3ConstantRegexGate req = M3ConstantRegexGate.of(Pattern.compile("foo\\d+bar"), 0, read);
+        M3ConstantRegexGate alt = M3ConstantRegexGate.compile("cat|dog", 0, read);
+        M3ConstantRegexGate miss = M3ConstantRegexGate.compile("zzz", 0, read);
+        M3ConstantRegexGate none = M3ConstantRegexGate.compile("hello", 0, null);
         assertTrue(pure.hit() && req.hit() && alt.hit());
         assertFalse(miss.hit() || none.hit());
         for (String s : List.of("", "hello", "say hello", "foo12bar", "foobar", "bar foo1", "hot dog", "catalog")) {
@@ -85,6 +85,12 @@ class M3ConstantRegexImageTest {
             }
         }
         assertFalse(req.holds("foo only"));
+        M3ConstantRegexImage embedded = M3ConstantRegexImage.verify(ByteBuffer.wrap(M3ConstantRegexImageWriter.write(
+                List.of(new M3ConstantRegexImageWriter.Item("(?m)^abc", 0, M3RegexRequirement.analyze("(?m)^abc", 0))),
+                M3ConstantRegexImageWriter.sha256Ints("embedded"))));
+        assertEquals(Pattern.MULTILINE, Pattern.compile("(?m)^abc").flags(), "flags() is not the source key");
+        assertTrue(M3ConstantRegexGate.compile("(?m)^abc", 0, embedded).hit());
+        assertFalse(M3ConstantRegexGate.compile("(?m)^abc", Pattern.MULTILINE, embedded).hit());
         assertTrue(alt.holds("hot dog"));
     }
 }

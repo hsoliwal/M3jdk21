@@ -44,10 +44,22 @@ public final class M3ConstantRegexGate {
         this.stack = new boolean[program.length];
     }
 
-    /** Gate for {@code pattern} over {@code image}; a null image yields a passthrough gate. */
-    public static M3ConstantRegexGate of(Pattern pattern, M3ConstantRegexImage image) {
+    /**
+     * Compiles {@code regex} with {@code flags} (stock {@link Pattern#compile(String, int)}, same
+     * exceptions) and attaches the image entry keyed by exactly that (regex, flags) pair.
+     */
+    public static M3ConstantRegexGate compile(String regex, int flags, M3ConstantRegexImage image) {
+        return of(Pattern.compile(regex, flags), flags, image);
+    }
+
+    /**
+     * Gate for {@code pattern}, which the caller compiled with {@code compileFlags}. The key is the
+     * compile argument, never {@link Pattern#flags()}: embedded flags such as {@code (?m)} change
+     * {@code flags()} without changing the source key. A null image yields a passthrough gate.
+     */
+    public static M3ConstantRegexGate of(Pattern pattern, int compileFlags, M3ConstantRegexImage image) {
         return new M3ConstantRegexGate(pattern,
-                image == null ? Optional.empty() : image.lookup(pattern.pattern(), pattern.flags()));
+                image == null ? Optional.empty() : image.lookup(pattern.pattern(), compileFlags));
     }
 
     /** The image named by {@value #IMAGE_PROPERTY}, or empty when unset or refused. */
