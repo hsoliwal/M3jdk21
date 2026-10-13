@@ -113,10 +113,7 @@ class JepResidueTest(unittest.TestCase):
             ]
             by_jep = {item.jep: item for item in self.r.queue(root, catalogue, [])}
 
-        self.assertEqual("PACKET_EVIDENCE", by_jep[423].evidence_state)
-        self.assertEqual("PACKET_EVIDENCE", by_jep[484].evidence_state)
-        self.assertEqual("PACKET_EVIDENCE", by_jep[485].evidence_state)
-        self.assertEqual("PACKET_EVIDENCE", by_jep[523].evidence_state)
+        self.assertEqual({458, 485}, set(by_jep))
         self.assertEqual("MATERIALIZED_PACKET", by_jep[458].evidence_state)
         self.assertIn("jep-458-current", by_jep[458].evidence_paths)
         self.assertEqual("PACKET_READY", by_jep[458].receipt_state)
@@ -127,6 +124,55 @@ class JepResidueTest(unittest.TestCase):
         )
         self.assertEqual("RECIPE_CLASS", by_jep[485].evidence_state)
         self.assertIn("M3Jep485BackportRecipe.java", by_jep[485].evidence_paths)
+
+    def test_packet_evidence_is_proven_by_its_own_jep_fixture(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            catalogue = [
+                self.row(release=22, jep=423, disposition="candidate"),
+                self.row(release=24, jep=484, disposition="candidate"),
+                self.row(release=27, jep=523, disposition="candidate"),
+            ]
+            for name in (
+                "jep-423-region-pinning",
+                "jep-484-classfile-api",
+                "jep-523-g1-default",
+            ):
+                packet = root / "m3/backports/recipes" / name
+                packet.mkdir(parents=True)
+                (packet / "README.md").write_text("packet\n", encoding="utf-8")
+            by_jep = {item.jep: item for item in self.r.queue(root, catalogue, [])}
+
+        self.assertEqual({423, 484, 523}, set(by_jep))
+        for jep in (423, 484, 523):
+            self.assertEqual("PACKET_EVIDENCE", by_jep[jep].evidence_state)
+            self.assertEqual("", by_jep[jep].promotion)
+            self.assertEqual("", by_jep[jep].receipt_state)
+
+    def test_packet_prefix_requires_a_jep_number_boundary(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            recipes = root / "m3/backports/recipes"
+            for name in ("jep-4230-false", "j4230", "jep-423extra"):
+                (recipes / name).mkdir(parents=True)
+            catalogue = [self.row(release=22, jep=423, disposition="candidate")]
+            first = self.r.queue(root, catalogue, [])[0]
+            (recipes / "jep-423-real").mkdir()
+            second = self.r.queue(root, catalogue, [])[0]
+
+        self.assertEqual("NO_RECIPE_EVIDENCE", first.evidence_state)
+        self.assertEqual("PACKET_EVIDENCE", second.evidence_state)
+
+    def test_duplicate_priority_rows_and_release_drift_fail_closed(self) -> None:
+        catalogue = [self.row(release=24, jep=493, disposition="candidate")]
+        row = self.priority(release=24, jep=493)
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            with self.assertRaisesRegex(ValueError, "duplicate priority"):
+                self.r.queue(root, catalogue, [row, row])
+            wrong_release = self.priority(release=23, jep=493)
+            with self.assertRaisesRegex(ValueError, "priority release mismatch"):
+                self.r.queue(root, catalogue, [wrong_release])
 
     def test_detects_compact_jep_packet_directory_names(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
@@ -188,6 +234,19 @@ class JepResidueTest(unittest.TestCase):
         self.assertIn("promotion", text)
         self.assertIn("receipt_next_action", text)
         self.assertIn("NO_RECIPE_EVIDENCE", text)
+
+    def test_checked_in_residue_queue_is_byte_exact_generator_output(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        backports = root / "m3" / "backports"
+        items = self.r.queue(
+            root,
+            self.r.read_tsv(backports / "JEP_CATALOGUE.tsv"),
+            self.r.read_tsv(backports / "POST21_PRIORITY_COMPATIBILITY.tsv"),
+        )
+        generated = io.StringIO()
+        self.r.write_tsv(items, generated)
+        checked_in = (backports / "JEP_RESIDUE_QUEUE.tsv").read_text(encoding="utf-8")
+        self.assertEqual(generated.getvalue(), checked_in)
 
     def test_live_repository_queue_matches_released_pending_denominator(self) -> None:
         root = Path(__file__).resolve().parents[2]

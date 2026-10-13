@@ -40,4 +40,4 @@ order	release	jep	title	domain	disposition	priority	evidence_state	evidence_path
 38	23	469	Vector API (Eighth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF	NO	OPT_IN_JDK_API_EXTENSION			
 39	24	489	Vector API (Ninth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
 40	25	508	Vector API (Tenth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
-41	27	537	Vector API (Twelfth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF
+41	27	537	Vector API (Twelfth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
