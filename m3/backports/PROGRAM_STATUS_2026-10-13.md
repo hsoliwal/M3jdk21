@@ -91,3 +91,25 @@ A canonical recipe-DAG handoff cannot bypass any of these target-specific gates.
 The entire backport programme is not complete while compatible residue remains. Current work should
 continue by consuming `JEP_RESIDUE_QUEUE.tsv` in deterministic priority order and improving one
 bounded recipe/proof packet at a time.
+
+## 2026-10-13 A3 residue frontier closure
+
+The backport packet compiler now materializes the proven A3 preparation stages as first-class atoms
+for every executable compatible JEP/JBS packet:
+
+```text
+INVENTORY
+ -> A3_ATOMIZE
+ -> A3_PATTERNIZE
+ -> A3_DOCUMENT
+ -> A3_FIXED_POINT
+ -> RECIPE
+ -> COMPILE
+ -> TEST
+ -> [RUNTIME_PARITY]
+ -> FIXED_POINT
+```
+
+This closes the orchestration mismatch between the documented A3 execution law and generated packet
+TSVs. Camel, Airflow and Drools projections therefore receive the same A3 atoms automatically.
+Scope-promotion flags remain false; the new atoms add proof obligations, not authority.
