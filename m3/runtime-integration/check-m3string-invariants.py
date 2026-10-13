@@ -1011,19 +1011,35 @@ for fragment in [
 if "for (int index = 0; index < len; index++)" not in string:
     fail("exact region comparison loop missing after precompute filter")
 
-# Case conversion is canonical only for ASCII + Locale.ROOT. Locale-sensitive and non-ASCII
-# transformations must continue through the stock JDK case engine.
+# ASCII case conversion uses the M3 mapper only for ASCII text and locales whose
+# JDK mappings have no Turkish, Azeri, or Lithuanian special handling.
+for signature, ascii_mapper in [
+    ("public String toLowerCase(Locale locale) {", "storage.asciiCase(false)"),
+    ("public String toUpperCase(Locale locale) {", "storage.asciiCase(true)"),
+]:
+    start = string.find(signature)
+    next_method = string.find("\n    public String ", start + len(signature)) if start >= 0 else -1
+    if start < 0 or next_method < 0:
+        fail(f"M3 ASCII locale-case method boundary missing: {signature}")
+    method = string[start:next_method]
+    for fragment in [
+        "storage != null && asciiCaseMappingLocale(locale)",
+        "M3StringFacts prepared = storage.facts();",
+        "if (prepared.ascii) {",
+        ascii_mapper,
+    ]:
+        if fragment not in method:
+            fail(f"M3 ASCII locale-case boundary missing in {signature}: {fragment}")
+if "private static boolean asciiCaseMappingLocale(Locale locale)" not in string:
+    fail("M3 ASCII locale helper missing")
 for fragment in [
-    "storage != null && locale.equals(Locale.ROOT)",
-    "M3StringFacts prepared = storage.facts();",
-    "if (prepared.ascii) {",
-    "storage.asciiCase(false)",
-    "storage.asciiCase(true)",
+    "String lang = locale.getLanguage();",
+    'lang != "tr" && lang != "az" && lang != "lt"',
 ]:
     if fragment not in string:
-        fail(f"M3 ROOT ASCII case boundary missing: {fragment}")
+        fail(f"M3 ASCII locale exclusion missing: {fragment}")
 if "M3String asciiCase(boolean upper)" not in m3:
-    fail("M3String ROOT ASCII canonical case mapper missing")
+    fail("M3 ASCII case mapper missing")
 
 # Builder coder selection may use exact M3 range facts locally. This does not change the
 # String/HotSpot coder; it only avoids inflating a Latin1 builder for a Latin1-only M3 range.
