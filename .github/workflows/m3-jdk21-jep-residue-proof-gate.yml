@@ -46,6 +46,10 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - name: Install provenance-pinned Synexia custody artifact
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/synexia-import/pure-int-recipe-custody/pom.xml clean install
       - name: Java21 Maven/OpenRewrite receiver replay
         run: |
           set -euo pipefail
