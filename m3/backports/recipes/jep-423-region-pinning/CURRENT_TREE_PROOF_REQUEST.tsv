@@ -2,7 +2,7 @@ field	value
 schema	M3_JEP423_CURRENT_PREIMAGE_PROOF_V2
 repository	hsoliwal/M3jdk21
 base_branch	master
-base_commit	c9b07049c57ecdf43175f5885e11998918416a00
+base_commit	3799df0b88d169064b610481400ec4edacec1d2e
 baseline_repository	openjdk/jdk
 baseline_ref	jdk-21+35
 donor_ref	0d5f5e15d43f94a79c6133baecd5af217365d176

@@ -7,6 +7,7 @@ on:
     paths:
       - "m3/backports/**"
       - "m3/tooling/backport-dag/**"
+      - "m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_PROOF_REQUEST.tsv"
       - ".github/workflows/m3-jep423-current-materialize.yml"
   workflow_dispatch:
 
@@ -15,7 +16,7 @@ permissions:
 
 jobs:
   materialize-and-prove:
-    if: \${{ !contains(github.event.head_commit.message || '', '[m3-jep423-materialized]') }}
+    if: ${{ !contains(github.event.head_commit.message || '', '[m3-jep423-materialized]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 240
     steps:
@@ -263,7 +264,7 @@ jobs:
       - name: 12 - Commit only proven recipe output and receipt
         shell: bash
         env:
-          BRANCH_NAME: \${{ github.ref_name }}
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           set -euo pipefail
           git add -A
@@ -277,15 +278,15 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: jep423-current-materialization-\${{ github.run_id }}
+          name: jep423-current-materialization-${{ github.run_id }}
           path: |
-            \${{ runner.temp }}/jep423
+            ${{ runner.temp }}/jep423
             build/*/test-results/**
           if-no-files-found: warn
           retention-days: 30
 
   canonical-readback:
-    if: \${{ contains(github.event.head_commit.message || '', '[m3-jep423-materialized]') }}
+    if: ${{ contains(github.event.head_commit.message || '', '[m3-jep423-materialized]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
