@@ -64,7 +64,13 @@ public final class M3RecipeScopeRegistry {
                     fixed(M3EditScope.MULTI_MODULE)),
             Map.entry(
                     "com.m3.rewrite.semantic.M3SemanticHashRecipe",
-                    fixed(M3EditScope.FILE)));
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipe",
+                    fixed(M3EditScope.PACKAGE)),
+            Map.entry(
+                    "com.m3.rewrite.a3.M3A3SerialFileWorkRecipe",
+                    fixed(M3EditScope.PACKAGE)));
 
     private M3RecipeScopeRegistry() {}
 
