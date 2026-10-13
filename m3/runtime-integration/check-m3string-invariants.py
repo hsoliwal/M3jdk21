@@ -1185,22 +1185,188 @@ for fragment in [
 if "canonicalize(String.valueOf(mapped))" in m3 or "canonicalize(String.valueOf(newChar))" in m3:
     fail("M3 canonical single-unit transform reintroduced one-char String churn")
 
-# VM-local native atoms must not be retained forever by the canonical lookup table.
-# Live M3String/Tuple owners provide the strong lifetime. The pool keeps weak refs and frees
-# the native block when the owner becomes unreachable.
+# VM-local native atoms are weakly indexed and released exactly once when their owners die.
+# Mask Java comments and literals before checking token/brace structure so prose cannot satisfy
+# a lifecycle invariant and braces in strings cannot forge a monitor scope.
+def java_mask_non_code(source: str) -> str:
+    if re.search(r"\\u+[0-9a-fA-F]{4}", source):
+        fail("VM-local M3 pool uses Java Unicode escapes; lifecycle review required")
+    chars = list(source)
+    state = "code"
+    index = 0
+
+    def blank(position: int) -> None:
+        if chars[position] not in "\r\n":
+            chars[position] = " "
+
+    while index < len(source):
+        char = source[index]
+        pair = source[index:index + 2]
+        if state == "line_comment":
+            blank(index)
+            if char == "\n":
+                state = "code"
+            index += 1
+        elif state == "block_comment":
+            blank(index)
+            if pair == "*/":
+                blank(index + 1)
+                state = "code"
+                index += 2
+            else:
+                index += 1
+        elif state in ("string", "character"):
+            blank(index)
+            if char == "\\":
+                if index + 1 < len(source):
+                    blank(index + 1)
+                index += 2
+            elif (state == "string" and char == '"') or (state == "character" and char == "'"):
+                state = "code"
+                index += 1
+            else:
+                index += 1
+        elif state == "text_block":
+            blank(index)
+            if char == "\\":
+                if index + 1 < len(source):
+                    blank(index + 1)
+                index += 2
+            elif source.startswith('"""', index):
+                blank(index + 1)
+                blank(index + 2)
+                state = "code"
+                index += 3
+            else:
+                index += 1
+        elif pair == "//":
+            blank(index)
+            blank(index + 1)
+            state = "line_comment"
+            index += 2
+        elif pair == "/*":
+            blank(index)
+            blank(index + 1)
+            state = "block_comment"
+            index += 2
+        elif source.startswith('"""', index):
+            blank(index)
+            blank(index + 1)
+            blank(index + 2)
+            state = "text_block"
+            index += 3
+        elif char == '"':
+            blank(index)
+            state = "string"
+            index += 1
+        elif char == "'":
+            blank(index)
+            state = "character"
+            index += 1
+        else:
+            index += 1
+    if state in ("block_comment", "string", "character", "text_block"):
+        fail("VM-local M3 pool has unterminated Java comment or literal")
+    return "".join(chars)
+
+pool_code = java_mask_non_code(pool)
 for fragment in [
     "ReferenceQueue<M3StringAtom> LOCAL_QUEUE",
     "ArrayList<LocalRef> values",
     "extends WeakReference<M3StringAtom>",
-    "UNSAFE.freeMemory(address)",
     "AtomicLong LOCAL_NATIVE_BYTES",
-    "LOCAL_NATIVE_BYTES.addAndGet(-retainedBytes)",
+    "final long retainedBytes;",
     "created.nativePayloadBytes()",
+    "private boolean released;",
 ]:
-    if fragment not in pool:
+    if fragment not in pool_code:
         fail(f"VM-local M3 atom lifecycle missing: {fragment}")
-if "ArrayList<M3StringAtom> values" in pool:
+if "ArrayList<M3StringAtom> values" in pool_code:
     fail("VM-local M3 atom pool strongly retains native atoms")
+
+def java_block_end(code: str, opening: int) -> int:
+    depth = 0
+    for index in range(opening, len(code)):
+        if code[index] == "{":
+            depth += 1
+        elif code[index] == "}":
+            depth -= 1
+            if depth == 0:
+                return index
+    return -1
+
+local_release_start = pool_code.find("void releaseNative()")
+local_release_open = pool_code.find("{", local_release_start)
+local_release_end = java_block_end(pool_code, local_release_open)
+if local_release_start < 0 or local_release_open < 0 or local_release_end < 0:
+    fail("VM-local M3 atom native release method missing")
+local_release = pool_code[local_release_start:local_release_end + 1]
+if re.sub(r"\s+", "", local_release) != (
+        "voidreleaseNative(){if(!released){released=true;"
+        "if(address!=0L)UNSAFE.freeMemory(address);release(retainedBytes);}}"):
+    fail("VM-local M3 release method control flow changed")
+
+accounting_start = pool_code.find("private static void release(long bytes)")
+accounting_open = pool_code.find("{", accounting_start)
+accounting_end = java_block_end(pool_code, accounting_open)
+if accounting_start < 0 or accounting_open < 0 or accounting_end < 0:
+    fail("VM-local M3 native budget release helper missing")
+accounting = pool_code[accounting_start:accounting_end + 1]
+if re.sub(r"\s+", "", accounting) != (
+        "privatestaticvoidrelease(longbytes){LOCAL_NATIVE_BYTES.addAndGet(-bytes);}"):
+    fail("VM-local M3 native budget release control flow changed")
+
+# Every call must remain a direct invocation; an escaping bound method reference is unsafe.
+if re.search(r"::\s*releaseNative\b", pool_code):
+    fail("VM-local M3 native release method reference escaped its monitor")
+release_calls = list(re.finditer(r"\breference\.releaseNative\(\)\s*;", pool_code))
+release_invocations = list(re.finditer(r"\.\s*releaseNative\s*\(\s*\)\s*;", pool_code))
+if len(release_calls) != 6 or len(release_invocations) != len(release_calls):
+    fail("VM-local M3 native release call sites changed or use another receiver")
+bucket_monitors = []
+for monitor in re.finditer(r"\bsynchronized\s*\(\s*bucket\s*\)\s*\{", pool_code):
+    opening = pool_code.find("{", monitor.start())
+    closing = java_block_end(pool_code, opening)
+    if closing < 0:
+        fail("VM-local M3 bucket monitor has unbalanced Java braces")
+    bucket_monitors.append((monitor.start(), opening, closing))
+canonical_release_calls = 0
+queued_release_calls = 0
+for call in release_calls:
+    enclosing = [scope for scope in bucket_monitors
+                 if scope[1] < call.start() < scope[2]]
+    if not enclosing:
+        fail("VM-local M3 native release call escaped its LocalBucket monitor")
+    monitor_start, _, _ = max(enclosing, key=lambda scope: scope[0])
+    prefix = pool_code[max(0, monitor_start - 512):monitor_start]
+    body_before_call = pool_code[monitor_start:call.start()]
+    normalized_body = re.sub(r"\s+", "", body_before_call)
+    iterated_bucket_ref = (
+        "LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());" in prefix
+        and normalized_body == (
+            "synchronized(bucket){if(bucket.retired)continue;"
+            "for(Iterator<LocalRef>iterator=bucket.values.iterator();iterator.hasNext();){"
+            "LocalRefreference=iterator.next();M3StringAtomexisting=reference.get();"
+            "if(existing==null){iterator.remove();"
+        )
+        and len(re.findall(r"\breference\s*=(?!=)", body_before_call)) == 1
+    )
+    queue_loop = pool_code.rfind(
+        "while ((reference = (LocalRef) LOCAL_QUEUE.poll()) != null)", 0, monitor_start)
+    queued_bucket_ref = (
+        queue_loop >= 0
+        and "LocalBucket bucket = reference.bucket;" in prefix
+        and normalized_body == "synchronized(bucket){bucket.values.remove(reference);"
+        and len(re.findall(r"\breference\s*=(?!=)", pool_code[queue_loop:call.start()])) == 1
+    )
+    if iterated_bucket_ref:
+        canonical_release_calls += 1
+    elif queued_bucket_ref:
+        queued_release_calls += 1
+    else:
+        fail("VM-local M3 release is not protected by its LocalRef-owning bucket")
+if canonical_release_calls != 5 or queued_release_calls != 1:
+    fail("VM-local M3 owner-to-bucket release paths changed")
 
 for required_mechanical_name_mapping in [
     '"source": "com.synexia.indexstring.precompute.MIndexRe2MechanicalFacts"',
