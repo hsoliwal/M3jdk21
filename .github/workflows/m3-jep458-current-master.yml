@@ -3,7 +3,7 @@ name: M3 JEP 458 current-master admission
 on:
   push:
     branches:
-      - "m3/jep458-proof-refresh-20261013"
+      - "m3/jep458-proof-refresh-*"
     paths:
       - "m3/backports/recipes/jep-458-current/**"
       - "m3/tooling/migration-recipes/**"
@@ -50,7 +50,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA="3799df0b88d169064b610481400ec4edacec1d2e"
+          git fetch --no-tags origin master
+          BASE_SHA="$(git merge-base HEAD origin/master)"
+          test -n "$BASE_SHA"
           git diff --exit-code "$BASE_SHA...HEAD" -- \
             make/CompileInterimLangtools.gmk \
             src/java.base/share/classes/module-info.java \
