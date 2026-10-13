@@ -33,7 +33,7 @@ jobs:
       - name: Install source-built rewrite and JUnit 5.10.2 toolchain
         run: >
           mvn -B -ntp -f m3/vendor/third_party/pom.xml
-          -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2
+          -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
           -am -DskipTests install
       - name: Install bounded Synexia recipe custody
         run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
@@ -66,7 +66,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           repository: hsoliwal/synexia-tornadovm
-          ref: 3bf826714a48d7fdf346ffde8a0fc25c525572c5
+          ref: 3ba01a07a9e5ad60564d30933d7ed27ff1f57ba4
           path: target/synexia-tornadovm
       - name: Install pinned RV32IM provider with Java 21 preview ABI
         run: >
@@ -75,7 +75,7 @@ jobs:
       - name: Install source-built JUnit 5.11.4 test runtime
         run: >
           mvn -B -ntp -f m3/vendor/third_party/pom.xml
-          -pl junit-jupiter-5.11.4 -am -DskipTests install
+          -pl junit-jupiter-5.11.4,junit-platform-launcher-1.11.4 -am -DskipTests install
       - name: CPU adapter contracts
         run: >
           mvn -B -ntp -f m3/ports/tornadovm-bulk/pom.xml
