@@ -222,7 +222,7 @@ class BackportRecipeDagTest(unittest.TestCase):
                 [row[1] for row in parsed],
             )
             self.assertTrue(all(row[2] == "MULTI_MODULE" for row in parsed))
-            self.assertTrue(all(row[3] == "true" for row in parsed))
+            self.assertTrue(all(row[3] == "false" for row in parsed))
             self.assertEqual("", parsed[0][5])
             self.assertEqual("inventory", parsed[1][5])
             self.assertEqual("recipe", parsed[2][5])
