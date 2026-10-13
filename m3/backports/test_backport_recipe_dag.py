@@ -307,6 +307,31 @@ class BackportRecipeDagTest(unittest.TestCase):
             all(atom.state.startswith("MATERIALIZED_RECIPE") for atom in jdk8357439)
         )
 
+        expected_frontier = [
+            "INVENTORY",
+            "A3_ATOMIZE",
+            "A3_PATTERNIZE",
+            "A3_DOCUMENT",
+            "A3_FIXED_POINT",
+            "RECIPE",
+        ]
+        executable_jep_ids = sorted(
+            {
+                atom.work_id
+                for atom in atoms
+                if atom.source_kind == "JEP" and atom.executable
+            }
+        )
+        self.assertTrue(executable_jep_ids)
+        for work_id in executable_jep_ids:
+            work = [atom for atom in atoms if atom.work_id == work_id]
+            phases = [atom.phase for atom in work]
+            self.assertEqual(expected_frontier, phases[: len(expected_frontier)], work_id)
+            self.assertEqual(1, phases.count("A3_ATOMIZE"), work_id)
+            self.assertEqual(1, phases.count("A3_PATTERNIZE"), work_id)
+            self.assertEqual(1, phases.count("A3_DOCUMENT"), work_id)
+            self.assertEqual(1, phases.count("A3_FIXED_POINT"), work_id)
+
         rejected = [atom for atom in atoms if atom.work_id == "JEP-511"]
         self.assertEqual(1, len(rejected))
         self.assertEqual("REJECT", rejected[0].state)
