@@ -15,11 +15,12 @@ and refuses duplicate/mismatched priority metadata.
 ## Portable recipe custody
 
 Canonical Apache-2.0 owner: hsoliwal/com.synexia PR #10724, at
-`05c969ec478e0b2a3e2d03e46aef48e0f60df060`.
+`f7e06bf2e7b69cacd8c67ff0cd14ecbd0a086a02`.
 
 The source-sealed Synexia recipe is
 `M3Jdk21JepResidueProofRepairRecipe`, applied to only:
 
+- `m3/backports/JEP_RESIDUE_QUEUE.tsv` (15-column canonical generated snapshot)
 - `m3/backports/jep_residue.py`
 - `m3/backports/test_jep_residue.py`
 
