@@ -16,37 +16,8 @@ TARGET_PATH = ROOT / "m3/synexia-import/current-full-borrow/check_string_phase.p
 
 OLD_MARKER = "M3StringTuple tuple = new M3StringTuple(left, right);"
 NEW_MARKER = "return concatBalanced(left, right);"
-EXPECTED_RECEIPT =     {
-        "schema": "M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V1",
-        "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
-        "source": {
-            "repository": "hsoliwal/com.synexia",
-            "pullRequest": 10942,
-            "head": "192607fed74e6ff27beaf553db6ec169afc40b3d",
-            "mergeCommit": "b6b1af473ea8ca5073b0bd3b16a7a0063db1782d",
-            "manifestPath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-current-proof-20261012/manifest.tsv",
-            "manifestGitBlob": "101be05c8b045749e5d1e86a97b73bd4ae1c4bd1",
-            "sourceResourcePath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-current-proof-20261012/03-check_string_phase.py.txt",
-            "sourceResourceGitBlob": "9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02",
-            "sourceResourceSha256": "11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4"
-        },
-        "target": {
-            "repository": "hsoliwal/M3jdk21",
-            "baseCommit": "736ae65b1b9fc77396a30653a1c5d2358e2117c4",
-            "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
-            "beforeGitBlob": "67d562b0a2a72bd72a185007b2345b87fb3a8e68",
-            "beforeSha256": "892a5986d7c8a24909cbe04c29a0a44dc22eea508463a3bef8bd3e8444a6304c",
-            "afterGitBlob": "9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02",
-            "afterSha256": "11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4"
-        },
-        "change": {
-            "oldMarker": "M3StringTuple tuple = new M3StringTuple(left, right);",
-            "newMarker": "return concatBalanced(left, right);",
-            "expectedOccurrences": 1,
-            "runtimeProductFilesChanged": false,
-            "runtimePromotionAuthorized": false
-        }
-}
+EXPECTED_RECEIPT = json.loads("{\n  \"schema\": \"M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V1\",\n  \"scope\": \"TOOLING_ONLY_NO_RUNTIME_PROMOTION\",\n  \"source\": {\n    \"repository\": \"hsoliwal/com.synexia\",\n    \"pullRequest\": 10942,\n    \"head\": \"192607fed74e6ff27beaf553db6ec169afc40b3d\",\n    \"mergeCommit\": \"b6b1af473ea8ca5073b0bd3b16a7a0063db1782d\",\n    \"manifestPath\": \"synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-current-proof-20261012/manifest.tsv\",\n    \"manifestGitBlob\": \"101be05c8b045749e5d1e86a97b73bd4ae1c4bd1\",\n    \"sourceResourcePath\": \"synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-current-proof-20261012/03-check_string_phase.py.txt\",\n    \"sourceResourceGitBlob\": \"9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02\",\n    \"sourceResourceSha256\": \"11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4\"\n  },\n  \"target\": {\n    \"repository\": \"hsoliwal/M3jdk21\",\n    \"baseCommit\": \"736ae65b1b9fc77396a30653a1c5d2358e2117c4\",\n    \"path\": \"m3/synexia-import/current-full-borrow/check_string_phase.py\",\n    \"beforeGitBlob\": \"67d562b0a2a72bd72a185007b2345b87fb3a8e68\",\n    \"beforeSha256\": \"892a5986d7c8a24909cbe04c29a0a44dc22eea508463a3bef8bd3e8444a6304c\",\n    \"afterGitBlob\": \"9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02\",\n    \"afterSha256\": \"11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4\"\n  },\n  \"change\": {\n    \"oldMarker\": \"M3StringTuple tuple = new M3StringTuple(left, right);\",\n    \"newMarker\": \"return concatBalanced(left, right);\",\n    \"expectedOccurrences\": 1,\n    \"runtimeProductFilesChanged\": false,\n    \"runtimePromotionAuthorized\": false\n  }\n}\n")
+
 
 def git_blob(data: bytes) -> str:
     header = b"blob " + str(len(data)).encode("ascii") + b"\\0"
