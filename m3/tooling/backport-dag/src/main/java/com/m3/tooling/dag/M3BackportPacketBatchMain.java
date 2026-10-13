@@ -7,7 +7,12 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
 
-/** Validates and composes every generated M3 backport packet in one JVM. */
+/**
+ * Validates all generated packet schemas and composes only explicitly scope-approved DAG packets.
+ *
+ * <p>Unapproved broader-scope packets remain HOLD planning evidence rather than acquiring
+ * scope-promotion authority from their domain/path classification.</p>
+ */
 public final class M3BackportPacketBatchMain {
     private M3BackportPacketBatchMain() {}
 
