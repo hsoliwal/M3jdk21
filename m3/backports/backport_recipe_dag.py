@@ -21,6 +21,10 @@ from typing import Iterable, Mapping, Sequence
 
 PHASES = (
     "INVENTORY",
+    "A3_ATOMIZE",
+    "A3_PATTERNIZE",
+    "A3_DOCUMENT",
+    "A3_FIXED_POINT",
     "RECIPE",
     "COMPILE",
     "TEST",
@@ -167,7 +171,16 @@ def _candidate_atoms(
     if state not in EXECUTABLE_STATES:
         return [("INVENTORY", scope, state, False, "", reason)]
 
-    phases = ["INVENTORY", "RECIPE", "COMPILE", "TEST"]
+    phases = [
+        "INVENTORY",
+        "A3_ATOMIZE",
+        "A3_PATTERNIZE",
+        "A3_DOCUMENT",
+        "A3_FIXED_POINT",
+        "RECIPE",
+        "COMPILE",
+        "TEST",
+    ]
     if _runtime_required(disposition, domain):
         phases.append("RUNTIME_PARITY")
     phases.append("FIXED_POINT")
@@ -177,7 +190,27 @@ def _candidate_atoms(
     for phase in phases:
         atom_id = f"{work_id.lower().replace('-', '_')}.{phase.lower()}"
         phase_reason = reason
-        if phase == "RECIPE" and state == "AUTHOR_RECIPE":
+        if phase == "A3_ATOMIZE":
+            phase_reason = (
+                "Run the proven FILE-local atomization recipe over explicit current-tree Java "
+                "targets; emit candidates only and preserve public/external contracts."
+            )
+        elif phase == "A3_PATTERNIZE":
+            phase_reason = (
+                "Run the proven pattern/IOP recipe over the atomized candidate; retain typed "
+                "residue for unadmitted shapes and do not widen scope."
+            )
+        elif phase == "A3_DOCUMENT":
+            phase_reason = (
+                "Regenerate derivable semantic/Javadoc documentation from the admitted atom/"
+                "pattern roles without changing source behavior."
+            )
+        elif phase == "A3_FIXED_POINT":
+            phase_reason = (
+                "Replay the complete A3 atomize-patternize-document DAG and require an unchanged "
+                "second pass before any backport recipe absorption."
+            )
+        elif phase == "RECIPE" and state == "AUTHOR_RECIPE":
             phase_reason = "No checked-in recipe packet exists; author/test source-pinned recipe first."
         elif phase == "RECIPE":
             phase_reason = "Reuse checked-in recipe packet(s); do not duplicate implementation ownership."
@@ -436,6 +469,8 @@ def _local_atom_id(phase: str) -> str:
 
 
 def _work_ref(atom: Atom) -> str:
+    if atom.phase.startswith("A3_"):
+        return "A3:" + atom.work_id + ":" + atom.phase
     if atom.phase == "RECIPE":
         if atom.state.startswith("MATERIALIZED_RECIPE"):
             return ";".join(
