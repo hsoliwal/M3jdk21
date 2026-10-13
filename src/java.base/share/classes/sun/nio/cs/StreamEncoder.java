@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2001, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -159,12 +160,41 @@ public final class StreamEncoder extends Writer {
     }
 
     public void write(String str, int off, int len) throws IOException {
-        /* Check the len before creating a char buffer */
+        // Keep String range/null validation before the closed-stream check.
         if (len < 0)
             throw new IndexOutOfBoundsException();
-        char[] cbuf = new char[len];
-        str.getChars(off, off + len, cbuf, 0);
-        write(cbuf, 0, len);
+        int length = str.length();
+        int end = off + len;
+        if (off < 0 || end > length || off > end) {
+            throw new StringIndexOutOfBoundsException(
+                    "begin " + off + ", end " + end + ", length " + length);
+        }
+
+        // Retain the immutable String (and its M3 owner), not a full char[] shadow.
+        // Slice confines the encoder's input view to this exact requested range.
+        CharBuffer cb = CharBuffer.wrap(str, off, end).slice();
+        Object lock = this.lock;
+        if (lock instanceof InternalLock locker) {
+            locker.lock();
+            try {
+                lockedWriteString(cb);
+            } finally {
+                locker.unlock();
+            }
+        } else {
+            synchronized (lock) {
+                lockedWriteString(cb);
+            }
+        }
+    }
+
+    private void lockedWriteString(CharBuffer cb) throws IOException {
+        ensureOpen();
+        // A zero-length String write must not advance a stateful encoder or
+        // consume a leftover surrogate. The public CharBuffer overload is unchanged.
+        if (cb.hasRemaining()) {
+            implWrite(cb);
+        }
     }
 
     public void write(CharBuffer cb) throws IOException {
