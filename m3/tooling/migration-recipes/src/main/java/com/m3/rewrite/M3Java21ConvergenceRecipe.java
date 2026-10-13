@@ -1,27 +1,17 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite;
 
-import com.synexia.rewrite.M3PureIntAtomizeRecipe;
-import com.synexia.rewrite.M3PureIntDocumentationRecipe;
-import com.synexia.rewrite.M3PureIntInventoryRecipe;
-import com.synexia.rewrite.M3PureIntPatternizeRecipe;
 import java.util.List;
 import java.util.Set;
 import org.openrewrite.Recipe;
-import org.openrewrite.java.RemoveUnusedImports;
 
 /**
- * Top-level Java 21 FILE-local M3 convergence recipe.
+ * M3JDK21 compatibility facade for Synexia's canonical FILE-local convergence recipe.
  *
- * <p>This is the single trusted OpenRewrite entry point for mechanically proven Java 21
- * atomization/patternization/documentation passes. New semantic families are added here only after
- * their bounded JUnit proof is green. OpenRewrite cycles the ordered child recipes until source
- * reaches a fixed point.
- *
- * <p>The final import pass reuses the pinned OpenRewrite catalogue recipe. Its missing-type
- * guard remains upstream-owned: incomplete attribution must not become guessed import usage.
- * Import cleanup follows typed atom/pattern/documentation edits and does not replace them.
+ * <p>The reusable ordered recipe composition is owned by hsoliwal/com.synexia. This target class
+ * name is retained only for M3JDK21 activation/backward compatibility.</p>
  */
+@Deprecated(forRemoval = false)
 public final class M3Java21ConvergenceRecipe extends Recipe {
     @Override
     public String getDisplayName() {
@@ -30,8 +20,8 @@ public final class M3Java21ConvergenceRecipe extends Recipe {
 
     @Override
     public String getDescription() {
-        return "Inventories, atomizes, patternizes/IOP-types and documents admitted Java 21 "
-                + "FILE-local leaves through one deterministic OpenRewrite DAG.";
+        return "M3JDK21 compatibility facade delegating FILE-local Java convergence to the "
+                + "canonical Synexia recipe.";
     }
 
     @Override
@@ -41,22 +31,14 @@ public final class M3Java21ConvergenceRecipe extends Recipe {
                 "java21",
                 "multi-pass",
                 "convergence",
-                "inventory",
-                "atomization",
-                "patternization",
-                "iop",
-                "documentation",
                 "file-local",
+                "synexia",
+                "target-adapter",
                 "behavior-contract-preserving");
     }
 
     @Override
     public List<Recipe> getRecipeList() {
-        return List.of(
-                new M3PureIntInventoryRecipe(),
-                new M3PureIntAtomizeRecipe(),
-                new M3PureIntPatternizeRecipe(),
-                new M3PureIntDocumentationRecipe(),
-                new RemoveUnusedImports());
+        return List.of(new com.synexia.rewrite.M3Jdk21FileConvergenceRecipe());
     }
 }
