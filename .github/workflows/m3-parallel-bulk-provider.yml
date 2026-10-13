@@ -1,0 +1,72 @@
+name: M3 Parallel Bulk Provider
+
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/parallel-bulk/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3ParallelBulkBridgeReceiverRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3ParallelBulkBridgeReceiverRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-parallel-bulk-bridge/**'
+      - 'm3/tooling/migration-recipes/tasks/parallel-bulk-bridge/**'
+      - 'm3/compatibility/synexia-parallel-bulk-bridge-20261013.tsv'
+      - '.github/workflows/m3-parallel-bulk-provider.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-real-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict Java21 JDK patch, actual M3 parallel source and CPU oracle
+        run: bash m3/ports/parallel-bulk/verification/verify.sh
+
+  module-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install JUnit runtime from existing vendored source
+        run: >
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml
+          -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
+          -am -DskipTests install
+      - name: Install existing m3.parallel module
+        run: mvn -B -ntp -f m3/ports/parallel/pom.xml -DskipTests install
+      - name: Execute JUnit against real JDK bulk and parallel owners
+        run: >
+          mvn -B -ntp -f m3/ports/parallel-bulk/pom.xml
+          -Dtest=M3ParallelIntAddProviderTest test
+
+  recipe-receiver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install source-built OpenRewrite and JUnit toolchain
+        run: >
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml
+          -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
+          -am -DskipTests install
+      - name: Install canonical bounded Synexia recipe custody
+        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+      - name: Receiver hash-pinned materialization and fixed point
+        run: >
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3ParallelBulkBridgeReceiverRecipeTest
+          test
