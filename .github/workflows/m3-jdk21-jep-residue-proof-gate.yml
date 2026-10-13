@@ -4,6 +4,7 @@ name: M3 JDK21 JEP residue proof-gate repair
 on:
   pull_request:
     paths:
+      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
       - 'm3/backports/jep_residue.py'
       - 'm3/backports/test_jep_residue.py'
       - 'm3/backports/recipes/jep-residue-proof-gate/**'
