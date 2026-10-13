@@ -15,7 +15,8 @@
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <asm.version>9.6-m3-source-1</asm.version>
-    <junit.version>5.10.2</junit.version>
+    <!-- CI without the vendored universe may pass -Dasm.version=9.6 -Djunit.artifact.version=5.10.2 -->
+    <junit.artifact.version>5.10.2-m3-source-1</junit.artifact.version>
     <!-- The harvester reads the stock JDK node tree; only build-time tools and tests open it. -->
     <m3.opens>--add-opens java.base/java.util.regex=ALL-UNNAMED</m3.opens>
   </properties>
@@ -43,7 +44,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>${junit.version}-m3-source-1</version>
+      <version>${junit.artifact.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
