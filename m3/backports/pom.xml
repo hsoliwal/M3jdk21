@@ -37,6 +37,20 @@
             </configuration>
           </execution>
           <execution>
+            <id>verify-synexia-nebula-recipe-dag-handoff</id>
+            <phase>validate</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <executable>${python.executable}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>recipe_dag_handoff.py</argument>
+                <argument>--out</argument>
+                <argument>${project.build.directory}/synexia-nebula-recipe-dag-handoff.json</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
             <id>compile-backport-recipe-dag</id>
             <phase>validate</phase>
             <goals><goal>exec</goal></goals>
