@@ -3,21 +3,15 @@ type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.rewrite.M3Java21Convergence
 displayName: M3 Java 21 FILE-local convergence
 description: >-
-  Declaratively composes the admitted Java 21 FILE-local inventory, atomization,
-  pattern/IOP and documentation leaves. Public behavior and contracts remain locked.
+  M3JDK21 receiver recipe delegating the complete FILE-local Java 21 convergence
+  pass to the canonical Apache-2.0 Synexia owner. Public behavior and contracts remain locked.
 tags:
   - m3
   - java21
-  - a3
   - file-local
-  - atomization
-  - patternization
-  - iop
-  - documentation
+  - synexia
+  - target-adapter
   - behavior-contract-preserving
 causesAnotherCycle: true
 recipeList:
-  - com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates
-  - com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe
-  - com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe
-  - com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe
+  - com.synexia.rewrite.M3Jdk21FileConvergenceRecipe
