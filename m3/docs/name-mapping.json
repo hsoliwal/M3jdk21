@@ -443,6 +443,42 @@
         "license": "Apache-2.0 for recipe/tooling; mixed Apache-2.0 AND BSD-3-Clause for production donor",
         "target_runtime_dependency": false
       }
+    },
+    {
+      "source": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-typed-stringifier-invariant-20261009/00-check-m3string-concat-reference-dag.py.txt",
+      "source_commit": "e243e183d72bf42d57b2f946e332c8dc49a75ae9",
+      "target": "m3/runtime-integration/check-m3string-concat-reference-dag.py",
+      "status": "received exact hash-pinned Synexia checker snapshot; runtime verification pending",
+      "source_role": "canonical Synexia OpenRewrite recipe output",
+      "target_rule": "Keep the Synexia m3Append/String[] checker postimage byte-identical; M3JDK checker/build gates own runtime qualification.",
+      "lineage": {
+        "donor_repo": "hsoliwal/com.synexia",
+        "donor_pr": 10963,
+        "donor_merge_commit": "e243e183d72bf42d57b2f946e332c8dc49a75ae9",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-typed-stringifier-invariant-20261009/manifest.tsv",
+        "manifest_git_blob": "9cfa92fb8edc158620fcd0cb1bb40eab052167d3",
+        "source_resource_git_blob": "bddd68cc9b36439fda39fe2fd655b8819fae7e0e",
+        "source_resource_sha256": "9fd82a96ad813f11c90e593c8cd3b93feae9d5658a7b7b68ca48e95f035b19fa",
+        "receiver_receipt": "m3/compatibility/synexia-string-concat-dag-successor-20261013.json"
+      }
+    },
+    {
+      "source": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-reference-dag-jtreg-20261013/00-M3StringConcatReferenceDagTest.java.txt",
+      "source_commit": "48900593efc773183594ac02e9ff0cf1928db197",
+      "target": "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java",
+      "status": "received exact hash-pinned Synexia jtreg snapshot; jtreg verification pending",
+      "source_role": "canonical Synexia OpenRewrite recipe output",
+      "target_rule": "Preserve String[] helper contract and Java concat conversion coverage; M3JDK jtreg/build gates own runtime qualification.",
+      "lineage": {
+        "donor_repo": "hsoliwal/com.synexia",
+        "donor_pr": 10970,
+        "donor_merge_commit": "48900593efc773183594ac02e9ff0cf1928db197",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-reference-dag-jtreg-20261013/manifest.tsv",
+        "manifest_git_blob": "37f0e594f1dc06045cd20305c3c06f7a30da27e1",
+        "source_resource_git_blob": "edf35d940739581b76b73d7b431989ec4ff0d966",
+        "source_resource_sha256": "e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95",
+        "receiver_receipt": "m3/compatibility/synexia-string-concat-dag-successor-20261013.json"
+      }
     }
   ],
   "imported_donor_sources": [],
