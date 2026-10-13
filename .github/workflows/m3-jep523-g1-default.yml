@@ -64,7 +64,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA="80b8534ad1e45002185fb3eeab233f98d3a7c0bd"
+          git fetch --no-tags origin master
+          BASE_SHA="$(git merge-base HEAD origin/master)"
+          test -n "$BASE_SHA"
           git diff --exit-code "$BASE_SHA...HEAD" -- \
             src/hotspot/share/gc/shared/gcConfig.cpp \
             test/hotspot/jtreg/gc/arguments/TestSelectDefaultGC.java
