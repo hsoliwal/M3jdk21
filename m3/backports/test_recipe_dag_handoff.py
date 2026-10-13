@@ -45,6 +45,23 @@ class RecipeDagHandoffTest(unittest.TestCase):
         self.assertTrue(first["nebulaReferenceOnly"])
         self.assertRegex(first["root"], r"^[0-9a-f]{64}$")
 
+    def test_successor_nebula_receiver_is_exact_and_keeps_native_current_head_pending(self) -> None:
+        row = self.mod.validate_nebula_receiver()
+
+        self.assertEqual("M3_NEBULA_MASTERED_DAG_RECEIVER_V2", row["schema"])
+        self.assertEqual("ADMITTED", row["recipe_dag_transfer"])
+        self.assertEqual("CANONICAL_SYNEXIA_APACHE_HANDOFF", row["recipe_custody"])
+        self.assertEqual(
+            "GREEN_ZERO_DRIFT_FROM_QUALIFIED_RUNTIME",
+            row["runtime_source_equivalence"],
+        )
+        self.assertEqual("PENDING_EXTERNAL_CI", row["native_current_head"])
+        self.assertEqual("PROVEN_RECIPE_DAG_ONLY", row["application_policy"])
+        self.assertEqual("false", row["source_mutation"])
+        self.assertEqual("false", row["semantic_equivalence"])
+        self.assertEqual("false", row["compatibility_authority"])
+        self.assertEqual("false", row["promotion"])
+
     def test_required_reusable_assets_are_exact_and_apache2(self) -> None:
         rows = self.mod.validate(self.current_rows())
         by_id = {row["id"]: row for row in rows}
