@@ -61,7 +61,10 @@ public final class M3RecipeScopeRegistry {
                     fixed(M3EditScope.MULTI_MODULE)),
             Map.entry(
                     "com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe",
-                    fixed(M3EditScope.MULTI_MODULE)));
+                    fixed(M3EditScope.MULTI_MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.semantic.M3SemanticHashRecipe",
+                    fixed(M3EditScope.FILE)));
 
     private M3RecipeScopeRegistry() {}
 
