@@ -473,7 +473,10 @@ def write_packets(atoms: Sequence[Atom], directory: Path) -> list[tuple[str, str
                 if not atom.depends_on
                 else local_ids[atom.depends_on]
             )
-            approved = atom.scope != "FILE"
+            # Scope is a required review floor, not an approval. A classification/path
+            # heuristic must never mint authority to cross FILE -> PACKAGE/MODULE/REACTOR.
+            # A reviewed packet may later set this flag explicitly, with independent proof.
+            approved = False
             lines.append(
                 "\t".join(
                     (
