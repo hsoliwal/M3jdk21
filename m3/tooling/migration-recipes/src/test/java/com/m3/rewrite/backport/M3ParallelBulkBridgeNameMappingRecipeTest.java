@@ -17,7 +17,7 @@ final class M3ParallelBulkBridgeNameMappingRecipeTest {
     private static final String OLD =
             "{\n  \"family_name_mapping\": [\n    {\n"
                     + "      \"source_family\": \"existing\"\n    }"
-                    + "\n  ],\n  \"recipe_authority\": {}\n}\n";
+                    + "\n\n  ],\n  \"recipe_authority\": {}\n}\n";
 
     @Test
     void addsOnlyOptionalMappingAndThenReachesFixedPoint() {
