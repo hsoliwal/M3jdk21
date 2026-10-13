@@ -43,6 +43,12 @@ ABSENT -> CREATING -> RESIDENT -> SWAPPING -> SWAPPED -> RESTORING -> RESIDENT
 
 Alternative: RESIDENT -> DESTROYING -> ABSENT is legal only for a declared reconstructible projection whose state is canonical elsewhere. Any failure returns to the last recoverable state. Reentrant creation and eviction while a scoped use is active are rejected. Concurrent use must be serialized or use an explicit owner lock; the initial implementation is thread-confined unless a later proof adds concurrency.
 
+## Viewport, overscan and widget projection
+
+For tree/table viewers, the viewport is a presentation window over the logical parent model, not a limit on logical data. Compute a bounded visible interval plus configured overscan, include required ancestors, and materialize only those widget/projection objects. Scrolling changes window membership; it must not change canonical parent state or logical row identity. Recycle/release only non-escaping presentation projections whose toolkit lifecycle permits it. Focus, selection, accessibility, editing, drag/drop, event order, and disposal tombstones are separate contract surfaces and must be covered by receiver tests.
+
+Existing evidence to reuse rather than duplicate: Synexia's `.m3/donor-convergence/treeviewer-tv50-20261013/` and `.m3/task-crates/swt-tree-residency-live-20261005/`; the latter records compilation and source replay, but explicitly says GUI/runtime tests were not run. In this M3JDK21 checkout, Swing's `TreeDemo.java` is available as a donor, while SWT/JFace receiver source is not present. Keep receiver-specific work open until exact source paths and tests are inventoried.
+
 ## Pressure and LRU policy
 
 At construction, the parent owns maxResidentBytes, reserveBytes, strategy flags, and the secondary store/factory. On access:

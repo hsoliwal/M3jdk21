@@ -11,6 +11,12 @@ This packet owns the recipe-first workflow for parent-owned lazy object projecti
 - Existing lazy-tree owner: M3TreeMap / M3LazyValueState in m3/collections
 - Existing temporary-array pool: src/java.base/share/classes/jdk/internal/util/M3ObjectArrayPool.java
 
+## Existing SWT/JFace donor and receiver owners
+
+Do not invent another viewer/overscan planner. The first-party TreeViewer donor inventory is maintained in Synexia at `.m3/donor-convergence/treeviewer-tv50-20261013/`; it nominates the existing MIndex owners and explicitly leaves contract comparison open. The live SWT bounded-residency source/recipe candidate is `.m3/task-crates/swt-tree-residency-live-20261005/` and links draft SWT PR #81 and canonical recipe PR #9339. Those source compilation/replay receipts do not prove GUI runtime parity.
+
+The M3JDK21 Swing donor presently visible in this repository is `src/demo/share/jfc/SwingSet2/TreeDemo.java`; no SWT/JFace TreeViewer receiver source is present in this checkout. Keep SWT/JFace and Swing as separate receivers, each with its own API/event/identity tests.
+
 ## Recipe stages
 
 1. Inventory annotated class/member sites and pin source/classfile SHA-256.
