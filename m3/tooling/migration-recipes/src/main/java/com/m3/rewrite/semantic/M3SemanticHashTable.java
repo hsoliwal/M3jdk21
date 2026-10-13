@@ -5,13 +5,21 @@ import org.openrewrite.Column;
 import org.openrewrite.DataTable;
 import org.openrewrite.Recipe;
 
-/** Semantic fingerprint evidence emitted without mutating Java source. */
+/**
+ * Legacy M3JDK21 semantic-hash row type retained for source compatibility only.
+ *
+ * <p>New executions emit {@link com.synexia.rewrite.semantic.M3SemanticHashTable} rows from the
+ * canonical Synexia recipe. This target-local type owns no hashing or recipe semantics.</p>
+ */
+@Deprecated(forRemoval = false)
 public final class M3SemanticHashTable extends DataTable<M3SemanticHashTable.Row> {
     public M3SemanticHashTable(Recipe recipe) {
-        super(recipe, "M3 semantic hashes", "Layered Java semantic fingerprints for recipe proof and convergence.");
+        super(
+                recipe,
+                "M3 semantic hashes (legacy target facade)",
+                "Compatibility row type; canonical semantic-hash evidence is emitted by Synexia.");
     }
 
-    /** One method/file fingerprint. */
     public static final class Row {
         @Column(displayName = "Source path", description = "Repository-relative source path.")
         private final String sourcePath;
@@ -30,9 +38,15 @@ public final class M3SemanticHashTable extends DataTable<M3SemanticHashTable.Row
         @Column(displayName = "Whole hash", description = "Behavioral + Pattern/IOP fingerprint.")
         private final String wholeHash;
 
-        public Row(String sourcePath, String level, String symbol,
-                   String contractHash, String logicHash, String architectureHash,
-                   String behavioralHash, String wholeHash) {
+        public Row(
+                String sourcePath,
+                String level,
+                String symbol,
+                String contractHash,
+                String logicHash,
+                String architectureHash,
+                String behavioralHash,
+                String wholeHash) {
             this.sourcePath = sourcePath;
             this.level = level;
             this.symbol = symbol;
