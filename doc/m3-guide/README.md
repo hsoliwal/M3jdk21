@@ -57,3 +57,9 @@ For primitive long lists, stacks, queues and deques, see the [primitive sequence
 For immutable byte/UTF-16/int/long views, see the [joined-array reference](joined-array-reference.md): every public member, snapshot versus retained ownership, copy and buffer boundaries, UTF-16 seams, explicit JNI loading/materialization, actual tests and two source-observed implementation gaps.
 
 For exact UTF-16 prefix facts and mutable point sums, see the [indexed algorithm reference](indexed-algorithm-reference.md): every PrefixZ/Fenwick entry point, budget and cancellation checkpoints, half-open indexing, checked intermediate overflow, failure-atomic staging, memory accounting and explicit test gaps.
+
+For literal recognition, regex/String facts, finite trial matrices and candidate-pruning checks, see the [regex precompute and oracle reference](regex-precompute-reference.md): flags and dialect boundaries, mode/class masks, exact versus approximate evidence, input/hash identity, budgets/cancellation, ranking materialization and the absence of a trial-image serialization API.
+
+The [precompute production-source coverage ledger](precompute-source-coverage.md) links all 23 production Java files, distinguishes public owners from internal dependencies and records remaining method/test/runtime gaps.
+
+For the isolated CPU-tool DAG, see the [CPU-tool plan, image and runtime reference](cpu-tool-precompute-reference.md): immutable declarations and prepared KMP state, versioned image/TSV validation, all 13 binary operators, snapshot/materialization boundaries, digest receipts, heap admission, and the optional Java/JNI lexical parity route.
