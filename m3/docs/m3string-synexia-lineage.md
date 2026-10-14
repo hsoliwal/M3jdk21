@@ -263,3 +263,21 @@ Compiled necessary-literal extraction may continue an exact BMP Slice run across
 It deliberately stops at `GroupTail`: HotSpot's regex graph also reuses GroupTail during
 group-reference execution, so static transparency is not assumed there. This allows safe
 candidate facts for shapes such as `ab(cd)` while retaining the exact regex engine as authority.
+
+
+## Restricted full-match regex DP
+
+Synexia `MIndexRestrictedRegex` is the donor/recipe owner for the LeetCode-10-style
+whole-input grammar: lowercase ASCII literals, `.`, and postfix `*`. M3JDK21 consumes it only
+inside `String.matches(regex)`.
+
+- internal receiver: `java.lang.M3StringRestrictedRegexDp`;
+- 64 weak pattern slots, at most 8,192 UTF-16 pattern units;
+- 2 MiB primitive prepared-metadata ceiling;
+- two rolling boolean rows at execution;
+- unsupported syntax/text falls back to `Pattern.matches(regex, this)`;
+- no Pattern/Matcher replacement, capture/find/replacement change, or JNI export.
+
+LeetCode/GFG are problem-category and differential-oracle references only; challenge code is not
+copied. HackerRank regex exercises are mismatch/category evidence. Exact Java regex semantics remain
+owned by the JDK engine outside the proven subset.
