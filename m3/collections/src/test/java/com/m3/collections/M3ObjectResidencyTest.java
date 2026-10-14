@@ -85,6 +85,19 @@ final class M3ObjectResidencyTest {
         assertThrows(M3ObjectResidency.BudgetExceededException.class, () -> arena.use(0, 16, value -> value));
     }
 
+    @Test void directRawReferenceExposurePinsProjectionAgainstLruEviction() {
+        var arena = new M3ObjectResidency<String>(2,
+                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU
+                        | M3ObjectResidency.RECREATE | M3ObjectResidency.PIN_EXPOSED,
+                8, 0, slot -> new String("slot-" + slot), null, null);
+        String escaped = arena.use(0, 8, value -> value);
+        assertSame(escaped, arena.use(0, 8, value -> value));
+        assertThrows(M3ObjectResidency.BudgetExceededException.class,
+                () -> arena.use(1, 8, value -> value.length()));
+        assertSame(escaped, arena.use(0, 8, value -> value));
+        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
+    }
+
     @Test void strictScopeRejectsReturningTheProjection() {
         var arena = new M3ObjectResidency<Object>(1,
                 M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.STRICT_NO_ESCAPE,

@@ -27,7 +27,9 @@ public final class M3ObjectResidency<T> {
     public static final int RECREATE = 1 << 4;
     public static final int OBSERVE_ONLY = 1 << 5;
     public static final int STRICT_NO_ESCAPE = 1 << 6;
-    public static final int ALL_FLAGS = (1 << 7) - 1;
+    /** Permanently pin a slot after a direct raw projection reference is returned to a caller. */
+    public static final int PIN_EXPOSED = 1 << 7;
+    public static final int ALL_FLAGS = (1 << 8) - 1;
 
     public enum State { ABSENT, CREATING, RESIDENT, SWAPPING, SWAPPED, RESTORING }
 
@@ -66,6 +68,8 @@ public final class M3ObjectResidency<T> {
     private final long[] weights;
     private final long[] touched;
     private final int[] active;
+    /** Conservative lifetime pin after direct raw-reference exposure; flat per-slot metadata. */
+    private final byte[] pinned;
     private long residentBytes;
     private long tick;
     private Decision lastDecision;
@@ -93,6 +97,7 @@ public final class M3ObjectResidency<T> {
         this.weights = new long[slots];
         this.touched = new long[slots];
         this.active = new int[slots];
+        this.pinned = new byte[slots];
         Arrays.fill(states, (byte) State.ABSENT.ordinal());
     }
 
@@ -140,8 +145,15 @@ public final class M3ObjectResidency<T> {
         touched[slot] = ++tick;
         try {
             R result = operation.apply(value);
-            if ((flags & STRICT_NO_ESCAPE) != 0 && result == value) {
-                throw new IllegalStateException("projection escaped STRICT_NO_ESCAPE scope");
+            if (result == value) {
+                if ((flags & STRICT_NO_ESCAPE) != 0) {
+                    throw new IllegalStateException("projection escaped STRICT_NO_ESCAPE scope");
+                }
+                if ((flags & PIN_EXPOSED) != 0) {
+                    pinned[slot] = 1;
+                    decision(slot, State.RESIDENT, State.RESIDENT,
+                            "direct projection reference exposed; slot pinned for arena lifetime");
+                }
             }
             return result;
         } finally {
@@ -265,7 +277,7 @@ public final class M3ObjectResidency<T> {
         int victim = -1;
         long oldest = Long.MAX_VALUE;
         for (int i = 0; i < resident.length; i++) {
-            if (i == excluded || resident[i] == null || active[i] != 0) continue;
+            if (i == excluded || resident[i] == null || active[i] != 0 || pinned[i] != 0) continue;
             if ((flags & (SWAP_SECONDARY | RECREATE)) == 0) continue;
             if (touched[i] < oldest) { oldest = touched[i]; victim = i; }
         }
