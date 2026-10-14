@@ -52,6 +52,33 @@ final class M3ObjectResidencyTest {
         assertEquals(0b0110L, arena.readParentBits(0));
     }
 
+
+    @Test void exposedProjectionIsPinnedAndNeverSilentlyReplaced() {
+        var arena = new M3ObjectResidency<StringBuilder>(2,
+                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU
+                        | M3ObjectResidency.RECREATE | M3ObjectResidency.PIN_EXPOSED,
+                8, 0, slot -> new StringBuilder("slot-" + slot), null, null);
+        StringBuilder exposed = arena.use(0, 8, value -> value);
+        assertEquals("slot-0", exposed.toString());
+        assertThrows(M3ObjectResidency.BudgetExceededException.class,
+                () -> arena.use(1, 8, value -> value.append("x").length()));
+        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
+        assertEquals("slot-0", exposed.toString());
+    }
+
+    @Test void exposedInstallIsPinnedFromTheMomentItEntersTheArena() {
+        var arena = new M3ObjectResidency<StringBuilder>(2,
+                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU
+                        | M3ObjectResidency.RECREATE | M3ObjectResidency.PIN_EXPOSED,
+                8, 0, slot -> new StringBuilder("slot-" + slot), null, null);
+        StringBuilder installed = new StringBuilder("externally-held");
+        arena.install(0, installed, 8);
+        assertThrows(M3ObjectResidency.BudgetExceededException.class,
+                () -> arena.use(1, 8, value -> value.length()));
+        assertSame(installed, arena.use(0, 8, value -> value));
+        assertEquals("externally-held", installed.toString());
+    }
+
     @Test void lazyCreateAndStableIntegerSlot() {
         java.util.concurrent.atomic.AtomicInteger creates = new java.util.concurrent.atomic.AtomicInteger();
         var arena = new M3ObjectResidency<Value>(2,
@@ -83,19 +110,6 @@ final class M3ObjectResidencyTest {
                 M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU,
                 8, 0, slot -> "v", null, null);
         assertThrows(M3ObjectResidency.BudgetExceededException.class, () -> arena.use(0, 16, value -> value));
-    }
-
-    @Test void directRawReferenceExposurePinsProjectionAgainstLruEviction() {
-        var arena = new M3ObjectResidency<String>(2,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU
-                        | M3ObjectResidency.RECREATE | M3ObjectResidency.PIN_EXPOSED,
-                8, 0, slot -> new String("slot-" + slot), null, null);
-        String escaped = arena.use(0, 8, value -> value);
-        assertSame(escaped, arena.use(0, 8, value -> value));
-        assertThrows(M3ObjectResidency.BudgetExceededException.class,
-                () -> arena.use(1, 8, value -> value.length()));
-        assertSame(escaped, arena.use(0, 8, value -> value));
-        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
     }
 
     @Test void strictScopeRejectsReturningTheProjection() {

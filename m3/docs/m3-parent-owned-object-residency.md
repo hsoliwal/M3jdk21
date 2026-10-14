@@ -13,7 +13,7 @@ This is not a promise that arbitrary Java object references can be transparently
 1. Canonical state wins. Mutable logical state is stored in parent-owned primitive/reference lanes or a declared checkpoint. `M3ObjectResidency` exposes a canonical 64-bit `readParentBits`/`writeParentBits`/`updateParentBits` lane per logical slot; projection state is not canonical merely because it is stored in the arena. A transient projection is not the sole owner of state if it may be destroyed.
 2. Stable identity is the handle, not the projection. The handle remains valid across materialize/swap/recreate transitions. Projection identity is not promised unless the opted-in contract explicitly requires it.
 3. Behavior and public contracts stay locked. Existing Swing/SWT/JDK methods are not changed by default. New behavior is opt-in by construction flags and recipe-generated internal metadata.
-4. No hidden escape. A projection cannot be evicted while a scoped operation is active. Direct raw-reference escape either fails under STRICT_NO_ESCAPE or permanently pins the slot under PIN_EXPOSED. This runtime check cannot detect references hidden in a wrapper, field, callback, collection, or native state; unknown indirect escape remains a compiler/recipe rejection.
+4. No hidden escape. A projection cannot be evicted while a scoped operation is active. With PIN_EXPOSED, a directly returned or installed projection remains pinned for the arena lifetime. Arbitrary nested/indirect escape is not detectable by this runtime check and must be rejected by compiler escape analysis or handled conservatively.
 5. Bounded memory. Each resident projection carries a conservative byte weight; the manager applies a resident budget and pressure reserve. LRU is a victim-selection policy, not the memory-pressure detector.
 6. Recoverability is explicit. SWAP requires a codec/checkpoint store; RECREATE requires a factory and canonical parent state sufficient to reproduce behavior. Otherwise a slot is pinned/non-evictable.
 7. No forced GC. Do not call System.gc() to make admission decisions. Sample heap limits/occupancy and use an explicit budget; samples are estimates.
@@ -32,11 +32,11 @@ M3ObjectResidencyFlags is an additive bitmask. Proposed stable meanings:
 - RECREATE: discard only when canonical parent state plus a deterministic factory can rebuild it.
 - ALLOW_NULL: null is a valid materialized value.
 - OBSERVE_ONLY: record decisions but do not evict, for safe measurement.
-- STRICT_NO_ESCAPE: use only scoped handle access; reject operations that directly return the raw projection. This is a local guard, not a proof against wrapper/field/callback escape.
-- PIN_EXPOSED: when an operation directly returns the projection, permanently pin that slot for the arena lifetime. This protects the direct raw reference; compiler escape analysis is still required for indirect escapes.
+- STRICT_NO_ESCAPE: use only scoped handle access; reject operations that would publish a raw projection reference.
+- PIN_EXPOSED: pin a slot if use() returns its projection directly, or install() admits a caller-supplied projection; indirect aliases remain compiler-proof obligations.
 - DEFAULT: lazy + LRU + pressure-aware + recreate only when a valid recreation contract is supplied.
 
-Unknown bits are rejected. PIN_EXPOSED is conservative and has no automatic unpin because Java does not expose a reliable general reference count. SWAP_SECONDARY and RECREATE are not interchangeable: swap preserves a codec-defined snapshot; recreation rebuilds from canonical parent state.
+Unknown bits are rejected. SWAP_SECONDARY and RECREATE are not interchangeable: swap preserves a codec-defined snapshot; recreation rebuilds from canonical parent state.
 
 ## State machine
 
@@ -82,7 +82,7 @@ JNI can help with compact primitive state lanes, spill-file I/O, or measured ser
 - Swap: round-trip state, checksum/source identity, corrupt snapshot, I/O failure and quota exhaustion.
 - Recreate: stable behavior from canonical state; constructor side effects not repeated unless declared safe.
 - Memory pressure: small -Xmx, headroom/reserve boundary, allocation failure, no forced GC, budget exhausted.
-- Escape/identity: leaked raw references block eviction; handle identity remains stable.
+- Escape/identity: direct exposed references are pinned by PIN_EXPOSED; indirect escapes remain compiler-proof obligations; handle identity remains stable.
 - API: existing Swing/SWT/JDK public signatures and event order unchanged when flags are OFF.
 - Compiler: stale metadata refusal, unknown annotation/bit refusal, reflection/JNI/serialization escapes block rewriting.
 - Fixed point: recipe second pass has zero diff.

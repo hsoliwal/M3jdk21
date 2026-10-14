@@ -1,6 +1,6 @@
 atom	owner	kind	precondition	proof_required	status
 R0	m3/docs/m3-parent-owned-object-residency.md	contract	inventory existing owners	public API/behavior boundary reviewed	DOCUMENTED
-R1	m3/collections/M3ObjectResidency.java	flat runtime arena + parent-owned 64-bit logical lane	R0	strict compile, tests, LRU/swap/pressure + mutation-survives-eviction tests	SOURCE_ADDED_UNVERIFIED
+R1	m3/collections/M3ObjectResidency.java	flat runtime arena + parent-owned 64-bit logical lane + PIN_EXPOSED	R0	strict compile, tests, direct escape pinning, LRU/swap/pressure + mutation-survives-eviction tests	SOURCE_PATCHED_CI_REQUIRED
 R2	m3/collections/M3Residency.java	CLASS-retained marker	R0	classfile metadata readback and stale hash refusal	SOURCE_ADDED_UNVERIFIED
 R3	m3/tooling/object-residency	Maven/OpenRewrite inventory recipe	R1,R2	actual recipe test, deterministic TSV, zero-diff second pass	OPEN
 R4	M3JDK compiler metadata bridge	classfile annotation decode and per-type flags	R3	classfile/source hash binding, unknown-bit refusal	OPEN

@@ -27,9 +27,11 @@ public final class M3ObjectResidency<T> {
     public static final int RECREATE = 1 << 4;
     public static final int OBSERVE_ONLY = 1 << 5;
     public static final int STRICT_NO_ESCAPE = 1 << 6;
-    /** Permanently pin a slot after a direct raw projection reference is returned to a caller. */
+    /** Pin a projection permanently once a raw reference is returned from use() or installed. */
     public static final int PIN_EXPOSED = 1 << 7;
     public static final int ALL_FLAGS = (1 << 8) - 1;
+    private static final int SLOT_PINNED = 1 << 6;
+    private static final int STATE_MASK = 0x07;
 
     public enum State { ABSENT, CREATING, RESIDENT, SWAPPING, SWAPPED, RESTORING }
 
@@ -68,8 +70,6 @@ public final class M3ObjectResidency<T> {
     private final long[] weights;
     private final long[] touched;
     private final int[] active;
-    /** Conservative lifetime pin after direct raw-reference exposure; flat per-slot metadata. */
-    private final byte[] pinned;
     private long residentBytes;
     private long tick;
     private Decision lastDecision;
@@ -97,7 +97,6 @@ public final class M3ObjectResidency<T> {
         this.weights = new long[slots];
         this.touched = new long[slots];
         this.active = new int[slots];
-        this.pinned = new byte[slots];
         Arrays.fill(states, (byte) State.ABSENT.ordinal());
     }
 
@@ -145,15 +144,11 @@ public final class M3ObjectResidency<T> {
         touched[slot] = ++tick;
         try {
             R result = operation.apply(value);
-            if (result == value) {
-                if ((flags & STRICT_NO_ESCAPE) != 0) {
-                    throw new IllegalStateException("projection escaped STRICT_NO_ESCAPE scope");
-                }
-                if ((flags & PIN_EXPOSED) != 0) {
-                    pinned[slot] = 1;
-                    decision(slot, State.RESIDENT, State.RESIDENT,
-                            "direct projection reference exposed; slot pinned for arena lifetime");
-                }
+            if ((flags & STRICT_NO_ESCAPE) != 0 && result == value) {
+                throw new IllegalStateException("projection escaped STRICT_NO_ESCAPE scope");
+            }
+            if ((flags & PIN_EXPOSED) != 0 && result == value) {
+                states[slot] = (byte) (states[slot] | SLOT_PINNED);
             }
             return result;
         } finally {
@@ -169,6 +164,7 @@ public final class M3ObjectResidency<T> {
         if (stateAt(slot) != State.ABSENT) throw new IllegalStateException("slot is not absent");
         admit(estimatedBytes, slot);
         resident[slot] = value;
+        if ((flags & PIN_EXPOSED) != 0) states[slot] = (byte) (states[slot] | SLOT_PINNED);
         weights[slot] = estimatedBytes;
         residentBytes = Math.addExact(residentBytes, estimatedBytes);
         setState(slot, State.RESIDENT);
@@ -277,7 +273,8 @@ public final class M3ObjectResidency<T> {
         int victim = -1;
         long oldest = Long.MAX_VALUE;
         for (int i = 0; i < resident.length; i++) {
-            if (i == excluded || resident[i] == null || active[i] != 0 || pinned[i] != 0) continue;
+            if (i == excluded || resident[i] == null || active[i] != 0
+                    || (Byte.toUnsignedInt(states[i]) & SLOT_PINNED) != 0) continue;
             if ((flags & (SWAP_SECONDARY | RECREATE)) == 0) continue;
             if (touched[i] < oldest) { oldest = touched[i]; victim = i; }
         }
@@ -316,7 +313,7 @@ public final class M3ObjectResidency<T> {
 
     private State stateAtOrAbsent(int slot) { return slot < 0 ? State.ABSENT : stateAt(slot); }
     private State stateAt(int slot) {
-        return switch (Byte.toUnsignedInt(states[slot])) {
+        return switch (Byte.toUnsignedInt(states[slot]) & STATE_MASK) {
             case 0 -> State.ABSENT;
             case 1 -> State.CREATING;
             case 2 -> State.RESIDENT;
@@ -326,7 +323,7 @@ public final class M3ObjectResidency<T> {
             default -> throw new IllegalStateException("invalid residency state lane");
         };
     }
-    private void setState(int slot, State state) { states[slot] = (byte) state.ordinal(); }
+    private void setState(int slot, State state) { states[slot] = (byte) ((states[slot] & SLOT_PINNED) | state.ordinal()); }
     private void decision(int slot, State before, State after, String reason) {
         lastDecision = new Decision(slot, before, after, residentBytes, maxResidentBytes, reason);
     }
