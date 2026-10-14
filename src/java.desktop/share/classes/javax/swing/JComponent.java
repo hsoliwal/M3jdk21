@@ -4177,7 +4177,7 @@ public abstract class JComponent extends Container implements Serializable,
             }
         }
         clientPropertyChanged(key, oldValue, value);
-        //FLLDCIM: L6 — M3 redraw-suspend construction flag (TARGET_OWNED_PORT)
+        //FLLDCIM: L6 - M3 redraw-suspend construction flag (TARGET_OWNED_PORT)
         if (RepaintManager.M3_REDRAW_SUSPENDED.equals(key)) {
             RepaintManager.m3RedrawChanged(this, oldValue, value);
         }
