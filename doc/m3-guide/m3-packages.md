@@ -53,6 +53,11 @@ These 44 physical source roots have a source-declaration sample and a component-
 | [com.m3.rewrite.packs](#package-43) | [m3/tooling/module-packs/recipes/src/main/java/com/m3/rewrite/packs](https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/tooling/module-packs/recipes/src/main/java/com/m3/rewrite/packs) | 2 | OBSERVED_SAMPLE / PARTIAL |
 | [com.synexia.rewrite.sealed](#package-44) | [m3/tooling/src/main/java/com/synexia/rewrite/sealed](https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/tooling/src/main/java/com/synexia/rewrite/sealed) | 9 | OBSERVED_SAMPLE / PARTIAL |
 
+## Deeper API reading routes
+
+- [Text/storage API contracts](#textstorage-api-contracts): ownership, offsets, encoding, image I/O, failure and usage
+- [Precompute API contracts](#precompute-api-contracts): metrics/signals, exact distance, workspace lifetime and progress
+
 ## Package contracts
 
 <a id="package-1"></a>
@@ -844,3 +849,292 @@ Implementation-identity proof helpers based on loaded class bytes and declared c
 The sampled source documents the following bounded contract (quoted from that public source; it is not a fresh test result):
 
 > Actual loaded class bytes for an explicitly declared implementation closure, never a version label alone.
+
+## Text/storage API contracts
+
+This bounded second pass read the complete bodies of M3StringPiece, LocalM3Arena,
+LocalM3StringPiece, JoinedM3StringPiece, StorageIdentity and SharedLexiconImage,
+plus FoundationTest. It closes the explanation gaps below for those owners; it does
+not cover every lexicon/catalog/precompute class in com.m3.text. Source remains at
+`278b221e8365ebeb6095a3a5643b38a0564258b5`. All test references below are **read, NOT_RUN**.
+
+### Text units, ownership and identity
+
+[M3StringPiece](../../m3/core/src/com/m3/text/M3StringPiece.java) is a sealed
+CharSequence whose permitted implementations are LocalM3StringPiece and the
+package-private JoinedM3StringPiece. Length, charAt indexes, subsequence bounds and
+local range offsets are **UTF-16 code units**, not bytes, Unicode code points or
+user-perceived characters. Bounds use start-inclusive/end-exclusive ranges. A
+subsequence may split a surrogate pair; no normalization or repair occurs.
+
+[LocalM3Arena](../../m3/core/src/com/m3/text/LocalM3Arena.java) is an explicit
+allocator, not an interner. copyUtf16(char[]) writes each code unit into privately
+owned little-endian bytes. copyLatin1(byte[]) clones the input and interprets each
+byte as an unsigned 0–255 code unit. Neither method performs charset guessing.
+Callers must keep mutable input stable during the copy; the method does not lock
+or snapshot an array atomically against concurrent external mutation.
+
+The arena retains its namespace and atomic record counter, not the allocated
+backing arrays. Each published piece owns its backing through a final reference.
+Dropping the arena does not invalidate pieces. A fresh arena has a new UUID;
+records start at one, generation is one in this implementation, and counter
+exhaustion throws IllegalStateException rather than wrapping. Atomic record
+allocation is not a general guarantee about concurrent caller-owned input.
+
+[StorageIdentity](../../m3/core/src/com/m3/text/StorageIdentity.java) validates a
+nonnull owner and positive generation/record. It describes a backing, not a
+particular range, content equality or access capability. Its public record
+constructor does not authenticate an identity. Equal text copied twice receives
+distinct allocation identities. Local piece equality is ordinary object identity;
+this API does not override equals/hashCode to implement String content equality.
+
+### Slices, joins and materialization
+
+| API | Ownership / result | Failure and cost boundary |
+| --- | --- | --- |
+| LocalM3Arena.copyUtf16 | New local owned bytes preserving every char, including unpaired surrogates | Null input: NullPointerException; length × 2 uses multiplyExact and may throw ArithmeticException; allocation failure propagates |
+| LocalM3Arena.copyLatin1 | New cloned byte backing; unsigned Latin-1 units | Null input: NullPointerException; allocation failure propagates |
+| LocalM3StringPiece.subSequence | New range object sharing the same entire backing and StorageIdentity | Invalid half-open bounds: IndexOutOfBoundsException; a tiny slice may retain a large backing |
+| LocalM3StringPiece.retainedBackingBytes | Byte length of the entire retained payload array | Excludes object/array headers, the piece itself, and other owners; not an all-in heap size |
+| M3StringPiece.join | Clones the caller's directory, omits empty leaves, flattens nested joined directories and stores cumulative ends | Null directory/element: NullPointerException; leaf/length sums use addExact; directory metadata allocates even though character bytes are not copied |
+| JoinedM3StringPiece.charAt | Binary search over cumulative ends, then local-leaf lookup | Invalid index: IndexOutOfBoundsException; lookup is not constant-time independent of leaf count |
+| JoinedM3StringPiece.subSequence | New local leaf ranges and a new flat joined directory | Invalid bounds refused; scans the existing leaf directory and allocates metadata |
+| flatten / toString | New char[] projection followed by ordinary String construction | Explicit allocating/export boundary; no cached flat String is retained by these implementations |
+
+Sources: [local piece](../../m3/core/src/com/m3/text/LocalM3StringPiece.java),
+[joined piece](../../m3/core/src/com/m3/text/JoinedM3StringPiece.java).
+Published piece state is immutable through this API; sharing readers does not
+require a mutable cursor or a cache update. This source observation is not a
+stress-test result. No close, pool-return or explicit free operation exists for
+these local backing objects; reachability controls their lifetime.
+
+### Local usage example
+
+This example is checked against the declarations and source logic, but was not compiled or run in this pass:
+
+```java
+import com.m3.text.LocalM3Arena;
+import com.m3.text.LocalM3StringPiece;
+import com.m3.text.M3StringPiece;
+
+LocalM3Arena arena = new LocalM3Arena();
+char[] input = {'A', '\uD83D', '\uDE42'};
+LocalM3StringPiece whole = arena.copyUtf16(input);
+input[0] = 'X';                     // Does not mutate the published piece
+M3StringPiece face = whole.subSequence(1, 3); // Two UTF-16 units
+M3StringPiece joined = M3StringPiece.join(
+        face, arena.copyLatin1(new byte[] {'!'}));
+String exported = joined.flatten(); // Expected: the smiling face followed by !
+```
+
+The example does not claim zero allocation: input copying, range objects, joined
+directories and final String projection are deliberate boundaries.
+
+### SharedLexiconImage file and lifetime contract
+
+[SharedLexiconImage](../../m3/core/src/com/m3/text/SharedLexiconImage.java) maps an
+explicit local path read-only. It does not fetch a network resource or attach to
+String constructors. The file channel is closed after mapping. The image is **not
+AutoCloseable** and has no close/unmap method; mapping lifetime follows
+reachability and the VM. warm() explicitly requests mapping load, without a
+portable latency or residency guarantee.
+
+- Maximum mapped file: 64 MiB; maximum record count: 65,536
+- A 64-byte header holds magic/version/count/dimensions/checksum. Header and directory integers are big-endian; text payload code units are UTF16_LE
+- open accepts versions 1 and 2; create emits version 1. Directory entries are 8 bytes in v1 and 12 bytes in v2; v2 additionally validates the stored Java String hash
+- Record offsets and lengths are measured in UTF-16 units within the payload. Records must be strictly increasing in Java UTF-16 String ordering, so duplicates are refused
+- open checks dimensions, whole-image SHA-256, record ranges, ordering and per-record snapshots; it checks the image digest again after capture
+- copyRecord(index, arena) checks the arena before the index, copies the selected bytes, compares their SHA-256 with the captured record digest, then gives the owned copy a fresh local-arena identity
+- A published local piece does not retain mapped storage and is not changed by later file edits. A later copy may throw IOException if the mapped record has changed
+- read-only mapping is not OS sealing. The caller must publish/manage immutable files. Concurrent external modification/truncation is not a supported hostile-file sandbox
+
+open/create/copyRecord propagate filesystem IOException failures. Unsupported
+headers/versions, corrupt dimensions/checksums/ranges/order and changed records
+are explicitly rejected with IOException. Invalid record indexes produce
+IndexOutOfBoundsException; null arena produces NullPointerException. create
+snapshots the List, rejects null elements through List.copyOf, requires sorted
+unique words, and opens the destination with CREATE_NEW, so it never deliberately
+truncates an existing file. It is not an atomic publication transaction: an I/O
+failure after creating a new file can leave a partial output requiring caller
+cleanup. The source does not provide a cross-process writer lock or a signed
+provenance check.
+
+The image retains two int arrays and 32 digest bytes per record, or 40 × count
+primitive metadata bytes, plus headers, mapping/VM metadata and other fields.
+copyRecord and opening/hash validation allocate temporary storage; this formula
+is not a whole-process memory bound. Multiple independently opened images can
+retain additional mappings. Source readers use per-call duplicate/sliced buffers;
+no explicit concurrent-read qualification was performed here.
+
+### Foundation test linkage and remaining gaps
+
+[FoundationTest.pieces](../../m3/core/test/FoundationTest.java) contains checks for
+mutable-input isolation, range identity and offsets, caller-directory mutation,
+all 256 Latin-1 values, malformed UTF-16, deep repeated joins, bounds/null refusal
+and concurrent arena record identities. FoundationTest.images includes v1/v2
+images, malformed headers, existing-destination refusal, missing shards,
+post-publication local-piece isolation and changed-record rejection.
+
+Those tests were read, not executed. Remaining gaps include identity-counter
+exhaustion and allocation-failure injection, interrupted file creation/recovery,
+hostile concurrent file changes, platform mapping lifetime, and full contracts for
+SharedLexiconCatalog and the other package owners. Some catalogue tests live in
+the same test file, but their presence does not extend this six-owner review to
+all catalogue APIs.
+
+## Precompute API contracts
+
+This bounded second pass read the complete bodies of M3TextMetrics,
+M3EditDistancePlan, M3Progress, M3TextSignals and its package-private M3Histogram
+dependency, plus the two test files linked below. These are independent library
+APIs under `m3/ports/precompute`, not java.lang.String state or a new bootstrap
+precompute framework. No test or benchmark was run.
+
+### M3TextMetrics: units, encoding and seam composition
+
+[M3TextMetrics](../../m3/ports/precompute/src/main/java/com/m3/precompute/M3TextMetrics.java)
+is an immutable record of UTF-16 length, UTF-8 encoded byte length, code-point
+count, unpaired-surrogate count, Java hash, 31-power and first/last UTF-16 units.
+It retains no spelling payload.
+
+of(CharSequence) scans the input's current charAt/length view. Use an immutable
+or externally stabilized input: it does not copy or synchronize a mutable
+CharSequence. A valid surrogate pair contributes two UTF-16 units, one code
+point and four UTF-8 bytes. An unpaired surrogate contributes one code point and
+the Java UTF-8 encoder's replacement-byte length; it is not silently treated as
+three bytes of well-formed UTF-8. Empty boundary units are -1, and EMPTY has
+hash31Power 1.
+
+combine(left, right) uses stored facts without rereading text. A high-surrogate
+left boundary followed by a low-surrogate right boundary joins into one code
+point: the implementation subtracts one code point and two unpaired-surrogate
+counts and adjusts the UTF-8 byte count. Length/count additions and selected
+subtractions use exact arithmetic and can throw ArithmeticException. Java hash
+and hash31Power intentionally use ordinary int overflow, matching the String
+hash recurrence. Null operands/input are rejected with NullPointerException.
+
+The public record constructor validates nonnegative counters and boundary-unit
+shape, **not full semantic consistency or authenticity**. Prefer of/combine over
+hand-authored metric values; a caller can construct facts whose hash/counts do
+not describe any supplied text. isWellFormedUtf16 only checks that the stored
+unpaired count is zero. Facts and matching hashes never prove text equality.
+
+### M3TextSignals: exact facts versus candidate signals
+
+[M3TextSignals](../../m3/ports/precompute/src/main/java/com/m3/precompute/M3TextSignals.java)
+compiles String input directly; for another CharSequence it uses toString(). The
+result stores derived metrics, sorted unigram/bigram/trigram histograms, boundary
+units and sketches, not the whole original spelling. For a custom CharSequence,
+toString must represent the same characters used by the caller. No concurrent
+mutation contract is enforced by the compiler.
+
+- Histogram characters and q-grams use UTF-16 units; letter/digit/whitespace/case classification uses Character code-point operations
+- characterCount, bigramCount and trigramCount are exact counts in those derived histograms; isAnagramOf compares UTF-16-unit multisets and does not imply order, code-point or normalization equivalence
+- mayContain uses length and a 64-bit presence filter; mayEqual uses length and two hashes. Positive answers require original-text verification
+- editLowerBound takes the maximum of length difference and rounded-up histogram L1 differences divided by 2, 4 and 6 for unigrams, bigrams and trigrams. Its documented domain is unit-cost UTF-16 Levenshtein
+- SimHash distance and 16-lane estimated Jaccard are ranking signals only. minHash() returns a defensive clone; labels() constructs an immutable list
+- combine joins histograms and adds the cross-boundary bigram/up to two trigrams. It uses boundary units to repair supplementary-code-point classification without reading child spellings
+- Empty text has vacuous ALL_LETTERS, ALL_DIGITS and BLANK flags, alongside ASCII, LATIN1 and WELL_FORMED_UTF16; HAS_LETTER/HAS_DIGIT remain false
+
+[M3Histogram](../../m3/ports/precompute/src/main/java/com/m3/precompute/M3Histogram.java)
+is package-private: of sorts an owned work array into distinct keys/counts;
+plus constructs merged arrays and uses exact additions for duplicate counts.
+Public signal methods reject null operands. Arithmetic and allocation failures
+propagate. histogramPayloadBytes counts only retained key/count primitive arrays
+(12 bytes per distinct key across the three histograms), not object headers,
+metrics, sketches, temporary arrays or total heap.
+
+Compilation allocates and sorts temporary q-gram arrays; combination allocates
+histogram/metadata results. These APIs are reusable facts, not an allocation-free
+path or a blanket constant-memory guarantee. The public result exposes no
+mutable histogram array; this does not replace a concurrent publication/runtime
+qualification.
+
+### M3EditDistancePlan: exact query and workspace contract
+
+[M3EditDistancePlan](../../m3/ports/precompute/src/main/java/com/m3/precompute/M3EditDistancePlan.java)
+computes unit-cost Levenshtein over **UTF-16 code units**. A supplementary
+character can therefore participate as two edit units. compile(CharSequence)
+copies pattern chars; it does not retain caller-mutable pattern storage. The
+caller must still keep the input stable during that copy.
+
+| Entry point | Result and effect | Refusal / constraint |
+| --- | --- | --- |
+| compile(pattern) | Immutable char snapshot and, for lengths 1–63, sorted unit masks for single-word Myers | Null: NullPointerException; more than 1,048,576 units: IllegalArgumentException |
+| workspace() | New mutable two-row int workspace and compiled pattern signals, bound to this exact plan instance | Allocates even when the plan uses Myers; identical pattern contents do not make another plan's workspace valid |
+| distance(value) | Exact int distance using a freshly created workspace and no-op monitor | Convenience call allocates; source must be stable during the call |
+| distance(value, workspace, monitor) | Myers for 1–63-unit patterns, two-row DP for longer patterns; empty pattern returns source length | Null value/workspace refused; foreign workspace: IllegalArgumentException; null monitor means no-op |
+| within(value, maxDistance) | Exact threshold decision after length/histogram negative filters, with a fresh workspace | Negative threshold: IllegalArgumentException; positive filters do not themselves establish acceptance |
+| within(value, workspace, maxDistance, monitor) | Reuses caller rows, compiles input signals, then uses the selected exact Myers/banded path if needed | Workspace remains bound by object identity; mutable inputs are not copied for the entire operation |
+| primitivePayloadBytes() | Counts the plan's retained primitive pattern/mask arrays | Excludes workspace rows, pattern/input signals, object headers, temporary arrays and caller storage |
+| charAt / subSequence | Pattern code-unit access; subsequence returns a new ordinary String | Bounds checked with Objects; subSequence and toString materialize |
+
+Both query APIs reject source lengths above 1,048,576 units. Full DP rejects
+sourceLength × max(1, patternLength) greater than 64,000,000. The banded guard
+uses sourceLength × max(1, min(patternLength, 2 × threshold + 1)) with the same
+limit. The guards use exact long arithmetic. These numbers bound the selected
+DP-cell calculation, **not all CPU work or allocation**: within compiles/sorts
+source histograms, and bandedWithin fills a full pattern-length row on each
+iteration even when the recurrence visits only a narrow band. No speedup or
+strict whole-operation work bound is implied.
+
+A Workspace contains mutable arrays with no lock. Reuse it sequentially; do not
+share it across concurrent/reentrant calls. Separate workspaces are needed for
+independent calls sharing an immutable plan, and callers must also stabilize
+source input and monitor state. previousRowCopy() clones the stored row; it is a
+diagnostic copy, not a promise that every early-refusal path populated a fresh
+complete DP matrix. This source-based usage guidance has not been stress-tested
+in this pass.
+
+### Progress, cancellation and early returns
+
+[M3Progress](../../m3/ports/precompute/src/main/java/com/m3/precompute/M3Progress.java)
+provides no-op defaults. Cancellation is caller-defined through checkCanceled;
+there is no built-in cancellation token or implicit thread-interrupt handling.
+Myers checks every 1,024 input iterations (including index zero) and once at the
+end; dynamic/banded paths check every 1,024 rows and at normal completion.
+Callbacks may throw and their exceptions propagate.
+
+The algorithms call begin before entering their try/finally and done in that
+finally. Thus done is reached after an entered algorithm body, including its
+exceptions/early exit, but is not guaranteed if begin itself throws. Argument,
+budget, empty-pattern, length-gap or histogram rejection can return/refuse before
+an algorithm begins, with **no balanced begin/done callback pair**. A banded
+row-minimum rejection returns before the final cancellation check. Do not use
+these callbacks as a universal resource-acquire/release protocol. A throwing done
+callback can replace an in-flight exception under ordinary Java finally rules.
+
+### Precompute usage and test linkage
+
+Source-checked example, not compiled or executed here:
+
+```java
+import com.m3.precompute.M3EditDistancePlan;
+import com.m3.precompute.M3TextMetrics;
+
+M3TextMetrics left = M3TextMetrics.of("\uD83D");
+M3TextMetrics right = M3TextMetrics.of("\uDE42");
+M3TextMetrics joined = M3TextMetrics.combine(left, right);
+// Expected from the implementation: 2 UTF-16 units, 1 code point, 4 UTF-8 bytes
+
+M3EditDistancePlan plan = M3EditDistancePlan.compile("kitten");
+M3EditDistancePlan.Workspace work = plan.workspace();
+int distance = plan.distance("sitting", work, null);       // Expected: 3
+boolean close = plan.within("sitting", work, 2, null);    // Expected: false
+// Reuse work only sequentially, and only with this same plan instance
+```
+
+[M3EditDistancePlanTest](../../m3/ports/precompute/src/test/java/com/m3/precompute/M3EditDistancePlanTest.java)
+contains deterministic/empty examples, seeded Myers/DP/threshold comparisons with
+an independent recurrence, wrong-workspace refusal and pattern/source/full-DP
+budget checks. [M3TextSignalsTest](../../m3/ports/precompute/src/test/java/com/m3/precompute/M3TextSignalsTest.java)
+contains flat-versus-composed metrics/histogram/sketch comparisons including
+surrogate seams, finite lower-bound comparisons and candidate-signal checks.
+These tests were read, **not run**, and their finite loops are not exhaustive
+semantic proof.
+
+Remaining targeted gaps: concurrent workspace misuse, mutable/custom CharSequence
+inconsistency, monitor throwing/cancellation paths, negative-threshold and banded
+budget edge cases, manually inconsistent metrics, allocation failure and measured
+cold/warm/full-operation resource costs. The rest of com.m3.precompute, including
+native providers and regex/image owners, retains its earlier partial review.

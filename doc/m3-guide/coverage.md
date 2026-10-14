@@ -63,6 +63,12 @@ This bounded editorial pass is not a completed full M3 execution run. Full compi
 | P1 | Map and execute applicable tests | NOT_RUN | Exact final-head build/test environment and separate Java/native/provider/platform receipts |
 | P2 | Reconcile historical guides | OPEN | Preserve historical scope while adding current-source successor links; do not rewrite old evidence |
 
+## Second-pass semantic review
+
+The [text/storage and precompute API sections](m3-packages.md#textstorage-api-contracts) now explain eleven complete production owner bodies (six text/storage, five precompute including internal histogram support) and three selected test files. They add source-backed units, ownership, failure, concurrency, allocation, callback and usage contracts. This deepens two package roots; it does not add eleven complete packages or change the unresolved package denominator.
+
+The new review specifically distinguishes immutable results from mutable edit-distance workspaces, Java UTF-8 replacement semantics from UTF-16 units, read-only mapping from immutable-file publication, and DP-cell budgets from total CPU/allocation cost. Tests/examples remain NOT_RUN. Remaining API owners and exact-head execution retain their prior open status.
+
 ## Publication and source safety
 
 Only new Markdown under doc/m3-guide is added. Uploaded design essays, private donor content and local working paths are not part of the public payload. All repository citations resolve to the public M3JDK21 tree or existing relative documentation. OpenJDK, third-party and scoped first-party notices remain in place. The catalogue is not a new ownership, licensing or receiving authority.
