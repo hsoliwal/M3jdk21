@@ -79,6 +79,20 @@ final class M3EscapeFlow {
                         || top(insns, f, 3, tainted);
             case Opcodes.AALOAD:
                 return top(insns, f, 1, tainted);
+            case Opcodes.INVOKESTATIC: {
+                MethodInsnNode call = (MethodInsnNode) insn;
+                if (!call.owner.equals("java/util/Objects") || !call.name.equals("requireNonNull")) {
+                    return false;
+                }
+                // Each exact JDK overload returns its first argument on normal completion.
+                int depth = switch (call.desc) {
+                    case "(Ljava/lang/Object;)Ljava/lang/Object;" -> 0;
+                    case "(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+                            "(Ljava/lang/Object;Ljava/util/function/Supplier;)Ljava/lang/Object;" -> 1;
+                    default -> -1;
+                };
+                return depth >= 0 && top(insns, f, depth, tainted);
+            }
             default:
                 return false;
         }
@@ -139,8 +153,9 @@ final class M3EscapeFlow {
     /** Escape kind of passing a tracked handle as a non-receiver argument to {@code call}. */
     static int callee(M3ItemReferenceScan scan, MethodInsnNode call) {
         String key = call.owner + "." + call.name;
-        if (scan.retainingMethods.contains(key) || RETAINING_CALLEES.contains(key)) return RETAINS_CALLEE;
-        if (scan.behaviourMethods.contains(key) || BEHAVIOUR_CALLEES.contains(key)) return 0;
+        String annotationKey = key + call.desc;
+        if (scan.retainingMethods.contains(annotationKey) || RETAINING_CALLEES.contains(key)) return RETAINS_CALLEE;
+        if (scan.behaviourMethods.contains(annotationKey) || BEHAVIOUR_CALLEES.contains(key)) return 0;
         if ((call.owner.startsWith("org/eclipse/swt/") || call.owner.startsWith("org/eclipse/nebula/"))
                 && BEHAVIOUR_NAMES_ON_SWT.contains(call.name)) return 0;
         if (call.owner.equals("java/lang/System") && call.name.equals("identityHashCode")) return IDENTITY_HASH;
