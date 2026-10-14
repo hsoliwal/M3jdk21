@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+module	main_class	family	status	license
+com.synexia.m3.chrome.chat	com.synexia.m3.chrome.chat.ChromeChat	LOCAL_MODEL	IMPLEMENTED	Apache-2.0
+com.synexia.m3.compute.vector	com.synexia.m3.compute.vector.VectorCompute	COMPUTE	IMPLEMENTED	Apache-2.0

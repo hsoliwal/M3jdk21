@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+canonical_repo	canonical_path	target_path	source_sha256	mode
+hsoliwal/com.synexia	synexia-m3-jmods/modules/com.synexia.m3.chrome.chat/src/main/java/module-info.java	m3/optional-jmods/modules/com.synexia.m3.chrome.chat/src/main/java/module-info.java	dd2e0a1568f263da0fabae0bb80273dd5a5a51e066360a3e3f6eeaea9b25cdf8	INDEPENDENT_APACHE_MODULE
+hsoliwal/com.synexia	synexia-m3-jmods/modules/com.synexia.m3.chrome.chat/src/main/java/com/synexia/m3/chrome/chat/ChromeChat.java	m3/optional-jmods/modules/com.synexia.m3.chrome.chat/src/main/java/com/synexia/m3/chrome/chat/ChromeChat.java	36377cb98be6f5970d67499a35c7234a884b19cd2753e75c1dba64d32fa789ff	INDEPENDENT_APACHE_MODULE
+hsoliwal/com.synexia	synexia-m3-jmods/modules/com.synexia.m3.compute.vector/src/main/java/module-info.java	m3/optional-jmods/modules/com.synexia.m3.compute.vector/src/main/java/module-info.java	97454641674d7d1946833b0bd38cd16714b0cdc64e59418f46af6097b77c59f7	INDEPENDENT_APACHE_MODULE
+hsoliwal/com.synexia	synexia-m3-jmods/modules/com.synexia.m3.compute.vector/src/main/java/com/synexia/m3/compute/vector/VectorCompute.java	m3/optional-jmods/modules/com.synexia.m3.compute.vector/src/main/java/com/synexia/m3/compute/vector/VectorCompute.java	5f85dda2ec3ecd6771def2172bd86cc7c8348c4af704496fc4dda457bd5c0c25	INDEPENDENT_APACHE_MODULE
