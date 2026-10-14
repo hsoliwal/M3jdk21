@@ -1,0 +1,273 @@
+/*
+ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Oracle designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ */
+
+package jdk.internal.vm.parallel;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+/**
+ * Bounded provider-neutral DAG of bulk tasks.
+ *
+ * <p>Stage declaration order is non-semantic. Inputs and outputs are global logical value
+ * identities. Each non-input value has exactly one producer. The constructor derives one
+ * lexicographically stable topological order and a content-addressed structural root.</p>
+ */
+public final class BulkPipeline {
+    public static final int ABSOLUTE_STAGE_LIMIT = 256;
+
+    private final String id;
+    private final int maxStages;
+    private final List<BulkPipelineStage> stages;
+    private final List<String> inputs;
+    private final List<String> outputs;
+    private final Map<String, String> producers;
+    private final Map<String, Set<String>> consumers;
+    private final String structuralRoot;
+
+    public BulkPipeline(String id, int maxStages, List<BulkPipelineStage> declaredStages,
+            List<String> inputs, List<String> outputs) {
+        this.id = BulkTask.identifier(id, "pipeline");
+        if (maxStages < 1 || maxStages > ABSOLUTE_STAGE_LIMIT) {
+            throw new IllegalArgumentException("maxStages");
+        }
+        this.maxStages = maxStages;
+        this.inputs = names(inputs, "inputs");
+        this.outputs = names(outputs, "outputs");
+        if (this.inputs.isEmpty() || this.outputs.isEmpty()) {
+            throw new IllegalArgumentException("pipeline inputs/outputs");
+        }
+        Set<String> ioOverlap = new HashSet<>(this.inputs);
+        ioOverlap.retainAll(this.outputs);
+        if (!ioOverlap.isEmpty()) {
+            throw new IllegalArgumentException("pipeline input/output overlap: " + ioOverlap);
+        }
+
+        TreeMap<String, BulkPipelineStage> byId = new TreeMap<>();
+        for (BulkPipelineStage stage : Objects.requireNonNull(declaredStages, "stages")) {
+            BulkPipelineStage checked = Objects.requireNonNull(stage, "stage");
+            if (byId.putIfAbsent(checked.id(), checked) != null) {
+                throw new IllegalArgumentException("duplicate stage: " + checked.id());
+            }
+        }
+        if (byId.isEmpty() || byId.size() > maxStages) {
+            throw new IllegalArgumentException("pipeline stage budget");
+        }
+
+        TreeMap<String, String> producerMap = new TreeMap<>();
+        TreeMap<String, TreeSet<String>> consumerSets = new TreeMap<>();
+        for (BulkPipelineStage stage : byId.values()) {
+            Set<String> localOverlap = new HashSet<>(stage.task().inputs());
+            localOverlap.retainAll(stage.task().outputs());
+            if (!localOverlap.isEmpty()) {
+                throw new IllegalArgumentException(
+                        "pipeline stages must use distinct input/output identities: "
+                                + stage.id() + ":" + localOverlap);
+            }
+            for (String output : stage.task().outputs()) {
+                if (this.inputs.contains(output)) {
+                    throw new IllegalArgumentException(
+                            "pipeline input cannot be stage-produced: " + output);
+                }
+                String previous = producerMap.putIfAbsent(output, stage.id());
+                if (previous != null) {
+                    throw new IllegalArgumentException(
+                            "multiple stages produce: " + output);
+                }
+            }
+            for (String input : stage.task().inputs()) {
+                consumerSets.computeIfAbsent(input, ignored -> new TreeSet<>()).add(stage.id());
+            }
+        }
+
+        for (String output : this.outputs) {
+            if (!producerMap.containsKey(output)) {
+                throw new IllegalArgumentException(
+                        "pipeline output has no producer: " + output);
+            }
+        }
+
+        TreeMap<String, Set<String>> dependencies = new TreeMap<>();
+        byId.keySet().forEach(stage -> dependencies.put(stage, new TreeSet<>()));
+        for (BulkPipelineStage stage : byId.values()) {
+            for (String input : stage.task().inputs()) {
+                String producer = producerMap.get(input);
+                if (producer == null) {
+                    if (!this.inputs.contains(input)) {
+                        throw new IllegalArgumentException(
+                                "unbound pipeline value: " + input);
+                    }
+                } else {
+                    if (producer.equals(stage.id())) {
+                        throw new IllegalArgumentException(
+                                "stage self-dependency through value: " + input);
+                    }
+                    dependencies.get(stage.id()).add(producer);
+                }
+            }
+        }
+
+        for (Map.Entry<String, String> entry : producerMap.entrySet()) {
+            String value = entry.getKey();
+            TreeSet<String> downstream =
+                    new TreeSet<>(consumerSets.getOrDefault(value, new TreeSet<>()));
+            downstream.remove(entry.getValue());
+            if (this.outputs.contains(value)) {
+                if (!downstream.isEmpty()) {
+                    throw new IllegalArgumentException(
+                            "pipeline output must be terminal: " + value);
+                }
+            } else if (downstream.isEmpty()) {
+                throw new IllegalArgumentException(
+                        "unused intermediate output: " + value);
+            }
+        }
+
+        this.stages = topological(byId, dependencies);
+        this.producers = Collections.unmodifiableMap(producerMap);
+        TreeMap<String, Set<String>> consumerCopy = new TreeMap<>();
+        consumerSets.forEach((value, stageIds) ->
+                consumerCopy.put(value, Collections.unmodifiableSet(new TreeSet<>(stageIds))));
+        this.consumers = Collections.unmodifiableMap(consumerCopy);
+        this.structuralRoot = structuralRoot();
+    }
+
+    public String id() { return id; }
+
+    public int maxStages() { return maxStages; }
+
+    /** Canonical topological order. */
+    public List<BulkPipelineStage> stages() { return stages; }
+
+    public List<String> inputs() { return inputs; }
+
+    public List<String> outputs() { return outputs; }
+
+    public List<String> stageIds() {
+        return stages.stream().map(BulkPipelineStage::id).toList();
+    }
+
+    public String producerStageId(String value) {
+        return producers.get(BulkTask.identifier(value, "value"));
+    }
+
+    public Set<String> consumers(String value) {
+        return consumers.getOrDefault(
+                BulkTask.identifier(value, "value"),
+                Set.of());
+    }
+
+    public String structuralRoot() { return structuralRoot; }
+
+    private static List<BulkPipelineStage> topological(
+            Map<String, BulkPipelineStage> stages,
+            Map<String, Set<String>> dependencies) {
+        Map<String, Integer> indegree = new HashMap<>();
+        Map<String, List<String>> children = new HashMap<>();
+        stages.keySet().forEach(id -> indegree.put(id, 0));
+        dependencies.forEach((stage, deps) -> {
+            indegree.put(stage, deps.size());
+            deps.forEach(parent ->
+                    children.computeIfAbsent(parent, ignored -> new ArrayList<>()).add(stage));
+        });
+        children.values().forEach(list -> list.sort(String::compareTo));
+
+        PriorityQueue<String> ready = new PriorityQueue<>();
+        indegree.forEach((id, degree) -> {
+            if (degree == 0) ready.add(id);
+        });
+
+        ArrayList<BulkPipelineStage> ordered = new ArrayList<>();
+        while (!ready.isEmpty()) {
+            String id = ready.remove();
+            ordered.add(stages.get(id));
+            for (String child : children.getOrDefault(id, List.of())) {
+                int remaining = indegree.merge(child, -1, Integer::sum);
+                if (remaining == 0) ready.add(child);
+            }
+        }
+        if (ordered.size() != stages.size()) {
+            throw new IllegalArgumentException("bulk pipeline contains cycle");
+        }
+        return List.copyOf(ordered);
+    }
+
+    private String structuralRoot() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add(id);
+        fields.add(Integer.toString(maxStages));
+        fields.add(Integer.toString(inputs.size()));
+        fields.addAll(inputs);
+        fields.add(Integer.toString(outputs.size()));
+        fields.addAll(outputs);
+        fields.add(Integer.toString(stages.size()));
+        for (BulkPipelineStage stage : stages) {
+            BulkTask task = stage.task();
+            fields.add(stage.id());
+            fields.add(task.operationId());
+            fields.add(Long.toString(task.workItems()));
+            fields.add(Long.toString(task.localWork()));
+            fields.add(Integer.toString(task.inputs().size()));
+            fields.addAll(task.inputs());
+            fields.add(Integer.toString(task.outputs().size()));
+            fields.addAll(task.outputs());
+        }
+        return hash("M3_BULK_PIPELINE_V1", fields);
+    }
+
+    static String hash(String domain, List<String> fields) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            update(digest, domain);
+            for (String field : fields) update(digest, field);
+            return java.util.HexFormat.of().formatHex(digest.digest());
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new ExceptionInInitializerError(impossible);
+        }
+    }
+
+    private static void update(MessageDigest digest, String value) {
+        byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
+        digest.update((byte) (bytes.length >>> 24));
+        digest.update((byte) (bytes.length >>> 16));
+        digest.update((byte) (bytes.length >>> 8));
+        digest.update((byte) bytes.length);
+        digest.update(bytes);
+    }
+
+    private static List<String> names(List<String> values, String field) {
+        TreeSet<String> sorted = new TreeSet<>();
+        for (String value : Objects.requireNonNull(values, field)) {
+            if (!sorted.add(BulkTask.identifier(value, field))) {
+                throw new IllegalArgumentException(field);
+            }
+        }
+        return Collections.unmodifiableList(new ArrayList<>(sorted));
+    }
+}
