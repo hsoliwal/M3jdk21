@@ -39,7 +39,12 @@ final class M3StringRegexDp {
 
         // Compile postfix '*' onto its preceding atom, keeping no regex String
         // and not publishing mutable instructions. Reject malformed grammar.
-        int[] program = new int[patternLength];
+        int[] program;
+        try {
+            program = new int[patternLength];
+        } catch (OutOfMemoryError unavailable) {
+            return UNAVAILABLE;
+        }
         int tokens = 0;
         for (int at = 0; at < patternLength; at++) {
             char atom = regex.charAt(at);
@@ -57,8 +62,14 @@ final class M3StringRegexDp {
         int length = text.length();
         if ((long) length * Math.max(1, tokens) > MAX_CELL_VISITS) return UNAVAILABLE;
 
-        boolean[] previous = new boolean[tokens + 1];
-        boolean[] current = new boolean[tokens + 1];
+        boolean[] previous;
+        boolean[] current;
+        try {
+            previous = new boolean[tokens + 1];
+            current = new boolean[tokens + 1];
+        } catch (OutOfMemoryError unavailable) {
+            return UNAVAILABLE;
+        }
         previous[0] = true;
         for (int j = 1; j <= tokens; j++) {
             if ((program[j - 1] & REPEATED) != 0) {
