@@ -22,7 +22,7 @@ import java.util.Map;
 public final class M3StringGuardRepair {
     static final String MANIFEST_SHA = "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999";
     static final String BEFORE = "0eaa95f80d96be8040aa9584b0ddf3eee3d1e2da40d1bb9d5beef11f3a7e61bb";
-    static final String STRING_SHA = "eed88205feda9f64b03515603e5807e3f83961ddeb99dae4ef84bd2034d6f568";
+    static final String STRING_SHA = "3fe9a39bb6bd457deeabac26c35867a54ab30a64b0fdf39a102d7a43b3f2e624";
     static final String RECEIPT_BEFORE_SHA = "22cc4f60884a25f57a341b99f3332b92ae3dca4d83f5ef13d34d77904174011d";
     static final String CHECKER = "m3/runtime-integration/check-m3string-invariants.py";
     static final String JAVA_TARGET = "m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java";
