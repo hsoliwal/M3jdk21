@@ -6,6 +6,10 @@
  */
 package java.lang;
 
+import java.lang.ref.WeakReference;
+import java.util.concurrent.atomic.AtomicReferenceArray;
+import jdk.internal.mindex.M3RegexDpPlan;
+
 /**
  * Bounded full-region dynamic programming for the conservative dot/star regex subset.
  *
@@ -30,15 +34,29 @@ final class M3StringRegexDp {
     private static final int MAX_TEXT_UNITS = 8_192;
     private static final long MAX_DP_CELLS = 1_000_000L;
 
+    // Lazy allocation avoids poisoning class initialization when optional metadata is refused.
+    private static volatile Caches caches;
+    private static final int PLAN_SLOTS = 64;
+    private static final int EFFECT_SLOTS = 128;
+    private static final long MAX_EFFECT_WORK = 262_144;
+
     private M3StringRegexDp() { }
 
     /**
      * A three-state, contract-preserving decision: UNKNOWN means use Pattern.matches.
-     * No stored per-String state, JNI ABI or cross-call cache is introduced.
+     * Optional plans/effects are primitive metadata, weak-owner/exact-coordinate keyed.
+     * No fields or spelling payload are added to String, M3String or its canonical owners.
      */
     static int tryMatch(M3String source, String regex) {
         int n = regex.length();
         if (n < 2 || n > MAX_PATTERN_UNITS) return UNKNOWN;
+
+        try {
+            int prepared = tryPrepared(source, regex);
+            if (prepared != UNKNOWN) return prepared;
+        } catch (OutOfMemoryError unavailable) {
+            // Preparation is optional; the existing bounded DP/Pattern path remains available.
+        }
 
         // Compile once per candidate. The compact int lane is a temporary pattern plan,
         // not an owned spelling payload. Every accepted pattern is syntactically valid.
@@ -94,6 +112,127 @@ final class M3StringRegexDp {
             current = swap;
         }
         return previous[count] ? MATCH : NO_MATCH;
+    }
+
+
+    private static int tryPrepared(M3String source, String regex) {
+        if (source.length() > MAX_TEXT_UNITS || !worthPreparing(source)) return UNKNOWN;
+        Caches cache = caches();
+        M3RegexDpPlan plan = plan(regex, cache);
+        if (plan == null || ((long) source.length() + 1) * plan.stateCount() > MAX_DP_CELLS) {
+            return UNKNOWN;
+        }
+        // Hierarchical preparation is reserved for the admitted repetition cohort.
+        // Other inputs retain the original rolling rows; effects cover every entry state.
+        if (source.length() >= 128 && source.owner() instanceof M3StringTuple) {
+            M3RegexDpPlan.Effect effect = effect(source, plan, cache, new Work(), 0);
+            if (effect != null) return plan.accepts(effect.apply(plan.initialState())) ? MATCH : NO_MATCH;
+        }
+        // Never replace the cheap scalar/ordinary-composite rolling path merely because
+        // a plan can be compiled. Cold-plan measurements are a selection gate, not a speed claim.
+        return UNKNOWN;
+    }
+
+    private static boolean worthPreparing(M3String source) {
+        // The selected candidate cohort is a structurally repeated canonical DAG.
+        // 256 occurrences is an internal cost gate, not a new semantic/input restriction:
+        // every other source still uses the unchanged rolling-DP/Pattern implementation.
+        int copies = 1;
+        M3String node = source;
+        while (copies < 256 && node.start() == 0 && node.length() == node.owner().length
+                && node.owner() instanceof M3StringTuple tuple
+                && tuple.left.owner() == tuple.right.owner()
+                && tuple.left.coordinate() == tuple.right.coordinate()) {
+            copies <<= 1;
+            node = tuple.left;
+        }
+        return copies >= 256;
+    }
+
+    private static Caches caches() {
+        Caches found = caches;
+        if (found != null) return found;
+        synchronized (M3StringRegexDp.class) {
+            found = caches;
+            if (found == null) caches = found = new Caches();
+        }
+        return found;
+    }
+
+    private static M3RegexDpPlan plan(String regex, Caches cache) {
+        // Do not admit a flat/bootstrap String into a new spelling pool for this optimization.
+        M3String pattern = regex.m3();
+        if (pattern == null) return M3RegexDpPlan.prepare(regex);
+        M3StringOwner owner = pattern.owner();
+        long coordinate = pattern.coordinate();
+        int slot = slot(owner, coordinate, PLAN_SLOTS);
+        PlanEntry old = cache.plans.get(slot);
+        if (old != null && old.owner.get() == owner && old.coordinate == coordinate) return old.plan;
+        M3RegexDpPlan made = M3RegexDpPlan.prepare(regex);
+        if (made != null) cache.plans.set(slot, new PlanEntry(new WeakReference<>(owner), coordinate, made));
+        return made;
+    }
+
+    private static M3RegexDpPlan.Effect effect(M3String source, M3RegexDpPlan plan,
+            Caches cache, Work work, int depth) {
+        if (depth > 48 || !work.take(1)) return null;
+        M3StringOwner owner = source.owner();
+        long coordinate = source.coordinate();
+        int slot = slot(owner, coordinate, EFFECT_SLOTS);
+        EffectEntry old = cache.effects.get(slot);
+        if (old != null && old.owner.get() == owner && old.coordinate == coordinate && old.plan == plan) {
+            return old.effect;
+        }
+        M3RegexDpPlan.Effect made;
+        if (source.start() == 0 && source.length() == owner.length && owner instanceof M3StringTuple tuple) {
+            M3RegexDpPlan.Effect left = effect(tuple.left, plan, cache, work, depth + 1);
+            if (left == null) return null;
+            M3RegexDpPlan.Effect right = effect(tuple.right, plan, cache, work, depth + 1);
+            if (right == null || !work.take((long) plan.stateCount() * plan.stateCount())) return null;
+            made = left.then(right, null);
+        } else {
+            if (!work.take((long) source.length() * plan.stateCount())) return null;
+            made = plan.summarize(new CursorView(source), null);
+        }
+        if (made != null) cache.effects.set(slot,
+                new EffectEntry(new WeakReference<>(owner), coordinate, plan, made));
+        return made;
+    }
+
+    private static int slot(M3StringOwner owner, long coordinate, int size) {
+        long mix = coordinate ^ (coordinate >>> 32) ^ System.identityHashCode(owner);
+        mix ^= mix >>> 17;
+        return (int) mix & (size - 1);
+    }
+
+    private static final class Work {
+        private long remaining = MAX_EFFECT_WORK;
+        boolean take(long amount) {
+            if (amount > remaining) return false;
+            remaining -= amount;
+            return true;
+        }
+    }
+
+    private static final class Caches {
+        final AtomicReferenceArray<PlanEntry> plans = new AtomicReferenceArray<>(PLAN_SLOTS);
+        final AtomicReferenceArray<EffectEntry> effects = new AtomicReferenceArray<>(EFFECT_SLOTS);
+    }
+    private record PlanEntry(WeakReference<M3StringOwner> owner, long coordinate, M3RegexDpPlan plan) { }
+    private record EffectEntry(WeakReference<M3StringOwner> owner, long coordinate,
+                               M3RegexDpPlan plan, M3RegexDpPlan.Effect effect) { }
+
+    /** Transient leaf cursor adapter. An Effect never retains this view or its source. */
+    private static final class CursorView implements CharSequence {
+        private final M3String.CodeUnitCursor cursor;
+        private final int length;
+        CursorView(M3String source) { cursor = new M3String.CodeUnitCursor(source); length = source.length(); }
+        @Override public int length() { return length; }
+        @Override public char charAt(int index) { return cursor.at(java.util.Objects.checkIndex(index, length)); }
+        @Override public CharSequence subSequence(int start, int end) {
+            throw new UnsupportedOperationException("regex effect traverses the complete view");
+        }
+        @Override public String toString() { throw new UnsupportedOperationException("no regex text shadow"); }
     }
 
     private static boolean isAsciiAlphanumeric(char value) {

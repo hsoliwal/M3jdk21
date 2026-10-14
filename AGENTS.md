@@ -48,3 +48,10 @@ public JDK contracts, one canonical payload owner, original copyright/Apache-2.0
 per-file OpenJDK/third-party rights. Implement each change through the Synexia-owned recipe and
 record target evidence or an explicit pending/excluded disposition. Repository policy, not chat
 memory, carries this invariant into every later task.
+
+## Regex/precompute receiving supplement
+
+Read [the scoped regex-effect mapping](m3/docs/name-mapping-regex-effects-20261014.json)
+alongside the canonical naming map. This additive supplement maps exact responsibilities,
+not prefixes, and keeps unported regex/image/compiler lanes explicitly pending.
+The Synexia recipe owns authoring; the target owns libjava, java.base and jtreg acceptance.

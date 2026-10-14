@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "canonical_map": "m3/docs/name-mapping.json",
+  "canonical_map_blob": "288f20575d3f9d106571990f21944e7f46b0cf71",
+  "policy": "additive scoped supplement; does not replace the canonical map or advance receiving phases",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
+  "target_base": "d5abed865bd47c4dd5ad78e95704348fe2095ed2",
+  "recipe": "com.synexia.rewrite.M3Jdk21RegexEffectsRecipe",
+  "intake_mode": "TARGET_OWNED_PORT",
+  "source_copy": false,
+  "runtime_dependency_on_synexia": false,
+  "mappings": [
+    {
+      "source": "com.synexia.indexstring.MIndexRegexProgram",
+      "target": "jdk.internal.mindex.M3RegexDpPlan.prepare/advance",
+      "disposition": "PARTIAL_TARGET_CANDIDATE",
+      "scope": "Only existing ASCII alphanumeric/dot/star whole-input Boolean subset, 1..63 tokens; all other syntax/widths preserve existing DP/Pattern fallback. Character predicates exclude JDK line terminators; surrogates are not admitted."
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexRegexAtomAlgebra",
+      "source_blob": "797d245dbf172ebbd2d2eca7006cef664de41aaa",
+      "target": "jdk.internal.mindex.M3RegexDpPlan.Effect",
+      "disposition": "PARTIAL_TARGET_CANDIDATE",
+      "scope": "All-entry-state exit effects; ordered composition and repeated powers. Capture offsets, prefix/restart/internal-search-hit lanes are NOT copied and remain pending for any Matcher consumer."
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexStateRelation and native/src/mindex_state_relation_jni.c",
+      "target": "M3RegexDpPlan.compose0 / src/java.base/share/native/libjava/M3RegexDpPlan.c",
+      "disposition": "TARGET_NATIVE_CANDIDATE",
+      "scope": "Target-owned bounded 1..64-state composition, validated primitive arrays only, no text ownership crossing JNI; native absence falls back to Java."
+    },
+    {
+      "source": "Synexia canonical immutable fragment precompute ownership",
+      "target": "java.lang.M3StringRegexDp",
+      "disposition": "SCOPED_RUNTIME_WIRING_CANDIDATE",
+      "scope": "Weak canonical owner + exact coordinate + exact plan identity. 64 plan slots and 128 effect slots. Selected candidate cohort: whole canonical tuples with an equal-child repetition spine of at least 256 occurrences. Other sources keep original rolling DP."
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexRegexTrigramQuery",
+      "target": "jdk.internal.mindex.M3TQ and java.util.regex.M3PatternQuery",
+      "disposition": "EXISTING_MAPPING_UNCHANGED",
+      "scope": "Conservative necessary-condition filtering; not exact matching."
+    },
+    {
+      "source": "MIndexRegexProgram.Image; MIndexRegexAtomAlgebra.write/map; prepared JNI image executors",
+      "target": "Future target-internal image/receiver owners after concrete consumer proof",
+      "disposition": "PENDING_NOT_PORTED",
+      "scope": "Persistent image formats, cross-process lifetime, corruption/replacement and resource budgets require separate qualified receiving work."
+    },
+    {
+      "source": "Synexia fixed-regex compiler lowering and generic/universal precompute",
+      "target": "Target compiler/tooling-owned integrations",
+      "disposition": "PENDING_NOT_PORTED",
+      "scope": "No compile-time lowering, universal cache, GPU/NPU runtime, database service or public String API introduced."
+    }
+  ],
+  "proof": {
+    "target_plan_and_jni": "executed on Java 21/Linux through patched java.base and a real native library",
+    "wrapper": "compiled and executed using explicitly TEST_ONLY owner/coordinate fixtures; actual M3String storage not substituted in product sources",
+    "full_jdk_jtreg": "PENDING",
+    "maven_openrewrite_sdk": "PENDING",
+    "windows": "PENDING",
+    "retention": "bounded array-capacity derivation only; no full runtime retained-heap/native-memory profile"
+  }
+}
