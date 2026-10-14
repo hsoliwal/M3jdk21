@@ -1,0 +1,39 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 JDK-8357439 Bash completion contract
+
+on:
+  pull_request:
+    paths:
+      - 'm3/backports/recipes/jdk-8357439/test_jcmd_completion.sh'
+      - 'm3/backports/recipes/jdk-8357439/COMPLETION_SMOKE.md'
+      - '.github/workflows/m3-jdk8357439-completion-smoke.yml'
+      - 'src/jdk.jcmd/share/conf/bash-completion/jcmd'
+      - 'm3/backports/recipes/jdk-8357439/manifest.tsv'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  completion-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify unchanged pinned upstream implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object src/jdk.jcmd/share/conf/bash-completion/jcmd)" = \
+            'c1aca269e721d422a8809fbf1691d11548fcac2d'
+          test "$(git hash-object make/modules/jdk.jcmd/Copy.gmk)" = \
+            'f3240f9f61db734f6dbd248ed4052e642b059874'
+      - name: Bash syntax and behavior regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash -n src/jdk.jcmd/share/conf/bash-completion/jcmd
+          bash -n m3/backports/recipes/jdk-8357439/test_jcmd_completion.sh
+          bash m3/backports/recipes/jdk-8357439/test_jcmd_completion.sh
