@@ -45,3 +45,7 @@ The inventory is complete for the pinned tracked tree. Substantive package docum
 For the other public forks, use the [public fork documentation index](public-forks.md) for pinned guides, module/package maps, open coverage and separate CI evidence.
 
 For the linked-hash map/set family, see the [collection API and storage reference](collections-reference.md): parallel payload/control arrays, bucket masks and tombstones, access order, live/reversed views, entry projections, callback effects, and explicit JDK-compatibility boundaries.
+
+For primitive long-to-long maps, see the [primitive and snapshot map reference](primitive-map-reference.md): differing insertion/replacement results, mutable tombstones and fail-fast traversal, immutable signed-key snapshots, copy/CAS costs, stream lifetime and bounded test evidence.
+
+For lexicon export identity, eager/lazy admission and derived-family scope, see the [lexicon catalog reference](lexicon-catalog-reference.md): source records versus physical coordinates, sidecar verification, close/retry behavior and typed precompute contracts.

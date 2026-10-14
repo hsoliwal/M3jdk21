@@ -74,3 +74,11 @@ The new review specifically distinguishes immutable results from mutable edit-di
 Only new Markdown under doc/m3-guide is added. Uploaded design essays, private donor content and local working paths are not part of the public payload. All repository citations resolve to the public M3JDK21 tree or existing relative documentation. OpenJDK, third-party and scoped first-party notices remain in place. The catalogue is not a new ownership, licensing or receiving authority.
 
 The PR description records the final documentation commit and checks observed after publication. Merge, release readiness and runtime acceptance remain separate decisions.
+
+## Lexicon catalog contract review
+
+The [lexicon catalog reference](lexicon-catalog-reference.md) adds complete source-body review of six `com.m3.text` catalog/payload/typed-value owners at `c038343521587d96c9fa190715ce2f4b9f8c490a`, reusing the earlier image/storage reference. Public methods and nested records are mapped to source and actual assertions in ten read Java test files, with two selected Python test boundaries and explicit source-only gaps. Eager/lazy admission, failed-first-touch retry, close/mapping lifetime, scoped identity, optional sidecars and selective builder validation are documented. Tests, examples and runtime checks remain NOT_RUN. This does not close all 17 core files, exporter/authenticity proofs or package/runtime qualification; instance-index, number and language siblings remain outside this packet.
+
+## Primitive and snapshot map contract review
+
+The [primitive and snapshot map reference](primitive-map-reference.md) adds complete source-body review of `M3LongLongHashMap`, `M3ConcurrentLongMap`, their primitive iterator/consumer contracts and the relevant factory at `c038343521587d96c9fa190715ce2f4b9f8c490a`. It explains differing `put` results, absence, mutable tombstones and fail-fast traversal, signed-key immutable snapshots, CAS retry/copy costs and stream ownership. Six complete test files were read; direct map assertions in two are distinguished from unrelated broad suites and source-only gaps. All examples/tests remain NOT_RUN. Other collection owners, racing-writer/resource qualification and JDK backend promotion remain open.
