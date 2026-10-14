@@ -7,6 +7,7 @@ on:
     paths:
       - "m3/backports/file_delta_inventory.py"
       - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/materialize_generated_crates.py"
       - "m3/backports/selected_path_inventory.py"
       - "m3/backports/test_selected_path_inventory.py"
       - "m3/backports/test_jep404_inventory_policy.py"
@@ -16,6 +17,7 @@ on:
     paths:
       - "m3/backports/file_delta_inventory.py"
       - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/materialize_generated_crates.py"
       - "m3/backports/selected_path_inventory.py"
       - "m3/backports/test_selected_path_inventory.py"
       - "m3/backports/test_jep404_inventory_policy.py"
@@ -53,9 +55,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile             m3/backports/file_delta_inventory.py             m3/backports/generate_recipe_crates.py             m3/backports/selected_path_inventory.py
+          python3 -m py_compile \
+            m3/backports/file_delta_inventory.py \
+            m3/backports/generate_recipe_crates.py \
+            m3/backports/materialize_generated_crates.py \
+            m3/backports/selected_path_inventory.py
           cd m3/backports
-          python3 -m unittest -v             test_selected_path_inventory.py             test_jep404_inventory_policy.py
+          python3 -m unittest -v \
+            test_selected_path_inventory.py \
+            test_materialize_generated_crates.py \
+            test_jep404_inventory_policy.py
 
       - name: 3 - Fetch pinned Java21 and Java24 GA donor history
         shell: bash
@@ -281,7 +290,7 @@ jobs:
           set -euo pipefail
           make JOBS=2 test TEST="hotspot_jtreg:gc/shenandoah/jni"
           make JOBS=2 test TEST="hotspot_jtreg:gc/shenandoah/mxbeans"
-          make JOBS=2 test TEST="jdk_jfr:jdk/jfr/event/gc/detailed/TestShenandoahEvacuationInformationEvent.java"
+          make JOBS=2 test TEST="test/jdk/jdk/jfr/event/gc/detailed/TestShenandoahEvacuationInformationEvent.java"
 
       - name: 18 - Upload JEP404 candidate proof
         if: always()
