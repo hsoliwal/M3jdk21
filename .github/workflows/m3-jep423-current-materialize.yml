@@ -279,7 +279,7 @@ jobs:
           git config user.name "m3-recipe-bot"
           git config user.email "actions@users.noreply.github.com"
           git commit -m "m3: materialize JEP423 recipe output [m3-jep423-materialized]"
-          git push origin "HEAD:\$BRANCH_NAME"
+          git push origin "HEAD:$BRANCH_NAME"
 
       - name: 13 - Upload materialization proof
         if: always()
