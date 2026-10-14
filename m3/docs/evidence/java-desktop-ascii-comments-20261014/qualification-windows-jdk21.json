@@ -1,0 +1,168 @@
+{
+  "schema": "m3.java-desktop-ASCII-comment-qualification/1",
+  "target_baseline": "ee0a2eb03e95d43dca343dd987d29a7673f905e4",
+  "owners": [
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/JComponent.java",
+      "before_blob": "23a6b8eb47f80150cdc2bd2be3bdfd2c758f4613",
+      "after_blob": "1c93555d168e0340e0468db1f87e53b8d4fd82a7",
+      "before_bytes": 218644,
+      "after_bytes": 218642,
+      "before_sha256": "defc4bbfb131ba52d283bf52c4a9eee9668b5442d5c50d87158f0766111d50c2",
+      "after_sha256": "6e693f7cb08ea1b532314a12c474bca2d249ca703a04cdb7d79bb754bc31f005",
+      "before_span_offsets": [
+        160372
+      ],
+      "comment_lines": [
+        4180
+      ],
+      "all_postimage_ASCII": true,
+      "line_count_unchanged": true,
+      "inverse_exact": true,
+      "inverse_operation": "reverse3glyph replacements at adjusted byte offsets"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/RepaintManager.java",
+      "before_blob": "1a4a0236b66debf0fb227d61ed293f09c50b3029",
+      "after_blob": "f52df24e2a2082feb776518c1e4205e761b96de0",
+      "before_bytes": 74599,
+      "after_bytes": 74595,
+      "before_sha256": "3a1afd56224c798d5768ce15423017be60efaf8bf95ab4c57c087d29adf88155",
+      "after_sha256": "0282ed6af883a113ec5fedece4096149bbb1a50596e4efe37a253b9700d418f3",
+      "before_span_offsets": [
+        19309,
+        33618
+      ],
+      "comment_lines": [
+        511,
+        915
+      ],
+      "all_postimage_ASCII": true,
+      "line_count_unchanged": true,
+      "inverse_exact": true,
+      "inverse_operation": "reverse3glyph replacements at adjusted byte offsets"
+    }
+  ],
+  "javac": "Oracle21.0.9;--release21;--patch-module java.desktop; -g -implicit:none -Xprefer:source -XDignore.symbol.file=true -Xlint:all -Werror -Xlint:-lossy-conversions,-this-escape",
+  "build_warning_policy": [
+    {
+      "path": "make/CompileJavaModules.gmk",
+      "sha": "b1b7a83498d353efe3ff2464d5d9d6220bb835b9"
+    },
+    {
+      "path": "make/common/JavaCompilation.gmk",
+      "sha": "ff7c90e5785860141672d7f8ea5754bf27cef6e0"
+    },
+    {
+      "path": "make/modules/java.desktop/Java.gmk",
+      "sha": "c9057c09c7f94e7c28d3eb542220a76678aaf004"
+    }
+  ],
+  "compiler_lint_support": "Both existing owner exclusions independently verified byactual --help-lint",
+  "baseline_ASCII": {
+    "exit": 1,
+    "unmappable_byte_errors": 9,
+    "log_sha256": "a767e4a6a78f3959dc0a59d463d1298c44f2e930bbe28a14b946b6c3073c52ac"
+  },
+  "strict_UTF8_all_lints": {
+    "exit": 1,
+    "reason": "Existing JComponent constructor this-escape warning,excludedbyoriginalownerpolicy; failure preserved"
+  },
+  "owning_policy_classparity": {
+    "baseline_UTF8_exit": 0,
+    "candidate_ASCII_exit": 0,
+    "class_count": 21,
+    "all_class_bytes_identical": true,
+    "class_hashes": [
+      {
+        "path": "javax/swing/JComponent$1.class",
+        "sha256": "0eacb8953b5be396077b9f5c09ebf01fa3686dbf07caad71376ea37150894e4e"
+      },
+      {
+        "path": "javax/swing/JComponent$2.class",
+        "sha256": "085cb58947db320e54a521917825210905dad13a7b44aa1eaa34c974b62be1b6"
+      },
+      {
+        "path": "javax/swing/JComponent$AccessibleJComponent$AccessibleContainerHandler.class",
+        "sha256": "ff787594817ecc745ee947d582c6e387cea8c0af6db675c7fb2d5c2afe680437"
+      },
+      {
+        "path": "javax/swing/JComponent$AccessibleJComponent$AccessibleFocusHandler.class",
+        "sha256": "93cdbe470f848e42470cec589940b15c079714ae9b2d5204356c290edf605e2a"
+      },
+      {
+        "path": "javax/swing/JComponent$AccessibleJComponent.class",
+        "sha256": "682f596daa14f43a7b57416cc08bcbd72cc3967d2fe1c8b44d0109743b2cc43f"
+      },
+      {
+        "path": "javax/swing/JComponent$ActionStandin.class",
+        "sha256": "f51f42df8f351a9a9982d88323bec557a0e8d02c13fb49255280b10a7401ab38"
+      },
+      {
+        "path": "javax/swing/JComponent$IntVector.class",
+        "sha256": "9baad69099cfa9bb2bb93c0970cd4c63acd1c4dcd01d0fcadf10d5cb55bec1cf"
+      },
+      {
+        "path": "javax/swing/JComponent$KeyboardState.class",
+        "sha256": "fd53e0b92363d49fadd0c2ef226897218d9dfc40856479af36810e0fc126cd52"
+      },
+      {
+        "path": "javax/swing/JComponent$ReadObjectCallback.class",
+        "sha256": "e02cc2ce6f83f8c3cd7a64db12a24dec9e2279f076de656ba9e40e1e6064447a"
+      },
+      {
+        "path": "javax/swing/JComponent.class",
+        "sha256": "decb8a7f3fe672185f218894eab75208f69e360a60ad5f0697d14018814e4e9b"
+      },
+      {
+        "path": "javax/swing/RepaintManager$1.class",
+        "sha256": "f4295f438c5ba289f467790512ad438a656700e642c3cca7eec451a65c91e2de"
+      },
+      {
+        "path": "javax/swing/RepaintManager$2$1.class",
+        "sha256": "e47884cd9abb52e4bcfa276486cd930fd51c45de8f0894a3f0cf0480b9a08d9a"
+      },
+      {
+        "path": "javax/swing/RepaintManager$2.class",
+        "sha256": "66ddf0e3dadcc083492d58b3c159766033784f8b44ef82510d43838c9944ffd3"
+      },
+      {
+        "path": "javax/swing/RepaintManager$3.class",
+        "sha256": "78fb3b00f1066f2af3cb7e1dea37635282f2e742f53787998a349b68b44beb87"
+      },
+      {
+        "path": "javax/swing/RepaintManager$4.class",
+        "sha256": "14f060e788126a54a03f97b3db04bdf89a8ce85f32acc9f00c81b7f5efffaa94"
+      },
+      {
+        "path": "javax/swing/RepaintManager$DisplayChangedHandler.class",
+        "sha256": "0e4a748dc15f4d89b6b5eff07b77fdde2a5fa63a4ce92652f80adf81f75736fc"
+      },
+      {
+        "path": "javax/swing/RepaintManager$DisplayChangedRunnable.class",
+        "sha256": "52443d2de54ecc3332790e4a38981f8185114897d45dfb1b9b525f8ebe72c8bc"
+      },
+      {
+        "path": "javax/swing/RepaintManager$DoubleBufferInfo.class",
+        "sha256": "e5a0074992a744f51c1229576df5edbe57262ff52841183a1f724d316dd34315"
+      },
+      {
+        "path": "javax/swing/RepaintManager$PaintManager.class",
+        "sha256": "28559a975f465096c0c9f79d5562dffff83dff318edb2089761b01dce1987107"
+      },
+      {
+        "path": "javax/swing/RepaintManager$ProcessingRunnable.class",
+        "sha256": "20617098519287b7e2695a5f3beda2ed0a57179ea0ff2c44e795b0dc8d6edd01"
+      },
+      {
+        "path": "javax/swing/RepaintManager.class",
+        "sha256": "a29c061aed6811bc47beb54b14c6b5a78ba5d9bf27ceb8ca0266f324ded5935c"
+      }
+    ],
+    "receipt_sha256": "57974a0e36279d62480cd81cdc8c148bf6c34ad8679041533dbcb725d723e15d"
+  },
+  "delta": "Three em dashes becomeASCIIhyphens insideexistingFLLDCIMlinecomments;code/linecounts/GPLheaders unchanged",
+  "full_JDK_images_or_jtreg_admitted": false,
+  "OpenRewrite_delivery_executed": false,
+  "goal": "ACTIVE"
+}

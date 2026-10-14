@@ -508,7 +508,7 @@ public class RepaintManager
             delegate.addDirtyRegion(c, x, y, w, h);
             return;
         }
-        //FLLDCIM: L6 — M3 redraw-suspend construction flag; one atomic read when unused
+        //FLLDCIM: L6 - M3 redraw-suspend construction flag; one atomic read when unused
         if (M3_SUSPENDED.get() != 0 && m3Defer(c, x, y, w, h)) {
             return;
         }
@@ -912,7 +912,7 @@ public class RepaintManager
             for (int j=0 ; j < count.get(); j++) {
                 final int i = j;
                 final Component dirtyComponent = roots.get(j);
-                //FLLDCIM: L3 — M3: a root that stopped showing paints nothing (paintImmediately
+                //FLLDCIM: L3 - M3: a root that stopped showing paints nothing (paintImmediately
                 // and the heavyweight branch both test isShowing); skip it before building the
                 // access-control context, unless a repaint root is waiting to be serviced.
                 if (repaintRoot == null && !dirtyComponent.isShowing()) {
