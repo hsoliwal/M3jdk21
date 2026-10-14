@@ -3,6 +3,7 @@ name: M3JDK21 Backport Recipe DAG
 on:
   push:
     branches:
+      - "master"
       - "m3/jdk21-backport-dag-control-20261003"
     paths:
       - "m3/pom.xml"
