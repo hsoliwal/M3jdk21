@@ -50,6 +50,15 @@ public class M3StringCompositeLiteralSearchCursorTest {
         if (slices.isEmpty()) return String.join("", "", "");
         return String.join("", slices);
     }
+    private static String segmented(char[] characters, int segmentWidth) {
+        List<String> pieces = new ArrayList<>();
+        for (int at = 0; at < characters.length; at += segmentWidth) {
+            int end = Math.min(characters.length, at + segmentWidth);
+            pieces.add(new String(characters, at, end - at));
+        }
+        return String.join("", pieces);
+    }
+
     private static void evaluate(String composite, char[] original, String needle,
                                  char[] needleArray, String label) {
         check(composite.length() == original.length, label + " length");
@@ -96,6 +105,38 @@ public class M3StringCompositeLiteralSearchCursorTest {
                 String.join("", "\ud83d", "\ude42"), "\ud83d\ude42".toCharArray(), "seam-surrogate");
         String big = String.join("", java.util.Collections.nCopies(512, "x"));
         evaluate(big, big.toCharArray(), String.join("", "xxx", "xxxxx"), "xxxxxxxx".toCharArray(), "repeated-bmh");
+        longTrigramPrefilterPreservesExactSearch();
         System.out.println("M3_COMPOSITE_LITERAL_CURSOR_TEST_PASS checks=" + checks);
+    }
+
+    private static void longTrigramPrefilterPreservesExactSearch() {
+        char[] sourceUnits = new char[32_768];
+        char[] cycle = {'a', 'a', 'b', 'a', 'a', 'a', '#'};
+        for (int index = 0; index < sourceUnits.length; index++) {
+            sourceUnits[index] = cycle[index % cycle.length];
+        }
+
+        char[] patternUnits = new char[8_192];
+        for (int index = 0; index < patternUnits.length - 1; index++) patternUnits[index] = 'a';
+        patternUnits[patternUnits.length - 1] = 'b';
+
+        String pattern = segmented(patternUnits, 64);
+        String absent = segmented(sourceUnits, 64);
+        int absentOracle = exactForward(sourceUnits, patternUnits, 0, sourceUnits.length);
+        check(absentOracle == -1, "long trigram-superset exact oracle");
+        check(absent.length() == 32_768 && pattern.length() == 8_192,
+                "trigram precompute admission boundaries");
+        check(absent.indexOf(pattern) == absentOracle,
+                "long composite absent despite complete trigram superset");
+
+        int expectedMatch = 16_384;
+        char[] presentUnits = sourceUnits.clone();
+        System.arraycopy(patternUnits, 0, presentUnits, expectedMatch, patternUnits.length);
+        String present = segmented(presentUnits, 64);
+        int presentOracle = exactForward(presentUnits, patternUnits, 0, presentUnits.length);
+        check(presentOracle == expectedMatch, "long trigram-superset exact match oracle");
+        check(present.indexOf(pattern) == presentOracle,
+                "long composite match survives trigram prefilter");
+    }
     }
 }
