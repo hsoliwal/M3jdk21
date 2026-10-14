@@ -20,6 +20,7 @@ package jdk.internal.vm.parallel;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 /** An execution envelope whose one-dimensional primitive result arrays are isolated. */
 public record BulkExecution(Map<String, Object> outputs, String provider, String receiptRoot) {
@@ -35,6 +36,16 @@ public record BulkExecution(Map<String, Object> outputs, String provider, String
             }
         }
         receiptRoot = root;
+    }
+
+    /**
+     * Returns immutable output names without cloning the (possibly large) primitive results.
+     *
+     * <p>Use this for scheduling/shape checks; callers requiring data continue to use
+     * {@link #outputs()}, which retains its defensive array-copy contract.</p>
+     */
+    public Set<String> outputNames() {
+        return outputs.keySet();
     }
 
     /** Returns defensive primitive-array views without transferring canonical result ownership. */
