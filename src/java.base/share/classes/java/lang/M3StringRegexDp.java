@@ -6,6 +6,10 @@
  */
 package java.lang;
 
+import java.lang.ref.WeakReference;
+import java.util.concurrent.atomic.AtomicReferenceArray;
+import jdk.internal.mindex.M3RX;
+
 /**
  * Bounded full-region dynamic programming for the conservative dot/star regex subset.
  *
@@ -30,13 +34,32 @@ final class M3StringRegexDp {
     private static final int MAX_TEXT_UNITS = 8_192;
     private static final long MAX_DP_CELLS = 1_000_000L;
 
+    private static final int PLAN_SLOTS = 32;
+    private static final int EFFECT_SLOTS = 128;
+    private static volatile Cache cache;
+
     private M3StringRegexDp() { }
+
+    /** Explicit eviction changes cost only; no canonical owner or text storage is cleared. */
+    static void clearPrecompute() { cache = null; }
+
+    /** Retained primitive-array payload bound, excluding object/scalar/VM overhead; includes all plans. */
+    static long maximumRetainedPrimitiveBytes() {
+        return (PLAN_SLOTS + (long) EFFECT_SLOTS) * (63L * 4 + 134L * 8)
+                + EFFECT_SLOTS * 64L * 8;
+    }
 
     /**
      * A three-state, contract-preserving decision: UNKNOWN means use Pattern.matches.
-     * No stored per-String state, JNI ABI or cross-call cache is introduced.
+     * No stored per-String state is introduced. Optional metadata uses weak exact owner/range
+     * keys and exact compiled instructions. No canonical payload or String API is added.
      */
     static int tryMatch(M3String source, String regex) {
+        return tryMatch(source, regex, false);
+    }
+
+    /** Explicit internal native-effect candidate; normal String.matches keeps Java selection. */
+    static int tryMatch(M3String source, String regex, boolean nativeComposition) {
         int n = regex.length();
         if (n < 2 || n > MAX_PATTERN_UNITS) return UNKNOWN;
 
@@ -63,6 +86,17 @@ final class M3StringRegexDp {
         int m = source.length();
         if (m > MAX_TEXT_UNITS || ((long) m + 1) * (count + 1) > MAX_DP_CELLS) {
             return UNKNOWN;
+        }
+
+        // Preserve the measured short-input baseline. Warm cache benefits do not justify
+        // charging all small one-shot matches for plan/cache admission.
+        if (m >= 256 && count <= M3RX.MAX_ATOMS) {
+            try {
+                return preparedMatch(source, atoms, count, nativeComposition);
+            } catch (OutOfMemoryError unavailable) {
+                // Only optional precompute is abandoned. Original DP remains the compatibility lane.
+                cache = null;
+            }
         }
 
         // Nullable prefix: every atom of an empty-text-matching prefix must be starred.
@@ -94,6 +128,118 @@ final class M3StringRegexDp {
             current = swap;
         }
         return previous[count] ? MATCH : NO_MATCH;
+    }
+
+    private static int preparedMatch(M3String source, int[] atoms, int count,
+                                     boolean nativeComposition) {
+        Cache current = cache;
+        if (current == null) {
+            synchronized (M3StringRegexDp.class) {
+                current = cache;
+                if (current == null) cache = current = new Cache();
+            }
+        }
+        M3RX.Plan plan = current.plan(atoms, count);
+        Entry entry = current.entry(source, plan);
+        if (entry != null && entry.effect != null) return plan.matches(entry.effect) ? MATCH : NO_MATCH;
+        // Admission/setup is not amortized for a cold one-shot string. Only a repeated exact
+        // owner/range/plan key warms all-entry effects, with independent work/shape limits.
+        if (entry != null && source.length() <= 512 && count <= 31) {
+            M3RX.Effect effect = prepareTree(source, plan, current, new Budget(), 0, nativeComposition);
+            if (effect != null) return plan.matches(effect) ? MATCH : NO_MATCH;
+        }
+        int result = plan.tryMatch(source.length(), source::charAt, null);
+        if (result != UNKNOWN) current.put(source, plan, null);
+        return result;
+    }
+
+    /** Reuses the existing tuple DAG and coordinate rules; slices are handles, never text copies. */
+    private static M3RX.Effect prepareTree(M3String source, M3RX.Plan plan, Cache current,
+                                          Budget budget, int depth, boolean nativeComposition) {
+        if (++budget.nodes > 128 || depth > 48) return null;
+        Entry cached = current.entry(source, plan);
+        if (cached != null && cached.effect != null) return cached.effect;
+        M3RX.Effect result;
+        if (source.owner() instanceof M3StringTuple tuple && source.length() != 0) {
+            int split = tuple.left.length();
+            int begin = source.start(), end = source.end();
+            if (end <= split) {
+                result = prepareTree(tuple.left.slice(begin, end), plan, current, budget,
+                        depth + 1, nativeComposition);
+            } else if (begin >= split) {
+                result = prepareTree(tuple.right.slice(begin - split, end - split), plan, current,
+                        budget, depth + 1, nativeComposition);
+            } else {
+                M3RX.Effect left = prepareTree(tuple.left.slice(begin, split), plan, current,
+                        budget, depth + 1, nativeComposition);
+                if (left == null) return null;
+                M3RX.Effect right = prepareTree(tuple.right.slice(0, end - split), plan, current,
+                        budget, depth + 1, nativeComposition);
+                if (right == null) return null;
+                result = nativeComposition ? plan.composeNative(left, right, null)
+                        : plan.compose(left, right, null);
+            }
+        } else {
+            long work = (long) source.length() * plan.states();
+            if (work > budget.steps) return null;
+            budget.steps -= work;
+            result = plan.summarize(source.length(), source::charAt, work, null);
+        }
+        if (result != null) current.put(source, plan, result);
+        return result;
+    }
+
+    private static final class Budget {
+        long steps = 1_000_000;
+        int nodes;
+    }
+
+    /** Follows M3StringSearchPrecompute's bounded weak-owner/exact-coordinate cache pattern. */
+    private static final class Cache {
+        final AtomicReferenceArray<M3RX.Plan> plans = new AtomicReferenceArray<>(PLAN_SLOTS);
+        final AtomicReferenceArray<Entry> effects = new AtomicReferenceArray<>(EFFECT_SLOTS);
+
+        M3RX.Plan plan(int[] atoms, int count) {
+            int hash = count;
+            for (int i = 0; i < count; i++) hash = 31 * hash + atoms[i];
+            int slot = hash & (PLAN_SLOTS - 1);
+            M3RX.Plan plan = plans.get(slot);
+            if (plan != null && plan.sameInstructions(atoms, count)) return plan;
+            plan = M3RX.compile(atoms, count, null);
+            plans.set(slot, plan);
+            return plan;
+        }
+
+        Entry entry(M3String source, M3RX.Plan plan) {
+            Entry entry = effects.get(slot(source, plan));
+            return entry != null && entry.owner.get() == source.owner()
+                    && entry.coordinate == source.coordinate() && entry.plan == plan ? entry : null;
+        }
+
+        void put(M3String source, M3RX.Plan plan, M3RX.Effect effect) {
+            effects.set(slot(source, plan), new Entry(source, plan, effect));
+        }
+
+        private int slot(M3String source, M3RX.Plan plan) {
+            long coordinate = source.coordinate();
+            int hash = System.identityHashCode(source.owner()) ^ System.identityHashCode(plan)
+                    ^ (int) coordinate ^ (int) (coordinate >>> 32);
+            hash ^= hash >>> 16;
+            return hash & (EFFECT_SLOTS - 1);
+        }
+    }
+
+    private static final class Entry {
+        final WeakReference<M3StringOwner> owner;
+        final long coordinate;
+        final M3RX.Plan plan;
+        final M3RX.Effect effect;
+        Entry(M3String source, M3RX.Plan plan, M3RX.Effect effect) {
+            owner = new WeakReference<>(source.owner());
+            coordinate = source.coordinate();
+            this.plan = plan;
+            this.effect = effect;
+        }
     }
 
     private static boolean isAsciiAlphanumeric(char value) {

@@ -1,0 +1,89 @@
+{
+  "schema": "M3JDK21_REGEX_EFFECT_RECEIVER_V1",
+  "extends": "name-mapping.json",
+  "canonical_mapping_base_blob": "288f20575d3f9d106571990f21944e7f46b0cf71",
+  "scope": "Additive capability supplement, not a replacement or complete migration catalogue. Historical global map remains unchanged.",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_revision": "d5abed865bd47c4dd5ad78e95704348fe2095ed2",
+  "recipe": "com.synexia.m3.M3Jdk21RegexEffects",
+  "recipe_owner": "synexia-openrewrite-recipes",
+  "runtime_dependency_on_synexia": false,
+  "status": "SOURCE_RECEIVER_CANDIDATE; full target image/jtreg admission pending",
+  "mappings": [
+    {
+      "source": "MIndexString",
+      "target": "java.lang.M3String",
+      "decision": "REUSE_UNCHANGED",
+      "contract": "Canonical owner plus packed coordinate; no fields or text storage added."
+    },
+    {
+      "source": "MIndexRegexProgram and M3RegexDp.Plan",
+      "target": "java.lang.M3StringRegexDp / jdk.internal.mindex.M3RX.Plan",
+      "decision": "TARGET_OWNED_ADAPTATION",
+      "contract": "Existing target syntax admission and rolling DP retained; instruction-based <=63-atom epsilon-NFA frontier. Not wholesale DFA/parser transplant."
+    },
+    {
+      "source": "M3RegexDp.Effect/compose/repeat",
+      "target": "jdk.internal.mindex.M3RX.Effect/Plan",
+      "decision": "TARGET_OWNED_ADAPTATION",
+      "contract": "Boolean relation for <=64 NFA positions; epsilon-closure identity; ordered relation composition and binary repetition with checked length."
+    },
+    {
+      "source": "M3RegexDp.Index and scalar range actions",
+      "target": "java.lang.M3StringTuple coordinate traversal + M3RX.Plan.apply",
+      "decision": "ADAPT_OWNER_NOT_FLAT_TREE",
+      "contract": "Reuse the existing target tuple DAG and exact slices. No second flat index is built; donor mutable snapshot/range API is not exposed in java.lang."
+    },
+    {
+      "source": "M3RegexDpNative / regex_dp_batch_jni.c",
+      "target": "src/java.base/share/native/libjava/M3RX.c",
+      "decision": "TARGET_OWNED_ABI",
+      "contract": "One bounded Boolean-relation composition; target JNI name; no Synexia symbol/loader dependency. 64 states and 1536 bytes fixed stack arrays; Java fallback on absent symbol."
+    },
+    {
+      "source": "MIndexStringSearchPlan / existing M3StringSearchPrecompute cache policy",
+      "target": "java.lang.M3StringRegexDp.Cache",
+      "decision": "REUSE_TARGET_OWNER_PATTERN",
+      "contract": "32 numeric plan slots,128 weak exact-owner/coordinate/plan slots. Cold scalar first, bounded repeated-key effect preparation. Explicit eviction and optional OOME fallback, not global memory-pressure integration."
+    },
+    {
+      "source": "IProgressMonitor/checkpoints",
+      "target": "M3RX internal Runnable checkpoint; existing String.matches unchanged",
+      "decision": "SEMANTIC_ADAPTATION",
+      "contract": "No new thread-interruption exception is introduced into ordinary String matching."
+    },
+    {
+      "source": "recipe and algorithm selection history",
+      "target": "m3/synexia-import/regex-effects-20261014",
+      "decision": "PINNED_RECEIVER_RECORD",
+      "contract": "Generic recipe source/templates/tests stay in Synexia; target receives runtime sources, native code, tests and mapping/provenance only."
+    }
+  ],
+  "deferred": [
+    "General captures, lookarounds, backreferences, find/region semantics: original Pattern/Matcher authority remains.",
+    "General Unicode/supplementary regex acceleration: original helper refuses surrogates; BMP dot behavior retained.",
+    "Large/unbounded NFA/DFA programs, full DFA indexed range/snapshot API, JIT/SIMD and automatic native routing.",
+    "Compile-time regex images, general M3Compute/compiler lowering and full shared-storage precompute synchronization.",
+    "Automatic system-wide pressure hooks, whole repository dependency closure and canonical global-map reconciliation."
+  ],
+  "inventory_note": "The existing full-family catalogue explicitly selects MIndex-prefixed basenames only; newer M3RegexDp owners need capability-based discovery. No claim of an exhaustive source scan.",
+  "licenses": {
+    "runtime": "Target-owned GPLv2 with Classpath exception; existing target notices retained. Algorithm capabilities referenced; no Apache donor source relicensed.",
+    "recipe_and_harness": "Apache-2.0 first-party tooling",
+    "challenge_sources": "Taxonomy/contract reference only; no editorial/submission code copied."
+  },
+  "observed_target_owners": {
+    "src/java.base/share/classes/java/lang/M3String.java": "42399d411c1516a56a47dcdb10242960157b4677",
+    "src/java.base/share/classes/java/lang/M3StringOwner.java": "acd2a9584c65c384ddebd9159a8775d196ea0f8c",
+    "src/java.base/share/classes/java/lang/M3StringTuple.java": "0d4cfb75317e68d54244588a474eba98bf7df27b",
+    "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java": "ac68eacd6ee4e6048ab424542ccf5c2cf5595908",
+    "make/modules/java.base/lib/CoreLibraries.gmk": "8b1a0a90fd4aa3fd455c78507dbfc491a3046d73"
+  },
+  "runtime_source_sha256": {
+    "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "3e0dfe77ac20a605df830eb29dec59d1c221fa0113a2ba5c69d56f86a2a2ddd2",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RX.java": "990b5d340140a89a7fa6088936a5f092b11b32cfde008f6cc8b1035a2ead5e0d",
+    "src/java.base/share/native/libjava/M3RX.c": "8c84106aa63c3d7bc53f0950c0b31543458a04c612ea136a886d2e1304c992ee"
+  }
+}
