@@ -8009,7 +8009,23 @@
         "existing java.util.concurrent concrete implementation",
         "com.m3.collections proving-ground owners where not yet promoted"
       ],
-      "rule": "Never create one universal M3 Collection replacement; backend substitutions are contract-specific."
+      "rule": "Never create one universal M3 Collection replacement; backend substitutions are contract-specific.",
+      "heap_growth_donor_evidence": {
+        "source_repository": "hsoliwal/com.synexia",
+        "source_pr": 11043,
+        "source_commit": "0c2c4f6ee1ce01418ffd158485d7ddb0342f900a",
+        "source_owners": [
+          "com.synexia.mindex.collections.M3PreGc",
+          "com.synexia.mindex.collections.MIndexPriorityQueue"
+        ],
+        "source_recipe": "com.synexia.m3.MIndexAutoHeapGrowth",
+        "source_crate": "mindex-auto-heap-growth-20261014",
+        "evidence_path": "synexia-openrewrite-recipes/recipes/mindex-auto-heap-growth-20261014/QUALIFICATION.md",
+        "status": "DONOR_QUALIFIED_TARGET_PORT_PENDING",
+        "public_api": "java.util.PriorityQueue keeps its name and its own ordering, comparator, iterator and serialization contracts",
+        "fit_boundary": "The donor stores IDs, priorities and FIFO serials in three primitive lanes. This is not the JDK PriorityQueue object-array representation; no direct body substitution or runtime acceptance is implied.",
+        "target_gate": "Target-specific preimages, API/behavior, allocation/retention, concurrency where applicable, matched JDK build and jtreg required. Ordered receiving remains String -> arrays -> collections."
+      }
     },
     {
       "source_family": "MIndexClass* / class precompute",

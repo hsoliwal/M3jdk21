@@ -1,0 +1,29 @@
+{
+  "schema": "M3_STRING_CI_RECEIVER_V1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_pr": "https://github.com/hsoliwal/com.synexia/pull/10152",
+  "source_revision": "fa65dfe3d44b98bc95f390f9f809f662b6c67081",
+  "recipe": "com.synexia.rewrite.M3StringCi",
+  "crate": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-history/ci",
+  "manifest_git_blob": "fe97fbac9d88f406effaf40e36c62712c3d57bce",
+  "evidence_git_blob": "be6c065de5ffc7071384fb8f6a381f13e3920a9e",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_preimage_revision": "5f68880c6f4a669e2fe82d6a914c071aef4f80f5",
+  "execution": "SDK_EXECUTION",
+  "recipe_ownership": "Synexia",
+  "runtime_ownership": "M3JDK21",
+  "qualified": {
+    "maven_tests": 8,
+    "guard_tests": 6,
+    "java_syntax_files": 28,
+    "stock_java_oracle_checks": 489490
+  },
+  "original_jtreg_selectors": 23,
+  "received_jtreg_selectors": 33,
+  "changed_runtime_code": false,
+  "target_runtime_execution": "PENDING_MATCHED_IMAGE_AND_JTREG",
+  "full_source_invariant_script": "NOT_RUN",
+  "full_borrow_receiver": "BLOCKED_IN_SPARSE_FIXTURE_NO_GIT_ANCESTRY",
+  "family_completion": false,
+  "notes": "This generated receipt records exact source/recipe custody and scoped execution. It is not a VM, JNI, full reactor or hosted CI acceptance claim. Original target file rights remain unchanged."
+}
