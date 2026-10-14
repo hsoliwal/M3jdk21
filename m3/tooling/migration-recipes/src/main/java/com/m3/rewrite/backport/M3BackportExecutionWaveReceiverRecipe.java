@@ -21,7 +21,8 @@ public final class M3BackportExecutionWaveReceiverRecipe extends Recipe {
     @Override
     public String getDescription() {
         return "Replays the exact reviewed execution-wave planner, tests, documentation and Maven "
-                + "wiring from hash-pinned UTF-8 preimages/postimages.";
+                + "wiring from hash-pinned UTF-8 preimages/postimages; these files do not edit JDK "
+                + "product source or grant compatibility/promotion authority.";
     }
 
     @Override
