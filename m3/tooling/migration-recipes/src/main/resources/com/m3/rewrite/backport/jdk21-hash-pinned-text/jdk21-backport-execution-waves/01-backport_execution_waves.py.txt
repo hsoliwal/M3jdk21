@@ -259,7 +259,7 @@ def write_tsv(items: Sequence[WaveItem], path: Path) -> None:
             handle,
             fieldnames=list(asdict(items[0]).keys()),
             delimiter="	",
-            lineterminator="\\n",
+            lineterminator="\n",
         )
         writer.writeheader()
         for item in items:
@@ -270,7 +270,7 @@ def write_json(items: Sequence[WaveItem], approvals: Mapping[str, str], path: Pa
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = summary(items, approvals)
     payload["items"] = [asdict(item) for item in items]
-    path.write_text(json.dumps(payload, sort_keys=True, indent=2) + "\\n", encoding="utf-8")
+    path.write_text(json.dumps(payload, sort_keys=True, indent=2) + "\n", encoding="utf-8")
 
 
 def compile_root(root_path: Path, approvals: Mapping[str, str]) -> list[WaveItem]:
