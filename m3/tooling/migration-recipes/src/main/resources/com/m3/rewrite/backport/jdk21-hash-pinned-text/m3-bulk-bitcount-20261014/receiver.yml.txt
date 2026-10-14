@@ -1,0 +1,10 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3ParallelBitCount
+version: 1.0.0
+displayName: M3 primitive bitcount bulk provider receiver
+description: Receive exact canonical Synexia Java and text postimages for the reviewed bitcount bulk operation.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: m3-bulk-bitcount-20261014
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-bulk-bitcount-20261014
