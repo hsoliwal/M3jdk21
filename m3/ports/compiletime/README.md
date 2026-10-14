@@ -39,3 +39,16 @@ python3 m3/ports/compiletime/seal_crate.py                    # regenerate the r
 python3 m3/ports/compiletime/verify_compiletime_precompute.py # refuse on any drift
 mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3CompileTimeRegexPrecomputeRecipeTest test
 ```
+
+## Detailed source references
+
+- [Inventory and report contracts](../../../doc/m3-guide/compiletime-inventory-reference.md)
+- [Item-residency scanner and sidecar contracts](../../../doc/m3-guide/compiletime-residency-reference.md)
+
+These references describe source at their stated pin. Their source/test review does not rerun the historical receipts or establish build/runtime acceptance.
+
+Also see the [regex analysis, image and gate reference](../../../doc/m3-guide/compiletime-regex-reference.md),
+[harvest and differential receipt reference](../../../doc/m3-guide/compiletime-harvest-reference.md)
+and [complete nineteen-source package map](../../../doc/m3-guide/compiletime-source-coverage.md).
+The map includes internal helpers while keeping the separate residency
+annotations, dependency projects and runtime qualification outside its count.

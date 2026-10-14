@@ -81,3 +81,17 @@ The [internal primitive lanes and metadata helpers reference](internal-metadata-
 For the immutable Class snapshot and UTF-16 candidate facts, see [class-index contracts](class-index-reference.md) and [trigram query/fact contracts](trigram-query-reference.md). The [complete internal mindex source map](internal-mindex-source-coverage.md) routes all 24 physical Java files to bounded body-level references, while keeping public JDK compatibility, executable coverage and runtime qualification separate.
 
 For the remaining independent text owners, see the [text projection, tool and receipt reference](text-projection-reference.md): generated numeric views and explicit materialization, operator-supplied instance indexing, fixed grammar-support signals, CLI image effects and LangDex verification without catalog admission. The [seventeen-source text map](text-source-coverage.md) routes every physical `com.m3.text` owner to its bounded source-contract review while preserving the earlier storage/catalog references and unexecuted-test status.
+
+## Compile-time inventory, regex and residency contracts
+
+- [Compile-time source coverage](compiletime-source-coverage.md): all 19 physical
+  `com.m3.compiletime` production source owners, including internal helpers,
+  with separate inventory, regex, receipt and residency routes and runtime gaps
+- [Compile-time regex analysis, image and gate](compiletime-regex-reference.md):
+  necessary formulas versus exact literals, content keys, packed lanes,
+  verification/retained-storage limits and mutable gate scratch
+- [Constant-regex harvest and differential receipts](compiletime-harvest-reference.md):
+  CLI/file schemas, exact discoveries versus sampled inputs, separate
+  harvested/oracle comparisons, measurement scopes and custody limits
+- [Compile-time inventory and report reference](compiletime-inventory-reference.md): catalogue matching, constant operands, Formatter plans, exact TSV schemas, state/resource/error boundaries and eight-owner declared-member map
+- [Compile-time item-residency reference](compiletime-residency-reference.md): hierarchy/escape rules, exact 14-column site TSV, summary/meta records, bytecode offsets, binary sidecar and three-owner declared-member map

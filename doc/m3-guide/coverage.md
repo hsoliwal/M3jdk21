@@ -186,3 +186,41 @@ The [text projection, tool and receipt reference](text-projection-reference.md) 
 The new reference distinguishes generated numeric source IDs from family keys/storage identities, CLI file effects from build-script publication, target-owned instance schemas from admitted data, fixed grammar signals from rules, and exact-wire LangDex receipts from producer authentication or catalog admission. It records the instance implementation's differing forward UTF-8 and reverse Java String ordering without changing source. Eight complete Java test/fixture bodies, the numeric Python integration test, the core build/JPMS and reactor boundaries, two CLI call paths and relevant manifest/field-map/export policy were inspected. Assertions and source-only cases are attributed separately; the LangDex expected-wire fixture is not represented as a captured producer execution.
 
 All builds, repository tests, examples, scripts, native/runtime checks, policy/recipe verifiers and measurements are **NOT_RUN by this documentation authoring/review pass**. Hosted CI remains separate exact-head evidence. Every physical source in this bounded text directory now has a body-reference route; complete inline package documentation, full inbound callers, external dataset/license admission, resource/platform qualification, whole package/module/project/repository completion and receiving acceptance remain open. No source/configuration/workflow/license, denominator or receiving phase changes.
+
+## Independent compile-time source-contract reconciliation
+
+### Compile-time package documentation routes
+
+The [complete 19-source map](compiletime-source-coverage.md) routes every
+production Java owner under `m3/ports/compiletime/src/main/java/com/m3/compiletime`
+at `8758991645037126985d56f16a208fec8a1eef38`, including package-private helpers.
+Its separate [regex reference](compiletime-regex-reference.md) covers six
+analysis/key/image/gate owners and the [harvest reference](compiletime-harvest-reference.md)
+covers two CLI/receipt owners. The inventory and residency references cover the
+other eleven owners without overlap.
+
+This is source-body/member documentation and navigation, not completion of
+runtime, resource, malformed-input, concurrency or integration qualification.
+All builds, tests, examples, benchmarks and custody/recipe verifiers in these
+documentation passes remain **NOT_RUN**. The standalone Java-21 Maven classpath
+artifact, separate ASM/precompute dependencies, no root-reactor membership and
+no JPMS descriptor remain explicit. The three sibling `com.m3.residency`
+annotations and hash-pinned custody copies are outside the 19-owner count.
+
+### Inventory and residency owner detail
+
+| Source owner | Visibility | Reference | Review scope |
+| --- | --- | --- | --- |
+| [M3CallSiteCatalog](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3CallSiteCatalog.java) | public | [compiletime-inventory-reference](compiletime-inventory-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
+| [M3ClassScan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ClassScan.java) | package-private | [compiletime-inventory-reference](compiletime-inventory-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
+| [M3CompileTimeStringInventory](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3CompileTimeStringInventory.java) | public | [compiletime-inventory-reference](compiletime-inventory-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
+| [M3FormatPlan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3FormatPlan.java) | public | [compiletime-inventory-reference](compiletime-inventory-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
+| [M3InventoryReport](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3InventoryReport.java) | package-private | [compiletime-inventory-reference](compiletime-inventory-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
+| [M3InventoryState](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3InventoryState.java) | package-private | [compiletime-inventory-reference](compiletime-inventory-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
+| [M3SiteRecorder](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3SiteRecorder.java) | package-private | [compiletime-inventory-reference](compiletime-inventory-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
+| [M3Tsv](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3Tsv.java) | public | [compiletime-inventory-reference](compiletime-inventory-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
+| [M3BytecodeOffsets](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3BytecodeOffsets.java) | package-private | [compiletime-residency-reference](compiletime-residency-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
+| [M3EscapeFlow](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3EscapeFlow.java) | package-private | [compiletime-residency-reference](compiletime-residency-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
+| [M3ItemReferenceScan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ItemReferenceScan.java) | public | [compiletime-residency-reference](compiletime-residency-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
+
+These 11 owners are disjoint from the eight regex/image/harvest owners. Annotation dependencies in `com.m3.residency` do not add to the 19-owner denominator. Source documentation coverage does not claim test execution, runtime promotion or whole-repository closure.

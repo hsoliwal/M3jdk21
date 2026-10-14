@@ -71,3 +71,32 @@ The [internal primitive lanes and metadata helpers reference](internal-metadata-
 ## Internal metadata, lanes and query source routing
 
 The [24-file internal mindex map](internal-mindex-source-coverage.md) completes source-body routing for this exact physical package using the mapped-storage, class/member, lane/helper, [M3CI snapshot](class-index-reference.md) and [M3TQ query/fact](trigram-query-reference.md) references. M3CI is an explicitly built in-memory Class closure; M3TQ is candidate-only UTF-16 query metadata. Their local IDs, candidate hashes, weak/live bindings and caller-owned caches do not establish a shared image schema, global identity or universal Class/String/regex replacement. This is an additive source-review update; all runtime and whole-module qualifications remain separate.
+
+## Standalone compile-time images and residency metadata
+
+The [compile-time source map](compiletime-source-coverage.md) routes all nineteen
+physical `com.m3.compiletime` owners through separate inventory/report,
+[regex analysis/image/gate](compiletime-regex-reference.md),
+[harvest/differential receipt](compiletime-harvest-reference.md), and
+[item-residency scanner](compiletime-residency-reference.md) references. These
+are the standalone Java-21 Maven classpath artifact's source contracts; they
+add no root-reactor membership, JPMS descriptor, bootstrap Pattern/Matcher
+receiver or runtime item-residency consumer.
+
+A REQUIRED regex formula is a necessary condition; a true result is only a
+candidate. Narrowly admitted pure literals can decide the gate's String
+find/matches calls directly. Image verification retains caller storage and
+checks header/digests/aggregate geometry without exhaustive hostile-entry
+validation. Decoded records expose arrays, and each gate retains mutable
+scratch that requires serialized use or separate gates. Original compile
+flags, stable image bytes and consistent producer analyses remain caller and
+producer requirements. The current gate does not consume stored trigram or
+matcher-state admission metadata.
+
+Residency scanning emits conservative source-defined classifications and a
+sidecar, not a change in GC, lifetime or SWT retention semantics. The separate
+three annotation sources and hash-pinned custody copies are outside the
+nineteen-owner package denominator. Historical receipts keep their original
+scope; builds, tests, examples, scripts, custody checks and measurements in
+this documentation pass are NOT_RUN. Whole-package behavior, project/runtime
+acceptance, resource/platform qualification and receiving phases remain open.
