@@ -9,6 +9,7 @@ import csv
 import hashlib
 import importlib.util
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -135,12 +136,23 @@ class M3NumberSpaceExportTest(unittest.TestCase):
             field_map = ROOT / "m3/lexicon/synexia-precompute-field-map.tsv"
             output_a = root / "export-a"
             output_b = root / "export-b"
-            first = EXPORT.export(
-                projected_manifest, records_path, output_a,
-                "https://github.com/hsoliwal/com.synexia", SOURCE_REVISION, field_map)
-            second = EXPORT.export(
-                projected_manifest, records_path, output_b,
-                "https://github.com/hsoliwal/com.synexia", SOURCE_REVISION, field_map)
+            exporter = ROOT / "m3/runtime-integration/export-synexia-lexicon.py"
+
+            def run_export(output: Path, records: Path = records_path) -> dict[str, object]:
+                completed = subprocess.run([
+                    sys.executable, "-B", str(exporter),
+                    "--source-manifest", str(projected_manifest),
+                    "--records", str(records),
+                    "--output", str(output),
+                    "--source-repository", "https://github.com/hsoliwal/com.synexia",
+                    "--source-commit", SOURCE_REVISION,
+                    "--field-map", str(field_map),
+                ], cwd=ROOT, check=True, capture_output=True, text=True)
+                self.assertIn("SYNEXIA_M3JDK_LEXICON_EXPORT_PASS", completed.stdout)
+                return json.loads((output / "synexia.export.json").read_text(encoding="utf-8"))
+
+            first = run_export(output_a)
+            second = run_export(output_b)
             self.assertEqual(EXPECTED_COUNT, first["counts"]["source_records"])
             self.assertEqual(EXPECTED_COUNT, first["counts"]["image_records"])
             self.assertEqual(1, first["counts"]["source_families"])
@@ -181,6 +193,12 @@ class M3NumberSpaceExportTest(unittest.TestCase):
                     "source_revision": SOURCE_REVISION,
                 }, json.loads(row["precompute_payload"]))
 
+            verifier = ROOT / "m3/runtime-integration/verify-synexia-lexicon.py"
+            for output in (output_a, output_b):
+                completed = subprocess.run(
+                    [sys.executable, "-B", str(verifier), str(output)],
+                    cwd=ROOT, check=True, capture_output=True, text=True)
+                self.assertIn("SYNEXIA_M3JDK_LEXICON_VERIFY_PASS", completed.stdout)
             verified = VERIFY.verify(output_a)
             expected_units = sum(
                 len(str(value).encode("utf-16-le", "surrogatepass")) // 2
@@ -209,10 +227,17 @@ class M3NumberSpaceExportTest(unittest.TestCase):
             duplicate_path.write_text(
                 "\n".join(rows + [rows[1]]) + "\n", encoding="utf-8")
             rejected_output = root / "duplicate-output"
-            with self.assertRaisesRegex(ValueError, "duplicate source/record identity"):
-                EXPORT.export(
-                    projected_manifest, duplicate_path, rejected_output,
-                    "https://github.com/hsoliwal/com.synexia", SOURCE_REVISION, field_map)
+            rejected = subprocess.run([
+                sys.executable, "-B", str(exporter),
+                "--source-manifest", str(projected_manifest),
+                "--records", str(duplicate_path),
+                "--output", str(rejected_output),
+                "--source-repository", "https://github.com/hsoliwal/com.synexia",
+                "--source-commit", SOURCE_REVISION,
+                "--field-map", str(field_map),
+            ], cwd=ROOT, capture_output=True, text=True)
+            self.assertNotEqual(0, rejected.returncode)
+            self.assertIn("duplicate source/record identity", rejected.stderr)
             self.assertFalse(rejected_output.exists())
 
 
