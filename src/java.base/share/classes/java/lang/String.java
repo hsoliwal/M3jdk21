@@ -3414,6 +3414,12 @@ public final class String
         if (storage != null && isConservativeLiteralRegex(regex)) {
             return storage.contentEquals(regex);
         }
+        if (storage != null) {
+            int decision = M3StringRegexDp.tryMatch(storage, regex);
+            if (decision != M3StringRegexDp.UNKNOWN) {
+                return decision == M3StringRegexDp.MATCH;
+            }
+        }
         return Pattern.matches(regex, this);
     }
 

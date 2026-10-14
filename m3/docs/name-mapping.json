@@ -3,6 +3,16 @@
   "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
     {
+      "source": "com.synexia.indexstring.MIndexRegexProgram / LeetCode 10 and GeeksForGeeks dot-star matching taxonomy",
+      "target": "java.lang.M3StringRegexDp and java.lang.String.matches",
+      "status": "additive bounded M3JDK21 runtime candidate; JDK product qualification pending",
+      "source_role": "Synexia automaton is implementation reference; LeetCode/GeeksForGeeks are problem-contract taxonomy only, not imported solutions",
+      "recipe": "com.synexia.rewrite.M3Jdk21RegexDotStarDp",
+      "target_rule": "For existing M3-backed String.matches receivers only, admit validated ASCII literal/dot/star full-match patterns with no flags, captures or supplementary input; use two rolling DP rows and ephemeral token states, delegate all refused cases unchanged to java.util.regex.Pattern; preserve owner+coordinate and JNI shadow boundaries",
+      "precompute_disposition": "bounded ephemeral compiled token lane only; persistent image/caching must use existing internal regex precompute owners after separate evidence",
+      "gate": "Java 21, real jtreg M3 on/off/CompactStrings, OpenRewrite fixed point and source refusal, full java.util.regex compatibility, source-first promotion, CPU/heap benchmark"
+    },
+    {
       "source": "com.synexia.indexstring.IndexStringTuple",
       "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
       "target": "java.lang.M3StringTuple",
