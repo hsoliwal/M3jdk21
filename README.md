@@ -35,6 +35,25 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 | **The actual runtime** — OpenJDK-derived Java 21 sources and M3 integration areas | [JDK sources](src/) · [M3 runtime integration](m3/runtime-integration/) |
 | **Release discipline** — what is admitted, tested, measured or still exploratory | [Release evidence](m3/release/README.md) · [Machine-readable contract](m3/release/release-contract.json) |
 
+## Developer reading and verification routes
+
+Start with the route you are changing; these are different artifacts and evidence scopes.
+
+| Task | Entry point | What it establishes |
+| --- | --- | --- |
+| Build the separate text foundation | [M3 module guide](m3/README.md#build-and-test) | A stock-Java module and fixture tests, not a replacement JDK |
+| Build or inspect the modified runtime | [Native build guide](m3/docs/native-build.md) and [runtime integration](m3/runtime-integration/README.md) | A matched Java/HotSpot image is required; feature gates remain explicit |
+| Trace String ownership or JNI | [Backing contract](doc/mindex-string-backing.md) and [JNI ingress/egress](m3/docs/mindex-jni-string-ingress.md) | Canonical owners, compatibility copies and native pointer lifetimes |
+| Work on separate collections | [Collection module](m3/collections/README.md) | Explicit library APIs; this does not replace `java.util` |
+| Port or document a donor enhancement | [Contributor checklist](CONTRIBUTING.md) and [canonical porting invariant](m3/docs/m3jdk21-porting-invariant.md) | Recipe authority, exact provenance and target acceptance |
+| Run upstream tests | [OpenJDK testing guide](doc/testing.md) | Harness configuration and test selection; presence of a workflow is not a passing run |
+
+The receiving order remains **String → arrays → collections → AST/compiler → remaining families**.
+Documentation, copied fixtures and successful donor tests do not advance that order. Read the
+[current String phase packet](m3/synexia-import/current-full-borrow/STRING_PHASE.md) alongside
+its machine-readable gate records. Historical guides retain their original evidence scope;
+use the current source and exact-commit results to determine what is available.
+
 ## Architecture at a glance
 
 ```mermaid

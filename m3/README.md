@@ -1,6 +1,11 @@
 # M3 immutable text foundation — stage P0
 
-This draft adds an independently built Apache-2.0 module alongside the pinned OpenJDK 21 tree. It does **not** modify `java.lang.String`, HotSpot, the installed JDK, or existing MIndex/MatIndex code. It is an additive storage substrate, not a String replacement or a compatibility facade.
+This section describes the separately built P0 foundation, not the entire repository's
+current runtime. Building this module does **not** modify `java.lang.String`, HotSpot,
+the installed JDK, or existing MIndex/MatIndex code. It is an additive storage substrate,
+not a String replacement or a compatibility facade. The repository also contains a
+separate [modified-runtime candidate](runtime-integration/README.md); use a complete
+matched image and its own gates for that route.
 
 Original contributions: Hitesh Soliwal <hsoliwal@gmail.com>. OpenJDK retains its existing licenses; see `NOTICE` and `LICENSE` for this separate subtree. No unresolved-license donor sources or external dictionary were imported.
 

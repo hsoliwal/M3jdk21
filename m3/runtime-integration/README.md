@@ -10,6 +10,20 @@ replace the system JDK. The flag is `-XX:+UnlockExperimentalVMOptions
 -XX:+UseM3StringStorage`; it forces interpreter mode. Compiled mode, CDS, JFR,
 JVMCI and dedup remain unsupported while enabled. Flag off remains the default.
 
+## Current-source navigation
+
+Use [the backing contract](../../doc/mindex-string-backing.md#reading-the-current-source)
+for the owner/range model and [JNI ownership](../docs/mindex-jni-string-ingress.md)
+for acquire/release behavior. The build and platform limitations are collected in
+[the native build guide](../docs/native-build.md). Historical pins and replay commands
+below retain their original scope; an old runtime patch is not an installer for an
+arbitrarily newer checkout.
+
+Before replaying or promoting a successor, run its source/recipe gates and reconcile
+[the current String phase map and gates](../synexia-import/current-full-borrow/STRING_PHASE.md).
+No source inspection, copied proof snapshot or successful donor test establishes a
+full matched-runtime pass. The documentation update adds no new runtime test result.
+
 ## Source custody and existing owners
 
 - Official upstream: jdk-21+35, `890adb6410dab4606a4f26a942aed02fb2f55387`.
@@ -57,10 +71,17 @@ file only after both child VMs have mapped it, then verify content after GC.
 After VM bootstrap, trusted/array/charset/builder/copy constructors admit content
 to MIndex storage before publishing final String fields. A shared hit retains its
 mapped scalar and no temporary constructor payload array. Equal live local misses
-share the canonical immutable Compact-String array. Local and tuple tables hold
-weak references, with queued metadata cleanup during admission. This is not a
-fixed total-memory budget: metadata scales with live atoms/tuples and pending
-cleanup. The finite mapped lexicon remains owned for the VM's lifetime.
+reuse canonical native atom storage through `M3StringPool`; they do not retain a
+canonical Compact-String payload array. `M3StringAtom.local` copies compact input to
+native storage, and `String.m3AdmitNative` replaces an admitted JNI construction
+shadow with the empty VM-layout sentinel. Local and tuple tables hold
+weak references, with queued metadata cleanup during admission. The current pool bounds multi-unit local native-byte admission with
+`m3.string.pool.maxBytes` (default `Runtime.maxMemory()`) and canonical tuple
+retention with `m3.string.pool.maxTuples` (default 1,048,576 entries). A refused
+local admission uses the caller's flat fallback; reaching the tuple retention cap
+can leave a composition uncanonicalized. This is not a fixed total-process-memory
+budget: mapped storage, the non-refusing single-unit lane, metadata, compatibility
+shadows and other VM allocations remain separate accounting surfaces. The finite mapped lexicon remains owned for the VM's lifetime.
 
 Two-reference `+`, `concat`, eligible general invokedynamic concat recipes,
 `substring`, bounded `repeat` and bounded `String.join` compose scalar/range tuples.
@@ -75,8 +96,9 @@ canonical metadata later. They cannot discard those arrays retroactively.
 Empty Strings may keep the ordinary empty representation. General recipes linked
 before activation and large join/repeat paths retain explicit contiguous fallbacks.
 There is no claim that every concat shape or every consumer remains unmaterialized.
-Other byte-array consumers use a separate descriptor cache. `toCharArray` traverses
-atoms directly into its required result, without allocating an extra byte cache.
+For an admitted descriptor, `String.value()` delegates to `M3String.materialize()`
+and obtains an explicit compatibility shadow; `M3String` does not cache that array.
+Public copy boundaries retain their required mutable-result semantics.
 
 VM readers acquire the volatile descriptor. Native UTF-8 conversions retain #5's
 no-scratch-allocation buffer paths. JNI critical acquisition always copies while
