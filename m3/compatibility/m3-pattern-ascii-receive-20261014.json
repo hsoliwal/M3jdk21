@@ -1,0 +1,21 @@
+{
+  "schema": "M3_REGEX_RECEIVER_V1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_baseline": "d5abed865bd47c4dd5ad78e95704348fe2095ed2",
+  "recipe": "com.synexia.rewrite.M3PatternAsciiReceive20261014",
+  "recipe_task": "synexia-openrewrite-recipes/tasks/m3-pattern-ascii-receive-20261014",
+  "target_owner": "java.util.regex.M3PatternQuery.BooleanPlan",
+  "target_source_sha256": "599f7f5a36e5454a401baa2a0d1853594915a162d32bcd827a6c8b5b471de430",
+  "source_disposition": "TARGET_OWNED_PORT; algorithm/precompute strategy adapted onto existing JDK predicates; no donor body copied",
+  "native_disposition": "TEST_ONLY_JNI_ORACLE; no production native dispatch",
+  "runtime_dependency_on_synexia": false,
+  "promotion_status": "HOLD_FULL_TARGET_GATES",
+  "naming_fragment": "m3/docs/name-mapping.d/m3-pattern-ascii-frontier.json",
+  "verification_boundaries": [
+    "exact M3PatternQuery and real target dependencies may be patch-module qualified on stock Java21",
+    "source-built M3JDK21 with canonical M3String/HotSpot/JIT/GC/CDS not qualified by that scoped proof",
+    "Maven/OpenRewrite SDK, global provenance and mapping-fragment reduction are separate gates"
+  ]
+}
