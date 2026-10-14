@@ -44,22 +44,40 @@ public final class M3LexiconPrecompute {
                                      String targetLanguage, String sourceFingerprint,
                                      int[] translatedTokenIds) {
             this(lexiconFingerprint, sourceLanguage, targetLanguage, sourceFingerprint,
-                    translatedTokenIds, translatedTokenIds == null ? 0 : translatedTokenIds.length);
+                    translatedTokenIds, (Integer) null);
         }
 
         public TranslationProjection(String lexiconFingerprint, String sourceLanguage,
                                      String targetLanguage, String sourceFingerprint,
                                      int[] translatedTokenIds, int mappedTokenCount) {
+            this(lexiconFingerprint, sourceLanguage, targetLanguage, sourceFingerprint,
+                    translatedTokenIds, Integer.valueOf(mappedTokenCount));
+        }
+
+        private TranslationProjection(String lexiconFingerprint, String sourceLanguage,
+                                      String targetLanguage, String sourceFingerprint,
+                                      int[] translatedTokenIds, Integer expectedMappedTokenCount) {
             this.lexiconFingerprint = text(lexiconFingerprint, "lexiconFingerprint");
             this.sourceLanguage = text(sourceLanguage, "sourceLanguage");
             this.targetLanguage = text(targetLanguage, "targetLanguage");
             this.sourceFingerprint = text(sourceFingerprint, "sourceFingerprint");
             Objects.requireNonNull(translatedTokenIds, "translatedTokenIds");
             this.translatedTokenIds = translatedTokenIds.clone();
-            for (int tokenId : this.translatedTokenIds) nonNegative(tokenId, "translated token id");
-            if (mappedTokenCount < 0 || mappedTokenCount > this.translatedTokenIds.length)
-                throw new IllegalArgumentException("mappedTokenCount outside projection");
-            this.mappedTokenCount = mappedTokenCount;
+            int derivedMappedTokenCount = 0;
+            for (int tokenId = 0; tokenId < this.translatedTokenIds.length; tokenId++) {
+                int translatedTokenId = this.translatedTokenIds[tokenId];
+                nonNegative(translatedTokenId, "translated token id");
+                if (translatedTokenId != tokenId) derivedMappedTokenCount++;
+            }
+            if (expectedMappedTokenCount != null) {
+                if (expectedMappedTokenCount < 0
+                        || expectedMappedTokenCount > this.translatedTokenIds.length)
+                    throw new IllegalArgumentException("mappedTokenCount outside projection");
+                if (expectedMappedTokenCount != derivedMappedTokenCount)
+                    throw new IllegalArgumentException(
+                            "mappedTokenCount does not match changed token IDs");
+            }
+            this.mappedTokenCount = derivedMappedTokenCount;
         }
 
         public String lexiconFingerprint() { return lexiconFingerprint; }

@@ -46,6 +46,24 @@ public final class M3TranslationReceiverMapTest {
                 "com.m3.text.SharedLexiconPrecomputeCatalog$TranslationIdentity") != null);
         check(Class.forName("com.m3.text.M3LanguageGrammarSupport") != null);
 
+        int[] mixedProjectionIds = {0, 17, 2, 31};
+        com.m3.text.M3LexiconPrecompute.TranslationProjection derivedCount =
+                new com.m3.text.M3LexiconPrecompute.TranslationProjection(
+                        "lex-3", "en", "fr", "source-3", mixedProjectionIds);
+        check(derivedCount.mappedTokenCount() == 2);
+        com.m3.text.M3LexiconPrecompute.TranslationProjection explicitCount =
+                new com.m3.text.M3LexiconPrecompute.TranslationProjection(
+                        "lex-3", "en", "fr", "source-3", mixedProjectionIds, 2);
+        check(explicitCount.mappedTokenCount() == 2);
+        boolean rejectedInconsistentMappedCount = false;
+        try {
+            new com.m3.text.M3LexiconPrecompute.TranslationProjection(
+                    "lex-3", "en", "fr", "source-3", mixedProjectionIds, 4);
+        } catch (IllegalArgumentException expected) {
+            rejectedInconsistentMappedCount = true;
+        }
+        check(rejectedInconsistentMappedCount);
+
         List<String> fieldMap = Files.readAllLines(
                 Path.of("lexicon/synexia-precompute-field-map.tsv"),
                 StandardCharsets.UTF_8);
