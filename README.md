@@ -37,6 +37,8 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 
 ## Developer reading and verification routes
 
+For a hands-on source tour and command cheat sheet, see the [first-session guide](m3/docs/first-session-guide.md).
+
 Start with the route you are changing; these are different artifacts and evidence scopes.
 
 | Task | Entry point | What it establishes |
