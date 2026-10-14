@@ -119,6 +119,16 @@ jobs:
             --packet "$packet" \
             --runner "$RUNNER_TEMP/jep423"
 
+      - name: 4b - Bootstrap source-vendored Maven DAG dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Build pinned upstream source artifacts before resolving source-coordinate dependencies.
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml -DskipTests install
+          # Build/install migration, A3, and DAG modules in reactor dependency order.
+          # This is preparation only; focused G1/JNI/JFR tests and promotion gates stay intact.
+          mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am -DskipTests install
+
       - name: 5 - Prove scoped recipe DAG before source mutation
         shell: bash
         run: |
