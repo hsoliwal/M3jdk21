@@ -182,7 +182,7 @@ public final class M3ItemReferenceScan {
             if (cn.superName != null) superOf.putIfAbsent(cn.name, cn.superName);
             if (has(cn.invisibleAnnotations, TRANSIENT) || has(cn.visibleAnnotations, TRANSIENT)) annotatedTransient.add(cn.name);
             for (MethodNode m : cn.methods) {
-                String key = cn.name + "." + m.name;
+                String key = cn.name + "." + m.name + m.desc;
                 if (has(m.invisibleAnnotations, RETAINS) || has(m.visibleAnnotations, RETAINS)) retainingMethods.add(key);
                 if (has(m.invisibleAnnotations, BEHAVIOUR_ONLY) || has(m.visibleAnnotations, BEHAVIOUR_ONLY)) behaviourMethods.add(key);
             }

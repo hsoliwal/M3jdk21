@@ -55,4 +55,50 @@ class M3ItemReferenceScanTest {
         assertEquals(h, M3ItemReferenceScan.siteKey("org/eclipse/swt/examples/X", "paint",
                 "(Lorg/eclipse/swt/events/PaintEvent;)V", 17));
     }
+
+    private static Map<String, String> classifications() throws IOException {
+        M3ItemReferenceScan scan = new M3ItemReferenceScan();
+        for (String name : new String[] {"FakeItem", "FakeTable", "ItemUsers"}) {
+            scan.hierarchy(bytes("com/m3/compiletime/fixture/" + name));
+        }
+        scan.closeTransientSet();
+        scan.sites("test", "fixture", bytes("com/m3/compiletime/fixture/ItemUsers"));
+        Map<String, String> result = new HashMap<>();
+        for (String[] row : scan.rows) result.put(row[3], row[9] + ":" + row[10]);
+        return result;
+    }
+
+    @Test
+    void requireNonNullReturnedAliasesKeepTheirFieldAndReturnEscapes() throws IOException {
+        Map<String, String> rows = classifications();
+        for (String name : new String[] {"requireAlias", "requireMessageAlias", "requireSupplierAlias"}) {
+            assertEquals("RETAINS:FIELD", rows.get(name), name + rows);
+        }
+        assertEquals("RETAINS:RETURN", rows.get("requireReturnAlias"), rows.toString());
+    }
+
+    @Test
+    void returnedAliasCastAndLocalCopiesKeepTheirEscape() throws IOException {
+        Map<String, String> rows = classifications();
+        assertEquals("RETAINS:FIELD", rows.get("requireCastAlias"), rows.toString());
+        assertEquals("BEHAVIOUR_ONLY:-", rows.get("requireBehaviour"), rows.toString());
+    }
+
+    @Test
+    void behaviourAnnotationDoesNotAuthorizeAnotherOverload() throws IOException {
+        Map<String, String> rows = classifications();
+        assertEquals("UNKNOWN:ARG_UNKNOWN", rows.get("overloadCall"), rows.toString());
+    }
+
+    @Test
+    void retainingAnnotationDoesNotClassifyAnotherOverload() throws IOException {
+        Map<String, String> rows = classifications();
+        assertEquals("UNKNOWN:ARG_UNKNOWN", rows.get("retainingOverloadCall"), rows.toString());
+    }
+
+    @Test
+    void otherNullHelpersRemainUnknown() throws IOException {
+        Map<String, String> rows = classifications();
+        assertEquals("UNKNOWN:ARG_UNKNOWN", rows.get("differentNullHelper"), rows.toString());
+    }
 }
