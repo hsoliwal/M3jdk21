@@ -20,6 +20,10 @@ snapshot, and the scheduler compares size and membership against the already
 unique output list. The extra metadata-check payload copy is eliminated.
 Defensive copying remains on construction and public data access.
 
+A second additive method, `BulkExecution.output(name)`, defensively materializes just one
+requested primitive array. It leaves unrelated output planes unmaterialized; `outputs()`
+retains its original full-snapshot semantics.
+
 ## Proof obligations
 
 - Exact source-sealed recipe replay, fixed point, drift refusal
