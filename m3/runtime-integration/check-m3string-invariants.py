@@ -57,6 +57,7 @@ native_encoding_c = read("test/jdk/java/lang/String/nativeEncoding/libstringPlat
 arguments = read("src/hotspot/share/runtime/arguments.cpp")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
 matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
+restricted_dp = read("src/java.base/share/classes/java/lang/M3StringRestrictedRegexDp.java")
 
 # M3String must remain owner + coordinate only.
 instance_fields = re.findall(
@@ -495,6 +496,36 @@ if '"getChars", "(II[CI)V"' not in char_shadow.group("body"):
     fail("M3 char shadow does not bulk-fill through M3String.getChars")
 if "CallVoidMethodA" not in byte_shadow.group("body") or "CallVoidMethodA" not in char_shadow.group("body"):
     fail("M3 JNI shadows lost single bulk dispatch")
+
+# Restricted regex DP is a full-match-only M3 String lane for the proven lowercase-ASCII
+# literal/dot/postfix-star subset. Unsupported syntax/text must fall through to Pattern.matches.
+for fragment in [
+    "private static final int CACHE_SLOTS = 64;",
+    "private static final int MAX_PATTERN_UNITS = 8_192;",
+    "WeakReference<M3StringOwner>",
+    "static long maximumRetainedPrimitiveBytes()",
+    "boolean[] previous = new boolean[tokens.length + 1];",
+    "boolean[] current = new boolean[tokens.length + 1];",
+    "catch (OutOfMemoryError unavailable)",
+]:
+    if fragment not in restricted_dp:
+        fail(f"M3 restricted regex DP boundary missing: {fragment}")
+for forbidden in [
+    r"\bString\s+\w+\s*;",
+    r"\bchar\[\]\s+\w+\s*;",
+    r"\bbyte\[\]\s+\w+\s*;",
+    r"\bMatcher\s+\w+\s*;",
+    r"\bPattern\s+\w+\s*;",
+]:
+    if re.search(forbidden, restricted_dp):
+        fail(f"M3 restricted regex DP retains forbidden payload/engine: {forbidden}")
+for fragment in [
+    "M3StringRestrictedRegexDp.tryMatches(storage, regex)",
+    "restricted != M3StringRestrictedRegexDp.UNSUPPORTED",
+    "return Pattern.matches(regex, this);",
+]:
+    if fragment not in string:
+        fail(f"String.matches restricted-DP fallback boundary missing: {fragment}")
 
 # Regex TQ integration is candidate-only and deliberately narrow. Literal find/search may
 # reject proven absence, but anchored match/lookingAt and case-insensitive literal semantics stay
@@ -1119,6 +1150,7 @@ for required_gate in [
     "M3StringPrecomputeSearchTest.java",
     "M3StringPositionPrecomputeTest.java",
     "M3StringInternTest.java",
+    "M3StringRestrictedRegexDpTest.java",
     "M3StringLiteralSplitTest.java",
     "nativeEncoding/StringPlatformChars.java",
     "M3TQFactsTest.java",
