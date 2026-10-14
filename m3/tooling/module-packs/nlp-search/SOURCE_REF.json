@@ -9,11 +9,30 @@
   "qualification": "Local Linux Java21 full-source/API/behavior/CLI/eight-JMOD and isolated receiver passed",
   "phase_advanced": false,
   "pending": [
-    "Full JDK build/jtreg",
-    "Full upstream suites",
-    "Full Synexia reactor/strict admission",
+    "Full Synexia reactor and strict admission",
+    "Full M3JDK21 configure/make/jtreg",
+    "Complete upstream test suites and other distribution modules",
     "Other platforms",
-    "Existing mixed literal String receiver CI failure"
+    "Target descriptor Maven source-artifact bootstrap",
+    "Existing mixed-literal String gate",
+    "Existing repository workflow-catalog discrepancies"
   ],
-  "license": "Apache/embedded OpenNLP and Lucene notices; SLF4J MIT; first-party integration Apache-2.0"
+  "license": "Apache/embedded OpenNLP and Lucene notices; SLF4J MIT; first-party integration Apache-2.0",
+  "previous_receipt": {
+    "target_commit": "f9b3a0ce84dcdbd0cc75df956def7710ac5d04fd",
+    "path": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
+    "git_blob": "e65dc6621efbedc64c76f4eaba8511342ad56f51"
+  },
+  "source_restoration_commit": "ebff714f37756273594086226098137d0a37b30a",
+  "source_restoration_pr": "https://github.com/hsoliwal/com.synexia/pull/11374",
+  "recovery_receipt": {
+    "source_repository": "hsoliwal/com.synexia",
+    "source_commit": "ebff714f37756273594086226098137d0a37b30a",
+    "source_pr": "https://github.com/hsoliwal/com.synexia/pull/11374",
+    "path": "synexia-openrewrite-recipes/crates/m3-nlp-search/recovery-20261014/RECEIVER.json",
+    "sha256": "d3f508d4332b0a6f6879146f44080fb1cbf630f3947aa98ae444f8595cc79cf4",
+    "git_blob": "15113bd40279c9c0dbcf5b1707e174ae629b78b3"
+  },
+  "historical_receipt_scope": "canonical_commit and file_receipt retain the original full-tool handoff. Subsequent naming-map/UTF-8/control changes are recorded by the recovery receipt and text-tools/SOURCE_REF.json.",
+  "current_source_qualification": "Full tools rebuilt from restored Synexia source; API, 20 unchanged Apache tests before/after, CLI, training/reload/inference, disk index/reopen/query, and eight-JMOD image passed. Current engines requalified with the same sealed outputs."
 }

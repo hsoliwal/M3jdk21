@@ -504,7 +504,14 @@
       "receiver": "m3/tooling/module-packs/text-tools",
       "source_revision_receipt": "m3/tooling/module-packs/text-tools/SOURCE_REF.json",
       "target_rule": "Opt-in fork SDK extension; preserve all Java SE names/contracts; no java.base replacement or phase advancement.",
-      "license": "Apache-2.0 first-party only; OpenJDK and third-party rights retained"
+      "license": "Apache-2.0 first-party only; OpenJDK and third-party rights retained",
+      "internal_optimization_owners": [
+        "jdk.m3.text.Canonical",
+        "jdk.m3.text.TextLine",
+        "jdk.m3.text.Utf8Segments"
+      ],
+      "optimization_source_commit": "36de32dcf1431e0ce1a43e8bd2e6ee6ac8c240cc",
+      "optimization": "Bounded UTF-8 digest chunks and allocation-free UTF-8 byte counting; one canonical String input; original public SDK APIs preserved."
     },
     {
       "source": "com.synexia.unix4jm3.io",
