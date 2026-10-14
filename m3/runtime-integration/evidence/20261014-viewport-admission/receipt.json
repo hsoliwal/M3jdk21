@@ -5,7 +5,7 @@
   "status": "DONOR_QUALIFIED_TARGET_CONSUMER_PENDING",
   "source": {
     "repository": "hsoliwal/com.synexia",
-    "commit": "3b1adfcd716580554c1181825068e1ce06996539",
+    "commit": "12350d12e034cb04f08eba2e56cf3c2606cbab44",
     "pr": 11103,
     "recipe": "com.synexia.rewrite.M3HugeJsonViewportTextBudgetRecipe",
     "java_crate": "m3-huge-json-viewport-text-budget-20261014-v3",
@@ -14,8 +14,12 @@
     "evidence": "synexia-openrewrite-recipes/recipes/huge-json-viewport-20261014/QUALIFICATION.md",
     "artifact_git_blobs": [
       {
+        "path": ".github/workflows/m3-huge-json-viewport-pressure-20261013.yml",
+        "sha": "e45d4451298f1a5ce04637cbd15e7e19f67059eb"
+      },
+      {
         "path": "docs/M3-SCALE/provenance/M3_FILE_PROVENANCE.tsv",
-        "sha": "60a8784503c22dfd253b26db4a057a9d794a0449"
+        "sha": "5f32acd01fe39a868955276f7c17b338119e2aad"
       },
       {
         "path": "synexia-mindex/viewer/src/main/java/com/synexia/mindex/viewer/MIndexHugeJsonIndex.java",
@@ -43,11 +47,11 @@
       },
       {
         "path": "synexia-openrewrite-recipes/recipes/huge-json-viewport-20261014/QUALIFICATION.md",
-        "sha": "86c24dbe8439262f8d22978d7e05d236e03d53eb"
+        "sha": "ebe19325d1e361bf3d8f0a0a6c337e519b5f7ea3"
       },
       {
         "path": "synexia-openrewrite-recipes/recipes/huge-json-viewport-20261014/README.md",
-        "sha": "34ab75cb089ea7b8a055a0dc8544f2075d12befa"
+        "sha": "d61e26b4734063885fce653446d72092a8e8d9ff"
       },
       {
         "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HugeJsonViewportTextBudgetRecipe.java",
@@ -90,6 +94,18 @@
         "sha": "32f66ac0c918b1dbf07965a789165ca8e01fb962"
       },
       {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-huge-json-viewport-ci-20261014/manifest.tsv",
+        "sha": "99a181be41d64ac67bcaa7791d6cca56377dd83f"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-huge-json-viewport-ci-20261014/pre-viewport.yml.txt",
+        "sha": "be86237da56d47950a870924209f2c804a4a990a"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-huge-json-viewport-ci-20261014/viewport.yml.txt",
+        "sha": "e45d4451298f1a5ce04637cbd15e7e19f67059eb"
+      },
+      {
         "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-huge-json-viewport-handoff-20261014/manifest.tsv",
         "sha": "f010f0d3eecb4eeb9aa31b3b7d322a81c3e5c443"
       },
@@ -103,13 +119,14 @@
       },
       {
         "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3HugeJsonViewportAdmissionTest.java",
-        "sha": "29ae7e5ab9a7fddc7a47101c036a831fb7686c2e"
+        "sha": "4bb1ddfa8030623319ccc696ebc878dd98f06e4e"
       },
       {
         "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3HugeJsonViewportTextBudgetRecipeTest.java",
         "sha": "f7b05a383be58a7adb8b832670c638dc23ee7ef8"
       }
-    ]
+    ],
+    "ci_crate": "m3-huge-json-viewport-ci-20261014"
   },
   "target": {
     "repository": "hsoliwal/M3jdk21",
@@ -120,7 +137,7 @@
     "new_runtime_sources": 0
   },
   "executed": {
-    "outer_recipe_junit": 6,
+    "outer_recipe_junit": 7,
     "baseline_behavior_junit": 16,
     "candidate_behavior_junit": 19,
     "production_java_sources": 5,
@@ -128,11 +145,12 @@
     "public_protected_api": "IDENTICAL",
     "javac_h_headers": "IDENTICAL",
     "counterexample": "Restore old viewport call site; exact two expected failures, including payload ClosedChannelException",
-    "source_provenance_paths": 24,
-    "source_git_blob_readback_paths": 24,
+    "source_provenance_paths": 28,
+    "source_git_blob_readback_paths": 28,
     "replay": "Named recipe, serial/reversed source order, two workers, exact fixed point, drift/missing/duplicate refusal; materialized replay passes",
     "target_map_preservation": "Every prior entry/policy preserved; one pending family entry appended",
-    "target_policy": "Existing validate_receiving_sequence passes, STRING active; full receiver NOT_RUN"
+    "target_policy": "Existing validate_receiving_sequence passes, STRING active; full receiver NOT_RUN",
+    "source_ci": "Existing viewport workflow is one additional actual SDK Result; v1/v2 lineage retained, v3 current-source seals, new profile execution and actual 5+2 JUnit receipts. Seven local guard checks include obsolete-v2 refusal, current pass, receipts and current/historical drift refusals."
   },
   "allocation": {
     "workload": "256 rejected 50,000-byte optional preview reads after 256 warmup reads",
@@ -148,5 +166,6 @@
     "Matched JDK build/jtreg/UI thread, identity and lifecycle proof",
     "Target cold/warm CPU and heap/native/process-memory qualification"
   ],
-  "boundary": "Synexia retains reusable recipe and implementation ownership. Public JDK/Swing naming and String-first phase order are unchanged. No Synexia runtime dependency or generic automatic object swapping is introduced."
+  "boundary": "Synexia retains reusable recipe and implementation ownership. Public JDK/Swing naming and String-first phase order are unchanged. No Synexia runtime dependency or generic automatic object swapping is introduced.",
+  "hosted_observation": "Initial target head foundation workflow run 38509727460 failed with zero jobs; it supplied no runtime/test execution evidence. Hosted qualification remains unverified."
 }
