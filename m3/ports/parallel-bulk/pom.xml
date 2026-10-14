@@ -47,7 +47,7 @@
     </plugin>
     <plugin>
       <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.15.0</version>
-      <configuration><release>21</release><proc>none</proc><fork>true</fork>
+      <configuration><source>21</source><target>21</target><proc>none</proc><fork>true</fork>
         <compilerArgs>
           <arg>--patch-module</arg><arg>java.base=${project.build.directory}/bulk-patch-classes</arg>
           <arg>--add-exports</arg><arg>java.base/jdk.internal.vm.parallel=ALL-UNNAMED</arg>
