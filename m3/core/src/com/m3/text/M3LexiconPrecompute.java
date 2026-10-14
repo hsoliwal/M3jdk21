@@ -44,19 +44,20 @@ public final class M3LexiconPrecompute {
                                      String targetLanguage, String sourceFingerprint,
                                      int[] translatedTokenIds) {
             this(lexiconFingerprint, sourceLanguage, targetLanguage, sourceFingerprint,
-                    translatedTokenIds, (Integer) null);
+                    translatedTokenIds, 0, true);
         }
 
         public TranslationProjection(String lexiconFingerprint, String sourceLanguage,
                                      String targetLanguage, String sourceFingerprint,
                                      int[] translatedTokenIds, int mappedTokenCount) {
             this(lexiconFingerprint, sourceLanguage, targetLanguage, sourceFingerprint,
-                    translatedTokenIds, Integer.valueOf(mappedTokenCount));
+                    translatedTokenIds, mappedTokenCount, false);
         }
 
         private TranslationProjection(String lexiconFingerprint, String sourceLanguage,
                                       String targetLanguage, String sourceFingerprint,
-                                      int[] translatedTokenIds, Integer expectedMappedTokenCount) {
+                                      int[] translatedTokenIds, int expectedMappedTokenCount,
+                                      boolean deriveMappedTokenCount) {
             this.lexiconFingerprint = text(lexiconFingerprint, "lexiconFingerprint");
             this.sourceLanguage = text(sourceLanguage, "sourceLanguage");
             this.targetLanguage = text(targetLanguage, "targetLanguage");
@@ -69,7 +70,7 @@ public final class M3LexiconPrecompute {
                 nonNegative(translatedTokenId, "translated token id");
                 if (translatedTokenId != tokenId) derivedMappedTokenCount++;
             }
-            if (expectedMappedTokenCount != null) {
+            if (!deriveMappedTokenCount) {
                 if (expectedMappedTokenCount < 0
                         || expectedMappedTokenCount > this.translatedTokenIds.length)
                     throw new IllegalArgumentException("mappedTokenCount outside projection");
@@ -84,6 +85,7 @@ public final class M3LexiconPrecompute {
         public String sourceLanguage() { return sourceLanguage; }
         public String targetLanguage() { return targetLanguage; }
         public String sourceFingerprint() { return sourceFingerprint; }
+        /** Number of vocabulary positions whose translated ID differs from its source ID. */
         public int mappedTokenCount() { return mappedTokenCount; }
         public int translatedTokenIdAt(int index) {
             return translatedTokenIds[Objects.checkIndex(index, translatedTokenIds.length)];
