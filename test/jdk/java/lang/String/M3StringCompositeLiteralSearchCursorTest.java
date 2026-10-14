@@ -138,5 +138,4 @@ public class M3StringCompositeLiteralSearchCursorTest {
         check(present.indexOf(pattern) == presentOracle,
                 "long composite match survives trigram prefilter");
     }
-    }
 }
