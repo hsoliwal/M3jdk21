@@ -14,6 +14,8 @@ Source: [M3String](../../src/java.base/share/classes/java/lang/M3String.java), [
 
 Constraints: preserve Java UTF-16 behavior, equality/hash/order, owner lifetime, bootstrap, native acquire/release and all public String contracts. Array projections do not become a second canonical spelling store. Tests under `test/jdk/java/lang/String` and `m3/runtime-integration/tests` are located; no test was run in this pass. Full method-by-method error, GC and VM-layout review remains open.
 
+For member-level detail at the reviewed public snapshot, continue with [bootstrap String ownership and admission](bootstrap-string-ownership.md) and [String operations and facts](bootstrap-string-contracts.md). These bounded references cover six foundational source bodies and selected String/native boundaries; the remaining sibling bodies, whole-package review and runtime/GC qualification stay open.
+
 ## java.util.regex: candidate pruning and exact matching
 
 `M3PatternQuery` derives conservative trigram requirements from the existing compiled Pattern node tree. Negative necessary-condition facts may prune; positive results still require the authoritative regex implementation. The source explicitly refuses unsupported or observably unsafe cases rather than inventing another parser.

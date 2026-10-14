@@ -63,3 +63,5 @@ For literal recognition, regex/String facts, finite trial matrices and candidate
 The [precompute production-source coverage ledger](precompute-source-coverage.md) links all 23 production Java files, distinguishes public owners from internal dependencies and records remaining method/test/runtime gaps.
 
 For the isolated CPU-tool DAG, see the [CPU-tool plan, image and runtime reference](cpu-tool-precompute-reference.md): immutable declarations and prepared KMP state, versioned image/TSV validation, all 13 binary operators, snapshot/materialization boundaries, digest receipts, heap admission, and the optional Java/JNI lexical parity route.
+
+For bootstrap String internals in `java.base`, read [ownership and admission](bootstrap-string-ownership.md) for native/mapped atoms, exact tuple-layout reuse, weak cleanup and refusal, then [String operations and facts](bootstrap-string-contracts.md) for descriptor-backed operations, facts, encoding and stream boundaries. Both are source-reviewed implementation references with execution gates still NOT_RUN.

@@ -108,3 +108,29 @@ The [precompute production-source ledger](precompute-source-coverage.md) reconci
 ## CPU-tool precompute contract review
 
 The [CPU-tool plan, image and runtime reference](cpu-tool-precompute-reference.md) adds complete source-body review of four public CPU-tool owners and their package-private `M3CpuToolNativeSignals` adapter at `13a70cdbbe7b0abc75df18c78e1ca044e0c74240`. It covers every declared public method/type, record projections, graph preparation versus subject-time work, canonical image/version checks, TSV/compiler effects, all 13 byte operators, ownership/encoding/indexing, budget and cancellation limits, hash-versus-exactness boundaries, and native loading/copying. CPU self-test/JUnit, lexical Java/JNI/C, native parity/check and build sources were read; documented assertions and missing gates remain distinct. Examples, builds, tests, policy/recipe checks and performance qualification are NOT_RUN. This is documentation coverage of five package bodies, not runtime promotion, whole-repository completion or operating-system-wide interning.
+
+## Bootstrap String ownership contract review
+
+The [bootstrap String ownership and admission reference](bootstrap-string-ownership.md) adds full source-body contract coverage of package-private `java.lang.M3StringOwner`, `M3StringAtom`, `M3StringPool` and `M3StringTuple`, including their declared constructors/methods, state and nested helpers, plus the bounded `M3String` descriptor/admission boundary. The source pin is `ed53dc8ab4fb6fd93ad1ed0c762546bdda475bb2`. It distinguishes exact content from tuple layout identity, local budget refusal from allocation failure, the non-refusing dedicated unit lane from ordinary one-unit input, weak native cleanup from immediate freeing, logical coder from mapped physical width/endian, lexicon snapshot lifetime, owner-local facts and JNI shadow boundaries. Five relevant test bodies and selected native/String callers were source-reviewed. Builds, tests, policy/recipe checks, performance and matched-runtime qualification are NOT_RUN; whole P01 remains PARTIAL.
+
+### P01 inherited package-documentation correction, 2026-10-14
+
+This is additive evidence; the original inventory snapshot and its `native_package_doc=false` field remain unchanged. The original calculation selected M3-prefixed filenames and therefore excluded inherited package documentation.
+
+- Original inventory pin: `278b221e8365ebeb6095a3a5643b38a0564258b5`
+- Audit pin: `ed53dc8ab4fb6fd93ad1ed0c762546bdda475bb2`
+- `physical_package_info_present`: true
+- `physical_package_info_path`: `src/java.base/share/classes/java/lang/package-info.java`
+- Blob at both pins: `882a610c1a08e37cbea6c7b49dc23f8672237b53`
+- `m3_specific_package_documentation_present`: false
+
+The [unchanged inherited package-info](https://github.com/hsoliwal/M3jdk21/blob/ed53dc8ab4fb6fd93ad1ed0c762546bdda475bb2/src/java.base/share/classes/java/lang/package-info.java) describes general `java.lang` and character encodings, with no M3-specific prose. Physical presence does not close M3 method coverage or whole-package documentation. This correction records a selection error, not a newly added package file or new runtime acceptance.
+### Bootstrap String-facing contracts: bounded source review, 2026-10-14
+
+The [bootstrap String-facing reference](bootstrap-string-contracts.md) covers the complete public-target bodies of `java.lang.M3String` and `M3StringFacts` at `ed53dc8ab4fb6fd93ad1ed0c762546bdda475bb2`. It maps all 120 explicitly declared constructor/method entries in those two files: 80 methods and one constructor directly in `M3String`, 12 methods and three constructors in its cursor/spliterator helpers, and 23 methods plus one constructor in `M3StringFacts`. Fields are accounted for separately, including the descriptor's two instance fields and the 23 primitive instance fact fields. This is internal implementation documentation, not a new public API or inherited-member audit.
+
+The companion [ownership reference](bootstrap-string-ownership.md) covers the four owner/atom/pool/tuple bodies. Together the two pages provide six complete production-body reviews, selected `String`/`System`/HotSpot/JNI boundaries, ten complete Java test-source reviews and the modified-UTF-8 native test helper. The new contract reference distinguishes UTF-16 coordinates from code points, negative candidate gates from exact comparison, caller output from retained canonical storage, standard from modified UTF-8, and public String exception/identity behavior from trusted helpers. The current generic-Charset lineage bullet is narrowly corrected to `CharBuffer.wrap(this)`; historical provenance is preserved.
+
+The source tests cover finite fact-composition/window/seam cases, equality gates, stream traversal, shadows and logical overflow. Their limits remain explicit: mixed-representation labels do not prove every operand stays flat; the modified-UTF-8 test scalarizes its verification inputs, and its standalone long-valued overflow oracle is not oversized runtime or tuple/range JNI cache proof. All builds, repository/native tests, recipes, policy verifiers, benchmarks and runtime qualification are **NOT_RUN** for this documentation pass.
+
+`M3CodeTextFacts`, `M3CodeTextSignalBatch`, `M3StringCodePointPrecompute`, `M3StringPositionPrecompute`, `M3StringRegexDp` and `M3StringSearchPrecompute` remain **DECLARATIONS_ONLY**. Their full cache, budget, concurrency, fallback and consumer contracts still need separate review. The `jdk.internal.mindex` StringBacking family is independent. Whole `java.lang`, `java.base`, GC/JIT/CDS/SA/native-platform and repository completion remain open; no receiving phase or runtime acceptance status advances.

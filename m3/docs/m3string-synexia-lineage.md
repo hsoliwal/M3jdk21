@@ -83,8 +83,8 @@ M3JDK now treats the ordinary Java arrays exactly as compatibility/output projec
   UTF-16 units directly, including split pairs and JDK replacement semantics for unpaired surrogates;
 - US-ASCII and ISO-8859-1 allocate from canonical code-point geometry and emit one replacement byte
   per unmappable code point;
-- other Charsets receive one caller-owned UTF-16 projection and the stock `CharsetEncoder`
-  replacement contract;
+- other Charsets read the `M3String` CharSequence through `CharBuffer.wrap(this)`, applying the
+  `CharsetEncoder` replacement contract and returning an independently allocated byte result;
 - no produced `byte[]` or `char[]` becomes canonical M3 String storage.
 
 ### No-replacement byte paths
