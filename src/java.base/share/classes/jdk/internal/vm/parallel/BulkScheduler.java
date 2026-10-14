@@ -18,6 +18,8 @@
 package jdk.internal.vm.parallel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -80,15 +82,18 @@ public final class BulkScheduler implements BulkExecutor {
 
     @Override
     public BulkExecution execute(BulkTask task, Map<String, Object> values) {
-        Objects.requireNonNull(values, "values");
+        // Freeze name-to-object bindings before provider selection. Array/data payloads
+        // remain by reference: copying them here would defeat device-resident work.
+        Map<String, Object> bindings = Collections.unmodifiableMap(
+                new HashMap<>(Objects.requireNonNull(values, "values")));
         for (String input : task.inputs()) {
-            if (!values.containsKey(input) || values.get(input) == null) {
+            if (!bindings.containsKey(input) || bindings.get(input) == null) {
                 throw new IllegalArgumentException("missing input: " + input);
             }
         }
         Registration item = registration(task);
         BulkExecution execution =
-                Objects.requireNonNull(item.provider().execute(task, values), "provider result");
+                Objects.requireNonNull(item.provider().execute(task, bindings), "provider result");
         item.requireStable();
         if (!item.id().equals(execution.provider())) {
             throw new IllegalStateException("provider identity mismatch");
