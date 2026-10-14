@@ -48,6 +48,16 @@ public record BulkExecution(Map<String, Object> outputs, String provider, String
         return outputs.keySet();
     }
 
+    /**
+     * Materializes a single named output, without cloning unrelated output arrays.
+     *
+     * <p>Primitive arrays remain caller-owned defensive copies. Non-array references keep
+     * the pre-existing shallow-reference contract.</p>
+     */
+    public Object output(String name) {
+        return copyPrimitiveArray(outputs.get(Objects.requireNonNull(name, "name")));
+    }
+
     /** Returns defensive primitive-array views without transferring canonical result ownership. */
     @Override
     public Map<String, Object> outputs() {
