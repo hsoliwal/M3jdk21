@@ -1,0 +1,49 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tornado;
+
+import java.util.Map;
+import java.util.Objects;
+import java.util.regex.Pattern;
+import jdk.internal.vm.parallel.BulkTask;
+import uk.ac.manchester.tornado.api.TaskGraph;
+
+/** Host-reviewed binding for one exact bulk operation in the TornadoVM pipeline provider. */
+public record TornadoPipelineKernelBinding(
+        String operationId,
+        String contractRoot,
+        OutputFactory outputFactory,
+        TaskAppender taskAppender,
+        CpuKernel cpuKernel) {
+
+    private static final Pattern ID =
+            Pattern.compile("[A-Za-z0-9][A-Za-z0-9._-]{0,127}");
+    private static final Pattern SHA =
+            Pattern.compile("[0-9a-f]{64}");
+
+    public TornadoPipelineKernelBinding {
+        if (operationId == null || !ID.matcher(operationId).matches()) {
+            throw new IllegalArgumentException("operationId");
+        }
+        if (contractRoot == null || !SHA.matcher(contractRoot).matches()) {
+            throw new IllegalArgumentException("contractRoot");
+        }
+        outputFactory = Objects.requireNonNull(outputFactory, "outputFactory");
+        taskAppender = Objects.requireNonNull(taskAppender, "taskAppender");
+        cpuKernel = Objects.requireNonNull(cpuKernel, "cpuKernel");
+    }
+
+    @FunctionalInterface
+    public interface OutputFactory {
+        Map<String, Object> allocate(BulkTask task, Map<String, Object> inputs);
+    }
+
+    @FunctionalInterface
+    public interface TaskAppender {
+        void append(TaskGraph graph, String taskName, BulkTask task, Map<String, Object> values);
+    }
+
+    @FunctionalInterface
+    public interface CpuKernel {
+        void execute(BulkTask task, Map<String, Object> values);
+    }
+}
