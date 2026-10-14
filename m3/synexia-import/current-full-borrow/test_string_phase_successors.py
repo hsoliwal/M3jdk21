@@ -51,8 +51,62 @@ class StringTargetSuccessorTest(unittest.TestCase):
         for target, row in receipts.items():
             path = phase.ROOT / target
             self.assertTrue(path.is_file(), target)
-            self.assertEqual(row["successor_git_blob"], phase.git_blob(path), target)
+            self.assertEqual(phase.current_successor_blobs(self.mapping())[target],
+                             phase.git_blob(path), target)
             phase.validate_successor_source(target, path.read_text(encoding="utf-8"))
+
+    def read_chain(self):
+        with phase.SUCCESSOR_CHAIN.open(encoding="utf-8", newline="") as handle:
+            return list(csv.DictReader(handle, delimiter="\t"))
+
+    def with_chain(self, changed, callback):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "candidate-string-successor-chain.tsv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=phase.SUCCESSOR_CHAIN_HEADER,
+                                        delimiter="\t", lineterminator="\n")
+                writer.writeheader()
+                writer.writerows(changed)
+            with patch.object(phase, "SUCCESSOR_CHAIN", path):
+                callback()
+
+    def test_first_source_chain_preserves_history_and_exact_identity(self):
+        historical = phase.approved_successors(self.mapping())
+        self.assertEqual("70d1d03c109126fdda36c54da21b484bbe368fd9",
+                         historical[phase.M3_STRING_PATH]["successor_git_blob"])
+        expected = phase.current_successor_blobs(self.mapping())
+        self.assertEqual("4fb87fd70ffe5c8d75d17db9c28b44bc9b574704",
+                         expected[phase.M3_STRING_PATH])
+        self.assertEqual(4, len(expected))
+
+    def test_chain_refuses_drift_ambiguity_reordering_and_promotion(self):
+        good = self.read_chain()
+        cases = []
+        cases.append(good[:0])
+        cases.append(good + [{
+            "schema": "M3JDK21_STRING_TARGET_EVOLUTION_V1",
+            "target_path": phase.M3_STRING_PATH,
+            "predecessor_git_blob": "4fb87fd70ffe5c8d75d17db9c28b44bc9b574704",
+            "successor_git_blob": "42399d411c1516a56a47dcdb10242960157b4677",
+            "synexia_pr": "11247",
+            "m3jdk_pr": "864",
+            "state": "SOURCE_CANDIDATE_NOT_RUNTIME_ACCEPTED",
+        }])  # Future-stage receipt cannot be admitted to this first-stage target.
+        cases.append(good + [good[-1].copy()])
+        for field, replacement in [
+            ("target_path", "src/java.base/share/classes/java/lang/FakeM3String.java"),
+            ("predecessor_git_blob", "0" * 40),
+            ("successor_git_blob", "f" * 40),
+            ("synexia_pr", "0"),
+            ("m3jdk_pr", "0"),
+            ("state", "RUNTIME_ACCEPTED"),
+        ]:
+            mutated = [row.copy() for row in good]
+            mutated[0][field] = replacement
+            cases.append(mutated)
+        for mutated in cases:
+            self.with_chain(mutated, lambda: self.assertRaises(
+                ValueError, phase.current_successor_blobs, self.mapping()))
 
     def test_duplicate_successor_refuses(self):
         rows = self.read_rows()
