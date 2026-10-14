@@ -51,3 +51,9 @@ Open gaps: full provider-order/refusal contract reconciliation, every operation/
 ## Compiler placement is a policy boundary, not a fabricated package
 
 The naming policy reserves compiler-specific counterparts such as com.sun.tools.javac.m3. The pinned source tree does not gain such a package merely because it appears in a design mapping. Use the actual `jdk.compiler` descriptor and package inventory; any proposed compiler owner requires an actual source path and target evidence before it is documented as implemented.
+
+## Bootstrap String precompute: additive source-review coverage
+
+The [bootstrap precompute reference](bootstrap-string-precompute.md) completes source-body contract review of the six P01 sibling files previously listed as declarations-only: code-text facts/batch, search, position, code-point geometry and regex DP. Read the [twelve-owner source map](bootstrap-string-source-coverage.md) for exact physical-file identities and remaining gates. This updates source-file documentation coverage only; the earlier sampled/partial caller, whole-package, native and VM/GC qualifications remain open, and repository execution by this authoring pass is NOT_RUN. Hosted CI remains separate exact-commit evidence.
+
+The separate [Pattern query and Boolean-plan reference](bootstrap-pattern-query-contracts.md) covers the complete P02 M3PatternQuery adapter and selected Pattern/Matcher/String integration boundaries. It distinguishes region-bound candidate pruning, the compiled-node full-match plan and the separate String-local dot/star helper; whole inherited-regex and runtime qualification remain open.

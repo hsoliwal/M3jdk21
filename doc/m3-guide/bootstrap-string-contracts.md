@@ -610,3 +610,7 @@ matched-runtime tests remain open beyond this bounded source reference.
 [test-shadows]: https://github.com/hsoliwal/M3jdk21/blob/ed53dc8ab4fb6fd93ad1ed0c762546bdda475bb2/test/jdk/java/lang/String/M3StringJniShadowLifetimeTest.java
 [test-overflow]: https://github.com/hsoliwal/M3jdk21/blob/ed53dc8ab4fb6fd93ad1ed0c762546bdda475bb2/test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java
 [string-escapes]: https://github.com/hsoliwal/M3jdk21/blob/ed53dc8ab4fb6fd93ad1ed0c762546bdda475bb2/src/java.base/share/classes/java/lang/String.java#L4889-L4896
+
+## Additive precompute review
+
+The later [bootstrap precompute reference](bootstrap-string-precompute.md) covers all six sibling bodies identified as declarations-only in this page's original bounded review. It details each method/type, weak owner/range caches, exact and approximate decisions, budgets, localized fallback and the separate provider boundary. The [twelve-owner source map](bootstrap-string-source-coverage.md) reconciles these reviews without promoting them to whole-java.lang, public API or runtime qualification.

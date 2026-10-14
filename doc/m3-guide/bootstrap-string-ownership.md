@@ -297,3 +297,7 @@ All rows below are public target files at the stated snapshot; these blob identi
 | `src/java.base/share/classes/java/lang/M3String.java` (bounded sections here) | `42399d411c1516a56a47dcdb10242960157b4677` |
 
 **Status: source-reviewed ownership reference; all execution/qualification stages in this documentation pass NOT_RUN.**
+
+## Additive precompute review
+
+For the six code-text/search/position/code-point/regex-DP siblings beyond this ownership review, see [bootstrap precompute contracts](bootstrap-string-precompute.md). The [twelve-owner source map](bootstrap-string-source-coverage.md) combines this page, the String/facts reference and that later source-body review. Weak cache ownership does not replace the canonical payload lifetime described here; source-file documentation coverage does not establish runtime or whole-package acceptance.
