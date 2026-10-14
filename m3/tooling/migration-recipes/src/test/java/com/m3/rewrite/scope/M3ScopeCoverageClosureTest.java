@@ -110,9 +110,30 @@ final class M3ScopeCoverageClosureTest {
                 "com.m3.rewrite.backport.M3Jep510KdfCandidateRecipe",
                 "com.m3.rewrite.backport.M3ReleaseJepAuthorityRepairRecipe",
                 "com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe",
-                "com.m3.rewrite.semantic.M3SemanticHashRecipe");
+                "com.m3.rewrite.semantic.M3SemanticHashRecipe",
+                "com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipe",
+                "com.m3.rewrite.a3.M3A3SerialFileWorkRecipe",
+                "com.m3.rewrite.backport.M3BulkExecutorGateRepairRecipe",
+                "com.m3.rewrite.backport.M3BulkExecutorNameMappingRecipe",
+                "com.m3.rewrite.backport.M3BulkExecutorPortRecipe",
+                "com.m3.rewrite.backport.M3BulkFreezeSourceBootstrapRecipe",
+                "com.m3.rewrite.backport.M3BulkLiveRegistrationRecoveryRecipe",
+                "com.m3.rewrite.backport.M3BulkOutputIsolationRecipe",
+                "com.m3.rewrite.backport.M3BulkOutputMetadataFastPathRecipe",
+                "com.m3.rewrite.backport.M3BulkRegistrationCiBootstrapRecipe",
+                "com.m3.rewrite.backport.M3BulkRegistrationFreezeReceiverRecipe",
+                "com.m3.rewrite.backport.M3BulkSchedulerProviderRecoveryRecipe",
+                "com.m3.rewrite.backport.M3BulkSchedulerRecoveryNameMappingRecipe",
+                "com.m3.rewrite.backport.M3BulkSchedulerRecoveryWorkflowRecipe",
+                "com.m3.rewrite.backport.M3ParallelBulkBridgeNameMappingRecipe",
+                "com.m3.rewrite.backport.M3ParallelBulkBridgeReceiverRecipe",
+                "com.m3.rewrite.backport.M3ParallelBulkCompilerRepairRecipe",
+                "com.m3.rewrite.backport.M3TornadoBulkAdapterMappingRecipe",
+                "com.m3.rewrite.backport.M3TornadoBulkAdapterPortRecipe",
+                "com.m3.rewrite.backport.M3TornadoBulkGeometryRepairReceiverRecipe",
+                "com.m3.rewrite.backport.M3TornadoProviderUpgradeReceiverRecipe");
 
-        assertEquals(10, com.synexia.rewrite.M3RecipeScopeRegistry.size());
+        assertEquals(16, com.synexia.rewrite.M3RecipeScopeRegistry.size());
         assertEquals(targetNames.size(), M3RecipeScopeRegistry.targetOverlaySize());
         assertEquals(
                 com.synexia.rewrite.M3RecipeScopeRegistry.size() + targetNames.size(),
@@ -128,7 +149,15 @@ final class M3ScopeCoverageClosureTest {
                 "com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe",
                 "com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe",
                 "com.synexia.rewrite.atom.M3PureIntConvergenceRecipe",
-                "com.synexia.rewrite.semantic.M3SemanticHashRecipe");
+                "com.synexia.rewrite.semantic.M3SemanticHashRecipe",
+                "com.synexia.rewrite.M3PureIntAtomizeRecipe",
+                "com.synexia.rewrite.M3PureIntInventoryRecipe",
+                "com.synexia.rewrite.M3PureIntPatternizeRecipe",
+                "com.synexia.rewrite.M3PureIntDocumentationRecipe",
+                "com.synexia.rewrite.M3PureIntConvergenceRecipe",
+                "com.synexia.rewrite.M3Jdk21FileConvergenceRecipe");
+        assertEquals(16, canonicalNames.size());
+        assertEquals(38, targetNames.size());
         for (String name : canonicalNames) {
             assertTrue(M3RecipeScopeRegistry.registered(name), name);
             assertNotNull(M3RecipeScopeRegistry.require(name), name);
@@ -156,6 +185,46 @@ final class M3ScopeCoverageClosureTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> M3RecipeScopeRegistry.require(M3ScopeCoverageClosureTest.class));
+    }
+
+
+    @Test
+    void bulkRecipeScopesEscalateWithActualJdkModuleBoundaries() {
+        List<String> bulkNames = List.of(
+                "com.m3.rewrite.backport.M3BulkExecutorGateRepairRecipe",
+                "com.m3.rewrite.backport.M3BulkExecutorNameMappingRecipe",
+                "com.m3.rewrite.backport.M3BulkExecutorPortRecipe",
+                "com.m3.rewrite.backport.M3BulkFreezeSourceBootstrapRecipe",
+                "com.m3.rewrite.backport.M3BulkLiveRegistrationRecoveryRecipe",
+                "com.m3.rewrite.backport.M3BulkOutputIsolationRecipe",
+                "com.m3.rewrite.backport.M3BulkOutputMetadataFastPathRecipe",
+                "com.m3.rewrite.backport.M3BulkRegistrationCiBootstrapRecipe",
+                "com.m3.rewrite.backport.M3BulkRegistrationFreezeReceiverRecipe",
+                "com.m3.rewrite.backport.M3BulkSchedulerProviderRecoveryRecipe",
+                "com.m3.rewrite.backport.M3BulkSchedulerRecoveryNameMappingRecipe",
+                "com.m3.rewrite.backport.M3BulkSchedulerRecoveryWorkflowRecipe",
+                "com.m3.rewrite.backport.M3ParallelBulkBridgeNameMappingRecipe",
+                "com.m3.rewrite.backport.M3ParallelBulkBridgeReceiverRecipe",
+                "com.m3.rewrite.backport.M3ParallelBulkCompilerRepairRecipe",
+                "com.m3.rewrite.backport.M3TornadoBulkAdapterMappingRecipe",
+                "com.m3.rewrite.backport.M3TornadoBulkAdapterPortRecipe",
+                "com.m3.rewrite.backport.M3TornadoBulkGeometryRepairReceiverRecipe",
+                "com.m3.rewrite.backport.M3TornadoProviderUpgradeReceiverRecipe");
+        assertEquals(19, bulkNames.size());
+        for (String name : bulkNames) {
+            M3RecipeScopePolicy policy = M3RecipeScopeRegistry.require(name);
+            assertTrue(policy.inferFromTargets(), name);
+            assertEquals(M3EditScope.MODULE, policy.minimumScope(), name);
+            assertEquals(M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
+                    policy.contractMode(), name);
+            assertEquals(M3EditScope.MODULE,
+                    policy.resolve(List.of("src/main/java/p/A.java")), name);
+            assertEquals(M3EditScope.MULTI_MODULE,
+                    policy.resolve(List.of(
+                            "src/java.base/share/classes/jdk/internal/vm/parallel/BulkTask.java",
+                            "src/java.logging/share/classes/java/util/logging/Logger.java")), name);
+            assertFalse(policy.fileLocalMechanical(List.of("src/main/java/p/A.java")), name);
+        }
     }
 
     @Test

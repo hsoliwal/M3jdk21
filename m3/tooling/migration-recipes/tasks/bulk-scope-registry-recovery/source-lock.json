@@ -1,0 +1,21 @@
+{
+  "schema": "M3JDK21_BULK_SCOPE_REGISTRY_PORT_V1",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_pr": 11149,
+  "canonical_head": "7aeabfbeb8f5e81ecee02eeae78a589d28c60fe0",
+  "canonical_recipe": "com.synexia.rewrite.M3Jdk21BulkScopeRecoveryRecipe",
+  "target_preimages": {
+    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java": "fc8a268b20bfa5a87f908784ab46e2f82be80e80f130fb0a2ab13c72a94e6285",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3ScopeCoverageClosureTest.java": "07ad7fe74c025f4d050dcec15088a9b9f8cecdf596e7091c83014bd4b63da266"
+  },
+  "target_postimages": {
+    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java": "788ca7be75a116feb3d2aec875e3f7c3aa21999b1e42d9395e7844b9cd7bbe3d",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3ScopeCoverageClosureTest.java": "b9681f920c9ccc5db241c01547d5c2a6df6867820f6f27f40cf3fea2ceef42b1"
+  },
+  "source_registrations": 16,
+  "target_registrations": 38,
+  "bulk_registrations": 19,
+  "state": "SOURCE_SEALED_PENDING_HOSTED_JUNIT",
+  "runtime_mutation": false,
+  "promotion_authority": false
+}

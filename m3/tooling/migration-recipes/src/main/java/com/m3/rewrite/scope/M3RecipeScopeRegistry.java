@@ -70,7 +70,64 @@ public final class M3RecipeScopeRegistry {
                     fixed(M3EditScope.PACKAGE)),
             Map.entry(
                     "com.m3.rewrite.a3.M3A3SerialFileWorkRecipe",
-                    fixed(M3EditScope.PACKAGE)));
+                    fixed(M3EditScope.PACKAGE)),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkExecutorGateRepairRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkExecutorNameMappingRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkExecutorPortRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkFreezeSourceBootstrapRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkLiveRegistrationRecoveryRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkOutputIsolationRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkOutputMetadataFastPathRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkRegistrationCiBootstrapRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkRegistrationFreezeReceiverRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkSchedulerProviderRecoveryRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkSchedulerRecoveryNameMappingRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BulkSchedulerRecoveryWorkflowRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3ParallelBulkBridgeNameMappingRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3ParallelBulkBridgeReceiverRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3ParallelBulkCompilerRepairRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3TornadoBulkAdapterMappingRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3TornadoBulkAdapterPortRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3TornadoBulkGeometryRepairReceiverRecipe",
+                    inferredModule()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3TornadoProviderUpgradeReceiverRecipe",
+                    inferredModule()));;
 
     private M3RecipeScopeRegistry() {}
 
@@ -124,6 +181,14 @@ public final class M3RecipeScopeRegistry {
     private static M3RecipeScopePolicy inferred() {
         return new M3RecipeScopePolicy(
                 M3EditScope.FILE,
+                M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
+                true);
+    }
+
+    /** Bulk and JDK receivers retain at least module authority, escalating with their targets. */
+    private static M3RecipeScopePolicy inferredModule() {
+        return new M3RecipeScopePolicy(
+                M3EditScope.MODULE,
                 M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
                 true);
     }
