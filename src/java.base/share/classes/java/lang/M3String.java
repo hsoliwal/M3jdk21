@@ -576,7 +576,7 @@ final class M3String implements CharSequence {
      * It resolves each contiguous visible scalar run once, not once per code unit.
      * Only canonical owners and primitive bounds are retained; no text or native pointer copy.
      */
-    private static final class CodeUnitCursor {
+    static final class CodeUnitCursor {
         private final M3String source;
         private M3StringOwner scalar;
         private int logicalBegin;

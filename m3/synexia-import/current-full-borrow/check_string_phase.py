@@ -34,6 +34,21 @@ EXPECTED_SUCCESSOR_PATHS = {
     "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
     "src/java.base/share/classes/java/lang/M3StringPool.java",
 }
+# Additive, candidate-only source chronology; historical four-row successor receipt remains immutable.
+SUCCESSOR_CHAIN = Path(__file__).with_name("string-target-successor-chain.tsv")
+SUCCESSOR_CHAIN_HEADER = [
+    "schema", "target_path", "predecessor_git_blob", "successor_git_blob",
+    "synexia_pr", "m3jdk_pr", "state",
+]
+M3_STRING_PATH = "src/java.base/share/classes/java/lang/M3String.java"
+# Each exact transition was independently observed at the named GitHub PR head.
+EXPECTED_STRING_CHAIN = (
+    ("70d1d03c109126fdda36c54da21b484bbe368fd9",
+     "4fb87fd70ffe5c8d75d17db9c28b44bc9b574704", "11220", "862"),
+    ("4fb87fd70ffe5c8d75d17db9c28b44bc9b574704",
+     "42399d411c1516a56a47dcdb10242960157b4677", "11247", "864"),
+)
+
 SUCCESSOR_MARKERS = {
     "src/java.base/share/classes/java/lang/M3String.java": (
         "private final M3StringOwner owner;",
@@ -158,6 +173,35 @@ def approved_successors(mapping_rows: list[dict[str, str]]) -> dict[str, dict[st
             + repr(sorted(set(received) - EXPECTED_SUCCESSOR_PATHS))
         )
     return received
+
+
+def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str]:
+    """Extend approved historical successors using an exact serial proof chain.
+
+    These are *candidate source identity* receipts, not runtime or phase acceptance.
+    Wrong source, wrong order, changed PR evidence, missing or extra steps fail closed.
+    """
+    historical = approved_successors(mapping_rows)
+    current = {target: row["successor_git_blob"] for target, row in historical.items()}
+    chain = load_tsv(SUCCESSOR_CHAIN, SUCCESSOR_CHAIN_HEADER)
+    if len(chain) != len(EXPECTED_STRING_CHAIN):
+        raise ValueError("String successor chain length drift")
+    for index, (step, expected) in enumerate(zip(chain, EXPECTED_STRING_CHAIN), start=1):
+        before, after, synexia_pr, m3jdk_pr = expected
+        if any(not step[field] for field in SUCCESSOR_CHAIN_HEADER):
+            raise ValueError(f"blank String successor chain field: {index}")
+        if (step["schema"] != "M3JDK21_STRING_TARGET_EVOLUTION_V1"
+                or step["target_path"] != M3_STRING_PATH
+                or step["predecessor_git_blob"] != before
+                or step["successor_git_blob"] != after
+                or step["synexia_pr"] != synexia_pr
+                or step["m3jdk_pr"] != m3jdk_pr
+                or step["state"] != "SOURCE_CANDIDATE_NOT_RUNTIME_ACCEPTED"):
+            raise ValueError(f"unreviewed String successor chain step: {index}")
+        if current[M3_STRING_PATH] != before:
+            raise ValueError(f"discontinuous String successor chain: {index}")
+        current[M3_STRING_PATH] = after
+    return current
 
 
 def validate_successor_source(path: str, source: str) -> None:
@@ -303,6 +347,7 @@ def main(argv: list[str]) -> int:
 
     rows = load_tsv(MAP, HEADER)
     successors = approved_successors(rows)
+    current_blobs = current_successor_blobs(rows)
     relations: set[str] = set()
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in HEADER):
@@ -336,7 +381,7 @@ def main(argv: list[str]) -> int:
             raise ValueError(f"target owner missing: {row['target_path']}")
         actual = git_blob(target)
         successor = successors.get(row["target_path"])
-        pinned = successor["successor_git_blob"] if successor else row["target_git_blob"]
+        pinned = current_blobs.get(row["target_path"], row["target_git_blob"])
         if actual != pinned:
             raise ValueError(
                 f"target owner drift: {row['target_path']} "
