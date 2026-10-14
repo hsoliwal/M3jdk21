@@ -50,6 +50,38 @@ public class BulkSchedulerTest {
         expect(IllegalStateException.class,
                 () -> new BulkScheduler(List.of(mismatchedIdentity()))
                         .execute(task(), Map.of("a", new int[4], "b", new int[4])));
+
+        snapshotInputsBeforeProviderSelection();
+    }
+
+
+    private static void snapshotInputsBeforeProviderSelection() {
+        int[] original = { 1, 2, 3, 4 };
+        java.util.Map<String, Object> caller = new java.util.HashMap<>();
+        caller.put("a", original);
+        caller.put("b", new int[] { 10, 20, 30, 40 });
+        // The old API allows unused null-valued entries. Preserve that boundary.
+        caller.put("optional", null);
+
+        BulkExecutorProvider adversarial = new BulkExecutorProvider() {
+            public String id() { return "stable"; }
+            public int priority() { return 50; }
+            public boolean supports(BulkTask task) {
+                caller.put("a", new int[] { 9, 9, 9, 9 });
+                return true;
+            }
+            public BulkExecution execute(BulkTask task, Map<String, Object> values) {
+                if (values.get("a") != original) throw new AssertionError("binding drift");
+                if (!values.containsKey("optional") || values.get("optional") != null)
+                    throw new AssertionError("extra nullable binding lost");
+                expect(UnsupportedOperationException.class,
+                        () -> values.put("a", new int[] { 8, 8, 8, 8 }));
+                return new BulkExecution(Map.of("c", new int[4]), id(), ROOT);
+            }
+        };
+        BulkExecution result = new BulkScheduler(List.of(adversarial))
+                .execute(task(), caller);
+        if (!result.provider().equals("stable")) throw new AssertionError("selected provider");
     }
 
     private static BulkTask task() {
