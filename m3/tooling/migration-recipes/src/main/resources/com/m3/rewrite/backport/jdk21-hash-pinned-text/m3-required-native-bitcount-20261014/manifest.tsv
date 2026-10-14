@@ -1,0 +1,6 @@
+.github/workflows/m3-parallel-native-bitcount.yml	ABSENT	7f0c29ae947d7941516fd76de412a0ab0ac93f1e7ab00b92f2a57ab0a434c53d	workflow.yml.txt
+m3/ports/parallel-bulk/native/m3_native_bitcount_jni.c	ABSENT	23942f5d57f1f849db66942e17b2551ffaba75bbcd0ecdabbea8d1c395508f7b	m3_native_bitcount_jni.c.txt
+m3/ports/parallel-bulk/verification/NATIVE_BITCOUNT.md	ABSENT	df2bbede1f231fefee1038bc240e33012528df0927b5dfdc5a4b1dd99f44007f	NATIVE_BITCOUNT.md.txt
+m3/ports/parallel-bulk/verification/verify-native-bitcount.sh	ABSENT	7145c090b0acb9354aeeec7138975c5dfe691cbc2feb30be3f03b6f38a69ea81	verify-native-bitcount.sh.txt
+m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-parallel-native-bitcount.yml	ABSENT	ac5c7661ec246348e570911f6b178c60af91093a5971f2c699fe4e9c97c61c65	receiver.yml.txt
+m3/tooling/migration-recipes/tasks/m3-parallel-native-bitcount-20261014/source-lock.json	ABSENT	75b6467391f15acf0d7160cb34bce9e269fc87c343c3f958ab04c5e753b32569	source-lock.json.txt
