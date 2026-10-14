@@ -1,0 +1,2 @@
+schema	target_path	predecessor_git_blob	successor_git_blob	synexia_pr	m3jdk_pr	state
+M3JDK21_STRING_TARGET_EVOLUTION_V1	src/java.base/share/classes/java/lang/M3String.java	70d1d03c109126fdda36c54da21b484bbe368fd9	4fb87fd70ffe5c8d75d17db9c28b44bc9b574704	11220	862	SOURCE_CANDIDATE_NOT_RUNTIME_ACCEPTED
