@@ -61,7 +61,7 @@ jobs:
           javac --release 21 -Xlint:all -Werror \
             --patch-module "java.base=$src" \
             -d "$out" "$src"/jdk/internal/vm/parallel/*.java
-          javac --release 21 -Xlint:all -Werror \
+          javac -Xlint:all -Werror \
             --patch-module "java.base=$out" \
             --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED \
             -d "$tests" \
