@@ -1,0 +1,19 @@
+{
+  "schema": "M3_FULL_TOOL_HANDOFF_1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "c49cca384837ebd9dc71b6141c71ab0bcb938d10",
+  "canonical_crate": "synexia-openrewrite-recipes/crates/m3-nlp-search",
+  "file_receipt": "synexia-openrewrite-recipes/crates/m3-nlp-search/RECEIVER_FILES.json",
+  "receiver": "m3/tooling/module-packs/nlp-search",
+  "scope": "Full source tool implementations; preserve upstream API/module identity; two qualified internal owner changes",
+  "qualification": "Local Linux Java21 full-source/API/behavior/CLI/eight-JMOD and isolated receiver passed",
+  "phase_advanced": false,
+  "pending": [
+    "Full JDK build/jtreg",
+    "Full upstream suites",
+    "Full Synexia reactor/strict admission",
+    "Other platforms",
+    "Existing mixed literal String receiver CI failure"
+  ],
+  "license": "Apache/embedded OpenNLP and Lucene notices; SLF4J MIT; first-party integration Apache-2.0"
+}

@@ -1,0 +1,179 @@
+{
+  "schema": "m3.text-jmods.receiver/1",
+  "source_runtime_base": "29da7f266f2b88fe175536318ae0d313ba058e7f",
+  "source_publication_parent": "aadce034b4dc0549568fe3eac9b7f47d51127e3b",
+  "target_parent": "134e84519e3eb3d75328527e3181c4cb5adbbe45",
+  "recipe_home": "synexia-openrewrite-recipes/crates/m3-text-jmods",
+  "canonical_source_commit": "bound by SOURCE_REF.json on target",
+  "license": "Apache-2.0 first-party; existing OpenJDK rights retained",
+  "phase_advanced": false,
+  "source_runtime_dependency": false,
+  "qualification": "LOCAL_LINUX_JAVA21_LINKED_IMAGE_PASS",
+  "files": {
+    "m3/docs/name-mapping.json": {
+      "sha256": "8dab4f5cda4e4e4aa6a68e0b5610d3604b6e2f462763c8ff062a85d492ad6e5c",
+      "git_blob": "bbebeeeb8c97241a9922f30e12e16696fe2a0c39",
+      "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014"
+    },
+    "m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java": {
+      "sha256": "db6625450e98eed094a19142370bcd7a064eb91322eab7cf8f8cf9bb2030417f",
+      "git_blob": "302a06c5a79ecb6fd26c988dcf1fb9147e9198e1",
+      "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014"
+    },
+    "m3/tooling/jmod-recipes/tools/jmod_pack.py": {
+      "sha256": "9f541885c4fd9e9e868c63af44e9d8bc10cb6d5ebcdb663bacc2a47320404b57",
+      "git_blob": "83b1483c6c5e6a39c519f82af603382914eed3e5",
+      "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014"
+    },
+    "m3/tooling/module-packs/text-tools/COVERAGE.json": {
+      "sha256": "1456736be0668da70674ebcd2fdccd4dd15a3937480804a0138185071657e90e",
+      "git_blob": "8c8bd6546f80ed92fb5123de52da67b1acb88194",
+      "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014"
+    },
+    "m3/tooling/module-packs/text-tools/README.md": {
+      "sha256": "5bfec9e72e48f134643dcc0109b09d5f94ebc94b32cf1267c9a55e7317961611",
+      "git_blob": "107484d9d58c09405df4299ba289d876b47cd501",
+      "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014"
+    },
+    "m3/tooling/module-packs/text-tools/build.py": {
+      "sha256": "8637d55ecec6cf05279ca3889bc588144b14dc66511f87d65cb7133d6b130530",
+      "git_blob": "95f0de231161102f086351d43df79f60650ee67d",
+      "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014"
+    },
+    "m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java": {
+      "sha256": "8033103404ef14c35e1fc0690ff8d604437c9e823bb314ec1fc909c6627383c2",
+      "git_blob": "f7b9ebf2aef0e9faea079a93220da75247fd8317",
+      "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014"
+    },
+    "m3/tooling/module-packs/text-tools/legal/LICENSE.txt": {
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "git_blob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014"
+    },
+    "m3/tooling/module-packs/text-tools/legal/NOTICE.txt": {
+      "sha256": "73bc2b626f41cc6fcd30f2b4b21be4f263ca91297686305acd532d309b378836",
+      "git_blob": "ba06103ea6f370085420f2ea453eb1370f2e6a55",
+      "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014"
+    },
+    "m3/tooling/module-packs/text-tools/native/m3textio.c": {
+      "sha256": "0ca900f14f730238d823bf292fe7e83c2d19cc187993489786b7509e07879797",
+      "git_blob": "c36401f622f2e1b49820921a402cc0c7e6ba46bd",
+      "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/FileTools.java": {
+      "sha256": "84d63fbef0792a2c4101c9e5ddab309e624f880ff17ec84b52e02db0818e7cd2",
+      "git_blob": "92f7ec740e5507e552d52a69fc007fe6d053bb1d",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.io/module-info.java": {
+      "sha256": "4c31699f42a5d28e42e90d67894d91492104ded8b0ed4e13c76239661f179c71",
+      "git_blob": "8f5a0fdd3ded2f828fd31440d89aca6596c97b83",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Atom.java": {
+      "sha256": "9719ae6bd5d1504223c6b556e24ede5c36163b10e83376b61d000e8a53db44fd",
+      "git_blob": "2f24a68f77a188c8cc2985599167e1332b7d40dd",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Binding.java": {
+      "sha256": "ea4363c34c5e4c1e474720c2c43e8f89d3b0dc26cbbdbe96b33d0dcc95980b7c",
+      "git_blob": "b1c40fa2e97c4d9fe21655863a413c79657136f9",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Canonical.java": {
+      "sha256": "fa465e1c50babfba2485d1bbcba1ec1657516c6ce2a9daaf76d9d35275bd4067",
+      "git_blob": "a1e581ce7799d317cbfb4fb50a5d298d0ff78ace",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Capability.java": {
+      "sha256": "d707d3af55d771cb59068443e7babd6c7e63cc493dbe9d2ff9ffa0f288eb9c8e",
+      "git_blob": "45a893df8edd36eaca54ef9ca3e3b65d07252ba0",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CommandCatalog.java": {
+      "sha256": "3ffaddf648bae5646827ef82c7c959c9932a9a2a0fcec610cf70653baf360ac3",
+      "git_blob": "2f4394ffdc75f0acb6ffc31f7a88aef744d4e683",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CoreDemo.java": {
+      "sha256": "b14cbf6752b639d0dce13e592010baec05315e49357f1bed959db8b6a6d6566c",
+      "git_blob": "2ae25882d2113f925881d5a0dbda22b5e4e57d20",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/ExecutionResult.java": {
+      "sha256": "8ce4198e81028fcf69a02b231841e74bacfc34c17ac720aa4931ef410de2f386",
+      "git_blob": "401545e7a875b3d377c98748992e0290978fda4e",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/FrameCollector.java": {
+      "sha256": "2fe6b2df6d9367a705030890dc0946f8efebd0ca52bb7167b1337aff81911e1c",
+      "git_blob": "93e6eb9212f979bc12fc80e574300cabb70a11b3",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Ids.java": {
+      "sha256": "4c9f81e83285925beccb49ebd48a96fd76a6f90360fee9f1edeba12a8962ee3f",
+      "git_blob": "84c258aa8e9be4e7d70af31d2c81ae5fd2783b41",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Limits.java": {
+      "sha256": "20280bb7a60caf402350296c1c776ffe22a4558559776f9517ff895a9993902b",
+      "git_blob": "0a33cf15f3b470da901112e7a745c51c7ae91b00",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3UnixRuntime.java": {
+      "sha256": "507291018a773488085ada9e7b7f8d56f2e9f015ce3385166324cce5d91e6096",
+      "git_blob": "0a8d6248c1844a4831673d14f366b00d3d2c2c7d",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Node.java": {
+      "sha256": "fa9fb6c2cf4a17fc3fa34002867332c726f1a9f833ec8f22c040698521842998",
+      "git_blob": "dbe4e68da1b69fa54778150f4385f2fa0e3e7e14",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Plan.java": {
+      "sha256": "e2bc4426f63a639b49f29dd7effc2d52e24fe3c0302230ad773387a410e81285",
+      "git_blob": "351d3d79c5dd19ea2dd27958d0c89d5b7cf043a7",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/PlanValidator.java": {
+      "sha256": "5dcacf367c97aeadacfe8f3198cf79832fee58a1a4d2d91a316ccd732e977540",
+      "git_blob": "4841ccae7fbc85155250331921e96860d72b9313",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Receipt.java": {
+      "sha256": "294bde7df4526bff8cc3b4dd00fa66e6be5d4397c5befcf2818776faec9ec10f",
+      "git_blob": "6a38aa066d901bfcfa5a6bb2ee2d57b691f22d84",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Registry.java": {
+      "sha256": "bcdb47abe614e5b0f3b534b2bf0d1d7823c68f20a3d7349c703bd67ca8771359",
+      "git_blob": "708ea2bec36e92e5a49c9f65ea5ebc6bbb25c37b",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/StepReceipt.java": {
+      "sha256": "2755641ffb46dfaff8d24e83a6493a341b3fa585e8d63c9dbbecb8ab0b58d800",
+      "git_blob": "c5604fb14da87c6c373939c25f0c5d92e7114f31",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextFrame.java": {
+      "sha256": "f43feb375643640ebaf3df027a86e747a89ebe8cf7ec29b8aff3ee9cee5c53c0",
+      "git_blob": "d3a7b9e68a9b642cf626414042a41acb5717a8f0",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextLine.java": {
+      "sha256": "5075697622105e07371cffb1bded3b143f7ca7053a568ef41a663ca34baf7392",
+      "git_blob": "69f1082a33a070f4f590a4fd09b11cc778f70201",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextTools.java": {
+      "sha256": "854030b58cbb310f2f231d80088ddf92c16f733d26e7cfa2eaeb744c31e1e7c6",
+      "git_blob": "3fdea3d900abecb9ec11a5c4a85731b8f4f68a19",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    },
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.text/module-info.java": {
+      "sha256": "1ea33c45db920e32c269dd85e41a5b0828498c607f5055b8a0d502180a304c40",
+      "git_blob": "0c8ef3979413149034488f3d7859603b7171f2d5",
+      "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe"
+    }
+  }
+}

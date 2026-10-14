@@ -1,0 +1,768 @@
+{
+  "schema": "m3.text-tools.coverage/1",
+  "attachment_sha256": "8a52676e95637464d0c3bd9f010c43c5aaa98aaa718623c680049aa12580d9a7",
+  "source_base": "29da7f266f2b88fe175536318ae0d313ba058e7f",
+  "target_base": "ee0a2eb03e95d43dca343dd987d29a7673f905e4",
+  "family_rows": [
+    {
+      "line": 15,
+      "family": "SAT / SMT solvers",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 16,
+      "family": "Constraint solvers / CSP",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 17,
+      "family": "ILP / LP / optimization",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 18,
+      "family": "Graph algorithms",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 19,
+      "family": "State machines / automata",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 20,
+      "family": "Petri nets",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 21,
+      "family": "Model checking",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 22,
+      "family": "Temporal logic engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 23,
+      "family": "Rule engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 24,
+      "family": "Decision tables / decision trees",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 25,
+      "family": "CEP engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 26,
+      "family": "Stream/window processors",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 27,
+      "family": "Query engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 28,
+      "family": "Dependency resolvers",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 29,
+      "family": "Schedulers",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 30,
+      "family": "Assignment/matching engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 31,
+      "family": "Planning algorithms",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 32,
+      "family": "Search/index engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 33,
+      "family": "Similarity engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 34,
+      "family": "Clustering",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 35,
+      "family": "Geometry/spatial engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 36,
+      "family": "Interval engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 37,
+      "family": "Parser generators",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 38,
+      "family": "Schema engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 39,
+      "family": "Type systems",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 40,
+      "family": "Symbolic execution",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 41,
+      "family": "Abstract interpretation",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 42,
+      "family": "Dataflow analysis",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 43,
+      "family": "Rewrite systems",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 44,
+      "family": "Unification engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 45,
+      "family": "Theorem/proof engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 46,
+      "family": "Hash/Merkle engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 47,
+      "family": "Event sourcing",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 48,
+      "family": "CRDTs",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 49,
+      "family": "Consensus/state replication",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 50,
+      "family": "Compression/delta engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 51,
+      "family": "Finite-difference/change detectors",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 52,
+      "family": "Workflow/BPM engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 53,
+      "family": "Transaction engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 54,
+      "family": "Simulation engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 55,
+      "family": "Physics/math engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 56,
+      "family": "Financial engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 57,
+      "family": "Calendar/time engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 58,
+      "family": "Version-control primitives",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 59,
+      "family": "Build systems",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 60,
+      "family": "Test generators from formal domains",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 61,
+      "family": "Fuzzers",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 62,
+      "family": "Protocol analyzers",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 63,
+      "family": "Binary/file format parsers",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 64,
+      "family": "Image/audio/video pipelines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 65,
+      "family": "OCR/NLP classical pipelines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 66,
+      "family": "Recommendation mathematics",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 67,
+      "family": "Game engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 68,
+      "family": "Behavior trees",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 69,
+      "family": "Blackboards",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 70,
+      "family": "Expert systems",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 71,
+      "family": "Provenance engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 72,
+      "family": "Policy engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 73,
+      "family": "Capability/security engines",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 74,
+      "family": "Rate-limit/backpressure controllers",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 75,
+      "family": "Cache admission/eviction algorithms",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 76,
+      "family": "Queueing/load-balancing algorithms",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 77,
+      "family": "Anomaly/statistical detectors",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 121,
+      "family": "Schema/contract tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 122,
+      "family": "Graph tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 123,
+      "family": "Set/algebra tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 124,
+      "family": "Statistical tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 125,
+      "family": "Similarity tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 126,
+      "family": "Search tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 127,
+      "family": "Compression tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 128,
+      "family": "Ordering tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 129,
+      "family": "Constraint solvers",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 130,
+      "family": "Code-structure tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 131,
+      "family": "Change tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 132,
+      "family": "Data-quality tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 133,
+      "family": "Temporal tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 134,
+      "family": "Spatial tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 135,
+      "family": "Parsing tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 136,
+      "family": "Ranking tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 137,
+      "family": "Provenance tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 138,
+      "family": "Verification tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 139,
+      "family": "Resource tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 140,
+      "family": "Scheduling tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 141,
+      "family": "Assembly tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 142,
+      "family": "Knowledge tools without LLMs",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 143,
+      "family": "Information-theoretic tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 144,
+      "family": "Optimization tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 145,
+      "family": "Consensus tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 146,
+      "family": "Recovery tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 147,
+      "family": "Filesystem tools",
+      "disposition": "BROADER_FAMILY_TARGET_REVIEW_PENDING",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    },
+    {
+      "line": 148,
+      "family": "Unix tool atoms",
+      "disposition": "BOUNDED_ATOMS_19_QUALIFIED",
+      "review_owner": "synexia-classic-tools/src/main/java/com/synexia/classictools/GpuToolEstateCatalog.java",
+      "note": "Catalogue presence is not whole-family implementation or JMOD delivery."
+    }
+  ],
+  "tool_contracts": [
+    {
+      "tool": "sort",
+      "module": "jdk.m3.text",
+      "contract": "Stable UTF-16 lexical order; reverse optional; normalize an unterminated line moved into the middle.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "uniq",
+      "module": "jdk.m3.text",
+      "contract": "Remove adjacent duplicate content, retaining the first line ending.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "comm",
+      "module": "jdk.m3.text",
+      "contract": "Sorted multiset merge into left-only/common/right-only frames; unsorted input refuses.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "join",
+      "module": "jdk.m3.text",
+      "contract": "Inner equijoin on first tab field; stable Cartesian duplicate multiplicity; bounded output.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "cut",
+      "module": "jdk.m3.text",
+      "contract": "Zero-based half-open Unicode code-point range clipped per line.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "paste",
+      "module": "jdk.m3.text",
+      "contract": "Row-wise fields with a literal separator, missing fields empty; output LF.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "tr",
+      "module": "jdk.m3.text",
+      "contract": "Literal Unicode scalar translation/deletion; short target repeats final scalar; no line-ending translation.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "xargs",
+      "module": "jdk.m3.text",
+      "contract": "One line per literal argument, explicit host callback; no shell or process launch; input plus prefix byte budget checked before callbacks.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "find",
+      "module": "jdk.m3.io",
+      "contract": "Bounded-depth filesystem walk without following directory symlinks; regex matches relative paths; lexical results.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "diff",
+      "module": "jdk.m3.text",
+      "contract": "Exact single full-file unified hunk for LF text, including final non-newline markers; not minimal/fuzzy diff.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "patch",
+      "module": "jdk.m3.text",
+      "contract": "Apply only that full-file format after exact preimage/header/count checks; no fuzzy or partial hunks.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "csplit",
+      "module": "jdk.m3.text",
+      "contract": "Partition before Java regex find matches, omit empty partitions; no implicit files.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "split",
+      "module": "jdk.m3.text",
+      "contract": "In-memory fixed-line partitions preserving input framing.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "fold",
+      "module": "jdk.m3.text",
+      "contract": "Unicode scalar width, not terminal display columns.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "nl",
+      "module": "jdk.m3.text",
+      "contract": "Explicit first/step and checked overflow; no unused final increment.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "tee",
+      "module": "jdk.m3.io",
+      "contract": "Stage UTF-8 beside destination, then move; replacement explicit; no crash-atomicity claim.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "mkfifo",
+      "module": "jdk.m3.io",
+      "contract": "POSIX JNI FIFO; checked permission bits, UTF-8 path and errno; Linux runtime qualified.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "shuf",
+      "module": "jdk.m3.text",
+      "contract": "Seeded Fisher-Yates shuffle; reproducible multiplicity and framing.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    },
+    {
+      "tool": "tsort",
+      "module": "jdk.m3.text",
+      "contract": "Lexically deterministic Kahn traversal; node/edge budgets, duplicate-edge suppression and cycle refusal.",
+      "status": "JAVA_JNI_LINKED_IMAGE_TESTED_LINUX_21"
+    }
+  ],
+  "external_donor": {
+    "repository": "tools4j/unix4j",
+    "commit": "0a127602907978efbff7ea297bd553274ba70a8e",
+    "license": "MIT",
+    "disposition": "EXISTING_ADAPTER_REFERENCE_ONLY; no donor implementation copied or external adapter execution claimed"
+  },
+  "limits": "Frame/graph budgets are not an arbitrary-Java CPU or process heap sandbox. Java regex/callback execution is not deadline bounded; filesystem traversal may inspect many unmatched paths."
+}
