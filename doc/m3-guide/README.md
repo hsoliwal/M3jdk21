@@ -49,3 +49,7 @@ For the linked-hash map/set family, see the [collection API and storage referenc
 For primitive long-to-long maps, see the [primitive and snapshot map reference](primitive-map-reference.md): differing insertion/replacement results, mutable tombstones and fail-fast traversal, immutable signed-key snapshots, copy/CAS costs, stream lifetime and bounded test evidence.
 
 For lexicon export identity, eager/lazy admission and derived-family scope, see the [lexicon catalog reference](lexicon-catalog-reference.md): source records versus physical coordinates, sidecar verification, close/retry behavior and typed precompute contracts.
+
+For packed code/regex features and candidate ranking, see the [precompute batch and similarity reference](precompute-batch-reference.md): stable-input obligations, packed lanes, heuristic versus exact facts, budget accounting, progress/cancellation, explicit native loading and JNI copying/lifetimes.
+
+For primitive long lists, stacks, queues and deques, see the [primitive sequence reference](primitive-sequence-reference.md): method aliases and empty results, capacity retention, callback partial effects, iterator versus spliterator mutation rules, batch defaults and polling progress limits.
