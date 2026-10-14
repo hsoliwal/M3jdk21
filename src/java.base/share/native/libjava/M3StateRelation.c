@@ -52,12 +52,10 @@ static void relation_error(JNIEnv *env, const char *type, const char *message) {
 JNIEXPORT jlongArray JNICALL
 Java_jdk_internal_mindex_M3StateRelation_composeNative(
     JNIEnv *env, jclass owner, jlongArray left, jlongArray right) {
-  jlong source_left[64];
-  jlong source_right[64];
-  jlong destination[64];
+  /* Reuse one JNI transfer lane; never type-pun jlong as uint64_t. */
+  jlong transfer[64];
   uint64_t lhs[64];
   uint64_t rhs[64];
-  uint64_t result[64];
   jsize states;
   jlongArray answer;
   (void) owner;
@@ -71,20 +69,21 @@ Java_jdk_internal_mindex_M3StateRelation_composeNative(
     relation_error(env, "java/lang/IllegalArgumentException", "invalid relation dimensions");
     return NULL;
   }
-  (*env)->GetLongArrayRegion(env, left, 0, states, source_left);
+  (*env)->GetLongArrayRegion(env, left, 0, states, transfer);
   if ((*env)->ExceptionCheck(env)) return NULL;
-  (*env)->GetLongArrayRegion(env, right, 0, states, source_right);
+  memcpy(lhs, transfer, (size_t) states * sizeof(uint64_t));
+  (*env)->GetLongArrayRegion(env, right, 0, states, transfer);
   if ((*env)->ExceptionCheck(env)) return NULL;
-  memcpy(lhs, source_left, (size_t) states * sizeof(uint64_t));
-  memcpy(rhs, source_right, (size_t) states * sizeof(uint64_t));
-  if (m3_state_relation_compose(lhs, rhs, result, (size_t) states) != 0) {
+  memcpy(rhs, transfer, (size_t) states * sizeof(uint64_t));
+  /* The existing kernel validates and stages every row before any aliased output write. */
+  if (m3_state_relation_compose(lhs, rhs, lhs, (size_t) states) != 0) {
     relation_error(env, "java/lang/IllegalArgumentException", "foreign relation state bits");
     return NULL;
   }
-  memcpy(destination, result, (size_t) states * sizeof(uint64_t));
+  memcpy(transfer, lhs, (size_t) states * sizeof(uint64_t));
   answer = (*env)->NewLongArray(env, states);
   if (answer == NULL) return NULL;
-  (*env)->SetLongArrayRegion(env, answer, 0, states, destination);
+  (*env)->SetLongArrayRegion(env, answer, 0, states, transfer);
   if ((*env)->ExceptionCheck(env)) return NULL;
   return answer;
 }
