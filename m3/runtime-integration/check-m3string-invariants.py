@@ -946,8 +946,8 @@ for fragment in [
     "IntStream codePointsStream()",
     "private static final class CharsSpliterator implements Spliterator.OfInt",
     "private static final class CodePointsSpliterator implements Spliterator.OfInt",
-    "Character.isLowSurrogate(source.charAt(mid))",
-    "Character.isHighSurrogate(source.charAt(mid - 1))",
+    "Character.isLowSurrogate(units.at(mid))",
+    "Character.isHighSurrogate(units.at(mid - 1))",
     "Character.toCodePoint(first, second)",
 ]:
     if fragment not in m3:
