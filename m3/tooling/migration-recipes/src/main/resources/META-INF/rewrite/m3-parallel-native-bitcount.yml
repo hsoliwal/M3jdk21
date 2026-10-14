@@ -1,0 +1,10 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3ParallelNativeBitCount
+version: 1.0.0
+displayName: Receive required JNI CPU bitcount provider
+description: Receive exact, bounded Java/C/JNI native CPU bitcount proof through canonical Synexia.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: m3-required-native-bitcount-20261014
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-required-native-bitcount-20261014
