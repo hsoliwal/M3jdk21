@@ -59,12 +59,12 @@ def main():
     version = run('01-java-version', [java_home / 'bin/java', '-version'])
     if 'version "21.' not in version and 'version "21"' not in version:
         raise SystemExit('The qualified baseline requires Java 21')
+    packet = json.loads((HERE / 'synexia-donation.json').read_text())
     manifest_name = packet.get('installed_source_manifest', 'qualification/installed-source-enum-set-20261008.tsv')
     manifest_relative = Path(manifest_name)
     if manifest_relative.is_absolute() or '..' in manifest_relative.parts:
         raise SystemExit('Invalid installed source manifest path')
     manifest = HERE / manifest_relative
-    packet = json.loads((HERE / 'synexia-donation.json').read_text())
     if digest(manifest) != packet['installed_source_manifest_sha256']:
         raise SystemExit('Installed source manifest drift; reconcile with canonical recipe before verifying')
     rows = [line.split('\t') for line in manifest.read_text().splitlines()
