@@ -89,6 +89,68 @@ For the separate runtime route, continue with the
 [JNI ingress/egress guide](mindex-jni-string-ingress.md). Never patch candidate
 `java.base` classes into an unrelated installed VM to simulate a matched build.
 
+## Deeper contract lab: coordinates, identity and allocation
+
+This lab stays in the independent text module. It is deliberately not a claim about
+`java.lang.String` layout or JNI. Read the methods linked above while working through
+these values on paper; the results below are derived from source, not captured output.
+
+Suppose a UTF16_LE piece owns the five code units in `"ABCDE"`:
+
+| Operation | Local offset | Length | Logical contents | Retained backing |
+| --- | --- | --- | --- | --- |
+| Original piece | 0 | 5 | ABCDE | 10 payload bytes |
+| `original.subSequence(1, 4)` | 1 | 3 | BCD | Same 10-byte backing |
+| That view's `subSequence(1, 2)` | 2 | 1 | C | Same 10-byte backing |
+
+The second subrange adds its start to the existing `codeUnitOffset`; it does not
+restart at the backing origin. `charAt(0)` on the final view addresses byte index
+`(2 + 0) << 1 = 4`. `charAt(1)` is out of range even though more backing exists.
+For LATIN1 the shift is zero and each unsigned byte supplies one code unit.
+
+### Three distinctions that prevent incorrect optimizations
+
+- **Identity is not content equality.** `storageIdentity()` identifies backing, not
+  a range. Two views can have the same identity and different contents. The inspected
+  piece classes do not override `equals`/`hashCode`; do not assume String-style
+  value equality or use backing identity alone as a content-cache key.
+- **Payload sharing is not zero object allocation.** `subSequence` constructs a new
+  handle. A join snapshots its input directory, allocates leaf/end arrays and flattens
+  nested directories. `flatten` and `toString` materialize text.
+- **Payload bytes are not total memory.** `retainedBackingBytes()` reports the local
+  backing array's length, excluding object headers and directory arrays. Summing it
+  across views double-counts shared backing; it is not a heap-profiler replacement.
+
+In `JoinedM3StringPiece`, cumulative exclusive `ends` support binary search in
+`charAt`. A join of `"AB"` and `"CDE"` has ends `[2, 5]`; index 2 belongs to
+the second leaf at local index 0. Its `subSequence(1, 4)` intersects each leaf and
+joins the surviving ranges. This is a concrete place to inspect off-by-one defects.
+Empty pieces are omitted. `Math.addExact` protects directory counts and accumulated
+length from integer overflow.
+
+### A focused debugging checklist
+
+| Symptom | Inspect first | Counterexample to preserve |
+| --- | --- | --- |
+| Wrong character after nested slicing | Offset accumulation and encoding shift in `LocalM3StringPiece` | A nonzero-offset view sliced again |
+| Wrong character at a join boundary | Binary search comparison against exclusive `ends` | First character of the second leaf |
+| Equal-looking pieces miss a map lookup | Object equality versus required value/coordinate semantics | Separate allocations containing the same characters |
+| “Tiny” view retains large memory | Strong backing reference and view lifetime | One-code-unit view kept after the original handle is dropped |
+| Logging allocates unexpectedly | `toString()` → `flatten()` | Repeated logging inside a hot loop |
+| Unicode result differs | UTF-16 code units versus code points | Surrogate halves split across a view boundary |
+
+Read-only searches from the checkout root:
+
+```sh
+git grep -n -e codeUnitOffset -e retainedBackingBytes -- m3/core/src/com/m3/text
+git grep -n -e checkFromToIndex -e addExact -- m3/core/src/com/m3/text
+git grep -n -e storageIdentity -e malformed -- m3/core/test/FoundationTest.java
+```
+
+When proposing a regression, state the violated contract and expected exception or
+code-unit sequence before changing implementation. Add cases through the owning
+source/recipe workflow; this documentation does not alter tests or qualify a fix.
+
 ## Troubleshooting by evidence scope
 
 - **Wrong Java selected:** inspect `"$M3_JDK/bin/java" -version` for the foundation;
