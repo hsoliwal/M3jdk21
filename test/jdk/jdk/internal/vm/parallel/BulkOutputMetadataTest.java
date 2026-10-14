@@ -42,6 +42,19 @@ public class BulkOutputMetadataTest {
             throw new AssertionError("read boundary");
         }
 
+        int[] selected = (int[]) original.output("result");
+        if (selected[0] != 123) throw new AssertionError("selected result");
+        selected[0] = -9;
+        if (((int[]) original.output("result"))[0] != 123) {
+            throw new AssertionError("selected copy boundary");
+        }
+        if (original.output("absent") != null) throw new AssertionError("absent");
+        BulkExecution multi = new BulkExecution(
+                Map.of("result", source, "other", new int[1 << 18]), "cpu", ROOT);
+        if (((int[]) multi.output("result")).length != (1 << 18)) {
+            throw new AssertionError("selective output length");
+        }
+
         BulkTask task = new BulkTask("reviewed-add", 4, 0,
                 List.of("input"), List.of("result"));
         BulkExecutorProvider provider = provider(original);
