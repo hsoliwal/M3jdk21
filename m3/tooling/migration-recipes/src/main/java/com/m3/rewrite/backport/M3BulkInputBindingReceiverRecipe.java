@@ -16,7 +16,8 @@ public final class M3BulkInputBindingReceiverRecipe extends Recipe {
                 + "the canonical Synexia OpenRewrite recipe, preserving existing java.base ABI.";
     }
     @Override public List<Recipe> getRecipeList() {
-        return List.of(new M3Jdk21HashPinnedSnapshotRecipe(CRATE));
+        return List.of(new M3Jdk21HashPinnedSnapshotRecipe(CRATE),
+                new M3Jdk21HashPinnedTextSnapshotRecipe(CRATE));
     }
     @Override public int maxCycles() { return 1; }
     public boolean promotionAuthority() { return false; }
