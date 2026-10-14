@@ -57,11 +57,19 @@ public final class M3StringRegexEffectsTest {
             check(backing.get(text) != null, "test requires real canonical M3 storage");
             Class<?> dp = Class.forName("java.lang.M3StringRegexDp");
             Field c = dp.getDeclaredField("caches"); c.setAccessible(true);
-            Object cache = c.get(null); check(cache != null, "precompute cache created");
-            Field plans = cache.getClass().getDeclaredField("plans"); plans.setAccessible(true);
-            Field effects = cache.getClass().getDeclaredField("effects"); effects.setAccessible(true);
-            check(((AtomicReferenceArray<?>) plans.get(cache)).length() == 64, "bounded plan slots");
-            check(((AtomicReferenceArray<?>) effects.get(cache)).length() == 128, "bounded effect slots");
+            Object root = c.get(null);
+            if (root != null) { // optional metadata may have been refused under pressure
+                check(root instanceof java.lang.ref.SoftReference<?>, "VM-reclaimable metadata root");
+                Object cache = ((java.lang.ref.Reference<?>) root).get();
+                if (cache != null) {
+                    Field plans = cache.getClass().getDeclaredField("plans"); plans.setAccessible(true);
+                    Field effects = cache.getClass().getDeclaredField("effects"); effects.setAccessible(true);
+                    check(((AtomicReferenceArray<?>) plans.get(cache)).length() == 64, "bounded plan slots");
+                    check(((AtomicReferenceArray<?>) effects.get(cache)).length() == 128, "bounded effect slots");
+                }
+                ((java.lang.ref.Reference<?>) root).clear();
+            }
+            parity(text, regex); // refusal/eviction/reconstruction preserves the answer
         }
         System.out.println("M3_STRING_REGEX_EFFECTS_PASS checks=" + checks);
     }

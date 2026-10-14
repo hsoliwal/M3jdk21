@@ -27,6 +27,7 @@ public final class M3RegexDpPlan {
     private final long accepting;
     private final int states;
     private static volatile boolean nativeUnavailable;
+    private static volatile boolean structuredUnavailable;
 
     private M3RegexDpPlan(long[] literals, long dots, long starred, int tokens) {
         this.literalMasks = literals;
@@ -35,9 +36,9 @@ public final class M3RegexDpPlan {
         states = tokens + 1;
         universe = states == 64 ? -1L : (1L << states) - 1;
         accepting = 1L << tokens;
-        nullableBridges = new long[6];
+        nullableBridges = new long[nullableLevels(starred)];
         long bridge = starred;
-        for (int k = 0; k < 6; k++) {
+        for (int k = 0; k < nullableBridges.length; k++) {
             nullableBridges[k] = bridge;
             bridge &= bridge << (1 << k);
         }
@@ -65,14 +66,14 @@ public final class M3RegexDpPlan {
             }
         }
         if (stars == 0) return null;
-        long[] literals = new long[128];
+        long[] literals = new long[62];
         long dot = 0, star = 0;
         int token = 0;
         for (int i = 0; i < size; i++) {
             char c = pattern.charAt(i);
             if (c == '*') star |= 1L << token;
             else if (c == '.') dot |= 1L << ++token;
-            else literals[c] |= 1L << ++token;
+            else literals[literalIndex(c)] |= 1L << ++token;
         }
         return new M3RegexDpPlan(literals, dot, star, tokens);
     }
@@ -82,15 +83,33 @@ public final class M3RegexDpPlan {
     public boolean accepts(long frontier) { checkBits(frontier); return (frontier & accepting) != 0; }
     public boolean supports(char unit) { return !Character.isSurrogate(unit); }
 
-    /** One allocation-free DP step, with six precomputed nullable-prefix propagation masks. */
+    /** One allocation-free DP step, with up to six precomputed nullable-prefix propagation masks. */
     public long advance(long frontier, char unit) {
         checkBits(frontier);
         if (!supports(unit)) throw new IllegalArgumentException("surrogate input is not admitted");
-        long matched = unit < literalMasks.length ? literalMasks[unit] : 0;
+        int literal = literalIndex(unit);
+        long matched = literal < 0 ? 0 : literalMasks[literal];
         if (!lineTerminator(unit)) matched |= dots;
         long consumed = ((frontier << 1) & matched & ~starred)
                 | (frontier & matched & starred);
         return close(consumed);
+    }
+
+    /** Compact perfect index for exactly the admitted 62 literal code units. */
+    private static int literalIndex(char unit) {
+        if (unit >= 'a' && unit <= 'z') return unit - 'a';
+        if (unit >= 'A' && unit <= 'Z') return unit - 'A' + 26;
+        if (unit >= '0' && unit <= '9') return unit - '0' + 52;
+        return -1;
+    }
+
+    /** Keep only the nonzero doubling bridges needed by this immutable program. */
+    private static int nullableLevels(long stars) {
+        int levels = 0;
+        for (long bridge = stars; bridge != 0 && levels < 6; levels++) {
+            bridge &= bridge << (1 << levels);
+        }
+        return levels;
     }
 
     private long close(long frontier) {
@@ -175,13 +194,23 @@ public final class M3RegexDpPlan {
 
     private long[] compose(long[] left, long[] right) {
         // Native absence is an optimization miss, never an answer of NO_MATCH.
-        if (states >= 16 && !nativeUnavailable) {
+        if (states >= 16 && needsRowUnion(left) && !nativeUnavailable) {
+            if (starred == (universe & ~1L) && !structuredUnavailable) {
+                try { return composeStructured0(left, right); }
+                catch (UnsatisfiedLinkError unavailable) { structuredUnavailable = true; }
+            }
             try { return compose0(left, right); }
             catch (UnsatisfiedLinkError unavailable) { nativeUnavailable = true; }
         }
         long[] result = new long[states];
         composeJava(left, right, result);
         return result;
+    }
+
+    /** Zero/singleton frontiers need direct row selection, not a JNI round trip. */
+    private static boolean needsRowUnion(long[] rows) {
+        for (long row : rows) if ((row & (row - 1)) != 0) return true;
+        return false;
     }
 
     private static void composeJava(long[] left, long[] right, long[] result) {
@@ -204,4 +233,5 @@ public final class M3RegexDpPlan {
 
     // Package visibility permits exact JNI boundary qualification without exposing a JDK API.
     static native long[] compose0(long[] left, long[] right);
+    static native long[] composeStructured0(long[] left, long[] right);
 }

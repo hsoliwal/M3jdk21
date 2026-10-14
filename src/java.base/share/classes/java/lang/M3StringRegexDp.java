@@ -6,6 +6,7 @@
  */
 package java.lang;
 
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import jdk.internal.mindex.M3RegexDpPlan;
@@ -35,7 +36,8 @@ final class M3StringRegexDp {
     private static final long MAX_DP_CELLS = 1_000_000L;
 
     // Lazy allocation avoids poisoning class initialization when optional metadata is refused.
-    private static volatile Caches caches;
+    private static volatile SoftReference<Caches> caches;
+    private static volatile boolean preparationSuspended;
     private static final int PLAN_SLOTS = 64;
     private static final int EFFECT_SLOTS = 128;
     private static final long MAX_EFFECT_WORK = 262_144;
@@ -55,6 +57,8 @@ final class M3StringRegexDp {
             int prepared = tryPrepared(source, regex);
             if (prepared != UNKNOWN) return prepared;
         } catch (OutOfMemoryError unavailable) {
+            preparationSuspended = true;
+            releaseCachedMetadata();
             // Preparation is optional; the existing bounded DP/Pattern path remains available.
         }
 
@@ -117,6 +121,7 @@ final class M3StringRegexDp {
 
     private static int tryPrepared(M3String source, String regex) {
         if (source.length() > MAX_TEXT_UNITS || !worthPreparing(source)) return UNKNOWN;
+        if (!heapAllowsPreparation()) return UNKNOWN;
         Caches cache = caches();
         M3RegexDpPlan plan = plan(regex, cache);
         if (plan == null || ((long) source.length() + 1) * plan.stateCount() > MAX_DP_CELLS) {
@@ -150,13 +155,46 @@ final class M3StringRegexDp {
     }
 
     private static Caches caches() {
-        Caches found = caches;
+        SoftReference<Caches> reference = caches;
+        Caches found = reference == null ? null : reference.get();
         if (found != null) return found;
         synchronized (M3StringRegexDp.class) {
-            found = caches;
-            if (found == null) caches = found = new Caches();
+            reference = caches;
+            found = reference == null ? null : reference.get();
+            if (found == null) {
+                found = new Caches();
+                caches = new SoftReference<>(found);
+            }
         }
         return found;
+    }
+
+    /** Recomputable metadata only; never clears or closes canonical text owners. */
+    private static void releaseCachedMetadata() {
+        SoftReference<Caches> reference = caches;
+        if (reference != null) reference.clear();
+    }
+
+    /** Advisory heap snapshot, not a reservation or an OS/native-memory measure. */
+    private static boolean heapAllowsPreparation() {
+        Runtime runtime = Runtime.getRuntime();
+        boolean allowed = hasHeapHeadroom(runtime.maxMemory(), runtime.totalMemory(),
+                runtime.freeMemory(), preparationSuspended);
+        preparationSuspended = !allowed;
+        if (!allowed) releaseCachedMetadata();
+        return allowed;
+    }
+
+    /** Overflow-safe normalization and hysteresis; no caller budget or forced GC. */
+    private static boolean hasHeapHeadroom(long maximum, long total, long free,
+            boolean suspended) {
+        if (maximum <= 0) return false;
+        long committed = Math.max(0, Math.min(maximum, total));
+        long unused = Math.max(0, Math.min(committed, free));
+        long headroom = maximum - (committed - unused);
+        long reserve = Math.max(suspended ? 1L << 20 : 1L << 19,
+                maximum >>> (suspended ? 4 : 5));
+        return headroom >= reserve;
     }
 
     private static M3RegexDpPlan plan(String regex, Caches cache) {

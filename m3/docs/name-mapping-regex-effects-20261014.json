@@ -55,6 +55,21 @@
       "scope": "No compile-time lowering, universal cache, GPU/NPU runtime, database service or public String API introduced."
     }
   ],
+  "latest_stage": "pressure_followup",
+  "pressure_followup": {
+    "recipe": "com.synexia.rewrite.M3Jdk21RegexPressureRecipe",
+    "target_preimage_commit": "03b949881dd7ae140ab1e29cb97bf1af644a22c2",
+    "source_preimage_commit": "436f7705a179bc494d20e08c383c4f65499b9c9a",
+    "documentation": "regex-pressure-receiving-20261014.md",
+    "target_owners": ["java.lang.M3StringRegexDp", "jdk.internal.mindex.M3RegexDpPlan", "libjava/M3RegexDpPlan.c"],
+    "scope": "Softly held derived metadata; internal heap-headroom hysteresis; 62 literal lanes; only needed nullable bridges; separate all-star structured JNI path; generic JNI preserved; Java singleton row selection",
+    "maximum_retained_array_payload_bytes": 169984,
+    "canonical_payload_changes": false,
+    "new_public_jdk_api": false,
+    "new_caller_configuration": false,
+    "full_m3jdk_product_qualification": "PENDING",
+    "strict_lru_or_payload_spilling": "NOT_IMPLEMENTED"
+  },
   "proof": {
     "target_plan_and_jni": "executed on Java 21/Linux through patched java.base and a real native library",
     "wrapper": "compiled and executed using explicitly TEST_ONLY owner/coordinate fixtures; actual M3String storage not substituted in product sources",
