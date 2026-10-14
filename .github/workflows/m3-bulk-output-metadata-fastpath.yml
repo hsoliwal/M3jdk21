@@ -25,6 +25,10 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Check source-built OpenRewrite coordinates
+        run: python3 -S m3/synexia-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
+      - name: Install source-built recipe and JUnit custody
+        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Compile/run existing receiver module and custody test
         run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
