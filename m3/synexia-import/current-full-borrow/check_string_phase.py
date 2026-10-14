@@ -17,6 +17,7 @@ ESTATE = Path(__file__).with_name("synexia-estate.tsv")
 NAME_MAP = ROOT / "m3/docs/name-mapping.json"
 WORK = Path(__file__).with_name("string-phase-work-orders.tsv")
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
+HEX64 = re.compile(r"^[0-9a-f]{64}$")
 SUCCESSORS = Path(__file__).with_name("string-target-successors.tsv")
 SUCCESSOR_HEADER = [
     "schema",
@@ -28,8 +29,63 @@ SUCCESSOR_HEADER = [
     "semantic_evidence",
     "state",
 ]
+TRANSITIONS = Path(__file__).with_name("string-target-transition-receipts.tsv")
+TRANSITION_HEADER = [
+    "schema",
+    "target_path",
+    "historical_map_blob",
+    "previous_successor_blob",
+    "m3jdk_pr",
+    "m3jdk_base_commit",
+    "m3jdk_base_git_blob",
+    "m3jdk_head_commit",
+    "m3jdk_merge_candidate",
+    "m3jdk_candidate_git_blob",
+    "synexia_pr",
+    "synexia_head_commit",
+    "synexia_merge_commit",
+    "synexia_postimage_sha256",
+    "status",
+]
+EXPECTED_TRANSITIONS = {
+    "src/java.base/share/classes/java/lang/M3String.java": {
+        "schema": "M3JDK21_STRING_TRANSITION_V1",
+        "target_path": "src/java.base/share/classes/java/lang/M3String.java",
+        "historical_map_blob": "b646eedfad856c640f727aa99c5142de0f03e8ae",
+        "previous_successor_blob": "70d1d03c109126fdda36c54da21b484bbe368fd9",
+        "m3jdk_pr": "864",
+        "m3jdk_base_commit": "bde4aa6f4f30ecbbc919af95252dab573d546eb3",
+        "m3jdk_base_git_blob": "4fb87fd70ffe5c8d75d17db9c28b44bc9b574704",
+        "m3jdk_head_commit": "a79b274f2cd2b4d0fe3865ca18b231f1850bf692",
+        "m3jdk_merge_candidate": "f224fc1a064e882127cc37c2652ce9f6eb4e01c2",
+        "m3jdk_candidate_git_blob": "42399d411c1516a56a47dcdb10242960157b4677",
+        "synexia_pr": "11247",
+        "synexia_head_commit": "92d8d3792c2fefb606b699cf9739efd283652399",
+        "synexia_merge_commit": "a9fbc8d51820851731e2c7e68f5737b010592de8",
+        "synexia_postimage_sha256": "d4dcb3f3320e42a977001254cdd9ac58105cea0a427839ec81d945912476943f",
+        "status": "SOURCE_ONLY_NOT_RUNTIME_ACCEPTED",
+    },
+    "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java": {
+        "schema": "M3JDK21_STRING_TRANSITION_V1",
+        "target_path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "historical_map_blob": "c45ae8696da18b15b7b9ee0267cc05aec1ae6c92",
+        "previous_successor_blob": "ABSENT",
+        "m3jdk_pr": "864",
+        "m3jdk_base_commit": "bde4aa6f4f30ecbbc919af95252dab573d546eb3",
+        "m3jdk_base_git_blob": "c45ae8696da18b15b7b9ee0267cc05aec1ae6c92",
+        "m3jdk_head_commit": "a79b274f2cd2b4d0fe3865ca18b231f1850bf692",
+        "m3jdk_merge_candidate": "f224fc1a064e882127cc37c2652ce9f6eb4e01c2",
+        "m3jdk_candidate_git_blob": "dfbb91cc169916cd0a95798f4cd2151c3407df4c",
+        "synexia_pr": "11247",
+        "synexia_head_commit": "92d8d3792c2fefb606b699cf9739efd283652399",
+        "synexia_merge_commit": "a9fbc8d51820851731e2c7e68f5737b010592de8",
+        "synexia_postimage_sha256": "b0cd3f3199cc14e12c69abc34dfba5fd8c15046b06f1faa703b41d7d8c6a6bc1",
+        "status": "SOURCE_ONLY_NOT_RUNTIME_ACCEPTED",
+    },
+}
 EXPECTED_SUCCESSOR_PATHS = {
     "src/java.base/share/classes/java/lang/M3String.java",
+    "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
     "src/java.base/share/classes/java/lang/M3StringFacts.java",
     "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
     "src/java.base/share/classes/java/lang/M3StringPool.java",
@@ -45,6 +101,21 @@ SUCCESSOR_MARKERS = {
         "if (right == null) return null;",
         "return M3StringPool.concat(left, right);",
         "static boolean isLiteralRegex(String regex)",
+    ),
+    "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java": (
+        "private static final int SLOTS = 256;",
+        "private static final int MAX_PATTERN_UNITS = 8_192;",
+        "private static final int SOURCE_SLOTS = 64;",
+        "private static final int MAX_TRIGRAM_SOURCE_UNITS = 32_768;",
+        "static long maximumRetainedPrimitiveBytes()",
+        "Eviction or absence changes performance only.",
+        "M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(pattern);",
+        "M3String.CodeUnitCursor sourceUnits = new M3String.CodeUnitCursor(source);",
+        "entry.owner.get() == owner",
+        "entry.coordinate == coordinate",
+        "catch (OutOfMemoryError unavailable)",
+        "KMP remains authoritative.",
+        "new Entry(new WeakReference<>(owner), coordinate, plan)",
     ),
     "src/java.base/share/classes/java/lang/M3StringFacts.java": (
         "boolean mayContain(String needle)",
@@ -156,6 +227,76 @@ def approved_successors(mapping_rows: list[dict[str, str]]) -> dict[str, dict[st
             + repr(sorted(EXPECTED_SUCCESSOR_PATHS - set(received)))
             + " unexpected="
             + repr(sorted(set(received) - EXPECTED_SUCCESSOR_PATHS))
+        )
+    return received
+
+
+def validate_transition_receipts(
+    mapping_rows: list[dict[str, str]],
+    successor_rows: list[dict[str, str]],
+) -> dict[str, dict[str, str]]:
+    """Validate exact PR lineage without rewriting the historical source map."""
+    baseline: dict[str, str] = {}
+    for row in mapping_rows:
+        path = row["target_path"]
+        pinned = row["target_git_blob"]
+        if path in baseline and baseline[path] != pinned:
+            raise ValueError("contradictory historical target pin: " + path)
+        baseline[path] = pinned
+
+    successors = {row["target_path"]: row for row in successor_rows}
+    received: dict[str, dict[str, str]] = {}
+    sha1_fields = (
+        "historical_map_blob",
+        "m3jdk_base_commit",
+        "m3jdk_base_git_blob",
+        "m3jdk_head_commit",
+        "m3jdk_merge_candidate",
+        "m3jdk_candidate_git_blob",
+        "synexia_head_commit",
+        "synexia_merge_commit",
+    )
+    for index, row in enumerate(load_tsv(TRANSITIONS, TRANSITION_HEADER), start=2):
+        path = row["target_path"]
+        if any(not row[field] for field in TRANSITION_HEADER):
+            raise ValueError(f"blank transition receipt field at row {index}")
+        if path in received:
+            raise ValueError("duplicate transition receipt owner: " + path)
+        if path not in EXPECTED_TRANSITIONS:
+            raise ValueError("unqualified transition receipt owner: " + path)
+        for field in sha1_fields:
+            if not HEX40.fullmatch(row[field]):
+                raise ValueError(f"invalid transition SHA-1 field {field}: {path}")
+        if not HEX64.fullmatch(row["synexia_postimage_sha256"]):
+            raise ValueError("invalid Synexia postimage SHA-256: " + path)
+        previous = row["previous_successor_blob"]
+        if previous != "ABSENT" and not HEX40.fullmatch(previous):
+            raise ValueError("invalid previous successor Git blob: " + path)
+        if not row["m3jdk_pr"].isdigit() or not row["synexia_pr"].isdigit():
+            raise ValueError("invalid transition PR number: " + path)
+        if row != EXPECTED_TRANSITIONS[path]:
+            raise ValueError("exact transition lineage drift: " + path)
+        if baseline.get(path) != row["historical_map_blob"]:
+            raise ValueError("transition changed historical source-map pin: " + path)
+        active = successors.get(path)
+        if active is None:
+            raise ValueError("transition owner missing from active successor view: " + path)
+        if active["historical_git_blob"] != row["historical_map_blob"]:
+            raise ValueError("active successor changed historical map pin: " + path)
+        if active["successor_git_blob"] != row["m3jdk_candidate_git_blob"]:
+            raise ValueError("active successor differs from transition candidate: " + path)
+        if row["synexia_pr"] not in active["synexia_prs"].split(","):
+            raise ValueError("active successor omitted canonical Synexia PR: " + path)
+        if row["m3jdk_pr"] not in active["m3jdk_prs"].split(","):
+            raise ValueError("active successor omitted receiver PR: " + path)
+        received[path] = row
+
+    if set(received) != set(EXPECTED_TRANSITIONS):
+        raise ValueError(
+            "transition inventory drift: missing="
+            + repr(sorted(set(EXPECTED_TRANSITIONS) - set(received)))
+            + " unexpected="
+            + repr(sorted(set(received) - set(EXPECTED_TRANSITIONS)))
         )
     return received
 
@@ -303,6 +444,7 @@ def main(argv: list[str]) -> int:
 
     rows = load_tsv(MAP, HEADER)
     successors = approved_successors(rows)
+    transitions = validate_transition_receipts(rows, list(successors.values()))
     relations: set[str] = set()
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in HEADER):
@@ -356,6 +498,7 @@ def main(argv: list[str]) -> int:
     print(
         "M3JDK21_STRING_PHASE_PIN_PASS "
         f"rows={len(rows)} source_revision={revision} successors={len(successors)} "
+        f"transitions={len(transitions)} runtime_acceptance=none "
         "promotion=false public_api=java.lang.String"
     )
     return 0
