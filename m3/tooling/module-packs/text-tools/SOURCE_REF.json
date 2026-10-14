@@ -1,7 +1,7 @@
 {
   "schema": "m3.text-jmods.source-ref/1",
   "source_repository": "hsoliwal/com.synexia",
-  "source_commit": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+  "source_commit": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
   "source_pr": "https://github.com/hsoliwal/com.synexia/pull/11188",
   "target_base": "134e84519e3eb3d75328527e3181c4cb5adbbe45",
   "target_role": "independent SDK product receiver and naming authority",
@@ -11,7 +11,7 @@
   "runtime_dependency_on_synexia": false,
   "runtime_phase_advanced": false,
   "local_validation": {
-    "outer_recipe_tests": 5,
+    "outer_recipe_tests": 6,
     "behavior_junit_tests": 17,
     "original_core_checks_each": 74,
     "scoped_atoms": 19,
@@ -30,7 +30,7 @@
       "canonical_source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-text-jmods-receiver-20261014/00-name-mapping.json.txt",
       "canonical_source_git_blob": "bbebeeeb8c97241a9922f30e12e16696fe2a0c39",
       "canonical_source_sha256": "8dab4f5cda4e4e4aa6a68e0b5610d3604b6e2f462763c8ff062a85d492ad6e5c",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java": {
@@ -40,7 +40,7 @@
       "canonical_source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-text-jmods-receiver-20261014/00-M3ModuleDescriptorRecipe.java.txt",
       "canonical_source_git_blob": "302a06c5a79ecb6fd26c988dcf1fb9147e9198e1",
       "canonical_source_sha256": "db6625450e98eed094a19142370bcd7a064eb91322eab7cf8f8cf9bb2030417f",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/jmod-recipes/tools/jmod_pack.py": {
@@ -50,7 +50,7 @@
       "canonical_source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-text-jmods-receiver-20261014/01-jmod_pack.py.txt",
       "canonical_source_git_blob": "83b1483c6c5e6a39c519f82af603382914eed3e5",
       "canonical_source_sha256": "9f541885c4fd9e9e868c63af44e9d8bc10cb6d5ebcdb663bacc2a47320404b57",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/COVERAGE.json": {
@@ -60,7 +60,7 @@
       "canonical_source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-text-jmods-receiver-20261014/02-COVERAGE.json.txt",
       "canonical_source_git_blob": "8c8bd6546f80ed92fb5123de52da67b1acb88194",
       "canonical_source_sha256": "1456736be0668da70674ebcd2fdccd4dd15a3937480804a0138185071657e90e",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/README.md": {
@@ -70,7 +70,7 @@
       "canonical_source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-text-jmods-receiver-20261014/03-README.md.txt",
       "canonical_source_git_blob": "107484d9d58c09405df4299ba289d876b47cd501",
       "canonical_source_sha256": "5bfec9e72e48f134643dcc0109b09d5f94ebc94b32cf1267c9a55e7317961611",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/build.py": {
@@ -80,7 +80,7 @@
       "canonical_source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-text-jmods-receiver-20261014/04-build.py.txt",
       "canonical_source_git_blob": "95f0de231161102f086351d43df79f60650ee67d",
       "canonical_source_sha256": "8637d55ecec6cf05279ca3889bc588144b14dc66511f87d65cb7133d6b130530",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java": {
@@ -90,7 +90,7 @@
       "canonical_source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-text-jmods-receiver-20261014/01-M3TextSmoke.java.txt",
       "canonical_source_git_blob": "f7b9ebf2aef0e9faea079a93220da75247fd8317",
       "canonical_source_sha256": "8033103404ef14c35e1fc0690ff8d604437c9e823bb314ec1fc909c6627383c2",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/legal/LICENSE.txt": {
@@ -100,7 +100,7 @@
       "canonical_source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-text-jmods-receiver-20261014/05-LICENSE.txt.txt",
       "canonical_source_git_blob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
       "canonical_source_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/legal/NOTICE.txt": {
@@ -110,7 +110,7 @@
       "canonical_source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-text-jmods-receiver-20261014/06-NOTICE.txt.txt",
       "canonical_source_git_blob": "ba06103ea6f370085420f2ea453eb1370f2e6a55",
       "canonical_source_sha256": "73bc2b626f41cc6fcd30f2b4b21be4f263ca91297686305acd532d309b378836",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/native/m3textio.c": {
@@ -120,7 +120,7 @@
       "canonical_source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-text-jmods-receiver-20261014/07-m3textio.c.txt",
       "canonical_source_git_blob": "c36401f622f2e1b49820921a402cc0c7e6ba46bd",
       "canonical_source_sha256": "0ca900f14f730238d823bf292fe7e83c2d19cc187993489786b7509e07879797",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/FileTools.java": {
@@ -130,7 +130,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/io/FileTools.java",
       "canonical_source_git_blob": "e88d1a709fd57fab96ed9d0a7a5ffc676c43ae2d",
       "canonical_source_sha256": "24d23658acf3dce9ab4e8a607b54086743789f275fb8a21fda149d14c8a6cad7",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.io/module-info.java": {
@@ -138,9 +138,9 @@
       "git_blob": "8f5a0fdd3ded2f828fd31440d89aca6596c97b83",
       "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe",
       "canonical_source_path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3TextJmodTest.java",
-      "canonical_source_git_blob": "80d684a9573389af9bd2311abf32365cc5a22931",
-      "canonical_source_sha256": "29a234370aaea5920769cc6c5a16374995115f668f1319310c9df812090ab534",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "canonical_source_git_blob": "cacfbe0e1aadcf4a2ca05db8976f44a1bf4d5722",
+      "canonical_source_sha256": "78cc37f924f026c3b05351ddc062a7c176fc454114376438e256e378ba32135f",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Atom.java": {
@@ -150,7 +150,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/Atom.java",
       "canonical_source_git_blob": "fdd1004f5569901d7ff248bfc7c533acc0cffed1",
       "canonical_source_sha256": "49481e7d11bd4f8f9fc738d10b851ee3efdba912d8beee390e2ad98b55875d3e",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Binding.java": {
@@ -160,7 +160,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/Binding.java",
       "canonical_source_git_blob": "8d50bd0d2479acc0116b95aa81928c52c497e1d0",
       "canonical_source_sha256": "a84bf82294b9041c47c09d5c4d87a501aec6b6e3425170c1b7f0e6945d5c1d08",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Canonical.java": {
@@ -170,7 +170,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/Canonical.java",
       "canonical_source_git_blob": "147ca5fdea7bf1027ee207fd55c877386ed463cc",
       "canonical_source_sha256": "7cee44d0d400d98ed5dfc7c33def56424daf2f6a6bbd546faf72023e6c6f97ae",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Capability.java": {
@@ -180,7 +180,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/Capability.java",
       "canonical_source_git_blob": "d3042eeb939398cbdd457715ea350ce7330a49e6",
       "canonical_source_sha256": "62a374f555074b9b295d80acf5fb652140f6d1bfcd49db1500d4b685b1ae7d41",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CommandCatalog.java": {
@@ -190,7 +190,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/CommandCatalog.java",
       "canonical_source_git_blob": "38c0d35d9ad62331b569fb2ae6ec71c2e177e0fa",
       "canonical_source_sha256": "00ac574979a3d288b6a16c556ad72aa7363b2b4f362e1144ac5b52814a901e99",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CoreDemo.java": {
@@ -200,7 +200,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/CoreDemo.java",
       "canonical_source_git_blob": "b09c3dd85b45c6f9f3a54936e5379341e073ca99",
       "canonical_source_sha256": "0fb9dfe0d52cab1c13f188d64460407543ada3d12eaae70ec477053b5e44c95b",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/ExecutionResult.java": {
@@ -210,7 +210,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/ExecutionResult.java",
       "canonical_source_git_blob": "e0a62115acc5ef70989eaafe5e1c49fbb1dabc1d",
       "canonical_source_sha256": "52ef7bc8553cf4378413a0d90f42c94e7859181cac13710e6691ff32f1ebc068",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/FrameCollector.java": {
@@ -220,7 +220,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/FrameCollector.java",
       "canonical_source_git_blob": "f2e193e2b1132b9855f7bc3deb768a4e0eda6c7c",
       "canonical_source_sha256": "36108eed784136f8546145ef7b3c962063794e80bae0029629578dc4f89ade1a",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Ids.java": {
@@ -230,7 +230,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/Ids.java",
       "canonical_source_git_blob": "ae76b574eb59659e52bd7cf56a92d55187af6927",
       "canonical_source_sha256": "5f69a26c6314de9da49d64cdb315ac0304eed3f6e65799ac5f9e2cbd46690b3b",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Limits.java": {
@@ -240,7 +240,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/Limits.java",
       "canonical_source_git_blob": "5db74e16321a328df8e21f60dedd8b5c5c96797b",
       "canonical_source_sha256": "d247a384de3de2625098776295c2468b003231d8648b9810faeeb40df31ad00f",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3UnixRuntime.java": {
@@ -250,7 +250,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/M3UnixRuntime.java",
       "canonical_source_git_blob": "739608e1f9623576c43cc0b04d11f0695503390a",
       "canonical_source_sha256": "8af1324e869aea678bbde10f92f64f1eb2e18dd39676f77e61b6562af4e40a24",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Node.java": {
@@ -260,7 +260,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/Node.java",
       "canonical_source_git_blob": "1f7626fdbde13a87ac5b64a87965f4439529c4c1",
       "canonical_source_sha256": "ce589692f5e96b6da99e8650aa0590b6c6f4c504e5f5f17dcf070e6235ba5473",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Plan.java": {
@@ -270,7 +270,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/Plan.java",
       "canonical_source_git_blob": "df958ad5104fb09a8be62367dfb912a144737139",
       "canonical_source_sha256": "e383c312215ddaadb61f03f74bdd02f92df7a73203d032cfa761da1ebedf4388",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/PlanValidator.java": {
@@ -280,7 +280,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/PlanValidator.java",
       "canonical_source_git_blob": "b4baa2cf07b3158bbb3ccbc92a92cb664fc24548",
       "canonical_source_sha256": "dd6af2c6082ae314927b6104fd9b14cbc6ec81ef213a4cb23627ae2383f41144",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Receipt.java": {
@@ -290,7 +290,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/Receipt.java",
       "canonical_source_git_blob": "f4c499a2135638cf0097b159c420de5d0eb59ada",
       "canonical_source_sha256": "560d9f4eb3a0b19572833aad58ee0ea58989efc1577cd40478d7e8e5a3128ba6",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Registry.java": {
@@ -300,7 +300,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/Registry.java",
       "canonical_source_git_blob": "7f61f1c9257ce19347ae881e22cd1184e41286c1",
       "canonical_source_sha256": "72d396b5ebe3160ad424a0ca60005275d336f6c201d0f469ab24da04a1cb59a3",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/StepReceipt.java": {
@@ -310,7 +310,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/StepReceipt.java",
       "canonical_source_git_blob": "75155873b3431a153b5a7cee5d2874168f2c9221",
       "canonical_source_sha256": "8884bac79d0ef6b8afc06d05062275a9b548fab6548dfffb0f7939f8d89a63bb",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextFrame.java": {
@@ -320,7 +320,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/TextFrame.java",
       "canonical_source_git_blob": "77c02c061feeda89d3a737b30c2df54033a6bdc5",
       "canonical_source_sha256": "b61c9d254e34dc98cea48da5b885fd0e7db107591266d7262b8e868f5c6d4594",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextLine.java": {
@@ -330,7 +330,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/TextLine.java",
       "canonical_source_git_blob": "84d4cb96e64178ba6ea721b388c188c1c120fc77",
       "canonical_source_sha256": "d0fcf13cf7f3825baf49982e0ca5b7d360b5201e3120680253e4fd8e23d6139d",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextTools.java": {
@@ -340,7 +340,7 @@
       "canonical_source_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/TextTools.java",
       "canonical_source_git_blob": "194d24c7838d2f251e53ffe804b52182a769d9f7",
       "canonical_source_sha256": "f59a065367d6f64cba92d2c832c5b9fc71cc852e3804c3b6eb02f2844b1cf556",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/src/jdk.m3.text/module-info.java": {
@@ -348,9 +348,9 @@
       "git_blob": "0c8ef3979413149034488f3d7859603b7171f2d5",
       "recipe": "ChangePackage + AddLicenseHeader + M3ModuleDescriptorRecipe",
       "canonical_source_path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3TextJmodTest.java",
-      "canonical_source_git_blob": "80d684a9573389af9bd2311abf32365cc5a22931",
-      "canonical_source_sha256": "29a234370aaea5920769cc6c5a16374995115f668f1319310c9df812090ab534",
-      "source_revision": "5f8848a2bdad06e1ea25f15d750bc3bdc18d0d70",
+      "canonical_source_git_blob": "cacfbe0e1aadcf4a2ca05db8976f44a1bf4d5722",
+      "canonical_source_sha256": "78cc37f924f026c3b05351ddc062a7c176fc454114376438e256e378ba32135f",
+      "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     }
   }
