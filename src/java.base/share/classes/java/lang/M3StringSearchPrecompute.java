@@ -73,32 +73,33 @@ final class M3StringSearchPrecompute {
             return entry.plan;
         }
 
+        M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(pattern);
         int[] prefix = new int[length];
         for (int index = 1; index < length; index++) {
             int matched = prefix[index - 1];
-            char unit = pattern.charAt(index);
-            while (matched > 0 && unit != pattern.charAt(matched)) {
+            char unit = units.at(index);
+            while (matched > 0 && unit != units.at(matched)) {
                 matched = prefix[matched - 1];
             }
-            if (unit == pattern.charAt(matched)) matched++;
+            if (unit == units.at(matched)) matched++;
             prefix[index] = matched;
         }
 
         int[] reversePrefix = new int[length];
         for (int index = 1; index < length; index++) {
             int matched = reversePrefix[index - 1];
-            char unit = reverseUnit(pattern, index);
-            while (matched > 0 && unit != reverseUnit(pattern, matched)) {
+            char unit = units.at(length - 1 - index);
+            while (matched > 0 && unit != units.at(length - 1 - matched)) {
                 matched = reversePrefix[matched - 1];
             }
-            if (unit == reverseUnit(pattern, matched)) matched++;
+            if (unit == units.at(length - 1 - matched)) matched++;
             reversePrefix[index] = matched;
         }
 
         int[] skip256 = new int[256];
         Arrays.fill(skip256, Math.max(1, length));
         for (int index = 0; index < length - 1; index++) {
-            skip256[pattern.charAt(index) & 255] = length - 1 - index;
+            skip256[units.at(index) & 255] = length - 1 - index;
         }
 
         M3TQ.Facts trigrams = length >= 3 ? M3TQ.precompute(pattern, MAX_PATTERN_UNITS) : null;
@@ -162,13 +163,15 @@ final class M3StringSearchPrecompute {
             Plan plan,
             int fromIndex,
             int endIndex) {
+        M3String.CodeUnitCursor sourceUnits = new M3String.CodeUnitCursor(source);
+        M3String.CodeUnitCursor patternUnits = new M3String.CodeUnitCursor(pattern);
         int matched = 0;
         for (int index = fromIndex; index < endIndex; index++) {
-            char unit = source.charAt(index);
-            while (matched > 0 && unit != pattern.charAt(matched)) {
+            char unit = sourceUnits.at(index);
+            while (matched > 0 && unit != patternUnits.at(matched)) {
                 matched = plan.prefix[matched - 1];
             }
-            if (unit == pattern.charAt(matched)) matched++;
+            if (unit == patternUnits.at(matched)) matched++;
             if (matched == plan.patternLength) {
                 return index - plan.patternLength + 1;
             }
@@ -182,17 +185,19 @@ final class M3StringSearchPrecompute {
             Plan plan,
             int fromIndex,
             int endIndex) {
+        M3String.CodeUnitCursor sourceUnits = new M3String.CodeUnitCursor(source);
+        M3String.CodeUnitCursor patternUnits = new M3String.CodeUnitCursor(pattern);
         int maximumStart = endIndex - plan.patternLength;
         int at = fromIndex;
         long failedComparisonWork = 0L;
         while (at <= maximumStart) {
             int index = plan.patternLength - 1;
-            while (index >= 0 && pattern.charAt(index) == source.charAt(at + index)) {
+            while (index >= 0 && patternUnits.at(index) == sourceUnits.at(at + index)) {
                 index--;
             }
             if (index < 0) return at;
 
-            int shift = plan.skip256[source.charAt(at + plan.patternLength - 1) & 255];
+            int shift = plan.skip256[sourceUnits.at(at + plan.patternLength - 1) & 255];
             if (shift > maximumStart - at) return -1;
             at += shift;
 
@@ -355,14 +360,16 @@ final class M3StringSearchPrecompute {
             M3String pattern,
             Plan plan,
             int maximumStart) {
+        M3String.CodeUnitCursor sourceUnits = new M3String.CodeUnitCursor(source);
+        M3String.CodeUnitCursor patternUnits = new M3String.CodeUnitCursor(pattern);
         int matched = 0;
         int scanStart = maximumStart + plan.patternLength - 1;
         for (int index = scanStart; index >= 0; index--) {
-            char unit = source.charAt(index);
-            while (matched > 0 && unit != reverseUnit(pattern, matched)) {
+            char unit = sourceUnits.at(index);
+            while (matched > 0 && unit != patternUnits.at(plan.patternLength - 1 - matched)) {
                 matched = plan.reversePrefix[matched - 1];
             }
-            if (unit == reverseUnit(pattern, matched)) matched++;
+            if (unit == patternUnits.at(plan.patternLength - 1 - matched)) matched++;
             if (matched == plan.patternLength) {
                 return index;
             }
