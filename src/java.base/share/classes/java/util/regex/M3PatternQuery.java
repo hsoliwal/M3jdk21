@@ -106,11 +106,13 @@ final class M3PatternQuery {
         return new BooleanPlan(atoms, repeated, empty);
     }
 
-    /** Immutable pattern facts; each invocation owns its single rolling DP row. */
+    /** Pattern facts; short-plan tables are private and promoted only after reuse. */
     static final class BooleanPlan {
         private final Pattern.CharPredicate[] atoms;
         private final boolean[] repeated;
         private final boolean[] empty;
+        private volatile WordPlan wordPlan;
+        private int uses;
 
         private BooleanPlan(Pattern.CharPredicate[] atoms, boolean[] repeated, boolean[] empty) {
             this.atoms = atoms;
@@ -120,6 +122,11 @@ final class M3PatternQuery {
 
         /** Returns 0/1, or -1 to defer surrogate semantics to the original Matcher. */
         int matches(String input) {
+            // The nullable-prefix fact already answers empty inputs without scratch space.
+            if (input.isEmpty()) return empty[atoms.length] ? 1 : 0;
+            WordPlan word = wordPlan;
+            if (word == null && atoms.length <= 63) word = reusedPlan();
+            if (word != null) return word.matches(input);
             boolean[] row = empty.clone();
             for (int offset = 0; offset < input.length(); offset++) {
                 char unit = input.charAt(offset);
@@ -135,6 +142,67 @@ final class M3PatternQuery {
                 }
             }
             return row[atoms.length] ? 1 : 0;
+        }
+
+        private synchronized WordPlan reusedPlan() {
+            // One-shot Pattern.matches calls retain only the existing compact DP facts.
+            // Publication is volatile; all table fields are final and matches own no scratch.
+            if (wordPlan == null && ++uses >= 32) wordPlan = new WordPlan(atoms, repeated);
+            return wordPlan;
+        }
+    }
+
+    /** At most 63 consuming states plus one accepting state in a primitive word. */
+    private static final class WordPlan {
+        private final Pattern.CharPredicate[] atoms;
+        private final long[] asciiMasks;
+        private final long[] nextStates;
+        private final long initialStates;
+        private final long accepting;
+
+        private WordPlan(Pattern.CharPredicate[] atoms, boolean[] repeated) {
+            this.atoms = atoms;
+            accepting = 1L << atoms.length;
+            long[] closure = new long[atoms.length + 1];
+            closure[atoms.length] = 1L << atoms.length;
+            for (int atom = atoms.length - 1; atom >= 0; atom--) {
+                closure[atom] = (1L << atom) | (repeated[atom] ? closure[atom + 1] : 0L);
+            }
+            initialStates = closure[0];
+            nextStates = new long[atoms.length];
+            asciiMasks = new long[128];
+            for (int atom = 0; atom < atoms.length; atom++) {
+                nextStates[atom] = closure[repeated[atom] ? atom : atom + 1];
+                for (int unit = 0; unit < asciiMasks.length; unit++) {
+                    if (atoms[atom].is(unit)) asciiMasks[unit] |= 1L << atom;
+                }
+            }
+        }
+
+        private int matches(String input) {
+            long active = initialStates;
+            for (int offset = 0; offset < input.length(); offset++) {
+                char unit = input.charAt(offset);
+                if (Character.isSurrogate(unit)) return -1;
+                long matching = active & ~accepting;
+                long next = 0L;
+                if (unit < asciiMasks.length) {
+                    matching &= asciiMasks[unit];
+                    while (matching != 0L) {
+                        int atom = Long.numberOfTrailingZeros(matching);
+                        next |= nextStates[atom];
+                        matching &= matching - 1;
+                    }
+                } else {
+                    while (matching != 0L) {
+                        int atom = Long.numberOfTrailingZeros(matching);
+                        if (atoms[atom].is(unit)) next |= nextStates[atom];
+                        matching &= matching - 1;
+                    }
+                }
+                active = next;
+            }
+            return (active & accepting) != 0L ? 1 : 0;
         }
     }
 
