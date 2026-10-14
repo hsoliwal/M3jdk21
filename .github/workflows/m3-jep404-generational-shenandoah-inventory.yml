@@ -149,17 +149,147 @@ jobs:
           PY
           test -z "$(git status --porcelain=v1 -uall)"
 
-      - name: 8 - Verify existing M3 backport control plane
+      - name: 8 - Verify current-tree preimages before ephemeral mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$RUNNER_TEMP/jep404/file-atoms" \
+            --mode check \
+            --require-one-target-per-crate \
+            --receipt "$RUNNER_TEMP/jep404/preimage.tsv"
+          test -z "$(git status --porcelain=v1 -uall)"
+
+      - name: 9 - Materialize exact JEP404 candidate and prove byte fixed point
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$RUNNER_TEMP/jep404/file-atoms" \
+            --mode apply \
+            --require-one-target-per-crate \
+            --receipt "$RUNNER_TEMP/jep404/apply.tsv"
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$RUNNER_TEMP/jep404/file-atoms" \
+            --mode verify-post \
+            --require-one-target-per-crate \
+            --receipt "$RUNNER_TEMP/jep404/postimage.tsv"
+          git diff --check
+          before="$(git diff --binary | sha256sum | awk '{print $1}')"
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$RUNNER_TEMP/jep404/file-atoms" \
+            --mode apply \
+            --require-one-target-per-crate
+          after="$(git diff --binary | sha256sum | awk '{print $1}')"
+          test "$before" = "$after"
+
+      - name: 10 - Prove only generated JEP404 FILE targets changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          import subprocess
+
+          generated = Path(os.environ["RUNNER_TEMP"]) / "jep404" / "file-atoms"
+          expected = set()
+          for root in (
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned",
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text",
+          ):
+              if not root.exists():
+                  continue
+              for manifest in root.glob("*/manifest.tsv"):
+                  for line in manifest.read_text(encoding="utf-8").splitlines():
+                      if line and not line.startswith("#"):
+                          expected.add(line.split("\t", 1)[0])
+
+          status = subprocess.check_output(
+              ["git", "status", "--porcelain=v1", "-uall"], text=True
+          )
+          actual = {line[3:] for line in status.splitlines() if line}
+          if actual != expected:
+              raise SystemExit(
+                  "JEP404 changed-path fence failed\n"
+                  f"expected={sorted(expected)}\nactual={sorted(actual)}"
+              )
+          print(f"JEP404_CHANGED_PATHS {len(actual)}")
+          PY
+
+      - name: 11 - Verify M3 backport and scope control plane
         shell: bash
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/backports/pom.xml verify
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3RecipeScopeDeclarationTest test
 
-      - name: 9 - Upload JEP404 inventory and ephemeral recipe evidence
+      - name: 12 - Install OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf make gcc g++ zip unzip \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+
+      - name: 13 - Configure fastdebug Java21 Shenandoah candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure \
+            --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=fastdebug \
+            --with-jvm-variants=server \
+            --disable-warnings-as-errors
+
+      - name: 14 - Build JDK image
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 images
+
+      - name: 15 - Smoke legacy and experimental generational Shenandoah modes
+        shell: bash
+        run: |
+          set -euo pipefail
+          JDK_IMAGE="$(find build -path '*/images/jdk' -type d | head -n 1)"
+          test -x "$JDK_IMAGE/bin/java"
+          "$JDK_IMAGE/bin/java" -XX:+UseShenandoahGC -version \
+            > "$RUNNER_TEMP/jep404/shenandoah-satb.log" 2>&1
+          "$JDK_IMAGE/bin/java" \
+            -XX:+UnlockExperimentalVMOptions \
+            -XX:+UseShenandoahGC \
+            -XX:ShenandoahGCMode=generational \
+            -version > "$RUNNER_TEMP/jep404/shenandoah-generational.log" 2>&1
+
+      - name: 16 - Run focused generational Shenandoah jtreg family
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="hotspot_jtreg:gc/shenandoah/generational"
+
+      - name: 17 - Run JNI management and JFR Shenandoah regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="hotspot_jtreg:gc/shenandoah/jni"
+          make JOBS=2 test TEST="hotspot_jtreg:gc/shenandoah/mxbeans"
+          make JOBS=2 test TEST="jdk_jfr:jdk/jfr/event/gc/detailed/TestShenandoahEvacuationInformationEvent.java"
+
+      - name: 18 - Upload JEP404 candidate proof
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: jep404-inventory-${{ github.run_id }}
-          path: ${{ runner.temp }}/jep404
+          name: jep404-candidate-proof-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/jep404
+            build/*/test-results/**
           if-no-files-found: warn
           retention-days: 30
