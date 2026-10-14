@@ -3385,6 +3385,13 @@ public final class String
      * @since 1.4
      */
     public boolean matches(String regex) {
+        M3String storage = m3();
+        if (storage != null && regex != null) {
+            int restricted = M3StringRestrictedRegexDp.tryMatches(storage, regex);
+            if (restricted != M3StringRestrictedRegexDp.UNSUPPORTED) {
+                return restricted == M3StringRestrictedRegexDp.MATCH;
+            }
+        }
         return Pattern.matches(regex, this);
     }
 
