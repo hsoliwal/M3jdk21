@@ -102,7 +102,8 @@ final class M3StringSearchPrecompute {
             skip256[units.at(index) & 255] = length - 1 - index;
         }
 
-        M3TQ.Facts trigrams = length >= 3 ? M3TQ.precompute(pattern, MAX_PATTERN_UNITS) : null;
+        M3TQ.Facts trigrams =
+                length >= 3 ? precomputeTrigrams(pattern, MAX_PATTERN_UNITS) : null;
         Plan plan = new Plan(length, prefix, reversePrefix, skip256, trigrams);
         CACHE.set(slot, new Entry(new WeakReference<>(owner), coordinate, plan));
         return plan;
@@ -134,7 +135,7 @@ final class M3StringSearchPrecompute {
             return entry.facts;
         }
 
-        M3TQ.Facts facts = M3TQ.precompute(source, MAX_TRIGRAM_SOURCE_UNITS);
+        M3TQ.Facts facts = precomputeTrigrams(source, MAX_TRIGRAM_SOURCE_UNITS);
         SOURCE_CACHE.set(
                 slot,
                 new SourceEntry(
@@ -143,6 +144,54 @@ final class M3StringSearchPrecompute {
                         source.length(),
                         facts));
         return facts;
+    }
+
+    /**
+     * Computes exact trigram facts with sequential reads through the current tuple leaf.
+     * The cursor-backed view is temporary; M3TQ.Facts retains no source or cursor reference.
+     */
+    private static M3TQ.Facts precomputeTrigrams(M3String value, int maxUtf16Units) {
+        return M3TQ.precompute(new CursorCharSequence(value), maxUtf16Units);
+    }
+
+    private static final class CursorCharSequence implements CharSequence {
+        private final M3String.CodeUnitCursor cursor;
+        private final int start;
+        private final int length;
+
+        private CursorCharSequence(M3String value) {
+            this(new M3String.CodeUnitCursor(value), 0, value.length());
+        }
+
+        private CursorCharSequence(M3String.CodeUnitCursor cursor, int start, int length) {
+            this.cursor = cursor;
+            this.start = start;
+            this.length = length;
+        }
+
+        @Override
+        public int length() {
+            return length;
+        }
+
+        @Override
+        public char charAt(int index) {
+            Objects.checkIndex(index, length);
+            return cursor.at(start + index);
+        }
+
+        @Override
+        public CharSequence subSequence(int beginIndex, int endIndex) {
+            Objects.checkFromToIndex(beginIndex, endIndex, length);
+            return new CursorCharSequence(cursor, start + beginIndex, endIndex - beginIndex);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder text = new StringBuilder(length);
+            for (int index = 0; index < length; index++) text.append(charAt(index));
+            return text.toString();
+        }
     }
 
     static int indexOf(
