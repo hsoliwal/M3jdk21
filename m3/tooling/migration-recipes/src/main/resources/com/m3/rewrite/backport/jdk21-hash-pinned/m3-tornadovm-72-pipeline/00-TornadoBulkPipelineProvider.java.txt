@@ -1,0 +1,355 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tornado;
+
+import java.lang.reflect.Array;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HexFormat;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.TreeMap;
+import jdk.internal.vm.parallel.BulkPipeline;
+import jdk.internal.vm.parallel.BulkPipelineExecution;
+import jdk.internal.vm.parallel.BulkPipelineExecutorProvider;
+import jdk.internal.vm.parallel.BulkPipelineStage;
+import jdk.internal.vm.parallel.BulkTask;
+import uk.ac.manchester.tornado.api.GridScheduler;
+import uk.ac.manchester.tornado.api.ImmutableTaskGraph;
+import uk.ac.manchester.tornado.api.TaskGraph;
+import uk.ac.manchester.tornado.api.TornadoExecutionPlan;
+import uk.ac.manchester.tornado.api.WorkerGrid1D;
+import uk.ac.manchester.tornado.api.enums.DataTransferMode;
+
+/**
+ * Optional TornadoVM 7.2 whole-pipeline provider.
+ *
+ * <p>Cross-stage values remain device resident through named persistOnDevice /
+ * consumeFromDevice links. Every accepted terminal output is independently reproduced by
+ * the host CPU bindings and compared exactly before publication.</p>
+ */
+public final class TornadoBulkPipelineProvider
+        implements BulkPipelineExecutorProvider {
+    public static final String PROVIDER_ID = "tornadovm-7.2-pipeline";
+    public static final int PROVIDER_PRIORITY = 200;
+
+    private final TornadoPipelineKernelRegistry registry;
+
+    public TornadoBulkPipelineProvider(
+            TornadoPipelineKernelRegistry registry) {
+        this.registry = Objects.requireNonNull(registry, "registry");
+    }
+
+    @Override
+    public String id() { return PROVIDER_ID; }
+
+    @Override
+    public int priority() { return PROVIDER_PRIORITY; }
+
+    @Override
+    public boolean supports(BulkPipeline pipeline) {
+        Objects.requireNonNull(pipeline, "pipeline");
+        for (BulkPipelineStage stage : pipeline.stages()) {
+            BulkTask task = stage.task();
+            if (!registry.contains(task.operationId())
+                    || task.localWork() < 1
+                    || task.localWork() > Integer.MAX_VALUE
+                    || task.workItems() > Integer.MAX_VALUE) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public BulkPipelineExecution execute(
+            BulkPipeline pipeline,
+            Map<String, Object> values) {
+        Objects.requireNonNull(pipeline, "pipeline");
+        Objects.requireNonNull(values, "values");
+        if (!supports(pipeline)) {
+            throw new IllegalArgumentException("unsupported TornadoVM pipeline");
+        }
+
+        Map<String, Object> cpu = inputState(pipeline, values);
+        Map<String, Object> accelerated = inputState(pipeline, values);
+        executeCpuOracle(pipeline, cpu);
+
+        ArrayList<ImmutableTaskGraph> graphs = new ArrayList<>();
+        GridScheduler grids = new GridScheduler();
+
+        for (BulkPipelineStage stage : pipeline.stages()) {
+            BulkTask task = stage.task();
+            TornadoPipelineKernelBinding binding =
+                    registry.require(task.operationId());
+            Map<String, Object> inputs = select(task.inputs(), accelerated);
+            Map<String, Object> outputs = allocate(binding, task, inputs);
+            HashMap<String, Object> stageValues = new HashMap<>(inputs);
+            stageValues.putAll(outputs);
+            outputs.forEach(accelerated::put);
+
+            TaskGraph graph = new TaskGraph(stage.id());
+            ArrayList<Object> hostInputs = new ArrayList<>();
+            TreeMap<String, List<Object>> deviceInputs = new TreeMap<>();
+            for (String input : task.inputs()) {
+                String producer = pipeline.producerStageId(input);
+                Object value = accelerated.get(input);
+                if (producer == null) {
+                    hostInputs.add(value);
+                } else {
+                    deviceInputs
+                            .computeIfAbsent(producer, ignored -> new ArrayList<>())
+                            .add(value);
+                }
+            }
+            if (!hostInputs.isEmpty()) {
+                graph.transferToDevice(
+                        DataTransferMode.FIRST_EXECUTION,
+                        hostInputs.toArray());
+            }
+            deviceInputs.forEach((producer, objects) ->
+                    graph.consumeFromDevice(producer, objects.toArray()));
+
+            binding.taskAppender().append(
+                    graph,
+                    "run",
+                    task,
+                    Map.copyOf(stageValues));
+
+            ArrayList<Object> persistent = new ArrayList<>();
+            ArrayList<Object> terminal = new ArrayList<>();
+            for (String output : task.outputs()) {
+                Object value = accelerated.get(output);
+                if (!pipeline.consumers(output).isEmpty()) {
+                    persistent.add(value);
+                }
+                if (pipeline.outputs().contains(output)) {
+                    terminal.add(value);
+                }
+            }
+            if (!persistent.isEmpty()) {
+                graph.persistOnDevice(persistent.toArray());
+            }
+            if (!terminal.isEmpty()) {
+                graph.transferToHost(
+                        DataTransferMode.EVERY_EXECUTION,
+                        terminal.toArray());
+            }
+
+            WorkerGrid1D worker =
+                    new WorkerGrid1D(Math.toIntExact(task.workItems()));
+            worker.setLocalWork(task.localWork(), 1, 1);
+            grids.addWorkerGrid(stage.id() + ".run", worker);
+            graphs.add(graph.snapshot());
+        }
+
+        try (TornadoExecutionPlan plan =
+                new TornadoExecutionPlan(
+                        graphs.toArray(ImmutableTaskGraph[]::new))) {
+            plan.withGridScheduler(grids);
+            for (int index = 0; index < graphs.size(); index++) {
+                plan.withGraph(index).execute();
+            }
+        } catch (Exception | LinkageError failure) {
+            throw new IllegalStateException(
+                    "TornadoVM 7.2 pipeline execution failed",
+                    failure);
+        }
+
+        verifyExact(pipeline.outputs(), cpu, accelerated);
+
+        LinkedHashMap<String, Object> terminal = new LinkedHashMap<>();
+        for (String output : pipeline.outputs()) {
+            terminal.put(output, accelerated.get(output));
+        }
+        String receipt = TornadoPipelineKernelRegistry.hash(
+                "M3_TORNADO_72_PIPELINE_EXECUTION_V1",
+                List.of(
+                        pipeline.structuralRoot(),
+                        registry.root(),
+                        hashValues(pipeline.inputs(), values),
+                        hashValues(pipeline.outputs(), accelerated)));
+
+        return new BulkPipelineExecution(
+                terminal,
+                PROVIDER_ID,
+                receipt,
+                pipeline.stageIds());
+    }
+
+    private void executeCpuOracle(
+            BulkPipeline pipeline,
+            Map<String, Object> state) {
+        for (BulkPipelineStage stage : pipeline.stages()) {
+            BulkTask task = stage.task();
+            TornadoPipelineKernelBinding binding =
+                    registry.require(task.operationId());
+            Map<String, Object> inputs = select(task.inputs(), state);
+            Map<String, Object> outputs = allocate(binding, task, inputs);
+            HashMap<String, Object> stageValues = new HashMap<>(inputs);
+            stageValues.putAll(outputs);
+            binding.cpuKernel().execute(
+                    task,
+                    Map.copyOf(stageValues));
+            outputs.forEach(state::put);
+        }
+    }
+
+    private static Map<String, Object> allocate(
+            TornadoPipelineKernelBinding binding,
+            BulkTask task,
+            Map<String, Object> inputs) {
+        Map<String, Object> outputs = Map.copyOf(
+                Objects.requireNonNull(
+                        binding.outputFactory().allocate(task, inputs),
+                        "output allocation"));
+        if (!outputs.keySet().equals(java.util.Set.copyOf(task.outputs()))) {
+            throw new IllegalStateException("Tornado output allocation shape mismatch");
+        }
+        outputs.values().forEach(value ->
+                Objects.requireNonNull(value, "allocated output"));
+        return outputs;
+    }
+
+    private static Map<String, Object> inputState(
+            BulkPipeline pipeline,
+            Map<String, Object> values) {
+        HashMap<String, Object> state = new HashMap<>();
+        for (String input : pipeline.inputs()) {
+            Object value = values.get(input);
+            if (value == null) {
+                throw new IllegalArgumentException("missing pipeline input: " + input);
+            }
+            state.put(input, copy(value));
+        }
+        return state;
+    }
+
+    private static Map<String, Object> select(
+            List<String> names,
+            Map<String, Object> state) {
+        LinkedHashMap<String, Object> selected = new LinkedHashMap<>();
+        for (String name : names) {
+            Object value = state.get(name);
+            if (value == null) {
+                throw new IllegalStateException("missing stage value: " + name);
+            }
+            selected.put(name, value);
+        }
+        return Map.copyOf(selected);
+    }
+
+    private static void verifyExact(
+            List<String> names,
+            Map<String, Object> expected,
+            Map<String, Object> actual) {
+        for (String name : names) {
+            if (!same(expected.get(name), actual.get(name))) {
+                throw new IllegalStateException(
+                        "TornadoVM CPU parity failed: " + name);
+            }
+        }
+    }
+
+    private static boolean same(Object left, Object right) {
+        if (left instanceof boolean[] a && right instanceof boolean[] b) return Arrays.equals(a, b);
+        if (left instanceof byte[] a && right instanceof byte[] b) return Arrays.equals(a, b);
+        if (left instanceof short[] a && right instanceof short[] b) return Arrays.equals(a, b);
+        if (left instanceof char[] a && right instanceof char[] b) return Arrays.equals(a, b);
+        if (left instanceof int[] a && right instanceof int[] b) return Arrays.equals(a, b);
+        if (left instanceof long[] a && right instanceof long[] b) return Arrays.equals(a, b);
+        if (left instanceof float[] a && right instanceof float[] b) {
+            if (a.length != b.length) return false;
+            for (int i = 0; i < a.length; i++) {
+                if (Float.floatToRawIntBits(a[i]) != Float.floatToRawIntBits(b[i])) return false;
+            }
+            return true;
+        }
+        if (left instanceof double[] a && right instanceof double[] b) {
+            if (a.length != b.length) return false;
+            for (int i = 0; i < a.length; i++) {
+                if (Double.doubleToRawLongBits(a[i]) != Double.doubleToRawLongBits(b[i])) return false;
+            }
+            return true;
+        }
+        return Objects.equals(left, right);
+    }
+
+    private static Object copy(Object value) {
+        Objects.requireNonNull(value, "value");
+        if (value instanceof boolean[] array) return array.clone();
+        if (value instanceof byte[] array) return array.clone();
+        if (value instanceof short[] array) return array.clone();
+        if (value instanceof char[] array) return array.clone();
+        if (value instanceof int[] array) return array.clone();
+        if (value instanceof long[] array) return array.clone();
+        if (value instanceof float[] array) return array.clone();
+        if (value instanceof double[] array) return array.clone();
+        if (value instanceof String
+                || value instanceof Boolean
+                || value instanceof Byte
+                || value instanceof Short
+                || value instanceof Character
+                || value instanceof Integer
+                || value instanceof Long
+                || value instanceof Float
+                || value instanceof Double) {
+            return value;
+        }
+        throw new IllegalArgumentException(
+                "unsupported Tornado pipeline value: " + value.getClass().getName());
+    }
+
+    private static String hashValues(
+            List<String> names,
+            Map<String, Object> values) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            for (String name : names) {
+                update(digest, name.getBytes(StandardCharsets.UTF_8));
+                updateValue(digest, values.get(name));
+            }
+            return HexFormat.of().formatHex(digest.digest());
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new ExceptionInInitializerError(impossible);
+        }
+    }
+
+    private static void updateValue(MessageDigest digest, Object value) {
+        Objects.requireNonNull(value, "value");
+        update(digest, value.getClass().getName().getBytes(StandardCharsets.UTF_8));
+        if (value.getClass().isArray()) {
+            int length = Array.getLength(value);
+            update(digest, ByteBuffer.allocate(4).order(ByteOrder.BIG_ENDIAN)
+                    .putInt(length).array());
+            for (int index = 0; index < length; index++) {
+                Object element = Array.get(value, index);
+                update(digest, String.valueOf(element).getBytes(StandardCharsets.UTF_8));
+                if (element instanceof Float number) {
+                    update(digest, ByteBuffer.allocate(4).order(ByteOrder.BIG_ENDIAN)
+                            .putInt(Float.floatToRawIntBits(number)).array());
+                } else if (element instanceof Double number) {
+                    update(digest, ByteBuffer.allocate(8).order(ByteOrder.BIG_ENDIAN)
+                            .putLong(Double.doubleToRawLongBits(number)).array());
+                }
+            }
+        } else {
+            update(digest, String.valueOf(value).getBytes(StandardCharsets.UTF_8));
+        }
+    }
+
+    private static void update(MessageDigest digest, byte[] bytes) {
+        digest.update((byte) (bytes.length >>> 24));
+        digest.update((byte) (bytes.length >>> 16));
+        digest.update((byte) (bytes.length >>> 8));
+        digest.update((byte) bytes.length);
+        digest.update(bytes);
+    }
+}
