@@ -516,7 +516,8 @@ for fragment in [
 # fallback. Low-byte collisions may only reduce skips; KMP remains semantic authority.
 for fragment in [
     "int[] skip256 = new int[256];",
-    "skip256[pattern.charAt(index) & 255] = length - 1 - index;",
+    "M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(pattern);",
+    "skip256[units.at(index) & 255] = length - 1 - index;",
     "if (plan.patternLength >= 8)",
     "failedComparisonWork > (long) plan.patternLength + 2L * (at - fromIndex)",
     "return kmp(source, pattern, plan, at, endIndex);",
@@ -570,7 +571,8 @@ for forbidden in [
 for fragment in [
     "final int[] skip256;",
     "Arrays.fill(skip256, Math.max(1, length));",
-    "skip256[pattern.charAt(index) & 255] = length - 1 - index;",
+    "M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(pattern);",
+    "skip256[units.at(index) & 255] = length - 1 - index;",
     "if (plan.patternLength >= 8)",
     "failedComparisonWork > (long) plan.patternLength + 2L * (at - fromIndex)",
     "return kmp(source, pattern, plan, at, endIndex);",
