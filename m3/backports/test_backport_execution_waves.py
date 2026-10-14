@@ -131,6 +131,86 @@ class BackportExecutionWavesTest(unittest.TestCase):
         self.assertEqual("m3_backport_jep_1_inventory", items[0].airflow_task_id)
         self.assertEqual("M3_BACKPORT_JEP_1_INVENTORY", items[0].drools_fact_id)
 
+    def test_header_only_approval_ledger_is_valid_but_invalid_headers_fail(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "approvals.tsv"
+            path.write_text("atom_id\tapproved\tproof_ref\n", encoding="utf-8")
+            self.assertEqual({}, self.w.read_approvals(path))
+            path.write_text("atom_id\tapproved\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "missing columns"):
+                self.w.read_approvals(path)
+
+    def test_duplicate_approval_ids_are_rejected_even_when_earlier_row_is_false(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "approvals.tsv"
+            path.write_text(
+                "atom_id\tapproved\tproof_ref\n"
+                "a.recipe\tfalse\t\n"
+                "a.recipe\ttrue\treview/real\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "duplicate approval atom_id"):
+                self.w.read_approvals(path)
+
+    def test_malformed_approval_record_is_not_accepted_as_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "approvals.tsv"
+            path.write_text(
+                "atom_id\tapproved\tproof_ref\n"
+                "a.recipe\ttrue\treview/real\textra\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "malformed approval ledger"):
+                self.w.read_approvals(path)
+
+    def test_nonexecutable_file_cannot_inherit_scope_approval(self) -> None:
+        held = atom(0, "held.file", "INVENTORY", executable=False)
+        item = self.w.plan([held], {"held.file": "review/evidence-only"})[0]
+        self.assertEqual(self.w.EVIDENCE_HOLD, item.execution_state)
+        self.assertFalse(item.scope_approved)
+        self.assertEqual(-1, item.wave)
+
+    def test_collision_after_scheduler_id_normalization_fails_closed(self) -> None:
+        atoms = [
+            atom(0, "jep-458.file", "RECIPE"),
+            atom(1, "jep_458.file", "RECIPE"),
+        ]
+        with self.assertRaisesRegex(ValueError, "scheduler identity collision"):
+            self.w.plan(atoms, {})
+
+    def test_direct_planner_rejects_unknown_approvals_and_invalid_scope(self) -> None:
+        atoms = [atom(0, "jep-458.inventory", "INVENTORY")]
+        with self.assertRaisesRegex(ValueError, "unknown atoms"):
+            self.w.plan(atoms, {"unrelated.atom": "review/other"})
+        with self.assertRaisesRegex(ValueError, "unrecognized edit scope"):
+            self.w.plan([atom(0, "jep-458.inventory", "INVENTORY", scope="REACTOR")], {})
+
+    def test_direct_planner_rejects_order_gaps_and_cross_work_dependencies(self) -> None:
+        with self.assertRaisesRegex(ValueError, "non-contiguous"):
+            self.w.plan([atom(3, "orphan.file", "RECIPE")], {})
+        atoms = [
+            atom(0, "jep-423.recipe", "RECIPE", work_id="JEP-423"),
+            atom(1, "jep-475.recipe", "RECIPE", work_id="JEP-475",
+                 depends_on="jep-423.recipe"),
+        ]
+        with self.assertRaisesRegex(ValueError, "cross-work-item dependency"):
+            self.w.plan(atoms, {})
+
+    def test_unapproved_g1_multimodule_backport_is_held_with_dependents(self) -> None:
+        atoms = [
+            atom(0, "jep475.inventory", "INVENTORY", work_id="JEP-475"),
+            atom(1, "jep475.recipe", "RECIPE", work_id="JEP-475",
+                 scope="MULTI_MODULE", depends_on="jep475.inventory"),
+            atom(2, "jep475.compile", "COMPILE", work_id="JEP-475",
+                 scope="MULTI_MODULE", depends_on="jep475.recipe"),
+        ]
+        items = {item.atom_id: item for item in self.w.plan(atoms, {})}
+        self.assertEqual(self.w.READY, items["jep475.inventory"].execution_state)
+        self.assertEqual(self.w.SCOPE_APPROVAL_HOLD, items["jep475.recipe"].execution_state)
+        self.assertEqual(self.w.SCOPE_APPROVAL_HOLD, items["jep475.compile"].execution_state)
+        self.assertEqual(-1, items["jep475.recipe"].wave)
+        self.assertEqual(-1, items["jep475.compile"].wave)
+
     def test_approval_ledger_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "approvals.tsv"

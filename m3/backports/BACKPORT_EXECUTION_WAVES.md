@@ -103,3 +103,29 @@ atoms may execute in parallel, while work inside one dependency chain remains de
 Atomization, patternization, IOP role admission and derivable documentation occur before the source
 recipe/proof tail in the existing backport DAG. This scheduler therefore accelerates the proven
 recipe DAG; it does not bypass it.
+
+## Source-sealed admission safety (2026-10-14)
+
+A scheduler projection is not proof of compatibility. Before producing any Camel, Airflow or
+Drools task identities, the wave planner now checks:
+
+- approval TSV headers and row widths, including zero-row ledgers;
+- duplicate atom IDs **across all approval rows**, including denied then approved entries;
+- exact approved atom membership in the canonical DAG;
+- contiguous canonical atom order and known semantic edit scopes;
+- absence of unapproved cross-work-item dependencies;
+- one-to-one atom-to-scheduler identity after normalization (no `a-b` / `a_b` alias);
+- explicit non-executable evidence never carries `scope_approved=true`, including FILE atoms.
+
+The existing `FILE -> VISIBILITY -> PACKAGE -> MODULE -> MULTI_MODULE -> LIBRARY_API`
+authority ladder is unchanged. Scope approvals remain declarations for scheduling, not
+independently verified recipe/JUnit, Java-21 compatibility or release promotion receipts.
+
+JEP 475 (G1 Late Barrier Expansion) is an intentional negative proof fixture:
+its MULTI_MODULE recipe/compile atoms remain held without explicit scoped approval, and no
+scheduler layer may turn its 58-path inventory into a compatibility claim.
+
+The source-sealed successor recipe is canonically authored in `hsoliwal/com.synexia`;
+M3JDK21 receives only the reviewed postimages and an immutable source/proof reference.
+The previous `M3BackportExecutionWaveReceiverRecipe` and its preimages are retained for
+history. The successor is an additive refinement, not a silent rewrite of that evidence.
