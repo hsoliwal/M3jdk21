@@ -3414,6 +3414,12 @@ public final class String
         if (storage != null && isConservativeLiteralRegex(regex)) {
             return storage.contentEquals(regex);
         }
+        if (storage != null) {
+            int dotStar = M3DotStarRegex.tryFullMatch(storage, regex);
+            if (dotStar != M3DotStarRegex.UNSUPPORTED) {
+                return dotStar == M3DotStarRegex.MATCH;
+            }
+        }
         return Pattern.matches(regex, this);
     }
 
