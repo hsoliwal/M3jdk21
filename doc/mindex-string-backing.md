@@ -6,6 +6,37 @@ Status: historical first-stage design, retained for provenance. The current runt
 
 Synexia uses the donor name `MIndexString`; M3JDK uses the target name `M3String`.
 
+## Reading the current source
+
+The first-stage sections below are historical; in particular, “String is not changed”
+and “no JNI library is loaded” do not describe the later integrated runtime. For the
+current candidate use the [runtime guide](../m3/runtime-integration/README.md),
+[JNI contract](../m3/docs/mindex-jni-string-ingress.md) and
+[build/configuration matrix](../m3/docs/native-build.md).
+
+At the reviewed source revision, the ownership path is:
+
+1. [`String`](../src/java.base/share/classes/java/lang/String.java) retains the VM-visible
+   `byte[] value` field and a volatile internal `M3String m3`. A non-null descriptor does
+   not license an old layout reader to treat the compatibility sentinel as the text.
+2. [`M3String`](../src/java.base/share/classes/java/lang/M3String.java) has two instance
+   fields: a final `M3StringOwner owner` and final packed `long value`. The coordinate
+   is a UTF-16 start/length range, not a pointer, encoded-byte offset or public token ID.
+3. [`M3StringAtom`](../src/java.base/share/classes/java/lang/M3StringAtom.java) owns access
+   to native/mapped scalar storage, retaining mapped ownership where applicable;
+   tuple owners retain component owners. A small range can keep a large owner alive.
+4. [`M3StringPool`](../src/java.base/share/classes/java/lang/M3StringPool.java) manages
+   VM-local canonical admission, weak-owner cleanup and bounded retention. A budget
+   refusal must preserve the original operation through its flat fallback; it must not
+   be interpreted as empty text or a valid null operand.
+5. `materialize()` creates a JNI compatibility shadow; `compatibilityValue()` supplies
+   the VM layout sentinel. Neither changes the canonical owner into a Java payload array.
+
+These are internal implementation landmarks, not a new supported application API.
+Content equality, Java object identity, `intern()` identity and owner/range identity
+remain distinct. Hashes can narrow candidates; exact semantics decide equality.
+The target must be built with its matching HotSpot readers and JNI implementation.
+
 ## Objective
 
 Allow a modified JDK to expose ordinary `java.lang.String` semantics while the immutable character

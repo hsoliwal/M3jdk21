@@ -48,6 +48,28 @@ range streams include all addresses, including zeros, with weakly consistent val
 streams capture immutable snapshots. Bitmap streams are weakly consistent and not SIZED.
 Parallel mode is available, not a promise that every workload is faster.
 
+## Representation and regression checklist
+
+This library's primitive lanes are not interchangeable with the reference-bearing
+backends of `java.util`. The [JDK collection replacement specification](../docs/collections-replacement-spec.md)
+is a design/acceptance document; its proposed changes are not installed by building
+this module. Keep mutable owner identity, topology, presence and slot generations
+separate from primitive values. A zero can be a valid value; absence needs the owner's
+specified representation. Single-threaded, atomic-scalar and snapshot owners have
+different consistency contracts.
+
+When documenting or porting an owner, trace its factory, concrete class, tests and
+receiver receipt together. Check boundary addresses and overflow, sparse zeros,
+range copying overlap, stale/reused handles, iteration order, mutation visibility,
+stream splitting and Java/native parity where applicable. For reference payloads,
+retain GC-traced Java references or a separately qualified rooted-handle protocol;
+primitive IDs alone are not object lifetime management.
+
+Prefer the current receiver qualification below over the historical installer.
+Fixed-point/refusal proofs protect source delivery; contract tests protect API
+behavior; JNI/UBSan checks protect a bounded native path. None alone proves lock-free
+whole-collection progress, a universal speedup or promotion of the JDK backend.
+
 ## Historical lane build, recipe and verification
 
 From the repository root, with Java 21 and Maven:

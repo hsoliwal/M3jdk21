@@ -1,5 +1,73 @@
 # JNI String ingress into canonical MIndex storage
 
+## Current target contract and reading order
+
+The 2026-10-02 narrative below is retained as historical ingress evidence. Its
+`MIndexString`, `String.mindex` and canonical Compact-String array descriptions are
+superseded for the current target. The donor name remains valid in provenance; the
+current implementation names are `java.lang.M3String`, `String.m3`, `ensureM3()` and
+`M3StringPool`. Do not globally rename donor records or rewrite historical receipts.
+
+Source landmarks:
+
+- [`jni.cpp`](../../src/hotspot/share/prims/jni.cpp): `m3_admit_jni_string`, String
+  constructors, acquire/release pairs, region copies and critical access.
+- [`String.java`](../../src/java.base/share/classes/java/lang/String.java):
+  `m3AdmitNative`, `ensureM3` and the VM-visible compatibility field.
+- [`M3String.java`](../../src/java.base/share/classes/java/lang/M3String.java):
+  owner/coordinate, `materialize` and `compatibilityValue`.
+
+### Construction and ownership
+
+`NewString` and `NewStringUTF` first use the existing HotSpot construction helpers.
+Before creating the returned local JNI reference, the VM calls `m3_admit_jni_string`.
+It returns early for null input, disabled `UseM3StringStorage`, incomplete module
+initialization or an uninitialized `M3String` class. The Java helper then applies
+`ensureM3()`'s boot/admission/nonempty gates.
+
+On successful admission, the helper returns `M3String.compatibilityValue()`, a shared
+empty VM-layout sentinel. HotSpot installs that `byte[]` in `String.value`; the text
+remains behind the canonical owner/coordinate. On refusal or unavailable admission,
+it returns the ordinary backing. This does not transfer ownership of a caller's
+native input pointer or let a native pointer masquerade as a Java array.
+
+### Acquire, use, release
+
+| JNI boundary | Source behavior | Caller/lifetime obligation |
+| --- | --- | --- |
+| `GetStringChars` / `ReleaseStringChars` | Allocates a native UTF-16 copy and frees it on release | Check failure; pair the matching release; do not retain the pointer afterward |
+| `GetStringUTFChars` / `ReleaseStringUTFChars` | Allocates a native modified-UTF-8 copy and frees it on release | JNI modified UTF-8 is not an ordinary UTF-8 file format; do not free via an unrelated allocator |
+| `GetStringRegion` / `GetStringUTFRegion` | Copies the requested region to caller-provided storage | Caller owns and sizes the buffer; validate UTF-16 range and encoded-byte capacity separately |
+| `GetStringCritical` / `ReleaseStringCritical` | Copies whenever M3 is enabled or text is Latin1; otherwise pins the UTF-16 value array | Pair the critical release and obey JNI critical-region restrictions even when the implementation copies |
+
+The critical acquire/release branch deliberately uses the storage flag, not just the
+presence of a descriptor: lazy admission must not change who releases a pointer.
+The stock pin path recovers the original array from the acquired address because
+String deduplication could replace `String.value`. Never cache a native address as a
+portable MIndex identity, free canonical storage when releasing a shadow, or retain
+local JNI references across their scope without the appropriate JNI reference owner.
+
+Lengths for Java text are UTF-16 code units. Embedded NUL, supplementary characters,
+isolated surrogates, empty strings and split-surrogate regions need explicit regression
+cases. Match the exact JNI encoding contract; a standard UTF-8 conversion is not an
+acceptable replacement for `NewStringUTF`/`GetStringUTFChars` semantics.
+
+### ABI and verification boundary
+
+Keep public JNI signatures and Java API behavior intact. Any change to the descriptor,
+field layout, VM symbols or String readers requires a matched Java/HotSpot image and
+review of GC, intrinsics, CDS, serviceability and native consumers. The current enabled
+experiment is interpreter-only and retains guards for incompatible facilities; see
+[the build/configuration matrix](native-build.md#configuration-and-platform-evidence-matrix).
+
+`run-api.sh` exercises default, interpreter, C2, enabled and enabled/noncompact modes
+under checked JNI, but its C2 mode does not enable M3. Use
+[the reproduction commands](native-build.md#build-and-test-a-complete-runtime) and
+record exact-head output. The historical oracle count below is a script expectation,
+not a claim that this documentation revision executed or passed the probe.
+
+## Historical ingress design (superseded representation)
+
 Date: 2026-10-02
 
 ## Purpose
