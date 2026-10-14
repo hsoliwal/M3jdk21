@@ -479,6 +479,38 @@
         "source_resource_sha256": "e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95",
         "receiver_receipt": "m3/compatibility/synexia-string-concat-dag-successor-20261013.json"
       }
+    },
+    {
+      "source": "com.synexia.unix4jm3",
+      "source_base": "29da7f266f2b88fe175536318ae0d313ba058e7f",
+      "target": "jdk.m3.text",
+      "module": "jdk.m3.text",
+      "public_sdk_types": [
+        "TextTools",
+        "M3UnixRuntime",
+        "TextFrame"
+      ],
+      "status": "candidate source receiver; local Linux Java21 linked-image qualified; product acceptance pending",
+      "recipe": "synexia-openrewrite-recipes/crates/m3-text-jmods/pom.xml",
+      "receiver": "m3/tooling/module-packs/text-tools",
+      "source_revision_receipt": "m3/tooling/module-packs/text-tools/SOURCE_REF.json",
+      "target_rule": "Opt-in fork SDK extension; preserve all Java SE names/contracts; no java.base replacement or phase advancement.",
+      "license": "Apache-2.0 first-party only; OpenJDK and third-party rights retained"
+    },
+    {
+      "source": "com.synexia.unix4jm3.io",
+      "source_base": "29da7f266f2b88fe175536318ae0d313ba058e7f",
+      "target": "jdk.m3.io",
+      "module": "jdk.m3.io",
+      "public_sdk_types": [
+        "FileTools"
+      ],
+      "status": "candidate source receiver; local Linux Java21 linked-image qualified; product acceptance pending",
+      "recipe": "synexia-openrewrite-recipes/crates/m3-text-jmods/pom.xml",
+      "receiver": "m3/tooling/module-packs/text-tools",
+      "source_revision_receipt": "m3/tooling/module-packs/text-tools/SOURCE_REF.json",
+      "target_rule": "Opt-in fork SDK extension; preserve all Java SE names/contracts; no java.base replacement or phase advancement.",
+      "license": "Apache-2.0 first-party only; OpenJDK and third-party rights retained"
     }
   ],
   "imported_donor_sources": [],

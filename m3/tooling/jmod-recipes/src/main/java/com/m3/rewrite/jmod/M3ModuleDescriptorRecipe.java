@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite.jmod;
 
@@ -35,7 +36,7 @@ import org.openrewrite.text.PlainText;
  *       file whose bytes do not match its pinned sha256 is refused before anything is written;</li>
  *   <li>absent target: generated with exactly the pinned bytes;</li>
  *   <li>present target with the pinned bytes: unchanged (second run = fixed point);</li>
- *   <li>present target with other bytes: never overwritten, marked with a {@link Markup.Error} (drift refusal).</li>
+ *   <li>present target with other bytes: fail before generating any descriptor (atomic drift refusal).</li>
  * </ul>
  */
 public final class M3ModuleDescriptorRecipe extends ScanningRecipe<M3ModuleDescriptorRecipe.Accumulator> {
@@ -77,7 +78,12 @@ public final class M3ModuleDescriptorRecipe extends ScanningRecipe<M3ModuleDescr
             if (!sha256(text).equals(row.sha256())) {
                 throw new IllegalStateException("generated descriptor does not match its pin: " + row.generated());
             }
-            acc.wanted.put(row.target(), text);
+            Path target = Path.of(row.target());
+            if (target.isAbsolute() || !target.normalize().equals(target)
+                    || target.startsWith("..") || !target.getFileName().toString().equals("module-info.java"))
+                throw new IllegalArgumentException("unsafe descriptor target: " + target);
+            if (acc.wanted.putIfAbsent(row.target(), text) != null)
+                throw new IllegalArgumentException("duplicate descriptor target: " + target);
         }
         return acc;
     }
@@ -91,7 +97,8 @@ public final class M3ModuleDescriptorRecipe extends ScanningRecipe<M3ModuleDescr
                     String path = slash(sf.getSourcePath());
                     String want = acc.wanted.get(path);
                     if (want != null) {
-                        acc.present.add(path);
+                        if (!acc.present.add(path))
+                            throw new IllegalStateException("duplicate descriptor input: " + path);
                         if (!want.equals(sf.printAll())) {
                             acc.drifted.add(path);
                         }
@@ -104,6 +111,8 @@ public final class M3ModuleDescriptorRecipe extends ScanningRecipe<M3ModuleDescr
 
     @Override
     public Collection<? extends SourceFile> generate(Accumulator acc, ExecutionContext ctx) {
+        if (!acc.drifted.isEmpty())
+            throw new IllegalStateException("descriptor drift: " + acc.drifted);
         List<SourceFile> created = new ArrayList<>();
         acc.wanted.forEach((target, text) -> {
             if (!acc.present.contains(target)) {
@@ -133,10 +142,14 @@ public final class M3ModuleDescriptorRecipe extends ScanningRecipe<M3ModuleDescr
 
     public static List<Row> rows(Path manifest) {
         List<String> lines = List.of(read(manifest).split("\n"));
+        if (lines.isEmpty() || !lines.getFirst().equals("module\tartifacts\tunit_jars\ttarget\tsha256\tgenerated"))
+            throw new IllegalArgumentException("descriptor manifest header");
         List<Row> rows = new ArrayList<>();
         for (String line : lines.subList(1, lines.size())) {
             if (!line.isBlank()) {
                 String[] c = line.split("\t", -1);
+                if (c.length != 6 || !c[4].matches("[0-9a-f]{64}"))
+                    throw new IllegalArgumentException("descriptor manifest row");
                 rows.add(new Row(c[0], c[1], c[2], c[3], c[4], c[5].strip()));
             }
         }
