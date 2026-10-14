@@ -45,6 +45,11 @@ jobs:
       - name: Java JNI and native C parity proof
         run: mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test
 
+      - name: Install the source-built OpenRewrite/JUnit dependency closure
+        run: |
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml -pl :rewrite-core,:rewrite-java,:rewrite-java-21,:rewrite-test,:junit-jupiter -am -DskipTests install
+          mvn -B -ntp -f m3/synexia-import/pure-int-recipe-custody/pom.xml -DskipTests install
+
       - name: Recipe engine and crate fixed point
         run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jdk21HashPinnedSnapshotRecipeNameTest,M3FullPrecomputeSecondPassRecipeTest             test
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3Jdk21HashPinnedSnapshotRecipeNameTest,M3FullPrecomputeSecondPassRecipeTest test
