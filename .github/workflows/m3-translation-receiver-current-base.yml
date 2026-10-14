@@ -7,13 +7,18 @@ on:
       - "m3/core/src/com/m3/text/M3LexiconPrecompute.java"
       - "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java"
       - "m3/core/src/com/m3/text/M3LanguageGrammarSupport.java"
+      - "m3/core/src/com/m3/text/M3NumberSpace.java"
+      - "m3/core/test/M3NumberSpaceContractTest.java"
+      - "m3/core/test/M3NumberSpaceExportFixture.java"
       - "m3/core/src/com/m3/text/SynexiaPrecomputePayload.java"
       - "m3/core/test/M3TranslationReceiverMapTest.java"
       - "m3/lexicon/synexia-precompute-field-map.tsv"
       - "m3/lexicon/synexia-source-manifest.tsv"
+      - "m3/lexicon/synexia-number-target-map.tsv"
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
       - "m3/runtime-integration/export-synexia-lexicon.py"
       - "m3/runtime-integration/tests/test_synexia_export.py"
+      - "m3/runtime-integration/tests/test_m3_number_space_export.py"
       - "m3/runtime-integration/verify-synexia-lexicon.py"
       - "m3/lexicon/SYNEXIA_EXPORT.md"
       - ".github/workflows/m3-translation-receiver-current-base.yml"
@@ -24,13 +29,18 @@ on:
       - "m3/core/src/com/m3/text/M3LexiconPrecompute.java"
       - "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java"
       - "m3/core/src/com/m3/text/M3LanguageGrammarSupport.java"
+      - "m3/core/src/com/m3/text/M3NumberSpace.java"
+      - "m3/core/test/M3NumberSpaceContractTest.java"
+      - "m3/core/test/M3NumberSpaceExportFixture.java"
       - "m3/core/src/com/m3/text/SynexiaPrecomputePayload.java"
       - "m3/core/test/M3TranslationReceiverMapTest.java"
       - "m3/lexicon/synexia-precompute-field-map.tsv"
       - "m3/lexicon/synexia-source-manifest.tsv"
+      - "m3/lexicon/synexia-number-target-map.tsv"
       - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
       - "m3/runtime-integration/export-synexia-lexicon.py"
       - "m3/runtime-integration/tests/test_synexia_export.py"
+      - "m3/runtime-integration/tests/test_m3_number_space_export.py"
       - "m3/runtime-integration/verify-synexia-lexicon.py"
       - "m3/lexicon/SYNEXIA_EXPORT.md"
       - ".github/workflows/m3-translation-receiver-current-base.yml"
@@ -60,7 +70,12 @@ jobs:
           mkdir -p build/translation-receiver-current-base/classes build/translation-receiver-current-base/tests
           mapfile -t sources < <(find core/src -name '*.java' | sort)
           javac --release 21 -Xlint:all,-module             -d build/translation-receiver-current-base/classes "${sources[@]}"
-          javac --release 21 -Xlint:all,-module -Werror             -cp build/translation-receiver-current-base/classes             -d build/translation-receiver-current-base/tests             core/test/M3TranslationReceiverMapTest.java
+          javac --release 21 -Xlint:all,-module -Werror             -cp build/translation-receiver-current-base/classes             -d build/translation-receiver-current-base/tests             core/test/M3TranslationReceiverMapTest.java core/test/M3NumberSpaceContractTest.java core/test/M3NumberSpaceExportFixture.java
           java -ea             -cp build/translation-receiver-current-base/classes:build/translation-receiver-current-base/tests             M3TranslationReceiverMapTest
+          java -ea -cp build/translation-receiver-current-base/classes:build/translation-receiver-current-base/tests M3NumberSpaceContractTest
+          java -ea -cp build/translation-receiver-current-base/classes:build/translation-receiver-current-base/tests M3NumberSpaceExportFixture build/translation-receiver-current-base/number-space.tsv
+          mkdir -p build/translation-receiver-current-base/python-temp
       - name: Verify Synexia export source-manifest contracts
-        run: python -B m3/runtime-integration/tests/test_synexia_export.py
+        run: |
+          python -B m3/runtime-integration/tests/test_synexia_export.py
+          python -B m3/runtime-integration/tests/test_m3_number_space_export.py --fixture m3/build/translation-receiver-current-base/number-space.tsv --scratch-dir m3/build/translation-receiver-current-base/python-temp

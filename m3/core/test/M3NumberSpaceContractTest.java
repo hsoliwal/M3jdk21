@@ -56,6 +56,8 @@ public final class M3NumberSpaceContractTest {
         check(columns[3].equals(M3NumberSpace.SOURCE_RECORD_ID_FIELD));
         check(columns[4].equals("value"));
         check(columns[7].contains("M3 generates the inclusive 0..10000 domain"));
+        check(columns[7].contains("language_tag=und only as an envelope"));
+        check(columns[7].contains("mapping_name=NUMBER_<record_id>"));
         String[] fields = columns[8].split(",", -1);
         String[] sortedFields = fields.clone();
         Arrays.sort(sortedFields);
