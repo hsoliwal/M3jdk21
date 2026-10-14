@@ -816,9 +816,11 @@ final class M3String implements CharSequence {
             getBytes(output, 0, 0, String.LATIN1, length());
             return output;
         }
+        // Resolve each visible scalar run once; the ASCII return stays cursor-free.
+        CodeUnitCursor units = new CodeUnitCursor(this);
         int target = 0;
         for (int index = 0; index < length(); index++) {
-            char unit = charAt(index);
+            char unit = units.at(index);
             if (unit < 0x80) {
                 output[target++] = (byte) unit;
             } else if (unit < 0x800) {
@@ -826,8 +828,8 @@ final class M3String implements CharSequence {
                 output[target++] = (byte) (0x80 | (unit & 0x3f));
             } else if (Character.isHighSurrogate(unit)
                     && index + 1 < length()
-                    && Character.isLowSurrogate(charAt(index + 1))) {
-                int codePoint = Character.toCodePoint(unit, charAt(++index));
+                    && Character.isLowSurrogate(units.at(index + 1))) {
+                int codePoint = Character.toCodePoint(unit, units.at(++index));
                 output[target++] = (byte) (0xf0 | (codePoint >>> 18));
                 output[target++] = (byte) (0x80 | ((codePoint >>> 12) & 0x3f));
                 output[target++] = (byte) (0x80 | ((codePoint >>> 6) & 0x3f));
