@@ -571,13 +571,65 @@ final class M3String implements CharSequence {
                 : owner.rangeFactsIfPrepared(value);
     }
 
+    /**
+     * Thread-confined logical UTF-16 reader over persistent canonical tuple coordinates.
+     * It resolves each contiguous visible scalar run once, not once per code unit.
+     * Only canonical owners and primitive bounds are retained; no text or native pointer copy.
+     */
+    private static final class CodeUnitCursor {
+        private final M3String source;
+        private M3StringOwner scalar;
+        private int logicalBegin;
+        private int logicalEnd;
+        private int scalarOffset;
+
+        CodeUnitCursor(M3String source) {
+            this.source = source;
+        }
+
+        char at(int index) {
+            Objects.checkIndex(index, source.length());
+            if (scalar == null || index < logicalBegin || index >= logicalEnd) {
+                seek(index);
+            }
+            return scalar.charAt(scalarOffset + index - logicalBegin);
+        }
+
+        private void seek(int index) {
+            int position = source.start() + index;
+            M3StringOwner current = source.owner();
+            int remaining = source.length() - index;
+            while (current instanceof M3StringTuple tuple) {
+                int leftLength = tuple.left.length();
+                M3String child;
+                int childIndex;
+                if (position < leftLength) {
+                    child = tuple.left;
+                    childIndex = position;
+                } else {
+                    child = tuple.right;
+                    childIndex = position - leftLength;
+                }
+                remaining = Math.min(remaining, child.length() - childIndex);
+                position = child.start() + childIndex;
+                current = child.owner();
+            }
+            scalar = current;
+            logicalBegin = index;
+            logicalEnd = index + remaining;
+            scalarOffset = position;
+        }
+    }
+
     private static final class CharsSpliterator implements Spliterator.OfInt {
         private final M3String source;
+        private final CodeUnitCursor units;
         private int index;
         private final int fence;
 
         CharsSpliterator(M3String source, int index, int fence) {
             this.source = Objects.requireNonNull(source, "source");
+            this.units = new CodeUnitCursor(this.source);
             this.index = index;
             this.fence = fence;
         }
@@ -595,14 +647,14 @@ final class M3String implements CharSequence {
         public boolean tryAdvance(IntConsumer action) {
             Objects.requireNonNull(action, "action");
             if (index >= fence) return false;
-            action.accept(source.charAt(index++));
+            action.accept(units.at(index++));
             return true;
         }
 
         @Override
         public void forEachRemaining(IntConsumer action) {
             Objects.requireNonNull(action, "action");
-            for (int at = index; at < fence; at++) action.accept(source.charAt(at));
+            for (int at = index; at < fence; at++) action.accept(units.at(at));
             index = fence;
         }
 
@@ -622,11 +674,13 @@ final class M3String implements CharSequence {
 
     private static final class CodePointsSpliterator implements Spliterator.OfInt {
         private final M3String source;
+        private final CodeUnitCursor units;
         private int index;
         private final int fence;
 
         CodePointsSpliterator(M3String source, int index, int fence) {
             this.source = Objects.requireNonNull(source, "source");
+            this.units = new CodeUnitCursor(this.source);
             this.index = index;
             this.fence = fence;
         }
@@ -638,8 +692,8 @@ final class M3String implements CharSequence {
             if (mid <= lo) return null;
             if (mid < fence
                     && mid > lo
-                    && Character.isLowSurrogate(source.charAt(mid))
-                    && Character.isHighSurrogate(source.charAt(mid - 1))) {
+                    && Character.isLowSurrogate(units.at(mid))
+                    && Character.isHighSurrogate(units.at(mid - 1))) {
                 mid--;
             }
             if (mid <= lo) return null;
@@ -651,9 +705,9 @@ final class M3String implements CharSequence {
         public boolean tryAdvance(IntConsumer action) {
             Objects.requireNonNull(action, "action");
             if (index >= fence) return false;
-            char first = source.charAt(index++);
+            char first = units.at(index++);
             if (Character.isHighSurrogate(first) && index < fence) {
-                char second = source.charAt(index);
+                char second = units.at(index);
                 if (Character.isLowSurrogate(second)) {
                     index++;
                     action.accept(Character.toCodePoint(first, second));

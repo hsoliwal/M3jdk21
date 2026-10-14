@@ -44,7 +44,56 @@ public class M3StringStreamsTest {
         int[] charsParallel = tuple.chars().parallel().toArray();
         check(Arrays.equals(charsSequential, charsParallel), "parallel chars split preserves order/content");
 
+        deepSharedTuples();
+        splitSurrogateAcrossTuple();
+        randomPartialTupleRanges();
+
         System.out.println("M3_STRING_STREAMS_PASS checks=" + checks);
+    }
+
+    /**
+     * Native tuple leaves must be traversed as logical UTF-16, including a pair
+     * whose high and low surrogates live in different canonical atom owners.
+     */
+    private static void splitSurrogateAcrossTuple() throws Exception {
+        String combined = fresh("x\ud83d").concat(fresh("\ude03y"));
+        ensureM3(combined, "cross-tuple surrogate composition");
+        verify(combined, "cross-tuple surrogate composition");
+        check(Arrays.equals(combined.codePoints().toArray(),
+                new int[] {'x', 0x1f603, 'y'}), "joined tuple surrogate pairing");
+        verify(combined.substring(1, 3), "cross-tuple surrogate range");
+    }
+
+    /** Shared subtrees are physical DAGs; stream coordinates remain logical occurrences. */
+    private static void deepSharedTuples() throws Exception {
+        String shared = fresh("a\ud83d\ude03z");
+        for (int level = 0; level < 9; level++) {
+            shared = shared.concat(shared);
+        }
+        ensureM3(shared, "shared repeated tuple");
+        verify(shared, "shared repeated tuple");
+        verify(shared.substring(1, shared.length() - 1), "shared tuple slice");
+    }
+
+    private static void randomPartialTupleRanges() throws Exception {
+        java.util.Random random = new java.util.Random(20261014L);
+        for (int trial = 0; trial < 500; trial++) {
+            int length = random.nextInt(64);
+            char[] units = new char[length];
+            for (int index = 0; index < length; index++) {
+                units[index] = (char) random.nextInt(65536);
+            }
+            String entire = new String(units);
+            int cut = random.nextInt(length + 1);
+            String joined = fresh(entire.substring(0, cut))
+                    .concat(fresh(entire.substring(cut)));
+            if (joined.length() > 0) {
+                verify(joined, "random joined tuple");
+                int start = random.nextInt(joined.length());
+                int end = start + 1 + random.nextInt(joined.length() - start);
+                verify(joined.substring(start, end), "random tuple range");
+            }
+        }
     }
 
     private static void verify(String value, String label) throws Exception {
