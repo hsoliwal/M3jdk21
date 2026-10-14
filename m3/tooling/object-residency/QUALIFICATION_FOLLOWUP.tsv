@@ -1,0 +1,7 @@
+gate	status	evidence
+installed_source_manifest	SUCCESSOR_PACKET_UPDATED	3 residency source/test entries are hash-bound
+recipe_maven_dependencies	UPSTREAM_COORDINATES_RESTORED	public upstream artifact versions; no fabricated -m3-source-1 Maven Central coordinates
+small_xmx_pressure_probe	ADDED_NOT_YET_RUN	.github/workflows/m3-object-residency-pressure.yml; 32 MiB Xmx
+existing_collection_contracts	CI_REQUIRED	must rerun after merge request
+existing_openrewrite_recipe	CI_REQUIRED	must rerun with real dependencies
+SWT_Swing_JDK21_integration	OPEN	separate receiver proof required
