@@ -224,3 +224,46 @@ annotations and hash-pinned custody copies are outside the 19-owner count.
 | [M3ItemReferenceScan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ItemReferenceScan.java) | public | [compiletime-residency-reference](compiletime-residency-reference.md) | Complete owner body and declared members; bounded callers/tests read; NOT_RUN |
 
 These 11 owners are disjoint from the eight regex/image/harvest owners. Annotation dependencies in `com.m3.residency` do not add to the 19-owner denominator. Source documentation coverage does not claim test execution, runtime promotion or whole-repository closure.
+
+## Collection factories and delivery-scope continuation
+
+[Collection factories and delivery scope](reconcile-factories-and-delivery-scope.md) reviews the complete `M3Collections` and `package-info.java` bodies at `7abdf87cb497d0d94abeb723d70c50f856ecc381`: one private constructor and all 58 factory overloads, exact M3/JDK/wrapper delegates, immutable shallow-copy/null/order boundaries, and owner-specific qualifications to the package description. Three complete test bodies, selected delegate constructors and build/receiving metadata were inspected. Existing linked-hash, primitive-map and primitive-sequence references are reused, not counted again as newly closed owners.
+
+The pinned package has 77 Java files, plus its separate module descriptor; the full src tree has 78 main and 30 test Java files. The selected installed manifest contains 98 rows (68 main Java, 25 test Java, two probes, three non-Java inputs), with a checksum matching donation metadata. Its linked dated receipt retains a different 95-row/66-main/24-test qualification scope. The source-set verifier compares 93 declared src Java files with 108 present files; a reached equality guard would refuse before compilation. This is source-backed inference, not an executed verifier failure or checksum mismatch.
+
+Evidence state: complete primary bodies and bounded source contracts reviewed; delegate-wide contracts, current-source successor qualification, compilation, recipe replay, tests, JNI, full reactor, JDK compatibility and installed-runtime gates remain open; repository execution is NOT_RUN in this documentation authoring/review pass. Hosted CI is separate exact-commit evidence. Two source files reviewed here do not establish collection-package completion or change the receiving phase.
+
+## Tree and lazy-value contract review
+
+The [tree and lazy-value reference](specify-trees-and-lazy-values.md) adds complete source-body and declared-member review of eleven collection files at `1011050da4205a901ad079d7711b6b8efd8a9af7`: M3TreeMap, M3TreeSet, M3LazyValueProvider, package-private M3LazyValueState, and the seven event/operation owners. The full unfiltered 77-file production-package listing is unchanged at `7abdf87cb497d0d94abeb723d70c50f856ecc381`. Shared slot/progress/factory/locked-owner dependencies are reused without double-counting. Comparator/range contracts, entry lifetime, old-value materialization before mutation, state/retry/reentrancy, event filtering/order/exception precedence, partial preload progress and storage/concurrency boundaries are documented. Nine test bodies were read, including a JUnit wrapper distinguished from direct assertions; builds, examples, repository tests, recipes and performance qualification are NOT_RUN in this documentation authoring/review pass. Hosted CI for a subsequently published commit is separate evidence and must be reported for its exact commit. Complete repository-wide caller mapping, all collection owners, inline package documentation and runtime/receiving acceptance remain open.
+
+## Locked collection and queue contract continuation
+
+At source pin `1011050da4205a901ad079d7711b6b8efd8a9af7`, five additional
+`com.m3.collections` owners have complete body/member source references:
+`M3LockedMap`, `M3LockedTreeMap`, `M3LockedTreeSet`, `M3BlockingDeque` and
+`M3TransferQueue`. [Locked views](specify-locked-map-views.md) and
+[blocking/transfer queues](specify-blocking-and-transfer-queues.md) document
+lock ownership and scope, callbacks, snapshots, mutation/error behavior,
+capacity, waits, interruption, timeout cleanup and transfer acknowledgement.
+The [member/test/hash companion](locked-queue-source-coverage.md) records
+the exact primary sources and dependency reading boundaries. Reused slot,
+array, spliterator, tree and factory sources are not counted again as new
+primary owners. All five primary blobs were rechecked unchanged at
+`7abdf87cb497d0d94abeb723d70c50f856ecc381`.
+
+Tests and the allocation probe were inspected but **NOT_RUN** in this
+documentation pass. No Maven, recipe, native, jtreg, benchmark or runtime
+gate was executed as part of this source-documentation review; hosted
+exact-head CI remains separate evidence. This continuation does
+not establish whole-package completion, JDK replacement, general fairness,
+universal no-loss behavior, measured allocation savings or receiving-phase
+advancement. Existing broader counts and pending qualification remain intact.
+
+## Collection progress-owner continuation
+
+[Collection progress ownership](specify-progress-ownership.md) reviews all declared members, nested implementations and state fields of eight files at `7abdf87cb497d0d94abeb723d70c50f856ecc381`: `M3ProgressMonitor`, `M3ProgressState`, `M3Progress`, `M3DefaultProgressMonitor`, package-private `M3ChildProgressMonitor`, `M3ProgressAdapters`, `M3ProgressScope` and `M3SystemProgress`. Record components/generated accessors, int/long conversion and validation, cumulative weighting, root/child generation checks, cancellation, local versus aggregate observations, callback errors and scope ownership are included.
+
+Source-observed limitations remain explicit: default-root cross-generation checks are separate from credit; legacy child rewinds/reopens can repeat credits; adapter percentage multiplication can overflow; and exceptional owned-scope close marks the child done and attempts remaining credit subject to parent checks. Existing lazy-provider tests establish specific assertions in source, not executed coverage of all progress contracts. The TreeMap/lazy-state caller review is bounded context and does not double-count those owners.
+
+Evidence state: all eight bodies/member routes source-reviewed, three complete lazy test bodies and their JUnit wrapper read, repository execution is NOT_RUN in this documentation authoring/review pass. Hosted CI is separate exact-commit evidence. Direct concurrent/restart/overflow/listener/scope regressions, recipe/runtime qualification and complete collection-package semantics remain open. This progress family is separate from `com.m3.precompute.M3Progress`.

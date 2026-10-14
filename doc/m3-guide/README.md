@@ -95,3 +95,15 @@ For the remaining independent text owners, see the [text projection, tool and re
   harvested/oracle comparisons, measurement scopes and custody limits
 - [Compile-time inventory and report reference](compiletime-inventory-reference.md): catalogue matching, constant operands, Formatter plans, exact TSV schemas, state/resource/error boundaries and eight-owner declared-member map
 - [Compile-time item-residency reference](compiletime-residency-reference.md): hierarchy/escape rules, exact 14-column site TSV, summary/meta records, bytecode offsets, binary sidecar and three-owner declared-member map
+
+For every collection factory overload, read [collection factories and delivery scope](reconcile-factories-and-delivery-scope.md): exact M3/JDK/wrapper routing, immutable shallow-copy/null/order boundaries, package concurrency qualifications, and the distinct current-source, installed-manifest and historical-receipt inventories. The source-set verifier's conditional refusal is documented as a static inference; no verification command was run.
+
+For AVL maps/sets and explicitly deferred values, see the [tree and lazy-value reference](specify-trees-and-lazy-values.md): comparator-equivalent keys, nested/descending ranges, key-only views, provider state/retry, callback guards, event masks/order, progress ownership and failure effects. Eleven source bodies and focused unrun test assertions are mapped without implying collection-package or runtime completion.
+
+## Locked collection and queue contracts
+
+- [Locked maps, sorted sets and backed views](specify-locked-map-views.md): shared-monitor scope, callbacks, snapshot entry lifetime and conditional removal
+- [Blocking deque and transfer queue contracts](specify-blocking-and-transfer-queues.md): capacity, waits, interruption, rendezvous visibility, acknowledgements and drain failure
+- [Locked collection and queue source coverage](locked-queue-source-coverage.md): five full-body owner reads, declared-member routes, source hashes and inspected tests; repository execution NOT_RUN in this documentation pass, with hosted exact-head CI tracked separately
+
+For the collection progress SPI and its legacy adapter, read [progress ownership, cancellation and observation](specify-progress-ownership.md): all eight source owners, weighted child generations, borrowed/owned scope close, long versus int totals, cancellation propagation, snapshot consistency, callback failures, and explicit source-observed arithmetic and restart limits.
