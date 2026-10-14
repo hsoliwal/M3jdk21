@@ -1019,6 +1019,9 @@ public final class Pattern
      */
     transient M3TQ m3Tq;
 
+    // Optional immutable Boolean plan, published by the existing compiled volatile write.
+    private transient M3PatternQuery.BooleanPlan m3BooleanPlan;
+
     /**
      * Temporary storage used by parsing pattern slice.
      */
@@ -1225,8 +1228,7 @@ public final class Pattern
      */
     public static boolean matches(String regex, CharSequence input) {
         Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(input);
-        return m.matches();
+        return p.m3Matches(input);
     }
 
     /**
@@ -1997,6 +1999,14 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
                 // Candidate precompute must never add a new Pattern.compile failure mode;
                 // an undecidable tree simply keeps the exact engine unassisted.
                 m3Tq = null;
+            }
+        }
+
+        if (!has(CANON_EQ)) {
+            try {
+                m3BooleanPlan = M3PatternQuery.deriveBoolean(matchRoot);
+            } catch (OutOfMemoryError | RuntimeException unavailable) {
+                m3BooleanPlan = null;
             }
         }
 
@@ -6038,8 +6048,19 @@ NEXT:       while (i <= last) {
      * @see     Matcher#matches
      */
     public Predicate<String> asMatchPredicate() {
-        return s -> matcher(s).matches();
+        return this::m3Matches;
     }
+
+    private boolean m3Matches(CharSequence input) {
+        // Keep mutable/custom CharSequence reads and deserialization's lazy compilation
+        // with Matcher. String.charAt also reads canonical M3 storage without flattening.
+        if (compiled && input instanceof String text && m3BooleanPlan != null) {
+            int result = m3BooleanPlan.matches(text);
+            if (result >= 0) return result != 0;
+        }
+        return matcher(input).matches();
+    }
+
 
     /**
      * Creates a stream from the given input sequence around matches of this

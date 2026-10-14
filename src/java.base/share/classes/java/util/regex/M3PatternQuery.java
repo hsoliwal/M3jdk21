@@ -52,6 +52,92 @@ final class M3PatternQuery {
         return query != null && query.hasConstraints() ? query : null;
     }
 
+    /**
+     * Bounded Boolean full-match plan over the JDK's compiled nodes, not another parser.
+     * Only straight-line character atoms, exact slices and greedy zero-or-more character
+     * atoms are admitted. Matcher remains responsible for every observable match object.
+     */
+    static BooleanPlan deriveBoolean(Pattern.Node start) {
+        final int maxAtoms = 256;
+        int count = 0;
+        boolean hasRepeat = false;
+        Pattern.Node node = start;
+        while (node != Pattern.lastAccept) {
+            if (node instanceof Pattern.CharPropertyGreedy greedy && greedy.cmin == 0) {
+                count++;
+                hasRepeat = true;
+            } else if (node instanceof Pattern.CharProperty) {
+                count++;
+            } else if (node instanceof Pattern.Slice slice) {
+                if (slice.buffer.length == 0 || slice.buffer.length > maxAtoms - count) {
+                    return null;
+                }
+                for (int unit : slice.buffer) {
+                    if (unit > Character.MAX_VALUE || Character.isSurrogate((char) unit)) {
+                        return null;
+                    }
+                }
+                count += slice.buffer.length;
+            } else {
+                return null;
+            }
+            if (count > maxAtoms) return null;
+            node = node.next;
+        }
+        if (!hasRepeat) return null;
+
+        Pattern.CharPredicate[] atoms = new Pattern.CharPredicate[count];
+        boolean[] repeated = new boolean[count];
+        boolean[] empty = new boolean[count + 1];
+        empty[0] = true;
+        int index = 0;
+        for (node = start; node != Pattern.lastAccept; node = node.next) {
+            if (node instanceof Pattern.CharPropertyGreedy greedy) {
+                atoms[index] = greedy.predicate;
+                repeated[index] = true;
+                empty[index + 1] = empty[index];
+                index++;
+            } else if (node instanceof Pattern.CharProperty property) {
+                atoms[index++] = property.predicate;
+            } else if (node instanceof Pattern.Slice slice) {
+                for (int unit : slice.buffer) atoms[index++] = Pattern.Single(unit);
+            }
+        }
+        return new BooleanPlan(atoms, repeated, empty);
+    }
+
+    /** Immutable pattern facts; each invocation owns its single rolling DP row. */
+    static final class BooleanPlan {
+        private final Pattern.CharPredicate[] atoms;
+        private final boolean[] repeated;
+        private final boolean[] empty;
+
+        private BooleanPlan(Pattern.CharPredicate[] atoms, boolean[] repeated, boolean[] empty) {
+            this.atoms = atoms;
+            this.repeated = repeated;
+            this.empty = empty;
+        }
+
+        /** Returns 0/1, or -1 to defer surrogate semantics to the original Matcher. */
+        int matches(String input) {
+            boolean[] row = empty.clone();
+            for (int offset = 0; offset < input.length(); offset++) {
+                char unit = input.charAt(offset);
+                if (Character.isSurrogate(unit)) return -1;
+                boolean diagonal = row[0];
+                row[0] = false;
+                for (int atom = 0; atom < atoms.length; atom++) {
+                    boolean above = row[atom + 1];
+                    row[atom + 1] = repeated[atom]
+                            ? row[atom] || (above && atoms[atom].is(unit))
+                            : diagonal && atoms[atom].is(unit);
+                    diagonal = above;
+                }
+            }
+            return row[atoms.length] ? 1 : 0;
+        }
+    }
+
     private static boolean admits(Pattern.Node start) {
         IdentityHashMap<Pattern.Node, Boolean> seen = new IdentityHashMap<>();
         ArrayDeque<Pattern.Node> work = new ArrayDeque<>();
