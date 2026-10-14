@@ -14,6 +14,8 @@ This guide describes the source snapshot `278b221e8365ebeb6095a3a5643b38a0564258
 6. [Build/module descriptor ledger](descriptors.md): every tracked POM and JPMS descriptor, including fixtures and vendors
 7. [Coverage, verification and next work](coverage.md): what was actually inspected, what remains unknown and how to continue
 
+For the concrete interned-descriptor bridge and explicit precompute boundaries, see the [indexed-string API reference](indexed-string-reference.md). It distinguishes text equality from backing identity, cached facts from canonical storage, and retained views from materialized output.
+
 ## What this repository is
 
 M3JDK21 is an OpenJDK 21-derived runtime research and engineering target. The root [README](../../README.md) and [runtime integration guide](../../m3/runtime-integration/README.md) distinguish current source, experimental feature gates and planned milestones. The full JDK image is built with OpenJDK configure/make; the Maven control reactor is a different authoring/proof artifact. Separate M3 libraries may also run on a stock Java 21 installation.
