@@ -24,6 +24,10 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Verify pinned source-built coordinates
+        run: python3 -S m3/synexia-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
+      - name: Install pinned OpenRewrite and JUnit custody
+        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Verify immutable recipe target paths
         run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
