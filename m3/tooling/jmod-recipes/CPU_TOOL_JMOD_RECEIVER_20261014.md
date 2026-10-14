@@ -33,6 +33,7 @@ Example when an independently checked donor worktree is available:
 
 ```sh
 python3 m3/tooling/jmod-recipes/tools/verify_cpu_jmod_packet.py \
+  --source-root /path/synexia-m3-jmods \
   --source-manifest /path/synexia-m3-jmods/tool-modules.tsv \
   --receipt /path/synexia-m3-jmods/target/JMOD_BUILD.tsv \
   --jmods /path/synexia-m3-jmods/target/jmods \
