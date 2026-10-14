@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: Apache-2.0
+source_module	candidate_target_module	intake_mode	phase	status
+com.synexia.m3.text.normalize	com.m3.tools.text.normalize	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.text.tokenize	com.m3.tools.text.tokenize	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.text.regex	com.m3.tools.text.regex	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.text.search	com.m3.tools.text.search	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.text.ngram	com.m3.tools.text.ngram	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.text.frequency	com.m3.tools.text.frequency	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.text.similarity	com.m3.tools.text.similarity	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.text.diff	com.m3.tools.text.diff	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.text.index	com.m3.tools.text.index	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.text.lucene	com.m3.tools.text.lucene	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.text.opennlp	com.m3.tools.text.opennlp	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.graph.topology	com.m3.tools.graph.topology	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.graph.paths	com.m3.tools.graph.paths	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.stats.streaming	com.m3.tools.stats.streaming	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.constraint.interval	com.m3.tools.constraint.interval	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.codec.varint	com.m3.tools.codec.varint	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.verify.sha256	com.m3.tools.verify.sha256	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.plan.priority	com.m3.tools.plan.priority	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
