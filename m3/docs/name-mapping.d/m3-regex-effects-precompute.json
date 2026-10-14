@@ -1,0 +1,33 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Candidate-only independent Apache-2.0 Maven receiver; canonical reusable regex implementation and recipe remain in Synexia. Public JDK String, Pattern and Matcher unchanged.",
+  "mappings": [
+    {
+      "source": "com.synexia.indexstring.M3RegexDp",
+      "source_commit": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
+      "source_blob_sha1": "f4254d2359697ae3abdae5b811001e976818084f",
+      "source_license": "Apache-2.0",
+      "target": "com.m3.precompute.M3RegexDfaEffects",
+      "status": "ISOLATED_MAVEN_CANDIDATE_NOT_JAVA_BASE",
+      "target_rule": "Adapt one canonical bounded DFA Boolean transition-effect engine; O(states) outgoing mapping, exact ordered compose/repeat/segment-tree range, no regex parser, no new text owner, no runtime JNI; explicitly admit only compiled source patterns supported by their semantic owner."
+    },
+    {
+      "source": "com.synexia.indexstring.M3RegexDpBridge",
+      "source_commit": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
+      "source_blob_sha1": "5b08c77869310e6f5c62558ba012ecb42636ad46",
+      "source_license": "Apache-2.0",
+      "target": "m3/ports/indexstring/REGEX_PROGRAM_PORT.md and com.m3.precompute (no receiving Java bridge yet)",
+      "status": "DONOR_ONLY_PENDING_CANONICAL_COMPILER_OWNER",
+      "target_rule": "The donor bridge owns MIndexRegexProgram and M3Utf16Spans dependencies; do not duplicate its parser or materialize JNI. Provide a bounded, separately proven target adapter only after an exact existing compiled-program owner and JDK matcher semantics are established."
+    },
+    {
+      "source": "com.synexia.indexstring.M3RegexDpNative",
+      "source_commit": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
+      "source_blob_sha1": "a0d8234ea4e5a78f4bc60c9fc4df87c664b7396e",
+      "source_license": "Apache-2.0",
+      "target": "NO_NEW_JNI_ABI",
+      "status": "JNI_CANDIDATE_NOT_IMPORTED",
+      "target_rule": "Native numeric composition is optional and not a new loader or regex semantic authority. Existing M3 precompute native signal backends are unrelated; do not impersonate their ABI or add per-match JNI calls without complete symbol, lifetime, memory and cold/warm cost evidence."
+    }
+  ]
+}
