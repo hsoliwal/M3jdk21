@@ -196,7 +196,10 @@ int java_lang_M3String::utf8_length_if_precomputed(oop value) {
     return -1;
   }
   oop facts = o->obj_field_acquire(_owner_facts_offset);
-  return facts == nullptr ? -1 : facts->int_field(_facts_utf8Length_offset);
+  // GetStringUTFLength/GetStringUTFChars require JNI *modified* UTF-8 length.
+  // Standard UTF-8 (utf8Length) is a separate fact and is never suitable here:
+  // NUL=2 bytes, individual surrogate code units=3 bytes.
+  return facts == nullptr ? -1 : facts->int_field(_facts_modifiedUtf8Length_offset);
 }
 
 jint java_lang_M3String::java_hash(oop value) {
