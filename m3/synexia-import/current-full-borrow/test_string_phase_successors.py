@@ -23,6 +23,21 @@ class StringTargetSuccessorTest(unittest.TestCase):
         with phase.SUCCESSORS.open(encoding="utf-8", newline="") as handle:
             return list(csv.DictReader(handle, delimiter="\t"))
 
+    def read_transition_rows(self):
+        with phase.TRANSITIONS.open(encoding="utf-8", newline="") as handle:
+            return list(csv.DictReader(handle, delimiter="\\t"))
+
+    def with_transition_rows(self, changed, callback):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "string-target-transition-receipts.tsv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=phase.TRANSITION_HEADER,
+                                        delimiter="\\t", lineterminator="\\n")
+                writer.writeheader()
+                writer.writerows(changed)
+            with patch.object(phase, "TRANSITIONS", path):
+                callback()
+
     def mapping(self):
         # Independent immutable donor map, not the mutable successor fixture.
         with phase.MAP.open(encoding="utf-8", newline="") as handle:
@@ -39,12 +54,14 @@ class StringTargetSuccessorTest(unittest.TestCase):
             with patch.object(phase, "SUCCESSORS", path):
                 callback()
 
-    def test_exact_four_successors_and_repeated_historical_relation(self):
+    def test_exact_five_successors_and_repeated_historical_relation(self):
         mapping = self.mapping()
         mapping.append(mapping[0].copy())
         result = phase.approved_successors(mapping)
         self.assertEqual(phase.EXPECTED_SUCCESSOR_PATHS, set(result))
-        self.assertEqual(4, len(result))
+        self.assertEqual(5, len(result))
+        transitions = phase.validate_transition_receipts(mapping, list(result.values()))
+        self.assertEqual(2, len(transitions))
 
     def test_actual_owner_sources_match_exact_receipts(self):
         receipts = phase.approved_successors(self.mapping())
@@ -53,6 +70,61 @@ class StringTargetSuccessorTest(unittest.TestCase):
             self.assertTrue(path.is_file(), target)
             self.assertEqual(row["successor_git_blob"], phase.git_blob(path), target)
             phase.validate_successor_source(target, path.read_text(encoding="utf-8"))
+
+    def test_transition_receipts_preserve_mapping_and_withhold_runtime_acceptance(self):
+        mapping = self.mapping()
+        successors = phase.approved_successors(mapping)
+        receipts = phase.validate_transition_receipts(mapping, list(successors.values()))
+        self.assertEqual(
+            "70d1d03c109126fdda36c54da21b484bbe368fd9",
+            receipts["src/java.base/share/classes/java/lang/M3String.java"][
+                "previous_successor_blob"
+            ],
+        )
+        self.assertEqual(
+            "ABSENT",
+            receipts[
+                "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java"
+            ]["previous_successor_blob"],
+        )
+        self.assertTrue(all(
+            row["status"] == "SOURCE_ONLY_NOT_RUNTIME_ACCEPTED"
+            for row in receipts.values()
+        ))
+
+    def test_wrong_transition_base_refuses(self):
+        mapping = self.mapping()
+        successors = phase.approved_successors(mapping)
+        rows = self.read_transition_rows()
+        rows[0]["m3jdk_base_git_blob"] = "0" * 40
+        self.with_transition_rows(rows, lambda: self.assertRaisesRegex(
+            ValueError, "exact transition lineage drift",
+            phase.validate_transition_receipts, mapping, list(successors.values())))
+
+    def test_missing_transition_receipt_refuses(self):
+        mapping = self.mapping()
+        successors = phase.approved_successors(mapping)
+        rows = self.read_transition_rows()
+        self.with_transition_rows(rows[:-1], lambda: self.assertRaisesRegex(
+            ValueError, "transition inventory drift",
+            phase.validate_transition_receipts, mapping, list(successors.values())))
+
+    def test_duplicate_transition_receipt_refuses(self):
+        mapping = self.mapping()
+        successors = phase.approved_successors(mapping)
+        rows = self.read_transition_rows()
+        self.with_transition_rows(rows + [rows[0].copy()], lambda: self.assertRaisesRegex(
+            ValueError, "duplicate transition receipt owner",
+            phase.validate_transition_receipts, mapping, list(successors.values())))
+
+    def test_runtime_acceptance_transition_claim_refuses(self):
+        mapping = self.mapping()
+        successors = phase.approved_successors(mapping)
+        rows = self.read_transition_rows()
+        rows[0]["status"] = "RUNTIME_ACCEPTED"
+        self.with_transition_rows(rows, lambda: self.assertRaisesRegex(
+            ValueError, "exact transition lineage drift",
+            phase.validate_transition_receipts, mapping, list(successors.values())))
 
     def test_duplicate_successor_refuses(self):
         rows = self.read_rows()
