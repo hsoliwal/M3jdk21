@@ -1,13 +1,13 @@
 {
   "schema": "M3_REGEX_RECEIVER_V1",
   "source_repository": "hsoliwal/com.synexia",
-  "source_revision": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
+  "source_revision": "2a11c25ff6427bef55dd1cc0cb443526a1fd736c",
   "target_repository": "hsoliwal/M3jdk21",
-  "target_baseline": "d5abed865bd47c4dd5ad78e95704348fe2095ed2",
+  "target_baseline": "072c2ff660c7ca36aba1d488672ce1ab02f27d2a",
   "recipe": "com.synexia.rewrite.M3PatternAsciiReceive20261014",
   "recipe_task": "synexia-openrewrite-recipes/tasks/m3-pattern-ascii-receive-20261014",
   "target_owner": "java.util.regex.M3PatternQuery.BooleanPlan",
-  "target_source_sha256": "599f7f5a36e5454a401baa2a0d1853594915a162d32bcd827a6c8b5b471de430",
+  "target_source_sha256": "6d653992c3a58f7d51ee3e2559424fc904e8d59df8489669aa91dcc3dfde8b0f",
   "source_disposition": "TARGET_OWNED_PORT; algorithm/precompute strategy adapted onto existing JDK predicates; no donor body copied",
   "native_disposition": "TEST_ONLY_JNI_ORACLE; no production native dispatch",
   "runtime_dependency_on_synexia": false,
@@ -17,5 +17,6 @@
     "exact M3PatternQuery and real target dependencies may be patch-module qualified on stock Java21",
     "source-built M3JDK21 with canonical M3String/HotSpot/JIT/GC/CDS not qualified by that scoped proof",
     "Maven/OpenRewrite SDK, global provenance and mapping-fragment reduction are separate gates"
-  ]
+  ],
+  "continuation": "64..256 atom multiword ASCII frontier; strict Java/JNI TEST oracle; full product gates remain open"
 }

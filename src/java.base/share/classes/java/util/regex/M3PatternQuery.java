@@ -112,7 +112,8 @@ final class M3PatternQuery {
         private final boolean[] repeated;
         private final boolean[] empty;
         // Optional derived metadata belongs to this plan, never to M3String or its backing.
-        // 128 character masks + six epsilon jumps + initial/accepting state = 1,088 bytes.
+        // Each 64-state word has 128 character masks, six local epsilon jumps,
+        // initial/accepting bits: 1,088 primitive bytes, at most five words (5,440).
         private final long[] ascii;
         private final long repeatedStates;
 
@@ -127,18 +128,19 @@ final class M3PatternQuery {
                 }
             }
             this.repeatedStates = stars;
-            this.ascii = prepareAscii(atoms, empty, stars);
+            this.ascii = prepareAscii(atoms, repeated, empty, stars);
         }
 
         /**
          * Reuses JDK predicates as semantic authority. Bit j represents the prefix of j atoms;
          * a starred atom adds an epsilon edge from j-1 to j. Doubling masks summarize runs
          * of 1, 2, 4, 8, 16 and 32 such edges without an input-length-sized DP allocation.
-         * Programs beyond 63 atoms retain the original rolling-row implementation.
+         * Up to 256 atoms use at most five words. Cross-word epsilon edges are
+         * propagated separately from consuming edges, after closing the preceding word.
          */
-        private static long[] prepareAscii(Pattern.CharPredicate[] atoms, boolean[] empty,
-                                          long stars) {
-            if (atoms.length > 63) return null;
+        private static long[] prepareAscii(Pattern.CharPredicate[] atoms, boolean[] repeated,
+                                          boolean[] empty, long stars) {
+            if (atoms.length > 63) return prepareWideAscii(atoms, repeated, empty);
             try {
                 long[] masks = new long[136];
                 for (int unit = 0; unit < 128; unit++) {
@@ -163,10 +165,44 @@ final class M3PatternQuery {
             }
         }
 
+        /** Immutable word-major derivative of the same JDK predicates; not another parser. */
+        private static long[] prepareWideAscii(Pattern.CharPredicate[] atoms,
+                                              boolean[] repeated, boolean[] empty) {
+            int words = (atoms.length >>> 6) + 1;
+            try {
+                long[] masks = new long[words * 136];
+                for (int atom = 0; atom < atoms.length; atom++) {
+                    int state = atom + 1;
+                    int base = (state >>> 6) * 136;
+                    long bit = 1L << (state & 63);
+                    for (int unit = 0; unit < 128; unit++) {
+                        if (atoms[atom].is(unit)) masks[base + unit] |= bit;
+                    }
+                    if (repeated[atom]) masks[base + 128] |= bit;
+                }
+                for (int word = 0; word < words; word++) {
+                    int base = word * 136;
+                    long jump = masks[base + 128];
+                    for (int level = 0, shift = 1; level < 6; level++, shift <<= 1) {
+                        masks[base + 128 + level] = jump;
+                        jump &= jump << shift;
+                    }
+                }
+                for (int state = 0; state < empty.length; state++) {
+                    if (empty[state]) masks[(state >>> 6) * 136 + 134] |= 1L << (state & 63);
+                }
+                masks[(atoms.length >>> 6) * 136 + 135] = 1L << (atoms.length & 63);
+                return masks;
+            } catch (OutOfMemoryError optionalMetadataUnavailable) {
+                return null;
+            }
+        }
+
         /** Returns 0/1, or -1 to defer surrogate semantics to the original Matcher. */
         int matches(String input) {
             long[] masks = ascii;
             if (masks == null) return matchesRolling(input);
+            if (atoms.length > 63) return matchesWideAscii(input, masks);
             long state = masks[134];
             for (int offset = 0; offset < input.length(); offset++) {
                 char unit = input.charAt(offset);
@@ -191,7 +227,49 @@ final class M3PatternQuery {
             return (state & masks[135]) != 0L ? 1 : 0;
         }
 
-        /** Original one-row DP kept as the non-ASCII and larger-program authority. */
+        /**
+         * Carry two different facts across a word boundary: the ORIGINAL frontier's high
+         * bit consumes this character; the UPDATED closed frontier's high bit crosses an
+         * epsilon edge. Mixing them permits two characters' work in one input step.
+         * No frontier or input is retained by the shared plan; no per-character allocation.
+         */
+        private int matchesWideAscii(String input, long[] masks) {
+            int words = masks.length / 136;
+            long[] frontier = new long[words];
+            for (int word = 0; word < words; word++) frontier[word] = masks[word * 136 + 134];
+            for (int offset = 0; offset < input.length(); offset++) {
+                char unit = input.charAt(offset);
+                if (unit >= 128) {
+                    boolean[] row = new boolean[atoms.length + 1];
+                    for (int state = 0; state <= atoms.length; state++) {
+                        row[state] = ((frontier[state >>> 6] >>> (state & 63)) & 1L) != 0L;
+                    }
+                    return matchesRolling(input, row, offset);
+                }
+                long consumingCarry = 0L;
+                long epsilonCarry = 0L;
+                for (int word = 0; word < words; word++) {
+                    int base = word * 136;
+                    long previous = frontier[word];
+                    long stars = masks[base + 128];
+                    long state = ((((previous << 1) | consumingCarry) & ~stars)
+                            | (previous & stars)) & masks[base + unit];
+                    consumingCarry = previous >>> 63;
+                    state |= epsilonCarry & stars;
+                    state |= (state << 1) & masks[base + 128];
+                    state |= (state << 2) & masks[base + 129];
+                    state |= (state << 4) & masks[base + 130];
+                    state |= (state << 8) & masks[base + 131];
+                    state |= (state << 16) & masks[base + 132];
+                    state |= (state << 32) & masks[base + 133];
+                    epsilonCarry = state >>> 63;
+                    frontier[word] = state;
+                }
+            }
+            return (frontier[words - 1] & masks[(words - 1) * 136 + 135]) != 0L ? 1 : 0;
+        }
+
+        /** Original one-row DP kept as the non-ASCII and unavailable-metadata authority. */
         private int matchesRolling(String input) {
             return matchesRolling(input, empty.clone(), 0);
         }

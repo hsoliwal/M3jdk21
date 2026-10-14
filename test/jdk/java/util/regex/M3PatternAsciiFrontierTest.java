@@ -8,7 +8,7 @@
  * @test
  * @summary Qualify existing M3PatternQuery BooleanPlan ASCII precompute and unchanged fallbacks
  * @modules java.base/java.util.regex:open
- * @run main/native M3PatternAsciiFrontierTest require-ascii
+ * @run main/native M3PatternAsciiFrontierTest require-wide
  */
 
 import java.lang.reflect.Field;
@@ -40,6 +40,7 @@ public final class M3PatternAsciiFrontierTest {
     private static long nativeCases;
     private static long plans;
     private static boolean requireAscii;
+    private static boolean requireWide;
     static {
         try {
             DIGEST = MessageDigest.getInstance("SHA-256");
@@ -64,6 +65,7 @@ public final class M3PatternAsciiFrontierTest {
     }
     private M3PatternAsciiFrontierTest() { }
     private static native int scalarOracle(long[] masks, long stars, int atoms, String input);
+    private static native int wideOracle(long[] masks, boolean[] repeats, int atoms, String input);
 
     private static void check(boolean condition, String message) {
         ASSERTIONS.incrementAndGet();
@@ -79,7 +81,8 @@ public final class M3PatternAsciiFrontierTest {
             throw failure;
         }
     }
-    private record Prepared(Pattern pattern, Object plan, long[] masks, long stars, int atoms) { }
+    private record Prepared(Pattern pattern, Object plan, long[] masks, long stars,
+                            int atoms, boolean[] repeats) { }
     private static Prepared prepare(String expression, int flags) throws Exception {
         Pattern pattern = Pattern.compile(expression, flags);
         Object plan = derive(pattern);
@@ -88,36 +91,46 @@ public final class M3PatternAsciiFrontierTest {
         Object[] atoms = (Object[]) ATOMS.get(plan);
         boolean[] repeated = (boolean[]) REPEATED.get(plan);
         boolean[] empty = (boolean[]) EMPTY.get(plan);
-        if (atoms.length > 63) {
-            if (ASCII != null) check(ASCII.get(plan) == null, "PROGRAM_LIMIT: " + atoms.length);
-            return new Prepared(pattern, plan, null, 0, atoms.length);
-        }
+        int words = (atoms.length >>> 6) + 1;
         long stars = 0;
-        long[] masks = new long[136];
+        long[] masks = new long[136 * words];
         for (int atom = 0; atom < atoms.length; atom++) {
-            if (repeated[atom]) stars |= 1L << (atom + 1);
+            int state = atom + 1;
+            if (repeated[atom] && state < 64) stars |= 1L << state;
             for (int unit = 0; unit < 128; unit++) {
-                if ((Boolean) PREDICATE.invoke(atoms[atom], unit)) masks[unit] |= 1L << (atom + 1);
+                if ((Boolean) PREDICATE.invoke(atoms[atom], unit)) {
+                    masks[(state >>> 6) * 136 + unit] |= 1L << (state & 63);
+                }
             }
         }
-        // Independent per-destination contiguous-run enumeration, not production doubling.
-        for (int level = 0; level < 6; level++) {
+        // Independent contiguous-run enumeration, not the production doubling recurrence.
+        for (int word = 0; word < words; word++) for (int level = 0; level < 6; level++) {
             int width = 1 << level;
-            for (int end = width; end <= atoms.length; end++) {
+            for (int end = Math.max(1, word * 64); end <= Math.min(atoms.length, word * 64 + 63); end++) {
+                if (level != 0 && (end & 63) < width - 1) continue;
+                if (end < width) continue;
                 boolean all = true;
                 for (int j = end - width; j < end; j++) all &= repeated[j];
-                if (all) masks[128 + level] |= 1L << end;
+                if (all) masks[word * 136 + 128 + level] |= 1L << (end & 63);
             }
         }
-        for (int state = 0; state < empty.length; state++) if (empty[state]) masks[134] |= 1L << state;
-        masks[135] = 1L << atoms.length;
-        if (requireAscii) check(ASCII != null && ASCII.get(plan) != null, "MISSING_ASCII_METADATA");
-        if (ASCII != null && ASCII.get(plan) != null) {
-            check(Arrays.equals(masks, (long[]) ASCII.get(plan)), "PRECOMPUTED_MASK_MISMATCH");
+        for (int state = 0; state < empty.length; state++) {
+            if (empty[state]) masks[(state >>> 6) * 136 + 134] |= 1L << (state & 63);
         }
-        return new Prepared(pattern, plan, masks, stars, atoms.length);
+        masks[(atoms.length >>> 6) * 136 + 135] = 1L << (atoms.length & 63);
+        if (requireAscii && (atoms.length <= 63 || requireWide)) {
+            check(ASCII != null && ASCII.get(plan) != null, "MISSING_ASCII_METADATA");
+        }
+        if (ASCII != null && ASCII.get(plan) != null) {
+            check(Arrays.equals(masks, (long[]) ASCII.get(plan)), "PRECOMPUTED_MASK_MISMATCH:" + atoms.length);
+        }
+        return new Prepared(pattern, plan, masks, stars, atoms.length, repeated.clone());
     }
+
     private static void verify(Prepared prepared, String input) throws Exception {
+        verify(prepared, input, null);
+    }
+    private static void verify(Prepared prepared, String input, Integer unaryExpected) throws Exception {
         if (prepared == null) return;
         int actual = match(prepared.plan, input);
         boolean surrogate = false, ascii = true;
@@ -125,12 +138,21 @@ public final class M3PatternAsciiFrontierTest {
             surrogate |= Character.isSurrogate(input.charAt(i));
             ascii &= input.charAt(i) < 128;
         }
-        int expected = surrogate ? -1 : prepared.pattern.matcher(input).matches() ? 1 : 0;
-        check(actual == expected, "SEMANTIC_DIVERGENCE pattern=" + prepared.pattern
-                + " input=" + escape(input) + " expected=" + expected + " actual=" + actual);
+        int expected = surrogate ? -1 : unaryExpected != null ? unaryExpected
+                : prepared.pattern.matcher(input).matches() ? 1 : 0;
+        if (actual != expected) {
+            check(false, "SEMANTIC_DIVERGENCE pattern=" + prepared.pattern
+                    + " input=" + escape(input) + " expected=" + expected + " actual=" + actual);
+        } else {
+            check(true, "exact semantic parity");
+        }
         if (prepared.masks != null) {
             long[] before = prepared.masks.clone();
-            int nativeValue = scalarOracle(prepared.masks, prepared.stars, prepared.atoms, input);
+            boolean[] repeatsBefore = prepared.repeats.clone();
+            int nativeValue = prepared.atoms > 63
+                    ? wideOracle(prepared.masks, prepared.repeats, prepared.atoms, input)
+                    : scalarOracle(prepared.masks, prepared.stars, prepared.atoms, input);
+            check(Arrays.equals(repeatsBefore, prepared.repeats), "JNI_MUTATED_REPEATS");
             nativeCases++;
             check(nativeValue == (ascii ? expected : -1), "JNI_ORACLE_DIVERGENCE");
             check(Arrays.equals(before, prepared.masks), "JNI_MUTATED_METADATA");
@@ -214,8 +236,59 @@ public final class M3PatternAsciiFrontierTest {
         verify(prepare("a*b*", 0), "a".repeat(100_000) + "b");
         verify(prepare("a*b*", 0), "a".repeat(100_000) + "c");
     }
+    private static void wideBoundaries() throws Exception {
+        for (int atoms = 64; atoms <= 256; atoms++) {
+            Prepared allStars = prepare("a*".repeat(atoms), 0);
+            Prepared closure = prepare("b" + "a*".repeat(atoms - 1), 0);
+            Prepared consume = prepare("a".repeat(atoms - 1) + "b*", 0);
+            for (String input : List.of("", "a", "aa", "b", "z\ud800", "\u00e9")) verify(allStars, input);
+            for (String input : List.of("b", "ba", "b\ud800", "", "a")) verify(closure, input);
+            String prefix = "a".repeat(atoms - 1);
+            for (String input : List.of(prefix, prefix + "b", prefix + "c", prefix.substring(1),
+                    prefix + "\u00e9", "z\ud800")) verify(consume, input);
+        }
+        for (int atoms : new int[] {64, 65, 127, 128, 129, 191, 192, 193, 255, 256}) {
+            for (int flags : new int[] {0, Pattern.DOTALL, Pattern.UNIX_LINES}) {
+                Prepared mixed = prepare("b" + ".*".repeat(atoms - 1), flags);
+                for (String input : List.of("b\u00e9a", "ba\u2028", "ba\u0085b", "z\ud800", "b\ud83d\ude00")) {
+                    verify(mixed, input);
+                }
+            }
+            for (int cohort = 0; cohort < 8; cohort++) {
+                StringBuilder expression = new StringBuilder();
+                int required = 0;
+                for (int atom = 0; atom < atoms; atom++) {
+                    expression.append('a');
+                    if (((atom + cohort) & 7) < 4) expression.append('*');
+                    else required++;
+                }
+                Prepared mixed = prepare(expression.toString(), 0);
+                // This generated chain contains only a/a* and at least one star. Its exact
+                // language is a^{n >= required}. Do not invoke an exponentially searching
+                // oracle for this family; predecessor/candidate and scalar JNI still run.
+                for (String input : List.of("a".repeat(required), "a".repeat(atoms), "c", "z\ud800")) {
+                    int expected = input.length() >= required && input.chars().allMatch(c -> c == 'a') ? 1 : 0;
+                    verify(mixed, input, expected);
+                }
+            }
+        }
+        Prepared p = prepare(".*".repeat(256), 0);
+        try { wideOracle(p.masks, p.repeats, 257, ""); throw new AssertionError("WIDE_LIMIT_ACCEPTED"); }
+        catch (IllegalArgumentException expected) { check(true, "wide limit"); }
+        try { wideOracle(new long[1], p.repeats, 256, ""); throw new AssertionError("WIDE_SHAPE_ACCEPTED"); }
+        catch (IllegalArgumentException expected) { check(true, "wide shape"); }
+        try { wideOracle(p.masks, new boolean[1], 256, ""); throw new AssertionError("WIDE_REPEAT_SHAPE_ACCEPTED"); }
+        catch (IllegalArgumentException expected) { check(true, "wide repeats"); }
+        long[] corrupt = p.masks.clone(); corrupt[0] |= 1;
+        try { wideOracle(corrupt, p.repeats, 256, ""); throw new AssertionError("WIDE_PREDICATE_ACCEPTED"); }
+        catch (IllegalArgumentException expected) { check(true, "wide predicates"); }
+        try { wideOracle(null, p.repeats, 256, ""); throw new AssertionError("WIDE_NULL_ACCEPTED"); }
+        catch (NullPointerException expected) { check(true, "wide null"); }
+    }
+
     private static void concurrency() throws Exception {
         Prepared p = prepare("a*b*c*", 0);
+        Prepared wide = prepare("a*b*c*" + "c*".repeat(253), 0);
         try (var executor = Executors.newFixedThreadPool(4)) {
             List<Callable<Void>> jobs = new ArrayList<>();
             for (int job = 0; job < 64; job++) jobs.add(() -> {
@@ -223,6 +296,8 @@ public final class M3PatternAsciiFrontierTest {
                     String input = (i & 1) == 0 ? "aaaabbbc" : "aaaabbbcz";
                     check(match(p.plan, input) == ((i & 1) == 0 ? 1 : 0), "CONCURRENT_PLAN");
                     check(scalarOracle(p.masks, p.stars, p.atoms, input) == ((i & 1) == 0 ? 1 : 0), "CONCURRENT_JNI");
+                    check(match(wide.plan, input) == ((i & 1) == 0 ? 1 : 0), "CONCURRENT_WIDE");
+                    check(wideOracle(wide.masks, wide.repeats, wide.atoms, input) == ((i & 1) == 0 ? 1 : 0), "CONCURRENT_WIDE_JNI");
                 }
                 return null;
             });
@@ -231,17 +306,35 @@ public final class M3PatternAsciiFrontierTest {
     }
     public static void main(String[] args) throws Exception {
         System.loadLibrary("M3PatternAsciiFrontierTest");
-        requireAscii = args.length > 0 && args[0].equals("require-ascii");
+        requireWide = args.length > 0 && args[0].equals("require-wide");
+        requireAscii = requireWide || args.length > 0 && args[0].equals("require-ascii");
+        if (args.length > 0 && args[0].equals("jdk-unary-timeout")) {
+            Pattern pattern = Pattern.compile("a*a*a*a*aaaa".repeat(8));
+            System.out.println("JDK_UNARY_ORACLE pattern=(a*a*a*a*aaaa)^8 input=a^32");
+            System.out.flush();
+            check(pattern.matcher("a".repeat(32)).matches(), "JDK_UNARY_ORACLE_RESULT");
+            return;
+        }
+        if (args.length > 0 && args[0].equals("mutant-consume")) {
+            Prepared p = prepare("a".repeat(64) + "b*", 0);
+            check(match(p.plan, "a".repeat(64)) == 1, "CONSUME_CARRY_64_MISSING");
+            return;
+        }
+        if (args.length > 0 && args[0].equals("mutant-epsilon")) {
+            Prepared p = prepare("b" + "a*".repeat(255), 0);
+            check(match(p.plan, "b") == 1, "EPSILON_CARRY_64_MISSING");
+            return;
+        }
         if (args.length > 0 && args[0].equals("mutant-case")) {
             Prepared p = prepare("b" + "a*".repeat(62), 0);
             int value = match(p.plan, "b");
             check(value == 1, "EPSILON_32_MISSING:b+(a*)62:b");
             return;
         }
-        corpus(); allBmpAndMixedPrefixes(); boundaries(); concurrency();
+        corpus(); allBmpAndMixedPrefixes(); boundaries(); wideBoundaries(); concurrency();
         System.out.println("M3_ASCII_PROOF cases=" + cases + " nativeCases=" + nativeCases
                 + " plans=" + plans + " assertions=" + ASSERTIONS.get()
                 + " digest=" + HexFormat.of().formatHex(DIGEST.digest())
-                + " implementation=" + (ASCII == null ? "ROLLING_BASELINE" : "ASCII_CANDIDATE"));
+                 + " implementation=" + (requireWide ? "WIDE_CANDIDATE" : "PREDECESSOR"));
     }
 }
