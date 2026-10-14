@@ -1,0 +1,27 @@
+{
+  "schema": "M3JDK21_REQUIRED_NATIVE_BITCOUNT_SOURCE_LOCK_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 11235,
+  "canonical_recipe": "com.synexia.rewrite.M3Jdk21RequiredJniBitcountRecipe",
+  "canonical_recipe_git_blob": "1be0a7235ddc3b2ead280572ed677b701788ef95",
+  "canonical_develop_parent": "aadce034b4dc0549568fe3eac9b7f47d51127e3b",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_scope": "m3/ports/parallel-bulk",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "operation": "m3.parallel.int-bitcount.v1",
+  "native_execution_policy": "JNI_REQUIRED_NO_FALLBACK",
+  "native_result_policy": "FULL_INTEGER_BITCOUNT_CPU_DIFFERENTIAL",
+  "source_copy_from_challenge_sites": false,
+  "challenge_category_disposition": "EVIDENCE_ONLY",
+  "local_executed_checks_normal": 330918,
+  "local_executed_checks_interpreter_repeat": 330918,
+  "local_proof_scope": "ACTUAL_JNI_WITH_ISOLATED_JDK_INTERFACE_FIXTURE",
+  "required_target_gates": [
+    "REAL_JDK_SOURCE_PATCH_COMPILE",
+    "NATIVE_C11_JNI_DIFFERENTIAL",
+    "MAVEN_JUNIT",
+    "OPENREWRITE_FIXED_POINT",
+    "MODULE_REACTOR_INTEGRATION"
+  ],
+  "promotion_authority": false
+}
