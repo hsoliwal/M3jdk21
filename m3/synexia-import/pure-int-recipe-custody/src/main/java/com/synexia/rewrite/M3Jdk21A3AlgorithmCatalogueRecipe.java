@@ -1,22 +1,19 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.rewrite.a3;
+package com.synexia.rewrite;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
-/** Exact source-image manifest for the A3 algorithm catalogue bridge. */
-final class M3A3AlgorithmCatalogueManifest {
+/** Canonical Synexia owner for the M3JDK21 A3 algorithm-catalogue source-sealed packet. */
+public final class M3Jdk21A3AlgorithmCatalogueRecipe extends M3Jdk21A3SourceSealedRecipe {
+    @Override
+    protected String resourceRoot() {
+        return "/com/synexia/rewrite/m3jdk21-a3-algorithm-catalogue/";
+    }
 
-    record Target(
-            String before,
-            String after,
-            String beforeResource,
-            String afterResource,
-            boolean required) {}
-
-    private M3A3AlgorithmCatalogueManifest() {}
-
-    static Map<String, Target> targets() {
+    @Override
+    protected Map<String, Target> targetManifest() {
         LinkedHashMap<String, Target> result = new LinkedHashMap<>();
         result.put(
                 "src/main/java/com/m3/a3/A3.java",
@@ -59,5 +56,23 @@ final class M3A3AlgorithmCatalogueManifest {
                         "after/A3AlgTest.java",
                         false));
         return Map.copyOf(result);
+    }
+
+    @Override
+    public String getDisplayName() {
+        return "Install M3JDK21 A3 algorithm catalogue bridge";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Synexia-owned exact source-sealed A3 algorithm-catalogue packet consumed by "
+                + "hsoliwal/M3jdk21.";
+    }
+
+    @Override
+    public Set<String> getTags() {
+        return Set.of(
+                "synexia", "m3", "m3jdk21", "a3", "algorithm", "catalogue",
+                "recipe-first", "source-sealed", "candidate-only");
     }
 }

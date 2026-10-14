@@ -39,6 +39,27 @@ public final class M3RecipeScopeRegistry {
                     M3RecipeScopePolicy.fixed(M3EditScope.FILE)),
             Map.entry(
                     "com.synexia.rewrite.atom.M3PureIntConvergenceRecipe",
+                    M3RecipeScopePolicy.fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.synexia.rewrite.M3PureIntAtomizeRecipe",
+                    M3RecipeScopePolicy.fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.synexia.rewrite.M3PureIntInventoryRecipe",
+                    M3RecipeScopePolicy.fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.synexia.rewrite.M3PureIntPatternizeRecipe",
+                    M3RecipeScopePolicy.fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.synexia.rewrite.M3PureIntDocumentationRecipe",
+                    M3RecipeScopePolicy.fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.synexia.rewrite.M3PureIntConvergenceRecipe",
+                    M3RecipeScopePolicy.fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.synexia.rewrite.semantic.M3SemanticHashRecipe",
+                    M3RecipeScopePolicy.fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.synexia.rewrite.M3Jdk21FileConvergenceRecipe",
                     M3RecipeScopePolicy.fixed(M3EditScope.FILE)));
 
     private M3RecipeScopeRegistry() {}

@@ -1,22 +1,19 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.rewrite.a3;
+package com.synexia.rewrite;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
-/** Exact source-image manifest for the A3 serial FILE work recipe. */
-final class M3A3SerialFileWorkManifest {
+/** Canonical Synexia owner for the M3JDK21 A3 serial FILE-work source-sealed packet. */
+public final class M3Jdk21A3SerialFileWorkRecipe extends M3Jdk21A3SourceSealedRecipe {
+    @Override
+    protected String resourceRoot() {
+        return "/com/synexia/rewrite/m3jdk21-a3-serial-file-work/";
+    }
 
-    record Target(
-            String before,
-            String after,
-            String beforeResource,
-            String afterResource,
-            boolean required) {}
-
-    private M3A3SerialFileWorkManifest() {}
-
-    static Map<String, Target> targets() {
+    @Override
+    protected Map<String, Target> targetManifest() {
         LinkedHashMap<String, Target> result = new LinkedHashMap<>();
         result.put(
                 "src/main/java/com/m3/a3/A3.java",
@@ -67,5 +64,23 @@ final class M3A3SerialFileWorkManifest {
                         "after/A3WorkTest.java",
                         false));
         return Map.copyOf(result);
+    }
+
+    @Override
+    public String getDisplayName() {
+        return "Install M3JDK21 A3 serial FILE-work planner";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Synexia-owned exact source-sealed A3 serial FILE-work packet consumed by "
+                + "hsoliwal/M3jdk21.";
+    }
+
+    @Override
+    public Set<String> getTags() {
+        return Set.of(
+                "synexia", "m3", "m3jdk21", "a3", "file-local", "serial",
+                "recipe-first", "source-sealed", "candidate-only");
     }
 }

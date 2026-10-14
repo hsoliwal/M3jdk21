@@ -94,7 +94,6 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         by_surface = {row["local_surface"]: row for row in rows}
         for surface in (
             "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**",
-            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/**",
             "m3/indexdb/**",
         ):
             self.assertEqual(
@@ -103,6 +102,15 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
                 surface,
             )
             self.assertEqual("true", by_surface[surface]["handoff_required"])
+
+        a3_surface = "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/**"
+        self.assertEqual("RECEIVER_ADAPTER_ONLY", by_surface[a3_surface]["disposition"])
+        self.assertEqual(
+            "com.synexia.rewrite.M3Jdk21A3AlgorithmCatalogueRecipe;"
+            "com.synexia.rewrite.M3Jdk21A3SerialFileWorkRecipe",
+            by_surface[a3_surface]["canonical_owner"],
+        )
+        self.assertEqual("true", by_surface[a3_surface]["handoff_required"])
 
         self.assertEqual(
             "com.synexia.rewrite.semantic.M3SemanticHashRecipe",
@@ -178,18 +186,18 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         )
 
 
-    def test_top_level_shared_surfaces_are_explicitly_noncanonical(self) -> None:
+    def test_top_level_shared_surfaces_are_receiver_adapters(self) -> None:
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = {row["local_surface"]: row for row in csv.DictReader(handle, delimiter="\t")}
 
         expected = {
             "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java":
-                "com.synexia.rewrite.M3CanonicalMultiPassPlan",
+                ("RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3Jdk21FileConvergenceRecipe"),
             "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java":
-                "com.synexia.rewrite.M3RepositoryJava21ConvergenceRecipe",
+                ("RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3Jdk21FileConvergenceRecipe"),
         }
-        for surface, owner in expected.items():
-            self.assertEqual("MIGRATION_RESIDUE_NOT_CANONICAL", rows[surface]["disposition"])
+        for surface, (disposition, owner) in expected.items():
+            self.assertEqual(disposition, rows[surface]["disposition"])
             self.assertEqual(owner, rows[surface]["canonical_owner"])
             self.assertEqual("true", rows[surface]["handoff_required"])
 
@@ -206,22 +214,14 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with RESIDUE.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(17, len(rows))
+        self.assertEqual(11, len(rows))
         frozen = {row["path"]: row for row in rows}
-        self.assertEqual(17, len(frozen))
+        self.assertEqual(11, len(frozen))
 
         actual: set[str] = set()
-        for exact in (
-            "tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java",
-            "tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
-        ):
-            if (ROOT / exact).is_file():
-                actual.add("m3/" + exact)
-
         for directory in (
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic",
-            "tooling/migration-recipes/src/main/java/com/m3/rewrite/a3",
             "indexdb/src/main/java/com/m3",
         ):
             start = ROOT / directory
