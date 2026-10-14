@@ -1,0 +1,15 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Restricted-regex candidate mapping for the serial name-mapping reducer. Canonical name-mapping.json remains untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "com.synexia.indexstring.MIndexRestrictedRegex",
+      "source_commit": "9e975f81b9f937d9f2a4f86ef3e821f917d7938e",
+      "source_blob_sha1": "38e6de8cda13b73314d15d09381c7cb7fbc1fdf6",
+      "source_license": "Apache-2.0",
+      "target": "java.lang.M3StringRegexDp + java.lang.String.matches (internal receiver, GPLv2+CPE)",
+      "status": "candidate-implemented; isolated Java21 proof passed; full target java.base/jtreg and OpenRewrite SDK NOT_RUN",
+      "target_rule": "Only lowercase ASCII LeetCode-10 grammar dot and postfix star on lowercase ASCII M3-backed text, bounded two-row DP; unmatched grammar/inputs/resources defer to unchanged JDK Pattern.matches, preserving Unicode, captures, exceptions, and all other JDK regex features"
+    }
+  ]
+}
