@@ -83,6 +83,18 @@ jtreg/runtime proof and serial promotion remain authoritative.
 With no approval ledger, the output is deliberately conservative: FILE work can become READY;
 broader work stays visible and held.
 
+## Machine-readable wave serialization
+
+The TSV is a real tab-delimited record stream: one LF-terminated header and one LF-terminated
+physical row per atom. The JSON is a valid UTF-8 JSON document with exactly one terminal LF.
+Writing the two literal characters backslash and `n` is not equivalent to writing a line
+terminator: it merges TSV rows and invalidates the JSON suffix.
+
+The `test_emitted_waves_are_real_tsv_rows_and_single_terminated_json` regression parses the
+actual output through `csv.DictReader` and `json.loads`, checks exact physical row counts,
+wave assignments, root identity and terminal newlines. A serialization failure holds the output;
+Camel/Airflow/Drools scheduling cannot consume a malformed or unverified wave artifact.
+
 ## M3 invariant
 
 Repository size does not widen edit authority. Small recipe atoms are preferred. Independent FILE
