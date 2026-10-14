@@ -185,7 +185,7 @@ jobs:
           mvn -B -ntp -f m3/vendor/third_party/pom.xml -DskipTests install
           # Compile/install reactor prerequisites (migration-recipes, A3, and DAG) before exec:java.
           # This is preparation only; the later JEP493 JUnit/jtreg/runtime gates are unchanged.
-          mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am -DskipTests install
+          mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am install
 
       - name: 6 - Validate and project the canonical JEP493 recipe DAG
         shell: bash
