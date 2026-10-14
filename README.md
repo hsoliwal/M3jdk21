@@ -38,6 +38,8 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 ## Developer reading and verification routes
 
 Start with the route you are changing; these are different artifacts and evidence scopes.
+For your first checkout, use the [build prerequisites and output checklist](CONTRIBUTING.md#first-build-prerequisites-outputs-and-test-selection)
+to select the shell, JDK variables, logs and matching test configuration.
 
 | Task | Entry point | What it establishes |
 | --- | --- | --- |
