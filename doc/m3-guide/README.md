@@ -53,3 +53,7 @@ For lexicon export identity, eager/lazy admission and derived-family scope, see 
 For packed code/regex features and candidate ranking, see the [precompute batch and similarity reference](precompute-batch-reference.md): stable-input obligations, packed lanes, heuristic versus exact facts, budget accounting, progress/cancellation, explicit native loading and JNI copying/lifetimes.
 
 For primitive long lists, stacks, queues and deques, see the [primitive sequence reference](primitive-sequence-reference.md): method aliases and empty results, capacity retention, callback partial effects, iterator versus spliterator mutation rules, batch defaults and polling progress limits.
+
+For immutable byte/UTF-16/int/long views, see the [joined-array reference](joined-array-reference.md): every public member, snapshot versus retained ownership, copy and buffer boundaries, UTF-16 seams, explicit JNI loading/materialization, actual tests and two source-observed implementation gaps.
+
+For exact UTF-16 prefix facts and mutable point sums, see the [indexed algorithm reference](indexed-algorithm-reference.md): every PrefixZ/Fenwick entry point, budget and cancellation checkpoints, half-open indexing, checked intermediate overflow, failure-atomic staging, memory accounting and explicit test gaps.
