@@ -43,3 +43,5 @@ Commands linked here are source-backed reproduction instructions. No compiler, M
 The inventory is complete for the pinned tracked tree. Substantive package documentation is still partial. See the [coverage ledger](coverage.md) before making a completion claim.
 
 For the other public forks, use the [public fork documentation index](public-forks.md) for pinned guides, module/package maps, open coverage and separate CI evidence.
+
+For the linked-hash map/set family, see the [collection API and storage reference](collections-reference.md): parallel payload/control arrays, bucket masks and tombstones, access order, live/reversed views, entry projections, callback effects, and explicit JDK-compatibility boundaries.
