@@ -1,0 +1,45 @@
+{
+  "schema": "M3JDK21_REGEX_EFFECTS_HANDOFF_V1",
+  "status": "SOURCE_RECEIVED_CANDIDATE_NOT_RUNTIME_PROMOTED",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_commit": "0f93c045e0da95147fe5abdf8f3de9d83c6cc726",
+  "canonical_recipe_pr": 11419,
+  "recipe": "com.synexia.m3.M3Jdk21RegexEffects",
+  "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk21-regex-effects/manifest.tsv",
+  "manifest_sha256": "3a58e4ecc4bcc4c6f855361f659055e9a26eb8d64e08ad3fd577bfdc5ad8f490",
+  "qualification_path": "synexia-openrewrite-recipes/verification/m3jdk21-regex-effects-20261014/evidence/qualification.json",
+  "qualification_git_blob": "d37b431a55c52c94b403b1dee0c62b5e1758c280",
+  "qualification_sha256": "eac01b614ae1001e5f336eb4e2abe4ebbda790ef2a1923a2f0fc6e420f8a07eb",
+  "receiving_base": "d5abed865bd47c4dd5ad78e95704348fe2095ed2",
+  "generated_output_count": 8,
+  "generated_outputs": {
+    "m3/docs/name-mapping-regex-effects.json": "84aeae5b188872ec54d3b473ad40ffcbb81a3483001e71cc0cc6002e2ca937f1",
+    "m3/synexia-import/regex-effects-20261014/README.md": "59cbbb180b35ee2439753cffd5a4c179fe952bbcec4186b3b17b70c955c3d929",
+    "m3/synexia-import/regex-effects-20261014/catalogue.tsv": "4a8b12d08ae4f00d5aae3378b3a2bf80b1686e038c020e78f3dcd07629126511",
+    "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "3e0dfe77ac20a605df830eb29dec59d1c221fa0113a2ba5c69d56f86a2a2ddd2",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RX.java": "990b5d340140a89a7fa6088936a5f092b11b32cfde008f6cc8b1035a2ead5e0d",
+    "src/java.base/share/native/libjava/M3RX.c": "8c84106aa63c3d7bc53f0950c0b31543458a04c612ea136a886d2e1304c992ee",
+    "test/jdk/java/lang/String/M3StringRegexEffectsTest.java": "76036dbd838a87ecbaabd1c0e271c4b524414cdcd4955dfe63270dd70a03e263",
+    "test/jdk/jdk/internal/mindex/M3RXTest.java": "2c325daeccda323f38e8673a74cb7ffd3a309e0ba6f6cddfea2f29c58590f0d0"
+  },
+  "observed_kernel_results": {
+    "recipe": "M3_SPAN_RECIPE_PROOF targets=8 fixedPointChanges=0 resumeSubsets=256 refusalCases=21 PASS",
+    "java_kernel": "M3RX_PROOF native=false checks=2540410 PASS",
+    "jni_inclusive": "M3RX_PROOF native=true checks=2560864 PASS",
+    "mock_native_failures": "NATIVE_MOCK_FAILURES cases=446 PASS",
+    "owner_model_cache": "OWNER_MODEL_CACHE checks=6332 PASS"
+  },
+  "qualification_boundary": "Explicit minimal owner model, NOT actual M3String native/mapped storage or full target module",
+  "unrun": [
+    "Maven lifecycle",
+    "OpenRewrite SDK scheduler/dry run",
+    "strict canonical task/provenance promotion",
+    "complete target image/libjava build",
+    "target jtreg storage on/off",
+    "HotSpot GC/JNI/JVMTI/CDS/serialization",
+    "other platforms",
+    "whole-estate migration/global mapping reconciliation"
+  ],
+  "count_note": "JNI-inclusive counts overlap Java kernel counts; do not add as independent coverage.",
+  "receiver_artifact": "This machine-generated handoff record binds the emitted files to canonical recipe custody. It is not a separate recipe implementation or a target-runtime pass."
+}
