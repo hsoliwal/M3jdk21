@@ -1,0 +1,158 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tornado;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+import java.util.Map;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
+import jdk.internal.vm.parallel.BulkPipeline;
+import jdk.internal.vm.parallel.BulkPipelineExecution;
+import jdk.internal.vm.parallel.BulkPipelineStage;
+import jdk.internal.vm.parallel.BulkTask;
+import uk.ac.manchester.tornado.api.TaskGraph;
+import uk.ac.manchester.tornado.api.annotations.Parallel;
+
+final class TornadoBulkPipelineProviderTest {
+    private static final String ROOT_A = "a".repeat(64);
+    private static final String ROOT_B = "b".repeat(64);
+
+    @Test
+    void registryAndSupportAreDeterministicWithoutHardware() {
+        TornadoPipelineKernelRegistry first = registry();
+        TornadoPipelineKernelRegistry second = new TornadoPipelineKernelRegistry(
+                List.of(incrementBinding(), doubleBinding()));
+        TornadoBulkPipelineProvider provider =
+                new TornadoBulkPipelineProvider(first);
+
+        assertEquals(first.root(), second.root());
+        assertEquals("tornadovm-7.2-pipeline", provider.id());
+        assertTrue(provider.supports(pipeline()));
+        assertFalse(provider.supports(new BulkPipeline(
+                "cpu-shape",
+                4,
+                List.of(new BulkPipelineStage(
+                        "only",
+                        new BulkTask(
+                                "double",
+                                4,
+                                0,
+                                List.of("input"),
+                                List.of("result")))),
+                List.of("input"),
+                List.of("result"))));
+    }
+
+    @Test
+    void physicalRuntimeRequiresIndependentExactParity() {
+        Assumptions.assumeTrue(Boolean.getBoolean("m3.gpu"));
+        TornadoBulkPipelineProvider provider =
+                new TornadoBulkPipelineProvider(registry());
+
+        BulkPipelineExecution result = provider.execute(
+                pipeline(),
+                Map.of("input", new int[] {1, 2, 3, 4}));
+
+        assertEquals("tornadovm-7.2-pipeline", result.provider());
+        assertEquals(List.of("double-stage", "increment-stage"), result.orderedStageIds());
+        assertTrue(java.util.Arrays.equals(
+                new int[] {3, 5, 7, 9},
+                (int[]) result.outputs().get("result")));
+        assertTrue(result.receiptRoot().matches("[0-9a-f]{64}"));
+    }
+
+    private static TornadoPipelineKernelRegistry registry() {
+        return new TornadoPipelineKernelRegistry(
+                List.of(doubleBinding(), incrementBinding()));
+    }
+
+    private static TornadoPipelineKernelBinding doubleBinding() {
+        return new TornadoPipelineKernelBinding(
+                "double",
+                ROOT_A,
+                (task, inputs) -> Map.of(
+                        task.outputs().getFirst(),
+                        new int[((int[]) inputs.get("input")).length]),
+                TornadoBulkPipelineProviderTest::appendDouble,
+                (task, values) -> doubleKernel(
+                        (int[]) values.get("input"),
+                        (int[]) values.get("mid")));
+    }
+
+    private static TornadoPipelineKernelBinding incrementBinding() {
+        return new TornadoPipelineKernelBinding(
+                "increment",
+                ROOT_B,
+                (task, inputs) -> Map.of(
+                        task.outputs().getFirst(),
+                        new int[((int[]) inputs.get("mid")).length]),
+                TornadoBulkPipelineProviderTest::appendIncrement,
+                (task, values) -> incrementKernel(
+                        (int[]) values.get("mid"),
+                        (int[]) values.get("result")));
+    }
+
+    private static BulkPipeline pipeline() {
+        return new BulkPipeline(
+                "two-stage",
+                8,
+                List.of(
+                        new BulkPipelineStage(
+                                "increment-stage",
+                                new BulkTask(
+                                        "increment",
+                                        4,
+                                        4,
+                                        List.of("mid"),
+                                        List.of("result"))),
+                        new BulkPipelineStage(
+                                "double-stage",
+                                new BulkTask(
+                                        "double",
+                                        4,
+                                        4,
+                                        List.of("input"),
+                                        List.of("mid")))),
+                List.of("input"),
+                List.of("result"));
+    }
+
+    private static void appendDouble(
+            TaskGraph graph,
+            String taskName,
+            BulkTask task,
+            Map<String, Object> values) {
+        graph.task(
+                taskName,
+                TornadoBulkPipelineProviderTest::doubleKernel,
+                (int[]) values.get("input"),
+                (int[]) values.get("mid"));
+    }
+
+    private static void appendIncrement(
+            TaskGraph graph,
+            String taskName,
+            BulkTask task,
+            Map<String, Object> values) {
+        graph.task(
+                taskName,
+                TornadoBulkPipelineProviderTest::incrementKernel,
+                (int[]) values.get("mid"),
+                (int[]) values.get("result"));
+    }
+
+    private static void doubleKernel(int[] input, int[] output) {
+        for (@Parallel int i = 0; i < output.length; i++) {
+            output[i] = input[i] * 2;
+        }
+    }
+
+    private static void incrementKernel(int[] input, int[] output) {
+        for (@Parallel int i = 0; i < output.length; i++) {
+            output[i] = input[i] + 1;
+        }
+    }
+}
