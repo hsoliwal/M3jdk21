@@ -25,14 +25,14 @@ class StringTargetSuccessorTest(unittest.TestCase):
 
     def read_transition_rows(self):
         with phase.TRANSITIONS.open(encoding="utf-8", newline="") as handle:
-            return list(csv.DictReader(handle, delimiter="\\t"))
+            return list(csv.DictReader(handle, delimiter="\t"))
 
     def with_transition_rows(self, changed, callback):
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / "string-target-transition-receipts.tsv"
             with path.open("w", encoding="utf-8", newline="") as handle:
                 writer = csv.DictWriter(handle, fieldnames=phase.TRANSITION_HEADER,
-                                        delimiter="\\t", lineterminator="\\n")
+                                        delimiter="\t", lineterminator="\n")
                 writer.writeheader()
                 writer.writerows(changed)
             with patch.object(phase, "TRANSITIONS", path):
