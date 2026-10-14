@@ -93,8 +93,11 @@ public final class BulkScheduler implements BulkExecutor {
         if (!item.id().equals(execution.provider())) {
             throw new IllegalStateException("provider identity mismatch");
         }
-        Set<String> expected = Set.copyOf(task.outputs());
-        if (!execution.outputs().keySet().equals(expected)) {
+        // Task outputs are already unique and immutable. Check names without copying
+        // potentially multi-gigabyte result planes through BulkExecution.outputs().
+        Set<String> actual = execution.outputNames();
+        if (actual.size() != task.outputs().size()
+                || !actual.containsAll(task.outputs())) {
             throw new IllegalStateException("provider output shape mismatch");
         }
         return execution;
