@@ -58,7 +58,13 @@ class M3NumberSpaceExportTest(unittest.TestCase):
             source_rows, _ = EXPORT.read_manifest(source_manifest)
             self.assertIn(SOURCE_ID, source_rows)
             source = source_rows[SOURCE_ID]
-            self.assertEqual(SOURCE_REVISION, source["precompute_fields"] and SOURCE_REVISION)
+            target_map_path = ROOT / "m3/lexicon/synexia-number-target-map.tsv"
+            with target_map_path.open("r", encoding="utf-8", newline="") as stream:
+                target_rows = csv.DictReader(stream, delimiter="\\t")
+                target_row = next(row for row in target_rows if row["source_id"] == SOURCE_ID)
+            self.assertEqual(SOURCE_REVISION, target_row["source_revision"])
+            self.assertIn("language_tag=und only as an envelope", source["data_policy"])
+            self.assertIn("mapping_name=NUMBER_<record_id>", source["data_policy"])
             self.assertEqual("id", source["record_id_field"])
             self.assertEqual("value", source["mapping_fields"])
             self.assertEqual("M3StringFacts + M3NumberSpace", source["precompute_target"])
