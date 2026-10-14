@@ -417,8 +417,7 @@
       "historical_evidence": "Synexia PR #9579 merged at 1a5f6c9abbf00887550f7c3d5647ebb20ef7ad99 with an owned UTF-16 address directory; that cache is absent from current develop at the pinned source revision.",
       "source_license": "Apache-2.0",
       "target_license": "GPL-2.0-with-Classpath-exception for the existing java.base files; no target source file changed by this intake"
-    }
-  ,
+    },
     {
       "source": "com.synexia.indexstring.MIndexTupleReferences.Node.textMetrics / Node.bitSignal64",
       "source_commit": "e8f16525b04d26c80973b08aaf01df0068a797c6",
@@ -511,6 +510,42 @@
       "source_revision_receipt": "m3/tooling/module-packs/text-tools/SOURCE_REF.json",
       "target_rule": "Opt-in fork SDK extension; preserve all Java SE names/contracts; no java.base replacement or phase advancement.",
       "license": "Apache-2.0 first-party only; OpenJDK and third-party rights retained"
+    },
+    {
+      "source": "Apache OpenNLP Tools 2.4.0",
+      "target": "Apache OpenNLP Tools 2.4.0",
+      "modules": [
+        "org.apache.opennlp.tools"
+      ],
+      "internal_optimization_owners": [
+        "opennlp.tools.util.StringList"
+      ],
+      "status": "full tool source compiled; local Java21 behavior/API/JMOD proof; product acceptance pending",
+      "recipe": "synexia-openrewrite-recipes/crates/m3-nlp-search/pom.xml",
+      "receiver": "m3/tooling/module-packs/nlp-search",
+      "source_revision_receipt": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
+      "target_rule": "Actual upstream tool implementations and APIs retained. M3-owned internal source recipes; no shadow implementation, API rename, java.base replacement or runtime phase advancement.",
+      "license": "Preserve Apache and embedded notices; SLF4J MIT; first-party recipe/integration Apache-2.0"
+    },
+    {
+      "source": "Apache Lucene 9.10.0",
+      "target": "Apache Lucene 9.10.0",
+      "modules": [
+        "org.apache.lucene.core",
+        "org.apache.lucene.analysis.common",
+        "org.apache.lucene.queries",
+        "org.apache.lucene.sandbox",
+        "org.apache.lucene.queryparser"
+      ],
+      "internal_optimization_owners": [
+        "org.apache.lucene.queryparser.classic.QueryParserBase"
+      ],
+      "status": "full tool source compiled; local Java21 behavior/API/JMOD proof; product acceptance pending",
+      "recipe": "synexia-openrewrite-recipes/crates/m3-nlp-search/pom.xml",
+      "receiver": "m3/tooling/module-packs/nlp-search",
+      "source_revision_receipt": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
+      "target_rule": "Actual upstream tool implementations and APIs retained. M3-owned internal source recipes; no shadow implementation, API rename, java.base replacement or runtime phase advancement.",
+      "license": "Preserve Apache and embedded notices; SLF4J MIT; first-party recipe/integration Apache-2.0"
     }
   ],
   "imported_donor_sources": [],
@@ -8148,9 +8183,7 @@
         "com.m3.parallel.Verified"
       ],
       "rule": "One reviewed bounded integer lane; no arbitrary Runnable; snapshotted inputs; required accelerators fail closed; full independent Java parity; no java.base dependency on the M3 parallel provider."
-    }
-
-,
+    },
     {
       "source_family": "MIndexHugeJsonIndex / MIndexHugeJsonViewport optional text admission",
       "target_family": "viewport text admission; concrete target consumer pending",
@@ -8241,8 +8274,7 @@
       "JDK compatibility",
       "build/runtime/JNI tests",
       "final promotion"
-    
-  ],
+    ],
     "portable_semantics_owner": "Synexia",
     "source_origin_commit": "1b954f886f0a40684c84bac443851d9fe4af1764",
     "source_pr_status": "hsoliwal/com.synexia#9489 closed historical review; canonical packet is present on develop",
