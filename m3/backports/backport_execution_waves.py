@@ -75,18 +75,21 @@ def read_approvals(path: Path | None) -> dict[str, str]:
     if path is None:
         return {}
     with path.open("r", encoding="utf-8", newline="") as handle:
-        rows = list(csv.DictReader(handle, delimiter="	"))
-    if not rows:
-        return {}
-    missing = _APPROVAL_COLUMNS - set(rows[0])
-    if missing:
-        raise ValueError(f"approval ledger missing columns: {sorted(missing)}")
+        reader = csv.DictReader(handle, delimiter="	")
+        missing = _APPROVAL_COLUMNS - set(reader.fieldnames or ())
+        if missing:
+            raise ValueError(f"approval ledger missing columns: {sorted(missing)}")
+        rows = list(reader)
 
     result: dict[str, str] = {}
+    seen: set[str] = set()
     for row in rows:
+        if None in row or any(row.get(column) is None for column in _APPROVAL_COLUMNS):
+            raise ValueError("malformed approval ledger record")
         atom_id = row["atom_id"].strip()
-        if not atom_id or atom_id in result:
+        if not atom_id or atom_id in seen:
             raise ValueError(f"invalid or duplicate approval atom_id: {atom_id!r}")
+        seen.add(atom_id)
         approved = _truth(row["approved"])
         proof = row["proof_ref"].strip()
         if approved and not proof:
@@ -104,7 +107,8 @@ def _safe(value: str) -> str:
 
 
 def _scope_approval(atom, approvals: Mapping[str, str]) -> bool:
-    return atom.scope == FILE_SCOPE or atom.atom_id in approvals
+    # Scheduling eligibility is never granted to non-executable evidence, even at FILE scope.
+    return bool(atom.executable and (atom.scope == FILE_SCOPE or atom.atom_id in approvals))
 
 
 def _base_state(atom, approvals: Mapping[str, str]) -> tuple[str, str]:
@@ -123,6 +127,28 @@ def plan(atoms: Sequence[object], approvals: Mapping[str, str]) -> list[WaveItem
     by_id = {atom.atom_id: atom for atom in atoms}
     if len(by_id) != len(atoms):
         raise ValueError("duplicate atom id")
+    if [atom.order for atom in atoms] != list(range(len(atoms))):
+        raise ValueError("non-contiguous canonical atom order")
+    unknown_approvals = sorted(set(approvals) - set(by_id))
+    if unknown_approvals:
+        raise ValueError(f"scope approvals reference unknown atoms: {unknown_approvals}")
+
+    # Camel/Airflow/Drools task normalization must never collapse distinct canonical atoms.
+    normalized: dict[str, str] = {}
+    scopes = {"FILE", "VISIBILITY", "PACKAGE", "MODULE", "MULTI_MODULE", "LIBRARY_API"}
+    for atom in atoms:
+        if atom.scope not in scopes:
+            raise ValueError(f"unrecognized edit scope: {atom.scope!r}")
+        alias = _safe(atom.atom_id)
+        previous = normalized.setdefault(alias, atom.atom_id)
+        if previous != atom.atom_id:
+            raise ValueError(
+                f"scheduler identity collision: {previous!r} and {atom.atom_id!r}"
+            )
+        if atom.depends_on and atom.depends_on not in by_id:
+            raise ValueError(f"unknown dependency: {atom.depends_on}")
+        if atom.depends_on and by_id[atom.depends_on].work_id != atom.work_id:
+            raise ValueError("cross-work-item dependency lacks canonical authority")
 
     state: dict[str, str] = {}
     action: dict[str, str] = {}
