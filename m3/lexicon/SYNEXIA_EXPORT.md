@@ -13,8 +13,13 @@ redistribute the bulk datasets named by it.
 The number row is an explicit generated projection, not a Synexia corpus
 snapshot. The pinned `NumberValue` source contributes a numeric scalar and an
 inherited decimal `id`; its integer cache covers only -128..127. M3 generates
-the inclusive 0..10000 domain and canonical decimal spellings, with no
-`language_tag` field or imported number rows.
+the inclusive 0..10000 domain and canonical decimal spellings. In the generic
+export envelope, `language_tag=und` is envelope metadata only, not a claim about
+the number vocabulary's language. Generated rows use `source_kind=number`,
+`translation_profile=-`, `mapping_id=<decimal record_id>`,
+`mapping_name=NUMBER_<record_id>`, and `lexeme=<canonical decimal spelling>`.
+The source itself has no `language_tag` field; the envelope values and labels
+are not attributed to Synexia.
 
 The source manifest's legacy eight-column form remains accepted. The v2 form
 appends `precompute_fields`, a sorted, unique comma-separated list of required
@@ -171,25 +176,34 @@ boundary. The sidecars remain language-layer metadata; they are not fields of
 `java.lang.String`, and they do not make Synexia resolver IDs interchangeable
 with VM-local M3 IDs.
 
-The repository contains only the schema, source map and synthetic proof. Full
-LangDex/Hugging Face/Kaggle/WordNet/Wikipedia or operator-owned dictionary data
-must be supplied under its exact revision and license custody. No network
-download is performed by the exporter, and no claim is made that a bulk corpus
-has been checked into this public JDK repository.
+The repository contains the schema, source map, and deterministic
+number-projection integration tests; no generated number export or bulk corpus
+is checked in. Full LangDex/Hugging Face/Kaggle/WordNet/Wikipedia or
+operator-owned dictionary data must be supplied under its exact revision and
+license custody. No network download is performed by the exporter.
 
 ## Proof
 
+The translation-receiver GitHub workflow compiles
+`M3NumberSpaceExportFixture` against the actual M3 core owner, emits all 10,001
+rows into its build directory, and runs the integration proof with an explicit
+scratch directory:
+
 ```text
-python3 -m unittest m3/runtime-integration/tests/test_synexia_export.py
-python3 m3/runtime-integration/verify-synexia-lexicon.py /operator/m3jdk-lexicon/export
+python -B m3/runtime-integration/tests/test_m3_number_space_export.py \
+  --fixture m3/build/translation-receiver-current-base/number-space.tsv \
+  --scratch-dir m3/build/translation-receiver-current-base/python-temp
 ```
 
-The proof covers all number IDs `0..10000`, multilingual/proper-name and unit
-mapping rows, directed antonym/thesaurus relation rows, rich owner payloads,
-  the reviewed source-manifest-to-field-map
-lineage, legacy-input compatibility, deterministic replay, M3LEX001 version 2
-metadata, precompute sidecars, conflict refusal before output creation, and
-source-blind rejection of a post-export mutation.
+That proof takes the current number-family row from the checked-in manifest,
+preserves the decimal source IDs, applies the generated `und` envelope and
+stable `NUMBER_<record_id>` label, verifies all eight `M3NumberSpace`
+precomputes, exports through the existing M3LEX001 v2 writer, and checks the
+result with the independent source-blind verifier. It also rejects duplicate
+source/record identities and compares two complete exports byte-for-byte.
+The separate general exporter suite continues to cover multilingual and
+synthetic unit mappings, directed antonym/thesaurus relations, legacy input,
+and post-export mutation refusal.
 
 ## Proper-name instance-index contract
 
