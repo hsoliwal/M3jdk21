@@ -3,23 +3,20 @@ name: M3JDK21 Backport Recipe DAG
 on:
   push:
     branches:
+      - "master"
       - "m3/jdk21-backport-dag-control-20261003"
     paths:
       - "m3/pom.xml"
       - "m3/tooling/backport-dag/**"
       - "m3/tooling/migration-recipes/**"
-      - "m3/backports/backport_recipe_dag.py"
-      - "m3/backports/test_backport_recipe_dag.py"
-      - "m3/backports/pom.xml"
+      - "m3/backports/**"
       - ".github/workflows/m3-jdk21-backport-dag.yml"
   pull_request:
     paths:
       - "m3/pom.xml"
       - "m3/tooling/backport-dag/**"
       - "m3/tooling/migration-recipes/**"
-      - "m3/backports/backport_recipe_dag.py"
-      - "m3/backports/test_backport_recipe_dag.py"
-      - "m3/backports/pom.xml"
+      - "m3/backports/**"
       - ".github/workflows/m3-jdk21-backport-dag.yml"
   workflow_dispatch:
 
