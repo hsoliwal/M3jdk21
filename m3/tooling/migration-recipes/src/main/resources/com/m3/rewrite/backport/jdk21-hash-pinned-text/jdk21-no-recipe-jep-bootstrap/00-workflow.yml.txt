@@ -1,0 +1,258 @@
+name: M3 high-risk JEP recipe bootstrap
+
+on:
+  push:
+    branches:
+      - "m3/no-recipe-jep-*"
+    paths:
+      - "m3/backports/HIGH_RISK_IMPLEMENTATION_AUTHORITY.tsv"
+      - "m3/backports/HIGH_RISK_RECIPE_BOOTSTRAP.md"
+      - "m3/backports/high_risk_implementation_authority.py"
+      - "m3/backports/test_high_risk_implementation_authority.py"
+      - "m3/backports/JEP_RESIDUE_QUEUE.tsv"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/selected_path_inventory.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - ".github/workflows/m3-high-risk-jep-recipe-bootstrap.yml"
+  pull_request:
+    paths:
+      - "m3/backports/HIGH_RISK_IMPLEMENTATION_AUTHORITY.tsv"
+      - "m3/backports/HIGH_RISK_RECIPE_BOOTSTRAP.md"
+      - "m3/backports/high_risk_implementation_authority.py"
+      - "m3/backports/test_high_risk_implementation_authority.py"
+      - "m3/backports/JEP_RESIDUE_QUEUE.tsv"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/selected_path_inventory.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - ".github/workflows/m3-high-risk-jep-recipe-bootstrap.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: 1 - Diff hygiene and authority tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 -m py_compile \
+            m3/backports/high_risk_implementation_authority.py \
+            m3/backports/file_delta_inventory.py \
+            m3/backports/selected_path_inventory.py \
+            m3/backports/generate_recipe_crates.py
+          cd m3/backports
+          python3 -m unittest -v \
+            test_high_risk_implementation_authority.py \
+            test_selected_path_inventory.py \
+            test_generate_recipe_crates.py
+
+      - name: 2 - Verify canonical backport control plane once
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/backports/pom.xml verify
+
+      - name: 3 - Emit deterministic high-risk JEP matrix
+        id: matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          matrix="$(python3 m3/backports/high_risk_implementation_authority.py \
+            --root "$GITHUB_WORKSPACE" --matrix-json)"
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+          echo "$matrix" | python3 -m json.tool
+
+  file-recipe-evidence:
+    needs: plan
+    runs-on: ubuntu-22.04
+    timeout-minutes: 80
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: 1 - Fetch pinned Java21 and final donor history
+        shell: bash
+        env:
+          DONOR_TAG: ${{ matrix.donor_tag }}
+          IMPLEMENTATION_COMMIT: ${{ matrix.commit }}
+        run: |
+          set -euo pipefail
+          UPSTREAM="$RUNNER_TEMP/upstream-jdk-${{ matrix.jep }}"
+          mkdir "$UPSTREAM"
+          git -C "$UPSTREAM" init -q
+          git -C "$UPSTREAM" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$UPSTREAM" -c protocol.version=2 fetch \
+            --filter=blob:none --no-tags origin \
+            "refs/tags/jdk-21+35:refs/tags/jdk-21+35" \
+            "refs/tags/$DONOR_TAG:refs/tags/$DONOR_TAG"
+          git -C "$UPSTREAM" cat-file -e "$IMPLEMENTATION_COMMIT^{commit}"
+          git -C "$UPSTREAM" merge-base --is-ancestor "$IMPLEMENTATION_COMMIT" "$DONOR_TAG"
+          printf 'UPSTREAM=%s\n' "$UPSTREAM" >> "$GITHUB_ENV"
+
+      - name: 2 - Prove exact implementation denominator
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/jep-${{ matrix.jep }}"
+          python3 m3/backports/high_risk_implementation_authority.py \
+            --root "$GITHUB_WORKSPACE" \
+            --repo "$UPSTREAM" \
+            --jep ${{ matrix.jep }} \
+            --paths-out "$RUNNER_TEMP/jep-${{ matrix.jep }}/INTEGRATION_PATHS.txt"
+          test "$(grep -c . "$RUNNER_TEMP/jep-${{ matrix.jep }}/INTEGRATION_PATHS.txt")" \
+            -eq ${{ matrix.path_count }}
+
+      - name: 3 - Compare Java21 against implementation and final GA
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/jep-${{ matrix.jep }}"
+          python3 m3/backports/file_delta_inventory.py \
+            --repo "$UPSTREAM" \
+            --release ${{ matrix.release }} \
+            --donor-ref "${{ matrix.commit }}" \
+            --out "$root/integration-delta.tsv"
+          python3 m3/backports/file_delta_inventory.py \
+            --repo "$UPSTREAM" \
+            --release ${{ matrix.release }} \
+            --out "$root/ga-delta.tsv"
+
+      - name: 4 - Select exact implementation paths in final GA
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/jep-${{ matrix.jep }}"
+          python3 m3/backports/selected_path_inventory.py \
+            --paths "$root/INTEGRATION_PATHS.txt" \
+            --integration-delta "$root/integration-delta.tsv" \
+            --ga-delta "$root/ga-delta.tsv" \
+            --out "$root/selected-paths.tsv"
+          python3 - <<'PY'
+          import csv
+          import os
+          from collections import Counter
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "jep-${{ matrix.jep }}"
+          with (root / "selected-paths.tsv").open(encoding="utf-8", newline="") as handle:
+              rows = list(csv.DictReader(handle, delimiter="\t"))
+          expected = int("${{ matrix.path_count }}")
+          if len(rows) != expected or len({row["path"] for row in rows}) != expected:
+              raise SystemExit(f"JEP ${{ matrix.jep }} selected-path denominator drift")
+          counts = Counter(row["disposition"] for row in rows)
+          admitted = [
+              row["path"]
+              for row in rows
+              if row["disposition"] == "MATERIALIZE_GA_POSTIMAGE"
+          ]
+          (root / "MATERIALIZE_PATHS.txt").write_text(
+              "".join(path + "\n" for path in admitted),
+              encoding="utf-8",
+          )
+          print(
+              "JEP${{ matrix.jep }}_SELECTED "
+              + " ".join(f"{key}={value}" for key, value in sorted(counts.items()))
+          )
+          if not admitted:
+              raise SystemExit("no final-GA materialization paths")
+          PY
+
+      - name: 5 - Generate one-file Java native and text recipe evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/jep-${{ matrix.jep }}"
+          python3 m3/backports/generate_recipe_crates.py \
+            --repo "$UPSTREAM" \
+            --release ${{ matrix.release }} \
+            --paths-file "$root/MATERIALIZE_PATHS.txt" \
+            --crate-size 1 \
+            --include-native \
+            --include-text \
+            --out "$root/file-atoms"
+
+      - name: 6 - Prove FILE-crate accounting
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "jep-${{ matrix.jep }}"
+          selected = {
+              line.strip()
+              for line in (root / "MATERIALIZE_PATHS.txt").read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          }
+          with (root / "file-atoms" / "CRATES.tsv").open(encoding="utf-8", newline="") as handle:
+              crates = list(csv.DictReader(handle, delimiter="\t"))
+          with (root / "file-atoms" / "EXCLUSIONS.tsv").open(encoding="utf-8", newline="") as handle:
+              exclusions = list(csv.DictReader(handle, delimiter="\t"))
+          if not all(int(row["target_count"]) == 1 for row in crates):
+              raise SystemExit("high-risk bootstrap requires one FILE target per crate")
+          generated = sum(int(row["target_count"]) for row in crates)
+          if generated + len(exclusions) != len(selected):
+              raise SystemExit(
+                  f"accounting drift generated={generated} exclusions={len(exclusions)} "
+                  f"selected={len(selected)}"
+              )
+          print(
+              f"JEP${{ matrix.jep }}_RECIPE_EVIDENCE "
+              f"selected={len(selected)} generated={generated} exclusions={len(exclusions)}"
+          )
+          PY
+          test -z "$(git status --porcelain=v1 -uall)"
+
+      - name: 7 - Write authority receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/jep-${{ matrix.jep }}"
+          cat > "$root/AUTHORITY.txt" <<EOF
+          jep=${{ matrix.jep }}
+          release=${{ matrix.release }}
+          title=${{ matrix.title }}
+          implementation_jbs=${{ matrix.implementation_jbs }}
+          implementation_commit=${{ matrix.commit }}
+          implementation_path_count=${{ matrix.path_count }}
+          donor_tag=${{ matrix.donor_tag }}
+          dependency_jep_ids=${{ matrix.dependency_jep_ids }}
+          authority=IMPLEMENTATION_COMMIT_ONLY
+          compatibility=NOT_PROVEN
+          source_mutation=NOT_AUTHORIZED
+          promotion=NOT_AUTHORIZED
+          EOF
+
+      - name: 8 - Upload JEP FILE-recipe evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: high-risk-jep-${{ matrix.jep }}-recipe-evidence-${{ github.run_id }}
+          path: ${{ runner.temp }}/jep-${{ matrix.jep }}
+          if-no-files-found: warn
+          retention-days: 30
