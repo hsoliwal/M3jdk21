@@ -9,8 +9,9 @@
       "target": "java.util.regex.M3PatternQuery.BooleanPlan",
       "status": "TARGET_OWNED_PORT_CANDIDATE; exact scoped proof separate from full M3JDK21 acceptance",
       "recipe": "com.synexia.rewrite.M3PatternAsciiReceive20261014",
-      "target_rule": "Keep JDK compiled predicates and parser; up to 63 atoms use bounded ASCII frontier; original DP for larger/non-ASCII programs and original surrogate refusal; no M3String fields or public JDK API change.",
-      "license": "Target-owned GPLv2 with Classpath exception adaptation; no third-party source body copied."
+      "target_rule": "Keep JDK compiled predicates and parser. Up to 63 atoms retain scalar execution; 64..256 atoms use 2..5 frontier words with distinct consuming/epsilon carries. Non-ASCII and absent metadata retain original rolling DP; surrogate refusal remains. No M3String fields or public JDK API change.",
+      "license": "Target-owned GPLv2 with Classpath exception adaptation; no third-party source body copied.",
+      "predecessor_target_commit": "072c2ff660c7ca36aba1d488672ce1ab02f27d2a"
     },
     {
       "source": "regex rolling-DP qualification algorithm",
