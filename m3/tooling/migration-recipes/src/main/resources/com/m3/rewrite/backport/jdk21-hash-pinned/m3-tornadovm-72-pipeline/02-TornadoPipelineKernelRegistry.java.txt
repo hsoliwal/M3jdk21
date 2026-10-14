@@ -1,0 +1,78 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tornado;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HexFormat;
+import java.util.Map;
+import java.util.Objects;
+import java.util.TreeMap;
+
+/** Immutable exact operation registry for the optional TornadoVM whole-pipeline provider. */
+public final class TornadoPipelineKernelRegistry {
+    private final Map<String, TornadoPipelineKernelBinding> bindings;
+    private final String root;
+
+    public TornadoPipelineKernelRegistry(
+            Collection<TornadoPipelineKernelBinding> input) {
+        TreeMap<String, TornadoPipelineKernelBinding> copy = new TreeMap<>();
+        for (TornadoPipelineKernelBinding binding
+                : Objects.requireNonNull(input, "input")) {
+            TornadoPipelineKernelBinding checked =
+                    Objects.requireNonNull(binding, "binding");
+            if (copy.putIfAbsent(checked.operationId(), checked) != null) {
+                throw new IllegalArgumentException(
+                        "duplicate operation: " + checked.operationId());
+            }
+        }
+        if (copy.isEmpty() || copy.size() > 256) {
+            throw new IllegalArgumentException("registry size");
+        }
+        bindings = Collections.unmodifiableMap(copy);
+        ArrayList<String> fields = new ArrayList<>();
+        copy.forEach((operation, binding) -> {
+            fields.add(operation);
+            fields.add(binding.contractRoot());
+        });
+        root = hash("M3_TORNADO_PIPELINE_REGISTRY_V1", fields);
+    }
+
+    public TornadoPipelineKernelBinding require(String operationId) {
+        TornadoPipelineKernelBinding binding = bindings.get(operationId);
+        if (binding == null) {
+            throw new IllegalArgumentException(
+                    "unknown Tornado pipeline operation: " + operationId);
+        }
+        return binding;
+    }
+
+    public boolean contains(String operationId) {
+        return bindings.containsKey(operationId);
+    }
+
+    public String root() { return root; }
+
+    static String hash(String domain, java.util.List<String> fields) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            update(digest, domain);
+            for (String field : fields) update(digest, field);
+            return HexFormat.of().formatHex(digest.digest());
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new ExceptionInInitializerError(impossible);
+        }
+    }
+
+    private static void update(MessageDigest digest, String value) {
+        byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
+        digest.update((byte) (bytes.length >>> 24));
+        digest.update((byte) (bytes.length >>> 16));
+        digest.update((byte) (bytes.length >>> 8));
+        digest.update((byte) bytes.length);
+        digest.update(bytes);
+    }
+}
