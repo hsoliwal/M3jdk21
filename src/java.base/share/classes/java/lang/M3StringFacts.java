@@ -23,6 +23,8 @@ final class M3StringFacts {
 
     final int utf16Length;
     final int utf8Length;
+    /** Java/JNI modified UTF-8 length: NUL takes 2 bytes; each UTF-16 surrogate takes 3. */
+    final int modifiedUtf8Length;
     final int codePointCount;
     final int unpairedSurrogateCount;
     final int javaHash;
@@ -55,6 +57,7 @@ final class M3StringFacts {
     private M3StringFacts(
             int utf16Length,
             int utf8Length,
+            int modifiedUtf8Length,
             int codePointCount,
             int unpairedSurrogateCount,
             int javaHash,
@@ -77,6 +80,7 @@ final class M3StringFacts {
             int stripEnd) {
         this.utf16Length = utf16Length;
         this.utf8Length = utf8Length;
+        this.modifiedUtf8Length = modifiedUtf8Length;
         this.codePointCount = codePointCount;
         this.unpairedSurrogateCount = unpairedSurrogateCount;
         this.javaHash = javaHash;
@@ -123,6 +127,9 @@ final class M3StringFacts {
         int length = value.length();
         int hash = 0;
         int utf8 = 0;
+        // JNI modified UTF-8 length can exceed jint for an otherwise valid large String.
+        // A negative fact means "not cacheable"; VM walks the actual units on demand.
+        long modifiedUtf8 = 0L;
         int codePoints = 0;
         int unpaired = 0;
         long signal = 0L;
@@ -154,6 +161,10 @@ final class M3StringFacts {
             for (int offset = 0; offset < count; offset++) {
                 int index = base + offset;
                 char unit = window[offset];
+                // Modified UTF-8 is encoded by JNI per UTF-16 *unit*, not per code point.
+                // Unlike standard UTF-8 this never folds a surrogate pair into four bytes.
+                modifiedUtf8 += (unit > 0 && unit <= 0x7f) ? 1
+                        : (unit <= 0x07ff ? 2 : 3);
                 if (index == 0) first = unit;
                 last = unit;
                 hash = 31 * hash + unit;
@@ -236,6 +247,7 @@ final class M3StringFacts {
         return new M3StringFacts(
                 length,
                 utf8,
+                modifiedUtf8 > Integer.MAX_VALUE ? -1 : (int) modifiedUtf8,
                 codePoints,
                 unpaired,
                 hash,
@@ -318,6 +330,12 @@ final class M3StringFacts {
         return new M3StringFacts(
                 length,
                 utf8,
+                // Modified UTF-8 is additive even when a surrogate pair crosses this seam.
+                left.modifiedUtf8Length < 0 || right.modifiedUtf8Length < 0
+                                || (long) left.modifiedUtf8Length + right.modifiedUtf8Length
+                                        > Integer.MAX_VALUE
+                        ? -1
+                        : left.modifiedUtf8Length + right.modifiedUtf8Length,
                 Math.addExact(left.codePointCount, right.codePointCount) - (seamPair ? 1 : 0),
                 Math.addExact(left.unpairedSurrogateCount, right.unpairedSurrogateCount)
                         - (seamPair ? 2 : 0),

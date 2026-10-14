@@ -223,6 +223,7 @@ class java_lang_M3String : AllStatic {
   static int _owner_javaHash_offset;
   static int _owner_facts_offset;
   static int _facts_utf8Length_offset;
+  static int _facts_modifiedUtf8Length_offset;
 
   static int _atom_address_offset;
   static int _atom_storageWidth_offset;
