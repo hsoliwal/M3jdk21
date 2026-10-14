@@ -1,0 +1,152 @@
+{
+  "schema": "M3_VIEWPORT_ADMISSION_DONOR_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0; OpenJDK and other source licenses remain unchanged",
+  "status": "DONOR_QUALIFIED_TARGET_CONSUMER_PENDING",
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "3b1adfcd716580554c1181825068e1ce06996539",
+    "pr": 11103,
+    "recipe": "com.synexia.rewrite.M3HugeJsonViewportTextBudgetRecipe",
+    "java_crate": "m3-huge-json-viewport-text-budget-20261014-v3",
+    "text_engine": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+    "text_crate": "m3-huge-json-viewport-handoff-20261014",
+    "evidence": "synexia-openrewrite-recipes/recipes/huge-json-viewport-20261014/QUALIFICATION.md",
+    "artifact_git_blobs": [
+      {
+        "path": "docs/M3-SCALE/provenance/M3_FILE_PROVENANCE.tsv",
+        "sha": "60a8784503c22dfd253b26db4a057a9d794a0449"
+      },
+      {
+        "path": "synexia-mindex/viewer/src/main/java/com/synexia/mindex/viewer/MIndexHugeJsonIndex.java",
+        "sha": "2f3973a07fb3557f81b4e9d83aeb42c30fafa33c"
+      },
+      {
+        "path": "synexia-mindex/viewer/src/main/java/com/synexia/mindex/viewer/MIndexHugeJsonViewport.java",
+        "sha": "f170d64266204a94b889d15f4d223afaf1fe76d0"
+      },
+      {
+        "path": "synexia-mindex/viewer/src/test/java/com/synexia/mindex/viewer/MIndexHugeJsonViewportTest.java",
+        "sha": "361d120ae0295fd380a71dbb8ba0a0ef160b484e"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv",
+        "sha": "10b49b8d81d5bb4bb42ac74ddfe7cbb1d9c1d63e"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/pom-huge-json-viewer-proof.xml",
+        "sha": "6fbe3d527e48ea56268536a5c12d6f1ca2ad4626"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/huge-json-viewport-20261014/FOSS_REUSE_DECISION.tsv",
+        "sha": "d812b2dcd05b78a408146d56c3bf807d2a9d1023"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/huge-json-viewport-20261014/QUALIFICATION.md",
+        "sha": "86c24dbe8439262f8d22978d7e05d236e03d53eb"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/huge-json-viewport-20261014/README.md",
+        "sha": "34ab75cb089ea7b8a055a0dc8544f2075d12befa"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HugeJsonViewportTextBudgetRecipe.java",
+        "sha": "ae5c2e55e0e9576ada19172b7bbf1dd450d62eb3"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-huge-json-viewport-text-budget-20261014-v3/M3ViewportAllocationProbe.java.txt",
+        "sha": "1c073561c57111f04cb5ca8ea4b2584ec2a68c48"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-huge-json-viewport-text-budget-20261014-v3/MIndexHugeJsonIndex.java.txt",
+        "sha": "2f3973a07fb3557f81b4e9d83aeb42c30fafa33c"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-huge-json-viewport-text-budget-20261014-v3/MIndexHugeJsonViewport.java.txt",
+        "sha": "f170d64266204a94b889d15f4d223afaf1fe76d0"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-huge-json-viewport-text-budget-20261014-v3/MIndexHugeJsonViewportTest.java.txt",
+        "sha": "361d120ae0295fd380a71dbb8ba0a0ef160b484e"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-huge-json-viewport-text-budget-20261014-v3/compiler-inputs.tsv",
+        "sha": "f39f919db053e68ea499375dc37ca23913d220fb"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-huge-json-viewport-text-budget-20261014-v3/manifest.tsv",
+        "sha": "e54be130e3632e778d9dc2e6da4c59ced22e0c6f"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-huge-json-viewport-text-budget-20261014-v3/pre-MIndexHugeJsonIndex.java.txt",
+        "sha": "ccc3d7a6e59845dbba683e32cd9a3051821663dd"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-huge-json-viewport-text-budget-20261014-v3/pre-MIndexHugeJsonViewport.java.txt",
+        "sha": "39cd322d8bf424a980d9a9e51dd43c632763bfcb"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-huge-json-viewport-text-budget-20261014-v3/pre-MIndexHugeJsonViewportTest.java.txt",
+        "sha": "32f66ac0c918b1dbf07965a789165ca8e01fb962"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-huge-json-viewport-handoff-20261014/manifest.tsv",
+        "sha": "f010f0d3eecb4eeb9aa31b3b7d322a81c3e5c443"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-huge-json-viewport-handoff-20261014/name-mapping.json.txt",
+        "sha": "d181bf3e2602a9392b405c00d6d92cf8167740bb"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-huge-json-viewport-handoff-20261014/pre-name-mapping.json.txt",
+        "sha": "a6bb7e5b1bc6f59e0510da3d907cab542c9537b7"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3HugeJsonViewportAdmissionTest.java",
+        "sha": "29ae7e5ab9a7fddc7a47101c036a831fb7686c2e"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3HugeJsonViewportTextBudgetRecipeTest.java",
+        "sha": "f7b05a383be58a7adb8b832670c638dc23ee7ef8"
+      }
+    ]
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base_commit": "536edcc0e57c3ca13e499e382ea565ed47df763f",
+    "generated_map": "m3/docs/name-mapping.json",
+    "generated_map_git_blob": "d181bf3e2602a9392b405c00d6d92cf8167740bb",
+    "application": "Exact OpenRewrite 8.17.1 SDK Result; receipt generated from published source proof.",
+    "new_runtime_sources": 0
+  },
+  "executed": {
+    "outer_recipe_junit": 6,
+    "baseline_behavior_junit": 16,
+    "candidate_behavior_junit": 19,
+    "production_java_sources": 5,
+    "compiler": "OpenJDK 21.0.8+9 --release 21 -Xlint:all -Werror; no stubs",
+    "public_protected_api": "IDENTICAL",
+    "javac_h_headers": "IDENTICAL",
+    "counterexample": "Restore old viewport call site; exact two expected failures, including payload ClosedChannelException",
+    "source_provenance_paths": 24,
+    "source_git_blob_readback_paths": 24,
+    "replay": "Named recipe, serial/reversed source order, two workers, exact fixed point, drift/missing/duplicate refusal; materialized replay passes",
+    "target_map_preservation": "Every prior entry/policy preserved; one pending family entry appended",
+    "target_policy": "Existing validate_receiving_sequence passes, STRING active; full receiver NOT_RUN"
+  },
+  "allocation": {
+    "workload": "256 rejected 50,000-byte optional preview reads after 256 warmup reads",
+    "baseline_thread_allocated_bytes": 26298520,
+    "candidate_thread_allocated_bytes": 395416,
+    "scope": "One frozen warmed workload only; not retained heap, native memory, RSS or universal speedup; timing informational."
+  },
+  "pending": [
+    "Full source reactor",
+    "Actual JNI/native runtime",
+    "Concrete existing target consumer and target-specific adaptation",
+    "Complete full-family receiver",
+    "Matched JDK build/jtreg/UI thread, identity and lifecycle proof",
+    "Target cold/warm CPU and heap/native/process-memory qualification"
+  ],
+  "boundary": "Synexia retains reusable recipe and implementation ownership. Public JDK/Swing naming and String-first phase order are unchanged. No Synexia runtime dependency or generic automatic object swapping is introduced."
+}

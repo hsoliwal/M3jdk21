@@ -8118,7 +8118,46 @@
       "rule": "One reviewed bounded integer lane; no arbitrary Runnable; snapshotted inputs; required accelerators fail closed; full independent Java parity; no java.base dependency on the M3 parallel provider."
     }
 
-
+,
+    {
+      "source_family": "MIndexHugeJsonIndex / MIndexHugeJsonViewport optional text admission",
+      "target_family": "viewport text admission; concrete target consumer pending",
+      "public_api": "Existing JDK/Swing APIs retain their names and observable contracts.",
+      "target_owners": [],
+      "status": "DONOR_QUALIFIED_TARGET_CONSUMER_PENDING",
+      "rule": "Use indexed text bounds before optional payload decode. Mandatory visible rows, exposed identity and canonical payload remain authoritative. No universal object swapping or new public M3 API is implied.",
+      "donor_evidence": {
+        "source_repository": "hsoliwal/com.synexia",
+        "source_base_revision": "9f9990595afd885e23b9c23ee4cad795293ed5fc",
+        "source_recipe": "com.synexia.rewrite.M3HugeJsonViewportTextBudgetRecipe",
+        "source_crate": "m3-huge-json-viewport-text-budget-20261014-v3",
+        "source_postimage_sha256": {
+          "synexia-mindex/viewer/src/main/java/com/synexia/mindex/viewer/MIndexHugeJsonIndex.java": "60416f93d43fd1d11b194bc907170f70b02c640bd8e93863e9bf6f6ff8bf31bb",
+          "synexia-mindex/viewer/src/main/java/com/synexia/mindex/viewer/MIndexHugeJsonViewport.java": "f77f5f36ca33e071437b33c8d75834471025f5b62a5d52b67016f6f93b3fa33d",
+          "synexia-mindex/viewer/src/test/java/com/synexia/mindex/viewer/MIndexHugeJsonViewportTest.java": "61dce9e67cd70969a57aa328c7a38349b018d36715fd2925b10c3a08cb70927a"
+        },
+        "source_evidence_path": "synexia-openrewrite-recipes/recipes/huge-json-viewport-20261014/QUALIFICATION.md",
+        "target_receipt": "m3/runtime-integration/evidence/20261014-viewport-admission/receipt.json",
+        "fit_boundary": "File-backed JSON viewport implementation is a higher-layer donor, not a direct java.base, Swing or HotSpot replacement. Select and prove a concrete existing consumer before runtime adaptation.",
+        "executed_source_gates": [
+          "Java 21 compiler: five real production sources and three JUnit classes",
+          "16 retained baseline and 19 candidate behavior tests",
+          "Public/protected surface and generated JNI headers unchanged",
+          "Metadata-bound Unicode/escape/truncation corpus",
+          "Rejected optional payload read refused before decode",
+          "Fixed workload thread-allocation comparison; no universal speedup claim"
+        ],
+        "pending_target_gates": [
+          "Concrete consumer and target-native contract mapping",
+          "Exact target runtime preimages and recipe adaptation",
+          "Matched JDK build and applicable jtreg, UI-thread, lifecycle and JNI/runtime proof",
+          "Cold/warm CPU, retained heap and native/process memory on target"
+        ],
+        "phase_rule": "String remains the active phase; remaining-family runtime promotion waits for predecessor evidence.",
+        "source_license": "Apache-2.0",
+        "target_license_rule": "Preserve target/OpenJDK rights; no direct relicensing or Synexia runtime dependency."
+      }
+    }
   ],
   "recipe_authority": {
     "recipe_id": "synexia.m3jdk.string.canonical-dag.20261006",
