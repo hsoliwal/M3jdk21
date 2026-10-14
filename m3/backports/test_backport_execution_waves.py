@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+import csv
 import importlib.util
 import json
 import sys
@@ -148,6 +149,40 @@ class BackportExecutionWavesTest(unittest.TestCase):
             )
             with self.assertRaises(ValueError):
                 self.w.read_approvals(path)
+
+    def test_emitted_waves_are_real_tsv_rows_and_single_terminated_json(self) -> None:
+        items = self.w.plan(
+            [
+                atom(0, "file.alpha", "RECIPE"),
+                atom(1, "file.beta", "RECIPE", depends_on="file.alpha"),
+            ],
+            {},
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            tsv = Path(temp) / "waves.tsv"
+            json_path = Path(temp) / "waves.json"
+            self.w.write_tsv(items, tsv)
+            self.w.write_json(items, {}, json_path)
+
+            raw_tsv = tsv.read_bytes()
+            self.assertEqual(3, raw_tsv.count(b"\\n"), "header + two physical TSV records")
+            self.assertTrue(raw_tsv.endswith(b"\\n"))
+            self.assertNotIn(b"\\\\n", raw_tsv, "no escaped row separator")
+            with tsv.open("r", encoding="utf-8", newline="") as handle:
+                parsed = list(csv.DictReader(handle, delimiter="\\t"))
+            self.assertEqual(2, len(parsed))
+            self.assertEqual(["file.alpha", "file.beta"],
+                             [row["atom_id"] for row in parsed])
+            self.assertEqual(["0", "1"], [row["wave"] for row in parsed])
+
+            raw_json = json_path.read_bytes()
+            self.assertTrue(raw_json.endswith(b"\\n"))
+            self.assertFalse(raw_json.endswith(b"\\\\n"))
+            self.assertEqual(1, len(raw_json) - len(raw_json.rstrip(b"\\n"))))
+            document = json.loads(raw_json.decode("utf-8"))
+            self.assertEqual(self.w.root(items), document["root"])
+            self.assertEqual(["file.alpha", "file.beta"],
+                             [row["atom_id"] for row in document["items"]])
 
     def test_json_output_binds_items_and_root(self) -> None:
         items = self.w.plan([atom(0, "a.inventory", "INVENTORY")], {})
