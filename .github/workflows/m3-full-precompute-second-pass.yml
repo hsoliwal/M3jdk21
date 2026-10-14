@@ -47,7 +47,7 @@ jobs:
 
       - name: Install the source-built OpenRewrite/JUnit dependency closure
         run: |
-          mvn -B -ntp -f m3/vendor/third_party/pom.xml -pl :rewrite-core,:rewrite-java,:rewrite-java-21,:rewrite-test,:junit-jupiter -am -DskipTests install
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml -pl :rewrite-core,:rewrite-java,:rewrite-java-21,:rewrite-test,:junit-jupiter -am -Dmaven.test.skip=true install
           mvn -B -ntp -f m3/synexia-import/pure-int-recipe-custody/pom.xml -DskipTests install
 
       - name: Recipe engine and crate fixed point
