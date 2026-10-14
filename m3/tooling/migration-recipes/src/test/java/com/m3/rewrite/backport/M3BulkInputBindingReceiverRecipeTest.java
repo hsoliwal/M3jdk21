@@ -9,12 +9,15 @@ import org.junit.jupiter.api.Test;
 final class M3BulkInputBindingReceiverRecipeTest {
     @Test void mirrorsCanonicalSealedTargets() {
         var recipe = new M3BulkInputBindingReceiverRecipe();
-        assertEquals(1, recipe.getRecipeList().size());
+        assertEquals(2, recipe.getRecipeList().size());
         assertFalse(recipe.promotionAuthority());
         assertEquals(List.of(
                 "src/java.base/share/classes/jdk/internal/vm/parallel/BulkScheduler.java",
                 "test/jdk/jdk/internal/vm/parallel/BulkSchedulerTest.java"),
                 new M3Jdk21HashPinnedSnapshotRecipe(M3BulkInputBindingReceiverRecipe.CRATE)
+                        .targetPaths());
+        assertEquals(List.of(".github/workflows/m3-bulk-input-binding.yml"),
+                new M3Jdk21HashPinnedTextSnapshotRecipe(M3BulkInputBindingReceiverRecipe.CRATE)
                         .targetPaths());
     }
 }
