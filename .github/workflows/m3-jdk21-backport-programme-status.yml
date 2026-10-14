@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 backport programme status
+
+on:
+  pull_request:
+    paths:
+      - 'm3/backports/JEP_CATALOGUE.tsv'
+      - 'm3/backports/backport_recipe_dag.py'
+      - 'm3/backports/backport_execution_waves.py'
+      - 'm3/backports/backport_programme_status.py'
+      - 'm3/backports/test_backport_programme_status.py'
+      - 'm3/backports/BACKPORT_PROGRAMME_STATUS.md'
+      - '.github/workflows/m3-jdk21-backport-programme-status.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  status:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Diff hygiene
+        run: git diff --check
+
+      - name: Backport status unit tests
+        run: python3 -m unittest m3.backports.test_backport_programme_status
+
+      - name: Compile live programme status
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m3/backports/target
+          python3 m3/backports/backport_programme_status.py \
+            --root . \
+            --tsv-out m3/backports/target/backport-programme-status.tsv \
+            --json-out m3/backports/target/backport-programme-status.json
+
+      - name: Verify authority-free output
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path("m3/backports/target/backport-programme-status.json")
+          payload = json.loads(path.read_text(encoding="utf-8"))
+          assert payload["schema"] == "M3_JDK21_BACKPORT_PROGRAMME_STATUS_V1"
+          assert payload["jeps"] > 0
+          assert payload["mutation_authority"] is False
+          assert payload["promotion_authority"] is False
+          assert payload["compatibility_authority"] is False
+          assert len(payload["root"]) == 64
+          print("PASS", payload["jeps"], payload["states"], payload["root"])
+          PY
+
+      - name: Upload read-only programme evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3jdk21-backport-programme-status
+          path: |
+            m3/backports/target/backport-programme-status.tsv
+            m3/backports/target/backport-programme-status.json
