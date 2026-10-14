@@ -1,0 +1,151 @@
+/* SPDX-License-Identifier: Apache-2.0
+ * Copyright 2026 Hitesh Soliwal and contributors.
+ */
+package com.m3.parallel.bulk;
+
+import com.m3.parallel.Backend;
+import com.m3.parallel.Grid1D;
+import com.m3.parallel.IntBuffer;
+import com.m3.parallel.JavaKernels;
+import com.m3.parallel.KernelId;
+import com.m3.parallel.Plan;
+import com.m3.parallel.Transfer;
+import com.m3.parallel.Verified;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import jdk.internal.vm.parallel.BulkExecution;
+import jdk.internal.vm.parallel.BulkExecutorProvider;
+import jdk.internal.vm.parallel.BulkTask;
+
+/**
+ * Bounded wordwise bitmap algebra over the existing M3 parallel plan and bulk scheduler.
+ *
+ * <p>Each output word belongs to exactly one logical worker; bits are not interpreted as
+ * Java strings, postings, or AST identities. Callers own trailing-bit masks when a logical
+ * bitmap has fewer than {@code workItems * 32} bits. Accelerated admission requires the
+ * selected backend to advertise the exact kernel and pass {@link Verified#run(Plan)}.</p>
+ */
+public final class M3ParallelWordLogicProvider implements BulkExecutorProvider {
+    public static final String LEFT = "left";
+    public static final String RIGHT = "right";
+    public static final String RESULT = "result";
+    public static final int MAX_WORDS = 1 << 18;
+
+    public enum Operation {
+        AND("m3.parallel.word-and.v1"),
+        OR("m3.parallel.word-or.v1"),
+        XOR("m3.parallel.word-xor.v1"),
+        AND_NOT("m3.parallel.word-and-not.v1");
+
+        private final KernelId kernel;
+
+        Operation(String id) {
+            kernel = KernelId.of(id);
+        }
+
+        public String operationId() {
+            return kernel.name();
+        }
+
+        private int apply(int left, int right) {
+            return switch (this) {
+                case AND -> left & right;
+                case OR -> left | right;
+                case XOR -> left ^ right;
+                case AND_NOT -> left & ~right;
+            };
+        }
+    }
+
+    static {
+        for (Operation operation : Operation.values()) {
+            JavaKernels.register(operation.kernel, (index, buffers) -> {
+                if (buffers.length != 3) {
+                    throw new IllegalArgumentException("word logic kernel requires three lanes");
+                }
+                if (index < buffers[2].length()) {
+                    buffers[2].set(index,
+                            operation.apply(buffers[0].get(index), buffers[1].get(index)));
+                }
+            });
+        }
+    }
+
+    private final Backend backend;
+    private final Operation operation;
+    private final String providerId;
+    private final int priority;
+
+    public M3ParallelWordLogicProvider(Operation operation, Backend backend) {
+        this.operation = Objects.requireNonNull(operation, "operation");
+        this.backend = Objects.requireNonNull(backend, "backend");
+        if (!backend.supports(operation.kernel)) {
+            throw new IllegalArgumentException(
+                    "backend does not support word logic kernel: " + operation.operationId());
+        }
+        providerId = "m3-word-" + operation.name().toLowerCase(java.util.Locale.ROOT)
+                + "-" + backend.id();
+        priority = backend.isReference() ? 10 : Math.addExact(20, backend.score());
+    }
+
+    public static M3ParallelWordLogicProvider reference(Operation operation) {
+        return new M3ParallelWordLogicProvider(operation, Backend.reference());
+    }
+
+    /** Refuses unsupported accelerators; never changes the requested backend to Java. */
+    public static M3ParallelWordLogicProvider requiredAccelerator(Operation operation) {
+        return new M3ParallelWordLogicProvider(
+                operation, Backend.select(Backend.Policy.ACCELERATOR));
+    }
+
+    @Override public String id() { return providerId; }
+
+    @Override public int priority() { return priority; }
+
+    @Override
+    public boolean supports(BulkTask task) {
+        return task != null
+                && operation.operationId().equals(task.operationId())
+                && task.workItems() >= 1 && task.workItems() <= MAX_WORDS
+                && task.inputs().equals(List.of(LEFT, RIGHT))
+                && task.outputs().equals(List.of(RESULT))
+                && (backend.isReference() ? task.localWork() == 0
+                        : task.localWork() >= 1 && task.localWork() <= task.workItems());
+    }
+
+    @Override
+    public BulkExecution execute(BulkTask task, Map<String, Object> values) {
+        if (!supports(task)) {
+            throw new IllegalArgumentException("unadmitted word logic task");
+        }
+        Objects.requireNonNull(values, "values");
+        if (!values.keySet().equals(Set.of(LEFT, RIGHT))) {
+            throw new IllegalArgumentException("word logic input schema");
+        }
+        if (!(values.get(LEFT) instanceof int[] left)
+                || !(values.get(RIGHT) instanceof int[] right)) {
+            throw new IllegalArgumentException("word logic requires int[] lanes");
+        }
+        int words = Math.toIntExact(task.workItems());
+        if (left.length != words || right.length != words) {
+            throw new IllegalArgumentException("word logic workItems/length mismatch");
+        }
+
+        IntBuffer a = IntBuffer.of(left);
+        IntBuffer b = IntBuffer.of(right);
+        IntBuffer c = IntBuffer.allocate(words);
+        int local = backend.isReference() ? 1 : Math.toIntExact(task.localWork());
+        try (Plan plan = Plan.builder(backend)
+                .kernel(operation.kernel)
+                .grid(Grid1D.of(words, local))
+                .bind(a, Transfer.ONCE)
+                .bind(b, Transfer.ONCE)
+                .bind(c, Transfer.ON_DEMAND)
+                .build()) {
+            Verified receipt = Verified.run(plan);
+            return new BulkExecution(Map.of(RESULT, c.toArray()), id(), receipt.root());
+        }
+    }
+}
