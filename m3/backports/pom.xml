@@ -51,6 +51,20 @@
             </configuration>
           </execution>
           <execution>
+            <id>verify-current-nebula-proof-gated-admission</id>
+            <phase>validate</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <executable>${python.executable}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>nebula_proof_admission.py</argument>
+                <argument>--out</argument>
+                <argument>${project.build.directory}/nebula-proof-gated-admission.json</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
             <id>compile-backport-recipe-dag</id>
             <phase>validate</phase>
             <goals><goal>exec</goal></goals>
