@@ -425,3 +425,56 @@ They cover all eight retained Java owners at
 Source-complete receiving, generic execution/persistence integration and runtime
 qualification remain open. Package tests/builds are NOT_RUN in this documentation
 authoring/review pass; hosted exact-commit CI is separate evidence.
+
+
+## Retained AST navigation detail (2026-10-15)
+
+For retained AST occurrence navigation, source ranges, pool/query postings,
+candidate reuse and kind-pattern scans, continue with the
+[navigation reference](../retained-ast-navigation-reference.md) and its
+[ten-body source map](../retained-ast-navigation-reference-coverage.md).
+Those source contracts do not make the retained intake a complete module or
+advance AST/compiler runtime promotion.
+
+Authoring/review execution is NOT_RUN; hosted CI remains separate exact-commit
+evidence.
+
+
+## Retained filesystem content-store contract supplement (2026-10-15)
+
+The historical `com.synexia.indexstring.fs` PATH_ONLY row above remains the
+inventory record. The [retained content-store reference](../retained-content-store-reference.md)
+and [eight-source/member/evidence map](../retained-content-store-reference-coverage.md)
+now add bounded primary contracts for `M3ContentId`, `M3DirectoryContentStore`,
+`M3MappedObject`, `M3ObjectKind`, `M3ObjectRef`, `M3PrecomputeCache`,
+`M3PrecomputeKey` and `M3PrecomputeResult` at public source pin
+`363c02caa2e5af1df9460b927ecd78f6a9dbcefb`.
+
+This covers the complete eight-file retained fs slice, including nested and
+support members, without expanding the distinct 37-source AST scope or treating
+regex dependency citations as prior full fs documentation. Exact original-v7
+custody hashes, caller/format boundaries, missing bundle/catalog/native-content
+owners and absent retained fs tests remain explicit. This source slice is not a
+complete compilable module, canonical IndexDB or admitted JDK runtime dependency;
+repository execution and runtime qualification were NOT_RUN in this documentation
+authoring/review pass. Hosted CI, if run, is separate evidence for its exact commit.
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors. -->
+
+## Complete retained AST production routing (2026-10-15)
+
+The [37-file retained AST map](../retained-ast-routing-map.md) assigns every
+physical production source in the retained AST directory to exactly one primary
+reference: [ownership and lifetimes](../retained-ast-ownership-reference.md),
+[navigation and queries](../retained-ast-navigation-reference.md), or
+[specifications and dispatch](../retained-ast-specification-reference.md).
+Each reference has an exact member/source/test/provenance coverage companion.
+Non-prefix enums/interfaces and package-private helpers remain visible.
+
+This is source-body documentation, not source-complete module, consumer, runtime,
+native-provider or full-family qualification. The separate retained filesystem/
+content-store family is outside the 37-source count. Builds/tests/scripts/native
+loads/benchmarks remain NOT_RUN in this documentation authoring/review pass;
+hosted CI is separate exact-commit evidence. Existing policy and promotion order
+are unchanged.

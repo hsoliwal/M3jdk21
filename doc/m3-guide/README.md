@@ -163,3 +163,45 @@ exact provenance, missing build dependencies and a conditional native
 registration mismatch. The retained slice is not a complete module or JDK
 runtime dependency; tests and native loads are NOT_RUN in this documentation
 pass. Hosted CI remains separate exact-commit evidence.
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors. -->
+
+## Retained AST ownership and lifetimes (2026-10-15)
+
+- [Retained AST ownership and lifetime reference](retained-ast-ownership-reference.md): pool-local atom identity, immutable document occurrences, parse-only partial trees, cache load/upgrade/pressure/eviction boundaries and retained single-source edit sessions
+- [Exact source/member/test/custody coverage](retained-ast-ownership-reference-coverage.md): nine primary owners at the pinned public revision, complete member/support routes, two cache test bodies and explicit dependency/qualification limits
+
+These are retained-source contracts, not source-complete module or JDK runtime admission. Tests/builds/repository scripts/native loads/benchmarks were NOT_RUN during documentation authoring/review; hosted exact-commit CI is separate evidence.
+
+
+## Retained AST navigation and candidate queries (2026-10-15)
+
+The [retained AST navigation reference](retained-ast-navigation-reference.md)
+explains occurrence/preorder/source-offset coordinates, canonical pool postings,
+query planning, exact versus candidate reuse, kind-pattern scans and the bounded
+navigation image format. The [source and assertion map](retained-ast-navigation-reference-coverage.md)
+records ten complete public source-body reviews and keeps the four-method
+historical oracle, missing codec bodies and current NOT_RUN gates distinct.
+
+Authoring/review execution is NOT_RUN; hosted CI remains separate exact-commit
+evidence.
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors. -->
+
+## Retained AST specifications and complete routing (2026-10-15)
+
+- [Retained AST specifications, production plans and dispatch](retained-ast-specification-reference.md): eighteen retained owners covering Java language metadata, grammar-derived facts, ambiguity-preserving dispatch, formal-tree geometry, snapshot limits, image writing and the optional native boundary
+- [Specification source and evidence coverage](retained-ast-specification-reference-coverage.md): exact public source/member/hash/provenance routes, test limits and unresolved dependency/qualification gates
+- [Complete retained AST production-source routing](retained-ast-routing-map.md): all 37 physical files assigned once across ownership, navigation and specification references, including non-prefix and package-private owners
+
+These are custody-source references, not source-complete build or JDK runtime admission. Examples, tests, native providers and benchmarks were not run in this documentation pass.
+
+Hosted CI is separate exact-commit evidence, not runtime qualification of these retained owners.
+
+
+## Retained filesystem content-store contracts (2026-10-15)
+
+- [Retained content objects, mappings and precompute persistence](retained-content-store-reference.md) explains all eight retained `com.synexia.indexstring.fs` source owners: IDs, exact-byte object publication, primitive lane/bundle formats, mapped ownership, operation keys, positive/negative cache pointers and failure/recovery limits
+- [Exact source/member/evidence map](retained-content-store-reference-coverage.md) records every primary body and member group, hashes, public v7 provenance, two caller boundaries and absent test/dependency closure. This is retained source documentation, not a standalone module, canonical IndexDB or JDK runtime admission
