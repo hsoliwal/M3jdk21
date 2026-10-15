@@ -265,11 +265,19 @@ class JepResidueTest(unittest.TestCase):
         )
         self.assertEqual("NOT_AUTHORIZED", by_jep[458].promotion)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[467].evidence_state)
-        self.assertEqual("PACKET_READY", by_jep[467].receipt_state)
+        self.assertEqual("PROOF_REPAIR_REQUESTED", by_jep[467].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[467].promotion)
+        self.assertEqual(
+            "RUN_REPAIRED_250_FILE_ATOMS_PLUS_DELETION_EVIDENCE_THEN_BUILD_LANGTOOLS_FIXED_POINT",
+            by_jep[467].receipt_next_action,
+        )
         self.assertEqual("MATERIALIZED_PACKET", by_jep[493].evidence_state)
-        self.assertEqual("PACKET_READY", by_jep[493].receipt_state)
+        self.assertEqual("PROOF_REPAIR_REQUESTED", by_jep[493].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[493].promotion)
+        self.assertEqual(
+            "RUN_REPAIRED_INVENTORY_AND_MATERIALIZATION_THEN_BUILD_JTREG_RUNTIME_LINK_FIXED_POINT_READBACK",
+            by_jep[493].receipt_next_action,
+        )
         self.assertEqual("MATERIALIZED_PACKET", by_jep[496].evidence_state)
         self.assertIn("m3/backports/recipes/j496", by_jep[496].evidence_paths)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[497].evidence_state)
