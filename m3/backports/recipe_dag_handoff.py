@@ -46,6 +46,34 @@ REQUIRED_ASSETS = {
     ),
 }
 SYNEXIA_ASSET_COMMIT = "850f5b0c2546ee6f645d91e3c341fd744d883480"
+NEBULA_JAVA_GRADE_REF = "m3/java-grade-transfer-qualification-v3-20261015"
+NEBULA_JAVA_GRADE_COMMIT = "7a5a3cb5ffd82bca671b20e1496db80369657578"
+NEBULA_JAVA_GRADE_POLICY = "HOLD_PENDING_NEBULA_PROOF"
+NEBULA_JAVA_GRADE_ASSETS = {
+    "nebula-java-grade-candidate": (
+        "JAVA_GRADE_CANDIDATE",
+        "m3/recipe-first/src/main/java/org/eclipse/nebula/m3/rewrite/convergence/"
+        "NebulaM3JavaGradeQualification.java",
+        "80f3a2a0ca443972f367b5636d3a897a27eff88b",
+    ),
+    "nebula-v2-backport-plan": (
+        "BACKPORT_PLAN_CANDIDATE",
+        "m3/recipe-first/src/main/java/org/eclipse/nebula/m3/rewrite/convergence/"
+        "NebulaM3BackportPlan.java",
+        "eddba9c6546749169b1a038147e06c4d8c863b4d",
+    ),
+    "nebula-v2-transfer-contract": (
+        "TRANSFER_CONTRACT_CANDIDATE",
+        "m3/recipe-first/src/main/java/org/eclipse/nebula/m3/rewrite/convergence/"
+        "NebulaM3TransferContract.java",
+        "368b947eacef8355607706c90991af5b55b08bc2",
+    ),
+    "nebula-java-grade-doc": (
+        "JAVA_GRADE_DOCUMENTATION_CANDIDATE",
+        "m3/docs/JAVA_GRADE_RECIPE_CONVERGENCE.md",
+        "d74b4180bf6b36a16d9c2f1362c19fcc5d38daf0",
+    ),
+}
 TARGET = "hsoliwal/M3jdk21"
 NEBULA_RECEIVER_SCHEMA = "M3_NEBULA_MASTERED_DAG_RECEIVER_V2"
 NEBULA_RECEIVER_PATH = (
@@ -151,6 +179,25 @@ def validate(rows: Iterable[Mapping[str, str]]) -> list[dict[str, str]]:
     ):
         raise ValueError("invalid Nebula proving reference")
 
+    for asset_id, (kind, path, blob_sha1) in NEBULA_JAVA_GRADE_ASSETS.items():
+        row = by_id.get(asset_id)
+        if row is None:
+            raise ValueError(f"missing Nebula Java-grade candidate: {asset_id}")
+        if (
+            row["kind"] != kind
+            or row["repository"] != "hsoliwal/nebula"
+            or row["ref"] != NEBULA_JAVA_GRADE_REF
+            or row["commit"] != NEBULA_JAVA_GRADE_COMMIT
+            or row["path"] != path
+            or row["contentHashAlgorithm"] != "GIT-BLOB-SHA1"
+            or row["contentHash"] != blob_sha1
+            or row["license"] != "EPL-2.0"
+            or row["authorship"] != "TARGET_PROOF"
+            or row["delivery"] != "REFERENCE_ONLY"
+            or row["applicationPolicy"] != NEBULA_JAVA_GRADE_POLICY
+        ):
+            raise ValueError(f"invalid Nebula Java-grade candidate: {asset_id}")
+
     return checked
 
 
@@ -201,6 +248,8 @@ def summary(rows: Sequence[Mapping[str, str]]) -> dict[str, object]:
         "promotionAuthority": False,
         "applicationPolicy": "PROVEN_RECIPE_DAG_ONLY",
         "nebulaReferenceOnly": True,
+        "nebulaJavaGradeState": NEBULA_JAVA_GRADE_POLICY,
+        "nebulaJavaGradeCommit": NEBULA_JAVA_GRADE_COMMIT,
     }
 
 
