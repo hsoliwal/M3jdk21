@@ -98,7 +98,7 @@ final class M3LibraryClosureTest {
     }
 
     @Test void guavaSortedSetParallelComparator() {
-        var actual = data().parallelStream().collect(M3LibraryCollectors.toGuavaSortedSetMultimap(i -> i % 7, Function.identity(), Comparator.reverseOrder()));
+        var actual = data().parallelStream().collect(M3LibraryCollectors.<Integer, Integer, Integer>toGuavaSortedSetMultimap(i -> i % 7, Function.identity(), Comparator.reverseOrder()));
         for (Integer key : actual.keySet()) assertEquals(
                 data().stream().filter(i -> i % 7 == key).distinct().sorted(Comparator.reverseOrder()).toList(),
                 new ArrayList<>(actual.get(key)));
@@ -199,12 +199,12 @@ final class M3LibraryClosureTest {
                 M3LibraryCollectors.toList(), M3LibraryCollectors.toSet(),
                 M3LibraryCollectors.toMap(Function.identity(), Function.identity()),
                 M3LibraryCollectors.toMap(Function.identity(), i -> 1, Integer::sum),
-                M3LibraryCollectors.toGuavaListMultimap(i -> i % 7, Function.identity()),
-                M3LibraryCollectors.toGuavaSetMultimap(i -> i % 7, Function.identity()),
-                M3LibraryCollectors.toGuavaSortedSetMultimap(i -> i % 7, Function.identity(), Comparator.naturalOrder()),
+                M3LibraryCollectors.<Integer, Integer, Integer>toGuavaListMultimap(i -> i % 7, Function.identity()),
+                M3LibraryCollectors.<Integer, Integer, Integer>toGuavaSetMultimap(i -> i % 7, Function.identity()),
+                M3LibraryCollectors.<Integer, Integer, Integer>toGuavaSortedSetMultimap(i -> i % 7, Function.identity(), Comparator.naturalOrder()),
                 M3LibraryCollectors.toEclipseList(), M3LibraryCollectors.toEclipseSet(),
                 M3LibraryCollectors.toEclipseMap(Function.identity(), Function.identity()),
-                M3LibraryCollectors.toSpringMultiValueMap(i -> i % 7, Function.identity()));
+                M3LibraryCollectors.<Integer, Integer, Integer>toSpringMultiValueMap(i -> i % 7, Function.identity()));
         for (var collector : collectors) {
             assertFalse(collector.characteristics().contains(Collector.Characteristics.CONCURRENT));
             assertFalse(collector.characteristics().contains(Collector.Characteristics.UNORDERED));
@@ -215,7 +215,7 @@ final class M3LibraryClosureTest {
         assertThrows(NullPointerException.class, () -> M3LibraryCollectors.toMap(null, Function.identity()));
         assertThrows(NullPointerException.class, () -> M3LibraryCollectors.toMap(Function.identity(), null));
         assertThrows(NullPointerException.class, () -> M3LibraryCollectors.toMap(Function.identity(), Function.identity(), null));
-        assertThrows(NullPointerException.class, () -> M3LibraryCollectors.toGuavaSortedSetMultimap(Function.identity(), Function.identity(), null));
+        assertThrows(NullPointerException.class, () -> M3LibraryCollectors.<Integer, Integer, Integer>toGuavaSortedSetMultimap(Function.identity(), Function.identity(), null));
         assertThrows(NullPointerException.class, () -> M3LibraryCollectors.toSpringMultiValueMap(null, Function.identity()));
     }
 }
