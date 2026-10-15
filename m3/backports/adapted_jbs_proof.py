@@ -126,9 +126,20 @@ def _verify_hash_pinned_text(
     root: Path, order: int, work_id: str, path: Path
 ) -> list[TargetReceipt]:
     receipts: list[TargetReceipt] = []
-    for row in _rows(path):
-        target = row["path"].strip()
-        expected = row["after"].strip()
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.reader(handle, delimiter="\t"))
+    if not rows:
+        raise ValueError(f"{work_id}: empty hash-pinned text manifest")
+    for line_no, cells in enumerate(rows, 1):
+        if len(cells) != 4:
+            raise ValueError(
+                f"{work_id}: invalid hash-pinned text manifest width at line {line_no}"
+            )
+        target, _preimage, expected, _template = (cell.strip() for cell in cells)
+        if not target or not expected:
+            raise ValueError(
+                f"{work_id}: invalid hash-pinned text manifest row at line {line_no}"
+            )
         file = root / target
         if not file.is_file():
             raise ValueError(f"{work_id}: target missing: {target}")
