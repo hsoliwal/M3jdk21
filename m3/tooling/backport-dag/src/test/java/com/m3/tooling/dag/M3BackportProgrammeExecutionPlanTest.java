@@ -59,6 +59,34 @@ final class M3BackportProgrammeExecutionPlanTest {
     }
 
     @Test
+    void wholeProgrammeRowsAdmitNonJepJbsPacketsWithoutChangingLegacySchema() {
+        String programme =
+                "order\twork_id\tsource_kind\trelease\tjep\ttitle\trecipe_state\trecipe_refs\t"
+                        + "atom_count\tready_atoms\theld_atoms\tprogramme_state\tnext_action\n"
+                        + "0\tJDK-8357439\tUPSTREAM_CHANGE\t27\t0\tBash completion\t"
+                        + "MATERIALIZED_RECIPE\tjdk-8357439-bash\t1\t1\t0\tFILE_READY\tRUN\n";
+        String packet =
+                M3BackportPacketLoader.HEADER
+                        + "\n"
+                        + "jdk-8357439\tjava\tFILE\tfalse\t"
+                        + "m3/backports/recipes/jdk-8357439-bash\t\n";
+        String index =
+                "work_id\tstate\tpacket\n"
+                        + "JDK-8357439\tMATERIALIZED_RECIPE\tjdk-8357439.tsv\n";
+
+        var plan =
+                M3BackportProgrammeExecutionPlan.compile(
+                        programme, index, Map.of("jdk-8357439.tsv", packet));
+
+        var row = plan.rows().getFirst();
+        assertEquals("JDK-8357439", row.workId());
+        assertEquals("UPSTREAM_CHANGE", row.sourceKind());
+        assertEquals(0, row.jep());
+        assertEquals(M3BackportProgrammeExecutionPlan.State.RUNNABLE, row.state());
+        assertTrue(row.schedulerProjection());
+    }
+
+    @Test
     void broaderScopeRequiresExplicitApproval() {
         String programme = header() + "\n" + row(24, 484, "SCOPE_READY", "RUN_MODULE_BACKPORT") + "\n";
         String index = "work_id\tstate\tpacket\nJEP-484\tMATERIALIZED_RECIPE\tjep-484.tsv\n";
