@@ -52,7 +52,8 @@ def main():
         jar = jars / (module + ".jar")
         command(output / (module + "-jar.log"), home / "bin/jar", "--create", "--file", jar,
                 "--date", "2026-01-01T00:00:00Z", "-C", classes / module, ".")
-        rows.append("\t".join((module, "1", str(jar), module, "java.base", "JMOD")))
+        rows.append("\t".join((module, "1", str(jar), module,
+                              "java.base" if module == "jdk.m3.text" else "jdk.m3.text", "JMOD")))
     image_tsv, manifest = output / "INPUT_JMOD_IMAGE.tsv", output / "EMPTY_DESCRIPTOR_MANIFEST.tsv"
     image_tsv.write_text("\n".join(rows) + "\n")
     manifest.write_text("module\tartifacts\tunit_jars\ttarget\tsha256\tgenerated\n")
