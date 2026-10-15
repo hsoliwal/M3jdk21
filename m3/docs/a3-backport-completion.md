@@ -42,3 +42,19 @@ One Maven/CI completion run builds the real queue from all six GA intervals, inv
 tree, creates the preparation frontier, and uploads the complete evidence bundle. Camel, Airflow and
 Drools remain optional projections of the canonical M3 backport DAG; they do not own semantic
 authority.
+
+
+## Single Maven completion build
+
+After `COMPATIBILITY_QUEUE.tsv` exists, the current-tree inventory and fan-in are lifecycle-bound:
+
+```bash
+mvn -B -ntp -f m3/tooling/a3/pom.xml \
+  -Pm3-a3-backport-completion \
+  -Dm3.a3.root="$PWD" \
+  -Dm3.a3.queue=m3/build/backports/COMPATIBILITY_QUEUE.tsv \
+  -Dm3.a3.completion.out=m3/build/a3/completion \
+  verify
+```
+
+The profile runs inventory first and completion fan-in second in the same Maven `verify` phase.
