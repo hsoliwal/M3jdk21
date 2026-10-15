@@ -17,11 +17,13 @@ from typing import Iterable, Mapping, Sequence
 
 AUTHOR_RECIPE = "AUTHOR_RECIPE"
 FILE_READY = "FILE_READY"
+SCOPE_READY = "SCOPE_READY"
 SCOPE_HOLD = "SCOPE_HOLD"
 EVIDENCE_HOLD = "EVIDENCE_HOLD"
 HOLD = "HOLD"
 REJECT = "REJECT"
 SUPERSEDED = "SUPERSEDED"
+VALID_WAVE_STATES = {"READY", "EVIDENCE_HOLD", "SCOPE_APPROVAL_HOLD", "DEPENDENCY_HOLD"}
 
 
 @dataclass(frozen=True)
@@ -59,6 +61,36 @@ def _rows(path: Path) -> list[dict[str, str]]:
     return rows
 
 
+def _aligned_wave_evidence(work_atoms: Sequence[object], work_waves: Sequence[object]) -> bool:
+    """Fail closed on partial, duplicate, stale, or cross-scope wave projections.
+
+    A ready scheduling atom is *not* compiler/test proof, but it must still be
+    the exact canonical atom from the recipe DAG. Cardinality alone is insufficient.
+    """
+    if not work_atoms or len(work_atoms) != len(work_waves):
+        return False
+    atoms = {str(atom.atom_id): atom for atom in work_atoms}
+    waves = {str(item.atom_id): item for item in work_waves}
+    if len(atoms) != len(work_atoms) or len(waves) != len(work_waves):
+        return False
+    if set(atoms) != set(waves):
+        return False
+    for atom_id, item in waves.items():
+        atom = atoms[atom_id]
+        if (
+            item.execution_state not in VALID_WAVE_STATES
+            or item.scope != atom.scope
+            or (item.execution_state == "READY" and not atom.executable)
+            or (
+                item.execution_state == "READY"
+                and item.scope != "FILE"
+                and not item.scope_approved
+            )
+        ):
+            return False
+    return True
+
+
 def classify(
     catalogue_row: Mapping[str, str],
     atoms: Sequence[object],
@@ -79,6 +111,7 @@ def classify(
     recipe_state = work_atoms[0].state if work_atoms else "MISSING_DAG"
     ready = sum(item.execution_state == "READY" for item in work_waves)
     held = len(work_waves) - ready
+    aligned = _aligned_wave_evidence(work_atoms, work_waves)
 
     if disposition.startswith("superseded"):
         state = SUPERSEDED
@@ -93,20 +126,26 @@ def classify(
     elif recipe_state == "AUTHOR_RECIPE":
         state = AUTHOR_RECIPE
         next_action = "AUTHOR_TEST_AND_FIXED_POINT_RECIPE"
-    elif not work_waves:
+    elif not aligned:
         state = EVIDENCE_HOLD
-        next_action = "REPAIR_BACKPORT_DAG_EVIDENCE"
+        next_action = "REPAIR_BACKPORT_DAG_WAVE_ALIGNMENT"
     elif any(item.execution_state in {"SCOPE_APPROVAL_HOLD", "DEPENDENCY_HOLD"} for item in work_waves):
         state = SCOPE_HOLD
         next_action = "REVIEW_SCOPE_PROMOTION_AND_RECORD_PROOF"
     elif any(item.execution_state == "EVIDENCE_HOLD" for item in work_waves):
         state = EVIDENCE_HOLD
         next_action = "WAIT_FOR_COMPATIBILITY_OR_RECIPE_ADMISSION"
+    elif ready != len(work_atoms):
+        state = EVIDENCE_HOLD
+        next_action = "REPAIR_BACKPORT_DAG_WAVE_ALIGNMENT"
+    elif any(atom.scope != "FILE" for atom in work_atoms):
+        state = SCOPE_READY
+        next_action = "EXECUTE_SCOPE_APPROVED_ATOMS_AND_PROVE_JAVA21_CONTRACT"
     else:
         state = FILE_READY
         next_action = "EXECUTE_READY_ATOMS_AND_PROVE_JAVA21_CONTRACT"
 
-    if "high-risk" in disposition and state == FILE_READY:
+    if "high-risk" in disposition and state in {FILE_READY, SCOPE_READY}:
         next_action = "EXECUTE_READY_ATOMS_THEN_VM_RUNTIME_JNI_PARITY"
 
     return ProgrammeRow(

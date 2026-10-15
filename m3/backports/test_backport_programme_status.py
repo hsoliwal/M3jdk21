@@ -35,17 +35,38 @@ def row(jep: int, disposition: str, *, successor: str = ""):
     }
 
 
-def atom(jep: int, state: str, recipe_ref: str = ""):
+def atom(
+    jep: int,
+    state: str,
+    recipe_ref: str = "",
+    *,
+    number: int = 0,
+    scope: str = "FILE",
+    executable: bool = True,
+):
     return SimpleNamespace(
         work_id=f"JEP-{jep}",
         state=state,
         recipe_ref=recipe_ref,
+        atom_id=f"jep_{jep}.atom_{number}",
+        scope=scope,
+        executable=executable,
     )
 
 
-def wave(jep: int, execution_state: str):
+def wave(
+    jep: int,
+    execution_state: str,
+    *,
+    number: int = 0,
+    scope: str = "FILE",
+    scope_approved: bool = False,
+):
     return SimpleNamespace(
         work_id=f"JEP-{jep}",
+        atom_id=f"jep_{jep}.atom_{number}",
+        scope=scope,
+        scope_approved=scope_approved,
         execution_state=execution_state,
     )
 
@@ -62,8 +83,9 @@ class BackportProgrammeStatusTest(unittest.TestCase):
     def test_materialized_file_recipe_can_be_ready(self) -> None:
         result = self.s.classify(
             row(485, "candidate"),
-            [atom(485, "MATERIALIZED_RECIPE", "jep-485-stream-gatherers")],
-            [wave(485, "READY"), wave(485, "READY")],
+            [atom(485, "MATERIALIZED_RECIPE", "jep-485-stream-gatherers", number=0),
+             atom(485, "MATERIALIZED_RECIPE", "jep-485-stream-gatherers", number=1)],
+            [wave(485, "READY", number=0), wave(485, "READY", number=1)],
         )
         self.assertEqual(self.s.FILE_READY, result.programme_state)
         self.assertEqual(2, result.ready_atoms)
@@ -72,12 +94,70 @@ class BackportProgrammeStatusTest(unittest.TestCase):
     def test_scope_hold_is_never_reported_ready(self) -> None:
         result = self.s.classify(
             row(475, "candidate-high-risk"),
-            [atom(475, "MATERIALIZED_RECIPE", "jep-475-g1")],
-            [wave(475, "READY"), wave(475, "SCOPE_APPROVAL_HOLD"), wave(475, "DEPENDENCY_HOLD")],
+            [atom(475, "MATERIALIZED_RECIPE", "jep-475-g1", number=i, scope="MULTI_MODULE")
+             for i in range(3)],
+            [wave(475, "READY", number=0, scope="MULTI_MODULE", scope_approved=True),
+             wave(475, "SCOPE_APPROVAL_HOLD", number=1, scope="MULTI_MODULE"),
+             wave(475, "DEPENDENCY_HOLD", number=2, scope="MULTI_MODULE")],
         )
         self.assertEqual(self.s.SCOPE_HOLD, result.programme_state)
         self.assertEqual(1, result.ready_atoms)
         self.assertEqual(2, result.held_atoms)
+
+    def test_truncated_ready_wave_set_is_not_file_ready(self) -> None:
+        result = self.s.classify(
+            row(485, "candidate"),
+            [atom(485, "MATERIALIZED_RECIPE", number=0),
+             atom(485, "MATERIALIZED_RECIPE", number=1)],
+            [wave(485, "READY", number=0)],
+        )
+        self.assertEqual(self.s.EVIDENCE_HOLD, result.programme_state)
+        self.assertEqual("REPAIR_BACKPORT_DAG_WAVE_ALIGNMENT", result.next_action)
+
+    def test_duplicate_or_stale_wave_identity_is_not_file_ready(self) -> None:
+        atoms = [atom(485, "MATERIALIZED_RECIPE", number=0),
+                 atom(485, "MATERIALIZED_RECIPE", number=1)]
+        for waves in (
+            [wave(485, "READY", number=0), wave(485, "READY", number=0)],
+            [wave(485, "READY", number=0), wave(485, "READY", number=999)],
+        ):
+            with self.subTest(waves=waves):
+                result = self.s.classify(row(485, "candidate"), atoms, waves)
+                self.assertEqual(self.s.EVIDENCE_HOLD, result.programme_state)
+
+    def test_scope_approved_module_is_not_mislabeled_file_ready(self) -> None:
+        result = self.s.classify(
+            row(485, "candidate"),
+            [atom(485, "MATERIALIZED_RECIPE", scope="MODULE")],
+            [wave(485, "READY", scope="MODULE", scope_approved=True)],
+        )
+        self.assertEqual(self.s.SCOPE_READY, result.programme_state)
+        self.assertEqual(
+            "EXECUTE_SCOPE_APPROVED_ATOMS_AND_PROVE_JAVA21_CONTRACT", result.next_action
+        )
+
+    def test_nonfile_ready_requires_explicit_scope_approval(self) -> None:
+        result = self.s.classify(
+            row(485, "candidate"),
+            [atom(485, "MATERIALIZED_RECIPE", scope="MODULE")],
+            [wave(485, "READY", scope="MODULE", scope_approved=False)],
+        )
+        self.assertEqual(self.s.EVIDENCE_HOLD, result.programme_state)
+        self.assertEqual("REPAIR_BACKPORT_DAG_WAVE_ALIGNMENT", result.next_action)
+
+    def test_wave_scope_mismatch_unknown_state_and_nonexecutable_ready_hold(self) -> None:
+        fixtures = (
+            ([atom(485, "MATERIALIZED_RECIPE", scope="MODULE")],
+             [wave(485, "READY", scope="FILE")]),
+            ([atom(485, "MATERIALIZED_RECIPE")],
+             [wave(485, "UNRECOGNIZED")]),
+            ([atom(485, "MATERIALIZED_RECIPE", executable=False)],
+             [wave(485, "READY")]),
+        )
+        for atoms, waves in fixtures:
+            with self.subTest(atoms=atoms, waves=waves):
+                result = self.s.classify(row(485, "candidate"), atoms, waves)
+                self.assertEqual(self.s.EVIDENCE_HOLD, result.programme_state)
 
     def test_hold_and_reject_remain_compatibility_decisions(self) -> None:
         held = self.s.classify(row(531, "hold-preview"), [], [])
