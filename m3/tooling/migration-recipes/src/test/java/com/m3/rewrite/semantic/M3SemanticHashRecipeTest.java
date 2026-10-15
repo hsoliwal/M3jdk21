@@ -132,8 +132,8 @@ final class M3SemanticHashRecipeTest implements RewriteTest {
                 }
                 """;
         String ordinary = fakeMarker.replace(
-                ""M3-IOP: PURE_INT_EXPRESSION"",
-                ""ordinary"");
+                "\"M3-IOP: PURE_INT_EXPRESSION\"",
+                "\"ordinary\"");
         assertEquals(
                 M3SemanticHasher.method(ordinary).architectureHash(),
                 M3SemanticHasher.method(fakeMarker).architectureHash());
