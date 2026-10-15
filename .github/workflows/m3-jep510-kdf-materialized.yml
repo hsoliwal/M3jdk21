@@ -44,6 +44,7 @@ jobs:
 
       - name: 2 - Compile and prove product plus security-test recipe DAG
         run: >-
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD" &&
           mvn -B -ntp
           -f m3/tooling/migration-recipes/pom.xml
           -Dtest=M3Jep510KdfBackportRecipeTest,M3Jep510KdfCandidateRecipeTest
