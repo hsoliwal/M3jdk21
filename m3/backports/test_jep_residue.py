@@ -333,7 +333,13 @@ class JepResidueTest(unittest.TestCase):
             "BUILD_JDK_IMAGE_RUN_KDF_JTREG_A3_FIXED_POINT_CANONICAL_READBACK",
             by_jep[510].receipt_next_action,
         )
-        self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[404].evidence_state)
+        self.assertEqual("PACKET_EVIDENCE", by_jep[404].evidence_state)
+        self.assertIn(
+            "m3/backports/recipes/jep-404-generational-shenandoah",
+            by_jep[404].evidence_paths,
+        )
+        self.assertEqual("", by_jep[404].receipt_state)
+        self.assertEqual("", by_jep[404].promotion)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[483].evidence_state)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[521].evidence_state)
         self.assertNotIn(401, by_jep)
