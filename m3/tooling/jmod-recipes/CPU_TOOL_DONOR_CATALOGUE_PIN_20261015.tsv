@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: Apache-2.0
+module	main_class	family	status	license
+com.synexia.m3.text.normalize	com.synexia.m3.text.normalize.UnicodeNormalizer	TEXT	IMPLEMENTED	Apache-2.0
+com.synexia.m3.text.tokenize	com.synexia.m3.text.tokenize.WordTokenizer	TEXT	IMPLEMENTED	Apache-2.0
+com.synexia.m3.text.regex	com.synexia.m3.text.regex.RegexMatcher	TEXT	IMPLEMENTED	Apache-2.0
+com.synexia.m3.text.search	com.synexia.m3.text.search.ExactSearch	TEXT	IMPLEMENTED	Apache-2.0
+com.synexia.m3.text.ngram	com.synexia.m3.text.ngram.NGrams	TEXT	IMPLEMENTED	Apache-2.0
+com.synexia.m3.text.frequency	com.synexia.m3.text.frequency.TermFrequency	TEXT	IMPLEMENTED	Apache-2.0
+com.synexia.m3.text.similarity	com.synexia.m3.text.similarity.EditDistance	TEXT	IMPLEMENTED	Apache-2.0
+com.synexia.m3.text.diff	com.synexia.m3.text.diff.TextDelta	TEXT	IMPLEMENTED	Apache-2.0
+com.synexia.m3.text.index	com.synexia.m3.text.index.InvertedIndex	TEXT	IMPLEMENTED	Apache-2.0
+com.synexia.m3.text.lucene	com.synexia.m3.text.lucene.LuceneTokenizer	TEXT_DONOR	ADAPTER_PENDING	Apache-2.0
+com.synexia.m3.text.opennlp	com.synexia.m3.text.opennlp.OpenNlpTokenizer	TEXT_DONOR	ADAPTER_PENDING	Apache-2.0
+com.synexia.m3.graph.topology	com.synexia.m3.graph.topology.TopologicalOrder	GRAPH	IMPLEMENTED	Apache-2.0
+com.synexia.m3.graph.paths	com.synexia.m3.graph.paths.ShortestPaths	GRAPH	IMPLEMENTED	Apache-2.0
+com.synexia.m3.stats.streaming	com.synexia.m3.stats.streaming.RunningStatistics	STATISTICS	IMPLEMENTED	Apache-2.0
+com.synexia.m3.constraint.interval	com.synexia.m3.constraint.interval.Intervals	CONSTRAINT	IMPLEMENTED	Apache-2.0
+com.synexia.m3.codec.varint	com.synexia.m3.codec.varint.VarInts	CODEC	IMPLEMENTED	Apache-2.0
+com.synexia.m3.verify.sha256	com.synexia.m3.verify.sha256.Sha256	PROVENANCE	IMPLEMENTED	Apache-2.0
+com.synexia.m3.plan.priority	com.synexia.m3.plan.priority.StablePriorityQueue	SCHEDULING	IMPLEMENTED	Apache-2.0
+com.synexia.m3.model.distill	com.synexia.m3.model.distill.Distillation	MODEL_DISTILL	IMPLEMENTED	Apache-2.0
+com.synexia.m3.compute.webgpu	com.synexia.m3.compute.webgpu.WebGpuCompute	WEBGPU	IMPLEMENTED	Apache-2.0

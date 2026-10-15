@@ -1,0 +1,10 @@
+problem_category	candidate	contract	complexity	licence	decision
+SET_RECONCILIATION	Existing 18-row exact receiver map	Existing target names protected	O(D+M)	Synexia Apache-2.0 metadata	REUSE
+SET_RECONCILIATION	Silent module omission	Violates complete source ownership	O(1) implementation but invalid	No code reuse	REJECT
+SET_RECONCILIATION	HashMap keyed donor module	Detect missing and collisions in bounded input	O(D+M); O(D+M) space	First-party Java	SELECT
+SET_RECONCILIATION	Quadratic pairwise scans	Can detect collisions but repeated work	O(D*M)	First-party Java	REJECT
+OPTIONAL_ACCELERATOR	WebGPU under CPU baseline	Violates always-on CPU guarantee	Not applicable	Dawn independently licensed	DEFER
+CPU_MODEL_MATH	Distillation optional JPMS/JNI handoff	Requires separate Java/JNI proof	Not measured	Synexia Apache-2.0	DEFER
+CHALLENGE_SHAPE	LeetCode 350 intersection of arrays	Taxonomy and oracle ideas only	O(N+M) with hashing	No source copied	REFERENCE
+CHALLENGE_SHAPE	HackerRank Sparse Arrays	Exact keyed count lookup category	O(N+Q) expected	No source copied	REFERENCE
+CHALLENGE_SHAPE	GeeksforGeeks hash-based set comparison	Set-difference family only	O(N+M) expected	No source copied	REFERENCE
