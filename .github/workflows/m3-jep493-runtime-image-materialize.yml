@@ -256,7 +256,7 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/backports/pom.xml verify
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3RecipeScopeDeclarationTest test
+          if ! test -s "$HOME/.m2/repository/com/synexia/synexia-openrewrite-recipes/1.0.0-SNAPSHOT/synexia-openrewrite-recipes-1.0.0-SNAPSHOT.jar"; then\n            bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"\n          fi\n          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3RecipeScopeDeclarationTest test
 
       - name: 11 - Install OpenJDK build prerequisites
         shell: bash
@@ -269,7 +269,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=release --with-jvm-variants=server --enable-linkable-runtime --disable-warnings-as-errors
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends jtreg7
+          test -f /usr/share/jtreg/lib/jtreg.jar
+          bash configure --with-jtreg=/usr/share/jtreg --with-boot-jdk="$JAVA_HOME" --with-debug-level=release --with-jvm-variants=server --enable-linkable-runtime --disable-warnings-as-errors
 
       - name: 13 - Build JDK image
         shell: bash
