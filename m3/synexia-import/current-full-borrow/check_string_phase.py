@@ -40,6 +40,87 @@ SUCCESSOR_CHAIN_HEADER = [
     "schema", "target_path", "predecessor_git_blob", "successor_git_blob",
     "synexia_pr", "m3jdk_pr", "state",
 ]
+PRECOMPUTE_OBSERVATION = Path(__file__).with_name("m3-string-precompute-observation-v2.tsv")
+PRECOMPUTE_OBSERVATION_HEADER = [
+    "schema",
+    "snapshot_date_utc",
+    "source_symbol",
+    "source_path",
+    "source_git_blob",
+    "source_license",
+    "source_relation",
+    "cache_symbol",
+    "cache_path",
+    "cache_git_blob",
+    "cache_relation",
+    "target_symbol",
+    "target_path",
+    "target_license",
+    "checkpoint_m3jdk_pr",
+    "checkpoint_m3jdk_merge_commit",
+    "checkpoint_target_git_blob",
+    "observation_m3jdk_pr",
+    "observation_m3jdk_head",
+    "observation_m3jdk_merge_commit",
+    "observation_target_git_blob",
+    "current_m3jdk_pr",
+    "current_m3jdk_merge_commit",
+    "current_m3jdk_master_commit",
+    "current_target_git_blob",
+    "synexia_source_recipe_pr",
+    "synexia_source_recipe_head",
+    "synexia_source_recipe_state_at_capture",
+    "synexia_donor_decision_pr",
+    "synexia_donor_decision_role",
+    "implementation_origin",
+    "runtime_acceptance",
+    "performance_evidence",
+    "state",
+]
+EXPECTED_PRECOMPUTE_OBSERVATION = {
+    "schema": "M3JDK21_STRING_PRECOMPUTE_OBSERVATION_V2",
+    "snapshot_date_utc": "2026-10-15",
+    "source_symbol": "com.synexia.indexstring.MIndexStringSearchPlan",
+    "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringSearchPlan.java",
+    "source_git_blob": "402e6d8cf2f99d19ffc9c1291afee7baf80665ec",
+    "source_license": "Apache-2.0",
+    "source_relation": "canonical operation-search facts; source mapping only",
+    "cache_symbol": "com.synexia.mindex.MIndexStringPrecomputeCache",
+    "cache_path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeCache.java",
+    "cache_git_blob": "0e777d4fe11e169aab7c495e334316e443142f16",
+    "cache_relation": "CONSUMER_SPLIT_PRECOMPUTE; source mapping only",
+    "target_symbol": "java.lang.M3StringSearchPrecompute",
+    "target_path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+    "target_license": "GPL-2.0-with-Classpath-exception",
+    "checkpoint_m3jdk_pr": "864",
+    "checkpoint_m3jdk_merge_commit": "fc57c84cbbd48c6fe25113a683992d7495aec7e5",
+    "checkpoint_target_git_blob": "dfbb91cc169916cd0a95798f4cd2151c3407df4c",
+    "observation_m3jdk_pr": "869",
+    "observation_m3jdk_head": "e0422f994559a2d9c2dee3b9b2af768a2b69c70a",
+    "observation_m3jdk_merge_commit": "d5abed865bd47c4dd5ad78e95704348fe2095ed2",
+    "observation_target_git_blob": "ac68eacd6ee4e6048ab424542ccf5c2cf5595908",
+    "current_m3jdk_pr": "920",
+    "current_m3jdk_merge_commit": "3d9d44eeed2859fe5c3d353723e7b627b379205d",
+    "current_m3jdk_master_commit": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
+    "current_target_git_blob": "0a88ed559b23def5d2229bba3316ea2268b4d720",
+    "synexia_source_recipe_pr": "11559",
+    "synexia_source_recipe_head": "46d4d4864fcbffda3538e594f6be9babc0f88407",
+    "synexia_source_recipe_state_at_capture": "OPEN_DRAFT",
+    "synexia_donor_decision_pr": "11270",
+    "synexia_donor_decision_role": "FIRST_PARTY_REUSE_INVENTORY_ONLY",
+    "implementation_origin": "M3JDK_TARGET_LOCAL_CURSOR_AND_M3TQ_REUSE_NO_SYNEXIA_CODE_COPY",
+    "runtime_acceptance": "NOT_CLAIMED",
+    "performance_evidence": "NOT_MEASURED",
+    "state": "SOURCE_OBSERVATION_NOT_RUNTIME_ACCEPTED",
+}
+PRECOMPUTE_SEARCH_MAPPING_SOURCE = (
+    "com.synexia.indexstring.MIndexStringSearchPlan and canonical operation-search facts"
+)
+PRECOMPUTE_SEARCH_MAPPING_RULE = (
+    "weakly key exact M3 owner+coordinate; retain primitive pattern metadata only; "
+    "no String/char[]/byte[]/M3String payload; eviction changes performance only"
+)
+
 M3_STRING_PATH = "src/java.base/share/classes/java/lang/M3String.java"
 # Each exact transition was independently observed at the named GitHub PR head.
 EXPECTED_STRING_CHAIN = (
@@ -204,6 +285,56 @@ def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str
     return current
 
 
+
+def load_precompute_observation() -> dict[str, str]:
+    """Read the exact V2 lineage receipt; candidate facts never imply acceptance."""
+    rows = load_tsv(PRECOMPUTE_OBSERVATION, PRECOMPUTE_OBSERVATION_HEADER)
+    if len(rows) != 1:
+        raise ValueError("M3String precompute observation cardinality drift")
+    row = rows[0]
+    if any(not row[field] for field in PRECOMPUTE_OBSERVATION_HEADER):
+        raise ValueError("blank M3String precompute observation field")
+    if row != EXPECTED_PRECOMPUTE_OBSERVATION:
+        raise ValueError("unreviewed M3String precompute observation drift")
+    for field in (
+        "source_git_blob", "cache_git_blob", "checkpoint_m3jdk_merge_commit",
+        "checkpoint_target_git_blob", "observation_m3jdk_head",
+        "observation_m3jdk_merge_commit", "observation_target_git_blob",
+        "current_m3jdk_merge_commit", "current_m3jdk_master_commit",
+        "current_target_git_blob", "synexia_source_recipe_head",
+    ):
+        if not HEX40.fullmatch(row[field]):
+            raise ValueError("unsealed M3String precompute observation: " + field)
+    for field in (
+        "checkpoint_m3jdk_pr", "observation_m3jdk_pr", "current_m3jdk_pr",
+        "synexia_source_recipe_pr", "synexia_donor_decision_pr",
+    ):
+        if not row[field].isdigit():
+            raise ValueError("invalid M3String precompute PR: " + field)
+    target = ROOT / row["target_path"]
+    if target.is_file() and git_blob(target) != row["current_target_git_blob"]:
+        raise ValueError("live M3JDK precompute target blob drift")
+    return row
+
+
+def validate_precompute_mapping(mapping_rows: list[dict[str, str]],
+                                observation: dict[str, str]) -> None:
+    matches = [
+        row for row in mapping_rows
+        if row["relation"] == "PRECOMPUTE_CACHE"
+        and row["source_path"] == observation["cache_path"]
+    ]
+    if len(matches) != 1:
+        raise ValueError("MIndexString precompute source mapping missing or duplicated")
+    row = matches[0]
+    if (row["source_git_blob"] != observation["cache_git_blob"]
+            or row["target_path"] != observation["target_path"]
+            or row["relationship"] != "CONSUMER_SPLIT_PRECOMPUTE"
+            or row["license_class"] != observation["source_license"]
+            or row["state"] != "PINNED_MAPPING"):
+        raise ValueError("MIndexString precompute mapping contract drift")
+
+
 def validate_successor_source(path: str, source: str) -> None:
     for fragment in SUCCESSOR_MARKERS[path]:
         if fragment not in source:
@@ -286,6 +417,18 @@ def validate_name_mapping() -> None:
     if set(row.get("target_owners", [])) != required:
         raise ValueError("canonical M3String target owner set drift")
 
+    search_maps = [
+        item for item in data.get("mappings", [])
+        if item.get("source") == PRECOMPUTE_SEARCH_MAPPING_SOURCE
+        and item.get("target") == "java.lang.M3StringSearchPrecompute"
+    ]
+    if len(search_maps) != 1:
+        raise ValueError("canonical MIndexString/M3StringSearchPrecompute map missing")
+    search_map = search_maps[0]
+    if (search_map.get("status") != "internal-only bounded operation-precompute adaptation"
+            or search_map.get("mapping_rule") != PRECOMPUTE_SEARCH_MAPPING_RULE):
+        raise ValueError("M3StringSearchPrecompute internal mapping contract drift")
+
 
 
 WORK_HEADER = [
@@ -348,6 +491,13 @@ def main(argv: list[str]) -> int:
     rows = load_tsv(MAP, HEADER)
     successors = approved_successors(rows)
     current_blobs = current_successor_blobs(rows)
+    precompute_observation = load_precompute_observation()
+    validate_precompute_mapping(rows, precompute_observation)
+    if precompute_observation["target_path"] in current_blobs:
+        raise ValueError("M3String precompute owner collides with V1 successor chain")
+    current_blobs[precompute_observation["target_path"]] = (
+        precompute_observation["current_target_git_blob"]
+    )
     relations: set[str] = set()
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in HEADER):
