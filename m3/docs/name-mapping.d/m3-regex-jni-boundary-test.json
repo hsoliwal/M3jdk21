@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "source": "Synexia MIndexString and MIndexRegexProgram UTF-16/regex execution boundaries",
+  "target": "M3JDK21 java.lang.M3String, String and java.util.regex.Pattern/Matcher with standard JNI",
+  "status": "TEST_ONLY_RECEIVER_HOLD",
+  "implementation": "JNI UTF16/GetStringChars/GetStringCritical/GetStringRegion/NewString exact-oracle tests; public API unchanged",
+  "invariant": "M3String canonical owner and packed coordinate remain authoritative; JNI char[] views and returned Strings are compatibility observations, not a second retained text store",
+  "gating": [
+    "source-sealed Maven/OpenRewrite SDK",
+    "Java21 C17 -Xcheck:jni normal/interpreter",
+    "matched M3JDK jtreg native -XX:+UseM3StringStorage",
+    "HotSpot GC/JIT/CDS and multi-platform JNI"
+  ],
+  "related": [
+    "hsoliwal/com.synexia#11408",
+    "hsoliwal/M3jdk21#890",
+    "hsoliwal/M3jdk21#889"
+  ],
+  "rights": "M3JDK test Java and C GPLv2 with Classpath exception; separate Synexia recipe Apache-2.0"
+}
