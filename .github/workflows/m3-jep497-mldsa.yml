@@ -59,6 +59,7 @@ jobs:
 
       - name: 2 - SHAKE, ML-KEM and ML-DSA recipe DAG proofs
         run: >-
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD" &&
           mvn -B -ntp
           -f m3/tooling/migration-recipes/pom.xml
           -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3Jep497MlDsaBackportRecipeTest,M3RecipeScopeDeclarationTest
@@ -88,6 +89,7 @@ jobs:
 
       - name: Prove canonical Synexia consumer and scope
         run: >-
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD" &&
           mvn -B -ntp
           -f m3/tooling/migration-recipes/pom.xml
           -Dtest=M3SynexiaJava21ConvergenceConsumerTest,M3RecipeScopeDeclarationTest
