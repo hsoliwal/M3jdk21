@@ -165,6 +165,31 @@ class CommitPatchAtomsTest(unittest.TestCase):
                 )
             self.assertEqual([], list(target.iterdir()))
 
+            # The direct CLI may not normalize away an untrusted output symlink.
+            alias = root / "output-alias"
+            alias.symlink_to(out)
+            selected = root / "selected.txt"
+            selected.write_text("src/New.java\\n", encoding="utf-8")
+            result = subprocess.run(
+                (
+                    sys.executable,
+                    str(Path(__file__).with_name("commit_patch_atoms.py")),
+                    "--donor-repo", str(donor),
+                    "--target-root", str(target),
+                    "--parent", parent,
+                    "--commit", commit,
+                    "--paths", str(selected),
+                    "--out", str(alias),
+                ),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                check=False,
+            )
+            self.assertNotEqual(0, result.returncode)
+            self.assertIn("symlink", result.stderr)
+            self.assertEqual([], list(target.iterdir()))
+
     def test_missing_selected_path_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             repo = Path(temp) / "repo"
