@@ -65,3 +65,31 @@ prove the target JDK image, recipe JUnit, jtreg, JNI/runtime parity, or fixed po
 `mvn -B -ntp -f m3/backports/pom.xml verify` now emits the scoped programme evidence into
 `target/backport-programme-status.tsv` and `target/backport-programme-status.json`.
 Both outputs are read-only receipts. The older `program-status.json` aggregate remains intact.
+
+
+## Current Nebula -> Synexia -> M3JDK21 admission (2026-10-15)
+
+The backport programme itself remains active: catalogue classification, packet authoring, recipe
+preparation, dependency closure and target-local proof work continue normally.
+
+The **current Nebula-qualified transfer edge** is separately HOLD-bound by:
+
+`NEBULA_PROOF_GATED_ADMISSION_20261015.tsv`
+
+It pins:
+
+- Nebula PR #212 / commit `9a77803ce174be534ba5f543a9f3b342858d2bbc`;
+- Synexia custody PR #11632 / commit `cf21063f2620ca12202122643bf7d4120ed16194`;
+- canonical owners `M3NebulaRecipeDag` and `M3NebulaViewportDistillationRecipe`.
+
+Current states:
+
+- Nebula: `HOLD_UNTIL_PROVEN` because hosted proof workflows have not executed green;
+- Synexia: `DRAFT_UNMERGED`;
+- M3JDK21 packet execution from this transfer: `false`;
+- mutation authority: `false`;
+- promotion authority: `false`.
+
+This does **not** stop independent JEP/JDK backport inventory or recipe development already admitted
+by the existing catalogue. It prevents only the new Nebula-qualified recipe handoff from silently
+becoming executable before its two prerequisite proof stages are complete.
