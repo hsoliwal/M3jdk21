@@ -80,6 +80,134 @@ public final class M3RegexDpPlan {
         return new M3RegexDpPlan(literals, dot, star, tokens);
     }
 
+    // Relocatable effect data; this is NOT Java serialization or the Synexia image ABI.
+    private static final long EFFECT_IMAGE_MAGIC = 0x31464f455852334dL;
+    private static final int EFFECT_IMAGE_VERSION = 1;
+    private static final int EFFECT_IMAGE_HEADER = 104;
+    private static final int IMAGE_LEADING_LOW = 1;
+    private static final int IMAGE_TRAILING_HIGH = 2;
+
+    /**
+     * Restore an effect into this exact compiled program from a qualified image receipt.
+     * The caller must supply a TRUSTED SHA-256 of the whole image and the exact canonical
+     * source identity bound by its producer. A checksum read from the same untrusted file
+     * is not a trusted receipt. Neither a hash nor this decoder proves that a forged effect
+     * was computed from text; the producer/receipt must have been qualified independently.
+     *
+     * <p>Reads the buffer's remaining region without changing its position, limit, mark or
+     * byte order. Takes a bounded snapshot before validation; neither the buffer, a mapping,
+     * nor any source identity array is retained. A mapping must remain readable during this
+     * call, but may be closed after it. Concurrent mutation is not synchronization: the
+     * snapshot is accepted only if it has exactly the supplied image digest.
+     *
+     * <p>All syntax, bounds, plan/source identity and digest errors throw
+     * IllegalArgumentException, never NO_MATCH. Nulls throw NullPointerException.
+     * Fingerprints must have exactly 32 bytes. Invalid outer sizes are refused before
+     * allocation of an image snapshot. A non-null checkpoint runs before that snapshot
+     * and before returning the result; its exceptions are propagated. Calls with null
+     * checkpoints neither consume nor change thread interruption status.
+     */
+    public Effect restoreEffect(java.nio.ByteBuffer image, byte[] expectedSourceIdentity,
+            byte[] expectedImageSha256, Runnable checkpoint) {
+        Objects.requireNonNull(image, "image");
+        byte[] sourceIdentity = copyImageFingerprint(expectedSourceIdentity);
+        byte[] imageIdentity = copyImageFingerprint(expectedImageSha256);
+        // Capture caller-selected geometry before user code can change the original view.
+        java.nio.ByteBuffer region = image.slice();
+        int size = region.remaining();
+        if (size < EFFECT_IMAGE_HEADER + states * Long.BYTES
+                || size > EFFECT_IMAGE_HEADER + 2 * states * Long.BYTES) {
+            throw new IllegalArgumentException("regex effect image size");
+        }
+        check(checkpoint);
+        byte[] snapshot = new byte[size];
+        region.get(snapshot);
+        if (!java.security.MessageDigest.isEqual(imageIdentity, imageDigest(snapshot))) {
+            throw new IllegalArgumentException("regex effect image digest");
+        }
+        java.nio.ByteBuffer input = java.nio.ByteBuffer.wrap(snapshot)
+                .order(java.nio.ByteOrder.LITTLE_ENDIAN);
+        if (input.getLong() != EFFECT_IMAGE_MAGIC || input.getInt() != EFFECT_IMAGE_VERSION
+                || input.getInt() != EFFECT_IMAGE_HEADER || input.getInt() != size
+                || input.getInt() != states) {
+            throw new IllegalArgumentException("regex effect image schema or program width");
+        }
+        int flags = input.getInt();
+        if ((flags & ~(IMAGE_LEADING_LOW | IMAGE_TRAILING_HIGH)) != 0 || input.getInt() != 0) {
+            throw new IllegalArgumentException("regex effect image flags or reserved field");
+        }
+        long length = input.getLong();
+        int laneCount = (flags & IMAGE_LEADING_LOW) != 0 ? 2 : 1;
+        if (length < 0 || length == 0 && flags != 0
+                || length == 1 && flags == (IMAGE_LEADING_LOW | IMAGE_TRAILING_HIGH)
+                || size != EFFECT_IMAGE_HEADER + laneCount * states * Long.BYTES) {
+            throw new IllegalArgumentException("regex effect image geometry");
+        }
+        byte[] stored = new byte[32];
+        input.get(stored);
+        if (!java.security.MessageDigest.isEqual(stored, imageProgramFingerprint())) {
+            throw new IllegalArgumentException("different regex image program");
+        }
+        input.get(stored);
+        if (!java.security.MessageDigest.isEqual(stored, sourceIdentity)) {
+            throw new IllegalArgumentException("different regex image source");
+        }
+        long[] rows = readImageRows(input);
+        long[] skipped = laneCount == 2 ? readImageRows(input) : null;
+        boolean high = (flags & IMAGE_TRAILING_HIGH) != 0;
+        // Structural invariants are additional admission checks, not semantic proof.
+        if (length == 0 || length == 1 && high) requireImageIdentity(rows);
+        if (length == 1 && skipped != null) requireImageIdentity(skipped);
+        if (skipped != null) {
+            for (int i = 0; i < states; i++) {
+                if (rows[i] != applyRows(skipped, advanceMatched(1L << i, dots))) {
+                    throw new IllegalArgumentException("regex image leading-low relation");
+                }
+            }
+        }
+        Effect result = new Effect(rows, length, skipped, high);
+        check(checkpoint);
+        return result;
+    }
+
+    private long[] readImageRows(java.nio.ByteBuffer input) {
+        long[] result = new long[states];
+        for (int i = 0; i < states; i++) {
+            result[i] = input.getLong();
+            checkBits(result[i]);
+        }
+        return result;
+    }
+
+    private void requireImageIdentity(long[] rows) {
+        for (int i = 0; i < states; i++) {
+            if (rows[i] != (1L << i)) throw new IllegalArgumentException("regex image identity");
+        }
+    }
+
+    private static byte[] copyImageFingerprint(byte[] value) {
+        Objects.requireNonNull(value, "fingerprint");
+        if (value.length != 32) throw new IllegalArgumentException("SHA-256 fingerprint length");
+        return value.clone();
+    }
+
+    private static byte[] imageDigest(byte[] bytes) {
+        try { return java.security.MessageDigest.getInstance("SHA-256").digest(bytes); }
+        catch (java.security.NoSuchAlgorithmException missing) { throw new AssertionError(missing); }
+    }
+
+    /** Exact derived primitive program and semantic-version identity, not object identity. */
+    private byte[] imageProgramFingerprint() {
+        java.nio.ByteBuffer data = java.nio.ByteBuffer.allocate(
+                16 + Long.BYTES * (5 + literalMasks.length + nullableBridges.length))
+                .order(java.nio.ByteOrder.LITTLE_ENDIAN);
+        data.putLong(EFFECT_IMAGE_MAGIC).putInt(EFFECT_IMAGE_VERSION).putInt(states)
+                .putLong(starred).putLong(dots).putLong(universe).putLong(initial).putLong(accepting);
+        for (long value : literalMasks) data.putLong(value);
+        for (long value : nullableBridges) data.putLong(value);
+        return imageDigest(data.array());
+    }
+
     public int stateCount() { return states; }
     public long initialState() { return initial; }
     public boolean accepts(long frontier) { checkBits(frontier); return (frontier & accepting) != 0; }
@@ -248,6 +376,41 @@ public final class M3RegexDpPlan {
             this.withoutLeadingLow = withoutLeadingLow;
             this.trailingHigh = trailingHigh;
         }
+        /**
+         * Export deterministic primitive metadata bound to a producer-supplied canonical
+         * source identity. The exact 32-byte identity is opaque here: use an immutable,
+         * generation/range-bound source receipt, never a process address or similarity hash.
+         * Return bytes are fresh and owned by the caller; mutating them cannot change this
+         * effect. No text or source-identity array is retained by this effect or its plan.
+         *
+         * <p>Persist SHA-256(returned bytes) in a separately trusted build/cache receipt.
+         * Restore requires that digest, the same source identity and an equivalent compiled
+         * plan. The format is little-endian, versioned and at most 1128 bytes (64 states,
+         * two relations). This method does not choose paths, perform disk I/O, attach an
+         * effect to a String owner, or make an untrusted artifact authoritative.
+         */
+        public byte[] toImage(byte[] sourceIdentity, Runnable checkpoint) {
+            byte[] source = copyImageFingerprint(sourceIdentity);
+            check(checkpoint);
+            int flags = (withoutLeadingLow != null ? IMAGE_LEADING_LOW : 0)
+                    | (trailingHigh ? IMAGE_TRAILING_HIGH : 0);
+            int size = EFFECT_IMAGE_HEADER + states * Long.BYTES
+                    * (withoutLeadingLow == null ? 1 : 2);
+            byte[] result = new byte[size];
+            java.nio.ByteBuffer output = java.nio.ByteBuffer.wrap(result)
+                    .order(java.nio.ByteOrder.LITTLE_ENDIAN);
+            output.putLong(EFFECT_IMAGE_MAGIC).putInt(EFFECT_IMAGE_VERSION)
+                    .putInt(EFFECT_IMAGE_HEADER).putInt(size).putInt(states)
+                    .putInt(flags).putInt(0).putLong(length)
+                    .put(imageProgramFingerprint()).put(source);
+            for (long row : rows) output.putLong(row);
+            if (withoutLeadingLow != null) {
+                for (long row : withoutLeadingLow) output.putLong(row);
+            }
+            check(checkpoint);
+            return result;
+        }
+
         public long length() { return length; }
         public long apply(long frontier) {
             checkBits(frontier);
