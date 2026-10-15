@@ -86,21 +86,16 @@ jobs:
           ROWS="$(awk -F '\t' 'NR > 1 {n++} END {print n+0}' m3/build/backports/UPSTREAM_CHANGES.tsv)"
           test "$ROWS" -eq 14948
 
-      - name: Inventory current M3JDK21 source/test tree
+      - name: Mavenize current tree and fan in complete queue
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/tooling/a3/pom.xml exec:java \
-            -Dexec.mainClass=com.m3.a3.A3 \
-            -Dexec.args="inv --root $PWD --out m3/build/a3/inventory.tsv"
-
-      - name: Fan in complete compatibility queue to FILE preparation atoms
-        shell: bash
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f m3/tooling/a3/pom.xml exec:java \
-            -Dexec.mainClass=com.m3.a3.A3 \
-            -Dexec.args="complete --root $PWD --inventory m3/build/a3/inventory.tsv --queue m3/build/backports/COMPATIBILITY_QUEUE.tsv --out m3/build/a3/completion"
+          mvn -B -ntp -f m3/tooling/a3/pom.xml \
+            -Pm3-a3-backport-completion \
+            -Dm3.a3.root="$PWD" \
+            -Dm3.a3.queue=m3/build/backports/COMPATIBILITY_QUEUE.tsv \
+            -Dm3.a3.completion.out=m3/build/a3/completion \
+            verify
           test -s m3/build/a3/completion/work.tsv
           test -s m3/build/a3/completion/receipt.tsv
           test -f m3/build/a3/completion/java-preparation-paths.txt
