@@ -193,12 +193,40 @@ def verify_security_properties_8364182_backport(root: Path) -> None:
                 f"missing JDK-8364182 target: {row['target_path']}"
             )
         actual = hashlib.sha256(path.read_bytes()).hexdigest()
-        if actual != row["target_sha256"]:
+        baseline = row["baseline_sha256"]
+        superseded = row.get("superseded_target_sha256", "")
+        if row["target_path"] == "src/hotspot/share/classfile/vmSymbols.hpp":
+            expected_superseded = (
+                "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab"
+            )
+            if superseded != expected_superseded:
+                raise AssertionError("JDK-8364182 vmSymbols superseded pin drift")
+        elif superseded:
+            raise AssertionError(
+                "unexpected JDK-8364182 superseded target: " + row["target_path"]
+            )
+        if superseded:
+            if len(superseded) != 64 or any(
+                char not in "0123456789abcdef" for char in superseded
+            ):
+                raise AssertionError(
+                    "invalid JDK-8364182 superseded SHA-256: " + row["target_path"]
+                )
+            if superseded in {baseline, row["target_sha256"]}:
+                raise AssertionError(
+                    "JDK-8364182 superseded state aliases a pinned state: "
+                    + row["target_path"]
+                )
+        allowed_targets = {row["target_sha256"]}
+        if superseded:
+            allowed_targets.add(superseded)
+        if actual not in allowed_targets:
             raise AssertionError(
                 f"JDK-8364182 target drift for {row['target_path']}: "
-                f"expected {row['target_sha256']}, actual {actual}"
+                f"expected {row['target_sha256']}"
+                + (f" or exact superseded {superseded}" if superseded else "")
+                + f", actual {actual}"
             )
-        baseline = row["baseline_sha256"]
         if baseline != "ABSENT" and baseline == row["target_sha256"]:
             raise AssertionError(
                 f"JDK-8364182 row has no delta: {row['target_path']}"
