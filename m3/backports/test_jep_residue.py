@@ -308,7 +308,7 @@ class JepResidueTest(unittest.TestCase):
         )
         self.assertEqual("NOT_AUTHORIZED", by_jep[485].promotion)
         self.assertEqual(
-            "RUN_RECIPE_DAG_BUILD_GATHERER_JTREG_STREAM_REGRESSIONS_API_SMOKE_FIXED_POINT",
+            "RUN_SELF_CONTAINED_RECIPE_DAG_BUILD_GATHERER_JTREG_STREAM_REGRESSIONS_API_SMOKE_FIXED_POINT",
             by_jep[485].receipt_next_action,
         )
         self.assertEqual("MATERIALIZED_PACKET", by_jep[510].evidence_state)
