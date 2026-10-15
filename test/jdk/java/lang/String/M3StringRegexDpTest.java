@@ -34,6 +34,7 @@ public final class M3StringRegexDpTest {
     public static void main(String[] arguments) throws Exception {
         deterministic();
         randomized();
+        compositeDags();
         refusals();
         System.out.println("M3_STRING_REGEX_DP_PASS|checks=" + checks);
     }
@@ -89,6 +90,26 @@ public final class M3StringRegexDpTest {
             // inputs/patterns in this randomized lane are strictly ASCII a-c.
             equal(memoized(composite, expression), expected, "memo/JDK parity trial=" + trial);
         }
+    }
+
+    /**
+     * Distinct shared DAG shapes and range boundaries must have identical
+     * Java Pattern full-match behavior; no payload materialization is required.
+     */
+    private static void compositeDags() throws Exception {
+        String shared = String.join("", "a", "b", "c");
+        for (int depth = 0; depth < 9; depth++) {
+            shared = shared.concat(shared);
+        }
+        verify(shared, ".*", 1);
+        verify(shared, "a.*c", 1);
+        verify(shared, "a.*b", 0);
+        String middle = shared.substring(1, shared.length() - 1);
+        verify(middle, ".*", 1);
+        verify(middle, "b.*b", 1);
+        // Reject syntactically unsupported regex before any cursor execution.
+        equal(decision(middle, "(abc)*"), -1,
+                "group repetition remains the exact JDK Pattern fallback");
     }
 
     private static void refusals() throws Exception {
