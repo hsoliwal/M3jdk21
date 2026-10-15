@@ -5,6 +5,7 @@ on:
     paths:
       - 'm3/synexia-import/**'
       - 'm3/docs/synexia-full-delivery-a3.md'
+      - 'm3/docs/a3-vendored-build-prerequisite-20261015.md'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/synexia-full-delivery-a3/**'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/synexia-full-delivery-a3-doc/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-synexia-full-delivery-a3.yml'
@@ -35,6 +36,11 @@ jobs:
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: git diff --check "$BASE_SHA...HEAD"
+      - name: Build source-vendored A3 OpenRewrite and JUnit closure
+        run: >
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml
+          -pl rewrite-java,rewrite-java-21,rewrite-test,junit-jupiter-5.10.2
+          -am -DskipTests install
       - name: Recipe replay and fixed point
         run: >
           mvn -B -ntp -f m3/pom.xml
