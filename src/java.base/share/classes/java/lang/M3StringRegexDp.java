@@ -73,8 +73,12 @@ final class M3StringRegexDp {
             previous[j] = (atoms[j - 1] & STAR) != 0 && previous[j - 1];
         }
 
+        // The same canonical owner/coordinate cursor is shared with literal
+        // search precompute. Resolve each scalar tuple leaf once per run,
+        // rather than locating the leaf again for every UTF-16 code unit.
+        M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(source);
         for (int i = 0; i < m; i++) {
-            char value = source.charAt(i);
+            char value = units.at(i);
             // java.util.regex matches Unicode code points, not arbitrary halves of
             // surrogate pairs. Preserve that contract through the JDK fallback.
             if (Character.isSurrogate(value)) return UNKNOWN;
