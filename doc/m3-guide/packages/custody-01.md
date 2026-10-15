@@ -408,3 +408,20 @@ Pinned source: `278b221e8365ebeb6095a3a5643b38a0564258b5`. Each row is a physica
 | [m3/vendor/third_party/commonmark/src/main/java/org/commonmark/renderer](https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/vendor/third_party/commonmark/src/main/java/org/commonmark/renderer) | org.commonmark.renderer | Retained donor/template/fixture source; active role unreviewed | `NodeRenderer.java` +1 | unreviewed | unmapped | PATH_ONLY | declaration, purpose, API, effects, dependencies and tests |
 | [m3/vendor/third_party/commonmark/src/main/java/org/commonmark/renderer/html](https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/vendor/third_party/commonmark/src/main/java/org/commonmark/renderer/html) | org.commonmark.renderer.html | [existing package contract](https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/vendor/third_party/commonmark/src/main/java/org/commonmark/renderer/html/package-info.java) | `AttributeProvider.java` +9 | owning descriptor; full imports unreviewed | harness mapping pending | DOC_LINKED | contract content reconciliation and tests unreviewed |
 | [m3/vendor/third_party/commonmark/src/main/java/org/commonmark/renderer/markdown](https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/vendor/third_party/commonmark/src/main/java/org/commonmark/renderer/markdown) | org.commonmark.renderer.markdown | [existing package contract](https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/vendor/third_party/commonmark/src/main/java/org/commonmark/renderer/markdown/package-info.java) | `CoreMarkdownNodeRenderer.java` +4 | owning descriptor; full imports unreviewed | harness mapping pending | DOC_LINKED | contract content reconciliation and tests unreviewed |
+
+## Retained root regex detail (2026-10-15)
+
+Additive detail for `m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring`: [retained regex contracts](../retained-regex-reference.md) and [source/member/evidence map](../retained-regex-reference-coverage.md) cover all seven retained root Java owners at `363c02caa2e5af1df9460b927ecd78f6a9dbcefb`. Custody-only, source-incomplete module; public historical oracle bodies read and repository execution NOT_RUN in this documentation authoring/review pass. Sibling namespaces and runtime-owner closure remain separate
+
+Hosted exact-commit CI is reported separately
+
+## Retained typed precompute contracts — 15 October 2026
+
+The historical `com.synexia.indexstring.precompute` PATH_ONLY row above is
+supplemented by [typed precompute contracts](../retained-precompute-reference.md)
+and [the exact source/member/evidence map](../retained-precompute-reference-coverage.md).
+They cover all eight retained Java owners at
+`363c02caa2e5af1df9460b927ecd78f6a9dbcefb`, preserving the original v7 custody.
+Source-complete receiving, generic execution/persistence integration and runtime
+qualification remain open. Package tests/builds are NOT_RUN in this documentation
+authoring/review pass; hosted exact-commit CI is separate evidence.

@@ -136,3 +136,30 @@ The sibling Fenwick owner remains covered by [indexed algorithms](indexed-algori
 ## Frozen-text compatibility fixture contracts, 15 October 2026
 
 For the separate test-only frozen-text fixture, see the [frozen-text compatibility reference](frozen-text-compatibility-reference.md): byte/UTF-16 ownership and sharing, trusted direct admission, copy/materialization and compaction boundaries, the throwing addressed-view seam, and the actual differential/direct-memory tests. The [four-source/member/hash map](frozen-text-compatibility-source-coverage.md) covers all 25 explicit public callables without conflating retained-port or canonical runtime owners; repository execution remains NOT_RUN.
+
+## Retained regex contracts (2026-10-15)
+
+- [Retained regex programs, images and candidate facts](retained-regex-reference.md): seven original-package custody owners, compile/session and workspace lifetime, v1–v7 codec transport, persisted request identity and UTF-16 trigram facts; [exact coverage and evidence](retained-regex-reference-coverage.md)
+
+Repository tests/builds were NOT_RUN in this documentation authoring/review pass; hosted exact-commit CI is reported separately
+
+## Retained typed precompute contracts — 15 October 2026
+
+- [Typed keys, scopes, passes, graph plans, direct-dependency contexts and budget helpers](retained-precompute-reference.md)
+- [Exact eight-source/member/hash, caller, test and provenance map](retained-precompute-reference-coverage.md)
+
+This retained source slice has no executor/cache/codec or standalone module;
+source routing does not promote it to the canonical JDK runtime. Execution is
+NOT_RUN in this documentation authoring/review pass; hosted exact-commit CI is
+separate evidence.
+
+## Retained shared-array custody contracts
+
+The [retained shared-array reference](retained-shared-array-reference.md) covers
+arena admission, namespace/range handles, language aliases, immutable segment
+views, copies, conversion-result caching and optional JNI boundaries. Its
+[eight-body source map](retained-shared-array-reference-coverage.md) records
+exact provenance, missing build dependencies and a conditional native
+registration mismatch. The retained slice is not a complete module or JDK
+runtime dependency; tests and native loads are NOT_RUN in this documentation
+pass. Hosted CI remains separate exact-commit evidence.

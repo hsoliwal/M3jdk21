@@ -328,3 +328,42 @@ Builds, tests, examples, verifiers, scripts, recipes, benchmarks and native/runt
 The [frozen-text compatibility reference](frozen-text-compatibility-reference.md) and [four-source/member/hash map](frozen-text-compatibility-source-coverage.md) cover all four complete bodies in `m3/compatibility/synexia-reference/src/com/synexia/indexstring` at `c842fab8cf5b799257e3c9ea07f8baddde80db09`: two pinned storage snapshots, one throwing compile-only seam and one executable main test. The 25 explicit public callables and private/package-private support members are mapped, with exact byte/UTF-16 units, cloning versus retained aliases, trusted hashes, range/materialization costs, conditional compaction, errors and lifetime limits. These are four physical fixture files, not four production owners; similarly named retained-port, vendor and canonical String roots are separate scopes.
 
 Both actual test bodies, the compatibility script, foundation build/workflow and public provenance/license/NOTICE were read. The source map resolves the earlier fixture test-routing gap without rewriting historical sampled inventory status. The mapped test uses allocateDirect rather than a mapped file and never invokes the addressed seam; no JNI, alias-exclusion, concurrency or API/owner-equivalence proof is inferred. All repository compilation/tests/scripts/workflows/examples/native/runtime gates and benchmarks were NOT_RUN in this documentation pass. Hosted CI is separate exact-commit evidence. Broader consumer/custody review, inline package documentation, error/alias/resource coverage and target receiving qualification remain open; no package-wide claim across duplicate roots, whole-repository completion or receiving-phase promotion follows.
+
+## Retained regex body coverage (2026-10-15)
+
+- Retained regex root: seven complete source bodies and nested/member boundaries documented at `363c02caa2e5af1df9460b927ecd78f6a9dbcefb` in [reference](retained-regex-reference.md) and [coverage](retained-regex-reference-coverage.md). Public historical oracle bodies read; repository execution NOT_RUN in this documentation authoring/review pass. FS/generic-precompute/shared-array siblings and complete module/runtime admission remain separate
+
+Hosted exact-commit CI is reported separately
+
+## Retained typed precompute supplement — 15 October 2026
+
+[Contract reference](retained-precompute-reference.md) and
+[exact coverage companion](retained-precompute-reference-coverage.md) route all
+eight public retained `com.synexia.indexstring.precompute` source bodies at
+`363c02caa2e5af1df9460b927ecd78f6a9dbcefb`: 39 explicitly declared callables on
+public types, generated members, nested support and retained state. The scope
+covers identity/validation, callback and artifact aliasing, deterministic CSR
+planning, direct dependency access and declared budget/work lifecycle limits.
+It does not include a generic executor, cache, persistence codec, package test
+body, source-complete module or runtime admission. All repository execution is
+NOT_RUN in this documentation authoring/review pass; hosted exact-commit CI is
+separate evidence. Historical custody/qualification records retain their scope.
+Earlier inventory rows remain historical; this additive map does not claim
+whole-repository semantic completion or new product authority.
+
+## Retained shared-array source-review increment
+
+The [retained shared-array reference](retained-shared-array-reference.md) and
+[coverage companion](retained-shared-array-reference-coverage.md) account for
+all eight physical Java bodies in the retained
+`com.synexia.indexstring.shared` package at
+`363c02caa2e5af1df9460b927ecd78f6a9dbcefb`, including their nested/private
+support. Two complete C++ bodies provide supporting JNI evidence, outside that
+eight-file primary denominator. Namespace/content/descriptor/language identity,
+input stability, mapping lifetime, copying, conversion caches, corruption and
+quota effects are source-reviewed. No retained shared-array tests are present;
+missing native inputs and a conditional registration-signature mismatch remain
+explicit. Runtime/build/JNI/cross-process/GC/resource verification is NOT_RUN in this
+documentation pass; hosted CI remains separate exact-commit evidence.
+This does not promote the custody slice, fixture, separate bridge, or canonical
+JDK String owner into interchangeable implementation authorities.
