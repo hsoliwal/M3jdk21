@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 JDK-8364182 source lineage proof
+
+on:
+  pull_request:
+    paths:
+      - 'm3/backports/recipes/jdk-8364182/adaptation.tsv'
+      - 'm3/backports/verify.py'
+      - 'm3/backports/test_jdk8364182_source_lineage.py'
+      - 'm3/docs/jdk8364182-vmsymbols-superseded-state-20261011.md'
+      - '.github/workflows/m3-jdk8364182-superseded-vmsymbols.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-lineage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: 1 - Diff and Python syntax
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 -m py_compile m3/backports/verify.py m3/backports/test_jdk8364182_source_lineage.py
+      - name: 2 - JDK-8364182 exact source lineage differential tests
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v m3.backports.test_jdk8364182_source_lineage
+      - name: 3 - Existing full backport catalogue/implementation integrity gate
+        run: |
+          set -euo pipefail
+          python3 m3/backports/verify.py --root .
