@@ -240,3 +240,13 @@ with exact UTF-16/byte domains, candidate limits, workspace preparation and
 callback/error boundaries. This is source documentation; builds, tests and
 runtime/resource qualification remain NOT_RUN in this documentation authoring/review
 pass. Hosted CI is separate exact-commit evidence, not established by this static review.
+
+
+## Module-pack inspection kernel contracts (2026-10-15)
+
+- [Module-pack inspection kernel reference](module-pack-kernel-reference.md): all four artifact/inspector/graph/CLI owners, exact archive and class-header rules, selected metadata closure, TSV effects and resource/error boundaries
+- [Complete four-owner member and test-source ledger](module-pack-kernel-source-coverage.md): pinned source/policy hashes, seven fully read kernel test/helper bodies and bounded OpenRewrite caller evidence
+
+This supplements the existing module-pack README. Source review and configured gates are distinct from execution, image/runtime admission and completion of other module packs; repository tests and builds were NOT_RUN in this documentation authoring/review pass.
+
+Hosted CI is separate exact-commit/workflow evidence and does not change these execution or admission limits.

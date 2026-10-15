@@ -299,3 +299,12 @@ Source-build/packaging receiver for existing OpenNLP, Lucene and logging tool im
 - Test/harness location: [m3/tooling/module-packs/nlp-search](https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/tooling/module-packs/nlp-search) (source location only; NOT_RUN)
 - Packages: [complete source-directory ledger](packages/README.md), [M3 contracts](m3-packages.md) and [descriptor ledger](descriptors.md)
 - Boundaries and gaps: Existing historical Linux receipts retain their scope; this pass did not rerun training, search, upstream suites or target JDK qualification. Full module/API/caller reconciliation and exact-head qualification remain open.
+
+
+## Module-pack kernel workstream routing (2026-10-15)
+
+Within [Maven/OpenRewrite tooling](#project-21), the [module-pack inspection kernel reference](module-pack-kernel-reference.md) now documents the four-owner artifact/inspector/graph/CLI contract, with [exact member, test-source and build/caller evidence](module-pack-kernel-source-coverage.md). The declared aggregation route is `m3/pom.xml` → `tooling/module-packs/pom.xml` → `kernel/pom.xml`; aggregation does not imply parent inheritance or an executed reactor.
+
+This closes that bounded source-contract documentation gap only. It supplements the existing module-pack README and leaves recipe-family, assembler, [text SDK](#project-22), [NLP/search](#project-23), JavaFX and target image/runtime qualifications separate. Builds, tests and recipes were NOT_RUN in this documentation authoring/review pass.
+
+Hosted CI is separate exact-commit/workflow evidence and does not change these execution or admission limits.
