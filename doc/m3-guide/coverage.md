@@ -488,3 +488,12 @@ gap, not behavior/resource/runtime qualification or package/module/project/
 repository completion. Builds, tests, examples and policy/recipe verifiers are
 NOT_RUN in this documentation authoring/review pass. Hosted CI is separate
 exact-commit evidence, not established by this static review.
+
+
+## Module-pack inspection kernel contracts (2026-10-15)
+
+The [kernel reference](module-pack-kernel-reference.md) and [source/member/test ledger](module-pack-kernel-source-coverage.md) complete the bounded source-contract review of four `com.m3.tools.modulepack` owners (335 lines) at `510dfa27b0679ce33348140afc57b558b8853802`. Every declared member and generated record surface is routed; all seven kernel test/helper bodies (844 lines) were read, plus the direct OpenRewrite inventory caller and its relevant test assertions. The JPMS descriptor and three-POM root-reactor route are supporting evidence, not extra implementation owners.
+
+This refines the earlier package-42 sample with exact archive/hash/effective-view/class-header/refusal, selected graph, ownership/concurrency/resource and CLI contracts. Metadata closure is not Java module resolution, class loading, dependency retrieval or pack/image admission. Historical receipts retain their original scope. Repository builds/tests/scripts, recipes, policy verifiers, native/runtime qualification and benchmarks were NOT_RUN in this documentation authoring/review pass; other module packs, recipe families and repository completion remain outside this denominator.
+
+Hosted CI is separate exact-commit/workflow evidence and does not change these execution or admission limits.

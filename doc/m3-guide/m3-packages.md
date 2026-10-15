@@ -1151,3 +1151,12 @@ Source review: 15 October 2026 at `c842fab8cf5b799257e3c9ea07f8baddde80db09`.
 The [frozen-text compatibility reference](frozen-text-compatibility-reference.md) and [complete four-source/member map](frozen-text-compatibility-source-coverage.md) supersede the earlier [package-4](#package-4) sample-only contract routing for this exact fixture root at `c842fab8cf5b799257e3c9ea07f8baddde80db09`. Its contents are two frozen-storage snapshots, a throwing `MIndexAddressedView` shim and `SynexiaMappedStorageTest`; there are no joined-view owners here. The separate [retained-port bridge](indexed-string-reference.md) keeps its own physical root and source pin.
 
 The [actual test map](frozen-text-compatibility-source-coverage.md#actual-test-to-contract-map) resolves the previously unmapped route: the package-local direct-memory test and unnamed-package `SynexiaContractTest` are compiled by `m3/compatibility/check-synexia.py` into separate reference-test classes alongside the `com.m3.text` product module path. Full source/member contracts and test assertions are reviewed, while execution is NOT_RUN; package Javadoc, broader consumer/alias/error coverage and runtime qualification remain open. This is additive current-source guidance, not a change to the earlier sample's evidence state.
+
+
+## Module-pack kernel contract supplement (2026-10-15)
+
+The [package-42](#package-42) historical artifact sample is supplemented by a [complete four-owner kernel reference](module-pack-kernel-reference.md) and [source/member/test ledger](module-pack-kernel-source-coverage.md). At `510dfa27b0679ce33348140afc57b558b8853802`, all 335 lines of `M3ModuleArtifact`, `M3ModuleInspector`, `M3ModuleGraph` and `M3ModuleInventory`, their declared/generated surfaces, seven test/helper bodies and the bounded direct adapter route were read. The supplement records exact errors, effects, resource/ownership limits and test assertion strength without changing the earlier sample's historical pin.
+
+No package-info file was added; recipe-package completion, whole-project caller closure and exact-head execution remain separate. Builds, tests, recipes and runtime/native qualification were NOT_RUN in this documentation authoring/review pass.
+
+Hosted CI is separate exact-commit/workflow evidence and does not change these execution or admission limits.
