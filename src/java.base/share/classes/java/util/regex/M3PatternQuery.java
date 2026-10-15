@@ -112,7 +112,7 @@ final class M3PatternQuery {
         private final boolean[] repeated;
         private final boolean[] empty;
         // Optional derived metadata belongs to this plan, never to M3String or its backing.
-        // 128 character masks + six epsilon jumps + initial/accepting state = 1,088 bytes.
+        // Scalar: 136 longs. Wide: 137 planes of <=5 words; at most 5,480 payload bytes.
         private final long[] ascii;
         private final long repeatedStates;
 
@@ -127,14 +127,15 @@ final class M3PatternQuery {
                 }
             }
             this.repeatedStates = stars;
-            this.ascii = prepareAscii(atoms, empty, stars);
+            this.ascii = atoms.length <= 63 ? prepareAscii(atoms, empty, stars)
+                    : prepareWideAscii(atoms, repeated, empty);
         }
 
         /**
          * Reuses JDK predicates as semantic authority. Bit j represents the prefix of j atoms;
          * a starred atom adds an epsilon edge from j-1 to j. Doubling masks summarize runs
          * of 1, 2, 4, 8, 16 and 32 such edges without an input-length-sized DP allocation.
-         * Programs beyond 63 atoms retain the original rolling-row implementation.
+         * The scalar layout remains unchanged; larger programs use bounded word planes.
          */
         private static long[] prepareAscii(Pattern.CharPredicate[] atoms, boolean[] empty,
                                           long stars) {
@@ -167,6 +168,7 @@ final class M3PatternQuery {
         int matches(String input) {
             long[] masks = ascii;
             if (masks == null) return matchesRolling(input);
+            if (atoms.length > 63) return matchesWideAscii(input, masks);
             long state = masks[134];
             for (int offset = 0; offset < input.length(); offset++) {
                 char unit = input.charAt(offset);
@@ -191,7 +193,82 @@ final class M3PatternQuery {
             return (state & masks[135]) != 0L ? 1 : 0;
         }
 
-        /** Original one-row DP kept as the non-ASCII and larger-program authority. */
+        /** Prepare optional word planes for the already admitted 64..256 atom domain. */
+        private static long[] prepareWideAscii(Pattern.CharPredicate[] atoms,
+                                              boolean[] repeated, boolean[] empty) {
+            int words = (atoms.length >>> 6) + 1;
+            try {
+                long[] masks = new long[137 * words];
+                for (int atom = 0; atom < atoms.length; atom++) {
+                    int state = atom + 1;
+                    int word = state >>> 6;
+                    long bit = 1L << (state & 63);
+                    if (repeated[atom]) masks[136 * words + word] |= bit;
+                    for (int unit = 0; unit < 128; unit++) {
+                        if (atoms[atom].is(unit)) masks[unit * words + word] |= bit;
+                    }
+                }
+                for (int word = 0; word < words; word++) {
+                    long jump = masks[136 * words + word];
+                    for (int level = 0, shift = 1; level < 6; level++, shift <<= 1) {
+                        masks[(128 + level) * words + word] = jump & (-1L << shift);
+                        jump &= jump << shift;
+                    }
+                }
+                for (int state = 0; state < empty.length; state++) {
+                    if (empty[state]) masks[134 * words + (state >>> 6)] |= 1L << (state & 63);
+                }
+                masks[135 * words + (atoms.length >>> 6)] = 1L << (atoms.length & 63);
+                return masks;
+            } catch (OutOfMemoryError optionalMetadataUnavailable) {
+                return null;
+            }
+        }
+
+        /**
+         * One invocation-local frontier, at most five words. OLD predecessor carry advances
+         * a consuming edge; NEW closed predecessor carry advances an epsilon edge. Keeping
+         * those carries distinct permits serial in-place updates across 64-bit boundaries.
+         * A dead frontier does not bypass later non-ASCII/surrogate interpretation.
+         */
+        private int matchesWideAscii(String input, long[] masks) {
+            int words = (atoms.length >>> 6) + 1;
+            long[] state = new long[words];
+            System.arraycopy(masks, 134 * words, state, 0, words);
+            for (int offset = 0; offset < input.length(); offset++) {
+                char unit = input.charAt(offset);
+                if (unit >= 128) {
+                    boolean[] row = new boolean[atoms.length + 1];
+                    for (int atom = 0; atom <= atoms.length; atom++) {
+                        row[atom] = ((state[atom >>> 6] >>> (atom & 63)) & 1L) != 0L;
+                    }
+                    return matchesRolling(input, row, offset);
+                }
+                long oldCarry = 0L;
+                long closedCarry = 0L;
+                for (int word = 0; word < words; word++) {
+                    long before = state[word];
+                    long stars = masks[136 * words + word];
+                    long shifted = (before << 1) | oldCarry;
+                    long next = ((shifted & ~stars) | (before & stars))
+                            & masks[unit * words + word];
+                    next |= closedCarry & stars;
+                    next |= (next << 1) & masks[128 * words + word];
+                    next |= (next << 2) & masks[129 * words + word];
+                    next |= (next << 4) & masks[130 * words + word];
+                    next |= (next << 8) & masks[131 * words + word];
+                    next |= (next << 16) & masks[132 * words + word];
+                    next |= (next << 32) & masks[133 * words + word];
+                    state[word] = next;
+                    oldCarry = before >>> 63;
+                    closedCarry = next >>> 63;
+                }
+            }
+            int last = atoms.length >>> 6;
+            return (state[last] & masks[135 * words + last]) != 0L ? 1 : 0;
+        }
+
+        /** Original one-row DP kept as the non-ASCII and optional-metadata fallback. */
         private int matchesRolling(String input) {
             return matchesRolling(input, empty.clone(), 0);
         }
