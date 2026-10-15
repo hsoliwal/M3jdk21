@@ -185,32 +185,32 @@ final class M3StringRegexDp {
         return result;
     }
 
-    /** Larger admitted patterns keep the existing O(pattern)-space rolling recurrence. */
+    /** Larger admitted patterns use one row and a saved previous-row diagonal. */
     private static int rolling(M3String source, Plan plan) {
         int count = plan.atoms.length;
-        boolean[] previous = new boolean[count + 1];
-        boolean[] current = new boolean[count + 1];
-        previous[0] = true;
+        boolean[] row = new boolean[count + 1];
+        row[0] = true;
         for (int j = 1; j <= count; j++) {
-            previous[j] = (plan.atoms[j - 1] & STAR) != 0 && previous[j - 1];
+            row[j] = (plan.atoms[j - 1] & STAR) != 0 && row[j - 1];
         }
         for (int i = 0; i < source.length(); i++) {
             char value = source.charAt(i);
             if (Character.isSurrogate(value)) return UNKNOWN;
-            current[0] = false;
+            boolean diagonal = row[0];
+            row[0] = false;
             for (int j = 1; j <= count; j++) {
+                boolean previous = row[j];
                 int atom = plan.atoms[j - 1];
                 char required = (char) (atom & CODE_UNIT);
                 boolean accepts = required == '.' ? !isJdkLineTerminator(value) : required == value;
-                current[j] = (atom & STAR) != 0
-                        ? current[j - 1] || (accepts && previous[j])
-                        : accepts && previous[j - 1];
+                // Left is already the current row; previous and diagonal are still the old row.
+                row[j] = (atom & STAR) != 0
+                        ? row[j - 1] || (accepts && previous)
+                        : accepts && diagonal;
+                diagonal = previous;
             }
-            boolean[] swap = previous;
-            previous = current;
-            current = swap;
         }
-        return previous[count] ? MATCH : NO_MATCH;
+        return row[count] ? MATCH : NO_MATCH;
     }
 
     private static native long advance0(long address, int capacity, int start, int length,

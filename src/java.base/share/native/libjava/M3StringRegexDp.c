@@ -34,6 +34,16 @@ static int line_terminator(uint32_t unit) {
     return unit == 10U || unit == 13U || unit == 133U || unit == 8232U || unit == 8233U;
 }
 
+/* Input is nonzero; all consuming state bits are in [0,31]. No compiler-specific intrinsic. */
+static unsigned int lowest_token(uint32_t bits) {
+    unsigned int token = 0U;
+    if ((bits & UINT32_C(0xffff)) == 0U) { bits >>= 16U; token += 16U; }
+    if ((bits & UINT32_C(0xff)) == 0U) { bits >>= 8U; token += 8U; }
+    if ((bits & UINT32_C(0xf)) == 0U) { bits >>= 4U; token += 4U; }
+    if ((bits & UINT32_C(0x3)) == 0U) { bits >>= 2U; token += 2U; }
+    return token + ((bits & UINT32_C(1)) == 0U ? 1U : 0U);
+}
+
 JNIEXPORT jlong JNICALL Java_java_lang_M3StringRegexDp_advance0(
         JNIEnv *env, jclass ignored, jlong address, jint capacity, jint start, jint length,
         jint width, jboolean big_endian, jlong incoming, jintArray atom_array,
@@ -102,6 +112,32 @@ JNIEXPORT jlong JNICALL Java_java_lang_M3StringRegexDp_advance0(
     }
     begin = (uintptr_t) raw_address + (uintptr_t) skip;
     text = (const unsigned char *) begin;
+    /* Keep the historical small-plan loop: bit-index dispatch costs more at this size. */
+    if (count < 8) {
+        for (i = 0; i < length; i++) {
+            size_t at = (size_t) i * (size_t) width;
+            uint32_t unit = (uint32_t) text[at];
+            uint64_t next = 0;
+            int token;
+            if (width == 2) {
+                uint32_t second = (uint32_t) text[at + 1U];
+                unit = big_endian ? (unit << 8U) | second : (second << 8U) | unit;
+            }
+            if (unit >= UINT32_C(0xd800) && unit <= UINT32_C(0xdfff)) return (jlong) -1;
+            // Even a dead frontier reads the remaining units to retain surrogate refusal.
+            for (token = 0; token < (int) count; token++) {
+                uint32_t atom = (uint32_t) atoms[token];
+                uint32_t required = atom & UINT32_C(65535);
+                int accepts = required == (uint32_t) '.' ? !line_terminator(unit) : required == unit;
+                if (accepts && (state & (UINT64_C(1) << (unsigned int) token)) != 0) {
+                    int destination = (atom & M3_REGEX_STAR) != 0 ? token : token + 1;
+                    next |= (uint64_t) closure[destination];
+                }
+            }
+            state = next;
+        }
+        return (jlong) state;
+    }
     for (i = 0; i < length; i++) {
         size_t at = (size_t) i * (size_t) width;
         uint32_t unit = (uint32_t) text[at];
@@ -113,13 +149,31 @@ JNIEXPORT jlong JNICALL Java_java_lang_M3StringRegexDp_advance0(
         }
         if (unit >= UINT32_C(0xd800) && unit <= UINT32_C(0xdfff)) return (jlong) -1;
         // Even a dead frontier reads the remaining units to retain surrogate refusal.
-        for (token = 0; token < (int) count; token++) {
-            uint32_t atom = (uint32_t) atoms[token];
-            uint32_t required = atom & UINT32_C(65535);
-            int accepts = required == (uint32_t) '.' ? !line_terminator(unit) : required == unit;
-            if (accepts && (state & (UINT64_C(1) << (unsigned int) token)) != 0) {
-                int destination = (atom & M3_REGEX_STAR) != 0 ? token : token + 1;
-                next |= (uint64_t) closure[destination];
+        uint64_t active = state & (valid >> 1U); /* Exclude the accepting state. */
+        uint64_t rest = active & (active - UINT64_C(1));
+        if (active != 0U && (rest & (rest - UINT64_C(1))) == 0U) {
+            /* At most two consuming states: inspect only those tokens. */
+            do {
+                unsigned int sparse = lowest_token((uint32_t) active);
+                uint32_t atom = (uint32_t) atoms[sparse];
+                uint32_t required = atom & UINT32_C(65535);
+                int accepts = required == (uint32_t) '.' ? !line_terminator(unit) : required == unit;
+                if (accepts) {
+                    unsigned int destination = (atom & M3_REGEX_STAR) != 0 ? sparse : sparse + 1U;
+                    next |= (uint64_t) closure[destination];
+                }
+                active &= active - UINT64_C(1);
+            } while (active != 0U);
+        } else if (active != 0U) {
+            /* Dense frontiers retain the original bounded token scan. */
+            for (token = 0; token < (int) count; token++) {
+                uint32_t atom = (uint32_t) atoms[token];
+                uint32_t required = atom & UINT32_C(65535);
+                int accepts = required == (uint32_t) '.' ? !line_terminator(unit) : required == unit;
+                if (accepts && (state & (UINT64_C(1) << (unsigned int) token)) != 0) {
+                    int destination = (atom & M3_REGEX_STAR) != 0 ? token : token + 1;
+                    next |= (uint64_t) closure[destination];
+                }
             }
         }
         state = next;

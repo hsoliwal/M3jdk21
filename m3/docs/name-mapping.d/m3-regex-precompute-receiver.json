@@ -34,5 +34,23 @@
   ],
   "phase": "String",
   "family_completion": false,
-  "promotion": "HOLD"
+  "promotion": "HOLD",
+  "refinements": [
+    {
+      "date": "2026-10-15",
+      "recipe": "com.synexia.m3.RegexPrecomputeKernelTarget",
+      "target_preimage_commit": "6f2e3a3e5162ec9ead8369b8e2f101a05ac09800",
+      "scope": [
+        "one-row rolling DP for existing larger plans",
+        "original native loop below eight atoms; sparse specialization above; dense scan retained"
+      ],
+      "preserved": [
+        "all original mappings and pending capabilities",
+        "public API and fallback",
+        "precompute/cache/storage ownership",
+        "native ABI and surrogate-tail refusal"
+      ],
+      "acceptance": "CANDIDATE; exact recipe and Java/JNI fixtures required; full product HOLD"
+    }
+  ]
 }
