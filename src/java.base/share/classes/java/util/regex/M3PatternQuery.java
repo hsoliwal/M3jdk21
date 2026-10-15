@@ -172,15 +172,7 @@ final class M3PatternQuery {
             long state = masks[134];
             for (int offset = 0; offset < input.length(); offset++) {
                 char unit = input.charAt(offset);
-                // Convert the exact prefix frontier once, then continue the original DP.
-                // Do not stop at a dead frontier: a later surrogate must still produce -1.
-                if (unit >= 128) {
-                    boolean[] row = new boolean[atoms.length + 1];
-                    for (int atom = 0; atom <= atoms.length; atom++) {
-                        row[atom] = ((state >>> atom) & 1L) != 0L;
-                    }
-                    return matchesRolling(input, row, offset);
-                }
+                if (unit >= 128) return matchesBmp(input, masks, state, offset);
                 state = (((state << 1) & ~repeatedStates) | (state & repeatedStates))
                         & masks[unit];
                 state |= (state << 1) & masks[128];
@@ -191,6 +183,70 @@ final class M3PatternQuery {
                 state |= (state << 32) & masks[133];
             }
             return (state & masks[135]) != 0L ? 1 : 0;
+        }
+
+        /** Mixed-input phase owns its bounded two-symbol cache; the ASCII prefix is complete. */
+        private int matchesBmp(String input, long[] masks, long state, int start) {
+            int cachedUnit = -1;
+            int secondUnit = -1;
+            long cachedBits = 0L;
+            long secondBits = 0L;
+            for (int offset = start; offset < input.length(); offset++) {
+                char unit = input.charAt(offset);
+                long accepted;
+                if (unit < 128) {
+                    accepted = masks[unit];
+                } else {
+                    // The refusal marker remains observable even after a dead frontier.
+                    if (Character.isSurrogate(unit)) return -1;
+                    if (unit == cachedUnit) {
+                        accepted = cachedBits;
+                    } else if (unit == secondUnit) {
+                        accepted = secondBits;
+                    } else if (cachedUnit < 0) {
+                        cachedBits = predicateBits(unit, 0);
+                        cachedUnit = unit;
+                        accepted = cachedBits;
+                    } else if (secondUnit < 0) {
+                        secondBits = predicateBits(unit, 0);
+                        secondUnit = unit;
+                        accepted = secondBits;
+                    } else {
+                        // Bound predicate preparation to two symbols. High-diversity input
+                        // continues the original DP from this exact prefix, never from zero.
+                        boolean[] row = new boolean[atoms.length + 1];
+                        for (int atom = 0; atom <= atoms.length; atom++) {
+                            row[atom] = ((state >>> atom) & 1L) != 0L;
+                        }
+                        return matchesRolling(input, row, offset);
+                    }
+                }
+                state = (((state << 1) & ~repeatedStates) | (state & repeatedStates))
+                        & accepted;
+                state |= (state << 1) & masks[128];
+                state |= (state << 2) & masks[129];
+                state |= (state << 4) & masks[130];
+                state |= (state << 8) & masks[131];
+                state |= (state << 16) & masks[132];
+                state |= (state << 32) & masks[133];
+            }
+            return (state & masks[135]) != 0L ? 1 : 0;
+        }
+
+        /**
+         * Exact acceptance for one destination-state word, using only JDK predicates.
+         * This is invocation-local derived data, never another Unicode table or text store.
+         * The caller rejects surrogates before reaching this atom. Cache replacement must
+         * overwrite the whole word; bits from a previous character cannot be retained.
+         */
+        private long predicateBits(char unit, int word) {
+            long bits = 0L;
+            int first = Math.max(0, (word << 6) - 1);
+            int limit = Math.min(atoms.length, ((word + 1) << 6) - 1);
+            for (int atom = first; atom < limit; atom++) {
+                if (atoms[atom].is(unit)) bits |= 1L << ((atom + 1) & 63);
+            }
+            return bits;
         }
 
         /** Prepare optional word planes for the already admitted 64..256 atom domain. */
@@ -237,13 +293,7 @@ final class M3PatternQuery {
             System.arraycopy(masks, 134 * words, state, 0, words);
             for (int offset = 0; offset < input.length(); offset++) {
                 char unit = input.charAt(offset);
-                if (unit >= 128) {
-                    boolean[] row = new boolean[atoms.length + 1];
-                    for (int atom = 0; atom <= atoms.length; atom++) {
-                        row[atom] = ((state[atom >>> 6] >>> (atom & 63)) & 1L) != 0L;
-                    }
-                    return matchesRolling(input, row, offset);
-                }
+                if (unit >= 128) return matchesWideBmp(input, masks, state, offset);
                 long oldCarry = 0L;
                 long closedCarry = 0L;
                 for (int word = 0; word < words; word++) {
@@ -268,7 +318,69 @@ final class M3PatternQuery {
             return (state[last] & masks[135 * words + last]) != 0L ? 1 : 0;
         }
 
-        /** Original one-row DP kept as the non-ASCII and optional-metadata fallback. */
+        /** Mixed-input phase shares the invocation frontier, not a persistent cache. */
+        private int matchesWideBmp(String input, long[] masks, long[] state, int start) {
+            int words = state.length;
+            int cachedUnit = -1;
+            int secondUnit = -1;
+            long[] bmp = null;
+            for (int offset = start; offset < input.length(); offset++) {
+                char unit = input.charAt(offset);
+                long[] predicates = masks;
+                int predicateBase = unit * words;
+                if (unit >= 128) {
+                    if (Character.isSurrogate(unit)) return -1;
+                    if (bmp == null) bmp = new long[2 * words];
+                    if (unit == cachedUnit) {
+                        predicateBase = 0;
+                    } else if (unit == secondUnit) {
+                        predicateBase = words;
+                    } else if (cachedUnit < 0) {
+                        for (int word = 0; word < words; word++) {
+                            bmp[word] = predicateBits(unit, word);
+                        }
+                        cachedUnit = unit;
+                        predicateBase = 0;
+                    } else if (secondUnit < 0) {
+                        for (int word = 0; word < words; word++) {
+                            bmp[word + words] = predicateBits(unit, word);
+                        }
+                        secondUnit = unit;
+                        predicateBase = words;
+                    } else {
+                        boolean[] row = new boolean[atoms.length + 1];
+                        for (int atom = 0; atom <= atoms.length; atom++) {
+                            row[atom] = ((state[atom >>> 6] >>> (atom & 63)) & 1L) != 0L;
+                        }
+                        return matchesRolling(input, row, offset);
+                    }
+                    predicates = bmp;
+                }
+                long oldCarry = 0L;
+                long closedCarry = 0L;
+                for (int word = 0; word < words; word++) {
+                    long before = state[word];
+                    long stars = masks[136 * words + word];
+                    long shifted = (before << 1) | oldCarry;
+                    long next = ((shifted & ~stars) | (before & stars))
+                            & predicates[predicateBase + word];
+                    next |= closedCarry & stars;
+                    next |= (next << 1) & masks[128 * words + word];
+                    next |= (next << 2) & masks[129 * words + word];
+                    next |= (next << 4) & masks[130 * words + word];
+                    next |= (next << 8) & masks[131 * words + word];
+                    next |= (next << 16) & masks[132 * words + word];
+                    next |= (next << 32) & masks[133 * words + word];
+                    state[word] = next;
+                    oldCarry = before >>> 63;
+                    closedCarry = next >>> 63;
+                }
+            }
+            int last = atoms.length >>> 6;
+            return (state[last] & masks[135 * words + last]) != 0L ? 1 : 0;
+        }
+
+        /** Original one-row DP retained for unavailable optional plan metadata. */
         private int matchesRolling(String input) {
             return matchesRolling(input, empty.clone(), 0);
         }
