@@ -102,6 +102,31 @@ public final class LfCount {
         }
     }
 
+    /**
+     * One-shot, bounded JNI line-boundary scan. Package-local so that public
+     * LfCount methods and their v1 ABI retain their original contract.
+     */
+    static int[] nativeLineEnds(ByteBuffer buffer, int start, int length, int maxBreaks) {
+        check(buffer, start, length);
+        if (!buffer.isDirect()) throw new IllegalArgumentException("direct buffer required");
+        if (length > SourceArtifact.MAX_BYTES || maxBreaks < 0
+                || maxBreaks > ByteLineIndex.MAX_LINE_BREAKS) {
+            throw new IllegalArgumentException("native line-index bounds");
+        }
+        if (!available) throw new IllegalStateException("native LF kernel not installed");
+        if (Thread.currentThread().isInterrupted()) {
+            throw new java.util.concurrent.CancellationException("line-index interrupted");
+        }
+        try {
+            return lineEnds0(buffer, start, length, maxBreaks);
+        } catch (UnsatisfiedLinkError missingExtension) {
+            throw new IllegalStateException("installed native LF library lacks line-index symbol",
+                    missingExtension);
+        }
+    }
+
+    private static native int[] lineEnds0(ByteBuffer buffer, int start, int length, int maxBreaks);
+
     private static native int abi0();
     private static native long countLf0(ByteBuffer buffer, int start, int length);
 }

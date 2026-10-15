@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.runtime.proof;
 
+import com.m3.runtime.capability.ByteLineIndex;
 import com.m3.runtime.capability.LfCount;
 import com.m3.runtime.capability.SourceArtifact;
 import com.m3.runtime.capability.WorkingSet;
@@ -20,6 +21,13 @@ public final class CapabilityImageSmoke {
         if (working.reservedBytes() != 0
                 || LfCount.javaCount(ByteBuffer.wrap(new byte[]{0, 10, 10}), 0, 3) != 2) {
             throw new AssertionError("actual linked image source-bytes contract");
+        }
+        ByteLineIndex lines = ByteLineIndex.javaIndex(source.whole());
+        if (lines.lineCount() != 3 || lines.startOffset(0) != 0
+                || lines.startOffset(1) != 1 || lines.startOffset(2) != 3
+                || lines.lineAtOffset(2) != 1 || lines.content(0).length() != 0
+                || lines.line(1).length() != 2) {
+            throw new AssertionError("actual linked image immutable byte-line index contract");
         }
         System.out.println("M3_CAPABILITY_DEVELOPER_IMAGE_PASS");
     }

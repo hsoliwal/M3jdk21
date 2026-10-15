@@ -72,6 +72,21 @@ def main():
         accelerated = 'NOT_RUN'
     if 'kernel=JAVA_BYTEBUFFER' not in pure:
         raise RuntimeError('Java-only proof did not run')
+    # Source-preserving line-index proof is independent of the preexisting LF
+    # count assertions and executes in both stock-JDK21 and JNI configurations.
+    line_class = 'com.m3.runtime.capability.ByteLineIndexChecks'
+    line_options = [java, '-Xmx128m', '-Xcheck:jni', '--module-path', classes,
+                    '--module', 'com.m3.runtime.capability/' + line_class]
+    java_lines = run(out, 'line-index-java-oracle', line_options)
+    if 'M3_BYTE_LINE_INDEX_PASS assertions=' not in java_lines or 'kernel=JAVA_SOURCE_RANGE' not in java_lines:
+        raise RuntimeError('line-index Java contract oracle did not execute')
+    native_lines = 'NOT_RUN'
+    if not args.java_only:
+        native_lines = run(out, 'line-index-jni-oracle', [*line_options,
+                           library.resolve(), sha(library)])
+        if 'M3_BYTE_LINE_INDEX_PASS assertions=' not in native_lines or 'kernel=JNI_DIRECT_C11' not in native_lines:
+            raise RuntimeError('line-index JNI contract oracle did not execute')
+
     image_proof = 'NOT_RUN'
     if args.developer_image:
         jmod, jlink = shutil.which('jmod'), shutil.which('jlink')
@@ -117,7 +132,8 @@ def main():
               'status': 'JAVA_JNI_PARITY_PASS' if not args.java_only else 'JAVA_ONLY_PASS',
               'full_openjdk_jtreg': 'NOT_RUN', 'maven_openrewrite_sdk': 'NOT_RUN',
               'performance_crossover': 'NOT_RUN',
-              'stock_jdk21_developer_image': image_proof}
+              'stock_jdk21_developer_image': image_proof,
+              'byte_line_java': java_lines, 'byte_line_jni': native_lines}
     (out / 'REPORT.json').write_text(json.dumps(report, indent=2, sort_keys=True) + '\n')
     print(json.dumps({'status': report['status'], 'java': pure, 'jni': accelerated, 'image': image_proof}))
 
