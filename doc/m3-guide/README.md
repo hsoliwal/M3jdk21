@@ -215,3 +215,28 @@ For Lucene integration opportunities, see the [canonical String opportunity refe
 
 - [OpenNLP string opportunity reference](opennlp-string-opportunity-reference.md): source-pinned token/span, dictionary, feature and normalization candidates; separates the existing 2.4 tool pack from the 3.x research fork, with model/state/offset boundaries and matched-interpreter qualification criteria
 - [OpenNLP opportunity source coverage](opennlp-string-opportunity-source-coverage.md): exact public source identities and explicit unexecuted gates
+
+
+## Core text storage member continuation, 15 October 2026
+
+The [core storage member reference](core-storage-reference.md) and
+[exact six-source/member/test map](core-storage-source-coverage.md) add systematic
+constructor, state, accessor, generated/inherited-member and image-lookup
+contracts to the existing six-owner storage overview. They cover the same six
+unchanged public bodies at `510dfa27b0679ce33348140afc57b558b8853802` (427 lines),
+including trusted local admission, record versus piece equality, mapped lookup
+versus checked local copy, and finite tests read **NOT_RUN in this documentation pass**. Hosted CI remains
+separate exact-commit/workflow evidence. Historical coverage
+and the seventeen-owner package denominator remain intact; this is documentation
+depth, not runtime/whole-package completion or Lucene/OpenNLP optimization proof.
+
+## Precompute base-fact contracts, 2026-10-15
+
+The [base text-fact and exact-distance reference](precompute-base-facts-reference.md)
+and [complete member/source/test ledger](precompute-base-facts-source-coverage.md)
+deepen the five existing Metrics, Signals, Histogram, EditDistancePlan and
+Progress owners. They preserve the earlier overview and batch/regex/CPU routes,
+with exact UTF-16/byte domains, candidate limits, workspace preparation and
+callback/error boundaries. This is source documentation; builds, tests and
+runtime/resource qualification remain NOT_RUN in this documentation authoring/review
+pass. Hosted CI is separate exact-commit evidence, not established by this static review.

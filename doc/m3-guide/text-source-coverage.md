@@ -172,3 +172,30 @@ No empty search result is used as proof that additional callers cannot exist.
 [SM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/synexia-source-manifest.tsv
 [FM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/synexia-precompute-field-map.tsv
 [EX]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/SYNEXIA_EXPORT.md
+
+
+## Six-owner member-depth continuation, 15 October 2026
+
+The historical seventeen-source table above remains unchanged. The following
+additive routes extend its same six storage rows from the earlier selected
+contract overview to complete declared-member/state/helper/accessor coverage at
+`510dfa27b0679ce33348140afc57b558b8853802`. Each current blob was freshly checked
+and still equals its historical table identity. This changes reference depth,
+not the package's seventeen-file denominator or the prior review's dated scope.
+
+| Existing storage row | Additive member route |
+| --- | --- |
+| JoinedM3StringPiece.java | [Non-public flat directory](core-storage-reference.md#joinedm3stringpiece-non-public-flat-directory) |
+| LocalM3Arena.java | [Allocation and trusted admission](core-storage-reference.md#localm3arena-allocation-and-trusted-admission) |
+| LocalM3StringPiece.java | [Backing, encoding and range members](core-storage-reference.md#localm3stringpiece-immutable-public-view-over-trusted-owned-bytes) |
+| M3StringPiece.java | [Declared and inherited surface](core-storage-reference.md#m3stringpiece-declared-and-inherited-surface) |
+| SharedLexiconImage.java | [State, validation and lookup/copy boundaries](core-storage-reference.md#sharedlexiconimage-state-and-validation) |
+| StorageIdentity.java | [Record components and generated value semantics](core-storage-reference.md#storageidentity-record-value-not-admission-authority) |
+
+The [exact source/member/test map](core-storage-source-coverage.md) accounts for
+all six bodies (427 lines), generated/inherited members separately, selected
+catalog/PrefixZ callers and finite FoundationTest assertions. Tests and repository
+execution are **NOT_RUN in this documentation pass**. Hosted CI remains separate
+exact-commit/workflow evidence. The six catalog owners and five projection/tool/receipt
+owners keep their existing routes; bootstrap String, retained MIndexString,
+joined-array and mapped/native backing owners remain physically separate.

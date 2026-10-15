@@ -449,3 +449,42 @@ The proposal preserves mutable token buffers, original UTF-16 offsets and graph 
 ## OpenNLP string opportunity research — 2026-10-15
 
 The [OpenNLP opportunity reference](opennlp-string-opportunity-reference.md) maps bounded 3.x source candidates while preserving the separate 2.4 received-tool-pack baseline. [Exact source coverage](opennlp-string-opportunity-source-coverage.md) records the inspected API/implementation/policy/test/JMH identities. This is documentation-only: no new runtime owner, source adaptation, model change, benchmark result or phase advancement. String/runtime/model differential and retained-memory qualification remain pending; active M3 storage is interpreter-only under the current gate.
+
+
+## Core storage declared-member closure, 15 October 2026
+
+The [core storage reference](core-storage-reference.md) and
+[source/member/test ledger](core-storage-source-coverage.md) close the systematic
+member-depth gap for exactly JoinedM3StringPiece, LocalM3Arena,
+LocalM3StringPiece (including Encoding), M3StringPiece, SharedLexiconImage and
+StorageIdentity: six public-source bodies, 427 lines, pinned to
+`510dfa27b0679ce33348140afc57b558b8853802`. JoinedM3StringPiece remains a
+package-private type. All declared fields, constructors, methods, nested types
+and record components are routed; generated/inherited surface is labelled
+separately. Trusted handoffs and digest-bypassing mapped lookup helpers are
+explicit, without promoting them to public admission guarantees.
+
+This is additive to the historical text/storage overview and seventeen-source
+map, not six newly covered physical files. FoundationTest was fully read and
+bounded assertions were attributed; repository builds, tests, policy verifiers,
+native/runtime gates and benchmarks remain **NOT_RUN in this documentation
+pass**. Hosted CI remains separate exact-commit/workflow evidence. Existing histories,
+catalog/projection scopes, receiver phases and false completion flags remain
+unchanged. No implementation, policy, configuration or workflow change is implied.
+
+## Precompute base-fact member routing, 2026-10-15
+
+The [base-fact reference](precompute-base-facts-reference.md) and
+[source/member/test ledger](precompute-base-facts-source-coverage.md) add
+systematic declared-member contracts for the five previously overview-only
+`com.m3.precompute` owners, including package-private `M3Histogram` and the
+nested edit workspace. All 965 primary source lines and seven direct test
+methods were read. This adds no physical owner to the existing 23-file map and
+recounts none of the eighteen batch/regex/CPU owners. The earlier overview dates
+and limits remain historical evidence; the
+[dated routing addendum](precompute-source-coverage.md#base-fact-contract-routing-addendum-2026-10-15)
+records the deeper routes. Source documentation closes only that member-routing
+gap, not behavior/resource/runtime qualification or package/module/project/
+repository completion. Builds, tests, examples and policy/recipe verifiers are
+NOT_RUN in this documentation authoring/review pass. Hosted CI is separate
+exact-commit evidence, not established by this static review.

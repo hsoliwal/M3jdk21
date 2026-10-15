@@ -64,3 +64,30 @@ The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md) keeps
 String → arrays → collections → AST/compiler → remaining families as the
 receiving order. This ledger is documentation/navigation only and changes no
 receiving status, code, build profile, runtime owner or provenance authority.
+
+## Base-fact contract routing addendum, 2026-10-15
+
+The preceding table preserves its earlier evidence date and selected-method
+overview depth. The following reviewed reference routes deepen exactly those
+five existing base owners; they supersede only the systematic member-enumeration
+gaps in those five rows. No earlier byte, owner count or test qualification is
+removed. The eighteen batch/regex/CPU routes retain their existing scope.
+
+| Existing owner | Dedicated source-contract route | Qualification still open |
+| --- | --- | --- |
+| `M3TextMetrics` | [Components, construction, scan and seam composition](precompute-base-facts-reference.md#metrics-components-construction-and-composition) | Executed inconsistent-record, mutable-input, encoding overflow and resource cases |
+| `M3TextSignals` | [Flags, preparation, composition, exact counts and candidate/sketch bounds](precompute-base-facts-reference.md#signals-stable-facts-and-candidate-boundaries) | Full adversarial/collision/filter/classification/q-gram and allocation/runtime evidence |
+| `M3Histogram` | [Internal ownership, sort/merge/search/L1 and payload accounting](precompute-base-facts-reference.md#histogram-internal-ownership-and-arithmetic) | Corruption/overflow/allocation tests; remains package-private, not a public API |
+| `M3EditDistancePlan` | [Public and inherited surface, query dispatch, budgets and workspace rows](precompute-base-facts-reference.md#edit-distance-plan-and-workspace) | Callback/reentrancy/concurrency/mutable-source, budget-edge and full-operation cost execution |
+| `M3Progress` | [Singleton/default declarations and actual caller cadence](precompute-base-facts-reference.md#progress-defaults-and-actual-caller-cadence) | Throwing callback/cancellation/early-return tests per caller; no universal balancing guarantee |
+
+The [exact member/source/test ledger](precompute-base-facts-source-coverage.md)
+accounts for 965 primary lines, all declared members and seven read test methods,
+with generated/inherited surfaces and support files kept separate. The scoped
+23 physical production files now have five base plus eighteen batch/regex/CPU
+dedicated source routes. This is documentation routing, not complete test,
+package, module, project, repository or runtime acceptance. All builds, tests,
+examples, recipes/policy verifiers, benchmarks and runtime/resource qualification
+are NOT_RUN in this documentation authoring/review pass. Hosted CI is separate
+exact-commit evidence, not established by this static review. Historical evidence
+remains unchanged.
