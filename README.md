@@ -35,6 +35,85 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 | **The actual runtime** — OpenJDK-derived Java 21 sources and M3 integration areas | [JDK sources](src/) · [M3 runtime integration](m3/runtime-integration/) |
 | **Release discipline** — what is admitted, tested, measured or still exploratory | [Release evidence](m3/release/README.md) · [Machine-readable contract](m3/release/release-contract.json) |
 
+<!-- fork-homepage-guide:begin -->
+## A first experiment: learn the representation before the runtime
+
+This fork starts from [OpenJDK 21](https://github.com/openjdk/jdk21), then adds
+M3-specific libraries, runtime candidates, recipes and evidence. The independent
+text module is the smallest entry point: you can inspect its ownership model
+without installing a replacement JDK or changing your system Java.
+
+### Six concepts to keep separate
+
+| Concept | Meaning in this tree | Important boundary |
+| --- | --- | --- |
+| Payload | The immutable character storage owned by a piece | A view can keep the whole backing alive |
+| Range/view | A start and length into that storage | Coordinates are UTF-16 code units, not code points |
+| Composition | A directory of immutable leaf ranges | Sharing characters still allocates directory objects |
+| Sidecar/precompute | Metadata or prepared work associated with data | Construction, retention and synchronization have costs |
+| Recipe/receipt | A reproducible transformation and its exact source/target record | Custody and transformation checks do not prove runtime behavior |
+| Matched image | Java classes, HotSpot and native pieces built together | A library JAR or unrelated stock VM is not this artifact |
+
+### Quickstart: the independent foundation
+
+Use Git, Bash 4+ (the script uses `mapfile`), a full JDK 21, and the shell utilities
+used by [m3/build.sh](m3/build.sh), including `sha256sum`. Run from the checkout root:
+
+```sh
+git clone https://github.com/hsoliwal/M3jdk21.git
+cd M3jdk21
+git rev-parse HEAD
+export M3_JDK=/absolute/path/to/jdk-21
+"$M3_JDK/bin/java" -version
+bash m3/build.sh
+```
+
+A successful script produces `m3/build/com.m3.text.jar`, logs under
+`m3/build/logs/`, and a small fixture image. Stop on failure and inspect the logs;
+the presence of an earlier JAR does not mean the full script passed. This route
+tests the separate module in several VM modes, not the modified JDK's acceptance.
+
+After a successful build, open JShell with the module:
+
+```sh
+"$M3_JDK/bin/jshell" --module-path m3/build/com.m3.text.jar --add-modules com.m3.text
+```
+
+```java
+import com.m3.text.*;
+var original = new LocalM3Arena().copyUtf16("ABCDE".toCharArray());
+var middle = original.subSequence(1, 4);
+var joined = M3StringPiece.join(middle, original.subSequence(4, 5));
+System.out.println(middle.flatten()); // expected: BCD
+System.out.println(joined.flatten()); // expected: BCDE
+```
+
+The original is copied into owned immutable storage. The two ranges share that
+storage; the join records leaves; each `flatten()` explicitly allocates a normal
+String. Follow [LocalM3Arena](m3/core/src/com/m3/text/LocalM3Arena.java),
+[M3StringPiece](m3/core/src/com/m3/text/M3StringPiece.java), and the
+[worked source tour](m3/docs/first-session-guide.md) to see where each cost occurs.
+The comments are source-derived expectations, not captured output from this documentation update.
+
+### Command and evidence cheat sheet
+
+| Question | Command or route | What to read in the result |
+| --- | --- | --- |
+| Which checkout is this? | `git rev-parse HEAD` | Record the exact revision with every result |
+| Does the foundation manifest match? | `python3 m3/recipes/apply.py --check` | Investigate refusals; do not weaken hash guards |
+| Does the control-plane reactor verify? | `mvn -B -ntp -f m3/pom.xml clean verify` | Recipe/admission evidence, with Maven and its pinned dependencies |
+| How do I build the runtime? | [Native build guide](m3/docs/native-build.md) | Host prerequisites, boot JDK and matched-image output |
+| What has actually been admitted? | [Release contract](m3/release/release-contract.json) and [current String phase](m3/synexia-import/current-full-borrow/STRING_PHASE.md) | Exact scope and still-open gates |
+
+At the reviewed baseline, the release contract records the immutable text
+foundation as implemented with a repository test surface. It explicitly does
+not claim full String replacement, full regex precompute, full jtreg compatibility,
+qualified arrays/collections/Eclipse integration, or performance superiority.
+Candidate source can exist without those gates being complete. This homepage
+update runs no product build and upgrades none of those claims.
+
+<!-- fork-homepage-guide:end -->
+
 ## Developer reading and verification routes
 
 For a hands-on source tour and command cheat sheet, see the [first-session guide](m3/docs/first-session-guide.md).
