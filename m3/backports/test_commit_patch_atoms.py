@@ -80,6 +80,23 @@ class CommitPatchAtomsTest(unittest.TestCase):
             self.assertTrue((out / "candidates/src/New.java").is_file())
             self.assertFalse((out / "candidates/src/Delete.java").exists())
 
+            # The exact same recipe run is an idempotent receipt replay.
+            self.assertEqual(
+                rows,
+                self.mod.materialize(
+                    donor, target, parent, commit,
+                    ["src/A.java", "src/Delete.java", "src/New.java"], out,
+                ),
+            )
+            receipt = out / "APPLICABILITY.tsv"
+            receipt.write_text("drifted receipt\\n", encoding="utf-8")
+            with self.assertRaises(ValueError):
+                self.mod.materialize(
+                    donor, target, parent, commit,
+                    ["src/A.java", "src/Delete.java", "src/New.java"], out,
+                )
+            self.assertEqual(before, (target / "src/A.java").read_bytes())
+
     def test_context_patch_can_apply_to_nonidentical_target_and_conflicts_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -106,6 +123,47 @@ class CommitPatchAtomsTest(unittest.TestCase):
             rows = self.mod.materialize(donor, target, parent, commit, ["src/A.java"], root / "bad")
             self.assertEqual("CONFLICT_CONTEXT", rows[0]["disposition"])
             self.assertFalse((root / "bad/candidates/src/A.java").exists())
+
+    def test_nul_delimited_git_status_refuses_newline_path(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp) / "donor"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+            self.write(repo, "src/A.java", "class A {}\\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "parent")
+            parent = self.git(repo, "rev-parse", "HEAD")
+            self.write(repo, "src/evil\\nname.java", "class Evil {}\\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "change")
+            commit = self.git(repo, "rev-parse", "HEAD")
+            with self.assertRaises(ValueError):
+                self.mod.changes(repo, parent, commit)
+
+    def test_output_symlink_does_not_write_through_to_target(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            donor, target, out = root / "donor", root / "target", root / "out"
+            subprocess.run(("git", "init", "-q", str(donor)), check=True)
+            self.git(donor, "config", "user.email", "fixture@example.invalid")
+            self.git(donor, "config", "user.name", "Fixture")
+            self.write(donor, "src/A.java", "class A {}\\n")
+            self.git(donor, "add", ".")
+            self.git(donor, "commit", "-q", "-m", "parent")
+            parent = self.git(donor, "rev-parse", "HEAD")
+            self.write(donor, "src/New.java", "class New {}\\n")
+            self.git(donor, "add", ".")
+            self.git(donor, "commit", "-q", "-m", "change")
+            commit = self.git(donor, "rev-parse", "HEAD")
+            out.mkdir()
+            target.mkdir()
+            (out / "patches").symlink_to(target)
+            with self.assertRaises(ValueError):
+                self.mod.materialize(
+                    donor, target, parent, commit, ["src/New.java"], out,
+                )
+            self.assertEqual([], list(target.iterdir()))
 
     def test_missing_selected_path_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
