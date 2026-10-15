@@ -35,6 +35,13 @@ jobs:
           java-version: "21"
           cache: maven
 
+      - name: Bootstrap source-vendored OpenRewrite and JUnit prerequisites
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl rewrite-java,rewrite-java-21,rewrite-test,junit-jupiter-5.10.2 \
+            -am -DskipTests install
+
       - name: Verify recipe substrate and DAG semantic kernel
         run: |
           mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am clean verify
