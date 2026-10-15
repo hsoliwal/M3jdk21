@@ -25,7 +25,9 @@ final class A3OutputFenceTest {
 
         A3Fs.write(root, target, "second\n");
         assertEquals("second\n", Files.readString(root.resolve(target)));
-        assertEquals(1L, Files.list(root.resolve("m3/build/a3/completion")).count());
+        try (var entries = Files.list(root.resolve("m3/build/a3/completion"))) {
+            assertEquals(1L, entries.count());
+        }
     }
 
     @Test
