@@ -3,7 +3,6 @@ package com.m3.a3;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -75,12 +74,7 @@ final class A3Fs {
     }
 
     static void write(Path root, Path out, String content) throws IOException {
-        Path target = out(root, out);
-        Files.createDirectories(target.getParent());
-        Files.writeString(
-                target,
-                Objects.requireNonNull(content, "content"),
-                StandardCharsets.UTF_8);
+        A3OutputFence.write(root, out, content);
     }
 
     static String cell(String value) {
