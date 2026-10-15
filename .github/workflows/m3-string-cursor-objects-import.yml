@@ -1,0 +1,85 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 String cursor Objects import receiver
+
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java'
+      - 'm3/backports/recipes/jdk-m3string-objects-import/**'
+      - '.github/workflows/m3-string-cursor-objects-import.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-custody:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact import-only postimage and negative proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 m3/backports/recipes/jdk-m3string-objects-import/verify_current.py --root .
+          python3 -m unittest discover -v             -s m3/backports/recipes/jdk-m3string-objects-import             -p test_verify_current.py
+
+  java21-image:
+    needs: source-custody
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install unchanged OpenJDK 21 build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends             autoconf make gcc g++ zip unzip             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+
+      - name: Configure real Java 21-compatible image
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure             --with-boot-jdk="$JAVA_HOME"             --with-debug-level=release             --with-jvm-variants=server             --disable-warnings-as-errors
+
+      - name: Build original OpenJDK image
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 images
+
+      - name: Smoke real JDK Java String and UTF-16 search
+        shell: bash
+        run: |
+          set -euo pipefail
+          JDK_BIN="$(find build -path '*/images/jdk/bin/java' -type f -print -quit)"
+          test -x "$JDK_BIN"
+          JDK_DIR="$(dirname "$JDK_BIN")"
+          "$JDK_BIN" --version
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          cat > "$tmp/CursorSmoke.java" <<'JAVA'
+          public final class CursorSmoke {
+              public static void main(String[] args) {
+                  String s = "alphaβalpha😀";
+                  if (s.indexOf("alpha") != 0
+                          || s.lastIndexOf("alpha") != 6
+                          || !s.contains("βa")
+                          || s.indexOf("not-here") != -1
+                          || !"😀".equals(s.substring(11, 13))) {
+                      throw new AssertionError("M3 String exact-search or UTF-16 contract drift");
+                  }
+                  System.out.println("M3_CURSOR_IMPORT_IMAGE_SMOKE_PASS");
+              }
+          }
+          JAVA
+          "$JDK_DIR/javac" "$tmp/CursorSmoke.java"
+          "$JDK_BIN" -cp "$tmp" CursorSmoke
