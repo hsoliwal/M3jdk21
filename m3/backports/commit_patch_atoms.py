@@ -255,12 +255,12 @@ def main() -> int:
     args = parser.parse_args()
 
     rows = materialize(
-        args.donor_repo.resolve(),
-        args.target_root.resolve(),
+        args.donor_repo.absolute(),
+        args.target_root.absolute(),
         args.parent,
         args.commit,
         read_paths(args.paths),
-        args.out.resolve(),
+        args.out.absolute(),
     )
     print(f"M3_PATCH_ATOMS={len(rows)}")
     return 0
