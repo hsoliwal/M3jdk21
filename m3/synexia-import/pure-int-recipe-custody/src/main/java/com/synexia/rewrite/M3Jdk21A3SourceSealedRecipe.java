@@ -224,13 +224,13 @@ abstract class M3Jdk21A3SourceSealedRecipe
             return file;
         }
         SourceFile candidate = parse(path, target.afterResource(), context);
-        return candidate.withId(file.getId())
-                .withSourcePath(file.getSourcePath())
-                .withMarkers(file.getMarkers())
-                .withFileAttributes(file.getFileAttributes())
-                .withCharset(file.getCharset())
-                .withCharsetBomMarked(file.isCharsetBomMarked())
-                .withChecksum(null);
+        candidate = candidate.withId(file.getId());
+        candidate = candidate.withSourcePath(file.getSourcePath());
+        candidate = candidate.withMarkers(file.getMarkers());
+        candidate = candidate.withFileAttributes(file.getFileAttributes());
+        candidate = candidate.withCharset(file.getCharset());
+        candidate = candidate.withCharsetBomMarked(file.isCharsetBomMarked());
+        return candidate.withChecksum(null);
     }
 
     private void requireAdmissible(Inventory inventory) {

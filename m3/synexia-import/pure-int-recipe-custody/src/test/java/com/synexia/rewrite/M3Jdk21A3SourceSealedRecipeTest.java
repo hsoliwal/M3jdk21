@@ -70,6 +70,30 @@ final class M3Jdk21A3SourceSealedRecipeTest {
         assertTrue(foreignRun.getChangeset().getAllResults().isEmpty());
     }
 
+    @Test
+    void serialPacketRefusesIncompleteAndDuplicateRequiredOwners() {
+        var recipe = new M3Jdk21A3SerialFileWorkRecipe();
+        String path = "src/main/java/com/m3/a3/A3.java";
+        var target = recipe.targetManifest().get(path);
+        var context = new InMemoryExecutionContext();
+        SourceFile source = parse(path, recipe.sourceImage(target.beforeResource()), context);
+        assertRefused(recipe, List.of(source), "missing A3Inv.java required owner");
+        assertRefused(recipe, List.of(source, source), "duplicate A3.java owner");
+    }
+
+    private static void assertRefused(Recipe recipe, List<SourceFile> sources, String description) {
+        var errors = new ArrayList<Throwable>();
+        try {
+            var results = recipe.run(new InMemoryLargeSourceSet(sources),
+                    new InMemoryExecutionContext(errors::add)).getChangeset().getAllResults();
+            assertTrue(results.isEmpty(), description);
+            assertFalse(errors.isEmpty(), description);
+        } catch (IllegalStateException expected) {
+            assertTrue(expected.getMessage() != null && !expected.getMessage().isEmpty(),
+                    description);
+        }
+    }
+
     private static void assertPacket(M3Jdk21A3SourceSealedRecipe recipe, int expectedTargets) {
         Map<String, M3Jdk21A3SourceSealedRecipe.Target> targets = recipe.targetManifest();
         assertEquals(expectedTargets, targets.size());
@@ -108,6 +132,28 @@ final class M3Jdk21A3SourceSealedRecipeTest {
         first.getChangeset().getAllResults().forEach(result -> {
             SourceFile source = result.getAfter();
             assertTrue(source != null);
+            SourceFile original = result.getBefore();
+            if (original != null) {
+                assertEquals(original.getId(), source.getId(), "stable source identity");
+                assertEquals(original.getSourcePath(), source.getSourcePath(), "source path");
+                // The OpenRewrite scheduler legitimately attaches RecipesThatMadeChanges
+                // after the recipe visitor returns. Preserve all source markers, but
+                // distinguish that framework provenance from a source mutation.
+                assertEquals(original.getMarkers().getId(),
+                        source.getMarkers().getId(), "stable marker collection identity");
+                for (var originalMarker : original.getMarkers().getMarkers()) {
+                    assertTrue(source.getMarkers().getMarkers().contains(originalMarker),
+                            "original marker retained: " + originalMarker.getClass().getName());
+                }
+                for (var newMarker : source.getMarkers().getMarkers()) {
+                    assertTrue(original.getMarkers().getMarkers().contains(newMarker)
+                                    || newMarker.getClass().getSimpleName().equals("RecipesThatMadeChanges"),
+                            "only scheduler recipe provenance may be appended");
+                }
+                assertEquals(original.getFileAttributes(), source.getFileAttributes(), "file attributes");
+                assertEquals(original.getCharset(), source.getCharset(), "charset");
+                assertEquals(original.isCharsetBomMarked(), source.isCharsetBomMarked(), "BOM");
+            }
             after.put(source.getSourcePath().toString().replace('\\', '/'), source);
         });
         assertEquals(recipe.targetManifest().keySet(), after.keySet());
