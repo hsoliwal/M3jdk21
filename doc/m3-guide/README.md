@@ -107,3 +107,13 @@ For AVL maps/sets and explicitly deferred values, see the [tree and lazy-value r
 - [Locked collection and queue source coverage](locked-queue-source-coverage.md): five full-body owner reads, declared-member routes, source hashes and inspected tests; repository execution NOT_RUN in this documentation pass, with hosted exact-head CI tracked separately
 
 For the collection progress SPI and its legacy adapter, read [progress ownership, cancellation and observation](specify-progress-ownership.md): all eight source owners, weighted child generations, borrowed/owned scope close, long versus int totals, cancellation propagation, snapshot consistency, callback failures, and explicit source-observed arithmetic and restart limits.
+
+For public `com.m3.collections` address, lane, slot, arena, row and handle-linked list owners, see [stable segmented primitive storage](specify-stable-segmented-storage.md): 8/8/12 checked geometry, sparse zero/bulk overlap, occupancy/rank/select, allocator-local generation handles, allocation versus publication, callback/partial-failure behavior, retained-payload accounting and explicit JNI counting. These are distinct from the similarly named internal mindex owners.
+
+- [Atomic primitive storage](specify-atomic-primitive-storage.md): concurrent int/long lane publication, retained sparse pages, scalar memory effects, fixed-range streams and fixed-capacity BitSet word semantics; matching no-op bit CAS is acquire-only, and multiword scans are not atomic snapshots
+
+- [Parent-owned residency lifecycle](specify-residency-lifecycle.md): canonical parent words, scoped projection access, conditional pinning, estimate-based admission, swap/restore/recreate, monitor-held callbacks, source-level failure limits and inert CLASS-retained annotation metadata
+
+- [Weak-key map lifetime](specify-weak-key-lifetime.md): equality, GC reachability and queue cleanup, backed views, live-entry/key retention, callback errors and storage limits
+- [Object linked-list and deque](specify-object-linked-sequences.md): nullable endpoints, reversed/sublist ownership, reusable slots, iterator state, bounds and late-binding traversal
+- [Reference-identity map and set](specify-identity-specialization.md): identity versus equality, null sidecars, strong snapshots, narrow API/factory boundaries and growth failure order
