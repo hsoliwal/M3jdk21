@@ -19,7 +19,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-from patch_atom_io import relative_git_path, safe_output_root, target_blob, write_exact
+# Direct CLI execution imports from this directory; test loaders may import by module path.
+try:
+    from patch_atom_io import relative_git_path, safe_output_root, target_blob, write_exact
+except ModuleNotFoundError as missing:
+    if missing.name != "patch_atom_io":
+        raise
+    from m3.backports.patch_atom_io import (
+        relative_git_path, safe_output_root, target_blob, write_exact,
+    )
 
 
 @dataclass(frozen=True)
