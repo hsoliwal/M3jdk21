@@ -86,7 +86,8 @@ final class A3OutputFence {
                     target,
                     StandardCopyOption.ATOMIC_MOVE,
                     StandardCopyOption.REPLACE_EXISTING);
-        } catch (AtomicMoveNotSupportedException unsupported) {
+        } catch (AtomicMoveNotSupportedException | FileAlreadyExistsException unsupported) {
+            requireOrdinaryTarget(target);
             Files.move(temporary, target, StandardCopyOption.REPLACE_EXISTING);
         }
     }
