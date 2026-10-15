@@ -9,7 +9,7 @@
       "target": "java.util.regex.M3PatternQuery.BooleanPlan",
       "status": "TARGET_OWNED_PORT_CANDIDATE; exact scoped proof separate from full M3JDK21 acceptance",
       "recipe": "com.synexia.rewrite.M3PatternAsciiReceive20261014",
-      "target_rule": "Keep JDK predicates and parser; <=63 atoms use the original scalar frontier; 64..256 atoms use <=5 words; original DP on unavailable metadata or non-ASCII continuation, unchanged surrogate refusal; no M3String fields or public JDK API change.",
+      "target_rule": "Same parser and <=256-atom admission. Scalar/wide frontiers continue over non-surrogate BMP with two invocation-local exact-key predicate masks, with exact-prefix DP on the third distinct symbol; optional-metadata fallback keeps original DP; surrogate -1 unchanged. No M3String fields or public API change.",
       "license": "Target-owned GPLv2 with Classpath exception adaptation; no third-party source body copied."
     },
     {
@@ -28,5 +28,16 @@
     "contract": "Same compiled-node admission, scalar path, surrogate -1 and public APIs",
     "jni": "independent scalar TEST oracle, not production dispatch",
     "gates": "fresh leaf proof required; full target/Maven/SDK/global admission remain separate"
+  },
+  "bmp_successor_20261015": {
+    "target": "java.util.regex.M3PatternQuery.BooleanPlan",
+    "baseline": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
+    "cache": "first two distinct non-ASCII units per invocation; no eviction; exact-prefix DP on third",
+    "scalar_extra_heap_payload_bytes": 0,
+    "wide_extra_heap_payload_bytes_max": 80,
+    "retained_plan_change_bytes": 0,
+    "contract": "Surrogate refusal and actual JDK predicate semantics; not general code-point matching",
+    "jni": "bounded sorted alphabet TEST oracle only",
+    "qualification": "source-sealed three-way leaf proof; product gates separate"
   }
 }
