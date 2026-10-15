@@ -75,7 +75,7 @@ class StringTargetSuccessorTest(unittest.TestCase):
         self.assertEqual("70d1d03c109126fdda36c54da21b484bbe368fd9",
                          historical[phase.M3_STRING_PATH]["successor_git_blob"])
         expected = phase.current_successor_blobs(self.mapping())
-        self.assertEqual("42399d411c1516a56a47dcdb10242960157b4677",
+        self.assertEqual("35ed998540e044eed8cb7596e2e2c019ae369bd3",
                          expected[phase.M3_STRING_PATH])
         self.assertEqual(4, len(expected))
 
