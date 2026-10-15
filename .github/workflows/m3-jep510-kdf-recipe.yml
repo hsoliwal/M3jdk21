@@ -41,7 +41,10 @@ jobs:
           cache: maven
       - name: Strict recipe compile and focused JUnit
         run: >
-          if ! test -s "$HOME/.m2/repository/com/synexia/synexia-openrewrite-recipes/1.0.0-SNAPSHOT/synexia-openrewrite-recipes-1.0.0-SNAPSHOT.jar"; then\n            bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"\n          fi\n          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          if ! test -s "$HOME/.m2/repository/com/synexia/synexia-openrewrite-recipes/1.0.0-SNAPSHOT/synexia-openrewrite-recipes-1.0.0-SNAPSHOT.jar"; then
+            bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+          fi
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
           -Dtest=M3Jep510KdfBackportRecipeTest
           -Dsurefire.failIfNoSpecifiedTests=false test
       - name: Diff hygiene
