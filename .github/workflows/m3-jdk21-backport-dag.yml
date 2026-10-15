@@ -91,7 +91,7 @@ jobs:
           set -euo pipefail
           mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
             -Pm3-backport-programme-execution-plan \
-            -Dm3.programme.status="$PWD/m3/backports/target/backport-programme-status.tsv" \
+            -Dm3.programme.status="$PWD/m3/backports/target/backport-whole-programme-status.tsv" \
             -Dm3.packet.index="$PWD/m3/backports/target/backport-packets.tsv" \
             -Dm3.packet.dir="$PWD/m3/backports/target/backport-packets" \
             -Dm3.execution.out="$PWD/m3/tooling/backport-dag/target/programme-execution" \
@@ -117,6 +117,10 @@ jobs:
           path: |
             m3/backports/target/program-status.json
             m3/backports/target/program-status.tsv
+            m3/backports/target/backport-programme-status.json
+            m3/backports/target/backport-programme-status.tsv
+            m3/backports/target/backport-whole-programme-status.json
+            m3/backports/target/backport-whole-programme-status.tsv
             m3/backports/target/backport-recipe-dag.json
             m3/backports/target/backport-recipe-dag.tsv
             m3/backports/target/backport-packets.tsv
