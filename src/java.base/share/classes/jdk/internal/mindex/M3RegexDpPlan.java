@@ -87,9 +87,18 @@ public final class M3RegexDpPlan {
     public long advance(long frontier, char unit) {
         checkBits(frontier);
         if (!supports(unit)) throw new IllegalArgumentException("surrogate input is not admitted");
+        return advanceMatched(frontier, matchingMask(unit));
+    }
+
+    /** Pure pattern predicate: compute once per consumed unit, not once per row. */
+    private long matchingMask(char unit) {
         int literal = literalIndex(unit);
         long matched = literal < 0 ? 0 : literalMasks[literal];
-        if (!lineTerminator(unit)) matched |= dots;
+        return lineTerminator(unit) ? matched : matched | dots;
+    }
+
+    /** Internal callers already hold validated states and a supported unit. */
+    private long advanceMatched(long frontier, long matched) {
         long consumed = ((frontier << 1) & matched & ~starred)
                 | (frontier & matched & starred);
         return close(consumed);
@@ -132,11 +141,32 @@ public final class M3RegexDpPlan {
         Objects.requireNonNull(text, "text");
         int length = text.length();
         long[] rows = identityRows();
+        long previousMask = 0;
+        boolean fixedPoint = false;
+        boolean seekFixedPoint = length >= 2 * states;
         for (int i = 0; i < length; i++) {
             if ((i & 255) == 0) check(checkpoint);
             char c = text.charAt(i);
             if (!supports(c)) return null;
-            for (int state = 0; state < states; state++) rows[state] = advance(rows[state], c);
+            long matched = matchingMask(c);
+            if (!seekFixedPoint || i == 0 || matched != previousMask) {
+                fixedPoint = false;
+                for (int state = 0; state < states; state++) {
+                    rows[state] = advanceMatched(rows[state], matched);
+                }
+            } else if (!fixedPoint) {
+                fixedPoint = true;
+                for (int state = 0; state < states; state++) {
+                    long incoming = rows[state];
+                    long next = advanceMatched(incoming, matched);
+                    fixedPoint &= incoming == next;
+                    rows[state] = next;
+                }
+            }
+            previousMask = matched;
+            // Reuse only a proven fixed point under the identical pattern predicate.
+            // Keep reading even then: later surrogates, charAt failures and
+            // checkpoint calls retain their original order and behavior.
         }
         check(checkpoint);
         return new Effect(rows, length);

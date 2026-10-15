@@ -8,6 +8,8 @@
 #include <stdint.h>
 #include <string.h>
 
+static unsigned first_bit(uint64_t word);
+
 /* Target-owned ordered Boolean relation composition. No canonical text crosses JNI.
  * All lanes are validated before output is written; the local result permits aliases. */
 static int compose_rows(const uint64_t *a, const uint64_t *b, uint64_t *out, size_t n) {
@@ -18,6 +20,23 @@ static int compose_rows(const uint64_t *a, const uint64_t *b, uint64_t *out, siz
     for (size_t i = 0; i < n; i++) {
         if (((a[i] | b[i]) & ~mask) != 0) return -1;
         ceiling |= b[i];
+    }
+    /* Validation above precedes every shortcut, including zero output. */
+    if (ceiling == 0) { memset(out, 0, n * sizeof(uint64_t)); return 0; }
+    /* Only multi-state rows can repay proving a homogeneous left relation. */
+    if ((a[0] & (a[0] - 1)) != 0) {
+        size_t equal = 1;
+        while (equal < n && a[equal] == a[0]) equal++;
+        if (equal == n) {
+            uint64_t frontier = a[0], value = frontier == mask ? ceiling : 0;
+            while (frontier != 0 && value != ceiling) {
+                value |= b[first_bit(frontier)];
+                frontier &= frontier - 1;
+            }
+            for (size_t i = 0; i < n; i++) result[i] = value;
+            memcpy(out, result, n * sizeof(uint64_t));
+            return 0;
+        }
     }
     for (size_t i = 0; i < n; i++) {
         uint64_t frontier = a[i], value = 0;

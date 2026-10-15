@@ -89,7 +89,6 @@ final class M3StringRegexDp {
 
         // Nullable prefix: every atom of an empty-text-matching prefix must be starred.
         boolean[] previous = new boolean[count + 1];
-        boolean[] current = new boolean[count + 1];
         previous[0] = true;
         for (int j = 1; j <= count; j++) {
             previous[j] = (atoms[j - 1] & STAR) != 0 && previous[j - 1];
@@ -100,20 +99,21 @@ final class M3StringRegexDp {
             // java.util.regex matches Unicode code points, not arbitrary halves of
             // surrogate pairs. Preserve that contract through the JDK fallback.
             if (Character.isSurrogate(value)) return UNKNOWN;
-            current[0] = false;
+            // Save the old diagonal before updating this row in place.
+            boolean diagonal = previous[0];
+            previous[0] = false;
             for (int j = 1; j <= count; j++) {
+                boolean above = previous[j];
                 int atom = atoms[j - 1];
                 char required = (char) (atom & CODE_UNIT);
                 boolean accepts = required == '.'
                         ? !isJdkLineTerminator(value)
                         : required == value;
-                current[j] = (atom & STAR) != 0
-                        ? current[j - 1] || (accepts && previous[j])
-                        : accepts && previous[j - 1];
+                previous[j] = (atom & STAR) != 0
+                        ? previous[j - 1] || (accepts && above)
+                        : accepts && diagonal;
+                diagonal = above;
             }
-            boolean[] swap = previous;
-            previous = current;
-            current = swap;
         }
         return previous[count] ? MATCH : NO_MATCH;
     }

@@ -1,4 +1,13 @@
 {
+  "reuse_followup": {
+    "source_recipe": "com.synexia.rewrite.M3Jdk21RegexReuseRecipe",
+    "target_parent": "3a8ff94bcebf55f16a6a570eae26fe82cb0afac9",
+    "status": "candidate; qualification recorded in paired Synexia task",
+    "atoms": ["scalar one-row DP", "per-unit predicate reuse", "invocation-local fixed-point reuse", "validated native zero/homogeneous shortcuts"],
+    "ownership": "same mapped Java/JNI owners; no new API, native export, retained cache or spelling owner",
+    "scope": "same dot/star language and limits; source reads, refusal and checkpoints retained",
+    "recipe_first": true
+  },
   "schema": 1,
   "canonical_map": "m3/docs/name-mapping.json",
   "canonical_map_blob": "288f20575d3f9d106571990f21944e7f46b0cf71",
