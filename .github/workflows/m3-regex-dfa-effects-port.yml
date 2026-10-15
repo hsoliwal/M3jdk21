@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 regex DFA effects exact port
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-regex-dfa-effects-port.yml'
+      - 'm3/ports/precompute/src/main/java/com/m3/precompute/M3RegexDfaEffects.java'
+      - 'm3/ports/precompute/src/test/java/com/m3/precompute/M3RegexDfaEffects*.java'
+      - 'm3/ports/precompute/docs/M3_REGEX_EFFECTS_PORT*'
+      - 'm3/docs/name-mapping.d/m3-regex-effects-precompute.json'
+      - 'm3/docs/synexia-string-precompute-port-map.tsv'
+permissions:
+  contents: read
+jobs:
+  source-seals-and-junit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact pull-request receiver
+        uses: actions/checkout@v4
+      - name: Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse any source-recipe postimage drift
+        run: sha256sum -c m3/ports/precompute/docs/M3_REGEX_EFFECTS_PORT_SHA256.txt
+      - name: Execute M3 owned DFA-effect JUnit oracle
+        run: mvn -B -ntp -f m3/ports/precompute/pom.xml -Dtest=M3RegexDfaEffectsPortTest test
