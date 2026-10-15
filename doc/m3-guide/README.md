@@ -117,3 +117,9 @@ For public `com.m3.collections` address, lane, slot, arena, row and handle-linke
 - [Weak-key map lifetime](specify-weak-key-lifetime.md): equality, GC reachability and queue cleanup, backed views, live-entry/key retention, callback errors and storage limits
 - [Object linked-list and deque](specify-object-linked-sequences.md): nullable endpoints, reversed/sublist ownership, reusable slots, iterator state, bounds and late-binding traversal
 - [Reference-identity map and set](specify-identity-specialization.md): identity versus equality, null sidecars, strong snapshots, narrow API/factory boundaries and growth failure order
+
+For primitive membership and min-heaps, see [primitive set variants](specify-primitive-set-variants.md) and [primitive heaps](specify-primitive-heaps.md): zero-sidecar/backshift versus tombstone sets, encounter-order moves, immutable concurrent snapshots, exact int traversal defaults, signed heap order, capacity and failure boundaries.
+
+- [Int-key primitive map specializations](specify-int-key-map-specializations.md): zero-key/value presence, exact sizing, backward-shift deletion, primitive return conventions and the different cursor/callback mutation contracts of M3IntIntHashMap and M3IntLongHashMap
+- [Enum primitive maps and bit-word sets](specify-enum-specialization.md): enum-domain/null validation, ordinal traversal, dense and adaptive payload rules, explicit compaction, reentrant-migration limits and M3EnumSet's bounded equality/bulk API
+- [Collections physical source coverage](collections-source-coverage.md): exact primary-reference routing for all 77 package Java files, reconciling 19 earlier body-contract routes with 58 remaining files while separating documentation from runtime and receiver qualification
