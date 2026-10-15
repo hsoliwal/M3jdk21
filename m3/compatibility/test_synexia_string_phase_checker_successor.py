@@ -12,6 +12,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 RECEIPT_PATH = ROOT / "m3/compatibility/synexia-string-phase-checker-successor-20261013.json"
+RECEIPT_V2_PATH = ROOT / "m3/compatibility/synexia-string-phase-checker-successor-20261015-v2.json"
 TARGET_PATH = ROOT / "m3/synexia-import/current-full-borrow/check_string_phase.py"
 
 OLD_MARKER = "M3StringTuple tuple = new M3StringTuple(left, right);"
@@ -24,6 +25,47 @@ EXPECTED_MANIFEST = (
     "m3/synexia-import/current-full-borrow/check_string_phase.py\t892a5986d7c8a24909cbe04c29a0a44dc22eea508463a3bef8bd3e8444a6304c\t11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4\t03-check_string_phase.py.txt\n"
 )
 EXPECTED_RECEIPT = json.loads("{\n  \"schema\": \"M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V1\",\n  \"scope\": \"TOOLING_ONLY_NO_RUNTIME_PROMOTION\",\n  \"source\": {\n    \"repository\": \"hsoliwal/com.synexia\",\n    \"pullRequest\": 10942,\n    \"head\": \"192607fed74e6ff27beaf553db6ec169afc40b3d\",\n    \"mergeCommit\": \"b6b1af473ea8ca5073b0bd3b16a7a0063db1782d\",\n    \"manifestPath\": \"synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-current-proof-20261012/manifest.tsv\",\n    \"manifestGitBlob\": \"101be05c8b045749e5d1e86a97b73bd4ae1c4bd1\",\n    \"sourceResourcePath\": \"synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-current-proof-20261012/03-check_string_phase.py.txt\",\n    \"sourceResourceGitBlob\": \"9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02\",\n    \"sourceResourceSha256\": \"11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4\"\n  },\n  \"target\": {\n    \"repository\": \"hsoliwal/M3jdk21\",\n    \"baseCommit\": \"ffc16b832c49798c422ded0d6ddbc5dbe524cce8\",\n    \"path\": \"m3/synexia-import/current-full-borrow/check_string_phase.py\",\n    \"beforeGitBlob\": \"67d562b0a2a72bd72a185007b2345b87fb3a8e68\",\n    \"beforeSha256\": \"892a5986d7c8a24909cbe04c29a0a44dc22eea508463a3bef8bd3e8444a6304c\",\n    \"afterGitBlob\": \"9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02\",\n    \"afterSha256\": \"11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4\"\n  },\n  \"change\": {\n    \"oldMarker\": \"M3StringTuple tuple = new M3StringTuple(left, right);\",\n    \"newMarker\": \"return concatBalanced(left, right);\",\n    \"expectedOccurrences\": 1,\n    \"runtimeProductFilesChanged\": false,\n    \"runtimePromotionAuthorized\": false\n  }\n}\n")
+
+EXPECTED_RECEIPT_V2 = json.loads(r'''{
+  "schema": "M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V2",
+  "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
+  "predecessor": {
+    "receiptPath": "m3/compatibility/synexia-string-phase-checker-successor-20261013.json",
+    "receiptGitBlob": "a0373fd42a1fe2b8104e3675abc1919254950fff",
+    "receiptSha256": "78fc05a0cb9b7f26e9a6226b2406cc38801f09040dc14e445e31651f7a9385af",
+    "targetAfterGitBlob": "9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02",
+    "targetAfterSha256": "11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4"
+  },
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 11615,
+    "headAtCapture": "90fc480bcd16aa044b103d4fff84f3d554553a83",
+    "stateAtCapture": "OPEN_DRAFT",
+    "manifestPath": "synexia-openrewrite-recipes/recipes/m3-string-successor-chain-20261014/manifest.tsv",
+    "manifestGitBlob": "19ac98444b295f327b22d54f2eb1439ff25efbc3",
+    "sourceResourcePath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-string-successor-chain/check_string_phase.py",
+    "sourceResourceGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+    "sourceResourceSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseCommit": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
+    "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+    "beforeGitBlob": "9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02",
+    "beforeSha256": "11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4",
+    "afterGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+    "afterSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3"
+  },
+  "change": {
+    "relation": "ADDITIVE_SOURCE_OBSERVATION_V2",
+    "v1HistoryPreserved": true,
+    "runtimeProductFilesChanged": false,
+    "runtimePromotionAuthorized": false,
+    "runtimeAcceptance": "NOT_CLAIMED",
+    "performanceEvidence": "NOT_MEASURED"
+  }
+}''')
+
 
 
 def git_blob(data: bytes) -> str:
@@ -40,6 +82,12 @@ def validate_target(data: bytes) -> None:
     if text.count(NEW_MARKER) != 1 or OLD_MARKER in text:
         raise ValueError("checker does not contain the exact balanced-concat successor")
 
+def validate_target_v2(data: bytes) -> None:
+    if hashlib.sha256(data).hexdigest() != EXPECTED_RECEIPT_V2["target"]["afterSha256"]:
+        raise ValueError("checker SHA-256 differs from pinned Synexia V2 postimage")
+    if git_blob(data) != EXPECTED_RECEIPT_V2["target"]["afterGitBlob"]:
+        raise ValueError("checker Git blob differs from pinned Synexia V2 postimage")
+
 
 class SynexiaStringPhaseCheckerSuccessorTest(unittest.TestCase):
     def test_receipt_is_exact_and_non_promoting(self):
@@ -48,6 +96,32 @@ class SynexiaStringPhaseCheckerSuccessorTest(unittest.TestCase):
         self.assertEqual("TOOLING_ONLY_NO_RUNTIME_PROMOTION", receipt["scope"])
         self.assertFalse(receipt["change"]["runtimeProductFilesChanged"])
         self.assertFalse(receipt["change"]["runtimePromotionAuthorized"])
+
+    def test_v2_receipt_extends_v1_without_runtime_promotion(self):
+        v1_bytes = RECEIPT_PATH.read_bytes()
+        v1 = json.loads(v1_bytes)
+        self.assertEqual(EXPECTED_RECEIPT, v1)
+        v2 = json.loads(RECEIPT_V2_PATH.read_text(encoding="utf-8"))
+        self.assertEqual(EXPECTED_RECEIPT_V2, v2)
+        self.assertEqual(hashlib.sha256(v1_bytes).hexdigest(),
+                         v2["predecessor"]["receiptSha256"])
+        self.assertEqual(git_blob(v1_bytes), v2["predecessor"]["receiptGitBlob"])
+        self.assertEqual(v1["target"]["afterGitBlob"],
+                         v2["predecessor"]["targetAfterGitBlob"])
+        self.assertEqual(v1["target"]["afterSha256"],
+                         v2["predecessor"]["targetAfterSha256"])
+        self.assertEqual(v1["target"]["afterGitBlob"],
+                         v2["target"]["beforeGitBlob"])
+        self.assertEqual(v1["target"]["afterSha256"],
+                         v2["target"]["beforeSha256"])
+        self.assertEqual(v2["source"]["sourceResourceGitBlob"],
+                         v2["target"]["afterGitBlob"])
+        self.assertEqual(v2["source"]["sourceResourceSha256"],
+                         v2["target"]["afterSha256"])
+        self.assertEqual("OPEN_DRAFT", v2["source"]["stateAtCapture"])
+        self.assertFalse(v2["change"]["runtimeProductFilesChanged"])
+        self.assertFalse(v2["change"]["runtimePromotionAuthorized"])
+        self.assertEqual("NOT_MEASURED", v2["change"]["performanceEvidence"])
 
     def test_source_manifest_and_target_postimage_are_cross_bound(self):
         source = EXPECTED_RECEIPT["source"]
@@ -65,15 +139,15 @@ class SynexiaStringPhaseCheckerSuccessorTest(unittest.TestCase):
         self.assertEqual([expected_row], rows)
 
     def test_target_matches_synexia_postimage(self):
-        validate_target(TARGET_PATH.read_bytes())
+        validate_target_v2(TARGET_PATH.read_bytes())
 
     def test_checker_drift_fails_closed(self):
         data = TARGET_PATH.read_bytes()
-        changed = data.replace(NEW_MARKER.encode("utf-8"),
-                               b"return concatUnbalanced(left, right);", 1)
+        changed = data.replace(b"EXPECTED_PRECOMPUTE_OBSERVATION",
+                               b"EXPECTED_PRECOMPUTE_OBSERVATION_DRIFT", 1)
         self.assertNotEqual(data, changed)
         with self.assertRaisesRegex(ValueError, "SHA-256 differs"):
-            validate_target(changed)
+            validate_target_v2(changed)
 
 
 if __name__ == "__main__":
