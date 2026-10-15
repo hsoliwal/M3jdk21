@@ -65,6 +65,59 @@
   </build>
   <profiles>
     <profile>
+      <id>m3-a3-backport-completion</id>
+      <properties>
+        <m3.a3.root>${maven.multiModuleProjectDirectory}/..</m3.a3.root>
+        <m3.a3.queue>m3/build/backports/COMPATIBILITY_QUEUE.tsv</m3.a3.queue>
+        <m3.a3.completion.out>m3/build/a3/completion</m3.a3.completion.out>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <executions>
+              <execution>
+                <id>m3-a3-inventory-current-tree</id>
+                <phase>verify</phase>
+                <goals><goal>java</goal></goals>
+                <configuration>
+                  <mainClass>com.m3.a3.A3</mainClass>
+                  <arguments>
+                    <argument>inv</argument>
+                    <argument>--root</argument>
+                    <argument>${m3.a3.root}</argument>
+                    <argument>--out</argument>
+                    <argument>m3/build/a3/inventory.tsv</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>m3-a3-fan-in-backport-queue</id>
+                <phase>verify</phase>
+                <goals><goal>java</goal></goals>
+                <configuration>
+                  <mainClass>com.m3.a3.A3</mainClass>
+                  <arguments>
+                    <argument>complete</argument>
+                    <argument>--root</argument>
+                    <argument>${m3.a3.root}</argument>
+                    <argument>--inventory</argument>
+                    <argument>m3/build/a3/inventory.tsv</argument>
+                    <argument>--queue</argument>
+                    <argument>${m3.a3.queue}</argument>
+                    <argument>--out</argument>
+                    <argument>${m3.a3.completion.out}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
       <id>m3-a3-algorithm-catalogue</id>
       <build>
         <plugins>
