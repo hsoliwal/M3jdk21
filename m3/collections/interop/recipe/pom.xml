@@ -9,6 +9,10 @@
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1</version></dependency>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>8.17.1</version></dependency>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>8.17.1</version><scope>runtime</scope></dependency>
+    <!-- Same proof-host correction as Synexia 7ab40dc72de58110aa8997b63c265a049d663cb4. -->
+    <!-- rewrite-java-21 v8.17.1 declares SLF4J 1.7 compileOnly, not a transitive runtime. -->
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36</version><scope>test</scope></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-simple</artifactId><version>1.7.36</version><scope>test</scope></dependency>
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
   </dependencies>
   <build>
