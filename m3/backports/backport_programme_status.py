@@ -81,6 +81,11 @@ def _aligned_wave_evidence(work_atoms: Sequence[object], work_waves: Sequence[ob
             item.execution_state not in VALID_WAVE_STATES
             or item.scope != atom.scope
             or (item.execution_state == "READY" and not atom.executable)
+            or (
+                item.execution_state == "READY"
+                and item.scope != "FILE"
+                and not item.scope_approved
+            )
         ):
             return False
     return True
