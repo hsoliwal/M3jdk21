@@ -180,6 +180,48 @@ Nebula proving ground
 Camel/Airflow/Drools remain projections of the same canonical DAG root; they may schedule/read
 dependency readiness but never edit JDK sources or promote a backport.
 
+
+### Nebula V2 Java-grade candidate receiver
+
+The handoff also pins the current Nebula Java-grade/backport tranche from PR #208 as a distinct
+**candidate** layer. This does not replace the older proven Synexia custody rows.
+
+Pinned candidate assets are:
+
+- `NebulaM3JavaGradeQualification.java`;
+- `NebulaM3BackportPlan.java`;
+- `NebulaM3TransferContract.java`;
+- `JAVA_GRADE_RECIPE_CONVERGENCE.md`.
+
+The exact repository/ref/commit and Git blob identities are recorded in
+`SYNEXIA_NEBULA_RECIPE_DAG_HANDOFF.tsv` and mirrored by
+`M3NebulaJavaGradeBackportBinding`.
+
+Its state is deliberately:
+
+`HOLD_PENDING_NEBULA_PROOF`.
+
+While held, M3JDK21 may use it only for read-only inventory, dependency planning and target recipe
+adaptation. It is **not** an executable backport dependency and grants no source mutation,
+semantic-equivalence, Java-21 compatibility or promotion authority.
+
+The pinned phase order is:
+
+```text
+NEBULA_PROOF
+ -> SYNEXIA_RECIPE_ABSORPTION
+ -> SYNEXIA_RECIPE_PROOF
+ -> M3JDK21_MAVEN_ORCHESTRATION_BOOTSTRAP
+ -> M3JDK21_BACKPORT_INVENTORY
+ -> M3JDK21_FILE_REPLAY
+ -> M3JDK21_SCOPE_PROMOTION
+ -> TARGET_PROOF
+```
+
+This makes the backport relationship explicit without allowing a proving-repository receipt to
+bypass M3JDK21's own compatibility catalogue, OpenRewrite packets, OpenJDK build, jtreg, runtime,
+JNI or fixed-point gates.
+
 ## Maven evidence
 
 `mvn -f m3/backports/pom.xml verify` now emits:
