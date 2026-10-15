@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "policy": "supplement existing name-mapping.json; no blind rename or phase advance",
+  "mappings": [
+    {
+      "source": "com.synexia.indexstring.MIndexRegexProgram / MIndexRegexEffects / MIndexRegexAtomAlgebra",
+      "source_revision": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
+      "target": "java.lang.M3StringRegexDp",
+      "status": "PARTIAL_TARGET_OWNED_CANDIDATE; product qualification HOLD",
+      "recipe": "com.synexia.m3.Jdk21RegexPrecomputeReceiver",
+      "target_rule": "Reuse bounded dot/star owner; exact opcode identity; weak canonical owner + range + plan + incoming-frontier effect key; no text cache, no Synexia runtime dependency, unchanged String.matches fallback",
+      "received": [
+        "reusable bounded token/epsilon/ASCII precompute",
+        "encountered-frontier effects through existing tuple DAG",
+        "exact slices and shared-node reuse",
+        "fixed cache cardinality and derived-state eviction",
+        "rolling DP fallback for 33+ atoms"
+      ],
+      "pending": [
+        "general regex execution-image admission",
+        "all-state relation tables and repeat exponentiation",
+        "captures/find/lookingAt/regions",
+        "compiler callsite/static-image lowering",
+        "persisted DB/mapped effects and hardware providers"
+      ]
+    },
+    {
+      "source": "Synexia finite-state/native effect design lineage; no source copy",
+      "target": "java.lang.M3StringRegexDp.advance0 / src/java.base/share/native/libjava/M3StringRegexDp.c",
+      "status": "TARGET_OWNED_NATIVE_CANDIDATE; standalone fixture JNI PASS only",
+      "target_rule": "Private target JNI symbol; canonical native address and exact range; width/endian lanes; validated opcode/closure/state; no copied text or retained native/JNI pointers; owner reachability fence",
+      "target_license": "GPLv2 with Classpath exception; preserve existing target header; no Apache code transplant"
+    }
+  ],
+  "phase": "String",
+  "family_completion": false,
+  "promotion": "HOLD"
+}
