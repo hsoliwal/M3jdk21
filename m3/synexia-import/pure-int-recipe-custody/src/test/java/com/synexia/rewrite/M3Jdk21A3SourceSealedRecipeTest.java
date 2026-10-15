@@ -136,7 +136,20 @@ final class M3Jdk21A3SourceSealedRecipeTest {
             if (original != null) {
                 assertEquals(original.getId(), source.getId(), "stable source identity");
                 assertEquals(original.getSourcePath(), source.getSourcePath(), "source path");
-                assertEquals(original.getMarkers(), source.getMarkers(), "source markers");
+                // The OpenRewrite scheduler legitimately attaches RecipesThatMadeChanges
+                // after the recipe visitor returns. Preserve all source markers, but
+                // distinguish that framework provenance from a source mutation.
+                assertEquals(original.getMarkers().getId(),
+                        source.getMarkers().getId(), "stable marker collection identity");
+                for (var originalMarker : original.getMarkers().getMarkers()) {
+                    assertTrue(source.getMarkers().getMarkers().contains(originalMarker),
+                            "original marker retained: " + originalMarker.getClass().getName());
+                }
+                for (var newMarker : source.getMarkers().getMarkers()) {
+                    assertTrue(original.getMarkers().getMarkers().contains(newMarker)
+                                    || newMarker.getClass().getSimpleName().equals("RecipesThatMadeChanges"),
+                            "only scheduler recipe provenance may be appended");
+                }
                 assertEquals(original.getFileAttributes(), source.getFileAttributes(), "file attributes");
                 assertEquals(original.getCharset(), source.getCharset(), "charset");
                 assertEquals(original.isCharsetBomMarked(), source.isCharsetBomMarked(), "BOM");
