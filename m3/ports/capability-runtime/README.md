@@ -33,6 +33,36 @@ Java is the semantic oracle. JNI is a separately admitted **C11 scalar reference
 no speedup or crossover is claimed. Source payload bytes are a separate artifact
 store, not a new M3 String per-value backing/parallel Java String engine.
 
+## Source-backed byte line indexing (second recipe wave)
+
+`ByteLineIndex.javaIndex(span)` compiles exact source-relative line-start byte
+coordinates with two bounded CPU passes, one `int[]` metadata directory, and
+binary-search `lineAtOffset(byteOffset)` queries. `line(ordinal)` returns the
+exact immutable `SourceArtifact.Span`, **including** its LF terminator, while
+`content(ordinal)` excludes only LF and intentionally retains CR. An empty
+source has one empty line; an LF-terminated source has a trailing empty line.
+All indexes are source-byte coordinates; invalid UTF-8 and surrogate/CRLF
+semantics are never rewritten or reinterpreted. A million LF boundaries is the
+hard precomputation cap (4 MiB metadata upper bound plus headers).
+
+`ByteLineIndex.nativeIndex(span)` is an explicit separately qualified variant:
+materialize one temporary direct buffer from the immutable source range, then
+use a new optional JNI `LfCount.lineEnds0()` symbol to count and emit line
+boundaries in bounded C11 stack chunks. The old `abi0()` version-1 and
+`countLf0()` semantics remain unchanged; an installed legacy native image
+without the optional symbol refuses rather than fabricating positions. The
+native caller never retains a ByteBuffer address or Java array pin. Neither
+path creates a new source payload owner or scheduler, and no native speedup is
+claimed without a setup-inclusive measurement.
+
+The second recipe is developed and sealed in Synexia as
+`m3-cpu-byte-line-index-20261015`. Its `ABSENT` and exact original SHA-256
+preimages are an independently reviewable additive follow-up on the initial
+capability-runtime recipe. `ByteLineIndexChecks` is run in *both* Java and JNI
+proof lanes, including binary fixtures, CRLF, subranges, empty/trailing lines,
+randomized offset oracles, memory-budget refusal, read-only direct buffers,
+virtual threads, and source/line immutable identity.
+
 ## Local focused proof (JDK 21)
 
 ```sh
