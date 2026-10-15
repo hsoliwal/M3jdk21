@@ -118,3 +118,33 @@ sources and standalone M3 String owners are untouched.
 - No MeshLLM node-local SQLite database or CPULLM continuation-state compiler.
 - No GPU/NPU availability assumption or measured CPU/native throughput advantage.
 - No `jlink` developer image or full Synexia/M3JDK reactor admission claim.
+
+
+## P3: immutable byte-pattern search (2026-10-15)
+
+`BytePatternSearch` adds explicit compile-once KMP lookup into existing
+`SourceArtifact.Span` immutable source coordinates. It is an opt-in leaf for
+CPULLM/FLLDCIM source-evidence lookup, **not** a replacement for M3 String,
+`java.util.regex`, or Synexia's composite-aware `MIndexStringSearchPlan`.
+It accepts 1..4,096 source **bytes**, returns overlapping sorted offsets
+relative to the selected span, and refuses incomplete results above an
+explicit 0..1,000,000 match cap. The byte search neither normalizes Unicode
+nor interprets line endings: callers may combine it with `ByteLineIndex`
+for source-backed line provenance.
+
+The optimized Java plan stores a cloned needle plus a KMP prefix table;
+matching makes two sequential passes to allocate an exact result `int[]`.
+The **optional** JNI extension lives in the same SHA-pinned `LfCount` C11
+image and independently recomputes the KMP failure table from one copied
+bounded pattern. Native uses `GetDirectBufferAddress` within a synchronous
+call, bounded stack scratch and fixed-size `SetIntArrayRegion` transfers;
+it retains no JVM pointer and does not change `abi0()`, `countLf0()`, or
+`lineEnds0()`. Native is caller-selected, never automatic. The JVM remains
+CPU-first even when JNI is unavailable.
+
+A synthetic independent naive oracle and 6,000 seeded binary/unicode/overlap
+cases compare Java and C11 JNI results, rejection budgets and immutability.
+The existing `verify_native.py` also compiles the new class, executes these
+proofs and validates the JMOD developer image. Full M3JDK/HotSpot/jtreg,
+actual OpenRewrite Maven SDK and setup-inclusive performance crossover remain
+independent release gates.

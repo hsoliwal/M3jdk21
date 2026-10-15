@@ -2,6 +2,7 @@
 package com.m3.runtime.proof;
 
 import com.m3.runtime.capability.ByteLineIndex;
+import com.m3.runtime.capability.BytePatternSearch;
 import com.m3.runtime.capability.LfCount;
 import com.m3.runtime.capability.SourceArtifact;
 import com.m3.runtime.capability.WorkingSet;
@@ -28,6 +29,11 @@ public final class CapabilityImageSmoke {
                 || lines.lineAtOffset(2) != 1 || lines.content(0).length() != 0
                 || lines.line(1).length() != 2) {
             throw new AssertionError("actual linked image immutable byte-line index contract");
+        }
+        int[] byteHits = BytePatternSearch.compile(new byte[]{10})
+                .findAll(source.whole(), 2);
+        if (byteHits.length != 2 || byteHits[0] != 0 || byteHits[1] != 2) {
+            throw new AssertionError("actual linked image byte-pattern search contract");
         }
         System.out.println("M3_CAPABILITY_DEVELOPER_IMAGE_PASS");
     }
