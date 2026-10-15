@@ -1,4 +1,16 @@
 {
+  "power_followup": {
+    "source_recipe": "com.synexia.rewrite.M3Jdk21RegexPowerRecipe",
+    "target_parent": "d2c7fba68f149f25d30fafc0eca0f4372ad75e89",
+    "status": "component candidate; source-built M3JDK qualification pending",
+    "documentation": "regex-power-receiving-20261015.md",
+    "mapping": "MIndexStateRelation repeated / MIndexRegexAtomAlgebra exit effects -> existing M3RegexDpPlan.Effect and M3StringRegexDp",
+    "atoms": ["bounded JNI relation power", "exact equal-child repetition factoring"],
+    "public_interfaces": "unchanged; supplied checkpoints retain original Java order",
+    "native_abi": "one additive internal export: Java_jdk_internal_mindex_M3RegexDpPlan_repeat0",
+    "ownership": "same canonical owners/coordinates; no new payload or retained cache",
+    "scope": "same language, input bounds, eligible repetition cohort and pressure policy; full parser/images/compiler work remains pending"
+  },
   "reuse_followup": {
     "source_recipe": "com.synexia.rewrite.M3Jdk21RegexReuseRecipe",
     "target_parent": "3a8ff94bcebf55f16a6a570eae26fe82cb0afac9",
@@ -64,7 +76,7 @@
       "scope": "No compile-time lowering, universal cache, GPU/NPU runtime, database service or public String API introduced."
     }
   ],
-  "latest_stage": "pressure_followup",
+  "latest_stage": "power_followup",
   "pressure_followup": {
     "recipe": "com.synexia.rewrite.M3Jdk21RegexPressureRecipe",
     "target_preimage_commit": "03b949881dd7ae140ab1e29cb97bf1af644a22c2",

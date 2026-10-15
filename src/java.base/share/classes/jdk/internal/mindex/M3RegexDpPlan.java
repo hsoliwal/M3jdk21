@@ -28,6 +28,7 @@ public final class M3RegexDpPlan {
     private final int states;
     private static volatile boolean nativeUnavailable;
     private static volatile boolean structuredUnavailable;
+    private static volatile boolean repeatUnavailable;
 
     private M3RegexDpPlan(long[] literals, long dots, long starred, int tokens) {
         this.literalMasks = literals;
@@ -200,11 +201,27 @@ public final class M3RegexDpPlan {
             return new Effect(result, total);
         }
 
-        /** Three work rows, reused at every exponent step; no expanded text or tuple. */
+        /**
+         * Exact power without expanded text. Java retains its checkpoint schedule and three
+         * rotating rows. Eligible wide/null-checkpoint powers may use one bounded JNI call,
+         * returning one row array. Missing repeat JNI leaves prior Java execution available.
+         */
         public Effect repeated(long count, Runnable checkpoint) {
             if (count < 0) throw new IllegalArgumentException("negative repeat count");
             long total = Math.multiplyExact(length, count);
             check(checkpoint);
+            // Preserve every supplied checkpoint on the original Java schedule.
+            // A null checkpoint permits one bounded native call; it never owns text.
+            if (checkpoint == null && count >= 256 && states >= 16
+                    && starred == (universe & ~1L) && needsRowUnion(rows)
+                    && !nativeUnavailable && !repeatUnavailable) {
+                try {
+                    return new Effect(repeat0(rows, count, starred == (universe & ~1L)), total);
+                } catch (UnsatisfiedLinkError unavailable) {
+                    // Older libjava may expose compose0 but not repeat0. Keep it usable.
+                    repeatUnavailable = true;
+                }
+            }
             long[] result = identityRows(), power = rows.clone(), scratch = new long[states];
             for (long left = count; left != 0; left >>>= 1) {
                 check(checkpoint);
@@ -264,4 +281,5 @@ public final class M3RegexDpPlan {
     // Package visibility permits exact JNI boundary qualification without exposing a JDK API.
     static native long[] compose0(long[] left, long[] right);
     static native long[] composeStructured0(long[] left, long[] right);
+    static native long[] repeat0(long[] rows, long count, boolean structured);
 }

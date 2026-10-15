@@ -162,3 +162,62 @@ Java_jdk_internal_mindex_M3RegexDpPlan_composeStructured0(
     (void)cls;
     return compose_jni(env, left, right, compose_structured_rows);
 }
+
+/* Bounded power of an existing relation, reusing the exact composition atoms above.
+ * Validate all input before even the count-zero identity; output may overlap input.
+ * No callbacks, retained pointers, text admission or allocation in this C atom.
+ * C accepts an unsigned count; the JNI boundary admits only nonnegative Java longs. */
+static int repeat_rows(const uint64_t *rows, uint64_t *out, size_t n,
+        uint64_t count, int structured) {
+    uint64_t result[64], power[64];
+    if (rows == NULL || out == NULL || n == 0 || n > 64) return -1;
+    const uint64_t mask = n == 64 ? UINT64_MAX : (UINT64_C(1) << n) - 1;
+    for (size_t i = 0; i < n; i++) {
+        if ((rows[i] & ~mask) != 0) return -1;
+        power[i] = rows[i];
+        result[i] = UINT64_C(1) << i;
+    }
+    int (*compose)(const uint64_t*, const uint64_t*, uint64_t*, size_t) =
+            structured ? compose_structured_rows : compose_rows;
+    for (uint64_t remaining = count; remaining != 0; remaining >>= 1) {
+        if ((remaining & UINT64_C(1)) != 0 && compose(result, power, result, n) != 0) return -1;
+        if (remaining > 1 && compose(power, power, power, n) != 0) return -1;
+    }
+    memcpy(out, result, n * sizeof(uint64_t));
+    return 0;
+}
+
+JNIEXPORT jlongArray JNICALL
+Java_jdk_internal_mindex_M3RegexDpPlan_repeat0(
+        JNIEnv *env, jclass cls, jlongArray rows, jlong count, jboolean structured) {
+    jlong transfer[64];
+    uint64_t bits[64];
+    (void)cls;
+    _Static_assert(sizeof(jlong) == sizeof(uint64_t), "JNI long width");
+    if (rows == NULL) {
+        fail(env, "java/lang/NullPointerException", "null regex effect");
+        return NULL;
+    }
+    if (count < 0) {
+        fail(env, "java/lang/IllegalArgumentException", "negative repeat count");
+        return NULL;
+    }
+    jsize n = (*env)->GetArrayLength(env, rows);
+    if (n < 1 || n > 64) {
+        fail(env, "java/lang/IllegalArgumentException", "invalid regex effect dimensions");
+        return NULL;
+    }
+    (*env)->GetLongArrayRegion(env, rows, 0, n, transfer);
+    if ((*env)->ExceptionCheck(env)) return NULL;
+    memcpy(bits, transfer, (size_t)n * sizeof(uint64_t));
+    if (repeat_rows(bits, bits, (size_t)n, (uint64_t)count, structured != JNI_FALSE) != 0) {
+        fail(env, "java/lang/IllegalArgumentException", "foreign regex effect state bits");
+        return NULL;
+    }
+    memcpy(transfer, bits, (size_t)n * sizeof(uint64_t));
+    jlongArray output = (*env)->NewLongArray(env, n);
+    if (output == NULL) return NULL;
+    (*env)->SetLongArrayRegion(env, output, 0, n, transfer);
+    if ((*env)->ExceptionCheck(env)) return NULL;
+    return output;
+}

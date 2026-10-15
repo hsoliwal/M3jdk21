@@ -222,7 +222,25 @@ final class M3StringRegexDp {
             return old.effect;
         }
         M3RegexDpPlan.Effect made;
-        if (source.start() == 0 && source.length() == owner.length && owner instanceof M3StringTuple tuple) {
+        M3String unit = source;
+        int levels = 0;
+        // Equality here is exact canonical owner AND coordinate, not a text/hash guess.
+        while (depth + levels < 48 && unit.start() == 0 && unit.length() == unit.owner().length
+                && unit.owner() instanceof M3StringTuple repeated
+                && repeated.left.owner() == repeated.right.owner()
+                && repeated.left.coordinate() == repeated.right.coordinate()) {
+            unit = repeated.left;
+            levels++;
+        }
+        if (levels >= 8) {
+            // A 2^levels power costs levels squares and one identity composition.
+            // Charge skipped node visits as well; do not widen the preparation budget.
+            long cost = levels + (long) plan.stateCount() * plan.stateCount() * (levels + 1);
+            if (!work.take(cost)) return null;
+            M3RegexDpPlan.Effect one = effect(unit, plan, cache, work, depth + levels);
+            if (one == null) return null;
+            made = one.repeated(1L << levels, null);
+        } else if (source.start() == 0 && source.length() == owner.length && owner instanceof M3StringTuple tuple) {
             M3RegexDpPlan.Effect left = effect(tuple.left, plan, cache, work, depth + 1);
             if (left == null) return null;
             M3RegexDpPlan.Effect right = effect(tuple.right, plan, cache, work, depth + 1);
