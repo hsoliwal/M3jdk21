@@ -143,6 +143,52 @@ final class M3RecipeDagTest {
         assertFalse(new M3AdmissionFact("p", true, true, true, true, false, false, false, true).promotable());
     }
 
+    @Test
+    void promotionCannotIgnoreAnIndependentSinkDespiteSortingLast() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3RecipeDag(List.of(
+                        node("orphan", M3DagKind.INVENTORY, M3EditScope.FILE,
+                                false, false, false, "", List.of()),
+                        node("work", M3DagKind.RECIPE, M3EditScope.FILE,
+                                true, false, false, "recipe.Work", List.of()),
+                        node("promote", M3DagKind.PROMOTION, M3EditScope.FILE,
+                                false, true, false, "serial", List.of("work")))));
+    }
+
+    @Test
+    void sameLayerSiblingCannotRaceAheadOfPromotion() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3RecipeDag(List.of(
+                        node("root", M3DagKind.INVENTORY, M3EditScope.FILE,
+                                false, false, false, "", List.of()),
+                        node("a-sibling", M3DagKind.VERIFICATION, M3EditScope.FILE,
+                                false, false, false, "", List.of("root")),
+                        node("promote", M3DagKind.PROMOTION, M3EditScope.FILE,
+                                false, true, false, "serial", List.of("root")))));
+    }
+
+    @Test
+    void completeParallelFileFanInRetainsDeterministicLayersAndProjectionRoot() {
+        M3RecipeDag dag = new M3RecipeDag(List.of(
+                node("file-b", M3DagKind.RECIPE, M3EditScope.FILE,
+                        true, false, false, "recipe.B", List.of()),
+                node("file-a", M3DagKind.RECIPE, M3EditScope.FILE,
+                        true, false, false, "recipe.A", List.of()),
+                node("verify", M3DagKind.VERIFICATION, M3EditScope.FILE,
+                        false, false, false, "", List.of("file-b", "file-a")),
+                node("promote", M3DagKind.PROMOTION, M3EditScope.FILE,
+                        false, true, false, "serial", List.of("verify"))));
+        assertEquals(
+                List.of("file-a", "file-b"),
+                dag.layers().getFirst().stream().map(M3DagNode::id).toList());
+        assertEquals(
+                List.of("promote"),
+                dag.layers().getLast().stream().map(M3DagNode::id).toList());
+        assertTrue(M3DagSemanticRoot.of(dag).matches("[0-9a-f]{64}"));
+    }
+
     private static M3DagNode node(
             String id,
             M3DagKind kind,
