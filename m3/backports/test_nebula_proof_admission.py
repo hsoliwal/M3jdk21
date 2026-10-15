@@ -37,6 +37,8 @@ class NebulaProofAdmissionTest(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertEqual("HOLD", first["disposition"])
         self.assertEqual("HOLD_UNTIL_PROVEN", first["nebulaState"])
+        self.assertEqual("217", row["nebula_pr"])
+        self.assertEqual("0ff8c981a655b4fffb940f59ed4b6c73a516c50d", row["nebula_commit"])
         self.assertEqual("DRAFT_UNMERGED", first["synexiaState"])
         self.assertFalse(first["packetExecution"])
         self.assertFalse(first["mutationAuthority"])
