@@ -39,6 +39,19 @@ jobs:
         run: |
           mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am clean verify
 
+      - name: Validate Synexia and Nebula Java-grade handoff before projection
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/m3-handoff
+          python3 m3/backports/recipe_dag_handoff.py \
+            --out target/m3-handoff/synexia-nebula-recipe-dag-handoff.json
+          python3 -m unittest m3.backports.test_recipe_dag_handoff -v
+          grep -F '"nebulaJavaGradeState": "HOLD_PENDING_NEBULA_PROOF"' \
+            target/m3-handoff/synexia-nebula-recipe-dag-handoff.json
+          grep -F '"nebulaJavaGradeCommit": "7a5a3cb5ffd82bca671b20e1496db80369657578"' \
+            target/m3-handoff/synexia-nebula-recipe-dag-handoff.json
+
       - name: Execute canonical DAG parser
         run: |
           mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportDagMain             exec:java
@@ -97,5 +110,6 @@ jobs:
             m3/backports/target/backport-packets.tsv
             m3/backports/target/backport-packets/**
             target/m3-projection-smoke/out/**
+            target/m3-handoff/**
           if-no-files-found: error
           retention-days: 14
