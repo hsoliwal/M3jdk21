@@ -367,3 +367,73 @@ explicit. Runtime/build/JNI/cross-process/GC/resource verification is NOT_RUN in
 documentation pass; hosted CI remains separate exact-commit evidence.
 This does not promote the custody slice, fixture, separate bridge, or canonical
 JDK String owner into interchangeable implementation authorities.
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors. -->
+
+## Retained AST ownership coverage (2026-10-15)
+
+The [ownership and lifetime reference](retained-ast-ownership-reference.md) and [source coverage companion](retained-ast-ownership-reference-coverage.md) cover nine nonoverlapping primary retained AST owners: MIndexAST, MIndexASTPool, MIndexASTDocument, MIndexASTParser, MIndexASTDiagnostic, MIndexASTOccurrenceSource, MIndexASTEditSession, MIndexASTPartialCache and package-private MIndexASTResidentCache.
+
+The companion records 67 member/support groups, both dedicated cache test bodies, exact source hashes/intake rows, missing text/context/grammar/backend dependencies and build/license boundaries. The historical AST intake excludes cache/edit/resident lifecycle qualification. All tests/builds/repository scripts/native loads/benchmarks were NOT_RUN during documentation authoring/review; hosted exact-commit CI remains separate. This does not mark the retained 37-file AST slice source-complete or admit it to the JDK runtime.
+
+
+## Retained AST navigation source-body coverage (2026-10-15)
+
+The [navigation reference](retained-ast-navigation-reference.md) and
+[exact source/member/assertion map](retained-ast-navigation-reference-coverage.md)
+cover ten retained `com.synexia.indexstring.ast` bodies at public pin
+`363c02caa2e5af1df9460b927ecd78f6a9dbcefb`: Diff, ReuseKey, Query,
+PoolPrecompute, Precompute, PrecomputeCodec, LcaSparseTable, SourceIndex,
+KindPattern and KindAutomaton, all with the `MIndexAST` prefix. This is bounded
+source documentation, not complete package/module or runtime qualification.
+The three linked test bodies were read and NOT_RUN; the historical four-method
+navigation receipt does not qualify absent general-AST/LCA codecs, hostile-image
+geometry, lifecycle, native, matched-runtime or performance gates.
+
+Authoring/review execution is NOT_RUN; hosted CI remains separate exact-commit
+evidence.
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors. -->
+
+## Retained AST specification and routing coverage (2026-10-15)
+
+The [specification reference](retained-ast-specification-reference.md) and
+[source/evidence companion](retained-ast-specification-reference-coverage.md)
+route eighteen complete public retained bodies through 110 explicit declared-member
+and support groups. They preserve actual validation, first-token operator mapping,
+registry collisions, ordered multi-candidate dispatch, caller-owned batch outputs,
+formal-tree snapshot limits, non-atomic image writes and absent native/image dependencies.
+
+The [37-file AST routing map](retained-ast-routing-map.md) is the unfiltered physical
+production-file inventory: nine ownership, ten navigation and eighteen specification
+owners, with no overlap. The separately documented filesystem/content-store family
+is outside that count. Direct spec/dispatch/image/native test coverage is not present
+in retained src/test; historical AST/importer receipts are attributed only to their
+bounded scope. Source-body coverage is not source-complete module, consumer, runtime,
+performance or promotion qualification. All execution in this authoring pass is NOT_RUN.
+
+Hosted CI is separate exact-commit evidence, not runtime qualification of these retained owners.
+
+
+## Retained filesystem content-store contract increment (2026-10-15)
+
+The [content-store reference](retained-content-store-reference.md) and its
+[eight-source/member/provenance map](retained-content-store-reference-coverage.md)
+add primary documentation for exactly eight Java files under
+`m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/fs`.
+Coverage includes ID/reference contracts; staged hard-link object publication;
+copied, streamed and mapped reads; primitive callback/geometry/profile/text-bundle
+semantics; canonical operation/result encodings; cache lock/pointer/mapping flows;
+and explicit error, concurrency, atomicity, path-security and recovery limits.
+
+The eight bodies match the original public v7 export. They remain separate from
+retained regex, AST, typed-precompute/shared arrays, canonical IndexDB and source
+recipe admission. Three referenced fs owners are absent from the retained
+subtree, which has no standalone POM/module descriptor or fs test bodies.
+Compilation, repository tests/scripts/policy verifiers, recipes, native/JNI,
+runtime qualification and benchmarks were NOT_RUN in this documentation authoring/review pass.
+Hosted CI, if run, is separate evidence for its exact commit.
+No build closure, target admission, phase advancement or wider family completion
+is inferred from this documentation increment.
