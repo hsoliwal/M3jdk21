@@ -53,6 +53,7 @@ jobs:
 
       - name: 2 - SHAKE recipe JUnit and fixed-point proof
         run: >-
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD" &&
           mvn -B -ntp
           -f m3/tooling/migration-recipes/pom.xml
           -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest
@@ -134,6 +135,7 @@ jobs:
 
       - name: Re-prove source-sealed SHAKE recipe before receipt mutation
         run: >-
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD" &&
           mvn -B -ntp
           -f m3/tooling/migration-recipes/pom.xml
           -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest
@@ -221,6 +223,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
           mvn -B -ntp \
             -f m3/tooling/migration-recipes/pom.xml \
             -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest \
