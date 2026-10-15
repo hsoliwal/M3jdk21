@@ -1,0 +1,8 @@
+order	work_id	evidence_kind	evidence_path	recipe_test	jtreg_tests	linux_build	macos_build	smoke
+0	JDK-8357439	HASH_PINNED_TEXT	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jcmd-8357439/manifest.tsv	M3Jdk8357439JcmdCompletionBackportRecipeTest		true	false	m3/backports/recipes/jdk-8357439/test_jcmd_completion.sh
+1	JDK-8347112	ADAPTATION	m3/backports/recipes/jdk-8347112/adaptation.tsv	M3Jdk8347112BackportRecipeTest	test/langtools/jdk/javadoc/doclet/testCopyFiles/TestCopyFiles.java	true	false	
+2	JDK-8359706	ADAPTATION	m3/backports/recipes/jdk-8359706/adaptation.tsv	M3Jdk8359706BackportRecipeTest	test/jdk/sun/tools/jcmd/TestJcmdSanity.java	true	true	
+3	JDK-8364182	ADAPTATION	m3/backports/recipes/jdk-8364182/adaptation.tsv	M3Jdk8364182BackportRecipeTest	test/hotspot/jtreg/serviceability/dcmd/vm/SecurityPropertiesTest.java;test/hotspot/jtreg/serviceability/dcmd/vm/SystemPropertiesTest.java	true	false	
+4	JDK-8367584	ADAPTATION	m3/backports/recipes/jdk-8367584/adaptation.tsv	M3Jdk8367584JfrOptionsHelpBackportRecipeTest	test/jdk/jdk/jfr/startupargs/TestOptionsHelp.java	true	false	m3/backports/recipes/jdk-8367584/verify_recovery.py
+5	JDK-8368692	ADAPTATION	m3/backports/recipes/jdk-8368692/adaptation.tsv	M3Jdk8368692PasswordSystemInBackportRecipeTest	test/jdk/sun/security/tools/keytool/AllowSystemIn.java	true	false	m3/backports/recipes/jdk-8368692/verify_recovery.py
+6	JDK-8374808	ADAPTATION	m3/backports/recipes/jdk-8374808/adaptation.tsv	M3Jdk8374808BackportRecipeTest	test/jdk/java/security/KeyStore/CreationInstant.java;test/jdk/java/security/KeyStore/TestKeyStoreBasic.java	true	false	
