@@ -19,8 +19,8 @@ DEFAULT_RECEIPT = Path(__file__).with_name("NEBULA_PROOF_GATED_ADMISSION_2026101
 EXPECTED = {
     "schema": SCHEMA,
     "nebula_repository": "hsoliwal/nebula",
-    "nebula_pr": "212",
-    "nebula_commit": "9a77803ce174be534ba5f543a9f3b342858d2bbc",
+    "nebula_pr": "217",
+    "nebula_commit": "0ff8c981a655b4fffb940f59ed4b6c73a516c50d",
     "nebula_state": "HOLD_UNTIL_PROVEN",
     "synexia_repository": "hsoliwal/com.synexia",
     "synexia_pr": "11632",
