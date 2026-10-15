@@ -1,29 +1,56 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-# M3 four-library interop: receiver admission packet
+# M3 four-library collections: qualified optional runtime slice
 
-**This is recipe-input preparation, not installed runtime delivery.** The canonical source is
-Synexia PR #11676 at `0ff2ee68607e02b0ec2d1bc699e93653a740ab87`. The five Java templates,
-manifest, named recipe and six-method proof host are exact mirrors. `donor-origin.json`
-records identities and pending gates. Canonical improvements must be made in Synexia's
-existing crate and re-received with provenance; do not independently fork these templates.
+The existing OpenRewrite recipe generated the three runtime classes and two test classes
+now present under `src/`. Their exact bytes were promoted from successful receiver run
+`38763952509`, head `777ba2b97d15ea2ef2e5ea4340f19c83fd7896bd`, after authenticating the
+uploaded artifact and comparing all SHA-256 and Git blob identities. No manual production
+source transformation was used. Canonical source remains Synexia PR #11676, now at
+`ce510939bde1be4d6f76f014ef6e92e81bbab05b`. See `recipe-receipt.tsv` and
+`qualification/qualified-recipe-output.json` for the exact bounded evidence.
 
-The candidate contains 18 typed JDK/Guava/Eclipse/Spring factories, 11 explicit M3-backed
-stream collectors, and 42 runtime tests. Spring-created lists and single-value copies use
-existing M3 owners; caller-provided lists remain aliased. Ordinary donor allocating methods,
-such as Eclipse collect/toImmutable, are not silently reclassified as M3-backed. The optional
-interop artifact carries third-party dependencies; existing core remains separately built.
+## Implemented and tested
 
-## Source generation and proof
+18 factories expose selected JDK, Guava, Eclipse Collections and Spring interfaces over
+existing M3 map/set/list/tree owners. 11 ordered stream collectors retain M3 accumulation
+and result storage for the supported contracts. Spring-created value lists and single-value
+copies use M3 owners; caller-provided lists deliberately preserve identity and aliasing.
+The optional artifact carries its third-party dependencies; the existing core still needs
+only java.base. Ordinary donor operations such as Eclipse collect/toImmutable can still
+allocate donor-backed results: use explicit M3 collectors when M3 result ownership is needed.
 
-No `interop/src/main/java` or `interop/src/test/java` outputs are committed by this admission
-packet. The only runtime-source generator is the existing receiver
-`m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java`.
-It is not upgraded or replaced. The portable shared test checks actual Java compilation units
-and exact printed postimages, so the older engine's optional PlainText fallback is not an
-acceptable proof. Six recipe tests exercise exact/named execution, hashes, fixed point,
-occupied/drifted targets, duplicates and non-Java refusal.
+Actual Linux ARM64 / Java21 evidence: **six recipe tests and 42 runtime tests passed, with
+zero failures, errors or skips**. The full unchanged M3 core and all new runtime/test source
+compiled with warnings as errors. The core java.base-only dependency boundary and optional
+jar packaging also passed. Source promotion does not imply an installed M3JDK distribution,
+whole-library API compatibility, universal speedup, native qualification or receiving-phase
+promotion. Earlier failed runs are retained, including the missing SLF4J host dependency,
+test inference errors and corrected donor-specific equality assertion.
 
-From an exclusively owned checkout, with Java 21 and Maven, first run all recipe proofs:
+## Important Spring compatibility limit
+
+`springSingleValueMap()` preserves Spring 6.2.0 SingleToMultiValueMapAdapter, including its
+null-equality anomaly: get(key) returns null for a null scalar, but entrySet exposes a
+singleton-null list. Independent JDK-backed donor peers also compare unequal in that state.
+Its hashCode delegates to the scalar backing map. It is therefore a version-specific bridge,
+not a general Map-equality substitute for null-containing data. The focused regression tests
+that behavior explicitly rather than silently changing the donor. See
+`qualification/spring-single-value-donor-parity.md`. `springMultiValueMap()` is a different,
+map-of-lists implementation; preserve the distinction.
+
+## Build and verify
+
+After installing the exact existing `com.m3:m3-collections:0.1.0-SNAPSHOT` core artifact:
+
+```sh
+mvn -B -f m3/collections/interop/pom.xml verify
+```
+
+The exact-head workflow compiles and installs the unchanged core itself, avoiding unrelated
+historical core test-coordinate resolution. It validates all installed postimage hashes,
+runs all six recipe proofs, reapplies the same recipe at fixed point, runs all 42 runtime
+tests, checks that production sources remain unchanged, and retains jars, dependency hashes,
+generated-source receipts and actual test reports. Reproduce the recipe directly with:
 
 ```sh
 mvn -B -f m3/collections/interop/recipe/pom.xml test
@@ -32,34 +59,36 @@ mvn -B -f m3/collections/interop/recipe/pom.xml \
   -Dm3.collections.target="$PWD" test
 ```
 
-Only the second invocation materializes the actual tested OpenRewrite results. Existing
-non-identical outputs and symlink destinations are refused. No runtime source is copied
-from a template by shell/Python instead of the recipe. Source delivery is not a multi-file
-transaction; the checkout must be exclusively owned.
+Use an exclusively owned checkout. The existing receiver engine is not upgraded, and its
+PlainText fallback is not accepted: the shared proof requires real Java compilation units.
+Only absent or exact-output targets are admitted. Changes after this delivery require a
+reviewed canonical before/after recipe; do not delete installed files to force admission.
+Preparation identities in donor-origin.json are historical and are supplemented by current
+qualification receipts.
 
-The exact-head `M3 four-library receiver admission` workflow runs on a standard Linux ARM64
-runner as a separate platform gate. It checks the existing engine identity, requires all six
-recipe tests before generation, compiles the unchanged core, checks java.base-only dependencies,
-installs that locally compiled core into the runner cache, then builds this optional module.
-It requires exactly 42 runtime tests with no failures, errors or skips, and uploads generated
-sources, source hashes, public API and actual test reports. It neither accesses the private
-Synexia repository nor writes back to GitHub. A queued job or a mirrored template is not a
-successful recipe/runtime gate.
+## Usage
 
-## Evidence and remaining scope
+```java
+import com.m3.collections.interop.M3LibraryCollectors;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
-Canonical local evidence covers the unchanged map and list/deque owners: 160,000 + 120,000
-differential operations and 960,020 + 600,005 comparisons, respectively. A deterministic JDK
-census recorded 86 public collection-related types and 3,470 members on the recorded host.
-These are not proof that these new external-library adapters compiled or passed their tests.
-Adapter compilation, actual OpenRewrite execution and all 42 runtime tests were still pending
-when this packet was prepared. Inspect the exact-head workflow reports, not this sentence,
-for later execution evidence.
+var words = Stream.of("red", "rose", "blue").parallel().collect(
+    M3LibraryCollectors.toGuavaListMultimap(s -> s.substring(0, 1), Function.identity()));
+var counts = Stream.of("red", "blue", "red").parallel().collect(
+    M3LibraryCollectors.toMap(Function.identity(), s -> 1L, Long::sum));
+```
 
-Full family delivery remains open: bags/multisets, bimaps, ranges, primitive Eclipse APIs,
-remaining Spring utilities, intrinsic result-owner closure, concurrency/reference/serialization
-variants, JNI specialization, performance measurements and installed-image delivery are not
-qualified here. All unlisted APIs remain unqualified. Neither core ownership nor the global
-receiving phase is promoted, and java.base is not replaced. Serializability, concrete donor
-class identity and a universal performance advantage are not promised. Pinned dependency
-versions are compatibility inputs, not latest-version or production-security endorsements.
+Collectors do not claim CONCURRENT or UNORDERED. Parallel collection merges independently
+owned partial results; it does not make the returned mutable collection thread-safe.
+Null policies, duplicate/merge rules, views, exceptions and borrowed ownership remain explicit.
+
+## Remaining full scope
+
+Bags/multisets, bimaps, ranges, primitive Eclipse APIs, further Spring utilities, complete
+intrinsic allocating-return closure, concurrency/reference/serialization variants, JNI batch
+specialization, performance measurements, dependency security and installed-image delivery
+remain unqualified. A compatible factory interface does not qualify every concrete donor
+class or serialized form. All unlisted APIs remain unqualified. Pinned dependency versions
+are compatibility inputs, not latest-version or production-security endorsements. Existing
+M3 and upstream licenses and attribution remain intact.

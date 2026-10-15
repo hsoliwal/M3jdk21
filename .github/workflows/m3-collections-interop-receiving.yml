@@ -30,7 +30,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Identify exact head and retain the existing Java-LST engine
+      - name: Identify exact head and verify admitted production postimages
         shell: bash
         run: |
           set -euxo pipefail
@@ -38,13 +38,30 @@ jobs:
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; } > proof/identity.txt
           ENGINE=m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
           test "$(git hash-object "$ENGINE")" = d58ca50dfaeb60f581b64f43545e688aca5c6530
-          git ls-files m3/collections/interop/src/main/java > proof/preexisting-runtime-sources.txt
-          test ! -s proof/preexisting-runtime-sources.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, subprocess
+          manifest = Path('m3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv')
+          rows = [line.split('\t') for line in manifest.read_text().splitlines() if line and not line.startswith('#')]
+          assert len(rows) == 5
+          expected = {row[0]: row[2] for row in rows}
+          tracked = set(subprocess.check_output(['git', 'ls-files', 'm3/collections/interop/src'], text=True).splitlines())
+          assert tracked == set(expected), ('unexpected or missing source', tracked ^ set(expected))
+          receipt = []
+          for name, wanted in sorted(expected.items()):
+              path = Path(name)
+              assert path.is_file() and not path.is_symlink(), name
+              actual = hashlib.sha256(path.read_bytes()).hexdigest()
+              assert actual == wanted, ('source drift', name, wanted, actual)
+              receipt.append(name + '\t' + actual)
+          Path('proof/admitted-postimages.tsv').write_text('\n'.join(receipt) + '\n')
+          print('ADMITTED_EXACT_POSTIMAGES', len(receipt))
+          PY
       - name: Run all six actual recipe proofs before delivery
         shell: bash
         run: |
           set -euxo pipefail
-          mvn -B -f m3/collections/interop/recipe/pom.xml test 2>&1 | tee proof/recipe.log
+          mvn -B -ntp -f m3/collections/interop/recipe/pom.xml test 2>&1 | tee proof/recipe.log
           cp -R m3/collections/interop/recipe/target/surefire-reports proof/recipe-all-six
           python3 - <<'PY'
           from pathlib import Path
@@ -56,14 +73,15 @@ jobs:
           assert totals == {'tests': 6, 'failures': 0, 'errors': 0, 'skipped': 0}, totals
           print('RECIPE_EXECUTED', totals)
           PY
-      - name: Emit only exact outputs from the tested existing recipe
+      - name: Reapply tested recipe at installed fixed point
         shell: bash
         run: |
           set -euxo pipefail
-          mvn -B -f m3/collections/interop/recipe/pom.xml \
+          mvn -B -ntp -f m3/collections/interop/recipe/pom.xml \
             '-Dtest=M3CollectionsLibraryInteropTest#exactOutputsFixedPointAndOptionalMaterialization' \
             -Dm3.collections.target="$GITHUB_WORKSPACE" test 2>&1 | tee proof/recipe-delivery.log
           cat m3/collections/interop/recipe-receipt.tsv | tee proof/recipe-receipt.tsv
+          git diff --exit-code -- m3/collections/interop/src m3/collections/interop/recipe-receipt.tsv
       - name: Compile unchanged M3 core and verify the dependency boundary
         shell: bash
         run: |
@@ -76,13 +94,13 @@ jobs:
           jdeps --print-module-deps proof/m3-collections.jar | tee proof/core-module-deps.txt
           test "$(cat proof/core-module-deps.txt)" = java.base
           JAR="$GITHUB_WORKSPACE/proof/m3-collections.jar"
-          (cd "$RUNNER_TEMP" && mvn -B org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
+          (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
             -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true)
       - name: Compile and execute all 42 adapter and collector tests
         shell: bash
         run: |
           set -euxo pipefail
-          mvn -B -f m3/collections/interop/pom.xml verify 2>&1 | tee proof/interop.log
+          mvn -B -ntp -f m3/collections/interop/pom.xml verify 2>&1 | tee proof/interop.log
           python3 - <<'PY'
           from pathlib import Path
           import xml.etree.ElementTree as E
@@ -97,8 +115,18 @@ jobs:
             com.m3.collections.interop.M3LibraryCollections \
             com.m3.collections.interop.M3LibraryCollectors \
             com.m3.collections.interop.M3SpringMultiValueMap > proof/interop-public-api.txt
-          git diff --exit-code -- m3/collections/src/main/java m3/tooling/migration-recipes/src/main/java
-      - name: Preserve exact generated candidates and executed reports including failures
+          git diff --exit-code -- m3/collections/src/main/java m3/tooling/migration-recipes/src/main/java m3/collections/interop/src
+      - name: Preserve actual resolved runtime dependency closure and hashes
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/collections/interop/pom.xml \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:copy-dependencies \
+            -DincludeScope=runtime -DprependGroupId=true \
+            -DoutputDirectory="$GITHUB_WORKSPACE/proof/runtime-dependencies" 2>&1 | tee proof/runtime-dependencies.log
+          find proof/runtime-dependencies -type f -name '*.jar' | sort | xargs sha256sum > proof/runtime-dependency-sha256.txt
+          test -s proof/runtime-dependency-sha256.txt
+      - name: Preserve exact admitted sources and executed reports including failures
         if: always()
         uses: actions/upload-artifact@v4
         with:
