@@ -437,3 +437,15 @@ runtime qualification and benchmarks were NOT_RUN in this documentation authorin
 Hosted CI, if run, is separate evidence for its exact commit.
 No build closure, target admission, phase advancement or wider family completion
 is inferred from this documentation increment.
+
+
+## Lucene canonical String opportunity map — 15 October 2026
+
+The [Lucene opportunity reference](lucene-string-opportunity-reference.md) and [source/version ledger](lucene-string-opportunity-source-coverage.md) map selected real APIs at current fork `1169cd2007d37c1e5354fdccf9aa7e4eef93d21a` and the concrete JDK21-compatible Lucene 10.3.1 release `51190f35a16d2ce433139abfe0fd8365791b352a`. Targeted contracts in 25 Java files were inspected at both pins; this is focused integration design coverage, not full Lucene member/package coverage. Current main needs JDK25, while the M3 source/guidance pin remains `1de629d26ea82d2729a5993bfc88099f83221923`.
+
+The proposal preserves mutable token buffers, original UTF-16 offsets and graph metadata, Lucene-specific UTF-8/hash/order contracts, segment/reader ordinals, existing pooling and index formats. It reuses M3 ownership/lineage/name-map authority and records the enabled-runtime interpreter/JFR restrictions. A bounded retained-token adapter and normalization/export experiments are proposed, not implemented. Compilation, tests, recipes, native/runtime qualification and all performance/resource measurements are NOT_RUN in this documentation authoring/review pass; historical CI remains separate exact-commit evidence. No donor change, receiving-phase promotion or runtime/performance acceptance is implied.
+
+
+## OpenNLP string opportunity research — 2026-10-15
+
+The [OpenNLP opportunity reference](opennlp-string-opportunity-reference.md) maps bounded 3.x source candidates while preserving the separate 2.4 received-tool-pack baseline. [Exact source coverage](opennlp-string-opportunity-source-coverage.md) records the inspected API/implementation/policy/test/JMH identities. This is documentation-only: no new runtime owner, source adaptation, model change, benchmark result or phase advancement. String/runtime/model differential and retained-memory qualification remain pending; active M3 storage is interpreter-only under the current gate.

@@ -205,3 +205,13 @@ Hosted CI is separate exact-commit evidence, not runtime qualification of these 
 
 - [Retained content objects, mappings and precompute persistence](retained-content-store-reference.md) explains all eight retained `com.synexia.indexstring.fs` source owners: IDs, exact-byte object publication, primitive lane/bundle formats, mapped ownership, operation keys, positive/negative cache pointers and failure/recovery limits
 - [Exact source/member/evidence map](retained-content-store-reference-coverage.md) records every primary body and member group, hashes, public v7 provenance, two caller boundaries and absent test/dependency closure. This is retained source documentation, not a standalone module, canonical IndexDB or JDK runtime admission
+
+## Lucene canonical String opportunity map — 15 October 2026
+
+For Lucene integration opportunities, see the [canonical String opportunity reference](lucene-string-opportunity-reference.md) and [source/version ledger](lucene-string-opportunity-source-coverage.md): mutable token buffers versus retained atoms, exact UTF-8/offset/graph contracts, the verified Lucene 10.3.1 JDK21 lane, and a bounded recipe/test/benchmark plan. This is a source-backed proposal; no adapter, performance gain or runtime qualification is claimed.
+
+
+## OpenNLP string opportunity research — 2026-10-15
+
+- [OpenNLP string opportunity reference](opennlp-string-opportunity-reference.md): source-pinned token/span, dictionary, feature and normalization candidates; separates the existing 2.4 tool pack from the 3.x research fork, with model/state/offset boundaries and matched-interpreter qualification criteria
+- [OpenNLP opportunity source coverage](opennlp-string-opportunity-source-coverage.md): exact public source identities and explicit unexecuted gates
