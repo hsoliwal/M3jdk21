@@ -64,6 +64,7 @@ def main():
         run(out, 'native-cc', [cc, *flags, '-I' + str(jdk / 'include'),
                               '-I' + str(jdk / 'include' / os_header),
                               '-include', headers / 'com_m3_runtime_capability_LfCount.h',
+                              '-include', headers / 'com_m3_runtime_capability_BytePatternSearch.h',
                               native, '-o', library])
         accelerated = run(out, 'jni-oracle', [*options, library.resolve(), sha(library)])
         if 'kernel=JNI_DIRECT_C11' not in accelerated:
@@ -86,6 +87,19 @@ def main():
                            library.resolve(), sha(library)])
         if 'M3_BYTE_LINE_INDEX_PASS assertions=' not in native_lines or 'kernel=JNI_DIRECT_C11' not in native_lines:
             raise RuntimeError('line-index JNI contract oracle did not execute')
+
+    search_class = 'com.m3.runtime.capability.BytePatternSearchChecks'
+    search_options = [java, '-Xmx128m', '-Xcheck:jni', '--module-path', classes,
+                      '--module', 'com.m3.runtime.capability/' + search_class]
+    java_patterns = run(out, 'byte-pattern-java-oracle', search_options)
+    if 'M3_BYTE_PATTERN_SEARCH_PASS assertions=' not in java_patterns or 'kernel=JAVA_KMP' not in java_patterns:
+        raise RuntimeError('actual source byte-pattern Java oracle not executed')
+    native_patterns = 'NOT_RUN'
+    if not args.java_only:
+        native_patterns = run(out, 'byte-pattern-jni-oracle', [*search_options,
+                                 library.resolve(), sha(library)])
+        if 'M3_BYTE_PATTERN_SEARCH_PASS assertions=' not in native_patterns or 'kernel=JNI_DIRECT_C11' not in native_patterns:
+            raise RuntimeError('actual source byte-pattern JNI oracle not executed')
 
     image_proof = 'NOT_RUN'
     if args.developer_image:
@@ -133,7 +147,8 @@ def main():
               'full_openjdk_jtreg': 'NOT_RUN', 'maven_openrewrite_sdk': 'NOT_RUN',
               'performance_crossover': 'NOT_RUN',
               'stock_jdk21_developer_image': image_proof,
-              'byte_line_java': java_lines, 'byte_line_jni': native_lines}
+              'byte_line_java': java_lines, 'byte_line_jni': native_lines,
+              'byte_pattern_java': java_patterns, 'byte_pattern_jni': native_patterns}
     (out / 'REPORT.json').write_text(json.dumps(report, indent=2, sort_keys=True) + '\n')
     print(json.dumps({'status': report['status'], 'java': pure, 'jni': accelerated, 'image': image_proof}))
 
