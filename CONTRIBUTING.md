@@ -24,6 +24,81 @@ prepare a review; it does not change those authorities or any license.
    the JDK collection backend. Missing provenance or qualification is an explicit pending
    disposition, never a reason to weaken a gate.
 
+## First build: prerequisites, outputs and test selection
+
+The [build/test routes](m3/docs/native-build.md#current-checkout-verification-routes)
+cover separate artifacts. Before running one, check the shell, JDK selection and
+output locations below. These are source-derived instructions, not new passing results.
+
+### Prepare the shell and JDKs
+
+The [foundation script](m3/build.sh) uses Bash `mapfile`, arrays and process
+substitution. Use Bash 4+ and make sure `sha256sum`, `find`, `sort`, `mktemp`,
+`tee`, `cmp`, `chmod` and `mv` are available. The older system Bash on macOS
+and a plain Windows command prompt do not supply this environment unchanged.
+General OpenJDK host support does not establish support for every M3 helper.
+
+Use isolated JDK installations and distinguish these variables:
+
+| Variable | Consumer | Meaning |
+| --- | --- | --- |
+| `M3_JDK` | `m3/build.sh` | JDK used to compile and run the separate foundation |
+| `M3_BOOT_JDK` | `m3/build-openjdk.sh` and native harnesses | Bootstrap JDK; the wrapper requests a private JDK 21 |
+| `M3_TEST_JDK` | M3 runtime harnesses | Complete candidate image with matching Java and HotSpot code |
+
+Setting one does not set the others. The foundation calls `javac`, `jar` and
+`java` from `M3_JDK/bin`, rather than selecting them from `PATH`.
+
+For native builds, follow the platform-specific
+[compiler requirements](doc/building.md#native-compiler-toolchain-requirements),
+[build tools](doc/building.md#build-tools-requirements) and
+[external libraries](doc/building.md#external-library-requirements).
+Use a short checkout path without spaces on a local disk, as described in the
+[source checkout guidance](doc/building.md#special-considerations). Reserve space
+for the image, objects, logs and test results before starting.
+
+### Find the output from this run
+
+| Entry point | Outputs to inspect |
+| --- | --- |
+| `m3/build.sh` | `m3/build/com.m3.text.jar`, `m3/build/classes/`, `m3/build/tests/` and `m3/build/logs/` |
+| Foundation fixture generation | `m3/build/english-image-path.txt` names the content-addressed fixture; `m3/build/logs/artifacts.sha256` records hashes |
+| `m3/build-openjdk.sh` | `m3/build/logs/native-configure.log`, `m3/build/logs/native-build.log` and `build/CONFIG/images/jdk/` |
+
+The foundation uses `set -euo pipefail`: a compile or test failure stops later
+steps, including fixture publication. An old JAR or fixture left in the output
+directory does not establish that the latest command completed. Check the exit
+status and invocation logs. Preserve logs before rerunning; the scripts reuse
+their log filenames.
+
+The [native wrapper](m3/build-openjdk.sh) passes fixed configure options and
+does not forward additional command-line arguments. It defaults to five make
+jobs; `M3_JOBS` changes that count. Use the documented OpenJDK configure/make
+route when you need custom configure flags.
+
+### Select the same image for the harness and jtreg
+
+To make jtreg discoverable by the wrapper's configure invocation, set `JT_HOME`
+to the directory containing `lib/jtreg.jar` before building. A direct configure
+invocation can instead use `--with-jtreg=/absolute/path/to/jtreg`; see
+[test configuration](doc/testing.md#configuration).
+
+After building, substitute the actual configuration name for `CONFIG` below:
+
+```sh
+export M3_TEST_JDK=/absolute/path/to/this-checkout/build/CONFIG/images/jdk
+"$M3_TEST_JDK/bin/java" -version
+make CONF_NAME=CONFIG test TEST="test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringStreamsTest.java"
+```
+
+`M3_TEST_JDK` selects the M3 harness image; it does not select the configuration
+used by `make test`. Use the same
+[explicit configuration](doc/building.md#using-multiple-configurations) for both.
+The separate [scripted jtreg lane](m3/runtime-integration/run-jtreg.sh) requires
+`JTREG_JAR`, `M3_TEST_JDK`, `M3_BOOT_JDK` and built native test libraries; its
+default native-library path is Linux x86-64. A focused test selection remains
+separate from full JDK, platform and performance qualification.
+
 ## Documentation and source comments
 
 Document inputs, units, return/refusal behavior, exceptions, owner lifetime, thread-safety
