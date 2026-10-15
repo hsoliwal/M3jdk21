@@ -2,5 +2,5 @@
 m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java	ABSENT	fa144a8c8617f190cdb1848bc28d3c9f6ae4302666a00c8ea3e904f25afc06fd	M3LibraryCollections.java.txt
 m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollectors.java	ABSENT	8836aaca2113c3d25bffbf1a226394ffa0f6a7c7fbba826715a0aa96c5500a19	M3LibraryCollectors.java.txt
 m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringMultiValueMap.java	ABSENT	cfd7a51bdce14f3e8f2b875d529006c3863049d10087a18b14ccad45f0fd669a	M3SpringMultiValueMap.java.txt
-m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java	ABSENT	85c497b830bdc6ff6d00c19775c67eed37d5d4c77051e85a6d472b3528cf315b	M3LibraryClosureTest.java.txt
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java	ABSENT	5ece9a369bcf5a223cb163ed0857534600fcd53bcc881f239956be15a4200f40	M3LibraryClosureTest.java.txt
 m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryCollectionsTest.java	ABSENT	4bebee17ef96cefd2c779c76a0b190e27de311d136dec2de0fc5c05161ac199a	M3LibraryCollectionsTest.java.txt

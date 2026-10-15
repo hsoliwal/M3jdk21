@@ -178,9 +178,38 @@ final class M3LibraryClosureTest {
         expected.add("a", 1); actual.add("a", 1);
         assertEquals(outcome(() -> { expected.add("a", 2); return null; }), outcome(() -> { actual.add("a", 2); return null; }));
         assertEquals(outcome(() -> expected.put("b", List.of(1, 2))), outcome(() -> actual.put("b", List.of(1, 2))));
-        expected.set("a", null); actual.set("a", null); assertEquals(expected, actual);
+        expected.set("a", null); actual.set("a", null); sameSingleValueView(expected, actual);
         assertEquals(outcome(() -> expected.put("c", List.of())), outcome(() -> actual.put("c", List.of())));
-        assertEquals(expected, actual);
+        sameSingleValueView(expected, actual);
+    }
+
+    private static void sameSingleValueView(MultiValueMap<String, Integer> expected,
+            MultiValueMap<String, Integer> actual) {
+        // Spring 6.2.0 returns null from get() for a null scalar, but entrySet()
+        // returns singletonList(null). Even two JDK-backed donor peers compare
+        // unequal in that state. Preserve and test that donor behavior explicitly.
+        var peer = MultiValueMap.<String, Integer>fromSingleValue(
+                new LinkedHashMap<>(expected.toSingleValueMap()));
+        assertEquals(expected.toSingleValueMap(), actual.toSingleValueMap());
+        assertEquals(new ArrayList<>(expected.keySet()), new ArrayList<>(actual.keySet()));
+        assertEquals(new ArrayList<>(expected.values()), new ArrayList<>(actual.values()));
+        assertEquals(expected.entrySet(), actual.entrySet());
+        assertEquals(expected.hashCode(), actual.hashCode());
+        assertEquals(expected.toString(), actual.toString());
+        assertEquals(expected.containsValue(null), actual.containsValue(null));
+        for (String key : expected.keySet()) {
+            assertEquals(expected.get(key), actual.get(key));
+            assertEquals(expected.getFirst(key), actual.getFirst(key));
+            assertEquals(expected.containsKey(key), actual.containsKey(key));
+        }
+        assertFalse(expected.equals(peer), "pinned donor null-equality behavior changed");
+        assertEquals(expected.equals(peer), actual.equals(peer));
+        assertEquals(peer.equals(expected), peer.equals(actual));
+        assertEquals(expected.equals(expected), actual.equals(actual));
+        Map<String, List<Integer>> expectedTraversal = new LinkedHashMap<>();
+        Map<String, List<Integer>> actualTraversal = new LinkedHashMap<>();
+        expected.forEach(expectedTraversal::put); actual.forEach(actualTraversal::put);
+        assertEquals(expectedTraversal, actualTraversal);
     }
 
     @Test void springAutoPopulatingListPreservesLazyFactoryCalls() {
