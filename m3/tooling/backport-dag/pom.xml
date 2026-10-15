@@ -82,6 +82,7 @@
                 <include>com/m3/tooling/dag/M3DagProjection*</include>
                 <include>com/m3/tooling/dag/M3DagProjector*</include>
                 <include>com/m3/tooling/dag/M3A3BackportPreparation*</include>
+                <include>com/m3/tooling/dag/M3BackportProgrammeExecutionPlan*</include>
               </includes>
               <rules><rule><element>BUNDLE</element><limits>
                 <limit><counter>LINE</counter><value>COVEREDRATIO</value><minimum>0.99</minimum></limit>
@@ -258,6 +259,39 @@
                 <exclusion>**/vendor/**</exclusion>
               </exclusions>
             </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>m3-backport-programme-execution-plan</id>
+      <properties>
+        <m3.programme.status>${project.basedir}/../../backports/target/backport-programme-status.tsv</m3.programme.status>
+        <m3.packet.index>${project.basedir}/../../backports/target/backport-packets.tsv</m3.packet.index>
+        <m3.packet.dir>${project.basedir}/../../backports/target/backport-packets</m3.packet.dir>
+        <m3.execution.out>${project.build.directory}/programme-execution</m3.execution.out>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>m3-backport-programme-execution-plan</id>
+                <phase>verify</phase>
+                <goals><goal>java</goal></goals>
+                <configuration>
+                  <mainClass>com.m3.tooling.dag.M3BackportProgrammeExecutionPlanMain</mainClass>
+                  <arguments>
+                    <argument>${m3.programme.status}</argument>
+                    <argument>${m3.packet.index}</argument>
+                    <argument>${m3.packet.dir}</argument>
+                    <argument>${m3.execution.out}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>
