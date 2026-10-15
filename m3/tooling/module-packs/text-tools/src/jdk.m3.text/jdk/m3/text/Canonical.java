@@ -1,10 +1,7 @@
-/*
- * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
- * SPDX-License-Identifier: Apache-2.0
- */
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+// SPDX-License-Identifier: Apache-2.0
 package jdk.m3.text;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
@@ -22,10 +19,9 @@ public final class Canonical {
     return this;
   }
   public Canonical text(String value) {
-    validUnicode(value);
-    byte[] data = value.getBytes(StandardCharsets.UTF_8);
-    number(data.length);
-    digest.update(data);
+    long utf8Bytes = Utf8Segments.length(value);
+    number(utf8Bytes);
+    Utf8Segments.update(digest, value);
     return this;
   }
   public String finish() { return HexFormat.of().formatHex(digest.digest()); }
