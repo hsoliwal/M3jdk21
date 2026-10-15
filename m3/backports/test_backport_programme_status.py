@@ -54,11 +54,19 @@ def atom(
     )
 
 
-def wave(jep: int, execution_state: str, *, number: int = 0, scope: str = "FILE"):
+def wave(
+    jep: int,
+    execution_state: str,
+    *,
+    number: int = 0,
+    scope: str = "FILE",
+    scope_approved: bool = False,
+):
     return SimpleNamespace(
         work_id=f"JEP-{jep}",
         atom_id=f"jep_{jep}.atom_{number}",
         scope=scope,
+        scope_approved=scope_approved,
         execution_state=execution_state,
     )
 
@@ -88,7 +96,7 @@ class BackportProgrammeStatusTest(unittest.TestCase):
             row(475, "candidate-high-risk"),
             [atom(475, "MATERIALIZED_RECIPE", "jep-475-g1", number=i, scope="MULTI_MODULE")
              for i in range(3)],
-            [wave(475, "READY", number=0, scope="MULTI_MODULE"),
+            [wave(475, "READY", number=0, scope="MULTI_MODULE", scope_approved=True),
              wave(475, "SCOPE_APPROVAL_HOLD", number=1, scope="MULTI_MODULE"),
              wave(475, "DEPENDENCY_HOLD", number=2, scope="MULTI_MODULE")],
         )
@@ -121,12 +129,21 @@ class BackportProgrammeStatusTest(unittest.TestCase):
         result = self.s.classify(
             row(485, "candidate"),
             [atom(485, "MATERIALIZED_RECIPE", scope="MODULE")],
-            [wave(485, "READY", scope="MODULE")],
+            [wave(485, "READY", scope="MODULE", scope_approved=True)],
         )
         self.assertEqual(self.s.SCOPE_READY, result.programme_state)
         self.assertEqual(
             "EXECUTE_SCOPE_APPROVED_ATOMS_AND_PROVE_JAVA21_CONTRACT", result.next_action
         )
+
+    def test_nonfile_ready_requires_explicit_scope_approval(self) -> None:
+        result = self.s.classify(
+            row(485, "candidate"),
+            [atom(485, "MATERIALIZED_RECIPE", scope="MODULE")],
+            [wave(485, "READY", scope="MODULE", scope_approved=False)],
+        )
+        self.assertEqual(self.s.EVIDENCE_HOLD, result.programme_state)
+        self.assertEqual("REPAIR_BACKPORT_DAG_WAVE_ALIGNMENT", result.next_action)
 
     def test_wave_scope_mismatch_unknown_state_and_nonexecutable_ready_hold(self) -> None:
         fixtures = (
