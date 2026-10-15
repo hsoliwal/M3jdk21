@@ -55,6 +55,39 @@ class A3CompleteTest {
     }
 
     @Test
+    void cliCompleteConsumesExplicitInventoryAndQueue() throws Exception {
+        Path inventory = write(
+                "m3/build/a3/inventory.tsv",
+                """
+                tree\tmodule\tarea\tpath\tkind\tbytes\tsha256
+                src\tjava.base\tshare\tsrc/java.base/share/classes/example/A.java\tJAVA\t10\t%s
+                """.formatted("a".repeat(64)));
+        Path queue = write(
+                "m3/build/backports/COMPATIBILITY_QUEUE.tsv",
+                header()
+                        + "\n"
+                        + row(0, "FILE", "src/java.base/share/classes/example/A.java")
+                        + "\n");
+
+        A3.main(
+                new String[] {
+                    "complete",
+                    "--root", root.toString(),
+                    "--inventory", root.relativize(inventory).toString(),
+                    "--queue", root.relativize(queue).toString(),
+                    "--out", "m3/build/a3/cli-completion"
+                });
+
+        assertTrue(Files.isRegularFile(
+                root.resolve("m3/build/a3/cli-completion/receipt.tsv")));
+        assertEquals(
+                "src/java.base/share/classes/example/A.java\n",
+                Files.readString(
+                        root.resolve(
+                                "m3/build/a3/cli-completion/java-preparation-paths.txt")));
+    }
+
+    @Test
     void outputCannotEscapeM3Build() throws Exception {
         Path inventory = write(
                 "m3/build/a3/inventory.tsv",
