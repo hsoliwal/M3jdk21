@@ -33,7 +33,15 @@ jobs:
     runs-on: windows-2022
     timeout-minutes: 30
     steps:
+      - name: Admit long repository paths on Windows
+        shell: pwsh
+        run: git config --global core.longpaths true
       - uses: actions/checkout@v4
+        with:
+          # Only this Java/JNI module is exercised on Windows; the historical
+          # full JDK tree includes path lengths that prevent default Git checkout.
+          sparse-checkout: m3/ports/capability-runtime
+          sparse-checkout-cone-mode: true
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
