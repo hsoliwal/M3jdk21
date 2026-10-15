@@ -12,11 +12,14 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import io
 import subprocess
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
+
+from patch_atom_io import relative_git_path, safe_output_root, target_blob, write_exact
 
 
 @dataclass(frozen=True)
@@ -46,23 +49,34 @@ def sha256(data: bytes) -> str:
 
 
 def changes(repo: Path, parent: str, commit: str) -> dict[str, Change]:
-    raw = git(repo, "diff", "--name-status", "-M", parent, commit).decode("utf-8")
+    """Read NUL-delimited Git status; quoting/newlines cannot alias another FILE atom."""
+    raw = git(repo, "diff", "--name-status", "-z", "-M", parent, commit)
+    if raw and not raw.endswith(b"\0"):
+        raise ValueError("unterminated Git name-status stream")
+    tokens = raw.decode("utf-8", "strict").split("\0")[:-1] if raw else []
     result: dict[str, Change] = {}
-    for line in raw.splitlines():
-        cells = line.split("\t")
-        status = cells[0]
+    index = 0
+    while index < len(tokens):
+        status = tokens[index]
+        index += 1
+        if not status:
+            raise ValueError("empty Git change status")
         kind = status[0]
-        if kind == "R":
-            if len(cells) != 3:
-                raise ValueError(f"invalid rename row: {line}")
-            change = Change(status, cells[2], cells[1])
+        needed = 2 if kind in ("R", "C") else 1
+        if index + needed > len(tokens):
+            raise ValueError("truncated Git change status")
+        if needed == 2:
+            previous = relative_git_path(tokens[index])
+            path = relative_git_path(tokens[index + 1])
+            index += 2
+            change = Change(status, path, previous)
         else:
-            if len(cells) != 2:
-                raise ValueError(f"invalid change row: {line}")
-            change = Change(status, cells[1])
-        if change.path in result:
-            raise ValueError(f"duplicate changed path: {change.path}")
-        result[change.path] = change
+            path = relative_git_path(tokens[index])
+            index += 1
+            change = Change(status, path)
+        if path in result:
+            raise ValueError(f"duplicate changed path: {path}")
+        result[path] = change
     return result
 
 
@@ -74,7 +88,7 @@ def read_paths(path: Path) -> list[str]:
     ]
     if rows != sorted(rows) or len(set(rows)) != len(rows):
         raise ValueError("paths must be sorted and unique")
-    return rows
+    return [relative_git_path(row) for row in rows]
 
 
 def object_bytes(repo: Path, ref: str, path: str) -> bytes:
@@ -127,29 +141,25 @@ def materialize(
     selected_paths: Iterable[str],
     out: Path,
 ) -> list[dict[str, str]]:
-    selected = list(selected_paths)
+    selected = [relative_git_path(path) for path in selected_paths]
+    if selected != sorted(set(selected)) or not selected:
+        raise ValueError("selected paths must be nonempty, sorted, unique")
     all_changes = changes(donor_repo, parent, commit)
     missing = sorted(set(selected) - set(all_changes))
     if missing:
         raise ValueError(f"selected paths absent from commit delta: {missing[:5]}")
 
-    out.mkdir(parents=True, exist_ok=True)
-    patch_root = out / "patches"
-    candidate_root = out / "candidates"
-    patch_root.mkdir(exist_ok=True)
-    candidate_root.mkdir(exist_ok=True)
+    out = safe_output_root(out, donor_repo, target_root)
 
     rows: list[dict[str, str]] = []
     for ordinal, path in enumerate(selected, 1):
         change = all_changes[path]
         patch = patch_bytes(donor_repo, parent, commit, change)
         patch_name = f"{ordinal:04d}.patch"
-        (patch_root / patch_name).write_bytes(patch)
+        write_exact(out, f"patches/{patch_name}", patch)
 
         kind = change.status[0]
-        target = target_root / path
-        target_exists = target.is_file()
-        target_bytes = target.read_bytes() if target_exists else b""
+        target_exists, target_bytes = target_blob(target_root, path)
         before_hash = sha256(target_bytes) if target_exists else "ABSENT"
         candidate: bytes | None = None
         disposition = ""
@@ -192,9 +202,7 @@ def materialize(
 
         after_hash = ""
         if candidate is not None:
-            destination = candidate_root / path
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            destination.write_bytes(candidate)
+            write_exact(out, f"candidates/{path}", candidate)
             after_hash = sha256(candidate)
 
         rows.append(
@@ -210,20 +218,21 @@ def materialize(
             }
         )
 
-    with (out / "APPLICABILITY.tsv").open("w", encoding="utf-8", newline="") as handle:
-        fields = [
-            "path",
-            "upstream_status",
-            "previous_path",
-            "target_before_sha256",
-            "candidate_after_sha256",
-            "disposition",
-            "patch",
-            "note",
-        ]
-        writer = csv.DictWriter(handle, fieldnames=fields, delimiter="\t", lineterminator="\n")
-        writer.writeheader()
-        writer.writerows(rows)
+    fields = [
+        "path",
+        "upstream_status",
+        "previous_path",
+        "target_before_sha256",
+        "candidate_after_sha256",
+        "disposition",
+        "patch",
+        "note",
+    ]
+    handle = io.StringIO(newline="")
+    writer = csv.DictWriter(handle, fieldnames=fields, delimiter="\t", lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(rows)
+    write_exact(out, "APPLICABILITY.tsv", handle.getvalue().encode("utf-8"))
     return rows
 
 
