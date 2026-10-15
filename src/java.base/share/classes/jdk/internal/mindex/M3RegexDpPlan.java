@@ -13,7 +13,8 @@ import java.util.Objects;
  *
  * <p>Maps the prepared-state and fragment-relation responsibilities of Synexia
  * MIndexRegexProgram/MIndexRegexAtomAlgebra into the existing M3 String decision path.
- * Only ASCII alphanumeric/dot atoms, optional stars, and non-surrogate input are admitted.
+ * Patterns admit only ASCII alphanumeric/dot atoms and optional stars. The legacy
+ * summarize/advance entries reject surrogate input; summarizeUtf16 resolves code points.
  * No captures, search history, assertions, spelling payload or donor runtime is retained.
  * Immutable effects belong to this exact plan; the effect of A followed by B is B(A(state)).
  */
@@ -173,6 +174,54 @@ public final class M3RegexDpPlan {
         return new Effect(rows, length);
     }
 
+    /**
+     * Code-point-correct summary for the same ASCII literal/dot/star program.
+     * Unlike {@link #summarize}, this entry admits paired and unpaired surrogates.
+     * A terminal high surrogate is deferred; a leading low has an optional skip relation.
+     * Those two pieces of boundary metadata allow concatenation to resolve a split pair.
+     * No character, source reference, text array or pointer is retained by the result.
+     * Every UTF-16 unit is read once, in order; checkpoints occur at the same unit cadence.
+     */
+    public Effect summarizeUtf16(CharSequence text, Runnable checkpoint) {
+        Objects.requireNonNull(text, "text");
+        int length = text.length();
+        long[] rows = identityRows();
+        long[] withoutLeadingLow = null;
+        boolean pendingHigh = false;
+        for (int i = 0; i < length; i++) {
+            if ((i & 255) == 0) check(checkpoint);
+            char unit = text.charAt(i);
+            if (i == 0 && Character.isLowSurrogate(unit)) {
+                withoutLeadingLow = identityRows();
+            }
+            if (pendingHigh) {
+                // Both a complete supplementary code point and a lone high surrogate
+                // have the dot predicate in this program's strictly ASCII literal domain.
+                advanceRows(rows, dots);
+                if (withoutLeadingLow != null) advanceRows(withoutLeadingLow, dots);
+                pendingHigh = false;
+                if (Character.isLowSurrogate(unit)) continue;
+            }
+            if (Character.isHighSurrogate(unit)) {
+                pendingHigh = true;
+            } else {
+                long matched = matchingMask(unit);
+                advanceRows(rows, matched);
+                if (withoutLeadingLow != null && i != 0) {
+                    advanceRows(withoutLeadingLow, matched);
+                }
+            }
+        }
+        check(checkpoint);
+        return new Effect(rows, length, withoutLeadingLow, pendingHigh);
+    }
+
+    private void advanceRows(long[] rows, long matched) {
+        for (int state = 0; state < states; state++) {
+            rows[state] = advanceMatched(rows[state], matched);
+        }
+    }
+
     /** Exact empty-fragment identity, not epsilon closure of arbitrary incoming states. */
     public Effect identity() { return new Effect(identityRows(), 0); }
 
@@ -187,29 +236,82 @@ public final class M3RegexDpPlan {
         private final long[] rows;
         private final long length;
 
-        private Effect(long[] rows, long length) { this.rows = rows; this.length = length; }
+        // Null means the fragment does not start with a low surrogate. Otherwise this
+        // is the open relation after omitting that first unit. Rows omit a terminal high.
+        private final long[] withoutLeadingLow;
+        private final boolean trailingHigh;
+
+        private Effect(long[] rows, long length) { this(rows, length, null, false); }
+        private Effect(long[] rows, long length, long[] withoutLeadingLow, boolean trailingHigh) {
+            this.rows = rows;
+            this.length = length;
+            this.withoutLeadingLow = withoutLeadingLow;
+            this.trailingHigh = trailingHigh;
+        }
         public long length() { return length; }
-        public long apply(long frontier) { checkBits(frontier); return applyRows(rows, frontier); }
+        public long apply(long frontier) {
+            checkBits(frontier);
+            long result = applyRows(rows, frontier);
+            // Complete-input observation flushes a remaining lone high surrogate.
+            return trailingHigh ? advanceMatched(result, dots) : result;
+        }
 
         public Effect then(Effect right, Runnable checkpoint) {
             Objects.requireNonNull(right, "right");
             if (right.plan != plan) throw new IllegalArgumentException("different regex plan");
             long total = Math.addExact(length, right.length);
             check(checkpoint);
-            long[] result = compose(rows, right.rows);
+            Effect result;
+            if (length == 0) {
+                result = new Effect(right.rows, total, right.withoutLeadingLow, right.trailingHigh);
+            } else if (right.length == 0) {
+                result = new Effect(rows, total, withoutLeadingLow, trailingHigh);
+            } else {
+                long[] suffix = trailingHigh && right.withoutLeadingLow != null
+                        ? right.withoutLeadingLow : right.rows;
+                long[] joined = appendOpen(rows, suffix, trailingHigh);
+                long[] skipped = withoutLeadingLow == null ? null
+                        : appendOpen(withoutLeadingLow, suffix, trailingHigh);
+                result = new Effect(joined, total, skipped, right.trailingHigh);
+            }
             check(checkpoint);
-            return new Effect(result, total);
+            return result;
+        }
+
+        /** Insert the pending-high predicate before the suffix, without completing it. */
+        private long[] appendOpen(long[] prefix, long[] suffix, boolean pendingHigh) {
+            if (!pendingHigh) return compose(prefix, suffix);
+            long[] flushed = prefix.clone();
+            advanceRows(flushed, dots);
+            return compose(flushed, suffix);
+        }
+
+        /** Boundary-aware powers reuse the same ordered composition; callbacks stay external. */
+        private Effect repeatedUtf16(long count, long total, Runnable checkpoint) {
+            Effect result = identity(), power = this;
+            for (long left = count; left != 0; left >>>= 1) {
+                check(checkpoint);
+                if ((left & 1L) != 0) result = result.then(power, null);
+                if (left > 1) power = power.then(power, null);
+            }
+            check(checkpoint);
+            return new Effect(result.rows, total, result.withoutLeadingLow, result.trailingHigh);
         }
 
         /**
-         * Exact power without expanded text. Java retains its checkpoint schedule and three
+         * Exact power without expanded text. Boundary-free Java retains its checkpoint schedule and three
          * rotating rows. Eligible wide/null-checkpoint powers may use one bounded JNI call,
          * returning one row array. Missing repeat JNI leaves prior Java execution available.
+         * Boundary-bearing effects compose in O(states^2 log(count + 1)) work and
+         * O(states) live row payload, with O(states log(count + 1)) allocated row payload.
          */
         public Effect repeated(long count, Runnable checkpoint) {
             if (count < 0) throw new IllegalArgumentException("negative repeat count");
             long total = Math.multiplyExact(length, count);
             check(checkpoint);
+            if (withoutLeadingLow != null || trailingHigh) {
+                return repeatedUtf16(count, total, checkpoint);
+            }
             // Preserve every supplied checkpoint on the original Java schedule.
             // A null checkpoint permits one bounded native call; it never owns text.
             if (checkpoint == null && count >= 256 && states >= 16

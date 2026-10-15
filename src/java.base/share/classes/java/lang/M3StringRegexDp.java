@@ -235,7 +235,7 @@ final class M3StringRegexDp {
         if (levels >= 8) {
             // A 2^levels power costs levels squares and one identity composition.
             // Charge skipped node visits as well; do not widen the preparation budget.
-            long cost = levels + (long) plan.stateCount() * plan.stateCount() * (levels + 1);
+            long cost = levels + 2L * plan.stateCount() * (plan.stateCount() + 1) * (levels + 1);
             if (!work.take(cost)) return null;
             M3RegexDpPlan.Effect one = effect(unit, plan, cache, work, depth + levels);
             if (one == null) return null;
@@ -244,11 +244,17 @@ final class M3StringRegexDp {
             M3RegexDpPlan.Effect left = effect(tuple.left, plan, cache, work, depth + 1);
             if (left == null) return null;
             M3RegexDpPlan.Effect right = effect(tuple.right, plan, cache, work, depth + 1);
-            if (right == null || !work.take((long) plan.stateCount() * plan.stateCount())) return null;
+            if (right == null || !work.take(2L * plan.stateCount() * (plan.stateCount() + 1))) return null;
             made = left.then(right, null);
         } else {
             if (!work.take((long) source.length() * plan.stateCount())) return null;
             made = plan.summarize(new CursorView(source), null);
+            if (made == null) {
+                // Immutable canonical input may be reread after legacy surrogate refusal.
+                // The boundary-aware lane retains two relations at most, never text.
+                if (!work.take(2L * source.length() * plan.stateCount())) return null;
+                made = plan.summarizeUtf16(new CursorView(source), null);
+            }
         }
         if (made != null) cache.effects.set(slot,
                 new EffectEntry(new WeakReference<>(owner), coordinate, plan, made));

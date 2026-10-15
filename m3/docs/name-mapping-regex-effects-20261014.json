@@ -1,4 +1,18 @@
 {
+  "utf16_followup": {
+    "source_recipe": "com.synexia.rewrite.M3Jdk21RegexUtf16Recipe",
+    "target_parent": "c8af42d9a6df6f3fd2c648ff7f8d98cf086fb87f",
+    "status": "target candidate; see paired Synexia qualification receipts",
+    "documentation": "regex-utf16-receiving-20261015.md",
+    "mapping": "Synexia fragment-effect algebra plus M3StringFacts pending-high/seam geometry -> existing M3RegexDpPlan.Effect",
+    "addition": "summarizeUtf16 consumes code points; legacy summarize/supports retain surrogate refusal",
+    "boundaries": "deferred terminal high and optional leading-low skip relation; no spelling retained",
+    "compatibility": "existing Java descriptors retained; one additive internal plan method; existing JNI bodies/exports reused unchanged",
+    "receiver": "existing repeated canonical cohort only; ordinary String matching still uses original scalar/JDK fallback",
+    "array_capacity_bound_bytes": 235520,
+    "array_capacity_exclusions": "object headers, references, scalars, active concurrent generations and transient work",
+    "scope": "ASCII literal/dot/star patterns only; captures/flags/lookaround/full parser/compiler images remain pending"
+  },
   "power_followup": {
     "source_recipe": "com.synexia.rewrite.M3Jdk21RegexPowerRecipe",
     "target_parent": "d2c7fba68f149f25d30fafc0eca0f4372ad75e89",
@@ -76,7 +90,7 @@
       "scope": "No compile-time lowering, universal cache, GPU/NPU runtime, database service or public String API introduced."
     }
   ],
-  "latest_stage": "power_followup",
+  "latest_stage": "utf16_followup",
   "pressure_followup": {
     "recipe": "com.synexia.rewrite.M3Jdk21RegexPressureRecipe",
     "target_preimage_commit": "03b949881dd7ae140ab1e29cb97bf1af644a22c2",
