@@ -4,6 +4,13 @@ import jdk.m3.text.Limits;
 import jdk.m3.text.TextFrame;
 import jdk.m3.text.TextTools;
 import jdk.m3.io.FileTools;
+import jdk.m3.structured.JsonLinesTools;
+import jdk.m3.structured.StructuredTextTools;
+import jdk.m3.structured.StructuredCli;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -44,6 +51,23 @@ public final class M3TextSmoke {
         same("data.txt\n", FileTools.find(directory, 2, Pattern.compile(".*\\.txt"), LIMITS).text());
         Path fifo = directory.resolve("fifo"); FileTools.mkfifo(fifo, 0600);
         same(0010000, (Integer) Files.getAttribute(fifo, "unix:mode") & 0170000);
-        System.out.println("M3_TEXT_IMAGE_PASS tools=19 java=" + Runtime.version());
+// Structured-format atoms are built into a third opt-in JMOD, not java.base.
+        same("a\n", StructuredTextTools.selectDelimited(text("\"a\",b\n"),
+                ',', new int[]{0}, LIMITS).text());
+        same("x,y", StructuredTextTools.delimited(text("\"x,y\",z\n"), ',', LIMITS)
+                .get(0).get(0));
+        same("b\ta\n", StructuredTextTools.selectDelimited(text("a\tb\n"),
+                '\t', new int[]{1, 0}, LIMITS).text());
+        same("v", StructuredTextTools.ini(text("[s]\nk=v\n"), LIMITS).get("s").get("k"));
+        same("v", StructuredTextTools.dotenv(text("KEY=v\n"), LIMITS).get("KEY"));
+        same("42\n", JsonLinesTools.select(text("{\"value\":42}\n"), "/value", LIMITS).text());
+        var pipeOut = new ByteArrayOutputStream();
+        var pipeErr = new ByteArrayOutputStream();
+        same(0, StructuredCli.run(new String[]{"csv-cut", "1"},
+                new ByteArrayInputStream("a,b\n".getBytes(StandardCharsets.UTF_8)),
+                pipeOut, new PrintStream(pipeErr, true, StandardCharsets.UTF_8)));
+        same("b\n", pipeOut.toString(StandardCharsets.UTF_8));
+        same("", pipeErr.toString(StandardCharsets.UTF_8));
+        System.out.println("M3_TEXT_IMAGE_PASS tools=24 java=" + Runtime.version());
     }
 }

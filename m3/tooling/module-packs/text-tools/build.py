@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-"""Compile the two text modules; delegate JMOD/image assembly to the existing packager."""
+"""Compile three opt-in text modules with the existing JMOD/image packager."""
 import argparse
 import os
 import platform
@@ -48,11 +48,12 @@ def main():
             "-shared", "-fPIC", "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
             "-o", native / "libm3textio.so", native_source)
     rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
-    for module in ("jdk.m3.text", "jdk.m3.io"):
+    for module in ("jdk.m3.text", "jdk.m3.io", "jdk.m3.structured"):
         jar = jars / (module + ".jar")
         command(output / (module + "-jar.log"), home / "bin/jar", "--create", "--file", jar,
                 "--date", "2026-01-01T00:00:00Z", "-C", classes / module, ".")
-        rows.append("\t".join((module, "1", str(jar), module, "java.base", "JMOD")))
+        rows.append("\t".join((module, "1", str(jar), module,
+                              "java.base" if module == "jdk.m3.text" else "jdk.m3.text", "JMOD")))
     image_tsv, manifest = output / "INPUT_JMOD_IMAGE.tsv", output / "EMPTY_DESCRIPTOR_MANIFEST.tsv"
     image_tsv.write_text("\n".join(rows) + "\n")
     manifest.write_text("module\tartifacts\tunit_jars\ttarget\tsha256\tgenerated\n")
@@ -68,13 +69,13 @@ def main():
     smoke_classes.mkdir()
     # --release 21 selects standard ct.sym APIs, excluding the new SDK modules.
     command(output / "image-javac.log", image / "bin/javac", "-source", "21", "-target", "21",
-            "-Xlint:all", "-Werror", "--add-modules", "jdk.m3.text,jdk.m3.io",
+            "-Xlint:all", "-Werror", "--add-modules", "jdk.m3.text,jdk.m3.io,jdk.m3.structured",
             "-d", smoke_classes, smoke)
     command(output / "image-runtime.log", image / "bin/java", "-Xcheck:jni", "--add-modules",
             "jdk.m3.text,jdk.m3.io", "-cp", smoke_classes, "M3TextSmoke", output / "image-files")
-    if "M3_TEXT_IMAGE_PASS tools=19" not in (output / "image-runtime.log").read_text():
+    if "M3_TEXT_IMAGE_PASS tools=24" not in (output / "image-runtime.log").read_text():
         raise ValueError("missing image runtime proof")
-    print("M3_TEXT_PACK_PASS modules=2 tools=19")
+    print("M3_TEXT_PACK_PASS modules=3 tools=24")
 
 
 if __name__ == "__main__":
