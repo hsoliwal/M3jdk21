@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 CPU capability runtime Java21 and JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/capability-runtime/**'
+      - '.github/workflows/m3-cpu-capability-runtime-20261015.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-real-owner:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict Java 21 actual source and C11 JNI oracle
+        run: |
+          python3 m3/ports/capability-runtime/verify_native.py --root m3/ports/capability-runtime --out "$RUNNER_TEMP/m3-cpu-capability-jni-proof" --developer-image
+          test -s "$RUNNER_TEMP/m3-cpu-capability-jni-proof/REPORT.json"
+      - name: Preserve proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-cpu-capability-java-jni
+          path: ${{ runner.temp }}/m3-cpu-capability-jni-proof/
+          if-no-files-found: error
+  windows-java21:
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Stock Java-only baseline, no WSL
+        shell: pwsh
+        run: |
+          python m3/ports/capability-runtime/verify_native.py --java-only --root m3/ports/capability-runtime --out "${{ runner.temp }}/m3-cpu-capability-java-proof"
