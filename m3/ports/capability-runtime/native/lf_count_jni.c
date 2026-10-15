@@ -203,3 +203,58 @@ Java_com_m3_runtime_capability_BytePatternSearch_findKmp0(
     illegal(env, "byte-search state unreachable");
     return NULL;
 }
+
+/*
+ * Optional single-hit byte search over a directly addressed immutable input
+ * window. The existing ABI v1, countLf0, lineEnds0 and findKmp0 are unchanged.
+ * KMP scratch is local, JNI arrays are not pinned, and no JVM pointer is retained.
+ */
+JNIEXPORT jint JNICALL
+Java_com_m3_runtime_capability_BytePatternSearch_firstKmp0(
+        JNIEnv *env, jclass owner, jobject buffer, jint start, jint length,
+        jbyteArray needle_array, jint from_index) {
+    (void)owner;
+    if (buffer == NULL || needle_array == NULL || start < 0 || length < 0
+            || length > 16777216 || from_index < 0 || from_index > length) {
+        illegal(env, "invalid first-hit JNI geometry");
+        return -1;
+    }
+    jsize width = (*env)->GetArrayLength(env, needle_array);
+    if (width < 1 || width > 4096) {
+        illegal(env, "invalid first-hit needle length");
+        return -1;
+    }
+    jlong capacity = (*env)->GetDirectBufferCapacity(env, buffer);
+    if (capacity < 0 || (jlong)start + (jlong)length > capacity) {
+        illegal(env, "first-hit direct-buffer capacity mismatch");
+        return -1;
+    }
+    if (from_index > length - width) return -1;
+    const uint8_t *data = (const uint8_t *)(*env)->GetDirectBufferAddress(env, buffer);
+    if (data == NULL) {
+        illegal(env, "first-hit direct-buffer address absent");
+        return -1;
+    }
+    uint8_t pattern[4096];
+    jint failure[4096];
+    (*env)->GetByteArrayRegion(env, needle_array, 0, width, (jbyte *)pattern);
+    if ((*env)->ExceptionCheck(env)) return -1;
+    failure[0] = 0;
+    for (jint i = 1, matched = 0; i < width; i++) {
+        while (matched > 0 && pattern[i] != pattern[matched]) {
+            matched = failure[matched - 1];
+        }
+        if (pattern[i] == pattern[matched]) matched++;
+        failure[i] = matched;
+    }
+    jint matched = 0;
+    for (jint i = from_index; i < length; i++) {
+        uint8_t unit = data[(size_t)start + (size_t)i];
+        while (matched > 0 && pattern[matched] != unit) {
+            matched = failure[matched - 1];
+        }
+        if (pattern[matched] == unit) matched++;
+        if (matched == width) return i + 1 - width;
+    }
+    return -1;
+}

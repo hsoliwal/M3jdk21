@@ -65,6 +65,18 @@ public final class BytePatternSearchChecks {
         yes(compiled.patternLength() == pattern.length, "pattern length " + caseName);
         yes(compiled.retainedPrimitiveBytes() == (long) pattern.length * 5,
                 "primitive memory " + caseName);
+        int first = expected.length == 0 ? -1 : expected[0];
+        yes(compiled.first(span, 0) == first, "first Java oracle " + caseName);
+        if (nativeAvailable) {
+            yes(compiled.firstNative(span, 0) == first, "first JNI oracle " + caseName);
+        }
+        int cursor = first < 0 ? count : first + 1;
+        int next = expected.length < 2 ? -1 : expected[1];
+        yes(compiled.first(span, cursor) == next, "first search after cursor " + caseName);
+        if (nativeAvailable) {
+            yes(compiled.firstNative(span, cursor) == next, "native search after cursor " + caseName);
+        }
+        yes(compiled.first(span, count) == -1, "legal EOF cursor " + caseName);
         boolean overflow = expected.length > maxMatches;
         if (overflow) {
             throwsType(IllegalArgumentException.class, () -> compiled.findAll(span, maxMatches));
@@ -128,6 +140,13 @@ public final class BytePatternSearchChecks {
         throwsType(IllegalArgumentException.class,
                 () -> plan.findAll(sampleSpan, BytePatternSearch.MAX_MATCHES + 1));
         throwsType(NullPointerException.class, () -> plan.findAll(null, 1));
+        throwsType(NullPointerException.class, () -> plan.first(null, 0));
+        throwsType(IndexOutOfBoundsException.class, () -> plan.first(sampleSpan, -1));
+        throwsType(IndexOutOfBoundsException.class,
+                () -> plan.first(sampleSpan, sampleSpan.length() + 1));
+        if (nativeAvailable) {
+            throwsType(IndexOutOfBoundsException.class, () -> plan.firstNative(sampleSpan, -1));
+        }
 
         byte[] longPattern = new byte[BytePatternSearch.MAX_PATTERN_BYTES];
         Arrays.fill(longPattern, (byte) 7);
@@ -175,9 +194,11 @@ public final class BytePatternSearchChecks {
         Thread.currentThread().interrupt();
         try {
             throwsType(CancellationException.class, () -> plan.findAll(sampleSpan, 100));
+            throwsType(CancellationException.class, () -> plan.first(sampleSpan, 0));
             throwsType(CancellationException.class, () -> BytePatternSearch.compile(new byte[]{1}));
             if (nativeAvailable) {
                 throwsType(CancellationException.class, () -> plan.findAllNative(sampleSpan, 100));
+                throwsType(CancellationException.class, () -> plan.firstNative(sampleSpan, 0));
             }
         } finally {
             Thread.interrupted();
