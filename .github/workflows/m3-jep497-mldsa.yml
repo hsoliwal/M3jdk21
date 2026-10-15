@@ -118,7 +118,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          bash configure             --with-boot-jdk="$JAVA_HOME"             --with-debug-level=release             --with-jvm-variants=server             --disable-warnings-as-errors
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends jtreg7
+          test -f /usr/share/jtreg/lib/jtreg.jar
+          bash configure --with-jtreg=/usr/share/jtreg             --with-boot-jdk="$JAVA_HOME"             --with-debug-level=release             --with-jvm-variants=server             --disable-warnings-as-errors
 
       - name: Build JDK image
         run: make JOBS=2 images
