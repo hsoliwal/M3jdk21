@@ -123,3 +123,16 @@ For primitive membership and min-heaps, see [primitive set variants](specify-pri
 - [Int-key primitive map specializations](specify-int-key-map-specializations.md): zero-key/value presence, exact sizing, backward-shift deletion, primitive return conventions and the different cursor/callback mutation contracts of M3IntIntHashMap and M3IntLongHashMap
 - [Enum primitive maps and bit-word sets](specify-enum-specialization.md): enum-domain/null validation, ordinal traversal, dense and adaptive payload rules, explicit compaction, reentrant-migration limits and M3EnumSet's bounded equality/bulk API
 - [Collections physical source coverage](collections-source-coverage.md): exact primary-reference routing for all 77 package Java files, reconciling 19 earlier body-contract routes with 58 remaining files while separating documentation from runtime and receiver qualification
+
+
+## Portable collection receiver contracts, 15 October 2026
+
+- [Portable primitive collection contracts](portable-primitive-collection-reference.md): exact-width carriers, list and ring-deque ownership, specialized int-deque legacy behavior, sorted min/max queue merging, capacity/error/callback contracts and the independent ports/collections build
+- [Portable collection source coverage](portable-primitive-collection-source-coverage.md): all six com.m3.util production bodies, 97 explicit public callable routes, implementation helpers, exact target hashes and five inspected test methods; repository execution NOT_RUN
+
+The sibling Fenwick owner remains covered by [indexed algorithms](indexed-algorithm-reference.md). These receiver utilities are distinct from the main com.m3.collections module and its [primitive sequence](primitive-sequence-reference.md) and [linked-hash](collections-reference.md) contracts.
+
+
+## Frozen-text compatibility fixture contracts, 15 October 2026
+
+For the separate test-only frozen-text fixture, see the [frozen-text compatibility reference](frozen-text-compatibility-reference.md): byte/UTF-16 ownership and sharing, trusted direct admission, copy/materialization and compaction boundaries, the throwing addressed-view seam, and the actual differential/direct-memory tests. The [four-source/member/hash map](frozen-text-compatibility-source-coverage.md) covers all 25 explicit public callables without conflating retained-port or canonical runtime owners; repository execution remains NOT_RUN.
