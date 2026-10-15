@@ -148,3 +148,33 @@ The existing `verify_native.py` also compiles the new class, executes these
 proofs and validates the JMOD developer image. Full M3JDK/HotSpot/jtreg,
 actual OpenRewrite Maven SDK and setup-inclusive performance crossover remain
 independent release gates.
+
+
+## P4: bounded, proof-carrying byte evidence (2026-10-15)
+
+`ByteEvidenceQuery` composes the **existing** `SourceArtifact.Span`, immutable
+`ByteLineIndex` and compiled `BytePatternSearch` into an opt-in source-evidence
+receipt. It does not copy source bytes per hit, invent text encodings or
+implement an additional search algorithm. Each result owns **one `int[]` of
+sorted byte offsets** and an immutable SHA-256 receipt binding original source
+ID/root, exact span root/range, compiled pattern root, request limit, and every
+matched offset. The query precomputes line boundaries once, and `firstLine`,
+`lastLine`, `firstColumnByte`, and `lastColumnByteExclusive` then recover **byte**
+coordinates by binary search. A match crossing a newline is represented as
+one immutable `Span` plus start/end line coordinates; no semantic flattening.
+
+`execute()` uses the existing CPU KMP reference; `executeNative()` reuses its
+already pinned JNI library/ABI. `verify(result)` independently replays via Java,
+refusing a result from another query owner. No extra C/JNI methods, native
+buffers, registered services, Java String or HotSpot changes are introduced.
+The native path is never selected automatically or claimed faster without a
+setup-inclusive measurement. Only the existing `LfCount.install()` loads JNI.
+
+The standalone `ByteEvidenceQueryChecks` uses 3,500 seeded source-range cases
+and an independent naive matcher/byte-by-byte line oracle, plus binary UTF-8,
+CRLF, cross-line, overlap, source/needle mutation, cancellation, concurrent
+query reuse, exact receipt equality, wrong-owner refusal and budget boundaries.
+`verify_native.py` invokes it in both Java-only and JNI modes and checks the
+stock-JDK21 linked image's `CapabilityImageSmoke`. This is a testable JPMS/JMOD
+consumer building block for CPULLM evidence retrieval; **integration with the
+actual CPULLM/FLLDCIM resolver and full modified M3JDK HotSpot remains gated**.
