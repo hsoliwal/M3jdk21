@@ -202,3 +202,53 @@ jtreg/JUnit, runtime/VM/JNI gates as applicable, fixed point, and serial promoti
 
 Language/spec-incompatible, compatibility-reducing, preview-only, or dependency-blocked JEPs remain
 held/rejected according to the existing catalogue.
+
+
+## Whole-programme execution plan
+
+The compatibility/status fan-in now has an explicit scheduler-ready boundary:
+
+```text
+JEP_CATALOGUE.tsv
+  + backport recipe DAG / packets
+  + execution waves
+  -> backport-programme-status.tsv
+  -> M3BackportProgrammeExecutionPlan
+       -> execution-plan.tsv
+       -> projections/<packet>/
+            M3BackportRoutes.java
+            m3_backport_dag.py
+            m3_backport_rules.drl
+            projection.tsv
+```
+
+The planner does not reinterpret compatibility. It consumes the existing programme state.
+
+- `FILE_READY` is runnable only when the referenced packet remains entirely FILE scope.
+- `SCOPE_READY` is runnable only when every broader-scope packet atom carries explicit
+  `scope_promotion_approved=true`; otherwise it becomes `SCOPE_APPROVAL_HOLD`.
+- `AUTHOR_RECIPE`, `EVIDENCE_HOLD`, `SCOPE_HOLD`, policy `HOLD`, and `REJECT` remain typed
+  non-runnable rows with their deterministic next action.
+- A missing packet, a FILE-ready packet that escapes FILE scope, an unknown programme state, or a
+  packet-index mismatch fails closed.
+
+Every runnable row binds the exact `M3RecipeDag` semantic root. Camel, Airflow, and Drools are
+generated only from that same validated DAG and remain orchestration projections; none can change
+scope, dependencies, compatibility disposition, source ownership, or serial-promotion rules.
+
+The programme planner itself grants neither product-source write authority nor promotion authority.
+Actual recipe execution still passes through A3 preparation, source-pinned recipe work, recipe
+JUnit, compile/jtreg, runtime/JNI/VM proof where required, and second-pass fixed point before the
+canonical serial promotion node.
+
+Maven entry point:
+
+```bash
+mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+  -Pm3-backport-programme-execution-plan \
+  -Dm3.programme.status="$PWD/m3/backports/target/backport-programme-status.tsv" \
+  -Dm3.packet.index="$PWD/m3/backports/target/backport-packets.tsv" \
+  -Dm3.packet.dir="$PWD/m3/backports/target/backport-packets" \
+  -Dm3.execution.out="$PWD/m3/tooling/backport-dag/target/programme-execution" \
+  verify
+```
