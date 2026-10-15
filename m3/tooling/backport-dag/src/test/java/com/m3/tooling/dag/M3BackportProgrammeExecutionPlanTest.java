@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -160,7 +161,114 @@ final class M3BackportProgrammeExecutionPlanTest {
         assertTrue(Files.isRegularFile(projection.resolve("m3_backport_rules.drl")));
         String receipt = Files.readString(projection.resolve("projection.tsv"));
         assertTrue(receipt.contains("jep-423"));
-        assertTrue(receipt.matches("(?s).*jep-423\\t[0-9a-f]{64}\\t[0-9]+\\n.*"));
+        assertTrue(receipt.matches("(?s).*jep-423\t[0-9a-f]{64}\t[0-9]+\n.*"));
+    }
+
+
+    @Test
+    void receiptRootBindsReleaseAndCannotBeForged() {
+        String index = "work_id\tstate\tpacket\nJEP-423\tMATERIALIZED_RECIPE\tjep-423.tsv\n";
+        Map<String, String> packets =
+                Map.of("jep-423.tsv", packet("jep-423", "FILE", false));
+        var original = M3BackportProgrammeExecutionPlan.compile(
+                header() + "\n" + row(22, 423, "FILE_READY", "RUN") + "\n",
+                index,
+                packets);
+        var differentRelease = M3BackportProgrammeExecutionPlan.compile(
+                header() + "\n" + row(23, 423, "FILE_READY", "RUN") + "\n",
+                index,
+                packets);
+
+        assertFalse(original.root().equals(differentRelease.root()));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3BackportProgrammeExecutionPlan.Plan(
+                        original.rows(), "0".repeat(64)));
+
+        var row = original.rows().getFirst();
+        var forged = new M3BackportProgrammeExecutionPlan.Row(
+                row.order(), row.workId(), row.sourceKind(), row.release() + 1,
+                row.jep(), row.programmeState(), row.state(), row.packet(),
+                row.scope(), row.dagRoot(), row.nextAction(),
+                row.schedulerProjection(), row.productWriteAuthority(), row.promotionAuthority());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3BackportProgrammeExecutionPlan.Plan(
+                        List.of(forged), original.root()));
+    }
+
+    @Test
+    void packetIdAndIndexFilenameAreBoundToTheExactWorkItem() {
+        String programme =
+                header() + "\n" + row(22, 423, "FILE_READY", "RUN") + "\n";
+        String index =
+                "work_id\tstate\tpacket\nJEP-423\tMATERIALIZED_RECIPE\tjep-423.tsv\n";
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3BackportProgrammeExecutionPlan.compile(
+                        programme, index,
+                        Map.of("jep-423.tsv", packet("jep-999", "FILE", false))));
+
+        String swappedName =
+                "work_id\tstate\tpacket\nJEP-423\tMATERIALIZED_RECIPE\tjep-999.tsv\n";
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3BackportProgrammeExecutionPlan.compile(
+                        programme, swappedName,
+                        Map.of("jep-999.tsv", packet("jep-999", "FILE", false))));
+    }
+
+    @Test
+    void unmaterializedPacketIndexCannotAuthorizeRunnableWork() {
+        String programme =
+                header() + "\n" + row(22, 423, "FILE_READY", "RUN") + "\n";
+        String pending =
+                "work_id\tstate\tpacket\nJEP-423\tAUTHOR_RECIPE\tjep-423.tsv\n";
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3BackportProgrammeExecutionPlan.compile(
+                        programme, pending,
+                        Map.of("jep-423.tsv", packet("jep-423", "FILE", false))));
+
+        String materializedSet =
+                "work_id\tstate\tpacket\nJEP-423\tMATERIALIZED_RECIPE_SET\tjep-423.tsv\n";
+        var admitted = M3BackportProgrammeExecutionPlan.compile(
+                programme, materializedSet,
+                Map.of("jep-423.tsv", packet("jep-423", "FILE", false)));
+        assertTrue(admitted.rows().getFirst().schedulerProjection());
+    }
+
+    @Test
+    void duplicateWorkRowsAndAmbiguousTsvHeadersFailClosed() {
+        String hold = row(22, 423, "HOLD", "WAIT");
+        String extraneousIndex =
+                "work_id\tstate\tpacket\nJEP-999\tAUTHOR_RECIPE\tjep-999.tsv\n";
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3BackportProgrammeExecutionPlan.compile(
+                        header() + "\n" + hold + "\n" + hold + "\n",
+                        extraneousIndex, Map.of()));
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3BackportProgrammeExecutionPlan.compile(
+                        header().replace("release\tjep", "release\trelease")
+                                + "\n" + hold + "\n",
+                        extraneousIndex, Map.of()));
+    }
+
+    @Test
+    void externallyReportedProgrammeOrderMustBeContiguous() {
+        String programme =
+                "order\twork_id\tsource_kind\trelease\tjep\tprogramme_state\tnext_action\n"
+                        + "3\tJEP-423\tJEP\t22\t423\tFILE_READY\tRUN\n";
+        String index =
+                "work_id\tstate\tpacket\nJEP-423\tMATERIALIZED_RECIPE\tjep-423.tsv\n";
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3BackportProgrammeExecutionPlan.compile(
+                        programme, index,
+                        Map.of("jep-423.tsv", packet("jep-423", "FILE", false))));
     }
 
     private static String header() {
