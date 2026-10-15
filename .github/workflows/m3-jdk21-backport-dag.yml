@@ -35,6 +35,12 @@ jobs:
           java-version: "21"
           cache: maven
 
+      - name: Bootstrap pinned source-built OpenRewrite and JUnit closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+
       - name: Verify recipe substrate and DAG semantic kernel
         run: |
           mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am clean verify
