@@ -265,11 +265,19 @@ class JepResidueTest(unittest.TestCase):
         )
         self.assertEqual("NOT_AUTHORIZED", by_jep[458].promotion)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[467].evidence_state)
-        self.assertEqual("PACKET_READY", by_jep[467].receipt_state)
+        self.assertEqual("PROOF_REPAIR_REQUESTED", by_jep[467].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[467].promotion)
+        self.assertEqual(
+            "RUN_REPAIRED_250_FILE_ATOMS_PLUS_DELETION_EVIDENCE_THEN_BUILD_LANGTOOLS_FIXED_POINT",
+            by_jep[467].receipt_next_action,
+        )
         self.assertEqual("MATERIALIZED_PACKET", by_jep[493].evidence_state)
-        self.assertEqual("PACKET_READY", by_jep[493].receipt_state)
+        self.assertEqual("PROOF_REPAIR_REQUESTED", by_jep[493].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[493].promotion)
+        self.assertEqual(
+            "RUN_REPAIRED_INVENTORY_AND_MATERIALIZATION_THEN_BUILD_JTREG_RUNTIME_LINK_FIXED_POINT_READBACK",
+            by_jep[493].receipt_next_action,
+        )
         self.assertEqual("MATERIALIZED_PACKET", by_jep[496].evidence_state)
         self.assertIn("m3/backports/recipes/j496", by_jep[496].evidence_paths)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[497].evidence_state)
@@ -300,7 +308,7 @@ class JepResidueTest(unittest.TestCase):
         )
         self.assertEqual("NOT_AUTHORIZED", by_jep[485].promotion)
         self.assertEqual(
-            "RUN_RECIPE_DAG_BUILD_GATHERER_JTREG_STREAM_REGRESSIONS_API_SMOKE_FIXED_POINT",
+            "RUN_SELF_CONTAINED_RECIPE_DAG_BUILD_GATHERER_JTREG_STREAM_REGRESSIONS_API_SMOKE_FIXED_POINT",
             by_jep[485].receipt_next_action,
         )
         self.assertEqual("MATERIALIZED_PACKET", by_jep[510].evidence_state)
@@ -325,7 +333,13 @@ class JepResidueTest(unittest.TestCase):
             "BUILD_JDK_IMAGE_RUN_KDF_JTREG_A3_FIXED_POINT_CANONICAL_READBACK",
             by_jep[510].receipt_next_action,
         )
-        self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[404].evidence_state)
+        self.assertEqual("PACKET_EVIDENCE", by_jep[404].evidence_state)
+        self.assertIn(
+            "m3/backports/recipes/jep-404-generational-shenandoah",
+            by_jep[404].evidence_paths,
+        )
+        self.assertEqual("", by_jep[404].receipt_state)
+        self.assertEqual("", by_jep[404].promotion)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[483].evidence_state)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[521].evidence_state)
         self.assertNotIn(401, by_jep)
