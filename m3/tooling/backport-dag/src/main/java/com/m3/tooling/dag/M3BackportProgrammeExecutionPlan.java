@@ -31,6 +31,7 @@ public final class M3BackportProgrammeExecutionPlan {
     public record Row(
             int order,
             String workId,
+            String sourceKind,
             int release,
             int jep,
             String programmeState,
@@ -43,8 +44,12 @@ public final class M3BackportProgrammeExecutionPlan {
             boolean productWriteAuthority,
             boolean promotionAuthority) {
         public Row {
-            if (order < 0 || release < 0 || jep <= 0) throw new IllegalArgumentException("identity");
+            if (order < 0 || release < 0 || jep < 0) throw new IllegalArgumentException("identity");
             workId = required(workId, "workId");
+            sourceKind = required(sourceKind, "sourceKind");
+            if ("JEP".equals(sourceKind) && jep <= 0) {
+                throw new IllegalArgumentException("JEP numeric identity");
+            }
             programmeState = required(programmeState, "programmeState");
             state = Objects.requireNonNull(state, "state");
             packet = Objects.toString(packet, "");
@@ -89,9 +94,16 @@ public final class M3BackportProgrammeExecutionPlan {
 
         ArrayList<Row> rows = new ArrayList<>();
         for (Map<String, String> source : programme) {
-            int jep = integer(source, "jep");
+            int jep = optionalInteger(source, "jep", 0);
             int release = integer(source, "release");
-            String workId = "JEP-" + jep;
+            String workId =
+                    optional(source, "work_id").isEmpty()
+                            ? "JEP-" + jep
+                            : optional(source, "work_id");
+            String sourceKind =
+                    optional(source, "source_kind").isEmpty()
+                            ? "JEP"
+                            : optional(source, "source_kind");
             String programmeState = cell(source, "programme_state");
             String nextAction = cell(source, "next_action");
             String packetName = packetIndex.getOrDefault(workId, "");
@@ -143,7 +155,7 @@ public final class M3BackportProgrammeExecutionPlan {
             }
 
             rows.add(new Row(
-                    rows.size(), workId, release, jep, programmeState, state, packetName, scope,
+                    rows.size(), workId, sourceKind, release, jep, programmeState, state, packetName, scope,
                     dagRoot, nextAction, projection, false, false));
         }
         return new Plan(rows, root(rows));
@@ -151,11 +163,12 @@ public final class M3BackportProgrammeExecutionPlan {
 
     public static String render(Plan plan) {
         StringBuilder out = new StringBuilder(
-                "order\twork_id\trelease\tjep\tprogramme_state\tplan_state\tpacket\tscope\t"
+                "order\twork_id\tsource_kind\trelease\tjep\tprogramme_state\tplan_state\tpacket\tscope\t"
                         + "dag_root\tnext_action\tscheduler_projection\tproduct_write_authority\tpromotion_authority\n");
         for (Row row : plan.rows()) {
             out.append(row.order()).append('\t')
                     .append(row.workId()).append('\t')
+                    .append(row.sourceKind()).append('\t')
                     .append(row.release()).append('\t')
                     .append(row.jep()).append('\t')
                     .append(row.programmeState()).append('\t')
@@ -206,6 +219,7 @@ public final class M3BackportProgrammeExecutionPlan {
         for (Row row : rows) {
             update(digest, Integer.toString(row.order()));
             update(digest, row.workId());
+            update(digest, row.sourceKind());
             update(digest, row.programmeState());
             update(digest, row.state().name());
             update(digest, row.packet());
@@ -235,6 +249,16 @@ public final class M3BackportProgrammeExecutionPlan {
 
     private static int integer(Map<String, String> row, String name) {
         return Integer.parseInt(cell(row, name));
+    }
+
+    private static int optionalInteger(
+            Map<String, String> row, String name, int fallback) {
+        String value = optional(row, name);
+        return value.isEmpty() ? fallback : Integer.parseInt(value);
+    }
+
+    private static String optional(Map<String, String> row, String name) {
+        return Objects.toString(row.get(name), "").strip();
     }
 
     private static String cell(Map<String, String> row, String name) {
