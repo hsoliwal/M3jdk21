@@ -98,21 +98,7 @@ jobs:
             verify
           PLAN="$PWD/m3/tooling/backport-dag/target/programme-execution/execution-plan.tsv"
           test -s "$PLAN"
-          grep -F         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: m3jdk21-backport-status-${{ github.run_id }}
-          path: |
-            m3/backports/target/program-status.json
-            m3/backports/target/program-status.tsv
-            m3/backports/target/backport-recipe-dag.json
-            m3/backports/target/backport-recipe-dag.tsv
-            m3/backports/target/backport-packets.tsv
-            m3/backports/target/backport-packets/**
-            target/m3-projection-smoke/out/**
-            m3/tooling/backport-dag/target/programme-execution/**
-          if-no-files-found: error
-          retention-days: 14
-\tRUNNABLE\t' "$PLAN" || true
+          grep -F $'\tRUNNABLE\t' "$PLAN" || true
           if test -d "$PWD/m3/tooling/backport-dag/target/programme-execution/projections"; then
             while IFS= read -r receipt; do
               ROOT="$(tail -n 1 "$receipt" | cut -f2)"
@@ -136,5 +122,6 @@ jobs:
             m3/backports/target/backport-packets.tsv
             m3/backports/target/backport-packets/**
             target/m3-projection-smoke/out/**
+            m3/tooling/backport-dag/target/programme-execution/**
           if-no-files-found: error
           retention-days: 14
