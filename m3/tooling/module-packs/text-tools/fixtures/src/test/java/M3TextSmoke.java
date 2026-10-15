@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
+import jdk.m3.text.CsvTools;
 import jdk.m3.text.Limits;
 import jdk.m3.text.TextFrame;
 import jdk.m3.text.TextTools;
@@ -44,6 +45,7 @@ public final class M3TextSmoke {
         same("data.txt\n", FileTools.find(directory, 2, Pattern.compile(".*\\.txt"), LIMITS).text());
         Path fifo = directory.resolve("fifo"); FileTools.mkfifo(fifo, 0600);
         same(0010000, (Integer) Files.getAttribute(fifo, "unix:mode") & 0170000);
+        CsvTools.main(new String[] {"--self-test"});
         System.out.println("M3_TEXT_IMAGE_PASS tools=19 java=" + Runtime.version());
     }
 }
