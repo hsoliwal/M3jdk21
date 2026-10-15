@@ -65,6 +65,12 @@ jobs:
           set -euo pipefail
           python3 m3/backports/verify.py --root .
 
+      - name: Install source-built OpenRewrite JUnit and Synexia custody
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+
       - name: Prove all seven source-pinned recipe atoms
         shell: bash
         run: |
