@@ -7,9 +7,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -17,7 +19,7 @@ import java.util.Objects;
  * Joins programme status to concrete packet DAGs without widening compatibility or scope authority.
  */
 public final class M3BackportProgrammeExecutionPlan {
-    public static final String SCHEMA = "M3_BACKPORT_PROGRAMME_EXECUTION_PLAN_V1";
+    public static final String SCHEMA = "M3_BACKPORT_PROGRAMME_EXECUTION_PLAN_V2";
 
     public enum State {
         RUNNABLE,
@@ -79,6 +81,9 @@ public final class M3BackportProgrammeExecutionPlan {
             for (int index = 0; index < rows.size(); index++) {
                 if (rows.get(index).order() != index) throw new IllegalArgumentException("order");
             }
+            if (!root.equals(M3BackportProgrammeExecutionPlan.root(rows))) {
+                throw new IllegalArgumentException("execution plan root does not bind rows");
+            }
         }
     }
 
@@ -89,11 +94,15 @@ public final class M3BackportProgrammeExecutionPlan {
             String packetIndexTsv,
             Map<String, String> packetContents) {
         List<Map<String, String>> programme = tsv(programmeTsv);
-        Map<String, String> packetIndex = packetIndex(packetIndexTsv);
+        Map<String, PacketRef> packetIndex = packetIndex(packetIndexTsv);
         Map<String, String> packets = Map.copyOf(Objects.requireNonNull(packetContents, "packetContents"));
 
         ArrayList<Row> rows = new ArrayList<>();
+        HashSet<String> workIds = new HashSet<>();
         for (Map<String, String> source : programme) {
+            if (optionalInteger(source, "order", rows.size()) != rows.size()) {
+                throw new IllegalArgumentException("programme order drift");
+            }
             int jep = optionalInteger(source, "jep", 0);
             int release = integer(source, "release");
             String workId =
@@ -104,9 +113,16 @@ public final class M3BackportProgrammeExecutionPlan {
                     optional(source, "source_kind").isEmpty()
                             ? "JEP"
                             : optional(source, "source_kind");
+            if (!workIds.add(workId)) {
+                throw new IllegalArgumentException("duplicate programme work_id: " + workId);
+            }
+            if ("JEP".equals(sourceKind) && !workId.equals("JEP-" + jep)) {
+                throw new IllegalArgumentException("JEP work_id/jep mismatch: " + workId);
+            }
             String programmeState = cell(source, "programme_state");
             String nextAction = cell(source, "next_action");
-            String packetName = packetIndex.getOrDefault(workId, "");
+            PacketRef packetRef = packetIndex.get(workId);
+            String packetName = packetRef == null ? "" : packetRef.fileName();
             M3BackportPacket packet = null;
             if (!packetName.isEmpty()) {
                 String packetText = packets.get(packetName);
@@ -114,6 +130,18 @@ public final class M3BackportProgrammeExecutionPlan {
                     throw new IllegalArgumentException("packet index references missing packet: " + packetName);
                 }
                 packet = M3BackportPacketLoader.parse(packetText);
+                String expected = expectedPacketId(workId);
+                if (!packet.packetId().equals(expected)
+                        || !packetName.equals(expected + ".tsv")) {
+                    throw new IllegalArgumentException(
+                            "packet index identity mismatch for " + workId);
+                }
+            }
+            if (("FILE_READY".equals(programmeState) || "SCOPE_READY".equals(programmeState))
+                    && packetRef != null
+                    && !packetRef.materialized()) {
+                throw new IllegalArgumentException(
+                        "runnable work item has unmaterialized packet: " + workId);
             }
 
             State state;
@@ -183,12 +211,39 @@ public final class M3BackportProgrammeExecutionPlan {
         return out.toString();
     }
 
-    private static Map<String, String> packetIndex(String tsv) {
+    private record PacketRef(String state, String fileName) {
+        private PacketRef {
+            state = required(state, "packet state");
+            fileName = required(fileName, "packet file name");
+            if (!fileName.matches("[a-z0-9][a-z0-9-]{0,79}\\.tsv")) {
+                throw new IllegalArgumentException("noncanonical packet filename: " + fileName);
+            }
+        }
+
+        boolean materialized() {
+            return "MATERIALIZED_RECIPE".equals(state)
+                    || "MATERIALIZED_RECIPE_SET".equals(state);
+        }
+    }
+
+    private static String expectedPacketId(String workId) {
+        String value = workId.toLowerCase(Locale.ROOT).replace('_', '-');
+        String candidate =
+                value.startsWith("jep-") || value.startsWith("jdk-")
+                        ? value
+                        : "m3-" + value;
+        if (!candidate.matches("[a-z0-9][a-z0-9-]{0,79}")) {
+            throw new IllegalArgumentException("invalid packet work identity: " + workId);
+        }
+        return candidate;
+    }
+
+    private static Map<String, PacketRef> packetIndex(String tsv) {
         List<Map<String, String>> rows = tsv(tsv);
-        LinkedHashMap<String, String> index = new LinkedHashMap<>();
+        LinkedHashMap<String, PacketRef> index = new LinkedHashMap<>();
         for (Map<String, String> row : rows) {
             String work = cell(row, "work_id");
-            String packet = cell(row, "packet");
+            PacketRef packet = new PacketRef(cell(row, "state"), cell(row, "packet"));
             if (index.putIfAbsent(work, packet) != null) {
                 throw new IllegalArgumentException("duplicate packet index work item: " + work);
             }
@@ -202,6 +257,12 @@ public final class M3BackportProgrammeExecutionPlan {
                 .toList();
         if (lines.size() < 2) throw new IllegalArgumentException("empty TSV");
         String[] header = lines.getFirst().split("\t", -1);
+        HashSet<String> headerNames = new HashSet<>();
+        for (String name : header) {
+            if (name.isBlank() || !headerNames.add(name)) {
+                throw new IllegalArgumentException("duplicate or empty TSV header");
+            }
+        }
         ArrayList<Map<String, String>> rows = new ArrayList<>();
         for (String line : lines.subList(1, lines.size())) {
             String[] cells = line.split("\t", -1);
@@ -220,12 +281,17 @@ public final class M3BackportProgrammeExecutionPlan {
             update(digest, Integer.toString(row.order()));
             update(digest, row.workId());
             update(digest, row.sourceKind());
+            update(digest, Integer.toString(row.release()));
+            update(digest, Integer.toString(row.jep()));
             update(digest, row.programmeState());
             update(digest, row.state().name());
             update(digest, row.packet());
             update(digest, row.scope().name());
             update(digest, row.dagRoot());
             update(digest, row.nextAction());
+            update(digest, Boolean.toString(row.schedulerProjection()));
+            update(digest, Boolean.toString(row.productWriteAuthority()));
+            update(digest, Boolean.toString(row.promotionAuthority()));
         }
         return HexFormat.of().formatHex(digest.digest());
     }
