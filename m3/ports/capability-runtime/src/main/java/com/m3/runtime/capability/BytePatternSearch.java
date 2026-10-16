@@ -105,6 +105,56 @@ public final class BytePatternSearch {
         }
     }
 
+    /**
+     * Single-pass first-hit search over exact immutable source bytes.
+     * fromIndex is 0..length inclusive, and -1 indicates an absent needle.
+     * Unlike findAll, this operation allocates no match-offset array.
+     */
+    public int first(SourceArtifact.Span span, int fromIndex) {
+        SourceArtifact.Span input = Objects.requireNonNull(span, "span");
+        Objects.checkFromIndexSize(fromIndex, 0, input.length());
+        if (Thread.currentThread().isInterrupted()) {
+            throw new CancellationException("first-hit scan interrupted");
+        }
+        if (fromIndex > input.length() - needle.length) return -1;
+        int matched = 0;
+        for (int at = fromIndex; at < input.length(); at++) {
+            checkpoint(at - fromIndex);
+            byte unit = input.byteAt(at);
+            while (matched > 0 && needle[matched] != unit) matched = failure[matched - 1];
+            if (needle[matched] == unit) matched++;
+            if (matched == needle.length) return at + 1 - needle.length;
+        }
+        checkpoint(input.length() - fromIndex);
+        return -1;
+    }
+
+    /**
+     * Explicit SHA-pinned JNI scalar candidate. The compatibility buffer is
+     * operation-local and no native pointer survives the call. A missing
+     * symbol refuses rather than silently using the Java implementation.
+     */
+    public int firstNative(SourceArtifact.Span span, int fromIndex) {
+        SourceArtifact.Span input = Objects.requireNonNull(span, "span");
+        Objects.checkFromIndexSize(fromIndex, 0, input.length());
+        if (Thread.currentThread().isInterrupted()) {
+            throw new CancellationException("native first-hit interrupted");
+        }
+        byte[] snapshot = input.copy();
+        ByteBuffer direct = ByteBuffer.allocateDirect(snapshot.length);
+        direct.put(snapshot).flip();
+        try {
+            int hit = firstKmp0(direct, 0, snapshot.length, needle, fromIndex);
+            if (hit < -1 || (hit >= 0
+                    && (hit > snapshot.length - needle.length || hit < fromIndex))) {
+                throw new IllegalStateException("invalid native first-hit coordinate");
+            }
+            return hit;
+        } catch (UnsatisfiedLinkError absent) {
+            throw new IllegalStateException("pinned native library lacks first-hit extension", absent);
+        }
+    }
+
     private int scan(SourceArtifact.Span input, int maxMatches, int[] hits) {
         int matched = 0;
         int found = 0;
@@ -142,4 +192,6 @@ public final class BytePatternSearch {
 
     private static native int[] findKmp0(
             ByteBuffer buffer, int start, int length, byte[] needle, int maxMatches);
+    private static native int firstKmp0(
+            ByteBuffer buffer, int start, int length, byte[] needle, int fromIndex);
 }
