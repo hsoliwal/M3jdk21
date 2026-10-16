@@ -22,6 +22,8 @@ import java.util.Map;
 public final class M3StringGuardRepair {
     static final String MANIFEST_SHA = "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999";
     static final String BEFORE = "0eaa95f80d96be8040aa9584b0ddf3eee3d1e2da40d1bb9d5beef11f3a7e61bb";
+    /** Exact fully reviewed V2 checker image, not a wildcard source allowance. */
+    static final String REVIEWED_CHECKER_SHA = "fa88e6ee2b5903802a9463bec14133feb74a730009b08e722924064052afb10e";
     static final String STRING_SHA = "b7a074c6f366397847538b6b1bc6a5e5fecfb94809ab70fda40ef58406595b13";
     static final String RECEIPT_BEFORE_SHA = "22cc4f60884a25f57a341b99f3332b92ae3dca4d83f5ef13d34d77904174011d";
     static final String CHECKER = "m3/runtime-integration/check-m3string-invariants.py";
@@ -49,7 +51,7 @@ public final class M3StringGuardRepair {
         requireHash(Files.readString(safe(root, "src/java.base/share/classes/java/lang/String.java")),
                     STRING_SHA, "runtime String source changed; review a new task");
         String current = Files.readString(safe(root, CHECKER));
-        String repaired = replay(current, BEFORE, ATOMS);
+        String repaired = replayReviewedChecker(current);
         String java = Files.readString(safe(crate, "templates/M3StringReplacementRoutes.java"));
         String python = Files.readString(safe(crate, "templates/test_string_replacement_routes.py"));
         requireHash(java, JAVA_SHA, "Java proof template drift");
@@ -139,6 +141,19 @@ public final class M3StringGuardRepair {
         }
         System.out.println("M3_STRING_GUARD_REPLAY_PASS changed=" + changes.size()
                 + " checker_after_sha256=" + sha256(repaired) + " runtime_changed=false");
+    }
+
+    /**
+     * The canonical V2 checker was independently admitted by Synexia's
+     * M3StringGuardRepairV2 and already contains the compiler-parsed replacement
+     * guard plus the stronger native reference-lifecycle checks.
+     * Older source replay remains exact and unchanged; other images still refuse.
+     */
+    static String replayReviewedChecker(String input) {
+        if (sha256(input).equals(REVIEWED_CHECKER_SHA)) {
+            return input;
+        }
+        return replay(input, BEFORE, ATOMS);
     }
 
     static String replay(String input, String beforeSha, List<Atom> atoms) {
