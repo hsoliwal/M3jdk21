@@ -70,6 +70,14 @@ public final class M3ObjectResidency<T> {
     private final long[] weights;
     private final long[] touched;
     private final int[] active;
+    /** Explicit cooperative lease counts, not JVM heap reference counts. */
+    private final int[] borrowers;
+    /** A caller-installed projection can remain externally reachable. */
+    private final boolean[] callerInstalled;
+    /** Generation-safe handles; allocate the primitive handle lanes only on first use. */
+    private M3SlotAllocator28 borrowHandles;
+    private M3IntLane28 borrowOwner;
+    private M3IntLane28 borrowCalls;
     private long residentBytes;
     private long tick;
     private Decision lastDecision;
@@ -97,6 +105,8 @@ public final class M3ObjectResidency<T> {
         this.weights = new long[slots];
         this.touched = new long[slots];
         this.active = new int[slots];
+        this.borrowers = new int[slots];
+        this.callerInstalled = new boolean[slots];
         Arrays.fill(states, (byte) State.ABSENT.ordinal());
     }
 
@@ -156,6 +166,121 @@ public final class M3ObjectResidency<T> {
         }
     }
 
+    /**
+     * Acquire an explicit, generation-checked cooperative borrow for a logical child.
+     * A long handle is sufficient for an asynchronous event; no Lease object is retained.
+     * The caller must release it in a finally block after the last callback. This does
+     * not count heap references, JNI globals, Thread locals or hidden escape paths.
+     */
+    public synchronized long retainProjection(int slot, long estimatedBytes) {
+        checkSlot(slot);
+        if (estimatedBytes < 0) throw new IllegalArgumentException("negative estimatedBytes");
+        if (borrowers[slot] == Integer.MAX_VALUE) {
+            throw new IllegalStateException("projection borrow count overflow");
+        }
+        ensureResident(slot, estimatedBytes);
+        if (borrowHandles == null) {
+            M3SlotAllocator28 ids = new M3SlotAllocator28();
+            M3IntLane28 owners = new M3IntLane28();
+            M3IntLane28 calls = new M3IntLane28();
+            borrowOwner = owners;
+            borrowCalls = calls;
+            borrowHandles = ids;
+        }
+        long lease = borrowHandles.allocate();
+        int index = M3SlotAllocator28.slot(lease);
+        try {
+            borrowOwner.set(index, Math.addExact(slot, 1));
+        } catch (RuntimeException | Error failure) {
+            borrowHandles.release(lease);
+            throw failure;
+        }
+        borrowers[slot]++;
+        return lease;
+    }
+
+    /** The number of explicitly retained projection borrows, not object reference count. */
+    public synchronized int projectionBorrowCount(int slot) {
+        checkSlot(slot);
+        return borrowers[slot];
+    }
+
+    /** Borrow handles remain unique when an allocator slot is reused (ABA-safe generation). */
+    public synchronized void releaseProjection(long lease) {
+        if (borrowHandles == null) throw new IllegalStateException("no projection borrows");
+        int index = borrowHandles.requireLiveSlot(lease);
+        int encodedSlot = borrowOwner.get(index);
+        if (encodedSlot <= 0 || encodedSlot > resident.length) {
+            throw new IllegalStateException("invalid projection borrower");
+        }
+        if (borrowCalls.get(index) != 0) {
+            throw new IllegalStateException("borrow has a running callback");
+        }
+        borrowHandles.release(lease); // Fails closed on generation exhaustion.
+        borrowOwner.clear(index);
+        borrowers[encodedSlot - 1]--;
+    }
+
+    /**
+     * Resolve a retained borrow back through the owning parent. A callback is executed
+     * under the existing arena monitor and must obey the same non-escape contract as use().
+     * Callback exceptions release only the active-use pin, not the borrow handle itself.
+     */
+    public synchronized <R> R useProjection(long lease,
+            Function<? super T, ? extends R> operation) {
+        Objects.requireNonNull(operation, "operation");
+        if (borrowHandles == null) throw new IllegalStateException("no projection borrows");
+        int index = borrowHandles.requireLiveSlot(lease);
+        int encodedSlot = borrowOwner.get(index);
+        if (encodedSlot <= 0 || encodedSlot > resident.length) {
+            throw new IllegalStateException("invalid projection borrower");
+        }
+        int slot = encodedSlot - 1;
+        if (stateAt(slot) != State.RESIDENT) {
+            throw new IllegalStateException("borrowed projection is not resident");
+        }
+        int calls = borrowCalls.get(index);
+        if (calls == Integer.MAX_VALUE || active[slot] == Integer.MAX_VALUE) {
+            throw new IllegalStateException("borrow callback nesting overflow");
+        }
+        borrowCalls.set(index, calls + 1);
+        active[slot]++;
+        try {
+            @SuppressWarnings("unchecked") T value = (T) resident[slot];
+            R result = operation.apply(value);
+            if ((flags & STRICT_NO_ESCAPE) != 0 && result == value) {
+                throw new IllegalStateException("projection escaped STRICT_NO_ESCAPE scope");
+            }
+            if ((flags & PIN_EXPOSED) != 0 && result == value) {
+                states[slot] = (byte) (states[slot] | SLOT_PINNED);
+            }
+            touched[slot] = ++tick;
+            return result;
+        } finally {
+            active[slot]--;
+            borrowCalls.set(index, calls);
+        }
+    }
+
+    /**
+     * Drop the arena's strong reference promptly ONLY for an opt-in, reconstructible,
+     * caller-nonescaping projection with no active or cooperative borrowers.
+     * The GC—not this method—decides when the Java object itself can be reclaimed.
+     * STRICT_NO_ESCAPE is a caller/compile-time proof obligation, not a VM escape oracle.
+     */
+    public synchronized boolean retireUnborrowedProjection(int slot) {
+        checkSlot(slot);
+        if ((flags & (RECREATE | STRICT_NO_ESCAPE)) != (RECREATE | STRICT_NO_ESCAPE)
+                || (flags & SWAP_SECONDARY) != 0 || callerInstalled[slot]
+                || (states[slot] & SLOT_PINNED) != 0
+                || active[slot] != 0 || borrowers[slot] != 0
+                || stateAt(slot) != State.RESIDENT) {
+            return false;
+        }
+        evict(slot);
+        return stateAt(slot) == State.ABSENT;
+    }
+
     /** Pin a pre-existing value supplied by the parent; no lazy factory is invoked. */
     public synchronized void install(int slot, T value, long estimatedBytes) {
         checkSlot(slot);
@@ -164,6 +289,7 @@ public final class M3ObjectResidency<T> {
         if (stateAt(slot) != State.ABSENT) throw new IllegalStateException("slot is not absent");
         admit(estimatedBytes, slot);
         resident[slot] = value;
+        callerInstalled[slot] = true;
         if ((flags & PIN_EXPOSED) != 0) states[slot] = (byte) (states[slot] | SLOT_PINNED);
         weights[slot] = estimatedBytes;
         residentBytes = Math.addExact(residentBytes, estimatedBytes);
@@ -273,7 +399,7 @@ public final class M3ObjectResidency<T> {
         int victim = -1;
         long oldest = Long.MAX_VALUE;
         for (int i = 0; i < resident.length; i++) {
-            if (i == excluded || resident[i] == null || active[i] != 0
+            if (i == excluded || resident[i] == null || active[i] != 0 || borrowers[i] != 0
                     || (Byte.toUnsignedInt(states[i]) & SLOT_PINNED) != 0) continue;
             if ((flags & (SWAP_SECONDARY | RECREATE)) == 0) continue;
             if (touched[i] < oldest) { oldest = touched[i]; victim = i; }
@@ -283,7 +409,7 @@ public final class M3ObjectResidency<T> {
 
     private void evict(int slot) {
         State before = stateAt(slot);
-        if (before != State.RESIDENT || active[slot] != 0) return;
+        if (before != State.RESIDENT || active[slot] != 0 || borrowers[slot] != 0) return;
         Object value = resident[slot];
         if ((flags & SWAP_SECONDARY) != 0) {
             setState(slot, State.SWAPPING);
