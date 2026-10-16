@@ -212,5 +212,87 @@ class StringTargetSuccessorTest(unittest.TestCase):
             phase.validate_successor_source(path, corrupted)
 
 
+    def read_precompute_rows(self):
+        with phase.PRECOMPUTE_OBSERVATION.open(encoding="utf-8", newline="") as handle:
+            return list(csv.DictReader(handle, delimiter="\t"))
+
+    def with_precompute_rows(self, changed, callback):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "m3-string-precompute-observation-v2.tsv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(
+                    handle, fieldnames=phase.PRECOMPUTE_OBSERVATION_HEADER,
+                    delimiter="\t", lineterminator="\n")
+                writer.writeheader()
+                writer.writerows(changed)
+            with patch.object(phase, "PRECOMPUTE_OBSERVATION", path):
+                callback()
+
+    def test_precompute_projection_keeps_mindex_and_m3_names_separate(self):
+        row = phase.load_precompute_observation()
+        self.assertEqual("com.synexia.indexstring.MIndexStringSearchPlan",
+                         row["source_symbol"])
+        self.assertEqual("java.lang.M3StringSearchPrecompute",
+                         row["target_symbol"])
+        self.assertEqual("NOT_CLAIMED", row["runtime_acceptance"])
+        self.assertEqual("NOT_MEASURED", row["performance_evidence"])
+        phase.validate_name_mapping()
+        mapping = phase.load_tsv(phase.MAP, phase.HEADER)
+        phase.validate_precompute_mapping(mapping, row)
+
+    def test_precompute_observation_refuses_identity_and_status_drift(self):
+        rows = self.read_precompute_rows()
+        cases = []
+        for field, replacement in [
+            ("source_symbol", "java.lang.M3StringSearchPrecompute"),
+            ("source_git_blob", "0" * 40),
+            ("target_symbol", "java.lang.MIndexStringSearchPlan"),
+            ("observation_target_git_blob", "f" * 40),
+            ("current_target_git_blob", "f" * 40),
+            ("synexia_source_recipe_state_at_capture", "MERGED"),
+            ("implementation_origin", "COPIED_DONOR_CODE"),
+            ("runtime_acceptance", "ACCEPTED"),
+            ("performance_evidence", "MEASURED"),
+            ("state", "RUNTIME_ACCEPTED"),
+        ]:
+            changed = [row.copy() for row in rows]
+            changed[0][field] = replacement
+            cases.append(changed)
+        cases.extend([rows[:-1], rows + [rows[0].copy()]])
+        for changed in cases:
+            self.with_precompute_rows(changed, lambda: self.assertRaises(
+                ValueError, phase.load_precompute_observation))
+
+    def test_live_precompute_target_blob_drift_refuses(self):
+        row = phase.load_precompute_observation()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            target = root / row["target_path"]
+            target.parent.mkdir(parents=True)
+            target.write_text("mutated target\n", encoding="utf-8")
+            with patch.object(phase, "ROOT", root):
+                with self.assertRaisesRegex(ValueError, "live M3JDK precompute target blob drift"):
+                    phase.load_precompute_observation()
+
+    def test_source_precompute_blob_pins_and_v1_chain_remain_exact(self):
+        row = phase.load_precompute_observation()
+        for key in ("source_path", "cache_path"):
+            path = phase.ROOT / row[key]
+            if path.is_file():
+                self.assertEqual(row["source_git_blob"] if key == "source_path"
+                                 else row["cache_git_blob"],
+                                 phase.git_blob(path), key)
+        self.assertEqual("4ef13745f3fdc265fc8df3f2d84a9f2ecd3b7516",
+                         phase.git_blob(phase.SUCCESSOR_CHAIN))
+
+
+    def test_live_precompute_target_matches_current_receipt_when_present(self):
+        row = phase.load_precompute_observation()
+        target = phase.ROOT / row["target_path"]
+        if not target.is_file():
+            self.skipTest("M3JDK receiver source tree is not present")
+        self.assertEqual(row["current_target_git_blob"], phase.git_blob(target))
+
+
 if __name__ == "__main__":
     unittest.main()
