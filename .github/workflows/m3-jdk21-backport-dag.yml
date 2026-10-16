@@ -97,6 +97,7 @@ jobs:
         with:
           name: m3jdk21-backport-status-${{ github.run_id }}
           path: |
+            m3/backports/target/nebula-upstream-proof-admission.json
             m3/backports/target/program-status.json
             m3/backports/target/program-status.tsv
             m3/backports/target/backport-recipe-dag.json
