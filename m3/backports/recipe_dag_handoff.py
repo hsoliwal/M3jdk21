@@ -46,6 +46,10 @@ REQUIRED_ASSETS = {
     ),
 }
 SYNEXIA_ASSET_COMMIT = "850f5b0c2546ee6f645d91e3c341fd744d883480"
+# Verify the immutable proof bytes at the pinned Nebula revision; a valid-length
+# but stale hash must never be accepted as evidence of the source handoff.
+NEBULA_PROOF_COMMIT = "7b36ce9e3e0c8d1e91324589b38b9d9d5a164356"
+NEBULA_PROOF_BLOB = "9d0683cc746d0edd60cc5b397f72d5dc74bcabd2"
 TARGET = "hsoliwal/M3jdk21"
 NEBULA_RECEIVER_SCHEMA = "M3_NEBULA_MASTERED_DAG_RECEIVER_V2"
 NEBULA_RECEIVER_PATH = (
@@ -145,6 +149,9 @@ def validate(rows: Iterable[Mapping[str, str]]) -> list[dict[str, str]]:
         raise ValueError("missing Nebula proving reference")
     if (
         nebula["repository"] != "hsoliwal/nebula"
+        or nebula["commit"] != NEBULA_PROOF_COMMIT
+        or nebula["contentHashAlgorithm"] != "GIT-BLOB-SHA1"
+        or nebula["contentHash"] != NEBULA_PROOF_BLOB
         or nebula["path"] != "m3/docs/FINAL_PROVEN_TRANSFER_20261006.md"
         or nebula["delivery"] != "REFERENCE_ONLY"
         or nebula["applicationPolicy"] != "PROVING_REFERENCE_ONLY"
