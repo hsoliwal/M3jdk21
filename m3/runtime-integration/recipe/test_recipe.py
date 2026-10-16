@@ -92,6 +92,48 @@ class RecipeTest(unittest.TestCase):
                 else:
                     path.write_bytes(original)
 
+    def test_modified_utf8_owner_fanin_matches_canonical_donor(self):
+        expected = {
+            "src/hotspot/share/classfile/javaClasses.cpp",
+            "src/hotspot/share/classfile/javaClasses.hpp",
+            "src/hotspot/share/classfile/javaClasses.inline.hpp",
+            "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        }
+        self.assertEqual(expected, set(recipe.MUTF8_FANIN))
+        observed = {}
+        for path, (prior, legacy, current) in recipe.MUTF8_FANIN.items():
+            row = manifest["files"][path]
+            self.assertEqual(prior, row["after"])
+            self.assertEqual([*legacy, current], row["superseded"])
+            observed[path] = recipe.digest((ROOT / path).read_bytes())
+            self.assertEqual(current, observed[path], path)
+        self.assertIsNone(recipe.verify_mutf8_fanin(manifest, observed))
+
+    def test_modified_utf8_partial_and_unreviewed_sources_are_refused(self):
+        current = {path: new for path, (_, _, new) in recipe.MUTF8_FANIN.items()}
+        historic = {
+            path: legacy[-1] if legacy else prior
+            for path, (prior, legacy, _) in recipe.MUTF8_FANIN.items()
+        }
+        self.assertIsNone(recipe.verify_mutf8_fanin(manifest, current))
+        self.assertIsNone(recipe.verify_mutf8_fanin(manifest, historic))
+        for path in current:
+            with self.subTest(path=path, stage="partial"):
+                partial = dict(current)
+                partial[path] = historic[path]
+                with self.assertRaisesRegex(ValueError, "partial modified UTF-8"):
+                    recipe.verify_mutf8_fanin(manifest, partial)
+            with self.subTest(path=path, stage="unknown"):
+                damaged = dict(current)
+                damaged[path] = "0" * 64
+                with self.assertRaisesRegex(ValueError, "modified UTF-8 source drift"):
+                    recipe.verify_mutf8_fanin(manifest, damaged)
+            with self.subTest(path=path, stage="receipt"):
+                damaged = json.loads(json.dumps(manifest))
+                damaged["files"][path]["superseded"].pop()
+                with self.assertRaisesRegex(ValueError, "modified UTF-8 recipe seal drift"):
+                    recipe.verify_mutf8_fanin(damaged, current)
+
     def test_symlink_target_is_refused(self):
         with tempfile.TemporaryDirectory() as folder:
             target = Path(folder)
