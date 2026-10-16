@@ -14,14 +14,32 @@ import java.util.function.LongPredicate;
  * Read-only live selection over any M3LongCollection. Stores one source and one predicate,
  * not a retained filtered copy. Iteration order is the source's order. Stable predicates
  * and no mutation during traversal are required; this is not a snapshot or a JDK view.
+ * Nested filtering retains one backing owner, no intermediate payload/array,
+ * and no per-element node. The explicit primitive Collection contract permits
+ * composition with the existing concat/stream owners without boxing.
  */
-public final class M3LongFilteredView {
+public final class M3LongFilteredView implements M3LongCollection {
     private final M3LongCollection source;
     private final LongPredicate predicate;
 
     public M3LongFilteredView(M3LongCollection source, LongPredicate predicate) {
-        this.source = Objects.requireNonNull(source, "source");
-        this.predicate = Objects.requireNonNull(predicate, "predicate");
+        M3LongCollection actual = Objects.requireNonNull(source, "source");
+        LongPredicate selected = Objects.requireNonNull(predicate, "predicate");
+        if (actual instanceof M3LongFilteredView previous) {
+            // Flatten nested filters without retaining intermediate view owners.
+            // Both predicates still run in encounter order and short-circuit.
+            this.source = previous.source;
+            this.predicate = previous.predicate.and(selected);
+        } else {
+            this.source = actual;
+            this.predicate = selected;
+        }
+    }
+
+    /** Fail closed for every mutation, including an empty/no-op clear. */
+    @Override
+    public void clear() {
+        throw new UnsupportedOperationException("read-only filtered collection");
     }
 
     public boolean contains(long value) {
