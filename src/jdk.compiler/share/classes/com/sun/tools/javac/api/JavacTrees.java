@@ -441,10 +441,13 @@ public class JavacTrees extends DocTrees {
                 // resulting type belongs to a different module, retry in the requested module.
                 Type t = attr.attribType(ref.qualifierExpression, env);
 
+                Symbol attributedElement = t == null ? null : t.asElement();
                 if (t == null
                         || t.isErroneous()
                         || (ref.moduleName != null
-                                && !mdlsym.equals(elements.getModuleOf(t.asElement())))) {
+                                && (attributedElement == null
+                                        || !mdlsym.equals(
+                                                elements.getModuleOf(attributedElement))))) {
                     JCCompilationUnit toplevel = treeMaker.TopLevel(List.nil());
                     toplevel.modle = mdlsym;
                     toplevel.packge = mdlsym.unnamedPackage;
