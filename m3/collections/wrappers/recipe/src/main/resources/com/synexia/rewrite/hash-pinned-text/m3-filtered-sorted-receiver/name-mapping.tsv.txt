@@ -1,0 +1,4 @@
+source	target	disposition
+com.synexia.primitives.M3CollectionViews	com.m3.collections.M3CollectionViews	INDEPENDENT_APACHE_MODULE; no java.util replacement
+com.synexia.primitives.M3FilteredMaps	com.m3.collections.M3FilteredMaps	INDEPENDENT_APACHE_MODULE; namespace port
+RunSearchJni	wrappers test-only peer	UNCHANGED_TEST_CODE; no production JNI promotion
