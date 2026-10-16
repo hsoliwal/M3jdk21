@@ -24,7 +24,7 @@ final class M3ObjectResidencyBorrowTest {
         long a = arena.retainProjection(0, 8);
         long b = arena.retainProjection(0, 8);
         assertEquals(2, arena.projectionBorrowCount(0));
-        assertEquals(1L, arena.useProjection(a, Integer::longValue));
+        assertEquals(1L, arena.useProjection(a, Integer::longValue).longValue());
         assertFalse(arena.retireUnborrowedProjection(0));
         assertThrows(M3ObjectResidency.BudgetExceededException.class,
                 () -> arena.use(1, 8, value -> 1L));
@@ -37,7 +37,7 @@ final class M3ObjectResidencyBorrowTest {
         assertTrue(arena.retireUnborrowedProjection(0));
         assertEquals(M3ObjectResidency.State.ABSENT, arena.state(0));
         assertEquals(0x55L, arena.readParentBits(0));
-        assertEquals(2L, arena.use(0, 8, Integer::longValue));
+        assertEquals(2L, arena.use(0, 8, Integer::longValue).longValue());
         assertEquals(2, constructed[0]);
         long next = arena.retainProjection(0, 8);
         assertNotEquals(a, next);
@@ -97,7 +97,7 @@ final class M3ObjectResidencyBorrowTest {
                 if (!release.await(5, TimeUnit.SECONDS)) {
                     throw new AssertionError("worker timed out");
                 }
-                assertEquals(5, arena.useProjection(token, StringBuilder::length));
+                assertEquals(5, arena.useProjection(token, StringBuilder::length).intValue());
                 arena.releaseProjection(token);
             } catch (Throwable error) {
                 failure.set(error);
