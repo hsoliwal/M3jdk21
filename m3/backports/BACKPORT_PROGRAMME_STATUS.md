@@ -93,3 +93,26 @@ Current states:
 This does **not** stop independent JEP/JDK backport inventory or recipe development already admitted
 by the existing catalogue. It prevents only the new Nebula-qualified recipe handoff from silently
 becoming executable before its two prerequisite proof stages are complete.
+
+## 2026-10-16 pinned upstream Nebula proof gate
+
+The backport programme now carries an additive V2 admission receipt for the real pinned
+`EclipseNebula/nebula` proving checkout:
+
+- upstream revision: `5d0bcbb9c6e3a118685a5ec91c6f5d8eb7833893`;
+- Synexia proof PR: `hsoliwal/com.synexia#11749`;
+- current Synexia proof commit: `b3b35e5fd706a6584df4f476b38e8255f8692ee3`;
+- proof workflow: `M3 Nebula Recipe DAG Convergence`;
+- physical private-atom extraction: `HOLD_TRUSTED_VERIFIER_REQUIRED`;
+- backport packet execution: false;
+- mutation authority: false;
+- promotion authority: false.
+
+The machine receipt is
+`NEBULA_UPSTREAM_PROOF_ADMISSION_20261016.tsv` and is verified by
+`nebula_upstream_proof_admission.py` during the Maven `validate` phase.
+
+The older V1/historical Nebula receipts remain intact. V2 does not reinterpret them and does not
+authorize any JDK source mutation. The programme remains HOLD until Synexia #11749 is green and its
+post-Tycho `M3_NEBULA_UPSTREAM_HANDOFF_V1` artifact is available for exact receiver binding.
+
