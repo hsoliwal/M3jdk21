@@ -75,9 +75,10 @@ class StringTargetSuccessorTest(unittest.TestCase):
         self.assertEqual("70d1d03c109126fdda36c54da21b484bbe368fd9",
                          historical[phase.M3_STRING_PATH]["successor_git_blob"])
         expected = phase.current_successor_blobs(self.mapping())
-        self.assertEqual("42399d411c1516a56a47dcdb10242960157b4677",
+        self.assertEqual("7a3cca7c0aa127d20fbcb276e5e603dee020aee5",
                          expected[phase.M3_STRING_PATH])
         self.assertEqual(4, len(expected))
+        self.assertEqual(4, len(self.read_chain()))
 
     def test_chain_refuses_drift_ambiguity_reordering_and_promotion(self):
         good = self.read_chain()
@@ -171,6 +172,11 @@ class StringTargetSuccessorTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "responsibility lost"):
             phase.validate_successor_source(
                 path, contents.replace("static M3String joinDesignated(", "static M3String lost("))
+
+        with self.assertRaisesRegex(ValueError, "responsibility lost"):
+            phase.validate_successor_source(
+                path, contents.replace("static M3String admitArrays(char[]... arrays)",
+                                       "static M3String lostArrays(char[]... arrays)"))
 
     def test_flat_needle_candidate_facts_loss_refuses(self):
         path = "src/java.base/share/classes/java/lang/M3StringFacts.java"
