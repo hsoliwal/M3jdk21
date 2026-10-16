@@ -3,11 +3,11 @@
   "source_repository": "hsoliwal/com.synexia",
   "source_revision": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
   "target_repository": "hsoliwal/M3jdk21",
-  "target_baseline": "d5abed865bd47c4dd5ad78e95704348fe2095ed2",
+  "target_baseline": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
   "recipe": "com.synexia.rewrite.M3PatternAsciiReceive20261014",
   "recipe_task": "synexia-openrewrite-recipes/tasks/m3-pattern-ascii-receive-20261014",
   "target_owner": "java.util.regex.M3PatternQuery.BooleanPlan",
-  "target_source_sha256": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531",
+  "target_source_sha256": "c34a6823f56a7e4539557551a1d2b2a4c5e24080f2c5862d76e2ae01c5c4e60d",
   "source_disposition": "TARGET_OWNED_PORT; algorithm/precompute strategy adapted onto existing JDK predicates; no donor body copied",
   "native_disposition": "TEST_ONLY_JNI_ORACLE; no production native dispatch",
   "runtime_dependency_on_synexia": false,
@@ -27,5 +27,19 @@
     "qualification": "LEAF_PROOF_RECORDED_IN_SYNEXIA_TASK; product gates separate",
     "product_acceptance": false
   },
-  "previous_target_source_sha256": "599f7f5a36e5454a401baa2a0d1853594915a162d32bcd827a6c8b5b471de430"
+  "previous_target_source_sha256": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531",
+  "bmp_successor_20261015": {
+    "source_parent": "25bbf2ba6a6fa134c72a049e8f4763011dc7576c",
+    "target_parent": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
+    "source_owner_sha256": "c34a6823f56a7e4539557551a1d2b2a4c5e24080f2c5862d76e2ae01c5c4e60d",
+    "prior_receiver_sha256": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531",
+    "original_rolling_baseline_retained": true,
+    "merged_wide_baseline_retained": true,
+    "retained_plan_layout_unchanged": true,
+    "max_invocation_extra_mask_words": 10,
+    "jni": "TEST_ONLY independent alphabet/DP oracle",
+    "product_acceptance": false,
+    "policy": "two admitted BMP symbols; third distinct symbol continues exact-prefix DP",
+    "ascii_phase": "predecessor loops; private mixed continuation after exact prefix"
+  }
 }

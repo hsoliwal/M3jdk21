@@ -8,7 +8,7 @@
  * @test
  * @summary Qualify existing M3PatternQuery BooleanPlan ASCII precompute and unchanged fallbacks
  * @modules java.base/java.util.regex:open
- * @run main/native M3PatternAsciiFrontierTest require-wide
+ * @run main/native M3PatternAsciiFrontierTest require-bmp
  */
 
 import java.lang.reflect.Field;
@@ -66,6 +66,7 @@ public final class M3PatternAsciiFrontierTest {
     private M3PatternAsciiFrontierTest() { }
     private static native int scalarOracle(long[] masks, long stars, int atoms, String input);
     private static native int wideScalarOracle(long[] masks, int atoms, String input);
+    private static native int mixedScalarOracle(long[] masks, char[] alphabet, int atoms, String input);
 
     private static void check(boolean condition, String message) {
         ASSERTIONS.incrementAndGet();
@@ -341,9 +342,160 @@ public final class M3PatternAsciiFrontierTest {
                 + HexFormat.of().formatHex(digest.digest()));
     }
 
+
+    /** An independent alphabet export; no production cache/closure state is read. */
+    private static long[] mixedImage(Prepared p, char[] keys) throws Exception {
+        Object[] atoms = (Object[]) ATOMS.get(p.plan);
+        boolean[] repeated = (boolean[]) REPEATED.get(p.plan);
+        int words = (p.atoms >>> 6) + 1;
+        long[] image = new long[(keys.length + 1) * words];
+        for (int atom = 0; atom < atoms.length; atom++) {
+            int state = atom + 1, word = state >>> 6;
+            long bit = 1L << (state & 63);
+            for (int symbol = 0; symbol < keys.length; symbol++) {
+                if ((Boolean) PREDICATE.invoke(atoms[atom], (int) keys[symbol])) {
+                    image[symbol * words + word] |= bit;
+                }
+            }
+            if (repeated[atom]) image[keys.length * words + word] |= bit;
+        }
+        return image;
+    }
+
+    private static void mixedCase(Prepared p, String text, long[] image, char[] keys,
+                                  MessageDigest digest) throws Exception {
+        int expected = wideJavaOracle(p, text);
+        check(match(p.plan, text) == expected, "BMP_FRONTIER_DIVERGENCE:" + p.atoms + ":" + escape(text));
+        check(mixedScalarOracle(image, keys, p.atoms, text) == expected, "BMP_NATIVE_DIVERGENCE");
+        digest.update((byte) expected);
+    }
+
+    private static void bmpCorpus() throws Exception {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        int tested = 0;
+        // All code units, not an ASCII-only corpus. Oracle alphabet excludes surrogates;
+        // the input-side refusal still has to occur even when its frontier has died.
+        for (int flags : new int[] {0, Pattern.DOTALL, Pattern.UNIX_LINES}) {
+            Prepared p = prepare(".*", flags);
+            for (int unit = 0; unit <= Character.MAX_VALUE; unit++) {
+                char c = (char) unit;
+                char[] keys = Character.isSurrogate(c) ? new char[0] : new char[] {c};
+                long[] image = mixedImage(p, keys);
+                String text = Character.toString(c);
+                int expected = Character.isSurrogate(c) ? -1 : p.pattern.matcher(text).matches() ? 1 : 0;
+                check(match(p.plan, text) == expected, "BMP_COMPLETE_JAVA");
+                check(mixedScalarOracle(image, keys, p.atoms, text) == expected, "BMP_COMPLETE_JNI");
+                digest.update((byte) expected); tested++;
+            }
+        }
+        char[] keys = {0, 'a', 'b', 'z', '\u0085', '\u00e9', '\u03b2', '\u0966', '\u2028', '\uffff'};
+        List<String> inputs = new ArrayList<>(words(new String[] {"a", "\u00e9", "\u03b2"}, 3));
+        inputs.addAll(List.of("\u03b2a\u00e9", "\u00e9a\u03b2", "\u00e9a\u00e9", "z\ud800",
+                "\u00e9\udc00", "\u0085", "\u0966", "\u2028", "\uffff", "\u0000",
+                "\u00e9\u03b2\u0966", "\u00e9\u03b2\u0966a", "\u00e9\u03b2\u0966\ud800"));
+        // Every atom count, with required ordering and changing non-ASCII acceptance sets.
+        for (int count = 1; count <= 256; count++) for (int family = 0; family < 2; family++) {
+            String expression = family == 0 ? "[a\u00e9\u03b2]*".repeat(count)
+                    : count == 1 ? "\u00e9*" : "\u00e9*" + "a*".repeat(count - 2) + "\u03b2*";
+            Prepared p = prepare(expression, 0);
+            check(p != null && p.atoms == count, "BMP_COMPILED_GEOMETRY");
+            long[] image = mixedImage(p, keys), saved = image.clone();
+            char[] savedKeys = keys.clone();
+            for (String input : inputs) { mixedCase(p, input, image, keys, digest); tested++; }
+            check(Arrays.equals(saved, image) && Arrays.equals(savedKeys, keys), "BMP_NATIVE_MUTATED_IMAGE");
+        }
+        for (String expression : List.of("\\w*", "\\d*", "[a-z]*", "\\p{Lower}*", "[^a]*")) {
+            for (int flags : new int[] {0, Pattern.UNICODE_CHARACTER_CLASS,
+                    Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE}) {
+                Prepared p = prepare(expression, flags);
+                check(p != null, "BMP_FLAG_PLAN");
+                long[] image = mixedImage(p, keys);
+                for (String input : inputs) {
+                    mixedCase(p, input, image, keys, digest);
+                    if (input.indexOf('\ud800') < 0 && input.indexOf('\udc00') < 0) {
+                        check(match(p.plan, input) == (p.pattern.matcher(input).matches() ? 1 : 0), "BMP_JDK_FLAGS");
+                    }
+                    tested++;
+                }
+            }
+        }
+        for (int count : new int[] {1, 63, 64, 128, 256}) {
+            Prepared p = prepare(".*".repeat(count), Pattern.DOTALL);
+            long[] image = mixedImage(p, keys);
+            for (String text : List.of("\u00e9\u03b2\u0966a", "\u03b2\u00e9\u0966",
+                    "\u00e9\u03b2\u0966\ud800", "\u00e9a\u03b2a\u00e9a\u03b2")) {
+                mixedCase(p, text, image, keys, digest); tested++;
+            }
+        }
+        // Invocation-local cache state cannot leak across threads or plan instances.
+        Prepared shared = prepare("\u00e9*" + "a*".repeat(254) + "\u03b2*", 0);
+        long[] image = mixedImage(shared, keys);
+        try (var executor = Executors.newFixedThreadPool(4)) {
+            List<Callable<Void>> jobs = new ArrayList<>();
+            for (int job = 0; job < 64; job++) jobs.add(() -> {
+                for (int i = 0; i < 64; i++) {
+                    String text = (i & 1) == 0 ? "\u00e9a\u03b2" : "\u03b2a\u00e9";
+                    int expected = (i & 1) == 0 ? 1 : 0;
+                    check(match(shared.plan, text) == expected, "BMP_CONCURRENT_JAVA");
+                    check(mixedScalarOracle(image, keys, 256, text) == expected, "BMP_CONCURRENT_JNI");
+                }
+                return null;
+            });
+            for (var future : executor.invokeAll(jobs)) future.get();
+        }
+        if (ASCII != null) {
+            Prepared fallback = prepare("\u00e9*\u03b2*", 0);
+            ASCII.set(fallback.plan, null); // Isolated test plan: force optional-metadata failure path.
+            check(match(fallback.plan, "\u00e9\u03b2") == 1, "BMP_OPTIONAL_DP");
+            check(match(fallback.plan, "\u03b2\u00e9") == 0, "BMP_OPTIONAL_DP_ORDER");
+            check(match(fallback.plan, "z\ud800") == -1, "BMP_OPTIONAL_DP_SURROGATE");
+        }
+        mixedRefusals();
+        System.out.println("M3_BMP_PROOF cases=" + tested + " atomCounts=256 concurrentTasks=64 digest="
+                + HexFormat.of().formatHex(digest.digest()));
+    }
+
+    private static void mixedReject(long[] image, char[] alphabet, int atoms, String text, String message) {
+        try { mixedScalarOracle(image, alphabet, atoms, text); throw new AssertionError("BMP_INVALID_ACCEPTED"); }
+        catch (IllegalArgumentException expected) { check(expected.getMessage().contains(message), "BMP_WRONG_REFUSAL"); }
+    }
+
+    private static void mixedRefusals() throws Exception {
+        Prepared p = prepare("\u00e9*", 0);
+        char[] keys = {'\u00e9'};
+        long[] image = mixedImage(p, keys);
+        mixedReject(image, keys, 257, "", "count");
+        mixedReject(image, keys, -1, "", "count");
+        mixedReject(image, new char[33], 1, "", "count");
+        mixedReject(new long[1], keys, 1, "", "shape");
+        mixedReject(new long[3], new char[] {'b', 'a'}, 1, "", "alphabet");
+        mixedReject(new long[3], new char[] {'a', 'a'}, 1, "", "alphabet");
+        mixedReject(image, new char[] {'\ud800'}, 1, "", "alphabet");
+        mixedReject(image, keys, 1, "b", "missing symbol");
+        long[] bad = image.clone(); bad[0] |= 1L;
+        mixedReject(bad, keys, 1, "", "foreign bits");
+        bad = image.clone(); bad[1] |= 4L;
+        mixedReject(bad, keys, 1, "\ud800", "foreign bits");
+        Prepared wide = prepare("a*".repeat(256), 0);
+        bad = mixedImage(wide, new char[] {'a', 'z'}); bad[5 + 4] |= 2L;
+        mixedReject(bad, new char[] {'a', 'z'}, 256, "a", "foreign bits");
+        for (int kind = 0; kind < 3; kind++) {
+            try {
+                mixedScalarOracle(kind == 0 ? null : image, kind == 1 ? null : keys, 1, kind == 2 ? null : "");
+                throw new AssertionError("BMP_NULL_ACCEPTED");
+            } catch (NullPointerException expected) { check(true, "native null"); }
+        }
+        check(mixedScalarOracle(new long[1], new char[0], 0, "") == 1, "BMP_NATIVE_EMPTY_IDENTITY");
+    }
+
     public static void main(String[] args) throws Exception {
         System.loadLibrary("M3PatternAsciiFrontierTest");
-        requireWide = args.length > 0 && args[0].equals("require-wide");
+        boolean requireBmp = args.length > 0 && args[0].equals("require-bmp");
+        requireWide = requireBmp || (args.length > 0 && args[0].equals("require-wide"));
+        if (requireBmp) {
+            Class.forName("java.util.regex.M3PatternQuery$BooleanPlan")
+                    .getDeclaredMethod("predicateBits", char.class, int.class);
+        }
         requireAscii = requireWide || (args.length > 0 && args[0].equals("require-ascii"));
         if (args.length > 0 && args[0].equals("mutant-case")) {
             Prepared p = prepare("b" + "a*".repeat(62), 0);
@@ -361,8 +513,18 @@ public final class M3PatternAsciiFrontierTest {
             check(match(p.plan, "b") == 1, "EPSILON_CARRY_64");
             return;
         }
+        if (args.length > 0 && args[0].equals("bmp-cache-mutant")) {
+            Prepared p = prepare("\u00e9*\u03b2*", 0);
+            check(match(p.plan, "\u03b2\u00e9") == 0, "BMP_CACHE_KEY");
+            return;
+        }
+        if (args.length > 0 && args[0].equals("bmp-replace-mutant")) {
+            Prepared p = prepare("\u00e9*" + "a*".repeat(254) + "\u03b2*", 0);
+            check(match(p.plan, "\u03b2\u00e9") == 0, "BMP_MASK_REPLACE");
+            return;
+        }
         corpus(); allBmpAndMixedPrefixes(); boundaries(); concurrency();
-        wideCorpus();
+        wideCorpus(); bmpCorpus();
         System.out.println("M3_ASCII_PROOF cases=" + cases + " nativeCases=" + nativeCases
                 + " plans=" + plans + " assertions=" + ASSERTIONS.get()
                 + " digest=" + HexFormat.of().formatHex(DIGEST.digest())
