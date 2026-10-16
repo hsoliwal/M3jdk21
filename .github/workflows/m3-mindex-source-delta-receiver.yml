@@ -18,6 +18,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 2
       - name: Diff hygiene
         run: git diff --check HEAD^ HEAD
       - name: Verify exact source-only pinned MIndex migration delta
