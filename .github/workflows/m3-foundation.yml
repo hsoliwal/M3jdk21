@@ -11,10 +11,6 @@ jobs:
   instance-index-contract:
     runs-on: ubuntu-22.04
     timeout-minutes: 5
-    env:
-      TEMP: ${{ runner.temp }}
-      TMP: ${{ runner.temp }}
-      TMPDIR: ${{ runner.temp }}
     steps:
       - name: Checkout only the owner and contract test
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -32,18 +28,22 @@ jobs:
           java-version: "21"
       - name: Compile and execute the isolated owner contract
         shell: bash
+        env:
+          TEMP: ${{ runner.temp }}
+          TMP: ${{ runner.temp }}
+          TMPDIR: ${{ runner.temp }}
         run: |
           set -euo pipefail
           test "$TEMP" = "$RUNNER_TEMP"
           test "$TMP" = "$RUNNER_TEMP"
-          printf 'TEMP=%s\\nTMP=%s\\n' "$TEMP" "$TMP"
+          printf 'TEMP=%s\nTMP=%s\n' "$TEMP" "$TMP"
           classes="$RUNNER_TEMP/m3-instance-index-contract"
           mkdir -p "$classes"
-          javac --release 17 -Xlint:all -Werror -d "$classes" \\
-            m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java \\
+          javac --release 17 -Xlint:all -Werror -d "$classes" \
+            m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java \
             m3/core/test/M3InstanceIndexPrecomputeTest.java
           output="$(java -ea -cp "$classes" M3InstanceIndexPrecomputeTest)"
-          printf '%s\\n' "$output"
+          printf '%s\n' "$output"
           test "$output" = "M3JDK_INSTANCE_INDEX_PRECOMPUTE_PASS checks=25"
   foundation:
     runs-on: ubuntu-22.04
