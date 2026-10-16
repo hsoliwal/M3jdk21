@@ -2,16 +2,17 @@
 # Frozen Synexia task custody, not a second recipe owner
 
 Canonical repository: hsoliwal/com.synexia
-Canonical commit: 199b6541ef63bcd16ee60880e5821ac8e1af87ac
+Canonical commit: ad2c88d38880264bee035a972477ab3c8b67c47b
 Canonical directory: synexia-openrewrite-recipes/recipe-crates/m3jdk-region-foundation-20261016
 Target source baseline: 855afe57a679aeb454052630de7beddcb25f5f8f
 
 All Java task sources, tests, templates, POM, prepare.py, qualify.py, qualify.sh and postimages.tsv
-are exact source-custody mirrors at that revision. The canonical README records contract,
-upstream JDK-8316879 provenance, donor decisions and pending product gates. Improve the
-Synexia owner and re-pin this custody; do not independently evolve these copies. They are
-build/proof tooling only, never a Java/HotSpot/JNI runtime dependency. Existing receiver
-engines are borrowed by exact source hash into the isolated Maven build, not forked here.
+are exact source-custody mirrors at that revision. The canonical README and OPEN_GATES.md record
+contract, upstream JDK-8316879 provenance, donor decisions, failed complete-JDK compiler gates
+and pending product qualification. Improve the Synexia owner and re-pin this custody; do not
+independently evolve these copies. They are build/proof tooling only, never a Java/HotSpot/JNI
+runtime dependency. Existing receiver engines are borrowed by exact source hash into the
+isolated Maven build, not forked here.
 
 Apache-2.0 applies to the authored recipe/tooling; the target jtreg template explicitly keeps
 GPL-2.0-only. Original OpenJDK source headers remain unchanged. Frozen postimages.tsv admits

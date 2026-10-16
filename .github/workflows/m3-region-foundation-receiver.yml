@@ -7,10 +7,13 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: m3-region-foundation-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   source-bound-qualification:
     if: github.ref == 'refs/heads/m3/region-foundation-repair-20261016'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
     timeout-minutes: 20
     permissions:
       contents: write
