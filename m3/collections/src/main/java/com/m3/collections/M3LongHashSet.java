@@ -129,7 +129,6 @@ public final class M3LongHashSet implements M3LongCollection {
     }
 
     @Override
-    public boolean contains(long key)    @Override
     public boolean contains(long key) {
         return findIndex(key) >= 0;
     }
