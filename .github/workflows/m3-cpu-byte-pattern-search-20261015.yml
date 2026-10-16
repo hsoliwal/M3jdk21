@@ -1,0 +1,56 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 source-backed byte-pattern search Java21 C11 JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/capability-runtime/**'
+      - '.github/workflows/m3-cpu-byte-pattern-search-20261015.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  linux-java-c11-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: m3/ports/capability-runtime
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Real Java21, independent KMP oracle, C11 UBSan JNI and JMOD developer-image tests
+        run: |
+          python3 m3/ports/capability-runtime/verify_native.py --root m3/ports/capability-runtime --out "$RUNNER_TEMP/m3-byte-pattern-proof" --developer-image
+          test -s "$RUNNER_TEMP/m3-byte-pattern-proof/REPORT.json"
+          grep -q 'M3_BYTE_PATTERN_SEARCH_PASS' "$RUNNER_TEMP/m3-byte-pattern-proof/byte-pattern-java-oracle.log"
+          grep -q 'M3_BYTE_PATTERN_SEARCH_PASS' "$RUNNER_TEMP/m3-byte-pattern-proof/byte-pattern-jni-oracle.log"
+      - name: Keep actual Java and native receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-byte-pattern-jdk21-jni
+          path: ${{ runner.temp }}/m3-byte-pattern-proof/
+          if-no-files-found: error
+  windows-java21-no-wsl:
+    runs-on: windows-2022
+    timeout-minutes: 40
+    steps:
+      - name: Admit long repo paths for OpenJDK history
+        shell: pwsh
+        run: git config --global core.longpaths true
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: m3/ports/capability-runtime
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict Java21 binary-pattern differential, no WSL
+        shell: pwsh
+        run: |
+          python m3/ports/capability-runtime/verify_native.py --root m3/ports/capability-runtime --out "${{ runner.temp }}/m3-byte-pattern-java" --java-only
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
