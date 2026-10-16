@@ -1,0 +1,4 @@
+source_repo	source_revision	source_owner	target_owner	target_path	mechanism	status
+hsoliwal/M3jdk21	abadfdc3c0679d41b6fba506fb98834f91b8c3af	com.m3.collections.M3LongHashSet	M3LongHashSet.retainByStateMask	m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java	long[] + byte[] tombstone selection	CANDIDATE_SOURCE_RECEIVED
+hsoliwal/M3jdk21	abadfdc3c0679d41b6fba506fb98834f91b8c3af	com.m3.collections.M3LongLongHashMap	M3LongLongHashMap.retainByStateMask	m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java	paired long[]/long[] + byte[] selection	CANDIDATE_SOURCE_RECEIVED
+hsoliwal/com.synexia	7370b3e158e5463b76dc1639b1f943e6a597a446	M3HashPinnedJavaSnapshotRecipe	M3Jdk21MaskKeyedReceiver20261016	m3/collections/qualification/mask-keyed-postimages-20261016.tsv	SHA256 exact source replay	RECIPE_QUALIFICATION_PENDING
