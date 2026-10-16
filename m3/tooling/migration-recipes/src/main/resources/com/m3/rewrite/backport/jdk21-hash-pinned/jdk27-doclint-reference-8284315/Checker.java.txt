@@ -974,7 +974,7 @@ public class Checker extends DocTreePathScanner<Void, Void> {
         // @link and @see require an element target. Other reference contexts may
         // legitimately denote primitive or array types, which have a TypeMirror
         // but no corresponding language-model Element.
-        if (inLink || inSee) {
+        if (inLink || getParentKind() == DocTree.Kind.SEE) {
             if (env.trees.getElement(getCurrentPath()) == null) {
                 reportBadReference(tree);
             }
