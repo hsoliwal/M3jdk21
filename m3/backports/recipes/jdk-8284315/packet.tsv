@@ -1,0 +1,12 @@
+packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
+jdk-8284315-doctrees	doctrees-contract	FILE	false	M3Jdk21HashPinnedSnapshotRecipe:jdk27-doctrees-contract-8284315	
+jdk-8284315-doctrees	javactrees-resolution	FILE	false	M3Jdk21HashPinnedSnapshotRecipe:jdk27-javactrees-resolution-8284315	
+jdk-8284315-doctrees	focused-jtreg	FILE	false	M3Jdk21HashPinnedSnapshotRecipe:jdk27-doctrees-test-8284315	
+jdk-8284315-doctrees	comment-helper	FILE	false	M3Jdk21HashPinnedSnapshotRecipe:jdk27-javadoc-comment-helper-8284315	
+jdk-8284315-doctrees	doclint-checker	FILE	false	M3Jdk21HashPinnedSnapshotRecipe:jdk27-doclint-reference-8284315	
+jdk-8284315-doctrees	javadoc-seetag-test	FILE	false	M3Jdk21HashPinnedSnapshotRecipe:jdk27-javadoc-seetag-8284315	
+jdk-8284315-doctrees	doclint-reference-test	FILE	false	M3Jdk21HashPinnedSnapshotRecipe:jdk27-doclint-test-8284315	
+jdk-8284315-doctrees	doclint-golden	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-doclint-golden-8284315	
+jdk-8284315-doctrees	compiler-module-join	MODULE	true	JOIN:jdk.compiler	doctrees-contract,javactrees-resolution,focused-jtreg
+jdk-8284315-doctrees	javadoc-module-join	MODULE	true	JOIN:jdk.javadoc	comment-helper,doclint-checker,javadoc-seetag-test,doclint-reference-test,doclint-golden
+jdk-8284315-doctrees	library-api-join	LIBRARY_API	true	com.m3.rewrite.backport.M3Jdk8284315FullBackportRecipe	compiler-module-join,javadoc-module-join
