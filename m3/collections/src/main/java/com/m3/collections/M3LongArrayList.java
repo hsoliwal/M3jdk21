@@ -195,6 +195,30 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
     }
 
     /**
+     * Compact resident primitive values in encounter order under a precomputed
+     * position-aligned unsigned-byte mask; no per-element objects or scratch
+     * result array. The caller owns the mask, which must remain stable.
+     * Invalid masks fail before mutation. Not concurrent/snapshot-safe.
+     *
+     * @return removed occurrences
+     */
+    public int retainByStateMask(byte[] alignedStates, int requiredMask) {
+        M3IndexMaskCompactor.validate(alignedStates, size, requiredMask);
+        int previous = size;
+        int kept = 0;
+        for (int read = 0; read < previous; read++) {
+            if (M3IndexMaskCompactor.matches(alignedStates[read], requiredMask)) {
+                elements[kept++] = elements[read];
+            }
+        }
+        if (kept == previous) return 0;
+        Arrays.fill(elements, kept, previous, 0L);
+        size = kept;
+        modCount++;
+        return previous - kept;
+    }
+
+    /**
      * Keeps matching values in-place. On predicate failure, prior rejections are committed, but
      * the throwing value and untested suffix remain intact. The predicate must not mutate this
      * collection.
