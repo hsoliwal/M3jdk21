@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 modified UTF-8 runtime owner fan-in
+on:
+  pull_request:
+    paths:
+      - 'm3/runtime-integration/recipe/**'
+      - '.github/workflows/m3-runtime-mutf8-fanin-proof.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-and-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check exact recipe syntax
+        run: python3 -m py_compile m3/runtime-integration/recipe/apply.py m3/runtime-integration/recipe/test_recipe.py
+      - name: Prove complete modified UTF-8 owner receipt and mutation refusal
+        run: python3 m3/runtime-integration/recipe/test_recipe.py RecipeTest.test_modified_utf8_owner_fanin_matches_canonical_donor RecipeTest.test_modified_utf8_partial_and_unreviewed_sources_are_refused -v
