@@ -39,6 +39,12 @@ public final class A3 {
                             options.inventory(),
                             options.queue(),
                             options.out("m3/build/a3/work.tsv"));
+            case "complete" ->
+                    A3Complete.write(
+                            options.root(),
+                            options.inventory(),
+                            options.queue(),
+                            options.out("m3/build/a3/completion"));
             case "apply" ->
                     A3Apply.run(
                             options.root(),
@@ -59,7 +65,7 @@ public final class A3 {
 
     private static void usage() {
         System.err.println(
-                "A3: inv|alg|plan|work|apply|lab [--root PATH] [--out PATH] "
+                "A3: inv|alg|plan|work|complete|apply|lab [--root PATH] [--out PATH] "
                         + "[--inventory PATH] [--queue PATH] "
                         + "[--file PATH ...] [--list PATH] "
                         + "[--mastery-receipt PATH --mastery-root SHA256]");
