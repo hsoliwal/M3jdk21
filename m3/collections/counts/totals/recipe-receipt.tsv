@@ -1,0 +1,8 @@
+# Actual existing OpenRewrite Java/text engine results; repository-relative UTF-8 SHA-256
+m3/collections/counts/totals/README.md	a28f425678ffbb9c560fc35ce4e87a28aed0f46fb2f71fdffdd7e5afe743fc21
+m3/collections/counts/totals/catalogue.tsv	c672cd711c623a69f534fb306e82cf043052f97fc890c8f2af7cd3adb520152a
+m3/collections/counts/totals/provenance.json	ac6c9af1d2152613de02ca4506859e56f990057dedfad2606b2e448ad8fc98cb
+m3/collections/counts/totals/src/test/java/com/m3/collections/M3CountTotalsAllocationProbe.java	003894ee1ccc7bf034ad3647661945afbdc85c0c99a748fd96191cb3b24d34d3
+m3/collections/counts/totals/src/test/java/com/m3/collections/M3CountTotalsTest.java	e32bd40566ad07636b412e82ad92df93021ad40de38468efe7c4b2a20caf0b5b
+m3/collections/src/main/java/com/m3/collections/M3CountTotals.java	40ddf920cdf8341e976538e958d5f103cbf9afb5c69f03b55baeff8c5f5ba252
+m3/collections/src/main/native/collections/m3_count_totals.c	bf1fc7d87f797c4047da75fc23ffc01d6f2fc5a89f1dcf9c70a819ffcf493ebd

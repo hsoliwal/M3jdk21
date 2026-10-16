@@ -1,0 +1,4 @@
+# Additive, exact UTF-8 postimages; historical targets unchanged.
+m3/collections/counts/totals/src/test/java/com/m3/collections/M3CountTotalsAllocationProbe.java	ABSENT	003894ee1ccc7bf034ad3647661945afbdc85c0c99a748fd96191cb3b24d34d3	M3CountTotalsAllocationProbe.java.txt
+m3/collections/counts/totals/src/test/java/com/m3/collections/M3CountTotalsTest.java	ABSENT	e32bd40566ad07636b412e82ad92df93021ad40de38468efe7c4b2a20caf0b5b	M3CountTotalsTest.java.txt
+m3/collections/src/main/java/com/m3/collections/M3CountTotals.java	ABSENT	40ddf920cdf8341e976538e958d5f103cbf9afb5c69f03b55baeff8c5f5ba252	M3CountTotals.java.txt
