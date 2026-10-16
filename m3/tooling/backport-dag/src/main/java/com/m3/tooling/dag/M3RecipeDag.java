@@ -163,5 +163,24 @@ public final class M3RecipeDag {
         if (!promotion.serialPromotion() || order.getLast() != promotion) {
             throw new IllegalArgumentException("canonical promotion must be serial and last");
         }
+
+        // A sorted last node is not a dependency barrier. Airflow and Drools follow the edges,
+        // not the presentation order: every admitted work atom must precede promotion transitively.
+        Map<String, M3DagNode> byId = new HashMap<>();
+        for (M3DagNode node : order) {
+            byId.put(node.id(), node);
+        }
+        Set<String> ancestors = new java.util.HashSet<>();
+        ArrayDeque<String> pending = new ArrayDeque<>(promotion.dependsOn());
+        while (!pending.isEmpty()) {
+            String id = pending.removeFirst();
+            if (ancestors.add(id)) {
+                pending.addAll(byId.get(id).dependsOn());
+            }
+        }
+        if (ancestors.size() != order.size() - 1) {
+            throw new IllegalArgumentException(
+                    "canonical promotion lacks complete dependency fan-in");
+        }
     }
 }
