@@ -1,0 +1,22 @@
+{
+  "schema": "M3_COUNTED_RECEIVER_V1",
+  "canonical_parent": "hsoliwal/com.synexia@65f7752d492920f94effcc8970610ff8d8179f21",
+  "canonical_crate": "synexia-openrewrite-recipes/crates/m3-four-library-bags",
+  "source_donor": "hsoliwal/com.synexia@6c33a5772a12ca99c8bff6a02403b28be4202bb3",
+  "receiver_parent": "hsoliwal/M3jdk21@094d20a566757f998f9944908761b5cc62434d4b",
+  "license": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and Synexia contributors",
+  "providers": {
+    "M3HashPinnedJavaSnapshotRecipe": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+    "M3HashPinnedTextSnapshotRecipe": "2db1257a40d21be06ba2a67da87aff0311183809"
+  },
+  "mapping": {
+    "PackedLongBag": "com.m3.collections.M3LongBag",
+    "BagCountProbe.combineNative": "com.m3.collections.M3CountLanes.combineNative"
+  },
+  "scope": "separately built core/optional interop and explicit JNI count atom",
+  "external_implementations_copied": false,
+  "compatibility_pins_not_security_endorsements": true,
+  "performance_claim": false,
+  "phase_advance": false
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "M3_RECIPE_REUSE_LOCK_V1",
+  "repository": "https://github.com/hsoliwal/M3jdk21.git",
+  "commit": "9b33098446084b1f3ad41f99fb704f6f29aa5dda",
+  "recipe_tree": "45d5b77bc9b18e02922eb0e69ef246a8bdff05c4",
+  "canonical_donor": "hsoliwal/com.synexia@6c33a5772a12ca99c8bff6a02403b28be4202bb3",
+  "canonical_crate": "synexia-openrewrite-recipes/crates/m3-four-library-bags",
+  "receiver_recipe": "m3/collections/counts/recipe",
+  "copyright": "2026 Hitesh Soliwal and Synexia contributors",
+  "license": "Apache-2.0",
+  "proof_scope": "eight existing-engine recipe tests and fixed-point delivery; runtime qualification is a separate receiver gate",
+  "phase_advance": false
+}
