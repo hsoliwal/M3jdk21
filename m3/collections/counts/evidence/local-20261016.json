@@ -1,0 +1,23 @@
+{
+  "schema": "M3_COUNTED_LOCAL_EXECUTION_V1",
+  "mode": "ACTUAL_EXISTING_OPENREWRITE_SDK_EXECUTION_NOT_LOCAL_MAVEN",
+  "recipe_tree": "45d5b77bc9b18e02922eb0e69ef246a8bdff05c4",
+  "recipe_tests": {"tests": 8, "failures": 0, "errors": 0, "skipped": 0},
+  "new_runtime_tests": {"tests": 16, "failures": 0, "errors": 0, "skipped": 0},
+  "retained_interop_tests": {"tests": 42, "failures": 0, "errors": 0, "skipped": 0},
+  "long_core_tests": {"tests": 13, "failures": 0, "errors": 0, "skipped": 0},
+  "core_main_compilation_units": 80,
+  "interop_main_compilation_units": 5,
+  "generated_files": 16,
+  "allocation_original_failures": 4,
+  "allocation_candidate_passes": 4,
+  "allocation_flags": "-Xmx32m -XX:+UseSerialGC -XX:NewRatio=16 -Dm3.pressure.mib=12",
+  "unchanged_public_api_owners": 3,
+  "jni": "C17 -Wall -Wextra -Werror UBSan; -Xcheck:jni; BigInteger reference",
+  "runtime_dependencies_core": ["java.base"],
+  "full_core_runtime": "NOT_COMPLETED",
+  "full_reactor": "NOT_RUN",
+  "installed_jdk": "NOT_RUN",
+  "performance_claim": false,
+  "phase_advance": false
+}

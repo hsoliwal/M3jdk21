@@ -211,7 +211,12 @@ public final class M3LongLongHashMap {
             Arrays.fill(states, EMPTY);
             occupied = 0;
         } else if ((long) occupied > (long) size * 2 && keys.length > MIN_CAPACITY) {
-            rehash(keys.length);
+            try {
+                rehash(keys.length);
+            } catch (OutOfMemoryError optionalCompactionFailure) {
+                // Removal already committed. Keep the valid tombstoned table so
+                // callers can update aggregate counts instead of observing a false failure.
+            }
         }
     }
 
@@ -232,36 +237,27 @@ public final class M3LongLongHashMap {
 
     private void rehash(int requestedCapacity) {
         int capacity = tableSizeFor(Math.max(MIN_CAPACITY, requestedCapacity));
-        long[] oldKeys = keys;
-        long[] oldValues = values;
-        byte[] oldStates = states;
-        keys = new long[capacity];
-        values = new long[capacity];
-        states = new byte[capacity];
-        int previousSize = size;
-        size = 0;
-        occupied = 0;
-        for (int i = 0; i < oldStates.length; i++) {
-            if (oldStates[i] == USED) {
-                insertRehashed(oldKeys[i], oldValues[i]);
-            }
+        // Allocate and populate every replacement lane before publishing any field.
+        // A failed growth leaves the original owner and all existing iterators intact.
+        long[] newKeys = new long[capacity];
+        long[] newValues = new long[capacity];
+        byte[] newStates = new byte[capacity];
+        int inserted = 0;
+        int mask = capacity - 1;
+        for (int i = 0; i < states.length; i++) {
+            if (states[i] != USED) continue;
+            int slot = mix(keys[i]) & mask;
+            while (newStates[slot] == USED) slot = (slot + 1) & mask;
+            newKeys[slot] = keys[i];
+            newValues[slot] = values[i];
+            newStates[slot] = USED;
+            inserted++;
         }
-        if (size != previousSize) {
-            throw new IllegalStateException("rehash lost map entries");
-        }
-    }
-
-    private void insertRehashed(long key, long value) {
-        int mask = keys.length - 1;
-        int index = mix(key) & mask;
-        while (states[index] == USED) {
-            index = (index + 1) & mask;
-        }
-        keys[index] = key;
-        values[index] = value;
-        states[index] = USED;
-        size++;
-        occupied++;
+        if (inserted != size) throw new IllegalStateException("rehash lost entries");
+        keys = newKeys;
+        values = newValues;
+        states = newStates;
+        occupied = inserted;
     }
 
     private static int capacityFor(int expectedSize) {
