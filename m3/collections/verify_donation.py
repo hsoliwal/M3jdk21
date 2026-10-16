@@ -27,6 +27,21 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def unique_json_object(pairs):
+    """Reject duplicate metadata keys before historical fields can shadow live pins."""
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError('Duplicate donation metadata key: ' + key)
+        result[key] = value
+    return result
+
+
+def read_donation_packet(path=HERE / 'synexia-donation.json'):
+    """Read all nested objects without silently accepting duplicate JSON keys."""
+    return json.loads(path.read_text(), object_pairs_hook=unique_json_object)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
@@ -59,7 +74,7 @@ def main():
     version = run('01-java-version', [java_home / 'bin/java', '-version'])
     if 'version "21.' not in version and 'version "21"' not in version:
         raise SystemExit('The qualified baseline requires Java 21')
-    packet = json.loads((HERE / 'synexia-donation.json').read_text())
+    packet = read_donation_packet()
     manifest_name = packet.get('installed_source_manifest', 'qualification/installed-source-enum-set-20261008.tsv')
     manifest_relative = Path(manifest_name)
     if manifest_relative.is_absolute() or '..' in manifest_relative.parts:
