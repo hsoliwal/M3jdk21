@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 multiset recipe qualification
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/**'
+      - 'm3/collections/src/main/java/**'
+      - '.github/workflows/m3-collections-multiset.yml'
+  push:
+    branches: [aix/m3-collections-multiset-20261016]
+permissions:
+  contents: read
+concurrency:
+  group: m3-multiset-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  recipe-and-count-contracts:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          sparse-checkout: |
+            m3/collections
+            m3/tooling/migration-recipes
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Isolated recipe toolchain and inherited actual SDK tests
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof toolchain
+          BASE=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.9
+          curl --fail --location --retry 3 "$BASE/apache-maven-3.9.9-bin.tar.gz" -o toolchain/apache-maven-3.9.9-bin.tar.gz
+          curl --fail --location --retry 3 "$BASE/apache-maven-3.9.9-bin.tar.gz.sha512" -o toolchain/maven.sha512
+          echo "$(cat toolchain/maven.sha512)  toolchain/apache-maven-3.9.9-bin.tar.gz" | sha512sum --check
+          tar -xzf toolchain/apache-maven-3.9.9-bin.tar.gz -C "$RUNNER_TEMP"
+          MVN="$RUNNER_TEMP/apache-maven-3.9.9/bin/mvn"
+          CACHE="$GITHUB_WORKSPACE/toolchain/repository"
+          { git rev-parse HEAD; uname -m; java -version 2>&1; "$MVN" -version; } > proof/identity.txt
+          "$MVN" -B -ntp -Dmaven.repo.local="$CACHE" -f m3/collections/interop/recipe/pom.xml test 2>&1 | tee proof/inherited-recipe.log
+          cp -R m3/collections/interop/recipe/target/surefire-reports proof/inherited-reports
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as E
+          roots = [E.parse(p).getroot() for p in Path('proof/inherited-reports').glob('TEST-*.xml')]
+          actual = {k: sum(int(r.attrib.get(k, 0)) for r in roots) for k in ('tests', 'failures', 'errors', 'skipped')}
+          assert actual == {'tests':6, 'failures':0, 'errors':0, 'skipped':0}, actual
+          print('INHERITED_SDK_PASS', actual)
+          PY
+          # Only this fresh dependency repository is retained. Never read home settings,
+          # credentials, general caches, environment values, or unrelated repositories.
+          (cd toolchain && find repository -type f | sort | xargs sha256sum > SHA256SUMS)
+          tar -czf proof/public-recipe-toolchain.tar.gz -C toolchain .
+          sha256sum proof/public-recipe-toolchain.tar.gz > proof/toolchain-archive.sha256
+          # The source closure is the unchanged, public recipe and M3 core, not secrets.
+          tar -czf proof/receiver-source-closure.tar.gz m3/collections/src/main/java m3/collections/interop/recipe m3/tooling/migration-recipes/src/main/java m3/collections/interop/pom.xml
+      - name: Preserve exact proof and dependency identities
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-multiset-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 7
+          path: proof/
