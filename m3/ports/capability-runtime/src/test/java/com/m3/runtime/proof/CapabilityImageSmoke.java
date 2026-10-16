@@ -3,6 +3,7 @@ package com.m3.runtime.proof;
 
 import com.m3.runtime.capability.ByteLineIndex;
 import com.m3.runtime.capability.BytePatternSearch;
+import com.m3.runtime.capability.BytePatternSet;
 import com.m3.runtime.capability.LfCount;
 import com.m3.runtime.capability.SourceArtifact;
 import com.m3.runtime.capability.WorkingSet;
@@ -34,6 +35,11 @@ public final class CapabilityImageSmoke {
                 .findAll(source.whole(), 2);
         if (byteHits.length != 2 || byteHits[0] != 0 || byteHits[1] != 2) {
             throw new AssertionError("actual linked image byte-pattern search contract");
+        }
+        long contained = BytePatternSet.compile(java.util.List.of(
+                new byte[]{10}, new byte[]{42}, new byte[]{99})).scan(source.whole());
+        if (contained != 3L) {
+            throw new AssertionError("linked image sparse byte-pattern set containment");
         }
         System.out.println("M3_CAPABILITY_DEVELOPER_IMAGE_PASS");
     }
