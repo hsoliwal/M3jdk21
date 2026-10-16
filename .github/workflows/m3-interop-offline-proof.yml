@@ -1,0 +1,112 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 collection closure qualification inputs
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-interop-offline-proof.yml'
+      - 'm3/collections/interop/contract-closure/**'
+permissions:
+  contents: read
+concurrency:
+  group: m3-closure-inputs-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  qualify-and-retain:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          sparse-checkout: |
+            m3/collections
+            m3/tooling/migration-recipes
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Re-execute inherited recipe and Java JNI proof
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p closure-inputs/toolchain closure-inputs/providers closure-proof
+          test "$(git rev-parse HEAD:m3/collections/interop/multiset-recipe)" = c2a7160857e5754c61d7ea2ae32eae7ab875c52e
+          { git rev-parse HEAD; uname -m; java -version 2>&1; gcc --version; } > closure-proof/identity.txt
+          BASE=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.9
+          curl --fail --location --retry 3 "$BASE/apache-maven-3.9.9-bin.tar.gz" -o closure-inputs/toolchain/maven.tar.gz
+          curl --fail --location --retry 3 "$BASE/apache-maven-3.9.9-bin.tar.gz.sha512" -o closure-inputs/toolchain/maven.sha512
+          echo "$(cat closure-inputs/toolchain/maven.sha512)  closure-inputs/toolchain/maven.tar.gz" | sha512sum --check
+          tar -xzf closure-inputs/toolchain/maven.tar.gz -C closure-inputs/toolchain
+          MVN="$GITHUB_WORKSPACE/closure-inputs/toolchain/apache-maven-3.9.9/bin/mvn"
+          CACHE="$GITHUB_WORKSPACE/closure-inputs/toolchain/repository"
+          TASK="$GITHUB_WORKSPACE/m3/collections/interop/multiset-recipe"
+          PROVIDERS="$GITHUB_WORKSPACE/closure-inputs/providers"
+          "$MVN" -B -ntp -Dmaven.repo.local="$CACHE" -f m3/collections/interop/recipe/pom.xml test 2>&1 | tee closure-proof/inherited.log
+          "$MVN" -B -ntp -Dmaven.repo.local="$CACHE" -f "$TASK/provider-pom.xml" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:copy-dependencies \
+            -DincludeScope=runtime -DoutputDirectory="$PROVIDERS" 2>&1 | tee closure-proof/providers.log
+          "$MVN" -B -ntp -Dmaven.repo.local="$CACHE" \
+            -Dm3.engine.sources="$GITHUB_WORKSPACE/m3/tooling/migration-recipes/src/main/java" \
+            -Dm3.legacy.resources="$GITHUB_WORKSPACE/m3/collections/interop/recipe/src/main/resources" \
+            -Dm3.receiver="$GITHUB_WORKSPACE" -Dm3.providers="$PROVIDERS" \
+            -Dm3.build.directory="$GITHUB_WORKSPACE/closure-proof/sdk" -f "$TASK/pom.xml" verify 2>&1 | tee closure-proof/maven.log
+          diff -u m3/collections/interop/qualification/multiset-recipe-receipt.tsv closure-proof/sdk/sdk-output/qualified-recipe-receipt.tsv
+          python3 - <<'PY'
+          import pathlib, xml.etree.ElementTree as E
+          reports=pathlib.Path('m3/collections/interop/recipe/target/surefire-reports')
+          roots=[E.parse(p).getroot() for p in reports.glob('TEST-*.xml')]
+          actual={k:sum(int(r.get(k,'0')) for r in roots) for k in ('tests','failures','errors','skipped')}
+          assert actual=={'tests':6,'failures':0,'errors':0,'skipped':0},actual
+          root=pathlib.Path('closure-proof/sdk/sdk-output')
+          for row in (root/'qualified-recipe-receipt.tsv').read_text().splitlines():
+              if row and not row.startswith('#'):
+                  name,_=row.split('\t'); assert (root/name).read_bytes()==pathlib.Path(name).read_bytes(),name
+          print('PARENT_ACTUAL_SDK_POSTIMAGES_VERIFIED')
+          PY
+      - name: Retain isolated public dependencies and source closure for offline replay
+        shell: bash
+        run: |
+          set -euxo pipefail
+          MVN="$GITHUB_WORKSPACE/closure-inputs/toolchain/apache-maven-3.9.9/bin/mvn"
+          CACHE="$GITHUB_WORKSPACE/closure-inputs/toolchain/repository"
+          TASK="$GITHUB_WORKSPACE/m3/collections/interop/multiset-recipe"
+          # Fixed compatibility input, not a latest/security recommendation or production admission.
+          for ARTIFACT in org.apache.commons:commons-collections4:4.4:jar org.apache.commons:commons-collections4:4.4:jar:sources; do
+            "$MVN" -B -ntp -Dmaven.repo.local="$CACHE" -f "$TASK/provider-pom.xml" \
+              org.apache.maven.plugins:maven-dependency-plugin:3.6.1:get -Dartifact="$ARTIFACT" -Dtransitive=false
+          done
+          "$MVN" -B -ntp -Dmaven.repo.local="$CACHE" -f "$TASK/provider-pom.xml" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:sources
+          cp "$CACHE/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar" closure-inputs/providers/
+          mkdir -p closure-inputs/source/m3/tooling/migration-recipes
+          cp -R m3/collections closure-inputs/source/m3/
+          cp -R m3/tooling/migration-recipes/src closure-inputs/source/m3/tooling/migration-recipes/
+          cp m3/tooling/migration-recipes/pom.xml closure-inputs/source/m3/tooling/migration-recipes/
+          # Only this job's dedicated cache is exported; no home settings, credentials or git config.
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root=Path('closure-inputs')
+          rows=[]
+          for p in sorted(root.rglob('*')):
+              assert not p.is_symlink(),p
+              if p.is_file(): rows.append(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.relative_to(root).as_posix())
+          (root/'SHA256SUMS').write_text('\n'.join(rows)+'\n')
+          print('SEALED_INPUT_FILES',len(rows))
+          PY
+          git diff --exit-code -- m3/collections m3/tooling/migration-recipes
+      - name: Preserve actual qualification and isolated inputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-closure-inputs-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 30
+          include-hidden-files: true
+          path: |
+            closure-inputs/
+            closure-proof/identity.txt
+            closure-proof/*.log
+            closure-proof/sdk/surefire-reports/
+            closure-proof/sdk/runtime-verifier.log
+            closure-proof/sdk/sdk-output/
+            closure-proof/sdk/runtime-proof/
