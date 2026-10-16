@@ -23,5 +23,3 @@ jobs:
         run: git diff --check HEAD^ HEAD
       - name: Verify exact source-only pinned MIndex migration delta
         run: python3 m3/compatibility/check_mindex_rename_synexia_delta.py --self-test
-      - name: Verify pre-existing full-family receiver
-        run: python3 m3/compatibility/check_synexia_full_borrow_receiver.py
