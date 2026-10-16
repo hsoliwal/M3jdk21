@@ -28,19 +28,40 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Isolated recipe toolchain and inherited actual SDK tests
+      - name: Verify exact receiving bytes before SDK execution
         shell: bash
         run: |
           set -euxo pipefail
-          mkdir -p proof toolchain
+          mkdir -p proof toolchain providers
+          { git rev-parse HEAD; uname -m; java -version 2>&1; gcc --version; } > proof/identity.txt
+          test "$(git rev-parse HEAD:m3/collections/interop/multiset-recipe)" = c2a7160857e5754c61d7ea2ae32eae7ab875c52e
+          python3 - <<'PY'
+          import hashlib, pathlib, subprocess
+          root = pathlib.Path('.')
+          receipt = root/'m3/collections/interop/qualification/multiset-recipe-receipt.tsv'
+          rows = [line.split('\t') for line in receipt.read_text().splitlines() if line and not line.startswith('#')]
+          assert len(rows) == 11 and len({p for p,h in rows}) == 11
+          tracked = set(subprocess.check_output(['git','ls-files','m3/collections/interop/src'],text=True).splitlines())
+          assert tracked == {p for p,h in rows}, 'unexpected/missing production source'
+          for p,h in rows:
+              path = root/p
+              assert path.is_file() and not path.is_symlink(), p
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == h, p
+          print('EXACT_ADMITTED_SOURCES', len(rows))
+          PY
+      - name: Execute inherited and successor recipes and generated Java JNI contracts
+        shell: bash
+        run: |
+          set -euxo pipefail
           BASE=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.9
-          curl --fail --location --retry 3 "$BASE/apache-maven-3.9.9-bin.tar.gz" -o toolchain/apache-maven-3.9.9-bin.tar.gz
+          curl --fail --location --retry 3 "$BASE/apache-maven-3.9.9-bin.tar.gz" -o toolchain/maven.tar.gz
           curl --fail --location --retry 3 "$BASE/apache-maven-3.9.9-bin.tar.gz.sha512" -o toolchain/maven.sha512
-          echo "$(cat toolchain/maven.sha512)  toolchain/apache-maven-3.9.9-bin.tar.gz" | sha512sum --check
-          tar -xzf toolchain/apache-maven-3.9.9-bin.tar.gz -C "$RUNNER_TEMP"
-          MVN="$RUNNER_TEMP/apache-maven-3.9.9/bin/mvn"
+          echo "$(cat toolchain/maven.sha512)  toolchain/maven.tar.gz" | sha512sum --check
+          tar -xzf toolchain/maven.tar.gz -C toolchain
+          MVN="$GITHUB_WORKSPACE/toolchain/apache-maven-3.9.9/bin/mvn"
           CACHE="$GITHUB_WORKSPACE/toolchain/repository"
-          { git rev-parse HEAD; uname -m; java -version 2>&1; "$MVN" -version; } > proof/identity.txt
+          TASK="$GITHUB_WORKSPACE/m3/collections/interop/multiset-recipe"
+          "$MVN" -version >> proof/identity.txt
           "$MVN" -B -ntp -Dmaven.repo.local="$CACHE" -f m3/collections/interop/recipe/pom.xml test 2>&1 | tee proof/inherited-recipe.log
           cp -R m3/collections/interop/recipe/target/surefire-reports proof/inherited-reports
           python3 - <<'PY'
@@ -51,17 +72,35 @@ jobs:
           assert actual == {'tests':6, 'failures':0, 'errors':0, 'skipped':0}, actual
           print('INHERITED_SDK_PASS', actual)
           PY
-          # Only this fresh dependency repository is retained. Never read home settings,
-          # credentials, general caches, environment values, or unrelated repositories.
-          (cd toolchain && find repository -type f | sort | xargs sha256sum > SHA256SUMS)
-          tar -czf proof/public-recipe-toolchain.tar.gz -C toolchain .
-          sha256sum proof/public-recipe-toolchain.tar.gz > proof/toolchain-archive.sha256
-          # The source closure is the unchanged, public recipe and M3 core, not secrets.
-          tar -czf proof/receiver-source-closure.tar.gz m3/collections/src/main/java m3/collections/interop/recipe m3/tooling/migration-recipes/src/main/java m3/collections/interop/pom.xml
-      - name: Preserve exact proof and dependency identities
+          "$MVN" -B -ntp -Dmaven.repo.local="$CACHE" -f "$TASK/provider-pom.xml" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:copy-dependencies \
+            -DincludeScope=runtime -DoutputDirectory="$GITHUB_WORKSPACE/providers" 2>&1 | tee proof/providers.log
+          "$MVN" -B -ntp -Dmaven.repo.local="$CACHE" \
+            -Dm3.engine.sources="$GITHUB_WORKSPACE/m3/tooling/migration-recipes/src/main/java" \
+            -Dm3.legacy.resources="$GITHUB_WORKSPACE/m3/collections/interop/recipe/src/main/resources" \
+            -Dm3.receiver="$GITHUB_WORKSPACE" -Dm3.providers="$GITHUB_WORKSPACE/providers" \
+            -Dm3.build.directory="$GITHUB_WORKSPACE/proof/sdk" -f "$TASK/pom.xml" verify 2>&1 | tee proof/maven-verify.log
+          diff -u m3/collections/interop/qualification/multiset-recipe-receipt.tsv proof/sdk/sdk-output/qualified-recipe-receipt.tsv
+          python3 - <<'PY'
+          from pathlib import Path
+          root=Path('proof/sdk/sdk-output')
+          rows=[line.split('\t') for line in (root/'qualified-recipe-receipt.tsv').read_text().splitlines() if line and not line.startswith('#')]
+          for name,h in rows:
+              assert (root/name).read_bytes()==Path(name).read_bytes(), name
+          print('ACTUAL_SDK_OUTPUT_MATCHES_COMMITTED',len(rows))
+          PY
+          git diff --exit-code -- m3/collections m3/tooling/migration-recipes
+      - name: Preserve actual proof and generated-source identities
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: m3-multiset-${{ github.event.pull_request.head.sha || github.sha }}
-          retention-days: 7
-          path: proof/
+          retention-days: 30
+          path: |
+            proof/identity.txt
+            proof/*.log
+            proof/inherited-reports/
+            proof/sdk/surefire-reports/
+            proof/sdk/runtime-verifier.log
+            proof/sdk/sdk-output/
+            proof/sdk/runtime-proof/

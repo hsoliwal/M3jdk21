@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3CollectionsMultiset
+displayName: M3 primitive-count multiset interop
+description: Reuses unchanged receiver engines to compose historical interop with sealed multiset Java and native additions.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: collections-library-interop
+      lst: false
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: collections-multiset
+      lst: false
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: collections-multiset

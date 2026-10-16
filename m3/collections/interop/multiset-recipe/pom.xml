@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Receiver-only Maven host for the unchanged existing snapshot engine and canonical Synexia proof. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+  <groupId>com.m3</groupId><artifactId>m3-collections-multiset-proof</artifactId><version>0.1.0-SNAPSHOT</version>
+  <properties><m3.build.directory>${project.basedir}/target</m3.build.directory><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <dependencies>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1</version></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>8.17.1</version></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>8.17.1</version><scope>runtime</scope></dependency>
+    <!-- Same proof-host correction as Synexia 7ab40dc72de58110aa8997b63c265a049d663cb4. -->
+    <!-- rewrite-java-21 v8.17.1 declares SLF4J 1.7 compileOnly, not a transitive runtime. -->
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36</version><scope>test</scope></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-simple</artifactId><version>1.7.36</version><scope>test</scope></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <directory>${m3.build.directory}</directory>
+    <resources>
+      <resource><directory>${project.basedir}/src/main/resources</directory></resource>
+      <resource><directory>${m3.legacy.resources}</directory></resource>
+    </resources>
+    <sourceDirectory>${m3.engine.sources}</sourceDirectory>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version><executions>
+        <execution><id>proof-resources</id><phase>process-resources</phase><goals><goal>resources</goal></goals></execution>
+      </executions></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><executions>
+        <execution><id>proof-compile</id><phase>compile</phase><goals><goal>compile</goal></goals></execution>
+        <execution><id>proof-test-compile</id><phase>test-compile</phase><goals><goal>testCompile</goal></goals></execution>
+      </executions><configuration>
+        <release>21</release><proc>none</proc><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
+        <includes><include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include><include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include></includes>
+        <testIncludes><testInclude>com/synexia/rewrite/M3Multiset*Test.java</testInclude></testIncludes>
+      </configuration></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration>
+        <useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests><includes><include>**/M3MultisetRecipeTest.java</include></includes>
+        <argLine>-Xmx512m</argLine>
+        <systemPropertyVariables>
+          <m3.task>${project.basedir}</m3.task><m3.build>${project.build.directory}</m3.build>
+          <m3.receiver>${m3.receiver}</m3.receiver><m3.providers>${m3.providers}</m3.providers>
+          <m3.cache>${maven.repo.local}</m3.cache>
+        </systemPropertyVariables>
+      </configuration>
+        <executions><execution><id>sdk-tests</id><phase>test</phase><goals><goal>test</goal></goals></execution>
+        <execution><id>qualified-sdk-delivery</id><phase>verify</phase><goals><goal>test</goal></goals><configuration>
+          <includes><include>**/M3MultisetDeliveryTest.java</include></includes>
+        </configuration></execution></executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

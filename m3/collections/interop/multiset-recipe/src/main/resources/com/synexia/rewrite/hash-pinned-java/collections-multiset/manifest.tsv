@@ -1,0 +1,6 @@
+# Successor additions; historical factory/collector recipes remain unchanged.
+m3/collections/interop/src/main/java/com/m3/collections/interop/M3CountAlgebra.java	ABSENT	64bfa72f53393d1b708819b8730b07db947b67f1c0b05061b9cf5b94dfe15ccb	M3CountAlgebra.java.txt
+m3/collections/interop/src/main/java/com/m3/collections/interop/M3Multiset.java	ABSENT	b3d58da9b8bbda8a91b5d60db455752824c80d55a6baeb6f832e4eabd4b694ed	M3Multiset.java.txt
+m3/collections/interop/src/main/java/com/m3/collections/interop/M3Multisets.java	ABSENT	820174dd390bd603527a0f73296878e0f104be64eaa34af514a60b65a05cb548	M3Multisets.java.txt
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3MultisetContract.java	ABSENT	5105091e352fc5c2440e442c6b5d6beb588e535f837705719910ef7cb5da3a9c	M3MultisetContract.java.txt
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3MultisetTest.java	ABSENT	b49276e5fd23ae893779b603b5a7d2389096b9bd9f7c890066c82c41c55087df	M3MultisetTest.java.txt
