@@ -245,20 +245,20 @@ class BackportExecutionWavesTest(unittest.TestCase):
             self.w.write_json(items, {}, json_path)
 
             raw_tsv = tsv.read_bytes()
-            self.assertEqual(3, raw_tsv.count(b"\\n"), "header + two physical TSV records")
-            self.assertTrue(raw_tsv.endswith(b"\\n"))
-            self.assertNotIn(b"\\\\n", raw_tsv, "no escaped row separator")
+            self.assertEqual(3, raw_tsv.count(b"\n"), "header + two physical TSV records")
+            self.assertTrue(raw_tsv.endswith(b"\n"))
+            self.assertNotIn(b"\\n", raw_tsv, "no escaped row separator")
             with tsv.open("r", encoding="utf-8", newline="") as handle:
-                parsed = list(csv.DictReader(handle, delimiter="\\t"))
+                parsed = list(csv.DictReader(handle, delimiter="\t"))
             self.assertEqual(2, len(parsed))
             self.assertEqual(["file.alpha", "file.beta"],
                              [row["atom_id"] for row in parsed])
             self.assertEqual(["0", "1"], [row["wave"] for row in parsed])
 
             raw_json = json_path.read_bytes()
-            self.assertTrue(raw_json.endswith(b"\\n"))
-            self.assertFalse(raw_json.endswith(b"\\\\n"))
-            self.assertEqual(1, len(raw_json) - len(raw_json.rstrip(b"\\n"))))
+            self.assertTrue(raw_json.endswith(b"\n"))
+            self.assertFalse(raw_json.endswith(b"\\n"))
+            self.assertEqual(1, len(raw_json) - len(raw_json.rstrip(b"\n")))
             document = json.loads(raw_json.decode("utf-8"))
             self.assertEqual(self.w.root(items), document["root"])
             self.assertEqual(["file.alpha", "file.beta"],
