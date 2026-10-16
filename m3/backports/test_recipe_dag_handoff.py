@@ -43,6 +43,11 @@ class RecipeDagHandoffTest(unittest.TestCase):
         self.assertFalse(first["mutationAuthority"])
         self.assertFalse(first["promotionAuthority"])
         self.assertTrue(first["nebulaReferenceOnly"])
+        self.assertEqual("HOLD_PENDING_NEBULA_PROOF", first["nebulaJavaGradeState"])
+        self.assertEqual(
+            "7a5a3cb5ffd82bca671b20e1496db80369657578",
+            first["nebulaJavaGradeCommit"],
+        )
         self.assertRegex(first["root"], r"^[0-9a-f]{64}$")
 
     def test_successor_nebula_receiver_is_exact_and_keeps_native_current_head_pending(self) -> None:
@@ -78,6 +83,49 @@ class RecipeDagHandoffTest(unittest.TestCase):
             self.assertEqual("COPY_ADAPT", row["delivery"])
             self.assertEqual("false", row["mutationAuthority"])
             self.assertEqual("false", row["promotionAuthority"])
+
+    def test_nebula_java_grade_candidate_is_exact_and_hold_only(self) -> None:
+        rows = self.mod.validate(self.current_rows())
+        by_id = {row["id"]: row for row in rows}
+
+        self.assertEqual(
+            set(self.mod.NEBULA_JAVA_GRADE_ASSETS),
+            {
+                "nebula-java-grade-candidate",
+                "nebula-v2-backport-plan",
+                "nebula-v2-transfer-contract",
+                "nebula-java-grade-doc",
+            },
+        )
+        for asset_id, (kind, path, blob_sha1) in self.mod.NEBULA_JAVA_GRADE_ASSETS.items():
+            row = by_id[asset_id]
+            self.assertEqual(kind, row["kind"])
+            self.assertEqual("hsoliwal/nebula", row["repository"])
+            self.assertEqual(self.mod.NEBULA_JAVA_GRADE_REF, row["ref"])
+            self.assertEqual(self.mod.NEBULA_JAVA_GRADE_COMMIT, row["commit"])
+            self.assertEqual(path, row["path"])
+            self.assertEqual("GIT-BLOB-SHA1", row["contentHashAlgorithm"])
+            self.assertEqual(blob_sha1, row["contentHash"])
+            self.assertEqual("EPL-2.0", row["license"])
+            self.assertEqual("REFERENCE_ONLY", row["delivery"])
+            self.assertEqual("HOLD_PENDING_NEBULA_PROOF", row["applicationPolicy"])
+            self.assertEqual("false", row["mutationAuthority"])
+            self.assertEqual("false", row["promotionAuthority"])
+
+    def test_nebula_java_grade_candidate_drift_fails_closed(self) -> None:
+        rows = [dict(row) for row in self.current_rows()]
+        for row in rows:
+            if row["id"] == "nebula-v2-backport-plan":
+                row["contentHash"] = "0" * 40
+        with self.assertRaises(ValueError):
+            self.mod.validate(rows)
+
+        rows = [dict(row) for row in self.current_rows()]
+        for row in rows:
+            if row["id"] == "nebula-java-grade-candidate":
+                row["applicationPolicy"] = "PROVEN_RECIPE_DAG_ONLY"
+        with self.assertRaises(ValueError):
+            self.mod.validate(rows)
 
     def test_mutation_or_promotion_authority_fails_closed(self) -> None:
         rows = self.current_rows()
