@@ -1,0 +1,175 @@
+/* Copyright 2026 Hitesh Soliwal and contributors.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.m3.text;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.Objects;
+
+/**
+ * Read-only, entry-less literal index over the existing, strictly mapped M3-GVAS owner.
+ *
+ * <p>Rows and UTF-16 code units live in mapped shared memory. Java never recreates a
+ * per-literal String, Map.Entry, wrapper or private payload array for lookup. A hit returns
+ * the native address of the canonical UTF-16 payload; zero is an ordinary miss. No entry
+ * can be published before full image geometry, UTF-16 facts and ordering are validated.</p>
+ */
+public final class M3GvasLiteralImage {
+    public static final int FLAG_ASCII = 1;
+    public static final int FLAG_LATIN1 = 2;
+    public static final int FLAG_SURROGATE = 4;
+    private static final String MAGIC = "M3GVAS01";
+    private static final int HEADER_BYTES = 64;
+    private static final int ROW_BYTES = 32;
+    private final M3FixedAddressMapping.Image mapped;
+    private final ByteBuffer data;
+    private final int count;
+    private final int payloadStart;
+
+    private M3GvasLiteralImage(M3FixedAddressMapping.Image mapped) {
+        this.mapped = mapped;
+        this.data = mapped.readOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
+        this.count = data.getInt(16);
+        this.payloadStart = data.getInt(28);
+    }
+
+    /** Admit the exact backing image only after native exact-address admission succeeded. */
+    public static M3GvasLiteralImage open(M3FixedAddressMapping.Image image) {
+        Objects.requireNonNull(image, "image");
+        ByteBuffer b = image.readOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
+        int capacity = b.capacity();
+        if (capacity < HEADER_BYTES + 2) throw new IllegalArgumentException("truncated M3-GVAS literal header");
+        for (int i = 0; i < MAGIC.length(); i++) {
+            if ((char) (b.get(i) & 0xff) != MAGIC.charAt(i)) throw new IllegalArgumentException("M3-GVAS literal magic");
+        }
+        int count = b.getInt(16);
+        int offset = b.getInt(28);
+        if (b.getInt(8) != 1 || b.getInt(12) != HEADER_BYTES || count < 0
+                || b.getInt(20) != ROW_BYTES || b.getInt(24) != HEADER_BYTES
+                || offset < HEADER_BYTES || b.getInt(32) != capacity
+                || offset != align16(HEADER_BYTES + (long) count * ROW_BYTES)
+                || offset > capacity - 2 || b.getChar(offset) != 0) {
+            throw new IllegalArgumentException("M3-GVAS literal geometry");
+        }
+        for (int i = 36; i < HEADER_BYTES; i++) {
+            if (b.get(i) != 0) throw new IllegalArgumentException("M3-GVAS unexpected header flags");
+        }
+        for (long i = HEADER_BYTES + (long) count * ROW_BYTES; i < offset; i++) {
+            if (b.get((int) i) != 0) throw new IllegalArgumentException("nonzero alignment padding");
+        }
+        int expected = offset + 2;
+        int previous = -1;
+        for (int row = 0; row < count; row++) {
+            int at = HEADER_BYTES + row * ROW_BYTES;
+            int begin = b.getInt(at);
+            int length = b.getInt(at + 4);
+            if (length < 0 || length > (capacity - expected) / Character.BYTES
+                    || begin != (length == 0 ? offset : expected)) {
+                throw new IllegalArgumentException("M3-GVAS overlapping/out-of-range payload");
+            }
+            if (previous >= 0 && compareRows(b, previous, row) >= 0) {
+                throw new IllegalArgumentException("M3-GVAS literal rows not strictly sorted");
+            }
+            int hash = 0;
+            int codePoints = 0;
+            int flags = FLAG_ASCII | FLAG_LATIN1;
+            char prior = 0;
+            for (int i = 0; i < length; i++) {
+                char c = b.getChar(begin + (i << 1));
+                hash = 31 * hash + c;
+                if (c > 0x7f) flags &= ~FLAG_ASCII;
+                if (c > 0xff) flags &= ~FLAG_LATIN1;
+                if (Character.isSurrogate(c)) flags |= FLAG_SURROGATE;
+                if (i == 0 || !Character.isLowSurrogate(c) || !Character.isHighSurrogate(prior)) codePoints++;
+                prior = c;
+            }
+            if (hash != b.getInt(at + 8) || power31(length) != b.getInt(at + 12)
+                    || codePoints != b.getInt(at + 16) || flags != b.getInt(at + 20)
+                    || (length == 0 ? -1 : b.getChar(begin)) != b.getInt(at + 24)
+                    || (length == 0 ? -1 : b.getChar(begin + ((length - 1) << 1))) != b.getInt(at + 28)) {
+                throw new IllegalArgumentException("M3-GVAS literal precompute fact mismatch");
+            }
+            if (length != 0) expected += length << 1;
+            previous = row;
+        }
+        if (expected != capacity) throw new IllegalArgumentException("trailing/omitted payload bytes");
+        return new M3GvasLiteralImage(image);
+    }
+
+    private static int align16(long value) {
+        if (value > Integer.MAX_VALUE - 15L) throw new IllegalArgumentException("M3-GVAS capacity overflow");
+        return (int) ((value + 15L) & ~15L);
+    }
+
+    private static int power31(int exponent) {
+        int p = 1, b = 31;
+        for (int n = exponent; n != 0; n >>>= 1) {
+            if ((n & 1) != 0) p *= b;
+            b *= b;
+        }
+        return p;
+    }
+
+    private static int compareRows(ByteBuffer b, int left, int right) {
+        int a = HEADER_BYTES + left * ROW_BYTES;
+        int c = HEADER_BYTES + right * ROW_BYTES;
+        int lenA = b.getInt(a + 4), lenB = b.getInt(c + 4);
+        int pa = b.getInt(a), pb = b.getInt(c);
+        for (int i = 0, end = Math.min(lenA, lenB); i < end; i++) {
+            int d = b.getChar(pa + (i << 1)) - b.getChar(pb + (i << 1));
+            if (d != 0) return d;
+        }
+        return Integer.compare(lenA, lenB);
+    }
+
+    private int compare(String needle, int row) {
+        int at = HEADER_BYTES + row * ROW_BYTES;
+        int length = data.getInt(at + 4);
+        int begin = data.getInt(at);
+        for (int i = 0, end = Math.min(length, needle.length()); i < end; i++) {
+            int diff = needle.charAt(i) - data.getChar(begin + (i << 1));
+            if (diff != 0) return diff;
+        }
+        return Integer.compare(needle.length(), length);
+    }
+
+    /** Returns a zero-allocation row index, or {@code -1}; Unicode comparison is UTF-16 exact. */
+    public int findRow(String spelling) {
+        Objects.requireNonNull(spelling, "spelling");
+        int lo = 0, hi = count;
+        while (lo < hi) {
+            int middle = (lo + hi) >>> 1;
+            int delta = compare(spelling, middle);
+            if (delta == 0) return middle;
+            if (delta < 0) hi = middle;
+            else lo = middle + 1;
+        }
+        return -1;
+    }
+
+    /** Exact numeric pointer to the canonical code-unit payload, or zero when absent. */
+    public long addressOf(String spelling) {
+        int row = findRow(spelling);
+        return row < 0 ? 0L : addressAt(row);
+    }
+
+    /** No Java heap pointer is ever returned. The mapping is retained for the process lifetime. */
+    public long addressAt(int row) {
+        Objects.checkIndex(row, count);
+        return mapped.addressOfOffset(data.getInt(HEADER_BYTES + row * ROW_BYTES));
+    }
+
+    public int utf16LengthAt(int row) { return fact(row, 4); }
+    public int hashCodeAt(int row) { return fact(row, 8); }
+    public int hash31PowerAt(int row) { return fact(row, 12); }
+    public int codePointCountAt(int row) { return fact(row, 16); }
+    public int flagsAt(int row) { return fact(row, 20); }
+    public int size() { return count; }
+    public long baseAddress() { return mapped.address(); }
+
+    private int fact(int row, int column) {
+        Objects.checkIndex(row, count);
+        return data.getInt(HEADER_BYTES + row * ROW_BYTES + column);
+    }
+}
