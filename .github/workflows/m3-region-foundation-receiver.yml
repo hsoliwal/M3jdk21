@@ -1,0 +1,63 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+# Target-native proof receiver; canonical recipe ownership remains in com.synexia.
+name: M3 region foundation receiver
+on:
+  push:
+    branches: ['m3/region-foundation-repair-20261016']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-bound-qualification:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github/workflows
+            .m3
+            m3/runtime-integration
+            m3/core
+            m3/ports/indexstring
+            m3/docs
+            m3/compatibility
+            m3/tooling/migration-recipes
+            m3/tooling/region-foundation-repair
+            m3/synexia-import/current-full-borrow
+            src/java.base/share/classes/java/lang
+            src/java.base/share/classes/jdk/internal/mindex
+            test/jdk/java/lang/String
+      - name: Capture exact target inputs and compiler tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/m3-region-evidence"
+          mkdir -p "$evidence"
+          git rev-parse HEAD > "$evidence/m3jdk-commit.txt"
+          git ls-tree -r HEAD > "$evidence/m3jdk-tree.tsv"
+          tar --exclude=.git -czf "$evidence/target-inputs.tar.gz" .
+          mvn -version > "$evidence/maven-version.txt"
+          java -version 2> "$evidence/java-version.txt"
+          maven_bin="$(readlink -f "$(command -v mvn)")"
+          maven_home="$(dirname "$(dirname "$maven_bin")")"
+          tar -C "$maven_home" -czf "$evidence/maven-tool.tar.gz" .
+          (cd "$evidence" && sha256sum *.tar.gz *.txt *.tsv > SHA256SUMS)
+          echo 'INPUT_CAPTURE_ONLY; no product qualification claimed' > "$evidence/STATUS.txt"
+      - name: Run qualified task receiver when installed
+        shell: bash
+        run: |
+          set -euo pipefail
+          receiver=m3/tooling/region-foundation-repair/qualify.sh
+          if test -f "$receiver"; then
+            bash "$receiver" "$PWD" "$RUNNER_TEMP/m3-region-evidence"
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: m3-region-foundation-${{ github.sha }}
+          path: ${{ runner.temp }}/m3-region-evidence/
+          if-no-files-found: error
+          retention-days: 7
