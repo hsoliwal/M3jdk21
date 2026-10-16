@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/m3-interop-offline-proof.yml'
       - 'm3/collections/interop/contract-closure/**'
+      - 'm3/collections/interop/apache/**'
+      - 'm3/collections/interop/qualification/apache-*'
 permissions:
   contents: read
 concurrency:
@@ -82,6 +84,37 @@ jobs:
           cp -R m3/collections closure-inputs/source/m3/
           cp -R m3/tooling/migration-recipes/src closure-inputs/source/m3/tooling/migration-recipes/
           cp m3/tooling/migration-recipes/pom.xml closure-inputs/source/m3/tooling/migration-recipes/
+          git diff --exit-code -- m3/collections m3/tooling/migration-recipes
+      - name: Qualify the exact Apache recipe mirror and committed SDK postimages
+        shell: bash
+        run: |
+          set -euxo pipefail
+          test "$(git rev-parse HEAD:m3/collections/interop/contract-closure)" = 669c4f9139fecd30d87f1e56592492ba394e004e
+          MVN="$GITHUB_WORKSPACE/closure-inputs/toolchain/apache-maven-3.9.9/bin/mvn"
+          CACHE="$GITHUB_WORKSPACE/closure-inputs/toolchain/repository"
+          TASK="$GITHUB_WORKSPACE/m3/collections/interop/contract-closure"
+          "$MVN" -B -ntp -Dmaven.repo.local="$CACHE" \
+            -Dm3.engine.sources="$GITHUB_WORKSPACE/m3/tooling/migration-recipes/src/main/java" \
+            -Dm3.legacy.resources="$GITHUB_WORKSPACE/m3/collections/interop/recipe/src/main/resources" \
+            -Dm3.multiset.resources="$GITHUB_WORKSPACE/m3/collections/interop/multiset-recipe/src/main/resources" \
+            -Dm3.receiver="$GITHUB_WORKSPACE" -Dm3.providers="$GITHUB_WORKSPACE/closure-inputs/providers" \
+            -Dm3.build.directory="$GITHUB_WORKSPACE/closure-proof/apache" -f "$TASK/pom.xml" verify 2>&1 | tee closure-proof/apache-maven.log
+          python3 "$TASK/proof/verify_module.py" --build "$GITHUB_WORKSPACE/closure-proof/apache" \
+            --receiver "$GITHUB_WORKSPACE" --cache "$CACHE" --maven "$MVN" 2>&1 | tee closure-proof/apache-module.log
+          diff -u m3/collections/interop/qualification/apache-recipe-receipt.tsv closure-proof/apache/sdk-output/qualified-recipe-receipt.tsv
+          python3 - <<'PYCODE'
+          from pathlib import Path
+          import hashlib
+          root=Path('closure-proof/apache/sdk-output')
+          rows=[r.split('\t') for r in (root/'qualified-recipe-receipt.tsv').read_text().splitlines() if r and not r.startswith('#')]
+          assert len(rows)==18
+          for name,digest in rows:
+              actual=Path(name).read_bytes()
+              assert hashlib.sha256(actual).hexdigest()==digest,name
+              assert actual==(root/name).read_bytes(),name
+          print('ACTUAL_APACHE_SDK_POSTIMAGES_VERIFIED',len(rows))
+          PYCODE
+          git diff --exit-code -- m3/collections m3/tooling/migration-recipes
           # Only this job's dedicated cache is exported; no home settings, credentials or git config.
           python3 - <<'PY'
           from pathlib import Path
@@ -94,7 +127,6 @@ jobs:
           (root/'SHA256SUMS').write_text('\n'.join(rows)+'\n')
           print('SEALED_INPUT_FILES',len(rows))
           PY
-          git diff --exit-code -- m3/collections m3/tooling/migration-recipes
       - name: Preserve actual qualification and isolated inputs
         if: always()
         uses: actions/upload-artifact@v4
@@ -110,3 +142,4 @@ jobs:
             closure-proof/sdk/runtime-verifier.log
             closure-proof/sdk/sdk-output/
             closure-proof/sdk/runtime-proof/
+            closure-proof/apache/
