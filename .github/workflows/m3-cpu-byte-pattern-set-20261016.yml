@@ -1,0 +1,58 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 CPU sparse source-byte Aho Java21/C11 JNI proof
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/capability-runtime/**'
+      - '.github/workflows/m3-cpu-byte-pattern-set-20261016.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  linux-real-java-jni-jmod:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            m3/ports/capability-runtime
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict actual Java21 and C11 UBSan JNI with linked developer-image oracle
+        run: |
+          python3 m3/ports/capability-runtime/verify_native.py \
+            --root m3/ports/capability-runtime \
+            --out "$RUNNER_TEMP/m3-byte-pattern-set-proof" --developer-image
+          test -s "$RUNNER_TEMP/m3-byte-pattern-set-proof/REPORT.json"
+          grep -q 'M3_BYTE_PATTERN_SET_PASS' "$RUNNER_TEMP/m3-byte-pattern-set-proof/byte-pattern-set-java-oracle.log"
+          grep -q 'M3_BYTE_PATTERN_SET_PASS' "$RUNNER_TEMP/m3-byte-pattern-set-proof/byte-pattern-set-jni-oracle.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-byte-pattern-set-linux-proof
+          path: ${{ runner.temp }}/m3-byte-pattern-set-proof/
+          if-no-files-found: error
+  windows-java21-no-wsl:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            m3/ports/capability-runtime
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Java-only authoritative source-bound corpus without WSL
+        shell: pwsh
+        run: |
+          python m3/ports/capability-runtime/verify_native.py `
+            --root m3/ports/capability-runtime `
+            --out "$env:RUNNER_TEMP/m3-byte-pattern-set-java-only" --java-only
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
