@@ -101,6 +101,19 @@ def main():
         if 'M3_BYTE_PATTERN_SEARCH_PASS assertions=' not in native_patterns or 'kernel=JNI_DIRECT_C11' not in native_patterns:
             raise RuntimeError('actual source byte-pattern JNI oracle not executed')
 
+    evidence_class = 'com.m3.runtime.capability.ByteEvidenceQueryChecks'
+    evidence_options = [java, '-Xmx128m', '-Xcheck:jni', '--module-path', classes,
+                        '--module', 'com.m3.runtime.capability/' + evidence_class]
+    java_evidence = run(out, 'byte-evidence-java-oracle', evidence_options)
+    if 'M3_BYTE_EVIDENCE_QUERY_PASS assertions=' not in java_evidence or 'kernel=JAVA_SOURCE_PROOF' not in java_evidence:
+        raise RuntimeError('source-backed evidence Java oracle not executed')
+    native_evidence = 'NOT_RUN'
+    if not args.java_only:
+        native_evidence = run(out, 'byte-evidence-jni-oracle', [*evidence_options,
+                               library.resolve(), sha(library)])
+        if 'M3_BYTE_EVIDENCE_QUERY_PASS assertions=' not in native_evidence or 'kernel=JAVA_JNI_KMP' not in native_evidence:
+            raise RuntimeError('source-backed evidence JNI differential not executed')
+
     image_proof = 'NOT_RUN'
     if args.developer_image:
         jmod, jlink = shutil.which('jmod'), shutil.which('jlink')
@@ -148,7 +161,8 @@ def main():
               'performance_crossover': 'NOT_RUN',
               'stock_jdk21_developer_image': image_proof,
               'byte_line_java': java_lines, 'byte_line_jni': native_lines,
-              'byte_pattern_java': java_patterns, 'byte_pattern_jni': native_patterns}
+              'byte_pattern_java': java_patterns, 'byte_pattern_jni': native_patterns,
+              'byte_evidence_java': java_evidence, 'byte_evidence_jni': native_evidence}
     (out / 'REPORT.json').write_text(json.dumps(report, indent=2, sort_keys=True) + '\n')
     print(json.dumps({'status': report['status'], 'java': pure, 'jni': accelerated, 'image': image_proof}))
 

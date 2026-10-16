@@ -2,6 +2,7 @@
 package com.m3.runtime.proof;
 
 import com.m3.runtime.capability.ByteLineIndex;
+import com.m3.runtime.capability.ByteEvidenceQuery;
 import com.m3.runtime.capability.BytePatternSearch;
 import com.m3.runtime.capability.LfCount;
 import com.m3.runtime.capability.SourceArtifact;
@@ -34,6 +35,14 @@ public final class CapabilityImageSmoke {
                 .findAll(source.whole(), 2);
         if (byteHits.length != 2 || byteHits[0] != 0 || byteHits[1] != 2) {
             throw new AssertionError("actual linked image byte-pattern search contract");
+        }
+        ByteEvidenceQuery evidenceQuery = ByteEvidenceQuery.compile(source.whole(), new byte[]{10});
+        ByteEvidenceQuery.Results receipt = evidenceQuery.execute(2);
+        evidenceQuery.verify(receipt);
+        if (receipt.count() != 2 || receipt.absoluteStart(1) != 2
+                || receipt.firstLine(1) != 1 || receipt.firstColumnByte(1) != 1
+                || !receipt.receipt().matches("[0-9a-f]{64}")) {
+            throw new AssertionError("source-backed receipt/line semantics in actual linked JMOD");
         }
         System.out.println("M3_CAPABILITY_DEVELOPER_IMAGE_PASS");
     }
