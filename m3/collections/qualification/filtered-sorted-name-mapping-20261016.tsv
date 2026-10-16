@@ -1,0 +1,4 @@
+source_repository	source_revision	source_owner	target_owner	behavior	status
+hsoliwal/M3jdk21	41ff6da0c7c8e6090a8adb6596602ecde96ea550	com.m3.collections.M3LongFilteredView	com.m3.collections.M3LongFilteredView	read-only backed live filtering, nested composition	MODULE_RECEIVER_CANDIDATE
+hsoliwal/M3jdk21	41ff6da0c7c8e6090a8adb6596602ecde96ea550	com.m3.collections.M3LongSortedViews	com.m3.collections.M3LongSortedViews	mutable live set ranges + duplicate-preserving primitive sorted snapshots	MODULE_RECEIVER_CANDIDATE
+hsoliwal/com.synexia	bf62eed6b93b7feaee8426e2de736b04c95e45b5	com.synexia.rewrite.M3Jdk21FilteredSortedComposition20261016	M3JDK21 module receiving	source-sealed existing Maven/OpenRewrite recipe	TOOLING_ONLY_NO_RUNTIME_DEPENDENCY
