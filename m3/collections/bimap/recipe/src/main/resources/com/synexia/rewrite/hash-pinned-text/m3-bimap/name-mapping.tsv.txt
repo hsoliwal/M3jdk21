@@ -1,0 +1,5 @@
+source	target	mode	disposition
+Guava AbstractBiMap dual-map/view atoms	com.m3.collections.interop.M3BiMap	INDEPENDENT_APACHE_MODULE	behavioral adaptation; not concrete-class replacement
+Synexia M3 collection composition	com.m3.collections.interop.M3BiMaps	INDEPENDENT_APACHE_MODULE	explicit wrappers and import; Eclipse MutableBiMap remains pending
+Java/JNI collection consumer	com.m3.collections.interop.M3BiMapNativeTest	TEST_ONLY	native client of the Java owner; not runtime acceleration
+java.util.Map and all JDK public classes	UNCHANGED	NO_BACKEND_PROMOTION	installed image and root migration-map promotion deferred

@@ -1,0 +1,7 @@
+# exact additive targets; ABSENT or exact postimage only
+bimap/README.md	ABSENT	b7fc6450a49010922dc7abf16ed680f6ad932ecdb84e34f61b219e1f437326cb	README.md.txt
+bimap/THIRD_PARTY_NOTICES.md	ABSENT	2fdc7f8a7518bdb96116f061fc4838ffdb33436bb3849c6b731a97c1e9253dc8	THIRD_PARTY_NOTICES.md.txt
+bimap/catalogue.tsv	ABSENT	a65ae9b56f99a2723e694471ac5c52cd2a8de9de1ed6d9109d4615a2d04b2f24	catalogue.tsv.txt
+bimap/name-mapping.tsv	ABSENT	d955136da7c747b862dc130c0409b0c5f16be8274b2583e4d64852e02c0d56d7	name-mapping.tsv.txt
+bimap/provenance.json	ABSENT	0d77b354a5a6918c0ce7be4676215cc28b8743a6ea36d99fad21ba9d8f81ec78	provenance.json.txt
+src/test/native/collections/m3_bimap_consumer.c	ABSENT	c6a073b211459f278d2674336ddc84ac28fe19324a0c3cbc30a44193eec84d1e	m3_bimap_consumer.c.txt

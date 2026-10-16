@@ -1,0 +1,44 @@
+{
+  "schema": "M3_BIMAP_PROVENANCE_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors; adapted runtime also retains Guava Authors notice",
+  "license": "Apache-2.0",
+  "receiver_baseline": "9af26a07a296f665778972f46a2bb97bc4971940",
+  "canonical_task": "synexia-openrewrite-recipes/recipe-crates/collections-library-interop/bimap",
+  "borrowed_atoms": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+      "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c"
+    },
+    {
+      "path": "m3/collections/counts/recipe/pinned-engine/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+    },
+    {
+      "path": "m3/collections/counts/recipe/pinned-engine/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "53abb7f4fcd9f2f3b4b6cdfce76d40ed313d0446c322cc088310e84ff23311bc"
+    },
+    {
+      "path": "m3/collections/counts/totals/recipe/src/test/java/com/synexia/rewrite/M3CountTotalsRecipeTest.java",
+      "sha256": "6a6e0d9b5197abc7d110eb50e19fb5bd436b20c5bc6a559c00c546ceb4e7c228"
+    }
+  ],
+  "upstream": [
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "guava/src/com/google/common/collect/AbstractBiMap.java",
+      "license": "Apache-2.0",
+      "mode": "behavioral-atom adaptation; replaced storage with M3; no inherited serialization; staged replaceAll is explicitly different on failure"
+    }
+  ],
+  "runtime_api_pins": [
+    "Guava 33.4.8-jre",
+    "Eclipse Collections 11.1.0",
+    "Spring 6.2.0",
+    "JDK 21"
+  ],
+  "dependency_pins_are_latest_or_security_endorsements": false,
+  "new_jni": "test-only Java BiMap consumer; inherited count kernels remain production Java/JNI",
+  "phase_advance": false,
+  "naming_disposition": "Additive optional-module API; public JDK names unchanged; see bimap/name-mapping.tsv; root historical mapping remains unchanged"
+}
