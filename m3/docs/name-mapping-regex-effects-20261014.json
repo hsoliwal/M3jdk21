@@ -1,4 +1,16 @@
 {
+  "image_followup": {
+    "source_recipe": "com.synexia.rewrite.M3Jdk21RegexImageRecipe",
+    "target_parent": "d6cae6863b754f3fc1f1ec5a47bb275a7951bc45",
+    "status": "candidate; bounded portable effect codec, not automatic persistent cache integration",
+    "target_owner": "jdk.internal.mindex.M3RegexDpPlan / Effect",
+    "source_reference": "MIndexRegexAtomAlgebra image geometry, fingerprint and lane validation",
+    "schema": "M3 effect image v1; distinct from Synexia table-image format",
+    "trust": "separately trusted image SHA-256 plus canonical source identity and program fingerprint; hashes do not prove computation correctness",
+    "limits": "104-byte header plus at most two 64-row lanes: at most 1128 bytes",
+    "native": "existing composition/power exports unchanged and exercised after restore",
+    "pending": ["automatic persistent owner/cache receiver", "signed receipt distribution", "whole compiled parser/image import", "full M3JDK image and jtreg"]
+  },
   "utf16_followup": {
     "source_recipe": "com.synexia.rewrite.M3Jdk21RegexUtf16Recipe",
     "target_parent": "c8af42d9a6df6f3fd2c648ff7f8d98cf086fb87f",
@@ -90,7 +102,7 @@
       "scope": "No compile-time lowering, universal cache, GPU/NPU runtime, database service or public String API introduced."
     }
   ],
-  "latest_stage": "utf16_followup",
+  "latest_stage": "image_followup",
   "pressure_followup": {
     "recipe": "com.synexia.rewrite.M3Jdk21RegexPressureRecipe",
     "target_preimage_commit": "03b949881dd7ae140ab1e29cb97bf1af644a22c2",
