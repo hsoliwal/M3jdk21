@@ -118,7 +118,7 @@ public final class M3LongLongHashMap {
         return removed;
     }
 
-    public long getOrDefault(long key, long defaultValue)    public long getOrDefault(long key, long defaultValue) {
+    public long getOrDefault(long key, long defaultValue) {
         int index = findIndex(key);
         return index < 0 ? defaultValue : values[index];
     }
