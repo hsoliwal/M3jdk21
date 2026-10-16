@@ -49,6 +49,12 @@ jobs:
           java-version: "21"
           cache: maven
 
+      - name: Bootstrap pinned source-built JUnit closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+
       - name: Validate current Synexia successor intake
         run: |
           set -euo pipefail
