@@ -28,7 +28,8 @@ public final class M3Jdk8284315FullBackportRecipe extends Recipe {
     public Set<String> getTags() {
         return Set.of(
                 "m3", "jdk21", "bugfix", "jdk-8284315",
-                "javac", "javadoc", "multi-module-scope", "candidate-only");
+                "javac", "javadoc", "library-api-scope", "explicit-bug-contract-change",
+                "candidate-only");
     }
 
     @Override
