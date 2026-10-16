@@ -774,7 +774,7 @@
   "prior_qualified_target_commit": "e567cd9a3c4f7f371aecf19c8dd46f31a1cf9b05",
   "prior_qualification_scope": "HISTORICAL_79_JAVA_DONATION_BEFORE_CONCURRENT_PRIMITIVE_RECONCILIATION",
   "original_applied_java_manifest_sha256": "1f45bc0ccd7ad714e8789724e67ac303f4c5c26b7f1a8bedcb942189e6cc4ae2",
-  "installed_source_manifest": "qualification/installed-source-enum-set-20261008.tsv",
+  "historical_installed_source_manifest_20261008": "qualification/installed-source-enum-set-20261008.tsv",
   "name_mapping": "name-mapping.json",
   "canonical_successor_recipe_path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008",
   "canonical_successor_engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
