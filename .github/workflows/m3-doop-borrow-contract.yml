@@ -48,7 +48,8 @@ jobs:
             "$MAIN/M3IntLane28.java" \
             "$MAIN/M3BitLane28.java" \
             "$MAIN/M3SlotAllocator28.java" \
-            "$MAIN/M3ObjectResidency.java"
+            "$MAIN/M3ObjectResidency.java" \
+            "$MAIN/M3Residency.java"
           javac --release 21 -Xlint:all -Werror \
             -cp "$OUT/main:$RUNNER_TEMP/m3-junit-console.jar" \
             -d "$OUT/test" \
