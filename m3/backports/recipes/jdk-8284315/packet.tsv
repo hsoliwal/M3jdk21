@@ -9,4 +9,4 @@ jdk-8284315-doctrees	doclint-reference-test	FILE	false	M3Jdk21HashPinnedSnapshot
 jdk-8284315-doctrees	doclint-golden	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-doclint-golden-8284315	
 jdk-8284315-doctrees	compiler-module-join	MODULE	true	JOIN:jdk.compiler	doctrees-contract,javactrees-resolution,focused-jtreg
 jdk-8284315-doctrees	javadoc-module-join	MODULE	true	JOIN:jdk.javadoc	comment-helper,doclint-checker,javadoc-seetag-test,doclint-reference-test,doclint-golden
-jdk-8284315-doctrees	multi-module-join	MULTI_MODULE	true	com.m3.rewrite.backport.M3Jdk8284315FullBackportRecipe	compiler-module-join,javadoc-module-join
+jdk-8284315-doctrees	library-api-join	LIBRARY_API	true	com.m3.rewrite.backport.M3Jdk8284315FullBackportRecipe	compiler-module-join,javadoc-module-join
