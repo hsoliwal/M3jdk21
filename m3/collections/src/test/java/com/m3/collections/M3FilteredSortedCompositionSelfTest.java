@@ -62,7 +62,9 @@ public final class M3FilteredSortedCompositionSelfTest {
         later[later.length - 1] = 24L;
         eq(later, nested.toArray());
         check(nested.contains(24L), "live insertion visible");
-        owner.remove(24L);
+        // Remove precisely the appended occurrence: remove(value) would
+        // remove the FIRST equal occurrence if one pre-existed.
+        owner.removeAt(owner.size() - 1);
         eq(expected, nested.toArray());
     }
 
