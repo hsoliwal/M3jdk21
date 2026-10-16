@@ -109,6 +109,24 @@
             </configuration>
           </execution>
           <execution>
+            <id>emit-whole-backport-programme-status</id>
+            <phase>verify</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <executable>${python.executable}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>backport_whole_programme_status.py</argument>
+                <argument>--root</argument>
+                <argument>${project.basedir}/../..</argument>
+                <argument>--tsv-out</argument>
+                <argument>${project.build.directory}/backport-whole-programme-status.tsv</argument>
+                <argument>--json-out</argument>
+                <argument>${project.build.directory}/backport-whole-programme-status.json</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
             <id>emit-backport-program-status</id>
             <phase>verify</phase>
             <goals><goal>exec</goal></goals>
