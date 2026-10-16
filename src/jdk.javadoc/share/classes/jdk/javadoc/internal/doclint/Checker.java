@@ -971,8 +971,14 @@ public class Checker extends DocTreePathScanner<Void, Void> {
 
     @Override @DefinedBy(Api.COMPILER_TREE)
     public Void visitReference(ReferenceTree tree, Void ignore) {
-        Element e = env.trees.getElement(getCurrentPath());
-        if (e == null) {
+        // @link and @see require an element target. Other reference contexts may
+        // legitimately denote primitive or array types, which have a TypeMirror
+        // but no corresponding language-model Element.
+        if (inLink || inSee) {
+            if (env.trees.getElement(getCurrentPath()) == null) {
+                reportBadReference(tree);
+            }
+        } else if (env.trees.getType(getCurrentPath()) == null) {
             reportBadReference(tree);
         }
         return super.visitReference(tree, ignore);
