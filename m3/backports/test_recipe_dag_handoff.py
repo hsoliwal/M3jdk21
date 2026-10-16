@@ -79,6 +79,33 @@ class RecipeDagHandoffTest(unittest.TestCase):
             self.assertEqual("false", row["mutationAuthority"])
             self.assertEqual("false", row["promotionAuthority"])
 
+    def test_nebula_proof_receipt_pins_verified_commit_and_blob(self) -> None:
+        rows = self.current_rows()
+        proof = next(row for row in rows if row["id"] == "nebula-proving-transfer")
+        self.assertEqual(
+            "7b36ce9e3e0c8d1e91324589b38b9d9d5a164356",
+            proof["commit"],
+        )
+        self.assertEqual("GIT-BLOB-SHA1", proof["contentHashAlgorithm"])
+        self.assertEqual(
+            "9d0683cc746d0edd60cc5b397f72d5dc74bcabd2",
+            proof["contentHash"],
+        )
+        self.assertEqual(self.mod.NEBULA_PROOF_BLOB, proof["contentHash"])
+        self.mod.validate(rows)
+        for field, replacement in (
+            ("contentHash", "0" * 40),
+            ("commit", "0" * 40),
+            ("contentHashAlgorithm", "SHA-256"),
+        ):
+            with self.subTest(field=field):
+                changed = [dict(row) for row in rows]
+                for row in changed:
+                    if row["id"] == "nebula-proving-transfer":
+                        row[field] = replacement
+                with self.assertRaises(ValueError):
+                    self.mod.validate(changed)
+
     def test_mutation_or_promotion_authority_fails_closed(self) -> None:
         rows = self.current_rows()
         mutated = [dict(row) for row in rows]
