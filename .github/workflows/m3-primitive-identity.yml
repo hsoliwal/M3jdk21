@@ -1,0 +1,63 @@
+name: M3 primitive identity candidate
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-primitive-identity.yml'
+      - 'm3/runtime-integration/primitive-identity/**'
+      - 'src/java.base/linux/native/libjava/M3PrimitiveImage.c'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3Primitive*.java'
+      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/comp/M3PrimitiveIdentityLowering.java'
+      - 'test/jdk/jdk/internal/mindex/*PrimitiveIdentity*'
+      - 'test/langtools/tools/javac/m3/PrimitiveIdentityFixture.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /m3/runtime-integration/primitive-identity/
+            /src/java.base/linux/native/libjava/M3PrimitiveImage.c
+            /src/java.base/share/classes/jdk/internal/mindex/M3PrimitiveIdentity.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3PrimitiveImage.java
+            /src/jdk.compiler/share/classes/com/sun/tools/javac/comp/M3PrimitiveIdentityLowering.java
+            /test/jdk/jdk/internal/mindex/*PrimitiveIdentity*
+            /test/langtools/tools/javac/m3/PrimitiveIdentityFixture.java
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/com.synexia
+          ref: c90964099bdb0a752d29033d3c7723842ad6b2dc
+          path: donor
+          persist-credentials: false
+          sparse-checkout: synexia-m3-recipe/recipes/m3jdk-primitive-identity-20261016
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact-head primitive, compiler, JNI and fixed-address proof
+        shell: bash
+        run: |
+          bash m3/runtime-integration/primitive-identity/verify.sh \
+            "$GITHUB_WORKSPACE/donor/synexia-m3-recipe/recipes/m3jdk-primitive-identity-20261016" \
+            "$RUNNER_TEMP/m3-primitive-proof"
+      - name: Maven recipe gate
+        shell: bash
+        run: |
+          set -o pipefail
+          mvn -B -ntp -f "$RUNNER_TEMP/m3-primitive-proof/recipe/pom.xml" test \
+            2>&1 | tee "$RUNNER_TEMP/m3-primitive-proof/maven.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-primitive-identity-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            ${{ runner.temp }}/m3-primitive-proof/*.log
+            ${{ runner.temp }}/m3-primitive-proof/*.txt
+          if-no-files-found: warn

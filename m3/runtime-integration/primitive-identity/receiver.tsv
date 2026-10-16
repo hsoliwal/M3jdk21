@@ -1,0 +1,6 @@
+capability	target	canonical_recipe	status	promotion_gate
+primitive typed identity	jdk.internal.mindex.M3PrimitiveIdentity	com.synexia.m3.recipe.M3PrimitiveIdentityReplay@c90964099bdb0a752d29033d3c7723842ad6b2dc	LOCAL_CANDIDATE	full matched-image compatibility; central name-mapping review
+frozen shared catalogue	jdk.internal.mindex.M3PrimitiveImage	com.synexia.m3.recipe.M3PrimitiveIdentityReplay@c90964099bdb0a752d29033d3c7723842ad6b2dc	LOCAL_CANDIDATE	canonical owner consolidation; lifecycle/memory/platform qualification
+identical virtual mappings	src/java.base/linux/native/libjava/M3PrimitiveImage.c	com.synexia.m3.recipe.M3PrimitiveIdentityReplay@c90964099bdb0a752d29033d3c7723842ad6b2dc	LINUX64_FROZEN_IMAGE_PROOF	startup reservation and shared-image admission; no live address reuse
+ahead-of-time comparison lowering	com.sun.tools.javac.comp.M3PrimitiveIdentityLowering	com.synexia.m3.recipe.M3PrimitiveIdentityReplay@c90964099bdb0a752d29033d3c7723842ad6b2dc	OPT_IN_ONLY	langtools/jtreg; matched runtime semantics; no absolute-pointer embedding
+String/arrays/collections/AST integration	existing canonical family owners	NONE	PENDING	preserve receiving order; no automatic phase promotion
