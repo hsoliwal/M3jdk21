@@ -15,7 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HexFormat;
 import java.util.Iterator;
@@ -803,8 +803,20 @@ final class M3StringPool {
         }
     }
 
+    /**
+     * Normalized, immutable owner/range sequence walker for canonical tuple interning.
+     *
+     * <p>The old walker allocated an M3String.range wrapper for every visited tuple child.
+     * Those objects were not payload owners, but on long concatenation DAGs they caused
+     * allocation pressure during every exact canonical-identity comparison. Two small
+     * private lanes now carry the same strong owner references and primitive coordinates.
+     * No native address, Java byte/char payload, or child M3String is retained or copied.
+     * The stack grows only when the tuple depth requires it.</p>
+     */
     private static final class LeafCursor {
-        private final ArrayDeque<M3String> pending = new ArrayDeque<>();
+        private M3StringOwner[] pendingOwners = new M3StringOwner[8];
+        private long[] pendingCoordinates = new long[8];
+        private int pendingSize;
 
         private M3StringAtom atom;
         private int start;
@@ -820,8 +832,26 @@ final class M3StringPool {
         private int rawLength;
 
         LeafCursor(M3String first, M3String second) {
-            if (second != null && second.length() != 0) pending.push(second);
-            if (first != null && first.length() != 0) pending.push(first);
+            if (second != null) push(second.owner(), second.start(), second.length());
+            if (first != null) push(first.owner(), first.start(), first.length());
+        }
+
+        /**
+         * Preserve M3String.range's exact bounds authority without manufacturing a child
+         * wrapper. Ownership remains strong for every pending JNI-visible atom.
+         */
+        private void push(M3StringOwner owner, int offset, int count) {
+            if (count == 0) return;
+            Objects.checkFromIndexSize(offset, count, owner.length);
+            if (pendingSize == pendingOwners.length) {
+                int capacity = Math.multiplyExact(pendingOwners.length, 2);
+                pendingOwners = Arrays.copyOf(pendingOwners, capacity);
+                pendingCoordinates = Arrays.copyOf(pendingCoordinates, capacity);
+            }
+            pendingOwners[pendingSize] = owner;
+            pendingCoordinates[pendingSize] =
+                    ((long) offset << Integer.SIZE) | Integer.toUnsignedLong(count);
+            pendingSize++;
         }
 
         boolean next() {
@@ -856,38 +886,37 @@ final class M3StringPool {
         int length() { return length; }
 
         private boolean pullRaw() {
-            while (!pending.isEmpty()) {
-                M3String value = pending.pop();
-                if (value.length() == 0) continue;
-                if (value.owner() instanceof M3StringAtom scalar) {
+            while (pendingSize != 0) {
+                int top = --pendingSize;
+                M3StringOwner owner = pendingOwners[top];
+                pendingOwners[top] = null; // Do not pin already-consumed owners.
+                long coordinate = pendingCoordinates[top];
+                int rangeStart = (int) (coordinate >>> Integer.SIZE);
+                int rangeLength = (int) coordinate;
+                if (owner instanceof M3StringAtom scalar) {
                     rawAtom = scalar;
-                    rawStart = value.start();
-                    rawLength = value.length();
+                    rawStart = rangeStart;
+                    rawLength = rangeLength;
                     return true;
                 }
 
-                M3StringTuple tuple = (M3StringTuple) value.owner();
-                int rangeStart = value.start();
-                int rangeEnd = value.end();
+                M3StringTuple tuple = (M3StringTuple) owner;
+                int rangeEnd = rangeStart + rangeLength;
                 int leftLength = tuple.left.length();
 
                 if (rangeEnd > leftLength) {
                     int rightStart = Math.max(0, rangeStart - leftLength);
                     int rightEnd = rangeEnd - leftLength;
-                    pending.push(
-                            M3String.range(
-                                    tuple.right.owner(),
-                                    Math.addExact(tuple.right.start(), rightStart),
-                                    rightEnd - rightStart));
+                    push(tuple.right.owner(),
+                            Math.addExact(tuple.right.start(), rightStart),
+                            rightEnd - rightStart);
                 }
                 if (rangeStart < leftLength) {
                     int leftStart = rangeStart;
                     int leftEnd = Math.min(rangeEnd, leftLength);
-                    pending.push(
-                            M3String.range(
-                                    tuple.left.owner(),
-                                    Math.addExact(tuple.left.start(), leftStart),
-                                    leftEnd - leftStart));
+                    push(tuple.left.owner(),
+                            Math.addExact(tuple.left.start(), leftStart),
+                            leftEnd - leftStart);
                 }
             }
             return false;
