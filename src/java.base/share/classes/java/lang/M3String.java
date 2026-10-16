@@ -152,6 +152,75 @@ final class M3String implements CharSequence {
         }
     }
 
+    /**
+     * Canonically composes independent mutable UTF-16 arrays without flattening them.
+     *
+     * <p>The outer reference lane is snapshotted before validation. Every non-empty array is
+     * admitted as one canonical scalar M3 atom and the atoms are combined through the existing
+     * persistent tuple owner. The caller must exclude concurrent mutation while admission is in
+     * progress; no source array is retained after admission.</p>
+     *
+     * @return canonical composition, {@link #empty()} for zero logical length, or {@code null}
+     *         when the canonical pool refuses any scalar admission
+     */
+    static M3String admitArrays(char[]... arrays) {
+        char[][] snapshot = Objects.requireNonNull(arrays, "arrays").clone();
+        int[] offsets = new int[snapshot.length];
+        int[] lengths = new int[snapshot.length];
+        for (int index = 0; index < snapshot.length; index++) {
+            char[] source = Objects.requireNonNull(snapshot[index], "array");
+            lengths[index] = source.length;
+        }
+        return admitArrayRanges(snapshot, offsets, lengths);
+    }
+
+    /**
+     * Canonically composes selected ranges from independent UTF-16 arrays.
+     *
+     * <p>All lane cardinality, null, range and aggregate-length checks complete before the first
+     * scalar is admitted. Zero-length ranges contribute no physical owner. Temporary Java arrays
+     * contain only caller references and integer metadata; the resulting M3String retains only its
+     * canonical owner and packed coordinate.</p>
+     */
+    static M3String admitArrayRanges(
+            char[][] arrays, int[] offsets, int[] lengths) {
+        char[][] sources = Objects.requireNonNull(arrays, "arrays").clone();
+        int[] starts = Objects.requireNonNull(offsets, "offsets").clone();
+        int[] counts = Objects.requireNonNull(lengths, "lengths").clone();
+        if (sources.length != starts.length || sources.length != counts.length) {
+            throw new IllegalArgumentException("char-array range lane cardinality mismatch");
+        }
+
+        long totalLength = 0L;
+        int nonEmpty = 0;
+        for (int index = 0; index < sources.length; index++) {
+            char[] source = Objects.requireNonNull(sources[index], "array");
+            Objects.checkFromIndexSize(starts[index], counts[index], source.length);
+            totalLength += counts[index];
+            if (totalLength > Integer.MAX_VALUE) {
+                throw new OutOfMemoryError("Required length exceeds implementation limit");
+            }
+            if (counts[index] != 0) nonEmpty++;
+        }
+        if (totalLength == 0L) return EMPTY;
+
+        ArrayList<M3String> admitted = new ArrayList<>(nonEmpty);
+        ADMITTING.set(Boolean.TRUE);
+        try {
+            for (int index = 0; index < sources.length; index++) {
+                int count = counts[index];
+                if (count == 0) continue;
+                M3String value =
+                        M3StringPool.internChars(sources[index], starts[index], count);
+                if (value == null) return null;
+                admitted.add(value);
+            }
+        } finally {
+            ADMITTING.remove();
+        }
+        return joinValues(admitted);
+    }
+
     static M3String admit(byte[] compactValue, byte coder) {
         Objects.requireNonNull(compactValue, "compactValue");
         ADMITTING.set(Boolean.TRUE);
