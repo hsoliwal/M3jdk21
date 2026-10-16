@@ -87,6 +87,12 @@ public final class BytePatternSearch {
         byte[] source = input.copy();
         ByteBuffer direct = ByteBuffer.allocateDirect(source.length);
         direct.put(source).flip();
+        // The KMP symbol alone is not native admission: another library in the
+        // class loader could export it without the source-pinned LF owner.
+        // Reuse the installed and independently hashed v1 ABI before dispatch.
+        if (LfCount.nativeCount(direct, 0, 0) != 0L) {
+            throw new IllegalStateException("pinned LF JNI preflight returned nonzero");
+        }
         try {
             int[] result = findKmp0(direct, 0, source.length, needle, maxMatches);
             if (result == null || result.length > maxMatches) {

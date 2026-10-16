@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 KMP JNI source-pinned admission and regression
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/capability-runtime/src/main/java/com/m3/runtime/capability/BytePatternSearch.java'
+      - 'm3/ports/capability-runtime/src/test/java/com/m3/runtime/capability/NativePinAdmissionChecks.java'
+      - 'm3/ports/capability-runtime/src/test/native/unverified_kmp_jni.c'
+      - 'm3/ports/capability-runtime/verify_native_pin.py'
+      - '.github/workflows/m3-cpu-kmp-native-pin-20261016.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pinned-native-refusal-and-regressions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Reject independently loaded unpinned KMP symbol
+        run: |
+          python3 m3/ports/capability-runtime/verify_native_pin.py --root m3/ports/capability-runtime --out "$RUNNER_TEMP/m3-kmp-pin-refusal"
+          test -s "$RUNNER_TEMP/m3-kmp-pin-refusal/REPORT.json"
+          grep -q '^M3_NATIVE_KMP_PIN_REFUSAL_PASS$' "$RUNNER_TEMP/m3-kmp-pin-refusal/unpinned-symbol-refusal.log"
+      - name: Reuse real Java/C11 JNI and linked JDK21 image oracles
+        run: |
+          python3 m3/ports/capability-runtime/verify_native.py --root m3/ports/capability-runtime --out "$RUNNER_TEMP/m3-kmp-pin-native-regression" --developer-image
+          test -s "$RUNNER_TEMP/m3-kmp-pin-native-regression/REPORT.json"
+      - name: Preserve independent receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-kmp-native-admission-evidence
+          path: |
+            ${{ runner.temp }}/m3-kmp-pin-refusal/
+            ${{ runner.temp }}/m3-kmp-pin-native-regression/REPORT.json
+          if-no-files-found: error
