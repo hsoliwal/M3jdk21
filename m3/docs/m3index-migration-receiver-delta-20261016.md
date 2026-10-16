@@ -53,7 +53,16 @@ does not itself establish remote availability or correct compilation.
 ## Local source-only verifier
 
     python3 m3/compatibility/check_mindex_rename_synexia_delta.py --self-test
+
+The independent full-family receiver remains mandatory for later M3JDK target
+promotion, but requires Git ancestry reaching its historical pinned baseline:
+
     python3 m3/compatibility/check_synexia_full_borrow_receiver.py
+
+Run that independent check from a complete-history checkout. The bounded
+source-only delta workflow intentionally does not equate a shallow clone's
+missing ancestral object with a failed migration or weaken the underlying
+full-family admission rule.
 
 The new stdlib verifier refuses modified/missing/duplicate blobs, unexpected
 paths, target promotion or runtime dependencies. Source PR #11918 locally
