@@ -155,6 +155,45 @@ public final class BytePatternSearch {
         }
     }
 
+
+    /**
+     * Count exact overlapping occurrences in one KMP pass, retaining no hit
+     * array.  This reuses the Java reference scanner and the existing
+     * maxMatches refusal rule, including a zero budget.
+     */
+    public int countMatches(SourceArtifact.Span span, int maxMatches) {
+        SourceArtifact.Span input = Objects.requireNonNull(span, "span");
+        requireLimit(maxMatches);
+        if (input.length() < needle.length) return 0;
+        return scan(input, maxMatches, null);
+    }
+
+    /**
+     * Explicit native count-only leaf. The existing pinned library remains
+     * authoritative; no result offsets are retained or allocated by JNI.
+     * A missing optional symbol refuses rather than claiming native parity.
+     */
+    public int countMatchesNative(SourceArtifact.Span span, int maxMatches) {
+        SourceArtifact.Span input = Objects.requireNonNull(span, "span");
+        requireLimit(maxMatches);
+        if (Thread.currentThread().isInterrupted()) {
+            throw new CancellationException("native count-only search interrupted");
+        }
+        byte[] snapshot = input.copy();
+        ByteBuffer direct = ByteBuffer.allocateDirect(snapshot.length);
+        direct.put(snapshot).flip();
+        try {
+            int result = countKmp0(direct, 0, snapshot.length, needle, maxMatches);
+            if (result < 0 || result > maxMatches) {
+                throw new IllegalStateException("invalid native byte-search count");
+            }
+            return result;
+        } catch (UnsatisfiedLinkError missingExtension) {
+            throw new IllegalStateException("pinned native library lacks byte-count extension",
+                    missingExtension);
+        }
+    }
+
     private int scan(SourceArtifact.Span input, int maxMatches, int[] hits) {
         int matched = 0;
         int found = 0;
@@ -194,4 +233,6 @@ public final class BytePatternSearch {
             ByteBuffer buffer, int start, int length, byte[] needle, int maxMatches);
     private static native int firstKmp0(
             ByteBuffer buffer, int start, int length, byte[] needle, int fromIndex);
+    private static native int countKmp0(
+            ByteBuffer buffer, int start, int length, byte[] needle, int maxMatches);
 }

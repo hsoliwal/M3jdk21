@@ -258,3 +258,66 @@ Java_com_m3_runtime_capability_BytePatternSearch_firstKmp0(
     }
     return -1;
 }
+
+/*
+ * Source-sealed single-pass KMP count-only leaf.
+ * No Java result array, retained JVM pointer or implicit native installation.
+ * Existing ABI v1, LF/line, all-hits and first-hit symbols remain unchanged.
+ */
+JNIEXPORT jint JNICALL
+Java_com_m3_runtime_capability_BytePatternSearch_countKmp0(
+        JNIEnv *env, jclass owner, jobject buffer, jint start, jint length,
+        jbyteArray needle_array, jint max_matches) {
+    (void) owner;
+    if (buffer == NULL || needle_array == NULL || start < 0 || length < 0
+            || length > 16777216 || max_matches < 0 || max_matches > 1000000) {
+        illegal(env, "invalid count-only KMP geometry");
+        return -1;
+    }
+    jsize width = (*env)->GetArrayLength(env, needle_array);
+    if (width < 1 || width > 4096) {
+        illegal(env, "invalid count-only needle budget");
+        return -1;
+    }
+    jlong capacity = (*env)->GetDirectBufferCapacity(env, buffer);
+    if (capacity < 0 || (jlong)start + (jlong)length > capacity) {
+        illegal(env, "count-only direct buffer capacity mismatch");
+        return -1;
+    }
+    if (width > length) return 0;
+    const uint8_t *data = (const uint8_t *)(*env)->GetDirectBufferAddress(env, buffer);
+    if (data == NULL) {
+        illegal(env, "count-only direct buffer address absent");
+        return -1;
+    }
+    uint8_t pattern[4096];
+    jint failure[4096];
+    (*env)->GetByteArrayRegion(env, needle_array, 0, width, (jbyte *)pattern);
+    if ((*env)->ExceptionCheck(env)) return -1;
+    failure[0] = 0;
+    for (jint i = 1, matched = 0; i < width; i++) {
+        while (matched != 0 && pattern[i] != pattern[matched]) {
+            matched = failure[matched - 1];
+        }
+        if (pattern[i] == pattern[matched]) matched++;
+        failure[i] = matched;
+    }
+    jint matched = 0;
+    jint found = 0;
+    for (jint i = 0; i < length; i++) {
+        uint8_t value = data[(size_t)start + (size_t)i];
+        while (matched != 0 && pattern[matched] != value) {
+            matched = failure[matched - 1];
+        }
+        if (pattern[matched] == value) matched++;
+        if (matched == width) {
+            if (found == max_matches) {
+                illegal(env, "count-only KMP match budget exceeded");
+                return -1;
+            }
+            found++;
+            matched = failure[width - 1];
+        }
+    }
+    return found;
+}

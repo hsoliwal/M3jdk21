@@ -79,12 +79,23 @@ public final class BytePatternSearchChecks {
         yes(compiled.first(span, count) == -1, "legal EOF cursor " + caseName);
         boolean overflow = expected.length > maxMatches;
         if (overflow) {
+            throwsType(IllegalArgumentException.class, () -> compiled.countMatches(span, maxMatches));
+            if (nativeAvailable) {
+                throwsType(IllegalArgumentException.class,
+                        () -> compiled.countMatchesNative(span, maxMatches));
+            }
             throwsType(IllegalArgumentException.class, () -> compiled.findAll(span, maxMatches));
             if (nativeAvailable) {
                 throwsType(IllegalArgumentException.class,
                         () -> compiled.findAllNative(span, maxMatches));
             }
         } else {
+            yes(compiled.countMatches(span, maxMatches) == expected.length,
+                    "count-only Java oracle " + caseName);
+            if (nativeAvailable) {
+                yes(compiled.countMatchesNative(span, maxMatches) == expected.length,
+                        "count-only JNI oracle " + caseName);
+            }
             same(expected, compiled.findAll(span, maxMatches), "Java " + caseName);
             if (nativeAvailable) {
                 same(expected, compiled.findAllNative(span, maxMatches), "JNI " + caseName);
@@ -115,6 +126,12 @@ public final class BytePatternSearchChecks {
                 plan.findAllNative(sampleSpan, 100), "snapshot native parity");
         var lineIndex = ByteLineIndex.javaIndex(sampleSpan);
         int[] positions = plan.findAll(sampleSpan, 100);
+        yes(plan.countMatches(sampleSpan, 100) == positions.length,
+                "sample count-only does not allocate result offsets");
+        if (nativeAvailable) {
+            yes(plan.countMatchesNative(sampleSpan, 100) == positions.length,
+                    "sample native count-only parity");
+        }
         for (int hit : positions) {
             int line = lineIndex.lineAtOffset(hit);
             yes(hit >= lineIndex.startOffset(line) && hit < lineIndex.endOffset(line),
@@ -136,6 +153,10 @@ public final class BytePatternSearchChecks {
         throwsType(IllegalArgumentException.class, () -> BytePatternSearch.compile(new byte[0]));
         throwsType(IllegalArgumentException.class,
                 () -> BytePatternSearch.compile(new byte[BytePatternSearch.MAX_PATTERN_BYTES + 1]));
+        throwsType(IllegalArgumentException.class, () -> plan.countMatches(sampleSpan, -1));
+        throwsType(IllegalArgumentException.class,
+                () -> plan.countMatches(sampleSpan, BytePatternSearch.MAX_MATCHES + 1));
+        throwsType(NullPointerException.class, () -> plan.countMatches(null, 0));
         throwsType(IllegalArgumentException.class, () -> plan.findAll(sampleSpan, -1));
         throwsType(IllegalArgumentException.class,
                 () -> plan.findAll(sampleSpan, BytePatternSearch.MAX_MATCHES + 1));
@@ -193,10 +214,13 @@ public final class BytePatternSearchChecks {
         }
         Thread.currentThread().interrupt();
         try {
+            throwsType(CancellationException.class, () -> plan.countMatches(sampleSpan, 100));
             throwsType(CancellationException.class, () -> plan.findAll(sampleSpan, 100));
             throwsType(CancellationException.class, () -> plan.first(sampleSpan, 0));
             throwsType(CancellationException.class, () -> BytePatternSearch.compile(new byte[]{1}));
             if (nativeAvailable) {
+                throwsType(CancellationException.class,
+                        () -> plan.countMatchesNative(sampleSpan, 100));
                 throwsType(CancellationException.class, () -> plan.findAllNative(sampleSpan, 100));
                 throwsType(CancellationException.class, () -> plan.firstNative(sampleSpan, 0));
             }
