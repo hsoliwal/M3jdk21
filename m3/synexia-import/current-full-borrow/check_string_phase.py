@@ -47,6 +47,10 @@ EXPECTED_STRING_CHAIN = (
      "4fb87fd70ffe5c8d75d17db9c28b44bc9b574704", "11220", "862"),
     ("4fb87fd70ffe5c8d75d17db9c28b44bc9b574704",
      "42399d411c1516a56a47dcdb10242960157b4677", "11247", "864"),
+    ("42399d411c1516a56a47dcdb10242960157b4677",
+     "35ed998540e044eed8cb7596e2e2c019ae369bd3", "11448", "898"),
+    ("35ed998540e044eed8cb7596e2e2c019ae369bd3",
+     "7a3cca7c0aa127d20fbcb276e5e603dee020aee5", "11790", "952"),
 )
 
 SUCCESSOR_MARKERS = {
@@ -59,6 +63,9 @@ SUCCESSOR_MARKERS = {
         "M3String right = canonicalize(second);",
         "if (right == null) return null;",
         "return M3StringPool.concat(left, right);",
+        "static M3String admitArrays(char[]... arrays)",
+        "static M3String admitArrayRanges(",
+        "return joinValues(admitted);",
         "static boolean isLiteralRegex(String regex)",
     ),
     "src/java.base/share/classes/java/lang/M3StringFacts.java": (
