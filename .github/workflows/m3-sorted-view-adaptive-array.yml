@@ -1,0 +1,35 @@
+name: M3 sorted view adaptive array receiver
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-sorted-view-adaptive-array.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3SortedView.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SortedViewAdaptiveSelectionTest.java'
+      - 'm3/collections/qualification/m3-sorted-view-adaptive-array-20261017/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-source-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify source seals, owner dependencies, public ABI, and index tests
+        shell: bash
+        run: |
+          bash m3/collections/qualification/m3-sorted-view-adaptive-array-20261017/verify.sh \
+            "$RUNNER_TEMP/m3-sorted-array"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-sorted-array-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/m3-sorted-array/
+          if-no-files-found: warn
