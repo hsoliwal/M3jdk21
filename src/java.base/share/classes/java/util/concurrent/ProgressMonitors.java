@@ -76,7 +76,7 @@ public final class ProgressMonitors {
         if (parentTicks < 0 || totalWork == 0 || totalWork < ProgressMonitor.UNKNOWN_WORK) {
             throw new IllegalArgumentException("Invalid child progress range");
         }
-        if (parent == ProgressMonitor.NONE || parentTicks == 0) {
+        if (parent == ProgressMonitor.NONE) {
             return ProgressMonitor.NONE;
         }
         return new WeightedChild(parent, name, parentTicks, totalWork);
@@ -110,7 +110,6 @@ public final class ProgressMonitors {
 
     private static final class WeightedChild implements ProgressMonitor {
         private final ProgressMonitor parent;
-        private final String name;
         private final long parentTicks;
         private final long totalWork;
         private final AtomicLong consumed = new AtomicLong();
@@ -120,10 +119,10 @@ public final class ProgressMonitors {
 
         WeightedChild(ProgressMonitor parent, String name, long parentTicks, long totalWork) {
             this.parent = parent;
-            this.name = Objects.requireNonNullElse(name, "");
+            String title = Objects.requireNonNullElse(name, "");
             this.parentTicks = parentTicks;
             this.totalWork = totalWork;
-            if (!this.name.isEmpty()) parent.message(this.name);
+            if (!title.isEmpty()) parent.message(title);
         }
 
         @Override public void worked(long units) {
