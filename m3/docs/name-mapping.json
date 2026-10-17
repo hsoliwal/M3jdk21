@@ -77,7 +77,7 @@
       "status": "target-internal String precompute dispatch membrane",
       "source_role": "Synexia canonical bridge policy/recipe donor",
       "recipe": "com.synexia.rewrite.M3Jdk21StringPrecomputeBridgeReceiverRecipe",
-      "recipe_blob": "fbff503ddd730b98b0c242d693ea8df200eee22e",
+      "recipe_blob": "8879983c1c1eea32537ee92c3cb953143b5ea748",
       "target_rule": "Package-private java.lang coordinator only; owns no cache or spelling payload, never admits a flat String merely for an optimization hit, and delegates to existing M3String facts/search/range owners with exact fallback semantics."
     },
     {
