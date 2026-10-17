@@ -563,6 +563,18 @@
       "source_revision_receipt": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
       "target_rule": "Actual upstream tool implementations and APIs retained. M3-owned internal source recipes; no shadow implementation, API rename, java.base replacement or runtime phase advancement.",
       "license": "Preserve Apache and embedded notices; SLF4J MIT; first-party recipe/integration Apache-2.0"
+
+    },
+    {
+      "source": "Existing Synexia MIndexString code-point geometry/rank taxonomy and canonical recipe",
+      "source_role": "Algorithm/recipe authority in hsoliwal/com.synexia, not M3 runtime code dependency",
+      "target": "java.lang.M3StringCodePointPrecompute.Geometry",
+      "target_path": "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java",
+      "recipe": "com.synexia.m3.Jdk21CodePointRankCursor20261017",
+      "canonical_recipe_pr": "hsoliwal/com.synexia#11966",
+      "receiver_test": "test/jdk/java/lang/String/M3StringCodePointRankCursorTest.java",
+      "status": "source-sealed exact Java21 rank/select candidate and host reference A/B passed; matched M3JDK21 java.base/HotSpot jtreg and resource gates pending",
+      "target_rule": "No public String ABI, duplicate payload owner, JNI symbol or retained per-value metadata changes; preserve unpaired UTF-16 surrogate semantics and fallback."
     }
   ],
   "imported_donor_sources": [],
