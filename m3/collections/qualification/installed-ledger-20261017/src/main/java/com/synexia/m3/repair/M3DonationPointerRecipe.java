@@ -46,23 +46,25 @@ public final class M3DonationPointerRecipe {
         return content.split(java.util.regex.Pattern.quote(exactLine), -1).length - 1;
     }
 
-    public static String emit(String json, String successorSha256) {
-        Objects.requireNonNull(json, "donation json");
+    public static String emit(String current, String successorSha256, String pinnedOriginal) {
+        Objects.requireNonNull(current, "donation json");
+        Objects.requireNonNull(pinnedOriginal, "reviewed original json");
+        if (!ORIGINAL_GIT_BLOB.equals(gitBlob(pinnedOriginal))) {
+            throw new IllegalStateException("original donation JSON Git blob drift");
+        }
         String afterHash = newHashLine(successorSha256);
-        if (count(json, NEW_PATH) == 1 && count(json, afterHash) == 1) {
-            return json; // exactly pinned fixed point, later verified by owner SHA.
+        if (count(pinnedOriginal, OLD_PATH) != 1 || count(pinnedOriginal, OLD_SHA) != 1) {
+            throw new IllegalStateException("ambiguous original top-level donation receipt");
         }
-        if (!ORIGINAL_GIT_BLOB.equals(gitBlob(json))) {
-            throw new IllegalStateException("historical donation JSON Git blob drift");
-        }
-        if (count(json, OLD_PATH) != 1 || count(json, OLD_SHA) != 1) {
-            throw new IllegalStateException("ambiguous top-level donation receipt");
-        }
-        String output = json.replace(OLD_PATH, NEW_PATH).replace(OLD_SHA, afterHash);
-        if (count(output, NEW_PATH) != 1 || count(output, afterHash) != 1
-                || count(output, OLD_PATH) != 0) {
+        String postimage = pinnedOriginal.replace(OLD_PATH, NEW_PATH)
+                .replace(OLD_SHA, afterHash);
+        if (count(postimage, NEW_PATH) != 1 || count(postimage, afterHash) != 1
+                || count(postimage, OLD_PATH) != 0) {
             throw new IllegalStateException("receipt postimage is ambiguous");
         }
-        return output;
+        if (!current.equals(pinnedOriginal) && !current.equals(postimage)) {
+            throw new IllegalStateException("donation JSON source drift / collision");
+        }
+        return postimage;
     }
 }
