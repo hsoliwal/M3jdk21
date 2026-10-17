@@ -1,0 +1,4 @@
+# path	sha256	state
+m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java	3bbce4a52493ecc0b272f965414e90a65f66af2e901c2d238f7e56258ff89b8c	MODULE_SOURCE_NOT_INSTALLED_JDK
+m3/collections/src/test/java/com/m3/collections/M3LongSortedAlgebraSelfTest.java	03804c6d86d4591462390242145956660c9b477a83435d990ad5d418fe6d2efc	MODULE_SOURCE_NOT_INSTALLED_JDK
+m3/collections/src/test/java/com/m3/collections/M3LongSortedAlgebraTest.java	c24537bf64defb7d7a114006722cd859b8daa1fd9c7528e51a70736d0607ad62	MODULE_SOURCE_NOT_INSTALLED_JDK
