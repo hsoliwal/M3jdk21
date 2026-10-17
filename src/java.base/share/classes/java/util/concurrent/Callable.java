@@ -69,9 +69,4 @@ public interface Callable<V> {
         return ProgressMonitors.call(this, monitor);
     }
 
-    /** The active monitor or the system fallback. */
-    default ProgressMonitor progressMonitor() {
-        return ProgressMonitors.current();
-    }
-
 }
