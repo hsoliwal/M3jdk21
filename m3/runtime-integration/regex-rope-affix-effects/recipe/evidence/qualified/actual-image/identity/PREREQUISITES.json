@@ -1,0 +1,25 @@
+{
+  "status": "EXACT_GIT_PREREQUISITES_STAGED",
+  "revision": "3bbb4712fb20adba1405741db8457164b9f436f5",
+  "repository": "/workspace/scratch/edcb3bae74f7/m3-string",
+  "archive": "/tmp/m3-runtime-prerequisites-3bbb4712.tar",
+  "archive_sha256": "613c88388534082d0239cd7c51dc76fb30e9b90739f6d05f43b140af207df449",
+  "source_inventory_sha256": "711f4d07b978cb1db9fa440d90fa1a494a36a0a27f0eb109b990cab466c48dc9",
+  "files": 415,
+  "bytes": 10614230,
+  "roots": [
+    "test/jdk/TEST.ROOT",
+    "test/jdk/TEST.groups",
+    "test/jdk/java/lang/String",
+    "test/jdk/java/util/regex",
+    "test/jdk/java/util/StringJoiner",
+    "test/jdk/lib/testlibrary/java/lang",
+    "test/jdk/lib/testlibrary/bootlib",
+    "test/lib",
+    "test/jtreg-ext/requires",
+    "src/java.base/share/data/unicodedata"
+  ],
+  "jtreg_required_version": "7.2+1",
+  "candidate_overlays": [],
+  "runtime_tests": "NOT_RUN"
+}

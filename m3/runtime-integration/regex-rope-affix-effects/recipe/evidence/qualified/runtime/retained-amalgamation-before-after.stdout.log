@@ -1,0 +1,11 @@
+M3_REGEX_AMALGAMATION_PLAN_BYTES before=588544 after=602624 max_extra=14080
+M3_REGEX_AMALGAMATION_AB case=missing-middle-prepared before_ns=54.965 after_ns=49.368 speedup=1.113x delta_pct=-10.18% iterations=5000 samples=9 stock_java21_fixture=true
+M3_REGEX_AMALGAMATION_AB_RAW case=missing-middle-prepared before=[400142, 465850, 378949, 248804, 238679, 239620, 274823, 239681, 367012] after=[356646, 368924, 326691, 239740, 240411, 246841, 239530, 481904, 226601]
+M3_REGEX_AMALGAMATION_AB case=minimum-length before_ns=398.505 after_ns=52.831 speedup=7.543x delta_pct=-86.74% iterations=5000 samples=9 stock_java21_fixture=true
+M3_REGEX_AMALGAMATION_AB_RAW case=minimum-length before=[2077413, 2028068, 1980006, 1960306, 1992525, 1958964, 2007638, 2057652, 1950973] after=[265819, 262765, 286130, 262715, 266010, 258338, 291167, 264157, 262684]
+M3_REGEX_AMALGAMATION_AB case=fixed-first before_ns=89.765 after_ns=122.917 speedup=0.730x delta_pct=36.93% iterations=5000 samples=9 stock_java21_fixture=true
+M3_REGEX_AMALGAMATION_AB_RAW case=fixed-first before=[471559, 475285, 521795, 474303, 448825, 441514, 446351, 383356, 395854] after=[618529, 588064, 663718, 635285, 625870, 614584, 605380, 594042, 576897]
+M3_REGEX_AMALGAMATION_AB case=matching-prepared before_ns=91.900 after_ns=74.626 speedup=1.231x delta_pct=-18.80% iterations=5000 samples=9 stock_java21_fixture=true
+M3_REGEX_AMALGAMATION_AB_RAW case=matching-prepared before=[462055, 437057, 459500, 525060, 442154, 461163, 409025, 450487, 476517] after=[373130, 397387, 356516, 356847, 400933, 303806, 386040, 392911, 366371]
+M3_REGEX_AMALGAMATION_DIFFERENTIAL_PASS checks=24604
+M3_REGEX_AMALGAMATION_EXTRACTED_JAVA_PASS before_after_exact=true mock_owner=true matched_jdk=false

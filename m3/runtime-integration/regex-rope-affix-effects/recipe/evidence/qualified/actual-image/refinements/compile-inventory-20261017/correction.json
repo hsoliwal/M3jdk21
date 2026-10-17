@@ -1,0 +1,13 @@
+{
+  "failure": "selector counted eleven sealed Regex* tests after exclusions while requiring twelve; compiler not started",
+  "repair": "add unchanged, source-sealed existing M3StringHierarchicalRegexTest to preserve twelve-source compile obligation",
+  "product_source_changes": false,
+  "added_parent": {
+    "path": "test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java",
+    "sha256": "1653c23098529c2fc9f7e66e1bfb5c5c2c97adc67c422b0e67cfbd7b5fb121fd"
+  },
+  "parent_inventory_sha256": "cfd27d7d001eda4da6053b07890ba1bfd7d3056790b325dea4e1a100c77cff5d",
+  "parent_inventory_count": 77,
+  "local_gate_sha256": "966df3a133bf738e917bae5f640f0e9143c1481b7c21d18a069b03a71813d8d1",
+  "readme_sha256": "060e8eac80b6916f7a8cfde40623c04b9f357f970531c7ed8849316cf6bfb92f"
+}

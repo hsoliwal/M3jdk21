@@ -1,0 +1,1 @@
+M3_STRING_INVARIANT_FAIL: M3 adaptive BMH/KMP convergence missing: skip256[pattern.charAt(index) & 255] = length - 1 - index;

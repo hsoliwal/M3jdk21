@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/tmp/m3jdk21-product-build/images/jdk/bin/java",
+    "-Xmx512m",
+    "-XX:ActiveProcessorCount=2",
+    "-XX:+UnlockExperimentalVMOptions",
+    "-XX:+UseM3StringStorage",
+    "--add-opens=java.base/java.lang=ALL-UNNAMED",
+    "/workspace/scratch/edcb3bae74f7/regex-work/runtime/M3RegexOptionalFactsProbe.java"
+  ],
+  "exit_code": 0,
+  "source_sha256": "fe94cf61362a14b8995618b8a1753a4d7d2515433de4ebdbaa25c3ee3dd52a6e",
+  "product_source_changed": false
+}

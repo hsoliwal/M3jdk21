@@ -1,0 +1,45 @@
+{
+  "scope": "recipe-input-only; actual singleton input and direct/public matching obligations preserved",
+  "cause": "String.join singleton fast path preserves flat backing; inherited fixture assumed all joins acquired canonical storage",
+  "repair": "existing M3String.canonicalize supplies exact spelling for direct DP; all original Strings and public Pattern comparisons retained; facts and direct DP share the same explicit canonical owner",
+  "jtreg_before_sha256": "e5228286bfb5e1531e5a5ebcee02c44d134cb49f833dce2e867d65600775781d",
+  "jtreg_after_sha256": "ebe702139e903ac5fc4b3e1b6c6f0180a1c4fda7d6db9175532bf96979296aa5",
+  "manifest_hashes": {
+    "java": "bf3dbef1349d6a42b58e92103237917236c0242aa044ac1a23ea6939de69e5c8",
+    "text": "f302b4ccba8ca9bd6221a009dd5d140b4eb253604bed1e404e798ebae22dcf36"
+  },
+  "changed_payloads": [
+    {
+      "path": "test/jdk/java/lang/String/M3StringRegexDpTest.java",
+      "sha256": "ebe702139e903ac5fc4b3e1b6c6f0180a1c4fda7d6db9175532bf96979296aa5"
+    },
+    {
+      "path": "m3/runtime-integration/regex-mandatory-affixes/run_source_extracted_java21.py",
+      "sha256": "c37c699cf23dc460d8831252aafd069edd9245338ab0d62316c6ade66d1d0b12"
+    },
+    {
+      "path": "m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py",
+      "sha256": "5a22761bf63817b885bec21d1547d3ccc756c47990ed8958f45aa67b5c47ccdf"
+    },
+    {
+      "path": "m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py",
+      "sha256": "4ed634cf9d795b9d49416cc74e310c8056bb1f7e69c932f0ebc2e61fb6362ee3"
+    },
+    {
+      "path": "m3/runtime-integration/regex-required-ngrams/verify.py",
+      "sha256": "e3d537b3b3284588bc00a53915734551464d0dd9011dbe67571a2172b81a523b"
+    },
+    {
+      "path": "m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py",
+      "sha256": "6a9e531d39805d054eef9a228b8b7ca7d0d9b089f1d0e6a1922b576e1012bac5"
+    },
+    {
+      "path": "m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py",
+      "sha256": "f78316956a02ac9020709bc7e397d8c1fa0fcb141b545112d9717483b81d48bd"
+    }
+  ],
+  "payload_manifest_sha256": "f69da3f94ac9784ac2b0de2c4f59aa5fae7881b6f6a9514da7625656cda6f7f9",
+  "local_gate_sha256": "d201b2a9390518e7fa45a2a16d624367b9766a503b694028ca53e43fe108cea6",
+  "product_core_changes": false,
+  "runtime_status": "NEW_TEMPLATE_NOT_RUN; awaiting actual SDK emission"
+}

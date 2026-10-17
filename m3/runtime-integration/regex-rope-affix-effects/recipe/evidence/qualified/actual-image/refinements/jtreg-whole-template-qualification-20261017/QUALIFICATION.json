@@ -1,0 +1,76 @@
+{
+  "qualification": "recipe-input full proposed jtreg source on actual M3JDK; not an SDK-emitted test receipt",
+  "source_sha256": "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a",
+  "compiler_command": [
+    "/tmp/m3jdk21-product-build/images/jdk/bin/javac",
+    "-J-Xmx512m",
+    "-J-XX:ActiveProcessorCount=2",
+    "-Xlint:all",
+    "-Werror",
+    "-d",
+    "/workspace/scratch/edcb3bae74f7/regex-work/review/jtreg-whole-template-qualification-20261017/classes",
+    "/workspace/scratch/edcb3bae74f7/regex-work/affix/after/test/jdk/java/lang/String/M3StringRegexDpTest.java"
+  ],
+  "compiler_exit": 0,
+  "class_sha256": "890454d8cda49715c20693d57a76d01b0f793d7a2a6c6192084e295fb736801b",
+  "runs": [
+    {
+      "label": "compact",
+      "command": [
+        "/tmp/m3jdk21-product-build/images/jdk/bin/java",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "-Xcheck:jni",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/regex-work/review/jtreg-whole-template-qualification-20261017/classes",
+        "M3StringRegexDpTest"
+      ],
+      "exit_code": 0,
+      "seconds": 15.577,
+      "log_sha256": "256efc78776b169d72c27de17c6037913acc48736e83df04b867534d0c1bbf86"
+    },
+    {
+      "label": "utf16",
+      "command": [
+        "/tmp/m3jdk21-product-build/images/jdk/bin/java",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "-Xcheck:jni",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-XX:-CompactStrings",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/regex-work/review/jtreg-whole-template-qualification-20261017/classes",
+        "M3StringRegexDpTest"
+      ],
+      "exit_code": 0,
+      "seconds": 16.928,
+      "log_sha256": "256efc78776b169d72c27de17c6037913acc48736e83df04b867534d0c1bbf86"
+    },
+    {
+      "label": "interpreted",
+      "command": [
+        "/tmp/m3jdk21-product-build/images/jdk/bin/java",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "-Xcheck:jni",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-Xint",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/regex-work/review/jtreg-whole-template-qualification-20261017/classes",
+        "M3StringRegexDpTest"
+      ],
+      "exit_code": 0,
+      "seconds": 18.009,
+      "log_sha256": "256efc78776b169d72c27de17c6037913acc48736e83df04b867534d0c1bbf86"
+    }
+  ],
+  "all_passed": true,
+  "product_core_changes": false
+}

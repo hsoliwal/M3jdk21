@@ -1,0 +1,92 @@
+{
+  "m3/docs/name-mapping.json": {
+    "sha256": "8d7718e3ec2355d68d6376b53e457e5980d0ed12481c01902e4816f3c3fd17f1",
+    "bytes": 406171,
+    "mode": "0o644",
+    "mtime_ns": 1792231958999774693
+  },
+  "m3/runtime-integration/regex-mandatory-affixes/M3StringRegexDpBefore.java.txt": {
+    "sha256": "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e",
+    "bytes": 16627,
+    "mode": "0o644",
+    "mtime_ns": 1792231959001066365
+  },
+  "m3/runtime-integration/regex-mandatory-affixes/run_source_extracted_java21.py": {
+    "sha256": "1d839587649a18b7878fb8223a0d709ebc271e92788c0b1b72e3bd9d1e74031e",
+    "bytes": 5640,
+    "mode": "0o644",
+    "mtime_ns": 1792231959001147978
+  },
+  "m3/runtime-integration/regex-mandatory-affixes/src/test/java/RegexAffixBeforeAfter.java": {
+    "sha256": "1d877ccc82b40017ce938ef1cc648ebc932604b1b78f1121904d26757848056e",
+    "bytes": 15281,
+    "mode": "0o644",
+    "mtime_ns": 1792231959001337863
+  },
+  "m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py": {
+    "sha256": "bfbc14f8e849d9804d64d165fea8ad760c4dd12d9ece8dbcad0f2bb494bc0776",
+    "bytes": 7847,
+    "mode": "0o644",
+    "mtime_ns": 1792231959001488610
+  },
+  "m3/runtime-integration/regex-plan-amalgamation/src/test/java/RegexAmalgamationBeforeAfter.java": {
+    "sha256": "348364b288e183dd651d1f3258a5c582e92785348169814b53139d81b828744e",
+    "bytes": 10562,
+    "mode": "0o644",
+    "mtime_ns": 1792231959001799107
+  },
+  "m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py": {
+    "sha256": "6dcb444eff726312c3b6fd3c895a35c18d5890246a307ad01cd4e9b01f2d6f8c",
+    "bytes": 2039,
+    "mode": "0o644",
+    "mtime_ns": 1792231959001904835
+  },
+  "m3/runtime-integration/regex-required-ngrams/verify.py": {
+    "sha256": "29c55b3d02c8c86ecf0b281c4f24b6d25345b65d8bd8c27abfd4383b807da48e",
+    "bytes": 1792,
+    "mode": "0o644",
+    "mtime_ns": 1792231959001993949
+  },
+  "m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py": {
+    "sha256": "5b6451516c992c88b773e42bc2c2a37aebe062f4974443a2f08ba382f309adcd",
+    "bytes": 6223,
+    "mode": "0o644",
+    "mtime_ns": 1792231959002203635
+  },
+  "m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py": {
+    "sha256": "33cca9f8b476c8e923bc0cd17dbbbb6aba24dfd2209822503b2d3cd150f9708f",
+    "bytes": 1446,
+    "mode": "0o644",
+    "mtime_ns": 1792231959002294211
+  },
+  "src/java.base/share/classes/java/lang/M3StringRegexDp.java": {
+    "sha256": "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4",
+    "bytes": 19206,
+    "mode": "0o644",
+    "mtime_ns": 1792231959002426800
+  },
+  "src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java": {
+    "sha256": "44e60be49cee95ec53efa9eb809d0a463fb3bd217e3e22e8a1a7046c2c0b0b4e",
+    "bytes": 36941,
+    "mode": "0o644",
+    "mtime_ns": 1792231959002544277
+  },
+  "src/java.base/share/native/libjava/M3RegexDpPlan.c": {
+    "sha256": "b263d55dbcfa817c8b256d56995e389d6992b503f3a46bc5f1b075d82340605c",
+    "bytes": 26111,
+    "mode": "0o644",
+    "mtime_ns": 1792231959002747863
+  },
+  "test/jdk/java/lang/String/M3StringRegexDpTest.java": {
+    "sha256": "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a",
+    "bytes": 28076,
+    "mode": "0o644",
+    "mtime_ns": 1792231959002917017
+  },
+  "test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java": {
+    "sha256": "465e1002df44eb9453b3d6c45670af4b9a9de90e7fc746d9b82a2c85423be0ef",
+    "bytes": 22081,
+    "mode": "0o644",
+    "mtime_ns": 1792231959003038239
+  }
+}

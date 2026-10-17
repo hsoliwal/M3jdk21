@@ -1,0 +1,7 @@
+Directory "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work" not found: creating
+Directory "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/report" not found: creating
+Passed: java/lang/String/M3StringRegexDpTest.java
+Passed: java/lang/String/M3StringRegexPreparedBatchTest.java
+Test results: passed: 2
+Report written to /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/report/html/report.html
+Results written to /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work

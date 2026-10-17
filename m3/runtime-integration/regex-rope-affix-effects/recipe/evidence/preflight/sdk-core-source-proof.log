@@ -1,0 +1,8 @@
+Core DP and jtreg inputs are actual canonical SDK pilot outputs; proof driver and relocated test are recipe input templates.
+M3_REGEX_AFFIX_CURSOR_WORK scalar_reads=24 root_wrapper_reads=11 affix_units=24
+M3_REGEX_AFFIX_COLD_WORK suffix_failure=false text_units=2057 before_reads=2059 after_reads=3
+M3_REGEX_AFFIX_COLD_WORK suffix_failure=true text_units=2057 before_reads=2059 after_reads=6
+M3_REGEX_AFFIX_CACHE_PASS key_lanes=5 warm_text_reads=0
+M3_REGEX_AFFIX_RETAINED_PRIMITIVES before=600064 after=602624 maximum_delta=2560
+M3_REGEX_AFFIX_DIFFERENTIAL_PASS checks=47904
+M3_REGEX_AFFIX_EXTRACTED_JAVA_PASS full_class=true cursor_exact=true mock_owner=true matched_m3jdk=false

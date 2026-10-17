@@ -1,0 +1,14 @@
+test_current_ledger_is_classified_without_promoting_holds (__main__.StringCompletenessTest.test_current_ledger_is_classified_without_promoting_holds) ... ok
+test_empty_malformed_and_changed_header_refuse (__main__.StringCompletenessTest.test_empty_malformed_and_changed_header_refuse) ... ok
+test_existing_required_disposition_cannot_be_promoted (__main__.StringCompletenessTest.test_existing_required_disposition_cannot_be_promoted) ... ok
+test_existing_string_runtime_and_implemented_owner_checks_survive (__main__.StringCompletenessTest.test_existing_string_runtime_and_implemented_owner_checks_survive) ... ok
+test_hold_and_advisory_keep_scope_owner_retention_and_oracle (__main__.StringCompletenessTest.test_hold_and_advisory_keep_scope_owner_retention_and_oracle) ... ok
+test_hold_or_advisory_cannot_be_promoted_or_reclassified (__main__.StringCompletenessTest.test_hold_or_advisory_cannot_be_promoted_or_reclassified) ... ok
+test_missing_hold_advisory_or_existing_required_responsibility_refuses (__main__.StringCompletenessTest.test_missing_hold_advisory_or_existing_required_responsibility_refuses) ... ok
+test_special_status_cannot_exempt_an_unrelated_responsibility (__main__.StringCompletenessTest.test_special_status_cannot_exempt_an_unrelated_responsibility) ... ok
+test_unknown_status_duplicate_and_unfinished_rows_refuse (__main__.StringCompletenessTest.test_unknown_status_duplicate_and_unfinished_rows_refuse) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.017s
+
+OK

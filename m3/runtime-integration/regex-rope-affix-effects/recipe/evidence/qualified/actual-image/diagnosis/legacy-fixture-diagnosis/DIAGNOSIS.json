@@ -1,0 +1,43 @@
+{
+  "scope": "bounded diagnosis only; unchanged broader jtreg tests remain failed and unmodified",
+  "probe_sha256": "e47013976093b62b419e419f9748cbac9fbd787404adc27a4975e8bfb1d159c1",
+  "runs": [
+    {
+      "label": "stock",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "/workspace/scratch/edcb3bae74f7/regex-work/runtime/M3StringLegacyFixtureProbe.java"
+      ],
+      "exit_code": 0,
+      "seconds": 0.559
+    },
+    {
+      "label": "actual-m3",
+      "command": [
+        "/tmp/m3jdk21-product-build/images/jdk/bin/java",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "/workspace/scratch/edcb3bae74f7/regex-work/runtime/M3StringLegacyFixtureProbe.java",
+        "m3"
+      ],
+      "exit_code": 0,
+      "seconds": 12.461
+    }
+  ],
+  "preimage_dp_sha256": "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e",
+  "preimage_contains_legacy_field_names": {
+    "caches": false,
+    "RELATION_ACCESS": false
+  },
+  "unchanged_legacy_tests": {
+    "M3StringRegexEffectsTest.java": "0d32a1ba62a0efdbb79b8038f4cb55f61ed826c883be9cec246fb6337f0bd144",
+    "M3StringHierarchicalRegexTest.java": "1653c23098529c2fc9f7e66e1bfb5c5c2c97adc67c422b0e67cfbd7b5fb121fd",
+    "M3StringOwnerRangeLifetimeTest.java": "8712748bcacd7a748cbcd06ec9bfdf8853b8841669bab0f97c616b6d78495701",
+    "M3StringRegexRowPrecomputeTest.java": "471339afc2c7e1f61d58ae1564ac089158f037840981fd4bd338bd0669f92c7c"
+  }
+}

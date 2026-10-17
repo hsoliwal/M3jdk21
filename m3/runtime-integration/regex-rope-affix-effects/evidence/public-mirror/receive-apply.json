@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python3",
+    "/tmp/m3-publication/string/m3/runtime-integration/regex-rope-affix-effects/recipe/receive.py",
+    "--target",
+    "/tmp/m3-publication/string"
+  ],
+  "cwd": "/tmp/m3-publication/string/m3/runtime-integration/regex-rope-affix-effects/recipe",
+  "started_utc": "2026-10-17T10:39:38.204101+00:00",
+  "seconds": 0.186,
+  "exit_code": 0,
+  "log_sha256": "74bf5a9745347262578c3acb63a35f2d148d052528960b561c96c31a794ce251"
+}

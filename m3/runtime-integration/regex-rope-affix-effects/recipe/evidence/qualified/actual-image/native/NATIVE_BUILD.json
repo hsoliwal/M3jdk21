@@ -1,0 +1,55 @@
+{
+  "commands": [
+    {
+      "command": [
+        "cc",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-fPIC",
+        "-shared",
+        "-I/tmp/m3jdk21-product-build/images/jdk/include",
+        "-I/tmp/m3jdk21-product-build/images/jdk/include/linux",
+        "/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.c",
+        "-o",
+        "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native/libM3StringRegexNativeBridgeTest.so"
+      ],
+      "input_sha256": "8ee49ba30626238d8d3afb06efd48c9ca357767fe2c6d79ee2600fe5113038c7",
+      "exit_code": 0,
+      "seconds": 0.0501904070006276,
+      "stdout": "",
+      "stderr": "",
+      "library_sha256": "18de37e4440ea6633094e6c822c95be1372973bc7fcdf9163a74181f37b36620"
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-fPIC",
+        "-shared",
+        "-I/tmp/m3jdk21-product-build/images/jdk/include",
+        "-I/tmp/m3jdk21-product-build/images/jdk/include/linux",
+        "/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/util/regex/libM3PatternAsciiFrontierTest.c",
+        "-o",
+        "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native/libM3PatternAsciiFrontierTest.so"
+      ],
+      "input_sha256": "21910b084279f21c799c59d56e9194202ea60b3300a298ea7c5b24f6e7eab793",
+      "exit_code": 0,
+      "seconds": 0.09467842499998369,
+      "stdout": "",
+      "stderr": "",
+      "library_sha256": "28540364ad3169965ac72eb8c1a0c7ef6ec1f240322dc747c968bf1b2562834c"
+    }
+  ],
+  "headers": {
+    "include/jni.h": "99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61",
+    "include/linux/jni_md.h": "88cb5c33e306900dd35a78d5a439087123b8e91b0986bb5acb42cc9bd2fcc42e"
+  },
+  "product_native_recompiled": false
+}

@@ -1,0 +1,361 @@
+{
+  "schema": "M3_ROPE_AFFIX_EFFECTS_SDK_CONTRACT_V1",
+  "status": "PASS_WITH_BASELINE_HOLD",
+  "target": "/workspace/scratch/edcb3bae74f7/m3-string-review",
+  "crate": "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017",
+  "required_parent_baseline": "3bbb4712fb20adba1405741db8457164b9f436f5",
+  "java_home": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "javac_version": "javac 21.0.12.1",
+  "manifest_sha256": {
+    "java": "d05609ee1f486274c7e17380fe977b51050a1a3e1c2e5cdebe4f5df019db4903",
+    "text": "654f67f4ccfc86811d707c23d84514f08eb3dd4638e76df333816623c79b08cc"
+  },
+  "parent_inputs_sha256": "cfd27d7d001eda4da6053b07890ba1bfd7d3056790b325dea4e1a100c77cff5d",
+  "contract_script_sha256": "af519276af3be51422da3d89776f63d9dc628d23b8d592571b1b78bfc163b38e",
+  "sdk_input_binding_verified": true,
+  "required_parent_files": 58,
+  "required_parent_absences": 19,
+  "historical_rolling_source": {
+    "commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+    "sha256": "9a5d9511b996d780f26672e2f5dc6ccc0a2747fe33f0c5ef1a9c62629564a41e"
+  },
+  "target_input_states": {
+    ".github/workflows/mindex-string-backing.yml": "ed0f0e4a9577f85a88860df2e226eb010a8bb7b793fcd8201764329c981d25da",
+    "m3/docs/m3-runtime-invariants.tsv": "5270938b149fcadb11822d74b64542adb52fe3199cd9122b94e49392cdfbf764",
+    "m3/docs/string-precompute-completeness.tsv": "b97310ae64f6c1e83ccdc1248b38c079b3ee4388e3e1b2f10f98993601b2acba",
+    "m3/docs/synexia-mindex-precompute-inventory.tsv": "c3e56c00231293a33eb2bed34c08e9589cc57de993f6893ee9d42e99e123da49",
+    "m3/docs/synexia-string-precompute-port-map.tsv": "cae9e123a16e7e22c2c5805b36036a0467a4ae88c590b5738ce331f1575b0093",
+    "m3/docs/synexia-string-recipe-authority.tsv": "dc15157960339d85b61077c4018c9b430edad840db9011c074dd4abc0cea0579",
+    "m3/history/licenses/Synexia-Apache-2.0.txt": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+    "m3/history/string-literal-replacement-lineage.tsv": "1379950d5e4ca17f7b7ca00b8b8177689f7e7febaaf21698d370bb37cb32aa60",
+    "m3/history/string-literal-replacement-notice.md": "b2c56058fdcf1f4b4062cc301f6b95222908f294568f1c71e666fb2f2f3cf08a",
+    "m3/runtime-integration/check-m3string-codepoint-geometry.py": "0c8b82661315dcbd474a573730118bac4444e678db9e00a92adcd9f1721aa7b3",
+    "m3/runtime-integration/check-m3string-invariants.py": "fa88e6ee2b5903802a9463bec14133feb74a730009b08e722924064052afb10e",
+    "m3/runtime-integration/check-m3string-literal-matches.py": "9c40228dfee735fe8f1b34f4a2f4ae21eac42eba3338a3bedecbd5dacec250e0",
+    "m3/runtime-integration/check-m3string-regex-split-current.py": "e775822520f88f13cc1e164f1ac1980ec5874d9bccd2ffa1a414730f37fc7490",
+    "m3/runtime-integration/regex-jni-oracle/run-host-proof.sh": "f47dc2df4e0746d76a617fa5478336d38f6ad62c70ebb30f9b28d02c86cb70fc",
+    "m3/runtime-integration/regex-plan-amalgamation/M3StringRegexDpBefore.java.txt": "f875210dfb605799b6c8dbee53b28ad6383e000d90da775f7fd285464da7b2d3",
+    "m3/runtime-integration/regex-plan-amalgamation/RegexAmalgamationBeforeAfter.java": "aaf858f9ed2c22cff398b9b2d5cb19f9eb6b5a4e522e06b89d118200f066b62c",
+    "m3/runtime-integration/regex-rolling-cursor/RegexRollingBeforeAfter.java": "47ac8b58196af818e1ffb37b961f24117831b62907d1a9b4974c76d46e0636fd",
+    "m3/runtime-integration/regex-row-precompute/source-seals.tsv": "c6f2d89e83446bdec28877c31888f9f259b680fc140f9f752a8f460825881add",
+    "m3/runtime-integration/regex-row-precompute/verify.py": "f3b0c2c0fdb6179e7b237212909700a9c5c69e3bcc0f8d40a6784e1779021349",
+    "m3/runtime-integration/src/main/java/M3StringLayout.java": "939cb8b803f19a0ae96d435dfa8b52df64e6ef629269c95d7e663f25342af4df",
+    "m3/runtime-integration/src/main/java/M3StringReplacementRoutes.java": "098da0581258b416bbf7546aec9d0f3d2783643c69d122c460fa96d56b7e9475",
+    "m3/runtime-integration/test_string_completeness.py": "083e7b57a1ddec9b517668e742a69d8291b11de61450542165380f923cd19358",
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-history-convergence.yml": "ABSENT",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-history-convergence": "ABSENT",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence": "ABSENT",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3StringHistoryConvergenceRecipeTest.java": "ABSENT",
+    "src/hotspot/share/cds/archiveHeapWriter.cpp": "fa8ea0f123a27055fde22d303dab7db87dc6f93ec8c8ebc34748ac4e6df27cf1",
+    "src/hotspot/share/classfile/javaClasses.inline.hpp": "bbe505ccc6b5ab1482f0e0235284d625f0cc75181a7b0d418f2fb3c722d30cdf",
+    "src/hotspot/share/classfile/stringTable.cpp": "129f6153a28d738e5dd9de8e0975b73735a3c6268046ec7b71f3f69adb460178",
+    "src/hotspot/share/classfile/vmClassMacros.hpp": "e71ea245f54053fbdd099cc53f45dc4e2294d3d571e8412ccab2dbbc21f34a12",
+    "src/hotspot/share/classfile/vmSymbols.hpp": "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab",
+    "src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp": "558422c57828be5e0f8d3fbdead9ee4fa0ab9f8b504487baa9199ebfb2b2dcd8",
+    "src/hotspot/share/opto/stringopts.cpp": "a278409363087f891f36fba0fd4c9d7ad2aee4784cd445a655d7fd07305127cd",
+    "src/java.base/share/classes/java/lang/AbstractStringBuilder.java": "a5e7213ca951fab21d6db842804a8abd79e90f924ec672de6c4c455cdebb47d5",
+    "src/java.base/share/classes/java/lang/M3String.java": "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728",
+    "src/java.base/share/classes/java/lang/M3StringAtom.java": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f",
+    "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java": "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257",
+    "src/java.base/share/classes/java/lang/M3StringExactWeightPrecomputation.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringFacts.java": "d18122b42e9e4bcb76fd3e807467a59160e012d7ac249efe9cc71e5f6b8faa22",
+    "src/java.base/share/classes/java/lang/M3StringJoinedNativeSearch.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringLcpPrecompute.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringLiteralSearchSummary.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringLucenePostingPrecompute.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringMappedPrecomputation.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringOwner.java": "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74",
+    "src/java.base/share/classes/java/lang/M3StringPalindromePrecompute.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringPool.java": "b58c82047f795807ff32229146c370c9e596eff19942a92cd0128ce4987d20ca",
+    "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b",
+    "src/java.base/share/classes/java/lang/M3StringPrecomputedStrings.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringPrefixFrontier.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringPrefixZ.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringReasoningPrecompute.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringRegexRowPrecompute.java": "97c3e5299c825411f6832697b20a9ec699e1c1f79013b40835488d123417caae",
+    "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java": "edae3c8d3afbd7c1b78aa3f88a4d3fdcd6bd03c9f8ee2ace3044255b44f571ac",
+    "src/java.base/share/classes/java/lang/M3StringSuffixDecision.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringSuffixIndex.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringTuple.java": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9",
+    "src/java.base/share/classes/java/lang/M3StringTweetyPrecompute.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringUtf16SearchImage.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/String.java": "b7a074c6f366397847538b6b1bc6a5e5fecfb94809ab70fda40ef58406595b13",
+    "src/java.base/share/classes/java/util/regex/Matcher.java": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+    "src/java.base/share/classes/java/util/regex/Pattern.java": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+    "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+    "src/java.base/share/native/libjava/String.c": "ee9d9bfa986259600d6fe95e21e3cb904a4f6541ce24c6391bc50715c6a054ef",
+    "test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java": "1653c23098529c2fc9f7e66e1bfb5c5c2c97adc67c422b0e67cfbd7b5fb121fd",
+    "test/jdk/java/lang/String/M3StringRegexEffectsTest.java": "0d32a1ba62a0efdbb79b8038f4cb55f61ed826c883be9cec246fb6337f0bd144",
+    "test/jdk/java/lang/String/M3StringRegexHybridContractTest.java": "806f90780a65595e777e56fefd84e8bf2e6d052148f2ef16bf806d5126918b56",
+    "test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.c": "8ee49ba30626238d8d3afb06efd48c9ca357767fe2c6d79ee2600fe5113038c7",
+    "test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java": "27c4588e04d1ab87edc8504dc2b5cef1c842206c71d9ec76e2b23d3cdcd3454d",
+    "test/jdk/java/lang/String/M3StringRegexPowerTest.java": "6e21bea3572b356ffa4e084474c30cd04bb792c9e5fc4008c070d163fd7041ca",
+    "test/jdk/java/lang/String/M3StringRegexPrecomputeTest.java": "1e5a9951bbd68de82bfd7f1643371ec21cb8d92a32bdaf49c9a107f3ee8123bb",
+    "test/jdk/java/lang/String/M3StringRegexReplacementTest.java": "d92764e590b29cc3374005559ec39183982c2455c2fa3eb7f54b85e8b87d9c8c",
+    "test/jdk/java/lang/String/M3StringRegexReuseTest.java": "479d71bf49bcfc603c7fdbcbe560ccf6cfca2ef2a302b59de2046d6e42e16920",
+    "test/jdk/java/lang/String/M3StringRegexRowPrecomputeTest.java": "471339afc2c7e1f61d58ae1564ac089158f037840981fd4bd338bd0669f92c7c",
+    "test/jdk/java/lang/String/M3StringRegexSplitCurrentTest.java": "438cec2a6a1e52cf1dfa5042aad91d8f633b91581e7b88303d7bcc72418b6ded",
+    "test/jdk/java/lang/String/M3StringRegexSplitHistoryTest.java": "16396851e7fa70be96293189b0a432af5d96286239df75049b337dc5d6727629",
+    "test/jdk/java/lang/String/M3StringRegexUtf16Test.java": "9a5063f9fc11fe6e4950a33c6459e522995494598f6031695a432392190333fa",
+    "m3/runtime-integration/regex-mandatory-affixes/src/test/java/RegexAffixBeforeAfter.java": "ABSENT",
+    "m3/runtime-integration/regex-plan-amalgamation/src/test/java/RegexAmalgamationBeforeAfter.java": "ABSENT",
+    "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java": "ee74718496b22d89c4714dcde0bb0ff12f48cb5179f91a1c2042e27cfecb9578",
+    "test/jdk/java/lang/String/M3StringRegexDpTest.java": "971290714bb056831ad844288e66562f88fa87fbf0c4cd17fa0716f9df797ffc",
+    "test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java": "ABSENT",
+    "m3/docs/name-mapping.json": "68aabd2a68a77db82214355d35387a9fe4184112c2defc3911600c7b356c0d9c",
+    "m3/runtime-integration/regex-mandatory-affixes/M3StringRegexDpBefore.java.txt": "ABSENT",
+    "m3/runtime-integration/regex-mandatory-affixes/run_source_extracted_java21.py": "ABSENT",
+    "m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py": "12ab6fa3966e063b3b11446bcfe76e5c8407490bb904b390a1a326171a6dc601",
+    "m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py": "f8eca30c5ce4e5dc8d6e7af16582016191e46e79089682b3e8d761903337637f",
+    "m3/runtime-integration/regex-required-ngrams/verify.py": "7a05cec8d5fd1e97b16bfc60bdee6df471d3c68eec3155a14ec342b1f1a232d8",
+    "m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py": "653643e72f0f767bce353d1dbce3648577c8d9d5fea58fa69fd41210a5ce5ef7",
+    "m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py": "c993f54563e6b492d55fa25334f53ecb0d8894115a0f4f70d10d760d80b289b4",
+    "src/java.base/share/native/libjava/M3RegexDpPlan.c": "77f58524b0ae73671b6f33cdf1a5dcc9e546deef7f7350b0df2f661f693f75e7"
+  },
+  "actual_sdk_generated_files": {
+    "m3/runtime-integration/regex-mandatory-affixes/src/test/java/RegexAffixBeforeAfter.java": "1d877ccc82b40017ce938ef1cc648ebc932604b1b78f1121904d26757848056e",
+    "m3/runtime-integration/regex-plan-amalgamation/src/test/java/RegexAmalgamationBeforeAfter.java": "348364b288e183dd651d1f3258a5c582e92785348169814b53139d81b828744e",
+    "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java": "44e60be49cee95ec53efa9eb809d0a463fb3bd217e3e22e8a1a7046c2c0b0b4e",
+    "test/jdk/java/lang/String/M3StringRegexDpTest.java": "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a",
+    "test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java": "465e1002df44eb9453b3d6c45670af4b9a9de90e7fc746d9b82a2c85423be0ef",
+    "m3/docs/name-mapping.json": "8d7718e3ec2355d68d6376b53e457e5980d0ed12481c01902e4816f3c3fd17f1",
+    "m3/runtime-integration/regex-mandatory-affixes/M3StringRegexDpBefore.java.txt": "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e",
+    "m3/runtime-integration/regex-mandatory-affixes/run_source_extracted_java21.py": "1d839587649a18b7878fb8223a0d709ebc271e92788c0b1b72e3bd9d1e74031e",
+    "m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py": "bfbc14f8e849d9804d64d165fea8ad760c4dd12d9ece8dbcad0f2bb494bc0776",
+    "m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py": "6dcb444eff726312c3b6fd3c895a35c18d5890246a307ad01cd4e9b01f2d6f8c",
+    "m3/runtime-integration/regex-required-ngrams/verify.py": "29c55b3d02c8c86ecf0b281c4f24b6d25345b65d8bd8c27abfd4383b807da48e",
+    "m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py": "5b6451516c992c88b773e42bc2c2a37aebe062f4974443a2f08ba382f309adcd",
+    "m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py": "33cca9f8b476c8e923bc0cd17dbbbb6aba24dfd2209822503b2d3cd150f9708f",
+    "src/java.base/share/native/libjava/M3RegexDpPlan.c": "b263d55dbcfa817c8b256d56995e389d6992b503f3a46bc5f1b075d82340605c"
+  },
+  "commands": [
+    {
+      "label": "affix-complete-source-before-after",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/regex-mandatory-affixes/run_source_extracted_java21.py",
+        "--source-root",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay",
+        "--candidate-root",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay",
+        "--java-home",
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1"
+      ],
+      "exit_code": 0,
+      "seconds": 1.5136,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "retained-amalgamation-source-seal",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0414,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "retained-required-grams-source-seal",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/regex-required-ngrams/verify.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0327,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "retained-rolling-source-seal",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0438,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "retained-amalgamation-before-after",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.6863,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "retained-row-precompute",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/regex-row-precompute/verify.py"
+      ],
+      "exit_code": 0,
+      "seconds": 2.3929,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "retained-literal-matches",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/check-m3string-literal-matches.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0315,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "retained-regex-split",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/check-m3string-regex-split-current.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0307,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "retained-codepoint-geometry",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/check-m3string-codepoint-geometry.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.025,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "retained-rolling-before-after",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.6852,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "retained-native-utf16-oracle",
+      "command": [
+        "bash",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/regex-jni-oracle/run-host-proof.sh"
+      ],
+      "exit_code": 0,
+      "seconds": 2.4827,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "retained-ledger-refusals",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/test_string_completeness.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0636,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "strict-retained-regex-jtreg-compile",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/build/retained-jtreg",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringRegexDpTest.java",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringRegexEffectsTest.java",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringRegexHybridContractTest.java",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringRegexPowerTest.java",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringRegexPrecomputeTest.java",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringRegexReuseTest.java",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringRegexRowPrecomputeTest.java",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringRegexSplitCurrentTest.java",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringRegexSplitHistoryTest.java",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringRegexUtf16Test.java",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2823,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "prepared-effects-java-jni-contract",
+      "command": [
+        "bash",
+        "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017/contract/batch/qualify.sh",
+        "--target",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay",
+        "--crate",
+        "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017",
+        "--output",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/prepared-effects"
+      ],
+      "exit_code": 0,
+      "seconds": 6.0309,
+      "expectation": "PASS",
+      "accepted": true
+    },
+    {
+      "label": "baseline-full-string-invariant",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/baseline/m3/runtime-integration/check-m3string-invariants.py"
+      ],
+      "exit_code": 1,
+      "seconds": 1.6392,
+      "expectation": "EXACT_BASELINE_HOLD",
+      "accepted": true
+    },
+    {
+      "label": "candidate-full-string-invariant",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/regex-work/final-sdk-contract-v4/overlay/m3/runtime-integration/check-m3string-invariants.py"
+      ],
+      "exit_code": 1,
+      "seconds": 1.6674,
+      "expectation": "EXACT_BASELINE_HOLD",
+      "accepted": true
+    }
+  ],
+  "baseline_holds": [
+    {
+      "gate": "full-string-source-invariant",
+      "status": "UNCHANGED_BASELINE_FAILURE",
+      "baseline_commit": "3bbb4712fb20adba1405741db8457164b9f436f5",
+      "diagnostic": "M3_STRING_INVARIANT_FAIL: M3 adaptive BMH/KMP convergence missing: skip256[pattern.charAt(index) & 255] = length - 1 - index;",
+      "candidate_failure_identical": true,
+      "full_string_stage_accepted": false
+    }
+  ],
+  "target_files_written": false,
+  "scope": {
+    "source_extracted_affixes": true,
+    "stock_jdk21_jni": true,
+    "matched_m3jdk_image": false,
+    "cuda_kernel_device": "NOT_RUN",
+    "product_throughput": "NOT_RUN",
+    "full_string_stage_accepted": false
+  }
+}

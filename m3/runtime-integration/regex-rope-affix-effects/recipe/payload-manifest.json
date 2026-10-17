@@ -1,0 +1,115 @@
+{
+  "target_preimage_commit": "3bbb4712fb20adba1405741db8457164b9f436f5",
+  "canonical_recipe_owner": "hsoliwal/com.synexia",
+  "canonical_source_reviewed_commit": "11c94feb18155a53cc213708c353791132edc4a7",
+  "mode": "RECIPE_INPUT_ONLY",
+  "files": [
+    {
+      "path": "m3/runtime-integration/regex-mandatory-affixes/M3StringRegexDpBefore.java.txt",
+      "before_sha256": null,
+      "before_git_blob": null,
+      "after_sha256": "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e",
+      "after_git_blob": "90f61b4649858af48dbaf48f06016389e55e2014",
+      "bytes": 16627,
+      "new_file": true
+    },
+    {
+      "path": "m3/runtime-integration/regex-mandatory-affixes/run_source_extracted_java21.py",
+      "before_sha256": null,
+      "before_git_blob": null,
+      "after_sha256": "1d839587649a18b7878fb8223a0d709ebc271e92788c0b1b72e3bd9d1e74031e",
+      "after_git_blob": "cdfc20a03726482add55d4b41d2cb88602c02bd9",
+      "bytes": 5640,
+      "new_file": true
+    },
+    {
+      "path": "m3/runtime-integration/regex-mandatory-affixes/src/test/java/RegexAffixBeforeAfter.java",
+      "before_sha256": null,
+      "before_git_blob": null,
+      "after_sha256": "1d877ccc82b40017ce938ef1cc648ebc932604b1b78f1121904d26757848056e",
+      "after_git_blob": "a11c77ea82a01f20f88f25419b01d030c308fda3",
+      "bytes": 15281,
+      "new_file": true
+    },
+    {
+      "path": "m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py",
+      "before_sha256": "12ab6fa3966e063b3b11446bcfe76e5c8407490bb904b390a1a326171a6dc601",
+      "before_git_blob": "d8a3a12a14fd281075f6bbe7420bfba8cba25571",
+      "after_sha256": "bfbc14f8e849d9804d64d165fea8ad760c4dd12d9ece8dbcad0f2bb494bc0776",
+      "after_git_blob": "ad2bf9acf187a27eeda58e867388a21e7e637ff9",
+      "bytes": 7847,
+      "new_file": false
+    },
+    {
+      "path": "m3/runtime-integration/regex-plan-amalgamation/src/test/java/RegexAmalgamationBeforeAfter.java",
+      "before_sha256": null,
+      "before_git_blob": null,
+      "after_sha256": "348364b288e183dd651d1f3258a5c582e92785348169814b53139d81b828744e",
+      "after_git_blob": "f51538bdcc835a48b3affe83a929df87055369dd",
+      "bytes": 10562,
+      "new_file": true
+    },
+    {
+      "path": "m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py",
+      "before_sha256": "f8eca30c5ce4e5dc8d6e7af16582016191e46e79089682b3e8d761903337637f",
+      "before_git_blob": "8894248e46e98d6a347af3ee17243483a081c52b",
+      "after_sha256": "6dcb444eff726312c3b6fd3c895a35c18d5890246a307ad01cd4e9b01f2d6f8c",
+      "after_git_blob": "d993c85a92c26698dfdec9d8cc76df802a468d12",
+      "bytes": 2039,
+      "new_file": false
+    },
+    {
+      "path": "m3/runtime-integration/regex-required-ngrams/verify.py",
+      "before_sha256": "7a05cec8d5fd1e97b16bfc60bdee6df471d3c68eec3155a14ec342b1f1a232d8",
+      "before_git_blob": "05d08f2271a4dda8ac21b8ee259af3cda2373335",
+      "after_sha256": "29c55b3d02c8c86ecf0b281c4f24b6d25345b65d8bd8c27abfd4383b807da48e",
+      "after_git_blob": "06c92556ddaea93cfcd57ed5e71845ab042960cc",
+      "bytes": 1792,
+      "new_file": false
+    },
+    {
+      "path": "m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py",
+      "before_sha256": "653643e72f0f767bce353d1dbce3648577c8d9d5fea58fa69fd41210a5ce5ef7",
+      "before_git_blob": "8ed8ac5c599ec5facf289ee7e15d7a2d82e06b62",
+      "after_sha256": "5b6451516c992c88b773e42bc2c2a37aebe062f4974443a2f08ba382f309adcd",
+      "after_git_blob": "aaf50ea06ad20ca5b88cba9291a788640807815b",
+      "bytes": 6223,
+      "new_file": false
+    },
+    {
+      "path": "m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py",
+      "before_sha256": "c993f54563e6b492d55fa25334f53ecb0d8894115a0f4f70d10d760d80b289b4",
+      "before_git_blob": "7122bf2b86d640b55d082e902a6a1e5bc03a2531",
+      "after_sha256": "33cca9f8b476c8e923bc0cd17dbbbb6aba24dfd2209822503b2d3cd150f9708f",
+      "after_git_blob": "3be246c87f1196a8554ef4a26a2b0cac6dc351b7",
+      "bytes": 1446,
+      "new_file": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+      "before_sha256": "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e",
+      "before_git_blob": "90f61b4649858af48dbaf48f06016389e55e2014",
+      "after_sha256": "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4",
+      "after_git_blob": "c629731534df9a81c6f297e48e83faeb6ae42ded",
+      "bytes": 19206,
+      "new_file": false
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringRegexDpTest.java",
+      "before_sha256": "971290714bb056831ad844288e66562f88fa87fbf0c4cd17fa0716f9df797ffc",
+      "before_git_blob": "8cb8891163b86e8a195aa95e86313f74e3b48f0c",
+      "after_sha256": "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a",
+      "after_git_blob": "a88f7461b49365ce1bf98857bb0cd7acaf7e8c15",
+      "bytes": 28076,
+      "new_file": false
+    }
+  ],
+  "preserved_historical_files": [
+    {
+      "path": "m3/runtime-integration/regex-plan-amalgamation/RegexAmalgamationBeforeAfter.java",
+      "sha256": "aaf858f9ed2c22cff398b9b2d5cb19f9eb6b5a4e522e06b89d118200f066b62c",
+      "git_blob": "19ec19dc03d18f6fe5eed709751ef46a51c6a78c",
+      "target_action": "UNCHANGED"
+    }
+  ]
+}

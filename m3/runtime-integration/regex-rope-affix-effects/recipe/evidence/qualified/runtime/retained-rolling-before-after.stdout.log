@@ -1,0 +1,8 @@
+M3_REGEX_ROLLING_AB_RESULT case=flat-768 before_ns=84160.544 after_ns=71972.984 speedup=1.169x change_pct=-14.48% samples=7 iterations=125 simulated_owner=true
+M3_REGEX_ROLLING_AB_RAW case=flat-768 before=[5192853, 5517210, 5447936, 11153839, 11032728, 10520068, 10546078] after=[4825933, 5046033, 4810539, 14689602, 9534991, 9557274, 8996623]
+M3_REGEX_ROLLING_AB_RESULT case=tuple-dag-768 before_ns=96327.328 after_ns=60302.784 speedup=1.597x change_pct=-37.40% samples=7 iterations=125 simulated_owner=true
+M3_REGEX_ROLLING_AB_RAW case=tuple-dag-768 before=[12043795, 12040916, 7963551, 10697455, 11730516, 14425971, 13685729] after=[5729529, 6147667, 7129771, 7537848, 10254450, 10504475, 10845587]
+M3_REGEX_ROLLING_AB_RESULT case=sliced-tuple-766 before_ns=64624.304 after_ns=44696.360 speedup=1.446x change_pct=-30.84% samples=7 iterations=125 simulated_owner=true
+M3_REGEX_ROLLING_AB_RAW case=sliced-tuple-766 before=[10761901, 11381341, 7907478, 7828700, 7663953, 8078038, 8138885] after=[9330964, 10997345, 5317470, 5587045, 5349999, 5487155, 5593425]
+M3_REGEX_ROLLING_DIFFERENTIAL_PASS checks=15601
+M3_REGEX_ROLLING_EXACT_JAVA_PASS source_extracted=true simulated_owner=true matched_m3jdk=false

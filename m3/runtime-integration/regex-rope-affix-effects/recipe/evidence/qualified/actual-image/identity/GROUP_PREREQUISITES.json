@@ -1,0 +1,1575 @@
+{
+  "revision": "3bbb4712fb20adba1405741db8457164b9f436f5",
+  "cause": "jtreg validates all TEST.groups entries before explicit file selection",
+  "scope": "exact referenced blobs; unselected directory structure only, not full group contents",
+  "entries": {
+    "test/jdk/build": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "df56253526b41c6d143600f3fcb6b5e02b7600e7"
+    },
+    "test/jdk/com/apple/eawt": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "5693cd56f8d3fbe6e026cacadd320e027f8e385a"
+    },
+    "test/jdk/com/apple/laf": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "3796cc9b86854010d3370d7e45f8902cd20750d1"
+    },
+    "test/jdk/com/sun/crypto": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "05d0ea507911be0680232d2ce86d49a3b46959fb"
+    },
+    "test/jdk/com/sun/crypto/provider/Cipher": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "29275b9d2be19aedfd517d6c8c760199961dd6e6"
+    },
+    "test/jdk/com/sun/crypto/provider/Cipher/AEAD/GCMIncrementByte4.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "1a92e0f4249e1269be5c16324239c72625a55c95",
+      "sha256": "36d2be4c3fb4bcac9225d399db6a168e3cb895264198284fe76b8e0203c5c67c"
+    },
+    "test/jdk/com/sun/crypto/provider/Cipher/AEAD/GCMIncrementDirect4.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "1aac884bfb708d74c8580296055038b13bbcd796",
+      "sha256": "694a8249f4e49e274956578609357ed369a3aa71ef2056875356a698c720e390"
+    },
+    "test/jdk/com/sun/crypto/provider/Cipher/DES/PerformanceTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "698acd083b4c9855c63070d6b1f7cd3f76331939",
+      "sha256": "761cd53d181f37637fa08d306d7f943bc3af8adc3a5214a7bfaec768fab7ab0f"
+    },
+    "test/jdk/com/sun/java/accessibility": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "08dbddd1b5cb7dafbb21d78a4935ac727b7e1c18"
+    },
+    "test/jdk/com/sun/java/swing": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "2cdaf1147a979d08b6d2e4005800470cc937439f"
+    },
+    "test/jdk/com/sun/jdi": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "cae84f4f9f04a63a41f6512d9f47425410f3ba40"
+    },
+    "test/jdk/com/sun/jdi/AcceptTimeout.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "d9479d521294ed3ccae07fc9786e1e241e51b3ac",
+      "sha256": "ed5a7e59ab9ff4a7bb4b9d51d31ff5935d925c73aab02f18c2885099d047313b"
+    },
+    "test/jdk/com/sun/jdi/AccessSpecifierTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "1c4df30bb56de48787f96ac24e909df009dae003",
+      "sha256": "e2a20e71dfff08e7d8be7338ea60669fee88d9cce75dcd17a76da865aad43f19"
+    },
+    "test/jdk/com/sun/jdi/AfterThreadDeathTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "61435a64a61cb8c2587f4f86e4bf5b1029f4161c",
+      "sha256": "0422d38f1f82730529d4c0d896351f74d42a621dd98f205c8d32a817f76a3a89"
+    },
+    "test/jdk/com/sun/jdi/ArrayRangeTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "aa86011b1656af35c7b79a0d4c677e72a204736e",
+      "sha256": "2c8d8d58e3d10f763c0eef394f45079a7576fa74f27b2b57040065c244447a0b"
+    },
+    "test/jdk/com/sun/jdi/ConstantPoolInfo.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "5d5c2a6a5d9b6ebce7635ee781612d4ae594e68d",
+      "sha256": "9d2e1f1b3c1d689a62e06d110ae935cd77babf5f912d4f83c4b730a6b0b6facf"
+    },
+    "test/jdk/com/sun/jdi/CountFilterTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "681a765eca5363c96b5a1c1718fc6371082d8ca9",
+      "sha256": "e17dcea05653bfcebfb478baf89019d88194ad7aecd7e152006c06a0984373d5"
+    },
+    "test/jdk/com/sun/jdi/EarlyReturnNegativeTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "16d35d39a9122de9a9a1dbbd5bd74050da8dbfef",
+      "sha256": "19d5534e2d7cfe3970ed154ae2b8252a9a16a36542f7847664b65bdd3ec7950a"
+    },
+    "test/jdk/com/sun/jdi/EarlyReturnTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "6a31332681c79b231e5356050a882edf7e7ba18f",
+      "sha256": "d13a96a91a8e641a67c32c8775d268c360153c4febe59eea846e63c425991ff1"
+    },
+    "test/jdk/com/sun/jdi/FieldWatchpoints.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "60ee10180218d27e63ab59348e4c25f5c37b5c85",
+      "sha256": "0ca2255a5c77f35ef005eb04d775917a1d176779126db0a6ce82b0580eb9a88b"
+    },
+    "test/jdk/com/sun/jdi/FramesTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "b60e7253e47447d4cd9d375cd8071e01239ef60c",
+      "sha256": "a20fd2d159420bc14b2050f899d3da3c80cf1542ceba6e2725afe3c529960cfd"
+    },
+    "test/jdk/com/sun/jdi/InstanceFilter.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "9514779cf5b9911a61198d3044eea9fc29db7c00",
+      "sha256": "78a429a1f3926abcae3e4042c79cf6853b7724776352f80ecbe54bf1341467d5"
+    },
+    "test/jdk/com/sun/jdi/InterfaceMethodsTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "163235b42e229a9e0a366f0b584b4ef9bd95f182",
+      "sha256": "c3a370ecfcdc5e08d11134dc5499af7d4f62b9b725b135dcd360e57252020c7d"
+    },
+    "test/jdk/com/sun/jdi/InvokeTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "a97d3cbe2c6d67bc649f291ab23ca288de70555a",
+      "sha256": "bd72e3c527b8d1663ececaadae8bc9e43d99964288a6e2e1b5f3729a186914d6"
+    },
+    "test/jdk/com/sun/jdi/LocalVariableEqual.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "7663bfaad0e13f512b8bc1b145af1b3d5153b7cf",
+      "sha256": "244c4f66678cbcd424e56f92e2d34015c38c0798d22e60dfa6432bbdea8e31e6"
+    },
+    "test/jdk/com/sun/jdi/LocationTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "64b91a660cdf6dbaecb266151ee2868d135faf50",
+      "sha256": "9997547926f201c6c454d6e924ac1207609a2caa8135e20394fd2f5c208155a2"
+    },
+    "test/jdk/com/sun/jdi/ModificationWatchpoints.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "4c31e5474e14dd13c3f43e7c5aec48e215747773",
+      "sha256": "642a968a79bd08413ad301afe0cfe338e3be40bcb5a12da12d9c835c5cd168e5"
+    },
+    "test/jdk/com/sun/jdi/MonitorEventTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "66e65937230753a3f77107c91966278dfb3b4cb7",
+      "sha256": "2593d4a8c390084c63fa7490b8b304c7d90e9d1b35894838fdf95014a34adab5"
+    },
+    "test/jdk/com/sun/jdi/MonitorFrameInfo.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "7b76e9ca4aac11a498785c026df12dee866fd639",
+      "sha256": "45e4552eae69a8112b881d73a87fdc23f155a33eb44df7c24cf25f1d90424a32"
+    },
+    "test/jdk/com/sun/jdi/NullThreadGroupNameTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "dbc18ec5e77c7c965795f517e8c8e30d4abbea3f",
+      "sha256": "53f4f4123a52f213dfdc9de2caf2ad1e42a3e18843e74b11a8daac554f789272"
+    },
+    "test/jdk/com/sun/jdi/PopAndStepTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "598a78bf34c5de93013c6f2d51cc958b89b0e76e",
+      "sha256": "0947f226b622735f155de02cf547d6004a13b829be2b4556258f9734fa49d399"
+    },
+    "test/jdk/com/sun/jdi/PopAsynchronousTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "4431bfc60c612a39924c0583ad912e62ef09b1c1",
+      "sha256": "7eb5f1075ad996247c3049b9f9e783a0bd68982dfd372e0d189d22f4f0353524"
+    },
+    "test/jdk/com/sun/jdi/ProcessAttachTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "8cccb1e2be3460a15c49b5d155938657cb6a2b58",
+      "sha256": "0d400334202dc4471e30d4e3ffbbac55f4c504eee7c741c6ba22315e9e8d98e5"
+    },
+    "test/jdk/com/sun/jdi/ReferrersTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "385292061b697c9b930f31a9aaee10b41a214802",
+      "sha256": "e4789243e8acb68fd43889af9d769e354c704c00ea298909a36cfa98e71f8dc9"
+    },
+    "test/jdk/com/sun/jdi/RequestReflectionTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "7983b87e38706963fb34ad60262adc3bd273c99c",
+      "sha256": "a8aea606664915d8b83d148bdc3a5e3ad7b4995f9c4b6168da39f9e03a351c1d"
+    },
+    "test/jdk/com/sun/jdi/ResumeOneThreadTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "8b724aba30c9c3dac66ea0a8e91e8521f8d2956a",
+      "sha256": "acd9e802904bd7b103e6baa6413d575e2902b44d90633b203fed71aaef17743b"
+    },
+    "test/jdk/com/sun/jdi/RunToExit.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "d5fd5d2b6f758be4ded9ef870c4f924616d3ab16",
+      "sha256": "ba591cac0681bd3a211e50a900dbf1daee9ac0b55299f51a79a2353a2c41191b"
+    },
+    "test/jdk/com/sun/jdi/SourceNameFilterTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "ec5d097f562747c4861868bb8cc7ed32c1b4b5f3",
+      "sha256": "070c2b30babb675f3cd34995e7f716e6b84bba6a9c3652fbd77a29a42e3f6a2f"
+    },
+    "test/jdk/com/sun/jdi/SuspendAfterDeath.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "652405a94bb1d26a11215c2b748d921f29c54c40",
+      "sha256": "2aafed4b9166bc42acdc9128b3dbb6396a70556161294d543072cbea509e2980"
+    },
+    "test/jdk/com/sun/jdi/VarargsTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "5f8e0341cf71e8e318f45e2ec653cb211e6935e1",
+      "sha256": "4058de7cca360e3c61dcbf40882399ab02d7d8372f2ba2f02947ace6144a819a"
+    },
+    "test/jdk/com/sun/jdi/Vars.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "d59d47984b6100161c1510f2cfe6060aeee61e1a",
+      "sha256": "d360718166b07e8e077147f95c24351b5b915541eaffe0281e0a73d0f7adcd87"
+    },
+    "test/jdk/com/sun/jdi/redefineMethod/RedefineTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "6863586c9e72b1c189a95ff7915d8c86f0ddc328",
+      "sha256": "51984b63d0a244ad90fc44639f2b85c680e1c1ea466cd1204077cc2f99485a21"
+    },
+    "test/jdk/com/sun/jdi/sde/MangleTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "301bef0d59f2802e776a34c0a9a2d6848ccb0e1d",
+      "sha256": "ff26a9c00fcd876bc12a96d8bd3e6f78dcb33b42a1250cde129060ea32e4c2b4"
+    },
+    "test/jdk/com/sun/jdi/sde/TemperatureTableTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "36c3e71c35fc188a434afc0f2ab6b09adc3cbaea",
+      "sha256": "82a27afea700a72980b211c3cc83fc0737ec4ed3613401b75dc249d864f9e77d"
+    },
+    "test/jdk/com/sun/jmx": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "54c26847f5080895624043f93a973aa34d72e5b5"
+    },
+    "test/jdk/com/sun/jndi": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "81c9c3bdba72e893ee507392ea66a9a0357b5c7e"
+    },
+    "test/jdk/com/sun/jndi/dns/Test6991580.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "11c7a1d0ea76ae4c14d5efc416cfd47b98acf76d",
+      "sha256": "226cc95533c3021642f51f236a371af38a0aeaef454f3fcf2545c44938036b06"
+    },
+    "test/jdk/com/sun/management": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "d912ac219ac015b60c894d28d6a9cb2bb942e4ce"
+    },
+    "test/jdk/com/sun/management/HotSpotDiagnosticMXBean": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "002a9fca9957bfb3fb3b7cf89e02cc7eee3190a8"
+    },
+    "test/jdk/com/sun/management/ThreadMXBean": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "a505070d8c7715f2bf31e0c0f06a4e8fb07f8ab9"
+    },
+    "test/jdk/com/sun/net/httpserver": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "77d328be6563fdc9afda00027280fd451fb6d2af"
+    },
+    "test/jdk/com/sun/net/httpserver/simpleserver/CommandLinePortNotSpecifiedTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "ba414a9d0c1ac6f2fb2a8f9f42099ffeebe5a346",
+      "sha256": "6cff0f8d2baed6bdaea0d3b81438ab526b354662546f707ce41721a76e73e310"
+    },
+    "test/jdk/com/sun/net/httpserver/simpleserver/jwebserver/CommandLinePortNotSpecifiedTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "4d850442b25e4580919f68fa2d356f6a499b5af8",
+      "sha256": "5de3748a6e9303d04a093c5403b0f3edd444d8858278d59f3be776a46ee12a44"
+    },
+    "test/jdk/com/sun/nio/sctp": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "3e17ef37b5ed14d7ab7d11bccc2b524e25f8793c"
+    },
+    "test/jdk/com/sun/org/apache/xml/internal/security": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ca8a45f3d5f4a2219b25dfd87ddaea813a7cc1ec"
+    },
+    "test/jdk/com/sun/security": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ed6a830f4825cf06dbd1f4e78dceed1db6410624"
+    },
+    "test/jdk/com/sun/security/auth/callback/TextCallbackHandler/Default.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "606a1ad5e0e1a98b987ba0f8007f36ef9a63cbe7",
+      "sha256": "ecf1c220537ebb3100243b73561d2e4a519b2a2a51aeb5f7282938a558b4f45f"
+    },
+    "test/jdk/com/sun/security/auth/callback/TextCallbackHandler/Password.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "b34ef0435586731ae978228d0d973e4760f755d3",
+      "sha256": "f6dd21e652bbfd7c6df5cc74a82c21a55bc42b8e8eb04f3fffb67ad488a3602d"
+    },
+    "test/jdk/com/sun/security/jgss": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "f9a2dc3981caa91376db4884b2e995dffdb36f38"
+    },
+    "test/jdk/com/sun/security/sasl/gsskerb/AuthOnly.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "c8e906d0ac11490fdf5b8a13b794b3174c2885ec",
+      "sha256": "2e537628c480fae6d72d8ab820eb0477035f2d8e5e520c41654c117b600c18f7"
+    },
+    "test/jdk/com/sun/security/sasl/gsskerb/ConfSecurityLayer.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "8a699a5920d07482b0bb86a434ad6117b6539c55",
+      "sha256": "bfd7e0448f1329f9541f13041038baac958b54f3907ca7597002d726606de9ff"
+    },
+    "test/jdk/com/sun/security/sasl/gsskerb/NoSecurityLayer.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "45d7d1fc1fb553673b3351f3ba5d139536400eb7",
+      "sha256": "49415919dd94a309ac84e7fe37b053d8dfc7fd6c10661999a53e134a0c70bbb0"
+    },
+    "test/jdk/com/sun/tools/attach": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "d5621215ede5e1e4e3a38a717b62d4c44b7825f8"
+    },
+    "test/jdk/demo/jfc": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "77fc0846e646b39734ee9cab1333e35426cb2620"
+    },
+    "test/jdk/java/awt": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "08d4811febb18906b0faeb367ded8406db8f5371"
+    },
+    "test/jdk/java/awt/Component": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "2f75719fcbdb0debb7543bf3bea917ec9c38f4dd"
+    },
+    "test/jdk/java/awt/Modal": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "53249b69a29fde6711f84af147c9625c8e4edbc2"
+    },
+    "test/jdk/java/awt/Window": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "1478a620ffddec0ca80f26712f86f6890693221a"
+    },
+    "test/jdk/java/awt/datatransfer": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "de9a959dfd66c050c8f503c14aa41d6b8fbcb0df"
+    },
+    "test/jdk/java/awt/print": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "6f7b5ebbd6be455af0f82b539eaa475ea44f34e8"
+    },
+    "test/jdk/java/beans": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "bbd73ca4a8e360e45588c7762b06ffe67f8ffe15"
+    },
+    "test/jdk/java/foreign": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "86983c292da6364468c939ab040a6305538d182e"
+    },
+    "test/jdk/java/foreign/TestMatrix.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "6620e0a81d7fd7145a6e590f0c183065b78ac77b",
+      "sha256": "52ec81a6f5225ee7851d477dee598c6501ce36c572f76b5e34e90c41ab36a26d"
+    },
+    "test/jdk/java/io": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ae4bde359af7f11df4eb5744d195f37865d41cfe"
+    },
+    "test/jdk/java/lang/Thread": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "b2b3900ebd39d9fe0a9e7d826f6120817525979d"
+    },
+    "test/jdk/java/lang/ThreadGroup": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "743bca4475f6a20341ea8c0d6f3698370b099ec0"
+    },
+    "test/jdk/java/lang/instrument": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "4a932a2ec11d3239c012300d68207ede17d74626"
+    },
+    "test/jdk/java/lang/management": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "f21a95a0408b2b9311ee8070035ebb51068b79bf"
+    },
+    "test/jdk/java/lang/management/ThreadMXBean": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "548742af39ae6ff945b80dd696d84c4caa8af728"
+    },
+    "test/jdk/java/math": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "7befdf0a67f15132f340189674fe24765087d5e9"
+    },
+    "test/jdk/java/net": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "52fb8ba2cc94a175da9283633c4407e1eb871a34"
+    },
+    "test/jdk/java/net/HugeDataTransferTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "20e8c7b0d69e5db004aecb25a183ff284a23352b",
+      "sha256": "52d6fb2456c2cbfc971912dba8376e25013692c717841c1edf4910d25426052a"
+    },
+    "test/jdk/java/net/httpclient/BodyProcessorInputStreamTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "1f316c2a64d5088d9572b90d8c368dc849bb7757",
+      "sha256": "4d1fe64260033ee6f3903d909b9a445693fe94c26ae635c149a926dd520ede81"
+    },
+    "test/jdk/java/net/httpclient/HttpInputStreamTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "2eb7899e1f0b5a811a3dbc9a52f83a26b286dd88",
+      "sha256": "f0e734906138ff52562e248c8e019189e9d9e95db51494a9877b741e9d80c9d4"
+    },
+    "test/jdk/java/net/vthread": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "3c88ede93390d7a7ae522af8b0df4e67f94df4c4"
+    },
+    "test/jdk/java/nio": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "87505276f1431cbcc4e62f306e119674cac48340"
+    },
+    "test/jdk/java/nio/Buffer": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "1d0205f749ae8de77e587b199fe172522a6b3e76"
+    },
+    "test/jdk/java/nio/MappedByteBuffer/PmemTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "2771295c8a0305e77d755d44eef8670cbdd902e2",
+      "sha256": "bf92d8b90a777b88be2b333e4db91440485bf6381bd9ae7dc16b2260187206f6"
+    },
+    "test/jdk/java/nio/channels/AsyncCloseAndInterrupt.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "e88a874b82bb028d2cd28186f14ba5dc07c8e46b",
+      "sha256": "9d53296f8a8fed3194f2439e486f1c82c71593ea11e6e1e153218d6b1bff8234"
+    },
+    "test/jdk/java/nio/channels/AsynchronousServerSocketChannel": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "e3b185eb7d5d50a3ec7c9936f7634063589e2d70"
+    },
+    "test/jdk/java/nio/channels/AsynchronousSocketChannel": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "4626d984c2d0ba8de05e856551ad42239905e8f3"
+    },
+    "test/jdk/java/nio/channels/DatagramChannel": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "c3ea8db80b809d0602c884c6cc834178bd5e0caa"
+    },
+    "test/jdk/java/nio/channels/Selector": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "87858306c8bc803ac2dec2b97bdda25cea4ef94f"
+    },
+    "test/jdk/java/nio/channels/ServerSocketChannel": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "18ff33bb5b47f96177819528faf5313642d35461"
+    },
+    "test/jdk/java/nio/channels/SocketChannel": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "26dfff37815cbade9a298685ccfa4a8568b2ab34"
+    },
+    "test/jdk/java/nio/channels/etc": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "88d08ae4eae837531d4f195daae586a4286e1f78"
+    },
+    "test/jdk/java/nio/channels/vthread": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "97402f496b87db185cefafcd00c23d64c607a5a6"
+    },
+    "test/jdk/java/rmi": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "7c65b8c92bcc30feaf1242795dc21f96a7f7ae68"
+    },
+    "test/jdk/java/rmi/registry/nonLocalRegistry/NonLocalRegistryTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "7dd147682398f571821a5142452ff53672050a20",
+      "sha256": "0e4e38d5b3256afc04ea065fdd36ba90b19a5455fd2af234373968afde895dba"
+    },
+    "test/jdk/java/rmi/registry/nonLocalRegistry/NonLocalSkeletonTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "dc2964ea5c8b086f97d879bf27f1a67638f063c9",
+      "sha256": "403f94c1d65f4fd5ac8fa3ce4a9a0f8d2218dc020f3518f448f6c88e7d550ade"
+    },
+    "test/jdk/java/security": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "9f9c98948b0ce7f4574679a14eafe98c48fefa7c"
+    },
+    "test/jdk/java/security/Policy/Root/Root.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "8610a14be9b186197e26844fe399eb004dab4e69",
+      "sha256": "b8cbfb32ed2db62b15e3cdfef919aaf0bae54c07816f3b6c281b1aa10575e9ff"
+    },
+    "test/jdk/java/sql": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "83e0435a83280254262f4d4f9bc9441ea0f48792"
+    },
+    "test/jdk/java/text": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "494d23eaf2e400226c7f8845851a1d3cd722e9f0"
+    },
+    "test/jdk/java/time": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "8a9214c7f84c8035c8a087bf1ee66b8a5f4f4110"
+    },
+    "test/jdk/java/util/AbstractCollection": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "f41534ae3213c0402ab9e7288e20df1b636a2414"
+    },
+    "test/jdk/java/util/AbstractList": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "474c329be309cda4c316e053325b8d03eb099f15"
+    },
+    "test/jdk/java/util/AbstractMap": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "3ab24a5a6abe066f609887a6f24959fbccb2e7b6"
+    },
+    "test/jdk/java/util/AbstractSequentialList": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "8e13ad61ca1df6fd798788e03d2ec55b7303e243"
+    },
+    "test/jdk/java/util/ArrayDeque": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "edd25cda39a4c3eae0e8d571e8f45e1928269b93"
+    },
+    "test/jdk/java/util/ArrayList": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "43883bef1751401645d75b040e159bf3584476a9"
+    },
+    "test/jdk/java/util/ArrayList/Bug8146568.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "f0f072cff803eb310da72eef3ed788b095aad637",
+      "sha256": "da6c1ce912b9249c97921476628cd7f41c706d36badb868dd53c339b178a1672"
+    },
+    "test/jdk/java/util/Arrays": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "6c7bd636228d54f4d8d7c7b1376b71bb182c60f8"
+    },
+    "test/jdk/java/util/BitSet": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "33a6d6c88dac9079f68a91f68e9068a4dc1b5a2d"
+    },
+    "test/jdk/java/util/Collection": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "1fc370ed7464cd925bed0e6830a0c934412daa66"
+    },
+    "test/jdk/java/util/Collections": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "446a6c71d78b5783723ddbd9947536a6d465af9a"
+    },
+    "test/jdk/java/util/Comparator": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "385bbbb1013ee15c33e36ba2eeac94376535b5f2"
+    },
+    "test/jdk/java/util/Deque": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "3d306806533c73c57b21d066edc83244485b3a24"
+    },
+    "test/jdk/java/util/EnumMap": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "cd1a54574a69212dd8c46907cade1ee5bc0d734d"
+    },
+    "test/jdk/java/util/EnumSet": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "04d4a76663a43daa67bb90681c949c01af64beda"
+    },
+    "test/jdk/java/util/HashMap": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "f9a53d12986c748079e2951555dda76a12c31235"
+    },
+    "test/jdk/java/util/HashSet": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "5bc9014ca952cc2b76892eb3a45b44be5bb13948"
+    },
+    "test/jdk/java/util/Hashtable": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "963d5e66cd8a642f581a6dd494522c41100a0c62"
+    },
+    "test/jdk/java/util/IdentityHashMap": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "bfac78ae00584e7ae744df279dc1afd616856a84"
+    },
+    "test/jdk/java/util/Iterator": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "36e61af207e0829a62240cabe44556215b798f9a"
+    },
+    "test/jdk/java/util/LinkedHashMap": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "046f1897e9545ff6e1e9bb17b47ebbe01681c3d5"
+    },
+    "test/jdk/java/util/LinkedHashSet": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "2ad68572bbbebdf2b827958c0a66b13d044342aa"
+    },
+    "test/jdk/java/util/LinkedList": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "0bd0ff15d5814a57c204dbebfe3edff43ca084bb"
+    },
+    "test/jdk/java/util/List": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "2fea3d5a0553ff3b5dd83250081af8f343560f20"
+    },
+    "test/jdk/java/util/Map": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "d5dfe2d3ca9f193b42e26dd3c88dec8c261810d5"
+    },
+    "test/jdk/java/util/NavigableMap": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "f69724b6851859857345c5dcf7ab26e79b6003e2"
+    },
+    "test/jdk/java/util/Optional": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "b916f927b2e27f127ab90d00c56d516c4227bf04"
+    },
+    "test/jdk/java/util/PriorityQueue": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "36ab0b053cc928f8b0f1662d22bc603be7ce3b75"
+    },
+    "test/jdk/java/util/SequencedCollection": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "23c577561f355449a690a4f4e2fdc1affe022dbb"
+    },
+    "test/jdk/java/util/TimSort": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "2fd58113d00c0729c2e03b54faf3fdbd38087a0b"
+    },
+    "test/jdk/java/util/TimeZone/DefaultTimeZoneTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "a6d3ac50866c0f21cd86c8cce30ac5747dcd5606",
+      "sha256": "3b91fa543f999c29d2f856c9ad34d1fbb0c123a366342ee89351f0dfc9ebe40d"
+    },
+    "test/jdk/java/util/TreeMap": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "17e9a21d85fd2f50e635a642607563c36eb5ccda"
+    },
+    "test/jdk/java/util/Vector": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "9bbfa1a1732671e84a7868283b3da3ef2b517283"
+    },
+    "test/jdk/java/util/Vector/Bug8148174.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "8d84bf55d8ba46279eb58a115b23b77c842b0805",
+      "sha256": "934f5ef9b27fe09fc1098683a3a0feaec31ff5cb910a3282e3e7a9cab6ca0362"
+    },
+    "test/jdk/java/util/WeakHashMap": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ab94c991fa47c6fb02cd097437bc434719f31c8a"
+    },
+    "test/jdk/java/util/concurrent": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "c5c527e7452f821d65ce0bd9698157847cfa23ef"
+    },
+    "test/jdk/java/util/function": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "c185f3844f66e10a99816d3aaec7d4fe8af58d7e"
+    },
+    "test/jdk/java/util/stream": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "d25551264e67cf676536535cf09d309f3732f5a3"
+    },
+    "test/jdk/java/util/zip/ZipFile/TestTooManyEntries.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "07ed760c1b76af5917b6bcd4c9aae693dcd0b927",
+      "sha256": "0f0300b023b345f222968a1b05afb879047cd1bee89e3b68f81d4837dabe5056"
+    },
+    "test/jdk/java/util/zip/ZipFile/TestZipFile.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "f46273b7c47c473e540d2e65e63d652a6dcd43e5",
+      "sha256": "bed17e6dd0e3f1feaef54390ccff81af455c02fab3e0b843d7e35e34a7ec3106"
+    },
+    "test/jdk/javax/accessibility": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "5a3f94ee6565b6e571d5b0ade8a022af5b9eb19b"
+    },
+    "test/jdk/javax/crypto": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "56c51f9310f59acce1b54eddf24a81a7dafa6904"
+    },
+    "test/jdk/javax/imageio": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "56bb65da0da7b05e8a72cfe343edf90b9283770c"
+    },
+    "test/jdk/javax/management": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ae7ebd1b54594bc663503a1deb29256f3062719f"
+    },
+    "test/jdk/javax/naming": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "3250a0f3d7fa64900ada2c75af8db236efdc5232"
+    },
+    "test/jdk/javax/net": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ca7b9a6ae9e1cd818213c5bbb8e5868895262e0f"
+    },
+    "test/jdk/javax/net/ssl/compatibility/AlpnTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "71a60fe54356d2ff64def05d608e033e6c0974f2",
+      "sha256": "147220ffd76ee3cac203d2a732d98177abbb3e3a6fefc2a4246d2dcb8215aa83"
+    },
+    "test/jdk/javax/net/ssl/compatibility/BasicConnectTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "c20154fdac494084a7756cf67e24e2efe8f1b51f",
+      "sha256": "93560222c53493519ec0202bf023620d8ddc668d58f7bfbec18962c5bbe39dcf"
+    },
+    "test/jdk/javax/net/ssl/compatibility/HrrTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "fa24fb0a6d0e8cb6e1128ccaa7f832d1da71fe89",
+      "sha256": "a01a9c87666140acfb429fd3b1eb63d67690ed9d2dedc3d51495ad7e771ff6e2"
+    },
+    "test/jdk/javax/net/ssl/compatibility/SniTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "9febadcb37f21fe61cb5682281b4033a51774f69",
+      "sha256": "afe22f40e719e9d82b0be33965c13e494d4eb3cdf5fbe6265d488ea6a334c1dc"
+    },
+    "test/jdk/javax/print": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "60dfe2c59ed4195443e2d7b3536d5f77cad1d3d8"
+    },
+    "test/jdk/javax/rmi": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "87090871ed816387cbe7b4a6036e6ca91f15a586"
+    },
+    "test/jdk/javax/script": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "717ab918335d9b66bb043adab15628cc7193e9f4"
+    },
+    "test/jdk/javax/security": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "066188e8fab905893d9bce11f9cdb32aa5dc4179"
+    },
+    "test/jdk/javax/security/auth/kerberos": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "49f06201ff4e6b079d1c4e88c039d6bc6fbc8562"
+    },
+    "test/jdk/javax/smartcardio": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "1e4500d2aa2ce729934d60a8738afdf7a3a45a21"
+    },
+    "test/jdk/javax/sound": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "c9325394f7e06cc891f7575bf39b3e75d41b2ccc"
+    },
+    "test/jdk/javax/sql": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ae2c2a5a04972fc6f726265d9ad1c1e6d6c0845b"
+    },
+    "test/jdk/javax/swing": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ff508e00c9367768eb1b065e0ef7a28854202df8"
+    },
+    "test/jdk/javax/transaction": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "1b70832244724ac797a1d31e29c830c1693a9457"
+    },
+    "test/jdk/javax/xml": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ffef99fb3221e2c50d721e21337c3df995440e4f"
+    },
+    "test/jdk/javax/xml/crypto": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "2e408ddae0c6438f1387d7407ab4d4bc0753e98b"
+    },
+    "test/jdk/jdk/classfile": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "7588445826c10f341f74d337c1ed082882599c50"
+    },
+    "test/jdk/jdk/dynalink": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "a1d6cabb6eca22088446283801dc9d13e2acad4a"
+    },
+    "test/jdk/jdk/editpad": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "32d84ae7bc42162c234c8332a0390fb2f349525b"
+    },
+    "test/jdk/jdk/incubator/vector": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "5b035fc72a0a813ecd5b3dc150e82a3f84010e29"
+    },
+    "test/jdk/jdk/incubator/vector/AddTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "bd11f0092becb7adfca37e65cd59f36be2c01d29",
+      "sha256": "9dd8b00bd00ce4dd3069fe00120cc7f63d08a820531cd37084a014503f7d4b2f"
+    },
+    "test/jdk/jdk/incubator/vector/ByteMaxVectorLoadStoreTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "8a51dd67cffe700e847057269ed6da1b3cb2a729",
+      "sha256": "c7b35277c146053e8920793ed8fca4c3b70ebddded5c7fc6e6cceb250c06a5c1"
+    },
+    "test/jdk/jdk/incubator/vector/ByteMaxVectorTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "3d19d2ab6d0b623bc9edc78602b57d1bb28bff30",
+      "sha256": "1aca8f61f06283ea4e9f3019a917ed985f96d63861a1bd577a6857d660323974"
+    },
+    "test/jdk/jdk/incubator/vector/CovarOverrideTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "482fd26b46b1ae204050fced28d68958ccb587ee",
+      "sha256": "1915c099cd8f458d22d8ccdffb7eea91fd4be00942afaaf492d02cd5c7dca64b"
+    },
+    "test/jdk/jdk/incubator/vector/DoubleMaxVectorLoadStoreTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "c6440367576c04b8c2981341577dd0a17c880595",
+      "sha256": "95d4e71fde3a5c50034741817b6d452c346e85431ef819ff1ccbe2b5232f6bd6"
+    },
+    "test/jdk/jdk/incubator/vector/DoubleMaxVectorTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "bcc7b6b0144abf548369b39f3a36706e45b5a693",
+      "sha256": "d1ca81710f405583f2f5aa24b10de201b3e74c5d4db0d33a8277c5848391a236"
+    },
+    "test/jdk/jdk/incubator/vector/FloatMaxVectorLoadStoreTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "0d9b2fa0bd469c91a624a68645835d97ad642667",
+      "sha256": "eab5cac7a7f865cb064e1f90c472e58379ff72b276196048ab8dd2c1d6be515f"
+    },
+    "test/jdk/jdk/incubator/vector/FloatMaxVectorTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "1c42c670b87ac8437ec75372291af9ae00e639c2",
+      "sha256": "a643bc0dd1e8aeb1b3450023386246788603fdb1358eec4062f54b52ebd10aa4"
+    },
+    "test/jdk/jdk/incubator/vector/ImageTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "656f0a277515787deaaa5a5798c346af66c48e08",
+      "sha256": "acbe434c274168b4780377ad8aa0365e0a194f9bacf0e47d5e3d2a4cc4a0beb5"
+    },
+    "test/jdk/jdk/incubator/vector/IntMaxVectorLoadStoreTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "96f8aa9e38a1f5310f451d8c3f119235d6c423e4",
+      "sha256": "40d0ef929dfff3a5eeec526351ea66deec716754da8ddb43746318c00904d54b"
+    },
+    "test/jdk/jdk/incubator/vector/IntMaxVectorTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "c0fdcbf58a3177cdf78130ab00107e09277413d1",
+      "sha256": "8973b57aceb91663150097ba89ec3a1ef51b9763fed5b89c5acb7db4f2a7fe9f"
+    },
+    "test/jdk/jdk/incubator/vector/LoadJsvmlTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "355201bfbf331b9b42136b04e3efa4fa23e9dc4a",
+      "sha256": "102b0370d6b67d1f1d1fa980c5d69a08c4f3c29a1013476df0882cd82209e473"
+    },
+    "test/jdk/jdk/incubator/vector/LongMaxVectorLoadStoreTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "ec0170c877912eb02eb13b5ef9a68ce666ecfae7",
+      "sha256": "f2092df8aaa54a5308035e4f56f9c894411b1c5475278088e1e692996cda8693"
+    },
+    "test/jdk/jdk/incubator/vector/LongMaxVectorTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "d467107e9f2a1a17b32cd9dda1eae15ce4cc1557",
+      "sha256": "b786cf9c0aa0f6b82022b9cd8c7754d349ec6164bb690f034f0bcc0fdab4bea4"
+    },
+    "test/jdk/jdk/incubator/vector/MethodOverideTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "9f5123c129fc74deda9734d06285a667530b205f",
+      "sha256": "d0ea053b79d8e1586dff1bc1c5598a7828ea547d4c7c824c21be8cf85f6e2052"
+    },
+    "test/jdk/jdk/incubator/vector/MismatchTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "9b2019b1875b8a45a3e8b259f1a70c9a9e40a5f6",
+      "sha256": "5e66e93dfabcc560723431a47b58658476cceca85b0273983a8631ec3c64289a"
+    },
+    "test/jdk/jdk/incubator/vector/PreferredSpeciesTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "f105df5756cf30027ad69170894a43af827b0d3c",
+      "sha256": "a30924c1c92c0d21fb492398a649229bdf986188bb6d47c99c5a3fe39ca10296"
+    },
+    "test/jdk/jdk/incubator/vector/ShortMaxVectorLoadStoreTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "4f5ab531c75c779de9948e2452c49cb17cbff2ff",
+      "sha256": "ba5c35e3ee7eddb807b90be667f189c6bc0e294fc8c16ab8dd7b947ec38d0bcc"
+    },
+    "test/jdk/jdk/incubator/vector/ShortMaxVectorTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "7e657a3f3983292e153d10a76954ac03a3410844",
+      "sha256": "d0fee01f57954e7f08ab5e15e27ea3b8df01419e9e510195d57e80b74b0f4ece"
+    },
+    "test/jdk/jdk/incubator/vector/VectorHash.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "94b7569a39351c57196ec10e40e2c70fb4f77c48",
+      "sha256": "3f276b8783980dbecbd601fba4f92ad773ecd90954e69379e281f59cbc53375d"
+    },
+    "test/jdk/jdk/incubator/vector/VectorMaxConversionTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "28c5348100afa24e2a11e6397c3c12d1b22dfc2b",
+      "sha256": "205704403b66b1304f3c719914447bcf5befde15397a5568fe330f5e76f69aa5"
+    },
+    "test/jdk/jdk/incubator/vector/VectorReshapeTests.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "5d70fa7483c7718ea7ecd0fc1990ac5be634c1a4",
+      "sha256": "935eebc31f58e7cdffd1fd05e9b433e90776b08fb6a28f6a966c5f1ef0b34912"
+    },
+    "test/jdk/jdk/incubator/vector/VectorRuns.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "c9d9889a71479e2d34ff1317b0271887ad5f4121",
+      "sha256": "b7e475ca550a7737c5191b6b540832c409290de57fd83c53706bfc4a66ce3522"
+    },
+    "test/jdk/jdk/internal/agent": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ccc2030de36094066c9fc7290ab4625e556e12b8"
+    },
+    "test/jdk/jdk/internal/jimage": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "f5f7e5607de20340292fc5bd08ab2164ed4f5898"
+    },
+    "test/jdk/jdk/internal/jline": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "5c7026e4fc35c434e55fc8372a12cb506b34b4b8"
+    },
+    "test/jdk/jdk/internal/jrtfs": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "4ab0a60b3f6c09a721e517a21618b116544b32b9"
+    },
+    "test/jdk/jdk/internal/loader": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "657c7011480557c6e94823fda18f5a95fef80339"
+    },
+    "test/jdk/jdk/internal/math": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "4a814b3ac798f4ae847410a833f5cd7c9de05002"
+    },
+    "test/jdk/jdk/internal/misc": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "490cd15d17b58aa49ab5b19d9635cb1529a44dee"
+    },
+    "test/jdk/jdk/internal/misc/ThreadFlock": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "c7cf657e26f47390f9d6253a9024efbbd21b80cc"
+    },
+    "test/jdk/jdk/internal/ref": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "dad2f7c7ddb9c7a316fbfa925680fe88b6d44c3f"
+    },
+    "test/jdk/jdk/internal/reflect": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "73fd97281dcedaf512d4905ac346db61f53204fd"
+    },
+    "test/jdk/jdk/internal/reflect/CallerSensitive/CheckCSMs.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "0a9d75e27a87c7801441f66f490cbc2e0fbfe9d7",
+      "sha256": "b33621b50166a68436012c713339faea25a5c14cf4afe9718ec650664971da83"
+    },
+    "test/jdk/jdk/internal/util": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "fa50b7f54f11eac90d5f285d6e67304a8f7f5f5f"
+    },
+    "test/jdk/jdk/internal/vm": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "0beb1f4cf26555c211cb76d92f0c4a8c41063a96"
+    },
+    "test/jdk/jdk/internal/vm/Continuation": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "41a39118e3d50bb49b850c9bb74cfcdf1b1d4675"
+    },
+    "test/jdk/jdk/jfr": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "7ba9177c98e51a18a64f0f26f6c4b84a2cd832b5"
+    },
+    "test/jdk/jdk/jfr/api/consumer/recordingstream/TestBasics.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "1dbfeefa968c861813388036e8b6cbafea7eae90",
+      "sha256": "b3586a0636d551642b5461124ed439f724549f02ebe3254b252c2c080dad782c"
+    },
+    "test/jdk/jdk/jfr/api/recording/event/TestLoadEventAfterStart.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "4bd96871b454e3c3106e19156c79dfdd719c5246",
+      "sha256": "a598ed9782fa5d864b91534ad6dd23212f7f4cd4686e4b7dee2bf6c1463a74ae"
+    },
+    "test/jdk/jdk/jfr/api/recording/state/TestState.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "5c548977ad79e87b851857708c1f94566ea4b444",
+      "sha256": "22bbc7e2f6d5f7e83e37e4dc6a7a9b23cdc1478eae3c8a2549687cce50eda684"
+    },
+    "test/jdk/jdk/jfr/event/allocation/TestObjectAllocationSampleEvent.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "2f7d3cc150303c881883ff4f4fdc362ff20db9d3",
+      "sha256": "9a42413bd1aaf8c77952c41a3406d9c295cda506777c54db95975517462d1218"
+    },
+    "test/jdk/jdk/jfr/event/compiler/TestCompilerCompile.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "77352ba26e97b4bc40aca5ccb6dc72c03dbe817d",
+      "sha256": "0882042758792888b72c038a9a2d23b225e9f50552e13bd3e86c532fc162c3da"
+    },
+    "test/jdk/jdk/jfr/event/gc/collection/TestG1ParallelPhases.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "05bf8d4fadaf47be64044da812df680d30017f28",
+      "sha256": "9ec53d336bce077c7949b6c7be888045db9ea95eabe885640ea91496eccb7a24"
+    },
+    "test/jdk/jdk/jfr/event/gc/collection/TestGCCauseWithG1ConcurrentMark.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "5ec810b11c861b10146aec0c28c39745611c18f3",
+      "sha256": "f5a0042674191bbaf7fad8ba00ea9a5fa32d70e669354f162e91c8b45b598e6d"
+    },
+    "test/jdk/jdk/jfr/event/gc/collection/TestGCCauseWithG1FullCollection.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "a83e0ba6d6f70920e4742cc274fdd73c6a4759fe",
+      "sha256": "90fd6bc02df977ecad2d984a962a632c98243724a1313d9d138684bdf7182a81"
+    },
+    "test/jdk/jdk/jfr/event/gc/collection/TestGCEventMixedWithG1ConcurrentMark.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "2282783ae149860ca6bed92ede7330a0d7b3d46f",
+      "sha256": "076670f41c83db8f33146ea4b404c5cd34b0b1cac0fce5a7a0a72b78c13b518e"
+    },
+    "test/jdk/jdk/jfr/event/gc/collection/TestGCEventMixedWithG1FullCollection.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "5c3da24fa1b9b44495d785915e204e7b351e459d",
+      "sha256": "096aa7cf3e3c64ca756d41aba0d4b38077b008e64a891a523e36992b5c18d72f"
+    },
+    "test/jdk/jdk/jfr/event/gc/collection/TestGCGarbageCollectionEvent.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "e228f7fd067ed1600df8a5a8020b4bf6fe8a6c5b",
+      "sha256": "0803d9a55e594f348756b34bba80bc3cda3a15ba8473ce8d4fd56a2d427d13f2"
+    },
+    "test/jdk/jdk/jfr/event/gc/collection/TestGCWithFasttime.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "edce5e76190c5fec2ec38f9eb3deb835c234765d",
+      "sha256": "d91f41b7c8bc709b095222a0b24c480b361cfa3401cebd174ea27897b695940d"
+    },
+    "test/jdk/jdk/jfr/event/gc/collection/TestYoungGarbageCollectionEventWithG1New.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "931721011aa4af60b1ebe0d57c991ad1888008d9",
+      "sha256": "9d5c44e9c65574d62c24237452d87a31058222b466dc013fe561636520175d1b"
+    },
+    "test/jdk/jdk/jfr/event/gc/configuration/TestGCConfigurationEvent.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "c134c21ffdc7462c999ddd37cd7916c45fc6f7ea",
+      "sha256": "e26aa76abb8c584665a2f6c6ee03f1e8dca8a205a373849f49eb74cb412dfa32"
+    },
+    "test/jdk/jdk/jfr/event/gc/detailed/TestEvacuationFailedEvent.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "fb34249c1dc9359132768dd776b6ec236577b1eb",
+      "sha256": "ff3b128c6a2687968e5a83239ec068455c9eaed1da3aa851233e521a0f65dd0f"
+    },
+    "test/jdk/jdk/jfr/event/gc/detailed/TestEvacuationInfoEvent.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "420f083758db0dfc28e7f6f6c9baea7a1f3b7b3b",
+      "sha256": "888e2690be5fad25729a08099039f5a94283812d5e818e43d931ea802f965c4b"
+    },
+    "test/jdk/jdk/jfr/event/gc/detailed/TestG1ConcurrentModeFailureEvent.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "dade7aea8b68e05c44d3c222935e2de5bc7307c7",
+      "sha256": "727ef341cfa7f204ac94bd0e6eb5643628cd25bec61b14dae803c15c19fd06e7"
+    },
+    "test/jdk/jdk/jfr/event/gc/heapsummary/TestHeapSummaryEventG1.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "fc30a8dec7345249b5118341e2ae216afed6937e",
+      "sha256": "0e643ad464a29018e43b51ba3b6771bb9544db48b30085fdbbec19de0bb4370d"
+    },
+    "test/jdk/jdk/jfr/event/gc/objectcount/TestObjectCountAfterGCEventWithG1ConcurrentMark.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "3fe9e0f360d9085647028b3f2cb5f088d168eed5",
+      "sha256": "e198d536de3e6dd3a46821417f7178b9c037209ab80a1d5e074fe6f4f7af9875"
+    },
+    "test/jdk/jdk/jfr/event/gc/objectcount/TestObjectCountAfterGCEventWithG1FullCollection.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "54b8ebc33e4bc8637cd3cf1f6c999137d211d4db",
+      "sha256": "3f4909efdf9651e6d66f4a80772fe888176dcdc72ab802b838eadc9e12f9ff66"
+    },
+    "test/jdk/jdk/jfr/event/gc/refstat/TestRefStatEventWithG1ConcurrentMark.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "7a635d4812e12d9b27422c2d619f94d15c85499f",
+      "sha256": "bbde0f1452f5d4624bc79c86ed8943b15f67fc5ef5253ad90971376215f04a2a"
+    },
+    "test/jdk/jdk/jfr/event/gc/refstat/TestRefStatEventWithG1FullCollection.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "b06d68c5cc3139c30a4951c002079eb92fe8a1a5",
+      "sha256": "a6a501666ac921f821ebab2e813b164aa140584751e637682bb6793a885c2ddb"
+    },
+    "test/jdk/jdk/jfr/event/gc/refstat/TestRefStatEventWithG1New.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "16e87232a51a296de401c62faf882cbaf639b5bc",
+      "sha256": "23264395e13b1b2aa6a351190cb5edcca622d44a76818d9235325205ad736ec5"
+    },
+    "test/jdk/jdk/jfr/event/io/TestFileStreamEvents.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "d557a8dfd7de24bd3ec05e61573e72cbebe56e50",
+      "sha256": "4e644fba897140ceb98e3230ad16b665a1887e9bfb1b5cc254a2ef84a94000f8"
+    },
+    "test/jdk/jdk/jfr/event/metadata/TestDefaultConfigurations.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "57b63316da75a91473b7314701137c72db372d02",
+      "sha256": "ae06ad8f58cf7160900c20320fdb6098dd033b2ed7c9fba0ba9ca1e9af5fcceb"
+    },
+    "test/jdk/jdk/jfr/event/os/TestCPULoad.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "efc9b39adf50ed8c97372ccc53c3c2ce73a3d172",
+      "sha256": "d2a115581d9808aabd24f7f3670b47c6f3b7da731fd69286672077ef06986e4c"
+    },
+    "test/jdk/jdk/jfr/event/runtime/TestClassLoadEvent.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "ec72253bc06624d84347648f0626ac8641372202",
+      "sha256": "804a857b87a2f656475621985b1e9e40181692c111070b1175809923300bcb56"
+    },
+    "test/jdk/jdk/jfr/event/runtime/TestJavaBlockedEvent.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "23fb1cd84332cbb533583e8e53a95ea4c32bcf99",
+      "sha256": "9343d249f6540510fa9826ecfab7ee49403f2b4eef06939a204cdf023bb98857"
+    },
+    "test/jdk/jdk/jfr/jcmd/TestJcmdStartStopDefault.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "5985b85b167b3012cc9e464dbc9eadf9f7ffc679",
+      "sha256": "e1c7e23a3f5c6560a10bbca5f751d0538ae536d49e1e2c1b0103cfbbd7abec70"
+    },
+    "test/jdk/jdk/jfr/startupargs/TestDumpOnExit.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "454bbb631ad99b60e2b4ff44288c4bb4832bad20",
+      "sha256": "dc30a74aed1f6718a713ce1597d58ef380bb7b1c232c63902eded95fa7afd98e"
+    },
+    "test/jdk/jdk/jfr/threading": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "8c3bb7cb0f71875f3d9dc37524eb4f9d93319248"
+    },
+    "test/jdk/jdk/lambda": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "caa4a031bb23dea1f74621ed9743d57dcbd6ebb9"
+    },
+    "test/jdk/jdk/modules": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "8de190a6929e3d1af57e42d8573f7a3c0cd565eb"
+    },
+    "test/jdk/jdk/net": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "777f7f008222e84c194c31e7f253b57b6a2796a4"
+    },
+    "test/jdk/jdk/nio": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "5fe44d484a50c3e10b490d4bd44d5f06b20721de"
+    },
+    "test/jdk/jdk/nio/zipfs/LargeCompressedEntrySizeTest.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "1dcfe461dda1224cf0715dbec078c992c1f05382",
+      "sha256": "74045fd1c4cd7caccc6b9a7723f8797644a70be778087821315fbf99a4dcae23"
+    },
+    "test/jdk/jdk/nio/zipfs/TestLocOffsetFromZip64EF.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "3084687c249279b0be3c477560134dde613308dc",
+      "sha256": "7dbe768eb44687cf823276a6c9dc8afaeaaff69755d7929f3580ff2b6bf07b6f"
+    },
+    "test/jdk/jdk/security": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "32b1dc7d504dd5674f3193740340c215ae924433"
+    },
+    "test/jdk/jni/nullCaller": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "3c9845ae1ef69469122bfdf74d7a2bc91857ef11"
+    },
+    "test/jdk/native_sanity": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "d7c15e737793c1148c9516a9eba85390d78592e8"
+    },
+    "test/jdk/sanity/client/SwingSet": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "f5e3d21552d896e543691ae45e1d05eb23badf78"
+    },
+    "test/jdk/security/infra/java/security/cert/CertPathValidator/certification": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "3fc057357571b0f712ca057ac5a175c71c094eda"
+    },
+    "test/jdk/sun/awt": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "81621b2ffd9087afe969a060417f14270b2e29e5"
+    },
+    "test/jdk/sun/invoke": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ba8474c240b2df4381e3fe1b8a9b080c60c8275b"
+    },
+    "test/jdk/sun/java2d": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "4913a6fa7a1bbdc0e7e01e7d2d442a53736509d1"
+    },
+    "test/jdk/sun/jvmstat": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "02f4ffea60851e41688cc1e8233802db41763170"
+    },
+    "test/jdk/sun/management": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "4ec71fd09750d96d8281a16436e507487040bdef"
+    },
+    "test/jdk/sun/misc": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "78b1baa77ca4a8aa3e18d75b09848122218a3e85"
+    },
+    "test/jdk/sun/net": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "8eb00807b33ac97eccbe470ed5a9a9b891091938"
+    },
+    "test/jdk/sun/nio": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "e535049884d5c40d479b83c81c93029c241de738"
+    },
+    "test/jdk/sun/nio/cs/ISO8859x.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "219e5d400fbc26d594f6ac05c78b905ebc423601",
+      "sha256": "0c38a5cf8fa05c4a82f292c46920612131bd0df0711dcd3edf8078a7fd06a5aa"
+    },
+    "test/jdk/sun/reflect": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "ec1761b2befb2b859ca48724437349b67270e7bd"
+    },
+    "test/jdk/sun/rmi": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "bd804647927b46dc6d951298b9bc349b5c982ae1"
+    },
+    "test/jdk/sun/security": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "1ee62f3868db16d21dd4b558d17a71aed7692d74"
+    },
+    "test/jdk/sun/security/jgss": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "e3a570078a869a5e3512e906d576374bf8b916ce"
+    },
+    "test/jdk/sun/security/krb5": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "0ddced218b28cce40ca311fa0dd66f1ea42c2a26"
+    },
+    "test/jdk/sun/security/krb5/config/native/TestDynamicStore.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "7e396013a71eea589de4f1a00774c661d8d02f07",
+      "sha256": "3322742be9d821757bde3ea9e69c434d7cb9b53eba0c4bc2298f7091f8b8f736"
+    },
+    "test/jdk/sun/security/provider/PolicyFile/GrantAllPermToExtWhenNoPolicy.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "d50623e0c80720222b836891b0cef2ea98594a9d",
+      "sha256": "3f2f511101bf41dc719ff812aa451b7f5dd3627ff1927cc7aaf8b47bf24c3410"
+    },
+    "test/jdk/sun/security/provider/PolicyParser/PrincipalExpansionError.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "54eabc3a228737e5f1d3b6ae3ac1fbb7b0403eb4",
+      "sha256": "271b37ea3d6135ef4fbbadfdba09ff504d8b23c30afd58610511c350b5530da9"
+    },
+    "test/jdk/sun/security/smartcardio/TestChannel.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "2315b405367662647f3e9695d4ae8dea5d293615",
+      "sha256": "fc7b7b1f9556cf9276a42d6e8dea18f1ed89fcf992400d6b8b4f8e8a682b4631"
+    },
+    "test/jdk/sun/security/smartcardio/TestConnect.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "fa0631c98ad5703b0299d2a7f9c8463213543786",
+      "sha256": "aa233c54fa17c8f65c617852f0efde38e86ee93e7cb5cfe3a9e4bb87799eaa14"
+    },
+    "test/jdk/sun/security/smartcardio/TestConnectAgain.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "7f2343b2edd3aa34d3807df7a34277c365500a48",
+      "sha256": "12fcc9b6add0c9477e274b8465597e34e8d066f9953d647499fbca5fdddb3034"
+    },
+    "test/jdk/sun/security/smartcardio/TestControl.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "d725f42c6a006ccd0ccc1255d5b7f3899c29984b",
+      "sha256": "e01dc4e1bcf9788de4a6c6c97fd13ad37864e6f88ded367ad92da460a9720af5"
+    },
+    "test/jdk/sun/security/smartcardio/TestDefault.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "8fe7ce8ec62b3b800ac78ee8cef131d647dccd10",
+      "sha256": "713dca2417b66f0962c83cb9d02a10ce03274bb3d8fe1c52989aa7450f481105"
+    },
+    "test/jdk/sun/security/smartcardio/TestDirect.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "77c46fbf4b6e64ed5746f964f7a5622ba9137bf8",
+      "sha256": "8621103a1999c26deb6fdfacb9520a82eed05ab307d86da14b01fc9efe03c556"
+    },
+    "test/jdk/sun/security/smartcardio/TestExclusive.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "cd451321f5356a4842f295a2b21303fd157ac79f",
+      "sha256": "538b961afb96011d7dbb0e939bdf87d8b5780eef8347c692814521417d237f17"
+    },
+    "test/jdk/sun/security/smartcardio/TestMultiplePresent.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "9fd2256bf099aaa1cc13a8dfe3b858d81974feb6",
+      "sha256": "4f4283287a23c4b2b7dd01d3514bcbe3ba9fdcb296aa82c09f9a3294804b6c62"
+    },
+    "test/jdk/sun/security/smartcardio/TestPresent.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "fea98795d7594d6dbbe50071d641d6ec778bf73a",
+      "sha256": "ea37f82f3e1ce49c32fd1051b1f7a768cc119df7025e8091b35a916ac2800cd4"
+    },
+    "test/jdk/sun/security/smartcardio/TestTransmit.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "4dcd816829ab49ced99a54e475cfb2c665f023b6",
+      "sha256": "a94767016fd75324f67a6dd98331fc6faa9bd56296053e5f4ca1de068678651f"
+    },
+    "test/jdk/sun/security/tools/jarsigner/compatibility/Compatibility.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "658663c8779f6740e68cde8d20ff6793dfc2b9b7",
+      "sha256": "5d1e56a7e57e70edab347a536d34ed754e75d4002be7a540c0160686ac5884d6"
+    },
+    "test/jdk/sun/security/tools/keytool/i18n.java": {
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "4ba8c7830b72fa9c9403f9875ff4a03c85f91f2d",
+      "sha256": "4a416edae40bfdce5d763944e068be16538be06c7f3526b1d9d79286c4e8f827"
+    },
+    "test/jdk/sun/text": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "e87e58d4912b5161aeb00591da58acf0d92f0848"
+    },
+    "test/jdk/sun/tools": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "0784fefee9dfe4668ac70a2abebf4aba1435990d"
+    },
+    "test/jdk/sun/tools/jrunscript": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "1835d0047623dfb497d2603a63b8e55dde4d239f"
+    },
+    "test/jdk/sun/util": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "61ed066f92106521861305e508ef455d0ce90ce9"
+    },
+    "test/jdk/tools": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "033744c2f3b5cadfbc322023b9c1e458d8061226"
+    },
+    "test/jdk/tools/launcher": {
+      "mode": "040000",
+      "kind": "tree",
+      "git_object": "649bc180319cea3c2f47ec5fec459f6a9ee017f8"
+    }
+  },
+  "archive_sha256": "857717acb6747ea10517cae874d668515645336bccbcfd94c07a2e998f74bf53",
+  "status": "EXACT_REFERENCED_FILES_AND_GIT_DIRECTORY_METADATA_STAGED",
+  "test_root_and_groups_modified": false,
+  "unselected_group_contents_claimed_complete": false
+}

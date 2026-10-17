@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-Drecipe.owner.root=/tmp/m3-publication/string/m3/runtime-integration/regex-rope-affix-effects/recipe/sdk-owner",
+    "test"
+  ],
+  "cwd": "/tmp/m3-publication/string/m3/runtime-integration/regex-rope-affix-effects/recipe",
+  "started_utc": "2026-10-17T10:38:31.833861+00:00",
+  "seconds": 66.18,
+  "exit_code": 0,
+  "log_sha256": "e36f933e9e93ab4ac4cc520dfeffe56613c5fcaa0bfb9d2e39b6c1331aa58871"
+}

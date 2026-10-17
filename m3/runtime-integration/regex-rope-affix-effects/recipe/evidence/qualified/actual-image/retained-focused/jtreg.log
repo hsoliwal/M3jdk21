@@ -1,0 +1,17 @@
+Directory "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work" not found: creating
+Directory "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/report" not found: creating
+Passed: java/lang/String/M3StringCanonicalDagTest.java
+Passed: java/lang/String/M3StringFactsCompositionTest.java
+FAILED: java/lang/String/M3StringHierarchicalRegexTest.java
+Passed: java/lang/String/M3StringLeafCursorCanonicalTest.java
+FAILED: java/lang/String/M3StringOwnerRangeLifetimeTest.java
+FAILED: java/lang/String/M3StringRegexEffectsTest.java
+Passed: java/lang/String/M3StringRegexNativeBridgeTest.java
+Passed: java/lang/String/M3StringRegexPowerTest.java
+Passed: java/lang/String/M3StringRegexReuseTest.java
+FAILED: java/lang/String/M3StringRegexRowPrecomputeTest.java
+Passed: java/lang/String/M3StringRegexUtf16Test.java
+Test results: passed: 7; failed: 4
+Report written to /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/report/html/report.html
+Results written to /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work
+Error: Some tests failed or other problems occurred.

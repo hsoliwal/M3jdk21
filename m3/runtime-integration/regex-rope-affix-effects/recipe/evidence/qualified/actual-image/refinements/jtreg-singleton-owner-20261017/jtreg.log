@@ -1,0 +1,8 @@
+Directory "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-with-group-prerequisites/work" not found: creating
+Directory "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-with-group-prerequisites/report" not found: creating
+FAILED: java/lang/String/M3StringRegexDpTest.java
+Passed: java/lang/String/M3StringRegexPreparedBatchTest.java
+Test results: passed: 1; failed: 1
+Report written to /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-with-group-prerequisites/report/html/report.html
+Results written to /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-with-group-prerequisites/work
+Error: Some tests failed or other problems occurred.

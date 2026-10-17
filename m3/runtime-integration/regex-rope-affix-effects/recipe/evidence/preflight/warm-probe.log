@@ -1,0 +1,4 @@
+AFFIX_WARM_PROBE case=warm-positive-short before_ns=25.63 after_ns=16.46 ratio=0.642 source_fixture=true
+AFFIX_WARM_PROBE case=warm-positive-long before_ns=45.33 after_ns=89.17 ratio=1.967 source_fixture=true
+AFFIX_WARM_PROBE case=warm-prefix-negative before_ns=27.87 after_ns=37.04 ratio=1.329 source_fixture=true
+AFFIX_WARM_PROBE case=cache-churn-prefix-negative before_ns=2808.81 after_ns=59.46 ratio=0.021 source_fixture=true
