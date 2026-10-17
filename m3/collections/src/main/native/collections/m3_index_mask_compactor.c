@@ -273,3 +273,102 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
     }
     return result;
 }
+
+
+/* SPDX-License-Identifier: Apache-2.0
+ * 2026 M3JDK21 indexed mask-window native repair.
+ * The original one-shot compactor JNI entrypoints above remain unchanged.
+ */
+#include <stdint.h>
+#define M3_WINDOW_CHUNK 256
+
+static jlong m3_window_pack(jint next, jint written) {
+    return ((jlong)(uint32_t)next << 32) | (jlong)(uint32_t)written;
+}
+static void m3_window_invalid(JNIEnv *env) {
+    jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+    if (type != NULL) {
+        (*env)->ThrowNew(env, type, "invalid indexed window geometry, masks or alias");
+        (*env)->DeleteLocalRef(env, type);
+    }
+}
+static int m3_window_inputs(JNIEnv *env, jarray rows, jbyteArray states,
+        jarray output, jint first, jint required, jint excluded,
+        jint outputOffset, jint limit) {
+    if (rows == NULL || states == NULL || output == NULL
+            || first < 0 || required < 0 || required > 255
+            || excluded < 0 || excluded > 255
+            || outputOffset < 0 || limit < 0 || limit > 4096) {
+        m3_window_invalid(env);
+        return 0;
+    }
+    if ((*env)->IsSameObject(env, rows, output) == JNI_TRUE) {
+        m3_window_invalid(env);
+        return 0;
+    }
+    jsize length = (*env)->GetArrayLength(env, rows);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    jsize flagsLength = (*env)->GetArrayLength(env, states);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    jsize capacity = (*env)->GetArrayLength(env, output);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    if (flagsLength != length || first > length
+            || outputOffset > capacity || limit > capacity - outputOffset) {
+        m3_window_invalid(env);
+        return 0;
+    }
+    return 1;
+}
+
+/* Exact same primitive region protocol for int[] and long[]; output is
+ * caller-owned, alias forbidden, maximum stack chunk 256 elements.
+ * Every inspected source index advances the returned resume cursor.
+ */
+#define M3_DEFINE_WINDOW_JNI(SUFFIX, ARR, VALUE, GET, SET) \
+JNIEXPORT jlong JNICALL Java_com_m3_collections_M3IndexMaskWindow_##SUFFIX( \
+        JNIEnv *env, jclass owner, ARR rows, jbyteArray states, jint first, \
+        jint required, jint excluded, ARR output, jint outputOffset, jint limit) { \
+    (void)owner; \
+    if (!m3_window_inputs(env, rows, states, output, first, required, \
+            excluded, outputOffset, limit)) return (jlong)0; \
+    jsize length = (*env)->GetArrayLength(env, rows); \
+    if ((*env)->ExceptionCheck(env)) return (jlong)0; \
+    if (limit == 0) return m3_window_pack(first, 0); \
+    if ((required & excluded) != 0) return m3_window_pack(length, 0); \
+    VALUE readBuffer[M3_WINDOW_CHUNK]; \
+    VALUE selected[M3_WINDOW_CHUNK]; \
+    jbyte flags[M3_WINDOW_CHUNK]; \
+    jint next = first, kept = 0; \
+    while (next < length && kept < limit) { \
+        jint remaining = length - next; \
+        jsize amount = remaining < M3_WINDOW_CHUNK ? remaining : M3_WINDOW_CHUNK; \
+        if (amount > limit - kept && required == 0 && excluded == 0) \
+            amount = limit - kept; \
+        (*env)->GET(env, rows, next, amount, readBuffer); \
+        if ((*env)->ExceptionCheck(env)) return (jlong)0; \
+        if (required != 0 || excluded != 0) { \
+            (*env)->GetByteArrayRegion(env, states, next, amount, flags); \
+            if ((*env)->ExceptionCheck(env)) return (jlong)0; \
+        } \
+        jint consumed = 0, accepted = 0; \
+        while (consumed < amount && kept + accepted < limit) { \
+            unsigned int bits = (required | excluded) == 0 ? 0u \
+                    : (unsigned int)(unsigned char)flags[consumed]; \
+            if ((bits & (unsigned int)required) == (unsigned int)required \
+                    && (bits & (unsigned int)excluded) == 0u) { \
+                selected[accepted++] = readBuffer[consumed]; \
+            } \
+            consumed++; \
+        } \
+        if (accepted > 0) { \
+            (*env)->SET(env, output, outputOffset + kept, accepted, selected); \
+            if ((*env)->ExceptionCheck(env)) return (jlong)0; \
+        } \
+        kept += accepted; \
+        next += consumed; \
+    } \
+    return m3_window_pack(next, kept); \
+}
+M3_DEFINE_WINDOW_JNI(scanNative, jintArray, jint, GetIntArrayRegion, SetIntArrayRegion)
+M3_DEFINE_WINDOW_JNI(scanLongNative, jlongArray, jlong, GetLongArrayRegion, SetLongArrayRegion)
+#undef M3_DEFINE_WINDOW_JNI

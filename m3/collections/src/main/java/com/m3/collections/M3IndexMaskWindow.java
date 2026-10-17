@@ -90,6 +90,70 @@ public final class M3IndexMaskWindow {
                 excludedMask, output, outputOffset, limit);
     }
 
+
+    /**
+     * Bounded primitive-long analogue of {@link #scan}; indexes and flags stay
+     * in caller-owned arrays. No boxed values, temporary selected array or
+     * per-entry objects are retained. Reuses the existing mask window contract.
+     */
+    public static long scanLong(long[] orderedRows, byte[] rowStates, int firstIndex,
+            int requiredMask, int excludedMask, long[] output, int outputOffset,
+            int limit, M3IndexMaskCompactor.Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(rowStates, "rowStates");
+        Objects.requireNonNull(output, "output");
+        Objects.requireNonNull(backend, "backend");
+        if (orderedRows == output) {
+            throw new IllegalArgumentException("source/output alias");
+        }
+        if (rowStates.length != orderedRows.length) {
+            throw new IllegalArgumentException("index and aligned state lengths differ");
+        }
+        checkMask(requiredMask);
+        checkMask(excludedMask);
+        if (firstIndex < 0 || firstIndex > orderedRows.length) {
+            throw new IndexOutOfBoundsException(firstIndex);
+        }
+        if (limit < 0 || limit > MAX_WINDOW) {
+            throw new IllegalArgumentException("invalid bounded window limit");
+        }
+        Objects.checkFromIndexSize(outputOffset, limit, output.length);
+        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+            if (!M3IndexMaskCompactor.nativeAvailable()) {
+                throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
+            }
+            if (limit == 0) return pack(firstIndex, 0);
+            long result = scanLongNative(orderedRows, rowStates, firstIndex, requiredMask,
+                    excludedMask, output, outputOffset, limit);
+            requireValidResult(result, firstIndex, orderedRows.length, limit);
+            return result;
+        }
+        if (limit == 0) return pack(firstIndex, 0);
+        if ((requiredMask & excludedMask) != 0) return pack(orderedRows.length, 0);
+        if ((requiredMask | excludedMask) == 0) {
+            int copied = Math.min(limit, orderedRows.length - firstIndex);
+            System.arraycopy(orderedRows, firstIndex, output, outputOffset, copied);
+            return pack(firstIndex + copied, copied);
+        }
+        return scanLongJava(orderedRows, rowStates, firstIndex, requiredMask,
+                excludedMask, output, outputOffset, limit);
+    }
+
+    /** Java reference atom for primitive-long output; no temporary result array. */
+    static long scanLongJava(long[] rows, byte[] states, int first, int required,
+            int excluded, long[] output, int outputOffset, int limit) {
+        int next = first;
+        int copied = 0;
+        while (next < rows.length && copied < limit) {
+            int flags = states[next] & 0xff;
+            if ((flags & required) == required && (flags & excluded) == 0) {
+                output[outputOffset + copied++] = rows[next];
+            }
+            next++;
+        }
+        return pack(next, copied);
+    }
+
     /** Pure Java reference atom; call only after public validation. */
     static long scanJava(int[] rows, byte[] states, int first, int required,
             int excluded, int[] output, int outputOffset, int limit) {
@@ -126,4 +190,7 @@ public final class M3IndexMaskWindow {
 
     private static native long scanNative(int[] rows, byte[] states, int first,
             int required, int excluded, int[] output, int outputOffset, int limit);
+
+    private static native long scanLongNative(long[] rows, byte[] states, int first,
+            int required, int excluded, long[] output, int outputOffset, int limit);
 }
