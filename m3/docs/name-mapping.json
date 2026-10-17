@@ -3,6 +3,20 @@
   "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
     {
+      "source": "com.synexia.indexstring.projection.MIndexDerivativeRegex / MIndexPredicateAlphabet / native derivative power ABI",
+      "source_commit": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
+      "source_blob": "292675e404c5a087e0039e20bf2b63f22bb97bfe",
+      "target": "com.m3.precompute.M3RegexDerivative / M3RegexPredicateAlphabet / M3RegexDerivativeNative",
+      "target_module": "m3/ports/precompute",
+      "status": "ISOLATED_TARGET_CANDIDATE_NO_JAVA_BASE_PROMOTION",
+      "recipe": "com.synexia.rewrite.M3Jdk21DerivativeRegexReceiver",
+      "license": "Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors; preserve OpenJDK licenses",
+      "adaptation": "target owned M3 naming, M3Progress, shared precompute native load path, symbolic predicates, existing M3RegexDfaEffects ASCII effect bridge",
+      "restrictions": "restricted non-surrogate BMP algebraic full matches; no captures/lookarounds/backreferences; Java Pattern/Matcher remain authoritative",
+      "gates": "receiver recipe fixed-point and drift refusal; Maven Java 21; native C11/JNI tests; differential Java Pattern fixtures; unicode refusal; full JDK jtreg and CPU/heap/JNI resource measurements PENDING",
+      "collections": "filtered/sorted collections remain separately gated after String stage; no public java.util contract changes"
+    },
+    {
       "source": "com.synexia.indexstring.MIndexRegexProgram / LeetCode 10 and GeeksForGeeks dot-star matching taxonomy",
       "target": "java.lang.M3StringRegexDp and java.lang.String.matches",
       "status": "additive bounded M3JDK21 runtime candidate; JDK product qualification pending",
