@@ -4,7 +4,7 @@ Status: **DRAFT / bounded collections receiver**, not collection-phase or java.u
 
 Canonical recipe authority: [hsoliwal/com.synexia#12098](https://github.com/hsoliwal/com.synexia/pull/12098),
 branch `m3/filtered-navigable-consolidation-20261017`, recipe commit
-`e22f86fa87e65ca9778c65dccb4785e2bd76daca`.
+`bd70e19257c61288b2c43c0c153ee55429798c84`.
 
 Target baseline: `master@4e29dc9d4141261e8763fbe9ffd6a20e017b1aff`.
 

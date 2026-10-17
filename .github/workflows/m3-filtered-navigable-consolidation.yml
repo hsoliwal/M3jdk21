@@ -6,6 +6,7 @@ on:
       - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3FilteredNavigableFacadeSelfTest.java'
+      - 'm3/collections/docs/FILTERED_SORTED_VIEWS_RECEIVING_20261017.md'
       - 'm3/collections/qualification/filtered-navigable-consolidation-20261017/**'
       - '.github/workflows/m3-filtered-navigable-consolidation.yml'
   workflow_dispatch:
