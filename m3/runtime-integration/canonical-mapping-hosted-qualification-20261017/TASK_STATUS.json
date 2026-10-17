@@ -1,0 +1,123 @@
+{
+  "schema": "M3_CANONICAL_MAPPING_HOSTED_QUALIFICATION_STATUS_V1",
+  "stage": "INDEPENDENT_SOURCE_REVIEW_PASS_DRAFT_ALL_NEW_EXECUTION_NOT_RUN",
+  "goal": {
+    "status": "active",
+    "objective": "Continuously implement, verify, and optimize the complete MIndex*/MatIndex*/SubMIndex* migration from hsoliwal/com.synexia to hsoliwal/M3jdk21 and its java.lang.String integration. Follow the user's twelve-pass specification and borrow-first doctrine; preserve source contracts and durable source-to-target mappings; advance Route A, safe compiler lowering (Route B), and matched complete-JDK integration (Route C) independently; measure performance and heap/native/mapped retention; fix evidenced defects; maintain recipes, coverage, exact-candidate receipts, draft PRs, TODO and resume records. Keep the continual optimization goal active across milestones; never treat a partial port, passing explicit-view tests, a manifest, or a draft PR as completion of the complete migration or ongoing optimization.",
+    "scopeReduced": false
+  },
+  "sourceParent": "ea94f34c364e08144d558cf269d48b6e2d1b904f",
+  "receiverParent": "069d7146733ff1d059c67220d5d5638d7c159ba3",
+  "mappingDonor": "347ac7363aea1e9a7527df64ad62184534089fdf",
+  "precodeFoss": "8de042e3c34c9872ae3763b2045fa17bfb78032b",
+  "workflowBefore": "c8e9b91b4c61377eaaa27e603e2a970b920f19b7",
+  "workflowAfter": "189a9292a2150ef04df003ab07cb1febaed0f7f3",
+  "expected": {
+    "originalSdkMethods": 9,
+    "mappingSdkMethods": 3,
+    "successorSdkMethods": 2,
+    "totalSdkMethods": 14,
+    "supervisedCommands": 16,
+    "artifactPaths": 17,
+    "contractMains": 2,
+    "compiledProofSources": 4,
+    "sourceContextFiles": 17,
+    "predecessorWorkflowJobs": 6,
+    "otherJobsByteExact": 5
+  },
+  "scope": {
+    "newRuntimeApi": false,
+    "installedJdk": false,
+    "globalPhaseAdvanced": false,
+    "actualEngineReplay": "NOT_RUN",
+    "ramWorkflowReplay": "EXACT_EIGHT_DELTA_FORWARD_AND_INVERSE",
+    "formalAutoreview": "NOT_RUN_STORAGE_HOLD",
+    "maven": "NOT_RUN",
+    "hosted": "AWAITING_EXACT_HEAD_RUN",
+    "originalMigrationCli": "NOT_RUN_DEPENDENCY_BOOTSTRAP_UNPROVEN",
+    "matchedJdkJtreg": "NOT_RUN",
+    "jni": "NOT_RUN_THIS_PHASE"
+  },
+  "audits": {
+    "runtimeCohort": {
+      "sourceBlob": "c90091edc8a5eb9d719e71c9d21ff15a9d4992c1",
+      "targets": 66,
+      "after": 56,
+      "authorizedMutf8Successor": 4,
+      "drift": 6,
+      "missing": 0,
+      "manifestResealed": false,
+      "next": "Qualify a complete exact current cohort and genuine successor recipe composition; preserve historical replay and refuse partial/unknown cohorts."
+    },
+    "originalCli": {
+      "sourceBlob": "4437ac925c6aa2990af247c1a65c498fd4c6b798",
+      "fileReadPaths": 50,
+      "sparsePathsIncludingPrevious": 54,
+      "dependencyRequirementPaths": 1,
+      "currentCustodyMismatches": 0,
+      "completionBlockers": 158,
+      "fullValidation": "NOT_RUN",
+      "dependencyImport": "NOT_RUN"
+    },
+    "wrapperContinuity": {
+      "sourceBlob": "3b1c441ca1d091777fd93b14ac66348ed68af52c",
+      "cause": "Ancestry-only octopus merge9528ffa retained wrapper branch e81 as parent13 while keeping first-parent tree; no deliberate abandonment established.",
+      "originalPrAddedFiles": 34,
+      "currentMissing": 34,
+      "historicalHostedRun": 38933086594,
+      "historicalHostedJob": 117082211486,
+      "historicalHosted": "SUCCESS_EXACT_HISTORICAL_HEAD_ONLY",
+      "currentCompatibility": "NOT_QUALIFIED",
+      "next": "Reuse the pinned finite dependency inventory to author and qualify a current continuity recipe: 45 existing target rows, 42 ABSENT plus three exact existing preimages; preserve current owners and run observed method inventories. No restoration has executed.",
+      "dependencyInventory": "44f22e347e18840333903feaf7809e2ec485fe4b",
+      "sourceDerivedExpected": {
+        "coreUnits": 88,
+        "interopOwners": 7,
+        "historicalSdkMethods": 34,
+        "composedWrapperRuntimeMethods": 137,
+        "additionalMaskAndLeaseMethods": 5,
+        "totalTargetedRuntimeMethods": 142,
+        "execution": "NOT_RUN"
+      }
+    }
+  },
+  "routes": {
+    "A": "Current runtime mapping and explicit-view acceptance remain partial/unverified.",
+    "B": "Current compiler source/fixture qualification is pending actual hosted execution; transparent safe lowering and real MIndex bridge are not qualified.",
+    "C": "Matched complete-JDK/native/jtreg/installed-image gates remain open."
+  },
+  "storage": {
+    "protection": "ACTIVE",
+    "bulk": "HOLD",
+    "nativeTemp": "K:\\codex-work\\agent-temp\\",
+    "controlSha256": "9dd68b48586a776700f2e9d4eee45a0bc568ccee7b6c2270bfab855570bd457d",
+    "localWrites": "Only admitted bounded S control receipts; no C TODO/memory/source/build writes.",
+    "lastMeasured": {
+      "K": 2999615488,
+      "S": 26366791680,
+      "C": 261480448
+    },
+    "reserveBytes": 8589934592
+  },
+  "next": [
+    "Observe exact candidate hosted qualification; queued means no execution.",
+    "Run original unchanged Python validator/report only with a genuine qualified dependency provider and exact sparse root.",
+    "Repair all six runtime custody drifts through existing source-sealed recipes and full current-cohort acceptance.",
+    "Materialize qualified collection chain with current-owner compatibility, then installed-image proof.",
+    "Continue twelve-pass complete family migration, performance and heap/native/mapped retention measurements."
+  ],
+  "sourceReview": {
+    "independent": "e60c8248f1ab8d2f6a00b3e475612299d7b7bd1d",
+    "authorReadback": "55d348a00f2af69776ffce6620ac3eb033ab6886",
+    "rootAll11RawHashes": "EXACT",
+    "formal": "NOT_RUN_STORAGE_HOLD"
+  },
+  "sdk": {
+    "core": "8185889db69c1f348db1cdca2497eceb5757c04c",
+    "pins": "6cef1b8395ef0f9ea13846b01711db3324576ee9",
+    "pinsSha256": "6c154614fdd47f276ba89f15846142aa21126fc2785d9cc6d1428ae75339f8e5",
+    "files": 11,
+    "bytes": 177190,
+    "checkpoint": "c57b30e0092442b61af423f4ee4e74f5b3f3c640"
+  }
+}

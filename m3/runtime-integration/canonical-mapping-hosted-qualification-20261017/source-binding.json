@@ -1,0 +1,26 @@
+{
+  "schema": "M3_CANONICAL_MAPPING_HOSTED_RECEIVER_BINDING_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalSourceCommit": "cdfce555fc13b5d34ce2c5ef2f23bc27714c59c6",
+  "canonicalPullRequest": 12031,
+  "canonicalSourcePath": "synexia-openrewrite-recipes/recipes/m3-canonical-mapping-hosted-qualification-20261017/workflow-sdk",
+  "moduleGitTree": "8185889db69c1f348db1cdca2497eceb5757c04c",
+  "pinsSha256": "6c154614fdd47f276ba89f15846142aa21126fc2785d9cc6d1428ae75339f8e5",
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "receiverParent": "069d7146733ff1d059c67220d5d5638d7c159ba3",
+  "receiverCorePath": "m3/runtime-integration/javac-regex-current-owner-20261017/mapping-workflow-canonical",
+  "mappingDonorCommit": "347ac7363aea1e9a7527df64ad62184534089fdf",
+  "mappingDonorPullRequest": 1041,
+  "donatedMappingFiles": 35,
+  "mappingCore": "acb7e31ace0871a7a4d1630ff899a19e922a9d52",
+  "unchangedPredecessorCore": "bb80fe9c69eb41ac6f33c063ce8d0736be9d6f85",
+  "precodeFoss": "8de042e3c34c9872ae3763b2045fa17bfb78032b",
+  "independentSourceReview": "e60c8248f1ab8d2f6a00b3e475612299d7b7bd1d",
+  "workflow": {
+    "before": "c8e9b91b4c61377eaaa27e603e2a970b920f19b7",
+    "after": "189a9292a2150ef04df003ab07cb1febaed0f7f3"
+  },
+  "execution": "NOT_RUN",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

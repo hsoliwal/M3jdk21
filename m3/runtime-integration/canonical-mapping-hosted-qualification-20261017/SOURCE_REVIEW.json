@@ -1,0 +1,109 @@
+{
+  "schema": "M3_CANONICAL_MAPPING_HOSTED_SUCCESSOR_INDEPENDENT_SOURCE_REVIEW_V1",
+  "atUtc": "2026-10-17 09:41:32 UTC",
+  "reviewer": "/root/mapping_successor_review",
+  "verdict": "PASS_SOURCE_AND_BYTE_REVIEW_ONLY",
+  "authorCheckpoint": "9eabfd19c9ee026d1e0c00dc16bbbbf487e3abf8",
+  "sdkCheckpoint": "c57b30e0092442b61af423f4ee4e74f5b3f3c640",
+  "precodeFoss": "8de042e3c34c9872ae3763b2045fa17bfb78032b",
+  "workflow": {
+    "beforeGit": "c8e9b91b4c61377eaaa27e603e2a970b920f19b7",
+    "beforeSha256": "689f6e970fedc702f8d31c36c840954bfdb0da3ca5e4b38de18dbb78a23fadb2",
+    "afterGit": "189a9292a2150ef04df003ab07cb1febaed0f7f3",
+    "afterSha256": "88ca043886bf8fcc4c9cc5488ad23bdb17ac005187fe44e17794874dd626d18d",
+    "literalChanges": 8,
+    "forward": "EXACT_AFTER_BYTES",
+    "inverse": "EXACT_BEFORE_BYTES",
+    "totalJobs": 6,
+    "unchangedOtherJobs": [
+      {
+        "name": "contract",
+        "same": true
+      },
+      {
+        "name": "foundation",
+        "same": true
+      },
+      {
+        "name": "precompute",
+        "same": true
+      },
+      {
+        "name": "control-reactor",
+        "same": true
+      },
+      {
+        "name": "release-proof-summary",
+        "same": true
+      }
+    ],
+    "oldCommands": 10,
+    "supervisedCommands": 16,
+    "oldCommandsPreserved": "EXACT_ORDERED_SUBSEQUENCE",
+    "artifactPaths": 17,
+    "mappingCustodyPaths": 10,
+    "allCustodyPathsInSparseCheckout": true,
+    "oldSdkMethods": 9,
+    "mappingSdkMethods": 3,
+    "successorSdkMethods": 2,
+    "expectedTotalSdkMethods": 14,
+    "originalJdkOnlyContractMains": 2
+  },
+  "guards": {
+    "timeoutMinutes": 15,
+    "aggregateCapMiB": 512,
+    "reserveGiB": 8,
+    "storageGate": "BYTE_EXACT_PREDECESSOR",
+    "commandSupervisor": "BYTE_EXACT_PREDECESSOR",
+    "tempCacheProcessControls": "PRESERVED_BY_EXACT_EIGHT_DELTA_INVERSE",
+    "predecessorMetadataGit": "9ade5544dcaeed65116fcacb05e12b54625a7f33",
+    "predecessorMetadataSha256": "bcf127cea1e729efeae22e1a098f3935c869d8d04218169c7a6bbddc7a75413c",
+    "predecessorFixtureSha256": "689f6e970fedc702f8d31c36c840954bfdb0da3ca5e4b38de18dbb78a23fadb2",
+    "mappingSourceBindingGit": "af643e00de3284e4dfd3716d50f1d88732d18f7e",
+    "mappingSourceBindingSha256": "8c6aa71568828f0ddef6b6ecf0df637c478cb066adb204252bf531477f7e509e",
+    "mappingTree": "acb7e31ace0871a7a4d1630ff899a19e922a9d52",
+    "mappingPinsSha256": "99e64f97550dfebede86c8d0fabfd3d2de2700a51e3b302af4676b1aeb2c9ab2",
+    "actualWorkflowBinding": "SUCCESSOR_OUTPUT_ONLY",
+    "selfHashCycle": false
+  },
+  "sdk": {
+    "tree": "8185889db69c1f348db1cdca2497eceb5757c04c",
+    "files": 11,
+    "bytes": 177190,
+    "pinsGit": "6cef1b8395ef0f9ea13846b01711db3324576ee9",
+    "pinsSha256": "6c154614fdd47f276ba89f15846142aa21126fc2785d9cc6d1428ae75339f8e5",
+    "testGit": "047df9dd6d37d8ecc39e51905729d557d4a70b1f",
+    "verifierGit": "20fdc0b6de51de46bcce615f16ad1dc0dabb1cd4",
+    "strictPomGit": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+    "providers": [
+      "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    ],
+    "allPinsMatchGitAndRawDigests": true,
+    "javaLiteralEditsIndependentlyReplayed": true,
+    "javaAssertedGateAnchors": 88,
+    "javaAssertedGateAnchorsPresent": 88,
+    "suiteNamesMatchJava": true,
+    "expectedClosureRefusals": 34,
+    "expectedReportRefusals": 18,
+    "refusalCounts": "DERIVED_FROM_SOURCE_NOT_EXECUTED",
+    "mavenValidateInvokes": "python3 -I -S -B verify.py --self-test"
+  },
+  "findings": [],
+  "execution": {
+    "javaCompile": "NOT_RUN",
+    "maven": "NOT_RUN",
+    "python": "NOT_RUN",
+    "formalAutoreview": "NOT_RUN_STORAGE_HOLD",
+    "wholeMigrationValidator": "NOT_RUN",
+    "modifiedJdk": "NOT_RUN",
+    "jni": "NOT_RUN",
+    "runtimeAcceptance": "NOT_RUN",
+    "performance": "NOT_RUN",
+    "runtimeApplied": false,
+    "phaseAdvanced": false
+  },
+  "reviewMethod": "Approved GitHub reads; bounded JavaScript RAM byte comparisons and official MIT js-sha256 v0.11.1 with abc self-check. No filesystem writes, JVM, Python, build, download, cache, SSH or ref mutation.",
+  "goal": "ACTIVE",
+  "remaining": "Execute qualified hosted job and inspect exact-candidate SDK/contract receipts; independent full migration validation, Routes A/B/C and JNI/performance acceptance remain required."
+}

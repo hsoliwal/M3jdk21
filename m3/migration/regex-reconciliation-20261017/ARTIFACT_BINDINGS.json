@@ -1,0 +1,258 @@
+{
+  "schema": "M3_CANONICAL_REGEX_MAPPING_ARTIFACT_BINDINGS_V2",
+  "scope": "HASHED_COMMITTED_SOURCE_FIXTURES_AND_ACTUAL_RECEIVING_BASELINES",
+  "sourceRevision": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+  "receivingRevision": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+  "artifacts": {
+    "sourceDot": {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "module": "synexia-indexstring",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexDotStarRelations.java",
+      "symbol": "com.synexia.indexstring.MIndexDotStarRelations",
+      "signatures": [
+        "<T> Result evaluate(T,Access<T>,int[],int,int,long,Join,IProgressMonitor)",
+        "Object Access.owner(T)",
+        "long Access.coordinate(T)",
+        "int Access.length(T)",
+        "int Access.codeUnitAt(T,int)",
+        "T Access.first(T)",
+        "T Access.second(T)",
+        "long[] Join.compose(long[],long[])"
+      ],
+      "sha256": "1eeaef102a313396a000538f2f8b1c04cd1dbfd5553d7fa81b4d97a131fb1573",
+      "git_blob_sha1": "9b75e3370bcec6de914954490cc355b9573f7505",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "sourceState": {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "module": "synexia-indexstring",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStateRelation.java",
+      "symbol": "com.synexia.indexstring.MIndexStateRelation",
+      "signatures": [
+        "void compose(long[],int,long[],int,long[],int,int)",
+        "native long[] composeNative(long[],long[])",
+        "native long[] repeatNative(long[],long)"
+      ],
+      "sha256": "b74e54410a6ece719ec38e88fa725271ec2ad0fe6a2a9a3446580e54d6c323d4",
+      "git_blob_sha1": "bc5eb2bf64eaacb85011c50749f8b02b7608f4f4",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "sourceC": {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "module": "synexia-indexstring/native",
+      "path": "synexia-indexstring/native/src/mindex_state_relation_jni.c",
+      "symbol": "mindex_state_relation_compose / mindex_state_relation_repeat",
+      "signatures": [
+        "int mindex_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+        "int mindex_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
+        "jlongArray Java_com_synexia_indexstring_MIndexStateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
+        "jlongArray Java_com_synexia_indexstring_MIndexStateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
+      ],
+      "sha256": "7210ecac2b72d411870889233957ce8213ec3cd0028b4f0a034a48b989f6d9f1",
+      "git_blob_sha1": "37cb952c9d9aea30de6f34e8dd6d5a5a571e46cd",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "sourceHeader": {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "module": "synexia-indexstring/native",
+      "path": "synexia-indexstring/native/include/mindex_state_relation.h",
+      "symbol": "mindex_state_relation_compose / mindex_state_relation_repeat",
+      "signatures": [
+        "int mindex_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+        "int mindex_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)"
+      ],
+      "sha256": "fcf42319350f44cb82b76f0cd4a8b71af87b474d643452e27cb07d3e163d021c",
+      "git_blob_sha1": "8ceee90e2e3b3665b433b410f81c4057b7e1de72",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "targetDot": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "module": "java.base",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
+      "symbol": "jdk.internal.mindex.M3DotStarRelations",
+      "signatures": [
+        "<T> Result evaluate(T,Access<T>,int[],int,int,long,Join,Runnable)",
+        "Object Access.owner(T)",
+        "long Access.coordinate(T)",
+        "int Access.length(T)",
+        "int Access.codeUnitAt(T,int)",
+        "T Access.first(T)",
+        "T Access.second(T)",
+        "long[] Join.compose(long[],long[])"
+      ],
+      "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757",
+      "git_blob_sha1": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "targetState": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "module": "java.base",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
+      "symbol": "jdk.internal.mindex.M3StateRelation",
+      "signatures": [
+        "void compose(long[],int,long[],int,long[],int,int)",
+        "native long[] composeNative(long[],long[])",
+        "native long[] repeatNative(long[],long)"
+      ],
+      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa",
+      "git_blob_sha1": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "targetC": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "module": "java.base",
+      "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+      "symbol": "m3_state_relation_compose / m3_state_relation_repeat",
+      "signatures": [
+        "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+        "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
+        "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
+        "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
+      ],
+      "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+      "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "targetHeader": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "module": "java.base",
+      "path": "src/java.base/share/native/libjava/m3_state_relation.h",
+      "symbol": "m3_state_relation_compose / m3_state_relation_repeat",
+      "signatures": [
+        "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+        "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)"
+      ],
+      "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
+      "git_blob_sha1": "18a02e228129827da486edc5b316790af6135310",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "targetDP": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "module": "java.base",
+      "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+      "symbol": "java.lang.M3StringRegexDp",
+      "signatures": [
+        "int tryMatch(M3String,String)"
+      ],
+      "sha256": "9a5d9511b996d780f26672e2f5dc6ccc0a2747fe33f0c5ef1a9c62629564a41e",
+      "git_blob_sha1": "164c3a369de2b888b5e5b532d0553352acccd032",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "targetHier": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "module": "jtreg",
+      "path": "test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java",
+      "symbol": "M3StringHierarchicalRegexTest",
+      "signatures": [
+        "void main(String[]) throws Exception"
+      ],
+      "sha256": "1653c23098529c2fc9f7e66e1bfb5c5c2c97adc67c422b0e67cfbd7b5fb121fd",
+      "git_blob_sha1": "5d47787597630efc70a4e3b173f2e788dfb6aa3a",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "relationFixture": {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/recipes/m3-regex-relations-current-owner-20261017/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringRegexDp.java",
+      "symbol": "java.lang.M3StringRegexDp",
+      "signatures": [
+        "int tryMatch(M3String,String)",
+        "M3DotStarRelations.Access<M3String> relationAccess()"
+      ],
+      "sha256": "fa8d39a5ad63b548f4333f86eb418c333acdb3a17b28c798f3b4737b31e90188",
+      "git_blob_sha1": "20caae4db7cd059a14a29709d7d5b5b10fff3d54",
+      "fingerprint": null,
+      "revision_role": "candidate"
+    },
+    "pressureFixture": {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/recipes/m3-regex-pressure-current-owner-20261017/sdk/src/main/resources/com/synexia/rewrite/m3-regex-pressure-current-owner-20261017/out/M3StringRegexDp.java",
+      "symbol": "java.lang.M3StringRegexDp",
+      "signatures": [
+        "int tryMatch(M3String,String)",
+        "Tables tables()",
+        "void releaseCachedMetadata()",
+        "boolean heapAllowsPreparation()",
+        "boolean hasHeapHeadroom(long,long,long,boolean)"
+      ],
+      "sha256": "287ad2b934c91f87ce904018528a16263585b43dd5ff1224f1d3de5dd92d94a3",
+      "git_blob_sha1": "e5b761fe32c9385cb09a8685c852eac3dd912216",
+      "fingerprint": null,
+      "revision_role": "candidate"
+    },
+    "pressureDonor": {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk21-regex-pressure-20261014/M3StringRegexDp.java",
+      "symbol": "java.lang.M3StringRegexDp",
+      "signatures": [
+        "Caches caches()",
+        "void releaseCachedMetadata()",
+        "boolean heapAllowsPreparation()",
+        "boolean hasHeapHeadroom(long,long,long,boolean)"
+      ],
+      "sha256": "9219bc4f6fc7cb7b1cbdefce4ebe9b9d3e722a89be5132241e66c44a7e19aed5",
+      "git_blob_sha1": "06fdd8072ce07b4b03c0381e7a175878749bf27d",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "hierarchyFixture": {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/recipes/m3-regex-hierarchical-route-acceptance-20261017/sdk/src/main/resources/com/synexia/rewrite/m3-regex-hierarchical-route-acceptance-20261017/out/M3StringHierarchicalRegexTest.java",
+      "symbol": "M3StringHierarchicalRegexTest",
+      "signatures": [
+        "void main(String[]) throws Exception",
+        "void verifyProductionRoutes(Field,Method,Field,Method,String) throws Exception"
+      ],
+      "sha256": "5302a8d4e877c168dc0224316cac8d75e39c850eafd7123c33e7feaf27f06209",
+      "git_blob_sha1": "0a91c9d3266525152ef64990eeb09af4c005f23d",
+      "fingerprint": null,
+      "revision_role": "candidate"
+    }
+  },
+  "sourceCandidateRole": "Recipe out fixtures are candidate source artifacts only. They are not public runtime targets or executed tests.",
+  "authority": "m3/docs/name-mapping.json migration.records; no new registry or canonical naming authority.",
+  "actualExecution": "NOT_RUN",
+  "historicalSparseManifest": {
+    "repo": "hsoliwal/com.synexia",
+    "commit": "f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72",
+    "module": "synexia-openrewrite-recipes",
+    "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+    "symbol": "m3jdk21-tq-sparse-lookup/manifest.tsv",
+    "signatures": [
+      "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java\td7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155\t78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4\tM3TQ.java.txt",
+      "test/jdk/java/lang/String/M3TQSparseContainmentTest.java\tABSENT\t94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790\tM3TQSparseContainmentTest.java.txt"
+    ],
+    "sha256": "725a5dbccbfa4ff834586c21f9c495fffec985dd9d9033f86fc6e808ea421fa2",
+    "git_blob_sha1": "2fdaa30d27463bb9e9bff5064cbd4015571d3aa9",
+    "fingerprint": null,
+    "revision_role": "pinned"
+  },
+  "sourceAndReceivingQualification": "NOT_RUN"
+}

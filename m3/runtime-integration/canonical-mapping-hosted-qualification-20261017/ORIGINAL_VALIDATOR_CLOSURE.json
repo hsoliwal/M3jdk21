@@ -1,0 +1,874 @@
+{
+  "schema": "M3_ORIGINAL_GLOBAL_MIGRATION_CLI_CLOSURE_AUDIT_V1",
+  "scope": "READ_ONLY_SOURCE_AND_GITHUB_TRANSPORT_INVENTORY_NOT_EXECUTED_VALIDATION",
+  "repository": "hsoliwal/M3jdk21",
+  "receivingCommit": "347ac7363aea1e9a7527df64ad62184534089fdf",
+  "baseline": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+  "canonicalD": {
+    "path": "m3/docs/name-mapping.json",
+    "git_blob_sha1": "188b06b9e25edb3373825d59d12b97ad1d2d1dce",
+    "sha256": "d9f17863e6325f7085967152ea725dfa9ab1b3b97ed21ee221a006e74fc10091",
+    "bytes": 436409,
+    "roles": [
+      "current-canonical-D"
+    ]
+  },
+  "originalValidator": {
+    "path": "m3/migration/migration.py",
+    "git_blob_sha1": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+    "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+    "bytes": 23333,
+    "roles": [
+      "original-validator"
+    ]
+  },
+  "originalSchema": {
+    "path": "m3/docs/name-mapping.schema.json",
+    "git_blob_sha1": "40f032174baa2f1c19e3b02686723bc37f37122c",
+    "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+    "bytes": 16827,
+    "roles": [
+      "original-schema"
+    ]
+  },
+  "previousA": {
+    "path": "m3/migration/regex-reconciliation-20261017/sdk/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-reconciliation-20261017/before.json",
+    "git_blob_sha1": "a44460f982940623cf6ba1ca625caeeaa889f633",
+    "sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+    "bytes": 399438,
+    "roles": [
+      "previous-canonical-A"
+    ]
+  },
+  "closureCounts": {
+    "currentValidatorFileReadPaths": 50,
+    "includingValidatorSchemaAndCurrentCanonical": 53,
+    "includingPreviousA": 54,
+    "includingDependencyRequirementsAdmission": 55,
+    "totalSourceBytes": 1213901,
+    "prior51AuditCorrection": "The earlier51read audit included the missing sparse source recipe path. D moved it to historical source custody; it is not a receiving file read."
+  },
+  "sparseCheckoutPaths54": [
+    "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+    "m3/algorithms/test/PrefixZContractTest.java",
+    "m3/algorithms/test/ViewInteropContractTest.java",
+    "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+    "m3/core/src/com/m3/text/LocalM3Arena.java",
+    "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+    "m3/core/src/com/m3/text/M3StringPiece.java",
+    "m3/core/src/com/m3/text/StorageIdentity.java",
+    "m3/docs/name-mapping.json",
+    "m3/docs/name-mapping.schema.json",
+    "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log",
+    "m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
+    "m3/migration/evidence/local-20261002-final/receipt.json",
+    "m3/migration/migration.py",
+    "m3/migration/pinned-dependencies.json",
+    "m3/migration/recipes/prefix-z-v1.tsv",
+    "m3/migration/regex-reconciliation-20261017/sdk/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-reconciliation-20261017/before.json",
+    "m3/migration/run-tests.py",
+    "m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+    "m3/migration/test/RecipeContractTest.java",
+    "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+    "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+    "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+    "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+    "src/java.base/share/classes/java/util/regex/Matcher.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3CB.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Field.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Member.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Method.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3PC.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
+    "src/java.base/share/native/libjava/M3BitLane28.c",
+    "src/java.base/share/native/libjava/M3StateRelation.c",
+    "src/java.base/share/native/libjava/m3_state_relation.h"
+  ],
+  "dependencyAdmissionExtra": "m3/migration/requirements.txt",
+  "files": {
+    "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java": {
+      "git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
+      "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+      "bytes": 5081,
+      "roles": [
+        "target:m3.prefix-z",
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/algorithms/test/PrefixZContractTest.java": {
+      "git_blob_sha1": "5e9a2af0dba89366459f2eb25f4a06301652dd73",
+      "sha256": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+      "bytes": 7818,
+      "roles": [
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/algorithms/test/ViewInteropContractTest.java": {
+      "git_blob_sha1": "003d437dd482e2bc7e85eb38747a41e6940b08e5",
+      "sha256": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+      "bytes": 3808,
+      "roles": [
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/core/src/com/m3/text/JoinedM3StringPiece.java": {
+      "git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+      "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+      "bytes": 2634,
+      "roles": [
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/core/src/com/m3/text/LocalM3Arena.java": {
+      "git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+      "bytes": 1975,
+      "roles": [
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/core/src/com/m3/text/LocalM3StringPiece.java": {
+      "git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+      "bytes": 2115,
+      "roles": [
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/core/src/com/m3/text/M3StringPiece.java": {
+      "git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+      "bytes": 767,
+      "roles": [
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/core/src/com/m3/text/StorageIdentity.java": {
+      "git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+      "bytes": 494,
+      "roles": [
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/docs/name-mapping.json": {
+      "git_blob_sha1": "188b06b9e25edb3373825d59d12b97ad1d2d1dce",
+      "sha256": "d9f17863e6325f7085967152ea725dfa9ab1b3b97ed21ee221a006e74fc10091",
+      "bytes": 436409,
+      "roles": [
+        "current-canonical-D"
+      ]
+    },
+    "m3/docs/name-mapping.schema.json": {
+      "git_blob_sha1": "40f032174baa2f1c19e3b02686723bc37f37122c",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "bytes": 16827,
+      "roles": [
+        "original-schema"
+      ]
+    },
+    "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log": {
+      "git_blob_sha1": "bb620416f7179f62c06f9085b1bd7d560807145d",
+      "sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "bytes": 57,
+      "roles": [
+        "receipt-stdout:prefix-z-interpreter"
+      ]
+    },
+    "m3/migration/evidence/local-20261002-final/prefix-z-normal.log": {
+      "git_blob_sha1": "bb620416f7179f62c06f9085b1bd7d560807145d",
+      "sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "bytes": 57,
+      "roles": [
+        "receipt-stdout:prefix-z-normal"
+      ]
+    },
+    "m3/migration/evidence/local-20261002-final/receipt.json": {
+      "git_blob_sha1": "45838490350429dd4c62f723ed4133a1111b81f9",
+      "sha256": "2a639e4937a414f98fd6f859562f8c392e54e94a39f02427daa7df6e336f82f6",
+      "bytes": 15056,
+      "roles": [
+        "selected-tested-record-receipt"
+      ]
+    },
+    "m3/migration/migration.py": {
+      "git_blob_sha1": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+      "bytes": 23333,
+      "roles": [
+        "original-validator"
+      ]
+    },
+    "m3/migration/pinned-dependencies.json": {
+      "git_blob_sha1": "7049bf1c72e057aa82d956469d0e72cd968686ed",
+      "sha256": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+      "bytes": 1748,
+      "roles": [
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/migration/recipes/prefix-z-v1.tsv": {
+      "git_blob_sha1": "9b70c3bfea7109fffab44b186d407854a5fe495d",
+      "sha256": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217",
+      "bytes": 1028,
+      "roles": [
+        "recipe:m3.prefix-z"
+      ]
+    },
+    "m3/migration/regex-reconciliation-20261017/sdk/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-reconciliation-20261017/before.json": {
+      "git_blob_sha1": "a44460f982940623cf6ba1ca625caeeaa889f633",
+      "sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "bytes": 399438,
+      "roles": [
+        "previous-canonical-A"
+      ]
+    },
+    "m3/migration/requirements.txt": {
+      "git_blob_sha1": "05b7a1e858af08d4d364a1e4a3df8c856c6a8451",
+      "sha256": "bdba948e9222f540dff178ccceebf97e496e1c360257c6434b8eac8cabf154a5",
+      "bytes": 73,
+      "roles": [
+        "dependency-admission-only-not-read-by-validator"
+      ]
+    },
+    "m3/migration/run-tests.py": {
+      "git_blob_sha1": "6c5a48faed8affdef5c3cbb39e349fa4154187a7",
+      "sha256": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+      "bytes": 5265,
+      "roles": [
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/migration/src/com/m3/migration/ExactFileRecipe.java": {
+      "git_blob_sha1": "918f41259c0c623bb88287c44c817070a58fd9fe",
+      "sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+      "bytes": 15906,
+      "roles": [
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/migration/test/RecipeContractTest.java": {
+      "git_blob_sha1": "77644bc9defdf65793dc3049ed0e6658acb6463a",
+      "sha256": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea",
+      "bytes": 10089,
+      "roles": [
+        "receipt-input:prefix-z-normal",
+        "receipt-input:prefix-z-interpreter"
+      ]
+    },
+    "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv": {
+      "git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "bytes": 2451,
+      "roles": [
+        "recipe:synexia.counterpart.MIndexVmSession",
+        "recipe:synexia.counterpart.MIndexVmPrecomputeKey",
+        "recipe:synexia.counterpart.MIndexClass",
+        "recipe:synexia.counterpart.MIndexClassIndex",
+        "recipe:synexia.counterpart.MIndexClassBoundary",
+        "recipe:synexia.counterpart.MIndexMember",
+        "recipe:synexia.counterpart.MIndexMemberKind",
+        "recipe:synexia.counterpart.MIndexMemberFlags",
+        "recipe:synexia.counterpart.MIndexClassFlags",
+        "recipe:synexia.counterpart.MIndexField",
+        "recipe:synexia.counterpart.MIndexMethod",
+        "recipe:synexia.counterpart.MIndexConstructor",
+        "recipe:synexia.counterpart.MIndexRecordComponent"
+      ]
+    },
+    "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv": {
+      "git_blob_sha1": "671f39310580ee466315a1340ae3e2006dc897bc",
+      "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "bytes": 1242,
+      "roles": [
+        "recipe:synexia.collections.SegmentedAddress28",
+        "recipe:synexia.collections.SegmentedIntLane28",
+        "recipe:synexia.collections.SegmentedLongLane28",
+        "recipe:synexia.collections.SegmentedBitLane28",
+        "recipe:synexia.collections.PackedBitAtoms"
+      ]
+    },
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv": {
+      "git_blob_sha1": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "bytes": 396,
+      "roles": [
+        "recipe:synexia.counterpart.MIndexJvmDescriptor"
+      ]
+    },
+    "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv": {
+      "git_blob_sha1": "d23517ac24eb1ba428f53bd34f304d70eb468406",
+      "sha256": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da",
+      "bytes": 392,
+      "roles": [
+        "recipe:synexia.regex.mr"
+      ]
+    },
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv": {
+      "git_blob_sha1": "777c79742b81d3fce8ad1f40e7a52e7d09474fde",
+      "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+      "bytes": 303,
+      "roles": [
+        "recipe:synexia.counterpart.MIndexRegexTrigramQuery"
+      ]
+    },
+    "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv": {
+      "git_blob_sha1": "2e77d4929b7b8dd3609b990774b062fc6991dc18",
+      "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
+      "bytes": 453,
+      "roles": [
+        "recipe:synexia.counterpart.MIndexVersionTable",
+        "recipe:synexia.counterpart.MIndexLibraryRelease"
+      ]
+    },
+    "src/java.base/share/classes/java/util/regex/Matcher.java": {
+      "git_blob_sha1": "b31fde7511bbdd3a139b330d85b66cae9a739224",
+      "sha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+      "bytes": 73418,
+      "roles": [
+        "target:synexia.regex.mr"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java": {
+      "git_blob_sha1": "14cdb999f5eab5be443044bff2d273fb4e4113fb",
+      "sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+      "bytes": 2596,
+      "roles": [
+        "target:synexia.collections.SegmentedAddress28"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java": {
+      "git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+      "sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+      "bytes": 10427,
+      "roles": [
+        "target:synexia.collections.SegmentedBitLane28"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java": {
+      "git_blob_sha1": "2ad46058a5325483647af4af16858c329ae24665",
+      "sha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+      "bytes": 551,
+      "roles": [
+        "target:synexia.collections.PackedBitAtoms"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": {
+      "git_blob_sha1": "f10f815fc1a59a0d1ea7ed45158b89178f128a1a",
+      "sha256": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
+      "bytes": 4114,
+      "roles": [
+        "target:synexia.counterpart.MIndexClassBoundary"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": {
+      "git_blob_sha1": "0be655b7020f13f3df4265f68daf189bd039d86b",
+      "sha256": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
+      "bytes": 7771,
+      "roles": [
+        "target:synexia.counterpart.MIndexVmSession"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": {
+      "git_blob_sha1": "2acac4ad654a8af823fa46b483a42dd2f9c894c4",
+      "sha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+      "bytes": 61135,
+      "roles": [
+        "target:synexia.counterpart.MIndexClassIndex"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Class.java": {
+      "git_blob_sha1": "b95eee3c820f6054b4f70507dee101c9f456302f",
+      "sha256": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+      "bytes": 16841,
+      "roles": [
+        "target:synexia.counterpart.MIndexClass"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java": {
+      "git_blob_sha1": "fc2152f63f4c404bce630b043d9138eaf96cb93e",
+      "sha256": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
+      "bytes": 1592,
+      "roles": [
+        "target:synexia.counterpart.MIndexClassFlags"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java": {
+      "git_blob_sha1": "4d708115e139a4ab938a4f9abd856f7fc98c5c00",
+      "sha256": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
+      "bytes": 2329,
+      "roles": [
+        "target:synexia.counterpart.MIndexConstructor"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java": {
+      "git_blob_sha1": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "bytes": 1815,
+      "roles": [
+        "target:synexia.counterpart.MIndexJvmDescriptor"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": {
+      "git_blob_sha1": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+      "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757",
+      "bytes": 8838,
+      "roles": [
+        "target:synexia.regex.ordered-relations.adapter"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Field.java": {
+      "git_blob_sha1": "fad031da70ce813f52e5fc06479542a224bcd81a",
+      "sha256": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
+      "bytes": 2041,
+      "roles": [
+        "target:synexia.counterpart.MIndexField"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java": {
+      "git_blob_sha1": "513a1e8f5d55c074250d3b2747f041c19a1128e7",
+      "sha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
+      "bytes": 7842,
+      "roles": [
+        "target:synexia.collections.SegmentedIntLane28"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java": {
+      "git_blob_sha1": "325e8e90ace21e71069665b74585c522b2c627b4",
+      "sha256": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
+      "bytes": 8134,
+      "roles": [
+        "target:synexia.collections.SegmentedLongLane28"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Member.java": {
+      "git_blob_sha1": "d5f8e07afc304379d5165c9c5c1659855938b5b0",
+      "sha256": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
+      "bytes": 2493,
+      "roles": [
+        "target:synexia.counterpart.MIndexMember"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java": {
+      "git_blob_sha1": "f68a952217d3eead4ed10a43de49c240d6b790f1",
+      "sha256": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be",
+      "bytes": 1722,
+      "roles": [
+        "target:synexia.counterpart.MIndexMemberFlags"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java": {
+      "git_blob_sha1": "d211e6bc1e72ccc8e0ff821d26b3e30361750bc9",
+      "sha256": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b",
+      "bytes": 718,
+      "roles": [
+        "target:synexia.counterpart.MIndexMemberKind"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Method.java": {
+      "git_blob_sha1": "6bc2fe9176bdd9c95d732ecad105f03b62f4385e",
+      "sha256": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58",
+      "bytes": 2478,
+      "roles": [
+        "target:synexia.counterpart.MIndexMethod"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3PC.java": {
+      "git_blob_sha1": "b63fd9e457f7ac16bca8bf07dcb564069fdfef79",
+      "sha256": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898",
+      "bytes": 1686,
+      "roles": [
+        "target:synexia.counterpart.MIndexVmPrecomputeKey"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java": {
+      "git_blob_sha1": "55f82a8486055d50e24d1a9b12b0636f9db876ed",
+      "sha256": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
+      "bytes": 1916,
+      "roles": [
+        "target:synexia.counterpart.MIndexRecordComponent"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": {
+      "git_blob_sha1": "1116f4cb0ffd361e764688640adb53af8cabe86d",
+      "sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+      "bytes": 1593,
+      "roles": [
+        "target:synexia.counterpart.MIndexLibraryRelease"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java": {
+      "git_blob_sha1": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa",
+      "bytes": 2138,
+      "roles": [
+        "target:synexia.regex.ordered-relations.adapter"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java": {
+      "git_blob_sha1": "533a07b77061e757d476627557413f6df1067d34",
+      "sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+      "bytes": 17919,
+      "roles": [
+        "target:synexia.counterpart.MIndexRegexTrigramQuery",
+        "target:synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup"
+      ]
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": {
+      "git_blob_sha1": "087aa55bef9b57189d03f3388fb2e1f360320b02",
+      "sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+      "bytes": 6165,
+      "roles": [
+        "target:synexia.counterpart.MIndexVersionTable"
+      ]
+    },
+    "src/java.base/share/native/libjava/m3_state_relation.h": {
+      "git_blob_sha1": "18a02e228129827da486edc5b316790af6135310",
+      "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
+      "bytes": 1021,
+      "roles": [
+        "target:synexia.regex.ordered-relations.adapter"
+      ]
+    },
+    "src/java.base/share/native/libjava/M3BitLane28.c": {
+      "git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
+      "sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+      "bytes": 3494,
+      "roles": [
+        "target:synexia.collections.SegmentedBitLane28"
+      ]
+    },
+    "src/java.base/share/native/libjava/M3StateRelation.c": {
+      "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+      "bytes": 5899,
+      "roles": [
+        "target:synexia.regex.ordered-relations.adapter"
+      ]
+    }
+  },
+  "transport": {
+    "all55GitHubFileReads": "PASS",
+    "rawSha256ComparisonMismatches": [],
+    "apiReadsBoundedAtFour": true,
+    "noLocalFilesCreated": true
+  },
+  "originalCli": {
+    "validate": [
+      "ADMITTED_PYTHON",
+      "-I",
+      "-B",
+      "m3/migration/migration.py",
+      "validate",
+      "ROOT",
+      "--manifest",
+      "ROOT/m3/docs/name-mapping.json",
+      "--previous",
+      "ROOT/m3/migration/regex-reconciliation-20261017/sdk/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-reconciliation-20261017/before.json"
+    ],
+    "report": [
+      "ADMITTED_PYTHON",
+      "-I",
+      "-B",
+      "m3/migration/migration.py",
+      "report",
+      "ROOT",
+      "--manifest",
+      "ROOT/m3/docs/name-mapping.json",
+      "--previous",
+      "ROOT/m3/migration/regex-reconciliation-20261017/sdk/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-reconciliation-20261017/before.json",
+      "--output",
+      "EXPLICIT_PROOF_ROOT/migration-coverage.md"
+    ],
+    "conditionalExpectedValidateExit": 0,
+    "conditionalExpectedValidateMarker": "MIGRATION_MANIFEST_VALID completion=INCOMPLETE",
+    "conditionalExpectedReportExit": 0,
+    "completeIsSeparate": {
+      "conditionalExpectedExit": 2,
+      "sourceEnumeratedBlockers": 158
+    },
+    "rootLayout": "Keep the original script at m3/migration/migration.py beside ../docs/name-mapping.schema.json. SCHEMA_PATH is based on __file__, not --manifest or root.",
+    "requiredOriginalRules": [
+      "Duplicate/nonfinite JSON rejection and16MiB limit",
+      "Original Draft202012Validator.check_schema and full document schema validation",
+      "Implemented target/recipe exact file hashes and safe relative/symlink paths",
+      "Selected implemented-tested receipt shapes, passed exits, exact input/output hashes and target candidate closure",
+      "--previous stable IDs and endpoint lineage",
+      "No implicit completion/inventory/runtime promotion"
+    ],
+    "completionErrorsSourceEnumeration": [
+      "full source tree inventory is incomplete",
+      "semantic dependency/ownership closure is incomplete",
+      "pinned exhaustive inventory receipt is absent",
+      "uninspected domains remain",
+      "m3.p0-view-dependencies: pending",
+      "m3.p0-view-dependencies: synchronization gaps remain",
+      "synexia.frozen-chars: pending",
+      "synexia.frozen-chars: synchronization gaps remain",
+      "synexia.inventory-producer: pending",
+      "synexia.inventory-producer: synchronization gaps remain",
+      "synexia.inventory-cli: pending",
+      "synexia.inventory-cli: synchronization gaps remain",
+      "bridge.MIndexCanonicalBridge: pending",
+      "bridge.MIndexCanonicalBridge: synchronization gaps remain",
+      "bridge.MIndexDagDeferredSwap: pending",
+      "bridge.MIndexDagDeferredSwap: synchronization gaps remain",
+      "bridge.MIndexDagPage: pending",
+      "bridge.MIndexDagPage: synchronization gaps remain",
+      "bridge.MIndexDagPageCodec: pending",
+      "bridge.MIndexDagPageCodec: synchronization gaps remain",
+      "bridge.MIndexKnowledgeArgumentCompiler: pending",
+      "bridge.MIndexKnowledgeArgumentCompiler: synchronization gaps remain",
+      "bridge.MIndexKnowledgeArguments: pending",
+      "bridge.MIndexKnowledgeArguments: synchronization gaps remain",
+      "bridge.MIndexLexiconCoordinateCompilerCli: pending",
+      "bridge.MIndexLexiconCoordinateCompilerCli: synchronization gaps remain",
+      "bridge.MIndexLexiconCoordinateManifest: pending",
+      "bridge.MIndexLexiconCoordinateManifest: synchronization gaps remain",
+      "bridge.MIndexLexiconCoordinatePublisher: pending",
+      "bridge.MIndexLexiconCoordinatePublisher: synchronization gaps remain",
+      "bridge.MIndexLexiconCoordinateSpace: pending",
+      "bridge.MIndexLexiconCoordinateSpace: synchronization gaps remain",
+      "bridge.MIndexRuntimeStructuralAdapterProvider: pending",
+      "bridge.MIndexRuntimeStructuralAdapterProvider: synchronization gaps remain",
+      "bridge.MIndexStringConversionBridge: pending",
+      "bridge.MIndexStringConversionBridge: synchronization gaps remain",
+      "family.entire-source-closure: pending",
+      "family.entire-source-closure: synchronization gaps remain",
+      "family.structural-owners: pending",
+      "family.structural-owners: synchronization gaps remain",
+      "family.substring-conflict: pending",
+      "family.substring-conflict: synchronization gaps remain",
+      "family.word-facts: pending",
+      "family.word-facts: synchronization gaps remain",
+      "family.application-structures: pending",
+      "family.application-structures: synchronization gaps remain",
+      "route-a.canonical-storage: pending",
+      "route-a.canonical-storage: synchronization gaps remain",
+      "route-b.compiler-lowering: pending",
+      "route-b.compiler-lowering: synchronization gaps remain",
+      "route-c.complete-jdk: pending",
+      "route-c.complete-jdk: synchronization gaps remain",
+      "synexia.counterpart.MIndexVersionTable: implemented-unverified",
+      "synexia.counterpart.MIndexVersionTable: synchronization gaps remain",
+      "synexia.counterpart.MIndexLibraryRelease: implemented-unverified",
+      "synexia.counterpart.MIndexLibraryRelease: synchronization gaps remain",
+      "synexia.counterpart.MIndexVmSession: implemented-unverified",
+      "synexia.counterpart.MIndexVmSession: synchronization gaps remain",
+      "synexia.counterpart.MIndexVmPrecomputeKey: implemented-unverified",
+      "synexia.counterpart.MIndexVmPrecomputeKey: synchronization gaps remain",
+      "synexia.counterpart.MIndexClass: implemented-unverified",
+      "synexia.counterpart.MIndexClass: synchronization gaps remain",
+      "synexia.counterpart.MIndexClassIndex: implemented-unverified",
+      "synexia.counterpart.MIndexClassIndex: synchronization gaps remain",
+      "synexia.counterpart.MIndexAST: pending",
+      "synexia.counterpart.MIndexAST: synchronization gaps remain",
+      "synexia.counterpart.MIndexAST: unresolved dependency",
+      "synexia.counterpart.MIndexASTPrecompute: pending",
+      "synexia.counterpart.MIndexASTPrecompute: synchronization gaps remain",
+      "synexia.counterpart.MIndexASTPrecompute: unresolved dependency",
+      "synexia.counterpart.MIndexCompilerASTPrecompute: pending",
+      "synexia.counterpart.MIndexCompilerASTPrecompute: synchronization gaps remain",
+      "synexia.counterpart.MIndexCompilerASTPrecompute: unresolved dependency",
+      "synexia.counterpart.MIndexClassBoundary: implemented-unverified",
+      "synexia.counterpart.MIndexClassBoundary: synchronization gaps remain",
+      "synexia.counterpart.MIndexJvmDescriptor: implemented-unverified",
+      "synexia.counterpart.MIndexJvmDescriptor: synchronization gaps remain",
+      "synexia.counterpart.MIndexMember: implemented-unverified",
+      "synexia.counterpart.MIndexMember: synchronization gaps remain",
+      "synexia.counterpart.MIndexMemberKind: implemented-unverified",
+      "synexia.counterpart.MIndexMemberKind: synchronization gaps remain",
+      "synexia.counterpart.MIndexMemberFlags: implemented-unverified",
+      "synexia.counterpart.MIndexMemberFlags: synchronization gaps remain",
+      "synexia.counterpart.MIndexClassFlags: implemented-unverified",
+      "synexia.counterpart.MIndexClassFlags: synchronization gaps remain",
+      "synexia.counterpart.MIndexField: implemented-unverified",
+      "synexia.counterpart.MIndexField: synchronization gaps remain",
+      "synexia.counterpart.MIndexMethod: implemented-unverified",
+      "synexia.counterpart.MIndexMethod: synchronization gaps remain",
+      "synexia.counterpart.MIndexConstructor: implemented-unverified",
+      "synexia.counterpart.MIndexConstructor: synchronization gaps remain",
+      "synexia.counterpart.MIndexRecordComponent: implemented-unverified",
+      "synexia.counterpart.MIndexRecordComponent: synchronization gaps remain",
+      "synexia.jcc-recipe-laboratory: blocked",
+      "synexia.jcc-recipe-laboratory: synchronization gaps remain",
+      "synexia.jcc-recipe-laboratory: unresolved dependency",
+      "synexia.jcc-java-jni-regression: blocked",
+      "synexia.jcc-java-jni-regression: synchronization gaps remain",
+      "synexia.jcc-java-jni-regression: unresolved dependency",
+      "synexia.jcc-java-jni-regression: unresolved dependency",
+      "synexia.jcc-java-jni-regression: unresolved dependency",
+      "synexia.counterpart.MIndexRegexTrigramQuery: implemented-unverified",
+      "synexia.counterpart.MIndexRegexTrigramQuery: synchronization gaps remain",
+      "synexia.counterpart.MIndexRegexTrigramQuery: unresolved dependency",
+      "synexia.collections.SegmentedAddress28: implemented-unverified",
+      "synexia.collections.SegmentedAddress28: synchronization gaps remain",
+      "synexia.collections.SegmentedAddress28: unresolved dependency",
+      "synexia.collections.SegmentedIntLane28: implemented-unverified",
+      "synexia.collections.SegmentedIntLane28: synchronization gaps remain",
+      "synexia.collections.SegmentedIntLane28: unresolved dependency",
+      "synexia.collections.SegmentedLongLane28: implemented-unverified",
+      "synexia.collections.SegmentedLongLane28: synchronization gaps remain",
+      "synexia.collections.SegmentedLongLane28: unresolved dependency",
+      "synexia.collections.SegmentedBitLane28: implemented-unverified",
+      "synexia.collections.SegmentedBitLane28: synchronization gaps remain",
+      "synexia.collections.SegmentedBitLane28: unresolved dependency",
+      "synexia.collections.PackedBitAtoms: implemented-unverified",
+      "synexia.collections.PackedBitAtoms: synchronization gaps remain",
+      "synexia.collections.PackedBitAtoms: unresolved dependency",
+      "synexia.regex.mr: implemented-unverified",
+      "synexia.regex.mr: synchronization gaps remain",
+      "synexia.regex.rxm: pending",
+      "synexia.regex.rxm: synchronization gaps remain",
+      "synexia.regex.rxa: pending",
+      "synexia.regex.rxa: synchronization gaps remain",
+      "synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup: implemented-unverified",
+      "synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup: synchronization gaps remain",
+      "synexia.regex.ordered-relations.adapter: implemented-unverified",
+      "synexia.regex.ordered-relations.adapter: synchronization gaps remain",
+      "synexia.regex.ordered-relations.dispatch: pending",
+      "synexia.regex.ordered-relations.dispatch: synchronization gaps remain",
+      "synexia.regex.metadata-pressure: pending",
+      "synexia.regex.metadata-pressure: synchronization gaps remain",
+      "synexia.regex.metadata-pressure: unresolved dependency",
+      "synexia.regex.hierarchical-route-acceptance: pending",
+      "synexia.regex.hierarchical-route-acceptance: synchronization gaps remain",
+      "synexia.regex.hierarchical-route-acceptance: unresolved dependency",
+      "synexia.regex.hierarchical-route-acceptance: unresolved dependency",
+      "source-inventory: blocked",
+      "ownership-naming: open",
+      "source-owner-differential: open",
+      "maven-recipe-lifecycle: blocked",
+      "route-a-canonical-storage: open",
+      "route-b-lowering: open",
+      "route-c-complete-image: open",
+      "runtime-flag-off: open",
+      "runtime-enabled: failed",
+      "jit-intrinsics: open",
+      "gc-intern-jni-jvmti: open",
+      "cds-serialization-serviceability: open",
+      "string-unicode-regex: open",
+      "shared-generation-cross-process: open",
+      "windows-native: open",
+      "performance-memory: open",
+      "independent-audit: open",
+      "future-port-full-closure: open",
+      "target-baseline-drift: blocked",
+      "source default-branch tip changed since baseline; reconcile rather than silently repin"
+    ]
+  },
+  "dependencyInventory": {
+    "repositoryRequirement": {
+      "path": "m3/migration/requirements.txt",
+      "git_blob_sha1": "05b7a1e858af08d4d364a1e4a3df8c856c6a8451",
+      "sha256": "bdba948e9222f540dff178ccceebf97e496e1c360257c6434b8eac8cabf154a5",
+      "bytes": 73,
+      "roles": [
+        "dependency-admission-only-not-read-by-validator"
+      ],
+      "requirement": "jsonschema==4.26.0",
+      "hashLocked": false,
+      "transitiveVersionsLocked": false
+    },
+    "publishedJsonschemaWheel": {
+      "url": "https://files.pythonhosted.org/packages/69/90/f63fb5873511e014207a475e2bb4e8b2e570d655b00ac19a9a0ca0a385ee/jsonschema-4.26.0-py3-none-any.whl",
+      "filename": "jsonschema-4.26.0-py3-none-any.whl",
+      "sha256": "d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce",
+      "bytes": 90630,
+      "python": ">=3.10",
+      "license": "MIT",
+      "licenseFile": "COPYING",
+      "payloadDownloaded": false,
+      "qualified": false
+    },
+    "requiredDirectRuntimeDistributions": [
+      "attrs>=22.2.0",
+      "jsonschema-specifications>=2023.03.6",
+      "referencing>=0.28.4",
+      "rpds-py>=0.25.0"
+    ],
+    "additionalMarkerDependency": "A referencing0.37.0 choice adds typing-extensions>=4.4.0 on Python<3.13; do not omit it on the current Python3.12 lane.",
+    "formatExtras": "Not requested or required by this source validator; do not install optional format extras.",
+    "repositoryVendorAudit": {
+      "path": "m3/vendor",
+      "gitTree": "416e906451ba72a2c7fb67ccf9f11a6abc2e5a8d",
+      "entries": 33788,
+      "truncated": false,
+      "wheels": 0,
+      "importablePythonJsonschemaProviderFound": false,
+      "note": "Same-named vendored Jackson JSON schema classes are Java APIs and cannot replace Python Draft202012Validator."
+    },
+    "historicalAvailabilityOnly": {
+      "receipt": "m3/migration/evidence/local-20261002-final/receipt.json",
+      "recordedJsonschema": "4.26.0",
+      "recordedExecution": "local-scoped-classpath",
+      "provesCurrentHostedProvider": false
+    },
+    "bootstrapFit": "PENDING: no genuine current hosted import/provider evidence or complete platform-specific hash-locked transitive wheel set has been admitted.",
+    "admissibleFutureArrangement": "Reuse a proved exact preinstalled isolated environment or a separately FOSS-inventoried complete wheelhouse with explicit versions, hashes and original licenses, installed under owned monitored output using pip --no-index --require-hashes --only-binary=:all: --no-deps --no-compile; no source builds, unbounded resolver or network fallback.",
+    "isolationBoundary": "Original imports jsonschema. Ordinary owned-venv site packages work with -I -B; -S disables site initialization and PYTHONPATH cannot repair -I. A stdlib-only -I -S -B SDK verifier is not proof that this external dependency is available."
+  },
+  "reuse": {
+    "boundedSupervisorAndStorageControls": true,
+    "strictMavenSdk": true,
+    "existingSourceContext17AsGlobalRoot": false,
+    "reason": "The17file context contains Synexia compiler sources, not the actual public Java/kernel/recipe/receipt paths read by original global validation.",
+    "twelveSdkMethods": {
+      "currentOwner": 2,
+      "fixtureRecovery": 5,
+      "hostedWorkflow": 2,
+      "canonicalMapping": 3,
+      "total": 12
+    },
+    "sourceSdkTestsAreNotOriginalGlobalValidate": true
+  },
+  "evidenceSources": [
+    "https://github.com/hsoliwal/M3jdk21/blob/347ac7363aea1e9a7527df64ad62184534089fdf/m3/migration/migration.py",
+    "https://github.com/hsoliwal/M3jdk21/blob/347ac7363aea1e9a7527df64ad62184534089fdf/m3/migration/requirements.txt",
+    "https://pypi.org/pypi/jsonschema/4.26.0/json",
+    "https://raw.githubusercontent.com/python-jsonschema/jsonschema/v4.26.0/pyproject.toml",
+    "https://pypi.org/pypi/referencing/0.37.0/json",
+    "https://docs.python.org/3.12/using/cmdline.html",
+    "https://pip.pypa.io/en/stable/topics/secure-installs/"
+  ],
+  "execution": {
+    "originalPythonValidate": "NOT_RUN",
+    "originalPythonReport": "NOT_RUN",
+    "pythonDependencyImport": "NOT_RUN",
+    "allNewHostedSdkTests": "NOT_RUN_THIS_AUDIT",
+    "matchedJdkJtregJni": "NOT_RUN",
+    "physicalCheckoutSymlinkAndRootChecks": "NOT_RUN",
+    "phaseAdvanced": false
+  }
+}
