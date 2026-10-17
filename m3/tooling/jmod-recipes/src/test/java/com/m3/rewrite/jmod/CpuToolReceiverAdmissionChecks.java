@@ -23,6 +23,27 @@ public final class CpuToolReceiverAdmissionChecks {
         var receipt = CpuToolReceiverAdmission.verify(dh + cpu + gpu, mh + mapped, hh + hold);
         yes(receipt.donorCount() == 2 && receipt.mappedCount() == 1 && receipt.deferredCount() == 1);
         yes(receipt.deferredModules().equals(java.util.List.of("com.synexia.m3.compute.webgpu")));
+        // The new CPU-only int8 receiver is an actual independent candidate module.
+        // It does not weaken the mandatory GPU deferral or admit a changed target name.
+        String quant = "com.synexia.m3.model.quantize\t"
+                + "com.synexia.m3.model.quantize.BlockInt8Quantizer\t"
+                + "MODEL_QUANTIZE\tIMPLEMENTED\tApache-2.0\n";
+        String mappedQuant = "com.synexia.m3.model.quantize\t"
+                + "com.m3.tools.model.quantize\tINDEPENDENT_APACHE_MODULE\t"
+                + "OPTIONAL_TOOLING\tQUALIFICATION_PENDING\n";
+        var quantReceipt = CpuToolReceiverAdmission.verify(
+                dh + cpu + gpu + quant, mh + mapped + mappedQuant, hh + hold);
+        yes(quantReceipt.donorCount() == 3 && quantReceipt.mappedCount() == 2
+                && quantReceipt.deferredCount() == 1);
+        yes(quantReceipt.deferredModules().equals(java.util.List.of(
+                "com.synexia.m3.compute.webgpu")));
+        refuses(dh + cpu + gpu + quant, mh + mapped, hh + hold);
+        refuses(dh + cpu + gpu + quant, mh + mapped
+                + mappedQuant.replace("com.m3.tools.model.quantize",
+                        "com.m3.tools.text.regex"), hh + hold);
+        refuses(dh + cpu + gpu + quant, mh + mapped
+                + mappedQuant.replace("QUALIFICATION_PENDING", "PASSED"), hh + hold);
+
         refuses(dh + cpu + gpu, mh + mapped, hh);
         refuses(dh + cpu + gpu, mh + mapped + mapped, hh + hold);
         refuses(dh + cpu + gpu, mh + mapped.replace("com.m3.tools", "java"), hh + hold);
