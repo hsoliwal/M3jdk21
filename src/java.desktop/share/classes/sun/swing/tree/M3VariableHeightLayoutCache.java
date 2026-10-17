@@ -66,6 +66,8 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
     private static final int CACHE = 1024;
     /** Children counts up to this are searched linearly; larger ones through a hash index. */
     private static final int SCAN = 16;
+    /** Lookups below a parent answered through TreeModel.getIndexOfChild before its hash index is built. */
+    private static final int PROBES = 32;
 
     /** Holder of the root's size lane; never a row. */
     private Node top;
@@ -127,6 +129,8 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
         int[] fh;
         /** Open-addressing index of child positions + 1 by user object hash; null when stale. */
         int[] lookup;
+        /** Lookups since the hash index was last dropped. */
+        int probes;
         int below;
         int belowH;
         int invalBelow;
@@ -354,6 +358,7 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
                 checkIndex(n, index);
                 n.v[index] = treeModel.getChild(n.value, index);
                 n.lookup = null;
+                n.probes = 0;
                 Node k = stateAt(n, index);
                 if (k != null) {
                     k.value = n.v[index];
@@ -585,6 +590,7 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
         }
         n.count = count;
         n.lookup = null;
+        n.probes = 0;
         rebuildFenwick(n);
         n.below = count;
         n.laneDirty = true;
@@ -619,6 +625,7 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
         }
         n.count++;
         n.lookup = null;
+        n.probes = 0;
         stamp++;
         laneCountChanged(n, 1, 1);
     }
@@ -648,6 +655,7 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
         }
         n.count--;
         n.lookup = null;
+        n.probes = 0;
         stamp++;
         laneCountChanged(n, -1, -invalid);
     }
@@ -1312,10 +1320,7 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
                 int row = rowOf(n.parent, n.index);
                 load(n, row == -1 ? -1 : row + 1, true);
             }
-            int index = findChild(n, components[k]);
-            if (index < 0) {
-                index = treeModel.getIndexOfChild(n.value, components[k]);
-            }
+            int index = childIndex(n, components[k]);
             if (index == -1 || index >= n.count || (onlyIfVisible && !visible(n))) {
                 return false;
             }
@@ -1337,6 +1342,29 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
             n = c;
         }
         return false;
+    }
+
+    /**
+     * The stock resolution of one path component below {@code n}: the loaded child whose cached user
+     * object equals {@code o} (the stock path map), else {@code TreeModel.getIndexOfChild} (the stock
+     * walk). Below large parents the first lookups ask the model and verify its answer against the
+     * cached object, so a one-off query does not pay for building the hash index.
+     */
+    private int childIndex(Node n, Object o) {
+        if (n.count > SCAN && n.lookup == null && ++n.probes <= PROBES) {
+            int index = treeModel.getIndexOfChild(n.value, o);
+            if (index >= 0 && index < n.count && n.v[index] != null && n.v[index].equals(o)) {
+                return index;
+            }
+            for (int i = n.count - 1; i >= 0; i--) {
+                if (n.v[i] != null && n.v[i].equals(o)) {
+                    return i;
+                }
+            }
+            return index;
+        }
+        int index = findChild(n, o);
+        return index >= 0 ? index : treeModel.getIndexOfChild(n.value, o);
     }
 
     /**

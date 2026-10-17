@@ -686,6 +686,15 @@ public final class M3TreeLayoutCacheDifferential {
         int seeds = args.length > 0 ? Integer.parseInt(args[0]) : 50;
         int steps = args.length > 1 ? Integer.parseInt(args[1]) : 300;
         long first = args.length > 2 ? Long.parseLong(args[2]) : 1;
+        String summary = runSeeds(first, seeds, steps);
+        System.out.println(summary);
+        if (!summary.contains(" failed 0 ")) {
+            throw new AssertionError(summary);
+        }
+    }
+
+    /** Runs seeds {@code first .. first + seeds - 1}; returns the one-line summary (also used by the JUnit test). */
+    public static String runSeeds(long first, int seeds, int steps) throws Exception {
         int passed = 0;
         List<String> failures = new ArrayList<>();
         for (long seed = first; seed < first + seeds; seed++) {
@@ -700,11 +709,8 @@ public final class M3TreeLayoutCacheDifferential {
                 }
             }
         }
-        System.out.println("M3TreeLayoutCacheDifferential seeds " + seeds + " steps " + steps + " passed " + passed
+        return "M3TreeLayoutCacheDifferential seeds " + seeds + " steps " + steps + " passed " + passed
                 + " failed " + failures.size() + " " + failures + "; accepted upstream defect D1 " + ACCEPTED[0]
-                + " times; rebuilt after exceptions: D2 " + ACCEPTED[1] + ", other " + ACCEPTED[2]);
-        if (!failures.isEmpty()) {
-            throw new AssertionError(failures.size() + " seeds differ: " + failures);
-        }
+                + " times; rebuilt after exceptions: D2 " + ACCEPTED[1] + ", other " + ACCEPTED[2];
     }
 }

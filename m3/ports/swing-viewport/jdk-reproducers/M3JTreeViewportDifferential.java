@@ -497,6 +497,15 @@ public final class M3JTreeViewportDifferential {
         int seeds = args.length > 0 ? Integer.parseInt(args[0]) : 30;
         int steps = args.length > 1 ? Integer.parseInt(args[1]) : 200;
         long first = args.length > 2 ? Long.parseLong(args[2]) : 1;
+        String summary = runSeeds(first, seeds, steps);
+        System.out.println(summary);
+        if (!summary.contains(" failed 0 ")) {
+            throw new AssertionError(summary);
+        }
+    }
+
+    /** Runs seeds {@code first .. first + seeds - 1} on the event dispatch thread; returns the summary. */
+    public static String runSeeds(long first, int seeds, int steps) throws Exception {
         List<String> failures = new ArrayList<>();
         int[] passed = new int[1];
         SwingUtilities.invokeAndWait(() -> {
@@ -512,12 +521,9 @@ public final class M3JTreeViewportDifferential {
                 }
             }
         });
-        System.out.println("M3JTreeViewportDifferential seeds " + seeds + " steps " + steps + " passed " + passed[0]
+        return "M3JTreeViewportDifferential seeds " + seeds + " steps " + steps + " passed " + passed[0]
                 + " failed " + failures.size() + " " + failures + "; pixel comparisons " + pixelChecks
                 + "; accepted upstream defect D1 " + acceptedD1 + " times; rebuilt after exceptions "
-                + rebuiltAfterException);
-        if (!failures.isEmpty()) {
-            throw new AssertionError(failures.size() + " seeds differ: " + failures);
-        }
+                + rebuiltAfterException;
     }
 }
