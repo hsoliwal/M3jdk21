@@ -114,13 +114,14 @@ jobs:
       - name: Install OpenJDK build prerequisites
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends             autoconf make gcc g++ zip unzip             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+          sudo apt-get install -y --no-install-recommends             autoconf make gcc g++ zip unzip             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev jtreg7
+          test -f /usr/share/jtreg/lib/jtreg.jar
 
       - name: Configure and build G1-enabled image
         shell: bash
         run: |
           set -euo pipefail
-          bash configure             --with-boot-jdk="$JAVA_HOME"             --with-debug-level=release             --with-jvm-variants=server             --disable-warnings-as-errors
+          bash configure             --with-boot-jdk="$JAVA_HOME"             --with-jtreg=/usr/share/jtreg             --with-debug-level=release             --with-jvm-variants=server             --disable-warnings-as-errors
           make JOBS=2 images
 
       - name: Focused default-GC jtreg
