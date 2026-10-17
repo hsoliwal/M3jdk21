@@ -46,4 +46,17 @@ public interface Supplier<T> {
      * @return a result
      */
     T get();
+
+    /** Execute with an explicit borrowed monitor, retaining the original SAM. */
+    default T get(java.util.concurrent.ProgressMonitor monitor) {
+        java.util.Objects.requireNonNull(monitor, "monitor");
+        try (java.util.concurrent.ProgressMonitors.Scope ignored =
+                     java.util.concurrent.ProgressMonitors.bind(monitor)) {
+            monitor.checkCancelled();
+            T result = get();
+            monitor.checkCancelled();
+            return result;
+        }
+    }
+
 }

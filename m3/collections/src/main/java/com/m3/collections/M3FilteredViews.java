@@ -106,11 +106,24 @@ public final class M3FilteredViews {
         return new UnsupportedOperationException("read-only filtered view");
     }
 
+    /**
+     * Apply visibility to the stored representative, never to a lookup alias.
+     * An identity-backed Set may retain equals-equal distinct references: give
+     * the actual reference priority before the normal Collection equality scan.
+     * No visible-element snapshot or per-element entry wrapper is retained.
+     */
     private static <E> boolean visible(Collection<E> source,
             Predicate<? super E> predicate, Object value) {
         if (!source.contains(value)) return false;
-        @SuppressWarnings("unchecked") E typed = (E) value;
-        return predicate.test(typed);
+        if (source instanceof Set<?>) {
+            for (E owned : source) {
+                if (owned == value) return predicate.test(owned);
+            }
+        }
+        for (E owned : source) {
+            if (Objects.equals(value, owned) && predicate.test(owned)) return true;
+        }
+        return false;
     }
 
     private static class CollectionView<E> extends AbstractCollection<E> {
@@ -168,6 +181,13 @@ public final class M3FilteredViews {
         }
 
         @Override public Comparator<? super E> comparator() { return sorted.comparator(); }
+        @Override public boolean contains(Object value) {
+            if (!sorted.contains(value)) return false;
+            @SuppressWarnings("unchecked") E alias = (E) value;
+            // contains() already established comparator equivalence, so the
+            // first tail representative is the exact stored element.
+            return predicate.test(sorted.tailSet(alias).first());
+        }
         @Override public SortedSet<E> subSet(E from, E to) {
             return new SortedSetView<>(sorted.subSet(from, to), predicate);
         }
@@ -193,6 +213,11 @@ public final class M3FilteredViews {
         NavigableSetView(NavigableSet<E> source, Predicate<? super E> predicate) {
             super(source, predicate);
             nav = source;
+        }
+        @Override public boolean contains(Object value) {
+            if (!nav.contains(value)) return false;
+            @SuppressWarnings("unchecked") E alias = (E) value;
+            return predicate.test(nav.ceiling(alias));
         }
         private E forward(E candidate) {
             while (candidate != null && !predicate.test(candidate)) candidate = nav.higher(candidate);
@@ -256,16 +281,23 @@ public final class M3FilteredViews {
             return count;
         }
         @Override public boolean isEmpty() { return !entrySet().iterator().hasNext(); }
+        /**
+         * Called only after containsKey has established membership. The
+         * comparator's tail range exposes the actual retained key, including
+         * when the query is a distinct comparator-equivalent object.
+         */
+        protected K storedKey(Object query) {
+            @SuppressWarnings("unchecked") K alias = (K) query;
+            return sorted.tailMap(alias).firstKey();
+        }
         @Override public boolean containsKey(Object key) {
             if (!sorted.containsKey(key)) return false;
-            @SuppressWarnings("unchecked") K typed = (K) key;
-            return predicate.test(typed, sorted.get(key));
+            return predicate.test(storedKey(key), sorted.get(key));
         }
         @Override public V get(Object key) {
             if (!sorted.containsKey(key)) return null;
             V value = sorted.get(key);
-            @SuppressWarnings("unchecked") K typed = (K) key;
-            return predicate.test(typed, value) ? value : null;
+            return predicate.test(storedKey(key), value) ? value : null;
         }
         @Override public Set<Entry<K, V>> entrySet() {
             return new AbstractSet<>() {
@@ -321,6 +353,12 @@ public final class M3FilteredViews {
                 BiPredicate<? super K, ? super V> predicate) {
             super(source, predicate);
             nav = source;
+        }
+        @Override protected K storedKey(Object key) {
+            @SuppressWarnings("unchecked") K alias = (K) key;
+            // A matching key exists (checked by containsKey); floorEntry
+            // retrieves its stored comparator-equivalent representative.
+            return nav.floorEntry(alias).getKey();
         }
         private Entry<K, V> seek(Entry<K, V> current, boolean forward) {
             while (current != null && !predicate.test(current.getKey(), current.getValue())) {
