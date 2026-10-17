@@ -1,0 +1,10 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3Jdk21GenericPurposeMapComposition20261017
+displayName: Receive original typed checked read-only synchronized filtered Map wrappers
+description: >
+  Source-sealed first-party Synexia M3FilteredMaps purpose-wrapper refinement
+  into the established M3JDK21 generic Map owner; keep comparator, Entry
+  guards and existing payload storage, no new JNI semantics.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-generic-filtered-purpose-20261017

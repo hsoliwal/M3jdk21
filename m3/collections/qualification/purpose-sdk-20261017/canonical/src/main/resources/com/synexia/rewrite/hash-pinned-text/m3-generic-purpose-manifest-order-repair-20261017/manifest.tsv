@@ -1,0 +1,2 @@
+# path	before_sha256	after_sha256	template
+synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-generic-filtered-purpose-20261017/manifest.tsv	efe0b4c8d5386c748c6605401977122006537ef54f0eaafd4bffa710671067db	33d730135f1dff30d158918499eb2fa16304ffe36509e481764731d1fdc7a66a	manifest.tsv.txt

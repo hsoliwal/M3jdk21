@@ -1,0 +1,10 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3Jdk21GenericPurposeSealSuccessor20261017
+displayName: Authorize only reviewed typed purpose Map source successor
+description: >
+  Preserve complete source identity of original five generic filtered wrapper
+  files while admitting exactly one named Java Map source successor and its
+  two companion tests through an exact signed SHA-256 receipt.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk21-generic-purpose-seal-successor-20261017
