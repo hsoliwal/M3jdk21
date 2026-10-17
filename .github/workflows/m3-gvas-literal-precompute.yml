@@ -1,0 +1,23 @@
+name: M3-GVAS compile-time literal image (strict-address)
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteral*.java'
+      - 'm3/core/src/com/m3/text/M3GvasLiteralImage.java'
+      - 'm3/core/test/com/m3/text/M3GvasLiteralImageContractTest.java'
+      - 'm3/verify-gvas-literal-precompute.py'
+      - '.github/workflows/m3-gvas-literal-precompute.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java-jni-strict-literal-address:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify compiled literal image and exact pointer across JVMs
+        run: M3_JDK="$JAVA_HOME" python3 m3/verify-gvas-literal-precompute.py
