@@ -37,7 +37,7 @@ public final class M3LongCompositeViews {
         return new BinarySetAlgebra(left, right, SetOperation.SYMMETRIC_DIFFERENCE);
     }
 
-    private static <T> T[] validate(T[] sources) {    private static <T> T[] validate(T[] sources) {
+    private static <T> T[] validate(T[] sources) {
         T[] result = Objects.requireNonNull(sources, "sources").clone();
         for (T source : result) Objects.requireNonNull(source, "source");
         return result;
@@ -428,7 +428,7 @@ public final class M3LongCompositeViews {
         }
     }
 
-    /** One primitive heap head per source; no Map.Entry or per-value nodes. */    /** One primitive heap head per source; no Map.Entry or per-value nodes. */
+    /** One primitive heap head per source; no Map.Entry or per-value nodes. */
     private static final class Merge implements M3LongIterator {
         private final M3LongIterator[] input;
         private final long[] head;
