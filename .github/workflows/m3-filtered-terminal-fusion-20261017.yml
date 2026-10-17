@@ -35,8 +35,10 @@ jobs:
           mvn -B -ntp -f m3/collections/qualification/filtered-terminal-fusion-20261017/pom.xml \
             -Dm3.engine.sources="$PWD/m3/tooling/migration-recipes/src/main/java" \
             -Dm3.receiver.source="$PWD" test 2>&1 | tee sdk-execution.log
-          diff -u m3/collections/qualification/filtered-terminal-fusion-20261017/evidence/QUALIFIED.tsv \
-            m3/collections/qualification/filtered-terminal-fusion-20261017/target/sdk-filtered-terminal-fusion/QUALIFIED.tsv
+          # Commentary is not a source identity; compare both exact path/SHA-256 rows.
+          diff -u \
+            <(grep -v '^#' m3/collections/qualification/filtered-terminal-fusion-20261017/evidence/QUALIFIED.tsv) \
+            <(grep -v '^#' m3/collections/qualification/filtered-terminal-fusion-20261017/target/sdk-filtered-terminal-fusion/QUALIFIED.tsv)
       - name: Real current M3 core, callback oracle and unchanged JNI
         shell: bash
         run: |
