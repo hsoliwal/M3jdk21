@@ -1,0 +1,42 @@
+{
+  "schema": "M3_PROBLEM_CATEGORY_CATALOGUE_V1",
+  "scope": "original-migration-provider-and-existing-canonical-custody",
+  "categories": [
+    {
+      "category": "dependency-closure/provider-isolation",
+      "chosen": "Six whole, unmodified published wheels in an owned CPython3.12 venv",
+      "candidateEvidence": "provider-inventory.json and 12 pre-implementation FOSS rows",
+      "alternatives": [
+        {
+          "candidate": "Original one-line requirements without a transitive hash lock",
+          "decision": "Retain original file unchanged; add a separate complete wheel lock because original file is not a reproducible provider closure."
+        },
+        {
+          "candidate": "Handwritten JSON Schema shim, Java schema substitute or resolver",
+          "decision": "Rejected: would replace the original Draft202012 authority or maintained packaging implementation."
+        }
+      ],
+      "complexity": "O(total admitted wheel and installed payload bytes) verification; released compressed payload642142B",
+      "correctness": "Genuine2020-12/local-ref/native discriminator and original26 tests are required; NOT_RUN",
+      "performance": "No throughput/allocation/native/retention improvement claimed",
+      "licenses": "Exact upstream source licenses and wheel hashes retained."
+    },
+    {
+      "category": "canonical-name-mapping/three-way-convergence",
+      "chosen": "Existing hash-pinned text recipe; exact current migration-value equals oldA before oldD replay",
+      "evaluation": "Preserve all bytes outside migration and all56 current top-level rows; retain stable IDs, frozen contracts and explicit lineage;50 original CLI read paths/80 hashes verified against actual receiver",
+      "alternatives": [
+        {
+          "candidate": "Restore historical wholeD file",
+          "decision": "Rejected: loses the new current top-level mapping row."
+        },
+        {
+          "candidate": "Blindly rehash targets or remove broken records/tests",
+          "decision": "Rejected: would conceal source drift and erase the contract/lineage evidence."
+        }
+      ],
+      "runtimeProof": "Current PRE must genuinely fail; recipe POST must genuinely validate while complete remains INCOMPLETE158; NOT_RUN"
+    }
+  ],
+  "algorithmPortScope": "This phase reuses packaging/validation/custody mechanisms. Regex, String algorithms, Java/JNI, RoutesA/B/C and full source inventory remain separate active work; no competitive-programming solution is copied."
+}

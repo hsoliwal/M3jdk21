@@ -1,0 +1,60 @@
+{
+  "schema": "M3_ORIGINAL_MAPPING_PROVIDER_TASK_STATUS_V1",
+  "observedUtc": "2026-10-17 11:53:06 UTC",
+  "fullObjective": "Complete continuous MIndex/MatIndex/SubMIndex migration and java.lang.String RoutesA/B/C; preserve full12-pass specification",
+  "goalActive": true,
+  "storageProtectionActive": true,
+  "localBulkOutput": "HOLD",
+  "scope": "Recipe-owned provider and canonical migration-value reconciliation qualification",
+  "sourceBase": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
+  "receiverBase": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "sdkTree": "139dd99093d8d0add7f6b7392e9c73b92736d572",
+  "sdkFiles": 72,
+  "sdkBytes": 1873351,
+  "pinsSha256": "f5f96db8fa0c07ecf876536cb957a38e9f447c4f5f5f4c1285b16c9bdfdaf9dc",
+  "targets": {
+    "total": 60,
+    "keep": 54,
+    "change": 1,
+    "add": 5
+  },
+  "plannedGates": {
+    "namedSdkMethods": 9,
+    "mutableStates": 64,
+    "sourceOrders": 2,
+    "custodyNegativeControls": 22,
+    "providerBoundaryMethods": 38,
+    "originalSyntheticMethods": 26,
+    "originalCliReadPaths": 50,
+    "hashObligations": 80,
+    "completionBlockers": 158
+  },
+  "sourceReview": "CORRECTED_SOURCE_CLEAR_EXECUTION_PENDING",
+  "execution": "NOT_RUN",
+  "runtimeApplied": false,
+  "canonicalProductionMapApplied": false,
+  "phaseAdvanced": false,
+  "fullMigrationComplete": false,
+  "remaining": [
+    "Actual exact-candidate Maven/Python/provider qualification",
+    "Receive exact emitted canonical mapping after qualification",
+    "Restore omitted recipe bodies through current-owner contract checks",
+    "Complete whole source and semantic dependency inventory",
+    "Route A / safe Route B / matched complete Route C Java-JNI-runtime proofs",
+    "Performance and heap/native/mapped retention benchmarks"
+  ],
+  "pinsGitBlob": "3c655543b92ab9ac4da2168c24ed973945862059",
+  "failedWorkflowAttempt": {
+    "head": "404a29f3494ccf7fcaa35b982895d7aec4ae258f",
+    "run": 39029940546,
+    "status": "completed",
+    "conclusion": "failure",
+    "createdJobs": 0,
+    "executedSteps": 0,
+    "rootCause": "runner context used in jobs.<job_id>.env is unavailable; invalid workflow annotation reports Unrecognized named-value: runner."
+  },
+  "correctedServerAdmission": "PENDING_NEW_HEAD",
+  "correctionEvidence": "workflow-context-correction.json",
+  "sourceCommit": "6e8bfaf8ebc40c0b956eea93e976495a0b1df312",
+  "sourcePullRequest": 12082
+}

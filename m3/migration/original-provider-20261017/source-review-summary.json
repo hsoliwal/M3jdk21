@@ -1,0 +1,38 @@
+{
+  "schema": "M3_ORIGINAL_PROVIDER_SOURCE_REVIEW_SUMMARY_V1",
+  "sourceCommit": "6e8bfaf8ebc40c0b956eea93e976495a0b1df312",
+  "assemblyAudit": {
+    "repository": "hsoliwal/com.synexia",
+    "gitBlob": "1f78ef1a019a31ab18b8a32b60abf181d2f060b1",
+    "sdkFiles": 72,
+    "sdkBytes": 1873351,
+    "pinnedFiles": 71,
+    "reconstructedSdkTree": "139dd99093d8d0add7f6b7392e9c73b92736d572",
+    "sourceOnly": true
+  },
+  "sourceReviews": [
+    "81a82e636813c97cbf54cebabe2d65d7d4a130ff",
+    "1f78ef1a019a31ab18b8a32b60abf181d2f060b1",
+    "96b34e74763b9818123de7a7fcc81d20d7de523d"
+  ],
+  "sourcePublication": {
+    "files": 84,
+    "correctedPublicationReadbacks": "PENDING_NEW_HEAD_READBACK",
+    "initial83ExactReadbacks": true
+  },
+  "currentRootReadPaths": 50,
+  "currentHashObligations": 80,
+  "receiverSparseInputs": 55,
+  "receiverBase": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "execution": "NOT_RUN",
+  "fullMigrationComplete": false,
+  "phaseAdvanced": false,
+  "supersededIntegrationConclusion": "bf7f674e453ec44fae18392c2b7f876cf4c3a622",
+  "failedAttempt": {
+    "run": 39029940546,
+    "jobs": 0,
+    "steps": 0,
+    "conclusion": "failure",
+    "correction": "workflow-context-correction.json"
+  }
+}

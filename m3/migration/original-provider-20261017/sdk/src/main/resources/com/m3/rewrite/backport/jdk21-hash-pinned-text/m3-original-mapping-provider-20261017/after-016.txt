@@ -1,0 +1,917 @@
+#!/usr/bin/env python3
+# Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+"""Admit six released wheels into an owned venv and run the untouched mapping CLI.
+
+Run beneath the existing bounded hosted process-group supervisor. All children
+inherit that group. Local execution remains subject to DEVELOPMENT_CONTROL.md.
+The lock and this wrapper are generated together by the Maven recipe; changes
+belong in its resources, not in emitted files.
+"""
+import argparse
+import base64
+import csv
+import email.parser
+import io
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path, PurePosixPath
+import platform
+import re
+import shutil
+import stat
+import subprocess
+import sys
+import tempfile
+import time
+import urllib.parse
+import urllib.request
+import zipfile
+
+LOCK_SHA256 = "3b5399db82a98e8f081be41b90213957c8509d5464d303e9e5312c77d6b807c8"
+MIN_FREE = 8 * 1024 ** 3
+OUTPUT_LIMIT = 64 * 1024 ** 2
+RECEIPT_RESERVE = 1024 ** 2
+MAX_UNPACKED = 16 * 1024 ** 2
+MAX_ENTRIES = 2048
+MAX_LOG = 2 * 1024 ** 2
+EXPECTED_NAMES = ("attrs", "jsonschema", "jsonschema-specifications",
+                  "referencing", "rpds-py", "typing-extensions")
+HEX = re.compile(r"[0-9a-f]{64}\Z")
+NAME = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
+
+
+class Refusal(ValueError):
+    pass
+
+
+def require(condition, message):
+    if not condition:
+        raise Refusal(message)
+
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def canonical_name(name):
+    return re.sub(r"[-_.]+", "-", name).lower()
+
+
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        require(key not in result, "duplicate JSON key: " + key)
+        result[key] = value
+    return result
+
+
+def parse_json(data):
+    require(len(data) <= 1024 ** 2, "JSON byte limit exceeded")
+    def invalid(value):
+        raise Refusal("nonfinite JSON number: " + value)
+    return json.loads(data, object_pairs_hook=unique_object, parse_constant=invalid)
+
+
+def no_symlinks(path, must_exist=True):
+    path = Path(os.path.abspath(path))
+    for part in (path, *path.parents):
+        require(not part.is_symlink(), "symlink path: " + str(part))
+    if must_exist:
+        require(path.exists(), "missing path: " + str(path))
+    return path
+
+
+def safe_relative(value):
+    require(isinstance(value, str) and bool(value), "empty relative path")
+    require("\\" not in value and ":" not in value and
+            not any(ord(c) < 32 for c in value), "invalid relative path")
+    require(not PurePosixPath(value).is_absolute() and
+            all(p not in ("", ".", "..") for p in value.split("/")),
+            "unsafe relative path: " + value)
+    return value
+
+
+def read_file(path, maximum):
+    path = no_symlinks(path)
+    require(path.is_file(), "not a regular file: " + str(path))
+    require(path.stat().st_size <= maximum, "file byte limit: " + str(path))
+    data = path.read_bytes()
+    require(len(data) <= maximum, "file grew beyond byte limit: " + str(path))
+    return data
+
+
+def validate_lock(lock):
+    require(set(lock) == {"schema", "inventory", "target", "totalWheelBytes",
+                         "artifacts", "original", "scope", "execution"},
+            "unexpected lock fields")
+    require(lock["schema"] == "M3_ORIGINAL_MAPPING_PYTHON_PROVIDER_LOCK_V1",
+            "unsupported lock schema")
+    require(lock["target"] == {"implementation": "cpython", "python": [3, 12],
+            "system": "Linux", "machine": "x86_64", "minimumGlibc": [2, 17],
+            "extras": []}, "unsupported target")
+    items = lock["artifacts"]
+    require(isinstance(items, list) and len(items) == 6, "six wheels required")
+    require(tuple(x["name"] for x in items) == EXPECTED_NAMES,
+            "duplicate, extraneous or reordered distributions")
+    filenames = set()
+    for item in items:
+        require(set(item) == {"name", "version", "filename", "url", "sha256",
+                "bytes", "requiresPython", "requiresDist",
+                "coreMetadataSha256", "source", "license"},
+                "unexpected wheel fields")
+        filename = item["filename"]
+        safe_relative(filename)
+        require("/" not in filename and filename.endswith(".whl"),
+                "unsupported wheel filename")
+        require(filename not in filenames, "duplicate wheel filename")
+        filenames.add(filename)
+        require(isinstance(item["sha256"], str) and HEX.fullmatch(item["sha256"]),
+                "invalid wheel digest")
+        require(type(item["bytes"]) is int and 0 < item["bytes"] < 1024 ** 2,
+                "invalid wheel byte count")
+        parts = urllib.parse.urlsplit(item["url"])
+        require(parts.scheme == "https" and parts.netloc == "files.pythonhosted.org"
+                and parts.username is None and not parts.query and not parts.fragment,
+                "unapproved wheel URL")
+        require(parts.path.startswith("/packages/") and
+                parts.path.rsplit("/", 1)[-1] == filename,
+                "wheel URL filename mismatch")
+        require(isinstance(item["requiresDist"], list) and
+                all(isinstance(r, str) for r in item["requiresDist"]),
+                "invalid runtime dependency metadata")
+        require(item["license"]["expression"] in ("MIT", "PSF-2.0") and
+                HEX.fullmatch(item["license"]["sha256"]), "invalid license pin")
+    require(sum(x["bytes"] for x in items) == lock["totalWheelBytes"] == 642142,
+            "wheel aggregate byte mismatch")
+    require(len(lock["original"]["tests"]["methods"]) == 26 and
+            len(set(lock["original"]["tests"]["methods"])) == 26,
+            "original method inventory mismatch")
+    require(all(v is False for k, v in lock["execution"].items()
+                if k.endswith("Qualified") or k == "phaseAdvanced"),
+            "lock cannot assert execution acceptance")
+    return lock
+
+
+def load_lock(path):
+    data = read_file(path, 1024 ** 2)
+    require(digest(data) == LOCK_SHA256, "provider lock byte drift")
+    return validate_lock(parse_json(data))
+
+
+def check_platform(info):
+    require(info["implementation"] == "cpython" and info["python"] == [3, 12]
+            and info["system"] == "Linux" and info["machine"] == "x86_64",
+            "requires CPython3.12 Linux x86_64")
+    require(info["libc"][0] == "glibc", "glibc required")
+    version = info["libc"][1].split(".")
+    require(len(version) >= 2 and all(x.isdigit() for x in version[:2]) and
+            tuple(int(x) for x in version[:2]) >= (2, 17),
+            "requires glibc>=2.17")
+
+
+def footprint(root):
+    total = 0
+    for directory, dirs, files in os.walk(root, followlinks=False):
+        for name in dirs + files:
+            path = Path(directory) / name
+            if path.is_symlink():
+                # CPython venv creates precisely this contained POSIX layout link.
+                require(path == Path(root) / "venv/lib64" and
+                        os.readlink(path) == "lib" and
+                        (Path(root) / "venv/lib").is_dir() and
+                        not (Path(root) / "venv/lib").is_symlink(),
+                        "symlink in owned output")
+        for name in files:
+            path = Path(directory) / name
+            require(path.is_file(), "nonregular owned output")
+            total += path.stat().st_size
+    return total
+
+
+def check_budget(root, planned=0):
+    used = footprint(root) if Path(root).is_dir() else 0
+    require(used + planned <= OUTPUT_LIMIT - RECEIPT_RESERVE,
+            "owned output budget exceeded")
+    require(shutil.disk_usage(root).free >= MIN_FREE + planned + RECEIPT_RESERVE,
+            "8GiB after-output reserve not available")
+    return used
+
+
+def create_output(output, roots):
+    output = no_symlinks(output, must_exist=False)
+    parent = no_symlinks(output.parent)
+    require(parent.is_dir() and not output.exists(), "fresh output directory required")
+    for root in roots:
+        root = no_symlinks(root)
+        require(output != root and output not in root.parents and
+                root not in output.parents, "source/output directories overlap")
+    require(shutil.disk_usage(parent).free >= MIN_FREE + OUTPUT_LIMIT,
+            "8GiB after planned64MiB reserve not available")
+    output.mkdir(mode=0o700)
+    return output
+
+
+def write_json(path, value):
+    data = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    require(len(data) < RECEIPT_RESERVE, "receipt byte budget exceeded")
+    no_symlinks(path, must_exist=False)
+    with Path(path).open("xb") as target:
+        target.write(data)
+
+
+def pin_sources(root, lock):
+    result = {}
+    for name in ("cli", "schema", "tests"):
+        pin = lock["original"][name]
+        path = no_symlinks(Path(root) / safe_relative(pin["path"]))
+        data = read_file(path, pin["bytes"])
+        require(len(data) == pin["bytes"] and digest(data) == pin["sha256"],
+                "original source drift: " + pin["path"])
+        result[pin["path"]] = {"sha256": digest(data), "bytes": len(data)}
+    manifest = no_symlinks(Path(root) / lock["original"]["manifestPath"])
+    data = read_file(manifest, 16 * 1024 ** 2)
+    result[lock["original"]["manifestPath"]] = {
+        "sha256": digest(data), "bytes": len(data)}
+    return result
+
+
+def isolated_env(output, python):
+    env = {"PATH": str(Path(python).parent) + os.pathsep + "/usr/bin:/bin",
+           "HOME": str(output / "home"), "XDG_CACHE_HOME": str(output / "home/cache"),
+           "TMPDIR": str(output / "tmp"), "TEMP": str(output / "tmp"),
+           "TMP": str(output / "tmp"), "LC_ALL": "C.UTF-8", "LANG": "C.UTF-8",
+           "PYTHONDONTWRITEBYTECODE": "1", "PIP_CONFIG_FILE": os.devnull,
+           "PIP_NO_CACHE_DIR": "1", "PIP_DISABLE_PIP_VERSION_CHECK": "1"}
+    return env
+
+
+def log_identity(path):
+    path = no_symlinks(path)
+    require(path.is_file(), "nonregular command log")
+    size = path.stat().st_size
+    if size > MAX_LOG:
+        return {"bytes": size, "sha256": None, "oversized": True}
+    total = 0
+    observed = hashlib.sha256()
+    with path.open("rb") as stream:
+        while True:
+            block = stream.read(min(65536, MAX_LOG - total + 1))
+            if not block:
+                break
+            total += len(block)
+            if total > MAX_LOG:
+                return {"bytes": path.stat().st_size, "sha256": None, "oversized": True}
+            observed.update(block)
+    return {"bytes": total, "sha256": observed.hexdigest(), "oversized": False}
+
+
+def command_result(output, label, argv, env, results, timeout=180):
+    require(NAME.fullmatch(label), "invalid command label")
+    check_budget(output)
+    stdout = output / "logs" / (label + ".stdout")
+    stderr = output / "logs" / (label + ".stderr")
+    record = {"label": label, "argv": [str(a) for a in argv],
+              "returncode": None, "termination": None,
+              "stdoutPath": str(stdout.relative_to(output)),
+              "stderrPath": str(stderr.relative_to(output))}
+    results.append(record)
+    started = time.monotonic()
+    process = None
+    failure = None
+    try:
+        with stdout.open("xb") as out, stderr.open("xb") as err:
+            process = subprocess.Popen([str(a) for a in argv], cwd=output,
+                env=env, stdin=subprocess.DEVNULL, stdout=out, stderr=err)
+            while process.poll() is None:
+                if time.monotonic() - started > timeout:
+                    record["termination"] = "DEADLINE"
+                    raise Refusal("command deadline: " + label)
+                if stdout.stat().st_size > MAX_LOG or stderr.stat().st_size > MAX_LOG:
+                    record["termination"] = "LOG_BUDGET"
+                    raise Refusal("command log budget: " + label)
+                check_budget(output)
+                time.sleep(0.1)
+    except Exception as exc:
+        failure = exc
+        if process is not None and process.poll() is None:
+            process.kill()
+    finally:
+        if process is not None:
+            record["returncode"] = process.wait()
+        for stream, path in (("stdout", stdout), ("stderr", stderr)):
+            if path.exists():
+                identity = log_identity(path)
+                record[stream + "Bytes"] = identity["bytes"]
+                record[stream + "Sha256"] = identity["sha256"]
+                if identity["oversized"]:
+                    record["termination"] = "LOG_BUDGET"
+                    if failure is None:
+                        failure = Refusal("terminal command log budget: " + label)
+        record["elapsedSeconds"] = round(time.monotonic() - started, 6)
+    if failure is not None:
+        raise failure
+    check_budget(output)
+    return record
+
+
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise Refusal("wheel redirects forbidden")
+
+
+def fetch_wheel(item, wheelhouse, output, opener=None):
+    final = wheelhouse / item["filename"]
+    partial = wheelhouse / (item["filename"] + ".part")
+    require(not final.exists() and not partial.exists(), "wheel output already exists")
+    if opener is None:
+        opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
+    request = urllib.request.Request(item["url"], headers={
+        "User-Agent": "M3PythonProvider/1", "Accept-Encoding": "identity"})
+    observed = hashlib.sha256()
+    count = 0
+    with opener.open(request, timeout=30) as response:
+        require(response.geturl() == item["url"] and response.status == 200,
+                "unexpected wheel response")
+        length = response.headers.get("Content-Length")
+        require(length is None or length == str(item["bytes"]),
+                "published wheel length mismatch")
+        require(response.headers.get("Content-Encoding", "identity") == "identity",
+                "encoded wheel response forbidden")
+        with partial.open("xb") as destination:
+            while True:
+                block = response.read(min(65536, item["bytes"] - count + 1))
+                if not block:
+                    break
+                count += len(block)
+                require(count <= item["bytes"], "wheel byte limit exceeded")
+                observed.update(block)
+                destination.write(block)
+                check_budget(output)
+    require(count == item["bytes"] and observed.hexdigest() == item["sha256"],
+            "wheel payload hash or length mismatch: " + item["name"])
+    partial.rename(final)
+    return final
+
+
+def check_wheel(path, item):
+    data = read_file(path, item["bytes"])
+    require(len(data) == item["bytes"] and digest(data) == item["sha256"],
+            "wheel changed before metadata admission")
+    unpacked = 0
+    with zipfile.ZipFile(path) as archive:
+        entries = archive.infolist()
+        require(0 < len(entries) <= MAX_ENTRIES, "wheel entry limit exceeded")
+        seen = set()
+        for entry in entries:
+            name = entry.filename
+            require(name not in seen, "duplicate wheel member")
+            seen.add(name)
+            safe_relative(name[:-1] if entry.is_dir() else name)
+            require(not entry.flag_bits & 1, "encrypted wheel member")
+            mode = entry.external_attr >> 16
+            require(not stat.S_ISLNK(mode) and
+                    stat.S_IFMT(mode) in (0, stat.S_IFREG, stat.S_IFDIR),
+                    "unsupported wheel member mode")
+            require(not name.endswith(".pth") and
+                    not PurePosixPath(name).name.startswith(
+                        ("sitecustomize.", "usercustomize.")),
+                    "wheel startup hook forbidden")
+            require(".data/" not in name, "wheel external scheme payload forbidden")
+            require(entry.file_size <= MAX_UNPACKED, "wheel member too large")
+            unpacked += entry.file_size
+        require(unpacked <= MAX_UNPACKED, "wheel expansion budget exceeded")
+        metadata_names = [n for n in seen if n.endswith(".dist-info/METADATA")]
+        require(len(metadata_names) == 1, "exactly one wheel METADATA required")
+        metadata_name = metadata_names[0]
+        info_root = metadata_name.rsplit("/", 1)[0] + "/"
+        expected_info = item["name"].replace("-", "_") + "-" + item["version"] + ".dist-info/"
+        require(info_root == expected_info, "wheel distribution directory mismatch")
+        metadata_bytes = archive.read(metadata_name)
+        if item["coreMetadataSha256"] is not None:
+            require(digest(metadata_bytes) == item["coreMetadataSha256"],
+                    "published core metadata drift")
+        metadata = email.parser.BytesParser().parsebytes(metadata_bytes)
+        for header in ("Name", "Version", "Requires-Python"):
+            require(len(metadata.get_all(header, [])) == 1,
+                    "missing or duplicate metadata header: " + header)
+        require(canonical_name(metadata["Name"]) == item["name"] and
+                metadata["Version"] == item["version"] and
+                metadata["Requires-Python"] == item["requiresPython"],
+                "wheel runtime identity mismatch")
+        require(sorted(metadata.get_all("Requires-Dist", [])) ==
+                sorted(item["requiresDist"]), "wheel dependency metadata mismatch")
+        wheel_name = info_root + "WHEEL"
+        require(wheel_name in seen and info_root + "RECORD" in seen,
+                "wheel lacks WHEEL or RECORD")
+        wheel = email.parser.BytesParser().parsebytes(archive.read(wheel_name))
+        expected_tags = (["cp312-cp312-manylinux_2_17_x86_64",
+                          "cp312-cp312-manylinux2014_x86_64"]
+                         if item["name"] == "rpds-py" else ["py3-none-any"])
+        require(sorted(wheel.get_all("Tag", [])) == sorted(expected_tags),
+                "unsupported wheel ABI/platform tags")
+        record_name = info_root + "RECORD"
+        rows = list(csv.reader(io.StringIO(archive.read(record_name).decode("utf-8"))))
+        records = {}
+        for row in rows:
+            require(len(row) == 3, "malformed wheel RECORD")
+            safe_relative(row[0])
+            require(row[0] not in records, "duplicate wheel RECORD path")
+            records[row[0]] = row[1:]
+        require(set(records) == {e.filename for e in entries if not e.is_dir()},
+                "wheel RECORD coverage mismatch")
+        for name, (hash_value, byte_value) in records.items():
+            if name == record_name:
+                require(hash_value == "" and byte_value == "",
+                        "wheel RECORD self digest must be empty")
+            else:
+                member = archive.read(name)
+                encoded = base64.urlsafe_b64encode(
+                    hashlib.sha256(member).digest()).rstrip(b"=").decode("ascii")
+                require(hash_value == "sha256=" + encoded and byte_value == str(len(member)),
+                        "wheel RECORD payload mismatch")
+        license_pin = item["license"]
+        matching_licenses = [n for n in seen if n.startswith(info_root) and
+            PurePosixPath(n).name == license_pin["sourcePath"] and
+            not n.endswith("/")]
+        require(any(len(archive.read(n)) == license_pin["bytes"] and
+                    digest(archive.read(n)) == license_pin["sha256"]
+                    for n in matching_licenses), "original wheel license absent or changed")
+        released = {}
+        for name in records:
+            if name != record_name:
+                member = archive.read(name)
+                released[name] = {"sha256": digest(member), "bytes": len(member)}
+    return {"name": item["name"], "sha256": item["sha256"],
+            "bytes": item["bytes"], "unpackedBytes": unpacked,
+            "originalLicensePreserved": True, "releasedFiles": released}
+
+
+def requirements(lock):
+    return "".join(item["name"] + "==" + item["version"] +
+                   " --hash=sha256:" + item["sha256"] + "\n"
+                   for item in lock["artifacts"])
+
+
+def cli_is_valid(records):
+    values = {r["label"].rsplit("-", 1)[-1]: r for r in records}
+    return (set(values) == {"validate", "report", "complete"} and
+            values["validate"]["returncode"] == 0 and
+            values["report"]["returncode"] == 0 and
+            values["complete"]["returncode"] in (0, 2) and
+            all(r["termination"] is None for r in records))
+
+
+ENSUREPIP_SELECTOR = r"""
+def inspect_selected_ensurepip(ensurepip,resources):
+ import hashlib
+ from pathlib import Path
+ def pinned_file(value,maximum):
+  p=Path(value)
+  assert p.is_absolute(),"selected tooling path must be absolute"
+  assert all(not q.is_symlink() for q in (p,*p.parents)),"selected tooling symlink"
+  assert p.is_file() and 0<p.stat().st_size<=maximum,"selected tooling file missing/oversized"
+  observed=hashlib.sha256();count=0
+  with p.open("rb") as stream:
+   while True:
+    block=stream.read(min(65536,maximum-count+1))
+    if not block: break
+    count+=len(block);assert count<=maximum,"selected tooling file grew beyond budget"
+    observed.update(block)
+  return {"path":str(p),"filename":p.name,"sha256":observed.hexdigest(),"bytes":count}
+ selector=getattr(ensurepip,"_get_packages",None)
+ assert callable(selector),"unsupported ensurepip selection interface"
+ packages=selector()
+ assert set(packages)=={"pip"},"unexpected ensurepip packages"
+ package=packages["pip"]
+ assert isinstance(package.version,str) and package.version==ensurepip.version()
+ if package.wheel_name:
+  assert package.wheel_path is None,"ambiguous ensurepip selection"
+  assert "/" not in package.wheel_name and "\\" not in package.wheel_name
+  path=resources.files("ensurepip").joinpath("_bundled",package.wheel_name)
+  selection="STDLIB_BUNDLED"
+ else:
+  assert package.wheel_path,"ensurepip selected wheel source unavailable"
+  path=package.wheel_path
+  selection="WHEEL_PKG_DIR"
+ wheel=pinned_file(str(path),8*1024**2)
+ assert wheel["filename"]=="pip-"+package.version+"-py3-none-any.whl"
+ return {"origin":pinned_file(ensurepip.__file__,1024**2),
+         "selection":selection,"selectedPipVersion":package.version,
+         "selectedWheel":wheel}
+"""
+
+
+PROBE = ENSUREPIP_SELECTOR + r"""
+import ensurepip,hashlib,importlib.resources,json,platform,sys
+from pathlib import Path
+p=Path(sys.executable)
+print(json.dumps({"ensurepip":inspect_selected_ensurepip(ensurepip,importlib.resources),
+ "implementation":sys.implementation.name,
+ "python":list(sys.version_info[:2]),"fullVersion":sys.version,
+ "system":platform.system(),"machine":platform.machine(),"libc":platform.libc_ver(),
+ "executable":str(p),"executableSha256":hashlib.sha256(p.read_bytes()).hexdigest(),
+ "prefix":sys.prefix,"basePrefix":sys.base_prefix,
+ "isolated":sys.flags.isolated,"noSite":sys.flags.no_site,
+ "dontWriteBytecode":sys.dont_write_bytecode}))
+"""
+
+
+EMPTY_SITE_PROBE = ENSUREPIP_SELECTOR + r"""
+import ensurepip,importlib.metadata as md,importlib.resources,json,site,sys
+from pathlib import Path
+venv=Path(sys.argv[1]).resolve()
+assert Path(sys.prefix).resolve()==venv and sys.prefix!=sys.base_prefix
+assert sys.flags.isolated and not sys.flags.no_site and sys.dont_write_bytecode
+assert site.ENABLE_USER_SITE is False
+cfg=(venv/"pyvenv.cfg").read_text(encoding="utf-8")
+assert "include-system-site-packages = false" in cfg
+actual={}
+for d in md.distributions():
+ name=d.metadata["Name"].lower().replace("_","-").replace(".","-")
+ assert name=="pip" and name not in actual
+ assert str(d.locate_file("")).startswith(str(venv)+"/")
+ actual[name]=d.version
+assert set(actual)=={"pip"}
+for directory in site.getsitepackages():
+ p=Path(directory)
+ if p.exists():
+  assert venv in p.resolve().parents
+  assert not list(p.glob("*.pth"))
+  assert not list(p.glob("sitecustomize.*")) and not list(p.glob("usercustomize.*"))
+print(json.dumps({"ensurepip":inspect_selected_ensurepip(ensurepip,importlib.resources),
+ "preProviderDistributions":actual,"isolated":True,
+ "userSite":False,"systemSitePackages":False,"startupHooks":False}))
+"""
+
+
+PROVIDER_PROBE = r"""
+import hashlib,importlib,importlib.metadata as md,json,site,sys
+from pathlib import Path
+venv=Path(sys.argv[1]).resolve()
+expected=json.loads(sys.argv[2])
+released=json.loads(Path(sys.argv[3]).read_text(encoding="utf-8"))
+assert set(released)==set(expected)
+assert sys.prefix != sys.base_prefix and Path(sys.prefix).resolve()==venv
+assert sys.flags.isolated and not sys.flags.no_site and sys.dont_write_bytecode
+assert site.ENABLE_USER_SITE is False
+def owned(path):
+ p=Path(path)
+ assert not p.is_symlink()
+ assert venv in p.resolve().parents
+ return str(p)
+actual={}
+for d in md.distributions():
+ name=d.metadata["Name"].lower().replace("_","-").replace(".","-")
+ assert name in expected or name=="pip", "extraneous distribution:"+name
+ assert name not in actual, "duplicate distribution:"+name
+ if name in expected: assert d.version==expected[name]
+ assert str(d.locate_file("")).startswith(str(venv)+"/")
+ actual[name]=d.version
+assert set(actual)==set(expected)|{"pip"}
+payload_receipts={}
+native={}
+for name, files in released.items():
+ d=md.distribution(name)
+ checked=0
+ for member,pin in files.items():
+  p=Path(d.locate_file(member))
+  owned(p)
+  assert p.stat().st_size==pin["bytes"],member
+  observed=hashlib.sha256();count=0
+  with p.open("rb") as stream:
+   while True:
+    block=stream.read(min(65536,pin["bytes"]-count+1))
+    if not block: break
+    count+=len(block);assert count<=pin["bytes"],member
+    observed.update(block)
+  assert count==pin["bytes"] and observed.hexdigest()==pin["sha256"],member
+  checked+=1
+  if member.endswith(".so"):
+   assert name=="rpds-py"
+   native[str(p.resolve())]={"sha256":pin["sha256"],"bytes":pin["bytes"]}
+ payload_receipts[name]={"releasedFilesVerified":checked}
+assert native,"released rpds native module required"
+origins={}
+for name in ("attr","attrs","jsonschema","jsonschema_specifications",
+             "referencing","rpds","typing_extensions","pip"):
+ m=importlib.import_module(name)
+ origins[name]=owned(m.__file__)
+for name,m in list(sys.modules.items()):
+ if name=="rpds" or name.startswith("rpds."):
+  if getattr(m,"__file__",None): origins[name]=owned(m.__file__)
+loaded_native={}
+for name,m in list(sys.modules.items()):
+ p=getattr(m,"__file__",None)
+ if (name=="rpds" or name.startswith("rpds.")) and p and p.endswith(".so"):
+  resolved=str(Path(p).resolve())
+  assert resolved in native
+  loaded_native[resolved]=native[resolved]
+assert loaded_native,"rpds native extension was not loaded"
+from rpds import HashTrieMap
+original=HashTrieMap({"before":1})
+derived=original.insert("after",2)
+assert len(original)==1 and "after" not in original
+assert len(derived)==2 and derived["before"]==1 and derived["after"]==2
+from jsonschema import Draft202012Validator
+from jsonschema.exceptions import SchemaError
+schema={"$schema":"https://json-schema.org/draft/2020-12/schema",
+ "$defs":{"positive":{"type":"integer","minimum":1}},
+ "type":"object","required":["value"],"additionalProperties":False,
+ "properties":{"value":{"$ref":"#/$defs/positive"}}}
+Draft202012Validator.check_schema(schema)
+v=Draft202012Validator(schema)
+assert not list(v.iter_errors({"value":1}))
+assert list(v.iter_errors({"value":0}))
+assert list(v.iter_errors({"value":"1"}))
+assert list(v.iter_errors({"value":1,"extra":True}))
+tuple_schema={"$schema":"https://json-schema.org/draft/2020-12/schema",
+ "type":"array","prefixItems":[{"type":"integer"},{"type":"string"}],"items":False}
+Draft202012Validator.check_schema(tuple_schema)
+tuples=Draft202012Validator(tuple_schema)
+assert not list(tuples.iter_errors([1,"one"]))
+assert list(tuples.iter_errors(["bad","one"]))
+assert list(tuples.iter_errors([1,"one",3]))
+unevaluated_schema={"$schema":"https://json-schema.org/draft/2020-12/schema",
+ "type":"object","allOf":[{"properties":{"known":{"type":"integer"}}}],
+ "unevaluatedProperties":False}
+Draft202012Validator.check_schema(unevaluated_schema)
+unevaluated=Draft202012Validator(unevaluated_schema)
+assert not list(unevaluated.iter_errors({"known":1}))
+assert list(unevaluated.iter_errors({"known":1,"unknown":True}))
+try:
+ Draft202012Validator.check_schema({"type":"not-a-json-schema-type"})
+except SchemaError:
+ invalid_schema_refused=True
+else:
+ raise AssertionError("invalid schema accepted")
+print(json.dumps({"distributions":actual,"origins":origins,
+ "isolated":True,"systemSitePackages":False,"genuineDraft202012":True,
+ "draft2020Discriminators":{"prefixItems":True,"unevaluatedProperties":True,
+ "invalidSchemaRefused":invalid_schema_refused,"localRef":True},
+ "hashTrieMapImmutableOperations":True,"loadedNativePayloads":loaded_native,
+ "releasedPayloads":payload_receipts}))
+"""
+
+
+UNIT_DRIVER = r"""
+import hashlib,importlib.util,json,sys,tempfile,unittest
+from pathlib import Path
+root,out,expected=Path(sys.argv[1]),Path(sys.argv[2]),json.loads(sys.argv[3])
+tempfile.tempdir=str(out/"tmp")
+path=root/"m3/migration/test/test_migration.py"
+spec=importlib.util.spec_from_file_location("m3_original_migration_tests",path)
+module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+suite=unittest.defaultTestLoader.loadTestsFromModule(module)
+def flatten(suite):
+ for case in suite:
+  if isinstance(case,unittest.TestSuite): yield from flatten(case)
+  else: yield case
+ids=sorted(".".join(case.id().split(".")[1:]) for case in flatten(suite))
+assert ids==expected and len(ids)==26 and len(set(ids))==26
+result=unittest.TextTestRunner(verbosity=2).run(suite)
+receipt={"methods":ids,"testsRun":result.testsRun,"failures":len(result.failures),
+ "errors":len(result.errors),"skipped":len(result.skipped),
+ "expectedFailures":len(result.expectedFailures),
+ "unexpectedSuccesses":len(result.unexpectedSuccesses),
+ "testSourceSha256":hashlib.sha256(path.read_bytes()).hexdigest()}
+with (out/"original-unit-results.json").open("x",encoding="utf-8") as f:
+ json.dump(receipt,f,sort_keys=True,indent=2);f.write("\n")
+ok=(result.testsRun==26 and result.wasSuccessful() and not result.skipped and
+ not result.expectedFailures and not result.unexpectedSuccesses)
+raise SystemExit(0 if ok else 1)
+"""
+
+
+def json_stdout(output, record):
+    return parse_json(read_file(output / record["stdoutPath"], 1024 ** 2))
+
+
+def run(root, output, lock_path, python=None, previous=None, baseline_root=None):
+    roots = [no_symlinks(root)]
+    require(roots[0].is_dir(), "source root must be a directory")
+    if baseline_root is not None:
+        roots.append(no_symlinks(baseline_root))
+        require(roots[-1].is_dir(), "baseline root must be a directory")
+    output = create_output(output, roots)
+    receipt = {"schema": "M3_ORIGINAL_MAPPING_PYTHON_PROVIDER_RECEIPT_V1",
+        "providerQualified": False, "originalSyntheticTestsPassed": False,
+        "currentManifestValid": False, "baselineManifestValid": None,
+        "migrationComplete": False, "runtimeQualified": False,
+        "jniQualified": False, "jdkQualified": False,
+        "performanceQualified": False, "phaseAdvanced": False,
+        "outputBudgetBytes": OUTPUT_LIMIT, "minimumFreeBytes": MIN_FREE,
+        "supervision": "Caller owns process-group and descendant terminal cleanup.",
+        "commands": [], "error": None, "exitCode": 1}
+    lock = None
+    start_pins = {}
+    previous_pin = None
+    try:
+        for name in ("logs", "tmp", "home", "wheelhouse"):
+            (output / name).mkdir(mode=0o700)
+        lock = load_lock(lock_path)
+        receipt["lockSha256"] = LOCK_SHA256
+        for index, source_root in enumerate(roots):
+            start_pins[str(source_root)] = pin_sources(source_root, lock)
+        receipt["sourceInputs"] = start_pins
+        prior = Path(previous) if previous is not None else roots[0] / lock["original"]["previous"]["path"]
+        if previous is not None or prior.exists():
+            prior = no_symlinks(prior)
+            pin = lock["original"]["previous"]
+            data = read_file(prior, pin["bytes"])
+            require(len(data) == pin["bytes"] and digest(data) == pin["sha256"],
+                    "previous fixture drift")
+            previous_pin = (prior, digest(data))
+            receipt["previous"] = {"path": str(prior), "sha256": digest(data), "bytes": len(data)}
+        else:
+            prior = None
+            receipt["previous"] = None
+        executable = Path(python or sys.executable).resolve(strict=True)
+        executable = no_symlinks(executable)
+        require(executable.is_file() and os.access(executable, os.X_OK),
+                "preinstalled Python executable required")
+        env = isolated_env(output, executable)
+        r = command_result(output, "preinstalled-python",
+            [executable, "-I", "-S", "-B", "-c", PROBE], env, receipt["commands"], 30)
+        require(r["returncode"] == 0, "preinstalled Python probe failed")
+        info = json_stdout(output, r)
+        check_platform(info)
+        receipt["preinstalledPython"] = info
+        r = command_result(output, "create-venv",
+            [executable, "-I", "-S", "-B", "-m", "venv", "--without-pip", "--copies",
+             output / "venv"], env, receipt["commands"], 90)
+        require(r["returncode"] == 0, "stdlib venv creation failed")
+        vpython = no_symlinks(output / "venv/bin/python")
+        r = command_result(output, "bootstrap-bundled-pip",
+            [vpython, "-I", "-B", "-m", "ensurepip", "--default-pip"],
+            env, receipt["commands"], 120)
+        require(r["returncode"] == 0, "preinstalled ensurepip unavailable or failed")
+        r = command_result(output, "empty-provider-site",
+            [vpython, "-I", "-B", "-c", EMPTY_SITE_PROBE, output / "venv"],
+            env, receipt["commands"], 30)
+        require(r["returncode"] == 0, "venv contains an extraneous distribution or startup hook")
+        receipt["emptySite"] = json_stdout(output, r)
+        require(receipt["emptySite"]["ensurepip"] == info["ensurepip"],
+                "actual ensurepip selected source changed between base and venv")
+        require(receipt["emptySite"]["preProviderDistributions"]["pip"] ==
+                info["ensurepip"]["selectedPipVersion"],
+                "installed pip differs from actual stdlib-selected wheel")
+        receipt["stdlibVenvLayoutLink"] = (
+            "lib64->lib (contained stdlib layout)"
+            if (output / "venv/lib64").is_symlink() else None)
+        receipt["wheels"] = []
+        total_unpacked = 0
+        for item in lock["artifacts"]:
+            path = fetch_wheel(item, output / "wheelhouse", output)
+            checked = check_wheel(path, item)
+            receipt["wheels"].append(checked)
+            total_unpacked += checked["unpackedBytes"]
+            require(total_unpacked <= MAX_UNPACKED, "aggregate wheel expansion budget exceeded")
+        req = output / "requirements.lock.txt"
+        with req.open("x", encoding="utf-8") as stream:
+            stream.write(requirements(lock))
+        pip = [vpython, "-I", "-B", "-m", "pip", "--isolated",
+               "--disable-pip-version-check"]
+        r = command_result(output, "install-six-wheels",
+            pip + ["install", "--no-index", "--require-hashes", "--only-binary=:all:",
+                   "--no-deps", "--no-compile", "--no-cache-dir", "--find-links",
+                   output / "wheelhouse", "-r", req], env, receipt["commands"], 180)
+        require(r["returncode"] == 0, "offline pinned wheel install failed")
+        r = command_result(output, "dependency-check", pip + ["check"],
+                           env, receipt["commands"], 30)
+        require(r["returncode"] == 0, "installed dependency closure check failed")
+        expected = {x["name"]: x["version"] for x in lock["artifacts"]}
+        released = {w["name"]: w.pop("releasedFiles") for w in receipt["wheels"]}
+        released_path = output / "released-payloads.json"
+        write_json(released_path, released)
+        receipt["releasedPayloadManifest"] = {
+            "path": released_path.name, "sha256": digest(released_path.read_bytes()),
+            "files": sum(len(files) for files in released.values())}
+        r = command_result(output, "genuine-provider",
+            [vpython, "-I", "-B", "-c", PROVIDER_PROBE, output / "venv",
+             json.dumps(expected, sort_keys=True), released_path],
+            env, receipt["commands"], 30)
+        require(r["returncode"] == 0, "genuine isolated provider check failed")
+        receipt["provider"] = json_stdout(output, r)
+        require(receipt["provider"]["distributions"]["pip"] ==
+                info["ensurepip"]["selectedPipVersion"],
+                "actual pip differs from preinstalled stdlib-selected wheel")
+        receipt["providerQualified"] = True
+        r = command_result(output, "original-unit-tests",
+            [vpython, "-I", "-B", "-c", UNIT_DRIVER, roots[0], output,
+             json.dumps(lock["original"]["tests"]["methods"])],
+            env, receipt["commands"], 120)
+        unit_ok = r["returncode"] == 0
+        receipt["originalSyntheticTestsPassed"] = unit_ok
+        if (output / "original-unit-results.json").is_file():
+            receipt["originalUnits"] = parse_json(read_file(
+                output / "original-unit-results.json", 1024 ** 2))
+        groups = []
+        if len(roots) > 1:
+            groups.append(("baseline", roots[1]))
+        groups.append(("current", roots[0]))
+        for label, source_root in groups:
+            records = []
+            for action in ("validate", "report", "complete"):
+                argv = [vpython, "-I", "-B", source_root / lock["original"]["cli"]["path"],
+                        action, source_root]
+                if prior is not None:
+                    argv += ["--previous", prior]
+                records.append(command_result(output, label + "-" + action, argv,
+                    env, receipt["commands"], 120))
+            valid = cli_is_valid(records)
+            receipt[label + "ManifestValid"] = valid
+            if label == "current":
+                receipt["migrationComplete"] = valid and records[-1]["returncode"] == 0
+        require(unit_ok, "original synthetic unit tests failed")
+        require(receipt["currentManifestValid"], "original CLI refused current mapping")
+        receipt["exitCode"] = 0
+    except Exception as failure:
+        receipt["error"] = type(failure).__name__ + ": " + str(failure)
+    finally:
+        if lock is not None and start_pins:
+            try:
+                for source_root, before in start_pins.items():
+                    require(pin_sources(source_root, lock) == before,
+                            "read-only original input changed during execution")
+                if previous_pin is not None:
+                    require(digest(read_file(previous_pin[0], 1024 ** 2)) == previous_pin[1],
+                            "previous fixture changed during execution")
+            except Exception as failure:
+                receipt["error"] = type(failure).__name__ + ": " + str(failure)
+                receipt["exitCode"] = 1
+                receipt["currentManifestValid"] = False
+        try:
+            receipt["observedOutputBytesBeforeReceipt"] = footprint(output)
+        except Exception as failure:
+            receipt["outputAuditError"] = type(failure).__name__ + ": " + str(failure)
+            receipt["exitCode"] = 1
+            receipt["currentManifestValid"] = False
+        write_json(output / "provider-receipt.json", receipt)
+    return receipt["exitCode"]
+
+
+def self_test(output, lock_path):
+    output = create_output(output, [])
+    for name in ("logs", "tmp", "home"):
+        (output / name).mkdir(mode=0o700)
+    receipt = {"schema": "M3_PYTHON_PROVIDER_STDLIB_BOUNDARY_TESTS_V1",
+               "runtimeQualified": False, "jniQualified": False,
+               "jdkQualified": False, "performanceQualified": False,
+               "phaseAdvanced": False, "providerInstall": "NOT_RUN",
+               "network": "NOT_RUN", "genuineProviderImport": "NOT_RUN"}
+    try:
+        import unittest
+        tempfile.tempdir = str(output / "tmp")
+        test_path = no_symlinks(Path(__file__).with_name("test_bootstrap.py"))
+        spec = importlib.util.spec_from_file_location("m3_provider_boundary_tests", test_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        module.TEST_OUTPUT = output
+        module.LOCK_PATH = no_symlinks(lock_path)
+        suite = unittest.defaultTestLoader.loadTestsFromModule(module)
+        result = unittest.TextTestRunner(verbosity=2).run(suite)
+        receipt.update({"testsRun": result.testsRun, "failures": len(result.failures),
+            "errors": len(result.errors), "skipped": len(result.skipped),
+            "expectedFailures": len(result.expectedFailures),
+            "unexpectedSuccesses": len(result.unexpectedSuccesses)})
+        ok = (result.testsRun > 0 and result.wasSuccessful() and not result.skipped
+              and not result.expectedFailures and not result.unexpectedSuccesses)
+        receipt["exitCode"] = 0 if ok else 1
+    except Exception as failure:
+        receipt.update({"error": type(failure).__name__ + ": " + str(failure),
+                        "exitCode": 1})
+    write_json(output / "stdlib-boundary-tests.json", receipt)
+    return receipt["exitCode"]
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", type=Path)
+    parser.add_argument("--baseline-root", type=Path)
+    parser.add_argument("--previous", type=Path)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--lock", type=Path,
+                        default=Path(__file__).with_name("wheels.lock.json"))
+    parser.add_argument("--python", type=Path)
+    parser.add_argument("--self-test", action="store_true")
+    args = parser.parse_args(argv)
+    try:
+        if args.self_test:
+            require(args.root is None and args.baseline_root is None and
+                    args.previous is None and args.python is None,
+                    "self-test accepts only output and lock")
+            return self_test(args.output, args.lock)
+        require(args.root is not None, "--root required")
+        return run(args.root, args.output, args.lock, args.python,
+                   args.previous, args.baseline_root)
+    except Exception as failure:
+        print("M3_PYTHON_PROVIDER_REFUSED: " + type(failure).__name__ + ": " +
+              str(failure), file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
