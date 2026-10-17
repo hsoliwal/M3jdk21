@@ -1,0 +1,10 @@
+[
+  "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+  "-o",
+  "-B",
+  "-f",
+  "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/m3jdk21-openrewrite-tool/candidate/m3/tooling/shared-frontend/openrewrite-tool/pom.xml",
+  "-Dmaven.repo.local=/tmp/m3-maven-repository",
+  "-Dm3.proof.directory=/workspace/scratch/13309be96b09/ast-work/rewrite-tool-sdk-proof",
+  "package"
+]
