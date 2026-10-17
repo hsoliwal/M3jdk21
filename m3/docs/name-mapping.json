@@ -72,6 +72,15 @@
       ]
     },
     {
+      "source": "com.synexia.m3index.jdk.M3JdkStringBridge / com.synexia.mindex.MIndexStringPrecomputeBridge",
+      "target": "java.lang.M3StringPrecomputeBridge",
+      "status": "target-internal String precompute dispatch membrane",
+      "source_role": "Synexia canonical bridge policy/recipe donor",
+      "recipe": "com.synexia.rewrite.M3Jdk21StringPrecomputeBridgeReceiverRecipe",
+      "recipe_blob": "8879983c1c1eea32537ee92c3cb953143b5ea748",
+      "target_rule": "Package-private java.lang coordinator only; owns no cache or spelling payload, never admits a flat String merely for an optimization hit, and delegates to existing M3String facts/search/range owners with exact fallback semantics."
+    },
+    {
       "source": "com.synexia.indexstring.MIndexStringBacking",
       "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
       "target": "jdk.internal.mindex.M3StringBacking",
