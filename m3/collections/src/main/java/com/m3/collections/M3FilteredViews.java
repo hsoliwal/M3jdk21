@@ -106,6 +106,14 @@ public final class M3FilteredViews {
         return new UnsupportedOperationException("read-only filtered view");
     }
 
+    /** Natural or owner-comparator order, including comparator-admitted null keys. */
+    @SuppressWarnings("unchecked")
+    private static <T> int compareStored(T stored, T query,
+            Comparator<? super T> comparator) {
+        return comparator != null ? comparator.compare(stored, query)
+                : ((Comparable<? super T>) stored).compareTo(query);
+    }
+
     /**
      * Apply visibility to the stored representative, never to a lookup alias.
      * An identity-backed Set may retain equals-equal distinct references: give
@@ -228,18 +236,37 @@ public final class M3FilteredViews {
             Iterator<E> selected = M3FilteredViews.filtered(cursor, predicate);
             return selected.hasNext() ? selected.next() : null;
         }
-        @Override public E lower(E e) {
-            return firstVisible(nav.headSet(e, false).descendingIterator());
+        /**
+         * Preserve the ordinary one-range/one-iterator fast path. A bounded JDK
+         * subview can reject an otherwise valid navigation query outside its
+         * endpoints; unlike range construction, lower/floor/ceiling/higher must
+         * answer from the retained subview. Recover only that rejected range.
+         */
+        private E bounded(E query, boolean forward, boolean inclusive) {
+            Iterator<E> cursor;
+            try {
+                cursor = forward ? nav.tailSet(query, inclusive).iterator()
+                        : nav.headSet(query, inclusive).descendingIterator();
+            } catch (IllegalArgumentException outOfRange) {
+                Iterator<E> bounded = forward ? nav.iterator() : nav.descendingIterator();
+                Comparator<? super E> comparator = nav.comparator();
+                while (bounded.hasNext()) {
+                    E stored = bounded.next();
+                    int relation = compareStored(stored, query, comparator);
+                    if ((forward ? relation > 0 || (inclusive && relation == 0)
+                            : relation < 0 || (inclusive && relation == 0))
+                            && predicate.test(stored)) {
+                        return stored;
+                    }
+                }
+                return null;
+            }
+            return firstVisible(cursor);
         }
-        @Override public E floor(E e) {
-            return firstVisible(nav.headSet(e, true).descendingIterator());
-        }
-        @Override public E ceiling(E e) {
-            return firstVisible(nav.tailSet(e, true).iterator());
-        }
-        @Override public E higher(E e) {
-            return firstVisible(nav.tailSet(e, false).iterator());
-        }
+        @Override public E lower(E e) { return bounded(e, false, false); }
+        @Override public E floor(E e) { return bounded(e, false, true); }
+        @Override public E ceiling(E e) { return bounded(e, true, true); }
+        @Override public E higher(E e) { return bounded(e, true, false); }
         @Override public E first() {
             Iterator<E> values = iterator();
             if (!values.hasNext()) throw new NoSuchElementException();
@@ -379,20 +406,48 @@ public final class M3FilteredViews {
                     entry -> predicate.test(entry.getKey(), entry.getValue()));
             return selected.hasNext() ? new SimpleImmutableEntry<>(selected.next()) : null;
         }
+        /**
+         * Do not turn an out-of-range query on a live bounded map into a
+         * subMap/headMap/tailMap construction exception. Only the exceptional
+         * recovery path scans owner entries; ordinary queries keep the
+         * comparator-backed bounded iterator, retaining each stored key/value.
+         */
+        private Entry<K, V> boundedEntry(K query, boolean forward, boolean inclusive) {
+            Iterator<Entry<K, V>> cursor;
+            try {
+                cursor = forward ? nav.tailMap(query, inclusive).entrySet().iterator()
+                        : nav.headMap(query, inclusive).descendingMap().entrySet().iterator();
+            } catch (IllegalArgumentException outOfRange) {
+                Iterator<Entry<K, V>> bounded = forward
+                        ? nav.entrySet().iterator() : nav.descendingMap().entrySet().iterator();
+                Comparator<? super K> comparator = nav.comparator();
+                while (bounded.hasNext()) {
+                    Entry<K, V> stored = bounded.next();
+                    int relation = compareStored(stored.getKey(), query, comparator);
+                    if ((forward ? relation > 0 || (inclusive && relation == 0)
+                            : relation < 0 || (inclusive && relation == 0))
+                            && predicate.test(stored.getKey(), stored.getValue())) {
+                        return new SimpleImmutableEntry<>(stored);
+                    }
+                }
+                return null;
+            }
+            return firstVisible(cursor);
+        }
         @Override public Entry<K, V> lowerEntry(K key) {
-            return firstVisible(nav.headMap(key, false).descendingMap().entrySet().iterator());
+            return boundedEntry(key, false, false);
         }
         @Override public K lowerKey(K key) { return keyOf(lowerEntry(key)); }
         @Override public Entry<K, V> floorEntry(K key) {
-            return firstVisible(nav.headMap(key, true).descendingMap().entrySet().iterator());
+            return boundedEntry(key, false, true);
         }
         @Override public K floorKey(K key) { return keyOf(floorEntry(key)); }
         @Override public Entry<K, V> ceilingEntry(K key) {
-            return firstVisible(nav.tailMap(key, true).entrySet().iterator());
+            return boundedEntry(key, true, true);
         }
         @Override public K ceilingKey(K key) { return keyOf(ceilingEntry(key)); }
         @Override public Entry<K, V> higherEntry(K key) {
-            return firstVisible(nav.tailMap(key, false).entrySet().iterator());
+            return boundedEntry(key, true, false);
         }
         @Override public K higherKey(K key) { return keyOf(higherEntry(key)); }
         @Override public Entry<K, V> firstEntry() {
