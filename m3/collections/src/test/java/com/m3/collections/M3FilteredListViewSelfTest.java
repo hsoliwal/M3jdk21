@@ -26,6 +26,7 @@ public final class M3FilteredListViewSelfTest {
         listIteratorContract();
         subListIsBackedAndVisibleIndexed();
         defaultSortAndReplaceAll();
+        snapshotSuperset();
         nestedFiltersFlattenToOwner();
         randomizedLiveParity();
         System.out.println("M3_FILTERED_LIST_PASS checks=" + checks);
@@ -137,6 +138,35 @@ public final class M3FilteredListViewSelfTest {
         eq(owner, List.of(2, -1, 4, -2, 6));
         check(view.hashCode() == List.of(2, 4, 6).hashCode(), "List hashCode");
         check(view.equals(List.of(2, 4, 6)), "List equality");
+    }
+
+    private static void snapshotSuperset() {
+        List<String> source = new ArrayList<>(List.of("b", "A", "a", "B"));
+        int[] calls = {0};
+        Collection<String> counted = new java.util.AbstractCollection<>() {
+            @Override public Iterator<String> iterator() {
+                calls[0]++;
+                return source.iterator();
+            }
+            @Override public int size() {
+                throw new AssertionError("snapshot must not pre-size by source.size()");
+            }
+        };
+
+        List<String> selected =
+                M3CollectionViews.filteredSnapshot(counted, value -> value.compareToIgnoreCase("b") < 0);
+        eq(selected, List.of("A", "a"));
+        check(calls[0] == 1, "filteredSnapshot one source iterator");
+        fails(UnsupportedOperationException.class, () -> selected.add("x"));
+
+        calls[0] = 0;
+        List<String> sorted =
+                M3CollectionViews.filteredSortedSnapshot(
+                        counted, value -> true, String.CASE_INSENSITIVE_ORDER);
+        eq(sorted, List.of("A", "a", "b", "B"));
+        check(calls[0] == 1, "filteredSortedSnapshot one source iterator");
+        source.add("0");
+        eq(sorted, List.of("A", "a", "b", "B"));
     }
 
     private static void nestedFiltersFlattenToOwner() throws Exception {
