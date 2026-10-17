@@ -1,0 +1,70 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 collection source inventory and Maven dependency repair recipe
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/qualification/installed-ledger-20261017/**'
+      - 'm3/collections/pom.xml'
+      - 'm3/collections/recipe/pom.xml'
+      - 'm3/collections/synexia-donation.json'
+      - 'm3/collections/qualification/installed-source-20261017.tsv'
+      - '.github/workflows/m3-installed-ledger-repair-20261017.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-sealed-maven-openrewrite:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Run real OpenRewrite XML two-POM generator and complete installed-source receipt JUnit
+        run: >-
+          mvn -B -ntp -f m3/collections/qualification/installed-ledger-20261017/pom.xml
+          test -Dsurefire.useFile=false
+      - name: Exact source-epoch V3 receipt emitted by qualified Maven test
+        shell: bash
+        run: |
+          set -euo pipefail
+          C=m3/collections/qualification/installed-ledger-20261017/target/receipt-candidates
+          test -s "$C/installed-source-20261017.tsv"
+          test -s "$C/synexia-donation.json"
+          python3 - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          import json
+          root=Path("m3/collections/qualification/installed-ledger-20261017/target/receipt-candidates")
+          src=(root/"installed-source-20261017.tsv").read_bytes()
+          rec=(root/"synexia-donation.json").read_bytes()
+          assert len([x for x in src.splitlines() if x and not x.startswith(b"#")])==136
+          def unique_keys(pairs):
+              mapping={}
+              for key,value in pairs:
+                  assert key not in mapping, f"duplicate donation JSON key: {key}"
+                  mapping[key]=value
+              return mapping
+          packet=json.loads(rec, object_pairs_hook=unique_keys)
+          assert packet["installed_source_manifest"]=="qualification/installed-source-20261017.tsv"
+          assert packet["installed_source_manifest_sha256"]==sha256(src).hexdigest()
+          assert (packet["historical_installed_source_manifest_20261008"]
+                  =="qualification/installed-source-enum-set-20261008.tsv")
+          print("M3_CURRENT_JSON_ROOT_KEY_UNIQUE_PASS")
+          print("M3_GENERATED_MANIFEST_SHA256="+sha256(src).hexdigest())
+          print("M3_GENERATED_DONATION_SHA256="+sha256(rec).hexdigest())
+          print("M3_GENERATED_MANIFEST_BEGIN")
+          print(src.decode("utf-8"),end="")
+          print("M3_GENERATED_MANIFEST_END")
+          PY
+      - name: Verify recipe and current-tree diff hygiene
+        run: git diff --check HEAD^ HEAD
