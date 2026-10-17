@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 FLLDCIM documentation receiver Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HierarchicalDocumentation*.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3HierarchicalDocumentation*.java'
+      - 'm3/docs/m3-flldcim-receiver-*'
+      - '.github/workflows/m3-flldcim-documentation-receiver.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  documentation-recipe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Exact PR diff and standalone Java 21 projection regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          mkdir -p "$RUNNER_TEMP/m3-doc"
+          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3-doc" \
+            m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HierarchicalDocumentation.java \
+            m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3HierarchicalDocumentationSelfTest.java
+          java -cp "$RUNNER_TEMP/m3-doc" com.synexia.rewrite.M3HierarchicalDocumentationSelfTest
+      - name: Real Maven OpenRewrite recipe and JUnit fixed-point/refusal
+        run: >
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3HierarchicalDocumentationRecipeTest test
