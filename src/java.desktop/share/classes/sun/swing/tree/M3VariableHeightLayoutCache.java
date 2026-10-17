@@ -70,7 +70,7 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
     private static final int MEMO = 256;
     /** Children counts up to this are searched linearly; larger ones through a hash index. */
     private static final int SCAN = 16;
-    /** Lookups below a parent answered through TreeModel.getIndexOfChild before its hash index is built. */
+    /** Lookups below a large parent answered by a scan of its cached objects before its hash index is built. */
     private static final int PROBES = 32;
 
     /** Node id of the holder of the root's size lane (never a row). */
@@ -476,8 +476,9 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
         }
         TreePath changedPath = SwingUtilities2.getTreePath(e, getModel());
         boolean found = resolve(changedPath, false, false);
-        if ((found && resP == TOP) || (!found && ((changedPath == null && treeModel != null
-                && treeModel.getRoot() == null) || (changedPath != null && changedPath.getPathCount() == 1)))) {
+        // a null changedPath with a model means a null root: SwingUtilities2.getTreePath supplies the root path
+        if ((found && resP == TOP) || (!found && ((changedPath == null && treeModel != null)
+                || (changedPath != null && changedPath.getPathCount() == 1)))) {
             rebuild(true);
         } else if (found) {
             int p = resP;
@@ -502,6 +503,7 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
     private void rebuild(boolean clearSelection) {
         nodeCount = 1;
         Arrays.fill(mapKeys, null);
+        Arrays.fill(mapIds, 0);
         mapSize = 0;
         stamp++;
         Arrays.fill(cPath, null);
@@ -791,7 +793,7 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
 
     /** Drops {@code k} and its state descendants from the path map. */
     private void unmap(int k) {
-        mapRemove(path[k]);
+        mapRemove(path[k], k);
         for (int s = 0; s < stateCount[k]; s++) {
             unmap(states[k][s]);
         }
@@ -799,7 +801,7 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
 
     /** Rebuilds the paths of {@code k}'s state subtree after its user object changed. */
     private void repath(int k) {
-        mapRemove(path[k]);
+        mapRemove(path[k], k);
         path[k] = path[parent[k]].pathByAddingChild(value[k]);
         mapPut(path[k], k);
         for (int s = 0; s < stateCount[k]; s++) {
@@ -817,7 +819,7 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
     private int mapGet(TreePath key) {
         int mask = mapKeys.length - 1;
         for (int s = mapSlot(key); mapKeys[s] != null; s = (s + 1) & mask) {
-            if (mapKeys[s] == key || mapKeys[s].equals(key)) {
+            if (mapKeys[s].equals(key)) {
                 return mapIds[s];
             }
         }
@@ -840,10 +842,6 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
         int mask = mapKeys.length - 1;
         int s = mapSlot(key);
         while (mapKeys[s] != null) {
-            if (mapKeys[s].equals(key)) {
-                mapIds[s] = id;
-                return;
-            }
             s = (s + 1) & mask;
         }
         mapKeys[s] = key;
@@ -851,14 +849,12 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
         mapSize++;
     }
 
-    private void mapRemove(TreePath key) {
+    /** Removes the entry of node {@code id}, filed under {@code key}; every state node is filed once. */
+    private void mapRemove(TreePath key, int id) {
         int mask = mapKeys.length - 1;
         int s = mapSlot(key);
-        while (mapKeys[s] != null && !mapKeys[s].equals(key)) {
+        while (mapIds[s] != id) {
             s = (s + 1) & mask;
-        }
-        if (mapKeys[s] == null) {
-            return;
         }
         mapKeys[s] = null;
         mapSize--;
@@ -1123,9 +1119,6 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
     /** The stock updateNodeSizes: visible rows in order, with their rows. */
     private void updateNodeSizes(boolean updateAll) {
         updateNodeSizes = false;
-        if (root == 0) {
-            return;
-        }
         int row = 0;
         if (rootRow) {
             if (updateAll || ch[TOP][0] == 0) {
@@ -1505,9 +1498,9 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
     /**
      * The stock resolution of one path component below {@code n}: the loaded child whose cached user
      * object equals {@code o} (the stock path map), else {@code TreeModel.getIndexOfChild} (the stock
-     * walk). Repeated components hit a small identity memo. Below large parents the first lookups ask
-     * the model and verify its answer against the cached object, so one-off queries do not pay for
-     * building the hash index.
+     * walk). Repeated components hit a small identity memo. Below large parents the first lookups
+     * scan the cached objects from the end (the last loaded duplicate wins, as in the stock map), so
+     * one-off queries do not pay for building the hash index.
      */
     private int childIndex(int n, Object o) {
         int m = System.identityHashCode(o) & (MEMO - 1);
@@ -1527,15 +1520,8 @@ public class M3VariableHeightLayoutCache extends VariableHeightLayoutCache {
     private int childIndex0(int n, Object o) {
         int c = count[n];
         Object[] v = cv[n];
-        if (c > SCAN && lookup[n] == null && ++probes[n] <= PROBES) {
-            int i = treeModel.getIndexOfChild(value[n], o);
-            if (i >= 0 && i < c && v[i].equals(o)) {
-                return i;
-            }
-            int j = scan(v, c, o);
-            return j >= 0 ? j : i;
-        }
-        int j = c <= SCAN ? scan(v, c, o) : hashed(n, o);
+        boolean scanned = c <= SCAN || (lookup[n] == null && ++probes[n] <= PROBES);
+        int j = scanned ? scan(v, c, o) : hashed(n, o);
         return j >= 0 ? j : treeModel.getIndexOfChild(value[n], o);
     }
 
