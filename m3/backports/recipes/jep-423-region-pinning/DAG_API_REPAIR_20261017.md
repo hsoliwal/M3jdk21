@@ -22,7 +22,7 @@ Previous real hosted materialization run:
 | --- | --- | --- | --- |
 | `m3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3A3BackportPreparation.java` | `19548080f59680e72ba3b3c2d67d50c8d86f34c3` | `933d9b8ca4555a614a81197f92fb653cd0053133` | Disambiguate nested-record `path` helper; refuse old receipt-less API; require and forward the canonical `Verified` mastery object; reject mismatched or duplicate A3 receipts |
 | `m3/tooling/backport-dag/src/main/java/com/m3/tooling/dag/M3PacketDagComposer.java` | `657bd4b2658069618559aa3c3d6ab1aacf55bd61` | `ffbbefba26df65fc2bbffea2a3b044aeb87a34f0` | Resolve dependency String IDs via `checkedPacket.require(id)` before mapping to full packet DAG atom node IDs |
-| `m3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3A3BackportPreparationTest.java` | `7a19605b396127988a7b3d5926505c30af42438d` | `07294a4eb61ed603ffb03ddd44dfccacbfab7b11` | Preserve existing mixed native/Java and refusal tests, supply fixture mastery like the current A3ApplyTest, and prove missing/null mastery refuses without any writes |
+| `m3/tooling/backport-dag/src/test/java/com/m3/tooling/dag/M3A3BackportPreparationTest.java` | `7a19605b396127988a7b3d5926505c30af42438d` | `cff9a1491997d8c76a2fd06655109cf54bca3b9c` | Preserve existing mixed native/Java and refusal tests, supply fixture mastery like the current A3ApplyTest, and prove missing/null mastery refuses without any writes |
 
 Source identity: M3JDK21 `master@970a34350ebdf6a3f1c5ff5acc8445d0f3515f55`,
 followed by the exact separate Synexia Cir recovery PR #1009. This repair
