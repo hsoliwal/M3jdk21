@@ -30,7 +30,7 @@ public final class M3LongFilteredView implements M3LongCollection {
         Objects.requireNonNull(predicate, "predicate");
         if (source instanceof M3LongFilteredView previous) {
             this.source = previous.source;
-            this.predicate = previous.predicate.and(predicate);
+            this.predicate = M3LongPredicates.and(previous.predicate, predicate);
         } else {
             this.source = source;
             this.predicate = predicate;

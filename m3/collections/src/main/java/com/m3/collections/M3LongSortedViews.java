@@ -36,7 +36,7 @@ public final class M3LongSortedViews {
         Objects.requireNonNull(predicate, "predicate");
         if (source instanceof Filtered previous) {
             // Preserve predicate order and a single backing traversal, even for nested views.
-            return new Filtered(previous.source, previous.predicate.and(predicate));
+            return new Filtered(previous.source, M3LongPredicates.and(previous.predicate, predicate));
         }
         return new Filtered(source, predicate);
     }
