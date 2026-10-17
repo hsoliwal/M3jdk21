@@ -1,7 +1,7 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
- * Modified 2026: target M3 collection namespace; behavior retained.
+ * Modified 2026: typed purpose-wrapper composition and allocation-light queries.
  * Design references: Synexia M3CollectionViews; Guava Maps filtered-entry views
  * (Google LLC, Apache-2.0). Exact donor/category decisions accompany the recipe.
  */
@@ -11,6 +11,7 @@ import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
@@ -81,6 +82,79 @@ public final class M3FilteredMaps {
         return new FilteredNavigableMap<>(source, predicate);
     }
 
+    /**
+     * Returns a live read-only view, retaining a runtime sorted/navigable owner even
+     * through an erased Map reference. This is not a snapshot and does not freeze
+     * mutable values. JDK Collections owns entry guarding and range propagation.
+     */
+    @SuppressWarnings("unchecked")
+    public static <K, V> Map<K, V> unmodifiableMap(Map<K, V> source) {
+        if (source instanceof NavigableMap<?, ?>) return unmodifiableMap((NavigableMap<K, V>) source);
+        if (source instanceof SortedMap<?, ?>) return unmodifiableMap((SortedMap<K, V>) source);
+        return Collections.unmodifiableMap(source);
+    }
+
+    /** Retains the comparator and live bounds in a JDK-owned read-only wrapper. */
+    @SuppressWarnings("unchecked")
+    public static <K, V> SortedMap<K, V> unmodifiableMap(SortedMap<K, V> source) {
+        if (source instanceof NavigableMap<?, ?>) return unmodifiableMap((NavigableMap<K, V>) source);
+        return Collections.unmodifiableSortedMap(source);
+    }
+
+    /** Retains navigable/descending views without copying mappings. */
+    public static <K, V> NavigableMap<K, V> unmodifiableMap(NavigableMap<K, V> source) {
+        return Collections.unmodifiableNavigableMap(source);
+    }
+
+    /**
+     * Adds JDK dynamic key/value type checks while retaining sorted capability.
+     * Existing contents are not scanned; other aliases can still bypass checks.
+     * Place this outside a filter to check raw calls before its typed predicate.
+     */
+    @SuppressWarnings("unchecked")
+    public static <K, V> Map<K, V> checkedMap(Map<K, V> source, Class<K> keys, Class<V> values) {
+        if (source instanceof NavigableMap<?, ?>) return checkedMap((NavigableMap<K, V>) source, keys, values);
+        if (source instanceof SortedMap<?, ?>) return checkedMap((SortedMap<K, V>) source, keys, values);
+        return Collections.checkedMap(source, keys, values);
+    }
+
+    /** Retains sorted bounds while delegating dynamic type safety to the JDK. */
+    @SuppressWarnings("unchecked")
+    public static <K, V> SortedMap<K, V> checkedMap(SortedMap<K, V> source, Class<K> keys, Class<V> values) {
+        if (source instanceof NavigableMap<?, ?>) return checkedMap((NavigableMap<K, V>) source, keys, values);
+        return Collections.checkedSortedMap(source, keys, values);
+    }
+
+    /** Retains navigable bounds and checked Entry.setValue through JDK adapters. */
+    public static <K, V> NavigableMap<K, V> checkedMap(NavigableMap<K, V> source, Class<K> keys, Class<V> values) {
+        return Collections.checkedNavigableMap(source, keys, values);
+    }
+
+    /**
+     * Adds the JDK synchronized wrapper outside an existing view. All access must
+     * use that same wrapper/monitor; direct backing aliases bypass it. Hold the
+     * returned root wrapper's monitor during iteration, stream use, compound
+     * actions, and traversal of range/descending views. This is not lock-free.
+     */
+    @SuppressWarnings("unchecked")
+    public static <K, V> Map<K, V> synchronizedMap(Map<K, V> source) {
+        if (source instanceof NavigableMap<?, ?>) return synchronizedMap((NavigableMap<K, V>) source);
+        if (source instanceof SortedMap<?, ?>) return synchronizedMap((SortedMap<K, V>) source);
+        return Collections.synchronizedMap(source);
+    }
+
+    /** Range views share the returned root wrapper's monitor, per JDK contract. */
+    @SuppressWarnings("unchecked")
+    public static <K, V> SortedMap<K, V> synchronizedMap(SortedMap<K, V> source) {
+        if (source instanceof NavigableMap<?, ?>) return synchronizedMap((NavigableMap<K, V>) source);
+        return Collections.synchronizedSortedMap(source);
+    }
+
+    /** Navigable/descending/range views use the same root monitor. */
+    public static <K, V> NavigableMap<K, V> synchronizedMap(NavigableMap<K, V> source) {
+        return Collections.synchronizedNavigableMap(source);
+    }
+
     private static class FilteredMap<K, V> extends AbstractMap<K, V> {
         protected final Map<K, V> backing;
         protected final BiPredicate<? super K, ? super V> predicate;
@@ -116,8 +190,30 @@ public final class M3FilteredMaps {
             return M3CollectionViews.filtered(backing.entrySet(), this::visible);
         }
 
-        @Override public int size() { return selectedEntries().size(); }
-        @Override public boolean isEmpty() { return !selectedEntries().iterator().hasNext(); }
+        // Reuse the existing raw-entry scan atom. No public Entry escapes here;
+        // callers of entrySet still receive the unchanged GuardedEntry adapter.
+        @Override public int size() {
+            int count = 0;
+            for (Entry<K, V> entry : backing.entrySet()) if (visible(entry)) count++;
+            return count;
+        }
+        @Override public boolean isEmpty() {
+            for (Entry<K, V> entry : backing.entrySet()) if (visible(entry)) return false;
+            return true;
+        }
+        @Override public boolean containsValue(Object value) {
+            for (Entry<K, V> entry : backing.entrySet()) {
+                if (visible(entry) && (value == null ? entry.getValue() == null : value.equals(entry.getValue()))) return true;
+            }
+            return false;
+        }
+        @Override public int hashCode() {
+            int hash = 0;
+            for (Entry<K, V> entry : backing.entrySet()) {
+                if (visible(entry)) hash += Objects.hashCode(entry.getKey()) ^ Objects.hashCode(entry.getValue());
+            }
+            return hash;
+        }
         @Override public boolean containsKey(Object key) { return visible(stored(key)); }
         @Override public V get(Object key) {
             Entry<K, V> entry = stored(key);
