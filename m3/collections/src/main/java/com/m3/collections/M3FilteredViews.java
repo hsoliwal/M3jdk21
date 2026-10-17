@@ -8,6 +8,7 @@ import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
@@ -60,12 +61,12 @@ public final class M3FilteredViews {
 
     public static <K, V> SortedMap<K, V> filterEntries(SortedMap<K, V> source,
             BiPredicate<? super K, ? super V> predicate) {
-        return new SortedMapView<>(source, predicate);
+        return Collections.unmodifiableSortedMap(new SortedMapView<>(source, predicate));
     }
 
     public static <K, V> NavigableMap<K, V> filterEntries(NavigableMap<K, V> source,
             BiPredicate<? super K, ? super V> predicate) {
-        return new NavigableMapView<>(source, predicate);
+        return Collections.unmodifiableNavigableMap(new NavigableMapView<>(source, predicate));
     }
 
     private static <E> Iterator<E> filtered(Iterator<E> source,
