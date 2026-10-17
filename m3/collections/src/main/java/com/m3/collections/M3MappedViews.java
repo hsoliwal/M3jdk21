@@ -18,6 +18,8 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.Set;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /** Purpose-owned wrapper atoms. Invoked through {@link M3CollectionWrappers}. */
@@ -196,16 +198,50 @@ final class M3MappedViews {
             };
         }
 
+        /** JDK Collection.size ceiling, retaining the original single scan. */
         @Override
         public int size() {
-            long count = 0;
+            int count = 0;
             for (T ignored : this) {
-                count++;
-                if (count > Integer.MAX_VALUE) {
-                    throw new IllegalStateException("flattened collection too large");
-                }
+                if (++count == Integer.MAX_VALUE) return Integer.MAX_VALUE;
             }
-            return (int) count;
+            return count;
+        }
+
+        /**
+         * A flattened view has no exact cardinality without evaluating mapper.
+         * Do not let the inherited SIZED collection cursor force a size() scan
+         * before findFirst/count/limit. One cursor is created only on traversal;
+         * parallel streams are correct but intentionally cannot split this view.
+         */
+        @Override
+        public Spliterator<T> spliterator() {
+            int order = source.spliterator().characteristics() & Spliterator.ORDERED;
+            return new Spliterator<>() {
+                private Iterator<T> cursor;
+
+                private Iterator<T> cursor() {
+                    if (cursor == null) cursor = FlatMappedCollection.this.iterator();
+                    return cursor;
+                }
+
+                @Override public boolean tryAdvance(Consumer<? super T> action) {
+                    Objects.requireNonNull(action, "action");
+                    Iterator<T> it = cursor();
+                    if (!it.hasNext()) return false;
+                    action.accept(it.next());
+                    return true;
+                }
+
+                @Override public void forEachRemaining(Consumer<? super T> action) {
+                    Objects.requireNonNull(action, "action");
+                    cursor().forEachRemaining(action);
+                }
+
+                @Override public Spliterator<T> trySplit() { return null; }
+                @Override public long estimateSize() { return Long.MAX_VALUE; }
+                @Override public int characteristics() { return order; }
+            };
         }
     }
 
