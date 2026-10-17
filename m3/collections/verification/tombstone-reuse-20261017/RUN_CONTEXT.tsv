@@ -1,0 +1,8 @@
+key	value
+repository	hsoliwal/M3jdk21
+base	970a34350ebdf6a3f1c5ff5acc8445d0f3515f55
+donor_PR	12010
+donor_commit	5ba32cc8c363532c25f615ef65842ac68736aa56
+mode	separately-built-collection-module
+JDK	Java21 selected source, stock JVM for proof
+product_stage	STRING_NOT_ADVANCED
