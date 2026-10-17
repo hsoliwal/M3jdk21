@@ -1,0 +1,8 @@
+donor	pinned_commit_or_version	module_or_symbol	license	use
+hsoliwal/M3jdk21	cb501d5447c659606f4a5d0910379abaa0c36739	M3CollectionViews.java; M3FilteredMaps.java	Apache-2.0; 2026 Hitesh Soliwal and contributors	Exact predecessor and bounded behavioral atom refinement
+hsoliwal/M3jdk21	cb501d5447c659606f4a5d0910379abaa0c36739	M3HashPinnedJavaSnapshotRecipe	Apache-2.0 first-party	Existing Maven/OpenRewrite provider reused unchanged
+hsoliwal/M3jdk21	cb501d5447c659606f4a5d0910379abaa0c36739	contract-refinement-20261017/replay/Replay.java	Apache-2.0 first-party	Only manifest and crate constants rebound
+openjdk/jdk	Java21 Collection/Set/List API specification	Contracts only	GPL-2.0-with-classpath-exception implementation; specification only	No JDK implementation copied
+Google Guava	33.4.4-jre documentation	Collections2.filter	Third party	Comparison only; no code copied
+Eclipse Collections	10.0.0 documentation	SelectIterable	Third party	Comparison only; no code copied
+Apache Commons Collections	4.6.0 documentation	PredicatedCollection	Apache-2.0	Comparison only; no code copied
