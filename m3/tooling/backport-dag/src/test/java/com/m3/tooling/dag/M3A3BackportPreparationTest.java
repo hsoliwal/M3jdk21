@@ -112,6 +112,7 @@ final class M3A3BackportPreparationTest {
     }
 
     @Test
+    @SuppressWarnings("removal") // This test intentionally calls the deprecated fail-closed entry.
     void missingMasteryFailsClosedEvenForOtherwiseValidSource() throws Exception {
         Path root = Files.createTempDirectory("m3-a3-mastery-required-");
         Path source = root.resolve("src/java.base/share/classes/example/Sample.java");
