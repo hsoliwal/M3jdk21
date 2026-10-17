@@ -56,6 +56,66 @@ public final class M3FilteredLists {
         return new StrictReadOnlyList<>(filtered(source, predicate));
     }
 
+    /**
+     * Reused from the existing Synexia-origin M3 CollectionViews predicate plan.
+     * O(1) nested composition, O(depth) lazy preparation, constant-stack evaluation;
+     * caches predicate references only, never values or predicate results.
+     */
+    private static final class FilterChain<E> implements Predicate<E> {
+        private final FilterTerm<E> tail;
+        private final int depth;
+        private volatile Predicate<? super E>[] plan;
+
+        @SuppressWarnings("unchecked")
+        private FilterChain(Predicate<? super E> existing, Predicate<? super E> added) {
+            if (existing instanceof FilterChain<?> nested) {
+                FilterChain<E> previous = (FilterChain<E>) nested;
+                this.depth = Math.addExact(previous.depth, 1);
+                this.tail = new FilterTerm<>(previous.tail, added);
+            } else {
+                this.depth = 2;
+                this.tail = new FilterTerm<>(new FilterTerm<>(null, existing), added);
+            }
+        }
+
+        @Override
+        public boolean test(E element) {
+            Predicate<? super E>[] steps = plan;
+            if (steps == null) steps = prepare();
+            for (Predicate<? super E> step : steps) {
+                if (!step.test(element)) return false;
+            }
+            return true;
+        }
+
+        /** User callbacks run outside the publication monitor, in original order. */
+        @SuppressWarnings("unchecked")
+        private synchronized Predicate<? super E>[] prepare() {
+            Predicate<? super E>[] steps = plan;
+            if (steps == null) {
+                steps = (Predicate<? super E>[]) new Predicate<?>[depth];
+                FilterTerm<E> current = tail;
+                for (int i = depth - 1; i >= 0; i--) {
+                    steps[i] = current.predicate;
+                    current = current.previous;
+                }
+                plan = steps;
+            }
+            return steps;
+        }
+    }
+
+    /** Prefix sharing does not retain compiled plans of intermediate wrappers. */
+    private static final class FilterTerm<E> {
+        private final FilterTerm<E> previous;
+        private final Predicate<? super E> predicate;
+
+        private FilterTerm(FilterTerm<E> previous, Predicate<? super E> predicate) {
+            this.previous = previous;
+            this.predicate = predicate;
+        }
+    }
+
     /** JDK21 List default endpoints can throw NoSuchElementException on empty views.
      * An explicit read-only boundary must refuse writes even for empty/no-op calls.
      */
@@ -103,8 +163,8 @@ public final class M3FilteredLists {
             if (source instanceof View<?> nested) {
                 View<E> previous = (View<E>) nested;
                 this.backing = previous.backing;
-                Predicate<? super E> existing = previous.predicate;
-                this.predicate = item -> existing.test(item) && filter.test(item);
+                // Share immutable predicate terms; evaluate them iteratively, in original order.
+                this.predicate = new FilterChain<>(previous.predicate, filter);
             } else {
                 this.backing = source;
                 this.predicate = filter;
