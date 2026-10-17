@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 BiMap mainline Java/JNI SDK receiver
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3BiMap*.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3BiMapTest.java'
+      - 'm3/collections/qualification/bimap-mainline-20261017/**'
+      - 'm3/collections/src/test/native/collections/m3_bimap_consumer.c'
+      - '.github/workflows/m3-bimap-mainline-20261017.yml'
+  workflow_dispatch:
+jobs:
+  java21-maven-openrewrite-jni:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prove source-sealed OpenRewrite recipe and fixed point
+        run: |
+          set -eu
+          mvn -B -ntp -f m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml clean verify
+      - name: Verify current M3 collection owners and real Guava provider
+        run: |
+          set -eu
+          mvn -B -ntp -f m3/collections/pom.xml -DskipTests install
+          mvn -B -ntp -f m3/collections/interop/pom.xml clean install
+      - name: Compile strict C17 test-only JNI consumer
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/m3-bimap-native"
+          cc -std=c17 -O1 -g -fPIC -shared -Wall -Wextra -Werror -fsanitize=undefined \
+            -fno-sanitize-recover=all -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/test/native/collections/m3_bimap_consumer.c \
+            -o "$RUNNER_TEMP/m3-bimap-native/libm3_bimap_consumer.so"
+      - name: Test real Java BiMap through checked JNI
+        run: |
+          set -eu
+          mvn -B -ntp -f m3/collections/qualification/bimap-mainline-20261017/native-test/pom.xml \
+            "-Dm3.bimap.native=$RUNNER_TEMP/m3-bimap-native/libm3_bimap_consumer.so" \
+            clean verify
