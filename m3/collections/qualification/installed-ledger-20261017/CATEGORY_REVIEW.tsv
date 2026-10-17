@@ -6,8 +6,8 @@ evidence/maven-collection-tests	junit-jupiter:5.10.2	Published upstream standard
 evidence/xml-codegen	OpenRewrite xml.ChangeTagValue	Existing Apache-2.0 OpenRewrite XML recipe	O(POM bytes) per source	Source SHA pinned; exact fixed point; no handpatched target XML	REUSE
 evidence/whole-file-source-digest	JDK21 Files.walk + MessageDigest SHA256	First-party existing JDK algorithms	O(total source bytes) and O(number files) receipt	No source mutation; duplicates/symlink/path traversal refused	SELECT
 evidence/manifest	overwrite old installed 20261014 ledger	Historical mutation destroys traceability	O(number files)	Old manifest expected mismatch is evidence, not justification to erase it	REJECT
-evidence/manifest	append source-complete 20261017 V3 ledger	Deterministic new full owner inventory	O(total source bytes)	Preserve original old receipt and enumerate 131 actual Java + 4 other files	SELECT
-evidence/donation-pointer	replace top-level two JSON fields only	JDK21 source-bound exact text recipe	O(JSON bytes)	Retain nested/provenance histories byte-identical, Git SHA preimage and fixed point	SELECT
+evidence/manifest	append source-complete 20261017 V3 ledger	Deterministic new full owner inventory	O(total source bytes)	Preserve original old receipt and enumerate 132 actual Java + 4 other files	SELECT
+evidence/donation-pointer	replace current root manifest path/SHA and rename duplicate historical root key	JDK21 source-bound exact text recipe	O(JSON bytes)	Preserve historical value under unique provenance key; prevent json.loads last-write-wins shadowing; exact Git SHA preimage, V1 successor and V2 fixed point	SELECT
 evidence/fuzzy-hash	SimHash clusters for source receipt	Discovery only, not custody	O(bytes)	Similarity cannot prove byte equality or JDK compatibility	REJECT_FOR_PROOF
 donors/JDK	Maven JDK21 source/module gate	JDK runtime source oracle	provider-specific	No changes in java.util or JNI ABI	REFERENCE
 donors/Guava/Eclipse/Commons/Spring	filtered/sorted wrapper contract checks	Retain distinct provider signatures/behavior	provider-specific	No donor source copied; licenses remain intact	PENDING_CROSS_PROVIDER
