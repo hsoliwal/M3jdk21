@@ -68,9 +68,9 @@ final class M3FilteredMatReceiverRecipeTest {
 
     @Test void sourceSealAndCanonicalNativeRecipe() {
         var java = recipe();
-        assertEquals(9, java.targetPaths().size());
+        assertEquals(10, java.targetPaths().size());
         assertTrue(java.preimageManifest().values().stream().allMatch("ABSENT"::equals));
-        assertEquals(9, after().size());
+        assertEquals(10, after().size());
         assertEquals(1, java.maxCycles());
         var nativeRecipe = new M3HashPinnedTextSnapshotRecipe(NATIVE);
         assertEquals(List.of("m3/collections/src/main/native/collections/m3_int_filter_jni.c"),
@@ -91,7 +91,7 @@ final class M3FilteredMatReceiverRecipeTest {
         Map<String, String> partial = Map.of(first, expected.get(first),
                 standalone, "package example; class Unrelated {}\n");
         Map<String, String> delta = changed(parse(partial));
-        assertEquals(8, delta.size());
+        assertEquals(9, delta.size());
         assertFalse(delta.containsKey(first));
         assertFalse(delta.containsKey(standalone));
     }

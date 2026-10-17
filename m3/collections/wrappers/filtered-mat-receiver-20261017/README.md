@@ -11,7 +11,7 @@ This branch stacks on M3JDK21 [#992](https://github.com/hsoliwal/M3jdk21/pull/99
 commit `11dde1eac33cea2a8b90baba8c155eabec341144`.
 It does not replace existing `M3CollectionViews`, `M3FilteredMaps`,
 primitive lane owners, `java.base`, HotSpot or public JDK contracts.
-The 9 Java and 1 C17 postimages are **ABSENT-before**, SHA-256 pinned,
+The 10 Java and 1 C17 postimages are **ABSENT-before**, SHA-256 pinned,
 and installed exactly as the canonical Synexia source templates.
 
 New opt-in components:
@@ -65,3 +65,7 @@ Any missing Maven dependencies or CI failures keep this PR in DRAFT.
 
 No unsupported algorithm or unlicensed challenge-site solution is copied;
 LeetCode, HackerRank and GeeksforGeeks are category/test taxonomy only.
+
+## Additive convergence with independent filtered List PRs
+
+Compared all five common Java files with M3JDK21 [#1021](https://github.com/hsoliwal/M3jdk21/pull/1021): the pre-convergence files were identical after stripping precisely one copyright-line header. The canonical recipe now receives **exact Git blob matches** from the pre-existing Synexia [#11989](https://github.com/hsoliwal/com.synexia/pull/11989) source (preserving the full SPDX copyright header), plus the formerly missing `M3FilteredListsSortedInteropTest`. The coherent receiver has **10 Java and 1 C17** source/test postimages. Target methods and Java/JNI behavior remain unchanged. The separate [#1020](https://github.com/hsoliwal/M3jdk21/pull/1020) overload `M3CollectionViews.filtered(List,...)` is not automatically imported: it may change existing Java source overload dispatch on recompilation. Review as a separate API/scope decision, rather than losing the established contract.

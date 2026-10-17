@@ -20,7 +20,7 @@ for kind,crate in [('hash-pinned-java','m3jdk21-filtered-mat-receiver-20261017')
         assert hashlib.sha256(candidate).hexdigest()==after,(path,'bad recipe template')
         assert candidate==actual,(path,'target differs from canonical recipe')
         rows.append(path);total+=1
-    assert rows==sorted(set(rows)) and len(rows)==(9 if kind=='hash-pinned-java' else 1)
+    assert rows==sorted(set(rows)) and len(rows)==(10 if kind=='hash-pinned-java' else 1)
 print(f'M3_JDK21_FILTERED_MAT_SOURCE_SEAL_PASS outputs={total}')
 PY
 build=$(mktemp -d)
