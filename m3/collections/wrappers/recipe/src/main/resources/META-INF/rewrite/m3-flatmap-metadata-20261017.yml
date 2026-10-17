@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FlatMapUnsizedMetadata20261017
+displayName: Preserve flatMapped collection JDK21 size ceiling and lazy unsized traversal
+description: Four exact Java21 postimages, one private behavioral atom, unchanged public signatures and production JNI kernel.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-flatmap-metadata-20261017
