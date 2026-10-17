@@ -46,7 +46,7 @@ jobs:
           root=Path("m3/collections/qualification/installed-ledger-20261017/target/receipt-candidates")
           src=(root/"installed-source-20261017.tsv").read_bytes()
           rec=(root/"synexia-donation.json").read_bytes()
-          assert len([x for x in src.splitlines() if x and not x.startswith(b"#")])==135
+          assert len([x for x in src.splitlines() if x and not x.startswith(b"#")])==136
           print("M3_GENERATED_MANIFEST_SHA256="+sha256(src).hexdigest())
           print("M3_GENERATED_DONATION_SHA256="+sha256(rec).hexdigest())
           print("M3_GENERATED_MANIFEST_BEGIN")
