@@ -16,7 +16,7 @@ TARGETS = {
     "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java":
         "02893ff5d555ef577789ca82fdbbe043172219ae59202d10a51f2fa1337d9152",
     "m3/collections/src/test/java/com/m3/collections/M3ObjectSlotIndexSelfTest.java":
-        "eb0526b86720fe5d16733995ee7d10d048c64546721cc11537c22851f3271b2d",
+        "745156bdcd632c0d664dcc9f42f19f47879fd4cfca05ecd69da4e03b60fad049",
     "m3/collections/src/test/java/com/m3/collections/M3ObjectSlotIndexTest.java":
         "eec9b203115a9896ebcc074926e4817b5ebcbdeab4e259c68d3c34b773b46ed0",
 }
