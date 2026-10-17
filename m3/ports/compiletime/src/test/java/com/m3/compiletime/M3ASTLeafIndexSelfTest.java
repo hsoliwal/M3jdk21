@@ -134,8 +134,64 @@ public final class M3ASTLeafIndexSelfTest {
             }
         }
     }
+    private static void multiModuleRelativePaths() {
+        final String path = "src/main/java/example/Main.java";
+        var first = fact(1, 1, 1, path, new int[] {11, 11},
+                new long[] {M3ASTLeafIndex.LIVE, Long.MIN_VALUE});
+        var second = fact(1, 2, 1, path, new int[] {22},
+                new long[] {M3ASTLeafIndex.LIVE | M3ASTLeafIndex.DIRTY});
+        var third = fact(2, 1, 1, path, new int[] {33},
+                new long[] {M3ASTLeafIndex.TOMBSTONE});
+        var index = M3ASTLeafIndex.build("multi", third, first, second);
+        var replay = M3ASTLeafIndex.build("multi", second, third, first);
+        ok(index.sha256(index.repositoryRow()).equals(
+                replay.sha256(replay.repositoryRow())), "module-relative path replay");
+        int[] expected = {3, 3, 3, 3, 2, 1};
+        for (int l = 0; l < expected.length; l++) {
+            ok(index.levelCount(l) == expected[l], "multi-module level " + l);
+        }
+        ok(index.atomCount(index.repositoryRow()) == 4, "multi-module atoms");
+        ok(index.fileCount(index.repositoryRow()) == 3, "multi-module files");
+        ok(index.atomIdAtPhysical(0) == 11 && index.atomIdAtPhysical(2) == 22
+                && index.atomIdAtPhysical(3) == 33, "module order/duplicates");
+        ok(Arrays.equals(index.selectOffsets(index.repositoryRow(),
+                M3ASTLeafIndex.LIVE, M3ASTLeafIndex.TOMBSTONE),
+                new int[] {0, 2}), "module state masks");
+        ok(Arrays.equals(index.selectOffsets(index.repositoryRow(),
+                Long.MIN_VALUE, 0), new int[] {1}), "high-bit state masks");
+        fails(IllegalArgumentException.class, () -> M3ASTLeafIndex.build("multi",
+                first, fact(1, 1, 2, path, new int[] {99}, new long[] {0})));
+        fails(IllegalArgumentException.class, () -> M3ASTLeafIndex.build("multi",
+                first, first));
+
+        // Repeated relative paths across large multi-module repositories are
+        // ordinary data, not duplicate file owners. Test input-order stability.
+        Random random = new Random(0x33005c0feL);
+        for (int iteration = 0; iteration < 128; iteration++) {
+            int length = 2 + random.nextInt(32);
+            var rows = new M3ASTLeafIndex.FileFacts[length];
+            for (int i = 0; i < length; i++) {
+                rows[i] = fact(i / 8, i % 8, i % 3, path,
+                        new int[] {i}, new long[] {(i & 1) == 0 ? -1L : 0});
+            }
+            var a = M3ASTLeafIndex.build("multi", rows);
+            for (int i = length - 1; i > 0; i--) {
+                int other = random.nextInt(i + 1);
+                var hold = rows[i]; rows[i] = rows[other]; rows[other] = hold;
+            }
+            var b = M3ASTLeafIndex.build("multi", rows);
+            ok(a.sha256(a.repositoryRow()).equals(b.sha256(b.repositoryRow())),
+                    "repeated path deterministic rollup");
+            ok(a.fileCount(a.repositoryRow()) == length, "repeated path file count");
+            ok(a.atomCount(a.repositoryRow()) == length, "repeated path atom count");
+            for (int i = 0; i < length; i++) {
+                ok(a.atomIdAtPhysical(i) == b.atomIdAtPhysical(i),
+                        "repeated path sorted physical atom index");
+            }
+        }
+    }
     public static void main(String[] args) {
-        deterministic(); randomized();
+        deterministic(); multiModuleRelativePaths(); randomized();
         System.out.println("PASS M3ASTLeafIndexSelfTest checks=" + checks);
     }
 }
