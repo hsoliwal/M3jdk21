@@ -22,6 +22,7 @@ final class M3StringFacts {
             java.nio.charset.StandardCharsets.UTF_8.newEncoder().replacement().length;
 
     final int utf16Length;
+    /** Standard UTF-8 length, or -1 when the byte length exceeds Integer.MAX_VALUE. */
     final int utf8Length;
     /** Java/JNI modified UTF-8 length: NUL takes 2 bytes; each UTF-16 surrogate takes 3. */
     final int modifiedUtf8Length;
@@ -126,7 +127,7 @@ final class M3StringFacts {
     static M3StringFacts scan(M3String value) {
         int length = value.length();
         int hash = 0;
-        int utf8 = 0;
+        long utf8 = 0L;
         // JNI modified UTF-8 length can exceed jint for an otherwise valid large String.
         // A negative fact means "not cacheable"; VM walks the actual units on demand.
         long modifiedUtf8 = 0L;
@@ -189,7 +190,7 @@ final class M3StringFacts {
                 if (pendingHigh) {
                     pendingHigh = false;
                     if (Character.isLowSurrogate(unit)) {
-                        utf8 = Math.addExact(utf8, 4);
+                        utf8 += 4;
                         codePoints++;
                         whitespace = Character.isWhitespace(Character.toCodePoint(previous1, unit));
                         if (leadingStrip) {
@@ -203,7 +204,7 @@ final class M3StringFacts {
                     }
                     // The previous high surrogate stays unpaired: a lone surrogate is never whitespace.
                     unpaired++;
-                    utf8 = Math.addExact(utf8, UTF8_REPLACEMENT_BYTES);
+                    utf8 += UTF8_REPLACEMENT_BYTES;
                     codePoints++;
                     leadingStrip = false;
                     stripEnd = index;
@@ -213,9 +214,9 @@ final class M3StringFacts {
                 } else {
                     if (Character.isLowSurrogate(unit)) {
                         unpaired++;
-                        utf8 = Math.addExact(utf8, UTF8_REPLACEMENT_BYTES);
+                        utf8 += UTF8_REPLACEMENT_BYTES;
                     } else {
-                        utf8 = Math.addExact(utf8, utf8Bytes(unit));
+                        utf8 += utf8Bytes(unit);
                     }
                     codePoints++;
                     whitespace = Character.isWhitespace(unit);
@@ -231,7 +232,7 @@ final class M3StringFacts {
         }
         if (pendingHigh) {
             unpaired++;
-            utf8 = Math.addExact(utf8, UTF8_REPLACEMENT_BYTES);
+            utf8 += UTF8_REPLACEMENT_BYTES;
             codePoints++;
             leadingStrip = false;
             stripEnd = length;
@@ -246,7 +247,7 @@ final class M3StringFacts {
 
         return new M3StringFacts(
                 length,
-                utf8,
+                utf8 > Integer.MAX_VALUE ? -1 : (int) utf8,
                 modifiedUtf8 > Integer.MAX_VALUE ? -1 : (int) modifiedUtf8,
                 codePoints,
                 unpaired,
@@ -278,9 +279,12 @@ final class M3StringFacts {
                 Character.isHighSurrogate(left.lastUtf16Unit)
                         && Character.isLowSurrogate(right.firstUtf16Unit);
         int length = Math.addExact(left.utf16Length, right.utf16Length);
-        int utf8 = Math.addExact(left.utf8Length, right.utf8Length);
-        if (seamPair) {
-            utf8 = Math.addExact(utf8, 4 - 2 * UTF8_REPLACEMENT_BYTES);
+        long utf8 = -1L;
+        if (left.utf8Length >= 0 && right.utf8Length >= 0) {
+            utf8 = (long) left.utf8Length + right.utf8Length;
+            if (seamPair) {
+                utf8 += 4L - 2L * UTF8_REPLACEMENT_BYTES;
+            }
         }
 
         int trimStart =
@@ -329,7 +333,7 @@ final class M3StringFacts {
 
         return new M3StringFacts(
                 length,
-                utf8,
+                utf8 > Integer.MAX_VALUE ? -1 : (int) utf8,
                 // Modified UTF-8 is additive even when a surrogate pair crosses this seam.
                 left.modifiedUtf8Length < 0 || right.modifiedUtf8Length < 0
                                 || (long) left.modifiedUtf8Length + right.modifiedUtf8Length
