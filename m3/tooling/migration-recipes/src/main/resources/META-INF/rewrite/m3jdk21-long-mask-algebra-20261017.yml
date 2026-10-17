@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.LongMaskAlgebra20261017
+displayName: Zero-intermediate Java masking plus required/forbidden ordinal rank/select
+description: Exact source-bound Java 21 receiver with original native ABI and payload owners intact.
+recipeList:
+  - com.synexia.rewrite.M3Jdk21LongMaskAlgebraRecipe
