@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.QualificationFixtureWhitespacePolicy
+displayName: Preserve exact OpenJDK qualification license fixtures
+description: >
+  Seal four immutable donor license owners while adding only four exact-path
+  blank-at-eol attributes and independent read-only seals before existing hygiene.
+recipeList:
+  - com.synexia.rewrite.M3QualificationFixtureWhitespacePolicyRecipe

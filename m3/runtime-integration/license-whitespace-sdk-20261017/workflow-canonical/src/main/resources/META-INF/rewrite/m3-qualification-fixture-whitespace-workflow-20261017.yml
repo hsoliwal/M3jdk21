@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.QualificationFixtureWhitespaceWorkflow
+displayName: Qualify exact license-fixture whitespace SDK
+description: >
+  Append exact source-owned policy SDK qualification and evidence steps after
+  JNI parity while preserving every existing workflow command and immutable provider.
+recipeList:
+  - com.synexia.rewrite.M3QualificationFixtureWhitespaceWorkflowRecipe

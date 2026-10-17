@@ -1,0 +1,105 @@
+{
+  "schema": "M3_LICENSE_WHITESPACE_POLICY_SDK_INPUTS_V1",
+  "files": [
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "sha256": "99ae7e7a8c1520cbb60c1adf173479066f6f9ca41cd6c14e98a6de08f749c0e1",
+      "unchangedGitBlob": "c6fb41803bd6fad0b00d87b223cf46bdafea7f76"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "01cde61b20abe44c79b0a309c94e3317989eb545e038c699baa31ba269f55b52",
+      "unchangedGitBlob": "0f986852e76b2930493682840b5b65c338a4b324"
+    },
+    {
+      "path": "licenses/ADDITIONAL_LICENSE_INFO",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "unchangedGitBlob": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b"
+    },
+    {
+      "path": "licenses/ASSEMBLY_EXCEPTION",
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33",
+      "unchangedGitBlob": "429666664e9ff5029d51dc7f807e1ec9eff2dd9f"
+    },
+    {
+      "path": "licenses/GPL-2.0.txt",
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726",
+      "unchangedGitBlob": "8b400c7ab81b7b18baff3f81d597f5e511883134"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "unchangedGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "unchangedGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3QualificationFixtureWhitespacePolicyRecipe.java",
+      "sha256": "725ea030c8a1de09604e1659fe765cd40baa4bb4e6e570f200c30255d1fb3665",
+      "unchangedGitBlob": "4d97622792b31abf13d067234bedf58388610708"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "a00ccd905424b5ca57b1b8202af8c75d95eefc76ea02bacdf9e3cd976b0d95bd",
+      "unchangedGitBlob": "0812a2209ca502bc6577fa8caeb567db1c70e782"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-qualification-fixture-whitespace-policy-20261017.yml",
+      "sha256": "e0947c4258a9c6c0a13c2a2e6c5c0a23a3b8c2dd00cb64c3f8213548ed4e7d26",
+      "unchangedGitBlob": "e30544b25ab68895bcd85770dbaf3b58949b311a"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-policy-20261017/before/ADDITIONAL_LICENSE_INFO",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "unchangedGitBlob": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-policy-20261017/before/gitattributes.txt",
+      "sha256": "867a654d9bdbd56a2e8e3743d13dacdcb34a0734f568754758eead3f681e6ae2",
+      "unchangedGitBlob": "74e5869819659da9effa800ce457baff8fd3630d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-policy-20261017/before/m3-full-borrow-string-phase.yml",
+      "sha256": "d1ed6b9aa47cc6de22637e405de7502f26a9fcd8b8c75b7b7f0fcbf18ff454f6",
+      "unchangedGitBlob": "04bd1693d3be3d18c4d60678a5b3932bdd685c9e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-policy-20261017/before/m3-synexia-full-borrow-receiver.yml",
+      "sha256": "528333f9460a62476b239c72d50f189c438b4f11b9ca2d0d736af8be0f02485a",
+      "unchangedGitBlob": "9108a21a41a0f721883d12adf4ed316ce480326b"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-policy-20261017/manifest.tsv",
+      "sha256": "4483702dea2abcc88c1c7ea85d00611944edf57512242c6bab4016171af36ec8",
+      "unchangedGitBlob": "c742f5fd070b401cc3fe97f48f9b536e2ba8a073"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-policy-20261017/out/gitattributes.txt",
+      "sha256": "7eabae637a18e909a606c108597779a30e82d9d2aba78948b228a0ac2a403d50",
+      "unchangedGitBlob": "b7d308816cb46863d711049f0b71971feb0db4df"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-policy-20261017/out/m3-full-borrow-string-phase.yml",
+      "sha256": "0d226ef8a4373aeaee25553ebaeb66de02f869941ff063ba20a46d9f2b703ad5",
+      "unchangedGitBlob": "af28fca94255a8ce486cf651cd538b6c0fc09e8c"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-policy-20261017/out/m3-synexia-full-borrow-receiver.yml",
+      "sha256": "b8335a1f10795c1457dd7b9721da8f971a1207314c0341226b83b108ca663450",
+      "unchangedGitBlob": "210cf4f9e58ef398def50372c456aa45cbb48476"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3QualificationFixtureWhitespacePolicyRecipeTest.java",
+      "sha256": "c8bcdff1095667b410c23de1f1e3bfd4e84e07ea23967be424e8201bc30685aa",
+      "unchangedGitBlob": "295ba16618abfcb074bdfc8b9add10bd2f6ba1e9"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "1e6a9cee4b6a83ff83743e36e6f29ae73af0629a31e4241672c000b97e058dc5",
+      "unchangedGitBlob": "3eff25e8891c64296fe3b2d0193d0d7b87070a45"
+    }
+  ]
+}

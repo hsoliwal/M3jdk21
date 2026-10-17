@@ -1,0 +1,16 @@
+{
+  "schema": "M3_LICENSE_WHITESPACE_WORKFLOW_CANONICAL_SOURCE_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "662bb8dde4242930460b809e25bb1877c9c27c6a",
+  "pullRequest": 11986,
+  "openrewriteAdapterGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+  "manifestKernelGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "qualification": "NOT_RUN",
+  "sourcePath": "synexia-openrewrite-recipes/recipes/m3-string-successor-chain-20261014/license-whitespace-sdk-20261017/workflow-sdk",
+  "receiverCorePath": "m3/runtime-integration/license-whitespace-sdk-20261017/workflow-canonical",
+  "moduleGitTree": "d39dc33d8459b0f38492efc3747ed73df54f9738",
+  "inputPinsGitBlob": "179cf1ab1cd7f7baf4c8cfa6363f0dd8ed9e0a98",
+  "pinsSha256": "f719a522ccfab065ac769106264a4fc997bbf164d8f3a9a8820dd2c97d29c2e6"
+}
