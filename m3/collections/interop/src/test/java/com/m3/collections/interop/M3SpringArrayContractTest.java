@@ -21,7 +21,7 @@ import org.springframework.util.MultiValueMapAdapter;
 /** Exact real Spring 6.2 interface, donor differential and ownership qualification. */
 final class M3SpringArrayContractTest {
     @Test void directContractNotSpringAdapter() {
-        var actual = M3LibraryCollections.<String, Integer>springMultiValueMap();
+        MultiValueMap<String, Integer> actual = M3FiveProviderDirectSdk.springMultiValueMap();
         assertInstanceOf(M3SpringArrayMultiValueMap.class, actual);
         assertEquals(AbstractMap.class, actual.getClass().getSuperclass());
         assertFalse(actual instanceof MultiValueMapAdapter<?, ?>);

@@ -1,0 +1,7 @@
+origin	version_or_commit	path_or_type	git_blob	license	reuse
+eclipse-collections/eclipse-collections	11.1.0	eclipse-collections/src/main/java/org/eclipse/collections/impl/multimap/list/AbstractMutableListMultimap.java	ce3dae9ef9b26d075b1d996737093b2d3c66d696	EPL-1.0 OR EDL-1.0	API/superclass dependency only
+eclipse-collections/eclipse-collections	11.1.0	eclipse-collections/src/main/java/org/eclipse/collections/impl/multimap/set/AbstractMutableSetMultimap.java	a7b58b16e970cc9926a4532005ae6abdaca3ea5c	EPL-1.0 OR EDL-1.0	API/superclass dependency only
+eclipse-collections/eclipse-collections	11.1.0	eclipse-collections/src/main/java/org/eclipse/collections/impl/multimap/bag/AbstractMutableBagMultimap.java	acd786861737e35cef1a1d64af412c443464c888	EPL-1.0 OR EDL-1.0	API/superclass dependency only
+hsoliwal/M3jdk21	58a72d0b2b8ffab220e3dc6e53ff7cc5d136bfb5	com.m3.collections.M3LinkedHashMap/M3LinkedList/M3LinkedHashSet/M3ObjectCounts	first-party-pinned-receiver	Apache-2.0	Actual existing M3 storage
+hsoliwal/M3jdk21	master@e913ab89056657eca4009678cfe9a657c020e79b	M3GpuToolJoinRecipe.java	1c1b1b568d369f688f6953161636bf36b484bf5a	Apache-2.0	Exact first-party OpenRewrite engine reuse
+hsoliwal/M3jdk21	master@e913ab89056657eca4009678cfe9a657c020e79b	M3GpuToolJoinManifest.java	38df5f97bbeec8a8a8cfc77091d56bda925c07f2	Apache-2.0	Exact hash manifest reuse
