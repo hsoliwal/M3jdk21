@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3Jdk21PinnedProviderTestCompat20261017
+displayName: Reconcile M3JDK21 source-sealed recipe tests with the actual pinned Java provider API
+description: >-
+  Exact original-before and two reviewed Java LST after snapshots. Read target
+  inventory from sealed manifests, not from newer optional helper methods absent
+  in the older pinned OpenRewrite Java provider. Preserve full Recipe.run tests,
+  fixed-point, drift and occupied-source refusal.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-pinned-engine-tests-20261017

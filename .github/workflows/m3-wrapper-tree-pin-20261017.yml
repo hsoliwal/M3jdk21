@@ -25,4 +25,4 @@ jobs:
           test "$(git hash-object m3/collections/wrappers/verify.py)" = 5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8
           test "$(git rev-parse HEAD:m3/collections/wrappers/proof)" = c901d303b718fb435b24a8fe1d42f40016a89fcf
       - name: Real OpenRewrite text recipe, fixed point and drift refusal
-        run: mvn -B -ntp -f m3/collections/wrappers/workflow-pin-20261017/recipe/pom.xml -Dtest=M3Jdk21WrapperTreePinRecipeTest test
+        run: mvn -B -ntp -f m3/collections/wrappers/workflow-pin-20261017/recipe/pom.xml -Dtest=M3Jdk21WrapperTreePinRecipeTest,M3Jdk21PinnedProviderTestCompatRecipeTest test
