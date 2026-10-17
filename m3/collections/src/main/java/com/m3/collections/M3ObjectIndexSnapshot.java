@@ -7,7 +7,6 @@ package com.m3.collections;
 
 import java.util.AbstractList;
 import java.util.Arrays;
-import java.util.BitSet;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
@@ -165,21 +164,37 @@ public final class M3ObjectIndexSnapshot<E> extends AbstractList<E> implements R
         return filteredByState(requiredMask, excludedMask, M3IndexMaskCompactor.Backend.JAVA);
     }
 
+    /**
+     * Stable predicate-once index selection, without a transient BitSet.
+     * A completely accepted view reuses this descriptor without allocating.
+     * First rejection copies only the already-accepted prefix from the
+     * immutable row directory; following accepted positions grow adaptively.
+     * No source payloads are copied and callbacks are never repeated.
+     */
     public M3ObjectIndexSnapshot<E> filtered(Predicate<? super E> predicate) {
         Objects.requireNonNull(predicate, "predicate");
-        BitSet accepted = new BitSet(size());
-        for (int i = 0; i < size(); i++) {
-            if (predicate.test(get(i))) accepted.set(i);
-        }
-        int count = accepted.cardinality();
-        if (count == size()) return this;
-        int[] selected = new int[count];
+        int length = size();
+        int[] selected = M3SlotArrays.EMPTY_INTS;
         int written = 0;
-        for (int bit = accepted.nextSetBit(0); bit >= 0; bit = accepted.nextSetBit(bit + 1)) {
-            selected[written++] = rows[from + bit];
-            if (bit == Integer.MAX_VALUE) break;
+        boolean rejected = false;
+        for (int position = 0; position < length; position++) {
+            if (predicate.test(get(position))) {
+                if (rejected) {
+                    if (written == selected.length) {
+                        selected = Arrays.copyOf(selected,
+                                Math.min(length, M3SlotArrays.grow(selected.length)));
+                    }
+                    selected[written++] = rows[from + position];
+                }
+            } else if (!rejected) {
+                rejected = true;
+                written = position;
+                if (written != 0) selected = Arrays.copyOfRange(rows, from, from + written);
+            }
         }
-        return withRows(selected, order);
+        if (!rejected) return this;
+        return withRows(written == selected.length
+                ? selected : Arrays.copyOf(selected, written), order);
     }
 
     public M3ObjectIndexSnapshot<E> sorted(Comparator<? super E> comparator) {
