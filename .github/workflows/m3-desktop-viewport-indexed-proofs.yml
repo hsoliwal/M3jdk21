@@ -1,0 +1,80 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 desktop viewport indexed Java21 proofs
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportIndexWindow.java'
+      - 'm3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3DesktopViewportAdapters.java'
+      - 'm3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3DesktopViewportProof.java'
+      - 'm3/ports/swing-viewport/optional-swingx/**'
+      - 'm3/ports/jfx-viewport/**'
+      - '.github/workflows/m3-desktop-viewport-indexed-proofs.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-index-core:
+    if: github.repository == 'hsoliwal/M3jdk21'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Diff hygiene against actual PR base
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: git diff --check "$BASE_SHA...HEAD"
+      - name: Strict compile and execute real Swing/AWT source and sorting oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=m3/ports/swing-viewport/src
+          OUT="$RUNNER_TEMP/m3-desktop-classes"
+          mkdir -p "$OUT"
+          javac --release 21 -Xlint:all -Werror -d "$OUT" \
+            "$SRC/main/java/com/m3/swing/viewport/M3ViewportIndexWindow.java" \
+            "$SRC/main/java/com/m3/swing/viewport/M3DesktopViewportAdapters.java" \
+            "$SRC/test/java/com/m3/swing/viewport/M3DesktopViewportProof.java"
+          java -ea -Djava.awt.headless=true -cp "$OUT" \
+            com.m3.swing.viewport.M3DesktopViewportProof | tee "$RUNNER_TEMP/m3-desktop.log"
+          grep -Eq '^M3_DESKTOP_VIEWPORT_PROOF_PASS=[2-9][0-9]+' "$RUNNER_TEMP/m3-desktop.log"
+      - name: Verify the existing Swing port still builds
+        shell: bash
+        run: |
+          mvn -B -ntp -f m3/ports/swing-viewport/pom.xml -DskipTests package
+      - name: Compile the optional external JavaFX 21 adapter
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/ports/swing-viewport/pom.xml -DskipTests install
+          mvn -B -ntp -f m3/ports/jfx-viewport/pom.xml -DskipTests package
+      - name: Compile and verify actual SwingX subclass linkage (LGPL donor not copied)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp org.apache.maven.plugins:maven-dependency-plugin:3.8.1:get \
+            -Dartifact=org.swinglabs.swingx:swingx-all:1.6.5-1
+          JAR="$HOME/.m2/repository/org/swinglabs/swingx/swingx-all/1.6.5-1/swingx-all-1.6.5-1.jar"
+          test -s "$JAR"
+          OUT="$RUNNER_TEMP/m3-desktop-classes"
+          javac --release 21 -cp "$OUT:$JAR" -d "$OUT" \
+            m3/ports/swing-viewport/optional-swingx/M3SwingXLinkageProof.java
+          java -Djava.awt.headless=true -cp "$OUT:$JAR" \
+            com.m3.swing.viewport.M3SwingXLinkageProof | tee "$RUNNER_TEMP/m3-swingx.log"
+          grep -F 'M3_SWINGX_SUBTYPE_PROOF_PASS=4' "$RUNNER_TEMP/m3-swingx.log"
+      - name: Publish exact-head logs without overstating native UI qualification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-desktop-viewport-java21-headless
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/m3-desktop.log
+            ${{ runner.temp }}/m3-swingx.log
