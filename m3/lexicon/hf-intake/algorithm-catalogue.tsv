@@ -1,0 +1,9 @@
+problem_category	discovery_source	candidate	decision	owner_or_reason	qualification
+sorted_token_dedup	LeetCode 26 Remove Duplicates from Sorted Array	two-pointer in-place compaction	REUSE	M3LEX image builder deduplicates sorted UTF-16 payload only; preserve source row IDs separately	differential string/order test
+filtered_offsets	LeetCode 27 Remove Element	index compaction and mask	REUSE	M3IndexMaskCompactor and M3FilteredLists are existing product owners	preserve stable relative source row order
+sparse_frequency_counts	HackerRank Frequency Queries	primitive frequency maps	REUSE	M3LongLongHashMap and existing typed token-frequency receiver	no second map implementation
+index_lookup	LeetCode 34 Find First and Last Position in Sorted Array	binary search boundaries	REUSE	SharedLexiconImage.findRecord and M3LongSortedViews	UTF16 sort and duplicates
+prefix_dictionary	LeetCode 208 Implement Trie	prefix trie	EVALUATE_ONLY	Synexia/M3 string prefix index is already owner; do not replace	contract and memory benchmark pending
+lexical_search	GeeksforGeeks KMP String Matching	bounded prefix precomputation	EVALUATE_ONLY	M3 String native search/regex owner; no JNI matcher invented	exact-match UTF16 regression needed
+morphology	Universal Dependencies CoNLL-U	row token grammar parse	ADAPT	this bounded offline data recipe emits typed opaque source facts	strict grammar sample and malformed-row refusal
+hf_provenance	Synexia DatasetLexiconImport	stream SHA256 and approved source metadata	ADAPT	metadata-only target projection; no corpus download	strict byte digest and rights-evidence refusal
