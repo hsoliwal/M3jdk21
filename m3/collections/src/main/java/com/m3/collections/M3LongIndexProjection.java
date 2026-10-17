@@ -130,6 +130,43 @@ public final class M3LongIndexProjection {
         return new M3LongIndexProjection(values, selected, 0, selected.length, order);
     }
 
+    /**
+     * Precomputed multi-stage 32-bit state filtering over original physical slots.
+     *
+     * <p>These are caller-supplied immutable metadata planes, not Java predicates.
+     * Our private index vector is BOTH the encounter-order row lane and its
+     * physical-offset lane: M3IndexPathMasks tests planes[stage][physicalId]
+     * and returns selected physical IDs in view order. Even a slice or a stable
+     * sort therefore requires no intermediate physical-index directory.
+     *
+     * <p>State planes must remain unchanged during the call. No source long[]
+     * is copied, and the existing JNI implementation remains explicitly opt-in.
+     * This is a detached filtered snapshot, never a live filtered wrapper.
+     */
+    public M3LongIndexProjection filteredByStatePlanes(
+            int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
+            M3IndexPathMasks.Backend backend) {
+        int[] selected = M3IndexPathMasks.select(indices, indices,
+                statePlanes, requiredMasks, forbiddenMasks,
+                from, size(), 1, backend);
+        if (selected.length == size()) return this;
+        return new M3LongIndexProjection(values, selected, 0, selected.length, order);
+    }
+
+    /**
+     * First matching ordinal in THIS logical view, or -1. The existing
+     * array-path matcher validates stage/physical bounds before traversing;
+     * it returns an index into the shared physical index directory, not a
+     * payload slot. Subtract this view's offset to report its logical ordinal.
+     * No selected index array is allocated.
+     */
+    public int firstMatchingOrdinalByStatePlanes(
+            int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks) {
+        int position = M3IndexPathMasks.firstMatchingIndex(indices, indices,
+                statePlanes, requiredMasks, forbiddenMasks, from, size(), 1);
+        return position < 0 ? -1 : position - from;
+    }
+
     /** Stable signed-long sort; only the primitive index vector is permuted. */
     public M3LongIndexProjection sortedAscending() { return sorted(false); }
 
