@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.MaskProjectionRefinement
+displayName: M3JDK mask projection refinement
+description: Target-specific exact-source receiver over unchanged canonical recipe ownership.
+recipeList:
+  - com.synexia.rewrite.M3MaskProjectionRecipe

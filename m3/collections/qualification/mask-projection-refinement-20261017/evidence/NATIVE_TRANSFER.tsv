@@ -1,0 +1,6 @@
+JNI_MOCK_SCENARIOS=71
+shape	input_items	state_region_calls	row_region_calls	row_items	output_items
+0	100000	782	0	0	0
+1	100000	782	391	100000	100000
+2	100000	782	391	100000	5883
+3	100000	782	98	25088	25088

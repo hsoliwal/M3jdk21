@@ -1,0 +1,62 @@
+{
+  "target_repo": "hsoliwal/M3jdk21",
+  "base": "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e",
+  "final_pass": "pass-0012",
+  "bounded_runtime_files": 2,
+  "public_api_fields_jni_symbol": "UNCHANGED",
+  "junit_methods": 3,
+  "recipe_schedules": 32,
+  "recipe_refusals": 18,
+  "verified_commands": 168,
+  "expected_negative_exits": 4,
+  "sealed_inputs": 34,
+  "java_cases": 16635,
+  "java_checks": 52460,
+  "native_cases_per_mode": 16635,
+  "native_checks_per_mode": 52461,
+  "native_modes": [
+    "release",
+    "UBSan"
+  ],
+  "mock_scenarios_per_mode": 71,
+  "mock_modes": [
+    "release",
+    "ASan+UBSan"
+  ],
+  "missing_native_cases": 3,
+  "tape": "294a29c653f585a43cef21171469d624bc8de8b73b9f3e7cb298595e321bf709",
+  "sdk_observed_results": 0,
+  "frozen_replay_results": 4,
+  "readback_results": 0,
+  "same_order_full_allocated_bytes": [
+    800064,
+    32
+  ],
+  "full_filter_allocated_bytes": [
+    500416,
+    100400
+  ],
+  "stack_bytes": {
+    "parent": 2416,
+    "candidate": 2432
+  },
+  "small_sorted_slice_retained_index_ints": 10,
+  "small_sorted_slice_retained_payload_longs": 100000,
+  "sdk_names": {
+    "existing_source_inventoried": 16,
+    "apache_adapter_pending": 1,
+    "fresh_interop_build": false
+  },
+  "compiled_and_installed_replay": "BYTE_IDENTICAL",
+  "native_heap": "no new native allocator; total process RSS/NMT not measured",
+  "open": [
+    "full collections module/reactor",
+    "full JDK image/jtreg",
+    "canonical every-module/provenance/family admission",
+    "hosted CI",
+    "Windows/macOS",
+    "JMH/application workloads",
+    "complete SDK/library coverage"
+  ],
+  "phase": "String-first phase not advanced"
+}

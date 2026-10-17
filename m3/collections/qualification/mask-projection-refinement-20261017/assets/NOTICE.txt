@@ -1,0 +1,7 @@
+M3JDK mask projection isolated preview
+Copyright 2026 Hitesh Soliwal and contributors. Apache-2.0.
+Runtime sources: hsoliwal/M3jdk21 existing M3LongIndexProjection and M3IndexMaskCompactor.
+The JNI library in this preview contains only the mask-compactor entrypoint. It is not
+an installable replacement for the complete M3JDK collections native library or SDK.
+No third-party runtime implementation is copied into these two runtime classes.
+Synexia/OpenRewrite are authoring tools only and are not included in this runtime JAR.

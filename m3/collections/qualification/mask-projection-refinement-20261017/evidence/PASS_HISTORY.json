@@ -1,0 +1,112 @@
+[
+  {
+    "pass": "pass-0001",
+    "status": "PASSED_HISTORICAL",
+    "failure": null,
+    "interruption": null
+  },
+  {
+    "pass": "pass-0002",
+    "status": "FAILED_OR_INTERRUPTED_NOT_QUALIFIED",
+    "failure": {
+      "completed": [
+        "baseline",
+        "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "m3/collections/algorithm-catalog/mask-projection-refinement-20261017.tsv",
+        "m3/collections/qualification/mask-projection-refinement-20261017/MAPPING.json"
+      ],
+      "failure": "failed expected-refusal; see /mnt/data/m3jdk-mask-refinement-20261017/pass-0002/runtime/negatives/offset-borrow/compiled/expected-refusal.stderr"
+    },
+    "interruption": null
+  },
+  {
+    "pass": "pass-0003",
+    "status": "PASSED_HISTORICAL",
+    "failure": null,
+    "interruption": null
+  },
+  {
+    "pass": "pass-0004",
+    "status": "PASSED_HISTORICAL",
+    "failure": null,
+    "interruption": null
+  },
+  {
+    "pass": "pass-0005",
+    "status": "FAILED_OR_INTERRUPTED_NOT_QUALIFIED",
+    "failure": null,
+    "interruption": null
+  },
+  {
+    "pass": "pass-0006",
+    "status": "PASSED_HISTORICAL",
+    "failure": null,
+    "interruption": null
+  },
+  {
+    "pass": "pass-0007",
+    "status": "PASSED_HISTORICAL",
+    "failure": null,
+    "interruption": null
+  },
+  {
+    "pass": "pass-0008",
+    "status": "FAILED_OR_INTERRUPTED_NOT_QUALIFIED",
+    "failure": {
+      "stage": "source-policy-lint",
+      "failure": "ValueError from relative_to(TASK) on sibling runtime owner; runtime not entered",
+      "before_sha256": "50cde358f3cf00a7d109618cb187cc1ad28599e8f2a3104709b3abd79f103a3b",
+      "fix": "use is_relative_to(TASK/assets) for license formatting exclusion",
+      "after_sha256": "74cfdea9333d118bd09184b18efc24b373905a5ff1f901c8805bb20e817b8422"
+    },
+    "interruption": null
+  },
+  {
+    "pass": "pass-0009",
+    "status": "FAILED_OR_INTERRUPTED_NOT_QUALIFIED",
+    "failure": null,
+    "interruption": {
+      "status": "EXTERNALLY_INTERRUPTED",
+      "completed_stages": [
+        "baseline",
+        "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "m3/collections/algorithm-catalog/mask-projection-refinement-20261017.tsv",
+        "m3/collections/qualification/mask-projection-refinement-20261017/MAPPING.json",
+        "negative-and-old-client",
+        "replay"
+      ],
+      "note": "container foreground timeout120000ms; no surviving qualifier/Maven process at readback; runtime/package gate not passed"
+    }
+  },
+  {
+    "pass": "pass-0010",
+    "status": "FAILED_OR_INTERRUPTED_NOT_QUALIFIED",
+    "failure": null,
+    "interruption": {
+      "status": "EXTERNALLY_INTERRUPTED",
+      "completed_stages": [
+        "baseline",
+        "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "m3/collections/algorithm-catalog/mask-projection-refinement-20261017.tsv",
+        "m3/collections/qualification/mask-projection-refinement-20261017/MAPPING.json",
+        "negative-and-old-client"
+      ],
+      "note": "foreground tool ended about35seconds after start despite240000ms requested; no surviving process at readback; not qualified"
+    }
+  },
+  {
+    "pass": "pass-0011",
+    "status": "PASSED_HISTORICAL",
+    "failure": null,
+    "interruption": null
+  },
+  {
+    "pass": "pass-0012",
+    "status": "FINAL_INSTALLED_SOURCE_PASS",
+    "failure": null,
+    "interruption": null
+  }
+]

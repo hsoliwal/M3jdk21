@@ -1,0 +1,83 @@
+Display-only normalization: trailing whitespace stripped; raw logs are in the proof archive.
+
+[INFO] Scanning for projects...
+[INFO]
+[INFO] --------------< com.m3.proof:mask-projection-refinement >---------------
+[INFO] Building mask-projection-refinement 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ mask-projection-refinement ---
+[INFO] Copying 1 resource from src/main/resources to ../../../../../../pass-0012/maven/classes
+[INFO] Copying 5 resources from ../templates to ../../../../../../pass-0012/maven/classes/com/synexia/rewrite/mask-projection
+[INFO] Copying 2 resources from ../before to ../../../../../../pass-0012/maven/classes/com/synexia/rewrite/mask-projection/before
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ mask-projection-refinement ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [debug release 21] to ../../../../../../pass-0012/maven/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ mask-projection-refinement ---
+[INFO] skip non existing resourceDirectory /mnt/data/m3jdk-mask-refinement-20261017/repository/m3/collections/qualification/mask-projection-refinement-20261017/recipe/src/test/resources
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ mask-projection-refinement ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug release 21] to ../../../../../../pass-0012/maven/test-classes
+[INFO]
+[INFO] --- surefire:3.2.5:test (default-test) @ mask-projection-refinement ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.RecipeTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.625 s -- in com.synexia.rewrite.RecipeTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO]
+[INFO] --- jar:3.4.1:jar (default-jar) @ mask-projection-refinement ---
+[INFO] Building jar: /mnt/data/m3jdk-mask-refinement-20261017/pass-0012/maven/mask-projection-refinement-1.0.0.jar
+[INFO]
+[INFO] --- surefire:3.2.5:test (receive) @ mask-projection-refinement ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.ReceiveTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.342 s -- in com.synexia.rewrite.ReceiveTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO]
+[INFO] --- surefire:3.2.5:test (runtime) @ mask-projection-refinement ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.RuntimeTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.82 s -- in com.synexia.rewrite.RuntimeTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  34.670 s
+[INFO] Finished at: 2026-10-17T12:28:55Z
+[INFO] ------------------------------------------------------------------------
+
+STDERR
+SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.

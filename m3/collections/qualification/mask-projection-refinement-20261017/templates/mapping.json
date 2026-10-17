@@ -1,0 +1,175 @@
+{
+  "schema": "M3_MASK_PROJECTION_RECEIVING_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "base": "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "recipe_mode": "EXTERNAL_RECIPE_TOOL",
+  "canonical_recipe_source": "hsoliwal/com.synexia@287afcdcd2dbcff5a43ce98368b14d86e182d16c",
+  "target_owners": [
+    "com.m3.collections.M3LongIndexProjection",
+    "com.m3.collections.M3IndexMaskCompactor",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectNative"
+  ],
+  "mapping_disposition": "EXISTING_NAMES_UNCHANGED; central name map excluded because no migration/rename/new API",
+  "phase_disposition": "BOUNDED_ARRAY_COLLECTION_CANDIDATE; active String-first phase not advanced",
+  "java_base_promotion": "PENDING full JDK/jtreg/GC/JMM and concrete java.util owner proof",
+  "mutable_live_wrappers": "UNCHANGED; detached snapshots remain detached",
+  "public_interfaces": "LOCKED",
+  "sdk_superset_policy": "ADDITIVE_CAPABILITIES; preserve external API names and semantics; accompanying M3 owners do not impersonate donor classes",
+  "sdk_source_inventory": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e",
+    "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java",
+    "git_blob": "35d419cc78f4fe583ea97cab3026d1dbf037f795",
+    "disposition": "READ_ONLY_INVENTORY; unchanged and not compiled in this bounded task"
+  },
+  "sdk_api_backings": [
+    {
+      "library": "JDK",
+      "api": "java.util.List",
+      "m3_backing": "com.m3.collections.M3LinkedList",
+      "factory": "jdkList",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "JDK",
+      "api": "java.util.Deque",
+      "m3_backing": "com.m3.collections.M3LinkedList",
+      "factory": "jdkDeque",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "JDK",
+      "api": "java.util.Set",
+      "m3_backing": "com.m3.collections.M3LinkedHashSet",
+      "factory": "jdkSet",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "JDK",
+      "api": "java.util.Map",
+      "m3_backing": "com.m3.collections.M3LinkedHashMap",
+      "factory": "jdkMap",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "JDK",
+      "api": "java.util.NavigableMap",
+      "m3_backing": "com.m3.collections.M3TreeMap",
+      "factory": "jdkSortedMap",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "JDK",
+      "api": "java.util.NavigableSet",
+      "m3_backing": "com.m3.collections.M3TreeSet",
+      "factory": "jdkSortedSet",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "Guava",
+      "api": "com.google.common.collect.ListMultimap",
+      "m3_backings": [
+        "com.m3.collections.M3LinkedHashMap",
+        "com.m3.collections.M3LinkedList"
+      ],
+      "factory": "guavaListMultimap",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "Guava",
+      "api": "com.google.common.collect.SetMultimap",
+      "m3_backings": [
+        "com.m3.collections.M3LinkedHashMap",
+        "com.m3.collections.M3LinkedHashSet"
+      ],
+      "factory": "guavaSetMultimap",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "Guava",
+      "api": "com.google.common.collect.SortedSetMultimap",
+      "m3_backings": [
+        "com.m3.collections.M3LinkedHashMap",
+        "com.m3.collections.M3TreeSet"
+      ],
+      "factory": "guavaSortedSetMultimap",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "Guava",
+      "api": "com.google.common.collect.Table",
+      "m3_backings": [
+        "com.m3.collections.M3LinkedHashMap"
+      ],
+      "factory": "guavaTable",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "Eclipse Collections",
+      "api": "org.eclipse.collections.api.list.MutableList",
+      "m3_backings": [
+        "com.m3.collections.M3LinkedList"
+      ],
+      "factory": "eclipseList",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "Eclipse Collections",
+      "api": "org.eclipse.collections.api.map.MutableMap",
+      "m3_backings": [
+        "com.m3.collections.M3LinkedHashMap"
+      ],
+      "factory": "eclipseMap",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "Eclipse Collections",
+      "api": "org.eclipse.collections.api.map.sorted.MutableSortedMap",
+      "m3_backings": [
+        "com.m3.collections.M3TreeMap"
+      ],
+      "factory": "eclipseSortedMap",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "Eclipse Collections",
+      "api": "org.eclipse.collections.api.set.MutableSet",
+      "m3_backings": [
+        "com.m3.collections.M3LinkedHashSet"
+      ],
+      "factory": "eclipseSet",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "Eclipse Collections",
+      "api": "org.eclipse.collections.api.set.sorted.MutableSortedSet",
+      "m3_backings": [
+        "com.m3.collections.M3TreeSet"
+      ],
+      "factory": "eclipseSortedSet",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "Spring Framework",
+      "api": "org.springframework.util.MultiValueMap",
+      "m3_backings": [
+        "com.m3.collections.M3LinkedHashMap",
+        "com.m3.collections.M3LinkedList"
+      ],
+      "factory": "springMultiValueMap",
+      "status": "EXISTING_SOURCE_INVENTORIED"
+    },
+    {
+      "library": "Apache Commons Collections",
+      "api": "org.apache.commons.collections4.MultiValuedMap",
+      "m3_backing": null,
+      "factory": null,
+      "status": "PENDING_ADAPTER_AND_CONTRACT_PROOF"
+    }
+  ],
+  "sdk_dependency_changes": "NONE; no new third-party runtime dependency",
+  "canonical_task_home": "synexia-openrewrite-recipes/recipes/keyed-api-20261015/m3jdk-mask-refinement-20261017",
+  "canonical_task_repository": "hsoliwal/com.synexia",
+  "canonical_task_pin": "See evidence/CONVERGENCE_RECEIPT.json; no self-referential source seal"
+}

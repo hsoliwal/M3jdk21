@@ -1,0 +1,34 @@
+[
+  {
+    "ordinal": 0,
+    "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+    "before": "fc4874e5db5472d8b2b79c122878c8531c536c4fe0b6d3ddfcce6b9ec6055eaf",
+    "after": "5016788c95838cdf4522992c9970c3e0417ebe4e81980205ea3bff5720648a44",
+    "source": "pass-0011 actual OpenRewrite Result",
+    "status": "LINT_COMPILE_TEST_JNI_VERIFIED"
+  },
+  {
+    "ordinal": 1,
+    "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "before": "d7786cd5308f4a1e6743680d35e51f5f11a66b106abdb8f170edcb92b901d1cb",
+    "after": "853706acd469ac0f7c7db831696fb0f898dc567daabadecb6c48848b6ce5fae6",
+    "source": "pass-0011 actual OpenRewrite Result",
+    "status": "LINT_COMPILE_TEST_JNI_VERIFIED"
+  },
+  {
+    "ordinal": 2,
+    "path": "m3/collections/algorithm-catalog/mask-projection-refinement-20261017.tsv",
+    "before": "ABSENT",
+    "after": "be35b512c78dc7573fea0e3a9f9ed3ff3251bc7356acff8213e7c07f001be1a8",
+    "source": "pass-0011 actual OpenRewrite Result",
+    "status": "LINT_COMPILE_TEST_JNI_VERIFIED"
+  },
+  {
+    "ordinal": 3,
+    "path": "m3/collections/qualification/mask-projection-refinement-20261017/MAPPING.json",
+    "before": "ABSENT",
+    "after": "948b15991059c4a50cc039633e712d98129127bd7f23f1f7c8dfc91642ef7fb8",
+    "source": "pass-0011 actual OpenRewrite Result",
+    "status": "LINT_COMPILE_TEST_JNI_VERIFIED"
+  }
+]

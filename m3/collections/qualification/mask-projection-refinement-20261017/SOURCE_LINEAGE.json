@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "mode": "EXTERNAL_RECIPE_TOOL",
+  "source_repo": "hsoliwal/com.synexia",
+  "source_commit": "287afcdcd2dbcff5a43ce98368b14d86e182d16c",
+  "intake_policy": "m3/docs/m3jdk21-porting-invariant.md",
+  "canonical_mechanics": "exact source-seal recipe mirrors, no local implementation changes",
+  "runtime_dependencies": "none",
+  "mirrors": [
+    {
+      "file": "M3GpuToolJoinRecipe.java",
+      "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "git_blob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "license": "Apache-2.0"
+    },
+    {
+      "file": "M3GpuToolJoinManifest.java",
+      "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "git_blob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "license": "Apache-2.0"
+    }
+  ],
+  "canonical_task_home": "synexia-openrewrite-recipes/recipes/keyed-api-20261015/m3jdk-mask-refinement-20261017",
+  "target_mirror": "Frozen exact handoff only; canonical commit/tree bound in evidence/CONVERGENCE_RECEIPT.json"
+}

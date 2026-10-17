@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+ <groupId>com.m3.proof</groupId><artifactId>mask-projection-refinement</artifactId><version>1.0.0</version>
+ <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ <m3.target.root>${project.basedir}/../../../../..</m3.target.root><m3.proof>${project.basedir}/target/proof</m3.proof><m3.python>python3</m3.python></properties>
+ <dependencyManagement><dependencies>
+ <dependency><groupId>org.ow2.asm</groupId><artifactId>asm</artifactId><version>9.6</version></dependency>
+ <dependency><groupId>org.ow2.asm</groupId><artifactId>asm-util</artifactId><version>9.6</version></dependency>
+ <dependency><groupId>org.ow2.asm</groupId><artifactId>asm-tree</artifactId><version>9.6</version></dependency>
+ <dependency><groupId>org.ow2.asm</groupId><artifactId>asm-analysis</artifactId><version>9.6</version></dependency>
+ </dependencies></dependencyManagement>
+ <dependencies>
+ <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1</version></dependency>
+ <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>2.0.9</version></dependency>
+ <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>24.1.0</version></dependency>
+ <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+ </dependencies>
+ <build><directory>${m3.proof}/maven</directory><resources>
+ <resource><directory>src/main/resources</directory></resource>
+ <resource><directory>../templates</directory><targetPath>com/synexia/rewrite/mask-projection</targetPath></resource>
+ <resource><directory>../before</directory><targetPath>com/synexia/rewrite/mask-projection/before</targetPath></resource>
+ </resources><plugins>
+ <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+ <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration></plugin>
+ <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration>
+ <failIfNoTests>true</failIfNoTests><systemPropertyVariables><m3.target.root>${m3.target.root}</m3.target.root><m3.proof>${m3.proof}</m3.proof><m3.task>${project.basedir}/..</m3.task><m3.python>${m3.python}</m3.python></systemPropertyVariables>
+ <excludes><exclude>**/ReceiveTest.java</exclude><exclude>**/RuntimeTest.java</exclude></excludes></configuration><executions>
+ <execution><id>receive</id><phase>pre-integration-test</phase><goals><goal>test</goal></goals><configuration><includes><include>**/ReceiveTest.java</include></includes><excludes combine.self="override"><exclude>**/Nothing.java</exclude></excludes></configuration></execution>
+ <execution><id>runtime</id><phase>verify</phase><goals><goal>test</goal></goals><configuration><includes><include>**/RuntimeTest.java</include></includes><excludes combine.self="override"><exclude>**/Nothing.java</exclude></excludes></configuration></execution>
+ </executions></plugin>
+ <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.1</version></plugin>
+ </plugins></build>
+</project>

@@ -1,0 +1,4 @@
+m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java
+m3/collections/src/main/native/collections/m3_index_mask_compactor.c
+m3/collections/algorithm-catalog/mask-projection-refinement-20261017.tsv
+m3/collections/qualification/mask-projection-refinement-20261017/MAPPING.json
