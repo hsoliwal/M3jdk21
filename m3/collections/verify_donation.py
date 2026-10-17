@@ -18,6 +18,7 @@ import subprocess
 import sys
 import xml.etree.ElementTree as ET
 import zipfile
+from m3_object_state_offset_receipt import include_successor as include_object_state_offset_successor
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -209,6 +210,7 @@ def main():
     rows = [line.split('\t') for line in manifest.read_text().splitlines()
             if line and not line.startswith('#')]
     rows = include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows)))
+    rows = include_object_state_offset_successor(rows)
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
@@ -216,7 +218,10 @@ def main():
         if relative.is_absolute() or '..' in relative.parts or not path.startswith('m3/collections/'):
             raise SystemExit('Invalid receiver path: ' + path)
         source = REPO / relative
-        if not source.is_file() or digest(source) != expected:
+        if (not source.is_file()
+                or (path.endswith("/M3ObjectStateSlots28.java")
+                    or path.endswith("/M3ObjectStateSlots28SelfTest.java")) and source.is_symlink()
+                or digest(source) != expected):
             raise SystemExit('Installed source drift: ' + path)
     declared_java = {path for path, _ in rows if path.endswith('.java') and '/src/' in path}
     actual_java = {str(path.relative_to(REPO)) for path in (HERE / 'src').rglob('*.java')}
