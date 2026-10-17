@@ -1,0 +1,13 @@
+{
+  "schema": "M3_BIMAP_CANONICAL_MIRROR_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "64108bacc26046ba0b9f5933d7a478fc97862eeb",
+  "pull_request": 11863,
+  "task": "synexia-openrewrite-recipes/recipe-crates/collections-library-interop/bimap",
+  "task_tree": "28b76cd99d1a04fa7644c9c7faee5edef31d7d34",
+  "recipe_tree": "34fa2a9ddf55237b0fb564492db98bc178ef03c6",
+  "verifier_blob": "f1b8ff89afb8e8ec108a88a9fd3402c6be148607",
+  "mode": "EXACT_RECIPE_AND_VERIFIER_MIRROR; runtime files are actual qualified OpenRewrite output",
+  "license": "Apache-2.0; Guava Authors notices retained on adapted runtime",
+  "phase_advance": false
+}
