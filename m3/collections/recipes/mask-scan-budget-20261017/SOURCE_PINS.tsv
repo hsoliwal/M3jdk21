@@ -1,0 +1,6 @@
+role	path	git_blob	policy
+original Java	m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java	1b3947d55dbd11df2d8ea331584431e64052b2c8	Apache-2.0 retained; exact preimage
+original native	m3/collections/src/main/native/collections/m3_index_mask_window.c	6ccf6f10a2945be3631d0493da74b09070dca415	Apache-2.0 retained; exact preimage
+unchanged availability owner	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	5def05aad11dbe3ab7bebe27a3c11b5d241c9a7a	Apache-2.0 retained; no replacement stub
+existing Synexia kernel	M3GpuToolJoinManifest.java	38df5f97bbeec8a8a8cfc77091d56bda925c07f2	verbatim Apache-2.0 build tooling
+existing Synexia SDK wrapper	M3GpuToolJoinRecipe.java	1c1b1b568d369f688f6953161636bf36b484bf5a	verbatim Apache-2.0 build tooling

@@ -1,0 +1,2 @@
+  public static final int MAX_EXAMINED;
+  public static long scanBounded(int[], byte[], int, int, int, int, int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend, java.util.function.BooleanSupplier);

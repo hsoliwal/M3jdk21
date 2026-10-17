@@ -1,0 +1,60 @@
+MaskBudgetReplay checks=774 orderings=32 emitted=8
+LegacyWindowProof checks=8192 digest=999998321913cfa3
+LegacyWindowProof checks=8192 digest=999998321913cfa3
+Serial pass 1: shared C core preserves original native ABI/results
+LegacyWindowProof checks=8192 digest=999998321913cfa3
+LegacyWindowProof checks=8192 digest=999998321913cfa3
+LegacyWindowProof checks=8192 digest=999998321913cfa3
+Serial pass 2: additive Java entry preserves original API results
+M3MaskScanBudgetSelfTest mode=java checks=419067 maskPairs=65536 randomCases=1024
+M3MaskScanBudgetSelfTest mode=native checks=419091 maskPairs=65536 randomCases=1024
+M3MaskScanBudgetSelfTest mode=java checks=419067 maskPairs=65536 randomCases=1024
+M3MaskScanBudgetSelfTest mode=native checks=419091 maskPairs=65536 randomCases=1024
+M3MaskScanBudgetSelfTest mode=native checks=419091 maskPairs=65536 randomCases=1024
+Budget refusal mode=missing checks=3
+Budget refusal mode=legacy checks=2
+cursor=2 rows=[]
+cursor=4 rows=[2]
+cursor=6 rows=[4]
+cursor=7 rows=[]
+cursor=2 rows=[]
+cursor=4 rows=[2]
+cursor=6 rows=[4]
+cursor=7 rows=[]
+Compiled from "M3IndexMaskWindow.java"
+public final class com.m3.collections.M3IndexMaskWindow {
+  public static final int MAX_WINDOW;
+  public static int nextIndex(long);
+  public static int written(long);
+  public static long scan(int[], byte[], int, int, int, int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+}
+Compiled from "M3IndexMaskWindow.java"
+public final class com.m3.collections.M3IndexMaskWindow {
+  public static final int MAX_WINDOW;
+  public static final int MAX_EXAMINED;
+  public static int nextIndex(long);
+  public static int written(long);
+  public static long scan(int[], byte[], int, int, int, int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+  public static long scanBounded(int[], byte[], int, int, int, int, int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend, java.util.function.BooleanSupplier);
+}
+RejectMillionBudget256 cursor=256 written=0 stateReads=256 rowReads=0
+RegionBudgetFixture cases=6049 checks=6495844 virtualMaxLength=INT_MAX
+Traceback (most recent call last):
+  File "/mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/verify.py", line 113, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/verify.py", line 88, in main
+    java(new,bad,main,'native',negative=True)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/verify.py", line 47, in java
+    return run(['java','-Xcheck:jni','-Xmx'+heap,*(['-Xint'] if interp else []),'-Djava.library.path='+str(native),'-cp',classes,main,*rest],negative)
+  File "/mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/verify.py", line 21, in run
+    raise RuntimeError('negative control not detected: '+' '.join(args)+'\n'+p.stdout)
+RuntimeError: negative control not detected: java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ent8fxew/end -cp /tmp/m3-budget-ent8fxew/new com.m3.collections.M3MaskScanBudgetSelfTest native
+Exception in thread "main" java.lang.IllegalStateException: invalid native mask-window cursor
+	at com.m3.collections.M3IndexMaskWindow.requireValidResult(M3IndexMaskWindow.java:209)
+	at com.m3.collections.M3IndexMaskWindow.scanBounded(M3IndexMaskWindow.java:147)
+	at com.m3.collections.M3MaskScanBudgetSelfTest.scan(M3MaskScanBudgetSelfTest.java:32)
+	at com.m3.collections.M3MaskScanBudgetSelfTest.caseOf(M3MaskScanBudgetSelfTest.java:41)
+	at com.m3.collections.M3MaskScanBudgetSelfTest.main(M3MaskScanBudgetSelfTest.java:137)
+

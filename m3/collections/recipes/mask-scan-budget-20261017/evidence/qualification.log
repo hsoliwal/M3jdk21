@@ -1,0 +1,143 @@
+$ javac --release 21 -Xlint:all -Werror -d /tmp/m3-budget-ck0lb4ja/engine /mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java /mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/src/main/java/com/synexia/rewrite/MaskBudgetReplay.java
+exit=0
+
+$ java -cp /tmp/m3-budget-ck0lb4ja/engine com.synexia.rewrite.MaskBudgetReplay /mnt/data/m3-budget/repo /tmp/m3-budget-ck0lb4ja/candidate
+exit=0
+MaskBudgetReplay checks=774 orderings=32 emitted=8
+
+$ javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-budget-ck0lb4ja/base /mnt/data/m3-budget/repo/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java /mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java /mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/proof/LegacyWindowProof.java
+exit=0
+
+$ javac --release 21 -proc:none -Xlint:all -Werror -h /tmp/m3-budget-ck0lb4ja/new -d /tmp/m3-budget-ck0lb4ja/new /mnt/data/m3-budget/repo/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java /tmp/m3-budget-ck0lb4ja/candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java /tmp/m3-budget-ck0lb4ja/candidate/m3/collections/src/test/java/com/m3/collections/M3MaskScanBudgetSelfTest.java /tmp/m3-budget-ck0lb4ja/candidate/m3/collections/examples/MaskBudgetExample.java /mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/proof/LegacyWindowProof.java
+exit=0
+
+$ gcc -std=c17 -Wall -Wextra -Werror -Wpedantic -fsanitize=undefined -fno-sanitize-recover=undefined -I/usr/lib/jvm/java-21-openjdk-amd64/include -I/usr/lib/jvm/java-21-openjdk-amd64/include/linux -fPIC -shared /mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/before/m3/collections/src/main/native/collections/m3_index_mask_window.c -o /tmp/m3-budget-ck0lb4ja/base-lib/libm3_collections_mask.so
+exit=0
+
+$ gcc -std=c17 -Wall -Wextra -Werror -Wpedantic -fsanitize=undefined -fno-sanitize-recover=undefined -I/usr/lib/jvm/java-21-openjdk-amd64/include -I/usr/lib/jvm/java-21-openjdk-amd64/include/linux -fPIC -shared -include /tmp/m3-budget-ck0lb4ja/new/com_m3_collections_M3IndexMaskWindow.h /tmp/m3-budget-ck0lb4ja/candidate/m3/collections/src/main/native/collections/m3_index_mask_window.c -o /tmp/m3-budget-ck0lb4ja/lib/libm3_collections_mask.so
+exit=0
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/base-lib -cp /tmp/m3-budget-ck0lb4ja/base LegacyWindowProof native
+exit=0
+LegacyWindowProof checks=8192 digest=999998321913cfa3
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/lib -cp /tmp/m3-budget-ck0lb4ja/base LegacyWindowProof native
+exit=0
+LegacyWindowProof checks=8192 digest=999998321913cfa3
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/lib -cp /tmp/m3-budget-ck0lb4ja/new LegacyWindowProof native
+exit=0
+LegacyWindowProof checks=8192 digest=999998321913cfa3
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/base-lib -cp /tmp/m3-budget-ck0lb4ja/new LegacyWindowProof native
+exit=0
+LegacyWindowProof checks=8192 digest=999998321913cfa3
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/missing -cp /tmp/m3-budget-ck0lb4ja/new LegacyWindowProof
+exit=0
+LegacyWindowProof checks=8192 digest=999998321913cfa3
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/lib -cp /tmp/m3-budget-ck0lb4ja/new com.m3.collections.M3MaskScanBudgetSelfTest java
+exit=0
+M3MaskScanBudgetSelfTest mode=java checks=419067 maskPairs=65536 randomCases=1024
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/lib -cp /tmp/m3-budget-ck0lb4ja/new com.m3.collections.M3MaskScanBudgetSelfTest native
+exit=0
+M3MaskScanBudgetSelfTest mode=native checks=419091 maskPairs=65536 randomCases=1024
+
+$ java -Xcheck:jni -Xmx128m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/lib -cp /tmp/m3-budget-ck0lb4ja/new com.m3.collections.M3MaskScanBudgetSelfTest java
+exit=0
+M3MaskScanBudgetSelfTest mode=java checks=419067 maskPairs=65536 randomCases=1024
+
+$ java -Xcheck:jni -Xmx128m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/lib -cp /tmp/m3-budget-ck0lb4ja/new com.m3.collections.M3MaskScanBudgetSelfTest native
+exit=0
+M3MaskScanBudgetSelfTest mode=native checks=419091 maskPairs=65536 randomCases=1024
+
+$ java -Xcheck:jni -Xmx32m -Xint -Djava.library.path=/tmp/m3-budget-ck0lb4ja/lib -cp /tmp/m3-budget-ck0lb4ja/new com.m3.collections.M3MaskScanBudgetSelfTest native
+exit=0
+M3MaskScanBudgetSelfTest mode=native checks=419091 maskPairs=65536 randomCases=1024
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/missing -cp /tmp/m3-budget-ck0lb4ja/new com.m3.collections.M3MaskScanBudgetSelfTest missing
+exit=0
+Budget refusal mode=missing checks=3
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/base-lib -cp /tmp/m3-budget-ck0lb4ja/new com.m3.collections.M3MaskScanBudgetSelfTest legacy
+exit=0
+Budget refusal mode=legacy checks=2
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/missing -cp /tmp/m3-budget-ck0lb4ja/new MaskBudgetExample
+exit=0
+cursor=2 rows=[]
+cursor=4 rows=[2]
+cursor=6 rows=[4]
+cursor=7 rows=[]
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/lib -cp /tmp/m3-budget-ck0lb4ja/new MaskBudgetExample native
+exit=0
+cursor=2 rows=[]
+cursor=4 rows=[2]
+cursor=6 rows=[4]
+cursor=7 rows=[]
+
+$ javap -public -classpath /tmp/m3-budget-ck0lb4ja/base com.m3.collections.M3IndexMaskWindow
+exit=0
+Compiled from "M3IndexMaskWindow.java"
+public final class com.m3.collections.M3IndexMaskWindow {
+  public static final int MAX_WINDOW;
+  public static int nextIndex(long);
+  public static int written(long);
+  public static long scan(int[], byte[], int, int, int, int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+}
+
+$ javap -public -classpath /tmp/m3-budget-ck0lb4ja/new com.m3.collections.M3IndexMaskWindow
+exit=0
+Compiled from "M3IndexMaskWindow.java"
+public final class com.m3.collections.M3IndexMaskWindow {
+  public static final int MAX_WINDOW;
+  public static final int MAX_EXAMINED;
+  public static int nextIndex(long);
+  public static int written(long);
+  public static long scan(int[], byte[], int, int, int, int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+  public static long scanBounded(int[], byte[], int, int, int, int, int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend, java.util.function.BooleanSupplier);
+}
+
+$ gcc -std=c17 -Wall -Wextra -Werror -Wpedantic -fsanitize=undefined -fno-sanitize-recover=undefined -I/usr/lib/jvm/java-21-openjdk-amd64/include -I/usr/lib/jvm/java-21-openjdk-amd64/include/linux -fsanitize=address,undefined -I/tmp/m3-budget-ck0lb4ja/candidate/m3/collections/src/main/native/collections /mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/proof/region_budget.c -o /tmp/m3-budget-ck0lb4ja/region
+exit=0
+
+$ /tmp/m3-budget-ck0lb4ja/region
+exit=0
+RejectMillionBudget256 cursor=256 written=0 stateReads=256 rowReads=0
+RegionBudgetFixture cases=6049 checks=6495844 virtualMaxLength=INT_MAX
+
+$ gcc -std=c17 -Wall -Wextra -Werror -Wpedantic -fsanitize=undefined -fno-sanitize-recover=undefined -I/usr/lib/jvm/java-21-openjdk-amd64/include -I/usr/lib/jvm/java-21-openjdk-amd64/include/linux -fPIC -shared /tmp/m3-budget-ck0lb4ja/end/m3_index_mask_window.c -o /tmp/m3-budget-ck0lb4ja/end/libm3_collections_mask.so
+exit=0
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/end -cp /tmp/m3-budget-ck0lb4ja/new com.m3.collections.M3MaskScanBudgetSelfTest native
+exit=1
+Exception in thread "main" java.lang.IllegalStateException: invalid native mask-window cursor
+	at com.m3.collections.M3IndexMaskWindow.requireValidResult(M3IndexMaskWindow.java:209)
+	at com.m3.collections.M3IndexMaskWindow.scanBounded(M3IndexMaskWindow.java:147)
+	at com.m3.collections.M3MaskScanBudgetSelfTest.scan(M3MaskScanBudgetSelfTest.java:32)
+	at com.m3.collections.M3MaskScanBudgetSelfTest.caseOf(M3MaskScanBudgetSelfTest.java:41)
+	at com.m3.collections.M3MaskScanBudgetSelfTest.main(M3MaskScanBudgetSelfTest.java:137)
+
+$ gcc -std=c17 -Wall -Wextra -Werror -Wpedantic -fsanitize=undefined -fno-sanitize-recover=undefined -I/usr/lib/jvm/java-21-openjdk-amd64/include -I/usr/lib/jvm/java-21-openjdk-amd64/include/linux -I/tmp/m3-budget-ck0lb4ja/end /mnt/data/m3-budget/repo/m3/collections/recipes/mask-scan-budget-20261017/proof/region_budget.c -o /tmp/m3-budget-ck0lb4ja/end/region
+exit=0
+
+$ /tmp/m3-budget-ck0lb4ja/end/region
+exit=2
+region budget check failed 358472
+
+$ gcc -std=c17 -Wall -Wextra -Werror -Wpedantic -fsanitize=undefined -fno-sanitize-recover=undefined -I/usr/lib/jvm/java-21-openjdk-amd64/include -I/usr/lib/jvm/java-21-openjdk-amd64/include/linux -fPIC -shared /tmp/m3-budget-ck0lb4ja/high-bit/m3_index_mask_window.c -o /tmp/m3-budget-ck0lb4ja/high-bit/libm3_collections_mask.so
+exit=0
+
+$ java -Xcheck:jni -Xmx32m -Djava.library.path=/tmp/m3-budget-ck0lb4ja/high-bit -cp /tmp/m3-budget-ck0lb4ja/new com.m3.collections.M3MaskScanBudgetSelfTest native
+exit=1
+Exception in thread "main" java.lang.AssertionError: budget check 649
+	at com.m3.collections.M3MaskScanBudgetSelfTest.check(M3MaskScanBudgetSelfTest.java:15)
+	at com.m3.collections.M3MaskScanBudgetSelfTest.caseOf(M3MaskScanBudgetSelfTest.java:43)
+	at com.m3.collections.M3MaskScanBudgetSelfTest.main(M3MaskScanBudgetSelfTest.java:137)
+
+$ java -cp /tmp/m3-budget-ck0lb4ja/engine com.synexia.rewrite.MaskBudgetReplay /mnt/data/m3-budget/repo /tmp/m3-budget-ck0lb4ja/replay
+exit=0
+MaskBudgetReplay checks=774 orderings=32 emitted=8

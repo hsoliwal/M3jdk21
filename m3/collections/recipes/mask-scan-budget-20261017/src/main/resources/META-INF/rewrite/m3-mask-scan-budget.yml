@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.MaskScanBudget20261017
+displayName: Bound M3 source scanning without changing legacy behavior
+description: Adds an explicit source-work budget to the existing Java and JNI mask-window owner.
+recipeList:
+  - com.synexia.rewrite.M3MaskScanBudgetRecipe
