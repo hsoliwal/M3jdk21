@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 filtered sorted primitive terminal recipe and JNI regression
+on:
+  pull_request:
+    paths:
+      - "m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java"
+      - "m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalProof.java"
+      - "m3/collections/qualification/filtered-terminal-fusion-20261017/**"
+      - ".github/workflows/m3-filtered-terminal-fusion-20261017.yml"
+  push:
+    branches: [m3/filtered-terminal-fusion-receiver-20261017]
+permissions:
+  contents: read
+jobs:
+  actual-sdk-core-and-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Exact source and original balanced predicate owner
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 -S m3/collections/qualification/filtered-terminal-fusion-20261017/verify.py
+      - name: Execute actual unchanged Maven OpenRewrite SDK recipe
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/collections/qualification/filtered-terminal-fusion-20261017/pom.xml \
+            -Dm3.engine.sources="$PWD/m3/tooling/migration-recipes/src/main/java" \
+            -Dm3.receiver.source="$PWD" test 2>&1 | tee sdk-execution.log
+          diff -u m3/collections/qualification/filtered-terminal-fusion-20261017/evidence/QUALIFIED.tsv \
+            m3/collections/qualification/filtered-terminal-fusion-20261017/target/sdk-filtered-terminal-fusion/QUALIFIED.tsv
+      - name: Real current M3 core, callback oracle and unchanged JNI
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof/classes proof/headers proof/native
+          find m3/collections/src/main/java -name '*.java' -print0 | sort -z | \
+            xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/classes
+          javac --release 21 -proc:none -Xlint:all -Werror -cp proof/classes \
+            -d proof/classes m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalProof.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
+          java -Xmx256m -cp proof/classes com.m3.collections.M3FilteredTerminalProof \
+            | tee proof/differential.log
+          grep -F "digest=a482d01252a7a235c73734ad9319b0b9c43c34b3bbb603437b23498e6322c008 assertions=642 chars=679300" proof/differential.log
+          javac --release 21 -proc:none -h proof/headers -cp proof/classes -d proof/classes \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+          gcc -std=c17 -Wall -Wextra -Wpedantic -Werror -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o proof/native/libm3_collections_mask.so
+          UBSAN_OPTIONS=halt_on_error=1 java -Xmx256m -Xcheck:jni \
+            -Djava.library.path="$PWD/proof/native" -cp proof/classes \
+            com.m3.collections.M3IndexMaskCompactorSelfTest --native | tee proof/jni.log
+          python3 -S m3/collections/qualification/filtered-terminal-fusion-20261017/verify.py
+          git diff --exit-code
+      - name: Preserve proof and failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: filtered-terminal-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 30
+          path: |
+            sdk-execution.log
+            proof/
+            m3/collections/qualification/filtered-terminal-fusion-20261017/target/surefire-reports/
+            m3/collections/qualification/filtered-terminal-fusion-20261017/target/sdk-filtered-terminal-fusion/
