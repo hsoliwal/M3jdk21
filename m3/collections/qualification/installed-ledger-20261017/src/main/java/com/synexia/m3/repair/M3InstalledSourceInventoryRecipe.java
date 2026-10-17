@@ -80,7 +80,7 @@ public final class M3InstalledSourceInventoryRecipe {
             sorted.add(relative + "\t" + digest(file));
         }
         Collections.sort(sorted);
-        if (javaCount != 131 || names.size() != 135) {
+        if (javaCount != 132 || names.size() != 136) {
             throw new IllegalStateException("unexpected source member census: java="
                     + javaCount + " total=" + names.size()
                     + "; requalify recipe against observed inventory");
