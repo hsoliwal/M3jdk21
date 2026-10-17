@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FiveProviderDirectSpring20261017
+displayName: Direct Spring MultiValueMap over M3 arrays within five-provider SDK
+description: Reuse actual M3 storage to add exact provider-specific Java implementations from sealed templates.
+recipeList:
+  - com.synexia.rewrite.M3FiveProviderDirectSpringRecipe
