@@ -747,6 +747,21 @@
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
+    },
+    {
+      "source": "com.synexia.primitives.M3FilteredLists",
+      "source_path": "synexia-primitives/src/main/java/com/synexia/primitives/M3FilteredLists.java",
+      "source_commit": "dcc01cbf67317709e8dfad123acbfc5d187699ad",
+      "source_blob_sha1": "ab51de6af292a2286ef3326398994a89b50725fc",
+      "target": "com.m3.collections.M3FilteredLists",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "target_sha256": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101",
+      "disposition": "ADDITIVE_RECIPE_SEALED_CANDIDATE_NOT_JDK_BACKEND_PROMOTION",
+      "license": "Apache-2.0",
+      "canonical_source_owner": "hsoliwal/com.synexia",
+      "canonical_recipe": "com.synexia.rewrite.M3Jdk21FilteredListsReceiver20261017",
+      "public_api": "opt-in M3FilteredLists.filtered and readOnlyFiltered only; no changed old overloads",
+      "native_abi": "UNCHANGED_PREDICATES_IN_JAVA"
     }
   ],
   "dense_jdk_reuse": [
