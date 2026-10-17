@@ -62,7 +62,10 @@ public final class M3IndexMaskCompactor {
     public static long[] selectLong(long[] orderedRows, byte[] rowStates, int requiredMask) {
         Objects.requireNonNull(orderedRows, "orderedRows");
         validate(rowStates, orderedRows.length, requiredMask);
-        long[] selected = new long[countSelected(rowStates, requiredMask)];
+        int selectedCount = countSelected(rowStates, requiredMask);
+        // Every row is selected: one defensive primitive copy, no second mask scan.
+        if (selectedCount == orderedRows.length) return orderedRows.clone();
+        long[] selected = new long[selectedCount];
         int written = 0;
         for (int i = 0; i < orderedRows.length; i++) {
             if (matches(rowStates[i], requiredMask)) {
@@ -98,6 +101,7 @@ public final class M3IndexMaskCompactor {
     }
 
     private static int countSelected(byte[] states, int requiredMask) {
+        if (requiredMask == 0) return states.length;
         int kept = 0;
         for (byte state : states) if (matches(state, requiredMask)) kept++;
         return kept;
@@ -108,7 +112,10 @@ public final class M3IndexMaskCompactor {
      * or per-element object. Caller must keep both input arrays stable during use.
      */
     static int[] selectJava(int[] orderedRows, byte[] rowStates, int requiredMask) {
-        int[] selected = new int[countSelected(rowStates, requiredMask)];
+        int selectedCount = countSelected(rowStates, requiredMask);
+        // Retain output isolation even when the mask selects every source index.
+        if (selectedCount == orderedRows.length) return orderedRows.clone();
+        int[] selected = new int[selectedCount];
         int written = 0;
         for (int i = 0; i < orderedRows.length; i++) {
             if (matches(rowStates[i], requiredMask)) {
