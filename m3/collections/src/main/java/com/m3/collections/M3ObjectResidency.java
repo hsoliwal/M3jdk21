@@ -136,6 +136,22 @@ public final class M3ObjectResidency<T> {
         return next;
     }
 
+    /**
+     * Copy a checked, contiguous window of canonical parent-owned state words.
+     *
+     * <p>This is one cooperative snapshot under the arena monitor, not a
+     * projection/GC reference enumeration or a promise about future concurrent
+     * writes. The output is caller-owned and can be used by a detached
+     * primitive offset/mask selector without exposing any child object.</p>
+     */
+    public synchronized void copyParentBits(int sourceOffset, long[] target,
+                                            int targetOffset, int length) {
+        Objects.requireNonNull(target, "target");
+        Objects.checkFromIndexSize(sourceOffset, length, parentBits.length);
+        Objects.checkFromIndexSize(targetOffset, length, target.length);
+        System.arraycopy(parentBits, sourceOffset, target, targetOffset, length);
+    }
+
     public synchronized long residentBytes() { return residentBytes; }
     public synchronized State state(int slot) { checkSlot(slot); return stateAt(slot); }
     public synchronized Decision lastDecision() { return lastDecision; }
