@@ -1,0 +1,68 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+name: M3 recipe bounded JNI mask scan Java21
+on:
+  push:
+    branches: ['m3/sdk-mask-bounded-current-20261017']
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java'
+      - 'm3/collections/src/main/native/collections/m3_index_mask_window.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3BudgetedMaskWindowContract.java'
+      - 'm3/collections/qualification/sdk-mask-bounded-current-20261017/**'
+      - '.github/workflows/m3-sdk-mask-bounded-current-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-current-java-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Maven recipe, fixed point and refusal
+        run: mvn -B -ntp -f m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/pom.xml verify
+      - name: Check the installed two postimages
+        run: |
+          java -cp m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/target/classes \
+            com.synexia.m3.M3MaskBoundedCurrentRecipe --check "$PWD"
+      - name: Java21 real owner and JNI strict compile
+        shell: bash
+        run: |
+          set -euo pipefail
+          pkg=m3/collections/src/main/java/com/m3/collections
+          proof=m3/collections/src/test/java/com/m3/collections
+          mkdir -p "$RUNNER_TEMP/m3-classes" "$RUNNER_TEMP/m3-headers" "$RUNNER_TEMP/m3-native" "$RUNNER_TEMP/m3-oldnative"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/m3-headers" -d "$RUNNER_TEMP/m3-classes" \
+            "$pkg/M3IndexMaskCompactor.java" "$pkg/M3IndexMaskWindow.java" \
+            "$pkg/M3MutableFilteredViews.java" "$proof/M3BudgetedMaskWindowContract.java"
+          java -ea -cp "$RUNNER_TEMP/m3-classes" com.m3.collections.M3BudgetedMaskWindowContract
+          javahdr="$RUNNER_TEMP/m3-headers/com_m3_collections_M3IndexMaskWindow.h"
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -pedantic -fsanitize=undefined \
+            -fno-sanitize-recover=all -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" -include "$javahdr" \
+            m3/collections/src/main/native/collections/m3_index_mask_window.c \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$RUNNER_TEMP/m3-native/libm3_collections_mask.so"
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 java -ea -Xcheck:jni \
+            -Djava.library.path="$RUNNER_TEMP/m3-native" -cp "$RUNNER_TEMP/m3-classes" \
+            com.m3.collections.M3BudgetedMaskWindowContract --native
+          java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP/no-library" \
+            -cp "$RUNNER_TEMP/m3-classes" com.m3.collections.M3BudgetedMaskWindowContract --missing
+          cp m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/resources/com/synexia/m3/m3_index_mask_window.c.before.txt "$RUNNER_TEMP/m3-oldnative/old_window.c"
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -pedantic -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" -include "$javahdr" \
+            "$RUNNER_TEMP/m3-oldnative/old_window.c" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$RUNNER_TEMP/m3-oldnative/libm3_collections_mask.so"
+          java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP/m3-oldnative" \
+            -cp "$RUNNER_TEMP/m3-classes" com.m3.collections.M3BudgetedMaskWindowContract --old-binary
+      - name: Owning M3 collections Maven compile (full JDK admission separate)
+        run: mvn -B -ntp -f m3/collections/pom.xml -DskipTests compile

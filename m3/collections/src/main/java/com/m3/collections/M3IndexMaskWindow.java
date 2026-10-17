@@ -90,12 +90,67 @@ public final class M3IndexMaskWindow {
                 excludedMask, output, outputOffset, limit);
     }
 
+    /**
+     * Select at most limit rows after examining at most maxExamined source slots.
+     * A nonterminal zero-result cursor is valid: resume at nextIndex(result).
+     * Only primitive indices and byte state masks cross optional JNI.
+     */
+    public static long scanBounded(int[] orderedRows, byte[] rowStates, int firstIndex,
+            int maxExamined, int requiredMask, int excludedMask, int[] output,
+            int outputOffset, int limit, M3IndexMaskCompactor.Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(rowStates, "rowStates");
+        Objects.requireNonNull(output, "output");
+        Objects.requireNonNull(backend, "backend");
+        if (orderedRows == output) throw new IllegalArgumentException("source/output alias");
+        if (rowStates.length != orderedRows.length) {
+            throw new IllegalArgumentException("index and aligned state lengths differ");
+        }
+        checkMask(requiredMask);
+        checkMask(excludedMask);
+        if (firstIndex < 0 || firstIndex > orderedRows.length) {
+            throw new IndexOutOfBoundsException(firstIndex);
+        }
+        if (limit < 0 || limit > MAX_WINDOW) {
+            throw new IllegalArgumentException("invalid bounded window limit");
+        }
+        Objects.checkFromIndexSize(outputOffset, limit, output.length);
+        if (maxExamined < 0) throw new IllegalArgumentException("negative input scan budget");
+        int end = firstIndex + Math.min(maxExamined, orderedRows.length - firstIndex);
+        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+            if (!M3IndexMaskCompactor.nativeAvailable()) {
+                throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
+            }
+            if (limit == 0 || end == firstIndex) return pack(firstIndex, 0);
+            long result = scanBoundedNative(orderedRows, rowStates, firstIndex, end,
+                    requiredMask, excludedMask, output, outputOffset, limit);
+            requireValidResult(result, firstIndex, end, limit);
+            return result;
+        }
+        if (limit == 0 || end == firstIndex) return pack(firstIndex, 0);
+        if ((requiredMask & excludedMask) != 0) return pack(end, 0);
+        if ((requiredMask | excludedMask) == 0) {
+            int copied = Math.min(limit, end - firstIndex);
+            System.arraycopy(orderedRows, firstIndex, output, outputOffset, copied);
+            return pack(firstIndex + copied, copied);
+        }
+        return scanRangeJava(orderedRows, rowStates, firstIndex, end, requiredMask,
+                excludedMask, output, outputOffset, limit);
+    }
+
     /** Pure Java reference atom; call only after public validation. */
     static long scanJava(int[] rows, byte[] states, int first, int required,
             int excluded, int[] output, int outputOffset, int limit) {
+        return scanRangeJava(rows, states, first, rows.length, required,
+                excluded, output, outputOffset, limit);
+    }
+
+    /** Single primitive scan atom used by the legacy and bounded Java paths. */
+    private static long scanRangeJava(int[] rows, byte[] states, int first, int end,
+            int required, int excluded, int[] output, int outputOffset, int limit) {
         int next = first;
         int copied = 0;
-        while (next < rows.length && copied < limit) {
+        while (next < end && copied < limit) {
             int flags = states[next] & 0xff;
             if ((flags & required) == required && (flags & excluded) == 0) {
                 output[outputOffset + copied++] = rows[next];
@@ -126,4 +181,8 @@ public final class M3IndexMaskWindow {
 
     private static native long scanNative(int[] rows, byte[] states, int first,
             int required, int excluded, int[] output, int outputOffset, int limit);
+
+    /** Native bounded ABI is additive; explicit requests reject older shared libraries. */
+    private static native long scanBoundedNative(int[] rows, byte[] states, int first,
+            int end, int required, int excluded, int[] output, int outputOffset, int limit);
 }
