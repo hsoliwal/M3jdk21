@@ -30,7 +30,13 @@ class Jep404InventoryPolicyTest(unittest.TestCase):
         with (self.ROOT / "MATERIALIZATION_POLICY.tsv").open(
             encoding="utf-8", newline=""
         ) as handle:
-            policy = dict(csv.reader(handle, delimiter="\t"))
+            rows = list(csv.reader(handle, delimiter="\t"))
+        self.assertTrue(rows, "policy ledger is empty")
+        self.assertEqual(["field", "value"], rows[0], "unexpected policy header")
+        self.assertTrue(all(len(row) == 2 for row in rows[1:]),
+                        "policy ledger contains malformed rows")
+        policy = dict(rows[1:])
+        self.assertEqual(len(rows) - 1, len(policy), "duplicate policy keys")
 
         expected = {
             "jep": "404",
