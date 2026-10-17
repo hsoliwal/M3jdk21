@@ -69,6 +69,9 @@ public final class M3IndexPathMasks {
         validate(orderedRows, physicalOffsets, statePlanes, requiredMasks,
                 forbiddenMasks, first, count, stride);
         if (count == 0) return -1;
+        // Original validate() already checked every path coordinate, even when
+        // one state plane requires and forbids the same bit.
+        if (anyStageImpossible(requiredMasks, forbiddenMasks)) return -1;
         // Full geometry and every physical state offset were already validated.
         // Zero required AND forbidden masks admit the first path occurrence.
         if (allStagesAdmit(requiredMasks, forbiddenMasks)) return first;
@@ -259,6 +262,14 @@ public final class M3IndexPathMasks {
         return true;
     }
 
+    /** Contradiction is per stage, never across independent state planes. */
+    private static boolean anyStageImpossible(int[] required, int[] forbidden) {
+        for (int stage = 0; stage < required.length; stage++) {
+            if ((required[stage] & forbidden[stage]) != 0) return true;
+        }
+        return false;
+    }
+
     /** True only for the identity expression in every full-width stage. */
     private static boolean allStagesAdmit(int[] required, int[] forbidden) {
         for (int stage = 0; stage < required.length; stage++) {
@@ -270,6 +281,9 @@ public final class M3IndexPathMasks {
     static int[] selectJava(int[] rows, int[] offsets, int[][] planes,
             int[] required, int[] forbidden, int first, int count, int stride) {
         if (count == 0) return new int[0];
+        // After public validation, any required/forbidden overlap in ONE stage
+        // proves no candidate can match. Return a fresh detached empty array.
+        if (anyStageImpossible(required, forbidden)) return new int[0];
         // Java-only identity selection over a prevalidated strided index path:
         // return detached row IDs without a second metadata/state-plane scan.
         if (allStagesAdmit(required, forbidden)) {
