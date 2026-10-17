@@ -22,11 +22,6 @@ public final class ByteStatistics {
         void accept(int unsignedByte, int startInclusive, int endExclusive);
     }
 
-    /**
-     * One bounded source pass; the only retained arrays are 256 long counters
-     * and four 64-bit presence-mask words. Ties for the mode choose the smaller
-     * unsigned byte. No input payload or source-to-String copy is created.
-     */
     private final SourceArtifact.Span source;
     private final long[] histogram;
     private final long[] presence;
@@ -44,6 +39,11 @@ public final class ByteStatistics {
         this.entropy = entropy;
     }
 
+    /**
+     * One bounded source pass; the only retained arrays are 256 long counters
+     * and four 64-bit presence-mask words. Ties for the mode choose the smaller
+     * unsigned byte. No input payload or source-to-String copy is created.
+     */
     public static ByteStatistics scan(SourceArtifact.Span span) {
         SourceArtifact.Span checked = Objects.requireNonNull(span, "source span");
         long[] counts = new long[ALPHABET];
