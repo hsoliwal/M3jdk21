@@ -24,6 +24,9 @@ import java.util.ConcurrentModificationException;
  * observes structural/state drift.</p>
  */
 public final class M3ObjectSlotStore28<E> {
+    /** Creates an empty store with lazily allocated payload blocks. */
+    public M3ObjectSlotStore28() { }
+
     private final M3ObjectStateSlots28 states = new M3ObjectStateSlots28();
     private final M3LongLane28 handles = new M3LongLane28();
     private final Object[][][] payload = new Object[M3Address28.REGION_COUNT][][];

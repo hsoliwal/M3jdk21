@@ -178,8 +178,16 @@ final class M3LongTreeSetTest {
         assertEquals(66_666, survivors.length);
         assertEquals(-699_993L, survivors[0]);
         assertEquals(699_993L, survivors[survivors.length - 1]);
+        TreeSet<Long> survivingOracle = new TreeSet<>();
+        for (long i = 3; i <= 100_000; i += 3) {
+            survivingOracle.add(i * 7);
+            survivingOracle.add(-i * 7);
+        }
+        assertArrayEquals(order(survivingOracle), survivors);
         for (int i = 1; i < survivors.length; i++) {
-            assertEquals(survivors[i - 1] + 21L, survivors[i]);
+            // Zero was never admitted; its two neighbours are -21 and +21.
+            long step = survivors[i - 1] == -21L ? 42L : 21L;
+            assertEquals(survivors[i - 1] + step, survivors[i]);
         }
         assertEquals(-699_993L, set.first());
         assertEquals(699_993L, set.last());
@@ -261,7 +269,8 @@ final class M3LongTreeSetTest {
         for (long i = 1; i <= 10; i++) {
             assertTrue(set.add(i));
         }
-        assertEquals(3, set.pageCount());
+        // Full pages split in half: [1,2], [3,4], [5,6], [7,8,9,10].
+        assertEquals(4, set.pageCount());
         RuntimeException boom = new RuntimeException("boom");
         RuntimeException thrown = assertThrows(RuntimeException.class, () -> set.filterInPlace(v -> {
             if (v == 7) {
@@ -295,8 +304,11 @@ final class M3LongTreeSetTest {
         M3LongSortedSet sub = M3LongSortedViews.subSet(actual, -50, 50);
         NavigableSet<Long> jdk = expected.subSet(-50L, true, 50L, false);
         assertArrayEquals(order(jdk), sub.toArray());
-        assertTrue(sub.add(7));
-        assertTrue(jdk.add(7L));
+        // The seed already contains 7 (-200 + 69 * 3); preserve duplicate refusal.
+        assertFalse(sub.add(7));
+        assertFalse(jdk.add(7L));
+        assertTrue(sub.add(8));
+        assertTrue(jdk.add(8L));
         assertThrows(IllegalArgumentException.class, () -> sub.add(500));
         assertTrue(sub.remove(-50));
         assertTrue(jdk.remove(-50L));

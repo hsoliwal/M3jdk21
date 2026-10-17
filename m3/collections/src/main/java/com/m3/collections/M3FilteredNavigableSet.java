@@ -42,6 +42,8 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
         return new M3FilteredNavigableSet<>(view);
     }
 
+    NavigableSet<E> navigationOwner() { return delegate; }
+
     @Override public Comparator<? super E> comparator() { return delegate.comparator(); }
     @Override public Iterator<E> iterator() { return delegate.iterator(); }
     @Override public Iterator<E> descendingIterator() { return delegate.descendingIterator(); }
@@ -95,6 +97,8 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
     @Override public boolean retainAll(Collection<?> values) { throw readonly(); }
     @Override public boolean removeIf(Predicate<? super E> predicate) { throw readonly(); }
     @Override public void clear() { throw readonly(); }
+    @Override public E removeFirst() { throw readonly(); }
+    @Override public E removeLast() { throw readonly(); }
     @Override public E pollFirst() { throw readonly(); }
     @Override public E pollLast() { throw readonly(); }
 }

@@ -49,12 +49,14 @@ public final class M3MutableFilteredViews {
         return new MapView<>(source, predicate);
     }
 
-    private static <E> E firstMatch(Iterator<E> cursor, Predicate<? super E> visible) {
-        while (cursor.hasNext()) {
-            E candidate = cursor.next();
-            if (visible.test(candidate)) return candidate;
-        }
-        return null;
+    @SuppressWarnings("unchecked")
+    static <E> NavigableSet<E> navigationOwner(NavigableSet<E> source) {
+        return source instanceof SetView<?> view ? ((SetView<E>) view).source : source;
+    }
+
+    @SuppressWarnings("unchecked")
+    static <K, V> NavigableMap<K, V> navigationOwner(NavigableMap<K, V> source) {
+        return source instanceof MapView<?, ?> view ? ((MapView<K, V>) view).source : source;
     }
 
     private static final class SetView<E> extends AbstractSet<E> implements NavigableSet<E> {
@@ -188,21 +190,17 @@ public final class M3MutableFilteredViews {
             };
         }
 
-        private E seek(Iterator<E> sourceCursor) {
-            return firstMatch(sourceCursor, predicate);
-        }
-
         @Override public E lower(E value) {
-            return seek(source.headSet(value, false).descendingIterator());
+            return M3FilteredViews.seek(source, predicate, value, false, true);
         }
         @Override public E floor(E value) {
-            return seek(source.headSet(value, true).descendingIterator());
+            return M3FilteredViews.seek(source, predicate, value, true, true);
         }
         @Override public E ceiling(E value) {
-            return seek(source.tailSet(value, true).iterator());
+            return M3FilteredViews.seek(source, predicate, value, true, false);
         }
         @Override public E higher(E value) {
-            return seek(source.tailSet(value, false).iterator());
+            return M3FilteredViews.seek(source, predicate, value, false, false);
         }
         @Override public E first() {
             Iterator<E> cursor = iterator();
