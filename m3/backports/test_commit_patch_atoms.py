@@ -115,9 +115,22 @@ class CommitPatchAtomsTest(unittest.TestCase):
             commit = self.git(donor, "rev-parse", "HEAD")
 
             self.write(target, "src/A.java", "// retained target header\nclass A {\n  int v=1;\n}\n")
+            unchanged_target = (target / "src/A.java").read_bytes()
+            exact_patch = self.mod.patch_bytes(
+                donor, parent, commit, self.mod.changes(donor, parent, commit)["src/A.java"]
+            )
+            # Strict Git patching does not apply across an extra target header.
+            # A fallback may only use the real upstream parent, never guess.
+            self.assertIsNone(self.mod.apply_patch(
+                unchanged_target, "src/A.java", exact_patch))
+            self.assertIsNone(self.mod.apply_patch(
+                unchanged_target, "src/A.java", exact_patch, b"wrong donor parent\n"))
             rows = self.mod.materialize(donor, target, parent, commit, ["src/A.java"], root / "ok")
             self.assertEqual("CONTEXT_PATCH_APPLIED", rows[0]["disposition"])
-            self.assertIn("int v=2;", (root / "ok/candidates/src/A.java").read_text())
+            merged = (root / "ok/candidates/src/A.java").read_text()
+            self.assertIn("// retained target header", merged)
+            self.assertIn("int v=2;", merged)
+            self.assertEqual(unchanged_target, (target / "src/A.java").read_bytes())
 
             self.write(target, "src/A.java", "class A { int entirelyDifferent=7; }\n")
             rows = self.mod.materialize(donor, target, parent, commit, ["src/A.java"], root / "bad")
@@ -134,7 +147,7 @@ class CommitPatchAtomsTest(unittest.TestCase):
             self.git(repo, "add", ".")
             self.git(repo, "commit", "-q", "-m", "parent")
             parent = self.git(repo, "rev-parse", "HEAD")
-            self.write(repo, "src/evil\\nname.java", "class Evil {}\\n")
+            self.write(repo, "src/evil\nname.java", "class Evil {}\\n")
             self.git(repo, "add", ".")
             self.git(repo, "commit", "-q", "-m", "change")
             commit = self.git(repo, "rev-parse", "HEAD")
@@ -169,7 +182,7 @@ class CommitPatchAtomsTest(unittest.TestCase):
             alias = root / "output-alias"
             alias.symlink_to(out)
             selected = root / "selected.txt"
-            selected.write_text("src/New.java\\n", encoding="utf-8")
+            selected.write_text("src/New.java\n", encoding="utf-8")
             result = subprocess.run(
                 (
                     sys.executable,
