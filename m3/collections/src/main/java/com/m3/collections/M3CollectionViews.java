@@ -19,6 +19,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.Spliterator;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -346,6 +348,10 @@ public final class M3CollectionViews {
         }
 
         private boolean removeMatching(Predicate<? super E> condition) {
+            // M3_COW_BULK_REMOVE_V1: use the COW owner's supported bulk removal.
+            if (backing instanceof CopyOnWriteArrayList<?> || backing instanceof CopyOnWriteArraySet<?>) {
+                return backing.removeIf(element -> visible(element) && condition.test(element));
+            }
             boolean changed = false;
             Iterator<E> iterator = backing.iterator();
             while (iterator.hasNext()) {
