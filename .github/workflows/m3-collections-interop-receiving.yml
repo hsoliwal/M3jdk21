@@ -25,6 +25,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           sparse-checkout: |
+            .github/workflows
             m3/collections
             m3/tooling/migration-recipes
       - uses: actions/setup-java@v4

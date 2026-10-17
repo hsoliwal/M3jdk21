@@ -140,6 +140,19 @@ public final class M3TaskRecipeTest {
     }
 
     @Test void exactReplayFixedPointAndInputOrder() {
+        // Source-sealed workflows must be present in the sparse checkout on CI:
+        // otherwise the postimage receiver sees an absent preimage and refuses.
+        String receiverWorkflow = resource("/com/synexia/rewrite/hash-pinned-text/"
+                + CRATE + "/interop-workflow.yml.txt", false);
+        String sparsePrefix = "          sparse-checkout: |\n";
+        int sparseStart = receiverWorkflow.indexOf(sparsePrefix);
+        assertTrue(sparseStart >= 0, "CI sparse checkout must be declared");
+        String sparseBody = receiverWorkflow.substring(sparseStart + sparsePrefix.length());
+        int nextAction = sparseBody.indexOf("\n      - uses:");
+        assertTrue(nextAction > 0, "CI sparse checkout block terminator");
+        sparseBody = sparseBody.substring(0, nextAction);
+        assertTrue(sparseBody.lines().anyMatch(line -> line.strip().equals(".github/workflows")),
+                "CI checkout must include hash-pinned .github/workflows targets");
         namedDescriptorComposesTheQualifiedLanes();
         for (Lane lane : lanes()) {
             List<SourceFile> initial = parse(lane, state(lane, false));
