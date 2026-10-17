@@ -1,0 +1,14 @@
+{
+  "donor_repository": "hsoliwal/com.synexia",
+  "donor_commit": "dcc01cbf67317709e8dfad123acbfc5d187699ad",
+  "donor_path": "tools/short-flag-query/Replay.java",
+  "donor_git_blob": "e01bc8c2fac834a6d683dc62836a9528a92db5e1",
+  "manifest_sha256": "1ae3b972d61b7f3188483920ce89383373d5767847e45892c00a9e38f091621e",
+  "literal_bindings": {
+    "\"tools/short-flag-query/recipe/\"": "\"m3/collections/wrappers/deep-filter-20261017/replay-inputs/\"",
+    "\"1681b7511d6cada0ded0f8069612b13d4ff3c8d97cd8f549c3dfe1718e233beb\"": "\"1ae3b972d61b7f3188483920ce89383373d5767847e45892c00a9e38f091621e\"",
+    "startsWith(\"synexia-\")": "startsWith(\"m3/collections/\")"
+  },
+  "bound_sha256": "996fd6f01ea764ba394d5bc5c348561edb5c8744a27a8a35e6accb18f11e5c14",
+  "sdk_execution": "NOT_EXECUTED"
+}
