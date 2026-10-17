@@ -108,7 +108,15 @@ def patch_bytes(repo: Path, parent: str, commit: str, change: Change) -> bytes:
     return git(repo, "diff", "--binary", parent, commit, "--", *paths)
 
 
-def apply_patch(current: bytes, path: str, patch: bytes) -> bytes | None:
+def apply_patch(
+    current: bytes, path: str, patch: bytes, donor_parent: bytes | None = None
+) -> bytes | None:
+    """Apply exact Git context, or a source-backed clean three-way merge.
+
+    The fallback requires the exact donor-parent Git blob, never zero-context
+    patching or a line-number heuristic. Merge conflicts stay in a disposable
+    scratch Git repository and return a typed CONFLICT_CONTEXT to callers.
+    """
     with tempfile.TemporaryDirectory() as temp:
         root = Path(temp)
         subprocess.run(("git", "init", "-q", str(root)), check=True)
@@ -127,17 +135,33 @@ def apply_patch(current: bytes, path: str, patch: bytes) -> bytes | None:
             stderr=subprocess.PIPE,
             check=False,
         )
-        if check.returncode:
+        if check.returncode == 0:
+            applied = subprocess.run(
+                ("git", "-C", str(root), "apply", "--whitespace=nowarn", "-"),
+                input=patch,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+            if applied.returncode:
+                raise RuntimeError(applied.stderr.decode("utf-8", "replace"))
+            return target.read_bytes()
+
+        if donor_parent is None:
             return None
-        applied = subprocess.run(
-            ("git", "-C", str(root), "apply", "--whitespace=nowarn", "-"),
+        # git apply --3way is anchored to the *original upstream parent blob*
+        # identified in this upstream diff. A changed header can be preserved
+        # only when Git itself proves an independent, conflict-free merge.
+        git(root, "hash-object", "-w", "--stdin", data=donor_parent)
+        merged = subprocess.run(
+            ("git", "-C", str(root), "apply", "--3way", "--whitespace=nowarn", "-"),
             input=patch,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             check=False,
         )
-        if applied.returncode:
-            raise RuntimeError(applied.stderr.decode("utf-8", "replace"))
+        if merged.returncode:
+            return None
         return target.read_bytes()
 
 
@@ -182,7 +206,7 @@ def materialize(
                 candidate = upstream_after
                 disposition = "EXACT_PARENT_REPLAY"
             else:
-                candidate = apply_patch(target_bytes, path, patch)
+                candidate = apply_patch(target_bytes, path, patch, upstream_before)
                 disposition = "CONTEXT_PATCH_APPLIED" if candidate is not None else "CONFLICT_CONTEXT"
         elif kind == "A":
             upstream_after = object_bytes(donor_repo, commit, path)
