@@ -34,6 +34,7 @@ public final class M3StringRegexDpTest {
     public static void main(String[] arguments) throws Exception {
         deterministic();
         randomized();
+        compositeDagsAndLongPlans();
         refusals();
         System.out.println("M3_STRING_REGEX_DP_PASS|checks=" + checks);
     }
@@ -89,6 +90,57 @@ public final class M3StringRegexDpTest {
             // inputs/patterns in this randomized lane are strictly ASCII a-c.
             equal(memoized(composite, expression), expected, "memo/JDK parity trial=" + trial);
         }
+    }
+
+    /**
+     * The >32-atom rolling DP, not only the <=32-atom prepared bitset path.
+     * Recover the shared-cursor donor tests without discarding newer regex logic.
+     */
+    private static void compositeDagsAndLongPlans() throws Exception {
+        String shared = String.join("", "a", "b", "c");
+        for (int depth = 0; depth < 8; depth++) {
+            shared = shared.concat(shared);
+        }
+        String middle = shared.substring(1, shared.length() - 1);
+        String accepting = "a*".repeat(36) + ".*";
+        String rejecting = "a*".repeat(36) + "z";
+        verify(shared, accepting, 1);
+        verify(middle, accepting, 1);
+        verify(shared, rejecting, 0);
+        verify(middle, rejecting, 0);
+        verify(shared, "a*".repeat(36) + "b*", 0);
+
+        Random random = new Random(0x4d33524547455837L);
+        String[] tokens = {"a*", "b*", "c*", ".*", "a", "b", "c"};
+        String[] leaves = {"a", "b", "c", "ab", "bc", "aa", "",
+                "\n", "\r", "\u0085", "\u2028", "\ud83d", "\ude42"};
+        for (int trial = 0; trial < 1_024; trial++) {
+            int atomCount = 33 + random.nextInt(30);
+            StringBuilder pattern = new StringBuilder("a*");
+            for (int i = 0; i < atomCount; i++) {
+                pattern.append(tokens[random.nextInt(tokens.length)]);
+            }
+            String[] parts = new String[1 + random.nextInt(10)];
+            for (int i = 0; i < parts.length; i++) {
+                parts[i] = leaves[random.nextInt(leaves.length)];
+            }
+            String source = String.join("", parts);
+            String regex = pattern.toString();
+            int result = decision(source, regex);
+            boolean oracle = Pattern.compile(regex)
+                    .matcher(new StringBuilder(source)).matches();
+            if (result >= 0) {
+                equal(result == 1, oracle, "rolling DP/JDK parity " + trial);
+            }
+            equal(source.matches(regex), oracle,
+                    "String/Pattern composite parity " + trial);
+        }
+        String splitPair = String.join("", "a", "\ud83d", "\ude42", "b");
+        equal(decision(splitPair, accepting), -1,
+                "rolling surrogate pair across tuple seam delegates");
+        equal(splitPair.matches(accepting),
+                Pattern.compile(accepting).matcher(new StringBuilder(splitPair)).matches(),
+                "rolling surrogate JDK fallback");
     }
 
     private static void refusals() throws Exception {
