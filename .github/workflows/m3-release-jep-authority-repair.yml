@@ -63,6 +63,17 @@ jobs:
           python3 -m unittest -v
           test_release_jep_authority.py
           test_program_status.py
+      - name: Bootstrap pinned source-built OpenRewrite and JUnit dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Keep the same closed-source-coordinate bootstrap as the canonical
+          # backport-DAG workflow. Do not silently fall back to Maven Central
+          # for the private *-m3-source-1 coordinates.
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+          # Install the exact migration-recipes reactor and its required
+          # source-built dependencies before the focused JEP authority test.
+          mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am -DskipTests install
       - name: OpenRewrite replay and scope proof
         run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
