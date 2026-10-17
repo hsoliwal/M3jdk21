@@ -1,0 +1,46 @@
+{
+  "schema": "M3_AST_MODULE_WIRING_CATALOGUE_V1",
+  "task": "m3-ast-sharing-20261017/frontend/module-wiring",
+  "recipes": [
+    "com.synexia.m3.ASTModuleWiringCanonical20261017",
+    "com.synexia.m3.ASTModuleWiringTarget20261017",
+    "com.synexia.m3.ASTOrdinaryLocalScope20261017"
+  ],
+  "historical_candidate_only": [
+    "com.synexia.m3.ASTPluginServiceAdmission20261017"
+  ],
+  "providers": [
+    "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe"
+  ],
+  "mutation_scope": "exact sealed Java/POM/service owners only",
+  "selected": {
+    "vendor_sources": 103,
+    "service_owners": 2,
+    "optional_provider": "separate Java 21/OpenRewrite 8.17.1 module",
+    "native_tests": "explicit m3-ast-native profile, failure retained when missing",
+    "ordinary_source_compile_repair": "Exact local variable rename in existing M3GvasLiteralHarvester; no staging/publication behavior change"
+  },
+  "retained": [
+    "ordinary receiver source directory and precompute dependencies",
+    "canonical compiler processor and dependency configuration",
+    "both existing canonical compiler plugin providers in their original order",
+    "ordinary primitive-image compiler path",
+    "existing structured-text/native recipe path gates",
+    "qualified optional provider lifecycle and lazy source-completion refusals"
+  ],
+  "evidence": "evidence/RESULTS.json",
+  "performance_claim": "none",
+  "qualification": {
+    "actual_maven_inputs": 138,
+    "normal_tests": 52,
+    "native_profile_tests": 54,
+    "upstream_leaf_checks": 86095,
+    "canonical_reactor": "UNAVAILABLE",
+    "optional_namespaces": [
+      "canonical",
+      "receiver"
+    ],
+    "optional_assertions_each": 841
+  }
+}

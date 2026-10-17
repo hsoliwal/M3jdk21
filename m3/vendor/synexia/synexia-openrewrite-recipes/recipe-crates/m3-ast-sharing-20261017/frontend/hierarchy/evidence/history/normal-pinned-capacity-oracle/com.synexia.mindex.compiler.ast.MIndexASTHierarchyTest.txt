@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest
+-------------------------------------------------------------------------------
+Tests run: 15, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.831 s <<< FAILURE! -- in com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest
+com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest.coldFactsReloadPreservesIdentityAndActiveLeaseProtection -- Time elapsed: 0.015 s <<< ERROR!
+com.synexia.mindex.swap.TieredSwapCache$CapacityException: all available capacity is pinned
+	at com.synexia.mindex.swap.TieredSwapCache.acquire(TieredSwapCache.java:316)
+	at com.synexia.mindex.compiler.ast.M3ASTWorkspaceCache.acquire(M3ASTWorkspaceCache.java:148)
+	at com.synexia.mindex.compiler.ast.MIndexASTHierarchy$Plan.acquireOrdinal(MIndexASTHierarchy.java:381)
+	at com.synexia.mindex.compiler.ast.MIndexASTHierarchy$Plan.acquire(MIndexASTHierarchy.java:371)
+	at com.synexia.mindex.compiler.ast.MIndexASTHierarchy$Plan.acquire(MIndexASTHierarchy.java:375)
+	at com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest.coldFactsReloadPreservesIdentityAndActiveLeaseProtection(MIndexASTHierarchyTest.java:291)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

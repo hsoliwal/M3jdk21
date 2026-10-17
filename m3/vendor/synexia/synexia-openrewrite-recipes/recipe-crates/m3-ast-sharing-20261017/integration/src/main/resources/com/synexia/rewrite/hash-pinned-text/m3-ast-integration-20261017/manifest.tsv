@@ -1,0 +1,5 @@
+.github/workflows/m3-compiletime-precompute.yml	1e5b2e4fede0326274041eb4422b88f09d275b4c6722e3903a676f5b72b764de	59e86aea0d16a2f92d434f1aaea0ea2416baab7c9bacaaf40481d4a1c18c28d7	000-m3-compiletime-precompute.yml.txt
+m3/compiler/ast-sharing-20261017/CATALOGUE_INDEX.tsv	ABSENT	cc52899e27c499ad5988c801aee395b9b16c2a42d86b915deb443f6986030409	001-CATALOGUE_INDEX.tsv.txt
+m3/compiler/ast-sharing-20261017/README.md	ABSENT	641989c0a400dc28a2691ca07cdf2f1917be7292042dda96620b07dd73a71b49	002-README.md.txt
+m3/compiler/ast-sharing-20261017/REPRODUCE.md	ABSENT	ec6b87dc328fc150519e02526e81b1819b3f79f21639dc08754643ee7bf4f367	003-REPRODUCE.md.txt
+m3/compiler/ast-sharing-20261017/handoff.json	ABSENT	a2873a1a4bdeccefe5806aa31bd115cf4cd1ac0135715fa8abc8916a3622bef7	004-handoff.json.txt

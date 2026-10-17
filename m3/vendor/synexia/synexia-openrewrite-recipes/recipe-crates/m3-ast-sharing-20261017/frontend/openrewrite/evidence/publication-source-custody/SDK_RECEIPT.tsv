@@ -1,0 +1,6 @@
+provider	M3HashPinnedJavaSnapshotRecipe
+mode	JAVA_LST
+results	1
+fixed_point_results	0
+target	synexia-mindex/compiler-openrewrite/src/main/java/com/synexia/mindex/compiler/ast/M3OpenRewriteSharedAST.java
+sha256	c12d325da4c8fe2dec533ffb728d8e9b815f40c5e65ee1eae54534f4cf2a2884

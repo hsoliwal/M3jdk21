@@ -1,0 +1,19 @@
+{
+  "schema": "M3_AST_MODULE_WIRING_PROVIDERS_V1",
+  "revision": "3aa8e45d93f5fed721fdb64579b655f4a432a308",
+  "mode": "EXACT_CANONICAL_UPSTREAM_INPUT",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+      "git_blob": "9d0788d3717e017d58345c5c3e62022c2915a3c8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+      "git_blob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40"
+    }
+  ],
+  "superseded_local_extension": "99a1ff392d426f8deac0d3b79c67f5290de74995615a618f4e7e0dc1abff137b",
+  "policy": "historical extension recipe is evidence only and never materializes an owner"
+}

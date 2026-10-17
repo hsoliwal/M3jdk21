@@ -1,0 +1,109 @@
+{
+  "schema": "M3_AST_FINAL_PUBLIC_REPRODUCTION_AUDIT_V1",
+  "scope": "Read-only public-packet reproduction review, with explicitly authorized proof-utility corrections and focused rechecks. No product edits by this audit.",
+  "status": "completed",
+  "reviewed_source_sha256": {
+    "frontend/build_candidates.py": "f89507128a8b3c210ddaac7926519011c429646ba7b0effe624532cc0ed98f97",
+    "cache/build_native_proof.py": "8ecebfb6da6a29186e5f8e831e2f44361a2a7f94fe79ca9d4a317e2924776e7d",
+    "cache/pom-runtime.xml": "9b64ce9f740b9b903e70599dd6ea535b31f4e0929d003d2f5d4021404041f497",
+    "cache/src/test/java/com/synexia/rewrite/M3ASTCacheRecipeTest.java": "7eb39dabd4c045d0b9151761f29ce56f736804a81747be40e517b50aa85aed9b",
+    "frontend/hierarchy/build.py": "966183e7c22812e0d9e5cc3f4bc29fcbe3d8700bb1c7384a94e6d2716eaff12f",
+    "frontend/module-wiring/verify.py": "af57b756fda466cff1fa80dc06e8b8d9c725cbee8edb974517e4181abb9b0e99",
+    "frontend/module-wiring/src/test/java/com/synexia/rewrite/WiringSupport.java": "848a84afbe81511373e999794613d3f6ad32e6e94533d626bf71d09bdd2cc321",
+    "frontend/openrewrite/verify.py": "934945121390b438f4641f9a1b3c88260e990bbf9b3a5db4cebad02cffe9e519",
+    "integration/compiletime-workflow.template.yml": "59e86aea0d16a2f92d434f1aaea0ea2416baab7c9bacaaf40481d4a1c18c28d7",
+    "integration/verify_target_sources.py": "dec40c6d19e4d8b7ab6d105836969aa2066bdafd4f5e6b6e68dcce9265de1847"
+  },
+  "findings": [
+    {
+      "id": "cache-runtime-inputs",
+      "result": "satisfied",
+      "evidence": "cache recipe SDK test unconditionally calls writeRuntimeInputs after actual emission and before optional materialization; CI runs that SDK test before native compilation and pom-runtime.xml. All nine runtime inputs are generated from packet templates."
+    },
+    {
+      "id": "frontend-public-inputs",
+      "result": "satisfied",
+      "evidence": "build_candidates.py reads retained source pins and actual cache/frontend/hierarchy SDK candidate roots, compiles in a unique temporary generation, and publishes complete artifacts. It does not read an unpublished canonical checkout."
+    },
+    {
+      "id": "hierarchy-output-reuse",
+      "result": "fixed-and-rechecked",
+      "evidence": "Owned build.py now uses a unique temporary source/class generation, qualified JAR publication and complete six-test-source publication. --jdk/JAVA_HOME and an optional --base-jar replace private toolchain assumptions. Final strict compile and all40 runtime contracts passed against frozen f4baf0/3f50."
+    },
+    {
+      "id": "canonical-reactor-assumption",
+      "result": "fixed-by-owner-inspection-confirmed",
+      "evidence": "module-wiring/verify.py now admits an optional --canonical-checkout; without it the canonical service is read from actual SDK candidates and reactor availability is explicitly UNAVAILABLE. No nonexistent public vendor reactor is invoked."
+    },
+    {
+      "id": "native-and-optional-output-reuse",
+      "result": "fixed-by-owner-inspection-confirmed",
+      "evidence": "Native proof now compiles in a unique temporary generation and publishes completed output; optional OpenRewrite proof now uses a unique work directory. Their execution receipts remain owned by the respective integration owners."
+    },
+    {
+      "id": "optional-dependency-classpath",
+      "result": "satisfied-by-CI-order",
+      "evidence": "The optional verifier consumes the local Surefire java.class.path from its actual SDK run, including pinned OpenRewrite8.17.1 artifacts. CI runs that SDK immediately before verification; archived reports are not substitute build inputs."
+    },
+    {
+      "id": "fresh-jdk-artifact-admission",
+      "result": "fixed-and-rechecked",
+      "evidence": "The default exact compiler pin remains. Explicit receipt admission binds actual patch bytes to exactly four source pins, the pinned compiler manifest and all retained templates; coexistence requires the identical receipt. Ten finite admission/refusal tests and actual frozen-receipt admission passed; original70+9 execution receipts are unchanged."
+    },
+    {
+      "id": "actual-receiver-source-readback",
+      "result": "fixed-and-rechecked",
+      "evidence": "New read-only integration checker verifies128 final Java/native/descriptor sources from eight pinned active manifests plus exact upstream module descriptor custody. Primary/recovery overlaps must agree or form an explicit sealed successor edge. Actual target passed; a complete temporary source fixture with one changed comment refused at that exact file."
+    },
+    {
+      "id": "upstream-module-descriptor-readback",
+      "result": "resolved-by-root-before-final-readback",
+      "evidence": "Initial inspection found only the M3AST Consumer uses clause and builtin Plugin provides clause missing from the local target descriptor. Root restored exact upstream custody; final target descriptor SHAae52d173 and public API SHA6a8bccb5 both pass."
+    }
+  ],
+  "ci_observed": {
+    "cache_sdk_before_runtime": true,
+    "optional_sdk_before_verify": true,
+    "all_module_wiring_sdk_tests_selected": true,
+    "public_api_trigger_present": true,
+    "module_descriptor_trigger_present": true,
+    "actual_target_source_step_present": true,
+    "receipt_admission_flags_present": true
+  },
+  "proofs": {
+    "final_composed_hierarchy": {
+      "path": "final-composed/QUALIFICATION.json",
+      "sha256": "f2d149aba0468afddafa5260f928a1af442f2a9d7ca5abefb43125321c186896",
+      "runtime_tests": 40
+    },
+    "final_compilation": {
+      "path": "final-composed/COMPILE.json",
+      "sha256": "509032a22ac199f21addddb7bc6b5adfaf8f25ce37ae50863b9b41654ec2a850"
+    },
+    "artifact_admission": {
+      "path": "../../upstream-contract/evidence/receipt-admission/QUALIFICATION.json",
+      "sha256": "ba468fbb2d6dea10fc3a9304fc808ade18f399c6cfd2d46b4c358c217fca8402",
+      "unit_tests": 10
+    },
+    "actual_target": {
+      "path": "target-source-readback/actual-target.json",
+      "sha256": "ba8d529b169af483dfc5e755a8fba54a8f69cdae47e1f680c711680f9241ff45",
+      "sources_verified": 128
+    },
+    "altered_source_refusal": {
+      "path": "target-source-readback/REFUSAL.json",
+      "sha256": "9a4cacdd5139a311ff9435fb8c7277a5674756252cf748281b4d503498765eea"
+    },
+    "generated_path_inventory": {
+      "path": "FINAL_GENERATED_PATHS.json",
+      "sha256": "d906f6a37f8257815f10eb8157774fa57e094b1294b8d4671e58d537f0261b53",
+      "entries": 46
+    }
+  },
+  "qualification_limits": [
+    "The normal Maven/module gates own POMs, Plugin service descriptors and their source closure.",
+    "The central registry has separate schema, fixed-point and protected-sequence qualification.",
+    "The source checker allows added unrelated files and does not promote any global receiving phase.",
+    "No full JDK, JCK or whole canonical reactor claim is made."
+  ]
+}

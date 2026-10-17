@@ -1,0 +1,42 @@
+{
+  "schema": "M3_UPSTREAM_ARTIFACT_ADMISSION_SUCCESSOR_V1",
+  "status": "passed",
+  "unit_tests": 10,
+  "compiler_or_linked_image_tests_rerun": false,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_artifact_admission.py",
+    "-v"
+  ],
+  "actual_frozen_receipt_admission": {
+    "mode": "sealed-build-receipt",
+    "receipt_sha256": "c080bf488cb333f94454320c0f7f366353c1643266ca409a6a61546a750c4cf6",
+    "compiler_manifest_sha256": "94420df2d3d252d6c4bd1b52469a55b52609bf075fef8f0d2e7550507ed0011f",
+    "compiler_source_sha256": {
+      "com/sun/source/util/M3AST.java": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+      "com/sun/tools/javac/m3/M3ASTPC.java": "a834fe19fdfdfa74f8641f3d02e552d19ed4eea97088d4739fb397ab5f36429b",
+      "com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java": "0c236a3e9c8ac5507865ec9b15d45f83312eece4a6b6c4e27dd5f4cfb302824d",
+      "com/sun/tools/javac/main/JavaCompiler.java": "51c5426f32877d03b30554646e559e65f264de92ccfa820799936a54f1d48fc3"
+    },
+    "patch_sha256": "3f50d59cca1cf7cf2811c0bb1da9314b71240c7f81f37854ed6fc021f03681b4",
+    "plugin_sha256": "f4baf0ae24e58c290a7de403c0571dccbe35c825694729aca40c3408db5b905c"
+  },
+  "historical_exact_pin_admission": {
+    "mode": "exact-artifact-pin",
+    "patch_sha256": "3f50d59cca1cf7cf2811c0bb1da9314b71240c7f81f37854ed6fc021f03681b4"
+  },
+  "historical_70_plus_9_receipts_unchanged": true,
+  "driver_sha256": {
+    "qualify.py": "04b2e0a4e7cd7af2134c16df1820773eac18143ec7b54f026d622eed4b6a77cf",
+    "coexistence.py": "dad37f31518f9e0bd87809f1136390d02eed38b69f5c5b46250d627f7ff014ef",
+    "artifact_admission.py": "913a77a35526809d09223b8f5effba5d75ecf05ba96aa1a96ff23b1874b8c80f",
+    "tests/test_artifact_admission.py": "0de660a513f6823d848a9e10d707ec19d46dffa34ff2821e0df09b99b7ae8ef5"
+  },
+  "log_sha256": "34b82eb72fdf430b5379f6d9e981450a2c5eb91a83138db988db1846c2e4ae66"
+}

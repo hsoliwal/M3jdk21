@@ -1,0 +1,302 @@
+java.base@21.0.2
+exports java.io
+exports java.lang
+exports java.lang.annotation
+exports java.lang.constant
+exports java.lang.foreign
+exports java.lang.invoke
+exports java.lang.module
+exports java.lang.ref
+exports java.lang.reflect
+exports java.lang.runtime
+exports java.math
+exports java.net
+exports java.net.spi
+exports java.nio
+exports java.nio.channels
+exports java.nio.channels.spi
+exports java.nio.charset
+exports java.nio.charset.spi
+exports java.nio.file
+exports java.nio.file.attribute
+exports java.nio.file.spi
+exports java.security
+exports java.security.cert
+exports java.security.interfaces
+exports java.security.spec
+exports java.text
+exports java.text.spi
+exports java.time
+exports java.time.chrono
+exports java.time.format
+exports java.time.temporal
+exports java.time.zone
+exports java.util
+exports java.util.concurrent
+exports java.util.concurrent.atomic
+exports java.util.concurrent.locks
+exports java.util.function
+exports java.util.jar
+exports java.util.random
+exports java.util.regex
+exports java.util.spi
+exports java.util.stream
+exports java.util.zip
+exports javax.crypto
+exports javax.crypto.interfaces
+exports javax.crypto.spec
+exports javax.net
+exports javax.net.ssl
+exports javax.security.auth
+exports javax.security.auth.callback
+exports javax.security.auth.login
+exports javax.security.auth.spi
+exports javax.security.auth.x500
+exports javax.security.cert
+uses java.lang.System$LoggerFinder
+uses java.net.ContentHandlerFactory
+uses java.net.spi.InetAddressResolverProvider
+uses java.net.spi.URLStreamHandlerProvider
+uses java.nio.channels.spi.AsynchronousChannelProvider
+uses java.nio.channels.spi.SelectorProvider
+uses java.nio.charset.spi.CharsetProvider
+uses java.nio.file.spi.FileSystemProvider
+uses java.nio.file.spi.FileTypeDetector
+uses java.security.Provider
+uses java.text.spi.BreakIteratorProvider
+uses java.text.spi.CollatorProvider
+uses java.text.spi.DateFormatProvider
+uses java.text.spi.DateFormatSymbolsProvider
+uses java.text.spi.DecimalFormatSymbolsProvider
+uses java.text.spi.NumberFormatProvider
+uses java.time.chrono.AbstractChronology
+uses java.time.chrono.Chronology
+uses java.time.zone.ZoneRulesProvider
+uses java.util.random.RandomGenerator
+uses java.util.spi.CalendarDataProvider
+uses java.util.spi.CalendarNameProvider
+uses java.util.spi.CurrencyNameProvider
+uses java.util.spi.LocaleNameProvider
+uses java.util.spi.ResourceBundleControlProvider
+uses java.util.spi.ResourceBundleProvider
+uses java.util.spi.TimeZoneNameProvider
+uses java.util.spi.ToolProvider
+uses javax.security.auth.spi.LoginModule
+uses jdk.internal.io.JdkConsoleProvider
+uses jdk.internal.logger.DefaultLoggerFinder
+uses sun.text.spi.JavaTimeDateTimePatternProvider
+uses sun.util.locale.provider.LocaleDataMetaInfo
+uses sun.util.resources.LocaleData$CommonResourceBundleProvider
+uses sun.util.resources.LocaleData$SupplementaryResourceBundleProvider
+uses sun.util.spi.CalendarProvider
+provides java.nio.file.spi.FileSystemProvider with jdk.internal.jrtfs.JrtFileSystemProvider
+provides java.util.random.RandomGenerator with java.security.SecureRandom java.util.Random java.util.SplittableRandom
+qualified exports com.sun.crypto.provider to jdk.crypto.cryptoki
+qualified exports com.sun.security.ntlm to java.security.sasl
+qualified exports jdk.internal.access to java.desktop java.logging java.management java.naming java.rmi jdk.charsets jdk.crypto.cryptoki jdk.jartool jdk.jfr jdk.jlink jdk.net jdk.sctp
+qualified exports jdk.internal.classfile to jdk.jartool jdk.jlink jdk.jshell
+qualified exports jdk.internal.classfile.attribute to jdk.jartool jdk.jlink
+qualified exports jdk.internal.classfile.constantpool to jdk.jartool jdk.jlink
+qualified exports jdk.internal.classfile.instruction to jdk.jlink jdk.jshell
+qualified exports jdk.internal.event to jdk.jfr
+qualified exports jdk.internal.foreign to jdk.incubator.vector
+qualified exports jdk.internal.io to jdk.internal.le jdk.jshell
+qualified exports jdk.internal.javac to java.compiler jdk.compiler jdk.incubator.vector jdk.jshell
+qualified exports jdk.internal.jimage to jdk.jlink
+qualified exports jdk.internal.jimage.decompressor to jdk.jlink
+qualified exports jdk.internal.jmod to jdk.compiler jdk.jlink
+qualified exports jdk.internal.loader to java.instrument java.logging java.naming
+qualified exports jdk.internal.logger to java.logging
+qualified exports jdk.internal.misc to java.desktop java.logging java.management java.naming java.net.http java.rmi java.security.jgss jdk.attach jdk.charsets jdk.compiler jdk.crypto.cryptoki jdk.incubator.vector jdk.internal.vm.ci jdk.jfr jdk.jshell jdk.nio.mapmode jdk.unsupported
+qualified exports jdk.internal.module to java.instrument java.management.rmi jdk.jartool jdk.jfr jdk.jlink jdk.jpackage
+qualified exports jdk.internal.org.objectweb.asm to jdk.jfr
+qualified exports jdk.internal.org.objectweb.asm.commons to jdk.jfr
+qualified exports jdk.internal.org.objectweb.asm.tree to jdk.jfr
+qualified exports jdk.internal.org.objectweb.asm.util to jdk.jfr
+qualified exports jdk.internal.org.xml.sax to jdk.jfr
+qualified exports jdk.internal.org.xml.sax.helpers to jdk.jfr
+qualified exports jdk.internal.perf to java.management jdk.internal.jvmstat jdk.management.agent
+qualified exports jdk.internal.platform to jdk.jfr jdk.management
+qualified exports jdk.internal.ref to java.desktop java.net.http jdk.naming.dns
+qualified exports jdk.internal.reflect to java.logging java.sql java.sql.rowset jdk.dynalink jdk.internal.vm.ci jdk.unsupported
+qualified exports jdk.internal.util to java.desktop java.prefs java.security.jgss java.smartcardio jdk.charsets jdk.jlink jdk.jpackage jdk.net
+qualified exports jdk.internal.util.random to jdk.random
+qualified exports jdk.internal.util.xml to jdk.jfr
+qualified exports jdk.internal.util.xml.impl to jdk.jfr
+qualified exports jdk.internal.vm to java.management jdk.internal.jvmstat jdk.internal.vm.ci jdk.management jdk.management.agent
+qualified exports jdk.internal.vm.annotation to java.instrument jdk.incubator.vector jdk.internal.vm.ci jdk.jfr jdk.unsupported
+qualified exports jdk.internal.vm.vector to jdk.incubator.vector
+qualified exports sun.invoke.util to jdk.compiler
+qualified exports sun.net to java.net.http jdk.naming.dns
+qualified exports sun.net.dns to java.security.jgss jdk.naming.dns
+qualified exports sun.net.ext to jdk.net
+qualified exports sun.net.util to java.desktop java.net.http jdk.jconsole jdk.sctp
+qualified exports sun.net.www to java.net.http jdk.jartool
+qualified exports sun.net.www.protocol.http to java.security.jgss
+qualified exports sun.nio.ch to java.management jdk.crypto.cryptoki jdk.net jdk.sctp
+qualified exports sun.nio.cs to java.desktop jdk.charsets
+qualified exports sun.nio.fs to jdk.net
+qualified exports sun.reflect.annotation to jdk.compiler
+qualified exports sun.reflect.generics.reflectiveObjects to java.desktop
+qualified exports sun.reflect.misc to java.datatransfer java.desktop java.management java.management.rmi java.rmi java.sql.rowset
+qualified exports sun.security.action to java.desktop java.security.jgss jdk.crypto.ec
+qualified exports sun.security.internal.interfaces to jdk.crypto.cryptoki
+qualified exports sun.security.internal.spec to jdk.crypto.cryptoki
+qualified exports sun.security.jca to java.smartcardio jdk.crypto.cryptoki jdk.crypto.ec jdk.naming.dns
+qualified exports sun.security.pkcs to jdk.crypto.ec jdk.jartool
+qualified exports sun.security.provider to java.rmi java.security.jgss jdk.crypto.cryptoki jdk.crypto.ec jdk.security.auth
+qualified exports sun.security.provider.certpath to java.naming jdk.jartool
+qualified exports sun.security.rsa to jdk.crypto.cryptoki
+qualified exports sun.security.timestamp to jdk.jartool
+qualified exports sun.security.tools to jdk.jartool
+qualified exports sun.security.util to java.desktop java.naming java.rmi java.security.jgss java.security.sasl java.smartcardio java.xml.crypto jdk.crypto.cryptoki jdk.crypto.ec jdk.jartool jdk.security.auth jdk.security.jgss
+qualified exports sun.security.util.math to jdk.crypto.ec
+qualified exports sun.security.util.math.intpoly to jdk.crypto.ec
+qualified exports sun.security.validator to jdk.jartool
+qualified exports sun.security.x509 to jdk.crypto.cryptoki jdk.crypto.ec jdk.jartool
+qualified exports sun.util.cldr to jdk.jlink
+qualified exports sun.util.locale.provider to java.desktop jdk.jlink jdk.localedata
+qualified exports sun.util.logging to java.desktop java.logging java.prefs
+qualified exports sun.util.resources to jdk.localedata
+contains java.lang.foreign.snippets
+contains jdk.internal
+contains jdk.internal.access.foreign
+contains jdk.internal.classfile.components
+contains jdk.internal.classfile.impl
+contains jdk.internal.classfile.impl.verifier
+contains jdk.internal.foreign.abi
+contains jdk.internal.foreign.abi.aarch64
+contains jdk.internal.foreign.abi.aarch64.linux
+contains jdk.internal.foreign.abi.aarch64.macos
+contains jdk.internal.foreign.abi.aarch64.windows
+contains jdk.internal.foreign.abi.fallback
+contains jdk.internal.foreign.abi.ppc64
+contains jdk.internal.foreign.abi.ppc64.linux
+contains jdk.internal.foreign.abi.riscv64
+contains jdk.internal.foreign.abi.riscv64.linux
+contains jdk.internal.foreign.abi.s390
+contains jdk.internal.foreign.abi.s390.linux
+contains jdk.internal.foreign.abi.x64
+contains jdk.internal.foreign.abi.x64.sysv
+contains jdk.internal.foreign.abi.x64.windows
+contains jdk.internal.foreign.layout
+contains jdk.internal.icu.impl
+contains jdk.internal.icu.impl.data.icudt72b
+contains jdk.internal.icu.lang
+contains jdk.internal.icu.text
+contains jdk.internal.icu.util
+contains jdk.internal.jrtfs
+contains jdk.internal.math
+contains jdk.internal.org.objectweb.asm.signature
+contains jdk.internal.org.objectweb.asm.tree.analysis
+contains jdk.internal.platform.cgroupv1
+contains jdk.internal.platform.cgroupv2
+contains jdk.internal.util.regex
+contains sun.invoke
+contains sun.invoke.empty
+contains sun.launcher
+contains sun.launcher.resources
+contains sun.net.ftp
+contains sun.net.ftp.impl
+contains sun.net.idn
+contains sun.net.sdp
+contains sun.net.smtp
+contains sun.net.spi
+contains sun.net.www.content.text
+contains sun.net.www.http
+contains sun.net.www.protocol.file
+contains sun.net.www.protocol.ftp
+contains sun.net.www.protocol.http.ntlm
+contains sun.net.www.protocol.https
+contains sun.net.www.protocol.jar
+contains sun.net.www.protocol.jmod
+contains sun.net.www.protocol.jrt
+contains sun.net.www.protocol.mailto
+contains sun.nio
+contains sun.reflect.generics.factory
+contains sun.reflect.generics.parser
+contains sun.reflect.generics.repository
+contains sun.reflect.generics.scope
+contains sun.reflect.generics.tree
+contains sun.reflect.generics.visitor
+contains sun.security.pkcs10
+contains sun.security.pkcs12
+contains sun.security.provider.certpath.ssl
+contains sun.security.ssl
+contains sun.security.tools.keytool
+contains sun.text
+contains sun.text.resources
+contains sun.text.resources.cldr
+contains sun.text.spi
+contains sun.util
+contains sun.util.calendar
+contains sun.util.locale
+contains sun.util.resources.cldr
+contains sun.util.spi
+platform linux-amd64
+hashes java.datatransfer SHA-256 ab8b1dc4a84f9a6161f9e98a40142672caa3412a857598fad61e8648a028b699
+hashes java.desktop SHA-256 866bf01e36845f40b42ac1f8406b6702df477fa7a1f6513d16d0e77699b73703
+hashes java.instrument SHA-256 636411cf506d443ddeb4e6afba830db868c5a45733e917d80d0e2c3b735b2bb0
+hashes java.logging SHA-256 ee0007347cd53916dcb48557b18caeddbe24ac6166eb399c191f61cf7dad7e0e
+hashes java.management SHA-256 89efd00cdfa6f5de2dbbd3c4e6ed44dc36ec33765cabc653d693d7b71f983751
+hashes java.management.rmi SHA-256 51fc6a551cb348868fae0f0d44b9b63c91e1b1b7c936bde3231ae6106fb99c1d
+hashes java.naming SHA-256 8e3124a4b005bff3374cbb80cd212df3bc47cf2bdffbc3a058a83523d3904081
+hashes java.net.http SHA-256 76b594b22627d3955e224b20ba2c29f29d9ed236181b0a03d293dbec70eadf2b
+hashes java.prefs SHA-256 97caf1557aa2aab95a7ff7556aec676264d21cf6f7d66d0dfe5a86fc2b997fb3
+hashes java.rmi SHA-256 45292339a52f88be268400510d707157dc787ff9585a7043510e4b05cc24a219
+hashes java.scripting SHA-256 68c9d3b1cb882bb6eb1555ff63c665cb1d9b6ebffa507550e878b665f2dc5fd9
+hashes java.se SHA-256 6c2dea2428844fa48247c489e1f45990ff20d66f9b4509ff6c30b7124ace8d88
+hashes java.security.jgss SHA-256 b3c529e03b1a949f5e0322c25fb6a193b2c333a1376d945d2f5a0e19eb884e94
+hashes java.security.sasl SHA-256 4088e7b0379cc16ac4b28539e306e8d5614f1f79177b8d692f7ef5a596aa958f
+hashes java.smartcardio SHA-256 6aa5daf003925300ff9fadf4307523b00dea79b632eb7fba440608cc0e88eaab
+hashes java.sql SHA-256 9b724a7d52f0761a3c6325fca24d2fe4040c4fadbb4ebe18c23cd3ac49ff356e
+hashes java.sql.rowset SHA-256 34be0c45e68eda5225c1148d70a667ebade76977279cc162226965c87c352272
+hashes java.transaction.xa SHA-256 8511472a7bacb21690d9dc21d97da1306aac55ac8af679f1c8be1536d6361e73
+hashes java.xml SHA-256 e70478395f1c2e5d020a98ef9a29420ba08cca3ae56844aca554bf003d412b93
+hashes java.xml.crypto SHA-256 4b3201cf9f702c6dc1fd35ca88aea48eb9f290eac3ec3398aee04379519029e7
+hashes jdk.accessibility SHA-256 f30bce12040e341a68b8f82a1cc51bad4b8bc1c6fee882c108023876d544023d
+hashes jdk.attach SHA-256 65967d07f740e6e6610d650b12f246e4f3f4b7d6c9801bb8599c56db465bdeaa
+hashes jdk.charsets SHA-256 b3fa23a95f0db7d78ddfc5f3aed211ff11ddedfd49463d005636d09de0b3ffaf
+hashes jdk.compiler SHA-256 7760fee0263d4d1400b24b8d94813341c5194126d9fc6460a520798a72647fcc
+hashes jdk.crypto.cryptoki SHA-256 0914429a6c6ed28e260b7dde3b6e87678671c1d087d42b79afdd50d539e86ccb
+hashes jdk.crypto.ec SHA-256 9d73870128c539ef752b051bd3fde099ae6975367cfe0bd5e50e24ffe086795f
+hashes jdk.dynalink SHA-256 f4d806874b0e95cb70796ea6f2c03a513c998727861d5eaeb80672b98f0c44a9
+hashes jdk.editpad SHA-256 767cd94d9e1c8d7bcccffc6c5bbae064a300874a77de652ec24080490ea33504
+hashes jdk.hotspot.agent SHA-256 276abc89a5bce6d65192ea3eecd6210cc1ffe5cc109375230d5b53e81c427c28
+hashes jdk.httpserver SHA-256 e582486822e2c917bedf59185568ba2f0a38e8e9809a1e2e36c76cdc8080e7a3
+hashes jdk.incubator.vector SHA-256 73764a984069e45858111709cf56a17a570b10eb1086f5890e79cebb8a9628b9
+hashes jdk.internal.ed SHA-256 d2d9a76d52f1e3791299c4c63b208ed97a70dcb010173468dc092d2b1c76efcf
+hashes jdk.internal.jvmstat SHA-256 f54b4f3586bafecfc7e9bb5b4e3e863a7ad88e6a0887b569ae85af75f3973854
+hashes jdk.internal.le SHA-256 1962737de22c58f9982488cbe17d12713cf118068a08a1c0d13327a75c08f06f
+hashes jdk.internal.opt SHA-256 dd021c81095dcb131f3311ecff878ae6922114b30941f31c6f574e8a6894b80c
+hashes jdk.internal.vm.ci SHA-256 d5b02627ec14fde053b9f66afc2aecc248281ee920cd36b152624c6ba84d76ff
+hashes jdk.jartool SHA-256 f3778346ebc805d169e6fe302ed7776caa1e3f77e75dc23210cbcb562bfe6fb2
+hashes jdk.javadoc SHA-256 7f3bed72fa9664339228d53335a66e71282e8b9bacbd8f27b8ec0c72bd0b14b2
+hashes jdk.jcmd SHA-256 f35b9eaa418a1e95c81d93dcc41c7d1b7f1e51129eae8c8bb219c559c13b7c7c
+hashes jdk.jconsole SHA-256 5ed71c5cf545af9290f4f13219c544ba0dd9cc0430928946981ae08daca7c930
+hashes jdk.jdeps SHA-256 4ef62ba71dee983812c61ec020ab8a459c1d4cc6db8297d30e39f49fdffc7e59
+hashes jdk.jdi SHA-256 1ce24c629824b3a14d4683528868a6998a264e9b1aa66892656fa715a1e23db2
+hashes jdk.jdwp.agent SHA-256 d7056353fa2a9d861497b1008d3bb766b33b9be8bf47b2f2f987dc01fb69319e
+hashes jdk.jfr SHA-256 51473465146db47ffc94b69eeb4d31a9929362af19e81fa68c30500b2113894f
+hashes jdk.jlink SHA-256 569e5222bc9120cb76fd72060f8321210c8281e0ccc1615e0358ebe6d8776834
+hashes jdk.jpackage SHA-256 c47296ec6464b852a9de5a9dc7aad04d2ba4a890825d826f0452b133cf10aa3a
+hashes jdk.jshell SHA-256 7f1fd37864208d2dd0c0379eb6448706b6d5afac3994d00dbe3ee27221765cde
+hashes jdk.jsobject SHA-256 2b12db05c50d09100b4083fca36a51e585065a3ee77c4a98cc679062f08627a1
+hashes jdk.jstatd SHA-256 cd900948b6ff1e9731ad8ac535435d53c76697fb7c382c4e2c9ba5fa038254cd
+hashes jdk.localedata SHA-256 f1d33904213c1f05853057baf787631003654c93900973248b92842ba7f56b20
+hashes jdk.management SHA-256 ec9b5372c5fc5edfad0626b645a8149de1ce83b2c891e9e65a211a4dc8eea0f7
+hashes jdk.management.agent SHA-256 4f4b6289d217b78bb80bba739cc4bb0505c4520d9c42a220504d0ba0e95c0841
+hashes jdk.management.jfr SHA-256 1b2c81fff90fb0e4c38422e8e89b98a4c9c34536ddab21b8d0033e4fb32c2757
+hashes jdk.naming.dns SHA-256 fe4a31311d309a73904f1f08fdadd8166111adb398a483be072b746baf0999cb
+hashes jdk.naming.rmi SHA-256 24bdac91268f37d82924c87ce51f92eadf2ef26b6b22c3eafe030ab8a8784c2c
+hashes jdk.net SHA-256 2b9eb54781a173ff06ecd22bd4937e0dbf87f3e5e0f460ea08355827759cc6bd
+hashes jdk.nio.mapmode SHA-256 4b9f6aa9fc3dd0b3a72037b9241f5daf5e1b8a17c9387bc0821282389c9a21a9
+hashes jdk.random SHA-256 67aad0c009f937abcc122042c9929ee623fceffe83e6d7a1a3560f7a36424256
+hashes jdk.sctp SHA-256 7b930785e6731acafbd82f35177b487c5dd48a29c7efcb819352eacc20e18db5
+hashes jdk.security.auth SHA-256 08b0526485df75eb8670832eb7d305ee21775d0435b5783d0c69ceeadf242eec
+hashes jdk.security.jgss SHA-256 09502012dc0f05bd6e78ea398929b28ab585625630a35b68c9803fa72ea065b6
+hashes jdk.unsupported SHA-256 63d3f4836c4fcd2a969724ed1397e085c3940085c671bea0b597a25ca24b724b
+hashes jdk.unsupported.desktop SHA-256 2934f068597d6f802913c3521f1acafb79a7b811e0f380ecd24ae983302dba2e
+hashes jdk.xml.dom SHA-256 b38c98846b0d86db7bfdf5d17bfb4925fe7ebbd41b666885330026d0c23d2b6e
+hashes jdk.zipfs SHA-256 fe7e142a4b81b3395fad796b322e57b6671d2450cdfe8be27b5434676a838972
+

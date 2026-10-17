@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.verification</groupId>
+  <artifactId>m3-ast-frontend-runtime-proof</artifactId>
+  <version>1</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <m3.frontend.candidate.jar>${project.basedir}/../target/m3-ast-sharing.jar</m3.frontend.candidate.jar>
+    <m3.frontend.patch.jar>${project.basedir}/../target/m3-javac-patch.jar</m3.frontend.patch.jar>
+    <m3.cache.native>${project.basedir}/../../cache/target/native/libsynexia_mindex_swap.so</m3.cache.native>
+  </properties>
+  <dependencies>
+    <!-- This is the local source-qualified candidate under test, never a downloaded runtime. -->
+    <dependency>
+      <groupId>com.synexia.verification</groupId><artifactId>m3-ast-frontend-candidate</artifactId><version>1</version>
+      <scope>system</scope><systemPath>${m3.frontend.candidate.jar}</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <directory>${project.basedir}/../target/runtime-tests</directory>
+    <testSourceDirectory>${project.basedir}</testSourceDirectory>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration><proc>none</proc><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+        <configuration>
+          <useModulePath>false</useModulePath>
+          <argLine>-Xmx512m --patch-module jdk.compiler=${m3.frontend.patch.jar} --add-exports jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED</argLine>
+          <systemPropertyVariables><m3.cache.native>${m3.cache.native}</m3.cache.native></systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

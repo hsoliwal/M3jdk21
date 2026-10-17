@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "recipe": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "crate": "m3-ast-registry-20261017",
+  "canonical_base": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "target_base": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "target_path": "m3/docs/name-mapping.json",
+  "before_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+  "after_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+  "schema_sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+  "intermediate_sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+  "routes": [
+    {
+      "crate": "m3-ast-registry-20261017",
+      "before_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+      "after_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+      "manifest_sha256": "eb1b40276b76a57639775731fc8bdc5113b3d16019bf3aa03a33f6787e1e34b7"
+    },
+    {
+      "crate": "m3-ast-registry-hierarchy-20261017",
+      "before_sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+      "after_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+      "manifest_sha256": "74a6f750737d90cdd56213b3655c82f78d1f1272e14e468c109b71187b043b9a"
+    }
+  ],
+  "recipe_owners": {
+    "M3HashPinnedJavaSnapshotRecipe.java": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+    "M3HashPinnedTextSnapshotRecipe.java": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+  },
+  "source_template_inputs": {
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/manifest.tsv": "c6084f617cbe23de0667a0cb9e4502d0afe6d0e958e5e543d1ca4c6f12b0deb7",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/004-M3File.java.txt": "2dda8ef7a912ce662e85731351cf19104d61b1adea0675d2d43805f1f0b85f90",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/manifest.tsv": "1a146bddd3924117abfa1e335b3f2e265b59cda4e52abd6d36e3630ffaa0cf0f",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/004-M3File.java.txt": "da2925fa912753fcd2cb69fd9c348c6fc1c2fc235a2ce1be006360597dd8565c",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/003-M3CompilationContext.java.txt": "5dc73a6cb4d0b1b7f5ff2a00e34ab706dd2606865421d3b2fed5ef4ba3acfa1e",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/003-M3CompilationContext.java.txt": "a71eb9aff9df4bc32bd31d20d97e711f97bcbf017a6c26e96a9665bfd69f3e23",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/000-M3AST.java.txt": "8923652ba76b55737a892805d9c1c921513c773eec9d3439dcfaf6f09d0df981",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/000-M3AST.java.txt": "d6384d68addb1702ac5fc15708dd603aee270eff2281a7b999576e44db4adcbb",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/005-M3JavacASTIndex.java.txt": "1430b06e00c8bf838ad23d915e5f08bc97b850a72386d8cf328e02f1b903ed34",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/005-M3JavacASTIndex.java.txt": "e381f163515d46ad8e2032622e9eb581a6a028a3b3d04fe37fa75430fe9336b5",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/001-M3ASTCodec.java.txt": "b4fc72dabfa3fbf7ded7bb4ca53f38b789ae6ab6c03a6f2d9dd68c326c8199c7",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/001-M3ASTCodec.java.txt": "b321a44eb790e503a94942482d84261f3368915c7ddbc06937ad583c74b5281b",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/002-M3ASTPlugin.java.txt": "4c96b3083cc3a3d38a2c1c25f66da62bccc97788a2b83b693f881ab6a948ddb4",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/002-M3ASTPlugin.java.txt": "0038001c542a432d9f796d80ecae61404b8f76ef9a2ffdfab88426097d2fe75d",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/manifest.tsv": "00e039e89bae3fc8d4b6bd637415ebdabf7023789e5d53914b85d5d6ca85e921",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/01-M3FileSourceFacts.java.txt": "3c6052c962b61b5cda14f1eab41a08f23a30c840a94f14ae2f57ef50f8fca32c",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv": "9c4c435a4908b35451b13acccc38825a05d2d6e1635bc13735e635ad05611a8f",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/01-M3FileSourceFacts.java.txt": "01bb62f9acc4fda98cc93ab63c83e259c22b70ba3a0757b195b071f80f2a74dd",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/00-M3ASTWorkspaceCache.java.txt": "7ad205f6521a14879ae537ff15a98199dc3b023ae7c69e844aea1f3664f5bae1",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/00-M3ASTWorkspaceCache.java.txt": "26e47cc50a069b25c45c77a67104b3e0b41abcfb3c6f8ba1ee2dbd452311feec",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/manifest.tsv": "94420df2d3d252d6c4bd1b52469a55b52609bf075fef8f0d2e7550507ed0011f",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/003-JavaCompiler.java.txt": "51c5426f32877d03b30554646e559e65f264de92ccfa820799936a54f1d48fc3",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/001-M3ASTPC.java.txt": "a834fe19fdfdfa74f8641f3d02e552d19ed4eea97088d4739fb397ab5f36429b",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/000-M3AST.java.txt": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/openrewrite/resources/com/synexia/rewrite/hash-pinned-java/m3-openrewrite-shared-ast-20261017/manifest.tsv": "04983e7a8c5aa0134f4d1c9011a5db909573896d1341a55f316262bb2e7fa9a3",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/openrewrite/resources/com/synexia/rewrite/hash-pinned-java/m3-openrewrite-shared-ast-20261017/M3OpenRewriteSharedAST.java.txt": "c12d325da4c8fe2dec533ffb728d8e9b815f40c5e65ee1eae54534f4cf2a2884",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-wiring-receiver-20261017/manifest.tsv": "3376b53ef986308efc1cc2ecc8ebdb0efd44f73c45a323f228af1a648e617d91",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-wiring-receiver-20261017/000-M3OpenRewriteSharedAST.java.txt": "d69c37b06fb02cbfa452dea6dfeee07563ad234f59929e255bce567f899bcde4",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/manifest.tsv": "8da5ba836914f077e8cee6ffdfef21956babd86d0a8e4efe5903cd2607f9d34a",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/000-MIndexASTHierarchy.java.txt": "39153fdaf1a926c8331a48a376b200315e4c1beea2c601b53b2ef59113ab3f84",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv": "3eee1a6a89dff5adbe5daeb80a5331f726c041e7585fdf9e4da1d36acc3fe9c8",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/000-M3ASTHierarchy.java.txt": "54725f3a7017725337f1ef3d51d813a88befa92996dc6a71963d02f4db69617d",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/004-MIndexAST.java.txt": "69866847dcfcc5fd4036359fdb9eff536561c758935b61b449e2782395aee9d0",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/006-MIndexAST.java.txt": "69866847dcfcc5fd4036359fdb9eff536561c758935b61b449e2782395aee9d0",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/005-MIndexPartialAstCache.java.txt": "6a8d31a2b05f42edf85915c4a48ef753594d3c19c57fbe9de9ef5ec688a8109e",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/009-MIndexPartialAstCache.java.txt": "6a8d31a2b05f42edf85915c4a48ef753594d3c19c57fbe9de9ef5ec688a8109e",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/001-MIndexASTHierarchyFacts.java.txt": "0ae813962a2899676d6ea61632809a31ffc53b578c072f3a711a3dacd76742bc",
+    "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/001-M3ASTHierarchyFacts.java.txt": "46f75ab8cbb47725a20ca0cf3a4da6c4153ee17a326d02c6bd7431418ebc8f0c"
+  },
+  "new_mapping_ids": [
+    "m3.ast-sharing.20261017.M3File",
+    "m3.ast-sharing.20261017.M3CompilationContext",
+    "m3.ast-sharing.20261017.M3AST",
+    "m3.ast-sharing.20261017.M3JavacASTIndex",
+    "m3.ast-sharing.20261017.M3ASTCodec",
+    "m3.ast-sharing.20261017.M3ASTPlugin",
+    "m3.ast-sharing.20261017.M3FileSourceFacts",
+    "m3.ast-sharing.20261017.M3ASTWorkspaceCache",
+    "m3.ast-sharing.20261017.JavaCompiler-source-observer",
+    "m3.ast-sharing.20261017.M3OpenRewriteSharedAST",
+    "m3.ast-sharing.20261017.M3ASTHierarchy",
+    "m3.ast-sharing.20261017.M3ASTHierarchyFacts"
+  ],
+  "new_mappings_sha256": "2a41dadc080a780fbdeea28926b05bc5f915a522f615c6ff2ba1d3454bba3dbc",
+  "final_commit_handoff": "m3/compiler/ast-sharing-20261017/handoff.json",
+  "changed_historical_record": "synexia.counterpart.MIndexCompilerASTPrecompute",
+  "allowed_historical_fields": [
+    "reason",
+    "observation"
+  ]
+}

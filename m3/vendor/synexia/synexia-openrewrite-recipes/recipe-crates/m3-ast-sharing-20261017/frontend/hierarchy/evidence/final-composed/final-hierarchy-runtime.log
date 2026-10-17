@@ -1,0 +1,48 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------< com.synexia.verification:m3-ast-hierarchy-runtime-proof >-------
+[INFO] Building m3-ast-hierarchy-runtime-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ m3-ast-hierarchy-runtime-proof ---
+[INFO] Deleting /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/runtime-tests/../target/runtime-tests
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-ast-hierarchy-runtime-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/runtime-tests/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-ast-hierarchy-runtime-proof ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-ast-hierarchy-runtime-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/runtime-tests/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-ast-hierarchy-runtime-proof ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 6 source files with javac [debug release 21] to ../target/runtime-tests/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-ast-hierarchy-runtime-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.compiletime.ast.M3ASTHierarchyTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.116 s -- in com.m3.compiletime.ast.M3ASTHierarchyTest
+[INFO] Running com.m3.compiletime.ast.M3ASTHierarchyFactsTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s -- in com.m3.compiletime.ast.M3ASTHierarchyFactsTest
+[INFO] Running com.synexia.mindex.compiler.ast.MIndexASTHierarchyFactsTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.147 s -- in com.synexia.mindex.compiler.ast.MIndexASTHierarchyFactsTest
+[INFO] Running com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.922 s -- in com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 40, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  13.554 s
+[INFO] Finished at: 2026-10-17T13:37:46+01:00
+[INFO] ------------------------------------------------------------------------

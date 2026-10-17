@@ -1,0 +1,11 @@
+{
+  "schema": "M3_AST_CUSTODIED_PROVIDER_SDK_RECHECK_V1",
+  "status": "PASS",
+  "tests": 4,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "log_sha256": "1f252d46628edbb32f2c79159df1955f6ae08d9481a87daf0bd988da922f0c99",
+  "source_receipt_sha256": "a19bafaa945efe4ae988503cf6842935289c3c7ffa60fa189f91648c2d019afc",
+  "scope": "Actual Java and text recipe SDK behavior rechecked after moving exact unchanged providers to public task-local custody."
+}

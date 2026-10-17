@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "probe_source_sha256": "072add81bd127277d3d0e50944ff2df7a67c4169e4da894f71692eae3b7c55f4",
+  "frontend_jar_sha256": "f4baf0ae24e58c290a7de403c0571dccbe35c825694729aca40c3408db5b905c",
+  "compiler_patch_sha256": "3f50d59cca1cf7cf2811c0bb1da9314b71240c7f81f37854ed6fc021f03681b4",
+  "linked_image_modules_sha256": "f4bb3a453e067a76d6821fb08116288255d824a8b1112955607d5ef5c8eadd04",
+  "upstream_test_was_modified": false,
+  "commands": [
+    {
+      "label": "compile-plugin-coexistence",
+      "argv": [
+        "/tmp/m3-ast-upstream-contract-jzrcrjsg/image/bin/javac",
+        "-J-Xmx256m",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-d",
+        "/tmp/m3-ast-upstream-contract-jzrcrjsg/coexistence/classes",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/proof/PluginCoexistenceProbe.java"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "plugin-coexistence",
+      "argv": [
+        "/tmp/m3-ast-upstream-contract-jzrcrjsg/image/bin/java",
+        "-Xmx512m",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-cp",
+        "/tmp/m3-ast-upstream-contract-jzrcrjsg/coexistence/classes:/tmp/m3-ast-final-artifacts-20261017/m3-ast-sharing.jar",
+        "PluginCoexistenceProbe",
+        "/tmp/m3-ast-upstream-contract-jzrcrjsg/coexistence/work"
+      ],
+      "exit_code": 0,
+      "log_sha256": "019446cb235c1d6264162c1a4118b6859a60f24a4ce640b38bc1845a063a34b9"
+    }
+  ],
+  "product_output_directory_touched": false,
+  "checks": 9,
+  "actual_parses": 1,
+  "plugins": [
+    "M3AST",
+    "M3ASTIndex"
+  ]
+}

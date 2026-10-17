@@ -1,0 +1,25 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ASTPluginServiceAdmission20261017
+displayName: Admit the two exact compiler plugin service owners
+description: Preserve existing path gates and add only the canonical and target M3AST service descriptors.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-wiring-engine-20261017
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ASTModuleWiringCanonical20261017
+displayName: Wire canonical AST compiler modules
+description: Seal native test opt-in and optional module metadata with exact compiler plugin service registration.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-ast-wiring-canonical-20261017
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ASTModuleWiringTarget20261017
+displayName: Wire the normal M3 AST compiler module
+description: Compile an exact vendored source closure, preserve ordinary sources, and isolate the optional OpenRewrite provider.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-ast-wiring-receiver-20261017
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-wiring-receiver-20261017

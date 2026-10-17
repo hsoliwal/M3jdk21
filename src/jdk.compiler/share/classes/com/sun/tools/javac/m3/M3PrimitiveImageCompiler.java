@@ -84,6 +84,13 @@ public final class M3PrimitiveImageCompiler {
             .thenComparing((a, b) -> Long.compareUnsigned(a.bits(), b.bits()));
 
     public static void main(String[] args) throws Exception {
+        run(args, task -> { });
+    }
+
+    /** Run the validated command with optional consumers attached before the same task parses. */
+    public static void run(String[] args, java.util.function.Consumer<? super JavacTask> beforeParse)
+            throws Exception {
+        Objects.requireNonNull(beforeParse, "beforeParse");
         Path out = null;
         Path slots = null;
         boolean foldExpressions = false;
@@ -125,11 +132,12 @@ public final class M3PrimitiveImageCompiler {
                 throw new IOException("output aliases input source: " + source);
             }
         }
-        emit(out, slots, sources, foldExpressions);
+        emit(out, slots, sources, foldExpressions, beforeParse);
     }
 
     private static void emit(Path out, Path slots, List<Path> sources,
-                             boolean foldExpressions) throws Exception {
+                             boolean foldExpressions,
+                             java.util.function.Consumer<? super JavacTask> beforeParse) throws Exception {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         if (compiler == null) throw new IllegalStateException("javac compiler unavailable");
         TreeSet<Entry> values = new TreeSet<>(ORDER);
@@ -139,6 +147,7 @@ public final class M3PrimitiveImageCompiler {
             Iterable<? extends JavaFileObject> units = fm.getJavaFileObjectsFromPaths(sources);
             JavacTask task = (JavacTask) compiler.getTask(null, fm, diagnostics,
                     List.of("--release", "21", "-proc:none", "-implicit:none"), null, units);
+            beforeParse.accept(task);
             List<CompilationUnitTree> parsed = new ArrayList<>();
             task.parse().forEach(parsed::add);
             task.analyze();

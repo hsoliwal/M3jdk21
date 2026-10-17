@@ -1,0 +1,13 @@
+{
+  "schema": "M3_AST_ORDINARY_LOCAL_SCOPE_V1",
+  "target_revision": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "same_blob_at_original_e336": true,
+  "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralHarvester.java",
+  "git_blob": "40400aaa7b1611cc5012a55579a5fed74f0cc3ad",
+  "before_sha256": "e4d1a2bced4ca3f33c743aa4be386ae546f5266f68473fd6e0f3fbba68f335f4",
+  "after_sha256": "0e4212f3adf1ca4c7bc7077d507810b42a342964b563f7ee81fdad469e11b865",
+  "manifest_sha256": "0ddab1b7ecc7a580a62866a08b655409b031bc80b9948f3fe43347b881987713",
+  "recipe": "com.synexia.m3.ASTOrdinaryLocalScope20261017",
+  "change": "Rename the normalized output Path local to publishedDirectory and its two uses; String CLI destination and staging/move behavior remain unchanged.",
+  "discovered_by": "evidence/normal-existing-local-scope-failure.log"
+}

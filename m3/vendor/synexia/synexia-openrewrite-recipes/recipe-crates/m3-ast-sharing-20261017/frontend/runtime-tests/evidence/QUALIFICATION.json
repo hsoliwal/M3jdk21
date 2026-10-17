@@ -1,0 +1,55 @@
+{
+  "schema": "M3_AST_FRONTEND_RUNTIME_QUALIFICATION_V2",
+  "status": "PASS",
+  "runtime": "OpenJDK21.0.2+13",
+  "plugin_sha256": "f4baf0ae24e58c290a7de403c0571dccbe35c825694729aca40c3408db5b905c",
+  "patch_sha256": "3f50d59cca1cf7cf2811c0bb1da9314b71240c7f81f37854ed6fc021f03681b4",
+  "native_library_sha256": "473f80b698901ed1fcfdf4643e7bcb002afb2b78040538861ecbf140d663bf3d",
+  "tests": 26,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "com.synexia.mindex.compiler.ast.M3ASTCodecTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.842",
+      "sha256": "2e29490a5f6428e9762edeaeada49495d660c90717b98105f67e5e10bcd6e37c"
+    },
+    {
+      "name": "com.synexia.mindex.compiler.ast.M3ASTCompilerBridgeTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "6.78",
+      "sha256": "8773495353535b6a64bfda3f778c8643eb81ef889730c84268817dae99b28ed2"
+    },
+    {
+      "name": "com.synexia.mindex.compiler.ast.M3FileAndContextTest",
+      "tests": "6",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.591",
+      "sha256": "cd087a9514efafe44d02775e882b4c1bb07141569dce78c99b72fec1f44b88db"
+    },
+    {
+      "name": "com.synexia.mindex.compiler.ast.M3JavacASTIndexTest",
+      "tests": "11",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "2.477",
+      "sha256": "d96ee61ea97015d79edc4eb3762e2fa8d6aaae80c682ce377520d504379bf675"
+    }
+  ],
+  "log_sha256": "9a03cbd2ec966f024ba04d9370d927b8aac902295d53c5708f4e3160ea6c39a0",
+  "upstream_api_coexistence": "public M3AST session and independent M3ASTPC observer receive the identical actual parsed unit and frozen source; both plugin names preserved",
+  "limits": [
+    "Finite Java21 compiler fixture suite; full JDK/JCK remains a separate gate."
+  ]
+}

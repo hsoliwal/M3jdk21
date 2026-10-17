@@ -1,0 +1,151 @@
+{
+  "schema": "M3_AST_HIERARCHY_QUALIFICATION_V1",
+  "status": "passed",
+  "date": "2026-10-17",
+  "scope": "Actual lazy L0-L5 provider hierarchy in canonical and receiver packages; finite source/cache/compiler contracts only",
+  "levels": [
+    "L0 per-file facts and atoms",
+    "L1 file summary",
+    "L2 package",
+    "L3 module",
+    "L4 project",
+    "L5 repository"
+  ],
+  "source_lineage_sha256": "b6fdf28403d7f6cb49bc8235530df22d23ff7601f310402eefb02148df2c1201",
+  "manifests": {
+    "canonical": {
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/manifest.tsv",
+      "sha256": "8da5ba836914f077e8cee6ffdfef21956babd86d0a8e4efe5903cd2607f9d34a",
+      "count": 6
+    },
+    "receiver": {
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv",
+      "sha256": "3eee1a6a89dff5adbe5daeb80a5331f726c041e7585fdf9e4da1d36acc3fe9c8",
+      "count": 16
+    }
+  },
+  "applied_source_paths": 22,
+  "applied_source_hashes": "applied-source-hashes.json",
+  "sdk": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "emission_fixedpoint_permutation": true,
+    "missing_duplicate_preimage_and_template_drift_refusal": true,
+    "application_tests": 1,
+    "application_paths": 22,
+    "application_readback_fixedpoint": true,
+    "java_recipe_owner_sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+    "text_recipe_owner_sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+  },
+  "runtime": {
+    "tests": 40,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "suites": [
+      {
+        "name": "com.m3.compiletime.ast.M3ASTHierarchyFactsTest",
+        "tests": "5",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "com.m3.compiletime.ast.M3ASTHierarchyTest",
+        "tests": "15",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "com.synexia.mindex.compiler.ast.MIndexASTHierarchyFactsTest",
+        "tests": "5",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest",
+        "tests": "15",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      }
+    ],
+    "strict_java21_product_fqns": 14,
+    "javac_options": [
+      "--release",
+      "21",
+      "-Xlint:all",
+      "-Werror",
+      "-proc:none"
+    ],
+    "base_frontend_jar_sha256": "3bbe637346b3ecf752bff60a1502f9b6eeb643448790c12b35fc9593fb807ed2",
+    "compiler_patch_sha256": "10563c2088934d199984231d59b0980376ed3ba535c7aa3cd3cf625bd5d3f0ca",
+    "hierarchy_runtime_jar_sha256": "bfc9da001ca9b496014578eb21f4b6ebd835e2a177a1d8db11dcabea45892d39",
+    "source_and_test_hashes": "runtime/COMPILE.json",
+    "later_combined_artifacts_receipt": "m3/compiler/ast-sharing-20261017/handoff.json"
+  },
+  "correctness_fixes": {
+    "stable_coordinate_prefix": {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexAST.java",
+      "before_sha256": "aa06940e0c182571d89e3ed84b29053f6bf45e63dab43fdd7e6fdc7230e43bff",
+      "after_sha256": "69866847dcfcc5fd4036359fdb9eff536561c758935b61b449e2782395aee9d0"
+    },
+    "existing_partial_cache_long_arithmetic": {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstCache.java",
+      "before_sha256": "a7f6d096e53366c27660213e3756e73a9e8377dd60d1f680d91112e776aba1cf",
+      "after_sha256": "6a8d31a2b05f42edf85915c4a48ef753594d3c19c57fbe9de9ef5ec688a8109e"
+    },
+    "original_counterexample": "counterexamples/partial-cache-long-overflow/RECEIPT.json",
+    "bounded_symbol_admission": "Check cumulative edge/attribute limits before per-row symbol work; stream distinct symbols without a row-wide temporary list"
+  },
+  "retained_history": [
+    "history/initial-21-source-sdk/",
+    "history/normal-pinned-capacity-oracle/"
+  ],
+  "upstream_followup": {
+    "commit": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
+    "source_blob": "fbce9f518890cd144bd4576e97031f017563e07f",
+    "read_only_review": "upstream-892e/REVIEW.md",
+    "included_in_compiled_closure": false
+  },
+  "limits": [
+    "Payload estimates do not bound JVM heap or caller-owned plans, suppliers, compiler units, and shared backing.",
+    "Explicit source dependencies and caller context pins define invalidation authority; undeclared external changes are not inferred.",
+    "Each hierarchy owns an exclusive store/cache ordinal namespace.",
+    "The default expandedNodesSaturated metric preserves canonical saturation and per-file distinct counts are not global deduplication.",
+    "These runtime receipts qualify the stated historical base artifacts; final composed compiler/module artifacts have separate handoff receipts."
+  ],
+  "global_receiving_phase_promoted": false,
+  "full_jdk_or_jck_claim": false,
+  "evidence_sha256": {
+    "applied-source-hashes.json": "b457f1330c019a86817306a53077e71b6ba3e623f2cbfd1a2cedbece5b65551e",
+    "counterexamples/partial-cache-long-overflow/PartialCacheLongOverflowProbe.java": "95af2bc0fafa70ca9ffd618b7409303de22c347ec24b4b42a4bfb70b3cb32ecc",
+    "counterexamples/partial-cache-long-overflow/RECEIPT.json": "e24bb6fc944e6e24d232c3824031e6ae7d011cbecdca5eaf843f5bc7aebf5426",
+    "counterexamples/partial-cache-long-overflow/compile-original.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "counterexamples/partial-cache-long-overflow/run-original.log": "e24b3dddd7e7b295d79893630e56a58237d6f21fb0909ad1438462391a81270c",
+    "history/initial-21-source-sdk/M3ASTHierarchyRecipeTest.txt": "09a905024b4bf637cfd75f9c09b628c11f2a7be28a02537218e76c3c6dac1b95",
+    "history/initial-21-source-sdk/sdk-qualification.log": "5d7a96c4467e46be45e8cc29feaa33f796bf53d27ac9c115183cb46ed63bedeb",
+    "history/normal-pinned-capacity-oracle/README.md": "5773b2bac75b6f6fbb4c98f5d47b2ec2e662a009c7c399856a58ed101a46ea7c",
+    "history/normal-pinned-capacity-oracle/com.m3.compiletime.ast.M3ASTHierarchyFactsTest.txt": "6c504ca0fb776835752d95cf2707bcd62dbf8d8d2a73550a7859f8e2b7a1027e",
+    "history/normal-pinned-capacity-oracle/com.m3.compiletime.ast.M3ASTHierarchyTest.txt": "cbff0c8d97926a65eeca455b76f708523c8d8eb45a06b32d06098f6f8d084859",
+    "history/normal-pinned-capacity-oracle/com.synexia.mindex.compiler.ast.MIndexASTHierarchyFactsTest.txt": "df6543f0ed4629923da62132a6cf1e82801b481f974d96e76d60dbcc75d708f7",
+    "history/normal-pinned-capacity-oracle/com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest.txt": "c409670fc80480230c363df6110c73773b328d426b66df93f643a0b09670f19a",
+    "history/normal-pinned-capacity-oracle/runtime-qualification.log": "48fe4308edba5328de746ed6433be75316b9d6b568167ed6221091caeda399e0",
+    "runtime/COMPILE.json": "c81c15ac441ccc0130fe276b8edb5e6f271adaa77a5cf5139f43d7b2abae43e6",
+    "runtime/com.m3.compiletime.ast.M3ASTHierarchyFactsTest.txt": "54151c3aad29df1469f05d76d357ea789987b7b03450f12a476abc8a495aa867",
+    "runtime/com.m3.compiletime.ast.M3ASTHierarchyTest.txt": "c8d76e4a64aba67c7008e9e5741e9e21e7fc0628962c05f6607db28565863f19",
+    "runtime/com.synexia.mindex.compiler.ast.MIndexASTHierarchyFactsTest.txt": "09814453e73af990e6776fb6066e60f40b5f69d9ddff1ab31d825bab30e5de83",
+    "runtime/com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest.txt": "dcf495315d3210d85e32c408edd5b277097f54710436f8a5c68e659239550f24",
+    "runtime/javac.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runtime/runtime-qualification.log": "aba7aa247a531d7e88c4093935803ad3bce8f515d0c7649728089d449ec56ab7",
+    "sdk/M3ASTHierarchyRecipeTest-application.txt": "e202b73c1ce8705a49f756f7ac6d25a0b5cb7f23f5a49aecf92ea862a99ca13b",
+    "sdk/sdk-materialization.log": "725cd343b5970ffe2024db01652d84a5f0f659de8b6f3e072f4de1c93893ba40",
+    "sdk/sdk-qualification.log": "79f13017a5a69a76bde636afb75e9e9f6c30e09a8761f91472bdbb284073ff0d",
+    "upstream-892e/MIndexASTLeafIndex.java.txt": "d60d18ce634d0a935727bc29fb9dbc41f06e8284760cdae7b93f1586ebf613d9",
+    "upstream-892e/REVIEW.md": "d7ee75f389b0eb6433e515cb138acb1e31781581d76877c18b87968726b1a9f4"
+  }
+}

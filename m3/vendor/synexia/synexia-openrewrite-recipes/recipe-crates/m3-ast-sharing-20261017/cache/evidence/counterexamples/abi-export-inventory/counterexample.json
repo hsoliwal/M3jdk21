@@ -1,0 +1,15 @@
+{
+  "status": "REFUSED",
+  "gate": "initial full shared-native export equality",
+  "reason": "Expected only the 12 SqliteSwapStore exports, but the unchanged canonical shared C unit also exports 4 JniSwapPageBinaryOps methods. No required SQLite symbol was missing.",
+  "missingSqliteSymbols": [],
+  "additionalCanonicalSymbols": [
+    "nativeCopy",
+    "nativeDeltaDecode",
+    "nativeDeltaEncode",
+    "nativePageAbiVersion"
+  ],
+  "sourceRevision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "repair": "Include exact pinned Java declarations and their 2 source dependencies as ABI-proof-only inputs; generate both JNI headers and compare all 16 exports without changing the native source or runtime closure.",
+  "initialScriptSha256": "3b2a2d8e33916d8cdcf3bffafe99c3e2c3bd5d1609ab27c576f840f6b68330d4"
+}

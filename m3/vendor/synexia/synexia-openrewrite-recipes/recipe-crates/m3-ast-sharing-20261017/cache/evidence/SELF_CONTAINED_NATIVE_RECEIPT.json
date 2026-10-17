@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "scope": "Linux C17 / Java 21 exact-donor ABI and native build",
+  "sourceRevision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "nativeSourceSha256": "4d8c04f5b50498038ce39c7d8412d24340a59c6a5f624c4e47fa1ea145fb762f",
+  "javaCompiler": "javac 21.0.2",
+  "cCompiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "sqliteSource": "https://www.sqlite.org/2026/sqlite-amalgamation-3510300.zip",
+  "sqliteRelease": "https://www.sqlite.org/releaselog/3_51_3.html",
+  "sqliteSourceId": "2026-03-13 10:38:09 737ae4a34738ffa0c3ff7f9bb18df914dd1cad163f28fd6b6e114a344fe6d618",
+  "sqliteSourceSha3_256": "32d5424f97e0a7fc5ed2f6335afbb58be4e0298bd7117a34e39d345ff13d859e",
+  "sqliteHeaderSha256": "19585c8b5230e9d4f223bf31b709ece7b6a0bb3faf00d8310625d8e58cda1b1d",
+  "abiProofInputs": [
+    {
+      "source": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/JavaSwapPageBinaryOps.java",
+      "sourceSha256": "16dbc821c896e4cba3ce289c741fd4ab3df35a0577e6461deea7a296db03fbfe",
+      "custody": "native-abi-sources/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/JavaSwapPageBinaryOps.java.txt",
+      "mode": "EXACT_ABI_PROOF_ONLY"
+    },
+    {
+      "source": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/JniSwapPageBinaryOps.java",
+      "sourceSha256": "90d592a4db43c0d4f0d6b04e32b9ded4ae12a36147a6caae94964b12dfb5246f",
+      "custody": "native-abi-sources/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/JniSwapPageBinaryOps.java.txt",
+      "mode": "EXACT_ABI_PROOF_ONLY"
+    },
+    {
+      "source": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapPageBinaryOps.java",
+      "sourceSha256": "37bf0ef4bf586dd1a305ee9ae45396f7a856a22eb8b14640d1ebbbcc1a9d06e1",
+      "custody": "native-abi-sources/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapPageBinaryOps.java.txt",
+      "mode": "EXACT_ABI_PROOF_ONLY"
+    }
+  ],
+  "jniHeaders": [
+    {
+      "name": "com_synexia_mindex_swap_SqliteSwapStore.h",
+      "sha256": "ee396b4f0a3a9301093c397c0b72ccbc3cc5a204dce5df24c77792e923dd6182"
+    },
+    {
+      "name": "com_synexia_mindex_swap_JniSwapPageBinaryOps.h",
+      "sha256": "0230517ed4b65315ec2d1d3e58400bc8eb179b2a98f709c6b08e5b388e51c45d"
+    }
+  ],
+  "jniSymbols": [
+    "Java_com_synexia_mindex_swap_JniSwapPageBinaryOps_nativeCopy",
+    "Java_com_synexia_mindex_swap_JniSwapPageBinaryOps_nativeDeltaDecode",
+    "Java_com_synexia_mindex_swap_JniSwapPageBinaryOps_nativeDeltaEncode",
+    "Java_com_synexia_mindex_swap_JniSwapPageBinaryOps_nativePageAbiVersion",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nCheckpoint",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nClose",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nCount",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nHead",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nIds",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nJournal",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nOpen",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nPrune",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nRead",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nVersion",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nWalSafe",
+    "Java_com_synexia_mindex_swap_SqliteSwapStore_nWrite"
+  ],
+  "librarySha256": "473f80b698901ed1fcfdf4643e7bcb002afb2b78040538861ecbf140d663bf3d",
+  "behaviorGate": "pom-runtime.xml executes 2 real JNI tests and refuses missing native library"
+}

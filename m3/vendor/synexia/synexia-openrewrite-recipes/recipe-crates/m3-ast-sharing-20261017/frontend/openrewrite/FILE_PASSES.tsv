@@ -1,0 +1,12 @@
+pass	files	result	evidence
+owner_inventory	core M3JavacASTIndex and OpenRewrite visitor/parser/type mapping	EXISTING_OWNERS_REUSED	README.md
+source_seal	adapter template and canonical recipe providers	PASSED	SOURCE_PINS.json
+typed_sdk	optional Java source candidate	PASSED_TWO_TESTS	evidence/sdk.log
+fixed_point	already emitted Java source in both input orders	ZERO_RESULTS	evidence/SDK_RECEIPT.tsv
+refusal	duplicate/occupied/representation/template drift	PASSED	evidence/sdk.log
+strict_java21_compile	actual emitted adapter and executable proof	PASSED_NO_WARNINGS	evidence/javac.log
+same_task_projection	original javac units/context/frozen sources and typed LSTs	PASSED	evidence/same-task.log
+host_bytecode	four generated classes vs separate reference compilation	BYTE_EQUAL	evidence/same-task.log
+optional_absence	core compiler/index with no OpenRewrite classpath	PASSED	evidence/without-openrewrite.log
+classloader	stock visitor without independent OpenRewrite parser implementation	PASSED	evidence/RESULTS.json
+whole_reactor_jtreg_jck	full provider/JDK reactor and production build	NOT_RUN	README.md

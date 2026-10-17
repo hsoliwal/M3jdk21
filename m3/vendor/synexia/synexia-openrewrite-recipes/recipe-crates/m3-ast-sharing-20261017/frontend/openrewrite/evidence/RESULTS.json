@@ -1,0 +1,45 @@
+{
+  "format": "M3_OPENREWRITE_SAME_JAVAC_TASK_V1",
+  "status": "PASSED",
+  "sdk_tests": 2,
+  "sdk_actual_results": 1,
+  "sdk_fixed_point_results": 0,
+  "adapter_source_sha256": "c12d325da4c8fe2dec533ffb728d8e9b815f40c5e65ee1eae54534f4cf2a2884",
+  "host_plugin_sha256": "f4baf0ae24e58c290a7de403c0571dccbe35c825694729aca40c3408db5b905c",
+  "compiler_patch_sha256": "3f50d59cca1cf7cf2811c0bb1da9314b71240c7f81f37854ed6fc021f03681b4",
+  "openrewrite_binary_sha256": {
+    "rewrite-java-8.17.1.jar": "32a3b27c0eafeb44c776500ae1378efdfb79d490a6afd7b58be07c6c0d6c55ff",
+    "rewrite-core-8.17.1.jar": "d7c07f91ab085a39bf1b40d7f2a7796a52619aaeefeca1481435e685aa663efa",
+    "rewrite-java-21-8.17.1.jar": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4"
+  },
+  "jdk": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode, sharing)",
+  "measured_input_units": 2,
+  "measured_javac_tasks": 1,
+  "measured_parse_events": 2,
+  "whole_unit_conversions": 2,
+  "top_level_analyze_events": 4,
+  "exact_frozen_source_reads": 2,
+  "bytecode_reference_classes": 4,
+  "bytecode_equality": "PASSED",
+  "original_javac_tree_and_type_identity": "PASSED",
+  "default_bytodo_generation_interleaving": "REPRODUCED",
+  "refusal_cases": 9,
+  "core_with_no_openrewrite_classpath": "PASSED",
+  "lazy_source_completion": {
+    "baseline_parse_events": 1,
+    "visitor_parse_events": 2,
+    "published_lst": 0,
+    "guarded_refusal": "PASSED"
+  },
+  "independent_openrewrite_parser_class_loaded": false,
+  "limits": [
+    "Java 21 / OpenRewrite 8.17.1 only",
+    "class-bearing compilation units only",
+    "host must select SIMPLE and disable parse-time string folding before parsing",
+    "M3JavacASTIndex frozen source contract is trusted",
+    "LST is a projection, not javac tree replacement",
+    "lazy classfile loading remains possible; unexpected source parsing causes refusal, not rollback",
+    "future recipe edits are not applied to javac's ongoing compilation",
+    "whole reactor, full JDK build, performance and other platforms not qualified here"
+  ]
+}

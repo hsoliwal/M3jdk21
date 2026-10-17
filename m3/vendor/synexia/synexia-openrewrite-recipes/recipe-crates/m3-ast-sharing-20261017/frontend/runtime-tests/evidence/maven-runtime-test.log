@@ -1,0 +1,45 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------< com.synexia.verification:m3-ast-frontend-runtime-proof >-------
+[INFO] Building m3-ast-frontend-runtime-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-ast-frontend-runtime-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/runtime-tests/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-ast-frontend-runtime-proof ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-ast-frontend-runtime-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/runtime-tests/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-ast-frontend-runtime-proof ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 5 source files with javac [debug release 21] to ../target/runtime-tests/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-ast-frontend-runtime-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.mindex.compiler.ast.M3ASTCompilerBridgeTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.023 s -- in com.synexia.mindex.compiler.ast.M3ASTCompilerBridgeTest
+[INFO] Running com.synexia.mindex.compiler.ast.M3ASTCodecTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.571 s -- in com.synexia.mindex.compiler.ast.M3ASTCodecTest
+[INFO] Running com.synexia.mindex.compiler.ast.M3FileAndContextTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.271 s -- in com.synexia.mindex.compiler.ast.M3FileAndContextTest
+[INFO] Running com.synexia.mindex.compiler.ast.M3JavacASTIndexTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.152 s -- in com.synexia.mindex.compiler.ast.M3JavacASTIndexTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 25, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  17.495 s
+[INFO] Finished at: 2026-10-17T11:53:41+01:00
+[INFO] ------------------------------------------------------------------------

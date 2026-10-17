@@ -1,0 +1,17 @@
+{
+  "revision": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "sources": [
+    {
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java",
+      "git_blob": "11baa53f13337a26fe35b18e5c5204f6cb1d2870",
+      "sha256": "0194ab2afa7c0a7ace8b8cb4e28aa142a44cf623176dce5feaa5e6c271173f8b",
+      "action": "HYDRATE_EXACT_UPSTREAM_GIT_OBJECT"
+    },
+    {
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java",
+      "git_blob": "747db4221e590be264c352c7031d1d60841be02e",
+      "sha256": "b1303aa343f542cf6339d907369eb08bec68025eb41c43eaf6500abbb84998aa",
+      "action": "HYDRATE_EXACT_UPSTREAM_GIT_OBJECT"
+    }
+  ]
+}

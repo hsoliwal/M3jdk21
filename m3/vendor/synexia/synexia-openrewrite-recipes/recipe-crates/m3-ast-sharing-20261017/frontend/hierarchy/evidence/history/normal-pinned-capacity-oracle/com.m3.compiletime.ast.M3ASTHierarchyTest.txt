@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: com.m3.compiletime.ast.M3ASTHierarchyTest
+-------------------------------------------------------------------------------
+Tests run: 15, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 3.163 s <<< FAILURE! -- in com.m3.compiletime.ast.M3ASTHierarchyTest
+com.m3.compiletime.ast.M3ASTHierarchyTest.coldFactsReloadPreservesIdentityAndActiveLeaseProtection -- Time elapsed: 0.046 s <<< ERROR!
+com.synexia.mindex.swap.TieredSwapCache$CapacityException: all available capacity is pinned
+	at com.synexia.mindex.swap.TieredSwapCache.acquire(TieredSwapCache.java:316)
+	at com.m3.compiletime.ast.M3ASTWorkspaceCache.acquire(M3ASTWorkspaceCache.java:148)
+	at com.m3.compiletime.ast.M3ASTHierarchy$Plan.acquireOrdinal(M3ASTHierarchy.java:385)
+	at com.m3.compiletime.ast.M3ASTHierarchy$Plan.acquire(M3ASTHierarchy.java:375)
+	at com.m3.compiletime.ast.M3ASTHierarchy$Plan.acquire(M3ASTHierarchy.java:379)
+	at com.m3.compiletime.ast.M3ASTHierarchyTest.coldFactsReloadPreservesIdentityAndActiveLeaseProtection(M3ASTHierarchyTest.java:295)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

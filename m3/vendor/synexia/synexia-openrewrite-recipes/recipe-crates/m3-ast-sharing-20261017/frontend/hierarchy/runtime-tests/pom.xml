@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.verification</groupId><artifactId>m3-ast-hierarchy-runtime-proof</artifactId><version>1</version>
+  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <m3.hierarchy.jar>${project.basedir}/../target/runtime/m3-ast-hierarchy.jar</m3.hierarchy.jar>
+    <m3.frontend.jar>${project.basedir}/../../target/m3-ast-sharing.jar</m3.frontend.jar>
+    <m3.frontend.patch>${project.basedir}/../../target/m3-javac-patch.jar</m3.frontend.patch>
+  </properties>
+  <dependencies>
+    <dependency><groupId>com.synexia.verification</groupId><artifactId>m3-ast-hierarchy-candidate</artifactId><version>1</version>
+      <scope>system</scope><systemPath>${m3.hierarchy.jar}</systemPath></dependency>
+    <dependency><groupId>com.synexia.verification</groupId><artifactId>m3-ast-frontend-candidate</artifactId><version>1</version>
+      <scope>system</scope><systemPath>${m3.frontend.jar}</systemPath></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <directory>${project.basedir}/../target/runtime-tests</directory>
+    <testSourceDirectory>${project.basedir}/../target/runtime/tests</testSourceDirectory>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration><proc>none</proc><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+        <configuration><useModulePath>false</useModulePath>
+          <includes>
+            <include>com/synexia/mindex/compiler/ast/MIndexASTHierarchyTest.java</include>
+            <include>com/synexia/mindex/compiler/ast/MIndexASTHierarchyFactsTest.java</include>
+            <include>com/m3/compiletime/ast/M3ASTHierarchyTest.java</include>
+            <include>com/m3/compiletime/ast/M3ASTHierarchyFactsTest.java</include>
+          </includes>
+          <argLine>-Xmx512m --patch-module jdk.compiler=${m3.frontend.patch} --add-exports jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED</argLine>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -1,0 +1,34 @@
+{
+  "schema": "M3_FRONTEND_COMPOSED_SDK_V1",
+  "status": "PASS",
+  "tests": 3,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "no_external_parser_classpath": true,
+  "compiler_upstream": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "recipe_owners_revision": "3aa8e45d93f5fed721fdb64579b655f4a432a308",
+  "manifests": {
+    "m3-ast-frontend-canonical-20261017": {
+      "sha256": "c6084f617cbe23de0667a0cb9e4502d0afe6d0e958e5e543d1ca4c6f12b0deb7",
+      "targets": 8
+    },
+    "m3-ast-frontend-canonical-recovery-20261017": {
+      "sha256": "1ade5857a695f9e6d96a1b3f4b5afc134128f43a794763e2a90587cd2f5dc702",
+      "targets": 1
+    },
+    "m3-ast-frontend-compiler-20261017": {
+      "sha256": "94420df2d3d252d6c4bd1b52469a55b52609bf075fef8f0d2e7550507ed0011f",
+      "targets": 4
+    },
+    "m3-ast-frontend-receiver-20261017": {
+      "sha256": "1a146bddd3924117abfa1e335b3f2e265b59cda4e52abd6d36e3630ffaa0cf0f",
+      "targets": 91
+    },
+    "m3-ast-frontend-receiver-recovery-20261017": {
+      "sha256": "48c51c2d5c32aa52f87af8c124044cbdd5de08e61660e406873564bce6e450dd",
+      "targets": 6
+    }
+  },
+  "log_sha256": "59425737e7ecf03586299e10bc3d9753bab57428f761b7200f9800204acf38d8"
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-compiletime-precompute</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>M3JDK :: Compile-time String Precompute Port</name>
+  <description>Class-file inventory of compile-time-known strings and the first build-time
+    precompute leaf: an int-packed constant-regex requirement image with a fail-open runtime
+    consumer. Stock java.util.regex remains the oracle.</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <asm.version>9.6-m3-source-1</asm.version>
+    <!-- CI without the vendored universe may pass -Dasm.version=9.6 -Djunit.artifact.version=5.10.2 -->
+    <junit.artifact.version>5.10.2-m3-source-1</junit.artifact.version>
+    <!-- The harvester reads the stock JDK node tree; only build-time tools and tests open it. -->
+    <m3.opens>--add-opens java.base/java.util.regex=ALL-UNNAMED</m3.opens>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>${asm.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-tree</artifactId>
+      <version>${asm.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-analysis</artifactId>
+      <version>${asm.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.m3</groupId>
+      <artifactId>m3-precompute</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <useModulePath>false</useModulePath>
+          <argLine>-Xmx1g ${m3.opens}</argLine>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

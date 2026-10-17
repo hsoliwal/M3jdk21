@@ -1,0 +1,77 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----< com.synexia.verification:m3-ast-sharing-integration-recipe >-----
+[INFO] Building m3-ast-sharing-integration-recipe 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-ast-sharing-integration-recipe ---
+[INFO] Copying 6 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-ast-sharing-integration-recipe ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-ast-sharing-integration-recipe ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/integration/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-ast-sharing-integration-recipe ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-ast-sharing-integration-recipe ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.M3ASTIntegrationRecipeTest
+[ERROR] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.234 s <<< FAILURE! -- in com.synexia.rewrite.M3ASTIntegrationRecipeTest
+[ERROR] com.synexia.rewrite.M3ASTIntegrationRecipeTest.exactIntegrationPacketAndAppliedFixedPoint -- Time elapsed: 0.133 s <<< ERROR!
+java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.M3ASTIntegrationRecipeTest.exactIntegrationPacketAndAppliedFixedPoint(M3ASTIntegrationRecipeTest.java:21)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ClassNotFoundException: org.slf4j.LoggerFactory
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	... 5 more
+
+[ERROR] com.synexia.rewrite.M3ASTIntegrationRecipeTest.sourceDriftDuplicatesAndTemplateDriftRefuse -- Time elapsed: 0.008 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+	at com.synexia.rewrite.M3ASTIntegrationRecipeTest.sourceDriftDuplicatesAndTemplateDriftRefuse(M3ASTIntegrationRecipeTest.java:51)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.M3ASTIntegrationRecipeTest.exactIntegrationPacketAndAppliedFixedPoint(M3ASTIntegrationRecipeTest.java:21)
+	... 3 more
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   M3ASTIntegrationRecipeTest.exactIntegrationPacketAndAppliedFixedPoint:21 » NoClassDefFound org/slf4j/LoggerFactory
+[ERROR]   M3ASTIntegrationRecipeTest.sourceDriftDuplicatesAndTemplateDriftRefuse:51 NoClassDefFound Could not initialize class com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+[INFO] 
+[ERROR] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.566 s
+[INFO] Finished at: 2026-10-17T15:24:40+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project m3-ast-sharing-integration-recipe: 
+[ERROR] 
+[ERROR] Please refer to /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/integration/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

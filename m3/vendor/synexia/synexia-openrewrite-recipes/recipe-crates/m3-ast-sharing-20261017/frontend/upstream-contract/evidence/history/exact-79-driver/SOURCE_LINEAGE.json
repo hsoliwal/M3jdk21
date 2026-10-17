@@ -1,0 +1,19 @@
+{
+  "repository": "hsoliwal/M3jdk21",
+  "commit": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "scope": "Exact upstream GPL test and descriptor custody; finite linked-image proof only",
+  "inputs": [
+    {
+      "source_path": "test/langtools/tools/javac/m3/M3ASTSharedFrontendTest.java",
+      "custody_path": "custody/test/langtools/tools/javac/m3/M3ASTSharedFrontendTest.java.txt",
+      "git_blob_sha1": "41eee89134939047e81f93b61bdda8c38ef805ed",
+      "sha256": "47349ef82633f724f3ca694521250048ba70486b094b069fc51c13b5e64978a5"
+    },
+    {
+      "source_path": "src/jdk.compiler/share/classes/module-info.java",
+      "custody_path": "custody/src/jdk.compiler/share/classes/module-info.java.txt",
+      "git_blob_sha1": "13ebbaf1db2e8ba997e48c317f4b64bf8f0cfb1d",
+      "sha256": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09"
+    }
+  ]
+}

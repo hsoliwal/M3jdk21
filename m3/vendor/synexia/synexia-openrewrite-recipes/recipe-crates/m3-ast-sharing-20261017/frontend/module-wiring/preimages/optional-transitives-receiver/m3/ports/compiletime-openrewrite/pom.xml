@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId><artifactId>m3-compiletime-openrewrite</artifactId><version>0.1.0-SNAPSHOT</version>
+  <name>Optional Java 21 shared-AST OpenRewrite provider</name>
+  <description>Explicitly selected projection of an existing compiler invocation; the core compiler module does not depend on this artifact.</description>
+  <properties>
+    <maven.compiler.source>21</maven.compiler.source><maven.compiler.target>21</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <rewrite.version>8.17.1</rewrite.version>
+  </properties>
+  <dependencies>
+    <dependency><groupId>com.m3</groupId><artifactId>m3-compiletime-precompute</artifactId><version>0.1.0-SNAPSHOT</version></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>${rewrite.version}</version></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>${rewrite.version}</version></dependency>
+  </dependencies>
+  <build><plugins>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+      <configuration><proc>none</proc><compilerArgs>
+            <arg>-Xlint:all</arg><arg>-Werror</arg>
+            <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
+      </compilerArgs></configuration>
+    </plugin>
+  </plugins></build>
+</project>

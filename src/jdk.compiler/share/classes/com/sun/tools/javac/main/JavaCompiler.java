@@ -658,6 +658,9 @@ public class JavaCompiler {
         }
 
         tree.sourcefile = filename;
+        if (!silent) {
+            com.sun.tools.javac.m3.M3ASTPC.parsed(context, tree, content);
+        }
 
         if (content != null && !taskListener.isEmpty() && !silent) {
             TaskEvent e = new TaskEvent(TaskEvent.Kind.PARSE, tree);

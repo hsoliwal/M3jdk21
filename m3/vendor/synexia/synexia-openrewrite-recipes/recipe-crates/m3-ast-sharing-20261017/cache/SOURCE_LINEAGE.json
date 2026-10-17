@@ -1,0 +1,91 @@
+{
+  "sourceRevision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "files": [
+    {
+      "source": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3FileSourceFacts.java",
+      "sourceSha256": "3c6052c962b61b5cda14f1eab41a08f23a30c840a94f14ae2f57ef50f8fca32c",
+      "targetSha256": "01bb62f9acc4fda98cc93ab63c83e259c22b70ba3a0757b195b071f80f2a74dd",
+      "mode": "PACKAGE_ONLY_ADAPTER_MAPPING",
+      "license": "Apache-2.0"
+    },
+    {
+      "source": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3ASTWorkspaceCache.java",
+      "sourceSha256": "7ad205f6521a14879ae537ff15a98199dc3b023ae7c69e844aea1f3664f5bae1",
+      "targetSha256": "26e47cc50a069b25c45c77a67104b3e0b41abcfb3c6f8ba1ee2dbd452311feec",
+      "mode": "PACKAGE_ONLY_ADAPTER_MAPPING",
+      "license": "Apache-2.0"
+    },
+    {
+      "source": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/TieredSwapCache.java",
+      "revision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+      "gitBlob": "22fe5017f55d39bba1a10d588ecf1b12fad17726",
+      "sourceSha256": "b76151008b20862bc56e14edf48f0034b29f2a7b9d9229bc2c4c085ebfef5ae3",
+      "mode": "EXACT_VENDOR_CUSTODY",
+      "license": "Apache-2.0"
+    },
+    {
+      "source": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapStore.java",
+      "revision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+      "gitBlob": "47eee325cec2f97c09d22cdb37e9f7a91abb80d5",
+      "sourceSha256": "5a99e61ed20a662c8b44957571e9159c7fd3fc784360b659f289a0e8f438b1ee",
+      "mode": "EXACT_VENDOR_CUSTODY",
+      "license": "Apache-2.0"
+    },
+    {
+      "source": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapBudgetPlane.java",
+      "revision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+      "gitBlob": "600754efed3306213dac1908ef4fbca8a865f6f4",
+      "sourceSha256": "88051ebf6e2ab8d73d92e3252fe2a05ab8f9c95894eb1f39ddbf4d019407e4b0",
+      "mode": "EXACT_VENDOR_CUSTODY",
+      "license": "Apache-2.0"
+    },
+    {
+      "source": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SqliteSwapStore.java",
+      "revision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+      "gitBlob": "f74acfb24e0a3061f542aaf8b8ba9b7a646604ee",
+      "sourceSha256": "091c41271c42f3603ee7d64439d612541a875217dc85783700752bbe16d959cf",
+      "mode": "EXACT_VENDOR_CUSTODY",
+      "license": "Apache-2.0"
+    },
+    {
+      "source": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapNativeLibrary.java",
+      "revision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+      "gitBlob": "ae51e7d3e0fcdabeb3725c5a834adf95ba7f6ff0",
+      "sourceSha256": "a1d0724afb9ee986b99e12e666ffc49b72cb0a37804baebf88c8a30e46e28a6c",
+      "mode": "EXACT_VENDOR_CUSTODY",
+      "license": "Apache-2.0"
+    },
+    {
+      "source": "synexia-native-interop/src/main/java/com/synexia/nativeinterop/JniLibraryLoader.java",
+      "revision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+      "gitBlob": "da5d6391af12d53a71c5f1e0f3736fa125659b64",
+      "sourceSha256": "fa22dcfcc2b442c72ee3dd97e5d97dd5c9ad19ee4eac422641336b7477c63699",
+      "mode": "EXACT_VENDOR_CUSTODY",
+      "license": "Apache-2.0"
+    },
+    {
+      "source": "synexia-native-interop/src/main/java/com/synexia/nativeinterop/NativeLibrarySpec.java",
+      "revision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+      "gitBlob": "39b9f04e46411de9bf7b8063608241efb2819aca",
+      "sourceSha256": "fd9bc8f19f629e6131dcb55f264eed524fa17e69bdda31d723b4addfddb8a4f5",
+      "mode": "EXACT_VENDOR_CUSTODY",
+      "license": "Apache-2.0"
+    },
+    {
+      "source": "synexia-mindex/runtime/native/swap/mindex_swap.c",
+      "revision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+      "gitBlob": "e55b0c4c6e78b789e570c6c002a6157ad73fbfb5",
+      "sourceSha256": "4d8c04f5b50498038ce39c7d8412d24340a59c6a5f624c4e47fa1ea145fb762f",
+      "mode": "EXACT_VENDOR_CUSTODY",
+      "license": "Apache-2.0"
+    },
+    {
+      "source": "synexia-mindex/runtime/native/swap/CMakeLists.txt",
+      "revision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+      "gitBlob": "2ec59294a9d14f0420cdbc4a44645c776dae3b3f",
+      "sourceSha256": "e164a6981af9626f797872b1e2a70ebcf77005292459275f463e4d8325eaf8ee",
+      "mode": "EXACT_VENDOR_CUSTODY",
+      "license": "Apache-2.0"
+    }
+  ]
+}

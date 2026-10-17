@@ -1,0 +1,24 @@
+{
+  "schema": "M3_AST_ACTUAL_RECEIVER_READBACK_V1",
+  "status": "passed",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/integration/verify_target_sources.py",
+    "--target",
+    "/workspace/scratch/5d405a20c026/repos/M3jdk21"
+  ],
+  "exit_code": 0,
+  "product_writes": false,
+  "driver_sha256": "dec40c6d19e4d8b7ab6d105836969aa2066bdafd4f5e6b6e68dcce9265de1847",
+  "log_sha256": "e20f62a4dfb113981d3a7c9922c442b898c6dec73d509bfbbfbefef7d34df5aa",
+  "result": {
+    "manifest_count": 8,
+    "module_info_sha256": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09",
+    "module_metadata_and_registry_checked": false,
+    "public_api_sha256": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+    "schema": "M3_AST_RECEIVER_SOURCE_READBACK_V1",
+    "source_closure_sha256": "af53258db63e5aa52a400a6abf31c3931685cfab4d8bf0dbe1ea8901f8e9e02b",
+    "sources_verified": 128,
+    "status": "passed"
+  }
+}

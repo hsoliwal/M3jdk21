@@ -1,0 +1,8 @@
+{
+  "status": "REFUSED",
+  "gate": "Java21 -Xlint:all -Werror compilation of real SDK output",
+  "reason": "View.acquireSyntax passed a zero-argument method reference to TieredSwapCache.Loader.load(long).",
+  "candidateSourceSha256": "d5f903e563460081feaad36641473b168b1a997fbcac1a3ccf3fcd39ab04301b",
+  "requiredRepair": "Adapt the loader ordinal explicitly: ignored -> ast(); regenerate through the existing recipe before rebuilding.",
+  "productSourceEditedByTestAgent": false
+}

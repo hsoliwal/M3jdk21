@@ -1,0 +1,16 @@
+{
+  "format": "M3_OPENREWRITE_SHARED_AST_SOURCE_PINS_V1",
+  "target": "synexia-mindex/compiler-openrewrite/src/main/java/com/synexia/mindex/compiler/ast/M3OpenRewriteSharedAST.java",
+  "before_sha256": "ABSENT",
+  "after_sha256": "c12d325da4c8fe2dec533ffb728d8e9b815f40c5e65ee1eae54534f4cf2a2884",
+  "template": "../templates/M3OpenRewriteSharedAST.java.txt",
+  "provider_sources": {
+    "M3HashPinnedJavaSnapshotRecipe.java": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+    "M3EditScope.java": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+    "M3ScopeInference.java": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
+  },
+  "openrewrite": {
+    "version": "8.17.1",
+    "source_commit": "3bd8271be963c025ce0856072d0f09360e3184cd"
+  }
+}

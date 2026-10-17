@@ -1,0 +1,294 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Hitesh Soliwal and contributors
+package com.m3.compiletime.ast;
+
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.util.JavacTask;
+import com.sun.source.util.TaskEvent;
+import com.sun.source.util.TaskListener;
+import com.sun.tools.javac.api.BasicJavacTask;
+import com.sun.tools.javac.comp.CompileStates;
+import com.sun.tools.javac.comp.CompileStates.CompileState;
+import com.sun.tools.javac.comp.Enter;
+import com.sun.tools.javac.tree.JCTree.JCClassDecl;
+import com.sun.tools.javac.tree.JCTree.JCCompilationUnit;
+import com.sun.tools.javac.util.Context;
+import com.sun.tools.javac.util.Log;
+import com.sun.tools.javac.util.Options;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.function.Consumer;
+import org.openrewrite.ExecutionContext;
+import org.openrewrite.internal.EncodingDetectingInputStream;
+import org.openrewrite.java.internal.JavaTypeCache;
+import org.openrewrite.java.isolated.ReloadableJava21ParserVisitor;
+import org.openrewrite.java.tree.J;
+import org.openrewrite.java.tree.Space;
+import org.openrewrite.style.NamedStyles;
+
+/**
+ * Optional OpenRewrite 8.17.1 projection of the actual Java 21 compiler invocation.
+ * No independent parser, compiler, or attribution pass is started by this adapter.
+ * If the stock type mapper causes the host to parse a lazy source dependency, publication is refused.
+ *
+ * <p>Attach before parsing. The host task must already select {@code -XDcompilePolicy=simple}
+ * and {@code -XDallowStringFolding=false}. Whole-unit conversion waits for every original
+ * top-level class's finished ANALYZE event and requires each compiler environment to be exactly
+ * at FLOW, before lowering. Module descriptors and files without top-level classes are refused.
+ * The result is an OpenRewrite LST projection; it does not replace javac's mutable tree.
+ *
+ * <p>Compile and run this optional provider with explicit jdk.compiler exports for
+ * com.sun.tools.javac.api, code, comp, tree, and util. Load it and the visitor through the
+ * application's ordinary loader so their javac types have the host compiler's identity.
+ */
+public final class M3OpenRewriteSharedAST implements AutoCloseable {
+    public record Snapshot(String sourceUri, String compilerContextSha256,
+            int topLevelTypes, J.CompilationUnit tree) { }
+
+    public record Statistics(long parsedUnits, long analyzedTypes, long convertedUnits,
+            long incompleteUnits, boolean closed) { }
+
+    private static final class UnitState {
+        final String source;
+        final List<JCClassDecl> classes;
+        final Set<JCClassDecl> analyzed = Collections.newSetFromMap(new IdentityHashMap<>());
+
+        UnitState(String source, List<JCClassDecl> classes) {
+            this.source = source;
+            this.classes = List.copyOf(classes);
+        }
+    }
+
+    /** Supplies the identical frozen String to the stock visitor without an encode/decode copy. */
+    private static final class FrozenCharacters extends EncodingDetectingInputStream {
+        private final String characters;
+
+        FrozenCharacters(String characters) {
+            super(InputStream.nullInputStream(), StandardCharsets.UTF_8);
+            this.characters = characters;
+        }
+
+        @Override public String readFully() { return characters; }
+    }
+
+    private M3JavacASTIndex index;
+    private JavacTask task;
+    private Context compilerContext;
+    private ExecutionContext executionContext;
+    private Consumer<Snapshot> consumer;
+    private final List<NamedStyles> styles;
+    private final String compilerContextSha256;
+    private final JavaTypeCache typeCache = new JavaTypeCache();
+    private final Map<CompilationUnitTree, UnitState> pending = new IdentityHashMap<>();
+    private final Set<CompilationUnitTree> completed = Collections.newSetFromMap(new IdentityHashMap<>());
+    private Thread compilerThread;
+    private boolean closed;
+    private boolean failed;
+    private boolean projecting;
+    private long parsedUnits;
+    private long analyzedTypes;
+    private long convertedUnits;
+    private long incompleteUnits;
+    private final TaskListener lifecycle = new TaskListener() {
+        @Override public void finished(TaskEvent event) {
+            if (event.getKind() == TaskEvent.Kind.COMPILATION) {
+                boolean incomplete = !pending.isEmpty();
+                close();
+                if (incomplete && !failed) {
+                    throw new IllegalStateException("incomplete whole-unit attribution");
+                }
+            }
+        }
+    };
+
+    private M3OpenRewriteSharedAST(M3JavacASTIndex index, JavacTask task,
+            ExecutionContext executionContext, List<NamedStyles> styles,
+            Consumer<Snapshot> consumer) {
+        if (Runtime.version().feature() != 21 || !"8.17.1".equals(
+                ReloadableJava21ParserVisitor.class.getPackage().getImplementationVersion())) {
+            throw new IllegalStateException("provider requires Java 21 and OpenRewrite 8.17.1");
+        }
+        if (!(task instanceof BasicJavacTask javac)) {
+            throw new IllegalArgumentException("provider requires the host javac task");
+        }
+        if (index.statistics().closed() || index.statistics().parseEvents() != 0) {
+            throw new IllegalStateException("attach provider before parsing");
+        }
+        this.index = index;
+        this.task = task;
+        this.compilerContext = javac.getContext();
+        this.executionContext = Objects.requireNonNull(executionContext, "executionContext");
+        this.styles = List.copyOf(styles);
+        this.consumer = Objects.requireNonNull(consumer, "consumer");
+        this.compilerContextSha256 = index.context().sha256();
+        requireOptions();
+    }
+
+    public static M3OpenRewriteSharedAST attach(M3JavacASTIndex index, JavacTask task,
+            ExecutionContext executionContext, List<NamedStyles> styles,
+            Consumer<Snapshot> consumer) {
+        Objects.requireNonNull(index, "index");
+        M3OpenRewriteSharedAST provider = new M3OpenRewriteSharedAST(index, task,
+                executionContext, styles, consumer);
+        String registration = M3OpenRewriteSharedAST.class.getName() + "/" + UUID.randomUUID();
+        index.on(M3JavacASTIndex.Phase.PARSE, registration, provider::observed)
+                .on(M3JavacASTIndex.Phase.ANALYZE, registration, provider::observed)
+                .on(M3JavacASTIndex.Phase.GENERATE, registration, provider::observed);
+        task.addTaskListener(provider.lifecycle);
+        return provider;
+    }
+
+    public Statistics statistics() {
+        return new Statistics(parsedUnits, analyzedTypes, convertedUnits, incompleteUnits, closed);
+    }
+
+    private void observed(M3JavacASTIndex.View view) {
+        if (closed) return;
+        try {
+            if (projecting) throw new IllegalStateException("compiler advanced during LST projection");
+            switch (view.phase()) {
+                case PARSE -> parsed(view);
+                case ANALYZE -> analyzed(view);
+                case GENERATE -> generated(view);
+            }
+        } catch (RuntimeException | Error failure) {
+            failed = true;
+            throw failure;
+        }
+    }
+
+    private void requireOptions() {
+        Options options = Options.instance(compilerContext);
+        if (!"simple".equals(options.get("compilePolicy"))) {
+            throw new IllegalStateException("whole-unit LST requires -XDcompilePolicy=simple");
+        }
+        if (!"false".equals(options.get("allowStringFolding"))) {
+            throw new IllegalStateException("exact source requires -XDallowStringFolding=false");
+        }
+    }
+
+    private JCCompilationUnit requireView(M3JavacASTIndex.View view, M3JavacASTIndex.Phase phase) {
+        if (view.phase() != phase || view.task() != task
+                || ((BasicJavacTask) view.task()).getContext() != compilerContext
+                || !(view.unit() instanceof JCCompilationUnit unit)) {
+            throw new IllegalStateException("foreign compiler view or phase");
+        }
+        if (compilerThread == null) compilerThread = Thread.currentThread();
+        if (compilerThread != Thread.currentThread()) {
+            throw new IllegalStateException("compiler callback changed thread");
+        }
+        requireOptions();
+        return unit;
+    }
+
+    private void parsed(M3JavacASTIndex.View view) {
+        if (closed) return;
+        JCCompilationUnit unit = requireView(view, M3JavacASTIndex.Phase.PARSE);
+        if (pending.containsKey(unit) || completed.contains(unit)) {
+            throw new IllegalStateException("duplicate compiler parse event");
+        }
+        List<JCClassDecl> classes = new ArrayList<>();
+        for (var declaration : unit.getTypeDecls()) {
+            if (declaration instanceof JCClassDecl type) classes.add(type);
+        }
+        if (unit.getModule() != null || classes.isEmpty()) {
+            throw new IllegalStateException("provider requires a class-bearing compilation unit");
+        }
+        if (unit.endPositions == null || unit.docComments == null) {
+            throw new IllegalStateException("compiler did not retain source positions and comments");
+        }
+        for (JCClassDecl type : classes) {
+            if (unit.endPositions.getEndPos(type) < 0) {
+                throw new IllegalStateException("compiler did not retain class end positions");
+            }
+        }
+        pending.put(unit, new UnitState(view.source(), classes));
+        parsedUnits++;
+    }
+
+    private void analyzed(M3JavacASTIndex.View view) {
+        if (closed) return;
+        JCCompilationUnit unit = requireView(view, M3JavacASTIndex.Phase.ANALYZE);
+        UnitState state = pending.get(unit);
+        if (state == null || state.source != view.source()) {
+            throw new IllegalStateException("unit lacks its original frozen parse input");
+        }
+        JCClassDecl analyzed = null;
+        for (JCClassDecl type : state.classes) {
+            if (type.sym != null && type.sym == view.analyzedType()) analyzed = type;
+        }
+        if (analyzed == null || !state.analyzed.add(analyzed)) {
+            throw new IllegalStateException("unexpected or duplicate top-level ANALYZE event");
+        }
+        analyzedTypes++;
+        if (state.analyzed.size() != state.classes.size()) return;
+
+        CompileStates compileStates = CompileStates.instance(compilerContext);
+        Enter enter = Enter.instance(compilerContext);
+        for (JCClassDecl type : state.classes) {
+            var environment = enter.getEnv(type.sym);
+            if (environment == null || environment.toplevel != unit
+                    || compileStates.get(environment) != CompileState.FLOW) {
+                throw new IllegalStateException("partial or lowered compiler tree");
+            }
+        }
+        if (Log.instance(compilerContext).nerrors != 0) {
+            throw new IllegalStateException("compiler errors prevent attributed LST publication");
+        }
+        ReloadableJava21ParserVisitor visitor = new ReloadableJava21ParserVisitor(
+                Path.of(unit.getSourceFile().getName()), null, new FrozenCharacters(state.source),
+                styles, typeCache, executionContext, compilerContext);
+        long parseEvents = index.statistics().parseEvents();
+        J.CompilationUnit tree;
+        projecting = true;
+        try {
+            tree = (J.CompilationUnit) visitor.scan(unit, Space.EMPTY);
+        } finally { projecting = false; }
+        if (failed || index.statistics().parseEvents() != parseEvents) {
+            throw new IllegalStateException("compiler advanced during LST projection");
+        }
+        if (!state.source.equals(tree.printAll()) || tree.getClasses().size() != state.classes.size()
+                || tree.getClasses().stream().anyMatch(type -> type.getType() == null)) {
+            throw new IllegalStateException("shared compiler tree cannot produce an exact attributed LST");
+        }
+        pending.remove(unit);
+        completed.add(unit);
+        convertedUnits++;
+        consumer.accept(new Snapshot(unit.getSourceFile().toUri().toString(), compilerContextSha256,
+                state.classes.size(), tree));
+    }
+
+    private void generated(M3JavacASTIndex.View view) {
+        if (closed) return;
+        JCCompilationUnit unit = requireView(view, M3JavacASTIndex.Phase.GENERATE);
+        if (!completed.contains(unit)) {
+            throw new IllegalStateException("generation preceded whole-unit LST conversion");
+        }
+    }
+
+    /** Releases all borrowed compiler references; emitted OpenRewrite trees are owned by consumers. */
+    @Override public void close() {
+        if (closed) return;
+        closed = true;
+        incompleteUnits += pending.size();
+        task.removeTaskListener(lifecycle);
+        pending.clear();
+        completed.clear();
+        typeCache.clear();
+        index = null;
+        task = null;
+        compilerContext = null;
+        executionContext = null;
+        consumer = null;
+        compilerThread = null;
+    }
+}

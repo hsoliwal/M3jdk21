@@ -1,0 +1,8 @@
+Error: More than one ModuleTarget attribute
+java.lang.module.InvalidModuleDescriptorException: More than one ModuleTarget attribute
+	at java.base/jdk.internal.module.ModuleInfo.invalidModuleDescriptor(ModuleInfo.java:1216)
+	at java.base/jdk.internal.module.ModuleInfo.doRead(ModuleInfo.java:243)
+	at java.base/jdk.internal.module.ModuleInfo.read(ModuleInfo.java:129)
+	at jdk.jlink/jdk.tools.jmod.JmodTask.describe(JmodTask.java:318)
+	at jdk.jlink/jdk.tools.jmod.JmodTask.run(JmodTask.java:207)
+	at jdk.jlink/jdk.tools.jmod.Main.main(Main.java:35)

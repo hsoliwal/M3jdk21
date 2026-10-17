@@ -1,0 +1,25 @@
+{
+  "schema": "M3_AST_FINAL_CANONICAL_BASE_RECONCILIATION_V1",
+  "status": "PASS",
+  "prior_revision": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
+  "publication_baseline": "d391494684c17b1cb8930d4a1f99fe56c0882aa0",
+  "publication_root_tree": "a6bcf104135dd577460f298fdc172e9e2b3cf6ca",
+  "prior_mindex_tree": "a484031740d3a49a751bc9257ee9255177a54ba6",
+  "publication_mindex_tree": "cb9219991cf7e0cb062fd98e6a7dc5194fc5df60",
+  "full_mindex_tree_entries": 7043,
+  "tree_truncated": false,
+  "changed_mindex_blobs": [
+    {
+      "path": "runtime/src/main/java/com/synexia/mindex/ast/MIndexASTLeafIndex.java",
+      "git_blob_sha1": "cf9b819c4fd4bfaea2aafeb9773e01e773b838c8"
+    },
+    {
+      "path": "runtime/src/test/java/com/synexia/mindex/ast/MIndexASTLeafIndexSelfTest.java",
+      "git_blob_sha1": "9fd5020355e554295ec67f81b52471ae995de424"
+    }
+  ],
+  "removed_mindex_blobs": [],
+  "preservation": "The only changed MIndex blobs are the separate detached LeafIndex projection and self-test. This packet does not replace either canonical file. All other MIndex donor files and module preimages retain the already qualified identities.",
+  "recipe_providers": "Exact unchanged providers from the sealed 3aa revision are carried in task-local custody. No global receiving or canonical provider is overwritten.",
+  "scope": "Pinned-source reconciliation, not a whole canonical reactor or all-repository qualification."
+}

@@ -1,0 +1,166 @@
+{
+  "schema": "M3_AST_MODULE_WIRING_SOURCE_PINS_V1",
+  "synexia_base": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "canonical_compiler_pom_git_blob": "c8883a706a6affac7333cd5b4c81aee32e0381f4",
+  "canonical_compiler_pom_verified_unchanged_at": "3aa8e45d93f5fed721fdb64579b655f4a432a308",
+  "canonical_plugin_service_git_blob": "d81d5a8fce1e80a30e75a68e3b8232189fc8bf99",
+  "canonical_plugin_service_verified_unchanged_at": "3aa8e45d93f5fed721fdb64579b655f4a432a308",
+  "canonical_service_policy": "append M3ASTPlugin after both existing providers in their original order",
+  "hierarchy_lineage_sha256": "b6fdf28403d7f6cb49bc8235530df22d23ff7601f310402eefb02148df2c1201",
+  "recipes": [
+    {
+      "representation": "java",
+      "crate": "m3-ast-wiring-engine-20261017",
+      "files": [
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+          "before_sha256": "504f1616b68fbd10c3df38adaecd0e9d90de5535d791c8c1b57958b7455c9bd3",
+          "after_sha256": "99a1ff392d426f8deac0d3b79c67f5290de74995615a618f4e7e0dc1abff137b",
+          "template": "templates/engine/000-M3HashPinnedTextSnapshotRecipe.java.txt"
+        }
+      ]
+    },
+    {
+      "representation": "java",
+      "crate": "m3-ast-wiring-receiver-20261017",
+      "files": [
+        {
+          "path": "m3/ports/compiletime-openrewrite/src/main/java/com/m3/compiletime/ast/M3OpenRewriteSharedAST.java",
+          "before_sha256": "ABSENT",
+          "after_sha256": "d69c37b06fb02cbfa452dea6dfeee07563ad234f59929e255bce567f899bcde4",
+          "template": "templates/receiver/000-M3OpenRewriteSharedAST.java.txt"
+        }
+      ]
+    },
+    {
+      "representation": "text",
+      "crate": "m3-ast-wiring-canonical-20261017",
+      "files": [
+        {
+          "path": "synexia-mindex/compiler-openrewrite/pom.xml",
+          "before_sha256": "ABSENT",
+          "after_sha256": "d517ffbb75b66eb84ad37ec8e6a2fb74d072838677c86677b4b083e319a49704",
+          "template": "templates/canonical/000-pom.xml.txt"
+        },
+        {
+          "path": "synexia-mindex/compiler/pom.xml",
+          "before_sha256": "cadd7aaf62bf1da69dc01db646117d913cf4ca5eff99c34069965caec8fb822c",
+          "after_sha256": "a535fa0d65b497379680075f9bbb8001007c675456bec6921420a3395329cd33",
+          "template": "templates/canonical/001-pom.xml.txt"
+        },
+        {
+          "path": "synexia-mindex/compiler/src/main/resources/META-INF/services/com.sun.source.util.Plugin",
+          "before_sha256": "81284c5e2ce668388a675b578fa62ce8939ff6e26b81cffa128e5503b809cfec",
+          "after_sha256": "d499127e721306567c0754945d7cc3ccfd80993fb17e618be0a4afb09fa0faeb",
+          "template": "templates/canonical/002-com.sun.source.util.Plugin.txt"
+        }
+      ]
+    },
+    {
+      "representation": "text",
+      "crate": "m3-ast-wiring-receiver-20261017",
+      "files": [
+        {
+          "path": "m3/ports/compiletime-openrewrite/pom.xml",
+          "before_sha256": "ABSENT",
+          "after_sha256": "dad956e04d3789bc2a99a9f8c967801ad8c5ae5dee5c07538a942907013c1e42",
+          "template": "templates/receiver/000-pom.xml.txt"
+        },
+        {
+          "path": "m3/ports/compiletime/pom.xml",
+          "before_sha256": "7c289c126eb5895a049d6941d7ca102f2f043f3f2cb68395cb4ea387e0a07a13",
+          "after_sha256": "3c21173dbcc2ad43355c7bacfec8929e3aca731d2d02c315d13355deffdad870",
+          "template": "templates/receiver/001-pom.xml.txt"
+        },
+        {
+          "path": "m3/ports/compiletime/src/main/resources/META-INF/services/com.sun.source.util.Plugin",
+          "before_sha256": "ABSENT",
+          "after_sha256": "c910e53017adacdc0caaa4d769f3e18cc5e6dbb8622aa804d6c6951b10f65eab",
+          "template": "templates/receiver/002-com.sun.source.util.Plugin.txt"
+        }
+      ]
+    },
+    {
+      "representation": "text",
+      "crate": "m3-ast-wiring-service-order-canonical-20261017",
+      "files": [
+        {
+          "path": "synexia-mindex/compiler/pom.xml",
+          "before_sha256": "0ceb545be02120f7385ac1e17807090105da4177209f7a60a0bcaae0e9b56944",
+          "after_sha256": "a535fa0d65b497379680075f9bbb8001007c675456bec6921420a3395329cd33",
+          "template": "templates/service-order-canonical/000-pom.xml.txt"
+        }
+      ]
+    },
+    {
+      "representation": "text",
+      "crate": "m3-ast-wiring-service-order-receiver-20261017",
+      "files": [
+        {
+          "path": "m3/ports/compiletime/pom.xml",
+          "before_sha256": "fbab0c9242f7bbfb320aca01632af01586c84035e217db5d3b4cf36158e55874",
+          "after_sha256": "3c21173dbcc2ad43355c7bacfec8929e3aca731d2d02c315d13355deffdad870",
+          "template": "templates/service-order-receiver/000-pom.xml.txt"
+        }
+      ]
+    },
+    {
+      "representation": "text",
+      "crate": "m3-ast-wiring-service-preservation-canonical-20261017",
+      "files": [
+        {
+          "path": "synexia-mindex/compiler/src/main/resources/META-INF/services/com.sun.source.util.Plugin",
+          "before_sha256": "eb8ca6ac5327674e4cf91b9c63f6d3fccf05860982a1d5f98f4c96d8cc312004",
+          "after_sha256": "d499127e721306567c0754945d7cc3ccfd80993fb17e618be0a4afb09fa0faeb",
+          "template": "templates/service-preservation-canonical/000-com.sun.source.util.Plugin.txt"
+        }
+      ]
+    },
+    {
+      "representation": "text",
+      "crate": "m3-ast-wiring-hierarchy-closure-receiver-20261017",
+      "files": [
+        {
+          "path": "m3/ports/compiletime/pom.xml",
+          "before_sha256": "8c42b1e7512ca8fe4a34d131f4c5abb9589284acb7bf76f9a1b24309ddf3dff9",
+          "after_sha256": "3c21173dbcc2ad43355c7bacfec8929e3aca731d2d02c315d13355deffdad870",
+          "template": "templates/hierarchy-closure-receiver/000-pom.xml.txt"
+        }
+      ]
+    },
+    {
+      "representation": "text",
+      "crate": "m3-ast-wiring-optional-transitives-receiver-20261017",
+      "files": [
+        {
+          "path": "m3/ports/compiletime-openrewrite/pom.xml",
+          "before_sha256": "beb250f697db93684796f65d64a35b2bff8ff37e7be49877c3beaf5556486051",
+          "after_sha256": "dad956e04d3789bc2a99a9f8c967801ad8c5ae5dee5c07538a942907013c1e42",
+          "template": "templates/optional-transitives-receiver/000-pom.xml.txt"
+        }
+      ]
+    }
+  ],
+  "historical_recipe_only": "m3-ast-wiring-engine-20261017",
+  "active_providers": {
+    "schema": "M3_AST_MODULE_WIRING_PROVIDERS_V1",
+    "revision": "3aa8e45d93f5fed721fdb64579b655f4a432a308",
+    "mode": "EXACT_CANONICAL_UPSTREAM_INPUT",
+    "files": [
+      {
+        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+        "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+        "git_blob": "9d0788d3717e017d58345c5c3e62022c2915a3c8"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+        "git_blob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40"
+      }
+    ],
+    "superseded_local_extension": "99a1ff392d426f8deac0d3b79c67f5290de74995615a618f4e7e0dc1abff137b",
+    "policy": "historical extension recipe is evidence only and never materializes an owner"
+  },
+  "optional_canonical_source_sha256": "c12d325da4c8fe2dec533ffb728d8e9b815f40c5e65ee1eae54534f4cf2a2884",
+  "optional_mapping": "package declaration only"
+}

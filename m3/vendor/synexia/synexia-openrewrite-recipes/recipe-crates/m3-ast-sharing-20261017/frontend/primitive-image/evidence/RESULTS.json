@@ -1,0 +1,88 @@
+{
+  "schema": "M3_PRIMITIVE_SHARED_TASK_PROOF_V1",
+  "status": "PASSED",
+  "checks": 18,
+  "plugin_sha256": "f4baf0ae24e58c290a7de403c0571dccbe35c825694729aca40c3408db5b905c",
+  "patch_sha256": "3f50d59cca1cf7cf2811c0bb1da9314b71240c7f81f37854ed6fc021f03681b4",
+  "proof_sha256": "1173e40bbd4a47e10faf38682dab4c41937958dd14c3b24ef8dd209b7c6dcef0",
+  "baseline_source_sha256": "e62147e5b936b068106731123daee2a2ed8ebb738164d710a365ece78b0a23df",
+  "log_sha256": "c809d7f00673ecb21a51d35dd9a0ee83f0c267aec2ff4bd0a22eacd9666b148e",
+  "commands": [
+    [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+      "-source",
+      "21",
+      "-target",
+      "21",
+      "-Xlint:all",
+      "-Werror",
+      "--patch-module",
+      "jdk.compiler=/tmp/m3-primitive-shared-task-a_c3_lj_/baseline-src",
+      "-d",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_/baseline-classes",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_/baseline-src/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java"
+    ],
+    [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+      "--patch-module",
+      "jdk.compiler=/tmp/m3-primitive-shared-task-a_c3_lj_/baseline-classes",
+      "-m",
+      "jdk.compiler/com.sun.tools.javac.m3.M3PrimitiveImageCompiler",
+      "--out",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_/baseline-legacy.m3prim",
+      "--slots",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_/baseline-legacy.tsv",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_/Constants.java"
+    ],
+    [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+      "--patch-module",
+      "jdk.compiler=/tmp/m3-primitive-shared-task-a_c3_lj_/baseline-classes",
+      "-m",
+      "jdk.compiler/com.sun.tools.javac.m3.M3PrimitiveImageCompiler",
+      "--out",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_/baseline-fold.m3prim",
+      "--slots",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_/baseline-fold.tsv",
+      "--fold-expressions",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_/Constants.java"
+    ],
+    [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+      "-source",
+      "21",
+      "-target",
+      "21",
+      "-Xlint:all",
+      "-Werror",
+      "--patch-module",
+      "jdk.compiler=/tmp/m3-primitive-shared-task-a_c3_lj_/m3-javac-patch.jar",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+      "-classpath",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_/m3-ast-sharing.jar",
+      "-d",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_/proof-classes",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/primitive-image/TaskReuseProof.java"
+    ],
+    [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+      "--patch-module",
+      "jdk.compiler=/tmp/m3-primitive-shared-task-a_c3_lj_/m3-javac-patch.jar",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+      "-classpath",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_/m3-ast-sharing.jar:/tmp/m3-primitive-shared-task-a_c3_lj_/proof-classes",
+      "TaskReuseProof",
+      "/tmp/m3-primitive-shared-task-a_c3_lj_"
+    ]
+  ],
+  "modes": [
+    "legacy",
+    "fold-expressions"
+  ],
+  "tasks_per_mode": 1,
+  "parses_per_mode": 1,
+  "image_bytes_equal": true,
+  "sidecar_bytes_equal": true
+}

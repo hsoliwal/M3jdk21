@@ -1,0 +1,3364 @@
+{
+  "schema": "M3_AST_EXACT_RECIPE_MIRROR_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_revision": "bb88a4d1abaee4b209db0be8812fc9911e3749df",
+  "canonical_recipe_tree": "1ecb64d6050d0270b9b0ca433224600d9c53c955",
+  "canonical_implementation_revision": "1bbe38f1746e78b334e74abb01cc932920023978",
+  "canonical_task": "synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017",
+  "target_prefix": "m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017",
+  "copied_without_changes": true,
+  "files": 670,
+  "inventory": [
+    {
+      "path": "README.md",
+      "sha256": "5632b968fcfd276a8e5dd33c4d5f0fa055c3c4dddc051ff2a142fb307a19b5db",
+      "git_blob_sha1": "b6e582a4fcac5b0c437674865c379c25a05f9754"
+    },
+    {
+      "path": "cache/README.md",
+      "sha256": "d87450abb4b5f29adf4c657ca8076de3521017b5681b6448eba6f4ed0dbcd704",
+      "git_blob_sha1": "92b9abe1c6a52e14f6bdfcbedfab4e70d991e328"
+    },
+    {
+      "path": "cache/SOURCE_LINEAGE.json",
+      "sha256": "c9d90a6c5167a92e71ab0258638ab0b1c858f5ea8aeea0eb25ef2faa26c60e19",
+      "git_blob_sha1": "27cd7f12c0de9dcd84fb31cf279be926e4080b3d"
+    },
+    {
+      "path": "cache/build_native_proof.py",
+      "sha256": "8ecebfb6da6a29186e5f8e831e2f44361a2a7f94fe79ca9d4a317e2924776e7d",
+      "git_blob_sha1": "3e0ce3c5a8f11f9f5744cc41fdc26aa45ca0c6d0"
+    },
+    {
+      "path": "cache/evidence/ISOLATED_NATIVE_BUILD.log",
+      "sha256": "a275153d72ca619bb825d1f9eaf5c0f267ef2a509dea9a13765b1c6348f9f8b2",
+      "git_blob_sha1": "8010c5fdbe4fc541a49adafc53d8ae122606997f"
+    },
+    {
+      "path": "cache/evidence/ISOLATED_NATIVE_COMMANDS.log",
+      "sha256": "0e60ccf81108bfcdccf5171744cb0ef84c1ced69dc288263237b57232d074e27",
+      "git_blob_sha1": "661dd7fff40ec8a013a15baacfc0545448f5d1a7"
+    },
+    {
+      "path": "cache/evidence/ISOLATED_NATIVE_RECEIPT.json",
+      "sha256": "6c03f999049150db40c7b4144e34f5b70ea728d8f7ba4c61dc692aadfac12433",
+      "git_blob_sha1": "cf62763a9a87e98c1788aea98bbee7855deded9c"
+    },
+    {
+      "path": "cache/evidence/QUALIFICATION.json",
+      "sha256": "c0ee5d62a1f7fc77dc88b91feeae3d25fbaa43eca9f52a0684be1a74aec29c94",
+      "git_blob_sha1": "1edb18b0c27af3ee4f5c92cd7ee153152ac271ed"
+    },
+    {
+      "path": "cache/evidence/SELF_CONTAINED_NATIVE_BUILD.log",
+      "sha256": "d8c2af14a7840a02c297c8fc0dc7666615ce01bd305e4efcce4fabaabb3c5038",
+      "git_blob_sha1": "caa85fcc07a8a34c3b7e391242cd74d8df75fd01"
+    },
+    {
+      "path": "cache/evidence/SELF_CONTAINED_NATIVE_RECEIPT.json",
+      "sha256": "044abb69644327aa9ea231e08f3da6dbcaac13e4d9f2ccaa2074e015730755f1",
+      "git_blob_sha1": "1d2726ad0d5bb70a23bbc6eff771fa7e4ffdac29"
+    },
+    {
+      "path": "cache/evidence/SOURCE_LINEAGE.json",
+      "sha256": "c9d90a6c5167a92e71ab0258638ab0b1c858f5ea8aeea0eb25ef2faa26c60e19",
+      "git_blob_sha1": "27cd7f12c0de9dcd84fb31cf279be926e4080b3d"
+    },
+    {
+      "path": "cache/evidence/com.synexia.mindex.compiler.ast.M3ASTWorkspaceCacheNativeTest.txt",
+      "sha256": "a2c714ba3e9c74ba0f25e4e4378736b314756ef905ee83dc4e808a7d5502f00f",
+      "git_blob_sha1": "a94b2e64350ab68f09bee88d7a79064646ea3d2a"
+    },
+    {
+      "path": "cache/evidence/com.synexia.mindex.compiler.ast.M3ASTWorkspaceCacheTest.txt",
+      "sha256": "dce04d89e727452c8d3a7e95d02509993a985179a3f8d5980f2c25792563327f",
+      "git_blob_sha1": "c0d5f88d221d00925706821dc5faafa6c895fbe1"
+    },
+    {
+      "path": "cache/evidence/com.synexia.mindex.compiler.ast.M3FileSourceFactsTest.txt",
+      "sha256": "f0d93cf0ec676fc4894cc524a5166d900ae3211e5546b1d91e372cd245e8d62d",
+      "git_blob_sha1": "655f4e62c1f635998fb7dffcffca2aa2d2745dcd"
+    },
+    {
+      "path": "cache/evidence/com.synexia.rewrite.M3ASTCacheRecipeTest.txt",
+      "sha256": "3471f151b03be1df28748e4732220d35019077b5d5ab7921875c8598269dc341",
+      "git_blob_sha1": "1332144e8e1d38fcb0155053ad222eb2cb9c95e8"
+    },
+    {
+      "path": "cache/evidence/counterexamples/abi-export-inventory/counterexample.json",
+      "sha256": "c760c3b6d4cdbf9c38da6aacb0dbe6b666ebfd54a91db70ae5106419f0440130",
+      "git_blob_sha1": "6dfb09b33e63680ad8d4a184902eeb5b3dff69b0"
+    },
+    {
+      "path": "cache/evidence/counterexamples/abi-export-inventory/initial-native-build.log",
+      "sha256": "44f7320821b3555b61ac92a0b0cff67d8480f240486e4551e5e2574c78e97674",
+      "git_blob_sha1": "f79f21392c595fa6d6a06eb90b7ad2f2b4fdb11c"
+    },
+    {
+      "path": "cache/evidence/counterexamples/abi-export-inventory/initial-proof.py.txt",
+      "sha256": "3b2a2d8e33916d8cdcf3bffafe99c3e2c3bd5d1609ab27c576f840f6b68330d4",
+      "git_blob_sha1": "23d08ddf484b7064e4b638fd1459f00f28b5409e"
+    },
+    {
+      "path": "cache/evidence/native-build.log",
+      "sha256": "bcc5e442d41bcf937ad920683c4525e010781c414763b0fd1d8cec7feb0be2f3",
+      "git_blob_sha1": "0be6af89fa02aaa377c75994c273613cdd3195fa"
+    },
+    {
+      "path": "cache/evidence/native-receipt.json",
+      "sha256": "aea7b9de7e40aa0fd792d051c3d082bf3fe831df34dafebe7f0c8d6a318ece67",
+      "git_blob_sha1": "8acddb16e79e0b0ac607558a3f96cfe222328f8e"
+    },
+    {
+      "path": "cache/native-abi-sources/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/JavaSwapPageBinaryOps.java.txt",
+      "sha256": "16dbc821c896e4cba3ce289c741fd4ab3df35a0577e6461deea7a296db03fbfe",
+      "git_blob_sha1": "68f9010340cbb3425c1d0a3ccfba75bdac4997d4"
+    },
+    {
+      "path": "cache/native-abi-sources/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/JniSwapPageBinaryOps.java.txt",
+      "sha256": "90d592a4db43c0d4f0d6b04e32b9ded4ae12a36147a6caae94964b12dfb5246f",
+      "git_blob_sha1": "2ebe4b69601ad2370c17d18d30f76b689e7f0b4d"
+    },
+    {
+      "path": "cache/native-abi-sources/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapPageBinaryOps.java.txt",
+      "sha256": "37bf0ef4bf586dd1a305ee9ae45396f7a856a22eb8b14640d1ebbbcc1a9d06e1",
+      "git_blob_sha1": "9d301a85847d4cad70bc7f4358e7a3fdc8d307af"
+    },
+    {
+      "path": "cache/native-custody-replay.log",
+      "sha256": "a275153d72ca619bb825d1f9eaf5c0f267ef2a509dea9a13765b1c6348f9f8b2",
+      "git_blob_sha1": "8010c5fdbe4fc541a49adafc53d8ae122606997f"
+    },
+    {
+      "path": "cache/pom-runtime.xml",
+      "sha256": "9b64ce9f740b9b903e70599dd6ea535b31f4e0929d003d2f5d4021404041f497",
+      "git_blob_sha1": "e410034f83a5610d80169f18cfa09e65f0e2e541"
+    },
+    {
+      "path": "cache/pom.xml",
+      "sha256": "d0c73fd4303fca787a872ad63f72478706a6b4daf1a427add5ab185b8d03a66f",
+      "git_blob_sha1": "a514ebe98af3dfe550b2fc4fddbd4d79d9ede95e"
+    },
+    {
+      "path": "cache/prepare_crate.py",
+      "sha256": "3efe8eafb380053425f7d137413335f4f5f1b08368d7a8efbaf557aa6a8b1a1a",
+      "git_blob_sha1": "6681118d020b75575ae1d43c0e95e2abe24d455c"
+    },
+    {
+      "path": "cache/runtime-tests/M3ASTCacheTestSupport.java",
+      "sha256": "79ccef742545a82142ea205b580e7cde384bfbf7d0974e01bae19d721d7093a4",
+      "git_blob_sha1": "58ffd1fe0118bd493055ff1384d622e64a3c74c2"
+    },
+    {
+      "path": "cache/runtime-tests/M3ASTWorkspaceCacheNativeTest.java",
+      "sha256": "7674c6533bf115d4e0515875cba9c95f088fffad364f39b2cea3e702c12e7f64",
+      "git_blob_sha1": "39faad4dce9e56ee22a88be61dadd187c6619832"
+    },
+    {
+      "path": "cache/runtime-tests/M3ASTWorkspaceCacheTest.java",
+      "sha256": "20313c8ec7c35efff91a5ed78bc922cb54922c918c65cd521e83309b5945ba07",
+      "git_blob_sha1": "8feef678de7f6bdf0087b31b0afd70071c2d167c"
+    },
+    {
+      "path": "cache/runtime-tests/M3FileSourceFactsTest.java",
+      "sha256": "6fffe7cb1d1e99f933f4605d1c4b1c5fb53c3520cf985d51492788ddb3723df4",
+      "git_blob_sha1": "e3a5fe64c004a221d53b090ca3d39805e648908a"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/00-M3ASTWorkspaceCache.java.txt",
+      "sha256": "7ad205f6521a14879ae537ff15a98199dc3b023ae7c69e844aea1f3664f5bae1",
+      "git_blob_sha1": "9dc2f18ba0d98f0408777cf00ce7a40ff59ee428"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/01-M3FileSourceFacts.java.txt",
+      "sha256": "3c6052c962b61b5cda14f1eab41a08f23a30c840a94f14ae2f57ef50f8fca32c",
+      "git_blob_sha1": "faf588b250f0fc3fcc2a91bf78d1c7d5f06b0589"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/02-M3ASTCacheTestSupport.java.txt",
+      "sha256": "79ccef742545a82142ea205b580e7cde384bfbf7d0974e01bae19d721d7093a4",
+      "git_blob_sha1": "58ffd1fe0118bd493055ff1384d622e64a3c74c2"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/03-M3ASTWorkspaceCacheNativeTest.java.txt",
+      "sha256": "7674c6533bf115d4e0515875cba9c95f088fffad364f39b2cea3e702c12e7f64",
+      "git_blob_sha1": "39faad4dce9e56ee22a88be61dadd187c6619832"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/04-M3ASTWorkspaceCacheTest.java.txt",
+      "sha256": "20313c8ec7c35efff91a5ed78bc922cb54922c918c65cd521e83309b5945ba07",
+      "git_blob_sha1": "8feef678de7f6bdf0087b31b0afd70071c2d167c"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/05-M3FileSourceFactsTest.java.txt",
+      "sha256": "6fffe7cb1d1e99f933f4605d1c4b1c5fb53c3520cf985d51492788ddb3723df4",
+      "git_blob_sha1": "e3a5fe64c004a221d53b090ca3d39805e648908a"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/manifest.tsv",
+      "sha256": "00e039e89bae3fc8d4b6bd637415ebdabf7023789e5d53914b85d5d6ca85e921",
+      "git_blob_sha1": "e75d884d2a32c8a4bca4d9410e0446b81a4a2ac0"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/00-M3ASTWorkspaceCache.java.txt",
+      "sha256": "26e47cc50a069b25c45c77a67104b3e0b41abcfb3c6f8ba1ee2dbd452311feec",
+      "git_blob_sha1": "fc9120a5f8bbae63ccad7030986e075b08602413"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/01-M3FileSourceFacts.java.txt",
+      "sha256": "01bb62f9acc4fda98cc93ab63c83e259c22b70ba3a0757b195b071f80f2a74dd",
+      "git_blob_sha1": "29193f8054695364428a5e8c22a213b1f6224638"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/02-M3ASTCacheTestSupport.java.txt",
+      "sha256": "fd022b757843e340785bec9145db5db23e659be31cec01d278d1506ee2b76f46",
+      "git_blob_sha1": "7741338b920c3e71c25e6f34f0675c59f17c4074"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/03-M3ASTWorkspaceCacheNativeTest.java.txt",
+      "sha256": "6d45fa3b3547a3a8c51958eb93d63e979c888f7beeb41739c06f055f42f2567c",
+      "git_blob_sha1": "e24234d1cd6c5d2f2d007956cdb1c7b2660226dc"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/04-M3ASTWorkspaceCacheTest.java.txt",
+      "sha256": "e77fec2dc736e9c1581e7d47dbe87644e86c865875aef8569cb0a186c198cad0",
+      "git_blob_sha1": "904771634c548defdb98dc4c6cf8a39647dda68c"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/05-M3FileSourceFactsTest.java.txt",
+      "sha256": "0fc00b688ce30aab99caaa7dfffe57b90a6c286b257f4f0c34b2ed3701adcdfe",
+      "git_blob_sha1": "95172be8f1b913224fe20dae346b25d2ee3b529b"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/06-SqliteSwapStore.java.txt",
+      "sha256": "091c41271c42f3603ee7d64439d612541a875217dc85783700752bbe16d959cf",
+      "git_blob_sha1": "f74acfb24e0a3061f542aaf8b8ba9b7a646604ee"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/07-SwapBudgetPlane.java.txt",
+      "sha256": "88051ebf6e2ab8d73d92e3252fe2a05ab8f9c95894eb1f39ddbf4d019407e4b0",
+      "git_blob_sha1": "600754efed3306213dac1908ef4fbca8a865f6f4"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/08-SwapNativeLibrary.java.txt",
+      "sha256": "a1d0724afb9ee986b99e12e666ffc49b72cb0a37804baebf88c8a30e46e28a6c",
+      "git_blob_sha1": "ae51e7d3e0fcdabeb3725c5a834adf95ba7f6ff0"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/09-SwapStore.java.txt",
+      "sha256": "5a99e61ed20a662c8b44957571e9159c7fd3fc784360b659f289a0e8f438b1ee",
+      "git_blob_sha1": "47eee325cec2f97c09d22cdb37e9f7a91abb80d5"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/10-TieredSwapCache.java.txt",
+      "sha256": "b76151008b20862bc56e14edf48f0034b29f2a7b9d9229bc2c4c085ebfef5ae3",
+      "git_blob_sha1": "22fe5017f55d39bba1a10d588ecf1b12fad17726"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/11-JniLibraryLoader.java.txt",
+      "sha256": "fa22dcfcc2b442c72ee3dd97e5d97dd5c9ad19ee4eac422641336b7477c63699",
+      "git_blob_sha1": "da5d6391af12d53a71c5f1e0f3736fa125659b64"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/12-NativeLibrarySpec.java.txt",
+      "sha256": "fd9bc8f19f629e6131dcb55f264eed524fa17e69bdda31d723b4addfddb8a4f5",
+      "git_blob_sha1": "39b9f04e46411de9bf7b8063608241efb2819aca"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv",
+      "sha256": "9c4c435a4908b35451b13acccc38825a05d2d6e1635bc13735e635ad05611a8f",
+      "git_blob_sha1": "7e1b50c315e060c2aa41a2b21cdd961e647fe4a2"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-cache-native-20261017/00-CMakeLists.txt.txt",
+      "sha256": "e164a6981af9626f797872b1e2a70ebcf77005292459275f463e4d8325eaf8ee",
+      "git_blob_sha1": "2ec59294a9d14f0420cdbc4a44645c776dae3b3f"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-cache-native-20261017/01-mindex_swap.c.txt",
+      "sha256": "4d8c04f5b50498038ce39c7d8412d24340a59c6a5f624c4e47fa1ea145fb762f",
+      "git_blob_sha1": "e55b0c4c6e78b789e570c6c002a6157ad73fbfb5"
+    },
+    {
+      "path": "cache/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-cache-native-20261017/manifest.tsv",
+      "sha256": "3ce4a2fb1b0137bd88aca80c376d933eec18d25122302348a5df4a49bf6e3c5d",
+      "git_blob_sha1": "14c6c3c11293e27c7cda8bf8c3d3bdf95fd52562"
+    },
+    {
+      "path": "cache/src/test/java/com/synexia/rewrite/M3ASTCacheRecipeTest.java",
+      "sha256": "7eb39dabd4c045d0b9151761f29ce56f736804a81747be40e517b50aa85aed9b",
+      "git_blob_sha1": "a4f751b5dcbbeca08f5f5e056f601d945c949bce"
+    },
+    {
+      "path": "cache/templates/M3ASTWorkspaceCache.java.txt",
+      "sha256": "7ad205f6521a14879ae537ff15a98199dc3b023ae7c69e844aea1f3664f5bae1",
+      "git_blob_sha1": "9dc2f18ba0d98f0408777cf00ce7a40ff59ee428"
+    },
+    {
+      "path": "cache/templates/M3FileSourceFacts.java.txt",
+      "sha256": "3c6052c962b61b5cda14f1eab41a08f23a30c840a94f14ae2f57ef50f8fca32c",
+      "git_blob_sha1": "faf588b250f0fc3fcc2a91bf78d1c7d5f06b0589"
+    },
+    {
+      "path": "frontend/CATALOGUE.tsv",
+      "sha256": "52e281f85ba5ffc5384ad3cc63556611213ae5ab8f9f8fd5e4ad917f64d1dfc9",
+      "git_blob_sha1": "b6bdd82ae73fd46f2d1a56a5eaf202ba0d7601ea"
+    },
+    {
+      "path": "frontend/FILE_REVIEW.tsv",
+      "sha256": "a03c376f82a950de8f4971aeceb88f78a9d7f32ea00b8fc3e86555d66e95a7d2",
+      "git_blob_sha1": "c73e9a59f2087bfc1a1208dda002d648df69b676"
+    },
+    {
+      "path": "frontend/README.md",
+      "sha256": "b140a4b68bf4ca891b1ffcea288419a83f2726d639b2997e44fdc57c5f7054f5",
+      "git_blob_sha1": "2a52586f86083b16f1a2aeb2fbe759b27b63036d"
+    },
+    {
+      "path": "frontend/SOURCE_LINEAGE.json",
+      "sha256": "45d43c8032e1a70e77f77cc97967bff1b661907002259d49e59ab324c069eba8",
+      "git_blob_sha1": "6a03721bb53872c20a08a5e1f52c2fadd9d63ba3"
+    },
+    {
+      "path": "frontend/UPSTREAM_COMPILER_COMPOSITION.json",
+      "sha256": "71f2fcffe7ee0be3e4f3c429bbf3b64fd07b40686249b3793ddd4e885e8375be",
+      "git_blob_sha1": "cb6b770d1b9b8b256ec31a8591ef42e748482efa"
+    },
+    {
+      "path": "frontend/before/JavaCompiler.java.txt",
+      "sha256": "c6e55b5eaf69b484edf408f261104b8fc0a2b62b4fe88c023924e79614ca90ea",
+      "git_blob_sha1": "2613ea8b2a93411d3f3f7d428a31ef8bed642da3"
+    },
+    {
+      "path": "frontend/before/M3PrimitiveImageCompiler.java.txt",
+      "sha256": "e62147e5b936b068106731123daee2a2ed8ebb738164d710a365ece78b0a23df",
+      "git_blob_sha1": "ba3fa2334eb48479c8c2c4e8fdd9c4e22f0e1d4f"
+    },
+    {
+      "path": "frontend/before/MIndexASTImage.java.txt",
+      "sha256": "5d124dd864b2149388f0d5865d2b78032be9eb1a3c166571fb161255763ebaf6",
+      "git_blob_sha1": "2b3424d34c3e9728440881c8242efd4a00b92673"
+    },
+    {
+      "path": "frontend/before/MIndexJavaAST.java.txt",
+      "sha256": "65ed6ab63ee2a091cf854ff5bc871ee773d92f9c53bb45934873d1c578a76280",
+      "git_blob_sha1": "d23ea38d51048478c972b9e19441dde9479372bb"
+    },
+    {
+      "path": "frontend/build_candidates.py",
+      "sha256": "f89507128a8b3c210ddaac7926519011c429646ba7b0effe624532cc0ed98f97",
+      "git_blob_sha1": "063bd2b10ff99d3d363223b5e1c1c02bb0ceccb1"
+    },
+    {
+      "path": "frontend/compose_upstream.py",
+      "sha256": "e22d0a3d48b8bbd70150944ae067356b9ab7ac5083b81ab98d1d011e93202020",
+      "git_blob_sha1": "cb050c4883018c3d0955b8449f6f9e0a9c69c5ab"
+    },
+    {
+      "path": "frontend/evidence/COUNTEREXAMPLE_MATERIALIZATION_OOM.log",
+      "sha256": "dd08731bf8c70551aa26a025d0858b1b591d02badf5f77030d3a92c8a825ecea",
+      "git_blob_sha1": "bc6f297366bec9b7b247c9dda97b86f6c2341083"
+    },
+    {
+      "path": "frontend/evidence/FINAL_CANONICAL_RECONCILIATION.json",
+      "sha256": "3c505448aa8e835f4071522aa836a4dcae55db9d7820e1da36da0b049a5e86df",
+      "git_blob_sha1": "5fd91bf57131b484f8ee62021a0a3aa4dcb2bd24"
+    },
+    {
+      "path": "frontend/evidence/FINAL_COMPOSED_APPLICATION.json",
+      "sha256": "c26473f464636eae816730258a41b45ff9d6e49fd51a5b3c1bae14578d185906",
+      "git_blob_sha1": "cb4f009af0ba9f852bff7f824134bb8d370409cb"
+    },
+    {
+      "path": "frontend/evidence/FINAL_COMPOSED_APPLICATION.log",
+      "sha256": "800b2cbad03dd270a58b4b1d3f03e1b1c2efe80f020aac1f6b5d7cf116dc0dbc",
+      "git_blob_sha1": "9047f5057c2879bf564877ee6f2510a3f1dfe4d3"
+    },
+    {
+      "path": "frontend/evidence/FINAL_COMPOSED_APPLICATION.xml",
+      "sha256": "81274984acbea75f49487393c43eebe858fb21cb1154d76bcd2a6d1c41ebb049",
+      "git_blob_sha1": "4a5e5525009431e0e3cac3be069e682219eb8d58"
+    },
+    {
+      "path": "frontend/evidence/FINAL_COMPOSED_ARTIFACTS.json",
+      "sha256": "c080bf488cb333f94454320c0f7f366353c1643266ca409a6a61546a750c4cf6",
+      "git_blob_sha1": "c73d07e2cb2392a73fa504f0afd4ecc43cda8ea5"
+    },
+    {
+      "path": "frontend/evidence/FINAL_COMPOSED_ARTIFACT_BUILD.log",
+      "sha256": "a5b5113c1d192e945f630bc2a7c955ef4445628c726cf1f97e92cc1143dafb33",
+      "git_blob_sha1": "acd40bcf49550845d271803773bae18ee1efa81e"
+    },
+    {
+      "path": "frontend/evidence/FINAL_CORE_APPLICATION.log",
+      "sha256": "f3a3e72f7a5cb0fddc1ed7e65dc4cfc731ddc228e9e7cdaccd727cf5289e88d8",
+      "git_blob_sha1": "74c591ea107a1478c1b4fd2c67218cb709d2bade"
+    },
+    {
+      "path": "frontend/evidence/FINAL_CORE_SDK_REPLAY.log",
+      "sha256": "74c00ceef9609174b73cff51c1aa56b461f79e88153632ba786d0580c93e2ba2",
+      "git_blob_sha1": "dffa515fa1862a0cadfd5b68f86f2bf21acddc68"
+    },
+    {
+      "path": "frontend/evidence/FINAL_PRIMITIVE_VERIFICATION.log",
+      "sha256": "b57d9b34ad8a848213257aed075c802af3e0d39fa457f85ef2284cc4137a6a4a",
+      "git_blob_sha1": "957e08888964d287ffe0d538ba56baf6de4dbbbc"
+    },
+    {
+      "path": "frontend/evidence/FINAL_RUNTIME_VERIFICATION.log",
+      "sha256": "9a03cbd2ec966f024ba04d9370d927b8aac902295d53c5708f4e3160ea6c39a0",
+      "git_blob_sha1": "5b23e42c0ab430c37630bc0eac0aaa676d9b4162"
+    },
+    {
+      "path": "frontend/evidence/FINAL_UPSTREAM_COMPOSITION_SDK.json",
+      "sha256": "4b442992cc423587d29d3049afada3c7edeeae2af718a5b113842b8c4c525fc6",
+      "git_blob_sha1": "153349c56484b66714733ead2b87cd1f17daf7e7"
+    },
+    {
+      "path": "frontend/evidence/FINAL_UPSTREAM_COMPOSITION_SDK.log",
+      "sha256": "59425737e7ecf03586299e10bc3d9753bab57428f761b7200f9800204acf38d8",
+      "git_blob_sha1": "cd89ea16f4507ba51e2f640d870124e5526f3719"
+    },
+    {
+      "path": "frontend/evidence/FINAL_UPSTREAM_COMPOSITION_SDK.xml",
+      "sha256": "a1b40f1ea06a69384531436c80b621792d9a30eaf2ec9d338d21d661e856ac58",
+      "git_blob_sha1": "af68d5646d7aa8cd03c21ff74a531fc5d6968318"
+    },
+    {
+      "path": "frontend/evidence/PUBLIC_CATALOGUE_REVIEW.json",
+      "sha256": "63b050727cd91a41d8ac5bd96a907e5a2d2086064538f2944bea1051bd444eea",
+      "git_blob_sha1": "2397bc573454e2e2fc43616ca93e9ced4c4ff7bc"
+    },
+    {
+      "path": "frontend/evidence/UPSTREAM_SOURCE_RECONCILIATION.json",
+      "sha256": "71a4c957150745c4000e32b48cc32be9f009eda648f097a47a9d78914ca10229",
+      "git_blob_sha1": "ba999d96fbeccbff12b2fdffec86c76a7acd702f"
+    },
+    {
+      "path": "frontend/evidence/counterexamples/shared-class-output/README.md",
+      "sha256": "276ac0d908967384e39deb7b113b763b356f15b2ac1e7540a6919b71b8be2c2a",
+      "git_blob_sha1": "5d65d915dec57094b5cdb4e2712ddb1dbd7ea00a"
+    },
+    {
+      "path": "frontend/evidence/history/before-upstream-composition/JavaCompiler.java.txt",
+      "sha256": "61179a228484bac588420991f811d67dd18d95b36debb4320ced1e06240c36c0",
+      "git_blob_sha1": "eb4b2b7113f57f5b10ec173ca051c8e09dec87e7"
+    },
+    {
+      "path": "frontend/evidence/history/before-upstream-composition/M3ASTPC.java.txt",
+      "sha256": "606a4f516965c0113b2cec898e2a8bf8470d8fb32b493e99d6be7f709bf10e62",
+      "git_blob_sha1": "90c5586114e79ba55ead6ae4873574c66ea07145"
+    },
+    {
+      "path": "frontend/evidence/history/before-upstream-composition/M3ASTPlugin.java.txt",
+      "sha256": "499547e8bafab76eb93b20454d41f0d63f6dbe556cd65f027fc10db7cfcfe23f",
+      "git_blob_sha1": "003a342f674a19ae2eb5f660ed09d650be2e0d00"
+    },
+    {
+      "path": "frontend/evidence/history/before-upstream-composition/M3PrimitiveImageCompiler.java.txt",
+      "sha256": "b989760e908a95712386a8f072d8cb0cad4cfafc6356dcf6e34e03733461929b",
+      "git_blob_sha1": "eeb47f80f078212842efa4fe4644592b93a7e2c1"
+    },
+    {
+      "path": "frontend/evidence/history/before-upstream-composition/compiler-manifest.tsv",
+      "sha256": "2a4ba306e61ccfe89281687fcbc83e4a7b5b80f64a7765858b6b7e18ae5e198d",
+      "git_blob_sha1": "49a13dd4ccfe8f9d4258539341480cbd00430957"
+    },
+    {
+      "path": "frontend/hierarchy/README.md",
+      "sha256": "785bb192d353432b12496a0e78c434f44f8bbf7dc6e2dc09a6773ca284554b35",
+      "git_blob_sha1": "eda3aff0e7badf137f2d81c81f0713d0dac98b30"
+    },
+    {
+      "path": "frontend/hierarchy/SOURCE_LINEAGE.json",
+      "sha256": "b6fdf28403d7f6cb49bc8235530df22d23ff7601f310402eefb02148df2c1201",
+      "git_blob_sha1": "beb6744c8fe412124dc913759e989d7d1cc1baa6"
+    },
+    {
+      "path": "frontend/hierarchy/build.py",
+      "sha256": "966183e7c22812e0d9e5cc3f4bc29fcbe3d8700bb1c7384a94e6d2716eaff12f",
+      "git_blob_sha1": "711edfce8b78b2d140a04d90fe80cde99f9d6623"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/FINAL_DONOR_RECONCILIATION.json",
+      "sha256": "fa7452a6f7286b3a84cf7208d5b8ba9bf038ae000d4edcd3e1d9e5cb46ddde0a",
+      "git_blob_sha1": "ebb4cdb35057d5cd7c47d93f9e3b832b1f6a3877"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/FINAL_GENERATED_PATHS.json",
+      "sha256": "d906f6a37f8257815f10eb8157774fa57e094b1294b8d4671e58d537f0261b53",
+      "git_blob_sha1": "9ddd17d1a5aca1289f669a1f41b7f0a579c1ac0c"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/FINAL_GENERATED_PATHS.tsv",
+      "sha256": "4e1edbe0ba0697b0e63d82e2da598f270d112c12b2a038e83da9840aa562429b",
+      "git_blob_sha1": "6f8a799ca97d511b9716141a2d408b0bd3fcc4bb"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/INTEGRATION_AUDIT.json",
+      "sha256": "e3de20ee05e647031ee2ccfee436e69a22331cdc2dad9c472630bb2de127b040",
+      "git_blob_sha1": "4008ccd2812d8b7ef9a333a86a15683f89f9c422"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/QUALIFICATION.json",
+      "sha256": "8f9ab3d98af12ebfe5ce7cc603b28f103da0d331ed8ee95217700b0657f24c47",
+      "git_blob_sha1": "ed4e8723e788ae8a3e4128ad51ee68748e8b41a5"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/applied-source-hashes.json",
+      "sha256": "b457f1330c019a86817306a53077e71b6ba3e623f2cbfd1a2cedbece5b65551e",
+      "git_blob_sha1": "7e37505eb58a1b52d68345a111938dc4e811cab0"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/counterexamples/partial-cache-long-overflow/PartialCacheLongOverflowProbe.java",
+      "sha256": "95af2bc0fafa70ca9ffd618b7409303de22c347ec24b4b42a4bfb70b3cb32ecc",
+      "git_blob_sha1": "2978a70efc7225dfc0ccfe6dae20240eb3eb7957"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/counterexamples/partial-cache-long-overflow/RECEIPT.json",
+      "sha256": "e24bb6fc944e6e24d232c3824031e6ae7d011cbecdca5eaf843f5bc7aebf5426",
+      "git_blob_sha1": "259867792fbe5524a7ef0d60cdc6ad6e4a52da5a"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/counterexamples/partial-cache-long-overflow/compile-original.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/counterexamples/partial-cache-long-overflow/run-original.log",
+      "sha256": "e24b3dddd7e7b295d79893630e56a58237d6f21fb0909ad1438462391a81270c",
+      "git_blob_sha1": "f0772756c1967feecd29670c9f0fab75a8e22ec4"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/final-composed/COMPILE.json",
+      "sha256": "509032a22ac199f21addddb7bc6b5adfaf8f25ce37ae50863b9b41654ec2a850",
+      "git_blob_sha1": "853a89006266ac2120b22943dc732c7b9233e96f"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/final-composed/QUALIFICATION.json",
+      "sha256": "f2d149aba0468afddafa5260f928a1af442f2a9d7ca5abefb43125321c186896",
+      "git_blob_sha1": "ae32c9d8595c9d5044074909a23be16786e5ccd4"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/final-composed/TEST-com.m3.compiletime.ast.M3ASTHierarchyFactsTest.xml",
+      "sha256": "b97316f70e0ceec3b33f7b71768de00c0a2ab73bb78784f09f55635080d5b8bc",
+      "git_blob_sha1": "cdd75ac801d25f19b9a98d0989dc310043faaab5"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/final-composed/TEST-com.m3.compiletime.ast.M3ASTHierarchyTest.xml",
+      "sha256": "f65f40d5bdbb8f8e254193ecbd6b42179bbce75c624e97b344b19b41bee779ba",
+      "git_blob_sha1": "cee36aa0c34cfe77877f9d28a94b18e6575e2613"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/final-composed/TEST-com.synexia.mindex.compiler.ast.MIndexASTHierarchyFactsTest.xml",
+      "sha256": "16e7910681dc018a420cb9057e414d3f2faf952d91c50b7148a478b42a576b23",
+      "git_blob_sha1": "251daf5aafe24f967673622e5c4fdd538762be3c"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/final-composed/TEST-com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest.xml",
+      "sha256": "289583284764372ef6cb72ddd054bf1a124add38a030f567f5b46e39a1e24aa6",
+      "git_blob_sha1": "2ae108f71048f98d41b101957a10c3afd6dc990a"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/final-composed/final-hierarchy-runtime.log",
+      "sha256": "97a97386e49246928b5f44030123840daf8b9b6f6bfa00e22e4a7b6ee9747cf0",
+      "git_blob_sha1": "1dcafdef76588f2685a698651d0c74376e0b988b"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/final-composed/isolated-runtime-compile.log",
+      "sha256": "9150513d06c0730b6e05e52b7c94c2de19c2356e2535d88f4533cb5a3ed58b5b",
+      "git_blob_sha1": "6287b07cadca622ea8e458aa9bbf1f587eecadb7"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/final-composed/javac.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/history/initial-21-source-sdk/M3ASTHierarchyRecipeTest.txt",
+      "sha256": "09a905024b4bf637cfd75f9c09b628c11f2a7be28a02537218e76c3c6dac1b95",
+      "git_blob_sha1": "fe97b602d2e827d70ed8af96c8fa1b6007a1ca72"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/history/initial-21-source-sdk/sdk-qualification.log",
+      "sha256": "5d7a96c4467e46be45e8cc29feaa33f796bf53d27ac9c115183cb46ed63bedeb",
+      "git_blob_sha1": "bc5964bbc64b113501a18666d7197c30f85b2a49"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/history/initial-hierarchy-qualification.json",
+      "sha256": "8f9ab3d98af12ebfe5ce7cc603b28f103da0d331ed8ee95217700b0657f24c47",
+      "git_blob_sha1": "ed4e8723e788ae8a3e4128ad51ee68748e8b41a5"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/history/normal-pinned-capacity-oracle/README.md",
+      "sha256": "5773b2bac75b6f6fbb4c98f5d47b2ec2e662a009c7c399856a58ed101a46ea7c",
+      "git_blob_sha1": "5d97e744696727c31ea77c16b348b6727c95bc10"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/history/normal-pinned-capacity-oracle/com.m3.compiletime.ast.M3ASTHierarchyFactsTest.txt",
+      "sha256": "6c504ca0fb776835752d95cf2707bcd62dbf8d8d2a73550a7859f8e2b7a1027e",
+      "git_blob_sha1": "39814fe61d954e08d3749bf0b033d082a0f4e002"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/history/normal-pinned-capacity-oracle/com.m3.compiletime.ast.M3ASTHierarchyTest.txt",
+      "sha256": "cbff0c8d97926a65eeca455b76f708523c8d8eb45a06b32d06098f6f8d084859",
+      "git_blob_sha1": "fa4c8ed00bc277c7e7fedb3283730c18b3640e0f"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/history/normal-pinned-capacity-oracle/com.synexia.mindex.compiler.ast.MIndexASTHierarchyFactsTest.txt",
+      "sha256": "df6543f0ed4629923da62132a6cf1e82801b481f974d96e76d60dbcc75d708f7",
+      "git_blob_sha1": "f3a1428264e92be01080ed0b6e2de2eb2a4de0d1"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/history/normal-pinned-capacity-oracle/com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest.txt",
+      "sha256": "c409670fc80480230c363df6110c73773b328d426b66df93f643a0b09670f19a",
+      "git_blob_sha1": "ccd50d6c495c606e0c0c6ff54078e663525d4652"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/history/normal-pinned-capacity-oracle/runtime-qualification.log",
+      "sha256": "48fe4308edba5328de746ed6433be75316b9d6b568167ed6221091caeda399e0",
+      "git_blob_sha1": "1f7fb06166a5c27570375a68e74811fabd9d374b"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/runtime/COMPILE.json",
+      "sha256": "c81c15ac441ccc0130fe276b8edb5e6f271adaa77a5cf5139f43d7b2abae43e6",
+      "git_blob_sha1": "755f986ec87050bec5cf813b11802f83b8196f7c"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/runtime/com.m3.compiletime.ast.M3ASTHierarchyFactsTest.txt",
+      "sha256": "54151c3aad29df1469f05d76d357ea789987b7b03450f12a476abc8a495aa867",
+      "git_blob_sha1": "1f68c3e512ff0698fd281e0c5586bb0f23e9faaa"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/runtime/com.m3.compiletime.ast.M3ASTHierarchyTest.txt",
+      "sha256": "c8d76e4a64aba67c7008e9e5741e9e21e7fc0628962c05f6607db28565863f19",
+      "git_blob_sha1": "d3a83cc9eeed5854faefe497eea8fe21fa698b5e"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/runtime/com.synexia.mindex.compiler.ast.MIndexASTHierarchyFactsTest.txt",
+      "sha256": "09814453e73af990e6776fb6066e60f40b5f69d9ddff1ab31d825bab30e5de83",
+      "git_blob_sha1": "5997a71654ad3b0748955a304fa0cea41537422b"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/runtime/com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest.txt",
+      "sha256": "dcf495315d3210d85e32c408edd5b277097f54710436f8a5c68e659239550f24",
+      "git_blob_sha1": "3e62e24eaf3c25d014d2bf53072f0e9276277557"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/runtime/javac.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/runtime/runtime-qualification.log",
+      "sha256": "aba7aa247a531d7e88c4093935803ad3bce8f515d0c7649728089d449ec56ab7",
+      "git_blob_sha1": "e2db4599358472e25369d5f8e48831ced83747b0"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/sdk/M3ASTHierarchyRecipeTest-application.txt",
+      "sha256": "e202b73c1ce8705a49f756f7ac6d25a0b5cb7f23f5a49aecf92ea862a99ca13b",
+      "git_blob_sha1": "5aef2a86b4ef5f50a99acdfdff8d416dbb760561"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/sdk/sdk-materialization.log",
+      "sha256": "725cd343b5970ffe2024db01652d84a5f0f659de8b6f3e072f4de1c93893ba40",
+      "git_blob_sha1": "a06d6358aaa6cc8612c9bfcd786bd98c0f59920c"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/sdk/sdk-qualification.log",
+      "sha256": "79f13017a5a69a76bde636afb75e9e9f6c30e09a8761f91472bdbb284073ff0d",
+      "git_blob_sha1": "613e0ca9b1852f244012279a617f46efaf7511e8"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/target-source-readback/REFUSAL.json",
+      "sha256": "9a4cacdd5139a311ff9435fb8c7277a5674756252cf748281b4d503498765eea",
+      "git_blob_sha1": "df2af3713d657de8036616fb1abfbd59c8f961f0"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/target-source-readback/actual-target-before-upstream-descriptor-readback.json",
+      "sha256": "ba8d529b169af483dfc5e755a8fba54a8f69cdae47e1f680c711680f9241ff45",
+      "git_blob_sha1": "24de05497b034b314337357b408aba61c178e3ea"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/target-source-readback/actual-target-before-upstream-descriptor-readback.log",
+      "sha256": "e20f62a4dfb113981d3a7c9922c442b898c6dec73d509bfbbfbefef7d34df5aa",
+      "git_blob_sha1": "bd3cb7430daf2ecb613aa18d3a53daec0ae8aed3"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/target-source-readback/actual-target.json",
+      "sha256": "ba8d529b169af483dfc5e755a8fba54a8f69cdae47e1f680c711680f9241ff45",
+      "git_blob_sha1": "24de05497b034b314337357b408aba61c178e3ea"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/target-source-readback/actual-target.log",
+      "sha256": "e20f62a4dfb113981d3a7c9922c442b898c6dec73d509bfbbfbefef7d34df5aa",
+      "git_blob_sha1": "bd3cb7430daf2ecb613aa18d3a53daec0ae8aed3"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/target-source-readback/altered-source-refusal.log",
+      "sha256": "e1ce9e3bd1ab4d488978583862772f32373d080bbe165f76d2bafcd97570005a",
+      "git_blob_sha1": "8763d43513d38f125f5a034237899556122b5306"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/upstream-892e/MIndexASTLeafIndex.java.txt",
+      "sha256": "d60d18ce634d0a935727bc29fb9dbc41f06e8284760cdae7b93f1586ebf613d9",
+      "git_blob_sha1": "fbce9f518890cd144bd4576e97031f017563e07f"
+    },
+    {
+      "path": "frontend/hierarchy/evidence/upstream-892e/REVIEW.md",
+      "sha256": "d7ee75f389b0eb6433e515cb138acb1e31781581d76877c18b87968726b1a9f4",
+      "git_blob_sha1": "78164c185d9382529ad799c3990cb4139ef35308"
+    },
+    {
+      "path": "frontend/hierarchy/pom.xml",
+      "sha256": "4b6f478f10b88596f97b7504d2aea88b98042341cfe3c12b4b931191ab070a3d",
+      "git_blob_sha1": "3c31b632a426ff8de2366572ed83c0c1c33d332a"
+    },
+    {
+      "path": "frontend/hierarchy/preimages/canonical/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexAST.java",
+      "sha256": "aa06940e0c182571d89e3ed84b29053f6bf45e63dab43fdd7e6fdc7230e43bff",
+      "git_blob_sha1": "716f126c6faa70f8cc85aaad0be9b37fc9267fb6"
+    },
+    {
+      "path": "frontend/hierarchy/preimages/canonical/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstCache.java",
+      "sha256": "a7f6d096e53366c27660213e3756e73a9e8377dd60d1f680d91112e776aba1cf",
+      "git_blob_sha1": "4b49d33287efae36ec161a0cc0276ca9f394500c"
+    },
+    {
+      "path": "frontend/hierarchy/preimages/receiver/m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexAST.java",
+      "sha256": "aa06940e0c182571d89e3ed84b29053f6bf45e63dab43fdd7e6fdc7230e43bff",
+      "git_blob_sha1": "716f126c6faa70f8cc85aaad0be9b37fc9267fb6"
+    },
+    {
+      "path": "frontend/hierarchy/prepare.py",
+      "sha256": "71ccd197e2e1a01ed341c7d4a493aaca39da145484088f1a146db22a55b5dfd8",
+      "git_blob_sha1": "a611640573f1a7ec53af5224fb11ace680ae8c37"
+    },
+    {
+      "path": "frontend/hierarchy/runtime-tests/pom.xml",
+      "sha256": "e29b8f515fb2da070bb1386cec1def297ae51094d84c222e8835d3bd4eb52f62",
+      "git_blob_sha1": "dfb8886c9923e18897685b513745b9c27304306a"
+    },
+    {
+      "path": "frontend/hierarchy/runtime-tests/runtime-qualification.log",
+      "sha256": "aba7aa247a531d7e88c4093935803ad3bce8f515d0c7649728089d449ec56ab7",
+      "git_blob_sha1": "e2db4599358472e25369d5f8e48831ced83747b0"
+    },
+    {
+      "path": "frontend/hierarchy/sdk-materialization.log",
+      "sha256": "725cd343b5970ffe2024db01652d84a5f0f659de8b6f3e072f4de1c93893ba40",
+      "git_blob_sha1": "a06d6358aaa6cc8612c9bfcd786bd98c0f59920c"
+    },
+    {
+      "path": "frontend/hierarchy/sdk-qualification.log",
+      "sha256": "79f13017a5a69a76bde636afb75e9e9f6c30e09a8761f91472bdbb284073ff0d",
+      "git_blob_sha1": "613e0ca9b1852f244012279a617f46efaf7511e8"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/000-MIndexASTHierarchy.java.txt",
+      "sha256": "39153fdaf1a926c8331a48a376b200315e4c1beea2c601b53b2ef59113ab3f84",
+      "git_blob_sha1": "e35acd54ff486c03ea1d3194c1866f31898dfce0"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/001-MIndexASTHierarchyFacts.java.txt",
+      "sha256": "0ae813962a2899676d6ea61632809a31ffc53b578c072f3a711a3dacd76742bc",
+      "git_blob_sha1": "5f8df4252543556b37981a6acbc73b5138b1c3a3"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/002-MIndexAST.java.txt",
+      "sha256": "e4b3205740bde8686da8647622ee48634f729791d23d3275233a635092e2cf14",
+      "git_blob_sha1": "b0f2d848b8b7f8984d063eca4d515b7b2ae03ad4"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/002-MIndexASTHierarchyFactsTest.java.txt",
+      "sha256": "02b3d6004b651df49e19ea21eb45fa4d3af56b65698ca11fd3f6bfd061bbf88e",
+      "git_blob_sha1": "448e371b4bae5d4bf0e09dd5325ab40e53d27c13"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/003-MIndexASTHierarchyTest.java.txt",
+      "sha256": "2dd14ce51bf0a685d37ddab40c1748dc7908b15aee9b8ab89612f726386ef2a8",
+      "git_blob_sha1": "683cf413899f9df64ad8300b570c4467e02d79e6"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/004-MIndexAST.java.txt",
+      "sha256": "69866847dcfcc5fd4036359fdb9eff536561c758935b61b449e2782395aee9d0",
+      "git_blob_sha1": "0168c4b3608a6a296382a39fa47989e4cc7e691f"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/005-MIndexPartialAstCache.java.txt",
+      "sha256": "6a8d31a2b05f42edf85915c4a48ef753594d3c19c57fbe9de9ef5ec688a8109e",
+      "git_blob_sha1": "0bf0893c85ce3206a02753bad9123e640ce648f2"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/manifest.tsv",
+      "sha256": "8da5ba836914f077e8cee6ffdfef21956babd86d0a8e4efe5903cd2607f9d34a",
+      "git_blob_sha1": "729535f9d123f529289b580baf3e0be659249ba9"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/000-M3ASTHierarchy.java.txt",
+      "sha256": "54725f3a7017725337f1ef3d51d813a88befa92996dc6a71963d02f4db69617d",
+      "git_blob_sha1": "ba5e3659126fc1449dadbc0575ad24ad9db729c0"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/001-M3ASTHierarchyFacts.java.txt",
+      "sha256": "46f75ab8cbb47725a20ca0cf3a4da6c4153ee17a326d02c6bd7431418ebc8f0c",
+      "git_blob_sha1": "798b5dc095662dcb144297cf8e64ee33b9dff763"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/002-M3ASTHierarchyFactsTest.java.txt",
+      "sha256": "13f03297bda3fe546c5a29dedcc04524246b7c453684648662f8bca4a80d8722",
+      "git_blob_sha1": "6f8924e64c63a8464dd818e146e853a3a92c44ec"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/002-MIndexASTHierarchy.java.txt",
+      "sha256": "f4ac1e1fe53c05f965ecb5fb3e3519e76875bfd20424c7e53b22d4b8e13fcc08",
+      "git_blob_sha1": "5ed6d0f47c16c7ae7ab19c5a5152ad13385e9334"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/003-M3ASTHierarchyTest.java.txt",
+      "sha256": "ad8f8b64c217b73790f1ece70f1de028a68d16008961509499fb2421eace7b4f",
+      "git_blob_sha1": "28e0b597f02c771fd5fd299176a225028566ba63"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/003-MIndexASTHierarchyFacts.java.txt",
+      "sha256": "0ae813962a2899676d6ea61632809a31ffc53b578c072f3a711a3dacd76742bc",
+      "git_blob_sha1": "5f8df4252543556b37981a6acbc73b5138b1c3a3"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/004-MIndexAST.java.txt",
+      "sha256": "e4b3205740bde8686da8647622ee48634f729791d23d3275233a635092e2cf14",
+      "git_blob_sha1": "b0f2d848b8b7f8984d063eca4d515b7b2ae03ad4"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/004-MIndexASTHierarchy.java.txt",
+      "sha256": "39153fdaf1a926c8331a48a376b200315e4c1beea2c601b53b2ef59113ab3f84",
+      "git_blob_sha1": "e35acd54ff486c03ea1d3194c1866f31898dfce0"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/005-MIndexASTHierarchyFacts.java.txt",
+      "sha256": "0ae813962a2899676d6ea61632809a31ffc53b578c072f3a711a3dacd76742bc",
+      "git_blob_sha1": "5f8df4252543556b37981a6acbc73b5138b1c3a3"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/005-MIndexPartialAstAdapter.java.txt",
+      "sha256": "5761bbaea04e6dfa69e1414e1655354d9c457e8bd749119454ac08db33145c63",
+      "git_blob_sha1": "f79c0b23729e697b9ecf61db858bd3c39caf8d14"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/006-MIndexAST.java.txt",
+      "sha256": "69866847dcfcc5fd4036359fdb9eff536561c758935b61b449e2782395aee9d0",
+      "git_blob_sha1": "0168c4b3608a6a296382a39fa47989e4cc7e691f"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/006-MIndexPartialAstAttempt.java.txt",
+      "sha256": "b1bf0577ae49794cf5dcf1fe7c12f59de7d2bd8f2b2ac42609453992e967df66",
+      "git_blob_sha1": "e6600ad2c84699c06ffc13b899ae04bfd903dc5a"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/007-MIndexPartialAstAdapter.java.txt",
+      "sha256": "5761bbaea04e6dfa69e1414e1655354d9c457e8bd749119454ac08db33145c63",
+      "git_blob_sha1": "f79c0b23729e697b9ecf61db858bd3c39caf8d14"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/007-MIndexPartialAstCache.java.txt",
+      "sha256": "a7f6d096e53366c27660213e3756e73a9e8377dd60d1f680d91112e776aba1cf",
+      "git_blob_sha1": "4b49d33287efae36ec161a0cc0276ca9f394500c"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/008-MIndexPartialAstAttempt.java.txt",
+      "sha256": "b1bf0577ae49794cf5dcf1fe7c12f59de7d2bd8f2b2ac42609453992e967df66",
+      "git_blob_sha1": "e6600ad2c84699c06ffc13b899ae04bfd903dc5a"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/008-MIndexPartialAstKey.java.txt",
+      "sha256": "abd8354134633d75dcfd85b8e2b7123c94eeb17a4d3ee825993d8a09a8bd2717",
+      "git_blob_sha1": "d1cec2707d31c9b37efc4d751e9c2c93427cb855"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/009-MIndexPartialAstCache.java.txt",
+      "sha256": "6a8d31a2b05f42edf85915c4a48ef753594d3c19c57fbe9de9ef5ec688a8109e",
+      "git_blob_sha1": "0bf0893c85ce3206a02753bad9123e640ce648f2"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/009-MIndexPartialAstMaster.java.txt",
+      "sha256": "eb9647a02b3f4ed40118144d0bf2302c9b8be3bc8ae255e0987e7a78cb80d71d",
+      "git_blob_sha1": "e631494426316fb67e3c8a60fb3f9c1451247cd0"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/010-MIndexPartialAstKey.java.txt",
+      "sha256": "abd8354134633d75dcfd85b8e2b7123c94eeb17a4d3ee825993d8a09a8bd2717",
+      "git_blob_sha1": "d1cec2707d31c9b37efc4d751e9c2c93427cb855"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/010-MIndexPartialAstMode.java.txt",
+      "sha256": "eb4d6f7f4efd3df73bb408ec1a93178d1ecca27d43b6de67f7d8a21994f845f6",
+      "git_blob_sha1": "8f63217433cd569a8915c121ebb60c146e5f1d8d"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/011-MIndexPartialAstMaster.java.txt",
+      "sha256": "eb9647a02b3f4ed40118144d0bf2302c9b8be3bc8ae255e0987e7a78cb80d71d",
+      "git_blob_sha1": "e631494426316fb67e3c8a60fb3f9c1451247cd0"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/011-MIndexPartialAstPressure.java.txt",
+      "sha256": "70257ee81627b222cb8824c3c82007068fccfe27845fcd89687eda686ef204a4",
+      "git_blob_sha1": "0566f1ad6f9fce3d81b94fb3fd85804558594383"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/012-MIndexPartialAstMode.java.txt",
+      "sha256": "eb4d6f7f4efd3df73bb408ec1a93178d1ecca27d43b6de67f7d8a21994f845f6",
+      "git_blob_sha1": "8f63217433cd569a8915c121ebb60c146e5f1d8d"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/012-MIndexPartialAstProjection.java.txt",
+      "sha256": "de231fd4008fc50ff213a5ab3b2e64e8e93cdf6a67ce3a020c162f9a08f58b02",
+      "git_blob_sha1": "eb42483bdf55b2b110287737bdc82f8dcb291f9c"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/013-MIndexPartialAstPressure.java.txt",
+      "sha256": "70257ee81627b222cb8824c3c82007068fccfe27845fcd89687eda686ef204a4",
+      "git_blob_sha1": "0566f1ad6f9fce3d81b94fb3fd85804558594383"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/013-MIndexPartialAstScope.java.txt",
+      "sha256": "87b746952e685baf8f6640a8f983810ff19cb27fef125ab942acef3309872797",
+      "git_blob_sha1": "a8f9e141610dfeda7b55cf003b2b0bd7a8c198e8"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/014-MIndexPartialAstProjection.java.txt",
+      "sha256": "de231fd4008fc50ff213a5ab3b2e64e8e93cdf6a67ce3a020c162f9a08f58b02",
+      "git_blob_sha1": "eb42483bdf55b2b110287737bdc82f8dcb291f9c"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/015-MIndexPartialAstScope.java.txt",
+      "sha256": "87b746952e685baf8f6640a8f983810ff19cb27fef125ab942acef3309872797",
+      "git_blob_sha1": "a8f9e141610dfeda7b55cf003b2b0bd7a8c198e8"
+    },
+    {
+      "path": "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv",
+      "sha256": "3eee1a6a89dff5adbe5daeb80a5331f726c041e7585fdf9e4da1d36acc3fe9c8",
+      "git_blob_sha1": "81a877bb8c4ca89c2e2a2bd3c5c9b0d61e2e4c63"
+    },
+    {
+      "path": "frontend/hierarchy/src/test/java/com/synexia/rewrite/M3ASTHierarchyRecipeTest.java",
+      "sha256": "c9474779342171a8f9665eaef812b6ffaa0d4edaacca09959d37c06c83344ae9",
+      "git_blob_sha1": "4f1ff96b3d03f0739122a99883dc053f10a0e047"
+    },
+    {
+      "path": "frontend/hierarchy/templates/canonical/MIndexAST.java.txt",
+      "sha256": "69866847dcfcc5fd4036359fdb9eff536561c758935b61b449e2782395aee9d0",
+      "git_blob_sha1": "0168c4b3608a6a296382a39fa47989e4cc7e691f"
+    },
+    {
+      "path": "frontend/hierarchy/templates/canonical/MIndexASTHierarchy.java.txt",
+      "sha256": "39153fdaf1a926c8331a48a376b200315e4c1beea2c601b53b2ef59113ab3f84",
+      "git_blob_sha1": "e35acd54ff486c03ea1d3194c1866f31898dfce0"
+    },
+    {
+      "path": "frontend/hierarchy/templates/canonical/MIndexASTHierarchyFacts.java.txt",
+      "sha256": "0ae813962a2899676d6ea61632809a31ffc53b578c072f3a711a3dacd76742bc",
+      "git_blob_sha1": "5f8df4252543556b37981a6acbc73b5138b1c3a3"
+    },
+    {
+      "path": "frontend/hierarchy/templates/canonical/MIndexPartialAstCache.java.txt",
+      "sha256": "6a8d31a2b05f42edf85915c4a48ef753594d3c19c57fbe9de9ef5ec688a8109e",
+      "git_blob_sha1": "0bf0893c85ce3206a02753bad9123e640ce648f2"
+    },
+    {
+      "path": "frontend/hierarchy/templates/tests/MIndexASTHierarchyFactsTest.java.txt",
+      "sha256": "02b3d6004b651df49e19ea21eb45fa4d3af56b65698ca11fd3f6bfd061bbf88e",
+      "git_blob_sha1": "448e371b4bae5d4bf0e09dd5325ab40e53d27c13"
+    },
+    {
+      "path": "frontend/hierarchy/templates/tests/MIndexASTHierarchyTest.java.txt",
+      "sha256": "2dd14ce51bf0a685d37ddab40c1748dc7908b15aee9b8ab89612f726386ef2a8",
+      "git_blob_sha1": "683cf413899f9df64ad8300b570c4467e02d79e6"
+    },
+    {
+      "path": "frontend/licenses/JDK21-ADDITIONAL_LICENSE_INFO.txt",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "git_blob_sha1": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b"
+    },
+    {
+      "path": "frontend/licenses/JDK21-ASSEMBLY_EXCEPTION.txt",
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33",
+      "git_blob_sha1": "429666664e9ff5029d51dc7f807e1ec9eff2dd9f"
+    },
+    {
+      "path": "frontend/licenses/JDK21-LICENSE.txt",
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726",
+      "git_blob_sha1": "8b400c7ab81b7b18baff3f81d597f5e511883134"
+    },
+    {
+      "path": "frontend/licenses/SOURCE_LICENSES.json",
+      "sha256": "6ba4521c1be1737ff1bf29ebca6fdbd0afbe5790731412bbacadbc1ab267f48b",
+      "git_blob_sha1": "7ce6fead02923a8c467bfdd069143715eb94104e"
+    },
+    {
+      "path": "frontend/module-wiring/CATALOGUE.json",
+      "sha256": "142418d988d55082d83322ec9dcd5bba3f6ab1bb88dfd1efbc7233206737fea5",
+      "git_blob_sha1": "0a4d7b1288df22aa60293310109cf3a178b124c3"
+    },
+    {
+      "path": "frontend/module-wiring/CURRENT_PROVIDERS.json",
+      "sha256": "7aad4605b314cb9b35b08433429a440f5043825e60fc23ed1db2b25668d7abae",
+      "git_blob_sha1": "192d0fc09f762f9f68ab069c934b7a3538bb3798"
+    },
+    {
+      "path": "frontend/module-wiring/README.md",
+      "sha256": "7689f7f4f5a7dfb08f76cdd0020c4f02de11432f195edf8ed7df421328fde832",
+      "git_blob_sha1": "302fec0d951e480780a2c4b055e82467efcf7a3a"
+    },
+    {
+      "path": "frontend/module-wiring/SOURCE_PINS.json",
+      "sha256": "dcb146a1c5fb6f80d38330e2caf5f838199a75c578df9160618366dae7e76449",
+      "git_blob_sha1": "14a7768065c838808ee8a0acc39f0a0f6ce54c3d"
+    },
+    {
+      "path": "frontend/module-wiring/VENDOR_CLOSURE.json",
+      "sha256": "352d1639cfac29046248cd0459cb5382ba3a8e91ffb4e8ddd628bb1a0a9ad9de",
+      "git_blob_sha1": "06b5c46e5c6138becc6234d49d411fe9136ef402"
+    },
+    {
+      "path": "frontend/module-wiring/engine-sdk.log",
+      "sha256": "29437c29afc3408f5b597bf4ed2a68f711ac2b2e93d446d675ff88a1ff2ad602",
+      "git_blob_sha1": "85cdef6749ceb7b94d9124fe7bca037bb12fb220"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/ENGINE_RECEIPT.tsv",
+      "sha256": "8ca4ba1ec6c9c978434c0b0798f01cf563782b1ff87a9f235dc004a8892e0ede",
+      "git_blob_sha1": "c87de9b428d6b8b31d89f8501a8dab236516d4d9"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/MAVEN_COMPILE_INPUTS.tsv",
+      "sha256": "d660d27763f69e9e62137875102b1adb58336f64aef65752001f8a3e6ab37a10",
+      "git_blob_sha1": "ea1c7f5ee4c1ebdee5c8f402c69710c66dd898be"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/ORDINARY_LOCAL_SCOPE_SDK_RECEIPT.json",
+      "sha256": "9932b7786e9644830daa359745f69a99ae86252914c865457a35b917cc491d3a",
+      "git_blob_sha1": "350190aa122165aeb289263862fe40f11f7e8cf3"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/RESULTS.json",
+      "sha256": "56fb297388797ee2108e19837d0ac16568de9801779626309d5bc3931b7b63e8",
+      "git_blob_sha1": "7bcc111e1f882bda53be14059eb8faf52bd44108"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/SDK_RECEIPT.tsv",
+      "sha256": "0d07df719483ca6f0e166768490b2bbc64fd48ea0887af2e2085200d50513319",
+      "git_blob_sha1": "dd0b4846ecc901372e7e0ebf92dfb7f3434c1486"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/TEST-com.synexia.rewrite.ModuleSuccessorRecipeTest.xml",
+      "sha256": "cfcbcfe251c746b0592d5542dc5062b29e1d0ad6fb3670fa720db0256d0eceba",
+      "git_blob_sha1": "eff8e3ddea852bdd36feb51317893254a7902cc6"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/TEST-com.synexia.rewrite.ModuleWiringRecipeTest.xml",
+      "sha256": "97bfec68cd3e41975105bface8edf3256a4317ee8ebd1576f9717f9b61ac76b9",
+      "git_blob_sha1": "5300b8bbf213666d8b1f3604ca8c339cf67c8a75"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/TEST-com.synexia.rewrite.OrdinaryLocalScopeRecipeTest.xml",
+      "sha256": "04380f53aeaf825e1d9729a618c1994aa795d5575a35b3631f143db868b8adea",
+      "git_blob_sha1": "56832a2340621cbf982a411a5e7a4767b48695d0"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/TEST-com.synexia.rewrite.ServiceOrderRecoveryRecipeTest.xml",
+      "sha256": "57c1d1c7b884978a77dc8eeb4e568c812e0753add42c2c527ac61254bb5fc2d5",
+      "git_blob_sha1": "0831c81b5a059c03d1d85a9b120f9507738c7293"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/TEST-com.synexia.rewrite.TextServiceEngineRecipeTest.xml",
+      "sha256": "5cd923706bd6e43264c66a29a3b50036e52dbd9423bdacd504f9004f866035a5",
+      "git_blob_sha1": "40d5c41b872502497179ab872abc3394b696293d"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/UPSTREAM_ADMISSION.json",
+      "sha256": "d925436189deb69e586e959095e9602fd692d8a243f5cf509db7f5e8e2b292f3",
+      "git_blob_sha1": "c8e6dddd8c94119e77217ae59534e3b5aafea9d0"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/canonical-reactor-availability.log",
+      "sha256": "131cded4c47884ad0ae2c1e04fe9941ce6ea86307ba1497ef1e655138ca6426d",
+      "git_blob_sha1": "1530dc2cd31314270a0eea16de856e4ca5e442a9"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/engine-sdk.log",
+      "sha256": "29437c29afc3408f5b597bf4ed2a68f711ac2b2e93d446d675ff88a1ff2ad602",
+      "git_blob_sha1": "85cdef6749ceb7b94d9124fe7bca037bb12fb220"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/first-build-service-bootstrap-failure.log",
+      "sha256": "ac9a9981bb0f26727d5f906ba3aa3837c7723e10b7c9dd664ec72984ea89308f",
+      "git_blob_sha1": "17cc4796d57e77eff4a8098e3138756baa955d15"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/module-plugin-discovery.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/module-plugin-reference.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/module-sdk-current-upstream.log",
+      "sha256": "0960d27f8a6609d7815c6dde5e7308781bbd9bdea299fa80af017259b850d868",
+      "git_blob_sha1": "ba99cf0785a8c05329ee22a0cab9f9400527be59"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/module-sdk-final-closure.log",
+      "sha256": "5d4a42a264f4774d61fe1bf6cac64c48862d88761e467ead2e784014c47a6476",
+      "git_blob_sha1": "d4ea888f92f946c274870f12d87e26047e59586d"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/module-sdk-final-current.log",
+      "sha256": "a7ef93d43cb327d0ac5c2613609b8738286c8c6d609223009f8d1557ad870059",
+      "git_blob_sha1": "9484d37326ce3d36ca0aa0f685e53f8c85acbb2c"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/module-sdk-final.log",
+      "sha256": "602733f3daba14fdb687c60751eeab2660346cb15758633c84db21bd3451ba65",
+      "git_blob_sha1": "f234819b961d743d9936b12d829356c80a564ecc"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/module-sdk-optional-transitives.log",
+      "sha256": "65fc3aed274149f3e8a879394305bec79411720a83576f66701c967442766524",
+      "git_blob_sha1": "f4bdb4782e350944dc7f642af6feb00c57c8a807"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/module-sdk.log",
+      "sha256": "4b71d42eb2b14bc68d0c7c8debb70047f9469b5d109955de089f8d87f24e100b",
+      "git_blob_sha1": "4fb10cb1ccd2748035343d2da067c597446e3ada"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/module-successors-sdk.log",
+      "sha256": "415abfd3afc7a2ab3b8e3c9b2008b95ea1d0856a362d5d9b38ef9568fca4879b",
+      "git_blob_sha1": "362e6a1185f2d35262959ddf18695756958b6726"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/normal-existing-local-scope-failure.log",
+      "sha256": "1872a22087213adea98518db2f4315fc5d82114576c771dc87d656f71720abe4",
+      "git_blob_sha1": "d2dfd400db83ee7cb5711d799a8afe8eae55a125"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/normal-module-final-verifier.log",
+      "sha256": "05e03653ee3669dc188b39eb42f00e9ffcb9032efae2363f9c3c7543e25ffa5b",
+      "git_blob_sha1": "7b6a621525cff311d354ab1007bac7872b11e8ff"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/optional-canonical-compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/optional-canonical-no-openrewrite.log",
+      "sha256": "1c13ad60e55b5014349700ea172b056ab11cdc691495798ebfe1090cc400b055",
+      "git_blob_sha1": "d15aabb1fadbca802c734da1e2c7a41d92514077"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/optional-canonical-patched-runtime.log",
+      "sha256": "38e97ec300126dbd7a0ff46391620ef3f08e2fe13b92e916e302bb19f6f5fb8f",
+      "git_blob_sha1": "ea3b216979fac5dffcc88eb744083ddc81cdb2fb"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/optional-receiver-compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/optional-receiver-no-openrewrite.log",
+      "sha256": "1c13ad60e55b5014349700ea172b056ab11cdc691495798ebfe1090cc400b055",
+      "git_blob_sha1": "d15aabb1fadbca802c734da1e2c7a41d92514077"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/optional-receiver-patched-runtime.log",
+      "sha256": "38e97ec300126dbd7a0ff46391620ef3f08e2fe13b92e916e302bb19f6f5fb8f",
+      "git_blob_sha1": "ea3b216979fac5dffcc88eb744083ddc81cdb2fb"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/optional-transitive-version-first-failure.log",
+      "sha256": "b377bf9fd5d180efad6e2dcf03405ff88179c9dd74286f758d03c8fc21246dad",
+      "git_blob_sha1": "b7a4c02f4b33881b216464c858d34edaac993f43"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/ordinary-local-scope-sdk.log",
+      "sha256": "816b3d085ea92b26a3d65dc24a1613ea5f65efabab5177964899771e66ba3744",
+      "git_blob_sha1": "e0823a05b999553c8c525a986534014871de12a2"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/service-order-sdk.log",
+      "sha256": "f5f442c105535f1a720b9273c961080aa7aea128e5d5755efe1b0f01d5efb340",
+      "git_blob_sha1": "4b08e51d5dc60274762625dab1a99cb212b2fe32"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/target-native-missing-refusal.log",
+      "sha256": "4e4bab57c3c95038efc11f8fa9d73e47963222b06c0ccf2e7d9c8b7b0eb829ec",
+      "git_blob_sha1": "4f7213e1a83c9077e7970e18e90cd426d8d933a5"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/target-native-positive.log",
+      "sha256": "633de1ee4cff0284ddc402e3ad62a24218d24171e9a4d88084d4d68dab89a349",
+      "git_blob_sha1": "3ec57750559db75fa0d9226ff2205417a22eddcf"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/target-normal-maven.log",
+      "sha256": "88e5bea2368f764a654048956005deebf4cd236ccba6af11c450ac9c1b64cad8",
+      "git_blob_sha1": "8a261215f01fccf050a17ff2bdbabd6da1d8f015"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/target-optional-maven.log",
+      "sha256": "55a0f0e3ccd621ece8ea8822dcfe710020317fcafaa574b5b6604df96261d4f8",
+      "git_blob_sha1": "a4ba3d2e10fda6c73ccf3b736d4cfb7e4bfa43db"
+    },
+    {
+      "path": "frontend/module-wiring/evidence/upstream-leaf-index-selftest.log",
+      "sha256": "660ba53de053c1c0a61504e571af60425c151179f163e7a7accb2efd6d618da3",
+      "git_blob_sha1": "043a8e43da0de3137764c660784c7cf7784397fe"
+    },
+    {
+      "path": "frontend/module-wiring/integration-run.log",
+      "sha256": "c10bfbd36d8c146fec01989653ac2b8da532c2266d2754f7a715aff1b105cc92",
+      "git_blob_sha1": "d05df712f4380e15620cb62d023743f328bac76c"
+    },
+    {
+      "path": "frontend/module-wiring/local-scope-fix/SOURCE_PIN.json",
+      "sha256": "0dd730d4ae71637a4abbd31d294f971c5901457a3f4f59f3fcde7eae1f0e3bfe",
+      "git_blob_sha1": "6fc42d185322777c005dfe9145946b27c1165577"
+    },
+    {
+      "path": "frontend/module-wiring/local-scope-fix/preimages/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralHarvester.java",
+      "sha256": "e4d1a2bced4ca3f33c743aa4be386ae546f5266f68473fd6e0f3fbba68f335f4",
+      "git_blob_sha1": "40400aaa7b1611cc5012a55579a5fed74f0cc3ad"
+    },
+    {
+      "path": "frontend/module-wiring/local-scope-fix/templates/M3GvasLiteralHarvester.java.txt",
+      "sha256": "0e4212f3adf1ca4c7bc7077d507810b42a342964b563f7ee81fdad469e11b865",
+      "git_blob_sha1": "4911e7b6fb04dc3d6a7e56733285ea977e3284df"
+    },
+    {
+      "path": "frontend/module-wiring/module-sdk-current-upstream.log",
+      "sha256": "0960d27f8a6609d7815c6dde5e7308781bbd9bdea299fa80af017259b850d868",
+      "git_blob_sha1": "ba99cf0785a8c05329ee22a0cab9f9400527be59"
+    },
+    {
+      "path": "frontend/module-wiring/module-sdk-final-closure.log",
+      "sha256": "5d4a42a264f4774d61fe1bf6cac64c48862d88761e467ead2e784014c47a6476",
+      "git_blob_sha1": "d4ea888f92f946c274870f12d87e26047e59586d"
+    },
+    {
+      "path": "frontend/module-wiring/module-sdk-final.log",
+      "sha256": "602733f3daba14fdb687c60751eeab2660346cb15758633c84db21bd3451ba65",
+      "git_blob_sha1": "f234819b961d743d9936b12d829356c80a564ecc"
+    },
+    {
+      "path": "frontend/module-wiring/module-sdk.log",
+      "sha256": "4b71d42eb2b14bc68d0c7c8debb70047f9469b5d109955de089f8d87f24e100b",
+      "git_blob_sha1": "4fb10cb1ccd2748035343d2da067c597446e3ada"
+    },
+    {
+      "path": "frontend/module-wiring/module-successors-sdk.log",
+      "sha256": "415abfd3afc7a2ab3b8e3c9b2008b95ea1d0856a362d5d9b38ef9568fca4879b",
+      "git_blob_sha1": "362e6a1185f2d35262959ddf18695756958b6726"
+    },
+    {
+      "path": "frontend/module-wiring/pom.xml",
+      "sha256": "c29d4e8bb797ad1a490891a2cced1a7a2398b67e6010fdbe2893801e7b2f4475",
+      "git_blob_sha1": "bfb723f637992c66d6285939dcc7e2c34aa4796f"
+    },
+    {
+      "path": "frontend/module-wiring/preimages/canonical/synexia-mindex/compiler/pom.xml",
+      "sha256": "cadd7aaf62bf1da69dc01db646117d913cf4ca5eff99c34069965caec8fb822c",
+      "git_blob_sha1": "c8883a706a6affac7333cd5b4c81aee32e0381f4"
+    },
+    {
+      "path": "frontend/module-wiring/preimages/canonical/synexia-mindex/compiler/src/main/resources/META-INF/services/com.sun.source.util.Plugin",
+      "sha256": "81284c5e2ce668388a675b578fa62ce8939ff6e26b81cffa128e5503b809cfec",
+      "git_blob_sha1": "d81d5a8fce1e80a30e75a68e3b8232189fc8bf99"
+    },
+    {
+      "path": "frontend/module-wiring/preimages/engine/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "504f1616b68fbd10c3df38adaecd0e9d90de5535d791c8c1b57958b7455c9bd3",
+      "git_blob_sha1": "c1ce1408b78201139221093076a454ae21169f72"
+    },
+    {
+      "path": "frontend/module-wiring/preimages/hierarchy-closure-receiver/m3/ports/compiletime/pom.xml",
+      "sha256": "8c42b1e7512ca8fe4a34d131f4c5abb9589284acb7bf76f9a1b24309ddf3dff9",
+      "git_blob_sha1": "0369cd6d2e1bc2a3b84e25ef4e268a8a7a2ee864"
+    },
+    {
+      "path": "frontend/module-wiring/preimages/optional-transitives-receiver/m3/ports/compiletime-openrewrite/pom.xml",
+      "sha256": "beb250f697db93684796f65d64a35b2bff8ff37e7be49877c3beaf5556486051",
+      "git_blob_sha1": "55ebd6124eab602d96178224af5bd8529186c66c"
+    },
+    {
+      "path": "frontend/module-wiring/preimages/receiver/m3/ports/compiletime/pom.xml",
+      "sha256": "7c289c126eb5895a049d6941d7ca102f2f043f3f2cb68395cb4ea387e0a07a13",
+      "git_blob_sha1": "d25b9b60e7ea6b72161a3d0313377f6fedcaefc6"
+    },
+    {
+      "path": "frontend/module-wiring/preimages/service-order-canonical/synexia-mindex/compiler/pom.xml",
+      "sha256": "0ceb545be02120f7385ac1e17807090105da4177209f7a60a0bcaae0e9b56944",
+      "git_blob_sha1": "c2eedffb1a99dcf2f89c80f25366e19a03c3c3b5"
+    },
+    {
+      "path": "frontend/module-wiring/preimages/service-order-receiver/m3/ports/compiletime/pom.xml",
+      "sha256": "fbab0c9242f7bbfb320aca01632af01586c84035e217db5d3b4cf36158e55874",
+      "git_blob_sha1": "f053af3fd5c192b3368f51c42e24236939dcae24"
+    },
+    {
+      "path": "frontend/module-wiring/preimages/service-preservation-canonical/synexia-mindex/compiler/src/main/resources/META-INF/services/com.sun.source.util.Plugin",
+      "sha256": "eb8ca6ac5327674e4cf91b9c63f6d3fccf05860982a1d5f98f4c96d8cc312004",
+      "git_blob_sha1": "e5788f59286e79e6c719504d909f0c1eed81a518"
+    },
+    {
+      "path": "frontend/module-wiring/prepare.py",
+      "sha256": "cf9b45fcaafd834bb7cd92cf36799b63410f703b4c602addae82e2219b362e8a",
+      "git_blob_sha1": "e8e7c72a874321ddcf611acd30f3f203b4d488bd"
+    },
+    {
+      "path": "frontend/module-wiring/prepare_verification_tree.py",
+      "sha256": "8ad9365e0dcd9c2acc26d9bf571a0ff03b73798c7529970102b4efbf1cc486d0",
+      "git_blob_sha1": "b07407f4b94b52626f805c7430c8605c8b458c8b"
+    },
+    {
+      "path": "frontend/module-wiring/resources/META-INF/rewrite/m3-ast-module-wiring.yml",
+      "sha256": "939f527fd5512623f2b75b4c9ce0083fe8f2495cdc9f16c69afdf20eafb6a979",
+      "git_blob_sha1": "0cd33be4943226e2eb71bbbd2c2a038b75f21003"
+    },
+    {
+      "path": "frontend/module-wiring/resources/META-INF/rewrite/m3-ast-ordinary-local-scope.yml",
+      "sha256": "cf6767bd4d14eecbde5c3f2db5b2c1cd88a066649e6bb3393422e314d8564612",
+      "git_blob_sha1": "75e66be325216948c243a68082d9565f84bdd050"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-ordinary-local-scope-20261017/M3GvasLiteralHarvester.java.txt",
+      "sha256": "0e4212f3adf1ca4c7bc7077d507810b42a342964b563f7ee81fdad469e11b865",
+      "git_blob_sha1": "4911e7b6fb04dc3d6a7e56733285ea977e3284df"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-ordinary-local-scope-20261017/manifest.tsv",
+      "sha256": "0ddab1b7ecc7a580a62866a08b655409b031bc80b9948f3fe43347b881987713",
+      "git_blob_sha1": "4bcdb6e3a532de52cf48b47d5344140fde52c55f"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-wiring-engine-20261017/000-M3HashPinnedTextSnapshotRecipe.java.txt",
+      "sha256": "99a1ff392d426f8deac0d3b79c67f5290de74995615a618f4e7e0dc1abff137b",
+      "git_blob_sha1": "fdbcd8be61ab23de5e972197ea2d8d226b4ed963"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-wiring-engine-20261017/manifest.tsv",
+      "sha256": "89870890bec4631bfbf14e554244265f6756577883be1efec5f64c421cf8b133",
+      "git_blob_sha1": "151cfc796900d89d688e62d4e0de421d29bd5263"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-wiring-receiver-20261017/000-M3OpenRewriteSharedAST.java.txt",
+      "sha256": "d69c37b06fb02cbfa452dea6dfeee07563ad234f59929e255bce567f899bcde4",
+      "git_blob_sha1": "d9a4744699015dc5af2e6eab84a34253bafaa5d4"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-wiring-receiver-20261017/manifest.tsv",
+      "sha256": "3376b53ef986308efc1cc2ecc8ebdb0efd44f73c45a323f228af1a648e617d91",
+      "git_blob_sha1": "f1b7f07f91ded30d9b75cb1eebd8f2e747d56012"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-canonical-20261017/000-pom.xml.txt",
+      "sha256": "d517ffbb75b66eb84ad37ec8e6a2fb74d072838677c86677b4b083e319a49704",
+      "git_blob_sha1": "7d1a46d03b5301c553d5527f8b36184abd8a344c"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-canonical-20261017/001-pom.xml.txt",
+      "sha256": "a535fa0d65b497379680075f9bbb8001007c675456bec6921420a3395329cd33",
+      "git_blob_sha1": "a704b84fcee610330727a1b88cca271f20934eed"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-canonical-20261017/002-com.sun.source.util.Plugin.txt",
+      "sha256": "d499127e721306567c0754945d7cc3ccfd80993fb17e618be0a4afb09fa0faeb",
+      "git_blob_sha1": "964f17e67423d4827ee9990bc7a8b872734e7bfa"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-canonical-20261017/manifest.tsv",
+      "sha256": "cf6d97cafd629dab2a1a17bc512fa02d70c5c41e37203d97317f657768871e49",
+      "git_blob_sha1": "5e24c78aff3edd7e281aacd20599133e98281ebe"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-hierarchy-closure-receiver-20261017/000-pom.xml.txt",
+      "sha256": "3c21173dbcc2ad43355c7bacfec8929e3aca731d2d02c315d13355deffdad870",
+      "git_blob_sha1": "d455ff9e2732f5c722cc0a0f520f7eb78bfb2902"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-hierarchy-closure-receiver-20261017/manifest.tsv",
+      "sha256": "1721765ef0aaa42171a7eec852057f565f2380ba57132b3d7a99c7a7174ffe30",
+      "git_blob_sha1": "211793d32a312c494e33f6bba3963bc17851a40e"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-optional-transitives-receiver-20261017/000-pom.xml.txt",
+      "sha256": "dad956e04d3789bc2a99a9f8c967801ad8c5ae5dee5c07538a942907013c1e42",
+      "git_blob_sha1": "4ee888de4740faae7e31de3d2cae970accd5d9b6"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-optional-transitives-receiver-20261017/manifest.tsv",
+      "sha256": "b818cb5c4d68a7d1429bee6ee4129cdb4e9be8bf2050b7a0919953eec0ecc653",
+      "git_blob_sha1": "18d5b82d4643bab3379462670c09078f694b9f86"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-receiver-20261017/000-pom.xml.txt",
+      "sha256": "dad956e04d3789bc2a99a9f8c967801ad8c5ae5dee5c07538a942907013c1e42",
+      "git_blob_sha1": "4ee888de4740faae7e31de3d2cae970accd5d9b6"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-receiver-20261017/001-pom.xml.txt",
+      "sha256": "3c21173dbcc2ad43355c7bacfec8929e3aca731d2d02c315d13355deffdad870",
+      "git_blob_sha1": "d455ff9e2732f5c722cc0a0f520f7eb78bfb2902"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-receiver-20261017/002-com.sun.source.util.Plugin.txt",
+      "sha256": "c910e53017adacdc0caaa4d769f3e18cc5e6dbb8622aa804d6c6951b10f65eab",
+      "git_blob_sha1": "a170f0d1232e67a3b7055f87de3dc8fdc3704860"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-receiver-20261017/manifest.tsv",
+      "sha256": "c4c814bee9e5b5c88f983b15c28fd0b776f739fce60e5f7529be43277ba30fd8",
+      "git_blob_sha1": "8052ebf52e72325cf8960c4665215a45eae62f54"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-service-order-canonical-20261017/000-pom.xml.txt",
+      "sha256": "a535fa0d65b497379680075f9bbb8001007c675456bec6921420a3395329cd33",
+      "git_blob_sha1": "a704b84fcee610330727a1b88cca271f20934eed"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-service-order-canonical-20261017/manifest.tsv",
+      "sha256": "728e16115f03f77e978904b22f5ed667bc89fba91bdf506e366cf667364a681a",
+      "git_blob_sha1": "1bb8919699f9c8032bb7431a036725bb44dafad0"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-service-order-receiver-20261017/000-pom.xml.txt",
+      "sha256": "3c21173dbcc2ad43355c7bacfec8929e3aca731d2d02c315d13355deffdad870",
+      "git_blob_sha1": "d455ff9e2732f5c722cc0a0f520f7eb78bfb2902"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-service-order-receiver-20261017/manifest.tsv",
+      "sha256": "61e2a899d9981d6bee17574912a9e83b2dfd9b950543f2b696750849c2aa9882",
+      "git_blob_sha1": "0195953efa99c55f1a0f1b44488072df04672d0b"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-service-preservation-canonical-20261017/000-com.sun.source.util.Plugin.txt",
+      "sha256": "d499127e721306567c0754945d7cc3ccfd80993fb17e618be0a4afb09fa0faeb",
+      "git_blob_sha1": "964f17e67423d4827ee9990bc7a8b872734e7bfa"
+    },
+    {
+      "path": "frontend/module-wiring/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-wiring-service-preservation-canonical-20261017/manifest.tsv",
+      "sha256": "235e547e3c019c314b660b9e51ca971fdf868e0d87f5470cafe44cb14646cd47",
+      "git_blob_sha1": "137bfa87d0197ddf71242c06ffc80eeae8e01a55"
+    },
+    {
+      "path": "frontend/module-wiring/service-order-sdk.log",
+      "sha256": "f5f442c105535f1a720b9273c961080aa7aea128e5d5755efe1b0f01d5efb340",
+      "git_blob_sha1": "4b08e51d5dc60274762625dab1a99cb212b2fe32"
+    },
+    {
+      "path": "frontend/module-wiring/src/test/java/com/synexia/rewrite/ModuleSuccessorRecipeTest.java",
+      "sha256": "7a74a2cc5a40df881b72280c13672744f58d8bb2c0fe160be5ccd3f9e5690b5e",
+      "git_blob_sha1": "fecd58734e08603bc9d77a2e02c939978590537a"
+    },
+    {
+      "path": "frontend/module-wiring/src/test/java/com/synexia/rewrite/ModuleWiringRecipeTest.java",
+      "sha256": "655a0c8a30386a8e597d3cb72499628f0861f89f54dfd0bb5435cb590f8768cf",
+      "git_blob_sha1": "26c0e67f270182088336465142ac54ce8a85a230"
+    },
+    {
+      "path": "frontend/module-wiring/src/test/java/com/synexia/rewrite/OrdinaryLocalScopeRecipeTest.java",
+      "sha256": "726555586df3ef08a09c9b4e39e39dfa6456fea57969368c6821801123f05333",
+      "git_blob_sha1": "936518d4381ee8a59eeb7f8840370f5f26b2afed"
+    },
+    {
+      "path": "frontend/module-wiring/src/test/java/com/synexia/rewrite/ServiceOrderRecoveryRecipeTest.java",
+      "sha256": "87a90f5c01f5454e453169647e223e0fa669036c1367eb5c5d0d879666123490",
+      "git_blob_sha1": "dbad16d7155550649d137b19e6d80f5a2bef8d37"
+    },
+    {
+      "path": "frontend/module-wiring/src/test/java/com/synexia/rewrite/TextServiceEngineRecipeTest.java",
+      "sha256": "b255e86996be9dc5aee79097f27e2ffe7a0a4c2c7fe16d2ac90c05f408df7d6b",
+      "git_blob_sha1": "fe0b3b629f28ae52e4aa24a68fba89d966346756"
+    },
+    {
+      "path": "frontend/module-wiring/src/test/java/com/synexia/rewrite/WiringSupport.java",
+      "sha256": "848a84afbe81511373e999794613d3f6ad32e6e94533d626bf71d09bdd2cc321",
+      "git_blob_sha1": "af72b7e6948ab5d2283db5f789734acb8c57fd44"
+    },
+    {
+      "path": "frontend/module-wiring/templates/canonical/000-pom.xml.txt",
+      "sha256": "d517ffbb75b66eb84ad37ec8e6a2fb74d072838677c86677b4b083e319a49704",
+      "git_blob_sha1": "7d1a46d03b5301c553d5527f8b36184abd8a344c"
+    },
+    {
+      "path": "frontend/module-wiring/templates/canonical/001-pom.xml.txt",
+      "sha256": "a535fa0d65b497379680075f9bbb8001007c675456bec6921420a3395329cd33",
+      "git_blob_sha1": "a704b84fcee610330727a1b88cca271f20934eed"
+    },
+    {
+      "path": "frontend/module-wiring/templates/canonical/002-com.sun.source.util.Plugin.txt",
+      "sha256": "d499127e721306567c0754945d7cc3ccfd80993fb17e618be0a4afb09fa0faeb",
+      "git_blob_sha1": "964f17e67423d4827ee9990bc7a8b872734e7bfa"
+    },
+    {
+      "path": "frontend/module-wiring/templates/engine/000-M3HashPinnedTextSnapshotRecipe.java.txt",
+      "sha256": "99a1ff392d426f8deac0d3b79c67f5290de74995615a618f4e7e0dc1abff137b",
+      "git_blob_sha1": "fdbcd8be61ab23de5e972197ea2d8d226b4ed963"
+    },
+    {
+      "path": "frontend/module-wiring/templates/hierarchy-closure-receiver/000-pom.xml.txt",
+      "sha256": "3c21173dbcc2ad43355c7bacfec8929e3aca731d2d02c315d13355deffdad870",
+      "git_blob_sha1": "d455ff9e2732f5c722cc0a0f520f7eb78bfb2902"
+    },
+    {
+      "path": "frontend/module-wiring/templates/optional-transitives-receiver/000-pom.xml.txt",
+      "sha256": "dad956e04d3789bc2a99a9f8c967801ad8c5ae5dee5c07538a942907013c1e42",
+      "git_blob_sha1": "4ee888de4740faae7e31de3d2cae970accd5d9b6"
+    },
+    {
+      "path": "frontend/module-wiring/templates/receiver/000-M3OpenRewriteSharedAST.java.txt",
+      "sha256": "d69c37b06fb02cbfa452dea6dfeee07563ad234f59929e255bce567f899bcde4",
+      "git_blob_sha1": "d9a4744699015dc5af2e6eab84a34253bafaa5d4"
+    },
+    {
+      "path": "frontend/module-wiring/templates/receiver/000-pom.xml.txt",
+      "sha256": "dad956e04d3789bc2a99a9f8c967801ad8c5ae5dee5c07538a942907013c1e42",
+      "git_blob_sha1": "4ee888de4740faae7e31de3d2cae970accd5d9b6"
+    },
+    {
+      "path": "frontend/module-wiring/templates/receiver/001-pom.xml.txt",
+      "sha256": "3c21173dbcc2ad43355c7bacfec8929e3aca731d2d02c315d13355deffdad870",
+      "git_blob_sha1": "d455ff9e2732f5c722cc0a0f520f7eb78bfb2902"
+    },
+    {
+      "path": "frontend/module-wiring/templates/receiver/002-com.sun.source.util.Plugin.txt",
+      "sha256": "c910e53017adacdc0caaa4d769f3e18cc5e6dbb8622aa804d6c6951b10f65eab",
+      "git_blob_sha1": "a170f0d1232e67a3b7055f87de3dc8fdc3704860"
+    },
+    {
+      "path": "frontend/module-wiring/templates/service-order-canonical/000-pom.xml.txt",
+      "sha256": "a535fa0d65b497379680075f9bbb8001007c675456bec6921420a3395329cd33",
+      "git_blob_sha1": "a704b84fcee610330727a1b88cca271f20934eed"
+    },
+    {
+      "path": "frontend/module-wiring/templates/service-order-receiver/000-pom.xml.txt",
+      "sha256": "3c21173dbcc2ad43355c7bacfec8929e3aca731d2d02c315d13355deffdad870",
+      "git_blob_sha1": "d455ff9e2732f5c722cc0a0f520f7eb78bfb2902"
+    },
+    {
+      "path": "frontend/module-wiring/templates/service-preservation-canonical/000-com.sun.source.util.Plugin.txt",
+      "sha256": "d499127e721306567c0754945d7cc3ccfd80993fb17e618be0a4afb09fa0faeb",
+      "git_blob_sha1": "964f17e67423d4827ee9990bc7a8b872734e7bfa"
+    },
+    {
+      "path": "frontend/module-wiring/verify.py",
+      "sha256": "af57b756fda466cff1fa80dc06e8b8d9c725cbee8edb974517e4181abb9b0e99",
+      "git_blob_sha1": "7975a8dad473a7a04dfbe2402a29b181862d1342"
+    },
+    {
+      "path": "frontend/openrewrite/CATALOGUE.tsv",
+      "sha256": "3c23bcc02116680db69f1bd3d16c726dc5ca94aa1df9283119d6abbdb6a6a556",
+      "git_blob_sha1": "206153e0967f6b47d268880bf59b2c8fa4119bdb"
+    },
+    {
+      "path": "frontend/openrewrite/FILE_PASSES.tsv",
+      "sha256": "77b4091f78c3415510de02fa15b783f4d26dd924aafbb15e77b945f2cbe8ceec",
+      "git_blob_sha1": "a5cbb01d3118759ad4d5216dc676b1205dd43329"
+    },
+    {
+      "path": "frontend/openrewrite/README.md",
+      "sha256": "90496e8356b337ae9208805d8a1a4af1c87295f1fbca795bb32ddeb4c6b110a3",
+      "git_blob_sha1": "a70cfab2def3eb28c94fe7cef2ed3e9ddc031f08"
+    },
+    {
+      "path": "frontend/openrewrite/SOURCE_PINS.json",
+      "sha256": "59a70c27852e56b29d3b5d3da449944e36453a2d54e280398632c4144f36acbe",
+      "git_blob_sha1": "d032220647b47930ff6d46908eb78d02e64c567c"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/CLASSLOAD_RECEIPT.json",
+      "sha256": "a7986a6d59b159558098694a3119aeab90b5204e2cf6f011e89f3f9982957c09",
+      "git_blob_sha1": "ec86a0fd415f3d9b1caf2f3fc9529a10e5735a90"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/RESULTS.json",
+      "sha256": "0ee8bffd77b0a087764bbc7e64a66917334b389fa348809b074bc2c506ca5682",
+      "git_blob_sha1": "e48eec8232294f130c697a8ffacc82c3109665f1"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/SDK_RECEIPT.tsv",
+      "sha256": "54e17eddbfcff45d059ee717cae41a34e541c7baffa2e9439020b19a6269fda9",
+      "git_blob_sha1": "c0220a094ffcb6b705a4d8ba59f0aa2ab134221a"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/TEST-com.synexia.rewrite.SharedASTRecipeTest.xml",
+      "sha256": "2f8cae64a347d622505e6be784aef57a98d6a283d99ee766b7558936accca5c2",
+      "git_blob_sha1": "963c5346e4aa50333a7c40f02b7f3ac1d70a7e9e"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/final-artifacts-verifier.log",
+      "sha256": "55d061992da88741e55a94156148ca72f584694513f9c1828d0d400f85890fea",
+      "git_blob_sha1": "b72cf4a181d33ec48ca7404f2bddc6ac26aa500e"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/javac.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/junit-summary.json",
+      "sha256": "842c587a1f0089ba916433a48348a95ea624cb6a359cff2eddb3242179473844",
+      "git_blob_sha1": "740560f5910beca1eaaa7470bb6dc82e3c39a37c"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/junit-summary.txt",
+      "sha256": "951822d7af696d1f50b6f6c9ed4c5f9636b469f1aafe075e9cad97127113ad13",
+      "git_blob_sha1": "39aea57107339c715ab062bc61dd51a4a40bf8c1"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/publication-source-custody/QUALIFICATION.json",
+      "sha256": "3e5121b7f73f4642a535370dcafa5e8998c2c40bbdcd13b6b59480081dab4bc1",
+      "git_blob_sha1": "d1a387463d85d921e7d72c87e2eb0b7823b78863"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/publication-source-custody/SDK_RECEIPT.tsv",
+      "sha256": "54e17eddbfcff45d059ee717cae41a34e541c7baffa2e9439020b19a6269fda9",
+      "git_blob_sha1": "c0220a094ffcb6b705a4d8ba59f0aa2ab134221a"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/publication-source-custody/TEST-com.synexia.rewrite.SharedASTRecipeTest.xml",
+      "sha256": "d032e83d9e3cb54141fe6579115f883fc310d0a165c0d09bf08a625199b6ad08",
+      "git_blob_sha1": "5ac5982dd1ba3a0d1df9b2674e46e026979e64bc"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/publication-source-custody/maven.log",
+      "sha256": "0a05cdcf6af2d3255b0d50f05e329672edfd4fd5158784b48d43c093b112d110",
+      "git_blob_sha1": "18d304dca8faacbf49ebb5d9e5070e12e5b7d688"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/same-task.log",
+      "sha256": "38e97ec300126dbd7a0ff46391620ef3f08e2fe13b92e916e302bb19f6f5fb8f",
+      "git_blob_sha1": "ea3b216979fac5dffcc88eb744083ddc81cdb2fb"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/sdk-final-artifacts.log",
+      "sha256": "aa5ca789e603fabaa39ebde464083e8636f8d3003922c0bb1fd777b1e5fe6aae",
+      "git_blob_sha1": "7515afb9ac2558390dbc41e2bde16c5ab11c09f7"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/sdk.log",
+      "sha256": "aa5ca789e603fabaa39ebde464083e8636f8d3003922c0bb1fd777b1e5fe6aae",
+      "git_blob_sha1": "7515afb9ac2558390dbc41e2bde16c5ab11c09f7"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/verifier.log",
+      "sha256": "55d061992da88741e55a94156148ca72f584694513f9c1828d0d400f85890fea",
+      "git_blob_sha1": "b72cf4a181d33ec48ca7404f2bddc6ac26aa500e"
+    },
+    {
+      "path": "frontend/openrewrite/evidence/without-openrewrite.log",
+      "sha256": "1c13ad60e55b5014349700ea172b056ab11cdc691495798ebfe1090cc400b055",
+      "git_blob_sha1": "d15aabb1fadbca802c734da1e2c7a41d92514077"
+    },
+    {
+      "path": "frontend/openrewrite/pom.xml",
+      "sha256": "dc34141f94e256c05521860eb85a992769aa508329a302591ff8552dc6b5c7de",
+      "git_blob_sha1": "8bac3a69cc3c613b962691a45c1b08b851cd3f7c"
+    },
+    {
+      "path": "frontend/openrewrite/prepare.py",
+      "sha256": "ea459ba7e5942afa71832745e6be312a0c9baff8eff11ab7c06c61c57d7236c6",
+      "git_blob_sha1": "b12e285c6a539bfffd12ad0b9ddfcb0159288c6f"
+    },
+    {
+      "path": "frontend/openrewrite/proof/NoOpenRewriteProbe.java",
+      "sha256": "1d91f16a67edac4538ce0a77579f0a4046e67f7795894ec25910a1f79e134ad6",
+      "git_blob_sha1": "236dfb9f7e0b48d13f1c39127af928f510106e57"
+    },
+    {
+      "path": "frontend/openrewrite/proof/SharedASTProof.java",
+      "sha256": "81f989ed64c08ffba974b1b9cf1d9cd23b2d051f20c829b5ffed1268b8f2c3bd",
+      "git_blob_sha1": "ac583dd50c3813281d2c5822d90b7183efc99890"
+    },
+    {
+      "path": "frontend/openrewrite/resources/META-INF/rewrite/m3-openrewrite-shared-ast.yml",
+      "sha256": "d6c8dba943c96a388b7f088dfee91c1a79b5fac9819cdb5f52b0f37cf69a8009",
+      "git_blob_sha1": "df7aa7b1961efe8bc2d167e012666adfbfb167fe"
+    },
+    {
+      "path": "frontend/openrewrite/resources/com/synexia/rewrite/hash-pinned-java/m3-openrewrite-shared-ast-20261017/M3OpenRewriteSharedAST.java.txt",
+      "sha256": "c12d325da4c8fe2dec533ffb728d8e9b815f40c5e65ee1eae54534f4cf2a2884",
+      "git_blob_sha1": "5d2f6669801526b18afaad833a0791c3dbcae777"
+    },
+    {
+      "path": "frontend/openrewrite/resources/com/synexia/rewrite/hash-pinned-java/m3-openrewrite-shared-ast-20261017/manifest.tsv",
+      "sha256": "04983e7a8c5aa0134f4d1c9011a5db909573896d1341a55f316262bb2e7fa9a3",
+      "git_blob_sha1": "bd239b42dcc9b8bdf35b79a16677ee73fd1ed8a9"
+    },
+    {
+      "path": "frontend/openrewrite/src/test/java/com/synexia/rewrite/SharedASTRecipeTest.java",
+      "sha256": "79cb71c6a9f7d40e806a5572b2842c93cf95bce7b91994504e558a28195e0c1e",
+      "git_blob_sha1": "41e533a93e933275fafd9d107a258b772901f89e"
+    },
+    {
+      "path": "frontend/openrewrite/verify.py",
+      "sha256": "934945121390b438f4641f9a1b3c88260e990bbf9b3a5db4cebad02cffe9e519",
+      "git_blob_sha1": "13012987ab6d2fbdee063a5ae167e677a86c5326"
+    },
+    {
+      "path": "frontend/pom.xml",
+      "sha256": "246597e214b9483c8cb4cf814fb2d8ed422755210e1b3e521cc4fabf7aa7b012",
+      "git_blob_sha1": "b69f8e502522878a3b024e92f4dd1292e3c1be74"
+    },
+    {
+      "path": "frontend/preimages/canonical/synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/MIndexJavaAST.java",
+      "sha256": "65ed6ab63ee2a091cf854ff5bc871ee773d92f9c53bb45934873d1c578a76280",
+      "git_blob_sha1": "d23ea38d51048478c972b9e19441dde9479372bb"
+    },
+    {
+      "path": "frontend/preimages/canonical/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTImage.java",
+      "sha256": "5d124dd864b2149388f0d5865d2b78032be9eb1a3c166571fb161255763ebaf6",
+      "git_blob_sha1": "2b3424d34c3e9728440881c8242efd4a00b92673"
+    },
+    {
+      "path": "frontend/preimages/canonical-recovery/synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3ASTPlugin.java",
+      "sha256": "499547e8bafab76eb93b20454d41f0d63f6dbe556cd65f027fc10db7cfcfe23f",
+      "git_blob_sha1": "003a342f674a19ae2eb5f660ed09d650be2e0d00"
+    },
+    {
+      "path": "frontend/preimages/compiler/src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java",
+      "sha256": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+      "git_blob_sha1": "dc8bca117d0fe55f534ab2b1b267d207ebaa8e4e"
+    },
+    {
+      "path": "frontend/preimages/compiler/src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java",
+      "sha256": "845c70bdc5e77a62282417889dc77bf466fd0c0005f72112e86faf27ec616399",
+      "git_blob_sha1": "89b888f296058811ad4d58c76226c34c6a6e8fc2"
+    },
+    {
+      "path": "frontend/preimages/compiler/src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java",
+      "sha256": "5827f24f34317707564be6ca031ecb6ef69958b66ca69a42a787080ef6ccb006",
+      "git_blob_sha1": "a04b4094d304958da4574244503c1b9d34e0a330"
+    },
+    {
+      "path": "frontend/preimages/compiler/src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java",
+      "sha256": "129e8c19ef328185c45465b9c8bf9baee43bb24be54842b69833c52e3e6f3dcb",
+      "git_blob_sha1": "cac77db60d93c1692bf4b9cfc18428ad3c36910f"
+    },
+    {
+      "path": "frontend/preimages/receiver-recovery/m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3ASTPlugin.java",
+      "sha256": "0f04102766052786bea1d09fc0cff178b6da17d7732f0d1a9c637b97e21b159a",
+      "git_blob_sha1": "c620b3b7bd0624560be3fa2af39022482e33b9cf"
+    },
+    {
+      "path": "frontend/preimages/receiver-recovery/m3/vendor/synexia/synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3ASTPlugin.java",
+      "sha256": "499547e8bafab76eb93b20454d41f0d63f6dbe556cd65f027fc10db7cfcfe23f",
+      "git_blob_sha1": "003a342f674a19ae2eb5f660ed09d650be2e0d00"
+    },
+    {
+      "path": "frontend/preimages/receiver-recovery/src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java",
+      "sha256": "606a4f516965c0113b2cec898e2a8bf8470d8fb32b493e99d6be7f709bf10e62",
+      "git_blob_sha1": "90c5586114e79ba55ead6ae4873574c66ea07145"
+    },
+    {
+      "path": "frontend/preimages/receiver-recovery/src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java",
+      "sha256": "b989760e908a95712386a8f072d8cb0cad4cfafc6356dcf6e34e03733461929b",
+      "git_blob_sha1": "eeb47f80f078212842efa4fe4644592b93a7e2c1"
+    },
+    {
+      "path": "frontend/preimages/receiver-recovery/src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java",
+      "sha256": "61179a228484bac588420991f811d67dd18d95b36debb4320ced1e06240c36c0",
+      "git_blob_sha1": "eb4b2b7113f57f5b10ec173ca051c8e09dec87e7"
+    },
+    {
+      "path": "frontend/prepare_crate.py",
+      "sha256": "e235103dc28e645138702a7843d4228329b27e9fc5a2517fd2572131247ef5c4",
+      "git_blob_sha1": "f025692ac2ab29766e4fc613542b3faadb8e2e09"
+    },
+    {
+      "path": "frontend/primitive-image/TaskReuseProof.java",
+      "sha256": "1173e40bbd4a47e10faf38682dab4c41937958dd14c3b24ef8dd209b7c6dcef0",
+      "git_blob_sha1": "59a824548f928e45ef55a1fc75965b631bec13cb"
+    },
+    {
+      "path": "frontend/primitive-image/evidence/RESULTS.json",
+      "sha256": "5f8487eb614e5dd89a1a6abf97bc8267e5c12048675b5b1c4eb081f207e6a4e8",
+      "git_blob_sha1": "52fdfe3a7b048e90f6a42c21c021975b5941c1a8"
+    },
+    {
+      "path": "frontend/primitive-image/evidence/proof.log",
+      "sha256": "c809d7f00673ecb21a51d35dd9a0ee83f0c267aec2ff4bd0a22eacd9666b148e",
+      "git_blob_sha1": "568f16bb92d0de55ffe96352d8102418eae6b0d3"
+    },
+    {
+      "path": "frontend/primitive-image/verify.py",
+      "sha256": "dc2700c5df1f6b0ef945cabb36ca844cb98553a0ac16bafb1990663de0243bc0",
+      "git_blob_sha1": "5566de9eeab22bb0eb5e2583b140ea71e102baf6"
+    },
+    {
+      "path": "frontend/recipe-final-sdk.log",
+      "sha256": "74c00ceef9609174b73cff51c1aa56b461f79e88153632ba786d0580c93e2ba2",
+      "git_blob_sha1": "dffa515fa1862a0cadfd5b68f86f2bf21acddc68"
+    },
+    {
+      "path": "frontend/recipe-materialize-receiver.log",
+      "sha256": "f3a3e72f7a5cb0fddc1ed7e65dc4cfc731ddc228e9e7cdaccd727cf5289e88d8",
+      "git_blob_sha1": "74c591ea107a1478c1b4fd2c67218cb709d2bade"
+    },
+    {
+      "path": "frontend/recipe-materialize.log",
+      "sha256": "dd08731bf8c70551aa26a025d0858b1b591d02badf5f77030d3a92c8a825ecea",
+      "git_blob_sha1": "bc6f297366bec9b7b247c9dda97b86f6c2341083"
+    },
+    {
+      "path": "frontend/recipe-sdk.log",
+      "sha256": "f2f09dfe01210c294cdd9f2f48811110e682289082b977e9dae99045508c2df7",
+      "git_blob_sha1": "56ea2833e6bd489c243d481793c16cc44e4a2f5b"
+    },
+    {
+      "path": "frontend/registry/README.md",
+      "sha256": "003da61ff483932e20bb8eef038cbfb778d0ddca8fe8c4289fa0058d3c36c33e",
+      "git_blob_sha1": "a2ef0122c34129c7ecdfccac57e8e66f7ee2d43c"
+    },
+    {
+      "path": "frontend/registry/SOURCE_LINEAGE.json",
+      "sha256": "93725a7de37463b728b4338a4eee272f2fe13056a3fc6aecfbcb111a91b66a87",
+      "git_blob_sha1": "31ffea51ef5afeb29e7d0c464f500f4ea0b0484b"
+    },
+    {
+      "path": "frontend/registry/evidence/M3ASTRegistryRecipeTest.txt",
+      "sha256": "4dbd50ce36ca4c9fcfb0e6b1b25605cf9f3f697751b078e5d191d438c725c6f9",
+      "git_blob_sha1": "74f5a5a46d156fc798e2bff8af7f9dfd5cfc93d4"
+    },
+    {
+      "path": "frontend/registry/evidence/QUALIFICATION.json",
+      "sha256": "185c06d0f7f599481e712c14c460d72470db229c9725a5784a1c0f14f68fd731",
+      "git_blob_sha1": "c89661ee197d8cf067c5a1914cdacd6ea027d46c"
+    },
+    {
+      "path": "frontend/registry/evidence/candidate-validation.json",
+      "sha256": "785ee22386112b5d0e1f1616de162097784044b7a11d04a46519e67839fadf6e",
+      "git_blob_sha1": "d05d31acef2fd14bc2aacffa246359c32c8842e5"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/M3ASTRegistryRecipeTest.txt",
+      "sha256": "94ec3b87d8e3a8211190694ac1fcb5fff7440351c43928fe2aed4c49b247a025",
+      "git_blob_sha1": "b321c4aa1084e25a75316e18ebec53e781805f94"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/QUALIFICATION.json",
+      "sha256": "3ab93f3b2570075f1170a8eaaaa6d14731e75a53528685b4f5988f440039020b",
+      "git_blob_sha1": "80a8da8c7aa5fec01ae7a5cb353e7af28f7144d9"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/README.md",
+      "sha256": "a84fa69f0b9d9aca13b5688691f7dda68288d82dc51462fec2649b5567af0d4a",
+      "git_blob_sha1": "ff6b54c1b1347e88c3bb11623e10dfb89c7dc532"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/SOURCE_LINEAGE.json",
+      "sha256": "d3492990c07587c05c8e281d34d9bdc14bb342c72208b6b98b855fd2401c52c9",
+      "git_blob_sha1": "f9d7e5c382b2dd0f49455a3bbad10999a629c6a4"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/candidate-validation.json",
+      "sha256": "8f1846a7249a3e29ae3999c4a8f32f579678be278ae79dd04c85ce4291ec9c38",
+      "git_blob_sha1": "5d659a31f3194db8442153a639719cae289d65f8"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/registry.py",
+      "sha256": "c2417248ac1d32d7912e59b79747e54395172ebce767006da54c7615e34bdff3",
+      "git_blob_sha1": "26606c0dd8da1cfaf957553cd02b44f7e3a65942"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-registry-20261017/000-name-mapping.json.txt",
+      "sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+      "git_blob_sha1": "157a981c22cd042c36b75aa7da538ab07c19eded"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-registry-20261017/manifest.tsv",
+      "sha256": "d07842bcd0da5cd32d95293e22bf893876e7f554e7db45f3584f76e4a7b5c76b",
+      "git_blob_sha1": "a9a401fafe3824c0a3c3c2ce0183953d444ab1c5"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/sdk-materialization.log",
+      "sha256": "36c8f212b7660d94b691528a8c1eea19377263ec59e317e59f25e747b2ba1920",
+      "git_blob_sha1": "c136bbada81efef2fe372d7e30678e798ae6ee17"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/sdk-qualification.log",
+      "sha256": "fe50b1a3763403017fde1f4a9604e604084d8c9c7686b1dc5eb41d15c655ee3a",
+      "git_blob_sha1": "a469063d992ba3cbad743086eae5d8e49f02f1bf"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/src/test/java/com/synexia/rewrite/M3ASTRegistryRecipeTest.java",
+      "sha256": "26813b8747b033e265cd2d0e9f539f0861acc3000ec9fa55d2f07604cbad564f",
+      "git_blob_sha1": "37ab1ea754f276d6fbe5b50fc85e2c0920f426a6"
+    },
+    {
+      "path": "frontend/registry/evidence/history/initial-ten-mappings/target-validation.json",
+      "sha256": "8f1846a7249a3e29ae3999c4a8f32f579678be278ae79dd04c85ce4291ec9c38",
+      "git_blob_sha1": "5d659a31f3194db8442153a639719cae289d65f8"
+    },
+    {
+      "path": "frontend/registry/evidence/sdk-materialization.log",
+      "sha256": "e9076b7a0c91371470a4a39ab93bd9e686b2b8bc560d50899823093013906d47",
+      "git_blob_sha1": "c830b59812263c938144ca70a2e12b21d32ea44b"
+    },
+    {
+      "path": "frontend/registry/evidence/sdk-qualification.log",
+      "sha256": "616dc4303320200d272702b37c14085b7deccdd82a28f3303b9884c65e78f7db",
+      "git_blob_sha1": "c4a02bed445a62941f6441ec4954f3add5bf3430"
+    },
+    {
+      "path": "frontend/registry/evidence/target-validation.json",
+      "sha256": "785ee22386112b5d0e1f1616de162097784044b7a11d04a46519e67839fadf6e",
+      "git_blob_sha1": "d05d31acef2fd14bc2aacffa246359c32c8842e5"
+    },
+    {
+      "path": "frontend/registry/guards/m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "git_blob_sha1": "40f032174baa2f1c19e3b02686723bc37f37122c"
+    },
+    {
+      "path": "frontend/registry/pom.xml",
+      "sha256": "94f24f2a3100583e4df356b05fa9c869ec4dcb385b930fb603eb8f8537d21ab0",
+      "git_blob_sha1": "c2f49b1205d73b525c4cd8fae5adc63123baca29"
+    },
+    {
+      "path": "frontend/registry/preimages/hierarchy/m3/docs/name-mapping.json",
+      "sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+      "git_blob_sha1": "157a981c22cd042c36b75aa7da538ab07c19eded"
+    },
+    {
+      "path": "frontend/registry/preimages/m3/docs/name-mapping.json",
+      "sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+      "git_blob_sha1": "769874f3049070f07d3481c70ae9fa873807aecd"
+    },
+    {
+      "path": "frontend/registry/registry.py",
+      "sha256": "0c16f0cbde6cdfc2b0e39ecc27d9ceeb09cb46e9e5d07362e40f73023f5ee8a5",
+      "git_blob_sha1": "ac66082d1321e6f3918a5b63b3846cca6fc59810"
+    },
+    {
+      "path": "frontend/registry/requirements-schema.txt",
+      "sha256": "30b8b4c017f3a7684cf310de11a8bbccc7c02d1086571698eeac88f8cd52bb5f",
+      "git_blob_sha1": "704152fd0a5bd52127d9ad3988061ca5cc8c4133"
+    },
+    {
+      "path": "frontend/registry/sdk-materialization.log",
+      "sha256": "e9076b7a0c91371470a4a39ab93bd9e686b2b8bc560d50899823093013906d47",
+      "git_blob_sha1": "c830b59812263c938144ca70a2e12b21d32ea44b"
+    },
+    {
+      "path": "frontend/registry/sdk-qualification.log",
+      "sha256": "616dc4303320200d272702b37c14085b7deccdd82a28f3303b9884c65e78f7db",
+      "git_blob_sha1": "c4a02bed445a62941f6441ec4954f3add5bf3430"
+    },
+    {
+      "path": "frontend/registry/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-registry-20261017/000-name-mapping.json.txt",
+      "sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+      "git_blob_sha1": "3b05530deb12826fb58451b7c26147cb357b6125"
+    },
+    {
+      "path": "frontend/registry/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-registry-20261017/manifest.tsv",
+      "sha256": "eb1b40276b76a57639775731fc8bdc5113b3d16019bf3aa03a33f6787e1e34b7",
+      "git_blob_sha1": "80e89455d4f5cf8d540721373295778069db7d30"
+    },
+    {
+      "path": "frontend/registry/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-registry-hierarchy-20261017/000-name-mapping.json.txt",
+      "sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+      "git_blob_sha1": "3b05530deb12826fb58451b7c26147cb357b6125"
+    },
+    {
+      "path": "frontend/registry/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-registry-hierarchy-20261017/manifest.tsv",
+      "sha256": "74a6f750737d90cdd56213b3655c82f78d1f1272e14e468c109b71187b043b9a",
+      "git_blob_sha1": "e2fd2d38dfcdaa705810fc1f8e1efc9ec607385a"
+    },
+    {
+      "path": "frontend/registry/src/test/java/com/synexia/rewrite/M3ASTRegistryRecipeTest.java",
+      "sha256": "a7f83fa9665fa58aa3c703515c88138f1ab15da5bcad2c0b17eaecc7510a6a82",
+      "git_blob_sha1": "ee5f1a5c76f386518c75b0074924cd58b352e24c"
+    },
+    {
+      "path": "frontend/runtime-tests/M3ASTCodecTest.java",
+      "sha256": "1efa8a65a6d079ba96a87c992d004883ab968e2bc9d627fa194df5b71d90ccd6",
+      "git_blob_sha1": "bfd7a05eaf8bb5047d2b596256a4adcd0e70919a"
+    },
+    {
+      "path": "frontend/runtime-tests/M3ASTCompilerBridgeTest.java",
+      "sha256": "efdbe0c37da488bec2fa6ce7459d30cea801cfb5face2deaf0efb19b665082f6",
+      "git_blob_sha1": "10289b401b86becd1df33c065b3eae909436cc80"
+    },
+    {
+      "path": "frontend/runtime-tests/M3FileAndContextTest.java",
+      "sha256": "6212a27631154ff38688c18b8160abba98e747bf86be2661e22b5409021a7848",
+      "git_blob_sha1": "6195cad9cdbddc7159392011f2124f8badd5bf66"
+    },
+    {
+      "path": "frontend/runtime-tests/M3FrontendTestSupport.java",
+      "sha256": "e37cbe366464dd888fa4530c47a1ee0468b12a1abe3109289f8f47f5886b6890",
+      "git_blob_sha1": "e51e6c38b01c055a5b550a8e5a3ce19ca0a5d47d"
+    },
+    {
+      "path": "frontend/runtime-tests/M3JavacASTIndexTest.java",
+      "sha256": "902b26409fbf4d94cac751569d14f2489c02c5a0f3c7de65bbbb7a67538fc1b9",
+      "git_blob_sha1": "53bda14d3bf4675fece713b00b2703eb879fa9f3"
+    },
+    {
+      "path": "frontend/runtime-tests/README.md",
+      "sha256": "63c91d89d7f95a9775cac1fe7cd7c464a4246580fdc1427e0de84407a807d056",
+      "git_blob_sha1": "d0f4dc0087c930f754ccb0813debecf5849a5549"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/M3ASTCodecTest.txt",
+      "sha256": "64266fb983dfd89c02ef816038779eefb8afb0a0ea1c79b4d8dd5d9a243b4f17",
+      "git_blob_sha1": "efd5430f0b9a2220def9712cf6b279ab5d577d0e"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/M3ASTCompilerBridgeTest.txt",
+      "sha256": "4a6c07ac0433365c2ac6467bc856781e6f33d1b84e3c35bc92f83f7273a9ce3b",
+      "git_blob_sha1": "2064ae11c78dc53cdf92ffa3c11d8e66e9aeb466"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/M3FileAndContextTest.txt",
+      "sha256": "f350a6995cc66c2c3c2b4ad22f01c388e449abd130ec33b8eb80f15d6c9b5155",
+      "git_blob_sha1": "79dfac87b2fa7c8a97dd34505fda1d0cdf607705"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/M3JavacASTIndexTest.txt",
+      "sha256": "0ecac744fe1547bba3ca88f9766cba6b261910989f3b6067c85640bf1aaf450d",
+      "git_blob_sha1": "1e85f5090577eb6363cffb8ed61bd77ad6142968"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/QUALIFICATION.json",
+      "sha256": "d8403304ff94d967cdaf1f0a2917526340e00dc5ffdc6a17511909c1ad0db8ed",
+      "git_blob_sha1": "bc24628d3318716f66dc1a85020ba6735dcf9606"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/TEST-com.synexia.mindex.compiler.ast.M3ASTCodecTest.xml",
+      "sha256": "2e29490a5f6428e9762edeaeada49495d660c90717b98105f67e5e10bcd6e37c",
+      "git_blob_sha1": "9a758e46ba641cf1372182c417a5e14a1ddf7328"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/TEST-com.synexia.mindex.compiler.ast.M3ASTCompilerBridgeTest.xml",
+      "sha256": "8773495353535b6a64bfda3f778c8643eb81ef889730c84268817dae99b28ed2",
+      "git_blob_sha1": "94b81f9c9f276a0ab9ea9e95d6939812bb671ee8"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/TEST-com.synexia.mindex.compiler.ast.M3FileAndContextTest.xml",
+      "sha256": "cd087a9514efafe44d02775e882b4c1bb07141569dce78c99b72fec1f44b88db",
+      "git_blob_sha1": "319ace12d04a3d24c128d33dfee67fd31cff7959"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/TEST-com.synexia.mindex.compiler.ast.M3JavacASTIndexTest.xml",
+      "sha256": "d96ee61ea97015d79edc4eb3762e2fa8d6aaae80c682ce377520d504379bf675",
+      "git_blob_sha1": "75e8096d0ab77c2354036453ef02556d5db61a68"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/counterexamples/acquire-syntax-loader-arity/M3JavacASTIndex.java.txt",
+      "sha256": "d5f903e563460081feaad36641473b168b1a997fbcac1a3ccf3fcd39ab04301b",
+      "git_blob_sha1": "bb7bd6dbb5bff25d5487fc2cf66f1683bd28feeb"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/counterexamples/acquire-syntax-loader-arity/counterexample.json",
+      "sha256": "5b8472067f5a341949249fca13e49687c368560ab06c7463035357b3a8ffe550",
+      "git_blob_sha1": "bc2fca120dc3b2a83ef219ce849bf891ec37e48d"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/counterexamples/acquire-syntax-loader-arity/javac.log",
+      "sha256": "8e2f653aa68153412ed48f6decdc0c89fecab8f998a46dbdc763342a1460ade8",
+      "git_blob_sha1": "9caf9549676478b3eca4e6bf704d56a09361e2db"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/history/before-upstream-composition/QUALIFICATION.json",
+      "sha256": "2df64978771e4685a418309830d4bd7fc83e755eefa70c50516dfcd516be6bb7",
+      "git_blob_sha1": "37234d5d1aac138e68b83d4f2f61a08d5cd6f08a"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/maven-runtime-test.log",
+      "sha256": "a055b6bc3f92ebd34cffd690807ae4c997a8b49aeb1b8fc5aa19693354b83d08",
+      "git_blob_sha1": "1ca20cd378bbc97356453554270c1533faef82cc"
+    },
+    {
+      "path": "frontend/runtime-tests/evidence/maven-runtime.log",
+      "sha256": "9a03cbd2ec966f024ba04d9370d927b8aac902295d53c5708f4e3160ea6c39a0",
+      "git_blob_sha1": "5b23e42c0ab430c37630bc0eac0aaa676d9b4162"
+    },
+    {
+      "path": "frontend/runtime-tests/pom.xml",
+      "sha256": "db2c8c11f35166884aafbdc92d9adaebcb7e3f71456860f5f7061d6ee4b842d1",
+      "git_blob_sha1": "c163300fd4a6d4c6e4ce395d844e05ac7ea0527a"
+    },
+    {
+      "path": "frontend/source-pins.json",
+      "sha256": "40ea50a86a4695499b5fa766a57577e966f0a81bce3f08e48a1c32dde50bb9ee",
+      "git_blob_sha1": "5e6bcf19042369b1aa93b719e68ba75b74c5cdc4"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/000-M3AST.java.txt",
+      "sha256": "8923652ba76b55737a892805d9c1c921513c773eec9d3439dcfaf6f09d0df981",
+      "git_blob_sha1": "cf7d0f7d0d9ac0f100e16d0a44c84eb86ffd69f8"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/001-M3ASTCodec.java.txt",
+      "sha256": "b4fc72dabfa3fbf7ded7bb4ca53f38b789ae6ab6c03a6f2d9dd68c326c8199c7",
+      "git_blob_sha1": "26e7bb8d456dc4d8a3c4759d71eb0e78e2cea54b"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/002-M3ASTPlugin.java.txt",
+      "sha256": "4c96b3083cc3a3d38a2c1c25f66da62bccc97788a2b83b693f881ab6a948ddb4",
+      "git_blob_sha1": "e9254b2cd47fe131b4df6e549009057edc6fb2f4"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/003-M3CompilationContext.java.txt",
+      "sha256": "5dc73a6cb4d0b1b7f5ff2a00e34ab706dd2606865421d3b2fed5ef4ba3acfa1e",
+      "git_blob_sha1": "91a48dcf81ac4c81f65ece2a4cb1745f14667e0b"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/004-M3File.java.txt",
+      "sha256": "2dda8ef7a912ce662e85731351cf19104d61b1adea0675d2d43805f1f0b85f90",
+      "git_blob_sha1": "d5ffd41d9f87e80d4db436560fe56d3b9c763ba2"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/005-M3JavacASTIndex.java.txt",
+      "sha256": "1430b06e00c8bf838ad23d915e5f08bc97b850a72386d8cf328e02f1b903ed34",
+      "git_blob_sha1": "d84e93390d0090082e43a93d6bc7524ce4ec05e8"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/006-MIndexJavaAST.java.txt",
+      "sha256": "ed85e1309d78794547a24864b9eeabfa960bdc10f4731980053b304b3dbcd769",
+      "git_blob_sha1": "0170a1987e64d9e413154a35674cb228b9f7c1ce"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/007-MIndexASTImage.java.txt",
+      "sha256": "cf055b8bad5f57e976427c99a5d8ead55642f5da736448dd40243dbb46a6db5b",
+      "git_blob_sha1": "97d195f42f4f1066745903a6528038a6ed79dbd2"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-20261017/manifest.tsv",
+      "sha256": "c6084f617cbe23de0667a0cb9e4502d0afe6d0e958e5e543d1ca4c6f12b0deb7",
+      "git_blob_sha1": "2bf05478f5494eaaad776bec8531c12147792f8a"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-recovery-20261017/000-M3ASTPlugin.java.txt",
+      "sha256": "4c96b3083cc3a3d38a2c1c25f66da62bccc97788a2b83b693f881ab6a948ddb4",
+      "git_blob_sha1": "e9254b2cd47fe131b4df6e549009057edc6fb2f4"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-canonical-recovery-20261017/manifest.tsv",
+      "sha256": "1ade5857a695f9e6d96a1b3f4b5afc134128f43a794763e2a90587cd2f5dc702",
+      "git_blob_sha1": "aaaf8797b34dd0495fa86a8661c8e0ebfec9567f"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/000-M3AST.java.txt",
+      "sha256": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+      "git_blob_sha1": "dc8bca117d0fe55f534ab2b1b267d207ebaa8e4e"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/000-M3ASTPC.java.txt",
+      "sha256": "606a4f516965c0113b2cec898e2a8bf8470d8fb32b493e99d6be7f709bf10e62",
+      "git_blob_sha1": "90c5586114e79ba55ead6ae4873574c66ea07145"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/001-M3ASTPC.java.txt",
+      "sha256": "a834fe19fdfdfa74f8641f3d02e552d19ed4eea97088d4739fb397ab5f36429b",
+      "git_blob_sha1": "d9cb096f48f39bee6ef35658d777a021957b489f"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/001-M3PrimitiveImageCompiler.java.txt",
+      "sha256": "b989760e908a95712386a8f072d8cb0cad4cfafc6356dcf6e34e03733461929b",
+      "git_blob_sha1": "eeb47f80f078212842efa4fe4644592b93a7e2c1"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/002-JavaCompiler.java.txt",
+      "sha256": "61179a228484bac588420991f811d67dd18d95b36debb4320ced1e06240c36c0",
+      "git_blob_sha1": "eb4b2b7113f57f5b10ec173ca051c8e09dec87e7"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/002-M3PrimitiveImageCompiler.java.txt",
+      "sha256": "0c236a3e9c8ac5507865ec9b15d45f83312eece4a6b6c4e27dd5f4cfb302824d",
+      "git_blob_sha1": "9179c9441233406fbbabf323f3334a77b3d1001e"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/003-JavaCompiler.java.txt",
+      "sha256": "51c5426f32877d03b30554646e559e65f264de92ccfa820799936a54f1d48fc3",
+      "git_blob_sha1": "f1c4af3c0f20e8f610524aedb011317ae9c976ad"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-compiler-20261017/manifest.tsv",
+      "sha256": "94420df2d3d252d6c4bd1b52469a55b52609bf075fef8f0d2e7550507ed0011f",
+      "git_blob_sha1": "4e1cc5e7c4fd7b79cc0e0229a42c70bd37d901ff"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/000-M3AST.java.txt",
+      "sha256": "d6384d68addb1702ac5fc15708dd603aee270eff2281a7b999576e44db4adcbb",
+      "git_blob_sha1": "05fa61907939e448121da234d3e5c3037bd9bc02"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/001-M3ASTCodec.java.txt",
+      "sha256": "b321a44eb790e503a94942482d84261f3368915c7ddbc06937ad583c74b5281b",
+      "git_blob_sha1": "87af5460fbe3dac3e0687335db72806b15f0c667"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/002-M3ASTPlugin.java.txt",
+      "sha256": "0038001c542a432d9f796d80ecae61404b8f76ef9a2ffdfab88426097d2fe75d",
+      "git_blob_sha1": "6abf5b4b3c0f64a30a3aff4647da6bb01c8cf41a"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/003-M3CompilationContext.java.txt",
+      "sha256": "a71eb9aff9df4bc32bd31d20d97e711f97bcbf017a6c26e96a9665bfd69f3e23",
+      "git_blob_sha1": "5399e9a3841cf5f5af08f5844991bed6e441c1a2"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/004-M3File.java.txt",
+      "sha256": "da2925fa912753fcd2cb69fd9c348c6fc1c2fc235a2ce1be006360597dd8565c",
+      "git_blob_sha1": "c6107ac0c651793ef2882c244c902509bcb2edbb"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/005-M3JavacASTIndex.java.txt",
+      "sha256": "e381f163515d46ad8e2032622e9eb581a6a028a3b3d04fe37fa75430fe9336b5",
+      "git_blob_sha1": "356f7b38010d9d63888d59ba6b3544ba50ad7897"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/006-M3AST.java.txt",
+      "sha256": "8923652ba76b55737a892805d9c1c921513c773eec9d3439dcfaf6f09d0df981",
+      "git_blob_sha1": "cf7d0f7d0d9ac0f100e16d0a44c84eb86ffd69f8"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/007-M3ASTCodec.java.txt",
+      "sha256": "b4fc72dabfa3fbf7ded7bb4ca53f38b789ae6ab6c03a6f2d9dd68c326c8199c7",
+      "git_blob_sha1": "26e7bb8d456dc4d8a3c4759d71eb0e78e2cea54b"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/008-M3ASTPlugin.java.txt",
+      "sha256": "4c96b3083cc3a3d38a2c1c25f66da62bccc97788a2b83b693f881ab6a948ddb4",
+      "git_blob_sha1": "e9254b2cd47fe131b4df6e549009057edc6fb2f4"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/009-M3ASTWorkspaceCache.java.txt",
+      "sha256": "7ad205f6521a14879ae537ff15a98199dc3b023ae7c69e844aea1f3664f5bae1",
+      "git_blob_sha1": "9dc2f18ba0d98f0408777cf00ce7a40ff59ee428"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/010-M3CompilationContext.java.txt",
+      "sha256": "5dc73a6cb4d0b1b7f5ff2a00e34ab706dd2606865421d3b2fed5ef4ba3acfa1e",
+      "git_blob_sha1": "91a48dcf81ac4c81f65ece2a4cb1745f14667e0b"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/011-M3File.java.txt",
+      "sha256": "2dda8ef7a912ce662e85731351cf19104d61b1adea0675d2d43805f1f0b85f90",
+      "git_blob_sha1": "d5ffd41d9f87e80d4db436560fe56d3b9c763ba2"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/012-M3FileSourceFacts.java.txt",
+      "sha256": "3c6052c962b61b5cda14f1eab41a08f23a30c840a94f14ae2f57ef50f8fca32c",
+      "git_blob_sha1": "faf588b250f0fc3fcc2a91bf78d1c7d5f06b0589"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/013-M3JavacASTIndex.java.txt",
+      "sha256": "1430b06e00c8bf838ad23d915e5f08bc97b850a72386d8cf328e02f1b903ed34",
+      "git_blob_sha1": "d84e93390d0090082e43a93d6bc7524ce4ec05e8"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/014-MIndexASTDocument.java.txt",
+      "sha256": "6954228293e4210ef61fddf416596801af2d6321b000d89c6bcab4a01973d4dc",
+      "git_blob_sha1": "1bd5819752d3f67e943639932236ef68b889ee47"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/015-MIndexASTOccurrence.java.txt",
+      "sha256": "e3adc0fdbd0f81ad0abc321274c34643a4de088f6f9ced8330cca111110f718b",
+      "git_blob_sha1": "9bec626348ea9cad11afe4b3268054b85972d143"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/016-MIndexJavaAST.java.txt",
+      "sha256": "ed85e1309d78794547a24864b9eeabfa960bdc10f4731980053b304b3dbcd769",
+      "git_blob_sha1": "0170a1987e64d9e413154a35674cb228b9f7c1ce"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/017-DictionaryProvenance.java.txt",
+      "sha256": "d58f223bce198727ca2d998ff76975c4fc4a718030482a32856d3122507c45c9",
+      "git_blob_sha1": "9c2538718c4a6e3710d4a7f2be413139c331584d"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/018-LexicalRange.java.txt",
+      "sha256": "d34fc220b940b3f96e057221978d8812760f2616e5c69988eb74eb997c0735b0",
+      "git_blob_sha1": "27c4d24bee5b766eaaf7af4171feffc64eaa5561"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/019-LexicalRef.java.txt",
+      "sha256": "ed16dea8dbbb5cde018d105a6e48332974bb96e52806fe785e2cab061f18eb8c",
+      "git_blob_sha1": "17c783817d1f30a509967e83f4a3270a5ee3830a"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/020-MIndexAddress.java.txt",
+      "sha256": "089bf57fd8dfba766381296fe3727d7411865c8f73e4865b97162633715b3f31",
+      "git_blob_sha1": "da628fe2fd11d8cf6a73e47ccf122cc15e144024"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/021-MIndexAnnotatedString.java.txt",
+      "sha256": "7fe91ad87bb3f63b981ce04a560652db266d416ce582ee75a8ed886298c355bf",
+      "git_blob_sha1": "3ffebcdc0bb09fb5414bf46abdd98c4014f9243f"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/022-MIndexAtomRef.java.txt",
+      "sha256": "97d87e442435007884352f1692184abffec73145e86a8a7f3dafc2b4e0746376",
+      "git_blob_sha1": "257ae39b16636083ddaeed4993be5fd6bcd84ac6"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/023-MIndexByteSequence.java.txt",
+      "sha256": "8d7a175fad15457b84d0deaa770f7de40baead3a466b63cd8709b4c5f388715e",
+      "git_blob_sha1": "7db70b7d754fc1fb410dd42e17b757459b8d2c24"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/024-MIndexCharSequence.java.txt",
+      "sha256": "4d435e90316b69b5d4a67bdc5a46db1bf2e8d4db17e25efeb42fa899b1b37313",
+      "git_blob_sha1": "6c0821756c4ac4241ab22c97ca336f07b92cfd2e"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/025-MIndexCompositeString.java.txt",
+      "sha256": "8037a689789fc351ccdeef8105122a961a6722bb27e8f54cfe42cfd2370365e3",
+      "git_blob_sha1": "71d1fcada1cec89c1b0d5f0122ca7707d0b1dd58"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/026-MIndexDictionary.java.txt",
+      "sha256": "9a5c39eb1621d52c4aa53f51c06dd7c0c7ee93169edd4110831172a854586ab6",
+      "git_blob_sha1": "db36dc36b2b3ef0a395db53e04b2441834246b13"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/027-MIndexDirectInlineKey32.java.txt",
+      "sha256": "58f8484f8332f6968ba9102968ce68ac66ce95d9a4f9c29a6e5bd2c8a4c2af22",
+      "git_blob_sha1": "44dfc9257d60c1107f0e285820090eab527e1bb3"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/028-MIndexDynamicLiteralPool.java.txt",
+      "sha256": "9737c652fe4c608a86cc4de4a8239e206197cdc53a05098af8049544d5e61203",
+      "git_blob_sha1": "6d59fe5b1ffaef95fd032d764c5096beeb7755d3"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/029-MIndexExactLookup.java.txt",
+      "sha256": "991b72e2750df5b44b0e8e8113946c0f76909b817792d9fc956a2a02045475b7",
+      "git_blob_sha1": "8de88ec4bbfb61994aaa50e57a73c00074643767"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/030-MIndexHeapAdmission.java.txt",
+      "sha256": "1d427c7daf0885dfd9b5a6e3f89aa94592c0a98a39017057e1ec46ba8132ffa7",
+      "git_blob_sha1": "10bfb8616756b6257a73b98d7d02adcddc5bf448"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/031-MIndexHybridCodec.java.txt",
+      "sha256": "c7e36a23613dfb25c4aff4a103d8834997b0e307e2604ad382c93cf0d3a18bc7",
+      "git_blob_sha1": "408249367e56820a410d99b077bab77cfff440bf"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/032-MIndexInt8MatmulPlan.java.txt",
+      "sha256": "469e247f69bdc4c304095bbe7ce9909283ea70c5879d1a589d5621e5430669a6",
+      "git_blob_sha1": "f4a049c2bd822d60715556ca0c713b2ca58c522f"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/033-MIndexLexemeCodec.java.txt",
+      "sha256": "edd4a0658423bf86c7bcae538ddf10008ba6b059c01e2e350ceb086404a5eb30",
+      "git_blob_sha1": "81d30a2b02bc520673404e4307ed8a10e4dd3030"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/034-MIndexLexemeKey128.java.txt",
+      "sha256": "8731b80b3cfba656cab84f257a7336037dce6a84b1b48abb851044969fc3d22d",
+      "git_blob_sha1": "dda1268b717cffdfdf9c3262a1e7556c2f1711b1"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/035-MIndexLexemeMatrixIndex.java.txt",
+      "sha256": "4e2ab463f4e10d596deff4c7f23cf1a6d5c7c33d8408afdb96df35a90422d6b3",
+      "git_blob_sha1": "645000f43675ffb3d76cea9c2310895b95fc5eaa"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/036-MIndexLexemePattern128.java.txt",
+      "sha256": "a3b35fcd47b55ea22252db29b395d824cb19b3c4a0418e86d8c5371b91a7c63e",
+      "git_blob_sha1": "e4fa1af203e7867e30a58e676d73a637cb3b4469"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/037-MIndexLexicalClass.java.txt",
+      "sha256": "89ff14d7659a2d608b5c298f2f8aa1c09aeddf0a8c77eb0648b012010864428e",
+      "git_blob_sha1": "1245336a19bbfb049b9dd1f6fa0a3e93812039e1"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/038-MIndexLexicalView.java.txt",
+      "sha256": "a8f635b3793d6431b4693a51432956a36bc2d45898a96cabcc96320bd5cae5a2",
+      "git_blob_sha1": "0c2e21b51f61242152a1348a0863279623abfbc1"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/039-MIndexLexicon.java.txt",
+      "sha256": "427bc86341fb45759b9c7b9f76e32f03d1c9fad2c769ba5fe4164058923b2b46",
+      "git_blob_sha1": "0dfb60fcb9897a41aea47830d742cd40a34469a9"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/040-MIndexLexiconKind.java.txt",
+      "sha256": "de77c40f9d20c42964ae8f723f11a1a9f4f156cd971624a22427a67d6b192272",
+      "git_blob_sha1": "bcb568151d69dcd8af30b850e7463bef6f8a6b2f"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/041-MIndexLexiconSpace.java.txt",
+      "sha256": "b1866997ade85b3eef7bf0440f150f4188a5e1f17090e2dce29dba41e3ed2efc",
+      "git_blob_sha1": "bd35e4dcf8743b05bf4114d2385ec48af904f3fd"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/042-MIndexNamespace.java.txt",
+      "sha256": "badf873e6a4dc9a1bf80ad7db1311e0e35239515522cd2c1c0f6eff09a5cd8af",
+      "git_blob_sha1": "0899a80420d070c19bada6a52b1781212c426456"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/043-MIndexNamespaceRegistry.java.txt",
+      "sha256": "cc4f76a4f8fd477aa7c4d64448de7cb7ec23bed526c4f0a529bb7fb8a15f7f5e",
+      "git_blob_sha1": "4b056e8522ca9fa6203e352d9e31f2820922c868"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/044-MIndexNativeOps.java.txt",
+      "sha256": "a85817f89b0f2e1395674f534895ad735597cfb0b35e9c82a34061741bd93523",
+      "git_blob_sha1": "1dbe5138d5e24786a9652c19ce874c54fb44eaec"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/045-MIndexPackedLexemeImageFormat.java.txt",
+      "sha256": "ebd3933e1207ccdb4ecde62f62b1bd4ea344cd2287f74a6c20f1b5b3920ca1d1",
+      "git_blob_sha1": "b9ebe69d6e45866996c8dbf17bc5e7295e6db757"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/046-MIndexPackedLexemeIndex.java.txt",
+      "sha256": "4b6c8f27756282a4718d08904c15b12a2ad450a9b4b4bf4ae0ab3e44bc24f1bc",
+      "git_blob_sha1": "387bea4d0f54abe331ca9df0b522277bae1eda4b"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/047-MIndexPackedLexemeKeySource.java.txt",
+      "sha256": "6c9966d9647efb118e8d6f9a1d870507565f76cc8030f7f1ef6322b12aacd94d",
+      "git_blob_sha1": "39f3aea75ebcde445258c8d469395133fbbc8772"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/048-MIndexPrecomputePressureBudget.java.txt",
+      "sha256": "d69b92dd018bfa9d66ff2daed5599a417db65346348b295c7bb1395a1b8175c6",
+      "git_blob_sha1": "250bfe260db890cf48c7656a439e8d3e98bd67a3"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/049-MIndexProgressMonitor.java.txt",
+      "sha256": "b907a5acfdd98e139abb5fe41ea86c35bf4f3f15481086a5831b0e60ee8ac728",
+      "git_blob_sha1": "763ea75ea1553e679d6fcda271760328defef8cd"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/050-MIndexRef.java.txt",
+      "sha256": "467c945c87277716c9dfaab70096d52b850e26c93bd6ece74dce14dd71c574d6",
+      "git_blob_sha1": "609c2eb1eca6de701275f3766c377029b81b121d"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/051-MIndexReferenceDomain.java.txt",
+      "sha256": "d866181d5073a995bbab3a0e4020056de8fcf84f4d2d1ec55dd32f7b7e8e0853",
+      "git_blob_sha1": "763bfa12efbb05aea87bba055bc3db6ee610ba21"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/052-MIndexRegexAutomaton.java.txt",
+      "sha256": "c4cd9feb7645ccd1ef7fc66d165e33ee74fb9fbf6002d80518c228df47290b46",
+      "git_blob_sha1": "28a5c10f1b0c859694da2c2ee880667f54ddf717"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/053-MIndexRegionIds.java.txt",
+      "sha256": "22b41820e00f326901b8a01e5f747ba7e7b7bf7159e3ca00403d0d7a6b21e7d2",
+      "git_blob_sha1": "735be02401aa541f02fc6e9652f15d804ee74e24"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/054-MIndexString.java.txt",
+      "sha256": "d6856891b706dc9f38e8941438323629f5831d6f7117ba78699ce9c6f2612b91",
+      "git_blob_sha1": "1840f12a3ea64750d829f6dd2bda7916fc25d9f5"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/055-MIndexStringMetadata.java.txt",
+      "sha256": "8040fd1512cf94d1df7dd490996483161c32fc4954d34286153d228642d3863a",
+      "git_blob_sha1": "b2428c746f44d33ebed0289ff445ee57a454876e"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/056-MIndexStringPool.java.txt",
+      "sha256": "710bceb90527383f91a93da35bbaadc4eab982705552a334e167d4e9463c5310",
+      "git_blob_sha1": "f52d65dfe3469abd7ea55cba614d9f4a0aad079f"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/057-MIndexStringPrecomputeCache.java.txt",
+      "sha256": "f189e35ea7583da3a0626049f7e7f92e29c234d45bc1de0065cd9d6a0ab0aa28",
+      "git_blob_sha1": "7f0bc4c5e1fdc01d93ea6d221813f73a7503f619"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/058-MIndexStringPrecomputeImage.java.txt",
+      "sha256": "1d952e3cca08d9cb3eef2753e1884dda95ba3185c7fca2c65ce1b2ba10282553",
+      "git_blob_sha1": "0bb97710e1f19c56cb4b93db6d2fd40a0b83f2a4"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/059-MIndexStringPrecomputeProfile.java.txt",
+      "sha256": "45527b9177122a21303ecfc9c3d398c1fc6e6a2e7d8dea048ceba3696f619e11",
+      "git_blob_sha1": "3bf61751db3acbfd50f687e030bc9d6d98e49f84"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/060-MIndexSymbolLexicon.java.txt",
+      "sha256": "7ddcbe639c2f5a063dff8cc1011ccb9223ae181f03e228549a505c62d0be7006",
+      "git_blob_sha1": "ec6dc9326a289c0421470d4def092e8b77a01e2d"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/061-MIndexSymbolRef.java.txt",
+      "sha256": "d1de86d86f60f46fa5eea0f7876934f4a1a86d05ff7dd29dc57e2831f547e2c8",
+      "git_blob_sha1": "e914c73b45a6256684bf03d82557cc0774de7fa5"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/062-MIndexSymbolReference.java.txt",
+      "sha256": "df2b6427ad40e0048c02331358cf5718253259d11ff6f967a157d2b521adb3f5",
+      "git_blob_sha1": "67e54a1f765c6c616ad038c6296850ac83d21cce"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/063-MIndexSymbolTable.java.txt",
+      "sha256": "bee438df9cddd934fed60ba515878e86f1215040bef83d16daadf4be7ad6be38",
+      "git_blob_sha1": "13aafab2665434455e390c1e895d4a7a9b18c47d"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/064-MIndexTensorBackend.java.txt",
+      "sha256": "c5e38f3af3b550aeaad62a6a97e1292d4ab04663b81770dbf7a740d6eab6d122",
+      "git_blob_sha1": "a589f2f98b05534101afb3dd370b38476f794760"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/065-MIndexTensorRuntime.java.txt",
+      "sha256": "9b7da793a7c824450c4be67379e0ac9452943d8e074c3ed6f4291abfd19e19b9",
+      "git_blob_sha1": "8f80ee676adb19ec864401a89f78c0be07cc22b9"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/066-MIndexText.java.txt",
+      "sha256": "d208020eba0af22422a4d007f3fdf05d83d2c3b90faac460b1d7152877671a4a",
+      "git_blob_sha1": "c3e3f6b7b0b03622613cc741661ec8f13411ae45"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/067-MIndexTextSearch.java.txt",
+      "sha256": "55c53897ba686029cddcf2156092f0dbc186cdc27d112ed442b1b7d3292978b9",
+      "git_blob_sha1": "375f931e7ce0d0947a6b7d6a96816f2fdf8c0f30"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/068-MappedMIndexPackedLexemeIndex.java.txt",
+      "sha256": "a48151de622e189424d2fe8014c9de5d285f75e3c31e7bcc12dce2a8dcab8558",
+      "git_blob_sha1": "a6801cee39fcc8a83828536e7c1022f8de5598b6"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/069-SemanticRef.java.txt",
+      "sha256": "6e381b3ae3eeb0bd0c240ee289a7de29a4ee9dd6f741bd9bf19f9dabe0ad9a1e",
+      "git_blob_sha1": "ec46885a24d8889e28a10ab2c3b6626e5a465552"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/070-SubMIndexCompositeString.java.txt",
+      "sha256": "d5726cf3f86afa5de2ddcd4d5bb64a4d68a5d0b5db5c1a0ecf8d2d439a03de74",
+      "git_blob_sha1": "c2ed3c2e8708730e225dadcb8b95df5983c6843a"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/071-SubMIndexString.java.txt",
+      "sha256": "80625746ec369c7071d97685e7742359e80b73f7c8b246de76e59655fa1289b7",
+      "git_blob_sha1": "92fa09754c4f5f85f29509a7e6077a9f0ad08f8d"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/072-TextMetadata.java.txt",
+      "sha256": "6407591f0da1d3e0d79007ad39b55922892e4127686aad29f3e35eb187b44e84",
+      "git_blob_sha1": "5ce261216305e0288f3adba3ca4de02550cf3b3e"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/073-MIndexAST.java.txt",
+      "sha256": "69866847dcfcc5fd4036359fdb9eff536561c758935b61b449e2782395aee9d0",
+      "git_blob_sha1": "0168c4b3608a6a296382a39fa47989e4cc7e691f"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/074-MIndexASTEdge.java.txt",
+      "sha256": "c3ecebdaab2af3d9fd1de9ac4bf97715ce72ff5f8abe2721b753b31117ba798c",
+      "git_blob_sha1": "796e5b508e6355c910701c18c3f82f433c174300"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/075-MIndexASTFingerprint.java.txt",
+      "sha256": "2525a06c350331704ae871d5058a7985441ac0f7fd394c2e45a52fdefa20f8bf",
+      "git_blob_sha1": "94f7768fee9705de57c79d62e06fc7d8accbc44d"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/076-MIndexASTImage.java.txt",
+      "sha256": "cf055b8bad5f57e976427c99a5d8ead55642f5da736448dd40243dbb46a6db5b",
+      "git_blob_sha1": "97d195f42f4f1066745903a6528038a6ed79dbd2"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/077-MIndexASTLimits.java.txt",
+      "sha256": "8dc358c3a403720fd7cb85c197c97e3476e52164d224e7f8f3bfb58bacc43247",
+      "git_blob_sha1": "6426f5a6e3029be5c9a088d2be6af2ef20b6ba2f"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/078-MIndexASTNode.java.txt",
+      "sha256": "e78d1caadddeadbe6079c78d2c88780a28327fd4f462b72d679155308e570c04",
+      "git_blob_sha1": "6ac5bb7ffbcc685a3dee0108b5a252667facd222"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/079-MIndexASTPool.java.txt",
+      "sha256": "d8be00b2aa61aa956e4f73e869b78c10320eab4879a8f40e0f6ce9f0a4169cc1",
+      "git_blob_sha1": "9cb091765e48184268c34fc826f4b3ed63e58935"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/080-MIndexASTSnapshot.java.txt",
+      "sha256": "8c2bd7559db0639da9db923452bc7c7386eb8bb1689bef105b890505be19ab83",
+      "git_blob_sha1": "0ad2960ff3e6529da68a25fec03770035fd2aa1a"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/081-MIndexASTStore.java.txt",
+      "sha256": "2ba8efcc1c670c0a10398b959c69441a18e0f8b96742d5285db1f815ccf683c0",
+      "git_blob_sha1": "5399d518fbd209440113a56dc878c6e56a66ff2c"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/082-MIndexASTTraversal.java.txt",
+      "sha256": "0560f1c58ddab188a3449367f29e1c83ce12c8f239e92dd60b12ffec6fb2623e",
+      "git_blob_sha1": "e8a10cf4eaa5fd3784296e06a98fd37bd7dd6a6c"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/083-MIndexAttributedASTImage.java.txt",
+      "sha256": "7ac84af8b7d8250c6e953c493cfd1fe87cb78d7b1708c5e578e0f3fe920fed05",
+      "git_blob_sha1": "6b3cc3f9a2dfd309972d2bee2ed02310cf3eea7d"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/084-Digests.java.txt",
+      "sha256": "a82d409699144f53415953985474f84a040f58fa35f1a84976400d92014cd34c",
+      "git_blob_sha1": "a20c478e1da562d83727c31c3f5478d6ddb7df06"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/085-MIndexPool.java.txt",
+      "sha256": "8f9f48519282baeadc8d7ca3480acdda88503826d2399beacce54da79dd2afd7",
+      "git_blob_sha1": "17b72109f82d8137ece796784defbddb1dc667ce"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/086-MIndexString.java.txt",
+      "sha256": "85a994380bb63823f0c9d77f5255c44834007fbbe483ad0017db4e67ca3ea3c2",
+      "git_blob_sha1": "ddd1105438a8174d000661ace27beb0373c09495"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/087-StringHashes.java.txt",
+      "sha256": "721f6e8862bb5f6f458ce067d81ef3fbd9cb033be5886dc361d6cba2c9d9193a",
+      "git_blob_sha1": "6204de238d69c3706dda200d846bf77bc945c629"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/088-TokenDictionary.java.txt",
+      "sha256": "e694f1db7c029f7358b9bf48db30cedab07396fdaa519652eb821245c19c4981",
+      "git_blob_sha1": "95484cdd08d990ec52765c768924b7d13be42668"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/089-TokenSpace.java.txt",
+      "sha256": "eb7848b15042b69420a68ec889c0f053cabf0f7e840d0e5b22cc37a42ecdf5a5",
+      "git_blob_sha1": "2851225a364ec62d6e3d6a61e5741e5478c5ab2a"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/090-Tokenizer.java.txt",
+      "sha256": "9e17fb3d11fdba67eec9bea4dd16db4b6234e867bae13575beafaef41a5b6302",
+      "git_blob_sha1": "5d0bb04dd22018b34b72783efc32844c1e235a06"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/manifest.tsv",
+      "sha256": "1a146bddd3924117abfa1e335b3f2e265b59cda4e52abd6d36e3630ffaa0cf0f",
+      "git_blob_sha1": "22904aa17b64f98a3b30616c6c315e8235a31c99"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-recovery-20261017/000-M3ASTPlugin.java.txt",
+      "sha256": "0038001c542a432d9f796d80ecae61404b8f76ef9a2ffdfab88426097d2fe75d",
+      "git_blob_sha1": "6abf5b4b3c0f64a30a3aff4647da6bb01c8cf41a"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-recovery-20261017/001-M3ASTPlugin.java.txt",
+      "sha256": "4c96b3083cc3a3d38a2c1c25f66da62bccc97788a2b83b693f881ab6a948ddb4",
+      "git_blob_sha1": "e9254b2cd47fe131b4df6e549009057edc6fb2f4"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-recovery-20261017/002-M3AST.java.txt",
+      "sha256": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+      "git_blob_sha1": "dc8bca117d0fe55f534ab2b1b267d207ebaa8e4e"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-recovery-20261017/003-M3ASTPC.java.txt",
+      "sha256": "a834fe19fdfdfa74f8641f3d02e552d19ed4eea97088d4739fb397ab5f36429b",
+      "git_blob_sha1": "d9cb096f48f39bee6ef35658d777a021957b489f"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-recovery-20261017/004-M3PrimitiveImageCompiler.java.txt",
+      "sha256": "0c236a3e9c8ac5507865ec9b15d45f83312eece4a6b6c4e27dd5f4cfb302824d",
+      "git_blob_sha1": "9179c9441233406fbbabf323f3334a77b3d1001e"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-recovery-20261017/005-JavaCompiler.java.txt",
+      "sha256": "51c5426f32877d03b30554646e559e65f264de92ccfa820799936a54f1d48fc3",
+      "git_blob_sha1": "f1c4af3c0f20e8f610524aedb011317ae9c976ad"
+    },
+    {
+      "path": "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-recovery-20261017/manifest.tsv",
+      "sha256": "48c51c2d5c32aa52f87af8c124044cbdd5de08e61660e406873564bce6e450dd",
+      "git_blob_sha1": "455e59d277672c414d5fe94abec30b52f074f405"
+    },
+    {
+      "path": "frontend/src/test/java/com/synexia/rewrite/M3ASTFrontendRecipeTest.java",
+      "sha256": "878216e4337d8c245d96c9a02752e8df90589fc7f5fc7158979c244000b1cbfb",
+      "git_blob_sha1": "85702a8b929909e6a3d9365b52f729ceca926f9a"
+    },
+    {
+      "path": "frontend/templates/JavaCompiler.java.txt",
+      "sha256": "51c5426f32877d03b30554646e559e65f264de92ccfa820799936a54f1d48fc3",
+      "git_blob_sha1": "f1c4af3c0f20e8f610524aedb011317ae9c976ad"
+    },
+    {
+      "path": "frontend/templates/M3AST.java.jdk.txt",
+      "sha256": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+      "git_blob_sha1": "dc8bca117d0fe55f534ab2b1b267d207ebaa8e4e"
+    },
+    {
+      "path": "frontend/templates/M3AST.java.txt",
+      "sha256": "8923652ba76b55737a892805d9c1c921513c773eec9d3439dcfaf6f09d0df981",
+      "git_blob_sha1": "cf7d0f7d0d9ac0f100e16d0a44c84eb86ffd69f8"
+    },
+    {
+      "path": "frontend/templates/M3ASTCodec.java.txt",
+      "sha256": "b4fc72dabfa3fbf7ded7bb4ca53f38b789ae6ab6c03a6f2d9dd68c326c8199c7",
+      "git_blob_sha1": "26e7bb8d456dc4d8a3c4759d71eb0e78e2cea54b"
+    },
+    {
+      "path": "frontend/templates/M3ASTPC.java.txt",
+      "sha256": "a834fe19fdfdfa74f8641f3d02e552d19ed4eea97088d4739fb397ab5f36429b",
+      "git_blob_sha1": "d9cb096f48f39bee6ef35658d777a021957b489f"
+    },
+    {
+      "path": "frontend/templates/M3ASTPlugin.java.txt",
+      "sha256": "4c96b3083cc3a3d38a2c1c25f66da62bccc97788a2b83b693f881ab6a948ddb4",
+      "git_blob_sha1": "e9254b2cd47fe131b4df6e549009057edc6fb2f4"
+    },
+    {
+      "path": "frontend/templates/M3CompilationContext.java.txt",
+      "sha256": "5dc73a6cb4d0b1b7f5ff2a00e34ab706dd2606865421d3b2fed5ef4ba3acfa1e",
+      "git_blob_sha1": "91a48dcf81ac4c81f65ece2a4cb1745f14667e0b"
+    },
+    {
+      "path": "frontend/templates/M3File.java.txt",
+      "sha256": "2dda8ef7a912ce662e85731351cf19104d61b1adea0675d2d43805f1f0b85f90",
+      "git_blob_sha1": "d5ffd41d9f87e80d4db436560fe56d3b9c763ba2"
+    },
+    {
+      "path": "frontend/templates/M3JavacASTIndex.java.txt",
+      "sha256": "1430b06e00c8bf838ad23d915e5f08bc97b850a72386d8cf328e02f1b903ed34",
+      "git_blob_sha1": "d84e93390d0090082e43a93d6bc7524ce4ec05e8"
+    },
+    {
+      "path": "frontend/templates/M3OpenRewriteSharedAST.java.txt",
+      "sha256": "c12d325da4c8fe2dec533ffb728d8e9b815f40c5e65ee1eae54534f4cf2a2884",
+      "git_blob_sha1": "5d2f6669801526b18afaad833a0791c3dbcae777"
+    },
+    {
+      "path": "frontend/templates/M3PrimitiveImageCompiler.java.txt",
+      "sha256": "0c236a3e9c8ac5507865ec9b15d45f83312eece4a6b6c4e27dd5f4cfb302824d",
+      "git_blob_sha1": "9179c9441233406fbbabf323f3334a77b3d1001e"
+    },
+    {
+      "path": "frontend/templates/MIndexASTImage.java.txt",
+      "sha256": "cf055b8bad5f57e976427c99a5d8ead55642f5da736448dd40243dbb46a6db5b",
+      "git_blob_sha1": "97d195f42f4f1066745903a6528038a6ed79dbd2"
+    },
+    {
+      "path": "frontend/templates/MIndexJavaAST.java.txt",
+      "sha256": "ed85e1309d78794547a24864b9eeabfa960bdc10f4731980053b304b3dbcd769",
+      "git_blob_sha1": "0170a1987e64d9e413154a35674cb228b9f7c1ce"
+    },
+    {
+      "path": "frontend/upstream-contract/README.md",
+      "sha256": "0129053b0fa4bbad90aeb6e7e7c0d5453ed79831051545ea40c860c8ecb49064",
+      "git_blob_sha1": "38bbf98ef9fc0f43bcbc67278d978e62340ca70a"
+    },
+    {
+      "path": "frontend/upstream-contract/SOURCE_LINEAGE.json",
+      "sha256": "e7d609f6df325983797531c9008c5b1db8b20e14bfbf63e3774c0a00f4567c45",
+      "git_blob_sha1": "4e6e0695410a5bf11fdcda0ec7a8489731a80fac"
+    },
+    {
+      "path": "frontend/upstream-contract/artifact_admission.py",
+      "sha256": "913a77a35526809d09223b8f5effba5d75ecf05ba96aa1a96ff23b1874b8c80f",
+      "git_blob_sha1": "12ecc6fdd7ec0dd02e573f47e2a420f18c0c947d"
+    },
+    {
+      "path": "frontend/upstream-contract/coexistence.py",
+      "sha256": "dad37f31518f9e0bd87809f1136390d02eed38b69f5c5b46250d627f7ff014ef",
+      "git_blob_sha1": "92d3907aba28e8da713bd4763006560d404ff8a7"
+    },
+    {
+      "path": "frontend/upstream-contract/custody/src/jdk.compiler/share/classes/module-info.java.txt",
+      "sha256": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09",
+      "git_blob_sha1": "13ebbaf1db2e8ba997e48c317f4b64bf8f0cfb1d"
+    },
+    {
+      "path": "frontend/upstream-contract/custody/test/langtools/tools/javac/m3/M3ASTSharedFrontendTest.java.txt",
+      "sha256": "47349ef82633f724f3ca694521250048ba70486b094b069fc51c13b5e64978a5",
+      "git_blob_sha1": "41eee89134939047e81f93b61bdda8c38ef805ed"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/COEXISTENCE.json",
+      "sha256": "a6aaa0050d418cc4f0787d9fe11c66e816b0eeac924081347722d6bfee66c231",
+      "git_blob_sha1": "7a585f5f9a066320d92db41e157c110600b388a1"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/COMMANDS.json",
+      "sha256": "487c4b55b9bed981451129d7e969efc0534d3f492b207156aebda7c84648c8df",
+      "git_blob_sha1": "8e4d0e66c9c681ec1cc5e1a15135e386bc8c5947"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/PACKET.json",
+      "sha256": "c1b76a5d32a6596de7979d0e0e754a27351e48d9e15e23b3f860e67e040aef32",
+      "git_blob_sha1": "34b8350e277df55fc847f3d61d8e08da33aa4603"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/QUALIFICATION.json",
+      "sha256": "aef2fdd668058ad150eff0eae63496362ad39067f849a90e33510a6df12f3768",
+      "git_blob_sha1": "3e0b71cd967d3a51be32fce4103df245fb4aaf6b"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/coexistence-builtin-trace.tsv",
+      "sha256": "599f52cf66c16464f4034713e7e40719b97cbfa3898922cd2dae8e617dbc17f1",
+      "git_blob_sha1": "42a2089dfe7ef404d4cf16a6e51f422f4a176a59"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/coexistence-index-receipt.json",
+      "sha256": "bdd26cc53cc798b2f431a6ea58a29e052e64c9fbfa3e22db4462ef632678101a",
+      "git_blob_sha1": "f6891e5f6299bbaa09c05b1cba1eadeb39ac2bc1"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/compile-exact-descriptor.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/compile-exact-upstream-test.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/compile-jmod-descriptor-input-helper.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/compile-plugin-coexistence.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/create-java.base.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/create-jdk.compiler.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/exact-upstream-contract.log",
+      "sha256": "ad33e48fae9af4643aaed9bc3f38d61247d818d9148ab0971992b375e4bb32d6",
+      "git_blob_sha1": "875913052a39e5f657a4493d7aaa22ba5546d7b5"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/extract-base.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/extract-compiler.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/exact-79-driver/PACKET.json",
+      "sha256": "de8bfb35877deefb55c6f5d779876f4ea2afe79986b83624a6b552f47f12b02e",
+      "git_blob_sha1": "462a7e67e6450c5eaa048212116e27ee734b2093"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/exact-79-driver/SOURCE_LINEAGE.json",
+      "sha256": "e7d609f6df325983797531c9008c5b1db8b20e14bfbf63e3774c0a00f4567c45",
+      "git_blob_sha1": "4e6e0695410a5bf11fdcda0ec7a8489731a80fac"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/exact-79-driver/coexistence.py",
+      "sha256": "94472bc1bdbf52009b693d982ef9f1225d2cb6a7a7e3b88d331597a2708af684",
+      "git_blob_sha1": "e0f4762880f3c8ad903e9d72184bcb66b34cb1ec"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/exact-79-driver/proof/JmodDescriptorInputs.java",
+      "sha256": "ac0e745b7a5d8202061b9907a5371ce55d3448664d592a86ddaf592578ab9f9e",
+      "git_blob_sha1": "01b5ead3349001d6e674cfb95b214d48057d9695"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/exact-79-driver/proof/PluginCoexistenceProbe.java",
+      "sha256": "072add81bd127277d3d0e50944ff2df7a67c4169e4da894f71692eae3b7c55f4",
+      "git_blob_sha1": "db7f85d0c9ad5f3fa032ff12df69148f5ba4ea6f"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/exact-79-driver/qualify.py",
+      "sha256": "41e2ed298b7b8635633f4b7bcf77d9179000004b69cf55f7cfd3ab64457a1504",
+      "git_blob_sha1": "99087cd9991c81828cad8a429e0d1fa5413c8eec"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/COMMANDS.json",
+      "sha256": "3daa686a44d5ebcef09fae7ed8ca8e9fdcf961c9b6a5cb260b0f22f78647e7fe",
+      "git_blob_sha1": "0edbf1641c224d0d3e4e90db1d2c7be2815e77d7"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/QUALIFICATION.json",
+      "sha256": "92eb1e9fe5f5b5297b9d444247493db85a4b2cc8f2ee2ed03a3da31e8af29e6a",
+      "git_blob_sha1": "bb18cfaa8fe54e00bb16e4624b3a0e55f9669ac4"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/README.md",
+      "sha256": "3d3d0303f2c6769bac17d2215656046c87c2950c515971a2ec1dc7253ca15c64",
+      "git_blob_sha1": "40093b3754152c95d25abe399570fd45d18a7e0f"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/compile-exact-descriptor.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/compile-jmod-descriptor-input-helper.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/create-java.base.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/create-jdk.compiler.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/extract-base.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/extract-compiler.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/original-base-descriptor.log",
+      "sha256": "5dd5bd2632f69dfa81e514e4f90aace7e68a762a01ea510f66b1c41cdcaf06d5",
+      "git_blob_sha1": "43b755e845a651a8b8fd00cf5ba65415e9c519a8"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/original-compiler-descriptor.log",
+      "sha256": "6b756a5ef6c57baa82b92c97c04182161548601d77bb4421bcd5b1954de6969a",
+      "git_blob_sha1": "c4bb66b7d3bd5a135292a9befaa460ff4d7cf8af"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/original-java-version.log",
+      "sha256": "17dc57451d68f613c07b3d8f2d9ee18b179fe4eea3d208874d609ddb0f641e40",
+      "git_blob_sha1": "5443b56ee7292aff9eade835fec54175183ced4b"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/prepare-generated-base-attributes.log",
+      "sha256": "089c8dc94cbaf1be1b217cf657b573141a74591f251e47c9b00032e4ef4922bc",
+      "git_blob_sha1": "9e480a049720c4980681b7cf567ef8aa231b9ee8"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/qualification.log",
+      "sha256": "3ccd6076ad77a7025c71016fbe8bb856258ec640875e67668d2309817341c524",
+      "git_blob_sha1": "22d189f00a8362e52c34c2a0a86de05f5a1d2a48"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/qualify.py",
+      "sha256": "cfd16a78a5f8d3680f5cdbddb3241c13eef058ecabd5993fdbab48807dd05231",
+      "git_blob_sha1": "bd61885bc5b03840acb259606b9529a6493751b4"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stale-output-generation/rehashed-base-descriptor.log",
+      "sha256": "fcab39f324002248c5464434cc2c007049c1cb402806206afd4cbc97e3fa594e",
+      "git_blob_sha1": "9346d6ba8ec312597fe4d8fbebe97aff44affea0"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/COMMANDS.json",
+      "sha256": "e2dc5c30cdec17f4496a3c175a4700f1f2b1735d813dfa39bdca5180fc9742ef",
+      "git_blob_sha1": "2f1aef9afeefee42200a557b108332437e58b411"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/QUALIFICATION.json",
+      "sha256": "be35584de0a62324cecbd51310f0ffa194e803a815cf94fac38f28c371258dc4",
+      "git_blob_sha1": "60b65bf7a17c582aa3ffe748a249a54fbbce1006"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/README.md",
+      "sha256": "060f8e8fd6cc3e0c8db9c70a1c016c935985007cf55f1f9fbbf58746844665f1",
+      "git_blob_sha1": "40a425845b47dd84d31e7b3bf4792831d52f497f"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/compile-exact-descriptor.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/create-java.base.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/create-jdk.compiler.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/extract-base.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/extract-compiler.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/original-base-descriptor.log",
+      "sha256": "5dd5bd2632f69dfa81e514e4f90aace7e68a762a01ea510f66b1c41cdcaf06d5",
+      "git_blob_sha1": "43b755e845a651a8b8fd00cf5ba65415e9c519a8"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/original-compiler-descriptor.log",
+      "sha256": "6b756a5ef6c57baa82b92c97c04182161548601d77bb4421bcd5b1954de6969a",
+      "git_blob_sha1": "c4bb66b7d3bd5a135292a9befaa460ff4d7cf8af"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/original-java-version.log",
+      "sha256": "17dc57451d68f613c07b3d8f2d9ee18b179fe4eea3d208874d609ddb0f641e40",
+      "git_blob_sha1": "5443b56ee7292aff9eade835fec54175183ced4b"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/qualification.log",
+      "sha256": "f7a24d3ab20a691bcacc901def97eec839c8fd0bf69a67a4a47314950bde418c",
+      "git_blob_sha1": "abfba69a8101b40e3dc399db014e9756d1f4efab"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/qualify.py",
+      "sha256": "29ac79e3a6e0fb0c548a99b4bbe69318524ef11bad8ff37f6412acc0dd6bb647",
+      "git_blob_sha1": "80959826b9f471a4ad26337f9231e8d3ecb4c196"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/history/stock-jmod-duplicate-attributes/rehashed-base-descriptor.log",
+      "sha256": "fcab39f324002248c5464434cc2c007049c1cb402806206afd4cbc97e3fa594e",
+      "git_blob_sha1": "9346d6ba8ec312597fe4d8fbebe97aff44affea0"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/jlink.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/linked-compiler-descriptor.log",
+      "sha256": "3c0549157ac18ed013062308d818e35e0bc07368d8c0ed72ffd94d42100d5242",
+      "git_blob_sha1": "8168f1bc241b031c87d271901883b5af95ef53c5"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/linked-modules.log",
+      "sha256": "c6c6cfa7438f785113784755882f2cdce559c227d12f2b5dff50a6a59550dc9f",
+      "git_blob_sha1": "966394c2c7e23b8ddbf05cffe37f91f0bed06b15"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/original-base-descriptor.log",
+      "sha256": "5dd5bd2632f69dfa81e514e4f90aace7e68a762a01ea510f66b1c41cdcaf06d5",
+      "git_blob_sha1": "43b755e845a651a8b8fd00cf5ba65415e9c519a8"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/original-compiler-descriptor.log",
+      "sha256": "6b756a5ef6c57baa82b92c97c04182161548601d77bb4421bcd5b1954de6969a",
+      "git_blob_sha1": "c4bb66b7d3bd5a135292a9befaa460ff4d7cf8af"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/original-java-version.log",
+      "sha256": "17dc57451d68f613c07b3d8f2d9ee18b179fe4eea3d208874d609ddb0f641e40",
+      "git_blob_sha1": "5443b56ee7292aff9eade835fec54175183ced4b"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/plugin-coexistence.log",
+      "sha256": "019446cb235c1d6264162c1a4118b6859a60f24a4ce640b38bc1845a063a34b9",
+      "git_blob_sha1": "ed124815a9ba5690a05b5b927a2cea4c8f01ed74"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/prepare-generated-base-attributes.log",
+      "sha256": "089c8dc94cbaf1be1b217cf657b573141a74591f251e47c9b00032e4ef4922bc",
+      "git_blob_sha1": "9e480a049720c4980681b7cf567ef8aa231b9ee8"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/receipt-admission/QUALIFICATION.json",
+      "sha256": "ba468fbb2d6dea10fc3a9304fc808ade18f399c6cfd2d46b4c358c217fca8402",
+      "git_blob_sha1": "b8eabf8250ed470eb752015e5c3546c4c91f066f"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/receipt-admission/coexistence.py.help.txt",
+      "sha256": "5c6c51a78fbcdf7732015164363e343ae4c20184d56273a5f5aebd9676a9d1f9",
+      "git_blob_sha1": "a1a08e78cda9b68a93e1e727757138e67a74fa47"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/receipt-admission/qualify.py.help.txt",
+      "sha256": "f2321fe79fbb4791e1124924280e49173229f985969a10c546d5cc6c87c66821",
+      "git_blob_sha1": "7b44f91b464f34bffcd2d8ac10b20c7be183ff33"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/receipt-admission/unit-tests.log",
+      "sha256": "34b82eb72fdf430b5379f6d9e981450a2c5eb91a83138db988db1846c2e4ae66",
+      "git_blob_sha1": "d9779bdf3a342d546d63c489918dc47bfcc26bab"
+    },
+    {
+      "path": "frontend/upstream-contract/evidence/rehashed-base-descriptor.log",
+      "sha256": "2303259662cd253bde22732e52cb86b69aab584b067ff6a028cc40cd0c7ec96a",
+      "git_blob_sha1": "23cc2cbb3ecc9c795562f7ad6ff3bf2ac4cd38a1"
+    },
+    {
+      "path": "frontend/upstream-contract/proof/JmodDescriptorInputs.java",
+      "sha256": "ac0e745b7a5d8202061b9907a5371ce55d3448664d592a86ddaf592578ab9f9e",
+      "git_blob_sha1": "01b5ead3349001d6e674cfb95b214d48057d9695"
+    },
+    {
+      "path": "frontend/upstream-contract/proof/PluginCoexistenceProbe.java",
+      "sha256": "072add81bd127277d3d0e50944ff2df7a67c4169e4da894f71692eae3b7c55f4",
+      "git_blob_sha1": "db7f85d0c9ad5f3fa032ff12df69148f5ba4ea6f"
+    },
+    {
+      "path": "frontend/upstream-contract/qualification.log",
+      "sha256": "3ccd6076ad77a7025c71016fbe8bb856258ec640875e67668d2309817341c524",
+      "git_blob_sha1": "22d189f00a8362e52c34c2a0a86de05f5a1d2a48"
+    },
+    {
+      "path": "frontend/upstream-contract/qualify.py",
+      "sha256": "04b2e0a4e7cd7af2134c16df1820773eac18143ec7b54f026d622eed4b6a77cf",
+      "git_blob_sha1": "337ac4bb1bd1157f0abe86dbdf46705f44fa7d1d"
+    },
+    {
+      "path": "frontend/upstream-contract/tests/test_artifact_admission.py",
+      "sha256": "0de660a513f6823d848a9e10d707ec19d46dffa34ff2821e0df09b99b7ae8ef5",
+      "git_blob_sha1": "aa179bc9eb51060eb7a1937773b30a9288a954f1"
+    },
+    {
+      "path": "integration/CATALOGUE_INDEX.template.tsv",
+      "sha256": "cc52899e27c499ad5988c801aee395b9b16c2a42d86b915deb443f6986030409",
+      "git_blob_sha1": "1d79f0b6d61d735d018b9cc970382575f62f692d"
+    },
+    {
+      "path": "integration/QUALIFICATION_INPUT.json",
+      "sha256": "929047d3c17f2c5cc296eb3177d6761af93cbedab2eb4a2016bbc08981f1c1ed",
+      "git_blob_sha1": "8208db64152fceaaf7f7aafe77f62bb7f427ec06"
+    },
+    {
+      "path": "integration/README.template.md",
+      "sha256": "bbde89c77eaa9f14912b063af971839d944149a4a8d7950346938fb8d8e4e5f8",
+      "git_blob_sha1": "6515d7c4e844186090056faabb2b3b38d64b8311"
+    },
+    {
+      "path": "integration/REPRODUCE.template.md",
+      "sha256": "ec6b87dc328fc150519e02526e81b1819b3f79f21639dc08754643ee7bf4f367",
+      "git_blob_sha1": "e529e5481c684f3d23bccf5f11289c64526ed7c6"
+    },
+    {
+      "path": "integration/WORKFLOW_SOURCE.json",
+      "sha256": "ea04f2d0c0f919541436b100fdd1f48c1fa4b8110c7cb6c8464cacbc8bd5c7ca",
+      "git_blob_sha1": "5240e4d7d28f1a4d5370aff7e7c8cc92d6910f1d"
+    },
+    {
+      "path": "integration/assemble_qualification.py",
+      "sha256": "b6959ca286dedd4c2571c053b386023d0876836f98cce19a47bf5644ddb1c7ae",
+      "git_blob_sha1": "3a78aae20f427e4e7db978e8ac538e8787e9ef88"
+    },
+    {
+      "path": "integration/compiletime-workflow.template.yml",
+      "sha256": "59e86aea0d16a2f92d434f1aaea0ea2416baab7c9bacaaf40481d4a1c18c28d7",
+      "git_blob_sha1": "30088abb6b6702c2ef576d868e3ad635d0dc0c36"
+    },
+    {
+      "path": "integration/evidence/INTEGRATION_SDK.json",
+      "sha256": "1737ec5654a953e1e8a7d8e1e9227e6c4118525044dc2531db08248aec9b3d3b",
+      "git_blob_sha1": "8627e8346bb5afa64d0b575d67250ec9cdb09f9c"
+    },
+    {
+      "path": "integration/evidence/INTEGRATION_SDK.log",
+      "sha256": "762863a0084e837bfd9883a283e2868c5fd239bc2957fdba1373b371a4f58155",
+      "git_blob_sha1": "4de4955c9306ac0155c1428a0b4e436a872976f2"
+    },
+    {
+      "path": "integration/evidence/PUBLICATION_SOURCES.json",
+      "sha256": "c4c4a13b64bab0383686a317383825557286241ec737de761978dce433295581",
+      "git_blob_sha1": "903230d5dea5638884b713c897fa6b9e6cc7e953"
+    },
+    {
+      "path": "integration/evidence/TEST-com.synexia.rewrite.M3ASTIntegrationRecipeTest.xml",
+      "sha256": "3052f52ce0f4185b0f0db1257f76c0aa268f124628ed8576fef1e75120992651",
+      "git_blob_sha1": "4ee1d006825fd93fd5dd60c19944bf8bce2f989f"
+    },
+    {
+      "path": "integration/evidence/history/absent-baseline-workflow/CUSTODY.json",
+      "sha256": "f1aad54eab588037bb588f0480698d79895886c412258b8ab5b415151fc317f8",
+      "git_blob_sha1": "b17e7270af5a84b80f76d7f354c89dd0193a3495"
+    },
+    {
+      "path": "integration/evidence/history/absent-baseline-workflow/INTEGRATION_SDK.log",
+      "sha256": "dee8dc02591bc1cf8dff3845dcef07039235250d4f3f549948680fc544854f05",
+      "git_blob_sha1": "e2832cc162724e819d5cee983e30ebe24aec525a"
+    },
+    {
+      "path": "integration/evidence/history/missing-slf4j/COUNTEREXAMPLE.json",
+      "sha256": "f56a3981763ccdb45a7c4b269cab9c58b48622f561a334255f60bd025de5252a",
+      "git_blob_sha1": "55e97a728294bb32e8ef33740aad47cc63911caf"
+    },
+    {
+      "path": "integration/evidence/history/missing-slf4j/INTEGRATION_SDK.log",
+      "sha256": "1dda633f9071604cee9871e363fecfb19fac42697e749ff27304232aa60b381a",
+      "git_blob_sha1": "2584c52acd40d521006505e6520a1f0b9971c8f8"
+    },
+    {
+      "path": "integration/evidence/history/missing-slf4j/TEST-com.synexia.rewrite.M3ASTIntegrationRecipeTest.xml",
+      "sha256": "3558cbefdf5779142c9c0b2bbea703ea2e2ccd2f3ebee3698c31751e4e11c038",
+      "git_blob_sha1": "014a7de2004bacd5386c6784d64d92835e7e9869"
+    },
+    {
+      "path": "integration/evidence/history/missing-slf4j/pom.xml",
+      "sha256": "1bcbc1a8355ddf48c4bf6f67b5887b04f842ef52966ed3c0be935dabd7b68c98",
+      "git_blob_sha1": "2df7a5be49c0b6e8fe7d9070e0ba28bdd594cb18"
+    },
+    {
+      "path": "integration/evidence/provider-custody/CACHE_SDK.json",
+      "sha256": "4a0dd5866851d00d6da990a8d7ead1d17e1fff9b6784bc4c85ddb4a55d1d70ba",
+      "git_blob_sha1": "1a86127a9226ce4dae8d4bc0f318344bbad5e253"
+    },
+    {
+      "path": "integration/evidence/provider-custody/CACHE_SDK.log",
+      "sha256": "1f252d46628edbb32f2c79159df1955f6ae08d9481a87daf0bd988da922f0c99",
+      "git_blob_sha1": "6e65c74b8aa4ddd8de6055e143d8d12de4e9f12d"
+    },
+    {
+      "path": "integration/evidence/provider-custody/QUALIFICATION.json",
+      "sha256": "8557f02f03a493b4e3364fa24e939ff212e25d3dc7dc3af592e9980656e5e037",
+      "git_blob_sha1": "4a88531c63c408701abe581f0edf8c294c9cd0c6"
+    },
+    {
+      "path": "integration/evidence/provider-custody/cache.log",
+      "sha256": "8c93d18f425e9b44ba3d89cf724a61c9e903cdb17ed19614b6f0fd8716b5b5b7",
+      "git_blob_sha1": "2f26bc19c64f940ca38b22a942249a266f6eeb7d"
+    },
+    {
+      "path": "integration/evidence/provider-custody/frontend-hierarchy.log",
+      "sha256": "10441afa7c6cc5c75ca427c1cd42df431e65197cf13947d9dc6a9f11075e3b76",
+      "git_blob_sha1": "1a45ce324228802c068a7c01fc2f531d2d468d29"
+    },
+    {
+      "path": "integration/evidence/provider-custody/frontend-module-wiring.log",
+      "sha256": "f08f231e3081e5be7155974b7ca3553a2438e89b2e52db6f30a5732c6acc7cc5",
+      "git_blob_sha1": "47d0a9e257105aa544145105e5fd17d1a6296dac"
+    },
+    {
+      "path": "integration/evidence/provider-custody/frontend-openrewrite.log",
+      "sha256": "f3f007ca77acba9fcda65caeb81b651096082f738836ed45508d44321b4c4fe1",
+      "git_blob_sha1": "6d11ffe302d5b78a2e7a50ea10fcd7f80a274e95"
+    },
+    {
+      "path": "integration/evidence/provider-custody/frontend-registry.log",
+      "sha256": "d09b1c32f4f2ab88c74e1d841d42234c78fe8163c7cdc71614dade6c2a7bf3af",
+      "git_blob_sha1": "77488a41d98343bc44da43ffd0af5bf06a0d094f"
+    },
+    {
+      "path": "integration/evidence/provider-custody/frontend.log",
+      "sha256": "d988ac3c6aafea8d7511591d39dfa54d2489bf86ce67d549ba5baec939c87701",
+      "git_blob_sha1": "e6c1e445dbda09828bc7542a5e259164db59475f"
+    },
+    {
+      "path": "integration/evidence/provider-custody/integration.log",
+      "sha256": "16ea806dee271bc1cc33568aad30985627526953b03e021e2b635b18257fb22d",
+      "git_blob_sha1": "3f28ec15561711ac0268254c09de8c5213f9b547"
+    },
+    {
+      "path": "integration/pom.xml",
+      "sha256": "92661fed24b89467d53cac80cf785a26ed4757375f02c3f9e432b50954345c73",
+      "git_blob_sha1": "d58c49e3d214f84d65c656239e7c265f2019b460"
+    },
+    {
+      "path": "integration/preimages/.github/workflows/m3-compiletime-precompute.yml",
+      "sha256": "1e5b2e4fede0326274041eb4422b88f09d275b4c6722e3903a676f5b72b764de",
+      "git_blob_sha1": "cb827a5cc04f0f8c164c44bd8dcb1bc84871e371"
+    },
+    {
+      "path": "integration/prepare_integration.py",
+      "sha256": "2f1304c4aeb0e430a23461a059058df4c4a89be46ea6f434c28bc18fa759d536",
+      "git_blob_sha1": "a66877749095173205909d60b04d6d75edb77f1f"
+    },
+    {
+      "path": "integration/qualify_provider_custody.py",
+      "sha256": "7aa8ec43f1e914cb15b8a52ad9bb3494e800a3ff8b69006fae3b86419fed249f",
+      "git_blob_sha1": "db1e5eaab03aa549d1132e1c098e650055f22421"
+    },
+    {
+      "path": "integration/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-integration-20261017/000-m3-compiletime-precompute.yml.txt",
+      "sha256": "59e86aea0d16a2f92d434f1aaea0ea2416baab7c9bacaaf40481d4a1c18c28d7",
+      "git_blob_sha1": "30088abb6b6702c2ef576d868e3ad635d0dc0c36"
+    },
+    {
+      "path": "integration/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-integration-20261017/001-CATALOGUE_INDEX.tsv.txt",
+      "sha256": "cc52899e27c499ad5988c801aee395b9b16c2a42d86b915deb443f6986030409",
+      "git_blob_sha1": "1d79f0b6d61d735d018b9cc970382575f62f692d"
+    },
+    {
+      "path": "integration/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-integration-20261017/002-README.md.txt",
+      "sha256": "641989c0a400dc28a2691ca07cdf2f1917be7292042dda96620b07dd73a71b49",
+      "git_blob_sha1": "602b9d7c4ce5413c730bb81556350f475688a538"
+    },
+    {
+      "path": "integration/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-integration-20261017/003-REPRODUCE.md.txt",
+      "sha256": "ec6b87dc328fc150519e02526e81b1819b3f79f21639dc08754643ee7bf4f367",
+      "git_blob_sha1": "e529e5481c684f3d23bccf5f11289c64526ed7c6"
+    },
+    {
+      "path": "integration/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-integration-20261017/004-handoff.json.txt",
+      "sha256": "a2873a1a4bdeccefe5806aa31bd115cf4cd1ac0135715fa8abc8916a3622bef7",
+      "git_blob_sha1": "631d87641ec920156fdec0bec4a6f8a2c7123049"
+    },
+    {
+      "path": "integration/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-integration-20261017/manifest.tsv",
+      "sha256": "f47ff9bbf79c730e2f4e80e049fdbd0c459807b5beb8580d3024cc31f9191f8d",
+      "git_blob_sha1": "7f431435d848fab0f8c939f9b25a5094aceec6a1"
+    },
+    {
+      "path": "integration/src/test/java/com/synexia/rewrite/M3ASTIntegrationRecipeTest.java",
+      "sha256": "b881cb9fe70530302b8f0e357da6acfd09cb6999002382e2f060da77973f1456",
+      "git_blob_sha1": "596d7aaa75c60ffa73a7befe23d2f18a05dbd4a7"
+    },
+    {
+      "path": "integration/verify_target_sources.py",
+      "sha256": "dec40c6d19e4d8b7ab6d105836969aa2066bdafd4f5e6b6e68dcce9265de1847",
+      "git_blob_sha1": "15fa238f6cf1c6bad9d91a96ab88bcb2f3de6fce"
+    },
+    {
+      "path": "provider-custody/README.md",
+      "sha256": "8cc4b41bfc15225e896c4071c25d6d5921db11378f4d7d6ea81118d3b1a12214",
+      "git_blob_sha1": "6ae467fab84c9ac9909b0da4b547709dc7915332"
+    },
+    {
+      "path": "provider-custody/SOURCES.json",
+      "sha256": "a19bafaa945efe4ae988503cf6842935289c3c7ffa60fa189f91648c2d019afc",
+      "git_blob_sha1": "51726cdddcce52da269fede3049ed552226a9b50"
+    },
+    {
+      "path": "provider-custody/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "git_blob_sha1": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db"
+    },
+    {
+      "path": "provider-custody/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+      "git_blob_sha1": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40"
+    },
+    {
+      "path": "provider-custody/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+      "git_blob_sha1": "9d0788d3717e017d58345c5c3e62022c2915a3c8"
+    },
+    {
+      "path": "provider-custody/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
+      "git_blob_sha1": "d24729950508857280ea1b56d4e930f05137ec85"
+    }
+  ],
+  "global_provider_files_modified": false
+}

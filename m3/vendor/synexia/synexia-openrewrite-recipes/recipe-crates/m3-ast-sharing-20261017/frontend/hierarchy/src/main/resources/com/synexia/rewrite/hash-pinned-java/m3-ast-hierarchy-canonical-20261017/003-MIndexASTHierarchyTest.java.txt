@@ -1,0 +1,433 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Hitesh Soliwal and contributors
+package com.synexia.mindex.compiler.ast;
+
+import static org.junit.jupiter.api.Assertions.*;
+import com.sun.source.util.JavacTask;
+import com.sun.source.util.TaskEvent;
+import com.sun.source.util.TaskListener;
+import com.synexia.mindex.MIndexProgressMonitor;
+import com.synexia.mindex.ast.MIndexAST;
+import com.synexia.mindex.ast.MIndexASTEdge;
+import com.synexia.mindex.ast.MIndexASTLimits;
+import com.synexia.mindex.ast.MIndexASTPool;
+import com.synexia.mindex.ast.partial.MIndexPartialAstCache;
+import com.synexia.mindex.ast.partial.MIndexPartialAstMaster;
+import com.synexia.mindex.ast.partial.MIndexPartialAstKey;
+import com.synexia.mindex.ast.partial.MIndexPartialAstMode;
+import com.synexia.mindex.ast.partial.MIndexPartialAstScope;
+import com.synexia.mindex.ast.partial.MIndexPartialAstPressure;
+import com.synexia.mindex.ast.partial.MIndexPartialAstProjection;
+import com.synexia.mindex.swap.TieredSwapCache;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
+import javax.tools.DiagnosticCollector;
+import javax.tools.JavaFileObject;
+import javax.tools.ToolProvider;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+class MIndexASTHierarchyTest {
+    private static final String CONTEXT = M3FileSourceFacts.contextSha256(List.of("repository-config-v1"));
+    private static final String SOURCE_CONTEXT = M3FileSourceFacts.contextSha256(List.of("actual-compiler-generation-1"));
+    private static final MIndexASTHierarchy.Limits LIMITS = MIndexASTHierarchy.Limits.defaults();
+    @TempDir Path work;
+
+    private static final class Observed implements MIndexASTHierarchy.Provider {
+        private final MIndexASTHierarchy.Provider delegate = MIndexASTHierarchy.counts();
+        final List<MIndexASTHierarchy.Level> calls = new ArrayList<>();
+        String id = delegate.id();
+        MIndexASTHierarchy.Level failOnce;
+        boolean wrongArity;
+        @Override public String id() { return id; }
+        @Override public int schemaVersion() { return 1; }
+        @Override public List<String> fields() { return delegate.fields(); }
+        @Override public long[] file(MIndexASTHierarchy.FileInput input, MIndexPartialAstProjection projection,
+                MIndexProgressMonitor monitor) {
+            calls.add(MIndexASTHierarchy.Level.L0_FILE_FACTS);
+            return wrongArity ? new long[] {1} : delegate.file(input, projection, monitor);
+        }
+        @Override public long[] aggregate(MIndexASTHierarchy.Level level, List<MIndexASTHierarchyFacts> children,
+                MIndexProgressMonitor monitor) {
+            calls.add(level);
+            assertTrue(children.stream().allMatch(child -> child.level().ordinal() == level.ordinal() - 1));
+            if (failOnce == level) { failOnce = null; throw new IllegalStateException("injected aggregate failure"); }
+            return delegate.aggregate(level, children, monitor);
+        }
+    }
+
+    private static final class Workspace implements AutoCloseable {
+        final M3ASTCacheTestSupport.MemoryStore store = new M3ASTCacheTestSupport.MemoryStore();
+        final MIndexPartialAstMaster master;
+        final M3ASTWorkspaceCache<MIndexASTHierarchyFacts> cache;
+        final MIndexASTHierarchy hierarchy;
+        Workspace(Observed provider, int entries) {
+            this(provider, entries, new MIndexPartialAstMaster(new MIndexPartialAstCache(16, 8L << 20, 75)), LIMITS);
+        }
+        Workspace(Observed provider, int entries, MIndexPartialAstMaster master, MIndexASTHierarchy.Limits limits) {
+            this.master = master;
+            cache = new M3ASTWorkspaceCache<>(CONTEXT, store, new MIndexASTHierarchyFacts.Codec(5),
+                    new TieredSwapCache.Budget(1 << 20, entries, 0), false);
+            hierarchy = new MIndexASTHierarchy(CONTEXT, provider, master, cache, limits, true);
+        }
+        @Override public void close() throws IOException { hierarchy.close(); store.close(); }
+    }
+
+    private static MIndexASTDocument document(String uri, String source) throws Exception {
+        MIndexASTPool pool = new MIndexASTPool(MIndexASTLimits.defaults());
+        MIndexAST leaf = pool.leaf("name", "x");
+        MIndexAST root = pool.intern("pair", Map.of(), List.of(new MIndexASTEdge("first", leaf), new MIndexASTEdge("second", leaf)));
+        return new MIndexASTDocument(uri, source, raw(source), root,
+                List.of(new MIndexASTOccurrence(root, 0, source.length()),
+                        new MIndexASTOccurrence(leaf, 0, source.length()), new MIndexASTOccurrence(leaf, 0, source.length())));
+    }
+    private static String raw(String source) throws Exception {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        for (int i = 0; i < source.length(); i++) {
+            digest.update((byte) (source.charAt(i) >>> 8)); digest.update((byte) source.charAt(i));
+        }
+        return HexFormat.of().formatHex(digest.digest());
+    }
+    private static M3FileSourceFacts facts(MIndexASTDocument document) {
+        return M3FileSourceFacts.capture(document.sourceName(), document.source(), SOURCE_CONTEXT, "javac-public-tree", 1, "PARSE");
+    }
+    private static MIndexASTHierarchy.FileInput input(String project, String pkg, String uri, String source,
+            List<String> dependencies, AtomicInteger reads) throws Exception {
+        MIndexASTDocument document = document(uri, source);
+        return MIndexASTHierarchy.fromMIndex(project, "main", pkg, facts(document), dependencies,
+                () -> { reads.incrementAndGet(); return document; });
+    }
+    private static MIndexASTHierarchyFacts get(MIndexASTHierarchy.Plan plan, MIndexASTHierarchy.Address address) throws Exception {
+        try (var lease = plan.acquire(address)) { return lease.value(); }
+    }
+
+    @Test void zeroConsumersThenRealLeafFirstFactsAndImmutableGeometry() throws Exception {
+        Observed provider = new Observed(); AtomicInteger reads = new AtomicInteger();
+        var source = input("app", "p", "memory:///A.java", "abc", List.of(), reads);
+        try (Workspace workspace = new Workspace(provider, 16)) {
+            var plan = workspace.hierarchy.publish("repo", List.of(source));
+            assertEquals(0, reads.get()); assertTrue(provider.calls.isEmpty()); assertEquals(0, workspace.store.reads);
+            assertEquals(6, plan.nodeCount());
+            MIndexASTHierarchyFacts root = get(plan, plan.root());
+            assertArrayEquals(new long[] {1, 3, 3, 2, 2}, root.values());
+            assertEquals(List.of(MIndexASTHierarchy.Level.values()), provider.calls);
+            assertEquals(1, reads.get());
+            assertEquals(root, get(plan, plan.root())); assertEquals(6, provider.calls.size());
+            int[] offsets = plan.childOffsets(), children = plan.childOrdinals();
+            assertArrayEquals(new int[] {0, 0, 1, 2, 3, 4, 5}, offsets);
+            assertArrayEquals(new int[] {0, 1, 2, 3, 4}, children);
+            offsets[0] = 99; children[0] = 99;
+            assertEquals(0, plan.childOffsets()[0]); assertEquals(0, plan.childOrdinals()[0]);
+            assertEquals(MIndexASTHierarchy.Level.L2_PACKAGE, source.address("repo").parent().parent().level());
+        }
+    }
+
+    @Test void inputOrderAndUnchangedPublicationPreserveAllOrdinals() throws Exception {
+        AtomicInteger reads = new AtomicInteger(); Observed provider = new Observed();
+        var a = input("app", "p", "memory:///A.java", "a", List.of(), reads);
+        var b = input("app", "q", "memory:///B.java", "bb", List.of(), reads);
+        try (Workspace workspace = new Workspace(provider, 32)) {
+            var first = workspace.hierarchy.publish("repo", List.of(a, b));
+            var second = workspace.hierarchy.publish("repo", List.of(b, a));
+            assertTrue(second.changedFrom(first).isEmpty());
+            for (var level : MIndexASTHierarchy.Level.values()) for (var address : first.addresses(level))
+                assertEquals(first.recordId(address), second.recordId(address));
+            assertEquals(0, reads.get());
+            get(first, first.root()); int calls = provider.calls.size();
+            get(second, second.root()); assertEquals(calls, provider.calls.size());
+        }
+    }
+
+    @Test void dependencyChangeInvalidatesDependantsAndOnlyTheirAncestors() throws Exception {
+        AtomicInteger reads = new AtomicInteger(); Observed provider = new Observed();
+        var a = input("app", "p", "memory:///A.java", "a", List.of("memory:///B.java"), reads);
+        var b = input("app", "q", "memory:///B.java", "bb", List.of(), reads);
+        var c = input("tools", "r", "memory:///C.java", "ccc", List.of(), reads);
+        try (Workspace workspace = new Workspace(provider, 64)) {
+            var first = workspace.hierarchy.publish("repo", List.of(a, b, c));
+            assertEquals(6, get(first, first.root()).value(1));
+            int initialReads = reads.get();
+            var changedB = input("app", "q", "memory:///B.java", "bbbb", List.of(), reads);
+            var second = workspace.hierarchy.publish("repo", List.of(c, changedB, a));
+            var changed = new HashSet<>(second.changedFrom(first));
+            for (var address = c.address("repo"); address.level() != MIndexASTHierarchy.Level.L5_REPOSITORY; address = address.parent()) {
+                assertFalse(changed.contains(address), address.toString());
+                assertEquals(first.recordId(address), second.recordId(address));
+            }
+            assertTrue(changed.contains(a.address("repo"))); assertTrue(changed.contains(b.address("repo")));
+            assertEquals(8, get(second, second.root()).value(1));
+            assertEquals(initialReads + 2, reads.get());
+            assertEquals(6, get(first, first.root()).value(1));
+            assertNotEquals(first.identitySha256(first.root()), second.identitySha256(second.root()));
+            var third = workspace.hierarchy.publish("repo", List.of(a, changedB));
+            assertTrue(third.changedFrom(second).contains(c.address("repo")));
+        }
+    }
+
+    @Test void sourceDependencyCyclesAreFiniteAndTopologyChangesInvalidate() throws Exception {
+        AtomicInteger reads = new AtomicInteger(); Observed provider = new Observed();
+        var a = input("app", "p", "memory:///A.java", "a", List.of("memory:///B.java"), reads);
+        var b = input("app", "p", "memory:///B.java", "b", List.of("memory:///A.java"), reads);
+        try (Workspace workspace = new Workspace(provider, 32)) {
+            var first = workspace.hierarchy.publish("repo", List.of(a, b));
+            assertEquals(2, get(first, first.root()).value(0));
+            var changed = input("app", "p", "memory:///B.java", "bb", List.of("memory:///A.java"), reads);
+            var second = workspace.hierarchy.publish("repo", List.of(a, changed));
+            assertTrue(second.changedFrom(first).containsAll(List.of(a.address("repo"), b.address("repo"))));
+            var withoutEdge = input("app", "p", "memory:///B.java", "bb", List.of(), reads);
+            var third = workspace.hierarchy.publish("repo", List.of(a, withoutEdge));
+            assertNotEquals(second.identitySha256(a.address("repo")), third.identitySha256(a.address("repo")));
+        }
+    }
+
+    @Test void missingDuplicateAndBoundedGraphsRefuseWithoutPublication() throws Exception {
+        AtomicInteger reads = new AtomicInteger(); Observed provider = new Observed();
+        var a = input("app", "", "memory:///A.java", "a", List.of(), reads);
+        var missing = input("app", "", "memory:///B.java", "b", List.of("memory:///Missing.java"), reads);
+        try (Workspace workspace = new Workspace(provider, 16)) {
+            var first = workspace.hierarchy.publish("repo", List.of(a));
+            assertThrows(IllegalArgumentException.class, () -> workspace.hierarchy.publish("repo", List.of(a, a)));
+            assertThrows(IllegalArgumentException.class, () -> workspace.hierarchy.publish("repo", List.of(missing)));
+            assertThrows(IllegalArgumentException.class, () -> workspace.hierarchy.publish("repo", List.of()));
+            var second = workspace.hierarchy.publish("repo", List.of(a));
+            assertTrue(second.changedFrom(first).isEmpty()); assertEquals(0, reads.get());
+        }
+        var tiny = new MIndexASTHierarchy.Limits(2, 6, 2, 1, 5, 4096, MIndexASTLimits.defaults());
+        try (Workspace workspace = new Workspace(provider, 16,
+                new MIndexPartialAstMaster(new MIndexPartialAstCache(4, 100_000, 75)), tiny)) {
+            var b = input("app", "", "memory:///B.java", "b", List.of("memory:///A.java"), reads);
+            assertThrows(IllegalArgumentException.class, () -> workspace.hierarchy.publish("repo", List.of(a, b)));
+            assertEquals(0, reads.get());
+        }
+    }
+
+    @Test void compilerProviderPhaseAndSchemaKeysRemainSeparate() throws Exception {
+        Observed provider = new Observed(); MIndexASTDocument document = document("memory:///A.java", "a");
+        try (Workspace workspace = new Workspace(provider, 32)) {
+            MIndexASTHierarchy.Plan previous = null;
+            List<M3FileSourceFacts> keys = List.of(facts(document),
+                    M3FileSourceFacts.capture(document.sourceName(), document.source(), CONTEXT, "javac-public-tree", 1, "PARSE"),
+                    M3FileSourceFacts.capture(document.sourceName(), document.source(), CONTEXT, "another-parser", 1, "PARSE"),
+                    M3FileSourceFacts.capture(document.sourceName(), document.source(), CONTEXT, "another-parser", 2, "PARSE"),
+                    M3FileSourceFacts.capture(document.sourceName(), document.source(), CONTEXT, "another-parser", 2, "ANALYZE"));
+            for (M3FileSourceFacts key : keys) {
+                var input = MIndexASTHierarchy.fromMIndex("app", "main", "p", key, List.of(), () -> document);
+                var plan = workspace.hierarchy.publish("repo", List.of(input));
+                if (previous != null) assertEquals(6, plan.changedFrom(previous).size());
+                get(plan, plan.root()); previous = plan;
+            }
+            var finalPlan = previous;
+            provider.id = "changed-provider";
+            assertThrows(IllegalStateException.class, () -> finalPlan.acquire(finalPlan.root()));
+            assertThrows(IllegalStateException.class, () -> workspace.hierarchy.publish("repo", List.of()));
+        }
+    }
+
+    @Test void failureCancellationAndInvalidProviderOutputPublishNoSuccessfulParent() throws Exception {
+        AtomicInteger reads = new AtomicInteger(); Observed provider = new Observed();
+        var source = input("app", "p", "memory:///A.java", "a", List.of(), reads);
+        try (Workspace workspace = new Workspace(provider, 16)) {
+            var plan = workspace.hierarchy.publish("repo", List.of(source));
+            var cancelled = new MIndexProgressMonitor() { @Override public boolean isCancelled() { return true; } };
+            assertThrows(CancellationException.class, () -> plan.acquire(plan.root(), cancelled));
+            assertEquals(0, reads.get()); assertEquals(0, workspace.store.count());
+            provider.failOnce = MIndexASTHierarchy.Level.L3_MODULE;
+            assertThrows(IllegalStateException.class, () -> plan.acquire(plan.root()));
+            assertFalse(workspace.store.records.containsKey(plan.recordId(plan.root())));
+            assertEquals(1, get(plan, plan.root()).value(0)); assertEquals(1, reads.get());
+        }
+        provider = new Observed(); provider.wrongArity = true;
+        try (Workspace workspace = new Workspace(provider, 16)) {
+            var plan = workspace.hierarchy.publish("repo", List.of(source));
+            assertThrows(IllegalStateException.class, () -> plan.acquire(plan.root()));
+            assertEquals(0, workspace.store.count());
+            provider.wrongArity = false;
+            assertEquals(1, get(plan, plan.root()).value(0));
+        }
+    }
+
+    @Test void concurrentConsumersShareExactlyOneSuccessfulResolution() throws Exception {
+        AtomicInteger reads = new AtomicInteger(); Observed provider = new Observed();
+        var source = input("app", "p", "memory:///A.java", "a", List.of(), reads);
+        try (Workspace workspace = new Workspace(provider, 16); var workers = Executors.newFixedThreadPool(2)) {
+            var plan = workspace.hierarchy.publish("repo", List.of(source));
+            CountDownLatch start = new CountDownLatch(1);
+            var first = workers.submit(() -> { start.await(); return get(plan, plan.root()); });
+            var second = workers.submit(() -> { start.await(); return get(plan, plan.root()); });
+            start.countDown();
+            assertEquals(first.get(10, TimeUnit.SECONDS), second.get(10, TimeUnit.SECONDS));
+            assertEquals(1, reads.get()); assertEquals(6, provider.calls.size());
+        }
+    }
+
+    @Test void coldFactsReloadPreservesIdentityAndActiveLeaseProtection() throws Exception {
+        AtomicInteger reads = new AtomicInteger(); Observed provider = new Observed();
+        var source = input("app", "p", "memory:///A.java", "a", List.of(), reads);
+        try (Workspace workspace = new Workspace(provider, 1)) {
+            var plan = workspace.hierarchy.publish("repo", List.of(source));
+            var root = get(plan, plan.root()); int calls = provider.calls.size();
+            long id = plan.recordId(plan.root());
+            get(plan, source.address("repo"));
+            assertEquals(root, get(plan, plan.root()));
+            assertEquals(calls, provider.calls.size()); assertEquals(1, reads.get());
+            try (var held = plan.acquire(plan.root())) {
+                assertEquals(id, held.id());
+                assertThrows(TieredSwapCache.CapacityException.class, () -> {
+                    try (var other = plan.acquire(source.address("repo"))) { assertNotNull(other.value()); }
+                });
+                assertTrue(held.resident()); assertEquals(root, held.value());
+                assertTrue(workspace.cache.stats().entries() <= 1);
+                assertThrows(IOException.class, workspace.hierarchy::close);
+            }
+        }
+    }
+
+    @Test void exactFrozenSourceDigestAndOccurrenceOwnerAreRequired() throws Exception {
+        MIndexASTDocument good = document("memory:///A.java", "a");
+        MIndexASTDocument other = document("memory:///A.java", "a");
+        List<MIndexASTDocument> invalid = List.of(document("memory:///A.java", "changed"),
+                new MIndexASTDocument(good.sourceName(), good.source(), "0".repeat(64), good.root(), good.occurrences()),
+                new MIndexASTDocument(good.sourceName(), good.source(), good.sourceUtf16Sha256(), good.root(), other.occurrences()));
+        for (MIndexASTDocument document : invalid) {
+            try (Workspace workspace = new Workspace(new Observed(), 16)) {
+                var source = MIndexASTHierarchy.fromMIndex("app", "main", "p", facts(good), List.of(), () -> document);
+                var plan = workspace.hierarchy.publish("repo", List.of(source));
+                assertThrows(IllegalArgumentException.class, () -> plan.acquire(plan.root()));
+                assertEquals(0, workspace.store.count());
+            }
+        }
+    }
+
+    @Test void laterPoolGrowthCannotChangeAdmittedRootSnapshotBudget() throws Exception {
+        var pool = new MIndexASTPool(MIndexASTLimits.defaults());
+        var root = pool.leaf("name", "a");
+        var document = new MIndexASTDocument("memory:///A.java", "a", raw("a"), root,
+                List.of(new MIndexASTOccurrence(root, 0, 1)));
+        var astLimits = new MIndexASTLimits(1, 10, 10, 32, 32, 1024, 10, 4096, 1024);
+        var limits = new MIndexASTHierarchy.Limits(1, 6, 0, 1, 5, 4096, astLimits);
+        try (Workspace workspace = new Workspace(new Observed(), 16,
+                new MIndexPartialAstMaster(new MIndexPartialAstCache(8, 100_000, 75)), limits)) {
+            var source = MIndexASTHierarchy.fromMIndex("app", "main", "p", facts(document), List.of(), () -> document);
+            var plan = workspace.hierarchy.publish("repo", List.of(source));
+            pool.leaf("unrelated", "later-b");
+            assertEquals(2, pool.size());
+            assertEquals(1, root.snapshot(1).size());
+            assertEquals(1, get(plan, plan.root()).value(3));
+            assertThrows(IllegalArgumentException.class, () -> pool.ref(1).snapshot(1));
+        }
+    }
+
+    private static MIndexPartialAstProjection weighted(int seed, long weight) {
+        var pool = new MIndexASTPool(MIndexASTLimits.defaults());
+        var root = pool.leaf("name", "x");
+        var key = new MIndexPartialAstKey(M3FileSourceFacts.contextSha256(List.of(Integer.toString(seed))),
+                CONTEXT, "", 0, 0, 2, 0, 1, MIndexPartialAstScope.FILE,
+                MIndexPartialAstMode.SYNTAX, MIndexASTLimits.defaults());
+        return new MIndexPartialAstProjection(key, root.snapshot(), root.contentIndex(), weight, 0);
+    }
+
+    @Test void existingPartialCachePercentagesAcceptValidLongBudgets() {
+        var cache = new MIndexPartialAstCache(2, Long.MAX_VALUE, 99);
+        var tiny = weighted(1, 1);
+        assertTrue(cache.put(tiny));
+        assertSame(tiny, cache.get(tiny.key()));
+        assertEquals(1, cache.stats().retainedWeight());
+        cache.setPressure(MIndexPartialAstPressure.ELEVATED);
+        assertSame(tiny, cache.get(tiny.key()));
+        cache.setPressure(MIndexPartialAstPressure.NORMAL);
+        assertEquals(1, cache.stats().entries());
+    }
+
+    @Test void existingPartialCacheTrimsBeforeWeightAdditionAndProtectedReplacement() {
+        var cache = new MIndexPartialAstCache(3, Long.MAX_VALUE, 99);
+        long half = Long.MAX_VALUE / 2;
+        var a = weighted(1, half);
+        var b = weighted(2, half);
+        assertTrue(cache.put(a)); assertTrue(cache.put(b));
+        assertSame(a, cache.get(a.key())); assertSame(b, cache.get(b.key()));
+        var largerA = new MIndexPartialAstProjection(a.key(), a.snapshot(), a.rootId(), Long.MAX_VALUE - 1, 0);
+        assertTrue(cache.put(largerA));
+        assertSame(largerA, cache.get(a.key()));
+        assertNull(cache.get(b.key()));
+        assertEquals(Long.MAX_VALUE - 1, cache.stats().retainedWeight());
+        var full = weighted(3, Long.MAX_VALUE);
+        assertTrue(cache.put(full));
+        assertSame(full, cache.get(full.key()));
+        assertEquals(Long.MAX_VALUE, cache.stats().retainedWeight());
+        assertEquals(1, cache.stats().entries());
+        cache.clear(); assertEquals(0, cache.stats().retainedWeight());
+    }
+
+    @Test void existingPartialMasterSharesImmutableSnapshotWithoutReimport() throws Exception {
+        MIndexASTPool pool = new MIndexASTPool(MIndexASTLimits.defaults());
+        MIndexAST root = pool.leaf("name", "x");
+        var snapshot = root.snapshot();
+        assertSame(snapshot, snapshot.ref(root.contentIndex()).snapshot());
+        assertEquals(root.contentIndex(), snapshot.ref(root.contentIndex()).contentIndex());
+        assertTrue(root.sameStructure(snapshot.ref(root.contentIndex())));
+        assertNotEquals(root, snapshot.ref(root.contentIndex()));
+        pool.leaf("later", "y"); assertEquals(1, snapshot.size()); assertEquals(2, pool.size());
+        assertThrows(IllegalStateException.class, () -> new MIndexAST(8, 8).snapshot());
+        AtomicInteger reads = new AtomicInteger();
+        var source = input("app", "p", "memory:///A.java", "a", List.of(), reads);
+        var master = new MIndexPartialAstMaster(new MIndexPartialAstCache(16, 1 << 20, 75));
+        try (Workspace first = new Workspace(new Observed(), 16, master, LIMITS);
+                Workspace second = new Workspace(new Observed(), 16, master, LIMITS)) {
+            var one = first.hierarchy.publish("repo", List.of(source)); get(one, one.root());
+            var two = second.hierarchy.publish("repo", List.of(source)); get(two, two.root());
+            assertEquals(1, reads.get());
+            assertTrue(master.cache().stats().hits() > 0);
+        }
+    }
+
+    @Test void realJava21FrontendFeedsBothExistingAndM3ViewsWithoutAnotherParse() throws Exception {
+        M3File source = M3File.of(URI.create("memory:///Example.java"), "package p; class Example { int n = 7; }");
+        var diagnostics = new DiagnosticCollector<JavaFileObject>();
+        var compiler = ToolProvider.getSystemJavaCompiler();
+        AtomicReference<M3AST> ast = new AtomicReference<>();
+        AtomicReference<M3FileSourceFacts> key = new AtomicReference<>();
+        AtomicInteger parses = new AtomicInteger();
+        try (var files = compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8)) {
+            var options = List.of("--release", "21", "-proc:none", "-d", work.toString());
+            var task = (JavacTask) compiler.getTask(null, files, diagnostics, options, null, List.of(source));
+            task.addTaskListener(new TaskListener() {
+                @Override public void finished(TaskEvent event) { if (event.getKind() == TaskEvent.Kind.PARSE) parses.incrementAndGet(); }
+            });
+            try (var index = new M3JavacASTIndex(task, M3CompilationContext.isolated(options),
+                    M3JavacASTIndex.frozenInputs(List.of(source)), MIndexASTLimits.defaults(), 21)) {
+                index.on(M3JavacASTIndex.Phase.PARSE, "hierarchy-test-capture", view -> {
+                    try { ast.set(view.ast()); key.set(view.facts("javac-public-tree", 1)); }
+                    catch (IOException failure) { throw new UncheckedIOException(failure); }
+                });
+                assertTrue(task.call(), diagnostics.getDiagnostics().toString());
+                assertEquals(1, index.statistics().syntaxCaptures());
+            }
+        }
+        assertEquals(1, parses.get()); assertNotNull(ast.get());
+        try (Workspace workspace = new Workspace(new Observed(), 16)) {
+            var frozen = MIndexASTHierarchy.fromM3("app", "main", "p", key.get(), List.of(), ast::get);
+            var plan = workspace.hierarchy.publish("repo", List.of(frozen));
+            var result = get(plan, plan.root());
+            assertEquals(1, result.value(0)); assertEquals(source.getCharContent(false).length(), result.value(1));
+            assertEquals(ast.get().asMIndex().root().expandedSize(), result.value(2));
+            assertEquals(ast.get().asMIndex().root().reachableAtoms(), result.value(3));
+            assertEquals(result, get(plan, plan.root())); assertEquals(1, parses.get());
+        }
+    }
+}

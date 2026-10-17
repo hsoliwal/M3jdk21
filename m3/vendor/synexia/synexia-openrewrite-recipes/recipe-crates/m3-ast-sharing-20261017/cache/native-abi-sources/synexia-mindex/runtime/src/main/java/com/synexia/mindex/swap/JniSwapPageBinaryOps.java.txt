@@ -1,0 +1,138 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.mindex.swap;
+
+import java.nio.BufferOverflowException;
+import java.nio.ByteBuffer;
+import java.util.Optional;
+
+/** JNI bulk page transforms backed by the existing synexia_mindex_swap library. */
+final class JniSwapPageBinaryOps implements SwapPageBinaryOps {
+  private static final int ABI_VERSION = 2;
+
+  private JniSwapPageBinaryOps() {}
+
+  static Optional<SwapPageBinaryOps> tryCreate() {
+    try {
+      SwapNativeLibrary.load();
+      return nativePageAbiVersion() == ABI_VERSION
+          ? Optional.of(new JniSwapPageBinaryOps())
+          : Optional.empty();
+    } catch (LinkageError failure) {
+      return Optional.empty();
+    }
+  }
+
+  @Override
+  public String id() {
+    return "jni";
+  }
+
+  @Override
+  public boolean nativeBackend() {
+    return true;
+  }
+
+  @Override
+  public int copy(ByteBuffer source, ByteBuffer target) {
+    if (source == null || target == null) {
+      throw new NullPointerException(source == null ? "source" : "target");
+    }
+    JavaSwapPageBinaryOps.writable(target, "target");
+    if (!source.isDirect() || !target.isDirect()) {
+      return JavaSwapPageBinaryOps.INSTANCE.copy(source, target);
+    }
+    if (target.remaining() < source.remaining()) throw new BufferOverflowException();
+
+    int result =
+        nativeCopy(
+            source,
+            source.position(),
+            source.remaining(),
+            target,
+            target.position(),
+            target.remaining());
+    return requireStatus(result, "copy");
+  }
+
+  @Override
+  public int deltaEncodeMonotonicLongs(ByteBuffer sourceLongs, ByteBuffer target) {
+    if (sourceLongs == null || target == null) {
+      throw new NullPointerException(sourceLongs == null ? "sourceLongs" : "target");
+    }
+    JavaSwapPageBinaryOps.writable(target, "target");
+    if ((sourceLongs.remaining() & (Long.BYTES - 1)) != 0) {
+      throw new IllegalArgumentException("long lane byte length must be a multiple of 8");
+    }
+    if (!sourceLongs.isDirect() || !target.isDirect()) {
+      return JavaSwapPageBinaryOps.INSTANCE.deltaEncodeMonotonicLongs(sourceLongs, target);
+    }
+
+    int result =
+        nativeDeltaEncode(
+            sourceLongs,
+            sourceLongs.position(),
+            sourceLongs.remaining(),
+            target,
+            target.position(),
+            target.remaining());
+    return requireStatus(result, "delta encode");
+  }
+
+  @Override
+  public int deltaDecodeMonotonicLongs(ByteBuffer encoded, ByteBuffer targetLongs) {
+    if (encoded == null || targetLongs == null) {
+      throw new NullPointerException(encoded == null ? "encoded" : "targetLongs");
+    }
+    JavaSwapPageBinaryOps.writable(targetLongs, "targetLongs");
+    if (!encoded.isDirect() || !targetLongs.isDirect()) {
+      return JavaSwapPageBinaryOps.INSTANCE.deltaDecodeMonotonicLongs(encoded, targetLongs);
+    }
+
+    int result =
+        nativeDeltaDecode(
+            encoded,
+            encoded.position(),
+            encoded.remaining(),
+            targetLongs,
+            targetLongs.position(),
+            targetLongs.remaining());
+    return requireStatus(result, "delta decode");
+  }
+
+  private static int requireStatus(int status, String operation) {
+    if (status >= 0) return status;
+    switch (status) {
+      case -2 -> throw new IllegalArgumentException(operation + " rejected malformed page data");
+      case -3 -> throw new BufferOverflowException();
+      case -4 -> throw new java.nio.ReadOnlyBufferException();
+      case -5 -> throw new OutOfMemoryError(operation + " overlap scratch allocation failed");
+      default -> throw new IllegalStateException(operation + " rejected validated direct buffers");
+    }
+  }
+
+  private static native int nativePageAbiVersion();
+
+  private static native int nativeCopy(
+      ByteBuffer source,
+      int sourcePosition,
+      int sourceLength,
+      ByteBuffer target,
+      int targetPosition,
+      int targetRemaining);
+
+  private static native int nativeDeltaEncode(
+      ByteBuffer sourceLongs,
+      int sourcePosition,
+      int sourceLength,
+      ByteBuffer target,
+      int targetPosition,
+      int targetRemaining);
+
+  private static native int nativeDeltaDecode(
+      ByteBuffer encoded,
+      int sourcePosition,
+      int sourceLength,
+      ByteBuffer targetLongs,
+      int targetPosition,
+      int targetRemaining);
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "M3_AST_INTEGRATION_SDK_QUALIFICATION_V1",
+  "status": "PASS",
+  "tests": 2,
+  "errors": 0,
+  "failures": 0,
+  "skipped": 0,
+  "actual_outputs": [
+    {
+      "path": ".github/workflows/m3-compiletime-precompute.yml",
+      "sha256": "59e86aea0d16a2f92d434f1aaea0ea2416baab7c9bacaaf40481d4a1c18c28d7",
+      "template": "000-m3-compiletime-precompute.yml.txt"
+    },
+    {
+      "path": "m3/compiler/ast-sharing-20261017/CATALOGUE_INDEX.tsv",
+      "sha256": "cc52899e27c499ad5988c801aee395b9b16c2a42d86b915deb443f6986030409",
+      "template": "001-CATALOGUE_INDEX.tsv.txt"
+    },
+    {
+      "path": "m3/compiler/ast-sharing-20261017/README.md",
+      "sha256": "641989c0a400dc28a2691ca07cdf2f1917be7292042dda96620b07dd73a71b49",
+      "template": "002-README.md.txt"
+    },
+    {
+      "path": "m3/compiler/ast-sharing-20261017/REPRODUCE.md",
+      "sha256": "ec6b87dc328fc150519e02526e81b1819b3f79f21639dc08754643ee7bf4f367",
+      "template": "003-REPRODUCE.md.txt"
+    },
+    {
+      "path": "m3/compiler/ast-sharing-20261017/handoff.json",
+      "sha256": "a2873a1a4bdeccefe5806aa31bd115cf4cd1ac0135715fa8abc8916a3622bef7",
+      "template": "004-handoff.json.txt"
+    }
+  ],
+  "actual_application_and_readback": true,
+  "fixed_point": true,
+  "source_template_duplicate_refusal": true,
+  "yaml_and_shell_syntax_checked": true,
+  "shell_blocks": 10,
+  "manifest_sha256": "f47ff9bbf79c730e2f4e80e049fdbd0c459807b5beb8580d3024cc31f9191f8d",
+  "log_sha256": "762863a0084e837bfd9883a283e2868c5fd239bc2957fdba1373b371a4f58155",
+  "authoring_pom_sha256": "92661fed24b89467d53cac80cf785a26ed4757375f02c3f9e432b50954345c73",
+  "provider_source_receipt_sha256": "a19bafaa945efe4ae988503cf6842935289c3c7ffa60fa189f91648c2d019afc",
+  "canonical_implementation_revision": "1bbe38f1746e78b334e74abb01cc932920023978",
+  "canonical_implementation_tree": "fb345ba7a75b2f6fb143d8893c3c8a3fb6e77865",
+  "hosted_actions": "PENDING",
+  "prior_authoring_compile_receipt": "The earlier seven-project test-compile receipt records the pre-SLF4J integration POM; this successful SDK receipt qualifies its dependency-complete successor without changing provider bytes."
+}

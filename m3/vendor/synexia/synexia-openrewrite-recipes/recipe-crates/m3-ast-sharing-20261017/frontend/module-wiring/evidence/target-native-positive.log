@@ -1,0 +1,76 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.m3:m3-compiletime-precompute >------------------
+[INFO] Building M3JDK :: Compile-time String Precompute Port 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- build-helper:3.6.2:add-source (m3-ast-vendor-closure) @ m3-compiletime-precompute ---
+[INFO] Source directory: /workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/../../vendor/synexia/synexia-mindex/compiler/src/main/java added.
+[INFO] Source directory: /workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/../../vendor/synexia/synexia-mindex/runtime/src/main/java added.
+[INFO] Source directory: /workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/../../vendor/synexia/synexia-native-interop/src/main/java added.
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-compiletime-precompute ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-compiletime-precompute ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:copy-resources (m3-ast-plugin-service) @ m3-compiletime-precompute ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-compiletime-precompute ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-compiletime-precompute ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-compiletime-precompute ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.compiletime.ast.M3ASTWorkspaceCacheNativeTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.492 s -- in com.m3.compiletime.ast.M3ASTWorkspaceCacheNativeTest
+[INFO] Running com.m3.compiletime.ast.M3ASTHierarchyTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.991 s -- in com.m3.compiletime.ast.M3ASTHierarchyTest
+[INFO] Running com.m3.compiletime.ast.M3ASTWorkspaceCacheTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.248 s -- in com.m3.compiletime.ast.M3ASTWorkspaceCacheTest
+[INFO] Running com.m3.compiletime.ast.M3ASTHierarchyFactsTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.030 s -- in com.m3.compiletime.ast.M3ASTHierarchyFactsTest
+[INFO] Running com.m3.compiletime.ast.M3FileSourceFactsTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.m3.compiletime.ast.M3FileSourceFactsTest
+[INFO] Running com.m3.compiletime.M3ItemReferenceScanTest
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.100 s -- in com.m3.compiletime.M3ItemReferenceScanTest
+[INFO] Running com.m3.compiletime.M3ConstantRegexImageTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.066 s -- in com.m3.compiletime.M3ConstantRegexImageTest
+[INFO] Running com.m3.compiletime.M3GvasLiteralHarvesterTest
+JARS 1
+UNIT vendor fixture.jar
+M3_GVAS_LITERAL_HARVEST rows=2 bytes=174 sha256=058c9e319cf80e4acfe28d6768a2776be5cb69cf443395357d75f7b101b443fe
+JARS 1
+PARSE_FAIL broken.jar Broken.class java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 4
+UNIT vendor broken.jar
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.199 s -- in com.m3.compiletime.M3GvasLiteralHarvesterTest
+[INFO] Running com.m3.compiletime.M3RegexRequirementTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s -- in com.m3.compiletime.M3RegexRequirementTest
+[INFO] Running com.m3.compiletime.M3FormatPlanTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.m3.compiletime.M3FormatPlanTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 54, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.850 s
+[INFO] Finished at: 2026-10-17T13:32:54+01:00
+[INFO] ------------------------------------------------------------------------

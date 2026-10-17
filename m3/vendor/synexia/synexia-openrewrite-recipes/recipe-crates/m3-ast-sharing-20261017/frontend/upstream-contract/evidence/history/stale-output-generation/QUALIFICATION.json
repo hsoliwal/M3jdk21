@@ -1,0 +1,26 @@
+{
+  "schema": "M3_UPSTREAM_SHARED_FRONTEND_LINKED_PROOF_V1",
+  "status": "failed",
+  "source_commit": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "patch_sha256": "3f50d59cca1cf7cf2811c0bb1da9314b71240c7f81f37854ed6fc021f03681b4",
+  "upstream_test_families": [
+    "sharing",
+    "lazyAndFailureMemoization",
+    "editedSource",
+    "separatePhases",
+    "callbackFailure",
+    "explicitCallbackClose",
+    "cleanupFailure",
+    "pluginAndImage",
+    "providerClassLoader",
+    "generatedSources"
+  ],
+  "source_lineage_sha256": "e7d609f6df325983797531c9008c5b1db8b20e14bfbf63e3774c0a00f4567c45",
+  "no_product_edits": true,
+  "full_jdk_or_jck_claim": false,
+  "original_jmods_sha256": {
+    "java.base": "b57cad45025ed9a01c7b547e84b268807bb2ae6c7ea2cefd9c3a56041ed0312d",
+    "jdk.compiler": "9b44492940366751cc49f72095f0171570f33edd10909f1f84756df2cb00a207"
+  },
+  "failure": "proof command failed: create-java.base"
+}

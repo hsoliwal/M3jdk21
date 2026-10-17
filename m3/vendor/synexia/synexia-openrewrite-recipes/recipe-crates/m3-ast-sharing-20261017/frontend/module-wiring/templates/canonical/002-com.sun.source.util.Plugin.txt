@@ -1,0 +1,3 @@
+com.synexia.mindex.compiler.MIndexCompilerPlugin
+com.synexia.mindex.experiment.compiler.MIndexCompilerPlugin
+com.synexia.mindex.compiler.ast.M3ASTPlugin

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.synexia.rewrite.M3ASTRegistryRecipeTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.720 s -- in com.synexia.rewrite.M3ASTRegistryRecipeTest

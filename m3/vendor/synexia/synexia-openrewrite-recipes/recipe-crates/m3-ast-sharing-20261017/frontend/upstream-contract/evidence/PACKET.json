@@ -1,0 +1,32 @@
+{
+  "schema": "M3_UPSTREAM_CONTRACT_PACKET_V1",
+  "exact_upstream_main_checks": 70,
+  "separate_plugin_coexistence_checks": 9,
+  "total_checks": 79,
+  "full_jdk_or_jck_claim": false,
+  "source_commit": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "compiler_patch_sha256": "3f50d59cca1cf7cf2811c0bb1da9314b71240c7f81f37854ed6fc021f03681b4",
+  "frontend_jar_sha256": "f4baf0ae24e58c290a7de403c0571dccbe35c825694729aca40c3408db5b905c",
+  "linked_image_modules_sha256": "f4bb3a453e067a76d6821fb08116288255d824a8b1112955607d5ef5c8eadd04",
+  "proof_inputs": {
+    "qualify.py": "41e2ed298b7b8635633f4b7bcf77d9179000004b69cf55f7cfd3ab64457a1504",
+    "coexistence.py": "94472bc1bdbf52009b693d982ef9f1225d2cb6a7a7e3b88d331597a2708af684",
+    "proof/JmodDescriptorInputs.java": "ac0e745b7a5d8202061b9907a5371ce55d3448664d592a86ddaf592578ab9f9e",
+    "proof/PluginCoexistenceProbe.java": "072add81bd127277d3d0e50944ff2df7a67c4169e4da894f71692eae3b7c55f4",
+    "SOURCE_LINEAGE.json": "e7d609f6df325983797531c9008c5b1db8b20e14bfbf63e3774c0a00f4567c45"
+  },
+  "receipts": {
+    "QUALIFICATION.json": "aef2fdd668058ad150eff0eae63496362ad39067f849a90e33510a6df12f3768",
+    "COMMANDS.json": "487c4b55b9bed981451129d7e969efc0534d3f492b207156aebda7c84648c8df",
+    "COEXISTENCE.json": "a6aaa0050d418cc4f0787d9fe11c66e816b0eeac924081347722d6bfee66c231"
+  },
+  "final_handoff": "m3/compiler/ast-sharing-20261017/handoff.json",
+  "qualified_driver_custody": {
+    "qualify.py": "history/exact-79-driver/qualify.py",
+    "coexistence.py": "history/exact-79-driver/coexistence.py",
+    "proof/JmodDescriptorInputs.java": "history/exact-79-driver/proof/JmodDescriptorInputs.java",
+    "proof/PluginCoexistenceProbe.java": "history/exact-79-driver/proof/PluginCoexistenceProbe.java",
+    "SOURCE_LINEAGE.json": "history/exact-79-driver/SOURCE_LINEAGE.json"
+  },
+  "driver_successor_note": "The 70+9 executed proof inputs are retained at qualified_driver_custody. Receipt-admission changes are separately qualified without rerunning or relabeling these historical compiler results."
+}

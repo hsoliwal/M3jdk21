@@ -1,0 +1,29 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------< com.synexia.verification:m3-ast-frontend-sharing-recipe >-------
+[INFO] Building m3-ast-frontend-sharing-recipe 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ m3-ast-frontend-sharing-recipe ---
+[INFO] Deleting /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-ast-frontend-sharing-recipe ---
+[INFO] Copying 118 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-ast-frontend-sharing-recipe ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-ast-frontend-sharing-recipe ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-ast-frontend-sharing-recipe ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  13.349 s
+[INFO] Finished at: 2026-10-17T13:53:25+01:00
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,193 @@
+{
+  "schema": "M3_AST_CACHE_QUALIFICATION_V1",
+  "status": "PASS",
+  "generatedAtUtc": "2026-10-17T10:33:26.729336+00:00",
+  "canonicalSourceRevision": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "targetBaseRevision": "e336c083c90bd882030e9a370949136e191386f2",
+  "javaCompiler": "javac 21.0.2",
+  "recipeSdk": "OpenRewrite 8.17.1",
+  "suites": [
+    {
+      "gate": "sdk",
+      "suite": "com.synexia.rewrite.M3ASTCacheRecipeTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reportSha256": "bc9bc22898ffbff2b2f38adcb2391347f1d5e0bc8deec29386335d16147a612c",
+      "summary": "com.synexia.rewrite.M3ASTCacheRecipeTest.txt"
+    },
+    {
+      "gate": "runtime",
+      "suite": "com.synexia.mindex.compiler.ast.M3ASTWorkspaceCacheTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reportSha256": "e04e33e88d611f18e767001c38ab7a8ae3c7d5409eaa80dbde90e1b789ce822d",
+      "summary": "com.synexia.mindex.compiler.ast.M3ASTWorkspaceCacheTest.txt"
+    },
+    {
+      "gate": "runtime",
+      "suite": "com.synexia.mindex.compiler.ast.M3FileSourceFactsTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reportSha256": "03aa404c000360c36a3a7f34903a136c0888996ec5acb203a0cf6281333506d2",
+      "summary": "com.synexia.mindex.compiler.ast.M3FileSourceFactsTest.txt"
+    },
+    {
+      "gate": "native",
+      "suite": "com.synexia.mindex.compiler.ast.M3ASTWorkspaceCacheNativeTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reportSha256": "f5595cf28005dedc61d75b5daa60b0785c77247e94bca87196c365d59493ebf1",
+      "summary": "com.synexia.mindex.compiler.ast.M3ASTWorkspaceCacheNativeTest.txt"
+    }
+  ],
+  "nativeAbiSymbols": 16,
+  "nativeReceipt": "native-receipt.json",
+  "nativeCounterexample": "counterexamples/abi-export-inventory/counterexample.json",
+  "materializedProductFiles": [
+    {
+      "crate": "m3-ast-cache-canonical-20261017",
+      "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3ASTWorkspaceCache.java",
+      "preimage": "ABSENT",
+      "sha256": "7ad205f6521a14879ae537ff15a98199dc3b023ae7c69e844aea1f3664f5bae1"
+    },
+    {
+      "crate": "m3-ast-cache-canonical-20261017",
+      "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3FileSourceFacts.java",
+      "preimage": "ABSENT",
+      "sha256": "3c6052c962b61b5cda14f1eab41a08f23a30c840a94f14ae2f57ef50f8fca32c"
+    },
+    {
+      "crate": "m3-ast-cache-canonical-20261017",
+      "path": "synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3ASTCacheTestSupport.java",
+      "preimage": "ABSENT",
+      "sha256": "79ccef742545a82142ea205b580e7cde384bfbf7d0974e01bae19d721d7093a4"
+    },
+    {
+      "crate": "m3-ast-cache-canonical-20261017",
+      "path": "synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3ASTWorkspaceCacheNativeTest.java",
+      "preimage": "ABSENT",
+      "sha256": "7674c6533bf115d4e0515875cba9c95f088fffad364f39b2cea3e702c12e7f64"
+    },
+    {
+      "crate": "m3-ast-cache-canonical-20261017",
+      "path": "synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3ASTWorkspaceCacheTest.java",
+      "preimage": "ABSENT",
+      "sha256": "20313c8ec7c35efff91a5ed78bc922cb54922c918c65cd521e83309b5945ba07"
+    },
+    {
+      "crate": "m3-ast-cache-canonical-20261017",
+      "path": "synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3FileSourceFactsTest.java",
+      "preimage": "ABSENT",
+      "sha256": "6fffe7cb1d1e99f933f4605d1c4b1c5fb53c3520cf985d51492788ddb3723df4"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3ASTWorkspaceCache.java",
+      "preimage": "ABSENT",
+      "sha256": "26e47cc50a069b25c45c77a67104b3e0b41abcfb3c6f8ba1ee2dbd452311feec"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3FileSourceFacts.java",
+      "preimage": "ABSENT",
+      "sha256": "01bb62f9acc4fda98cc93ab63c83e259c22b70ba3a0757b195b071f80f2a74dd"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3ASTCacheTestSupport.java",
+      "preimage": "ABSENT",
+      "sha256": "fd022b757843e340785bec9145db5db23e659be31cec01d278d1506ee2b76f46"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3ASTWorkspaceCacheNativeTest.java",
+      "preimage": "ABSENT",
+      "sha256": "6d45fa3b3547a3a8c51958eb93d63e979c888f7beeb41739c06f055f42f2567c"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3ASTWorkspaceCacheTest.java",
+      "preimage": "ABSENT",
+      "sha256": "e77fec2dc736e9c1581e7d47dbe87644e86c865875aef8569cb0a186c198cad0"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3FileSourceFactsTest.java",
+      "preimage": "ABSENT",
+      "sha256": "0fc00b688ce30aab99caaa7dfffe57b90a6c286b257f4f0c34b2ed3701adcdfe"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SqliteSwapStore.java",
+      "preimage": "ABSENT",
+      "sha256": "091c41271c42f3603ee7d64439d612541a875217dc85783700752bbe16d959cf"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapBudgetPlane.java",
+      "preimage": "ABSENT",
+      "sha256": "88051ebf6e2ab8d73d92e3252fe2a05ab8f9c95894eb1f39ddbf4d019407e4b0"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapNativeLibrary.java",
+      "preimage": "ABSENT",
+      "sha256": "a1d0724afb9ee986b99e12e666ffc49b72cb0a37804baebf88c8a30e46e28a6c"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapStore.java",
+      "preimage": "ABSENT",
+      "sha256": "5a99e61ed20a662c8b44957571e9159c7fd3fc784360b659f289a0e8f438b1ee"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/TieredSwapCache.java",
+      "preimage": "ABSENT",
+      "sha256": "b76151008b20862bc56e14edf48f0034b29f2a7b9d9229bc2c4c085ebfef5ae3"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/vendor/synexia/synexia-native-interop/src/main/java/com/synexia/nativeinterop/JniLibraryLoader.java",
+      "preimage": "ABSENT",
+      "sha256": "fa22dcfcc2b442c72ee3dd97e5d97dd5c9ad19ee4eac422641336b7477c63699"
+    },
+    {
+      "crate": "m3-ast-cache-target-20261017",
+      "path": "m3/vendor/synexia/synexia-native-interop/src/main/java/com/synexia/nativeinterop/NativeLibrarySpec.java",
+      "preimage": "ABSENT",
+      "sha256": "fd9bc8f19f629e6131dcb55f264eed524fa17e69bdda31d723b4addfddb8a4f5"
+    },
+    {
+      "crate": "m3-ast-cache-native-20261017",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/native/swap/CMakeLists.txt",
+      "preimage": "ABSENT",
+      "sha256": "e164a6981af9626f797872b1e2a70ebcf77005292459275f463e4d8325eaf8ee"
+    },
+    {
+      "crate": "m3-ast-cache-native-20261017",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/native/swap/mindex_swap.c",
+      "preimage": "ABSENT",
+      "sha256": "4d8c04f5b50498038ce39c7d8412d24340a59c6a5f624c4e47fa1ea145fb762f"
+    }
+  ],
+  "assertedFiniteWorkloads": {
+    "concurrentRequests": 24,
+    "workerThreads": 8,
+    "successfulFirstLoaders": 1,
+    "firstRecordWrites": 1,
+    "coldMemoryStoreRecords": 2048,
+    "residentEntryCeiling": 2,
+    "declaredResidentByteCeiling": 8192,
+    "sqliteCloseReopenRecords": 128
+  },
+  "scopeLimit": "Isolated cache/source-facts contract and Linux native ABI. No complete JDK build, RSS ceiling, workload throughput or cross-process semantic-reuse claim."
+}

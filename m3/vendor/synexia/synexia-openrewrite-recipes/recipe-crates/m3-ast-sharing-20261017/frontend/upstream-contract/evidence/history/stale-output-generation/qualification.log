@@ -1,0 +1,24 @@
+{"step": "original-java-version", "exit_code": 0}
+{"step": "original-compiler-descriptor", "exit_code": 0}
+{"step": "extract-compiler", "exit_code": 0}
+{"step": "compile-exact-descriptor", "exit_code": 0}
+{"step": "create-jdk.compiler", "exit_code": 0}
+{"step": "original-base-descriptor", "exit_code": 0}
+{"step": "extract-base", "exit_code": 0}
+{"step": "compile-jmod-descriptor-input-helper", "exit_code": 0}
+{"step": "prepare-generated-base-attributes", "exit_code": 0}
+{"step": "create-java.base", "exit_code": 4}
+{"status": "failed", "upstream_checks": null}
+Traceback (most recent call last):
+  File "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/qualify.py", line 270, in <module>
+    main()
+  File "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/qualify.py", line 210, in main
+    base = create_jmod("java.base", expanded_base, base_desc,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/qualify.py", line 131, in create_jmod
+    run("create-" + name, command)
+  File "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/qualify.py", line 106, in run
+    require(result.returncode == 0, "proof command failed: " + label)
+  File "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/qualify.py", line 61, in require
+    raise ValueError(message)
+ValueError: proof command failed: create-java.base

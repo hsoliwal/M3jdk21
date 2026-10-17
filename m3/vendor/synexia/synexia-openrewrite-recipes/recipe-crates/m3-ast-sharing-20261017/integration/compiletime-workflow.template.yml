@@ -1,0 +1,159 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Compile-time String Precompute
+
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/compiletime/**'
+      - 'm3/ports/compiletime-openrewrite/**'
+      - 'm3/compiler/ast-sharing-20261017/**'
+      - 'm3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/**'
+      - 'm3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinned*SnapshotRecipe.java'
+      - 'm3/vendor/synexia/synexia-mindex/**'
+      - 'm3/vendor/synexia/synexia-native-interop/**'
+      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java'
+      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java'
+      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
+      - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
+      - 'src/jdk.compiler/share/classes/module-info.java'
+      - 'm3/docs/m3-compiletime-precompute.md'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-compiletime-regex-precompute.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/**'
+      - '.github/workflows/m3-compiletime-precompute.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Custody (CPU only, refusal on drift)
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 m3/ports/compiletime/verify_compiletime_precompute.py
+
+      - name: Install the dependency-free precompute port
+        run: |
+          set -euo pipefail
+          out=target/m3-precompute-classes
+          mkdir -p "$out"
+          javac --release 21 -d "$out" $(find m3/ports/precompute/src/main/java -name '*.java')
+          jar --create --file target/m3-precompute.jar -C "$out" .
+          mvn -B -ntp install:install-file -Dfile=target/m3-precompute.jar \
+            -DgroupId=com.m3 -DartifactId=m3-precompute -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar
+
+      - name: Unit tests (upstream ASM/JUnit coordinates)
+        run: |
+          mvn -B -ntp -f m3/ports/compiletime/pom.xml \
+            -Dasm.version=9.6 -Djunit.artifact.version=5.10.2 test
+
+      - name: Harvest the CI JDK and prove the gate against stock java.util.regex
+        run: |
+          set -euo pipefail
+          pom=m3/ports/compiletime/pom.xml
+          mvn -B -ntp -q -f "$pom" -Dasm.version=9.6 -Djunit.artifact.version=5.10.2 \
+            dependency:build-classpath -Dmdep.outputFile=target/ct-cp.txt
+          cp="m3/ports/compiletime/target/classes:$(cat target/ct-cp.txt)"
+          opens="--add-opens java.base/java.util.regex=ALL-UNNAMED"
+          java -Xmx1g $opens -cp "$cp" com.m3.compiletime.M3ConstantRegexHarvester \
+            --out target/ci-harvest --jdk --rounds 5
+          java -Xmx1g $opens -cp "$cp" com.m3.compiletime.M3ConstantRegexDifferential \
+            --harvest target/ci-harvest --rounds 3 --reps 1
+          cat target/ci-harvest/HARVEST_RECEIPT.tsv target/ci-harvest/DIFFERENTIAL_RECEIPT.tsv
+
+      - name: OpenRewrite crate fixed point
+        run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3CompileTimeRegexPrecomputeRecipeTest test
+
+  ast-sharing:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21.0.2'
+          cache: maven
+
+      - name: Qualify the canonical Maven recipes and exact candidates
+        env:
+          MAVEN_OPTS: -Xmx192m
+        run: |
+          set -euo pipefail
+          task=m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017
+          python3 "$task/integration/verify_target_sources.py" --target "$PWD"
+          mvn -B -ntp -f "$task/cache/pom.xml" test
+          mvn -B -ntp -f "$task/frontend/pom.xml" -Dm3.frontend.maxHeap=768m test
+          mvn -B -ntp -f "$task/frontend/hierarchy/pom.xml" test
+          mvn -B -ntp -f "$task/frontend/module-wiring/pom.xml" test
+          mvn -B -ntp -f "$task/frontend/registry/pom.xml" test
+          mvn -B -ntp -f "$task/integration/pom.xml" test
+          python3 "$task/frontend/build_candidates.py" --jdk "$JAVA_HOME" \
+            --hierarchy-candidates "$PWD/$task/frontend/hierarchy/target/candidate"
+
+      - name: Qualify the exact SQLite JNI donor and cache contracts
+        env:
+          MAVEN_OPTS: -Xmx192m
+        run: |
+          set -euo pipefail
+          task=m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017
+          mkdir -p target/m3-ast-native
+          curl --fail --location --retry 3 \
+            https://www.sqlite.org/2026/sqlite-amalgamation-3510300.zip \
+            --output target/m3-ast-native/sqlite.zip
+          unzip -q target/m3-ast-native/sqlite.zip -d target/m3-ast-native
+          python3 "$task/cache/build_native_proof.py" --jdk-home "$JAVA_HOME" \
+            --sqlite-source "$PWD/target/m3-ast-native/sqlite-amalgamation-3510300"
+          mvn -B -ntp -f "$task/cache/pom-runtime.xml" test
+
+      - name: Qualify the composed frontend and hierarchy
+        env:
+          MAVEN_OPTS: -Xmx192m
+        run: |
+          set -euo pipefail
+          task=m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017
+          mvn -B -ntp -f "$task/frontend/runtime-tests/pom.xml" test
+          python3 "$task/frontend/primitive-image/verify.py" --jdk "$JAVA_HOME"
+          python3 "$task/frontend/hierarchy/build.py" --stage runtime --jdk "$JAVA_HOME"
+          mvn -B -ntp -f "$task/frontend/hierarchy/runtime-tests/pom.xml" test
+
+      - name: Qualify the optional stock OpenRewrite visitor
+        env:
+          MAVEN_OPTS: -Xmx192m
+        run: |
+          set -euo pipefail
+          task=m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017
+          mvn -B -ntp -f "$task/frontend/openrewrite/pom.xml" test
+          python3 "$task/frontend/openrewrite/verify.py" --jdk "$JAVA_HOME" \
+            --plugin "$PWD/$task/frontend/target/m3-ast-sharing.jar" \
+            --patch "$PWD/$task/frontend/target/m3-javac-patch.jar"
+
+      - name: Preserve the upstream API and both compiler plugins
+        run: |
+          set -euo pipefail
+          task=m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017
+          patch="$PWD/$task/frontend/target/m3-javac-patch.jar"
+          plugin="$PWD/$task/frontend/target/m3-ast-sharing.jar"
+          receipt="$PWD/$task/frontend/target/ARTIFACTS.json"
+          python3 -m unittest discover -s "$task/frontend/upstream-contract/tests" -p test_artifact_admission.py -v
+          python3 "$task/frontend/upstream-contract/qualify.py" --jdk "$JAVA_HOME" --patch "$patch" \
+            --artifact-receipt "$receipt"
+          python3 "$task/frontend/upstream-contract/coexistence.py" \
+            --frontend-jar "$plugin" --artifact-receipt "$receipt" \
+            --patch "$patch"

@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "schema": "Draft2020-12",
+  "jsonschema_version": "4.23.0",
+  "candidate_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+  "baseline_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+  "schema_sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+  "new_mappings": 12,
+  "exact_preimage_routes": [
+    {
+      "crate": "m3-ast-registry-20261017",
+      "before_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+      "after_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+      "manifest_sha256": "eb1b40276b76a57639775731fc8bdc5113b3d16019bf3aa03a33f6787e1e34b7"
+    },
+    {
+      "crate": "m3-ast-registry-hierarchy-20261017",
+      "before_sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+      "after_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+      "manifest_sha256": "74a6f750737d90cdd56213b3655c82f78d1f1272e14e468c109b71187b043b9a"
+    }
+  ],
+  "unchanged_receiving_sequence": true,
+  "unchanged_global_gates": true,
+  "unchanged_java_base_reservations": true,
+  "full_counterpart_status": "pending",
+  "hierarchy": {
+    "L0": "per-file facts and atoms",
+    "L1": "file summary",
+    "L2": "package",
+    "L3": "module",
+    "L4": "project",
+    "L5": "repository"
+  },
+  "scope_mutations_refused": [
+    "receiving-phase",
+    "migration-gate",
+    "java-base-reservation",
+    "full-counterpart-promotion",
+    "package-level",
+    "target-source-hash"
+  ],
+  "source_template_hashes_verified": 38,
+  "final_commit_handoff": "m3/compiler/ast-sharing-20261017/handoff.json"
+}

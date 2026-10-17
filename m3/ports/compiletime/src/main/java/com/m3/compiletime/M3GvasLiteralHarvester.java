@@ -72,8 +72,8 @@ public final class M3GvasLiteralHarvester {
         }
         // Publish the complete image + offsets + receipt as one no-clobber directory move; never
         // expose an already-live inode to compilation. Aborted staging is removed.
-        Path destination = out.toAbsolutePath().normalize();
-        Path staging = Files.createTempDirectory(destination.getParent(), ".m3-gvas-staging-");
+        Path publishedDirectory = out.toAbsolutePath().normalize();
+        Path staging = Files.createTempDirectory(publishedDirectory.getParent(), ".m3-gvas-staging-");
         try {
             M3GvasLiteralImageWriter.writeNew(staging.resolve("literals.m3gvas"), image);
             Files.writeString(staging.resolve("COMPILETIME_LITERAL_OFFSETS.tsv"), offsets);
@@ -85,7 +85,7 @@ public final class M3GvasLiteralHarvester {
                     + "\nunique_literals\t" + image.rows().size()
                     + "\nclasses_scanned\t" + classes
                     + "\nproducer\tM3GvasLiteralHarvester\n");
-            Files.move(staging, destination); // no REPLACE_EXISTING: refuse a concurrent destination
+            Files.move(staging, publishedDirectory); // no REPLACE_EXISTING: refuse a concurrent destination
         } finally {
             if (Files.exists(staging)) {
                 try (var files = Files.list(staging)) {

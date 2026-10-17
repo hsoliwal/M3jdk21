@@ -1,0 +1,8 @@
+{
+  "status": "EXPECTED_FAILURE_RETAINED",
+  "tests": 2,
+  "errors": 2,
+  "failure": "NoClassDefFoundError org/slf4j/LoggerFactory",
+  "correction": "Add the same test-scoped SLF4J binding used by the other qualified recipe POMs; rerun the recipe.",
+  "product_outputs_written": false
+}

@@ -1,0 +1,5 @@
+java.base@21.0.2
+java.compiler@21.0.2
+jdk.compiler@21.0.2
+jdk.internal.opt@21.0.2
+jdk.zipfs@21.0.2

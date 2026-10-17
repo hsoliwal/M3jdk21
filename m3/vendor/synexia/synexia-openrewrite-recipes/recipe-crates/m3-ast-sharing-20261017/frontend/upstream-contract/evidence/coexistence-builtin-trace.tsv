@@ -1,0 +1,6 @@
+# M3AST-1 actual javac events; no independent parse or attribution
+phase	source	type
+PARSED	string:///Coexist.java	
+ANALYZED	string:///Coexist.java	Coexist
+ANALYZED	string:///Coexist.java	Peer
+# parsed=1 analyzed=2 captures=1 extraSourceReads=0 projections=0 hits=0 errors=0 completed=true consumerFailed=false

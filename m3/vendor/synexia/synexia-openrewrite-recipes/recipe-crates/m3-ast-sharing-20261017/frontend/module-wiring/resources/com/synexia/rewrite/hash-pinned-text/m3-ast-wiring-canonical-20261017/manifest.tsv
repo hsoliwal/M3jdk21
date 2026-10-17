@@ -1,0 +1,3 @@
+synexia-mindex/compiler-openrewrite/pom.xml	ABSENT	d517ffbb75b66eb84ad37ec8e6a2fb74d072838677c86677b4b083e319a49704	000-pom.xml.txt
+synexia-mindex/compiler/pom.xml	cadd7aaf62bf1da69dc01db646117d913cf4ca5eff99c34069965caec8fb822c	a535fa0d65b497379680075f9bbb8001007c675456bec6921420a3395329cd33	001-pom.xml.txt
+synexia-mindex/compiler/src/main/resources/META-INF/services/com.sun.source.util.Plugin	81284c5e2ce668388a675b578fa62ce8939ff6e26b81cffa128e5503b809cfec	d499127e721306567c0754945d7cc3ccfd80993fb17e618be0a4afb09fa0faeb	002-com.sun.source.util.Plugin.txt

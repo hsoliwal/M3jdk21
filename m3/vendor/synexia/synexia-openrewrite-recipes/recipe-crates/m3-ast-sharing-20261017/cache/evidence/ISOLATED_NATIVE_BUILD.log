@@ -1,0 +1,1 @@
+PASS: C17 strict donor compilation and 16 JNI symbols match javac -h

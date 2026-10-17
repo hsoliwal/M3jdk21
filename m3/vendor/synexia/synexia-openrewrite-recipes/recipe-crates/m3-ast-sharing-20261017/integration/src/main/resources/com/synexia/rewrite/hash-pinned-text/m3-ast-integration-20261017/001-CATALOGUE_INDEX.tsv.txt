@@ -1,0 +1,11 @@
+problem_category	catalogue_or_review	selection_boundary
+compiler-event-sharing	../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/CATALOGUE.tsv	Existing javac task, MIndexJavaAST conversion and scoped pool
+per-file-behavioral-atoms	../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/FILE_REVIEW.tsv	Serial reviewed operations, preserved contracts and evidence
+source-context-and-lru-spill	../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/cache/README.md	Exact source identity, existing leases/budgets/SQLite JNI
+leaf-first-hierarchy	../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/README.md	L0 facts/atoms, L1 file, L2 package, L3 module, L4 project, L5 repository
+lossless-visitor-projection	../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/openrewrite/README.md	Pinned stock visitor, full FLOW and exact source-print admission
+upstream-public-api-composition	../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/README.md	Original public M3AST and service registration retained
+module-lifecycle-and-optional-dependencies	../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/README.md	Existing Maven owners, delayed SPI installation, explicit source closure
+authoritative-name-mapping	../../docs/name-mapping.json	Existing registry and broader receiving gates preserved
+dynamic-arrays-offsets-state-masks	https://github.com/hsoliwal/M3jdk21/pull/1125	Separate qualified existing array/JNI refinement and donor catalogue
+filtered-and-sorted-wrappers	https://github.com/hsoliwal/M3jdk21/pull/1077	Merged wrapper qualification and canonical source custody

@@ -1,0 +1,602 @@
+{
+  "schema": "M3_AST_NORMAL_MODULE_PROOF_V1",
+  "status": "PASSED_WITH_CANONICAL_REACTOR_UNAVAILABLE",
+  "dependency_mode": {
+    "asm.version": "9.6",
+    "junit.artifact.version": "5.10.2",
+    "authority": "existing receiver POM CI override comment",
+    "custom_source_artifact_defaults": "not qualified in this environment"
+  },
+  "source_counts": {
+    "ordinary_including_target_facades": 35,
+    "vendor": 103,
+    "actual_maven_compiler_inputs": 138
+  },
+  "normal_tests": [
+    {
+      "class": "com.m3.compiletime.M3ConstantRegexImageTest",
+      "tests": 4,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3FormatPlanTest",
+      "tests": 2,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3GvasLiteralHarvesterTest",
+      "tests": 2,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3ItemReferenceScanTest",
+      "tests": 7,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3RegexRequirementTest",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3ASTHierarchyFactsTest",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3ASTHierarchyTest",
+      "tests": 15,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3ASTWorkspaceCacheTest",
+      "tests": 9,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3FileSourceFactsTest",
+      "tests": 3,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  ],
+  "native_missing_profile_tests": [
+    {
+      "class": "com.m3.compiletime.M3ConstantRegexImageTest",
+      "tests": 4,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3FormatPlanTest",
+      "tests": 2,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3GvasLiteralHarvesterTest",
+      "tests": 2,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3ItemReferenceScanTest",
+      "tests": 7,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3RegexRequirementTest",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3ASTHierarchyFactsTest",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3ASTHierarchyTest",
+      "tests": 15,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3ASTWorkspaceCacheNativeTest",
+      "tests": 2,
+      "errors": 0,
+      "failures": 2,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3ASTWorkspaceCacheTest",
+      "tests": 9,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3FileSourceFactsTest",
+      "tests": 3,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  ],
+  "native_positive_profile_tests": [
+    {
+      "class": "com.m3.compiletime.M3ConstantRegexImageTest",
+      "tests": 4,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3FormatPlanTest",
+      "tests": 2,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3GvasLiteralHarvesterTest",
+      "tests": 2,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3ItemReferenceScanTest",
+      "tests": 7,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.M3RegexRequirementTest",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3ASTHierarchyFactsTest",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3ASTHierarchyTest",
+      "tests": 15,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3ASTWorkspaceCacheNativeTest",
+      "tests": 2,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3ASTWorkspaceCacheTest",
+      "tests": 9,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.m3.compiletime.ast.M3FileSourceFactsTest",
+      "tests": 3,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  ],
+  "ordinary_compile_repair": {
+    "schema": "M3_AST_ORDINARY_LOCAL_SCOPE_V1",
+    "target_revision": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+    "same_blob_at_original_e336": true,
+    "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralHarvester.java",
+    "git_blob": "40400aaa7b1611cc5012a55579a5fed74f0cc3ad",
+    "before_sha256": "e4d1a2bced4ca3f33c743aa4be386ae546f5266f68473fd6e0f3fbba68f335f4",
+    "after_sha256": "0e4212f3adf1ca4c7bc7077d507810b42a342964b563f7ee81fdad469e11b865",
+    "manifest_sha256": "0ddab1b7ecc7a580a62866a08b655409b031bc80b9948f3fe43347b881987713",
+    "recipe": "com.synexia.m3.ASTOrdinaryLocalScope20261017",
+    "change": "Rename the normalized output Path local to publishedDirectory and its two uses; String CLI destination and staging/move behavior remain unchanged.",
+    "discovered_by": "evidence/normal-existing-local-scope-failure.log"
+  },
+  "upstream_leaf_index_selftest": "PASS M3ASTLeafIndexSelfTest checks=86095",
+  "core_jar_sha256": "1ce372fae1f0648f5f46247c4cf38fcd3275370b642c92c71056bfde3eda71d1",
+  "optional_jar_sha256": "dbe5f54210ce9f8592a9fd16401dc83d72d2b32a7d5799b62a80eb4312302966",
+  "compiler_patch_sha256": "3f50d59cca1cf7cf2811c0bb1da9314b71240c7f81f37854ed6fc021f03681b4",
+  "native_library_sha256": "473f80b698901ed1fcfdf4643e7bcb002afb2b78040538861ecbf140d663bf3d",
+  "core_has_openrewrite": false,
+  "module_plugin_discovery": {
+    "schema": "M3_AST_BUILD_RECEIPT_V1",
+    "contextSha256": "7c85cc884e581a3d6253e3fd5a2ad57574d2bf166476131c67e7a2393f243e07",
+    "crossProcessSemanticReuse": false,
+    "parseEvents": 1,
+    "analyzeEvents": 1,
+    "syntaxCaptures": 1,
+    "compilerErrors": 0
+  },
+  "plugin_bytecode_reference_equal": true,
+  "optional_patched_runtime": {
+    "canonical": {
+      "status": "PASSED",
+      "stdout": "SHARED_AST_PASS parses=2 analyzedTypes=4 conversions=2 frozenReads=2 stringAdditions=1\nBYTECODE_EQUAL_PASS classes=4\nDEFAULT_BYTODO_HAZARD_REPRODUCED [PARSE:null, ENTER:null, ANALYZE:sample.Alpha, GENERATE:sample.Alpha, ANALYZE:sample.Beta, GENERATE:sample.Beta, ANALYZE:sample.Gamma, GENERATE:sample.Gamma, COMPILATION:null]\nSHARED_AST_REFUSAL_PASS cases=8\nLAZY_SOURCE_COMPLETION_REFUSAL_PASS baselineParses=1 visitorParses=2 published=0\nOPENREWRITE_SAME_JAVAC_TASK_PASS checks=841",
+      "independent_openrewrite_parser_loaded": false,
+      "proof_source_sha256": {
+        "SharedASTProof.java": "81f989ed64c08ffba974b1b9cf1d9cd23b2d051f20c829b5ffed1268b8f2c3bd",
+        "NoOpenRewriteProbe.java": "1d91f16a67edac4538ce0a77579f0a4046e67f7795894ec25910a1f79e134ad6",
+        "M3OpenRewriteSharedAST.java": "c12d325da4c8fe2dec533ffb728d8e9b815f40c5e65ee1eae54534f4cf2a2884"
+      }
+    },
+    "receiver": {
+      "status": "PASSED",
+      "stdout": "SHARED_AST_PASS parses=2 analyzedTypes=4 conversions=2 frozenReads=2 stringAdditions=1\nBYTECODE_EQUAL_PASS classes=4\nDEFAULT_BYTODO_HAZARD_REPRODUCED [PARSE:null, ENTER:null, ANALYZE:sample.Alpha, GENERATE:sample.Alpha, ANALYZE:sample.Beta, GENERATE:sample.Beta, ANALYZE:sample.Gamma, GENERATE:sample.Gamma, COMPILATION:null]\nSHARED_AST_REFUSAL_PASS cases=8\nLAZY_SOURCE_COMPLETION_REFUSAL_PASS baselineParses=1 visitorParses=2 published=0\nOPENREWRITE_SAME_JAVAC_TASK_PASS checks=841",
+      "independent_openrewrite_parser_loaded": false,
+      "proof_source_sha256": {
+        "SharedASTProof.java": "c31d160cf79f6eb47b96085445b88c0777f7974b34dc5bdebceada7f6f3c6e6f",
+        "NoOpenRewriteProbe.java": "abd4952ee0f209c02b971986f11859c39dffb8a4d8d7d5abf855090ec05c4f72"
+      }
+    }
+  },
+  "canonical_reactor": {
+    "status": "UNAVAILABLE",
+    "reason": "exact pinned parent references modules not hydrated in the supplied checkout",
+    "canonical_metadata": "actual text recipe outputs",
+    "service_source": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/compiler/src/main/resources/META-INF/services/com.sun.source.util.Plugin"
+  },
+  "limits": [
+    "Linux x86_64 stock Java 21.0.2 and pinned compiler patch",
+    "default custom source artifact repository not qualified",
+    "full M3 JDK build, jtreg/JCK, and hosted CI not run in this lane",
+    "optional LST provider retains its documented lifecycle and lazy source completion refusal limits"
+  ],
+  "commands": [
+    {
+      "label": "target-normal-maven",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/5d405a20c026/toolchains/maven-settings.xml",
+        "-Dmaven.repo.local=/workspace/scratch/5d405a20c026/toolchains/m2",
+        "-o",
+        "-Dasm.version=9.6",
+        "-Djunit.artifact.version=5.10.2",
+        "install"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime",
+      "exit_code": 0,
+      "log_sha256": "88e5bea2368f764a654048956005deebf4cd236ccba6af11c450ac9c1b64cad8"
+    },
+    {
+      "label": "upstream-leaf-index-selftest",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx384m",
+        "-Xverify:all",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/target/classes:/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/target/test-classes",
+        "com.m3.compiletime.M3ASTLeafIndexSelfTest"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring",
+      "exit_code": 0,
+      "log_sha256": "660ba53de053c1c0a61504e571af60425c151179f163e7a7accb2efd6d618da3"
+    },
+    {
+      "label": "target-optional-maven",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/5d405a20c026/toolchains/maven-settings.xml",
+        "-Dmaven.repo.local=/workspace/scratch/5d405a20c026/toolchains/m2",
+        "-o",
+        "-Dasm.version=9.6",
+        "-Djunit.artifact.version=5.10.2",
+        "package"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime-openrewrite",
+      "exit_code": 0,
+      "log_sha256": "55a0f0e3ccd621ece8ea8822dcfe710020317fcafaa574b5b6604df96261d4f8"
+    },
+    {
+      "label": "target-native-missing-refusal",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/5d405a20c026/toolchains/maven-settings.xml",
+        "-Dmaven.repo.local=/workspace/scratch/5d405a20c026/toolchains/m2",
+        "-o",
+        "-Dasm.version=9.6",
+        "-Djunit.artifact.version=5.10.2",
+        "-Pm3-ast-native",
+        "-Dm3.cache.native=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/intentionally-missing-native-library",
+        "test"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime",
+      "exit_code": 1,
+      "log_sha256": "4e4bab57c3c95038efc11f8fa9d73e47963222b06c0ccf2e7d9c8b7b0eb829ec"
+    },
+    {
+      "label": "target-native-positive",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/5d405a20c026/toolchains/maven-settings.xml",
+        "-Dmaven.repo.local=/workspace/scratch/5d405a20c026/toolchains/m2",
+        "-o",
+        "-Dasm.version=9.6",
+        "-Djunit.artifact.version=5.10.2",
+        "-Pm3-ast-native",
+        "-Dm3.cache.native=/tmp/m3-ast-final-artifacts-20261017/libsynexia_mindex_swap.so",
+        "test"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime",
+      "exit_code": 0,
+      "log_sha256": "633de1ee4cff0284ddc402e3ad62a24218d24171e9a4d88084d4d68dab89a349"
+    },
+    {
+      "label": "module-plugin-reference",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+        "-J-Xmx512m",
+        "-J--patch-module=jdk.compiler=/tmp/m3-ast-final-artifacts-20261017/m3-javac-patch.jar",
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--release",
+        "21",
+        "-proc:none",
+        "-d",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/plain",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/BuildProbe.java"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "module-plugin-discovery",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+        "-J-Xmx512m",
+        "-J--patch-module=jdk.compiler=/tmp/m3-ast-final-artifacts-20261017/m3-javac-patch.jar",
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--release",
+        "21",
+        "-proc:none",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/target/m3-compiletime-precompute-0.1.0-SNAPSHOT.jar",
+        "-d",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/plugin",
+        "-Xplugin:M3ASTIndex out=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/images",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/BuildProbe.java"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "optional-canonical-compile",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+        "-J-Xmx512m",
+        "-source",
+        "21",
+        "-target",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/target/m3-compiletime-precompute-0.1.0-SNAPSHOT.jar:/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime-openrewrite/target/m3-compiletime-openrewrite-0.1.0-SNAPSHOT.jar:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/test-classes:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/classes:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar:/workspace/scratch/5d405a20c026/toolchains/m2/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-text/1.11.0/commons-text-1.11.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/xerial/snappy/snappy-java/1.1.10.5/snappy-java-1.1.10.5.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm/9.6/asm-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:",
+        "-d",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-canonical/classes",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-canonical/SharedASTProof.java",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-canonical/NoOpenRewriteProbe.java",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/openrewrite/target/candidate/synexia-mindex/compiler-openrewrite/src/main/java/com/synexia/mindex/compiler/ast/M3OpenRewriteSharedAST.java"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "optional-canonical-patched-runtime",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx768m",
+        "-Xverify:all",
+        "-Xlog:class+load=info:file=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-canonical/class-load.log",
+        "--patch-module",
+        "jdk.compiler=/tmp/m3-ast-final-artifacts-20261017/m3-javac-patch.jar",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-canonical/classes:/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/target/m3-compiletime-precompute-0.1.0-SNAPSHOT.jar:/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime-openrewrite/target/m3-compiletime-openrewrite-0.1.0-SNAPSHOT.jar:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/test-classes:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/classes:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar:/workspace/scratch/5d405a20c026/toolchains/m2/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-text/1.11.0/commons-text-1.11.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/xerial/snappy/snappy-java/1.1.10.5/snappy-java-1.1.10.5.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm/9.6/asm-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:",
+        "SharedASTProof",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-canonical/compilations"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring",
+      "exit_code": 0,
+      "log_sha256": "38e97ec300126dbd7a0ff46391620ef3f08e2fe13b92e916e302bb19f6f5fb8f"
+    },
+    {
+      "label": "optional-canonical-no-openrewrite",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx512m",
+        "-Xverify:all",
+        "--patch-module",
+        "jdk.compiler=/tmp/m3-ast-final-artifacts-20261017/m3-javac-patch.jar",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-canonical/classes:/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/target/m3-compiletime-precompute-0.1.0-SNAPSHOT.jar",
+        "NoOpenRewriteProbe",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-canonical/without-openrewrite"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring",
+      "exit_code": 0,
+      "log_sha256": "1c13ad60e55b5014349700ea172b056ab11cdc691495798ebfe1090cc400b055"
+    },
+    {
+      "label": "optional-receiver-compile",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+        "-J-Xmx512m",
+        "-source",
+        "21",
+        "-target",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/target/m3-compiletime-precompute-0.1.0-SNAPSHOT.jar:/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime-openrewrite/target/m3-compiletime-openrewrite-0.1.0-SNAPSHOT.jar:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/test-classes:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/classes:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar:/workspace/scratch/5d405a20c026/toolchains/m2/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-text/1.11.0/commons-text-1.11.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/xerial/snappy/snappy-java/1.1.10.5/snappy-java-1.1.10.5.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm/9.6/asm-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:",
+        "-d",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-receiver/classes",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-receiver/SharedASTProof.java",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-receiver/NoOpenRewriteProbe.java"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "optional-receiver-patched-runtime",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx768m",
+        "-Xverify:all",
+        "-Xlog:class+load=info:file=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-receiver/class-load.log",
+        "--patch-module",
+        "jdk.compiler=/tmp/m3-ast-final-artifacts-20261017/m3-javac-patch.jar",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-receiver/classes:/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/target/m3-compiletime-precompute-0.1.0-SNAPSHOT.jar:/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime-openrewrite/target/m3-compiletime-openrewrite-0.1.0-SNAPSHOT.jar:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/test-classes:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/classes:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar:/workspace/scratch/5d405a20c026/toolchains/m2/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apache/commons/commons-text/1.11.0/commons-text-1.11.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/xerial/snappy/snappy-java/1.1.10.5/snappy-java-1.1.10.5.jar:/workspace/scratch/5d405a20c026/toolchains/m2/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm/9.6/asm-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/5d405a20c026/toolchains/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:",
+        "SharedASTProof",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-receiver/compilations"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring",
+      "exit_code": 0,
+      "log_sha256": "38e97ec300126dbd7a0ff46391620ef3f08e2fe13b92e916e302bb19f6f5fb8f"
+    },
+    {
+      "label": "optional-receiver-no-openrewrite",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx512m",
+        "-Xverify:all",
+        "--patch-module",
+        "jdk.compiler=/tmp/m3-ast-final-artifacts-20261017/m3-javac-patch.jar",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-receiver/classes:/workspace/scratch/5d405a20c026/repos/M3jdk21/m3/ports/compiletime/target/m3-compiletime-precompute-0.1.0-SNAPSHOT.jar",
+        "NoOpenRewriteProbe",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/target/module-proof/optional-receiver/without-openrewrite"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring",
+      "exit_code": 0,
+      "log_sha256": "1c13ad60e55b5014349700ea172b056ab11cdc691495798ebfe1090cc400b055"
+    },
+    {
+      "label": "canonical-reactor-availability",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/5d405a20c026/toolchains/maven-settings.xml",
+        "-Dmaven.repo.local=/workspace/scratch/5d405a20c026/toolchains/m2",
+        "-o",
+        "-pl",
+        "compiler",
+        "-am",
+        "-DskipTests",
+        "compile"
+      ],
+      "cwd": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex",
+      "exit_code": 1,
+      "log_sha256": "131cded4c47884ad0ae2c1e04fe9941ce6ea86307ba1497ef1e655138ca6426d"
+    }
+  ]
+}

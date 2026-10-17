@@ -1,0 +1,443 @@
+{
+  "schema": "M3_AST_CACHE_HIERARCHY_FINAL_GENERATED_PATHS_V1",
+  "status": "all-materialized-bytes-match-sealed-templates",
+  "entries": 46,
+  "counts": {
+    "com.synexia": {
+      "production": 6,
+      "test": 6
+    },
+    "M3jdk21": {
+      "native-build": 1,
+      "native-source": 1,
+      "production": 25,
+      "registry": 1,
+      "test": 6
+    }
+  },
+  "excluded": [
+    "unchanged upstream MIndexASTLeafIndex/M3ASTLeafIndex custody",
+    "unchanged upstream public com.sun.source.util.M3AST custody",
+    "upstream module-info and exact contract test custody",
+    "proof drivers and evidence files",
+    "other agents' frontend, optional adapter, module POM and array-mask outputs"
+  ],
+  "final_handoff": "m3/compiler/ast-sharing-20261017/handoff.json",
+  "files": [
+    {
+      "repository": "M3jdk21",
+      "path": "m3/docs/name-mapping.json",
+      "kind": "registry",
+      "sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+      "authority_manifests": [
+        "frontend/registry/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-registry-20261017/manifest.tsv",
+        "frontend/registry/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-registry-hierarchy-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3ASTHierarchy.java",
+      "kind": "production",
+      "sha256": "54725f3a7017725337f1ef3d51d813a88befa92996dc6a71963d02f4db69617d",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3ASTHierarchyFacts.java",
+      "kind": "production",
+      "sha256": "46f75ab8cbb47725a20ca0cf3a4da6c4153ee17a326d02c6bd7431418ebc8f0c",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3ASTWorkspaceCache.java",
+      "kind": "production",
+      "sha256": "26e47cc50a069b25c45c77a67104b3e0b41abcfb3c6f8ba1ee2dbd452311feec",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3FileSourceFacts.java",
+      "kind": "production",
+      "sha256": "01bb62f9acc4fda98cc93ab63c83e259c22b70ba3a0757b195b071f80f2a74dd",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3ASTCacheTestSupport.java",
+      "kind": "test",
+      "sha256": "fd022b757843e340785bec9145db5db23e659be31cec01d278d1506ee2b76f46",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3ASTHierarchyFactsTest.java",
+      "kind": "test",
+      "sha256": "13f03297bda3fe546c5a29dedcc04524246b7c453684648662f8bca4a80d8722",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3ASTHierarchyTest.java",
+      "kind": "test",
+      "sha256": "ad8f8b64c217b73790f1ece70f1de028a68d16008961509499fb2421eace7b4f",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3ASTWorkspaceCacheNativeTest.java",
+      "kind": "test",
+      "sha256": "6d45fa3b3547a3a8c51958eb93d63e979c888f7beeb41739c06f055f42f2567c",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3ASTWorkspaceCacheTest.java",
+      "kind": "test",
+      "sha256": "e77fec2dc736e9c1581e7d47dbe87644e86c865875aef8569cb0a186c198cad0",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3FileSourceFactsTest.java",
+      "kind": "test",
+      "sha256": "0fc00b688ce30aab99caaa7dfffe57b90a6c286b257f4f0c34b2ed3701adcdfe",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3ASTWorkspaceCache.java",
+      "kind": "production",
+      "sha256": "7ad205f6521a14879ae537ff15a98199dc3b023ae7c69e844aea1f3664f5bae1",
+      "authority_manifests": [
+        "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3FileSourceFacts.java",
+      "kind": "production",
+      "sha256": "3c6052c962b61b5cda14f1eab41a08f23a30c840a94f14ae2f57ef50f8fca32c",
+      "authority_manifests": [
+        "frontend/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-frontend-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/MIndexASTHierarchy.java",
+      "kind": "production",
+      "sha256": "39153fdaf1a926c8331a48a376b200315e4c1beea2c601b53b2ef59113ab3f84",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/MIndexASTHierarchyFacts.java",
+      "kind": "production",
+      "sha256": "0ae813962a2899676d6ea61632809a31ffc53b578c072f3a711a3dacd76742bc",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/native/swap/CMakeLists.txt",
+      "kind": "native-build",
+      "sha256": "e164a6981af9626f797872b1e2a70ebcf77005292459275f463e4d8325eaf8ee",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-cache-native-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/native/swap/mindex_swap.c",
+      "kind": "native-source",
+      "sha256": "4d8c04f5b50498038ce39c7d8412d24340a59c6a5f624c4e47fa1ea145fb762f",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-cache-native-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexAST.java",
+      "kind": "production",
+      "sha256": "69866847dcfcc5fd4036359fdb9eff536561c758935b61b449e2782395aee9d0",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstAdapter.java",
+      "kind": "production",
+      "sha256": "5761bbaea04e6dfa69e1414e1655354d9c457e8bd749119454ac08db33145c63",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstAttempt.java",
+      "kind": "production",
+      "sha256": "b1bf0577ae49794cf5dcf1fe7c12f59de7d2bd8f2b2ac42609453992e967df66",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstCache.java",
+      "kind": "production",
+      "sha256": "6a8d31a2b05f42edf85915c4a48ef753594d3c19c57fbe9de9ef5ec688a8109e",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstKey.java",
+      "kind": "production",
+      "sha256": "abd8354134633d75dcfd85b8e2b7123c94eeb17a4d3ee825993d8a09a8bd2717",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstMaster.java",
+      "kind": "production",
+      "sha256": "eb9647a02b3f4ed40118144d0bf2302c9b8be3bc8ae255e0987e7a78cb80d71d",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstMode.java",
+      "kind": "production",
+      "sha256": "eb4d6f7f4efd3df73bb408ec1a93178d1ecca27d43b6de67f7d8a21994f845f6",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstPressure.java",
+      "kind": "production",
+      "sha256": "70257ee81627b222cb8824c3c82007068fccfe27845fcd89687eda686ef204a4",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstProjection.java",
+      "kind": "production",
+      "sha256": "de231fd4008fc50ff213a5ab3b2e64e8e93cdf6a67ce3a020c162f9a08f58b02",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstScope.java",
+      "kind": "production",
+      "sha256": "87b746952e685baf8f6640a8f983810ff19cb27fef125ab942acef3309872797",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SqliteSwapStore.java",
+      "kind": "production",
+      "sha256": "091c41271c42f3603ee7d64439d612541a875217dc85783700752bbe16d959cf",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapBudgetPlane.java",
+      "kind": "production",
+      "sha256": "88051ebf6e2ab8d73d92e3252fe2a05ab8f9c95894eb1f39ddbf4d019407e4b0",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapNativeLibrary.java",
+      "kind": "production",
+      "sha256": "a1d0724afb9ee986b99e12e666ffc49b72cb0a37804baebf88c8a30e46e28a6c",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/SwapStore.java",
+      "kind": "production",
+      "sha256": "5a99e61ed20a662c8b44957571e9159c7fd3fc784360b659f289a0e8f438b1ee",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-mindex/runtime/src/main/java/com/synexia/mindex/swap/TieredSwapCache.java",
+      "kind": "production",
+      "sha256": "b76151008b20862bc56e14edf48f0034b29f2a7b9d9229bc2c4c085ebfef5ae3",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-native-interop/src/main/java/com/synexia/nativeinterop/JniLibraryLoader.java",
+      "kind": "production",
+      "sha256": "fa22dcfcc2b442c72ee3dd97e5d97dd5c9ad19ee4eac422641336b7477c63699",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "M3jdk21",
+      "path": "m3/vendor/synexia/synexia-native-interop/src/main/java/com/synexia/nativeinterop/NativeLibrarySpec.java",
+      "kind": "production",
+      "sha256": "fd9bc8f19f629e6131dcb55f264eed524fa17e69bdda31d723b4addfddb8a4f5",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-target-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3ASTWorkspaceCache.java",
+      "kind": "production",
+      "sha256": "7ad205f6521a14879ae537ff15a98199dc3b023ae7c69e844aea1f3664f5bae1",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3FileSourceFacts.java",
+      "kind": "production",
+      "sha256": "3c6052c962b61b5cda14f1eab41a08f23a30c840a94f14ae2f57ef50f8fca32c",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/MIndexASTHierarchy.java",
+      "kind": "production",
+      "sha256": "39153fdaf1a926c8331a48a376b200315e4c1beea2c601b53b2ef59113ab3f84",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/MIndexASTHierarchyFacts.java",
+      "kind": "production",
+      "sha256": "0ae813962a2899676d6ea61632809a31ffc53b578c072f3a711a3dacd76742bc",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3ASTCacheTestSupport.java",
+      "kind": "test",
+      "sha256": "79ccef742545a82142ea205b580e7cde384bfbf7d0974e01bae19d721d7093a4",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3ASTWorkspaceCacheNativeTest.java",
+      "kind": "test",
+      "sha256": "7674c6533bf115d4e0515875cba9c95f088fffad364f39b2cea3e702c12e7f64",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3ASTWorkspaceCacheTest.java",
+      "kind": "test",
+      "sha256": "20313c8ec7c35efff91a5ed78bc922cb54922c918c65cd521e83309b5945ba07",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3FileSourceFactsTest.java",
+      "kind": "test",
+      "sha256": "6fffe7cb1d1e99f933f4605d1c4b1c5fb53c3520cf985d51492788ddb3723df4",
+      "authority_manifests": [
+        "cache/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-cache-canonical-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/MIndexASTHierarchyFactsTest.java",
+      "kind": "test",
+      "sha256": "02b3d6004b651df49e19ea21eb45fa4d3af56b65698ca11fd3f6bfd061bbf88e",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/MIndexASTHierarchyTest.java",
+      "kind": "test",
+      "sha256": "2dd14ce51bf0a685d37ddab40c1748dc7908b15aee9b8ab89612f726386ef2a8",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexAST.java",
+      "kind": "production",
+      "sha256": "69866847dcfcc5fd4036359fdb9eff536561c758935b61b449e2782395aee9d0",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/manifest.tsv"
+      ]
+    },
+    {
+      "repository": "com.synexia",
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstCache.java",
+      "kind": "production",
+      "sha256": "6a8d31a2b05f42edf85915c4a48ef753594d3c19c57fbe9de9ef5ec688a8109e",
+      "authority_manifests": [
+        "frontend/hierarchy/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/manifest.tsv"
+      ]
+    }
+  ]
+}

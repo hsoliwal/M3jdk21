@@ -1,0 +1,7 @@
+owner	path	change	authority	status
+M3OpenRewriteSharedAST	../templates/M3OpenRewriteSharedAST.java.txt	optional direct visitor projection of original javac task	class-backed exact Java LST recipe	SDK_AND_RUNTIME_PASSED
+M3HashPinnedJavaSnapshotRecipe	../../../../src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java	reused unchanged existing canonical provider	canonical source pin	PRESERVED
+SharedASTRecipeTest	src/test/java/com/synexia/rewrite/SharedASTRecipeTest.java	actual named SDK emission/fixed-point/refusal	OpenRewrite 8.17.1 + JUnit 5.10.2	PASSED_2_TESTS
+SharedASTProof	proof/SharedASTProof.java	original task, full phase guard, exact syntax/types/bytecode, refusal	stock JDK21 and original frozen core plugin	PASSED_841_ASSERTIONS
+NoOpenRewriteProbe	proof/NoOpenRewriteProbe.java	core index with OpenRewrite absent	stock JDK21 without optional jars	PASSED
+ReceivingSource	synexia-mindex/compiler-openrewrite/src/main/java/com/synexia/mindex/compiler/ast/M3OpenRewriteSharedAST.java	ABSENT to reviewed optional provider	actual SDK Result	CANDIDATE_ONLY

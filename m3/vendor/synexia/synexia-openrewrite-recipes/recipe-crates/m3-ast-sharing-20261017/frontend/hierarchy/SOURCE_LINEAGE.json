@@ -1,0 +1,88 @@
+{
+  "schema": "M3_AST_HIERARCHY_SOURCE_LINEAGE_V1",
+  "donor_commit": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "integration_base": "3aa8e45d93f5fed721fdb64579b655f4a432a308",
+  "source_receipt": "m3/compiler/ast-sharing-20261017/handoff.json",
+  "recipe_owners": {
+    "M3HashPinnedJavaSnapshotRecipe.java": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+    "M3HashPinnedTextSnapshotRecipe.java": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+  },
+  "partial_owner_preimages": [
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstAdapter.java",
+      "git_blob_sha1": "f79c0b23729e697b9ecf61db858bd3c39caf8d14",
+      "sha256": "5761bbaea04e6dfa69e1414e1655354d9c457e8bd749119454ac08db33145c63"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstAttempt.java",
+      "git_blob_sha1": "e6600ad2c84699c06ffc13b899ae04bfd903dc5a",
+      "sha256": "b1bf0577ae49794cf5dcf1fe7c12f59de7d2bd8f2b2ac42609453992e967df66"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstCache.java",
+      "git_blob_sha1": "4b49d33287efae36ec161a0cc0276ca9f394500c",
+      "sha256": "a7f6d096e53366c27660213e3756e73a9e8377dd60d1f680d91112e776aba1cf"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstKey.java",
+      "git_blob_sha1": "d1cec2707d31c9b37efc4d751e9c2c93427cb855",
+      "sha256": "abd8354134633d75dcfd85b8e2b7123c94eeb17a4d3ee825993d8a09a8bd2717"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstMaster.java",
+      "git_blob_sha1": "e631494426316fb67e3c8a60fb3f9c1451247cd0",
+      "sha256": "eb9647a02b3f4ed40118144d0bf2302c9b8be3bc8ae255e0987e7a78cb80d71d"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstMode.java",
+      "git_blob_sha1": "8f63217433cd569a8915c121ebb60c146e5f1d8d",
+      "sha256": "eb4d6f7f4efd3df73bb408ec1a93178d1ecca27d43b6de67f7d8a21994f845f6"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstPressure.java",
+      "git_blob_sha1": "0566f1ad6f9fce3d81b94fb3fd85804558594383",
+      "sha256": "70257ee81627b222cb8824c3c82007068fccfe27845fcd89687eda686ef204a4"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstProjection.java",
+      "git_blob_sha1": "eb42483bdf55b2b110287737bdc82f8dcb291f9c",
+      "sha256": "de231fd4008fc50ff213a5ab3b2e64e8e93cdf6a67ce3a020c162f9a08f58b02"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstScope.java",
+      "git_blob_sha1": "a8f9e141610dfeda7b55cf003b2b0bd7a8c198e8",
+      "sha256": "87b746952e685baf8f6640a8f983810ff19cb27fef125ab942acef3309872797"
+    }
+  ],
+  "existing_ast": {
+    "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexAST.java",
+    "before_sha256": "aa06940e0c182571d89e3ed84b29053f6bf45e63dab43fdd7e6fdc7230e43bff",
+    "after_sha256": "69866847dcfcc5fd4036359fdb9eff536561c758935b61b449e2782395aee9d0"
+  },
+  "existing_partial_cache": {
+    "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstCache.java",
+    "before_sha256": "a7f6d096e53366c27660213e3756e73a9e8377dd60d1f680d91112e776aba1cf",
+    "after_sha256": "6a8d31a2b05f42edf85915c4a48ef753594d3c19c57fbe9de9ef5ec688a8109e"
+  },
+  "manifests": {
+    "canonical": {
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-canonical-20261017/manifest.tsv",
+      "sha256": "8da5ba836914f077e8cee6ffdfef21956babd86d0a8e4efe5903cd2607f9d34a",
+      "count": 6
+    },
+    "receiver": {
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-hierarchy-receiver-20261017/manifest.tsv",
+      "sha256": "3eee1a6a89dff5adbe5daeb80a5331f726c041e7585fdf9e4da1d36acc3fe9c8",
+      "count": 16
+    }
+  },
+  "mapping": "Exact package rename and MIndexASTHierarchy\u2192M3ASTHierarchy; all underlying AST/partial/swap owners remain canonical.",
+  "levels": [
+    "L0 per-file facts and atoms",
+    "L1 file summary",
+    "L2 package",
+    "L3 module",
+    "L4 project",
+    "L5 repository"
+  ]
+}

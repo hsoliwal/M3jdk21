@@ -1,0 +1,32 @@
+{
+  "schema": "M3_OPTIONAL_AST_PUBLICATION_SOURCE_CUSTODY_V1",
+  "status": "passed",
+  "command": [
+    "/workspace/scratch/5d405a20c026/toolchains/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-s",
+    "/workspace/scratch/5d405a20c026/toolchains/maven-settings.xml",
+    "-Dmaven.repo.local=/workspace/scratch/5d405a20c026/toolchains/m2",
+    "-f",
+    "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/openrewrite/pom.xml",
+    "-Dtest=SharedASTRecipeTest",
+    "-Dm3.sharedAst.plugin=/tmp/m3-ast-final-artifacts-20261017/m3-ast-sharing.jar",
+    "test"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 40.344,
+  "log_sha256": "0a05cdcf6af2d3255b0d50f05e329672edfd4fd5158784b48d43c093b112d110",
+  "runtime_proof_rerun": false,
+  "canonical_product_written": false,
+  "tests": {
+    "tests": 2,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "candidate_path": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/openrewrite/target/candidate/synexia-mindex/compiler-openrewrite/src/main/java/com/synexia/mindex/compiler/ast/M3OpenRewriteSharedAST.java",
+  "source_sha256": "c12d325da4c8fe2dec533ffb728d8e9b815f40c5e65ee1eae54534f4cf2a2884",
+  "sdk_receipt_sha256": "54e17eddbfcff45d059ee717cae41a34e541c7baffa2e9439020b19a6269fda9",
+  "provider_custody_pom_sha256": "dc34141f94e256c05521860eb85a992769aa508329a302591ff8552dc6b5c7de"
+}

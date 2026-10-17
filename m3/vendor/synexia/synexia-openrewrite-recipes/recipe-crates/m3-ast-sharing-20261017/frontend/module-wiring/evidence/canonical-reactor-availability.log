@@ -1,0 +1,94 @@
+[INFO] Scanning for projects...
+[ERROR] [ERROR] Some problems were encountered while processing the POMs:
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/runtime/pom.xml of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-core of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-jdk-bridge of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-data-structure of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-algorithm of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-library of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-tool of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-framework of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/precompute-api of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/precompute-jini of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/runtime-jini of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/repository-inventory of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/data-structure of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/algorithm of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/library of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/tool of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/framework of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/codec-toml of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/codec-yaml of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/viewer of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/viewer-rewrite of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/viewer-intellij of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/viewer-jini of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/viewer-swt of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/regex-re2j of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/collections of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/db of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/db-h2 of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/db-sqlite of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/db-derby of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/loader of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/maven-plugin of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/compat-tests of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/context-bridge of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/tabletree-bridge of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/collection-bridge of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/enhanced-runtime of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/sql-jsqlparser of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/foundation of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/class-index of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+[ERROR] Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/resource of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist @ 
+ @ 
+[ERROR] The build could not read 1 project -> [Help 1]
+[ERROR]   
+[ERROR]   The project com.synexia:synexia-mindex-parent:1.0.0-SNAPSHOT (/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml) has 41 errors
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/runtime/pom.xml of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-core of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-jdk-bridge of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-data-structure of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-algorithm of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-library of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-tool of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/m3index-framework of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/precompute-api of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/precompute-jini of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/runtime-jini of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/repository-inventory of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/data-structure of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/algorithm of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/library of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/tool of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/framework of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/codec-toml of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/codec-yaml of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/viewer of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/viewer-rewrite of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/viewer-intellij of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/viewer-jini of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/viewer-swt of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/regex-re2j of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/collections of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/db of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/db-h2 of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/db-sqlite of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/db-derby of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/loader of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/maven-plugin of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/compat-tests of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/context-bridge of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/tabletree-bridge of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/collection-bridge of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/enhanced-runtime of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/sql-jsqlparser of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/foundation of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/class-index of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR]     Child module /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/resource of /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-mindex/pom.xml does not exist
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/ProjectBuildingException

@@ -1,0 +1,53 @@
+{
+  "schema": "M3_UPSTREAM_SOURCE_RECONCILIATION_V1",
+  "donorBaseline": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "integrationBase": "3aa8e45d93f5fed721fdb64579b655f4a432a308",
+  "frontendDependencyCount": 77,
+  "frontendDependencyDrift": [],
+  "cacheExactDonorCount": 9,
+  "cacheExactDonorDrift": [],
+  "recipeOwnerRevision": "3aa8e45d93f5fed721fdb64579b655f4a432a308",
+  "recipeOwners": [
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "gitBlob": "9d0788d3717e017d58345c5c3e62022c2915a3c8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "gitBlob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40"
+    }
+  ],
+  "treeResponsesTruncated": false,
+  "decision": "Reuse the exact upstream recipe owner pair. Existing selected AST, cache, native and loader donors remain byte-identical to their reviewed baseline. The earlier service-path extension is historical evidence, superseded by upstream source.",
+  "currentIntegrationBase": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
+  "currentIntegrationTree": "f1b05841afe7b9f127a4f73ebd7d1eed8490b35a",
+  "sameSelectedOwnersAtCurrentBase": true,
+  "newMIndexOwnersSincePriorCheck": [
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTLeafIndex.java",
+      "git_blob_sha1": "fbce9f518890cd144bd4576e97031f017563e07f"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/test/java/com/synexia/mindex/ast/MIndexASTLeafIndexSelfTest.java",
+      "git_blob_sha1": "8f46f9de8626041c76d6b9ae6a3f7a2b5e2eb10c"
+    }
+  ],
+  "allFourRecipeOwnersAtCurrentBase": [
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "gitBlob": "9d0788d3717e017d58345c5c3e62022c2915a3c8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "gitBlob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "gitBlob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "gitBlob": "d24729950508857280ea1b56d4e930f05137ec85"
+    }
+  ]
+}

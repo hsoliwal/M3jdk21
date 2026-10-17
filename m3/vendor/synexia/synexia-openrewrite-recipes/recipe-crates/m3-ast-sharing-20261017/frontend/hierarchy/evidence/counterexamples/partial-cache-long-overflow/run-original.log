@@ -1,0 +1,3 @@
+maxEntries=1 maxWeight=9223372036854775807 projectionWeight=1 admitted=false entries=0 retainedWeight=0
+Exception in thread "main" java.lang.AssertionError: M3_PARTIAL_CACHE_LONG_BUDGET_COUNTEREXAMPLE: a valid positive budget rejected one tiny projection
+	at PartialCacheLongOverflowProbe.main(PartialCacheLongOverflowProbe.java:29)

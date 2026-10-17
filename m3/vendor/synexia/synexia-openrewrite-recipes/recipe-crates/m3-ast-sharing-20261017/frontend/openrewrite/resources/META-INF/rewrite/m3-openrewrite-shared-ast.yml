@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.OpenRewriteSharedAST20261017
+displayName: Project the existing Java 21 compiler tree into OpenRewrite
+description: Generate the optional guarded adapter from the exact reviewed Java source template.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-openrewrite-shared-ast-20261017

@@ -1,0 +1,100 @@
+{
+  "schema": "M3_AST_PROVIDER_CUSTODY_QUALIFICATION_V1",
+  "status": "PASS",
+  "source_receipt_sha256": "a19bafaa945efe4ae988503cf6842935289c3c7ffa60fa189f91648c2d019afc",
+  "exact_sources": 4,
+  "clean_compiled_projects": 7,
+  "projects": [
+    {
+      "project": "cache",
+      "pom_sha256": "d0c73fd4303fca787a872ad63f72478706a6b4daf1a427add5ab185b8d03a66f",
+      "status": "PASS",
+      "provider_inputs": [
+        "com/synexia/rewrite/M3EditScope.java",
+        "com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+        "com/synexia/rewrite/M3ScopeInference.java"
+      ],
+      "log_sha256": "8c93d18f425e9b44ba3d89cf724a61c9e903cdb17ed19614b6f0fd8716b5b5b7",
+      "elapsed_seconds": 40.593
+    },
+    {
+      "project": "frontend",
+      "pom_sha256": "246597e214b9483c8cb4cf814fb2d8ed422755210e1b3e521cc4fabf7aa7b012",
+      "status": "PASS",
+      "provider_inputs": [
+        "com/synexia/rewrite/M3EditScope.java",
+        "com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+        "com/synexia/rewrite/M3ScopeInference.java"
+      ],
+      "log_sha256": "d988ac3c6aafea8d7511591d39dfa54d2489bf86ce67d549ba5baec939c87701",
+      "elapsed_seconds": 27.837
+    },
+    {
+      "project": "frontend/hierarchy",
+      "pom_sha256": "4b6f478f10b88596f97b7504d2aea88b98042341cfe3c12b4b931191ab070a3d",
+      "status": "PASS",
+      "provider_inputs": [
+        "com/synexia/rewrite/M3EditScope.java",
+        "com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+        "com/synexia/rewrite/M3ScopeInference.java"
+      ],
+      "log_sha256": "10441afa7c6cc5c75ca427c1cd42df431e65197cf13947d9dc6a9f11075e3b76",
+      "elapsed_seconds": 20.907
+    },
+    {
+      "project": "frontend/module-wiring",
+      "pom_sha256": "c29d4e8bb797ad1a490891a2cced1a7a2398b67e6010fdbe2893801e7b2f4475",
+      "status": "PASS",
+      "provider_inputs": [
+        "com/synexia/rewrite/M3EditScope.java",
+        "com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+        "com/synexia/rewrite/M3ScopeInference.java"
+      ],
+      "log_sha256": "f08f231e3081e5be7155974b7ca3553a2438e89b2e52db6f30a5732c6acc7cc5",
+      "elapsed_seconds": 24.197
+    },
+    {
+      "project": "frontend/registry",
+      "pom_sha256": "94f24f2a3100583e4df356b05fa9c869ec4dcb385b930fb603eb8f8537d21ab0",
+      "status": "PASS",
+      "provider_inputs": [
+        "com/synexia/rewrite/M3EditScope.java",
+        "com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+        "com/synexia/rewrite/M3ScopeInference.java"
+      ],
+      "log_sha256": "d09b1c32f4f2ab88c74e1d841d42234c78fe8163c7cdc71614dade6c2a7bf3af",
+      "elapsed_seconds": 29.306
+    },
+    {
+      "project": "frontend/openrewrite",
+      "pom_sha256": "dc34141f94e256c05521860eb85a992769aa508329a302591ff8552dc6b5c7de",
+      "status": "PASS",
+      "provider_inputs": [
+        "com/synexia/rewrite/M3EditScope.java",
+        "com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "com/synexia/rewrite/M3ScopeInference.java"
+      ],
+      "log_sha256": "f3f007ca77acba9fcda65caeb81b651096082f738836ed45508d44321b4c4fe1",
+      "elapsed_seconds": 12.353
+    },
+    {
+      "project": "integration",
+      "pom_sha256": "1bcbc1a8355ddf48c4bf6f67b5887b04f842ef52966ed3c0be935dabd7b68c98",
+      "status": "PASS",
+      "provider_inputs": [
+        "com/synexia/rewrite/M3EditScope.java",
+        "com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+        "com/synexia/rewrite/M3ScopeInference.java"
+      ],
+      "log_sha256": "16ea806dee271bc1cc33568aad30985627526953b03e021e2b635b18257fb22d",
+      "elapsed_seconds": 24.427
+    }
+  ],
+  "production_outputs_changed": false,
+  "scope": "Exact provider bytes and clean authoring compilation; executed recipe SDK behavioral evidence is retained separately."
+}

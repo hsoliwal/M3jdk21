@@ -1,0 +1,7 @@
+{
+  "status": "UNCHANGED_BASELINE_HYDRATED",
+  "path": ".github/workflows/m3-compiletime-precompute.yml",
+  "sha256": "1e5b2e4fede0326274041eb4422b88f09d275b4c6722e3903a676f5b72b764de",
+  "baseline": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "guard": "missing required source refused before product writes; hydrate exact absent baseline, then rerun recipe"
+}

@@ -1,0 +1,84 @@
+{
+  "schema": "M3_AST_HIERARCHY_FINAL_COMPOSED_RECHECK_V1",
+  "status": "passed",
+  "base_frontend_sha256": "f4baf0ae24e58c290a7de403c0571dccbe35c825694729aca40c3408db5b905c",
+  "compiler_patch_sha256": "3f50d59cca1cf7cf2811c0bb1da9314b71240c7f81f37854ed6fc021f03681b4",
+  "build_driver_sha256": "966183e7c22812e0d9e5cc3f4bc29fcbe3d8700bb1c7384a94e6d2716eaff12f",
+  "historical_receipt_sha256": "8f9ab3d98af12ebfe5ce7cc603b28f103da0d331ed8ee95217700b0657f24c47",
+  "commands": [
+    {
+      "label": "isolated-runtime-compile",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/build.py",
+        "--stage",
+        "runtime",
+        "--jdk",
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13",
+        "--base-jar",
+        "/tmp/m3-ast-final-artifacts-20261017/m3-ast-sharing.jar"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 6.189,
+      "log": "isolated-runtime-compile.log",
+      "log_sha256": "9150513d06c0730b6e05e52b7c94c2de19c2356e2535d88f4533cb5a3ed58b5b"
+    },
+    {
+      "label": "final-hierarchy-runtime",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/5d405a20c026/toolchains/maven-settings.xml",
+        "-Dmaven.repo.local=/workspace/scratch/5d405a20c026/toolchains/m2",
+        "-f",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/runtime-tests/pom.xml",
+        "-Dm3.frontend.jar=/tmp/m3-ast-final-artifacts-20261017/m3-ast-sharing.jar",
+        "-Dm3.frontend.patch=/tmp/m3-ast-final-artifacts-20261017/m3-javac-patch.jar",
+        "clean",
+        "test"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 19.137,
+      "log": "final-hierarchy-runtime.log",
+      "log_sha256": "97a97386e49246928b5f44030123840daf8b9b6f6bfa00e22e4a7b6ee9747cf0"
+    }
+  ],
+  "runtime_tests": 40,
+  "test_suites": [
+    {
+      "name": "com.m3.compiletime.ast.M3ASTHierarchyFactsTest",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.m3.compiletime.ast.M3ASTHierarchyTest",
+      "tests": 15,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.synexia.mindex.compiler.ast.MIndexASTHierarchyFactsTest",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.synexia.mindex.compiler.ast.MIndexASTHierarchyTest",
+      "tests": 15,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  ],
+  "unique_production_sources": 14,
+  "sdk_test_sources": 4,
+  "existing_helper_sources": 2,
+  "hierarchy_jar_sha256": "2aa5f9dcea2b64006ff23306b0aa0929ed84f1002047bdae99fb4f45cc7880cb",
+  "compile_receipt_sha256": "509032a22ac199f21addddb7bc6b5adfaf8f25ce37ae50863b9b41654ec2a850"
+}

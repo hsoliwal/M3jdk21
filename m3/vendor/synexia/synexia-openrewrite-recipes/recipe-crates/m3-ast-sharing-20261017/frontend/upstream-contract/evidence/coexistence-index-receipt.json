@@ -1,0 +1,9 @@
+{
+  "schema": "M3_AST_BUILD_RECEIPT_V1",
+  "contextSha256": "8744a77d89993cb6a89b10107602663e451d62d0d340d1fb13c0b5b96823a69a",
+  "crossProcessSemanticReuse": false,
+  "parseEvents": 1,
+  "analyzeEvents": 2,
+  "syntaxCaptures": 1,
+  "compilerErrors": 0
+}

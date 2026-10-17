@@ -1,0 +1,15 @@
+target-normal-maven: 0
+upstream-leaf-index-selftest: 0
+target-optional-maven: 0
+target-native-missing-refusal: 1
+target-native-positive: 0
+module-plugin-reference: 0
+module-plugin-discovery: 0
+optional-canonical-compile: 0
+optional-canonical-patched-runtime: 0
+optional-canonical-no-openrewrite: 0
+optional-receiver-compile: 0
+optional-receiver-patched-runtime: 0
+optional-receiver-no-openrewrite: 0
+canonical-reactor-availability: 1
+{"status": "PASSED_WITH_CANONICAL_REACTOR_UNAVAILABLE", "source_counts": {"ordinary_including_target_facades": 35, "vendor": 103, "actual_maven_compiler_inputs": 138}, "normal_tests": 52, "native_positive_tests": 54}

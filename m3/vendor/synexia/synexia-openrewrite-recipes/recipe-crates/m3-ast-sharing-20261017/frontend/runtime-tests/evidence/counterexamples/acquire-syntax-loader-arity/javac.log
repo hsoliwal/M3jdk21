@@ -1,0 +1,9 @@
+/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/target/candidate/canonical/synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3JavacASTIndex.java:83: error: incompatible types: invalid method reference
+            return Objects.requireNonNull(cache, "cache").acquire(id, facts("javac-public-tree", 1), this::ast);
+                                                                                                     ^
+    method ast in class M3JavacASTIndex.View cannot be applied to given types
+      required: no arguments
+      found:    long
+      reason: actual and formal argument lists differ in length
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+1 error

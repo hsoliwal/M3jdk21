@@ -1,0 +1,13 @@
+usage: qualify.py [-h] [--jdk JDK] [--patch PATCH]
+                  [--artifact-receipt ARTIFACT_RECEIPT] [--work-dir WORK_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --jdk JDK
+  --patch PATCH
+  --artifact-receipt ARTIFACT_RECEIPT
+                        Fresh build_candidates.py ARTIFACTS.json with exact
+                        sealed compiler source pins; omission requires the
+                        historical exact patch pin
+  --work-dir WORK_DIR   New, nonexistent isolated directory; default creates a
+                        unique /tmp directory

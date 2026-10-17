@@ -1,0 +1,15 @@
+test_count_mismatch_refuses (test_artifact_admission.ArtifactAdmissionTest.test_count_mismatch_refuses) ... ok
+test_default_exact_pin_is_preserved (test_artifact_admission.ArtifactAdmissionTest.test_default_exact_pin_is_preserved) ... ok
+test_digest_mismatch_refuses (test_artifact_admission.ArtifactAdmissionTest.test_digest_mismatch_refuses) ... ok
+test_duplicate_receipt_keys_refuse (test_artifact_admission.ArtifactAdmissionTest.test_duplicate_receipt_keys_refuse) ... ok
+test_manifest_drift_refuses (test_artifact_admission.ArtifactAdmissionTest.test_manifest_drift_refuses) ... ok
+test_missing_source_map_refuses_digest_only_override (test_artifact_admission.ArtifactAdmissionTest.test_missing_source_map_refuses_digest_only_override) ... ok
+test_sealed_receipt_admits_its_actual_digest_and_all_four_sources (test_artifact_admission.ArtifactAdmissionTest.test_sealed_receipt_admits_its_actual_digest_and_all_four_sources) ... ok
+test_source_hash_mismatch_refuses (test_artifact_admission.ArtifactAdmissionTest.test_source_hash_mismatch_refuses) ... ok
+test_source_set_mismatch_refuses (test_artifact_admission.ArtifactAdmissionTest.test_source_set_mismatch_refuses) ... ok
+test_template_drift_refuses (test_artifact_admission.ArtifactAdmissionTest.test_template_drift_refuses) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.043s
+
+OK

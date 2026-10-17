@@ -1,0 +1,14 @@
+usage: coexistence.py [-h] --frontend-jar FRONTEND_JAR
+                      (--frontend-sha256 FRONTEND_SHA256 | --artifact-receipt ARTIFACT_RECEIPT)
+                      --patch PATCH
+
+options:
+  -h, --help            show this help message and exit
+  --frontend-jar FRONTEND_JAR
+  --frontend-sha256 FRONTEND_SHA256
+                        Explicit frontend digest used with the exact pinned
+                        compiler proof
+  --artifact-receipt ARTIFACT_RECEIPT
+                        The same source-qualified ARTIFACTS.json used for the
+                        linked compiler proof
+  --patch PATCH

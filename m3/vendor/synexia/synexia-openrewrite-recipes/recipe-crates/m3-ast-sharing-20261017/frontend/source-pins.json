@@ -1,0 +1,387 @@
+[
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexAST.java",
+    "git_blob_sha1": "716f126c6faa70f8cc85aaad0be9b37fc9267fb6",
+    "chars": 11643
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTEdge.java",
+    "git_blob_sha1": "796e5b508e6355c910701c18c3f82f433c174300",
+    "chars": 381
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTFingerprint.java",
+    "git_blob_sha1": "94f7768fee9705de57c79d62e06fc7d8accbc44d",
+    "chars": 1676
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTImage.java",
+    "git_blob_sha1": "2b3424d34c3e9728440881c8242efd4a00b92673",
+    "chars": 7390
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTLimits.java",
+    "git_blob_sha1": "6426f5a6e3029be5c9a088d2be6af2ef20b6ba2f",
+    "chars": 886
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTNode.java",
+    "git_blob_sha1": "6ac5bb7ffbcc685a3dee0108b5a252667facd222",
+    "chars": 1417
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTPool.java",
+    "git_blob_sha1": "9cb091765e48184268c34fc826f4b3ed63e58935",
+    "chars": 12982
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTSnapshot.java",
+    "git_blob_sha1": "0ad2960ff3e6529da68a25fec03770035fd2aa1a",
+    "chars": 1046
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTStore.java",
+    "git_blob_sha1": "5399d518fbd209440113a56dc878c6e56a66ff2c",
+    "chars": 360
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTTraversal.java",
+    "git_blob_sha1": "e8a10cf4eaa5fd3784296e06a98fd37bd7dd6a6c",
+    "chars": 6022
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/experiment/Digests.java",
+    "git_blob_sha1": "a20c478e1da562d83727c31c3f5478d6ddb7df06",
+    "chars": 805
+  },
+  {
+    "relative": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/MIndexJavaAST.java",
+    "git_blob_sha1": "d23ea38d51048478c972b9e19441dde9479372bb",
+    "chars": 11294
+  },
+  {
+    "relative": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/MIndexASTDocument.java",
+    "git_blob_sha1": "1bd5819752d3f67e943639932236ef68b889ee47",
+    "chars": 1362
+  },
+  {
+    "relative": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/MIndexASTOccurrence.java",
+    "git_blob_sha1": "9bec626348ea9cad11afe4b3268054b85972d143",
+    "chars": 624
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/experiment/MIndexPool.java",
+    "git_blob_sha1": "17b72109f82d8137ece796784defbddb1dc667ce",
+    "chars": 2579
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/experiment/MIndexString.java",
+    "git_blob_sha1": "ddd1105438a8174d000661ace27beb0373c09495",
+    "chars": 5770
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/experiment/TokenSpace.java",
+    "git_blob_sha1": "2851225a364ec62d6e3d6a61e5741e5478c5ab2a",
+    "chars": 897
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/experiment/TokenDictionary.java",
+    "git_blob_sha1": "95484cdd08d990ec52765c768924b7d13be42668",
+    "chars": 3196
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexAttributedASTImage.java",
+    "git_blob_sha1": "6b3cc3f9a2dfd309972d2bee2ed02310cf3eea7d",
+    "chars": 8336
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/experiment/Tokenizer.java",
+    "git_blob_sha1": "5d0bb04dd22018b34b72783efc32844c1e235a06",
+    "chars": 1177
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexString.java",
+    "git_blob_sha1": "1840f12a3ea64750d829f6dd2bda7916fc25d9f5",
+    "chars": 16156
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAddress.java",
+    "git_blob_sha1": "da628fe2fd11d8cf6a73e47ccf122cc15e144024",
+    "chars": 1952
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexReferenceDomain.java",
+    "git_blob_sha1": "763bfa12efbb05aea87bba055bc3db6ee610ba21",
+    "chars": 491
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexHybridCodec.java",
+    "git_blob_sha1": "408249367e56820a410d99b077bab77cfff440bf",
+    "chars": 4881
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRef.java",
+    "git_blob_sha1": "609c2eb1eca6de701275f3766c377029b81b121d",
+    "chars": 1345
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexByteSequence.java",
+    "git_blob_sha1": "7db70b7d754fc1fb410dd42e17b757459b8d2c24",
+    "chars": 15815
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexiconSpace.java",
+    "git_blob_sha1": "bd35e4dcf8743b05bf4114d2385ec48af904f3fd",
+    "chars": 9095
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicalView.java",
+    "git_blob_sha1": "0c2e21b51f61242152a1348a0863279623abfbc1",
+    "chars": 2321
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringMetadata.java",
+    "git_blob_sha1": "b2428c746f44d33ebed0289ff445ee57a454876e",
+    "chars": 13222
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPool.java",
+    "git_blob_sha1": "f52d65dfe3469abd7ea55cba614d9f4a0aad079f",
+    "chars": 52573
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCharSequence.java",
+    "git_blob_sha1": "6c0821756c4ac4241ab22c97ca336f07b92cfd2e",
+    "chars": 8683
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeCache.java",
+    "git_blob_sha1": "7f0bc4c5e1fdc01d93ea6d221813f73a7503f619",
+    "chars": 7778
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolReference.java",
+    "git_blob_sha1": "67e54a1f765c6c616ad038c6296850ac83d21cce",
+    "chars": 422
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeImage.java",
+    "git_blob_sha1": "0bb97710e1f19c56cb4b93db6d2fd40a0b83f2a4",
+    "chars": 34742
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/LexicalRef.java",
+    "git_blob_sha1": "17c783817d1f30a509967e83f4a3270a5ee3830a",
+    "chars": 3020
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexString.java",
+    "git_blob_sha1": "92fa09754c4f5f85f29509a7e6077a9f0ad08f8d",
+    "chars": 5219
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolRef.java",
+    "git_blob_sha1": "e914c73b45a6256684bf03d82557cc0774de7fa5",
+    "chars": 1728
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexText.java",
+    "git_blob_sha1": "c3e3f6b7b0b03622613cc741661ec8f13411ae45",
+    "chars": 1192
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCompositeString.java",
+    "git_blob_sha1": "71d1fcada1cec89c1b0d5f0122ca7707d0b1dd58",
+    "chars": 22477
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeProfile.java",
+    "git_blob_sha1": "3bf61751db3acbfd50f687e030bc9d6d98e49f84",
+    "chars": 2335
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/experiment/StringHashes.java",
+    "git_blob_sha1": "6204de238d69c3706dda200d846bf77bc945c629",
+    "chars": 621
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAtomRef.java",
+    "git_blob_sha1": "257ae39b16636083ddaeed4993be5fd6bcd84ac6",
+    "chars": 2589
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNamespaceRegistry.java",
+    "git_blob_sha1": "4b056e8522ca9fa6203e352d9e31f2820922c868",
+    "chars": 7030
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDynamicLiteralPool.java",
+    "git_blob_sha1": "6d59fe5b1ffaef95fd032d764c5096beeb7755d3",
+    "chars": 5484
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicon.java",
+    "git_blob_sha1": "0dfb60fcb9897a41aea47830d742cd40a34469a9",
+    "chars": 7055
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexiconKind.java",
+    "git_blob_sha1": "bcb568151d69dcd8af30b850e7463bef6f8a6b2f",
+    "chars": 663
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNamespace.java",
+    "git_blob_sha1": "0899a80420d070c19bada6a52b1781212c426456",
+    "chars": 1020
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolTable.java",
+    "git_blob_sha1": "13aafab2665434455e390c1e895d4a7a9b18c47d",
+    "chars": 4913
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicalClass.java",
+    "git_blob_sha1": "1245336a19bbfb049b9dd1f6fa0a3e93812039e1",
+    "chars": 1232
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolLexicon.java",
+    "git_blob_sha1": "ec6dc9326a289c0421470d4def092e8b77a01e2d",
+    "chars": 984
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDictionary.java",
+    "git_blob_sha1": "db36dc36b2b3ef0a395db53e04b2441834246b13",
+    "chars": 34100
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegionIds.java",
+    "git_blob_sha1": "735be02401aa541f02fc6e9652f15d804ee74e24",
+    "chars": 529
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/LexicalRange.java",
+    "git_blob_sha1": "27c4d24bee5b766eaaf7af4171feffc64eaa5561",
+    "chars": 668
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAnnotatedString.java",
+    "git_blob_sha1": "3ffebcdc0bb09fb5414bf46abdd98c4014f9243f",
+    "chars": 3135
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/TextMetadata.java",
+    "git_blob_sha1": "5ce261216305e0288f3adba3ca4de02550cf3b3e",
+    "chars": 6288
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/SemanticRef.java",
+    "git_blob_sha1": "ec46885a24d8889e28a10ab2c3b6626e5a465552",
+    "chars": 1999
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexCompositeString.java",
+    "git_blob_sha1": "c2ed3c2e8708730e225dadcb8b95df5983c6843a",
+    "chars": 2084
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNativeOps.java",
+    "git_blob_sha1": "1dbe5138d5e24786a9652c19ce874c54fb44eaec",
+    "chars": 22301
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/DictionaryProvenance.java",
+    "git_blob_sha1": "9c2538718c4a6e3710d4a7f2be413139c331584d",
+    "chars": 1359
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPrecomputePressureBudget.java",
+    "git_blob_sha1": "250bfe260db890cf48c7656a439e8d3e98bd67a3",
+    "chars": 2054
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexHeapAdmission.java",
+    "git_blob_sha1": "10bfb8616756b6257a73b98d7d02adcddc5bf448",
+    "chars": 8018
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTextSearch.java",
+    "git_blob_sha1": "375f931e7ce0d0947a6b7d6a96816f2fdf8c0f30",
+    "chars": 7612
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeIndex.java",
+    "git_blob_sha1": "387bea4d0f54abe331ca9df0b522277bae1eda4b",
+    "chars": 14780
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexProgressMonitor.java",
+    "git_blob_sha1": "763ea75ea1553e679d6fcda271760328defef8cd",
+    "chars": 865
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeMatrixIndex.java",
+    "git_blob_sha1": "645000f43675ffb3d76cea9c2310895b95fc5eaa",
+    "chars": 12164
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDirectInlineKey32.java",
+    "git_blob_sha1": "44dfc9257d60c1107f0e285820090eab527e1bb3",
+    "chars": 16953
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexInt8MatmulPlan.java",
+    "git_blob_sha1": "f4a049c2bd822d60715556ca0c713b2ca58c522f",
+    "chars": 7403
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexExactLookup.java",
+    "git_blob_sha1": "8de88ec4bbfb61994aaa50e57a73c00074643767",
+    "chars": 11272
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexAutomaton.java",
+    "git_blob_sha1": "28a5c10f1b0c859694da2c2ee880667f54ddf717",
+    "chars": 47088
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeCodec.java",
+    "git_blob_sha1": "81d30a2b02bc520673404e4307ed8a10e4dd3030",
+    "chars": 10180
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeKeySource.java",
+    "git_blob_sha1": "39f3aea75ebcde445258c8d469395133fbbc8772",
+    "chars": 539
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemePattern128.java",
+    "git_blob_sha1": "e4fa1af203e7867e30a58e676d73a637cb3b4469",
+    "chars": 10574
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MappedMIndexPackedLexemeIndex.java",
+    "git_blob_sha1": "a6801cee39fcc8a83828536e7c1022f8de5598b6",
+    "chars": 14886
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTensorRuntime.java",
+    "git_blob_sha1": "8f80ee676adb19ec864401a89f78c0be07cc22b9",
+    "chars": 5125
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeKey128.java",
+    "git_blob_sha1": "dda1268b717cffdfdf9c3262a1e7556c2f1711b1",
+    "chars": 3561
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTensorBackend.java",
+    "git_blob_sha1": "a589f2f98b05534101afb3dd370b38476f794760",
+    "chars": 869
+  },
+  {
+    "relative": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeImageFormat.java",
+    "git_blob_sha1": "b9ebe69d6e45866996c8dbf17bc5e7295e6db757",
+    "chars": 3343
+  }
+]

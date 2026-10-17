@@ -1,0 +1,158 @@
+{
+  "schema": "M3_AST_REGISTRY_QUALIFICATION_V2",
+  "status": "passed",
+  "date": "2026-10-17",
+  "target_path": "m3/docs/name-mapping.json",
+  "original_preimage_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+  "intermediate_preimage_sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+  "postimage_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+  "routes": [
+    {
+      "crate": "m3-ast-registry-20261017",
+      "before_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+      "after_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+      "manifest_sha256": "eb1b40276b76a57639775731fc8bdc5113b3d16019bf3aa03a33f6787e1e34b7"
+    },
+    {
+      "crate": "m3-ast-registry-hierarchy-20261017",
+      "before_sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+      "after_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+      "manifest_sha256": "74a6f750737d90cdd56213b3655c82f78d1f1272e14e468c109b71187b043b9a"
+    }
+  ],
+  "recipe": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "recipe_owners": {
+    "M3HashPinnedJavaSnapshotRecipe.java": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+    "M3HashPinnedTextSnapshotRecipe.java": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+  },
+  "source_lineage_sha256": "93725a7de37463b728b4338a4eee272f2fe13056a3fc6aecfbcb111a91b66a87",
+  "sdk": {
+    "qualification_tests": 3,
+    "materialization_tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "actual_sdk_emission": true,
+    "both_exact_preimage_routes_emit_same_postimage": true,
+    "both_orders_of_composed_replay_are_fixedpoint": true,
+    "unrelated_source_preserved": true,
+    "missing_duplicate_preimage_drift_other_route_and_template_drift_refused": true,
+    "product_writes_only_actual_sdk_result": true,
+    "materialized_target_readback": true
+  },
+  "scope": {
+    "existing_mapping_count": 56,
+    "new_mapping_count": 12,
+    "final_mapping_count": 68,
+    "hierarchy_implemented_mappings": 2,
+    "actual_source_manifest_and_template_pins": 38,
+    "global_receiving_sequence_unchanged": true,
+    "global_gates_unchanged": true,
+    "java_base_reservations_unchanged": true,
+    "historical_full_counterpart_status": "pending",
+    "historical_changed_fields": [
+      "reason",
+      "observation"
+    ]
+  },
+  "candidate_validation": {
+    "status": "passed",
+    "schema": "Draft2020-12",
+    "jsonschema_version": "4.23.0",
+    "candidate_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+    "baseline_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+    "schema_sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+    "new_mappings": 12,
+    "exact_preimage_routes": [
+      {
+        "crate": "m3-ast-registry-20261017",
+        "before_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+        "after_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+        "manifest_sha256": "eb1b40276b76a57639775731fc8bdc5113b3d16019bf3aa03a33f6787e1e34b7"
+      },
+      {
+        "crate": "m3-ast-registry-hierarchy-20261017",
+        "before_sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+        "after_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+        "manifest_sha256": "74a6f750737d90cdd56213b3655c82f78d1f1272e14e468c109b71187b043b9a"
+      }
+    ],
+    "unchanged_receiving_sequence": true,
+    "unchanged_global_gates": true,
+    "unchanged_java_base_reservations": true,
+    "full_counterpart_status": "pending",
+    "hierarchy": {
+      "L0": "per-file facts and atoms",
+      "L1": "file summary",
+      "L2": "package",
+      "L3": "module",
+      "L4": "project",
+      "L5": "repository"
+    },
+    "scope_mutations_refused": [
+      "receiving-phase",
+      "migration-gate",
+      "java-base-reservation",
+      "full-counterpart-promotion",
+      "package-level",
+      "target-source-hash"
+    ],
+    "source_template_hashes_verified": 38,
+    "final_commit_handoff": "m3/compiler/ast-sharing-20261017/handoff.json"
+  },
+  "target_validation": {
+    "status": "passed",
+    "schema": "Draft2020-12",
+    "jsonschema_version": "4.23.0",
+    "candidate_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+    "baseline_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+    "schema_sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+    "new_mappings": 12,
+    "exact_preimage_routes": [
+      {
+        "crate": "m3-ast-registry-20261017",
+        "before_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+        "after_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+        "manifest_sha256": "eb1b40276b76a57639775731fc8bdc5113b3d16019bf3aa03a33f6787e1e34b7"
+      },
+      {
+        "crate": "m3-ast-registry-hierarchy-20261017",
+        "before_sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+        "after_sha256": "fb315a1e12dfc53329c9914e503b17100332d842b7a8094e75f769383f23c20b",
+        "manifest_sha256": "74a6f750737d90cdd56213b3655c82f78d1f1272e14e468c109b71187b043b9a"
+      }
+    ],
+    "unchanged_receiving_sequence": true,
+    "unchanged_global_gates": true,
+    "unchanged_java_base_reservations": true,
+    "full_counterpart_status": "pending",
+    "hierarchy": {
+      "L0": "per-file facts and atoms",
+      "L1": "file summary",
+      "L2": "package",
+      "L3": "module",
+      "L4": "project",
+      "L5": "repository"
+    },
+    "scope_mutations_refused": [
+      "receiving-phase",
+      "migration-gate",
+      "java-base-reservation",
+      "full-counterpart-promotion",
+      "package-level",
+      "target-source-hash"
+    ],
+    "source_template_hashes_verified": 38,
+    "final_commit_handoff": "m3/compiler/ast-sharing-20261017/handoff.json"
+  },
+  "historical_initial_ten_mapping_qualification": "history/initial-ten-mappings/QUALIFICATION.json",
+  "final_commit_handoff": "m3/compiler/ast-sharing-20261017/handoff.json",
+  "full_jdk_or_jck_claim": false,
+  "evidence_sha256": {
+    "M3ASTRegistryRecipeTest.txt": "4dbd50ce36ca4c9fcfb0e6b1b25605cf9f3f697751b078e5d191d438c725c6f9",
+    "candidate-validation.json": "785ee22386112b5d0e1f1616de162097784044b7a11d04a46519e67839fadf6e",
+    "sdk-materialization.log": "e9076b7a0c91371470a4a39ab93bd9e686b2b8bc560d50899823093013906d47",
+    "sdk-qualification.log": "616dc4303320200d272702b37c14085b7deccdd82a28f3303b9884c65e78f7db",
+    "target-validation.json": "785ee22386112b5d0e1f1616de162097784044b7a11d04a46519e67839fadf6e"
+  }
+}

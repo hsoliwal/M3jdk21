@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.synexia</groupId>
+    <artifactId>synexia-mindex-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>synexia-mindex-compiler</artifactId>
+  <name>Synexia :: MIndex :: Compiler</name>
+  <dependencies>
+    <dependency>
+      <groupId>com.synexia</groupId>
+      <artifactId>synexia-mindex-runtime</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.synexia</groupId>
+      <artifactId>synexia-mindex-foundation</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.synexia</groupId>
+      <artifactId>synexia-indexstring</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.synexia</groupId>
+      <artifactId>synexia-job</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.synexia</groupId>
+      <artifactId>synexia-native-interop</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.synexia</groupId>
+      <artifactId>synexia-mindex-db</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.synexia</groupId>
+      <artifactId>synexia-mindex-db-h2</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <compilerArgs combine.children="append">
+            <arg>-processorpath</arg><arg>${project.basedir}/src/main/java</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**/*$*</exclude>
+            <exclude>**/M3ASTWorkspaceCacheNativeTest.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <!-- Explicit opt-in: the selected tests fail if -Dm3.cache.native is absent or invalid. -->
+    <profile>
+      <id>m3-ast-native</id>
+      <build><plugins><plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <excludes combine.self="override"><exclude>**/*$*</exclude></excludes>
+        </configuration>
+      </plugin></plugins></build>
+    </profile>
+    <!-- Inspect compiler-owned sources with the named candidate-only recipe. -->
+    <profile>
+      <id>m3-mindex-ast-gpu-recipe</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openrewrite.maven</groupId>
+            <artifactId>rewrite-maven-plugin</artifactId>
+            <version>5.23.1</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia</groupId>
+                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <version>${revision}</version>
+              </dependency>
+            </dependencies>
+            <configuration>
+              <activeRecipes combine.self="override">
+                <recipe>com.synexia.rewrite.M3MIndexAstGpuRecipe</recipe>
+              </activeRecipes>
+              <exportDatatables>true</exportDatatables>
+              <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
+              <failOnDryRunResults>false</failOnDryRunResults>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

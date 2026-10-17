@@ -1,0 +1,8 @@
+{
+  "path": ".github/workflows/m3-compiletime-precompute.yml",
+  "source_revision": "e336c083c90bd882030e9a370949136e191386f2",
+  "unchanged_at": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "git_blob_sha1": "cb827a5cc04f0f8c164c44bd8dcb1bc84871e371",
+  "preimage_sha256": "1e5b2e4fede0326274041eb4422b88f09d275b4c6722e3903a676f5b72b764de",
+  "policy": "Extend the existing compiletime workflow with separately scoped AST qualification; preserve its original precompute job."
+}

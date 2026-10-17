@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "schema": "Draft2020-12",
+  "jsonschema_version": "4.23.0",
+  "candidate_sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+  "baseline_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+  "schema_sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+  "new_mappings": 10,
+  "unchanged_receiving_sequence": true,
+  "unchanged_global_gates": true,
+  "unchanged_java_base_reservations": true,
+  "full_counterpart_status": "pending",
+  "hierarchy": {
+    "L0": "per-file facts and atoms",
+    "L1": "file summary",
+    "L2": "package",
+    "L3": "module",
+    "L4": "project",
+    "L5": "repository"
+  },
+  "scope_mutations_refused": [
+    "receiving-phase",
+    "migration-gate",
+    "java-base-reservation",
+    "full-counterpart-promotion",
+    "package-level",
+    "target-source-hash"
+  ],
+  "source_template_hashes_verified": 27,
+  "final_commit_handoff": "m3/compiler/ast-sharing-20261017/handoff.json"
+}

@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/integration/verify_target_sources.py", line 127, in <module>
+    main()
+  File "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/integration/verify_target_sources.py", line 123, in main
+    print(json.dumps(verify_target(args.target, expected_sources()), sort_keys=True))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/integration/verify_target_sources.py", line 108, in verify_target
+    require(actual == item["sha256"], "receiver source drift: " + relative +
+  File "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/integration/verify_target_sources.py", line 50, in require
+    raise ValueError(message)
+ValueError: receiver source drift: m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3FileSourceFacts.java (expected 01bb62f9acc4fda98cc93ab63c83e259c22b70ba3a0757b195b071f80f2a74dd, got 7dcdb49c649ddba6de1d8dac919991171383312062f0c5db7592d2234a0042f9)

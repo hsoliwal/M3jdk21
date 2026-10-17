@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ASTOrdinaryLocalScope20261017
+displayName: Restore ordinary compiler module local-variable compilation
+description: Rename one duplicate Path local without changing staging or publication behavior.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-ordinary-local-scope-20261017

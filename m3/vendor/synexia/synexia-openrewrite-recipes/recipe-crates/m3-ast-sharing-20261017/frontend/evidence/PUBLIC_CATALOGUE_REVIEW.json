@@ -1,0 +1,26 @@
+{
+  "observed": "2026-10-17",
+  "disposition": "EVIDENCE_ONLY",
+  "copied_challenge_expression": false,
+  "sources": [
+    {
+      "url": "https://leetcode.com/problems/lru-cache/",
+      "category": "access-order eviction",
+      "selection": "Existing TieredSwapCache already owns this operation; use category for boundary tests."
+    },
+    {
+      "url": "https://www.hackerrank.com/challenges/java-dequeue/problem",
+      "category": "finite sliding-window/deque state",
+      "selection": "Category comparison only; no replacement of cache owner."
+    },
+    {
+      "url": "https://www.geeksforgeeks.org/dsa/design-a-data-structure-for-lru-cache/",
+      "category": "indexed recency",
+      "selection": "Category comparison only; inspected existing first-party implementation remains selected."
+    }
+  ],
+  "rejected_lookup": {
+    "url": "https://www.geeksforgeeks.org/dsa/lru-cache-implementation/",
+    "reason": "Unreachable; resolved to the actual design page through site search."
+  }
+}

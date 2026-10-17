@@ -1,0 +1,90 @@
+{
+  "status": "passed",
+  "sdk_tests": 3,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "sdk_passes": [
+    "qualification-before-write",
+    "materialization-and-fixedpoint"
+  ],
+  "before_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+  "after_sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+  "source_base": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "target_base": "e336c083c90bd882030e9a370949136e191386f2",
+  "text_recipe_source_sha256": "99a1ff392d426f8deac0d3b79c67f5290de74995615a618f4e7e0dc1abff137b",
+  "candidate_validation": {
+    "status": "passed",
+    "schema": "Draft2020-12",
+    "jsonschema_version": "4.23.0",
+    "candidate_sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+    "baseline_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+    "schema_sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+    "new_mappings": 10,
+    "unchanged_receiving_sequence": true,
+    "unchanged_global_gates": true,
+    "unchanged_java_base_reservations": true,
+    "full_counterpart_status": "pending",
+    "hierarchy": {
+      "L0": "per-file facts and atoms",
+      "L1": "file summary",
+      "L2": "package",
+      "L3": "module",
+      "L4": "project",
+      "L5": "repository"
+    },
+    "scope_mutations_refused": [
+      "receiving-phase",
+      "migration-gate",
+      "java-base-reservation",
+      "full-counterpart-promotion",
+      "package-level",
+      "target-source-hash"
+    ],
+    "source_template_hashes_verified": 27,
+    "final_commit_handoff": "m3/compiler/ast-sharing-20261017/handoff.json"
+  },
+  "target_validation": {
+    "status": "passed",
+    "schema": "Draft2020-12",
+    "jsonschema_version": "4.23.0",
+    "candidate_sha256": "d427edb3c78cd931204ee92d6fc734a769d841c483c3f1180e600b5a0b6c2561",
+    "baseline_sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
+    "schema_sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+    "new_mappings": 10,
+    "unchanged_receiving_sequence": true,
+    "unchanged_global_gates": true,
+    "unchanged_java_base_reservations": true,
+    "full_counterpart_status": "pending",
+    "hierarchy": {
+      "L0": "per-file facts and atoms",
+      "L1": "file summary",
+      "L2": "package",
+      "L3": "module",
+      "L4": "project",
+      "L5": "repository"
+    },
+    "scope_mutations_refused": [
+      "receiving-phase",
+      "migration-gate",
+      "java-base-reservation",
+      "full-counterpart-promotion",
+      "package-level",
+      "target-source-hash"
+    ],
+    "source_template_hashes_verified": 27,
+    "final_commit_handoff": "m3/compiler/ast-sharing-20261017/handoff.json"
+  },
+  "changed_product_paths": [
+    "m3/docs/name-mapping.json"
+  ],
+  "allowed_historical_record_fields": [
+    "reason",
+    "observation"
+  ],
+  "whole_family_or_receiving_promotion": false,
+  "logs": {
+    "sdk-materialization.log": "36c8f212b7660d94b691528a8c1eea19377263ec59e317e59f25e747b2ba1920",
+    "sdk-qualification.log": "fe50b1a3763403017fde1f4a9604e604084d8c9c7686b1dc5eb41d15c655ee3a"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "M3_AST_EXACT_PROVIDER_CUSTODY_V1",
+  "repository": "hsoliwal/com.synexia",
+  "revision": "3aa8e45d93f5fed721fdb64579b655f4a432a308",
+  "verified_unchanged_at": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
+  "copied_without_changes": true,
+  "incumbent_receiving_global_providers_modified": false,
+  "sources": [
+    {
+      "path": "com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+      "git_blob_sha1": "9d0788d3717e017d58345c5c3e62022c2915a3c8"
+    },
+    {
+      "path": "com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+      "git_blob_sha1": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40"
+    },
+    {
+      "path": "com/synexia/rewrite/M3EditScope.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "git_blob_sha1": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db"
+    },
+    {
+      "path": "com/synexia/rewrite/M3ScopeInference.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
+      "git_blob_sha1": "d24729950508857280ea1b56d4e930f05137ec85"
+    }
+  ]
+}

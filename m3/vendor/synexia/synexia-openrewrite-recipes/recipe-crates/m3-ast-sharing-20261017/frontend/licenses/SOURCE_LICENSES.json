@@ -1,0 +1,26 @@
+[
+  {
+    "source_repository": "hsoliwal/M3jdk21",
+    "source_revision": "e336c083c90bd882030e9a370949136e191386f2",
+    "source_path": "LICENSE",
+    "source_git_blob": "8b400c7ab81b7b18baff3f81d597f5e511883134",
+    "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726",
+    "custody_path": "JDK21-LICENSE.txt"
+  },
+  {
+    "source_repository": "hsoliwal/M3jdk21",
+    "source_revision": "e336c083c90bd882030e9a370949136e191386f2",
+    "source_path": "ADDITIONAL_LICENSE_INFO",
+    "source_git_blob": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b",
+    "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+    "custody_path": "JDK21-ADDITIONAL_LICENSE_INFO.txt"
+  },
+  {
+    "source_repository": "hsoliwal/M3jdk21",
+    "source_revision": "e336c083c90bd882030e9a370949136e191386f2",
+    "source_path": "ASSEMBLY_EXCEPTION",
+    "source_git_blob": "429666664e9ff5029d51dc7f807e1ec9eff2dd9f",
+    "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33",
+    "custody_path": "JDK21-ASSEMBLY_EXCEPTION.txt"
+  }
+]

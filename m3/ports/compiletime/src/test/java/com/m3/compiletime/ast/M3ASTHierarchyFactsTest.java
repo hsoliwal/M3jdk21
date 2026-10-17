@@ -1,0 +1,87 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Hitesh Soliwal and contributors
+package com.m3.compiletime.ast;
+
+import com.synexia.mindex.compiler.ast.MIndexASTDocument;
+import com.synexia.mindex.compiler.ast.MIndexASTOccurrence;
+import com.synexia.mindex.compiler.ast.MIndexJavaAST;
+
+import static org.junit.jupiter.api.Assertions.*;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+class M3ASTHierarchyFactsTest {
+    private static final String CONTEXT = M3FileSourceFacts.contextSha256(List.of("hierarchy-config"));
+    private static final String ID = M3FileSourceFacts.contextSha256(List.of("exact-node-input"));
+    private static M3ASTHierarchyFacts facts(M3ASTHierarchy.Level level, String provider, long... values) {
+        return new M3ASTHierarchyFacts(level, ID, CONTEXT, provider, 1, values);
+    }
+
+    @Test void immutableArrayValueSemantics() {
+        long[] values = {2, 7};
+        var facts = facts(M3ASTHierarchy.Level.L0_FILE_FACTS, "counts", values);
+        values[0] = 99;
+        facts.values()[1] = 100;
+        assertArrayEquals(new long[] {2, 7}, facts.values());
+        var equal = facts(M3ASTHierarchy.Level.L0_FILE_FACTS, "counts", 2, 7);
+        assertEquals(equal, facts);
+        assertEquals(equal.hashCode(), facts.hashCode());
+        assertNotEquals(facts(M3ASTHierarchy.Level.L1_FILE, "counts", 2, 7), facts);
+        assertThrows(IndexOutOfBoundsException.class, () -> facts.value(2));
+    }
+
+    @Test void allLevelsRoundTripExactUtf16AndLongValues() throws Exception {
+        var codec = new M3ASTHierarchyFacts.Codec(4);
+        for (var level : M3ASTHierarchy.Level.values()) {
+            var value = facts(level, "provider-\uD800-\uDFFF", 0, Long.MAX_VALUE, 7, 1);
+            assertEquals(value, codec.decode(codec.encode(value)));
+            assertTrue(codec.weight(value) > 0);
+        }
+    }
+
+    @Test void corruptionAndTruncationRefuseBeforePublication() throws Exception {
+        var codec = new M3ASTHierarchyFacts.Codec(2);
+        byte[] bytes = codec.encode(facts(M3ASTHierarchy.Level.L5_REPOSITORY, "p", 7));
+        for (int index : new int[] {0, 8, 32, 90, bytes.length - 1}) {
+            byte[] bad = bytes.clone(); bad[index] ^= 1;
+            assertThrows(IOException.class, () -> codec.decode(bad));
+        }
+        for (int length : new int[] {0, 119, bytes.length - 1}) {
+            assertThrows(IOException.class, () -> codec.decode(Arrays.copyOf(bytes, length)));
+        }
+        assertThrows(IOException.class, () -> codec.decode(new byte[1 << 20]));
+    }
+
+    @Test void authenticatedInvalidGeometryAndNegativeFactsRefuse() throws Exception {
+        var codec = new M3ASTHierarchyFacts.Codec(2);
+        byte[] bytes = codec.encode(facts(M3ASTHierarchy.Level.L0_FILE_FACTS, "p", 7));
+        for (int[] mutation : new int[][] {{8, 6}, {12, 0}, {80, Integer.MAX_VALUE}, {86, Integer.MAX_VALUE}}) {
+            byte[] bad = bytes.clone(); ByteBuffer.wrap(bad).putInt(mutation[0], mutation[1]);
+            reseal(bad);
+            assertThrows(IOException.class, () -> codec.decode(bad));
+        }
+        byte[] negative = bytes.clone(); ByteBuffer.wrap(negative).putLong(90, -1); reseal(negative);
+        assertThrows(IOException.class, () -> codec.decode(negative));
+    }
+
+    @Test void constructorAndCodecAdmissionBoundsRefuse() {
+        assertThrows(IllegalArgumentException.class, () -> facts(M3ASTHierarchy.Level.L0_FILE_FACTS, "p", -1));
+        assertThrows(IllegalArgumentException.class, () -> facts(M3ASTHierarchy.Level.L0_FILE_FACTS, "p"));
+        assertThrows(IllegalArgumentException.class, () -> facts(M3ASTHierarchy.Level.L0_FILE_FACTS, " ", 1));
+        assertThrows(IllegalArgumentException.class, () -> new M3ASTHierarchyFacts.Codec(257));
+        assertThrows(IOException.class, () -> new M3ASTHierarchyFacts.Codec(1)
+                .encode(facts(M3ASTHierarchy.Level.L0_FILE_FACTS, "p", 1, 2)));
+        assertThrows(IllegalArgumentException.class, () -> new M3ASTHierarchyFacts(
+                M3ASTHierarchy.Level.L0_FILE_FACTS, "short", CONTEXT, "p", 1, new long[] {1}));
+    }
+
+    private static void reseal(byte[] bytes) throws Exception {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        digest.update(bytes, 0, bytes.length - 32);
+        System.arraycopy(digest.digest(), 0, bytes, bytes.length - 32, 32);
+    }
+}

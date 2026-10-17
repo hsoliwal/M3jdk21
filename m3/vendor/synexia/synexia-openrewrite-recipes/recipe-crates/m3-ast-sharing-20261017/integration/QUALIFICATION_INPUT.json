@@ -1,0 +1,270 @@
+{
+  "levels": [
+    {
+      "level": 0,
+      "scope": "PER_FILE_FACTS_AND_ATOMS"
+    },
+    {
+      "level": 1,
+      "scope": "FILE_SUMMARY"
+    },
+    {
+      "level": 2,
+      "scope": "PACKAGE"
+    },
+    {
+      "level": 3,
+      "scope": "MODULE"
+    },
+    {
+      "level": 4,
+      "scope": "PROJECT"
+    },
+    {
+      "level": 5,
+      "scope": "REPOSITORY"
+    }
+  ],
+  "hierarchy_description": "The hierarchy stores child ranges and indexes in primitive arrays and evaluates admitted providers from leaves upward. Each published result binds source, complete caller-declared compilation context, provider, phase, and explicit dependency closure. Existing partial-AST and swap owners enforce lazy access and leases; a changed source generation receives a different identity.",
+  "plugin_sha256": "f4baf0ae24e58c290a7de403c0571dccbe35c825694729aca40c3408db5b905c",
+  "patch_sha256": "3f50d59cca1cf7cf2811c0bb1da9314b71240c7f81f37854ed6fc021f03681b4",
+  "native_library_sha256": "473f80b698901ed1fcfdf4643e7bcb002afb2b78040538861ecbf140d663bf3d",
+  "artifact_source_counts": {
+    "runtime_sources": 103,
+    "facade_sources": 10,
+    "compiler_sources": 4
+  },
+  "compiler_source_sha256": {
+    "com/sun/source/util/M3AST.java": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+    "com/sun/tools/javac/m3/M3ASTPC.java": "a834fe19fdfdfa74f8641f3d02e552d19ed4eea97088d4739fb397ab5f36429b",
+    "com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java": "0c236a3e9c8ac5507865ec9b15d45f83312eece4a6b6c4e27dd5f4cfb302824d",
+    "com/sun/tools/javac/main/JavaCompiler.java": "51c5426f32877d03b30554646e559e65f264de92ccfa820799936a54f1d48fc3"
+  },
+  "runtime_source_sha256": {
+    "com.m3.compiletime.ast.M3AST": "d6384d68addb1702ac5fc15708dd603aee270eff2281a7b999576e44db4adcbb",
+    "com.m3.compiletime.ast.M3ASTCodec": "b321a44eb790e503a94942482d84261f3368915c7ddbc06937ad583c74b5281b",
+    "com.m3.compiletime.ast.M3ASTHierarchy": "54725f3a7017725337f1ef3d51d813a88befa92996dc6a71963d02f4db69617d",
+    "com.m3.compiletime.ast.M3ASTHierarchyFacts": "46f75ab8cbb47725a20ca0cf3a4da6c4153ee17a326d02c6bd7431418ebc8f0c",
+    "com.m3.compiletime.ast.M3ASTPlugin": "0038001c542a432d9f796d80ecae61404b8f76ef9a2ffdfab88426097d2fe75d",
+    "com.m3.compiletime.ast.M3ASTWorkspaceCache": "26e47cc50a069b25c45c77a67104b3e0b41abcfb3c6f8ba1ee2dbd452311feec",
+    "com.m3.compiletime.ast.M3CompilationContext": "a71eb9aff9df4bc32bd31d20d97e711f97bcbf017a6c26e96a9665bfd69f3e23",
+    "com.m3.compiletime.ast.M3File": "da2925fa912753fcd2cb69fd9c348c6fc1c2fc235a2ce1be006360597dd8565c",
+    "com.m3.compiletime.ast.M3FileSourceFacts": "01bb62f9acc4fda98cc93ab63c83e259c22b70ba3a0757b195b071f80f2a74dd",
+    "com.m3.compiletime.ast.M3JavacASTIndex": "e381f163515d46ad8e2032622e9eb581a6a028a3b3d04fe37fa75430fe9336b5",
+    "com.synexia.mindex.DictionaryProvenance": "d58f223bce198727ca2d998ff76975c4fc4a718030482a32856d3122507c45c9",
+    "com.synexia.mindex.LexicalRange": "d34fc220b940b3f96e057221978d8812760f2616e5c69988eb74eb997c0735b0",
+    "com.synexia.mindex.LexicalRef": "ed16dea8dbbb5cde018d105a6e48332974bb96e52806fe785e2cab061f18eb8c",
+    "com.synexia.mindex.MIndexAddress": "089bf57fd8dfba766381296fe3727d7411865c8f73e4865b97162633715b3f31",
+    "com.synexia.mindex.MIndexAnnotatedString": "7fe91ad87bb3f63b981ce04a560652db266d416ce582ee75a8ed886298c355bf",
+    "com.synexia.mindex.MIndexAtomRef": "97d87e442435007884352f1692184abffec73145e86a8a7f3dafc2b4e0746376",
+    "com.synexia.mindex.MIndexByteSequence": "8d7a175fad15457b84d0deaa770f7de40baead3a466b63cd8709b4c5f388715e",
+    "com.synexia.mindex.MIndexCharSequence": "4d435e90316b69b5d4a67bdc5a46db1bf2e8d4db17e25efeb42fa899b1b37313",
+    "com.synexia.mindex.MIndexCompositeString": "8037a689789fc351ccdeef8105122a961a6722bb27e8f54cfe42cfd2370365e3",
+    "com.synexia.mindex.MIndexDictionary": "9a5c39eb1621d52c4aa53f51c06dd7c0c7ee93169edd4110831172a854586ab6",
+    "com.synexia.mindex.MIndexDirectInlineKey32": "58f8484f8332f6968ba9102968ce68ac66ce95d9a4f9c29a6e5bd2c8a4c2af22",
+    "com.synexia.mindex.MIndexDynamicLiteralPool": "9737c652fe4c608a86cc4de4a8239e206197cdc53a05098af8049544d5e61203",
+    "com.synexia.mindex.MIndexExactLookup": "991b72e2750df5b44b0e8e8113946c0f76909b817792d9fc956a2a02045475b7",
+    "com.synexia.mindex.MIndexHeapAdmission": "1d427c7daf0885dfd9b5a6e3f89aa94592c0a98a39017057e1ec46ba8132ffa7",
+    "com.synexia.mindex.MIndexHybridCodec": "c7e36a23613dfb25c4aff4a103d8834997b0e307e2604ad382c93cf0d3a18bc7",
+    "com.synexia.mindex.MIndexInt8MatmulPlan": "469e247f69bdc4c304095bbe7ce9909283ea70c5879d1a589d5621e5430669a6",
+    "com.synexia.mindex.MIndexLexemeCodec": "edd4a0658423bf86c7bcae538ddf10008ba6b059c01e2e350ceb086404a5eb30",
+    "com.synexia.mindex.MIndexLexemeKey128": "8731b80b3cfba656cab84f257a7336037dce6a84b1b48abb851044969fc3d22d",
+    "com.synexia.mindex.MIndexLexemeMatrixIndex": "4e2ab463f4e10d596deff4c7f23cf1a6d5c7c33d8408afdb96df35a90422d6b3",
+    "com.synexia.mindex.MIndexLexemePattern128": "a3b35fcd47b55ea22252db29b395d824cb19b3c4a0418e86d8c5371b91a7c63e",
+    "com.synexia.mindex.MIndexLexicalClass": "89ff14d7659a2d608b5c298f2f8aa1c09aeddf0a8c77eb0648b012010864428e",
+    "com.synexia.mindex.MIndexLexicalView": "a8f635b3793d6431b4693a51432956a36bc2d45898a96cabcc96320bd5cae5a2",
+    "com.synexia.mindex.MIndexLexicon": "427bc86341fb45759b9c7b9f76e32f03d1c9fad2c769ba5fe4164058923b2b46",
+    "com.synexia.mindex.MIndexLexiconKind": "de77c40f9d20c42964ae8f723f11a1a9f4f156cd971624a22427a67d6b192272",
+    "com.synexia.mindex.MIndexLexiconSpace": "b1866997ade85b3eef7bf0440f150f4188a5e1f17090e2dce29dba41e3ed2efc",
+    "com.synexia.mindex.MIndexNamespace": "badf873e6a4dc9a1bf80ad7db1311e0e35239515522cd2c1c0f6eff09a5cd8af",
+    "com.synexia.mindex.MIndexNamespaceRegistry": "cc4f76a4f8fd477aa7c4d64448de7cb7ec23bed526c4f0a529bb7fb8a15f7f5e",
+    "com.synexia.mindex.MIndexNativeOps": "a85817f89b0f2e1395674f534895ad735597cfb0b35e9c82a34061741bd93523",
+    "com.synexia.mindex.MIndexPackedLexemeImageFormat": "ebd3933e1207ccdb4ecde62f62b1bd4ea344cd2287f74a6c20f1b5b3920ca1d1",
+    "com.synexia.mindex.MIndexPackedLexemeIndex": "4b6c8f27756282a4718d08904c15b12a2ad450a9b4b4bf4ae0ab3e44bc24f1bc",
+    "com.synexia.mindex.MIndexPackedLexemeKeySource": "6c9966d9647efb118e8d6f9a1d870507565f76cc8030f7f1ef6322b12aacd94d",
+    "com.synexia.mindex.MIndexPrecomputePressureBudget": "d69b92dd018bfa9d66ff2daed5599a417db65346348b295c7bb1395a1b8175c6",
+    "com.synexia.mindex.MIndexProgressMonitor": "b907a5acfdd98e139abb5fe41ea86c35bf4f3f15481086a5831b0e60ee8ac728",
+    "com.synexia.mindex.MIndexRef": "467c945c87277716c9dfaab70096d52b850e26c93bd6ece74dce14dd71c574d6",
+    "com.synexia.mindex.MIndexReferenceDomain": "d866181d5073a995bbab3a0e4020056de8fcf84f4d2d1ec55dd32f7b7e8e0853",
+    "com.synexia.mindex.MIndexRegexAutomaton": "c4cd9feb7645ccd1ef7fc66d165e33ee74fb9fbf6002d80518c228df47290b46",
+    "com.synexia.mindex.MIndexRegionIds": "22b41820e00f326901b8a01e5f747ba7e7b7bf7159e3ca00403d0d7a6b21e7d2",
+    "com.synexia.mindex.MIndexString": "d6856891b706dc9f38e8941438323629f5831d6f7117ba78699ce9c6f2612b91",
+    "com.synexia.mindex.MIndexStringMetadata": "8040fd1512cf94d1df7dd490996483161c32fc4954d34286153d228642d3863a",
+    "com.synexia.mindex.MIndexStringPool": "710bceb90527383f91a93da35bbaadc4eab982705552a334e167d4e9463c5310",
+    "com.synexia.mindex.MIndexStringPrecomputeCache": "f189e35ea7583da3a0626049f7e7f92e29c234d45bc1de0065cd9d6a0ab0aa28",
+    "com.synexia.mindex.MIndexStringPrecomputeImage": "1d952e3cca08d9cb3eef2753e1884dda95ba3185c7fca2c65ce1b2ba10282553",
+    "com.synexia.mindex.MIndexStringPrecomputeProfile": "45527b9177122a21303ecfc9c3d398c1fc6e6a2e7d8dea048ceba3696f619e11",
+    "com.synexia.mindex.MIndexSymbolLexicon": "7ddcbe639c2f5a063dff8cc1011ccb9223ae181f03e228549a505c62d0be7006",
+    "com.synexia.mindex.MIndexSymbolRef": "d1de86d86f60f46fa5eea0f7876934f4a1a86d05ff7dd29dc57e2831f547e2c8",
+    "com.synexia.mindex.MIndexSymbolReference": "df2b6427ad40e0048c02331358cf5718253259d11ff6f967a157d2b521adb3f5",
+    "com.synexia.mindex.MIndexSymbolTable": "bee438df9cddd934fed60ba515878e86f1215040bef83d16daadf4be7ad6be38",
+    "com.synexia.mindex.MIndexTensorBackend": "c5e38f3af3b550aeaad62a6a97e1292d4ab04663b81770dbf7a740d6eab6d122",
+    "com.synexia.mindex.MIndexTensorRuntime": "9b7da793a7c824450c4be67379e0ac9452943d8e074c3ed6f4291abfd19e19b9",
+    "com.synexia.mindex.MIndexText": "d208020eba0af22422a4d007f3fdf05d83d2c3b90faac460b1d7152877671a4a",
+    "com.synexia.mindex.MIndexTextSearch": "55c53897ba686029cddcf2156092f0dbc186cdc27d112ed442b1b7d3292978b9",
+    "com.synexia.mindex.MappedMIndexPackedLexemeIndex": "a48151de622e189424d2fe8014c9de5d285f75e3c31e7bcc12dce2a8dcab8558",
+    "com.synexia.mindex.SemanticRef": "6e381b3ae3eeb0bd0c240ee289a7de29a4ee9dd6f741bd9bf19f9dabe0ad9a1e",
+    "com.synexia.mindex.SubMIndexCompositeString": "d5726cf3f86afa5de2ddcd4d5bb64a4d68a5d0b5db5c1a0ecf8d2d439a03de74",
+    "com.synexia.mindex.SubMIndexString": "80625746ec369c7071d97685e7742359e80b73f7c8b246de76e59655fa1289b7",
+    "com.synexia.mindex.TextMetadata": "6407591f0da1d3e0d79007ad39b55922892e4127686aad29f3e35eb187b44e84",
+    "com.synexia.mindex.ast.MIndexAST": "69866847dcfcc5fd4036359fdb9eff536561c758935b61b449e2782395aee9d0",
+    "com.synexia.mindex.ast.MIndexASTEdge": "c3ecebdaab2af3d9fd1de9ac4bf97715ce72ff5f8abe2721b753b31117ba798c",
+    "com.synexia.mindex.ast.MIndexASTFingerprint": "2525a06c350331704ae871d5058a7985441ac0f7fd394c2e45a52fdefa20f8bf",
+    "com.synexia.mindex.ast.MIndexASTImage": "cf055b8bad5f57e976427c99a5d8ead55642f5da736448dd40243dbb46a6db5b",
+    "com.synexia.mindex.ast.MIndexASTLimits": "8dc358c3a403720fd7cb85c197c97e3476e52164d224e7f8f3bfb58bacc43247",
+    "com.synexia.mindex.ast.MIndexASTNode": "e78d1caadddeadbe6079c78d2c88780a28327fd4f462b72d679155308e570c04",
+    "com.synexia.mindex.ast.MIndexASTPool": "d8be00b2aa61aa956e4f73e869b78c10320eab4879a8f40e0f6ce9f0a4169cc1",
+    "com.synexia.mindex.ast.MIndexASTSnapshot": "8c2bd7559db0639da9db923452bc7c7386eb8bb1689bef105b890505be19ab83",
+    "com.synexia.mindex.ast.MIndexASTStore": "2ba8efcc1c670c0a10398b959c69441a18e0f8b96742d5285db1f815ccf683c0",
+    "com.synexia.mindex.ast.MIndexASTTraversal": "0560f1c58ddab188a3449367f29e1c83ce12c8f239e92dd60b12ffec6fb2623e",
+    "com.synexia.mindex.ast.MIndexAttributedASTImage": "7ac84af8b7d8250c6e953c493cfd1fe87cb78d7b1708c5e578e0f3fe920fed05",
+    "com.synexia.mindex.ast.partial.MIndexPartialAstAdapter": "5761bbaea04e6dfa69e1414e1655354d9c457e8bd749119454ac08db33145c63",
+    "com.synexia.mindex.ast.partial.MIndexPartialAstAttempt": "b1bf0577ae49794cf5dcf1fe7c12f59de7d2bd8f2b2ac42609453992e967df66",
+    "com.synexia.mindex.ast.partial.MIndexPartialAstCache": "6a8d31a2b05f42edf85915c4a48ef753594d3c19c57fbe9de9ef5ec688a8109e",
+    "com.synexia.mindex.ast.partial.MIndexPartialAstKey": "abd8354134633d75dcfd85b8e2b7123c94eeb17a4d3ee825993d8a09a8bd2717",
+    "com.synexia.mindex.ast.partial.MIndexPartialAstMaster": "eb9647a02b3f4ed40118144d0bf2302c9b8be3bc8ae255e0987e7a78cb80d71d",
+    "com.synexia.mindex.ast.partial.MIndexPartialAstMode": "eb4d6f7f4efd3df73bb408ec1a93178d1ecca27d43b6de67f7d8a21994f845f6",
+    "com.synexia.mindex.ast.partial.MIndexPartialAstPressure": "70257ee81627b222cb8824c3c82007068fccfe27845fcd89687eda686ef204a4",
+    "com.synexia.mindex.ast.partial.MIndexPartialAstProjection": "de231fd4008fc50ff213a5ab3b2e64e8e93cdf6a67ce3a020c162f9a08f58b02",
+    "com.synexia.mindex.ast.partial.MIndexPartialAstScope": "87b746952e685baf8f6640a8f983810ff19cb27fef125ab942acef3309872797",
+    "com.synexia.mindex.compiler.ast.M3AST": "8923652ba76b55737a892805d9c1c921513c773eec9d3439dcfaf6f09d0df981",
+    "com.synexia.mindex.compiler.ast.M3ASTCodec": "b4fc72dabfa3fbf7ded7bb4ca53f38b789ae6ab6c03a6f2d9dd68c326c8199c7",
+    "com.synexia.mindex.compiler.ast.M3ASTPlugin": "4c96b3083cc3a3d38a2c1c25f66da62bccc97788a2b83b693f881ab6a948ddb4",
+    "com.synexia.mindex.compiler.ast.M3ASTWorkspaceCache": "7ad205f6521a14879ae537ff15a98199dc3b023ae7c69e844aea1f3664f5bae1",
+    "com.synexia.mindex.compiler.ast.M3CompilationContext": "5dc73a6cb4d0b1b7f5ff2a00e34ab706dd2606865421d3b2fed5ef4ba3acfa1e",
+    "com.synexia.mindex.compiler.ast.M3File": "2dda8ef7a912ce662e85731351cf19104d61b1adea0675d2d43805f1f0b85f90",
+    "com.synexia.mindex.compiler.ast.M3FileSourceFacts": "3c6052c962b61b5cda14f1eab41a08f23a30c840a94f14ae2f57ef50f8fca32c",
+    "com.synexia.mindex.compiler.ast.M3JavacASTIndex": "1430b06e00c8bf838ad23d915e5f08bc97b850a72386d8cf328e02f1b903ed34",
+    "com.synexia.mindex.compiler.ast.MIndexASTDocument": "6954228293e4210ef61fddf416596801af2d6321b000d89c6bcab4a01973d4dc",
+    "com.synexia.mindex.compiler.ast.MIndexASTHierarchy": "39153fdaf1a926c8331a48a376b200315e4c1beea2c601b53b2ef59113ab3f84",
+    "com.synexia.mindex.compiler.ast.MIndexASTHierarchyFacts": "0ae813962a2899676d6ea61632809a31ffc53b578c072f3a711a3dacd76742bc",
+    "com.synexia.mindex.compiler.ast.MIndexASTOccurrence": "e3adc0fdbd0f81ad0abc321274c34643a4de088f6f9ced8330cca111110f718b",
+    "com.synexia.mindex.compiler.ast.MIndexJavaAST": "ed85e1309d78794547a24864b9eeabfa960bdc10f4731980053b304b3dbcd769",
+    "com.synexia.mindex.experiment.Digests": "a82d409699144f53415953985474f84a040f58fa35f1a84976400d92014cd34c",
+    "com.synexia.mindex.experiment.MIndexPool": "8f9f48519282baeadc8d7ca3480acdda88503826d2399beacce54da79dd2afd7",
+    "com.synexia.mindex.experiment.MIndexString": "85a994380bb63823f0c9d77f5255c44834007fbbe483ad0017db4e67ca3ea3c2",
+    "com.synexia.mindex.experiment.StringHashes": "721f6e8862bb5f6f458ce067d81ef3fbd9cb033be5886dc361d6cba2c9d9193a",
+    "com.synexia.mindex.experiment.TokenDictionary": "e694f1db7c029f7358b9bf48db30cedab07396fdaa519652eb821245c19c4981",
+    "com.synexia.mindex.experiment.TokenSpace": "eb7848b15042b69420a68ec889c0f053cabf0f7e840d0e5b22cc37a42ecdf5a5",
+    "com.synexia.mindex.experiment.Tokenizer": "9e17fb3d11fdba67eec9bea4dd16db4b6234e867bae13575beafaef41a5b6302",
+    "com.synexia.mindex.swap.SqliteSwapStore": "091c41271c42f3603ee7d64439d612541a875217dc85783700752bbe16d959cf",
+    "com.synexia.mindex.swap.SwapBudgetPlane": "88051ebf6e2ab8d73d92e3252fe2a05ab8f9c95894eb1f39ddbf4d019407e4b0",
+    "com.synexia.mindex.swap.SwapNativeLibrary": "a1d0724afb9ee986b99e12e666ffc49b72cb0a37804baebf88c8a30e46e28a6c",
+    "com.synexia.mindex.swap.SwapStore": "5a99e61ed20a662c8b44957571e9159c7fd3fc784360b659f289a0e8f438b1ee",
+    "com.synexia.mindex.swap.TieredSwapCache": "b76151008b20862bc56e14edf48f0034b29f2a7b9d9229bc2c4c085ebfef5ae3",
+    "com.synexia.nativeinterop.JniLibraryLoader": "fa22dcfcc2b442c72ee3dd97e5d97dd5c9ad19ee4eac422641336b7477c63699",
+    "com.synexia.nativeinterop.NativeLibrarySpec": "fd9bc8f19f629e6131dcb55f264eed524fa17e69bdda31d723b4addfddb8a4f5"
+  },
+  "receiving_source_closure_sha256": "af53258db63e5aa52a400a6abf31c3931685cfab4d8bf0dbe1ea8901f8e9e02b",
+  "module_source_counts": {
+    "ordinary_including_target_facades": 35,
+    "vendor": 103,
+    "actual_maven_compiler_inputs": 138
+  },
+  "receipt_sha256": {
+    "frontend/evidence/FINAL_COMPOSED_ARTIFACTS.json": "c080bf488cb333f94454320c0f7f366353c1643266ca409a6a61546a750c4cf6",
+    "integration/evidence/provider-custody/QUALIFICATION.json": "8557f02f03a493b4e3364fa24e939ff212e25d3dc7dc3af592e9980656e5e037",
+    "integration/evidence/provider-custody/CACHE_SDK.json": "4a0dd5866851d00d6da990a8d7ead1d17e1fff9b6784bc4c85ddb4a55d1d70ba",
+    "frontend/hierarchy/evidence/target-source-readback/actual-target.json": "ba8d529b169af483dfc5e755a8fba54a8f69cdae47e1f680c711680f9241ff45",
+    "frontend/hierarchy/evidence/target-source-readback/REFUSAL.json": "9a4cacdd5139a311ff9435fb8c7277a5674756252cf748281b4d503498765eea",
+    "frontend/evidence/FINAL_CANONICAL_RECONCILIATION.json": "3c505448aa8e835f4071522aa836a4dcae55db9d7820e1da36da0b049a5e86df",
+    "frontend/evidence/FINAL_UPSTREAM_COMPOSITION_SDK.json": "4b442992cc423587d29d3049afada3c7edeeae2af718a5b113842b8c4c525fc6",
+    "frontend/evidence/FINAL_COMPOSED_APPLICATION.json": "c26473f464636eae816730258a41b45ff9d6e49fd51a5b3c1bae14578d185906",
+    "frontend/runtime-tests/evidence/QUALIFICATION.json": "d8403304ff94d967cdaf1f0a2917526340e00dc5ffdc6a17511909c1ad0db8ed",
+    "cache/evidence/QUALIFICATION.json": "c0ee5d62a1f7fc77dc88b91feeae3d25fbaa43eca9f52a0684be1a74aec29c94",
+    "cache/evidence/ISOLATED_NATIVE_RECEIPT.json": "6c03f999049150db40c7b4144e34f5b70ea728d8f7ba4c61dc692aadfac12433",
+    "frontend/hierarchy/evidence/QUALIFICATION.json": "8f9ab3d98af12ebfe5ce7cc603b28f103da0d331ed8ee95217700b0657f24c47",
+    "frontend/hierarchy/evidence/final-composed/QUALIFICATION.json": "f2d149aba0468afddafa5260f928a1af442f2a9d7ca5abefb43125321c186896",
+    "frontend/hierarchy/evidence/final-composed/COMPILE.json": "509032a22ac199f21addddb7bc6b5adfaf8f25ce37ae50863b9b41654ec2a850",
+    "frontend/upstream-contract/evidence/QUALIFICATION.json": "aef2fdd668058ad150eff0eae63496362ad39067f849a90e33510a6df12f3768",
+    "frontend/upstream-contract/evidence/COEXISTENCE.json": "a6aaa0050d418cc4f0787d9fe11c66e816b0eeac924081347722d6bfee66c231",
+    "frontend/upstream-contract/evidence/receipt-admission/QUALIFICATION.json": "ba468fbb2d6dea10fc3a9304fc808ade18f399c6cfd2d46b4c358c217fca8402",
+    "frontend/primitive-image/evidence/RESULTS.json": "5f8487eb614e5dd89a1a6abf97bc8267e5c12048675b5b1c4eb081f207e6a4e8",
+    "frontend/module-wiring/evidence/RESULTS.json": "56fb297388797ee2108e19837d0ac16568de9801779626309d5bc3931b7b63e8",
+    "frontend/openrewrite/evidence/RESULTS.json": "0ee8bffd77b0a087764bbc7e64a66917334b389fa348809b074bc2c506ca5682",
+    "frontend/registry/evidence/QUALIFICATION.json": "185c06d0f7f599481e712c14c460d72470db229c9725a5784a1c0f14f68fd731"
+  },
+  "qualifications": [
+    {
+      "area": "Maven/OpenRewrite recipes",
+      "status": "PASS",
+      "result": "Exact Java/text outputs, drift and missing/duplicate-owner refusal, fixed points, and actual application passed.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/evidence/FINAL_UPSTREAM_COMPOSITION_SDK.json)"
+    },
+    {
+      "area": "Public recipe and source custody",
+      "status": "PASS",
+      "result": "Four exact providers; seven clean Maven authoring compilations; four repeated Java/text SDK tests; all 128 receiving sources match, and a one-file change is refused.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/integration/evidence/provider-custody/QUALIFICATION.json)"
+    },
+    {
+      "area": "Immutable source, compiler views and codec",
+      "status": "PASS",
+      "result": "26 tests; 103 canonical runtime sources, 10 receiving facades and 4 compiler sources compiled strictly.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/runtime-tests/evidence/QUALIFICATION.json)"
+    },
+    {
+      "area": "Bounded cache and real JNI",
+      "status": "PASS",
+      "result": "14 cache runtime tests including 2 SQLite JNI tests; 16 javac-generated native exports; fresh native rebuild matches the tested binary.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/cache/evidence/QUALIFICATION.json)"
+    },
+    {
+      "area": "L0\u2013L5 hierarchy",
+      "status": "PASS",
+      "result": "40 canonical/receiving hierarchy contracts on the final composed artifacts; immutable coordinate-prefix snapshots and overflow-safe existing partial-cache accounting.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/evidence/final-composed/QUALIFICATION.json)"
+    },
+    {
+      "area": "Existing compiler API and service registration",
+      "status": "PASS",
+      "result": "Unmodified upstream test: 70 checks in a linked 5-module image with hash checks enabled; 9 separate coexistence checks for both plugins.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/evidence/QUALIFICATION.json)"
+    },
+    {
+      "area": "Primitive images",
+      "status": "PASS",
+      "result": "18 checks; image and sidecar bytes preserved in both modes, using the original compiler task.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/primitive-image/evidence/RESULTS.json)"
+    },
+    {
+      "area": "Ordinary Maven module",
+      "status": "PASS",
+      "result": "138 exact inputs; 52 normal tests and 54 selected-native tests; required missing-library failure; upstream leaf self-test and service discovery passed.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/evidence/RESULTS.json)"
+    },
+    {
+      "area": "Optional OpenRewrite 8.17.1",
+      "status": "PASS",
+      "result": "Stock visitor consumes the same javac units; source/type identity and reference class bytes preserved; core works without Rewrite; reentry refuses publication.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/openrewrite/evidence/RESULTS.json)"
+    },
+    {
+      "area": "Authoritative name mapping",
+      "status": "PASS",
+      "result": "12 scoped mappings, 38 source/manifest pins; existing mappings and broader phase gates preserved.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/registry/evidence/QUALIFICATION.json)"
+    },
+    {
+      "area": "Full canonical reactor",
+      "status": "NOT_QUALIFIED",
+      "result": "Unavailable: the sparse checkout omits child modules required by the pinned parent. Canonical standalone sources and the M3 receiving modules have separate successful proofs.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/evidence/RESULTS.json)"
+    },
+    {
+      "area": "Custom source-built dependency coordinates",
+      "status": "NOT_QUALIFIED",
+      "result": "Normal Maven proof uses the receiver's documented ASM 9.6 / JUnit 5.10.2 CI overrides; the custom source-artifact defaults were not qualified here.",
+      "evidence": "[receipt](../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/evidence/RESULTS.json)"
+    },
+    {
+      "area": "Whole JDK, jtreg/JCK and other platforms",
+      "status": "NOT_RUN",
+      "result": "Separate gates; no broader phase promotion is inferred from these finite Linux/Java21 proofs.",
+      "evidence": "Separate repository gate"
+    }
+  ],
+  "reproduction_markdown": "<!-- SPDX-License-Identifier: Apache-2.0 -->\n# Reproduce the qualified AST implementation\n\nRun from a checkout of this pull request with a Java 21.0.2 JDK, Maven, Python 3,\nGCC, `nm`, `curl` and `unzip` on Linux. Set `JAVA_HOME` and configure Maven's\nordinary repository settings for the environment. The commands use the checked-in\npublic recipe mirror; they do not require access to a private Synexia checkout.\nThe Maven recipes use OpenRewrite 8.17.1. Generated classes and native libraries\nare local build artifacts, not downloaded M3 implementations.\n\n## Qualify the recipes and build their exact emitted candidates\n\n```sh\nexport MAVEN_OPTS=-Xmx192m\ntask=m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017\npython3 \"$task/integration/verify_target_sources.py\" --target \"$PWD\"\nmvn -B -ntp -f \"$task/cache/pom.xml\" test\nmvn -B -ntp -f \"$task/frontend/pom.xml\" -Dm3.frontend.maxHeap=768m test\nmvn -B -ntp -f \"$task/frontend/hierarchy/pom.xml\" test\nmvn -B -ntp -f \"$task/frontend/module-wiring/pom.xml\" test\nmvn -B -ntp -f \"$task/frontend/registry/pom.xml\" test\nmvn -B -ntp -f \"$task/integration/pom.xml\" test\npython3 \"$task/frontend/build_candidates.py\" --jdk \"$JAVA_HOME\" \\\n  --hierarchy-candidates \"$PWD/$task/frontend/hierarchy/target/candidate\"\n```\n\nThese tests execute the actual class-backed Java and text recipes, compare exact\npostimages, reject drift and missing/duplicate inputs, and require fixed points.\nThey include the narrow existing-harvester local-scope repair and the module\nsuccessors. The builder compiles 103 canonical runtime sources, 10 receiving\nfacades and four compiler sources with strict Java 21 diagnostics. Its\n`frontend/target/ARTIFACTS.json` binds the resulting JARs and source hashes.\n\n## Build the original JNI store and run the contracts\n\n```sh\nmkdir -p target/m3-ast-native\ncurl --fail --location --retry 3 \\\n  https://www.sqlite.org/2026/sqlite-amalgamation-3510300.zip \\\n  --output target/m3-ast-native/sqlite.zip\nunzip -q target/m3-ast-native/sqlite.zip -d target/m3-ast-native\npython3 \"$task/cache/build_native_proof.py\" --jdk-home \"$JAVA_HOME\" \\\n  --sqlite-source \"$PWD/target/m3-ast-native/sqlite-amalgamation-3510300\"\nmvn -B -ntp -f \"$task/cache/pom-runtime.xml\" test\nmvn -B -ntp -f \"$task/frontend/runtime-tests/pom.xml\" test\npython3 \"$task/frontend/primitive-image/verify.py\" --jdk \"$JAVA_HOME\"\npython3 \"$task/frontend/hierarchy/build.py\" --stage runtime --jdk \"$JAVA_HOME\"\nmvn -B -ntp -f \"$task/frontend/hierarchy/runtime-tests/pom.xml\" test\n```\n\nThe native builder validates the official SQLite source digest, source identity\nand header digest before compiling. It regenerates both Java ABI headers and\nchecks all 16 exports of the unchanged shared native unit. Compilation uses a\nfresh temporary directory. The cache suite includes real SQLite close/reopen\ntests; the frontend and hierarchy suites exercise exact source/context identity,\nlifetime refusal, lazy projection, immutable snapshots and invalidation.\n\n## Check the existing compiler API and both plugins\n\n```sh\npatch=\"$PWD/$task/frontend/target/m3-javac-patch.jar\"\nplugin=\"$PWD/$task/frontend/target/m3-ast-sharing.jar\"\nreceipt=\"$PWD/$task/frontend/target/ARTIFACTS.json\"\npython3 \"$task/frontend/upstream-contract/qualify.py\" \\\n  --jdk \"$JAVA_HOME\" --patch \"$patch\" --artifact-receipt \"$receipt\"\npython3 \"$task/frontend/upstream-contract/coexistence.py\" \\\n  --frontend-jar \"$plugin\" --patch \"$patch\" --artifact-receipt \"$receipt\"\n```\n\nThe first command assembles a finite linked image using the exact upstream module\ndescriptor and test, preserving all unrelated stock JMOD entries and hashes. It\nuses the standard `jmod` hash update for the scratch compiler module; hash checks\nremain enabled. The second command checks the built-in `M3AST` and external\n`M3ASTIndex` providers together. The input receipt must match the actual artifacts\nand the four sealed compiler source templates. These are finite compatibility\nproofs, not a complete JDK or JCK build.\n\n## Check the optional OpenRewrite visitor\n\n```sh\nmvn -B -ntp -f \"$task/frontend/openrewrite/pom.xml\" test\npython3 \"$task/frontend/openrewrite/verify.py\" --jdk \"$JAVA_HOME\" \\\n  --plugin \"$plugin\" --patch \"$patch\"\n```\n\nThe optional fixture checks original javac tree/type/source identity, exact source\nprinting, class-byte equality, full FLOW admission and refusal of extra source\nparsing. It verifies that the standalone OpenRewrite parser was never loaded and\nthat the core works without OpenRewrite on its classpath. Actual source-completion\nattempts are detected; no rollback of such attempted reads is claimed.\n\n## Build the ordinary receiving modules\n\nThe existing `m3-precompute` dependency must first be installed from its source\nmodule. In a configured source-artifact environment:\n\n```sh\nmvn -B -ntp -f m3/ports/precompute/pom.xml install\nmvn -B -ntp -f m3/ports/compiletime/pom.xml install\nmvn -B -ntp -f m3/ports/compiletime-openrewrite/pom.xml package\n```\n\nThe repository's existing compile-time CI also supports upstream ASM 9.6 and\nJUnit 5.10.2 through `-Dasm.version=9.6 -Djunit.artifact.version=5.10.2`. The final\nnormal-module receipt records that mode explicitly; the optional module preserves\nthese overrides for transitive ASM dependencies. The existing workflow installs\nthe dependency-free precompute source artifact before the tests.\n\nEnable the real native tests explicitly:\n\n```sh\nmvn -B -ntp -f m3/ports/compiletime/pom.xml \\\n  -Dasm.version=9.6 -Djunit.artifact.version=5.10.2 \\\n  -Pm3-ast-native \\\n  -Dm3.cache.native=\"$PWD/$task/cache/target/native/libsynexia_mindex_swap.so\" test\n```\n\nThe selected profile must fail for a missing native library. No assumption or\nconditional skip changes that contract. `frontend/module-wiring/verify.py --help`\ndescribes the complete normal/optional/native verifier. Its optional\n`--canonical-checkout` enables a separate canonical-reactor availability probe;\npublic receiving-module qualification does not require that checkout.\n\nThe receiving source files are the already-applied recipe outputs. The individual\npacket READMEs document explicit materialization for an exact admitted preimage.\nKeep the source and target commit identities, generation receipts and source\nhashes when replaying on another checkout. A different JDK vendor can change JAR\nmetadata; a new run must report its own actual artifact identities and pass the\nsource-bound admission and runtime gates.\n",
+  "catalogue_index_tsv": "problem_category\tcatalogue_or_review\tselection_boundary\ncompiler-event-sharing\t../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/CATALOGUE.tsv\tExisting javac task, MIndexJavaAST conversion and scoped pool\nper-file-behavioral-atoms\t../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/FILE_REVIEW.tsv\tSerial reviewed operations, preserved contracts and evidence\nsource-context-and-lru-spill\t../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/cache/README.md\tExact source identity, existing leases/budgets/SQLite JNI\nleaf-first-hierarchy\t../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/README.md\tL0 facts/atoms, L1 file, L2 package, L3 module, L4 project, L5 repository\nlossless-visitor-projection\t../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/openrewrite/README.md\tPinned stock visitor, full FLOW and exact source-print admission\nupstream-public-api-composition\t../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/README.md\tOriginal public M3AST and service registration retained\nmodule-lifecycle-and-optional-dependencies\t../../../m3/vendor/synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/module-wiring/README.md\tExisting Maven owners, delayed SPI installation, explicit source closure\nauthoritative-name-mapping\t../../docs/name-mapping.json\tExisting registry and broader receiving gates preserved\ndynamic-arrays-offsets-state-masks\thttps://github.com/hsoliwal/M3jdk21/pull/1125\tSeparate qualified existing array/JNI refinement and donor catalogue\nfiltered-and-sorted-wrappers\thttps://github.com/hsoliwal/M3jdk21/pull/1077\tMerged wrapper qualification and canonical source custody\n",
+  "global_receiving_phases_promoted": false
+}

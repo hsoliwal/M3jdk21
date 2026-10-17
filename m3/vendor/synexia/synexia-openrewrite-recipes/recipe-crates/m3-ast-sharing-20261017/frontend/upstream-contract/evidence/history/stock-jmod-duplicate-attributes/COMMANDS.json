@@ -1,0 +1,164 @@
+[
+  {
+    "step": "original-java-version",
+    "argv": [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+      "-version"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.488,
+    "log": "original-java-version.log",
+    "log_sha256": "17dc57451d68f613c07b3d8f2d9ee18b179fe4eea3d208874d609ddb0f641e40"
+  },
+  {
+    "step": "original-compiler-descriptor",
+    "argv": [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/jmod",
+      "describe",
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/jmods/jdk.compiler.jmod"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.374,
+    "log": "original-compiler-descriptor.log",
+    "log_sha256": "6b756a5ef6c57baa82b92c97c04182161548601d77bb4421bcd5b1954de6969a"
+  },
+  {
+    "step": "extract-compiler",
+    "argv": [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/jmod",
+      "-J-Xmx256m",
+      "extract",
+      "--dir",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-compiler",
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/jmods/jdk.compiler.jmod"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.591,
+    "log": "extract-compiler.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "step": "compile-exact-descriptor",
+    "argv": [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+      "-J-Xmx256m",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-compiler/classes",
+      "--add-modules",
+      "jdk.javadoc,jdk.jshell,jdk.jdeps",
+      "-d",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-compiler/classes",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/sources/src/jdk.compiler/share/classes/module-info.java"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 4.366,
+    "log": "compile-exact-descriptor.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "step": "create-jdk.compiler",
+    "argv": [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/jmod",
+      "-J-Xmx384m",
+      "create",
+      "--date=2026-10-17T00:00:00Z",
+      "--module-version",
+      "21.0.2",
+      "--target-platform",
+      "linux-amd64",
+      "--class-path",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-compiler/classes",
+      "--cmds",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-compiler/bin",
+      "--libs",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-compiler/lib",
+      "--legal-notices",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-compiler/legal",
+      "--man-pages",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-compiler/man",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/jmods/jdk.compiler.jmod"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 4.804,
+    "log": "create-jdk.compiler.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "step": "original-base-descriptor",
+    "argv": [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/jmod",
+      "describe",
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/jmods/java.base.jmod"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.583,
+    "log": "original-base-descriptor.log",
+    "log_sha256": "5dd5bd2632f69dfa81e514e4f90aace7e68a762a01ea510f66b1c41cdcaf06d5"
+  },
+  {
+    "step": "extract-base",
+    "argv": [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/jmod",
+      "-J-Xmx256m",
+      "extract",
+      "--dir",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-base",
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/jmods/java.base.jmod"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 5.524,
+    "log": "extract-base.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "step": "create-java.base",
+    "argv": [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/jmod",
+      "-J-Xmx384m",
+      "create",
+      "--date=2026-10-17T00:00:00Z",
+      "--module-version",
+      "21.0.2",
+      "--target-platform",
+      "linux-amd64",
+      "--class-path",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-base/classes",
+      "--cmds",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-base/bin",
+      "--config",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-base/conf",
+      "--libs",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-base/lib",
+      "--header-files",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-base/include",
+      "--legal-notices",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-base/legal",
+      "--man-pages",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/expanded-base/man",
+      "--module-path",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/jmods",
+      "--hash-modules",
+      "^(?:java\\.datatransfer|java\\.desktop|java\\.instrument|java\\.logging|java\\.management|java\\.management\\.rmi|java\\.naming|java\\.net\\.http|java\\.prefs|java\\.rmi|java\\.scripting|java\\.se|java\\.security\\.jgss|java\\.security\\.sasl|java\\.smartcardio|java\\.sql|java\\.sql\\.rowset|java\\.transaction\\.xa|java\\.xml|java\\.xml\\.crypto|jdk\\.accessibility|jdk\\.attach|jdk\\.charsets|jdk\\.compiler|jdk\\.crypto\\.cryptoki|jdk\\.crypto\\.ec|jdk\\.dynalink|jdk\\.editpad|jdk\\.hotspot\\.agent|jdk\\.httpserver|jdk\\.incubator\\.vector|jdk\\.internal\\.ed|jdk\\.internal\\.jvmstat|jdk\\.internal\\.le|jdk\\.internal\\.opt|jdk\\.internal\\.vm\\.ci|jdk\\.jartool|jdk\\.javadoc|jdk\\.jcmd|jdk\\.jconsole|jdk\\.jdeps|jdk\\.jdi|jdk\\.jdwp\\.agent|jdk\\.jfr|jdk\\.jlink|jdk\\.jpackage|jdk\\.jshell|jdk\\.jsobject|jdk\\.jstatd|jdk\\.localedata|jdk\\.management|jdk\\.management\\.agent|jdk\\.management\\.jfr|jdk\\.naming\\.dns|jdk\\.naming\\.rmi|jdk\\.net|jdk\\.nio\\.mapmode|jdk\\.random|jdk\\.sctp|jdk\\.security\\.auth|jdk\\.security\\.jgss|jdk\\.unsupported|jdk\\.unsupported\\.desktop|jdk\\.xml\\.dom|jdk\\.zipfs)$",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/jmods/java.base.jmod"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 20.648,
+    "log": "create-java.base.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "step": "rehashed-base-descriptor",
+    "argv": [
+      "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/jmod",
+      "describe",
+      "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/upstream-contract/target/jmods/java.base.jmod"
+    ],
+    "exit_code": 4,
+    "elapsed_seconds": 0.958,
+    "log": "rehashed-base-descriptor.log",
+    "log_sha256": "fcab39f324002248c5464434cc2c007049c1cb402806206afd4cbc97e3fa594e"
+  }
+]

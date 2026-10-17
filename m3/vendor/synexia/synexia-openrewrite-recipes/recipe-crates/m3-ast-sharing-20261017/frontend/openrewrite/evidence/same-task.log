@@ -1,0 +1,6 @@
+SHARED_AST_PASS parses=2 analyzedTypes=4 conversions=2 frozenReads=2 stringAdditions=1
+BYTECODE_EQUAL_PASS classes=4
+DEFAULT_BYTODO_HAZARD_REPRODUCED [PARSE:null, ENTER:null, ANALYZE:sample.Alpha, GENERATE:sample.Alpha, ANALYZE:sample.Beta, GENERATE:sample.Beta, ANALYZE:sample.Gamma, GENERATE:sample.Gamma, COMPILATION:null]
+SHARED_AST_REFUSAL_PASS cases=8
+LAZY_SOURCE_COMPLETION_REFUSAL_PASS baselineParses=1 visitorParses=2 published=0
+OPENREWRITE_SAME_JAVAC_TASK_PASS checks=841

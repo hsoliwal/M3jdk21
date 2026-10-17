@@ -1,0 +1,6 @@
+synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3ASTWorkspaceCache.java	ABSENT	7ad205f6521a14879ae537ff15a98199dc3b023ae7c69e844aea1f3664f5bae1	00-M3ASTWorkspaceCache.java.txt
+synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/ast/M3FileSourceFacts.java	ABSENT	3c6052c962b61b5cda14f1eab41a08f23a30c840a94f14ae2f57ef50f8fca32c	01-M3FileSourceFacts.java.txt
+synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3ASTCacheTestSupport.java	ABSENT	79ccef742545a82142ea205b580e7cde384bfbf7d0974e01bae19d721d7093a4	02-M3ASTCacheTestSupport.java.txt
+synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3ASTWorkspaceCacheNativeTest.java	ABSENT	7674c6533bf115d4e0515875cba9c95f088fffad364f39b2cea3e702c12e7f64	03-M3ASTWorkspaceCacheNativeTest.java.txt
+synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3ASTWorkspaceCacheTest.java	ABSENT	20313c8ec7c35efff91a5ed78bc922cb54922c918c65cd521e83309b5945ba07	04-M3ASTWorkspaceCacheTest.java.txt
+synexia-mindex/compiler/src/test/java/com/synexia/mindex/compiler/ast/M3FileSourceFactsTest.java	ABSENT	6fffe7cb1d1e99f933f4605d1c4b1c5fb53c3520cf985d51492788ddb3723df4	05-M3FileSourceFactsTest.java.txt

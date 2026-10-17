@@ -1,0 +1,81 @@
+{
+  "schema": "M3_AST_FINAL_DONOR_RECONCILIATION_V1",
+  "observed_date": "2026-10-17",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "d391494684c17b1cb8930d4a1f99fe56c0882aa0",
+  "disposition": "PRESERVE_COMPLEMENTARY_EXISTING_OWNERS",
+  "review_mode": "Read-only inspection of exact GitHub source blobs; no new runtime qualification claimed.",
+  "product_changes": [],
+  "sources": [
+    {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTHierarchy.java",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/d391494684c17b1cb8930d4a1f99fe56c0882aa0/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTHierarchy.java",
+      "git_blob_sha1": "dfcdff0012951055e61757ebdd90c129353e0dab",
+      "sha256": "f9d353aa68b31d4d723d584940cb87a39163958d2e7c0962e2a648c96fcf1434",
+      "byte_count": 18239
+    },
+    {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTHierarchyReceiptAdapter.java",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/d391494684c17b1cb8930d4a1f99fe56c0882aa0/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTHierarchyReceiptAdapter.java",
+      "git_blob_sha1": "83d2c6a9e6a4171239d498b0fcc1dae3d2f35ad3",
+      "sha256": "c1f69f5e09d53781c505e18f50500e9fe9ded3ff83e4730b2c7ff47ef5a1c6cd",
+      "byte_count": 3251
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-l0l5-target-20261017/manifest.tsv",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/d391494684c17b1cb8930d4a1f99fe56c0882aa0/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-l0l5-target-20261017/manifest.tsv",
+      "git_blob_sha1": "4f7cd44ca95f9ece7967d88fb43b8089a02e5f8e",
+      "sha256": "0bf6589d6f536eec7fbc30c100b26536bd81a4401858c2436b946b7da6957d1e",
+      "byte_count": 511
+    }
+  ],
+  "level_contract": {
+    "L0": "per-file facts and atoms",
+    "L1": "file summary",
+    "L2": "package",
+    "L3": "module",
+    "L4": "project",
+    "L5": "repository"
+  },
+  "observed_capabilities": [
+    "MIndexASTHierarchy.build eagerly constructs immutable L0-L5 scope planes from supplied file atom handles, byte state masks, source SHA-256 and atomization receipt SHA-256.",
+    "Primitive aligned lanes and contiguous child ranges retain source occurrence identifiers; collection family masks classify detached coverage.",
+    "File inputs defensively copy atom handles and masks; normalized identity sorting makes one build deterministic.",
+    "MIndexASTHierarchyReceiptAdapter.fromVerifiedFile recomputes the existing file atomizer receipt before and after mask extraction, checks receipt and source/root identity, then admits detached facts."
+  ],
+  "comparison_criteria": [
+    {
+      "criterion": "Existing AST and receipt authority",
+      "finding": "Uses IndexString occurrence source, FileAtomizer and atomization receipt owners; preserve this distinct detached projection."
+    },
+    {
+      "criterion": "Lazy provider and cache lifetime",
+      "finding": "The inspected build/promote API eagerly materializes its supplied collection; it exposes no provider/acquire, active lease or SwapStore API."
+    },
+    {
+      "criterion": "Compiler and provider isolation",
+      "finding": "Its explicit file identity binds source and atomization receipt hashes; it has no separate compiler-context/provider/schema/phase cache-key API comparable to the qualified compilation hierarchy."
+    },
+    {
+      "criterion": "Incremental dependency invalidation",
+      "finding": "The inspected public API has no previous-generation state, stable ordinal reservation across builds or source-dependency invalidation operation."
+    },
+    {
+      "criterion": "Namespace and receiving path",
+      "finding": "Canonical com.synexia.indexstring.ast.MIndexASTHierarchy and target com.m3.ast.M3ASTHierarchy are distinct from com.synexia.mindex.compiler.ast.MIndexASTHierarchy and com.m3.compiletime.ast.M3ASTHierarchy."
+    }
+  ],
+  "upstream_target": {
+    "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-l0l5-target-20261017/manifest.tsv",
+    "production_path": "m3/ast/src/main/java/com/m3/ast/M3ASTHierarchy.java",
+    "fqn": "com.m3.ast.M3ASTHierarchy",
+    "sealed_postimage_sha256": "f3fe6810edce185dab20ca73ffb03edaf5a778eb60c41b432e0f902d574a8441",
+    "additional_paths": [
+      "m3/ast/src/test/java/com/m3/ast/M3ASTHierarchyContract.java",
+      "m3/ast/src/test/java/com/m3/ast/M3ASTHierarchyTest.java"
+    ]
+  },
+  "reconciliation": "Preserve both existing detached owners in the d391 canonical base. Their receipt and collection-family projection is complementary to the qualified lazy compilation hierarchy. It does not replace the required isolated provider, existing partial-master/workspace-cache reuse, active leases and dependency invalidation contracts. No frozen production code or receiver mapping changes are justified by this read-only comparison.",
+  "possible_future_adapter": "A later separately qualified provider could expose these detached receipt/family facts after explicitly adapting occurrence and receipt identities; this packet does not claim that adapter exists.",
+  "license": "Inspected Java sources retain SPDX Apache-2.0 and Copyright 2026 Hitesh Soliwal and contributors; no source copied into production by this reconciliation."
+}

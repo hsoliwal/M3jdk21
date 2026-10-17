@@ -1,0 +1,243 @@
+{
+  "schema": "com.synexia.m3.ast.frontend.runtime-proof.v1",
+  "status": "passed",
+  "canonical_base": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "target_base": "e336c083c90bd882030e9a370949136e191386f2",
+  "platform": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "java_version": "21.0.2",
+    "java_runtime_version": "21.0.2+13-LTS",
+    "java_vendor": "Eclipse Adoptium"
+  },
+  "run": {
+    "runner": "runtime-tests/pom.xml",
+    "log": "maven-runtime-test.log",
+    "maven": "3.9.9",
+    "junit": "5.10.2",
+    "java_compile_flags": [
+      "--release 21",
+      "-Xlint:all",
+      "-Werror",
+      "-proc:none"
+    ],
+    "fork_flags": [
+      "-Xmx512m",
+      "--patch-module jdk.compiler=<qualified-patch>",
+      "--add-exports jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED"
+    ],
+    "tests": 25,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "artifacts": [
+    {
+      "role": "plugin",
+      "path": "target/m3-ast-sharing.jar",
+      "sha256": "3bbe637346b3ecf752bff60a1502f9b6eeb643448790c12b35fc9593fb807ed2"
+    },
+    {
+      "role": "patch",
+      "path": "target/m3-javac-patch.jar",
+      "sha256": "10563c2088934d199984231d59b0980376ed3ba535c7aa3cd3cf625bd5d3f0ca"
+    },
+    {
+      "role": "native-sqlite-donor",
+      "path": "../cache/target/native/libsynexia_mindex_swap.so",
+      "sha256": "473f80b698901ed1fcfdf4643e7bcb002afb2b78040538861ecbf140d663bf3d"
+    }
+  ],
+  "test_sources": [
+    {
+      "path": "runtime-tests/M3ASTCodecTest.java",
+      "sha256": "1efa8a65a6d079ba96a87c992d004883ab968e2bc9d627fa194df5b71d90ccd6"
+    },
+    {
+      "path": "runtime-tests/M3ASTCompilerBridgeTest.java",
+      "sha256": "efdbe0c37da488bec2fa6ce7459d30cea801cfb5face2deaf0efb19b665082f6"
+    },
+    {
+      "path": "runtime-tests/M3FileAndContextTest.java",
+      "sha256": "6212a27631154ff38688c18b8160abba98e747bf86be2661e22b5409021a7848"
+    },
+    {
+      "path": "runtime-tests/M3FrontendTestSupport.java",
+      "sha256": "e37cbe366464dd888fa4530c47a1ee0468b12a1abe3109289f8f47f5886b6890"
+    },
+    {
+      "path": "runtime-tests/M3JavacASTIndexTest.java",
+      "sha256": "0dc20179b4adff506cdd1d84d0b5a8546c3243f4c5413d21ff045c02ceef8310"
+    },
+    {
+      "path": "runtime-tests/pom.xml",
+      "sha256": "db2c8c11f35166884aafbdc92d9adaebcb7e3f71456860f5f7061d6ee4b842d1"
+    }
+  ],
+  "suites": [
+    {
+      "class": "com.synexia.mindex.compiler.ast.M3ASTCodecTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.571,
+      "cases": [
+        {
+          "name": "malformedChecksummedFramesRefuseVersionCountsSpansAndTrailingData",
+          "seconds": 0.127
+        },
+        {
+          "name": "staleSourceDigestAndForeignAtomWithCoincidentOrdinalAreRefused",
+          "seconds": 0.133
+        },
+        {
+          "name": "roundTripPreservesExactSourceStructuralIdentityAndEveryOccurrence",
+          "seconds": 0.209
+        },
+        {
+          "name": "independentSourceNodeImageAndOuterRecordBudgetsRefuseOversizedValues",
+          "seconds": 0.093
+        }
+      ]
+    },
+    {
+      "class": "com.synexia.mindex.compiler.ast.M3ASTCompilerBridgeTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 3.023,
+      "cases": [
+        {
+          "name": "buildPluginExportsTheCapturedSourceAndHonestSuccessReceipt",
+          "seconds": 2.033
+        },
+        {
+          "name": "annotationGeneratedSourceUsesTheSameExactParserHook",
+          "seconds": 0.431
+        },
+        {
+          "name": "compilerBridgeReportsActualReleaseAndDiagnosticAuthority",
+          "seconds": 0.207
+        },
+        {
+          "name": "buildPluginNeverLabelsMalformedSourceAsSuccessful",
+          "seconds": 0.086
+        },
+        {
+          "name": "observersAreTaskScopedAndClosingOnePreservesTheOther",
+          "seconds": 0.194
+        }
+      ]
+    },
+    {
+      "class": "com.synexia.mindex.compiler.ast.M3FileAndContextTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.271,
+      "cases": [
+        {
+          "name": "incompleteEnvironmentUsesFreshSessionAuthority",
+          "seconds": 0.003
+        },
+        {
+          "name": "stockJavacWrapperStillResolvesTheAdmittedImmutableInput",
+          "seconds": 0.118
+        },
+        {
+          "name": "sealedContextIncludesOrderContentAndGenerationAndDefendsItsDigest",
+          "seconds": 0.009
+        },
+        {
+          "name": "byteSnapshotHasIndependentDigestAndStrictBoundedDecoding",
+          "seconds": 0.008
+        },
+        {
+          "name": "characterIngressIsImmutableAndPreservesExactUtf16",
+          "seconds": 0.003
+        },
+        {
+          "name": "duplicateAndReplacedFrozenInputsAreRefused",
+          "seconds": 0.108
+        }
+      ]
+    },
+    {
+      "class": "com.synexia.mindex.compiler.ast.M3JavacASTIndexTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 2.152,
+      "cases": [
+        {
+          "name": "malformedSourceNeverBecomesSuccessfulCompilation",
+          "seconds": 0.107
+        },
+        {
+          "name": "parseOnlyInvocationHasAnExplicitCloseAndNoAttributionOrGeneration",
+          "seconds": 0.066
+        },
+        {
+          "name": "noConsumerPerformsNoSyntaxCaptureAndLeavesCompilerOutputExact",
+          "seconds": 0.408
+        },
+        {
+          "name": "analyzeOnlyInvocationDeliversBindingsAndClosesWithoutGeneratingClasses",
+          "seconds": 0.383
+        },
+        {
+          "name": "failedConsumerClosesTheIndexAndInvalidatesItsView",
+          "seconds": 0.12
+        },
+        {
+          "name": "compilerProjectionUsesTheExistingDurableCacheAndReloadsAfterCallback",
+          "seconds": 0.298
+        },
+        {
+          "name": "consumerRegistrationIsFixedBeforeCompilationStarts",
+          "seconds": 0.167
+        },
+        {
+          "name": "analysisUsesActualAttributedTypesAndKeepsParseSyntaxFrozen",
+          "seconds": 0.324
+        },
+        {
+          "name": "twoConsumersShareOneCaptureFromTheOwningCompilerUnit",
+          "seconds": 0.12
+        },
+        {
+          "name": "callbackViewsRejectAnotherThreadAndAllEscapedAccess",
+          "seconds": 0.126
+        }
+      ]
+    }
+  ],
+  "claims": [
+    "actual JavacTask PARSE, ANALYZE and GENERATE callbacks",
+    "zero-consumer syntaxCaptures=0 with exact baseline class bytes",
+    "two consumers share one syntax capture from one real parser unit",
+    "callback lifetime and compiler-thread confinement, including failure cleanup",
+    "parse-only and analyze-only explicit close",
+    "frozen source binding through actual Javac ClientCodeWrapper",
+    "actual annotation processor-generated source captured through patched parser hook",
+    "exact UTF16, independent byte/source identities, sealed and isolated compiler contexts",
+    "codec roundtrip, foreign-owner and digest refusal, checksummed corruption and bounds",
+    "actual SQLite spill and cold reload after compiler callback",
+    "plugin exports with actual compiler diagnostic error counts"
+  ],
+  "limitations": [
+    "Finite contract tests on Linux x86_64 and the pinned Java 21.0.2 toolchain, not whole-JDK qualification.",
+    "No throughput, wall-time, heap/RSS, or all-platform native performance claim.",
+    "No cross-process semantic reuse claim.",
+    "M3JavacASTIndex live compiler objects and frozen source custody remain compilation-scoped; resident cache budgets apply only to declared projection payload weight.",
+    "The test-only POM uses the exact local candidate artifact, not a production runtime Maven dependency."
+  ],
+  "retained_counterexamples": [
+    "counterexamples/acquire-syntax-loader-arity/counterexample.json"
+  ],
+  "artifact_and_test_source_path_base": "frontend crate directory"
+}

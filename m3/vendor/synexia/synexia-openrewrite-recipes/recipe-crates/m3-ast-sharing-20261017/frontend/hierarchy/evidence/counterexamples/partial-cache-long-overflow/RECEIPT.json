@@ -1,0 +1,43 @@
+{
+  "class_output_temporary": "/tmp/m3-partial-cache-long-overflow-wo40ptx8/classes",
+  "compile_command": [
+    "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+    "-J-Xmx128m",
+    "--release",
+    "21",
+    "-Xlint:all",
+    "-Werror",
+    "-implicit:none",
+    "-cp",
+    "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/target/bootstrap/classes:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/target/m3-ast-sharing.jar",
+    "-d",
+    "/tmp/m3-partial-cache-long-overflow-wo40ptx8/classes",
+    "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/preimages/canonical/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstCache.java",
+    "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/evidence/counterexamples/partial-cache-long-overflow/PartialCacheLongOverflowProbe.java"
+  ],
+  "compile_exit_code": 0,
+  "compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "elapsed_seconds": 7.932,
+  "expected": "one admitted entry with retainedWeight=1",
+  "jdk_release_sha256": "ad9dcd2580bb226cd54f77cc7a9d05bce85be768b92ea93a49292c7240a10965",
+  "max_entries": 1,
+  "max_weight": 9223372036854775807,
+  "observed": "admitted=false, entries=0, retainedWeight=0",
+  "probe_sha256": "95af2bc0fafa70ca9ffd618b7409303de22c347ec24b4b42a4bfb70b3cb32ecc",
+  "product_sources_modified": false,
+  "projection_retained_weight": 1,
+  "run_command": [
+    "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+    "-Xmx128m",
+    "-cp",
+    "/tmp/m3-partial-cache-long-overflow-wo40ptx8/classes:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/target/bootstrap/classes:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/target/m3-ast-sharing.jar",
+    "PartialCacheLongOverflowProbe"
+  ],
+  "run_exit_code": 1,
+  "run_log_sha256": "e24b3dddd7e7b295d79893630e56a58237d6f21fb0909ad1438462391a81270c",
+  "schema": "M3_PARTIAL_CACHE_LONG_BUDGET_COUNTEREXAMPLE_V1",
+  "sdk_sha256": "3bbe637346b3ecf752bff60a1502f9b6eeb643448790c12b35fc9593fb807ed2",
+  "source_preimage": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-sharing-20261017/frontend/hierarchy/preimages/canonical/synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/partial/MIndexPartialAstCache.java",
+  "source_preimage_sha256": "a7f6d096e53366c27660213e3756e73a9e8377dd60d1f680d91112e776aba1cf",
+  "status": "ORIGINAL_DEFECT_REPRODUCED"
+}
