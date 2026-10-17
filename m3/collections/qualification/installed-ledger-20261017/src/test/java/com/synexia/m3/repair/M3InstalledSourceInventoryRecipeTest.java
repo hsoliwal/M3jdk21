@@ -75,6 +75,13 @@ final class M3InstalledSourceInventoryRecipeTest {
                 CRATE, "pre/synexia-donation.json.txt");
         String live = Files.readString(ROOT.resolve("m3/collections/synexia-donation.json"));
         String approved = M3DonationPointerRecipe.emit(live, manifestSha, original);
+        String reviewed = M3CollectionDependencyRepair.resource(
+                CRATE, "synexia-donation-v2.json.txt");
+        assertEquals(reviewed, approved, "emitted JSON must match reviewed V2 postimage byte-for-byte");
+        assertEquals("a8a4ada0975933a8f80d7377a34c199603025f02",
+                M3DonationPointerRecipe.gitBlob(approved));
+        assertEquals("36cf1740400fc4dc0d0c4669969f58948bfd34f4e5147d1f4f5d8549cc4bddf9",
+                M3InstalledSourceInventoryRecipe.sha256(approved.getBytes(StandardCharsets.UTF_8)));
         assertEquals(approved, M3DonationPointerRecipe.emit(approved, manifestSha, original));
         assertTrue(approved.contains("\"installed_source_manifest\": \"qualification/installed-source-20261017.tsv\""));
         assertTrue(approved.contains("\"installed_source_manifest_sha256\": \"" + manifestSha + "\""));
