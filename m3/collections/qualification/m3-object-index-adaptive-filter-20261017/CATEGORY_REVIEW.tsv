@@ -1,0 +1,11 @@
+category	candidate	status	complexity	donor/license	rationale	verification
+predicate_once_snapshot	Original M3ObjectIndexSnapshot BitSet+int[]	BASELINE	O(n) + O(n/8) scratch + O(k) index	M3JDK21 #1095 Apache-2.0	Valid single callback but allocates transient BitSet even for none/all	Standalone original differential model
+predicate_once_snapshot	M3SlotArrays EMPTY_INTS adaptive index growth	SELECTED	O(n + k) amortized, O(k) index, O(1) additional scratch	M3JDK21 M3SlotArrays Apache-2.0	First rejection defers allocation; no copied payloads, unstable predicate not rescanned	528419 parity checks each of 4 HotSpot modes (local model)
+predicate_once_snapshot	Two-pass count then exact primitive allocation	REJECTED	O(n) twice	JDK array idiom	Would call arbitrary Java predicates twice; violates observable side effects	Frozen exception/call-count oracle
+predicate_once_snapshot	LeetCode 27 Remove Element	REFERENCE_ONLY	O(n)	LeetCode problem taxonomy	In-place compaction mutates owner; detached immutable snapshot must not	No external source copied
+dynamic_growth	HackerRank Dynamic Array	REFERENCE_ONLY	Amortized growth	HackerRank problem taxonomy	Compare growth-by-demand to dense preallocation; not exact List contract	No editorial or submission copied
+bit_mask_selection	GeeksforGeeks BitSet filtering examples	REFERENCE_ONLY	O(n)	GeeksforGeeks problem taxonomy	BitSet is valuable for repeated/revision-checked masks, not once-only callback transient	No external source copied
+immutable_index	Eclipse Collections select	CONTRACT_ORACLE	O(n)	Eclipse Collections EPL/EDL review	Detached selection may be compared but must preserve stored occurrence identities	No donor source copied
+live_filtered	Guava filter views	NOT_EQUIVALENT	O(n) predicate traversal	Guava Apache-2.0	Live backed filter cannot replace immutable detached M3 view	No donor source copied
+predicated_insert	Apache Commons PredicatedCollection	NOT_EQUIVALENT	Ingress-specific	Commons Collections Apache-2.0	Write validation does not imply membership filtering	No donor source copied
+JNI_index_window	M3IndexMaskWindow C17 bounded selector	REUSE_UNCHANGED	O(n) state scan	M3JDK21 #1095 first-party Apache-2.0	Production native predicate calls remain forbidden; existing explicit mask JNI is unaffected	Existing parent JNI regression gate

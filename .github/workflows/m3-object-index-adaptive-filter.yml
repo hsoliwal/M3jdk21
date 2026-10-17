@@ -1,0 +1,36 @@
+name: M3 object index adaptive filtered snapshots
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-object-index-adaptive-filter.yml'
+      - 'm3/collections/qualification/m3-object-index-adaptive-filter-20261017/**'
+      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3ObjectIndexAdaptiveFilterTest.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-java21-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source seals, old/new strict compiler/API, four VM configurations, existing JNI
+        shell: bash
+        run: bash m3/collections/qualification/m3-object-index-adaptive-filter-20261017/verify.sh "$RUNNER_TEMP/m3-object-index-filter"
+      - name: Maven module JUnit contract
+        shell: bash
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3ObjectSlotIndexTest test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-object-filter-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/m3-object-index-filter/
+          if-no-files-found: warn
