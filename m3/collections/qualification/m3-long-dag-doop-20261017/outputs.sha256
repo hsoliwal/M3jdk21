@@ -1,0 +1,5 @@
+59688faf5f40f767213e7c2403abb584d5fd1d1571d8c2773912c3711ca8308f  m3/collections/src/main/java/com/m3/collections/M3LongDag.java
+27c5ffc37302dc173e00a82134cc57be64ba3721aafe42d1d854d4cdba3fb257  m3/collections/src/main/java/com/m3/collections/M3VirtualAccumulator.java
+2e74d033a06247ba6ffa0beae2a7c5b1ddb838bfa50499678755934eeda7e086  m3/collections/src/main/java/com/m3/collections/M3VirtualCollector.java
+759acfe840f5fb463892b580a6207d7cb09bec114c09bc269cd3ee53c29a76a1  m3/collections/src/test/java/com/m3/collections/M3LongDagContract.java
+02b675021d118b0f68cb8bfa093f35299f4d508cba25f4100fba0c080f6d5425  m3/collections/src/test/java/com/m3/collections/M3LongDagJUnitTest.java
