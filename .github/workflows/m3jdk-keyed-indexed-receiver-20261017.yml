@@ -1,0 +1,122 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 keyed index and JNI recipe receiver
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk-keyed-indexed-receiver-20261017.yml'
+      - 'm3/collections/keyed/**'
+      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  named-openrewrite-sdk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout: |
+            m3/collections
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Run real named Maven OpenRewrite LST and text providers, fixed point, refusal tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/keyed/recipe/pom.xml -Dm3.keyed.output="$RUNNER_TEMP/m3-keyed-sdk" clean verify
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m3-keyed-actual-sdk-emission
+          path: ${{ runner.temp }}/m3-keyed-sdk/
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-keyed-maven-test-reports
+          path: m3/collections/keyed/recipe/target/collections-keyed-proof/surefire-reports/
+          retention-days: 7
+  installed-java-jni:
+    needs: named-openrewrite-sdk
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout: |
+            m3/collections
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/download-artifact@v4
+        with:
+          name: m3-keyed-actual-sdk-emission
+          path: ${{ runner.temp }}/m3-keyed-sdk
+      - name: Verify actual emitted bytes equal committed product and pinned real M3 owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, os
+          from pathlib import Path
+          r=Path.cwd()
+          target=Path(os.environ['RUNNER_TEMP'])/'m3-keyed-sdk'
+          base=r/'m3/collections/keyed/recipe/src/main/resources/com/synexia/rewrite'
+          manifests=(base/'hash-pinned-java/collections-keyed/manifest.tsv',base/'hash-pinned-text/collections-keyed/manifest.tsv')
+          digest=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          emitted={}
+          for manifest in manifests:
+              for line in manifest.read_text().splitlines():
+                  if not line or line.startswith('#'): continue
+                  path,pre,after,name=line.split('\t')
+                  assert pre=='ABSENT',(path,'unexpected predecessor')
+                  assert path not in emitted,(path,'duplicate')
+                  assert digest(manifest.parent/name)==after,(path,'template drift')
+                  assert digest(target/path)==after,(path,'SDK emission drift')
+                  assert digest(r/path)==after,(path,'committed receiver drift')
+                  emitted[path]=after
+          assert len(emitted)==19
+          assert (target/'m3/collections/keyed/recipe-receipt.tsv').is_file()
+          roots=r/'m3/collections/src/main/java/com/m3/collections'
+          deps={
+              'M3LinkedHashMap.java':'5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c',
+              'M3OrderedSlotMap.java':'015242ae386c4366471cd7d26fab886a2c362b58029982b0108976342c4f3357',
+              'M3SlotArrays.java':'4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518',
+              'M3SlotMap.java':'0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806',
+              'M3SlotSpliterators.java':'4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070',
+          }
+          for name,sha in deps.items(): assert digest(roots/name)==sha,(name,'unpinned M3 owner')
+          print('M3_KEYED_SDK_INSTALLED_SEAL_PASS',len(emitted),'targets',len(deps),'real M3 owners')
+          PY
+      - name: Compile actual Java21 receiver and execute all inherited/new contract mains
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd m3/collections
+          mkdir -p "$RUNNER_TEMP/classes"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/classes"             src/main/java/com/m3/collections/{M3LinkedHashMap,M3OrderedSlotMap,M3SlotArrays,M3SlotMap,M3SlotSpliterators,M3CollectionViews,M3FilteredMaps}.java             keyed/src/main/java/com/m3/collections/parallel/*.java             keyed/src/test/java/com/m3/collections/parallel/*.java
+          for name in M3ParallelSelfTest M3ExtensionsSelfTest M3SchedulingSelfTest M3ReuseSelfTest M3ReceiverInteropSelfTest; do
+            java -ea -Xmx512m -cp "$RUNNER_TEMP/classes" "com.m3.collections.parallel.$name"
+          done
+      - name: Build native C++17 with UBSan and execute explicit JNI backend
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/native"
+          g++ -std=c++17 -shared -fPIC -Wall -Wextra -Werror             -fsanitize=undefined -fno-sanitize-recover=all             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux"             m3/collections/keyed/native/m3_keyed.cpp -o "$RUNNER_TEMP/native/libm3_keyed.so"
+          for name in M3ParallelSelfTest M3ExtensionsSelfTest M3SchedulingSelfTest M3ReceiverInteropSelfTest; do
+            java -ea -Xcheck:jni -Xmx512m -Djava.library.path="$RUNNER_TEMP/native"               -cp "$RUNNER_TEMP/classes" "com.m3.collections.parallel.$name" --native
+          done
+          for name in M3ParallelSelfTest M3ExtensionsSelfTest M3SchedulingSelfTest; do
+            java -ea -Xmx512m -Djava.library.path="$RUNNER_TEMP/never-built"               -cp "$RUNNER_TEMP/classes" "com.m3.collections.parallel.$name" --missing-native
+          done

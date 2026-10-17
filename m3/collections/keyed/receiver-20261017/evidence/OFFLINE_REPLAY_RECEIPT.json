@@ -1,0 +1,41 @@
+{
+  "schema": "M3KEYED_RECEIVER_OFFLINE_REPLAY_V1",
+  "receiver": "hsoliwal/M3jdk21",
+  "donor": "hsoliwal/com.synexia@2f9a579c60a41422f5b164049cf65746a0830713",
+  "parent": "6fe0f291145db7a99209159cddb77979ad2343c5",
+  "named_recipe": "com.synexia.m3jdk.KeyedReceiver20261017",
+  "manifest_sha256": "eefe25294dd6e797463a3ae825449888df7eebd1a4ed91919bacbfbfaafb5298",
+  "output_targets": 19,
+  "changes": [
+    "M3Parallel captureOnce: no Collection.size or toArray",
+    "M3ReadWrite budgeted capture via same primitive/dynamic lane",
+    "new filtered and sorted view interop proof"
+  ],
+  "offline_replay": {
+    "source": "M3JDK21 first-party qualified Java Replay adapter",
+    "first_apply": "19 outputs",
+    "check": "0 changes",
+    "second_apply": "0 changes",
+    "template_sha256_parity": true
+  },
+  "local_tests": {
+    "java_version": "21.0.12",
+    "compiler": "javac --release 21 -proc:none -Xlint:all -Werror",
+    "caveat": "M3LinkedHashMap linked against local test-only java.util.LinkedHashMap compatibility stand-in; full real-owner compilation remains unverified locally",
+    "java_contract_mains": 5,
+    "native_jni_ubsan_mains": 4,
+    "missing_native_isolation_mains": 3,
+    "relevant_results": [
+      "M3ParallelSelfTest: 18 Java/21 native contract cases",
+      "M3ExtensionsSelfTest: 24 Java/26 native contract cases",
+      "M3SchedulingSelfTest: 22 Java/24 native contract cases",
+      "M3ReuseSelfTest: 8 contract cases",
+      "M3ReceiverInteropSelfTest: 18 Java/20 native checks"
+    ]
+  },
+  "exact_head_openrewrite_sdk": "UNVERIFIED",
+  "full_m3_receiver_module": "UNVERIFIED",
+  "other_platforms": "UNVERIFIED",
+  "production_promotion": "HOLD_UNTIL_REAL_SDK_AND_JAVA_JNI_GATES_PASS",
+  "provenance": "Apache-2.0 first-party sources; category-only external algorithm evidence"
+}

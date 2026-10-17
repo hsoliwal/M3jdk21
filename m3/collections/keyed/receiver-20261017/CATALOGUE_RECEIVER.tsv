@@ -1,0 +1,9 @@
+problem_category	operation	before	selected	correctness	complexity	source
+lazy-collection-capture	M3Parallel.by/byInt/byKeys	Collection.toArray	Single-pass growable Object[] and compact snapshot	OnePass no-size/no-toArray + filtered/sorted wrapper oracle	O(n) time and O(n) temporary references	Synexia pinned receiver improvement
+resource-bounded-capture	M3ReadWrite.capture	source.size() plus toArray	Single-pass budgeted capture	Old row/read/write budget and quiescence suites + OnePass test	O(min(rows,budget)) space; bound refusal reads next item	M3JDK21/Synexia first-party
+key-local-partitions	stable grouping	per-key materialized List<Entry>	M3LinkedHashMap key IDs plus packed primitive offset/row indices	18 original Java and 21 native cases, 200 random traces	O(n + keyCount) index	Synexia pinned first-party
+selection-mask	stable filter	object copies during element scan	boolean[] mask then stable serial compaction	original differential selection cases	O(n) mask + compact output	Synexia pinned first-party
+hash-index-reuse	cache	boxed slot ID map	inline first-party PackedHashMap.Table atoms	8 reuse cases, 20000 independent weighted reference operations	O(1) expected hash lookup	Synexia pinned first-party
+problem-category	stable grouping	LeetCode counting and grouping taxonomy	prefix-count scatter	category evidence only, no challenge solutions copied	O(n+k)	LeetCode categories
+problem-category	indexed-key semantics	HackerRank Java Map taxonomy	immutable key partition plan	category evidence only, no challenge solutions copied	O(n+k)	HackerRank categories
+problem-category	stable index selection	GeeksforGeeks partition/filter categories	primitive stable mask and offsets	category evidence only, no challenge solutions copied	O(n)	GeeksforGeeks categories
