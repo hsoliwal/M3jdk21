@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "556b7a28722b459a9bb63183273e1b12f720623a",
+  "canonical_pull_request": 12038,
+  "canonical_path": "synexia-m3-recipe/recipes/m3-java-util-views-20261017/typed-contracts",
+  "canonical_task_tree": "e456be69c90fbd27fee19db34d1710fe291f28c5",
+  "receiver_repository": "hsoliwal/M3jdk21",
+  "receiver_base": "bed96f73a74bfe146bf05346f3a260036093ba89",
+  "receiver_path": "m3/runtime-integration/java-util-views/typed-contracts/recipe",
+  "mirror_status": "EXACT_28_FILE_AUTHORING_AND_PROOF_MIRROR",
+  "runtime_dependency": "NONE",
+  "recipe": "com.synexia.m3.JavaUtilViewContracts",
+  "actual_receiving": "three exact SDK Results; two existing source replacements and one absent-before test addition",
+  "proof": "two completed offline Maven/OpenRewrite verify runs plus serial patched-java.base/JNI checks; source-built product gates pending",
+  "ownership": "Canonical reusable recipes remain Synexia-owned; target runtime/promotion remains M3JDK21-owned. Fix the canonical recipe and rerun; do not hand-edit this mirror or generated runtime.",
+  "license": "Existing per-file Apache notices retained. Inherited java.base explicit license admission HOLD is not waived.",
+  "frozen_proof_base": "67feb628e55d886d4a82fd8bc4e8a3a63fe2c967",
+  "receiving_preflight": "All four source input Git blobs match the frozen proof after parent PR1038 and PR1048 merges; new regression and task directory absent."
+}

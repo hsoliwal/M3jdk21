@@ -1,0 +1,47 @@
+{
+  "target_base": "hsoliwal/M3jdk21@67feb628e55d886d4a82fd8bc4e8a3a63fe2c967",
+  "canonical_parent": "hsoliwal/com.synexia@4541f77950157f9d75d95b24a5caf785cf4a0341",
+  "source_family": "synexia-m3-recipe/recipes/m3-java-util-views-20261017",
+  "ancestor_catalogue_blob": "ac1bea05293f9995eefb999d8dc96668f35b6849",
+  "engine_source": "hsoliwal/com.synexia@7faff1fdb0a72bbb2e271bdf2571acfe6cc9bb2c/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite",
+  "engine_mirror": "two exact authoring files; canonical ownership unchanged",
+  "license": "First-party Apache-2.0 notices retained; java.base admission remains HOLD; no third-party/challenge implementation copied",
+  "toolchain": {
+    "archive_sha256": "d6118d735beccdc5e92fcac85c91cc1a1ba33dcb25f3b23222349743d37c8a02",
+    "maven": "3.9.6",
+    "rewrite-core": "8.89.0",
+    "junit": "5.10.1",
+    "java": "openjdk version \"21.0.12.1\" 2026-08-18\nOpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)\n",
+    "gcc": "gcc (Debian 14.2.0-19) 14.2.0",
+    "observed_jar_sha256": {
+      "org/openrewrite/rewrite-core/8.89.0/rewrite-core-8.89.0.jar": "d240699f25c6bb52cce0541ab286bdf41a309b3c03f721ce3901ada3a3d66b2f",
+      "org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar": "c1a386e901fae28e493185a47c8cea988fb1a37422b353a0f8b4df2e6c5d6037"
+    }
+  },
+  "inputs": {
+    "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java": {
+      "sha256": "282b92bbce458ccd3f99f933fe6859388a0e97a1db0cd61b0dfdc44431b7575c",
+      "git_blob": "33ca98058ef08ea5779e259daaae8b5f1f9b678a"
+    },
+    "src/java.base/share/classes/java/util/CollectionViews.java": {
+      "sha256": "d294f1f9a25f664b4735c015ff1aec83118a90020d6fc443b6d92f459251fc8b",
+      "git_blob": "60ee7b46b457167cecb242d8ec14a4e9dd7653cd"
+    },
+    "test/jdk/java/util/CollectionViews/RunSearchJni.java": {
+      "sha256": "3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a",
+      "git_blob": "0508f70a7c846c2841f978a9085d2b6254d2465c"
+    },
+    "test/jdk/java/util/CollectionViews/run_search_jni.c": {
+      "sha256": "aecfe097fe61b5260a09c2bbbcec57bca2a96bd7cabf343bc380cfc5b28a1d10",
+      "git_blob": "5a9cf3274e120788dd9e9b15433d130e5f23865b"
+    },
+    "M3GpuToolJoinRecipe.java": {
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "git_blob": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+    },
+    "M3GpuToolJoinManifest.java": {
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "git_blob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    }
+  }
+}

@@ -5,6 +5,7 @@
  * direct owner membership/removal and single-pass sorted snapshot acquisition.
  * Modified 2026-10-17: stack-safe deferred predicate plans for nested filters.
  * Modified 2026-10-17: java.base receiver; sole implementation behind legacy facade.
+ * Modified 2026-10-17: preserve typed traversal metadata and saturating size.
  * Apache notice retained; core integration license review remains a promotion gate.
  */
 package java.util;
@@ -241,7 +242,7 @@ public final class CollectionViews {
             int count = 0;
             for (E element : backing) {
                 if (visible(element)) {
-                    count++;
+                    if (count != Integer.MAX_VALUE) count++;
                 }
             }
             return count;
@@ -326,6 +327,12 @@ public final class CollectionViews {
         }
 
         @Override
+        public Spliterator<E> spliterator() {
+            return new SelectionSpliterator<>(backing.spliterator(), predicate,
+                    Spliterator.DISTINCT, null);
+        }
+
+        @Override
         public boolean equals(Object other) {
             if (other == this) {
                 return true;
@@ -392,6 +399,14 @@ public final class CollectionViews {
         @Override
         public Comparator<? super E> comparator() {
             return sorted.comparator();
+        }
+
+        /** Owner order is authoritative, including bounded and descending views. */
+        @Override
+        public Spliterator<E> spliterator() {
+            return new SelectionSpliterator<>(sorted.spliterator(), super.predicate,
+                    Spliterator.DISTINCT | Spliterator.SORTED | Spliterator.ORDERED,
+                    sorted.comparator());
         }
 
         @Override
@@ -553,12 +568,21 @@ public final class CollectionViews {
     private static final class SelectionSpliterator<E> implements Spliterator<E>, Consumer<E> {
         private final Spliterator<E> source;
         private final Predicate<? super E> predicate;
+        private final int guaranteed;
+        private final Comparator<? super E> ownerComparator;
         private Consumer<? super E> action;
         private boolean delivered;
 
         private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate) {
+            this(source, predicate, 0, null);
+        }
+
+        private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate,
+                int guaranteed, Comparator<? super E> ownerComparator) {
             this.source = source;
             this.predicate = predicate;
+            this.guaranteed = guaranteed;
+            this.ownerComparator = ownerComparator;
         }
 
         @Override
@@ -596,7 +620,7 @@ public final class CollectionViews {
         @Override
         public Spliterator<E> trySplit() {
             Spliterator<E> prefix = source.trySplit();
-            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate);
+            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate, guaranteed, ownerComparator);
         }
 
         @Override
@@ -606,12 +630,12 @@ public final class CollectionViews {
 
         @Override
         public int characteristics() {
-            return source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE);
+            return (source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE)) | guaranteed;
         }
 
         @Override
         public Comparator<? super E> getComparator() {
-            return source.getComparator();
+            return (guaranteed & SORTED) != 0 ? ownerComparator : source.getComparator();
         }
     }
 

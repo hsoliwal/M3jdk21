@@ -1,0 +1,65 @@
+{
+  "status": "PASS_SELECTED_ACTUAL_MAVEN_OPENREWRITE_JAVA_JNI",
+  "sdk_methods": [
+    "everyPartialStateAndInputOrder",
+    "independentWorkerReplay",
+    "missingDriftDuplicateAndOccupiedTargetsRefused",
+    "namedResultsFixedPointAndActualEmission",
+    "templateTamperLateEditAndCancellationRefused"
+  ],
+  "sdk_results": 3,
+  "sdk_partial_states": 8,
+  "sdk_partial_order_schedules": 24,
+  "target_baseline": "hsoliwal/M3jdk21@67feb628e55d886d4a82fd8bc4e8a3a63fe2c967",
+  "serial_receiving": [
+    {
+      "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+      "sha256": "5248d72231f7a55df8bee51e5cc68aff2c19fbe907e3f75ee0434ef832dac244",
+      "git_blob": "204d4aaf08d9c981f5cc106563d9fb6fd4853787"
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/run_search_jni.c",
+      "sha256": "d0b4314123b2b503b9452e1675a2a45160e569681602c3ffe9f3839336691e10",
+      "git_blob": "29e0116b0a5e54221525ec1ab3d48199d56d1e16"
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/TraversalContractsTest.java",
+      "sha256": "3486211166f0a9f05ae09a597f5318a6aeac5698085c4a670e4657fcc3a03084",
+      "git_blob": "faba574bff23f44be8c39ed2ee8cf880d9c57748"
+    }
+  ],
+  "observations": {
+    "baseline-legacy": "PASS mode=legacy checks=28559 tape=74b12951ca7fb379",
+    "baseline-actual-jni": "PASS mode=jni checks=2606 tape=c7deee66c4be0083",
+    "pass-1-legacy": "PASS mode=legacy checks=28559 tape=74b12951ca7fb379",
+    "pass-1-contracts": "PASS mode=all checks=705766 tape=ebba8ce88e3e9eda",
+    "pass-1-saturated-size": "SATURATED occurrences=2147483664 size=2147483647\nPASS mode=size checks=2 tape=ffffffff8000002f",
+    "pass-1-actual-jni": "PASS mode=jni checks=2606 tape=c7deee66c4be0083",
+    "pass-2-legacy": "PASS mode=legacy checks=28559 tape=74b12951ca7fb379",
+    "pass-2-contracts": "PASS mode=all checks=705766 tape=ebba8ce88e3e9eda",
+    "pass-2-actual-jni": "PASS mode=jni checks=2606 tape=c7deee66c4be0083",
+    "pass-3-legacy": "PASS mode=legacy checks=28559 tape=74b12951ca7fb379",
+    "pass-3-contracts": "PASS mode=all checks=705766 tape=ebba8ce88e3e9eda",
+    "pass-3-actual-jni": "PASS mode=jni checks=2606 tape=c7deee66c4be0083",
+    "final-interpreter": "PASS mode=all checks=705766 tape=ebba8ce88e3e9eda",
+    "final-C1": "PASS mode=all checks=705766 tape=ebba8ce88e3e9eda",
+    "final-C2": "PASS mode=all checks=705766 tape=ebba8ce88e3e9eda",
+    "final-release-jni": "PASS mode=jni checks=2606 tape=c7deee66c4be0083"
+  },
+  "commands": 58,
+  "canonical_engine_blobs": {
+    "M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "native_scope": "Existing verification-only RunSearchJni; not production acceleration or libjava changes",
+  "proof_scope": "Real selected sources patched into stock Java21 java.base; not a rebuilt matched M3JDK21",
+  "unexecuted": [
+    "full source-built M3JDK21",
+    "jtreg harness and JCK",
+    "owning module/full reactor and all-provider closure",
+    "hosted exact-head CI",
+    "Windows/macOS",
+    "application/JMH performance",
+    "java.base source license admission"
+  ]
+}

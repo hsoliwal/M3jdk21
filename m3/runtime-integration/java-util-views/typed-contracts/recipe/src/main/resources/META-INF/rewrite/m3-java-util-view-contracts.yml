@@ -1,0 +1,7 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.JavaUtilViewContracts
+displayName: M3 java.util view contracts
+description: Source-sealed target contract refinement with unchanged public interfaces.
+recipeList:
+  - com.synexia.rewrite.M3JavaUtilViewContractsRecipe
