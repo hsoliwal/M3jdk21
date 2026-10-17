@@ -41,6 +41,14 @@ jobs:
           expected=(crate/template).read_bytes()
           assert hashlib.sha256(expected).hexdigest()==post
           assert (pathlib.Path(path)).read_bytes()==expected
+          pin=root/'wrappers/cross-family-20261017/SYNEXIA_PIN.tsv'
+          lines=pin.read_text(encoding='utf-8').splitlines()
+          assert len(lines)==5
+          for line in lines[1:]:
+              repo,commit,canonical,receiver,digest,blob=line.split('\t')
+              assert repo=='hsoliwal/com.synexia'
+              assert commit=='e05e3adedb2579319355678e7712ec3792bc0863'
+              assert hashlib.sha256(pathlib.Path(receiver).read_bytes()).hexdigest()==digest
           for module,name,expected_count in [
               (root/'wrappers/recipe', 'M3CrossFamilyOracleRecipeTest', 2),
               (root, 'M3FilteredCrossFamilyOracleTest', 4),

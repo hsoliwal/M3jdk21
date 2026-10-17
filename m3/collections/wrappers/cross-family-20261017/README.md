@@ -54,3 +54,19 @@ is created.
 `AGENTS.md` and the canonical receiving invariant still place the global phase
 in **STRING**. This is isolated collection acceptance evidence, not promotion of
 `java.util` collection implementations or a full M3JDK image.
+
+## Canonical source pin and mirror rule
+
+The exact reusable recipe and test are now committed in **Synexia PR #12043**,
+commit `e05e3adedb2579319355678e7712ec3792bc0863`.
+The four Maven/OpenRewrite inputs below are a byte-identical proof mirror,
+not a second canonical recipe implementation. Every target mirror SHA-256 and
+Git blob matches the immutable Synexia revision; see `SYNEXIA_PIN.tsv`.
+The source-sealed JUnit fixture was emitted into this branch before the
+canonical resource was pinned. The same reviewed bytes are now canonical
+in Synexia, so future improvements must change the canonical recipe first.
+
+The repository's cross-repository access is deliberately not assumed by CI:
+the public target verifies the pinned source bytes locally, while the private
+Synexia reactor independently compiles/tests the named recipe. No target
+workflow may claim remote canonical execution merely because a pin matches.
