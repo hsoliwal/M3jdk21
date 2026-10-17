@@ -282,18 +282,18 @@ final class M3StringRegexDp {
             this.atoms = atoms;
             this.units = units;
             int minimum = 0;
-            long required = 0L;
+            long requiredSignals = 0L;
             for (int atom : atoms) {
                 if ((atom & STAR) == 0) {
                     minimum++;
                     char literal = (char) (atom & CODE_UNIT);
                     if (literal != '.') {
-                        required |= M3StringFacts.codeUnitSignal(literal);
+                        requiredSignals |= M3StringFacts.codeUnitSignal(literal);
                     }
                 }
             }
             minimumUtf16Units = minimum;
-            mandatoryUnitSignals = required;
+            mandatoryUnitSignals = requiredSignals;
             int first = atoms[0];
             int last = atoms[atoms.length - 1];
             fixedFirstUnit = (first & STAR) == 0
