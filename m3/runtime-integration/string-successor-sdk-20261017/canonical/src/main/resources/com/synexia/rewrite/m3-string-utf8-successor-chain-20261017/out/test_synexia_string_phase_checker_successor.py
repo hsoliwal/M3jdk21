@@ -132,8 +132,8 @@ EXPECTED_RECEIPT_V4 = json.loads(r'''{
     "baseCommit": "1421c11c8d4b16b6ed02c72f61382e52f5ee8cee",
     "recipeClass": "com.synexia.rewrite.M3StringUtf8SuccessorChainRecipe",
     "sourceResourcePath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/out/check_string_phase.py",
-    "sourceResourceGitBlob": "8e4a94d8549143c9696d91881e4599ab2457a772",
-    "sourceResourceSha256": "d3deb2133cc94d0208e5b79e1c61d6b68804ba9387e954c2494a5ec8f7b83ccc",
+    "sourceResourceGitBlob": "2f8b3b75c1de3110c30cf3b860b6fbad8f00fd72",
+    "sourceResourceSha256": "db38acfb6f2b04b5f119544e91642a3639bd6b73ae32e88f077e819b0a4375c1",
     "stateAtCapture": "DRAFT_CANDIDATE_NOT_QUALIFIED"
   },
   "target": {
@@ -142,8 +142,8 @@ EXPECTED_RECEIPT_V4 = json.loads(r'''{
     "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
     "beforeGitBlob": "368842c70f4671bac14ad902ed047a486109f27d",
     "beforeSha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
-    "afterGitBlob": "8e4a94d8549143c9696d91881e4599ab2457a772",
-    "afterSha256": "d3deb2133cc94d0208e5b79e1c61d6b68804ba9387e954c2494a5ec8f7b83ccc"
+    "afterGitBlob": "2f8b3b75c1de3110c30cf3b860b6fbad8f00fd72",
+    "afterSha256": "db38acfb6f2b04b5f119544e91642a3639bd6b73ae32e88f077e819b0a4375c1"
   },
   "sourceChronology": {
     "chainPath": "m3/synexia-import/current-full-borrow/string-target-successor-chain.tsv",
@@ -161,6 +161,46 @@ EXPECTED_RECEIPT_V4 = json.loads(r'''{
     "utf8ReceiptGitBlob": "e3ee12859fd0a272dfcf56e85741a95ac4acbf76",
     "utf8ReceiptSha256": "510d635a87eac7f0d0dcfcb5901b1e985ed770571b5f98f46ae4bb286cdf9f68",
     "utf8Qualification": "DRAFT_CANDIDATE_HOLD"
+  },
+  "ownerChronology": {
+    "chainPath": "m3/synexia-import/current-full-borrow/string-target-owner-successor-chain-20261017.tsv",
+    "chainGitBlob": "c7b52d16a15277c0aa2a09fada6f1fb3840aa70e",
+    "chainSha256": "c56d86b7981dd31533a509aad97c25368df57b6e0297847dde8b3435e9c618ad",
+    "transitionCount": 2,
+    "historicalSuccessorsPath": "m3/synexia-import/current-full-borrow/string-target-successors.tsv",
+    "historicalSuccessorsGitBlob": "141806b3119342dfba2efe6487664ba3a0c53158",
+    "historicalSuccessorsSha256": "ab1c56d567e739a6a5d2f630ec667751a8821ebdab2857a225c2650d84ca7e25",
+    "state": "SOURCE_CANDIDATE_NOT_RUNTIME_ACCEPTED",
+    "lineages": [
+      {
+        "targetPath": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        "predecessorGitBlob": "fcd108ab6181fec11d16eda811b29d18298f3fb1",
+        "successorGitBlob": "d8dd7dc30db6a9e3897146572bd4a7755c954ffb",
+        "synexiaPr": 11288,
+        "synexiaSourceCommit": "0b10db35ec0cf1af442077bcd6200cf7f5896eb3",
+        "synexiaManifestGitBlob": "c5ec30a2f6ad836697f884d8d332fc0a42bb1939",
+        "m3jdkPr": 873,
+        "m3jdkContentCommit": "56d29d32b128de0d998e933f957e090383e8d2dc",
+        "receiptPath": "m3/runtime-integration/modified-utf8-dp-receipt-20261014.md",
+        "receiptGitBlob": "0777d79c2d32361c40f1198e9bff5c312fbf1229",
+        "receiptSha256": "e4875b1656c2d9c8c2a28888190c794416e14d501fc9b68fe4ed5dcb305448dc",
+        "evidenceScope": "EXISTING_RECEIVER_HOLD_NO_MATCHED_RUNTIME_ACCEPTANCE"
+      },
+      {
+        "targetPath": "src/java.base/share/classes/java/lang/M3StringPool.java",
+        "predecessorGitBlob": "514247a2e6c3704e03a9b47682f74e481f66585f",
+        "successorGitBlob": "0905414556ad0b698a5b5f835f53d12bc040bc8c",
+        "synexiaPr": 11612,
+        "synexiaSourceCommit": "ed7da73bc2c1fd958e9d250acf308e8bb46c7b9e",
+        "synexiaManifestGitBlob": "eed598522d2b17579f023ab5eb2b71a5e47f4964",
+        "m3jdkPr": 929,
+        "m3jdkContentCommit": "bd68daa7849a3390473d61237c81d5c423f5bb42",
+        "receiptPath": "m3/runtime-integration/leaf-cursor-receipt-20261015.md",
+        "receiptGitBlob": "13b2a36514736d6357cb8ccf130fede577ee059b",
+        "receiptSha256": "34d15a97962500108f67909ea3389bd94dceb16111b1617b163ae67039b225d9",
+        "evidenceScope": "EXISTING_RECEIVER_HOLD_NO_MATCHED_RUNTIME_ACCEPTANCE"
+      }
+    ]
   },
   "change": {
     "relation": "SOURCE_CANDIDATE_UTF8_CHRONOLOGY_RECONCILIATION",
@@ -407,6 +447,92 @@ class SynexiaStringPhaseCheckerSuccessorTest(unittest.TestCase):
                          hold["post_git_blob"])
         self.assertEqual(chronology["predecessorGitBlob"], hold["pre_git_blob"])
         self.assertEqual(chronology["successorGitBlob"], hold["post_git_blob"])
+
+
+    def test_v4_owner_chronology_preserves_history_and_receiver_holds(self):
+        chronology = EXPECTED_RECEIPT_V4["ownerChronology"]
+        chain = (ROOT / chronology["chainPath"]).read_bytes()
+        expected = (
+            (
+                "src/java.base/share/classes/java/lang/M3StringFacts.java",
+                "fcd108ab6181fec11d16eda811b29d18298f3fb1",
+                "d8dd7dc30db6a9e3897146572bd4a7755c954ffb", "11288", "873",
+                "m3/runtime-integration/modified-utf8-dp-receipt-20261014.md",
+                "0777d79c2d32361c40f1198e9bff5c312fbf1229",
+                "e4875b1656c2d9c8c2a28888190c794416e14d501fc9b68fe4ed5dcb305448dc",
+            ),
+            (
+                "src/java.base/share/classes/java/lang/M3StringPool.java",
+                "514247a2e6c3704e03a9b47682f74e481f66585f",
+                "0905414556ad0b698a5b5f835f53d12bc040bc8c", "11612", "929",
+                "m3/runtime-integration/leaf-cursor-receipt-20261015.md",
+                "13b2a36514736d6357cb8ccf130fede577ee059b",
+                "34d15a97962500108f67909ea3389bd94dceb16111b1617b163ae67039b225d9",
+            ),
+        )
+        expected_lines = [
+            "schema\ttarget_path\tpredecessor_git_blob\tsuccessor_git_blob\t"
+            "synexia_pr\tm3jdk_pr\tstate\n"
+        ]
+        for path, before, after, source_pr, target_pr, *_ in expected:
+            expected_lines.append("\t".join((
+                "M3JDK21_STRING_TARGET_EVOLUTION_V1", path, before, after,
+                source_pr, target_pr, "SOURCE_CANDIDATE_NOT_RUNTIME_ACCEPTED",
+            )) + "\n")
+        self.assertEqual("".join(expected_lines).encode("ascii"), chain)
+        self.assertEqual("c7b52d16a15277c0aa2a09fada6f1fb3840aa70e", git_blob(chain))
+        self.assertEqual("c56d86b7981dd31533a509aad97c25368df57b6e0297847dde8b3435e9c618ad",
+                         hashlib.sha256(chain).hexdigest())
+        self.assertEqual(chronology["chainGitBlob"], git_blob(chain))
+        self.assertEqual(chronology["chainSha256"], hashlib.sha256(chain).hexdigest())
+        self.assertEqual(2, chronology["transitionCount"])
+        self.assertEqual("SOURCE_CANDIDATE_NOT_RUNTIME_ACCEPTED", chronology["state"])
+
+        historical = (ROOT / chronology["historicalSuccessorsPath"]).read_bytes()
+        self.assertEqual("141806b3119342dfba2efe6487664ba3a0c53158", git_blob(historical))
+        self.assertEqual("ab1c56d567e739a6a5d2f630ec667751a8821ebdab2857a225c2650d84ca7e25",
+                         hashlib.sha256(historical).hexdigest())
+        self.assertEqual(chronology["historicalSuccessorsGitBlob"], git_blob(historical))
+        self.assertEqual(chronology["historicalSuccessorsSha256"],
+                         hashlib.sha256(historical).hexdigest())
+        historical_rows = [line.split("\t") for line in historical.decode("utf-8").splitlines()]
+        self.assertEqual(5, len(historical_rows))
+        historical_successors = {row[1]: row[3] for row in historical_rows[1:]}
+        self.assertEqual({
+            "src/java.base/share/classes/java/lang/M3String.java",
+            "src/java.base/share/classes/java/lang/M3StringFacts.java",
+            "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+            "src/java.base/share/classes/java/lang/M3StringPool.java",
+        }, set(historical_successors))
+        self.assertEqual(2, len(chronology["lineages"]))
+        for fields, lineage in zip(expected, chronology["lineages"]):
+            path, before, after, source_pr, target_pr, receipt_path, receipt_git, receipt_sha = fields
+            with self.subTest(owner=path):
+                self.assertEqual(before, historical_successors[path])
+                self.assertEqual(
+                    (path, before, after, source_pr, target_pr,
+                     receipt_path, receipt_git, receipt_sha),
+                    (lineage["targetPath"], lineage["predecessorGitBlob"],
+                     lineage["successorGitBlob"], str(lineage["synexiaPr"]),
+                     str(lineage["m3jdkPr"]), lineage["receiptPath"],
+                     lineage["receiptGitBlob"], lineage["receiptSha256"]),
+                )
+                self.assertEqual("EXISTING_RECEIVER_HOLD_NO_MATCHED_RUNTIME_ACCEPTANCE",
+                                 lineage["evidenceScope"])
+                hold_bytes = (ROOT / receipt_path).read_bytes()
+                self.assertEqual(receipt_git, git_blob(hold_bytes))
+                self.assertEqual(receipt_sha, hashlib.sha256(hold_bytes).hexdigest())
+                text = hold_bytes.decode("utf-8")
+                if path.endswith("M3StringFacts.java"):
+                    self.assertIn("draft PR [#11288]", text)
+                    self.assertIn("**Hold promotion:**", text)
+                    self.assertIn("platform matrices remain NOT_RUN", text)
+                    self.assertIn("not yet tested against this target's matched M3JDK21 runtime", text)
+                else:
+                    self.assertIn("recipe commit \u0060ed7da73bc2c1fd958e9d250acf308e8bb46c7b9e\u0060", text)
+                    self.assertIn("**NOT RUN:**", text)
+                    self.assertIn("Keep this receiver PR **draft**", text)
+                    self.assertIn("not* proof of matched M3JDK/HotSpot production behavior", text)
 
 
 if __name__ == "__main__":

@@ -74,8 +74,8 @@ final class M3StringUtf8SuccessorChainRecipeTest {
     @Test void everyPartialStateAndBothOrdersReachExactFixedPoint() throws Exception {
         var changed = manifest().targets().stream()
                 .filter(target -> !target.before().equals(target.after())).toList();
-        assertEquals(5, changed.size());
-        for (int state = 0; state < 32; state++) {
+        assertEquals(6, changed.size());
+        for (int state = 0; state < 64; state++) {
             var input = before();
             for (int i = 0; i < changed.size(); i++) {
                 if ((state & (1 << i)) != 0) input.put(changed.get(i).path(), changed.get(i).text());
@@ -86,7 +86,7 @@ final class M3StringUtf8SuccessorChainRecipeTest {
                 if (reverse) java.util.Collections.reverse(paths);
                 for (String path : paths) ordered.put(path, input.get(path));
                 var result = apply(ordered);
-                assertEquals(5 - Integer.bitCount(state), result.changes());
+                assertEquals(6 - Integer.bitCount(state), result.changes());
                 for (var target : manifest().targets()) {
                     assertEquals(target.after(),
                             M3GpuToolJoinManifest.sha256(result.files().get(target.path())));
@@ -193,7 +193,7 @@ final class M3StringUtf8SuccessorChainRecipeTest {
         assertTrue(baseline.contains("Ran 26 tests"), baseline);
         assertTrue(baseline.contains("FAILED (failures=1, errors=2)"), baseline);
         var result = apply(serialAfter);
-        assertEquals(5, result.changes());
+        assertEquals(6, result.changes());
         for (var target : manifest().targets()) {
             assertEquals(target.after(),
                     M3GpuToolJoinManifest.sha256(result.files().get(target.path())));
@@ -205,12 +205,12 @@ final class M3StringUtf8SuccessorChainRecipeTest {
         }
         write(temporary, result.files());
         String candidate = python(test, temporary.resolve("v4-candidate.log"), 0);
-        assertTrue(candidate.contains("Ran 26 tests"), candidate);
+        assertTrue(candidate.contains("Ran 29 tests"), candidate);
         assertTrue(candidate.matches("(?s).*\\nOK\\s*"), candidate);
         Path compatibility = temporary.resolve(
                 "m3/compatibility/test_synexia_string_phase_checker_successor.py");
         String custody = python(compatibility, temporary.resolve("v4-custody.log"), 0);
-        assertTrue(custody.contains("Ran 12 tests"), custody);
+        assertTrue(custody.contains("Ran 13 tests"), custody);
         assertTrue(custody.matches("(?s).*\\nOK\\s*"), custody);
         for (String name : List.of("v3-baseline.log", "v4-candidate.log", "v4-custody.log")) {
             retain("logs", name, Files.readString(temporary.resolve(name), StandardCharsets.UTF_8));

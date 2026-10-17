@@ -399,5 +399,141 @@ class StringTargetSuccessorTest(unittest.TestCase):
         self.assertEqual(row["current_target_git_blob"], phase.git_blob(target))
 
 
+    def read_owner_chain(self):
+        with phase.OWNER_SUCCESSOR_CHAIN.open(encoding="utf-8", newline="") as handle:
+            return list(csv.DictReader(handle, delimiter="\t"))
+
+    def with_owner_chain(self, changed, callback, header=None, extra_cell=False):
+        fields = phase.SUCCESSOR_CHAIN_HEADER if header is None else header
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "candidate-owner-successor-chain.tsv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+                writer.writerow(fields)
+                for row in changed:
+                    cells = [row.get(field, "") for field in fields]
+                    writer.writerow(cells + (["unreviewed"] if extra_cell else []))
+            with patch.object(phase, "OWNER_SUCCESSOR_CHAIN", path):
+                callback()
+
+    def test_owner_chain_independent_current_four_owner_oracle(self):
+        # Literal oracle is independent of both checker tuples and mutable tables.
+        expected = {
+            "src/java.base/share/classes/java/lang/M3String.java":
+                "35ed998540e044eed8cb7596e2e2c019ae369bd3",
+            "src/java.base/share/classes/java/lang/M3StringFacts.java":
+                "d8dd7dc30db6a9e3897146572bd4a7755c954ffb",
+            "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java":
+                "c0074f4b144da23040e63e0ba8866d56d0d304ac",
+            "src/java.base/share/classes/java/lang/M3StringPool.java":
+                "0905414556ad0b698a5b5f835f53d12bc040bc8c",
+        }
+        self.assertEqual(expected, phase.current_successor_blobs(self.mapping()))
+        self.assertEqual("string-target-owner-successor-chain-20261017.tsv",
+                         phase.OWNER_SUCCESSOR_CHAIN.name)
+        expected_chain = (
+            ("src/java.base/share/classes/java/lang/M3StringFacts.java",
+             "fcd108ab6181fec11d16eda811b29d18298f3fb1",
+             "d8dd7dc30db6a9e3897146572bd4a7755c954ffb", "11288", "873"),
+            ("src/java.base/share/classes/java/lang/M3StringPool.java",
+             "514247a2e6c3704e03a9b47682f74e481f66585f",
+             "0905414556ad0b698a5b5f835f53d12bc040bc8c", "11612", "929"),
+        )
+        chain = self.read_owner_chain()
+        self.assertEqual(expected_chain, tuple(
+            (step["target_path"], step["predecessor_git_blob"],
+             step["successor_git_blob"], step["synexia_pr"], step["m3jdk_pr"])
+            for step in chain))
+        for step in chain:
+            self.assertEqual("M3JDK21_STRING_TARGET_EVOLUTION_V1", step["schema"])
+            self.assertEqual("SOURCE_CANDIDATE_NOT_RUNTIME_ACCEPTED", step["state"])
+
+    def test_owner_chain_refuses_drift_ambiguity_reordering_and_promotion(self):
+        good = self.read_owner_chain()
+        self.assertEqual(2, len(good))
+        # Prove a valid baseline before exercising every malformed candidate.
+        baseline = phase.current_successor_blobs(self.mapping())
+        self.assertEqual(4, len(baseline))
+        self.assertEqual("d8dd7dc30db6a9e3897146572bd4a7755c954ffb",
+                         baseline["src/java.base/share/classes/java/lang/M3StringFacts.java"])
+        self.assertEqual("0905414556ad0b698a5b5f835f53d12bc040bc8c",
+                         baseline["src/java.base/share/classes/java/lang/M3StringPool.java"])
+        extra = good[-1].copy()
+        extra["target_path"] = "src/java.base/share/classes/java/lang/InventedString.java"
+        cases = [
+            ("empty", []),
+            ("facts-only", good[:1]),
+            ("pool-only", good[1:]),
+            ("reversed", list(reversed(good))),
+            ("duplicate-facts", [good[0], good[0].copy()]),
+            ("duplicate-pool", [good[1], good[1].copy()]),
+            ("appended-facts", good + [good[0].copy()]),
+            ("appended-pool", good + [good[1].copy()]),
+            ("unreviewed-third-owner", good + [extra]),
+        ]
+        replacements = {
+            "schema": "M3JDK21_STRING_TARGET_EVOLUTION_V2",
+            "target_path": "src/java.base/share/classes/java/lang/InventedString.java",
+            "predecessor_git_blob": "0" * 40,
+            "successor_git_blob": "f" * 40,
+            "synexia_pr": "0",
+            "m3jdk_pr": "0",
+            "state": "RUNTIME_ACCEPTED",
+        }
+        self.assertEqual(set(phase.SUCCESSOR_CHAIN_HEADER), set(replacements))
+        for index in range(len(good)):
+            for field, replacement in replacements.items():
+                for candidate in (replacement, ""):
+                    changed = [row.copy() for row in good]
+                    changed[index][field] = candidate
+                    cases.append((f"row-{index + 1}:{field}:{candidate!r}", changed))
+        self.assertEqual(37, len(cases))
+        for label, changed in cases:
+            with self.subTest(case=label):
+                self.with_owner_chain(changed, lambda: self.assertRaises(
+                    ValueError, phase.current_successor_blobs, self.mapping()))
+        for header in (
+            list(reversed(phase.SUCCESSOR_CHAIN_HEADER)),
+            phase.SUCCESSOR_CHAIN_HEADER[:-1],
+            phase.SUCCESSOR_CHAIN_HEADER + ["unreviewed"],
+        ):
+            with self.subTest(header=header):
+                self.with_owner_chain(good, lambda: self.assertRaises(
+                    ValueError, phase.current_successor_blobs, self.mapping()), header=header)
+        self.with_owner_chain(good, lambda: self.assertRaises(
+            ValueError, phase.current_successor_blobs, self.mapping()), extra_cell=True)
+        with tempfile.TemporaryDirectory() as temporary:
+            missing = Path(temporary) / "missing-owner-successor-chain.tsv"
+            with patch.object(phase, "OWNER_SUCCESSOR_CHAIN", missing):
+                with self.assertRaises(FileNotFoundError):
+                    phase.current_successor_blobs(self.mapping())
+        historical = phase.approved_successors(self.mapping())
+        for target in (
+            "src/java.base/share/classes/java/lang/M3StringFacts.java",
+            "src/java.base/share/classes/java/lang/M3StringPool.java",
+        ):
+            changed = {path: row.copy() for path, row in historical.items()}
+            changed[target]["successor_git_blob"] = "0" * 40
+            with self.subTest(discontinuous_owner=target):
+                with patch.object(phase, "approved_successors", return_value=changed):
+                    with self.assertRaisesRegex(ValueError, "discontinuous owner successor chain"):
+                        phase.current_successor_blobs(self.mapping())
+
+    def test_owner_chain_keeps_original_ledgers_and_new_table_identity(self):
+        # Independently seal both immutable ledgers and the separate two-row delta.
+        for path, expected_blob, physical_lines in (
+            (phase.SUCCESSORS, "141806b3119342dfba2efe6487664ba3a0c53158", 5),
+            (phase.SUCCESSOR_CHAIN, "75d949e5aa2c8ff4e5c70d648e81fc0d37b68651", 4),
+            (phase.OWNER_SUCCESSOR_CHAIN, "c7b52d16a15277c0aa2a09fada6f1fb3840aa70e", 3),
+        ):
+            data = path.read_bytes()
+            self.assertEqual(physical_lines, len(data.splitlines()), str(path))
+            header = f"blob {len(data)}\0".encode("ascii")
+            self.assertEqual(expected_blob, hashlib.sha1(header + data).hexdigest(), str(path))
+        self.assertEqual(
+            "c56d86b7981dd31533a509aad97c25368df57b6e0297847dde8b3435e9c618ad",
+            hashlib.sha256(phase.OWNER_SUCCESSOR_CHAIN.read_bytes()).hexdigest())
+
+
 if __name__ == "__main__":
     unittest.main()

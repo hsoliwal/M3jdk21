@@ -186,6 +186,7 @@ final class M3StringMatchedBuildAdmissionRecipeTest {
         assertEquals(contents("before/m3-first-release-admission.yml"), receiving.replace(insertion, ""));
         assertTrue(insertion.contains("shutil.disk_usage(\".\").free - (512 << 20) >= (8 << 30)"));
         assertTrue(insertion.contains("if-no-files-found: error"));
+        assertTrue(insertion.contains("          include-hidden-files: true\n"));
     }
 
     @Test void eachWorkflowRefusesDriftMissingAndDuplicateOwnership() throws Exception {
