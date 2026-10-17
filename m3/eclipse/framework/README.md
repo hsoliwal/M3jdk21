@@ -49,7 +49,7 @@ No Eclipse source has been copied into the generated adapter. JDK API surface
 and existing M3 runtime owners remain unchanged.
 
 **Not implemented:** replacement of SWT/Nebula intrinsic widget behavior,
-JFace/Workbench event loops, OSGi service registration/resolution, JDT
+JFace/Workbench event loops, real Equinox resolver/activation qualification, JDT
 refactoring internals, EMF notifications/proxy semantics or PDE launch.
 See `ECLIPSE_FORWARDING_COVERAGE.tsv`, and keep unqualified subsystems
 explicitly marked instead of claiming total Eclipse coverage.
