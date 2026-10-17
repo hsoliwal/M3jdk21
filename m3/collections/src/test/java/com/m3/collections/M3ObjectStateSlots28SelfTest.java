@@ -30,6 +30,11 @@ public final class M3ObjectStateSlots28SelfTest {
             throw new AssertionError("M3 state check " + checks + ": " + a + " != " + b);
         }
     }
+    private static void equal(int[] a, int[] b) {
+        checks++;
+        if (!Arrays.equals(a, b)) throw new AssertionError("selected positions differ");
+    }
+
     private static void equal(long[] a, long[] b) {
         checks++;
         if (!Arrays.equals(a, b)) {
@@ -235,11 +240,97 @@ public final class M3ObjectStateSlots28SelfTest {
         }
     }
 
+    private static void indexedMaskBridge(boolean nativeRun) {
+        var states = new M3ObjectStateSlots28();
+        long first = states.allocate(1);
+        long second = states.allocate(3);
+        long third = states.allocate(4);
+        long[] handles = {-99L, first, second, third, first, second, -98L};
+        long[] before = handles.clone();
+        var javaBackend = M3IndexMaskCompactor.Backend.JAVA;
+        var nativeBackend = M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
+        equal(new int[]{1, 4}, states.matchingPositions(handles, 1, 6, 1, 2, javaBackend));
+        equal(new int[]{1, 2, 3, 4, 5}, states.matchingPositions(handles, 1, 6, 0, 0, javaBackend));
+        equal(new int[0], states.matchingPositions(handles, 2, 2, 0, 0, javaBackend));
+        if (nativeRun) {
+            equal(new int[]{1, 4}, states.matchingPositions(handles, 1, 6, 1, 2, nativeBackend));
+            equal(new int[]{1, 2, 3, 4, 5},
+                    states.matchingPositions(handles, 1, 6, 0, 0, nativeBackend));
+        }
+        equal(states.updateHandles(handles, 1, 6, 8, 1), 3);
+        equal(states.state(first), 8);
+        equal(states.state(second), 10);
+        equal(states.state(third), 12);
+        equal(states.updateHandles(handles, 1, 6, 8, 1), 0);
+        equal(before, handles);
+        refuse(IllegalArgumentException.class,
+                () -> states.updateHandles(handles, 1, 6, 3, 3));
+        refuse(IndexOutOfBoundsException.class,
+                () -> states.matchingPositions(handles, -1, 6, 0, 0, javaBackend));
+        refuse(NullPointerException.class,
+                () -> states.matchingPositions(handles, 1, 6, 0, 0, null));
+        states.release(second);
+        int unchanged = states.state(first);
+        refuse(IllegalStateException.class,
+                () -> states.updateHandles(handles, 1, 6, 1, 0));
+        equal(states.state(first), unchanged);
+        refuse(IllegalStateException.class,
+                () -> states.matchingPositions(handles, 1, 6, 0, 0, javaBackend));
+        if (nativeRun) {
+            refuse(IllegalStateException.class,
+                    () -> states.matchingPositions(handles, 1, 6, 0, 0, nativeBackend));
+        }
+        long reused = states.allocate(1);
+        equal(M3SlotAllocator28.slot(reused), M3SlotAllocator28.slot(second));
+        refuse(IllegalStateException.class,
+                () -> states.matchingPositions(handles, 1, 6, 0, 0, javaBackend));
+        states.release(reused);
+        states.release(first);
+        states.release(third);
+
+        Random rng = new Random(0x4d33534c4f544d4cL);
+        for (int trial = 0; trial < 96; trial++) {
+            var arena = new M3ObjectStateSlots28();
+            long[] ids = new long[1 + rng.nextInt(96)];
+            for (int i = 0; i < ids.length; i++) {
+                ids[i] = i > 0 && i % 7 == 0
+                        ? ids[i - 1] : arena.allocate(rng.nextInt(256));
+            }
+            for (int iteration = 0; iteration < 32; iteration++) {
+                int from = rng.nextInt(ids.length + 1);
+                int to = from + rng.nextInt(ids.length - from + 1);
+                int required = rng.nextInt(256);
+                int excluded = rng.nextInt(256);
+                int[] expected = new int[to - from];
+                int count = 0;
+                for (int i = from; i < to; i++) {
+                    if (matches(arena.state(ids[i]), required, excluded)) {
+                        expected[count++] = i;
+                    }
+                }
+                expected = Arrays.copyOf(expected, count);
+                equal(arena.matchingPositions(ids, from, to,
+                        required, excluded, javaBackend), expected);
+                if (nativeRun) {
+                    equal(arena.matchingPositions(ids, from, to,
+                            required, excluded, nativeBackend), expected);
+                }
+                operations++;
+            }
+            for (long h : ids) if (arena.isLive(h)) arena.release(h);
+        }
+    }
+
     public static void main(String[] args) throws Exception {
-        if (args.length != 0) throw new IllegalArgumentException("no arguments");
+        boolean nativeRun = args.length == 1 && "--native".equals(args[0]);
+        if (args.length != 0 && !nativeRun) throw new IllegalArgumentException("unsupported args");
+        if (nativeRun && !M3IndexMaskCompactor.nativeAvailable()) {
+            throw new AssertionError("JNI library required");
+        }
         lifecycleAndMemory();
         rangeAndRefusal();
         randomized();
+        indexedMaskBridge(nativeRun);
         System.out.println("PASS M3_OBJECT_STATE_SLOTS_28 checks=" + checks
                 + " randomized_operations=" + operations + " primitive_state_bytes_per_touched_slot=1");
     }
