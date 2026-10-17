@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 long index projection (recipe + JNI)
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionSelfTest.java'
+      - 'm3/collections/qualification/m3-long-index-projection-20261017/**'
+      - '.github/workflows/m3-long-index-projection-20261017.yml'
+  workflow_dispatch:
+jobs:
+  indexed-projection:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact sealed Maven recipe
+        run: |
+          set -eu
+          mvn -B -ntp -f m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml verify
+          java -cp m3/collections/qualification/m3-long-index-projection-20261017/recipe/target/classes com.synexia.m3.M3LongIndexProjectionRecipe --check .
+      - name: Compile selected owner against actual existing M3 index mask backend
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/m3-index-classes" "$RUNNER_TEMP/m3-index-native"
+          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3-index-classes" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionSelfTest.java
+          java -cp "$RUNNER_TEMP/m3-index-classes" com.m3.collections.M3LongIndexProjectionSelfTest
+      - name: Compile and exercise existing bounded JNI mask selector
+        run: |
+          set -eu
+          NATIVE="$RUNNER_TEMP/m3-index-native"
+          INC="$JAVA_HOME/include"
+          cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared \
+            -I"$INC" -I"$INC/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$NATIVE/libm3_collections_mask.so"
+          java -Xcheck:jni -Djava.library.path="$NATIVE" \
+            -cp "$RUNNER_TEMP/m3-index-classes" com.m3.collections.M3LongIndexProjectionSelfTest
