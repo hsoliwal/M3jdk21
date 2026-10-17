@@ -1,0 +1,8 @@
+gate	status
+source_sealed_selected_java21	PASS
+source_root_and_parent_identity	PINNED_TO_EXISTING_PR
+reusable_Maven_OpenRewrite_SDK	NOT_RUN
+full_M3JDK21_jtreg	NOT_RUN
+JNI_native	UNCHANGED_NOT_RUN
+real_collection_source_L0_receipts	NOT_RUN
+merge	DRAFT_HOLD

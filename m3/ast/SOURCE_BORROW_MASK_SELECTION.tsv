@@ -1,0 +1,11 @@
+field	value
+source_repository	hsoliwal/com.synexia
+source_pr	12088
+source_commit	ac6a9adcd29ae79c155805ed698ff1cf2175e048
+source_recipe	com.synexia.rewrite.M3ASTMaskSelection20261017
+source_path	synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTHierarchyMaskSelection.java
+source_sha256	5849cba9d05b452b7b8aafeb506d8eadc67d2568154de6bc44b78285075c7a67
+target_path	m3/ast/src/main/java/com/m3/ast/M3ASTHierarchyMaskSelection.java
+target_sha256	cd917644733e38eb8b13972c1342a34fac49785db66bae8f5da8b8612830ed81
+license	Apache-2.0
+status	CANDIDATE_ONLY_HOLD
