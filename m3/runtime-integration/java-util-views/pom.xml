@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0; target verification only, not recipe ownership. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion><groupId>com.m3.proof</groupId><artifactId>java-util-views</artifactId><version>1.0</version><packaging>pom</packaging>
+ <properties><proof.output>${project.build.directory}/proof</proof.output></properties>
+ <build><plugins><plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version><executions><execution><id>java-base-jni-proof</id><phase>verify</phase><goals><goal>exec</goal></goals><configuration><executable>python3</executable><arguments><argument>${project.basedir}/verify.py</argument><argument>${proof.output}</argument></arguments></configuration></execution></executions></plugin></plugins></build>
+</project>
