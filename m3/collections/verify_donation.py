@@ -43,6 +43,56 @@ def read_donation_packet(path=HERE / 'synexia-donation.json'):
 
 
 
+# The next exact successor applies the validated stored-representative atom
+# without rewriting the six original filtered/sorted receiver source receipts.
+_REPRESENTATIVE_RECEIPT = HERE / 'recipe/stored-representative-20261017/manifest.tsv'
+_REPRESENTATIVE_SHA256 = 'a62827ffafc18bd6d710d7898741d2114a0068b8ac9ee63aac02e55038e1f293'
+_REPRESENTATIVE_PATHS = (
+    'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java',
+    'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java',
+    'm3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java',
+    'm3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeTest.java',
+)
+
+
+def include_stored_representative_successor(previous_rows,
+        receipt=_REPRESENTATIVE_RECEIPT):
+    """Source-sealed additive correction for exactly two owners and two tests.
+
+    Verify the full previous receipt first, then only replace those two
+    exact old digests and append the two new Java21 test owners. No historical
+    manifest rewriting, unknown source admission or permissive wildcards.
+    """
+    if not receipt.exists() and not receipt.is_symlink():
+        return list(previous_rows)
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _REPRESENTATIVE_SHA256:
+        raise SystemExit('Stored-representative successor missing, aliased or drifted')
+    entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
+    if len(entries) != len(_REPRESENTATIVE_PATHS):
+        raise SystemExit('Stored-representative successor must declare exactly four paths')
+    current = {path: expected for path, expected in previous_rows}
+    if len(current) != len(previous_rows):
+        raise SystemExit('Duplicate prior stored-representative source path')
+    extras = []
+    for cells, expected_path in zip(entries, _REPRESENTATIVE_PATHS):
+        if len(cells) != 4:
+            raise SystemExit('Malformed stored-representative successor')
+        path, before, after, template = cells
+        if (path != expected_path or len(after) != 64
+                or any(c not in '0123456789abcdef' for c in after)
+                or template != path.rsplit('/', 1)[1] + '.after'):
+            raise SystemExit('Unapproved stored-representative source: ' + path)
+        if before == 'ABSENT':
+            if path in current:
+                raise SystemExit('Occupied new stored-representative source: ' + path)
+            extras.append((path, after))
+        else:
+            if current.get(path) != before:
+                raise SystemExit('Stored-representative source preimage drift: ' + path)
+            current[path] = after
+    return [(path, current[path]) for path, _ in previous_rows] + extras
+
+
 # The historical installed-source receipt remains immutable. This optional
 # additive overlay is authored by the Synexia OpenRewrite collection receiver.
 _FILTERED_VIEW_RECEIPT = HERE / 'recipe/filtered-sorted-views-20261017/manifest.tsv'
@@ -125,7 +175,7 @@ def main():
         raise SystemExit('Installed source manifest drift: actual=' + digest(manifest) + ' expected=' + packet['installed_source_manifest_sha256'] + '; reconcile with canonical recipe before verifying')
     rows = [line.split('\t') for line in manifest.read_text().splitlines()
             if line and not line.startswith('#')]
-    rows = include_filtered_view_successor(rows)
+    rows = include_stored_representative_successor(include_filtered_view_successor(rows))
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
