@@ -1,0 +1,305 @@
+{
+  "schema": "M3_QUALIFIED_LICENSE_POLICY_APPLICATION_V1",
+  "parent": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "94aeac9b20f30a16a4339617984b782e3638b98c",
+    "tree": "027d7252fa4f74065b96ffcfb3ddb982406754d0",
+    "pr": 1017
+  },
+  "method": "Materialize the already-qualified class-backed Maven/OpenRewrite recipe postimages after exact preimage and KEEP verification; no manual target edits.",
+  "recipe": {
+    "class": "com.synexia.rewrite.M3QualificationFixtureWhitespacePolicyRecipe",
+    "gitBlob": "4d97622792b31abf13d067234bedf58388610708",
+    "manifestGitBlob": "c742f5fd070b401cc3fe97f48f9b536e2ba8a073",
+    "coreTree": "d9f99d9d99ff66ae4afd37f147af66f63da61e55",
+    "path": "m3/runtime-integration/license-whitespace-sdk-20261017/canonical",
+    "fossDecisionGitBlob": "c6fb41803bd6fad0b00d87b223cf46bdafea7f76",
+    "providers": {
+      "adapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "kernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    }
+  },
+  "inputs": [
+    {
+      "path": ".gitattributes",
+      "git": "74e5869819659da9effa800ce457baff8fd3630d",
+      "sha256": "867a654d9bdbd56a2e8e3743d13dacdcb34a0734f568754758eead3f681e6ae2",
+      "state": "BEFORE"
+    },
+    {
+      "path": ".github/workflows/m3-full-borrow-string-phase.yml",
+      "git": "04bd1693d3be3d18c4d60678a5b3932bdd685c9e",
+      "sha256": "d1ed6b9aa47cc6de22637e405de7502f26a9fcd8b8c75b7b7f0fcbf18ff454f6",
+      "state": "BEFORE"
+    },
+    {
+      "path": ".github/workflows/m3-synexia-full-borrow-receiver.yml",
+      "git": "9108a21a41a0f721883d12adf4ed316ce480326b",
+      "sha256": "528333f9460a62476b239c72d50f189c438b4f11b9ca2d0d736af8be0f02485a",
+      "state": "BEFORE"
+    },
+    {
+      "path": "m3/runtime-integration/string-successor-sdk-20261017/canonical/licenses/ADDITIONAL_LICENSE_INFO",
+      "git": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "state": "KEEP"
+    },
+    {
+      "path": "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical/licenses/OpenJDK-ADDITIONAL_LICENSE_INFO",
+      "git": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "state": "KEEP"
+    },
+    {
+      "path": "m3/runtime-integration/license-whitespace-sdk-20261017/canonical/licenses/ADDITIONAL_LICENSE_INFO",
+      "git": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "state": "KEEP"
+    },
+    {
+      "path": "m3/runtime-integration/license-whitespace-sdk-20261017/canonical/src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-policy-20261017/before/ADDITIONAL_LICENSE_INFO",
+      "git": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "state": "KEEP"
+    }
+  ],
+  "outputs": [
+    {
+      "path": ".gitattributes",
+      "sha": "b7d308816cb46863d711049f0b71971feb0db4df",
+      "sha256": "7eabae637a18e909a606c108597779a30e82d9d2aba78948b228a0ac2a403d50"
+    },
+    {
+      "path": ".github/workflows/m3-full-borrow-string-phase.yml",
+      "sha": "af28fca94255a8ce486cf651cd538b6c0fc09e8c",
+      "sha256": "0d226ef8a4373aeaee25553ebaeb66de02f869941ff063ba20a46d9f2b703ad5"
+    },
+    {
+      "path": ".github/workflows/m3-synexia-full-borrow-receiver.yml",
+      "sha": "210cf4f9e58ef398def50372c456aa45cbb48476",
+      "sha256": "b8335a1f10795c1457dd7b9721da8f971a1207314c0341226b83b108ca663450"
+    }
+  ],
+  "alreadyAppliedWorkflow": {
+    "path": ".github/workflows/m3-first-release-admission.yml",
+    "gitBlob": "4e363da0abf913e6a5c46dd7ea82bf3ea9a05f87",
+    "sha256": "7507dafae9714a2afcbf49df375571928e015118d418e1daca756a18f7888971",
+    "action": "KEEP"
+  },
+  "qualification": {
+    "runId": 39009255463,
+    "jobId": 117328013387,
+    "jobConclusion": "success",
+    "actualCheckout": "6a74036b38caeed3256af14e6c7ce2b0a908f026",
+    "checkoutRole": "GitHub synthetic commit whose second parent is the PR1017 head; not a direct PR-head build",
+    "jobLogs": {
+      "117328013387": {
+        "bytes": 92788,
+        "sha256": "90b45dcca5b2716c81f51beae17bf9b570e86284fe553b89302482cb41344d36"
+      },
+      "117328013209": {
+        "bytes": 22345,
+        "sha256": "67b2a4e1a33c48597d4d7ebf60c7319704b938c556df9e6dac77240e2d63e57d"
+      },
+      "117328013401": {
+        "bytes": 101467,
+        "sha256": "09a5445f68fd048b5970128e2b0c17248447a14d4824e1be4d7fd981c163f244"
+      }
+    },
+    "policyReceipt": {
+      "ciReportedSha": "6a74036b38caeed3256af14e6c7ce2b0a908f026",
+      "emitted": {
+        "gitCases": {
+          "baseline": {
+            "diagnostics": 112,
+            "exitCode": 2,
+            "sha256": "d3ecbd5f03e267a6620ac366b617a5eebc79f187cbaab4b5359f0bcf06475693"
+          },
+          "blank-at-eof-0": {
+            "diagnostics": 1,
+            "exitCode": 2,
+            "sha256": "3a4cbaf9ba7999c16f796e930ca29f418647738e357cdc03f3e381f0b3ba0412"
+          },
+          "blank-at-eof-1": {
+            "diagnostics": 1,
+            "exitCode": 2,
+            "sha256": "c4e36fe7912de726e63152e91059ab2d51bf04c59d4bf75ccf5c9d2e81f966fb"
+          },
+          "blank-at-eof-2": {
+            "diagnostics": 1,
+            "exitCode": 2,
+            "sha256": "35a2f67f1eb053432f29fcec2a541b1a250c6d9b4328d98c02ea2cec29fca3fe"
+          },
+          "blank-at-eof-3": {
+            "diagnostics": 1,
+            "exitCode": 2,
+            "sha256": "35810fe780a8c12c069659c32e78e48524db786ad51b12938ef920f0c52a3353"
+          },
+          "candidate": {
+            "diagnostics": 0,
+            "exitCode": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "nested-root-path-0": {
+            "diagnostics": 28,
+            "exitCode": 2,
+            "sha256": "8f659412ab58236a81c2a5aa821ad296486a0d67d81f011cc70a00f92980b7e5"
+          },
+          "nested-root-path-1": {
+            "diagnostics": 28,
+            "exitCode": 2,
+            "sha256": "57cf9b16dbab3d2b390580e951ade9402ceaee33764e1983524c8097b3963b08"
+          },
+          "nested-root-path-2": {
+            "diagnostics": 28,
+            "exitCode": 2,
+            "sha256": "a84badbd315602447985dc6758472902859e28d8dc33c055315e7b6ed6d82e5f"
+          },
+          "nested-root-path-3": {
+            "diagnostics": 28,
+            "exitCode": 2,
+            "sha256": "b0df11b4e0b041f4f52784ec81d10bfee6c7a3a6c14e69e238d666f6765f51b3"
+          },
+          "space-before-tab-0": {
+            "diagnostics": 1,
+            "exitCode": 2,
+            "sha256": "158c885e9a62903f0adc77d87ea5ad4ef5f277e3e4d005f21fcd38bc78168366"
+          },
+          "space-before-tab-1": {
+            "diagnostics": 1,
+            "exitCode": 2,
+            "sha256": "a245c150fc5de03612738d76b1a7f45abdf684e8dbffb007ff8d2c9246044571"
+          },
+          "space-before-tab-2": {
+            "diagnostics": 1,
+            "exitCode": 2,
+            "sha256": "e69bfca6403bd8621937c5316b8073ba96721863c30bc8b12854c9ad866ee8c3"
+          },
+          "space-before-tab-3": {
+            "diagnostics": 1,
+            "exitCode": 2,
+            "sha256": "d5b46fb4421788d9782b5ec3bb04ad69056080c10cb7bbee233539dafeb14006"
+          },
+          "suffixed-license-path-0": {
+            "diagnostics": 28,
+            "exitCode": 2,
+            "sha256": "40402f026e60083270bca900ddbb2d52a2ed33456869dd69288389ae35cf315c"
+          },
+          "suffixed-license-path-1": {
+            "diagnostics": 28,
+            "exitCode": 2,
+            "sha256": "13ee5cbd547b9cc1c252169d19518dad06ac4836cba5322c7c93d17ac4e3570f"
+          },
+          "suffixed-license-path-2": {
+            "diagnostics": 28,
+            "exitCode": 2,
+            "sha256": "a7a4dee262f429caf2ec0c54eea5053d630ce865decb7a27818560fe9d0f5dcf"
+          },
+          "suffixed-license-path-3": {
+            "diagnostics": 28,
+            "exitCode": 2,
+            "sha256": "489a4e453ba9b5cad3aba97beb4686005b36021f126544e5c7a9d0631f8155da"
+          },
+          "unrelated-trailing": {
+            "diagnostics": 1,
+            "exitCode": 2,
+            "sha256": "7aeef33463ecb978a06ad09cb52c1818b1d9440cb0a7fb0ff1597b9508043418"
+          }
+        },
+        "policyOutputs": {
+          ".gitattributes": "7eabae637a18e909a606c108597779a30e82d9d2aba78948b228a0ac2a403d50",
+          ".github/workflows/m3-full-borrow-string-phase.yml": "0d226ef8a4373aeaee25553ebaeb66de02f869941ff063ba20a46d9f2b703ad5",
+          ".github/workflows/m3-synexia-full-borrow-receiver.yml": "b8335a1f10795c1457dd7b9721da8f971a1207314c0341226b83b108ca663450"
+        },
+        "rawByteRefusals": 18
+      },
+      "expectedClosureSelfTestRefusals": 104,
+      "expectedReportSelfTestRefusals": 32,
+      "fullJdkOutputAdmission": "NOT_ADMITTED",
+      "inputPinsSha256": "03b940aa136078498dd9cbd6349c0abda59c8c8123d0a7672fb213171fdbc99b",
+      "matchedJdkJtreg": "NOT_RUN",
+      "namedDescriptorPartialStates": 8,
+      "phaseAdvanced": false,
+      "providers": {
+        "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+        "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+      },
+      "recipeRefusals": 21,
+      "reports": {
+        "com.synexia.rewrite.M3QualificationFixtureWhitespacePolicyRecipeTest": {
+          "counts": {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "tests": 4
+          },
+          "sha256": "db9cc8952fd98ca575e41e8ff69202d03f76fba6bd4a09d0ca07fe31587ac5a2"
+        }
+      },
+      "runtimeAppliedByThisTask": false,
+      "schema": "M3_LICENSE_WHITESPACE_POLICY_SDK_RECEIPT_V1",
+      "scope": "ORIGINAL_PROVIDER_THREE_POLICY_OUTPUTS_FOUR_IMMUTABLE_LICENSE_OWNERS",
+      "sourceOrders": 2
+    },
+    "workflowReceipt": {
+      "ciReportedSha": "6a74036b38caeed3256af14e6c7ce2b0a908f026",
+      "emittedWorkflowOutputs": {
+        ".github/workflows/m3-first-release-admission.yml": "7507dafae9714a2afcbf49df375571928e015118d418e1daca756a18f7888971"
+      },
+      "inputPinsSha256": "f719a522ccfab065ac769106264a4fc997bbf164d8f3a9a8820dd2c97d29c2e6",
+      "phaseAdvanced": false,
+      "policyOutputsAppliedByThisModule": false,
+      "providers": {
+        "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+        "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+      },
+      "reports": {
+        "com.synexia.rewrite.M3QualificationFixtureWhitespaceWorkflowRecipeTest": {
+          "counts": {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "tests": 2
+          },
+          "sha256": "fed43ba5470471dd367f44af29512b9f5baf285f1c7c6dbff0faf8345cfe67ea"
+        }
+      },
+      "runtimeAppliedByThisTask": false,
+      "schema": "M3_LICENSE_WHITESPACE_WORKFLOW_RECEIVING_SDK_RECEIPT_V1",
+      "scope": "ORIGINAL_PROVIDER_ONE_EXISTING_WORKFLOW_OUTPUT"
+    },
+    "artifact": {
+      "id": 12094721527,
+      "sizeBytes": 31681,
+      "apiAndUploadDigest": "a6013d1482f2357815bdc9543707e01d4650b994e9f495888911d00b608e615f",
+      "zipBytesIndependentlyRead": false
+    }
+  },
+  "validation": {
+    "sourceAndPreimageReview": "PASS",
+    "childCommitCi": "NOT_RUN",
+    "localMaven": "NOT_RUN",
+    "formalAutoreviewHelper": "NOT_RUN_STORAGE_HOLD"
+  },
+  "separateFailures": [
+    {
+      "jobId": 117328013209,
+      "name": "immutable text foundation",
+      "result": "failure",
+      "cause": "m3/runtime-integration/recipe/apply.py --check rejects M3String.java source drift"
+    },
+    {
+      "jobId": 117328013401,
+      "name": "M3 control reactor",
+      "result": "failure",
+      "cause": "Missing forked JUnit/OpenRewrite dependencies and Python backport suite failures (4 failures, 9 errors)"
+    }
+  ],
+  "runtimeAppliedByThisChange": false,
+  "phaseAdvanced": false,
+  "matchedCompleteJdk": "NOT_RUN",
+  "fullJdkOutputAdmission": "NOT_ADMITTED",
+  "continualMigrationGoal": "ACTIVE",
+  "storageProtection": "ACTIVE",
+  "localBulkOutput": "HOLD"
+}

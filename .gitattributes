@@ -1,3 +1,9 @@
 *	-text
 # Unified-diff blank context lines are a single space by format; they are not whitespace errors.
 m3/runtime-integration/recipe/*.patch	-whitespace
+
+# Preserve exact OpenJDK donor-license fixture bytes; SDK input seals remain mandatory.
+/m3/runtime-integration/string-successor-sdk-20261017/canonical/licenses/ADDITIONAL_LICENSE_INFO	whitespace=-blank-at-eol
+/m3/runtime-integration/utf8-cursor-20261014/recipe/canonical/licenses/OpenJDK-ADDITIONAL_LICENSE_INFO	whitespace=-blank-at-eol
+/m3/runtime-integration/license-whitespace-sdk-20261017/canonical/licenses/ADDITIONAL_LICENSE_INFO	whitespace=-blank-at-eol
+/m3/runtime-integration/license-whitespace-sdk-20261017/canonical/src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-policy-20261017/before/ADDITIONAL_LICENSE_INFO	whitespace=-blank-at-eol
