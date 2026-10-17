@@ -1,0 +1,13 @@
+category	candidate	revision_or_pin	license	decision	complexity	contract_and_evidence
+stored-equal-member	M3CollectionViews 1050 correct member scan	M3JDK21 #1050 b2df8a4d	Apache-2.0	REUSE_ADAPT	O(n)/O(1)	Observe stored member, not equal external probe; dedicated red/green Java oracle
+identity-backed-set	JDK Collections.newSetFromMap IdentityHashMap	OpenJDK21	GPL-2.0-with-Classpath-exception	REUSE_CONTRACT	O(n)/O(1)	Owner membership gate plus exact-reference priority, test both equal aliases
+list-visible-remove	indexed physical removal	JDK ArrayList CopyOnWriteArrayList	GPL-2.0-with-Classpath-exception	SELECT	O(n)/O(1)	Never remove an earlier hidden equal occurrence; COW iterators cannot remove
+generic-iterator-fallback	iterator.remove and conservative fallback	M3JDK21 #1050	Apache-2.0	SELECT	O(n)/O(1)	Do not delete hidden equal element when iterator.remove unsupported
+sorted-set-comparator	already-admitted stored comparator resolution	M3JDK21 #1065	Apache-2.0	KEEP	O(log n + rejected run)	Do not alter existing NavigableSet and SortedSet overrides
+mask-index-retained-state	M3ObjectStateSlots28 offset masks	M3JDK21 #1097	Apache-2.0	NOT_APPLICABLE	N/A	Do not cache arbitrary live mutable predicate results without revision evidence
+in-place-filter	LeetCode 27 Remove Element	LeetCode problem taxonomy	REFERENCE_ONLY	REJECT	O(n)	Compacts source and changes live backed view contract; no solution copied
+dynamic-array	HackerRank Dynamic Array	HackerRank problem taxonomy	REFERENCE_ONLY	REJECT	amortized growth	Group/append operations are not a generic backed filtered Collection contract
+sort-filter	GeeksforGeeks stable sorting and filtering	GeeksforGeeks taxonomy	REFERENCE_ONLY	REJECT	O(n log n)	Sorting cannot silently replace live owner encounter order
+third-party-filter	Guava Collections2.filter	Google Guava	Apache-2.0	CONTRACT_ORACLE_ONLY	depends on backing	Independent filter API; no implementation source transplanted
+predicated-write	Apache Commons PredicatedCollection	Apache Commons Collections	Apache-2.0	DIFFERENT_CONTRACT	depends on backing	Ingress validation is not live visibility filtering
+eclipse-selection	Eclipse Collections select	Eclipse Collections	EPL-1.0/EDL-1.0 verify pin	DIFFERENT_CONTRACT	O(n)	Detached select != backed mutable view; no code imported
