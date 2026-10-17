@@ -26,12 +26,24 @@ public final class M3ConstantRegexGate {
     private static final int PURE = 1;
     private static final int GATED = 2;
 
+    /*
+     * The same build-time image gate may be held in a static field and called
+     * from many threads. No execution stack is ever stored in the gate.
+     * Typical postfix formulas execute entirely in one invocation-local long.
+     * Exceptionally wide formulas borrow thread-confined primitive scratch.
+     */
+    private static final int PACKED_DEPTH = Long.SIZE;
+    private static final int MAX_RETAINED_THREAD_DEPTH = 4_096;
+    private static final ThreadLocal<boolean[]> THREAD_SCRATCH =
+            ThreadLocal.withInitial(() -> new boolean[0]);
+
     private final Pattern pattern;
     private final int mode;
     private final String literal;
     private final String[] atoms;
     private final int[] program;
-    private final boolean[] stack;
+    private final int stackDepth;
+    private final boolean packed;
 
     private M3ConstantRegexGate(Pattern pattern, Optional<M3ConstantRegexImage.Entry> entry) {
         this.pattern = pattern;
@@ -41,7 +53,30 @@ public final class M3ConstantRegexGate {
         this.atoms = mode == PASS ? new String[0] : entry.get().atoms();
         this.program = mode == PASS ? new int[0] : entry.get().program();
         this.literal = mode == PURE ? atoms[0] : null;
-        this.stack = new boolean[program.length];
+        // Fold the *shape* of the already-compiled postfix plan just once,
+        // not a regex parser or per-match stack plan. Refuse corrupt images.
+        int depth = 0;
+        int maxDepth = 0;
+        for (int operation : program) {
+            if (operation >>> 24 == M3ConstantRegexImage.OP_ATOM) {
+                depth++;
+            } else {
+                int consumed = operation & 0xffffff;
+                if (consumed > depth) {
+                    throw new IllegalArgumentException("invalid regex precompute stack");
+                }
+                depth = depth - consumed + 1;
+            }
+            if (depth > MAX_RETAINED_THREAD_DEPTH * 4) {
+                throw new IllegalArgumentException("regex precompute stack too deep");
+            }
+            maxDepth = Math.max(maxDepth, depth);
+        }
+        if (program.length != 0 && depth != 1) {
+            throw new IllegalArgumentException("incomplete regex precompute stack");
+        }
+        stackDepth = maxDepth;
+        packed = maxDepth <= PACKED_DEPTH;
     }
 
     /**
@@ -126,15 +161,68 @@ public final class M3ConstantRegexGate {
         return pattern.split(input);
     }
 
-    /** True when the stored necessary condition holds; false proves absence of any match. */
+    /**
+     * True when the build-time necessary condition holds; false proves absence.
+     * All mutable evaluation state is invocation-local or thread-exclusive.
+     * Never trust a positive candidate as a complete JDK Pattern result.
+     */
     public boolean holds(String s) {
+        return packed ? holdsPacked(s) : holdsWide(s);
+    }
+
+    /**
+     * Evaluate arbitrary-length postfix formulas as a scalar Boolean stack,
+     * provided the precomputed *maximum stack depth* fits in 64 bits.
+     * AND/OR reductions use one mask/shift instead of an inner Boolean loop.
+     * There are no arrays, shared writes, JNI crossings or retained inputs.
+     */
+    private boolean holdsPacked(String text) {
+        long bits = 0L;
         int top = 0;
-        boolean[] st = stack;
         for (int op : program) {
             int code = op >>> 24;
             int arg = op & 0xffffff;
             if (code == M3ConstantRegexImage.OP_ATOM) {
-                st[top++] = s.indexOf(atoms[arg]) >= 0;
+                long bit = 1L << top++;
+                if (text.indexOf(atoms[arg]) >= 0) bits |= bit;
+                else bits &= ~bit;
+                continue;
+            }
+            long mask = arg == Long.SIZE ? -1L : (1L << arg) - 1;
+            long selected = (bits >>> (top - arg)) & mask;
+            boolean matched = code == M3ConstantRegexImage.OP_AND
+                    ? selected == mask : selected != 0L;
+            top -= arg;
+            long target = 1L << top++;
+            if (matched) bits |= target;
+            else bits &= ~target;
+        }
+        return top == 0 || (bits & 1L) != 0;
+    }
+
+    /** A single bounded scratch lane per thread, shared across all regex gates. */
+    private static boolean[] threadScratch(int required) {
+        if (required > MAX_RETAINED_THREAD_DEPTH) {
+            // Do not retain pathological arrays on long-lived pooled threads.
+            return new boolean[required];
+        }
+        boolean[] present = THREAD_SCRATCH.get();
+        if (present.length < required) {
+            present = new boolean[required];
+            THREAD_SCRATCH.set(present);
+        }
+        return present;
+    }
+
+    /** Wide formulas retain no mutable state in a globally reusable gate. */
+    private boolean holdsWide(String text) {
+        int top = 0;
+        boolean[] st = threadScratch(stackDepth);
+        for (int op : program) {
+            int code = op >>> 24;
+            int arg = op & 0xffffff;
+            if (code == M3ConstantRegexImage.OP_ATOM) {
+                st[top++] = text.indexOf(atoms[arg]) >= 0;
                 continue;
             }
             boolean and = code == M3ConstantRegexImage.OP_AND;
