@@ -1,0 +1,16 @@
+{
+  "schema": "M3_LICENSE_WHITESPACE_POLICY_CANONICAL_SOURCE_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "662bb8dde4242930460b809e25bb1877c9c27c6a",
+  "pullRequest": 11986,
+  "openrewriteAdapterGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+  "manifestKernelGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "qualification": "NOT_RUN",
+  "sourcePath": "synexia-openrewrite-recipes/recipes/m3-string-successor-chain-20261014/license-whitespace-sdk-20261017/sdk",
+  "receiverCorePath": "m3/runtime-integration/license-whitespace-sdk-20261017/canonical",
+  "moduleGitTree": "d9f99d9d99ff66ae4afd37f147af66f63da61e55",
+  "inputPinsGitBlob": "0f5ee9b4528453e402fcf21b3b8035160da2b59f",
+  "pinsSha256": "03b940aa136078498dd9cbd6349c0abda59c8c8123d0a7672fb213171fdbc99b"
+}

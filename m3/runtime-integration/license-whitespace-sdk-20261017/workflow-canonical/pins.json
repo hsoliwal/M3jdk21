@@ -1,0 +1,59 @@
+{
+  "schema": "M3_LICENSE_WHITESPACE_WORKFLOW_RECEIVING_SDK_INPUTS_V1",
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "files": [
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "unchangedGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "unchangedGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3QualificationFixtureWhitespaceWorkflowRecipe.java",
+      "sha256": "93803d07ebb7349c2f3f51c94020621b70fe1f174d01e2c18f6fe73e2784d10f",
+      "unchangedGitBlob": "a2da4d5bee53ed074c90a7dd8b863bd9fa1e61ca"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "unchangedGitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-qualification-fixture-whitespace-workflow-20261017.yml",
+      "sha256": "6caf253eea803d3fe009045686c0275d97b2541e10883076716321f890f149fe",
+      "unchangedGitBlob": "7a4b348b7e0327977d54a9d01055034f27bf8913"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-workflow-20261017/before/m3-first-release-admission.yml",
+      "sha256": "870a1319893f20b6906aa70a58e72f54b5a14b123ee23982bd78877d2d087f7d",
+      "unchangedGitBlob": "949e5ed7d43362ab14820947a8369006ea4dac90"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-workflow-20261017/manifest.tsv",
+      "sha256": "3cf01557886b869d44fe280c84bddd3f64af8edfd401aa539144a326a57a9073",
+      "unchangedGitBlob": "457296cd260be6d2f1019a993e37e5718009eefa"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-qualification-fixture-whitespace-workflow-20261017/out/m3-first-release-admission.yml",
+      "sha256": "7507dafae9714a2afcbf49df375571928e015118d418e1daca756a18f7888971",
+      "unchangedGitBlob": "4e363da0abf913e6a5c46dd7ea82bf3ea9a05f87"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3QualificationFixtureWhitespaceWorkflowRecipeTest.java",
+      "sha256": "aef2f3cca5fb622e0fc27d5acfd73d876957fb844db5fc14649faea15c5f7f59",
+      "unchangedGitBlob": "4b58ba7ae6d92764b93219e9253a53dd001aed0e"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "defd19535b0d60606a06302634f27892dac686de94709a5770ac6181ee20cf17",
+      "unchangedGitBlob": "b519451ecdfbfd903b5a4f533dfd436d0dacdc22"
+    }
+  ]
+}

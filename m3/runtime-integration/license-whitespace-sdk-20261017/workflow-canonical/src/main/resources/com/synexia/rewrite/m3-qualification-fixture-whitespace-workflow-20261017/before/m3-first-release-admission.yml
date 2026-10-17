@@ -1,0 +1,266 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 first release admission
+
+on:
+  pull_request:
+    paths:
+      - 'M3-SYNEXIA-NOTICE.md'
+      - 'M3-SYNEXIA-RIGHTS.md'
+      - 'M3-SYNEXIA-AUTHORS.md'
+      - 'm3/**'
+      - '.github/workflows/m3-first-release-admission.yml'
+  push:
+    branches:
+      - 'release/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m3-first-release-admission-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    name: release contract and provenance
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Unit-test the release verifier
+        run: python3 -m unittest discover -s m3/release -p 'test_*.py' -v
+      - name: Validate release claims and boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/m3-release-proof
+          mode=()
+          if [[ "${GITHUB_REF}" == refs/heads/release/* ]]; then
+            mode=(--release)
+          fi
+          python3 m3/release/verify_release_admission.py \
+            --root . "${mode[@]}" \
+            --json-out target/m3-release-proof/admission.json \
+            --sha256-out target/m3-release-proof/SHA256SUMS
+          git rev-parse HEAD | tee target/m3-release-proof/HEAD
+          git rev-parse 'HEAD^{tree}' | tee target/m3-release-proof/TREE
+          git status --porcelain=v1 --untracked-files=no | tee target/m3-release-proof/WORKTREE
+          test ! -s target/m3-release-proof/WORKTREE
+      - name: Upload contract evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-release-contract-${{ github.sha }}
+          path: target/m3-release-proof
+          retention-days: 90
+          if-no-files-found: error
+
+  foundation:
+    name: immutable text foundation
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare exact Java 21 compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' \
+            -o "$RUNNER_TEMP/jdk21.tar.gz"
+          printf '%s  %s\n' \
+            '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' \
+            "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
+          echo "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          echo "JAVA_HOME=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          echo "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+      - name: Verify source-bound recipes
+        run: |
+          set -euo pipefail
+          python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
+          python3 m3/runtime-integration/char-array-copy/recipe/test_recipe.py
+          python3 m3/runtime-integration/recipe/apply.py --check
+          python3 m3/runtime-integration/recipe/test_recipe.py
+      - name: Build and test P0 immutable text foundation
+        run: bash ./m3/build.sh
+      - name: Verify Synexia compatibility and shared mapping
+        run: |
+          python3 m3/compatibility/check-synexia.py
+          python3 m3/verify-shared-mapping.py
+
+  precompute:
+    name: Java and JNI precompute parity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Qualify exact UTF8 receiving SDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import json, pathlib, shutil, subprocess
+          root = pathlib.Path("m3/runtime-integration/utf8-cursor-20261014/recipe")
+          metadata = json.loads((root / "canonical-source.json").read_text(encoding="utf-8"))
+          assert metadata["repository"] == "hsoliwal/com.synexia"
+          assert metadata["receivingProviderGitBlob"] == "2530c533003a8a17d0e782728d98a4dfebe13651"
+          assert metadata["phase_advance"] is False and metadata["runtimeApplied"] is False
+          assert metadata["receiverCorePath"] == str(root / "canonical")
+          actual = subprocess.check_output(
+              ["git", "rev-parse", "HEAD:" + metadata["receiverCorePath"]],
+              text=True).strip()
+          assert actual == metadata["moduleGitTree"], "canonical receiving core tree drift"
+          assert shutil.disk_usage(".").free - (512 << 20) >= (8 << 30), "SDK scratch reserve"
+          print("M3_UTF8_RECEIVING_CORE_TREE_EXACT " + actual)
+          PY
+          python3 -I -S -B m3/runtime-integration/utf8-cursor-20261014/recipe/canonical/verify.py --repository "$GITHUB_WORKSPACE"
+          mvn -B -ntp -f m3/runtime-integration/utf8-cursor-20261014/recipe/canonical/pom.xml test
+          python3 -I -S -B m3/runtime-integration/utf8-cursor-20261014/recipe/canonical/verify.py --reports --repository "$GITHUB_WORKSPACE"
+      - name: Retain exact UTF8 SDK receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-utf8-receiving-sdk-${{ github.sha }}
+          path: |
+            m3/runtime-integration/utf8-cursor-20261014/recipe/canonical/target/sdk-receipt.json
+            m3/runtime-integration/utf8-cursor-20261014/recipe/canonical/target/surefire-reports/TEST-*.xml
+          retention-days: 90
+          if-no-files-found: error
+      - name: Qualify serial String successor repairs with original provider
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import hashlib, json, pathlib, shutil, subprocess
+          root = pathlib.Path("m3/runtime-integration/string-successor-sdk-20261017")
+          metadata = json.loads((root / "canonical-source.json").read_text(encoding="utf-8"))
+          assert metadata["repository"] == "hsoliwal/com.synexia"
+          assert metadata["commit"] == "4be49026cdbaf277a062fb294c519a80535ad42a"
+          assert metadata["moduleGitTree"] == "12902bd47baa70fd524e91addb73541d9eece032"
+          assert metadata["openrewriteAdapterGitBlob"] == "1c1b1b568d369f688f6953161636bf36b484bf5a"
+          assert metadata["manifestKernelGitBlob"] == "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+          assert metadata["receiverCorePath"] == str(root / "canonical")
+          assert metadata["runtimeApplied"] is False and metadata["phaseAdvanced"] is False
+          assert metadata["targetToolingApplied"] is False
+          actual = subprocess.check_output(
+              ["git", "rev-parse", "HEAD:" + metadata["receiverCorePath"]],
+              text=True).strip()
+          assert actual == metadata["moduleGitTree"], "canonical receiving core tree drift"
+          pins = (root / "canonical/pins.json").read_bytes()
+          assert hashlib.sha256(pins).hexdigest() == "93a14c96379d598daf86d0ecfc12aa58a5464e06defa4158e77d35408919c3bb"
+          assert shutil.disk_usage(".").free - (512 << 20) >= (8 << 30), "SDK scratch reserve"
+          print("M3_STRING_SUCCESSOR_RECEIVING_CORE_TREE_EXACT " + actual)
+          guard = json.loads((root / "workflow-canonical-source.json").read_text(encoding="utf-8"))
+          assert guard["repository"] == "hsoliwal/com.synexia"
+          assert guard["sourcePath"] == "synexia-openrewrite-recipes/recipes/m3-string-successor-chain-20261014/utf8-chain-sdk-20261017/workflow-sdk"
+          assert guard["receiverCorePath"] == str(root / "workflow-canonical")
+          assert guard["openrewriteAdapterGitBlob"] == "1c1b1b568d369f688f6953161636bf36b484bf5a"
+          assert guard["manifestKernelGitBlob"] == "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+          assert guard["runtimeApplied"] is False and guard["phaseAdvanced"] is False
+          guard_tree = subprocess.check_output(
+              ["git", "rev-parse", "HEAD:" + guard["receiverCorePath"]],
+              text=True).strip()
+          assert guard_tree == guard["moduleGitTree"], "canonical workflow module tree drift"
+          print("M3_STRING_WORKFLOW_RECEIVING_CORE_TREE_EXACT " + guard_tree)
+          PY
+          python3 -I -S -B m3/runtime-integration/string-successor-sdk-20261017/canonical/verify.py
+          mvn -B -ntp -f m3/runtime-integration/string-successor-sdk-20261017/canonical/pom.xml test
+          python3 -I -S -B m3/runtime-integration/string-successor-sdk-20261017/canonical/verify.py --reports
+          python3 -I -S -B m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/verify.py
+          mvn -B -ntp -f m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/pom.xml test
+          python3 -I -S -B m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/verify.py --reports
+      - name: Retain serial String SDK evidence and emitted files
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-string-successor-sdk-${{ github.sha }}
+          path: |
+            m3/runtime-integration/string-successor-sdk-20261017/canonical/target/sdk-receipt.json
+            m3/runtime-integration/string-successor-sdk-20261017/canonical/target/surefire-reports/TEST-*.xml
+            m3/runtime-integration/string-successor-sdk-20261017/canonical/target/emitted/
+            m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/target/sdk-receipt.json
+            m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/target/surefire-reports/TEST-*.xml
+            m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/target/emitted/
+          retention-days: 90
+          include-hidden-files: true
+          if-no-files-found: error
+      - name: Java differential proof
+        run: mvn -B -ntp -f m3/ports/precompute/pom.xml test
+      - name: JNI/native parity proof
+        run: mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test
+
+  control-reactor:
+    name: M3 control reactor
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Full M3 Maven verification
+        run: mvn -B -ntp -fae -f m3/pom.xml clean verify
+      - name: Full-family and receiving-policy verification
+        run: |
+          if test -f m3/compatibility/check_synexia_full_family.py; then
+            python3 m3/compatibility/check_synexia_full_family.py
+            python3 -m unittest -v m3/compatibility/test_synexia_full_family.py
+          fi
+
+  release-proof-summary:
+    name: proof summary
+    needs:
+      - contract
+      - foundation
+      - precompute
+      - control-reactor
+    if: always()
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Summarize release admission
+        shell: bash
+        run: |
+          {
+            echo '## M3JDK21 first-release admission'
+            echo
+            echo "| Gate | Result |"
+            echo "| --- | --- |"
+            echo "| contract/provenance | ${{ needs.contract.result }} |"
+            echo "| immutable text foundation | ${{ needs.foundation.result }} |"
+            echo "| Java + JNI precompute parity | ${{ needs.precompute.result }} |"
+            echo "| M3 control reactor | ${{ needs.control-reactor.result }} |"
+            echo
+            echo 'The existing OpenJDK GHA sanity workflow remains the product-build/platform matrix.'
+            echo 'A passing proof summary does not upgrade any claim marked NOT_CLAIMED in release-contract.json.'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Fail if any mandatory M3 gate failed
+        if: >
+          needs.contract.result != 'success' ||
+          needs.foundation.result != 'success' ||
+          needs.precompute.result != 'success' ||
+          needs.control-reactor.result != 'success'
+        run: exit 1
