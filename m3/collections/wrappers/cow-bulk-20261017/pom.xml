@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3.tooling</groupId>
+  <artifactId>m3-filtered-cow-bulk-receiver</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>M3JDK21 filtered/sorted copy-on-write bulk receiver</name>
+  <properties>
+    <m3.root>${project.basedir}/../../../..</m3.root>
+    <m3.mode>verify</m3.mode>
+  </properties>
+  <profiles>
+    <profile>
+      <id>apply</id>
+      <properties><m3.mode>apply</m3.mode></properties>
+    </profile>
+  </profiles>
+  <build><plugins>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>3.5.0</version>
+      <executions><execution>
+        <id>source-sealed-m3-filtered-cow-bulk-java21</id>
+        <phase>verify</phase><goals><goal>exec</goal></goals>
+        <configuration>
+          <executable>python3</executable>
+          <arguments>
+            <argument>${project.basedir}/recipe.py</argument>
+            <argument>${m3.mode}</argument>
+            <argument>--root</argument>
+            <argument>${m3.root}</argument>
+          </arguments>
+        </configuration>
+      </execution></executions>
+    </plugin>
+  </plugins></build>
+</project>
