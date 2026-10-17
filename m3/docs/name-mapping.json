@@ -563,6 +563,19 @@
       "source_revision_receipt": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
       "target_rule": "Actual upstream tool implementations and APIs retained. M3-owned internal source recipes; no shadow implementation, API rename, java.base replacement or runtime phase advancement.",
       "license": "Preserve Apache and embedded notices; SLF4J MIT; first-party recipe/integration Apache-2.0"
+    },
+    {
+      "source": "Synexia MIndexRegexProgram mandatory literals/length and canonical M3StringFacts signals",
+      "source_role": "Canonical algorithm/recipe provenance; not a java.base runtime dependency",
+      "target": "java.lang.M3StringRegexDp.Plan (amalgamated immutable preflight)",
+      "target_path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+      "recipe": "com.synexia.m3.Jdk21RegexPlanAmalgamation20261017",
+      "canonical_recipe_pr": "hsoliwal/com.synexia#11975",
+      "receiver_pr": "hsoliwal/M3jdk21 (stacked on #1003)",
+      "current_preimage_sha256": "f875210dfb605799b6c8dbee53b28ad6383e000d90da775f7fd285464da7b2d3",
+      "candidate_postimage_sha256": "043c26a0f55ee2a0170bf907ee428dfd133696ce45bf0de44b822dc9e1e5e0e7",
+      "status": "Draft candidate: existing Plan gains conservative minimum-length, mandatory literal signals and fixed edges; JDK Pattern remains authority; full matched runtime gates pending",
+      "target_rule": "No duplicate regex grammar/cache, no extra String payload, no native ABI change; read only already-prepared canonical facts, preserve all public JDK semantics"
     }
   ],
   "imported_donor_sources": [],
