@@ -40,6 +40,15 @@ def safe(base, name):
         current=current/part
         if current.is_symlink(): raise ValueError("redirected path")
     return current
+def workflow_contexts(data):
+    # Admission for this fixed one-job/four-step producer; not a general YAML parser.
+    # GitHub forbids runner in jobs.<id>.env and permits it in steps.env/with.
+    text=data.decode("utf-8",errors="strict")
+    if "\n    env:\n" in text or text.count("\n        env:\n")!=4:
+        raise ValueError("runner-dependent paths must be in all four step environments")
+    for line in text.splitlines():
+        if "runner." in line and len(line)-len(line.lstrip(" "))<10:
+            raise ValueError("runner context outside the supported step scope")
 def validate_packet(pins, files):
     if pins.get("schema")!="M3_ORIGINAL_MAPPING_PROVIDER_SDK_V1" or pins.get("snapshotProviderGitBlob")!="4a38e39d0755462d40c2b22548b87abde938ea0b":
         raise ValueError("SDK authority drift")
@@ -75,6 +84,8 @@ def validate_packet(pins, files):
     if paths!=sorted(set(paths)) or manifest!=pins["targets"]: raise ValueError("manifest pin/order drift")
     if sum(r["before"]=="ABSENT" for r in manifest)!=5 or sum(r["before"] not in ("ABSENT",r["after"]) for r in manifest)!=1:
         raise ValueError("expected five additions and one canonical mapping change")
+    workflow=next(row for row in manifest if row["path"]==".github/workflows/m3-original-mapping-provider-qualification.yml")
+    workflow_contexts(files[RESOURCE+workflow["resource"]])
     return manifest
 def traversal_error(error):
     raise ValueError("closed inventory traversal failed") from error
@@ -175,6 +186,10 @@ def self_test(pins,files):
         elif kind=="nestedfailure":ET.SubElement(broken[0],"failure")
         else:broken.remove(broken[-1])
         refuses(lambda:validate_report(ET.tostring(broken),SUITE,METHODS))
+    workflow_data=next(files[RESOURCE+r["resource"]] for r in pins["targets"] if r["path"]==".github/workflows/m3-original-mapping-provider-qualification.yml")
+    workflow_contexts(workflow_data)
+    invalid_scope=workflow_data.replace(b"    steps:\n",b"    env:\n      BAD_TMP: "+bytes([36])+b"{{ runner.temp }}\n    steps:\n",1)
+    refuses(lambda:workflow_contexts(invalid_scope))
     # Bind the real provider path even when an earlier shadow has its exact old blob.
     changed=copy.deepcopy(pins);values=dict(files)
     real="src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"

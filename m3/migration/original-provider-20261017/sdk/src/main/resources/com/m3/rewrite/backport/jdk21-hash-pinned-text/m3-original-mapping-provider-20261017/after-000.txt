@@ -130,17 +130,17 @@ jobs:
     name: genuine provider, recipe and unchanged original CLI
     runs-on: ubuntu-24.04
     timeout-minutes: 15
-    env:
-      M3_PROOF_ROOT: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}
-      M3_SOURCE_ROOT: ${{ github.workspace }}/m3-original-provider-source
-      TMPDIR: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
-      TEMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
-      TMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
-      XDG_CACHE_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/cache
-      XDG_CONFIG_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/config
-      XDG_DATA_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/data
     steps:
       - name: Reserve storage and select existing toolchains
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-original-provider-source
+          TMPDIR: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/data
         id: preflight
         shell: bash
         run: |
@@ -174,6 +174,15 @@ jobs:
 
           PY
       - name: Narrow exact-head checkout
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-original-provider-source
+          TMPDIR: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/data
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           path: m3-original-provider-source
@@ -246,6 +255,14 @@ jobs:
       - name: Qualify recipe and genuine original validator under storage supervision
         shell: bash
         env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-original-provider-source
+          TMPDIR: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/data
           M3_JAVA_HOME: ${{ steps.preflight.outputs.java }}
           M3_PYTHON: ${{ steps.preflight.outputs.python }}
           M3_PYTHON_BIN: ${{ steps.preflight.outputs.python-bin }}
@@ -412,6 +429,15 @@ jobs:
 
           PY
       - name: Retain bounded original receipts and failure tail
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-original-provider-source
+          TMPDIR: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/data
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
