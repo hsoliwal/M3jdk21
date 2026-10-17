@@ -1,0 +1,41 @@
+name: M3 primitive long RangeSet real array/mask owner Java21
+on:
+  push:
+    branches: ['m3/primitive-long-rangeset-receiver-20261017']
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRangeSet*'
+      - 'm3/collections/algorithm-catalog/long-range-set-20261017/**'
+      - '.github/workflows/m3-primitive-long-rangeset-20261017.yml'
+jobs:
+  real-java21-indexed-masks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source postimage exact SHA256
+        shell: bash
+        run: |
+          echo 'f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8  m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java' | sha256sum -c -
+          echo '3b4ba4e2542ebbc607710f183f231d7c1bbe3e94ef4aa4fe6de49f0f9242ac29  m3/collections/src/test/java/com/m3/collections/M3LongRangeSetSelfTest.java' | sha256sum -c -
+          echo '1768a8be759b46ae24678ce089cdf328ef6c83f335bd3f5582cda813819261a5  m3/collections/src/test/java/com/m3/collections/M3LongRangeSetTest.java' | sha256sum -c -
+      - name: Compile actual M3 Java 21 owners and run differential
+        shell: bash
+        run: |
+          mkdir -p /tmp/m3-rangeset-classes
+          javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-rangeset-classes \
+            m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRangeSetSelfTest.java
+          java -ea -Xmx64m -cp /tmp/m3-rangeset-classes com.m3.collections.M3LongRangeSetSelfTest
+      - name: Full m3-collections Maven/JUnit contract proof
+        shell: bash
+        run: |
+          mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongRangeSetTest test
