@@ -7,6 +7,7 @@ on:
   pull_request:
     paths:
       - "src/java.base/share/classes/java/util/HashMap.java"
+      - "src/java.base/share/classes/java/util/Collections.java"
       - "test/jdk/java/util/HashMap/M3HashMapBulkCopyTest.java"
       - "m3/runtime-integration/hashmap27/**"
       - ".github/workflows/m3-hashmap27-bulk-backport.yml"
@@ -35,9 +36,12 @@ jobs:
                    "$RUNNER_TEMP/m3-hashmap/test"
           cp src/java.base/share/classes/java/util/HashMap.java \
              "$RUNNER_TEMP/m3-hashmap/src/java/util/HashMap.java"
+          cp src/java.base/share/classes/java/util/Collections.java \
+             "$RUNNER_TEMP/m3-hashmap/src/java/util/Collections.java"
           javac --patch-module "java.base=$RUNNER_TEMP/m3-hashmap/src" \
                 -proc:none -Xlint:all,-serial -Werror \
                 -d "$RUNNER_TEMP/m3-hashmap/patch" \
+                "$RUNNER_TEMP/m3-hashmap/src/java/util/Collections.java" \
                 "$RUNNER_TEMP/m3-hashmap/src/java/util/HashMap.java"
           javac --release 21 -proc:none -Xlint:all,-serial -Werror \
                 -d "$RUNNER_TEMP/m3-hashmap/test" \
