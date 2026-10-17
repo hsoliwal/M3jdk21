@@ -19,6 +19,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.Spliterator;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -130,6 +131,102 @@ public final class M3CollectionViews {
         return selected;
     }
 
+    /**
+     * Persistent binary-carry predicate composition shared by Set and Map views.
+     * Only M3-created conjunctions are opened; caller predicates remain opaque.
+     * Order, duplicate occurrences, short circuiting and thrown objects survive.
+     * A perfect subtree becomes an immutable prefix on append; only the smaller
+     * suffix is rebuilt. For d leaves, height is ceil(log2(d)), retained storage
+     * is O(d), append is O(log d), and testing allocates no traversal buffer.
+     * This bounds M3 composition frames, not recursion inside a caller predicate.
+     */
+    @SuppressWarnings("unchecked")
+    static <E> Predicate<E> orderedAnd(
+            Predicate<? super E> first, Predicate<? super E> next) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(next, "next");
+        FilterNode<Predicate<? super E>> prefix = first instanceof OrderedPredicate<?> old
+                ? ((OrderedPredicate<E>) old).root : new FilterNode<>(first);
+        return new OrderedPredicate<>(appendFilter(prefix, new FilterNode<>(next)));
+    }
+
+    @SuppressWarnings("unchecked")
+    static <K, V> BiPredicate<K, V> orderedAnd(
+            BiPredicate<? super K, ? super V> first,
+            BiPredicate<? super K, ? super V> next) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(next, "next");
+        FilterNode<BiPredicate<? super K, ? super V>> prefix = first instanceof OrderedBiPredicate<?, ?> old
+                ? ((OrderedBiPredicate<K, V>) old).root : new FilterNode<>(first);
+        return new OrderedBiPredicate<>(appendFilter(prefix, new FilterNode<>(next)));
+    }
+
+    private static final class FilterNode<P> {
+        private final P leaf;
+        private final FilterNode<P> left;
+        private final FilterNode<P> right;
+        private final int height;
+        private final boolean perfect;
+
+        private FilterNode(P leaf) {
+            this.leaf = leaf;
+            this.left = null;
+            this.right = null;
+            this.height = 0;
+            this.perfect = true;
+        }
+
+        private FilterNode(FilterNode<P> left, FilterNode<P> right) {
+            this.leaf = null;
+            this.left = left;
+            this.right = right;
+            this.height = Math.max(left.height, right.height) + 1;
+            this.perfect = left.perfect && right.perfect && left.height == right.height;
+        }
+    }
+
+    private static <P> FilterNode<P> appendFilter(FilterNode<P> prefix, FilterNode<P> leaf) {
+        if (prefix.perfect) return new FilterNode<>(prefix, leaf);
+        return new FilterNode<>(prefix.left, appendFilter(prefix.right, leaf));
+    }
+
+    private static final class OrderedPredicate<E> implements Predicate<E> {
+        private final FilterNode<Predicate<? super E>> root;
+
+        private OrderedPredicate(FilterNode<Predicate<? super E>> root) {
+            this.root = root;
+        }
+
+        @Override
+        public boolean test(E element) {
+            return evaluate(root, element);
+        }
+
+        private static <E> boolean evaluate(FilterNode<Predicate<? super E>> node, E element) {
+            if (node.leaf != null) return node.leaf.test(element);
+            return evaluate(node.left, element) && evaluate(node.right, element);
+        }
+    }
+
+    private static final class OrderedBiPredicate<K, V> implements BiPredicate<K, V> {
+        private final FilterNode<BiPredicate<? super K, ? super V>> root;
+
+        private OrderedBiPredicate(FilterNode<BiPredicate<? super K, ? super V>> root) {
+            this.root = root;
+        }
+
+        @Override
+        public boolean test(K key, V value) {
+            return evaluate(root, key, value);
+        }
+
+        private static <K, V> boolean evaluate(
+                FilterNode<BiPredicate<? super K, ? super V>> node, K key, V value) {
+            if (node.leaf != null) return node.leaf.test(key, value);
+            return evaluate(node.left, key, value) && evaluate(node.right, key, value);
+        }
+    }
+
     /** A live filter without per-element retained adapters. */
     private static class FilteredCollection<E> extends AbstractCollection<E> {
         protected final Collection<E> backing;
@@ -143,7 +240,7 @@ public final class M3CollectionViews {
                 FilteredCollection<E> previous = (FilteredCollection<E>) nested;
                 this.backing = previous.backing;
                 Predicate<? super E> existing = previous.predicate;
-                this.predicate = element -> existing.test(element) && filter.test(element);
+                this.predicate = orderedAnd(existing, filter);
             } else {
                 this.backing = source;
                 this.predicate = filter;
