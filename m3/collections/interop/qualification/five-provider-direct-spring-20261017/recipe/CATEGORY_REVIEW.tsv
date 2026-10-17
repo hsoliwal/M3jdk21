@@ -1,0 +1,9 @@
+category	reference	chosen_existing_M3_atom	decision	proof_boundary	license
+MULTIVALUE_MAP	Spring 6.2.0 MultiValueMapAdapter donor; M3JDK21 #1190	M3SpringArrayMultiValueMap with M3LinkedHashMap and M3LinkedList	REUSE_DIRECT_IMPLEMENTATION	4500-step seeded Spring donor comparison in JUnit	First-party Apache-2.0; Spring API Apache-2.0
+FIVE_PROVIDER_FACADE	M3JDK21 #1174 33 factories 20 collectors	M3FiveProviderDirectSdk typed factory over existing owners	ADDITIVE_SELECT	Seven provider entry points, no renamed external classes	First-party Apache-2.0
+COUNTED_MULTIVIEW	M3ObjectCounts (current #1174)	Shared primitive count/state slot owner across Guava/Eclipse/Apache	REUSE	Shared-count mutation differential	First-party Apache-2.0, provider notices retained
+JDK_SEQUENCED	JDK21 java.util.SequencedMap	M3LinkedHashMap	REUSE	Index/order contract retained	OpenJDK API, no source copied
+BITSET_FILTER	LeetCode #27 https://leetcode.com/problems/remove-element/	Existing M3 bit masks and index compactor	REFERENCE_ONLY	No new filtering engine	No challenge source copied
+HASH_BIJECTION	HackerRank Hash Tables; LeetCode #205	Existing M3GuavaBiMap/M3ApacheBidiMap	REUSE	No conflation of different provider displacement rules	Reference only
+INDEX_SORT	GeeksforGeeks stable sorting	Existing primitive index sort	REFERENCE_ONLY	No payload move or new sort implementation	Reference only
+JNI_SOURCE	Existing M3IndexMaskCompactor and M3ObjectCounts	No JNI changes; reuse prior tested kernel	REUSE_UNCHANGED	Dedicated old workflow retains checked JNI parity	First-party Apache-2.0
