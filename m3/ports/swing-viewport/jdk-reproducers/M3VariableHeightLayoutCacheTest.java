@@ -256,6 +256,15 @@ public class M3VariableHeightLayoutCacheTest {
             root.add(new DefaultMutableTreeNode("x"));
             step(out, "inserted 7", () -> c.treeNodesInserted(new TreeModelEvent(m, rp, new int[] {7}, null)));
             step(out, "inserted -1", () -> c.treeNodesInserted(new TreeModelEvent(m, rp, new int[] {-1}, null)));
+            step(out, "inserted null indices", () -> c.treeNodesInserted(new TreeModelEvent(m, rp, (int[]) null,
+                    null)));
+            step(out, "removed null indices", () -> c.treeNodesRemoved(new TreeModelEvent(m, rp, (int[]) null,
+                    null)));
+            for (int i = 0; i < 3; i++) {
+                root.add(new DefaultMutableTreeNode("silent" + i));
+            }
+            step(out, "inserted beyond the loaded children", () -> c.treeNodesInserted(new TreeModelEvent(m, rp,
+                    new int[] {root.getChildCount() - 1}, null)));
             dump(c, out);
         });
     }
@@ -274,26 +283,40 @@ public class M3VariableHeightLayoutCacheTest {
         });
     }
 
-    /** A model that answers null for a child. */
+    /**
+     * A model that answers null for a child: both caches throw the same exception. The stock cache is
+     * then left inconsistent (a loaded child missing from its row vector), so each case starts from a
+     * fresh cache and nothing is compared after the exception.
+     */
     @Test
     void nullChildren() throws Exception {
-        same((c, out) -> {
-            ListModel m = new ListModel();
-            m.put("root", "a", "b");
-            m.put("a", "a1", null, "a3");
-            setUp(c, m, 0, true);
-            step(out, "expand a", () -> c.setExpandedState(new TreePath(new Object[] {"root", "a"}), true));
-            dump(c, out);
-            m.put("root", "a", "b", null);
-            step(out, "insert null", () -> c.treeNodesInserted(new TreeModelEvent(m, new TreePath("root"),
-                    new int[] {2}, null)));
-            m.put("root", null, "b");
-            step(out, "changed to null", () -> c.treeNodesChanged(new TreeModelEvent(m, new TreePath("root"),
-                    new int[] {0}, null)));
-            m.put("root", "a", null);
-            step(out, "structure to null", () -> c.treeStructureChanged(new TreeModelEvent(m,
-                    new TreePath(new Object[] {"root", "b"}))));
-        });
+        String[] cases = {"expand", "insert", "changed", "structure"};
+        for (String k : cases) {
+            same((c, out) -> {
+                ListModel m = new ListModel();
+                m.put("root", "a", "b");
+                m.put("a", "a1", null, "a3");
+                setUp(c, m, 0, true);
+                TreePath rp = new TreePath("root");
+                switch (k) {
+                    case "expand" -> step(out, k, () -> c.setExpandedState(new TreePath(new Object[] {"root", "a"}),
+                            true));
+                    case "insert" -> {
+                        m.put("root", "a", "b", null);
+                        step(out, k, () -> c.treeNodesInserted(new TreeModelEvent(m, rp, new int[] {2}, null)));
+                    }
+                    case "changed" -> {
+                        m.put("root", null, "b");
+                        step(out, k, () -> c.treeNodesChanged(new TreeModelEvent(m, rp, new int[] {0}, null)));
+                    }
+                    default -> {
+                        m.put("root", "a", null);
+                        step(out, k, () -> c.treeStructureChanged(new TreeModelEvent(m,
+                                new TreePath(new Object[] {"root", "b"}))));
+                    }
+                }
+            });
+        }
     }
 
     /** A model changed without events: both caches answer from their cached user objects. */
@@ -325,23 +348,29 @@ public class M3VariableHeightLayoutCacheTest {
         });
     }
 
-    /** User objects equal by value (not identity), duplicates among siblings, and a wide parent. */
+    /**
+     * User objects equal by value (not identity), with a hash collision ("Aa" and "BB"), below a wide
+     * parent: the first lookups scan, later ones use the hash index. Equal siblings (duplicates) are
+     * a documented non-claim (DESIGN.md section 3) and are not used.
+     */
     @Test
     void valueEqualObjects() throws Exception {
         same((c, out) -> {
             ListModel m = new ListModel();
             List<Object> kids = new ArrayList<>();
-            for (int i = 0; i < 40; i++) {
-                kids.add("k" + (i % 37));
+            for (int i = 0; i < 38; i++) {
+                kids.add("k" + i);
             }
+            kids.add("Aa");
+            kids.add("BB");
             m.put("root", kids.toArray());
             m.put("k3", "k3a", "k3b");
             m.put("k5", "k5a");
             setUp(c, m, 0, false);
             c.setSelectionModel(new DefaultTreeSelectionModel());
             for (int round = 0; round < 3; round++) {
-                for (int i = 0; i < 40; i++) {
-                    TreePath p = new TreePath(new Object[] {new String("root"), new String("k" + (i % 37))});
+                for (Object k : kids) {
+                    TreePath p = new TreePath(new Object[] {new String("root"), new String((String) k)});
                     out.append(' ').append(c.getRowForPath(p));
                 }
             }
@@ -355,7 +384,7 @@ public class M3VariableHeightLayoutCacheTest {
                     new int[] {3}, null)));
             kids.remove(38);
             m.put("root", kids.toArray());
-            step(out, "remove last k2", () -> c.treeNodesRemoved(new TreeModelEvent(m, new TreePath("root"),
+            step(out, "remove last", () -> c.treeNodesRemoved(new TreeModelEvent(m, new TreePath("root"),
                     new int[] {38}, null)));
             out.append(' ').append(c.getRowForPath(new TreePath(new Object[] {"root", "k3", "k3a"})))
                     .append(c.getRowForPath(new TreePath(new Object[] {"root", "nothing"})));
