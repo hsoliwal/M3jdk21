@@ -169,4 +169,14 @@ public final class M3LibraryCollections {
         return com.google.common.collect.Sets.filter(
                 Objects.requireNonNull(owner, "owner"), Objects.requireNonNull(predicate, "predicate"));
     }
+    /** Guava's real BiMap API with M3-owned forward and reverse index/offset stores. */
+    public static <K, V> com.google.common.collect.BiMap<K, V> guavaBiMap() {
+        return new M3GuavaBiMap<>();
+    }
+
+    /** Apache Commons Collections' distinct BidiMap contract over M3 indexed maps. */
+    public static <K, V> org.apache.commons.collections4.BidiMap<K, V> apacheBidiMap() {
+        return new M3ApacheBidiMap<>();
+    }
+
 }

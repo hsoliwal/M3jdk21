@@ -21,3 +21,5 @@ APACHE_COMMONS_COLLECTIONS	apacheListValuedMap		org.apache.commons.collections4.
 APACHE_COMMONS_COLLECTIONS	apacheSetValuedMap		org.apache.commons.collections4.SetValuedMap	com.m3.collections.interop.M3ApacheSetValuedMap	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3LinkedHashSet	M3_CREATED	4.5.0
 GUAVA	guavaFilteredCollection	com.m3.collections.M3LinkedList;com.google.common.base.Predicate	java.util.Collection	com.google.common.collect.Collections2	com.m3.collections.M3LinkedList	BORROWED_M3	33.4.8-jre
 GUAVA	guavaFilteredNavigableSet	com.m3.collections.M3TreeSet;com.google.common.base.Predicate	java.util.NavigableSet	com.google.common.collect.Sets	com.m3.collections.M3TreeSet	BORROWED_M3	33.4.8-jre
+GUAVA	guavaBiMap		com.google.common.collect.BiMap	com.m3.collections.interop.M3GuavaBiMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	33.4.8-jre
+APACHE_COMMONS_COLLECTIONS	apacheBidiMap		org.apache.commons.collections4.BidiMap	com.m3.collections.interop.M3ApacheBidiMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	4.5.0
