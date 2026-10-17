@@ -392,6 +392,7 @@ public final class M3BidiMap<K, V> implements BidiMap<K, V> {
                 public void remove() {
                     // Preserve the donor's delivered-value removal after an external replacement.
                     cursor.removeObservedValue(deliveredValue);
+                    deliveredValue = null;
                 }
             };
         }
