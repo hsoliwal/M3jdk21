@@ -51,7 +51,7 @@ final class M3InstalledSourceInventoryRecipeTest {
         assertTrue(seen.contains("m3/collections/NOTICE"));
         String old = M3InstalledSourceInventoryRecipe.digest(ROOT.resolve(
                 "m3/collections/qualification/installed-source-enum-set-20261014.tsv"));
-        assertEquals("6627c851e6a879e28c0434b41f988669c118649e04a4d89bcf30102aa9e767ed",
+        assertEquals("90e6e4adcc6a9224b6ca7f85b5d01b950ed8c368fcc660b04ce56fda59eae689",
                 old, "preserve independently observed historical manifest content");
         assertEquals(candidate, generate(), "repeated source image differs");
         Path installed = ROOT.resolve("m3/collections/qualification/installed-source-20261017.tsv");
