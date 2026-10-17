@@ -11,7 +11,7 @@ on #999 failed two execution jobs:
    PR #999 synthetic merge checkout installed manifest **actual**
    `6627c851e6a879e28c0434b41f988669c118649e04a4d89bcf30102aa9e767ed`
    versus **expected** `90e6e4adcc6a9224b6ca7f85b5d01b950ed8c368fcc660b04ce56fda59eae689`.
-   The pinned head retains the expected historical manifest SHA; the old inventory still has fewer paths than the installed Java source set. Treat the synthetic merge-tree hash mismatch as a separate Git ref custody discrepancy. Do not change the
+   The pinned head retains the expected historical manifest SHA; the old inventory still has fewer paths than the installed Java source set. Inspection identified a duplicate TOP-LEVEL `installed_source_manifest` key: the last historical 20261008 value shadowed the first current value when `json.loads` parsed the packet. The earlier apparent merge-tree manifest mismatch was actually this pointer collision. Do not change the
    expected SHA alone or weaken duplicate/path checks: generate a NEW complete
    path + SHA256 manifest for this exact source epoch, and update only the root
    JSON receipt pointer; retain all original/historical manifests and nested JSON.
@@ -46,8 +46,13 @@ receipt, not migration or source rewrite. No source code has been changed.
 
 `M3DonationPointerRecipe` accepts only the Git-blob-verified complete
 original `synexia-donation.json` and its own exact generated fixed point,
-updates only the top-level installed manifest path+SHA256, leaving all other
-nested receipts and attribution byte-identical.
+updates the current top-level installed manifest path+SHA256 and renames the
+other duplicate top-level `installed_source_manifest` to
+`historical_installed_source_manifest_20261008`, preserving its historical
+value and all nested receipts/attribution. Source V1 was validly pinned as a
+Git blob but parsed incorrectly; the successor recipe admits exactly original,
+V1, and corrected V2, then reaches a fixed point. A strict JSON duplicate-key
+parser checks the candidate before it can be installed.
 
 ### Required sequence
 1. **Source first**: frozen donor POM/JSON preimages, exact POM postimages,
