@@ -1,0 +1,2 @@
+M3 Apache Commons interoperability — Copyright 2026 Hitesh Soliwal and contributors, Apache-2.0.
+Optional Apache Software Foundation org.apache.commons:commons-collections4:4.5.0 dependency retains Apache-2.0/NOTICE separately. Apache provider implementation bodies are not copied. Original JDK, Guava, Eclipse and Spring rights unchanged.

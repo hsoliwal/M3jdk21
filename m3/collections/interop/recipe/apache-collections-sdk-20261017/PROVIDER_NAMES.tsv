@@ -1,0 +1,4 @@
+upstream_fqcn	M3_factory	status
+org.apache.commons.collections4.ListValuedMap	com.m3.collections.interop.M3ApacheCollections.listValuedMap	CANDIDATE_PROVIDER_RUNTIME_PENDING
+org.apache.commons.collections4.SetValuedMap	com.m3.collections.interop.M3ApacheCollections.setValuedMap	CANDIDATE_PROVIDER_RUNTIME_PENDING
+org.apache.commons.collections4.MultiValuedMap	com.m3.collections.interop.M3ApacheCollections.listValuedMap	CANDIDATE_PROVIDER_RUNTIME_PENDING

@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ApacheCollectionsInterop20261017
+displayName: Apache Commons ListValuedMap / SetValuedMap backed by canonical M3 arrays and slot indexes
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: apache-collections-interop
+      lst: false
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: apache-collections-pom

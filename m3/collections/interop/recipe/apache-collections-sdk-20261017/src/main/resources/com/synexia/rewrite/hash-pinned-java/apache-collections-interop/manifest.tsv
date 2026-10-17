@@ -1,0 +1,4 @@
+# new provider-specific Java and standalone/JUnit oracles
+m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheCollections.java	ABSENT	5adbfa8a9ab06ef5f93c2ce54226da1499cab770778de7037895201f0471961b	M3ApacheCollections.java.txt
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsContract.java	ABSENT	0c983a1132ba969d612742f4dfe7c5bcfa76f00bcfb7a8038ba4d7b2074ac488	M3ApacheCollectionsContract.java.txt
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java	ABSENT	ee90f1066df302f90481f550c338dbd88fb235b55ca3bc51ab09d14c450a9cb0	M3ApacheCollectionsTest.java.txt

@@ -1,0 +1,87 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Apache Commons indexed multimap receiver
+on:
+  pull_request:
+    paths:
+      - "m3/collections/interop/pom.xml"
+      - "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheCollections.java"
+      - "m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollections*.java"
+      - "m3/collections/interop/recipe/apache-collections-sdk-20261017/**"
+      - "m3/collections/interop/qualification/apache-collections-20261017/**"
+      - ".github/workflows/m3-apache-collections-sdk.yml"
+  push:
+    branches: [m3/apache-collections-sdk-receiver-20261017]
+permissions:
+  contents: read
+jobs:
+  source-java-apache-and-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Refuse source/recipe/pom drift before compilation
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 -S m3/collections/interop/qualification/apache-collections-20261017/verify.py
+      - name: Execute real Maven/OpenRewrite Java recipe and POM proof
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/collections/interop/recipe/apache-collections-sdk-20261017/pom.xml \
+            -Dm3.receiver="$PWD" test
+      - name: Resolve actual Apache Commons binary, never vendor stubs
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof/providers proof/core proof/jni
+          mvn -B -ntp -f m3/collections/interop/qualification/apache-collections-20261017/provider-pom.xml \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:copy-dependencies \
+            -DincludeScope=test -DoutputDirectory="$PWD/proof/providers"
+          test -f proof/providers/commons-collections4-4.5.0.jar
+      - name: Strict Java 21 current M3 owners and 4600-step real Apache oracle
+        shell: bash
+        run: |
+          set -euxo pipefail
+          find m3/collections/src/main/java -name '*.java' -print0 | sort -z | \
+            xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/core
+          CP="proof/core:$(find proof/providers -name '*.jar' | paste -sd: -)"
+          javac --release 21 -proc:none -Xlint:all -Werror -cp "$CP" -d proof/core \
+            m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheCollections.java \
+            m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsContract.java \
+            m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java
+          java -Xmx256m -cp "$CP" com.m3.collections.interop.M3ApacheCollectionsContract
+          javap -public -cp "$CP" com.m3.collections.interop.M3ApacheCollections >proof/apache-api.txt
+      - name: Revalidate unchanged JNI bulk mask path
+        shell: bash
+        run: |
+          set -euxo pipefail
+          javac --release 21 -proc:none -h proof/jni -cp proof/core -d proof/core \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+          gcc -std=c17 -Wall -Wextra -Wpedantic -Werror -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o proof/jni/libm3_collections_mask.so
+          javac --release 21 -proc:none -cp proof/core -d proof/core \
+            m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
+          UBSAN_OPTIONS=halt_on_error=1 java -Xmx256m -Xcheck:jni \
+            -Djava.library.path="$PWD/proof/jni" -cp proof/core \
+            com.m3.collections.M3IndexMaskCompactorSelfTest --native
+          python3 -S m3/collections/interop/qualification/apache-collections-20261017/verify.py
+          git diff --exit-code
+      - name: Preserve positive and negative proof artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-apache-interop-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 30
+          path: |
+            proof/
+            m3/collections/interop/recipe/apache-collections-sdk-20261017/target/surefire-reports/
