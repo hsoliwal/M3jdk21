@@ -102,7 +102,7 @@ public final class RegexRollingBeforeAfter {
                 throw new AssertionError("old/new trial=" + trial);
             }
             if (before >= 0) {
-                boolean expected = Pattern.matches(pattern, raw);
+                boolean expected = Pattern.matches(pattern, raw.toString());
                 checks++;
                 if ((before == 1) != expected) {
                     throw new AssertionError("Pattern parity trial=" + trial);
