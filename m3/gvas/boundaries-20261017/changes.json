@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+  "crate": "m3-gvas-boundaries-20261017",
+  "files": [
+    {
+      "path": "m3/core/src/com/m3/text/M3FixedAddressMapping.java",
+      "kind": "java",
+      "before_git_blob": "5e02839678dd2d8608e2fef4a6df5aba07401490",
+      "before_sha256": "704acbd7c0899f6cb4ca47658e0ce0387d8b498ce6ca6d801f02461d2f3a0025",
+      "after_git_blob": "a616ebcfc25ee525ece419b571ba79d0f5ba79f8",
+      "after_sha256": "a42c4952705cf25aff4c7de7f5a77851aad321047203bbc2d61fe7388d9699d4",
+      "replacements": [
+        {
+          "before": "        String actual = digest(raw.asReadOnlyBuffer());\n        if (!actual.equals(digest)) {\n            unmapRejected0(address, length);\n            throw new IOException(\"M3 canonical image SHA-256 mismatch\");\n        }\n        Image admitted = new Image(file, address, actual, raw);\n",
+          "after": "        Image admitted;\n        try {\n            String actual = digest(raw.asReadOnlyBuffer());\n            if (!actual.equals(digest)) {\n                throw new IOException(\"M3 canonical image SHA-256 mismatch\");\n            }\n            admitted = new Image(file, address, actual, raw);\n        } catch (IOException | RuntimeException | Error failure) {\n            // This exact native mapping is not published yet. Preserve the\n            // admission failure while returning its address slot for retry.\n            try {\n                unmapRejected0(address, length);\n            } catch (IOException cleanup) {\n                failure.addSuppressed(cleanup);\n            }\n            throw failure;\n        }\n        // Keep publication outside rollback: a registry allocation failure\n        // must never leave a published Image pointing at unmapped storage.\n"
+        }
+      ]
+    },
+    {
+      "path": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",
+      "kind": "text",
+      "before_git_blob": "a3cbcd5c17e99761fe5a9acc4200e920f73e1c79",
+      "before_sha256": "99ee928f3af6733d344933836541d1fbeafa69555e18148728a5ba52b8dc7f41",
+      "after_git_blob": "5d61a9d635ef49772116cce85218908210322d68",
+      "after_sha256": "d89291fe502f7dfdd51aefadb0d2a191fda3d251034e58d3d5576bcd0dd68dfa",
+      "replacements": [
+        {
+          "before": "#include <limits.h>\n",
+          "after": "#include <limits.h>\n#include <stdlib.h>\n"
+        },
+        {
+          "before": "static int valid_range(jlong base, jlong length) {",
+          "after": "#if defined(__linux__) && defined(MAP_FIXED_NOREPLACE)\n/* Reuse the JDK encoder: JNI modified UTF-8 is not a Linux UTF-8 file name. */\nstatic char *path_utf8(JNIEnv *env, jstring path) {\n    jclass strings = (*env)->FindClass(env, \"java/lang/String\");\n    if (strings == NULL) return NULL;\n    jmethodID encode = (*env)->GetMethodID(env, strings, \"getBytes\", \"(Ljava/lang/String;)[B\");\n    (*env)->DeleteLocalRef(env, strings);\n    if (encode == NULL) return NULL;\n    jstring utf8 = (*env)->NewStringUTF(env, \"UTF-8\");\n    if (utf8 == NULL) return NULL;\n    jbyteArray bytes = (jbyteArray)(*env)->CallObjectMethod(env, path, encode, utf8);\n    jboolean failed = (*env)->ExceptionCheck(env);\n    (*env)->DeleteLocalRef(env, utf8);\n    if (failed) return NULL;\n    if (bytes == NULL) {\n        fail(env, \"java/io/IOException\", \"JDK returned no UTF-8 file name\");\n        return NULL;\n    }\n    jsize length = (*env)->GetArrayLength(env, bytes);\n    if ((*env)->ExceptionCheck(env)) {\n        (*env)->DeleteLocalRef(env, bytes);\n        return NULL;\n    }\n    char *name = (char *)malloc((size_t)length + 1u);\n    if (name == NULL) {\n        (*env)->DeleteLocalRef(env, bytes);\n        fail(env, \"java/lang/OutOfMemoryError\", \"canonical UTF-8 file name\");\n        return NULL;\n    }\n    (*env)->GetByteArrayRegion(env, bytes, 0, length, (jbyte *)name);\n    failed = (*env)->ExceptionCheck(env);\n    (*env)->DeleteLocalRef(env, bytes);\n    if (failed) {\n        free(name);\n        return NULL;\n    }\n    if (memchr(name, 0, (size_t)length) != NULL) {\n        free(name);\n        fail(env, \"java/io/IOException\", \"embedded NUL in canonical file name\");\n        return NULL;\n    }\n    name[length] = '\\0';\n    return name;\n}\n#endif\n\nstatic int valid_range(jlong base, jlong length) {"
+        },
+        {
+          "before": "    const char *filename = (*env)->GetStringUTFChars(env, path, NULL);\n    if (filename == NULL) return NULL;\n    int fd = open(filename, O_RDONLY | O_CLOEXEC | O_NOFOLLOW);\n    (*env)->ReleaseStringUTFChars(env, path, filename);\n",
+          "after": "    char *filename = path_utf8(env, path);\n    if (filename == NULL) return NULL;\n    int fd = open(filename, O_RDONLY | O_CLOEXEC | O_NOFOLLOW);\n    free(filename);\n"
+        }
+      ]
+    }
+  ],
+  "additions": [
+    {
+      "kind": "java",
+      "path": "m3/core/test/com/m3/text/M3FixedAddressBoundaryProof.java",
+      "fixture": "M3FixedAddressBoundaryProof.java",
+      "after_sha256": "c70cdd94a89e68b522691cfca9ffa605446b1839e7be505faba1286e4acdc598"
+    },
+    {
+      "kind": "text",
+      "path": "m3/verify-fixed-address-boundaries.py",
+      "fixture": "verify-boundaries.py",
+      "after_sha256": "23bb61c343f8190bf70ee9b58896ba4900eee3d951dce63b2395ea6bd6c67df9"
+    }
+  ]
+}

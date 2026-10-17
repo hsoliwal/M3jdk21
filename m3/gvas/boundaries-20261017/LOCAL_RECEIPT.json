@@ -1,0 +1,40 @@
+{
+  "kind": "LOCAL_CANDIDATE_NOT_MAVEN_PROMOTION",
+  "baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+  "java_version": "openjdk version \"21.0.12.1\" 2026-08-18\nOpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)\n",
+  "c_compiler": "cc (Debian 14.2.0-19) 14.2.0",
+  "java_assertions": 130,
+  "two_simultaneous_jvms": true,
+  "fixed_address": "0x600000000000",
+  "proof_runs": 2,
+  "maven_sdk": "NOT_EXECUTED_LOCAL",
+  "windows_native": "NOT_EXECUTED",
+  "hotspot_full_image": "NOT_EXECUTED",
+  "inputs": [
+    {
+      "path": "m3/core/src/com/m3/text/M3FixedAddressMapping.java",
+      "kind": "java",
+      "before_git_blob": "5e02839678dd2d8608e2fef4a6df5aba07401490",
+      "before_sha256": "704acbd7c0899f6cb4ca47658e0ce0387d8b498ce6ca6d801f02461d2f3a0025",
+      "after_git_blob": "a616ebcfc25ee525ece419b571ba79d0f5ba79f8",
+      "after_sha256": "a42c4952705cf25aff4c7de7f5a77851aad321047203bbc2d61fe7388d9699d4"
+    },
+    {
+      "path": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",
+      "kind": "text",
+      "before_git_blob": "a3cbcd5c17e99761fe5a9acc4200e920f73e1c79",
+      "before_sha256": "99ee928f3af6733d344933836541d1fbeafa69555e18148728a5ba52b8dc7f41",
+      "after_git_blob": "5d61a9d635ef49772116cce85218908210322d68",
+      "after_sha256": "d89291fe502f7dfdd51aefadb0d2a191fda3d251034e58d3d5576bcd0dd68dfa"
+    }
+  ],
+  "jni_header_sha256": "deacc06bfd0d226f5ab661a8a3a3e2848a3a1e4b70f62001fcf982c1664b55db",
+  "proof": "M3_GVAS_BOUNDARY_PASS mode=unicode checks=13\nM3_GVAS_BOUNDARY_PASS mode=cleanup checks=15\nM3_GVAS_BOUNDARY_PASS mode=digest checks=12\nM3_GVAS_BOUNDARY_PASS mode=collision checks=1\nM3_GVAS_BOUNDARY_PASS mode=unicode checks=13\nM3_GVAS_BOUNDARY_PASS mode=cleanup checks=15\nM3_GVAS_BOUNDARY_PASS mode=digest checks=12\nM3_GVAS_BOUNDARY_PASS mode=collision checks=1\nM3_GVAS_BOUNDARY_READY base=0x600000000000\nM3_GVAS_BOUNDARY_READY base=0x600000000000\nM3_GVAS_BOUNDARY_PASS mode=child checks=24\nM3_GVAS_BOUNDARY_PASS mode=child checks=24\nM3_GVAS_BOUNDARIES_STRICT_PASS address=0x600000000000 processes=2 device=27 inode=1048976 sha256=4682f934be542b0561a0d9ae6d061d59034df9ee58f7df01e702193deb6b2c28\n600000000000-600000001000 r--s 00000000 00:1b 1048976                    /tmp/m3-gvas-boundaries-egt_hs1_/साझा-😀-𐐷.bin\n600000000000-600000001000 r--s 00000000 00:1b 1048976                    /tmp/m3-gvas-boundaries-egt_hs1_/साझा-😀-𐐷.bin\n",
+  "counterexamples": {
+    "unicode": "Exception in thread \"main\" java.io.IOException: cannot open canonical image read-only\n\tat com.m3.text.M3FixedAddressMapping.mapExact0(Native Method)\n\tat com.m3.text.M3FixedAddressMapping.open(M3FixedAddressMapping.java:106)\n\tat com.m3.text.M3FixedAddressBoundaryProof.main(M3FixedAddressBoundaryProof.java:108)\n",
+    "cleanup": "Exception in thread \"main\" java.io.IOException: exact shared address unavailable (no relocation)\n\tat com.m3.text.M3FixedAddressMapping.mapExact0(Native Method)\n\tat com.m3.text.M3FixedAddressMapping.open(M3FixedAddressMapping.java:106)\n\tat com.m3.text.M3FixedAddressBoundaryProof.rejectedProvider(M3FixedAddressBoundaryProof.java:58)\n\tat com.m3.text.M3FixedAddressBoundaryProof.main(M3FixedAddressBoundaryProof.java:92)\n"
+  },
+  "recipe_sha256": "41657cebfeb36be4beefbb35dc1edc21f28fd2fc2f0baf4cf38f9b4a07d39e77",
+  "proof_repeat": "M3_GVAS_BOUNDARY_PASS mode=unicode checks=13\nM3_GVAS_BOUNDARY_PASS mode=cleanup checks=15\nM3_GVAS_BOUNDARY_PASS mode=digest checks=12\nM3_GVAS_BOUNDARY_PASS mode=collision checks=1\nM3_GVAS_BOUNDARY_PASS mode=unicode checks=13\nM3_GVAS_BOUNDARY_PASS mode=cleanup checks=15\nM3_GVAS_BOUNDARY_PASS mode=digest checks=12\nM3_GVAS_BOUNDARY_PASS mode=collision checks=1\nM3_GVAS_BOUNDARY_READY base=0x600000000000\nM3_GVAS_BOUNDARY_READY base=0x600000000000\nM3_GVAS_BOUNDARY_PASS mode=child checks=24\nM3_GVAS_BOUNDARY_PASS mode=child checks=24\nM3_GVAS_BOUNDARIES_STRICT_PASS address=0x600000000000 processes=2 device=27 inode=1048924 sha256=4682f934be542b0561a0d9ae6d061d59034df9ee58f7df01e702193deb6b2c28\n600000000000-600000001000 r--s 00000000 00:1b 1048924                    /tmp/m3-gvas-boundaries-g5wic5_o/साझा-😀-𐐷.bin\n600000000000-600000001000 r--s 00000000 00:1b 1048924                    /tmp/m3-gvas-boundaries-g5wic5_o/साझा-😀-𐐷.bin\n",
+  "initial_abi_fixture_failure": "GCC: O_CLOEXEC and O_NOFOLLOW undeclared when the generated JNI header was pre-included before _GNU_SOURCE. Corrected only the ABI test unit include order; both original and candidate then compiled strictly."
+}

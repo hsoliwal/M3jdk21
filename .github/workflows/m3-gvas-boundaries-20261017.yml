@@ -1,0 +1,80 @@
+name: M3 GVAS boundary recipe and native admission
+on:
+  pull_request:
+    paths:
+      - 'm3/gvas/boundaries-20261017/**'
+      - 'm3/core/src/com/m3/text/M3FixedAddressMapping.java'
+      - 'm3/core/test/com/m3/text/M3FixedAddressBoundaryProof.java'
+      - 'm3/lexicon/native/m3_fixed_address_mapping_jni.c'
+      - 'm3/verify-fixed-address-boundaries.py'
+      - '.github/workflows/m3-gvas-boundaries-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  recipe-and-contract:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Preserve pinned source bytes on this ephemeral runner
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.longpaths true
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            m3/gvas
+            m3/core/src/com/m3/text
+            m3/core/test/com/m3/text
+            m3/lexicon/native
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify existing recipe-provider custody and prepare resources only
+        run: |
+          set -euo pipefail
+          engine=m3/gvas/boundaries-20261017/recipe/pinned-engine/com/synexia/rewrite
+          test "$(git hash-object "$engine/M3HashPinnedJavaSnapshotRecipe.java")" = d58ca50dfaeb60f581b64f43545e688aca5c6530
+          test "$(git hash-object "$engine/M3HashPinnedTextSnapshotRecipe.java")" = 2db1257a40d21be06ba2a67da87aff0311183809
+          git fetch --no-tags --depth=1 https://github.com/hsoliwal/M3jdk21.git 970a34350ebdf6a3f1c5ff5acc8445d0f3515f55
+          python m3/gvas/boundaries-20261017/prepare.py
+      - name: Actual Maven Java LST and native-text SDK tests
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/gvas/boundaries-20261017/recipe/pom.xml \
+            -Dm3.gvas.output="$RUNNER_TEMP/m3-gvas-sdk-output" test
+      - name: Install only qualified SDK output into this ephemeral checkout
+        run: |
+          set -euo pipefail
+          python m3/gvas/boundaries-20261017/prepare.py \
+            --install-sdk-output "$RUNNER_TEMP/m3-gvas-sdk-output"
+          git diff --check
+      - name: Linux C17 checked JNI, original regression and strict two-process proof
+        if: runner.os == 'Linux'
+        env:
+          M3_JDK: ${{ env.JAVA_HOME }}
+        run: |
+          set -euo pipefail
+          python m3/verify-fixed-address-boundaries.py
+          timeout 120s python m3/verify-fixed-address-jni.py
+      - name: Preserve exact SDK outputs, resources and Maven receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-gvas-boundaries-${{ matrix.os }}
+          path: |
+            ${{ runner.temp }}/m3-gvas-sdk-output
+            m3/gvas/boundaries-20261017/recipe/target/surefire-reports
+            m3/gvas/boundaries-20261017/recipe/src/main/resources
+          if-no-files-found: error
