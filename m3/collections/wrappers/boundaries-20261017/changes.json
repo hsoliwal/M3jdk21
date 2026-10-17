@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "baseline": "11dde1eac33cea2a8b90baba8c155eabec341144",
+  "source_repository": "hsoliwal/M3jdk21",
+  "engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "crate": "m3-wrapper-boundaries-20261017",
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MappedViews.java",
+      "before_git_blob": "4c2ffbfc358eb0c161227e46ed0b0cc6bfbeb85f",
+      "before_sha256": "6bd1f0bd3458678acbc9983c006c20edc63563c702bf5ad6a7581a2d149eeb3f",
+      "after_sha256": "daaeff64f1d104f3a89637fd0b9a4f9f4e5dd615e835c603b5ff6dafa706ac3b",
+      "after_git_blob": "64639a2b5041887179ec238170a97713205c015b",
+      "replacements": [
+        {
+          "before": "import java.util.Set;\nimport java.util.function.Function;",
+          "after": "import java.util.Set;\nimport java.util.Spliterator;\nimport java.util.Spliterators;\nimport java.util.function.Consumer;\nimport java.util.function.Function;"
+        },
+        {
+          "before": "        @Override\n        public ListIterator<T> listIterator(int index) {",
+          "after": "        /** Delegate sequential traversal; AbstractList.iterator would repeatedly call get. */\n        @Override\n        public Iterator<T> iterator() {\n            return listIterator(0);\n        }\n\n        /** Keep the original list's range checks, interference rules and access capability. */\n        @Override\n        public List<T> subList(int fromIndex, int toIndex) {\n            return list(source.subList(fromIndex, toIndex), mapper);\n        }\n\n        @Override\n        public ListIterator<T> listIterator(int index) {"
+        },
+        {
+          "before": "        @Override\n        public int size() {\n            long count = 0;\n            for (T ignored : this) {\n                count++;\n                if (count > Integer.MAX_VALUE) {\n                    throw new IllegalStateException(\"flattened collection too large\");\n                }\n            }\n            return (int) count;\n        }",
+          "after": "        /** Collection.size saturates; it is not an exact long cardinality API. */\n        @Override\n        public int size() {\n            int count = 0;\n            for (T ignored : this) {\n                if (++count == Integer.MAX_VALUE) {\n                    return count;\n                }\n            }\n            return count;\n        }\n\n        @Override\n        public boolean isEmpty() {\n            return !iterator().hasNext();\n        }\n\n        /**\n         * Unknown flattened cardinality must not trigger an eager size prepass.\n         * Binding is delayed until traversal. JDK AbstractSpliterator supplies\n         * optional bounded batch splitting; no child collection is retained here.\n         * No source DISTINCT, SORTED, NONNULL, SIZED or SUBSIZED claim survives\n         * an arbitrary flat mapper. Iteration and callback failures propagate.\n         */\n        @Override\n        public Spliterator<T> spliterator() {\n            return new Spliterators.AbstractSpliterator<>(Long.MAX_VALUE, 0) {\n                private Iterator<T> iterator;\n\n                @Override\n                public boolean tryAdvance(Consumer<? super T> action) {\n                    Objects.requireNonNull(action, \"action\");\n                    if (iterator == null) {\n                        iterator = FlatMappedCollection.this.iterator();\n                    }\n                    if (!iterator.hasNext()) {\n                        return false;\n                    }\n                    action.accept(iterator.next());\n                    return true;\n                }\n            };\n        }"
+        }
+      ]
+    },
+    {
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3MapCursorNativeProof.java",
+      "before_git_blob": "f4f6fbb0c1f361f5cd31b72bf77a08879b4f1faa",
+      "before_sha256": "9b458b3fbcc5f282494dc6755ae76576d12257e72ecb94ed305ae73cc62dccaa",
+      "after_git_blob": "4ef392d139ef5993a1a35c6cfbadb162b59e61b7",
+      "after_sha256": "32ca011d3efc754255348c60d6bf76b7f0e6bab774f00d1b289015ee4b53e769",
+      "replacements": [
+        {
+          "before": "            // Reuse this native peer for the new fused M3 snapshot API:\n",
+          "after": "            // Refined lazy flattening composes with the existing filter/sort owner.\n            java.util.Collection<Integer> flat = M3MappedViews.flatMapped(\n                    backing.keySet(), key -> java.util.List.of(key, key));\n            int[] flattened = M3CollectionViews.filteredSortedSnapshot(flat,\n                    key -> (key & 1) == 0, java.util.Comparator.naturalOrder())\n                    .stream().mapToInt(Integer::intValue).toArray();\n            check(fold(flattened) == javaFold(flattened),\n                    \"lazy flatten/filter/stable-sort JNI shadow parity\");\n            // Reuse this native peer for the new fused M3 snapshot API:\n"
+        }
+      ]
+    }
+  ]
+}
