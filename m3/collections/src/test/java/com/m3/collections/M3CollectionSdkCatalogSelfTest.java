@@ -25,6 +25,7 @@ public final class M3CollectionSdkCatalogSelfTest {
         check(entries.size() >= 95, "provider coverage inventory");
         check(M3CollectionSdkCatalog.size() == entries.size(), "family count");
         int[] vendors = new int[M3CollectionSdkCatalog.Vendor.values().length];
+        int optional = 0;
         String previous = "";
         for (var family : entries) {
             checks++;
@@ -40,8 +41,15 @@ public final class M3CollectionSdkCatalogSelfTest {
                 check(!family.hasExistingM3Owner(), "pending is not already installed");
                 check(!family.candidateRole().isEmpty(), "future role explicit");
             }
+            if (family.disposition() == M3CollectionSdkCatalog.Disposition.OPTIONAL_ADAPTER) {
+                optional++;
+                check(family.hasExistingM3Owner(), "optional adapter must name a real owner");
+                check(family.existingM3Owner().startsWith("com.m3.collections.interop."),
+                        "optional compatibility never pollutes core dependency boundary");
+            }
             vendors[family.vendor().ordinal()]++;
         }
+        check(optional == 12, "selected optional adapters must be enumerated exactly");
         for (var vendor : M3CollectionSdkCatalog.Vendor.values()) {
             check(vendors[vendor.ordinal()] > 0, "vendor coverage: " + vendor);
             check(M3CollectionSdkCatalog.byVendor(vendor).size() == vendors[vendor.ordinal()],
@@ -55,7 +63,8 @@ public final class M3CollectionSdkCatalogSelfTest {
         check(!spring.semanticContract().equals(guava.semanticContract()), "Spring map-of-lists != Guava multimap");
         check(!spring.upstreamName().equals(apache.upstreamName()), "Spring != Apache FQCN");
         check(!guava.upstreamName().equals(eclipse.upstreamName()), "Guava != Eclipse FQCN");
-        check(spring.disposition() == M3CollectionSdkCatalog.Disposition.PENDING, "no Spring module dependency");
+        check(spring.disposition() == M3CollectionSdkCatalog.Disposition.OPTIONAL_ADAPTER,
+                "optional Spring adapter is not core or pending");
         check(M3CollectionSdkCatalog.require("org.eclipse.collections.api.list.primitive.MutableLongList")
                 .existingM3Owner().equals("com.m3.collections.M3LongArrayList"), "Eclipse long shape only");
         for (String jdk : List.of("java.util.ArrayList", "java.util.SequencedSet",
