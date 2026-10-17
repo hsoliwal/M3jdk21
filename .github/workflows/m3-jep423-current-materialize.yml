@@ -219,7 +219,8 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             autoconf make gcc g++ zip unzip \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev jtreg7
+          test -f /usr/share/jtreg/lib/jtreg.jar
 
       - name: 9 - Configure and build fastdebug JDK image
         shell: bash
@@ -227,6 +228,7 @@ jobs:
           set -euo pipefail
           bash configure \
             --with-boot-jdk="$JAVA_HOME" \
+            --with-jtreg=/usr/share/jtreg \
             --with-debug-level=fastdebug \
             --with-jvm-variants=server \
             --disable-warnings-as-errors
