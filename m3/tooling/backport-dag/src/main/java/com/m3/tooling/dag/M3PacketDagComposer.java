@@ -95,7 +95,7 @@ public final class M3PacketDagComposer {
                             atom.dependsOn().isEmpty()
                                     ? List.of(A3_PREPARATION)
                                     : atom.dependsOn().stream()
-                                            .map(M3PacketDagComposer::nodeId)
+                                            .map(id -> nodeId(checkedPacket.require(id)))
                                             .toList()));
         }
 
