@@ -166,6 +166,44 @@ def include_path_mask_successor(historical_rows, receipt=_PATH_MASK_RECEIPT):
         extra.append((path, after))
     return [*historical_rows, *extra]
 
+# Exact successor: compose physical offset/int32 stage masks without rewriting
+# the historical installed-source manifest or weakening source-set completeness.
+_STAGE_PATH_RECEIPT = HERE / 'recipe/long-index-stage-path-20261017/manifest.tsv'
+_STAGE_PATH_SHA256 = '37686ec2db3a8570de182768bc166384322e045a0419a0bf4e38f415ce8bf1e2'
+_STAGE_PATH_MAIN = 'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java'
+_STAGE_PATH_TEST = 'm3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionPathMasksTest.java'
+_STAGE_PATH_BEFORE = 'a69694a2ce22ca9599cb665e4845f5dee75d527b7c144fa3ea7fb4518ec2d3fa'
+_STAGE_PATH_AFTER = 'b923b9857f6302ed529fa4b3a4415b8f3da0f1b42701ff2b4a3d8f89854fd5f0'
+_STAGE_PATH_TEST_SHA = '239c6662ba7f91c786df60a9faa19633844b20408c972f88f381a7a241a49847'
+
+
+def include_long_stage_path_successor(previous_rows, receipt=_STAGE_PATH_RECEIPT):
+    """Replace one exact installed source and admit one test, nothing else."""
+    if not receipt.exists() and not receipt.is_symlink():
+        return list(previous_rows)
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _STAGE_PATH_SHA256:
+        raise SystemExit('Indexed stage-path receipt missing, aliased, or drifted')
+    entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
+    expected = (
+        (_STAGE_PATH_MAIN, _STAGE_PATH_BEFORE, _STAGE_PATH_AFTER,
+         'M3LongIndexProjection.java.txt'),
+        (_STAGE_PATH_TEST, 'ABSENT', _STAGE_PATH_TEST_SHA,
+         'M3LongIndexProjectionPathMasksTest.java.txt'),
+    )
+    if len(entries) != len(expected) or any(tuple(row) != want
+                                               for row, want in zip(entries, expected)):
+        raise SystemExit('Indexed stage-path successor must declare exactly two approved rows')
+    earlier = dict(previous_rows)
+    if len(earlier) != len(previous_rows):
+        raise SystemExit('Duplicate incoming installed source path')
+    if earlier.get(_STAGE_PATH_MAIN) != _STAGE_PATH_BEFORE:
+        raise SystemExit('Indexed stage-path old projection SHA mismatch')
+    if _STAGE_PATH_TEST in earlier:
+        raise SystemExit('Indexed stage-path test must be additive')
+    return [(path, _STAGE_PATH_AFTER if path == _STAGE_PATH_MAIN else sha)
+            for path, sha in previous_rows] + [(_STAGE_PATH_TEST, _STAGE_PATH_TEST_SHA)]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
@@ -208,7 +246,7 @@ def main():
         raise SystemExit('Installed source manifest drift: actual=' + digest(manifest) + ' expected=' + packet['installed_source_manifest_sha256'] + '; reconcile with canonical recipe before verifying')
     rows = [line.split('\t') for line in manifest.read_text().splitlines()
             if line and not line.startswith('#')]
-    rows = include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows)))
+    rows = include_long_stage_path_successor(include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows))))
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
