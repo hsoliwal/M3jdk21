@@ -29,5 +29,19 @@ jobs:
         run: >
           java -cp m3/collections/target/classes:m3/collections/target/test-classes
           com.m3.collections.M3CpuMaskRunsSelfTest
-      - name: Parse Maven/OpenRewrite crate sources
+      - name: Verify source equals recipe postimage exactly
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cpu-mask-runs-20261017
+          cmp -s m3/collections/src/main/java/com/m3/collections/M3CpuMaskRuns.java "$ROOT/M3CpuMaskRuns.java.txt"
+          cmp -s m3/collections/src/test/java/com/m3/collections/M3CpuMaskRunsSelfTest.java "$ROOT/M3CpuMaskRunsSelfTest.java.txt"
+          echo '7cab3146a69d945c1a04b3522f554ab01aacf971c96a2d3b3e9147c817a8ffd9  m3/collections/src/main/java/com/m3/collections/M3CpuMaskRuns.java' | sha256sum -c -
+          echo 'c53675932f76e933304ebd3dd2477b7981423243b53d4b52ca44ec56d4dcf2fe  m3/collections/src/test/java/com/m3/collections/M3CpuMaskRunsSelfTest.java' | sha256sum -c -
+      - name: Compile existing Maven/OpenRewrite recipe provider
         run: mvn -B -ntp -f m3/collections/recipe/cpu-mask-runs-20261017/pom.xml -DskipTests package
+      - name: Execute named OpenRewrite candidate recipe dry-run
+        run: >
+          mvn -B -ntp -f m3/collections/recipe/cpu-mask-runs-20261017/pom.xml
+          org.openrewrite.maven:rewrite-maven-plugin:5.23.1:dryRun
+          -Drewrite.activeRecipes=com.synexia.m3.CpuMaskRuns20261017
