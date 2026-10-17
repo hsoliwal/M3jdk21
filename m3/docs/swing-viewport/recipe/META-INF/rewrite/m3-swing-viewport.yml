@@ -1,0 +1,19 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.M3SwingViewportBasicTreeUI
+displayName: BasicTreeUI creates the M3 arithmetic layout cache when m3.swing.viewport is set
+description: >-
+  M3JDK Swing viewport leaf 1 (m3/docs/swing-viewport/DESIGN.md). One statement block in
+  BasicTreeUI.createLayoutCache, after the large-model branch: with -Dm3.swing.viewport=true the UI
+  returns sun.swing.tree.M3VariableHeightLayoutCache where it returns VariableHeightLayoutCache.
+  Default off. Applied by M3PerFileApply; a second pass must report UNCHANGED.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.plaf.basic.BasicTreeUI]
+      methodName: createLayoutCache
+      parameterCount: 0
+      anchor: "if(isLargeModel() && getRowHeight() > 0)"
+      position: AFTER
+      statements: "        if (sun.swing.tree.M3VariableHeightLayoutCache.ENABLED) {\n            return new sun.swing.tree.M3VariableHeightLayoutCache();\n        }"
