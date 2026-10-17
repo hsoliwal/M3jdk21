@@ -32,17 +32,17 @@ mvn -B -f m3/eclipse/framework/pom.xml verify
 Install `com.m3:m3-collections:0.1.0-SNAPSHOT` first, or run the exact-head workflow,
 which compiles the existing unchanged core and installs a thin Maven artifact.
 
-Source files are byte-identical to five SHA-256-sealed ABSENT-before templates in
+Source files are byte-identical to eight SHA-256-sealed ABSENT-before templates in
 canonical Synexia recipe `com.synexia.rewrite.M3EclipseFrameworkIndexForward`,
-`hsoliwal/com.synexia#12154`. One JUnit test class covers 5 families of
+`hsoliwal/com.synexia#12154`. Two JUnit test classes cover 6 families of
 adversarial cases, including bundle ID zero, Long.MAX_VALUE, duplicate bundle IDs,
 extension invalidation, bounded delta walks, cycles and a 2049-node deep delta.
-The isolated Java21 stub-API run passed all five tests. **Real Eclipse/M3 Maven
+The isolated Java21 stub-API run passed all six tests. **Real Eclipse/M3 Maven
 build and OSGi runtime proof are separate, mandatory gates**; no unexecuted
 GitHub Actions job establishes qualification.
 
 ## Provenance and upstream contracts
-Original Synexia core Eclipse mechanics and pluginify adapter are donor evidence.
+**OSGi integration:** `M3EclipseRuntimeActivator` registers an `M3EclipseRuntimeServices` implementation through BundleContext and unregisters it once at stop. The host supplies Eclipse services and controls bundle lifetimes. The generated OSGi manifest imports `com.m3.collections`, so that package must be exported by a separately installed M3 collections bundle; the exact-head workflow builds a manifest-wrapped OSGi candidate for that dependency. Source/JUnit tests do not establish actual Equinox resolution or plugin activation.\n\nOriginal Synexia core Eclipse mechanics and pluginify adapter are donor evidence.
 Synexia first-party recipe/source is Apache-2.0; Eclipse supplied APIs remain
 EPL-2.0 and OSGi interfaces retain their original Apache-2.0 licensing.
 No Eclipse source has been copied into the generated adapter. JDK API surface

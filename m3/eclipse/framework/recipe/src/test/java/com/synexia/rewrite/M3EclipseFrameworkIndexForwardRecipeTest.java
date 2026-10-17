@@ -65,7 +65,7 @@ final class M3EclipseFrameworkIndexForwardRecipeTest {
     @Test
     void manifestIsSortedAndTemplatesAreHashSealed() throws Exception {
         var rows = rows();
-        assertEquals(5, rows.size());
+        assertEquals(8, rows.size());
         assertEquals(after().keySet().stream().toList(), rows.stream().map(row -> row[0]).toList());
         for (String[] row : rows) {
             assertEquals("ABSENT", row[1]);

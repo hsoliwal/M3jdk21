@@ -10,3 +10,4 @@ M3_ECLIPSE_FORWARDING_COVERAGE_V1	jdt	org.eclipse.jdt.*	JDT/Core.Manipulation	M3
 M3_ECLIPSE_FORWARDING_COVERAGE_V1	emf	org.eclipse.emf.*	EMF	M3 index/graphs	HOLD_UNQUALIFIED
 M3_ECLIPSE_FORWARDING_COVERAGE_V1	workbench	org.eclipse.ui.*	Eclipse Workbench	M3 lifecycle/state	HOLD_UNQUALIFIED
 M3_ECLIPSE_FORWARDING_COVERAGE_V1	pde	org.eclipse.pde.*	Eclipse PDE	Synexia pluginify	HOLD_UNQUALIFIED
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	osgi.runtime_service	BundleActivator/ServiceRegistration	org.osgi.framework	M3EclipseRuntimeActivator;M3EclipseRuntimeServices	OSGI_BUNDLE_CANDIDATE_UNQUALIFIED_RUNTIME
