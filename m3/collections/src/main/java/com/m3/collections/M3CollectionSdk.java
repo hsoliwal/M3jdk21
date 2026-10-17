@@ -11,6 +11,9 @@ import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.SequencedCollection;
+import java.util.SequencedMap;
+import java.util.SequencedSet;
 import java.util.function.BiPredicate;
 import java.util.function.LongPredicate;
 import java.util.function.Predicate;
@@ -27,6 +30,21 @@ import java.util.function.Predicate;
  */
 public final class M3CollectionSdk {
     private M3CollectionSdk() { }
+
+    /** Java 21 SequencedMap over canonical M3 stable-slot arrays and order links. */
+    public static <K, V> SequencedMap<K, V> jdkSequencedMap() {
+        return new M3LinkedHashMap<>();
+    }
+
+    /** Java 21 SequencedSet over existing M3 key-only indexed slot storage. */
+    public static <E> SequencedSet<E> jdkSequencedSet() {
+        return new M3LinkedHashSet<>();
+    }
+
+    /** Java 21 SequencedCollection over existing M3 indexed-link list storage. */
+    public static <E> SequencedCollection<E> jdkSequencedCollection() {
+        return new M3LinkedList<>();
+    }
 
     public static M3CollectionSdkCatalog.Family family(String fqcn) {
         return M3CollectionSdkCatalog.require(fqcn);
