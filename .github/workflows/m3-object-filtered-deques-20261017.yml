@@ -1,0 +1,15 @@
+name: m3-object-filtered-deques-java21
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  java21-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Java 21 source contract
+        run: bash m3/collections/verification/filtered-object-deques-20261017/verify.sh
