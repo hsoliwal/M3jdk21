@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 long sorted live lazy cursor
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongSortedLateBindingSelfTest.java'
+      - '.github/workflows/m3-long-sorted-late-binding.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sorted-view-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict Java21 primitive collection and sorted view contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$(mktemp -d)"
+          trap 'rm -rf "$classes"' EXIT
+          root=m3/collections/src/main/java/com/m3/collections
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$classes" \
+            "$root/M3LongCollection.java" "$root/M3LongIterator.java" \
+            "$root/M3LongSortedSet.java" "$root/M3LongFilteredView.java" \
+            "$root/M3LongSortedViews.java" \
+            m3/collections/src/test/java/com/m3/collections/M3LongSortedLateBindingSelfTest.java
+          java -ea -cp "$classes" com.m3.collections.M3LongSortedLateBindingSelfTest
+          java -Xint -ea -cp "$classes" com.m3.collections.M3LongSortedLateBindingSelfTest
+          git diff --check
