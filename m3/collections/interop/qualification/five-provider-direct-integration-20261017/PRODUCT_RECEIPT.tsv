@@ -1,0 +1,18 @@
+# M3 current product receiving custody
+canonical_source_repo	hsoliwal/com.synexia
+canonical_source_pr	12192
+canonical_source_head	5ee3ada50155608daffa278b099e34a4e2a66d74
+product_stack_base_pr	1174
+product_stack_base_head	6c00eef6fd67ed6c34fd86560a4ffe8343ec17d4
+Java_recipe_java_targets	8
+Text_recipe_metadata_targets	1
+M3_object_count_parent	UNCHANGED
+provider_families	JDK;GUAVA;ECLIPSE;SPRING;APACHE
+Spring_implementation_direct	M3SpringArrayMultiValueMap
+JDK_list_implementation	M3ArrayList
+JDK_indexed_immutable_snapshot	M3IndexedListSnapshot
+new_JNI_symbols	0
+local_parent_1174_core_junit	211_PASS
+local_parent_1174_provider_junit	126_PASS
+new_combined_exact_head_gates	PENDING
+installed_JDK_JTReg_JCK	PENDING

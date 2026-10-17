@@ -1,0 +1,20 @@
+category	upstream_api	shared_M3_owner	problem_shape	decision	license
+JDK_REFERENCE_ARRAY	java.util.List	M3ArrayList<E>: Object[]/size/index	LeetCode 27/912 stable compaction and indirect sort	ADMIT_PROVEN_DONOR_1154	M3 Apache-2.0; no JDK source copied
+JDK_INDEXED_SNAPSHOT	java.util.List	M3IndexedListSnapshot<E>: Object[] plus int[] indices	Index permutation and offset slicing; O(n log n) sort/O(1) read	ADMIT_PROVEN_DONOR_1154	M3 Apache-2.0
+JDK_BASE_MAP_SET	java.util.Map/Set/NavigableMap/Set	M3LinkedHashMap/M3LinkedHashSet/M3TreeMap/M3TreeSet	Stable slot arrays, indexed order, bit masks	REUSE_CURRENT_1174	M3 Apache-2.0
+GUAVA_COUNT	com.google.common.collect.Multiset	M3GuavaMultiset + M3ObjectCounts	Shared primitive int[] counts/flags per distinct key	REUSE_1174	Guava Apache-2.0 plus first-party adaptation; retain donor notice
+GUAVA_BIDIRECTIONAL	com.google.common.collect.BiMap	M3GuavaBiMap + two M3LinkedHashMap indexes	Inverse consistency and forcePut	REUSE_1174	Guava Apache-2.0; notices retained
+GUAVA_MULTIMAP	com.google.common.collect.ListMultimap/SetMultimap/Table	M3-backed real Guava adapters	Live provider views; different from Spring/Apache	REUSE_ADAPTER_1174	Guava Apache-2.0
+ECLIPSE_BAG	org.eclipse.collections.api.bag.MutableBag	M3EclipseBag + M3ObjectCounts	Rich occurrence methods over shared count/flag planes	REUSE_1174	Eclipse EPL/EDL source and notices retained
+ECLIPSE_ORDERED_MAP	org.eclipse.collections.api.map.MutableOrderedMap	M3 linked key slots through real Eclipse adapter	Provider method names and result contracts remain Eclipse	REUSE_ADAPTER_1174	Eclipse EPL/EDL API
+SPRING_MULTIVALUE	org.springframework.util.MultiValueMap	M3SpringArrayMultiValueMap + M3LinkedHashMap/M3LinkedList	Direct Map<K,List<V>> and live single-value adapter semantics	ADD_PROVEN_DONOR_1190	Spring Apache-2.0; M3 first-party source
+SPRING_LEGACY	org.springframework.util.MultiValueMap	M3SpringMultiValueMap	Keep existing public class for prior SDK clients	RETAIN	M3 Apache-2.0
+APACHE_COUNT	org.apache.commons.collections4.MultiSet/Bag	M3ApacheMultiSet/M3ApacheBag + M3ObjectCounts	Different per-element overflow/removal rules from Guava	REUSE_1174	Apache Commons Apache-2.0 notices retained
+APACHE_BIMAP	org.apache.commons.collections4.BidiMap	M3ApacheBidiMap	Apache inverse and key/value semantics	REUSE_1174	Apache Commons Apache-2.0 notices retained
+APACHE_MULTIVALUED	org.apache.commons.collections4.ListValuedMap/SetValuedMap	M3ApacheListValuedMap/SetValuedMap	Apache live get/asMap and pair count	REUSE_1174	Apache Commons Apache-2.0 notices retained
+JNI_PRIMITIVE	M3IndexMaskCompactor/M3IndexPathMasks	existing C17 Region-array kernels	Bounded int/long index and mask precompute	RETAIN_UNCHANGED	M3 first-party Apache-2.0
+LEETCODE_ARRAY	LeetCode 27 Remove Element	M3ArrayList.removeIf stable two-pass compaction	O(n) preserving order, reject mutation on failing predicates	TAXONOMY_ONLY	no challenge implementation copied
+LEETCODE_SORT	LeetCode 912 Sort Array	M3IndexedListSnapshot stable row-index merge	O(n log n) O(n) primitive index scratch	TAXONOMY_ONLY	no challenge implementation copied
+HACKERRANK_ARRAY	HackerRank Arrays	M3 Object[] dynamic and linked-index owners	Bounds, copies, ordered cursor categories	TAXONOMY_ONLY	no challenge implementation copied
+GFG_BITMAP	GeeksforGeeks bitmap/int mask topics	M3ObjectCounts int[] flags, M3IndexMaskCompactor	Separate collection application flags from VM GC/object headers	TAXONOMY_ONLY	no article code copied
+RELEASE_CENSUS	Entire five upstream library concrete classes	Current five-provider SDK contracts	Serialization, JMM, all specializations, results, installed JDK, performance	PENDING_LIBRARY_WIDE	No blanket equivalence claim
