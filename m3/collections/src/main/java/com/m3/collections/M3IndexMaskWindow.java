@@ -49,6 +49,71 @@ public final class M3IndexMaskWindow {
     public static long scan(int[] orderedRows, byte[] rowStates, int firstIndex,
             int requiredMask, int excludedMask, int[] output, int outputOffset,
             int limit, M3IndexMaskCompactor.Backend backend) {
+        validate(orderedRows, rowStates, firstIndex, requiredMask, excludedMask,
+                output, outputOffset, limit, backend);
+        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+            if (!M3IndexMaskCompactor.nativeAvailable()) {
+                throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
+            }
+            if (limit == 0) return pack(firstIndex, 0);
+            long result = scanNative(orderedRows, rowStates, firstIndex, requiredMask,
+                    excludedMask, output, outputOffset, limit);
+            requireValidResult(result, firstIndex, orderedRows.length, limit);
+            return result;
+        }
+        if (limit == 0) return pack(firstIndex, 0);
+        return scanJava(orderedRows, rowStates, firstIndex, requiredMask,
+                excludedMask, output, outputOffset, limit);
+    }
+
+    /**
+     * Resumable filtering with independent input-work and output-capacity budgets.
+     *
+     * <p>Examines at most {@code maxExamined} consecutive source ordinals and writes
+     * at most {@code limit} accepted row IDs, stopping at whichever bound is reached
+     * first. Zero for either budget leaves the cursor and output unchanged. The input
+     * budget is clamped to the remaining source length without integer overflow.
+     *
+     * <p>A nonterminal result may contain zero rows. Resume at {@link #nextIndex(long)};
+     * do not interpret {@code written(result) == 0} as exhaustion. With both budgets
+     * positive, the cursor advances unless the source is exhausted. The caller owns
+     * scheduling, progress/cancellation between calls, and generation validation.
+     *
+     * <p>The source order can be sorted, filtered, or contain duplicate/signed row IDs;
+     * no payload or input slice is copied, sorted, or retained. This is explicit index
+     * projection, not a live JDK/Guava/Eclipse/Spring/Commons collection wrapper.
+     * Native scratch remains fixed at 128 cells. NATIVE_REQUIRED refuses an old binary
+     * without the additive bounded-scan symbol when work is requested.
+     *
+     * @return high 32 bits: exclusive next input index; low 32 bits: written count
+     * @throws IllegalArgumentException if maxExamined is negative or other arguments
+     *         violate the same constraints as {@link #scan}
+     */
+    public static long scanBounded(int[] orderedRows, byte[] rowStates, int firstIndex,
+            int maxExamined, int requiredMask, int excludedMask, int[] output,
+            int outputOffset, int limit, M3IndexMaskCompactor.Backend backend) {
+        validate(orderedRows, rowStates, firstIndex, requiredMask, excludedMask,
+                output, outputOffset, limit, backend);
+        if (maxExamined < 0) throw new IllegalArgumentException("negative input scan budget");
+        int end = firstIndex + Math.min(maxExamined, orderedRows.length - firstIndex);
+        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+            if (!M3IndexMaskCompactor.nativeAvailable()) {
+                throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
+            }
+            if (limit == 0 || end == firstIndex) return pack(firstIndex, 0);
+            long result = scanBoundedNative(orderedRows, rowStates, firstIndex, end,
+                    requiredMask, excludedMask, output, outputOffset, limit);
+            requireValidResult(result, firstIndex, end, limit);
+            return result;
+        }
+        if (limit == 0 || end == firstIndex) return pack(firstIndex, 0);
+        return scanRangeJava(orderedRows, rowStates, firstIndex, end, requiredMask,
+                excludedMask, output, outputOffset, limit);
+    }
+
+    private static void validate(int[] orderedRows, byte[] rowStates, int firstIndex,
+            int requiredMask, int excludedMask, int[] output, int outputOffset,
+            int limit, M3IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(orderedRows, "orderedRows");
         Objects.requireNonNull(rowStates, "rowStates");
         Objects.requireNonNull(output, "output");
@@ -68,27 +133,21 @@ public final class M3IndexMaskWindow {
             throw new IllegalArgumentException("invalid bounded window limit");
         }
         Objects.checkFromIndexSize(outputOffset, limit, output.length);
-        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
-            if (!M3IndexMaskCompactor.nativeAvailable()) {
-                throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
-            }
-            if (limit == 0) return pack(firstIndex, 0);
-            long result = scanNative(orderedRows, rowStates, firstIndex, requiredMask,
-                    excludedMask, output, outputOffset, limit);
-            requireValidResult(result, firstIndex, orderedRows.length, limit);
-            return result;
-        }
-        if (limit == 0) return pack(firstIndex, 0);
-        return scanJava(orderedRows, rowStates, firstIndex, requiredMask,
-                excludedMask, output, outputOffset, limit);
     }
 
     /** Pure Java reference atom; call only after public validation. */
     static long scanJava(int[] rows, byte[] states, int first, int required,
             int excluded, int[] output, int outputOffset, int limit) {
+        return scanRangeJava(rows, states, first, rows.length, required, excluded,
+                output, outputOffset, limit);
+    }
+
+    /** Shared scan atom: bounds are admitted before any caller output is changed. */
+    private static long scanRangeJava(int[] rows, byte[] states, int first, int end,
+            int required, int excluded, int[] output, int outputOffset, int limit) {
         int next = first;
         int copied = 0;
-        while (next < rows.length && copied < limit) {
+        while (next < end && copied < limit) {
             int flags = states[next] & 0xff;
             if ((flags & required) == required && (flags & excluded) == 0) {
                 output[outputOffset + copied++] = rows[next];
@@ -119,4 +178,7 @@ public final class M3IndexMaskWindow {
 
     private static native long scanNative(int[] rows, byte[] states, int first,
             int required, int excluded, int[] output, int outputOffset, int limit);
+
+    private static native long scanBoundedNative(int[] rows, byte[] states, int first,
+            int end, int required, int excluded, int[] output, int outputOffset, int limit);
 }

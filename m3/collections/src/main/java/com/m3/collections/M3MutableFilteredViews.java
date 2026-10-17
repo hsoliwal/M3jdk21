@@ -6,6 +6,7 @@ package com.m3.collections;
 
 import java.util.AbstractMap;
 import java.util.AbstractSet;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -105,12 +106,16 @@ public final class M3MutableFilteredViews {
         @Override public boolean addAll(Collection<? extends E> values) {
             if (!allowAdd) throw new UnsupportedOperationException("map key-set addition");
             Objects.requireNonNull(values, "values");
+            // Capture exactly the references admitted in this traversal. Reopening a lazy
+            // input could otherwise write different, never-validated occurrences.
+            ArrayList<E> admitted = new ArrayList<>();
             for (E value : values) {
                 if (!predicate.test(value)) {
                     throw new IllegalArgumentException("element rejected by filtered view");
                 }
+                admitted.add(value);
             }
-            return source.addAll(values);
+            return source.addAll(admitted);
         }
 
         @Override public boolean remove(Object value) {
@@ -243,6 +248,36 @@ public final class M3MutableFilteredViews {
         @Override public SortedSet<E> tailSet(E from) { return tailSet(from, true); }
     }
 
+    /** Call-local parallel reference lanes; no eager per-mapping Entry object. */
+    private static final class CapturedEntries<K, V> extends AbstractMap<K, V> {
+        private final ArrayList<K> keys;
+        private final ArrayList<V> values;
+
+        CapturedEntries(ArrayList<K> keys, ArrayList<V> values) {
+            this.keys = keys;
+            this.values = values;
+        }
+
+        @Override public int size() { return keys.size(); }
+
+        @Override public Set<Entry<K, V>> entrySet() {
+            return new AbstractSet<>() {
+                @Override public int size() { return keys.size(); }
+                @Override public Iterator<Entry<K, V>> iterator() {
+                    return new Iterator<>() {
+                        private int index;
+                        @Override public boolean hasNext() { return index < keys.size(); }
+                        @Override public Entry<K, V> next() {
+                            if (!hasNext()) throw new NoSuchElementException();
+                            int slot = index++;
+                            return new SimpleImmutableEntry<>(keys.get(slot), values.get(slot));
+                        }
+                    };
+                }
+            };
+        }
+    }
+
     private static final class MapView<K, V> extends AbstractMap<K, V>
             implements NavigableMap<K, V> {
         private final NavigableMap<K, V> source;
@@ -318,11 +353,17 @@ public final class M3MutableFilteredViews {
          * Validate the effective *stored* representatives before any writes.
          * The transient TreeMap holds only first-occurrence keys for new
          * comparator classes; it is not a retained element/entry cache.
-         * This also handles input maps with distinct comparator-equal keys.
+         * This also handles input maps with distinct comparator-equal keys. Each key
+         * and value reference is captured once; the owner's bulk call reads that exact
+         * encounter sequence rather than reopening the incoming view. This is not a
+         * deep copy or a transaction: owner range/type/comparator failures retain the
+         * owner's partial-write semantics. Predicate/input-read failures precede writes.
          */
         @Override public void putAll(Map<? extends K, ? extends V> incoming) {
             Objects.requireNonNull(incoming, "incoming");
             NavigableMap<K, K> newRepresentatives = null;
+            ArrayList<K> admittedKeys = new ArrayList<>();
+            ArrayList<V> admittedValues = new ArrayList<>();
             for (Entry<? extends K, ? extends V> entry : incoming.entrySet()) {
                 K key = entry.getKey();
                 Entry<K, V> existing = storedEntry(key);
@@ -340,11 +381,14 @@ public final class M3MutableFilteredViews {
                         effective = key;
                     }
                 }
-                if (!predicate.test(effective, entry.getValue())) {
+                V value = entry.getValue();
+                if (!predicate.test(effective, value)) {
                     throw new IllegalArgumentException("mapping rejected by filtered view");
                 }
+                admittedKeys.add(key);
+                admittedValues.add(value);
             }
-            source.putAll(incoming);
+            source.putAll(new CapturedEntries<>(admittedKeys, admittedValues));
         }
 
         @Override public V remove(Object key) {

@@ -21,11 +21,10 @@ static jlong m3_window_invalid(JNIEnv *env, const char *message) {
     return (jlong) -1;
 }
 
-JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3IndexMaskWindow_scanNative(
-        JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,
-        jint required, jint excluded, jintArray output, jint output_offset, jint limit) {
-    (void) owner;
+/* Shared admitted range kernel; the legacy symbol passes the full source end. */
+static jlong m3_window_scan(JNIEnv *env, jintArray rows, jbyteArray states,
+        jint first, jint end, jint required, jint excluded,
+        jintArray output, jint output_offset, jint limit) {
     if (rows == NULL || states == NULL || output == NULL || required < 0
             || required > 255 || excluded < 0 || excluded > 255 || limit < 0
             || limit > M3_MASK_WINDOW_MAX) {
@@ -33,7 +32,8 @@ Java_com_m3_collections_M3IndexMaskWindow_scanNative(
     }
     jsize n = (*env)->GetArrayLength(env, rows);
     if ((*env)->ExceptionCheck(env)) return (jlong) -1;
-    if (first < 0 || first > n || (*env)->GetArrayLength(env, states) != n
+    if (first < 0 || first > n || end < first || end > n
+            || (*env)->GetArrayLength(env, states) != n
             || (*env)->IsSameObject(env, rows, output) == JNI_TRUE) {
         return m3_window_invalid(env, "invalid source/alias geometry");
     }
@@ -51,8 +51,8 @@ Java_com_m3_collections_M3IndexMaskWindow_scanNative(
     jint next = first;
     jint written = 0;
     jint pending = 0;
-    while (next < n && written < limit) {
-        jint take = n - next;
+    while (next < end && written < limit) {
+        jint take = end - next;
         if (take > M3_MASK_WINDOW_CHUNK) take = M3_MASK_WINDOW_CHUNK;
         (*env)->GetByteArrayRegion(env, states, next, take, marks);
         if ((*env)->ExceptionCheck(env)) return (jlong) -1;
@@ -81,4 +81,28 @@ Java_com_m3_collections_M3IndexMaskWindow_scanNative(
         if ((*env)->ExceptionCheck(env)) return (jlong) -1;
     }
     return m3_window_result(next, written);
+}
+
+/* Original JNI ABI retained unchanged. */
+JNIEXPORT jlong JNICALL
+Java_com_m3_collections_M3IndexMaskWindow_scanNative(
+        JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,
+        jint required, jint excluded, jintArray output, jint output_offset, jint limit) {
+    (void) owner;
+    if (rows == NULL) return m3_window_invalid(env, "invalid mask-window arguments");
+    jsize n = (*env)->GetArrayLength(env, rows);
+    if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+    return m3_window_scan(env, rows, states, first, n, required, excluded,
+            output, output_offset, limit);
+}
+
+/* Additive bounded-work ABI; every JNI region stays inside [first, end). */
+JNIEXPORT jlong JNICALL
+Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(
+        JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,
+        jint end, jint required, jint excluded, jintArray output,
+        jint output_offset, jint limit) {
+    (void) owner;
+    return m3_window_scan(env, rows, states, first, end, required, excluded,
+            output, output_offset, limit);
 }

@@ -1,0 +1,10 @@
+family	contract_name	existing_m3_owner	disposition	boundary
+JDK	java.util.NavigableSet / java.util.NavigableMap	com.m3.collections.M3MutableFilteredViews	EXISTING_FACTORY_ABI_RETAINED	Bulk admission reference capture only; comparator/ranges/navigation retained
+JDK	java.util.Collection / java.util.SortedSet / java.util.SortedMap	com.m3.collections.M3FilteredViews	UNCHANGED_OTHER_PR_OWNER	Read-only live filters remain separate from mutable views
+Guava	com.google.common.collect.Collections2.filter	com.m3.collections.M3FilteredViews / M3MutableFilteredViews	CONTRACT_REFERENCE_ONLY	No namespace shadowing or claimed binary substitute; iterator mutation differs
+Eclipse Collections	org.eclipse.collections.api.LazyIterable	Existing M3 view/index owners	CONTRACT_REFERENCE_ONLY	Do not relabel eager/lazy select semantics or claim interface implementation
+Spring Framework	org.springframework.util.MultiValueMap	Existing M3 multi-value owners (not changed)	OUT_OF_MUTABLE_NAVIGABLE_SCOPE	Multiple values per key are not a filtered NavigableMap contract
+Apache Commons Collections	org.apache.commons.collections4.collection.PredicatedCollection	Existing M3 filtered owners	NO_FIT_AS_SUBSTITUTE	Admission validation is not hiding existing rejected members
+M3 primitive SDK	com.m3.collections.M3IndexMaskWindow	Same existing owner + scanBounded	ADDITIVE_PUBLIC_METHOD	Detached primitive projection, not a live predicate wrapper
+M3 native	Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative	m3_collections_mask	ADDITIVE_PRIVATE_NATIVE_SYMBOL	Old symbols retained; fixed primitive Region batches; no Java callbacks
+JDK runtime	java.util / java.base / HotSpot	Existing target runtime owners	NOT_MODIFIED	STRING stage remains active; independent collections proof is not runtime promotion
