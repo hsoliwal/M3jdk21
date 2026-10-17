@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+"""Source and template custody; never a substitute for live vendor binary testing."""
+from pathlib import Path
+import hashlib
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parents[4]
+RES=ROOT/"m3/collections/interop/recipe/apache-collections-sdk-20261017/src/main/resources"
+JAVA=RES/"com/synexia/rewrite/hash-pinned-java/apache-collections-interop"
+TEXT=RES/"com/synexia/rewrite/hash-pinned-text/apache-collections-pom"
+
+def digest(p):
+    if p.is_symlink() or not p.is_file():
+        raise RuntimeError(f"missing or aliased: {p}")
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+java_rows=[]
+for line in (JAVA/"manifest.tsv").read_text().splitlines():
+    if not line or line.startswith("#"): continue
+    path,before,after,template=line.split("\t")
+    if before!="ABSENT" or not path.startswith("m3/collections/interop/src/") or path in [p for p,_,_ in java_rows]:
+        raise RuntimeError("Java source manifest drift")
+    original=ROOT/path
+    source=JAVA/template
+    if digest(original)!=after or digest(source)!=after or original.read_bytes()!=source.read_bytes():
+        raise RuntimeError(f"Java source not recipe output: {path}")
+    java_rows.append((path,after,template))
+if len(java_rows)!=3 or [p for p,_,_ in java_rows]!=sorted(p for p,_,_ in java_rows):
+    raise RuntimeError("Expected exactly three distinct new Java sources")
+
+path,before,after,template=(TEXT/"manifest.tsv").read_text().strip().split("\t")
+if path!="m3/collections/interop/pom.xml":
+    raise RuntimeError("Unexpected Maven metadata owner")
+if digest(TEXT/"pom.xml.before")!=before or digest(TEXT/template)!=after or digest(ROOT/path)!=after:
+    raise RuntimeError("POM preimage/postimage not source sealed")
+if (ROOT/path).read_bytes()!=(TEXT/template).read_bytes():
+    raise RuntimeError("Receiver POM not exact canonical output")
+print("PASS APACHE_COLLECTIONS_RECEIVER: three Java and one POM exact outputs")

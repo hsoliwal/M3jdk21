@@ -1,0 +1,17 @@
+category	upstream_fqcn	M3_owner	decision	cost_and_contract	license
+APACHE_LIST_VALUED	org.apache.commons.collections4.ListValuedMap	M3LinkedHashMap<K,List<V>> + M3LinkedList<V>	ADAPTER_CANDIDATE	expected O(1) map/hash and append; duplicate pairs, provider live-view parity pending	Apache API Apache-2.0; original M3
+APACHE_SET_VALUED	org.apache.commons.collections4.SetValuedMap	M3LinkedHashMap<K,Set<V>> + M3LinkedHashSet<V>	ADAPTER_CANDIDATE	expected O(1) hash, duplicate suppression, provider live-view parity pending	Apache API Apache-2.0; original M3
+APACHE_LIST_REFERENCE	org.apache.commons.collections4.multimap.ArrayListValuedLinkedHashMap	Actual Commons 4.5.0 binary oracle	TEST_ONLY	Seeded differential 2400 operations; runtime pending	Apache Software Foundation Apache-2.0
+APACHE_SET_REFERENCE	org.apache.commons.collections4.multimap.LinkedHashSetValuedLinkedHashMap	Actual Commons 4.5.0 binary oracle	TEST_ONLY	Seeded differential 2200 operations; runtime pending	Apache Software Foundation Apache-2.0
+APACHE_BASE	org.apache.commons.collections4.MultiValuedMap	Reuse Apache AbstractMultiValuedMap implementation	INHERIT_PROVIDER_CONTRACT	Pair-count size, keyMultiSet, asMap/get live, entry views	Apache Software Foundation Apache-2.0
+GUAVA_LIST_MULTIMAP	com.google.common.collect.ListMultimap	Existing M3LibraryCollections.guavaListMultimap	REUSE_UNCHANGED	Not equivalent to Apache or Spring MultiValueMap	Google Guava Apache-2.0
+SPRING_MULTI_VALUE	org.springframework.util.MultiValueMap	Existing M3SpringMultiValueMap	REUSE_UNCHANGED	Map<K,List<V>>; size counts distinct keys	Spring Framework Apache-2.0
+ECLIPSE_RICH_MULTIMAP	org.eclipse.collections.api.multimap.list.MutableListMultimap	Unproven rich provider adapter	DEFER	Requires Eclipse API-specific transformation/collector tests	Eclipse EPL/EDL
+JDK_MAP	java.util.Map	M3LinkedHashMap	REUSE	Parallel array slots and encounter-order indexes	Synexia/M3 Apache-2.0
+JDK_LIST	java.util.List	M3LinkedList	REUSE	Primitive indexed links, positional access not always O(1)	Synexia/M3 Apache-2.0
+JDK_SET	java.util.Set	M3LinkedHashSet	REUSE	No retained per-element Entry nodes	Synexia/M3 Apache-2.0
+LEETCODE_TWO_POINTER	LeetCode #27 Remove Element	M3 state-mask compactor	CATEGORY_ONLY	O(n) stable compaction only when contract requires	Problem reference, no copied solution
+LEETCODE_HASH	LeetCode #1 Two Sum	M3 indexed hash slots	CATEGORY_ONLY	Hash-index lookup rather than vendor implementation	Problem reference, no copied solution
+HACKERRANK_JAVA_MAP	HackerRank Java Map	M3LinkedHashMap	CATEGORY_ONLY	Keyed frequency category only	Problem reference, no copied code
+GEEKSFORGEEKS_MULTIMAP	GeeksforGeeks multimap examples	Apache API boundary	CATEGORY_ONLY	Different library multisets/valueless rules	Article reference, no copied code
+JNI_MASK	M3IndexMaskCompactor unchanged	M3 existing JNI	REUSE_NO_EDIT	Do not forward Java predicates, object pointers or Apache API objects	Synexia/M3 Apache-2.0

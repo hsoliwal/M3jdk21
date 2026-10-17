@@ -1,0 +1,18 @@
+# M3JDK21 optional Apache Commons interoperability receiver; not java.base promotion
+source_repository	hsoliwal/com.synexia
+canonical_source_PR	12133
+canonical_source_head	bc1634ab0387288e677afd563a01782b90aae618
+target_base_PR	1127
+target_base_sha	fb01e49e6bee030ce5cdd0146b15837379b1dfdb
+source_recipe	com.synexia.m3.ApacheCollectionsInterop20261017
+java_recipe	M3HashPinnedJavaSnapshotRecipe / exact PlainText
+pom_recipe	M3HashPinnedTextSnapshotRecipe / exact PlainText
+provider_api	org.apache.commons.collections4.ListValuedMap;org.apache.commons.collections4.SetValuedMap
+provider_version	commons-collections4:4.5.0
+new_java_count	3
+modified_pom_count	1
+local_java_sdk_junit	4 PASS
+local_compiler	STRICT_JAVA21_M3_ARCHIVED_OWNERS_PLUS_SIGNATURE_SCAFFOLDS
+actual_vendor_binary	NOT_RUN_LOCALLY
+native_code_changes	NONE
+promotion	WAITING_FOR_STRING

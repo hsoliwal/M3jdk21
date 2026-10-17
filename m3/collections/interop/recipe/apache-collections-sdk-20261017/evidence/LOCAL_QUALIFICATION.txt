@@ -1,0 +1,8 @@
+LOCAL QUALIFICATION (2026-10-17)
+Linux x86_64, JDK 21.0.12.1, Maven 3.9.9, OpenRewrite 8.17.1, JUnit 5.10.2
+Actual Maven test: 4 run / 0 failed / 0 errors / 0 skipped / BUILD SUCCESS.
+Java SDK generated 3 exact new sources, 8 partial-state combinations x 2 orders and fixed points.
+Drift/duplicate were refused. Native OpenRewrite FindAndReplace POM changed the one dependency, and POM parsed as XML. Postimage SHA-256 unchanged on replay.
+Strict javac for existing 77 archived M3 main owners plus adapter and isolated *compile-only Apache API signature scaffold* PASS.
+REAL APACHE DEPENDENCY BINARY: NOT PRESENT IN LOCAL OFFLINE CACHE. 4600-step provider oracle NOT_EXECUTED.
+FULL NAMED JAVA+TEXT SDK COMPOSITE, FULL MODULE, HOSTED JAVA/JNI, INSTALLED-JDK AND BENCHMARKS: NOT_PROVEN.
