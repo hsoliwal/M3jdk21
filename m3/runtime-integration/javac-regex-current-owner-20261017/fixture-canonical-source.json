@@ -1,0 +1,17 @@
+{
+  "schema": "M3_JAVAC_FIXTURE_RECOVERY_RECEIVING_CANONICAL_SOURCE_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+  "pullRequest": 12014,
+  "openrewriteAdapterGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+  "manifestKernelGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "qualification": "NOT_RUN",
+  "sourcePath": "synexia-openrewrite-recipes/recipes/m3-javac-regex-owner-fixture-recovery-20261017/sdk",
+  "receiverCorePath": "m3/runtime-integration/javac-regex-current-owner-20261017/fixture-canonical",
+  "moduleGitTree": "8b044787430444c4ffd01d6bd0d312356b136ad2",
+  "inputPinsGitBlob": "50be9008272d7c9d250f31e11f90699326d06120",
+  "pinsSha256": "8de03168a897f3001b9f47b5dd18d539303eb60513eb5bc0f74ac0bd0944ba65",
+  "expectedSdkTests": 5
+}

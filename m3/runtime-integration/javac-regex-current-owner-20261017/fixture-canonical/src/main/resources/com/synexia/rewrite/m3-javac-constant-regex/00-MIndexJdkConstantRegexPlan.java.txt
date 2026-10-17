@@ -1,0 +1,69 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.indexstring;
+
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Explicit opt-in, compile-once JDK regex plan for a javac-proven constant.
+ *
+ * <p>Pattern owns exact Java regular-expression semantics, including backrefs,
+ * Unicode flags, zero-width matches and replacement group syntax. The compiled
+ * Pattern can be shared safely; a new Matcher is used per invocation, never a
+ * pooled mutable Matcher or GC-unstable JNI reference.
+ *
+ * <p>This plan does not itself rewrite String methods or move a
+ * PatternSyntaxException to a class initializer. Callers prepare only after
+ * the compiler evidence and behavioral gates qualify that exact call site.
+ */
+public final class MIndexJdkConstantRegexPlan {
+    private final Pattern pattern;
+    private final int requestedFlags;
+
+    private MIndexJdkConstantRegexPlan(Pattern pattern, int flags) {
+        this.pattern = pattern;
+        this.requestedFlags = flags;
+    }
+
+    public static MIndexJdkConstantRegexPlan compile(String expression) {
+        return compile(expression, 0);
+    }
+
+    public static MIndexJdkConstantRegexPlan compile(String expression, int flags) {
+        String checked = Objects.requireNonNull(expression, "expression");
+        if (checked.length() > 8192) {
+            throw new IllegalArgumentException("M3 compile-time regex budget exceeded");
+        }
+        return new MIndexJdkConstantRegexPlan(Pattern.compile(checked, flags), flags);
+    }
+
+    public String expression() { return pattern.pattern(); }
+    /** Caller-supplied flags, before any JDK-inferred Unicode bits. */
+    public int flags() { return requestedFlags; }
+    /** Exact effective flags reported by the running JDK Pattern owner. */
+    public int javaEffectiveFlags() { return pattern.flags(); }
+    public Pattern javaPattern() { return pattern; }
+
+    public boolean matches(String input) {
+        return pattern.matcher(Objects.requireNonNull(input, "input")).matches();
+    }
+
+    public String[] split(String input) {
+        return split(input, 0);
+    }
+
+    public String[] split(String input, int limit) {
+        return pattern.split(Objects.requireNonNull(input, "input"), limit);
+    }
+
+    public String replaceAll(String input, String replacement) {
+        Matcher matcher = pattern.matcher(Objects.requireNonNull(input, "input"));
+        return matcher.replaceAll(replacement);
+    }
+
+    public String replaceFirst(String input, String replacement) {
+        Matcher matcher = pattern.matcher(Objects.requireNonNull(input, "input"));
+        return matcher.replaceFirst(replacement);
+    }
+}

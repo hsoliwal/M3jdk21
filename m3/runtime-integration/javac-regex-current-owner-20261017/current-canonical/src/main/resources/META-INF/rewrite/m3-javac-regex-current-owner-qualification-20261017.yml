@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.JavacConstantRegexCurrentOwnerQualification
+displayName: Qualify current javac constant regex owners without production changes
+description: >
+  Add source-pinned four-file JDK21 compiler-fact and CharSequence contract qualification
+  while preserving current production owners and historical proof sources unchanged.
+recipeList:
+  - com.synexia.rewrite.M3JavacConstantRegexCurrentOwnerQualificationRecipe

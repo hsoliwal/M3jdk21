@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.JavacRegexHostedReceivingWorkflow
+displayName: Qualify donated compiler SDKs and JDK21 contracts in the existing receiving workflow
+description: >
+  Add one bounded independent compiler qualification job with exact canonical SDKs and source context,
+  preserving all existing jobs and strengthening the existing summary without changing product runtime.
+recipeList:
+  - com.synexia.rewrite.M3JavacRegexHostedReceivingWorkflowRecipe

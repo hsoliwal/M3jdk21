@@ -1,0 +1,149 @@
+{
+  "schema": "M3_JAVAC_REGEX_OWNER_FIXTURE_RECOVERY_RECEIVING_SDK_INPUTS_V1",
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "files": [
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "unchangedGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "unchangedGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3JavacConstantRegexPrecomputeRecipe.java",
+      "sha256": "076be555dba3719f342b9259695c24cea887d66b7ce72827c74a361ed4680cb1",
+      "unchangedGitBlob": "7c49bc0d1472f48386ed52476840079c4a488bde"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3JavacRegexOwnerFixtureRecoveryRecipe.java",
+      "sha256": "5dae6fd43b6b356b032de69616f4d9562680c26b3c22847152150c1a6c693972",
+      "unchangedGitBlob": "ae71aa9c15f91413dfa0efc4ec9d0562b2083a69"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "unchangedGitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-javac-regex-owner-fixture-recovery-20261017.yml",
+      "sha256": "75b56891c033f8f0c5034de695f7520a29dbb2e7352eb52c07491f8fb2ef5988",
+      "unchangedGitBlob": "3a67fc4fd61c6da1043b8dd0cd0a1e2606dfaa43"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-regex-owner-fixture-recovery-20261017/before/MIndexCompilerASTPrecompute.java",
+      "sha256": "74dd92f6a378763e040dc868a267f06b6c9af035d26fbfad0ac1224c3438a834",
+      "unchangedGitBlob": "1ac623b8fa822f4f8ce9ed9c3bb8c9a5194184b6"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-regex-owner-fixture-recovery-20261017/out/MIndexCompilerASTPrecompute.java",
+      "sha256": "74dd92f6a378763e040dc868a267f06b6c9af035d26fbfad0ac1224c3438a834",
+      "unchangedGitBlob": "1ac623b8fa822f4f8ce9ed9c3bb8c9a5194184b6"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-regex-owner-fixture-recovery-20261017/before/M3JavacConstantRegexPrecomputeRecipeTest.java",
+      "sha256": "3e19e63b38fb97b1964c050d422c6494a7acc3b46cda11b0da1cb3e09ddefb79",
+      "unchangedGitBlob": "2fd1927532cf27818a44024199256aec776b1df4"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-regex-owner-fixture-recovery-20261017/out/M3JavacConstantRegexPrecomputeRecipeTest.java",
+      "sha256": "3e19e63b38fb97b1964c050d422c6494a7acc3b46cda11b0da1cb3e09ddefb79",
+      "unchangedGitBlob": "2fd1927532cf27818a44024199256aec776b1df4"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-regex-owner-fixture-recovery-20261017/before/manifest.tsv",
+      "sha256": "c623d462fa245abc1d3b964a908dac5bd7a2968703e507c64e2da587af4a49bc",
+      "unchangedGitBlob": "2ea8bbbaf7a93decb09f1bf4ecc756f2101892b8"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-regex-owner-fixture-recovery-20261017/out/manifest.tsv",
+      "sha256": "c623d462fa245abc1d3b964a908dac5bd7a2968703e507c64e2da587af4a49bc",
+      "unchangedGitBlob": "2ea8bbbaf7a93decb09f1bf4ecc756f2101892b8"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-regex-owner-fixture-recovery-20261017/before/verify_source_seals.py",
+      "sha256": "e4b4e7a2c4efec34661bca472c61ee164a75432d0781eccc0c1037e36f793b3e",
+      "unchangedGitBlob": "c8fafe24441a138e246068b4efac5c791bf359d0"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-regex-owner-fixture-recovery-20261017/out/verify_source_seals.py",
+      "sha256": "e4b4e7a2c4efec34661bca472c61ee164a75432d0781eccc0c1037e36f793b3e",
+      "unchangedGitBlob": "c8fafe24441a138e246068b4efac5c791bf359d0"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-regex-owner-fixture-recovery-20261017/out/compiler-owner-before.java.txt",
+      "sha256": "74dd92f6a378763e040dc868a267f06b6c9af035d26fbfad0ac1224c3438a834",
+      "unchangedGitBlob": "1ac623b8fa822f4f8ce9ed9c3bb8c9a5194184b6"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-regex-owner-fixture-recovery-20261017/manifest.tsv",
+      "sha256": "f5c254057374cb429c8a6a80bffdb41977255d0362956bb2521ccfe76ddcda9f",
+      "unchangedGitBlob": "5282767a150e40b7f789196d14d2345e099feb4e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-constant-regex/00-MIndexJdkConstantRegexPlan.java.txt",
+      "sha256": "c5c0569b5e7d1d5a0abbf76e2188c14024318a34ae2bc05c13567f7a3e24b4d2",
+      "unchangedGitBlob": "aef73f8b743dcc193e528f69748443a1810a1f1c"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-constant-regex/01-MIndexJdkConstantRegexPlanContract.java.txt",
+      "sha256": "cdd2d4704c647adbd5e6888a4228355a53b6dd7dc400d0e86fc04673e760fddf",
+      "unchangedGitBlob": "92d77554ea1a8a242bc7a4b891a6af6a56bb4431"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-constant-regex/02-MIndexJdkConstantRegexPlanTest.java.txt",
+      "sha256": "7b0842c62366ce830efd9a252f16a67f4d42550a1d6ec63b4b0a883065c93f4b",
+      "unchangedGitBlob": "70512a3c53fa5b791147086d0e491475e6caf3b6"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-constant-regex/03-MIndexJavaConstantStringFacts.java.txt",
+      "sha256": "85e36a76dc85b75fda2d3e8d4577a73d586c33ce26ef04367c9236cda62425dd",
+      "unchangedGitBlob": "0003406b4d62499e919a9e5a1be0853906225158"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-constant-regex/04-MIndexJavaConstantStringFactsContract.java.txt",
+      "sha256": "12d064b6e11a9ca3c670340890a22e699125ded1e051a18407f085adf53c76f2",
+      "unchangedGitBlob": "901db786b0ad9306f2750524255b8bb8046f05e4"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-constant-regex/05-MIndexJavaConstantStringFactsTest.java.txt",
+      "sha256": "c0fe48f169df924c5f05200613c4770a7a5bffe8b99c24916bf2a19099d88144",
+      "unchangedGitBlob": "3fe69b3c580f8a2544b4a096e9b34d18cea32122"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-constant-regex/06-M3JavacConstantRegexPrecomputeRecipe.java.txt",
+      "sha256": "076be555dba3719f342b9259695c24cea887d66b7ce72827c74a361ed4680cb1",
+      "unchangedGitBlob": "7c49bc0d1472f48386ed52476840079c4a488bde"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-constant-regex/manifest.tsv",
+      "sha256": "c623d462fa245abc1d3b964a908dac5bd7a2968703e507c64e2da587af4a49bc",
+      "unchangedGitBlob": "2ea8bbbaf7a93decb09f1bf4ecc756f2101892b8"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-javac-constant-regex/compiler-owner-before.java.txt",
+      "sha256": "74dd92f6a378763e040dc868a267f06b6c9af035d26fbfad0ac1224c3438a834",
+      "unchangedGitBlob": "1ac623b8fa822f4f8ce9ed9c3bb8c9a5194184b6"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3JavacRegexOwnerFixtureRecoveryRecipeTest.java",
+      "sha256": "189bb7996c5de9c630729db5b5c32b83728b00255224e74cbee3908bfeb7cfb0",
+      "unchangedGitBlob": "3dfe38f59be2dcc30071cfceddd264afc50dff0e"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3JavacConstantRegexPrecomputeRecipeTest.java",
+      "sha256": "3e19e63b38fb97b1964c050d422c6494a7acc3b46cda11b0da1cb3e09ddefb79",
+      "unchangedGitBlob": "2fd1927532cf27818a44024199256aec776b1df4"
+    },
+    {
+      "path": "verify.py",
+      "unchangedGitBlob": "1703198de646dabaff8e1a8f5388a3fd7bc8d4be",
+      "sha256": "7b8112a4ba4e8c984cffa641daaaadeb779e124d9642e995b98de45206a4d7aa"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.mindex.compiler;
+
+import org.junit.jupiter.api.Test;
+
+/** Maven owner gate for real javac TreePath/ExecutableElement constant resolution. */
+final class MIndexJavaConstantStringFactsTest {
+    @Test void compilerProvesOrRefusesEveryLiteralCandidate() throws Exception {
+        MIndexJavaConstantStringFactsContract.main(new String[0]);
+    }
+}
