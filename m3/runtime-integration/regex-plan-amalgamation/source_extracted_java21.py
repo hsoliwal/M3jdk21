@@ -140,8 +140,8 @@ def rewrite_engine(source, class_name):
                            "private " + class_name + "() { }"))
 
 def main():
-    previous = checked(run(["git", "-C", str(ROOT), "show", BEFORE + ":" + SOURCE],
-                           capture_output=True).stdout, BEFORE_SHA, "before")
+    previous = checked(Path(__file__).with_name("M3StringRegexDpBefore.java.txt").read_bytes(),
+                       BEFORE_SHA, "before")
     updated = checked((ROOT / SOURCE).read_bytes(), AFTER_SHA, "after")
     checked((ROOT / "test/jdk/java/lang/String/M3StringRegexDpTest.java").read_bytes(),
             TEST_SHA, "jtreg")
