@@ -67,9 +67,7 @@ public final class M3IntLongHashMap {
             if (inserted) {
                 size++;
                 modCount++;
-                if (size > threshold) {
-                    rehash(keys.length << 1);
-                }
+                // The off-lane zero key consumes no probe slot.
             }
             return inserted;
         }
@@ -86,7 +84,8 @@ public final class M3IntLongHashMap {
         values[pos] = value;
         size++;
         modCount++;
-        if (size > threshold) {
+        // Count only keys actually retained in the primitive probe lane.
+        if (size - (hasZero ? 1 : 0) > threshold) {
             rehash(keys.length << 1);
         }
         return true;
