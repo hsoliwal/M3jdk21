@@ -1,0 +1,96 @@
+name: M3 typed filtered purpose Map Java21 and inherited JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredWrapperSelfTest.java'
+      - 'm3/collections/qualification/generic-filtered-purpose-postimages-20261017.tsv'
+      - 'm3/collections/qualification/verify_generic_filtered_wrappers.py'
+      - '.github/workflows/m3-generic-purpose-map-receiver-20261017.yml'
+      - 'm3/collections/qualification/purpose-sdk-20261017/**'
+  push:
+    branches: [m3/generic-purpose-map-receiver-20261017]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  actual-m3-core-purpose-java-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Validate inherited and new canonical source receipts and negative tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/collections/qualification/verify_mask_selection.py
+          python3 m3/collections/qualification/verify_mask_keyed.py
+          python3 m3/collections/qualification/verify_mask_priority.py
+          python3 m3/collections/qualification/verify_filtered_sorted.py
+          python3 m3/collections/qualification/verify_filtered_view_late_union.py
+          python3 m3/collections/qualification/verify_sorted_set_algebra.py
+          python3 m3/collections/qualification/verify_generic_filtered_wrappers.py
+          python3 -m unittest discover -s m3/collections/qualification             -p 'test_verify_generic_filtered_successor.py' -v
+          python3 -m unittest discover -s m3/collections/qualification             -p 'test_verify_filtered_sorted_successor.py' -v
+      - name: Compile all M3 Java21 collection owners and purpose Map/JDK differential probes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/m3-purpose-map
+          find m3/collections/src/main/java/com/m3/collections -name '*.java' -print | sort > /tmp/m3-purpose-core-sources.txt
+          javac --release 21 -proc:none -Xlint:all -Werror             -d /tmp/m3-purpose-map @/tmp/m3-purpose-core-sources.txt
+          javac --release 21 -proc:none -Xlint:all -Werror             -cp /tmp/m3-purpose-map -d /tmp/m3-purpose-map             m3/collections/src/test/java/com/m3/collections/M3FilteredWrapperSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3FilteredMapsSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3CollectionViewsReceiverSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3LongSortedAlgebraSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3LongFilteredViewUnionSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3FilteredSortedCompositionSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3IndexMaskKeyedSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3IndexMaskPrioritySelfTest.java
+          java -Xcheck:jni -cp /tmp/m3-purpose-map com.m3.collections.M3FilteredWrapperSelfTest
+          java -Xcheck:jni -cp /tmp/m3-purpose-map com.m3.collections.M3FilteredMapsSelfTest
+          java -Xcheck:jni -cp /tmp/m3-purpose-map com.m3.collections.M3CollectionViewsReceiverSelfTest
+          java -Xcheck:jni -cp /tmp/m3-purpose-map com.m3.collections.M3LongSortedAlgebraSelfTest
+          java -Xcheck:jni -cp /tmp/m3-purpose-map com.m3.collections.M3LongFilteredViewUnionSelfTest
+          java -Xcheck:jni -cp /tmp/m3-purpose-map com.m3.collections.M3FilteredSortedCompositionSelfTest
+          java -Xcheck:jni -cp /tmp/m3-purpose-map com.m3.collections.M3IndexMaskCompactorSelfTest
+          java -Xcheck:jni -cp /tmp/m3-purpose-map com.m3.collections.M3IndexMaskKeyedSelfTest
+          java -Xcheck:jni -cp /tmp/m3-purpose-map com.m3.collections.M3IndexMaskPrioritySelfTest
+      - name: Recompile and run existing C17 JNI bit-mask selector without native Java predicate callbacks
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -Wall -Wextra -Wconversion -Wshadow -Werror             -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux"             m3/collections/src/main/native/collections/m3_index_mask_compactor.c             -o /tmp/libm3_collections_mask.so
+          java -Xcheck:jni -Djava.library.path=/tmp -cp /tmp/m3-purpose-map             com.m3.collections.M3IndexMaskCompactorSelfTest --native
+      - name: Qualify existing purpose recipes and exact canonical repairs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import json, pathlib, shutil, subprocess
+          root = pathlib.Path("m3/collections/qualification/purpose-sdk-20261017")
+          metadata = json.loads((root / "canonical-source.json").read_text(encoding="utf-8"))
+          assert metadata["repository"] == "hsoliwal/com.synexia"
+          assert metadata["commit"] == "54687f4b14ff8cbbb2ae34680075038e3e86a095"
+          assert metadata["receiverCorePath"] == str(root / "canonical")
+          assert metadata["moduleGitTree"] == "73b93b1c3f1f7d50414edf3bfe74d7760956d319"
+          assert metadata["receivingJavaProvider"] == "2530c533003a8a17d0e782728d98a4dfebe13651"
+          assert metadata["receivingTextProvider"] == "2db1257a40d21be06ba2a67da87aff0311183809"
+          assert metadata["runtimeApplied"] is False and metadata["phaseAdvanced"] is False
+          actual = subprocess.check_output(
+              ["git", "rev-parse", "HEAD:" + metadata["receiverCorePath"]],
+              text=True).strip()
+          assert actual == metadata["moduleGitTree"], "canonical receiving core tree drift"
+          assert shutil.disk_usage(".").free - (512 << 20) >= (8 << 30), "SDK scratch reserve"
+          print("M3_PURPOSE_RECEIVING_CORE_TREE_EXACT " + actual)
+          PY
+          python3 -I -S -B m3/collections/qualification/purpose-sdk-20261017/canonical/verify.py --repository "$GITHUB_WORKSPACE"
+          mvn -B -ntp -f m3/collections/qualification/purpose-sdk-20261017/canonical/pom.xml test
+          python3 -I -S -B m3/collections/qualification/purpose-sdk-20261017/canonical/verify.py --reports --repository "$GITHUB_WORKSPACE"
+      - name: Retain exact purpose SDK receipt and generated repairs
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-purpose-receiving-sdk-${{ github.sha }}
+          path: |
+            m3/collections/qualification/purpose-sdk-20261017/canonical/target/sdk-receipt.json
+            m3/collections/qualification/purpose-sdk-20261017/canonical/target/surefire-reports/TEST-*.xml
+            m3/collections/qualification/purpose-sdk-20261017/canonical/target/repair-emitted/
+          retention-days: 90
+          if-no-files-found: error
