@@ -21,11 +21,10 @@ static jlong m3_window_invalid(JNIEnv *env, const char *message) {
     return (jlong) -1;
 }
 
-JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3IndexMaskWindow_scanNative(
-        JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,
+/* max_examined == -1 is reserved for the unchanged legacy entry point. */
+static jlong m3_window_scan(
+        JNIEnv *env, jintArray rows, jbyteArray states, jint first, jint max_examined,
         jint required, jint excluded, jintArray output, jint output_offset, jint limit) {
-    (void) owner;
     if (rows == NULL || states == NULL || output == NULL || required < 0
             || required > 255 || excluded < 0 || excluded > 255 || limit < 0
             || limit > M3_MASK_WINDOW_MAX) {
@@ -43,13 +42,15 @@ Java_com_m3_collections_M3IndexMaskWindow_scanNative(
     if (output_offset < 0 || output_offset > capacity || limit > capacity - output_offset) {
         return m3_window_invalid(env, "invalid output geometry");
     }
-    if (limit == 0) return m3_window_result(first, 0);
+    jint end = n;
+    if (max_examined >= 0 && max_examined < n - first) end = first + max_examined;
+    if (limit == 0 || first == end) return m3_window_result(first, 0);
 
     /* Remain inside this ABI: an unavailable required native symbol must still refuse. */
-    if ((required & excluded) != 0) return m3_window_result(n, 0);
+    if ((required & excluded) != 0) return m3_window_result(end, 0);
     jint values[M3_MASK_WINDOW_CHUNK];
     if ((required | excluded) == 0) {
-        jint count = n - first;
+        jint count = end - first;
         if (count > limit) count = limit;
         for (jint copied = 0; copied < count;) {
             jint take = count - copied;
@@ -68,8 +69,8 @@ Java_com_m3_collections_M3IndexMaskWindow_scanNative(
     jint next = first;
     jint written = 0;
     jint pending = 0;
-    while (next < n && written < limit) {
-        jint take = n - next;
+    while (next < end && written < limit) {
+        jint take = end - next;
         if (take > M3_MASK_WINDOW_CHUNK) take = M3_MASK_WINDOW_CHUNK;
         (*env)->GetByteArrayRegion(env, states, next, take, marks);
         if ((*env)->ExceptionCheck(env)) return (jlong) -1;
@@ -112,4 +113,25 @@ Java_com_m3_collections_M3IndexMaskWindow_scanNative(
         if ((*env)->ExceptionCheck(env)) return (jlong) -1;
     }
     return m3_window_result(next, written);
+}
+
+JNIEXPORT jlong JNICALL
+Java_com_m3_collections_M3IndexMaskWindow_scanNative(
+        JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,
+        jint required, jint excluded, jintArray output, jint output_offset, jint limit) {
+    (void) owner;
+    return m3_window_scan(env, rows, states, first, -1,
+            required, excluded, output, output_offset, limit);
+}
+
+JNIEXPORT jlong JNICALL
+Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(
+        JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,
+        jint max_examined, jint required, jint excluded, jintArray output,
+        jint output_offset, jint limit) {
+    (void) owner;
+    if (max_examined < 0 || max_examined > M3_MASK_WINDOW_MAX)
+        return m3_window_invalid(env, "invalid source scan budget");
+    return m3_window_scan(env, rows, states, first, max_examined,
+            required, excluded, output, output_offset, limit);
 }
