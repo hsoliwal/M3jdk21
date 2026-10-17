@@ -184,10 +184,13 @@ public final class M3FilteredLists {
 
         /** An unknown-size sequential cursor: no false SIZED/SORTED/DISTINCT claims. */
         @Override public Spliterator<E> spliterator() {
-            Iterator<E> iterator = iterator();
             return new Spliterator<>() {
+                // Bind on first traversal, not stream/spliterator construction. This preserves
+                // source mutations before binding without capturing a stale fail-fast iterator.
+                private Iterator<E> iterator;
                 @Override public boolean tryAdvance(Consumer<? super E> action) {
                     Objects.requireNonNull(action, "action");
+                    if (iterator == null) iterator = View.this.iterator();
                     if (!iterator.hasNext()) return false;
                     action.accept(iterator.next());
                     return true;
