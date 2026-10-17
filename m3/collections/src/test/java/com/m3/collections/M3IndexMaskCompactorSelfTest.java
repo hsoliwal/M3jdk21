@@ -24,6 +24,7 @@ public final class M3IndexMaskCompactorSelfTest {
         allMasksAndLengths(requireNative);
         randomizedDifferential(requireNative);
         windowSelectionContracts(requireNative);
+        stateWordMaskContracts(requireNative);
         primitiveOwnersAndLongIds(requireNative);
         System.out.println("PASS M3IndexMaskCompactorSelfTest checks=" + checks
                 + " JNI=" + requireNative);
@@ -326,6 +327,159 @@ public final class M3IndexMaskCompactorSelfTest {
                 rows, 0, states, 0, 1, 0, null));
         fails(NullPointerException.class, () -> M3IndexMaskCompactor.selectLongWindow(
                 longRows, 0, states, 0, 1, 0, null));
+    }
+
+
+    /** Oracle: bit 63 and all lower parent-state flags, independent offsets. */
+    private static void stateWordMaskContracts(boolean nativeRun) {
+        int n = 1044;
+        int[] rows = new int[n];
+        long[] longRows = new long[n];
+        long[] states = new long[n];
+        Random rng = new Random(0x534c4f544d41534bL);
+        for (int i = 0; i < n; i++) {
+            rows[i] = i % 5 == 0 ? Integer.MIN_VALUE : (i % 5 == 1
+                    ? Integer.MAX_VALUE : (i % 17 - 7));
+            longRows[i] = i % 5 == 0 ? Long.MIN_VALUE : (i % 5 == 1
+                    ? Long.MAX_VALUE : (i % 17 - 7L));
+            states[i] = i % 8 == 0 ? -1L : (i % 8 == 1
+                    ? Long.MIN_VALUE : rng.nextLong());
+        }
+        int[] unchangedRows = rows.clone();
+        long[] unchangedLongRows = longRows.clone();
+        long[] unchangedStates = states.clone();
+
+        M3ObjectResidency<Object> residency =
+                new M3ObjectResidency<>(n, 0, 0L, 0L, null, null, null);
+        for (int i = 0; i < n; i++) residency.writeParentBits(i, states[i]);
+        long[] snapshot = new long[n + 5];
+        residency.copyParentBits(0, snapshot, 3, n);
+        eq(unchangedStates, Arrays.copyOfRange(snapshot, 3, n + 3));
+        long before = snapshot[3];
+        residency.writeParentBits(0, 0L);
+        ok(snapshot[3] == before); // detached source state is not a live object view
+        fails(IndexOutOfBoundsException.class, () ->
+                residency.copyParentBits(-1, snapshot, 0, 1));
+        fails(IndexOutOfBoundsException.class, () ->
+                residency.copyParentBits(0, snapshot, snapshot.length, 1));
+        fails(IndexOutOfBoundsException.class, () ->
+                residency.copyParentBits(0, snapshot, 0, Integer.MAX_VALUE));
+        fails(NullPointerException.class, () ->
+                residency.copyParentBits(0, null, 0, 1));
+        long[] unchangedCopy = snapshot.clone();
+        residency.copyParentBits(n, snapshot, snapshot.length, 0);
+        eq(unchangedCopy, snapshot);
+
+        long[] requiredMasks = new long[74];
+        requiredMasks[0] = 0L;
+        requiredMasks[1] = -1L;
+        requiredMasks[2] = Long.MIN_VALUE;
+        requiredMasks[3] = Long.MAX_VALUE;
+        requiredMasks[4] = 0xffL;
+        requiredMasks[5] = 1L << 32;
+        for (int bit = 0; bit < 64; bit++) {
+            requiredMasks[6 + bit] = 1L << bit;
+        }
+        requiredMasks[70] = Long.MIN_VALUE | 1L;
+        requiredMasks[71] = (1L << 31) | (1L << 63);
+        requiredMasks[72] = 0xf0f0f0f0f0f0f0f0L;
+        requiredMasks[73] = 0x00ff00ff00ff00ffL;
+
+        var javaBackend = M3IndexMaskCompactor.Backend.JAVA;
+        var nativeBackend = M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
+        for (int count : new int[] {0, 1, 2, 63, 64, 65, 255, 256, 257, 1025}) {
+            for (int rowStart : new int[] {0, 1, 7}) {
+                for (int stateStart : new int[] {0, 2, 9}) {
+                    for (long mask : requiredMasks) {
+                        int[] oracle = stateWordIntOracle(
+                                rows, rowStart, states, stateStart, count, mask);
+                        long[] longOracle = stateWordLongOracle(
+                                longRows, rowStart, states, stateStart, count, mask);
+                        eq(oracle, M3IndexMaskCompactor.selectStateWordWindow(
+                                rows, rowStart, states, stateStart, count, mask, javaBackend));
+                        eq(longOracle, M3IndexMaskCompactor.selectLongStateWordWindow(
+                                longRows, rowStart, states, stateStart, count, mask, javaBackend));
+                        if (nativeRun) {
+                            eq(oracle, M3IndexMaskCompactor.selectStateWordWindow(
+                                    rows, rowStart, states, stateStart, count, mask, nativeBackend));
+                            eq(longOracle, M3IndexMaskCompactor.selectLongStateWordWindow(
+                                    longRows, rowStart, states, stateStart, count, mask, nativeBackend));
+                        }
+                    }
+                }
+            }
+        }
+        Random random = new Random(0x4d334f424a535441L);
+        for (int i = 0; i < 512; i++) {
+            int count = random.nextInt(n + 1);
+            int rowStart = random.nextInt(n - count + 1);
+            int stateStart = random.nextInt(n - count + 1);
+            long mask = random.nextLong();
+            int[] expected = stateWordIntOracle(rows, rowStart,
+                    states, stateStart, count, mask);
+            long[] expectedLong = stateWordLongOracle(
+                    longRows, rowStart, states, stateStart, count, mask);
+            eq(expected, M3IndexMaskCompactor.selectStateWordWindow(
+                    rows, rowStart, states, stateStart, count, mask, javaBackend));
+            eq(expectedLong, M3IndexMaskCompactor.selectLongStateWordWindow(
+                    longRows, rowStart, states, stateStart, count, mask, javaBackend));
+            if (nativeRun) {
+                eq(expected, M3IndexMaskCompactor.selectStateWordWindow(
+                        rows, rowStart, states, stateStart, count, mask, nativeBackend));
+                eq(expectedLong, M3IndexMaskCompactor.selectLongStateWordWindow(
+                        longRows, rowStart, states, stateStart, count, mask, nativeBackend));
+            }
+        }
+        eq(rows, unchangedRows);
+        eq(longRows, unchangedLongRows);
+        eq(states, unchangedStates);
+        for (var backend : M3IndexMaskCompactor.Backend.values()) {
+            fails(IndexOutOfBoundsException.class, () ->
+                    M3IndexMaskCompactor.selectStateWordWindow(
+                            rows, -1, states, 0, 1, -1L, backend));
+            fails(IndexOutOfBoundsException.class, () ->
+                    M3IndexMaskCompactor.selectStateWordWindow(
+                            rows, 0, states, n, 1, 0L, backend));
+            fails(IndexOutOfBoundsException.class, () ->
+                    M3IndexMaskCompactor.selectLongStateWordWindow(
+                            longRows, 0, states, 0, Integer.MAX_VALUE, 1L, backend));
+            fails(NullPointerException.class, () ->
+                    M3IndexMaskCompactor.selectStateWordWindow(
+                            null, 0, states, 0, 0, 0L, backend));
+            fails(NullPointerException.class, () ->
+                    M3IndexMaskCompactor.selectLongStateWordWindow(
+                            longRows, 0, null, 0, 0, 0L, backend));
+        }
+        fails(NullPointerException.class, () ->
+                M3IndexMaskCompactor.selectStateWordWindow(
+                        rows, 0, states, 0, 0, 0L, null));
+        fails(NullPointerException.class, () ->
+                M3IndexMaskCompactor.selectLongStateWordWindow(
+                        longRows, 0, states, 0, 0, 0L, null));
+    }
+
+    private static int[] stateWordIntOracle(int[] rows, int rowFrom,
+            long[] words, int wordFrom, int count, long required) {
+        int[] values = new int[count];
+        int used = 0;
+        for (int i = 0; i < count; i++) {
+            if ((words[wordFrom + i] & required) == required) {
+                values[used++] = rows[rowFrom + i];
+            }
+        }
+        return Arrays.copyOf(values, used);
+    }
+
+    private static long[] stateWordLongOracle(long[] rows, int rowFrom,
+            long[] words, int wordFrom, int count, long required) {
+        long[] values = new long[count];
+        int used = 0;
+        for (int i = 0; i < count; i++) {
+            if ((words[wordFrom + i] & required) == required) {
+                values[used++] = rows[rowFrom + i];
+            }
+        }
+        return Arrays.copyOf(values, used);
     }
 
     private static void eq(long[] expected, long[] actual) {
