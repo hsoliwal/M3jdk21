@@ -1,0 +1,33 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+/** Compatibility audit of callable public descriptors, including inherited methods. */
+public final class PublicClosureAudit {
+    private PublicClosureAudit() { }
+
+    public static void main(String[] args) throws Exception {
+        for (String name : List.of("M3FilteredViews", "M3MutableFilteredViews",
+                "M3FilteredLists", "M3FilteredNavigableSet")) {
+            Class<?> owner = Class.forName("com.m3.collections." + name);
+            List<String> surface = new ArrayList<>();
+            for (Method method : owner.getMethods()) {
+                surface.add(method.getName() + Arrays.toString(method.getParameterTypes()) + " -> "
+                        + method.getReturnType().getName() + " " + Modifier.isStatic(method.getModifiers()));
+            }
+            for (Constructor<?> constructor : owner.getConstructors()) {
+                surface.add("<init>" + Arrays.toString(constructor.getParameterTypes()));
+            }
+            Collections.sort(surface);
+            System.out.println(name + " " + surface);
+        }
+    }
+}

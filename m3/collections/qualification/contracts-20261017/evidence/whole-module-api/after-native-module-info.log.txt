@@ -1,0 +1,5 @@
+Compiled from "module-info.java"
+module com.m3.collections@0.1.0-SNAPSHOT {
+  requires java.base;
+  exports com.m3.collections;
+}

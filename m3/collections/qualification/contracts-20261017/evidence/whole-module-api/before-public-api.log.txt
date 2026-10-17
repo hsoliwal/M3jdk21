@@ -1,0 +1,2012 @@
+Compiled from "M3AdaptiveEnumLongMap.java"
+public final class com.m3.collections.M3AdaptiveEnumLongMap<E extends java.lang.Enum<E>> {
+  public com.m3.collections.M3AdaptiveEnumLongMap(java.lang.Class<E>);
+  public com.m3.collections.M3AdaptiveEnumLongMap(java.lang.Class<E>, int);
+  public java.lang.Class<E> keyType();
+  public int keyCapacity();
+  public int size();
+  public boolean isEmpty();
+  public boolean isDirect();
+  public long payloadBytes();
+  public long directPayloadBytes();
+  public int directSwitchSize();
+  public boolean containsKey(E);
+  public boolean containsValue(long);
+  public long getOrDefault(E, long);
+  public long getAsLong(E);
+  public long put(E, long, long);
+  public boolean put(E, long);
+  public boolean putIfAbsent(E, long);
+  public long remove(E, long);
+  public boolean removeKey(E);
+  public void clear();
+  public void compact();
+  public void forEachOrdinal(com.m3.collections.M3EnumLongMap$OrdinalLongConsumer);
+  public void forEach(com.m3.collections.M3EnumLongMap$EntryConsumer<E>);
+  public long[] values();
+  public E[] keys();
+}
+Compiled from "M3Address28.java"
+public final class com.m3.collections.M3Address28 {
+  public static final int REGION_BITS;
+  public static final int BLOCK_BITS;
+  public static final int OFFSET_BITS;
+  public static final int REGION_COUNT;
+  public static final int BLOCKS_PER_REGION;
+  public static final int VALUES_PER_BLOCK;
+  public static final int OCCUPANCY_WORDS_PER_BLOCK;
+  public static final int MAX_SLOTS;
+  public static final int MAX_SLOT;
+  public static final int OFFSET_MASK;
+  public static final int BLOCK_MASK;
+  public static int region(int);
+  public static int block(int);
+  public static int offset(int);
+  public static int compose(int, int, int);
+  public static void checkRange(int, int);
+  public static void checkRangeSize(int, int);
+  public static void checkSlot(int);
+}
+Compiled from "M3BitLane28.java"
+public final class com.m3.collections.M3BitLane28 {
+  public com.m3.collections.M3BitLane28();
+  public boolean get(int);
+  public void set(int);
+  public void clear(int);
+  public void set(int, boolean);
+  public void flip(int);
+  public int cardinality();
+  public int allocatedRegionCount();
+  public int allocatedBlockCount();
+  public long payloadBytes();
+  public long indexPayloadBytes();
+  public int nextSetBit(int);
+  public int previousSetBit(int);
+  public int cardinality(int, int);
+  public int rank(int);
+  public int select(int);
+  public int cardinalityNative(int, int);
+}
+Compiled from "M3BlockingDeque.java"
+public final class com.m3.collections.M3BlockingDeque<E> extends java.util.AbstractQueue<E> implements java.util.concurrent.BlockingDeque<E> {
+  public com.m3.collections.M3BlockingDeque();
+  public com.m3.collections.M3BlockingDeque(int);
+  public com.m3.collections.M3BlockingDeque(int, boolean);
+  public int size();
+  public int remainingCapacity();
+  public boolean offerFirst(E);
+  public boolean offerLast(E);
+  public void addFirst(E);
+  public void addLast(E);
+  public void putFirst(E) throws java.lang.InterruptedException;
+  public void putLast(E) throws java.lang.InterruptedException;
+  public boolean offerFirst(E, long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException;
+  public boolean offerLast(E, long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException;
+  public E pollFirst();
+  public E pollLast();
+  public E takeFirst() throws java.lang.InterruptedException;
+  public E takeLast() throws java.lang.InterruptedException;
+  public E pollFirst(long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException;
+  public E pollLast(long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException;
+  public E peekFirst();
+  public E peekLast();
+  public E removeFirst();
+  public E removeLast();
+  public E getFirst();
+  public E getLast();
+  public boolean offer(E);
+  public void put(E) throws java.lang.InterruptedException;
+  public boolean offer(E, long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException;
+  public E poll();
+  public E peek();
+  public E take() throws java.lang.InterruptedException;
+  public E poll(long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException;
+  public void push(E);
+  public E pop();
+  public boolean remove(java.lang.Object);
+  public boolean removeFirstOccurrence(java.lang.Object);
+  public boolean removeLastOccurrence(java.lang.Object);
+  public boolean contains(java.lang.Object);
+  public void clear();
+  public int drainTo(java.util.Collection<? super E>);
+  public int drainTo(java.util.Collection<? super E>, int);
+  public java.util.Spliterator<E> spliterator();
+  public java.util.Iterator<E> iterator();
+  public java.util.Iterator<E> descendingIterator();
+}
+Compiled from "M3ChildProgressMonitor.java"
+final class com.m3.collections.M3ChildProgressMonitor implements com.m3.collections.M3ProgressMonitor {
+  public void beginTask(java.lang.String, long);
+  public void done();
+  public void worked(long);
+  public void setProgress(long, long);
+  public void setTaskName(java.lang.String);
+  public void subTask(java.lang.String);
+  public boolean isCanceled();
+  public void setCanceled(boolean);
+  public com.m3.collections.M3ProgressMonitor split(long);
+  public synchronized com.m3.collections.M3ProgressState state();
+}
+Compiled from "M3CollectionSdk.java"
+public final class com.m3.collections.M3CollectionSdk {
+  public static com.m3.collections.M3CollectionSdkCatalog$Family family(java.lang.String);
+  public static <E> java.util.List<E> filteredList(java.util.List<E>, java.util.function.Predicate<? super E>);
+  public static <E> java.util.List<E> readOnlyFilteredList(java.util.List<E>, java.util.function.Predicate<? super E>);
+  public static <E> java.util.Set<E> readOnlyFilteredSet(java.util.Set<E>, java.util.function.Predicate<? super E>);
+  public static <E> java.util.NavigableSet<E> readOnlyFilteredNavigableSet(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+  public static <K, V> java.util.NavigableMap<K, V> readOnlyFilteredNavigableMap(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+  public static <E> java.util.Collection<E> readOnlyFilteredCollection(java.util.Collection<E>, java.util.function.Predicate<? super E>);
+  public static com.m3.collections.M3LongIndexProjection sortedLongSnapshot(long[]);
+  public static com.m3.collections.M3LongBitmapFilteredSnapshot filteredLongSnapshot(long[], java.util.function.LongPredicate);
+  public static com.m3.collections.M3LongBitmapFilteredSnapshot filteredLongSnapshot(long[], java.util.function.LongPredicate, com.m3.collections.M3IndexMaskCompactor$Backend);
+}
+Compiled from "M3CollectionSdkCatalog.java"
+public final class com.m3.collections.M3CollectionSdkCatalog {
+  public static int size();
+  public static java.util.List<com.m3.collections.M3CollectionSdkCatalog$Family> families();
+  public static java.util.Optional<com.m3.collections.M3CollectionSdkCatalog$Family> find(java.lang.String);
+  public static com.m3.collections.M3CollectionSdkCatalog$Family require(java.lang.String);
+  public static java.util.List<com.m3.collections.M3CollectionSdkCatalog$Family> byVendor(com.m3.collections.M3CollectionSdkCatalog$Vendor);
+}
+Compiled from "M3CollectionSdkNames.java"
+public final class com.m3.collections.M3CollectionSdkNames {
+  public static java.util.List<com.m3.collections.M3CollectionSdkNames$Family> all();
+  public static int size();
+  public static com.m3.collections.M3CollectionSdkNames$Family get(java.lang.String);
+  public static com.m3.collections.M3CollectionSdkNames$Family require(java.lang.String);
+  public static java.util.List<com.m3.collections.M3CollectionSdkNames$Family> from(com.m3.collections.M3CollectionSdkNames$Provider);
+}
+Compiled from "M3Collections.java"
+public final class com.m3.collections.M3Collections {
+  public static com.m3.collections.M3LongLane28 longLane();
+  public static com.m3.collections.M3IntLane28 intLane();
+  public static com.m3.collections.M3BitLane28 bitLane();
+  public static com.m3.collections.M3SlotAllocator28 stableSlots();
+  public static com.m3.collections.M3LongLaneStore28 longRows(int);
+  public static com.m3.collections.M3LongArena28 longArena();
+  public static com.m3.collections.M3LongLinkedList28 longLinkedList();
+  public static com.m3.collections.M3ConcurrentLongLane28 concurrentLongLane();
+  public static com.m3.collections.M3ConcurrentIntLane28 concurrentIntLane();
+  public static <E> java.util.ArrayList<E> arrayList();
+  public static <E> com.m3.collections.M3LinkedList<E> linkedList();
+  public static <K, V> com.m3.collections.M3LinkedHashMap<K, V> hashMap();
+  public static <K, V> com.m3.collections.M3LinkedHashMap<K, V> linkedHashMap();
+  public static <K, V> com.m3.collections.M3LinkedHashMap<K, V> linkedHashMap(boolean);
+  public static <K, V> com.m3.collections.M3TreeMap<K, V> treeMap();
+  public static <K, V> com.m3.collections.M3TreeMap<K, V> treeMap(java.util.Comparator<? super K>);
+  public static <E> com.m3.collections.M3LinkedHashSet<E> hashSet();
+  public static <E> com.m3.collections.M3LinkedHashSet<E> linkedHashSet();
+  public static <E> com.m3.collections.M3TreeSet<E> treeSet();
+  public static <E> com.m3.collections.M3TreeSet<E> treeSet(java.util.Comparator<? super E>);
+  public static <E> java.util.ArrayDeque<E> arrayDeque();
+  public static <E> java.util.PriorityQueue<E> priorityQueue();
+  public static <E> java.util.PriorityQueue<E> priorityQueue(java.util.Comparator<? super E>);
+  public static <K, V> java.util.IdentityHashMap<K, V> identityMap();
+  public static <K, V> com.m3.collections.M3WeakHashMap<K, V> weakMap();
+  public static <K extends java.lang.Enum<K>, V> java.util.EnumMap<K, V> enumMap(java.lang.Class<K>);
+  public static <E extends java.lang.Enum<E>> java.util.EnumSet<E> enumSet(java.lang.Class<E>);
+  public static java.util.BitSet bitSet();
+  public static <E> java.util.Vector<E> vector();
+  public static <E> java.util.Stack<E> stack();
+  public static <E> java.util.concurrent.CopyOnWriteArrayList<E> copyOnWriteList();
+  public static <E> java.util.concurrent.CopyOnWriteArraySet<E> copyOnWriteSet();
+  public static <K, V> com.m3.collections.M3LockedMap<K, V> lockedMap();
+  public static <K, V> com.m3.collections.M3LockedMap<K, V> lockedHashtableMap();
+  public static <K, V> com.m3.collections.M3LockedTreeMap<K, V> lockedTreeMap();
+  public static <K, V> com.m3.collections.M3LockedTreeMap<K, V> lockedTreeMap(java.util.Comparator<? super K>);
+  public static <E> java.util.Set<E> lockedHashSet();
+  public static <E> com.m3.collections.M3LockedTreeSet<E> lockedTreeSet();
+  public static <E> com.m3.collections.M3LockedTreeSet<E> lockedTreeSet(java.util.Comparator<? super E>);
+  public static <E> com.m3.collections.M3BlockingDeque<E> lockedQueue();
+  public static <E> com.m3.collections.M3BlockingDeque<E> lockedDeque();
+  public static <E> com.m3.collections.M3BlockingDeque<E> blockingQueue(int);
+  public static <E> com.m3.collections.M3BlockingDeque<E> blockingDeque(int);
+  public static <E> java.util.concurrent.ArrayBlockingQueue<E> arrayBlockingQueue(int, boolean);
+  public static <E> java.util.concurrent.PriorityBlockingQueue<E> priorityBlockingQueue(java.util.Comparator<? super E>);
+  public static <E extends java.util.concurrent.Delayed> java.util.concurrent.DelayQueue<E> delayQueue();
+  public static <E> com.m3.collections.M3TransferQueue<E> transferQueue();
+  public static <E> com.m3.collections.M3TransferQueue<E> synchronousQueue(boolean);
+  public static <E> java.util.List<E> immutableList(java.util.Collection<? extends E>);
+  public static <E> java.util.Set<E> immutableSet(java.util.Collection<? extends E>);
+  public static <K, V> java.util.Map<K, V> immutableMap(java.util.Map<? extends K, ? extends V>);
+  public static com.m3.collections.M3LongArrayList longArrayList();
+  public static com.m3.collections.M3LongArrayList longArrayList(int);
+  public static com.m3.collections.M3LongArrayDeque longArrayDeque();
+  public static com.m3.collections.M3LongArrayDeque longArrayDeque(int);
+  public static com.m3.collections.M3LongHashSet longHashSet();
+  public static com.m3.collections.M3LongLongHashMap longLongHashMap();
+  public static com.m3.collections.M3LongPriorityQueue longPriorityQueue();
+}
+Compiled from "M3ConcurrentBitSet.java"
+public final class com.m3.collections.M3ConcurrentBitSet {
+  public com.m3.collections.M3ConcurrentBitSet(int);
+  public int bitCapacity();
+  public int wordCount();
+  public boolean get(int);
+  public boolean set(int);
+  public boolean clear(int);
+  public boolean toggle(int);
+  public boolean compareAndSet(int, boolean, boolean);
+  public int cardinalityApprox();
+  public long[] snapshotWords();
+  public void clearAll();
+  public java.util.stream.IntStream setBitStream();
+  public java.util.stream.IntStream parallelSetBitStream();
+}
+Compiled from "M3ConcurrentIntLane28.java"
+public final class com.m3.collections.M3ConcurrentIntLane28 {
+  public com.m3.collections.M3ConcurrentIntLane28();
+  public int getAcquire(int);
+  public void setRelease(int, int);
+  public boolean compareAndSet(int, int, int);
+  public int getAndSet(int, int);
+  public int getAndAdd(int, int);
+  public void prepare(int, int);
+  public int allocatedBlockCount();
+  public long payloadBytes();
+  public java.util.Spliterator$OfInt spliterator(int, int);
+  public java.util.stream.IntStream stream(int, int);
+  public java.util.stream.IntStream parallelStream(int, int);
+}
+Compiled from "M3ConcurrentLongLane28.java"
+public final class com.m3.collections.M3ConcurrentLongLane28 {
+  public com.m3.collections.M3ConcurrentLongLane28();
+  public long getAcquire(int);
+  public void setRelease(int, long);
+  public boolean compareAndSet(int, long, long);
+  public long getAndSet(int, long);
+  public long getAndAdd(int, long);
+  public void prepare(int, int);
+  public int allocatedBlockCount();
+  public long payloadBytes();
+  public java.util.Spliterator$OfLong spliterator(int, int);
+  public java.util.stream.LongStream stream(int, int);
+  public java.util.stream.LongStream parallelStream(int, int);
+}
+Compiled from "M3ConcurrentLongMap.java"
+public final class com.m3.collections.M3ConcurrentLongMap {
+  public com.m3.collections.M3ConcurrentLongMap();
+  public int size();
+  public boolean isEmpty();
+  public boolean containsKey(long);
+  public long getOrDefault(long, long);
+  public boolean put(long, long);
+  public boolean remove(long);
+  public void clear();
+  public void forEach(com.m3.collections.M3LongLongConsumer);
+  public long[] toInterleavedArray();
+  public java.util.stream.LongStream keyStream();
+  public java.util.stream.LongStream valueStream();
+}
+Compiled from "M3ConcurrentLongSet.java"
+public final class com.m3.collections.M3ConcurrentLongSet implements com.m3.collections.M3LongCollection {
+  public com.m3.collections.M3ConcurrentLongSet();
+  public boolean add(long);
+  public boolean remove(long);
+  public boolean contains(long);
+  public int size();
+  public void clear();
+  public long[] toArray();
+  public java.util.Spliterator$OfLong longSpliterator();
+  public com.m3.collections.M3LongIterator iterator();
+}
+Compiled from "M3DefaultProgressMonitor.java"
+public final class com.m3.collections.M3DefaultProgressMonitor implements com.m3.collections.M3ProgressMonitor {
+  public com.m3.collections.M3DefaultProgressMonitor();
+  public void beginTask(java.lang.String, long);
+  public void done();
+  public void worked(long);
+  public void setProgress(long, long);
+  public void setTaskName(java.lang.String);
+  public void subTask(java.lang.String);
+  public boolean isCanceled();
+  public void setCanceled(boolean);
+  public com.m3.collections.M3ProgressMonitor split(long);
+  public com.m3.collections.M3ProgressState state();
+}
+Compiled from "M3EnumLongMap.java"
+public final class com.m3.collections.M3EnumLongMap<E extends java.lang.Enum<E>> {
+  public com.m3.collections.M3EnumLongMap(java.lang.Class<E>);
+  public java.lang.Class<E> keyType();
+  public int keyCapacity();
+  public int size();
+  public boolean isEmpty();
+  public long payloadBytes();
+  public boolean containsKey(E);
+  public boolean containsValue(long);
+  public long getOrDefault(E, long);
+  public long getAsLong(E);
+  public long put(E, long, long);
+  public boolean put(E, long);
+  public boolean putIfAbsent(E, long);
+  public long remove(E, long);
+  public boolean removeKey(E);
+  public void clear();
+  public void forEachOrdinal(com.m3.collections.M3EnumLongMap$OrdinalLongConsumer);
+  public void forEach(com.m3.collections.M3EnumLongMap$EntryConsumer<E>);
+  public long[] values();
+  public E[] keys();
+}
+Compiled from "M3EnumSet.java"
+public final class com.m3.collections.M3EnumSet<E extends java.lang.Enum<E>> {
+  public static <E extends java.lang.Enum<E>> com.m3.collections.M3EnumSet<E> noneOf(java.lang.Class<E>);
+  public static <E extends java.lang.Enum<E>> com.m3.collections.M3EnumSet<E> allOf(java.lang.Class<E>);
+  public static <E extends java.lang.Enum<E>> com.m3.collections.M3EnumSet<E> of(E, E...);
+  public static <E extends java.lang.Enum<E>> com.m3.collections.M3EnumSet<E> copyOf(com.m3.collections.M3EnumSet<E>);
+  public static <E extends java.lang.Enum<E>> com.m3.collections.M3EnumSet<E> complementOf(com.m3.collections.M3EnumSet<E>);
+  public static <E extends java.lang.Enum<E>> com.m3.collections.M3EnumSet<E> range(E, E);
+  public java.lang.Class<E> elementType();
+  public int size();
+  public boolean isEmpty();
+  public long payloadBytes();
+  public boolean contains(java.lang.Object);
+  public boolean add(E);
+  public boolean remove(java.lang.Object);
+  public boolean containsAll(com.m3.collections.M3EnumSet<E>);
+  public boolean addAll(com.m3.collections.M3EnumSet<E>);
+  public boolean removeAll(com.m3.collections.M3EnumSet<E>);
+  public boolean retainAll(com.m3.collections.M3EnumSet<E>);
+  public void clear();
+  public void complement();
+  public void forEach(java.util.function.Consumer<? super E>);
+  public E[] toArray();
+  public long[] toLongArray();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "M3FilteredLists.java"
+public final class com.m3.collections.M3FilteredLists {
+  public static <E> java.util.List<E> filtered(java.util.List<E>, java.util.function.Predicate<? super E>);
+  public static <E> java.util.List<E> readOnlyFiltered(java.util.List<E>, java.util.function.Predicate<? super E>);
+}
+Compiled from "M3FilteredNavigableSet.java"
+public final class com.m3.collections.M3FilteredNavigableSet<E> extends java.util.AbstractSet<E> implements java.util.NavigableSet<E> {
+  public static <E> java.util.NavigableSet<E> view(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+  public java.util.Comparator<? super E> comparator();
+  public java.util.Iterator<E> iterator();
+  public java.util.Iterator<E> descendingIterator();
+  public int size();
+  public boolean isEmpty();
+  public boolean contains(java.lang.Object);
+  public E first();
+  public E last();
+  public E lower(E);
+  public E floor(E);
+  public E ceiling(E);
+  public E higher(E);
+  public java.util.NavigableSet<E> descendingSet();
+  public java.util.NavigableSet<E> subSet(E, boolean, E, boolean);
+  public java.util.NavigableSet<E> headSet(E, boolean);
+  public java.util.NavigableSet<E> tailSet(E, boolean);
+  public java.util.SortedSet<E> subSet(E, E);
+  public java.util.SortedSet<E> headSet(E);
+  public java.util.SortedSet<E> tailSet(E);
+  public boolean add(E);
+  public boolean remove(java.lang.Object);
+  public boolean addAll(java.util.Collection<? extends E>);
+  public boolean removeAll(java.util.Collection<?>);
+  public boolean retainAll(java.util.Collection<?>);
+  public boolean removeIf(java.util.function.Predicate<? super E>);
+  public void clear();
+  public E pollFirst();
+  public E pollLast();
+}
+Compiled from "M3FilteredViews.java"
+public final class com.m3.collections.M3FilteredViews {
+  public static <E> java.util.Collection<E> filter(java.util.Collection<E>, java.util.function.Predicate<? super E>);
+  public static <E> java.util.Set<E> filter(java.util.Set<E>, java.util.function.Predicate<? super E>);
+  public static <E> java.util.SortedSet<E> filter(java.util.SortedSet<E>, java.util.function.Predicate<? super E>);
+  public static <E> java.util.NavigableSet<E> filter(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+  public static <K, V> java.util.SortedMap<K, V> filterEntries(java.util.SortedMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+  public static <K, V> java.util.NavigableMap<K, V> filterEntries(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+}
+Compiled from "M3IndexMaskCompactor.java"
+public final class com.m3.collections.M3IndexMaskCompactor {
+  public static boolean nativeAvailable();
+  public static int[] select(int[], byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);
+  public static int selectedCount(byte[], int);
+  public static long[] selectLong(long[], byte[], int);
+  public static int[] selectWindow(int[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+  public static long[] selectLongWindow(long[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+}
+Compiled from "M3IndexMaskWindow.java"
+public final class com.m3.collections.M3IndexMaskWindow {
+  public static final int MAX_WINDOW;
+  public static int nextIndex(long);
+  public static int written(long);
+  public static long scan(int[], byte[], int, int, int, int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+}
+Compiled from "M3IndexPathMasks.java"
+public final class com.m3.collections.M3IndexPathMasks {
+  public static final int MAX_WINDOW;
+  public static boolean nativeAvailable();
+  public static int[] select(int[], int[], int[][], int[], int[], int, int, int, com.m3.collections.M3IndexPathMasks$Backend);
+  public static int firstMatchingIndex(int[], int[], int[][], int[], int[], int, int, int);
+  public static int nextOrdinal(long);
+  public static int written(long);
+  public static long scanWindow(int[], int[], int[][], int[], int[], int, int, int, int, int[], int, int, com.m3.collections.M3IndexPathMasks$Backend);
+}
+Compiled from "M3IndexPathRank.java"
+public final class com.m3.collections.M3IndexPathRank {
+  public static com.m3.collections.M3IndexPathRank snapshot(int[], int[], int[][], int[], int[], int, int, int);
+  public int sourceSize();
+  public int size();
+  public boolean containsSourceOrdinal(int);
+  public int rank(int);
+  public int selectedSourceOrdinal(int);
+  public int selectedRowId(int);
+  public int[] toArray();
+  public com.m3.collections.M3IndexPathRank$Window window(int, int);
+}
+Compiled from "M3IndexedMultiValueMap.java"
+public final class com.m3.collections.M3IndexedMultiValueMap<K, V> {
+  public static final int LIVE;
+  public static final int VISIBLE;
+  public static final int DIRTY;
+  public static final int DEFERRED;
+  public com.m3.collections.M3IndexedMultiValueMap();
+  public void add(K, V);
+  public void add(K, V, int);
+  public int size();
+  public int keyCount();
+  public boolean containsKey(java.lang.Object);
+  public long revision();
+  public int capacity();
+  public V getFirst(java.lang.Object);
+  public int valueCount(java.lang.Object);
+  public java.util.List<K> keysSnapshot();
+  public int stateAt(java.lang.Object, int);
+  public int updateState(java.lang.Object, int, int, int);
+  public int removeKey(java.lang.Object);
+  public void clear();
+  public com.m3.collections.M3IndexedMultiValueMap$ValuesSnapshot<V> snapshot(java.lang.Object);
+  public com.m3.collections.M3IndexedMultiValueMap$ValuesSnapshot<V> selected(java.lang.Object, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+}
+Compiled from "M3IntCollection.java"
+public interface com.m3.collections.M3IntCollection {
+  public abstract int size();
+  public abstract boolean contains(int);
+  public abstract void clear();
+  public abstract com.m3.collections.M3IntIterator iterator();
+  public abstract int[] toArray();
+  public default boolean isEmpty();
+  public default void forEachInt(java.util.function.IntConsumer);
+  public default java.util.Spliterator$OfInt intSpliterator();
+  public default java.util.stream.IntStream intStream();
+  public default java.util.stream.IntStream parallelIntStream();
+}
+Compiled from "M3IntHashSet.java"
+public final class com.m3.collections.M3IntHashSet implements com.m3.collections.M3IntCollection {
+  public com.m3.collections.M3IntHashSet();
+  public com.m3.collections.M3IntHashSet(int);
+  public boolean add(int);
+  public boolean remove(int);
+  public boolean contains(int);
+  public int size();
+  public int capacity();
+  public long payloadBytes();
+  public void clear();
+  public int[] toArray();
+  public com.m3.collections.M3IntIterator iterator();
+}
+Compiled from "M3IntIntConsumer.java"
+public interface com.m3.collections.M3IntIntConsumer {
+  public abstract void accept(int, int);
+}
+Compiled from "M3IntIntHashMap.java"
+public final class com.m3.collections.M3IntIntHashMap {
+  public com.m3.collections.M3IntIntHashMap();
+  public com.m3.collections.M3IntIntHashMap(int);
+  public boolean put(int, int);
+  public int getOrDefault(int, int);
+  public boolean containsKey(int);
+  public boolean containsValue(int);
+  public boolean replace(int, int, int);
+  public int addTo(int, int);
+  public boolean remove(int);
+  public boolean remove(int, int);
+  public int size();
+  public boolean isEmpty();
+  public int capacity();
+  public long payloadBytes();
+  public void clear();
+  public void forEach(com.m3.collections.M3IntIntConsumer);
+  public com.m3.collections.M3IntIterator keyIterator();
+  public int[] keysToArray();
+}
+Compiled from "M3IntIterator.java"
+public interface com.m3.collections.M3IntIterator {
+  public abstract boolean hasNext();
+  public abstract int nextInt();
+  public default void forEachRemaining(java.util.function.IntConsumer);
+}
+Compiled from "M3IntLane28.java"
+public final class com.m3.collections.M3IntLane28 {
+  public com.m3.collections.M3IntLane28();
+  public int get(int);
+  public void set(int, int);
+  public int getAndSet(int, int);
+  public int incrementAndGet(int);
+  public void clear(int);
+  public boolean isBlockAllocated(int);
+  public int allocatedRegionCount();
+  public int allocatedBlockCount();
+  public long payloadBytes();
+  public void fill(int, int, int);
+  public void copyTo(int, int[], int, int);
+  public void copyFrom(int[], int, int, int);
+  public void copyFrom(com.m3.collections.M3IntLane28, int, int, int);
+}
+Compiled from "M3IntLongConsumer.java"
+public interface com.m3.collections.M3IntLongConsumer {
+  public abstract void accept(int, long);
+}
+Compiled from "M3IntLongHashMap.java"
+public final class com.m3.collections.M3IntLongHashMap {
+  public com.m3.collections.M3IntLongHashMap();
+  public com.m3.collections.M3IntLongHashMap(int);
+  public static long payloadBytesFor(int);
+  public boolean put(int, long);
+  public long getOrDefault(int, long);
+  public boolean containsKey(int);
+  public boolean containsValue(long);
+  public boolean replace(int, long, long);
+  public long addTo(int, long);
+  public boolean remove(int);
+  public boolean remove(int, long);
+  public int size();
+  public boolean isEmpty();
+  public int capacity();
+  public long payloadBytes();
+  public void clear();
+  public void forEach(com.m3.collections.M3IntLongConsumer);
+  public com.m3.collections.M3IntIterator keyIterator();
+  public int[] keysToArray();
+}
+Compiled from "M3IntPriorityQueue.java"
+public final class com.m3.collections.M3IntPriorityQueue implements com.m3.collections.M3IntCollection {
+  public com.m3.collections.M3IntPriorityQueue();
+  public com.m3.collections.M3IntPriorityQueue(int);
+  public boolean offer(int);
+  public boolean add(int);
+  public int firstInt();
+  public int removeFirstInt();
+  public boolean remove(int);
+  public boolean contains(int);
+  public int size();
+  public int capacity();
+  public long payloadBytes();
+  public void clear();
+  public int[] toArray();
+  public int[] toSortedArray();
+  public com.m3.collections.M3IntIterator iterator();
+}
+Compiled from "M3LazyEventBits.java"
+public final class com.m3.collections.M3LazyEventBits {
+  public static final long NONE;
+  public static final long BEFORE_TOUCH;
+  public static final long AFTER_TOUCH;
+  public static final long CACHE_HIT;
+  public static final long CACHE_MISS;
+  public static final long BEFORE_LOAD;
+  public static final long AFTER_LOAD;
+  public static final long LOAD_FAILED;
+  public static final long CANCELLED;
+  public static final long STATE_CHANGED;
+  public static final long INVALIDATED;
+  public static final long RANGE_BEGIN;
+  public static final long RANGE_END;
+  public static final long PROVIDER_BEGIN;
+  public static final long PROVIDER_END;
+  public static final long PROGRESS;
+  public static final long ALL;
+}
+Compiled from "M3LazyEventGranularity.java"
+public final class com.m3.collections.M3LazyEventGranularity extends java.lang.Enum<com.m3.collections.M3LazyEventGranularity> {
+  public static final com.m3.collections.M3LazyEventGranularity INHERIT;
+  public static final com.m3.collections.M3LazyEventGranularity NONE;
+  public static final com.m3.collections.M3LazyEventGranularity OPERATION;
+  public static final com.m3.collections.M3LazyEventGranularity RANGE;
+  public static final com.m3.collections.M3LazyEventGranularity ELEMENT;
+  public static final com.m3.collections.M3LazyEventGranularity STATE_TRANSITION;
+  public static com.m3.collections.M3LazyEventGranularity[] values();
+  public static com.m3.collections.M3LazyEventGranularity valueOf(java.lang.String);
+  public boolean includes(com.m3.collections.M3LazyEventGranularity);
+}
+Compiled from "M3LazyEventPolicy.java"
+public final class com.m3.collections.M3LazyEventPolicy extends java.lang.Record {
+  public static final com.m3.collections.M3LazyEventPolicy NONE;
+  public com.m3.collections.M3LazyEventPolicy(long, long, short, com.m3.collections.M3LazyEventGranularity);
+  public static com.m3.collections.M3LazyEventPolicy of(long, com.m3.collections.M3LazyEventGranularity);
+  public long effectiveMask();
+  public com.m3.collections.M3LazyEventPolicy overlay(com.m3.collections.M3LazyEventPolicy);
+  public boolean enabled(long, com.m3.collections.M3LazyEventGranularity, short, short);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public long includeMask();
+  public long excludeMask();
+  public short watchedStateMask();
+  public com.m3.collections.M3LazyEventGranularity granularity();
+}
+Compiled from "M3LazyEventSink.java"
+public interface com.m3.collections.M3LazyEventSink<M> {
+  public static final long NO_SLOT;
+  public abstract void onEvent(long, long, short, short, com.m3.collections.M3LazyOperation, M, java.lang.Throwable);
+  public static <M> com.m3.collections.M3LazyEventSink<M> noop();
+}
+Compiled from "M3LazyEventSource.java"
+public interface com.m3.collections.M3LazyEventSource<M> {
+  public default com.m3.collections.M3LazyEventPolicy lazyEventPolicy();
+  public default com.m3.collections.M3LazyEventSink<M> lazyEventSink();
+}
+Compiled from "M3LazyEvents.java"
+public final class com.m3.collections.M3LazyEvents {
+  public static <M> void emit(com.m3.collections.M3LazyEventPolicy, com.m3.collections.M3LazyEventSink<? super M>, long, com.m3.collections.M3LazyEventGranularity, long, short, short, com.m3.collections.M3LazyOperation, M, java.lang.Throwable);
+}
+Compiled from "M3LazyOperation.java"
+public final class com.m3.collections.M3LazyOperation extends java.lang.Enum<com.m3.collections.M3LazyOperation> {
+  public static final com.m3.collections.M3LazyOperation READ;
+  public static final com.m3.collections.M3LazyOperation TOUCH;
+  public static final com.m3.collections.M3LazyOperation LOAD;
+  public static final com.m3.collections.M3LazyOperation PRELOAD;
+  public static final com.m3.collections.M3LazyOperation RENDER;
+  public static final com.m3.collections.M3LazyOperation SELECT;
+  public static final com.m3.collections.M3LazyOperation EXPAND;
+  public static final com.m3.collections.M3LazyOperation EDIT;
+  public static final com.m3.collections.M3LazyOperation NAVIGATE;
+  public static final com.m3.collections.M3LazyOperation PREFETCH;
+  public static final com.m3.collections.M3LazyOperation API_OBJECT;
+  public static final com.m3.collections.M3LazyOperation PAGE;
+  public static final com.m3.collections.M3LazyOperation CHILD_PROBE;
+  public static final com.m3.collections.M3LazyOperation ROOT_COUNT;
+  public static final com.m3.collections.M3LazyOperation ROOT_KEY;
+  public static final com.m3.collections.M3LazyOperation CHILD_COUNT;
+  public static final com.m3.collections.M3LazyOperation CHILD_KEY;
+  public static final com.m3.collections.M3LazyOperation INVALIDATE;
+  public static com.m3.collections.M3LazyOperation[] values();
+  public static com.m3.collections.M3LazyOperation valueOf(java.lang.String);
+}
+Compiled from "M3LazyValueProvider.java"
+public interface com.m3.collections.M3LazyValueProvider<K, V> extends com.m3.collections.M3LazyEventSource<com.m3.collections.M3Progress> {
+  public static final short ABSENT;
+  public static final short UNLOADED;
+  public static final short LOADING;
+  public static final short LOADED;
+  public static final short FAILED;
+  public abstract V load(K, com.m3.collections.M3Progress);
+}
+Compiled from "M3LazyValueState.java"
+final class com.m3.collections.M3LazyValueState<K, V> {
+}
+Compiled from "M3LinkedHashMap.java"
+public final class com.m3.collections.M3LinkedHashMap<K, V> extends com.m3.collections.M3OrderedSlotMap<K, V> {
+  public com.m3.collections.M3LinkedHashMap();
+  public com.m3.collections.M3LinkedHashMap(boolean);
+  public int size();
+  public V put(K, V);
+  public V putFirst(K, V);
+  public V putLast(K, V);
+  public java.util.Map$Entry<K, V> firstEntry();
+  public java.util.Map$Entry<K, V> lastEntry();
+  public java.util.Map$Entry<K, V> pollFirstEntry();
+  public java.util.Map$Entry<K, V> pollLastEntry();
+  public com.m3.collections.M3LinkedHashMap<K, V> reversed();
+  public void clear();
+  public void verifyInvariants();
+  public java.util.SequencedSet sequencedEntrySet();
+  public java.util.SequencedCollection sequencedValues();
+  public java.util.SequencedSet sequencedKeySet();
+  public java.util.SequencedCollection values();
+  public java.util.SequencedSet entrySet();
+  public java.util.SequencedSet keySet();
+  public com.m3.collections.M3OrderedSlotMap reversed();
+  public java.util.SequencedMap reversed();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public void replaceAll(java.util.function.BiFunction);
+  public void forEach(java.util.function.BiConsumer);
+  public java.lang.Object merge(java.lang.Object, java.lang.Object, java.util.function.BiFunction);
+  public java.lang.Object compute(java.lang.Object, java.util.function.BiFunction);
+  public java.lang.Object computeIfPresent(java.lang.Object, java.util.function.BiFunction);
+  public java.lang.Object computeIfAbsent(java.lang.Object, java.util.function.Function);
+  public boolean replace(java.lang.Object, java.lang.Object, java.lang.Object);
+  public java.lang.Object replace(java.lang.Object, java.lang.Object);
+  public java.lang.Object putIfAbsent(java.lang.Object, java.lang.Object);
+  public void putAll(java.util.Map);
+  public boolean remove(java.lang.Object, java.lang.Object);
+  public java.lang.Object remove(java.lang.Object);
+  public boolean containsValue(java.lang.Object);
+  public java.lang.Object getOrDefault(java.lang.Object, java.lang.Object);
+  public java.lang.Object get(java.lang.Object);
+  public boolean containsKey(java.lang.Object);
+}
+Compiled from "M3LinkedHashSet.java"
+public final class com.m3.collections.M3LinkedHashSet<E> extends java.util.AbstractSet<E> implements java.util.SequencedSet<E> {
+  public com.m3.collections.M3LinkedHashSet();
+  public int size();
+  public boolean contains(java.lang.Object);
+  public boolean add(E);
+  public boolean remove(java.lang.Object);
+  public void clear();
+  public java.util.Spliterator<E> spliterator();
+  public java.util.Iterator<E> iterator();
+  public E getFirst();
+  public E getLast();
+  public E removeFirst();
+  public E removeLast();
+  public void addFirst(E);
+  public void addLast(E);
+  public com.m3.collections.M3LinkedHashSet<E> reversed();
+  public void verifyInvariants();
+  public java.util.SequencedSet reversed();
+  public java.util.SequencedCollection reversed();
+}
+Compiled from "M3LinkedList.java"
+public final class com.m3.collections.M3LinkedList<E> extends java.util.AbstractSequentialList<E> implements java.util.Deque<E> {
+  public com.m3.collections.M3LinkedList();
+  public int size();
+  public void addFirst(E);
+  public void addLast(E);
+  public boolean offerFirst(E);
+  public boolean offerLast(E);
+  public E pollFirst();
+  public E pollLast();
+  public E peekFirst();
+  public E peekLast();
+  public E removeFirst();
+  public E removeLast();
+  public E getFirst();
+  public E getLast();
+  public boolean add(E);
+  public boolean offer(E);
+  public E poll();
+  public E remove();
+  public E peek();
+  public E element();
+  public void push(E);
+  public E pop();
+  public boolean remove(java.lang.Object);
+  public boolean removeFirstOccurrence(java.lang.Object);
+  public boolean removeLastOccurrence(java.lang.Object);
+  public java.util.Spliterator<E> spliterator();
+  public java.util.Iterator<E> descendingIterator();
+  public com.m3.collections.M3LinkedList<E> reversed();
+  public void clear();
+  public java.util.ListIterator<E> listIterator(int);
+  public void verifyInvariants();
+  public java.util.List reversed();
+  public java.util.SequencedCollection reversed();
+  public java.util.Deque reversed();
+}
+Compiled from "M3LockedMap.java"
+public class com.m3.collections.M3LockedMap<K, V> extends java.util.AbstractMap<K, V> implements java.util.concurrent.ConcurrentMap<K, V> {
+  public com.m3.collections.M3LockedMap();
+  public int size();
+  public boolean isEmpty();
+  public V get(java.lang.Object);
+  public V getOrDefault(java.lang.Object, V);
+  public boolean containsKey(java.lang.Object);
+  public boolean containsValue(java.lang.Object);
+  public V put(K, V);
+  public V putIfAbsent(K, V);
+  public V remove(java.lang.Object);
+  public boolean remove(java.lang.Object, java.lang.Object);
+  public V replace(K, V);
+  public boolean replace(K, V, V);
+  public void clear();
+  public void putAll(java.util.Map<? extends K, ? extends V>);
+  public V computeIfAbsent(K, java.util.function.Function<? super K, ? extends V>);
+  public V computeIfPresent(K, java.util.function.BiFunction<? super K, ? super V, ? extends V>);
+  public V compute(K, java.util.function.BiFunction<? super K, ? super V, ? extends V>);
+  public V merge(K, V, java.util.function.BiFunction<? super V, ? super V, ? extends V>);
+  public void replaceAll(java.util.function.BiFunction<? super K, ? super V, ? extends V>);
+  public void forEach(java.util.function.BiConsumer<? super K, ? super V>);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public java.util.Set<K> keySet();
+  public java.util.Collection<V> values();
+  public java.util.Set<java.util.Map$Entry<K, V>> entrySet();
+}
+Compiled from "M3LockedTreeMap.java"
+public final class com.m3.collections.M3LockedTreeMap<K, V> extends com.m3.collections.M3LockedMap<K, V> implements java.util.concurrent.ConcurrentNavigableMap<K, V> {
+  public com.m3.collections.M3LockedTreeMap();
+  public com.m3.collections.M3LockedTreeMap(java.util.Comparator<? super K>);
+  public java.util.Comparator<? super K> comparator();
+  public K firstKey();
+  public K lastKey();
+  public java.util.Map$Entry<K, V> firstEntry();
+  public java.util.Map$Entry<K, V> lastEntry();
+  public java.util.Map$Entry<K, V> pollFirstEntry();
+  public java.util.Map$Entry<K, V> pollLastEntry();
+  public K lowerKey(K);
+  public K floorKey(K);
+  public K ceilingKey(K);
+  public K higherKey(K);
+  public java.util.Map$Entry<K, V> lowerEntry(K);
+  public java.util.Map$Entry<K, V> floorEntry(K);
+  public java.util.Map$Entry<K, V> ceilingEntry(K);
+  public java.util.Map$Entry<K, V> higherEntry(K);
+  public com.m3.collections.M3LockedTreeMap<K, V> descendingMap();
+  public com.m3.collections.M3LockedTreeMap<K, V> subMap(K, boolean, K, boolean);
+  public com.m3.collections.M3LockedTreeMap<K, V> headMap(K, boolean);
+  public com.m3.collections.M3LockedTreeMap<K, V> tailMap(K, boolean);
+  public com.m3.collections.M3LockedTreeMap<K, V> subMap(K, K);
+  public com.m3.collections.M3LockedTreeMap<K, V> headMap(K);
+  public com.m3.collections.M3LockedTreeMap<K, V> tailMap(K);
+  public java.util.NavigableSet<K> keySet();
+  public java.util.NavigableSet<K> navigableKeySet();
+  public java.util.NavigableSet<K> descendingKeySet();
+  public java.util.Set keySet();
+  public java.util.concurrent.ConcurrentNavigableMap descendingMap();
+  public java.util.concurrent.ConcurrentNavigableMap tailMap(java.lang.Object);
+  public java.util.concurrent.ConcurrentNavigableMap headMap(java.lang.Object);
+  public java.util.concurrent.ConcurrentNavigableMap subMap(java.lang.Object, java.lang.Object);
+  public java.util.concurrent.ConcurrentNavigableMap tailMap(java.lang.Object, boolean);
+  public java.util.concurrent.ConcurrentNavigableMap headMap(java.lang.Object, boolean);
+  public java.util.concurrent.ConcurrentNavigableMap subMap(java.lang.Object, boolean, java.lang.Object, boolean);
+  public java.util.SortedMap tailMap(java.lang.Object);
+  public java.util.SortedMap headMap(java.lang.Object);
+  public java.util.SortedMap subMap(java.lang.Object, java.lang.Object);
+  public java.util.NavigableMap tailMap(java.lang.Object, boolean);
+  public java.util.NavigableMap headMap(java.lang.Object, boolean);
+  public java.util.NavigableMap subMap(java.lang.Object, boolean, java.lang.Object, boolean);
+  public java.util.NavigableMap descendingMap();
+}
+Compiled from "M3LockedTreeSet.java"
+public final class com.m3.collections.M3LockedTreeSet<E> extends java.util.AbstractSet<E> implements java.util.NavigableSet<E> {
+  public com.m3.collections.M3LockedTreeSet();
+  public com.m3.collections.M3LockedTreeSet(java.util.Comparator<? super E>);
+  public int size();
+  public boolean isEmpty();
+  public boolean contains(java.lang.Object);
+  public boolean add(E);
+  public boolean remove(java.lang.Object);
+  public void clear();
+  public java.util.Spliterator<E> spliterator();
+  public java.util.Iterator<E> iterator();
+  public java.util.Iterator<E> descendingIterator();
+  public java.util.Comparator<? super E> comparator();
+  public E first();
+  public E last();
+  public E lower(E);
+  public E floor(E);
+  public E ceiling(E);
+  public E higher(E);
+  public E pollFirst();
+  public E pollLast();
+  public com.m3.collections.M3LockedTreeSet<E> descendingSet();
+  public com.m3.collections.M3LockedTreeSet<E> subSet(E, boolean, E, boolean);
+  public com.m3.collections.M3LockedTreeSet<E> headSet(E, boolean);
+  public com.m3.collections.M3LockedTreeSet<E> tailSet(E, boolean);
+  public com.m3.collections.M3LockedTreeSet<E> subSet(E, E);
+  public com.m3.collections.M3LockedTreeSet<E> headSet(E);
+  public com.m3.collections.M3LockedTreeSet<E> tailSet(E);
+  public java.util.SortedSet tailSet(java.lang.Object);
+  public java.util.SortedSet headSet(java.lang.Object);
+  public java.util.SortedSet subSet(java.lang.Object, java.lang.Object);
+  public java.util.NavigableSet tailSet(java.lang.Object, boolean);
+  public java.util.NavigableSet headSet(java.lang.Object, boolean);
+  public java.util.NavigableSet subSet(java.lang.Object, boolean, java.lang.Object, boolean);
+  public java.util.NavigableSet descendingSet();
+}
+Compiled from "M3LongAddressKernel.java"
+public final class com.m3.collections.M3LongAddressKernel {
+  public static int physicalIndex(int[], int);
+  public static long get(long[], int[], int);
+  public static boolean matches(byte[], int, int, int);
+  public static boolean nativeAvailable();
+  public static long[] gather(long[], int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+  public static void gatherInto(long[], int[], int, int, long[], int, com.m3.collections.M3IndexMaskCompactor$Backend);
+}
+Compiled from "M3LongArena28.java"
+public final class com.m3.collections.M3LongArena28 {
+  public com.m3.collections.M3LongArena28();
+  public int append(long);
+  public int appendAll(long[]);
+  public long get(int);
+  public void set(int, long);
+  public int size();
+  public boolean isEmpty();
+  public int allocatedBlockCount();
+  public long payloadBytes();
+  public long[] copyRange(int, int);
+  public void forEach(java.util.function.LongConsumer);
+}
+Compiled from "M3LongArrayDeque.java"
+public final class com.m3.collections.M3LongArrayDeque implements com.m3.collections.M3LongDeque {
+  public com.m3.collections.M3LongArrayDeque();
+  public com.m3.collections.M3LongArrayDeque(int);
+  public void addFirst(long);
+  public void addLast(long);
+  public boolean offerFirst(long);
+  public boolean offerLast(long);
+  public boolean offer(long);
+  public boolean addLastIf(long, java.util.function.LongPredicate);
+  public long getFirst();
+  public long getLast();
+  public long peek();
+  public long get(int);
+  public long removeFirstLong();
+  public long removeLastLong();
+  public long poll();
+  public boolean contains(long);
+  public boolean removeFirstOccurrence(long);
+  public boolean removeLastOccurrence(long);
+  public int retainByStateMask(byte[], int);
+  public int filterInPlace(java.util.function.LongPredicate);
+  public int size();
+  public int capacity();
+  public void clear();
+  public long[] toArray();
+  public com.m3.collections.M3LongIterator iterator();
+  public com.m3.collections.M3LongIterator descendingIterator();
+}
+Compiled from "M3LongArrayList.java"
+public final class com.m3.collections.M3LongArrayList implements com.m3.collections.M3LongList,com.m3.collections.M3LongStack {
+  public com.m3.collections.M3LongArrayList();
+  public com.m3.collections.M3LongArrayList(int);
+  public static com.m3.collections.M3LongArrayList copyOf(long[]);
+  public boolean add(long);
+  public void add(int, long);
+  public boolean addIf(long, java.util.function.LongPredicate);
+  public boolean addAll(long[]);
+  public long get(int);
+  public long set(int, long);
+  public long removeAt(int);
+  public boolean remove(long);
+  public boolean contains(long);
+  public int indexOf(long);
+  public int lastIndexOf(long);
+  public void sort();
+  public int binarySearch(long);
+  public int deduplicateSorted();
+  public int retainByStateMask(byte[], int);
+  public int filterInPlace(java.util.function.LongPredicate);
+  public void push(long);
+  public long peek();
+  public long pop();
+  public int size();
+  public int capacity();
+  public void ensureCapacity(int);
+  public void trimToSize();
+  public void clear();
+  public long[] toArray();
+  public java.util.Spliterator$OfLong longSpliterator();
+  public com.m3.collections.M3LongIterator iterator();
+}
+Compiled from "M3LongBitmapFilterPlan.java"
+public final class com.m3.collections.M3LongBitmapFilterPlan implements com.m3.collections.M3LongCollection {
+  public static com.m3.collections.M3LongBitmapFilterPlan all(com.m3.collections.M3LongIndexProjection);
+  public static com.m3.collections.M3LongBitmapFilterPlan none(com.m3.collections.M3LongIndexProjection);
+  public static com.m3.collections.M3LongBitmapFilterPlan where(com.m3.collections.M3LongIndexProjection, java.util.function.LongPredicate);
+  public static com.m3.collections.M3LongBitmapFilterPlan fromBits(com.m3.collections.M3LongIndexProjection, java.util.BitSet);
+  public static com.m3.collections.M3LongBitmapFilterPlan fromStates(com.m3.collections.M3LongIndexProjection, byte[], int, int);
+  public com.m3.collections.M3LongBitmapFilterPlan and(com.m3.collections.M3LongBitmapFilterPlan);
+  public com.m3.collections.M3LongBitmapFilterPlan or(com.m3.collections.M3LongBitmapFilterPlan);
+  public com.m3.collections.M3LongBitmapFilterPlan xor(com.m3.collections.M3LongBitmapFilterPlan);
+  public com.m3.collections.M3LongBitmapFilterPlan minus(com.m3.collections.M3LongBitmapFilterPlan);
+  public com.m3.collections.M3LongBitmapFilterPlan not();
+  public com.m3.collections.M3LongBitmapFilterPlan refine(java.util.function.LongPredicate);
+  public boolean includesOrdinal(int);
+  public java.util.BitSet bitsCopy();
+  public com.m3.collections.M3LongIndexProjection projection();
+  public com.m3.collections.M3LongIndexProjection projection(com.m3.collections.M3IndexMaskCompactor$Backend);
+  public com.m3.collections.M3LongIndexProjection sortedAscending();
+  public com.m3.collections.M3LongIndexProjection sortedDescending();
+  public com.m3.collections.M3LongIndexProjection slice(int, int);
+  public long get(int);
+  public int physicalIndex(int);
+  public int size();
+  public boolean isEmpty();
+  public long[] toArray();
+  public boolean contains(long);
+  public void clear();
+  public com.m3.collections.M3LongIterator iterator();
+  public java.util.Spliterator$OfLong longSpliterator();
+}
+Compiled from "M3LongBitmapFilteredSnapshot.java"
+public final class com.m3.collections.M3LongBitmapFilteredSnapshot implements com.m3.collections.M3LongCollection {
+  public static com.m3.collections.M3LongBitmapFilteredSnapshot snapshot(long[], java.util.function.LongPredicate);
+  public static com.m3.collections.M3LongBitmapFilteredSnapshot snapshot(long[], java.util.function.LongPredicate, com.m3.collections.M3IndexMaskCompactor$Backend);
+  public static com.m3.collections.M3LongBitmapFilteredSnapshot fromProjection(com.m3.collections.M3LongIndexProjection, java.util.function.LongPredicate, com.m3.collections.M3IndexMaskCompactor$Backend);
+  public com.m3.collections.M3LongBitmapFilteredSnapshot filtered(java.util.function.LongPredicate);
+  public com.m3.collections.M3LongBitmapFilteredSnapshot filtered(java.util.function.LongPredicate, com.m3.collections.M3IndexMaskCompactor$Backend);
+  public com.m3.collections.M3LongBitmapFilteredSnapshot sortedAscending();
+  public com.m3.collections.M3LongBitmapFilteredSnapshot sortedDescending();
+  public com.m3.collections.M3LongBitmapFilteredSnapshot slice(int, int);
+  public int physicalIndex(int);
+  public long get(int);
+  public boolean includesPhysicalIndex(int);
+  public java.util.BitSet physicalMaskCopy();
+  public int size();
+  public boolean contains(long);
+  public long[] toArray();
+  public void clear();
+  public com.m3.collections.M3LongIterator iterator();
+  public java.util.Spliterator$OfLong longSpliterator();
+}
+Compiled from "M3LongCollection.java"
+public interface com.m3.collections.M3LongCollection {
+  public abstract int size();
+  public abstract boolean contains(long);
+  public abstract void clear();
+  public abstract com.m3.collections.M3LongIterator iterator();
+  public abstract long[] toArray();
+  public default boolean isEmpty();
+  public default void forEachLong(java.util.function.LongConsumer);
+  public default java.util.Spliterator$OfLong longSpliterator();
+  public default java.util.stream.LongStream longStream();
+  public default java.util.stream.LongStream parallelLongStream();
+}
+Compiled from "M3LongCompositeViews.java"
+public final class com.m3.collections.M3LongCompositeViews {
+  public static com.m3.collections.M3LongCollection concat(com.m3.collections.M3LongCollection...);
+  public static com.m3.collections.M3LongSortedSet sortedUnion(com.m3.collections.M3LongSortedSet...);
+  public static com.m3.collections.M3LongSortedSet sortedIntersection(com.m3.collections.M3LongSortedSet, com.m3.collections.M3LongSortedSet);
+  public static com.m3.collections.M3LongSortedSet sortedDifference(com.m3.collections.M3LongSortedSet, com.m3.collections.M3LongSortedSet);
+  public static com.m3.collections.M3LongSortedSet sortedSymmetricDifference(com.m3.collections.M3LongSortedSet, com.m3.collections.M3LongSortedSet);
+}
+Compiled from "M3LongDag.java"
+public final class com.m3.collections.M3LongDag {
+  public static com.m3.collections.M3LongDag from(com.m3.collections.M3LongCollection);
+  public static com.m3.collections.M3LongDag filtered(com.m3.collections.M3LongCollection, java.util.function.LongPredicate);
+  public static com.m3.collections.M3LongDag sortedFiltered(com.m3.collections.M3LongSortedSet, java.util.function.LongPredicate);
+  public com.m3.collections.M3LongDag filter(java.util.function.LongPredicate);
+  public com.m3.collections.M3LongDag map(java.util.function.LongUnaryOperator);
+  public com.m3.collections.M3LongDag skip(long);
+  public com.m3.collections.M3LongDag limit(long);
+  public com.m3.collections.M3LongDag distinctBounded(int);
+  public com.m3.collections.M3LongDag sortedBounded(int);
+  public com.m3.collections.M3LongDag concat(com.m3.collections.M3LongDag);
+  public int nodeCount();
+  public java.util.stream.LongStream stream();
+  public void forEachOrdered(java.util.function.LongConsumer);
+  public long count();
+  public long[] toArrayBounded(int);
+  public java.util.stream.Stream<long[]> batches(int);
+  public <A> com.m3.collections.M3VirtualAccumulator<A> virtualAccumulator(java.util.function.Supplier<? extends A>, java.util.function.ObjLongConsumer<? super A>);
+  public <A, R> com.m3.collections.M3VirtualCollector<A, R> virtualCollector(java.util.function.Supplier<? extends A>, java.util.function.ObjLongConsumer<? super A>, java.util.function.Function<? super A, ? extends R>);
+  public <A, R> R collect(java.util.stream.Collector<java.lang.Long, A, R>);
+}
+Compiled from "M3LongDeque.java"
+public interface com.m3.collections.M3LongDeque extends com.m3.collections.M3LongQueue {
+  public abstract void addFirst(long);
+  public abstract void addLast(long);
+  public abstract boolean offerFirst(long);
+  public abstract boolean offerLast(long);
+  public abstract boolean addLastIf(long, java.util.function.LongPredicate);
+  public abstract long getFirst();
+  public abstract long getLast();
+  public abstract long removeFirstLong();
+  public abstract long removeLastLong();
+  public abstract boolean removeFirstOccurrence(long);
+  public abstract boolean removeLastOccurrence(long);
+  public abstract long get(int);
+  public abstract int filterInPlace(java.util.function.LongPredicate);
+  public abstract com.m3.collections.M3LongIterator descendingIterator();
+  public default long first();
+  public default long last();
+  public default long removeFirst();
+  public default long removeLast();
+}
+Compiled from "M3LongFilteredView.java"
+public final class com.m3.collections.M3LongFilteredView implements com.m3.collections.M3LongCollection {
+  public com.m3.collections.M3LongFilteredView(com.m3.collections.M3LongCollection, java.util.function.LongPredicate);
+  public boolean contains(long);
+  public int size();
+  public boolean isEmpty();
+  public void clear();
+  public void forEachLong(java.util.function.LongConsumer);
+  public long[] toArray();
+  public java.util.Spliterator$OfLong longSpliterator();
+  public com.m3.collections.M3LongIterator iterator();
+}
+Compiled from "M3LongHashSet.java"
+public final class com.m3.collections.M3LongHashSet implements com.m3.collections.M3LongCollection {
+  public com.m3.collections.M3LongHashSet();
+  public com.m3.collections.M3LongHashSet(int);
+  public boolean add(long);
+  public boolean remove(long);
+  public boolean contains(long);
+  public int size();
+  public int capacity();
+  public void clear();
+  public long[] toArray();
+  public com.m3.collections.M3LongIterator iterator();
+}
+Compiled from "M3LongIndexProjection.java"
+public final class com.m3.collections.M3LongIndexProjection {
+  public static com.m3.collections.M3LongIndexProjection snapshot(long[]);
+  public int size();
+  public boolean isEmpty();
+  public com.m3.collections.M3LongIndexProjection$Order order();
+  public int physicalIndex(int);
+  public long get(int);
+  public com.m3.collections.M3LongIndexProjection slice(int, int);
+  public int[] physicalIndices();
+  public long[] toArray();
+  public com.m3.collections.M3LongIndexProjection filtered(byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);
+  public com.m3.collections.M3LongIndexProjection sortedAscending();
+  public com.m3.collections.M3LongIndexProjection sortedDescending();
+}
+Compiled from "M3LongIterator.java"
+public interface com.m3.collections.M3LongIterator {
+  public abstract boolean hasNext();
+  public abstract long nextLong();
+  public default void forEachRemaining(java.util.function.LongConsumer);
+}
+Compiled from "M3LongLane28.java"
+public final class com.m3.collections.M3LongLane28 {
+  public com.m3.collections.M3LongLane28();
+  public long get(int);
+  public void set(int, long);
+  public long getAndSet(int, long);
+  public long addAndGet(int, long);
+  public void clear(int);
+  public boolean isBlockAllocated(int);
+  public int allocatedRegionCount();
+  public int allocatedBlockCount();
+  public long payloadBytes();
+  public void fill(int, int, long);
+  public void copyTo(int, long[], int, int);
+  public void copyFrom(long[], int, int, int);
+  public void copyFrom(com.m3.collections.M3LongLane28, int, int, int);
+}
+Compiled from "M3LongLaneStore28.java"
+public final class com.m3.collections.M3LongLaneStore28 {
+  public com.m3.collections.M3LongLaneStore28(int);
+  public int laneCount();
+  public int size();
+  public boolean isEmpty();
+  public long allocate();
+  public long allocate1(long);
+  public long allocate2(long, long);
+  public long allocate3(long, long, long);
+  public long get(long, int);
+  public void set(long, int, long);
+  public void release(long);
+  public boolean isLive(long);
+  public int highWaterMark();
+  public int allocatedDataBlockCount();
+  public int allocatedAllocatorBlockCount();
+  public long payloadBytes();
+  public void forEachLive(com.m3.collections.M3LongLaneStore28$HandleConsumer);
+  public int copyLiveLane(int, long[], int);
+}
+Compiled from "M3LongLinkedHashSet.java"
+public final class com.m3.collections.M3LongLinkedHashSet implements com.m3.collections.M3LongCollection {
+  public com.m3.collections.M3LongLinkedHashSet();
+  public com.m3.collections.M3LongLinkedHashSet(int);
+  public boolean add(long);
+  public void addLast(long);
+  public void addFirst(long);
+  public boolean remove(long);
+  public long first();
+  public long last();
+  public long removeFirst();
+  public long removeLast();
+  public boolean contains(long);
+  public int size();
+  public int capacity();
+  public long payloadBytes();
+  public void clear();
+  public long[] toArray();
+  public long[] toReversedArray();
+  public com.m3.collections.M3LongIterator iterator();
+}
+Compiled from "M3LongLinkedList28.java"
+public final class com.m3.collections.M3LongLinkedList28 {
+  public static final long NULL_HANDLE;
+  public com.m3.collections.M3LongLinkedList28();
+  public int size();
+  public boolean isEmpty();
+  public long firstHandle();
+  public long lastHandle();
+  public long firstLong();
+  public long lastLong();
+  public long addFirst(long);
+  public long addLast(long);
+  public long insertAfter(long, long);
+  public long insertBefore(long, long);
+  public long value(long);
+  public long set(long, long);
+  public long nextHandle(long);
+  public long previousHandle(long);
+  public boolean isLive(long);
+  public long remove(long);
+  public long removeFirstLong();
+  public long removeLastLong();
+  public void clear();
+  public long[] toArray();
+  public void forEachLong(java.util.function.LongConsumer);
+  public int allocatedDataBlockCount();
+  public long payloadBytes();
+}
+Compiled from "M3LongList.java"
+public interface com.m3.collections.M3LongList extends com.m3.collections.M3LongSequence {
+  public abstract boolean add(long);
+  public abstract void add(int, long);
+  public abstract boolean addIf(long, java.util.function.LongPredicate);
+  public abstract boolean addAll(long[]);
+  public abstract long get(int);
+  public abstract long set(int, long);
+  public abstract long removeAt(int);
+  public abstract boolean remove(long);
+  public abstract int indexOf(long);
+  public abstract int lastIndexOf(long);
+  public abstract int filterInPlace(java.util.function.LongPredicate);
+  public abstract void sort();
+  public abstract int binarySearch(long);
+  public abstract int deduplicateSorted();
+  public abstract int capacity();
+  public abstract void ensureCapacity(int);
+  public abstract void trimToSize();
+  public default void insert(int, long);
+  public default boolean removeValue(long);
+}
+Compiled from "M3LongListSpliterator.java"
+final class com.m3.collections.M3LongListSpliterator implements java.util.Spliterator$OfLong {
+  public java.util.Spliterator$OfLong trySplit();
+  public boolean tryAdvance(java.util.function.LongConsumer);
+  public void forEachRemaining(java.util.function.LongConsumer);
+  public long estimateSize();
+  public int characteristics();
+  public void forEachRemaining(java.lang.Object);
+  public boolean tryAdvance(java.lang.Object);
+  public java.util.Spliterator$OfPrimitive trySplit();
+  public java.util.Spliterator trySplit();
+}
+Compiled from "M3LongLongConsumer.java"
+public interface com.m3.collections.M3LongLongConsumer {
+  public abstract void accept(long, long);
+}
+Compiled from "M3LongLongHashMap.java"
+public final class com.m3.collections.M3LongLongHashMap {
+  public com.m3.collections.M3LongLongHashMap();
+  public com.m3.collections.M3LongLongHashMap(int);
+  public boolean put(long, long);
+  public long getOrDefault(long, long);
+  public boolean containsKey(long);
+  public boolean containsValue(long);
+  public boolean replace(long, long, long);
+  public boolean remove(long);
+  public boolean remove(long, long);
+  public int size();
+  public boolean isEmpty();
+  public int capacity();
+  public void clear();
+  public void forEach(com.m3.collections.M3LongLongConsumer);
+  public com.m3.collections.M3LongIterator keyIterator();
+  public long[] keysToArray();
+}
+Compiled from "M3LongLongLinkedHashMap.java"
+public final class com.m3.collections.M3LongLongLinkedHashMap {
+  public com.m3.collections.M3LongLongLinkedHashMap();
+  public com.m3.collections.M3LongLongLinkedHashMap(int);
+  public boolean put(long, long);
+  public boolean putLast(long, long);
+  public boolean putFirst(long, long);
+  public long getOrDefault(long, long);
+  public boolean containsKey(long);
+  public boolean containsValue(long);
+  public boolean replace(long, long, long);
+  public boolean remove(long);
+  public boolean remove(long, long);
+  public long firstKey();
+  public long lastKey();
+  public long firstValue();
+  public long lastValue();
+  public long removeFirst();
+  public long removeLast();
+  public int size();
+  public boolean isEmpty();
+  public int capacity();
+  public long payloadBytes();
+  public void clear();
+  public void forEach(com.m3.collections.M3LongLongConsumer);
+  public com.m3.collections.M3LongIterator keyIterator();
+  public long[] keysToArray();
+  public long[] valuesToArray();
+  public long[] reversedKeysToArray();
+  public long[] reversedValuesToArray();
+}
+Compiled from "M3LongPredicates.java"
+final class com.m3.collections.M3LongPredicates {
+}
+Compiled from "M3LongPriorityQueue.java"
+public final class com.m3.collections.M3LongPriorityQueue implements com.m3.collections.M3LongCollection {
+  public com.m3.collections.M3LongPriorityQueue();
+  public com.m3.collections.M3LongPriorityQueue(int);
+  public boolean offer(long);
+  public boolean add(long);
+  public long firstLong();
+  public long removeFirstLong();
+  public boolean remove(long);
+  public boolean contains(long);
+  public int size();
+  public int capacity();
+  public void clear();
+  public long[] toArray();
+  public long[] toSortedArray();
+  public com.m3.collections.M3LongIterator iterator();
+}
+Compiled from "M3LongQueue.java"
+public interface com.m3.collections.M3LongQueue extends com.m3.collections.M3LongCollection {
+  public abstract boolean offer(long);
+  public abstract long peek();
+  public abstract long poll();
+  public abstract int capacity();
+  public default boolean tryPoll(long[], int);
+  public default long pollReserved();
+  public default int offerBatch(long[], int, int);
+  public default int drainTo(long[], int, int);
+}
+Compiled from "M3LongRankBatchNative.java"
+public final class com.m3.collections.M3LongRankBatchNative {
+  public static boolean nativeAvailable();
+}
+Compiled from "M3LongRankIndex.java"
+public final class com.m3.collections.M3LongRankIndex {
+  public static com.m3.collections.M3LongRankIndex snapshot(com.m3.collections.M3LongCollection);
+  public static com.m3.collections.M3LongRankIndex snapshotFiltered(com.m3.collections.M3LongCollection, java.util.function.LongPredicate);
+  public static com.m3.collections.M3LongRankIndex snapshotDistinct(com.m3.collections.M3LongCollection);
+  public static com.m3.collections.M3LongRankIndex snapshotFilteredDistinct(com.m3.collections.M3LongCollection, java.util.function.LongPredicate);
+  public static com.m3.collections.M3LongRankIndex copyOf(long[]);
+  public int size();
+  public boolean isEmpty();
+  public boolean isDistinct();
+  public int lowerBound(long);
+  public int upperBound(long);
+  public long select(int);
+  public boolean contains(long);
+  public int count(long);
+  public int rankLessThan(long);
+  public int rankLessOrEqual(long);
+  public int rangeCount(long, long);
+  public int rangeCountInclusive(long, long);
+  public int denseRankDescending(long);
+  public int[] lowerBounds(long[]);
+  public long[] toArray();
+  public java.util.stream.LongStream longStream();
+}
+Compiled from "M3LongSequence.java"
+public interface com.m3.collections.M3LongSequence extends com.m3.collections.M3LongCollection {
+  public abstract boolean add(long);
+  public abstract boolean addIf(long, java.util.function.LongPredicate);
+  public abstract boolean addAll(long[]);
+  public abstract void insert(int, long);
+  public abstract long get(int);
+  public abstract long set(int, long);
+  public abstract long removeAt(int);
+  public abstract boolean removeValue(long);
+  public abstract int indexOf(long);
+  public abstract int lastIndexOf(long);
+  public abstract int filterInPlace(java.util.function.LongPredicate);
+  public abstract int capacity();
+  public abstract void trimToSize();
+}
+Compiled from "M3LongSortedSet.java"
+public interface com.m3.collections.M3LongSortedSet extends com.m3.collections.M3LongCollection {
+  public abstract boolean add(long);
+  public abstract boolean remove(long);
+  public abstract long first();
+  public abstract long last();
+  public abstract long floor(long, long);
+  public abstract long ceiling(long, long);
+  public abstract long lower(long, long);
+  public abstract long higher(long, long);
+  public abstract int filterInPlace(java.util.function.LongPredicate);
+}
+Compiled from "M3LongSortedSnapshot.java"
+public final class com.m3.collections.M3LongSortedSnapshot implements com.m3.collections.M3LongSortedSet {
+  public static com.m3.collections.M3LongSortedSnapshot copyOf(com.m3.collections.M3LongSortedSet);
+  public static com.m3.collections.M3LongSortedSnapshot filtered(com.m3.collections.M3LongSortedSet, java.util.function.LongPredicate);
+  public static com.m3.collections.M3LongSortedSnapshot fromSorted(long[]);
+  public static com.m3.collections.M3LongSortedSnapshot fromAlignedMask(long[], byte[], int);
+  public int size();
+  public boolean isEmpty();
+  public int rank(long);
+  public long select(int);
+  public int indexOf(long);
+  public int countRange(long, long);
+  public com.m3.collections.M3LongSortedSnapshot subSet(long, long);
+  public com.m3.collections.M3LongSortedSnapshot headSet(long);
+  public com.m3.collections.M3LongSortedSnapshot tailSet(long);
+  public long retainedPrimitiveBytes();
+  public boolean contains(long);
+  public long[] toArray();
+  public com.m3.collections.M3LongIterator iterator();
+  public java.util.Spliterator$OfLong longSpliterator();
+  public long first();
+  public long last();
+  public long lower(long, long);
+  public long floor(long, long);
+  public long ceiling(long, long);
+  public long higher(long, long);
+  public boolean add(long);
+  public boolean remove(long);
+  public int filterInPlace(java.util.function.LongPredicate);
+  public void clear();
+}
+Compiled from "M3LongSortedViews.java"
+public final class com.m3.collections.M3LongSortedViews {
+  public static com.m3.collections.M3LongFilteredView filter(com.m3.collections.M3LongCollection, java.util.function.LongPredicate);
+  public static com.m3.collections.M3LongSortedSet filter(com.m3.collections.M3LongSortedSet, java.util.function.LongPredicate);
+  public static com.m3.collections.M3LongSortedSet subSet(com.m3.collections.M3LongSortedSet, long, long);
+  public static com.m3.collections.M3LongSortedSet headSet(com.m3.collections.M3LongSortedSet, long);
+  public static com.m3.collections.M3LongSortedSet tailSet(com.m3.collections.M3LongSortedSet, long);
+  public static com.m3.collections.M3LongSortedSet unmodifiable(com.m3.collections.M3LongSortedSet);
+}
+Compiled from "M3LongStack.java"
+public interface com.m3.collections.M3LongStack extends com.m3.collections.M3LongCollection {
+  public abstract void push(long);
+  public abstract long peek();
+  public abstract long pop();
+}
+Compiled from "M3LongTreeSet.java"
+public final class com.m3.collections.M3LongTreeSet implements com.m3.collections.M3LongSortedSet {
+  public static final int DEFAULT_PAGE_CAPACITY;
+  public com.m3.collections.M3LongTreeSet();
+  public com.m3.collections.M3LongTreeSet(int);
+  public com.m3.collections.M3LongTreeSet(int, int);
+  public boolean add(long);
+  public boolean remove(long);
+  public boolean contains(long);
+  public long first();
+  public long last();
+  public long floor(long, long);
+  public long ceiling(long, long);
+  public long lower(long, long);
+  public long higher(long, long);
+  public int filterInPlace(java.util.function.LongPredicate);
+  public int size();
+  public int capacity();
+  public int pageCount();
+  public int pageCapacity();
+  public long payloadBytes();
+  public void trimToSize();
+  public void clear();
+  public long[] toArray();
+  public com.m3.collections.M3LongIterator iterator();
+  public java.util.Spliterator$OfLong longSpliterator();
+}
+Compiled from "M3MutableFilteredViews.java"
+public final class com.m3.collections.M3MutableFilteredViews {
+  public static <E> java.util.NavigableSet<E> filter(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+  public static <K, V> java.util.NavigableMap<K, V> filterEntries(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+}
+Compiled from "M3ObjectIdentityMap.java"
+public final class com.m3.collections.M3ObjectIdentityMap<K, V> {
+  public com.m3.collections.M3ObjectIdentityMap();
+  public com.m3.collections.M3ObjectIdentityMap(int);
+  public int size();
+  public boolean isEmpty();
+  public int capacity();
+  public int referenceSlots();
+  public boolean containsKey(java.lang.Object);
+  public boolean containsValue(java.lang.Object);
+  public V get(java.lang.Object);
+  public V getOrDefault(java.lang.Object, V);
+  public V put(K, V);
+  public V putIfAbsent(K, V);
+  public V remove(java.lang.Object);
+  public boolean remove(java.lang.Object, java.lang.Object);
+  public void clear();
+  public void forEach(java.util.function.BiConsumer<? super K, ? super V>);
+  public java.lang.Object[] keysToArray();
+}
+Compiled from "M3ObjectIdentitySet.java"
+public final class com.m3.collections.M3ObjectIdentitySet<E> {
+  public com.m3.collections.M3ObjectIdentitySet();
+  public com.m3.collections.M3ObjectIdentitySet(int);
+  public int size();
+  public boolean isEmpty();
+  public int capacity();
+  public int referenceSlots();
+  public boolean contains(java.lang.Object);
+  public boolean add(E);
+  public boolean remove(java.lang.Object);
+  public void clear();
+  public void forEach(java.util.function.Consumer<? super E>);
+  public java.lang.Object[] toArray();
+}
+Compiled from "M3ObjectIndexSnapshot.java"
+public final class com.m3.collections.M3ObjectIndexSnapshot<E> extends java.util.AbstractList<E> implements java.util.RandomAccess {
+  public com.m3.collections.M3ObjectIndexSnapshot$Order order();
+  public int size();
+  public E get(int);
+  public int physicalSlotAt(int);
+  public int stateAt(int);
+  public int[] physicalSlots();
+  public byte[] stateBytes();
+  public com.m3.collections.M3ObjectIndexSnapshot<E> filteredByState(int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+  public com.m3.collections.M3ObjectIndexSnapshot<E> filteredByState(int, int);
+  public com.m3.collections.M3ObjectIndexSnapshot<E> filtered(java.util.function.Predicate<? super E>);
+  public com.m3.collections.M3ObjectIndexSnapshot<E> sorted(java.util.Comparator<? super E>);
+  public com.m3.collections.M3ObjectIndexSnapshot<E> sortedBySignal(java.util.function.ToDoubleFunction<? super E>, boolean, com.m3.collections.M3SignalOrder$Backend);
+  public com.m3.collections.M3ObjectIndexSnapshot<E> sortedBySignal(java.util.function.ToDoubleFunction<? super E>, boolean);
+  public com.m3.collections.M3ObjectIndexSnapshot<E> subList(int, int);
+  public long retainedPrimitiveBytes();
+  public int retainedReferenceSlots();
+  public java.util.List subList(int, int);
+}
+Compiled from "M3ObjectResidency.java"
+public final class com.m3.collections.M3ObjectResidency<T> {
+  public static final int LAZY_CREATE;
+  public static final int LRU;
+  public static final int PRESSURE_AWARE;
+  public static final int SWAP_SECONDARY;
+  public static final int RECREATE;
+  public static final int OBSERVE_ONLY;
+  public static final int STRICT_NO_ESCAPE;
+  public static final int PIN_EXPOSED;
+  public static final int ALL_FLAGS;
+  public com.m3.collections.M3ObjectResidency(int, int, long, long, com.m3.collections.M3ObjectResidency$Factory<? extends T>, com.m3.collections.M3ObjectResidency$Codec<T>, com.m3.collections.M3ObjectResidency$SpillStore);
+  public int slots();
+  public synchronized long readParentBits(int);
+  public synchronized void writeParentBits(int, long);
+  public synchronized long updateParentBits(int, java.util.function.LongUnaryOperator);
+  public synchronized long residentBytes();
+  public synchronized com.m3.collections.M3ObjectResidency$State state(int);
+  public synchronized com.m3.collections.M3ObjectResidency$Decision lastDecision();
+  public synchronized <R> R use(int, long, java.util.function.Function<? super T, ? extends R>);
+  public synchronized long retainProjection(int, long);
+  public synchronized int projectionBorrowCount(int);
+  public synchronized void releaseProjection(long);
+  public synchronized <R> R useProjection(long, java.util.function.Function<? super T, ? extends R>);
+  public synchronized boolean retireUnborrowedProjection(int);
+  public synchronized void install(int, T, long);
+  public synchronized void signalMemoryPressure();
+}
+Compiled from "M3ObjectSlotStore28.java"
+public final class com.m3.collections.M3ObjectSlotStore28<E> {
+  public com.m3.collections.M3ObjectSlotStore28();
+  public long add(E);
+  public long add(E, int);
+  public E get(long);
+  public E set(long, E);
+  public E remove(long);
+  public boolean isLive(long);
+  public int size();
+  public boolean isEmpty();
+  public long revision();
+  public int state(long);
+  public int setState(long, int);
+  public int updateState(long, int, int);
+  public com.m3.collections.M3ObjectIndexSnapshot<E> snapshot();
+  public com.m3.collections.M3ObjectIndexSnapshot<E> snapshotByState(int, int);
+  public long allocatedPayloadReferenceSlots();
+  public int allocatedPayloadBlocks();
+  public int allocatedPayloadRegions();
+  public long handlePlaneBytes();
+  public long statePlaneBytes();
+}
+Compiled from "M3ObjectStateBatch28.java"
+public final class com.m3.collections.M3ObjectStateBatch28 {
+  public static int update(com.m3.collections.M3ObjectStateSlots28, long[], int, int, int, int);
+  public static int updateMatching(com.m3.collections.M3ObjectStateSlots28, long[], int, int, int, int, int, int);
+  public static int countMatching(com.m3.collections.M3ObjectStateSlots28, long[], int, int, int, int);
+  public static int firstMatchingIndex(com.m3.collections.M3ObjectStateSlots28, long[], int, int, int, int);
+}
+Compiled from "M3ObjectStateSlots28.java"
+public final class com.m3.collections.M3ObjectStateSlots28 {
+  public static final int VISIBLE;
+  public static final int DIRTY;
+  public static final int DEFERRED;
+  public static final int INDEXED;
+  public static final int PIN_REQUEST;
+  public static final int USER_0;
+  public static final int USER_1;
+  public static final int USER_2;
+  public com.m3.collections.M3ObjectStateSlots28();
+  public long allocate();
+  public long allocate(int);
+  public void release(long);
+  public boolean isLive(long);
+  public int size();
+  public int highWaterMark();
+  public int freeSlotCount();
+  public int state(long);
+  public int stateBitCount(long);
+  public int setState(long, int);
+  public int update(long, int, int);
+  public int nextMatchingSlot(int, int, int);
+  public int countMatching(int, int, int, int);
+  public int compactHandles(long[], int, int, int, int);
+  public long[] snapshotHandles(long[], int, int, int, int);
+  public void exportStates(long[], int, int, byte[], int);
+  public int[] matchingPositions(long[], int, int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+  public int updateHandles(long[], int, int, int, int);
+  public long statePayloadBytes();
+  public int allocatedStateBlocks();
+  public int allocatedStateRegions();
+  public long allocatorPayloadBytes();
+}
+Compiled from "M3OrderedSlotMap.java"
+abstract class com.m3.collections.M3OrderedSlotMap<K, V> extends com.m3.collections.M3SlotMap<K, V> implements java.util.SequencedMap<K, V> {
+  public abstract com.m3.collections.M3OrderedSlotMap<K, V> reversed();
+  public java.util.SequencedSet<K> keySet();
+  public java.util.SequencedSet<java.util.Map$Entry<K, V>> entrySet();
+  public java.util.SequencedCollection<V> values();
+  public java.util.SequencedSet<K> sequencedKeySet();
+  public java.util.SequencedCollection<V> sequencedValues();
+  public java.util.SequencedSet<java.util.Map$Entry<K, V>> sequencedEntrySet();
+  public java.util.Set entrySet();
+  public java.util.Collection values();
+  public java.util.Set keySet();
+  public java.util.SequencedMap reversed();
+}
+Compiled from "M3Progress.java"
+public class com.m3.collections.M3Progress implements com.m3.collections.M3ProgressMonitor {
+  public static final com.m3.collections.M3Progress NULL;
+  public static com.m3.collections.M3Progress of(int);
+  public static com.m3.collections.M3Progress of(int, java.util.function.Consumer<com.m3.collections.M3Progress>);
+  public void beginTask(java.lang.String, int);
+  public void beginTask(java.lang.String, long);
+  public void subTask(java.lang.String);
+  public void worked(int);
+  public void worked(long);
+  public void setProgress(long, long);
+  public void setTaskName(java.lang.String);
+  public com.m3.collections.M3Progress split(int);
+  public com.m3.collections.M3Progress split(long);
+  public void done();
+  public synchronized void cancel();
+  public synchronized boolean isCanceled();
+  public synchronized void setCanceled(boolean);
+  public synchronized boolean isDone();
+  public synchronized int getPercentComplete();
+  public synchronized int getTotalWork();
+  public synchronized int getWorkedSoFar();
+  public synchronized java.lang.String getTaskName();
+  public synchronized java.lang.String getSubTaskName();
+  public synchronized com.m3.collections.M3Progress$Snapshot snapshot();
+  public synchronized com.m3.collections.M3ProgressState state();
+  public java.lang.String toString();
+  public com.m3.collections.M3ProgressMonitor split(long);
+}
+Compiled from "M3ProgressAdapters.java"
+public final class com.m3.collections.M3ProgressAdapters {
+  public static com.m3.collections.M3Progress asLegacy(com.m3.collections.M3ProgressMonitor);
+}
+Compiled from "M3ProgressMonitor.java"
+public interface com.m3.collections.M3ProgressMonitor {
+  public static final long UNKNOWN;
+  public abstract void beginTask(java.lang.String, long);
+  public abstract void done();
+  public abstract void worked(long);
+  public abstract void setProgress(long, long);
+  public abstract void setTaskName(java.lang.String);
+  public abstract void subTask(java.lang.String);
+  public abstract boolean isCanceled();
+  public abstract void setCanceled(boolean);
+  public abstract com.m3.collections.M3ProgressState state();
+  public default void checkCanceled();
+  public default com.m3.collections.M3ProgressMonitor split(long);
+}
+Compiled from "M3ProgressScope.java"
+public final class com.m3.collections.M3ProgressScope implements java.lang.AutoCloseable {
+  public static com.m3.collections.M3ProgressScope resolve(com.m3.collections.M3Progress, long);
+  public com.m3.collections.M3Progress monitor();
+  public boolean owned();
+  public void close();
+}
+Compiled from "M3ProgressState.java"
+public final class com.m3.collections.M3ProgressState extends java.lang.Record {
+  public com.m3.collections.M3ProgressState(java.lang.String, java.lang.String, long, long, boolean, boolean, long, long);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.lang.String taskName();
+  public java.lang.String subTaskName();
+  public long worked();
+  public long totalWork();
+  public boolean canceled();
+  public boolean done();
+  public long generation();
+  public long startedAtMs();
+}
+Compiled from "M3Residency.java"
+public interface com.m3.collections.M3Residency extends java.lang.annotation.Annotation {
+  public abstract int flags();
+  public abstract long estimatedBytes();
+  public abstract java.lang.String parent();
+  public abstract com.m3.collections.M3Residency$Strategy strategy();
+}
+Compiled from "M3ResidencyStateMaskIndex.java"
+public final class com.m3.collections.M3ResidencyStateMaskIndex {
+  public static boolean nativeAvailable();
+  public static int states(com.m3.collections.M3ObjectResidency$State...);
+  public static int[] select(com.m3.collections.M3ObjectResidency<?>, int[], int, int, int, long, long, int, com.m3.collections.M3ResidencyStateMaskIndex$Backend);
+  public static int selectInto(com.m3.collections.M3ObjectResidency<?>, int[], int, int, int, long, long, int, int[], int);
+  public static int count(com.m3.collections.M3ObjectResidency<?>, int[], int, int, int, long, long, int);
+  public static int first(com.m3.collections.M3ObjectResidency<?>, int[], int, int, int, long, long, int);
+}
+Compiled from "M3SignalOrder.java"
+public final class com.m3.collections.M3SignalOrder {
+  public static com.m3.collections.M3SignalOrder ascending(double[]);
+  public static com.m3.collections.M3SignalOrder descending(double[]);
+  public static com.m3.collections.M3SignalOrder filtered(double[], byte[], int, int, boolean, com.m3.collections.M3SignalOrder$Backend);
+  public static <T> com.m3.collections.M3SignalOrder ascending(T[], java.util.function.ToDoubleFunction<? super T>);
+  public static <T> com.m3.collections.M3SignalOrder descending(T[], java.util.function.ToDoubleFunction<? super T>);
+  public static double numericSeparation(double, double);
+  public static int compare(double, double);
+  public int size();
+  public boolean isEmpty();
+  public int rowAt(int);
+  public int[] rows();
+  public com.m3.collections.M3SignalOrder slice(int, int);
+  public long retainedPrimitiveBytes();
+}
+Compiled from "M3SignalOrderNative.java"
+public final class com.m3.collections.M3SignalOrderNative {
+  public static boolean available();
+}
+Compiled from "M3SlotAllocator28.java"
+public final class com.m3.collections.M3SlotAllocator28 {
+  public com.m3.collections.M3SlotAllocator28();
+  public long allocate();
+  public void release(long);
+  public boolean isLive(long);
+  public int requireLiveSlot(long);
+  public int size();
+  public boolean isEmpty();
+  public int highWaterMark();
+  public int freeSlotCount();
+  public int generationAtSlot(int);
+  public boolean isSlotLive(int);
+  public int nextLiveSlot(int);
+  public long handleForLiveSlot(int);
+  public long payloadBytes();
+  public int allocatedBlockCount();
+  public static int slot(long);
+  public static int generation(long);
+  public static long handle(int, int);
+}
+Compiled from "M3SlotArrays.java"
+final class com.m3.collections.M3SlotArrays {
+}
+Compiled from "M3SlotMap.java"
+abstract class com.m3.collections.M3SlotMap<K, V> extends java.util.AbstractMap<K, V> {
+  public boolean containsKey(java.lang.Object);
+  public V get(java.lang.Object);
+  public V getOrDefault(java.lang.Object, V);
+  public boolean containsValue(java.lang.Object);
+  public V remove(java.lang.Object);
+  public boolean remove(java.lang.Object, java.lang.Object);
+  public void putAll(java.util.Map<? extends K, ? extends V>);
+  public V putIfAbsent(K, V);
+  public V replace(K, V);
+  public boolean replace(K, V, V);
+  public V computeIfAbsent(K, java.util.function.Function<? super K, ? extends V>);
+  public V computeIfPresent(K, java.util.function.BiFunction<? super K, ? super V, ? extends V>);
+  public V compute(K, java.util.function.BiFunction<? super K, ? super V, ? extends V>);
+  public V merge(K, V, java.util.function.BiFunction<? super V, ? super V, ? extends V>);
+  public void forEach(java.util.function.BiConsumer<? super K, ? super V>);
+  public void replaceAll(java.util.function.BiFunction<? super K, ? super V, ? extends V>);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public java.util.Set<K> keySet();
+  public java.util.Collection<V> values();
+  public java.util.Set<java.util.Map$Entry<K, V>> entrySet();
+}
+Compiled from "M3SlotSpliterators.java"
+final class com.m3.collections.M3SlotSpliterators {
+}
+Compiled from "M3SpanIndex.java"
+public final class com.m3.collections.M3SpanIndex {
+  public com.m3.collections.M3SpanIndex();
+  public int add(int, long, int);
+  public void set(int, int, long, int);
+  public void removeAt(int);
+  public void clear();
+  public int size();
+  public int startAt(int);
+  public long endAt(int);
+  public int stateAt(int);
+  public com.m3.collections.M3SpanIndex$Snapshot snapshot(int, int);
+  public static boolean nativeAvailable();
+}
+Compiled from "M3StateMaskArrays.java"
+public final class com.m3.collections.M3StateMaskArrays {
+  public static boolean matches(byte, int, int);
+  public static int update(byte[], int, int, int);
+  public static int compactWindow(int[], byte[], int, int, int, int);
+  public static void rotateWindow(int[], byte[], int, int, int);
+  public static int[] select(int[], byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);
+}
+Compiled from "M3SystemProgress.java"
+public final class com.m3.collections.M3SystemProgress {
+  public static com.m3.collections.M3ProgressMonitor get();
+  public static com.m3.collections.M3ProgressMonitor split(long);
+  public static com.m3.collections.M3ProgressMonitor resolve(com.m3.collections.M3ProgressMonitor, long);
+}
+Compiled from "M3TransferQueue.java"
+public final class com.m3.collections.M3TransferQueue<E> extends java.util.AbstractQueue<E> implements java.util.concurrent.TransferQueue<E> {
+  public com.m3.collections.M3TransferQueue();
+  public com.m3.collections.M3TransferQueue(boolean, boolean);
+  public boolean offer(E);
+  public void put(E) throws java.lang.InterruptedException;
+  public boolean offer(E, long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException;
+  public void transfer(E) throws java.lang.InterruptedException;
+  public boolean tryTransfer(E);
+  public boolean tryTransfer(E, long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException;
+  public E poll();
+  public E take() throws java.lang.InterruptedException;
+  public E poll(long, java.util.concurrent.TimeUnit) throws java.lang.InterruptedException;
+  public E peek();
+  public int size();
+  public int remainingCapacity();
+  public boolean hasWaitingConsumer();
+  public int getWaitingConsumerCount();
+  public boolean contains(java.lang.Object);
+  public boolean remove(java.lang.Object);
+  public void clear();
+  public int drainTo(java.util.Collection<? super E>);
+  public int drainTo(java.util.Collection<? super E>, int);
+  public java.util.Spliterator<E> spliterator();
+  public java.util.Iterator<E> iterator();
+  public void verifyInvariants();
+}
+Compiled from "M3TreeMap.java"
+public final class com.m3.collections.M3TreeMap<K, V> extends com.m3.collections.M3OrderedSlotMap<K, V> implements java.util.NavigableMap<K, V> {
+  public com.m3.collections.M3TreeMap();
+  public com.m3.collections.M3TreeMap(java.util.Comparator<? super K>);
+  public com.m3.collections.M3TreeMap(java.util.Comparator<? super K>, com.m3.collections.M3LazyValueProvider<? super K, ? extends V>);
+  public int size();
+  public boolean isEmpty();
+  public V put(K, V);
+  public void clear();
+  public boolean defer(K);
+  public short valueFlags(java.lang.Object);
+  public boolean isValueLoaded(java.lang.Object);
+  public V touch(java.lang.Object);
+  public V touch(java.lang.Object, com.m3.collections.M3Progress);
+  public V touch(java.lang.Object, com.m3.collections.M3LazyEventPolicy, com.m3.collections.M3Progress);
+  public void preload();
+  public void preload(com.m3.collections.M3Progress);
+  public void preload(com.m3.collections.M3LazyEventPolicy, com.m3.collections.M3Progress);
+  public java.util.Comparator<? super K> comparator();
+  public K firstKey();
+  public K lastKey();
+  public java.util.Map$Entry<K, V> firstEntry();
+  public java.util.Map$Entry<K, V> lastEntry();
+  public java.util.Map$Entry<K, V> lowerEntry(K);
+  public java.util.Map$Entry<K, V> floorEntry(K);
+  public java.util.Map$Entry<K, V> ceilingEntry(K);
+  public java.util.Map$Entry<K, V> higherEntry(K);
+  public K lowerKey(K);
+  public K floorKey(K);
+  public K ceilingKey(K);
+  public K higherKey(K);
+  public java.util.Map$Entry<K, V> pollFirstEntry();
+  public java.util.Map$Entry<K, V> pollLastEntry();
+  public com.m3.collections.M3TreeMap<K, V> reversed();
+  public com.m3.collections.M3TreeMap<K, V> descendingMap();
+  public java.util.NavigableSet<K> sequencedKeySet();
+  public java.util.NavigableSet<K> navigableKeySet();
+  public java.util.NavigableSet<K> keySet();
+  public java.util.NavigableSet<K> descendingKeySet();
+  public com.m3.collections.M3TreeMap<K, V> subMap(K, boolean, K, boolean);
+  public com.m3.collections.M3TreeMap<K, V> headMap(K, boolean);
+  public com.m3.collections.M3TreeMap<K, V> tailMap(K, boolean);
+  public java.util.SortedMap<K, V> subMap(K, K);
+  public java.util.SortedMap<K, V> headMap(K);
+  public java.util.SortedMap<K, V> tailMap(K);
+  public void verifyInvariants();
+  public java.util.SequencedSet sequencedEntrySet();
+  public java.util.SequencedCollection sequencedValues();
+  public java.util.SequencedSet sequencedKeySet();
+  public java.util.SequencedCollection values();
+  public java.util.SequencedSet entrySet();
+  public java.util.SequencedSet keySet();
+  public com.m3.collections.M3OrderedSlotMap reversed();
+  public java.util.SequencedMap reversed();
+  public java.util.Set keySet();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public void replaceAll(java.util.function.BiFunction);
+  public void forEach(java.util.function.BiConsumer);
+  public java.lang.Object merge(java.lang.Object, java.lang.Object, java.util.function.BiFunction);
+  public java.lang.Object compute(java.lang.Object, java.util.function.BiFunction);
+  public java.lang.Object computeIfPresent(java.lang.Object, java.util.function.BiFunction);
+  public java.lang.Object computeIfAbsent(java.lang.Object, java.util.function.Function);
+  public boolean replace(java.lang.Object, java.lang.Object, java.lang.Object);
+  public java.lang.Object replace(java.lang.Object, java.lang.Object);
+  public java.lang.Object putIfAbsent(java.lang.Object, java.lang.Object);
+  public void putAll(java.util.Map);
+  public boolean remove(java.lang.Object, java.lang.Object);
+  public java.lang.Object remove(java.lang.Object);
+  public boolean containsValue(java.lang.Object);
+  public java.lang.Object getOrDefault(java.lang.Object, java.lang.Object);
+  public java.lang.Object get(java.lang.Object);
+  public boolean containsKey(java.lang.Object);
+  public java.util.NavigableMap reversed();
+  public java.util.NavigableMap tailMap(java.lang.Object, boolean);
+  public java.util.NavigableMap headMap(java.lang.Object, boolean);
+  public java.util.NavigableMap subMap(java.lang.Object, boolean, java.lang.Object, boolean);
+  public java.util.NavigableMap descendingMap();
+  public java.util.SortedMap reversed();
+}
+Compiled from "M3TreeSet.java"
+public final class com.m3.collections.M3TreeSet<E> extends java.util.AbstractSet<E> implements java.util.NavigableSet<E> {
+  public com.m3.collections.M3TreeSet();
+  public com.m3.collections.M3TreeSet(java.util.Comparator<? super E>);
+  public int size();
+  public boolean isEmpty();
+  public boolean contains(java.lang.Object);
+  public boolean add(E);
+  public boolean remove(java.lang.Object);
+  public void clear();
+  public java.util.Spliterator<E> spliterator();
+  public java.util.Iterator<E> iterator();
+  public java.util.Iterator<E> descendingIterator();
+  public java.util.Comparator<? super E> comparator();
+  public E first();
+  public E last();
+  public E lower(E);
+  public E floor(E);
+  public E ceiling(E);
+  public E higher(E);
+  public E pollFirst();
+  public E pollLast();
+  public com.m3.collections.M3TreeSet<E> descendingSet();
+  public com.m3.collections.M3TreeSet<E> subSet(E, boolean, E, boolean);
+  public com.m3.collections.M3TreeSet<E> headSet(E, boolean);
+  public com.m3.collections.M3TreeSet<E> tailSet(E, boolean);
+  public java.util.SortedSet<E> subSet(E, E);
+  public java.util.SortedSet<E> headSet(E);
+  public java.util.SortedSet<E> tailSet(E);
+  public void verifyInvariants();
+  public java.util.NavigableSet tailSet(java.lang.Object, boolean);
+  public java.util.NavigableSet headSet(java.lang.Object, boolean);
+  public java.util.NavigableSet subSet(java.lang.Object, boolean, java.lang.Object, boolean);
+  public java.util.NavigableSet descendingSet();
+}
+Compiled from "M3VirtualAccumulator.java"
+public final class com.m3.collections.M3VirtualAccumulator<A> {
+  public A evaluate();
+  public <R> com.m3.collections.M3VirtualCollector<A, R> finish(java.util.function.Function<? super A, ? extends R>);
+}
+Compiled from "M3VirtualCollector.java"
+public final class com.m3.collections.M3VirtualCollector<A, R> {
+  public R evaluate();
+  public <U> com.m3.collections.M3VirtualCollector<A, U> mapResult(java.util.function.Function<? super R, ? extends U>);
+  public <B, S, U> com.m3.collections.M3VirtualCollector<com.m3.collections.M3VirtualCollector$Pair<A, B>, U> tee(com.m3.collections.M3VirtualCollector<B, S>, java.util.function.BiFunction<? super R, ? super S, ? extends U>);
+}
+Compiled from "M3WeakHashMap.java"
+public final class com.m3.collections.M3WeakHashMap<K, V> extends com.m3.collections.M3SlotMap<K, V> {
+  public com.m3.collections.M3WeakHashMap();
+  public int size();
+  public V put(K, V);
+  public void clear();
+  public void expungeStaleKeys();
+  public java.util.Set entrySet();
+  public java.util.Collection values();
+  public java.util.Set keySet();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public void replaceAll(java.util.function.BiFunction);
+  public void forEach(java.util.function.BiConsumer);
+  public java.lang.Object merge(java.lang.Object, java.lang.Object, java.util.function.BiFunction);
+  public java.lang.Object compute(java.lang.Object, java.util.function.BiFunction);
+  public java.lang.Object computeIfPresent(java.lang.Object, java.util.function.BiFunction);
+  public java.lang.Object computeIfAbsent(java.lang.Object, java.util.function.Function);
+  public boolean replace(java.lang.Object, java.lang.Object, java.lang.Object);
+  public java.lang.Object replace(java.lang.Object, java.lang.Object);
+  public java.lang.Object putIfAbsent(java.lang.Object, java.lang.Object);
+  public void putAll(java.util.Map);
+  public boolean remove(java.lang.Object, java.lang.Object);
+  public java.lang.Object remove(java.lang.Object);
+  public boolean containsValue(java.lang.Object);
+  public java.lang.Object getOrDefault(java.lang.Object, java.lang.Object);
+  public java.lang.Object get(java.lang.Object);
+  public boolean containsKey(java.lang.Object);
+}

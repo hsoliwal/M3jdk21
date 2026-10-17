@@ -1,0 +1,30 @@
+{
+  "argv": [
+    "/tmp/m3-ast-product-build/images/jdk/bin/java",
+    "-Xms32m",
+    "-Xmx192m",
+    "-Xss256k",
+    "-XX:+UseSerialGC",
+    "-XX:NativeMemoryTracking=summary",
+    "-XX:+UnlockDiagnosticVMOptions",
+    "-XX:+PrintNMTStatistics",
+    "--add-opens",
+    "java.base/java.util=ALL-UNNAMED",
+    "--add-opens",
+    "java.base/java.util.function=ALL-UNNAMED",
+    "-cp",
+    "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/probe-classes:/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-classes",
+    "com.m3.collections.qualification.M3FilteredViewResourceProbe",
+    "list",
+    "64",
+    "16"
+  ],
+  "exit_code": 0,
+  "rusage": {
+    "user_seconds": 0.330167,
+    "system_seconds": 0.035934,
+    "max_rss_kib": 45684,
+    "minor_faults": 7264,
+    "major_faults": 2
+  }
+}

@@ -1,0 +1,3 @@
+# OpenRewrite SDK Results; no template-copy materialization
+m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java	02893ff5d555ef577789ca82fdbbe043172219ae59202d10a51f2fa1337d9152	907fc4c4bf9003e9edb481afeba4a7cfe3fe4e6e520e7f34e8e5fb2a861e56d5
+m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java	76da13c95905f3a41b0e95acd89ff68e9ae12b665fec8fe804a5af37235a9641	08ea68e5ec274e0229f2a91d91a00b9aa66004e73b474ea67b602c63234d8167

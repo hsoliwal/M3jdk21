@@ -1,0 +1,617 @@
+{
+  "schema": "M3_COLLECTIONS_FINAL_OWNING_MODULE_V2",
+  "mode": "java",
+  "status": "PASS",
+  "receiving_root": "/workspace/scratch/13309be96b09/collections-work/received",
+  "accepted_run_root": "/tmp/m3-collections-final-java-958zv36l",
+  "evidence_root": "/tmp/m3-collections-final-java-958zv36l/evidence",
+  "build_root": "/tmp/m3-collections-final-java-958zv36l/module",
+  "command": {
+    "command": [
+      "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+      "-B",
+      "-ntp",
+      "-o",
+      "-Dmaven.repo.local=/tmp/m3-maven-repository",
+      "-DfailIfNoTests=true",
+      "-DargLine=-Xmx768m -Xcheck:jni -Xlog:class+load=info:file=/tmp/m3-collections-final-java-958zv36l/evidence/class-load.log -Djava.library.path=/tmp/m3-collections-final-java-958zv36l/absent-libraries -Dm3.collections.signal.native=false -Dm3.collections.rank.native=false",
+      "-f",
+      "/tmp/m3-collections-final-java-958zv36l/module/pom.xml",
+      "clean",
+      "verify"
+    ],
+    "JAVA_HOME": "/tmp/m3-ast-product-build/images/jdk",
+    "MAVEN_OPTS": "-Xmx768m",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+    "mode": "java",
+    "source_tree_sha256": "e3b6d1426892baff4024828c1e0a527bf164e25b46d1fa317780b5abfdeb3ef1",
+    "source_files": 249,
+    "original_pom_unchanged": true,
+    "qualified_postimages_verified": 16,
+    "build_root": "/tmp/m3-collections-final-java-958zv36l/module",
+    "source_transport_only": true,
+    "exit_code": 0,
+    "elapsed_seconds": 38.071,
+    "stable_source_monitor_polls": 35,
+    "source_stable": true,
+    "class_outputs_stable_after_test_entry": true,
+    "source_tree_after_sha256": "e3b6d1426892baff4024828c1e0a527bf164e25b46d1fa317780b5abfdeb3ef1"
+  },
+  "source_tree_sha256": "e3b6d1426892baff4024828c1e0a527bf164e25b46d1fa317780b5abfdeb3ef1",
+  "qualified_postimages_verified": 16,
+  "source_files": 249,
+  "runtime_release_sha256": "5a3d73c8957e7fcb0da466afc0be260adeaddbf8bb04ad82ebb562710c2989de",
+  "runtime_modules_sha256": "e7a2827ebfcb2f1fb474db3a8e4e4bc058ffe5f5dea5f9701803669101b28b8b",
+  "test_totals": {
+    "tests": 214,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "name": "com.m3.collections.M3AdaptiveEnumLongMapTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3AdaptiveEnumLongMapTest.xml",
+      "sha256": "b5f95dce538faf53fc276467da57d81fc1fd1ddd7c749ed1a1518724f97a7a25"
+    },
+    {
+      "name": "com.m3.collections.M3BitLane28FenwickTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3BitLane28FenwickTest.xml",
+      "sha256": "38fd3a9741cf37969e6e28fa1ae08e7a5d32afc30d04b3a4ff5f87daca03bc2e"
+    },
+    {
+      "name": "com.m3.collections.M3ConcurrentContractTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ConcurrentContractTest.xml",
+      "sha256": "f4cfe3abc0a35641f95f329e5d219723ccaa52f97a738ce9d858762ea2f06a9a"
+    },
+    {
+      "name": "com.m3.collections.M3ConcurrentLaneContractTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ConcurrentLaneContractTest.xml",
+      "sha256": "be01b012469e55d0f65eff80af35a0712de6b37bb8e417996fdbc12d243b9fd1"
+    },
+    {
+      "name": "com.m3.collections.M3DeepFilteredListsTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3DeepFilteredListsTest.xml",
+      "sha256": "ff2c8f95f9894fbef05899914067027c1fdbe3210180aadbdbb476ecaf00b786"
+    },
+    {
+      "name": "com.m3.collections.M3DeepReadOnlyCollectionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3DeepReadOnlyCollectionTest.xml",
+      "sha256": "a328c4ae6a9d9eafd75a68a9da9470f505c12df43bfdb1a76df11dc68374ef1b"
+    },
+    {
+      "name": "com.m3.collections.M3EnumLongMapTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3EnumLongMapTest.xml",
+      "sha256": "68da07daac4e0a9f08ca8ff8f296c44568960c2294d97c3c93e0cb73b40b5838"
+    },
+    {
+      "name": "com.m3.collections.M3EnumSetTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3EnumSetTest.xml",
+      "sha256": "4c7583065e64fe2a0fa78eac26fb02ce8c3d53f1da32d2c2c9b10fe204f24145"
+    },
+    {
+      "name": "com.m3.collections.M3FactoryContractTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3FactoryContractTest.xml",
+      "sha256": "50aafa4fa20aca3cc988b827bc1d10c9274f10e28285f2d848ff3ae0e3f7437c"
+    },
+    {
+      "name": "com.m3.collections.M3FilteredListsSortedInteropTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3FilteredListsSortedInteropTest.xml",
+      "sha256": "fb4943abd8b7836f5bff7defebb7a93de15b44f9d55f6259942db070b1c96ed3"
+    },
+    {
+      "name": "com.m3.collections.M3FilteredListsTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3FilteredListsTest.xml",
+      "sha256": "e2f615db48d8cb426d5fcbb4fcdd1f71d1480d0fc1a133fefbbbd7937fbdd524"
+    },
+    {
+      "name": "com.m3.collections.M3FilteredNavigableSetTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3FilteredNavigableSetTest.xml",
+      "sha256": "d8ba6b8a7a7532d699d25371f945215d377994d3774c8b4c86da0a8efc82a9dc"
+    },
+    {
+      "name": "com.m3.collections.M3FilteredNavigationBoundaryTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3FilteredNavigationBoundaryTest.xml",
+      "sha256": "31307fa6a29b34921f3378d78f0327825d5d8c2653ee4773712662325ae86ab1"
+    },
+    {
+      "name": "com.m3.collections.M3FilteredViewsTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3FilteredViewsTest.xml",
+      "sha256": "1dd01b713e73c7eca047447f4b7ce2fce998d67f0a58989ed923a0d23337efd0"
+    },
+    {
+      "name": "com.m3.collections.M3FootprintContractTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3FootprintContractTest.xml",
+      "sha256": "09788b897b6bc9b5669a620829714178168c5b408741cd8fbb367281269f97da"
+    },
+    {
+      "name": "com.m3.collections.M3IndexMaskCompactorTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3IndexMaskCompactorTest.xml",
+      "sha256": "a38dec88cd1f1819dca02f39e31aecdc10ed86d7fe5f813269cd5b249d34ef4e"
+    },
+    {
+      "name": "com.m3.collections.M3IndexMaskWindowRecoveryTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3IndexMaskWindowRecoveryTest.xml",
+      "sha256": "991d85414f3e8a5a055f3c0e58d92defb8e87bdccca17b6ff874fffbd87111ac"
+    },
+    {
+      "name": "com.m3.collections.M3IndexMaskWindowTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3IndexMaskWindowTest.xml",
+      "sha256": "bc50a3b053400e35429c802ea6444c924524961b9c896390e419f8a059902d0c"
+    },
+    {
+      "name": "com.m3.collections.M3IndexPathMasksTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3IndexPathMasksTest.xml",
+      "sha256": "92639ce39149c2a2b37a58a3816564f87707e6b9059f26efe660f92df82dc040"
+    },
+    {
+      "name": "com.m3.collections.M3IndexPathRankTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3IndexPathRankTest.xml",
+      "sha256": "ef34ded827c0c76e30f4c30f924ae263f0239129be5f34ea421f9cb65794bfda"
+    },
+    {
+      "name": "com.m3.collections.M3IntLanesTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3IntLanesTest.xml",
+      "sha256": "34ab54655aee0b94f933abd29c8c281b9b52fd49a1cf222109399d82681f90a1"
+    },
+    {
+      "name": "com.m3.collections.M3IntLongHashMapTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3IntLongHashMapTest.xml",
+      "sha256": "5600216672ccf996356620d0a857b05ff3d95ab4647f5d025f2212baa5389acd"
+    },
+    {
+      "name": "com.m3.collections.M3JdkCollectionDifferentialTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3JdkCollectionDifferentialTest.xml",
+      "sha256": "c0ed2b1a0f111de3b96f3cea4d29f9f8eed76c72af589a4a0bc286a2c6d48236"
+    },
+    {
+      "name": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3JdkShapedPrimitiveCollectionsTest.xml",
+      "sha256": "6bd2a6bf49510c74df6f044a50e57a414667de82069dfe854deb83e1cbd2e704"
+    },
+    {
+      "name": "com.m3.collections.M3LazyObserverRegressionTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LazyObserverRegressionTest.xml",
+      "sha256": "38ddb5b601482d9999f5bb490eba6082ffe30dee746b90929f40f3890c39e6b3"
+    },
+    {
+      "name": "com.m3.collections.M3LazyTreeMapTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LazyTreeMapTest.xml",
+      "sha256": "62497e16a0c4a92c86c09b3896868bd9fcfd2172515d75525ad2d186a067db2a"
+    },
+    {
+      "name": "com.m3.collections.M3LongAddressBoundedTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongAddressBoundedTest.xml",
+      "sha256": "c149a215de7fb2eead284bdece11eb14f0459c0dd6ed9c3dac4a3c6f8b7fc7e8"
+    },
+    {
+      "name": "com.m3.collections.M3LongAddressKernelTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongAddressKernelTest.xml",
+      "sha256": "84477b6253a6d6ba1add496804a668022b1cb7f1ff131a609ec1c32ba44ec226"
+    },
+    {
+      "name": "com.m3.collections.M3LongArrayDequeTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongArrayDequeTest.xml",
+      "sha256": "e08592dc3144fff648e9d3dd05cc88f1cbd65b11af2a09e269bc8879b27b6c1a"
+    },
+    {
+      "name": "com.m3.collections.M3LongArrayListTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongArrayListTest.xml",
+      "sha256": "56ba63567f90bfe09269c88e2744e8b602d521d34fa17ad63e2c2f9f09d05ee5"
+    },
+    {
+      "name": "com.m3.collections.M3LongDagJUnitTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongDagJUnitTest.xml",
+      "sha256": "9a4b6e899e9590386a18127df21ec37cd29b3ad9071986eaf589a1a36750b184"
+    },
+    {
+      "name": "com.m3.collections.M3LongFilteredViewContractTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongFilteredViewContractTest.xml",
+      "sha256": "e354760a3fe8138b63d345c3732a7bf2e8e14227e047734959e22181c90c41d8"
+    },
+    {
+      "name": "com.m3.collections.M3LongIndexProjectionMaskOffsetTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongIndexProjectionMaskOffsetTest.xml",
+      "sha256": "9d56663b0991c09be36cfd9b83f4accd08b5abdf42a4a370fb05db02470c9ac2"
+    },
+    {
+      "name": "com.m3.collections.M3LongLinkedHashSetTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongLinkedHashSetTest.xml",
+      "sha256": "dd76f25d9486cef80357a8f2d2e468b16ff5682370d88f20365980c43939f664"
+    },
+    {
+      "name": "com.m3.collections.M3LongLongLinkedHashMapTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongLongLinkedHashMapTest.xml",
+      "sha256": "219ea7b9e344ab09b827fb4534573015760b4ceaffb4f154b134376d6e7f60c6"
+    },
+    {
+      "name": "com.m3.collections.M3LongRankIndexTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongRankIndexTest.xml",
+      "sha256": "c7618324c5a4e4e1f84cfeffcbe60c95dc3b78786ad358d1780f2b91b7a5c8df"
+    },
+    {
+      "name": "com.m3.collections.M3LongSortedAlgebraTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongSortedAlgebraTest.xml",
+      "sha256": "cdb1fa81904ada184b1bcfab448f55c33ed8b0f84353a8048611dbd3d3c27039"
+    },
+    {
+      "name": "com.m3.collections.M3LongTreeSetTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3LongTreeSetTest.xml",
+      "sha256": "41fbd27e2729ef871ad188c77d968bfa29562119c58829564aed8702d8c12811"
+    },
+    {
+      "name": "com.m3.collections.M3MapContractTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3MapContractTest.xml",
+      "sha256": "468d83b11bf73aea6ffbd4394309f1720eb88d28654c3e2d90760b7987883a82"
+    },
+    {
+      "name": "com.m3.collections.M3MaskAllSelectionReceiverTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3MaskAllSelectionReceiverTest.xml",
+      "sha256": "7fdf10cfd4cebd6a5a1bfe68541e767075b3cfdf77716ce5119290779d036e01"
+    },
+    {
+      "name": "com.m3.collections.M3MutableFilteredViewsTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3MutableFilteredViewsTest.xml",
+      "sha256": "bcd985fedb86da3d3681b787a9ea01eb1dd0891a65c6bf68c7c43dc21a382a5f"
+    },
+    {
+      "name": "com.m3.collections.M3NativeIndexRangeTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3NativeIndexRangeTest.xml",
+      "sha256": "2aa2334c9c262755e0970c93be1affca5bd40be4fbd8792e3596a5509e0653f9"
+    },
+    {
+      "name": "com.m3.collections.M3NoRetainedStructuralEntryTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3NoRetainedStructuralEntryTest.xml",
+      "sha256": "41f3a391d4f26985fbf652c68f193647b913695094b321586a16e51948c65265"
+    },
+    {
+      "name": "com.m3.collections.M3ObjectIdentityTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ObjectIdentityTest.xml",
+      "sha256": "5514c5727a35dc828d127d1b387d1321b166a3340a6503e182ec78c0b5365087"
+    },
+    {
+      "name": "com.m3.collections.M3ObjectResidencyBorrowTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ObjectResidencyBorrowTest.xml",
+      "sha256": "26452071c441ac254de1ea407f42d8081246ffc17d648f307de86006f2878795"
+    },
+    {
+      "name": "com.m3.collections.M3ObjectResidencyRuntimePressureTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ObjectResidencyRuntimePressureTest.xml",
+      "sha256": "7c51cef73c8895830faf0920922ace4dbd4d637547715e2afd3c11b2ec7f4520"
+    },
+    {
+      "name": "com.m3.collections.M3ObjectResidencyTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ObjectResidencyTest.xml",
+      "sha256": "c26b12ee3fd91cbfc6f1f9d2ee25522b4c69c90d2496d98e9cdeb5f5c01cf6a8"
+    },
+    {
+      "name": "com.m3.collections.M3ObjectSlotIndexTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ObjectSlotIndexTest.xml",
+      "sha256": "8f9d81fab1f5171ed5c04f5addaaaafc93ad749a83c7a81de66acf557e51bf80"
+    },
+    {
+      "name": "com.m3.collections.M3PrimitiveCollectionDifferentialTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3PrimitiveCollectionDifferentialTest.xml",
+      "sha256": "c3a8da80e7fc7693a58bf4d3ff5ed6b291e8dd033725548c39ca66f4e8049c4a"
+    },
+    {
+      "name": "com.m3.collections.M3ReadOnlyViewBoundaryTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ReadOnlyViewBoundaryTest.xml",
+      "sha256": "34f346bf2e73592d34e592691323ddd21718e4dc6c258e4931749a1911d06ac7"
+    },
+    {
+      "name": "com.m3.collections.M3ReceivingRecoveryTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ReceivingRecoveryTest.xml",
+      "sha256": "79e1366ab0dd232adefcbbd48cac44cb0951a5c2b38c6e3dda7e647eb7b0dc1c"
+    },
+    {
+      "name": "com.m3.collections.M3ResidencyStateMaskTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ResidencyStateMaskTest.xml",
+      "sha256": "739aa39cbf1be927561cb5933649d050b437105e13c7e2a5aadd917212ad8e01"
+    },
+    {
+      "name": "com.m3.collections.M3SequenceContractTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3SequenceContractTest.xml",
+      "sha256": "1a618edef5f4466cb100c5827c6718b953e7cabd178044f32c75a597a24c629b"
+    },
+    {
+      "name": "com.m3.collections.M3SignalOrderJUnitTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3SignalOrderJUnitTest.xml",
+      "sha256": "1f96ef7f2a133fc87518feae74529d371da6586eaada398b306f717acf2e08a9"
+    },
+    {
+      "name": "com.m3.collections.M3SpanIndexTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3SpanIndexTest.xml",
+      "sha256": "2711f76c9ab5c8ffc48f06fa397be1097cf78c603171cbb35efc0285f15988ae"
+    },
+    {
+      "name": "com.m3.collections.M3StoredRepresentativeTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3StoredRepresentativeTest.xml",
+      "sha256": "95d344ded27228bf8c8c9cd27bab4416ca69c26075e83b5af90b8ec452966b39"
+    },
+    {
+      "name": "com.m3.collections.M3TombstoneReuseTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3TombstoneReuseTest.xml",
+      "sha256": "274cbbc60d001d750ab582e983fb92218804cf6ecad92733fff9f6ddee4b1b1f"
+    },
+    {
+      "name": "com.m3.collections.M3ZeroMaskArrayFastPathTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ZeroMaskArrayFastPathTest.xml",
+      "sha256": "98976ed5b22f5b02f0e32b8652600ac09f1cb65922bd4af86648f5d52b68ec03"
+    },
+    {
+      "name": "com.m3.collections.M3ZeroSlotCapacityTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.M3ZeroSlotCapacityTest.xml",
+      "sha256": "40b14d98f388d5e5f2dcf37790934be60975d0fd41a0815c4bbf0d79b1d5c434"
+    },
+    {
+      "name": "com.m3.collections.SegmentedLaneBulkContractTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.SegmentedLaneBulkContractTest.xml",
+      "sha256": "922d344c4a0ebdeccf2aa4572b80099b2c71a4f53534817ee701cd2275a14378"
+    },
+    {
+      "name": "com.m3.collections.SegmentedPrimitiveStorageTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "module/target/surefire-reports/TEST-com.m3.collections.SegmentedPrimitiveStorageTest.xml",
+      "sha256": "da3f9a528738564fb70633d229bcdbee21fe9d2f2180b01f412a71ae54e11fca"
+    }
+  ],
+  "jni_or_ubsan_diagnostics": [],
+  "class_output_count": 441,
+  "class_outputs_stable_after_test_entry": true,
+  "class_output_tree_sha256": "8e6ea0869d7b51ad8b5090ad7dc4f7f0f949e41f2296280e0cecfb42b6b884cb",
+  "final_filtered_view_helpers_present": true,
+  "filtered_view_class_sha256": "e0502a2f4695ccb50ee6d7c23cdbb4c86e995de06914399a392dc455180d9911",
+  "test_class_shadow_paths": [],
+  "filtered_view_loaded_from_verified_class_directory": true,
+  "native_libraries": [],
+  "native_library_count": 0,
+  "full_reports_preserved": true,
+  "class_outputs_preserved": true,
+  "source_scope": "All249 owning src, original POM, and packaged legal/provenance files. Source-only module transport in unique archive/build root verified byte-exact.",
+  "archive_note": "This run used a fresh unique working root containing a byte-exact transport of the qualified receiver module; original POM clean verify ran with no source or test edits.",
+  "scope": "Strict original standalone collections Maven module on the recorded actual M3 image. JNI mode enables existing opt-ins and supplies all8 UBSAN libraries; independent retained JNI boundary witness requires selection of all8."
+}

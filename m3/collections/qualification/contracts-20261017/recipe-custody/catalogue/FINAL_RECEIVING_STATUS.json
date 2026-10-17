@@ -1,0 +1,218 @@
+{
+  "schema": "M3_COLLECTIONS_FINAL_RECEIVING_STATUS_V1",
+  "baseline_commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "canonical_engine_pin": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+  "qualified_datasets": {
+    "fixture": {
+      "status": "PASS",
+      "targets": 6,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "610878804add01953d507d03a903b5d900e5449c97251c356735a468230a1f3d",
+      "sdk_results_sha256": "4dfc646b45dad6214452eb4de5888689916479de51b9cfac4268c426236ff999",
+      "receipt": "evidence/fixture/SDK_QUALIFICATION.json",
+      "receipt_sha256": "c1bafe1961f625a2355dccc16acfb4c84f76113e0ff2c051bd909138f35852f0"
+    },
+    "m3jdk21-array-proof-v2": {
+      "status": "PASS",
+      "targets": 122,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "8f6d58a6103c470793dce1cdb8db65cabc50134ddb429b8bd399e6f15fc1bdb7",
+      "sdk_results_sha256": "ad9cb43ec3fe999e12ecff0b66d18d5d4ed675fbf89106369f73ceb0d13bc73a",
+      "receipt": "evidence/m3jdk21-array-proof-v2/SDK_QUALIFICATION.json",
+      "receipt_sha256": "25f63d555dcd5c2c326454167b73307b2e4335c53d959a2db8944ad4fc30f056"
+    },
+    "m3jdk21-arrays": {
+      "status": "PASS",
+      "targets": 4,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "9b79aaf4398723f1cb9bf419512148557735f541edb3a704589c112293da7771",
+      "sdk_results_sha256": "3a0cabd3554a74b3467b42d9396202f59d5b745b8847c473f7db26c1c3d1d6d2",
+      "receipt": "evidence/m3jdk21-arrays/SDK_QUALIFICATION.json",
+      "receipt_sha256": "2a6eb31a7a4e53371eab51d3aeed2e8032b784a9dbf67a969f5c50566121fde2"
+    },
+    "m3jdk21-collection-build": {
+      "status": "PASS",
+      "targets": 2,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "53ee7806d6901bfdd58171d1f259a305b6551addc29cac3e01e3169195c177cb",
+      "sdk_results_sha256": "0ce6f71c183024a1f2338e0e4211b37ae892a2429b1c6d87e2e8dc41251d2a98",
+      "receipt": "evidence/m3jdk21-collection-build/SDK_QUALIFICATION.json",
+      "receipt_sha256": "dc9f53e6f424eff78482bc2dbd32fd4f21311d0d40cdd475536b88fa501fea4a"
+    },
+    "m3jdk21-collection-oracles": {
+      "status": "PASS",
+      "targets": 1,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "c406ffcf0ef95ab75eaa20929f87d72164cdabc743c5a9dd87fa7d36a993c20a",
+      "sdk_results_sha256": "4b884511a22d4fcc532b3a0c41781f529dc3f9d9c73d9c63147c5a32fbef59f3",
+      "receipt": "evidence/m3jdk21-collection-oracles/SDK_QUALIFICATION.json",
+      "receipt_sha256": "c2f969090adc7f553c119c06a476e56c1354b73f76167b5fcca5d06206ad889b"
+    },
+    "m3jdk21-collections": {
+      "status": "PASS",
+      "targets": 14,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "674abaeba319bed2a4a7614bbb8c193c6b1b5d91083e111e0adaf342cea04578",
+      "sdk_results_sha256": "8a9f74d7476f3881ecddc84c3eab7cdd1bacb60942993bdfab85e05ebd52380b",
+      "receipt": "evidence/m3jdk21-collections/SDK_QUALIFICATION.json",
+      "receipt_sha256": "69e101a5c89c7cce3e1946481922ff2503299cc51d81295fca80324ad8f295f5"
+    },
+    "m3jdk21-collections-final": {
+      "status": "PASS",
+      "targets": 16,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "ae668b01f7f0d22664b76aa3c2099efbcee4b5bf0171c904fbd40b0c673ff053",
+      "sdk_results_sha256": "f00131b6424f2c29d82d57092dc1c3882bdcd0981afc5141221c083736f19194",
+      "receipt": "evidence/m3jdk21-collections-final/SDK_QUALIFICATION.json",
+      "receipt_sha256": "4d77b1d06262063a7bdd741d7a4ec43a0a23f9d1c4f9268cfd06e89a003c6bed"
+    },
+    "m3jdk21-generic-views": {
+      "status": "PASS",
+      "targets": 3,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "c3adfe266747b4fc172f144643f9e557a394e800d01b38c846b9f81a4b9a841d",
+      "sdk_results_sha256": "97110558f20f0bdb0e7161acf1945d322760ee89e4b6520fa1e1bb50b9e40ca3",
+      "receipt": "evidence/m3jdk21-generic-views/SDK_QUALIFICATION.json",
+      "receipt_sha256": "2b88445c9f63023a2db51c43a950dfac32f5ecd2d3d7422dac422c650fddd09a"
+    },
+    "m3jdk21-navigation": {
+      "status": "PASS",
+      "targets": 4,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "5d7c8ea115380e86f7c37139ba62ee25b881155227f8d757a55a43e04b61afec",
+      "sdk_results_sha256": "954c16fb1140ba60220cdf93436e51428a51aa75050e02b72175efd0d3cd5618",
+      "receipt": "evidence/m3jdk21-navigation/SDK_QUALIFICATION.json",
+      "receipt_sha256": "e19d00eec153875abffba85cdde2d943e2e38efc90c21eee84e7eae880fa63c8"
+    },
+    "m3jdk21-view-successor": {
+      "status": "PASS",
+      "targets": 9,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "8ffc95422141d5ffbc98fc6df46b51d97ae46b49bf9ce7d1bf14d5cacaf86e30",
+      "sdk_results_sha256": "6caadf3a7548973842dab50ecdca3e9b71963c20e6c9b80a4c074b3c24787def",
+      "receipt": "evidence/m3jdk21-view-successor/SDK_QUALIFICATION.json",
+      "receipt_sha256": "4536c2d043cf453628e6fae712e55837c3e6116eb4501621eb704b73173d0d33"
+    },
+    "synexia-collection-ledger": {
+      "status": "PASS",
+      "targets": 2,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "be5fb36c0aea4380a6de7ead796963396e0e99c0ba21fa149a8401e86706fed0",
+      "sdk_results_sha256": "2c3c95e060c10f5f970d73bb4a8cdbf7cbef91ab1ba80c849975228ae01a13e5",
+      "receipt": "evidence/synexia-collection-ledger/SDK_QUALIFICATION.json",
+      "receipt_sha256": "2f9e87a9f7840c2866fe14e5efa17f42ca13bb89f7d838ffbbf93921348c6dc8"
+    },
+    "synexia-collection-shapes": {
+      "status": "PASS",
+      "targets": 1,
+      "sdk_tests": 5,
+      "input_sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "6882885cf37d6b86eac74e786bb49759938ac513e5543eaa3571160b0fdf4afb",
+      "sdk_results_sha256": "2123282cb0ec2e5bb87ab64245084190ec1c312f50bcfd152c531beb6f77ea3d",
+      "receipt": "evidence/synexia-collection-shapes/SDK_QUALIFICATION.json",
+      "receipt_sha256": "b8d8b7748ff9320a841077c04bc0176f9b7fd4c89c7d6b68411c7170de56f795"
+    }
+  },
+  "final_delivery_datasets": [
+    "m3jdk21-arrays",
+    "m3jdk21-collections-final"
+  ],
+  "source_epoch": "catalogue-proof/FINAL_SOURCE_EPOCH.json",
+  "frozen_evaluation_overlays": {
+    "arrays-evaluation.json": "Actual recipe, receiver Java/JNI/interpreter and resource gates passed; authoring pending markers are historical.",
+    "views-successor-evaluation.json": "Actual successor SDK and standalone receiver gates passed; generic stack witness is resolved by later generic pass. Initial navigation donor alternatives are retained as counterexamples.",
+    "generic-views-evaluation.json": "Actual generic SDK, receiving depth/tape and independent final owning-module Java/native/API gates passed."
+  },
+  "receiving_runtime": {
+    "arrays": {
+      "receipt": "evidence/runtime/arrays/RECEIPT.json",
+      "checks_per_mode": 417595,
+      "cases": 912,
+      "modes": [
+        "Java",
+        "JNI -Xcheck:jni",
+        "interpreter JNI -Xcheck:jni"
+      ]
+    },
+    "views": {
+      "successor": "evidence/runtime/views/received-successor-proof.json",
+      "generic": "evidence/runtime/views/received-generic-proof.json",
+      "generic_tape_bytes": 18779,
+      "sorted_map_tape_bytes": 2537,
+      "depth": 65536,
+      "stack": "-Xss256k"
+    },
+    "collections_owning_module": {
+      "receipt": "evidence/runtime/collections-owning-module/ACCEPTED_GATES.json",
+      "status": "PASS",
+      "tests_per_mode": 214,
+      "suites_per_mode": 61,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "modes": [
+        "Java required native-absence",
+        "required JNI with8 UBSAN libraries"
+      ],
+      "source_inputs": 249,
+      "source_units_api_accounted": 116,
+      "compiled_class_files": 441,
+      "class_tree_sha256": "8e6ea0869d7b51ad8b5090ad7dc4f7f0f949e41f2296280e0cecfb42b6b884cb"
+    },
+    "existing_collection_jni_boundary": "evidence/runtime/collection-native-boundary/RECEIPT.json",
+    "array_portable_custody": "evidence/runtime/array-portable-custody/REPLAY.json"
+  },
+  "catalogue": {
+    "baseline_files": 248,
+    "baseline_shards": 28,
+    "final_postimages": 20,
+    "final_shards": 5,
+    "new_regression_files": 10,
+    "existing_files_with_named_operations_reviewed": 10,
+    "other_operations": "PENDING",
+    "source_index": "catalogue-proof/partitions/baseline/source-index.tsv",
+    "comparison": "catalogue-proof/final-file-comparison.tsv",
+    "fingerprints": "Existing owner candidate-only representations; no equivalence authority",
+    "category_extension_receipt": "catalogue-proof/category-extension/RECEIPT.json"
+  },
+  "refused_dataset": {
+    "dataset": "m3jdk21-array-proof",
+    "reason": "Two runnable Java proof paths outside admitted Maven Java source layout; no receiver writes; corrected in v2 without owner changes."
+  },
+  "historical_intermediates": [
+    "m3jdk21-navigation",
+    "m3jdk21-collections"
+  ],
+  "limits": [
+    "No global family promotion or java.base change",
+    "No whole-JDK/JCK or non-Linux native platform claim",
+    "No unmeasured throughput claim",
+    "Generic contains preserves original repeated scans, including quadratic one-member callback demand",
+    "Opaque owner recursion and arbitrary callback traces after foreign range rejection remain outside proof",
+    "Facade explicitly declares previously inherited removeFirst/removeLast; callable descriptors preserved, declaration ownership disclosed",
+    "New resource probe and hosted CI results may be appended separately without changing qualified production sources"
+  ]
+}

@@ -1,0 +1,10 @@
+DFS_CATEGORY_REVIEW_PASS	b078ab190f74208d3479e561f0b45b84c9310b7e4e1822649289f3d00f2a3d2d	7e02ef1c64814dc39edfc25d45e9c73b389de8136edef3fbb9c33c88740860c9	728c246bf912bdde0a57d45659e58f40957da2ec5b1b0bcdda9bfbfae914cd84
+ordinal	id	repository	revision	source	license_hint	adoption
+0	leetcode-reference			https://leetcode.com/problemset/	PROPRIETARY_CONTENT_REFERENCE_ONLY	REFERENCE_ONLY
+1	hackerrank-reference			https://www.hackerrank.com/domains/algorithms	PROPRIETARY_CONTENT_REFERENCE_ONLY	REFERENCE_ONLY
+2	geeksforgeeks-reference			https://www.geeksforgeeks.org/dsa/	PUBLIC_ARTICLE_REFERENCE_ONLY	REFERENCE_ONLY
+3	doocs-leetcode-current	doocs/leetcode	719172c2745794a3fd496df6dc07588f7ccd98d6	https://github.com/doocs/leetcode	CC-BY-SA-4.0	REFERENCE_ONLY
+4	java-aid-hackerrank-current	Java-aid/Hackerrank-Solutions	0928f53bb32d0aad2d740a3917ecfc2d56018bb1	https://github.com/Java-aid/Hackerrank-Solutions	MIT	REFERENCE_ONLY
+5	cvalingam-geeksforgeeks-current	cvalingam/GeeksforGeeks	8341993d94a6100415fe2b060f30345b2079ed49	https://github.com/cvalingam/GeeksforGeeks	MIT	REFERENCE_ONLY
+6	thealgorithms-java-current	TheAlgorithms/Java	e43ec3897e48f23843972d02cd05a5bb1b6864a2	https://github.com/TheAlgorithms/Java	MIT	REFERENCE_AND_REUSE_AFTER_REVIEW
+7	thealgorithms-python	TheAlgorithms/Python	7f81fcd68c195ce71534de09d1b69d2b61665902	https://github.com/TheAlgorithms/Python	MIT	REFERENCE_AND_REUSE_AFTER_REVIEW

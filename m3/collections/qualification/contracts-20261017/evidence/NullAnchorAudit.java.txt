@@ -1,0 +1,17 @@
+import com.m3.collections.*;
+import java.util.*;
+public class NullAnchorAudit {
+  public static void main(String[] args) {
+    RuntimeException marker = new IllegalArgumentException("null not supported");
+    Comparator<Integer> order = (a,b) -> { if(a==null||b==null) throw marker; return Integer.compare(a,b); };
+    NavigableSet<Integer> owner = new TreeSet<>(order); owner.add(1); owner.add(3);
+    NavigableSet<Integer> view = M3FilteredViews.filter(owner, x->true);
+    try { System.out.println("RESULT " + view.lower(0)); }
+    catch(RuntimeException e) { System.out.println("FAIL unsupported-null-probe marker=" + (e==marker)); }
+    List<String> tape = new ArrayList<>();
+    NavigableSet<Integer> nested = M3FilteredViews.filter(
+      M3FilteredViews.filter(new TreeSet<>(List.of(1,2,3)), x->{tape.add("inner"+x);return true;}),
+      x->{tape.add("outer"+x);return true;});
+    System.out.println("NESTED_RESULT " + nested.floor(3) + " tape=" + tape);
+  }
+}

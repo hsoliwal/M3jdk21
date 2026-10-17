@@ -1,0 +1,374 @@
+{
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and contributors",
+  "spdx_license_identifier": "Apache-2.0",
+  "schema": "M3_COLLECTION_CONTRACTS_DECISIONS_V1",
+  "per_file": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "before_sha256": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101",
+      "before_git_blob": "e381d23e93702cea3ccd7d9c3f7ff5e0d56baaa6",
+      "after_sha256": "4e90ed0c7ccd20292ca08c2e2d3f43b6e0f4157b84900f7de80f10aac6a96d4b",
+      "after_git_blob": "eeafe71400b2b862d3526f207e5d7b6ba9afffdc",
+      "bytes": 15725,
+      "decision": "replace-left-recursive-conjunction-with-existing-balanced-atom"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "before_sha256": "d70bcdd969aa688ed0a498ce3503684fee2b0ecc9eb11348160e7befa1a7cfe0",
+      "before_git_blob": "ccf65b212b756fe2147b68d3c1d6655e87bb3103",
+      "after_sha256": "d10fa589318f55099aa07ac703008f6c590db667ee2d684fad8944164bc2825e",
+      "after_git_blob": "2e149b166d0c71c215e667ba66f2aa6b21abdcf6",
+      "bytes": 4720,
+      "decision": "compatibility-facade; inherited-empty-endpoint-refusal; private-source-access"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before_sha256": "d67a632f63647f033e71360858f8f1be1f93418880178a96437bb0605998ad5b",
+      "before_git_blob": "10bc8328c0aef2cab69ba0d55f7f566fc4e60df3",
+      "after_sha256": "aa7614e7009b3f342f26339b5c4e8c5583d2642db0930ad34a4a3252fca28cd6",
+      "after_git_blob": "f020985c5a1d074895477e23f28dd20be3e4f9eb",
+      "bytes": 41720,
+      "decision": "bounded-navigation; strict-read-only; ordered-predicate-composition; recursion-elimination"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "before_sha256": "bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65",
+      "before_git_blob": "893c7be04197cef2be39df65ad7684916699d7d2",
+      "after_sha256": "fe830fe58e72afbadfcc43065b53176b95c9bb6f6750e251ed4b8c907bb23700",
+      "after_git_blob": "84687705101790b0dc7b38691bf10f4dd7f4d9f4",
+      "bytes": 21946,
+      "decision": "shared-bounded-navigation; private-source-access"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java",
+      "before_sha256": "02893ff5d555ef577789ca82fdbbe043172219ae59202d10a51f2fa1337d9152",
+      "before_git_blob": "0c65469024118a25399f9581a1be2769078fa087",
+      "after_sha256": "907fc4c4bf9003e9edb481afeba4a7cfe3fe4e6e520e7f34e8e5fb2a861e56d5",
+      "after_git_blob": "98c3d8a124a22bdadad2988b20329f8f993c54db",
+      "bytes": 8496,
+      "decision": "make-implicit-public-empty-constructor-explicit"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java",
+      "before_sha256": "76da13c95905f3a41b0e95acd89ff68e9ae12b665fec8fe804a5af37235a9641",
+      "before_git_blob": "2f194670d58f5248d5220eade807f152647b4052",
+      "after_sha256": "08ea68e5ec274e0229f2a91d91a00b9aa66004e73b474ea67b602c63234d8167",
+      "after_git_blob": "68d5c4776864cf6fc38d091ca5bd602742347758",
+      "bytes": 10297,
+      "decision": "make-implicit-public-empty-constructor-explicit"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": null,
+      "after_sha256": "4b7b1bab32dda18c4f6bfef99e5b6d38754e838178205a0632b56ac64fc4c061",
+      "after_git_blob": "c125496cdca42e589c3ab8e493527b4b6480336b",
+      "bytes": 19647,
+      "decision": "finite-contract-proof-or-junit-adapter"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": null,
+      "after_sha256": "bb2c6b0687aa3619553f105637898d135460e150c989f82b1be3706aa3ceefcb",
+      "after_git_blob": "17d92932e2bf1befdcd311eb9d61b23e7f3d56fb",
+      "bytes": 458,
+      "decision": "finite-contract-proof-or-junit-adapter"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": null,
+      "after_sha256": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0",
+      "after_git_blob": "f3c89e8a85e7e322ee8b3712ad8db91a69a66fac",
+      "bytes": 10170,
+      "decision": "finite-contract-proof-or-junit-adapter"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": null,
+      "after_sha256": "46fb2cdf27829984581db5a6cdd6d2fb243cbf183742afafa5b2003d0ff5dce6",
+      "after_git_blob": "37a2e0fe50687df6917a0ac0f105d491b2446974",
+      "bytes": 501,
+      "decision": "finite-contract-proof-or-junit-adapter"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": null,
+      "after_sha256": "06ca1bc4f818218156f6f9dedadced0f45eff165470e4c93f8938b8103ee9d2f",
+      "after_git_blob": "8c178bff039bf57d078a4fcab8051b3099162f89",
+      "bytes": 16051,
+      "decision": "finite-contract-proof-or-junit-adapter"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundaryTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": null,
+      "after_sha256": "84a9a87ab9101da250f504f8f0ae9d99baa6106dcb090dd3c3a90f776c4b82f9",
+      "after_git_blob": "a7c3ad1c6c4687808c20f2ebc30fd78b887fe6f9",
+      "bytes": 710,
+      "decision": "finite-contract-proof-or-junit-adapter"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetTest.java",
+      "before_sha256": "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
+      "before_git_blob": "a65e12972e8c60eb516413cd03a0c192043c6457",
+      "after_sha256": "7c4a4ba25f54847f39391ca3ee44709a29b6dfd116405c6570bc7ce6d3e761bd",
+      "after_git_blob": "17b404ab9cf4f7de95f535074f968f15a129c2e6",
+      "bytes": 16496,
+      "decision": "independent-jdk-oracle; half-split-page-shape"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": null,
+      "after_sha256": "3c2836df74ef09f844f845dbb7f0cd0d179787254d994fa98168d93f3c1e30d4",
+      "after_git_blob": "4827525f701e696f537205c86a6ee067d13ecc9a",
+      "bytes": 19087,
+      "decision": "finite-contract-proof-or-junit-adapter"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundaryTest.java",
+      "before_sha256": "ABSENT",
+      "before_git_blob": null,
+      "after_sha256": "5dace1d4f7e86a98af7b817be6594063c63083a1b7f6f37ad47f192d74eae632",
+      "after_git_blob": "c6590b6a539768f2ddf8d3b102577dd13ce13c4e",
+      "bytes": 618,
+      "decision": "finite-contract-proof-or-junit-adapter"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java",
+      "before_sha256": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
+      "before_git_blob": "8773cea4dace2f29d904f0d98c5ef68d54d19bde",
+      "after_sha256": "fa59e9a722068963eed9146dbc4b9ead6dc53abde672e28bde5c178d9ea4360a",
+      "after_git_blob": "ee6fdfea8870195a3069e90c8444fdcb157a3184",
+      "bytes": 13526,
+      "decision": "oracle-identity-vs-equality"
+    }
+  ],
+  "navigation_readonly_list_decisions": [
+    {
+      "files": [
+        "M3FilteredViews.java",
+        "M3MutableFilteredViews.java",
+        "M3FilteredNavigableSet.java"
+      ],
+      "category": "bounded-navigation",
+      "before": "Legal lower/floor/ceiling/higher query outside a bounded source throws IAE when used directly as head/tail bound. Both null sentinel ambiguity and nested wrapper predicate demand matter.",
+      "selected": "Retain legal range path; on range rejection anchor using innermost known M3 raw backing owner; skip scan through original wrapped range. Stored-null presence uses actual extreme comparison.",
+      "rejected": [
+        {
+          "choice": "unconditional wrapped-source neighbor anchoring",
+          "reason": "Observed duplicate inner predicate occurrence; witness preserved in null-anchor-negative-controls.log."
+        },
+        {
+          "choice": "donor source.contains(null)",
+          "reason": "Observed arbitrary custom IAE on otherwise legal nonnull navigation; witness preserved."
+        },
+        {
+          "choice": "full source scan per query",
+          "reason": "Unnecessarily discards existing bounded tree seek and comparator-work benefit."
+        },
+        {
+          "choice": "opaque wrapper flattening",
+          "reason": "No general access to foreign visibility effects; preserve legal range path and limit boundary claim to interface behavior."
+        }
+      ],
+      "complexity": "For tree raw owner and fixed M3 wrapper depth, O(log n + rejected prefix) search/traversal; no retained element snapshots. Owner peeling adds O(wrapper depth) at invalid-bound fallback. Comparator and opaque-owner internals follow owner implementation."
+    },
+    {
+      "files": [
+        "M3FilteredViews.java",
+        "M3FilteredNavigableSet.java"
+      ],
+      "category": "read-only-boundary",
+      "before": "Several Map defaults, empty collection-view mutators and empty sequenced set endpoints return no-op values or NSEE instead of documented UOE.",
+      "selected": "Explicit mutator overrides before lookups/argument validation/callbacks; existing JDK unmodifiable collection/sequence API; private sorted reversed/range permission guard forwarding all reads.",
+      "rejected": [
+        {
+          "choice": "re-filter backing.reversed()",
+          "reason": "Changes sorted reversed first/last/toArray/hash/toString callback demand."
+        },
+        {
+          "choice": "Collections.unmodifiableSortedSet alone",
+          "reason": "Inspected JDK21 and reproduced missing explicit empty sequenced-endpoint refusal."
+        }
+      ],
+      "storage": "Constant wrapper objects on request; no retained element/entry cache, no ordering copy."
+    },
+    {
+      "files": [
+        "M3FilteredLists.java",
+        "M3FilteredViews.java"
+      ],
+      "category": "deep-list-composition",
+      "before": "Repeated List filters flatten source but retain left-recursive lambdas; at depth65536 get overflows Xss256k.",
+      "selected": "Reuse pinned binary-carry predicate atom.",
+      "complexity": "O(log d) M3 predicate composition stack and append path, O(d) retained nodes at depth d, O(d) worst-case predicate evaluation; no per-evaluation traversal buffer. Caller predicate recursion is opaque.",
+      "performance_claim": "Stack-safety and operation-bound evidence only; no general throughput speedup claim."
+    },
+    {
+      "files": [
+        "M3StoredRepresentativeContract.java"
+      ],
+      "category": "test-oracle-identity-vs-equality",
+      "before": "List.remove(visible) removes first equals-equal hidden reference; old test incorrectly expected visible reference removal.",
+      "selected": "Retain actual JDK List equality behavior assertion, assert visible reference survives and view stays visible, then remove exact visible reference and assert absence.",
+      "production_changed": false
+    },
+    {
+      "files": [
+        "M3ReadOnlyViewBoundarySelfTest.java",
+        "M3ReadOnlyViewBoundaryTest.java",
+        "M3DeepFilteredListsProof.java",
+        "M3DeepFilteredListsTest.java"
+      ],
+      "category": "finite-contract-evidence",
+      "selected": "Reuse current donor deep proof and existing module contracts, add compact independent nullable/bounded results, callback-prefix/readonly-noop and detached-entry live-view assertions; preserve original-versus-successor stable read tapes."
+    }
+  ],
+  "generic_recursion_decision": {
+    "status": "FROZEN_CANDIDATE_SDK_RECEIVING_PENDING",
+    "dataset": "generic-dataset.json",
+    "source_epoch": "generic-source-epoch.json",
+    "existing_catalogue": {
+      "repository": "hsoliwal/com.synexia",
+      "revision": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+      "owner": "synexia-algorithms / M3ProblemShapeCatalogue",
+      "owner_git_blob": "dab66f204428e02fcaaf9844a8e6868fb91b0713",
+      "shape_id": "dfs",
+      "category": "graphs",
+      "shape_use": "Recursion elimination / explicit continuation stack; actual collection work measured independently",
+      "review_receipt": "catalogue-proof/category-results/DFS_REVIEW_RECEIPT.json",
+      "review_output_sha256": "d522a545ce9233613547d54628ed8e4f4b7fe2255f4e5621fdb69a8a134b64f2",
+      "donor_review_order": [
+        "leetcode-reference",
+        "hackerrank-reference",
+        "geeksforgeeks-reference",
+        "doocs-leetcode-current",
+        "java-aid-hackerrank-current",
+        "cvalingam-geeksforgeeks-current",
+        "thealgorithms-java-current",
+        "thealgorithms-python"
+      ],
+      "external_source_copied": false
+    },
+    "reused_atoms": [
+      "Current M3FilteredViews.filtered lookahead state and strict iterator mutation refusal",
+      "Current visible stored-representative identity/equality scan, factored after its membership guard without changing probe order",
+      "Existing owner source/predicate fields and logical wrapper chain",
+      "JDK ArrayList dynamic array and reverse index traversal of predicate/continuation references"
+    ],
+    "problem": "Known read-only decorators recursively construct iterator chains; CollectionView.size() at depth65536 over one element overflows -Xss256k. Recursive contains() also recurses through the same logical owners and deliberately re-evaluates inner visibility during outer representative scans.",
+    "selection": {
+      "iterator": "Collect only known private read-only iterator decorators into one temporary array of predicates. Invoke the existing filtered cursor on the first opaque/raw iterator, testing predicates from inner to outer. Preserve lazy source iteration, callbacks, exception continuation and strict iterator UOE.",
+      "membership": "Collect only CollectionView and exact plain SetView membership continuations; evaluate original innermost membership once, then replay each outer visible-member scan over its original source. Sorted/navigable membership retains its specialized representative path.",
+      "shallow_fast_path": "One-layer views retain the original filtered iterator and visible(source,predicate,value) call; no unnecessary continuation array for shallow owners.",
+      "public_api": "No new public owner, callable descriptor or field; all helper methods and state remain private."
+    },
+    "alternatives": [
+      {
+        "choice": "flatten source and predicate at construction",
+        "status": "REJECTED",
+        "reason": "Would discard the logical source hierarchy and reduce observable contains predicate counts; one all-accepted member needs d(d+1)/2 calls under the existing contract."
+      },
+      {
+        "choice": "persistent balanced conjunction per retained wrapper",
+        "status": "NOT_SELECTED_HERE",
+        "reason": "The List donor is appropriate where original List already flattens source. Generic membership needs the retained hierarchy; retaining every prefix tree adds unnecessary composition metadata. Iterator-local predicate arrays directly replace existing per-depth iterator objects."
+      },
+      {
+        "choice": "unwrap arbitrary mutable or opaque owners",
+        "status": "REJECTED",
+        "reason": "Their cursors can have different live lookup and callback behavior. They remain original iterator boundaries."
+      },
+      {
+        "choice": "iterate with an explicit continuation array",
+        "status": "SELECTED",
+        "reason": "Reuses current filter/membership atoms and standard dynamic array; exact external event tapes demonstrate unchanged callback/source/identity demand."
+      }
+    ],
+    "complexity": {
+      "retained_view_metadata": "O(d) original source/predicate owner chain; no extra construction cache or element storage.",
+      "iterator": "O(d) setup and temporary predicate references; O(d) worst-case predicate work per raw element; O(1) Java call-stack contribution from the flattened M3 decorator chain. Existing caller/opaque recursion remains outside the claim.",
+      "membership": "O(d) temporary continuation references and original repeated traversal work; a single always-visible element intentionally retains d(d+1)/2 callbacks. No linear-time membership claim.",
+      "data_ownership": "Raw backing values are never copied into predicate/continuation arrays."
+    },
+    "validation": {
+      "source_built_m3_image": "/tmp/m3-ast-product-build/images/jdk",
+      "strict_compile": "--release21 -proc:none -Xlint:all -Werror",
+      "negative_control": "generic-before-depth-negative.log",
+      "depth": 65536,
+      "stack": "-Xss256k",
+      "checks": 84,
+      "exact_event_tape_bytes": 18779,
+      "exact_event_tape_sha256": "7a10a88ba35159ffdefa7de404e5ed70936dee7f3bc7b2c2336811d52c1d351a",
+      "tapes_equal": true,
+      "previous_contract_checks": [
+        32267,
+        69,
+        123500,
+        288223,
+        117773
+      ],
+      "existing_sorted_map_read_tape_unchanged": true,
+      "public_callable_descriptors_unchanged": true
+    },
+    "limits": [
+      "No claim that every recursive owner family is eliminated.",
+      "Sorted/navigable membership, deeply nested sorted range construction and deeply nested StrictReadOnlyList wrappers are separate admission boundaries.",
+      "Mutable and opaque iterator owners preserve their original behavior; their internal recursion is not opened.",
+      "Predicate reentrancy or unstable visibility and concurrent owner mutation keep existing documented limits.",
+      "No whole-JDK promotion, native callback engine or universal throughput improvement."
+    ],
+    "files": [
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+        "template": "/workspace/scratch/13309be96b09/collections-work/views/generic-candidate/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+        "before_sha256": "3d126240d30993c16a6c855a3f826c508d97b4b96c4d0c17ad77ef0dd9362bdb",
+        "after_sha256": "aa7614e7009b3f342f26339b5c4e8c5583d2642db0930ad34a4a3252fca28cd6",
+        "after_git_blob": "f020985c5a1d074895477e23f28dd20be3e4f9eb"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+        "template": "/workspace/scratch/13309be96b09/collections-work/views/generic-candidate/m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+        "before_sha256": "ABSENT",
+        "after_sha256": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0",
+        "after_git_blob": "f3c89e8a85e7e322ee8b3712ad8db91a69a66fac"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java",
+        "template": "/workspace/scratch/13309be96b09/collections-work/views/generic-candidate/m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java",
+        "before_sha256": "ABSENT",
+        "after_sha256": "46fb2cdf27829984581db5a6cdd6d2fb243cbf183742afafa5b2003d0ff5dce6",
+        "after_git_blob": "37a2e0fe50687df6917a0ac0f105d491b2446974"
+      }
+    ]
+  },
+  "oracle_corrections": [
+    {
+      "file": "M3StoredRepresentativeContract.java",
+      "problem": "List.remove(Object) removed the first equals-equal hidden reference, leaving the visible reference.",
+      "correction": "Assert which reference survives and remains visible, remove the exact visible reference explicitly, then assert absence. No production change."
+    },
+    {
+      "file": "M3LongTreeSetTest.java",
+      "problem": "Zero was never inserted into the signed multiples-of-seven corpus; the central retained gap is -21 to +21.",
+      "correction": "Add independent JDK TreeSet full-array equality and use a 42-unit central gap, retaining 21-unit gaps elsewhere. No production change."
+    },
+    {
+      "file": "M3LongTreeSetTest.java",
+      "problem": "A capacity-four full page splits in half; ten sequential values occupy [1,2], [3,4], [5,6], [7,8,9,10].",
+      "correction": "Require four pages before the unchanged throwing-suffix/partial-commit assertions. This is an implementation-shape oracle, not a JDK page-layout claim."
+    },
+    {
+      "file": "M3LongTreeSetTest.java",
+      "problem": "The -200..200 step-three seed already contains 7.",
+      "correction": "Assert add(7) returns false in both owners and add(8) returns true in both, preserving separate duplicate and insertion checks. No production change."
+    }
+  ],
+  "constructor_decision": "Reuse existing M3 convention: explicit public empty constructors preserve ()V descriptors and field initialization order while satisfying exported-package -Xlint:all -Werror.",
+  "selection_limits": "Candidate fingerprint equality is discovery evidence. Finite SDK/runtime/effect/ABI gates establish only their recorded scope."
+}

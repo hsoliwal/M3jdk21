@@ -1,0 +1,111 @@
+diagnostic_only=true; thresholds=none; family=collection; depth=64; payload_size=16
+runtime=21-internal-adhoc.root.M3jdk21; vm=OpenJDK 64-Bit Server VM; arch=amd64
+class_binding=com.m3.collections.M3FilteredViews; sha256=457123dc450e21d066a9945ded4e7bbcc3dd90327abc2e6945c5ca237ad8a983; origin=file:/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-classes/
+class_binding=com.m3.collections.M3FilteredLists; sha256=679cfae3334420974f35c07f2009bd634b92d7d8eb4e1780bf403eed339526f1; origin=file:/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-classes/
+construction_samples=7; wrapper_construction_cpu_ns_median=14031; wrapper_construction_allocated_bytes_median=1560
+post_gc_process_heap_baseline_bytes=1959808; post_gc_process_heap_owner_bytes=1871280; observed_heap_delta_bytes=-88528
+owner_graph=objects=83; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredViews$CollectionView=64, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1}
+post_gc_process_heap_owner_and_cursor_bytes=2128712; observed_cursor_heap_delta_bytes=257432
+cursor_graph=objects=84; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredViews$1=64, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1, java.util.ArrayList$Itr=1}
+read_samples=7; read_cpu_ns_median=148020; read_allocated_bytes_median=2112; checksum=120; callbacks=1024
+membership_callbacks=2080
+result=PASS
+linux_process_memory=VmPeak:	 2671328 kB
+linux_process_memory=VmSize:	 2605792 kB
+linux_process_memory=VmHWM:	   46480 kB
+linux_process_memory=VmRSS:	   46480 kB
+linux_process_memory=VmData:	   70568 kB
+Exception in thread "main" java.util.NoSuchElementException: No value present
+	at java.base/java.util.Optional.orElseThrow(Optional.java:377)
+	at com.m3.collections.qualification.M3FilteredViewResourceProbe.main(M3FilteredViewResourceProbe.java:127)
+
+Native Memory Tracking:
+
+Total: reserved=1624711200, committed=63246368
+       malloc: 5124128 #13868
+       mmap:   reserved=1619587072, committed=58122240
+
+-                 Java Heap (reserved=201326592, committed=33685504)
+                            (mmap: reserved=201326592, committed=33685504) 
+ 
+-                     Class (reserved=1073957881, committed=609273)
+                            (classes #1289)
+                            (  instance classes #1156, array classes #133)
+                            (malloc=216057 #3770) 
+                            (mmap: reserved=1073741824, committed=393216) 
+                            (  Metadata:   )
+                            (    reserved=67108864, committed=1966080)
+                            (    used=1768168)
+                            (    waste=197912 =10.07%)
+                            (  Class space:)
+                            (    reserved=1073741824, committed=393216)
+                            (    used=221912)
+                            (    waste=171304 =43.56%)
+ 
+-                    Thread (reserved=6331968, committed=720448)
+                            (thread #13)
+                            (stack: reserved=6291456, committed=679936)
+                            (malloc=27864 #82) 
+                            (arena=12648 #23)
+ 
+-                      Code (reserved=253757560, committed=7854200)
+                            (malloc=125048 #1720) 
+                            (mmap: reserved=253632512, committed=7729152) 
+ 
+-                        GC (reserved=686378, committed=137514)
+                            (malloc=22826 #80) 
+                            (mmap: reserved=663552, committed=114688) 
+ 
+-                  Compiler (reserved=1495020, committed=1495020)
+                            (malloc=5668 #46) 
+                            (arena=1489352 #12)
+ 
+-                  Internal (reserved=231592, committed=231592)
+                            (malloc=194728 #2550) 
+                            (mmap: reserved=36864, committed=36864) 
+ 
+-                    Symbol (reserved=1263126, committed=1263126)
+                            (malloc=894486 #1816) 
+                            (arena=368640 #1)
+ 
+-    Native Memory Tracking (reserved=227616, committed=227616)
+                            (malloc=5728 #88) 
+                            (tracking overhead=221888)
+ 
+-        Shared class space (reserved=16777216, committed=13508608, readonly=0)
+                            (mmap: reserved=16777216, committed=13508608) 
+ 
+-               Arena Chunk (reserved=1130776, committed=1130776)
+                            (malloc=1130776 #119) 
+ 
+-                   Tracing (reserved=257, committed=257)
+                            (malloc=257 #5) 
+ 
+-                Statistics (reserved=128, committed=128)
+                            (malloc=128 #2) 
+ 
+-                 Arguments (reserved=154, committed=154)
+                            (malloc=154 #5) 
+ 
+-                    Module (reserved=176576, committed=176576)
+                            (malloc=176576 #2081) 
+ 
+-                 Safepoint (reserved=8192, committed=8192)
+                            (mmap: reserved=8192, committed=8192) 
+ 
+-           Synchronization (reserved=144736, committed=144736)
+                            (malloc=144736 #1381) 
+ 
+-            Serviceability (reserved=17152, committed=17152)
+                            (malloc=17152 #9) 
+ 
+-                 Metaspace (reserved=67177392, committed=2034608)
+                            (malloc=68528 #105) 
+                            (mmap: reserved=67108864, committed=1966080) 
+ 
+-      String Deduplication (reserved=680, committed=680)
+                            (malloc=680 #8) 
+ 
+-           Object Monitors (reserved=208, committed=208)
+                            (malloc=208 #1) 
+ 

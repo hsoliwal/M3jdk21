@@ -1,0 +1,25 @@
+{
+  "schema": "M3_EXISTING_CATEGORY_DATA_EXTENSION_PROOF_V1",
+  "status": "PASS",
+  "baseline_commit": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+  "baseline_source_sha256": "b0582330749ff1b0df500baaa7cc1daa92d8d17d1e8543a52611861d0c4e113d",
+  "received_source_sha256": "482a4798843c92256100b75ea9714237ec524a02c143db5e3ff088b60031cc1a",
+  "existing_records": 36,
+  "added_shape_ids": [
+    "live-filtered-navigation",
+    "ordered-filter-composition",
+    "read-only-collection-guards",
+    "segmented-upper-bound"
+  ],
+  "queries": 565,
+  "all_existing_serialized_entries_and_reviews_equal": true,
+  "existing_search_and_category_result_order_preserved": true,
+  "public_callable_descriptors_equal": true,
+  "invalid_query_refusals_equal": true,
+  "original_probe_unchanged_sha256": "2e1eca9b37b2108428e3aaf77c626709892d260a4423e1420faf598ce2408836",
+  "observer_source_sha256": "1172f980ea89b8064c6e3a20bfd33fb76e1bc4e190a51aa976453501e555c3f7",
+  "query_input_sha256": "04e7978b6b5c01c04fe84c4eb9688259bcbeb01ec3396bf26399ee4605584d39",
+  "public_descriptors_sha256": "cf2fc22b0bcca61ec1a676c80679c89794865f34be31f7004e6e97b39f2f230f",
+  "runtime": "Java 21; explicit native=false; exact four unchanged dependency owners",
+  "scope": "Data-only additive catalogue coverage; no source-copy, transformation, or promotion authority."
+}

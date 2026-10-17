@@ -1,0 +1,82 @@
+{
+  "status": "ACTUAL_SDK_RECEIVING_OUTPUT_FOCUSED_PROOFS_PASS",
+  "runtime": "/tmp/m3-ast-product-build/images/jdk",
+  "runtime_version": "openjdk version \"21-internal\" 2023-09-19\nOpenJDK Runtime Environment (build 21-internal-adhoc.root.M3jdk21)\nOpenJDK 64-Bit Server VM (build 21-internal-adhoc.root.M3jdk21, mixed mode, sharing)\n",
+  "received_root": "/workspace/scratch/13309be96b09/collections-work/received",
+  "dataset_sha256": "2a5c5372c73f1cba629c7b63041166fe692f48a15662616ebd81a95da7f66490",
+  "source_hashes": {
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java": "4e90ed0c7ccd20292ca08c2e2d3f43b6e0f4157b84900f7de80f10aac6a96d4b",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java": "d10fa589318f55099aa07ac703008f6c590db667ee2d684fad8944164bc2825e",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": "3d126240d30993c16a6c855a3f826c508d97b4b96c4d0c17ad77ef0dd9362bdb",
+    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java": "fe830fe58e72afbadfcc43065b53176b95c9bb6f6750e251ed4b8c907bb23700",
+    "m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java": "4b7b1bab32dda18c4f6bfef99e5b6d38754e838178205a0632b56ac64fc4c061",
+    "m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsTest.java": "bb2c6b0687aa3619553f105637898d135460e150c989f82b1be3706aa3ceefcb",
+    "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java": "3c2836df74ef09f844f845dbb7f0cd0d179787254d994fa98168d93f3c1e30d4",
+    "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundaryTest.java": "5dace1d4f7e86a98af7b817be6594063c63083a1b7f6f37ad47f192d74eae632",
+    "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java": "fa59e9a722068963eed9146dbc4b9ead6dc53abde672e28bde5c178d9ea4360a"
+  },
+  "strict_compile": "--release21 -proc:none -Xlint:all -Werror",
+  "tests": [
+    {
+      "test": "M3ReadOnlyViewBoundarySelfTest",
+      "args": [],
+      "exit": 0,
+      "stdout": "PASS M3ReadOnlyViewBoundarySelfTest checks=32267\n",
+      "stderr": ""
+    },
+    {
+      "test": "M3DeepFilteredListsProof",
+      "args": [
+        "65536",
+        "192"
+      ],
+      "exit": 0,
+      "stdout": "M3DeepFilteredListsProof checks=55469 depth=65536 seeds=192\n",
+      "stderr": ""
+    },
+    {
+      "test": "M3StoredRepresentativeContract",
+      "args": [],
+      "exit": 0,
+      "stdout": "M3_STORED_REPRESENTATIVE_CONTRACT_PASS assertions=69\n",
+      "stderr": ""
+    },
+    {
+      "test": "M3FilteredViewsContract",
+      "args": [],
+      "exit": 0,
+      "stdout": "PASS M3_FILTERED_VIEWS checks=123500 randomized=750\n",
+      "stderr": ""
+    },
+    {
+      "test": "M3MutableFilteredViewsContract",
+      "args": [],
+      "exit": 0,
+      "stdout": "PASS M3_MUTABLE_FILTERED_VIEWS assertions=288223\n",
+      "stderr": ""
+    },
+    {
+      "test": "M3FilteredNavigableFacadeSelfTest",
+      "args": [],
+      "exit": 0,
+      "stdout": "MEASURE setComparisons bounded=12 repeated=51197 mapComparisons bounded=12 repeated=51197\nPASS M3FilteredNavigableFacadeSelfTest checks=117773 randomized=750\n",
+      "stderr": ""
+    },
+    {
+      "test": "ReceivingNavigationGate",
+      "args": [],
+      "exit": 0,
+      "stdout": "PASS ReceivingNavigationGate identity, failures, live queries\n",
+      "stderr": ""
+    }
+  ],
+  "original_vs_received_read_tape_equal": true,
+  "original_vs_received_callable_public_descriptors_equal": true,
+  "log_files": [
+    "received-contract-proof.log",
+    "received-readonly-read-trace.log",
+    "received-public-closure.log",
+    "received-null-anchor.log"
+  ],
+  "full_module_gate": "root owns full Maven/JUnit module gate; large range corpus intentionally not repeated in focused subset"
+}

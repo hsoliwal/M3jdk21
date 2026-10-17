@@ -1,0 +1,78 @@
+[
+  {
+    "argv": [
+      "/tmp/m3-ast-product-build/images/jdk/bin/java",
+      "-Xms32m",
+      "-Xmx192m",
+      "-Xss256k",
+      "-XX:+UseSerialGC",
+      "-XX:NativeMemoryTracking=summary",
+      "-XX:+UnlockDiagnosticVMOptions",
+      "-XX:+PrintNMTStatistics",
+      "--add-opens",
+      "java.base/java.util=ALL-UNNAMED",
+      "--add-opens",
+      "java.base/java.util.function=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/probe-classes:/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-classes",
+      "com.m3.collections.qualification.M3FilteredViewResourceProbe",
+      "collection",
+      "1",
+      "16"
+    ],
+    "exit_code": 0,
+    "rusage": {
+      "user_seconds": 0.250573,
+      "system_seconds": 0.053204999999999995,
+      "max_rss_kib": 46896,
+      "minor_faults": 7398,
+      "major_faults": 2
+    },
+    "epoch": "baseline",
+    "family": "collection",
+    "depth": 1,
+    "payload_size": 16,
+    "log": "baseline-collection-1.log.txt",
+    "log_sha256": "7f7ca3a89627fc1db6c696355f1bb500e63c8e8f0ff911918bf519fca2c93d5a",
+    "observed": "result=PASS",
+    "expected": "result=PASS"
+  },
+  {
+    "argv": [
+      "/tmp/m3-ast-product-build/images/jdk/bin/java",
+      "-Xms32m",
+      "-Xmx192m",
+      "-Xss256k",
+      "-XX:+UseSerialGC",
+      "-XX:NativeMemoryTracking=summary",
+      "-XX:+UnlockDiagnosticVMOptions",
+      "-XX:+PrintNMTStatistics",
+      "--add-opens",
+      "java.base/java.util=ALL-UNNAMED",
+      "--add-opens",
+      "java.base/java.util.function=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/probe-classes:/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-classes",
+      "com.m3.collections.qualification.M3FilteredViewResourceProbe",
+      "collection",
+      "64",
+      "16"
+    ],
+    "exit_code": 1,
+    "rusage": {
+      "user_seconds": 0.296632,
+      "system_seconds": 0.018501999999999998,
+      "max_rss_kib": 46652,
+      "minor_faults": 7525,
+      "major_faults": 0
+    },
+    "epoch": "baseline",
+    "family": "collection",
+    "depth": 64,
+    "payload_size": 16,
+    "log": "baseline-collection-64.log.txt",
+    "log_sha256": "9cd867b1373054fe81987341d8168b4429ddfb21abeeca4351e7fa608e51716c",
+    "observed": "result=PASS",
+    "expected": "result=PASS"
+  }
+]

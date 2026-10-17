@@ -1,0 +1,21 @@
+M3ReadOnlyViewBoundarySelfTest exit=0 seconds=0.319
+PASS M3ReadOnlyViewBoundarySelfTest checks=32267
+
+M3DeepFilteredListsProof exit=0 seconds=2.069
+M3DeepFilteredListsProof checks=55469 depth=65536 seeds=192
+
+M3StoredRepresentativeContract exit=0 seconds=0.162
+M3_STORED_REPRESENTATIVE_CONTRACT_PASS assertions=69
+
+M3FilteredViewsContract exit=0 seconds=0.494
+PASS M3_FILTERED_VIEWS checks=123500 randomized=750
+
+M3MutableFilteredViewsContract exit=0 seconds=0.552
+PASS M3_MUTABLE_FILTERED_VIEWS assertions=288223
+
+M3FilteredNavigableFacadeSelfTest exit=0 seconds=0.305
+MEASURE setComparisons bounded=12 repeated=51197 mapComparisons bounded=12 repeated=51197
+PASS M3FilteredNavigableFacadeSelfTest checks=117773 randomized=750
+
+ReceivingNavigationGate exit=0 seconds=0.071
+PASS ReceivingNavigationGate identity, failures, live queries

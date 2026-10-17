@@ -1,0 +1,4 @@
+{
+  "status": "HARNESS_OBSERVATION_REJECTED",
+  "reason": "ProcessHandle.Info.totalCpuDuration is optional; one VM returned empty after the observed contract checks passed. Use OperatingSystemMXBean process CPU plus independent POSIX wait4 CPU/RSS instead. No production change."
+}

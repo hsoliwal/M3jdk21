@@ -1,0 +1,16 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.m3.collections;
+
+/** Small final-output subset; the owning module runs the exhaustive range corpus. */
+public final class ReceivingNavigationGate {
+    private ReceivingNavigationGate() { }
+
+    public static void main(String[] args) {
+        M3FilteredNavigationBoundarySelfTest.identityAndFailure();
+        M3FilteredNavigationBoundarySelfTest.liveAndQueryContracts();
+        System.out.println("PASS ReceivingNavigationGate identity, failures, live queries");
+    }
+}

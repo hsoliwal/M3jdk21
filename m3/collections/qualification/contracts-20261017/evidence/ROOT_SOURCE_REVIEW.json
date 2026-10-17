@@ -1,0 +1,32 @@
+{
+  "schema": "M3_ROOT_SELECTED_SOURCE_REVIEW_V1",
+  "reviewed_against": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "reviewed_paths": [
+    "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
+    "m3/arrays/src/main/native/tests/m3_arrays_checks.c",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+    "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java",
+    "m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java"
+  ],
+  "decisions": [
+    "Restore the two required snapshot methods, then select the first-greater cumulative-end search; retain duplicate endpoints and their original owners.",
+    "Keep production array JNI unchanged; make native C test failures executable when NDEBUG removes assert.",
+    "Preserve the existing legal range-navigation path. On rejected out-of-range endpoints, use a stored raw-owner anchor and traverse through the original known wrapper chain.",
+    "Preserve null presence using a real stored extreme instead of probing an unsupported null comparator input.",
+    "Reuse the persistent ordered predicate atom for list composition. Only private M3 conjunctions are opened; opaque predicates retain order and exception identity.",
+    "Flatten known read-only iterator decorators into temporary predicate references, not source elements. Preserve generic membership representative scans and repeated callback demand with explicit continuations.",
+    "Guard documented read-only default mutation paths before callbacks; delegate existing reversed reads to preserve their observed traversal shape.",
+    "Explicit exported default constructors preserve the original callable constructors and permit the existing strict module build."
+  ],
+  "oracle_corrections": "Four independently established false test assumptions are corrected without changing M3LongTreeSet production behavior or weakening coverage.",
+  "limits": [
+    "Structural/logic/similarity catalogue matches are candidate discovery signals, not proofs of equivalence.",
+    "Generic membership may retain quadratic predicate demand because that is part of the observed repeated representative scans.",
+    "Opaque third-party owner callback identity after rejected range construction, deep sorted range recursion and deeply nested strict read-only list owners are outside this pass acceptance.",
+    "The facade explicitly declares two already-inherited endpoint methods; callable closure is retained while declaration/reflection ownership changes are disclosed.",
+    "Platform-wide native portability and whole-JDK family promotion require their separate gates."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-DfailIfNoTests=true",
+    "-DargLine=-Xmx768m -Xcheck:jni -Xlog:class+load=info:file=/tmp/m3-collections-final-java-958zv36l/evidence/class-load.log -Djava.library.path=/tmp/m3-collections-final-java-958zv36l/absent-libraries -Dm3.collections.signal.native=false -Dm3.collections.rank.native=false",
+    "-f",
+    "/tmp/m3-collections-final-java-958zv36l/module/pom.xml",
+    "clean",
+    "verify"
+  ],
+  "JAVA_HOME": "/tmp/m3-ast-product-build/images/jdk",
+  "MAVEN_OPTS": "-Xmx768m",
+  "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+  "mode": "java",
+  "source_tree_sha256": "e3b6d1426892baff4024828c1e0a527bf164e25b46d1fa317780b5abfdeb3ef1",
+  "source_files": 249,
+  "original_pom_unchanged": true,
+  "qualified_postimages_verified": 16,
+  "build_root": "/tmp/m3-collections-final-java-958zv36l/module",
+  "source_transport_only": true,
+  "exit_code": 0,
+  "elapsed_seconds": 38.071,
+  "stable_source_monitor_polls": 35,
+  "source_stable": true,
+  "class_outputs_stable_after_test_entry": true,
+  "source_tree_after_sha256": "e3b6d1426892baff4024828c1e0a527bf164e25b46d1fa317780b5abfdeb3ef1"
+}

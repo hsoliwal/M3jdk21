@@ -1,0 +1,50 @@
+[
+  {
+    "epoch": "baseline",
+    "argv": [
+      "/tmp/m3-ast-product-build/images/jdk/bin/javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-classes",
+      "/workspace/scratch/13309be96b09/collections-work/baseline/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "/workspace/scratch/13309be96b09/collections-work/baseline/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "/workspace/scratch/13309be96b09/collections-work/baseline/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "/workspace/scratch/13309be96b09/collections-work/baseline/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java"
+    ],
+    "exit_code": 0,
+    "sources": {
+      "/workspace/scratch/13309be96b09/collections-work/baseline/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": "d67a632f63647f033e71360858f8f1be1f93418880178a96437bb0605998ad5b",
+      "/workspace/scratch/13309be96b09/collections-work/baseline/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101",
+      "/workspace/scratch/13309be96b09/collections-work/baseline/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java": "bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65",
+      "/workspace/scratch/13309be96b09/collections-work/baseline/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java": "d70bcdd969aa688ed0a498ce3503684fee2b0ecc9eb11348160e7befa1a7cfe0"
+    }
+  },
+  {
+    "epoch": "final",
+    "argv": [
+      "/tmp/m3-ast-product-build/images/jdk/bin/javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/final-classes",
+      "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java"
+    ],
+    "exit_code": 0,
+    "sources": {
+      "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": "aa7614e7009b3f342f26339b5c4e8c5583d2642db0930ad34a4a3252fca28cd6",
+      "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java": "4e90ed0c7ccd20292ca08c2e2d3f43b6e0f4157b84900f7de80f10aac6a96d4b",
+      "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java": "fe830fe58e72afbadfcc43065b53176b95c9bb6f6750e251ed4b8c907bb23700",
+      "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java": "d10fa589318f55099aa07ac703008f6c590db667ee2d684fad8944164bc2825e"
+    }
+  }
+]

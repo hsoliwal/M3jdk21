@@ -1,0 +1,2207 @@
+{
+  "classes/com/m3/collections/M3AdaptiveEnumLongMap.class": {
+    "sha256": "d375df6732f883e780104370e60e8d18020d8c13685140c8a69989a02e4d2d14",
+    "bytes": 11129,
+    "mtime_ns": 1792246979896893772
+  },
+  "classes/com/m3/collections/M3Address28.class": {
+    "sha256": "bc99279fc022a8f6bf4bc4e3e9f3ada1f0e28c49332e047af8a88270cef4c4e2",
+    "bytes": 2198,
+    "mtime_ns": 1792246979960894963
+  },
+  "classes/com/m3/collections/M3BitLane28.class": {
+    "sha256": "76f26e5257f009984542e0b5f3d53300ce1e078d375560faf30ebc6bf3ae357b",
+    "bytes": 6225,
+    "mtime_ns": 1792246979980895335
+  },
+  "classes/com/m3/collections/M3BlockingDeque$1.class": {
+    "sha256": "e3d8009c64624bdbdb28035378266b4d20104ac5d0a9523d359cc3887a2786be",
+    "bytes": 1975,
+    "mtime_ns": 1792246980060896824
+  },
+  "classes/com/m3/collections/M3BlockingDeque.class": {
+    "sha256": "2b8e11537092f57247c7f68ac28ab8477fc6885298fc726c100b6473159625c9",
+    "bytes": 13467,
+    "mtime_ns": 1792246980068896972
+  },
+  "classes/com/m3/collections/M3ChildProgressMonitor.class": {
+    "sha256": "2b74585f64da4c5c2485cdf0841825868a3dd11541ef15556294e4572fb7ed79",
+    "bytes": 5440,
+    "mtime_ns": 1792246980084897271
+  },
+  "classes/com/m3/collections/M3CollectionSdk.class": {
+    "sha256": "d77208a2276dd993d9efa4feb86e3d61f76c9be8f05e395c9fce68294264f8c4",
+    "bytes": 4181,
+    "mtime_ns": 1792246980112897791
+  },
+  "classes/com/m3/collections/M3CollectionSdkCatalog$1.class": {
+    "sha256": "68c5e185a750a3945f932cf8bb1656ae6677eb6a36c085f3a2652c78af8d208f",
+    "bytes": 1102,
+    "mtime_ns": 1792246980151928666
+  },
+  "classes/com/m3/collections/M3CollectionSdkCatalog$Disposition.class": {
+    "sha256": "85bc64b5c563731cf1370d0254c5256dfa905f304be35e49faf6fd2b834debc4",
+    "bytes": 1556,
+    "mtime_ns": 1792246980150793249
+  },
+  "classes/com/m3/collections/M3CollectionSdkCatalog$Family.class": {
+    "sha256": "ed143d96bb863d5208461d55941afde4eb83df659d6efbe8c39d4956eaff4248",
+    "bytes": 3152,
+    "mtime_ns": 1792246980151410176
+  },
+  "classes/com/m3/collections/M3CollectionSdkCatalog$Vendor.class": {
+    "sha256": "33f842f5d3769cb35868c0eedfb8f36aa7ab4bde7635df02b7100fb5952de9c6",
+    "bytes": 1466,
+    "mtime_ns": 1792246980144898387
+  },
+  "classes/com/m3/collections/M3CollectionSdkCatalog.class": {
+    "sha256": "7ebb061ac535f8d3292e8bc18b6cff18ba6c7f05152bb3c0a896f91fceeecb0f",
+    "bytes": 20125,
+    "mtime_ns": 1792246980154699651
+  },
+  "classes/com/m3/collections/M3CollectionSdkNames$Disposition.class": {
+    "sha256": "f0b7de24ff1d1b73472b0fd299374e707b7269d5439c5b396b8eb37a88fb6272",
+    "bytes": 1461,
+    "mtime_ns": 1792246980236900098
+  },
+  "classes/com/m3/collections/M3CollectionSdkNames$Family.class": {
+    "sha256": "841b4891ddb192016340466146cef21f3ac2e108e657d105d3693665955a5055",
+    "bytes": 3606,
+    "mtime_ns": 1792246980242310765
+  },
+  "classes/com/m3/collections/M3CollectionSdkNames$Provider.class": {
+    "sha256": "a094ed49f8fb860dad8df871a5048b341e0a513a3717b22a964ac871c9e16178",
+    "bytes": 1464,
+    "mtime_ns": 1792246980236900098
+  },
+  "classes/com/m3/collections/M3CollectionSdkNames.class": {
+    "sha256": "ac088d02a1ad1fdf8b140a4c369b462cf36e7d3c5d61eb6c2d7f2f38fb5311a1",
+    "bytes": 6748,
+    "mtime_ns": 1792246980244865987
+  },
+  "classes/com/m3/collections/M3Collections.class": {
+    "sha256": "2f5c3cad0777241176c9ba930a9dc9850da4b36f27e4f9695044c84dc9c56f46",
+    "bytes": 13724,
+    "mtime_ns": 1792246980268900694
+  },
+  "classes/com/m3/collections/M3ConcurrentBitSet$SetBits.class": {
+    "sha256": "3f8274ebeb9cac4b46bd47f90bab831629e29bcc5013f8233a44787effb86ec4",
+    "bytes": 2365,
+    "mtime_ns": 1792246980712908954
+  },
+  "classes/com/m3/collections/M3ConcurrentBitSet.class": {
+    "sha256": "356440c39b811c626be28bc75061f08d220578be7cd2cd11e5d0aedfca38330a",
+    "bytes": 3735,
+    "mtime_ns": 1792246980717848126
+  },
+  "classes/com/m3/collections/M3ConcurrentIntLane28$Range.class": {
+    "sha256": "e4ff5e9cfb74eb3c7e4b5bb57ffffcb5a46a45e9e21c8bd8c4c799ba2c6014a4",
+    "bytes": 2310,
+    "mtime_ns": 1792246980339984738
+  },
+  "classes/com/m3/collections/M3ConcurrentIntLane28.class": {
+    "sha256": "b5eb757ec41c0db029dc6a842891ed6541b31b2cbbf314269e93067c48f4d1b8",
+    "bytes": 3751,
+    "mtime_ns": 1792246980340843669
+  },
+  "classes/com/m3/collections/M3ConcurrentLongLane28$Range.class": {
+    "sha256": "9f4f7122ec8f4c403056f3d88ad5beaa8508bfe390fa7fe39b037e49d06d37e7",
+    "bytes": 2327,
+    "mtime_ns": 1792246980328901811
+  },
+  "classes/com/m3/collections/M3ConcurrentLongLane28.class": {
+    "sha256": "0942a6e98330a94c035c867a81901325f0f40b220679ecba1f2d476040ba7df3",
+    "bytes": 3781,
+    "mtime_ns": 1792246980334110437
+  },
+  "classes/com/m3/collections/M3ConcurrentLongMap$PairLane.class": {
+    "sha256": "59f960708a596ffbeb05f8fbc39fa5ba140052cee9d7cc66017b0c1db3a447b9",
+    "bytes": 1987,
+    "mtime_ns": 1792246980720909105
+  },
+  "classes/com/m3/collections/M3ConcurrentLongMap.class": {
+    "sha256": "4f92ef415b6276954a3523779c1feade5f11a7c0bc938bc72c94331b30ef57a3",
+    "bytes": 4369,
+    "mtime_ns": 1792246980725786830
+  },
+  "classes/com/m3/collections/M3ConcurrentLongSet$1.class": {
+    "sha256": "c0f53a810bef64b79cfb830861a7b51138807e579a04011c057c450cb7da6e52",
+    "bytes": 1068,
+    "mtime_ns": 1792246980730553315
+  },
+  "classes/com/m3/collections/M3ConcurrentLongSet.class": {
+    "sha256": "4d2be6483ec52d38915497d58ecba6dbc388a558b3b7b459c625401f6db8ddb6",
+    "bytes": 3129,
+    "mtime_ns": 1792246980731791236
+  },
+  "classes/com/m3/collections/M3DefaultProgressMonitor.class": {
+    "sha256": "2d7136abd43dcbfc825b954d2495d6e1e2d39770ecf7bd3550034fffbd4e38ea",
+    "bytes": 4265,
+    "mtime_ns": 1792246980732909327
+  },
+  "classes/com/m3/collections/M3EnumLongMap$EntryConsumer.class": {
+    "sha256": "e51eac9a653b54b2924de86206ca4c57826e93e939d6819c7bc0ebf52a4d2ece",
+    "bytes": 442,
+    "mtime_ns": 1792246979952146499
+  },
+  "classes/com/m3/collections/M3EnumLongMap$OrdinalLongConsumer.class": {
+    "sha256": "f68b289f6d311b7bd95a030a2532caa09e909fa3db275255e41e8960b8a88416",
+    "bytes": 355,
+    "mtime_ns": 1792246979944894665
+  },
+  "classes/com/m3/collections/M3EnumLongMap.class": {
+    "sha256": "097167aa0a133450d578f29c9fe28eec17147f1b4f414c9de56a62b4059e4aaa",
+    "bytes": 8619,
+    "mtime_ns": 1792246979955845821
+  },
+  "classes/com/m3/collections/M3EnumSet.class": {
+    "sha256": "515626e44115c6dad46fcb6b8a7617580af5294fe0a991f4de13234a62e8e9d7",
+    "bytes": 10078,
+    "mtime_ns": 1792246980748909625
+  },
+  "classes/com/m3/collections/M3FilteredLists$StrictReadOnlyList.class": {
+    "sha256": "c55da6bbc69dd1f1d5ffc14a0fcbe9963ee679406eeec158218a2478c98ee72d",
+    "bytes": 5230,
+    "mtime_ns": 1792246980768909997
+  },
+  "classes/com/m3/collections/M3FilteredLists$View$1.class": {
+    "sha256": "0294092273bb145f45889b263c323e70e0da42360ac1cb0df30e704eb41c2fcc",
+    "bytes": 1893,
+    "mtime_ns": 1792246980775260994
+  },
+  "classes/com/m3/collections/M3FilteredLists$View$Cursor.class": {
+    "sha256": "536e73105809c3f2ace2586885772a4db71478226184d793b67b3fe8fd055e8e",
+    "bytes": 5239,
+    "mtime_ns": 1792246980776139725
+  },
+  "classes/com/m3/collections/M3FilteredLists$View.class": {
+    "sha256": "16720983b52d6ebbcc9551322733a79410a7aefdd40cae2a74af2be1711954ac",
+    "bytes": 6388,
+    "mtime_ns": 1792246980779293926
+  },
+  "classes/com/m3/collections/M3FilteredLists.class": {
+    "sha256": "f2845aa4a54c3141fff31e562d23e67cb4d3ec59f271860179dfc54735b6f5c1",
+    "bytes": 1339,
+    "mtime_ns": 1792246980780201551
+  },
+  "classes/com/m3/collections/M3FilteredNavigableSet.class": {
+    "sha256": "78448f331e4cfd193375c7224fc1d1ba2e924c4819d81f7384001b330f066392",
+    "bytes": 6546,
+    "mtime_ns": 1792246980792910444
+  },
+  "classes/com/m3/collections/M3FilteredViews$1.class": {
+    "sha256": "ed88fbaf0a1b2229be5e21f914250ba403406b4852cb11a8f68b3f979079b84c",
+    "bytes": 1668,
+    "mtime_ns": 1792246980896912379
+  },
+  "classes/com/m3/collections/M3FilteredViews$CollectionView.class": {
+    "sha256": "4eec13971a9d7192e96966b8192c82a6831747d0b255b735978551e0736701a2",
+    "bytes": 4926,
+    "mtime_ns": 1792246980905210366
+  },
+  "classes/com/m3/collections/M3FilteredViews$FilterNode.class": {
+    "sha256": "4be1c2184a423427313517af30e82022f13450a3246a1998b8bd8ec20e83b61a",
+    "bytes": 1428,
+    "mtime_ns": 1792246980903554397
+  },
+  "classes/com/m3/collections/M3FilteredViews$NavigableMapView.class": {
+    "sha256": "3dbc4662cacf5f9f7f8717bc657a14204df4f5a907cdb065a4671574a3c5733b",
+    "bytes": 9466,
+    "mtime_ns": 1792246980911855966
+  },
+  "classes/com/m3/collections/M3FilteredViews$NavigableSetView.class": {
+    "sha256": "13ddf15500851fc506982e122ddc0b3ad0a70c8990c56b92b57bf5bb105c9684",
+    "bytes": 5583,
+    "mtime_ns": 1792246980908778660
+  },
+  "classes/com/m3/collections/M3FilteredViews$OrderedPredicate.class": {
+    "sha256": "506f24ea3bac4c9860edb92e1b8bdf525e5af3dc7eb8fc2bcc3972e8f1eb825c",
+    "bytes": 1765,
+    "mtime_ns": 1792246980904203973
+  },
+  "classes/com/m3/collections/M3FilteredViews$ReadOnlySortedMap.class": {
+    "sha256": "49d3241bd4befbf6a61dd79110144cda1a3218380ad814f6663cf6e2cc698434",
+    "bytes": 9004,
+    "mtime_ns": 1792246980906968068
+  },
+  "classes/com/m3/collections/M3FilteredViews$ReadOnlySortedSet.class": {
+    "sha256": "47c39bdabd436c8a508e157aaee09a0144ac9a987796882598df29f4b6efa07a",
+    "bytes": 6410,
+    "mtime_ns": 1792246980906286303
+  },
+  "classes/com/m3/collections/M3FilteredViews$SetView.class": {
+    "sha256": "7a95b907771c77035247f9012910cbdc12377bf365c1cc1380a49f0a43386254",
+    "bytes": 2871,
+    "mtime_ns": 1792246980905816797
+  },
+  "classes/com/m3/collections/M3FilteredViews$SortedMapView$1$1.class": {
+    "sha256": "bdf985bc1bcdd402082ab6b07274cc90e812ed6910fc0fd2d07085831b972fe7",
+    "bytes": 1811,
+    "mtime_ns": 1792246980909192181
+  },
+  "classes/com/m3/collections/M3FilteredViews$SortedMapView$1.class": {
+    "sha256": "dad72a0140973a147e47ad0532b51a83cc3125dc6486dbea60dcde1e4daf2051",
+    "bytes": 3255,
+    "mtime_ns": 1792246980909658533
+  },
+  "classes/com/m3/collections/M3FilteredViews$SortedMapView.class": {
+    "sha256": "88cf612ad0db4fe014fd10059305cc305fbb1c7c6b916edd479db461424b98c7",
+    "bytes": 9295,
+    "mtime_ns": 1792246980910350783
+  },
+  "classes/com/m3/collections/M3FilteredViews$SortedSetView.class": {
+    "sha256": "a08bad19c3851eea456952488fa8d3775076eada3b89d4e151d4401da2c25869",
+    "bytes": 4051,
+    "mtime_ns": 1792246980907655612
+  },
+  "classes/com/m3/collections/M3FilteredViews.class": {
+    "sha256": "e0502a2f4695ccb50ee6d7c23cdbb4c86e995de06914399a392dc455180d9911",
+    "bytes": 12873,
+    "mtime_ns": 1792246980913612166
+  },
+  "classes/com/m3/collections/M3IndexMaskCompactor$Backend.class": {
+    "sha256": "025517461d2bc2e9fa69a91b002a63148b03ccab68c47386d4f8f22fbb6233f6",
+    "bytes": 1320,
+    "mtime_ns": 1792246980204899504
+  },
+  "classes/com/m3/collections/M3IndexMaskCompactor$NativeLibrary.class": {
+    "sha256": "d585f52b41b7fe1edef97b6591cb85e2ea6c59b6330ad9c6a9665eccc1fb6da7",
+    "bytes": 854,
+    "mtime_ns": 1792246980210233554
+  },
+  "classes/com/m3/collections/M3IndexMaskCompactor$NativeRange.class": {
+    "sha256": "612770a9f160280ee1db59ba6c1895e206cc6c5ed5a0602673c0c2dc33001dd7",
+    "bytes": 812,
+    "mtime_ns": 1792246980210750151
+  },
+  "classes/com/m3/collections/M3IndexMaskCompactor.class": {
+    "sha256": "7ad7516166c41448ad0ca2e723ca83d4a88247f16ad870b5297da00c8d06289f",
+    "bytes": 5097,
+    "mtime_ns": 1792246980213252282
+  },
+  "classes/com/m3/collections/M3IndexMaskWindow.class": {
+    "sha256": "72e847d1c06a9e5b86c03ad82187b4cafc88774159f5608e0de829ec9395c372",
+    "bytes": 3222,
+    "mtime_ns": 1792246980919520298
+  },
+  "classes/com/m3/collections/M3IndexPathMasks$Backend.class": {
+    "sha256": "181937cf576051f1248c80bce33c06ebbb99bb02ce040a2984e24490a1524d8e",
+    "bytes": 1288,
+    "mtime_ns": 1792246980924912900
+  },
+  "classes/com/m3/collections/M3IndexPathMasks$NativeLibrary.class": {
+    "sha256": "9039ab4cc5362df86a6e1cf66a357fcdcb6c41fa803e3b7c2806c206eb13bd86",
+    "bytes": 838,
+    "mtime_ns": 1792246980929197896
+  },
+  "classes/com/m3/collections/M3IndexPathMasks.class": {
+    "sha256": "ad83096a6566711700ce5962d94201298aa594f264275de3152a4590520a6a4f",
+    "bytes": 6280,
+    "mtime_ns": 1792246980930269887
+  },
+  "classes/com/m3/collections/M3IndexPathRank$Window.class": {
+    "sha256": "2ef940485b8cf86ed64a29eab3485af0263191f27a6a4b1e011c189e83a540e7",
+    "bytes": 1813,
+    "mtime_ns": 1792246980934913398
+  },
+  "classes/com/m3/collections/M3IndexPathRank.class": {
+    "sha256": "ff0539e3fcf79b64abe4cc214ea709579a035f570faddfb790c7b28b08f17a95",
+    "bytes": 4417,
+    "mtime_ns": 1792246980935853200
+  },
+  "classes/com/m3/collections/M3IndexedMultiValueMap$ValuesSnapshot.class": {
+    "sha256": "2032a9147926596bf30ff01303e4d0b43b6d88628e5a97a51e25b848153d15d5",
+    "bytes": 5374,
+    "mtime_ns": 1792246980948913346
+  },
+  "classes/com/m3/collections/M3IndexedMultiValueMap.class": {
+    "sha256": "a08ac45a31476d58d7f5bad49e61333be9ab347d02535a41832ec021c452de94",
+    "bytes": 9624,
+    "mtime_ns": 1792246980955614888
+  },
+  "classes/com/m3/collections/M3IntCollection$1.class": {
+    "sha256": "d34ac43f7f8ba5a705b7e3d32c9e4627c8d4e0784980d9cf1f820799e0ff4a32",
+    "bytes": 1957,
+    "mtime_ns": 1792246980956913495
+  },
+  "classes/com/m3/collections/M3IntCollection.class": {
+    "sha256": "eb3d79796ddfd1aff14b84e0637cfbb1d9c9cf61ff4a43803c3ff99f2a889ac9",
+    "bytes": 1773,
+    "mtime_ns": 1792246980961828419
+  },
+  "classes/com/m3/collections/M3IntHashSet$1.class": {
+    "sha256": "b4c306fb6f454515d6280adbfd41630cc38654d9616021c40808660a9c2808d5",
+    "bytes": 1392,
+    "mtime_ns": 1792246980968200078
+  },
+  "classes/com/m3/collections/M3IntHashSet.class": {
+    "sha256": "b432621b42a434da25cd0905b22f63119508f20adb5dcaf133e49565b5a9dc7d",
+    "bytes": 4322,
+    "mtime_ns": 1792246980969520573
+  },
+  "classes/com/m3/collections/M3IntIntConsumer.class": {
+    "sha256": "50b101ca3b714b3a3b4890b2fb6400b23c762ad349378639dc5a587b34dc19f0",
+    "bytes": 231,
+    "mtime_ns": 1792246980970414557
+  },
+  "classes/com/m3/collections/M3IntIntHashMap$1.class": {
+    "sha256": "9c9c9dba036bda4518ed1d7cc3f40d111527a1d5157634e7bce29cba4868016a",
+    "bytes": 1413,
+    "mtime_ns": 1792246980972913792
+  },
+  "classes/com/m3/collections/M3IntIntHashMap.class": {
+    "sha256": "8cfd92484b267d0d4527a865d5f7e31481eaaaa92f9e32d6032d44b05f95b6c6",
+    "bytes": 6232,
+    "mtime_ns": 1792246980979042166
+  },
+  "classes/com/m3/collections/M3IntIterator.class": {
+    "sha256": "fd6f4aefb52242468b6c578e30cd71e27a0ef18a177ecac062e386cb7f8db205",
+    "bytes": 697,
+    "mtime_ns": 1792246979959902559
+  },
+  "classes/com/m3/collections/M3IntLane28.class": {
+    "sha256": "002e7cbd4a242ccba0b897a0e2a8414892425c2f080fd34ae9fa64c3c06f7fb3",
+    "bytes": 4589,
+    "mtime_ns": 1792246980296901215
+  },
+  "classes/com/m3/collections/M3IntLongConsumer.class": {
+    "sha256": "c2a6384e5fc36a01e2d19b127018426870b4aae036a5034170ef5c4baeb02321",
+    "bytes": 233,
+    "mtime_ns": 1792246979957839217
+  },
+  "classes/com/m3/collections/M3IntLongHashMap$1.class": {
+    "sha256": "efe8b21e85ddf5dacf51d3d15cb5f85cd557d73ed0481df65c1a31e8c9a9e23f",
+    "bytes": 1419,
+    "mtime_ns": 1792246979916894145
+  },
+  "classes/com/m3/collections/M3IntLongHashMap.class": {
+    "sha256": "62eba086b7b918b1dbc398e341d6492dfae8a5c5512888ce7b5b6ad50c4f9a4f",
+    "bytes": 6494,
+    "mtime_ns": 1792246979920894219
+  },
+  "classes/com/m3/collections/M3IntPriorityQueue$1.class": {
+    "sha256": "7d02d0e5caeee59706db4cc80893750169914537266fab7cca08b1035665e24d",
+    "bytes": 1202,
+    "mtime_ns": 1792246980980913942
+  },
+  "classes/com/m3/collections/M3IntPriorityQueue.class": {
+    "sha256": "90afe62f8d8fba2e81681a563a64210457d800ace80d86f0b5261f0a7a8e98ee",
+    "bytes": 4586,
+    "mtime_ns": 1792246980986124644
+  },
+  "classes/com/m3/collections/M3LazyEventBits.class": {
+    "sha256": "2b0d16870cdee2d33e7dfa4ec462ec64d50844c2875b2d745005e5759fc0220f",
+    "bytes": 976,
+    "mtime_ns": 1792246980987076114
+  },
+  "classes/com/m3/collections/M3LazyEventGranularity.class": {
+    "sha256": "01c9cfe41b742e9da42dd0157b6fcb41e8bcfcc4dacdc407c0f269bcd33d9116",
+    "bytes": 1981,
+    "mtime_ns": 1792246980697841660
+  },
+  "classes/com/m3/collections/M3LazyEventPolicy.class": {
+    "sha256": "e744b0cdfd7c280a39335d087fef70c075d037a885cdb68be9ee853d5b834d68",
+    "bytes": 3660,
+    "mtime_ns": 1792246980695549905
+  },
+  "classes/com/m3/collections/M3LazyEventSink$NoOpHolder.class": {
+    "sha256": "091238ae18f7f9875ca90053e24bdb22fd5a4976546e83f70940fe1e7f81541d",
+    "bytes": 1512,
+    "mtime_ns": 1792246980700756322
+  },
+  "classes/com/m3/collections/M3LazyEventSink.class": {
+    "sha256": "2a5c99ec9d494adbfb2215739ccb143672ae8691ac42a1cf1225934818d6f3b1",
+    "bytes": 873,
+    "mtime_ns": 1792246980701051836
+  },
+  "classes/com/m3/collections/M3LazyEventSource.class": {
+    "sha256": "274acb3b93b6beaa161fc33f8ee5a4ac6831c97db1d1c6559e04cdac8a6cdc7c",
+    "bytes": 847,
+    "mtime_ns": 1792246980679872398
+  },
+  "classes/com/m3/collections/M3LazyEvents.class": {
+    "sha256": "b8c64991198aca9142d85199086246a02348b8c0aa0bd1a041c20825106cc98e",
+    "bytes": 1873,
+    "mtime_ns": 1792246980989170132
+  },
+  "classes/com/m3/collections/M3LazyOperation.class": {
+    "sha256": "f0d4bc2386d20fd3bc6d621eb0da842aba66cea1f33b7533fe04d121bf594aa3",
+    "bytes": 2029,
+    "mtime_ns": 1792246980692194170
+  },
+  "classes/com/m3/collections/M3LazyValueProvider.class": {
+    "sha256": "fcbd3f870b2a8305ea84088f443d5d92645810294b34c824360878f715ff0782",
+    "bytes": 720,
+    "mtime_ns": 1792246980678874427
+  },
+  "classes/com/m3/collections/M3LazyValueState.class": {
+    "sha256": "ebe58917e7017ad9e8ace662ea59c91f6ee568c22141818cf85b24e52da1adf7",
+    "bytes": 9197,
+    "mtime_ns": 1792246980708281354
+  },
+  "classes/com/m3/collections/M3LinkedHashMap$Table.class": {
+    "sha256": "b9d11bad7d2522bce7fb36f3fee07c0ebf2e649df3720171bf7cec2393b1af0b",
+    "bytes": 4757,
+    "mtime_ns": 1792246980416903448
+  },
+  "classes/com/m3/collections/M3LinkedHashMap.class": {
+    "sha256": "a73ac6e2c255051f437375aa7e3ebda76d0eb3f76bb558de22bcaadf99c6e26b",
+    "bytes": 9224,
+    "mtime_ns": 1792246980416903448
+  },
+  "classes/com/m3/collections/M3LinkedHashSet.class": {
+    "sha256": "6a29120dea7ff6dd9aa20f8173964bdcee1c0af8036c7540a07beeb7581f7dde",
+    "bytes": 4080,
+    "mtime_ns": 1792246980488904787
+  },
+  "classes/com/m3/collections/M3LinkedList$1.class": {
+    "sha256": "5afe68de5b8353d8a4fcf70dde99b48b948633e7d1e08e993ae543a267c8c607",
+    "bytes": 3217,
+    "mtime_ns": 1792246980356902332
+  },
+  "classes/com/m3/collections/M3LinkedList$Storage.class": {
+    "sha256": "113a532595c5a3cbce0f0d60aa68bd9cd6f1417d7771ebd1d73a4929d8fe4932",
+    "bytes": 2179,
+    "mtime_ns": 1792246980356902332
+  },
+  "classes/com/m3/collections/M3LinkedList.class": {
+    "sha256": "783a5b806ecadce4d29a0a342bc80781d6acf656da443ad744a9b1f7a53295e8",
+    "bytes": 8365,
+    "mtime_ns": 1792246980362251626
+  },
+  "classes/com/m3/collections/M3LockedMap$1.class": {
+    "sha256": "6775755bfd1d199a3022068deb9335e85a0d959a87f69e6744415e91b7a91bff",
+    "bytes": 1962,
+    "mtime_ns": 1792246980560906128
+  },
+  "classes/com/m3/collections/M3LockedMap$2.class": {
+    "sha256": "a9c5d902c4e2b1123ea99f7f9d94bdd6dd281dc6dae8444c652da0a786ebd04c",
+    "bytes": 1748,
+    "mtime_ns": 1792246980567805914
+  },
+  "classes/com/m3/collections/M3LockedMap$3.class": {
+    "sha256": "1e47cbbbb05a1ffe8150f6337ff814c959ae7aa5f2afc8043776b349ffe0526b",
+    "bytes": 1583,
+    "mtime_ns": 1792246980568212035
+  },
+  "classes/com/m3/collections/M3LockedMap$4.class": {
+    "sha256": "a43d99236b9ab87c6099cf56f969742c7f2013cc6634f7af8b72f9c22bbb3fe7",
+    "bytes": 2240,
+    "mtime_ns": 1792246980568833980
+  },
+  "classes/com/m3/collections/M3LockedMap$SnapshotEntry.class": {
+    "sha256": "829b4d08392381dff5fdfa1bc028b879bd52dc2d3b6e4e84b702ba8a70f45679",
+    "bytes": 2734,
+    "mtime_ns": 1792246980567222217
+  },
+  "classes/com/m3/collections/M3LockedMap.class": {
+    "sha256": "00b5e11f730f47f0f8cf721481f34dc648251d006bb7a07eb2a1d353cf6cf486",
+    "bytes": 10476,
+    "mtime_ns": 1792246980570439773
+  },
+  "classes/com/m3/collections/M3LockedTreeMap.class": {
+    "sha256": "96452bf78cf91e4de91be17bc41e8c32f26e2baa0b801e9b79163f4f97ab8938",
+    "bytes": 9317,
+    "mtime_ns": 1792246980584906574
+  },
+  "classes/com/m3/collections/M3LockedTreeSet.class": {
+    "sha256": "03168dc5fead5e6b63141dcb12d887c199286f9a0e3f8f40d4c9a7c924f37128",
+    "bytes": 6986,
+    "mtime_ns": 1792246980600906872
+  },
+  "classes/com/m3/collections/M3LongAddressKernel$NativeLibrary.class": {
+    "sha256": "6b202b8f4d63a9c24b345bd5e5d91421430ff4fa9852e75d005b646bb5bba716",
+    "bytes": 923,
+    "mtime_ns": 1792246980993793892
+  },
+  "classes/com/m3/collections/M3LongAddressKernel.class": {
+    "sha256": "ed0c26b4b41189b88d6e10c646cf9552250771dda14fc87357f69734ab7fbc44",
+    "bytes": 3347,
+    "mtime_ns": 1792246980994425862
+  },
+  "classes/com/m3/collections/M3LongArena28.class": {
+    "sha256": "6191ffd6aaa621870417e7a852eb69c4ad18e94a7655dc7fef440508e7b3fead",
+    "bytes": 2374,
+    "mtime_ns": 1792246980320395830
+  },
+  "classes/com/m3/collections/M3LongArrayDeque$1.class": {
+    "sha256": "b2f62b3e9d379faca661cf2b9fa63f512d288fe3b13daa11a3872265235cd563",
+    "bytes": 1237,
+    "mtime_ns": 1792246980648907764
+  },
+  "classes/com/m3/collections/M3LongArrayDeque$2.class": {
+    "sha256": "3ee866153d6898265695326d7f56c9a838e329d331471abbc84a7d92ea2ab3e1",
+    "bytes": 1250,
+    "mtime_ns": 1792246980654105753
+  },
+  "classes/com/m3/collections/M3LongArrayDeque.class": {
+    "sha256": "ad3331acb1171bf25558bdd8900b84f2d7e9d1b7bd1353ea2fa553ea19be81de",
+    "bytes": 6854,
+    "mtime_ns": 1792246980654985095
+  },
+  "classes/com/m3/collections/M3LongArrayList$1.class": {
+    "sha256": "6b95305b916ad34e0e8a3e4ba0cb50868e7c90b4a72258fcf19d4efd944fdd84",
+    "bytes": 1191,
+    "mtime_ns": 1792246980632907467
+  },
+  "classes/com/m3/collections/M3LongArrayList.class": {
+    "sha256": "6d8ea254466b44831d650b317f3c48ea13119ca485ef5b75863ba0d877ada26e",
+    "bytes": 7426,
+    "mtime_ns": 1792246980639429585
+  },
+  "classes/com/m3/collections/M3LongBitmapFilterPlan$1.class": {
+    "sha256": "b9872c935dcceb8dfb6216c62005ebeb6bf163be9ef028795530bc1a3630348c",
+    "bytes": 1277,
+    "mtime_ns": 1792246981000914313
+  },
+  "classes/com/m3/collections/M3LongBitmapFilterPlan$IndexedSpliterator.class": {
+    "sha256": "327ac84bc052b2a999c514ff4641243379c3296ced50b759d9e26a491219598f",
+    "bytes": 2122,
+    "mtime_ns": 1792246981005867082
+  },
+  "classes/com/m3/collections/M3LongBitmapFilterPlan.class": {
+    "sha256": "e666cb6b6d068c86edba0eeb72701186355086bc7026cd38da4b0a82e59a2944",
+    "bytes": 7665,
+    "mtime_ns": 1792246981007035348
+  },
+  "classes/com/m3/collections/M3LongBitmapFilteredSnapshot$1.class": {
+    "sha256": "1bc6a38d1c2350b926bcfed46f2da9a70b5db04b5ae0ab0730c7640b4d84fb45",
+    "bytes": 1242,
+    "mtime_ns": 1792246980176898981
+  },
+  "classes/com/m3/collections/M3LongBitmapFilteredSnapshot$IndexSpliterator.class": {
+    "sha256": "2c614d0e6ef082e435c774048c6be190243f226a48dc68e87a43324ae7315343",
+    "bytes": 2182,
+    "mtime_ns": 1792246980181965920
+  },
+  "classes/com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView$1.class": {
+    "sha256": "c6c83a6b05d7ef37c8ee58bbb34ffc852fabde1dbb375c272d35019d39e8a2ec",
+    "bytes": 1628,
+    "mtime_ns": 1792246980182721406
+  },
+  "classes/com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView$Cache.class": {
+    "sha256": "d97722a2d90ca040e23f49801c756f5815d51ee43cc48151588f038fce80f5ef",
+    "bytes": 840,
+    "mtime_ns": 1792246980182371680
+  },
+  "classes/com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView.class": {
+    "sha256": "d27b777780a3b92dd9f3c8fad0a34b089fc3e128065eb7c76fae460f888a12b4",
+    "bytes": 4214,
+    "mtime_ns": 1792246980183544904
+  },
+  "classes/com/m3/collections/M3LongBitmapFilteredSnapshot.class": {
+    "sha256": "ad241a810664a6866498236d959d71cbcdad6fec79643f2e6f314b7063b5d91f",
+    "bytes": 5746,
+    "mtime_ns": 1792246980184710927
+  },
+  "classes/com/m3/collections/M3LongCollection$1.class": {
+    "sha256": "f046d236b36d6072f1af4ee238e4c79e97ff579dec2f780012d1d8f341d1f65d",
+    "bytes": 1970,
+    "mtime_ns": 1792246980184899131
+  },
+  "classes/com/m3/collections/M3LongCollection.class": {
+    "sha256": "27c36efed5ec3cb905997ba32a4fb87db3ce96205de31edc9ac3d5ddb6a1402e",
+    "bytes": 1802,
+    "mtime_ns": 1792246980192379785
+  },
+  "classes/com/m3/collections/M3LongCompositeViews$1.class": {
+    "sha256": "48ee66317494f452549b1a223ab166950d5e82f6d640c488887bc0f4f1f55bef",
+    "bytes": 2216,
+    "mtime_ns": 1792246981024914761
+  },
+  "classes/com/m3/collections/M3LongCompositeViews$BinarySetAlgebra.class": {
+    "sha256": "0b0fcd8ace53ea403cb2e3c8573d7c85cd802daba09b757e82b8d45905e4ed7a",
+    "bytes": 4757,
+    "mtime_ns": 1792246981032366388
+  },
+  "classes/com/m3/collections/M3LongCompositeViews$BinarySetCursor.class": {
+    "sha256": "cce631eb49b2d09d56834aeaedf915a73189b3185b6d0036ed9a65a0393bec8e",
+    "bytes": 2904,
+    "mtime_ns": 1792246981033123717
+  },
+  "classes/com/m3/collections/M3LongCompositeViews$Concatenation$1.class": {
+    "sha256": "ae0be8769d85c6eb6a0f37b6d1c87f6dabef5126c305675b9c680d4260d473b0",
+    "bytes": 1410,
+    "mtime_ns": 1792246981024914761
+  },
+  "classes/com/m3/collections/M3LongCompositeViews$Concatenation.class": {
+    "sha256": "5100b586656f5bfaf0ea7ea33de59e3e9eaeb2fbfcfea3b33442af407916d767",
+    "bytes": 2467,
+    "mtime_ns": 1792246981029808082
+  },
+  "classes/com/m3/collections/M3LongCompositeViews$Merge.class": {
+    "sha256": "dc2734ac987634b802b6e9b058cca20b2b1f0b232b12ce73482a54be18998f59",
+    "bytes": 2511,
+    "mtime_ns": 1792246981033718280
+  },
+  "classes/com/m3/collections/M3LongCompositeViews$SetOperation.class": {
+    "sha256": "4a1160c7ceee1f03b31d753791e6d9bb2e299fbb5c5ae2a17c3275468f50828e",
+    "bytes": 1421,
+    "mtime_ns": 1792246981031379935
+  },
+  "classes/com/m3/collections/M3LongCompositeViews$Union.class": {
+    "sha256": "be6416c014e8be2e8a12b4816084e23c34ab7976ebba98699f1101104cd22dd1",
+    "bytes": 3999,
+    "mtime_ns": 1792246981030888517
+  },
+  "classes/com/m3/collections/M3LongCompositeViews.class": {
+    "sha256": "3c0cc6d2159a7296d3035e405983898a1ae38f2e19bcb85ba0179ddea3503421",
+    "bytes": 3224,
+    "mtime_ns": 1792246981034190751
+  },
+  "classes/com/m3/collections/M3LongDag$1.class": {
+    "sha256": "d51cab9bc8b7b51b035ac939610d6f8ef38067d04077a25284a98436a133599f",
+    "bytes": 1846,
+    "mtime_ns": 1792246981056915355
+  },
+  "classes/com/m3/collections/M3LongDag$Concat.class": {
+    "sha256": "b044e9d5181964d8886460324884e3c112b7d0a4398768fd55c961d60df0cef1",
+    "bytes": 1778,
+    "mtime_ns": 1792246981062404714
+  },
+  "classes/com/m3/collections/M3LongDag$Distinct.class": {
+    "sha256": "afea3283060c24c2638eddf409d0eb80406b36cad936f4002f4e9b43279791fd",
+    "bytes": 2762,
+    "mtime_ns": 1792246981065504965
+  },
+  "classes/com/m3/collections/M3LongDag$Filter.class": {
+    "sha256": "f99e50bae3a3cb9dd260e971a27dad1ff340cd8b5a55c42f8691c138c18439e3",
+    "bytes": 1925,
+    "mtime_ns": 1792246981063417457
+  },
+  "classes/com/m3/collections/M3LongDag$Frame.class": {
+    "sha256": "af45c14fc26e287e5b8bfbd99e8a2bd668cede231efa050f34bc2090d149fa66",
+    "bytes": 1754,
+    "mtime_ns": 1792246981062872057
+  },
+  "classes/com/m3/collections/M3LongDag$Limit.class": {
+    "sha256": "fb6728904f51172f1e497143dfe037be7a8e263792391968845aebe1df6c74d3",
+    "bytes": 1782,
+    "mtime_ns": 1792246981064637090
+  },
+  "classes/com/m3/collections/M3LongDag$MapValue.class": {
+    "sha256": "19e818bec1db49a1ed5c2584e98b56c71ec6c1415be3e22361dda5c1e8b33ec1",
+    "bytes": 1947,
+    "mtime_ns": 1792246981063855776
+  },
+  "classes/com/m3/collections/M3LongDag$Node.class": {
+    "sha256": "834b4421687ea022f639cb8e2a3ef88348d7d84cd637a7819948fc596c73dcb2",
+    "bytes": 422,
+    "mtime_ns": 1792246981061129487
+  },
+  "classes/com/m3/collections/M3LongDag$Skip.class": {
+    "sha256": "78ed04d850af12bbc235912027ef05f0ade65e30ce4aef1074fbdfb734162906",
+    "bytes": 1775,
+    "mtime_ns": 1792246981064261075
+  },
+  "classes/com/m3/collections/M3LongDag$Sort.class": {
+    "sha256": "1a404ae98e685acf993a8cf3e2198ffc53664490f64bb5a4b67bb7958b9fc764",
+    "bytes": 2172,
+    "mtime_ns": 1792246981066060330
+  },
+  "classes/com/m3/collections/M3LongDag$Source.class": {
+    "sha256": "e9137ecfe40c39b4e512829bffebede0b73b603dd3f61fa715d4e2329ed8eb80",
+    "bytes": 1619,
+    "mtime_ns": 1792246981061621577
+  },
+  "classes/com/m3/collections/M3LongDag$Stage.class": {
+    "sha256": "fea16192a4281512e1f1e7bf146744c677f21b4f14a68c27d62f72e45c3ac897",
+    "bytes": 683,
+    "mtime_ns": 1792246981063046830
+  },
+  "classes/com/m3/collections/M3LongDag$Unary.class": {
+    "sha256": "84f67166ad1e0b5dd406951b2deb6316480c8ba93e6f229b230aa493472da6bf",
+    "bytes": 1913,
+    "mtime_ns": 1792246981062100827
+  },
+  "classes/com/m3/collections/M3LongDag.class": {
+    "sha256": "bbb0e13a2306c18cf5621dd3981b0a819382be3ccb8334cc9e5ccb5ab1bb52b9",
+    "bytes": 13148,
+    "mtime_ns": 1792246981067870762
+  },
+  "classes/com/m3/collections/M3LongDeque.class": {
+    "sha256": "9b7d4310d2519907bf102c4785a98719e91e0d9ac88e9906102baff263a8287c",
+    "bytes": 1046,
+    "mtime_ns": 1792246980656047042
+  },
+  "classes/com/m3/collections/M3LongFilteredView$1.class": {
+    "sha256": "b518acc93c7d68ef5070f02aab1208debaeca2606f1c1ac31cd85153eabad0c1",
+    "bytes": 2029,
+    "mtime_ns": 1792246981080915801
+  },
+  "classes/com/m3/collections/M3LongFilteredView$2.class": {
+    "sha256": "a7a781e218d7fcb7a79b83a59418e18426818f30390277618363cc58607938c2",
+    "bytes": 1467,
+    "mtime_ns": 1792246981087733751
+  },
+  "classes/com/m3/collections/M3LongFilteredView.class": {
+    "sha256": "cd4c8d505a16e0ac087a03267a8d052995f43e8183504a6cc2e9eed93814a76e",
+    "bytes": 3234,
+    "mtime_ns": 1792246981088387284
+  },
+  "classes/com/m3/collections/M3LongHashSet$1.class": {
+    "sha256": "beca2fc9784fef1ac39c27045e5483ad709a70e9cc80ed95710b73d33572d4f1",
+    "bytes": 1296,
+    "mtime_ns": 1792246980662955517
+  },
+  "classes/com/m3/collections/M3LongHashSet.class": {
+    "sha256": "b9902bb6971f022f6583ad85fa8426c67ea06b166b5a2cf266fe6d380c85f790",
+    "bytes": 4937,
+    "mtime_ns": 1792246980663807377
+  },
+  "classes/com/m3/collections/M3LongIndexProjection$Order.class": {
+    "sha256": "608b5f3d663ba4187935d9bb11e6c42a171981acb37ecbc77a05a8371becb7e5",
+    "bytes": 1366,
+    "mtime_ns": 1792246980160898685
+  },
+  "classes/com/m3/collections/M3LongIndexProjection.class": {
+    "sha256": "b70915430220b6ac2fca7eba37e966f1b8b4c0a0653a18d36a6e8494a3d7230c",
+    "bytes": 5275,
+    "mtime_ns": 1792246980166322294
+  },
+  "classes/com/m3/collections/M3LongIterator.class": {
+    "sha256": "f8f2bb00abae6a85c7b2cd2752f27ee157678b8a1b8fb0921c1b8eab9a0e1c43",
+    "bytes": 704,
+    "mtime_ns": 1792246980215794654
+  },
+  "classes/com/m3/collections/M3LongLane28.class": {
+    "sha256": "5c1ab4f006dd706a3ccb997ecc93a19b7927c6ef07c5d3b6d930a3eb7dc051e8",
+    "bytes": 4662,
+    "mtime_ns": 1792246980284900991
+  },
+  "classes/com/m3/collections/M3LongLaneStore28$HandleConsumer.class": {
+    "sha256": "b133cce6eefae4023a4cdb221624292dac4d8966f23c51c62456f4103b56cfb4",
+    "bytes": 356,
+    "mtime_ns": 1792246980308901439
+  },
+  "classes/com/m3/collections/M3LongLaneStore28.class": {
+    "sha256": "88f825d131a89cc7cb334044a6f3a16e1275f5c95182e3aeacf5021057353b79",
+    "bytes": 4827,
+    "mtime_ns": 1792246980312901513
+  },
+  "classes/com/m3/collections/M3LongLinkedHashSet$1.class": {
+    "sha256": "39000e9cc2642c8eed279175bfdd210d47aac0b611b9690e094c8f599efe8339",
+    "bytes": 1277,
+    "mtime_ns": 1792246981088915952
+  },
+  "classes/com/m3/collections/M3LongLinkedHashSet.class": {
+    "sha256": "2e3009f612ac713ad4d24d12321307c56bf0f15516425f916a82384982cba47a",
+    "bytes": 7027,
+    "mtime_ns": 1792246981095002899
+  },
+  "classes/com/m3/collections/M3LongLinkedList28.class": {
+    "sha256": "f90b2bff97ad71bb91bc184fa6602d9a60ded506531e3a150b11be6baa1c9892",
+    "bytes": 4668,
+    "mtime_ns": 1792246980320901661
+  },
+  "classes/com/m3/collections/M3LongList.class": {
+    "sha256": "00ed58f7b8118b0eb8aba0de161792168862bdbbe72504972633fcbde7f9c183",
+    "bytes": 937,
+    "mtime_ns": 1792246980641528530
+  },
+  "classes/com/m3/collections/M3LongListSpliterator.class": {
+    "sha256": "a019b1ab86cfb554b30e3778c5e88accea1f0177ba87aad9d4c592108370c877",
+    "bytes": 2298,
+    "mtime_ns": 1792246981099464686
+  },
+  "classes/com/m3/collections/M3LongLongConsumer.class": {
+    "sha256": "533d6e1f33805fc3be80a267ccdc2d5e2a79b631850c7f5f7b98bf6b45dc8378",
+    "bytes": 235,
+    "mtime_ns": 1792246980678206924
+  },
+  "classes/com/m3/collections/M3LongLongHashMap$1.class": {
+    "sha256": "8e314025e7ce5c6064b222871119d855e6f1b44b6d00c1e2e155e43db2662524",
+    "bytes": 1323,
+    "mtime_ns": 1792246980664908062
+  },
+  "classes/com/m3/collections/M3LongLongHashMap.class": {
+    "sha256": "38e6835ba5726165f9a6e9f184afde43d31fc40191f670a6ab5870da1e066847",
+    "bytes": 6526,
+    "mtime_ns": 1792246980671093650
+  },
+  "classes/com/m3/collections/M3LongLongLinkedHashMap$1.class": {
+    "sha256": "cddf78fce9d844d3e66ad47ef7f93fe74b9da0907a86195281103ad80f51f4f5",
+    "bytes": 1304,
+    "mtime_ns": 1792246981100916174
+  },
+  "classes/com/m3/collections/M3LongLongLinkedHashMap.class": {
+    "sha256": "e492f6a58134261e4dd2c5fb364edf69fdeb4c33a8464afe3b1fae836b3bd039",
+    "bytes": 9036,
+    "mtime_ns": 1792246981104916248
+  },
+  "classes/com/m3/collections/M3LongPredicates$1.class": {
+    "sha256": "356fc19098471cffbf543b0711ef85ce2cba3a64b0c504d5eebaadaeeee93c18",
+    "bytes": 1522,
+    "mtime_ns": 1792246981112916398
+  },
+  "classes/com/m3/collections/M3LongPredicates$Branch.class": {
+    "sha256": "dfc71a344a2e6525f855fd4a90070d77ccc86ca8fd351955bcf7a9fa879b0319",
+    "bytes": 2412,
+    "mtime_ns": 1792246981119153614
+  },
+  "classes/com/m3/collections/M3LongPredicates$Chain.class": {
+    "sha256": "5e0607c0a97fcbae769e181659900ca7b09901548ccb58ecf7a3244baa3167ee",
+    "bytes": 769,
+    "mtime_ns": 1792246981119384942
+  },
+  "classes/com/m3/collections/M3LongPredicates$Leaf.class": {
+    "sha256": "b2702f0a311f6ab04c66a54eead3532899b54206f6a4ff5971586b069be7f1c2",
+    "bytes": 1876,
+    "mtime_ns": 1792246981118740483
+  },
+  "classes/com/m3/collections/M3LongPredicates$Node.class": {
+    "sha256": "2ffc26ce5cc33c78cdf9663cf02a3f6aae309b933d61b4dfc3862c696679d6da",
+    "bytes": 440,
+    "mtime_ns": 1792246981118258579
+  },
+  "classes/com/m3/collections/M3LongPredicates.class": {
+    "sha256": "8b74d70a57951c7dab42a1ebf645d2b448c4b2588eba799f94e6e295093ff805",
+    "bytes": 2891,
+    "mtime_ns": 1792246981119801538
+  },
+  "classes/com/m3/collections/M3LongPriorityQueue$1.class": {
+    "sha256": "e27392c514940086091007b4ccf594c1394da0e9cb48efb29279d1c37962be58",
+    "bytes": 1211,
+    "mtime_ns": 1792246980676197002
+  },
+  "classes/com/m3/collections/M3LongPriorityQueue.class": {
+    "sha256": "4d8157eafdef78c835c57ac2c0a42794fd50753f8b30038fc1b084148bfe5511",
+    "bytes": 4517,
+    "mtime_ns": 1792246980677215584
+  },
+  "classes/com/m3/collections/M3LongQueue.class": {
+    "sha256": "da88312d41fa5bb9a9695901f2c75371d9a8a1474a14359321f38db7961574cd",
+    "bytes": 1488,
+    "mtime_ns": 1792246980658081199
+  },
+  "classes/com/m3/collections/M3LongRankBatchNative.class": {
+    "sha256": "17b34e72fbe2b476ed7ed379ff5a9cc181661a512c3f5604a637eb376dc7c425",
+    "bytes": 1681,
+    "mtime_ns": 1792246981121862086
+  },
+  "classes/com/m3/collections/M3LongRankIndex.class": {
+    "sha256": "4cdf614bfb57f213db18e43ffdaf8567818f861fa9b9573ce0a400d9a1b52090",
+    "bytes": 6441,
+    "mtime_ns": 1792246981132916770
+  },
+  "classes/com/m3/collections/M3LongSequence.class": {
+    "sha256": "d8db168936f54d25080ce3680c07f1d31d335fa9a267f4eb7aa78241e367d0f1",
+    "bytes": 546,
+    "mtime_ns": 1792246980642484136
+  },
+  "classes/com/m3/collections/M3LongSortedSet.class": {
+    "sha256": "1d38f96f231e88d4a9d317525d789b4d3d053a7c13851c8e91f4b58ea6f823e8",
+    "bytes": 387,
+    "mtime_ns": 1792246981035311986
+  },
+  "classes/com/m3/collections/M3LongSortedSnapshot$1.class": {
+    "sha256": "4d8b8a775661a14935fab9cf6b9d707646f62bbaf492ea96cb52c109cb14f371",
+    "bytes": 1105,
+    "mtime_ns": 1792246981140916918
+  },
+  "classes/com/m3/collections/M3LongSortedSnapshot.class": {
+    "sha256": "a87b947d116b006ee6fd0a3061e71dd52eb43626c130e97e3785e9f8e0cc3d35",
+    "bytes": 7403,
+    "mtime_ns": 1792246981146103357
+  },
+  "classes/com/m3/collections/M3LongSortedViews$1.class": {
+    "sha256": "708297863b21cda82b4a62a41f3e17bc0b60cd6bd20322e4e1089e162af5cd6c",
+    "bytes": 2283,
+    "mtime_ns": 1792246981152917142
+  },
+  "classes/com/m3/collections/M3LongSortedViews$Filtered.class": {
+    "sha256": "2439cbf1700bd94c6a4402afaa35e0dd05d63a4d459846b98b5c9ac1b47f75bd",
+    "bytes": 4709,
+    "mtime_ns": 1792246981158385301
+  },
+  "classes/com/m3/collections/M3LongSortedViews$Unmodifiable.class": {
+    "sha256": "c7bfaadebbcbe5feef55eddc615a7abf4db312d8ba0a944be19d84b808b5fc94",
+    "bytes": 2557,
+    "mtime_ns": 1792246981159087567
+  },
+  "classes/com/m3/collections/M3LongSortedViews.class": {
+    "sha256": "1ee83c6061631ba5a47f1c50a34ad44587483084d735fed794d83d89a2cad14b",
+    "bytes": 3907,
+    "mtime_ns": 1792246981160142513
+  },
+  "classes/com/m3/collections/M3LongStack.class": {
+    "sha256": "846e099b4dc8f77ba80316e8a128d6becd661dc7605295a9ef51f399996207ce",
+    "bytes": 222,
+    "mtime_ns": 1792246980643032591
+  },
+  "classes/com/m3/collections/M3LongTreeSet$1.class": {
+    "sha256": "be2ee6030fe86fdb45618858ccadcac40b39aa33bd0820b9cdb3792ab19052da",
+    "bytes": 1389,
+    "mtime_ns": 1792246981172917515
+  },
+  "classes/com/m3/collections/M3LongTreeSet$2.class": {
+    "sha256": "d304bd61da44b8e6d6eac276a449b0af18782004633e7f56c8cc7938a7cf28cc",
+    "bytes": 2131,
+    "mtime_ns": 1792246981178473079
+  },
+  "classes/com/m3/collections/M3LongTreeSet.class": {
+    "sha256": "2cbddcf6f5e284a362e8222fc2e05b3424c5f9781971ad11b3ac83713cceee47",
+    "bytes": 10294,
+    "mtime_ns": 1792246981179740214
+  },
+  "classes/com/m3/collections/M3MutableFilteredViews$MapView$1.class": {
+    "sha256": "122b993c5ca2dd2b796faf21fad2e8b5603b13c027f6cff0a525cc7f557fd1fe",
+    "bytes": 2320,
+    "mtime_ns": 1792246981221255153
+  },
+  "classes/com/m3/collections/M3MutableFilteredViews$MapView$2.class": {
+    "sha256": "d75239357c11e1b8512aea22d5322da9c94a95b5de26033261ded95ae57141cf",
+    "bytes": 2827,
+    "mtime_ns": 1792246981221945000
+  },
+  "classes/com/m3/collections/M3MutableFilteredViews$MapView$LiveEntry.class": {
+    "sha256": "1bc6c1d289521cfc8f3699afab6cfc89d6f022af47255f72e93db9a7286df815",
+    "bytes": 2972,
+    "mtime_ns": 1792246981222669689
+  },
+  "classes/com/m3/collections/M3MutableFilteredViews$MapView.class": {
+    "sha256": "926cee24e5763e1d32da3546c2fe96b6fc46cc248f0fdfc23f2ac8067e08312f",
+    "bytes": 11745,
+    "mtime_ns": 1792246981223649191
+  },
+  "classes/com/m3/collections/M3MutableFilteredViews$SetView$1.class": {
+    "sha256": "618680d46671d9c10b9ad07ecaf8cf586ba6258d28d3cbcd98cb9d56ec2c69f4",
+    "bytes": 2664,
+    "mtime_ns": 1792246981212918259
+  },
+  "classes/com/m3/collections/M3MutableFilteredViews$SetView.class": {
+    "sha256": "7d39906a24f01c44aa43b1b256f87d110049661f9570f2ab473b5eb0bfc04122",
+    "bytes": 8247,
+    "mtime_ns": 1792246981220342931
+  },
+  "classes/com/m3/collections/M3MutableFilteredViews.class": {
+    "sha256": "3bf71145127bda4ee502876c54f6b2c6bf7d17a682bbe017f20bfed1ab39d51e",
+    "bytes": 2890,
+    "mtime_ns": 1792246981224489615
+  },
+  "classes/com/m3/collections/M3ObjectIdentityMap.class": {
+    "sha256": "46f0853a1ac7136f8abb20221410eccab9dfc600184b90b7d77954180e1733a2",
+    "bytes": 7043,
+    "mtime_ns": 1792246981228918556
+  },
+  "classes/com/m3/collections/M3ObjectIdentitySet.class": {
+    "sha256": "76e7ecb675ea5caf371063cc7de0da174833f3c7a17043e938f0a9ba99968555",
+    "bytes": 5325,
+    "mtime_ns": 1792246981232918631
+  },
+  "classes/com/m3/collections/M3ObjectIndexSnapshot$Order.class": {
+    "sha256": "65e2a1da327d41a2f285f6a2faac54961f75b4ccf6923caf25a688bbffa81af8",
+    "bytes": 1453,
+    "mtime_ns": 1792246981244918853
+  },
+  "classes/com/m3/collections/M3ObjectIndexSnapshot.class": {
+    "sha256": "00ec9cb9a2758893da0a2a3b659e55c4fea380de5040a3b4436353af302580c9",
+    "bytes": 10335,
+    "mtime_ns": 1792246981251054339
+  },
+  "classes/com/m3/collections/M3ObjectResidency$BudgetExceededException.class": {
+    "sha256": "1d3d0ebc81b298fca2153ef91003838de8064101a6cfaf47894b130e73e7418f",
+    "bytes": 1221,
+    "mtime_ns": 1792246981286854418
+  },
+  "classes/com/m3/collections/M3ObjectResidency$Codec.class": {
+    "sha256": "4307c5187f05f290f2574849aeef25ebede63fb4ac684be947c97c8bc16cb40a",
+    "bytes": 483,
+    "mtime_ns": 1792246981284680631
+  },
+  "classes/com/m3/collections/M3ObjectResidency$Decision.class": {
+    "sha256": "c1fc7dd26070e471119b88ca86e7d98a9154e48e364f94694161571e1c3b8f52",
+    "bytes": 2477,
+    "mtime_ns": 1792246981285737830
+  },
+  "classes/com/m3/collections/M3ObjectResidency$Factory.class": {
+    "sha256": "a8e9f2be66d0aa4d57c9ceb879085dcca6619a951a62ae0f171be7d8fc67c73f",
+    "bytes": 487,
+    "mtime_ns": 1792246981284265867
+  },
+  "classes/com/m3/collections/M3ObjectResidency$HeapSnapshot.class": {
+    "sha256": "56e934223c94c5d256815b50296c974bef52b1236a8085c1c33e960409bb6ec7",
+    "bytes": 2434,
+    "mtime_ns": 1792246981285292510
+  },
+  "classes/com/m3/collections/M3ObjectResidency$ResidencyException.class": {
+    "sha256": "f0b35f529c415c73fa385a82962897270c72fe4d2a0fede35bece83e4936f3c8",
+    "bytes": 663,
+    "mtime_ns": 1792246981286175197
+  },
+  "classes/com/m3/collections/M3ObjectResidency$SpillStore.class": {
+    "sha256": "79adf0d59fce08195f2e871cbd5b06735e1aa32d885894a596368d0fabffa6b8",
+    "bytes": 390,
+    "mtime_ns": 1792246981284877747
+  },
+  "classes/com/m3/collections/M3ObjectResidency$State.class": {
+    "sha256": "5d4057ce16a051bf2db43a774a5e0d3ba9176856da7147602eee2d0d8b3dd7fd",
+    "bytes": 1482,
+    "mtime_ns": 1792246981276919449
+  },
+  "classes/com/m3/collections/M3ObjectResidency.class": {
+    "sha256": "f850eb427323a2286ad373e85d79e6ad54343da5e55fa95067e40398f46518f5",
+    "bytes": 15132,
+    "mtime_ns": 1792246981290223322
+  },
+  "classes/com/m3/collections/M3ObjectSlotStore28.class": {
+    "sha256": "c7677be8cc5acb02f5329ec3c7a3f9473392564db85f084f6370ea5eed2efb87",
+    "bytes": 7243,
+    "mtime_ns": 1792246981292919747
+  },
+  "classes/com/m3/collections/M3ObjectStateBatch28.class": {
+    "sha256": "0d4622f0956b88af442552e892f43908d4d938075a4fee20f676af0a95c410fb",
+    "bytes": 3142,
+    "mtime_ns": 1792246981312920119
+  },
+  "classes/com/m3/collections/M3ObjectStateSlots28.class": {
+    "sha256": "330efafc28a50f0401bfa527fc83df20b979d9415e2b4a76e02bfb73108f51ed",
+    "bytes": 8023,
+    "mtime_ns": 1792246981304919971
+  },
+  "classes/com/m3/collections/M3OrderedSlotMap$SetView.class": {
+    "sha256": "c97da3cefb99feac4efb99178228ec5b952c93b29092bc537fc9f714a2ecd6e6",
+    "bytes": 2273,
+    "mtime_ns": 1792246980424807766
+  },
+  "classes/com/m3/collections/M3OrderedSlotMap$View.class": {
+    "sha256": "85606374933c6e0e862c44edb2f706ca2c61150e97a2c2cb0d71775ab1bf1fe0",
+    "bytes": 4533,
+    "mtime_ns": 1792246980423384437
+  },
+  "classes/com/m3/collections/M3OrderedSlotMap.class": {
+    "sha256": "cdcd57ab2d115fae9ffc07232a1264beaafb55ed2e48b00e8b44b810db3cb5d7",
+    "bytes": 2303,
+    "mtime_ns": 1792246980425243682
+  },
+  "classes/com/m3/collections/M3Progress$NullProgress.class": {
+    "sha256": "50fd4e99796c5d03a5363a0eb428b6cc1d476c7a8126f657a44b378340f62804",
+    "bytes": 1723,
+    "mtime_ns": 1792246980687959675
+  },
+  "classes/com/m3/collections/M3Progress$Snapshot.class": {
+    "sha256": "a5ec2d2c053fd0c067b3cfa505c9d96f1d53f4ac1031bbb4899927b2b5d53f73",
+    "bytes": 2339,
+    "mtime_ns": 1792246980680908360
+  },
+  "classes/com/m3/collections/M3Progress$SubProgress.class": {
+    "sha256": "24449afd0039e281fbac7fa2d44e6c9e40fc7cbf5f81133680c411cbfd46bef3",
+    "bytes": 2135,
+    "mtime_ns": 1792246980687368216
+  },
+  "classes/com/m3/collections/M3Progress.class": {
+    "sha256": "d6316a45e39a4e753a9f851ff0ac5382f878ee6b2b0e1b2051fff801f2c314a1",
+    "bytes": 6959,
+    "mtime_ns": 1792246980689108372
+  },
+  "classes/com/m3/collections/M3ProgressAdapters$LegacyAdapter.class": {
+    "sha256": "5dd7105f7ed7467750536c2d46f190b73689e0c848f5d0b2ec7dcfc7afa4780a",
+    "bytes": 3748,
+    "mtime_ns": 1792246981316920193
+  },
+  "classes/com/m3/collections/M3ProgressAdapters.class": {
+    "sha256": "ada95343dd9df0db3613022d940e41da5406a5d0621da2f5a1bdd86993d29594",
+    "bytes": 1235,
+    "mtime_ns": 1792246981323619306
+  },
+  "classes/com/m3/collections/M3ProgressMonitor.class": {
+    "sha256": "72a5a1f0313163e56d756950ef42b8dae30a0276c73c984651d51fb91360dd74",
+    "bytes": 1632,
+    "mtime_ns": 1792246980088897345
+  },
+  "classes/com/m3/collections/M3ProgressScope.class": {
+    "sha256": "ae4e5047b98a96c7347874e23d9c4782cc94154b5933d7c92b15935b1ccf06f3",
+    "bytes": 1608,
+    "mtime_ns": 1792246981325397949
+  },
+  "classes/com/m3/collections/M3ProgressState.class": {
+    "sha256": "5dc26242e99c9906a143f91e362cb5ee8018ef1711d21f66431f2d572730d93b",
+    "bytes": 2918,
+    "mtime_ns": 1792246980096897493
+  },
+  "classes/com/m3/collections/M3Residency$Strategy.class": {
+    "sha256": "beed822df2709fa467035852d5943b3332fff01304392de3ab54100821da7299",
+    "bytes": 1294,
+    "mtime_ns": 1792246981328118870
+  },
+  "classes/com/m3/collections/M3Residency.class": {
+    "sha256": "12a8a9225281c527e6c23c8cf2513a8e94e7c259d1e8965d9ebb57c0aeedc282",
+    "bytes": 835,
+    "mtime_ns": 1792246981328624340
+  },
+  "classes/com/m3/collections/M3ResidencyStateMaskIndex$Backend.class": {
+    "sha256": "69fada3c96dac22c83048004337f03781641666ff78cbb5121eddb528a3f8e3e",
+    "bytes": 1357,
+    "mtime_ns": 1792246981332920491
+  },
+  "classes/com/m3/collections/M3ResidencyStateMaskIndex$NativePeer.class": {
+    "sha256": "17144e868de02ae4e4da8866afd2257b83edf1da3fb1d250b0f1ba67a380dc1e",
+    "bytes": 870,
+    "mtime_ns": 1792246981336920566
+  },
+  "classes/com/m3/collections/M3ResidencyStateMaskIndex.class": {
+    "sha256": "6bdeb1b11fca6dd002a9749e27376b0453d3ebc4e3dbc8d2aacdf353814d2935",
+    "bytes": 6764,
+    "mtime_ns": 1792246981342176192
+  },
+  "classes/com/m3/collections/M3SignalOrder$Backend.class": {
+    "sha256": "f7dc95e043d64c27165bd62958a4edffb3d838ec5c737a4009d5dc74abc1a017",
+    "bytes": 1264,
+    "mtime_ns": 1792246981256919077
+  },
+  "classes/com/m3/collections/M3SignalOrder.class": {
+    "sha256": "7af6a9766ebc4c83843987cc1a466d6244433e58e98ec1c44bbb63d1d311a09a",
+    "bytes": 6602,
+    "mtime_ns": 1792246981262110791
+  },
+  "classes/com/m3/collections/M3SignalOrderNative.class": {
+    "sha256": "9862f79506aeeb714588411adc68256e2c96a92285d6c4da1c3b9641022a0251",
+    "bytes": 1165,
+    "mtime_ns": 1792246981343769427
+  },
+  "classes/com/m3/collections/M3SlotAllocator28.class": {
+    "sha256": "82fc63aa074499315e007a41045643b7fb10939955c15318d1d0a8874fc4335e",
+    "bytes": 4357,
+    "mtime_ns": 1792246980304901363
+  },
+  "classes/com/m3/collections/M3SlotArrays.class": {
+    "sha256": "5a792f23781d9e71d6d17df7726009d152f9d3471c9a03f16c017063c312519f",
+    "bytes": 1389,
+    "mtime_ns": 1792246981345878928
+  },
+  "classes/com/m3/collections/M3SlotMap$1.class": {
+    "sha256": "d9f70f94ebe320de9b3eac271301a4228dcc5ed092eb2ad515ad0a1de0408b29",
+    "bytes": 2218,
+    "mtime_ns": 1792246980426955545
+  },
+  "classes/com/m3/collections/M3SlotMap$2.class": {
+    "sha256": "0b6e3764cb9475fdb037138c602e182f2f26909c0ec95d9829d6deb78be91234",
+    "bytes": 1517,
+    "mtime_ns": 1792246980427304720
+  },
+  "classes/com/m3/collections/M3SlotMap$3.class": {
+    "sha256": "184d8f38bebb2c92d0d67113f459686373d8c913fa311fca44e4b303361dbd19",
+    "bytes": 1286,
+    "mtime_ns": 1792246980427739483
+  },
+  "classes/com/m3/collections/M3SlotMap$4.class": {
+    "sha256": "96d6203a0f8a70fffd96327b5f03555baa8565a88b38f104c014717611b430e2",
+    "bytes": 1970,
+    "mtime_ns": 1792246980428205514
+  },
+  "classes/com/m3/collections/M3SlotMap$LiveEntry.class": {
+    "sha256": "4a77ba901abb3d8b1410cf9511575cfe97e0a67832a85410b3034832820de74e",
+    "bytes": 2829,
+    "mtime_ns": 1792246980426173830
+  },
+  "classes/com/m3/collections/M3SlotMap.class": {
+    "sha256": "904e6a9249daead1333e6117d016d34ea20c013aa722df4b19c2e956d7df8ef3",
+    "bytes": 10032,
+    "mtime_ns": 1792246980429627502
+  },
+  "classes/com/m3/collections/M3SlotSpliterators$1.class": {
+    "sha256": "8f311b2b74e66630c9609e52554e85c18b23652408585b2b843c6b4b316d58ff",
+    "bytes": 1422,
+    "mtime_ns": 1792246981348920789
+  },
+  "classes/com/m3/collections/M3SlotSpliterators$2.class": {
+    "sha256": "50f140e932d00abf31f4b629b18a52fd43bfb3b700fc09f060201ad1ed9168fb",
+    "bytes": 1957,
+    "mtime_ns": 1792246981354451025
+  },
+  "classes/com/m3/collections/M3SlotSpliterators.class": {
+    "sha256": "abb8516c7f0ce5ff8e9c095a35ec5418461358207989a7d89409751b2a6406a2",
+    "bytes": 3114,
+    "mtime_ns": 1792246981355032790
+  },
+  "classes/com/m3/collections/M3SpanIndex$Backend.class": {
+    "sha256": "1003de36c92245b7e327174fd44fc96733b1314e00644b10e98714754493cada",
+    "bytes": 1248,
+    "mtime_ns": 1792246981356920938
+  },
+  "classes/com/m3/collections/M3SpanIndex$Snapshot.class": {
+    "sha256": "63c9d52f5019de5945bca694ee37923271e55cd510732caaa5634f0c09adce39",
+    "bytes": 2302,
+    "mtime_ns": 1792246981363004052
+  },
+  "classes/com/m3/collections/M3SpanIndex.class": {
+    "sha256": "486724d443e1df67f225645b88537ffd8565bb81b83cfa83fdbe44a731c68c8e",
+    "bytes": 4606,
+    "mtime_ns": 1792246981363907200
+  },
+  "classes/com/m3/collections/M3StateMaskArrays.class": {
+    "sha256": "f801fbbb43f565d9788fb8b4630ce3ccc6976b9df302ba25543e475cefc9af64",
+    "bytes": 3034,
+    "mtime_ns": 1792246981368334686
+  },
+  "classes/com/m3/collections/M3SystemProgress.class": {
+    "sha256": "0f9a92c0a26017a8132b1c0869251742d01b0c0b4e31396c306101965c0cb2ac",
+    "bytes": 1258,
+    "mtime_ns": 1792246981369850245
+  },
+  "classes/com/m3/collections/M3TransferQueue$1.class": {
+    "sha256": "160cea50dc446956177af2fe9ee7d25f0c6956692edc0f337fd29ca98e857940",
+    "bytes": 1980,
+    "mtime_ns": 1792246980616907168
+  },
+  "classes/com/m3/collections/M3TransferQueue.class": {
+    "sha256": "7fb663a4faf36635d94c7528102a537f39bfcf8bbfe0ce8f399387bc9329a116",
+    "bytes": 11821,
+    "mtime_ns": 1792246980620907243
+  },
+  "classes/com/m3/collections/M3TreeMap$Tree.class": {
+    "sha256": "b00a652789a9aaf38937c1f2426a0bb941a42a4bb9d23d8014d1beefa38982b5",
+    "bytes": 8199,
+    "mtime_ns": 1792246980476904565
+  },
+  "classes/com/m3/collections/M3TreeMap.class": {
+    "sha256": "7289e20dc2dde77db7dea66f617217c50b668e26b93ba874b273edfe71860e58",
+    "bytes": 23089,
+    "mtime_ns": 1792246980480904639
+  },
+  "classes/com/m3/collections/M3TreeSet.class": {
+    "sha256": "ca5c57060dcab6e28349934ebe8915a22098503d90c0d8e3279398175a84f6bf",
+    "bytes": 6581,
+    "mtime_ns": 1792246980504905085
+  },
+  "classes/com/m3/collections/M3VirtualAccumulator.class": {
+    "sha256": "27f349c26d6d6692e3af0aaab552134d94cc0404cde19f8843a5c211e2a74d01",
+    "bytes": 2144,
+    "mtime_ns": 1792246981071083682
+  },
+  "classes/com/m3/collections/M3VirtualCollector$Pair.class": {
+    "sha256": "190aad3b6de2f23a40186df6e656ffd9a1850c1542e2c512a0e2b3d175a99335",
+    "bytes": 2071,
+    "mtime_ns": 1792246981072915654
+  },
+  "classes/com/m3/collections/M3VirtualCollector.class": {
+    "sha256": "bb8cd05fbbfdf85bafa8a292716eaad0c2f4a0c36b1ee15d310cc361a8c33a05",
+    "bytes": 6410,
+    "mtime_ns": 1792246981076915728
+  },
+  "classes/com/m3/collections/M3WeakHashMap$KeyReference.class": {
+    "sha256": "677850f64be317128885e5af4e84330671bdfb7258b6ef45693971f05a5c2b34",
+    "bytes": 930,
+    "mtime_ns": 1792246980516905309
+  },
+  "classes/com/m3/collections/M3WeakHashMap.class": {
+    "sha256": "61fde9f46848a658ee4dc247cfb27f7863c72452e28e815a0128b2e34c762a62",
+    "bytes": 8602,
+    "mtime_ns": 1792246980523363715
+  },
+  "classes/com/m3/collections/package-info.class": {
+    "sha256": "c767903f10c80c72111dd166ae515f01dc564ebd7e09acc7869ce99621a518a0",
+    "bytes": 124,
+    "mtime_ns": 1792246981372921236
+  },
+  "classes/module-info.class": {
+    "sha256": "531ac10883d55a2a7bab8f58ce0d35628c1285a6b1691c2c63d36cc53029f7e7",
+    "bytes": 218,
+    "mtime_ns": 1792246979800891986
+  },
+  "test-classes/com/m3/collections/M3AdaptiveEnumLongMapTest$Narrow.class": {
+    "sha256": "ea17d6d286b49aaf1e787a4ec74c106521723f03e4b448c7e5650c623ef097c3",
+    "bytes": 1380,
+    "mtime_ns": 1792246981828929720
+  },
+  "test-classes/com/m3/collections/M3AdaptiveEnumLongMapTest$Other.class": {
+    "sha256": "cc47fff315bfac936229f5cda3c4368df446d09d4f340ac7094ba9adf21aacae",
+    "bytes": 1285,
+    "mtime_ns": 1792246981837190046
+  },
+  "test-classes/com/m3/collections/M3AdaptiveEnumLongMapTest$Wide.class": {
+    "sha256": "f4d226503c65b0886a2391c1946cd5ad8af360cef869499cc11f37f8a442a9cd",
+    "bytes": 4647,
+    "mtime_ns": 1792246981835629580
+  },
+  "test-classes/com/m3/collections/M3AdaptiveEnumLongMapTest.class": {
+    "sha256": "159f3e8b9a2133bea6470c50551f354570d755fb17672b7abf792e34a8d147c0",
+    "bytes": 16872,
+    "mtime_ns": 1792246981841453225
+  },
+  "test-classes/com/m3/collections/M3AllocationProbe$Payload.class": {
+    "sha256": "38718dc9c9dc9da11a28249561a3a483a03739e854787992a647762e65601401",
+    "bytes": 1028,
+    "mtime_ns": 1792246981848930092
+  },
+  "test-classes/com/m3/collections/M3AllocationProbe.class": {
+    "sha256": "5786410194da4e950bd68cf06391f2d09a87c7c62c56f012d28add23b67a6f18",
+    "bytes": 11379,
+    "mtime_ns": 1792246981855162804
+  },
+  "test-classes/com/m3/collections/M3BitLane28FenwickSelfTest.class": {
+    "sha256": "4a14abf62c133d9f00185fc6564f7575aa6c30210da9223912d32865b3a7c6af",
+    "bytes": 6999,
+    "mtime_ns": 1792246981860930316
+  },
+  "test-classes/com/m3/collections/M3BitLane28FenwickTest.class": {
+    "sha256": "b1df27380e894ca913f9acc4b8ac76fd25af22406c499ec1f5bf9303bb2c8afa",
+    "bytes": 2493,
+    "mtime_ns": 1792246981864930390
+  },
+  "test-classes/com/m3/collections/M3BitLaneJumpProof.class": {
+    "sha256": "184df6f544be3b4b01c9365269b63789d71df9c442879f96d3e08cd03b251830",
+    "bytes": 8762,
+    "mtime_ns": 1792246981880930687
+  },
+  "test-classes/com/m3/collections/M3CollectionCostProbe$1.class": {
+    "sha256": "9e44c7fecb752a63b2805948a93c348c3e86dbdf27a643c6d7da20a6bef36552",
+    "bytes": 1552,
+    "mtime_ns": 1792246981904706453
+  },
+  "test-classes/com/m3/collections/M3CollectionCostProbe$2.class": {
+    "sha256": "9a99619d44045016ffe84b26b5e6c1210816dfc87a038970fbd9e5d7e0a64b4a",
+    "bytes": 1421,
+    "mtime_ns": 1792246981905185634
+  },
+  "test-classes/com/m3/collections/M3CollectionCostProbe$3.class": {
+    "sha256": "baf914c328d59500259aa5719b57cd86445ec6f5fa918b513602d24f14c9256c",
+    "bytes": 1168,
+    "mtime_ns": 1792246981905867529
+  },
+  "test-classes/com/m3/collections/M3CollectionCostProbe$4.class": {
+    "sha256": "88d3fec48f13b976eba98119945b1e01ad015a78f6a50b1210e0c12ece7e1516",
+    "bytes": 1165,
+    "mtime_ns": 1792246981906241491
+  },
+  "test-classes/com/m3/collections/M3CollectionCostProbe$Fixture.class": {
+    "sha256": "b34c49d297ebf6cd405a1fc94a45e42b02dfd68a25c42d1ddc8660f2897daac3",
+    "bytes": 298,
+    "mtime_ns": 1792246981904033562
+  },
+  "test-classes/com/m3/collections/M3CollectionCostProbe$Key.class": {
+    "sha256": "9d7586cd6bfda437d7750a39d322732170bc28364ad01f9509d0887669095be2",
+    "bytes": 1910,
+    "mtime_ns": 1792246981896930984
+  },
+  "test-classes/com/m3/collections/M3CollectionCostProbe.class": {
+    "sha256": "9a36bbc408a72d8c12bff6829bf2cd2e11783a0e7da344a8872bd72071214088",
+    "bytes": 10033,
+    "mtime_ns": 1792246981908163500
+  },
+  "test-classes/com/m3/collections/M3CollectionSdkCatalogSelfTest.class": {
+    "sha256": "616338fcf440df8fa6404905fd3a624e2f1daaa2a1700870561752f5fbe1a568",
+    "bytes": 7644,
+    "mtime_ns": 1792246981912931283
+  },
+  "test-classes/com/m3/collections/M3CollectionSdkContractSelfTest.class": {
+    "sha256": "1e710f5c025210165659dafe6c5814b6ba121e8b9a4325dcee6e14b7fa8482b0",
+    "bytes": 15120,
+    "mtime_ns": 1792246981940931803
+  },
+  "test-classes/com/m3/collections/M3CollectionSdkSelfTest.class": {
+    "sha256": "0f5014e49e7ad4798b55a54d31e0b52966ffc5425902a847af0907a7607e750e",
+    "bytes": 9836,
+    "mtime_ns": 1792246981964932250
+  },
+  "test-classes/com/m3/collections/M3ConcurrentContractTest$1.class": {
+    "sha256": "1b3ccea91d06ed92a7d3133ab55214e97ee79a8f36489dcd38b1d672c9d1b31c",
+    "bytes": 1455,
+    "mtime_ns": 1792246982072934259
+  },
+  "test-classes/com/m3/collections/M3ConcurrentContractTest.class": {
+    "sha256": "810e3a1ec4c08bd98187e922d9c8a790ab1462c023a0e036bbf56bd10531c941",
+    "bytes": 22114,
+    "mtime_ns": 1792246982076934335
+  },
+  "test-classes/com/m3/collections/M3ConcurrentLaneContractTest.class": {
+    "sha256": "49e469fc43b0166bf9396eaa9ec29b111359d44d70f6202bfaed6035bab4dd4a",
+    "bytes": 11019,
+    "mtime_ns": 1792246982104934855
+  },
+  "test-classes/com/m3/collections/M3DeepFilteredListsProof$Representative.class": {
+    "sha256": "2f5bfaa17d7ced0de39624314e6f5a9e1580c0648a575754c3459807ad07b327",
+    "bytes": 1373,
+    "mtime_ns": 1792246982160935898
+  },
+  "test-classes/com/m3/collections/M3DeepFilteredListsProof.class": {
+    "sha256": "f5d31d63d309863b480e6147d5644db1ee199859eb111cc07323ababf90cb1ac",
+    "bytes": 24100,
+    "mtime_ns": 1792246982164935972
+  },
+  "test-classes/com/m3/collections/M3DeepFilteredListsTest.class": {
+    "sha256": "48ea1e9e424f6f881974b91ca6e74613262bed95112b78b482ca16ce96e74858",
+    "bytes": 659,
+    "mtime_ns": 1792246982164935972
+  },
+  "test-classes/com/m3/collections/M3DeepReadOnlyCollectionSelfTest$Key.class": {
+    "sha256": "d3ba9d0926e53ee957eb3f82fe7beed7c0b513c481d8dfa56b450377207ab8f6",
+    "bytes": 1913,
+    "mtime_ns": 1792246982200936642
+  },
+  "test-classes/com/m3/collections/M3DeepReadOnlyCollectionSelfTest$ObservedCollection$1.class": {
+    "sha256": "3bfdbe316cbfa504d9ddabd2747c8ff67db8dfcebcbf38b31dbbd2f74b586439",
+    "bytes": 2292,
+    "mtime_ns": 1792246982204936716
+  },
+  "test-classes/com/m3/collections/M3DeepReadOnlyCollectionSelfTest$ObservedCollection.class": {
+    "sha256": "5205d7b1cf02289a1598adda824828b188997e0a0eb80c633dc384fff99b5b0d",
+    "bytes": 2606,
+    "mtime_ns": 1792246982209261788
+  },
+  "test-classes/com/m3/collections/M3DeepReadOnlyCollectionSelfTest$ObservedIdentitySet.class": {
+    "sha256": "1e389899380fd0396089a5b7fb763349c386f141f319d25ba0b6609f66a7e068",
+    "bytes": 2318,
+    "mtime_ns": 1792246982209695741
+  },
+  "test-classes/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.class": {
+    "sha256": "05edba3f9eb1865e00addb883b6cf612a211551cb8f3fb7f5f6590abb2c00a42",
+    "bytes": 12829,
+    "mtime_ns": 1792246982212143851
+  },
+  "test-classes/com/m3/collections/M3DeepReadOnlyCollectionTest.class": {
+    "sha256": "8c910893a5534e1b900f17b89681aa76f77cbc97c576a4664812607d93444a03",
+    "bytes": 794,
+    "mtime_ns": 1792246982213472888
+  },
+  "test-classes/com/m3/collections/M3EnumLongMapTest$Narrow.class": {
+    "sha256": "f8b62cc7d4b8f79fe77389a0d65487fb9c07960b80a87c8b33654a5211d6cde9",
+    "bytes": 1316,
+    "mtime_ns": 1792246982248937535
+  },
+  "test-classes/com/m3/collections/M3EnumLongMapTest$Other.class": {
+    "sha256": "46be8fbb16922a30309652c5aabdeea978ab75dc32290989f29447c5fc80cde6",
+    "bytes": 1221,
+    "mtime_ns": 1792246982256751008
+  },
+  "test-classes/com/m3/collections/M3EnumLongMapTest$Wide.class": {
+    "sha256": "24f51cc85e901cc6808423fdd8bfee4c242d3159f8cedf477ebd3fe7a9ef3412",
+    "bytes": 4583,
+    "mtime_ns": 1792246982256270626
+  },
+  "test-classes/com/m3/collections/M3EnumLongMapTest.class": {
+    "sha256": "a48b793a4db9470efe35d075826fea364bdde41677e0b5d37d9212bff547d51e",
+    "bytes": 12643,
+    "mtime_ns": 1792246982258416311
+  },
+  "test-classes/com/m3/collections/M3EnumSetTest$Narrow.class": {
+    "sha256": "f1aceeceb123f1fabf199479fa10ee6617ee955147821b603d341e9878c3f1e5",
+    "bytes": 1284,
+    "mtime_ns": 1792246982304938577
+  },
+  "test-classes/com/m3/collections/M3EnumSetTest$Other.class": {
+    "sha256": "67d14ac85a8d13d4db72eeeb79a4cae01cf2caaf03099046be24aaea4673531f",
+    "bytes": 1189,
+    "mtime_ns": 1792246982310806520
+  },
+  "test-classes/com/m3/collections/M3EnumSetTest$Wide.class": {
+    "sha256": "dac0976d946abc6337116ec1bb7f42bf63839e1e7c452bea240b5b5c9e26e603",
+    "bytes": 4551,
+    "mtime_ns": 1792246982310413629
+  },
+  "test-classes/com/m3/collections/M3EnumSetTest.class": {
+    "sha256": "0223e172951d37549244f26db459dd4ebb95782bcba74fdc59b07adb27f7cbca",
+    "bytes": 11719,
+    "mtime_ns": 1792246982312282739
+  },
+  "test-classes/com/m3/collections/M3FactoryContractTest$Color.class": {
+    "sha256": "129656dc442bc3e17e38ce661212f577b94bb14ef381781b30da57a27d2f62b2",
+    "bytes": 1350,
+    "mtime_ns": 1792246982344939320
+  },
+  "test-classes/com/m3/collections/M3FactoryContractTest$Ready.class": {
+    "sha256": "f8ca9006f019d0d485a31ce4a5d4269342e880c15d8ed16d552d5f2fd760bf02",
+    "bytes": 2065,
+    "mtime_ns": 1792246982348939396
+  },
+  "test-classes/com/m3/collections/M3FactoryContractTest.class": {
+    "sha256": "ab6d3fdc5e0b7cee236cc76712ae4f60243dd844b3c79a414d5bc4507fa3c719",
+    "bytes": 12121,
+    "mtime_ns": 1792246982353950447
+  },
+  "test-classes/com/m3/collections/M3FilteredListsContract.class": {
+    "sha256": "b0b5478ddb865478e59a8909a87785bda0cb822a01a3d64f1fd6d1c33e06fc7c",
+    "bytes": 16716,
+    "mtime_ns": 1792246982396940288
+  },
+  "test-classes/com/m3/collections/M3FilteredListsEdges.class": {
+    "sha256": "2043549903d9fd0259dbbf0fdd269fdd18f45843ccc39871d3bd839c6af02504",
+    "bytes": 10296,
+    "mtime_ns": 1792246982428940883
+  },
+  "test-classes/com/m3/collections/M3FilteredListsSortedInteropTest.class": {
+    "sha256": "38f1f53f797e93d77a5cb08d32f3efed9aaaa19653c16ab3afe42c2c46708008",
+    "bytes": 5089,
+    "mtime_ns": 1792246982448941255
+  },
+  "test-classes/com/m3/collections/M3FilteredListsTest.class": {
+    "sha256": "5349e6643d935b097f62a5a65f3cdba414029f04416e08e6ac1e39340c3a4173",
+    "bytes": 890,
+    "mtime_ns": 1792246982453818207
+  },
+  "test-classes/com/m3/collections/M3FilteredListsWorkProof.class": {
+    "sha256": "5175117b3ce03d0de94b37fa3671bcb7bf0d0b413d80a217ee8bdf41b72a2667",
+    "bytes": 4612,
+    "mtime_ns": 1792246982458897814
+  },
+  "test-classes/com/m3/collections/M3FilteredNavigableFacadeSelfTest$CountingComparator.class": {
+    "sha256": "4a6624ca882513203b51e6d644f6fcdd72ff234c02662ba57bf064b2755bd942",
+    "bytes": 1404,
+    "mtime_ns": 1792246982480941851
+  },
+  "test-classes/com/m3/collections/M3FilteredNavigableFacadeSelfTest.class": {
+    "sha256": "2327d14175e0b118558033dfab7e35e78f9177188133fceee5d2c6244ef0d9db",
+    "bytes": 12938,
+    "mtime_ns": 1792246982484941926
+  },
+  "test-classes/com/m3/collections/M3FilteredNavigableSetTest.class": {
+    "sha256": "f9c2dbea17b1465b28ae83ff73337190d3c486b4dc5e13439900955be7d7f287",
+    "bytes": 8028,
+    "mtime_ns": 1792246982528942745
+  },
+  "test-classes/com/m3/collections/M3FilteredNavigationBoundarySelfTest$Key.class": {
+    "sha256": "4483ac0c086098bd8979ee9ee16f31a8dd9df20b487b262435e983d1f6849241",
+    "bytes": 1785,
+    "mtime_ns": 1792246982580943711
+  },
+  "test-classes/com/m3/collections/M3FilteredNavigationBoundarySelfTest.class": {
+    "sha256": "db075d095995dd4ec16705bc5bb36b0f5189c83323401b04101a1e1e73c138d8",
+    "bytes": 22721,
+    "mtime_ns": 1792246982587370360
+  },
+  "test-classes/com/m3/collections/M3FilteredNavigationBoundaryTest.class": {
+    "sha256": "46e074054219ab6d0a1a217a5cd88459397a6b5c0d08f148f36fb5a9626d75c6",
+    "bytes": 924,
+    "mtime_ns": 1792246982589087021
+  },
+  "test-classes/com/m3/collections/M3FilteredViewsContract.class": {
+    "sha256": "269cc1157b1ef773649248d43031b6ef9f943437e7bcd386dc13a59ce0393320",
+    "bytes": 19827,
+    "mtime_ns": 1792246982620944456
+  },
+  "test-classes/com/m3/collections/M3FilteredViewsTest.class": {
+    "sha256": "c7d138185f04e97949711d451850e916d4b8cc426602e9f2af5dc737809fbc09",
+    "bytes": 925,
+    "mtime_ns": 1792246982627152514
+  },
+  "test-classes/com/m3/collections/M3FootprintContractTest$Key.class": {
+    "sha256": "3ab84497cad4fdf2456a987e819804501671ca57edb6a943ffb036ff071d80ca",
+    "bytes": 738,
+    "mtime_ns": 1792246982656945126
+  },
+  "test-classes/com/m3/collections/M3FootprintContractTest.class": {
+    "sha256": "f44a508ea2c09ae915c563229469f629653d8483a588ab72f0f5c82fa9aeddb9",
+    "bytes": 11044,
+    "mtime_ns": 1792246982664277028
+  },
+  "test-classes/com/m3/collections/M3IndexMaskCompactorSelfTest.class": {
+    "sha256": "f227194100c8dad04ab897d8d48a56d477047e4555218fdc3438b61a6f31600b",
+    "bytes": 11863,
+    "mtime_ns": 1792246982672945424
+  },
+  "test-classes/com/m3/collections/M3IndexMaskCompactorTest.class": {
+    "sha256": "2e1c775e2437d7864c1e8f37d3e088a55b5e71325695830b2815731e6f96c5bf",
+    "bytes": 621,
+    "mtime_ns": 1792246982676945498
+  },
+  "test-classes/com/m3/collections/M3IndexMaskWindowRecoverySelfTest.class": {
+    "sha256": "36863649532b80678af96192dcd2aaba3548980797950ba0a0f5611eee3fbd29",
+    "bytes": 9900,
+    "mtime_ns": 1792246982688945721
+  },
+  "test-classes/com/m3/collections/M3IndexMaskWindowRecoveryTest.class": {
+    "sha256": "7461f7870b0b91077cadfe919a27e75054861af8296cdea1c572029f35da43a4",
+    "bytes": 618,
+    "mtime_ns": 1792246982688945721
+  },
+  "test-classes/com/m3/collections/M3IndexMaskWindowSelfTest.class": {
+    "sha256": "2452de9edafdfa312bf5fe103812c468a30a4bde1d62f2d82a341afabf5d7e9c",
+    "bytes": 12191,
+    "mtime_ns": 1792246982700945945
+  },
+  "test-classes/com/m3/collections/M3IndexMaskWindowTest.class": {
+    "sha256": "dc85ece138aaf71e24ab77e569de50f89f01f5e75f0c8fcfbef482a51b388f7a",
+    "bytes": 614,
+    "mtime_ns": 1792246982708385495
+  },
+  "test-classes/com/m3/collections/M3IndexPathMaskWindowSelfTest$Action.class": {
+    "sha256": "43644ed4ab1fef6e6c774e260b1a461a83f310607bb7a7976b11c533fcf92103",
+    "bytes": 372,
+    "mtime_ns": 1792246982716946242
+  },
+  "test-classes/com/m3/collections/M3IndexPathMaskWindowSelfTest.class": {
+    "sha256": "cc33320ecad48362c6f80d30c3469635cb95a85e615cc1939c3d6fe05281fcab",
+    "bytes": 12799,
+    "mtime_ns": 1792246982723806378
+  },
+  "test-classes/com/m3/collections/M3IndexPathMasksSelfTest.class": {
+    "sha256": "128880bdf8ac6392b4f72d7436b8d206210f49d35537e261c00e5b0443f99ea0",
+    "bytes": 9290,
+    "mtime_ns": 1792246982732946540
+  },
+  "test-classes/com/m3/collections/M3IndexPathMasksTest.class": {
+    "sha256": "db1cfa7e7dba6f0de6cd41817d36062d96cb1a67319afa67aa3d6c8bfe778ad2",
+    "bytes": 624,
+    "mtime_ns": 1792246982739272688
+  },
+  "test-classes/com/m3/collections/M3IndexPathRankNativeSelfTest.class": {
+    "sha256": "8a21134a95df84185eb8dcf3dac5f08c1dcd26e1fc19012552e5389959bc440f",
+    "bytes": 3179,
+    "mtime_ns": 1792246982742474902
+  },
+  "test-classes/com/m3/collections/M3IndexPathRankSelfTest.class": {
+    "sha256": "01f61964c29842b29427d996fc57b8c670750d33831638431cc438c7ab51ef45",
+    "bytes": 12048,
+    "mtime_ns": 1792246982752946912
+  },
+  "test-classes/com/m3/collections/M3IndexPathRankTest.class": {
+    "sha256": "a4b08f9a76625b80498cfd050d5c0365da4d29ead68bba9e061dfc9963bd51d1",
+    "bytes": 1621,
+    "mtime_ns": 1792246982756946987
+  },
+  "test-classes/com/m3/collections/M3IntLanesTest.class": {
+    "sha256": "f437a2ba7d7e8d1d500e1ecff3cdcef88f9bcc23679a2a789ea11b66a35338c5",
+    "bytes": 12541,
+    "mtime_ns": 1792246982800947805
+  },
+  "test-classes/com/m3/collections/M3IntLongHashMapTest.class": {
+    "sha256": "149c7d744563a0e6a0a2a68f8c3eab16b6866fc8077829bb21193a1fe7994197",
+    "bytes": 8131,
+    "mtime_ns": 1792246982824948252
+  },
+  "test-classes/com/m3/collections/M3JdkCollectionDifferentialTest.class": {
+    "sha256": "2a1602c53fa56756f8a59a4e7d56f06daa192ae560f0ce04ab4c965f665e69a1",
+    "bytes": 32799,
+    "mtime_ns": 1792246982904949740
+  },
+  "test-classes/com/m3/collections/M3JdkShapedPrimitiveCollectionsTest.class": {
+    "sha256": "7da565635778e538b263b3518d2fc689cb6511d6ad285102547417e0bcfd81a0",
+    "bytes": 9963,
+    "mtime_ns": 1792246982932950262
+  },
+  "test-classes/com/m3/collections/M3LazyObserverRegressionTest$1.class": {
+    "sha256": "d8003548f1cce86a60b6e97b1d30be7c714bc191dc956187474c8cb32663ad25",
+    "bytes": 4121,
+    "mtime_ns": 1792246982952950633
+  },
+  "test-classes/com/m3/collections/M3LazyObserverRegressionTest$2.class": {
+    "sha256": "da5e9e667cee3d55cc81c2297e5d0cd5c800ae5661ba4157ddf10c68bdbf6047",
+    "bytes": 4035,
+    "mtime_ns": 1792246982957609246
+  },
+  "test-classes/com/m3/collections/M3LazyObserverRegressionTest$3.class": {
+    "sha256": "8188cdfa699ba9bf480fa6d3b8e0767e2b49c976af222161ed0b44973036735c",
+    "bytes": 4099,
+    "mtime_ns": 1792246982958016569
+  },
+  "test-classes/com/m3/collections/M3LazyObserverRegressionTest$4.class": {
+    "sha256": "4ed34d87fec652432f9527f7d62c3a4a32c10c93128cd39ae50c17bb899b0764",
+    "bytes": 4010,
+    "mtime_ns": 1792246982958447987
+  },
+  "test-classes/com/m3/collections/M3LazyObserverRegressionTest.class": {
+    "sha256": "8bb3cf6192e38a2ce65ee8fa229d820e0dfcd43a5cd52968c1993c8a6828b6ed",
+    "bytes": 10104,
+    "mtime_ns": 1792246982959462963
+  },
+  "test-classes/com/m3/collections/M3LazyTreeMapSelfTest$1.class": {
+    "sha256": "6738b59b24bd2aa3a821dc9370dd4eb74c29324fcaefb5837a13488024e7e3d3",
+    "bytes": 2896,
+    "mtime_ns": 1792246982988951303
+  },
+  "test-classes/com/m3/collections/M3LazyTreeMapSelfTest.class": {
+    "sha256": "0abe6a11c2771e385261ccce11252f63321b858e6528598e1150b4cfc7308ea4",
+    "bytes": 26288,
+    "mtime_ns": 1792246982988951303
+  },
+  "test-classes/com/m3/collections/M3LazyTreeMapTest.class": {
+    "sha256": "bb09de87cfb31e47f333b356b2e11874fe820abc2f3ff07add1e209cd0cc2511",
+    "bytes": 646,
+    "mtime_ns": 1792246982992951377
+  },
+  "test-classes/com/m3/collections/M3LazyValueStateSelfTest$1.class": {
+    "sha256": "22d8634074d1277f668bc32770f8063fd1bf61df400972c6bf9298e118785db6",
+    "bytes": 3202,
+    "mtime_ns": 1792246983000951527
+  },
+  "test-classes/com/m3/collections/M3LazyValueStateSelfTest.class": {
+    "sha256": "eb2b02a954c54decf99eaa5a3a83c762abdad2f22d21b66ea0002e6a6222212c",
+    "bytes": 10994,
+    "mtime_ns": 1792246983004951601
+  },
+  "test-classes/com/m3/collections/M3LongAddressBoundedSelfTest.class": {
+    "sha256": "e4d0975026b88a51e9bc3f8b68e1c61fc4d52af359c0d09e4a25a08ffdd0becb",
+    "bytes": 11076,
+    "mtime_ns": 1792246983012951750
+  },
+  "test-classes/com/m3/collections/M3LongAddressBoundedTest.class": {
+    "sha256": "bbef8d4ab825a516bdeacbaecdc6ba1a6dd128fcef2db8d1de928fe86b4e0641",
+    "bytes": 590,
+    "mtime_ns": 1792246983017873907
+  },
+  "test-classes/com/m3/collections/M3LongAddressKernelSelfTest.class": {
+    "sha256": "30a1720a54e5ef0337c33584a6128229aee690664ea87473efab99b9e6d98dd1",
+    "bytes": 4549,
+    "mtime_ns": 1792246983020953837
+  },
+  "test-classes/com/m3/collections/M3LongAddressKernelTest.class": {
+    "sha256": "e2efd01affaaa1ebe45fa1c1c804da225830a597a1fb6af79a677a15860ae8cd",
+    "bytes": 565,
+    "mtime_ns": 1792246983021543463
+  },
+  "test-classes/com/m3/collections/M3LongArrayDequeTest.class": {
+    "sha256": "973467678a50feaa23126394aba2a36d5d91e55308b0acb180ea23243b64e64e",
+    "bytes": 11423,
+    "mtime_ns": 1792246983036952196
+  },
+  "test-classes/com/m3/collections/M3LongArrayListTest.class": {
+    "sha256": "2b34468eea41144f9d5ca40fa317c19456e2dc9ae6e5b7e47640d64ce147d647",
+    "bytes": 15255,
+    "mtime_ns": 1792246983068952792
+  },
+  "test-classes/com/m3/collections/M3LongBitmapFilterPlanSelfTest.class": {
+    "sha256": "fa8e52a3ea788ead63ed5ed01ae79d7d32951b4882bd1e1ad7ccbd15460ffdec",
+    "bytes": 11998,
+    "mtime_ns": 1792246983080953016
+  },
+  "test-classes/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest$MutableSource$1.class": {
+    "sha256": "e481e9ba5ce4c289f493e949f0c611349b934676aa1a1183c8a2945184869ada",
+    "bytes": 1324,
+    "mtime_ns": 1792246983096953312
+  },
+  "test-classes/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest$MutableSource.class": {
+    "sha256": "2bdc2a751bb85358c3b470eb04530437e04791b266d4fa1c841b577eea28b5f8",
+    "bytes": 1510,
+    "mtime_ns": 1792246983101436962
+  },
+  "test-classes/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.class": {
+    "sha256": "c37defec3c5265dce82c06bee507ca05aac8a0c0d757e1b858223cd073cd0153",
+    "bytes": 18195,
+    "mtime_ns": 1792246983104287207
+  },
+  "test-classes/com/m3/collections/M3LongDagContract$1.class": {
+    "sha256": "8889761f9eb055b08b62c0d13f8b1300144884ec11be961bfaeb643ac66c137c",
+    "bytes": 1400,
+    "mtime_ns": 1792246983136954056
+  },
+  "test-classes/com/m3/collections/M3LongDagContract$2.class": {
+    "sha256": "7836a9313d8b479366992fc0ce998b396f6ac838841c8d53aa41766e1b11edf8",
+    "bytes": 2293,
+    "mtime_ns": 1792246983142075748
+  },
+  "test-classes/com/m3/collections/M3LongDagContract$TestSortedSet$1.class": {
+    "sha256": "12172b264ac849d11b5e2d473edd93b224beaf64233686395bdc67bc0a4ae4ad",
+    "bytes": 1197,
+    "mtime_ns": 1792246983141230087
+  },
+  "test-classes/com/m3/collections/M3LongDagContract$TestSortedSet.class": {
+    "sha256": "2dbabb0f7d70b8f75f481d03e7e9c2eb83d96b41b008a03280a91bf4e6413343",
+    "bytes": 4156,
+    "mtime_ns": 1792246983141554925
+  },
+  "test-classes/com/m3/collections/M3LongDagContract.class": {
+    "sha256": "47a47ba4c681e609823fe56b9790c1a9e3a315b98296d8c5e634d4e151cb6eaf",
+    "bytes": 21630,
+    "mtime_ns": 1792246983144114233
+  },
+  "test-classes/com/m3/collections/M3LongDagJUnitTest.class": {
+    "sha256": "e3e8888ac46c06ff58b9ae3951e0559fbb45020604b151c69f985d7ce7ad9610",
+    "bytes": 605,
+    "mtime_ns": 1792246983146352968
+  },
+  "test-classes/com/m3/collections/M3LongDeepFilterSelfTest$1.class": {
+    "sha256": "2a0f1ceea9719cb9f0a65926180423b0bff6c6fa1834c08850a38414f3b1bb93",
+    "bytes": 904,
+    "mtime_ns": 1792246983162805962
+  },
+  "test-classes/com/m3/collections/M3LongDeepFilterSelfTest$1Disjunctive.class": {
+    "sha256": "a05e150b1a21acfff2db6604a2855f6b1d860ad6e1703d7503a9114033f419f3",
+    "bytes": 2009,
+    "mtime_ns": 1792246983156954428
+  },
+  "test-classes/com/m3/collections/M3LongDeepFilterSelfTest$2.class": {
+    "sha256": "9771b67928d936c8b67099d168fc0f56b42fedcf239910916208c2d002f7186a",
+    "bytes": 809,
+    "mtime_ns": 1792246983163029047
+  },
+  "test-classes/com/m3/collections/M3LongDeepFilterSelfTest$SortedFixture$1.class": {
+    "sha256": "78f8d6a0a1cf8d14e9782e233f3313e6ac8dde24da35fba832001f67f5c1fd00",
+    "bytes": 1246,
+    "mtime_ns": 1792246983163255578
+  },
+  "test-classes/com/m3/collections/M3LongDeepFilterSelfTest$SortedFixture.class": {
+    "sha256": "62bb30b59a00a9bf6104bb973b9b23895102fe3bbc9401460d8eda772a1a51bf",
+    "bytes": 4299,
+    "mtime_ns": 1792246983163793296
+  },
+  "test-classes/com/m3/collections/M3LongDeepFilterSelfTest.class": {
+    "sha256": "b892f44b3235f5866f4121d5dfc2d9be00c0ed4ba265276cc2ec6256ea2370ec",
+    "bytes": 14099,
+    "mtime_ns": 1792246983165664469
+  },
+  "test-classes/com/m3/collections/M3LongFilteredViewContractTest$Counting$1.class": {
+    "sha256": "b24642f67b523a37353ac7161de3c05e093aa23f446417ac6a653b728d1a4640",
+    "bytes": 1258,
+    "mtime_ns": 1792246983172954727
+  },
+  "test-classes/com/m3/collections/M3LongFilteredViewContractTest$Counting.class": {
+    "sha256": "2e79df5425a1a3da5819cd965e1fdebfc709f706a3e1c392c388584afe9f7441",
+    "bytes": 2995,
+    "mtime_ns": 1792246983178879315
+  },
+  "test-classes/com/m3/collections/M3LongFilteredViewContractTest.class": {
+    "sha256": "414c5146463bcef7ac751e538104098285ededb5f41646620a64dc83532ba233",
+    "bytes": 11470,
+    "mtime_ns": 1792246983180854073
+  },
+  "test-classes/com/m3/collections/M3LongIndexProjectionMaskOffsetProof.class": {
+    "sha256": "da0a1beaf3322f1683423c2687a4720de1e9e083ba77824c1f5592e1e8662fbb",
+    "bytes": 10314,
+    "mtime_ns": 1792246983184954951
+  },
+  "test-classes/com/m3/collections/M3LongIndexProjectionMaskOffsetTest.class": {
+    "sha256": "aa353f75516759e10b326c6a0554c67bba0dfd14d04bec2738091b5746b4d73f",
+    "bytes": 679,
+    "mtime_ns": 1792246983191107538
+  },
+  "test-classes/com/m3/collections/M3LongIndexProjectionSelfTest.class": {
+    "sha256": "47b2fbe9d6b6a046d88e9e1cffcce51b46528386b9778711c5c9e932bcbcd26a",
+    "bytes": 8530,
+    "mtime_ns": 1792246983192955099
+  },
+  "test-classes/com/m3/collections/M3LongLinkedHashSetTest.class": {
+    "sha256": "85619e270ea10ce44dbf0c6d670559039dc1582a6dfe380862d024e879338588",
+    "bytes": 7720,
+    "mtime_ns": 1792246983212955471
+  },
+  "test-classes/com/m3/collections/M3LongLongLinkedHashMapTest.class": {
+    "sha256": "ae198d444d09c54171db5e2ec9526ef823cd070bbb3efe8d1838f74e610b0036",
+    "bytes": 11393,
+    "mtime_ns": 1792246983232955844
+  },
+  "test-classes/com/m3/collections/M3LongRankIndexSelfTest$ArraySource$1.class": {
+    "sha256": "506ed6e536e275575f3e3d684b903c71a1295f51209d5d981f91b6eef985f058",
+    "bytes": 1227,
+    "mtime_ns": 1792246983240955991
+  },
+  "test-classes/com/m3/collections/M3LongRankIndexSelfTest$ArraySource.class": {
+    "sha256": "1b110643068c26f545c36061f29e246ad2cfa5c2c3307c2026ad662fe8f4ea22",
+    "bytes": 1330,
+    "mtime_ns": 1792246983245762935
+  },
+  "test-classes/com/m3/collections/M3LongRankIndexSelfTest.class": {
+    "sha256": "a78368d0a122165caad52dcd1c927e8cf67400cc3d60008704555976a4e08fca",
+    "bytes": 6345,
+    "mtime_ns": 1792246983248780336
+  },
+  "test-classes/com/m3/collections/M3LongRankIndexTest.class": {
+    "sha256": "038e3e66c9371c2c77ba66889d0a0d931bdd0ab071aa47e2476efc47ac09156a",
+    "bytes": 4291,
+    "mtime_ns": 1792246983260956364
+  },
+  "test-classes/com/m3/collections/M3LongSortedAlgebraSelfTest$JdkSortedLongSet$1.class": {
+    "sha256": "aea83d6c531a4b5e5a585384d9701d2b7c9d66dc337971d93c86d72cafc3987d",
+    "bytes": 1280,
+    "mtime_ns": 1792246983284901252
+  },
+  "test-classes/com/m3/collections/M3LongSortedAlgebraSelfTest$JdkSortedLongSet.class": {
+    "sha256": "3f906ec5958999354a0120e0ec6ca630e3cf825b5ed2078e8d1e29d430275818",
+    "bytes": 4156,
+    "mtime_ns": 1792246983285705861
+  },
+  "test-classes/com/m3/collections/M3LongSortedAlgebraSelfTest.class": {
+    "sha256": "fa43e48ad073c40eb9541209870e64d7046192a52f39bedfd7fea0a6fb317a89",
+    "bytes": 14869,
+    "mtime_ns": 1792246983285705861
+  },
+  "test-classes/com/m3/collections/M3LongSortedAlgebraTest.class": {
+    "sha256": "10059f524e50f135a422efaea73a8795ce1cf62ff0c93370a7e3bc103f848a47",
+    "bytes": 680,
+    "mtime_ns": 1792246983289233639
+  },
+  "test-classes/com/m3/collections/M3LongSortedLateBindingSelfTest$CountedSorted$1.class": {
+    "sha256": "c2698fb11b0066e811404869bc6f7be9f23fb8139084f0a707eab96125e7d443",
+    "bytes": 1293,
+    "mtime_ns": 1792246983296957034
+  },
+  "test-classes/com/m3/collections/M3LongSortedLateBindingSelfTest$CountedSorted.class": {
+    "sha256": "9f8753b337c53a7ac2e8fdb55cd0fc001f3f5f6b80e63a45f57bd4ea8b9c8888",
+    "bytes": 4443,
+    "mtime_ns": 1792246983302964340
+  },
+  "test-classes/com/m3/collections/M3LongSortedLateBindingSelfTest.class": {
+    "sha256": "8490a72c05ff1b525377ffb99dba361eba214784402b507c415b70536409616a",
+    "bytes": 11668,
+    "mtime_ns": 1792246983304651997
+  },
+  "test-classes/com/m3/collections/M3LongSortedSnapshotSelfTest$MutableSorted$1.class": {
+    "sha256": "57e9a8433de378f5213d5f503f7d366ff22ff63ab2f75ddc8955db3f63e61f33",
+    "bytes": 1272,
+    "mtime_ns": 1792246983328957629
+  },
+  "test-classes/com/m3/collections/M3LongSortedSnapshotSelfTest$MutableSorted.class": {
+    "sha256": "27a5be071fad5a65a3af457d30ab89a568dffaa4e2bb41e60f7f0ad2d97a0772",
+    "bytes": 4057,
+    "mtime_ns": 1792246983333689624
+  },
+  "test-classes/com/m3/collections/M3LongSortedSnapshotSelfTest.class": {
+    "sha256": "9d0692d35ceb2b4c1f3ac659f54ea5f2de0bbed0f76448f65287f40c701ee9ea",
+    "bytes": 12032,
+    "mtime_ns": 1792246983335439235
+  },
+  "test-classes/com/m3/collections/M3LongTreeSetTest.class": {
+    "sha256": "6b251d48bade3c265f4ce8c10db07611e671bc141521fbf4f6c5f5e55c92a642",
+    "bytes": 17293,
+    "mtime_ns": 1792246983364958299
+  },
+  "test-classes/com/m3/collections/M3MapContractTest$Collision.class": {
+    "sha256": "bdfbd3a3a6790a015a1922198e2032c52937059cb4f9b601bd6e41353297dbfd",
+    "bytes": 1455,
+    "mtime_ns": 1792246983404959044
+  },
+  "test-classes/com/m3/collections/M3MapContractTest.class": {
+    "sha256": "5a8a46e8efe311c59af3aabdf69ba8ffac88711e70accad2f82532d0e4b7a832",
+    "bytes": 25372,
+    "mtime_ns": 1792246983408959117
+  },
+  "test-classes/com/m3/collections/M3MaskAllSelectionReceiverTest.class": {
+    "sha256": "06338da1991d30d201850ea8a9f24365d07faf61a9a574948902ba747c4c0514",
+    "bytes": 645,
+    "mtime_ns": 1792246983415828252
+  },
+  "test-classes/com/m3/collections/M3MaskDenseSelectionProof.class": {
+    "sha256": "4128a8a39b5c9e23c9177326e989c87f196285a1ca120dc37a3cd3be70776bce",
+    "bytes": 7487,
+    "mtime_ns": 1792246983416959267
+  },
+  "test-classes/com/m3/collections/M3MaskNativeParityProof.class": {
+    "sha256": "36d3032d71c30dbc645774e305069079aa23d64f49e365b534077cae532d11a9",
+    "bytes": 2330,
+    "mtime_ns": 1792246983424126377
+  },
+  "test-classes/com/m3/collections/M3MaskWindowSparseContract.class": {
+    "sha256": "87e84dc0381a6cbd651496c87b2ab88265c6a5d55fe759b9cdcee97144474d5d",
+    "bytes": 8321,
+    "mtime_ns": 1792246983424959416
+  },
+  "test-classes/com/m3/collections/M3MutableFilteredViewsContract.class": {
+    "sha256": "d4461fecc673a69071aebabedd65cf87bfe73d7533cab91ffca774d2dbc3f391",
+    "bytes": 25066,
+    "mtime_ns": 1792246983464960160
+  },
+  "test-classes/com/m3/collections/M3MutableFilteredViewsTest.class": {
+    "sha256": "027139581d5fcc3a26c27e417a698379e0c39054add64de1e12ba5140f60430a",
+    "bytes": 631,
+    "mtime_ns": 1792246983470088241
+  },
+  "test-classes/com/m3/collections/M3NativeIndexRangeSelfTest.class": {
+    "sha256": "323e67f44cfae51868ce8d853a0d268e83a1d51f3e2713a9578c714b327657f4",
+    "bytes": 12906,
+    "mtime_ns": 1792246983480960458
+  },
+  "test-classes/com/m3/collections/M3NativeIndexRangeTest.class": {
+    "sha256": "f5f5559b387a4da7c019ef7d197b88e81a784dfd5bfd6ba05f98feca1d4ee53d",
+    "bytes": 880,
+    "mtime_ns": 1792246983480960458
+  },
+  "test-classes/com/m3/collections/M3NoRetainedStructuralEntryTest.class": {
+    "sha256": "b222879b1820fc98d98163549a222764b8ec6d1f16a9b23de46aa4f3475b02ba",
+    "bytes": 11887,
+    "mtime_ns": 1792246983488960607
+  },
+  "test-classes/com/m3/collections/M3ObjectIdentityTest.class": {
+    "sha256": "f24747f45714a19eb825051488e1e9b7cdf8169729fe54c3417220670fca7108",
+    "bytes": 12387,
+    "mtime_ns": 1792246983512961052
+  },
+  "test-classes/com/m3/collections/M3ObjectResidencyBorrowTest.class": {
+    "sha256": "21dcc6646a4df865f44a7d900c429f44657b1ecf9543028be2f56e54a8a19b40",
+    "bytes": 10805,
+    "mtime_ns": 1792246983532961425
+  },
+  "test-classes/com/m3/collections/M3ObjectResidencyRuntimePressureTest.class": {
+    "sha256": "9cdf5db99d127da2e9dd4f2b65611521897d7e2545ab6f34136bc57d30a7274f",
+    "bytes": 1332,
+    "mtime_ns": 1792246983532961425
+  },
+  "test-classes/com/m3/collections/M3ObjectResidencyTest$1.class": {
+    "sha256": "ad622de41f70ef5a36aa22236fbc226757c865f880f81e82b86ad1c34ab94660",
+    "bytes": 2441,
+    "mtime_ns": 1792246983571766573
+  },
+  "test-classes/com/m3/collections/M3ObjectResidencyTest$2.class": {
+    "sha256": "e8c04fa948b7a617821bba7f3a16ada1a6cf2f8760a83cc0cb652d72eb040ea7",
+    "bytes": 1185,
+    "mtime_ns": 1792246983572097400
+  },
+  "test-classes/com/m3/collections/M3ObjectResidencyTest$3.class": {
+    "sha256": "a06715140bc5af7f1d2411c0c1540a1fed8967dcdabda8bc8b82fb794dc9e421",
+    "bytes": 1632,
+    "mtime_ns": 1792246983572379044
+  },
+  "test-classes/com/m3/collections/M3ObjectResidencyTest$AnnotatedProjection.class": {
+    "sha256": "595a5c4a75e3a16ce926be6f5ffdf9728248b7c7a202f9406516001df7eba721",
+    "bytes": 839,
+    "mtime_ns": 1792246983572701498
+  },
+  "test-classes/com/m3/collections/M3ObjectResidencyTest$MemoryStore.class": {
+    "sha256": "ebc9623a3681c2b960b396f17b4768987c8b2f9e971c208582507d2545c45065",
+    "bytes": 1918,
+    "mtime_ns": 1792246983571175995
+  },
+  "test-classes/com/m3/collections/M3ObjectResidencyTest$Value.class": {
+    "sha256": "1bb40dc32c7c85c235469fb611a7a96e84065bff1d09d5d1bc0f386435132681",
+    "bytes": 584,
+    "mtime_ns": 1792246983564962021
+  },
+  "test-classes/com/m3/collections/M3ObjectResidencyTest.class": {
+    "sha256": "3c186340a6fa75b3146e8af40b29b65d494a1ee49b4e09858d6c580dabda2d5a",
+    "bytes": 16934,
+    "mtime_ns": 1792246983574947354
+  },
+  "test-classes/com/m3/collections/M3ObjectSlotIndexSelfTest$1Item.class": {
+    "sha256": "7061f9002313871ee9b8549f0f87d61a986e710cf44fd77ae8be78ca509fca1f",
+    "bytes": 1772,
+    "mtime_ns": 1792246983592962542
+  },
+  "test-classes/com/m3/collections/M3ObjectSlotIndexSelfTest.class": {
+    "sha256": "e7981be9e5524ad7a73e32b6332a0349ff90995f43f1608f68dbd5f63eabc830",
+    "bytes": 13149,
+    "mtime_ns": 1792246983600199495
+  },
+  "test-classes/com/m3/collections/M3ObjectSlotIndexTest.class": {
+    "sha256": "8627d380d7fe06759c2dcd90ae28424404b23a4153218673d052558fd20b014c",
+    "bytes": 591,
+    "mtime_ns": 1792246983601417436
+  },
+  "test-classes/com/m3/collections/M3ObjectStateBatch28SelfTest.class": {
+    "sha256": "903faef0763cbc6d928f11e220e5478ae7693b92cbf0d239ceb58b824d19449b",
+    "bytes": 7633,
+    "mtime_ns": 1792246983604962765
+  },
+  "test-classes/com/m3/collections/M3ObjectStateSlots28SelfTest.class": {
+    "sha256": "99c5845d913502665f9f0ce67de41329fb5a4e51fbeb85febecaa750efa40698",
+    "bytes": 19696,
+    "mtime_ns": 1792246983624963136
+  },
+  "test-classes/com/m3/collections/M3PrimitiveCollectionDifferentialTest.class": {
+    "sha256": "8325b603026c8f54b7b79bc506960fa2413c02ea493c30eb51079abc2c6d872b",
+    "bytes": 11360,
+    "mtime_ns": 1792246983656963732
+  },
+  "test-classes/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.class": {
+    "sha256": "04fdd26debe209739cce852b5577a53de508ad530d909b942037c8c6254ddb2e",
+    "bytes": 29681,
+    "mtime_ns": 1792246983696964477
+  },
+  "test-classes/com/m3/collections/M3ReadOnlyViewBoundaryTest.class": {
+    "sha256": "04522e11f022b5056d8e018e3ece46457943a473469e532d1fdf30cc556bc389",
+    "bytes": 922,
+    "mtime_ns": 1792246983702036206
+  },
+  "test-classes/com/m3/collections/M3ReceivingRecoveryTest.class": {
+    "sha256": "37dcb3f0b7133da6e73442459511b992363b6d150c19b640b480415579a0f66a",
+    "bytes": 5903,
+    "mtime_ns": 1792246983707067229
+  },
+  "test-classes/com/m3/collections/M3ResidencyStateMaskProof.class": {
+    "sha256": "dd9a93853efc10c2b27229fae87312c0df26ac161755cdd33dce9adfe38b5842",
+    "bytes": 14471,
+    "mtime_ns": 1792246983712964775
+  },
+  "test-classes/com/m3/collections/M3ResidencyStateMaskTest.class": {
+    "sha256": "7fd4ab56c081f138896cd859a42cb9a6e85b2e6aa55133b8def9884a3c45df34",
+    "bytes": 633,
+    "mtime_ns": 1792246983712964775
+  },
+  "test-classes/com/m3/collections/M3SequenceContractTest.class": {
+    "sha256": "32628d75c2cbdb078662000e87e2de12e870a6809f5db9788cc62b13570d1e59",
+    "bytes": 10592,
+    "mtime_ns": 1792246983732965147
+  },
+  "test-classes/com/m3/collections/M3SignalOrderContract$1Person.class": {
+    "sha256": "15575aa3519e263d6dc4b1a3135d7c1302c88c08881dee5bd160bbe5f0b90dfd",
+    "bytes": 661,
+    "mtime_ns": 1792246983736965221
+  },
+  "test-classes/com/m3/collections/M3SignalOrderContract$Throwing.class": {
+    "sha256": "d97edc92099340e5f3c5391a20ca448effe0fbb15a7bc55a16292d6183846119",
+    "bytes": 352,
+    "mtime_ns": 1792246983743891241
+  },
+  "test-classes/com/m3/collections/M3SignalOrderContract.class": {
+    "sha256": "224d10b89874749d5fb74667d5437426821c50851f6800082967d2b5a82c9206",
+    "bytes": 9811,
+    "mtime_ns": 1792246983745340399
+  },
+  "test-classes/com/m3/collections/M3SignalOrderJUnitTest.class": {
+    "sha256": "16bca9fdfa73f25d227bc1cc6d5f22798a2bf0dbffb0a725f248be53e22bfde1",
+    "bytes": 633,
+    "mtime_ns": 1792246983746134904
+  },
+  "test-classes/com/m3/collections/M3SpanIndexSelfTest.class": {
+    "sha256": "d035d1ff76f136ef2727d498e9c5f2086e3deed383d4a0cadb01f2cc0c6306ff",
+    "bytes": 9719,
+    "mtime_ns": 1792246983748965444
+  },
+  "test-classes/com/m3/collections/M3SpanIndexTest.class": {
+    "sha256": "3b26046108a5f67f59be55c2e450350741560c2dd77bdef4d7bb4c92ea58909e",
+    "bytes": 670,
+    "mtime_ns": 1792246983753320266
+  },
+  "test-classes/com/m3/collections/M3StateMaskArraysSelfTest$Pair.class": {
+    "sha256": "2675b7aa568631836276557970301280000837a58d3523d84fd7d933da132bbd",
+    "bytes": 1690,
+    "mtime_ns": 1792246983759528068
+  },
+  "test-classes/com/m3/collections/M3StateMaskArraysSelfTest.class": {
+    "sha256": "a4f656b15fd9850c305666e4c548e57d8451220049855de4477d204ed197cb21",
+    "bytes": 8253,
+    "mtime_ns": 1792246983760992329
+  },
+  "test-classes/com/m3/collections/M3StoredRepresentativeContract$Key.class": {
+    "sha256": "70ccede4cafc2b58b3e27d7f362eda5bbdef80d5ef2249e29e728654b62c9831",
+    "bytes": 1699,
+    "mtime_ns": 1792246983776965965
+  },
+  "test-classes/com/m3/collections/M3StoredRepresentativeContract.class": {
+    "sha256": "0b3218d06f1644b63e06822c2d83480f744e2b5ad4a46efc6cfc63581dd1c5b1",
+    "bytes": 16555,
+    "mtime_ns": 1792246983780966040
+  },
+  "test-classes/com/m3/collections/M3StoredRepresentativeTest.class": {
+    "sha256": "ae44b62aa13e57dd658ade1ae7cfe42fae7cb2391122475a2cee647c7b21b4ab",
+    "bytes": 646,
+    "mtime_ns": 1792246983786217029
+  },
+  "test-classes/com/m3/collections/M3TombstoneReuseSelfTest.class": {
+    "sha256": "33c5ad96c97fe45db03052bdf7382aedbb4c836a67c6122871966126db9b9f43",
+    "bytes": 8401,
+    "mtime_ns": 1792246983792355231
+  },
+  "test-classes/com/m3/collections/M3TombstoneReuseTest.class": {
+    "sha256": "114cd373273966220dc9055749340e78d0fb2197b96211bef128c673c7bd7477",
+    "bytes": 625,
+    "mtime_ns": 1792246983793222595
+  },
+  "test-classes/com/m3/collections/M3ZeroMaskArrayFastPathProof.class": {
+    "sha256": "ee1d3f9351bfb788b7cc4f05bc9be45d3c698430c356f3023d6644d23ca3e2d8",
+    "bytes": 11564,
+    "mtime_ns": 1792246983796966337
+  },
+  "test-classes/com/m3/collections/M3ZeroMaskArrayFastPathTest.class": {
+    "sha256": "289613f46e6dbdb4fa0a2bf7f942e23b166d1aa2fedde6178c7db6886aa29944",
+    "bytes": 660,
+    "mtime_ns": 1792246983801638597
+  },
+  "test-classes/com/m3/collections/M3ZeroSlotCapacityContract.class": {
+    "sha256": "302d48b8daba5be7c49e08df41ef976b8edde740f83a707ecebdc4cc83849609",
+    "bytes": 14771,
+    "mtime_ns": 1792246983808966561
+  },
+  "test-classes/com/m3/collections/M3ZeroSlotCapacityTest.class": {
+    "sha256": "96a0ede40bbccd79682229b287dc25003d4a20b33d7b77fa135d42bf93e1b2d2",
+    "bytes": 617,
+    "mtime_ns": 1792246983813652978
+  },
+  "test-classes/com/m3/collections/SegmentedLaneBulkContractTest.class": {
+    "sha256": "3f3bae6d9a8bca169365654dca0aa0d24a165099a19eca9ad9ab2a67f2962f4d",
+    "bytes": 8820,
+    "mtime_ns": 1792246983816966709
+  },
+  "test-classes/com/m3/collections/SegmentedPrimitiveStorageTest.class": {
+    "sha256": "cecbdf971f77d6b59d080d0218b3c73e28bbbf9e6b918206e18f7f87e2e09b50",
+    "bytes": 8428,
+    "mtime_ns": 1792246983832967007
+  }
+}

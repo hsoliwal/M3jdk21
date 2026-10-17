@@ -1,0 +1,66 @@
+{
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and contributors",
+  "spdx_license_identifier": "Apache-2.0",
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Additive fragment; no central manifest rewrite and no public receiver rename.",
+  "source_metadata": "m3/collections/qualification/contracts-20261017/SOURCE.json",
+  "mappings": [
+    {
+      "source": "com.synexia.primitives.M3CollectionViews bounded-neighbor atom",
+      "source_commit": "76a3ebf87654806644317e4048b1fd134116bfaf",
+      "source_blob": "9e7cf76c17182258a0290f2414f3b6c0b8b65b76",
+      "target": "com.m3.collections.M3FilteredViews.seek and M3MutableFilteredViews SetView navigation",
+      "target_rule": "Preserve current owners and callbacks; specialize bounded fallback with known owner unwrapping and actual stored-null presence.",
+      "status": "EXACT_SDK_RECEIVED_FINITE_GATES_RECORDED",
+      "license": "Apache-2.0",
+      "catalogue": "m3/collections/qualification/contracts-20261017/ALGORITHM_DECISIONS.json"
+    },
+    {
+      "source": "com.synexia.primitives.M3FilteredMaps entry-presence navigation",
+      "source_commit": "a0227fc8a23b102613dd760a6180a8f39e344215",
+      "source_blob": "7374279f89f73b904cee66134a84033269bd743d",
+      "target": "com.m3.collections.M3FilteredViews.NavigableMapView.seek",
+      "target_rule": "Retain detached immutable entries and original wrapped traversal.",
+      "status": "EXACT_SDK_RECEIVED_FINITE_GATES_RECORDED",
+      "license": "Apache-2.0",
+      "catalogue": "m3/collections/qualification/contracts-20261017/ALGORITHM_DECISIONS.json"
+    },
+    {
+      "source": "DeepFilteredListComposition20261017 orderedAnd Predicate atom",
+      "source_commit": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+      "source_blob": "e21fd9b277ce44a8c6efe4a4ffdf9f01a14a1d0b",
+      "target": "com.m3.collections.M3FilteredViews.orderedAnd / M3FilteredLists.View",
+      "target_rule": "Reuse the balanced conjunction in the existing owner; preserve opaque predicate occurrence order and short circuiting.",
+      "status": "EXACT_SDK_RECEIVED_FINITE_GATES_RECORDED",
+      "license": "Apache-2.0",
+      "catalogue": "m3/collections/qualification/contracts-20261017/ALGORITHM_DECISIONS.json"
+    },
+    {
+      "source": "Current M3FilteredViews iterator/visible atoms and existing Synexia dfs category",
+      "source_commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+      "target": "com.m3.collections.M3FilteredViews.CollectionView",
+      "target_rule": "Replace known read-only decorator and membership recursion with temporary arrays of predicate/continuation references; keep original representative scans.",
+      "status": "EXACT_SDK_RECEIVED_FINITE_GATES_RECORDED",
+      "license": "Apache-2.0",
+      "catalogue": "m3/collections/qualification/contracts-20261017/ALGORITHM_DECISIONS.json"
+    },
+    {
+      "source": "Existing M3 read-only contract and JDK21 unmodifiable APIs",
+      "source_commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+      "target": "com.m3.collections.M3FilteredViews / M3FilteredNavigableSet",
+      "target_rule": "Explicit no-op and empty sequenced mutation refusal; forward original sorted reversed query behavior.",
+      "status": "EXACT_SDK_RECEIVED_FINITE_GATES_RECORDED",
+      "license": "Apache-2.0",
+      "catalogue": "m3/collections/qualification/contracts-20261017/ALGORITHM_DECISIONS.json"
+    },
+    {
+      "source": "Existing exported M3 default constructor convention",
+      "source_commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+      "target": "com.m3.collections.M3ObjectSlotStore28 / M3SpanIndex",
+      "target_rule": "Make the same public empty constructors explicit; preserve descriptors and initialization.",
+      "status": "EXACT_SDK_RECEIVED_FINITE_GATES_RECORDED",
+      "license": "Apache-2.0",
+      "catalogue": "m3/collections/qualification/contracts-20261017/ALGORITHM_DECISIONS.json"
+    }
+  ]
+}

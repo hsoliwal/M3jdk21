@@ -1,0 +1,86 @@
+{
+  "manifest": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collections-final/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collections-final/manifest.tsv",
+  "sha256": "1fbb50e8bdc2e03118ace97c4752d82e7a65b1ef930144b9385bf9b5b284dcfd",
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "before_sha256": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101",
+      "after_sha256": "4e90ed0c7ccd20292ca08c2e2d3f43b6e0f4157b84900f7de80f10aac6a96d4b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "before_sha256": "d70bcdd969aa688ed0a498ce3503684fee2b0ecc9eb11348160e7befa1a7cfe0",
+      "after_sha256": "d10fa589318f55099aa07ac703008f6c590db667ee2d684fad8944164bc2825e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before_sha256": "d67a632f63647f033e71360858f8f1be1f93418880178a96437bb0605998ad5b",
+      "after_sha256": "aa7614e7009b3f342f26339b5c4e8c5583d2642db0930ad34a4a3252fca28cd6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "before_sha256": "bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65",
+      "after_sha256": "fe830fe58e72afbadfcc43065b53176b95c9bb6f6750e251ed4b8c907bb23700"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java",
+      "before_sha256": "02893ff5d555ef577789ca82fdbbe043172219ae59202d10a51f2fa1337d9152",
+      "after_sha256": "907fc4c4bf9003e9edb481afeba4a7cfe3fe4e6e520e7f34e8e5fb2a861e56d5"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java",
+      "before_sha256": "76da13c95905f3a41b0e95acd89ff68e9ae12b665fec8fe804a5af37235a9641",
+      "after_sha256": "08ea68e5ec274e0229f2a91d91a00b9aa66004e73b474ea67b602c63234d8167"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "4b7b1bab32dda18c4f6bfef99e5b6d38754e838178205a0632b56ac64fc4c061"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "bb2c6b0687aa3619553f105637898d135460e150c989f82b1be3706aa3ceefcb"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "46fb2cdf27829984581db5a6cdd6d2fb243cbf183742afafa5b2003d0ff5dce6"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "06ca1bc4f818218156f6f9dedadced0f45eff165470e4c93f8938b8103ee9d2f"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundaryTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "84a9a87ab9101da250f504f8f0ae9d99baa6106dcb090dd3c3a90f776c4b82f9"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetTest.java",
+      "before_sha256": "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
+      "after_sha256": "7c4a4ba25f54847f39391ca3ee44709a29b6dfd116405c6570bc7ce6d3e761bd"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "3c2836df74ef09f844f845dbb7f0cd0d179787254d994fa98168d93f3c1e30d4"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundaryTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "5dace1d4f7e86a98af7b817be6594063c63083a1b7f6f37ad47f192d74eae632"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java",
+      "before_sha256": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
+      "after_sha256": "fa59e9a722068963eed9146dbc4b9ead6dc53abde672e28bde5c178d9ea4360a"
+    }
+  ]
+}

@@ -1,0 +1,1286 @@
+{
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and contributors",
+  "spdx_license_identifier": "Apache-2.0",
+  "schema": "M3_COLLECTION_CONTRACTS_EVIDENCE_MAP_V1",
+  "status": "RECORDS_RETAINED",
+  "source_metadata": "SOURCE.json",
+  "records": [
+    {
+      "id": "navigation-dataset.json",
+      "status": "RETAINED",
+      "path": "evidence/navigation-dataset.json",
+      "sha256": "8a6bd1b43a795b99014667780d845f5c82a48efa418bf80a943ccb173e6d386d",
+      "bytes": 1973,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/navigation-dataset.json",
+      "claim": "Frozen intermediate navigation source epoch; its two later review regressions are retained, not asserted as final behavior."
+    },
+    {
+      "id": "successor-dataset.json",
+      "status": "RETAINED",
+      "path": "evidence/successor-dataset.json",
+      "sha256": "2a5c5372c73f1cba629c7b63041166fe692f48a15662616ebd81a95da7f66490",
+      "bytes": 4397,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/successor-dataset.json",
+      "claim": "Frozen source epoch for nullable anchoring, read-only guards, deep List atom and oracle correction."
+    },
+    {
+      "id": "successor-source-epoch.json",
+      "status": "RETAINED",
+      "path": "evidence/successor-source-epoch.json",
+      "sha256": "fe31b961d0ee5062c6184086b388884fe5a7cebb1ad573a3716c9df8b556bd4d",
+      "bytes": 1975,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/successor-source-epoch.json",
+      "claim": "Author freeze receipt; candidate-only historical status is retained.",
+      "recorded_status": "FROZEN_CANDIDATE_NOT_YET_SDK_RECEIVED"
+    },
+    {
+      "id": "received-successor-proof.json",
+      "status": "RETAINED",
+      "path": "evidence/received-successor-proof.json",
+      "sha256": "d601eef38fa726e70936bb6a507537cd7e7a697dbec67d35660174bbc3fd251c",
+      "bytes": 3848,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/received-successor-proof.json",
+      "claim": "Actual SDK receiving output validated on source-built M3 image before the final generic pass.",
+      "recorded_status": "ACTUAL_SDK_RECEIVING_OUTPUT_FOCUSED_PROOFS_PASS"
+    },
+    {
+      "id": "generic-dataset.json",
+      "status": "RETAINED",
+      "path": "evidence/generic-dataset.json",
+      "sha256": "a54cf56d257b7b709e0dc0291eeb07987f8256e02c25579b1e342b65b21e831c",
+      "bytes": 1435,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/generic-dataset.json",
+      "claim": "Final generic traversal and membership continuation source epoch."
+    },
+    {
+      "id": "generic-source-epoch.json",
+      "status": "RETAINED",
+      "path": "evidence/generic-source-epoch.json",
+      "sha256": "b2fb2168c8d12f8702df7027c2e030622de404c15eafaa6ab37b454f269355b8",
+      "bytes": 1273,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/generic-source-epoch.json",
+      "claim": "Historical author freeze for final generic pass.",
+      "recorded_status": "FROZEN_CANDIDATE_SDK_RECEIVING_PENDING"
+    },
+    {
+      "id": "received-generic-proof.json",
+      "status": "RETAINED",
+      "path": "evidence/received-generic-proof.json",
+      "sha256": "c519a02b0b633e473c69c171db11dcd868cf30e797475d0ea235bc31d436bc82",
+      "bytes": 3504,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/received-generic-proof.json",
+      "claim": "Actual SDK receiving output generic proof and exact event tapes.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "baseline-readonly-read-trace.log",
+      "status": "RETAINED",
+      "path": "evidence/baseline-readonly-read-trace.log.txt",
+      "sha256": "0014cf664c4d395f43df534318d33a92416011168d9690b08bfd52ba8a7ebfb2",
+      "bytes": 2537,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/baseline-readonly-read-trace.log",
+      "claim": "Original stable sorted/reversed and mixed map callback tape."
+    },
+    {
+      "id": "received-readonly-read-trace.log",
+      "status": "RETAINED",
+      "path": "evidence/received-readonly-read-trace.log.txt",
+      "sha256": "0014cf664c4d395f43df534318d33a92416011168d9690b08bfd52ba8a7ebfb2",
+      "bytes": 2537,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/received-readonly-read-trace.log",
+      "claim": "Successor receiving output matched the original tape byte for byte."
+    },
+    {
+      "id": "received-contract-proof.log",
+      "status": "RETAINED",
+      "path": "evidence/received-contract-proof.log.txt",
+      "sha256": "8efbbc1d2835bfb0b4ee9bf774a0bb479df98c481bd22858164d5f55cf4e7c1e",
+      "bytes": 836,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/received-contract-proof.log",
+      "claim": "Seven focused proof corpora against exact successor receiving output."
+    },
+    {
+      "id": "null-anchor-negative-controls.log",
+      "status": "RETAINED",
+      "path": "evidence/null-anchor-negative-controls.log.txt",
+      "sha256": "e33616c471f58a53573cff7ea5858f56adcf4a8ae7e1668945e200175bbcfe6e",
+      "bytes": 231,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/null-anchor-negative-controls.log",
+      "claim": "Original, intermediate and successor null/duplicate-callback witnesses."
+    },
+    {
+      "id": "received-null-anchor.log",
+      "status": "RETAINED",
+      "path": "evidence/received-null-anchor.log.txt",
+      "sha256": "01a4b70508df9aae2fa15e93126fa6945c454977c5b0358515127ecbef83541d",
+      "bytes": 50,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/received-null-anchor.log",
+      "claim": "Actual successor output resolves both intermediate navigation regressions."
+    },
+    {
+      "id": "generic-before-depth-negative.log",
+      "status": "RETAINED",
+      "path": "evidence/generic-before-depth-negative.log.txt",
+      "sha256": "93ad2a57619168e8cf0611c36842fd39226d56568666dc38c248a5bed3a75bff",
+      "bytes": 91192,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/generic-before-depth-negative.log",
+      "claim": "Exact predecessor StackOverflowError counterexample at depth 65536 and 256 KiB Java stack."
+    },
+    {
+      "id": "generic-before-trace.log",
+      "status": "RETAINED",
+      "path": "evidence/generic-before-trace.log.txt",
+      "sha256": "7a10a88ba35159ffdefa7de404e5ed70936dee7f3bc7b2c2336811d52c1d351a",
+      "bytes": 18779,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/generic-before-trace.log",
+      "claim": "Predecessor generic source/iterator/equality/predicate event tape."
+    },
+    {
+      "id": "generic-received-trace.log",
+      "status": "RETAINED",
+      "path": "evidence/generic-received-trace.log.txt",
+      "sha256": "7a10a88ba35159ffdefa7de404e5ed70936dee7f3bc7b2c2336811d52c1d351a",
+      "bytes": 18779,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/generic-received-trace.log",
+      "claim": "Final receiving output generic event tape, matched byte for byte."
+    },
+    {
+      "id": "generic-received-depth-proof.log",
+      "status": "RETAINED",
+      "path": "evidence/generic-received-depth-proof.log.txt",
+      "sha256": "ccaf4bb0b42636d010c09ccedadc7922fcd0b67148f1a6d3b9b03e74d97fcfd6",
+      "bytes": 60,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/generic-received-depth-proof.log",
+      "claim": "Final receiving output deep traversal/membership-demand proof."
+    },
+    {
+      "id": "baseline-public-closure.log",
+      "status": "RETAINED",
+      "path": "evidence/baseline-public-closure.log.txt",
+      "sha256": "6add24dda3f2e5c7463c16b50787e6eed8e0e58f80c14067bb8ef3748d02ddf7",
+      "bytes": 4777,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/baseline-public-closure.log",
+      "claim": "Original callable public descriptors, including inherited methods."
+    },
+    {
+      "id": "received-public-closure.log",
+      "status": "RETAINED",
+      "path": "evidence/received-public-closure.log.txt",
+      "sha256": "6add24dda3f2e5c7463c16b50787e6eed8e0e58f80c14067bb8ef3748d02ddf7",
+      "bytes": 4777,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/received-public-closure.log",
+      "claim": "Successor callable public descriptors."
+    },
+    {
+      "id": "generic-received-public-closure.log",
+      "status": "RETAINED",
+      "path": "evidence/generic-received-public-closure.log.txt",
+      "sha256": "6add24dda3f2e5c7463c16b50787e6eed8e0e58f80c14067bb8ef3748d02ddf7",
+      "bytes": 4777,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/generic-received-public-closure.log",
+      "claim": "Final receiving callable public descriptors."
+    },
+    {
+      "id": "PublicClosureAudit.java",
+      "status": "RETAINED",
+      "path": "evidence/PublicClosureAudit.java.txt",
+      "sha256": "0abf2cff1929019c7a315c3bd56c2f8ef2c6174d11462c6ae169222e39dab636",
+      "bytes": 1280,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/PublicClosureAudit.java",
+      "claim": "Original qualification probe text from the executed epoch; executable copy is under qualification src/test/java."
+    },
+    {
+      "id": "NullAnchorAudit.java",
+      "status": "RETAINED",
+      "path": "evidence/NullAnchorAudit.java.txt",
+      "sha256": "f4c22614fce73f01b0e4b1e49ad599836e0cc9b6c2c97c0def29c215d4ce3ee0",
+      "bytes": 970,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/NullAnchorAudit.java",
+      "claim": "Original qualification probe text from the executed epoch; executable copy is under qualification src/test/java."
+    },
+    {
+      "id": "ReceivingNavigationGate.java",
+      "status": "RETAINED",
+      "path": "evidence/ReceivingNavigationGate.java.txt",
+      "sha256": "6309aeca8017bf5522826e33a215c7594cb2e1f90b4346b9be703bdcc215a24e",
+      "bytes": 486,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/ReceivingNavigationGate.java",
+      "claim": "Original qualification probe text from the executed epoch; executable copy is under qualification src/test/java."
+    },
+    {
+      "id": "qualification-java/PublicClosureAudit.java",
+      "status": "RETAINED",
+      "path": "src/test/java/PublicClosureAudit.java",
+      "sha256": "bab49d82bbfc66c290efa5a3004251479fdee6f6ca2b4d54df79e6d51f1f6613",
+      "bytes": 1390,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/PublicClosureAudit.java",
+      "original_sha256": "0abf2cff1929019c7a315c3bd56c2f8ef2c6174d11462c6ae169222e39dab636",
+      "claim": "Original executed witness with attribution comments added only; no product owner or runtime dependency."
+    },
+    {
+      "id": "qualification-java/NullAnchorAudit.java",
+      "status": "RETAINED",
+      "path": "src/test/java/NullAnchorAudit.java",
+      "sha256": "c8f884a95e4356303688b21838431d331d26b0f23e8e077cc3da0bc72661c157",
+      "bytes": 1080,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/NullAnchorAudit.java",
+      "original_sha256": "f4c22614fce73f01b0e4b1e49ad599836e0cc9b6c2c97c0def29c215d4ce3ee0",
+      "claim": "Original executed witness with attribution comments added only; no product owner or runtime dependency."
+    },
+    {
+      "id": "qualification-java/com/m3/collections/ReceivingNavigationGate.java",
+      "status": "RETAINED",
+      "path": "src/test/java/com/m3/collections/ReceivingNavigationGate.java",
+      "sha256": "2211dc3183aa965adf1b4998c92c53d566475f0623c3a2143142f9fa4e796a5b",
+      "bytes": 596,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/ReceivingNavigationGate.java",
+      "original_sha256": "6309aeca8017bf5522826e33a215c7594cb2e1f90b4346b9be703bdcc215a24e",
+      "claim": "Original executed witness with attribution comments added only; no product owner or runtime dependency."
+    },
+    {
+      "id": "qualification-java/JdkOracleWitness.java",
+      "status": "RETAINED",
+      "path": "src/test/java/JdkOracleWitness.java",
+      "sha256": "f57b5890b5b2c5441d0c6bba0e0f47bf7b6fa8f58134d3fe386d1502683f19a0",
+      "bytes": 1046,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/integration/JdkOracleWitness.java",
+      "original_sha256": "d6435ba37cf8087db68ff89578e408e2c64789fc05dcb7d8942d2ea1a2401d70",
+      "claim": "Original executed witness with attribution comments added only; no product owner or runtime dependency."
+    },
+    {
+      "id": "qualification-java/M3NativeBoundaryIntegration.java",
+      "status": "RETAINED",
+      "path": "src/test/java/com/m3/collections/M3NativeBoundaryIntegration.java",
+      "sha256": "dd35e571d4a9f513c4562d63a55d8b71038182effc3bd099d411733ea39a5e0c",
+      "bytes": 15817,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/arrays/M3NativeBoundaryIntegration.java",
+      "claim": "Exact unchanged source bound by native-boundary-receipt.json: required, interpreted and absent-library checks for existing native owners."
+    },
+    {
+      "id": "original-strict-compile",
+      "status": "RETAINED",
+      "path": "evidence/baseline-compile.log.txt",
+      "sha256": "970753e90b829c3dfb1d0b0727caf90110c4cfc1637a5d7bf75202034d52c666",
+      "bytes": 784,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/qualification/baseline/compile.log",
+      "claim": "Original two exported implicit-constructor warnings fail the unchanged strict gate."
+    },
+    {
+      "id": "original-strict-command",
+      "status": "RETAINED",
+      "path": "evidence/baseline-compile-command.json",
+      "sha256": "ee7d8f3bc1df2c951a8a333ada9c1b936a872a97b1d3c0b48ed67528cb85a330",
+      "bytes": 12206,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/qualification/baseline/command.json",
+      "claim": "Exact original strict compile invocation and source list."
+    },
+    {
+      "id": "original-module-failure",
+      "status": "RETAINED",
+      "path": "evidence/original-module-maven.log.txt",
+      "sha256": "cfd63e9cf4bb31a2f134a9c8d9116356b0b978e72d43407e8dbaee751debd5ee",
+      "bytes": 19541,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/qualification/collection-module-build/maven.log",
+      "claim": "Original 205-test module run: four existing fixture-oracle failures, no skipped tests."
+    },
+    {
+      "id": "original-module-command",
+      "status": "RETAINED",
+      "path": "evidence/original-module-command.json",
+      "sha256": "e0297133dba99b9c9360f63e26c628a58b004e3bf4fe806927038f6a7e4853f9",
+      "bytes": 426,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/qualification/collection-module-build/command.json",
+      "claim": "Exact original whole-module invocation."
+    },
+    {
+      "id": "jdk-oracle-source",
+      "status": "RETAINED",
+      "path": "evidence/JdkOracleWitness.java.txt",
+      "sha256": "d6435ba37cf8087db68ff89578e408e2c64789fc05dcb7d8942d2ea1a2401d70",
+      "bytes": 936,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/integration/JdkOracleWitness.java",
+      "claim": "Independent JDK signed-seam and duplicate/new-member observations."
+    },
+    {
+      "id": "jdk-oracle-receipt",
+      "status": "RETAINED",
+      "path": "evidence/JDK_ORACLE_RECEIPT.json",
+      "sha256": "6fe68252aba12b49ae6e5fa06184a842d5b3cf2afdf4c589ebf7fbfb6b581272",
+      "bytes": 400,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/integration/JDK_ORACLE_RECEIPT.json",
+      "claim": "Executed independent JDK TreeSet oracle witness."
+    },
+    {
+      "id": "jdk-oracle-log",
+      "status": "RETAINED",
+      "path": "evidence/JDK_ORACLE_WITNESS.log.txt",
+      "sha256": "5f2575b4d6d825a01e3f42de2a4572618f25aefeea3a85946eab0a86a96b0148",
+      "bytes": 87,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/integration/JDK_ORACLE_WITNESS.log.txt",
+      "claim": "Exact independent JDK witness stdout."
+    },
+    {
+      "id": "root-source-review",
+      "status": "RETAINED",
+      "path": "evidence/ROOT_SOURCE_REVIEW.json",
+      "sha256": "ba88255c26923c4d4153360c718b9e588393063ab1ae1e1a800cae81f12e74e3",
+      "bytes": 2882,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/qualification/ROOT_SOURCE_REVIEW.json",
+      "claim": "Separate root review of selected source changes, false oracles and admission limits."
+    },
+    {
+      "id": "class-linkage-preflight",
+      "status": "RETAINED",
+      "path": "evidence/native-linkage-preflight-witness.json",
+      "sha256": "37d9b4902b9117842fa82cf18b62c7e768ddd779ef64036ac5c06b16b8514a3a",
+      "bytes": 8208,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/native-linkage-preflight-witness.json",
+      "claim": "Historical stale class artifacts: old private helper surface despite final source bytes; final gate requires independently rebuilt artifacts.",
+      "recorded_status": "OBSERVED_LINKAGE_CLASS_ARTIFACT_DRIFT"
+    },
+    {
+      "id": "native-boundary-receipt",
+      "status": "RETAINED",
+      "path": "evidence/native-boundary-receipt.json",
+      "sha256": "f841f5f5c5b5348d168980ed4520db0ad8f723c0a9c506776c06c33ada736367",
+      "bytes": 17316,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/RECEIPT.json",
+      "claim": "Existing JNI owners/libraries, exact source and library hashes, required/absent runs and bounded claims.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "native-build-commands",
+      "status": "RETAINED",
+      "path": "evidence/native-build-commands.json",
+      "sha256": "281503f5ce3683f8d2a3a02b8083d823f404a7f848b77751f52a1d77cfaaf479",
+      "bytes": 27423,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/commands.json",
+      "claim": "Actual native source/header/link invocations and library selection."
+    },
+    {
+      "id": "m3jdk21-collection-build/SDK_QUALIFICATION.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collection-build/SDK_QUALIFICATION.json",
+      "sha256": "dc9f53e6f424eff78482bc2dbd32fd4f21311d0d40cdd475536b88fa501fea4a",
+      "bytes": 1612,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collection-build/SDK_QUALIFICATION.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-collection-build/RECEIVER_RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collection-build/RECEIVER_RECEIPT.json",
+      "sha256": "be27c3b4ab5211d26b93fc5251c03de7b8059e265171bf323cc74a329fb08e8f",
+      "bytes": 1640,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collection-build/RECEIVER_RECEIPT.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-collection-build/SDK_INPUTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collection-build/SDK_INPUTS.tsv",
+      "sha256": "53ee7806d6901bfdd58171d1f259a305b6551addc29cac3e01e3169195c177cb",
+      "bytes": 3039,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collection-build/SDK_INPUTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-collection-build/SDK_RESULTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collection-build/SDK_RESULTS.tsv",
+      "sha256": "0ce6f71c183024a1f2338e0e4211b37ae892a2429b1c6d87e2e8dc41251d2a98",
+      "bytes": 458,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collection-build/SDK_RESULTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-collection-oracles/SDK_QUALIFICATION.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collection-oracles/SDK_QUALIFICATION.json",
+      "sha256": "c2f969090adc7f553c119c06a476e56c1354b73f76167b5fcca5d06206ad889b",
+      "bytes": 1618,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collection-oracles/SDK_QUALIFICATION.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-collection-oracles/RECEIVER_RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collection-oracles/RECEIVER_RECEIPT.json",
+      "sha256": "c9cd476dcd3d1ec282ac945fcfe58dab6f495ca06e58b4b5a755118d55b0d4a9",
+      "bytes": 1654,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collection-oracles/RECEIVER_RECEIPT.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-collection-oracles/SDK_INPUTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collection-oracles/SDK_INPUTS.tsv",
+      "sha256": "c406ffcf0ef95ab75eaa20929f87d72164cdabc743c5a9dd87fa7d36a993c20a",
+      "bytes": 2559,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collection-oracles/SDK_INPUTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-collection-oracles/SDK_RESULTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collection-oracles/SDK_RESULTS.tsv",
+      "sha256": "4b884511a22d4fcc532b3a0c41781f529dc3f9d9c73d9c63147c5a32fbef59f3",
+      "bytes": 261,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collection-oracles/SDK_RESULTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-navigation/SDK_QUALIFICATION.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-navigation/SDK_QUALIFICATION.json",
+      "sha256": "e19d00eec153875abffba85cdde2d943e2e38efc90c21eee84e7eae880fa63c8",
+      "bytes": 1594,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-navigation/SDK_QUALIFICATION.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-navigation/RECEIVER_RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-navigation/RECEIVER_RECEIPT.json",
+      "sha256": "3fa03d858cebb83320145853f12f7d1f91f32535160c4e7ce58ed76d5de9612d",
+      "bytes": 1676,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-navigation/RECEIVER_RECEIPT.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-navigation/SDK_INPUTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-navigation/SDK_INPUTS.tsv",
+      "sha256": "5d7c8ea115380e86f7c37139ba62ee25b881155227f8d757a55a43e04b61afec",
+      "bytes": 3479,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-navigation/SDK_INPUTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-navigation/SDK_RESULTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-navigation/SDK_RESULTS.tsv",
+      "sha256": "954c16fb1140ba60220cdf93436e51428a51aa75050e02b72175efd0d3cd5618",
+      "bytes": 785,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-navigation/SDK_RESULTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-view-successor/SDK_QUALIFICATION.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-view-successor/SDK_QUALIFICATION.json",
+      "sha256": "4536c2d043cf453628e6fae712e55837c3e6116eb4501621eb704b73173d0d33",
+      "bytes": 1697,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-view-successor/SDK_QUALIFICATION.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-view-successor/RECEIVER_RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-view-successor/RECEIVER_RECEIPT.json",
+      "sha256": "b4d168496fd589857789b337f4429bd76f7701c7ef686de6b7d4404eb9c23bfe",
+      "bytes": 1676,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-view-successor/RECEIVER_RECEIPT.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-view-successor/SDK_INPUTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-view-successor/SDK_INPUTS.tsv",
+      "sha256": "8ffc95422141d5ffbc98fc6df46b51d97ae46b49bf9ce7d1bf14d5cacaf86e30",
+      "bytes": 5713,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-view-successor/SDK_INPUTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-view-successor/SDK_RESULTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-view-successor/SDK_RESULTS.tsv",
+      "sha256": "6caadf3a7548973842dab50ecdca3e9b71963c20e6c9b80a4c074b3c24787def",
+      "bytes": 1691,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-view-successor/SDK_RESULTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-generic-views/SDK_QUALIFICATION.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-generic-views/SDK_QUALIFICATION.json",
+      "sha256": "2b88445c9f63023a2db51c43a950dfac32f5ecd2d3d7422dac422c650fddd09a",
+      "bytes": 1694,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-generic-views/SDK_QUALIFICATION.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-generic-views/RECEIVER_RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-generic-views/RECEIVER_RECEIPT.json",
+      "sha256": "8c3a6fb7c5976301d2aa5223d46416b45142ac4476e31120cc99342deaa6a4fb",
+      "bytes": 1671,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-generic-views/RECEIVER_RECEIPT.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-generic-views/SDK_INPUTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-generic-views/SDK_INPUTS.tsv",
+      "sha256": "c3adfe266747b4fc172f144643f9e557a394e800d01b38c846b9f81a4b9a841d",
+      "bytes": 3140,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-generic-views/SDK_INPUTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-generic-views/SDK_RESULTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-generic-views/SDK_RESULTS.tsv",
+      "sha256": "97110558f20f0bdb0e7161acf1945d322760ee89e4b6520fa1e1bb50b9e40ca3",
+      "bytes": 571,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-generic-views/SDK_RESULTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-collections/SDK_QUALIFICATION.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collections/SDK_QUALIFICATION.json",
+      "sha256": "69e101a5c89c7cce3e1946481922ff2503299cc51d81295fca80324ad8f295f5",
+      "bytes": 1636,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collections/SDK_QUALIFICATION.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-collections/RECEIVER_RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collections/RECEIVER_RECEIPT.json",
+      "sha256": "142819ea9707c740db735382ef5da5efc39144b33d36d9ba5ef29f26ab4308cc",
+      "bytes": 1674,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collections/RECEIVER_RECEIPT.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-collections/SDK_INPUTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collections/SDK_INPUTS.tsv",
+      "sha256": "674abaeba319bed2a4a7614bbb8c193c6b1b5d91083e111e0adaf342cea04578",
+      "bytes": 7586,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collections/SDK_INPUTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-collections/SDK_RESULTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collections/SDK_RESULTS.tsv",
+      "sha256": "8a9f74d7476f3881ecddc84c3eab7cdd1bacb60942993bdfab85e05ebd52380b",
+      "bytes": 2610,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collections/SDK_RESULTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-collections-final/SDK_QUALIFICATION.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collections-final/SDK_QUALIFICATION.json",
+      "sha256": "4d77b1d06262063a7bdd741d7a4ec43a0a23f9d1c4f9268cfd06e89a003c6bed",
+      "bytes": 1654,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collections-final/SDK_QUALIFICATION.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-collections-final/RECEIVER_RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collections-final/RECEIVER_RECEIPT.json",
+      "sha256": "bae8a235ba72e641b9a04ed9bd2f68912cec0ae82d9ffa7a752ab79e4bb4178b",
+      "bytes": 1680,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collections-final/RECEIVER_RECEIPT.json",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "m3jdk21-collections-final/SDK_INPUTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collections-final/SDK_INPUTS.tsv",
+      "sha256": "ae668b01f7f0d22664b76aa3c2099efbcee4b5bf0171c904fbd40b0c673ff053",
+      "bytes": 8434,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collections-final/SDK_INPUTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "m3jdk21-collections-final/SDK_RESULTS.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/m3jdk21-collections-final/SDK_RESULTS.tsv",
+      "sha256": "f00131b6424f2c29d82d57092dc1c3882bdcd0981afc5141221c083736f19194",
+      "bytes": 2922,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/evidence/m3jdk21-collections-final/SDK_RESULTS.tsv",
+      "claim": "Exact source/result binding and finite SDK/sealing/receiver gates for this epoch."
+    },
+    {
+      "id": "ENGINE_SOURCES.tsv",
+      "status": "RETAINED",
+      "path": "evidence/recipe/ENGINE_SOURCES.tsv",
+      "sha256": "ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c",
+      "bytes": 1637,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/ENGINE_SOURCES.tsv",
+      "claim": "Existing canonical engine and harness reuse; engine source changes are empty."
+    },
+    {
+      "id": "HARNESS_LINEAGE.json",
+      "status": "RETAINED",
+      "path": "evidence/recipe/HARNESS_LINEAGE.json",
+      "sha256": "3a26e75c15328e96a95714035659afd24195c49e557b78e081530d28c3ac968f",
+      "bytes": 3774,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/HARNESS_LINEAGE.json",
+      "claim": "Existing canonical engine and harness reuse; engine source changes are empty."
+    },
+    {
+      "id": "DFS_REVIEW_RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/catalogue/DFS_REVIEW_RECEIPT.json",
+      "sha256": "91449bc8cb76952759625ab714749f01f27e62dbbc0165d88761665068eb3875",
+      "bytes": 636,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/catalogue-proof/category-results/DFS_REVIEW_RECEIPT.json",
+      "claim": "Current existing category/donor review; references are discovery inputs, not automatic code-copy authority.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "dfs-review.tsv",
+      "status": "RETAINED",
+      "path": "evidence/catalogue/dfs-review.tsv",
+      "sha256": "d522a545ce9233613547d54628ed8e4f4b7fe2255f4e5621fdb69a8a134b64f2",
+      "bytes": 1414,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/catalogue-proof/category-results/dfs-review.tsv",
+      "claim": "Current existing category/donor review; references are discovery inputs, not automatic code-copy authority."
+    },
+    {
+      "id": "shapes.tsv",
+      "status": "RETAINED",
+      "path": "evidence/catalogue/shapes.tsv",
+      "sha256": "a71d9f55c574a84efdaac5c9eae79785e4823e8f75bc74d0b76c8113201a77ef",
+      "bytes": 8363,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/catalogue-proof/category-results/shapes.tsv",
+      "claim": "Current existing category/donor review; references are discovery inputs, not automatic code-copy authority."
+    },
+    {
+      "id": "donors.tsv",
+      "status": "RETAINED",
+      "path": "evidence/catalogue/donors.tsv",
+      "sha256": "741db0dd136642512c12f1526ca0ca37427bc34de33992a44f37cda3d04bb6bf",
+      "bytes": 4535,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/catalogue-proof/category-results/donors.tsv",
+      "claim": "Current existing category/donor review; references are discovery inputs, not automatic code-copy authority."
+    },
+    {
+      "id": "reviews.tsv",
+      "status": "RETAINED",
+      "path": "evidence/catalogue/reviews.tsv",
+      "sha256": "4caa389347621b43d7578109e4f1e383861d784e5d2454022e3da9df9989942e",
+      "bytes": 938,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/catalogue-proof/category-results/reviews.tsv",
+      "claim": "Current existing category/donor review; references are discovery inputs, not automatic code-copy authority."
+    },
+    {
+      "id": "INVENTORY_RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/catalogue/INVENTORY_RECEIPT.json",
+      "sha256": "b4ff978babcc90baf7c92621cb0a4266b113baedf9d7fdf9e5f031cca60f1867",
+      "bytes": 1082,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/catalogue-proof/INVENTORY_RECEIPT.json",
+      "claim": "Existing canonical catalogue owner and bounded relevant-source inventory."
+    },
+    {
+      "id": "CATEGORY_OWNER_SOURCES.json",
+      "status": "RETAINED",
+      "path": "evidence/catalogue/CATEGORY_OWNER_SOURCES.json",
+      "sha256": "4d0ee6580b26b6219ccb29e2baaf1915adfdd4ecf7e30115cd561547e47c0d61",
+      "bytes": 1506,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/catalogue-proof/CATEGORY_OWNER_SOURCES.json",
+      "claim": "Existing canonical catalogue owner and bounded relevant-source inventory."
+    },
+    {
+      "id": "CATALOGUE_OWNER_SOURCES.json",
+      "status": "RETAINED",
+      "path": "evidence/catalogue/CATALOGUE_OWNER_SOURCES.json",
+      "sha256": "5e6bfe102c79045b868ffe7629f9159cef500959c9fa916e2baa0bbe54e858cc",
+      "bytes": 2699,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/catalogue-proof/CATALOGUE_OWNER_SOURCES.json",
+      "claim": "Existing canonical catalogue owner and bounded relevant-source inventory."
+    },
+    {
+      "id": "accepted-gate-handoff",
+      "status": "RETAINED",
+      "path": "evidence/accepted-module-gates.json",
+      "sha256": "e71c123878b6e5dce7252262a1743c6454068345262e81ff2bc8313b455265b1",
+      "bytes": 3103,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/qualification/accepted-collection-module-gates-20261017.json",
+      "claim": "Independent final gate selects only unique source/class-bound build roots; shared attempts are historical.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "observed-incremental-java/command.json",
+      "status": "RETAINED",
+      "path": "evidence/observed-incremental-java/command.json",
+      "sha256": "2cdeb4b5d1e08d29f1ccabb7d452478dad846e0cf06a4e8fbcc109e873616358",
+      "bytes": 1099,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/review-candidate/m3/collections/qualification/contracts-20261017/evidence/observed-incremental-java/command.json",
+      "claim": "Historical initial execution before stale class artifacts were detected; not final selected acceptance."
+    },
+    {
+      "id": "observed-incremental-java/maven.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/observed-incremental-java/maven.log.txt",
+      "sha256": "833f0e883070cb7ffaef35f984b29ac8ee22d537f7c41298115607b25798515a",
+      "bytes": 15412,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/review-candidate/m3/collections/qualification/contracts-20261017/evidence/observed-incremental-java/maven.log.txt",
+      "claim": "Historical initial execution before stale class artifacts were detected; not final selected acceptance."
+    },
+    {
+      "id": "observed-incremental-java/RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/observed-incremental-java/RECEIPT.json",
+      "sha256": "7fd3e615a973c63a5b4546f8ba452b46dea414d019c93961a9e1ec068039842f",
+      "bytes": 20796,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/review-candidate/m3/collections/qualification/contracts-20261017/evidence/observed-incremental-java/RECEIPT.json",
+      "claim": "Historical initial execution before stale class artifacts were detected; not final selected acceptance.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "final-java/command.json",
+      "status": "RETAINED",
+      "path": "evidence/final-java/command.json",
+      "sha256": "a78a872ad8a5c0a62775e4727f64932cdfaa2d076fe87e6200b3a8714e2a13e4",
+      "bytes": 1264,
+      "original_source": "/tmp/m3-collections-final-java-958zv36l/evidence/command.json",
+      "claim": "Accepted unique owning-module java gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-java/maven.log",
+      "status": "RETAINED",
+      "path": "evidence/final-java/maven.log.txt",
+      "sha256": "ddb14c9c33c5e1beccf7d1534ae2719a4c290f81ba9a957d5a68f5326f9f7e15",
+      "bytes": 15422,
+      "original_source": "/tmp/m3-collections-final-java-958zv36l/evidence/maven.log",
+      "claim": "Accepted unique owning-module java gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-java/RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/final-java/RECEIPT.json",
+      "sha256": "2b7006d50315f013525a213dfa26d0f5439606cf1ffa1d86cbf18caa3714304d",
+      "bytes": 23783,
+      "original_source": "/tmp/m3-collections-final-java-958zv36l/evidence/RECEIPT.json",
+      "claim": "Accepted unique owning-module java gate: final source, test-entry class binding and loaded-class origin.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "final-java/qualified-postimages.json",
+      "status": "RETAINED",
+      "path": "evidence/final-java/qualified-postimages.json",
+      "sha256": "6748835fdc3d16e9216ab1463442c51aa3301e4e021e45498b6e99dee560d2f1",
+      "bytes": 4527,
+      "original_source": "/tmp/m3-collections-final-java-958zv36l/evidence/qualified-postimages.json",
+      "claim": "Accepted unique owning-module java gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-java/sources-before.json",
+      "status": "RETAINED",
+      "path": "evidence/final-java/sources-before.json",
+      "sha256": "20955e65013f3ce5966f6ea1f9f2f4a2fe1eee1707bdf930dcb31c3a82dc6c94",
+      "bytes": 56512,
+      "original_source": "/tmp/m3-collections-final-java-958zv36l/evidence/sources-before.json",
+      "claim": "Accepted unique owning-module java gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-java/sources-after.json",
+      "status": "RETAINED",
+      "path": "evidence/final-java/sources-after.json",
+      "sha256": "20955e65013f3ce5966f6ea1f9f2f4a2fe1eee1707bdf930dcb31c3a82dc6c94",
+      "bytes": 56512,
+      "original_source": "/tmp/m3-collections-final-java-958zv36l/evidence/sources-after.json",
+      "claim": "Accepted unique owning-module java gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-java/classes-at-test-entry.json",
+      "status": "RETAINED",
+      "path": "evidence/final-java/classes-at-test-entry.json",
+      "sha256": "b59bea09515bfa1cc7eea22c032b0d2ce2b75741c12b2f2a43f21cd19d9dd999",
+      "bytes": 92029,
+      "original_source": "/tmp/m3-collections-final-java-958zv36l/evidence/classes-at-test-entry.json",
+      "claim": "Accepted unique owning-module java gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-java/classes-after.json",
+      "status": "RETAINED",
+      "path": "evidence/final-java/classes-after.json",
+      "sha256": "b59bea09515bfa1cc7eea22c032b0d2ce2b75741c12b2f2a43f21cd19d9dd999",
+      "bytes": 92029,
+      "original_source": "/tmp/m3-collections-final-java-958zv36l/evidence/classes-after.json",
+      "claim": "Accepted unique owning-module java gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-java/collection-class-origins.log",
+      "status": "RETAINED",
+      "path": "evidence/final-java/collection-class-origins.log.txt",
+      "sha256": "a50179650ad669ecedce8fefa23098d6c2290f5fbc8947023315c9ad51b9bcf7",
+      "bytes": 57997,
+      "original_source": "/tmp/m3-collections-final-java-958zv36l/evidence/collection-class-origins.log",
+      "claim": "Accepted unique owning-module java gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "observed-incremental-native/command.json",
+      "status": "RETAINED",
+      "path": "evidence/observed-incremental-native/command.json",
+      "sha256": "c38631a69784ac17e42a435cb174c3f24c811ed16a70642046d761ed4bef43cd",
+      "bytes": 1076,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/review-candidate/m3/collections/qualification/contracts-20261017/evidence/observed-incremental-native/command.json",
+      "claim": "Historical initial execution before stale class artifacts were detected; not final selected acceptance."
+    },
+    {
+      "id": "observed-incremental-native/maven.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/observed-incremental-native/maven.log.txt",
+      "sha256": "2feec2a8ea302ae14e0ce7a742322be7c082af1cad16696aae7b3ac44f59af93",
+      "bytes": 116309,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/review-candidate/m3/collections/qualification/contracts-20261017/evidence/observed-incremental-native/maven.log.txt",
+      "claim": "Historical initial execution before stale class artifacts were detected; not final selected acceptance."
+    },
+    {
+      "id": "observed-incremental-native/RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/observed-incremental-native/RECEIPT.json",
+      "sha256": "1c83833b2f299da973774ac5fb38c3bb482e7668a81018a8c17cb7e8861230b7",
+      "bytes": 22570,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/review-candidate/m3/collections/qualification/contracts-20261017/evidence/observed-incremental-native/RECEIPT.json",
+      "claim": "Historical initial execution before stale class artifacts were detected; not final selected acceptance.",
+      "recorded_status": "FAIL"
+    },
+    {
+      "id": "final-native/command.json",
+      "status": "RETAINED",
+      "path": "evidence/final-native/command.json",
+      "sha256": "6f754a16510b4ec34dc82f972222806aa5ce29db41346f49edd1669a3f2b29db",
+      "bytes": 1299,
+      "original_source": "/tmp/m3-collections-final-native-dw7ir6h_/evidence/command.json",
+      "claim": "Accepted unique owning-module native gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-native/maven.log",
+      "status": "RETAINED",
+      "path": "evidence/final-native/maven.log.txt",
+      "sha256": "2c9542e3d94348388d907cc056ec0b61530c0663447eae68ebc0e0a1bf7a9fc8",
+      "bytes": 15422,
+      "original_source": "/tmp/m3-collections-final-native-dw7ir6h_/evidence/maven.log",
+      "claim": "Accepted unique owning-module native gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-native/RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/final-native/RECEIPT.json",
+      "sha256": "6b1cc1fe1495825a256e240bfdb95b1500bb497ca28e41842206bd4c1aef620a",
+      "bytes": 25620,
+      "original_source": "/tmp/m3-collections-final-native-dw7ir6h_/evidence/RECEIPT.json",
+      "claim": "Accepted unique owning-module native gate: final source, test-entry class binding and loaded-class origin.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "final-native/qualified-postimages.json",
+      "status": "RETAINED",
+      "path": "evidence/final-native/qualified-postimages.json",
+      "sha256": "6748835fdc3d16e9216ab1463442c51aa3301e4e021e45498b6e99dee560d2f1",
+      "bytes": 4527,
+      "original_source": "/tmp/m3-collections-final-native-dw7ir6h_/evidence/qualified-postimages.json",
+      "claim": "Accepted unique owning-module native gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-native/sources-before.json",
+      "status": "RETAINED",
+      "path": "evidence/final-native/sources-before.json",
+      "sha256": "20955e65013f3ce5966f6ea1f9f2f4a2fe1eee1707bdf930dcb31c3a82dc6c94",
+      "bytes": 56512,
+      "original_source": "/tmp/m3-collections-final-native-dw7ir6h_/evidence/sources-before.json",
+      "claim": "Accepted unique owning-module native gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-native/sources-after.json",
+      "status": "RETAINED",
+      "path": "evidence/final-native/sources-after.json",
+      "sha256": "20955e65013f3ce5966f6ea1f9f2f4a2fe1eee1707bdf930dcb31c3a82dc6c94",
+      "bytes": 56512,
+      "original_source": "/tmp/m3-collections-final-native-dw7ir6h_/evidence/sources-after.json",
+      "claim": "Accepted unique owning-module native gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-native/classes-at-test-entry.json",
+      "status": "RETAINED",
+      "path": "evidence/final-native/classes-at-test-entry.json",
+      "sha256": "66f55f26da877d11b5372f8b32c263dd0f623fc42d85adcf0ab8242c2bee7e3e",
+      "bytes": 92029,
+      "original_source": "/tmp/m3-collections-final-native-dw7ir6h_/evidence/classes-at-test-entry.json",
+      "claim": "Accepted unique owning-module native gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-native/classes-after.json",
+      "status": "RETAINED",
+      "path": "evidence/final-native/classes-after.json",
+      "sha256": "66f55f26da877d11b5372f8b32c263dd0f623fc42d85adcf0ab8242c2bee7e3e",
+      "bytes": 92029,
+      "original_source": "/tmp/m3-collections-final-native-dw7ir6h_/evidence/classes-after.json",
+      "claim": "Accepted unique owning-module native gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "final-native/collection-class-origins.log",
+      "status": "RETAINED",
+      "path": "evidence/final-native/collection-class-origins.log.txt",
+      "sha256": "f548e38cea054908b9da43bcbc4c91f396c80ceae41333a4645c7e536ecd10e1",
+      "bytes": 58936,
+      "original_source": "/tmp/m3-collections-final-native-dw7ir6h_/evidence/collection-class-origins.log",
+      "claim": "Accepted unique owning-module native gate: final source, test-entry class binding and loaded-class origin."
+    },
+    {
+      "id": "whole-module-api/RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/whole-module-api/RECEIPT.json",
+      "sha256": "65b034ad5119e7995cc5e244543920e1d5a6913142cd8458efc83ddd1d3c9caa",
+      "bytes": 21309,
+      "original_source": "/tmp/m3-collections-final-api-k2yvk75i/RECEIPT.json",
+      "claim": "Independent comparison of 114 ordinary type declarations, semantic module descriptor and package source.",
+      "recorded_status": "PASS"
+    },
+    {
+      "id": "whole-module-api/before-public-api.log",
+      "status": "RETAINED",
+      "path": "evidence/whole-module-api/before-public-api.log.txt",
+      "sha256": "fc869c21a65e11ac759cba2bfe96e405d36f2722b1821db931ff500f28174e46",
+      "bytes": 96716,
+      "original_source": "/tmp/m3-collections-final-api-k2yvk75i/before-public-api.log",
+      "claim": "Independent comparison of 114 ordinary type declarations, semantic module descriptor and package source."
+    },
+    {
+      "id": "whole-module-api/after-java-public-api.log",
+      "status": "RETAINED",
+      "path": "evidence/whole-module-api/after-java-public-api.log.txt",
+      "sha256": "1e9f294316a0d1d47bd1d892630b0fbf593a143f2d96fb4a214ee1d97dc5bcb8",
+      "bytes": 96767,
+      "original_source": "/tmp/m3-collections-final-api-k2yvk75i/after-java-public-api.log",
+      "claim": "Independent comparison of 114 ordinary type declarations, semantic module descriptor and package source."
+    },
+    {
+      "id": "whole-module-api/after-native-public-api.log",
+      "status": "RETAINED",
+      "path": "evidence/whole-module-api/after-native-public-api.log.txt",
+      "sha256": "1e9f294316a0d1d47bd1d892630b0fbf593a143f2d96fb4a214ee1d97dc5bcb8",
+      "bytes": 96767,
+      "original_source": "/tmp/m3-collections-final-api-k2yvk75i/after-native-public-api.log",
+      "claim": "Independent comparison of 114 ordinary type declarations, semantic module descriptor and package source."
+    },
+    {
+      "id": "whole-module-api/before-module-info.log",
+      "status": "RETAINED",
+      "path": "evidence/whole-module-api/before-module-info.log.txt",
+      "sha256": "a2e5b87b29afad2a8d7b30c090bbe46ccd1adef000b0ed66de3d9267b7a6f095",
+      "bytes": 115,
+      "original_source": "/tmp/m3-collections-final-api-k2yvk75i/before-module-info.log",
+      "claim": "Independent comparison of 114 ordinary type declarations, semantic module descriptor and package source."
+    },
+    {
+      "id": "whole-module-api/after-java-module-info.log",
+      "status": "RETAINED",
+      "path": "evidence/whole-module-api/after-java-module-info.log.txt",
+      "sha256": "8ec3c47bec2ae52f6136f5285f50f0dc2c51a32b39215cf4862492e524277804",
+      "bytes": 130,
+      "original_source": "/tmp/m3-collections-final-api-k2yvk75i/after-java-module-info.log",
+      "claim": "Independent comparison of 114 ordinary type declarations, semantic module descriptor and package source."
+    },
+    {
+      "id": "whole-module-api/after-native-module-info.log",
+      "status": "RETAINED",
+      "path": "evidence/whole-module-api/after-native-module-info.log.txt",
+      "sha256": "8ec3c47bec2ae52f6136f5285f50f0dc2c51a32b39215cf4862492e524277804",
+      "bytes": 130,
+      "original_source": "/tmp/m3-collections-final-api-k2yvk75i/after-native-module-info.log",
+      "claim": "Independent comparison of 114 ordinary type declarations, semantic module descriptor and package source."
+    },
+    {
+      "id": "whole-module-api/public-api.diff",
+      "status": "RETAINED",
+      "path": "evidence/whole-module-api/public-api.diff.txt",
+      "sha256": "65e5808a1fdab3d90f09ddbfc7f1f24f781a3a680408a7b00a9f9510201716be",
+      "bytes": 333,
+      "original_source": "/tmp/m3-collections-final-api-k2yvk75i/public-api.diff",
+      "claim": "Independent comparison of 114 ordinary type declarations, semantic module descriptor and package source."
+    },
+    {
+      "id": "resource-observation/RECEIPT.json",
+      "status": "RETAINED",
+      "path": "evidence/resources/RECEIPT.json",
+      "sha256": "d6ab51e3e6c64a4ad6a798d80d464d66c026dd1085e837e98ff962e34725f1ef",
+      "bytes": 29502,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/RECEIPT.json",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled.",
+      "recorded_status": "OBSERVATIONS_RECORDED"
+    },
+    {
+      "id": "resource-observation/baseline-collection-1.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/baseline-collection-1.log.txt",
+      "sha256": "ee45842820840ba203df2dd0b428e4f21795209a69658a275ed2d39c08e6d688",
+      "bytes": 5813,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-collection-1.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/baseline-collection-64.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/baseline-collection-64.log.txt",
+      "sha256": "9e33e32cffd6c2e75c4e461b20502f991a4f8a9e33e6094984181965c63d3381",
+      "bytes": 5828,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-collection-64.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/baseline-collection-65536.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/baseline-collection-65536.log.txt",
+      "sha256": "e0511dc168f14726571759dff797ef33a0a2841b7dcede7856bf241c21794f76",
+      "bytes": 5377,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-collection-65536.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/baseline-compile.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/baseline-compile.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-compile.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/baseline-list-1.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/baseline-list-1.log.txt",
+      "sha256": "344d4a447322da4d4827e6ee34855f2d9084ff1573cbc4c23094652cda1d0a6f",
+      "bytes": 5853,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-list-1.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/baseline-list-64.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/baseline-list-64.log.txt",
+      "sha256": "6995cd61511a6178134ec616d02e2de73691152973daf2323720fa0ced490494",
+      "bytes": 5966,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-list-64.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/baseline-list-65536.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/baseline-list-65536.log.txt",
+      "sha256": "5bdc47d5417e3f039d98de07d326c0e429a9a9940b2470a8a1151eeb0e9968da",
+      "bytes": 5408,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-list-65536.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/commands.json",
+      "status": "RETAINED",
+      "path": "evidence/resources/commands.json",
+      "sha256": "4adce7a2b6974f146e653e295f0a96ae0046f44208e3709f30a4a3b18f702734",
+      "bytes": 14863,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/commands.json",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/compile-command.json",
+      "status": "RETAINED",
+      "path": "evidence/resources/compile-command.json",
+      "sha256": "c68235c3794cd17bcd077d62a0a345d9018d3e7b815868eb9502b0e8f8d5e5a2",
+      "bytes": 696,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/compile-command.json",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/compile.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/compile.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/compile.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/final-collection-1.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/final-collection-1.log.txt",
+      "sha256": "8d988a89b3d478843d1e9e5c1f5227e5077df74337b628a7ef970cbb003024a9",
+      "bytes": 5807,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/final-collection-1.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/final-collection-64.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/final-collection-64.log.txt",
+      "sha256": "20f32f41ed33f1b37062ee72e008ec5e02e55c161f3d925ec28cc8518655a285",
+      "bytes": 5880,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/final-collection-64.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/final-collection-65536.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/final-collection-65536.log.txt",
+      "sha256": "43f1d41050e1c6a9f05fdbd7411f4029488f89410a62f7f55c8a202af876cdef",
+      "bytes": 5988,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/final-collection-65536.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/final-compile.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/final-compile.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/final-compile.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/final-list-1.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/final-list-1.log.txt",
+      "sha256": "2b1ae625004fe3ce260971c11ae7f8bff8e27f49be5b8aed1cfc3b40c9cc202b",
+      "bytes": 5849,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/final-list-1.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/final-list-64.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/final-list-64.log.txt",
+      "sha256": "5a0218df78616f762d8ac587885bdbd1e0a73a8a5f14ab904495aa0cddd56e01",
+      "bytes": 6074,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/final-list-64.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/final-list-65536.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/final-list-65536.log.txt",
+      "sha256": "f36d542f598eb62895730f17aad5c31a208b13a4df2d3a151b19f518d9ecc653",
+      "bytes": 6143,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/final-list-65536.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/historical-process-handle-optional/DISPOSITION.json",
+      "status": "RETAINED",
+      "path": "evidence/resources/historical-process-handle-optional/DISPOSITION.json",
+      "sha256": "7d1379d3dddffd050796a976b48bb94179e4071705bdba6538df91bff05b72e7",
+      "bytes": 282,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/historical-process-handle-optional/DISPOSITION.json",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled.",
+      "recorded_status": "HARNESS_OBSERVATION_REJECTED"
+    },
+    {
+      "id": "resource-observation/historical-process-handle-optional/M3FilteredViewResourceProbe.java.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/historical-process-handle-optional/M3FilteredViewResourceProbe.java.txt",
+      "sha256": "75b47d4f6c0c727e41b2a595d25373faa64df36c3330e148fbe18c45a9d51bae",
+      "bytes": 12584,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/historical-process-handle-optional/M3FilteredViewResourceProbe.java.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/historical-process-handle-optional/baseline-collection-1.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/historical-process-handle-optional/baseline-collection-1.log.txt",
+      "sha256": "7f7ca3a89627fc1db6c696355f1bb500e63c8e8f0ff911918bf519fca2c93d5a",
+      "bytes": 5780,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/historical-process-handle-optional/baseline-collection-1.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/historical-process-handle-optional/baseline-collection-64.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/historical-process-handle-optional/baseline-collection-64.log.txt",
+      "sha256": "9cd867b1373054fe81987341d8168b4429ddfb21abeeca4351e7fa608e51716c",
+      "bytes": 6011,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/historical-process-handle-optional/baseline-collection-64.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/historical-process-handle-optional/baseline-list-64.log.txt",
+      "status": "RETAINED",
+      "path": "evidence/resources/historical-process-handle-optional/baseline-list-64.log.txt",
+      "sha256": "55417b85318ec24fdf4bf637506b3ca529d1bc832b118dc01b198dc4cf9a3a0a",
+      "bytes": 5936,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/historical-process-handle-optional/baseline-list-64.log.txt",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/historical-process-handle-optional/commands.json",
+      "status": "RETAINED",
+      "path": "evidence/resources/historical-process-handle-optional/commands.json",
+      "sha256": "c20e22e61583dc37c7a91b066e9edbaa18696f16dd8895d19ea647f09e3fa46b",
+      "bytes": 2470,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/historical-process-handle-optional/commands.json",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/historical-process-handle-optional/compile-command.json",
+      "status": "RETAINED",
+      "path": "evidence/resources/historical-process-handle-optional/compile-command.json",
+      "sha256": "5a179eddb5b51fafebb6b851e3c19742dbbc55ef982aa4cdb7cb47da0810f065",
+      "bytes": 662,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/historical-process-handle-optional/compile-command.json",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/historical-process-handle-optional/preflight-command.json",
+      "status": "RETAINED",
+      "path": "evidence/resources/historical-process-handle-optional/preflight-command.json",
+      "sha256": "ad8872fb6033a7b42c6eddd68dae4a992a32625bf2bd1db75ef1b816a23e4d34",
+      "bytes": 869,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/historical-process-handle-optional/preflight-command.json",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/owner-compile-commands.json",
+      "status": "RETAINED",
+      "path": "evidence/resources/owner-compile-commands.json",
+      "sha256": "35f6c3ee4cb1b1b438e855370decb1da3ef5e5c234541c49e2bc4331ded5d82e",
+      "bytes": 3499,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/owner-compile-commands.json",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "resource-observation/preflight-command.json",
+      "status": "RETAINED",
+      "path": "evidence/resources/preflight-command.json",
+      "sha256": "ad8872fb6033a7b42c6eddd68dae4a992a32625bf2bd1db75ef1b816a23e4d34",
+      "bytes": 869,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/preflight-command.json",
+      "claim": "Finite CPU/allocation/owner-graph/post-GC process-heap/RSS/NMT observations; historical rejected probe is labeled."
+    },
+    {
+      "id": "independent-review",
+      "status": "RETAINED",
+      "path": "evidence/INDEPENDENT_REVIEW.json",
+      "sha256": "d74234a7dbe1031caf0c3f878d5eb69b6acee0b0e378424a8895daa3c09f35e1",
+      "bytes": 14723,
+      "original_source": "/workspace/scratch/13309be96b09/collections-work/arrays/collection-public-review/RECEIPT.json",
+      "claim": "Independent review of the explicitly listed final source/custody/document/evidence claims; no whole-package hash cycle.",
+      "recorded_status": "PASS"
+    }
+  ],
+  "claim_rule": "Historical candidate/pending markers remain historical; final status comes only from the separately retained actual receiving and final module receipts."
+}

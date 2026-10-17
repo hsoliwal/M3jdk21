@@ -1,0 +1,30 @@
+shape_id	ordinal	id	repository	revision	source	license_hint	adoption
+binary-search	0	leetcode-reference			https://leetcode.com/problemset/	PROPRIETARY_CONTENT_REFERENCE_ONLY	REFERENCE_ONLY
+binary-search	1	hackerrank-reference			https://www.hackerrank.com/domains/algorithms	PROPRIETARY_CONTENT_REFERENCE_ONLY	REFERENCE_ONLY
+binary-search	2	geeksforgeeks-reference			https://www.geeksforgeeks.org/dsa/	PUBLIC_ARTICLE_REFERENCE_ONLY	REFERENCE_ONLY
+binary-search	3	doocs-leetcode-current	doocs/leetcode	719172c2745794a3fd496df6dc07588f7ccd98d6	https://github.com/doocs/leetcode	CC-BY-SA-4.0	REFERENCE_ONLY
+binary-search	4	java-aid-hackerrank-current	Java-aid/Hackerrank-Solutions	0928f53bb32d0aad2d740a3917ecfc2d56018bb1	https://github.com/Java-aid/Hackerrank-Solutions	MIT	REFERENCE_ONLY
+binary-search	5	cvalingam-geeksforgeeks-current	cvalingam/GeeksforGeeks	8341993d94a6100415fe2b060f30345b2079ed49	https://github.com/cvalingam/GeeksforGeeks	MIT	REFERENCE_ONLY
+binary-search	6	thealgorithms-java-current	TheAlgorithms/Java	e43ec3897e48f23843972d02cd05a5bb1b6864a2	https://github.com/TheAlgorithms/Java	MIT	REFERENCE_AND_REUSE_AFTER_REVIEW
+two-pointers	0	leetcode-reference			https://leetcode.com/problemset/	PROPRIETARY_CONTENT_REFERENCE_ONLY	REFERENCE_ONLY
+two-pointers	1	hackerrank-reference			https://www.hackerrank.com/domains/algorithms	PROPRIETARY_CONTENT_REFERENCE_ONLY	REFERENCE_ONLY
+two-pointers	2	geeksforgeeks-reference			https://www.geeksforgeeks.org/dsa/	PUBLIC_ARTICLE_REFERENCE_ONLY	REFERENCE_ONLY
+two-pointers	3	doocs-leetcode-current	doocs/leetcode	719172c2745794a3fd496df6dc07588f7ccd98d6	https://github.com/doocs/leetcode	CC-BY-SA-4.0	REFERENCE_ONLY
+two-pointers	4	java-aid-hackerrank-current	Java-aid/Hackerrank-Solutions	0928f53bb32d0aad2d740a3917ecfc2d56018bb1	https://github.com/Java-aid/Hackerrank-Solutions	MIT	REFERENCE_ONLY
+two-pointers	5	cvalingam-geeksforgeeks-current	cvalingam/GeeksforGeeks	8341993d94a6100415fe2b060f30345b2079ed49	https://github.com/cvalingam/GeeksforGeeks	MIT	REFERENCE_ONLY
+two-pointers	6	thealgorithms-java-current	TheAlgorithms/Java	e43ec3897e48f23843972d02cd05a5bb1b6864a2	https://github.com/TheAlgorithms/Java	MIT	REFERENCE_AND_REUSE_AFTER_REVIEW
+packed-state	0	leetcode-reference			https://leetcode.com/problemset/	PROPRIETARY_CONTENT_REFERENCE_ONLY	REFERENCE_ONLY
+packed-state	1	hackerrank-reference			https://www.hackerrank.com/domains/algorithms	PROPRIETARY_CONTENT_REFERENCE_ONLY	REFERENCE_ONLY
+packed-state	2	geeksforgeeks-reference			https://www.geeksforgeeks.org/dsa/	PUBLIC_ARTICLE_REFERENCE_ONLY	REFERENCE_ONLY
+packed-state	3	doocs-leetcode-current	doocs/leetcode	719172c2745794a3fd496df6dc07588f7ccd98d6	https://github.com/doocs/leetcode	CC-BY-SA-4.0	REFERENCE_ONLY
+packed-state	4	java-aid-hackerrank-current	Java-aid/Hackerrank-Solutions	0928f53bb32d0aad2d740a3917ecfc2d56018bb1	https://github.com/Java-aid/Hackerrank-Solutions	MIT	REFERENCE_ONLY
+packed-state	5	cvalingam-geeksforgeeks-current	cvalingam/GeeksforGeeks	8341993d94a6100415fe2b060f30345b2079ed49	https://github.com/cvalingam/GeeksforGeeks	MIT	REFERENCE_ONLY
+packed-state	6	thealgorithms-java-current	TheAlgorithms/Java	e43ec3897e48f23843972d02cd05a5bb1b6864a2	https://github.com/TheAlgorithms/Java	MIT	REFERENCE_AND_REUSE_AFTER_REVIEW
+paged-long-array	0	leetcode-reference			https://leetcode.com/problemset/	PROPRIETARY_CONTENT_REFERENCE_ONLY	REFERENCE_ONLY
+paged-long-array	1	hackerrank-reference			https://www.hackerrank.com/domains/algorithms	PROPRIETARY_CONTENT_REFERENCE_ONLY	REFERENCE_ONLY
+paged-long-array	2	geeksforgeeks-reference			https://www.geeksforgeeks.org/dsa/	PUBLIC_ARTICLE_REFERENCE_ONLY	REFERENCE_ONLY
+paged-long-array	3	doocs-leetcode-current	doocs/leetcode	719172c2745794a3fd496df6dc07588f7ccd98d6	https://github.com/doocs/leetcode	CC-BY-SA-4.0	REFERENCE_ONLY
+paged-long-array	4	java-aid-hackerrank-current	Java-aid/Hackerrank-Solutions	0928f53bb32d0aad2d740a3917ecfc2d56018bb1	https://github.com/Java-aid/Hackerrank-Solutions	MIT	REFERENCE_ONLY
+paged-long-array	5	cvalingam-geeksforgeeks-current	cvalingam/GeeksforGeeks	8341993d94a6100415fe2b060f30345b2079ed49	https://github.com/cvalingam/GeeksforGeeks	MIT	REFERENCE_ONLY
+paged-long-array	6	thealgorithms-java-current	TheAlgorithms/Java	e43ec3897e48f23843972d02cd05a5bb1b6864a2	https://github.com/TheAlgorithms/Java	MIT	REFERENCE_AND_REUSE_AFTER_REVIEW
+paged-long-array	7	thealgorithms-python	TheAlgorithms/Python	7f81fcd68c195ce71534de09d1b69d2b61665902	https://github.com/TheAlgorithms/Python	MIT	REFERENCE_AND_REUSE_AFTER_REVIEW

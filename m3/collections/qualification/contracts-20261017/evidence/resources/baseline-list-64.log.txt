@@ -1,0 +1,110 @@
+diagnostic_only=true; thresholds=none; family=list; depth=64; payload_size=16
+runtime=21-internal-adhoc.root.M3jdk21; vm=OpenJDK 64-Bit Server VM; arch=amd64
+class_binding=com.m3.collections.M3FilteredViews; sha256=457123dc450e21d066a9945ded4e7bbcc3dd90327abc2e6945c5ca237ad8a983; origin=file:/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-classes/
+class_binding=com.m3.collections.M3FilteredLists; sha256=679cfae3334420974f35c07f2009bd634b92d7d8eb4e1780bf403eed339526f1; origin=file:/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/baseline-classes/
+construction_samples=7; wrapper_construction_cpu_ns_median=39780; wrapper_construction_allocated_bytes_median=3072
+post_gc_process_heap_baseline_bytes=2140776; post_gc_process_heap_owner_bytes=2057520; observed_heap_delta_bytes=-83256
+owner_graph=objects=83; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.M3FilteredLists$View$$Lambda=63, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1}
+post_gc_process_heap_owner_and_cursor_bytes=2133752; observed_cursor_heap_delta_bytes=76232
+cursor_graph=objects=85; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.M3FilteredLists$View$$Lambda=63, com.m3.collections.M3FilteredLists$View$Cursor=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1, java.util.ArrayList$ListItr=1}
+read_samples=7; read_cpu_ns_median=45337; read_allocated_bytes_median=144; checksum=120; callbacks=1088
+membership_callbacks=128
+result=PASS
+linux_process_memory=VmPeak:	 2539232 kB
+linux_process_memory=VmSize:	 2539232 kB
+linux_process_memory=VmHWM:	   46308 kB
+linux_process_memory=VmRSS:	   46308 kB
+linux_process_memory=VmData:	   68972 kB
+process_cpu_ns=350000000; negative_means_unavailable=true
+blackhole=120
+
+Native Memory Tracking:
+
+Total: reserved=1623115030, committed=62723350
+       malloc: 4576534 #14259
+       mmap:   reserved=1618538496, committed=58146816
+
+-                 Java Heap (reserved=201326592, committed=33685504)
+                            (mmap: reserved=201326592, committed=33685504) 
+ 
+-                     Class (reserved=1073961473, committed=612865)
+                            (classes #1350)
+                            (  instance classes #1212, array classes #138)
+                            (malloc=219649 #3907) 
+                            (mmap: reserved=1073741824, committed=393216) 
+                            (  Metadata:   )
+                            (    reserved=67108864, committed=2031616)
+                            (    used=1856712)
+                            (    waste=174904 =8.61%)
+                            (  Class space:)
+                            (    reserved=1073741824, committed=393216)
+                            (    used=233760)
+                            (    waste=159456 =40.55%)
+ 
+-                    Thread (reserved=5280912, committed=677008)
+                            (thread #12)
+                            (stack: reserved=5242880, committed=638976)
+                            (malloc=25600 #76) 
+                            (arena=12432 #22)
+ 
+-                      Code (reserved=253768512, committed=7865152)
+                            (malloc=136000 #1781) 
+                            (mmap: reserved=253632512, committed=7729152) 
+ 
+-                        GC (reserved=686378, committed=137514)
+                            (malloc=22826 #80) 
+                            (mmap: reserved=663552, committed=114688) 
+ 
+-                  Compiler (reserved=787264, committed=787264)
+                            (malloc=4496 #39) 
+                            (arena=782768 #12)
+ 
+-                  Internal (reserved=233528, committed=233528)
+                            (malloc=196664 #2691) 
+                            (mmap: reserved=36864, committed=36864) 
+ 
+-                    Symbol (reserved=1269480, committed=1269480)
+                            (malloc=900840 #1896) 
+                            (arena=368640 #1)
+ 
+-    Native Memory Tracking (reserved=233784, committed=233784)
+                            (malloc=5640 #87) 
+                            (tracking overhead=228144)
+ 
+-        Shared class space (reserved=16777216, committed=13508608, readonly=0)
+                            (mmap: reserved=16777216, committed=13508608) 
+ 
+-               Arena Chunk (reserved=1280912, committed=1280912)
+                            (malloc=1280912 #97) 
+ 
+-                   Tracing (reserved=257, committed=257)
+                            (malloc=257 #5) 
+ 
+-                Statistics (reserved=128, committed=128)
+                            (malloc=128 #2) 
+ 
+-                 Arguments (reserved=154, committed=154)
+                            (malloc=154 #5) 
+ 
+-                    Module (reserved=176576, committed=176576)
+                            (malloc=176576 #2081) 
+ 
+-                 Safepoint (reserved=8192, committed=8192)
+                            (mmap: reserved=8192, committed=8192) 
+ 
+-           Synchronization (reserved=149936, committed=149936)
+                            (malloc=149936 #1431) 
+ 
+-            Serviceability (reserved=17152, committed=17152)
+                            (malloc=17152 #9) 
+ 
+-                 Metaspace (reserved=67155696, committed=2078448)
+                            (malloc=46832 #63) 
+                            (mmap: reserved=67108864, committed=2031616) 
+ 
+-      String Deduplication (reserved=680, committed=680)
+                            (malloc=680 #8) 
+ 
+-           Object Monitors (reserved=208, committed=208)
+                            (malloc=208 #1) 
+ 

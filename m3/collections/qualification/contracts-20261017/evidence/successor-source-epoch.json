@@ -1,0 +1,23 @@
+{
+  "status": "FROZEN_CANDIDATE_NOT_YET_SDK_RECEIVED",
+  "m3_baseline": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "canonical_baseline": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+  "source_epoch": "After qualified navigation dataset; constructor and independent oracle output unchanged by these paths",
+  "dataset_sha256": "2a5c5372c73f1cba629c7b63041166fe692f48a15662616ebd81a95da7f66490",
+  "file_count": 9,
+  "path_epochs": {
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java": "d70bcdd969aa688ed0a498ce3503684fee2b0ecc9eb11348160e7befa1a7cfe0",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": "6249eedb0e2615102015bc068e40b3bda826c626bd2715d1bf8b7335f68ad89f",
+    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java": "5e0bbd45c1a71a258c2d3367922eac21a93811a6ac2d63c822fb07e7511dedd1",
+    "m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java": "ABSENT",
+    "m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsTest.java": "ABSENT",
+    "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java": "ABSENT",
+    "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundaryTest.java": "ABSENT",
+    "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016"
+  },
+  "public_descriptor_closure": "Equal for all four touched public owners; facade declared override set intentionally gains inherited endpoint overrides",
+  "read_trace_sha256": "0014cf664c4d395f43df534318d33a92416011168d9690b08bfd52ba8a7ebfb2",
+  "read_trace_bytes": 2537,
+  "checks": "Compact 32267; deep 55469 at depth65536 seeds192/Xss256k; stored69; readonly123500; mutable288223; facade117773"
+}

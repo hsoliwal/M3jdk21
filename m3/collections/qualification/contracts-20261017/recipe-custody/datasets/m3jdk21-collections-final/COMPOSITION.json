@@ -1,0 +1,164 @@
+{
+  "schema": "M3_QUALIFIED_DATASET_COMPOSITION_V1",
+  "repository": "hsoliwal/M3JDK21",
+  "baseline_commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "ordered_datasets": [
+    {
+      "dataset": "m3jdk21-collection-build",
+      "sdk_inputs_sha256": "53ee7806d6901bfdd58171d1f259a305b6551addc29cac3e01e3169195c177cb",
+      "sdk_results_sha256": "0ce6f71c183024a1f2338e0e4211b37ae892a2429b1c6d87e2e8dc41251d2a98"
+    },
+    {
+      "dataset": "m3jdk21-navigation",
+      "sdk_inputs_sha256": "5d7c8ea115380e86f7c37139ba62ee25b881155227f8d757a55a43e04b61afec",
+      "sdk_results_sha256": "954c16fb1140ba60220cdf93436e51428a51aa75050e02b72175efd0d3cd5618"
+    },
+    {
+      "dataset": "m3jdk21-collection-oracles",
+      "sdk_inputs_sha256": "c406ffcf0ef95ab75eaa20929f87d72164cdabc743c5a9dd87fa7d36a993c20a",
+      "sdk_results_sha256": "4b884511a22d4fcc532b3a0c41781f529dc3f9d9c73d9c63147c5a32fbef59f3"
+    },
+    {
+      "dataset": "m3jdk21-view-successor",
+      "sdk_inputs_sha256": "8ffc95422141d5ffbc98fc6df46b51d97ae46b49bf9ce7d1bf14d5cacaf86e30",
+      "sdk_results_sha256": "6caadf3a7548973842dab50ecdca3e9b71963c20e6c9b80a4c074b3c24787def"
+    },
+    {
+      "dataset": "m3jdk21-generic-views",
+      "sdk_inputs_sha256": "c3adfe266747b4fc172f144643f9e557a394e800d01b38c846b9f81a4b9a841d",
+      "sdk_results_sha256": "97110558f20f0bdb0e7161acf1945d322760ee89e4b6520fa1e1bb50b9e40ca3"
+    }
+  ],
+  "target_paths": 16,
+  "file_histories": {
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java": [
+      {
+        "dataset": "m3jdk21-view-successor",
+        "before_sha256": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101",
+        "after_sha256": "4e90ed0c7ccd20292ca08c2e2d3f43b6e0f4157b84900f7de80f10aac6a96d4b"
+      }
+    ],
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java": [
+      {
+        "dataset": "m3jdk21-view-successor",
+        "before_sha256": "d70bcdd969aa688ed0a498ce3503684fee2b0ecc9eb11348160e7befa1a7cfe0",
+        "after_sha256": "d10fa589318f55099aa07ac703008f6c590db667ee2d684fad8944164bc2825e"
+      }
+    ],
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": [
+      {
+        "dataset": "m3jdk21-navigation",
+        "before_sha256": "d67a632f63647f033e71360858f8f1be1f93418880178a96437bb0605998ad5b",
+        "after_sha256": "6249eedb0e2615102015bc068e40b3bda826c626bd2715d1bf8b7335f68ad89f"
+      },
+      {
+        "dataset": "m3jdk21-view-successor",
+        "before_sha256": "6249eedb0e2615102015bc068e40b3bda826c626bd2715d1bf8b7335f68ad89f",
+        "after_sha256": "3d126240d30993c16a6c855a3f826c508d97b4b96c4d0c17ad77ef0dd9362bdb"
+      },
+      {
+        "dataset": "m3jdk21-generic-views",
+        "before_sha256": "3d126240d30993c16a6c855a3f826c508d97b4b96c4d0c17ad77ef0dd9362bdb",
+        "after_sha256": "aa7614e7009b3f342f26339b5c4e8c5583d2642db0930ad34a4a3252fca28cd6"
+      }
+    ],
+    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java": [
+      {
+        "dataset": "m3jdk21-navigation",
+        "before_sha256": "bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65",
+        "after_sha256": "5e0bbd45c1a71a258c2d3367922eac21a93811a6ac2d63c822fb07e7511dedd1"
+      },
+      {
+        "dataset": "m3jdk21-view-successor",
+        "before_sha256": "5e0bbd45c1a71a258c2d3367922eac21a93811a6ac2d63c822fb07e7511dedd1",
+        "after_sha256": "fe830fe58e72afbadfcc43065b53176b95c9bb6f6750e251ed4b8c907bb23700"
+      }
+    ],
+    "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java": [
+      {
+        "dataset": "m3jdk21-collection-build",
+        "before_sha256": "02893ff5d555ef577789ca82fdbbe043172219ae59202d10a51f2fa1337d9152",
+        "after_sha256": "907fc4c4bf9003e9edb481afeba4a7cfe3fe4e6e520e7f34e8e5fb2a861e56d5"
+      }
+    ],
+    "m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java": [
+      {
+        "dataset": "m3jdk21-collection-build",
+        "before_sha256": "76da13c95905f3a41b0e95acd89ff68e9ae12b665fec8fe804a5af37235a9641",
+        "after_sha256": "08ea68e5ec274e0229f2a91d91a00b9aa66004e73b474ea67b602c63234d8167"
+      }
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java": [
+      {
+        "dataset": "m3jdk21-view-successor",
+        "before_sha256": "ABSENT",
+        "after_sha256": "4b7b1bab32dda18c4f6bfef99e5b6d38754e838178205a0632b56ac64fc4c061"
+      }
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsTest.java": [
+      {
+        "dataset": "m3jdk21-view-successor",
+        "before_sha256": "ABSENT",
+        "after_sha256": "bb2c6b0687aa3619553f105637898d135460e150c989f82b1be3706aa3ceefcb"
+      }
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java": [
+      {
+        "dataset": "m3jdk21-generic-views",
+        "before_sha256": "ABSENT",
+        "after_sha256": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0"
+      }
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java": [
+      {
+        "dataset": "m3jdk21-generic-views",
+        "before_sha256": "ABSENT",
+        "after_sha256": "46fb2cdf27829984581db5a6cdd6d2fb243cbf183742afafa5b2003d0ff5dce6"
+      }
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java": [
+      {
+        "dataset": "m3jdk21-navigation",
+        "before_sha256": "ABSENT",
+        "after_sha256": "06ca1bc4f818218156f6f9dedadced0f45eff165470e4c93f8938b8103ee9d2f"
+      }
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundaryTest.java": [
+      {
+        "dataset": "m3jdk21-navigation",
+        "before_sha256": "ABSENT",
+        "after_sha256": "84a9a87ab9101da250f504f8f0ae9d99baa6106dcb090dd3c3a90f776c4b82f9"
+      }
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetTest.java": [
+      {
+        "dataset": "m3jdk21-collection-oracles",
+        "before_sha256": "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
+        "after_sha256": "7c4a4ba25f54847f39391ca3ee44709a29b6dfd116405c6570bc7ce6d3e761bd"
+      }
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java": [
+      {
+        "dataset": "m3jdk21-view-successor",
+        "before_sha256": "ABSENT",
+        "after_sha256": "3c2836df74ef09f844f845dbb7f0cd0d179787254d994fa98168d93f3c1e30d4"
+      }
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundaryTest.java": [
+      {
+        "dataset": "m3jdk21-view-successor",
+        "before_sha256": "ABSENT",
+        "after_sha256": "5dace1d4f7e86a98af7b817be6594063c63083a1b7f6f37ad47f192d74eae632"
+      }
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java": [
+      {
+        "dataset": "m3jdk21-view-successor",
+        "before_sha256": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
+        "after_sha256": "fa59e9a722068963eed9146dbc4b9ead6dc53abde672e28bde5c178d9ea4360a"
+      }
+    ]
+  },
+  "selection": "Each candidate byte is the last actual SDK Result for its path; every intermediate preimage matches the previous output or pinned baseline. The final dataset must pass its own unchanged SDK proof. All 16 final bytes currently match the receiving checkout.",
+  "superseded_intermediate": "m3jdk21-navigation has preserved counterexamples resolved by later stages; m3jdk21-collections is the prior 14-file consolidation. Neither is the final public replay dataset."
+}

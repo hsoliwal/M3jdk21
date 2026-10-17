@@ -1,0 +1,11 @@
+baseline
+RESULT null
+NESTED_RESULT 3 tape=[inner3, outer3]
+
+intermediate_navigation
+FAIL unsupported-null-probe marker=true
+NESTED_RESULT 3 tape=[inner3, inner3, outer3]
+
+successor
+RESULT null
+NESTED_RESULT 3 tape=[inner3, outer3]

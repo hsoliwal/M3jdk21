@@ -1,0 +1,9 @@
+collections-work/baseline/m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java:26: warning: [missing-explicit-ctor] class M3ObjectSlotStore28 in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3ObjectSlotStore28<E> {
+             ^
+error: warnings found and -Werror specified
+collections-work/baseline/m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java:38: warning: [missing-explicit-ctor] class M3SpanIndex in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3SpanIndex {
+             ^
+1 error
+2 warnings

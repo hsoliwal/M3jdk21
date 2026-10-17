@@ -1,0 +1,83 @@
+{
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and contributors",
+  "spdx_license_identifier": "Apache-2.0",
+  "schema": "M3_COLLECTION_CONTRACTS_DONORS_V1",
+  "donors": [
+    {
+      "category": "ordered-bounded-neighbor-and-null-presence",
+      "repository": "hsoliwal/com.synexia",
+      "commit": "76a3ebf87654806644317e4048b1fd134116bfaf",
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/M3CollectionViews.java",
+      "git_blob": "9e7cf76c17182258a0290f2414f3b6c0b8b65b76",
+      "pr": 11782,
+      "license": "Apache-2.0",
+      "disposition": "REUSED_AND_REFINED",
+      "rationale": "Stored neighbor is a legal range endpoint even when query exceeds nested bounds. Preserve former range construction for legal queries; peel known current M3 owners for boundary lookup only. Replace donor fabricated contains(null) probe with comparison of an actual existing extreme."
+    },
+    {
+      "category": "ordered-map-entry-presence",
+      "repository": "hsoliwal/com.synexia",
+      "commit": "a0227fc8a23b102613dd760a6180a8f39e344215",
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/M3FilteredMaps.java",
+      "git_blob": "7374279f89f73b904cee66134a84033269bd743d",
+      "pr": 11865,
+      "license": "Apache-2.0",
+      "disposition": "REUSED_ATOM_ADAPTED_TO_CURRENT_OWNER",
+      "rationale": "Map.Entry supplies presence independently of nullable stored key. Boundary anchor is raw owner neighbor; traversal stays on original wrapped range and returned entry remains detached immutable."
+    },
+    {
+      "category": "ordered-predicate-composition",
+      "repository": "hsoliwal/com.synexia",
+      "commit": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-deep-filter-list-20261017/M3CollectionViews.java.txt",
+      "git_blob": "e21fd9b277ce44a8c6efe4a4ffdf9f01a14a1d0b",
+      "recipe": "com.synexia.m3jdk.DeepFilteredListComposition20261017",
+      "descriptor_git_blob": "9b8911eb63500fbc121092cc858e294a0c8c5c93",
+      "license": "Apache-2.0",
+      "disposition": "REUSED_PREDICATE_ATOM_IN_EXISTING_OWNER",
+      "rationale": "Exact current donor has a persistent binary-carry conjunction. Copy Predicate/FilterNode/OrderedPredicate atom into current M3FilteredViews owner and redirect current List composition call. Exclude unused BiPredicate atom. Preserve opaque callbacks, order, duplicates, short-circuit and exception identity."
+    },
+    {
+      "category": "deep-filtered-list-proof",
+      "repository": "hsoliwal/com.synexia",
+      "commit": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-deep-filter-list-20261017/M3DeepFilteredListsProof.java.txt",
+      "git_blob": "27a0f8c0069dbf5c28c19640eba282a7d8fef844",
+      "license": "Apache-2.0",
+      "disposition": "REUSED_AND_REBOUND",
+      "rationale": "Only unavailable M3CollectionViews filteredSortedSnapshot proof call changed to current List stream().sorted(byLength).toList(); preserves explicit immutable sorted projection assertion. Current donor List payload ee0b65c5f067abefe1d514b9f0d75aadf30690b1 starts from exact baseline preimage e381d23e93702cea3ccd7d9c3f7ff5e0d56baaa6."
+    },
+    {
+      "category": "strict-read-only-and-reversed-sequence",
+      "repository": "openjdk/jdk21u",
+      "path": "java.base/java/util/{Collections,SortedSet,SortedMap,ReverseOrderSortedSetView,ReverseOrderSortedMapView}.java",
+      "reference": "Inspected actual JDK21 source archive for default-method dispatch and behavior; no source copied. Runtime-owned Collections.unmodifiable* wrappers called directly.",
+      "license": "GPL-2.0-with-classpath-exception; reference and API use only",
+      "disposition": "API_REUSE_AND_REFERENCE_ONLY",
+      "rationale": "Stock JDK21 unmodifiableSortedSet alone inherits empty endpoint NSEE. Existing JDK sorted reversed views also have observable read callback demand. Explicit current-owner mutation overrides and small private query-forwarding guards preserve those query traces while enforcing documented UOE before callbacks."
+    }
+  ],
+  "recursion_elimination_review": {
+    "repository": "hsoliwal/com.synexia",
+    "revision": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+    "owner": "synexia-algorithms / M3ProblemShapeCatalogue",
+    "owner_git_blob": "dab66f204428e02fcaaf9844a8e6868fb91b0713",
+    "shape_id": "dfs",
+    "category": "graphs",
+    "shape_use": "Recursion elimination / explicit continuation stack; actual collection work measured independently",
+    "review_receipt": "catalogue-proof/category-results/DFS_REVIEW_RECEIPT.json",
+    "review_output_sha256": "d522a545ce9233613547d54628ed8e4f4b7fe2255f4e5621fdb69a8a134b64f2",
+    "donor_review_order": [
+      "leetcode-reference",
+      "hackerrank-reference",
+      "geeksforgeeks-reference",
+      "doocs-leetcode-current",
+      "java-aid-hackerrank-current",
+      "cvalingam-geeksforgeeks-current",
+      "thealgorithms-java-current",
+      "thealgorithms-python"
+    ],
+    "external_source_copied": false
+  },
+  "license_boundary": "Retain first-party Apache-2.0 notices. Challenge/editorial/solution references and JDK sources are reference-only; no copied external source or new Guava/runtime dependency."
+}

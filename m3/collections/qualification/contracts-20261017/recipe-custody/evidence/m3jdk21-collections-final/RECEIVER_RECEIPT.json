@@ -1,0 +1,57 @@
+{
+  "schema": "M3_AST_BUILD_RECEIVER_CONTRACT_V1",
+  "status": "PASS",
+  "dataset": "m3jdk21-collections-final",
+  "targets": 16,
+  "cases": [
+    {
+      "case": "check-no-write",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "apply-exact-sdk",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "fixed-point-no-write",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "late-drift-no-partial-write",
+      "exit_code": 1,
+      "expected_refusal": "target source drift: m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java"
+    },
+    {
+      "case": "qualified-input-tamper",
+      "exit_code": 1,
+      "expected_refusal": "recipe changed after SDK qualification:"
+    },
+    {
+      "case": "sdk-result-tamper",
+      "exit_code": 1,
+      "expected_refusal": "SDK result changed after qualification: m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java"
+    },
+    {
+      "case": "symlink-target",
+      "exit_code": 1,
+      "expected_refusal": "symlink target or parent is not admitted:"
+    },
+    {
+      "case": "mixed-pre-postimages",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "failed-sdk-test-refusal",
+      "exit_code": 1,
+      "expected_refusal": "all actual SDK qualification tests must execute successfully"
+    }
+  ],
+  "actual_sdk_results": true,
+  "product_files_written": false,
+  "sdk_inputs_sha256": "ae668b01f7f0d22664b76aa3c2099efbcee4b5bf0171c904fbd40b0c673ff053",
+  "sdk_results_sha256": "f00131b6424f2c29d82d57092dc1c3882bdcd0981afc5141221c083736f19194"
+}

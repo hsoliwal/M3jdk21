@@ -1,0 +1,27 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-DfailIfNoTests=true",
+    "-DargLine=-Xmx768m -Xcheck:jni -Djava.library.path=/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib -Dm3.collections.signal.native=true -Dm3.collections.rank.native=true",
+    "-f",
+    "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/pom.xml",
+    "verify"
+  ],
+  "JAVA_HOME": "/tmp/m3-ast-product-build/images/jdk",
+  "MAVEN_OPTS": "-Xmx768m",
+  "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+  "mode": "native",
+  "source_tree_sha256": "e3b6d1426892baff4024828c1e0a527bf164e25b46d1fa317780b5abfdeb3ef1",
+  "source_files": 249,
+  "original_pom_unchanged": true,
+  "final_generic_source_handoff_verified": true,
+  "exit_code": 1,
+  "elapsed_seconds": 10.139,
+  "stable_source_monitor_polls": 9,
+  "source_stable": true,
+  "source_tree_after_sha256": "e3b6d1426892baff4024828c1e0a527bf164e25b46d1fa317780b5abfdeb3ef1"
+}

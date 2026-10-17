@@ -1,0 +1,1496 @@
+{
+  "LICENSE": {
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "bytes": 11358,
+    "mtime_ns": 1792243114742529993,
+    "mode": "0644"
+  },
+  "NOTICE": {
+    "sha256": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+    "bytes": 423,
+    "mtime_ns": 1792243114746261293,
+    "mode": "0644"
+  },
+  "SYNEXIA-DONATION-NOTICE.txt": {
+    "sha256": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556",
+    "bytes": 1831,
+    "mtime_ns": 1792243114764917729,
+    "mode": "0644"
+  },
+  "name-mapping.json": {
+    "sha256": "320f47e9a8381350cd641a3444119513e5fd32b961369c98338846d7735d03f4",
+    "bytes": 61448,
+    "mtime_ns": 1792243116597319534,
+    "mode": "0644"
+  },
+  "pom.xml": {
+    "sha256": "d216e3da4ac02615ef46f8b48803174e24c11939ad5b826be9ca9d7df6bbebf6",
+    "bytes": 11931,
+    "mtime_ns": 1792243116240176555,
+    "mode": "0644"
+  },
+  "provenance.json": {
+    "sha256": "b5f4029a3b44a064d848f23ed513882e58d5e04b23f2a123ea268a18705fa9c0",
+    "bytes": 14538,
+    "mtime_ns": 1792243116241096127,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java": {
+    "sha256": "79cac12007699fb2983853af40c27e9b00d2475390d9d1f36c245ddfe7b317d3",
+    "bytes": 11708,
+    "mtime_ns": 1792243130628814500,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3Address28.java": {
+    "sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56",
+    "bytes": 2595,
+    "mtime_ns": 1792243130629213600,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3BitLane28.java": {
+    "sha256": "86f1f600aac3583925b26eb857811255e2a997f8415d6edd65841cb61554c3b6",
+    "bytes": 11179,
+    "mtime_ns": 1792243130924476850,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3BlockingDeque.java": {
+    "sha256": "ac4ae1d0d2e9d10d39f15226d19bb92fd34d60da37bd0a8c822b731836c10577",
+    "bytes": 11505,
+    "mtime_ns": 1792243130667158601,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ChildProgressMonitor.java": {
+    "sha256": "3ccd42c38929179e855bcbfa1a6f54f9edb6968a210c65d013ed434ee592e680",
+    "bytes": 5738,
+    "mtime_ns": 1792243130667564972,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3CollectionSdk.java": {
+    "sha256": "9a51f5edad8fd58ec9a7cc4dcd17cec23117de1eba486ba1b7a4c631acd8eff0",
+    "bytes": 3731,
+    "mtime_ns": 1792243130928537774,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3CollectionSdkCatalog.java": {
+    "sha256": "54c84bf0bc957d7fe6156f8b2df1017918947e58f430b5ce220d0b19d2678b4f",
+    "bytes": 25154,
+    "mtime_ns": 1792243131012867043,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3CollectionSdkNames.java": {
+    "sha256": "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee",
+    "bytes": 5889,
+    "mtime_ns": 1792243131067724768,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3Collections.java": {
+    "sha256": "aa162790de8cb17341ba751c3fef6226196807157bf14d9f6516d3eaf687e926",
+    "bytes": 11283,
+    "mtime_ns": 1792243130855418118,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ConcurrentBitSet.java": {
+    "sha256": "bb1486f22518957d1fa1f951ef78b312364de5a736aff17ae5a543fe1765a4c5",
+    "bytes": 6285,
+    "mtime_ns": 1792243130855800142,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ConcurrentIntLane28.java": {
+    "sha256": "baaa8de6567da94efba77b1363b5629755e5394a6fe951976dc552622ddd0573",
+    "bytes": 7533,
+    "mtime_ns": 1792243130856116818,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ConcurrentLongLane28.java": {
+    "sha256": "727666e9ad92ab6ab1a41e625307baa70ef08c1397954c2aa362282a137c46ea",
+    "bytes": 7583,
+    "mtime_ns": 1792243130856454075,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ConcurrentLongMap.java": {
+    "sha256": "00b8882f22b664552ae9dae4c37ab243b7fc1fb8159b80b5b74e180b4dfd7698",
+    "bytes": 6637,
+    "mtime_ns": 1792243130856784802,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ConcurrentLongSet.java": {
+    "sha256": "7a7e71695a1106f6cefc43e2ba0883eec78abf44f4bf72ead6d094991d6366d6",
+    "bytes": 3876,
+    "mtime_ns": 1792243130857064022,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3DefaultProgressMonitor.java": {
+    "sha256": "f0b52dec2ed7166f242bdd1076792dc3187fc2353d237af59df7b22403bf3d64",
+    "bytes": 3629,
+    "mtime_ns": 1792243130857306877,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3EnumLongMap.java": {
+    "sha256": "8be53dd0b4ccd1e0f226d4ad7a667bd986b21e51d150bea6f8ddae072bdf4966",
+    "bytes": 8229,
+    "mtime_ns": 1792243130857574179,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3EnumSet.java": {
+    "sha256": "a4c359c8035efdf31edbe6f5c36808984bf3de628e9f7c293429a1c7578ce77c",
+    "bytes": 9254,
+    "mtime_ns": 1792243130857904726,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3FilteredLists.java": {
+    "sha256": "4e90ed0c7ccd20292ca08c2e2d3f43b6e0f4157b84900f7de80f10aac6a96d4b",
+    "bytes": 15725,
+    "mtime_ns": 1792245159723081748,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3FilteredNavigableSet.java": {
+    "sha256": "d10fa589318f55099aa07ac703008f6c590db667ee2d684fad8944164bc2825e",
+    "bytes": 4720,
+    "mtime_ns": 1792245159723965346,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3FilteredViews.java": {
+    "sha256": "aa7614e7009b3f342f26339b5c4e8c5583d2642db0930ad34a4a3252fca28cd6",
+    "bytes": 41720,
+    "mtime_ns": 1792245929875923438,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IndexMaskCompactor.java": {
+    "sha256": "af78b910c1639030286023696da693890be5163cd0ffe6befef68748ff9450bc",
+    "bytes": 12568,
+    "mtime_ns": 1792243131267338637,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IndexMaskWindow.java": {
+    "sha256": "dfaaf7b0d0c4f46657474eadb6f216dd68e920e327e153a0242ffe7ae6efbd9c",
+    "bytes": 5924,
+    "mtime_ns": 1792243131326400421,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IndexPathMasks.java": {
+    "sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e",
+    "bytes": 13626,
+    "mtime_ns": 1792243131311745917,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IndexPathRank.java": {
+    "sha256": "9f683bec8b328f4d2ed4ae1540281ea14ccd2475e2096c60ffe77e36bfe53ecc",
+    "bytes": 9214,
+    "mtime_ns": 1792243131366077661,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IndexedMultiValueMap.java": {
+    "sha256": "0acfd80aee31b670b2dc0fa104d43b068ada2bd37781738170efdc7560f6fa82",
+    "bytes": 15368,
+    "mtime_ns": 1792243131421083208,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IntCollection.java": {
+    "sha256": "2b489fd313a90881a5da424f4664e37842dbf244178e5a5b1c780c9639c70f81",
+    "bytes": 2521,
+    "mtime_ns": 1792243131256356168,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IntHashSet.java": {
+    "sha256": "055f45cbba3ff22d206cd1d805859c20ee2688cef5443323838ed6d3c061db14",
+    "bytes": 7216,
+    "mtime_ns": 1792243131488137487,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IntIntConsumer.java": {
+    "sha256": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484",
+    "bytes": 304,
+    "mtime_ns": 1792243131267898809,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IntIntHashMap.java": {
+    "sha256": "b77352f6502182caf4caca55eda1073b74c2c0b1094e07d9c8c3fbabb8cc8418",
+    "bytes": 9778,
+    "mtime_ns": 1792243131513152602,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IntIterator.java": {
+    "sha256": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63",
+    "bytes": 543,
+    "mtime_ns": 1792243131312331678,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IntLane28.java": {
+    "sha256": "771b1450d137874e7c3e08d4e9bee405a6cf88aa6695a9fd4c3616be4ae34d18",
+    "bytes": 6912,
+    "mtime_ns": 1792243131312983768,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IntLongConsumer.java": {
+    "sha256": "523534ffb1824ffbdd7ac4f1dce04e9688f3f8a9b7ce637796100070df645b92",
+    "bytes": 331,
+    "mtime_ns": 1792243131313640215,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IntLongHashMap.java": {
+    "sha256": "d713f4cd75b49becf6ed478cb5b9d5d971eadbebd90ead8a67c83722cb96eae1",
+    "bytes": 10465,
+    "mtime_ns": 1792243131517180016,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3IntPriorityQueue.java": {
+    "sha256": "71f6dcf76eeab67a78c902efbcd3a781931c49477656f84659245c9c8fd75d59",
+    "bytes": 6371,
+    "mtime_ns": 1792243131328187083,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LazyEventBits.java": {
+    "sha256": "e62aa39ad9da31a186235de8cbc63a83c84159833c1bab25747073bc8955289f",
+    "bytes": 1303,
+    "mtime_ns": 1792243131328595166,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LazyEventGranularity.java": {
+    "sha256": "0d5d821ebc7626e6e07dc4eba0146a2c36a5db906c9010ca1745a73e27cb2020",
+    "bytes": 989,
+    "mtime_ns": 1792243131328992103,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LazyEventPolicy.java": {
+    "sha256": "e2504269d75b6d79b2e0fe2bcc3ce02719ff6ee326d8db478a083bc38dac1a2f",
+    "bytes": 2488,
+    "mtime_ns": 1792243131329420797,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LazyEventSink.java": {
+    "sha256": "2a45fb78a9d93614a9d2ed2f5bc1e42e922816fc4ae4123f4d2ac07288134e8d",
+    "bytes": 1190,
+    "mtime_ns": 1792243131330235862,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LazyEventSource.java": {
+    "sha256": "6e779fbed83ae72bb75588ad77028c9c644ae176284877e824828e3f5b97bf27",
+    "bytes": 575,
+    "mtime_ns": 1792243131330867622,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LazyEvents.java": {
+    "sha256": "35d0a22624feb3dddbe8ba11235772d3579a72fc7128e17c15b3b596b7c6c28d",
+    "bytes": 1275,
+    "mtime_ns": 1792243131332442600,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LazyOperation.java": {
+    "sha256": "588937f401355bac4971394a185e16e89eb5e32e2a8a8aa1b7ec761fb242d667",
+    "bytes": 640,
+    "mtime_ns": 1792243131332946637,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LazyValueProvider.java": {
+    "sha256": "a0daba82e6787bcacbf3811a04a094f9442c88d2ad3513e3029a9b0767f95b66",
+    "bytes": 1357,
+    "mtime_ns": 1792243131333275502,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LazyValueState.java": {
+    "sha256": "c3374b459647735929490b6c01b633538e3232237e4dd52c565b4e95df0ddca4",
+    "bytes": 10835,
+    "mtime_ns": 1792243131333953992,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LinkedHashMap.java": {
+    "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
+    "bytes": 8702,
+    "mtime_ns": 1792243131334487163,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LinkedHashSet.java": {
+    "sha256": "b429ed027228bdb39b366b7023630a4a4da7fbef660386798083f4f3e341c757",
+    "bytes": 2467,
+    "mtime_ns": 1792243131335046073,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LinkedList.java": {
+    "sha256": "31efffe0d25132b393178bec38906e5b977d8939a246a59115afeccb6a23e11b",
+    "bytes": 9164,
+    "mtime_ns": 1792243131335463170,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LockedMap.java": {
+    "sha256": "ab4e57cd0e256e427a21cfbff9bd1c9e910d5f971d7d59051f8d25ec8347fbca",
+    "bytes": 9231,
+    "mtime_ns": 1792243131335888840,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LockedTreeMap.java": {
+    "sha256": "26abeb1427bd90c278549a29f62c2b261f4e286fd36e7eb64a46bb5cdf24efd9",
+    "bytes": 3957,
+    "mtime_ns": 1792243131336321140,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LockedTreeSet.java": {
+    "sha256": "060c8971d038ef82e80197864e00302c898d11d26a01b60791bf383954a79e09",
+    "bytes": 3413,
+    "mtime_ns": 1792243131336850045,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongAddressKernel.java": {
+    "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+    "bytes": 5865,
+    "mtime_ns": 1792243131618504286,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongArena28.java": {
+    "sha256": "f797998ca57b353f7c44ae48f3d65eeaddec6182066cec0f56c8526d71355e60",
+    "bytes": 2316,
+    "mtime_ns": 1792243131366928350,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongArrayDeque.java": {
+    "sha256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84",
+    "bytes": 10605,
+    "mtime_ns": 1792243131367721102,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongArrayList.java": {
+    "sha256": "968773eb7e044332b9c1a44040b49e3aa253e0f1464d8d9e38513e2ebcc8f6dd",
+    "bytes": 11793,
+    "mtime_ns": 1792243131625794616,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongBitmapFilterPlan.java": {
+    "sha256": "bd7969cfc42e26171b9904c65eb12f3321b2fbffe77a34f6d76f4db15c11c1d3",
+    "bytes": 11349,
+    "mtime_ns": 1792243131688543648,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java": {
+    "sha256": "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9",
+    "bytes": 13163,
+    "mtime_ns": 1792243131757085308,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongCollection.java": {
+    "sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
+    "bytes": 2310,
+    "mtime_ns": 1792243131513714396,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongCompositeViews.java": {
+    "sha256": "759ba7905d6190f42eb691d25307dc5807af7289948fc5c45b94568d679c11b8",
+    "bytes": 20211,
+    "mtime_ns": 1792243131761870873,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongDag.java": {
+    "sha256": "0962be0f81f1e83cd3b2686a22e24cc245d5db14e26a27cb681530215f76be47",
+    "bytes": 12331,
+    "mtime_ns": 1792243131832947148,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongDeque.java": {
+    "sha256": "ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272",
+    "bytes": 1896,
+    "mtime_ns": 1792243131618943807,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongFilteredView.java": {
+    "sha256": "f2a4d038413e8ddd294be088f8bff9ab127ee63706df1f9e16ef57f1e4b44355",
+    "bytes": 5494,
+    "mtime_ns": 1792243131835852436,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongHashSet.java": {
+    "sha256": "7274e4b0ab7a65be73e2a59d92e5b419a91261c954917428eba85f2dfccf03e6",
+    "bytes": 7831,
+    "mtime_ns": 1792243131891925137,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongIndexProjection.java": {
+    "sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+    "bytes": 8421,
+    "mtime_ns": 1792243131933374595,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongIterator.java": {
+    "sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+    "bytes": 554,
+    "mtime_ns": 1792243131758831934,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongLane28.java": {
+    "sha256": "5e35c6c646389c582585b684a4e6224bb968cf2f7b669598eb88920ab1538960",
+    "bytes": 7204,
+    "mtime_ns": 1792243131759263503,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongLaneStore28.java": {
+    "sha256": "e12261ea8149c9b6cedcfb08915699ec344a57eaed15f68060a9927717eb44a1",
+    "bytes": 4470,
+    "mtime_ns": 1792243131759657105,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongLinkedHashSet.java": {
+    "sha256": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef",
+    "bytes": 11685,
+    "mtime_ns": 1792243131760087522,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongLinkedList28.java": {
+    "sha256": "2db7c6ba3342a58fdce49c3e988ded51ece2de336575d225edb6cca75cd483c2",
+    "bytes": 5940,
+    "mtime_ns": 1792243131761196499,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongList.java": {
+    "sha256": "7da7f46ea6bfb6dee64fe8a4eaeb914b07e537d10c3cb08ed20f440b1cfcd2dd",
+    "bytes": 1992,
+    "mtime_ns": 1792243131765111694,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongListSpliterator.java": {
+    "sha256": "c456dc750c27dc100df3a032a422902288cb155645996703a9565ce85bcb2003",
+    "bytes": 1919,
+    "mtime_ns": 1792243131762261810,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongLongConsumer.java": {
+    "sha256": "a9be525afc8c71fa191625dc69c60f76273299832744392435a5739006c8d15c",
+    "bytes": 326,
+    "mtime_ns": 1792243131762701721,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongLongHashMap.java": {
+    "sha256": "7688d153817347490e2df39c71a283b142286fed14cb60ed731bc60d558a1ac3",
+    "bytes": 9787,
+    "mtime_ns": 1792243132024695283,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongLongLinkedHashMap.java": {
+    "sha256": "c2f74a1336ec435d7fbd031797a485ded70f21283bb8ace10aca09ed68fe9846",
+    "bytes": 15160,
+    "mtime_ns": 1792243132033131305,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongPredicates.java": {
+    "sha256": "e5d9d7fca94c4eef0843bb7eb7929c2baba05892207f9336a6da3a089bc882ad",
+    "bytes": 3651,
+    "mtime_ns": 1792243132076209953,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongPriorityQueue.java": {
+    "sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c",
+    "bytes": 6107,
+    "mtime_ns": 1792243131836300709,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongQueue.java": {
+    "sha256": "50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8",
+    "bytes": 2189,
+    "mtime_ns": 1792243131836644586,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongRankBatchNative.java": {
+    "sha256": "a199d9601ca4c36d8dbe3d1b95a8dd7da49d5f22a15ed29a7112665a38288c82",
+    "bytes": 2195,
+    "mtime_ns": 1792243132133766244,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongRankIndex.java": {
+    "sha256": "d1011f31158fa96c23722e6df2fd7ec9e9c1592fba860580330c42fb3f25f4f9",
+    "bytes": 8035,
+    "mtime_ns": 1792243132135553781,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongSequence.java": {
+    "sha256": "d7cf703705bb68d1ff6c2455d7e94533baedf5c89a776f10e729c7a9410321eb",
+    "bytes": 1163,
+    "mtime_ns": 1792243131933903380,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongSortedSet.java": {
+    "sha256": "257a69f75483df729add39767532718f96ac3c9917bdadbe9a4be08f32caf933",
+    "bytes": 561,
+    "mtime_ns": 1792243131934213296,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongSortedSnapshot.java": {
+    "sha256": "37ce5651596e7b44bb2512d2bdc6ee8bba40bf95320c5c377162077032c69975",
+    "bytes": 9637,
+    "mtime_ns": 1792243132216708497,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongSortedViews.java": {
+    "sha256": "7a42630fbffd2c5875d8a7e4258540454879117a52bd6fe52c3cde4ce07b4d99",
+    "bytes": 9813,
+    "mtime_ns": 1792243132296052721,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongStack.java": {
+    "sha256": "812c2df2bc73f04e6ab7551c48cea59bc8b5c877bd347266c287764db88e4c36",
+    "bytes": 318,
+    "mtime_ns": 1792243132033653350,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3LongTreeSet.java": {
+    "sha256": "141b90d104cf9d8715e97b6a805314fd2a8fcc9fe10d3c81b1894cf744141d42",
+    "bytes": 18634,
+    "mtime_ns": 1792243132378204786,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3MutableFilteredViews.java": {
+    "sha256": "fe830fe58e72afbadfcc43065b53176b95c9bb6f6750e251ed4b8c907bb23700",
+    "bytes": 21946,
+    "mtime_ns": 1792245159726027701,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ObjectIdentityMap.java": {
+    "sha256": "0e6e12dd48b62b8606de078e25a0b3a75b6d741d11bf9b5927d730d2f0110bd3",
+    "bytes": 9766,
+    "mtime_ns": 1792243132134287087,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ObjectIdentitySet.java": {
+    "sha256": "6d6b6f58113a44438c721cd645efa45ac6c0f63842b164ebb33a94dce4066e3d",
+    "bytes": 6870,
+    "mtime_ns": 1792243132134730334,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java": {
+    "sha256": "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c",
+    "bytes": 11078,
+    "mtime_ns": 1792243132420255229,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ObjectResidency.java": {
+    "sha256": "c8ffc48d43e98223ae37e722c5841b962217fb6b98daf561cba430eb3492bdc5",
+    "bytes": 21809,
+    "mtime_ns": 1792243132135968405,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ObjectSlotStore28.java": {
+    "sha256": "907fc4c4bf9003e9edb481afeba4a7cfe3fe4e6e520e7f34e8e5fb2a861e56d5",
+    "bytes": 8496,
+    "mtime_ns": 1792243455807634813,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ObjectStateBatch28.java": {
+    "sha256": "aa4f2c277fa8e36f217b1e93533fe0e78a98e6e7e6b9f7fa6d31c60f36c314d9",
+    "bytes": 6039,
+    "mtime_ns": 1792243132496509498,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ObjectStateSlots28.java": {
+    "sha256": "0b4f3600af352d2b22b35a520f98540a446c0a3494a9253cb0ef6c309a5f7bcb",
+    "bytes": 14660,
+    "mtime_ns": 1792243132555650727,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3OrderedSlotMap.java": {
+    "sha256": "015242ae386c4366471cd7d26fab886a2c362b58029982b0108976342c4f3357",
+    "bytes": 4511,
+    "mtime_ns": 1792243132378760421,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3Progress.java": {
+    "sha256": "01b387d63a1ddfb1b758e11fcee76366aea68ec391bc0d87234172857cb6a25d",
+    "bytes": 9579,
+    "mtime_ns": 1792243132379088094,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ProgressAdapters.java": {
+    "sha256": "6d4637c9b3de4481180d6459f1312aff90141b6ddf46b91aff886bab958339c9",
+    "bytes": 3722,
+    "mtime_ns": 1792243132379387193,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ProgressMonitor.java": {
+    "sha256": "f45282edf96cbf61f84df41e92c5ad958e577ea07a397bc8802c5bc8996aeb24",
+    "bytes": 1107,
+    "mtime_ns": 1792243132379670219,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ProgressScope.java": {
+    "sha256": "8ad6c20a9661ec095fb4dcd0566b400130f9c13e9c4312a625ff2dfd0c40553b",
+    "bytes": 1504,
+    "mtime_ns": 1792243132379950450,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ProgressState.java": {
+    "sha256": "1de191dc8e99a92f0aee3f8f24e665f9de49714f8571c0f5c3b047fbd43a6e6d",
+    "bytes": 1151,
+    "mtime_ns": 1792243132380227296,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3Residency.java": {
+    "sha256": "240f63bf1cc6d1ce2681c338f8715e301913eeaf8a3cd69baebc5971b9cdaf67",
+    "bytes": 955,
+    "mtime_ns": 1792243132380500908,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java": {
+    "sha256": "fcb1575f5366bba814870456acdf38379325f631cde86a18ae9541588e500dfc",
+    "bytes": 11259,
+    "mtime_ns": 1792243132645657980,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3SignalOrder.java": {
+    "sha256": "da761a6b4f10d9a3c9a61979a4ee238fd6d26492d1ba0e6daacdf371f6561058",
+    "bytes": 7263,
+    "mtime_ns": 1792243132694892898,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3SignalOrderNative.java": {
+    "sha256": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8",
+    "bytes": 967,
+    "mtime_ns": 1792243132701162512,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3SlotAllocator28.java": {
+    "sha256": "9a7487453e0bd2369b56e7e17dedb79e2eba8919944772ec0407c95833458ae7",
+    "bytes": 4760,
+    "mtime_ns": 1792243132422923520,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3SlotArrays.java": {
+    "sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518",
+    "bytes": 1261,
+    "mtime_ns": 1792243132423262089,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3SlotMap.java": {
+    "sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806",
+    "bytes": 10870,
+    "mtime_ns": 1792243132423634899,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3SlotSpliterators.java": {
+    "sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
+    "bytes": 3512,
+    "mtime_ns": 1792243132423888070,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3SpanIndex.java": {
+    "sha256": "08ea68e5ec274e0229f2a91d91a00b9aa66004e73b474ea67b602c63234d8167",
+    "bytes": 10297,
+    "mtime_ns": 1792243455808068615,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3StateMaskArrays.java": {
+    "sha256": "6c21752b4a73bc110a5f6b7aebc808d216e5df157cd67f0542065627cc88cefc",
+    "bytes": 6505,
+    "mtime_ns": 1792243132757259655,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3SystemProgress.java": {
+    "sha256": "683b4a0532ff40682d43a51ee9e38fb1c73de3a05e53d9ec5392e4ba29cdd29b",
+    "bytes": 1070,
+    "mtime_ns": 1792243132556147914,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3TransferQueue.java": {
+    "sha256": "e4f3ad7fa0fb8e9f9c0bdf3530143b7fb525515d2e43d7cc479a4bceab81ebe7",
+    "bytes": 11873,
+    "mtime_ns": 1792243132560539856,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3TreeMap.java": {
+    "sha256": "01582359b73d671f627f9bde3b266021c975bcf374f4c575fa43c05fd49218e8",
+    "bytes": 23625,
+    "mtime_ns": 1792243132560931976,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3TreeSet.java": {
+    "sha256": "e55e48d581412955c468b8263d9f2b15bfb03b659f3b70f1187697853aeebc5c",
+    "bytes": 3547,
+    "mtime_ns": 1792243132561120159,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3VirtualAccumulator.java": {
+    "sha256": "27c5ffc37302dc173e00a82134cc57be64ba3721aafe42d1d854d4cdba3fb257",
+    "bytes": 1295,
+    "mtime_ns": 1792243132787904412,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3VirtualCollector.java": {
+    "sha256": "2e74d033a06247ba6ffa0beae2a7c5b1ddb838bfa50499678755934eeda7e086",
+    "bytes": 3016,
+    "mtime_ns": 1792243132888908181,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/M3WeakHashMap.java": {
+    "sha256": "1b1fd624108635fbb76e2608b066abfdaa4cc297b85f0052d84f17ac33c19d2a",
+    "bytes": 5511,
+    "mtime_ns": 1792243132646235248,
+    "mode": "0644"
+  },
+  "src/main/java/com/m3/collections/package-info.java": {
+    "sha256": "d1a378061968774e1b7a9e0e784039ae34b84efc22629cec2db0bae2f3117acc",
+    "bytes": 699,
+    "mtime_ns": 1792243132646543131,
+    "mode": "0644"
+  },
+  "src/main/java/module-info.java": {
+    "sha256": "e531b318ea4cbc6ca09bb3e52cb1a70ee4539ccf78d8b61b0f73bcf3027db557",
+    "bytes": 165,
+    "mtime_ns": 1792243132646844654,
+    "mode": "0644"
+  },
+  "src/main/native/collections/m3_index_mask_compactor.c": {
+    "sha256": "59b1bb47f2df09f1455e4ce2160becbeefd6da877ecddca4ad245a286d14fa48",
+    "bytes": 11283,
+    "mtime_ns": 1792243132885877175,
+    "mode": "0644"
+  },
+  "src/main/native/collections/m3_index_mask_window.c": {
+    "sha256": "ddf23e3dab10bc2315ca4a8def699b0ee29ed3c8f457b7a13b7ab93cc1ddbff3",
+    "bytes": 5126,
+    "mtime_ns": 1792243132937674278,
+    "mode": "0644"
+  },
+  "src/main/native/collections/m3_index_path_masks.c": {
+    "sha256": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+    "bytes": 5772,
+    "mtime_ns": 1792243132981620651,
+    "mode": "0644"
+  },
+  "src/main/native/collections/m3_long_address_kernel.c": {
+    "sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+    "bytes": 3458,
+    "mtime_ns": 1792243133013865594,
+    "mode": "0644"
+  },
+  "src/main/native/collections/m3_long_rank_batch_jni.c": {
+    "sha256": "50c741073d6ef0b4efbd4a90c1f336f42945fa3bcd5824455f213f7509a52388",
+    "bytes": 2278,
+    "mtime_ns": 1792243133046492675,
+    "mode": "0644"
+  },
+  "src/main/native/collections/m3_residency_state_mask.c": {
+    "sha256": "07076627c4cdca856ead90d400c467d7259b65a7970dfbea114ffd66a9bb54e4",
+    "bytes": 4443,
+    "mtime_ns": 1792243133138715238,
+    "mode": "0644"
+  },
+  "src/main/native/collections/m3_signal_order_jni.c": {
+    "sha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5",
+    "bytes": 3052,
+    "mtime_ns": 1792243133201486103,
+    "mode": "0644"
+  },
+  "src/main/native/collections/m3_span_index_jni.c": {
+    "sha256": "f33781ca270dda25553986da350d4d5fc3808c483363c93a7bad64717effaf3c",
+    "bytes": 2898,
+    "mtime_ns": 1792243133256647154,
+    "mode": "0644"
+  },
+  "src/main/native/collections/segmented_bit_lane.c": {
+    "sha256": "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210",
+    "bytes": 3458,
+    "mtime_ns": 1792243132982028144,
+    "mode": "0644"
+  },
+  "src/main/resources/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv": {
+    "sha256": "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313",
+    "bytes": 11184,
+    "mtime_ns": 1792243133255756225,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3AdaptiveEnumLongMapTest.java": {
+    "sha256": "7c86957b387dd1afa83384b1fbf05ff1c5d0807bb3255f31ffcd9dfd4b5ec140",
+    "bytes": 14191,
+    "mtime_ns": 1792243133014764996,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3AllocationProbe.java": {
+    "sha256": "47c94f4de1f02dd6544342481e1e44b159b6895767d53e238659424f4a709f6d",
+    "bytes": 4167,
+    "mtime_ns": 1792243133015177806,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3BitLane28FenwickSelfTest.java": {
+    "sha256": "a82291d6dfc65546369804db2ad31b773c0d35bddb46ae998f98e586fefb54c3",
+    "bytes": 4617,
+    "mtime_ns": 1792243133342532832,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3BitLane28FenwickTest.java": {
+    "sha256": "b221c981c9cabacadeea694a311fd7a76025a161a5e3cb01860b311b35311e3c",
+    "bytes": 1400,
+    "mtime_ns": 1792243133305164093,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3BitLaneJumpProof.java": {
+    "sha256": "1a6b291f5c5e079afbfe02adf6faf2dc6de997263e24507e85ee6333365bab24",
+    "bytes": 6582,
+    "mtime_ns": 1792243133368287432,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3CollectionCostProbe.java": {
+    "sha256": "c3b7fe8f9b10dd1607af7b5da7b657138934a1b5cf0d449960c50c2a219d35a8",
+    "bytes": 8201,
+    "mtime_ns": 1792243133202028649,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java": {
+    "sha256": "b28c7bea13e62b546cfc77b518126b1cbae52a3449bc264230ace523a10e3dc1",
+    "bytes": 5059,
+    "mtime_ns": 1792243133429047430,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3CollectionSdkContractSelfTest.java": {
+    "sha256": "7d15455b3253291c7756b8d5e3abf33426885ba66600a63aba4e26109cba257d",
+    "bytes": 10544,
+    "mtime_ns": 1792243133549531363,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3CollectionSdkSelfTest.java": {
+    "sha256": "eb0ca67291ebd8d41c0d6d7f10f8a171b16d59866a2455ce406958ba4af34792",
+    "bytes": 4322,
+    "mtime_ns": 1792243133555019863,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ConcurrentContractTest.java": {
+    "sha256": "9aea61d2c674b81f0b8b84f053b82449ec0d97ae7e69264efd3561edef808872",
+    "bytes": 12948,
+    "mtime_ns": 1792243133305859759,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ConcurrentLaneContractTest.java": {
+    "sha256": "4a72dcca1648cbd3cf9f2d9bbec526de13fb50464d6b2ed19b101182541f7e5a",
+    "bytes": 7340,
+    "mtime_ns": 1792243133306183645,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3DeepFilteredListsProof.java": {
+    "sha256": "4b7b1bab32dda18c4f6bfef99e5b6d38754e838178205a0632b56ac64fc4c061",
+    "bytes": 19647,
+    "mtime_ns": 1792245159726712311,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3DeepFilteredListsTest.java": {
+    "sha256": "bb2c6b0687aa3619553f105637898d135460e150c989f82b1be3706aa3ceefcb",
+    "bytes": 458,
+    "mtime_ns": 1792245159727045201,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java": {
+    "sha256": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0",
+    "bytes": 10170,
+    "mtime_ns": 1792245929877105616,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java": {
+    "sha256": "46fb2cdf27829984581db5a6cdd6d2fb243cbf183742afafa5b2003d0ff5dce6",
+    "bytes": 501,
+    "mtime_ns": 1792245929877487910,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3EnumLongMapTest.java": {
+    "sha256": "cd93ecad156634537dbb42acf199558689ff91c113db26803cfc2cf235377531",
+    "bytes": 8177,
+    "mtime_ns": 1792243133306549375,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3EnumSetTest.java": {
+    "sha256": "334ec881ecaf3fa7807bf912ff3d758cf8ac9eeb162ff7e261738e73890e81c9",
+    "bytes": 8542,
+    "mtime_ns": 1792243133306957579,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FactoryContractTest.java": {
+    "sha256": "62bd5948000dcd9cf7625ab0b80fd2f43b9b2f1aad351e90e04017344e556436",
+    "bytes": 5868,
+    "mtime_ns": 1792243133307320364,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FilteredListsContract.java": {
+    "sha256": "e5addee9657a66a731ca8acf79c0682e96a1ad4d7dbab251f5196ab706b9826a",
+    "bytes": 12360,
+    "mtime_ns": 1792243133569423851,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FilteredListsEdges.java": {
+    "sha256": "3310337caf4552892d3dc8a944e749b479f73c381903565f1322542e192d2b0a",
+    "bytes": 4929,
+    "mtime_ns": 1792243133631857329,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FilteredListsSortedInteropTest.java": {
+    "sha256": "a43047f07d8cf421e286fa511daeb44c6487a89107900843d526ea20bcb6a539",
+    "bytes": 2051,
+    "mtime_ns": 1792243133631074031,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FilteredListsTest.java": {
+    "sha256": "589a2f683a5465c0491104993a5647fc7f861048b9d1ed50281bd64621ad405c",
+    "bytes": 543,
+    "mtime_ns": 1792243133714188894,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FilteredListsWorkProof.java": {
+    "sha256": "37a55f9c6c577984fafb867bf59ea1c210bf835c5cef4d08880da48c0daf7aa6",
+    "bytes": 2452,
+    "mtime_ns": 1792243133851153015,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FilteredNavigableFacadeSelfTest.java": {
+    "sha256": "2a21873201c6f3bce733f75be1140ca66a5f5ddd19865203016a6bf4e66c4c21",
+    "bytes": 8873,
+    "mtime_ns": 1792243133871654144,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FilteredNavigableSetTest.java": {
+    "sha256": "1ae5663d68320ff9d223f717bdda3a88fb08ce7994061281d22b931808473f76",
+    "bytes": 3966,
+    "mtime_ns": 1792243133941445473,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java": {
+    "sha256": "06ca1bc4f818218156f6f9dedadced0f45eff165470e4c93f8938b8103ee9d2f",
+    "bytes": 16051,
+    "mtime_ns": 1792243870326437547,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FilteredNavigationBoundaryTest.java": {
+    "sha256": "84a9a87ab9101da250f504f8f0ae9d99baa6106dcb090dd3c3a90f776c4b82f9",
+    "bytes": 710,
+    "mtime_ns": 1792243870326821104,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FilteredViewsContract.java": {
+    "sha256": "fe7960369b1e3fab45dec3eadfadaa13f088e46e9c139de671faccac9fda4575",
+    "bytes": 12271,
+    "mtime_ns": 1792243134068971511,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FilteredViewsTest.java": {
+    "sha256": "5f17bb2a2f2abfd4584b144ff398f6b2359b97cb605fa06e0bbaa8001b81131e",
+    "bytes": 666,
+    "mtime_ns": 1792243133901883997,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3FootprintContractTest.java": {
+    "sha256": "e369e66b2f95179383ef1e1b2a9cef28f439f762fcd3478e6df2113e3d1f8957",
+    "bytes": 7612,
+    "mtime_ns": 1792243133714682236,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java": {
+    "sha256": "86eb2c9a436aac6f6e5b99f5c275636ca272d849dd08aa07f8796271167c63a1",
+    "bytes": 10437,
+    "mtime_ns": 1792243133714979282,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexMaskCompactorTest.java": {
+    "sha256": "2d4273ec51e75d07e9f551d64e3059bb325253a41edbdb7eba5564040d1da3c0",
+    "bytes": 412,
+    "mtime_ns": 1792243133715261436,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexMaskWindowRecoverySelfTest.java": {
+    "sha256": "fb5d6b2baddeb5a48b00b4082eb109b298624e5988430d78fc3c932cf4c382d9",
+    "bytes": 8664,
+    "mtime_ns": 1792243134033089291,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexMaskWindowRecoveryTest.java": {
+    "sha256": "adf6909182c6f44fa143c7734d894b642789dfdfb99ab1d1b2ada53b665a1da5",
+    "bytes": 364,
+    "mtime_ns": 1792243134095836020,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexMaskWindowSelfTest.java": {
+    "sha256": "4b63050b62de64aacd89a4ec744d0ed489e95a05fbfad2167783105f3e30c9f6",
+    "bytes": 10415,
+    "mtime_ns": 1792243134134668375,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexMaskWindowTest.java": {
+    "sha256": "7bc19b1d266016a0a76c8a6186be573c1e698c704ab1d56407b1717b19fc4823",
+    "bytes": 393,
+    "mtime_ns": 1792243134145290533,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexPathMaskWindowSelfTest.java": {
+    "sha256": "9cdfb6292703fa6a48c7d21da919b6d544d59879c1477af8ed3170f1cb5f391f",
+    "bytes": 13211,
+    "mtime_ns": 1792243134271391073,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java": {
+    "sha256": "86157abd29f46ab8f33111382dc5442cc235b45634205be2d39c552fd57e4639",
+    "bytes": 9742,
+    "mtime_ns": 1792243134275501543,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexPathMasksTest.java": {
+    "sha256": "5cf617e4dec3d22d042ce4d201a42dc8779f5fbe572bf3e62ba6ab48c3ec83ad",
+    "bytes": 410,
+    "mtime_ns": 1792243134367639769,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java": {
+    "sha256": "d3f8eb5c51ab0a60bf69ea22a1d27600f908b4df9a164e0b85c3046bbd8eb7ed",
+    "bytes": 2834,
+    "mtime_ns": 1792243134294177332,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexPathRankSelfTest.java": {
+    "sha256": "d354516b794666bb594d91acb1da0128172b88771b48a899e4c456da947759d2",
+    "bytes": 10699,
+    "mtime_ns": 1792243134445125965,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IndexPathRankTest.java": {
+    "sha256": "55380e5f05f815fc77b6730482614b0de2a11b1cbf38c46da509d35e7746ca20",
+    "bytes": 1062,
+    "mtime_ns": 1792243134449851909,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IntLanesTest.java": {
+    "sha256": "0ddd123adba9511aac147c3fce715734ec5080395d7dd681ca89f95fb2ca0c4d",
+    "bytes": 10141,
+    "mtime_ns": 1792243134272116514,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3IntLongHashMapTest.java": {
+    "sha256": "59fbd569f900826bead33b3297528aedc94f22b24366039cfd41d584a527ff17",
+    "bytes": 6366,
+    "mtime_ns": 1792243134272654072,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3JdkCollectionDifferentialTest.java": {
+    "sha256": "e0b52a315dc95583093a4aa96b757f74728a42f40c0a5b390d2b1b8fe84edb9b",
+    "bytes": 18438,
+    "mtime_ns": 1792243134273078870,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java": {
+    "sha256": "d5ea4fdcde6280a43041b6fd105a65dbbac0e138ab353475a8801282a910f1f7",
+    "bytes": 10731,
+    "mtime_ns": 1792243134273611060,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LazyObserverRegressionTest.java": {
+    "sha256": "a9422f722a5e0009683d5dbaedca42e66b5df781ac7d9cb40b5b98db96333004",
+    "bytes": 8769,
+    "mtime_ns": 1792243134273950691,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java": {
+    "sha256": "b61d390196173ef0d4f99a86d0569f0542f9805d639a29eff4035140f6cf10ea",
+    "bytes": 18625,
+    "mtime_ns": 1792243134274385745,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LazyTreeMapTest.java": {
+    "sha256": "fee5f625022c58e0774380121ce5a653fea936334e0fe4be0a2e81a7fdf5f99a",
+    "bytes": 466,
+    "mtime_ns": 1792243134274948982,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LazyValueStateSelfTest.java": {
+    "sha256": "e367a234f8dbb0c628443e3afec7446553f2168c50b515da96b7afa43246b7d2",
+    "bytes": 7622,
+    "mtime_ns": 1792243134275501543,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongAddressBoundedSelfTest.java": {
+    "sha256": "0e590e67416010c433b82eb263ddc55f162c099eed13b7fb1606b2c868d83c5d",
+    "bytes": 8569,
+    "mtime_ns": 1792243134534297572,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongAddressBoundedTest.java": {
+    "sha256": "c7a5abb5a7e205bda31271c52c4aea121fdc4e36ba2498c6ad86c2668c718306",
+    "bytes": 318,
+    "mtime_ns": 1792243134527878468,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongAddressKernelSelfTest.java": {
+    "sha256": "250b900897c8ca5829b033f643c88420bf0526a597426f27195c497d79cdddfa",
+    "bytes": 4982,
+    "mtime_ns": 1792243134615937548,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongAddressKernelTest.java": {
+    "sha256": "ffc5a62d913a7b6d0fdceea7c4f479cb17486cd7babc2b14600bf033d099f057",
+    "bytes": 244,
+    "mtime_ns": 1792243134596839658,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongArrayDequeTest.java": {
+    "sha256": "5cd23d6177bf98fde595d722512bf1be7b48d9ac1e3536a66a066062be8cd19e",
+    "bytes": 8613,
+    "mtime_ns": 1792243134445731365,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongArrayListTest.java": {
+    "sha256": "95b3dd51206674dbae0336c64bc329e7bfba67c1a8ea60bc5db68fe61931b6c1",
+    "bytes": 11653,
+    "mtime_ns": 1792243134446012087,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongBitmapFilterPlanSelfTest.java": {
+    "sha256": "fa87bbf51b5a58b6b1562b909c3c16d0b670168165db57e6bb4430158de11fd7",
+    "bytes": 8441,
+    "mtime_ns": 1792243134733042070,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java": {
+    "sha256": "de0be6b6fa43ea9b824db0f79106213976e94f8f7cdf6a84f15378a6c090cc37",
+    "bytes": 14241,
+    "mtime_ns": 1792243134694892621,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongDagContract.java": {
+    "sha256": "06c25e107fbb0f9f431543137a93d36c76736acd3d75c54891691b4b4fe2fe3f",
+    "bytes": 14821,
+    "mtime_ns": 1792243134764947046,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongDagJUnitTest.java": {
+    "sha256": "02b675021d118b0f68cb8bfa093f35299f4d508cba25f4100fba0c080f6d5425",
+    "bytes": 252,
+    "mtime_ns": 1792243134829755649,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java": {
+    "sha256": "a5df095ddaf792e8dacdb93d674e1dd90294786684af5ca5851951d9d0a9fd6a",
+    "bytes": 11639,
+    "mtime_ns": 1792243134834873878,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongFilteredViewContractTest.java": {
+    "sha256": "3cefdce84f9f78cbd77a8ac42626b6b54a15930dcc4becb0802c87491f725044",
+    "bytes": 8340,
+    "mtime_ns": 1792243134616495416,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongIndexProjectionMaskOffsetProof.java": {
+    "sha256": "1d554f7e18523f363279e0670abc572a3f430b0a8db65850aaf57e82b15e309a",
+    "bytes": 7812,
+    "mtime_ns": 1792243134936982196,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongIndexProjectionMaskOffsetTest.java": {
+    "sha256": "e3401ec86e0ac9d227039983e93ca00ca4fe2bd59330deb1911ec2388b51f37f",
+    "bytes": 447,
+    "mtime_ns": 1792243134904123832,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongIndexProjectionSelfTest.java": {
+    "sha256": "e611a47ae6362c7dc86557db99593b9242ea4cf3e94169138c4b4a45208e48cd",
+    "bytes": 5373,
+    "mtime_ns": 1792243134981913808,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongLinkedHashSetTest.java": {
+    "sha256": "f33e703397f639a47228e450a2c587bcea47e9c5d0b347099d91a9c91fa047ec",
+    "bytes": 6410,
+    "mtime_ns": 1792243134765434969,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongLongLinkedHashMapTest.java": {
+    "sha256": "c6674d52066a686aca441c3a1ca72461c0e3481985a47f219d12dab2f1e56e6a",
+    "bytes": 10328,
+    "mtime_ns": 1792243135070249178,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongRankIndexSelfTest.java": {
+    "sha256": "63fd0c55d60419a6ca3669bc5f877357566f06072cfdad553e9824767836e3d1",
+    "bytes": 5842,
+    "mtime_ns": 1792243135208776597,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongRankIndexTest.java": {
+    "sha256": "b204714a64abb5a6e73c23cf91c1399096c7a2246a714d7bc783568ede131b39",
+    "bytes": 2218,
+    "mtime_ns": 1792243135164998809,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongSortedAlgebraSelfTest.java": {
+    "sha256": "03804c6d86d4591462390242145956660c9b477a83435d990ad5d418fe6d2efc",
+    "bytes": 15388,
+    "mtime_ns": 1792243135175913626,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongSortedAlgebraTest.java": {
+    "sha256": "c24537bf64defb7d7a114006722cd859b8daa1fd9c7528e51a70736d0607ad62",
+    "bytes": 371,
+    "mtime_ns": 1792243135273507923,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongSortedLateBindingSelfTest.java": {
+    "sha256": "08c2300967209a4bac3f010b882b4b549b8a263517adf745a245c081840721e1",
+    "bytes": 10385,
+    "mtime_ns": 1792243134982535483,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongSortedSnapshotSelfTest.java": {
+    "sha256": "21c566242b95e24ab50a3f3dc611203c2bb63e1bbaa663d5ccc783e7fcb10748",
+    "bytes": 9345,
+    "mtime_ns": 1792243135277524671,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3LongTreeSetTest.java": {
+    "sha256": "7c4a4ba25f54847f39391ca3ee44709a29b6dfd116405c6570bc7ce6d3e761bd",
+    "bytes": 16496,
+    "mtime_ns": 1792243871348226138,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3MapContractTest.java": {
+    "sha256": "9c94e112c9f40731ad4d05273605e6efc3f369f79f578c67cf2fed7445071cd2",
+    "bytes": 16280,
+    "mtime_ns": 1792243135165705541,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3MaskAllSelectionReceiverTest.java": {
+    "sha256": "dbc455b32e173b4930b7863f0433ecef78b502be3f0f617835b35549fa94b70e",
+    "bytes": 353,
+    "mtime_ns": 1792243135401116289,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3MaskDenseSelectionProof.java": {
+    "sha256": "2fde4bb73609bbd0e086b10c9371f69ad212aa7c961bb1f346c78d9ddb2127da",
+    "bytes": 5462,
+    "mtime_ns": 1792243135458467136,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3MaskNativeParityProof.java": {
+    "sha256": "11b5d661119a2a2027520f0b1ef3e77d5068e1ce79fd6a61f1f8348dc3c8d374",
+    "bytes": 1313,
+    "mtime_ns": 1792243135533077928,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3MaskWindowSparseContract.java": {
+    "sha256": "4972f1e06aecc9608a1d1fcb1d464a0057f8b9c4e7cfae958e4b01cddd1fd582",
+    "bytes": 5791,
+    "mtime_ns": 1792243135466332229,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3MutableFilteredViewsContract.java": {
+    "sha256": "042f476e027b877b717c9cb6a0877049a1c70ef8425a7fc65f61176f9c372781",
+    "bytes": 19509,
+    "mtime_ns": 1792243135596156660,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3MutableFilteredViewsTest.java": {
+    "sha256": "5c9eed13cdf8afc36d74fcf738ffe8cc1fc4724d3f273880df79cf6ac84d0e28",
+    "bytes": 451,
+    "mtime_ns": 1792243135600514531,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3NativeIndexRangeSelfTest.java": {
+    "sha256": "6350e1da0ca13de67a2406c73823e4297c8cc51c0c68c5e5a8973d0fb778b821",
+    "bytes": 9447,
+    "mtime_ns": 1792243135612224003,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3NativeIndexRangeTest.java": {
+    "sha256": "d427b506139f11b5c6a638f5436724f50b5795342d2f5b9bfc1b0ebb1c705f62",
+    "bytes": 395,
+    "mtime_ns": 1792243135759338281,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java": {
+    "sha256": "338d443ef01b118377940397b447b083af9a5a73c8bd8a001005b08efd5a9666",
+    "bytes": 9053,
+    "mtime_ns": 1792243135466985751,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ObjectIdentityTest.java": {
+    "sha256": "9d7a4f6d385ef013f868f5a1984f28e73537952eacc81f5854611ecaafc98746",
+    "bytes": 8814,
+    "mtime_ns": 1792243135467423118,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ObjectResidencyBorrowTest.java": {
+    "sha256": "04c8fab7bac66b214428f2cc80476e01d9d55c69a7ab5d0f2332b0b3947ff1f6",
+    "bytes": 5365,
+    "mtime_ns": 1792243135467849880,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ObjectResidencyRuntimePressureTest.java": {
+    "sha256": "bf05ea2b323a83f5c1569bc88d0d5417093df8d1e7f88c00f6831e27e276a4b5",
+    "bytes": 886,
+    "mtime_ns": 1792243135468218003,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ObjectResidencyTest.java": {
+    "sha256": "6ee2da4009928feb40d5854bfedb716c904e0d2b83ed92f9ad311bbb9bdb8240",
+    "bytes": 10032,
+    "mtime_ns": 1792243135468620048,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ObjectSlotIndexSelfTest.java": {
+    "sha256": "745156bdcd632c0d664dcc9f42f19f47879fd4cfca05ecd69da4e03b60fad049",
+    "bytes": 8304,
+    "mtime_ns": 1792243135685339172,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ObjectSlotIndexTest.java": {
+    "sha256": "eec9b203115a9896ebcc074926e4817b5ebcbdeab4e259c68d3c34b773b46ed0",
+    "bytes": 362,
+    "mtime_ns": 1792243135811101623,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ObjectStateBatch28SelfTest.java": {
+    "sha256": "0dc77f56bb4515a8e058e0ffd95a6647f8704a28dc1b49969e2f035312b76910",
+    "bytes": 6288,
+    "mtime_ns": 1792243135847465426,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ObjectStateSlots28SelfTest.java": {
+    "sha256": "d2e750f4b3102c4269038ebd78318efc68f721ead906522f225a915c62808c26",
+    "bytes": 17646,
+    "mtime_ns": 1792243135911339975,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3PrimitiveCollectionDifferentialTest.java": {
+    "sha256": "25b1899b492eb4b4830316f92a7d9d4eacacacd7fc496db145acd0be67991a1c",
+    "bytes": 7996,
+    "mtime_ns": 1792243135612759098,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java": {
+    "sha256": "3c2836df74ef09f844f845dbb7f0cd0d179787254d994fa98168d93f3c1e30d4",
+    "bytes": 19087,
+    "mtime_ns": 1792245159727289749,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ReadOnlyViewBoundaryTest.java": {
+    "sha256": "5dace1d4f7e86a98af7b817be6594063c63083a1b7f6f37ad47f192d74eae632",
+    "bytes": 618,
+    "mtime_ns": 1792245159727521046,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ReceivingRecoveryTest.java": {
+    "sha256": "a21de6be9297f6c4c97cb7e34b1636d35ee438cd1e5267cdbf30fec40da0ae19",
+    "bytes": 2841,
+    "mtime_ns": 1792243135613088343,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ResidencyStateMaskProof.java": {
+    "sha256": "7052168df353463174c88114f83df098791e8ebcabfd936cfa9c1032870bd86a",
+    "bytes": 11878,
+    "mtime_ns": 1792243135884856729,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ResidencyStateMaskTest.java": {
+    "sha256": "859345773db669a006cd45b792be2016f6d09fc8ff590e998f193f5d4a5c0d30",
+    "bytes": 356,
+    "mtime_ns": 1792243135958517224,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3SequenceContractTest.java": {
+    "sha256": "665e431f88c277545a2b49cfa58d964afb02583a558f7ef886a5e744e5343d72",
+    "bytes": 7172,
+    "mtime_ns": 1792243135760018534,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3SignalOrderContract.java": {
+    "sha256": "f603fc581b38e1b1f31ff484ce58c00f1fb73072ea5c3b8aa6a7e4ba82b3d4d2",
+    "bytes": 7084,
+    "mtime_ns": 1792243135946808693,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3SignalOrderJUnitTest.java": {
+    "sha256": "c3060de2f68af16bd4964c8ce303bfc33e82e838f1d7c6a4834a3ae9042f1ead",
+    "bytes": 422,
+    "mtime_ns": 1792243136074096527,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3SpanIndexSelfTest.java": {
+    "sha256": "38a577aaa1857878b095e2a89f8a7c60868f471ff3c125cbfb839b56e7842cf6",
+    "bytes": 7971,
+    "mtime_ns": 1792243136082051865,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3SpanIndexTest.java": {
+    "sha256": "fc92c4b6d1dc47519a6613ce1773331741ffd2e6deaf8dd97e35dc98a02b2cef",
+    "bytes": 461,
+    "mtime_ns": 1792243136136036536,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3StateMaskArraysSelfTest.java": {
+    "sha256": "7608a36e5f06d2c1595bc8f251a9734270e68eb7573de84277fb459d790821b0",
+    "bytes": 7089,
+    "mtime_ns": 1792243136134229901,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3StoredRepresentativeContract.java": {
+    "sha256": "fa59e9a722068963eed9146dbc4b9ead6dc53abde672e28bde5c178d9ea4360a",
+    "bytes": 13526,
+    "mtime_ns": 1792245159727803992,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3StoredRepresentativeTest.java": {
+    "sha256": "b948aca5ae6f14b80027429e6b820800927d3013bebb972fa92b712383af55f3",
+    "bytes": 375,
+    "mtime_ns": 1792243136205197411,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3TombstoneReuseSelfTest.java": {
+    "sha256": "14b75e79847792541a692be288846b05c23c3603053e33218b5938d1edbda654",
+    "bytes": 6832,
+    "mtime_ns": 1792243136278763308,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3TombstoneReuseTest.java": {
+    "sha256": "c1bf34d9cd29780e449867731d8289d190bfdd31fd8c0ac7af8c17e716960537",
+    "bytes": 398,
+    "mtime_ns": 1792243136285244902,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ZeroMaskArrayFastPathProof.java": {
+    "sha256": "edb173ca45a1d7b0194b95cdef00b1690307e43b8cb4bf0855d3b4e8377c1ffd",
+    "bytes": 9853,
+    "mtime_ns": 1792243136354834190,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ZeroMaskArrayFastPathTest.java": {
+    "sha256": "2235c5a6a917b4a1550bf98f3eb0b23bb96ad0f50bf295aee0253c85c92ed2b3",
+    "bytes": 432,
+    "mtime_ns": 1792243136468810584,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ZeroSlotCapacityContract.java": {
+    "sha256": "0b473cb13772f0cacbcb657ad944c2bd467edcc22d0917ff65bd454e387cfbc8",
+    "bytes": 12831,
+    "mtime_ns": 1792243136440251112,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/M3ZeroSlotCapacityTest.java": {
+    "sha256": "a33821a411b712f2fafada5c9453c60a61b86e6fcf2f072d87ff730dc471a2a7",
+    "bytes": 341,
+    "mtime_ns": 1792243136472789775,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/SegmentedLaneBulkContractTest.java": {
+    "sha256": "f2ea51cf92b35489ca0bc3c6555850ff9ceee45a1459eb0af06f19feaff810ce",
+    "bytes": 7117,
+    "mtime_ns": 1792243136281218930,
+    "mode": "0644"
+  },
+  "src/test/java/com/m3/collections/SegmentedPrimitiveStorageTest.java": {
+    "sha256": "b202adb68518e47c49ceddc4f21e52c7bb48c387b3f1ee08baceaf8a930eb44c",
+    "bytes": 6641,
+    "mtime_ns": 1792243136281552100,
+    "mode": "0644"
+  },
+  "src/test/native/m3_bitlane_jump_jni.c": {
+    "sha256": "6a81bde570bbef1ad25786e225667fd0918bfdde563356865e38255eaf1aab0c",
+    "bytes": 2919,
+    "mtime_ns": 1792243136554053013,
+    "mode": "0644"
+  },
+  "src/test/native/m3_mask_window_regions.c": {
+    "sha256": "ac09456844268b592475d9da1e6eee6f154e741c893167cf21d675010580deab",
+    "bytes": 3178,
+    "mtime_ns": 1792243136552680781,
+    "mode": "0644"
+  },
+  "synexia-donation.json": {
+    "sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
+    "bytes": 65725,
+    "mtime_ns": 1792243136355538449,
+    "mode": "0644"
+  }
+}

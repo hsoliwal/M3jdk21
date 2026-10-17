@@ -1,0 +1,260 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.m3.collections.qualification;
+
+import com.m3.collections.M3FilteredLists;
+import com.m3.collections.M3FilteredViews;
+import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.IdentityHashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.function.Predicate;
+
+/**
+ * Finite resource observations for the recorded VM and inputs, not a throughput gate.
+ * Thread allocation follows the existing M3CollectionCostProbe; identity-based field
+ * inspection follows M3NoRetainedStructuralEntryTest, using an explicit work array.
+ * Post-GC heap is process heap usage, not exact retained bytes of an individual owner.
+ */
+public final class M3FilteredViewResourceProbe {
+    private static final com.sun.management.ThreadMXBean BEAN = bean();
+    private static volatile Object ownerRoot;
+    private static volatile Object cursorRoot;
+    private static volatile long blackhole;
+
+    private M3FilteredViewResourceProbe() { }
+
+    private static final class Accept implements Predicate<Integer> {
+        long calls;
+        @Override public boolean test(Integer value) { calls++; return true; }
+    }
+
+    private record Fixture(Collection<Integer> view, List<Integer> raw, Accept predicate) { }
+    private record Reading(long checksum, long callbacks) { }
+
+    public static void main(String[] args) throws Exception {
+        if (args.length != 3) throw new IllegalArgumentException("family depth payload-size");
+        String family = args[0];
+        int depth = Integer.parseInt(args[1]);
+        int size = Integer.parseInt(args[2]);
+        if ((!family.equals("collection") && !family.equals("list")) || depth < 1 || size < 1) {
+            throw new IllegalArgumentException("finite positive collection/list case required");
+        }
+        System.out.println("diagnostic_only=true; thresholds=none; family=" + family
+                + "; depth=" + depth + "; payload_size=" + size);
+        System.out.println("runtime=" + System.getProperty("java.runtime.version")
+                + "; vm=" + System.getProperty("java.vm.name")
+                + "; arch=" + System.getProperty("os.arch"));
+        printClassBinding(M3FilteredViews.class);
+        printClassBinding(M3FilteredLists.class);
+        for (int warm = 0; warm < 3; warm++) read(fixture(family, 1, size));
+        long beforeHeap = heapAfterGc();
+        int samples = depth <= 64 ? 7 : 1;
+        long[] coldCpu = new long[samples], coldBytes = new long[samples];
+        Fixture held = null;
+        for (int sample = 0; sample < samples; sample++) {
+            List<Integer> raw = payload(size);
+            Accept predicate = new Accept();
+            long startBytes = allocated(), startCpu = cpu();
+            held = fixture(family, depth, raw, predicate);
+            coldCpu[sample] = cpu() - startCpu;
+            coldBytes[sample] = allocated() - startBytes;
+            ownerRoot = held;
+        }
+        if (held == null) throw new AssertionError("missing fixture");
+        System.out.println("construction_samples=" + samples
+                + "; wrapper_construction_cpu_ns_median=" + median(coldCpu)
+                + "; wrapper_construction_allocated_bytes_median=" + median(coldBytes));
+        long ownerHeap = heapAfterGc();
+        System.out.println("post_gc_process_heap_baseline_bytes=" + beforeHeap
+                + "; post_gc_process_heap_owner_bytes=" + ownerHeap
+                + "; observed_heap_delta_bytes=" + (ownerHeap - beforeHeap));
+        System.out.println("owner_graph=" + graph(held.view(), held.raw()));
+        try {
+            Iterator<Integer> cursor = held.view().iterator();
+            cursorRoot = cursor;
+            long cursorHeap = heapAfterGc();
+            System.out.println("post_gc_process_heap_owner_and_cursor_bytes=" + cursorHeap
+                    + "; observed_cursor_heap_delta_bytes=" + (cursorHeap - ownerHeap));
+            System.out.println("cursor_graph=" + graph(cursor, held.raw()));
+            cursorRoot = null;
+            long[] readCpu = new long[7], readBytes = new long[7];
+            for (int warm = 0; warm < 3; warm++) read(held);
+            Reading last = null;
+            for (int sample = 0; sample < readCpu.length; sample++) {
+                long startBytes = allocated(), startCpu = cpu();
+                last = read(held);
+                readCpu[sample] = cpu() - startCpu;
+                readBytes[sample] = allocated() - startBytes;
+            }
+            // List cursor creation locates physical index zero before its first delivered probe.
+            long expectedReadCallbacks = (long) depth * (family.equals("list") ? size + 1L : size);
+            if (last == null || last.callbacks() != expectedReadCallbacks
+                    || last.checksum() != ((long) size * (size - 1)) / 2) {
+                throw new AssertionError("iteration result/callback demand changed: " + last);
+            }
+            System.out.println("read_samples=7; read_cpu_ns_median=" + median(readCpu)
+                    + "; read_allocated_bytes_median=" + median(readBytes)
+                    + "; checksum=" + last.checksum() + "; callbacks=" + last.callbacks());
+            if (depth <= 64) {
+                held.predicate().calls = 0;
+                if (!held.view().contains(Integer.valueOf(0))) throw new AssertionError("missing member");
+                long expected = family.equals("collection") ? (long) depth * (depth + 1) / 2 : 2L * depth;
+                if (held.predicate().calls != expected) throw new AssertionError("membership demand changed");
+                System.out.println("membership_callbacks=" + held.predicate().calls);
+            } else {
+                System.out.println("deep_membership_measurement=excluded; reason=preserved_quadratic_callbacks");
+            }
+            System.out.println("result=PASS");
+        } catch (StackOverflowError expectedPredecessorWitness) {
+            System.out.println("result=STACK_OVERFLOW; location=known_owner_iterator_or_predicate_chain");
+        }
+        processMemory();
+        long processCpu = ManagementFactory.getOperatingSystemMXBean()
+                instanceof com.sun.management.OperatingSystemMXBean os ? os.getProcessCpuTime() : -1L;
+        System.out.println("process_cpu_ns=" + processCpu + "; negative_means_unavailable=true");
+        System.out.println("blackhole=" + blackhole);
+        ownerRoot = null;
+        cursorRoot = null;
+    }
+
+    private static List<Integer> payload(int size) {
+        List<Integer> raw = new ArrayList<>(size);
+        for (int index = 0; index < size; index++) raw.add(Integer.valueOf(index));
+        return raw;
+    }
+
+    private static Fixture fixture(String family, int depth, int size) {
+        return fixture(family, depth, payload(size), new Accept());
+    }
+
+    private static Fixture fixture(String family, int depth, List<Integer> raw, Accept predicate) {
+        Collection<Integer> view = raw;
+        if (family.equals("collection")) {
+            for (int index = 0; index < depth; index++) view = M3FilteredViews.filter(view, predicate);
+        } else {
+            List<Integer> list = raw;
+            for (int index = 0; index < depth; index++) list = M3FilteredLists.filtered(list, predicate);
+            view = list;
+        }
+        return new Fixture(view, raw, predicate);
+    }
+
+    private static Reading read(Fixture fixture) {
+        fixture.predicate().calls = 0;
+        long sum = 0;
+        for (Integer value : fixture.view()) sum += value.intValue();
+        blackhole = sum;
+        return new Reading(sum, fixture.predicate().calls);
+    }
+
+    private static String graph(Object start, Object backing) throws IllegalAccessException {
+        IdentityHashMap<Object, Boolean> seen = new IdentityHashMap<>();
+        ArrayList<Object> work = new ArrayList<>();
+        Map<String, Integer> counts = new TreeMap<>();
+        work.add(start);
+        long referenceArraySlots = 0;
+        boolean ownsBacking = false;
+        for (int index = 0; index < work.size(); index++) {
+            Object item = work.get(index);
+            if (seen.put(item, Boolean.TRUE) != null) continue;
+            ownsBacking |= item == backing;
+            Class<?> type = item.getClass();
+            String label = type.getName();
+            int dynamicSuffix = label.indexOf("$$Lambda");
+            if (dynamicSuffix >= 0) label = label.substring(0, dynamicSuffix) + "$$Lambda";
+            counts.merge(label, Integer.valueOf(1), Integer::sum);
+            if (type.isArray()) {
+                if (!type.getComponentType().isPrimitive()) {
+                    referenceArraySlots += Array.getLength(item);
+                    for (int slot = 0; slot < Array.getLength(item); slot++) {
+                        Object value = Array.get(item, slot);
+                        if (value != null) work.add(value);
+                    }
+                }
+                continue;
+            }
+            if (!(type.getName().startsWith("com.m3.collections.")
+                    || type.getName().startsWith("java.util.ArrayList")
+                    || type.getName().startsWith("java.util.function.Predicate$$Lambda"))) continue;
+            for (Class<?> owner = type; owner != null && owner != Object.class; owner = owner.getSuperclass()) {
+                for (Field field : owner.getDeclaredFields()) {
+                    if (Modifier.isStatic(field.getModifiers()) || field.getType().isPrimitive()) continue;
+                    if (!field.trySetAccessible()) throw new AssertionError("unopened retained field " + field);
+                    Object value = field.get(item);
+                    if (value != null) work.add(value);
+                }
+            }
+        }
+        return "objects=" + seen.size() + "; reference_array_slots=" + referenceArraySlots
+                + "; original_backing_reachable=" + ownsBacking + "; classes=" + counts;
+    }
+
+    private static void printClassBinding(Class<?> owner) throws Exception {
+        String resource = '/' + owner.getName().replace('.', '/') + ".class";
+        byte[] bytes;
+        try (var stream = owner.getResourceAsStream(resource)) {
+            if (stream == null) throw new IOException(resource);
+            bytes = stream.readAllBytes();
+        }
+        System.out.println("class_binding=" + owner.getName() + "; sha256="
+                + java.util.HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes))
+                + "; origin=" + owner.getProtectionDomain().getCodeSource().getLocation());
+    }
+
+    private static void processMemory() throws IOException {
+        for (String line : Files.readAllLines(Path.of("/proc/self/status"))) {
+            if (line.startsWith("VmRSS:") || line.startsWith("VmHWM:") || line.startsWith("VmPeak:")
+                    || line.startsWith("VmSize:") || line.startsWith("VmData:")) {
+                System.out.println("linux_process_memory=" + line.strip());
+            }
+        }
+    }
+
+    private static long heapAfterGc() {
+        System.gc();
+        System.gc();
+        return ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
+    }
+
+    private static com.sun.management.ThreadMXBean bean() {
+        if (!(ManagementFactory.getThreadMXBean() instanceof com.sun.management.ThreadMXBean bean)
+                || !bean.isThreadAllocatedMemorySupported() || !bean.isCurrentThreadCpuTimeSupported()) {
+            throw new IllegalStateException("resource measurement unavailable");
+        }
+        if (!bean.isThreadAllocatedMemoryEnabled()) bean.setThreadAllocatedMemoryEnabled(true);
+        if (!bean.isThreadCpuTimeEnabled()) bean.setThreadCpuTimeEnabled(true);
+        return bean;
+    }
+
+    private static long allocated() {
+        long value = BEAN.getCurrentThreadAllocatedBytes();
+        if (value < 0) throw new IllegalStateException("thread allocation unavailable");
+        return value;
+    }
+
+    private static long cpu() {
+        long value = BEAN.getCurrentThreadCpuTime();
+        if (value < 0) throw new IllegalStateException("thread CPU unavailable");
+        return value;
+    }
+
+    private static long median(long[] values) {
+        Arrays.sort(values);
+        return values[values.length / 2];
+    }
+}

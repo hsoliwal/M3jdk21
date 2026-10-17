@@ -1,0 +1,75 @@
+{
+  "schema": "M3_READONLY_ITERATIVE_RECEIVING_PROOF_V1",
+  "status": "PASS",
+  "source_built_runtime": "/tmp/m3-ast-product-build/images/jdk",
+  "received_root": "/workspace/scratch/13309be96b09/collections-work/received",
+  "sdk_dataset": "m3jdk21-generic-views",
+  "source_epoch": "Qualified successor output then generic SDK output",
+  "sources": {
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": "aa7614e7009b3f342f26339b5c4e8c5583d2642db0930ad34a4a3252fca28cd6",
+    "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0",
+    "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java": "46fb2cdf27829984581db5a6cdd6d2fb243cbf183742afafa5b2003d0ff5dce6"
+  },
+  "strict_compilation": "--release21 -proc:none -Xlint:all -Werror",
+  "runs": [
+    {
+      "argv": [
+        "/tmp/m3-ast-product-build/images/jdk/bin/java",
+        "-Xmx192m",
+        "-Xss256k",
+        "-cp",
+        "/workspace/scratch/13309be96b09/collections-work/views/generic-received-classes:/workspace/scratch/13309be96b09/collections-work/views/received-classes",
+        "com.m3.collections.M3DeepReadOnlyCollectionSelfTest"
+      ],
+      "exit_code": 0,
+      "output": "generic-received-depth-proof.log",
+      "output_sha256": "ccaf4bb0b42636d010c09ccedadc7922fcd0b67148f1a6d3b9b03e74d97fcfd6",
+      "matched_predecessor": null
+    },
+    {
+      "argv": [
+        "/tmp/m3-ast-product-build/images/jdk/bin/java",
+        "-Xmx192m",
+        "-Xss256k",
+        "-cp",
+        "/workspace/scratch/13309be96b09/collections-work/views/generic-received-classes:/workspace/scratch/13309be96b09/collections-work/views/received-classes",
+        "com.m3.collections.M3DeepReadOnlyCollectionSelfTest",
+        "--trace"
+      ],
+      "exit_code": 0,
+      "output": "generic-received-trace.log",
+      "output_sha256": "7a10a88ba35159ffdefa7de404e5ed70936dee7f3bc7b2c2336811d52c1d351a",
+      "matched_predecessor": "generic-before-trace.log"
+    },
+    {
+      "argv": [
+        "/tmp/m3-ast-product-build/images/jdk/bin/java",
+        "-Xmx192m",
+        "-Xss256k",
+        "-cp",
+        "/workspace/scratch/13309be96b09/collections-work/views/generic-received-classes:/workspace/scratch/13309be96b09/collections-work/views/received-classes",
+        "com.m3.collections.M3ReadOnlyViewBoundarySelfTest",
+        "--read-trace"
+      ],
+      "exit_code": 0,
+      "output": "generic-received-readonly-read-trace.log",
+      "output_sha256": "0014cf664c4d395f43df534318d33a92416011168d9690b08bfd52ba8a7ebfb2",
+      "matched_predecessor": "baseline-readonly-read-trace.log"
+    },
+    {
+      "argv": [
+        "/tmp/m3-ast-product-build/images/jdk/bin/java",
+        "-Xmx192m",
+        "-Xss256k",
+        "-cp",
+        "/workspace/scratch/13309be96b09/collections-work/views/generic-received-classes:/workspace/scratch/13309be96b09/collections-work/views/received-classes",
+        "PublicClosureAudit"
+      ],
+      "exit_code": 0,
+      "output": "generic-received-public-closure.log",
+      "output_sha256": "6add24dda3f2e5c7463c16b50787e6eed8e0e58f80c14067bb8ef3748d02ddf7",
+      "matched_predecessor": "baseline-public-closure.log"
+    }
+  ],
+  "bounded_proof": "Depth65536/Xss256k PASS84;18779-byte generic effect tape and2537-byte sorted/reversed/mixed-map tape identical; callable public descriptors identical. Whole-module final gate is independent."
+}

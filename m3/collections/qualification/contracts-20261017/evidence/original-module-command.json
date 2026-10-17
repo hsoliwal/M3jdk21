@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-DfailIfNoTests=true",
+    "-DargLine=-Xmx768m",
+    "-f",
+    "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/pom.xml",
+    "verify"
+  ],
+  "JAVA_HOME": "/tmp/m3-ast-product-build/images/jdk",
+  "exit_code": 1,
+  "elapsed_seconds": 20.983
+}

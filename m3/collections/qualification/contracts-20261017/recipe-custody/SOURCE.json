@@ -1,0 +1,28 @@
+{
+  "schema": "M3_COLLECTION_PUBLIC_RECIPE_SOURCE_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "72580cf231dc025965370933f099e914ddc407be",
+  "tree": "2984b3fec41659f1a6536b5032e80fb67fa701ea",
+  "parent": "11ac8a842ef832ceaed9365b7d70c71df7368432",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_readme_url": "https://github.com/hsoliwal/com.synexia/blob/72580cf231dc025965370933f099e914ddc407be/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/README.md",
+  "canonical_catalogue_url": "https://github.com/hsoliwal/com.synexia/blob/72580cf231dc025965370933f099e914ddc407be/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/README.md",
+  "canonical_full_baseline_index_url": "https://github.com/hsoliwal/com.synexia/blob/72580cf231dc025965370933f099e914ddc407be/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/partitions/baseline/source-index.tsv",
+  "canonical_final_postimage_index_url": "https://github.com/hsoliwal/com.synexia/blob/72580cf231dc025965370933f099e914ddc407be/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/partitions/final/source-index.tsv",
+  "source_owner_commit": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+  "source_copies": 80,
+  "source_copy_tree_sha256": "4bc26c21eca718976206fa5b0c30640e645c51cbb4f2b54861589ab5049bedcd",
+  "source_custody_manifest": "OWNER_CUSTODY.json",
+  "source_custody_manifest_sha256": "79472bd7e08fecfec88876fd8779eada50a9cca233cf3693c38ef7d5f4ecb204",
+  "target_repository": "hsoliwal/M3JDK21",
+  "target_baseline": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "included_datasets": [
+    "fixture",
+    "m3jdk21-collections-final"
+  ],
+  "product_target_paths": 16,
+  "metadata_delivery_dataset": "m3jdk21-collection-proof",
+  "runtime_dependency_added": false,
+  "full_index_mirrored": false,
+  "scope": "Exact qualified recipe source custody; authored scope metadata is separate from unchanged engine/harness bytes. Actual SDK replay and product runtime gates remain separately recorded."
+}

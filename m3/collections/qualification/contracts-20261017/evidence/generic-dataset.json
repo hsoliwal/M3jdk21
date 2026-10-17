@@ -1,0 +1,23 @@
+[
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+    "template": "/workspace/scratch/13309be96b09/collections-work/views/generic-candidate/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+    "before_sha256": "3d126240d30993c16a6c855a3f826c508d97b4b96c4d0c17ad77ef0dd9362bdb",
+    "after_sha256": "aa7614e7009b3f342f26339b5c4e8c5583d2642db0930ad34a4a3252fca28cd6",
+    "after_git_blob": "f020985c5a1d074895477e23f28dd20be3e4f9eb"
+  },
+  {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+    "template": "/workspace/scratch/13309be96b09/collections-work/views/generic-candidate/m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+    "before_sha256": "ABSENT",
+    "after_sha256": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0",
+    "after_git_blob": "f3c89e8a85e7e322ee8b3712ad8db91a69a66fac"
+  },
+  {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java",
+    "template": "/workspace/scratch/13309be96b09/collections-work/views/generic-candidate/m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java",
+    "before_sha256": "ABSENT",
+    "after_sha256": "46fb2cdf27829984581db5a6cdd6d2fb243cbf183742afafa5b2003d0ff5dce6",
+    "after_git_blob": "37a2e0fe50687df6917a0ac0f105d491b2446974"
+  }
+]

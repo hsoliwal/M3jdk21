@@ -1,0 +1,11 @@
+{
+  "schema": "M3_EXISTING_DFS_CATEGORY_REVIEW_V1",
+  "status": "PASS",
+  "canonical_revision": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+  "shape": "dfs",
+  "category": "graphs",
+  "owner_sources_manifest_sha256": "4d0ee6580b26b6219ccb29e2baaf1915adfdd4ecf7e30115cd561547e47c0d61",
+  "probe_sha256": "476173a8d48d5d293e2fe7ff6e0e88db609073f170f1011c2a7006eac1cd2f4b",
+  "review_output_sha256": "d522a545ce9233613547d54628ed8e4f4b7fe2255f4e5621fdb69a8a134b64f2",
+  "scope": "Category/reference-only discovery for explicit continuation stack; actual collection callback cost and equivalence require their own exact receiving proof."
+}

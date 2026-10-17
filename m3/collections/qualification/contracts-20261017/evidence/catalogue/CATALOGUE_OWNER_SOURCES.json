@@ -1,0 +1,62 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "revision": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomHashDatabaseRecipe.java",
+      "git_blob_sha1": "05d74cb1e3417642cb11a0128b74225cb876d326",
+      "sha256": "b2c9cf040058f93eb9795e55e634fe60c5624cb21ed104013ecf7608d7ca901f",
+      "bytes": 11314,
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atomdb/AtomCatalogCli.java",
+      "git_blob_sha1": "19532ea5b5d26c7bd1fa95044cbbd558da0971f3",
+      "sha256": "cb85a27ccb88706d7228ba1d881cf374c8cfb04ca2e4fd23599c6265f5f4803c",
+      "bytes": 8501,
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atomdb/AtomFingerprints.java",
+      "git_blob_sha1": "956390120c6e3426dbd7970b6e4707a7d804de0d",
+      "sha256": "525eb5a820cf3ea0235c9a6a1f324e7a737a7236e27ee9945d60d0e7da514470",
+      "bytes": 13825,
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atomdb/M3SemanticSkeletons.java",
+      "git_blob_sha1": "463ab3ca2355c33ac7ca33b67e6ca1372f487414",
+      "sha256": "49e70c136680b477172a3385d02a21046a364c89074f36fd9ec00a4e6963b8ad",
+      "bytes": 10224,
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealHash.java",
+      "git_blob_sha1": "8184e14c51f8dc288ae44879a7e0a69c0ff26c05",
+      "sha256": "17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a",
+      "bytes": 1859,
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atomdb/AtomCatalog.java",
+      "git_blob_sha1": "e3ffcb72514d6269b3f24e9aeaa21ed59b553975",
+      "sha256": "92ca529721c6ee3155b5d02dd387406320f4558a9b8d11f5eef9b59d3dfb78e4",
+      "bytes": 13315,
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atomdb/AtomCatalogSql.java",
+      "git_blob_sha1": "d21969e7579c437972cec6bf513794dc67e5959a",
+      "sha256": "68cbf55e0854af359aa2ebf9ffe628540aeb4ff858c9d0e598d46fd443c5e8cb",
+      "bytes": 9831,
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atomdb/JavaAtomCatalogScanner.java",
+      "git_blob_sha1": "f429930a00568e9429ed9ec3c919b1acc3587877",
+      "sha256": "d00cd11b754be96a3cb5c71fe25fc94ebacea990c6e316c8eecf72e538c7e5a9",
+      "bytes": 6639,
+      "license": "Apache-2.0"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "M3_SOURCE_INVENTORY_REVIEW_SCOPE_V1",
+  "repository": "hsoliwal/M3JDK21",
+  "revision": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "files": 248,
+  "bytes": 1625564,
+  "inventory_sha256": "e73370d33bada8b3e07c09a798a0db615773f4ab5c21015601958da091b98880",
+  "scope_counts": {
+    "collections_main_java": 116,
+    "collections_test_java": 106,
+    "collections_main_native": 9,
+    "collections_test_native": 2,
+    "arrays_main_java": 8,
+    "arrays_test_java": 2,
+    "arrays_main_native": 5
+  },
+  "fingerprinted_files": 248,
+  "reviewed_selected_files": 10,
+  "all_other_operations": "PENDING",
+  "full_runtime_family_promotion": false,
+  "fingerprint_identity": "Exact existing per-shard catalogue; candidate-only structural/logic/SimHash/LSEM/DESM signals are not behavioral proof.",
+  "review_status_scope": "10 existing files have named selected operations evaluated; all other operations, including unreviewed operations within those files, remain PENDING",
+  "new_regression_test_files": 10,
+  "final_postimage_files": 20,
+  "final_postimage_shards": 5
+}

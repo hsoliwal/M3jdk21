@@ -1,0 +1,66 @@
+{
+  "java": {
+    "run_root": "/tmp/m3-collections-final-java-958zv36l",
+    "receipt": "/tmp/m3-collections-final-java-958zv36l/evidence/RECEIPT.json",
+    "receipt_sha256": "2b7006d50315f013525a213dfa26d0f5439606cf1ffa1d86cbf18caa3714304d",
+    "test_totals": {
+      "tests": 214,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "suite_count": 61,
+    "source_tree_sha256": "e3b6d1426892baff4024828c1e0a527bf164e25b46d1fa317780b5abfdeb3ef1",
+    "class_output_tree_sha256": "8e6ea0869d7b51ad8b5090ad7dc4f7f0f949e41f2296280e0cecfb42b6b884cb",
+    "elapsed_seconds": 38.071,
+    "class_count": 441,
+    "xml_root": "/tmp/m3-collections-final-java-958zv36l/module/target/surefire-reports",
+    "class_root": "/tmp/m3-collections-final-java-958zv36l/module/target/classes"
+  },
+  "native": {
+    "run_root": "/tmp/m3-collections-final-native-dw7ir6h_",
+    "receipt": "/tmp/m3-collections-final-native-dw7ir6h_/evidence/RECEIPT.json",
+    "receipt_sha256": "6b1cc1fe1495825a256e240bfdb95b1500bb497ca28e41842206bd4c1aef620a",
+    "test_totals": {
+      "tests": 214,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "suite_count": 61,
+    "source_tree_sha256": "e3b6d1426892baff4024828c1e0a527bf164e25b46d1fa317780b5abfdeb3ef1",
+    "class_output_tree_sha256": "8e6ea0869d7b51ad8b5090ad7dc4f7f0f949e41f2296280e0cecfb42b6b884cb",
+    "elapsed_seconds": 38.946,
+    "class_count": 441,
+    "xml_root": "/tmp/m3-collections-final-native-dw7ir6h_/module/target/surefire-reports",
+    "class_root": "/tmp/m3-collections-final-native-dw7ir6h_/module/target/classes"
+  },
+  "api": {
+    "receipt": "/tmp/m3-collections-final-api-k2yvk75i/RECEIPT.json",
+    "receipt_sha256": "65b034ad5119e7995cc5e244543920e1d5a6913142cd8458efc83ddd1d3c9caa",
+    "source_units_accounted": 116,
+    "ordinary_top_level_declarations_compared": 114,
+    "expected_declaration_additions": {
+      "com.m3.collections.M3FilteredNavigableSet": [
+        "public E removeFirst();",
+        "public E removeLast();"
+      ]
+    },
+    "module_semantics_equal": true,
+    "public_callables_preserved_by_separate_closure_proof": true
+  },
+  "schema": "M3_ACCEPTED_COLLECTION_MODULE_GATES_V1",
+  "status": "PASS",
+  "all16_qualified_postimages_verified": true,
+  "all249_owning_inputs_bound": true,
+  "java_native_all441_class_bytes_equal": true,
+  "strict_original_pom_unchanged": true,
+  "native_libraries": 8,
+  "scope": "Owning collections module only on actual M3 JDK image; no whole-JDK claim.",
+  "excluded_shared_attempts": [
+    "collections-work/qualification/collection-module-final-java-history-stale-bytecode",
+    "collections-work/qualification/collection-module-final-native-history-stale-bytecode",
+    "/tmp/m3-collections-final-java-yvsgn0_g/evidence/REJECTED_ARCHIVE_RECEIPT.json"
+  ],
+  "historical_note": "Earlier shared generated output was repopulated with stale class/report artifacts; it is retained but not accepted. Both accepted gates ran clean verify in separate unique roots with exact source transport, class stability monitoring and actual class-load origins."
+}

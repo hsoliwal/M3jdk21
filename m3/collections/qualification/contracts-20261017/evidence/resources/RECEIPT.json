@@ -1,0 +1,564 @@
+{
+  "schema": "M3_FILTERED_VIEW_RESOURCE_OBSERVATIONS_V1",
+  "status": "OBSERVATIONS_RECORDED",
+  "source_built_m3_image": "/tmp/m3-ast-product-build/images/jdk",
+  "os": "Linux x86_64",
+  "baseline_commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "received_source_epoch": "final actual SDK output aa7614e7009b3f342f26339b5c4e8c5583d2642db0930ad34a4a3252fca28cd6",
+  "probe_source_path": "src/test/java/com/m3/collections/qualification/M3FilteredViewResourceProbe.java",
+  "probe_sha256": "640f8f47aac63643194eb15c006643771993f2ee714ab44733f29f67d0080161",
+  "measurements": {
+    "thread_cpu": "ThreadMXBean.getCurrentThreadCpuTime",
+    "allocation": "ThreadMXBean.getCurrentThreadAllocatedBytes; prepared raw values and predicate excluded from wrapper construction; read samples include the shared diagnostic Reading result record and measurement-call overhead",
+    "retained_structure": "Iterative identity graph walk of M3/JDK cursor/predicate and backing ArrayList fields; original backing identity tested by reference",
+    "heap": "MemoryMXBean heap used after two explicit System.gc calls; whole process observation, not an individual owner retained-byte measurement",
+    "process": "POSIX wait4 CPU and peak RSS, /proc/self/status current/peak fields, HotSpot NMT summary committed/reserved bytes",
+    "samples": "Three shallow warmups; seven shallow construction samples, one deep construction sample; three read warmups then seven read samples. Individual median values are diagnostic only."
+  },
+  "all_12_expected_outcomes_recorded": true,
+  "comparable_shallow_cases": [
+    {
+      "family": "collection",
+      "depth": 1,
+      "result_and_callback_demand_equal": true,
+      "baseline_read_allocated_bytes": 96,
+      "final_read_allocated_bytes": 96,
+      "baseline_constructor_allocated_bytes": 48,
+      "final_constructor_allocated_bytes": 48
+    },
+    {
+      "family": "collection",
+      "depth": 64,
+      "result_and_callback_demand_equal": true,
+      "baseline_read_allocated_bytes": 2112,
+      "final_read_allocated_bytes": 1056,
+      "baseline_constructor_allocated_bytes": 1560,
+      "final_constructor_allocated_bytes": 1560
+    },
+    {
+      "family": "list",
+      "depth": 1,
+      "result_and_callback_demand_equal": true,
+      "baseline_read_allocated_bytes": 144,
+      "final_read_allocated_bytes": 144,
+      "baseline_constructor_allocated_bytes": 48,
+      "final_constructor_allocated_bytes": 48
+    },
+    {
+      "family": "list",
+      "depth": 64,
+      "result_and_callback_demand_equal": true,
+      "baseline_read_allocated_bytes": 144,
+      "final_read_allocated_bytes": 144,
+      "baseline_constructor_allocated_bytes": 3072,
+      "final_constructor_allocated_bytes": 10760
+    }
+  ],
+  "observations": [
+    {
+      "epoch": "baseline",
+      "family": "collection",
+      "depth": 1,
+      "payload_size": 16,
+      "exit_code": 0,
+      "observed": "result=PASS",
+      "expected": "result=PASS",
+      "log": "baseline-collection-1.log.txt",
+      "log_sha256": "ee45842820840ba203df2dd0b428e4f21795209a69658a275ed2d39c08e6d688",
+      "rusage": {
+        "user_seconds": 0.243466,
+        "system_seconds": 0.024047,
+        "max_rss_kib": 46304,
+        "minor_faults": 7261,
+        "major_faults": 0
+      },
+      "wrapper_construction_cpu_ns_median": 821,
+      "wrapper_construction_allocated_bytes_median": 48,
+      "read_cpu_ns_median": 5859,
+      "read_allocated_bytes_median": 96,
+      "checksum": 120,
+      "callbacks": 16,
+      "membership_callbacks": 1,
+      "post_gc_process_heap_baseline_bytes": 2140712,
+      "post_gc_process_heap_owner_bytes": 2050672,
+      "observed_heap_delta_bytes": -90040,
+      "post_gc_process_heap_owner_and_cursor_bytes": 1944280,
+      "observed_cursor_heap_delta_bytes": -106392,
+      "process_cpu_ns": 250000000,
+      "nmt_total_reserved_bytes": 1623051882,
+      "nmt_total_committed_bytes": 62594666,
+      "owner_graph": "objects=20; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredViews$CollectionView=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1}",
+      "cursor_graph": "objects=21; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredViews$1=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1, java.util.ArrayList$Itr=1}"
+    },
+    {
+      "epoch": "baseline",
+      "family": "collection",
+      "depth": 64,
+      "payload_size": 16,
+      "exit_code": 0,
+      "observed": "result=PASS",
+      "expected": "result=PASS",
+      "log": "baseline-collection-64.log.txt",
+      "log_sha256": "9e33e32cffd6c2e75c4e461b20502f991a4f8a9e33e6094984181965c63d3381",
+      "rusage": {
+        "user_seconds": 0.288634,
+        "system_seconds": 0.035455,
+        "max_rss_kib": 47724,
+        "minor_faults": 7825,
+        "major_faults": 0
+      },
+      "wrapper_construction_cpu_ns_median": 17456,
+      "wrapper_construction_allocated_bytes_median": 1560,
+      "read_cpu_ns_median": 68232,
+      "read_allocated_bytes_median": 2112,
+      "checksum": 120,
+      "callbacks": 1024,
+      "membership_callbacks": 2080,
+      "post_gc_process_heap_baseline_bytes": 2140712,
+      "post_gc_process_heap_owner_bytes": 2052184,
+      "observed_heap_delta_bytes": -88528,
+      "post_gc_process_heap_owner_and_cursor_bytes": 1947808,
+      "observed_cursor_heap_delta_bytes": -104376,
+      "process_cpu_ns": 310000000,
+      "nmt_total_reserved_bytes": 1625111444,
+      "nmt_total_committed_bytes": 63712148,
+      "owner_graph": "objects=83; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredViews$CollectionView=64, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1}",
+      "cursor_graph": "objects=84; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredViews$1=64, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1, java.util.ArrayList$Itr=1}"
+    },
+    {
+      "epoch": "baseline",
+      "family": "collection",
+      "depth": 65536,
+      "payload_size": 1,
+      "exit_code": 0,
+      "observed": "result=STACK_OVERFLOW; location=known_owner_iterator_or_predicate_chain",
+      "expected": "result=STACK_OVERFLOW; location=known_owner_iterator_or_predicate_chain",
+      "log": "baseline-collection-65536.log.txt",
+      "log_sha256": "e0511dc168f14726571759dff797ef33a0a2841b7dcede7856bf241c21794f76",
+      "rusage": {
+        "user_seconds": 0.5883499999999999,
+        "system_seconds": 0.053274999999999996,
+        "max_rss_kib": 64232,
+        "minor_faults": 12796,
+        "major_faults": 1
+      },
+      "wrapper_construction_cpu_ns_median": 3682586,
+      "wrapper_construction_allocated_bytes_median": 1573120,
+      "post_gc_process_heap_baseline_bytes": 2140712,
+      "post_gc_process_heap_owner_bytes": 3623432,
+      "observed_heap_delta_bytes": 1482720,
+      "process_cpu_ns": 590000000,
+      "nmt_total_reserved_bytes": 1630906597,
+      "nmt_total_committed_bytes": 68659429,
+      "owner_graph": "objects=65540; reference_array_slots=1; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredViews$CollectionView=65536, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=1, java.util.ArrayList=1}"
+    },
+    {
+      "epoch": "baseline",
+      "family": "list",
+      "depth": 1,
+      "payload_size": 16,
+      "exit_code": 0,
+      "observed": "result=PASS",
+      "expected": "result=PASS",
+      "log": "baseline-list-1.log.txt",
+      "log_sha256": "344d4a447322da4d4827e6ee34855f2d9084ff1573cbc4c23094652cda1d0a6f",
+      "rusage": {
+        "user_seconds": 0.38942299999999996,
+        "system_seconds": 0.06787499999999999,
+        "max_rss_kib": 45600,
+        "minor_faults": 7249,
+        "major_faults": 0
+      },
+      "wrapper_construction_cpu_ns_median": 771,
+      "wrapper_construction_allocated_bytes_median": 48,
+      "read_cpu_ns_median": 15323,
+      "read_allocated_bytes_median": 144,
+      "checksum": 120,
+      "callbacks": 17,
+      "membership_callbacks": 2,
+      "post_gc_process_heap_baseline_bytes": 2140776,
+      "post_gc_process_heap_owner_bytes": 1869576,
+      "observed_heap_delta_bytes": -271200,
+      "post_gc_process_heap_owner_and_cursor_bytes": 1946360,
+      "observed_cursor_heap_delta_bytes": 76784,
+      "process_cpu_ns": 440000000,
+      "nmt_total_reserved_bytes": 1623031634,
+      "nmt_total_committed_bytes": 62639954,
+      "owner_graph": "objects=20; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1}",
+      "cursor_graph": "objects=22; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.M3FilteredLists$View$Cursor=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1, java.util.ArrayList$ListItr=1}"
+    },
+    {
+      "epoch": "baseline",
+      "family": "list",
+      "depth": 64,
+      "payload_size": 16,
+      "exit_code": 0,
+      "observed": "result=PASS",
+      "expected": "result=PASS",
+      "log": "baseline-list-64.log.txt",
+      "log_sha256": "6995cd61511a6178134ec616d02e2de73691152973daf2323720fa0ced490494",
+      "rusage": {
+        "user_seconds": 0.338804,
+        "system_seconds": 0.026445999999999997,
+        "max_rss_kib": 46260,
+        "minor_faults": 7284,
+        "major_faults": 0
+      },
+      "wrapper_construction_cpu_ns_median": 39780,
+      "wrapper_construction_allocated_bytes_median": 3072,
+      "read_cpu_ns_median": 45337,
+      "read_allocated_bytes_median": 144,
+      "checksum": 120,
+      "callbacks": 1088,
+      "membership_callbacks": 128,
+      "post_gc_process_heap_baseline_bytes": 2140776,
+      "post_gc_process_heap_owner_bytes": 2057520,
+      "observed_heap_delta_bytes": -83256,
+      "post_gc_process_heap_owner_and_cursor_bytes": 2133752,
+      "observed_cursor_heap_delta_bytes": 76232,
+      "process_cpu_ns": 350000000,
+      "nmt_total_reserved_bytes": 1623115030,
+      "nmt_total_committed_bytes": 62723350,
+      "owner_graph": "objects=83; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.M3FilteredLists$View$$Lambda=63, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1}",
+      "cursor_graph": "objects=85; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.M3FilteredLists$View$$Lambda=63, com.m3.collections.M3FilteredLists$View$Cursor=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1, java.util.ArrayList$ListItr=1}"
+    },
+    {
+      "epoch": "baseline",
+      "family": "list",
+      "depth": 65536,
+      "payload_size": 1,
+      "exit_code": 0,
+      "observed": "result=STACK_OVERFLOW; location=known_owner_iterator_or_predicate_chain",
+      "expected": "result=STACK_OVERFLOW; location=known_owner_iterator_or_predicate_chain",
+      "log": "baseline-list-65536.log.txt",
+      "log_sha256": "5bdc47d5417e3f039d98de07d326c0e429a9a9940b2470a8a1151eeb0e9968da",
+      "rusage": {
+        "user_seconds": 0.614391,
+        "system_seconds": 0.04015,
+        "max_rss_kib": 66232,
+        "minor_faults": 13531,
+        "major_faults": 0
+      },
+      "wrapper_construction_cpu_ns_median": 7799627,
+      "wrapper_construction_allocated_bytes_median": 3175216,
+      "post_gc_process_heap_baseline_bytes": 2140784,
+      "post_gc_process_heap_owner_bytes": 3628936,
+      "observed_heap_delta_bytes": 1488152,
+      "process_cpu_ns": 630000000,
+      "nmt_total_reserved_bytes": 1631689176,
+      "nmt_total_committed_bytes": 69429720,
+      "owner_graph": "objects=65540; reference_array_slots=1; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.M3FilteredLists$View$$Lambda=65535, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=1, java.util.ArrayList=1}"
+    },
+    {
+      "epoch": "final",
+      "family": "collection",
+      "depth": 1,
+      "payload_size": 16,
+      "exit_code": 0,
+      "observed": "result=PASS",
+      "expected": "result=PASS",
+      "log": "final-collection-1.log.txt",
+      "log_sha256": "8d988a89b3d478843d1e9e5c1f5227e5077df74337b628a7ef970cbb003024a9",
+      "rusage": {
+        "user_seconds": 0.24500899999999998,
+        "system_seconds": 0.025154,
+        "max_rss_kib": 46004,
+        "minor_faults": 7293,
+        "major_faults": 0
+      },
+      "wrapper_construction_cpu_ns_median": 1232,
+      "wrapper_construction_allocated_bytes_median": 48,
+      "read_cpu_ns_median": 6299,
+      "read_allocated_bytes_median": 96,
+      "checksum": 120,
+      "callbacks": 16,
+      "membership_callbacks": 1,
+      "post_gc_process_heap_baseline_bytes": 2141904,
+      "post_gc_process_heap_owner_bytes": 2051608,
+      "observed_heap_delta_bytes": -90296,
+      "post_gc_process_heap_owner_and_cursor_bytes": 1945216,
+      "observed_cursor_heap_delta_bytes": -106392,
+      "process_cpu_ns": 260000000,
+      "nmt_total_reserved_bytes": 1623063789,
+      "nmt_total_committed_bytes": 62672109,
+      "owner_graph": "objects=20; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredViews$CollectionView=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1}",
+      "cursor_graph": "objects=21; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredViews$1=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1, java.util.ArrayList$Itr=1}"
+    },
+    {
+      "epoch": "final",
+      "family": "collection",
+      "depth": 64,
+      "payload_size": 16,
+      "exit_code": 0,
+      "observed": "result=PASS",
+      "expected": "result=PASS",
+      "log": "final-collection-64.log.txt",
+      "log_sha256": "20f32f41ed33f1b37062ee72e008ec5e02e55c161f3d925ec28cc8518655a285",
+      "rusage": {
+        "user_seconds": 0.255174,
+        "system_seconds": 0.02477,
+        "max_rss_kib": 46036,
+        "minor_faults": 7305,
+        "major_faults": 0
+      },
+      "wrapper_construction_cpu_ns_median": 8463,
+      "wrapper_construction_allocated_bytes_median": 1560,
+      "read_cpu_ns_median": 98977,
+      "read_allocated_bytes_median": 1056,
+      "checksum": 120,
+      "callbacks": 1024,
+      "membership_callbacks": 2080,
+      "post_gc_process_heap_baseline_bytes": 2141904,
+      "post_gc_process_heap_owner_bytes": 1872216,
+      "observed_heap_delta_bytes": -269688,
+      "post_gc_process_heap_owner_and_cursor_bytes": 2129248,
+      "observed_cursor_heap_delta_bytes": 257032,
+      "process_cpu_ns": 270000000,
+      "nmt_total_reserved_bytes": 1623067904,
+      "nmt_total_committed_bytes": 62676224,
+      "owner_graph": "objects=83; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredViews$CollectionView=64, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1}",
+      "cursor_graph": "objects=24; reference_array_slots=89; original_backing_reachable=true; classes={[Ljava.lang.Object;=2, com.m3.collections.M3FilteredViews$1=1, com.m3.collections.M3FilteredViews$CollectionView$$Lambda=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=2, java.util.ArrayList$Itr=1}"
+    },
+    {
+      "epoch": "final",
+      "family": "collection",
+      "depth": 65536,
+      "payload_size": 1,
+      "exit_code": 0,
+      "observed": "result=PASS",
+      "expected": "result=PASS",
+      "log": "final-collection-65536.log.txt",
+      "log_sha256": "43f1d41050e1c6a9f05fdbd7411f4029488f89410a62f7f55c8a202af876cdef",
+      "rusage": {
+        "user_seconds": 0.51759,
+        "system_seconds": 0.038783,
+        "max_rss_kib": 63212,
+        "minor_faults": 12512,
+        "major_faults": 0
+      },
+      "wrapper_construction_cpu_ns_median": 2598497,
+      "wrapper_construction_allocated_bytes_median": 1573176,
+      "read_cpu_ns_median": 777724,
+      "read_allocated_bytes_median": 854208,
+      "checksum": 0,
+      "callbacks": 65536,
+      "post_gc_process_heap_baseline_bytes": 2141904,
+      "post_gc_process_heap_owner_bytes": 3443520,
+      "observed_heap_delta_bytes": 1301616,
+      "post_gc_process_heap_owner_and_cursor_bytes": 3861096,
+      "observed_cursor_heap_delta_bytes": 417576,
+      "process_cpu_ns": 530000000,
+      "nmt_total_reserved_bytes": 1631059115,
+      "nmt_total_committed_bytes": 68738219,
+      "owner_graph": "objects=65540; reference_array_slots=1; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredViews$CollectionView=65536, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=1, java.util.ArrayList=1}",
+      "cursor_graph": "objects=9; reference_array_slots=71141; original_backing_reachable=true; classes={[Ljava.lang.Object;=2, com.m3.collections.M3FilteredViews$1=1, com.m3.collections.M3FilteredViews$CollectionView$$Lambda=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=1, java.util.ArrayList=2, java.util.ArrayList$Itr=1}"
+    },
+    {
+      "epoch": "final",
+      "family": "list",
+      "depth": 1,
+      "payload_size": 16,
+      "exit_code": 0,
+      "observed": "result=PASS",
+      "expected": "result=PASS",
+      "log": "final-list-1.log.txt",
+      "log_sha256": "2b1ae625004fe3ce260971c11ae7f8bff8e27f49be5b8aed1cfc3b40c9cc202b",
+      "rusage": {
+        "user_seconds": 0.219239,
+        "system_seconds": 0.02865,
+        "max_rss_kib": 46048,
+        "minor_faults": 7281,
+        "major_faults": 0
+      },
+      "wrapper_construction_cpu_ns_median": 731,
+      "wrapper_construction_allocated_bytes_median": 48,
+      "read_cpu_ns_median": 10666,
+      "read_allocated_bytes_median": 144,
+      "checksum": 120,
+      "callbacks": 17,
+      "membership_callbacks": 2,
+      "post_gc_process_heap_baseline_bytes": 2140752,
+      "post_gc_process_heap_owner_bytes": 2050456,
+      "observed_heap_delta_bytes": -90296,
+      "post_gc_process_heap_owner_and_cursor_bytes": 1946336,
+      "observed_cursor_heap_delta_bytes": -104120,
+      "process_cpu_ns": 230000000,
+      "nmt_total_reserved_bytes": 1623063441,
+      "nmt_total_committed_bytes": 62671761,
+      "owner_graph": "objects=20; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1}",
+      "cursor_graph": "objects=22; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.M3FilteredLists$View$Cursor=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1, java.util.ArrayList$ListItr=1}"
+    },
+    {
+      "epoch": "final",
+      "family": "list",
+      "depth": 64,
+      "payload_size": 16,
+      "exit_code": 0,
+      "observed": "result=PASS",
+      "expected": "result=PASS",
+      "log": "final-list-64.log.txt",
+      "log_sha256": "5a0218df78616f762d8ac587885bdbd1e0a73a8a5f14ab904495aa0cddd56e01",
+      "rusage": {
+        "user_seconds": 0.242812,
+        "system_seconds": 0.0031769999999999997,
+        "max_rss_kib": 46016,
+        "minor_faults": 7304,
+        "major_faults": 0
+      },
+      "wrapper_construction_cpu_ns_median": 51766,
+      "wrapper_construction_allocated_bytes_median": 10760,
+      "read_cpu_ns_median": 119608,
+      "read_allocated_bytes_median": 144,
+      "checksum": 120,
+      "callbacks": 1088,
+      "membership_callbacks": 128,
+      "post_gc_process_heap_baseline_bytes": 2140752,
+      "post_gc_process_heap_owner_bytes": 2056400,
+      "observed_heap_delta_bytes": -84352,
+      "post_gc_process_heap_owner_and_cursor_bytes": 1956288,
+      "observed_cursor_heap_delta_bytes": -100112,
+      "process_cpu_ns": 230000000,
+      "nmt_total_reserved_bytes": 1623079895,
+      "nmt_total_committed_bytes": 62688215,
+      "owner_graph": "objects=148; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.M3FilteredViews$FilterNode=127, com.m3.collections.M3FilteredViews$OrderedPredicate=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1}",
+      "cursor_graph": "objects=150; reference_array_slots=16; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.M3FilteredLists$View$Cursor=1, com.m3.collections.M3FilteredViews$FilterNode=127, com.m3.collections.M3FilteredViews$OrderedPredicate=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=16, java.util.ArrayList=1, java.util.ArrayList$ListItr=1}"
+    },
+    {
+      "epoch": "final",
+      "family": "list",
+      "depth": 65536,
+      "payload_size": 1,
+      "exit_code": 0,
+      "observed": "result=PASS",
+      "expected": "result=PASS",
+      "log": "final-list-65536.log.txt",
+      "log_sha256": "f36d542f598eb62895730f17aad5c31a208b13a4df2d3a151b19f518d9ecc653",
+      "rusage": {
+        "user_seconds": 0.8031929999999999,
+        "system_seconds": 0.094903,
+        "max_rss_kib": 75424,
+        "minor_faults": 17184,
+        "major_faults": 0
+      },
+      "wrapper_construction_cpu_ns_median": 9524947,
+      "wrapper_construction_allocated_bytes_median": 21510576,
+      "read_cpu_ns_median": 390800,
+      "read_allocated_bytes_median": 144,
+      "checksum": 0,
+      "callbacks": 131072,
+      "post_gc_process_heap_baseline_bytes": 2140760,
+      "post_gc_process_heap_owner_bytes": 6064296,
+      "observed_heap_delta_bytes": 3923536,
+      "post_gc_process_heap_owner_and_cursor_bytes": 6788400,
+      "observed_cursor_heap_delta_bytes": 724104,
+      "process_cpu_ns": 880000000,
+      "nmt_total_reserved_bytes": 1632516446,
+      "nmt_total_committed_bytes": 71190878,
+      "owner_graph": "objects=131077; reference_array_slots=1; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.M3FilteredViews$FilterNode=131071, com.m3.collections.M3FilteredViews$OrderedPredicate=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=1, java.util.ArrayList=1}",
+      "cursor_graph": "objects=131079; reference_array_slots=1; original_backing_reachable=true; classes={[Ljava.lang.Object;=1, com.m3.collections.M3FilteredLists$View=1, com.m3.collections.M3FilteredLists$View$Cursor=1, com.m3.collections.M3FilteredViews$FilterNode=131071, com.m3.collections.M3FilteredViews$OrderedPredicate=1, com.m3.collections.qualification.M3FilteredViewResourceProbe$Accept=1, java.lang.Integer=1, java.util.ArrayList=1, java.util.ArrayList$ListItr=1}"
+    }
+  ],
+  "resource_tradeoffs": [
+    "Depth64 generic owner construction remains1560 measured bytes; traversal allocation is2112 baseline vs1056 final bytes in this run. Depth1 traversal allocation is unchanged96 bytes.",
+    "Depth64 List balanced composition increases measured construction allocation3072->10760 bytes and retains127 FilterNode objects instead of63 recursive lambda objects. It bounds recursion and preserves1088 read/128 membership callbacks.",
+    "Depth65536 generic final traversal records65536 predicate calls and854208 allocated bytes; List final traversal records131072 calls and144 allocated bytes. Both predecessors overflow on the recorded256KiB stack, so no deep throughput ratio is valid.",
+    "Depth65536 final process peak RSS was63212KiB for Collection and75424KiB for List; these include VM, observer graph walk and NMT overhead. They are not component-only memory sizes."
+  ],
+  "limits": [
+    "Finite diagnostic observations do not establish statistically controlled throughput rankings or universal memory savings. No time or memory threshold is used as a correctness gate.",
+    "Small whole-process post-GC heap differences include class initialization, compilation and runtime garbage collection; negative shallow deltas are retained as observations and never interpreted as negative owner size.",
+    "NMT excludes allocations outside its tracking scope. These pure Java wrapper runs invoke no new JNI implementation and do not replace the independent JNI integration gate.",
+    "Deep membership cost is deliberately not repeated: existing depth proof and exact callback tapes retain the original quadratic visibility demand.",
+    "The first probe attempt used optional ProcessHandle.Info CPU data and was rejected when it was unavailable; its fixture/log disposition is retained separately. No product source changed."
+  ],
+  "existing_pattern_lineage": [
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionCostProbe.java",
+      "commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+      "reuse": "Thread allocation/MXBean support and finite sample diagnostic discipline",
+      "sha256": "c3b7fe8f9b10dd1607af7b5da7b657138934a1b5cf0d449960c50c2a219d35a8",
+      "git_blob": "13c39fb6ac06b43d2bd88b66759cfebc5b197e1d"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java",
+      "commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+      "reuse": "Retained-object identity and field traversal, converted to an explicit work array for this deep observer",
+      "sha256": "338d443ef01b118377940397b447b083af9a5a73c8bd8a001005b08efd5a9666",
+      "git_blob": "9e64f4c57ab840b0da744bcff43b9f703fe033f8"
+    }
+  ],
+  "files": {
+    "baseline-collection-1.log.txt": {
+      "sha256": "ee45842820840ba203df2dd0b428e4f21795209a69658a275ed2d39c08e6d688",
+      "bytes": 5813
+    },
+    "baseline-collection-64.log.txt": {
+      "sha256": "9e33e32cffd6c2e75c4e461b20502f991a4f8a9e33e6094984181965c63d3381",
+      "bytes": 5828
+    },
+    "baseline-collection-65536.log.txt": {
+      "sha256": "e0511dc168f14726571759dff797ef33a0a2841b7dcede7856bf241c21794f76",
+      "bytes": 5377
+    },
+    "baseline-compile.log.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "baseline-list-1.log.txt": {
+      "sha256": "344d4a447322da4d4827e6ee34855f2d9084ff1573cbc4c23094652cda1d0a6f",
+      "bytes": 5853
+    },
+    "baseline-list-64.log.txt": {
+      "sha256": "6995cd61511a6178134ec616d02e2de73691152973daf2323720fa0ced490494",
+      "bytes": 5966
+    },
+    "baseline-list-65536.log.txt": {
+      "sha256": "5bdc47d5417e3f039d98de07d326c0e429a9a9940b2470a8a1151eeb0e9968da",
+      "bytes": 5408
+    },
+    "commands.json": {
+      "sha256": "4adce7a2b6974f146e653e295f0a96ae0046f44208e3709f30a4a3b18f702734",
+      "bytes": 14863
+    },
+    "compile-command.json": {
+      "sha256": "c68235c3794cd17bcd077d62a0a345d9018d3e7b815868eb9502b0e8f8d5e5a2",
+      "bytes": 696
+    },
+    "compile.log.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "final-collection-1.log.txt": {
+      "sha256": "8d988a89b3d478843d1e9e5c1f5227e5077df74337b628a7ef970cbb003024a9",
+      "bytes": 5807
+    },
+    "final-collection-64.log.txt": {
+      "sha256": "20f32f41ed33f1b37062ee72e008ec5e02e55c161f3d925ec28cc8518655a285",
+      "bytes": 5880
+    },
+    "final-collection-65536.log.txt": {
+      "sha256": "43f1d41050e1c6a9f05fdbd7411f4029488f89410a62f7f55c8a202af876cdef",
+      "bytes": 5988
+    },
+    "final-compile.log.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "final-list-1.log.txt": {
+      "sha256": "2b1ae625004fe3ce260971c11ae7f8bff8e27f49be5b8aed1cfc3b40c9cc202b",
+      "bytes": 5849
+    },
+    "final-list-64.log.txt": {
+      "sha256": "5a0218df78616f762d8ac587885bdbd1e0a73a8a5f14ab904495aa0cddd56e01",
+      "bytes": 6074
+    },
+    "final-list-65536.log.txt": {
+      "sha256": "f36d542f598eb62895730f17aad5c31a208b13a4df2d3a151b19f518d9ecc653",
+      "bytes": 6143
+    },
+    "owner-compile-commands.json": {
+      "sha256": "35f6c3ee4cb1b1b438e855370decb1da3ef5e5c234541c49e2bc4331ded5d82e",
+      "bytes": 3499
+    }
+  }
+}

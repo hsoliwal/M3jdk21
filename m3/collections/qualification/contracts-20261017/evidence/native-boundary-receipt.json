@@ -1,0 +1,321 @@
+{
+  "schema": "M3_COLLECTIONS_EXISTING_JNI_BOUNDARY_V1",
+  "status": "PASS",
+  "created_utc": "2026-10-17T13:41:17.459256+00:00",
+  "receiving_root": "/workspace/scratch/13309be96b09/collections-work/received",
+  "scope": "Integration evidence only; no collection production Java or native implementation changed by this witness.",
+  "witness": {
+    "path": "/workspace/scratch/13309be96b09/collections-work/arrays/M3NativeBoundaryIntegration.java",
+    "bytes": 15817,
+    "sha256": "dd35e571d4a9f513c4562d63a55d8b71038182effc3bd099d411733ea39a5e0c"
+  },
+  "received_java_owners": [
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "bytes": 12568,
+      "sha256": "af78b910c1639030286023696da693890be5163cd0ffe6befef68748ff9450bc"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "bytes": 5924,
+      "sha256": "dfaaf7b0d0c4f46657474eadb6f216dd68e920e327e153a0242ffe7ae6efbd9c"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "bytes": 13626,
+      "sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "bytes": 5865,
+      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java",
+      "bytes": 11259,
+      "sha256": "fcb1575f5366bba814870456acdf38379325f631cde86a18ae9541588e500dfc"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java",
+      "bytes": 2195,
+      "sha256": "a199d9601ca4c36d8dbe3d1b95a8dd7da49d5f22a15ed29a7112665a38288c82"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java",
+      "bytes": 967,
+      "sha256": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java",
+      "bytes": 10297,
+      "sha256": "08ea68e5ec274e0229f2a91d91a00b9aa66004e73b474ea67b602c63234d8167"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3BitLane28.java",
+      "bytes": 11179,
+      "sha256": "86f1f600aac3583925b26eb857811255e2a997f8415d6edd65841cb61554c3b6"
+    }
+  ],
+  "native_sources": [
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 11283,
+      "sha256": "59b1bb47f2df09f1455e4ce2160becbeefd6da877ecddca4ad245a286d14fa48"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "bytes": 5126,
+      "sha256": "ddf23e3dab10bc2315ca4a8def699b0ee29ed3c8f457b7a13b7ab93cc1ddbff3"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/native/collections/m3_index_path_masks.c",
+      "bytes": 5772,
+      "sha256": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "bytes": 3458,
+      "sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c",
+      "bytes": 2278,
+      "sha256": "50c741073d6ef0b4efbd4a90c1f336f42945fa3bcd5824455f213f7509a52388"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/native/collections/m3_residency_state_mask.c",
+      "bytes": 4443,
+      "sha256": "07076627c4cdca856ead90d400c467d7259b65a7970dfbea114ffd66a9bb54e4"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+      "bytes": 3052,
+      "sha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/native/collections/m3_span_index_jni.c",
+      "bytes": 2898,
+      "sha256": "f33781ca270dda25553986da350d4d5fc3808c483363c93a7bad64717effaf3c"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/native/collections/segmented_bit_lane.c",
+      "bytes": 3458,
+      "sha256": "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210"
+    }
+  ],
+  "libraries": [
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3_collections_address.so",
+      "bytes": 43224,
+      "sha256": "4d47382be4bf144d5c57a545cc87169ca6220b3028199e78ab18ff8e10454ad3"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3_collections_mask.so",
+      "bytes": 120352,
+      "sha256": "f879fb45cf9e92763b9af52ce8391cda384d62f9a02a7d96634e31194830b228"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3_collections_pathmask.so",
+      "bytes": 54224,
+      "sha256": "44c282ad0309e4c8949aaefa425a7e74dc9462e11fe26a7a2555f509e52242ad"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3_collections_span.so",
+      "bytes": 43400,
+      "sha256": "821a9f2a1cec4f5259817aa9ba63b0343da353d313689866f55529fc812e578a"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3_residency_state_mask.so",
+      "bytes": 56496,
+      "sha256": "df28063f7519bf0305a2a78001f27b72ad9f5227bd1b094c4a38e75e4beeaed1"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3rankbatch.so",
+      "bytes": 40976,
+      "sha256": "b095f4a57fb2c399235c1d5fd2e627eebc36be847a352dfd55e7c31dbb6a15a2"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3signalorder.so",
+      "bytes": 44576,
+      "sha256": "8739eb719864a0b38d217f5b1fd046361aa8cd410ddceb5caa3cc5fffad16578"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libsegmented_bits.so",
+      "bytes": 43312,
+      "sha256": "ceccec13833e790111d8a60f6d7e23a140d90ef6f5d5f349cced85e867dd8c16"
+    }
+  ],
+  "generated_headers": [
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "bytes": 1639,
+      "sha256": "6ca7cb8d74a1c8c5c84988d047eab18fc7c8d39fab82417a486c5b167313f17f",
+      "matches_native_build_header": true
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/headers/com_m3_collections_M3IndexMaskWindow.h",
+      "bytes": 709,
+      "sha256": "c9d17289167e935907fcf340f33a17e2532caf22b12f4b9d714efbb6cddc0af9",
+      "matches_native_build_header": true
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/headers/com_m3_collections_M3IndexPathMasks.h",
+      "bytes": 726,
+      "sha256": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
+      "matches_native_build_header": true
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/headers/com_m3_collections_M3LongAddressKernel.h",
+      "bytes": 592,
+      "sha256": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7",
+      "matches_native_build_header": true
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/headers/com_m3_collections_M3ResidencyStateMaskIndex.h",
+      "bytes": 620,
+      "sha256": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff",
+      "matches_native_build_header": true
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/headers/com_m3_collections_M3LongRankBatchNative.h",
+      "bytes": 716,
+      "sha256": "d1b1b66ab80343d0ac9674334c2facf4c6e371200f463db2100ae6b73c7bc641",
+      "matches_native_build_header": true
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/headers/com_m3_collections_M3SignalOrderNative.h",
+      "bytes": 543,
+      "sha256": "9aa514761c1a67d298c0cf463db64cbfde1f380951eadf30c8d664b3a1a15c96",
+      "matches_native_build_header": true
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/headers/com_m3_collections_M3SpanIndex.h",
+      "bytes": 534,
+      "sha256": "97f7008debc3cb89057b4ca7be9f4fcbc9af8a5e823bc97e2c008cb243ad73cf",
+      "matches_native_build_header": true
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/headers/com_m3_collections_M3BitLane28.h",
+      "bytes": 522,
+      "sha256": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1",
+      "matches_native_build_header": true
+    }
+  ],
+  "native_build_commands": {
+    "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/commands.json",
+    "bytes": 27423,
+    "sha256": "281503f5ce3683f8d2a3a02b8083d823f404a7f848b77751f52a1d77cfaaf479"
+  },
+  "runtime_release": {
+    "path": "/tmp/m3-ast-product-build/images/jdk/release",
+    "bytes": 1223,
+    "sha256": "5a3d73c8957e7fcb0da466afc0be260adeaddbf8bb04ad82ebb562710c2989de"
+  },
+  "runtime_modules": {
+    "path": "/tmp/m3-ast-product-build/images/jdk/lib/modules",
+    "bytes": 142907690,
+    "sha256": "e7a2827ebfcb2f1fb474db3a8e4e4bc058ffe5f5dea5f9701803669101b28b8b"
+  },
+  "runs": [
+    {
+      "label": "compile-received-owners",
+      "argv": [
+        "/tmp/m3-ast-product-build/images/jdk/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-h",
+        "/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/headers",
+        "-cp",
+        "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/classes",
+        "-d",
+        "/workspace/scratch/13309be96b09/collections-work/arrays/native-boundary-classes",
+        "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+        "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+        "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+        "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java",
+        "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java",
+        "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java",
+        "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java",
+        "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/src/main/java/com/m3/collections/M3BitLane28.java",
+        "/workspace/scratch/13309be96b09/collections-work/arrays/M3NativeBoundaryIntegration.java"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.570868,
+      "log": "compile-received-owners.log",
+      "output": ""
+    },
+    {
+      "label": "native-required",
+      "argv": [
+        "/tmp/m3-ast-product-build/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "-Djava.library.path=/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib",
+        "-cp",
+        "/workspace/scratch/13309be96b09/collections-work/arrays/native-boundary-classes:/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/classes",
+        "com.m3.collections.M3NativeBoundaryIntegration",
+        "native"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.153031,
+      "log": "native-required.log",
+      "output": "M3_NATIVE_BOUNDARY_INTEGRATION_PASS checks=577 libraries=8 owners=9 required=true"
+    },
+    {
+      "label": "native-required-interpreter",
+      "argv": [
+        "/tmp/m3-ast-product-build/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "-Xint",
+        "-Djava.library.path=/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib",
+        "-cp",
+        "/workspace/scratch/13309be96b09/collections-work/arrays/native-boundary-classes:/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/classes",
+        "com.m3.collections.M3NativeBoundaryIntegration",
+        "native"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.143467,
+      "log": "native-required-interpreter.log",
+      "output": "M3_NATIVE_BOUNDARY_INTEGRATION_PASS checks=577 libraries=8 owners=9 required=true"
+    },
+    {
+      "label": "native-absent",
+      "argv": [
+        "/tmp/m3-ast-product-build/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "-Djava.library.path=/workspace/scratch/13309be96b09/collections-work/arrays/received-qualification/native-boundary/absent-libraries",
+        "-cp",
+        "/workspace/scratch/13309be96b09/collections-work/arrays/native-boundary-classes:/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/classes",
+        "com.m3.collections.M3NativeBoundaryIntegration"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.140238,
+      "log": "native-absent.log",
+      "output": "M3_NATIVE_BOUNDARY_INTEGRATION_PASS checks=17 libraries=8 owners=9 required=false"
+    }
+  ],
+  "selection_proof": "Seven native availability flags required true; segmented_bits loaded explicitly. Required APIs exercised; rank has opt-in true, a nonempty owner, and 128 queries, exceeding its 64-query JNI threshold.",
+  "absence_proof": "Fresh JVM with empty library directory: availability false; explicit required backends including empty outputs throw UnsatisfiedLinkError. Rank optional backend correctly falls back.",
+  "covered_boundaries": [
+    "Unsigned byte masks including bit 7, all-bits masks, zero and contradictory selections",
+    "Independent row/state offsets, signed int/long row payloads, duplicates and chunk boundaries",
+    "Mask scan cursor/count and guarded output windows including empty/limited windows",
+    "32-bit path mask sign bit, forward/reverse stride, multistage filters, preflight invalid physical index with no output mutation",
+    "64-bit gather payloads; contiguous/arbitrary input and exact valid-prefix failure behavior across 256-row chunks",
+    "Output alias rejection and arithmetic bounds overflow rejection",
+    "64-bit parent-state sign bit and absent lifecycle selections with zero child materialization",
+    "Signed rank lower bounds and stable Double total ordering for NaNs, signed zeros and infinities",
+    "Span range extremes, empty owners/queries and clamped negative rows",
+    "Sparse bit cardinality across word/page/region boundaries and the maximum address"
+  ],
+  "findings": "No additional production JNI contract defect established by this bounded audit. All native runs passed -Xcheck:jni and the existing strict UBSAN libraries without diagnostics.",
+  "limits": "Linux x86_64 on the recorded M3 image; bounded integration witness, not exhaustive JNI fuzzing or a whole-JDK performance claim. Dependencies use root's exact-source compilation; the nine native owners are recompiled here directly from the receiver."
+}

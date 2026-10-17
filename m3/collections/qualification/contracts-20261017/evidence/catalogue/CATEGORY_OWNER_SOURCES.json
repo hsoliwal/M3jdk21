@@ -1,0 +1,36 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "revision": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+  "files": [
+    {
+      "path": "synexia-m3-recipe/src/main/java/com/synexia/m3/recipe/M3ProblemShapeCatalogue.java",
+      "sha256": "b0582330749ff1b0df500baaa7cc1daa92d8d17d1e8543a52611861d0c4e113d",
+      "git_blob_sha1": "dab66f204428e02fcaaf9844a8e6868fb91b0713",
+      "bytes": 22127
+    },
+    {
+      "path": "synexia-m3-recipe/src/main/java/com/synexia/m3/recipe/M3CategoryDonorCatalogue.java",
+      "sha256": "b7b70e3cabcf7582918eae1afe951f54dec640cd9dc94c1b3be92bac9c0bd94b",
+      "git_blob_sha1": "4c23dd4f4fe866c59e5c10f18713c25d72e41655",
+      "bytes": 7616
+    },
+    {
+      "path": "synexia-m3-recipe/src/main/java/com/synexia/m3/recipe/DonorCatalog.java",
+      "sha256": "a80a006cd43dac31881dab0cda4290cb4cfa381967e5a243587ea943278af8a5",
+      "git_blob_sha1": "1073cc157bc359f2fd6025291e5015e2d4a29555",
+      "bytes": 10595
+    },
+    {
+      "path": "synexia-m3-recipe/src/main/java/com/synexia/m3/recipe/Donor.java",
+      "sha256": "81387bbf96829f722262b4a8a84a712d63ac50f4b526fdead8004cd34bfb116e",
+      "git_blob_sha1": "bcd161ed1af5f911d38f09953ac903afac6c0dcd",
+      "bytes": 570
+    },
+    {
+      "path": "synexia-m3-recipe/src/main/java/com/synexia/m3/recipe/NativeRecipeBridge.java",
+      "sha256": "c1c2c29e44e90b2beb6dd51a1796deed9dcb9fb9c6cca40ff72b6ce993e50dee",
+      "git_blob_sha1": "8bd806f72b1e2ed5f02cb6dcc0a8764eb43ed0b0",
+      "bytes": 4117
+    }
+  ]
+}

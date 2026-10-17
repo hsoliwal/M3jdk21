@@ -1,0 +1,16 @@
+m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java	0644
+m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java	0644
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	0644
+m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	0644
+m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java	0644
+m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java	0644
+m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java	0644
+m3/collections/src/test/java/com/m3/collections/M3DeepFilteredListsTest.java	0644
+m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java	0644
+m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java	0644
+m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java	0644
+m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundaryTest.java	0644
+m3/collections/src/test/java/com/m3/collections/M3LongTreeSetTest.java	0644
+m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java	0644
+m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundaryTest.java	0644
+m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java	0644

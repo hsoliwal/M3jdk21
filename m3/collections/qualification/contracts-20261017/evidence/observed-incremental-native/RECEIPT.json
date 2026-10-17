@@ -1,0 +1,632 @@
+{
+  "schema": "M3_COLLECTIONS_FINAL_OWNING_MODULE_V1",
+  "mode": "native",
+  "status": "FAIL",
+  "receiving_root": "/workspace/scratch/13309be96b09/collections-work/received",
+  "command": {
+    "command": [
+      "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+      "-B",
+      "-ntp",
+      "-o",
+      "-Dmaven.repo.local=/tmp/m3-maven-repository",
+      "-DfailIfNoTests=true",
+      "-DargLine=-Xmx768m -Xcheck:jni -Djava.library.path=/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib -Dm3.collections.signal.native=true -Dm3.collections.rank.native=true",
+      "-f",
+      "/workspace/scratch/13309be96b09/collections-work/received/m3/collections/pom.xml",
+      "verify"
+    ],
+    "JAVA_HOME": "/tmp/m3-ast-product-build/images/jdk",
+    "MAVEN_OPTS": "-Xmx768m",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+    "mode": "native",
+    "source_tree_sha256": "e3b6d1426892baff4024828c1e0a527bf164e25b46d1fa317780b5abfdeb3ef1",
+    "source_files": 249,
+    "original_pom_unchanged": true,
+    "final_generic_source_handoff_verified": true,
+    "exit_code": 1,
+    "elapsed_seconds": 10.139,
+    "stable_source_monitor_polls": 9,
+    "source_stable": true,
+    "source_tree_after_sha256": "e3b6d1426892baff4024828c1e0a527bf164e25b46d1fa317780b5abfdeb3ef1"
+  },
+  "runtime_release_sha256": "5a3d73c8957e7fcb0da466afc0be260adeaddbf8bb04ad82ebb562710c2989de",
+  "runtime_modules_sha256": "e7a2827ebfcb2f1fb474db3a8e4e4bc058ffe5f5dea5f9701803669101b28b8b",
+  "test_totals": {
+    "tests": 214,
+    "failures": 0,
+    "errors": 9,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "name": "com.m3.collections.M3AdaptiveEnumLongMapTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3AdaptiveEnumLongMapTest.xml",
+      "sha256": "4609a050cabfabca585d82cde94dac23fae2c8857603a59d7e551803df6085af"
+    },
+    {
+      "name": "com.m3.collections.M3BitLane28FenwickTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3BitLane28FenwickTest.xml",
+      "sha256": "edb9356a1f5f3d2478c813cbc5be6d1f87c221af7bf6ae7dc545e1088c35c3bd"
+    },
+    {
+      "name": "com.m3.collections.M3ConcurrentContractTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ConcurrentContractTest.xml",
+      "sha256": "0d7e49faad01867bea2a9fa610e66c2ad4d7e7208964ad2f3f6d5837cf3132b3"
+    },
+    {
+      "name": "com.m3.collections.M3ConcurrentLaneContractTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ConcurrentLaneContractTest.xml",
+      "sha256": "617847a98bbf2959d1323dfa6922569142d1280c930d123f1f99f2f78513e01c"
+    },
+    {
+      "name": "com.m3.collections.M3DeepFilteredListsTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3DeepFilteredListsTest.xml",
+      "sha256": "850779b3da40283e926c8f8d5e926efa63df8dbb61f63f65e7efece44fe24c98"
+    },
+    {
+      "name": "com.m3.collections.M3DeepReadOnlyCollectionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3DeepReadOnlyCollectionTest.xml",
+      "sha256": "e90b0c4f759da077c218c1870f5d96295539a72148e156cab94c11a279e27a20"
+    },
+    {
+      "name": "com.m3.collections.M3EnumLongMapTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3EnumLongMapTest.xml",
+      "sha256": "bb74ac3003e906314405476f3a262bb1c250469f96f851c6048df3d84ad2298e"
+    },
+    {
+      "name": "com.m3.collections.M3EnumSetTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3EnumSetTest.xml",
+      "sha256": "554e30b9aa579600357f2ab46624d69ecd9777fe8dd63e8077ff334acdb60448"
+    },
+    {
+      "name": "com.m3.collections.M3FactoryContractTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3FactoryContractTest.xml",
+      "sha256": "a4961417bc14d143ee0213b703fc150489c7ba8e2ad51e456223905dde455de2"
+    },
+    {
+      "name": "com.m3.collections.M3FilteredListsSortedInteropTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3FilteredListsSortedInteropTest.xml",
+      "sha256": "38e8ef033f86c4b709bf1a786b585f51cbc5f1373f4e1e3cf7bdc02d0b75db6d"
+    },
+    {
+      "name": "com.m3.collections.M3FilteredListsTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3FilteredListsTest.xml",
+      "sha256": "b906335ac445097b71379cbb7d857c07d735aa2b3a4c121c5c0d1b2eccdcfb08"
+    },
+    {
+      "name": "com.m3.collections.M3FilteredNavigableSetTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3FilteredNavigableSetTest.xml",
+      "sha256": "fc5ac7caf10052293fe84fde496e0d8c53d5374cf377cde85a0912a91b921be7"
+    },
+    {
+      "name": "com.m3.collections.M3FilteredNavigationBoundaryTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 3,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3FilteredNavigationBoundaryTest.xml",
+      "sha256": "4d3cda6d1fcb3095f4970e6ac4aaabe2546954e84a574e16e29411822e830678"
+    },
+    {
+      "name": "com.m3.collections.M3FilteredViewsTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3FilteredViewsTest.xml",
+      "sha256": "744a36c92efe43b939c1a0892891c093c8f5d7be0d87d2a404114bf522784076"
+    },
+    {
+      "name": "com.m3.collections.M3FootprintContractTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3FootprintContractTest.xml",
+      "sha256": "a8428cf172952ba7cefb2ab70ba0195f22d7a88265379c8981d0cba331823a68"
+    },
+    {
+      "name": "com.m3.collections.M3IndexMaskCompactorTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3IndexMaskCompactorTest.xml",
+      "sha256": "744ef3ccaca2a3c90bc35c1c4e108d62dd0ee56f2f7f2467f36e20acb5748590"
+    },
+    {
+      "name": "com.m3.collections.M3IndexMaskWindowRecoveryTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3IndexMaskWindowRecoveryTest.xml",
+      "sha256": "6a406bad59ebccaca46e5950ad15fe69f92982182b9ffecf69c3cbd5f1edc934"
+    },
+    {
+      "name": "com.m3.collections.M3IndexMaskWindowTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3IndexMaskWindowTest.xml",
+      "sha256": "c2a7efed737b76f7425261e86bc840ab2a63b1374316e48b3762e01ca57f4aa4"
+    },
+    {
+      "name": "com.m3.collections.M3IndexPathMasksTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3IndexPathMasksTest.xml",
+      "sha256": "4bac50e43c6d42b9289f6633039abd15bbbcebecb04ca3ab9cc42f837b1421e5"
+    },
+    {
+      "name": "com.m3.collections.M3IndexPathRankTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3IndexPathRankTest.xml",
+      "sha256": "3d9d3aa06497ee72e27f0b325273f8261bb2069932c9a876633f366d56c8e127"
+    },
+    {
+      "name": "com.m3.collections.M3IntLanesTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3IntLanesTest.xml",
+      "sha256": "c79c14b4009a17f9a9bd88a94bb20dbee30c8625d75d17871d5269bda82cb121"
+    },
+    {
+      "name": "com.m3.collections.M3IntLongHashMapTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3IntLongHashMapTest.xml",
+      "sha256": "36c2e6fe48a39e986a047cc12e3199b2e384b82021c3420bf9626f47ad9c5eb7"
+    },
+    {
+      "name": "com.m3.collections.M3JdkCollectionDifferentialTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3JdkCollectionDifferentialTest.xml",
+      "sha256": "cea91cbb40a6f6b8a9becec583f573048fd842073c35af0bcd8b0f9b0209edb6"
+    },
+    {
+      "name": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3JdkShapedPrimitiveCollectionsTest.xml",
+      "sha256": "052cf76866621005ba76c0e09e928df93d0aa39b00e3eed1261353b9440f316a"
+    },
+    {
+      "name": "com.m3.collections.M3LazyObserverRegressionTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LazyObserverRegressionTest.xml",
+      "sha256": "819d9526eb618fd064cb0cc4ce317ce1285729794a6f00fa08fdadf5a5f6b1e2"
+    },
+    {
+      "name": "com.m3.collections.M3LazyTreeMapTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LazyTreeMapTest.xml",
+      "sha256": "66b63a41f2f8069cfda48fca89472e8fc989ddf3ad0bb8465c4edc31b3b9f460"
+    },
+    {
+      "name": "com.m3.collections.M3LongAddressBoundedTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongAddressBoundedTest.xml",
+      "sha256": "d2930a6d5338412ab8946d38d16b11c0e046effe8ea736c5d2d7cb701cff6c81"
+    },
+    {
+      "name": "com.m3.collections.M3LongAddressKernelTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongAddressKernelTest.xml",
+      "sha256": "3e8da1fe699d4f42bf4391c2b74a90193a6a0f64b4a2746c8bdb51b93f6eca06"
+    },
+    {
+      "name": "com.m3.collections.M3LongArrayDequeTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongArrayDequeTest.xml",
+      "sha256": "b0a96005fbf41e65a18e7290b85260094d3b29283e1ea902b5d2363a7581ce75"
+    },
+    {
+      "name": "com.m3.collections.M3LongArrayListTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongArrayListTest.xml",
+      "sha256": "cbd95413155cfa26e30e3fc4c12d91a57097f20511fb3beb146d73021c7b81c3"
+    },
+    {
+      "name": "com.m3.collections.M3LongDagJUnitTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongDagJUnitTest.xml",
+      "sha256": "5ff217093b18d1cf61883a7b44fa3fe6e0f0eed1104ab8871192fc5d43c733b2"
+    },
+    {
+      "name": "com.m3.collections.M3LongFilteredViewContractTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongFilteredViewContractTest.xml",
+      "sha256": "b0a6552e74ed705cab3e1845dabeabdcc26c0e4c638670d76ac6b5906d563d03"
+    },
+    {
+      "name": "com.m3.collections.M3LongIndexProjectionMaskOffsetTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongIndexProjectionMaskOffsetTest.xml",
+      "sha256": "26ffd4d0ac531248bd85798f47592c36fa9eca452b08db786e18906e46df40a1"
+    },
+    {
+      "name": "com.m3.collections.M3LongLinkedHashSetTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongLinkedHashSetTest.xml",
+      "sha256": "8218b465fec137ce753add13faacaabe3aed16e54afc560adfb9d05b2b3400e1"
+    },
+    {
+      "name": "com.m3.collections.M3LongLongLinkedHashMapTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongLongLinkedHashMapTest.xml",
+      "sha256": "ca4b58af7efdf5aa45bd5cfe4ed3265649400cb4f4873247dbae50336393577c"
+    },
+    {
+      "name": "com.m3.collections.M3LongRankIndexTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongRankIndexTest.xml",
+      "sha256": "cdbf240686a04ece7dfb9d2eb546edd6cc3a3d41d17be27da0aa4f3690001f79"
+    },
+    {
+      "name": "com.m3.collections.M3LongSortedAlgebraTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongSortedAlgebraTest.xml",
+      "sha256": "5f98d0a83528382a9a1c6e96cc46b0757a311002404e0eb0c32079dd71e9d0ee"
+    },
+    {
+      "name": "com.m3.collections.M3LongTreeSetTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3LongTreeSetTest.xml",
+      "sha256": "a14a0315b42d4949243feb7d74054e218e8b09849c9a50644798e59da3dfda2f"
+    },
+    {
+      "name": "com.m3.collections.M3MapContractTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3MapContractTest.xml",
+      "sha256": "154e0a6e446d9c80764b7a617c8f2c8959d681defabb61c1f79e019068539cf7"
+    },
+    {
+      "name": "com.m3.collections.M3MaskAllSelectionReceiverTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3MaskAllSelectionReceiverTest.xml",
+      "sha256": "7bf4ab534f2ae9244967da7aa96b98f4439fe3bb6040cb1fa664a32a42bcdb4b"
+    },
+    {
+      "name": "com.m3.collections.M3MutableFilteredViewsTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3MutableFilteredViewsTest.xml",
+      "sha256": "f1f4cdfcb7c98bb6ba2a8884d81ff1cc5fe5dfaba2b7d5bab7a94233982c9934"
+    },
+    {
+      "name": "com.m3.collections.M3NativeIndexRangeTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3NativeIndexRangeTest.xml",
+      "sha256": "fed7ec21059ac1c1dcce952e1ef76c682e6b0b207b97f8c80c1ebaf14868f7cf"
+    },
+    {
+      "name": "com.m3.collections.M3NoRetainedStructuralEntryTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3NoRetainedStructuralEntryTest.xml",
+      "sha256": "38c46d52133aa0f58059fc94965a0a677a4d3794bd21e0df30d9c8da195ab3ca"
+    },
+    {
+      "name": "com.m3.collections.M3ObjectIdentityTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ObjectIdentityTest.xml",
+      "sha256": "9c92e5e2b954c68b3b2c2e02ff845a0390649a752a6957d0be8369070e51ab58"
+    },
+    {
+      "name": "com.m3.collections.M3ObjectResidencyBorrowTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ObjectResidencyBorrowTest.xml",
+      "sha256": "85db2f2d5b9f3d756228d1e8814ee7a43f804d6ffc28f313142b5018040f122f"
+    },
+    {
+      "name": "com.m3.collections.M3ObjectResidencyRuntimePressureTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ObjectResidencyRuntimePressureTest.xml",
+      "sha256": "9e36ee9cc004f7865fff2a510675fb3592499eab4cb9dbac47fe462bc8e74d89"
+    },
+    {
+      "name": "com.m3.collections.M3ObjectResidencyTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ObjectResidencyTest.xml",
+      "sha256": "7a807e0fc8ab2cec3c551e9f067a5280f5eca6fe85813e940d40ab8e60562437"
+    },
+    {
+      "name": "com.m3.collections.M3ObjectSlotIndexTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ObjectSlotIndexTest.xml",
+      "sha256": "d19c49e85f73234f0de1430d99a2f1373b3e71800bc67a318b5d4b217c3eebec"
+    },
+    {
+      "name": "com.m3.collections.M3PrimitiveCollectionDifferentialTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3PrimitiveCollectionDifferentialTest.xml",
+      "sha256": "be62da19dd0ca10f8d755bb80d838a297040d7470b0d876a73308b858536da34"
+    },
+    {
+      "name": "com.m3.collections.M3ReadOnlyViewBoundaryTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 3,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ReadOnlyViewBoundaryTest.xml",
+      "sha256": "af761f23060cbf4b047c7b1e19794923e0c4bae0db53757a90b02d927227155a"
+    },
+    {
+      "name": "com.m3.collections.M3ReceivingRecoveryTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ReceivingRecoveryTest.xml",
+      "sha256": "d7d3ba88c48e43cebb57f27d5c30c14d816de750c11c7670764fbb9d9f83c6c5"
+    },
+    {
+      "name": "com.m3.collections.M3ResidencyStateMaskTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ResidencyStateMaskTest.xml",
+      "sha256": "ea0a622c082572e6689513d8b541377b9e98cb89f253920fc0ccb316d02aec23"
+    },
+    {
+      "name": "com.m3.collections.M3SequenceContractTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3SequenceContractTest.xml",
+      "sha256": "5d3b0d27d9515634b3e965855f1a7d5e5c5dc9a3a337273287927aa48810af43"
+    },
+    {
+      "name": "com.m3.collections.M3SignalOrderJUnitTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3SignalOrderJUnitTest.xml",
+      "sha256": "7c87438a06fb65cd09dc841952c11226628549d7994f98c4836b30b2af4f8b37"
+    },
+    {
+      "name": "com.m3.collections.M3SpanIndexTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3SpanIndexTest.xml",
+      "sha256": "b1219d16a8632e87be54f4bdddab5361a3e8878b96d1956d7342f646e9d4e6a4"
+    },
+    {
+      "name": "com.m3.collections.M3StoredRepresentativeTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3StoredRepresentativeTest.xml",
+      "sha256": "f0983ca35bc160c1946fac321fd7171fa35f3a499dbc1bac716ddef72c7d1ddf"
+    },
+    {
+      "name": "com.m3.collections.M3TombstoneReuseTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3TombstoneReuseTest.xml",
+      "sha256": "a2549aa204cc9164707ad30b99781d3d8b8c5a32fdb9b75fc8ed351878da6087"
+    },
+    {
+      "name": "com.m3.collections.M3ZeroMaskArrayFastPathTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ZeroMaskArrayFastPathTest.xml",
+      "sha256": "eb1574575939be5e4605b5f5010752abb4f012475e16ec0e3e4a816489e8409e"
+    },
+    {
+      "name": "com.m3.collections.M3ZeroSlotCapacityTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.M3ZeroSlotCapacityTest.xml",
+      "sha256": "c9098c4946017055938f32cde73f28f54f103e87ee9ef9f2ce91ff7da22e7d8c"
+    },
+    {
+      "name": "com.m3.collections.SegmentedLaneBulkContractTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.SegmentedLaneBulkContractTest.xml",
+      "sha256": "321ccb0a18672f23f1ef52d481be61e2138f77847bb77ec157bd7500e14faa42"
+    },
+    {
+      "name": "com.m3.collections.SegmentedPrimitiveStorageTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml": "TEST-com.m3.collections.SegmentedPrimitiveStorageTest.xml",
+      "sha256": "bfeaf48dfea039a0e342123b6b9c6ff63e5acbe30bb834d6ce6c5cf619e848a4"
+    }
+  ],
+  "jni_or_ubsan_diagnostics": [],
+  "native_libraries": [
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3_collections_address.so",
+      "sha256": "4d47382be4bf144d5c57a545cc87169ca6220b3028199e78ab18ff8e10454ad3"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3_collections_mask.so",
+      "sha256": "f879fb45cf9e92763b9af52ce8391cda384d62f9a02a7d96634e31194830b228"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3_collections_pathmask.so",
+      "sha256": "44c282ad0309e4c8949aaefa425a7e74dc9462e11fe26a7a2555f509e52242ad"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3_collections_span.so",
+      "sha256": "821a9f2a1cec4f5259817aa9ba63b0343da353d313689866f55529fc812e578a"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3_residency_state_mask.so",
+      "sha256": "df28063f7519bf0305a2a78001f27b72ad9f5227bd1b094c4a38e75e4beeaed1"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3rankbatch.so",
+      "sha256": "b095f4a57fb2c399235c1d5fd2e627eebc36be847a352dfd55e7c31dbb6a15a2"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libm3signalorder.so",
+      "sha256": "8739eb719864a0b38d217f5b1fd046361aa8cd410ddceb5caa3cc5fffad16578"
+    },
+    {
+      "path": "/workspace/scratch/13309be96b09/collections-work/qualification/native-integration/lib/libsegmented_bits.so",
+      "sha256": "ceccec13833e790111d8a60f6d7e23a140d90ef6f5d5f349cced85e867dd8c16"
+    }
+  ],
+  "native_library_count": 8,
+  "full_reports_preserved": true,
+  "class_outputs_preserved": false,
+  "source_scope": "All owning src files plus the original POM and packaged legal/provenance resources; generated target and unrelated qualification documents excluded.",
+  "scope": "Strict original standalone collections Maven module on the recorded actual M3 image. JNI mode enables existing native opt-ins and supplies all eight exact UBSAN libraries. Per-library required selection was independently checked by the retained JNI boundary witness."
+}

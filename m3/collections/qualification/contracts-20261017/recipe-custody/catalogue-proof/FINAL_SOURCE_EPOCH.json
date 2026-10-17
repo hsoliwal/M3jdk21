@@ -1,0 +1,19 @@
+{
+  "schema": "M3_QUALIFIED_FINGERPRINT_SOURCE_EPOCH_V1",
+  "repository": "hsoliwal/M3JDK21",
+  "baseline_commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "qualified_final_datasets": [
+    {
+      "dataset": "m3jdk21-arrays",
+      "sdk_inputs_sha256": "9b79aaf4398723f1cb9bf419512148557735f541edb3a704589c112293da7771",
+      "sdk_results_sha256": "3a0cabd3554a74b3467b42d9396202f59d5b745b8847c473f7db26c1c3d1d6d2"
+    },
+    {
+      "dataset": "m3jdk21-collections-final",
+      "sdk_inputs_sha256": "ae668b01f7f0d22664b76aa3c2099efbcee4b5bf0171c904fbd40b0c673ff053",
+      "sdk_results_sha256": "f00131b6424f2c29d82d57092dc1c3882bdcd0981afc5141221c083736f19194"
+    }
+  ],
+  "files": 20,
+  "scope": "Only final changed/new product source and test paths, actual receiving bytes equal qualified SDK Results. Hashes describe candidates, not behavioral equivalence."
+}

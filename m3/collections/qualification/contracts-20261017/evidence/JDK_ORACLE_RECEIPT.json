@@ -1,0 +1,9 @@
+{
+  "command": [
+    "/tmp/m3-ast-product-build/images/jdk/bin/java",
+    "/workspace/scratch/13309be96b09/collections-work/integration/JdkOracleWitness.java"
+  ],
+  "exit_code": 0,
+  "output": "JDK_ORACLE_PASS retained=66666 absentZero=true seam=-21,+21 duplicate7=false new8=true\n",
+  "oracle": "Independent JDK TreeSet survivor, duplicate and seam witness; no production M3LongTreeSet changes"
+}

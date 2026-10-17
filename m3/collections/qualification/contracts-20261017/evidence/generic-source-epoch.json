@@ -1,0 +1,15 @@
+{
+  "status": "FROZEN_CANDIDATE_SDK_RECEIVING_PENDING",
+  "dataset_sha256": "a54cf56d257b7b709e0dc0291eeb07987f8256e02c25579b1e342b65b21e831c",
+  "source_epoch": "Qualified successor dataset postimages; M3FilteredViews=3d126240d30993c16a6c855a3f826c508d97b4b96c4d0c17ad77ef0dd9362bdb",
+  "file_count": 3,
+  "negative_control": "Exact prior SDK output throws StackOverflowError at depth65536/-Xss256k",
+  "proof": "Candidate PASS84 independent depth/demand/exception checks at depth65536; shallow exact owner/predicate/equality/iterator tapes byte-identical18779bytes. Previous 32267+69+123500+288223+117773 corpora pass. Sorted/map tapes and callable descriptors unchanged.",
+  "tape_sha256": "7a10a88ba35159ffdefa7de404e5ed70936dee7f3bc7b2c2336811d52c1d351a",
+  "boundaries": [
+    "Only known current read-only iterator decorators are opened; unknown and mutable iterators retain original behavior.",
+    "Membership unrolls CollectionView and exact plain SetView; sorted/navigable representative membership remains an opaque boundary.",
+    "No deep sorted range-factory or deep readOnlyFiltered List stacking claim.",
+    "Preserves original repeated membership callback work; quadratic depth cost for single visible member is intentional contract preservation."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/tmp/m3-ast-product-build/images/jdk/bin/javac",
+    "--release",
+    "21",
+    "-proc:none",
+    "-Xlint:all",
+    "-Werror",
+    "-cp",
+    "/workspace/scratch/13309be96b09/collections-work/views/generic-received-classes:/workspace/scratch/13309be96b09/collections-work/views/received-classes",
+    "-d",
+    "/workspace/scratch/13309be96b09/collections-work/views/resource-observation-nc1l5955/probe-classes",
+    "/workspace/scratch/13309be96b09/collections-work/views/review-candidate/m3/collections/qualification/contracts-20261017/src/test/java/com/m3/collections/qualification/M3FilteredViewResourceProbe.java"
+  ],
+  "exit_code": 0
+}

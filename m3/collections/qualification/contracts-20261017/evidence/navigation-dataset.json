@@ -1,0 +1,30 @@
+[
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+    "template": "/workspace/scratch/13309be96b09/collections-work/views/navigation-candidate/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+    "before_sha256": "d67a632f63647f033e71360858f8f1be1f93418880178a96437bb0605998ad5b",
+    "after_sha256": "6249eedb0e2615102015bc068e40b3bda826c626bd2715d1bf8b7335f68ad89f",
+    "after_git_blob": "06f7ef486a1ff3b603822d2593ac3a7335f2051c"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+    "template": "/workspace/scratch/13309be96b09/collections-work/views/navigation-candidate/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+    "before_sha256": "bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65",
+    "after_sha256": "5e0bbd45c1a71a258c2d3367922eac21a93811a6ac2d63c822fb07e7511dedd1",
+    "after_git_blob": "9b2eb7b4ebe4911898c2f60ca08c334fb839c25d"
+  },
+  {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java",
+    "template": "/workspace/scratch/13309be96b09/collections-work/views/navigation-candidate/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java",
+    "before_sha256": "ABSENT",
+    "after_sha256": "06ca1bc4f818218156f6f9dedadced0f45eff165470e4c93f8938b8103ee9d2f",
+    "after_git_blob": "8c178bff039bf57d078a4fcab8051b3099162f89"
+  },
+  {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundaryTest.java",
+    "template": "/workspace/scratch/13309be96b09/collections-work/views/navigation-candidate/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundaryTest.java",
+    "before_sha256": "ABSENT",
+    "after_sha256": "84a9a87ab9101da250f504f8f0ae9d99baa6106dcb090dd3c3a90f776c4b82f9",
+    "after_git_blob": "a7c3ad1c6c4687808c20f2ebc30fd78b887fe6f9"
+  }
+]
