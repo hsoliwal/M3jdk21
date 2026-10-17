@@ -109,6 +109,22 @@
             </configuration>
           </execution>
           <execution>
+            <id>emit-jep-source-witness</id>
+            <phase>verify</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <executable>${python.executable}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>jep_source_witness.py</argument>
+                <argument>--root</argument>
+                <argument>${project.basedir}/../..</argument>
+                <argument>--out</argument>
+                <argument>${project.build.directory}/jep-source-witness.tsv</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
             <id>emit-backport-program-status</id>
             <phase>verify</phase>
             <goals><goal>exec</goal></goals>
