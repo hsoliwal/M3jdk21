@@ -17,7 +17,7 @@ import java.util.function.LongPredicate;
  * and no mutation during traversal are required; this is not a snapshot or a JDK view.
  *
  * <p>Nested selections compose predicates against the original source, preserving
- * their left-to-right short-circuit evaluation order. The cursor and stream are
+ * their left-to-right short-circuit evaluation order. The stream is
  * late-binding; a terminal operation sees backing changes made before traversal.
  * JNI is deliberately not used to invoke arbitrary Java predicates.
  */
@@ -100,26 +100,7 @@ public final class M3LongFilteredView implements M3LongCollection {
      */
     @Override
     public Spliterator.OfLong longSpliterator() {
-        return new Spliterator.OfLong() {
-            private M3LongIterator cursor;
-
-            @Override
-            public boolean tryAdvance(LongConsumer action) {
-                Objects.requireNonNull(action, "action");
-                if (cursor == null) {
-                    cursor = iterator();
-                }
-                if (!cursor.hasNext()) {
-                    return false;
-                }
-                action.accept(cursor.nextLong());
-                return true;
-            }
-
-            @Override public OfLong trySplit() { return null; }
-            @Override public long estimateSize() { return Long.MAX_VALUE; }
-            @Override public int characteristics() { return NONNULL; }
-        };
+        return M3LongTraversal.of(this, Spliterator.NONNULL);
     }
 
     /** One source iterator plus one filtering cursor per traversal, not per value. */

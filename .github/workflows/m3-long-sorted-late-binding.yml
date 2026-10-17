@@ -3,7 +3,8 @@ name: M3 long sorted live lazy cursor
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3Long*.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongLiveTraversalSelfTest.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3LongSortedLateBindingSelfTest.java'
       - '.github/workflows/m3-long-sorted-late-binding.yml'
   workflow_dispatch:
@@ -17,6 +18,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -31,8 +33,12 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror -d "$classes" \
             "$root/M3LongCollection.java" "$root/M3LongIterator.java" \
             "$root/M3LongSortedSet.java" "$root/M3LongFilteredView.java" \
-            "$root/M3LongSortedViews.java" \
-            m3/collections/src/test/java/com/m3/collections/M3LongSortedLateBindingSelfTest.java
+            "$root/M3LongSortedViews.java" "$root/M3LongTraversal.java" "$root/M3LongCompositeViews.java" \
+            m3/collections/src/test/java/com/m3/collections/M3LongSortedLateBindingSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongLiveTraversalSelfTest.java
           java -ea -cp "$classes" com.m3.collections.M3LongSortedLateBindingSelfTest
           java -Xint -ea -cp "$classes" com.m3.collections.M3LongSortedLateBindingSelfTest
+          java -ea -cp "$classes" com.m3.collections.M3LongLiveTraversalSelfTest
+          java -Xint -ea -cp "$classes" com.m3.collections.M3LongLiveTraversalSelfTest
+          java -XX:TieredStopAtLevel=1 -ea -cp "$classes" com.m3.collections.M3LongLiveTraversalSelfTest
           git diff --check

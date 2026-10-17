@@ -5,10 +5,14 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Spliterator;
-import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 
-/** Live, read-only primitive composition with no retained objects per element. */
+/**
+ * Live, read-only primitive composition with no retained objects per element.
+ * Streams bind on first valid traversal; metadata and trySplit acquire no iterators.
+ * Source mutation during traversal remains unsupported. A sorted union still needs
+ * one head from every source when traversal starts; it never freezes them at stream creation.
+ */
 public final class M3LongCompositeViews {
     private M3LongCompositeViews() { }
 
@@ -23,23 +27,10 @@ public final class M3LongCompositeViews {
         for (T source : result) Objects.requireNonNull(source, "source");
         return result;
     }
-    private static Spliterator.OfLong cursorSpliterator(M3LongIterator cursor, int flags) {
-        return new Spliterator.OfLong() {
-            public boolean tryAdvance(LongConsumer action) {
-                Objects.requireNonNull(action, "action");
-                if (!cursor.hasNext()) return false;
-                action.accept(cursor.nextLong());
-                return true;
-            }
-            public OfLong trySplit() { return null; }
-            public long estimateSize() { return Long.MAX_VALUE; }
-            public int characteristics() { return flags; }
-            public java.util.Comparator<? super Long> getComparator() {
-                if ((flags & SORTED) == 0) throw new IllegalStateException();
-                return null;
-            }
-        };
+    private static Spliterator.OfLong cursorSpliterator(M3LongCollection source, int flags) {
+        return M3LongTraversal.of(source, flags);
     }
+
     private static final class Concatenation implements M3LongCollection {
         private final M3LongCollection[] inputs;
         Concatenation(M3LongCollection[] inputs) { this.inputs = inputs; }
@@ -86,7 +77,7 @@ public final class M3LongCompositeViews {
             };
         }
         public Spliterator.OfLong longSpliterator() {
-            return cursorSpliterator(iterator(), Spliterator.ORDERED | Spliterator.NONNULL);
+            return cursorSpliterator(this, Spliterator.ORDERED | Spliterator.NONNULL);
         }
     }
     private static final class Union implements M3LongSortedSet {
@@ -121,7 +112,7 @@ public final class M3LongCompositeViews {
             return size == result.length ? result : Arrays.copyOf(result, size);
         }
         public Spliterator.OfLong longSpliterator() {
-            return cursorSpliterator(iterator(), Spliterator.ORDERED | Spliterator.NONNULL
+            return cursorSpliterator(this, Spliterator.ORDERED | Spliterator.NONNULL
                     | Spliterator.SORTED | Spliterator.DISTINCT);
         }
         public long first() { M3LongIterator i = iterator(); if (!i.hasNext()) throw new NoSuchElementException(); return i.nextLong(); }
@@ -165,8 +156,13 @@ public final class M3LongCompositeViews {
             head = new long[sources.length]; owner = new int[sources.length];
             for (int n = 0; n < sources.length; n++) {
                 input[n] = sources[n].iterator();
-                if (input[n].hasNext()) insert(n, input[n].nextLong());
+                if (input[n].hasNext()) {
+                    head[size] = input[n].nextLong();
+                    owner[size++] = n;
+                }
             }
+            // Same source callback order and tie-breaker; O(k) bottom-up heap construction.
+            for (int at = (size >>> 1) - 1; at >= 0; at--) siftDown(at);
         }
         private boolean before(int a, int b) {
             int c = Long.compare(head[a], head[b]);
@@ -187,9 +183,12 @@ public final class M3LongCompositeViews {
         private void pop() {
             --size; if (size == 0) return;
             head[0] = head[size]; owner[0] = owner[size];
-            int at = 0;
-            while (true) {
-                int child = (at << 1) + 1; if (child >= size) break;
+            siftDown(0);
+        }
+        private void siftDown(int at) {
+            // Test for an internal node before computing 2*at+1, avoiding int overflow.
+            while (at < (size >>> 1)) {
+                int child = (at << 1) + 1;
                 if (child + 1 < size && before(child + 1, child)) child++;
                 if (before(at, child)) break;
                 swap(at, child); at = child;

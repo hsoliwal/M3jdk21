@@ -4,11 +4,12 @@ package com.m3.collections;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Spliterator;
-import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 
 /**
  * Primitive, live, backed sorted-set wrappers. Does not copy keys or own their payloads.
+ * Streams acquire the backing iterator only on first valid traversal; metadata and
+ * zero-element terminal operations do not evaluate the source or its predicates.
  *
  * <p>These wrappers use natural signed-long order, preserve the existing
  * {@link M3LongSortedSet} contract and do not implement JDK {@code NavigableSet}.
@@ -73,20 +74,8 @@ public final class M3LongSortedViews {
      * The source owns post-binding interference/fail-fast behavior.
      */
     private static Spliterator.OfLong sortedCursor(M3LongCollection source) {
-        return new Spliterator.OfLong() {
-            private M3LongIterator cursor;
-            @Override public boolean tryAdvance(LongConsumer action) {
-                Objects.requireNonNull(action, "action");
-                if (cursor == null) cursor = source.iterator();
-                if (!cursor.hasNext()) return false;
-                action.accept(cursor.nextLong());
-                return true;
-            }
-            @Override public OfLong trySplit() { return null; }
-            @Override public long estimateSize() { return Long.MAX_VALUE; }
-            @Override public int characteristics() { return ORDERED | SORTED | DISTINCT | NONNULL; }
-            @Override public java.util.Comparator<? super Long> getComparator() { return null; }
-        };
+        return M3LongTraversal.of(source, Spliterator.ORDERED | Spliterator.SORTED
+                | Spliterator.DISTINCT | Spliterator.NONNULL);
     }
 
     private static final class Filtered implements M3LongSortedSet {
