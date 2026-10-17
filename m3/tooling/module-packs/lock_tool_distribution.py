@@ -66,7 +66,10 @@ def distribution_pack(tool, distribution, version, source, license_name, module_
         "assets": assets,
         "distribution": {
             "file_count": len(identity),
-            "tree_sha256": hashlib.sha256("".join(identity).encode("utf-8")).hexdigest(),
+            # The lock validator orders the serialized relative-path records.
+            # Path component ordering differs for e.g. lib/native.jar and
+            # lib/native/platform/library.so, so sort the final records here.
+            "tree_sha256": hashlib.sha256("".join(sorted(identity)).encode("utf-8")).hexdigest(),
             "source_build_acceptance": "NOT_ESTABLISHED_BY_INPUT_INVENTORY",
         },
     }

@@ -157,6 +157,37 @@ class ToolPackLockTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "distribution inventory mismatch"):
             self.load()
 
+    def test_generated_distribution_inventory_accepts_nested_prefix_paths(self):
+        import lock_tool_distribution
+        layouts = (
+            ("lib/jline-native-4.4.8.jar", "lib/jline-native.license",
+             "lib/jline-native/FreeBSD/x86/libjlinenative.so"),
+            ("lib/jline-native/Linux-musl/x86/libjlinenative.so",
+             "lib/jline-native/Linux/x86/libjlinenative.so"),
+        )
+        for index, layout in enumerate(layouts):
+            with self.subTest(layout=layout):
+                distribution = self.root / ("distribution-" + str(index))
+                paths = tuple(lock_tool_distribution.REQUIRED["maven"]) + (
+                    "boot/plexus-classworlds-fixture.jar", "lib/maven-core-fixture.jar") + layout
+                for relative in paths:
+                    target = distribution / relative
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_text("Inventory fixture only: " + relative + "\n")
+                (distribution / "bin/mvn").chmod(0o755)
+                pack = lock_tool_distribution.distribution_pack(
+                    "maven", distribution, "fixture", "inventory regression fixture", "Apache-2.0")
+                self.lock = {"schema_version": 1, "packs": [pack]}
+                selection = self.load()
+                self.assertEqual(len(paths), selection.provenance[0]["distribution"]["file_count"])
+                self.assertEqual(pack["distribution"]["tree_sha256"],
+                                 selection.provenance[0]["distribution"]["tree_sha256"])
+                # JSON asset order is not part of the distribution's identity.
+                pack["assets"].reverse()
+                reordered = self.load()
+                self.assertEqual(selection.assets, reordered.assets)
+                self.assertEqual(selection.provenance, reordered.provenance)
+
     def test_duplicate_and_misnamed_locked_modules_refused(self):
         archive = self.root / "com.m3test.tool.jmod"
         archive.write_bytes(b"LOCK CONTRACT FIXTURE, NOT JMOD ADMISSION")
