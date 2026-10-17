@@ -1,0 +1,5 @@
+donor	pin	license	role
+hsoliwal/M3jdk21	b8c2ded94a1c99e8840923d3b618083726d3a620	Apache-2.0, Hitesh Soliwal/contributors	Existing M3Parallel, M3PartitionLayout, M3HashPinnedJavaSnapshotRecipe and JNI kernel; exact predecessor
+hsoliwal/com.synexia	2f9a579c60a41422f5b164049cf65746a0830713	Apache-2.0, original upstream contributors	Earlier convergence of keyed Java/JNI atoms; attribution retained, not duplicated
+OpenJDK/JDK21 API docs	Java SE 21	Specification API reference	VarHandle array-element atomic bitwise access, Long bit-count/trailing-zeros; no implementation copied
+LeetCode HackerRank GeeksforGeeks	URL pin in CATALOGUE.tsv	Respective site rights retained	Problem categories only; no solutions copied or relicensed

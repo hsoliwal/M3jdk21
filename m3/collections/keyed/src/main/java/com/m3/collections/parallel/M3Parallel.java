@@ -278,12 +278,12 @@ public final class M3Parallel {
         }
         /** Stable selection mask followed by serial compaction; predicates obey the same key contract. */
         public List<T> filter(Predicate<? super T> predicate) {
-            Objects.requireNonNull(predicate); boolean[] selected = new boolean[items.length];
-            rows(i -> selected[i] = predicate.test(element(items, i)));
-            int count = 0; for (boolean keep : selected) if (keep) count++;
-            Object[] result = new Object[count]; int position = 0;
-            for (int i = 0; i < items.length; i++) if (selected[i]) result[position++] = items[i];
-            return readOnly(result);
+            Objects.requireNonNull(predicate);
+            // Partition workers can visit different source rows in the same mask
+            // word. Atomic bitwise OR preserves both writes; no per-row wrapper.
+            M3SelectionBits selected = new M3SelectionBits(items.length);
+            rows(i -> { if (predicate.test(element(items, i))) selected.mark(i); });
+            return readOnly(selected.compact(items));
         }
         /**
          * Ordered per-key left fold: no associativity/commutativity assumption or combiner.

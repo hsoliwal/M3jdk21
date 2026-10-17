@@ -83,7 +83,18 @@ jobs:
                   assert path not in emitted,(path,'duplicate')
                   assert digest(manifest.parent/name)==after,(path,'template drift')
                   assert digest(target/path)==after,(path,'SDK emission drift')
-                  assert digest(r/path)==after,(path,'committed receiver drift')
+                  successor=r/'m3/collections/keyed/bit-selection-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-selection-bits-20261017/manifest.tsv'
+                  if successor.is_file():
+                      successor_rows=[row.split('\\t') for row in successor.read_text().splitlines() if row.strip()]
+                      successor_info={row[0]:(row[1],row[2]) for row in successor_rows}
+                      if path in successor_info:
+                          predecessor_sha,new_sha=successor_info[path]
+                          assert predecessor_sha==after,(path,'unsealed successor predecessor')
+                          assert digest(r/path)==new_sha,(path,'successor installed drift')
+                      else:
+                          assert digest(r/path)==after,(path,'committed receiver drift')
+                  else:
+                      assert digest(r/path)==after,(path,'committed receiver drift')
                   emitted[path]=after
           assert len(emitted)==19
           assert (target/'m3/collections/keyed/recipe-receipt.tsv').is_file()

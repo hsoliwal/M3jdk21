@@ -1,0 +1,32 @@
+{
+  "schema": "M3_PACKED_SELECTION_RECEIVER_EVIDENCE_V1",
+  "base": "b8c2ded94a1c99e8840923d3b618083726d3a620",
+  "recipe": "com.synexia.m3jdk.PackedKeyedSelection20261017",
+  "manifest_sha256": "1f66b9f75fb057c03c6287d70408fd8f398bacc46219eb8d62e3bee152eaa54d",
+  "local_java": {
+    "strict_compile": "PASS_with_test_only_LinkedHashMap_substitute",
+    "real_m3_owner_compile": "NOT_RUN",
+    "new_mask_assertions": 54429,
+    "concurrent_rounds": 400,
+    "randomized_trials": 260,
+    "public_api_javap_parity": "PASS",
+    "inherited_java_mains": 5
+  },
+  "local_jni": {
+    "CXX17_Werror": "PASS",
+    "UBSan_fatal": "PASS",
+    "Xcheck_jni": "PASS",
+    "native_mains": 4,
+    "missing_native_isolation": 3,
+    "new_native_symbols": 0
+  },
+  "offline_replay": {
+    "target_files": 3,
+    "hashes": "PASS",
+    "check": "0 changes",
+    "second_apply": "0 changes"
+  },
+  "maven_openrewrite_sdk": "NOT_RUN_LOCALLY",
+  "full_receiver_reactor": "NOT_RUN",
+  "performance": "NO_SPEEDUP_CLAIM"
+}

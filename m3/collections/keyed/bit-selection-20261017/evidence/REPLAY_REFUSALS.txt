@@ -1,0 +1,12 @@
+PASS 11 custody/refusal checks
+missing-output check-only refusal
+initial all-target emission
+fixed-point check
+fixed-point re-apply
+drifted owner refused before new output
+occupied new target refused before source edit
+mixed PRE/POST refused
+missing required prior source refused
+symlink new output refused
+unsealed manifest drift refused
+postimage resource hash drift refused

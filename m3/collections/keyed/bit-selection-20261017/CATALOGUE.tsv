@@ -1,0 +1,12 @@
+category	operation	candidate	complexity	contract_evaluation	decision	provenance
+concurrent-selection	mark row	boolean[n]	O(n) bytes	Correct per-row writer but larger storage	baseline	M3JDK21 #1072; Apache-2.0
+concurrent-selection	mark row	plain long[] bitwise OR	O(n/8) bytes	Lost updates when independent keys hit same word	rejected	Java Memory Model reference only
+concurrent-selection	mark row	java.util.BitSet.set	O(n/8) bytes	Not safe without synchronization across keyed workers	rejected	JDK21 BitSet API reference only
+concurrent-selection	mark row	AtomicLongArray CAS update	O(n/8) bytes	Correct but extra array owner, CAS retry loop	reviewed	JDK21 atomic API reference only
+concurrent-selection	mark row	VarHandle getAndBitwiseOr on primitive long[]	O(n/8) bytes; atomic word OR	Passed 400x32 shared-word adversarial races	selected	Java21 MethodHandles.arrayElementVarHandle; no source copied
+stable-index-compaction	selected rows	loop every row and boolean check	O(n)	Correct but sparse mask requires O(n) checks	rejected	first-party M3 keyed source
+stable-index-compaction	selected rows	Long.bitCount + trailingZeros + clear-lowest-bit	O(n/64+k)	Stable source index order; duplicates and null preserved	selected	JDK21 Long APIs; no source copied
+object-state-owner	generation flags	duplicate per-object state bit map	O(n/8) plus consistency	Conflicts with current M3ObjectStateSlots28 owner	rejected	M3JDK21 #1083; Apache-2.0
+problem-category	population count	LeetCode 191 Number of 1 Bits	bit operations	Taxonomy only; no solution copied	category evidence	https://leetcode.com/problems/number-of-1-bits/
+problem-category	XOR identities	HackerRank Lonely Integer	bit operations	Not a concurrency operation; taxonomy only	category evidence	https://www.hackerrank.com/challenges/lonely-integer/problem
+problem-category	set kth bit	GeeksforGeeks Set the K-th bit	bit operations	Taxonomy only; no solution copied	category evidence	https://www.geeksforgeeks.org/dsa/set-k-th-bit-given-number/
