@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3Jdk21WrapperRecipeTreePinV220261017
+displayName: Re-pin M3JDK21 wrapper workflow after pinned-provider recipe test repair
+description: >-
+  Exact-text source snapshot from the previous wrapper workflow e4cc subtree
+  identity to current 879db subtree identity, with all proof gates intact.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk21-wrapper-recipe-pin-v2-20261017

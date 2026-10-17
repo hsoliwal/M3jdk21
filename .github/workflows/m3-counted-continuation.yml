@@ -34,7 +34,7 @@ jobs:
           set -euo pipefail
           mkdir -p proof/deps proof/core
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; gcc --version; } > proof/identity.txt
-          test "$(git rev-parse HEAD:m3/collections/counts/recipe)" = 45d5b77bc9b18e02922eb0e69ef246a8bdff05c4
+          test "$(git rev-parse HEAD:m3/collections/counts/recipe)" = 5e6f70feac19cd0f3a9e763656248b22c4192d0b
       - name: Execute all eight Maven OpenRewrite proofs and exact output replay
         shell: bash
         run: |

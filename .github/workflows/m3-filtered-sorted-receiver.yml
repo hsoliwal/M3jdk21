@@ -33,7 +33,7 @@ jobs:
           set -euo pipefail
           mkdir -p proof/deps proof/core
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; gcc --version; } > proof/identity.txt
-          test "$(git rev-parse HEAD:m3/collections/wrappers/recipe)" = 53fb42686982de4906dc73c2d8c7ca4d687dc4a1
+          test "$(git rev-parse HEAD:m3/collections/wrappers/recipe)" = 879db8ef909678f6eb63994e5b9138c498a21e79
           test "$(git hash-object m3/collections/wrappers/verify.py)" = 5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8
           test "$(git rev-parse HEAD:m3/collections/wrappers/proof)" = c901d303b718fb435b24a8fe1d42f40016a89fcf
           cp m3/collections/wrappers/canonical-source.json proof/

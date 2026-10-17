@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3Jdk21WritableFilteredMapAvl20261017
+displayName: Additive M3JDK21 writable filtered Map with comparator-aware AVL preflight
+description: >-
+  Source-sealed five Java-file recipe. Adds a package-local stored-key helper
+  to existing M3FilteredMaps without changing any previous behavior, then reuses
+  first-party Synexia writable views, primitive AVL staging and Java21 tests.
+  Native and JDK contracts remain separate qualification gates.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-writable-map-avl-20261017

@@ -36,7 +36,7 @@ jobs:
           mkdir -p proof/deps proof/core
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; gcc --version; } > proof/identity.txt
           test "$(git hash-object m3/collections/counts/recipe/pinned-engine/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java)" = d58ca50dfaeb60f581b64f43545e688aca5c6530
-          test "$(git hash-object m3/collections/counts/recipe/pinned-engine/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java)" = 2db1257a40d21be06ba2a67da87aff0311183809
+          test "$(git hash-object m3/collections/counts/recipe/pinned-engine/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java)" = 8bd6f399b298f364a41d53391ba2e72da4c5c635
           mvn -B -ntp -f m3/collections/counts/recipe/pom.xml -Dm3.counted.target="$GITHUB_WORKSPACE" test 2>&1 | tee proof/predecessor-recipe.log
           mvn -B -ntp -f m3/collections/counts/totals/recipe/pom.xml -Dm3.totals.target="$GITHUB_WORKSPACE" test 2>&1 | tee proof/totals-recipe.log
           python3 - <<'PY'
