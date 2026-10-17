@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.StringMatchedBuildAdmission
+displayName: M3 String bounded SDK and matched-build admission
+description: >-
+  Source-sealed child of the existing String recipe family. Bind the bounded SDK
+  harness and retain an explicit nonzero matched complete-JDK output hold, while
+  preserving every original build, resource and jtreg command and its order.
+recipeList:
+  - com.synexia.rewrite.M3StringMatchedBuildAdmissionRecipe

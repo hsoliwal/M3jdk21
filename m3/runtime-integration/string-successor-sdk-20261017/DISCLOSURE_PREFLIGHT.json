@@ -1,0 +1,22 @@
+{
+  "schema": "M3_GENERIC_RECIPE_DISCLOSURE_PREFLIGHT_V1",
+  "sourceRepository": "hsoliwal/com.synexia",
+  "sourceCommit": "803c41a722967a2e8fd7850aa88bf19cad887b21",
+  "sourcePr": 11973,
+  "scope": "DIRECTLY_REQUIRED_GENERIC_APACHE_OPENREWRITE_ADAPTER_AND_STRING_TOOLING_FIXTURES",
+  "newlyPublicProvider": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+  "alreadyPublicKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "classification": "GENERIC_FIRST_PARTY_MIGRATION_GLUE",
+  "reason": "Existing exact-hash scanner/admission/PlainText emitter and metadata-preserving editor is directly required to prove the authorized String migration recipe; no private runtime/domain algorithm is introduced.",
+  "excluded": [
+    "unrelated GPU resources",
+    "GPU catalogue",
+    "GPU fixture SDK tests",
+    "private credentials",
+    "private runtime implementation",
+    "new executor"
+  ],
+  "rights": "Retain Apache-2.0 source notices; original public GPL/ClassPath-exception owner fixtures are independent opaque data with license texts.",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "M3_STRING_SUCCESSOR_CANONICAL_APPLICATION_COPY_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "4be49026cdbaf277a062fb294c519a80535ad42a",
+  "pullRequest": 11973,
+  "sourcePath": "synexia-openrewrite-recipes/recipes/m3-string-successor-chain-20261014/utf8-chain-sdk-20261017/sdk",
+  "receiverCorePath": "m3/runtime-integration/string-successor-sdk-20261017/canonical",
+  "moduleGitTree": "12902bd47baa70fd524e91addb73541d9eece032",
+  "openrewriteAdapterGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+  "manifestKernelGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "historicalRecipeGitBlob": "0bc92e10a154c64a5420059836c5b6d6c05d5820",
+  "historicalSdkTestGitBlob": "d87f54324e5dc338ce1d2dc34639bda9dacfede4",
+  "newRecipeGitBlob": "99abb1217e1ffc8b70154425bdde8c497f531370",
+  "newSdkTestGitBlob": "5fe36d01accd5d8c55fa0d61fc77ba97bf472812",
+  "targetToolingApplied": false,
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "fullJdkOutputAdmission": "NOT_ADMITTED",
+  "qualification": "RERUN_REQUIRED_AFTER_EXACT_SUREFIRE_SIGNATURE_REPAIR",
+  "inputPinsGitBlob": "f9e54819fce9816617eb4623a37f639ca1fa1b2a",
+  "inputPinsSha256": "93a14c96379d598daf86d0ecfc12aa58a5464e06defa4158e77d35408919c3bb"
+}

@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.StringUtf8SuccessorChain
+displayName: M3 String UTF8 source successor chain
+description: >-
+  Exact source-only third transition after the historical precompute pin recipe.
+  Preserve three earlier receipt versions, frozen checker history and runtime holds.
+recipeList:
+  - com.synexia.rewrite.M3StringUtf8SuccessorChainRecipe

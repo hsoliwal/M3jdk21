@@ -1,0 +1,39 @@
+{
+  "schema": "M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V2",
+  "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
+  "predecessor": {
+    "receiptPath": "m3/compatibility/synexia-string-phase-checker-successor-20261013.json",
+    "receiptGitBlob": "a0373fd42a1fe2b8104e3675abc1919254950fff",
+    "receiptSha256": "78fc05a0cb9b7f26e9a6226b2406cc38801f09040dc14e445e31651f7a9385af",
+    "targetAfterGitBlob": "9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02",
+    "targetAfterSha256": "11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4"
+  },
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 11615,
+    "headAtCapture": "90fc480bcd16aa044b103d4fff84f3d554553a83",
+    "stateAtCapture": "OPEN_DRAFT",
+    "manifestPath": "synexia-openrewrite-recipes/recipes/m3-string-successor-chain-20261014/manifest.tsv",
+    "manifestGitBlob": "19ac98444b295f327b22d54f2eb1439ff25efbc3",
+    "sourceResourcePath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-string-successor-chain/check_string_phase.py",
+    "sourceResourceGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+    "sourceResourceSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseCommit": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
+    "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+    "beforeGitBlob": "9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02",
+    "beforeSha256": "11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4",
+    "afterGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+    "afterSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3"
+  },
+  "change": {
+    "relation": "ADDITIVE_SOURCE_OBSERVATION_V2",
+    "v1HistoryPreserved": true,
+    "runtimeProductFilesChanged": false,
+    "runtimePromotionAuthorized": false,
+    "runtimeAcceptance": "NOT_CLAIMED",
+    "performanceEvidence": "NOT_MEASURED"
+  }
+}

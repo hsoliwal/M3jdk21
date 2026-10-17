@@ -1,0 +1,22 @@
+{
+  "schema": "M3_STRING_RECEIVING_SDK_ATTEMPT_V1",
+  "run": 39003681608,
+  "job": 117311661103,
+  "head": "0488ad9b853681b954848f0a405bdede1acc172b",
+  "checkout": "d0cf6b86816970520f51f62f4c5f25e047c1f556",
+  "conclusion": "FAILURE",
+  "closureRefusalsPassed": 162,
+  "compile": "MISSING_INTELLIJ_LANGUAGE_ANNOTATION_WITH_WERROR",
+  "sdk": "NOT_RUN",
+  "inheritedUtf8Sdk": {
+    "tests": 5,
+    "closureRefusals": 26,
+    "conclusion": "PASS",
+    "artifact": 12089638885,
+    "artifactSha256": "58a345da5e98d9fe819d8e3ef5026e0428d7228db91bece11ab87bf058cd8b8d"
+  },
+  "repair": "org.jetbrains:annotations:24.1.0 provided; preserve -Werror/provider/tests",
+  "rerun": "REQUIRED",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

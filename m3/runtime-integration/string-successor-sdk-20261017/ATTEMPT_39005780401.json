@@ -1,0 +1,182 @@
+{
+  "schema": "M3_SUREFIRE_PATH_REPORT_COUNTEREXAMPLE_V1",
+  "run": 39005780401,
+  "job": 117317853302,
+  "head": "8d418283052b0d2afa115bb9a44889babe29fe3e",
+  "ciReportedSha": "07961f69400e948f5d2ee5eba0f6252b542cc16e",
+  "artifact": {
+    "id": 12091485032,
+    "bytes": 62904,
+    "files": 16,
+    "sha256": "e48049b2429ced83e77f173c62df21b945c4edcc68397cb27729877c06d28f94"
+  },
+  "artifactInventory": [
+    {
+      "path": "canonical/target/surefire-reports/TEST-com.synexia.rewrite.M3StringUtf8SuccessorChainRecipeTest.xml",
+      "bytes": 11910,
+      "sha256": "a66545e5cfe7842a6cfd93efae0724193e2d92a92d2bad9f90fb61d86968fd3e",
+      "gitBlob": "1d91f21eedade67e84d7d80b473c28758d0d2f40",
+      "counts": {
+        "tests": "3",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      "cases": [
+        {
+          "name": "namedRecipeEmitsSerialHistoryAndCompletePythonSpectrum(Path)",
+          "classname": "com.synexia.rewrite.M3StringUtf8SuccessorChainRecipeTest"
+        },
+        {
+          "name": "eachRequiredInputAndAdditionRefusesDriftMissingAndDuplicates",
+          "classname": "com.synexia.rewrite.M3StringUtf8SuccessorChainRecipeTest"
+        },
+        {
+          "name": "everyPartialStateAndBothOrdersReachExactFixedPoint",
+          "classname": "com.synexia.rewrite.M3StringUtf8SuccessorChainRecipeTest"
+        }
+      ]
+    },
+    {
+      "path": "canonical/target/surefire-reports/TEST-com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipeTest.xml",
+      "bytes": 11885,
+      "sha256": "b9418a527cdbbdeefaacd4fc4da0c1535d274793903752989f8212e1e867815a",
+      "gitBlob": "63e492eb25d9a6a9106d19b387072a5e9c16484b",
+      "counts": {
+        "tests": "3",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      "cases": [
+        {
+          "name": "emittedFocusedPythonRegressionsExposeBaselineAndAcceptCandidate(Path)",
+          "classname": "com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipeTest"
+        },
+        {
+          "name": "eachRequiredInputAndAdditionRefusesDriftMissingAndDuplicates",
+          "classname": "com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipeTest"
+        },
+        {
+          "name": "everyPartialStateAndBothOrdersReachExactFixedPoint",
+          "classname": "com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipeTest"
+        }
+      ]
+    },
+    {
+      "path": "canonical/target/emitted/logs/v4-candidate.log",
+      "bytes": 4239,
+      "sha256": "284a3883f538bd5d60b212f69e02cabf2014e5960f5d4d1b5ce1e39356e4c7ab",
+      "gitBlob": "40383cbf2ec78821029469a804fd7ccf4f13aed4",
+      "tail": "ied_successor_refuses (__main__.StringTargetSuccessorTest.test_unqualified_successor_refuses) ... ok\n\n----------------------------------------------------------------------\nRan 29 tests in 0.048s\n\nOK\n"
+    },
+    {
+      "path": "canonical/target/emitted/logs/v3-baseline.log",
+      "bytes": 6319,
+      "sha256": "83a4267603269c3008d9ad22be4c4f7d96494d50747f395b02f5161d225883c8",
+      "gitBlob": "003514795dfc78827072c927aa1e5c1833b78ccd",
+      "tail": "dc265fc8df3f2d84a9f2ecd3b7516\n+ 75d949e5aa2c8ff4e5c70d648e81fc0d37b68651\n\n\n----------------------------------------------------------------------\nRan 26 tests in 0.016s\n\nFAILED (failures=1, errors=2)\n"
+    },
+    {
+      "path": "canonical/target/emitted/logs/v4-custody.log",
+      "bytes": 2144,
+      "sha256": "f485c1fc56552ca838a699535257c1e787792ab6f3d5074b5619012e445a0c48",
+      "gitBlob": "dbad8f634b4457f8f797603396bccebd03f5c23e",
+      "tail": "xiaStringPhaseCheckerSuccessorTest.test_v4_source_chain_and_immutable_utf8_hold_remain_exact) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "path": "canonical/target/emitted/v3/m3/compatibility/fixtures/string-phase-checker-v2-20261017.py",
+      "bytes": 24427,
+      "sha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3",
+      "gitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d"
+    },
+    {
+      "path": "canonical/target/emitted/v3/m3/compatibility/synexia-string-phase-checker-successor-20261017-v3.json",
+      "bytes": 2185,
+      "sha256": "45a7b377ec949d75f12d030952eeab9b5175c42f4581a0d9e900ee994da7208c",
+      "gitBlob": "22d49606563cfb93d06024ba6ed34fd3fd682d6e"
+    },
+    {
+      "path": "canonical/target/emitted/v3/m3/compatibility/test_synexia_string_phase_checker_successor.py",
+      "bytes": 14870,
+      "sha256": "b569114a7e2e0d4380f1bbbb503f9a9c5c5914cdeca3aeebe4c9b4bab26c470f",
+      "gitBlob": "9a2c5b0a5583a04b145443df966e29369fcd707e"
+    },
+    {
+      "path": "canonical/target/emitted/v3/m3/synexia-import/current-full-borrow/check_string_phase.py",
+      "bytes": 24670,
+      "sha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+      "gitBlob": "368842c70f4671bac14ad902ed047a486109f27d"
+    },
+    {
+      "path": "canonical/target/emitted/v3/m3/synexia-import/current-full-borrow/test_string_phase_successors.py",
+      "bytes": 17062,
+      "sha256": "992b8524d4ed3f1fabdd4f2685adb6d55eb23d9e3de0683675695afa71e03e75",
+      "gitBlob": "70f3abde194e3437ac4e6c68b1d320f82e7d896b"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/compatibility/fixtures/string-phase-checker-v3-20261017.py",
+      "bytes": 24670,
+      "sha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+      "gitBlob": "368842c70f4671bac14ad902ed047a486109f27d"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/compatibility/synexia-string-phase-checker-successor-20261017-v4.json",
+      "bytes": 5458,
+      "sha256": "b9e78abacc2a7e6bdf9ac21711812381f476288af2a1e289cf8368ec66e75643",
+      "gitBlob": "1bf38b06df3bef3dc07e6c4d4f9c818561592cfe"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/compatibility/test_synexia_string_phase_checker_successor.py",
+      "bytes": 32062,
+      "sha256": "b39ed26dfbeef7d830d54c234d4c6de73a823b41412d3161a200c1a0e4389073",
+      "gitBlob": "68faa1c5f4c6807d6d162ee40eae362b6a683ce3"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/synexia-import/current-full-borrow/check_string_phase.py",
+      "bytes": 26562,
+      "sha256": "db38acfb6f2b04b5f119544e91642a3639bd6b73ae32e88f077e819b0a4375c1",
+      "gitBlob": "2f8b3b75c1de3110c30cf3b860b6fbad8f00fd72"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/synexia-import/current-full-borrow/string-target-owner-successor-chain-20261017.tsv",
+      "bytes": 528,
+      "sha256": "c56d86b7981dd31533a509aad97c25368df57b6e0297847dde8b3435e9c618ad",
+      "gitBlob": "c7b52d16a15277c0aa2a09fada6f1fb3840aa70e"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/synexia-import/current-full-borrow/test_string_phase_successors.py",
+      "bytes": 27735,
+      "sha256": "48796f0fd1be609bd50c7b83293c5c08bcf6de3261298d818f41529926da16cc",
+      "gitBlob": "1c45ef4a88d6f941e158be2529b33e3dedbe4d89"
+    }
+  ],
+  "failure": {
+    "stage": "verify.py --reports",
+    "message": "SDK test inventory drift",
+    "cause": "Exact two parameterized Java methods report as method(Path); bare expected inventory was wrong"
+  },
+  "sourceCandidates": {
+    "foss": "c3192f5aad9532092084cfe64c1599eee139d6e2",
+    "mainVerifier": "38105e3f16666e9d65cf95317423d714728ddeb8",
+    "guardVerifier": "78830ca76458a9c5e50ee0289055ee66c5be7176"
+  },
+  "ramExecuted": {
+    "mainReportRefusals": 50,
+    "guardReportRefusals": 22,
+    "actualMainXmlAccepted": 2,
+    "oldBareInventoriesReproducedFailures": 2,
+    "filesystemOutputBytes": 0
+  },
+  "actualMainSdk": {
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "closureRefusals": 171
+  },
+  "refinedMavenRerun": "REQUIRED",
+  "guardSdk": "NOT_RUN",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

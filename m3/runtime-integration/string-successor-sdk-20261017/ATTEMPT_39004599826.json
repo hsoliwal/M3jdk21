@@ -1,0 +1,47 @@
+{
+  "schema": "M3_STRING_SUCCESSOR_EXECUTED_ATTEMPT_V1",
+  "run": 39004599826,
+  "job": 117314380300,
+  "head": "7c7e8ac5183a852ce6b35d0fc5b4075d18b87c54",
+  "ciReportedSha": "22f6636b18e3650fc0451afd7bc8e8cf86a17cdf",
+  "conclusion": "failure",
+  "strictJava21Compile": "PASS",
+  "originalSdk": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "newSdk": {
+    "tests": 3,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "candidatePython": {
+    "tests": 26,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "closureRefusals": 162,
+  "firstMismatch": {
+    "owner": "M3StringFacts",
+    "expected": "fcd108ab6181fec11d16eda811b29d18298f3fb1",
+    "actual": "d8dd7dc30db6a9e3897146572bd4a7755c954ffb"
+  },
+  "additionalAuditedEvolution": {
+    "owner": "M3StringPool",
+    "expected": "514247a2e6c3704e03a9b47682f74e481f66585f",
+    "actual": "0905414556ad0b698a5b5f835f53d12bc040bc8c"
+  },
+  "artifact": {
+    "id": 12090690797,
+    "bytes": 56963,
+    "sha256": "98f98b5b718d4462fb2823af971cf2d92071e10618f4b4c0794f4cc3dd4bd82d"
+  },
+  "custody13": "NOT_RUN",
+  "workflowSdk": "NOT_RUN",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}
