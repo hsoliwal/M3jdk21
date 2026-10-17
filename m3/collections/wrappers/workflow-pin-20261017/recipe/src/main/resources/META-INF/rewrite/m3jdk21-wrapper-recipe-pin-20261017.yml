@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3Jdk21WrapperRecipeTreePin20261017
+displayName: Advance existing M3JDK21 wrapper CI source-tree pin after source-sealed receipt
+description: >-
+  Exact hash-pinned text successor for one GitHub Actions workflow.
+  Retains source, proof and verifier gates and replaces only the prior
+  wrappers/recipe subtree Git SHA with the exact reviewed postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk21-wrapper-recipe-pin-20261017
