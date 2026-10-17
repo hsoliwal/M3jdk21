@@ -1,0 +1,96 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK isolated collections direct projected map cursor receiver
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java'
+      - 'm3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsCursorProof.java'
+      - 'm3/collections/wrappers/src/test/java/com/m3/collections/M3MapCursorNativeProof.java'
+      - 'm3/collections/wrappers/direct-projection-20261017/**'
+      - 'm3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-direct-map-projection-20261017/**'
+      - 'm3/collections/wrappers/recipe/src/main/resources/META-INF/rewrite/m3-direct-map-projection-20261017.yml'
+      - 'm3/collections/wrappers/recipe/src/test/java/com/synexia/rewrite/M3DirectProjectionReceiverRecipeTest.java'
+      - '.github/workflows/m3jdk-direct-map-projection-20261017.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-source-java21-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Preimage and generated Java source custody
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          root=Path('m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-direct-map-projection-20261017')
+          rows=[line.split('\t') for line in (root/'manifest.tsv').read_text().splitlines() if line]
+          assert len(rows)==3 and len({r[0] for r in rows})==3
+          for path,before,after,name in rows:
+              assert name.endswith('.java.txt'),name
+              sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+              assert sha(root/name)==after,(name,'template')
+              assert Path(path).is_file() and sha(Path(path))==after,(path,'target')
+              if before!='ABSENT':
+                  assert sha(root/'pre'/name)==before,(path,'preimage')
+          print('M3_JDK_MAP_DIRECT_PROJECTION_SOURCE_SEAL_PASS targets=3')
+          PY
+      - name: Compile true m3/collections owner source and run contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          B=build/m3-direct-projection
+          mkdir -p "$B"
+          javac --release 21 -proc:none -Xlint:all -Werror -h "$B" -d "$B" \
+            m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java \
+            m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsCursorProof.java \
+            m3/collections/wrappers/src/test/java/com/m3/collections/M3MapCursorNativeProof.java
+          java -ea -cp "$B" com.m3.collections.M3FilteredMapsCursorProof
+      - name: Verify JNI signature and C17 bounded primitive shadow parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          B=build/m3-direct-projection
+          C=m3/collections/wrappers/direct-projection-20261017/m3_map_cursor_jni.c
+          grep -q Java_com_m3_collections_M3MapCursorNativeProof_fold "$B/com_m3_collections_M3MapCursorNativeProof.h"
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -pedantic -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            "$C" -o "$B/libm3_map_cursor_jni.so"
+          java -ea -Xcheck:jni -Dm3.cursor.native.library="$PWD/$B/libm3_map_cursor_jni.so" \
+            -cp "$B" com.m3.collections.M3MapCursorNativeProof
+      - name: Git diff hygiene
+        run: git diff --check HEAD^ HEAD
+
+  unchanged-recipe-sdk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Retained Maven/OpenRewrite LST recipe fixed point and refusal
+        run: >-
+          mvn -B -ntp -f m3/collections/wrappers/recipe/pom.xml test
+          -Dtest=M3DirectProjectionReceiverRecipeTest
