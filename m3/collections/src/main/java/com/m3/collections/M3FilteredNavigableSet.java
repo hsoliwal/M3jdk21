@@ -2,11 +2,8 @@
 package com.m3.collections;
 
 import java.util.AbstractSet;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.SortedSet;
@@ -97,10 +94,17 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
     public boolean contains(Object value) {
         // Preserve backing-set type/comparator exceptions and avoid unsafe casts.
         if (!backing.contains(value)) return false;
-        for (E accepted : this) {
-            if (Objects.equals(accepted, value)) return true;
-        }
-        return false;
+        // A TreeSet's comparator, not Object.equals, defines set membership.
+        // Resolve the representative from the backing set before testing the predicate.
+        @SuppressWarnings("unchecked")
+        E key = (E) value;
+        E member = backing.ceiling(key);
+        if (member == null) return false;
+        Comparator<? super E> order = backing.comparator();
+        if (order != null) return order.compare(member, key) == 0 && predicate.test(member);
+        @SuppressWarnings("unchecked")
+        Comparable<? super E> natural = (Comparable<? super E>) member;
+        return natural.compareTo(key) == 0 && predicate.test(member);
     }
 
     @Override
