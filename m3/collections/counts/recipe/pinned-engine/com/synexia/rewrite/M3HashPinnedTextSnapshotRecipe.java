@@ -258,6 +258,10 @@ public final class M3HashPinnedTextSnapshotRecipe
       return false;
     }
     boolean nativePath = value.startsWith("src/main/native/") || value.startsWith("src/test/native/");
+    // Exact first-party M3JDK21 Java/JNI receiver. Do not admit arbitrary
+    // module native paths, Java source, or unreviewed JNI backends.
+    boolean m3IndexFilterJni = value.equals(
+        "m3/collections/src/main/native/collections/m3_int_filter_jni.c");
     // SWT fragments use manifest-first Tycho metadata; no XML/Java parser owns this format.
     boolean swtManifest = value.matches(
         "binaries/org[.]eclipse[.]swt[.][a-z0-9_]+[.][a-z0-9_]+[.][a-z0-9_]+/META-INF/MANIFEST[.]MF");
@@ -279,11 +283,12 @@ public final class M3HashPinnedTextSnapshotRecipe
         || lower.endsWith(".json") || lower.endsWith(".md") || lower.endsWith(".txt")
         || lower.endsWith(".tsv") || lower.endsWith(".yml") || lower.endsWith(".yaml")
         || lower.endsWith(".xml") || lower.endsWith(".properties");
-    if (!nativePath && !swtManifest && !swtDistillationBootstrap && !structuredText) return false;
+    if (!nativePath && !m3IndexFilterJni && !swtManifest && !swtDistillationBootstrap
+        && !structuredText) return false;
     for (String part : value.split("/", -1)) {
       if (part.isBlank() || part.equals(".") || part.equals("..")) return false;
     }
-    return swtManifest || swtDistillationBootstrap || structuredText
+    return m3IndexFilterJni || swtManifest || swtDistillationBootstrap || structuredText
         || value.endsWith(".c") || value.endsWith(".h")
         || value.endsWith(".cc") || value.endsWith(".cpp") || value.endsWith(".hpp")
         || value.endsWith("CMakeLists.txt");
