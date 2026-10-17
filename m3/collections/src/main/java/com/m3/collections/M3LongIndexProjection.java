@@ -56,10 +56,14 @@ public final class M3LongIndexProjection {
 
     /** Original physical slot, not the logical ordinal within this view. */
     public int physicalIndex(int ordinal) {
-        return indices[from + Objects.checkIndex(ordinal, size())];
+        int checked = Objects.checkIndex(ordinal, size());
+        return M3LongAddressKernel.addressUnchecked(indices, from, checked);
     }
 
-    public long get(int ordinal) { return values[physicalIndex(ordinal)]; }
+    public long get(int ordinal) {
+        int checked = Objects.checkIndex(ordinal, size());
+        return M3LongAddressKernel.loadUnchecked(values, indices, from, checked);
+    }
 
     /** Shares immutable arrays; offset/length are relative to this view. */
     public M3LongIndexProjection slice(int offset, int length) {
@@ -74,7 +78,8 @@ public final class M3LongIndexProjection {
     /** Materialization boundary; never exposes or returns the canonical backing array. */
     public long[] toArray() {
         long[] result = new long[size()];
-        for (int i = 0; i < result.length; i++) result[i] = values[indices[from + i]];
+        M3LongAddressKernel.gatherJavaUnchecked(
+                values, indices, from, result, 0, result.length);
         return result;
     }
 
@@ -115,7 +120,7 @@ public final class M3LongIndexProjection {
                     throw new java.util.ConcurrentModificationException(
                             "aligned selection states changed");
                 }
-                selected[written++] = indices[from + i];
+                selected[written++] = M3LongAddressKernel.addressUnchecked(indices, from, i);
             }
         }
         if (written != selected.length) {
@@ -147,7 +152,9 @@ public final class M3LongIndexProjection {
                 int right = (int) Math.min(base + width * 2, size);
                 int a = left, b = middle, write = left;
                 while (a < middle && b < right) {
-                    int cmp = Long.compare(values[current[a]], values[current[b]]);
+                    int cmp = Long.compare(
+                            M3LongAddressKernel.loadPhysicalUnchecked(values, current[a]),
+                            M3LongAddressKernel.loadPhysicalUnchecked(values, current[b]));
                     // Equality chooses left, guaranteeing stable ties.
                     if (descending ? cmp >= 0 : cmp <= 0) scratch[write++] = current[a++];
                     else scratch[write++] = current[b++];
