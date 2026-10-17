@@ -36,9 +36,9 @@ postimages/fixed point/partial delivery/missing/drift/occupied/extra refusal.
 Fix recipe and rerun, never patch installed emitted targets.
 
 A second cohesive JDK21 recipe `M3InstalledSourceInventoryRecipe` reuses JDK
-`Files.walk` + `MessageDigest(SHA-256)` to produce the **ordered** 135-row
+`Files.walk` + `MessageDigest(SHA-256)` to produce the **ordered** 136-row
 full current ledger: every ordinary Java file under `src/main/java`,
-`src/test/java` (84 + 47 = 131 Java), `LICENSE`, `NOTICE`,
+`src/test/java` (84 package-level main + 1 module-info + 47 test = 132 Java), `LICENSE`, `NOTICE`,
 and two known `verification/*.java` native probes. Refuses symlinks,
 unexpected cardinality, path traversal, duplicate paths, unpinned source
 commit, partial trees or SHA drift. This is a source-bound *inventory*
