@@ -1,0 +1,8 @@
+source	owner	pin	license	usage
+hsoliwal/M3jdk21 m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java	hsoliwal/M3jdk21	master@970a34350ebdf6a3f1c5ff5acc8445d0f3515f55; blob c613bf12e479d1b206ee0b4a290c6f10f263547e	Apache-2.0	preserved interface and navigation semantics
+hsoliwal/M3jdk21 m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java	hsoliwal/M3jdk21	master@970a34350ebdf6a3f1c5ff5acc8445d0f3515f55; blob product from master	Apache-2.0	transient primitive staging; no payload objects
+hsoliwal/M3jdk21 m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	hsoliwal/M3jdk21	master@970a34350ebdf6a3f1c5ff5acc8445d0f3515f55; blob 240bbfb62ca949bfbd8abb0061cccad6630f7888	Apache-2.0	already implemented primitive mask compaction including JNI-offload owner
+hsoliwal/M3jdk21 m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java	hsoliwal/M3jdk21	master@970a34350ebdf6a3f1c5ff5acc8445d0f3515f55; blob d58ca50dfaeb60f581b64f43545e688aca5c6530	Apache-2.0	existing Maven/OpenRewrite generator, no parallel engine
+java.util.Arrays, Spliterators	OpenJDK/JDK 21	Java SE API contract	JDK API only	JDK binary search/spliterator semantics; no source body copied
+Guava Sets.filter	Google Guava	Javadoc 33.7.2-jre	Javadoc reference only	live-vs-snapshot cost/semantic contrast
+LeetCode/HackerRank/GeeksForGeeks	public challenge sites	problem links in category catalogue	no solution bodies copied	category names and adversarial boundary cases
