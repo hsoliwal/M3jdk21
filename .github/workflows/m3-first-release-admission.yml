@@ -152,8 +152,8 @@ jobs:
           root = pathlib.Path("m3/runtime-integration/string-successor-sdk-20261017")
           metadata = json.loads((root / "canonical-source.json").read_text(encoding="utf-8"))
           assert metadata["repository"] == "hsoliwal/com.synexia"
-          assert metadata["commit"] == "803c41a722967a2e8fd7850aa88bf19cad887b21"
-          assert metadata["moduleGitTree"] == "9e0b1a456a21cceedd4dc95eb08d07aad8ea25d3"
+          assert metadata["commit"] == "4349d8d20622176ed08cfae2fbbf98404916a80d"
+          assert metadata["moduleGitTree"] == "edb997124a975bc4a0a4ff8f5b67b74526e5a33c"
           assert metadata["openrewriteAdapterGitBlob"] == "1c1b1b568d369f688f6953161636bf36b484bf5a"
           assert metadata["manifestKernelGitBlob"] == "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
           assert metadata["receiverCorePath"] == str(root / "canonical")
@@ -164,13 +164,28 @@ jobs:
               text=True).strip()
           assert actual == metadata["moduleGitTree"], "canonical receiving core tree drift"
           pins = (root / "canonical/pins.json").read_bytes()
-          assert hashlib.sha256(pins).hexdigest() == "df4773bb3312d196e8f087bd4040fe2a7bcfb2341992c11d34d8e41db0bf7d60"
+          assert hashlib.sha256(pins).hexdigest() == "06d0700a3eac211afd8291ba3bbdaaca3533e6d2249a35c44a4ca4b53e770012"
           assert shutil.disk_usage(".").free - (512 << 20) >= (8 << 30), "SDK scratch reserve"
           print("M3_STRING_SUCCESSOR_RECEIVING_CORE_TREE_EXACT " + actual)
+          guard = json.loads((root / "workflow-canonical-source.json").read_text(encoding="utf-8"))
+          assert guard["repository"] == "hsoliwal/com.synexia"
+          assert guard["sourcePath"] == "synexia-openrewrite-recipes/recipes/m3-string-successor-chain-20261014/utf8-chain-sdk-20261017/workflow-sdk"
+          assert guard["receiverCorePath"] == str(root / "workflow-canonical")
+          assert guard["openrewriteAdapterGitBlob"] == "1c1b1b568d369f688f6953161636bf36b484bf5a"
+          assert guard["manifestKernelGitBlob"] == "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+          assert guard["runtimeApplied"] is False and guard["phaseAdvanced"] is False
+          guard_tree = subprocess.check_output(
+              ["git", "rev-parse", "HEAD:" + guard["receiverCorePath"]],
+              text=True).strip()
+          assert guard_tree == guard["moduleGitTree"], "canonical workflow module tree drift"
+          print("M3_STRING_WORKFLOW_RECEIVING_CORE_TREE_EXACT " + guard_tree)
           PY
           python3 -I -S -B m3/runtime-integration/string-successor-sdk-20261017/canonical/verify.py
           mvn -B -ntp -f m3/runtime-integration/string-successor-sdk-20261017/canonical/pom.xml test
           python3 -I -S -B m3/runtime-integration/string-successor-sdk-20261017/canonical/verify.py --reports
+          python3 -I -S -B m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/verify.py
+          mvn -B -ntp -f m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/pom.xml test
+          python3 -I -S -B m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/verify.py --reports
       - name: Retain serial String SDK evidence and emitted files
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -180,6 +195,9 @@ jobs:
             m3/runtime-integration/string-successor-sdk-20261017/canonical/target/sdk-receipt.json
             m3/runtime-integration/string-successor-sdk-20261017/canonical/target/surefire-reports/TEST-*.xml
             m3/runtime-integration/string-successor-sdk-20261017/canonical/target/emitted/
+            m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/target/sdk-receipt.json
+            m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/target/surefire-reports/TEST-*.xml
+            m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical/target/emitted/
           retention-days: 90
           if-no-files-found: error
       - name: Java differential proof

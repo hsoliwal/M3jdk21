@@ -1,11 +1,11 @@
 {
   "schema": "M3_STRING_SUCCESSOR_CANONICAL_APPLICATION_COPY_V1",
   "repository": "hsoliwal/com.synexia",
-  "commit": "803c41a722967a2e8fd7850aa88bf19cad887b21",
+  "commit": "4349d8d20622176ed08cfae2fbbf98404916a80d",
   "pullRequest": 11973,
   "sourcePath": "synexia-openrewrite-recipes/recipes/m3-string-successor-chain-20261014/utf8-chain-sdk-20261017/sdk",
   "receiverCorePath": "m3/runtime-integration/string-successor-sdk-20261017/canonical",
-  "moduleGitTree": "9e0b1a456a21cceedd4dc95eb08d07aad8ea25d3",
+  "moduleGitTree": "edb997124a975bc4a0a4ff8f5b67b74526e5a33c",
   "openrewriteAdapterGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
   "manifestKernelGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
   "historicalRecipeGitBlob": "0bc92e10a154c64a5420059836c5b6d6c05d5820",
@@ -16,5 +16,5 @@
   "runtimeApplied": false,
   "phaseAdvanced": false,
   "fullJdkOutputAdmission": "NOT_ADMITTED",
-  "qualification": "NOT_RUN"
+  "qualification": "RERUN_REQUIRED_AFTER_COMPILE_DEPENDENCY_REPAIR"
 }

@@ -42,8 +42,8 @@
     },
     {
       "path": "pom.xml",
-      "sha256": "f6f297bf51b3fad08d1c491600cdc6574e9c5a2a781339fefc778e981119e6a4",
-      "unchangedGitBlob": "18dc26472123580d321325026947f5de8d8bdf84"
+      "sha256": "a00ccd905424b5ca57b1b8202af8c75d95eefc76ea02bacdf9e3cd976b0d95bd",
+      "unchangedGitBlob": "0812a2209ca502bc6577fa8caeb567db1c70e782"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/before/check_string_phase.py",
@@ -267,8 +267,8 @@
     },
     {
       "path": "verify.py",
-      "sha256": "ddaead1c6d0d020c8c9e2579fb782bc3a83bac944f17273691c224893e9aa63e",
-      "unchangedGitBlob": "f94468ea41c739ba7ddef123a10880a396bc1a85"
+      "sha256": "988ad175e2a57c62256a5f12fffaebc197c6e1290ed668733f13fc9387311478",
+      "unchangedGitBlob": "2559013da11eb54c4cff592000d9748538ddf78a"
     }
   ]
 }

@@ -1,0 +1,69 @@
+{
+  "schema": "M3_STRING_MATCHED_BUILD_RECEIVING_SDK_INPUTS_V1",
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "files": [
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "unchangedGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "unchangedGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipe.java",
+      "sha256": "ffff0c1b6a4012821f7e5bab6b0e04d6a83a9725e208d9fd6c4f0b9f2a3731c5",
+      "unchangedGitBlob": "0b81dc7b2b8682681a136d5dcffdb8a6526bd849"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "unchangedGitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/m3-first-release-admission.yml",
+      "sha256": "b44c1590ecbf1df53403ad810601c8fde071e556a149a26f4bec8bf7c8be06d6",
+      "unchangedGitBlob": "1f0924995cae52819e1bcf76a4d0b4385a287b96"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/mindex-string-backing.yml",
+      "sha256": "ed0f0e4a9577f85a88860df2e226eb010a8bb7b793fcd8201764329c981d25da",
+      "unchangedGitBlob": "793ea270938003a40f8d54f831b4d189e1f91f97"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/manifest.tsv",
+      "sha256": "7995918657c3618afa6afb8000822059b390d087c52ecfaf888f9da458efb3d7",
+      "unchangedGitBlob": "e77d32745fd4fe6af4953ea9d34c6b1c4207f681"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/m3-first-release-admission.yml",
+      "sha256": "1fff46ed2234fe430f1dbcbdb7f55c3e3f0d0e4c08f7ae6e44b951f3da0bd552",
+      "unchangedGitBlob": "40eab8605bbc2e323c6e93d4da4f3d35ee1a0c49"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/mindex-string-backing.yml",
+      "sha256": "dbcce64499d3b189985137ea0f6580d7fc983b343536abca5fd7d3b6853be0b8",
+      "unchangedGitBlob": "2a92041b72e27aa38581c47bdd653e7c1e75ceab"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-string-matched-build-admission-20261017.yml",
+      "sha256": "e33d975adb1fbc8589ff4e2e0697192d5289a44b60fb12f8a30aa872e84075fe",
+      "unchangedGitBlob": "a4bb79181a8b5cc126ff8c65abfccdb5a524dec5"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipeTest.java",
+      "sha256": "5ae5410f079446e6c2a9de92c1f696a098200006d7cc7889ff7654449e9dd0a1",
+      "unchangedGitBlob": "f5d3131ebbec0dc35861c876f6acf60aa8a824b6"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "a01bebef7efc16da6cf40059fefca88bb86f59f10e61369350faa27824bd346f",
+      "unchangedGitBlob": "3bda43b17b4439e855379995bc6652824d8baa5b"
+    }
+  ]
+}

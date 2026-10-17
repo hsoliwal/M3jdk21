@@ -1,0 +1,15 @@
+{
+  "schema": "M3_STRING_WORKFLOW_CANONICAL_APPLICATION_COPY_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "3b61df6a000bf162b727c7e725ed35b52ce78cc3",
+  "pullRequest": 11973,
+  "sourcePath": "synexia-openrewrite-recipes/recipes/m3-string-successor-chain-20261014/utf8-chain-sdk-20261017/workflow-sdk",
+  "receiverCorePath": "m3/runtime-integration/string-successor-sdk-20261017/workflow-canonical",
+  "moduleGitTree": "e5fa92b5734c593091f55636d4637472f4d62ed2",
+  "openrewriteAdapterGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+  "manifestKernelGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "fullJdkOutputAdmission": "NOT_ADMITTED",
+  "qualification": "NOT_RUN"
+}
