@@ -1,0 +1,9 @@
+
+/workspace/scratch/6320427574fe/m3jdk21-wrappers-publish/m3/collections/wrappers/target/native/librun_search_jni.so:
+0000000000001300 T Java_RunSearchJni_first
+
+/workspace/scratch/6320427574fe/m3jdk21-wrappers-publish/m3/collections/wrappers/target/native/libm3_map_cursor_jni.so:
+00000000000011c0 T Java_com_m3_collections_M3MapCursorNativeProof_fold
+
+/workspace/scratch/6320427574fe/m3jdk21-wrappers-publish/m3/collections/wrappers/target/native/libm3_collections_mask.so:
+00000000000022f0 T Java_com_m3_collections_M3IndexMaskCompactor_selectNative

@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CollectionWrapperMasterReconciliation20261017
+displayName: Reconcile existing M3 collection wrappers with current master
+description: Apply qualified first-party wrapper atoms through the existing Java LST and text snapshot owners.
+recipeList:
+  - com.synexia.rewrite.M3CollectionWrapperReconciliationRecipe:
+      crateName: m3-collection-wrapper-reconciliation-20261017

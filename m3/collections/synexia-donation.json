@@ -10,10 +10,10 @@
   "canonical_recipe_path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-20261007",
   "canonical_recipe_implementation_blob": "6807cabe2c5715f9c3b307e21dcc7cb700f2be38",
   "source_pins_sha256": "856e0b3e0efd47c88bfedfd6ac47291078ba6207e58178baaaac30017ade081f",
-  "name_map_sha256": "e976621377edae456e5c69308208b9a193d81c2d221cd137afefcd2d07e67b94",
+  "name_map_sha256": "30e8f9a378ff6b7856707c858226b4fdd162fb560dd6f851771d72951806dbb3",
   "applied_java_manifest_sha256": "31ef71b432356b141588bbc1352638890f1abeae81acb89d97a497f8e0eda513",
-  "installed_source_manifest": "qualification/installed-source-enum-set-20261014.tsv",
-  "installed_source_manifest_sha256": "046e3aa7f4d9523a72657942fac62bcb7d7bb6eaafb928dbe1c1d87afed1252c",
+  "installed_source_manifest": "qualification/installed-source-wrappers-20261017.tsv",
+  "installed_source_manifest_sha256": "989adce813571579836646a0e2c1527e3bf0aef531af0c16476dabb9e5911a5b",
   "qualification_receipt": "qualification/receiving-enum-set-20261008.json",
   "application_receipt": "qualification/synexia-receiving-application-20261008.json",
   "first_party_license": "Apache-2.0",
@@ -766,6 +766,255 @@
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
+    },
+    {
+      "source": "com.synexia.primitives.M3AdmissionWrappers",
+      "source_path": "synexia-primitives/src/main/java/com/synexia/primitives/M3AdmissionWrappers.java",
+      "source_commit": "b983ceab2848ddb3f2ef76a73bef85a2ee636398",
+      "source_blob_sha1": "60bf0bea6ca0d8a631266d64dfc6b07be447cda0",
+      "source_repository": "hsoliwal/com.synexia",
+      "target": "com.m3.collections.M3AdmissionWrappers",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3AdmissionWrappers.java",
+      "target_sha256": "d14f999cc54ef5470477d50cd3e34df3c924d9aa1cac31a9d2c76dccdaba5eda",
+      "target_git_blob": "0f6822137df55d0e1dbafa660c7f1f37b6a831c2",
+      "receiver_preimage": "ABSENT",
+      "receiver_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+      "disposition": "ADDITIVE_GENERIC_OWNER",
+      "changes": [
+        "Retain the exact existing PR 992 purpose owner and its canonical Synexia lineage."
+      ],
+      "license": "Apache-2.0",
+      "canonical_source_owner": "hsoliwal/com.synexia",
+      "canonical_successor_recipe": "com.synexia.rewrite.M3CollectionWrapperReconciliationRecipe",
+      "canonical_successor_recipe_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation",
+      "retained_receiver_lineage": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+        "path": "m3/collections/src/main/java/com/m3/collections/M3AdmissionWrappers.java",
+        "sha256": "d14f999cc54ef5470477d50cd3e34df3c924d9aa1cac31a9d2c76dccdaba5eda",
+        "git_blob": "0f6822137df55d0e1dbafa660c7f1f37b6a831c2"
+      }
+    },
+    {
+      "source": "com.synexia.primitives.M3BoundedLists",
+      "source_path": "synexia-primitives/src/main/java/com/synexia/primitives/M3BoundedLists.java",
+      "source_commit": "c1fe03a05078f395776a0570b934f87682b8abca",
+      "source_blob_sha1": "30418b309b85c375193c1f614abfbf0938ba8d02",
+      "source_repository": "hsoliwal/com.synexia",
+      "target": "com.m3.collections.M3BoundedLists",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3BoundedLists.java",
+      "target_sha256": "4b2af6d7137d64cd2838000bf5366d4b4c5da52d8287ff6cdfdbe2cb2e565daa",
+      "target_git_blob": "fd8b4194d31d68b555a7dcad22641ee0475af59c",
+      "receiver_preimage": "ABSENT",
+      "receiver_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+      "disposition": "ADDITIVE_GENERIC_OWNER",
+      "changes": [
+        "Retain the exact existing PR 992 purpose owner and its canonical Synexia lineage."
+      ],
+      "license": "Apache-2.0",
+      "canonical_source_owner": "hsoliwal/com.synexia",
+      "canonical_successor_recipe": "com.synexia.rewrite.M3CollectionWrapperReconciliationRecipe",
+      "canonical_successor_recipe_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation",
+      "retained_receiver_lineage": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+        "path": "m3/collections/src/main/java/com/m3/collections/M3BoundedLists.java",
+        "sha256": "4b2af6d7137d64cd2838000bf5366d4b4c5da52d8287ff6cdfdbe2cb2e565daa",
+        "git_blob": "fd8b4194d31d68b555a7dcad22641ee0475af59c"
+      }
+    },
+    {
+      "source": "com.synexia.primitives.M3CollectionViews",
+      "source_path": "synexia-primitives/src/main/java/com/synexia/primitives/M3CollectionViews.java",
+      "source_commit": "a0227fc8a23b102613dd760a6180a8f39e344215",
+      "source_blob_sha1": "6c769c61d1851a7e4b08f63ea85c9458c939ae31",
+      "source_sha256": "c3ff418b51cd1b471ded6da0376e0e17eb429151d7e1383da0b23c587c9a3f53",
+      "source_repository": "hsoliwal/com.synexia",
+      "target": "com.m3.collections.M3CollectionViews",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "target_sha256": "b2889562f453543d8d8a927da0d5cfd56e3f4329a5fc25f4c40e341a2ab3fdfe",
+      "target_git_blob": "29fb475fe1840f74672cd613afd907135f99dfce",
+      "receiver_preimage": "ABSENT",
+      "receiver_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+      "disposition": "ADDITIVE_GENERIC_OWNER",
+      "changes": [
+        "Retain PR 992 snapshots and owner traversal; saturate filtered size while completing predicate traversal."
+      ],
+      "license": "Apache-2.0",
+      "canonical_source_owner": "hsoliwal/com.synexia",
+      "canonical_successor_recipe": "com.synexia.rewrite.M3CollectionWrapperReconciliationRecipe",
+      "canonical_successor_recipe_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation",
+      "retained_receiver_lineage": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+        "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+        "sha256": "e51e894c15dd0f6163cd8129fd20748660332b58f6fd8dc6e749fdec49e3c5c6",
+        "git_blob": "2750647c832d5bec07940b032ad2a2f66f425072"
+      }
+    },
+    {
+      "source": "com.synexia.primitives.M3CollectionWrappers",
+      "source_path": "synexia-primitives/src/main/java/com/synexia/primitives/M3CollectionWrappers.java",
+      "source_commit": "b983ceab2848ddb3f2ef76a73bef85a2ee636398",
+      "source_blob_sha1": "807adc74d9acfa0a6423869ac8e638ded357f7e7",
+      "source_repository": "hsoliwal/com.synexia",
+      "target": "com.m3.collections.M3CollectionWrappers",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3CollectionWrappers.java",
+      "target_sha256": "c468c54630ef81997594e8370763f6c01cb9a2db6a7725d91c6117b04e57f12c",
+      "target_git_blob": "4fd06a0fe34aa584a4d8492b6617ff098735f095",
+      "receiver_preimage": "ABSENT",
+      "receiver_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+      "disposition": "ADDITIVE_GENERIC_OWNER",
+      "changes": [
+        "Retain the exact existing PR 992 purpose owner and its canonical Synexia lineage."
+      ],
+      "license": "Apache-2.0",
+      "canonical_source_owner": "hsoliwal/com.synexia",
+      "canonical_successor_recipe": "com.synexia.rewrite.M3CollectionWrapperReconciliationRecipe",
+      "canonical_successor_recipe_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation",
+      "retained_receiver_lineage": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+        "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionWrappers.java",
+        "sha256": "c468c54630ef81997594e8370763f6c01cb9a2db6a7725d91c6117b04e57f12c",
+        "git_blob": "4fd06a0fe34aa584a4d8492b6617ff098735f095"
+      }
+    },
+    {
+      "source": "com.synexia.primitives.M3ConcatenatedViews",
+      "source_path": "synexia-primitives/src/main/java/com/synexia/primitives/M3ConcatenatedViews.java",
+      "source_commit": "02369570f62c362ebc5907360b0320232a91cc00",
+      "source_blob_sha1": "744748e3afcd6176fe13a49caef6f41dc6906e8c",
+      "source_repository": "hsoliwal/com.synexia",
+      "target": "com.m3.collections.M3ConcatenatedViews",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3ConcatenatedViews.java",
+      "target_sha256": "9ef41f113ed56f82e30e3b116c3309a42c5963741f94e04f6f2a891649da2484",
+      "target_git_blob": "a31c001d788d1539b8e6571009adc837f46d195a",
+      "receiver_preimage": "ABSENT",
+      "receiver_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+      "disposition": "ADDITIVE_GENERIC_OWNER",
+      "changes": [
+        "Retain the exact existing PR 992 purpose owner and its canonical Synexia lineage."
+      ],
+      "license": "Apache-2.0",
+      "canonical_source_owner": "hsoliwal/com.synexia",
+      "canonical_successor_recipe": "com.synexia.rewrite.M3CollectionWrapperReconciliationRecipe",
+      "canonical_successor_recipe_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation",
+      "retained_receiver_lineage": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+        "path": "m3/collections/src/main/java/com/m3/collections/M3ConcatenatedViews.java",
+        "sha256": "9ef41f113ed56f82e30e3b116c3309a42c5963741f94e04f6f2a891649da2484",
+        "git_blob": "a31c001d788d1539b8e6571009adc837f46d195a"
+      }
+    },
+    {
+      "source": "com.synexia.primitives.M3FilteredMaps",
+      "source_path": "synexia-primitives/src/main/java/com/synexia/primitives/M3FilteredMaps.java",
+      "source_commit": "dfce28fc0394398357195ec63a9778bd57e8140c",
+      "source_blob_sha1": "28ffaea975bba77c062c75a3d6846c6c37ce03e9",
+      "source_sha256": "e0dee924d84fbf2b1fecd7845ae7a2025712805e79b7fb42c13cacbb087cefd8",
+      "source_repository": "hsoliwal/com.synexia",
+      "target": "com.m3.collections.M3FilteredMaps",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java",
+      "target_sha256": "38bdde6b8ed1bd0f035ef6ac620af2b2c51865cf3e8040a37cb96fef1ac7ff05",
+      "target_git_blob": "59568a6d50796fa829c56c0baf8acd1fd1907664",
+      "receiver_preimage": "ABSENT",
+      "receiver_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+      "disposition": "ADDITIVE_GENERIC_OWNER",
+      "changes": [
+        "Retain PR 992 direct projections; restore nine composition factories and direct raw queries from Synexia PR 11920; saturate filtered-map size."
+      ],
+      "license": "Apache-2.0",
+      "canonical_source_owner": "hsoliwal/com.synexia",
+      "canonical_successor_recipe": "com.synexia.rewrite.M3CollectionWrapperReconciliationRecipe",
+      "canonical_successor_recipe_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation",
+      "retained_receiver_lineage": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+        "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java",
+        "sha256": "39e3698a6a9e1c494050f04bd9dbd13134dfbb748a075fa6a0535d3325c3dd9d",
+        "git_blob": "c3779cb4dd07e71d28fbc547ff1991256919ace5"
+      }
+    },
+    {
+      "source": "com.synexia.primitives.M3FixedSizeLists",
+      "source_path": "synexia-primitives/src/main/java/com/synexia/primitives/M3FixedSizeLists.java",
+      "source_commit": "b983ceab2848ddb3f2ef76a73bef85a2ee636398",
+      "source_blob_sha1": "66b3d6f264c1007fa92ae0ddfc5c0c9eff2eab14",
+      "source_repository": "hsoliwal/com.synexia",
+      "target": "com.m3.collections.M3FixedSizeLists",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FixedSizeLists.java",
+      "target_sha256": "42a7297c4faf6298afa7325fae905b1cb73d18e410ecee880e3457af9fe1d94b",
+      "target_git_blob": "d6f7725421b7c3c22d2f7a3667dd92d4340260df",
+      "receiver_preimage": "ABSENT",
+      "receiver_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+      "disposition": "ADDITIVE_GENERIC_OWNER",
+      "changes": [
+        "Retain the exact existing PR 992 purpose owner and its canonical Synexia lineage."
+      ],
+      "license": "Apache-2.0",
+      "canonical_source_owner": "hsoliwal/com.synexia",
+      "canonical_successor_recipe": "com.synexia.rewrite.M3CollectionWrapperReconciliationRecipe",
+      "canonical_successor_recipe_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation",
+      "retained_receiver_lineage": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+        "path": "m3/collections/src/main/java/com/m3/collections/M3FixedSizeLists.java",
+        "sha256": "42a7297c4faf6298afa7325fae905b1cb73d18e410ecee880e3457af9fe1d94b",
+        "git_blob": "d6f7725421b7c3c22d2f7a3667dd92d4340260df"
+      }
+    },
+    {
+      "source": "com.m3.collections.M3LongSortedViews",
+      "source_kind": "CANONICAL_SYNEXIA_RECEIVER_TEMPLATE",
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-sorted-composition-20261016/M3LongSortedViews.java.txt",
+      "source_commit": "ad7cc06b1dba2e0946db4c9bff2eddec2dac16f8",
+      "source_blob_sha1": "4bc4d2db935423000b58e6483bc78a6a54d9c3ae",
+      "source_sha256": "97db99b66ea237735038f22c63f840dda3dab6d7368b5ea87a4257e4e3a83477",
+      "source_repository": "hsoliwal/com.synexia",
+      "target": "com.m3.collections.M3LongSortedViews",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java",
+      "target_sha256": "97db99b66ea237735038f22c63f840dda3dab6d7368b5ea87a4257e4e3a83477",
+      "target_git_blob": "4bc4d2db935423000b58e6483bc78a6a54d9c3ae",
+      "receiver_preimage": "b2b9f26e5a353c602e50054cf5f66d4ce04e3ed989aefdaab44ab181be8f3a35",
+      "receiver_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+      "disposition": "REFINE_EXISTING_PRIMITIVE_OWNER",
+      "changes": [
+        "Receive the existing canonical sortedSnapshot, filteredSortedSnapshot and maskedSortedSnapshot methods into the current primitive owner."
+      ],
+      "license": "Apache-2.0",
+      "canonical_source_owner": "hsoliwal/com.synexia",
+      "canonical_successor_recipe": "com.synexia.rewrite.M3CollectionWrapperReconciliationRecipe",
+      "canonical_successor_recipe_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation"
+    },
+    {
+      "source": "com.synexia.primitives.M3MappedViews",
+      "source_path": "synexia-primitives/src/main/java/com/synexia/primitives/M3MappedViews.java",
+      "source_commit": "b983ceab2848ddb3f2ef76a73bef85a2ee636398",
+      "source_blob_sha1": "dba1d1163e05c3fdd389785522a277fe77ff0a1d",
+      "source_repository": "hsoliwal/com.synexia",
+      "target": "com.m3.collections.M3MappedViews",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3MappedViews.java",
+      "target_sha256": "8e41d66484af9068e36ae7c9b50098d9556417a0013ae0986850aa658940f40a",
+      "target_git_blob": "5aca2339b08f3760155fb655b8ce3dc5113716c5",
+      "receiver_preimage": "ABSENT",
+      "receiver_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+      "disposition": "ADDITIVE_GENERIC_OWNER",
+      "changes": [
+        "Retain existing owner; saturate full flattened size traversal and supply a lazy, unsized, unsplittable cursor."
+      ],
+      "license": "Apache-2.0",
+      "canonical_source_owner": "hsoliwal/com.synexia",
+      "canonical_successor_recipe": "com.synexia.rewrite.M3CollectionWrapperReconciliationRecipe",
+      "canonical_successor_recipe_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation",
+      "retained_receiver_lineage": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+        "path": "m3/collections/src/main/java/com/m3/collections/M3MappedViews.java",
+        "sha256": "6bd1f0bd3458678acbc9983c006c20edc63563c702bf5ad6a7581a2d149eeb3f",
+        "git_blob": "4c2ffbfc358eb0c161227e46ed0b0cc6bfbeb85f"
+      }
     }
   ],
   "modification_notice": "Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.",
@@ -974,8 +1223,8 @@
     }
   ],
   "qualification_source_counts": {
-    "main_java": 66,
-    "test_java": 24
+    "main_java": 91,
+    "test_java": 34
   },
   "historical_receipts": "Immutable 20261007 evidence remains canonical in Synexia; it is not current target qualification.",
   "historical_receiving_repair_20261008": {
@@ -1014,5 +1263,113 @@
     "canonical_source_artifact_format": "SHA256 of UTF8 sorted path<TAB>mode<TAB>git_blob<TAB>sha256<LF>; excludes live central home and the external manifest",
     "publication_binding_notice": "Modified 2026: bind the qualified current cohort to its exact published canonical packet; all runtime and historical qualification facts remain unchanged."
   },
-  "modifications_20261008_enum_set_successor": "Preserve concurrent EnumSet code and its existing licensing/mapping receipts; qualify exact current inventory without changing historical88-source proof."
+  "modifications_20261008_enum_set_successor": "Preserve concurrent EnumSet code and its existing licensing/mapping receipts; qualify exact current inventory without changing historical88-source proof.",
+  "historical_wrapper_reconciliation_predecessor_20261017": {
+    "installed_source_manifest": "qualification/installed-source-enum-set-20261014.tsv",
+    "installed_source_manifest_sha256": "046e3aa7f4d9523a72657942fac62bcb7d7bb6eaafb928dbe1c1d87afed1252c",
+    "name_map_sha256": "e976621377edae456e5c69308208b9a193d81c2d221cd137afefcd2d07e67b94",
+    "qualification_source_counts": {
+      "main_java": 66,
+      "test_java": 24
+    },
+    "document_sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
+    "name_mapping_document_sha256": "e976621377edae456e5c69308208b9a193d81c2d221cd137afefcd2d07e67b94",
+    "source_set_successor": {
+      "descriptor": "com.synexia.m3.M3CollectionsEnumSetInventorySuccessor20261008",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008/metadata-proof/enum-set-source-set-successor",
+      "source_baseline": "1074559415050bcda1110ca5c485870b3e7513a7",
+      "new_packet_publication": "PUBLISHED_CANONICAL_SOURCE",
+      "target_baseline": "eda1ae0733952394851c3580f8efb7624563b98c",
+      "scope": "EXACT_ADDITIVE_90_MODULE_SOURCE_COHORT",
+      "installed_rows": 95,
+      "standalone_java_probes": 2,
+      "non_java_inputs": 3,
+      "runtime_source_changes": 0,
+      "preserved_enum_set_receipt": "m3/compatibility/synexia-enum-set-receipt.json",
+      "preserved_enum_set_mapping_fragment": "m3/docs/name-mapping.d/m3-enum-set.json",
+      "preserved_family_map": "m3/collections/JDK_FAMILY_MAP.tsv",
+      "historical_receipts": "Original93-row inventory and88-module-source qualification/application evidence remain unchanged.",
+      "phase_advance": false,
+      "canonical_source_revision": "ea441c53361caf7222eb064b24640be7f7927672",
+      "canonical_source_tree": "21ba9919ac6c5a6f41019f8af05528915d7b0e60",
+      "canonical_source_artifact_root_sha256": "2b4f251c5730672f86566ab82543adc6c8169602f03e49f9635df6d845b1f568",
+      "canonical_source_artifact_files": 57,
+      "canonical_source_artifact_format": "SHA256 of UTF8 sorted path<TAB>mode<TAB>git_blob<TAB>sha256<LF>; excludes live central home and the external manifest",
+      "publication_binding_notice": "Modified 2026: bind the qualified current cohort to its exact published canonical packet; all runtime and historical qualification facts remain unchanged."
+    },
+    "disposition": "HISTORICAL_PREDECESSOR; all original metadata fields and source records remain retained."
+  },
+  "current_target_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+  "active_source_successor": "wrapper_reconciliation_successor_20261017",
+  "wrapper_reconciliation_successor_20261017": {
+    "descriptor": "com.synexia.rewrite.M3CollectionWrapperReconciliationRecipe",
+    "canonical_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation",
+    "canonical_source_repository": "hsoliwal/com.synexia",
+    "canonical_publication_binding": "Exact published source commit and SDK receipts are bound externally by the receiving PR; no pending commit is invented in this generated packet.",
+    "target_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "scope": "SEPARATELY_BUILT_COLLECTION_MODULE_CANDIDATE",
+    "installed_source_manifest": "qualification/installed-source-wrappers-20261017.tsv",
+    "installed_source_manifest_sha256": "989adce813571579836646a0e2c1527e3bf0aef531af0c16476dabb9e5911a5b",
+    "installed_rows": 130,
+    "module_java_sources": 125,
+    "qualification_source_counts": {
+      "main_java": 91,
+      "test_java": 34
+    },
+    "standalone_java_probes": 2,
+    "non_java_inputs": 3,
+    "additive_generic_owners": 8,
+    "refined_existing_primitive_owners": 1,
+    "wrapper_test_scope": "m3/collections/wrappers/src/test/java; received wrapper and primitive-composition proofs execute separately from the legacy module src cohort.",
+    "qualification_status": "CURRENT_JAVA_JNI_EXECUTION_REQUIRED; historical receipt results are not transferred.",
+    "historical_receipt_scope": "Existing top-level source, application and qualification receipt fields retain their original donation epochs.",
+    "retained_master_inventory_reconciliation": {
+      "newly_declared_current_paths": [
+        "m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntCollection.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntIterator.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java",
+        "m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java",
+        "m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java",
+        "m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+        "m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java",
+        "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java",
+        "m3/collections/src/test/java/com/m3/collections/M3AdaptiveEnumLongMapTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3IntLanesTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3IntLongHashMapTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3LongFilteredViewContractTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3LongLinkedHashSetTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyRuntimePressureTest.java"
+      ],
+      "refreshed_preexisting_master_hashes": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+          "historical_manifest_sha256": "42cbfad68941221a81efc34d33356334a7c9625eb7031aeaee387e2583fa832d",
+          "master_sha256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84",
+          "disposition": "PRESERVED_CURRENT_MASTER_SOURCE"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+          "historical_manifest_sha256": "df1c03c44c3108cf6b9e34fe5ca49c7692dd63c2250f749ce25add792e12147d",
+          "master_sha256": "290a9037d22957983080b63bbf32d50286fc71a2a2e2a8ff1a6d16239617838c",
+          "disposition": "PRESERVED_CURRENT_MASTER_SOURCE"
+        }
+      ],
+      "runtime_changes_from_inventory_reconciliation": 0
+    },
+    "active_phase": "STRING",
+    "phase_advance": false,
+    "java_base_or_hotspot_promoted": false,
+    "runtime_dependency_on_synexia": false,
+    "universal_performance_claim": false,
+    "modification_notice": "Modified 2026-10-17 by Hitesh Soliwal and Contributors to the Synexia Project: retain all master collection owners, receive existing generic wrappers, and restore exact successor custody."
+  }
 }

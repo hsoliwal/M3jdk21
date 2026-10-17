@@ -1,0 +1,519 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "schema": "M3_WRAPPER_RECIPE_CUSTODY_V1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "ca2713e70a53071d248411713e9073f27a1acea5",
+  "canonical_module": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation",
+  "canonical_recipe": "com.synexia.m3.CollectionWrapperMasterReconciliation20261017",
+  "target_repository": "hsoliwal/M3jdk21",
+  "custody": "Exact pinned authoring mirror; Synexia remains the canonical reusable recipe owner and M3jdk21 retains product/runtime authority.",
+  "license_scope": "Each mirrored file retains its original license, notices and source provenance; the Apache-2.0 declaration on this JSON covers this control document only.",
+  "frozen_publish_allowlist_sha256": "a03e817de645c1348f2151f516975d9f690405108d563cf02f8ca9c370b48a4d",
+  "files": [
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/QUALIFICATION.md",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/QUALIFICATION.md",
+      "git_blob": "ae5eaf348d1ceb9f94240c4831039464c5b5473d",
+      "sha256": "82b11a1e7279b2cccc1464c29179f716604a41e3a0b1b12589a1bdcfbbc15df8"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/README.md",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/README.md",
+      "git_blob": "07d57565ba172aab1e140de164d4a0f0dcc33c06",
+      "sha256": "c4890d4b9798d4fca5f26caef730c7464949013021c78186f8497c03013d7cbb"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/donor-notices/M3jdk21-collections-NOTICE.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/donor-notices/M3jdk21-collections-NOTICE.txt",
+      "git_blob": "c35cf82657474282058afc7ffbcb98c46fd865e3",
+      "sha256": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/SDK_EXECUTION.tsv",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/SDK_EXECUTION.tsv",
+      "git_blob": "4768dea889bb406f7dffe37ea00d7ad4928f61e2",
+      "sha256": "451c8b6a585f501c931617ce08cd027a4fbf70a4beda1eedaa9bc18b85267edb"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/installed-qualification.json",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/installed-qualification.json",
+      "git_blob": "6a55d2faf268cce5ef3766c82bb5fe288fe649dc",
+      "sha256": "a4af44e458b093d115ed64a1fa520b31ebdcd4826db408caec3e0a8ca393a6fe"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/legacy-qualification.json",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/legacy-qualification.json",
+      "git_blob": "f9079ef1de5d66c03d1077601fb6ff8b933c5082",
+      "sha256": "46809c86b85ee2367b577b9003366714b4632241a24de0aee5a057296d7bb87d"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/legacy-receipt-summary.json",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/legacy-receipt-summary.json",
+      "git_blob": "1f96c5e4850e6c0e47654ac01c4ed8f5341741d9",
+      "sha256": "4ee982a0fd4ccb9cffb046e66ccfddb1ea3266d9daf7eae2fbe6a610690f5e95"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/legacy-source-inventory.json",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/legacy-source-inventory.json",
+      "git_blob": "bf6cbe839d79f0b3b104b537050ff14ec82a0a1a",
+      "sha256": "2abeac03ada8715b8db4d6a05978ce7187ade0417af768730d1cf3a5eeda9c8e"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/legacy-verification.log.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/legacy-verification.log.txt",
+      "git_blob": "28a96997c4d5b82ccb9e53da2c3b7b1a881b77dc",
+      "sha256": "1211d18944d5287986ac2a4c0f4bcfc636406d11efcaf581e9fdf59787e418e5"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/metadata-unit.log.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/metadata-unit.log.txt",
+      "git_blob": "8b4bf206a4ff023d502cef561647174477f79efd",
+      "sha256": "e8867e9402e2de21d76fb0223af0ab8c3cb5cdcf91b5a87944fcbd044c8c0825"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/native-exports.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/native-exports.txt",
+      "git_blob": "2eed23faf48210c13103ff50826b5987bbd3f45f",
+      "sha256": "b0a27093a72218cc5df1daf84d83ae0d3d602d793b15c8df59e057f3cdc491c1"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/native-map-cursor.log.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/native-map-cursor.log.txt",
+      "git_blob": "e8f0e1c9e780489cd760e8fa40d904cdfb69b262",
+      "sha256": "f443c5651e99ed4a562ccf17e3c680eb7ebe582fe3e48e01490c1c68b34cf8e1"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/native-map-parity.log.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/native-map-parity.log.txt",
+      "git_blob": "655b53176ac5b5dbc3fb80366453c396895c9d02",
+      "sha256": "281a7af248492bf4a2852f16459f1c8870c1a1c8f0a51b72ff2753f93ab020ff"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/native-primitive-mask.log.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/native-primitive-mask.log.txt",
+      "git_blob": "5671d0d80ca04483e39acb30773d1377d278ac84",
+      "sha256": "d30a10c63fc6dacdf6ddae8d6fa143d3ccb8b0ae8f4183923684773cc42b3bc9"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/native-run-boundaries.log.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/native-run-boundaries.log.txt",
+      "git_blob": "1d9b3bdde9c7ef54887b0da23f3e43401f46984b",
+      "sha256": "de39edb133ad83a941eae24d342d8abddd88f69a92d953ce22149753e1488d3a"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/recipe-sdk.log.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/recipe-sdk.log.txt",
+      "git_blob": "1e743909ca9876bf51114bf3a40730b529d404a9",
+      "sha256": "54a9003a9ab84fd6a7370652b5e98774ea7776b5ae666b1c3a52ab41c894522e"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/sdk-apply.log.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/sdk-apply.log.txt",
+      "git_blob": "ca65c503dafb4b4b0694db2863627f1b6c6aed4a",
+      "sha256": "f10895f9d5efbb6fb36d2c1a0f869235e767551e93033f8069e1ec3a68f00648"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/wrapper-java-jni.log.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/evidence/wrapper-java-jni.log.txt",
+      "git_blob": "faa870bdc79c1a17796d40f725302dfd9454ef66",
+      "sha256": "31caa7f14dc0d921cda5be3c6997ec7a54684c713d013a514ec254b3cb9fd30f"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/pom.xml",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation/pom.xml",
+      "git_blob": "8e19f5968082f74d595fffe1aecf4f84021510af",
+      "sha256": "6f94dcc932ff7a21d1b253445cfe95dab73dfd1a72f013966f05393ffb1114a5"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CollectionWrapperReconciliationRecipe.java",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CollectionWrapperReconciliationRecipe.java",
+      "git_blob": "560332f32f93b6d1d0d4933cc301a210cceafa8b",
+      "sha256": "374cd5577e32f3ba05450117405b4265a0ab6e9feafce1344374f35ae7a70f2e"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "git_blob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "git_blob": "39c3a6c99f94ab53eb1eab8bc2eb8c691638cd35",
+      "sha256": "750f2e8266ca308369daea14d2bb6db9f3ec90a64e45ee7d5aa1cb5192028347"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "git_blob": "c1ce1408b78201139221093076a454ae21169f72",
+      "sha256": "504f1616b68fbd10c3df38adaecd0e9d90de5535d791c8c1b57958b7455c9bd3"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "git_blob": "d24729950508857280ea1b56d4e930f05137ec85",
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-collection-wrapper-reconciliation-20261017.yml",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-collection-wrapper-reconciliation-20261017.yml",
+      "git_blob": "8007ec84ba2c0e13688c724a34ed15d3228bb385",
+      "sha256": "fd1632732061ebb349e4937784ba318149d01ffea21b1fd52a4266a99d353d54"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3AdmissionWrappers.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3AdmissionWrappers.java.txt",
+      "git_blob": "0f6822137df55d0e1dbafa660c7f1f37b6a831c2",
+      "sha256": "d14f999cc54ef5470477d50cd3e34df3c924d9aa1cac31a9d2c76dccdaba5eda"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3BoundedLists.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3BoundedLists.java.txt",
+      "git_blob": "fd8b4194d31d68b555a7dcad22641ee0475af59c",
+      "sha256": "4b2af6d7137d64cd2838000bf5366d4b4c5da52d8287ff6cdfdbe2cb2e565daa"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3CollectionViews.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3CollectionViews.java.txt",
+      "git_blob": "29fb475fe1840f74672cd613afd907135f99dfce",
+      "sha256": "b2889562f453543d8d8a927da0d5cfd56e3f4329a5fc25f4c40e341a2ab3fdfe"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3CollectionWrappers.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3CollectionWrappers.java.txt",
+      "git_blob": "4fd06a0fe34aa584a4d8492b6617ff098735f095",
+      "sha256": "c468c54630ef81997594e8370763f6c01cb9a2db6a7725d91c6117b04e57f12c"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3CollectionWrappersSelfTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3CollectionWrappersSelfTest.java.txt",
+      "git_blob": "fc4a2a8db8a727d90dbb740bbe8c3f81527b9c49",
+      "sha256": "91f7683b93e55ec803e3a06782955e71f2c26de7cb86a1a52882de2c2fcd5bd0"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3CollectionWrappersTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3CollectionWrappersTest.java.txt",
+      "git_blob": "7140481d7ad555f31aa4a455efb43a140592dd0f",
+      "sha256": "afcfead6e1c30cdbe424b53fac44e00d10c05389749902d6aa21093f43410ece"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3ConcatenatedViews.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3ConcatenatedViews.java.txt",
+      "git_blob": "a31c001d788d1539b8e6571009adc837f46d195a",
+      "sha256": "9ef41f113ed56f82e30e3b116c3309a42c5963741f94e04f6f2a891649da2484"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapApiProof.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapApiProof.java.txt",
+      "git_blob": "0b493dec6d5664fbe1cf47c74dce8adaf783b1c4",
+      "sha256": "6606f93e14286bdb199bab859c1d488913919b49445aafc6365b18fe2259c0bf"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapSizeProof.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapSizeProof.java.txt",
+      "git_blob": "03c27b10723cec35d2ee4f728e6f78f6c5d85ba5",
+      "sha256": "4539aff8d18300f0fb98c84c6357e079a64b4b5666b7e23660df909bc4bc96d2"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMaps.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMaps.java.txt",
+      "git_blob": "59568a6d50796fa829c56c0baf8acd1fd1907664",
+      "sha256": "38bdde6b8ed1bd0f035ef6ac620af2b2c51865cf3e8040a37cb96fef1ac7ff05"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapsCursorProof.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapsCursorProof.java.txt",
+      "git_blob": "e94a6ef054652d3a58eeb9526dc70025c3601cdd",
+      "sha256": "6ffbcaa671dcf408c361edeb3c94812ef71381b2b2434a8d394f7aad4da8fcc7"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapsNativeSelfTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapsNativeSelfTest.java.txt",
+      "git_blob": "65277db098158ff63acc17a0103515ab02f80690",
+      "sha256": "5437dfeea903d7208f6453e052d8ca88b84ac1e292dff1acd0df845b6c21f136"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapsSelfTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapsSelfTest.java.txt",
+      "git_blob": "5d72a62dfa5403fa5ce7fdbc6b217b46482aa45d",
+      "sha256": "a99ae7502a7b1832c149dd2d0af888ddbdeb5805659ef5c778ceda4ca1949cd5"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapsTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredMapsTest.java.txt",
+      "git_blob": "fca44882774187b2b301fb18ea2f3e8fc4897452",
+      "sha256": "c4139f6db6648b0e71a347c15c35d6d133cb4d32581990490141501f273cb271"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredSnapshotFusionProof.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredSnapshotFusionProof.java.txt",
+      "git_blob": "73aaa80c019126031f8015a0ead5e1858e073937",
+      "sha256": "5e04edafe5ea8d17f448756d4a6a63647e5d989a41bbc2f871c5567f525153f0"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredSnapshotFusionTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredSnapshotFusionTest.java.txt",
+      "git_blob": "65e81d1b80573f979a0c3c91e2ab957896dd5fc1",
+      "sha256": "3d4340a1a5c5b5cd49180a0d690953a230f9e156ce5164ba9752248a8c98300a"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredSortedCompositionSelfTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredSortedCompositionSelfTest.java.txt",
+      "git_blob": "dce5200046142c7f5b25c685b73509f046b3001a",
+      "sha256": "df1d46ee5dbbd82132d3bb6b071430f647df75a3d67dc8d537a153e6d5d1186b"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredSortedCompositionTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredSortedCompositionTest.java.txt",
+      "git_blob": "ee69b4c1d0f123ee22e799f9a1d587d6baf021b8",
+      "sha256": "5d0e0d31bec733577fb9ef374f7ccd90255382d15423e691d74755f329f01f12"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredTraversalProof.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredTraversalProof.java.txt",
+      "git_blob": "2a51cfe89ba391d6e5627e7a6c0b0401f3472b0d",
+      "sha256": "14dc064c546b0ab96b97de9f5edb4ec99c0e53533273b4ee745727876ba22bc6"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredTraversalTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredTraversalTest.java.txt",
+      "git_blob": "7785799960ce38b0d0035e684c5ba2b3901cbe91",
+      "sha256": "80997e2a21aee9eee5bd7eb79131f01a70f7015b33aed1c65b6acbfc2456ed6d"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredWrapperSelfTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FilteredWrapperSelfTest.java.txt",
+      "git_blob": "85af59e2c8bc516de21b57f13e8104b107422bae",
+      "sha256": "b9fabf7e916744765a8b67e629d19e9e6d1e85ba2ae7e2d67a7b3ecbdb878c9d"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FixedSizeLists.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3FixedSizeLists.java.txt",
+      "git_blob": "d6f7725421b7c3c22d2f7a3667dd92d4340260df",
+      "sha256": "42a7297c4faf6298afa7325fae905b1cb73d18e410ecee880e3457af9fe1d94b"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3LongSortedViews.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3LongSortedViews.java.txt",
+      "git_blob": "4bc4d2db935423000b58e6483bc78a6a54d9c3ae",
+      "sha256": "97db99b66ea237735038f22c63f840dda3dab6d7368b5ea87a4257e4e3a83477"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3MapCursorNativeProof.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3MapCursorNativeProof.java.txt",
+      "git_blob": "f4f6fbb0c1f361f5cd31b72bf77a08879b4f1faa",
+      "sha256": "9b458b3fbcc5f282494dc6755ae76576d12257e72ecb94ed305ae73cc62dccaa"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3MappedViews.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3MappedViews.java.txt",
+      "git_blob": "5aca2339b08f3760155fb655b8ce3dc5113716c5",
+      "sha256": "8e41d66484af9068e36ae7c9b50098d9556417a0013ae0986850aa658940f40a"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3PrimitiveSortedSnapshotOracleSelfTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3PrimitiveSortedSnapshotOracleSelfTest.java.txt",
+      "git_blob": "fd29e5cf34cc6ad6edececf47591ff86a076beb6",
+      "sha256": "cf12d03ce2ff40927dc4787c1222e0b0d017583d20da9c60665e78ad82d9c463"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3PrimitiveSortedSnapshotOracleTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3PrimitiveSortedSnapshotOracleTest.java.txt",
+      "git_blob": "476effc0bae69d0f48ead6aa65782df23bdbd009",
+      "sha256": "374bee906ad5c32546563f1b99ec56560769bf227839f3417ff30c8fa2f57f44"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3PurposeReceiverProof.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3PurposeReceiverProof.java.txt",
+      "git_blob": "4aefaf1d1224db10b1fcd6177f4057f23769bd15",
+      "sha256": "ff3724167222c62637429a8789997566b3ad9acef6d51f3382eeba523c9f3d25"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3PurposeReceiverProofTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3PurposeReceiverProofTest.java.txt",
+      "git_blob": "dbefde5cf203a124282bc313dbc96667fbfb9f20",
+      "sha256": "3f1f09f60209291b940d026ef8c4bb01ef7989d0279c30cd65a479d10291bb7d"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3WrapperReconciliationContractsTest.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/M3WrapperReconciliationContractsTest.java.txt",
+      "git_blob": "100f1a26df276b8af714bdf50ae28aacb35988a1",
+      "sha256": "8cbf5d72f9e7fab855d5e761ffbf40f2720679380a2fdf6426827b17ff06ae8e"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/QueryReadProof.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/QueryReadProof.java.txt",
+      "git_blob": "5546d9347d7f1e2fa6ccca7bfc116049de815ae9",
+      "sha256": "1ac087dad8b7dca257b906aa8043711dc228ad1bebf520d9b2d80d6092737f81"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/RunSearchJni.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/RunSearchJni.java.txt",
+      "git_blob": "0508f70a7c846c2841f978a9085d2b6254d2465c",
+      "sha256": "3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/manifest.tsv",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/manifest.tsv",
+      "git_blob": "d02dfc59dae707048692ab512843a930da6445e9",
+      "sha256": "31d3d4c4de0ec47610bc04f54d3edf1ad94388b6ccf01beb7abf7d9702668248"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/pre/M3LongSortedViews.java.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-wrapper-reconciliation-20261017/pre/M3LongSortedViews.java.txt",
+      "git_blob": "9a7813e5aa6f85fcf1cc781940e385a2993b4e99",
+      "sha256": "b2b9f26e5a353c602e50054cf5f66d4ce04e3ed989aefdaab44ab181be8f3a35"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/FILE_PASSES.tsv.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/FILE_PASSES.tsv.txt",
+      "git_blob": "00cfde211026c76f51918e8a53195bab5587de58",
+      "sha256": "5ed81bc79781837f271889b02b34c97de8ace863a67f23b0606ecc6e0f10f158"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/catalogue.tsv.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/catalogue.tsv.txt",
+      "git_blob": "be9e1dac51ebfdb34b6090e28ac0c12f718feea7",
+      "sha256": "1d182c5bf4a3494b3d9f75e2549c371873ec34ec14336a8718b150c153a41b81"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/m3-collections-workflow.yml.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/m3-collections-workflow.yml.txt",
+      "git_blob": "54739d3da32ebdc9de659df4eda3c732e44e56e0",
+      "sha256": "762dc3ad9479064218a5e072b52b6f03234b099669e2dd48024c4722ede03f35"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/m3_map_cursor_jni.c.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/m3_map_cursor_jni.c.txt",
+      "git_blob": "0fa362205377e67d82e1c66479704d94936dbebe",
+      "sha256": "d0650f81a1ad0167db85f0be6dd4a7dcb55633c679c397fa9e2c036805820ee2"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/manifest.tsv",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/manifest.tsv",
+      "git_blob": "4a6a693db569d6f55b4eeec562b17b6f6b384917",
+      "sha256": "0eda022d1413dce7c291961df4005fe4aa0211c966e13c635b48eff83b3cd94c"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-installed-source-wrappers-20261017.tsv.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-installed-source-wrappers-20261017.tsv.txt",
+      "git_blob": "026d27280389c18fa97f7a06e7fbbebcdd1fa7a3",
+      "sha256": "989adce813571579836646a0e2c1527e3bf0aef531af0c16476dabb9e5911a5b"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-name-mapping.json.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-name-mapping.json.txt",
+      "git_blob": "85742177a2f10fda0421796bb905b6c5a261eef1",
+      "sha256": "30e8f9a378ff6b7856707c858226b4fdd162fb560dd6f851771d72951806dbb3"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-provenance.json.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-provenance.json.txt",
+      "git_blob": "2a786eb69740dafb69c32a5e4ca0266312d26b6e",
+      "sha256": "55627464a460477d1dccb9abfd6df4afbf5cc5ec87bb11cb4a31cfaf8ef3f31c"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-synexia-donation.json.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-synexia-donation.json.txt",
+      "git_blob": "de527499124400f17e1fb903fb180b50cfed1dbf",
+      "sha256": "3e2259c833700221434ab967bb4f3fd4be6a6944dcf5b0f50cf2705cb3756f0c"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-test_verify_donation.py.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-test_verify_donation.py.txt",
+      "git_blob": "04207f8e71f4892f177901a013fe1adb3414f62c",
+      "sha256": "49900a5d90978f2b450d07502dadb2164968095770e38f34d8c1f8d33a451771"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-verify_donation.py.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/metadata-verify_donation.py.txt",
+      "git_blob": "a750ccf4f8f5c388ebcc1eafbe58f072091da02d",
+      "sha256": "46e462ec748c3a445053de1a15fd399e6144dc1d3b9f3f5c277f9ced859fd8c5"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/m3-collections-workflow.yml.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/m3-collections-workflow.yml.txt",
+      "git_blob": "8d61ca60fb4e5fa7debb6b5b792b500d9898d3b3",
+      "sha256": "48f8e1bd596bf7269d907bc24d52a4dbe62cdc441fd70eebe72578efa7c91e3e"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/metadata-name-mapping.json.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/metadata-name-mapping.json.txt",
+      "git_blob": "7b5622619035dbfe12218da878b5b5df21ea2ad0",
+      "sha256": "e976621377edae456e5c69308208b9a193d81c2d221cd137afefcd2d07e67b94"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/metadata-provenance.json.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/metadata-provenance.json.txt",
+      "git_blob": "e7cea52684a439c9a090d700279894150e04215a",
+      "sha256": "b5f4029a3b44a064d848f23ed513882e58d5e04b23f2a123ea268a18705fa9c0"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/metadata-synexia-donation.json.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/metadata-synexia-donation.json.txt",
+      "git_blob": "a6339fc2f901cd3aef071c731bb71fb8ab715d1e",
+      "sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/metadata-test_verify_donation.py.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/metadata-test_verify_donation.py.txt",
+      "git_blob": "08d77b1bda64b5577967d331bb2d708c8ad7a513",
+      "sha256": "93a3296cd051f536eba3c5cc9ce26ab592ff0b428b6645aa8195d6f0d4301b68"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/metadata-verify_donation.py.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/pre/metadata-verify_donation.py.txt",
+      "git_blob": "54fa2569d9445f9729f3e9aea874c42ef9e46cad",
+      "sha256": "ff380ac9dedda6e36ea233eabb0a567a0a51595913d571f6bd11d5937d7c6706"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/purpose-CATEGORY_REVIEW.tsv.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/purpose-CATEGORY_REVIEW.tsv.txt",
+      "git_blob": "9778a3c16a8cb5bf22293ce69264dd5015c343e0",
+      "sha256": "ea2b0433932447d9a02943eca7b04aa10f13cdd3c384d97731610a1a179c0fcf"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/run_search_jni.c.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/run_search_jni.c.txt",
+      "git_blob": "23bb375961a678b363dfe8bc7d58c4c243f1e772",
+      "sha256": "14584793e7481297af878b35ab34d0d1efeaf2af7f58204ac70e47ae0b16a14c"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/source-review.json.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/source-review.json.txt",
+      "git_blob": "f37c4dc55fd4b2d7da011600897d359ad847a337",
+      "sha256": "760299202fc2e99a1c1663c036f4cdb1ff43d1007ae7a3c8097d040faa6d4581"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/verify-native.sh.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/verify-native.sh.txt",
+      "git_blob": "4f0965beba570ff809da8dda9ffbd9e44caa9893",
+      "sha256": "022968dd6029db648bc13220d403c13ea36b72e1cd6dd2d510cc89eeca91d1eb"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/wrappers-README.md.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/wrappers-README.md.txt",
+      "git_blob": "cc4a1a1f6e02f814569cc524f213197d3a26b7e3",
+      "sha256": "35f04205ce6cf1efb0ecaa4a7994e50d0167b6b253f684a2d044f434f1cc270b"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/wrappers-pom.xml.txt",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-collection-wrapper-reconciliation-20261017/wrappers-pom.xml.txt",
+      "git_blob": "287a41414525aeb99a7e87100146c33b33efcf72",
+      "sha256": "061c0336dfa00f7f448a059d36cdc76f84f2f3b9a08ad83f5484d8afd26456f6"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3CollectionWrapperReconciliationApply.java",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3CollectionWrapperReconciliationApply.java",
+      "git_blob": "2654c780b3a6767ede9a29bbdbbe508f4bf82019",
+      "sha256": "d51e302f7cb1f904ccdd3c581e702aae83a577115d5d92ae3f6d9416e11375f4"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3CollectionWrapperReconciliationRecipeTest.java",
+      "target_path": "m3/collections/wrappers/recipe/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3CollectionWrapperReconciliationRecipeTest.java",
+      "git_blob": "1b70061c6b7eed13373d3ecc246e3d3ba6637ed6",
+      "sha256": "78fb60d8d80b792ad0efc3784fcce3deb97cfe3755800a897e652004cede67bf"
+    }
+  ]
+}

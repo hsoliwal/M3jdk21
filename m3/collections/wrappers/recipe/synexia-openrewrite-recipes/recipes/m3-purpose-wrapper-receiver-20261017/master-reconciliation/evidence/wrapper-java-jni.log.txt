@@ -1,0 +1,74 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.m3:m3-collection-wrapper-contracts >---------------
+[INFO] Building Installed M3 wrapper Java and JNI qualification 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-collection-wrapper-contracts ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/6320427574fe/m3jdk21-wrappers-publish/m3/collections/wrappers/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-collection-wrapper-contracts ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 90 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-collection-wrapper-contracts ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/6320427574fe/m3jdk21-wrappers-publish/m3/collections/wrappers/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-collection-wrapper-contracts ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 23 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-collection-wrapper-contracts ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running M3WrapperReconciliationContractsTest
+M3_FILTERED_MAP_API_PROOF expected=present present=9 missing=0
+FILTERED_WRAPPER_COMPOSITION_PASS checks=2444 owners=6
+M3_MAP_CURSOR_INTEGRATION_PASS checks=7683
+M3_FILTERED_MAP_SIZE_PROOF mode=candidate size=2147483647 entries=2147483648 complete_scan=true late_failure_checked=true
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 74.14 s -- in M3WrapperReconciliationContractsTest
+[INFO] Running com.m3.collections.M3FilteredSnapshotFusionTest
+M3_FILTERED_SNAPSHOT_FUSION_PASS checks=7068
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.057 s -- in com.m3.collections.M3FilteredSnapshotFusionTest
+[INFO] Running com.m3.collections.M3FilteredSortedCompositionTest
+PASS M3FilteredSortedCompositionSelfTest checks=2432
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 s -- in com.m3.collections.M3FilteredSortedCompositionTest
+[INFO] Running com.m3.collections.M3CollectionWrappersTest
+PASS M3CollectionWrappers checks=313767
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.154 s -- in com.m3.collections.M3CollectionWrappersTest
+[INFO] Running com.m3.collections.M3PurposeReceiverProofTest
+M3_PURPOSE_WRAPPER_RECEIVER_PASS checks=22
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.m3.collections.M3PurposeReceiverProofTest
+[INFO] Running com.m3.collections.M3FilteredTraversalTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.875 s -- in com.m3.collections.M3FilteredTraversalTest
+[INFO] Running com.m3.collections.M3PrimitiveSortedSnapshotOracleTest
+M3_PRIMITIVE_SORTED_ORACLE_PASS backend=JAVA checks=258021
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s -- in com.m3.collections.M3PrimitiveSortedSnapshotOracleTest
+[INFO] Running com.m3.collections.M3FilteredMapsTest
+M3_FILTERED_MAPS_PASS checks=862420
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.562 s -- in com.m3.collections.M3FilteredMapsTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ m3-collection-wrapper-contracts ---
+[INFO] Building jar: /workspace/scratch/6320427574fe/m3jdk21-wrappers-publish/m3/collections/wrappers/target/m3-collection-wrapper-contracts-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec:3.3.0:exec (existing-native-peers) @ m3-collection-wrapper-contracts ---
+M3_FILTERED_MAPS_JNI_PASS checks=166656 calls=41478 refusals=6
+WRAPPER_NATIVE_BOUNDARIES_PASS checks=314
+M3_MAP_CURSOR_JNI_PASS checks=45
+M3_PRIMITIVE_SORTED_ORACLE_PASS backend=JAVA_AND_NATIVE_INDEX_PARITY checks=260838
+M3_WRAPPER_JNI_PASS generated-header ABI, C17, fatal UBSan, checked JNI
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:29 min
+[INFO] Finished at: 2026-10-17T00:09:11-07:00
+[INFO] ------------------------------------------------------------------------

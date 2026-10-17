@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
+import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 
@@ -64,6 +67,111 @@ public final class M3LongSortedViews {
     public static M3LongSortedSet unmodifiable(M3LongSortedSet source) {
         Objects.requireNonNull(source, "source");
         return source instanceof Unmodifiable ? source : new Unmodifiable(source);
+    }
+
+    /**
+     * Immutable primitive sorted snapshot (including duplicate occurrences).
+     * Unlike the live sorted-set decorators, it owns precisely one long[] and
+     * does not retain or materialize per-element objects or Map.Entry nodes.
+     */
+    public static M3LongCollection sortedSnapshot(M3LongCollection source) {
+        return new SortedSnapshot(collectSorted(source, null));
+    }
+
+    /**
+     * Fuse a predicate and sorting into one traversal of the original owner,
+     * without constructing intermediate filtered/sorted wrappers or elements.
+     * A primitive workspace may be trimmed to keep only selected values.
+     */
+    public static M3LongCollection filteredSortedSnapshot(
+            M3LongCollection source, LongPredicate keep) {
+        Objects.requireNonNull(keep, "keep");
+        return new SortedSnapshot(collectSorted(source, keep));
+    }
+
+    /**
+     * Precomputed positional-mask route: one exact selected primitive array
+     * using the existing target-owned M3IndexMaskCompactor, then in-place sort.
+     * Input long[] and mask remain caller-owned and are never modified.
+     */
+    public static M3LongCollection maskedSortedSnapshot(
+            long[] values, byte[] alignedStates, int requiredMask) {
+        long[] selected = M3IndexMaskCompactor.selectLong(
+                Objects.requireNonNull(values, "values"), alignedStates, requiredMask);
+        Arrays.sort(selected);
+        return new SortedSnapshot(selected);
+    }
+
+    /**
+     * Single source-cursor pass. A failing predicate publishes no snapshot.
+     * Guard size drift rather than silently emitting an incomplete result;
+     * these non-concurrent collections do not promise snapshot isolation.
+     */
+    private static long[] collectSorted(M3LongCollection source, LongPredicate keep) {
+        M3LongCollection actual = Objects.requireNonNull(source, "source");
+        int expected = actual.size();
+        long[] rows = new long[expected];
+        M3LongIterator iterator = actual.iterator();
+        int read = 0, selected = 0;
+        while (iterator.hasNext()) {
+            if (read == expected) {
+                throw new ConcurrentModificationException("snapshot source expanded");
+            }
+            long value = iterator.nextLong();
+            read++;
+            if (keep == null || keep.test(value)) {
+                rows[selected++] = value;
+            }
+        }
+        if (read != expected || actual.size() != expected) {
+            throw new ConcurrentModificationException("snapshot source changed");
+        }
+        if (selected != rows.length) {
+            rows = Arrays.copyOf(rows, selected);
+        }
+        Arrays.sort(rows);
+        return rows;
+    }
+
+    /** Single canonical primitive payload; duplicates are intentionally allowed. */
+    private static final class SortedSnapshot implements M3LongCollection {
+        private final long[] sorted;
+
+        private SortedSnapshot(long[] sorted) { this.sorted = sorted; }
+
+        @Override public int size() { return sorted.length; }
+
+        @Override public boolean contains(long value) {
+            return Arrays.binarySearch(sorted, value) >= 0;
+        }
+
+        @Override public void clear() {
+            throw new UnsupportedOperationException("read-only sorted snapshot");
+        }
+
+        @Override public long[] toArray() { return sorted.clone(); }
+
+        @Override public void forEachLong(LongConsumer action) {
+            Objects.requireNonNull(action, "action");
+            for (long value : sorted) action.accept(value);
+        }
+
+        @Override public M3LongIterator iterator() {
+            return new M3LongIterator() {
+                private int cursor;
+                @Override public boolean hasNext() { return cursor < sorted.length; }
+                @Override public long nextLong() {
+                    if (!hasNext()) throw new NoSuchElementException();
+                    return sorted[cursor++];
+                }
+            };
+        }
+
+        @Override public Spliterator.OfLong longSpliterator() {
+            return Spliterators.spliterator(sorted, Spliterator.ORDERED
+                    | Spliterator.SORTED | Spliterator.NONNULL
+                    | Spliterator.IMMUTABLE);
+        }
     }
 
     private static Spliterator.OfLong sortedCursor(M3LongIterator cursor) {

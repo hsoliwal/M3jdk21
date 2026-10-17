@@ -1,0 +1,15 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------< com.synexia:m3-collection-wrapper-reconciliation >----------
+[INFO] Building Existing M3 wrapper recipe reconciliation proof 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec:3.3.0:java (default-cli) @ m3-collection-wrapper-reconciliation ---
+SDK_EXECUTION first_pass_changes=48 second_pass_changes=0; bounded Java/JNI receiver, no JDK phase advancement
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.982 s
+[INFO] Finished at: 2026-10-17T00:07:40-07:00
+[INFO] ------------------------------------------------------------------------

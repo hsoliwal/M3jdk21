@@ -1,0 +1,48 @@
+01-java-version: PASS
+02-module-compile: PASS
+03-test-compile: PASS
+04-all-contract-tests: PASS
+04-M3LazyTreeMapSelfTest: PASS
+04-M3LazyValueStateSelfTest: PASS
+05-module-package: PASS
+06-module-descriptor: PASS
+07-native-static: PASS
+08-native-compile: PASS
+09-checked-jni-parity: PASS
+10-prepared-allocation: PASS
+11-collection-cost-probe: PASS
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "schema": "M3_COLLECTION_RECEIVING_QUALIFICATION_V1",
+  "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
+  "installed_source_manifest_sha256": "989adce813571579836646a0e2c1527e3bf0aef531af0c16476dabb9e5911a5b",
+  "java_sources": 91,
+  "test_sources": 34,
+  "junit": {
+    "tests": 156,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "main_self_tests": [
+    "M3LazyTreeMapSelfTest:PASS",
+    "M3LazyValueStateSelfTest:PASS"
+  ],
+  "java_compile": "--release 21 -Xlint:all,-module -Werror",
+  "runtime_requires": [
+    "java.base"
+  ],
+  "native_standard": "c17",
+  "undefined_behavior_sanitizer": "PASS",
+  "checked_jni": "PASS",
+  "prepared_lane_allocation": "PASS",
+  "packaged_license_provenance": "PASS",
+  "cost_probe": "DIAGNOSTIC_RECORDED",
+  "full_reactor": "NOT_RUN",
+  "openjdk_jtreg_hotspot": "NOT_RUN",
+  "universal_performance_claim": false,
+  "phase_advance": false,
+  "active_phase": "STRING",
+  "target_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55"
+}

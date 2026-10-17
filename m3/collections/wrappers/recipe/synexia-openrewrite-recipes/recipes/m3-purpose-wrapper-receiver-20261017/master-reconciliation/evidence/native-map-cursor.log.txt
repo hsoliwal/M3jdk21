@@ -1,0 +1,1 @@
+M3_MAP_CURSOR_JNI_PASS checks=45

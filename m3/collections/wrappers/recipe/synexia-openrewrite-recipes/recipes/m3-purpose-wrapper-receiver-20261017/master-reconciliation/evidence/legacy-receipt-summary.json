@@ -1,0 +1,93 @@
+{
+  "target": "/workspace/scratch/6320427574fe/m3jdk21-wrappers-publish",
+  "started_utc": "2026-10-17T07:11:28.135128+00:00",
+  "java_home": "/tmp/m3-jep-tools/jdk-21.0.12.1+1",
+  "junit_console": "/tmp/m3-jep-tools/junit-platform-console-standalone-1.12.2.jar",
+  "junit_console_sha256": "329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a",
+  "gates": [
+    {
+      "name": "metadata-unit",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "m3/collections",
+        "-p",
+        "test_verify_donation.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASSED",
+      "log": "/tmp/m3-wrapper-audit/publish-legacy-gate/metadata-unit.log",
+      "log_sha256": "e8867e9402e2de21d76fb0223af0ab8c3cb5cdcf91b5a87944fcbd044c8c0825"
+    },
+    {
+      "name": "verify-donation",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "m3/collections/verify_donation.py",
+        "--cost-probe"
+      ],
+      "exit_code": 0,
+      "status": "PASSED",
+      "log": "/tmp/m3-wrapper-audit/publish-legacy-gate/verify-donation.log",
+      "log_sha256": "1211d18944d5287986ac2a4c0f4bcfc636406d11efcaf581e9fdf59787e418e5"
+    }
+  ],
+  "target_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+  "preflight": {
+    "status": "PASSED",
+    "manifest_sha256": "989adce813571579836646a0e2c1527e3bf0aef531af0c16476dabb9e5911a5b",
+    "manifest_rows": 130,
+    "java_source_set": 125,
+    "java_main_sources": 91,
+    "java_test_sources": 34,
+    "workflow_sha256": "762dc3ad9479064218a5e072b52b6f03234b099669e2dd48024c4722ede03f35",
+    "source_inventory": "/tmp/m3-wrapper-audit/publish-legacy-gate/source-inventory.json",
+    "source_inventory_sha256": "2abeac03ada8715b8db4d6a05978ce7187ade0417af768730d1cf3a5eeda9c8e"
+  },
+  "qualification": {
+    "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+    "license": "Apache-2.0",
+    "schema": "M3_COLLECTION_RECEIVING_QUALIFICATION_V1",
+    "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
+    "installed_source_manifest_sha256": "989adce813571579836646a0e2c1527e3bf0aef531af0c16476dabb9e5911a5b",
+    "java_sources": 91,
+    "test_sources": 34,
+    "junit": {
+      "tests": 156,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "main_self_tests": [
+      "M3LazyTreeMapSelfTest:PASS",
+      "M3LazyValueStateSelfTest:PASS"
+    ],
+    "java_compile": "--release 21 -Xlint:all,-module -Werror",
+    "runtime_requires": [
+      "java.base"
+    ],
+    "native_standard": "c17",
+    "undefined_behavior_sanitizer": "PASS",
+    "checked_jni": "PASS",
+    "prepared_lane_allocation": "PASS",
+    "packaged_license_provenance": "PASS",
+    "cost_probe": "DIAGNOSTIC_RECORDED",
+    "full_reactor": "NOT_RUN",
+    "openjdk_jtreg_hotspot": "NOT_RUN",
+    "universal_performance_claim": false,
+    "phase_advance": false,
+    "active_phase": "STRING",
+    "target_baseline": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55"
+  },
+  "postflight": {
+    "status": "PASSED",
+    "all_130_manifest_inputs_unchanged": true,
+    "java_source_set_unchanged": true,
+    "workflow_unchanged": true
+  },
+  "finished_utc": "2026-10-17T07:11:43.829794+00:00"
+}

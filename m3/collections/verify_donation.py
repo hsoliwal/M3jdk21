@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026-10-17: bind new qualification receipts to the selected packet current baseline; preserve original fallback.
 # Modified 2026 by Hitesh Soliwal and contributors: qualify concurrent EnumSet in a new exact inventory; preserve all acceptance guards and historical receipts.
 # Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.
 """Verify the installed M3 collection donation with target-native Java/JNI checks.
@@ -166,7 +167,7 @@ def main():
                'cost_probe': 'DIAGNOSTIC_RECORDED' if args.cost_probe else 'NOT_RUN',
                'full_reactor': 'NOT_RUN', 'openjdk_jtreg_hotspot': 'NOT_RUN',
                'universal_performance_claim': False, 'phase_advance': False,
-               'active_phase': 'STRING', 'target_baseline': 'eda1ae0733952394851c3580f8efb7624563b98c'}
+               'active_phase': 'STRING', 'target_baseline': packet.get('current_target_baseline', packet['target_baseline'])}
     (evidence / 'qualification.json').write_text(json.dumps(receipt, indent=2) + '\n')
     print(json.dumps(receipt, indent=2))
 

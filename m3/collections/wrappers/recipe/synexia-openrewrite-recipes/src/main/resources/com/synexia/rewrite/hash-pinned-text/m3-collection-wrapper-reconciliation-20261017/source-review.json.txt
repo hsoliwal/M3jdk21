@@ -1,0 +1,1925 @@
+{
+  "schema": "M3_WRAPPER_RECONCILIATION_SOURCE_REVIEW_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+  "source_owner": "hsoliwal/com.synexia",
+  "family": "synexia-openrewrite-recipes/recipes/m3-purpose-wrapper-receiver-20261017/master-reconciliation",
+  "status": "CANDIDATE_PROOF; SDK_AND_TARGET_RESULTS_RECORDED_SEPARATELY",
+  "generic_source": [
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/canonical-source.json",
+      "git_blob": "d485981f5ff1dd6d5b764a5dcd495e34490a20fe",
+      "sha256": "7d715e39924f81bd7d4d73c320a005d1bd4fe9d9bed6f5dee55dc2994009e5f0"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/catalogue.tsv",
+      "git_blob": "ea544b7b2039c142348f8ebff6d02c505a9ff08e",
+      "sha256": "eac5101db577439a71f60d303a3edba323c6760277384b92510064777e17599c"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/direct-projection-20261017/CATEGORY_REVIEW.tsv",
+      "git_blob": "f98a7a72381bc1592e5328bc9b9e260f0afeaf96",
+      "sha256": "cb59aa0e76afd33a040694d12c1460c274f3f46fabbc62708258c2154a12301e"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/direct-projection-20261017/m3_map_cursor_jni.c",
+      "git_blob": "0fa362205377e67d82e1c66479704d94936dbebe",
+      "sha256": "d0650f81a1ad0167db85f0be6dd4a7dcb55633c679c397fa9e2c036805820ee2"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/purpose-receiver-20261017/CATEGORY_REVIEW.tsv",
+      "git_blob": "9778a3c16a8cb5bf22293ce69264dd5015c343e0",
+      "sha256": "ea2b0433932447d9a02943eca7b04aa10f13cdd3c384d97731610a1a179c0fcf"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/snapshot-fusion-20261017/CATEGORY_REVIEW.tsv",
+      "git_blob": "310343f62c19d80e209cae10047906b7d86a13e2",
+      "sha256": "d44444268dc10327a2836ed64ef1ff991e7f64f2b1f11be96db7fa1766613e0a"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/RunSearchJni.java",
+      "git_blob": "0508f70a7c846c2841f978a9085d2b6254d2465c",
+      "sha256": "3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3CollectionWrappersSelfTest.java",
+      "git_blob": "fc4a2a8db8a727d90dbb740bbe8c3f81527b9c49",
+      "sha256": "91f7683b93e55ec803e3a06782955e71f2c26de7cb86a1a52882de2c2fcd5bd0"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3CollectionWrappersTest.java",
+      "git_blob": "7140481d7ad555f31aa4a455efb43a140592dd0f",
+      "sha256": "afcfead6e1c30cdbe424b53fac44e00d10c05389749902d6aa21093f43410ece"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsCursorProof.java",
+      "git_blob": "e94a6ef054652d3a58eeb9526dc70025c3601cdd",
+      "sha256": "6ffbcaa671dcf408c361edeb3c94812ef71381b2b2434a8d394f7aad4da8fcc7"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsNativeSelfTest.java",
+      "git_blob": "65277db098158ff63acc17a0103515ab02f80690",
+      "sha256": "5437dfeea903d7208f6453e052d8ca88b84ac1e292dff1acd0df845b6c21f136"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsSelfTest.java",
+      "git_blob": "5d72a62dfa5403fa5ce7fdbc6b217b46482aa45d",
+      "sha256": "a99ae7502a7b1832c149dd2d0af888ddbdeb5805659ef5c778ceda4ca1949cd5"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsTest.java",
+      "git_blob": "fca44882774187b2b301fb18ea2f3e8fc4897452",
+      "sha256": "c4139f6db6648b0e71a347c15c35d6d133cb4d32581990490141501f273cb271"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredSnapshotFusionProof.java",
+      "git_blob": "73aaa80c019126031f8015a0ead5e1858e073937",
+      "sha256": "5e04edafe5ea8d17f448756d4a6a63647e5d989a41bbc2f871c5567f525153f0"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredSnapshotFusionTest.java",
+      "git_blob": "65e81d1b80573f979a0c3c91e2ab957896dd5fc1",
+      "sha256": "3d4340a1a5c5b5cd49180a0d690953a230f9e156ce5164ba9752248a8c98300a"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3MapCursorNativeProof.java",
+      "git_blob": "f4f6fbb0c1f361f5cd31b72bf77a08879b4f1faa",
+      "sha256": "9b458b3fbcc5f282494dc6755ae76576d12257e72ecb94ed305ae73cc62dccaa"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3PurposeReceiverProof.java",
+      "git_blob": "4aefaf1d1224db10b1fcd6177f4057f23769bd15",
+      "sha256": "ff3724167222c62637429a8789997566b3ad9acef6d51f3382eeba523c9f3d25"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3PurposeReceiverProofTest.java",
+      "git_blob": "dbefde5cf203a124282bc313dbc96667fbfb9f20",
+      "sha256": "3f1f09f60209291b940d026ef8c4bb01ef7989d0279c30cd65a479d10291bb7d"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3WrapperContractsTest.java",
+      "git_blob": "a743bc94aa684f35db6e871df0633aa5b720907d",
+      "sha256": "a641b0eda9ecbfac68d8719e5d2a39f6b826f5228954173da37188a7629d911e"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/wrappers/verify.py",
+      "git_blob": "5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8",
+      "sha256": "fe35eaa0e9d38fb4a054308f18a7bd0bcc3557a552b52c19eb6981406a98af72"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3AdmissionWrappers.java",
+      "git_blob": "0f6822137df55d0e1dbafa660c7f1f37b6a831c2",
+      "sha256": "d14f999cc54ef5470477d50cd3e34df3c924d9aa1cac31a9d2c76dccdaba5eda"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3BoundedLists.java",
+      "git_blob": "fd8b4194d31d68b555a7dcad22641ee0475af59c",
+      "sha256": "4b2af6d7137d64cd2838000bf5366d4b4c5da52d8287ff6cdfdbe2cb2e565daa"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "git_blob": "2750647c832d5bec07940b032ad2a2f66f425072",
+      "sha256": "e51e894c15dd0f6163cd8129fd20748660332b58f6fd8dc6e749fdec49e3c5c6"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionWrappers.java",
+      "git_blob": "4fd06a0fe34aa584a4d8492b6617ff098735f095",
+      "sha256": "c468c54630ef81997594e8370763f6c01cb9a2db6a7725d91c6117b04e57f12c"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcatenatedViews.java",
+      "git_blob": "a31c001d788d1539b8e6571009adc837f46d195a",
+      "sha256": "9ef41f113ed56f82e30e3b116c3309a42c5963741f94e04f6f2a891649da2484"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java",
+      "git_blob": "c3779cb4dd07e71d28fbc547ff1991256919ace5",
+      "sha256": "39e3698a6a9e1c494050f04bd9dbd13134dfbb748a075fa6a0535d3325c3dd9d"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FixedSizeLists.java",
+      "git_blob": "d6f7725421b7c3c22d2f7a3667dd92d4340260df",
+      "sha256": "42a7297c4faf6298afa7325fae905b1cb73d18e410ecee880e3457af9fe1d94b"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MappedViews.java",
+      "git_blob": "4c2ffbfc358eb0c161227e46ed0b0cc6bfbeb85f",
+      "sha256": "6bd1f0bd3458678acbc9983c006c20edc63563c702bf5ad6a7581a2d149eeb3f"
+    }
+  ],
+  "filtered_traversal": {
+    "schema_version": 1,
+    "status": "SCRATCH_RECIPE_INPUT_VERIFIED",
+    "source_repository": "https://github.com/hsoliwal/M3jdk21",
+    "source_pr": 992,
+    "source_commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+    "receiver_base_commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "source_mutation": false,
+    "target_mutation": false,
+    "openrewrite_execution_for_this_candidate": "NOT_PERFORMED_BY_THIS_AUDIT",
+    "changes": [
+      {
+        "target_path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+        "input_path": "src/com/m3/collections/M3CollectionViews.java",
+        "candidate_path": "candidate/com/m3/collections/M3CollectionViews.java",
+        "before": {
+          "sha256": "e51e894c15dd0f6163cd8129fd20748660332b58f6fd8dc6e749fdec49e3c5c6",
+          "git_blob_oid": "2750647c832d5bec07940b032ad2a2f66f425072",
+          "bytes": 22178
+        },
+        "after": {
+          "sha256": "b2889562f453543d8d8a927da0d5cfd56e3f4329a5fc25f4c40e341a2ab3fdfe",
+          "git_blob_oid": "29fb475fe1840f74672cd613afd907135f99dfce",
+          "bytes": 22471
+        }
+      },
+      {
+        "target_path": "m3/collections/src/main/java/com/m3/collections/M3MappedViews.java",
+        "input_path": "src/com/m3/collections/M3MappedViews.java",
+        "candidate_path": "candidate/com/m3/collections/M3MappedViews.java",
+        "before": {
+          "sha256": "6bd1f0bd3458678acbc9983c006c20edc63563c702bf5ad6a7581a2d149eeb3f",
+          "git_blob_oid": "4c2ffbfc358eb0c161227e46ed0b0cc6bfbeb85f",
+          "bytes": 8738
+        },
+        "after": {
+          "sha256": "8e41d66484af9068e36ae7c9b50098d9556417a0013ae0986850aa658940f40a",
+          "git_blob_oid": "5aca2339b08f3760155fb655b8ce3dc5113716c5",
+          "bytes": 10202
+        }
+      }
+    ],
+    "additive_tests": [
+      {
+        "source_path": "tests/com/m3/collections/M3FilteredTraversalProof.java",
+        "proposed_target_path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredTraversalProof.java",
+        "sha256": "14dc064c546b0ab96b97de9f5edb4ec99c0e53533273b4ee745727876ba22bc6",
+        "git_blob_oid": "2a51cfe89ba391d6e5627e7a6c0b0401f3472b0d",
+        "bytes": 9598
+      },
+      {
+        "source_path": "tests/com/m3/collections/M3FilteredTraversalTest.java",
+        "proposed_target_path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredTraversalTest.java",
+        "sha256": "80997e2a21aee9eee5bd7eb79131f01a70f7015b33aed1c65b6acbfc2456ed6d",
+        "git_blob_oid": "7785799960ce38b0d0035e684c5ba2b3901cbe91",
+        "bytes": 1064
+      }
+    ],
+    "strict_compile": {
+      "release": 21,
+      "flags": [
+        "-Xlint:all",
+        "-Werror"
+      ],
+      "owner_count": 8,
+      "old_result": "PASS",
+      "candidate_result": "PASS"
+    },
+    "standalone_before": {
+      "exit_code": 1,
+      "cases": 7,
+      "failed_cases": 6,
+      "passed_cases": 1,
+      "executed_assertions": 12,
+      "log": "before-proof.log"
+    },
+    "standalone_candidate": {
+      "exit_code": 0,
+      "cases": 7,
+      "failed_cases": 0,
+      "passed_cases": 7,
+      "executed_assertions": 27,
+      "log": "candidate-proof.log"
+    },
+    "junit_candidate": {
+      "name": "com.m3.collections.M3FilteredTraversalTest",
+      "tests": "7",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0",
+      "time": "7.925",
+      "maven_version": "3.9.9",
+      "compiler_plugin": "3.12.1",
+      "surefire_plugin": "3.2.5",
+      "junit_jupiter": "5.10.2",
+      "mode": "OFFLINE_USING_PREVIOUSLY_RESOLVED_PUBLISHED_DEPENDENCIES"
+    },
+    "public_api": {
+      "tool": "javap -public",
+      "changed_owner_count": 2,
+      "comparison": "BYTE_IDENTICAL",
+      "before": "API.before.txt",
+      "candidate": "API.candidate.txt"
+    },
+    "contract_sources": [
+      "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collection.html#size()",
+      "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Spliterator.html"
+    ],
+    "claims_excluded": [
+      "JNI changes or native performance measurements",
+      "full target module acceptance",
+      "all Java collection behavior",
+      "recipe SDK replay or source-derived dependency admission",
+      "parallel source speedup"
+    ],
+    "independent_review": {
+      "reviewer": "/root/routing_review",
+      "scope": "two source candidates and additive traversal contract corpus",
+      "result": "PASS_NO_CONCRETE_SEMANTIC_DEFECT",
+      "notes": [
+        "predicate evaluation remains before saturation guard",
+        "iterator and mapper remain deferred until valid traversal",
+        "null callback refusal occurs before source binding",
+        "no unsupported SIZED, SUBSIZED, or NONNULL characteristics",
+        "unsplittable source remains valid for a parallel stream"
+      ]
+    }
+  },
+  "map_composition": {
+    "status": "SCRATCH_REVIEWED_CANDIDATE_NOT_RECIPE_APPLIED",
+    "target_repository": "hsoliwal/M3jdk21",
+    "target_commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+    "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java",
+    "target_before": {
+      "bytes": 21980,
+      "git_blob": "c3779cb4dd07e71d28fbc547ff1991256919ace5",
+      "sha256": "39e3698a6a9e1c494050f04bd9dbd13134dfbb748a075fa6a0535d3325c3dd9d"
+    },
+    "candidate_after": {
+      "bytes": 26907,
+      "git_blob": "59568a6d50796fa829c56c0baf8acd1fd1907664",
+      "sha256": "38bdde6b8ed1bd0f035ef6ac620af2b2c51865cf3e8040a37cb96fef1ac7ff05"
+    },
+    "donor_repository": "hsoliwal/com.synexia",
+    "donor_commit": "dfce28fc0394398357195ec63a9778bd57e8140c",
+    "donors": [
+      {
+        "k": "new_map",
+        "path": "synexia-primitives/src/main/java/com/synexia/primitives/M3FilteredMaps.java",
+        "out": "M3FilteredMaps.java",
+        "sha": "28ffaea975bba77c062c75a3d6846c6c37ce03e9",
+        "bytes": 25138,
+        "git_blob": "28ffaea975bba77c062c75a3d6846c6c37ce03e9",
+        "sha256": "e0dee924d84fbf2b1fecd7845ae7a2025712805e79b7fb42c13cacbb087cefd8"
+      },
+      {
+        "k": "new_native",
+        "path": "synexia-openrewrite-recipes/recipes/collection-view-convergence-20261016/proof/run_search_jni.c",
+        "out": "run_search_jni.c",
+        "sha": "23bb375961a678b363dfe8bc7d58c4c243f1e772",
+        "bytes": 1984,
+        "git_blob": "23bb375961a678b363dfe8bc7d58c4c243f1e772",
+        "sha256": "14584793e7481297af878b35ab34d0d1efeaf2af7f58204ac70e47ae0b16a14c"
+      },
+      {
+        "k": "newRunSearch",
+        "path": "synexia-openrewrite-recipes/recipes/collection-view-convergence-20261016/proof/RunSearchJni.java",
+        "out": "RunSearchJni.java",
+        "sha": "0508f70a7c846c2841f978a9085d2b6254d2465c",
+        "bytes": 2024,
+        "git_blob": "0508f70a7c846c2841f978a9085d2b6254d2465c",
+        "sha256": "3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a"
+      },
+      {
+        "k": "newMapSelfTest",
+        "path": "synexia-primitives/src/test/java/com/synexia/primitives/M3FilteredMapsSelfTest.java",
+        "out": "M3FilteredMapsSelfTest.java",
+        "sha": "e3466b0a83eeef26ccbd461cab04a2a0942d2827",
+        "bytes": 17051,
+        "git_blob": "e3466b0a83eeef26ccbd461cab04a2a0942d2827",
+        "sha256": "814311b2e4bbe64b0fbf4175ea419b441241bcb0679aac7d31030ee406986747"
+      },
+      {
+        "k": "newQueryProof",
+        "path": "synexia-openrewrite-recipes/recipes/filtered-wrapper-composition-20261016/proof/QueryReadProof.java",
+        "out": "QueryReadProof.java",
+        "sha": "50707ac8262239c50ab44dbfcc9ff1958788b9b9",
+        "bytes": 3794,
+        "git_blob": "50707ac8262239c50ab44dbfcc9ff1958788b9b9",
+        "sha256": "0b8396a1ce65f30323630c1a6e87095f1cdf09a60b2b1232b935885b21cfb545"
+      },
+      {
+        "k": "newWrapperSelfTest",
+        "path": "synexia-primitives/src/test/java/com/synexia/primitives/M3FilteredWrapperSelfTest.java",
+        "out": "M3FilteredWrapperSelfTest.java",
+        "sha": "c866fa006c1921d777946603b597f01512d7bfc5",
+        "bytes": 16805,
+        "git_blob": "c866fa006c1921d777946603b597f01512d7bfc5",
+        "sha256": "623df74e1e1fdf6a63fc71a64c025dcc0b0c11a252a77bd8a054e3077af81a09"
+      },
+      {
+        "k": "newNativeSelfTest",
+        "path": "synexia-primitives/src/test/java/com/synexia/primitives/M3FilteredMapsNativeSelfTest.java",
+        "out": "M3FilteredMapsNativeSelfTest.java",
+        "sha": "f6d52313ca64d18ca42952de4fc93cb2bf7407d0",
+        "bytes": 3816,
+        "git_blob": "f6d52313ca64d18ca42952de4fc93cb2bf7407d0",
+        "sha256": "16cbfed05eb7499b4802b78f72920703c9aaabb93331cbd20a69373d198e5c07"
+      }
+    ],
+    "modifications": [
+      "Reuse exact nine public overloads from Synexia PR11920 and java.util.Collections import.",
+      "Reuse four private raw-entry queries from PR11920; size counter saturates after predicate evaluation while preserving the complete scan.",
+      "Preserve all PR992 projection/cursor source byte-for-byte; no Stream pipeline restored.",
+      "Retain original copyright and Apache-2.0 SPDX; update modification note.",
+      "Donor Java corpora change only package/import namespace; RunSearchJni Java and C bytes unchanged."
+    ],
+    "native_role": "RunSearchJni.first is a verification-only oracle; keep target M3MapCursorNativeProof_fold peer separately.",
+    "license": "Apache-2.0 first-party source; JDK wrappers delegated; no copied challenge/editorial implementation",
+    "platform_category_references": [
+      "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/Maps.java",
+      "https://leetcode.com/problems/remove-element/",
+      "https://www.hackerrank.com/challenges/java-iterator/problem",
+      "https://www.geeksforgeeks.org/java/java-treeset-special-methods/"
+    ],
+    "contract_references": [
+      "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collections.html",
+      "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html#size()",
+      "https://docs.oracle.com/en/java/javase/21/docs/specs/jni/functions.html#getprimitivetypearrayregion-routines"
+    ],
+    "outputs": {
+      "candidates/com/m3/collections/M3FilteredMaps.java": {
+        "bytes": 26907,
+        "git_blob": "59568a6d50796fa829c56c0baf8acd1fd1907664",
+        "sha256": "38bdde6b8ed1bd0f035ef6ac620af2b2c51865cf3e8040a37cb96fef1ac7ff05"
+      },
+      "candidates/run_search_jni.c": {
+        "bytes": 1984,
+        "git_blob": "23bb375961a678b363dfe8bc7d58c4c243f1e772",
+        "sha256": "14584793e7481297af878b35ab34d0d1efeaf2af7f58204ac70e47ae0b16a14c"
+      },
+      "tests/M3FilteredMapApiProof.java": {
+        "bytes": 1729,
+        "git_blob": "0b493dec6d5664fbe1cf47c74dce8adaf783b1c4",
+        "sha256": "6606f93e14286bdb199bab859c1d488913919b49445aafc6365b18fe2259c0bf"
+      },
+      "tests/M3FilteredMapSizeProof.java": {
+        "bytes": 2965,
+        "git_blob": "03c27b10723cec35d2ee4f728e6f78f6c5d85ba5",
+        "sha256": "4539aff8d18300f0fb98c84c6357e079a64b4b5666b7e23660df909bc4bc96d2"
+      },
+      "tests/QueryReadProof.java": {
+        "bytes": 3790,
+        "git_blob": "5546d9347d7f1e2fa6ccca7bfc116049de815ae9",
+        "sha256": "1ac087dad8b7dca257b906aa8043711dc228ad1bebf520d9b2d80d6092737f81"
+      },
+      "tests/RunSearchJni.java": {
+        "bytes": 2024,
+        "git_blob": "0508f70a7c846c2841f978a9085d2b6254d2465c",
+        "sha256": "3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a"
+      },
+      "tests/com/m3/collections/M3FilteredMapsNativeSelfTest.java": {
+        "bytes": 3812,
+        "git_blob": "65277db098158ff63acc17a0103515ab02f80690",
+        "sha256": "5437dfeea903d7208f6453e052d8ca88b84ac1e292dff1acd0df845b6c21f136"
+      },
+      "tests/com/m3/collections/M3FilteredMapsSelfTest.java": {
+        "bytes": 17047,
+        "git_blob": "5d72a62dfa5403fa5ce7fdbc6b217b46482aa45d",
+        "sha256": "a99ae7502a7b1832c149dd2d0af888ddbdeb5805659ef5c778ceda4ca1949cd5"
+      },
+      "tests/com/m3/collections/M3FilteredWrapperSelfTest.java": {
+        "bytes": 16801,
+        "git_blob": "85af59e2c8bc516de21b57f13e8104b107422bae",
+        "sha256": "b9fabf7e916744765a8b67e629d19e9e6d1e85ba2ae7e2d67a7b3ecbdb878c9d"
+      }
+    },
+    "native_before": {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "11dde1eac33cea2a8b90baba8c155eabec341144",
+      "path": "m3/collections/src/test/native/collections/run_search_jni.c",
+      "git_blob": "5a9cf3274e120788dd9e9b15433d130e5f23865b",
+      "sha256": "aecfe097fe61b5260a09c2bbbcec57bca2a96bd7cabf343bc380cfc5b28a1d10"
+    },
+    "verification": {
+      "scope": "local scratch source-exact Java21 and JNI against83real master core units; no recipe replay/target install/full reactor/JDK image acceptance",
+      "strict_compilation": true,
+      "api_positive_candidate": 9,
+      "api_positive_old": "EXPECTED_FAILURE missing unmodifiableMap(Map)",
+      "map_corpus_checks": 862420,
+      "composition_checks": 2444,
+      "composition_real_owner_profiles": 6,
+      "query_before_after_equal": true,
+      "query_trace_sha256": "3f88ccf87b350d935459e21f0697e8d5f4e0532a65560b3ad3cae40f56338c24",
+      "query_trace_characters": 252336,
+      "size_before_observed": -2147483648,
+      "size_after_observed": 2147483647,
+      "size_virtual_cardinality": 2147483648,
+      "size_late_predicate_exception_preserved": true,
+      "native_old_and_new_boundary_checks_each": 314,
+      "candidate_native_map_checks": 166656,
+      "candidate_native_map_calls": 41478,
+      "candidate_native_map_refusals": 6,
+      "fatal_ubsan": true,
+      "checked_jni": true,
+      "positive_native_stderr_empty": true,
+      "early_return_native_mutant": "EXPECTED_FAILURE late invalid endpoint admitted",
+      "separate_map_cursor_jni": "PRESERVE_EXISTING; not part of this scratch run",
+      "root_successor_recipe_gate": "PENDING"
+    },
+    "logs": {
+      "logs/M3FilteredMapsNativeSelfTest-native.log": {
+        "sha256": "281a7af248492bf4a2852f16459f1c8870c1a1c8f0a51b72ff2753f93ab020ff",
+        "bytes": 63
+      },
+      "logs/M3FilteredMapsNativeSelfTest-native.stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "logs/M3FilteredMapsSelfTest.log": {
+        "sha256": "e1ba038977c639fc78200c70260862aa76b679acb10c7ec492636d4520224454",
+        "bytes": 36
+      },
+      "logs/M3FilteredWrapperSelfTest-native.log": {
+        "sha256": "de39edb133ad83a941eae24d342d8abddd88f69a92d953ce22149753e1488d3a",
+        "bytes": 42
+      },
+      "logs/M3FilteredWrapperSelfTest-native.stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "logs/M3FilteredWrapperSelfTest.log": {
+        "sha256": "0ed0f634ffe6e303cfacb96d9a6779e98701b4552f3c1660f60c54944e01ad0c",
+        "bytes": 55
+      },
+      "logs/before-api.log": {
+        "sha256": "c2e5ac40433ce238ceed75a1e5931b00224ea8f87505a1e11fe7e658a2c1133d",
+        "bytes": 63
+      },
+      "logs/before-compile.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "logs/before-query.log": {
+        "sha256": "2bb9a5d24424022c145a62d436ef75e4c6429bb20f7f8c4846f6abadc4a16abc",
+        "bytes": 104
+      },
+      "logs/before-size.log": {
+        "sha256": "11bcff1f3219164cf35f07d3232140fc794f38d2ecc16167f6429fadca32669b",
+        "bytes": 127
+      },
+      "logs/candidate-api.log": {
+        "sha256": "660d19809ff34bd3c954c4a387fda9094dade40d75a6b4aad7e4b0f9a00a7907",
+        "bytes": 63
+      },
+      "logs/candidate-compile.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "logs/candidate-query.log": {
+        "sha256": "2bb9a5d24424022c145a62d436ef75e4c6429bb20f7f8c4846f6abadc4a16abc",
+        "bytes": 104
+      },
+      "logs/candidate-size.log": {
+        "sha256": "3f3292d7ffe63669e8f1fdd59f24c985b3b97f521c10c817988c754e9c332a20",
+        "bytes": 122
+      },
+      "logs/core-compile.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "logs/donor-tests-compile.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "logs/early-return-negative-compile.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "logs/early-return-negative-native-boundaries.log": {
+        "sha256": "068986d077372f77615258eaee2d06108c6ce465be5cf84e46a73a3d355a0200",
+        "bytes": 276
+      },
+      "logs/native-compile.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "logs/native-exports.log": {
+        "sha256": "716ea5b6e2bbcc5e3f8277f9ad2eb2a9ef269395619fecd013ab148505fc2e6b",
+        "bytes": 43
+      },
+      "logs/old-api-positive-refusal.log": {
+        "sha256": "c5e242051410ee41859327750c6c4ecc81a0914c339c3ae70b38e8cf510adc37",
+        "bytes": 382
+      },
+      "logs/old-size-positive-refusal.log": {
+        "sha256": "8c2c2795181d5d2b243ca28ccd5e8078719fa557988b66357b14dd646f6030f0",
+        "bytes": 152
+      },
+      "logs/original-compile.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "logs/original-native-boundaries.log": {
+        "sha256": "de39edb133ad83a941eae24d342d8abddd88f69a92d953ce22149753e1488d3a",
+        "bytes": 42
+      }
+    },
+    "master_core_sources": {
+      "commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+      "units": 83,
+      "all_byte_identical_to_git": true,
+      "inventory_sha256": "6e22145a5c684d153fc6f32f8bba11d8e3d86a7181b0de424423f09abb514fea"
+    },
+    "compiled_files": {
+      "build/before/M3FilteredMapApiProof.class": {
+        "sha256": "27048f568863ecdb97cfb81ea49b9ce84a0340f0e4bb206cacd4c5ab8f3f4978",
+        "bytes": 2713
+      },
+      "build/before/M3FilteredMapSizeProof$VirtualMap$1$1.class": {
+        "sha256": "ffd5e8291c0b8f6186ec83abb3708c78117d963c4ef057a334a94a91b7107ef2",
+        "bytes": 1646
+      },
+      "build/before/M3FilteredMapSizeProof$VirtualMap$1.class": {
+        "sha256": "451146fb9c7959d3297bfd7181338af084064afcd2fdbc4659b179de69e08097",
+        "bytes": 1189
+      },
+      "build/before/M3FilteredMapSizeProof$VirtualMap.class": {
+        "sha256": "ceb1a6a3912eea31a277c2ae48bcdf09e255d5307b9b9e40985ba7d3e6c5dabb",
+        "bytes": 776
+      },
+      "build/before/M3FilteredMapSizeProof.class": {
+        "sha256": "6d77912511aed0dc2f0205706df863ad3c6a778a347d43b540a6b72d05351813",
+        "bytes": 2929
+      },
+      "build/before/QueryReadProof$Value.class": {
+        "sha256": "12a452f3c8631ee1e87e53cff58ede41b96809ae645695aeb5f22257d8c22da3",
+        "bytes": 1333
+      },
+      "build/before/QueryReadProof.class": {
+        "sha256": "32a43e67a655d86f26ca58ae5764311a2aa3db2bac1407a7c44641f544b20d8f",
+        "bytes": 6484
+      },
+      "build/before/com/m3/collections/M3CollectionViews$1.class": {
+        "sha256": "764ed4988a120b57e1bb42ecf5311085184d55295c5957439c3cb28d463ed2ab",
+        "bytes": 1480
+      },
+      "build/before/com/m3/collections/M3CollectionViews$FilteredCollection.class": {
+        "sha256": "cdd49b5ce4bd55512fa95e20d33b2cf3e04cbe6f2df7574630f61fe83efbbc88",
+        "bytes": 4503
+      },
+      "build/before/com/m3/collections/M3CollectionViews$FilteredNavigableSet.class": {
+        "sha256": "1456285b2b610668f2198c670caf99740643db1372fbf7645f385a46b8f687d2",
+        "bytes": 3765
+      },
+      "build/before/com/m3/collections/M3CollectionViews$FilteredSet.class": {
+        "sha256": "47a69638d41ce863a7adfef2052bf4067711642b9dc689c005192beae00dee86",
+        "bytes": 1421
+      },
+      "build/before/com/m3/collections/M3CollectionViews$FilteredSortedSet.class": {
+        "sha256": "37f709817af1bf76a921db96b18853be3e27c7a68a977be393e977d6935b61c8",
+        "bytes": 2581
+      },
+      "build/before/com/m3/collections/M3CollectionViews$SelectionSpliterator.class": {
+        "sha256": "179239f53ea76b0dcfa5f8414ef7fa5e7ec1344e83e07b88a622f4ee2e00e3b8",
+        "bytes": 3078
+      },
+      "build/before/com/m3/collections/M3CollectionViews.class": {
+        "sha256": "6521c0a38a9e785fdc43504ebe532f8145a763f524a8c30d1c4b8980f23f7050",
+        "bytes": 4688
+      },
+      "build/before/com/m3/collections/M3FilteredMaps$1.class": {
+        "sha256": "bf5b066b3ce16c29d78fbf5019daf86214a7702d34a4ac846d722144484580b8",
+        "bytes": 983
+      },
+      "build/before/com/m3/collections/M3FilteredMaps$FilteredMap$Entries.class": {
+        "sha256": "9d1034653ee6fc71783e40ed4f9bccf2fcec45251007c8f1ebabc6cb34b467fd",
+        "bytes": 4405
+      },
+      "build/before/com/m3/collections/M3FilteredMaps$FilteredMap$GuardedEntry.class": {
+        "sha256": "022ed425adaa988daa8a4929ec87f52d1aaf4ae6a1010e2dc8a6a8167e066561",
+        "bytes": 2448
+      },
+      "build/before/com/m3/collections/M3FilteredMaps$FilteredMap$Keys.class": {
+        "sha256": "3366166d4c40dc016ba40e99885e8b2c585f7e6846028cccc5953a3bee93470f",
+        "bytes": 3615
+      },
+      "build/before/com/m3/collections/M3FilteredMaps$FilteredMap$Values.class": {
+        "sha256": "d5aaedc69935b6862ad906eb651a7b3e90bfa40f5b2489083de4685d584ce473",
+        "bytes": 3641
+      },
+      "build/before/com/m3/collections/M3FilteredMaps$FilteredMap.class": {
+        "sha256": "9f4f7ecf24225a21ab289ec7fdbb95363c48111f97a8e279105e439aba323806",
+        "bytes": 5629
+      },
+      "build/before/com/m3/collections/M3FilteredMaps$FilteredNavigableMap.class": {
+        "sha256": "72c03dd24dd352abfa98d90006dc604bc023fc4c90e950e3fdff59b7b08cb856",
+        "bytes": 6285
+      },
+      "build/before/com/m3/collections/M3FilteredMaps$FilteredSortedMap.class": {
+        "sha256": "9e43e39c2a1b904c46c07cfa9633463e909b5ced3dc56d112f6f7daab1d73e4b",
+        "bytes": 2445
+      },
+      "build/before/com/m3/collections/M3FilteredMaps$ProjectingSpliterator.class": {
+        "sha256": "17a165a1bd38a5f5adf03ab48b9ad9a3efc438df0632fb61f45e5937d474a640",
+        "bytes": 2844
+      },
+      "build/before/com/m3/collections/M3FilteredMaps.class": {
+        "sha256": "764c5666a1ede483c9cec867e2f2a184ccc68eb7a26503aa8627a01bdf76a80b",
+        "bytes": 3746
+      },
+      "build/candidate/M3FilteredMapApiProof.class": {
+        "sha256": "27048f568863ecdb97cfb81ea49b9ce84a0340f0e4bb206cacd4c5ab8f3f4978",
+        "bytes": 2713
+      },
+      "build/candidate/M3FilteredMapSizeProof$VirtualMap$1$1.class": {
+        "sha256": "ffd5e8291c0b8f6186ec83abb3708c78117d963c4ef057a334a94a91b7107ef2",
+        "bytes": 1646
+      },
+      "build/candidate/M3FilteredMapSizeProof$VirtualMap$1.class": {
+        "sha256": "451146fb9c7959d3297bfd7181338af084064afcd2fdbc4659b179de69e08097",
+        "bytes": 1189
+      },
+      "build/candidate/M3FilteredMapSizeProof$VirtualMap.class": {
+        "sha256": "ceb1a6a3912eea31a277c2ae48bcdf09e255d5307b9b9e40985ba7d3e6c5dabb",
+        "bytes": 776
+      },
+      "build/candidate/M3FilteredMapSizeProof.class": {
+        "sha256": "6d77912511aed0dc2f0205706df863ad3c6a778a347d43b540a6b72d05351813",
+        "bytes": 2929
+      },
+      "build/candidate/QueryReadProof$Value.class": {
+        "sha256": "12a452f3c8631ee1e87e53cff58ede41b96809ae645695aeb5f22257d8c22da3",
+        "bytes": 1333
+      },
+      "build/candidate/QueryReadProof.class": {
+        "sha256": "32a43e67a655d86f26ca58ae5764311a2aa3db2bac1407a7c44641f544b20d8f",
+        "bytes": 6484
+      },
+      "build/candidate/RunSearchJni.class": {
+        "sha256": "3f5420abc9a148e6cfc6b1ef19830369750aee43486b5e08e245f35c7bf99d26",
+        "bytes": 2676
+      },
+      "build/candidate/com/m3/collections/M3CollectionViews$1.class": {
+        "sha256": "764ed4988a120b57e1bb42ecf5311085184d55295c5957439c3cb28d463ed2ab",
+        "bytes": 1480
+      },
+      "build/candidate/com/m3/collections/M3CollectionViews$FilteredCollection.class": {
+        "sha256": "cdd49b5ce4bd55512fa95e20d33b2cf3e04cbe6f2df7574630f61fe83efbbc88",
+        "bytes": 4503
+      },
+      "build/candidate/com/m3/collections/M3CollectionViews$FilteredNavigableSet.class": {
+        "sha256": "1456285b2b610668f2198c670caf99740643db1372fbf7645f385a46b8f687d2",
+        "bytes": 3765
+      },
+      "build/candidate/com/m3/collections/M3CollectionViews$FilteredSet.class": {
+        "sha256": "47a69638d41ce863a7adfef2052bf4067711642b9dc689c005192beae00dee86",
+        "bytes": 1421
+      },
+      "build/candidate/com/m3/collections/M3CollectionViews$FilteredSortedSet.class": {
+        "sha256": "37f709817af1bf76a921db96b18853be3e27c7a68a977be393e977d6935b61c8",
+        "bytes": 2581
+      },
+      "build/candidate/com/m3/collections/M3CollectionViews$SelectionSpliterator.class": {
+        "sha256": "179239f53ea76b0dcfa5f8414ef7fa5e7ec1344e83e07b88a622f4ee2e00e3b8",
+        "bytes": 3078
+      },
+      "build/candidate/com/m3/collections/M3CollectionViews.class": {
+        "sha256": "6521c0a38a9e785fdc43504ebe532f8145a763f524a8c30d1c4b8980f23f7050",
+        "bytes": 4688
+      },
+      "build/candidate/com/m3/collections/M3FilteredMaps$1.class": {
+        "sha256": "46b4e654f04e5ef01b67f81ef41238b8519bce40c237bec1ded5a8c3b7fe0c0f",
+        "bytes": 983
+      },
+      "build/candidate/com/m3/collections/M3FilteredMaps$FilteredMap$Entries.class": {
+        "sha256": "8bae39a726c019e9360b32978dfb4899715350a6dc95b7186d4f6ac3159fee21",
+        "bytes": 4405
+      },
+      "build/candidate/com/m3/collections/M3FilteredMaps$FilteredMap$GuardedEntry.class": {
+        "sha256": "3d0817c33fd63484895e9fe4a20fed22238f1985a40bfc672aca0fc4e2e4658c",
+        "bytes": 2448
+      },
+      "build/candidate/com/m3/collections/M3FilteredMaps$FilteredMap$Keys.class": {
+        "sha256": "f3a73d8fbc699727813b150039156a72af5339a573c1ddecb060aecfbefcf021",
+        "bytes": 3615
+      },
+      "build/candidate/com/m3/collections/M3FilteredMaps$FilteredMap$Values.class": {
+        "sha256": "237ff5137a760c1d23fe163b23721cde69481f1b40206e2123b777295e087880",
+        "bytes": 3641
+      },
+      "build/candidate/com/m3/collections/M3FilteredMaps$FilteredMap.class": {
+        "sha256": "92d5f12f8e446dc1caee8c940cc441d15280fe39d7b54753cf1a9102e78f1d88",
+        "bytes": 6119
+      },
+      "build/candidate/com/m3/collections/M3FilteredMaps$FilteredNavigableMap.class": {
+        "sha256": "2746349ecac89d7b3f4e18bda9c8de7fe12f2fc73e0c4ae5d09668e3d43954ba",
+        "bytes": 6285
+      },
+      "build/candidate/com/m3/collections/M3FilteredMaps$FilteredSortedMap.class": {
+        "sha256": "1c7777fba74f7fa0cba2bc9d470686d0d2f4770bb77f4418e865274b2ee694cb",
+        "bytes": 2445
+      },
+      "build/candidate/com/m3/collections/M3FilteredMaps$ProjectingSpliterator.class": {
+        "sha256": "b3c35aafe2d383c87941fd9a9253d14e0fc8a86f01dcf6d709bc7e93202f9ff7",
+        "bytes": 2844
+      },
+      "build/candidate/com/m3/collections/M3FilteredMaps.class": {
+        "sha256": "6615dd9f770f6aca6bf1c424291348c8ba968f185550558c96840d07b1f8a3a4",
+        "bytes": 5936
+      },
+      "build/candidate/com/m3/collections/M3FilteredMapsNativeSelfTest.class": {
+        "sha256": "cd9c56d6148cde0f9f0a30a652fb6c02e226c65f5d0e813eac5dc2f016544f3d",
+        "bytes": 6211
+      },
+      "build/candidate/com/m3/collections/M3FilteredMapsSelfTest$Key.class": {
+        "sha256": "e1140a5693ba0a35d15185662d85934e26b5afbbd4d62496a35b4e36c25fe7f5",
+        "bytes": 1446
+      },
+      "build/candidate/com/m3/collections/M3FilteredMapsSelfTest$SortedOnly.class": {
+        "sha256": "c57ab6bdf2faba173940f4a4b7fd8b57cf7239bf31b3a2366fee0f501a7dacd7",
+        "bytes": 2117
+      },
+      "build/candidate/com/m3/collections/M3FilteredMapsSelfTest.class": {
+        "sha256": "6b63aed0ec8381bdb817a8a09107e87820e214c9505ab899f983818071cac349",
+        "bytes": 23262
+      },
+      "build/candidate/com/m3/collections/M3FilteredWrapperSelfTest$SortedOnly.class": {
+        "sha256": "d17df569b65ec821e47c418d2398bc4a690c03ecca77ccbd5da223e7e2624590",
+        "bytes": 2125
+      },
+      "build/candidate/com/m3/collections/M3FilteredWrapperSelfTest.class": {
+        "sha256": "b309ae9b5e8190a5badd9ad2c923bd3ae46bc5ee142e51c630ad697dc67d9750",
+        "bytes": 21658
+      },
+      "build/core/com/m3/collections/M3AdaptiveEnumLongMap.class": {
+        "sha256": "bf37a1a96fe02a0cb054b18dce2f41ce7db9b1da00c4bff6413c68113a5b1504",
+        "bytes": 8591
+      },
+      "build/core/com/m3/collections/M3Address28.class": {
+        "sha256": "6305c8ab4f9666ab32359e71329cece9e1d5cdc1cf20435ca789169f08e50796",
+        "bytes": 1923
+      },
+      "build/core/com/m3/collections/M3BitLane28.class": {
+        "sha256": "526a4fffa75d0fe4d2845876b5b39c4f39de8e934865b182bff7bbf338a36a09",
+        "bytes": 3561
+      },
+      "build/core/com/m3/collections/M3BlockingDeque$1.class": {
+        "sha256": "fc2dd861ddf761a1b4a21f876103b2d5f132c886a57035a32eb47ff1dc6da73c",
+        "bytes": 1713
+      },
+      "build/core/com/m3/collections/M3BlockingDeque.class": {
+        "sha256": "3c7097225d9c5214643a1c904196c14d8f02bb09839d5ce48885d7fae474638f",
+        "bytes": 9886
+      },
+      "build/core/com/m3/collections/M3ChildProgressMonitor.class": {
+        "sha256": "1a6dbcdcb268db85f494aaca5b383456c4cdd2760a120fcdbed1f53a1d922104",
+        "bytes": 4624
+      },
+      "build/core/com/m3/collections/M3Collections.class": {
+        "sha256": "e541c9035dda96798ff33a1b5f541b20354b20ec9430a92fbd84d3bd274157a2",
+        "bytes": 12391
+      },
+      "build/core/com/m3/collections/M3ConcurrentBitSet$SetBits.class": {
+        "sha256": "7d9ded8169c272da5398cfedc6e1e1d8767e2cd37eb00460063a9e0833067135",
+        "bytes": 2024
+      },
+      "build/core/com/m3/collections/M3ConcurrentBitSet.class": {
+        "sha256": "8878acbc3a088bb78b42f64eab522cce520ac268d228e0e02ec313c47e37f1c1",
+        "bytes": 2977
+      },
+      "build/core/com/m3/collections/M3ConcurrentIntLane28$Range.class": {
+        "sha256": "dc9d1e448be347e10f4c591c7ecf510208e9e9dd7ce5dd9bd709a1f5ea70aad8",
+        "bytes": 1910
+      },
+      "build/core/com/m3/collections/M3ConcurrentIntLane28.class": {
+        "sha256": "bc241b4731c9591f0d95de49529596fdc59e7046f105345033dcb6cb7e7f546b",
+        "bytes": 3000
+      },
+      "build/core/com/m3/collections/M3ConcurrentLongLane28$Range.class": {
+        "sha256": "d5438f73aa3edbbf7c9d1c001839fd71fc16208ff890d8d02e654dc175db908b",
+        "bytes": 1921
+      },
+      "build/core/com/m3/collections/M3ConcurrentLongLane28.class": {
+        "sha256": "2da5b77e19c85a734f49253fa916221d281a37407462e7629be589dc839b170e",
+        "bytes": 3025
+      },
+      "build/core/com/m3/collections/M3ConcurrentLongMap$PairLane.class": {
+        "sha256": "30f1a7ebdbbb2fcd3d51d1b38f14cf50dc6747567f73a1721dc97a02212684df",
+        "bytes": 1617
+      },
+      "build/core/com/m3/collections/M3ConcurrentLongMap.class": {
+        "sha256": "2929d37571cc38fd0574fa29a9861928e35f2db8d3545855fa6c7bed3db1f996",
+        "bytes": 3462
+      },
+      "build/core/com/m3/collections/M3ConcurrentLongSet$1.class": {
+        "sha256": "406a231873b0c07dbde5a92b4196c2eb523c3b94e67e86a17ff1e481e24e1135",
+        "bytes": 879
+      },
+      "build/core/com/m3/collections/M3ConcurrentLongSet.class": {
+        "sha256": "8014d2112ae06d6b9da0467d00cbb10767fc77f948d1a01b0629d43f840585b3",
+        "bytes": 2614
+      },
+      "build/core/com/m3/collections/M3DefaultProgressMonitor.class": {
+        "sha256": "51368f5467b0477e6680cf2e0b0591703b1fbc97c52cbb07aa5f557586fc40b2",
+        "bytes": 3716
+      },
+      "build/core/com/m3/collections/M3EnumLongMap$EntryConsumer.class": {
+        "sha256": "e51eac9a653b54b2924de86206ca4c57826e93e939d6819c7bc0ebf52a4d2ece",
+        "bytes": 442
+      },
+      "build/core/com/m3/collections/M3EnumLongMap$OrdinalLongConsumer.class": {
+        "sha256": "f68b289f6d311b7bd95a030a2532caa09e909fa3db275255e41e8960b8a88416",
+        "bytes": 355
+      },
+      "build/core/com/m3/collections/M3EnumLongMap.class": {
+        "sha256": "5d808ba5c14a5be2bc864c8b50be517577e73e53301e35b4ccca7d4e5fedb2a9",
+        "bytes": 6439
+      },
+      "build/core/com/m3/collections/M3EnumSet.class": {
+        "sha256": "c8be2f9f64e2e53c828cb4b9c951cee95a5b1b8fd8bc74701c9e09669aef363d",
+        "bytes": 7681
+      },
+      "build/core/com/m3/collections/M3IndexMaskCompactor$Backend.class": {
+        "sha256": "ba88b56db816f917e5d868c8b609c99726013335832bfd513f36e196f689c3e2",
+        "bytes": 1228
+      },
+      "build/core/com/m3/collections/M3IndexMaskCompactor$NativeLibrary.class": {
+        "sha256": "9bc8e5f7e8e4ab227139310d5171deca543db01c5a63763020b8f5faeb1a5f81",
+        "bytes": 654
+      },
+      "build/core/com/m3/collections/M3IndexMaskCompactor.class": {
+        "sha256": "f1fc899fc544754e962bf23d8b8958d457b2eb85f391c356c1f3e9e178192339",
+        "bytes": 2397
+      },
+      "build/core/com/m3/collections/M3IntCollection$1.class": {
+        "sha256": "de7b4df86a1a977c093fb04d14479706f9639de42a177da35754f94ffbad1904",
+        "bytes": 1641
+      },
+      "build/core/com/m3/collections/M3IntCollection.class": {
+        "sha256": "90509dfff86850bdae32f2da3bb2be02a1824783d56937526abc07494280ec39",
+        "bytes": 1505
+      },
+      "build/core/com/m3/collections/M3IntHashSet$1.class": {
+        "sha256": "bf098f7835bda49e8773fea735cb29d8b7c710d88069c0a86ae5deb7e2e3477b",
+        "bytes": 1262
+      },
+      "build/core/com/m3/collections/M3IntHashSet.class": {
+        "sha256": "24a08754ccbd4a99f2c77189d52c02343f9b414f03efcfc3876d7b95963f425b",
+        "bytes": 3550
+      },
+      "build/core/com/m3/collections/M3IntIntConsumer.class": {
+        "sha256": "50b101ca3b714b3a3b4890b2fb6400b23c762ad349378639dc5a587b34dc19f0",
+        "bytes": 231
+      },
+      "build/core/com/m3/collections/M3IntIntHashMap$1.class": {
+        "sha256": "e535d849e60f9de7c75aa902854b327129efea774631370285c807dc11133ccd",
+        "bytes": 1280
+      },
+      "build/core/com/m3/collections/M3IntIntHashMap.class": {
+        "sha256": "f1da8469756629a916e9cd42d5aae1c59302682aa05898561122d156f8d034e4",
+        "bytes": 4951
+      },
+      "build/core/com/m3/collections/M3IntIterator.class": {
+        "sha256": "5f6a9bc1a069a31d1380aefd5c425a731723db1283daee4e6450e9f4b9e297e6",
+        "bytes": 569
+      },
+      "build/core/com/m3/collections/M3IntLane28.class": {
+        "sha256": "ab23fd70b8fab30ddec19896939bcf79f3cedf47c941ab4c7b1c13fe96c99910",
+        "bytes": 3426
+      },
+      "build/core/com/m3/collections/M3IntLongConsumer.class": {
+        "sha256": "c2a6384e5fc36a01e2d19b127018426870b4aae036a5034170ef5c4baeb02321",
+        "bytes": 233
+      },
+      "build/core/com/m3/collections/M3IntLongHashMap$1.class": {
+        "sha256": "416f63e7a109aec2c9988240e2b3662d6bfa0229396af824134b51b2d60ddc33",
+        "bytes": 1285
+      },
+      "build/core/com/m3/collections/M3IntLongHashMap.class": {
+        "sha256": "f8cbdb6299e0c6020b38bb1f69517de557cff6514da3ba5699c88b45a528a58e",
+        "bytes": 5197
+      },
+      "build/core/com/m3/collections/M3IntPriorityQueue$1.class": {
+        "sha256": "4426f8f4b90fefa6ea93a067d58fae5d5e66c3eb03372c07f0c4a0941f81e2ef",
+        "bytes": 1066
+      },
+      "build/core/com/m3/collections/M3IntPriorityQueue.class": {
+        "sha256": "e3158dbd8771cb5ac48bcc5eeb3a14a4e5d3d209c72c454cafbf4d3bb44ef9c1",
+        "bytes": 3591
+      },
+      "build/core/com/m3/collections/M3LazyEventBits.class": {
+        "sha256": "25b8807932eaa161476298ba56cb6503870ad86ed4df296abeac8be1f146757b",
+        "bytes": 891
+      },
+      "build/core/com/m3/collections/M3LazyEventGranularity.class": {
+        "sha256": "fe66b6e2ed27d9bb5992731509cae5650dd65dfc259c81915db8600ffb418b41",
+        "bytes": 1824
+      },
+      "build/core/com/m3/collections/M3LazyEventPolicy.class": {
+        "sha256": "46ece6bb799b5dc6f534e80ad8ae226de4ab246ae3fe00e6eefb0b7588229eea",
+        "bytes": 3117
+      },
+      "build/core/com/m3/collections/M3LazyEventSink$NoOpHolder.class": {
+        "sha256": "6393b7b11b6d5444928c83733f5a8b881d550dd08f99bd0f8c43694f3b8982ce",
+        "bytes": 1174
+      },
+      "build/core/com/m3/collections/M3LazyEventSink.class": {
+        "sha256": "2a5c99ec9d494adbfb2215739ccb143672ae8691ac42a1cf1225934818d6f3b1",
+        "bytes": 873
+      },
+      "build/core/com/m3/collections/M3LazyEventSource.class": {
+        "sha256": "b6168035f1fd25d15956ececa0304e12038f319d259ed524b45853481ebb4b89",
+        "bytes": 635
+      },
+      "build/core/com/m3/collections/M3LazyEvents.class": {
+        "sha256": "9759a5914eeb444cd19b9cb22b89315ad9ecdb7ddeadfb655857469811cef44b",
+        "bytes": 1265
+      },
+      "build/core/com/m3/collections/M3LazyOperation.class": {
+        "sha256": "3e34292466d76a1035a77626ba724d4285ff8661b93f663386d22adb1cb30af5",
+        "bytes": 1937
+      },
+      "build/core/com/m3/collections/M3LazyValueProvider.class": {
+        "sha256": "fcbd3f870b2a8305ea84088f443d5d92645810294b34c824360878f715ff0782",
+        "bytes": 720
+      },
+      "build/core/com/m3/collections/M3LazyValueState.class": {
+        "sha256": "0ad392af5e9112b292f585c9943a334bfd39872e2174fac9bea56b0523c4157b",
+        "bytes": 7170
+      },
+      "build/core/com/m3/collections/M3LinkedHashMap$Table.class": {
+        "sha256": "a9255db839a200723523ff2d38a83f70fba5b97f6a3f7b3d581df562b60d2c1e",
+        "bytes": 3923
+      },
+      "build/core/com/m3/collections/M3LinkedHashMap.class": {
+        "sha256": "0f6a0cae713ae9f546d888a31f23a6d03b76a08c06e39999b68df741dccc2941",
+        "bytes": 6557
+      },
+      "build/core/com/m3/collections/M3LinkedHashSet.class": {
+        "sha256": "23aab01787fc8e3fcce17dbb9d69563004d65bfaf11e184e912a2697c48b1cf0",
+        "bytes": 3004
+      },
+      "build/core/com/m3/collections/M3LinkedList$1.class": {
+        "sha256": "7eaf351c32bd6894914a2d07657d2e03dfe68420859c8a5131d2ece33227ac42",
+        "bytes": 2649
+      },
+      "build/core/com/m3/collections/M3LinkedList$Storage.class": {
+        "sha256": "6f5cc4dc092c0efc3486a1c160abb689f61bf3a35e3aa8cf4b1fded8bf5a3390",
+        "bytes": 1801
+      },
+      "build/core/com/m3/collections/M3LinkedList.class": {
+        "sha256": "cab88be9c1fbf7ced71ac1f46c27052a95eb0df02fe82caa57ad890eb444d20e",
+        "bytes": 6163
+      },
+      "build/core/com/m3/collections/M3LockedMap$1.class": {
+        "sha256": "1944d37b99eb959f14afb0754e1c60efd1878154a5d73de4da601259a7393752",
+        "bytes": 1612
+      },
+      "build/core/com/m3/collections/M3LockedMap$2.class": {
+        "sha256": "84273b2a142e2c9bd04b0ae2c432494df8e5ec6a3c06e5ffcdc34131652a3afd",
+        "bytes": 1351
+      },
+      "build/core/com/m3/collections/M3LockedMap$3.class": {
+        "sha256": "f3adbdd0560a5e0674c9ac59aa538c0f53cc48166b5c5e01b7f74b4c097fa55b",
+        "bytes": 1232
+      },
+      "build/core/com/m3/collections/M3LockedMap$4.class": {
+        "sha256": "e3dcf7f617c5280846b6f5b4ac0b3ecc7718a66585e38b01e81a308e6146d513",
+        "bytes": 1727
+      },
+      "build/core/com/m3/collections/M3LockedMap$SnapshotEntry.class": {
+        "sha256": "7fc630def9dd226ac5351ebb37b7bf171c4a9b697d21531170cc322a4f3c94ad",
+        "bytes": 2133
+      },
+      "build/core/com/m3/collections/M3LockedMap.class": {
+        "sha256": "70e29f9b88025f08be1a2fe034a660d9e30e6498ab4f55f170b17ded6ecd5f99",
+        "bytes": 8036
+      },
+      "build/core/com/m3/collections/M3LockedTreeMap.class": {
+        "sha256": "3db50db8e5ac0671dda5ee4f7347969ad8db1b1d494899ef4aa694daebeb8164",
+        "bytes": 7063
+      },
+      "build/core/com/m3/collections/M3LockedTreeSet.class": {
+        "sha256": "a7e08c8b6e4d7b4acfd4fa7a72e637b6f06ed4dd9fea4e84581310ddc5916778",
+        "bytes": 5095
+      },
+      "build/core/com/m3/collections/M3LongArena28.class": {
+        "sha256": "11db58ff9861521260895b82141519006ca02b9f34865aa72eab871b4032e326",
+        "bytes": 1874
+      },
+      "build/core/com/m3/collections/M3LongArrayDeque$1.class": {
+        "sha256": "b1aff41a0ed84ecbeac0cc1f34800fc0cd2ccc17c1a3d3ce2dfd839f3d69f8d9",
+        "bytes": 1103
+      },
+      "build/core/com/m3/collections/M3LongArrayDeque$2.class": {
+        "sha256": "faabc64ed3c737a058b691bd81ef6f1a4447075b849dce3f15664022f26dc72f",
+        "bytes": 1116
+      },
+      "build/core/com/m3/collections/M3LongArrayDeque.class": {
+        "sha256": "ad4be2b6214fe3b80260008789ea3bb6830ea9067cb5ad4a08ffca1445aec357",
+        "bytes": 5481
+      },
+      "build/core/com/m3/collections/M3LongArrayList$1.class": {
+        "sha256": "5cafa67c4141040cd44c183119ee1e2f22d617abc28af9202ea038c08ca59b83",
+        "bytes": 1058
+      },
+      "build/core/com/m3/collections/M3LongArrayList.class": {
+        "sha256": "96c0b1c2094b4d91b8fa019ca5b35c79291136ecce23850cebeb524c1f7201a0",
+        "bytes": 5974
+      },
+      "build/core/com/m3/collections/M3LongCollection$1.class": {
+        "sha256": "bb3f0f8e1d152cd3f45a94dae1502926bb0df4967cad9d438e33d2788bf24907",
+        "bytes": 1651
+      },
+      "build/core/com/m3/collections/M3LongCollection.class": {
+        "sha256": "515ed3480be8df795ae3a467a76711bf9f51250ce69306c99c55bba58447bcb2",
+        "bytes": 1531
+      },
+      "build/core/com/m3/collections/M3LongCompositeViews$1.class": {
+        "sha256": "ecec16a505f30ed9e622580937dbc15a34faa04250e04e663bb12d1d4b535566",
+        "bytes": 1934
+      },
+      "build/core/com/m3/collections/M3LongCompositeViews$Concatenation$1.class": {
+        "sha256": "5125c9a62f2e4ab3c825a2078652f0409f06a11ef74b0cc707a4618e71d0deca",
+        "bytes": 1258
+      },
+      "build/core/com/m3/collections/M3LongCompositeViews$Concatenation.class": {
+        "sha256": "3ecbc43251f94b58e94136bf004acab02b4f613eb011c9354b3f1a78d70e6efa",
+        "bytes": 2023
+      },
+      "build/core/com/m3/collections/M3LongCompositeViews$Merge.class": {
+        "sha256": "d8f279ac49e2839b67addd7a7bb799c82d19480443b058a26ec5a7ea4cc9006b",
+        "bytes": 2065
+      },
+      "build/core/com/m3/collections/M3LongCompositeViews$Union.class": {
+        "sha256": "1acf11dbd6f8dc3f5011c335bb0d7263993d117bca84a415d2083b678e132ea4",
+        "bytes": 3094
+      },
+      "build/core/com/m3/collections/M3LongCompositeViews.class": {
+        "sha256": "f7ddf628e7bf3a185fd10003062f40d057bfef22567e4a3723f82707fed40e04",
+        "bytes": 1841
+      },
+      "build/core/com/m3/collections/M3LongDeque.class": {
+        "sha256": "da9c8cc8dd92be8d282fc2bbb3020f4b369290a4e2c48043d74dcb2f0bc02a52",
+        "bytes": 911
+      },
+      "build/core/com/m3/collections/M3LongFilteredView$1.class": {
+        "sha256": "fb494e89161b0dcbfa53f76b8e71f70c4d130a414b6e848ed05c1b5263654a96",
+        "bytes": 1757
+      },
+      "build/core/com/m3/collections/M3LongFilteredView$2.class": {
+        "sha256": "91a28fa92297f64035d9e771ff2c689f2244677e99193636cd428a1be0d03f9c",
+        "bytes": 1313
+      },
+      "build/core/com/m3/collections/M3LongFilteredView.class": {
+        "sha256": "2efe23658d90559e3402b39704f53864149fa6c48c03af1a5315e141704131e8",
+        "bytes": 2675
+      },
+      "build/core/com/m3/collections/M3LongHashSet$1.class": {
+        "sha256": "216e28c4a90f3ee5e789e5183f3f07be991d36502f3e207eb0d5dde5fb43107a",
+        "bytes": 1165
+      },
+      "build/core/com/m3/collections/M3LongHashSet.class": {
+        "sha256": "0b3ff7c4d5641752707fc2bebfb3381ce02ed58986954b67c4ec12f2b89084d2",
+        "bytes": 3839
+      },
+      "build/core/com/m3/collections/M3LongIterator.class": {
+        "sha256": "27dc860fb4e54d0db92ab3de2aa48977024f4f7a23267c12d62181573aeacf3b",
+        "bytes": 574
+      },
+      "build/core/com/m3/collections/M3LongLane28.class": {
+        "sha256": "5b57c8270cab08d246dfaeb841f56a22184cf935071a04315571040c7675e41e",
+        "bytes": 3476
+      },
+      "build/core/com/m3/collections/M3LongLaneStore28$HandleConsumer.class": {
+        "sha256": "b133cce6eefae4023a4cdb221624292dac4d8966f23c51c62456f4103b56cfb4",
+        "bytes": 356
+      },
+      "build/core/com/m3/collections/M3LongLaneStore28.class": {
+        "sha256": "ec017da97fb2aaec1d4ce985e292f73263bc31736fda2d83136ce619ea351ae9",
+        "bytes": 3845
+      },
+      "build/core/com/m3/collections/M3LongLinkedHashSet$1.class": {
+        "sha256": "a5b61ead2ca519bd75b712fc9c8668d4d12c56867acf6395ca342a17b0028c33",
+        "bytes": 1120
+      },
+      "build/core/com/m3/collections/M3LongLinkedHashSet.class": {
+        "sha256": "00ddaffa6433e13a8572422eae7c21eab540308e1b0d060b0b57640641b8c391",
+        "bytes": 5631
+      },
+      "build/core/com/m3/collections/M3LongLinkedList28.class": {
+        "sha256": "57758a410bd9faaf4687dc897f233d2d95e922e19609a6490daa92112abd4195",
+        "bytes": 3722
+      },
+      "build/core/com/m3/collections/M3LongList.class": {
+        "sha256": "8642c637a725f23ab6cf08255a424c8ec733f72671add97c824d25adbf09fa39",
+        "bytes": 785
+      },
+      "build/core/com/m3/collections/M3LongListSpliterator.class": {
+        "sha256": "7ca5f1aa09510aa513c1e5496bbd311a22660c3e72a930dcd8d82ca66852d99a",
+        "bytes": 1924
+      },
+      "build/core/com/m3/collections/M3LongLongConsumer.class": {
+        "sha256": "533d6e1f33805fc3be80a267ccdc2d5e2a79b631850c7f5f7b98bf6b45dc8378",
+        "bytes": 235
+      },
+      "build/core/com/m3/collections/M3LongLongHashMap$1.class": {
+        "sha256": "ad22d9d3957e381bdcec6926e39bdcc0880b8b674a098e619a51d2aec9317be2",
+        "bytes": 1188
+      },
+      "build/core/com/m3/collections/M3LongLongHashMap.class": {
+        "sha256": "7c62197cabcf7f729992c386ea11b2b2e5d47be52fa5471046768d234e568b29",
+        "bytes": 4974
+      },
+      "build/core/com/m3/collections/M3LongPriorityQueue$1.class": {
+        "sha256": "ad3b9e0f3b92335bb7b4b7df5ed06b4ad76cb4a32ed7f74405ebb82c13218505",
+        "bytes": 1074
+      },
+      "build/core/com/m3/collections/M3LongPriorityQueue.class": {
+        "sha256": "220338b7580fa0e52542c7b2aead0d76bb2769d9bd428efb586babd488d47fc5",
+        "bytes": 3539
+      },
+      "build/core/com/m3/collections/M3LongQueue.class": {
+        "sha256": "aa30f394bff887882a6511ab148217b13dd8ec7b89b7cc98ad71afba0c35db21",
+        "bytes": 1108
+      },
+      "build/core/com/m3/collections/M3LongSequence.class": {
+        "sha256": "d8db168936f54d25080ce3680c07f1d31d335fa9a267f4eb7aa78241e367d0f1",
+        "bytes": 546
+      },
+      "build/core/com/m3/collections/M3LongSortedSet.class": {
+        "sha256": "1d38f96f231e88d4a9d317525d789b4d3d053a7c13851c8e91f4b58ea6f823e8",
+        "bytes": 387
+      },
+      "build/core/com/m3/collections/M3LongSortedViews$1.class": {
+        "sha256": "6f591ee04eb4c10c0a0f14f3a9c8b44c245e14d5c00989e28c316b3a6cd42af8",
+        "bytes": 1806
+      },
+      "build/core/com/m3/collections/M3LongSortedViews$Filtered.class": {
+        "sha256": "462df0459e36969727d47d390e8742b5f5f69e2959e8ec6802ac1bba28a99a6b",
+        "bytes": 3951
+      },
+      "build/core/com/m3/collections/M3LongSortedViews$Unmodifiable.class": {
+        "sha256": "af2a07c8ed4a44a44194c13fa68fdf569b2dea273b3511e69a2a2e8bde575007",
+        "bytes": 1973
+      },
+      "build/core/com/m3/collections/M3LongSortedViews.class": {
+        "sha256": "f15792c8d4ee0243d5ad318afeda667d9fd053a60b3c2d88fcd70f190b18880c",
+        "bytes": 3352
+      },
+      "build/core/com/m3/collections/M3LongStack.class": {
+        "sha256": "846e099b4dc8f77ba80316e8a128d6becd661dc7605295a9ef51f399996207ce",
+        "bytes": 222
+      },
+      "build/core/com/m3/collections/M3ObjectIdentityMap.class": {
+        "sha256": "6e0aaab34f6020468ffd264262f88b5ac3db5248ec676d52dcfee8b2583818bf",
+        "bytes": 5234
+      },
+      "build/core/com/m3/collections/M3ObjectIdentitySet.class": {
+        "sha256": "deae224962d261203d162598d2b24edc783b0f4cb4a1147d90e00ce18e9087a0",
+        "bytes": 4027
+      },
+      "build/core/com/m3/collections/M3ObjectResidency$BudgetExceededException.class": {
+        "sha256": "5b4e210da71e448653c3a02c122dba9aab11263e9f4d2d8fdf060d38055229be",
+        "bytes": 1080
+      },
+      "build/core/com/m3/collections/M3ObjectResidency$Codec.class": {
+        "sha256": "4307c5187f05f290f2574849aeef25ebede63fb4ac684be947c97c8bc16cb40a",
+        "bytes": 483
+      },
+      "build/core/com/m3/collections/M3ObjectResidency$Decision.class": {
+        "sha256": "50ab95c923d512c7a2f175b6eeddd6992e8c6d0b9eae51dc33872a5becd4f365",
+        "bytes": 2124
+      },
+      "build/core/com/m3/collections/M3ObjectResidency$Factory.class": {
+        "sha256": "a8e9f2be66d0aa4d57c9ceb879085dcca6619a951a62ae0f171be7d8fc67c73f",
+        "bytes": 487
+      },
+      "build/core/com/m3/collections/M3ObjectResidency$HeapSnapshot.class": {
+        "sha256": "4b4219a62340fdd27e1b1d25f8fcc9719326e8cb0a0d157f09e534ec38e90b55",
+        "bytes": 2050
+      },
+      "build/core/com/m3/collections/M3ObjectResidency$ResidencyException.class": {
+        "sha256": "1190d8d89e08b6e5846b197cfabbb876288ac8e8291379c613173a0ebdbfb58f",
+        "bytes": 474
+      },
+      "build/core/com/m3/collections/M3ObjectResidency$SpillStore.class": {
+        "sha256": "79adf0d59fce08195f2e871cbd5b06735e1aa32d885894a596368d0fabffa6b8",
+        "bytes": 390
+      },
+      "build/core/com/m3/collections/M3ObjectResidency$State.class": {
+        "sha256": "7289da26285bc95f6b85ce0088f478d2488597443aee3276b949310abbb4e297",
+        "bytes": 1390
+      },
+      "build/core/com/m3/collections/M3ObjectResidency.class": {
+        "sha256": "f39bc461664c139d70b9ac9de8493dd1d3dc479d184978e099b1cdf29c4f5087",
+        "bytes": 12445
+      },
+      "build/core/com/m3/collections/M3OrderedSlotMap$SetView.class": {
+        "sha256": "63ce1bcfe8319a7cc614f5ee8592a843f68c858af8f9925da591522aa46c9ff4",
+        "bytes": 1719
+      },
+      "build/core/com/m3/collections/M3OrderedSlotMap$View.class": {
+        "sha256": "b8efc2c32a22779c9738371b9d08417a45caffad66859f66fa5c5cd65b81944a",
+        "bytes": 3541
+      },
+      "build/core/com/m3/collections/M3OrderedSlotMap.class": {
+        "sha256": "72c0d81c5edfb9d4a8d76b3a6d4e6cc4ada53a993f74e0f4636c1cdb89af1df5",
+        "bytes": 1766
+      },
+      "build/core/com/m3/collections/M3Progress$NullProgress.class": {
+        "sha256": "2ef7a183fcd9d7db4db6771f6ca1156148515a58427b1557178127f81a2d5a3b",
+        "bytes": 1177
+      },
+      "build/core/com/m3/collections/M3Progress$Snapshot.class": {
+        "sha256": "9e32bd9acee4d65b018b69e42e9ec65b9ff8db573263cc0bff068e3078e420af",
+        "bytes": 1965
+      },
+      "build/core/com/m3/collections/M3Progress$SubProgress.class": {
+        "sha256": "182fcc8c47fc18407005a2298eabdfd3d5084d3da4013820cc5d3b99d13668a8",
+        "bytes": 1751
+      },
+      "build/core/com/m3/collections/M3Progress.class": {
+        "sha256": "292c4a050ca91ac99d25b40c1c1402c8f3b421cd7039352401a79f40ec41bea5",
+        "bytes": 6079
+      },
+      "build/core/com/m3/collections/M3ProgressAdapters$LegacyAdapter.class": {
+        "sha256": "13ba52b00c239ab631c0d4e0c8fa4b9fb433dfe9c1e6c1c17ca7ef7a3f077763",
+        "bytes": 2996
+      },
+      "build/core/com/m3/collections/M3ProgressAdapters.class": {
+        "sha256": "29be5235243dde5a26e812f9f812b0ed7064cce653d02238ab9eb88bfad431dc",
+        "bytes": 985
+      },
+      "build/core/com/m3/collections/M3ProgressMonitor.class": {
+        "sha256": "03cd2da647042386e8b82f6c95a89b44efb11f40c87cd35fd2c7b25808a8c580",
+        "bytes": 1504
+      },
+      "build/core/com/m3/collections/M3ProgressScope.class": {
+        "sha256": "67331794e91e2b54a22036ef04c8541aa6771a2ea32cc57d688d337ad7275463",
+        "bytes": 1404
+      },
+      "build/core/com/m3/collections/M3ProgressState.class": {
+        "sha256": "928a75b36be4b5eb7257fe54ebd8db488405e4e40e559c4b73705890669c14fb",
+        "bytes": 2520
+      },
+      "build/core/com/m3/collections/M3Residency$Strategy.class": {
+        "sha256": "e6bda47db7281e3a49b2c123ce37b257927cf0de7b8519789a5c0a9022516102",
+        "bytes": 1202
+      },
+      "build/core/com/m3/collections/M3Residency.class": {
+        "sha256": "12a8a9225281c527e6c23c8cf2513a8e94e7c259d1e8965d9ebb57c0aeedc282",
+        "bytes": 835
+      },
+      "build/core/com/m3/collections/M3SlotAllocator28.class": {
+        "sha256": "85289cae49be89da767a5e2fab98d61631c7ca59bdd8f5163f65d93669b0084a",
+        "bytes": 3787
+      },
+      "build/core/com/m3/collections/M3SlotArrays.class": {
+        "sha256": "ff7512e76e008e1836860a20e93e33bc35e0a815b50c2587ed9c69afe3483bef",
+        "bytes": 1158
+      },
+      "build/core/com/m3/collections/M3SlotMap$1.class": {
+        "sha256": "e183893aada8bbcaf617e82f0bef25ff8650da7d563b1cdcf3818fcdcbc4bcef",
+        "bytes": 1957
+      },
+      "build/core/com/m3/collections/M3SlotMap$2.class": {
+        "sha256": "dd13be197cbb4fbd45c96cdfc5f29a9ab45f6c57b59843add624c5f5dd2b1eeb",
+        "bytes": 1140
+      },
+      "build/core/com/m3/collections/M3SlotMap$3.class": {
+        "sha256": "84137c4f8bcd0f5c483b7a5d2bf0f8a0ac62302c1ce3e4e5730cbba2dcb2ed45",
+        "bytes": 973
+      },
+      "build/core/com/m3/collections/M3SlotMap$4.class": {
+        "sha256": "048b2fc56d20bd3f8543f5e796b0503cb60ee75b7c327ac6cb41130d7b9b41cb",
+        "bytes": 1477
+      },
+      "build/core/com/m3/collections/M3SlotMap$LiveEntry.class": {
+        "sha256": "251908309cebf287a0384bf27ad6bd13d037e1b3d025a29fe95b179b276dc947",
+        "bytes": 2248
+      },
+      "build/core/com/m3/collections/M3SlotMap.class": {
+        "sha256": "d4a2e63cebc6634613294a097ab6afbde317b0efa1ce8d604b57a461ad3e7e49",
+        "bytes": 7168
+      },
+      "build/core/com/m3/collections/M3SlotSpliterators$1.class": {
+        "sha256": "86a990b304c29427cc70b7ac7c26f3037d740d1f1f469722b9e00deb2f46c79c",
+        "bytes": 1140
+      },
+      "build/core/com/m3/collections/M3SlotSpliterators$2.class": {
+        "sha256": "8ac7be19ae87f2fe6afb19a11680c4b1521874ae22facf7a98b5e30ca5424942",
+        "bytes": 1531
+      },
+      "build/core/com/m3/collections/M3SlotSpliterators.class": {
+        "sha256": "c370928235f05880f49d9e10933310931945b7c638cbb65818606bed1fe82e58",
+        "bytes": 2336
+      },
+      "build/core/com/m3/collections/M3SystemProgress.class": {
+        "sha256": "25be7bd15feca53586e667d2a3b04a18ca24e12d8ae7e6700b3bb28594b9eec9",
+        "bytes": 1040
+      },
+      "build/core/com/m3/collections/M3TransferQueue$1.class": {
+        "sha256": "300d5f86570b67f1295e595754557b5870327212948d6d4e108d2a5e652c9ff9",
+        "bytes": 1718
+      },
+      "build/core/com/m3/collections/M3TransferQueue.class": {
+        "sha256": "93f4080bf4b76d5ef7e6d737cb06ab55cd4a4b07e16394d63b289c55755e949e",
+        "bytes": 9193
+      },
+      "build/core/com/m3/collections/M3TreeMap$Tree.class": {
+        "sha256": "89e9bc4b12d3e3fdc24dfaa87d68bb978c8d0d3300567d71d53b5d0493f84afa",
+        "bytes": 6298
+      },
+      "build/core/com/m3/collections/M3TreeMap.class": {
+        "sha256": "1b00e00956e9c91718f4d9fd57ca0d84bca05ed84e4f62af088e30bede73ea23",
+        "bytes": 17250
+      },
+      "build/core/com/m3/collections/M3TreeSet.class": {
+        "sha256": "ef5164798231490cf4b9184094a7841ed3fc40f7fce23aef30634f40f124246c",
+        "bytes": 4756
+      },
+      "build/core/com/m3/collections/M3WeakHashMap$KeyReference.class": {
+        "sha256": "4fc51fd0c596d95dfb0b86a2aba9a3950af80a7ed8adf3804143f724c83b94af",
+        "bytes": 640
+      },
+      "build/core/com/m3/collections/M3WeakHashMap.class": {
+        "sha256": "94e964e4bcbeb74e8a75975e5bd1c30233ff8657434a2dbadad1d0f653deeb9e",
+        "bytes": 6383
+      },
+      "build/core/module-info.class": {
+        "sha256": "440779e416e3a6e75114f6aa1631d00083d502855636b833a295e60226c150f6",
+        "bytes": 199
+      },
+      "build/headers/RunSearchJni.h": {
+        "sha256": "4951592c0910573adb291347a4b2589c699afc9b93bc55cd0c376aa781de8411",
+        "bytes": 413
+      },
+      "build/librunsearch-early-return-negative.so": {
+        "sha256": "5059a3faddbf2144d27b7c657de36b8cbe872d6c315be6ee6e69f577d0fd1e7e",
+        "bytes": 16952
+      },
+      "build/librunsearch-original.so": {
+        "sha256": "9bb21c0870a1f4e082500421dce74322af6d75bf884b9c1b5bbe4d18ea830ae6",
+        "bytes": 16904
+      },
+      "build/librunsearch.so": {
+        "sha256": "1583942faa843a366ccc2233cfa4b3cd376a88a73a43fc2625611063bd223ca0",
+        "bytes": 16976
+      }
+    }
+  },
+  "primitive_sorted": {
+    "source_revision": "ad7cc06b1dba2e0946db4c9bff2eddec2dac16f8",
+    "target_revision": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "retained_live_owner_bytes": true,
+    "files": [
+      {
+        "target_path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java",
+        "before_sha256": "b2b9f26e5a353c602e50054cf5f66d4ce04e3ed989aefdaab44ab181be8f3a35",
+        "after_sha256": "97db99b66ea237735038f22c63f840dda3dab6d7368b5ea87a4257e4e3a83477",
+        "after_git_blob": "4bc4d2db935423000b58e6483bc78a6a54d9c3ae",
+        "source_record_url": "https://github.com/hsoliwal/com.synexia/blob/ad7cc06b1dba2e0946db4c9bff2eddec2dac16f8/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-sorted-composition-20261016/M3LongSortedViews.java.txt",
+        "license": "Apache-2.0",
+        "adaptation": "NONE; exact previously generated source"
+      },
+      {
+        "target_path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredSortedCompositionSelfTest.java",
+        "before_sha256": "ABSENT",
+        "after_sha256": "df1d46ee5dbbd82132d3bb6b071430f647df75a3d67dc8d537a153e6d5d1186b",
+        "after_git_blob": "dce5200046142c7f5b25c685b73509f046b3001a",
+        "source_record_url": "https://github.com/hsoliwal/com.synexia/blob/ad7cc06b1dba2e0946db4c9bff2eddec2dac16f8/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-sorted-composition-20261016/M3FilteredSortedCompositionSelfTest.java.txt",
+        "license": "Apache-2.0",
+        "adaptation": "Exact source bytes retained; physical test path relocated into the receiving wrapper proof module.",
+        "donor_target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSortedCompositionSelfTest.java"
+      },
+      {
+        "target_path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredSortedCompositionTest.java",
+        "before_sha256": "ABSENT",
+        "after_sha256": "5d0e0d31bec733577fb9ef374f7ccd90255382d15423e691d74755f329f01f12",
+        "after_git_blob": "ee69b4c1d0f123ee22e799f9a1d587d6baf021b8",
+        "source_record_url": "https://github.com/hsoliwal/M3jdk21/blob/b24db7f5697d65133f801b9a398f9bd3818233da/m3/collections/src/test/java/com/m3/collections/M3FilteredSortedCompositionTest.java",
+        "license": "Apache-2.0",
+        "adaptation": "Exact source bytes retained; physical test path relocated into the receiving wrapper proof module.",
+        "donor_target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSortedCompositionTest.java"
+      }
+    ]
+  },
+  "metrics": {
+    "schema": "M3_EXISTING_QUERY_PROBE_OBSERVATION_V1",
+    "jdk": "Temurin21.0.12.1+1",
+    "flags": [
+      "-Xms128m",
+      "-Xmx128m",
+      "-XX:ActiveProcessorCount=1",
+      "-XX:+UseSerialGC",
+      "-XX:-DoEscapeAnalysis"
+    ],
+    "probe_source_sha256": "1ac087dad8b7dca257b906aa8043711dc228ad1bebf520d9b2d80d6092737f81",
+    "workload": {
+      "backing_owner": "JDK LinkedHashMap<Integer,Integer>",
+      "mappings": 4096,
+      "predicate": "key even",
+      "visible_mappings": 2048,
+      "operations": [
+        "hashCode",
+        "containsValue(-1) miss",
+        "size",
+        "isEmpty"
+      ],
+      "warmup_calls_per_operation": 80,
+      "measured_calls_per_operation": 64,
+      "metric": "calling Java thread allocated bytes from ThreadMXBean",
+      "process_cpu_includes": "whole JVM startup, setup, warmup, measurement and teardown; not isolated operation CPU",
+      "note": "this existing metrics path does not exercise M3LinkedHashMap/M3TreeMap although the unchanged compiled proof references them in its separate semantics path"
+    },
+    "runs": [
+      {
+        "round": 1,
+        "variant": "before",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/before:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.230318,
+        "system_cpu_seconds": 0.020401,
+        "wall_seconds": 0.17646611100099108,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 3155968,
+          "containsValueMiss": 3155968,
+          "size": 4608,
+          "isEmpty": 6656
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.25071899999999997
+      },
+      {
+        "round": 1,
+        "variant": "candidate",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/candidate:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.189277,
+        "system_cpu_seconds": 0.016169,
+        "wall_seconds": 0.13152653799988911,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 2048,
+          "containsValueMiss": 2048,
+          "size": 2048,
+          "isEmpty": 2048
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.205446
+      },
+      {
+        "round": 2,
+        "variant": "candidate",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/candidate:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.172958,
+        "system_cpu_seconds": 0.033771,
+        "wall_seconds": 0.14464932500050054,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 2048,
+          "containsValueMiss": 2048,
+          "size": 2048,
+          "isEmpty": 2048
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.206729
+      },
+      {
+        "round": 2,
+        "variant": "before",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/before:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.21614,
+        "system_cpu_seconds": 0.03219899999999999,
+        "wall_seconds": 0.15761926300001505,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 3155968,
+          "containsValueMiss": 3155968,
+          "size": 4608,
+          "isEmpty": 6656
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.24833899999999998
+      },
+      {
+        "round": 3,
+        "variant": "before",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/before:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.26093500000000003,
+        "system_cpu_seconds": 0.016072000000000003,
+        "wall_seconds": 0.2067482389993529,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 3155968,
+          "containsValueMiss": 3155968,
+          "size": 4608,
+          "isEmpty": 6656
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.277007
+      },
+      {
+        "round": 3,
+        "variant": "candidate",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/candidate:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.1847749999999999,
+        "system_cpu_seconds": 0.012540999999999997,
+        "wall_seconds": 0.1394578809995437,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 2048,
+          "containsValueMiss": 2048,
+          "size": 2048,
+          "isEmpty": 2048
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.1973159999999999
+      },
+      {
+        "round": 4,
+        "variant": "candidate",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/candidate:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.17695700000000003,
+        "system_cpu_seconds": 0.023918999999999996,
+        "wall_seconds": 0.13144263899994257,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 2048,
+          "containsValueMiss": 2048,
+          "size": 2048,
+          "isEmpty": 2048
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.20087600000000003
+      },
+      {
+        "round": 4,
+        "variant": "before",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/before:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.22287999999999997,
+        "system_cpu_seconds": 0.022648,
+        "wall_seconds": 0.15904166499967687,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 3155968,
+          "containsValueMiss": 3155968,
+          "size": 4608,
+          "isEmpty": 6656
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.24552799999999997
+      },
+      {
+        "round": 5,
+        "variant": "before",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/before:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.24968999999999997,
+        "system_cpu_seconds": 0.039463,
+        "wall_seconds": 0.18439710399979958,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 3155968,
+          "containsValueMiss": 3155968,
+          "size": 4608,
+          "isEmpty": 6656
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.289153
+      },
+      {
+        "round": 5,
+        "variant": "candidate",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/candidate:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.1934260000000001,
+        "system_cpu_seconds": 0.026034,
+        "wall_seconds": 0.14820184000018344,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 2048,
+          "containsValueMiss": 2048,
+          "size": 2048,
+          "isEmpty": 2048
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.2194600000000001
+      },
+      {
+        "round": 6,
+        "variant": "candidate",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/candidate:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.20045499999999983,
+        "system_cpu_seconds": 0.021653000000000006,
+        "wall_seconds": 0.17163577300016186,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 2048,
+          "containsValueMiss": 2048,
+          "size": 2048,
+          "isEmpty": 2048
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.22210799999999983
+      },
+      {
+        "round": 6,
+        "variant": "before",
+        "command": [
+          "/tmp/m3-jep-tools/jdk-21.0.12.1+1/bin/java",
+          "-Xms128m",
+          "-Xmx128m",
+          "-XX:ActiveProcessorCount=1",
+          "-XX:+UseSerialGC",
+          "-XX:-DoEscapeAnalysis",
+          "-cp",
+          "/tmp/m3-wrapper-map-refinement/build/before:/tmp/m3-wrapper-map-refinement/build/core",
+          "QueryReadProof",
+          "metrics"
+        ],
+        "user_cpu_seconds": 0.2682389999999999,
+        "system_cpu_seconds": 0.03813099999999997,
+        "wall_seconds": 0.21399532799841836,
+        "allocations_bytes_per64_calls": {
+          "hashCode": 3155968,
+          "containsValueMiss": 3155968,
+          "size": 4608,
+          "isEmpty": 6656
+        },
+        "exit_code": 0,
+        "process_cpu_seconds": 0.30636999999999986
+      }
+    ],
+    "summary": {
+      "before": {
+        "process_cpu_seconds": {
+          "min": 0.24552799999999997,
+          "median": 0.26386299999999996,
+          "max": 0.30636999999999986
+        },
+        "wall_seconds": {
+          "min": 0.15761926300001505,
+          "median": 0.18043160750039533,
+          "max": 0.21399532799841836
+        },
+        "allocations_bytes_per64_calls": {
+          "hashCode": {
+            "min": 3155968,
+            "median": 3155968.0,
+            "max": 3155968
+          },
+          "containsValueMiss": {
+            "min": 3155968,
+            "median": 3155968.0,
+            "max": 3155968
+          },
+          "size": {
+            "min": 4608,
+            "median": 4608.0,
+            "max": 4608
+          },
+          "isEmpty": {
+            "min": 6656,
+            "median": 6656.0,
+            "max": 6656
+          }
+        }
+      },
+      "candidate": {
+        "process_cpu_seconds": {
+          "min": 0.1973159999999999,
+          "median": 0.20608749999999998,
+          "max": 0.22210799999999983
+        },
+        "wall_seconds": {
+          "min": 0.13144263899994257,
+          "median": 0.14205360300002212,
+          "max": 0.17163577300016186
+        },
+        "allocations_bytes_per64_calls": {
+          "hashCode": {
+            "min": 2048,
+            "median": 2048.0,
+            "max": 2048
+          },
+          "containsValueMiss": {
+            "min": 2048,
+            "median": 2048.0,
+            "max": 2048
+          },
+          "size": {
+            "min": 2048,
+            "median": 2048.0,
+            "max": 2048
+          },
+          "isEmpty": {
+            "min": 2048,
+            "median": 2048.0,
+            "max": 2048
+          }
+        }
+      }
+    },
+    "claims": "bounded observations with escape analysis disabled; not application throughput, universal allocation, or CPU speedup"
+  },
+  "ordered_phase": "STRING",
+  "phase_advance": false,
+  "license": "Apache-2.0; original per-file notices retained",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project"
+}

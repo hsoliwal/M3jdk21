@@ -1,0 +1,10 @@
+test_current_packet_selects_a_sha256_sealed_manifest (test_verify_donation.DonationPacketTest.test_current_packet_selects_a_sha256_sealed_manifest) ... ok
+test_duplicate_selector_is_refused_even_if_values_match (test_verify_donation.DonationPacketTest.test_duplicate_selector_is_refused_even_if_values_match) ... ok
+test_loader_refuses_drift_without_changing_file (test_verify_donation.DonationPacketTest.test_loader_refuses_drift_without_changing_file) ... ok
+test_nested_duplicate_is_refused (test_verify_donation.DonationPacketTest.test_nested_duplicate_is_refused) ... ok
+test_receipt_uses_current_packet_baseline_with_historical_fallback (test_verify_donation.DonationPacketTest.test_receipt_uses_current_packet_baseline_with_historical_fallback) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.005s
+
+OK

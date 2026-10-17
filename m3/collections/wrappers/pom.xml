@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId><artifactId>m3-collection-wrapper-contracts</artifactId><version>0.1.0-SNAPSHOT</version>
+  <name>Installed M3 wrapper Java and JNI qualification</name>
+  <description>Bounded proof build over the actual current collection owners; the collection module remains the product build.</description>
+  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <dependencies><dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency></dependencies>
+  <build>
+    <sourceDirectory>${project.basedir}/../src/main/java</sourceDirectory>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration><release>21</release><proc>none</proc><useModulePath>false</useModulePath>
+          <includes><include>com/m3/collections/**/*.java</include></includes>
+          <!-- Match the retained product verifier: the established com.m3 module name is intentional. -->
+          <compilerArgs><arg>-Xlint:all,-module</arg><arg>-Werror</arg><arg>-h</arg><arg>${project.build.directory}/jni-headers</arg></compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+        <configuration><useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests><argLine>-Xmx384m</argLine></configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles><profile><id>jni-linux</id><build><plugins>
+    <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version>
+      <executions><execution><id>existing-native-peers</id><phase>integration-test</phase><goals><goal>exec</goal></goals>
+        <configuration><executable>bash</executable><arguments><argument>${project.basedir}/verify-native.sh</argument><argument>${java.home}</argument></arguments></configuration>
+      </execution></executions>
+    </plugin>
+  </plugins></build></profile></profiles>
+</project>
