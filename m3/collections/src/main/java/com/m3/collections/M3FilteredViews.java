@@ -274,7 +274,9 @@ public final class M3FilteredViews {
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
-        @Override public Iterator<E> descendingIterator() { return descendingSet().iterator(); }
+        @Override public Iterator<E> descendingIterator() {
+            return filtered(nav.descendingSet().iterator(), predicate);
+        }
         @Override public NavigableSet<E> subSet(E from, boolean inclusiveFrom,
                 E to, boolean inclusiveTo) {
             return new NavigableSetView<>(nav.subSet(from, inclusiveFrom, to, inclusiveTo), predicate);
@@ -308,7 +310,10 @@ public final class M3FilteredViews {
                 if (predicate.test(entry.getKey(), entry.getValue())) count++;
             return count;
         }
-        @Override public boolean isEmpty() { return !entrySet().iterator().hasNext(); }
+        @Override public boolean isEmpty() {
+            return !filtered(sorted.entrySet().iterator(),
+                    item -> predicate.test(item.getKey(), item.getValue())).hasNext();
+        }
         /**
          * Called only after containsKey has established membership. The
          * comparator's tail range exposes the actual retained key, including

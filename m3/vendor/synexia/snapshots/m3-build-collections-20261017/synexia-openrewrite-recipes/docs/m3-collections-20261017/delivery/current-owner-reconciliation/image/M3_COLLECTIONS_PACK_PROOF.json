@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "modules": [
+    "com.m3.collections",
+    "jdk.m3.collections"
+  ],
+  "existing_collection_source_files": 91,
+  "optional_projection_source_files": 7,
+  "native_symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+  "native_sha256": "d91ffea8fe745662cda76ea1cf5a4300ab5c2ab7e476170c0e3857be4ba6d3b9",
+  "linked_native_sha256": "1bf2a2f057fe1ced09c10bdd9052387c723c39477ac59226d09b4d9ae2b31dde",
+  "native_packaging_transform": "objcopy --strip-debug reference; exact linked byte parity",
+  "native_required_on_host_and_image": true,
+  "jdk_home": "/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13",
+  "toolchain_release_sha256": "ad9dcd2580bb226cd54f77cc7a9d05bce85be768b92ea93a49292c7240a10965",
+  "host_platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "scope": "Linux optional source modules and actual JNI/JMOD linked-image proof; not a full custom HotSpot build or java.util receiving promotion"
+}

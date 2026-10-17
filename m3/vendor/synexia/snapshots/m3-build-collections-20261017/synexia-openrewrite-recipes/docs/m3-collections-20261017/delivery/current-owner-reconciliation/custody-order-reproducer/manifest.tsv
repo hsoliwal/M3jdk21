@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	template
+# parse-context-sha256	dd0c745b7ae41d56148276edf956a31e6368f368505ab851707cdcebf2ae5526
+m3/vendor/synexia/snapshots/m3-build-collections-20261017/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java	ABSENT	750f2e8266ca308369daea14d2bb6db9f3ec90a64e45ee7d5aa1cb5192028347	template-00.txt

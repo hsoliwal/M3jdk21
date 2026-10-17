@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	template
+m3/tooling/module-packs/collections/README.md	41c19669c53e35a16e8ea3e415a1c2968ed33e52b5a76513df1a938f3aa3a1b9	c98d56b1880696bc3bcc1961e766a43c7f1a67561eb82fcd64e55b57eba70d68	template-00.txt
+m3/tooling/module-packs/collections/build.py	af20d5f0797ac3cf45bb5674a1f07776e3b66e01ea578c887518bb6ff85cfd8a	42bbaa31b72745f9c930c05bf44bf24e2d3a974360300c884d8f88894e5f5531	template-01.txt
