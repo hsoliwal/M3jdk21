@@ -68,6 +68,10 @@ public final class M3IndexPathMasks {
             int first, int count, int stride) {
         validate(orderedRows, physicalOffsets, statePlanes, requiredMasks,
                 forbiddenMasks, first, count, stride);
+        if (count == 0) return -1;
+        // Full geometry and every physical state offset were already validated.
+        // Zero required AND forbidden masks admit the first path occurrence.
+        if (allStagesAdmit(requiredMasks, forbiddenMasks)) return first;
         long at = first;
         for (int n = 0; n < count; n++, at += stride) {
             int index = (int) at;
@@ -236,8 +240,27 @@ public final class M3IndexPathMasks {
         return true;
     }
 
+    /** True only for the identity expression in every full-width stage. */
+    private static boolean allStagesAdmit(int[] required, int[] forbidden) {
+        for (int stage = 0; stage < required.length; stage++) {
+            if (required[stage] != 0 || forbidden[stage] != 0) return false;
+        }
+        return true;
+    }
+
     static int[] selectJava(int[] rows, int[] offsets, int[][] planes,
             int[] required, int[] forbidden, int first, int count, int stride) {
+        if (count == 0) return new int[0];
+        // Java-only identity selection over a prevalidated strided index path:
+        // return detached row IDs without a second metadata/state-plane scan.
+        if (allStagesAdmit(required, forbidden)) {
+            int[] selected = new int[count];
+            long at = first;
+            for (int i = 0; i < count; i++, at += stride) {
+                selected[i] = rows[(int) at];
+            }
+            return selected;
+        }
         int kept = 0;
         long at = first;
         for (int n = 0; n < count; n++, at += stride) {
