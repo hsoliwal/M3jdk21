@@ -1,0 +1,42 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 SDK Eclipse multimap real-provider/OpenRewrite/JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3Eclipse*Multimap*.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3EclipseMultimapsTest.java'
+      - 'm3/collections/interop/recipe/sdk-eclipse-multimaps-20261017/**'
+      - '.github/workflows/m3-sdk-eclipse-multimaps-20261017.yml'
+  workflow_dispatch:
+jobs:
+  eclipse-three-multimaps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Actual Maven/OpenRewrite scanning recipe generation, fixed point and refusals
+        run: mvn -B -ntp -f m3/collections/interop/recipe/sdk-eclipse-multimaps-20261017/pom.xml verify
+      - name: Build and test actual existing M3 owners (Java21)
+        run: mvn -B -ntp -f m3/collections/pom.xml clean install
+      - name: Real Eclipse 11.1.0 API and retained JDK Guava Apache Spring tests
+        run: mvn -B -ntp -f m3/collections/interop/pom.xml clean verify
+      - name: Existing native index selector, checked JNI and fatal UBSan
+        run: |
+          set -eu
+          CLASS_DIR="$RUNNER_TEMP/m3-eclipse-native-classes"
+          LIB_DIR="$RUNNER_TEMP/m3-eclipse-native"
+          mkdir -p "$CLASS_DIR" "$LIB_DIR"
+          gcc -std=c17 -O1 -g -fPIC -shared -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$LIB_DIR/libm3_collections_mask.so"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -cp m3/collections/target/classes -d "$CLASS_DIR" \
+            m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
+          java -Xcheck:jni -Djava.library.path="$LIB_DIR" \
+            -cp "$CLASS_DIR:m3/collections/target/classes" \
+            com.m3.collections.M3IndexMaskCompactorSelfTest --native

@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.EclipseMultimaps20261017
+displayName: Eclipse Collections list, set and bag multimaps over M3 indexed owners
+description: Add exact Java21 source-sealed adapters without rewriting live provider contracts.
+recipeList:
+  - com.synexia.rewrite.M3EclipseMultimapRecipe
