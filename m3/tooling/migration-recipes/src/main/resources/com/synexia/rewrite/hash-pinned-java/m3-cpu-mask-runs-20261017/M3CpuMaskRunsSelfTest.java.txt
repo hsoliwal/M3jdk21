@@ -79,6 +79,14 @@ public final class M3CpuMaskRunsSelfTest {
                 M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
                         1, 2, 1, 0, M3IndexPathMasks.Backend.JAVA,
                         (row, len) -> { }));
+        expect(IndexOutOfBoundsException.class, () ->
+                M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
+                        0, -1, 1, 1, M3IndexPathMasks.Backend.JAVA,
+                        (row, len) -> { }));
+        expect(IndexOutOfBoundsException.class, () ->
+                M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
+                        1, 2, 1, 1, M3IndexPathMasks.Backend.JAVA,
+                        (row, len) -> { }));
         if (!M3IndexPathMasks.nativeAvailable()) {
             expect(UnsatisfiedLinkError.class, () ->
                     M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},

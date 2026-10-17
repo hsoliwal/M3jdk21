@@ -21,6 +21,7 @@ import java.util.Objects;
  */
 public final class M3CpuMaskRuns {
     private M3CpuMaskRuns() { }
+    private static final int[] NO_OUTPUT = new int[0];
 
     @FunctionalInterface
     public interface RunConsumer {
@@ -39,13 +40,12 @@ public final class M3CpuMaskRuns {
         Objects.requireNonNull(backend, "backend");
         Objects.requireNonNull(consumer, "consumer");
         if (maxRuns < 0) throw new IllegalArgumentException("negative run budget");
-        // Establish structural validity even when the requested output budget is zero.
-        if (maxRuns == 0 || count == 0) {
-            M3IndexPathMasks.scanWindow(orderedRows, physicalOffsets, statePlanes,
-                    requiredMasks, forbiddenMasks, first, count, stride, 0,
-                    new int[0], 0, 0, backend);
-            return 0;
-        }
+        // Always validate borrowed geometry and the JNI boundary before any callbacks.
+        // The zero-length output is shared safely because limit zero never writes it.
+        M3IndexPathMasks.scanWindow(orderedRows, physicalOffsets, statePlanes,
+                requiredMasks, forbiddenMasks, first, count, stride, 0,
+                NO_OUTPUT, 0, 0, backend);
+        if (maxRuns == 0 || count == 0) return 0;
 
         int[] window = new int[M3IndexPathMasks.MAX_WINDOW];
         int next = 0;
