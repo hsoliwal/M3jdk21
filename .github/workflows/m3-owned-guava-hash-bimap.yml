@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 owned Guava HashBiMap
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/implementations/guava/**'
+      - 'm3/collections/recipe/owned-guava-hash-bimap-20261017/**'
+      - 'm3/collections/qualification/owned-guava-hash-bimap-20261017/**'
+      - '.github/workflows/m3-owned-guava-hash-bimap.yml'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Qualify exact receiving recipe
+        run: |
+          set -euxo pipefail
+          python3 -I -S -B m3/collections/qualification/owned-guava-hash-bimap-20261017/verify.py
+          mvn -B -ntp -f m3/collections/recipe/owned-guava-hash-bimap-20261017/pom.xml test
+      - name: Compile owned body and real provider protocols
+        run: |
+          set -euxo pipefail
+          mkdir -p proof/classes
+          POM=m3/collections/recipe/owned-guava-hash-bimap-20261017/pom.xml
+          for ARTIFACT in com.google.guava:guava:33.4.8-jre com.google.guava:guava:33.4.8-android org.jspecify:jspecify:1.0.0 com.google.errorprone:error_prone_annotations:2.36.0 com.google.j2objc:j2objc-annotations:3.0.0; do
+            mvn -B -ntp -f "$POM" org.apache.maven.plugins:maven-dependency-plugin:3.6.1:get -Dartifact="$ARTIFACT" -Dtransitive=false
+          done
+          JRE="$HOME/.m2/repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar"
+          ANDROID="$HOME/.m2/repository/com/google/guava/guava/33.4.8-android/guava-33.4.8-android.jar"
+          ANNOTATIONS="$HOME/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:$HOME/.m2/repository/com/google/errorprone/error_prone_annotations/2.36.0/error_prone_annotations-2.36.0.jar:$HOME/.m2/repository/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar"
+          CP="proof/classes:$JRE:$ANNOTATIONS"
+          find m3/collections/implementations/guava/src/main/java m3/collections/implementations/guava/src/test/java m3/collections/qualification/owned-guava-hash-bimap-20261017 -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -cp "$CP" -d proof/classes
+          java -Xmx512m -cp "$CP" com.m3.collections.guava.M3HashBiMapCommonSelfTest guava-33.4.8-jre.jar
+          java -Xmx512m -cp "$CP" com.m3.collections.guava.InverseForcePutDenseOrderDiscriminator guava-33.4.8-jre.jar > proof/dense-jre.log
+          ACP="proof/classes:$ANDROID:$ANNOTATIONS"
+          java -Xmx512m -cp "$ACP" com.m3.collections.guava.M3HashBiMapSectionRunner android-valid guava-33.4.8-android.jar
+          java -Xmx512m -cp "$ACP" M3HashBiMapProtocolDiscriminator > proof/protocol-android.log
+          python3 -I -S -B m3/collections/qualification/owned-guava-hash-bimap-20261017/verify_protocol_log.py android proof/protocol-android.log
+          set +e
+          java -Xmx512m -cp "$CP" M3HashBiMapProtocolDiscriminator > proof/protocol-jre.log 2>&1
+          JRE_STATUS=$?
+          set -e
+          test "$JRE_STATUS" -eq 1
+          python3 -I -S -B m3/collections/qualification/owned-guava-hash-bimap-20261017/verify_protocol_log.py jre proof/protocol-jre.log
+          python3 -I -S -B m3/collections/qualification/owned-guava-hash-bimap-20261017/verify.py
+          git diff --exit-code
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-owned-guava-qualification
+          path: |
+            proof/
+            m3/collections/recipe/owned-guava-hash-bimap-20261017/target/surefire-reports/

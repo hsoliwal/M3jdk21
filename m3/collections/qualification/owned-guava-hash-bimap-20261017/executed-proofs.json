@@ -1,0 +1,120 @@
+{
+  "proofs": [
+    {
+      "name": "guava-common-compile-01",
+      "mode": "guava-common-compile",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "guava-common-jre-01",
+      "mode": "guava-common-jre",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "ab5c46ae66544dd6ffa100f508e35f031150860d078f6474bbf0231e117cc66f"
+    },
+    {
+      "name": "guava-section-android-01",
+      "mode": "guava-section-android",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "6584eddaab273ed830a8edafa18f90e873b4e96510d637366f0dcd384b59677f"
+    },
+    {
+      "name": "guava-dense-jre-02",
+      "mode": "guava-dense-jre",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "f40cc24f3f172d5401ad71fe34ed10cced0b09439bb9745622e4014dc024abe6"
+    },
+    {
+      "name": "guava-protocol-compile-04",
+      "mode": "guava-protocol-compile",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "guava-android-03",
+      "mode": "guava-android",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "7adcad132bcc9a0fca9d49bc2e4714fa8a1ff59e4f1e836114c1bf9a85662b21"
+    },
+    {
+      "name": "guava-recipe-01",
+      "mode": "guava-recipe",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "4368f91cc6dae172fce4691b845f6ac85cd709d10a97ac57e6bd86439b2c44c3"
+    },
+    {
+      "name": "guava-selftest-android-01",
+      "mode": "guava-selftest-android",
+      "passed": false,
+      "inputs_unchanged": true,
+      "log_sha256": "b0945864e20e9df57823faa7bc9c646c9e2296ac75dee0c822e0290c49569af4"
+    },
+    {
+      "name": "guava-dense-android-01",
+      "mode": "guava-dense-android",
+      "passed": false,
+      "inputs_unchanged": true,
+      "log_sha256": "870ec598110e67e759db068dee13dd56037d1df2a4928cb52ece279d3644d83a"
+    },
+    {
+      "name": "guava-dense-jre-01",
+      "mode": "guava-dense-jre",
+      "passed": false,
+      "inputs_unchanged": true,
+      "log_sha256": "91279c91028b183fd729377f0e867074b489447dc17e744e0b562f2389bbbfea"
+    },
+    {
+      "name": "guava-dense-android-02",
+      "mode": "guava-dense-android",
+      "passed": false,
+      "inputs_unchanged": true,
+      "log_sha256": "bc1637a9d7a7071e65c43b9632cf452368972339f384664d410e066d83a66775"
+    },
+    {
+      "name": "guava-section-jre-01",
+      "mode": "guava-section-jre",
+      "passed": false,
+      "inputs_unchanged": true,
+      "log_sha256": "41f634ae704292f22dd2ebcf174133c4aa2b83004c6598bf3964611d2a61954a"
+    },
+    {
+      "name": "guava-jre-03",
+      "mode": "guava-jre",
+      "passed": false,
+      "inputs_unchanged": true,
+      "log_sha256": "766c8ace78c85bb2c0a506d16f87774069f95f75caa83ff162be4ac1f7910eaa"
+    },
+    {
+      "name": "guava-public-compile-01",
+      "mode": "guava-public-compile",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "guava-protocol-audit-android-02",
+      "mode": "guava-protocol-audit-android",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "2160dae98808bf6d4ddac164f845a8562de675132d6068cd0aac8d7d7c14ed84"
+    },
+    {
+      "name": "guava-protocol-audit-jre-02",
+      "mode": "guava-protocol-audit-jre",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "ee88bd198d4a25c9e34c173c5d330576e8187f4edbaf64dfa701d7d7b4e5b242"
+    }
+  ],
+  "negative_receipts_retained": true,
+  "hosted_ci": "PENDING",
+  "performance": "NOT_MEASURED",
+  "classifier_note": "Original parser expected a top-level NPE; actual record nests two NPEs in the iterator return sequence. Failed parser01 preserved; parser02 verifies all132 exact paired state/outcome/callback snapshots plus the nested error classification."
+}
