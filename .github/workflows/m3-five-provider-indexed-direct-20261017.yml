@@ -1,0 +1,51 @@
+name: M3 five-provider indexed/direct Java21 + real JNI
+on:
+  push:
+    branches: ['m3/five-provider-indexed-direct-receiver-20261017']
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java'
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderFlagSelection.java'
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3*ContractTest.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
+      - 'm3/collections/interop/sdk-family-bindings.tsv'
+      - 'm3/collections/interop/qualification/five-provider-indexed-direct-20261017/**'
+      - '.github/workflows/m3-five-provider-indexed-direct-20261017.yml'
+jobs:
+  real-five-provider-contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact canonical Java and metadata postimage identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'b35e46bc758ae7118185d3513aacb9d7565ccab0bbe8a941a450e36f31de4413  m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java' | sha256sum -c -
+          echo '8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96  m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java' | sha256sum -c -
+          echo '5becc5f604dc0309fe000c5388e76488f11f22e3f725ae01f073f2c3e85b73c0  m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderFlagSelection.java' | sha256sum -c -
+          echo 'a8b537381b64899e263eb481a95a83ae40a9b7ed8109fe401f2329c750419267  m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java' | sha256sum -c -
+          echo '3ae1258c36fc4366af6d5f7aadeb3709acb51b9d98baca3061985ced9a02e7fd  m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java' | sha256sum -c -
+          echo '19c42a55d5d7e470767a62d9f549b7990fe6ae4bebc4728b588e5be857169a89  m3/collections/interop/sdk-family-bindings.tsv' | sha256sum -c -
+      - name: Java 21 owning M3 collection module
+        run: mvn -B -ntp -f m3/collections/pom.xml install
+      - name: All real five-provider dependency JUnit regression
+        run: mvn -B -ntp -f m3/collections/interop/pom.xml verify
+      - name: Existing real C17 JNI mask backend
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared \
+            -I"${JAVA_HOME}/include" -I"${JAVA_HOME}/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "${RUNNER_TEMP}/libm3_collections_pathmask.so"
+          JAVA_TOOL_OPTIONS="-Xcheck:jni -Djava.library.path=${RUNNER_TEMP}" \
+            mvn -B -ntp -f m3/collections/interop/pom.xml \
+              -Dtest=M3FiveProviderFlagSelectionTest,M3SpringArrayContractTest test
