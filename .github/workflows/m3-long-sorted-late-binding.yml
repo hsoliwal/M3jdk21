@@ -6,6 +6,7 @@ on:
       - 'm3/collections/src/main/java/com/m3/collections/M3Long*.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3LongLiveTraversalSelfTest.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3LongSortedLateBindingSelfTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java'
       - '.github/workflows/m3-long-sorted-late-binding.yml'
   workflow_dispatch:
 permissions:
@@ -33,12 +34,16 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror -d "$classes" \
             "$root/M3LongCollection.java" "$root/M3LongIterator.java" \
             "$root/M3LongSortedSet.java" "$root/M3LongFilteredView.java" \
-            "$root/M3LongSortedViews.java" "$root/M3LongTraversal.java" "$root/M3LongCompositeViews.java" \
+            "$root/M3LongSortedViews.java" "$root/M3LongPredicates.java" \
+            "$root/M3LongTraversal.java" "$root/M3LongCompositeViews.java" \
             m3/collections/src/test/java/com/m3/collections/M3LongSortedLateBindingSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3LongLiveTraversalSelfTest.java
+            m3/collections/src/test/java/com/m3/collections/M3LongLiveTraversalSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java
           java -ea -cp "$classes" com.m3.collections.M3LongSortedLateBindingSelfTest
           java -Xint -ea -cp "$classes" com.m3.collections.M3LongSortedLateBindingSelfTest
           java -ea -cp "$classes" com.m3.collections.M3LongLiveTraversalSelfTest
           java -Xint -ea -cp "$classes" com.m3.collections.M3LongLiveTraversalSelfTest
           java -XX:TieredStopAtLevel=1 -ea -cp "$classes" com.m3.collections.M3LongLiveTraversalSelfTest
+          java -Xss256k -ea -cp "$classes" com.m3.collections.M3LongDeepFilterSelfTest
+          java -Xint -Xss256k -ea -cp "$classes" com.m3.collections.M3LongDeepFilterSelfTest
           git diff --check
