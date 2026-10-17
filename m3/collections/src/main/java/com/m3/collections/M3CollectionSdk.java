@@ -11,6 +11,8 @@ import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
 import java.util.function.BiPredicate;
 import java.util.function.LongPredicate;
 import java.util.function.Predicate;
@@ -45,6 +47,18 @@ public final class M3CollectionSdk {
     /** Live read-only Set retaining its JDK equality/iteration owner. */
     public static <E> Set<E> readOnlyFilteredSet(Set<E> source, Predicate<? super E> predicate) {
         return M3FilteredViews.filter(source, predicate);
+    }
+
+    /** Live, read-only, comparator-preserving SortedSet over the original storage. */
+    public static <E> SortedSet<E> readOnlyFilteredSortedSet(
+            SortedSet<E> source, Predicate<? super E> predicate) {
+        return M3FilteredViews.filter(source, predicate);
+    }
+
+    /** Live, read-only, comparator-preserving SortedMap with immutable entries. */
+    public static <K, V> SortedMap<K, V> readOnlyFilteredSortedMap(
+            SortedMap<K, V> source, BiPredicate<? super K, ? super V> predicate) {
+        return M3FilteredViews.filterEntries(source, predicate);
     }
 
     /** Live NavigableSet wrapper retaining backing comparator/range ownership. */

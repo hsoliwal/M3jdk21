@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.Random;
+import java.util.SortedMap;
+import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -46,6 +48,34 @@ public final class M3CollectionSdkSelfTest {
         TreeMap<Integer, Integer> map = new TreeMap<>(Map.of(1, 10, 2, 20, 3, 30));
         NavigableMap<Integer,Integer> view = M3CollectionSdk.readOnlyFilteredNavigableMap(map, (k,v)->v>=20);
         check(view.firstKey() == 2 && view.lastKey() == 3, "sorted map predicate");
+        SortedSet<Integer> simpleSorted = new TreeSet<>(List.of(1, 2, 3, 4, 5, 6));
+        SortedSet<Integer> simpleView = M3CollectionSdk.readOnlyFilteredSortedSet(
+                simpleSorted, x -> (x & 1) == 0);
+        check(simpleView.equals(new TreeSet<>(List.of(2, 4, 6))), "SortedSet visibility");
+        check(simpleView.first() == 2 && simpleView.last() == 6, "SortedSet navigation");
+        check(simpleView.subSet(2, 6).equals(new TreeSet<>(List.of(2, 4))),
+                "SortedSet bounded projection");
+        simpleSorted.add(8);
+        check(simpleView.last() == 8, "SortedSet live updates");
+        expect(UnsupportedOperationException.class, () -> simpleView.add(10));
+        expect(UnsupportedOperationException.class, () -> simpleView.subSet(2, 8).clear());
+        SortedMap<Integer, Integer> simpleSortedMap =
+                new TreeMap<>(Map.of(1, 10, 2, 20, 3, 30));
+        SortedMap<Integer, Integer> simpleMapView =
+                M3CollectionSdk.readOnlyFilteredSortedMap(simpleSortedMap,
+                        (k, v) -> k % 2 == 0 && v >= 20);
+        check(simpleMapView.size() == 1 && simpleMapView.firstKey() == 2,
+                "SortedMap entry visibility");
+        check(simpleMapView.get(1) == null && !simpleMapView.containsKey(1),
+                "SortedMap hidden keys");
+        simpleSortedMap.put(4, 40);
+        check(simpleMapView.lastKey() == 4 && simpleMapView.size() == 2,
+                "SortedMap live updates");
+        expect(UnsupportedOperationException.class, () -> simpleMapView.put(6, 60));
+        expect(UnsupportedOperationException.class, () ->
+                simpleMapView.entrySet().iterator().next().setValue(0));
+        expect(UnsupportedOperationException.class, () ->
+                simpleMapView.headMap(4).clear());
         Random r = new Random(0x3efaac71L);
         for (int trial=0;trial<240;trial++) {
             int n=r.nextInt(90); long[] source=new long[n];
