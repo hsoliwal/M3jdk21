@@ -131,6 +131,19 @@ public final class M3ObjectSlotIndexSelfTest {
         signal.subList(1, 3);
         equal(4, projected.get(), "signal is primitive precompute");
 
+        AtomicInteger nativeProjected = new AtomicInteger();
+        if (M3SignalOrderNative.available()) {
+            M3ObjectIndexSnapshot<Item> nativeSignal = all.sortedBySignal(item -> {
+                nativeProjected.incrementAndGet();
+                return item.rank();
+            }, false, M3SignalOrder.Backend.NATIVE_REQUIRED);
+            equal(4, nativeProjected.get(), "one native signal projection per candidate");
+            equal(signal.physicalSlots(), nativeSignal.physicalSlots(), "JNI signal-order parity");
+        } else {
+            refuse(UnsatisfiedLinkError.class, () -> all.sortedBySignal(
+                    Item::rank, false, M3SignalOrder.Backend.NATIVE_REQUIRED));
+        }
+
         int[] escaped = all.physicalSlots();
         escaped[0] = -1;
         check(all.physicalSlotAt(0) >= 0, "physical slot array is defensive");
