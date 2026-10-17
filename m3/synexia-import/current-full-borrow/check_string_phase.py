@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026-10-17 by Synexia: reject forged historical precompute target pins.
 """Validate the source-bound Phase-1 Synexia MIndexString -> M3JDK M3String mapping."""
 
 from __future__ import annotations
@@ -327,7 +328,9 @@ def validate_precompute_mapping(mapping_rows: list[dict[str, str]],
     if len(matches) != 1:
         raise ValueError("MIndexString precompute source mapping missing or duplicated")
     row = matches[0]
-    if (row["source_git_blob"] != observation["cache_git_blob"]
+    # Historical donor identity is independent of the sealed V2 live owner.
+    if (row["target_git_blob"] != "c45ae8696da18b15b7b9ee0267cc05aec1ae6c92"
+            or row["source_git_blob"] != observation["cache_git_blob"]
             or row["target_path"] != observation["target_path"]
             or row["relationship"] != "CONSUMER_SPLIT_PRECOMPUTE"
             or row["license_class"] != observation["source_license"]

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026-10-17 by Synexia: preserve V1/V2 while validating the V3 pin repair.
 """Prove the exact Synexia-owned checker successor received by M3JDK21."""
 
 from __future__ import annotations
@@ -13,6 +14,8 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 RECEIPT_PATH = ROOT / "m3/compatibility/synexia-string-phase-checker-successor-20261013.json"
 RECEIPT_V2_PATH = ROOT / "m3/compatibility/synexia-string-phase-checker-successor-20261015-v2.json"
+RECEIPT_V3_PATH = ROOT / "m3/compatibility/synexia-string-phase-checker-successor-20261017-v3.json"
+HISTORICAL_V2_PATH = ROOT / "m3/compatibility/fixtures/string-phase-checker-v2-20261017.py"
 TARGET_PATH = ROOT / "m3/synexia-import/current-full-borrow/check_string_phase.py"
 
 OLD_MARKER = "M3StringTuple tuple = new M3StringTuple(left, right);"
@@ -68,6 +71,49 @@ EXPECTED_RECEIPT_V2 = json.loads(r'''{
 
 
 
+EXPECTED_RECEIPT_V3 = json.loads(r'''{
+  "schema": "M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V3",
+  "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
+  "predecessor": {
+    "receiptPath": "m3/compatibility/synexia-string-phase-checker-successor-20261015-v2.json",
+    "receiptGitBlob": "52cacd20c406f57027734d2e78b405c8b6176e9f",
+    "receiptSha256": "e47b404b87e9748f323cfbca53f07fcde3c3d1a5b14f221e14df6a92613cb1b2",
+    "targetAfterGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+    "targetAfterSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3",
+    "frozenTargetPath": "m3/compatibility/fixtures/string-phase-checker-v2-20261017.py"
+  },
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "baseCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+    "recipeClass": "com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipe",
+    "sourceResourcePath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/out/check_string_phase.py",
+    "sourceResourceGitBlob": "368842c70f4671bac14ad902ed047a486109f27d",
+    "sourceResourceSha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+    "stateAtCapture": "DRAFT_CANDIDATE_NOT_QUALIFIED"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseCommit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+    "beforeGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+    "beforeSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3",
+    "afterGitBlob": "368842c70f4671bac14ad902ed047a486109f27d",
+    "afterSha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47"
+  },
+  "change": {
+    "relation": "HISTORICAL_PRECOMPUTE_TARGET_PIN_REFUSAL",
+    "historicalTargetGitBlob": "c45ae8696da18b15b7b9ee0267cc05aec1ae6c92",
+    "currentObservedTargetGitBlob": "0a88ed559b23def5d2229bba3316ea2268b4d720",
+    "v1HistoryPreserved": true,
+    "v2HistoryPreserved": true,
+    "runtimeProductFilesChanged": false,
+    "runtimePromotionAuthorized": false,
+    "runtimeAcceptance": "NOT_CLAIMED",
+    "performanceEvidence": "NOT_MEASURED"
+  }
+}''')
+
+
 def git_blob(data: bytes) -> str:
     header = b"blob " + str(len(data)).encode("ascii") + b"\0"
     return hashlib.sha1(header + data).hexdigest()
@@ -87,6 +133,13 @@ def validate_target_v2(data: bytes) -> None:
         raise ValueError("checker SHA-256 differs from pinned Synexia V2 postimage")
     if git_blob(data) != EXPECTED_RECEIPT_V2["target"]["afterGitBlob"]:
         raise ValueError("checker Git blob differs from pinned Synexia V2 postimage")
+
+
+def validate_target_v3(data: bytes) -> None:
+    if hashlib.sha256(data).hexdigest() != EXPECTED_RECEIPT_V3["target"]["afterSha256"]:
+        raise ValueError("checker SHA-256 differs from pinned Synexia V3 postimage")
+    if git_blob(data) != EXPECTED_RECEIPT_V3["target"]["afterGitBlob"]:
+        raise ValueError("checker Git blob differs from pinned Synexia V3 postimage")
 
 
 class SynexiaStringPhaseCheckerSuccessorTest(unittest.TestCase):
@@ -139,7 +192,7 @@ class SynexiaStringPhaseCheckerSuccessorTest(unittest.TestCase):
         self.assertEqual([expected_row], rows)
 
     def test_target_matches_synexia_postimage(self):
-        validate_target_v2(TARGET_PATH.read_bytes())
+        validate_target_v3(TARGET_PATH.read_bytes())
 
     def test_checker_drift_fails_closed(self):
         data = TARGET_PATH.read_bytes()
@@ -147,7 +200,45 @@ class SynexiaStringPhaseCheckerSuccessorTest(unittest.TestCase):
                                b"EXPECTED_PRECOMPUTE_OBSERVATION_DRIFT", 1)
         self.assertNotEqual(data, changed)
         with self.assertRaisesRegex(ValueError, "SHA-256 differs"):
-            validate_target_v2(changed)
+            validate_target_v3(changed)
+
+
+    def test_v3_receipt_extends_immutable_v2_without_promotion(self):
+        predecessor_bytes = RECEIPT_V2_PATH.read_bytes()
+        predecessor = json.loads(predecessor_bytes)
+        receipt = json.loads(RECEIPT_V3_PATH.read_text(encoding="utf-8"))
+        self.assertEqual(EXPECTED_RECEIPT_V3, receipt)
+        self.assertEqual(EXPECTED_RECEIPT_V2, predecessor)
+        self.assertEqual(hashlib.sha256(predecessor_bytes).hexdigest(),
+                         receipt["predecessor"]["receiptSha256"])
+        self.assertEqual(git_blob(predecessor_bytes),
+                         receipt["predecessor"]["receiptGitBlob"])
+        for suffix in ("GitBlob", "Sha256"):
+            self.assertEqual(predecessor["target"]["after" + suffix],
+                             receipt["predecessor"]["targetAfter" + suffix])
+            self.assertEqual(predecessor["target"]["after" + suffix],
+                             receipt["target"]["before" + suffix])
+            self.assertEqual(receipt["source"]["sourceResource" + suffix],
+                             receipt["target"]["after" + suffix])
+        self.assertEqual("TOOLING_ONLY_NO_RUNTIME_PROMOTION", receipt["scope"])
+        self.assertTrue(receipt["change"]["v1HistoryPreserved"])
+        self.assertTrue(receipt["change"]["v2HistoryPreserved"])
+        self.assertFalse(receipt["change"]["runtimeProductFilesChanged"])
+        self.assertFalse(receipt["change"]["runtimePromotionAuthorized"])
+        self.assertEqual("NOT_CLAIMED", receipt["change"]["runtimeAcceptance"])
+        self.assertEqual("NOT_MEASURED", receipt["change"]["performanceEvidence"])
+
+    def test_frozen_v2_target_preserves_exact_earlier_postimage(self):
+        data = HISTORICAL_V2_PATH.read_bytes()
+        validate_target_v2(data)
+        self.assertEqual(EXPECTED_RECEIPT_V3["predecessor"]["frozenTargetPath"],
+                         HISTORICAL_V2_PATH.relative_to(ROOT).as_posix())
+        with self.assertRaisesRegex(ValueError, "V3 postimage"):
+            validate_target_v3(data)
+
+    def test_v3_is_not_accepted_as_v2(self):
+        with self.assertRaisesRegex(ValueError, "V2 postimage"):
+            validate_target_v2(TARGET_PATH.read_bytes())
 
 
 if __name__ == "__main__":

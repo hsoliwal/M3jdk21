@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026-10-17 by Synexia: reject forged historical precompute target pins.
 """Refusal and live-target proof for approved Phase-1 M3 String successor images."""
 from __future__ import annotations
 
@@ -239,6 +240,57 @@ class StringTargetSuccessorTest(unittest.TestCase):
         phase.validate_name_mapping()
         mapping = phase.load_tsv(phase.MAP, phase.HEADER)
         phase.validate_precompute_mapping(mapping, row)
+
+    def test_precompute_mapping_keeps_historical_and_live_pins_distinct(self):
+        # Independent historical identity; never substitute the V2 current owner.
+        observation = phase.EXPECTED_PRECOMPUTE_OBSERVATION.copy()
+        rows = self.mapping()
+        historical = [
+            row for row in rows if row["relation"] == "PRECOMPUTE_CACHE"
+        ]
+        self.assertEqual(1, len(historical))
+        self.assertEqual("c45ae8696da18b15b7b9ee0267cc05aec1ae6c92",
+                         historical[0]["target_git_blob"])
+        self.assertEqual("0a88ed559b23def5d2229bba3316ea2268b4d720",
+                         observation["current_target_git_blob"])
+        self.assertNotEqual(historical[0]["target_git_blob"],
+                            observation["current_target_git_blob"])
+        phase.validate_precompute_mapping(rows, observation)
+
+    def test_precompute_mapping_refuses_forged_historical_target(self):
+        observation = phase.EXPECTED_PRECOMPUTE_OBSERVATION.copy()
+        original = self.mapping()
+        for forged in (
+            "0" * 40,
+            "f" * 40,
+            "0a88ed559b23def5d2229bba3316ea2268b4d720",  # V2 live owner
+            "dfbb91cc169916cd0a95798f4cd2151c3407df4c",  # checkpoint
+            "ac68eacd6ee4e6048ab424542ccf5c2cf5595908",  # observation
+            "",
+            "not-a-git-blob",
+            "C45AE8696DA18B15B7B9EE0267CC05AEC1AE6C92",
+        ):
+            rows = [row.copy() for row in original]
+            selected = next(row for row in rows
+                            if row["relation"] == "PRECOMPUTE_CACHE")
+            selected["target_git_blob"] = forged
+            with self.subTest(forged=forged):
+                with self.assertRaisesRegex(
+                        ValueError, "^MIndexString precompute mapping contract drift$"):
+                    phase.validate_precompute_mapping(rows, observation)
+        self.assertEqual(original, self.mapping())
+
+    def test_precompute_mapping_refuses_missing_and_duplicate_cache_rows(self):
+        observation = phase.EXPECTED_PRECOMPUTE_OBSERVATION.copy()
+        rows = self.mapping()
+        cache = next(row for row in rows if row["relation"] == "PRECOMPUTE_CACHE")
+        missing = [row.copy() for row in rows
+                   if row["relation"] != "PRECOMPUTE_CACHE"]
+        duplicate = [row.copy() for row in rows] + [cache.copy()]
+        for changed in (missing, duplicate):
+            with self.assertRaisesRegex(
+                    ValueError, "^MIndexString precompute source mapping missing or duplicated$"):
+                phase.validate_precompute_mapping(changed, observation)
 
     def test_precompute_observation_refuses_identity_and_status_drift(self):
         rows = self.read_precompute_rows()
