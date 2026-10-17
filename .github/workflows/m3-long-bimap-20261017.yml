@@ -1,0 +1,42 @@
+name: M3 primitive BiMap real-owner Java 21 proof
+on:
+  push:
+    branches:
+      - 'm3/long-bimap-flagged-receiver-20261017-1804'
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongBiMap.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongBiMap*'
+      - 'm3/collections/qualification/m3-long-bimap-20261017/**'
+      - '.github/workflows/m3-long-bimap-20261017.yml'
+jobs:
+  real-owner-java21:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify SHA-256 of canonical recipe Java postimages
+        shell: bash
+        run: |
+          echo '0627829aa19138f5fe3b7551bfb087e3ea9d90305b28deffa6128b56b3239970  m3/collections/src/main/java/com/m3/collections/M3LongBiMap.java' | sha256sum -c -
+          echo '125bfd1732ba960ff2ffe99b21f45298b877a18e259a588e1e8f3d72daed0bc2  m3/collections/src/test/java/com/m3/collections/M3LongBiMapSelfTest.java' | sha256sum -c -
+          echo '9c937b37e723510266976ef9d041db87b454c97b695f8c5985b9de5d0cc576eb  m3/collections/src/test/java/com/m3/collections/M3LongBiMapTest.java' | sha256sum -c -
+      - name: Compile the REAL source owners with strict Java 21 lint
+        shell: bash
+        run: |
+          mkdir -p /tmp/m3-long-bimap-classes
+          javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-long-bimap-classes \
+            m3/collections/src/main/java/com/m3/collections/M3LongIterator.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongBiMap.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongBiMapSelfTest.java
+          java -ea -cp /tmp/m3-long-bimap-classes com.m3.collections.M3LongBiMapSelfTest
+      - name: Real M3 collections Maven and JUnit module test
+        shell: bash
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongBiMapTest test
