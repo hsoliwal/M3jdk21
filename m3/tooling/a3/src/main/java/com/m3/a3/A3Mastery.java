@@ -9,12 +9,12 @@ import java.nio.file.Path;
 import java.util.Objects;
 
 /** Target-side reader for one pinned, authority-free Synexia recipe-mastery receipt. */
-final class A3Mastery {
+public final class A3Mastery {
 
     private A3Mastery() {
     }
 
-    static M3RecipeMasteryPortableReceipt.Verified verify(
+    public static M3RecipeMasteryPortableReceipt.Verified verify(
             Path root,
             Path receipt,
             String expectedRoot) throws IOException {
