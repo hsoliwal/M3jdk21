@@ -1,0 +1,280 @@
+{
+  "donor_archive_sha256": "c5359dc5f382441b3875fae7d5505afddfc7a0bcfb1db40a364e2612f67f543b",
+  "target_base": "11dde1eac33cea2a8b90baba8c155eabec341144",
+  "source_role": "Synexia convergence source; target adaptation, no runtime dependency",
+  "files": [
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3Flow.java",
+      "source_sha256": "dc4e5ba2b9fe87b5351792b179ffff1956dd9149c283d866c7f45ecfb3679ae2",
+      "source_git_blob": "52444739a5887148ee070a4a6921776ce555be17",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3Flow.java",
+      "target_sha256": "b2c338c48e46b63fdfce2603bfb0d561f538add03ebbc4fd18d4b307c88dbf1a",
+      "target_git_blob": "0f5e7fb2294912bb930b1e535791fd92cdb7949c",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3IndexView.java",
+      "source_sha256": "28e326cc6d1fc1b09b1b5034d12d7c69426906a096967ccbdb48809b53e90f6c",
+      "source_git_blob": "369b294a7f98a7e0862101176632e1f10f3f3000",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3IndexView.java",
+      "target_sha256": "175210472e3bfe6bf3d47c3dc5f5ab85a48a4df6982f90d926745136d08e9715",
+      "target_git_blob": "09b16d66454e1be1bc86d698f6afcb30ecf1ff25",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3KeyedFlow.java",
+      "source_sha256": "f89b17e6cfa102f81612aec2f01cc505e715134d296a491db551b1a2eeb93c94",
+      "source_git_blob": "d4813cf1751c5db4397452c6a30d0f2822cf1350",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3KeyedFlow.java",
+      "target_sha256": "d832b32df1e155b583165fed41f582e47ed7e2fa3c86161dd02352cf85867f33",
+      "target_git_blob": "49d0954be953edeb3a20e77fa23fc0afec21e593",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3LongFlow.java",
+      "source_sha256": "543622fffc7a02b1afe4e23338c371851b2d407c18ef93a8128b4333c3821088",
+      "source_git_blob": "23ac89046fd4eb2a774c5f89270de0e2c9a61857",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3LongFlow.java",
+      "target_sha256": "c981b0f9311e8c291454423644e9d43912358bda97e1a5f08605450610dff8b0",
+      "target_git_blob": "61c2b91305064014f3c6ec246030605b64e70c92",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3LongGroups.java",
+      "source_sha256": "0df56c6ce8498676c368e0da9ff89c3c7efd08ddc5cc654541c328badd032a25",
+      "source_git_blob": "1043dabe498dee0481942c4cae1cde3d9ee549f5",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3LongGroups.java",
+      "target_sha256": "618facb3ac0de580a3a773bdf26f1fea9548e155e341a115d1c6440b6a602b12",
+      "target_git_blob": "8dfb14d3c5055fc3f8ca13f9c1f184709830eeaa",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3LongSummary.java",
+      "source_sha256": "c8b167a7fb6cfb0c4ee4d6957baac5cb820d39707ffb043c39fc6c53bb355ace",
+      "source_git_blob": "517a54a83f0e1b3191c4a346e82b6ba0253f8b22",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3LongSummary.java",
+      "target_sha256": "1becc52270becdde02af5bd5aee460a836ed6b35f274e0cd9b085708a82dc8ed",
+      "target_git_blob": "1ef47807bf3fcc9ee8927b640f309dfd6b6f2c7c",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3LongWindows.java",
+      "source_sha256": "2b11f1674eaaf7c1951c58fff06c260ae0c0d79131c1a840ea2db5949dc4d60f",
+      "source_git_blob": "e57a7ad4b80eb1776da87dcd3532605c18d457dc",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3LongWindows.java",
+      "target_sha256": "1bbca3ddcd4e7b8aed36b8a784cfa92687c6290481a60b11e494e20ecbfaeb19",
+      "target_git_blob": "de8a353233a0f39bdad74b2e64e365030be99cb4",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3NativeLongs.java",
+      "source_sha256": "caa8c2016230eac5afa87cc67e0265da4f94242fe2e0d2632fdb656572fd9625",
+      "source_git_blob": "8785e0e602ababe7acaa2fdcd37f7a6c2676f387",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3NativeLongs.java",
+      "target_sha256": "afaf3c4e8b811391b9be1cee83a6ac874ed7300db9cb95f31038448b5039cc39",
+      "target_git_blob": "a0fa9aaa208ba76f548f21ca8e788b3e18ed10df",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3Partitions.java",
+      "source_sha256": "bcd742311de47c273135c51acf06ac883016446776b4d7d747e6663cb410f6d5",
+      "source_git_blob": "69d4bd7081fa78d1b9fc904f07678007b0797ebc",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3Partitions.java",
+      "target_sha256": "c11f1d438ffe0db7596d12ca3f47d1e46cca6a4d1a20e10affda71e475208530",
+      "target_git_blob": "12a9ec09be91bf34476cfbb0e58667373f3ceaca",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3Runs.java",
+      "source_sha256": "92934bb28055d7949f5d52acfb6bd48c4fdfcac77ed094f0b2bfabdadccb0b24",
+      "source_git_blob": "561f1d5c443cda4fb0c590cb7b6fcd76f0b8ae2f",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3Runs.java",
+      "target_sha256": "30f9b175c1de470f65dc24e249787dd0a4364fa01c47f88b633359d1f076a19c",
+      "target_git_blob": "e50459fd09cabec0129151aa37058ae7814f7201",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3SummaryGroups.java",
+      "source_sha256": "d15cf2ef83588e2f3bb7306f3ebfcfd4c164965857381802bea62234dc830cac",
+      "source_git_blob": "3e15358aae3d0d175a3de731554b35c4627be8b2",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3SummaryGroups.java",
+      "target_sha256": "385f202f0a1edf3003bb4232c45917eeba95e977abf92830961623ff6cc46864",
+      "target_git_blob": "c68e4a9b5a7c0566ddf238739b63b0e62ac264b8",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3TemporaryCollectors.java",
+      "source_sha256": "ab7207c531a7a5e5d666dd36375066ee4c28f236d9df2fd7c27700eab2cbb9db",
+      "source_git_blob": "d8c5ee47833fe0be40456cf1e176215239eac94d",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3TemporaryCollectors.java",
+      "target_sha256": "443c8d26fc4ce469cd401a66a27c08d1a3d1a1ad389092d377f83d54c11dd158",
+      "target_git_blob": "9f608c096b4af4646ad51e53eb345657d421ac4d",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3TopK.java",
+      "source_sha256": "7d16c951890ac8edd9845176bdc8587bec1c58b4687ca4e3dea5d8c3657d43e5",
+      "source_git_blob": "7be76e87a1f63dd213686f56e19338288c73b4ec",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3TopK.java",
+      "target_sha256": "a30834b99969cf447599ddebd7293c48bc348f1a19d981321524bf870d7f0dc3",
+      "target_git_blob": "e154cb5f2060fddb3d89e74f516349761f3036a7",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3VirtualCollectors.java",
+      "source_sha256": "47c01708d5ffc9d89897ef72523e47fad7dbfec8b4abdeacb03c734f4e6f0e58",
+      "source_git_blob": "dc20cd5e3059e860e780d0699086dc6697bd2b47",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3VirtualCollectors.java",
+      "target_sha256": "87aabc9d7499ee5fa4a1a8365eae01cff31b1121529754001790b8f3d140d4ee",
+      "target_git_blob": "6bc8beb974f195e3bd9cabd7261189456bd3f773",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/M3Windows.java",
+      "source_sha256": "341717f7bbe0101f78c54f88791f6cad40be03237ba1b5e52df0c0174d387ffb",
+      "source_git_blob": "67c85ea5127a308cffc3490251ffdcb29fe34e02",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3Windows.java",
+      "target_sha256": "dc52d3006caa6b3cacdbd04bb5fcbab2d984b137d1ad2e620f079e96200c2390",
+      "target_git_blob": "6e93f399764b4445b7b2ac8a2ab7c5a321fab98a",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/PrimitiveIndices.java",
+      "source_sha256": "f84e58d35af9dead5cfb019932aa3492727f77b82a62d205e7df5f4fbb84ca88",
+      "source_git_blob": "ff9c99926cc68657f140530c44778304c33fb28a",
+      "target": "m3/collections/src/main/java/com/m3/collections/PrimitiveIndices.java",
+      "target_sha256": "1ce0ba61c5c9a38f6eef54c9ad1705761ac9288bdfe6aa8c4e2a2a5b87f9b76c",
+      "target_git_blob": "de9339e8a9640af547ab965546fdf340f3a876ba",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/flow/VirtualLongAccumulator.java",
+      "source_sha256": "327783dd6ce20536ff61ea136299c12ad1c1fbae8eae17a90a1b09809502ef54",
+      "source_git_blob": "c3d123b8a3b09de73b747684b72e9388bd959448",
+      "target": "m3/collections/src/main/java/com/m3/collections/VirtualLongAccumulator.java",
+      "target_sha256": "bc4723c728d841cd1952115370d9db827bd2acb6e0522b5b911f118392c8955c",
+      "target_git_blob": "941d29d3275e4191247d5b07ba0fdb6685d4f756",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/M3SortedView.java",
+      "source_sha256": "3c2a127938148090cccb7bd998da8518c26045ca0c13c252c57e9bd05b4657f1",
+      "source_git_blob": "30ec01288a09a21660de6e636bb64d656b665761",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3SortedView.java",
+      "target_sha256": "59ba6c44528a6c0925a6492515f0ecb7c1f3c64355212c381ae63c81454cb575",
+      "target_git_blob": "e31b9db77fe12437e2bf008e093ff91e0efeb6aa",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/java/com/synexia/common/collections/DenseArrayOrder.java",
+      "source_sha256": "ba58900afa3b87db84bf61efd7706ab945b7702151330aaf3ba821913c6cab86",
+      "source_git_blob": "e237da8f1054c7d10effe779d0ff0944a1f5f785",
+      "target": "m3/collections/src/main/java/com/m3/collections/DenseArrayOrder.java",
+      "target_sha256": "3afe2317b8c713ec45fad31d246b4f4e077d681b5496ea7fe305708165c48faf",
+      "target_git_blob": "049572ea5e444468042e2648c14678cc1183abe8",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/native/m3_flow.c",
+      "source_sha256": "b75b2c73bbbb35a36c840cd0e120e226c3fde7eeb787778f94b50fc25d3397d8",
+      "source_git_blob": "c6b1965f01c1f68e0ca45069c6113f7d8f5c7d31",
+      "target": "m3/collections/src/main/native/collections/m3_flow.c",
+      "target_sha256": "2c4074d21061f719b7fb02382f9d4a55bf5cd187c6f37c1dcec4541d72feb7bd",
+      "target_git_blob": "d754bb17c479b3e1c7c7f4fad223b0e780a85683",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/main/native/m3_index_order.c",
+      "source_sha256": "a0aef86f792a1e01747bd2b6c387b67d32d553f8115e565aba6a73622b078efe",
+      "source_git_blob": "7ffaa91433194c4f852b1708e5a51781c23e0b1a",
+      "target": "m3/collections/src/main/native/collections/m3_index_order.c",
+      "target_sha256": "65219b5f34c2d6eefe2678bf20112bd556a126bc7f658ae5b21b0b267f584474",
+      "target_git_blob": "7da5bac65996238d6248791decf19899e061588b",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/test/java/com/synexia/common/collections/flow/FlowV2Proof.java",
+      "source_sha256": "3d0bf19330bfaa785242a56911dfb9d6e1679eeb7ed0ac652ae370e2924b9de2",
+      "source_git_blob": "848069eb85aa9c50db50a0498ef6a512514db2b0",
+      "target": "m3/collections/src/test/java/com/m3/collections/FlowV2Proof.java",
+      "target_sha256": "ba2681cec802f999a530f5feac0b14595cf558abccaa814974af9a289d6e856a",
+      "target_git_blob": "3af7a8f0842d252626c9077236e01360888450cf",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-common/src/test/java/com/synexia/common/collections/flow/FlowV3Proof.java",
+      "source_sha256": "45a78024311c52d5bc563ae1847b021ab98f9adc9641ce57b575e55b0e20f6e2",
+      "source_git_blob": "3e3ab7a0187c079820e634d83d2482b06549e57a",
+      "target": "m3/collections/src/test/java/com/m3/collections/FlowV3Proof.java",
+      "target_sha256": "85be67da206bd3758f6836c82df93017ce2031de2abc81134ce16d796fc3791f",
+      "target_git_blob": "c3ebe5615c1312d43374f267d48ec0280b634443",
+      "license": "Apache-2.0",
+      "change": "exact-source target package/progress/JNI adaptation",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "synexia-openrewrite-recipes/recipe-crates/collection-views-20261016/passes/closure-v2/fixtures/ClosurePreparedProof.java",
+      "source_sha256": "9b57d2026ef95e692e6dbd17b8cf43edc64396216f9b4c0f43e961e2a7ddc330",
+      "target": "m3/collections/src/test/java/com/m3/collections/ClosurePreparedProof.java",
+      "target_sha256": "3336ffbcd29ee95580d6cd95be1d73dc554ee6a3d86351d4e9c4cb3785ed94f1",
+      "target_git_blob": "7b147c0672e1fee2a68e4b63e5f8f124fe0ce5b9",
+      "license": "Apache-2.0",
+      "change": "exact test namespace transport",
+      "status": "CANDIDATE"
+    },
+    {
+      "source": "TARGET_SPECIFIC_PROOF",
+      "source_sha256": null,
+      "target": "m3/collections/src/test/java/com/m3/collections/M3FlowReceiverProof.java",
+      "target_sha256": "32a61a3458793a63d69afa06e13f2a6df7e7983e508745e074412b8263ecb44e",
+      "target_git_blob": "d4a84b887cf55a2e1116545d121e7a78dae4ca42",
+      "license": "Apache-2.0",
+      "change": "target composition contract proof",
+      "status": "CANDIDATE"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CollectionFlowJdk21Receiver
+displayName: Receive qualified M3 collection flow and sorted indices
+description: Exact source transport with target progress and JNI identity, preserving existing owners.
+recipeList:
+  - com.synexia.rewrite.M3FlowJdkReceiverRecipe
