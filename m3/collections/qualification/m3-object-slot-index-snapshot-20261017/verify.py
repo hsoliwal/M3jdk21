@@ -76,6 +76,11 @@ def main() -> None:
         if installed.read_bytes() != (MIRROR / m[target][1]).read_bytes():
             raise ValueError("installed bytes differ from canonical mirror: " + target)
 
+    local_catalogue = HERE / "CATEGORY_REVIEW.tsv"
+    shared_catalogue = ROOT / "m3/collections/algorithm-catalog/object-slot-index-snapshot-20261017.tsv"
+    if local_catalogue.read_bytes() != shared_catalogue.read_bytes():
+        raise ValueError("shared algorithm catalogue drift")
+
     mapping = json.loads((ROOT / "m3/docs/name-mapping.json").read_text(encoding="utf-8"))
     plan = mapping["porting_invariant"]["receiving_sequence"]
     if plan["active_phase"] != "STRING":
