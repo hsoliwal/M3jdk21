@@ -41,11 +41,11 @@ Java_com_m3_collections_M3LongAddressKernel_gatherNative(
         return;
     }
 
-    jint bad = -1;
+    jboolean invalid = JNI_FALSE;
     for (jint i = 0; i < length; i++) {
         jint physical = index[address_from + i];
         if (physical < 0 || physical >= payload_length) {
-            bad = physical;
+            invalid = JNI_TRUE;
             break;
         }
         result[output_from + i] = values[physical];
@@ -55,7 +55,7 @@ Java_com_m3_collections_M3LongAddressKernel_gatherNative(
     (*env)->ReleasePrimitiveArrayCritical(env, addresses, index, JNI_ABORT);
     (*env)->ReleasePrimitiveArrayCritical(env, payload, values, JNI_ABORT);
 
-    if (bad >= 0 || bad < -1) {
+    if (invalid == JNI_TRUE) {
         jclass error = (*env)->FindClass(env, "java/lang/IndexOutOfBoundsException");
         if (error != NULL) (*env)->ThrowNew(env, error, "physical address outside payload");
     }
