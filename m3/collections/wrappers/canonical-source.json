@@ -1,0 +1,13 @@
+{
+  "schema": "M3_FILTERED_SORTED_CANONICAL_MIRROR_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "8dabfc853a1351a211023182afaea934ec789f9f",
+  "pull_request": 11922,
+  "task": "synexia-openrewrite-recipes/recipe-crates/collections-library-interop/filtered-sorted-receiver",
+  "task_tree": "c458ad27f8488e18b5bc5836e715e96d672edccf",
+  "recipe_tree": "53fb42686982de4906dc73c2d8c7ca4d687dc4a1",
+  "verifier_blob": "5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8",
+  "mode": "EXACT_RECIPE_VERIFIER_PROOF_MIRROR; runtime files are actual OpenRewrite outputs",
+  "license": "Apache-2.0; retained first-party and original donor notices",
+  "phase_advance": false
+}
