@@ -336,11 +336,13 @@ public final class SwingViewportBench {
         row("jtree_heap", mb(usedAfterGc() - base), "MB", "JTree + UI + layout cache + expansion table");
         TreePath deep = pathOf(nodes[nodes.length - 1]);
         t0 = System.nanoTime();
-        int r = 0;
+        int r = tree.getRowForPath(deep);
+        row("jtree_get_row_for_path_last_first", us(t0, 1), "us", "first query of a fresh path, row " + r);
+        t0 = System.nanoTime();
         for (int i = 0; i < 100; i++) {
             r = tree.getRowForPath(deep);
         }
-        row("jtree_get_row_for_path_last", us(t0, 100), "us/op", "row " + r);
+        row("jtree_get_row_for_path_last", us(t0, 100), "us/op", "the same path 100 more times, row " + r);
         frames(tree, tree.getRowHeight() > 0 ? tree.getRowHeight() : 18, pref.height);
     }
 
