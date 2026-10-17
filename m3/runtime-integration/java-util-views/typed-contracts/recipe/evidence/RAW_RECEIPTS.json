@@ -1,0 +1,37 @@
+{
+  "status": "RAW_LOGS_IN_REVIEW_ARCHIVE_NOT_IN_GIT",
+  "archive": "M3JDK21_CollectionViews_Contracts_20261017.zip",
+  "logs": [
+    {
+      "path": "commands.json.gz",
+      "size_bytes": 2554,
+      "sha256": "9a303ae050ce62f81554f63084d22b1b1df1f5698349098b30cbca0ec5a77cf3",
+      "git_blob": "5282aebeb8606384e0867d61821b8dfcfd7284b7"
+    },
+    {
+      "path": "completed-run2-maven.log.gz",
+      "size_bytes": 2819,
+      "sha256": "574033b28dac289ad196498972550094f47f96ddf619c912dbce3f618d9f5407",
+      "git_blob": "07a7273a6b1662dd4390697ccd1b2c8d458d006b"
+    },
+    {
+      "path": "completed-run3-maven.log.gz",
+      "size_bytes": 2829,
+      "sha256": "229159a84db633e8c6e1af013aa00fb7a7bd22ed56aa8f273f30dee793e877f1",
+      "git_blob": "a269d82506c7300e3e12ed0b3bac4e97d89eb80a"
+    },
+    {
+      "path": "failed-run-maven.log.gz",
+      "size_bytes": 1796,
+      "sha256": "f705f88c9373dea53f701fd47f9bed10973baa4a7e3acc7fd872709c1a76ff11",
+      "git_blob": "42e5ec615775fdc4d1e049414262a4e131ad0d38"
+    },
+    {
+      "path": "surefire.xml.gz",
+      "size_bytes": 2266,
+      "sha256": "ac8b9b063ad38232a3b5e8befb0251157aac603c0ce45890b0ab9ad1a9fafe57",
+      "git_blob": "c143a315afe8d244d680b46b6e2f8386e05ec3df"
+    }
+  ],
+  "raw_proof_tar_sha256": "941602f83482f416bf177a41b86193ee01911af939d2c7fa3d45d2931537090e"
+}

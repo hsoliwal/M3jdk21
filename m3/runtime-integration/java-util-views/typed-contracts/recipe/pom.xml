@@ -1,0 +1,20 @@
+<!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+ <groupId>com.synexia.proof</groupId><artifactId>m3-java-util-view-contracts</artifactId><version>1.0-SNAPSHOT</version>
+ <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><proof.root>${project.basedir}/target/proof</proof.root></properties>
+ <!-- Captured authoring tuple. No dependency is added to java.base or target runtime. -->
+ <dependencies>
+  <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>26.1.0</version><scope>provided</scope></dependency>
+  <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36</version></dependency>
+  <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.89.0</version></dependency>
+  <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.1</version><scope>test</scope></dependency>
+ </dependencies>
+ <build><directory>${proof.root}/maven</directory><plugins>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.15.0</version><configuration><proc>none</proc><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration></plugin>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.6</version><configuration><failIfNoTests>true</failIfNoTests><systemPropertyVariables><proof.root>${proof.root}</proof.root></systemPropertyVariables></configuration></plugin>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.3.0</version></plugin>
+  <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.1</version><executions><execution><id>actual-java-jni-receiver</id><phase>verify</phase><goals><goal>exec</goal></goals><configuration><executable>python3</executable><arguments><argument>${project.basedir}/verify.py</argument><argument>--sdk</argument><argument>${proof.root}/sdk-results</argument><argument>--output</argument><argument>${proof.root}/runtime</argument></arguments></configuration></execution></executions></plugin>
+ </plugins></build>
+</project>

@@ -1,0 +1,6 @@
+source	target	status	boundary
+Synexia first-party typed filtered traversal atom	java.util.CollectionViews	SELECTED_SDK_GENERATED_CORRECTION	no new public signature or owner; source-built/registry/license admission pending
+com.m3.collections.M3CollectionViews	java.util.CollectionViews	UNCHANGED_COMPATIBILITY_FACADE	seven existing factories; matched java.base required
+RunSearchJni first-run query	test/jdk/java/util/CollectionViews/run_search_jni.c	TEST_ONLY_BOUNDED_REGION_REFINEMENT	not production native acceleration; same Java_RunSearchJni_first ABI
+M3GpuToolJoinRecipe/Manifest	canonical Synexia task plus exact target proof mirror	AUTHORING_ONLY	no Synexia runtime dependency or new canonical recipe engine
+other collection and M3Index families	existing target-specific owners	PENDING_PER_CONTRACT	no blanket migration or phase promotion
