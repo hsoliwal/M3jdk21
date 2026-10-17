@@ -50,6 +50,25 @@ import java.util.function.Predicate;
  */
 public final class M3FilteredMaps {
     private M3FilteredMaps() { }
+    /**
+     * The stored key identity, rather than the incoming probe, controls predicate
+     * admission for comparator-based maps. Call only after source.containsKey(probe).
+     * This is a new package-local atom and does not alter existing map operations.
+     */
+    static <K,V> K storedRepresentativeKey(Map<K,V> source, K probe) {
+        if (source instanceof NavigableMap<?,?> navigable) {
+            @SuppressWarnings("unchecked") NavigableMap<K,V> ordered=(NavigableMap<K,V>) navigable;
+            Map.Entry<K,V> entry=ordered.ceilingEntry(probe);
+            if (entry == null) throw new IllegalStateException("present navigable key has no representative");
+            return entry.getKey();
+        }
+        if (source instanceof SortedMap<?,?> sorted) {
+            @SuppressWarnings("unchecked") SortedMap<K,V> ordered=(SortedMap<K,V>) sorted;
+            return ordered.tailMap(probe).firstKey();
+        }
+        return probe;
+    }
+
 
     /** Retains sorted/navigable capabilities even when the source is typed Map. */
     @SuppressWarnings("unchecked")
