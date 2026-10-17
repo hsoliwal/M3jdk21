@@ -1,0 +1,12 @@
+{
+  "status": "SOURCE_PREPARATION_ONLY",
+  "recipe": "com.synexia.m3.SdkSuperset20261017",
+  "materialized_path": ".github/workflows/m3-sdk-superset-inputs.yml",
+  "sha256": "3f8be42ea94e816118d905ba7cd4ed50f827774d34704a8aeeaec7d0784ee639",
+  "before": "ABSENT",
+  "local_gate": "Maven3.9.6 OpenRewrite8.89.0 Jupiter5.10.1 Java21.0.12.1; five methods, no failures/errors/skips; fixed point zero; 32 partial target states",
+  "finished_at": "2026-10-17T12:34:55Z",
+  "production_changes": 0,
+  "purpose": "Capture original Commons 4.5.0 binary/source as offline qualification inputs, with origin checksums. Does not claim SDK/runtime/provider acceptance.",
+  "task_source_delivery": "Recipe, exact templates and tests will be committed before generated production targets in this branch. Canonical generic recipe owners remain Synexia."
+}

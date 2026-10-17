@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors.
+name: M3 SDK pinned provider capture
+on:
+  push:
+    branches: [m3/sdk-provider-contracts-20261017]
+    paths: [.github/workflows/m3-sdk-superset-inputs.yml]
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Capture the exact Commons 4.5.0 binary and source for offline qualification
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p provider
+          cd provider
+          base=https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.5.0
+          for name in commons-collections4-4.5.0.jar commons-collections4-4.5.0-sources.jar; do
+            curl --fail --silent --show-error --location --retry 2 "$base/$name" -o "$name"
+            expected=$(curl --fail --silent --show-error --location --retry 2 "$base/$name.sha1")
+            test "${#expected}" -eq 40
+            printf '%s  %s\n' "$expected" "$name" | sha1sum --check -
+          done
+          sha256sum *.jar > SHA256SUMS
+          printf '%s\n' "$base" > ORIGIN.txt
+          java -version 2> toolchain.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-sdk-commons-4.5.0-input
+          path: provider/
+          if-no-files-found: error
+          retention-days: 7
