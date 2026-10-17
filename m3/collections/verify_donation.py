@@ -18,6 +18,7 @@ import subprocess
 import sys
 import xml.etree.ElementTree as ET
 import zipfile
+from m3_window_mask_receipt import approved_successor, qualified_hash
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -126,6 +127,7 @@ def main():
     rows = [line.split('\t') for line in manifest.read_text().splitlines()
             if line and not line.startswith('#')]
     rows = include_filtered_view_successor(rows)
+    indexed_successor = approved_successor()
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
@@ -133,7 +135,10 @@ def main():
         if relative.is_absolute() or '..' in relative.parts or not path.startswith('m3/collections/'):
             raise SystemExit('Invalid receiver path: ' + path)
         source = REPO / relative
-        if not source.is_file() or digest(source) != expected:
+        admissible_hash = qualified_hash(path, expected, indexed_successor)
+        if (not source.is_file()
+                or (path in indexed_successor and source.is_symlink())
+                or digest(source) != admissible_hash):
             raise SystemExit('Installed source drift: ' + path)
     declared_java = {path for path, _ in rows if path.endswith('.java') and '/src/' in path}
     actual_java = {str(path.relative_to(REPO)) for path in (HERE / 'src').rglob('*.java')}
