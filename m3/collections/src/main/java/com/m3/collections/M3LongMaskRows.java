@@ -20,7 +20,8 @@ import java.util.function.LongConsumer;
  * concurrent mutation or position reordering is supported while a plan is in use.</p>
  *
  * <p>Ranges use original source ordinals, NOT ranks in an earlier filtered view.
- * The required bits are conjunctive: (state[row] &amp; requiredFlags) == requiredFlags.
+ * The required bits are conjunctive, and forbidden bits must all be clear.
+ * A conflicting required/forbidden bit combination selects no rows, not an error.
  * A native backend is available only for explicitly materialized source row IDs and
  * reuses M3IndexMaskCompactor; arbitrary Java callbacks never cross JNI.</p>
  */
@@ -31,14 +32,17 @@ public final class M3LongMaskRows {
     private final int from;
     private final int to;
     private final int requiredFlags;
+    private final int excludedFlags;
 
     private record Parent(M3LongCollection owner, byte[] flags) { }
 
-    private M3LongMaskRows(Parent parent, int from, int to, int requiredFlags) {
+    private M3LongMaskRows(Parent parent, int from, int to,
+            int requiredFlags, int excludedFlags) {
         this.parent = parent;
         this.from = from;
         this.to = to;
         this.requiredFlags = requiredFlags;
+        this.excludedFlags = excludedFlags;
     }
 
     /** Admission copies the caller's state bytes only once, never the long payload. */
@@ -49,7 +53,7 @@ public final class M3LongMaskRows {
             throw new IllegalArgumentException("state mask must align to source ordinals");
         }
         return new M3LongMaskRows(new Parent(owner, alignedFlags.clone()), 0,
-                alignedFlags.length, 0);
+                alignedFlags.length, 0, 0);
     }
 
     /** Compose required flags without cloning the already-owned state. */
@@ -57,7 +61,15 @@ public final class M3LongMaskRows {
         if ((bits & ~ALL_BYTE_BITS) != 0) {
             throw new IllegalArgumentException("required flags must fit an unsigned byte");
         }
-        return new M3LongMaskRows(parent, from, to, requiredFlags | bits);
+        return new M3LongMaskRows(parent, from, to, requiredFlags | bits, excludedFlags);
+    }
+
+    /** Compose forbidden flags without copying the parent bytes or the payload. */
+    public M3LongMaskRows excludeFlags(int bits) {
+        if ((bits & ~ALL_BYTE_BITS) != 0) {
+            throw new IllegalArgumentException("excluded flags must fit an unsigned byte");
+        }
+        return new M3LongMaskRows(parent, from, to, requiredFlags, excludedFlags | bits);
     }
 
     /** Intersect original source-offset ranges; no copying or iterator traversal. */
@@ -65,12 +77,40 @@ public final class M3LongMaskRows {
         if (firstInclusive < from || lastExclusive > to || firstInclusive > lastExclusive) {
             throw new IndexOutOfBoundsException("source range not within current range");
         }
-        return new M3LongMaskRows(parent, firstInclusive, lastExclusive, requiredFlags);
+        return new M3LongMaskRows(parent, firstInclusive, lastExclusive,
+                requiredFlags, excludedFlags);
     }
 
     public int sourceStart() { return from; }
     public int sourceEnd() { return to; }
     public int requiredFlags() { return requiredFlags; }
+    public int excludedFlags() { return excludedFlags; }
+
+    /** Number of accepted original ordinals in [sourceStart, exclusiveOrdinal). No index retained. */
+    public int rankBefore(int exclusiveOrdinal) {
+        requireAligned();
+        if (exclusiveOrdinal < from || exclusiveOrdinal > to) {
+            throw new IndexOutOfBoundsException("source ordinal outside selected range");
+        }
+        int count = 0;
+        for (int i = from; i < exclusiveOrdinal; i++) if (matches(i)) count++;
+        requireAligned();
+        return count;
+    }
+
+    /** Original source ordinal of an accepted row at zero-based visible rank, without materialization. */
+    public int sourceRowAtRank(int rank) {
+        requireAligned();
+        if (rank < 0) throw new IndexOutOfBoundsException("negative selected rank");
+        for (int i = from; i < to; i++) {
+            if (matches(i) && rank-- == 0) {
+                requireAligned();
+                return i;
+            }
+        }
+        requireAligned();
+        throw new IndexOutOfBoundsException("selected rank outside view");
+    }
 
     /** Count selected ordinals; O(range length), O(1) allocation. */
     public int selectedCount() {
@@ -83,20 +123,47 @@ public final class M3LongMaskRows {
     }
 
     /**
-     * Explicit indexed boundary. Allocates aligned primitive row IDs and flag bytes for
-     * the range, then uses the original Java/JNI selection kernel. Never passes payloads.
-     * No native speedup claim: the temporary arrays themselves have a cost.
+     * Exact selected original ordinals. The Java backend makes only the O(k) result,
+     * with no O(range) temporary index/mask copies. The explicit JNI backend retains
+     * the original array-based native interface and its O(range) transient inputs.
      */
     public int[] selectedSourceRows(M3IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(backend, "backend");
         requireAligned();
+        if (backend == M3IndexMaskCompactor.Backend.JAVA) {
+            int[] result = new int[selectedCount()];
+            int written = 0;
+            for (int i = from; i < to; i++) {
+                if (matches(i)) {
+                    if (written >= result.length) {
+                        throw new ConcurrentModificationException("selected row count drift");
+                    }
+                    result[written++] = i;
+                }
+            }
+            if (written != result.length) {
+                throw new ConcurrentModificationException("selected row count drift");
+            }
+            requireAligned();
+            return result;
+        }
         int width = to - from;
         int[] ordinals = new int[width];
         for (int i = 0; i < width; i++) ordinals[i] = from + i;
-        byte[] flags = Arrays.copyOfRange(parent.flags(), from, to);
-        int[] rows = M3IndexMaskCompactor.select(ordinals, flags, requiredFlags, backend);
+        byte[] flags;
+        int required;
+        if (excludedFlags == 0) {
+            flags = Arrays.copyOfRange(parent.flags(), from, to);
+            required = requiredFlags;
+        } else {
+            // Adapter: Java owns boolean predicate composition; JNI receives only bytes/indices.
+            flags = new byte[width];
+            for (int i = 0; i < width; i++) flags[i] = (byte) (matches(from + i) ? 1 : 0);
+            required = 1;
+        }
+        int[] result = M3IndexMaskCompactor.select(ordinals, flags, required, backend);
         requireAligned();
-        return rows;
+        return result;
     }
 
     /** Lightweight read-only facade: no per-row object and no cached payload array. */
@@ -106,7 +173,8 @@ public final class M3LongMaskRows {
     public M3LongDag dag() { return M3LongDag.from(view()); }
 
     private boolean matches(int position) {
-        return ((parent.flags()[position] & ALL_BYTE_BITS) & requiredFlags) == requiredFlags;
+        int state = parent.flags()[position] & ALL_BYTE_BITS;
+        return (state & requiredFlags) == requiredFlags && (state & excludedFlags) == 0;
     }
 
     private void requireAligned() {

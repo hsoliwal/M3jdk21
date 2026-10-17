@@ -26,6 +26,8 @@ public final class M3LongMaskRowsContract {
         lateBindingAndDrift();
         randomizedDifferential();
         budgetAndStress();
+        forbiddenMaskRankSelect();
+        randomizedMaskAlgebra();
         System.out.println("M3_MASK_ROWS_ASSERTIONS=" + assertions + " RESULT=PASS");
     }
 
@@ -151,6 +153,97 @@ public final class M3LongMaskRowsContract {
             }
             long sum=p.view().longStream().sum();
             yes(sum==((long)(n/4-1)*(n/4)/2)*4,"stress primitive sum");
+        }
+    }
+
+
+    private static void forbiddenMaskRankSelect() {
+        long[] data = {0, 1, 2, 3, 4, 5, 6, 7};
+        byte[] flags = {1, 3, 0, 5, 7, 1, (byte) 0xff, 4};
+        M3LongMaskRows root = M3LongMaskRows.from(new SimpleOwner(data), flags);
+        M3LongMaskRows plan = root.requireFlags(1).excludeFlags(2).sourceRange(1, 7);
+        // Indices 3 and 5 carry bit 1 but not bit 2; 1, 4, 6 fail forbidden bit 2.
+        eq(new int[] {3, 5}, plan.selectedSourceRows(M3IndexMaskCompactor.Backend.JAVA),
+                "positive plus forbidden bits, exact-size Java result");
+        eq(new long[] {3, 5}, plan.view().toArray(), "forbidden-mask live values");
+        if (M3IndexMaskCompactor.nativeAvailable()) {
+            eq(new int[] {3, 5}, plan.selectedSourceRows(M3IndexMaskCompactor.Backend.NATIVE_REQUIRED),
+                    "native adapter parity with forbidden bit");
+        }
+        yes(plan.requiredFlags() == 1 && plan.excludedFlags() == 2,
+                "independent retained bit policies");
+        yes(plan.rankBefore(1) == 0 && plan.rankBefore(4) == 1
+                && plan.rankBefore(7) == 2, "stable prefix ranks on original ordinals");
+        yes(plan.sourceRowAtRank(0) == 3 && plan.sourceRowAtRank(1) == 5,
+                "rank-select returns original ordinals");
+        raises(IndexOutOfBoundsException.class, () -> plan.rankBefore(0),
+                "prefix cannot escape source range");
+        raises(IndexOutOfBoundsException.class, () -> plan.rankBefore(8),
+                "prefix cannot extend source range");
+        raises(IndexOutOfBoundsException.class, () -> plan.sourceRowAtRank(-1),
+                "negative rank refused");
+        raises(IndexOutOfBoundsException.class, () -> plan.sourceRowAtRank(2),
+                "out-of-bounds rank refused");
+        raises(IllegalArgumentException.class, () -> plan.excludeFlags(256),
+                "invalid unsigned byte bit refused");
+        raises(IllegalArgumentException.class, () -> plan.excludeFlags(-1),
+                "negative forbidden mask refused");
+        M3LongMaskRows empty = plan.excludeFlags(1);
+        yes(empty.selectedCount() == 0 && empty.excludedFlags() == 3,
+                "conflicting required/forbidden bits select nothing");
+        eq(new int[0], empty.selectedSourceRows(M3IndexMaskCompactor.Backend.JAVA),
+                "conflicting masks have no selected positions");
+        eq(new int[] {0, 1, 3, 4, 5, 6}, root.requireFlags(1)
+                .selectedSourceRows(M3IndexMaskCompactor.Backend.JAVA),
+                "derived branch leaves original byte policy unchanged");
+        // All positions are based on original unfiltered coordinate space.
+        eq(new int[]{5}, plan.sourceRange(4, 7)
+                .selectedSourceRows(M3IndexMaskCompactor.Backend.JAVA),
+                "nested absolute source-range composition");
+    }
+
+    private static void randomizedMaskAlgebra() {
+        Random rng = new Random(0x64aa1f20261017L);
+        for (int round = 0; round < 350; round++) {
+            int n = rng.nextInt(1200);
+            long[] payload = new long[n];
+            byte[] flags = new byte[n];
+            for (int i = 0; i < n; i++) {
+                payload[i] = rng.nextLong();
+                flags[i] = (byte) rng.nextInt(256);
+            }
+            int first = rng.nextInt(n + 1);
+            int last = first + rng.nextInt(n - first + 1);
+            int required = rng.nextInt(256);
+            int forbidden = rng.nextInt(256);
+            M3LongMaskRows candidate = M3LongMaskRows.from(new SimpleOwner(payload), flags)
+                    .requireFlags(required).excludeFlags(forbidden).sourceRange(first, last);
+            int[] expected = new int[last - first];
+            int used = 0;
+            for (int i = first; i < last; i++) {
+                int bits = flags[i] & 0xff;
+                if ((bits & required) == required && (bits & forbidden) == 0) expected[used++] = i;
+            }
+            expected = Arrays.copyOf(expected, used);
+            eq(expected, candidate.selectedSourceRows(M3IndexMaskCompactor.Backend.JAVA),
+                    "random byte-mask algebra Java round=" + round);
+            if (M3IndexMaskCompactor.nativeAvailable()) {
+                eq(expected, candidate.selectedSourceRows(M3IndexMaskCompactor.Backend.NATIVE_REQUIRED),
+                        "random masked JNI parity round=" + round);
+            }
+            yes(candidate.selectedCount() == used, "random masked count round=" + round);
+            int probe = first + rng.nextInt(last - first + 1);
+            int oracleRank = 0;
+            for (int i : expected) if (i < probe) oracleRank++;
+            yes(candidate.rankBefore(probe) == oracleRank, "random rank-before round=" + round);
+            if (used > 0) {
+                int chosenRank = rng.nextInt(used);
+                yes(candidate.sourceRowAtRank(chosenRank) == expected[chosenRank],
+                        "random rank-select round=" + round);
+            } else {
+                raises(IndexOutOfBoundsException.class, () -> candidate.sourceRowAtRank(0),
+                        "empty rank-select refuses");
+            }
         }
     }
 
