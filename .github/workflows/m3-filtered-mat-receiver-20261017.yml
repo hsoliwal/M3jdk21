@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 filtered MAT receiver Java21 JNI + OpenRewrite
+on:
+  push:
+    branches: ["m3/filtered-list-signal-int-jni-receiver-20261017"]
+  pull_request:
+    paths:
+      - "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java"
+      - "m3/collections/src/main/java/com/m3/collections/M3IntFilterKernel.java"
+      - "m3/collections/src/main/java/com/m3/collections/M3SignalSortedViews.java"
+      - "m3/collections/src/test/java/com/m3/collections/M3FilteredLists*"
+      - "m3/collections/src/test/java/com/m3/collections/M3IntFilterDenseContract.java"
+      - "m3/collections/src/test/java/com/m3/collections/M3SignalSortedViewsSelfTest.java"
+      - "m3/collections/src/main/native/collections/m3_int_filter_jni.c"
+      - "m3/collections/wrappers/recipe/**"
+      - "m3/collections/wrappers/filtered-mat-receiver-20261017/**"
+      - ".github/workflows/m3-filtered-mat-receiver-20261017.yml"
+jobs:
+  source-compiler-native:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: SHA-seal Java21 strict list/signal and five real JNI collectors
+        run: sh m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh
+  source-sealed-openrewrite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Real Java LST source recipe and fixed point
+        run: mvn -B -ntp -f m3/collections/wrappers/recipe/pom.xml -Dtest=M3FilteredMatReceiverRecipeTest test
