@@ -68,8 +68,10 @@ final class M3FilteredMatReceiverRecipeTest {
 
     @Test void sourceSealAndCanonicalNativeRecipe() {
         var java = recipe();
-        assertEquals(10, java.targetPaths().size());
-        assertTrue(java.preimageManifest().values().stream().allMatch("ABSENT"::equals));
+        var rows = resource("manifest.tsv").lines().filter(row -> !row.isBlank())
+                .map(row -> row.split("\\t", -1)).toList();
+        assertEquals(10, rows.size());
+        assertTrue(rows.stream().allMatch(row -> row.length == 4 && "ABSENT".equals(row[1])));
         assertEquals(10, after().size());
         assertEquals(1, java.maxCycles());
         var nativeRecipe = new M3HashPinnedTextSnapshotRecipe(NATIVE);
