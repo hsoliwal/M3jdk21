@@ -25,6 +25,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Verify indexed window offset/mask source successor
+        run: python3 -m unittest discover -s m3/collections -p 'test_verify_indexed_window.py' -v
       - name: Verify sealed postimages before compilation
         run: python3 m3/collections/qualification/verify_mask_selection.py
       - name: Compile current M3 core and actual mask tests as Java 21
