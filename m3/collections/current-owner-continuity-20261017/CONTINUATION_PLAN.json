@@ -1,0 +1,1327 @@
+{
+  "schema": "M3_COLLECTIONS_CURRENT_RECEIVER_RECIPE_COMPOSITION_PLAN_V1",
+  "status": "READ_ONLY_PLAN_IMPLEMENTATION_DEFERRED_STRING66_PRIORITY",
+  "goal": "ACTIVE",
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "anchor": {
+    "causalAudit": "3b1c441ca1d091777fd93b14ac66348ed68af52c",
+    "dependencyInventory": "44f22e347e18840333903feaf7809e2ec485fe4b",
+    "currentRepository": "hsoliwal/M3jdk21",
+    "currentPullRequest": 1052,
+    "currentHead": "7ece73842aa4adc965decfa727d2a57b89d72556",
+    "currentCollectionsSourceTree": "407a890b0d1553d764850674d28365185728d316",
+    "currentInteropTree": "9fbb610cc5cc5e1d39092dedd8ec0a04364ca540",
+    "currentProductTreesRevalidated": true
+  },
+  "canonicalOwnership": {
+    "newCanonicalControlModule": "hsoliwal/com.synexia:synexia-openrewrite-recipes/recipes/m3-collections-current-owner-continuity-20261017",
+    "receivingControlModule": "hsoliwal/M3jdk21:m3/collections/current-owner-continuity-20261017",
+    "existingRuntimeOwners": "m3/collections/src/main/java/com/m3/collections and existing optional interop/src/main/java; use original package/API names",
+    "sourceChoice": "Reuse the exact qualified public receiver recipes and original named canonical source components; put only the uncovered current-composition controller and proof successors in a new Synexia source module. PR11922 is canonical for wrappers, not for the entire counts/BiMap chain.",
+    "wrappers": {
+      "repository": "hsoliwal/com.synexia",
+      "pullRequest": 11922,
+      "commit": "8dabfc853a1351a211023182afaea934ec789f9f",
+      "path": "synexia-openrewrite-recipes/recipe-crates/collections-library-interop/filtered-sorted-receiver",
+      "taskTree": "c458ad27f8488e18b5bc5836e715e96d672edccf",
+      "recipeTree": "53fb42686982de4906dc73c2d8c7ca4d687dc4a1",
+      "verifier": "5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8",
+      "sourceDirectoryRevalidated": true
+    },
+    "bimap": {
+      "repository": "hsoliwal/com.synexia",
+      "pullRequest": 11863,
+      "commit": "64108bacc26046ba0b9f5933d7a478fc97862eeb",
+      "path": "synexia-openrewrite-recipes/recipe-crates/collections-library-interop/bimap",
+      "taskTree": "28b76cd99d1a04fa7644c9c7faee5edef31d7d34",
+      "recipeTree": "34fa2a9ddf55237b0fb564492db98bc178ef03c6",
+      "verifier": "f1b8ff89afb8e8ec108a88a9fd3402c6be148607",
+      "sourceDirectoryRevalidated": true,
+      "notPresentAtWrapperCommit8dab": true
+    },
+    "counts": {
+      "runtimeDonor": "hsoliwal/com.synexia@6c33a5772a12ca99c8bff6a02403b28be4202bb3",
+      "canonicalCrate": "synexia-openrewrite-recipes/crates/m3-four-library-bags",
+      "canonicalParent": "65f7752d492920f94effcc8970610ff8d8179f21",
+      "exactReceivingRecipeAnchor": "hsoliwal/M3jdk21@9b33098446084b1f3ad41f99fb704f6f29aa5dda:m3/collections/counts/recipe",
+      "recipeTree": "45d5b77bc9b18e02922eb0e69ef246a8bdff05c4",
+      "reuseLock": "9504088ee0a61feddcae6c090093552be209952c"
+    },
+    "notices": "Preserve first-party Apache-2.0 plus Guava Authors notice eefaf472...; dependency JAR notices retained. No external challenge solution body copied."
+  },
+  "physicalFossRowCandidates": {
+    "status": "CANDIDATES_ONLY_NOT_A_PHYSICAL_GATE_ROW; ROOT_MUST_MATERIALIZE_USING_CURRENT_LEDGER_SCHEMA_BEFORE_CODE",
+    "rows": [
+      {
+        "capability": "collections-current-receiver-recipe-bootstrap",
+        "classification": "DIRECT_IMPORT_AND_WRAP",
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "e81a42da2158801a9358b5371e22563c24f4853f",
+        "paths": [
+          "m3/collections/counts/recipe",
+          "m3/collections/counts/totals/recipe",
+          "m3/collections/bimap/recipe",
+          "m3/collections/wrappers/recipe"
+        ],
+        "pins": {
+          "counts": "45d5b77bc9b18e02922eb0e69ef246a8bdff05c4",
+          "totals": "12aebd2a434ff4074b6cb2d6640d8d4b0f6dd727",
+          "bimap": "34fa2a9ddf55237b0fb564492db98bc178ef03c6",
+          "wrappers": "53fb42686982de4906dc73c2d8c7ca4d687dc4a1",
+          "javaProvider": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+          "textProvider": "2db1257a40d21be06ba2a67da87aff0311183809"
+        },
+        "license": "Apache-2.0",
+        "fit": "Unchanged existing 34-method SDK chain and 45 disjoint fenced targets; three current source owners equal sealed PRE fixtures.",
+        "gap": "New exact current-receiver bootstrap/delivery composition and source-custody proof only; no new runtime engine."
+      },
+      {
+        "capability": "collections-current-receiver-scaffold-source-custody",
+        "classification": "DIRECT_IMPORT_AND_WRAP",
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "7ece73842aa4adc965decfa727d2a57b89d72556",
+        "paths": [
+          "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+        ],
+        "pins": {
+          "provider": "4a38e39d0755462d40c2b22548b87abde938ea0b"
+        },
+        "license": "Apache-2.0",
+        "fit": "Existing target-native provider supports ABSENT exact UTF-8 postimages, fixed point, drift/duplicate/missing/change-after-scan refusals, sorted safe relative paths, at most256 targets.",
+        "gap": "A 75-target CREATE-only scaffold manifest plus explicit new qualification/configuration targets; PlainText source custody is not Java semantic proof. Existing recipe SDKs and JDK21 compilation supply semantic/runtime qualification."
+      },
+      {
+        "capability": "collections-current-receiver-qualified-verifier-successor",
+        "classification": "ADAPT_EXISTING_VERIFIERS",
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "e81a42da2158801a9358b5371e22563c24f4853f",
+        "paths": [
+          "m3/collections/counts/verify.py",
+          "m3/collections/counts/totals/verify.py",
+          "m3/collections/bimap/verify.py",
+          "m3/collections/wrappers/verify.py"
+        ],
+        "pins": {
+          "counts": "87373f983d9517cce6ab3b2164ff53adf0c525dc",
+          "totals": "a1e863654708eb4a34353cf0672bedb9015a10c2",
+          "bimap": "f1b8ff89afb8e8ec108a88a9fd3402c6be148607",
+          "wrappers": "5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8"
+        },
+        "license": "Apache-2.0; preserve Guava notice on adapted runtime",
+        "fit": "Existing source/compiled custody, retained predecessor chain, failure controls, JUnit/XML checks and Java/JNI/package checks; all four require explicit --root and do not use __file__ for ownership.",
+        "gap": "Create versioned companion variants with exact predecessor/output-root changes and explicit original13+new5 method ownership, then retain current mask1/residency4 regressions. Do not relax counts to arbitrary minimum or fabricate receipts."
+      },
+      {
+        "capability": "collections-current-source-donation-admission-successor",
+        "classification": "WRAP_EXISTING_POLICY",
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "7ece73842aa4adc965decfa727d2a57b89d72556",
+        "paths": [
+          "m3/collections/verify_donation.py",
+          "m3/collections/test_verify_donation.py",
+          "m3/collections/synexia-donation.json",
+          "m3/collections/qualification/installed-source-enum-set-20261014.tsv"
+        ],
+        "pins": {
+          "verifier": "54fa2569d9445f9729f3e9aea874c42ef9e46cad",
+          "packet": "a6339fc2f901cd3aef071c731bb71fb8ab715d1e",
+          "manifest": "5dc9c51a332e8fe5179d3562e40adf5b4d876922"
+        },
+        "license": "Apache-2.0",
+        "fit": "Existing strict digest, duplicate JSON, complete Java source-set equality, all-contract/JNI/package admission; existing current-source inventory already excludes23 current Java paths.",
+        "gap": "Recipe-generated new exact source inventory plus honest selector/receipt lineage; execute original strict policy. No guard weakening and no transfer of historical acceptance to added/current owners."
+      }
+    ]
+  },
+  "fileOwnership": {
+    "historicalInventoryFiles": 114,
+    "historicalInventoryBytes": 609869,
+    "roles": {
+      "requiredScaffold": 75,
+      "recipeManagedOutputsWithinHistoricalDirs": 29,
+      "historicalDeliveryReceipts": 4,
+      "historicalLocalEvidence": 2,
+      "unusedCanonicalEntryHelpers": 4
+    },
+    "scaffoldBytes": 452996,
+    "requiredScaffold": [
+      {
+        "path": "m3/collections/counts/README.md",
+        "gitBlob": "e7d58ab473045b4e28f2741a9271910b27a7c36a",
+        "bytes": 5608,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/pinned-engine/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "gitBlob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+        "bytes": 13805,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/pinned-engine/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+        "gitBlob": "2db1257a40d21be06ba2a67da87aff0311183809",
+        "bytes": 12981,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/pom.xml",
+        "gitBlob": "0f5b96d157d6500032ad0d0e5b6445a7d1ae1ec6",
+        "bytes": 2080,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3AllocationFailureProbe.java.txt",
+        "gitBlob": "a2c8d7323f01fca9b8951c59322782ba49eb5364",
+        "bytes": 4198,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3BagInteropTest.java.txt",
+        "gitBlob": "a15150ccdb812ec544bdc99946c7617535dedba9",
+        "bytes": 6807,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3CountLanes.java.txt",
+        "gitBlob": "1d260fdbfe5a961e96ecf76f0882d93ec8f598d0",
+        "bytes": 3424,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3CountLanesTest.java.txt",
+        "gitBlob": "6d1e3be27b430f633d7594c3a312aba6beb8c05a",
+        "bytes": 4057,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3CountedCatalogue.java.txt",
+        "gitBlob": "ffc026d13caa254e8eabed974eca365669c3e7a2",
+        "bytes": 1391,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3CountedCollectionsTest.java.txt",
+        "gitBlob": "f8eb02d80056809d7771bb2e40f97952ba9d6788",
+        "bytes": 6832,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3GuavaLongMultiset.java.txt",
+        "gitBlob": "4bef22568f1d2f87a6b6758109d04a8194f43805",
+        "bytes": 10270,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3LibraryBags.java.txt",
+        "gitBlob": "f22e5603a10d1efd57cb9b48ffe122ad4d775ac3",
+        "bytes": 2284,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3LongBag.java.txt",
+        "gitBlob": "9483047e48b4ba926093c827bef92ff40fb6420d",
+        "bytes": 6944,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3LongHashSet.java.txt",
+        "gitBlob": "d2fca03ba49ef568a900320f99bac690bc3eaea5",
+        "bytes": 7536,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3LongLinkedHashSet.java.txt",
+        "gitBlob": "99a41e8bdfdf92941ceb979e3d7354c9b291df90",
+        "bytes": 12233,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3LongLongHashMap.java.txt",
+        "gitBlob": "ad7cd2dca56f42d8b39175dc25a65409f050097d",
+        "bytes": 9364,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/manifest.tsv",
+        "gitBlob": "4dc48b87034e242f9e04f20c95189be887273311",
+        "bytes": 2346,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/pre/M3LongHashSet.java.txt",
+        "gitBlob": "1fe9ac1bfa11cf6a626a749c37d64ccec0ed09df",
+        "bytes": 7249,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/pre/M3LongLinkedHashSet.java.txt",
+        "gitBlob": "28c864a69a384dbfe6fbc499eff7da4015264a3f",
+        "bytes": 11685,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/pre/M3LongLongHashMap.java.txt",
+        "gitBlob": "b1d85622c2e19db069d0b2a64fb8011b5c01be34",
+        "bytes": 9090,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-counted-receiver/M3_RECIPE_FIRST_INVARIANT.md.txt",
+        "gitBlob": "c700d958e8b3467ae1489a11e0afe80b8c7b60e5",
+        "bytes": 2165,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-counted-receiver/catalogue.tsv.txt",
+        "gitBlob": "4e93200b41816c8bfa8b5d7c83aeb290c7dadd81",
+        "bytes": 8873,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-counted-receiver/m3_count_lanes.c.txt",
+        "gitBlob": "fcb85a55c9ff3d19faa1de991a109e3b3f3c3582",
+        "bytes": 3273,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-counted-receiver/manifest.tsv",
+        "gitBlob": "04cb35660051cce09a83b66e010a58d98eb3b724",
+        "bytes": 560,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-counted-receiver/provenance.json.txt",
+        "gitBlob": "f01533cc2ed65c3ea72bb6bb4956375624df24f3",
+        "bytes": 1041,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/recipe/src/test/java/com/synexia/rewrite/M3CountedCollectionRecipeTest.java",
+        "gitBlob": "b73f82e6d92941b99ca72601a9962937dbb48f22",
+        "bytes": 12625,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe/pom.xml",
+        "gitBlob": "28cc6cb96586bb158ea4d7d8901cf64c53c86220",
+        "bytes": 2108,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-count-totals/M3CountTotals.java.txt",
+        "gitBlob": "31ce540046a34db05d65a950ffd6fae48f5a2d81",
+        "bytes": 5337,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-count-totals/M3CountTotalsAllocationProbe.java.txt",
+        "gitBlob": "7684db3d4224dcf211db6e9156cbbb2d62f26f67",
+        "bytes": 3467,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-count-totals/M3CountTotalsTest.java.txt",
+        "gitBlob": "67d23af6cc9c743c4a82a673d6ff4ea73fedc5b6",
+        "bytes": 9751,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-count-totals/manifest.tsv",
+        "gitBlob": "885429642a4a2b1b0ff397e20926b0ed4ed4fa5b",
+        "bytes": 618,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-count-totals/README.md.txt",
+        "gitBlob": "cd27d517246ac10612c3216dedb8fa73b0e4cae8",
+        "bytes": 3770,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-count-totals/catalogue.tsv.txt",
+        "gitBlob": "c2c556aa2e9dde1308491810e70c144c559736d2",
+        "bytes": 2389,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-count-totals/m3_count_totals.c.txt",
+        "gitBlob": "d987d5860dec30d042cacbe833b244c4e54d79ca",
+        "bytes": 2997,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-count-totals/manifest.tsv",
+        "gitBlob": "c26295707344995d22ff848404b86cdd5c8c0f01",
+        "bytes": 556,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-count-totals/provenance.json.txt",
+        "gitBlob": "9942334663b5f75730fb8ddf8c7c8aec1fe9d70e",
+        "bytes": 3708,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe/src/test/java/com/synexia/rewrite/M3CountTotalsRecipeTest.java",
+        "gitBlob": "69f7e1fc85174740ca4fd29dc27231c8b0a923d7",
+        "bytes": 13023,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/totals/verify.py",
+        "gitBlob": "a1e863654708eb4a34353cf0672bedb9015a10c2",
+        "bytes": 6681,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/counts/verify.py",
+        "gitBlob": "87373f983d9517cce6ab3b2164ff53adf0c525dc",
+        "bytes": 9825,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/canonical-source.json",
+        "gitBlob": "37c075b2151fe36d3ceebbe4610ffa407b9fe931",
+        "bytes": 645,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/pom.xml",
+        "gitBlob": "930e8770daaa073c4da0ca6a416be87c803d9498",
+        "bytes": 2179,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-bimap/M3BiMap.java.txt",
+        "gitBlob": "6a705e1d9c33e7b0d6f0061e8154a0484ff8661d",
+        "bytes": 10762,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-bimap/M3BiMapNativeTest.java.txt",
+        "gitBlob": "4fc45de54046877ad489dd256a9337aa751852ce",
+        "bytes": 2690,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-bimap/M3BiMapTest.java.txt",
+        "gitBlob": "49ca9ae0149c9981bc53ed6f0619410eb1d24712",
+        "bytes": 17675,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-bimap/M3BiMaps.java.txt",
+        "gitBlob": "0d7691d6a5abb3eac929b7334640171e7bac4ee0",
+        "bytes": 2764,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-bimap/manifest.tsv",
+        "gitBlob": "c003b5f5c16b1e6af05f95716e15c013690105c0",
+        "bytes": 747,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/README.md.txt",
+        "gitBlob": "003cde1fc8afcd870d7da26178fc3f6ceda8c6de",
+        "bytes": 4605,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/THIRD_PARTY_NOTICES.md.txt",
+        "gitBlob": "eefaf472d4eb0b0384b4c0d5d2a6f7b33b5c51c7",
+        "bytes": 827,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/catalogue.tsv.txt",
+        "gitBlob": "25c8d21e76b26789bee9720fcd16b63d0eb4e119",
+        "bytes": 3243,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/m3_bimap_consumer.c.txt",
+        "gitBlob": "fc9f43c59e600e13f60a996a00214eeda3521b1a",
+        "bytes": 2431,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/manifest.tsv",
+        "gitBlob": "1c21edfe31a9305df6a5fd93491bdb186aef6ea8",
+        "bytes": 771,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/name-mapping.tsv.txt",
+        "gitBlob": "2bd31c805a99dc508ac356af360c53aea1f45263",
+        "bytes": 621,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/provenance.json.txt",
+        "gitBlob": "6e6e21ff4145f80cb95dd876f18ed737e2055d20",
+        "bytes": 2040,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/recipe/src/test/java/com/synexia/rewrite/M3BiMapRecipeTest.java",
+        "gitBlob": "ed44382625a8c7db843495ef2e187412150b7816",
+        "bytes": 14090,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/bimap/verify.py",
+        "gitBlob": "f1b8ff89afb8e8ec108a88a9fd3402c6be148607",
+        "bytes": 7039,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/canonical-source.json",
+        "gitBlob": "d485981f5ff1dd6d5b764a5dcd495e34490a20fe",
+        "bytes": 665,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/proof/M3CollectionViews.original.java.txt",
+        "gitBlob": "6c769c61d1851a7e4b08f63ea85c9458c939ae31",
+        "bytes": 19837,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/proof/M3WrapperRefinementProbe.java",
+        "gitBlob": "623d98b38643f529e93819d6e66e09bb91e3590d",
+        "bytes": 2637,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/pom.xml",
+        "gitBlob": "a1a6dca752f4760ff786ed669e065517cfa5038a",
+        "bytes": 2198,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3CollectionViews.java.txt",
+        "gitBlob": "8de1cbc3e1255cc6f9d73b068a164a991adcad15",
+        "bytes": 20385,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3FilteredMaps.java.txt",
+        "gitBlob": "8fec2f88d641d15e90ca2ad522749383c1926e59",
+        "bytes": 20246,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3FilteredMapsNativeSelfTest.java.txt",
+        "gitBlob": "65277db098158ff63acc17a0103515ab02f80690",
+        "bytes": 3812,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3FilteredMapsSelfTest.java.txt",
+        "gitBlob": "5d72a62dfa5403fa5ce7fdbc6b217b46482aa45d",
+        "bytes": 17047,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3FilteredMapsTest.java.txt",
+        "gitBlob": "fca44882774187b2b301fb18ea2f3e8fc4897452",
+        "bytes": 265,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3WrapperContractsTest.java.txt",
+        "gitBlob": "a743bc94aa684f35db6e871df0633aa5b720907d",
+        "bytes": 18046,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/RunSearchJni.java.txt",
+        "gitBlob": "0508f70a7c846c2841f978a9085d2b6254d2465c",
+        "bytes": 2024,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/manifest.tsv",
+        "gitBlob": "c606ac649f4f3bae46e3a615a4fe837176339203",
+        "bytes": 1273,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/README.md.txt",
+        "gitBlob": "bf0ab1a42f66c725a2ac2e50042bf3f7c97170b8",
+        "bytes": 3445,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/catalogue.tsv.txt",
+        "gitBlob": "ea544b7b2039c142348f8ebff6d02c505a9ff08e",
+        "bytes": 2255,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/manifest.tsv",
+        "gitBlob": "3c62be95f2a67f04d0050e26c4d1494ffd823a31",
+        "bytes": 621,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/name-mapping.tsv.txt",
+        "gitBlob": "211a758a4b211828a06e9389d521cf015901b16a",
+        "bytes": 356,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/provenance.json.txt",
+        "gitBlob": "129e0105732a1edb5b1d36a21e81bf1438947382",
+        "bytes": 3323,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/run_search_jni.c.txt",
+        "gitBlob": "5a9cf3274e120788dd9e9b15433d130e5f23865b",
+        "bytes": 1375,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe/src/test/java/com/synexia/rewrite/M3FilteredSortedRecipeTest.java",
+        "gitBlob": "03ec9e68e618f85c1388de6d5350bba28a1f1f07",
+        "bytes": 14582,
+        "role": "REQUIRED_SCAFFOLD"
+      },
+      {
+        "path": "m3/collections/wrappers/verify.py",
+        "gitBlob": "5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8",
+        "bytes": 12524,
+        "role": "REQUIRED_SCAFFOLD"
+      }
+    ],
+    "excludedFromCurrentProof": [
+      {
+        "path": "m3/collections/counts/canonical-entry/README.md",
+        "gitBlob": "a21f89e1e6ca1a7fbef8240acc1f539eb96b4622",
+        "bytes": 796,
+        "role": "UNUSED_CANONICAL_ENTRY_HELPER"
+      },
+      {
+        "path": "m3/collections/counts/canonical-entry/lock.json",
+        "gitBlob": "9504088ee0a61feddcae6c090093552be209952c",
+        "bytes": 684,
+        "role": "UNUSED_CANONICAL_ENTRY_HELPER"
+      },
+      {
+        "path": "m3/collections/counts/canonical-entry/pom.xml",
+        "gitBlob": "61b21b44d57cd37003ab5f961fcb48a013d96e91",
+        "bytes": 998,
+        "role": "UNUSED_CANONICAL_ENTRY_HELPER"
+      },
+      {
+        "path": "m3/collections/counts/canonical-entry/replay.py",
+        "gitBlob": "bf0e46b9e33b6e34a193e940c5db022a45442fe6",
+        "bytes": 4844,
+        "role": "UNUSED_CANONICAL_ENTRY_HELPER"
+      },
+      {
+        "path": "m3/collections/counts/evidence/local-20261016.json",
+        "gitBlob": "f5f21b00b719713710edd6a9fa24d7e64f3ec298",
+        "bytes": 1074,
+        "role": "HISTORICAL_LOCAL_EVIDENCE"
+      },
+      {
+        "path": "m3/collections/counts/recipe-receipt.tsv",
+        "gitBlob": "7270720afda6de918cd614983bea413312d1bdc7",
+        "bytes": 2246,
+        "role": "HISTORICAL_DELIVERY_RECEIPT"
+      },
+      {
+        "path": "m3/collections/counts/totals/evidence/local-20261016.json",
+        "gitBlob": "1d9a25c4574fb2136824572c7a7674bb95f62bdb",
+        "bytes": 1600,
+        "role": "HISTORICAL_LOCAL_EVIDENCE"
+      },
+      {
+        "path": "m3/collections/counts/totals/recipe-receipt.tsv",
+        "gitBlob": "52373cfd4b4cbf99f2baecf7ab976dad4c37fdb6",
+        "bytes": 981,
+        "role": "HISTORICAL_DELIVERY_RECEIPT"
+      },
+      {
+        "path": "m3/collections/bimap/recipe-receipt.tsv",
+        "gitBlob": "99cfa000eb753afc50254ae976edf710a6c28389",
+        "bytes": 1307,
+        "role": "HISTORICAL_DELIVERY_RECEIPT"
+      },
+      {
+        "path": "m3/collections/wrappers/recipe-receipt.tsv",
+        "gitBlob": "1255b5d59a38e9ffb34669fefa5538145f0a2b72",
+        "bytes": 1620,
+        "role": "HISTORICAL_DELIVERY_RECEIPT"
+      }
+    ],
+    "outputOwnership": "Do not copy the29 recipe-managed files or historical four delivery receipts as current results. Generate the45-target cohort through the unchanged actual Maven/OpenRewrite delivery methods; four fresh delivery receipts arise from those methods. Preserve excluded historical evidence by pinned references in source bindings.",
+    "preserveExactCurrent": [
+      {
+        "path": "main/java/com/m3/collections/M3LongArrayDeque.java",
+        "gitBlob": "cfe73fe987ec59d906807f8a7580bba8d371a946"
+      },
+      {
+        "path": "main/java/com/m3/collections/M3LongArrayList.java",
+        "gitBlob": "0ecf0a20c0f1195f79632e261de54117e204da42"
+      },
+      {
+        "path": "main/java/com/m3/collections/M3ObjectResidency.java",
+        "gitBlob": "d3132cdc31d450926d29f7c4f9d3c47d03ad2363"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "gitBlob": "240bbfb62ca949bfbd8abb0061cccad6630f7888"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java",
+        "gitBlob": "30a9d1b1b3ae781c4cefa543a1b24fd9c6c62f58"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java",
+        "gitBlob": "9ccb1286c23e4532585541ad212b08eb82fe2f67"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java",
+        "gitBlob": "c613bf12e479d1b206ee0b4a290c6f10f263547e"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java",
+        "gitBlob": "9a7813e5aa6f85fcf1cc781940e385a2993b4e99"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "gitBlob": "f1a9488905807e6417dd267e125bfc44dbcc9297"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java",
+        "gitBlob": "02db2523258c1f1dca676a2612579980321f46c7"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorTest.java",
+        "gitBlob": "e9342d8064a19bb44ce31d470b33b1fd0c3777ff"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3LongFilteredViewContractTest.java",
+        "gitBlob": "5b1bafe39ad6a9752dd94eb737e05bd0b5a5ccd9"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyBorrowTest.java",
+        "gitBlob": "a34ad79e869c5069545d00934f12c5292e00888b"
+      }
+    ],
+    "protectedCode": "No current whole-tree replacement; only original counts three preimage-owned transitions plus42 absent targets. All other current source owners retain exact blobs."
+  },
+  "delivery": {
+    "cohort": {
+      "uniqueTargets": 45,
+      "absentTargets": 42,
+      "exactPreimageTransitions": 3,
+      "rows": [
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/counts/src/main/java/com/m3/collections/tooling/M3CountedCatalogue.java",
+          "before": "ABSENT",
+          "after": "17b78b696f34752a000c822e6456f6c568609559f6d4812f16e976bc8655c36a",
+          "resource": "M3CountedCatalogue.java.txt"
+        },
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/counts/src/test/java/com/m3/collections/M3AllocationFailureProbe.java",
+          "before": "ABSENT",
+          "after": "f39eec9cacb733583e9b27b5a93809ea7b2362145e58237d7e00a263034ed95c",
+          "resource": "M3AllocationFailureProbe.java.txt"
+        },
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/counts/src/test/java/com/m3/collections/M3CountLanesTest.java",
+          "before": "ABSENT",
+          "after": "d59069893d0672e70b5e788e4bd735e71e57f83089aef5d292a3507a02ee3d1d",
+          "resource": "M3CountLanesTest.java.txt"
+        },
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/counts/src/test/java/com/m3/collections/M3CountedCollectionsTest.java",
+          "before": "ABSENT",
+          "after": "34bca4ca00e8663934c244a38cb950ad4bdc63daf76eae80095a7b7841be5320",
+          "resource": "M3CountedCollectionsTest.java.txt"
+        },
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/counts/src/test/java/com/m3/collections/interop/M3BagInteropTest.java",
+          "before": "ABSENT",
+          "after": "c80f10c0ef66b374c0ed15e7d0c6e23df9cd5dc22193ec4bb49330c1197dd6f5",
+          "resource": "M3BagInteropTest.java.txt"
+        },
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaLongMultiset.java",
+          "before": "ABSENT",
+          "after": "5901c60287695c4ef3480c3a5c341b658c84fbb8696fc0048552e11278685194",
+          "resource": "M3GuavaLongMultiset.java.txt"
+        },
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBags.java",
+          "before": "ABSENT",
+          "after": "57aea8a1ed8b2fcc5ebb5b64551826e5db392d67f9e78ced5d4fd4dcfa1b4eef",
+          "resource": "M3LibraryBags.java.txt"
+        },
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/src/main/java/com/m3/collections/M3CountLanes.java",
+          "before": "ABSENT",
+          "after": "1da43b83b932fa4f38d60f1564214e8552ddba99a36da4f8e9179ef932da94c8",
+          "resource": "M3CountLanes.java.txt"
+        },
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongBag.java",
+          "before": "ABSENT",
+          "after": "ba3c02266256fa5e8588e4e9fb94c0d37acd1fd8f7674339fc7cbe791e364ee1",
+          "resource": "M3LongBag.java.txt"
+        },
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+          "before": "8d1226aac98d797e164c1844886435df3602933c287db597eb2fe275936330eb",
+          "after": "15061216d11767e84db22edeb1a6050a632a8299360ab31793d6a3a0fccd18cf",
+          "resource": "M3LongHashSet.java.txt"
+        },
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+          "before": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef",
+          "after": "9024bb2aa1e9021249fa4361d675ae6687cab203c909a989949c27a0ccdc1b3f",
+          "resource": "M3LongLinkedHashSet.java.txt"
+        },
+        {
+          "manifest": "4dc48b87034e242f9e04f20c95189be887273311",
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+          "before": "a1b007cd7676fe6fced9fe8330b39f402c6355d29138e0e84185becaa47d7c36",
+          "after": "26e554ba8232799e2c5a9f1563358ef39f7639abd72effabe8eae1bd127b4805",
+          "resource": "M3LongLongHashMap.java.txt"
+        },
+        {
+          "manifest": "04cb35660051cce09a83b66e010a58d98eb3b724",
+          "path": "m3/collections/counts/M3_RECIPE_FIRST_INVARIANT.md",
+          "before": "ABSENT",
+          "after": "71950f026e1e11416388922455ce9ec33ac8f1424eb83089676d22807251dda9",
+          "resource": "M3_RECIPE_FIRST_INVARIANT.md.txt"
+        },
+        {
+          "manifest": "04cb35660051cce09a83b66e010a58d98eb3b724",
+          "path": "m3/collections/counts/catalogue.tsv",
+          "before": "ABSENT",
+          "after": "751c208ef826ea47cf6f1ea0eedf55e859653cdd48d8341f926ff13e6f4383b1",
+          "resource": "catalogue.tsv.txt"
+        },
+        {
+          "manifest": "04cb35660051cce09a83b66e010a58d98eb3b724",
+          "path": "m3/collections/counts/provenance.json",
+          "before": "ABSENT",
+          "after": "e029b5ecb907d5296ff8fff4ea1808e617df5119800a01f687082817ec1b5eef",
+          "resource": "provenance.json.txt"
+        },
+        {
+          "manifest": "04cb35660051cce09a83b66e010a58d98eb3b724",
+          "path": "m3/collections/src/main/native/collections/m3_count_lanes.c",
+          "before": "ABSENT",
+          "after": "e2797a2750d45cada0ec468fb92040bd0c2da460a76a0a893a31fe7a4894a920",
+          "resource": "m3_count_lanes.c.txt"
+        },
+        {
+          "manifest": "885429642a4a2b1b0ff397e20926b0ed4ed4fa5b",
+          "path": "m3/collections/counts/totals/src/test/java/com/m3/collections/M3CountTotalsAllocationProbe.java",
+          "before": "ABSENT",
+          "after": "003894ee1ccc7bf034ad3647661945afbdc85c0c99a748fd96191cb3b24d34d3",
+          "resource": "M3CountTotalsAllocationProbe.java.txt"
+        },
+        {
+          "manifest": "885429642a4a2b1b0ff397e20926b0ed4ed4fa5b",
+          "path": "m3/collections/counts/totals/src/test/java/com/m3/collections/M3CountTotalsTest.java",
+          "before": "ABSENT",
+          "after": "e32bd40566ad07636b412e82ad92df93021ad40de38468efe7c4b2a20caf0b5b",
+          "resource": "M3CountTotalsTest.java.txt"
+        },
+        {
+          "manifest": "885429642a4a2b1b0ff397e20926b0ed4ed4fa5b",
+          "path": "m3/collections/src/main/java/com/m3/collections/M3CountTotals.java",
+          "before": "ABSENT",
+          "after": "40ddf920cdf8341e976538e958d5f103cbf9afb5c69f03b55baeff8c5f5ba252",
+          "resource": "M3CountTotals.java.txt"
+        },
+        {
+          "manifest": "c26295707344995d22ff848404b86cdd5c8c0f01",
+          "path": "m3/collections/counts/totals/README.md",
+          "before": "ABSENT",
+          "after": "a28f425678ffbb9c560fc35ce4e87a28aed0f46fb2f71fdffdd7e5afe743fc21",
+          "resource": "README.md.txt"
+        },
+        {
+          "manifest": "c26295707344995d22ff848404b86cdd5c8c0f01",
+          "path": "m3/collections/counts/totals/catalogue.tsv",
+          "before": "ABSENT",
+          "after": "c672cd711c623a69f534fb306e82cf043052f97fc890c8f2af7cd3adb520152a",
+          "resource": "catalogue.tsv.txt"
+        },
+        {
+          "manifest": "c26295707344995d22ff848404b86cdd5c8c0f01",
+          "path": "m3/collections/counts/totals/provenance.json",
+          "before": "ABSENT",
+          "after": "ac6c9af1d2152613de02ca4506859e56f990057dedfad2606b2e448ad8fc98cb",
+          "resource": "provenance.json.txt"
+        },
+        {
+          "manifest": "c26295707344995d22ff848404b86cdd5c8c0f01",
+          "path": "m3/collections/src/main/native/collections/m3_count_totals.c",
+          "before": "ABSENT",
+          "after": "bf1fc7d87f797c4047da75fc23ffc01d6f2fc5a89f1dcf9c70a819ffcf493ebd",
+          "resource": "m3_count_totals.c.txt"
+        },
+        {
+          "manifest": "c003b5f5c16b1e6af05f95716e15c013690105c0",
+          "path": "m3/collections/bimap/src/test/java/com/m3/collections/interop/M3BiMapNativeTest.java",
+          "before": "ABSENT",
+          "after": "a8678c86f440b2020fca7345d77a5ef5e951432032b0c766da3ee3ad44d198b6",
+          "resource": "M3BiMapNativeTest.java.txt"
+        },
+        {
+          "manifest": "c003b5f5c16b1e6af05f95716e15c013690105c0",
+          "path": "m3/collections/bimap/src/test/java/com/m3/collections/interop/M3BiMapTest.java",
+          "before": "ABSENT",
+          "after": "8b5171a387ba6f33a652f9a7dfd9f29e4bd40c9b87527d1c85b1323f775dba4a",
+          "resource": "M3BiMapTest.java.txt"
+        },
+        {
+          "manifest": "c003b5f5c16b1e6af05f95716e15c013690105c0",
+          "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3BiMap.java",
+          "before": "ABSENT",
+          "after": "80aa788db958a34779f02559323e3d77268791eb82ababfacc42538217c6e4bc",
+          "resource": "M3BiMap.java.txt"
+        },
+        {
+          "manifest": "c003b5f5c16b1e6af05f95716e15c013690105c0",
+          "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3BiMaps.java",
+          "before": "ABSENT",
+          "after": "ae16d7395c3325230bebe7d3f58765669c639f091fd1e06c4b069031affd5db8",
+          "resource": "M3BiMaps.java.txt"
+        },
+        {
+          "manifest": "1c21edfe31a9305df6a5fd93491bdb186aef6ea8",
+          "path": "m3/collections/bimap/README.md",
+          "before": "ABSENT",
+          "after": "b7fc6450a49010922dc7abf16ed680f6ad932ecdb84e34f61b219e1f437326cb",
+          "resource": "README.md.txt"
+        },
+        {
+          "manifest": "1c21edfe31a9305df6a5fd93491bdb186aef6ea8",
+          "path": "m3/collections/bimap/THIRD_PARTY_NOTICES.md",
+          "before": "ABSENT",
+          "after": "2fdc7f8a7518bdb96116f061fc4838ffdb33436bb3849c6b731a97c1e9253dc8",
+          "resource": "THIRD_PARTY_NOTICES.md.txt"
+        },
+        {
+          "manifest": "1c21edfe31a9305df6a5fd93491bdb186aef6ea8",
+          "path": "m3/collections/bimap/catalogue.tsv",
+          "before": "ABSENT",
+          "after": "a65ae9b56f99a2723e694471ac5c52cd2a8de9de1ed6d9109d4615a2d04b2f24",
+          "resource": "catalogue.tsv.txt"
+        },
+        {
+          "manifest": "1c21edfe31a9305df6a5fd93491bdb186aef6ea8",
+          "path": "m3/collections/bimap/name-mapping.tsv",
+          "before": "ABSENT",
+          "after": "d955136da7c747b862dc130c0409b0c5f16be8274b2583e4d64852e02c0d56d7",
+          "resource": "name-mapping.tsv.txt"
+        },
+        {
+          "manifest": "1c21edfe31a9305df6a5fd93491bdb186aef6ea8",
+          "path": "m3/collections/bimap/provenance.json",
+          "before": "ABSENT",
+          "after": "0d77b354a5a6918c0ce7be4676215cc28b8743a6ea36d99fad21ba9d8f81ec78",
+          "resource": "provenance.json.txt"
+        },
+        {
+          "manifest": "1c21edfe31a9305df6a5fd93491bdb186aef6ea8",
+          "path": "m3/collections/src/test/native/collections/m3_bimap_consumer.c",
+          "before": "ABSENT",
+          "after": "c6a073b211459f278d2674336ddc84ac28fe19324a0c3cbc30a44193eec84d1e",
+          "resource": "m3_bimap_consumer.c.txt"
+        },
+        {
+          "manifest": "c606ac649f4f3bae46e3a615a4fe837176339203",
+          "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+          "before": "ABSENT",
+          "after": "cfe0eb7335e3945f35b4a9763e11e0a7dff6c672f7014733f15e876b0b06909e",
+          "resource": "M3CollectionViews.java.txt"
+        },
+        {
+          "manifest": "c606ac649f4f3bae46e3a615a4fe837176339203",
+          "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java",
+          "before": "ABSENT",
+          "after": "1dff497079e768fda574a349cc521732d69cbacbecc19deba6888d909844f1cb",
+          "resource": "M3FilteredMaps.java.txt"
+        },
+        {
+          "manifest": "c606ac649f4f3bae46e3a615a4fe837176339203",
+          "path": "m3/collections/wrappers/src/test/java/RunSearchJni.java",
+          "before": "ABSENT",
+          "after": "3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a",
+          "resource": "RunSearchJni.java.txt"
+        },
+        {
+          "manifest": "c606ac649f4f3bae46e3a615a4fe837176339203",
+          "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsNativeSelfTest.java",
+          "before": "ABSENT",
+          "after": "5437dfeea903d7208f6453e052d8ca88b84ac1e292dff1acd0df845b6c21f136",
+          "resource": "M3FilteredMapsNativeSelfTest.java.txt"
+        },
+        {
+          "manifest": "c606ac649f4f3bae46e3a615a4fe837176339203",
+          "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsSelfTest.java",
+          "before": "ABSENT",
+          "after": "a99ae7502a7b1832c149dd2d0af888ddbdeb5805659ef5c778ceda4ca1949cd5",
+          "resource": "M3FilteredMapsSelfTest.java.txt"
+        },
+        {
+          "manifest": "c606ac649f4f3bae46e3a615a4fe837176339203",
+          "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsTest.java",
+          "before": "ABSENT",
+          "after": "c4139f6db6648b0e71a347c15c35d6d133cb4d32581990490141501f273cb271",
+          "resource": "M3FilteredMapsTest.java.txt"
+        },
+        {
+          "manifest": "c606ac649f4f3bae46e3a615a4fe837176339203",
+          "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3WrapperContractsTest.java",
+          "before": "ABSENT",
+          "after": "a641b0eda9ecbfac68d8719e5d2a39f6b826f5228954173da37188a7629d911e",
+          "resource": "M3WrapperContractsTest.java.txt"
+        },
+        {
+          "manifest": "3c62be95f2a67f04d0050e26c4d1494ffd823a31",
+          "path": "m3/collections/src/test/native/collections/run_search_jni.c",
+          "before": "ABSENT",
+          "after": "aecfe097fe61b5260a09c2bbbcec57bca2a96bd7cabf343bc380cfc5b28a1d10",
+          "resource": "run_search_jni.c.txt"
+        },
+        {
+          "manifest": "3c62be95f2a67f04d0050e26c4d1494ffd823a31",
+          "path": "m3/collections/wrappers/README.md",
+          "before": "ABSENT",
+          "after": "fbf1c6668a49e007a93ab3ed0c251171ea1708312c8892a512049ee359e06dda",
+          "resource": "README.md.txt"
+        },
+        {
+          "manifest": "3c62be95f2a67f04d0050e26c4d1494ffd823a31",
+          "path": "m3/collections/wrappers/catalogue.tsv",
+          "before": "ABSENT",
+          "after": "eac5101db577439a71f60d303a3edba323c6760277384b92510064777e17599c",
+          "resource": "catalogue.tsv.txt"
+        },
+        {
+          "manifest": "3c62be95f2a67f04d0050e26c4d1494ffd823a31",
+          "path": "m3/collections/wrappers/name-mapping.tsv",
+          "before": "ABSENT",
+          "after": "e24d49d6bff8bde4c6c85c1d3ee5441a5fa9e54c48ec9e7b15dda0903a89b76b",
+          "resource": "name-mapping.tsv.txt"
+        },
+        {
+          "manifest": "3c62be95f2a67f04d0050e26c4d1494ffd823a31",
+          "path": "m3/collections/wrappers/provenance.json",
+          "before": "ABSENT",
+          "after": "aaaadcb60fdb5534543a770bfb4e1dac1952f108fa901907c4bb5a011e3cc26f",
+          "resource": "provenance.json.txt"
+        }
+      ]
+    },
+    "sequence": [
+      {
+        "stage": 0,
+        "owner": "new continuity controller",
+        "action": "Qualify CREATE-only scaffold recipe with75 exact UTF-8 targets, complete75-target absence/drift/duplicate/path-safety/partial-state/fixed-point controls. Source-custody outputs must then compile in genuine SDK/runtime stages.",
+        "newEngine": false,
+        "provider": "4a38e39d0755462d40c2b22548b87abde938ea0b"
+      },
+      {
+        "stage": 1,
+        "module": "counts",
+        "pom": "m3/collections/counts/recipe/pom.xml",
+        "command": "mvn -B -ntp -f m3/collections/counts/recipe/pom.xml -Dm3.counted.target=<exclusive-receiver-root> test",
+        "sdkMethods": 8,
+        "outputs": 16,
+        "receipt": "m3/collections/counts/recipe-receipt.tsv"
+      },
+      {
+        "stage": 2,
+        "module": "counts/totals",
+        "pom": "m3/collections/counts/totals/recipe/pom.xml",
+        "command": "mvn -B -ntp -f m3/collections/counts/totals/recipe/pom.xml -Dm3.totals.target=<exclusive-receiver-root> test",
+        "sdkMethods": 8,
+        "outputs": 7,
+        "receipt": "m3/collections/counts/totals/recipe-receipt.tsv"
+      },
+      {
+        "stage": 3,
+        "module": "bimap",
+        "pom": "m3/collections/bimap/recipe/pom.xml",
+        "command": "mvn -B -ntp -f m3/collections/bimap/recipe/pom.xml -Dm3.bimap.target=<exclusive-receiver-root> test",
+        "sdkMethods": 9,
+        "outputs": 10,
+        "receipt": "m3/collections/bimap/recipe-receipt.tsv"
+      },
+      {
+        "stage": 4,
+        "module": "wrappers",
+        "pom": "m3/collections/wrappers/recipe/pom.xml",
+        "command": "mvn -B -ntp -f m3/collections/wrappers/recipe/pom.xml -Dm3.wrappers.target=<exclusive-receiver-root> test",
+        "sdkMethods": 9,
+        "outputs": 12,
+        "receipt": "m3/collections/wrappers/recipe-receipt.tsv"
+      }
+    ],
+    "fixedPoint": "The75 bootstrap targets and45 runtime/data output targets are disjoint. Keep original live verifier files unchanged so the bootstrap is still a fixed point after current qualification. Add versioned companion qualification files separately; never nest an old-preimage CHANGE stage in a claimed repeatable whole entry without final-state handling.",
+    "requiredProof": [
+      "all45 inputs prechecked together against actual exclusive receiver checkout",
+      "all45 outputs and four actual delivery receipts exact",
+      "all83 preexisting core units retained except exactly three sealed count transitions",
+      "all10 current-only files and ArrayList/Deque/Residency blobs retained",
+      "public API for three changed storage owners unchanged",
+      "repeat full composition is a fixed point; missing/foreign source refuses before publication",
+      "recompute applied blob/tree bindings from actual hosted-generated output; do not manually patch outputs"
+    ]
+  },
+  "qualificationSuccessor": {
+    "targetDirectory": "m3/collections/current-owner-continuity-20261017/verification",
+    "variants": [
+      {
+        "name": "counts.py",
+        "source": "87373f983d9517cce6ab3b2164ff53adf0c525dc",
+        "delta": "Use owned current-run output root; prove original13 long methods and five exact current filtered-view methods rather than accepting arbitrary18 tests."
+      },
+      {
+        "name": "totals.py",
+        "source": "a1e863654708eb4a34353cf0672bedb9015a10c2",
+        "delta": "Call companion counts.py and read its bound current-run receipt/core artifacts; retain all original10 scalar tests and allocation/native checks."
+      },
+      {
+        "name": "bimap.py",
+        "source": "f1b8ff89afb8e8ec108a88a9fd3402c6be148607",
+        "delta": "Call companion totals.py and read its bound current-run artifacts; preserve26 tests,48000 differential operations and JNI/stderr controls."
+      },
+      {
+        "name": "wrappers.py",
+        "source": "5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8",
+        "delta": "Call companion bimap.py; require exact112 retained methods,25 original wrapper methods and immutable source/compiled staging custody. Preserve three phases and original/native/candidate controls."
+      }
+    ],
+    "originalVerifiersAndMirrorJson": "Retain original four verifier files and original canonical-source.json byte-for-byte. Versioned current variants are explicitly ADAPT successors tied to old source blobs and current owner inventory; never describe modified variants as exact original mirrors.",
+    "outputRoot": "m3/collections/current-owner-continuity-20261017/target/<run-bound-stage> with exact shared custody references and all output paths included in aggregate budget",
+    "legacyLongMethodInventory": [
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3LongArrayDequeTest.java",
+        "gitBlob": "8d3b4c32dab74e0654ec4b4a843c02b40ea7c1a0",
+        "currentGitBlob": "8d3b4c32dab74e0654ec4b4a843c02b40ea7c1a0",
+        "methods": [
+          "primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams",
+          "callbackFailurePreservesThrowingValueAndUnreadSuffixAcrossRingWrap",
+          "queueAndIndexedViewsAreJdkShapedAliases"
+        ]
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3LongArrayListTest.java",
+        "gitBlob": "3a1eacc0057d748135764a43a51eee627aeda2ee",
+        "currentGitBlob": "3a1eacc0057d748135764a43a51eee627aeda2ee",
+        "methods": [
+          "mixedOperationsMatchJdkValueOrder",
+          "callbackFailurePreservesThrowingValueAndUnreadSuffix",
+          "directStreamsRetainOwnerAcrossStorageRelocation",
+          "sortDedupAndSearchPreserveSignedLongSemantics",
+          "structuralMutationsFailFastAndStackIsJdkShapedRemoval",
+          "boundsOwnershipAndStackExceptions",
+          "primitiveStorageAndCapacityChecksStayBounded"
+        ]
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3LongLinkedHashSetTest.java",
+        "gitBlob": "a4202b54eeb03aa662101a8c3d3c57e0c9a96e2e",
+        "currentGitBlob": "a4202b54eeb03aa662101a8c3d3c57e0c9a96e2e",
+        "methods": [
+          "matchesJdkSequencedSetAcrossChurnIncludingMovesAndRehash",
+          "edgeContractsFailFastAndSizing",
+          "retainsOnlyPrimitiveLanes"
+        ]
+      }
+    ],
+    "newFilter": {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongFilteredViewContractTest.java",
+      "gitBlob": "5b1bafe39ad6a9752dd94eb737e05bd0b5a5ccd9",
+      "methods": [
+        "composableAndReadOnly",
+        "lateBindingStreamsAndNoSizeScan",
+        "fusedNestedPredicatesKeepEvaluationOrder",
+        "differentialSeeded",
+        "exceptionBoundaries"
+      ]
+    },
+    "sourcePredictionsOnly": {
+      "oldLongMethods": 13,
+      "newLongMethods": 5,
+      "longMethods": 18,
+      "retainedChain": 112,
+      "withWrappers": 137,
+      "currentMaskAdditional": 1,
+      "currentResidencyAdditional": 4,
+      "targetedDistinctTotal": 142,
+      "coreMainJavaUnits": 88,
+      "interopMainJavaUnits": 7
+    },
+    "additionalCurrentRegressions": [
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorTest.java",
+        "gitBlob": "e9342d8064a19bb44ce31d470b33b1fd0c3777ff",
+        "method": "stableMaskSelectionContract"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyBorrowTest.java",
+        "gitBlob": "a34ad79e869c5069545d00934f12c5292e00888b",
+        "methods": 4
+      }
+    ],
+    "acceptance": "Source predictions are not receipts; actual Surefire/JUnit method inventories must show zero unexpected, missing, skipped, errors or failures.142 targeted methods do not prove all current core/library coverage. Retain core java.base-only packaging and separate optional interop; test-only generic JNI peers are not production generic native maps."
+  },
+  "donationAdmission": {
+    "status": "PREEXISTING_CURRENT_SOURCE_INVENTORY_GAP; NOT_FIXED_BY_THIS_PLAN",
+    "verifier": "54fa2569d9445f9729f3e9aea874c42ef9e46cad",
+    "packet": "a6339fc2f901cd3aef071c731bb71fb8ab715d1e",
+    "selector": "qualification/installed-source-enum-set-20261014.tsv",
+    "manifestBlob": "5dc9c51a332e8fe5179d3562e40adf5b4d876922",
+    "currentGap": {
+      "manifestRows": 99,
+      "declaredJava": 94,
+      "actualJava": 117,
+      "missingDeclared": [
+        "m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntCollection.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntIterator.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java",
+        "m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java",
+        "m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java",
+        "m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java",
+        "m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+        "m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java",
+        "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java",
+        "m3/collections/src/test/java/com/m3/collections/M3AdaptiveEnumLongMapTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3IntLanesTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3IntLongHashMapTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3LongFilteredViewContractTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3LongLinkedHashSetTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyRuntimePressureTest.java"
+      ],
+      "declaredAbsent": []
+    },
+    "strictGuard": "declared_java == actual_java and all declared raw hashes match",
+    "nextCandidatePaths": {
+      "inventory": "m3/collections/qualification/installed-source-current-owner-continuity-20261017.tsv",
+      "selectorOwner": "m3/collections/synexia-donation.json",
+      "receipt": "m3/collections/current-owner-continuity-20261017/target/donation-admission/evidence/qualification.json"
+    },
+    "inventoryPrediction": {
+      "completeCurrentSourceFiles": 119,
+      "afterAddingNineMissingCoreNativeFiles": 128,
+      "withLicenseNoticeAndTwoRetainedVerificationProbes": 132,
+      "javaPathsAfterFiveAdds": 122
+    },
+    "nextAction": "Trace current23 undeclared Java owners and already-evolved declared hashes to their genuine source/recipe lineage; generate a new exact complete installed-source inventory and selector through a source-bound Maven recipe. Preserve historical99-row manifest and receipts. Run original strict donation policy plus selector/duplicate-key regressions; no whitelist broadening or silent source omission.",
+    "qualificationHonesty": "New selector/receipt must explicitly remain pending until actual all-contract/JNI/package execution. Historical acceptance cannot be re-labelled as acceptance of new/current source set.",
+    "phase": "STRING remains active; phase_advance=false; full_mindex_family_completed=false"
+  },
+  "hostedLane": {
+    "decision": "SEPARATE_COLLECTIONS_QUALIFICATION_JOB; DO_NOT_APPEND_TO_CURRENT_COMPILER_15_MINUTE_JOB",
+    "proposedLimits": {
+      "timeoutMinutes": 15,
+      "aggregateOutputBytes": 536870912,
+      "freeBytesAfterPlannedOutput": 8589934592
+    },
+    "historicalMeasurement": {
+      "run": 38933086594,
+      "job": 117082211486,
+      "head": "e81a42da2158801a9358b5371e22563c24f4853f",
+      "conclusion": "success",
+      "startedAt": "2026-10-16T16:36:15Z",
+      "completedAt": "2026-10-16T16:39:13Z",
+      "elapsedSeconds": 178,
+      "labels": [
+        "ubuntu-24.04-arm"
+      ],
+      "steps": [
+        {
+          "name": "Identify exact source and canonical recipe mirror",
+          "seconds": 2
+        },
+        {
+          "name": "Execute retained and new Maven OpenRewrite suites",
+          "seconds": 100
+        },
+        {
+          "name": "Compile current core and resolve existing optional library closure",
+          "seconds": 18
+        },
+        {
+          "name": "Verify retained Java JNI and new wrapper runtime tests",
+          "seconds": 35
+        },
+        {
+          "name": "Verify bound native navigation in tiered interpreter and C1 modes",
+          "seconds": 7
+        },
+        {
+          "name": "Finish negative controls API package and source qualification",
+          "seconds": 4
+        }
+      ],
+      "outputPeakBytes": "NOT_MEASURED; historical workflow does not establish512MiB fit",
+      "currentColdCacheAndNew88UnitQualification": "NOT_RUN"
+    },
+    "fitConclusion": "Historical178s supports attempting a separately bounded15min job. It does not prove cold dependency storage/current closure fit. Measure capacity first and aggregate checkout/Git objects, explicit Maven repo, temp, classes, native, reports/logs and artifact packaging throughout. Do not reuse the old unbounded-cache workflow verbatim.",
+    "controls": [
+      "explicit owned output/temp/cache/home paths before every child; no implicit host cache writes",
+      "sparse/filtered checkout of exact required paths; no full clone or vendor reactor build",
+      "serial Maven and runtime commands; cap JVM memory separately from output budget",
+      "capacity/reserve and aggregate-byte monitor with process-group cleanup and bounded failure tails",
+      "source/compiled/artifact hashes and exact run/commit identity retained even on failure",
+      "if time/output/reserve guard fires, stop and record incomplete; split into measured independently bound jobs or request an explicit measured larger allowance later—no fallback/counter-only success",
+      "global donation/full-current-core admission remains an independent unmeasured gate; String66, installed image, full reactor and global migration cannot borrow this targeted result"
+    ]
+  },
+  "noNewImplementation": {
+    "localWrites": false,
+    "jvm": false,
+    "maven": false,
+    "builds": false,
+    "downloads": false,
+    "codeAuthored": false,
+    "runtimeOwnersRestored": false,
+    "refsChanged": false,
+    "physicalFossGateCreated": false,
+    "onlyPrivatePlanBlobPublished": true
+  },
+  "nextActionOrder": [
+    "Finish prioritized String66 runtime source-custody work independently.",
+    "When collections phase starts, root records physical FOSS decisions from candidates before code.",
+    "Author only continuity manifests/controller and versioned qualification/admission recipe deltas in new Synexia canonical module; preserve all historical recipe/provider cores.",
+    "Qualify recipes and execute real serial delivery plus current Java/JNI/package gates on separately bounded hosted worker.",
+    "Publish paired draft PRs with actual generated outputs/source-to-target hashes and unmodified historical receipt lineage; keep global phase and goal active."
+  ]
+}

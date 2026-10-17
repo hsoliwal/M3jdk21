@@ -1,0 +1,75 @@
+{
+  "schema": "M3_FILTERED_SORTED_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "canonical_owner": "synexia-openrewrite-recipes/recipe-crates/collections-library-interop/filtered-sorted-receiver",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "a0227fc8a23b102613dd760a6180a8f39e344215",
+  "source_pr": 11865,
+  "collection_source_pr": 11813,
+  "membership_atom": {
+    "pr": 11824,
+    "commit": "7d48f2647d2c3095483ae6918f182f87e6d716c5",
+    "blob": "a05370fb1e42770e359b678517960e7d2a90b5ec"
+  },
+  "source_files": [
+    {
+      "source": "synexia-primitives/src/main/java/com/synexia/primitives/M3CollectionViews.java",
+      "git_blob": "6c769c61d1851a7e4b08f63ea85c9458c939ae31",
+      "sha256": "c3ff418b51cd1b471ded6da0376e0e17eb429151d7e1383da0b23c587c9a3f53",
+      "mode": "source adaptation; namespace and explicitly catalogued atoms"
+    },
+    {
+      "source": "synexia-primitives/src/main/java/com/synexia/primitives/M3FilteredMaps.java",
+      "git_blob": "7374279f89f73b904cee66134a84033269bd743d",
+      "sha256": "2f6ecaade1dbc555a40d09161068dde5c954b5846283831f058e9c8926cbac97",
+      "mode": "namespace-only port"
+    },
+    {
+      "source": "synexia-primitives/src/test/java/com/synexia/primitives/M3FilteredMapsSelfTest.java",
+      "git_blob": "e3466b0a83eeef26ccbd461cab04a2a0942d2827",
+      "sha256": "814311b2e4bbe64b0fbf4175ea419b441241bcb0679aac7d31030ee406986747",
+      "mode": "namespace-only port"
+    },
+    {
+      "source": "synexia-primitives/src/test/java/com/synexia/primitives/M3FilteredMapsNativeSelfTest.java",
+      "git_blob": "f6d52313ca64d18ca42952de4fc93cb2bf7407d0",
+      "sha256": "16cbfed05eb7499b4802b78f72920703c9aaabb93331cbd20a69373d198e5c07",
+      "mode": "namespace-only port"
+    },
+    {
+      "source": "synexia-primitives/src/test/java/com/synexia/primitives/M3FilteredMapsTest.java",
+      "git_blob": "7c38d49a8cbc335f960013016e520564330e277a",
+      "sha256": "1706e3d6cc7c2b439dd3f02cf630f3c81cbf93f4ea5b01599d1b64f42970b8c0",
+      "mode": "namespace-only port"
+    },
+    {
+      "source": "synexia-openrewrite-recipes/recipes/collection-view-convergence-20261016/proof/RunSearchJni.java",
+      "git_blob": "0508f70a7c846c2841f978a9085d2b6254d2465c",
+      "sha256": "3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a",
+      "mode": "unchanged test-only JNI peer"
+    },
+    {
+      "source": "synexia-openrewrite-recipes/recipes/collection-view-convergence-20261016/proof/run_search_jni.c",
+      "git_blob": "5a9cf3274e120788dd9e9b15433d130e5f23865b",
+      "sha256": "aecfe097fe61b5260a09c2bbbcec57bca2a96bd7cabf343bc380cfc5b28a1d10",
+      "mode": "unchanged test-only JNI peer"
+    }
+  ],
+  "receiver_baseline": "f7b9062f6c84b9d11ae7d9d3e895f33f695f4c99",
+  "changes": [
+    "namespace/Javadoc adaptation",
+    "preserve runtime collection set/sorted/navigable capabilities",
+    "ordinary membership/removal use authoritative owner",
+    "single-pass stable sorted-snapshot acquisition"
+  ],
+  "native": "unchanged test-only run-search peer; product count JNI retained",
+  "provider_pins": [
+    "JDK21",
+    "Guava33.4.8-jre",
+    "Eclipse11.1.0",
+    "Spring6.2.0"
+  ],
+  "pins_are_security_or_latest_claims": false,
+  "phase_advance": false
+}

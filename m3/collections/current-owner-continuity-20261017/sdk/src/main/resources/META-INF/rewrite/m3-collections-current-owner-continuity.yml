@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CollectionsCurrentOwnerContinuity
+displayName: M3 collections current owner continuity source custody
+description: Restores exact donor recipe scaffolds and versioned controls with the existing target-native PlainText provider. Runtime, JNI, complete JDK and performance admission remain separate.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-collections-current-owner-continuity-20261017

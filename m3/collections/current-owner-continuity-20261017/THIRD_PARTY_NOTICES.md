@@ -1,0 +1,9 @@
+# Provenance
+
+Tooling and collection sources retain their Apache-2.0 headers and original notices. This module directly imports the four existing counted-storage/totals/BiMap/wrapper SDKs and exact historical scaffold from M3jdk21 e81a42da2158801a9358b5371e22563c24f4853f. Wrapper canonical source is Synexia PR11922 at8dabfc853a1351a211023182afaea934ec789f9f. The existing M3Jdk21HashPinnedTextSnapshotRecipe4a38e39d0755462d40c2b22548b87abde938ea0b is unchanged. No new collection storage/matcher/native engine is introduced.
+
+Launcher POMs are mechanical adaptations of their original POMs: only the run-specific build directory is added. Original verifiers87373f983d9517cce6ab3b2164ff53adf0c525dc, a1e863654708eb4a34353cf0672bedb9015a10c2, f1b8ff89afb8e8ec108a88a9fd3402c6be148607,5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8 and strict donation policy54fa2569d9445f9729f3e9aea874c42ef9e46cad remain immutable; versioned successors carry exact reversible edit/source evidence. Stronger source/compiled custody wraps existing source hashing, JUnit XML and staging mechanisms.
+
+The bounded workflow derives from298fb1da85879368475f18fe128c46f477de1857; WORKFLOW_DERIVATION.json records eight exact block edits and42 output-prefix substitutions with byte-exact inverse. Actions remain pinned; OpenRewrite8.17.1/JUnit5.10.2 API fit was checked against official source and genuine dependency coordinates. No local or hosted execution is implied.
+
+Guava-derived BiMap/runtime notices and THIRD_PARTY_NOTICES files are preserved in the original recipe resources and corresponding outputs. Optional interop dependencies retain their existing licenses and stay outside the java.base-only core. Existing LICENSE/NOTICE are unchanged. FOSS_REUSE_DECISION.tsv physically recorded donor classification/fit before the implementation. No competitive-programming solution body or OpenJDK implementation body is newly copied by this collection phase.

@@ -1,0 +1,2035 @@
+{
+  "schema": "M3_COLLECTIONS_CURRENT_PROOF_SOURCE_PINS_V1",
+  "sourceCustodyOnly": true,
+  "runtimeQualified": false,
+  "jniQualified": false,
+  "installedJdkQualified": false,
+  "performanceQualified": false,
+  "phaseAdvanced": false,
+  "baselineRepository": "hsoliwal/M3jdk21",
+  "baselineCommit": "eeb236ab208b2ca0d0c262bdfa0c4654ec9c8f25",
+  "baselineSourceTree": "407a890b0d1553d764850674d28365185728d316",
+  "donors": {
+    "counts": "87373f983d9517cce6ab3b2164ff53adf0c525dc",
+    "totals": "a1e863654708eb4a34353cf0672bedb9015a10c2",
+    "bimap": "f1b8ff89afb8e8ec108a88a9fd3402c6be148607",
+    "wrappers": "5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8",
+    "donation": "54fa2569d9445f9729f3e9aea874c42ef9e46cad"
+  },
+  "files": {
+    "m3/collections/bimap/canonical-source.json": {
+      "gitBlob": "37c075b2151fe36d3ceebbe4610ffa407b9fe931",
+      "sha256": "bbaa565e1d846cd29611e3d17b11574e08de1ad38a429c3a0afb3dc1a4f38b7a",
+      "bytes": 645
+    },
+    "m3/collections/bimap/catalogue.tsv": {
+      "gitBlob": "25c8d21e76b26789bee9720fcd16b63d0eb4e119",
+      "sha256": "a65ae9b56f99a2723e694471ac5c52cd2a8de9de1ed6d9109d4615a2d04b2f24",
+      "bytes": 3243
+    },
+    "m3/collections/bimap/name-mapping.tsv": {
+      "gitBlob": "2bd31c805a99dc508ac356af360c53aea1f45263",
+      "sha256": "d955136da7c747b862dc130c0409b0c5f16be8274b2583e4d64852e02c0d56d7",
+      "bytes": 621
+    },
+    "m3/collections/bimap/provenance.json": {
+      "gitBlob": "6e6e21ff4145f80cb95dd876f18ed737e2055d20",
+      "sha256": "0d77b354a5a6918c0ce7be4676215cc28b8743a6ea36d99fad21ba9d8f81ec78",
+      "bytes": 2040
+    },
+    "m3/collections/bimap/README.md": {
+      "gitBlob": "003cde1fc8afcd870d7da26178fc3f6ceda8c6de",
+      "sha256": "b7fc6450a49010922dc7abf16ed680f6ad932ecdb84e34f61b219e1f437326cb",
+      "bytes": 4605
+    },
+    "m3/collections/bimap/recipe/continuity-20261017-pom.xml": {
+      "gitBlob": "1ee0e653f169d140ac190892dbf6e5cc6a0ee9a5",
+      "sha256": "74273077aead4f860e7ee7fa2b3aaab31841540c0e6224dd465fe2dec0799276",
+      "bytes": 2225
+    },
+    "m3/collections/bimap/recipe/pom.xml": {
+      "gitBlob": "930e8770daaa073c4da0ca6a416be87c803d9498",
+      "sha256": "8e83fdf0f1d8e8319e584384dcf73b84142557c6d4c2b645b092fb14a3c9359f",
+      "bytes": 2179
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-bimap/M3BiMap.java.txt": {
+      "gitBlob": "6a705e1d9c33e7b0d6f0061e8154a0484ff8661d",
+      "sha256": "80aa788db958a34779f02559323e3d77268791eb82ababfacc42538217c6e4bc",
+      "bytes": 10762
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-bimap/M3BiMapNativeTest.java.txt": {
+      "gitBlob": "4fc45de54046877ad489dd256a9337aa751852ce",
+      "sha256": "a8678c86f440b2020fca7345d77a5ef5e951432032b0c766da3ee3ad44d198b6",
+      "bytes": 2690
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-bimap/M3BiMaps.java.txt": {
+      "gitBlob": "0d7691d6a5abb3eac929b7334640171e7bac4ee0",
+      "sha256": "ae16d7395c3325230bebe7d3f58765669c639f091fd1e06c4b069031affd5db8",
+      "bytes": 2764
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-bimap/M3BiMapTest.java.txt": {
+      "gitBlob": "49ca9ae0149c9981bc53ed6f0619410eb1d24712",
+      "sha256": "8b5171a387ba6f33a652f9a7dfd9f29e4bd40c9b87527d1c85b1323f775dba4a",
+      "bytes": 17675
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-bimap/manifest.tsv": {
+      "gitBlob": "c003b5f5c16b1e6af05f95716e15c013690105c0",
+      "sha256": "ba229591104afebc871176626fc64fff42d2a0c553ac24763fd178acc80980e4",
+      "bytes": 747
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/catalogue.tsv.txt": {
+      "gitBlob": "25c8d21e76b26789bee9720fcd16b63d0eb4e119",
+      "sha256": "a65ae9b56f99a2723e694471ac5c52cd2a8de9de1ed6d9109d4615a2d04b2f24",
+      "bytes": 3243
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/m3_bimap_consumer.c.txt": {
+      "gitBlob": "fc9f43c59e600e13f60a996a00214eeda3521b1a",
+      "sha256": "c6a073b211459f278d2674336ddc84ac28fe19324a0c3cbc30a44193eec84d1e",
+      "bytes": 2431
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/manifest.tsv": {
+      "gitBlob": "1c21edfe31a9305df6a5fd93491bdb186aef6ea8",
+      "sha256": "08f8d5e86bd54814ebb18c70119c08f37a5370f226213f4b8b64dab71d5b5113",
+      "bytes": 771
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/name-mapping.tsv.txt": {
+      "gitBlob": "2bd31c805a99dc508ac356af360c53aea1f45263",
+      "sha256": "d955136da7c747b862dc130c0409b0c5f16be8274b2583e4d64852e02c0d56d7",
+      "bytes": 621
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/provenance.json.txt": {
+      "gitBlob": "6e6e21ff4145f80cb95dd876f18ed737e2055d20",
+      "sha256": "0d77b354a5a6918c0ce7be4676215cc28b8743a6ea36d99fad21ba9d8f81ec78",
+      "bytes": 2040
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/README.md.txt": {
+      "gitBlob": "003cde1fc8afcd870d7da26178fc3f6ceda8c6de",
+      "sha256": "b7fc6450a49010922dc7abf16ed680f6ad932ecdb84e34f61b219e1f437326cb",
+      "bytes": 4605
+    },
+    "m3/collections/bimap/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-bimap/THIRD_PARTY_NOTICES.md.txt": {
+      "gitBlob": "eefaf472d4eb0b0384b4c0d5d2a6f7b33b5c51c7",
+      "sha256": "2fdc7f8a7518bdb96116f061fc4838ffdb33436bb3849c6b731a97c1e9253dc8",
+      "bytes": 827
+    },
+    "m3/collections/bimap/recipe/src/test/java/com/synexia/rewrite/M3BiMapRecipeTest.java": {
+      "gitBlob": "ed44382625a8c7db843495ef2e187412150b7816",
+      "sha256": "6f75bbd6ab478a0f2a2d712722f48299ccc4611b839b389e5cbd54402063bb44",
+      "bytes": 14090
+    },
+    "m3/collections/bimap/src/test/java/com/m3/collections/interop/M3BiMapNativeTest.java": {
+      "gitBlob": "4fc45de54046877ad489dd256a9337aa751852ce",
+      "sha256": "a8678c86f440b2020fca7345d77a5ef5e951432032b0c766da3ee3ad44d198b6",
+      "bytes": 2690
+    },
+    "m3/collections/bimap/src/test/java/com/m3/collections/interop/M3BiMapTest.java": {
+      "gitBlob": "49ca9ae0149c9981bc53ed6f0619410eb1d24712",
+      "sha256": "8b5171a387ba6f33a652f9a7dfd9f29e4bd40c9b87527d1c85b1323f775dba4a",
+      "bytes": 17675
+    },
+    "m3/collections/bimap/THIRD_PARTY_NOTICES.md": {
+      "gitBlob": "eefaf472d4eb0b0384b4c0d5d2a6f7b33b5c51c7",
+      "sha256": "2fdc7f8a7518bdb96116f061fc4838ffdb33436bb3849c6b731a97c1e9253dc8",
+      "bytes": 827
+    },
+    "m3/collections/bimap/verify.py": {
+      "gitBlob": "f1b8ff89afb8e8ec108a88a9fd3402c6be148607",
+      "sha256": "437a72353865a1e74d2a74b8b0882eb1523d9fae869a68f9c349e82fcce95692",
+      "bytes": 7039
+    },
+    "m3/collections/counts/catalogue.tsv": {
+      "gitBlob": "4e93200b41816c8bfa8b5d7c83aeb290c7dadd81",
+      "sha256": "751c208ef826ea47cf6f1ea0eedf55e859653cdd48d8341f926ff13e6f4383b1",
+      "bytes": 8873
+    },
+    "m3/collections/counts/M3_RECIPE_FIRST_INVARIANT.md": {
+      "gitBlob": "c700d958e8b3467ae1489a11e0afe80b8c7b60e5",
+      "sha256": "71950f026e1e11416388922455ce9ec33ac8f1424eb83089676d22807251dda9",
+      "bytes": 2165
+    },
+    "m3/collections/counts/provenance.json": {
+      "gitBlob": "f01533cc2ed65c3ea72bb6bb4956375624df24f3",
+      "sha256": "e029b5ecb907d5296ff8fff4ea1808e617df5119800a01f687082817ec1b5eef",
+      "bytes": 1041
+    },
+    "m3/collections/counts/README.md": {
+      "gitBlob": "e7d58ab473045b4e28f2741a9271910b27a7c36a",
+      "sha256": "8003a4114c6aeb419f4929a317f85c3e13a78d96823533f91642336f278b0133",
+      "bytes": 5608
+    },
+    "m3/collections/counts/recipe/continuity-20261017-pom.xml": {
+      "gitBlob": "64146aef043d938a87966798a523b009c2795036",
+      "sha256": "724923e21b248c761d2ee577738fe2fa0a2732b608f81406cbf67f9eef3297db",
+      "bytes": 2126
+    },
+    "m3/collections/counts/recipe/pinned-engine/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java": {
+      "gitBlob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+      "bytes": 13805
+    },
+    "m3/collections/counts/recipe/pinned-engine/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java": {
+      "gitBlob": "2db1257a40d21be06ba2a67da87aff0311183809",
+      "sha256": "53abb7f4fcd9f2f3b4b6cdfce76d40ed313d0446c322cc088310e84ff23311bc",
+      "bytes": 12981
+    },
+    "m3/collections/counts/recipe/pom.xml": {
+      "gitBlob": "0f5b96d157d6500032ad0d0e5b6445a7d1ae1ec6",
+      "sha256": "9f78dd02b051ec873d4a9a4307fafe2724473d3548117d2c7c00bec83b1e74bc",
+      "bytes": 2080
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3AllocationFailureProbe.java.txt": {
+      "gitBlob": "a2c8d7323f01fca9b8951c59322782ba49eb5364",
+      "sha256": "f39eec9cacb733583e9b27b5a93809ea7b2362145e58237d7e00a263034ed95c",
+      "bytes": 4198
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3BagInteropTest.java.txt": {
+      "gitBlob": "a15150ccdb812ec544bdc99946c7617535dedba9",
+      "sha256": "c80f10c0ef66b374c0ed15e7d0c6e23df9cd5dc22193ec4bb49330c1197dd6f5",
+      "bytes": 6807
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3CountedCatalogue.java.txt": {
+      "gitBlob": "ffc026d13caa254e8eabed974eca365669c3e7a2",
+      "sha256": "17b78b696f34752a000c822e6456f6c568609559f6d4812f16e976bc8655c36a",
+      "bytes": 1391
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3CountedCollectionsTest.java.txt": {
+      "gitBlob": "f8eb02d80056809d7771bb2e40f97952ba9d6788",
+      "sha256": "34bca4ca00e8663934c244a38cb950ad4bdc63daf76eae80095a7b7841be5320",
+      "bytes": 6832
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3CountLanes.java.txt": {
+      "gitBlob": "1d260fdbfe5a961e96ecf76f0882d93ec8f598d0",
+      "sha256": "1da43b83b932fa4f38d60f1564214e8552ddba99a36da4f8e9179ef932da94c8",
+      "bytes": 3424
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3CountLanesTest.java.txt": {
+      "gitBlob": "6d1e3be27b430f633d7594c3a312aba6beb8c05a",
+      "sha256": "d59069893d0672e70b5e788e4bd735e71e57f83089aef5d292a3507a02ee3d1d",
+      "bytes": 4057
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3GuavaLongMultiset.java.txt": {
+      "gitBlob": "4bef22568f1d2f87a6b6758109d04a8194f43805",
+      "sha256": "5901c60287695c4ef3480c3a5c341b658c84fbb8696fc0048552e11278685194",
+      "bytes": 10270
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3LibraryBags.java.txt": {
+      "gitBlob": "f22e5603a10d1efd57cb9b48ffe122ad4d775ac3",
+      "sha256": "57aea8a1ed8b2fcc5ebb5b64551826e5db392d67f9e78ced5d4fd4dcfa1b4eef",
+      "bytes": 2284
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3LongBag.java.txt": {
+      "gitBlob": "9483047e48b4ba926093c827bef92ff40fb6420d",
+      "sha256": "ba3c02266256fa5e8588e4e9fb94c0d37acd1fd8f7674339fc7cbe791e364ee1",
+      "bytes": 6944
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3LongHashSet.java.txt": {
+      "gitBlob": "d2fca03ba49ef568a900320f99bac690bc3eaea5",
+      "sha256": "15061216d11767e84db22edeb1a6050a632a8299360ab31793d6a3a0fccd18cf",
+      "bytes": 7536
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3LongLinkedHashSet.java.txt": {
+      "gitBlob": "99a41e8bdfdf92941ceb979e3d7354c9b291df90",
+      "sha256": "9024bb2aa1e9021249fa4361d675ae6687cab203c909a989949c27a0ccdc1b3f",
+      "bytes": 12233
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/M3LongLongHashMap.java.txt": {
+      "gitBlob": "ad7cd2dca56f42d8b39175dc25a65409f050097d",
+      "sha256": "26e554ba8232799e2c5a9f1563358ef39f7639abd72effabe8eae1bd127b4805",
+      "bytes": 9364
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/manifest.tsv": {
+      "gitBlob": "4dc48b87034e242f9e04f20c95189be887273311",
+      "sha256": "8ceff2bc6cfd8662a8a6bd5498608ac8f47981011755fc3875cc18bf0ebb1d67",
+      "bytes": 2346
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/pre/M3LongHashSet.java.txt": {
+      "gitBlob": "1fe9ac1bfa11cf6a626a749c37d64ccec0ed09df",
+      "sha256": "8d1226aac98d797e164c1844886435df3602933c287db597eb2fe275936330eb",
+      "bytes": 7249
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/pre/M3LongLinkedHashSet.java.txt": {
+      "gitBlob": "28c864a69a384dbfe6fbc499eff7da4015264a3f",
+      "sha256": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef",
+      "bytes": 11685
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-counted-receiver/pre/M3LongLongHashMap.java.txt": {
+      "gitBlob": "b1d85622c2e19db069d0b2a64fb8011b5c01be34",
+      "sha256": "a1b007cd7676fe6fced9fe8330b39f402c6355d29138e0e84185becaa47d7c36",
+      "bytes": 9090
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-counted-receiver/catalogue.tsv.txt": {
+      "gitBlob": "4e93200b41816c8bfa8b5d7c83aeb290c7dadd81",
+      "sha256": "751c208ef826ea47cf6f1ea0eedf55e859653cdd48d8341f926ff13e6f4383b1",
+      "bytes": 8873
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-counted-receiver/m3_count_lanes.c.txt": {
+      "gitBlob": "fcb85a55c9ff3d19faa1de991a109e3b3f3c3582",
+      "sha256": "e2797a2750d45cada0ec468fb92040bd0c2da460a76a0a893a31fe7a4894a920",
+      "bytes": 3273
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-counted-receiver/M3_RECIPE_FIRST_INVARIANT.md.txt": {
+      "gitBlob": "c700d958e8b3467ae1489a11e0afe80b8c7b60e5",
+      "sha256": "71950f026e1e11416388922455ce9ec33ac8f1424eb83089676d22807251dda9",
+      "bytes": 2165
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-counted-receiver/manifest.tsv": {
+      "gitBlob": "04cb35660051cce09a83b66e010a58d98eb3b724",
+      "sha256": "b7772244b4fc08eec4ebcc324ad93eec8847c26186cf1aaa3453b40c361162c6",
+      "bytes": 560
+    },
+    "m3/collections/counts/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-counted-receiver/provenance.json.txt": {
+      "gitBlob": "f01533cc2ed65c3ea72bb6bb4956375624df24f3",
+      "sha256": "e029b5ecb907d5296ff8fff4ea1808e617df5119800a01f687082817ec1b5eef",
+      "bytes": 1041
+    },
+    "m3/collections/counts/recipe/src/test/java/com/synexia/rewrite/M3CountedCollectionRecipeTest.java": {
+      "gitBlob": "b73f82e6d92941b99ca72601a9962937dbb48f22",
+      "sha256": "ca20f76ab7a45fc282740539686a5bc3f8569cd27ce50ef0062c50666ae16317",
+      "bytes": 12625
+    },
+    "m3/collections/counts/src/main/java/com/m3/collections/tooling/M3CountedCatalogue.java": {
+      "gitBlob": "ffc026d13caa254e8eabed974eca365669c3e7a2",
+      "sha256": "17b78b696f34752a000c822e6456f6c568609559f6d4812f16e976bc8655c36a",
+      "bytes": 1391
+    },
+    "m3/collections/counts/src/test/java/com/m3/collections/interop/M3BagInteropTest.java": {
+      "gitBlob": "a15150ccdb812ec544bdc99946c7617535dedba9",
+      "sha256": "c80f10c0ef66b374c0ed15e7d0c6e23df9cd5dc22193ec4bb49330c1197dd6f5",
+      "bytes": 6807
+    },
+    "m3/collections/counts/src/test/java/com/m3/collections/M3AllocationFailureProbe.java": {
+      "gitBlob": "a2c8d7323f01fca9b8951c59322782ba49eb5364",
+      "sha256": "f39eec9cacb733583e9b27b5a93809ea7b2362145e58237d7e00a263034ed95c",
+      "bytes": 4198
+    },
+    "m3/collections/counts/src/test/java/com/m3/collections/M3CountedCollectionsTest.java": {
+      "gitBlob": "f8eb02d80056809d7771bb2e40f97952ba9d6788",
+      "sha256": "34bca4ca00e8663934c244a38cb950ad4bdc63daf76eae80095a7b7841be5320",
+      "bytes": 6832
+    },
+    "m3/collections/counts/src/test/java/com/m3/collections/M3CountLanesTest.java": {
+      "gitBlob": "6d1e3be27b430f633d7594c3a312aba6beb8c05a",
+      "sha256": "d59069893d0672e70b5e788e4bd735e71e57f83089aef5d292a3507a02ee3d1d",
+      "bytes": 4057
+    },
+    "m3/collections/counts/totals/catalogue.tsv": {
+      "gitBlob": "c2c556aa2e9dde1308491810e70c144c559736d2",
+      "sha256": "c672cd711c623a69f534fb306e82cf043052f97fc890c8f2af7cd3adb520152a",
+      "bytes": 2389
+    },
+    "m3/collections/counts/totals/provenance.json": {
+      "gitBlob": "9942334663b5f75730fb8ddf8c7c8aec1fe9d70e",
+      "sha256": "ac6c9af1d2152613de02ca4506859e56f990057dedfad2606b2e448ad8fc98cb",
+      "bytes": 3708
+    },
+    "m3/collections/counts/totals/README.md": {
+      "gitBlob": "cd27d517246ac10612c3216dedb8fa73b0e4cae8",
+      "sha256": "a28f425678ffbb9c560fc35ce4e87a28aed0f46fb2f71fdffdd7e5afe743fc21",
+      "bytes": 3770
+    },
+    "m3/collections/counts/totals/recipe/continuity-20261017-pom.xml": {
+      "gitBlob": "029393ca974421827cfc9f7ed19d91cd7148c6c8",
+      "sha256": "fc09aabcd29a82b6d4af8bcf1513c5ef04a945ccceada543c2ba20a7b52dca8a",
+      "bytes": 2154
+    },
+    "m3/collections/counts/totals/recipe/pom.xml": {
+      "gitBlob": "28cc6cb96586bb158ea4d7d8901cf64c53c86220",
+      "sha256": "9c49eb0f1acfdb693a2e4f0919bf0ce81425d9ae0fdb4d92918c482b7b240653",
+      "bytes": 2108
+    },
+    "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-count-totals/M3CountTotals.java.txt": {
+      "gitBlob": "31ce540046a34db05d65a950ffd6fae48f5a2d81",
+      "sha256": "40ddf920cdf8341e976538e958d5f103cbf9afb5c69f03b55baeff8c5f5ba252",
+      "bytes": 5337
+    },
+    "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-count-totals/M3CountTotalsAllocationProbe.java.txt": {
+      "gitBlob": "7684db3d4224dcf211db6e9156cbbb2d62f26f67",
+      "sha256": "003894ee1ccc7bf034ad3647661945afbdc85c0c99a748fd96191cb3b24d34d3",
+      "bytes": 3467
+    },
+    "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-count-totals/M3CountTotalsTest.java.txt": {
+      "gitBlob": "67d23af6cc9c743c4a82a673d6ff4ea73fedc5b6",
+      "sha256": "e32bd40566ad07636b412e82ad92df93021ad40de38468efe7c4b2a20caf0b5b",
+      "bytes": 9751
+    },
+    "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-count-totals/manifest.tsv": {
+      "gitBlob": "885429642a4a2b1b0ff397e20926b0ed4ed4fa5b",
+      "sha256": "7a85c01ebf7790e563c206af986026e3d492bfd266e63ff2d95aa3a7bae4f776",
+      "bytes": 618
+    },
+    "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-count-totals/catalogue.tsv.txt": {
+      "gitBlob": "c2c556aa2e9dde1308491810e70c144c559736d2",
+      "sha256": "c672cd711c623a69f534fb306e82cf043052f97fc890c8f2af7cd3adb520152a",
+      "bytes": 2389
+    },
+    "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-count-totals/m3_count_totals.c.txt": {
+      "gitBlob": "d987d5860dec30d042cacbe833b244c4e54d79ca",
+      "sha256": "bf1fc7d87f797c4047da75fc23ffc01d6f2fc5a89f1dcf9c70a819ffcf493ebd",
+      "bytes": 2997
+    },
+    "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-count-totals/manifest.tsv": {
+      "gitBlob": "c26295707344995d22ff848404b86cdd5c8c0f01",
+      "sha256": "4714cef19d6493bf2d7b622ff1f37406e9937f7161525afc190b1cd2d8735eda",
+      "bytes": 556
+    },
+    "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-count-totals/provenance.json.txt": {
+      "gitBlob": "9942334663b5f75730fb8ddf8c7c8aec1fe9d70e",
+      "sha256": "ac6c9af1d2152613de02ca4506859e56f990057dedfad2606b2e448ad8fc98cb",
+      "bytes": 3708
+    },
+    "m3/collections/counts/totals/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-count-totals/README.md.txt": {
+      "gitBlob": "cd27d517246ac10612c3216dedb8fa73b0e4cae8",
+      "sha256": "a28f425678ffbb9c560fc35ce4e87a28aed0f46fb2f71fdffdd7e5afe743fc21",
+      "bytes": 3770
+    },
+    "m3/collections/counts/totals/recipe/src/test/java/com/synexia/rewrite/M3CountTotalsRecipeTest.java": {
+      "gitBlob": "69f7e1fc85174740ca4fd29dc27231c8b0a923d7",
+      "sha256": "6a6e0d9b5197abc7d110eb50e19fb5bd436b20c5bc6a559c00c546ceb4e7c228",
+      "bytes": 13023
+    },
+    "m3/collections/counts/totals/src/test/java/com/m3/collections/M3CountTotalsAllocationProbe.java": {
+      "gitBlob": "7684db3d4224dcf211db6e9156cbbb2d62f26f67",
+      "sha256": "003894ee1ccc7bf034ad3647661945afbdc85c0c99a748fd96191cb3b24d34d3",
+      "bytes": 3467
+    },
+    "m3/collections/counts/totals/src/test/java/com/m3/collections/M3CountTotalsTest.java": {
+      "gitBlob": "67d23af6cc9c743c4a82a673d6ff4ea73fedc5b6",
+      "sha256": "e32bd40566ad07636b412e82ad92df93021ad40de38468efe7c4b2a20caf0b5b",
+      "bytes": 9751
+    },
+    "m3/collections/counts/totals/verify.py": {
+      "gitBlob": "a1e863654708eb4a34353cf0672bedb9015a10c2",
+      "sha256": "67c9994f256b8bea4ee4460c2c064594099023090c92afc56394ffd9f2ab98f7",
+      "bytes": 6681
+    },
+    "m3/collections/counts/verify.py": {
+      "gitBlob": "87373f983d9517cce6ab3b2164ff53adf0c525dc",
+      "sha256": "54f0864318f3a175b5ba2a2d0d43691ac5dbb90d4918c428dc4303fa68dfa09f",
+      "bytes": 9825
+    },
+    "m3/collections/interop/current-continuity-pom.xml": {
+      "gitBlob": "9950ae6ed4e57c9b5744bf1100cc0f39cb0d9d73",
+      "sha256": "86e4b90bef32e903794cd4bea7edd2a67b567dcf679146e26be0b74f2fba1ca5",
+      "bytes": 3074
+    },
+    "m3/collections/interop/pom.xml": {
+      "gitBlob": "f105d56a842c3aa75e9e7a027d4c0d893699d102",
+      "sha256": "7144e37b9e553d4644ea1e8e997448c3a65dcb627b85cb9b9ae650d6c2500977",
+      "bytes": 3028
+    },
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3BiMap.java": {
+      "gitBlob": "6a705e1d9c33e7b0d6f0061e8154a0484ff8661d",
+      "sha256": "80aa788db958a34779f02559323e3d77268791eb82ababfacc42538217c6e4bc",
+      "bytes": 10762
+    },
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3BiMaps.java": {
+      "gitBlob": "0d7691d6a5abb3eac929b7334640171e7bac4ee0",
+      "sha256": "ae16d7395c3325230bebe7d3f58765669c639f091fd1e06c4b069031affd5db8",
+      "bytes": 2764
+    },
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaLongMultiset.java": {
+      "gitBlob": "4bef22568f1d2f87a6b6758109d04a8194f43805",
+      "sha256": "5901c60287695c4ef3480c3a5c341b658c84fbb8696fc0048552e11278685194",
+      "bytes": 10270
+    },
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBags.java": {
+      "gitBlob": "f22e5603a10d1efd57cb9b48ffe122ad4d775ac3",
+      "sha256": "57aea8a1ed8b2fcc5ebb5b64551826e5db392d67f9e78ced5d4fd4dcfa1b4eef",
+      "bytes": 2284
+    },
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java": {
+      "gitBlob": "35d419cc78f4fe583ea97cab3026d1dbf037f795",
+      "sha256": "fa144a8c8617f190cdb1848bc28d3c9f6ae4302666a00c8ea3e904f25afc06fd",
+      "bytes": 6987
+    },
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollectors.java": {
+      "gitBlob": "1c358f17cf8bc90024669b74f969c6d798c2b31f",
+      "sha256": "8836aaca2113c3d25bffbf1a226394ffa0f6a7c7fbba826715a0aa96c5500a19",
+      "bytes": 6469
+    },
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringMultiValueMap.java": {
+      "gitBlob": "baf64557424e17a2650d44f697f6dd6253edb55a",
+      "sha256": "cfd7a51bdce14f3e8f2b875d529006c3863049d10087a18b14ccad45f0fd669a",
+      "bytes": 3628
+    },
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java": {
+      "gitBlob": "141661a24e962506a2f1f87106e7d7eab15e5d7c",
+      "sha256": "5ece9a369bcf5a223cb163ed0857534600fcd53bcc881f239956be15a4200f40",
+      "bytes": 15949
+    },
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryCollectionsTest.java": {
+      "gitBlob": "aa1a5ebf5903ea2296a427d1b1d1be45d13552b5",
+      "sha256": "4bebee17ef96cefd2c779c76a0b190e27de311d136dec2de0fc5c05161ac199a",
+      "bytes": 16696
+    },
+    "m3/collections/LICENSE": {
+      "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    "m3/collections/name-mapping.json": {
+      "gitBlob": "7b5622619035dbfe12218da878b5b5df21ea2ad0",
+      "sha256": "e976621377edae456e5c69308208b9a193d81c2d221cd137afefcd2d07e67b94",
+      "bytes": 60487
+    },
+    "m3/collections/NOTICE": {
+      "gitBlob": "c35cf82657474282058afc7ffbcb98c46fd865e3",
+      "sha256": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+      "bytes": 423
+    },
+    "m3/collections/pom.xml": {
+      "gitBlob": "3c408446a3841282754f06d82819c285a23acd8a",
+      "sha256": "d216e3da4ac02615ef46f8b48803174e24c11939ad5b826be9ca9d7df6bbebf6",
+      "bytes": 11931
+    },
+    "m3/collections/provenance.json": {
+      "gitBlob": "e7cea52684a439c9a090d700279894150e04215a",
+      "sha256": "b5f4029a3b44a064d848f23ed513882e58d5e04b23f2a123ea268a18705fa9c0",
+      "bytes": 14538
+    },
+    "m3/collections/qualification/installed-source-enum-set-20261014.tsv": {
+      "gitBlob": "5dc9c51a332e8fe5179d3562e40adf5b4d876922",
+      "sha256": "046e3aa7f4d9523a72657942fac62bcb7d7bb6eaafb928dbe1c1d87afed1252c",
+      "bytes": 13599
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java": {
+      "gitBlob": "67a1bf136c21ab2b347f0a33ec4784e17c0eb245",
+      "sha256": "79cac12007699fb2983853af40c27e9b00d2475390d9d1f36c245ddfe7b317d3",
+      "bytes": 11708
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3Address28.java": {
+      "gitBlob": "2dda612d7cfdc39d8138c17a85308dc9d084b28b",
+      "sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56",
+      "bytes": 2595
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3BitLane28.java": {
+      "gitBlob": "bf44fbf34b893f3919fa1919064869c5aac7d0c3",
+      "sha256": "1964daa513d98b295ad13ad820519a56af6f29916063860c4c8ec8bf7d3baaa2",
+      "bytes": 7589
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3BlockingDeque.java": {
+      "gitBlob": "b2c730f6d666a81fb1ea1bd2a8f220820c1dfa35",
+      "sha256": "ac4ae1d0d2e9d10d39f15226d19bb92fd34d60da37bd0a8c822b731836c10577",
+      "bytes": 11505
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java": {
+      "gitBlob": "44a791db2fac00214479e7020ec3c509f70d7ef2",
+      "sha256": "3ccd42c38929179e855bcbfa1a6f54f9edb6968a210c65d013ed434ee592e680",
+      "bytes": 5738
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3Collections.java": {
+      "gitBlob": "3d2f5aa53bda55293b3254bed3d526b896cbd044",
+      "sha256": "aa162790de8cb17341ba751c3fef6226196807157bf14d9f6516d3eaf687e926",
+      "bytes": 11283
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java": {
+      "gitBlob": "8de1cbc3e1255cc6f9d73b068a164a991adcad15",
+      "sha256": "cfe0eb7335e3945f35b4a9763e11e0a7dff6c672f7014733f15e876b0b06909e",
+      "bytes": 20385
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ConcurrentBitSet.java": {
+      "gitBlob": "feb93280cbc1481c40c52156ffc50e2be5e35b54",
+      "sha256": "bb1486f22518957d1fa1f951ef78b312364de5a736aff17ae5a543fe1765a4c5",
+      "bytes": 6285
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ConcurrentIntLane28.java": {
+      "gitBlob": "bc2004e2c4802c3338c0099d537b94fb49dc4363",
+      "sha256": "baaa8de6567da94efba77b1363b5629755e5394a6fe951976dc552622ddd0573",
+      "bytes": 7533
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongLane28.java": {
+      "gitBlob": "176991710420d96aace2774c59fe0137d2b1ba4e",
+      "sha256": "727666e9ad92ab6ab1a41e625307baa70ef08c1397954c2aa362282a137c46ea",
+      "bytes": 7583
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongMap.java": {
+      "gitBlob": "bbe25dfd008fe143806c8c3aefac6d33e413aec2",
+      "sha256": "00b8882f22b664552ae9dae4c37ab243b7fc1fb8159b80b5b74e180b4dfd7698",
+      "bytes": 6637
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongSet.java": {
+      "gitBlob": "1dd5331b42efa855a51ba31d40380b0064231983",
+      "sha256": "7a7e71695a1106f6cefc43e2ba0883eec78abf44f4bf72ead6d094991d6366d6",
+      "bytes": 3876
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3CountLanes.java": {
+      "gitBlob": "1d260fdbfe5a961e96ecf76f0882d93ec8f598d0",
+      "sha256": "1da43b83b932fa4f38d60f1564214e8552ddba99a36da4f8e9179ef932da94c8",
+      "bytes": 3424
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3CountTotals.java": {
+      "gitBlob": "31ce540046a34db05d65a950ffd6fae48f5a2d81",
+      "sha256": "40ddf920cdf8341e976538e958d5f103cbf9afb5c69f03b55baeff8c5f5ba252",
+      "bytes": 5337
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3DefaultProgressMonitor.java": {
+      "gitBlob": "2c5f52b913ed7d4207645871f522ad63c2bf57df",
+      "sha256": "f0b52dec2ed7166f242bdd1076792dc3187fc2353d237af59df7b22403bf3d64",
+      "bytes": 3629
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java": {
+      "gitBlob": "43623113339ffff197d682f2c497b0f07abd4b25",
+      "sha256": "8be53dd0b4ccd1e0f226d4ad7a667bd986b21e51d150bea6f8ddae072bdf4966",
+      "bytes": 8229
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3EnumSet.java": {
+      "gitBlob": "3b9cd8179549116524b7f9252a29ba185c22fc98",
+      "sha256": "a4c359c8035efdf31edbe6f5c36808984bf3de628e9f7c293429a1c7578ce77c",
+      "bytes": 9254
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java": {
+      "gitBlob": "8fec2f88d641d15e90ca2ad522749383c1926e59",
+      "sha256": "1dff497079e768fda574a349cc521732d69cbacbecc19deba6888d909844f1cb",
+      "bytes": 20246
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": {
+      "gitBlob": "240bbfb62ca949bfbd8abb0061cccad6630f7888",
+      "sha256": "8c1aaba72372c6caecfa35d4121a0b518888d64933bef428a8e61c15b3a746d9",
+      "bytes": 5949
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3IntCollection.java": {
+      "gitBlob": "bd6aff905cf47e64ccd76bc19acc899ef93742af",
+      "sha256": "2b489fd313a90881a5da424f4664e37842dbf244178e5a5b1c780c9639c70f81",
+      "bytes": 2521
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java": {
+      "gitBlob": "e4272ab154175d115873d38f305a8fdf380d1f7d",
+      "sha256": "5f28ee01edbbafd12b8ea12d69aa523585685cc8c70b3c8ccff0be1e45353429",
+      "bytes": 7129
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java": {
+      "gitBlob": "f1329b55c234a65faad61be2a1a557b2a9b2dcd8",
+      "sha256": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484",
+      "bytes": 304
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java": {
+      "gitBlob": "f944165b0ddd1b4c45b656a3e522e0038676d17e",
+      "sha256": "09bb75b166db75286aed1283e9e2f39fc6341fa0333b3ec7190bff0b0d52b899",
+      "bytes": 9723
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3IntIterator.java": {
+      "gitBlob": "366f92e9da842e00e346872f386ecfede38c5cb6",
+      "sha256": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63",
+      "bytes": 543
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3IntLane28.java": {
+      "gitBlob": "4e1e7eb7f2212493eecd544c3e7174ac1ca33232",
+      "sha256": "771b1450d137874e7c3e08d4e9bee405a6cf88aa6695a9fd4c3616be4ae34d18",
+      "bytes": 6912
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java": {
+      "gitBlob": "49404c6e9b450da64228ddb4af958770f9060382",
+      "sha256": "523534ffb1824ffbdd7ac4f1dce04e9688f3f8a9b7ce637796100070df645b92",
+      "bytes": 331
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java": {
+      "gitBlob": "00e9190be49f7071504a477f0aad4eabd46f22d1",
+      "sha256": "43df8c19ca96e4da9715547ed3e2b2bd1751c26c3dc0b56af7dcfa8d1ce5cddf",
+      "bytes": 10410
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java": {
+      "gitBlob": "3ee7233f27105d326832e212b01b8da17142569e",
+      "sha256": "71f6dcf76eeab67a78c902efbcd3a781931c49477656f84659245c9c8fd75d59",
+      "bytes": 6371
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LazyEventBits.java": {
+      "gitBlob": "e0605534823bd2933b9a3f92f2481a1fef794b33",
+      "sha256": "e62aa39ad9da31a186235de8cbc63a83c84159833c1bab25747073bc8955289f",
+      "bytes": 1303
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LazyEventGranularity.java": {
+      "gitBlob": "7e031ea2e06900aa6326d6d587ad66f290911d6a",
+      "sha256": "0d5d821ebc7626e6e07dc4eba0146a2c36a5db906c9010ca1745a73e27cb2020",
+      "bytes": 989
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LazyEventPolicy.java": {
+      "gitBlob": "aa79f1cc24bc83a5c2db5f7427a3a461715af380",
+      "sha256": "e2504269d75b6d79b2e0fe2bcc3ce02719ff6ee326d8db478a083bc38dac1a2f",
+      "bytes": 2488
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LazyEvents.java": {
+      "gitBlob": "c2a0aa479a4aa89b029ab9d99e22a3a27557b392",
+      "sha256": "35d0a22624feb3dddbe8ba11235772d3579a72fc7128e17c15b3b596b7c6c28d",
+      "bytes": 1275
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LazyEventSink.java": {
+      "gitBlob": "f0085ec59bbedda0ca18d752996ad489ec976d5c",
+      "sha256": "2a45fb78a9d93614a9d2ed2f5bc1e42e922816fc4ae4123f4d2ac07288134e8d",
+      "bytes": 1190
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LazyEventSource.java": {
+      "gitBlob": "a21d4701650880ae5db7c569427ff64ec2195b92",
+      "sha256": "6e779fbed83ae72bb75588ad77028c9c644ae176284877e824828e3f5b97bf27",
+      "bytes": 575
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LazyOperation.java": {
+      "gitBlob": "9d8939d6d768c3c1861a532d185e8c27afa35994",
+      "sha256": "588937f401355bac4971394a185e16e89eb5e32e2a8a8aa1b7ec761fb242d667",
+      "bytes": 640
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LazyValueProvider.java": {
+      "gitBlob": "5bb4a035f57206bb82dc6b19657a0f39dc2d5fe8",
+      "sha256": "a0daba82e6787bcacbf3811a04a094f9442c88d2ad3513e3029a9b0767f95b66",
+      "bytes": 1357
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LazyValueState.java": {
+      "gitBlob": "d13625a82d623a5aa99fee498e7b5afe793f504a",
+      "sha256": "c3374b459647735929490b6c01b633538e3232237e4dd52c565b4e95df0ddca4",
+      "bytes": 10835
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java": {
+      "gitBlob": "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
+      "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
+      "bytes": 8702
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LinkedHashSet.java": {
+      "gitBlob": "e1ac806d1ebe8aac1b9efe7bcfbaa3f675e7d0d6",
+      "sha256": "b429ed027228bdb39b366b7023630a4a4da7fbef660386798083f4f3e341c757",
+      "bytes": 2467
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LinkedList.java": {
+      "gitBlob": "da39d792baf7311691d2d6e8398adf62f3aa88a8",
+      "sha256": "31efffe0d25132b393178bec38906e5b977d8939a246a59115afeccb6a23e11b",
+      "bytes": 9164
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LockedMap.java": {
+      "gitBlob": "17cdc6d3bba0093fba9f598f74219c90706f05be",
+      "sha256": "ab4e57cd0e256e427a21cfbff9bd1c9e910d5f971d7d59051f8d25ec8347fbca",
+      "bytes": 9231
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LockedTreeMap.java": {
+      "gitBlob": "374960e9edfd4c1bbcc0951c4592d3ffd1b31f70",
+      "sha256": "26abeb1427bd90c278549a29f62c2b261f4e286fd36e7eb64a46bb5cdf24efd9",
+      "bytes": 3957
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LockedTreeSet.java": {
+      "gitBlob": "fb472120f4e93fcf8ca474e390c89aaef63fc9a6",
+      "sha256": "060c8971d038ef82e80197864e00302c898d11d26a01b60791bf383954a79e09",
+      "bytes": 3413
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongArena28.java": {
+      "gitBlob": "b265551ff952606326e25c0361bc6f35c72adedf",
+      "sha256": "f797998ca57b353f7c44ae48f3d65eeaddec6182066cec0f56c8526d71355e60",
+      "bytes": 2316
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java": {
+      "gitBlob": "cfe73fe987ec59d906807f8a7580bba8d371a946",
+      "sha256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84",
+      "bytes": 10605
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java": {
+      "gitBlob": "0ecf0a20c0f1195f79632e261de54117e204da42",
+      "sha256": "290a9037d22957983080b63bbf32d50286fc71a2a2e2a8ff1a6d16239617838c",
+      "bytes": 11577
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongBag.java": {
+      "gitBlob": "9483047e48b4ba926093c827bef92ff40fb6420d",
+      "sha256": "ba3c02266256fa5e8588e4e9fb94c0d37acd1fd8f7674339fc7cbe791e364ee1",
+      "bytes": 6944
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongCollection.java": {
+      "gitBlob": "d0b389681ade738e97426d950b6291c746912cf0",
+      "sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
+      "bytes": 2310
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java": {
+      "gitBlob": "30a9d1b1b3ae781c4cefa543a1b24fd9c6c62f58",
+      "sha256": "37755091b46aa1c21ea8ae56596f74209512f4ccc58bd1de702071fa3cb41cb3",
+      "bytes": 9502
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongDeque.java": {
+      "gitBlob": "7fb1dc4bcd5275c703a19f36062ae5c66b3d2f43",
+      "sha256": "ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272",
+      "bytes": 1896
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java": {
+      "gitBlob": "9ccb1286c23e4532585541ad212b08eb82fe2f67",
+      "sha256": "cf9f15e9712b169768be2611a9eae98d317d47b07b7494b168bf81988e678341",
+      "bytes": 5476
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java": {
+      "gitBlob": "d2fca03ba49ef568a900320f99bac690bc3eaea5",
+      "sha256": "15061216d11767e84db22edeb1a6050a632a8299360ab31793d6a3a0fccd18cf",
+      "bytes": 7536
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongIterator.java": {
+      "gitBlob": "44778a63d99c5b1f99adee536b954a4ebb8c64f3",
+      "sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+      "bytes": 554
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongLane28.java": {
+      "gitBlob": "8616ab397be434e947a3148ea7b02e946c710e99",
+      "sha256": "5e35c6c646389c582585b684a4e6224bb968cf2f7b669598eb88920ab1538960",
+      "bytes": 7204
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongLaneStore28.java": {
+      "gitBlob": "bc67c1f6d4da60c330c2d130cfa69b9c05d5b814",
+      "sha256": "e12261ea8149c9b6cedcfb08915699ec344a57eaed15f68060a9927717eb44a1",
+      "bytes": 4470
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java": {
+      "gitBlob": "99a41e8bdfdf92941ceb979e3d7354c9b291df90",
+      "sha256": "9024bb2aa1e9021249fa4361d675ae6687cab203c909a989949c27a0ccdc1b3f",
+      "bytes": 12233
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongLinkedList28.java": {
+      "gitBlob": "f92fd3b564b53ee7bee422db4ce7b6b63a0860eb",
+      "sha256": "2db7c6ba3342a58fdce49c3e988ded51ece2de336575d225edb6cca75cd483c2",
+      "bytes": 5940
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongList.java": {
+      "gitBlob": "df2d2741b67987d93deefcd75f139d5648eb4dc2",
+      "sha256": "7da7f46ea6bfb6dee64fe8a4eaeb914b07e537d10c3cb08ed20f440b1cfcd2dd",
+      "bytes": 1992
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java": {
+      "gitBlob": "a1a620d464f7b29bb8a5e801e51a1ce9592d3f7f",
+      "sha256": "c456dc750c27dc100df3a032a422902288cb155645996703a9565ce85bcb2003",
+      "bytes": 1919
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java": {
+      "gitBlob": "b1c01d1afacc76bd338179398ab42835e16992fa",
+      "sha256": "a9be525afc8c71fa191625dc69c60f76273299832744392435a5739006c8d15c",
+      "bytes": 326
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java": {
+      "gitBlob": "ad7cd2dca56f42d8b39175dc25a65409f050097d",
+      "sha256": "26e554ba8232799e2c5a9f1563358ef39f7639abd72effabe8eae1bd127b4805",
+      "bytes": 9364
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java": {
+      "gitBlob": "2fb403549f2baf0afe5b04743647c26ebd4cce80",
+      "sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c",
+      "bytes": 6107
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongQueue.java": {
+      "gitBlob": "8fcb61bd6a8a5077008ac0102f44f28035096bec",
+      "sha256": "50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8",
+      "bytes": 2189
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongSequence.java": {
+      "gitBlob": "26ca657bd372e3a70ed4ee84a216e9a78b95dba0",
+      "sha256": "d7cf703705bb68d1ff6c2455d7e94533baedf5c89a776f10e729c7a9410321eb",
+      "bytes": 1163
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java": {
+      "gitBlob": "c613bf12e479d1b206ee0b4a290c6f10f263547e",
+      "sha256": "257a69f75483df729add39767532718f96ac3c9917bdadbe9a4be08f32caf933",
+      "bytes": 561
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java": {
+      "gitBlob": "9a7813e5aa6f85fcf1cc781940e385a2993b4e99",
+      "sha256": "b2b9f26e5a353c602e50054cf5f66d4ce04e3ed989aefdaab44ab181be8f3a35",
+      "bytes": 9376
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongStack.java": {
+      "gitBlob": "94ff060e1294197863e3676632e9809cfc6d8593",
+      "sha256": "812c2df2bc73f04e6ab7551c48cea59bc8b5c877bd347266c287764db88e4c36",
+      "bytes": 318
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java": {
+      "gitBlob": "18f9277389f7fa5ab8ddbff9971bb0f941659750",
+      "sha256": "0e6e12dd48b62b8606de078e25a0b3a75b6d741d11bf9b5927d730d2f0110bd3",
+      "bytes": 9766
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentitySet.java": {
+      "gitBlob": "6f20a64f8d7e9dc6bbc9880396c502349e2e3d7a",
+      "sha256": "6d6b6f58113a44438c721cd645efa45ac6c0f63842b164ebb33a94dce4066e3d",
+      "bytes": 6870
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java": {
+      "gitBlob": "d3132cdc31d450926d29f7c4f9d3c47d03ad2363",
+      "sha256": "c8ffc48d43e98223ae37e722c5841b962217fb6b98daf561cba430eb3492bdc5",
+      "bytes": 21809
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java": {
+      "gitBlob": "e7be2297d19f22cf4dd4ef8b7d1424fe963063d9",
+      "sha256": "015242ae386c4366471cd7d26fab886a2c362b58029982b0108976342c4f3357",
+      "bytes": 4511
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3Progress.java": {
+      "gitBlob": "5728ff52b138121791fd2b12c923a883d52327bc",
+      "sha256": "01b387d63a1ddfb1b758e11fcee76366aea68ec391bc0d87234172857cb6a25d",
+      "bytes": 9579
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java": {
+      "gitBlob": "87d3fa14669325d26d0fe1f9a626fce43b357a51",
+      "sha256": "6d4637c9b3de4481180d6459f1312aff90141b6ddf46b91aff886bab958339c9",
+      "bytes": 3722
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java": {
+      "gitBlob": "fbaaf21bb7f013bebbc32d0d43dbf71e47b90059",
+      "sha256": "f45282edf96cbf61f84df41e92c5ad958e577ea07a397bc8802c5bc8996aeb24",
+      "bytes": 1107
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ProgressScope.java": {
+      "gitBlob": "591223844f3cfd50fdf5431deb3bc2b1c9d7b5f0",
+      "sha256": "8ad6c20a9661ec095fb4dcd0566b400130f9c13e9c4312a625ff2dfd0c40553b",
+      "bytes": 1504
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3ProgressState.java": {
+      "gitBlob": "23e877a0862e2b9a9a83f247e6b0b499a0757d9e",
+      "sha256": "1de191dc8e99a92f0aee3f8f24e665f9de49714f8571c0f5c3b047fbd43a6e6d",
+      "bytes": 1151
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3Residency.java": {
+      "gitBlob": "34c18f45632096c3bd4f0df199fe99a1a59c2f16",
+      "sha256": "240f63bf1cc6d1ce2681c338f8715e301913eeaf8a3cd69baebc5971b9cdaf67",
+      "bytes": 955
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java": {
+      "gitBlob": "3aa639f8fa88c948babfacb5b34511dd2f18442d",
+      "sha256": "9a7487453e0bd2369b56e7e17dedb79e2eba8919944772ec0407c95833458ae7",
+      "bytes": 4760
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java": {
+      "gitBlob": "e337c69710c871f8caa77a1afe53149f1fd705cc",
+      "sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518",
+      "bytes": 1261
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java": {
+      "gitBlob": "a7d20300717661c26897f0b69e1e5a83400a62ad",
+      "sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806",
+      "bytes": 10870
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java": {
+      "gitBlob": "30cf137538353ac8e91514fff7c5db3903da8819",
+      "sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
+      "bytes": 3512
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3SystemProgress.java": {
+      "gitBlob": "66984feed7d22b8e047f69de0862b7ade9083ede",
+      "sha256": "683b4a0532ff40682d43a51ee9e38fb1c73de3a05e53d9ec5392e4ba29cdd29b",
+      "bytes": 1070
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3TransferQueue.java": {
+      "gitBlob": "54c577fcbd5d43959b748e734603f40370d98e78",
+      "sha256": "e4f3ad7fa0fb8e9f9c0bdf3530143b7fb525515d2e43d7cc479a4bceab81ebe7",
+      "bytes": 11873
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java": {
+      "gitBlob": "8a85b86c027bc031ef096ad94de2747b8fd28f9c",
+      "sha256": "01582359b73d671f627f9bde3b266021c975bcf374f4c575fa43c05fd49218e8",
+      "bytes": 23625
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3TreeSet.java": {
+      "gitBlob": "e414f679a341392770fb482377a51fe2f5e6518f",
+      "sha256": "e55e48d581412955c468b8263d9f2b15bfb03b659f3b70f1187697853aeebc5c",
+      "bytes": 3547
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java": {
+      "gitBlob": "5d7eb065aeca2cecc1d939532d154c87bbb01c2c",
+      "sha256": "1b1fd624108635fbb76e2608b066abfdaa4cc297b85f0052d84f17ac33c19d2a",
+      "bytes": 5511
+    },
+    "m3/collections/src/main/java/com/m3/collections/package-info.java": {
+      "gitBlob": "3998c9f78a8617aa3b593c353f7d7ac48e93a52b",
+      "sha256": "d1a378061968774e1b7a9e0e784039ae34b84efc22629cec2db0bae2f3117acc",
+      "bytes": 699
+    },
+    "m3/collections/src/main/java/module-info.java": {
+      "gitBlob": "e6ca30e5a04a0b7c0f1ada4f0659342cd863d78d",
+      "sha256": "e531b318ea4cbc6ca09bb3e52cb1a70ee4539ccf78d8b61b0f73bcf3027db557",
+      "bytes": 165
+    },
+    "m3/collections/src/main/native/collections/m3_count_lanes.c": {
+      "gitBlob": "fcb85a55c9ff3d19faa1de991a109e3b3f3c3582",
+      "sha256": "e2797a2750d45cada0ec468fb92040bd0c2da460a76a0a893a31fe7a4894a920",
+      "bytes": 3273
+    },
+    "m3/collections/src/main/native/collections/m3_count_totals.c": {
+      "gitBlob": "d987d5860dec30d042cacbe833b244c4e54d79ca",
+      "sha256": "bf1fc7d87f797c4047da75fc23ffc01d6f2fc5a89f1dcf9c70a819ffcf493ebd",
+      "bytes": 2997
+    },
+    "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": {
+      "gitBlob": "f1a9488905807e6417dd267e125bfc44dbcc9297",
+      "sha256": "d7786cd5308f4a1e6743680d35e51f5f11a66b106abdb8f170edcb92b901d1cb",
+      "bytes": 3577
+    },
+    "m3/collections/src/main/native/collections/segmented_bit_lane.c": {
+      "gitBlob": "011b847f0d22ea96e4b136547083904ac50b1440",
+      "sha256": "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210",
+      "bytes": 3458
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3AdaptiveEnumLongMapTest.java": {
+      "gitBlob": "e38554da2e95f11f1ab7206ace574fe75bdf207c",
+      "sha256": "7c86957b387dd1afa83384b1fbf05ff1c5d0807bb3255f31ffcd9dfd4b5ec140",
+      "bytes": 14191
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3AllocationProbe.java": {
+      "gitBlob": "2e3699b04417b7c97aa66828f941d69e1f63a48b",
+      "sha256": "47c94f4de1f02dd6544342481e1e44b159b6895767d53e238659424f4a709f6d",
+      "bytes": 4167
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3CollectionCostProbe.java": {
+      "gitBlob": "13c39fb6ac06b43d2bd88b66759cfebc5b197e1d",
+      "sha256": "c3b7fe8f9b10dd1607af7b5da7b657138934a1b5cf0d449960c50c2a219d35a8",
+      "bytes": 8201
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3ConcurrentContractTest.java": {
+      "gitBlob": "a9e57f112d5ca4e224d3776fc49e4afdf3a62df1",
+      "sha256": "9aea61d2c674b81f0b8b84f053b82449ec0d97ae7e69264efd3561edef808872",
+      "bytes": 12948
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3ConcurrentLaneContractTest.java": {
+      "gitBlob": "86f5ae48e363b14a00e62ed6fd6d74fe572cc2c3",
+      "sha256": "4a72dcca1648cbd3cf9f2d9bbec526de13fb50464d6b2ed19b101182541f7e5a",
+      "bytes": 7340
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3EnumLongMapTest.java": {
+      "gitBlob": "efc6ba35e448278c6e3bc055b2496fbd8ed42771",
+      "sha256": "cd93ecad156634537dbb42acf199558689ff91c113db26803cfc2cf235377531",
+      "bytes": 8177
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3EnumSetTest.java": {
+      "gitBlob": "44c0fe435803776df38a4f493869dfa08fcb7bc1",
+      "sha256": "334ec881ecaf3fa7807bf912ff3d758cf8ac9eeb162ff7e261738e73890e81c9",
+      "bytes": 8542
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3FactoryContractTest.java": {
+      "gitBlob": "e7e156e6d73d178b1bf6f2ee32deb1db5bc046c6",
+      "sha256": "62bd5948000dcd9cf7625ab0b80fd2f43b9b2f1aad351e90e04017344e556436",
+      "bytes": 5868
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3FootprintContractTest.java": {
+      "gitBlob": "92183e11d643a12cc797d3d3eb674793d538005a",
+      "sha256": "e369e66b2f95179383ef1e1b2a9cef28f439f762fcd3478e6df2113e3d1f8957",
+      "bytes": 7612
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java": {
+      "gitBlob": "02db2523258c1f1dca676a2612579980321f46c7",
+      "sha256": "86eb2c9a436aac6f6e5b99f5c275636ca272d849dd08aa07f8796271167c63a1",
+      "bytes": 10437
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorTest.java": {
+      "gitBlob": "e9342d8064a19bb44ce31d470b33b1fd0c3777ff",
+      "sha256": "2d4273ec51e75d07e9f551d64e3059bb325253a41edbdb7eba5564040d1da3c0",
+      "bytes": 412
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3IntLanesTest.java": {
+      "gitBlob": "b617f579eecc6f48078076c642be33438eea9481",
+      "sha256": "0ddd123adba9511aac147c3fce715734ec5080395d7dd681ca89f95fb2ca0c4d",
+      "bytes": 10141
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3IntLongHashMapTest.java": {
+      "gitBlob": "2d0561fb85f6d62947b4914fd0077b049f36cc58",
+      "sha256": "59fbd569f900826bead33b3297528aedc94f22b24366039cfd41d584a527ff17",
+      "bytes": 6366
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3JdkCollectionDifferentialTest.java": {
+      "gitBlob": "0ca5ef64c7a3fbbc8f869e96affca5dcd8672003",
+      "sha256": "e0b52a315dc95583093a4aa96b757f74728a42f40c0a5b390d2b1b8fe84edb9b",
+      "bytes": 18438
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java": {
+      "gitBlob": "9a6710e2985676613778895dd42c8bb9d08e8534",
+      "sha256": "d5ea4fdcde6280a43041b6fd105a65dbbac0e138ab353475a8801282a910f1f7",
+      "bytes": 10731
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3LazyObserverRegressionTest.java": {
+      "gitBlob": "7d4a21d41dab5a06d52edf8f54689f3118198963",
+      "sha256": "a9422f722a5e0009683d5dbaedca42e66b5df781ac7d9cb40b5b98db96333004",
+      "bytes": 8769
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java": {
+      "gitBlob": "9f076ba1d21747e412904b2042510b0ca1e460cd",
+      "sha256": "b61d390196173ef0d4f99a86d0569f0542f9805d639a29eff4035140f6cf10ea",
+      "bytes": 18625
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapTest.java": {
+      "gitBlob": "b101de05ae69a578f273f4e455b796224a2ecf0a",
+      "sha256": "fee5f625022c58e0774380121ce5a653fea936334e0fe4be0a2e81a7fdf5f99a",
+      "bytes": 466
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3LazyValueStateSelfTest.java": {
+      "gitBlob": "4c3ce5c828630c7001b9945a1555f5be63c6193f",
+      "sha256": "e367a234f8dbb0c628443e3afec7446553f2168c50b515da96b7afa43246b7d2",
+      "bytes": 7622
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3LongArrayDequeTest.java": {
+      "gitBlob": "8d3b4c32dab74e0654ec4b4a843c02b40ea7c1a0",
+      "sha256": "5cd23d6177bf98fde595d722512bf1be7b48d9ac1e3536a66a066062be8cd19e",
+      "bytes": 8613
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3LongArrayListTest.java": {
+      "gitBlob": "3a1eacc0057d748135764a43a51eee627aeda2ee",
+      "sha256": "95b3dd51206674dbae0336c64bc329e7bfba67c1a8ea60bc5db68fe61931b6c1",
+      "bytes": 11653
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3LongFilteredViewContractTest.java": {
+      "gitBlob": "5b1bafe39ad6a9752dd94eb737e05bd0b5a5ccd9",
+      "sha256": "3cefdce84f9f78cbd77a8ac42626b6b54a15930dcc4becb0802c87491f725044",
+      "bytes": 8340
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3LongLinkedHashSetTest.java": {
+      "gitBlob": "a4202b54eeb03aa662101a8c3d3c57e0c9a96e2e",
+      "sha256": "f33e703397f639a47228e450a2c587bcea47e9c5d0b347099d91a9c91fa047ec",
+      "bytes": 6410
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3MapContractTest.java": {
+      "gitBlob": "d40c88ec184b90eb057dd859d840c915e4f93df8",
+      "sha256": "9c94e112c9f40731ad4d05273605e6efc3f369f79f578c67cf2fed7445071cd2",
+      "bytes": 16280
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java": {
+      "gitBlob": "9e64f4c57ab840b0da744bcff43b9f703fe033f8",
+      "sha256": "338d443ef01b118377940397b447b083af9a5a73c8bd8a001005b08efd5a9666",
+      "bytes": 9053
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3ObjectIdentityTest.java": {
+      "gitBlob": "a2ea451fd5724e212df4c43e20776d3882d13254",
+      "sha256": "9d7a4f6d385ef013f868f5a1984f28e73537952eacc81f5854611ecaafc98746",
+      "bytes": 8814
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyBorrowTest.java": {
+      "gitBlob": "a34ad79e869c5069545d00934f12c5292e00888b",
+      "sha256": "04c8fab7bac66b214428f2cc80476e01d9d55c69a7ab5d0f2332b0b3947ff1f6",
+      "bytes": 5365
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyRuntimePressureTest.java": {
+      "gitBlob": "19cad07982d1a1222f52cc61fd2168e50ce1f55b",
+      "sha256": "bf05ea2b323a83f5c1569bc88d0d5417093df8d1e7f88c00f6831e27e276a4b5",
+      "bytes": 886
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyTest.java": {
+      "gitBlob": "0deb35e3e8b8a8e44b94b3aab03cac0085dd4c07",
+      "sha256": "6ee2da4009928feb40d5854bfedb716c904e0d2b83ed92f9ad311bbb9bdb8240",
+      "bytes": 10032
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3PrimitiveCollectionDifferentialTest.java": {
+      "gitBlob": "7c641d69f04cebbdca2e7fdb6226396a2e98a736",
+      "sha256": "25b1899b492eb4b4830316f92a7d9d4eacacacd7fc496db145acd0be67991a1c",
+      "bytes": 7996
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3ReceivingRecoveryTest.java": {
+      "gitBlob": "1c5f24f32807b408de25e73080640cdb5fef5206",
+      "sha256": "a21de6be9297f6c4c97cb7e34b1636d35ee438cd1e5267cdbf30fec40da0ae19",
+      "bytes": 2841
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3SequenceContractTest.java": {
+      "gitBlob": "02ba3c683428a02855517093edbaece60ba7444e",
+      "sha256": "665e431f88c277545a2b49cfa58d964afb02583a558f7ef886a5e744e5343d72",
+      "bytes": 7172
+    },
+    "m3/collections/src/test/java/com/m3/collections/SegmentedLaneBulkContractTest.java": {
+      "gitBlob": "050fea92fd02950e5cdc653d55234e829d0a7ab3",
+      "sha256": "f2ea51cf92b35489ca0bc3c6555850ff9ceee45a1459eb0af06f19feaff810ce",
+      "bytes": 7117
+    },
+    "m3/collections/src/test/java/com/m3/collections/SegmentedPrimitiveStorageTest.java": {
+      "gitBlob": "fd14c6e5e0e56b634592a3eb0ef46e3136091c4a",
+      "sha256": "b202adb68518e47c49ceddc4f21e52c7bb48c387b3f1ee08baceaf8a930eb44c",
+      "bytes": 6641
+    },
+    "m3/collections/src/test/native/collections/m3_bimap_consumer.c": {
+      "gitBlob": "fc9f43c59e600e13f60a996a00214eeda3521b1a",
+      "sha256": "c6a073b211459f278d2674336ddc84ac28fe19324a0c3cbc30a44193eec84d1e",
+      "bytes": 2431
+    },
+    "m3/collections/src/test/native/collections/run_search_jni.c": {
+      "gitBlob": "5a9cf3274e120788dd9e9b15433d130e5f23865b",
+      "sha256": "aecfe097fe61b5260a09c2bbbcec57bca2a96bd7cabf343bc380cfc5b28a1d10",
+      "bytes": 1375
+    },
+    "m3/collections/SYNEXIA-DONATION-NOTICE.txt": {
+      "gitBlob": "dba49be9546695ec85f0f05fc073752e9950a95a",
+      "sha256": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556",
+      "bytes": 1831
+    },
+    "m3/collections/synexia-donation.json": {
+      "gitBlob": "a6339fc2f901cd3aef071c731bb71fb8ab715d1e",
+      "sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
+      "bytes": 65725
+    },
+    "m3/collections/test_verify_donation.py": {
+      "gitBlob": "08d77b1bda64b5577967d331bb2d708c8ad7a513",
+      "sha256": "93a3296cd051f536eba3c5cc9ce26ab592ff0b428b6645aa8195d6f0d4301b68",
+      "bytes": 2807
+    },
+    "m3/collections/verification/PreparedLaneAllocationProbe.java": {
+      "gitBlob": "abd09daee4742abc1ff0b182691e9c918c568522",
+      "sha256": "11bb2728a65f58d91ca9dc1e5da9ebb015297b5c6cacd88f25dd3db2938ec290",
+      "bytes": 2241
+    },
+    "m3/collections/verification/SegmentedLaneNativeProbe.java": {
+      "gitBlob": "babb33e8570d4cf455e4ad8665a5d5f3e4a468d0",
+      "sha256": "1bfff970dfcad8bb19c9e9ab6885aafef657e0f52a2ab7fbea970963694ed065",
+      "bytes": 1804
+    },
+    "m3/collections/verify_donation.py": {
+      "gitBlob": "54fa2569d9445f9729f3e9aea874c42ef9e46cad",
+      "sha256": "ff380ac9dedda6e36ea233eabb0a567a0a51595913d571f6bd11d5937d7c6706",
+      "bytes": 10153
+    },
+    "m3/collections/wrappers/canonical-source.json": {
+      "gitBlob": "d485981f5ff1dd6d5b764a5dcd495e34490a20fe",
+      "sha256": "7d715e39924f81bd7d4d73c320a005d1bd4fe9d9bed6f5dee55dc2994009e5f0",
+      "bytes": 665
+    },
+    "m3/collections/wrappers/catalogue.tsv": {
+      "gitBlob": "ea544b7b2039c142348f8ebff6d02c505a9ff08e",
+      "sha256": "eac5101db577439a71f60d303a3edba323c6760277384b92510064777e17599c",
+      "bytes": 2255
+    },
+    "m3/collections/wrappers/name-mapping.tsv": {
+      "gitBlob": "211a758a4b211828a06e9389d521cf015901b16a",
+      "sha256": "e24d49d6bff8bde4c6c85c1d3ee5441a5fa9e54c48ec9e7b15dda0903a89b76b",
+      "bytes": 356
+    },
+    "m3/collections/wrappers/proof/M3CollectionViews.original.java.txt": {
+      "gitBlob": "6c769c61d1851a7e4b08f63ea85c9458c939ae31",
+      "sha256": "c3ff418b51cd1b471ded6da0376e0e17eb429151d7e1383da0b23c587c9a3f53",
+      "bytes": 19837
+    },
+    "m3/collections/wrappers/proof/M3WrapperRefinementProbe.java": {
+      "gitBlob": "623d98b38643f529e93819d6e66e09bb91e3590d",
+      "sha256": "567cf0c70bb503daa9e992ba9f0884ca8d1029458673f7b6f939fde193595bf6",
+      "bytes": 2637
+    },
+    "m3/collections/wrappers/provenance.json": {
+      "gitBlob": "129e0105732a1edb5b1d36a21e81bf1438947382",
+      "sha256": "aaaadcb60fdb5534543a770bfb4e1dac1952f108fa901907c4bb5a011e3cc26f",
+      "bytes": 3323
+    },
+    "m3/collections/wrappers/README.md": {
+      "gitBlob": "bf0ab1a42f66c725a2ac2e50042bf3f7c97170b8",
+      "sha256": "fbf1c6668a49e007a93ab3ed0c251171ea1708312c8892a512049ee359e06dda",
+      "bytes": 3445
+    },
+    "m3/collections/wrappers/recipe/continuity-20261017-pom.xml": {
+      "gitBlob": "39e978b04594459cc6172067b5e79906b6f98c41",
+      "sha256": "c65ba84d1a3455200961c63e377edf3c2a82dabb400324cdcc3fa94531e5e111",
+      "bytes": 2244
+    },
+    "m3/collections/wrappers/recipe/pom.xml": {
+      "gitBlob": "a1a6dca752f4760ff786ed669e065517cfa5038a",
+      "sha256": "b203a5a6a5d4c490be043d5b8d8885816f0fa6e3fae71fbedb2ab4936ae4069d",
+      "bytes": 2198
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3CollectionViews.java.txt": {
+      "gitBlob": "8de1cbc3e1255cc6f9d73b068a164a991adcad15",
+      "sha256": "cfe0eb7335e3945f35b4a9763e11e0a7dff6c672f7014733f15e876b0b06909e",
+      "bytes": 20385
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3FilteredMaps.java.txt": {
+      "gitBlob": "8fec2f88d641d15e90ca2ad522749383c1926e59",
+      "sha256": "1dff497079e768fda574a349cc521732d69cbacbecc19deba6888d909844f1cb",
+      "bytes": 20246
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3FilteredMapsNativeSelfTest.java.txt": {
+      "gitBlob": "65277db098158ff63acc17a0103515ab02f80690",
+      "sha256": "5437dfeea903d7208f6453e052d8ca88b84ac1e292dff1acd0df845b6c21f136",
+      "bytes": 3812
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3FilteredMapsSelfTest.java.txt": {
+      "gitBlob": "5d72a62dfa5403fa5ce7fdbc6b217b46482aa45d",
+      "sha256": "a99ae7502a7b1832c149dd2d0af888ddbdeb5805659ef5c778ceda4ca1949cd5",
+      "bytes": 17047
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3FilteredMapsTest.java.txt": {
+      "gitBlob": "fca44882774187b2b301fb18ea2f3e8fc4897452",
+      "sha256": "c4139f6db6648b0e71a347c15c35d6d133cb4d32581990490141501f273cb271",
+      "bytes": 265
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/M3WrapperContractsTest.java.txt": {
+      "gitBlob": "a743bc94aa684f35db6e871df0633aa5b720907d",
+      "sha256": "a641b0eda9ecbfac68d8719e5d2a39f6b826f5228954173da37188a7629d911e",
+      "bytes": 18046
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/manifest.tsv": {
+      "gitBlob": "c606ac649f4f3bae46e3a615a4fe837176339203",
+      "sha256": "562841271aa7bdbb2ea0a179c10a95fad61706cdc64effdc16ff3cb746f134c9",
+      "bytes": 1273
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-sorted-receiver/RunSearchJni.java.txt": {
+      "gitBlob": "0508f70a7c846c2841f978a9085d2b6254d2465c",
+      "sha256": "3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a",
+      "bytes": 2024
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/catalogue.tsv.txt": {
+      "gitBlob": "ea544b7b2039c142348f8ebff6d02c505a9ff08e",
+      "sha256": "eac5101db577439a71f60d303a3edba323c6760277384b92510064777e17599c",
+      "bytes": 2255
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/manifest.tsv": {
+      "gitBlob": "3c62be95f2a67f04d0050e26c4d1494ffd823a31",
+      "sha256": "f9913731a6d3b05706651ca7242ab8ab975392b32b499322415562e206d0ff65",
+      "bytes": 621
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/name-mapping.tsv.txt": {
+      "gitBlob": "211a758a4b211828a06e9389d521cf015901b16a",
+      "sha256": "e24d49d6bff8bde4c6c85c1d3ee5441a5fa9e54c48ec9e7b15dda0903a89b76b",
+      "bytes": 356
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/provenance.json.txt": {
+      "gitBlob": "129e0105732a1edb5b1d36a21e81bf1438947382",
+      "sha256": "aaaadcb60fdb5534543a770bfb4e1dac1952f108fa901907c4bb5a011e3cc26f",
+      "bytes": 3323
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/README.md.txt": {
+      "gitBlob": "bf0ab1a42f66c725a2ac2e50042bf3f7c97170b8",
+      "sha256": "fbf1c6668a49e007a93ab3ed0c251171ea1708312c8892a512049ee359e06dda",
+      "bytes": 3445
+    },
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-sorted-receiver/run_search_jni.c.txt": {
+      "gitBlob": "5a9cf3274e120788dd9e9b15433d130e5f23865b",
+      "sha256": "aecfe097fe61b5260a09c2bbbcec57bca2a96bd7cabf343bc380cfc5b28a1d10",
+      "bytes": 1375
+    },
+    "m3/collections/wrappers/recipe/src/test/java/com/synexia/rewrite/M3FilteredSortedRecipeTest.java": {
+      "gitBlob": "03ec9e68e618f85c1388de6d5350bba28a1f1f07",
+      "sha256": "890a80bc74f35f8b8d4273b9b4ee21aef156e8ba170cc1481c10a3eb77ff2222",
+      "bytes": 14582
+    },
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsNativeSelfTest.java": {
+      "gitBlob": "65277db098158ff63acc17a0103515ab02f80690",
+      "sha256": "5437dfeea903d7208f6453e052d8ca88b84ac1e292dff1acd0df845b6c21f136",
+      "bytes": 3812
+    },
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsSelfTest.java": {
+      "gitBlob": "5d72a62dfa5403fa5ce7fdbc6b217b46482aa45d",
+      "sha256": "a99ae7502a7b1832c149dd2d0af888ddbdeb5805659ef5c778ceda4ca1949cd5",
+      "bytes": 17047
+    },
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsTest.java": {
+      "gitBlob": "fca44882774187b2b301fb18ea2f3e8fc4897452",
+      "sha256": "c4139f6db6648b0e71a347c15c35d6d133cb4d32581990490141501f273cb271",
+      "bytes": 265
+    },
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3WrapperContractsTest.java": {
+      "gitBlob": "a743bc94aa684f35db6e871df0633aa5b720907d",
+      "sha256": "a641b0eda9ecbfac68d8719e5d2a39f6b826f5228954173da37188a7629d911e",
+      "bytes": 18046
+    },
+    "m3/collections/wrappers/src/test/java/RunSearchJni.java": {
+      "gitBlob": "0508f70a7c846c2841f978a9085d2b6254d2465c",
+      "sha256": "3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a",
+      "bytes": 2024
+    },
+    "m3/collections/wrappers/verify.py": {
+      "gitBlob": "5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8",
+      "sha256": "fe35eaa0e9d38fb4a054308f18a7bd0bcc3557a552b52c19eb6981406a98af72",
+      "bytes": 12524
+    }
+  },
+  "suites": {
+    "new-runtime": [
+      "com.m3.collections.M3CountLanesTest#aggregateOverflowCrossesNativeChunkBoundary",
+      "com.m3.collections.M3CountLanesTest#overflowNegativesAndArgumentAdmission",
+      "com.m3.collections.M3CountLanesTest#randomSlicesAcrossChunkBoundariesAgainstBigInteger",
+      "com.m3.collections.M3CountedCollectionsTest#algebraOverflowDoesNotMutateOperands",
+      "com.m3.collections.M3CountedCollectionsTest#extremesAndOverflowLeaveInputsUnchanged",
+      "com.m3.collections.M3CountedCollectionsTest#laneImportExportAndIndependentCopies",
+      "com.m3.collections.M3CountedCollectionsTest#longOwnersPreserveOrderAndMutationContracts",
+      "com.m3.collections.M3CountedCollectionsTest#randomMutableCountsAgainstJdk",
+      "com.m3.collections.M3CountedCollectionsTest#snapshotAlgebraMatchesIndependentCounts",
+      "com.m3.collections.interop.M3BagInteropTest#actualGuavaAlgebraViewsRemainLive",
+      "com.m3.collections.interop.M3BagInteropTest#backedViewsIteratorRemovalAndImmutableEntrySnapshots",
+      "com.m3.collections.interop.M3BagInteropTest#bulkMembershipSelfOperationsAndRemoveIf",
+      "com.m3.collections.interop.M3BagInteropTest#failFastAndCopiesCannotMutateOwner",
+      "com.m3.collections.interop.M3BagInteropTest#mutationTracesAgainstActualGuava",
+      "com.m3.collections.interop.M3BagInteropTest#parallelCollectorAndRealEclipsePrimitiveImport",
+      "com.m3.collections.interop.M3BagInteropTest#perKeyIntegerLimitSizeSaturationAndInvalidInputs"
+    ],
+    "old-interop": [
+      "com.m3.collections.interop.M3LibraryClosureTest#collectorCharacteristicsDoNotClaimConcurrentMutation",
+      "com.m3.collections.interop.M3LibraryClosureTest#duplicatesRejectedAcrossParallelPartitions",
+      "com.m3.collections.interop.M3LibraryClosureTest#eclipseListAndSetResultsStayMutableAndIndependent",
+      "com.m3.collections.interop.M3LibraryClosureTest#eclipseMapUsesUniqueM3Accumulation",
+      "com.m3.collections.interop.M3LibraryClosureTest#guavaListParallelValuesAndFirstKeyOrder",
+      "com.m3.collections.interop.M3LibraryClosureTest#guavaSetParallelDuplicates",
+      "com.m3.collections.interop.M3LibraryClosureTest#guavaSortedSetParallelComparator",
+      "com.m3.collections.interop.M3LibraryClosureTest#listSequentialParallelAndNullOwnership",
+      "com.m3.collections.interop.M3LibraryClosureTest#mapNullPoliciesAndCallbackExceptions",
+      "com.m3.collections.interop.M3LibraryClosureTest#mapperAndComparatorNullsAreRefusedBeforeCollection",
+      "com.m3.collections.interop.M3LibraryClosureTest#mergingMapCountsAndDeletionMatchJdk",
+      "com.m3.collections.interop.M3LibraryClosureTest#setSequentialParallelOrderAndNull",
+      "com.m3.collections.interop.M3LibraryClosureTest#springAutoPopulatingListPreservesLazyFactoryCalls",
+      "com.m3.collections.interop.M3LibraryClosureTest#springBorrowedListsAreNotSilentlyCopied",
+      "com.m3.collections.interop.M3LibraryClosureTest#springCreatedListsAndFactoryWiring",
+      "com.m3.collections.interop.M3LibraryClosureTest#springInvalidBulkInputDoesNotInstallAnAbsentKey",
+      "com.m3.collections.interop.M3LibraryClosureTest#springNullEmptyAbsentAndCopyViewDistinctions",
+      "com.m3.collections.interop.M3LibraryClosureTest#springParallelCollectorUsesM3ListsAndCopies",
+      "com.m3.collections.interop.M3LibraryClosureTest#springSingleValueBridgeMatchesDonorExceptionsAndMutations",
+      "com.m3.collections.interop.M3LibraryClosureTest#uniqueMapOrderedParallelResult",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#eachFactoryCallHasIndependentOwnership",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#eclipseListRichOperationsAndLiveView",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#eclipseMapCollisionNullAndDefaultMethods",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#eclipseMapRichOperationsAndLiveView",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#eclipseSetAndSortedFamilies",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaListIteratorAndAsMapRemove",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaListMultimapDifferentialTrace",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaListMultimapLiveAbsentViewsAndDetachedRemovals",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaSetMultimapDifferentialTrace",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaSortedValuesAndBackedRanges",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaTableRowsColumnsAndCellRemoval",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkDequeEnds",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkFactoriesReuseOwners",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkListAndBackedSubList",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkMapCollisionNullAndDefaultMethods",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkSetAndIteratorRemoval",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkSortedMapRangesAndReverse",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkSortedSetRangesAndReverse",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#nullComparatorRefusal",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#springAndGuavaAreNotInterchangeableContracts",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#springDifferentialTrace",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#springEmptyAbsentNullCopyAndLiveView"
+    ],
+    "long-core": [
+      "com.m3.collections.M3LongArrayDequeTest#callbackFailurePreservesThrowingValueAndUnreadSuffixAcrossRingWrap",
+      "com.m3.collections.M3LongArrayDequeTest#primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams",
+      "com.m3.collections.M3LongArrayDequeTest#queueAndIndexedViewsAreJdkShapedAliases",
+      "com.m3.collections.M3LongArrayListTest#boundsOwnershipAndStackExceptions",
+      "com.m3.collections.M3LongArrayListTest#callbackFailurePreservesThrowingValueAndUnreadSuffix",
+      "com.m3.collections.M3LongArrayListTest#directStreamsRetainOwnerAcrossStorageRelocation",
+      "com.m3.collections.M3LongArrayListTest#mixedOperationsMatchJdkValueOrder",
+      "com.m3.collections.M3LongArrayListTest#primitiveStorageAndCapacityChecksStayBounded",
+      "com.m3.collections.M3LongArrayListTest#sortDedupAndSearchPreserveSignedLongSemantics",
+      "com.m3.collections.M3LongArrayListTest#structuralMutationsFailFastAndStackIsJdkShapedRemoval",
+      "com.m3.collections.M3LongFilteredViewContractTest#composableAndReadOnly",
+      "com.m3.collections.M3LongFilteredViewContractTest#differentialSeeded",
+      "com.m3.collections.M3LongFilteredViewContractTest#exceptionBoundaries",
+      "com.m3.collections.M3LongFilteredViewContractTest#fusedNestedPredicatesKeepEvaluationOrder",
+      "com.m3.collections.M3LongFilteredViewContractTest#lateBindingStreamsAndNoSizeScan",
+      "com.m3.collections.M3LongLinkedHashSetTest#edgeContractsFailFastAndSizing",
+      "com.m3.collections.M3LongLinkedHashSetTest#matchesJdkSequencedSetAcrossChurnIncludingMovesAndRehash",
+      "com.m3.collections.M3LongLinkedHashSetTest#retainsOnlyPrimitiveLanes"
+    ],
+    "scalar": [
+      "com.m3.collections.M3CountTotalsTest#aliasesEmptySlicesAndValuesOutsideSlices",
+      "com.m3.collections.M3CountTotalsTest#alignedLanesMatchBigIntegerAndExistingJavaAndJni",
+      "com.m3.collections.M3CountTotalsTest#bagNullsRejectedEvenWhenOtherInputIsEmpty",
+      "com.m3.collections.M3CountTotalsTest#bagSelfEmptyAndSparseCapacityCases",
+      "com.m3.collections.M3CountTotalsTest#bagTotalsMatchMaterializedAlgebraAndIndependentFrequencyOracle",
+      "com.m3.collections.M3CountTotalsTest#laneBoundsNullsAndOperationsHaveExistingExceptionParity",
+      "com.m3.collections.M3CountTotalsTest#laneIndividualAndAggregateOverflow",
+      "com.m3.collections.M3CountTotalsTest#lateChunkFailuresNeverModifyInputs",
+      "com.m3.collections.M3CountTotalsTest#overlapIsSubtractedBeforeUnionOverflowCheck",
+      "com.m3.collections.M3CountTotalsTest#perLaneValidationOrderIsNotReorderedByReduction"
+    ],
+    "bimap": [
+      "com.m3.collections.interop.M3BiMapNativeTest#nativeCallbackExceptionIdentityIsPreserved",
+      "com.m3.collections.interop.M3BiMapNativeTest#nativeNullsAndDuplicateRefusal",
+      "com.m3.collections.interop.M3BiMapNativeTest#nativePutForceRemoveAndInverseGetMatchDonor",
+      "com.m3.collections.interop.M3BiMapNativeTest#nativeValidationAndInverseReceiver",
+      "com.m3.collections.interop.M3BiMapTest#actualEclipseImportAndLiveMapBridge",
+      "com.m3.collections.interop.M3BiMapTest#actualSpringSingleValueBridgeKeepsBimapUniqueness",
+      "com.m3.collections.interop.M3BiMapTest#bulkViewRemovalRetentionAndSelfArguments",
+      "com.m3.collections.interop.M3BiMapTest#collectorParallelAndIndependentPartials",
+      "com.m3.collections.interop.M3BiMapTest#collectorRejectsBothDuplicateSidesAndAllowsNullOnce",
+      "com.m3.collections.interop.M3BiMapTest#copiesAreIndependentAndUnmodifiableClosure",
+      "com.m3.collections.interop.M3BiMapTest#differentialAllMutatorsBothDirections",
+      "com.m3.collections.interop.M3BiMapTest#emptyValidationAndIteratorProtocol",
+      "com.m3.collections.interop.M3BiMapTest#entryArraysCannotBypassInverseMaintenance",
+      "com.m3.collections.interop.M3BiMapTest#entrySetDuplicateRefusalAndStaleIterator",
+      "com.m3.collections.interop.M3BiMapTest#entryUpdatesPermitIteratorContinuationAndRemove",
+      "com.m3.collections.interop.M3BiMapTest#forEachAndOwnershipShape",
+      "com.m3.collections.interop.M3BiMapTest#guavaFilterConverterAndInverseCompositions",
+      "com.m3.collections.interop.M3BiMapTest#insertionOrderAndCanonicalRepresentative",
+      "com.m3.collections.interop.M3BiMapTest#keyValueEntryArrayAndStreamMutations",
+      "com.m3.collections.interop.M3BiMapTest#nullsAndAllForcePutSizeOutcomes",
+      "com.m3.collections.interop.M3BiMapTest#replaceAllDuplicateAndCallbackFailureDoNotPublish",
+      "com.m3.collections.interop.M3BiMapTest#replaceAllReentrantMutationIsDetectedNotRolledBack",
+      "com.m3.collections.interop.M3BiMapTest#replaceAllSupportsCyclesAndRetainedViews",
+      "com.m3.collections.interop.M3BiMapTest#sequentialPutAllKeepsSuccessfulPrefix",
+      "com.m3.collections.interop.M3BiMapTest#synchronizedWrapperDelegatesCommonLock",
+      "com.m3.collections.interop.M3BiMapTest#viewsStayLiveAndMutateBothDirections"
+    ],
+    "wrappers": [
+      "com.m3.collections.M3FilteredMapsTest#mapContracts",
+      "com.m3.collections.M3WrapperContractsTest#actualEclipseSortedWrappersKeepM3BackedMutations",
+      "com.m3.collections.M3WrapperContractsTest#actualGuavaSetFilterSharedProfile",
+      "com.m3.collections.M3WrapperContractsTest#actualSpringWrapperRespectsFilteredVisibility",
+      "com.m3.collections.M3WrapperContractsTest#bimapEntryUpdatesRetainBothPredicateAndInverseGuards",
+      "com.m3.collections.M3WrapperContractsTest#boundedNavigationNullsAndBothDirectionsAgainstJdk",
+      "com.m3.collections.M3WrapperContractsTest#collectionAddAllChecksAllPredicatesBeforeWriting",
+      "com.m3.collections.M3WrapperContractsTest#comparatorStoredRepresentativeLookupRemoval",
+      "com.m3.collections.M3WrapperContractsTest#directOwnerMembershipRespectsIdentity",
+      "com.m3.collections.M3WrapperContractsTest#entryBoundariesNeverLeakUnfilteredWriteAuthority",
+      "com.m3.collections.M3WrapperContractsTest#erasedCollectionPreservesSortedAndNavigableContracts",
+      "com.m3.collections.M3WrapperContractsTest#explicitOwnerRemovalDoesNotRequireRemovableIterator",
+      "com.m3.collections.M3WrapperContractsTest#externallyLockedFilteredPollingKeepsHiddenElements",
+      "com.m3.collections.M3WrapperContractsTest#filteredSortedMapRangesAndImmutableNavigationEntries",
+      "com.m3.collections.M3WrapperContractsTest#listDuplicatesAndHiddenSurvivors",
+      "com.m3.collections.M3WrapperContractsTest#mapViewsUseActualM3OwnerAndKeepHiddenEntries",
+      "com.m3.collections.M3WrapperContractsTest#nestedPredicatesShortCircuitInOrder",
+      "com.m3.collections.M3WrapperContractsTest#nullKeysAndComparatorMapLookup",
+      "com.m3.collections.M3WrapperContractsTest#predicateFailureIdentityAndEmptyValidation",
+      "com.m3.collections.M3WrapperContractsTest#readOnlySortedMapsProtectAllNestedEntries",
+      "com.m3.collections.M3WrapperContractsTest#sortedOnlyOwnerKeepsComparatorThroughErasure",
+      "com.m3.collections.M3WrapperContractsTest#sortedReadOnlyCheckedAndSequencedComposition",
+      "com.m3.collections.M3WrapperContractsTest#sortedSnapshotFiltersOnceAndPreservesDuplicates",
+      "com.m3.collections.M3WrapperContractsTest#sortedTraversalMetadataAndSplitMatchComparator",
+      "com.m3.collections.M3WrapperContractsTest#streamMetadataDoesNotCountPredicateAndShortCircuitIsLazy"
+    ],
+    "current-mask": [
+      "com.m3.collections.M3IndexMaskCompactorTest#stableMaskSelectionContract"
+    ],
+    "current-borrow": [
+      "com.m3.collections.M3ObjectResidencyBorrowTest#ExternalAndUnprovenOwnersNeverFastRetire",
+      "com.m3.collections.M3ObjectResidencyBorrowTest#asynchronousBorrowKeepsEventOwnerUntilAck",
+      "com.m3.collections.M3ObjectResidencyBorrowTest#callbackExceptionAndReentrantReleasePreserveCount",
+      "com.m3.collections.M3ObjectResidencyBorrowTest#independentBorrowersPreventEarlyReclamationAndStaleReuse"
+    ],
+    "donation-all": [
+      "com.m3.collections.M3AdaptiveEnumLongMapTest#foreignEnumKeysAreRejectedLikeJdkInBothModes",
+      "com.m3.collections.M3AdaptiveEnumLongMapTest#modeTransitionsAndOrdinalOrderInSparseMode",
+      "com.m3.collections.M3AdaptiveEnumLongMapTest#narrowEnumIsDenseFromTheStartAndEdgeContracts",
+      "com.m3.collections.M3AdaptiveEnumLongMapTest#retainsOnlyTheActiveBackingAndNoKeyReferences",
+      "com.m3.collections.M3AdaptiveEnumLongMapTest#wideEnumMatchesJdkAcrossMutationsAndModes",
+      "com.m3.collections.M3ConcurrentContractTest#atomicHashAndTreeCompute",
+      "com.m3.collections.M3ConcurrentContractTest#blockingDequeDifferential",
+      "com.m3.collections.M3ConcurrentContractTest#blockingWakeupTimeoutAndInterrupt",
+      "com.m3.collections.M3ConcurrentContractTest#concurrentStreamsUseSnapshotSizeAndSelfToStringTerminates",
+      "com.m3.collections.M3ConcurrentContractTest#drainFailureRetainsUndeliveredElement",
+      "com.m3.collections.M3ConcurrentContractTest#lockedRangeAndSetViews",
+      "com.m3.collections.M3ConcurrentContractTest#mpmcBlockingDequeHasNoLossOrDuplicates",
+      "com.m3.collections.M3ConcurrentContractTest#mpmcRendezvousHasNoLossOrDuplicates",
+      "com.m3.collections.M3ConcurrentContractTest#mpmcTransferHasNoLossOrDuplicates",
+      "com.m3.collections.M3ConcurrentContractTest#synchronousQueueHasNoCollectionCapacity",
+      "com.m3.collections.M3ConcurrentContractTest#transferBufferedDifferentialAndIteratorRecycling",
+      "com.m3.collections.M3ConcurrentContractTest#transferWaitersCancellationAndTimeout",
+      "com.m3.collections.M3ConcurrentLaneContractTest#atomicValuesWrapAndZeroWritesKeepPublicationLocations",
+      "com.m3.collections.M3ConcurrentLaneContractTest#concurrentCollectionStreamsPreserveCapturedSnapshotsAndIndexOrder",
+      "com.m3.collections.M3ConcurrentLaneContractTest#intAtomicBoundaryAndSparsePreparation",
+      "com.m3.collections.M3ConcurrentLaneContractTest#parallelStreamsSplitFixedRangesWithoutLosingOrDuplicatingSlots",
+      "com.m3.collections.M3ConcurrentLaneContractTest#racingPublicationAndAtomicAddsLoseNoUpdates",
+      "com.m3.collections.M3EnumLongMapTest#foreignEnumKeysAreRejectedLikeJdk",
+      "com.m3.collections.M3EnumLongMapTest#narrowEnumAndEdgeContracts",
+      "com.m3.collections.M3EnumLongMapTest#retainsOnlyPrimitiveLanesAndTheSharedUniverse",
+      "com.m3.collections.M3EnumLongMapTest#wideEnumMatchesJdkAcrossMutationsAndOrdinalOrder",
+      "com.m3.collections.M3EnumSetTest#foreignEnumConstantsAreRejectedLikeJdk",
+      "com.m3.collections.M3EnumSetTest#narrowEnumEdgeContractsMatchJdk",
+      "com.m3.collections.M3EnumSetTest#retainsOnlyPresenceWordsAndTheSharedUniverse",
+      "com.m3.collections.M3EnumSetTest#wideEnumMatchesJdkAcrossMutationsAndBulkOperations",
+      "com.m3.collections.M3FactoryContractTest#allFactoryFamiliesAreUsable",
+      "com.m3.collections.M3FactoryContractTest#immutableAndJdkUtilityWrappers",
+      "com.m3.collections.M3FootprintContractTest#emptyHashLookupsStillEvaluateCallbacksAndFirstInsertRecovers",
+      "com.m3.collections.M3FootprintContractTest#listAndSetViewsWorkAcrossFirstInsertionClearAndReuse",
+      "com.m3.collections.M3FootprintContractTest#mapViewsCreatedWhileEmptyRemainBackedAndFailFast",
+      "com.m3.collections.M3FootprintContractTest#representableAvlHeightFitsSignedByteEvenDuringInsertion",
+      "com.m3.collections.M3FootprintContractTest#separateEmptyOwnersNeverShareWritableSlots",
+      "com.m3.collections.M3FootprintContractTest#treeEmptyChecksStillInvokeComparatorAndRejectNull",
+      "com.m3.collections.M3FootprintContractTest#weakSecondHashFailureLeavesAnUsableEmptyOwner",
+      "com.m3.collections.M3IndexMaskCompactorTest#stableMaskSelectionContract",
+      "com.m3.collections.M3IntLanesTest#hashSetEdgeContractsAndFailFast",
+      "com.m3.collections.M3IntLanesTest#hashSetMatchesJdkAcrossChurnIncludingZeroAndRehash",
+      "com.m3.collections.M3IntLanesTest#intIntMapEdgeContractsAndFailFast",
+      "com.m3.collections.M3IntLanesTest#intIntMapMatchesJdkAcrossChurnIncludingZeroKey",
+      "com.m3.collections.M3IntLanesTest#intLanesRetainOnlyPrimitiveFields",
+      "com.m3.collections.M3IntLanesTest#priorityQueueMatchesJdkHeadContentsAndRemoval",
+      "com.m3.collections.M3IntLongHashMapTest#edgeContractsFailFastAndSizing",
+      "com.m3.collections.M3IntLongHashMapTest#matchesJdkAcrossChurnIncludingZeroKeyAndRehash",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#blockedProducerInterruptionLeavesNoPhantomElement",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#boundedDequeWrapDrainAndTimedOperationsMatchJdk",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#comparatorEquivalentKeysAndNestedBoundsMatchTreeMap",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#everySortedSplitRetainsCustomComparatorAndEncounterOrder",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#lateBindingTraversalsFollowListSetAndMapViews",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#lockedMapAtomicCallbacksLoseNoUpdates",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#reversedSublistAndDefaultListMutationsMatchLinkedList",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#sequencedNullAndAccessOrderOperationsMatchLinkedHashMap",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#transferAcknowledgementTimeoutAndCancellationMatchJdk",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#zeroCapacityRendezvousPreservesSynchronousQueueContract",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#arrayDequeMatchesJdkOrderAndOccurrenceRemoval",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#arrayListMatchesJdkAcrossDeterministicMutationSequence",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#duplicateSetAddAndMapValueReplacementAreNonStructural",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#hashMapMatchesJdkAcrossReplacementDeletionAndRehash",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#hashSetMatchesJdkAcrossCollisionsDeletionAndRehash",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#iteratorsAreFailFastOnStructuralMutation",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#priorityQueueMatchesJdkHeadContentsAndRemoval",
+      "com.m3.collections.M3LazyObserverRegressionTest#beforeTouchObserverCannotRetargetRecycledSlot",
+      "com.m3.collections.M3LazyObserverRegressionTest#deferredKeysPreserveNullFailureCancellationAndViewOrder",
+      "com.m3.collections.M3LazyObserverRegressionTest#failureObserversCannotReplaceProviderExceptionOrPoisonRetry",
+      "com.m3.collections.M3LazyObserverRegressionTest#rangeAndCachedValueObserversShareMutationGuard",
+      "com.m3.collections.M3LazyObserverRegressionTest#successfulValueRemainsCoherentWhenCompletionObserverThrows",
+      "com.m3.collections.M3LazyTreeMapTest#actualPackedTreeProviderContract",
+      "com.m3.collections.M3LongArrayDequeTest#callbackFailurePreservesThrowingValueAndUnreadSuffixAcrossRingWrap",
+      "com.m3.collections.M3LongArrayDequeTest#primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams",
+      "com.m3.collections.M3LongArrayDequeTest#queueAndIndexedViewsAreJdkShapedAliases",
+      "com.m3.collections.M3LongArrayListTest#boundsOwnershipAndStackExceptions",
+      "com.m3.collections.M3LongArrayListTest#callbackFailurePreservesThrowingValueAndUnreadSuffix",
+      "com.m3.collections.M3LongArrayListTest#directStreamsRetainOwnerAcrossStorageRelocation",
+      "com.m3.collections.M3LongArrayListTest#mixedOperationsMatchJdkValueOrder",
+      "com.m3.collections.M3LongArrayListTest#primitiveStorageAndCapacityChecksStayBounded",
+      "com.m3.collections.M3LongArrayListTest#sortDedupAndSearchPreserveSignedLongSemantics",
+      "com.m3.collections.M3LongArrayListTest#structuralMutationsFailFastAndStackIsJdkShapedRemoval",
+      "com.m3.collections.M3LongFilteredViewContractTest#composableAndReadOnly",
+      "com.m3.collections.M3LongFilteredViewContractTest#differentialSeeded",
+      "com.m3.collections.M3LongFilteredViewContractTest#exceptionBoundaries",
+      "com.m3.collections.M3LongFilteredViewContractTest#fusedNestedPredicatesKeepEvaluationOrder",
+      "com.m3.collections.M3LongFilteredViewContractTest#lateBindingStreamsAndNoSizeScan",
+      "com.m3.collections.M3LongLinkedHashSetTest#edgeContractsFailFastAndSizing",
+      "com.m3.collections.M3LongLinkedHashSetTest#matchesJdkSequencedSetAcrossChurnIncludingMovesAndRehash",
+      "com.m3.collections.M3LongLinkedHashSetTest#retainsOnlyPrimitiveLanes",
+      "com.m3.collections.M3MapContractTest#collisionChainsRecyclingAndNull",
+      "com.m3.collections.M3MapContractTest#comparatorNullKeysAndEquality",
+      "com.m3.collections.M3MapContractTest#entryAndKeyViewsRemoveNullValuedMappings",
+      "com.m3.collections.M3MapContractTest#iteratorDeletionPreservesAllTreeSuccessors",
+      "com.m3.collections.M3MapContractTest#nestedRangeExceptionContractsMatchTreeMap",
+      "com.m3.collections.M3MapContractTest#sequencedAndReversedHashViews",
+      "com.m3.collections.M3MapContractTest#sequencedEndpointsUseLiveAndDetachedEntriesCorrectly",
+      "com.m3.collections.M3MapContractTest#treeRangesNavigationAndMutation",
+      "com.m3.collections.M3MapContractTest#treeRotationsAndEveryDeletionOrder",
+      "com.m3.collections.M3MapContractTest#weakCleanupIsDeterministicAndDoesNotDeleteReusedKeys",
+      "com.m3.collections.M3NoRetainedStructuralEntryTest#onlySlotMapDefinesTheExplicitMapEntryCompatibilityProjection",
+      "com.m3.collections.M3NoRetainedStructuralEntryTest#returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage",
+      "com.m3.collections.M3NoRetainedStructuralEntryTest#storageRootsAndNestedOwnersHaveNoRetainedEntryNodeBucketOrCellFields",
+      "com.m3.collections.M3ObjectIdentityTest#identityMapEdgeContractsRehashAndFailFast",
+      "com.m3.collections.M3ObjectIdentityTest#identityMapMatchesJdkAcrossChurnWithNullKeyAndValues",
+      "com.m3.collections.M3ObjectIdentityTest#identityOwnersRetainOnlyFlatLanes",
+      "com.m3.collections.M3ObjectIdentityTest#identitySetMatchesJdkAcrossChurn",
+      "com.m3.collections.M3ObjectResidencyBorrowTest#ExternalAndUnprovenOwnersNeverFastRetire",
+      "com.m3.collections.M3ObjectResidencyBorrowTest#asynchronousBorrowKeepsEventOwnerUntilAck",
+      "com.m3.collections.M3ObjectResidencyBorrowTest#callbackExceptionAndReentrantReleasePreserveCount",
+      "com.m3.collections.M3ObjectResidencyBorrowTest#independentBorrowersPreventEarlyReclamationAndStaleReuse",
+      "com.m3.collections.M3ObjectResidencyRuntimePressureTest#targetUsesTheActualRunningJvmHeap",
+      "com.m3.collections.M3ObjectResidencyTest#exposedInstallIsPinnedFromTheMomentItEntersTheArena",
+      "com.m3.collections.M3ObjectResidencyTest#exposedProjectionIsPinnedAndNeverSilentlyReplaced",
+      "com.m3.collections.M3ObjectResidencyTest#failedSwapLeavesOriginalProjectionResident",
+      "com.m3.collections.M3ObjectResidencyTest#lazyCreateAndStableIntegerSlot",
+      "com.m3.collections.M3ObjectResidencyTest#lruDoesNotSpinWhenNoEvictionStrategyIsConfigured",
+      "com.m3.collections.M3ObjectResidencyTest#neverEvictsActiveSlotAndReportsUnrecoverableBudget",
+      "com.m3.collections.M3ObjectResidencyTest#parentBitsRemainCanonicalAcrossProjectionRecreation",
+      "com.m3.collections.M3ObjectResidencyTest#recreatesOnlyFromCanonicalParentState",
+      "com.m3.collections.M3ObjectResidencyTest#rejectsUnknownFlagsAndIncompleteSwapConfiguration",
+      "com.m3.collections.M3ObjectResidencyTest#residencyAnnotationIsClassRetainedAndExplicit",
+      "com.m3.collections.M3ObjectResidencyTest#strictScopeRejectsReturningTheProjection",
+      "com.m3.collections.M3ObjectResidencyTest#swapsToSecondaryAndRestoresWithoutChangingLogicalValue",
+      "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams",
+      "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveListMatchesJdkAcrossGrowthCompactionSortingAndStreams",
+      "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveListSnapshotFilterFailureAndOwnerBoundStream",
+      "com.m3.collections.M3ReceivingRecoveryTest#restoredDequeFactoryKeepsCurrentCallbackFailureAndNoOpSemantics",
+      "com.m3.collections.M3ReceivingRecoveryTest#restoredFactoryKeepsCurrentSmallListSortInvalidation",
+      "com.m3.collections.M3ReceivingRecoveryTest#restoredSequenceAndCurrentListAreOneOwnerThroughTheFactory",
+      "com.m3.collections.M3SequenceContractTest#linkedListAndDequeDifferential",
+      "com.m3.collections.M3SequenceContractTest#listIteratorAlternatingMutations",
+      "com.m3.collections.M3SequenceContractTest#orderedSetSequenceOperations",
+      "com.m3.collections.M3SequenceContractTest#streamsRetainEncounterOrderAndSortedComparator",
+      "com.m3.collections.M3SequenceContractTest#sublistAndReverseShareStructuralVersion",
+      "com.m3.collections.M3SequenceContractTest#treeSetViewsAndPolls",
+      "com.m3.collections.SegmentedLaneBulkContractTest#bitmapRankSelectAndTraversalMatchBitSet",
+      "com.m3.collections.SegmentedLaneBulkContractTest#intCopiesAndImportsMatchFlatArrays",
+      "com.m3.collections.SegmentedLaneBulkContractTest#invalidRangesAreRejectedBeforeWriting",
+      "com.m3.collections.SegmentedLaneBulkContractTest#longCopiesMatchArraycopyAcrossBothOverlapDirections",
+      "com.m3.collections.SegmentedLaneBulkContractTest#sparseRowsRetainAscendingSlotAndGenerationSemantics",
+      "com.m3.collections.SegmentedLaneBulkContractTest#sparseZeroPropagationAndExtremeEndpointsDoNotGrowHoles",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#addressRoundTripsAllBoundaries",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#allocatorRejectsStaleHandlesAfterReuse",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#leanFactoryExposesStorageWithoutChoosingSemantics",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#linkedListKeepsOrderAcrossStableSlotReuse",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#longIntAndBitLanesAllocateOnlyTouchedPaths",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#multiLaneStoreDoesNotMoveOtherHandlesOnRemoval",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#segmentedArenaCrossesLeafBoundaryWithoutCopyingExistingOffsets"
+    ]
+  },
+  "methodsByPath": {
+    "m3/collections/bimap/recipe/src/test/java/com/synexia/rewrite/M3BiMapRecipeTest.java": [
+      "com.synexia.rewrite.M3BiMapRecipeTest#exactReplayFixedPointAndOptionalDelivery",
+      "com.synexia.rewrite.M3BiMapRecipeTest#sealedManifestHashesAndJavaTextSeparation",
+      "com.synexia.rewrite.M3BiMapRecipeTest#everyPartialStateResumesWithoutReplacingAdmittedOutputs",
+      "com.synexia.rewrite.M3BiMapRecipeTest#refusesEveryJavaDrift",
+      "com.synexia.rewrite.M3BiMapRecipeTest#unrelatedInputsAreNotModified",
+      "com.synexia.rewrite.M3BiMapRecipeTest#refusesEveryTextDrift",
+      "com.synexia.rewrite.M3BiMapRecipeTest#refusesDuplicatesAndNonJavaSubstitution",
+      "com.synexia.rewrite.M3BiMapRecipeTest#everyRuntimeTargetHasReviewedCategoryAndProvenance",
+      "com.synexia.rewrite.M3BiMapRecipeTest#deliveryRejectsSymlinksAndForeignContents"
+    ],
+    "m3/collections/bimap/src/test/java/com/m3/collections/interop/M3BiMapNativeTest.java": [
+      "com.m3.collections.interop.M3BiMapNativeTest#nativePutForceRemoveAndInverseGetMatchDonor",
+      "com.m3.collections.interop.M3BiMapNativeTest#nativeNullsAndDuplicateRefusal",
+      "com.m3.collections.interop.M3BiMapNativeTest#nativeCallbackExceptionIdentityIsPreserved",
+      "com.m3.collections.interop.M3BiMapNativeTest#nativeValidationAndInverseReceiver"
+    ],
+    "m3/collections/bimap/src/test/java/com/m3/collections/interop/M3BiMapTest.java": [
+      "com.m3.collections.interop.M3BiMapTest#differentialAllMutatorsBothDirections",
+      "com.m3.collections.interop.M3BiMapTest#nullsAndAllForcePutSizeOutcomes",
+      "com.m3.collections.interop.M3BiMapTest#viewsStayLiveAndMutateBothDirections",
+      "com.m3.collections.interop.M3BiMapTest#keyValueEntryArrayAndStreamMutations",
+      "com.m3.collections.interop.M3BiMapTest#entryUpdatesPermitIteratorContinuationAndRemove",
+      "com.m3.collections.interop.M3BiMapTest#entrySetDuplicateRefusalAndStaleIterator",
+      "com.m3.collections.interop.M3BiMapTest#bulkViewRemovalRetentionAndSelfArguments",
+      "com.m3.collections.interop.M3BiMapTest#replaceAllSupportsCyclesAndRetainedViews",
+      "com.m3.collections.interop.M3BiMapTest#replaceAllDuplicateAndCallbackFailureDoNotPublish",
+      "com.m3.collections.interop.M3BiMapTest#replaceAllReentrantMutationIsDetectedNotRolledBack",
+      "com.m3.collections.interop.M3BiMapTest#sequentialPutAllKeepsSuccessfulPrefix",
+      "com.m3.collections.interop.M3BiMapTest#insertionOrderAndCanonicalRepresentative",
+      "com.m3.collections.interop.M3BiMapTest#copiesAreIndependentAndUnmodifiableClosure",
+      "com.m3.collections.interop.M3BiMapTest#collectorParallelAndIndependentPartials",
+      "com.m3.collections.interop.M3BiMapTest#collectorRejectsBothDuplicateSidesAndAllowsNullOnce",
+      "com.m3.collections.interop.M3BiMapTest#actualEclipseImportAndLiveMapBridge",
+      "com.m3.collections.interop.M3BiMapTest#actualSpringSingleValueBridgeKeepsBimapUniqueness",
+      "com.m3.collections.interop.M3BiMapTest#guavaFilterConverterAndInverseCompositions",
+      "com.m3.collections.interop.M3BiMapTest#synchronizedWrapperDelegatesCommonLock",
+      "com.m3.collections.interop.M3BiMapTest#emptyValidationAndIteratorProtocol",
+      "com.m3.collections.interop.M3BiMapTest#entryArraysCannotBypassInverseMaintenance",
+      "com.m3.collections.interop.M3BiMapTest#forEachAndOwnershipShape"
+    ],
+    "m3/collections/counts/recipe/src/test/java/com/synexia/rewrite/M3CountedCollectionRecipeTest.java": [
+      "com.synexia.rewrite.M3CountedCollectionRecipeTest#exactReplayFixedPointAndOptionalDelivery",
+      "com.synexia.rewrite.M3CountedCollectionRecipeTest#sealedManifestHashesAndJavaTextSeparation",
+      "com.synexia.rewrite.M3CountedCollectionRecipeTest#refusesEveryJavaDrift",
+      "com.synexia.rewrite.M3CountedCollectionRecipeTest#refusesEveryMissingPreimage",
+      "com.synexia.rewrite.M3CountedCollectionRecipeTest#refusesEveryTextDrift",
+      "com.synexia.rewrite.M3CountedCollectionRecipeTest#refusesDuplicatesAndNonJavaSubstitution",
+      "com.synexia.rewrite.M3CountedCollectionRecipeTest#everyRuntimeTargetHasReviewedCategoryAndProvenance",
+      "com.synexia.rewrite.M3CountedCollectionRecipeTest#deliveryRejectsSymlinksAndForeignContents"
+    ],
+    "m3/collections/counts/src/test/java/com/m3/collections/interop/M3BagInteropTest.java": [
+      "com.m3.collections.interop.M3BagInteropTest#mutationTracesAgainstActualGuava",
+      "com.m3.collections.interop.M3BagInteropTest#backedViewsIteratorRemovalAndImmutableEntrySnapshots",
+      "com.m3.collections.interop.M3BagInteropTest#bulkMembershipSelfOperationsAndRemoveIf",
+      "com.m3.collections.interop.M3BagInteropTest#perKeyIntegerLimitSizeSaturationAndInvalidInputs",
+      "com.m3.collections.interop.M3BagInteropTest#failFastAndCopiesCannotMutateOwner",
+      "com.m3.collections.interop.M3BagInteropTest#actualGuavaAlgebraViewsRemainLive",
+      "com.m3.collections.interop.M3BagInteropTest#parallelCollectorAndRealEclipsePrimitiveImport"
+    ],
+    "m3/collections/counts/src/test/java/com/m3/collections/M3CountedCollectionsTest.java": [
+      "com.m3.collections.M3CountedCollectionsTest#randomMutableCountsAgainstJdk",
+      "com.m3.collections.M3CountedCollectionsTest#extremesAndOverflowLeaveInputsUnchanged",
+      "com.m3.collections.M3CountedCollectionsTest#snapshotAlgebraMatchesIndependentCounts",
+      "com.m3.collections.M3CountedCollectionsTest#algebraOverflowDoesNotMutateOperands",
+      "com.m3.collections.M3CountedCollectionsTest#laneImportExportAndIndependentCopies",
+      "com.m3.collections.M3CountedCollectionsTest#longOwnersPreserveOrderAndMutationContracts"
+    ],
+    "m3/collections/counts/src/test/java/com/m3/collections/M3CountLanesTest.java": [
+      "com.m3.collections.M3CountLanesTest#randomSlicesAcrossChunkBoundariesAgainstBigInteger",
+      "com.m3.collections.M3CountLanesTest#overflowNegativesAndArgumentAdmission",
+      "com.m3.collections.M3CountLanesTest#aggregateOverflowCrossesNativeChunkBoundary"
+    ],
+    "m3/collections/counts/totals/recipe/src/test/java/com/synexia/rewrite/M3CountTotalsRecipeTest.java": [
+      "com.synexia.rewrite.M3CountTotalsRecipeTest#exactReplayFixedPointAndOptionalDelivery",
+      "com.synexia.rewrite.M3CountTotalsRecipeTest#sealedManifestHashesAndJavaTextSeparation",
+      "com.synexia.rewrite.M3CountTotalsRecipeTest#refusesEveryJavaDrift",
+      "com.synexia.rewrite.M3CountTotalsRecipeTest#unrelatedInputsAreNotModified",
+      "com.synexia.rewrite.M3CountTotalsRecipeTest#refusesEveryTextDrift",
+      "com.synexia.rewrite.M3CountTotalsRecipeTest#refusesDuplicatesAndNonJavaSubstitution",
+      "com.synexia.rewrite.M3CountTotalsRecipeTest#everyRuntimeTargetHasReviewedCategoryAndProvenance",
+      "com.synexia.rewrite.M3CountTotalsRecipeTest#deliveryRejectsSymlinksAndForeignContents"
+    ],
+    "m3/collections/counts/totals/src/test/java/com/m3/collections/M3CountTotalsTest.java": [
+      "com.m3.collections.M3CountTotalsTest#bagTotalsMatchMaterializedAlgebraAndIndependentFrequencyOracle",
+      "com.m3.collections.M3CountTotalsTest#bagSelfEmptyAndSparseCapacityCases",
+      "com.m3.collections.M3CountTotalsTest#overlapIsSubtractedBeforeUnionOverflowCheck",
+      "com.m3.collections.M3CountTotalsTest#bagNullsRejectedEvenWhenOtherInputIsEmpty",
+      "com.m3.collections.M3CountTotalsTest#alignedLanesMatchBigIntegerAndExistingJavaAndJni",
+      "com.m3.collections.M3CountTotalsTest#aliasesEmptySlicesAndValuesOutsideSlices",
+      "com.m3.collections.M3CountTotalsTest#laneBoundsNullsAndOperationsHaveExistingExceptionParity",
+      "com.m3.collections.M3CountTotalsTest#laneIndividualAndAggregateOverflow",
+      "com.m3.collections.M3CountTotalsTest#lateChunkFailuresNeverModifyInputs",
+      "com.m3.collections.M3CountTotalsTest#perLaneValidationOrderIsNotReorderedByReduction"
+    ],
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java": [
+      "com.m3.collections.interop.M3LibraryClosureTest#listSequentialParallelAndNullOwnership",
+      "com.m3.collections.interop.M3LibraryClosureTest#setSequentialParallelOrderAndNull",
+      "com.m3.collections.interop.M3LibraryClosureTest#uniqueMapOrderedParallelResult",
+      "com.m3.collections.interop.M3LibraryClosureTest#duplicatesRejectedAcrossParallelPartitions",
+      "com.m3.collections.interop.M3LibraryClosureTest#mergingMapCountsAndDeletionMatchJdk",
+      "com.m3.collections.interop.M3LibraryClosureTest#mapNullPoliciesAndCallbackExceptions",
+      "com.m3.collections.interop.M3LibraryClosureTest#guavaListParallelValuesAndFirstKeyOrder",
+      "com.m3.collections.interop.M3LibraryClosureTest#guavaSetParallelDuplicates",
+      "com.m3.collections.interop.M3LibraryClosureTest#guavaSortedSetParallelComparator",
+      "com.m3.collections.interop.M3LibraryClosureTest#eclipseListAndSetResultsStayMutableAndIndependent",
+      "com.m3.collections.interop.M3LibraryClosureTest#eclipseMapUsesUniqueM3Accumulation",
+      "com.m3.collections.interop.M3LibraryClosureTest#springParallelCollectorUsesM3ListsAndCopies",
+      "com.m3.collections.interop.M3LibraryClosureTest#springCreatedListsAndFactoryWiring",
+      "com.m3.collections.interop.M3LibraryClosureTest#springBorrowedListsAreNotSilentlyCopied",
+      "com.m3.collections.interop.M3LibraryClosureTest#springNullEmptyAbsentAndCopyViewDistinctions",
+      "com.m3.collections.interop.M3LibraryClosureTest#springInvalidBulkInputDoesNotInstallAnAbsentKey",
+      "com.m3.collections.interop.M3LibraryClosureTest#springSingleValueBridgeMatchesDonorExceptionsAndMutations",
+      "com.m3.collections.interop.M3LibraryClosureTest#springAutoPopulatingListPreservesLazyFactoryCalls",
+      "com.m3.collections.interop.M3LibraryClosureTest#collectorCharacteristicsDoNotClaimConcurrentMutation",
+      "com.m3.collections.interop.M3LibraryClosureTest#mapperAndComparatorNullsAreRefusedBeforeCollection"
+    ],
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryCollectionsTest.java": [
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkFactoriesReuseOwners",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkMapCollisionNullAndDefaultMethods",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#eclipseMapCollisionNullAndDefaultMethods",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkListAndBackedSubList",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkSetAndIteratorRemoval",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkDequeEnds",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkSortedMapRangesAndReverse",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#jdkSortedSetRangesAndReverse",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaListMultimapDifferentialTrace",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaListMultimapLiveAbsentViewsAndDetachedRemovals",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaListIteratorAndAsMapRemove",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaSetMultimapDifferentialTrace",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaSortedValuesAndBackedRanges",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#guavaTableRowsColumnsAndCellRemoval",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#eclipseListRichOperationsAndLiveView",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#eclipseMapRichOperationsAndLiveView",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#eclipseSetAndSortedFamilies",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#springDifferentialTrace",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#springEmptyAbsentNullCopyAndLiveView",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#springAndGuavaAreNotInterchangeableContracts",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#eachFactoryCallHasIndependentOwnership",
+      "com.m3.collections.interop.M3LibraryCollectionsTest#nullComparatorRefusal"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3AdaptiveEnumLongMapTest.java": [
+      "com.m3.collections.M3AdaptiveEnumLongMapTest#wideEnumMatchesJdkAcrossMutationsAndModes",
+      "com.m3.collections.M3AdaptiveEnumLongMapTest#modeTransitionsAndOrdinalOrderInSparseMode",
+      "com.m3.collections.M3AdaptiveEnumLongMapTest#narrowEnumIsDenseFromTheStartAndEdgeContracts",
+      "com.m3.collections.M3AdaptiveEnumLongMapTest#foreignEnumKeysAreRejectedLikeJdkInBothModes",
+      "com.m3.collections.M3AdaptiveEnumLongMapTest#retainsOnlyTheActiveBackingAndNoKeyReferences"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3ConcurrentContractTest.java": [
+      "com.m3.collections.M3ConcurrentContractTest#concurrentStreamsUseSnapshotSizeAndSelfToStringTerminates",
+      "com.m3.collections.M3ConcurrentContractTest#atomicHashAndTreeCompute",
+      "com.m3.collections.M3ConcurrentContractTest#lockedRangeAndSetViews",
+      "com.m3.collections.M3ConcurrentContractTest#blockingDequeDifferential",
+      "com.m3.collections.M3ConcurrentContractTest#blockingWakeupTimeoutAndInterrupt",
+      "com.m3.collections.M3ConcurrentContractTest#drainFailureRetainsUndeliveredElement",
+      "com.m3.collections.M3ConcurrentContractTest#transferBufferedDifferentialAndIteratorRecycling",
+      "com.m3.collections.M3ConcurrentContractTest#transferWaitersCancellationAndTimeout",
+      "com.m3.collections.M3ConcurrentContractTest#synchronousQueueHasNoCollectionCapacity",
+      "com.m3.collections.M3ConcurrentContractTest#mpmcBlockingDequeHasNoLossOrDuplicates",
+      "com.m3.collections.M3ConcurrentContractTest#mpmcTransferHasNoLossOrDuplicates",
+      "com.m3.collections.M3ConcurrentContractTest#mpmcRendezvousHasNoLossOrDuplicates"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3ConcurrentLaneContractTest.java": [
+      "com.m3.collections.M3ConcurrentLaneContractTest#atomicValuesWrapAndZeroWritesKeepPublicationLocations",
+      "com.m3.collections.M3ConcurrentLaneContractTest#racingPublicationAndAtomicAddsLoseNoUpdates",
+      "com.m3.collections.M3ConcurrentLaneContractTest#parallelStreamsSplitFixedRangesWithoutLosingOrDuplicatingSlots",
+      "com.m3.collections.M3ConcurrentLaneContractTest#intAtomicBoundaryAndSparsePreparation",
+      "com.m3.collections.M3ConcurrentLaneContractTest#concurrentCollectionStreamsPreserveCapturedSnapshotsAndIndexOrder"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3EnumLongMapTest.java": [
+      "com.m3.collections.M3EnumLongMapTest#wideEnumMatchesJdkAcrossMutationsAndOrdinalOrder",
+      "com.m3.collections.M3EnumLongMapTest#narrowEnumAndEdgeContracts",
+      "com.m3.collections.M3EnumLongMapTest#foreignEnumKeysAreRejectedLikeJdk",
+      "com.m3.collections.M3EnumLongMapTest#retainsOnlyPrimitiveLanesAndTheSharedUniverse"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3EnumSetTest.java": [
+      "com.m3.collections.M3EnumSetTest#wideEnumMatchesJdkAcrossMutationsAndBulkOperations",
+      "com.m3.collections.M3EnumSetTest#narrowEnumEdgeContractsMatchJdk",
+      "com.m3.collections.M3EnumSetTest#foreignEnumConstantsAreRejectedLikeJdk",
+      "com.m3.collections.M3EnumSetTest#retainsOnlyPresenceWordsAndTheSharedUniverse"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3FactoryContractTest.java": [
+      "com.m3.collections.M3FactoryContractTest#allFactoryFamiliesAreUsable",
+      "com.m3.collections.M3FactoryContractTest#immutableAndJdkUtilityWrappers"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3FootprintContractTest.java": [
+      "com.m3.collections.M3FootprintContractTest#emptyHashLookupsStillEvaluateCallbacksAndFirstInsertRecovers",
+      "com.m3.collections.M3FootprintContractTest#weakSecondHashFailureLeavesAnUsableEmptyOwner",
+      "com.m3.collections.M3FootprintContractTest#treeEmptyChecksStillInvokeComparatorAndRejectNull",
+      "com.m3.collections.M3FootprintContractTest#mapViewsCreatedWhileEmptyRemainBackedAndFailFast",
+      "com.m3.collections.M3FootprintContractTest#listAndSetViewsWorkAcrossFirstInsertionClearAndReuse",
+      "com.m3.collections.M3FootprintContractTest#separateEmptyOwnersNeverShareWritableSlots",
+      "com.m3.collections.M3FootprintContractTest#representableAvlHeightFitsSignedByteEvenDuringInsertion"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorTest.java": [
+      "com.m3.collections.M3IndexMaskCompactorTest#stableMaskSelectionContract"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3IntLanesTest.java": [
+      "com.m3.collections.M3IntLanesTest#hashSetMatchesJdkAcrossChurnIncludingZeroAndRehash",
+      "com.m3.collections.M3IntLanesTest#hashSetEdgeContractsAndFailFast",
+      "com.m3.collections.M3IntLanesTest#intIntMapMatchesJdkAcrossChurnIncludingZeroKey",
+      "com.m3.collections.M3IntLanesTest#intIntMapEdgeContractsAndFailFast",
+      "com.m3.collections.M3IntLanesTest#priorityQueueMatchesJdkHeadContentsAndRemoval",
+      "com.m3.collections.M3IntLanesTest#intLanesRetainOnlyPrimitiveFields"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3IntLongHashMapTest.java": [
+      "com.m3.collections.M3IntLongHashMapTest#matchesJdkAcrossChurnIncludingZeroKeyAndRehash",
+      "com.m3.collections.M3IntLongHashMapTest#edgeContractsFailFastAndSizing"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3JdkCollectionDifferentialTest.java": [
+      "com.m3.collections.M3JdkCollectionDifferentialTest#lateBindingTraversalsFollowListSetAndMapViews",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#everySortedSplitRetainsCustomComparatorAndEncounterOrder",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#sequencedNullAndAccessOrderOperationsMatchLinkedHashMap",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#comparatorEquivalentKeysAndNestedBoundsMatchTreeMap",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#reversedSublistAndDefaultListMutationsMatchLinkedList",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#boundedDequeWrapDrainAndTimedOperationsMatchJdk",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#blockedProducerInterruptionLeavesNoPhantomElement",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#transferAcknowledgementTimeoutAndCancellationMatchJdk",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#zeroCapacityRendezvousPreservesSynchronousQueueContract",
+      "com.m3.collections.M3JdkCollectionDifferentialTest#lockedMapAtomicCallbacksLoseNoUpdates"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java": [
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#arrayListMatchesJdkAcrossDeterministicMutationSequence",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#hashSetMatchesJdkAcrossCollisionsDeletionAndRehash",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#hashMapMatchesJdkAcrossReplacementDeletionAndRehash",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#arrayDequeMatchesJdkOrderAndOccurrenceRemoval",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#priorityQueueMatchesJdkHeadContentsAndRemoval",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#duplicateSetAddAndMapValueReplacementAreNonStructural",
+      "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#iteratorsAreFailFastOnStructuralMutation"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3LazyObserverRegressionTest.java": [
+      "com.m3.collections.M3LazyObserverRegressionTest#successfulValueRemainsCoherentWhenCompletionObserverThrows",
+      "com.m3.collections.M3LazyObserverRegressionTest#failureObserversCannotReplaceProviderExceptionOrPoisonRetry",
+      "com.m3.collections.M3LazyObserverRegressionTest#beforeTouchObserverCannotRetargetRecycledSlot",
+      "com.m3.collections.M3LazyObserverRegressionTest#rangeAndCachedValueObserversShareMutationGuard",
+      "com.m3.collections.M3LazyObserverRegressionTest#deferredKeysPreserveNullFailureCancellationAndViewOrder"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapTest.java": [
+      "com.m3.collections.M3LazyTreeMapTest#actualPackedTreeProviderContract"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3LongArrayDequeTest.java": [
+      "com.m3.collections.M3LongArrayDequeTest#primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams",
+      "com.m3.collections.M3LongArrayDequeTest#callbackFailurePreservesThrowingValueAndUnreadSuffixAcrossRingWrap",
+      "com.m3.collections.M3LongArrayDequeTest#queueAndIndexedViewsAreJdkShapedAliases"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3LongArrayListTest.java": [
+      "com.m3.collections.M3LongArrayListTest#mixedOperationsMatchJdkValueOrder",
+      "com.m3.collections.M3LongArrayListTest#callbackFailurePreservesThrowingValueAndUnreadSuffix",
+      "com.m3.collections.M3LongArrayListTest#directStreamsRetainOwnerAcrossStorageRelocation",
+      "com.m3.collections.M3LongArrayListTest#sortDedupAndSearchPreserveSignedLongSemantics",
+      "com.m3.collections.M3LongArrayListTest#structuralMutationsFailFastAndStackIsJdkShapedRemoval",
+      "com.m3.collections.M3LongArrayListTest#boundsOwnershipAndStackExceptions",
+      "com.m3.collections.M3LongArrayListTest#primitiveStorageAndCapacityChecksStayBounded"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3LongFilteredViewContractTest.java": [
+      "com.m3.collections.M3LongFilteredViewContractTest#composableAndReadOnly",
+      "com.m3.collections.M3LongFilteredViewContractTest#lateBindingStreamsAndNoSizeScan",
+      "com.m3.collections.M3LongFilteredViewContractTest#fusedNestedPredicatesKeepEvaluationOrder",
+      "com.m3.collections.M3LongFilteredViewContractTest#differentialSeeded",
+      "com.m3.collections.M3LongFilteredViewContractTest#exceptionBoundaries"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3LongLinkedHashSetTest.java": [
+      "com.m3.collections.M3LongLinkedHashSetTest#matchesJdkSequencedSetAcrossChurnIncludingMovesAndRehash",
+      "com.m3.collections.M3LongLinkedHashSetTest#edgeContractsFailFastAndSizing",
+      "com.m3.collections.M3LongLinkedHashSetTest#retainsOnlyPrimitiveLanes"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3MapContractTest.java": [
+      "com.m3.collections.M3MapContractTest#treeRotationsAndEveryDeletionOrder",
+      "com.m3.collections.M3MapContractTest#treeRangesNavigationAndMutation",
+      "com.m3.collections.M3MapContractTest#comparatorNullKeysAndEquality",
+      "com.m3.collections.M3MapContractTest#collisionChainsRecyclingAndNull",
+      "com.m3.collections.M3MapContractTest#sequencedAndReversedHashViews",
+      "com.m3.collections.M3MapContractTest#iteratorDeletionPreservesAllTreeSuccessors",
+      "com.m3.collections.M3MapContractTest#weakCleanupIsDeterministicAndDoesNotDeleteReusedKeys",
+      "com.m3.collections.M3MapContractTest#sequencedEndpointsUseLiveAndDetachedEntriesCorrectly",
+      "com.m3.collections.M3MapContractTest#nestedRangeExceptionContractsMatchTreeMap",
+      "com.m3.collections.M3MapContractTest#entryAndKeyViewsRemoveNullValuedMappings"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java": [
+      "com.m3.collections.M3NoRetainedStructuralEntryTest#storageRootsAndNestedOwnersHaveNoRetainedEntryNodeBucketOrCellFields",
+      "com.m3.collections.M3NoRetainedStructuralEntryTest#onlySlotMapDefinesTheExplicitMapEntryCompatibilityProjection",
+      "com.m3.collections.M3NoRetainedStructuralEntryTest#returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3ObjectIdentityTest.java": [
+      "com.m3.collections.M3ObjectIdentityTest#identityMapMatchesJdkAcrossChurnWithNullKeyAndValues",
+      "com.m3.collections.M3ObjectIdentityTest#identityMapEdgeContractsRehashAndFailFast",
+      "com.m3.collections.M3ObjectIdentityTest#identitySetMatchesJdkAcrossChurn",
+      "com.m3.collections.M3ObjectIdentityTest#identityOwnersRetainOnlyFlatLanes"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyBorrowTest.java": [
+      "com.m3.collections.M3ObjectResidencyBorrowTest#independentBorrowersPreventEarlyReclamationAndStaleReuse",
+      "com.m3.collections.M3ObjectResidencyBorrowTest#callbackExceptionAndReentrantReleasePreserveCount",
+      "com.m3.collections.M3ObjectResidencyBorrowTest#ExternalAndUnprovenOwnersNeverFastRetire",
+      "com.m3.collections.M3ObjectResidencyBorrowTest#asynchronousBorrowKeepsEventOwnerUntilAck"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyRuntimePressureTest.java": [
+      "com.m3.collections.M3ObjectResidencyRuntimePressureTest#targetUsesTheActualRunningJvmHeap"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyTest.java": [
+      "com.m3.collections.M3ObjectResidencyTest#parentBitsRemainCanonicalAcrossProjectionRecreation",
+      "com.m3.collections.M3ObjectResidencyTest#exposedProjectionIsPinnedAndNeverSilentlyReplaced",
+      "com.m3.collections.M3ObjectResidencyTest#exposedInstallIsPinnedFromTheMomentItEntersTheArena",
+      "com.m3.collections.M3ObjectResidencyTest#lazyCreateAndStableIntegerSlot",
+      "com.m3.collections.M3ObjectResidencyTest#swapsToSecondaryAndRestoresWithoutChangingLogicalValue",
+      "com.m3.collections.M3ObjectResidencyTest#neverEvictsActiveSlotAndReportsUnrecoverableBudget",
+      "com.m3.collections.M3ObjectResidencyTest#strictScopeRejectsReturningTheProjection",
+      "com.m3.collections.M3ObjectResidencyTest#rejectsUnknownFlagsAndIncompleteSwapConfiguration",
+      "com.m3.collections.M3ObjectResidencyTest#lruDoesNotSpinWhenNoEvictionStrategyIsConfigured",
+      "com.m3.collections.M3ObjectResidencyTest#recreatesOnlyFromCanonicalParentState",
+      "com.m3.collections.M3ObjectResidencyTest#failedSwapLeavesOriginalProjectionResident",
+      "com.m3.collections.M3ObjectResidencyTest#residencyAnnotationIsClassRetainedAndExplicit"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3PrimitiveCollectionDifferentialTest.java": [
+      "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveListMatchesJdkAcrossGrowthCompactionSortingAndStreams",
+      "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveListSnapshotFilterFailureAndOwnerBoundStream",
+      "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3ReceivingRecoveryTest.java": [
+      "com.m3.collections.M3ReceivingRecoveryTest#restoredSequenceAndCurrentListAreOneOwnerThroughTheFactory",
+      "com.m3.collections.M3ReceivingRecoveryTest#restoredFactoryKeepsCurrentSmallListSortInvalidation",
+      "com.m3.collections.M3ReceivingRecoveryTest#restoredDequeFactoryKeepsCurrentCallbackFailureAndNoOpSemantics"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/M3SequenceContractTest.java": [
+      "com.m3.collections.M3SequenceContractTest#linkedListAndDequeDifferential",
+      "com.m3.collections.M3SequenceContractTest#listIteratorAlternatingMutations",
+      "com.m3.collections.M3SequenceContractTest#sublistAndReverseShareStructuralVersion",
+      "com.m3.collections.M3SequenceContractTest#orderedSetSequenceOperations",
+      "com.m3.collections.M3SequenceContractTest#streamsRetainEncounterOrderAndSortedComparator",
+      "com.m3.collections.M3SequenceContractTest#treeSetViewsAndPolls"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/SegmentedLaneBulkContractTest.java": [
+      "com.m3.collections.SegmentedLaneBulkContractTest#longCopiesMatchArraycopyAcrossBothOverlapDirections",
+      "com.m3.collections.SegmentedLaneBulkContractTest#intCopiesAndImportsMatchFlatArrays",
+      "com.m3.collections.SegmentedLaneBulkContractTest#sparseZeroPropagationAndExtremeEndpointsDoNotGrowHoles",
+      "com.m3.collections.SegmentedLaneBulkContractTest#invalidRangesAreRejectedBeforeWriting",
+      "com.m3.collections.SegmentedLaneBulkContractTest#bitmapRankSelectAndTraversalMatchBitSet",
+      "com.m3.collections.SegmentedLaneBulkContractTest#sparseRowsRetainAscendingSlotAndGenerationSemantics"
+    ],
+    "m3/collections/src/test/java/com/m3/collections/SegmentedPrimitiveStorageTest.java": [
+      "com.m3.collections.SegmentedPrimitiveStorageTest#addressRoundTripsAllBoundaries",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#longIntAndBitLanesAllocateOnlyTouchedPaths",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#allocatorRejectsStaleHandlesAfterReuse",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#segmentedArenaCrossesLeafBoundaryWithoutCopyingExistingOffsets",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#linkedListKeepsOrderAcrossStableSlotReuse",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#leanFactoryExposesStorageWithoutChoosingSemantics",
+      "com.m3.collections.SegmentedPrimitiveStorageTest#multiLaneStoreDoesNotMoveOtherHandlesOnRemoval"
+    ],
+    "m3/collections/wrappers/recipe/src/test/java/com/synexia/rewrite/M3FilteredSortedRecipeTest.java": [
+      "com.synexia.rewrite.M3FilteredSortedRecipeTest#exactReplayFixedPointAndOptionalDelivery",
+      "com.synexia.rewrite.M3FilteredSortedRecipeTest#sealedManifestHashesAndJavaTextSeparation",
+      "com.synexia.rewrite.M3FilteredSortedRecipeTest#eachTargetPresentAndMissingResumesWithoutReplacingAdmittedOutputs",
+      "com.synexia.rewrite.M3FilteredSortedRecipeTest#refusesEveryJavaDrift",
+      "com.synexia.rewrite.M3FilteredSortedRecipeTest#unrelatedInputsAreNotModified",
+      "com.synexia.rewrite.M3FilteredSortedRecipeTest#refusesEveryTextDrift",
+      "com.synexia.rewrite.M3FilteredSortedRecipeTest#refusesDuplicatesAndNonJavaSubstitution",
+      "com.synexia.rewrite.M3FilteredSortedRecipeTest#donorPinsAndRuntimeTargetsHaveCatalogue",
+      "com.synexia.rewrite.M3FilteredSortedRecipeTest#deliveryRejectsSymlinksAndForeignContents"
+    ],
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsTest.java": [
+      "com.m3.collections.M3FilteredMapsTest#mapContracts"
+    ],
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3WrapperContractsTest.java": [
+      "com.m3.collections.M3WrapperContractsTest#erasedCollectionPreservesSortedAndNavigableContracts",
+      "com.m3.collections.M3WrapperContractsTest#sortedOnlyOwnerKeepsComparatorThroughErasure",
+      "com.m3.collections.M3WrapperContractsTest#directOwnerMembershipRespectsIdentity",
+      "com.m3.collections.M3WrapperContractsTest#explicitOwnerRemovalDoesNotRequireRemovableIterator",
+      "com.m3.collections.M3WrapperContractsTest#listDuplicatesAndHiddenSurvivors",
+      "com.m3.collections.M3WrapperContractsTest#nestedPredicatesShortCircuitInOrder",
+      "com.m3.collections.M3WrapperContractsTest#sortedSnapshotFiltersOnceAndPreservesDuplicates",
+      "com.m3.collections.M3WrapperContractsTest#streamMetadataDoesNotCountPredicateAndShortCircuitIsLazy",
+      "com.m3.collections.M3WrapperContractsTest#sortedTraversalMetadataAndSplitMatchComparator",
+      "com.m3.collections.M3WrapperContractsTest#boundedNavigationNullsAndBothDirectionsAgainstJdk",
+      "com.m3.collections.M3WrapperContractsTest#comparatorStoredRepresentativeLookupRemoval",
+      "com.m3.collections.M3WrapperContractsTest#sortedReadOnlyCheckedAndSequencedComposition",
+      "com.m3.collections.M3WrapperContractsTest#collectionAddAllChecksAllPredicatesBeforeWriting",
+      "com.m3.collections.M3WrapperContractsTest#mapViewsUseActualM3OwnerAndKeepHiddenEntries",
+      "com.m3.collections.M3WrapperContractsTest#filteredSortedMapRangesAndImmutableNavigationEntries",
+      "com.m3.collections.M3WrapperContractsTest#entryBoundariesNeverLeakUnfilteredWriteAuthority",
+      "com.m3.collections.M3WrapperContractsTest#nullKeysAndComparatorMapLookup",
+      "com.m3.collections.M3WrapperContractsTest#readOnlySortedMapsProtectAllNestedEntries",
+      "com.m3.collections.M3WrapperContractsTest#bimapEntryUpdatesRetainBothPredicateAndInverseGuards",
+      "com.m3.collections.M3WrapperContractsTest#actualGuavaSetFilterSharedProfile",
+      "com.m3.collections.M3WrapperContractsTest#actualEclipseSortedWrappersKeepM3BackedMutations",
+      "com.m3.collections.M3WrapperContractsTest#actualSpringWrapperRespectsFilteredVisibility",
+      "com.m3.collections.M3WrapperContractsTest#externallyLockedFilteredPollingKeepsHiddenElements",
+      "com.m3.collections.M3WrapperContractsTest#predicateFailureIdentityAndEmptyValidation"
+    ]
+  },
+  "receiptPaths": [
+    "m3/collections/counts/recipe-receipt.tsv",
+    "m3/collections/counts/totals/recipe-receipt.tsv",
+    "m3/collections/bimap/recipe-receipt.tsv",
+    "m3/collections/wrappers/recipe-receipt.tsv"
+  ],
+  "sourceRoots": [
+    "m3/collections/src",
+    "m3/collections/interop/src"
+  ],
+  "packetRoots": [
+    "m3/collections/counts",
+    "m3/collections/bimap",
+    "m3/collections/wrappers"
+  ],
+  "boundaries": [
+    "Immutable outputs/scaffolds and current retained owners; no containing module, generated proof file, workflow, SDK pins or future commit hash in this seal.",
+    "Exact candidate Java/JNI/package runs must generate their own receipts; this inventory is not acceptance.",
+    "137 retained/targeted plus separate mask1 and borrow4 does not cover all current tests."
+  ]
+}

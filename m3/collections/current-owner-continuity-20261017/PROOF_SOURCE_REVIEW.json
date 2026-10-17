@@ -1,0 +1,71 @@
+{
+  "schema": "M3_COLLECTIONS_CURRENT_PROOFS_FINAL_INDEPENDENT_SOURCE_REVIEW_V2",
+  "status": "NO_OPEN_SOURCE_FINDINGS_IN_TEN_FILE_V4_PROOF_COHORT_EXECUTION_NOT_RUN",
+  "supersedesSourceAssessment": "10412b94775419da12873313d8a78139597b3e92",
+  "candidateCheckpoint": "569a6927b32adfc3f87624b76d2dc5538fb698a0",
+  "priorThreeFindingFixes": "UNCHANGED_FROM_V3_AND_REVIEWED",
+  "lateFinding": {
+    "id": "ZERO_EXIT_JNI_WARNING",
+    "fix": "custody1659bd70 diagnosticrejectleaf +donation69507243 actualstdout/stderr checkbeforeexitacceptance +test7c9bf2ee new17thcleanpositiveand2diagnosticrefusals",
+    "originalDonor": "54fa2569d9445f9729f3e9aea874c42ef9e46cad unchanged",
+    "sourceReview": "RESOLVED_EXECUTION_PENDING"
+  },
+  "all10OutputSha256ReadbacksExact": true,
+  "unchanged7ResourcesFromV3": true,
+  "all5MechanicalAdaptations": [
+    {
+      "name": "counts",
+      "edits": 11,
+      "forward": true,
+      "inverse": true
+    },
+    {
+      "name": "totals",
+      "edits": 12,
+      "forward": true,
+      "inverse": true
+    },
+    {
+      "name": "bimap",
+      "edits": 11,
+      "forward": true,
+      "inverse": true
+    },
+    {
+      "name": "wrappers",
+      "edits": 17,
+      "forward": true,
+      "inverse": true
+    },
+    {
+      "name": "donation",
+      "edits": 16,
+      "forward": true,
+      "inverse": true
+    }
+  ],
+  "currentSourcePins": "259genuineimmutableowners+fivePOMs;9JUnitsetsactualsource-matched;142targeted+148donation/23overlap=267distinct predicted",
+  "helperActualMethodInventory": [
+    "CustodyBoundaryTest.test_actual_junit_methods_positive_baseline",
+    "CustodyBoundaryTest.test_compiled_artifact_drift_is_bound",
+    "CustodyBoundaryTest.test_cross_run_receipt_refuses",
+    "CustodyBoundaryTest.test_duplicate_and_unexpected_junit_methods_refuse",
+    "CustodyBoundaryTest.test_duplicate_json_keys_at_any_depth_refuse",
+    "CustodyBoundaryTest.test_git_blob_and_length_metadata_are_enforced",
+    "CustodyBoundaryTest.test_junit_counter_cannot_replace_actual_method_cases",
+    "CustodyBoundaryTest.test_malformed_or_foreign_run_identity_refuses",
+    "CustodyBoundaryTest.test_missing_source_refuses_after_positive_baseline",
+    "CustodyBoundaryTest.test_skipped_or_missing_junit_reports_refuse",
+    "CustodyBoundaryTest.test_source_byte_drift_names_exact_owner_without_write",
+    "CustodyBoundaryTest.test_source_inventory_positive_baseline",
+    "CustodyBoundaryTest.test_symlinked_parent_and_source_refuse",
+    "CustodyBoundaryTest.test_unlisted_source_is_not_silently_omitted",
+    "CustodyBoundaryTest.test_unsafe_paths_and_missing_receipts_refuse",
+    "CustodyBoundaryTest.test_valid_run_identity",
+    "CustodyBoundaryTest.test_zero_exit_native_diagnostics_cannot_grant_acceptance"
+  ],
+  "sourceOnlyScope": "NoPython/JVM/Maven/JNI execution; noactual performance/currentinstalledJDKadmission; finalSDK/workflow integration audit stillpending",
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "goal": "ACTIVE"
+}

@@ -1,0 +1,8 @@
+# exact additive SDK targets
+m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	ABSENT	cfe0eb7335e3945f35b4a9763e11e0a7dff6c672f7014733f15e876b0b06909e	M3CollectionViews.java.txt
+m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java	ABSENT	1dff497079e768fda574a349cc521732d69cbacbecc19deba6888d909844f1cb	M3FilteredMaps.java.txt
+m3/collections/wrappers/src/test/java/RunSearchJni.java	ABSENT	3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a	RunSearchJni.java.txt
+m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsNativeSelfTest.java	ABSENT	5437dfeea903d7208f6453e052d8ca88b84ac1e292dff1acd0df845b6c21f136	M3FilteredMapsNativeSelfTest.java.txt
+m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsSelfTest.java	ABSENT	a99ae7502a7b1832c149dd2d0af888ddbdeb5805659ef5c778ceda4ca1949cd5	M3FilteredMapsSelfTest.java.txt
+m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsTest.java	ABSENT	c4139f6db6648b0e71a347c15c35d6d133cb4d32581990490141501f273cb271	M3FilteredMapsTest.java.txt
+m3/collections/wrappers/src/test/java/com/m3/collections/M3WrapperContractsTest.java	ABSENT	a641b0eda9ecbfac68d8719e5d2a39f6b826f5228954173da37188a7629d911e	M3WrapperContractsTest.java.txt

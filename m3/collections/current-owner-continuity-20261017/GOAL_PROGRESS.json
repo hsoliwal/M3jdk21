@@ -1,0 +1,96 @@
+{
+  "schema": "M3_COMPLETE_MIGRATION_GOAL_PROGRESS_V1",
+  "utc": "2026-10-17T11:04:44Z",
+  "goal": {
+    "status": "active",
+    "objective": "Continuously implement, verify, and optimize the complete MIndex*/MatIndex*/SubMIndex* migration from hsoliwal/com.synexia to hsoliwal/M3jdk21 and its java.lang.String integration. Follow the user's twelve-pass specification and borrow-first doctrine; preserve source contracts and durable source-to-target mappings; advance Route A, safe compiler lowering (Route B), and matched complete-JDK integration (Route C) independently; measure performance and heap/native/mapped retention; fix evidenced defects; maintain recipes, coverage, exact-candidate receipts, draft PRs, TODO and resume records. Keep the continual optimization goal active across milestones; never treat a partial port, passing explicit-view tests, a manifest, or a draft PR as completion of the complete migration or ongoing optimization.",
+    "scopeReduced": false
+  },
+  "routes": {
+    "A": "Current runtime mapping and explicit-view acceptance remain partial/unverified.",
+    "B": "Current compiler source/fixture qualification is pending actual hosted execution; transparent safe lowering and real MIndex bridge are not qualified.",
+    "C": "Matched complete-JDK/native/jtreg/installed-image gates remain open."
+  },
+  "sourceInventory": "INCOMPLETE_BOUNDED_FILENAME_CENSUS_IS_NOT_COMPLETE_SYMBOL_INVENTORY",
+  "acceptance": "NOT_COMPLETE",
+  "canonicalCoverage": {
+    "records": 60,
+    "historicallyTested": 1,
+    "implementedUnverified": 25,
+    "pending": 32,
+    "blocked": 2,
+    "completionBlockers": 158,
+    "originalCli": "NOT_RUN"
+  },
+  "openWork": [
+    "Run this exact bounded hosted collection candidate: real two-round original SDK delivery, actual source/compiled custody,142 targeted method IDs and native diagnostics, with all counters/receipts checked.",
+    "Run the separate strict current donation148-method/132-row inventory gate; do not add142+148 as290 distinct because23 overlap.",
+    "Observe exact current runtime source custody39025980936/job117376930759 and priorcompiler job without rerunning or borrowing results.",
+    "Complete original unchanged canonical mapping validator with a genuine qualified dependency provider, full symbol census and twelve-pass family migration.",
+    "Continue RoutesA/B/C independently through real Java/JNI/installedJDK behavior and performance/heap/native/mapped retention measurements; current collection/runtime tests do not complete those requirements."
+  ],
+  "storage": {
+    "protection": "ACTIVE",
+    "bulk": "HOLD",
+    "nativeTemp": "K:\\codex-work\\agent-temp\\",
+    "controlSha256": "9dd68b48586a776700f2e9d4eee45a0bc568ccee7b6c2270bfab855570bd457d",
+    "localWrites": "Only bounded S controls and separately gated small memory pointers; no local source/Git/build/cache outputs; bothC output holds andbulkHOLD active.",
+    "lastMeasured": {
+      "K": 204800,
+      "S": 26164858880,
+      "C": 25888763904,
+      "utc": "2026-10-17T10:52:23Z",
+      "observationOnly": true
+    },
+    "reserveBytes": 8589934592
+  },
+  "documentationAuthority": "Immutable source objects, exact candidate receipts and executed proofs; chat summaries and Git ancestry do not establish received code or runtime qualification.",
+  "wrapperDependencyInventory": {
+    "gitBlob": "44f22e347e18840333903feaf7809e2ec485fe4b",
+    "existingTargets": 45,
+    "absent": 42,
+    "exactPreimages": 3,
+    "sourcePayloadBytes": 609869,
+    "execution": "NOT_RUN"
+  },
+  "milestone": "Restoring complete existing collection recipe chain with current owners and stronger source/compiled/Java/JNI qualification",
+  "sourceCustodyCandidate": {
+    "cohortPaths": 72,
+    "legacyPatchPaths": 66,
+    "legacyAfter": 56,
+    "modifiedUtf8Owners": 4,
+    "currentSuccessors": 6,
+    "extraCustodyPaths": 6,
+    "productionDependenciesAmongExtras": 2,
+    "proofAndMappingCompanions": 4,
+    "sourceCustodyOnly": true,
+    "execution": "NOT_RUN",
+    "runtimeQualified": false,
+    "jniQualified": false,
+    "jdkQualified": false,
+    "performanceQualified": false,
+    "phaseAdvanced": false
+  },
+  "collectionCandidate": {
+    "sourceParent": "f2d1fc2be70a5df066e17c2592627e8f966bc8a8",
+    "receiverParent": "eeb236ab208b2ca0d0c262bdfa0c4654ec9c8f25",
+    "sdkTree": "2417d44526baa6f53729247c8f1cf6115b9d890b",
+    "sdkFiles": 99,
+    "sdkBytes": 924179,
+    "bootstrapTargets": 91,
+    "existingRecipeProductTargets": 45,
+    "existingProductChanges": 3,
+    "newProductPaths": 42,
+    "originalDistinctSdkMethods": 34,
+    "helperTests": 17,
+    "targetedRuntimeMethods": 142,
+    "separateDonationMethods": 148,
+    "targetedDonationOverlap": 23,
+    "sourceDerivedUnionIfBothExecute": 267,
+    "donationInventoryRows": 132,
+    "donationJavaPaths": 122,
+    "runtimeApplied": false,
+    "phaseAdvanced": false,
+    "execution": "NOT_RUN"
+  }
+}

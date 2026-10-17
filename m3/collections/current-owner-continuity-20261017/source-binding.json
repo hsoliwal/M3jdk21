@@ -1,0 +1,14 @@
+{
+  "schema": "M3_COLLECTIONS_CURRENT_CONTINUITY_SOURCE_BINDING_V1",
+  "repository": "hsoliwal/com.synexia",
+  "sourceCommit": "112ccad490aa94551c587d2229c6729c24252363",
+  "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/12066",
+  "sourcePath": "synexia-openrewrite-recipes/recipes/m3-collections-current-owner-continuity-20261017/sdk",
+  "receiverCorePath": "m3/collections/current-owner-continuity-20261017/sdk",
+  "moduleGitTree": "2417d44526baa6f53729247c8f1cf6115b9d890b",
+  "pinsSha256": "fb95f0312b4871d6232203e4b2c5f312a54521259ccb92cf4dccc81ef2a21e12",
+  "snapshotProviderGitBlob": "4a38e39d0755462d40c2b22548b87abde938ea0b",
+  "workflowSha256": "50aced5260a3cbbecdc923347b4c3cdf1dbb356ae90d421762ba37dd0f5d816f",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

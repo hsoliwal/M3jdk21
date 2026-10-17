@@ -1,0 +1,69 @@
+{
+  "schema": "M3_COLLECTIONS_CONTINUITY_FINAL_SDK_WORKFLOW_INDEPENDENT_SOURCE_REVIEW_V1",
+  "status": "NO_OPEN_SOURCE_FINDINGS_FINAL99FILE_SDK_AND_WORKFLOW_EXECUTION_NOT_RUN",
+  "reviewer": "collections_review",
+  "candidateCheckpoint": "ea300cfdd626879eaef36a652a9d0d60356978b8",
+  "sdkTree": "2417d44526baa6f53729247c8f1cf6115b9d890b",
+  "pinsGitBlob": "0ee6383325bc2ded8f927951df121e9f73998331",
+  "pinsSha256": "fb95f0312b4871d6232203e4b2c5f312a54521259ccb92cf4dccc81ef2a21e12",
+  "all99FilesRawReadAndHashVerified": true,
+  "sdkBytes": 924179,
+  "closedInventory": {
+    "allFiles": 99,
+    "pinsFiles": 98,
+    "pinsSelfExcluded": true,
+    "treeEntryCount99": true
+  },
+  "targets": {
+    "allADD": 91,
+    "immutableHistoricalScaffold": 75,
+    "runBoundPoms": 5,
+    "versionedProofs": 10,
+    "boundedHostedWorkflow": 1,
+    "products": 45,
+    "bootstrapProductDisjoint": true,
+    "preservedCurrentFiles": 141,
+    "currentOnly13OwnersRetained": true
+  },
+  "originalDonorContracts": {
+    "snapshotProvider": "4a38e39d0755462d40c2b22548b87abde938ea0b byteexact",
+    "originalSDKMethods": "8+8+9+9=34 source-exact; executedtwiceresource4stageplan68executions not68distinct",
+    "canonicalMirrorJsonAndOriginalVerifiers": "allbyteexact",
+    "original5Poms": "inversingsolebuilddirectoryinsertionrestoresoriginalbytes",
+    "composition": "actual2serialreplays withallN+45byteand4actualreceiptmapschecks;controller6fixture-basedadmissiontests;bootstrap8Mavenmethods",
+    "selfCycles": "No containingSDKtree/pins/rawselfhashinbootstrapoutputs;external source-binding metadataowner separate"
+  },
+  "proofAssessment": "0229f5ed52fbfa7faeadbf874bc71c1c3bd75589",
+  "workflow": {
+    "gitBlob": "8416ce181bd1962389d9fde189715a43b79810c3",
+    "sha256": "50aced5260a3cbbecdc923347b4c3cdf1dbb356ae90d421762ba37dd0f5d816f",
+    "bytes": 28615,
+    "foundAndFixed": "FinalheredocPYhad20spacesin5c48;8416sole10spacecorrection, all3PYclosingsmatch10spaceblockbase",
+    "commands": [
+      "17custodyhelpermethods",
+      "4unchangedhistoricalselectorJSONpolicytests",
+      "controller6selftests+2realbootstrap/fourSDKdeliveryrounds",
+      "88corepreparation/install+interopverify+copydependencies+pinnedJUnit",
+      "wrappersphasejava(recursivelycounts/totals/BiMap)",
+      "wrappersphasenative",
+      "wrappersphasefinish"
+    ],
+    "checkedReceiptInterfaces": "All4actualschemas/fieldnames/currentHEAD/runID/pins/compiledroots/nonemptycompiled maps +137retained-wrappers142inclmask/borrow/directnativecorpusmatchsource",
+    "limits": "15min;512MiBaggregate;480MiBproofcap;32MiBmetadata/archiveallocation;8GiBreserveafterplanned;ownedcache/tmp/home;preinstalledTemurin21;narrowshallowcheckout;1secondaggregatewatch;ownedprocessgroupcleanup;artifact<=8MiB/512files;16MiBleftbeforecompression0upload",
+    "deferred": "Donation148allcontract/completeJDK/fullreactor/performance/retention remainNOT_RUN;142doesnotprovefullcollectioncoverage",
+    "syntax": "Manualsource/indentationreviewonly, noYAMLparser/actionlint/Pythonexecution"
+  },
+  "openFindings": [],
+  "execution": {
+    "python": "NOT_RUN_STORAGE_HOLD",
+    "maven": "NOT_RUN_STORAGE_HOLD",
+    "java": "NOT_RUN",
+    "jni": "NOT_RUN",
+    "yamlParser": "NOT_RUN",
+    "actionlint": "NOT_RUN",
+    "formalAutoreview": "NOT_RUN_STORAGE_HOLD"
+  },
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "goal": "ACTIVE"
+}

@@ -1,0 +1,611 @@
+{
+  "schema": "M3_COLLECTIONS_CONTINUITY_CANONICAL_RAW_READBACK_V1",
+  "utc": "2026-10-17T11:04:44Z",
+  "repository": "hsoliwal/com.synexia",
+  "sdkTree": "2417d44526baa6f53729247c8f1cf6115b9d890b",
+  "files": [
+    {
+      "path": "composition.json",
+      "gitBlob": "c6d3d034d3c24041471e7076605f1db7aa4602c1",
+      "sha256": "7d389d980eec47a5469b9cfb1b0a5238d6b78943bd00426d0f1805727c51c76f",
+      "bytes": 101904
+    },
+    {
+      "path": "controller.py",
+      "gitBlob": "70d7286ec103144639335b6d5f76da81e1bf9810",
+      "sha256": "596bf75fcb23c844873fa1d445b631e14c60a3bad5d1ec32469e5d457fcd424a",
+      "bytes": 21806
+    },
+    {
+      "path": "pins.json",
+      "gitBlob": "0ee6383325bc2ded8f927951df121e9f73998331",
+      "sha256": "fb95f0312b4871d6232203e4b2c5f312a54521259ccb92cf4dccc81ef2a21e12",
+      "bytes": 32747
+    },
+    {
+      "path": "pom.xml",
+      "gitBlob": "751b4dce4d743998dd01151916859b02ed82b911",
+      "sha256": "ba8f5b1d8029e1d6d9486e83c2912597417c7e60d68636cd504610a4e7b2f7c3",
+      "bytes": 2216
+    },
+    {
+      "path": "src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "gitBlob": "4a38e39d0755462d40c2b22548b87abde938ea0b",
+      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a",
+      "bytes": 12355
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-collections-current-owner-continuity.yml",
+      "gitBlob": "e0a39b3624f1d320885657ca72ed6c4c9becc198",
+      "sha256": "868e467fa0eab3e6be7d4fbe38cddc9060de05e9ef77da3ebb86cd4683b86efa",
+      "bytes": 542
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/hosted-workflow.yml.txt",
+      "gitBlob": "8416ce181bd1962389d9fde189715a43b79810c3",
+      "sha256": "50aced5260a3cbbecdc923347b4c3cdf1dbb356ae90d421762ba37dd0f5d816f",
+      "bytes": 28615
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/launcher-00.txt",
+      "gitBlob": "64146aef043d938a87966798a523b009c2795036",
+      "sha256": "724923e21b248c761d2ee577738fe2fa0a2732b608f81406cbf67f9eef3297db",
+      "bytes": 2126
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/launcher-01.txt",
+      "gitBlob": "029393ca974421827cfc9f7ed19d91cd7148c6c8",
+      "sha256": "fc09aabcd29a82b6d4af8bcf1513c5ef04a945ccceada543c2ba20a7b52dca8a",
+      "bytes": 2154
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/launcher-02.txt",
+      "gitBlob": "1ee0e653f169d140ac190892dbf6e5cc6a0ee9a5",
+      "sha256": "74273077aead4f860e7ee7fa2b3aaab31841540c0e6224dd465fe2dec0799276",
+      "bytes": 2225
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/launcher-03.txt",
+      "gitBlob": "39e978b04594459cc6172067b5e79906b6f98c41",
+      "sha256": "c65ba84d1a3455200961c63e377edf3c2a82dabb400324cdcc3fa94531e5e111",
+      "bytes": 2244
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/launcher-04.txt",
+      "gitBlob": "9950ae6ed4e57c9b5744bf1100cc0f39cb0d9d73",
+      "sha256": "86e4b90bef32e903794cd4bea7edd2a67b567dcf679146e26be0b74f2fba1ca5",
+      "bytes": 3074
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/manifest.tsv",
+      "gitBlob": "bcb4b69313918ab9b229517f8ee33e00d79eb4f8",
+      "sha256": "eacca2b6dbb31b24aad586fa44df7baa0f612be1670d60fac0a2f04a45526df3",
+      "bytes": 17556
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/proof-00.txt",
+      "gitBlob": "49be18043302691791cfeca5133f057121e300e1",
+      "sha256": "0f13551c17a36a3521f01aeb938ec8415082a524f136327c37b89dabb2b3b8d9",
+      "bytes": 12585
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/proof-01.txt",
+      "gitBlob": "bbd97007db55f9c966c934910898b3e4a007e702",
+      "sha256": "994b87ca770161d2139aa11e7fb93139c68e3367d7f0351efe39a91eff5c2d1a",
+      "bytes": 7620
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/proof-02.txt",
+      "gitBlob": "98382f0bb7ce67a78b9f5e5532cd72373ac6bc13",
+      "sha256": "7c377d674627bd515e75dfc0a1803b7d66115032b9fb0c45bc274c6b3ea825d6",
+      "bytes": 7625
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/proof-03.txt",
+      "gitBlob": "d0122ace05b89d8cc9644f3397035c385136d45b",
+      "sha256": "b3b1005908bdfa464d2afb382412092ef94f838a2c5816f90848fd9eb5ac1a90",
+      "bytes": 14121
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/proof-04.txt",
+      "gitBlob": "1659bd70ae67e0d7ceed0ff02cbc94f3e33e5cce",
+      "sha256": "1b3a755b56686f829ecd68d14ac79a7aeea168ca1ea8a424c4ccededda535ec3",
+      "bytes": 11355
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/proof-05.txt",
+      "gitBlob": "8a272663a4e7953b6de219b954215f975847030f",
+      "sha256": "c6f474a2180b9196a45efccd4ba348932cef3e08780fa0860d67ae9d0f664be7",
+      "bytes": 129908
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/proof-06.txt",
+      "gitBlob": "695072430c995f931cebbabdb3b9da9d006a66c3",
+      "sha256": "610d0d32a2f500ff5713c640fbec2f6c350cf2b2202ed9978d48e417b615c035",
+      "bytes": 11986
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/proof-07.txt",
+      "gitBlob": "d28c2a2900e6a054d97275231c323ab2ceb82b46",
+      "sha256": "c6bc0ca7243b72dfc33a08cf2f76ad61ca910fffe9f46154bbffba06dcd76028",
+      "bytes": 1829
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/proof-08.txt",
+      "gitBlob": "7c9bf2eee712d40f6427ff648ef7d93f4333218f",
+      "sha256": "a5fd60b93f724fa82e3e8d0164714531e989b0e517f2057a03896827801f4e20",
+      "bytes": 11299
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/proof-09.txt",
+      "gitBlob": "84c466ebb652a798f406e395a7dc5628fa510e3d",
+      "sha256": "f55059230481141a32a9a945b508c09e47f5a2d11d4411aae08ed3b882137aee",
+      "bytes": 18033
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-000.txt",
+      "gitBlob": "e7d58ab473045b4e28f2741a9271910b27a7c36a",
+      "sha256": "8003a4114c6aeb419f4929a317f85c3e13a78d96823533f91642336f278b0133",
+      "bytes": 5608
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-001.txt",
+      "gitBlob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+      "bytes": 13805
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-002.txt",
+      "gitBlob": "2db1257a40d21be06ba2a67da87aff0311183809",
+      "sha256": "53abb7f4fcd9f2f3b4b6cdfce76d40ed313d0446c322cc088310e84ff23311bc",
+      "bytes": 12981
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-003.txt",
+      "gitBlob": "0f5b96d157d6500032ad0d0e5b6445a7d1ae1ec6",
+      "sha256": "9f78dd02b051ec873d4a9a4307fafe2724473d3548117d2c7c00bec83b1e74bc",
+      "bytes": 2080
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-004.txt",
+      "gitBlob": "a2c8d7323f01fca9b8951c59322782ba49eb5364",
+      "sha256": "f39eec9cacb733583e9b27b5a93809ea7b2362145e58237d7e00a263034ed95c",
+      "bytes": 4198
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-005.txt",
+      "gitBlob": "a15150ccdb812ec544bdc99946c7617535dedba9",
+      "sha256": "c80f10c0ef66b374c0ed15e7d0c6e23df9cd5dc22193ec4bb49330c1197dd6f5",
+      "bytes": 6807
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-006.txt",
+      "gitBlob": "1d260fdbfe5a961e96ecf76f0882d93ec8f598d0",
+      "sha256": "1da43b83b932fa4f38d60f1564214e8552ddba99a36da4f8e9179ef932da94c8",
+      "bytes": 3424
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-007.txt",
+      "gitBlob": "6d1e3be27b430f633d7594c3a312aba6beb8c05a",
+      "sha256": "d59069893d0672e70b5e788e4bd735e71e57f83089aef5d292a3507a02ee3d1d",
+      "bytes": 4057
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-008.txt",
+      "gitBlob": "ffc026d13caa254e8eabed974eca365669c3e7a2",
+      "sha256": "17b78b696f34752a000c822e6456f6c568609559f6d4812f16e976bc8655c36a",
+      "bytes": 1391
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-009.txt",
+      "gitBlob": "f8eb02d80056809d7771bb2e40f97952ba9d6788",
+      "sha256": "34bca4ca00e8663934c244a38cb950ad4bdc63daf76eae80095a7b7841be5320",
+      "bytes": 6832
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-010.txt",
+      "gitBlob": "4bef22568f1d2f87a6b6758109d04a8194f43805",
+      "sha256": "5901c60287695c4ef3480c3a5c341b658c84fbb8696fc0048552e11278685194",
+      "bytes": 10270
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-011.txt",
+      "gitBlob": "f22e5603a10d1efd57cb9b48ffe122ad4d775ac3",
+      "sha256": "57aea8a1ed8b2fcc5ebb5b64551826e5db392d67f9e78ced5d4fd4dcfa1b4eef",
+      "bytes": 2284
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-012.txt",
+      "gitBlob": "9483047e48b4ba926093c827bef92ff40fb6420d",
+      "sha256": "ba3c02266256fa5e8588e4e9fb94c0d37acd1fd8f7674339fc7cbe791e364ee1",
+      "bytes": 6944
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-013.txt",
+      "gitBlob": "d2fca03ba49ef568a900320f99bac690bc3eaea5",
+      "sha256": "15061216d11767e84db22edeb1a6050a632a8299360ab31793d6a3a0fccd18cf",
+      "bytes": 7536
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-014.txt",
+      "gitBlob": "99a41e8bdfdf92941ceb979e3d7354c9b291df90",
+      "sha256": "9024bb2aa1e9021249fa4361d675ae6687cab203c909a989949c27a0ccdc1b3f",
+      "bytes": 12233
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-015.txt",
+      "gitBlob": "ad7cd2dca56f42d8b39175dc25a65409f050097d",
+      "sha256": "26e554ba8232799e2c5a9f1563358ef39f7639abd72effabe8eae1bd127b4805",
+      "bytes": 9364
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-016.txt",
+      "gitBlob": "4dc48b87034e242f9e04f20c95189be887273311",
+      "sha256": "8ceff2bc6cfd8662a8a6bd5498608ac8f47981011755fc3875cc18bf0ebb1d67",
+      "bytes": 2346
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-017.txt",
+      "gitBlob": "1fe9ac1bfa11cf6a626a749c37d64ccec0ed09df",
+      "sha256": "8d1226aac98d797e164c1844886435df3602933c287db597eb2fe275936330eb",
+      "bytes": 7249
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-018.txt",
+      "gitBlob": "28c864a69a384dbfe6fbc499eff7da4015264a3f",
+      "sha256": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef",
+      "bytes": 11685
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-019.txt",
+      "gitBlob": "b1d85622c2e19db069d0b2a64fb8011b5c01be34",
+      "sha256": "a1b007cd7676fe6fced9fe8330b39f402c6355d29138e0e84185becaa47d7c36",
+      "bytes": 9090
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-020.txt",
+      "gitBlob": "c700d958e8b3467ae1489a11e0afe80b8c7b60e5",
+      "sha256": "71950f026e1e11416388922455ce9ec33ac8f1424eb83089676d22807251dda9",
+      "bytes": 2165
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-021.txt",
+      "gitBlob": "4e93200b41816c8bfa8b5d7c83aeb290c7dadd81",
+      "sha256": "751c208ef826ea47cf6f1ea0eedf55e859653cdd48d8341f926ff13e6f4383b1",
+      "bytes": 8873
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-022.txt",
+      "gitBlob": "fcb85a55c9ff3d19faa1de991a109e3b3f3c3582",
+      "sha256": "e2797a2750d45cada0ec468fb92040bd0c2da460a76a0a893a31fe7a4894a920",
+      "bytes": 3273
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-023.txt",
+      "gitBlob": "04cb35660051cce09a83b66e010a58d98eb3b724",
+      "sha256": "b7772244b4fc08eec4ebcc324ad93eec8847c26186cf1aaa3453b40c361162c6",
+      "bytes": 560
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-024.txt",
+      "gitBlob": "f01533cc2ed65c3ea72bb6bb4956375624df24f3",
+      "sha256": "e029b5ecb907d5296ff8fff4ea1808e617df5119800a01f687082817ec1b5eef",
+      "bytes": 1041
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-025.txt",
+      "gitBlob": "b73f82e6d92941b99ca72601a9962937dbb48f22",
+      "sha256": "ca20f76ab7a45fc282740539686a5bc3f8569cd27ce50ef0062c50666ae16317",
+      "bytes": 12625
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-026.txt",
+      "gitBlob": "28cc6cb96586bb158ea4d7d8901cf64c53c86220",
+      "sha256": "9c49eb0f1acfdb693a2e4f0919bf0ce81425d9ae0fdb4d92918c482b7b240653",
+      "bytes": 2108
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-027.txt",
+      "gitBlob": "31ce540046a34db05d65a950ffd6fae48f5a2d81",
+      "sha256": "40ddf920cdf8341e976538e958d5f103cbf9afb5c69f03b55baeff8c5f5ba252",
+      "bytes": 5337
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-028.txt",
+      "gitBlob": "7684db3d4224dcf211db6e9156cbbb2d62f26f67",
+      "sha256": "003894ee1ccc7bf034ad3647661945afbdc85c0c99a748fd96191cb3b24d34d3",
+      "bytes": 3467
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-029.txt",
+      "gitBlob": "67d23af6cc9c743c4a82a673d6ff4ea73fedc5b6",
+      "sha256": "e32bd40566ad07636b412e82ad92df93021ad40de38468efe7c4b2a20caf0b5b",
+      "bytes": 9751
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-030.txt",
+      "gitBlob": "885429642a4a2b1b0ff397e20926b0ed4ed4fa5b",
+      "sha256": "7a85c01ebf7790e563c206af986026e3d492bfd266e63ff2d95aa3a7bae4f776",
+      "bytes": 618
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-031.txt",
+      "gitBlob": "cd27d517246ac10612c3216dedb8fa73b0e4cae8",
+      "sha256": "a28f425678ffbb9c560fc35ce4e87a28aed0f46fb2f71fdffdd7e5afe743fc21",
+      "bytes": 3770
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-032.txt",
+      "gitBlob": "c2c556aa2e9dde1308491810e70c144c559736d2",
+      "sha256": "c672cd711c623a69f534fb306e82cf043052f97fc890c8f2af7cd3adb520152a",
+      "bytes": 2389
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-033.txt",
+      "gitBlob": "d987d5860dec30d042cacbe833b244c4e54d79ca",
+      "sha256": "bf1fc7d87f797c4047da75fc23ffc01d6f2fc5a89f1dcf9c70a819ffcf493ebd",
+      "bytes": 2997
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-034.txt",
+      "gitBlob": "c26295707344995d22ff848404b86cdd5c8c0f01",
+      "sha256": "4714cef19d6493bf2d7b622ff1f37406e9937f7161525afc190b1cd2d8735eda",
+      "bytes": 556
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-035.txt",
+      "gitBlob": "9942334663b5f75730fb8ddf8c7c8aec1fe9d70e",
+      "sha256": "ac6c9af1d2152613de02ca4506859e56f990057dedfad2606b2e448ad8fc98cb",
+      "bytes": 3708
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-036.txt",
+      "gitBlob": "69f7e1fc85174740ca4fd29dc27231c8b0a923d7",
+      "sha256": "6a6e0d9b5197abc7d110eb50e19fb5bd436b20c5bc6a559c00c546ceb4e7c228",
+      "bytes": 13023
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-037.txt",
+      "gitBlob": "a1e863654708eb4a34353cf0672bedb9015a10c2",
+      "sha256": "67c9994f256b8bea4ee4460c2c064594099023090c92afc56394ffd9f2ab98f7",
+      "bytes": 6681
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-038.txt",
+      "gitBlob": "87373f983d9517cce6ab3b2164ff53adf0c525dc",
+      "sha256": "54f0864318f3a175b5ba2a2d0d43691ac5dbb90d4918c428dc4303fa68dfa09f",
+      "bytes": 9825
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-039.txt",
+      "gitBlob": "37c075b2151fe36d3ceebbe4610ffa407b9fe931",
+      "sha256": "bbaa565e1d846cd29611e3d17b11574e08de1ad38a429c3a0afb3dc1a4f38b7a",
+      "bytes": 645
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-040.txt",
+      "gitBlob": "930e8770daaa073c4da0ca6a416be87c803d9498",
+      "sha256": "8e83fdf0f1d8e8319e584384dcf73b84142557c6d4c2b645b092fb14a3c9359f",
+      "bytes": 2179
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-041.txt",
+      "gitBlob": "6a705e1d9c33e7b0d6f0061e8154a0484ff8661d",
+      "sha256": "80aa788db958a34779f02559323e3d77268791eb82ababfacc42538217c6e4bc",
+      "bytes": 10762
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-042.txt",
+      "gitBlob": "4fc45de54046877ad489dd256a9337aa751852ce",
+      "sha256": "a8678c86f440b2020fca7345d77a5ef5e951432032b0c766da3ee3ad44d198b6",
+      "bytes": 2690
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-043.txt",
+      "gitBlob": "49ca9ae0149c9981bc53ed6f0619410eb1d24712",
+      "sha256": "8b5171a387ba6f33a652f9a7dfd9f29e4bd40c9b87527d1c85b1323f775dba4a",
+      "bytes": 17675
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-044.txt",
+      "gitBlob": "0d7691d6a5abb3eac929b7334640171e7bac4ee0",
+      "sha256": "ae16d7395c3325230bebe7d3f58765669c639f091fd1e06c4b069031affd5db8",
+      "bytes": 2764
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-045.txt",
+      "gitBlob": "c003b5f5c16b1e6af05f95716e15c013690105c0",
+      "sha256": "ba229591104afebc871176626fc64fff42d2a0c553ac24763fd178acc80980e4",
+      "bytes": 747
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-046.txt",
+      "gitBlob": "003cde1fc8afcd870d7da26178fc3f6ceda8c6de",
+      "sha256": "b7fc6450a49010922dc7abf16ed680f6ad932ecdb84e34f61b219e1f437326cb",
+      "bytes": 4605
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-047.txt",
+      "gitBlob": "eefaf472d4eb0b0384b4c0d5d2a6f7b33b5c51c7",
+      "sha256": "2fdc7f8a7518bdb96116f061fc4838ffdb33436bb3849c6b731a97c1e9253dc8",
+      "bytes": 827
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-048.txt",
+      "gitBlob": "25c8d21e76b26789bee9720fcd16b63d0eb4e119",
+      "sha256": "a65ae9b56f99a2723e694471ac5c52cd2a8de9de1ed6d9109d4615a2d04b2f24",
+      "bytes": 3243
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-049.txt",
+      "gitBlob": "fc9f43c59e600e13f60a996a00214eeda3521b1a",
+      "sha256": "c6a073b211459f278d2674336ddc84ac28fe19324a0c3cbc30a44193eec84d1e",
+      "bytes": 2431
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-050.txt",
+      "gitBlob": "1c21edfe31a9305df6a5fd93491bdb186aef6ea8",
+      "sha256": "08f8d5e86bd54814ebb18c70119c08f37a5370f226213f4b8b64dab71d5b5113",
+      "bytes": 771
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-051.txt",
+      "gitBlob": "2bd31c805a99dc508ac356af360c53aea1f45263",
+      "sha256": "d955136da7c747b862dc130c0409b0c5f16be8274b2583e4d64852e02c0d56d7",
+      "bytes": 621
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-052.txt",
+      "gitBlob": "6e6e21ff4145f80cb95dd876f18ed737e2055d20",
+      "sha256": "0d77b354a5a6918c0ce7be4676215cc28b8743a6ea36d99fad21ba9d8f81ec78",
+      "bytes": 2040
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-053.txt",
+      "gitBlob": "ed44382625a8c7db843495ef2e187412150b7816",
+      "sha256": "6f75bbd6ab478a0f2a2d712722f48299ccc4611b839b389e5cbd54402063bb44",
+      "bytes": 14090
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-054.txt",
+      "gitBlob": "f1b8ff89afb8e8ec108a88a9fd3402c6be148607",
+      "sha256": "437a72353865a1e74d2a74b8b0882eb1523d9fae869a68f9c349e82fcce95692",
+      "bytes": 7039
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-055.txt",
+      "gitBlob": "d485981f5ff1dd6d5b764a5dcd495e34490a20fe",
+      "sha256": "7d715e39924f81bd7d4d73c320a005d1bd4fe9d9bed6f5dee55dc2994009e5f0",
+      "bytes": 665
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-056.txt",
+      "gitBlob": "6c769c61d1851a7e4b08f63ea85c9458c939ae31",
+      "sha256": "c3ff418b51cd1b471ded6da0376e0e17eb429151d7e1383da0b23c587c9a3f53",
+      "bytes": 19837
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-057.txt",
+      "gitBlob": "623d98b38643f529e93819d6e66e09bb91e3590d",
+      "sha256": "567cf0c70bb503daa9e992ba9f0884ca8d1029458673f7b6f939fde193595bf6",
+      "bytes": 2637
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-058.txt",
+      "gitBlob": "a1a6dca752f4760ff786ed669e065517cfa5038a",
+      "sha256": "b203a5a6a5d4c490be043d5b8d8885816f0fa6e3fae71fbedb2ab4936ae4069d",
+      "bytes": 2198
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-059.txt",
+      "gitBlob": "8de1cbc3e1255cc6f9d73b068a164a991adcad15",
+      "sha256": "cfe0eb7335e3945f35b4a9763e11e0a7dff6c672f7014733f15e876b0b06909e",
+      "bytes": 20385
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-060.txt",
+      "gitBlob": "8fec2f88d641d15e90ca2ad522749383c1926e59",
+      "sha256": "1dff497079e768fda574a349cc521732d69cbacbecc19deba6888d909844f1cb",
+      "bytes": 20246
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-061.txt",
+      "gitBlob": "65277db098158ff63acc17a0103515ab02f80690",
+      "sha256": "5437dfeea903d7208f6453e052d8ca88b84ac1e292dff1acd0df845b6c21f136",
+      "bytes": 3812
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-062.txt",
+      "gitBlob": "5d72a62dfa5403fa5ce7fdbc6b217b46482aa45d",
+      "sha256": "a99ae7502a7b1832c149dd2d0af888ddbdeb5805659ef5c778ceda4ca1949cd5",
+      "bytes": 17047
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-063.txt",
+      "gitBlob": "fca44882774187b2b301fb18ea2f3e8fc4897452",
+      "sha256": "c4139f6db6648b0e71a347c15c35d6d133cb4d32581990490141501f273cb271",
+      "bytes": 265
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-064.txt",
+      "gitBlob": "a743bc94aa684f35db6e871df0633aa5b720907d",
+      "sha256": "a641b0eda9ecbfac68d8719e5d2a39f6b826f5228954173da37188a7629d911e",
+      "bytes": 18046
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-065.txt",
+      "gitBlob": "0508f70a7c846c2841f978a9085d2b6254d2465c",
+      "sha256": "3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a",
+      "bytes": 2024
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-066.txt",
+      "gitBlob": "c606ac649f4f3bae46e3a615a4fe837176339203",
+      "sha256": "562841271aa7bdbb2ea0a179c10a95fad61706cdc64effdc16ff3cb746f134c9",
+      "bytes": 1273
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-067.txt",
+      "gitBlob": "bf0ab1a42f66c725a2ac2e50042bf3f7c97170b8",
+      "sha256": "fbf1c6668a49e007a93ab3ed0c251171ea1708312c8892a512049ee359e06dda",
+      "bytes": 3445
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-068.txt",
+      "gitBlob": "ea544b7b2039c142348f8ebff6d02c505a9ff08e",
+      "sha256": "eac5101db577439a71f60d303a3edba323c6760277384b92510064777e17599c",
+      "bytes": 2255
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-069.txt",
+      "gitBlob": "3c62be95f2a67f04d0050e26c4d1494ffd823a31",
+      "sha256": "f9913731a6d3b05706651ca7242ab8ab975392b32b499322415562e206d0ff65",
+      "bytes": 621
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-070.txt",
+      "gitBlob": "211a758a4b211828a06e9389d521cf015901b16a",
+      "sha256": "e24d49d6bff8bde4c6c85c1d3ee5441a5fa9e54c48ec9e7b15dda0903a89b76b",
+      "bytes": 356
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-071.txt",
+      "gitBlob": "129e0105732a1edb5b1d36a21e81bf1438947382",
+      "sha256": "aaaadcb60fdb5534543a770bfb4e1dac1952f108fa901907c4bb5a011e3cc26f",
+      "bytes": 3323
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-072.txt",
+      "gitBlob": "5a9cf3274e120788dd9e9b15433d130e5f23865b",
+      "sha256": "aecfe097fe61b5260a09c2bbbcec57bca2a96bd7cabf343bc380cfc5b28a1d10",
+      "bytes": 1375
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-073.txt",
+      "gitBlob": "03ec9e68e618f85c1388de6d5350bba28a1f1f07",
+      "sha256": "890a80bc74f35f8b8d4273b9b4ee21aef156e8ba170cc1481c10a3eb77ff2222",
+      "bytes": 14582
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-collections-current-owner-continuity-20261017/scaffold-074.txt",
+      "gitBlob": "5c813e8aa766ae9bd90a8c3a7e54412a8b5281c8",
+      "sha256": "fe35eaa0e9d38fb4a054308f18a7bd0bcc3557a552b52c19eb6981406a98af72",
+      "bytes": 12524
+    },
+    {
+      "path": "src/test/java/com/m3/rewrite/backport/M3CollectionsContinuityRecipeTest.java",
+      "gitBlob": "406bbd972956883e2ea989727d60ffa6662e34ae",
+      "sha256": "abcb7420c10ad90b78e7e63fa1556c789914eadb516a986ee35ae6ebf733900a",
+      "bytes": 15258
+    }
+  ],
+  "count": 99,
+  "utf8Bytes": 924179,
+  "allRawSha256AndUtf8SizesMatched": true,
+  "pinsGitBlob": "0ee6383325bc2ded8f927951df121e9f73998331",
+  "pinsSha256": "fb95f0312b4871d6232203e4b2c5f312a54521259ccb92cf4dccc81ef2a21e12",
+  "independentSourceReview": "a3b463476a2d478010d4ca780242e216c758ad68",
+  "execution": "NOT_RUN",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

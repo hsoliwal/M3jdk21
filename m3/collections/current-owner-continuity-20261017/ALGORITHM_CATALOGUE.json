@@ -1,0 +1,38 @@
+{
+  "schema": "M3_ALGORITHM_CATALOGUE_CONTINUITY_EVALUATION_V1",
+  "utc": "2026-10-17T11:04:44Z",
+  "categories": [
+    {
+      "problem": "Counted primitive hash storage, atomic replacement and allocation failure",
+      "selected": "Reuse existing counts+totals recipes",
+      "correctness": "Exact3 preimages and original34 method chain/source contracts; actual replay pending",
+      "complexity": "Retain existing donor operations; no new complexity/performance claim",
+      "classification": "DIRECT_IMPORT_AND_WRAP"
+    },
+    {
+      "problem": "Filtered/sorted wrappers and bidirectional map contracts",
+      "selected": "Reuse existing Synexia/Guava-derived BiMap and wrapper implementations",
+      "correctness": "Original resource/postimage custody plus current137+5 named tests and actual JNI diagnostics planned",
+      "classification": "DIRECT_IMPORT_AND_WRAP",
+      "license": "Apache-2.0; preserve original Guava attribution",
+      "alternativesRejected": "Reinventing wrapper/storage engines has no uncovered capability justification"
+    },
+    {
+      "problem": "Incremental source, compiled artifact and run identity",
+      "selected": "ADAPT existing verifier/staging mechanisms into versioned current companions",
+      "evidence": "259 pinned files; all compiled root membership exact;17 meaningful boundary tests authored, NOT_RUN",
+      "complexity": "Linear in bounded declared source/artifact bytes"
+    },
+    {
+      "problem": "Strict whole-current-source donation admission",
+      "selected": "ADAPT entry point of unchanged strict donation policy with pending132-row selector",
+      "evidence": "148 genuine source method IDs; exact complete Java set guard preserved; actual admission NOT_RUN",
+      "alternativesRejected": "Weakening count/source equality or relabelling old acceptance"
+    }
+  ],
+  "precodeFoss": "1c82d287867ee9dc14967b95c92216560115d725",
+  "performance": "NOT_MEASURED",
+  "execution": "NOT_RUN",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

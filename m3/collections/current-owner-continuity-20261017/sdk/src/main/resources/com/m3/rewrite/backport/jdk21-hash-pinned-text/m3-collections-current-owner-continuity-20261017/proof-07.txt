@@ -1,0 +1,42 @@
+{
+  "schema": "M3_COLLECTIONS_CURRENT_DONATION_SELECTOR_V1",
+  "status": "PENDING_ACTUAL_ALL_CONTRACT_JNI_PACKAGE_EXECUTION",
+  "sourceCustodyOnly": true,
+  "runtimeQualified": false,
+  "jniQualified": false,
+  "installedJdkQualified": false,
+  "performanceQualified": false,
+  "phaseAdvanced": false,
+  "installed_source_manifest": "qualification/installed-source-current-owner-continuity-20261017.tsv",
+  "installed_source_manifest_sha256": "f55059230481141a32a9a945b508c09e47f5a2d11d4411aae08ed3b882137aee",
+  "historical_selector": {
+    "path": "m3/collections/synexia-donation.json",
+    "gitBlob": "a6339fc2f901cd3aef071c731bb71fb8ab715d1e",
+    "sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964"
+  },
+  "historical_manifest": {
+    "path": "m3/collections/qualification/installed-source-enum-set-20261014.tsv",
+    "gitBlob": "5dc9c51a332e8fe5179d3562e40adf5b4d876922",
+    "rows": 99,
+    "sha256": "046e3aa7f4d9523a72657942fac62bcb7d7bb6eaafb928dbe1c1d87afed1252c"
+  },
+  "policy_donor": {
+    "path": "m3/collections/verify_donation.py",
+    "gitBlob": "54fa2569d9445f9729f3e9aea874c42ef9e46cad",
+    "sha256": "ff380ac9dedda6e36ea233eabb0a567a0a51595913d571f6bd11d5937d7c6706",
+    "guard": "declared_java == actual_java; unchanged strict complete source-set equality"
+  },
+  "source_custody": {
+    "files": 132,
+    "java_under_src": 122,
+    "main_java": 88,
+    "test_java": 34,
+    "core_src_files": 128,
+    "all_contract_method_prediction": 148
+  },
+  "scope": "Separately built current core only; optional interop and targeted137+5 chain remain independently qualified.",
+  "acceptance": "NOT_RUN. Historical qualification is preserved as history and does not qualify this source set.",
+  "active_phase": "STRING",
+  "phase_advance": false,
+  "full_mindex_family_completed": false
+}
