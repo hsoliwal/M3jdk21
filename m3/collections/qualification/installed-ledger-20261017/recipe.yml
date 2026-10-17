@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.RepairUnresolvableCollectionTestCoordinates20261017
+displayName: Repair exact old M3 collections test dependencies without runtime/API edits
+description: Two SHA-sealed Maven XML source revisions; use published OpenRewrite/JUnit versions and preserve all other dependency contracts.
+recipeList:
+  - org.openrewrite.xml.ChangeTagValue:
+      elementName: /project/dependencies/dependency/version
+      oldValue: 8.17.1-m3-source-1
+      newValue: 8.17.1
+  - org.openrewrite.xml.ChangeTagValue:
+      elementName: /project/dependencies/dependency/version
+      oldValue: 5.10.2-m3-source-1
+      newValue: 5.10.2
