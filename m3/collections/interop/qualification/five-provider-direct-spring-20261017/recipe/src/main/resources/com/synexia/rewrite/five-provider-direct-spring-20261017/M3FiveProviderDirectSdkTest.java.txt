@@ -88,8 +88,8 @@ final class M3FiveProviderDirectSdkTest {
         Map<String, Integer> snapshot = map.toSingleValueMap();
         Map<String, Integer> live = map.asSingleValueMap();
         map.set("k", 3);
-        assertEquals(1, snapshot.get("k"));
-        assertEquals(3, live.get("k"));
+        assertEquals(Integer.valueOf(1), snapshot.get("k"));
+        assertEquals(Integer.valueOf(3), live.get("k"));
     }
 
     @Test void threeCountProvidersMayShareOneCanonicalOwner() {
