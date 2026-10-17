@@ -103,8 +103,14 @@ final class M3ReleaseJepAuthorityRepairRecipeTest {
         assertTrue(catalogue.indexOf("25\t520\t") < catalogue.indexOf("25\t521\t"));
 
         String priority = after.get("m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv").printAll();
-        assertTrue(priority.contains("24\t404\tGenerational Shenandoah (Experimental)"));
-        assertFalse(priority.contains("26\t401\tValue Classes and Objects"));
+        // POST21_PRIORITY_COMPATIBILITY.tsv is JEP-first (jep, release, title),
+        // unlike the release-first JEP_CATALOGUE.tsv. Test the actual schema,
+        // not a reversed-column substring that can never match.
+        assertTrue(priority.startsWith("jep\trelease\ttitle\tclassification\t"));
+        assertTrue(priority.lines().anyMatch(line ->
+                line.startsWith("404\t24\tGenerational Shenandoah (Experimental)\t")));
+        assertFalse(priority.lines().anyMatch(line ->
+                line.startsWith("401\t26\tValue Classes and Objects\t")));
 
         String residue = after.get("m3/backports/JEP_RESIDUE_QUEUE.tsv").printAll();
         assertTrue(residue.contains("22\t423\tRegion Pinning for G1\tgc\tcandidate\t20\tMATERIALIZED_PACKET"));
