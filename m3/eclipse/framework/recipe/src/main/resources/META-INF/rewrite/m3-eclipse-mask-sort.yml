@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3EclipseMaskSort
+displayName: Compose required/excluded M3 index masks and Eclipse sorted bundle windows
+description: Three exact source-sealed Java21 postimages; preserve old APIs, reused JNI selection and source ownership.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: eclipse-m3-mask-sort

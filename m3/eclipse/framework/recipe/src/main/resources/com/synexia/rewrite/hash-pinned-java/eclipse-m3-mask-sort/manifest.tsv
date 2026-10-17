@@ -1,0 +1,4 @@
+# Ordered source-sealed Java21 candidate manifest: path, preimage, postimage, template
+m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545	f589786488e7c7bbd45aa9589bc95cce91b47e92cc8404b1638950e5732b7ec0	after-M3LongIndexProjection.java.txt
+m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseBundleSnapshot.java	361cd096ce70bcea50080351f20c06cf989502eb62fe489b0a13faed93c63bea	fec59b7ee47ac83557b0730b25f234358cfce238a0c087c06fc8308c796dde84	after-M3EclipseBundleSnapshot.java.txt
+m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseBundleOrderedViewTest.java	ABSENT	54fceebab6c5717d4d59556ee397ae574fd4a0fbfc17b6e935c7c306afb690d4	after-M3EclipseBundleOrderedViewTest.java.txt
