@@ -43,10 +43,23 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           from hashlib import sha256
+          import json
           root=Path("m3/collections/qualification/installed-ledger-20261017/target/receipt-candidates")
           src=(root/"installed-source-20261017.tsv").read_bytes()
           rec=(root/"synexia-donation.json").read_bytes()
           assert len([x for x in src.splitlines() if x and not x.startswith(b"#")])==136
+          def unique_keys(pairs):
+              mapping={}
+              for key,value in pairs:
+                  assert key not in mapping, f"duplicate donation JSON key: {key}"
+                  mapping[key]=value
+              return mapping
+          packet=json.loads(rec, object_pairs_hook=unique_keys)
+          assert packet["installed_source_manifest"]=="qualification/installed-source-20261017.tsv"
+          assert packet["installed_source_manifest_sha256"]==sha256(src).hexdigest()
+          assert (packet["historical_installed_source_manifest_20261008"]
+                  =="qualification/installed-source-enum-set-20261008.tsv")
+          print("M3_CURRENT_JSON_ROOT_KEY_UNIQUE_PASS")
           print("M3_GENERATED_MANIFEST_SHA256="+sha256(src).hexdigest())
           print("M3_GENERATED_DONATION_SHA256="+sha256(rec).hexdigest())
           print("M3_GENERATED_MANIFEST_BEGIN")
