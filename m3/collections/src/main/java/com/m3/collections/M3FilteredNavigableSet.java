@@ -99,7 +99,14 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
         @SuppressWarnings("unchecked")
         E key = (E) value;
         E member = backing.ceiling(key);
-        if (member == null) return false;
+        if (member == null) {
+            // NavigableSet uses null for absence AND may store null under its comparator.
+            // contains above admitted the key; an iterator separates those cases and
+            // supplies the actual stored representative, even when key itself is nonnull.
+            Iterator<E> candidates = backing.tailSet(key, true).iterator();
+            if (!candidates.hasNext()) return false;
+            member = candidates.next();
+        }
         Comparator<? super E> order = backing.comparator();
         if (order != null) return order.compare(member, key) == 0 && predicate.test(member);
         @SuppressWarnings("unchecked")

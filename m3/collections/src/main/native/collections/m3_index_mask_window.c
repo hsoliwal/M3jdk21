@@ -45,40 +45,57 @@ Java_com_m3_collections_M3IndexMaskWindow_scanNative(
     }
     if (limit == 0) return m3_window_result(first, 0);
 
+    if ((required & excluded) != 0) return m3_window_result(n, 0);
+
     jbyte marks[M3_MASK_WINDOW_CHUNK];
     jint values[M3_MASK_WINDOW_CHUNK];
-    jint selected[M3_MASK_WINDOW_CHUNK];
     jint next = first;
     jint written = 0;
-    jint pending = 0;
     while (next < n && written < limit) {
         jint take = n - next;
         if (take > M3_MASK_WINDOW_CHUNK) take = M3_MASK_WINDOW_CHUNK;
+        if ((required | excluded) == 0) {
+            // Every ordinal qualifies: copy only the caller's remaining window, no states.
+            if (take > limit - written) take = limit - written;
+            (*env)->GetIntArrayRegion(env, rows, next, take, values);
+            if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+            (*env)->SetIntArrayRegion(env, output, output_offset + written, take, values);
+            if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+            next += take;
+            written += take;
+            continue;
+        }
         (*env)->GetByteArrayRegion(env, states, next, take, marks);
         if ((*env)->ExceptionCheck(env)) return (jlong) -1;
-        (*env)->GetIntArrayRegion(env, rows, next, take, values);
-        if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+        // A transient two-word selection bitmap owns decisions, never payload or object state.
+        uint64_t selected[2] = {UINT64_C(0), UINT64_C(0)};
         for (jint i = 0; i < take; i++) {
             unsigned int flags = (unsigned int) (unsigned char) marks[i];
             if ((flags & (unsigned int) required) == (unsigned int) required
                     && (flags & (unsigned int) excluded) == 0U) {
-                selected[pending++] = values[i];
-                written++;
-                if (pending == M3_MASK_WINDOW_CHUNK || written == limit) {
-                    (*env)->SetIntArrayRegion(env, output,
-                            output_offset + written - pending, pending, selected);
-                    if ((*env)->ExceptionCheck(env)) return (jlong) -1;
-                    pending = 0;
-                }
+                selected[i >> 6] |= UINT64_C(1) << (i & 63);
             }
-            next++;
-            if (written == limit) break;
         }
-    }
-    if (pending != 0) {
-        (*env)->SetIntArrayRegion(env, output,
-                output_offset + written - pending, pending, selected);
+        if ((selected[0] | selected[1]) == 0) {
+            // Metadata rejects the whole block: do not fetch row IDs that cannot be emitted.
+            next += take;
+            continue;
+        }
+        (*env)->GetIntArrayRegion(env, rows, next, take, values);
         if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+        jint copied = 0;
+        jint consumed = 0;
+        while (consumed < take && copied < limit - written) {
+            if ((selected[consumed >> 6] & (UINT64_C(1) << (consumed & 63))) != 0) {
+                // Stable prefix compaction: copied never exceeds the unconsumed local slot.
+                values[copied++] = values[consumed];
+            }
+            consumed++;
+        }
+        (*env)->SetIntArrayRegion(env, output, output_offset + written, copied, values);
+        if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+        next += consumed;
+        written += copied;
     }
     return m3_window_result(next, written);
 }

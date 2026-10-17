@@ -86,6 +86,14 @@ public final class M3IndexMaskWindow {
     /** Pure Java reference atom; call only after public validation. */
     static long scanJava(int[] rows, byte[] states, int first, int required,
             int excluded, int[] output, int outputOffset, int limit) {
+        // Geometry and native-required selection remain the public boundary's job.
+        if (limit == 0) return pack(first, 0);
+        if ((required & excluded) != 0) return pack(rows.length, 0);
+        if ((required | excluded) == 0) {
+            int count = Math.min(limit, rows.length - first);
+            System.arraycopy(rows, first, output, outputOffset, count);
+            return pack(first + count, count);
+        }
         int next = first;
         int copied = 0;
         while (next < rows.length && copied < limit) {

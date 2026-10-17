@@ -21,7 +21,8 @@ import java.util.Objects;
  * <p>Unlike M3's live collection wrappers this class is a detached snapshot.
  * Its methods never refresh when a mutable source changes. It does not replace
  * {@code java.util} or claim compatible serialized concrete class identity.
- * Reordering is O(n log n) time and O(n) index scratch; indexed reads O(1).
+ * Reordering encounter order is O(n log n); switching a known sorted direction is O(n).
+ * Both use O(n) index storage; indexed reads are O(1).
  * Native mask selection is opt-in via the existing M3IndexMaskCompactor JNI.</p>
  */
 public final class M3LongIndexProjection {
@@ -130,12 +131,37 @@ public final class M3LongIndexProjection {
     /** Stable signed-long descending sort; exact ties retain encounter order. */
     public M3LongIndexProjection sortedDescending() { return sorted(true); }
 
+    /**
+     * Reverse the order of equal-value groups, not the occurrences within a group.
+     * The existing immutable window is already sorted: no comparisons across unrelated
+     * payloads, second index scratch, or per-row objects are needed. A sliced tie group
+     * is bounded by this view's [from,to), including after earlier mask selection.
+     */
+    private int[] reverseValueGroups() {
+        int[] reversed = new int[size()];
+        int write = 0;
+        for (int end = to; end > from;) {
+            int start = end - 1;
+            long value = values[indices[start]];
+            while (start > from && values[indices[start - 1]] == value) start--;
+            int count = end - start;
+            System.arraycopy(indices, start, reversed, write, count);
+            write += count;
+            end = start;
+        }
+        return reversed;
+    }
+
     private M3LongIndexProjection sorted(boolean descending) {
         Order requested = descending ? Order.DESCENDING : Order.ASCENDING;
         if (order == requested || size() < 2) {
             // A slice/filter retains its direction and tie order; do not re-sort an
             // immutable directory already in the requested order or copy its window.
             return new M3LongIndexProjection(values, indices, from, to, requested);
+        }
+        if (order != Order.ENCOUNTER) {
+            int[] reversed = reverseValueGroups();
+            return new M3LongIndexProjection(values, reversed, 0, reversed.length, requested);
         }
         int[] current = physicalIndices();
         int size = current.length;
