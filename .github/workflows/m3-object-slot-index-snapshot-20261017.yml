@@ -67,7 +67,12 @@ jobs:
             m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
             m3/collections/src/main/native/collections/m3_index_mask_window.c \
             -o "$out/native/libm3_collections_mask.so"
-          java -Xcheck:jni -Djava.library.path="$out/native" \
+          gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
+            -fPIC -shared -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_signal_order_jni.c \
+            -o "$out/native/libm3signalorder.so"
+          java -Xcheck:jni -Dm3.collections.signal.native=true \
+            -Djava.library.path="$out/native" \
             -cp "m3/collections/target/classes:m3/collections/target/test-classes" \
             com.m3.collections.M3ObjectSlotIndexSelfTest
 
