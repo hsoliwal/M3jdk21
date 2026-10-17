@@ -106,24 +106,26 @@ public final class M3BitLane28 {
     /** Returns the first set slot at or after from, or -1; MAX_SLOTS is a valid end. */
     public int nextSetBit(int from) {
         M3Address28.checkRange(from, M3Address28.MAX_SLOTS);
-        while (from < M3Address28.MAX_SLOTS) {
-            long[][] region = regions[from >>> 20];
-            if (region == null) { from = ((from >>> 20) + 1) << 20; continue; }
-            long[] page = region[(from >>> 12) & 255];
-            int end = ((from >>> 12) + 1) << 12;
+        if (from == M3Address28.MAX_SLOTS || cardinality == 0) return -1;
+        int blockBase = from & ~M3Address28.OFFSET_MASK;
+        long[][] region = regions[from >>> 20];
+        if (region != null) {
+            long[] page = region[(from >>> 12) & M3Address28.BLOCK_MASK];
             if (page != null) {
-                int wordIndex = (from & 4095) >>> 6;
+                int wordIndex = (from & M3Address28.OFFSET_MASK) >>> 6;
                 long word = page[wordIndex] & (-1L << (from & 63));
                 for (;;) {
-                    if (word != 0) return (from & ~4095) + (wordIndex << 6)
+                    if (word != 0L) return blockBase + (wordIndex << 6)
                             + Long.numberOfTrailingZeros(word);
-                    if (++wordIndex == 64) break;
+                    if (++wordIndex == M3Address28.OCCUPANCY_WORDS_PER_BLOCK) break;
                     word = page[wordIndex];
                 }
             }
-            from = end;
         }
-        return -1;
+        // The next occupied slot, if any, is select(rank(blockEnd)).
+        // Reuse already-maintained Fenwick indexes instead of scanning empty pages.
+        int nextBlock = blockBase + M3Address28.VALUES_PER_BLOCK;
+        return select(rankUnchecked(nextBlock));
     }
 
     /** Returns the last set slot at or before from, or -1; -1 is a valid empty prefix. */
@@ -131,23 +133,25 @@ public final class M3BitLane28 {
         if (from < -1 || from >= M3Address28.MAX_SLOTS) {
             throw new IndexOutOfBoundsException(from);
         }
-        while (from >= 0) {
-            long[][] region = regions[from >>> 20];
-            if (region == null) { from = (from & ~((1 << 20) - 1)) - 1; continue; }
-            long[] page = region[(from >>> 12) & 255];
+        if (from == -1 || cardinality == 0) return -1;
+        int blockBase = from & ~M3Address28.OFFSET_MASK;
+        long[][] region = regions[from >>> 20];
+        if (region != null) {
+            long[] page = region[(from >>> 12) & M3Address28.BLOCK_MASK];
             if (page != null) {
-                int wordIndex = (from & 4095) >>> 6;
+                int wordIndex = (from & M3Address28.OFFSET_MASK) >>> 6;
                 long word = page[wordIndex] & (-1L >>> (63 - (from & 63)));
                 for (;;) {
-                    if (word != 0) return (from & ~4095) + (wordIndex << 6)
+                    if (word != 0L) return blockBase + (wordIndex << 6)
                             + 63 - Long.numberOfLeadingZeros(word);
                     if (--wordIndex < 0) break;
                     word = page[wordIndex];
                 }
             }
-            from = (from & ~4095) - 1;
         }
-        return -1;
+        // Every value before this block has rank strictly below the block start.
+        int preceding = rankUnchecked(blockBase);
+        return preceding == 0 ? -1 : select(preceding - 1);
     }
 
 

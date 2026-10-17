@@ -1,0 +1,55 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3 indexed 28-bit bitmap successor Java21 JNI receiver
+on:
+  push:
+    branches:
+      - m3/bitlane-indexed-navigation-receiver-20261017
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3BitLane28.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3BitLaneJumpProof.java'
+      - 'm3/collections/src/test/native/m3_bitlane_jump_jni.c'
+      - 'm3/collections/qualification/bitlane-indexed-navigation-20261017/**'
+      - '.github/workflows/m3-bitlane-indexed-navigation-20261017.yml'
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3BitLane28.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3BitLaneJumpProof.java'
+      - 'm3/collections/src/test/native/m3_bitlane_jump_jni.c'
+      - 'm3/collections/qualification/bitlane-indexed-navigation-20261017/**'
+      - '.github/workflows/m3-bitlane-indexed-navigation-20261017.yml'
+jobs:
+  exact-product-java-jni:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            m3/collections
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact SHA-256 and public descriptors, Java21 tiered and interpreter oracles
+        run: python3 m3/collections/qualification/bitlane-indexed-navigation-20261017/verify.py
+      - name: Strict C17 UBSan and checked JNI differential (test-only native)
+        run: python3 m3/collections/qualification/bitlane-indexed-navigation-20261017/verify.py --jni
+      - name: No file mutations from source verification
+        run: git diff --exit-code -- m3/collections
+  owning-maven-module:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            m3/collections
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Existing complete M3 collection module tests
+        run: mvn -B -ntp -f m3/collections/pom.xml test
