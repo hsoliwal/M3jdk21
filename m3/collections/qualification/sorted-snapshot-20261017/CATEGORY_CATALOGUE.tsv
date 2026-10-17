@@ -1,0 +1,10 @@
+category	operation	candidate	origin	license-disposition	complexity	decision
+SORTED_QUERY	rank/lowerBound	M3LongArrayList.binarySearch	M3JDK21 master M3LongArrayList, Apache-2.0	first-party design reference	O(log n) query	USE bounded lowerBound with exact insertion rank to avoid ambiguous negative insertion encoding
+SORTED_QUERY	navigation	JDK Arrays.binarySearch(long[])	Java SE 21 java.util.Arrays contract	JDK specification reference only; no copied source	O(log n)	USE signed-natural order + lower/upper bounds for strict/inclusive navigation
+SORTED_QUERY	navigation	M3LongSortedViews live filtered	M3JDK21 master M3LongSortedViews, Apache-2.0	first-party retained live owner	O(n) in worst-case hidden gaps	KEEP live behavior; ADD explicitly detached precomputed snapshot
+FILTER_SELECTION	one-time predicate	M3LongArrayList	M3JDK21 master M3LongArrayList, Apache-2.0	first-party reused temporary primitive list	O(n) construct	USE transient array lane; retain only exact final long[]
+FILTER_SELECTION	aligned precomputed masks	M3IndexMaskCompactor.selectLong	M3JDK21 master M3IndexMaskCompactor, Apache-2.0	first-party reuse; no new native ABI	O(n+k) construct	USE existing primitive mask compaction
+FILTER_SELECTION	live predicate views	Guava Sets.filter(SortedSet)	https://guava.dev/releases/33.7.2-jre/api/docs/com/google/common/collect/Sets.html	documentation comparison only, no code copied	O(n) size scans	REJECT for snapshot semantics; Guava view is live
+RANK_SELECT	binary search insertion	LeetCode 35 Search Insert Position	https://leetcode.com/problems/search-insert-position/	problem taxonomy only; no code/editorials copied	O(log n)	ADVERSARIAL TEST boundary rank, empty, min/max
+RANK_SELECT	ordered comparison	HackerRank Java Comparator	https://www.hackerrank.com/challenges/java-comparator/problem	problem taxonomy only; no code/editorials copied	O(log n)	ADVERSARIAL TEST strict and inclusive navigation
+RANK_SELECT	floor ceiling lower bound	GeeksForGeeks floor/ceil in sorted array	https://www.geeksforgeeks.org/dsa/ceiling-in-a-sorted-array/	problem taxonomy only; no code/editorials copied	O(log n)	ADVERSARIAL TEST max/min fallback and missing keys
