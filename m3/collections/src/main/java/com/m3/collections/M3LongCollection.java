@@ -39,20 +39,10 @@ public interface M3LongCollection {
      * Primitive traversal without boxing or an element snapshot. The fallback cannot split;
      * indexed owners override this to partition indices directly. Mutation rules are those
      * of iterator(); callbacks must not interfere with a non-concurrent collection.
+     * The fallback binds on first valid traversal, not at stream creation or metadata access.
      */
     default java.util.Spliterator.OfLong longSpliterator() {
-        M3LongIterator cursor = iterator();
-        return new java.util.Spliterator.OfLong() {
-            @Override public boolean tryAdvance(LongConsumer action) {
-                Objects.requireNonNull(action, "action");
-                if (!cursor.hasNext()) return false;
-                action.accept(cursor.nextLong());
-                return true;
-            }
-            @Override public OfLong trySplit() { return null; }
-            @Override public long estimateSize() { return Long.MAX_VALUE; }
-            @Override public int characteristics() { return NONNULL; }
-        };
+        return M3LongTraversal.of(this, java.util.Spliterator.NONNULL);
     }
 
     /** Lazy primitive stream; no Long wrapper is created by the source. */
