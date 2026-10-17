@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3Jdk21CountedSourcePin20261017
+displayName: Qualify exact counted collection source pins after M3 JNI native-path admission
+description: >-
+  Source-sealed two-file text recipe updates only Git identities for
+  the reviewed pinned text provider and its owning counted recipe subtree.
+  It preserves every Maven/OpenRewrite, Java21, JNI and collector test gate.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk21-counted-source-pins-20261017
