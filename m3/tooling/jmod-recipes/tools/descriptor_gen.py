@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 """M3SDK JMOD step 2, facts only (design section 6.2): module descriptors for the vendored jars that have none.
 1. Candidates = JMOD_IMAGE.tsv NEEDS_DESCRIPTOR rows; keep the highest version per artifact; drop a jar whose packages
    a named (descriptor-carrying) module already owns (it is an older line of that library).
@@ -8,13 +8,13 @@
 3. jdeps --generate-module-info per unit (module path = named jars + the units); the generated module-info.java files and
    DESCRIPTOR_MANIFEST.tsv (module, unit jar(s), target path in the M3 refactor layer, sha256) are the input of the
    OpenRewrite recipe M3ModuleDescriptorRecipe, which writes them into the repository. The upstream jars never change."""
-import argparse, csv, hashlib, io, re, shutil, subprocess, sys, zipfile
+import argparse, csv, hashlib, io, os, re, shutil, subprocess, sys, zipfile
 from collections import defaultdict
 from pathlib import Path
 
-JDK = Path(r"C:\Program Files\Java\jdk-21")
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from split_packages import packages  # noqa: E402
+from jmod_image import JDK, check_space, guard_output, measured_archive_size, output_arguments, relative_path  # noqa: E402
 
 
 def run(*a):
@@ -99,8 +99,14 @@ def main():
     ap.add_argument("--image-tsv", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--layer", default="m3/vendor/third_party-m3/descriptors", help="repository path of the M3 refactor layer")
+    output_arguments(ap)
     a = ap.parse_args()
+    a.out = guard_output(a.out, a.output_root, a.output_budget_bytes)
+    if relative_path(a.layer).parts != ("m3", "vendor", "third_party-m3", "descriptors"):
+        raise ValueError("descriptor layer must be the existing M3 refactor layer")
     rows = list(csv.DictReader(io.open(a.image_tsv, encoding="utf-8", newline=""), delimiter="\t"))
+    estimate = sum(measured_archive_size(p, a.output_root) for p in {r["jar"] for r in rows}) + 1024 * 1024
+    guard_output(a.out, a.output_root, a.output_budget_bytes, estimate)
     named = [r for r in rows if r["disposition"].startswith(("JMOD", "MODULAR_JAR"))]
     named_pkgs = set()
     for r in named:
@@ -141,8 +147,6 @@ def main():
         groups[find(art)].append(art)
     work = a.out / "units"; gen = a.out / "generated"
     for d in (work, gen):
-        if d.exists():
-            shutil.rmtree(d)
         d.mkdir(parents=True)
     unit_jars = {}
     for root, arts in sorted(groups.items()):
@@ -153,6 +157,7 @@ def main():
         shared = sorted(p for p, o in owners.items() if len(o) > 1 and o <= set(arts))
         name = min(shared, key=len)
         dest = work / (name + ".jar")
+        check_space(a.output_root, a.output_budget_bytes)
         merge_jars([units[x][0]["jar"] for x in arts], dest)
         # jdeps derives the module name from the file name: name the merged jar after its module
         unit_jars[name] = ([str(dest)], arts)
@@ -164,8 +169,10 @@ def main():
     for key, (jars, arts) in sorted(unit_jars.items()):
         jar = jars[0]
         before = {p.relative_to(gen).parts[0] for p in gen.glob("**/module-info.java")}
-        mp = ";".join(x for x in all_jars if x != jar)  # the input jar must not also sit on the module path
-        res = run(JDK / "bin/jdeps", "--multi-release", "21", "--ignore-missing-deps", "--module-path", mp, "--generate-module-info", gen, jar)
+        mp = os.pathsep.join(x for x in all_jars if x != jar)  # the input jar must not also sit on the module path
+        check_space(a.output_root, a.output_budget_bytes)
+        res = run(JDK / "bin/jdeps", "--multi-release", "21", "--ignore-missing-deps",
+                  *(["--module-path", mp] if mp else []), "--generate-module-info", gen, jar)
         new = sorted({p.relative_to(gen).parts[0] for p in gen.glob("**/module-info.java")} - before)
         if res.returncode != 0 or not new:
             msg = [l for l in (res.stdout + res.stderr).strip().splitlines() if l.strip()]

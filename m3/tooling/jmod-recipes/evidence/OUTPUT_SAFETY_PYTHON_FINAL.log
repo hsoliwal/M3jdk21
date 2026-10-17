@@ -1,0 +1,14 @@
+test_all_cli_owners_preserve_occupied_output_before_inputs_are_read (__main__.OutputSafetyTest.test_all_cli_owners_preserve_occupied_output_before_inputs_are_read) ... ok
+test_archive_escape_refuses_even_after_a_valid_entry_without_partial_output (__main__.OutputSafetyTest.test_archive_escape_refuses_even_after_a_valid_entry_without_partial_output) ... ok
+test_archive_size_refuses_before_creation (__main__.OutputSafetyTest.test_archive_size_refuses_before_creation) ... ok
+test_archive_symbolic_link_is_refused_before_any_write (__main__.OutputSafetyTest.test_archive_symbolic_link_is_refused_before_any_write) ... ok
+test_release_21_overlay_is_preserved_without_manifest_deletion (__main__.OutputSafetyTest.test_release_21_overlay_is_preserved_without_manifest_deletion) ... ok
+test_reserve_and_budget_fail_before_creation (__main__.OutputSafetyTest.test_reserve_and_budget_fail_before_creation) ... ok
+test_root_source_and_escape_are_refused_without_effects (__main__.OutputSafetyTest.test_root_source_and_escape_are_refused_without_effects) ... ok
+test_small_files_are_charged_by_destination_allocation_not_payload_bytes (__main__.OutputSafetyTest.test_small_files_are_charged_by_destination_allocation_not_payload_bytes) ... ok
+test_windows_junction_owner_is_refused_without_writing (__main__.OutputSafetyTest.test_windows_junction_owner_is_refused_without_writing) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.631s
+
+OK

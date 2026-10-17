@@ -30,3 +30,43 @@ Evidence (`evidence/`, 2026-10-12, JDK 21.0.9, Windows):
 | Image | 119 modules = `java.se` closure + 87 vendored JMODs; `java --validate-modules` rc 0; 253 MB |
 
 The jlink'ed image itself is a build output and is not committed.
+
+## Safety repair after source-custody restoration
+
+The 52 original PR #788 blobs and immutable historical evidence are pinned in
+`evidence/SOURCE_CUSTODY_788.json`. The safety changes are a separate delta; the
+2026-10-12 image evidence above does not qualify the changed tools.
+
+All three Python entrypoints now require `--output-root` and
+`--output-budget-bytes`. The owner must already exist, and `--out` must be a fresh,
+absolute strict child. Occupied output is preserved and refused; nothing is
+recursively deleted. Every effect checks the actual destination's free space
+with an 8 GiB reserve after the declared allowance (at most 512 MiB). Archive
+estimates charge expanded files and directories using the destination's measured
+allocation unit; path escapes, Git paths and archive links are refused before
+extraction. Full image construction may need a larger measured allowance and
+remains unqualified under the current limit.
+
+Windows uses the explicit `K:/codex-work/agent-temp` output lane required by this
+workstation's storage policy. Other platforms use the caller's explicit owned
+directory and their filesystem allocation unit; there is no alternate-drive
+fallback. `JAVA_HOME` selects the JDK; the defaults are the original Windows JDK
+21 path and `/usr/lib/jvm/java-21-openjdk-amd64` on other platforms. Module paths
+use the platform separator. The POSIX policy branch is discriminated on Windows;
+execution on a non-Windows runtime remains pending.
+
+Descriptor manifests are bounded to 128 rows / 512 KiB and only name
+`m3/vendor/third_party-m3/descriptors/<module>/module-info.java`. All targets,
+generated payload size, reparse ancestors, and a fresh external TSV receipt are
+validated before descriptor writes. The apply tool reserves 4 MiB, limits total
+descriptor payload to 512 KiB, charges new files/directories by the destination's
+measured allocation unit, and creates new files without truncating existing
+ones. Original fixed point and drift refusal behavior remain covered by the
+actual recipe tests. Concurrent hostile path replacement is not qualified by
+these local filesystem checks.
+
+Run the Python discriminators with `python -B tools/test_output_safety.py` and the
+existing Java recipe tests using the exact pinned providers. Standard cached
+rewrite-core execution is recorded separately from the source-suffixed Maven
+provider closure. Full Maven/source-suffixed closure, jlink/image, non-Windows and
+current-master whole-source fit remain explicit pending gates.

@@ -1,0 +1,372 @@
+{
+  "schema": "m3-jmod-source-custody-1",
+  "sourcePr": 788,
+  "sourceHead": "3c7f331a65e31fdbe4c198d79c7bfcb4c226cda2",
+  "targetMaster": "3799df0b88d169064b610481400ec4edacec1d2e",
+  "files": [
+    {
+      "path": "m3/tooling/jmod-recipes/README.md",
+      "prBlob": "2a4222348293051608051a4d4963fc3cbf3ccfa0",
+      "sha256": "ddee3d335ef56884393fdfea75ed0eab5b41f7cd06af8d8caaaaa64a796264f7",
+      "bytes": 3060,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/evidence/DESCRIPTORS.tsv",
+      "prBlob": "a8aa433922351f6a354e3b341202e953856b5d0d",
+      "sha256": "a0b0475633fcd1f7f8cba98aa248e02db882cd88e024c6ca4bf365d6149effd1",
+      "bytes": 4376,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/evidence/DESCRIPTOR_MANIFEST.tsv",
+      "prBlob": "c67dd58aed8f78e18c79f95967efecca5acab674",
+      "sha256": "9296e77c953ab441a97cb2566962c37efc3928ae9e02180010935a962a67ea49",
+      "bytes": 5476,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/evidence/JMOD_IMAGE.tsv",
+      "prBlob": "c8caa12ea0cb0eea7f1ce83803f6f27c5ce12d4d",
+      "sha256": "eb449d4cca7329618c1dc4d103515ef8fd80e024b0327f8900c797281f02db42",
+      "bytes": 11891,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/evidence/JMOD_PACK.tsv",
+      "prBlob": "0e6bc64190a42dce336e0207340934186c4bf688",
+      "sha256": "52447eb33a749ae35bb350fe73ea56e2d7ca6a339c68fd9d22d9ca383d853534",
+      "bytes": 3631,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/evidence/MERGE_GROUPS.tsv",
+      "prBlob": "433e269aef757d3a1e4bcf5292ea1f207e30570c",
+      "sha256": "d2c4dbfb64b7783e2865b1a9e9696b4548abbecc74e872522a49879c88e79ab0",
+      "bytes": 2096,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/evidence/RECIPE_RECEIPT_apply.tsv",
+      "prBlob": "078d24f6d5e93a245e250580876953ae5869170f",
+      "sha256": "b57c397d3a9e21b7573d9941897ec12f068c91fbc01213ed52ad516b9a24bc9c",
+      "bytes": 4995,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/evidence/RECIPE_RECEIPT_drift.tsv",
+      "prBlob": "974dcdfbb9c2f57dffde75fc848ba81925ae6210",
+      "sha256": "a2877dfdbb63abbf37f1144a9eb151e064dc40fcb36e9853a84c8b4485284808",
+      "bytes": 116,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/evidence/SPLIT_PACKAGES.tsv",
+      "prBlob": "b49e300cc88f20a9093f6c8a08a2cbaa72d2c769",
+      "sha256": "2b472d0ae268e9790fcbeb9cdea686efd11d0efecf50ebb7de540d6323b263fe",
+      "bytes": 4614,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/pom.xml",
+      "prBlob": "bea579cf4ffe9ebfa6cbe8bfd445b4f96dce9543",
+      "sha256": "826ef8303d354b947a35e87b2fc9e534846d78d90a908fd479c0455d184bcf01",
+      "bytes": 2244,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorApply.java",
+      "prBlob": "0c35f76c65cb009bfda0a7594a79005b457767b4",
+      "sha256": "6927291e8629b7de0ffebfb51ddad4f9da3b371b0536574230383aef17124baf",
+      "bytes": 4002,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java",
+      "prBlob": "83b7ecc23b00c2fe026de54c8fa03ce9000612d3",
+      "sha256": "81a4d25e472fecc36d95a431d67a7fd3afe25d5fd8db9eeed86d3b1cd7473960",
+      "bytes": 6289,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/src/test/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java",
+      "prBlob": "a84e9add5ad5dcc30800c707e918a2593cc70cdb",
+      "sha256": "62f1bc378a968495b7c0249e122272d7a5e19524c31f08876ae6c91770c709f5",
+      "bytes": 3399,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/tools/descriptor_gen.py",
+      "prBlob": "fb25328725a1ccd6398083c43e8d851eacbb0b74",
+      "sha256": "46215430ace87315c0a05ad7b4872790bb22bf0ff1b7f3029830eecbe9c9b131",
+      "bytes": 9536,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/tools/jmod_image.py",
+      "prBlob": "db95e360a39360be796f8f08d7801e2aecfbb98b",
+      "sha256": "407622e9a4db86f1b9abae2e451638713b151f14256190c0e28fe7d0739eb7cf",
+      "bytes": 6733,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "prBlob": "6824ea4419d769b71af846c5b6eee64f9a7454d1",
+      "sha256": "e5dbfc0c3148bb69c908095753d6fb0f7b79cafc0ccaf9c20a02cdd9798a45c4",
+      "bytes": 4148,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/jmod-recipes/tools/split_packages.py",
+      "prBlob": "a19e72fb438bef93a75a0fe3ffabcfaff7f1e156",
+      "sha256": "8559a357fb2e3b06af13b1b3972166493aede2d77dc3611e84555a87ab068d9a",
+      "bytes": 3033,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/NOTICE",
+      "prBlob": "1e3b5f48c7f64b7b842429ee707079c310709eef",
+      "sha256": "ca96132250a340b12ef4bce0991b54e71c261d564dea667f79db3c6b02fdd33c",
+      "bytes": 400,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/README.md",
+      "prBlob": "01ee2ffaf07628e26c70df0a31ac8d9a109d825e",
+      "sha256": "f28908783d55a46b5941b9670200402dd91347de8deef6d6f6bd6ab48142c8ba",
+      "bytes": 1187,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/HdrHistogram/module-info.java",
+      "prBlob": "5355016b18bec9d68c9418f9687f64d8fb5c5287",
+      "sha256": "d33d7dcb2be44019a3bbf1448d24614184e19955eacb2581ddb7564c82d4405a",
+      "bytes": 97,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/JavaEWAH/module-info.java",
+      "prBlob": "9e410d0c6dbf9d2f65e8edd0114f0bc3660bf32f",
+      "sha256": "46a9cc0e781508d709e6f7e470c91ec883c40a8ec33432f94e5b3d92bc9adb02",
+      "bytes": 244,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/LatencyUtils/module-info.java",
+      "prBlob": "966be347d40bd128da13db2d468de16a0603df97",
+      "sha256": "b7a3df69a30ed0630c8e314736a64dfe2a75928a5e358a1ecabb5eddb20407ed",
+      "bytes": 94,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/cglib/module-info.java",
+      "prBlob": "ae961ac0bbf958f4d5fc7535e2d9e30b916d953a",
+      "sha256": "6dcfe8c3e6242bce0c47a6e26b46316652dc3360b61e448c36aae339ab560021",
+      "bytes": 377,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/com.google.common.util.concurrent.internal/module-info.java",
+      "prBlob": "f6fca12a96e06f2eb3e8fbd6c00f0cbfa5603502",
+      "sha256": "38e0d083ee40eaa48bdb0a0a945c5d53671ac647d7e46c93913c6a45d131c81e",
+      "bytes": 111,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/com.google.common/module-info.java",
+      "prBlob": "2f8f784c91158f05a7c432eb0b5c670dcfb0d232",
+      "sha256": "66c4394c4ed0e02879b483da56f8a274e6ea5e511a8f528a5ce6f8779de07c0b",
+      "bytes": 984,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/com.google.errorprone.annotations/module-info.java",
+      "prBlob": "20a5f95862d7aef8b1f0bec2af307820120f4b44",
+      "sha256": "a66601791088bf3a92e98fde9e628f32b8683c8658a94b67693cc85e0e13c70e",
+      "bytes": 191,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/com.sun.jna.platform/module-info.java",
+      "prBlob": "744f7bdf1fca83de5af0b3ed1932298122d4778c",
+      "sha256": "8993bdc85a0468b50404735eedc535c39f51437ce35779712749fd4134f9a5c7",
+      "bytes": 830,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/com.sun.jna/module-info.java",
+      "prBlob": "253f049ad239f57975ada5039e9d6a57970ca709",
+      "sha256": "5e80a1ddde61af1b150b1191920d6afbe95d09cb04dc45f025a9077164d04b7e",
+      "bytes": 210,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/dec/module-info.java",
+      "prBlob": "69a45410f5e218c5a776b983adf4c89e27e30238",
+      "sha256": "bb20d0540d3376b32eba5b9a9c6db3ddbb5559e924412fdeef9286ddf7db70d7",
+      "bytes": 44,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/fastfilter/module-info.java",
+      "prBlob": "916d46eb7ec073138b338fc23a755633a80b78e3",
+      "sha256": "ce873b51c15d753cc8de1cecfcc6eea8f3a815a15688ece1bf7665100ad7f836",
+      "bytes": 328,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/gizmo/module-info.java",
+      "prBlob": "c236e7b0632f4eeef0d5e8d5376c4070b1304532",
+      "sha256": "a2a8fb08c4a1f5c75e74c9ed8112d431b1e04694c53888cb3b979c19949fb53c",
+      "bytes": 172,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/j2objc.annotations/module-info.java",
+      "prBlob": "143723e3bc2c785827a701b498a5f129bdef7ca4",
+      "sha256": "a029f90e2945c53699d755dfaaf938826279177300e142b4afb4d020b9aee942",
+      "bytes": 74,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/java.object.diff/module-info.java",
+      "prBlob": "446bd41ea411deea51f48f34c3578c643ecec139",
+      "sha256": "0ddc71f827320f5c2502fc7f34a20a7a516bbdbe779e6d40a50217f7d8bd6240",
+      "bytes": 712,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/jsr305/module-info.java",
+      "prBlob": "6b8564a3be0abbe1f77a10cac0c8b935da6a7c7a",
+      "sha256": "97fbaf1664125d91c5cc36069a009f385fcf8b06efe1f5c80a33944ee2d4320e",
+      "bytes": 125,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/micrometer.core/module-info.java",
+      "prBlob": "dd4c2a2f3a455f3e025f8b5b1f14021e25ee237d",
+      "sha256": "8d58890b397275f9c2c83263a4e4fd5b04e51e83adf9a3c4b6b356050ccc4ec4",
+      "bytes": 2421,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/org.agrona.core/module-info.java",
+      "prBlob": "2a52c7e66aed3989518aed0b145e00223aa5c1d4",
+      "sha256": "5e8c148523ba14817f5aff8f6f8f5c782b0e897c189dc8f6943756975f3bf4d1",
+      "bytes": 590,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/org.antlr.antlr4.runtime/module-info.java",
+      "prBlob": "5ff0fc13bdb9134240ad31c91da2ebe461f8ea33",
+      "sha256": "43c65557d5cc60cd729b6e963a9ac08676bfa93e5d9edca588d1184596445399",
+      "bytes": 317,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/org.eclipse.collections.api/module-info.java",
+      "prBlob": "d03c9bc74de82e20e87d503f349a4ee82337843b",
+      "sha256": "907030b3a025e5bcab5ac6fcbd12899023b6da82fef657bb37316b7d98232da9",
+      "bytes": 3779,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/org.eclipse.collections.impl/module-info.java",
+      "prBlob": "3ee817c08060107053bef7f57a6c964a381a97d2",
+      "sha256": "b640ac808a554606b5731063144197c9f1a5caed4da5481006075b7ded51faad",
+      "bytes": 50653,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/org.eclipse.jgit/module-info.java",
+      "prBlob": "8254ba33a482d8aa503f7367c78115756d5dc6f2",
+      "sha256": "90123de49f5c5549e086c5a7fd73c9b276de6154d159d06ab22c26cf454e609c",
+      "bytes": 2367,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/org.jboss.jandex/module-info.java",
+      "prBlob": "879b110e2a230779e1569f53e118445ec9514450",
+      "sha256": "18b0e8432bf716b6f827f81561fb6ee9898cafca6103831dd856d0903edd9ca7",
+      "bytes": 59,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/org.lz4.java/module-info.java",
+      "prBlob": "c9c43f09cc497d4efb62a6f9747141c7db8e1a13",
+      "sha256": "a2efe4339afa2d7550670117aadba5961a71eb51f3a004a7162068f5c8272387",
+      "bytes": 147,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/org.openrewrite.java/module-info.java",
+      "prBlob": "94af86377d4264790ce076f461e3a71788d78cf0",
+      "sha256": "2a779c02d7ca9bb2f6d1bf3cc070d5725be1f9db98214662cd9bf85d4f9a90e3",
+      "bytes": 1314,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/org.openrewrite/module-info.java",
+      "prBlob": "ab62136cc40992e364d640ee898569eb5b070ade",
+      "sha256": "3903bd38a6c0fb77dea9f5454e40beb01cd8c284b6faecfa0500b297760e690e",
+      "bytes": 4361,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/org.osgi.core/module-info.java",
+      "prBlob": "a1926e8d63cd316c53e715354148b8f20a41fd68",
+      "sha256": "26271adaccc16f7ee0345b9a6e69b8e7ea78abc16fae83d0efd24c8b0aa893e6",
+      "bytes": 866,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/org.tomlj/module-info.java",
+      "prBlob": "9acc23d8b73a091ebf6f5f2a1ec2de6a40bbb7a9",
+      "sha256": "7b9338889b12e9af521111cad543294a3e0a723dccf6aadc31ca43b6a208ec5d",
+      "bytes": 177,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/re2j/module-info.java",
+      "prBlob": "26068a934f341092055dde3398d2399dfca7426b",
+      "sha256": "73654fa81345090198e7391a54d6e0251dbc87dc1a3c60fe6b362af86d866f31",
+      "bytes": 46,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/rewrite.xml/module-info.java",
+      "prBlob": "3aa48285a65006e91558e78022924c94cbb83cb1",
+      "sha256": "7c7bfdcbd33b0ba016b159091af55e4b63fca74c0b1f7b318b5bcb32000af4e3",
+      "bytes": 537,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/rewrite.yaml/module-info.java",
+      "prBlob": "537075ea6952dcad9b4dae3e6d639b1aa908db16",
+      "sha256": "25811d17acda6d51604d10905c60460abbc9b1986a41fd0079a38030e653e4d5",
+      "bytes": 482,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/snappy.java/module-info.java",
+      "prBlob": "6bc8b676f393e88a0b4869e4215f7dff50a5f285",
+      "sha256": "4bbb6cd14d325462d0069711af17cd3cdb7c94092d1ca42cc47dc89a97e3a700",
+      "bytes": 197,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/univocity.parsers/module-info.java",
+      "prBlob": "6906e7d22fbb270107595b2c3a8a6ae31c109e10",
+      "sha256": "03c25fa685c6f2a69cd17419b51472e06189394d6250262106c0d0e7465c758d",
+      "bytes": 839,
+      "targetPreimage": "ABSENT"
+    },
+    {
+      "path": "m3/vendor/third_party-m3/descriptors/zero.allocation.hashing/module-info.java",
+      "prBlob": "7aa3f12b0b419f80e0f48fe0371740b55227266c",
+      "sha256": "5226bc297e67b678645958eb5cffcf482352a387a7c92252558afdece34d18c3",
+      "bytes": 121,
+      "targetPreimage": "ABSENT"
+    }
+  ]
+}
