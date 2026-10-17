@@ -58,6 +58,13 @@ public final class M3MapCursorNativeProof {
                     .mapToInt(Integer::intValue).toArray();
             check(fold(purposeShadow) == javaFold(purposeShadow),
                     "purpose-composed map JNI primitive shadow parity");
+            // Native sees only a detached primitive shadow, never the flatMapper.
+            java.util.Collection<Integer> flattened = M3CollectionWrappers.flatMappedView(
+                    java.util.List.of(projected, purposeShadow),
+                    keys -> java.util.Arrays.stream(keys).boxed().toList());
+            int[] flattenedIndices = flattened.stream().mapToInt(Integer::intValue).toArray();
+            check(fold(flattenedIndices) == javaFold(flattenedIndices),
+                    "lazy flatMap read-only projection JNI primitive shadow parity");
             // Reuse this native peer for the new fused M3 snapshot API:
             // predicates, sorting and reference projection stay in Java.
             java.util.List<Integer> frozen = M3CollectionViews.filteredSortedSnapshot(
