@@ -2,8 +2,9 @@
 
 M3JDK21 target-owned, **Java 21 CPU-only** validation of Synexia's module manifest.
 The frozen donor manifest is a **metadata snapshot**, not borrowed implementation code.
-It contains 20 source module entries; the existing target receiver retains its 18
-`QUALIFICATION_PENDING` entries unchanged. The other two entries must remain
+It now contains 21 source module entries: the original 18 mapped entries stay
+`QUALIFICATION_PENDING`, and signed INT8 quantization is an additional nineteenth
+mapped candidate. The other two entries must remain
 explicitly pending:
 * `com.synexia.m3.model.distill` — CPU model-math provider, separate Java/JNI qualification
 * `com.synexia.m3.compute.webgpu` — optional GPU-native Dawn provider, not a CPU dependency
