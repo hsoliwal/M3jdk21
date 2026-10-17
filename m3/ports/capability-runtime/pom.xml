@@ -30,6 +30,13 @@
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
+          <execution><id>strict-jdk21-byte-histogram-oracle</id><phase>verify</phase>
+            <goals><goal>java</goal></goals>
+            <configuration>
+              <mainClass>com.m3.runtime.capability.ByteHistogram256Checks</mainClass>
+              <classpathScope>test</classpathScope>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>
