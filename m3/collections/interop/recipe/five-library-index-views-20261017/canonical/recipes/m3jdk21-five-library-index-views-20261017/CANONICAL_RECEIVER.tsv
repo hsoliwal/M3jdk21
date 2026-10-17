@@ -1,0 +1,11 @@
+item	value
+canonical_repo	hsoliwal/com.synexia
+canonical_branch	m3/five-provider-index-views-canonical-20261017
+canonical_recipe	com.synexia.m3.FiveLibraryIndexViews20261017
+m3jdk21_base	ec8fb1389c4bdb8c8608b3e1ee70144845b81fa7
+source_owner	M3HashPinnedJavaSnapshotRecipe
+product_module	m3/collections/interop
+version_java	21
+license	Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors
+jni_status	reuses M3IndexMaskWindow; no C symbol added
+provider_names	JDK;Guava;Eclipse Collections;Spring Framework;Apache Commons Collections

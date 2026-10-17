@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 five-provider indexed views Java21 and checked JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/**'
+      - '.github/workflows/m3-five-provider-index-views-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  five-provider:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            m3/collections
+            m3/tooling/migration-recipes
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact canonical source seals and generated postimages
+        run: python3 m3/collections/interop/recipe/five-library-index-views-20261017/verify.py
+      - name: Execute real OpenRewrite recipe refusal and fixed-point JUnit
+        run: mvn -B -ntp -f m3/collections/interop/recipe/five-library-index-views-20261017/pom.xml test
+      - name: Compile real M3 array/index/byte-mask core under Java21 strictness
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-core"
+          find m3/collections/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/sources.txt"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror -d "$RUNNER_TEMP/m3-core" @"$RUNNER_TEMP/sources.txt"
+          jar --create --file "$RUNNER_TEMP/m3-core.jar" -C "$RUNNER_TEMP/m3-core" .
+          mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.2:install-file \
+            -Dfile="$RUNNER_TEMP/m3-core.jar" -DgroupId=com.m3 -DartifactId=m3-collections \
+            -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true
+      - name: Run real JDK Guava Eclipse Spring Apache SDK contract suites
+        run: mvn -B -ntp -f m3/collections/interop/pom.xml clean verify
+      - name: Compile existing unchanged mask-window C17 JNI library
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3native"
+          JH="$JAVA_HOME"
+          gcc -std=c17 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion \
+            -fPIC -shared -I"$JH/include" -I"$JH/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            m3/collections/src/main/native/collections/m3_index_mask_window.c \
+            -o "$RUNNER_TEMP/m3native/libm3_collections_mask.so"
+      - name: Run same five-provider JUnit under actual checked native backend
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/interop/pom.xml -Dtest=M3FiveLibraryIndexViewsTest \
+            "-DargLine=-Xcheck:jni -Djava.library.path=$RUNNER_TEMP/m3native" test
+      - name: Require four actual provider tests and no skips/failures
+        shell: bash
+        run: |
+          python3 - <<'PYTEST'
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+          p=Path('m3/collections/interop/target/surefire-reports/TEST-com.m3.collections.interop.M3FiveLibraryIndexViewsTest.xml')
+          assert p.is_file(), 'new real-provider test not run'
+          el=ET.parse(p).getroot()
+          assert int(el.get('tests','0')) == 4, 'missing four contracts'
+          assert all(int(el.get(k,'0'))==0 for k in ('errors','failures','skipped')), el.attrib
+          print('FIVE_PROVIDER_NATIVE_JAVA_CONTRACT_PASS',el.attrib)
+          PYTEST
