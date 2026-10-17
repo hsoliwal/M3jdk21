@@ -112,6 +112,38 @@ public final class M3LongPriorityQueue implements M3LongCollection {
         return Arrays.copyOf(heap, size);
     }
 
+    /**
+     * Filter the current binary heap in its unsorted iterator encounter order
+     * using caller-owned positional byte flags. Survivors first compact into
+     * the same long[]; Floyd bottom-up heapification then restores min order
+     * in O(n) without a temporary array, boxed Long or heap-entry objects.
+     *
+     * Mask states are not priority values and do not address heap pointers.
+     * Validation rejects all invalid inputs before mutation. No concurrent
+     * source or mask mutation is supported, and only actual member removal
+     * invalidates a live primitive iterator.
+     *
+     * @return the number of removed occurrences
+     */
+    public int retainByStateMask(byte[] statesByPosition, int requiredMask) {
+        M3IndexMaskCompactor.validate(statesByPosition, size, requiredMask);
+        int previous = size;
+        int kept = 0;
+        for (int read = 0; read < previous; read++) {
+            if (M3IndexMaskCompactor.matches(statesByPosition[read], requiredMask)) {
+                heap[kept++] = heap[read];
+            }
+        }
+        if (kept == previous) return 0;
+        Arrays.fill(heap, kept, previous, 0L);
+        size = kept;
+        for (int at = (size >>> 1) - 1; at >= 0; at--) {
+            siftDown(at, heap[at]);
+        }
+        modCount++;
+        return previous - kept;
+    }
+
     /** Returns a sorted snapshot without mutating this queue. */
     public long[] toSortedArray() {
         long[] result = toArray();

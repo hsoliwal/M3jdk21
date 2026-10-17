@@ -1,0 +1,42 @@
+name: M3 priority mask Java21 heap differential
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexMaskPrioritySelfTest.java'
+      - 'm3/collections/qualification/mask-priority-postimages-20261016.tsv'
+      - '.github/workflows/m3-collections-mask-priority-receiver.yml'
+  push:
+    branches:
+      - m3/mask-priority-receiver-20261016
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  primitive-heap-masks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source seal checks for all stacked mask receivers
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/collections/qualification/verify_mask_selection.py
+          python3 m3/collections/qualification/verify_mask_keyed.py
+          python3 m3/collections/qualification/verify_mask_priority.py
+      - name: Compile full M3 primitive collection source and execute actual Java 21 oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/m3-priority-mask
+          find m3/collections/src/main/java/com/m3/collections -name '*.java' -print | sort > /tmp/m3-priority-all.txt
+          javac --release 21 -proc:none -Xlint:all -Werror             -d /tmp/m3-priority-mask @/tmp/m3-priority-all.txt
+          javac --release 21 -proc:none -Xlint:all -Werror             -cp /tmp/m3-priority-mask -d /tmp/m3-priority-mask             m3/collections/src/test/java/com/m3/collections/M3IndexMaskPrioritySelfTest.java             m3/collections/src/test/java/com/m3/collections/M3IndexMaskKeyedSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
+          java -Xcheck:jni -cp /tmp/m3-priority-mask com.m3.collections.M3IndexMaskPrioritySelfTest
+          java -Xcheck:jni -cp /tmp/m3-priority-mask com.m3.collections.M3IndexMaskKeyedSelfTest
+          java -Xcheck:jni -cp /tmp/m3-priority-mask com.m3.collections.M3IndexMaskCompactorSelfTest

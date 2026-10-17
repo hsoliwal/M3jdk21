@@ -1,0 +1,3 @@
+source_revision	owner	target_path	disposition	storage	algorithm
+127a989e53772b7b27aeee05f39ced22386a6402	com.m3.collections.M3LongPriorityQueue	m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java	RECEIVED_CANDIDATE	long[] heap	in-place compact + Floyd heapify
+6c743495b135716a3f225fc45167d64c13802328	com.synexia.rewrite.M3Jdk21MaskPriorityReceiver20261016	m3/collections/qualification/mask-priority-postimages-20261016.tsv	RECIPE_SOURCE_SEALED	primitive arrays only	exact SHA256 before/after
