@@ -1,0 +1,272 @@
+{
+  "schema": "M3_WRAPPER_CONTRACTS_REPLAY_V1",
+  "targets": [
+    [
+      "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "5da6837eee9112cb97725efff8fbcc1b95f455761d923f643e9a1158ba208989",
+      "f6a7963ed9a357e1aa41a7285549f07bf1d35c06a58b2e06494fe855e629df55",
+      "M3CollectionViews.java.txt"
+    ],
+    [
+      "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java",
+      "3f5c1016aeaee1081533ebcdb2dd29b8d620dab839024ff383bd0dfab47f2f72",
+      "903399fb109feea866c117c60701b0a79c24d12afa6daa1cfdf80b359f6f04ed",
+      "M3FilteredMaps.java.txt"
+    ],
+    [
+      "m3/collections/wrappers/src/test/java/com/m3/collections/M3WrapperContractsProof.java",
+      "ABSENT",
+      "8ac2618544e99013cefcbaa5b0119ca089c766b61c499f083b237f95dd7e37b1",
+      "M3WrapperContractsProof.java.txt"
+    ],
+    [
+      "m3/collections/wrappers/src/test/java/com/m3/collections/M3WrapperContractsTest.java",
+      "ABSENT",
+      "7dca04ea790f13099a6968fef30616cb4159c37cfab4f60eda69e2dfe458b6ea",
+      "M3WrapperContractsTest.java.txt"
+    ]
+  ],
+  "replay_sha256": "af04569d6cc2e9b8086c9dd059f0c7a53a431e5f8d88349d54ae592489b006a9",
+  "refusals": [
+    "source-drift",
+    "missing-original",
+    "occupied-new",
+    "mixed-state",
+    "leaf-symlink",
+    "parent-symlink",
+    "directory-target",
+    "check-pre",
+    "invalid-mode",
+    "ownership-lock",
+    "manifest-drift",
+    "template-drift",
+    "template-symlink"
+  ],
+  "unchanged_public_owners": 2,
+  "jdk_source_baselines": {
+    "M3CollectionViews.java": "e21fd9b277ce44a8c6efe4a4ffdf9f01a14a1d0b",
+    "M3FilteredMaps.java": "400996d9331bf5c8bac9090a223aa0e8630825f1"
+  },
+  "native_original_git_blob": "0fa362205377e67d82e1c66479704d94936dbebe",
+  "java_modes": {
+    "tiered": {
+      "checks": 964437,
+      "seeds": 192,
+      "owner_profiles": 5
+    },
+    "interpreter": {
+      "checks": 964437,
+      "seeds": 192,
+      "owner_profiles": 5
+    },
+    "deep-tiered": {
+      "checks": 1312160,
+      "depth": 65536,
+      "seeds": 192
+    },
+    "deep-interpreter": {
+      "checks": 165280,
+      "depth": 8192,
+      "seeds": 192
+    }
+  },
+  "actual_large_occurrences": 2147483664,
+  "jni_checks": 156,
+  "maven_lifecycle": "NOT_EXECUTED_BY_THIS_SCRIPT",
+  "openrewrite_sdk": "NOT_EXECUTED_BY_THIS_SCRIPT",
+  "external_seals_checked": [],
+  "commands": [
+    {
+      "name": "compile-replay",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "5a41c013f65800f0d143fa075b3c08964f45162bc773520de2d6a97967b418a8"
+    },
+    {
+      "name": "refuse-source-drift",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "09db05e02652b857539de3f69b664e1700368538b87f7c80bf60372d9215d8d7"
+    },
+    {
+      "name": "refuse-missing-original",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "bc6d679d67ca6a6254b44bbe3612a6dfac580526b4a23043cdac33e54cefb7d0"
+    },
+    {
+      "name": "refuse-occupied-new",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "577d4a13a1d591233f948612eafb0b6e0c8222aba506650eb8be39f34bfcfd1f"
+    },
+    {
+      "name": "refuse-mixed-state",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "a4c2461fc33074141c58b21f313d995db1a1434248a5bcf4fb87f86b6cab20f4"
+    },
+    {
+      "name": "refuse-leaf-symlink",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "3d883c92c28620f0bf1cc7943d970638ae85ae6848c8f8c65a5aa302cf575e92"
+    },
+    {
+      "name": "refuse-parent-symlink",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "d107d14d7540db575af6265ada180e56f9612c6f733a0dd352b3e629bcc64d13"
+    },
+    {
+      "name": "refuse-directory-target",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "1243b0020a5d14b21756b776edeecfe13ba799319113e132df52f7cd42dab518"
+    },
+    {
+      "name": "refuse-check-pre",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "0e079b28b4ee8f8829aa2ff993d7dbbdbf4989319eadf5878d14b03a62bfc472"
+    },
+    {
+      "name": "refuse-invalid-mode",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "15f46091a8e3a476324f3ef29fbb54fadb813f775318c08a0eff48aaa24a04e6"
+    },
+    {
+      "name": "refuse-ownership-lock",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "01a5fbca45fcbb43ee96e19fcf8c9e6289a92c370167eaadca9df4e166bb2e4c"
+    },
+    {
+      "name": "refuse-manifest-drift",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "9a2b996d4ac9068bc7fab3668d5d80bbf18288deec66758f1063173c099a9398"
+    },
+    {
+      "name": "refuse-template-drift",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "302027d81a3cdbbceadf7ef7d1ccdf3046bbffd25732a0acbcd3da83bf560f60"
+    },
+    {
+      "name": "refuse-template-symlink",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "a8bba25d2241d61af6724efb12434bdc7169c84f371d647e5050868edb8169cd"
+    },
+    {
+      "name": "actual-replay-emission",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "5e17661d9f9e408f882bcedd3223f6c9369a969f4c803fc0c90f10b4d84651ef"
+    },
+    {
+      "name": "fixed-point-replay",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "65afd2676afd1a100fccc941b419d2776376a51fe18b517bb3acc9a853357bed"
+    },
+    {
+      "name": "fixed-point-check",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "9b4336cd4996a7976491b910f67c61f4af2ca4045c38d07a548f210e07860f38"
+    },
+    {
+      "name": "compile-generated-java",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "65839251f2754e715327e7a5613f02e6c36119066fca8a8f076368220e7d8866"
+    },
+    {
+      "name": "generated-tiered",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "62ecf4756a0e0eb23a66537c99bcba8b02fa8677a928e3064f6a347444ffb09d"
+    },
+    {
+      "name": "generated-interpreter",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "aaa984e6df672e47fe92243cdbaae8cf277af3710a7fd44840c836993d48a7db"
+    },
+    {
+      "name": "inherited-deep-tiered",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "ad73db9d01961b600444f432064d3f5607c71631ca98ff1eb512217097fa9086"
+    },
+    {
+      "name": "inherited-deep-interpreter",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "872e95232be0e41c38fbeb45564a43c132cd8f701dcd19a7df10b13c9a5168bc"
+    },
+    {
+      "name": "compile-original-witness",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "6c855b24c82b161c95943eacf8c26e0e143c878d21edeb18a19b90dfca3677e0"
+    },
+    {
+      "name": "original-distinct-contract",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "a68c2e7add017ef45cb74326d16034599674e60e59d1081da607a3a54ff50968"
+    },
+    {
+      "name": "original-large-count",
+      "exit": 1,
+      "expected_exit": 1,
+      "log_sha256": "1e4d7135345b698f31b7c5cb7e2297b88ff60bf3c8c68cb6a459821e7f436ec3"
+    },
+    {
+      "name": "generated-large-count",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "69edcd10b74aeee6a33a4d9e7a116f1e136e476120e6b43de8ae191113fc1934"
+    },
+    {
+      "name": "M3CollectionViews.java-old-api",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "d86399b5cac07545f3bbab39f612e93674c93eea16c2193cb191abf3f8de826c"
+    },
+    {
+      "name": "M3CollectionViews.java-new-api",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "2b0dfc68d54e2eed68779e5deec77d8452e94f958bae823348c4aecc52806dd8"
+    },
+    {
+      "name": "M3FilteredMaps.java-old-api",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "20df7b2b637f75f39982503cc708f08848f92291230394e4fd306c3e297dea02"
+    },
+    {
+      "name": "M3FilteredMaps.java-new-api",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "20bb6cfc61c93331db0fe2f243820185bd137c7a33a790bf34eac528e5605424"
+    },
+    {
+      "name": "compile-jni-ubsan",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "ed1142417a2931548b779d9126e1fdf7dd8ab4a9550cab8ca1da1c815b195349"
+    },
+    {
+      "name": "generated-jni",
+      "exit": 0,
+      "expected_exit": 0,
+      "log_sha256": "f4e6418ca1568e3a5b59c8f8d3c43ae3ef57dae49886cfe0f3906e6948f94fbe"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.WrapperContracts20261017
+displayName: Preserve filtered Set metadata and bounded counts with existing M3 scan atoms
+description: Refine exact existing wrapper owners without changing public APIs or storage ownership.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-wrapper-contracts-20261017

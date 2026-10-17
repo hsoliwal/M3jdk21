@@ -1,0 +1,10 @@
+{
+  "donor": "m3/collections/wrappers/deep-filter-20261017/replay/Replay.java",
+  "donor_sha256": "996fd6f01ea764ba394d5bc5c348561edb5c8744a27a8a35e6accb18f11e5c14",
+  "manifest_sha256": "89ec455073dfe1cac6c7b4e97eb0e5489b6b7fc68eeeeee317dbf508166b3bad",
+  "bound_sha256": "af04569d6cc2e9b8086c9dd059f0c7a53a431e5f8d88349d54ae592489b006a9",
+  "literal_bindings": {
+    "m3/collections/wrappers/deep-filter-20261017/replay-inputs/": "m3/collections/wrappers/contract-refinement-20261017/replay-inputs/",
+    "1ae3b972d61b7f3188483920ce89383373d5767847e45892c00a9e38f091621e": "89ec455073dfe1cac6c7b4e97eb0e5489b6b7fc68eeeeee317dbf508166b3bad"
+  }
+}
