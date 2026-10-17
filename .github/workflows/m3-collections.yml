@@ -61,7 +61,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Verify unambiguous collection donation metadata
-        run: python3 -m unittest discover -s m3/collections -p 'test_verify_donation.py' -v
+        run: python3 -m unittest discover -s m3/collections -p 'test_verify_*.py' -v
       - name: Prepare pinned Java 21 compiler and JUnit console
         shell: bash
         run: |
