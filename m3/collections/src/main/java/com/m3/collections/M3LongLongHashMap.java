@@ -82,6 +82,42 @@ public final class M3LongLongHashMap {
         }
     }
 
+    /**
+     * Select entries by a caller-owned unsigned-byte mask aligned to keyIterator
+     * / keysToArray encounter order, not by key value or raw bucket index.
+     * No per-key Map.Entry, boxed ID, temporary array or second payload owner.
+     * Values move with their keys by keeping the same occupied slot.
+     *
+     * The operation is stable and O(capacity), with O(1) scratch; tombstone
+     * rehashing remains deferred to normal map insertion. Validation refuses
+     * invalid lengths or masks before mutating resident arrays. No thread
+     * safety or concurrent snapshot semantics are implied.
+     *
+     * @return number of removed mappings
+     */
+    public int retainByStateMask(byte[] statesByPosition, int requiredMask) {
+        M3IndexMaskCompactor.validate(statesByPosition, size, requiredMask);
+        int encounter = 0;
+        int removed = 0;
+        for (int slot = 0; slot < states.length; slot++) {
+            if (states[slot] != USED) continue;
+            if (!M3IndexMaskCompactor.matches(statesByPosition[encounter++], requiredMask)) {
+                states[slot] = DELETED;
+                keys[slot] = 0L;
+                values[slot] = 0L;
+                removed++;
+            }
+        }
+        if (removed == 0) return 0;
+        size -= removed;
+        if (size == 0) {
+            Arrays.fill(states, EMPTY);
+            occupied = 0;
+        }
+        modCount++;
+        return removed;
+    }
+
     public long getOrDefault(long key, long defaultValue) {
         int index = findIndex(key);
         return index < 0 ? defaultValue : values[index];

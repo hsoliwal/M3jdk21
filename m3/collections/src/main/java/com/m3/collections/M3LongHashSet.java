@@ -93,6 +93,41 @@ public final class M3LongHashSet implements M3LongCollection {
         return true;
     }
 
+    /**
+     * Remove entries according to caller-owned states aligned to the current
+     * encounter order (the same physical-used-slot order as toArray/iterator).
+     * Retains the existing primitive key[] and byte occupancy[]; does not
+     * allocate a temporary key list, entry, mask, result object or wrapper.
+     *
+     * Deterministic input refusal is prior to all writes. As with this
+     * non-concurrent collection, callers must not mutate the mask or owner
+     * simultaneously. Deleted slots remain tombstones for ordinary insertion
+     * reuse; compacting/repacking is intentionally not hidden in this call.
+     *
+     * @return number of removed keys
+     */
+    public int retainByStateMask(byte[] statesByPosition, int requiredMask) {
+        M3IndexMaskCompactor.validate(statesByPosition, size, requiredMask);
+        int encounter = 0;
+        int removed = 0;
+        for (int slot = 0; slot < states.length; slot++) {
+            if (states[slot] != USED) continue;
+            if (!M3IndexMaskCompactor.matches(statesByPosition[encounter++], requiredMask)) {
+                states[slot] = DELETED;
+                keys[slot] = 0L;
+                removed++;
+            }
+        }
+        if (removed == 0) return 0;
+        size -= removed;
+        if (size == 0) {
+            Arrays.fill(states, EMPTY);
+            occupied = 0;
+        }
+        modCount++;
+        return removed;
+    }
+
     @Override
     public boolean contains(long key) {
         return findIndex(key) >= 0;

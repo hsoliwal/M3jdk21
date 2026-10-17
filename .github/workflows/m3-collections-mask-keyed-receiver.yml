@@ -1,0 +1,39 @@
+name: M3 keyed masks Set Map Java21 contract
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongHashSet.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexMaskKeyedSelfTest.java'
+      - 'm3/collections/qualification/mask-keyed-postimages-20261016.tsv'
+      - '.github/workflows/m3-collections-mask-keyed-receiver.yml'
+  push:
+    branches:
+      - m3/mask-keyed-receiver-20261016
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  primitive-array-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify source-sealed array/mask receiver and keyed postimages
+        run: |
+          python3 m3/collections/qualification/verify_mask_selection.py
+          python3 m3/collections/qualification/verify_mask_keyed.py
+      - name: Compile original M3 core and actual keyed mask Java21 proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/m3-keyed-mask
+          find m3/collections/src/main/java/com/m3/collections -name '*.java' -print | sort > /tmp/m3-keyed-mask-sources.txt
+          javac --release 21 -proc:none -Xlint:all -Werror             -d /tmp/m3-keyed-mask @/tmp/m3-keyed-mask-sources.txt
+          javac --release 21 -proc:none -Xlint:all -Werror             -cp /tmp/m3-keyed-mask -d /tmp/m3-keyed-mask             m3/collections/src/test/java/com/m3/collections/M3IndexMaskKeyedSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
+          java -Xcheck:jni -cp /tmp/m3-keyed-mask com.m3.collections.M3IndexMaskKeyedSelfTest
+          java -Xcheck:jni -cp /tmp/m3-keyed-mask com.m3.collections.M3IndexMaskCompactorSelfTest
