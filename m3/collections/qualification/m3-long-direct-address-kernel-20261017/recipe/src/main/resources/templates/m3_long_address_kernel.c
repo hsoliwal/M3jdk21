@@ -1,10 +1,15 @@
 /* SPDX-License-Identifier: Apache-2.0 */
+/* Copyright 2026 Hitesh Soliwal and contributors.
+ * Modified 2026-10-17: bounded index chunks and contiguous region reads.
+ */
 #include <jni.h>
 
-/*
- * Explicit batch gather only. No Java heap pointer survives this call. PrimitiveArrayCritical is
- * held for one bounded non-blocking loop; no JNI calls are made until all critical arrays release.
+/* Own scratch is fixed: 256 jint indexes and 256 jlong values (3072 bytes).
+ * JVM-internal copying is implementation-dependent. Caller keeps input arrays stable.
+ * No Java pointer survives a chunk. Prefix writes on an invalid address are preserved.
  */
+enum { M3_GATHER_CHUNK = 256 };
+
 JNIEXPORT void JNICALL
 Java_com_m3_collections_M3LongAddressKernel_gatherNative(
         JNIEnv *env, jclass ignored, jlongArray payload, jintArray addresses,
@@ -26,37 +31,44 @@ Java_com_m3_collections_M3LongAddressKernel_gatherNative(
         if (error != NULL) (*env)->ThrowNew(env, error, "gather range");
         return;
     }
+    if (length == 0) return;
 
-    jlong *values = (*env)->GetPrimitiveArrayCritical(env, payload, NULL);
-    if (values == NULL) return;
-    jint *index = (*env)->GetPrimitiveArrayCritical(env, addresses, NULL);
-    if (index == NULL) {
-        (*env)->ReleasePrimitiveArrayCritical(env, payload, values, JNI_ABORT);
-        return;
-    }
-    jlong *result = (*env)->GetPrimitiveArrayCritical(env, output, NULL);
-    if (result == NULL) {
-        (*env)->ReleasePrimitiveArrayCritical(env, addresses, index, JNI_ABORT);
-        (*env)->ReleasePrimitiveArrayCritical(env, payload, values, JNI_ABORT);
-        return;
-    }
+    jint index[M3_GATHER_CHUNK];
+    jlong result[M3_GATHER_CHUNK];
+    for (jint done = 0; done < length;) {
+        jint count = length - done;
+        if (count > M3_GATHER_CHUNK) count = M3_GATHER_CHUNK;
+        (*env)->GetIntArrayRegion(env, addresses, address_from + done, count, index);
+        if ((*env)->ExceptionCheck(env)) return;
 
-    jboolean invalid = JNI_FALSE;
-    for (jint i = 0; i < length; i++) {
-        jint physical = index[address_from + i];
-        if (physical < 0 || physical >= payload_length) {
-            invalid = JNI_TRUE;
-            break;
+        jint valid = 0;
+        jboolean contiguous = JNI_TRUE;
+        for (; valid < count; valid++) {
+            jint physical = index[valid];
+            if (physical < 0 || physical >= payload_length) break;
+            if ((jlong) physical != (jlong) index[0] + valid) contiguous = JNI_FALSE;
         }
-        result[output_from + i] = values[physical];
-    }
-
-    (*env)->ReleasePrimitiveArrayCritical(env, output, result, 0);
-    (*env)->ReleasePrimitiveArrayCritical(env, addresses, index, JNI_ABORT);
-    (*env)->ReleasePrimitiveArrayCritical(env, payload, values, JNI_ABORT);
-
-    if (invalid == JNI_TRUE) {
-        jclass error = (*env)->FindClass(env, "java/lang/IndexOutOfBoundsException");
-        if (error != NULL) (*env)->ThrowNew(env, error, "physical address outside payload");
+        if (valid != 0) {
+            if (contiguous == JNI_TRUE) {
+                /* Affine forward indexes need no critical pointer at all. */
+                (*env)->GetLongArrayRegion(env, payload, index[0], valid, result);
+                if ((*env)->ExceptionCheck(env)) return;
+            } else {
+                const jlong *values = (*env)->GetPrimitiveArrayCritical(env, payload, NULL);
+                if (values == NULL) return;
+                /* No callbacks, allocation, blocking, or unrelated JNI calls while pinned. */
+                for (jint i = 0; i < valid; i++) result[i] = values[index[i]];
+                (*env)->ReleasePrimitiveArrayCritical(env, payload, (void *) values, JNI_ABORT);
+            }
+            (*env)->SetLongArrayRegion(env, output, output_from + done, valid, result);
+            if ((*env)->ExceptionCheck(env)) return;
+        }
+        if (valid != count) {
+            /* Publish exactly the valid prefix, including the current partial chunk. */
+            jclass error = (*env)->FindClass(env, "java/lang/IndexOutOfBoundsException");
+            if (error != NULL) (*env)->ThrowNew(env, error, "physical address outside payload");
+            return;
+        }
+        done += count;
     }
 }

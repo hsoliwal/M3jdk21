@@ -22,7 +22,7 @@ jobs:
           mvn -B -ntp -f m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml verify
           java -cp m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/target/classes com.synexia.m3.M3LongDirectAddressKernelRecipe --check .
       - name: Java owner tests
-        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongAddressKernelTest test
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongAddressKernelTest,M3LongAddressBoundedTest test
       - name: Build optional JNI batch gather
         shell: bash
         run: |
@@ -30,4 +30,4 @@ jobs:
           mkdir -p /tmp/m3address
           cc -std=c17 -fPIC -shared -Wall -Wextra -Werror             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux"             m3/collections/src/main/native/collections/m3_long_address_kernel.c             -o /tmp/m3address/libm3_collections_address.so
       - name: JNI parity
-        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongAddressKernelTest -DargLine="-Xcheck:jni -Djava.library.path=/tmp/m3address" test
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongAddressKernelTest,M3LongAddressBoundedTest -DargLine="-Xcheck:jni -Dm3.address.required=true -Djava.library.path=/tmp/m3address" test
