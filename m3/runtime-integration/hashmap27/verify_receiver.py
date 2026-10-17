@@ -8,6 +8,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[3]
 FILES = {
+    "src/java.base/share/classes/java/util/Collections.java":
+        "7dcb1bde18923274518b747ad4e65e3019046ca7742714ead678c615d99499ba",
     "src/java.base/share/classes/java/util/HashMap.java":
         "8e5a059db03409858132297dd68811e16c19fc83d91d4449bdeca824f073605f",
     "test/jdk/java/util/HashMap/M3HashMapBulkCopyTest.java":
@@ -29,4 +31,7 @@ for required in ("private void putHashMapEntries(",
                  "for (Map.Entry<? extends K, ? extends V> e : m.entrySet())"):
     if required not in content:
         sys.exit("M3_HASHMAP_BACKPORT_SOURCE_FAIL route=" + required)
-print("M3_HASHMAP_BACKPORT_SOURCE_PASS targets=2 java21_binary_unverified=true")
+if "    static class UnmodifiableMap<K,V> implements Map<K,V>, Serializable {" not in \
+        (ROOT / "src/java.base/share/classes/java/util/Collections.java").read_text():
+    sys.exit("M3_HASHMAP_BACKPORT_SOURCE_FAIL Collections visibility")
+print("M3_HASHMAP_BACKPORT_SOURCE_PASS targets=3 java21_binary_unverified=true")
