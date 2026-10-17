@@ -2,6 +2,7 @@
 package com.m3.rewrite.backport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -70,6 +71,33 @@ final class M3Jdk21HashPinnedTextSnapshotRecipeTest {
                 "make/modules/jdk.jcmd/Copy.gmk"));
         assertThrows(IllegalArgumentException.class,
                 () -> new M3Jdk21HashPinnedTextSnapshotRecipe("../bad"));
+    }
+
+    @Test
+    void onlyBoundedCrateLocalNestedTemplateResourcesAreAccepted() {
+        assertTrue(M3Jdk21HashPinnedTextSnapshotRecipe.crateTemplatePath("template.txt"));
+        assertTrue(M3Jdk21HashPinnedTextSnapshotRecipe.crateTemplatePath(
+                "templates/JEP_RESIDUE_QUEUE.tsv.txt"));
+        assertTrue(M3Jdk21HashPinnedTextSnapshotRecipe.crateTemplatePath(
+                "templates/nested/jep_residue.py.txt"));
+        for (String invalid : List.of(
+                "", ".", "..", "templates/..", "../template.txt",
+                "./template.txt", "/template.txt", "templates//file",
+                "templates/../escape", "templates/.git/config",
+                "templates\\\\evil.txt", "file:C:/template",
+                "templates/file\\nname.txt")) {
+            assertFalse(M3Jdk21HashPinnedTextSnapshotRecipe.crateTemplatePath(invalid),
+                    "unsafe resource admitted: " + invalid);
+        }
+        assertFalse(M3Jdk21HashPinnedTextSnapshotRecipe.crateTemplatePath(null));
+
+        // Existing sealed JEP receipt is physically stored one safe level down.
+        // This only proves resource provenance, never JEP runtime acceptance.
+        var actual = new M3Jdk21HashPinnedTextSnapshotRecipe("jdk21-jep-residue-proof");
+        assertEquals(List.of(
+                "m3/backports/JEP_RESIDUE_QUEUE.tsv",
+                "m3/backports/jep_residue.py",
+                "m3/backports/test_jep_residue.py"), actual.targetPaths());
     }
 
     private static InMemoryExecutionContext context() {
