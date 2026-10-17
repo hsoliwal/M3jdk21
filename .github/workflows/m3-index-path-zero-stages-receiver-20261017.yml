@@ -73,3 +73,54 @@ jobs:
             test -s "$REPORT"
             grep -E 'Tests run: [1-9][0-9]*, Failures: 0, Errors: 0, Skipped: 0' "$REPORT"
           done
+  original-c17-jni-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Rebuild unchanged C17 JNI and prove original native requirements and Java equivalence
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORK="$(mktemp -d)"
+          trap 'rm -rf "$WORK"' EXIT
+          ROOT=m3/collections/src
+          javac --release 21 -proc:none -Xlint:all -Werror -h "$WORK" -d "$WORK" \
+            "$ROOT/main/java/com/m3/collections/M3IndexPathMasks.java" \
+            "$ROOT/test/java/com/m3/collections/M3IndexPathZeroStagesSelfTest.java" \
+            "$ROOT/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java" \
+            "$ROOT/test/java/com/m3/collections/M3IndexPathMaskWindowSelfTest.java"
+          test -s "$WORK/com_m3_collections_M3IndexPathMasks.h"
+          grep -Fq 'Java_com_m3_collections_M3IndexPathMasks_selectNative' \
+            "$WORK/com_m3_collections_M3IndexPathMasks.h"
+          gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            "$ROOT/main/native/collections/m3_index_path_masks.c" \
+            -o "$WORK/libm3_collections_pathmask.so"
+          for mode in '' '-Xint' '-XX:TieredStopAtLevel=1'; do
+            UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+              java -ea $mode -Xcheck:jni -Djava.library.path="$WORK" -cp "$WORK" \
+                com.m3.collections.M3IndexPathZeroStagesSelfTest --native
+            UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+              java -ea $mode -Xcheck:jni -Djava.library.path="$WORK" -cp "$WORK" \
+                com.m3.collections.M3IndexPathMasksSelfTest --native
+            UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+              java -ea $mode -Xcheck:jni -Djava.library.path="$WORK" -cp "$WORK" \
+                com.m3.collections.M3IndexPathMaskWindowSelfTest --native
+          done
+      - name: Refuse native/HotSpot changes outside this reviewed source slice
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --name-only 221e3d4edfa928e6ca17768396b2ba3e224bc70a HEAD \
+              | grep -E '(^src/java\.base/|^src/hotspot/|\.(c|cc|cpp|h)$)'; then
+            echo 'Unexpected JDK/HotSpot/JNI ABI modification'
+            exit 1
+          fi
