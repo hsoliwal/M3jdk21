@@ -6,6 +6,7 @@ on:
       - '.github/workflows/m3jdk-stored-representative-20261017.yml'
       - 'm3/collections/wrappers/**'
       - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/FilteredBatchContracts.java'
   workflow_dispatch:
 permissions:
   contents: read
@@ -25,7 +26,24 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Prove predecessor and successor recipes using the real OpenRewrite SDK
+      - name: Verify the exact canonical proof mirror
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          receiver=Path('m3/collections/wrappers/composition-20261017')
+          handoff=json.loads((receiver/'handoff.json').read_text())
+          commit=handoff['canonical_commit']
+          assert len(commit)==40 and all(c in '0123456789abcdef' for c in commit)
+          for line in (receiver/'MIRROR_RECEIPT.tsv').read_text().splitlines():
+              if line.startswith('#') or not line:continue
+              path,expected=line.split('\t')
+              assert hashlib.sha256((receiver/'recipe'/path).read_bytes()).hexdigest()==expected,path
+          print('CANONICAL_WRAPPER_MIRROR_SEAL_PASS')
+          PY
+      - name: Qualify the historical predecessor recipes against their original inputs
         shell: bash
         run: |
           set -euo pipefail
@@ -33,72 +51,42 @@ jobs:
             -Dtest=M3WrapperContractsRecipeTest,M3StoredRepresentativeRecipeTest \
             -Dm3.wrapper.sdk.output="$RUNNER_TEMP/m3-wrapper-sdk" \
             -Dm3.stored.sdk.output="$RUNNER_TEMP/m3-stored-sdk"
-      - name: Verify SDK emissions and exact installed source, Java21 and unchanged JNI ABI
+      - name: Qualify both composition routes and the successor workflow through the real SDK
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/proof"/{classes,baseline,headers}
+          crate=m3/collections/wrappers/composition-20261017/recipe
+          mvn -B -ntp -f "$crate/pom.xml" test \
+            -Dm3.composition.output="$RUNNER_TEMP/m3-composition-sdk" \
+            -Dm3.composition.workflow.output="$RUNNER_TEMP/m3-composition-workflow-sdk"
+      - name: Seal predecessor lineage and current emitted sources
+        shell: bash
+        run: |
+          set -euo pipefail
           python3 - <<'PY'
           import hashlib,os
           from pathlib import Path
-          root=Path.cwd()
-          temp=Path(os.environ['RUNNER_TEMP'])
-          r=root/'m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-stored-representative-20261017'
-          prev=root/'m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-wrapper-contracts-20261017'
-          rows=[line.split('\t') for line in (r/'manifest.tsv').read_text().splitlines()]
-          assert len(rows)==2 and all(len(row)==4 for row in rows)
-          h=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
-          sdk=temp/'m3-stored-sdk'
-          assert (sdk/'SDK_RECEIPT.tsv').is_file()
-          assert (temp/'m3-wrapper-sdk'/'SDK_RECEIPT.tsv').is_file()
-          for path,before,after,template in rows:
-              assert h(root/path)==after,(path,'installed')
-              assert h(sdk/path)==after,(path,'SDK')
-              assert h(r/template)==after,(path,'template')
-              if before!='ABSENT':
-                  assert h(r/'pre'/template)==before
-                  assert h(prev/template)==before
-          print('M3_STORED_REPRESENTATIVE_SDK_RECEIVER_SEAL_PASS targets=2')
+          root=Path.cwd();temp=Path(os.environ['RUNNER_TEMP'])
+          crate=root/'m3/collections/wrappers/composition-20261017/recipe'
+          resources=crate/'resources/com/synexia/rewrite/hash-pinned-java/wrapper-composition-representative-20261017'
+          main='m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+          assert (temp/'m3-stored-sdk'/main).read_bytes()==(resources/'pre/M3CollectionViews.java.txt').read_bytes()
+          for row in (resources/'manifest.tsv').read_text().splitlines():
+              path,before,after,template=row.split('\t')
+              actual=(root/path).read_bytes()
+              assert hashlib.sha256(actual).hexdigest()==after,path
+              assert actual==(temp/'m3-composition-sdk/representative'/path).read_bytes(),path
+          path='.github/workflows/m3jdk-stored-representative-20261017.yml'
+          assert (root/path).read_bytes()==(temp/'m3-composition-workflow-sdk'/path).read_bytes()
+          print('WRAPPER_PREDECESSOR_AND_SUCCESSOR_SDK_SEALS_PASS')
           PY
-          root=m3/collections
-          src=$root/src/main/java/com/m3/collections
-          tests=$root/wrappers/src/test/java/com/m3/collections
-          proof="$RUNNER_TEMP/proof"
-          javac --release 21 -proc:none -Xlint:all -Werror -h "$proof/headers" -d "$proof/classes" \
-            "$src/M3CollectionViews.java" "$src/M3FilteredMaps.java" \
-            "$tests/M3StoredRepresentativeProof.java" \
-            "$tests/M3WrapperContractsProof.java" \
-            "$tests/M3DeepFilterCompositionProof.java" \
-            "$tests/M3DeepFilterNativeProof.java"
-          java -ea -Xss256k -Xmx256m -cp "$proof/classes" com.m3.collections.M3StoredRepresentativeProof | tee "$proof/new-tiered.log"
-          java -ea -Xint -Xss256k -Xmx256m -cp "$proof/classes" com.m3.collections.M3StoredRepresentativeProof | tee "$proof/new-interpreter.log"
-          java -ea -Xss256k -Xmx256m -cp "$proof/classes" com.m3.collections.M3WrapperContractsProof | tee "$proof/old-wrapper.log"
-          java -ea -Xint -Xss256k -Xmx256m -cp "$proof/classes" com.m3.collections.M3WrapperContractsProof | tee "$proof/old-wrapper-int.log"
-          java -ea -Xss256k -Xmx256m -Dm3.deep.depth=65536 -cp "$proof/classes" com.m3.collections.M3DeepFilterCompositionProof | tee "$proof/deep.log"
-          java -ea -Xint -Xss256k -Xmx256m -Dm3.deep.depth=8192 -cp "$proof/classes" com.m3.collections.M3DeepFilterCompositionProof | tee "$proof/deep-int.log"
-          cp "$root/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-stored-representative-20261017/pre/M3CollectionViews.java.txt" "$proof/baseline/M3CollectionViews.java"
-          javac --release 21 -proc:none -Xlint:all -Werror -d "$proof/baseline" "$proof/baseline/M3CollectionViews.java" "$src/M3FilteredMaps.java" "$tests/M3StoredRepresentativeProof.java"
-          if java -ea -Xss256k -Xmx256m -cp "$proof/baseline" com.m3.collections.M3StoredRepresentativeProof >"$proof/red.log" 2>&1; then
-            echo 'Predecessor unexpectedly passed failing regression'; exit 1
-          fi
-          grep -q 'search stored representative not external probe' "$proof/red.log"
-          javap -public -s -cp "$proof/baseline" com.m3.collections.M3CollectionViews > "$proof/public-before.txt"
-          javap -public -s -cp "$proof/classes" com.m3.collections.M3CollectionViews > "$proof/public-after.txt"
-          diff -u "$proof/public-before.txt" "$proof/public-after.txt"
-          java_home="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"
-          gcc -std=c17 -O2 -Wall -Wextra -Werror -pedantic -fPIC -shared \
-            -fsanitize=undefined -fno-sanitize-recover=undefined \
-            -I"$java_home/include" -I"$java_home/include/linux" \
-            "$root/wrappers/direct-projection-20261017/m3_map_cursor_jni.c" \
-            "$root/wrappers/deep-filter-20261017/native/m3_deep_filter_jni.c" \
-            -o "$proof/libm3_stored_representative_jni.so"
-          java -ea -Xss256k -Xmx256m -Xcheck:jni \
-            -Dm3.deep.native.library="$proof/libm3_stored_representative_jni.so" \
-            -cp "$proof/classes" com.m3.collections.M3DeepFilterNativeProof | tee "$proof/jni.log"
-          grep -q 'checks=86866 seeds=1200' "$proof/new-tiered.log"
-          grep -q 'checks=86866 seeds=1200' "$proof/new-interpreter.log"
-          grep -q 'checks=156 depth=65536' "$proof/jni.log"
-          echo 'M3_STORED_REPRESENTATIVE_EXACT_HEAD_PASS'
+      - name: Run independent Java, full module compilation and unchanged native consumers
+        shell: bash
+        run: |
+          set -euo pipefail
+          M3_COMPOSITION_EMITTED="$RUNNER_TEMP/m3-composition-sdk" \
+            bash m3/collections/wrappers/composition-20261017/recipe/verify.sh \
+            "$RUNNER_TEMP/proof" "$GITHUB_WORKSPACE"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -106,4 +94,5 @@ jobs:
           path: |
             ${{ runner.temp }}/proof/
             m3/collections/wrappers/recipe/target/surefire-reports/
+            m3/collections/wrappers/composition-20261017/recipe/target/surefire-reports/
           retention-days: 7

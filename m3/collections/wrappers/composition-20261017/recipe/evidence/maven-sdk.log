@@ -1,0 +1,42 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------< com.synexia.verification:wrapper-composition-20261017 >--------
+[INFO] Building wrapper-composition-20261017 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ wrapper-composition-20261017 ---
+[INFO] Copying 12 resources from resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ wrapper-composition-20261017 ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ wrapper-composition-20261017 ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collection-view-range-20261016/wrapper-composition-20261017/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ wrapper-composition-20261017 ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ wrapper-composition-20261017 ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.WrapperCompositionRecipeTest
+WRAPPER_WORKFLOW_REAL_SDK_EMISSION paths=1 fixed_point=true
+WRAPPER_COMPOSITION_REAL_SDK_EMISSION routes=2 changes_per_route=2
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 45.05 s -- in com.synexia.rewrite.WrapperCompositionRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  52.147 s
+[INFO] Finished at: 2026-10-17T11:11:56+01:00
+[INFO] ------------------------------------------------------------------------

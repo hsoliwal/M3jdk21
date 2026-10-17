@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.AssertionError: VALIDATED_REFERENCES_ONLY
+	at com.m3.collections.FilteredBatchContracts.check(FilteredBatchContracts.java:30)
+	at com.m3.collections.FilteredBatchContracts.changingSource(FilteredBatchContracts.java:73)
+	at com.m3.collections.FilteredBatchContracts.main(FilteredBatchContracts.java:183)

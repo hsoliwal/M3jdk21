@@ -1,0 +1,88 @@
+-------------------------------------------------------------------------------
+Test set: com.synexia.rewrite.WrapperCompositionRecipeTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 4.326 s <<< FAILURE! -- in com.synexia.rewrite.WrapperCompositionRecipeTest
+com.synexia.rewrite.WrapperCompositionRecipeTest.refusesWrongRepresentationAndUnknownPredecessor -- Time elapsed: 0.150 s <<< ERROR!
+java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory
+	at org.openrewrite.config.ClasspathScanningLoader.<clinit>(ClasspathScanningLoader.java:42)
+	at org.openrewrite.config.Environment$Builder.scanRuntimeClasspath(Environment.java:224)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.named(WrapperCompositionRecipeTest.java:109)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refuses(WrapperCompositionRecipeTest.java:151)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refusesWrongRepresentationAndUnknownPredecessor(WrapperCompositionRecipeTest.java:274)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ClassNotFoundException: org.slf4j.LoggerFactory
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	... 8 more
+
+com.synexia.rewrite.WrapperCompositionRecipeTest.everyPartialStateAndInputOrderPreservesDecoys -- Time elapsed: 2.834 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.openrewrite.config.ClasspathScanningLoader
+	at org.openrewrite.config.Environment$Builder.scanRuntimeClasspath(Environment.java:224)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.named(WrapperCompositionRecipeTest.java:109)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.apply(WrapperCompositionRecipeTest.java:117)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.everyPartialStateAndInputOrderPreservesDecoys(WrapperCompositionRecipeTest.java:203)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.config.ClasspathScanningLoader.<clinit>(ClasspathScanningLoader.java:42)
+	at org.openrewrite.config.Environment$Builder.scanRuntimeClasspath(Environment.java:224)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.named(WrapperCompositionRecipeTest.java:109)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refuses(WrapperCompositionRecipeTest.java:151)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refusesWrongRepresentationAndUnknownPredecessor(WrapperCompositionRecipeTest.java:274)
+	... 3 more
+
+com.synexia.rewrite.WrapperCompositionRecipeTest.namedOrdersConvergeAndExportActualChanges -- Time elapsed: 0.677 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.openrewrite.config.ClasspathScanningLoader
+	at org.openrewrite.config.Environment$Builder.scanRuntimeClasspath(Environment.java:224)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.named(WrapperCompositionRecipeTest.java:109)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.apply(WrapperCompositionRecipeTest.java:117)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.namedOrdersConvergeAndExportActualChanges(WrapperCompositionRecipeTest.java:162)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.config.ClasspathScanningLoader.<clinit>(ClasspathScanningLoader.java:42)
+	at org.openrewrite.config.Environment$Builder.scanRuntimeClasspath(Environment.java:224)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.named(WrapperCompositionRecipeTest.java:109)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refuses(WrapperCompositionRecipeTest.java:151)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refusesWrongRepresentationAndUnknownPredecessor(WrapperCompositionRecipeTest.java:274)
+	... 3 more
+
+com.synexia.rewrite.WrapperCompositionRecipeTest.refusesMissingDuplicateDriftAndOccupiedTargets -- Time elapsed: 0.002 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.openrewrite.config.ClasspathScanningLoader
+	at org.openrewrite.config.Environment$Builder.scanRuntimeClasspath(Environment.java:224)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.named(WrapperCompositionRecipeTest.java:109)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refuses(WrapperCompositionRecipeTest.java:151)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refusesMissingDuplicateDriftAndOccupiedTargets(WrapperCompositionRecipeTest.java:256)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.config.ClasspathScanningLoader.<clinit>(ClasspathScanningLoader.java:42)
+	at org.openrewrite.config.Environment$Builder.scanRuntimeClasspath(Environment.java:224)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.named(WrapperCompositionRecipeTest.java:109)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refuses(WrapperCompositionRecipeTest.java:151)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refusesWrongRepresentationAndUnknownPredecessor(WrapperCompositionRecipeTest.java:274)
+	... 3 more
+
+com.synexia.rewrite.WrapperCompositionRecipeTest.serialAndTwoIndependentWorkersAgree -- Time elapsed: 0.583 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.openrewrite.config.ClasspathScanningLoader
+	at org.openrewrite.config.Environment$Builder.scanRuntimeClasspath(Environment.java:224)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.named(WrapperCompositionRecipeTest.java:109)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.apply(WrapperCompositionRecipeTest.java:117)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.serialAndTwoIndependentWorkersAgree(WrapperCompositionRecipeTest.java:211)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.config.ClasspathScanningLoader.<clinit>(ClasspathScanningLoader.java:42)
+	at org.openrewrite.config.Environment$Builder.scanRuntimeClasspath(Environment.java:224)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.named(WrapperCompositionRecipeTest.java:109)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refuses(WrapperCompositionRecipeTest.java:151)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refusesWrongRepresentationAndUnknownPredecessor(WrapperCompositionRecipeTest.java:274)
+	... 3 more
+

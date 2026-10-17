@@ -1,0 +1,92 @@
+{
+  "recorded_at_utc": "2026-10-17T10:14:17.410730+00:00",
+  "scope": "M3_COLLECTIONS_WRAPPER_COMPOSITION",
+  "canonical_owner": "hsoliwal/com.synexia",
+  "receiver_base": "b2df8a4d342286421c7d1eeb91a73e5d69d39bdb",
+  "java_version": "Temurin 21.0.2+13",
+  "maven_version": "3.9.9",
+  "openrewrite_version": "8.17.1",
+  "sdk": {
+    "status": "PASSED",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "java_routes": 2,
+    "changes_per_java_route": 2,
+    "workflow_emissions": 1,
+    "fixed_point": "PASSED",
+    "partial_states_input_orders": 16,
+    "worker_widths": [
+      1,
+      2
+    ],
+    "refusal": "PASSED"
+  },
+  "historical_predecessor_sdk": {
+    "status": "PASSED",
+    "tests": 2
+  },
+  "runtime": {
+    "status": "PASSED",
+    "stored_representative_checks_per_mode": 86866,
+    "batch_checks_per_mode": 34281,
+    "wrapper_checks_per_mode": 964437,
+    "modes": [
+      "tiered",
+      "interpreter"
+    ],
+    "deep_tiered_checks": 1312160,
+    "deep_tiered_depth": 65536,
+    "deep_interpreter_checks": 165280,
+    "deep_interpreter_depth": 8192,
+    "predecessor_red_controls": 2,
+    "public_descriptors": "IDENTICAL",
+    "unaffected_runtime_class_bytes": 9
+  },
+  "jni": {
+    "status": "PASSED",
+    "range_consumer_checks": 4506,
+    "deep_filter_checks": 156,
+    "compiler": "GCC C17 strict warnings plus fatal UBSan",
+    "vm": "-Xcheck:jni; range MaxJNILocalCapacity=64",
+    "production_symbols_added": 0
+  },
+  "whole_collections_production_javac": {
+    "status": "PASSED",
+    "source_files": 89,
+    "flags": [
+      "--release 21",
+      "-proc:none",
+      "-Xlint:all,-module",
+      "-Werror"
+    ]
+  },
+  "owning_module_maven_tests": {
+    "status": "BLOCKED",
+    "reason": "offline repository lacks org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1; see module-maven-blocked.log"
+  },
+  "hosted_successor_workflow": "NOT_RUN",
+  "source_built_jdk_jtreg_jck": "NOT_RUN",
+  "other_platforms": "NOT_RUN",
+  "performance_or_process_memory": "NOT_RUN",
+  "full_m3_family_promotion": false,
+  "evidence_files": {
+    "API_DESCRIPTORS.txt": "54878c76e87167bb5ceb1cb628008d027dbecf7507a2f8b7d4de2a753216e776",
+    "FAILURE_HISTORY.md": "455d059f012197f247103a8d57a6675c04a9283c8127c476a17b5013f1c49866",
+    "RECEIVER_RECEIPT.json": "b00e79e3c227cce572ac6217350cb7cb14811e6e5f2f81c31e7c579bb4a8705f",
+    "SDK_JAVA_RECEIPT.tsv": "8d1804c187f21bf58748aa0ebe797d137c891547506007192a941de62ee2592c",
+    "SDK_WORKFLOW_RECEIPT.tsv": "f1c7b9a7658d5dd3598edc517d05d2b38bfb6d7e7e81f834f323b32a929204b5",
+    "batch-red.log": "07a985918f0783f862b24ded0e74c46ed85e8fd9884e462843817dee46916e36",
+    "deep-symbols.txt": "ad1a8f607468b7aa083d655f0cb7d3c4e4cc428c008fb4c0e62ab53f50e25f30",
+    "initial-missing-slf4j.txt": "59c981f70eb263344ffa46cd84f8c657430424c9d240651410ba2401bb77a652",
+    "initial-sdk-refusal-boundary.txt": "ac9c37da489a1f91ed1acbca501a018d57a689ab5c5aacaa7dd2cbad863420b5",
+    "junit-summary.txt": "ec7b0284ac19b7680f90332fecff2259c295db3c1952cee1dc25f72317dec721",
+    "maven-sdk.log": "9a06235a28e21b2df63e1a838e8e406b818ffc4ed93eefc2cb67be9f4aabd7c0",
+    "module-maven-blocked.log": "aea2913c8986b2982c97e96c05d9e502f909a8f4a9c96f5ae83e54e4d86979a4",
+    "predecessor-sdk-summary.txt": "bf85587d35aadb19ce34e3ebe5b782fa3db7ce030f4e612c08d1af6aa9b07040",
+    "range-symbols.txt": "0e8c5c19c2df4aecd46a5122d80e1f9f80a5ae7995a2c209882ffed73cc76785",
+    "representative-red.log": "9f578d004a6f1cbb3336018495761b02e8789d84b8b4c2cabbaded3a8d19dc7a",
+    "runtime.log": "d854eb04ca837ccc45380e4dcbd0a6661bcf71c3cf826ffafe181fbc0e4cbb84"
+  }
+}
