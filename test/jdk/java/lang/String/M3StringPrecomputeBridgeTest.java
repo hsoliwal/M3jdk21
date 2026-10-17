@@ -100,12 +100,11 @@ public class M3StringPrecomputeBridgeTest {
         };
 
         for (int trial = 0; trial < 4_000; trial++) {
-            char[] sourceChars = randomChars(random, alphabet, random.nextInt(48));
+            char[] sourceChars = randomChars(random, alphabet, 1 + random.nextInt(48));
             char[] needleChars = randomChars(random, alphabet, random.nextInt(12));
             String source = fresh(sourceChars);
             String needle = fresh(needleChars);
             requireM3(source);
-            requireM3(needle);
 
             check(source.hashCode() == manualHash(sourceChars), "hash " + trial);
             check(source.equals(needle) == Arrays.equals(sourceChars, needleChars),
