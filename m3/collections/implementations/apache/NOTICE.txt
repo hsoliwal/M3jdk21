@@ -1,0 +1,43 @@
+Apache Commons Collections
+Copyright 2001-2025 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (https://www.apache.org/).
+
+M3BidiMap protocol adaptation
+Copyright 2026 Hitesh Soliwal and contributors
+
+The Apache AbstractDualBidiMap mutation, inverse, setter and view bulk protocols
+are adapted from commons-collections commit 7f7fb0244abc940a2e9dd28b67508c0483a58c3e,
+Git blob c99878d0446429cd1677e32f8ed58cb5ab500009, under Apache-2.0.
+The original Apache source header and product notice are retained.
+
+Storage is composed from the unchanged first-party M3LinkedHashMap public API,
+Git blob ade59880b8c9b2bee1b32ae67ca9d29b7382d998 at M3jdk21 commit
+e913ab89056657eca4009678cfe9a657c020e79b, Apache-2.0.
+No Apache provider implementation superclass or instance is used.
+
+Qualification boundaries and preserved source quirks:
+- For a still-resident entry, Entry.setValue returns the installed value;
+  MapIterator.setValue returns the old value. Apache detached entry nodes retain
+  stale values and may return the detached old value when they recreate a mapping;
+  detached entry use is outside this owned candidate qualification.
+- Duplicate setter checks use key reference identity, including equal distinct keys.
+- Values retains the provider collection-identity equals/hash behavior despite Set API.
+- Empty-view removeAll(null)/retainAll(null) return false; removeIf(null) returns false.
+- Standard Map default methods route through this owned mutation/entry protocol.
+- Guarded view mutations keep both M3 owners in sync; raw array-entry setters retain
+  the provider reverse-maintenance bypass. Values iterate forward key encounter order.
+- Retained entries or iterators after external structural mutation, serialization,
+  reentrant callbacks and the complete Commons Collections library are not admitted.
+The pinned AbstractCollectionDecorator inherited dispatch is retained using owned
+M3 API view descriptors (blob 493ff732764698abe64b156c1f6a40b24a54ac04): add/addAll,
+containsAll, isEmpty, size, toString and toArray()/toArray(T[]) delegate to the owner.
+The generator toArray default reaches that typed overload. Entry array elements
+are raw owner API entries: setValue returns the prior value, bypasses duplicate
+checks and changes only forward storage, leaving the reverse owner unchanged.
+This pinned provider quirk is intentionally preserved, not silently repaired.
+forEach, Set.spliterator, stream and parallelStream remain interface defaults
+over the guarded iterator, as in the pinned provider.
+Previous passing source-byte receipts precede this dispatch correction; final
+qualification belongs to the root-run targeted discriminator/full provider oracle.
