@@ -1,0 +1,13 @@
+com\m3\precompute\M3CodeTextSignalsTest.class
+com\m3\precompute\M3PatternQueryDifferential$Ungated.class
+com\m3\precompute\M3NativeParityTest.class
+com\m3\precompute\M3PatternQueryDifferential.class
+com\m3\precompute\M3RegexStringSignalsTest.class
+com\m3\precompute\M3SimilarityBatchTest.class
+com\m3\precompute\M3EditDistancePlanTest.class
+com\m3\precompute\M3RegexShapeTest.class
+com\m3\precompute\M3RegexStringTrialImageTest.class
+com\m3\precompute\M3RegexStringSignalsTest$CountingProgress.class
+com\m3\precompute\M3TextSignalsTest.class
+com\m3\precompute\M3RegexOracleHarnessTest.class
+com\m3\precompute\M3NativeParityTest$Packed.class
