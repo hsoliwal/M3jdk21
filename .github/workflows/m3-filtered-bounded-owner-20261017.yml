@@ -1,0 +1,76 @@
+name: M3 bounded filtered/sorted Java21 JNI source proof
+on:
+  push:
+    branches: ['m3/filtered-bounded-owner-receiver-20261017']
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigation*'
+      - 'm3/collections/qualification/m3-filtered-bounded-owner-20261017/**'
+      - '.github/workflows/m3-filtered-bounded-owner-20261017.yml'
+permissions:
+  contents: read
+jobs:
+  actual-owner:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact recipe source postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'e378595bc38cbd5ca9031bd68b749c23b18092c22a1d5ae8b63c3725bcc883dc  m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java' | sha256sum -c -
+          echo '124c2bb89b362fe42486f83ced2420d23a90d15b6a25dc6721210c54385b2db2  m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java' | sha256sum -c -
+          echo 'f37ead5e6647b1f0ec7cf0d0723c2662508d1991bf0c967b298f2be737fd7c8d  m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java' | sha256sum -c -
+          echo '96233e8fbdd4679d4e6a4e028581d84b3cdbf0bcf187c3beb5db4ed7645f3a8b  m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationTest.java' | sha256sum -c -
+      - name: Keep original JDK-facing signatures exact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/old-src" "$RUNNER_TEMP/old-classes" "$RUNNER_TEMP/new-classes"
+          for f in M3FilteredViews.java M3MutableFilteredViews.java; do
+            git show e913ab89056657eca4009678cfe9a657c020e79b:m3/collections/src/main/java/com/m3/collections/"$f" > "$RUNNER_TEMP/old-src/$f"
+          done
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/old-classes" "$RUNNER_TEMP/old-src/"*.java
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/new-classes" m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java
+          for cls in M3FilteredViews M3MutableFilteredViews; do
+            javap -public -classpath "$RUNNER_TEMP/old-classes" com.m3.collections."$cls" > "$RUNNER_TEMP/$cls.before"
+            javap -public -classpath "$RUNNER_TEMP/new-classes" com.m3.collections."$cls" > "$RUNNER_TEMP/$cls.after"
+            diff -u "$RUNNER_TEMP/$cls.before" "$RUNNER_TEMP/$cls.after"
+          done
+      - name: Exact real-owner Java21 JDK navigation oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java \
+            m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3MutableFilteredViewsContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java
+          java -ea -cp "$RUNNER_TEMP/classes" com.m3.collections.M3FilteredViewsContract
+          java -ea -cp "$RUNNER_TEMP/classes" com.m3.collections.M3MutableFilteredViewsContract
+          java -ea -cp "$RUNNER_TEMP/classes" com.m3.collections.M3BoundedFilteredNavigationContract
+      - name: Full M3 source owner Maven JUnit
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3BoundedFilteredNavigationTest,M3FilteredViewsTest,M3MutableFilteredViewsTest test
+      - name: Unchanged indexed-state Java JNI C17 parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
+          java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
+            -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3IndexPathMasksSelfTest --native
