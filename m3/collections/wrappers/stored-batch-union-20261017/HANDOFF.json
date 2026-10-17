@@ -1,0 +1,40 @@
+{
+  "schema": "M3_FILTERED_STORED_BATCH_UNION_20261017",
+  "state": "DRAFT_PENDING_FULL_PRODUCT_GATES",
+  "product": "hsoliwal/M3jdk21",
+  "parent_pr": 1051,
+  "parent_head": "c5e5e90e2dcc2298a372ab39640120dd60a2edb7",
+  "canonical_recipe": "com.synexia.m3.StoredBatchUnion20261017",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_pr": 12040,
+  "canonical_commit": "4603897b59df5d59870f62f6d1fb4ffe58588e79",
+  "recipe_engine": "M3HashPinnedJavaSnapshotRecipe",
+  "jdk_surface_changed": false,
+  "jni_exports_changed": false,
+  "reused_source_license": "Apache-2.0",
+  "baseline": {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+    "git_blob": "55dd91e8f413b48a59a60637aa9f9d1ee15e678a",
+    "sha256": "115f16592a41ce78a63b4892904cb4fe934f5ee45974ffb3305ec39a7c0b9f6e"
+  },
+  "outputs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "sha256": "e71a3ee67e69fa4f24d20e4a44e929333334ca82cf05793c241d8119cd2937f1"
+    },
+    {
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3StoredRepresentativeProof.java",
+      "sha256": "2c19ec2913ab6f9e5874f0209565f90ea858b79521f55a0916ed9892548da136",
+      "preimage": "ABSENT"
+    }
+  ],
+  "gates": {
+    "github_exact_blob_equal": "PASSED",
+    "maven_openrewrite_sdk": "NOT_RUN",
+    "javac_java21_integrated": "NOT_RUN",
+    "source_built_jdk_jtreg_jck": "NOT_RUN",
+    "native_jni_regression": "NOT_RUN",
+    "complete_collections_reactor": "NOT_RUN",
+    "performance_and_native_memory": "NOT_RUN"
+  }
+}

@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 filtered/sorted stored-representative and batch receiver
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk-stored-batch-union-20261017.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+      - 'm3/collections/wrappers/src/test/java/com/m3/collections/M3StoredRepresentativeProof.java'
+      - 'm3/collections/wrappers/stored-batch-union-20261017/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-source-and-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: SHA-256 exact installed output, strict compile, tiered/interpreter Java contracts and javap
+        run: bash m3/collections/wrappers/stored-batch-union-20261017/verify.sh
+      - name: Diff hygiene against exact parent ref
+        if: github.event_name == 'pull_request'
+        run: git diff --check ${{ github.event.pull_request.base.sha }} HEAD
