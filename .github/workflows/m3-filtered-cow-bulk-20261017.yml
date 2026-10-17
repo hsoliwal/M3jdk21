@@ -1,0 +1,41 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3 filtered COW bulk Java21 JNI proof
+on:
+  push:
+    branches:
+      - m3/filtered-cow-bulk-receiver-20261017
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3CowBulkReceiverProof.java'
+      - 'm3/collections/wrappers/cow-bulk-20261017/**'
+      - '.github/workflows/m3-filtered-cow-bulk-20261017.yml'
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3CowBulkReceiverProof.java'
+      - 'm3/collections/wrappers/cow-bulk-20261017/**'
+      - '.github/workflows/m3-filtered-cow-bulk-20261017.yml'
+jobs:
+  source-sealed-receiver:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Sealed source and refusal checks
+        run: python3 m3/collections/wrappers/cow-bulk-20261017/recipe.py self-test
+      - name: Maven receipt and Java 21 red/green/ABI
+        run: mvn -B -ntp -f m3/collections/wrappers/cow-bulk-20261017/pom.xml verify
+      - name: Strict GCC C17 UBSan and real JNI checked parity
+        run: python3 m3/collections/wrappers/cow-bulk-20261017/recipe.py verify --jni
+      - name: Catalogue query
+        run: python3 m3/collections/wrappers/cow-bulk-20261017/search_catalogue.py copy-on-write
+      - name: Verify recipe ran without mutation
+        run: |
+          git diff --exit-code -- m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+          git diff --exit-code -- m3/collections/src/test/java/com/m3/collections/M3CowBulkReceiverProof.java
