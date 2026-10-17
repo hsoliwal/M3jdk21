@@ -1,34 +1,86 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-# Filtered and sorted collection view: bounded receiving increment (2026-10-17)
+# Filtered and sorted collection views: recipe-received M3JDK21 proving ground (2026-10-17)
 
-## Ownership and contract
+## Ownership and receiving status
 
-This is a **draft target-side Java adapter**, not an OpenJDK `java.util` replacement. The canonical reusable recipe and atom/pattern catalogue remain owned by Synexia; this target retains Java 21 product validation. Existing `m3/collections/pom.xml` exposes the canonical Synexia OpenRewrite atom/pattern dry-run profile, and `m3/collections/recipe/pom.xml` supplies the pre-existing sealed OpenRewrite receiving fixture. Neither was silently altered.
+These wrappers are **independent M3 collection components**, not replacements for OpenJDK
+`java.util` and not evidence that the repository-wide collections phase has been promoted.
+The required receiving sequence remains **STRING -> arrays -> collections -> AST/compiler**.
 
-`M3FilteredNavigableSet.view(backing,predicate)` is a **live, read-only** `NavigableSet` over the given backing set. It retains the backing comparator, iteration ordering, range-bound exceptions, and external backing changes. It does not copy its elements or cache filtered results. Iteration and navigable queries are O(n) in the worst case; `size` is O(n). Iterator remove, add, clear, poll, removeIf, retainAll and removal APIs reject mutation with `UnsupportedOperationException`. Predicate mutation during iteration is not supported as a snapshot-consistency guarantee. Backing concurrency has only the backing owner's guarantees.
+Canonical recipe/provenance ownership is in Synexia:
 
-The new receiver class does not modify or weaken existing public APIs. A mutable filtered wrapper is a **different contract** and must be a separate implementation.
+- filtered/sorted family receiver: [com.synexia #11995](https://github.com/hsoliwal/com.synexia/pull/11995),
+  named recipe `com.synexia.m3.Jdk21FilteredSortedViews`;
+- current consolidation/refinement: [com.synexia #12098](https://github.com/hsoliwal/com.synexia/pull/12098),
+  Maven recipe `M3FilteredNavigableFacadeRecipe`, with exact M3JDK21 preimages and postimages;
+- target receipts: `m3/collections/qualification/FILTERED_SORTED_VIEWS_20261017.md` and
+  `qualification/filtered-navigable-consolidation-20261017/SOURCE_RECEIPT.tsv`.
+
+The earlier statement that this wrapper had no qualified recipe is therefore superseded. The
+correct response to future source drift is to update/test the canonical recipe and replay it, not
+hand-edit generated product source.
+
+## Current contracts and implementation owners
+
+- `M3FilteredViews`: live read-only Collection, Set, SortedSet, NavigableSet, SortedMap and
+  NavigableMap views. No element snapshot or predicate-result cache.
+- `M3MutableFilteredViews`: separately admitted mutable NavigableSet/NavigableMap contract.
+- `M3FilteredNavigableSet`: public compatibility facade over the read-only NavigableSet owner;
+  it does not retain a second filtering/navigation algorithm.
+- `M3FilteredLists`: separate List-specific owner because index/subList/list-iterator contracts
+  are not equivalent to Set/Map filtering.
+- `M3LongFilteredView`, `M3LongSortedViews`, `M3LongSortedSnapshot` and
+  `M3LongCompositeViews`: primitive-long owners with no boxed Entry payload graph.
+
+Sorted navigation delegates endpoint/comparator validity to the backing sorted collection. The
+current read-only NavigableSet/NavigableMap implementation performs one bounded backing range seek
+and scans rejected members with that range iterator. Worst-case rejected-item scanning remains
+linear; no wall-clock speed claim is made.
+
+## Dynamic arrays, indexes, masks and JNI boundary
+
+M3 collection state remains centered on dynamic primitive/object lanes, physical offsets, logical
+indexes and masks. Existing owners such as `M3IndexMaskCompactor`, `M3IndexMaskWindow`,
+`M3IndexPathMasks`, state-mask arrays and object-slot projections remain the canonical path for
+stable precomputed coordinates. Their optional JNI kernels operate on primitive arrays/masks.
+
+Arbitrary Java Predicate/Comparator callbacks are intentionally **not** sent through JNI here:
+doing so would add callback crossings and new exception/GC-lifetime semantics without an admitted
+contract. No JNI ABI changes in this wrapper refinement.
 
 ## Category catalogue / donors
 
-| Category | Donor/reference | Assessment | Decision |
-| --- | --- | --- | --- |
-| Filtered live set view | Guava `Collections2`, `Sets.filter` | Existing well-known lazy view approach; evaluate iterator and write-through behavior; Guava's mutable filtered views have different mutation contracts | Study behavior, do not copy source; first M3 receiver is explicitly read-only |
-| Select/reject | Eclipse Collections `select`/`reject` | Eager materialization and rich immutable/mutable return types; excellent algorithm donor but not automatically a live view | Catalogue as materialized alternative, not a contract-equivalent replacement |
-| Ordered range views | OpenJDK 21 `NavigableSet`, `TreeSet` | Comparator, range argument checks, descending order and null behavior are essential | Delegate range and ordering to existing backing set |
-| Atom clustering and recipe normalization | Synexia Atomizer/Patternizer and M3 AtomLogic | Candidate discovery only; SimHash is not semantic equivalence | Reuse canonical Synexia recipes; no hash-directed rewrites until contract admission |
-| Index-assisted filtering | M3 bit lanes and native cardinality | Index generation/invalidation cost, predicate effects, and GC references may negate savings | Do not add JNI to Java wrapper; a native count kernel requires stable primitive lanes and differential parity first |
+| Category | Reference | Decision |
+| --- | --- | --- |
+| Live filtered view | Guava Collections2/Sets.filter | Contract reference only; mutable Guava behavior differs |
+| Ordered range view | OpenJDK 21 NavigableSet/TreeSet/NavigableMap/TreeMap | Comparator/range semantics authoritative |
+| Materialized selection | Eclipse Collections select/reject | Separate eager/snapshot contract |
+| Predicate admission | Apache Commons predicated collections | Different insertion-guard contract |
+| Primitive compaction | Existing M3 index/mask lanes | Reuse existing Java/JNI owners |
+| LeetCode / HackerRank / GeeksforGeeks | filtering, comparator, selection and bit-mask categories | Taxonomy only; no submission/editorial source copied |
 
-References: https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Sets.java ; https://github.com/eclipse-collections/eclipse-collections/blob/master/docs/1-Iteration_Patterns.adoc ; https://github.com/openjdk/jdk21 .
+Exact decisions for the current refinement are in
+`qualification/filtered-navigable-consolidation-20261017/CATALOGUE.tsv`.
 
-LeetCode, HackerRank and GeeksforGeeks are discovery sources for relevant ordered-search, interval and predicate-composition algorithms, not source-copy authority. This receiver iteration does not claim a specific challenge implementation has been evaluated.
+## Verification and hold
 
-## Recipe-first admission still required
+Selected Java21 proof:
 
-The branch carries the Java receiver and JUnit tests for review; **the new wrapper itself has not been generated by a qualified Synexia Maven/OpenRewrite recipe**. As a result this draft must not be marked complete or promoted under the mandatory M3 recipe-first invariant. Before merge, author/master a source-pinned wrapper receiver recipe in Synexia, produce the exact preimage/postimage and proof receipt, and replay it against this branch. Keep the canonical recipe, tests and generated result linked in the resulting review.
+```sh
+bash m3/collections/qualification/filtered-navigable-consolidation-20261017/verify.sh
+```
 
-Validation required: Java 21 `mvn -f m3/collections/pom.xml test`, `mvn -f m3/collections/recipe/pom.xml verify`, source-pinned recipe dry run, JUnit regression suite, null/comparator corner cases, Java API baseline, fixed-point, and native parity **only if native logic is eventually added**. No JNI implementation is claimed in this increment.
+It verifies exact generated Git blobs, compiles with `--release 21 -proc:none -Xlint:all -Werror`,
+and runs both the existing randomized `M3FilteredViewsContract` and the generated consolidation
+oracle. Broader Maven/JUnit/module/JDK-image/jtreg/native-platform/performance gates remain separate.
+
+A source receipt, finite oracle or exact fixed point does not promote the entire collection family.
+No java.base, HotSpot or public Java SE API is changed by this bounded receiver.
 
 ## Follow-on categories
 
-Filtered `Collection`, `Set`, `SortedSet`, `NavigableSet`, sorted-map key/value/entry views, key-affinity parallel partitioning, bitmap-indexed predicates, snapshot/mutable variants, and deterministic composed predicates require separate contract matrices. Preserving `Map.Entry.setValue`, comparators inconsistent with equals, callback effects, concurrent modification, serialization and identity must be explicit before adaptation.
+Continue file-by-file and contract-by-contract: List wrappers, mutable sorted variants where a real
+non-Navigable owner requires them, map key/value/entry views, snapshot/index-backed filters,
+dynamic-array growth, offsets/state masks, LRU/MRU policies and primitive/native batch operations.
+Preserve comparator representatives, Map.Entry mutation rules, callback effects, concurrent
+modification, serialization and identity explicitly before adapting each family.

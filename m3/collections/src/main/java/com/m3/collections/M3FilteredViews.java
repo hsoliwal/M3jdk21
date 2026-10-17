@@ -219,18 +219,27 @@ public final class M3FilteredViews {
             @SuppressWarnings("unchecked") E alias = (E) value;
             return predicate.test(nav.ceiling(alias));
         }
-        private E forward(E candidate) {
-            while (candidate != null && !predicate.test(candidate)) candidate = nav.higher(candidate);
-            return candidate;
+        /**
+         * One bounded range traversal per navigation query.  This preserves the backing
+         * comparator's representative and exception behavior without repeating tree
+         * searches for every rejected element.
+         */
+        private E firstVisible(Iterator<E> cursor) {
+            Iterator<E> selected = M3FilteredViews.filtered(cursor, predicate);
+            return selected.hasNext() ? selected.next() : null;
         }
-        private E backward(E candidate) {
-            while (candidate != null && !predicate.test(candidate)) candidate = nav.lower(candidate);
-            return candidate;
+        @Override public E lower(E e) {
+            return firstVisible(nav.headSet(e, false).descendingIterator());
         }
-        @Override public E lower(E e) { return backward(nav.lower(e)); }
-        @Override public E floor(E e) { return backward(nav.floor(e)); }
-        @Override public E ceiling(E e) { return forward(nav.ceiling(e)); }
-        @Override public E higher(E e) { return forward(nav.higher(e)); }
+        @Override public E floor(E e) {
+            return firstVisible(nav.headSet(e, true).descendingIterator());
+        }
+        @Override public E ceiling(E e) {
+            return firstVisible(nav.tailSet(e, true).iterator());
+        }
+        @Override public E higher(E e) {
+            return firstVisible(nav.tailSet(e, false).iterator());
+        }
         @Override public E first() {
             Iterator<E> values = iterator();
             if (!values.hasNext()) throw new NoSuchElementException();
@@ -360,22 +369,38 @@ public final class M3FilteredViews {
             // retrieves its stored comparator-equivalent representative.
             return nav.floorEntry(alias).getKey();
         }
-        private Entry<K, V> seek(Entry<K, V> current, boolean forward) {
-            while (current != null && !predicate.test(current.getKey(), current.getValue())) {
-                current = forward ? nav.higherEntry(current.getKey()) : nav.lowerEntry(current.getKey());
-            }
-            return current == null ? null : new SimpleImmutableEntry<>(current);
+        /**
+         * Select the first visible entry from a bounded backing iterator and detach it
+         * as an immutable Map.Entry.  Range creation pays the tree search once; rejected
+         * entries are then skipped by iterator advancement instead of repeated lookup.
+         */
+        private Entry<K, V> firstVisible(Iterator<Entry<K, V>> cursor) {
+            Iterator<Entry<K, V>> selected = M3FilteredViews.filtered(cursor,
+                    entry -> predicate.test(entry.getKey(), entry.getValue()));
+            return selected.hasNext() ? new SimpleImmutableEntry<>(selected.next()) : null;
         }
-        @Override public Entry<K, V> lowerEntry(K key) { return seek(nav.lowerEntry(key), false); }
+        @Override public Entry<K, V> lowerEntry(K key) {
+            return firstVisible(nav.headMap(key, false).descendingMap().entrySet().iterator());
+        }
         @Override public K lowerKey(K key) { return keyOf(lowerEntry(key)); }
-        @Override public Entry<K, V> floorEntry(K key) { return seek(nav.floorEntry(key), false); }
+        @Override public Entry<K, V> floorEntry(K key) {
+            return firstVisible(nav.headMap(key, true).descendingMap().entrySet().iterator());
+        }
         @Override public K floorKey(K key) { return keyOf(floorEntry(key)); }
-        @Override public Entry<K, V> ceilingEntry(K key) { return seek(nav.ceilingEntry(key), true); }
+        @Override public Entry<K, V> ceilingEntry(K key) {
+            return firstVisible(nav.tailMap(key, true).entrySet().iterator());
+        }
         @Override public K ceilingKey(K key) { return keyOf(ceilingEntry(key)); }
-        @Override public Entry<K, V> higherEntry(K key) { return seek(nav.higherEntry(key), true); }
+        @Override public Entry<K, V> higherEntry(K key) {
+            return firstVisible(nav.tailMap(key, false).entrySet().iterator());
+        }
         @Override public K higherKey(K key) { return keyOf(higherEntry(key)); }
-        @Override public Entry<K, V> firstEntry() { return seek(nav.firstEntry(), true); }
-        @Override public Entry<K, V> lastEntry() { return seek(nav.lastEntry(), false); }
+        @Override public Entry<K, V> firstEntry() {
+            return firstVisible(nav.entrySet().iterator());
+        }
+        @Override public Entry<K, V> lastEntry() {
+            return firstVisible(nav.descendingMap().entrySet().iterator());
+        }
         @Override public K firstKey() {
             Entry<K, V> e = firstEntry();
             if (e == null) throw new NoSuchElementException();
