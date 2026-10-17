@@ -129,6 +129,61 @@ public final class M3LongIndexProjection {
         return new M3LongIndexProjection(values, selected, 0, selected.length, order);
     }
 
+    /**
+     * Required/excluded mask selection over logical ordinals, preserving duplicate
+     * occurrences and backing payload. The Java path compacts index IDs directly
+     * with no intermediate state array. JNI uses the existing primitive selector
+     * on one derived eligibility plane and never silently falls back to Java.
+     */
+    public M3LongIndexProjection filtered(byte[] alignedStates, int requiredMask,
+            int excludedMask, M3IndexMaskCompactor.Backend backend) {
+        Objects.requireNonNull(alignedStates, "alignedStates");
+        Objects.requireNonNull(backend, "backend");
+        if (((requiredMask | excludedMask) & ~0xff) != 0
+                || (requiredMask & excludedMask) != 0) {
+            throw new IllegalArgumentException("state masks must be disjoint unsigned bytes");
+        }
+        if (alignedStates.length != size()) {
+            throw new IllegalArgumentException("mask must align with logical view size");
+        }
+        if (excludedMask == 0) return filtered(alignedStates, requiredMask, backend);
+        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+            byte[] eligible = new byte[alignedStates.length];
+            for (int i = 0; i < eligible.length; i++) {
+                if (M3LongAddressKernel.matchesUnchecked(alignedStates, i,
+                        requiredMask, excludedMask)) {
+                    eligible[i] = 1;
+                }
+            }
+            return filtered(eligible, 1, backend);
+        }
+        int kept = 0;
+        for (int i = 0; i < alignedStates.length; i++) {
+            if (M3LongAddressKernel.matchesUnchecked(alignedStates, i,
+                    requiredMask, excludedMask)) kept++;
+        }
+        if (kept == size()) {
+            return new M3LongIndexProjection(values, indices, from, to, order);
+        }
+        int[] chosen = new int[kept];
+        int written = 0;
+        for (int i = 0; i < alignedStates.length; i++) {
+            if (M3LongAddressKernel.matchesUnchecked(alignedStates, i,
+                    requiredMask, excludedMask)) {
+                if (written == chosen.length) {
+                    throw new java.util.ConcurrentModificationException(
+                            "aligned selection states changed");
+                }
+                chosen[written++] = M3LongAddressKernel.addressUnchecked(indices, from, i);
+            }
+        }
+        if (written != chosen.length) {
+            throw new java.util.ConcurrentModificationException(
+                    "aligned selection states changed");
+        }
+        return new M3LongIndexProjection(values, chosen, 0, chosen.length, order);
+    }
+
     /** Stable signed-long sort; only the primitive index vector is permuted. */
     public M3LongIndexProjection sortedAscending() { return sorted(false); }
 
