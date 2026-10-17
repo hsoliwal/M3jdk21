@@ -46,6 +46,8 @@ public final class M3StateMaskArrays {
         checkMasks(setBits, clearBits);
         int index = Objects.checkIndex(slot, stateBits.length);
         int previous = stateBits[index] & 0xff;
+        // A null state transition is an identity operation after all validation.
+        if (setBits == 0 && clearBits == 0) return previous;
         stateBits[index] = (byte) ((previous | setBits) & ~clearBits);
         return previous;
     }
