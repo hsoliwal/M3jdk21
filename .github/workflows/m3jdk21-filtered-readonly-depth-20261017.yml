@@ -1,0 +1,125 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 stack-safe nested read-only filtered Lists
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk21-filtered-readonly-depth-20261017.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsReadonlyDepth*.java'
+      - 'm3/collections/name-mapping.json'
+      - 'm3/collections/qualification/M3_FILTERED_READONLY_DEPTH_20261017.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-recipe-postimage-red-green:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compare all five exact Java, test and provenance postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' 'b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d' 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java' | sha256sum -c -
+          printf '%s  %s\n' '7476bd46c9bbd465d54237e3dd106d71725e8d8ba74a73d2001878b53bb22f5c' 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsReadonlyDepthProof.java' | sha256sum -c -
+          printf '%s  %s\n' '4c443dfe22e908747b6cc1267c25e42fa9252b4936d47e27a8b55d3d50bf5e8b' 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsReadonlyDepthTest.java' | sha256sum -c -
+          printf '%s  %s\n' 'a7404deb43df1e1daccbe42e291a38f462049650e1f7d8ed6a05629c1ef08576' 'm3/collections/name-mapping.json' | sha256sum -c -
+          printf '%s  %s\n' '61720b07a1a5e4b0c7a958bbce47b3ba4541c59ee024a1bcd938478ace230ddf' 'm3/collections/qualification/M3_FILTERED_READONLY_DEPTH_20261017.md' | sha256sum -c -
+          echo M3_READONLY_FILTER_SOURCE_SEAL_PASS
+      - name: Strict Java21 old StackOverflowError and candidate green, two JVM modes
+        shell: bash
+        run: |
+          set -euo pipefail
+          B="$(mktemp -d)"
+          trap 'rm -rf "$B"' EXIT
+          mkdir -p "$B/original/com/m3/collections" "$B/oldclasses" "$B/newclasses"
+          SOURCE=m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+          PROOF=m3/collections/src/test/java/com/m3/collections/M3FilteredListsReadonlyDepthProof.java
+          git show "7e8c646ea27e439a15377d1b332e6d08aa2b9c48:$SOURCE" > "$B/original/com/m3/collections/M3FilteredLists.java"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$B/oldclasses" \
+            "$B/original/com/m3/collections/M3FilteredLists.java" "$PROOF"
+          if java -ea -Xss256k -Xmx384m -cp "$B/oldclasses" \
+              com.m3.collections.M3FilteredListsReadonlyDepthProof > "$B/old.log" 2>&1; then
+            echo 'Old nested strict read-only wrapper unexpectedly passed 20k layers'
+            exit 1
+          fi
+          grep -Fq StackOverflowError "$B/old.log"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$B/newclasses" "$SOURCE" "$PROOF"
+          java -ea -Xss256k -Xmx384m -cp "$B/newclasses" \
+            com.m3.collections.M3FilteredListsReadonlyDepthProof
+          java -ea -Xint -Xss256k -Xmx384m -cp "$B/newclasses" \
+            com.m3.collections.M3FilteredListsReadonlyDepthProof
+          javap -public -classpath "$B/oldclasses" com.m3.collections.M3FilteredLists > "$B/original-api"
+          javap -public -classpath "$B/newclasses" com.m3.collections.M3FilteredLists > "$B/refined-api"
+          diff -u "$B/original-api" "$B/refined-api"
+          git diff --check '7e8c646ea27e439a15377d1b332e6d08aa2b9c48' HEAD
+      - name: Enforce no unrelated native/JDK/HotSpot changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --name-only '7e8c646ea27e439a15377d1b332e6d08aa2b9c48' HEAD | grep -E '(^src/java\.base/|^src/hotspot/|\.(c|h|cc|cpp)$)'; then
+            echo 'Unexpected source changed outside exact recipe FILE set'
+            exit 1
+          fi
+  full-maven-module-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Run inherited filtered/sorted List and compacted-mask JUnit contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3FilteredListsTest,M3FilteredListsReadonlyDepthTest,M3FilteredListsDeepCompositionTest,M3FilteredListsLateBindingTest,M3FilteredListsSortedInteropTest,M3IndexMaskCompactorTest \
+            test
+          for suite in M3FilteredListsTest M3FilteredListsReadonlyDepthTest M3FilteredListsDeepCompositionTest M3FilteredListsLateBindingTest M3FilteredListsSortedInteropTest M3IndexMaskCompactorTest; do
+            REPORT="m3/collections/target/surefire-reports/com.m3.collections.${suite}.txt"
+            test -s "$REPORT"
+            grep -E 'Tests run: [1-9][0-9]*, Failures: 0, Errors: 0, Skipped: 0' "$REPORT"
+          done
+  inherited-real-jni-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Compile the unchanged canonical M3 numeric JNI source and run native-required oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml -DskipTests test-compile
+          B="$(mktemp -d)"
+          trap 'rm -rf "$B"' EXIT
+          gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror -pedantic \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$B/libm3_collections_mask.so"
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+          java -ea -Xcheck:jni -Djava.library.path="$B" \
+            -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3IndexMaskCompactorSelfTest --native
