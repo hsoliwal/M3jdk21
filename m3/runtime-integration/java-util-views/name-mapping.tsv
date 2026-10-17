@@ -1,0 +1,6 @@
+source	target	status	boundary
+com.m3.collections.M3CollectionViews	java.util.CollectionViews	GENERATED_LOCAL_PROOF	legacy class delegates; matched java.base required
+com.m3.collections.M3*	java.util contract-specific owners	PENDING_FILE_BY_FILE	no blanket prefix or package replacement
+java.lang.M3String	java.lang.String internal implementation	PENDING_FAMILY_PROOF	preserve final public String contract; related views remain internal
+com.synexia.indexstring.IndexStringText	String internal text/range protocol	PENDING_DEPENDENCY_CLOSURE	resolver-local IDs are not global String equality
+jdk.internal.mindex.M3LongLane28	existing shared java.base storage owner	INSPECTED_REUSE	no copy or public rename in this pass

@@ -1,0 +1,46 @@
+name: java.util CollectionViews receiver
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/java-util-views.yml'
+      - 'src/java.base/share/classes/java/util/CollectionViews.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+      - 'test/jdk/java/util/CollectionViews/**'
+      - 'm3/runtime-integration/java-util-views/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  receiver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /src/java.base/share/classes/java/util/CollectionViews.java
+            /m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+            /test/jdk/java/util/CollectionViews/
+            /m3/runtime-integration/java-util-views/
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact-head java.base and JNI proof via Maven target control
+        shell: bash
+        run: |
+          set -o pipefail
+          mvn -B -ntp -f m3/runtime-integration/java-util-views/pom.xml verify \
+            -Dproof.output="$RUNNER_TEMP/java-util-views-proof" 2>&1 | tee "$RUNNER_TEMP/java-util-views-maven.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: java-util-views-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            ${{ runner.temp }}/java-util-views-proof/*.log
+            ${{ runner.temp }}/java-util-views-proof/*.json
+            ${{ runner.temp }}/java-util-views-maven.log
+          if-no-files-found: warn
