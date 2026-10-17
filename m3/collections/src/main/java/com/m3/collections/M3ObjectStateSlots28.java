@@ -194,6 +194,90 @@ public final class M3ObjectStateSlots28 {
         }
     }
 
+    /**
+     * Return the original physical <em>positions</em> of matching handles in
+     * [from,to), rather than allocating Entry objects or moving payload values.
+     *
+     * <p>Each handle is generation-checked before any output is produced, so a
+     * recycled physical slot cannot silently inherit a stale identity.
+     * Encoded application state remains in this owner's byte lanes; the
+     * selected positions are a detached primitive index projection, not a
+     * live collection view or a JVM object reference count.</p>
+     *
+     * <p>The Java backend uses two passes and exactly one O(k) result array.
+     * The explicit native backend composes the existing int[] JNI mask
+     * compactor through two ephemeral, position-aligned primitive buffers.
+     * JNI never receives Java objects, predicates, or slot generations.
+     * This is not automatically faster than the no-scratch Java path.</p>
+     */
+    public int[] matchingPositions(long[] orderedHandles, int from, int to,
+            int requiredMask, int excludedMask, M3IndexMaskCompactor.Backend backend) {
+        Objects.requireNonNull(orderedHandles, "orderedHandles");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromToIndex(from, to, orderedHandles.length);
+        requireMasks(requiredMask, excludedMask);
+        validateHandles(orderedHandles, from, to);
+
+        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+            if (!M3IndexMaskCompactor.nativeAvailable()) {
+                throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
+            }
+            int length = to - from;
+            int[] positions = new int[length];
+            byte[] eligible = new byte[length];
+            for (int i = 0; i < length; i++) {
+                positions[i] = from + i;
+                int slot = M3SlotAllocator28.slot(orderedHandles[from + i]);
+                eligible[i] = (byte) (matches(read(slot), requiredMask, excludedMask) ? 1 : 0);
+            }
+            return M3IndexMaskCompactor.select(
+                    positions, eligible, 1, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+        }
+
+        int selected = 0;
+        for (int i = from; i < to; i++) {
+            int slot = M3SlotAllocator28.slot(orderedHandles[i]);
+            if (matches(read(slot), requiredMask, excludedMask)) selected++;
+        }
+        int[] positions = new int[selected];
+        int written = 0;
+        for (int i = from; i < to; i++) {
+            int slot = M3SlotAllocator28.slot(orderedHandles[i]);
+            if (matches(read(slot), requiredMask, excludedMask)) positions[written++] = i;
+        }
+        return positions;
+    }
+
+    /**
+     * Update the state of a window of generation-valid handles in-place,
+     * without a per-object state node, temporary Entry or result buffer.
+     * Every handle and both masks are validated before the first state write.
+     * Repeated handles are accepted but count as one state change at most.
+     *
+     * @return number of distinct state words actually changed
+     */
+    public int updateHandles(long[] orderedHandles, int from, int to,
+            int setMask, int clearMask) {
+        Objects.requireNonNull(orderedHandles, "orderedHandles");
+        Objects.checkFromToIndex(from, to, orderedHandles.length);
+        requireMasks(setMask, clearMask);
+        if ((setMask & clearMask) != 0) {
+            throw new IllegalArgumentException("overlapping set and clear masks");
+        }
+        validateHandles(orderedHandles, from, to);
+        int updated = 0;
+        for (int i = from; i < to; i++) {
+            int slot = M3SlotAllocator28.slot(orderedHandles[i]);
+            int old = read(slot);
+            int next = (old | setMask) & ~clearMask & 0xff;
+            if (old != next) {
+                write(slot, next);
+                updated++;
+            }
+        }
+        return updated;
+    }
+
     /** Primitive state bytes only; excludes array headers/directories and slot allocator. */
     public long statePayloadBytes() {
         return (long) stateBlocks * M3Address28.VALUES_PER_BLOCK;
