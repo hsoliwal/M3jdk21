@@ -1,0 +1,114 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 lazy unsized flatMap Maven OpenRewrite Java21 JNI
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3MappedViews.java'
+      - 'm3/collections/wrappers/src/test/java/com/m3/collections/M3FlatMapCursor*.java'
+      - 'm3/collections/wrappers/src/test/java/com/m3/collections/M3MapCursorNativeProof.java'
+      - 'm3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-flatmap-metadata-20261017/**'
+      - 'm3/collections/wrappers/recipe/src/main/resources/META-INF/rewrite/m3-flatmap-metadata-20261017.yml'
+      - 'm3/collections/wrappers/recipe/src/test/java/com/synexia/rewrite/M3FlatMapMetadataReceiverRecipeTest.java'
+      - 'm3/collections/wrappers/flatmap-metadata-20261017/**'
+      - '.github/workflows/m3jdk-flatmap-metadata-20261017.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-maven-openrewrite-source-first:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Execute canonical source-pinned Java LST results before installing target files
+        run: >-
+          mvn -B -ntp -f m3/collections/wrappers/recipe/pom.xml test
+          -Dtest=M3FlatMapMetadataReceiverRecipeTest
+      - name: Git diff hygiene
+        run: git diff --check HEAD^ HEAD
+
+  java21-existing-api-and-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: All four exact installed Java postimages must match approved source digests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          root=Path('m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-flatmap-metadata-20261017')
+          rows=[x.split('\t') for x in (root/'manifest.tsv').read_text().splitlines() if x]
+          assert len(rows)==4 and len({r[0] for r in rows})==4
+          assert rows == sorted(rows,key=lambda r:r[0])
+          assert sum(row[1]=='ABSENT' for row in rows)==2
+          digest=lambda p:sha256(p.read_bytes()).hexdigest()
+          for path,before,after,template in rows:
+              assert len([path,before,after,template])==4
+              assert digest(root/template)==after,(path,'postimage template')
+              assert Path(path).is_file() and digest(Path(path))==after,(path,'installed source differs from recipe')
+              if before!='ABSENT':
+                  assert digest(root/'pre'/template)==before,(path,'preimage fixture')
+          print('M3_FLAT_MAP_SOURCE_SEAL_PASS targets=4')
+          PY
+      - name: Compile actual JDK21 source owners and inherited plus new Java oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          B=build/m3-flatmap-metadata
+          mkdir -p "$B"
+          javac --release 21 -proc:none -Xlint:all -Werror -h "$B" -d "$B" \
+            m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java \
+            m3/collections/src/main/java/com/m3/collections/M3AdmissionWrappers.java \
+            m3/collections/src/main/java/com/m3/collections/M3BoundedLists.java \
+            m3/collections/src/main/java/com/m3/collections/M3CollectionWrappers.java \
+            m3/collections/src/main/java/com/m3/collections/M3ConcatenatedViews.java \
+            m3/collections/src/main/java/com/m3/collections/M3FixedSizeLists.java \
+            m3/collections/src/main/java/com/m3/collections/M3MappedViews.java \
+            m3/collections/wrappers/src/test/java/com/m3/collections/M3FlatMapCursorProof.java \
+            m3/collections/wrappers/src/test/java/com/m3/collections/M3CollectionWrappersSelfTest.java \
+            m3/collections/wrappers/src/test/java/com/m3/collections/M3PurposeReceiverProof.java \
+            m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredSnapshotFusionProof.java \
+            m3/collections/wrappers/src/test/java/com/m3/collections/M3FilteredMapsCursorProof.java \
+            m3/collections/wrappers/src/test/java/com/m3/collections/M3MapCursorNativeProof.java
+          java -ea -Xmx384m -cp "$B" com.m3.collections.M3FlatMapCursorProof
+          java -ea -Xmx384m -cp "$B" com.m3.collections.M3CollectionWrappersSelfTest
+          java -ea -Xmx384m -cp "$B" com.m3.collections.M3PurposeReceiverProof
+          java -ea -Xmx384m -cp "$B" com.m3.collections.M3FilteredSnapshotFusionProof
+          java -ea -Xmx384m -cp "$B" com.m3.collections.M3FilteredMapsCursorProof
+      - name: Reuse existing C17 source unchanged under UBSan and checked JNI
+        shell: bash
+        run: |
+          set -euo pipefail
+          B=build/m3-flatmap-metadata
+          C=m3/collections/wrappers/direct-projection-20261017/m3_map_cursor_jni.c
+          grep -q Java_com_m3_collections_M3MapCursorNativeProof_fold "$B/com_m3_collections_M3MapCursorNativeProof.h"
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -pedantic -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            "$C" -o "$B/libm3_map_cursor_jni.so"
+          java -ea -Xcheck:jni -Dm3.cursor.native.library="$PWD/$B/libm3_map_cursor_jni.so" \
+            -cp "$B" com.m3.collections.M3MapCursorNativeProof
+      - name: Git diff hygiene
+        run: git diff --check HEAD^ HEAD
