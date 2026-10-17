@@ -1,0 +1,123 @@
+{
+  "schema": "M3_CANONICAL_REGEX_MAPPING_RECEIVING_SDK_INPUTS_V1",
+  "providers": {
+    "hashPinnedTextSnapshot": "4a38e39d0755462d40c2b22548b87abde938ea0b"
+  },
+  "files": [
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "sha256": "fc669ae108a0966d8d8dcc9db54a220ef406bf977e0ccb73025d37585dffcaf7",
+      "unchangedGitBlob": "05cdea4750e4e53d2960e2d2661d0f642f51ae48"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "775048bd90ffb6556f6cfe8e08456b901f64aee35b8159077031389bc891212f",
+      "unchangedGitBlob": "e3399878d6c98621b788a8a72909071d867f89fe"
+    },
+    {
+      "path": "pinned-engine/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a",
+      "unchangedGitBlob": "4a38e39d0755462d40c2b22548b87abde938ea0b"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "0594ebcd36985db4ff06d89ea7f1d6f56fc39cfa1b6f0f3b754b7189253685d6",
+      "unchangedGitBlob": "1a004d03190d0d0d4d5a827870522cc22945b544"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-canonical-regex-reconciliation-20261017.yml",
+      "sha256": "99f88fdedad45524bf17407631594e085863423667c0a612055b57998768fc6c",
+      "unchangedGitBlob": "0b93d77b45d8b54ca03d591b35158248ffc06445"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/custody/append-insertion.txt",
+      "sha256": "169e82b5c6c44637c427c6b3a171fe17e74598dc20394d405c43db5d5b6d9645",
+      "unchangedGitBlob": "6f4391c8752e3b6303872fdb572f3b3d3fad5df0"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/custody/historical-sparse-manifest.tsv",
+      "sha256": "725a5dbccbfa4ff834586c21f9c495fffec985dd9d9033f86fc6e808ea421fa2",
+      "unchangedGitBlob": "2fdaa30d27463bb9e9bff5064cbd4015571d3aa9"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/custody/migration.py",
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+      "unchangedGitBlob": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/custody/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "unchangedGitBlob": "40f032174baa2f1c19e3b02686723bc37f37122c"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/custody/records.json",
+      "sha256": "e8931d4ffac80339a5b3989c36eb0968ccce302333a9ee7d178fd66d425c470a",
+      "unchangedGitBlob": "614599dadccb048b2e8422b744e668b28a45b57b"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-append-20261017/after.json",
+      "sha256": "daad1f0947f85d88179d6653fcffc5b66070c27f22bce9bf8853e076a45b60aa",
+      "unchangedGitBlob": "5b423f474830923ce816a528e172ac96757cb99a"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-append-20261017/manifest.tsv",
+      "sha256": "1af339ddeedd233f37f26727324e669a807961c2ce6f7f27d19419caa9b06452",
+      "unchangedGitBlob": "a4ffa10c9908f31dc7d3943f1ea924d9f7639ecf"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-reconciliation-20261017/after.json",
+      "sha256": "d9f17863e6325f7085967152ea725dfa9ab1b3b97ed21ee221a006e74fc10091",
+      "unchangedGitBlob": "188b06b9e25edb3373825d59d12b97ad1d2d1dce"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-reconciliation-20261017/before.json",
+      "sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "unchangedGitBlob": "a44460f982940623cf6ba1ca625caeeaa889f633"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-reconciliation-20261017/manifest.tsv",
+      "sha256": "6ac6d481178067aee78863331426c124c2360f2b4def5cff244aad39d8ed6ea6",
+      "unchangedGitBlob": "30d96e76e4083039e0fd034701cc0e2302101690"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-rollback-20261017/before.json",
+      "sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "unchangedGitBlob": "a44460f982940623cf6ba1ca625caeeaa889f633"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-regex-family-rollback-20261017/manifest.tsv",
+      "sha256": "f01fcd4c197075df6529abc3a9879454a7fc508751df1b7d580f4ad4dedc2093",
+      "unchangedGitBlob": "a0e5526fe7ef367b516f1c1e9f961dbd14aab33f"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-sparse-recipe-custody-20261017/after.json",
+      "sha256": "d9f17863e6325f7085967152ea725dfa9ab1b3b97ed21ee221a006e74fc10091",
+      "unchangedGitBlob": "188b06b9e25edb3373825d59d12b97ad1d2d1dce"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-sparse-recipe-custody-20261017/manifest.tsv",
+      "sha256": "1ab4bab6c3228cf9887a038a349f394e30033f66559184c3afa0e48eacae167b",
+      "unchangedGitBlob": "8486d22919e348ad343edb366c4dc978a4b3463b"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-target-lineage-20261017/after.json",
+      "sha256": "d115f231d02264036402920be8427f50a05661cd9ea3dbf0794c67c0ab8e10ab",
+      "unchangedGitBlob": "e504ecfb8991cf3f0f10406b2b3dd356ed70fa67"
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-target-lineage-20261017/manifest.tsv",
+      "sha256": "5435e84cd6a3f9af4c6525ee7019009c1c0dc89a36b52ad70d1e6665ca169e0d",
+      "unchangedGitBlob": "262f6423b8c26c2ea3e77cffc6ff43159a79396a"
+    },
+    {
+      "path": "src/test/java/com/m3/rewrite/backport/M3CanonicalRegexMappingReconciliationTest.java",
+      "sha256": "fc951a4f088cfa701263aa87b5f64ce980f2efd25a9af310364a2625a9899d0a",
+      "unchangedGitBlob": "8d16e2a413ec2501a9d268946c86de303df92b68"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "6a90d99e620995b270372b8a1066d778222ea8bdd2b1f4b73421862297b49cf5",
+      "unchangedGitBlob": "c2658f5f124812ebb172eb9cdd001c0c0a1e1a9a"
+    }
+  ]
+}

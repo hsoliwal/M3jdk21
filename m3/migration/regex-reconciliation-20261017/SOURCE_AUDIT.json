@@ -1,0 +1,180 @@
+{
+  "schema": "M3_CANONICAL_REGEX_MAPPING_FINAL_SOURCE_AUDIT_V2",
+  "scope": "STATIC_RAM_JSON_BYTE_AND_GITHUB_FILE_CUSTODY_ONLY",
+  "baseline": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+  "source": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+  "preCodeFoss": "05cdea4750e4e53d2960e2d2661d0f642f51ae48",
+  "stages": {
+    "A": {
+      "git": "a44460f982940623cf6ba1ca625caeeaa889f633",
+      "sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "bytes": 399438
+    },
+    "B": {
+      "git": "5b423f474830923ce816a528e172ac96757cb99a",
+      "sha256": "daad1f0947f85d88179d6653fcffc5b66070c27f22bce9bf8853e076a45b60aa",
+      "bytes": 432901
+    },
+    "C": {
+      "git": "e504ecfb8991cf3f0f10406b2b3dd356ed70fa67",
+      "sha256": "d115f231d02264036402920be8427f50a05661cd9ea3dbf0794c67c0ab8e10ab",
+      "bytes": 434509
+    },
+    "D": {
+      "git": "188b06b9e25edb3373825d59d12b97ad1d2d1dce",
+      "sha256": "d9f17863e6325f7085967152ea725dfa9ab1b3b97ed21ee221a006e74fc10091",
+      "bytes": 436409
+    }
+  },
+  "appendAudit": {
+    "before": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+    "after": "daad1f0947f85d88179d6653fcffc5b66070c27f22bce9bf8853e076a45b60aa",
+    "fragment": "e8931d4ffac80339a5b3989c36eb0968ccce302333a9ee7d178fd66d425c470a",
+    "insertion": "169e82b5c6c44637c427c6b3a171fe17e74598dc20394d405c43db5d5b6d9645",
+    "originalBytes": 399438,
+    "outputBytes": 432901,
+    "appendBytes": 33463,
+    "appendOffset": 373244,
+    "fullOldByteInverse": true,
+    "allOldFieldsSemanticallyUnchanged": true,
+    "records": 60,
+    "topMappings": 55,
+    "gates": 20,
+    "statuses": [
+      "implemented-unverified",
+      "pending",
+      "pending",
+      "pending"
+    ],
+    "pythonSchemaValidation": "NOT_RUN",
+    "pythonWholeValidator": "NOT_RUN",
+    "knownTQDrift": "RETAINED_NOT_REPAIRED_BY_APPEND"
+  },
+  "tqFourFieldAudit": {
+    "schema": "M3_CANONICAL_MAPPING_SERIAL_TQ_AUDIT_V1",
+    "stage": "B_TO_C_METADATA_ONLY",
+    "targetRecordId": "synexia.counterpart.MIndexRegexTrigramQuery",
+    "preCodeFoss": "7ccb0075565c6a05decbf7f34ea119eeb8460ab3",
+    "beforeB": {
+      "git": "5b423f474830923ce816a528e172ac96757cb99a",
+      "sha256": "daad1f0947f85d88179d6653fcffc5b66070c27f22bce9bf8853e076a45b60aa",
+      "bytes": 432901
+    },
+    "afterC": {
+      "sha256": "d115f231d02264036402920be8427f50a05661cd9ea3dbf0794c67c0ab8e10ab",
+      "bytes": 434509
+    },
+    "changedRecordFields": [
+      "targets",
+      "sync",
+      "lineage",
+      "observation"
+    ],
+    "exactFourFieldInverseRestoresB": true,
+    "unrelatedFieldsAndAllOtherRecordsUnchanged": true,
+    "originalStatus": "implemented-unverified",
+    "finalStatus": "implemented-unverified",
+    "noRuntimeReceiptTransfer": true,
+    "oldLineageExact": true,
+    "formerTargetAppendedExact": true,
+    "recordCount": 60,
+    "pythonSchemaAndWholeValidator": "NOT_RUN",
+    "separateKnownGlobalFailure": {
+      "id": "synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup",
+      "issue": "recipe.path is source-repository path absent from receiving e28; old field retained unchanged."
+    }
+  },
+  "sparseSourceCustodyAudit": {
+    "beforeC": {
+      "git": "e504ecfb8991cf3f0f10406b2b3dd356ed70fa67",
+      "sha256": "d115f231d02264036402920be8427f50a05661cd9ea3dbf0794c67c0ab8e10ab",
+      "bytes": 434509
+    },
+    "afterD": {
+      "sha256": "d9f17863e6325f7085967152ea725dfa9ab1b3b97ed21ee221a006e74fc10091",
+      "bytes": 436409
+    },
+    "changedFields": [
+      "sources",
+      "recipe",
+      "sync",
+      "observation"
+    ],
+    "exactInverse": true,
+    "allOtherFieldsAndRecordsExact": true,
+    "recordCount": 60,
+    "statusPreserved": true,
+    "originalSourcePreserved": true,
+    "testRefsExact": true,
+    "contractExact": true,
+    "recipeIdVersionRollbackPreserved": true,
+    "originalPreconditionsPreserved": true,
+    "manifestGit": "2fdaa30d27463bb9e9bff5064cbd4015571d3aa9",
+    "manifestSHA": "725a5dbccbfa4ff834586c21f9c495fffec985dd9d9033f86fc6e808ea421fa2",
+    "sourceManifestAbsentAtCurrentSource": true,
+    "fullPythonValidation": "NOT_RUN"
+  },
+  "immutableSchema": {
+    "git": "40f032174baa2f1c19e3b02686723bc37f37122c",
+    "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+  },
+  "immutableValidator": {
+    "git": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+    "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+  },
+  "readback": {
+    "DExact": true,
+    "sparseReplayExact": true
+  },
+  "sourceMetadataAndOwnershipErrors": [],
+  "previousAEndpointLineageErrors": [],
+  "implementedFileCustody": {
+    "implementedRecords": 26,
+    "targetComparisons": 30,
+    "uniqueTargetPaths": 29,
+    "targetHashMismatches": [],
+    "recipeComparisonsAfterSourceCustodyCorrection": 24,
+    "uniqueRecipePathsAfterCorrection": 7,
+    "recipeMismatches": [],
+    "COnlyMissingRecipePathCorrectedAsSourceOwnership": true,
+    "totalUniqueTargetCheckoutReadsDuringAudit": 51,
+    "allReadsSucceededExceptKnownRemovedSourceRecipePath": true
+  },
+  "prefixEvidence": {
+    "testedRecord": "m3.prefix-z",
+    "receipt": "m3/migration/evidence/local-20261002-final/receipt.json",
+    "receiptGit": "45838490350429dd4c62f723ed4133a1111b81f9",
+    "allReceiptRunShapesChecked": 8,
+    "selectedRuns": [
+      "prefix-z-normal",
+      "prefix-z-interpreter"
+    ],
+    "selectedInputsAndStdoutComparisons": 26,
+    "evidenceMismatches": []
+  },
+  "completion": {
+    "status": "INCOMPLETE",
+    "statusCounts": {
+      "implemented-tested": 1,
+      "pending": 32,
+      "implemented-unverified": 25,
+      "blocked": 2
+    },
+    "recordsWithSyncGaps": 59,
+    "unresolvedDependencyEdges": 16,
+    "recordsWithUnresolvedDependencyEdges": 13,
+    "unpassedGates": 19,
+    "coverageFlagsAndInventoryStillIncomplete": true,
+    "sourceObservedTipDiffersFromBaseline": true
+  },
+  "execution": {
+    "pythonJsonParserDuplicateKeyValidation": "NOT_RUN",
+    "pythonJsonschema": "NOT_RUN",
+    "pythonWholeMigrationValidate": "NOT_RUN",
+    "physicalCheckoutSymlinkAndRootGates": "NOT_RUN",
+    "mavenOpenRewrite": "NOT_RUN",
+    "matchedJdkRuntimeJtregJni": "NOT_RUN",
+    "fullMapValidity": "NOT_CLAIMED",
+    "phaseAdvanced": false
+  }
+}
