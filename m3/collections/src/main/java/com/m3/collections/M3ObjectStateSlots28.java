@@ -26,6 +26,9 @@ import java.util.Objects;
  * an out-of-memory failure during allocation is not a multi-array transaction.
  */
 public final class M3ObjectStateSlots28 {
+    /** Retains the original implicit public no-argument constructor contract. */
+    public M3ObjectStateSlots28() { }
+
     public static final int VISIBLE = 0x01;
     public static final int DIRTY = 0x02;
     public static final int DEFERRED = 0x04;
