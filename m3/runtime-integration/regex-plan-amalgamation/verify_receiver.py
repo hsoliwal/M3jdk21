@@ -9,7 +9,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[3]
 FILES = {
     "src/java.base/share/classes/java/lang/M3StringRegexDp.java":
-        "043c26a0f55ee2a0170bf907ee428dfd133696ce45bf0de44b822dc9e1e5e0e7",
+        "4972d8c3a664867559273a63df340c042eab1fa40f21e7b2139422ed06f942ba",
     "test/jdk/java/lang/String/M3StringRegexDpTest.java":
         "23b49a26ce30586758afb8cc7a7fecaee5a70833943fd3598c5b703d2a516cd9"
 }
