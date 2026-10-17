@@ -1,0 +1,93 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 stack-safe deep filtered List receiver
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk21-filtered-list-stack-safe-20261017.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsDeepComposition*.java'
+      - 'm3/collections/name-mapping.json'
+      - 'm3/collections/qualification/M3_FILTERED_LIST_DEEP_COMPOSITION_20261017.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-source-red-green-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check exact five canonical source and metadata SHA-256 postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' '5204f0a3eb29ce84107ba5fa40ee00943da277c99a37c8355bd1bc216ee074b5' 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java' | sha256sum -c -
+          printf '%s  %s\n' '7226c2622ffe49bbf4d6299a9c79bf284f849a6d44cfb966f0082038b765a89c' 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsDeepCompositionProof.java' | sha256sum -c -
+          printf '%s  %s\n' '6fd5e3956d5a0b1dc443d48b5f0691cff213c5a5f67f128be6a8080e6a6bd32e' 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsDeepCompositionTest.java' | sha256sum -c -
+          printf '%s  %s\n' 'd13ba2d0c7f71d46fa3c34eefb67506bd9641f7bb1ade74ef35c3182a3ae167e' 'm3/collections/name-mapping.json' | sha256sum -c -
+          printf '%s  %s\n' '12c17ae994f4170524c8b77a56f10cc4cbbb024ca8a9981f84177b2aa7d5b590' 'm3/collections/qualification/M3_FILTERED_LIST_DEEP_COMPOSITION_20261017.md' | sha256sum -c -
+          echo M3_FILTERED_LIST_STACK_SAFE_RECEIVER_SOURCE_SEAL_PASS
+      - name: Reproduce original stack failure and prove new 20k-level List contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          B="$(mktemp -d)"
+          trap 'rm -rf "$B"' EXIT
+          mkdir -p "$B/red/com/m3/collections" "$B/red-classes" "$B/green-classes"
+          OWNER=m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+          PROOF=m3/collections/src/test/java/com/m3/collections/M3FilteredListsDeepCompositionProof.java
+          git show "bea800fd8270389de387db88ca7d42c6c4b278fa:$OWNER" > "$B/red/com/m3/collections/M3FilteredLists.java"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$B/red-classes" \
+            "$B/red/com/m3/collections/M3FilteredLists.java" "$PROOF"
+          if java -ea -Xss256k -Xmx384m -cp "$B/red-classes" com.m3.collections.M3FilteredListsDeepCompositionProof > "$B/red.log" 2>&1; then
+            echo 'Original recursive M3 filtered List must fail at 20,000 nested predicates'
+            exit 1
+          fi
+          grep -Fq StackOverflowError "$B/red.log"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$B/green-classes" "$OWNER" "$PROOF"
+          java -ea -Xss256k -Xmx384m -cp "$B/green-classes" com.m3.collections.M3FilteredListsDeepCompositionProof
+          java -Xint -ea -Xss256k -Xmx384m -cp "$B/green-classes" com.m3.collections.M3FilteredListsDeepCompositionProof
+          javap -public -classpath "$B/red-classes" com.m3.collections.M3FilteredLists > "$B/red-public.txt"
+          javap -public -classpath "$B/green-classes" com.m3.collections.M3FilteredLists > "$B/green-public.txt"
+          diff -u "$B/red-public.txt" "$B/green-public.txt"
+      - name: Preserve original source/test owners, avoid new JNI runtime changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          if git diff --name-only 'bea800fd8270389de387db88ca7d42c6c4b278fa' HEAD | grep -E '(\.c$|\.h$|\.cpp$|^src/java\.base/|^src/hotspot/)'; then
+            echo 'Unexpected native/JDK implementation change outside source seal'
+            exit 1
+          fi
+  full-module-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Full M3 collections Java21 module compilation and inherited List/primitive JNI contract JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3FilteredListsTest,M3FilteredListsSortedInteropTest,M3FilteredListsLateBindingTest,M3FilteredListsDeepCompositionTest,M3IndexMaskCompactorTest \
+            test
+          for name in M3FilteredListsTest M3FilteredListsSortedInteropTest M3FilteredListsLateBindingTest M3FilteredListsDeepCompositionTest M3IndexMaskCompactorTest; do
+            REPORT="m3/collections/target/surefire-reports/com.m3.collections.${name}.txt"
+            test -s "$REPORT"
+            grep -E 'Tests run: [1-9][0-9]*, Failures: 0, Errors: 0, Skipped: 0' "$REPORT"
+          done
