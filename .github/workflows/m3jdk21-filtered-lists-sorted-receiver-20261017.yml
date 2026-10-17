@@ -1,0 +1,80 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 filtered List and sorted interop source receiver
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk21-filtered-lists-sorted-receiver-20261017.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredLists*.java'
+      - 'm3/collections/JDK_FAMILY_MAP.tsv'
+      - 'm3/collections/name-mapping.json'
+      - 'm3/collections/qualification/M3_FILTERED_LISTS_RECEIVING_20261017.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-seal-and-standalone-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact Synexia recipe postimages (nine files)
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' '7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101' 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java' | sha256sum -c -
+          printf '%s  %s\n' 'e5addee9657a66a731ca8acf79c0682e96a1ad4d7dbab251f5196ab706b9826a' 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsContract.java' | sha256sum -c -
+          printf '%s  %s\n' '3310337caf4552892d3dc8a944e749b479f73c381903565f1322542e192d2b0a' 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsEdges.java' | sha256sum -c -
+          printf '%s  %s\n' 'a43047f07d8cf421e286fa511daeb44c6487a89107900843d526ea20bcb6a539' 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsSortedInteropTest.java' | sha256sum -c -
+          printf '%s  %s\n' '589a2f683a5465c0491104993a5647fc7f861048b9d1ed50281bd64621ad405c' 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsTest.java' | sha256sum -c -
+          printf '%s  %s\n' '37a55f9c6c577984fafb867bf59ea1c210bf835c5cef4d08880da48c0daf7aa6' 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsWorkProof.java' | sha256sum -c -
+          printf '%s  %s\n' 'e75547f2e579ad3c794ea4ef5839afb8b3419af978b971b9da64303c5f97fca5' 'm3/collections/JDK_FAMILY_MAP.tsv' | sha256sum -c -
+          printf '%s  %s\n' '320f47e9a8381350cd641a3444119513e5fd32b961369c98338846d7735d03f4' 'm3/collections/name-mapping.json' | sha256sum -c -
+          printf '%s  %s\n' 'd28c495a49aea2bb1c1a17376632a610f04da9bcd8214421dd7bb7d982dfb3c0' 'm3/collections/qualification/M3_FILTERED_LISTS_RECEIVING_20261017.md' | sha256sum -c -
+          echo 'M3_FILTERED_LIST_RECEIVER_SOURCE_SEAL_PASS targets=9'
+      - name: Compile real filtered List donor and run three Java21 standalone proof suites
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="$(mktemp -d)"
+          trap 'rm -rf "$dir"' EXIT
+          root=m3/collections/src
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$dir" \
+            "$root/main/java/com/m3/collections/M3FilteredLists.java" \
+            "$root/test/java/com/m3/collections/M3FilteredListsContract.java" \
+            "$root/test/java/com/m3/collections/M3FilteredListsEdges.java" \
+            "$root/test/java/com/m3/collections/M3FilteredListsWorkProof.java"
+          java -ea -Xmx384m -cp "$dir" com.m3.collections.M3FilteredListsContract
+          java -ea -Xmx384m -cp "$dir" com.m3.collections.M3FilteredListsEdges
+          java -ea -Xmx384m -cp "$dir" com.m3.collections.M3FilteredListsWorkProof
+          java -Xint -ea -Xmx384m -cp "$dir" com.m3.collections.M3FilteredListsEdges
+          javap -classpath "$dir" com.m3.collections.M3FilteredLists | grep -F 'readOnlyFiltered'
+          git diff --check HEAD^ HEAD
+  maven-junit-module-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Real M3 collections module compilation and both JUnit suites
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3FilteredListsTest,M3FilteredListsSortedInteropTest test
+          test -s m3/collections/target/surefire-reports/com.m3.collections.M3FilteredListsTest.txt
+          test -s m3/collections/target/surefire-reports/com.m3.collections.M3FilteredListsSortedInteropTest.txt
