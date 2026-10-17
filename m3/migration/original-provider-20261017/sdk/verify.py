@@ -10,7 +10,7 @@ ROOT = Path(os.path.abspath(__file__)).parent
 CRATE = "m3-original-mapping-provider-20261017"
 RESOURCE = "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE + "/"
 SUITE = "com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest"
-METHODS = ["allMutableStatesBothOrdersAndFixedPoint","exactRecipeResultsDeliveredToDeclaredOutput","everyUnknownTargetRefusesAfterItsPositiveBaseline","everyDuplicateTargetRefusesAfterItsPositiveBaseline","everyRequiredTargetMissingRefusesAfterItsPositiveBaseline","everyNonPlainTextTargetRefusesAfterItsPositiveBaseline","everyChangedAfterScanTargetRefusesAfterItsPositiveBaseline","sealedManifestPathSafetyAndConvergedIdentity","deliveryPrechecksForeignContentsAndAllSymlinkComponents"]
+METHODS = ["allMutableStatesBothOrdersAndFixedPoint","exactRecipeResultsDeliveredToDeclaredOutput","everyUnknownTargetRefusesAfterItsPositiveBaseline","everyDuplicateTargetRefusesAfterItsPositiveBaseline","everyRequiredTargetMissingRefusesAfterItsPositiveBaseline","everyNonPlainTextTargetRefusesAfterItsPositiveBaseline","everyChangedAfterScanTargetRefusesAfterItsPositiveBaseline","sealedManifestPathSafetyAndConvergedIdentity","deliveryPrechecksForeignContentsAndAllSymlinkComponents","currentMappingReconciliationPreservesNewFieldsAndReviewedMigration"]
 def digest(data):
     return hashlib.sha256(data).hexdigest()
 def git_blob(data):
