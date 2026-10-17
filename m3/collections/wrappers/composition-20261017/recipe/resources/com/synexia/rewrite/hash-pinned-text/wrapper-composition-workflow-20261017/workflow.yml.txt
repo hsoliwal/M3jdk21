@@ -1,0 +1,98 @@
+# Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 stored-representative filtered wrappers
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk-stored-representative-20261017.yml'
+      - 'm3/collections/wrappers/**'
+      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/FilteredBatchContracts.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-head-recipe-and-java-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: |
+            m3/collections
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify the exact canonical proof mirror
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          receiver=Path('m3/collections/wrappers/composition-20261017')
+          handoff=json.loads((receiver/'handoff.json').read_text())
+          commit=handoff['canonical_commit']
+          assert len(commit)==40 and all(c in '0123456789abcdef' for c in commit)
+          for line in (receiver/'MIRROR_RECEIPT.tsv').read_text().splitlines():
+              if line.startswith('#') or not line:continue
+              path,expected=line.split('\t')
+              assert hashlib.sha256((receiver/'recipe'/path).read_bytes()).hexdigest()==expected,path
+          print('CANONICAL_WRAPPER_MIRROR_SEAL_PASS')
+          PY
+      - name: Qualify the historical predecessor recipes against their original inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/wrappers/recipe/pom.xml test \
+            -Dtest=M3WrapperContractsRecipeTest,M3StoredRepresentativeRecipeTest \
+            -Dm3.wrapper.sdk.output="$RUNNER_TEMP/m3-wrapper-sdk" \
+            -Dm3.stored.sdk.output="$RUNNER_TEMP/m3-stored-sdk"
+      - name: Qualify both composition routes and the successor workflow through the real SDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          crate=m3/collections/wrappers/composition-20261017/recipe
+          mvn -B -ntp -f "$crate/pom.xml" test \
+            -Dm3.composition.output="$RUNNER_TEMP/m3-composition-sdk" \
+            -Dm3.composition.workflow.output="$RUNNER_TEMP/m3-composition-workflow-sdk"
+      - name: Seal predecessor lineage and current emitted sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,os
+          from pathlib import Path
+          root=Path.cwd();temp=Path(os.environ['RUNNER_TEMP'])
+          crate=root/'m3/collections/wrappers/composition-20261017/recipe'
+          resources=crate/'resources/com/synexia/rewrite/hash-pinned-java/wrapper-composition-representative-20261017'
+          main='m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+          assert (temp/'m3-stored-sdk'/main).read_bytes()==(resources/'pre/M3CollectionViews.java.txt').read_bytes()
+          for row in (resources/'manifest.tsv').read_text().splitlines():
+              path,before,after,template=row.split('\t')
+              actual=(root/path).read_bytes()
+              assert hashlib.sha256(actual).hexdigest()==after,path
+              assert actual==(temp/'m3-composition-sdk/representative'/path).read_bytes(),path
+          path='.github/workflows/m3jdk-stored-representative-20261017.yml'
+          assert (root/path).read_bytes()==(temp/'m3-composition-workflow-sdk'/path).read_bytes()
+          print('WRAPPER_PREDECESSOR_AND_SUCCESSOR_SDK_SEALS_PASS')
+          PY
+      - name: Run independent Java, full module compilation and unchanged native consumers
+        shell: bash
+        run: |
+          set -euo pipefail
+          M3_COMPOSITION_EMITTED="$RUNNER_TEMP/m3-composition-sdk" \
+            bash m3/collections/wrappers/composition-20261017/recipe/verify.sh \
+            "$RUNNER_TEMP/proof" "$GITHUB_WORKSPACE"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-stored-representative-proof
+          path: |
+            ${{ runner.temp }}/proof/
+            m3/collections/wrappers/recipe/target/surefire-reports/
+            m3/collections/wrappers/composition-20261017/recipe/target/surefire-reports/
+          retention-days: 7

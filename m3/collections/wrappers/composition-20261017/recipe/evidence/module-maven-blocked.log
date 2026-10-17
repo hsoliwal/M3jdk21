@@ -1,0 +1,23 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< com.m3:m3-collections >------------------------
+[INFO] Building M3 collection lanes 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] The POM for org.junit.jupiter:junit-jupiter:jar:5.10.2-m3-source-1 is missing, no dependency information available
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.438 s
+[INFO] Finished at: 2026-10-17T11:13:53+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project m3-collections: Could not resolve dependencies for project com.m3:m3-collections:jar:0.1.0-SNAPSHOT
+[ERROR] dependency: org.junit.jupiter:junit-jupiter:jar:5.10.2-m3-source-1 (test)
+[ERROR] 	Cannot access central (https://repo.maven.apache.org/maven2) in offline mode and the artifact org.junit.jupiter:junit-jupiter:jar:5.10.2-m3-source-1 has not been downloaded from it before.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException

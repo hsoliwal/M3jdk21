@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.AssertionError: search stored representative not external probe
+	at com.m3.collections.M3StoredRepresentativeProof.truth(M3StoredRepresentativeProof.java:50)
+	at com.m3.collections.M3StoredRepresentativeProof.deterministic(M3StoredRepresentativeProof.java:77)
+	at com.m3.collections.M3StoredRepresentativeProof.main(M3StoredRepresentativeProof.java:157)

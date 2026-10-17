@@ -1,0 +1,3 @@
+# actual OpenRewrite Results
+m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d
+m3/collections/src/test/java/com/m3/collections/FilteredBatchContracts.java	4cc262d5bb4ddf476c59285f630de1b55808e4530d418ed0d0d4d989c8d25575

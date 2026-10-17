@@ -1,0 +1,44 @@
+-------------------------------------------------------------------------------
+Test set: com.synexia.rewrite.WrapperCompositionRecipeTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 83.75 s <<< FAILURE! -- in com.synexia.rewrite.WrapperCompositionRecipeTest
+com.synexia.rewrite.WrapperCompositionRecipeTest.refusesWrongRepresentationAndUnknownPredecessor -- Time elapsed: 4.850 s <<< ERROR!
+java.lang.IllegalStateException: target representation does not match configured Java snapshot mode: m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.requireAdmissible(M3HashPinnedJavaSnapshotRecipe.java:210)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.prepare(M3HashPinnedJavaSnapshotRecipe.java:190)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.generate(M3HashPinnedJavaSnapshotRecipe.java:135)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.generate(M3HashPinnedJavaSnapshotRecipe.java:43)
+	at org.openrewrite.ScanningRecipe.generate(ScanningRecipe.java:63)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refuses(WrapperCompositionRecipeTest.java:151)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refusesWrongRepresentationAndUnknownPredecessor(WrapperCompositionRecipeTest.java:274)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.synexia.rewrite.WrapperCompositionRecipeTest.refusesMissingDuplicateDriftAndOccupiedTargets -- Time elapsed: 0.976 s <<< ERROR!
+java.lang.IllegalStateException: required source missing: m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.requireAdmissible(M3HashPinnedJavaSnapshotRecipe.java:206)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.prepare(M3HashPinnedJavaSnapshotRecipe.java:190)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.generate(M3HashPinnedJavaSnapshotRecipe.java:135)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.generate(M3HashPinnedJavaSnapshotRecipe.java:43)
+	at org.openrewrite.ScanningRecipe.generate(ScanningRecipe.java:63)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refuses(WrapperCompositionRecipeTest.java:151)
+	at com.synexia.rewrite.WrapperCompositionRecipeTest.refusesMissingDuplicateDriftAndOccupiedTargets(WrapperCompositionRecipeTest.java:256)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
