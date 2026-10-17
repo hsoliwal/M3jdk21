@@ -1,0 +1,4 @@
+donor_repo	donor_revision	donor_owner	receiver_owner	disposition	license
+hsoliwal/M3jdk21	e81a42da2158801a9358b5371e22563c24f4853f	M3CollectionViews	com.m3.collections.M3CollectionViews	EXACT_DONOR_SOURCE_REUSED	Apache-2.0
+hsoliwal/M3jdk21	e81a42da2158801a9358b5371e22563c24f4853f	M3FilteredMaps	com.m3.collections.M3FilteredMaps	EXACT_DONOR_SOURCE_REUSED	Apache-2.0
+hsoliwal/com.synexia	fc95bae20658979bd79edd2451213e089a067774	M3HashPinnedJavaSnapshotRecipe	Current M3 Java21 module owner	SOURCE_RECIPE_ONLY_NO_RUNTIME_DEPENDENCY	Apache-2.0
