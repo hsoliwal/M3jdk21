@@ -142,4 +142,31 @@ public final class M3LibraryCollections {
     public static <E> List<E> springAutoPopulatingList(AutoPopulatingList.ElementFactory<E> factory) {
         return new AutoPopulatingList<>(new M3LinkedList<E>(), factory);
     }
+    /** Apache ListValuedMap contract, not Guava ListMultimap or Spring MultiValueMap. */
+    public static <K, V> org.apache.commons.collections4.ListValuedMap<K, V> apacheListValuedMap() {
+        return new M3ApacheListValuedMap<>();
+    }
+
+    /** Apache SetValuedMap contract with M3-owned keys and value sets. */
+    public static <K, V> org.apache.commons.collections4.SetValuedMap<K, V> apacheSetValuedMap() {
+        return new M3ApacheSetValuedMap<>();
+    }
+
+    /**
+     * Guava live filtered Collection over an existing M3 list owner; never a snapshot.
+     * Guava owns predicate evaluation, insertion rejection and iterator-remove semantics.
+     * Filtering does not acquire an independent value store or cache mutable predicates.
+     */
+    public static <E> java.util.Collection<E> guavaFilteredCollection(
+            M3LinkedList<E> owner, com.google.common.base.Predicate<? super E> predicate) {
+        return com.google.common.collect.Collections2.filter(
+                Objects.requireNonNull(owner, "owner"), Objects.requireNonNull(predicate, "predicate"));
+    }
+
+    /** Guava live sorted/range/descending view over the existing M3 navigable-set owner. */
+    public static <E> NavigableSet<E> guavaFilteredNavigableSet(
+            M3TreeSet<E> owner, com.google.common.base.Predicate<? super E> predicate) {
+        return com.google.common.collect.Sets.filter(
+                Objects.requireNonNull(owner, "owner"), Objects.requireNonNull(predicate, "predicate"));
+    }
 }
