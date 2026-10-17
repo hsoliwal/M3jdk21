@@ -1,0 +1,3 @@
+$ ["objcopy", "--strip-debug", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/freshbase-image-proof/native/libm3_collections_mask.so", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/freshbase-image-proof/reference-strip-debug.so"]
+
+EXIT 0

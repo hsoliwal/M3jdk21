@@ -1,0 +1,12 @@
+$ ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/javap", "-public", "-classpath", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/final-classes", "com.synexia.common.collections.M3FilteredViews"]
+Compiled from "M3FilteredViews.java"
+public final class com.synexia.common.collections.M3FilteredViews {
+  public static <E> java.util.Collection<E> filter(java.util.Collection<E>, java.util.function.Predicate<? super E>);
+  public static <E> java.util.Set<E> filter(java.util.Set<E>, java.util.function.Predicate<? super E>);
+  public static <E> java.util.SortedSet<E> filter(java.util.SortedSet<E>, java.util.function.Predicate<? super E>);
+  public static <E> java.util.NavigableSet<E> filter(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+  public static <K, V> java.util.SortedMap<K, V> filterEntries(java.util.SortedMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+  public static <K, V> java.util.NavigableMap<K, V> filterEntries(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+}
+
+EXIT 0

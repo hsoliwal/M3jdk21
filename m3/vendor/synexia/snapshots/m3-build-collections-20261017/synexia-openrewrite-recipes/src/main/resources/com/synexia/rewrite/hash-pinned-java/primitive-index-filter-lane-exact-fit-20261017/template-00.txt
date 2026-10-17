@@ -1,0 +1,252 @@
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.synexia.primitives;
+
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.function.LongPredicate;
+
+/**
+ * Primitive int[] index/permutation view over a {@link PrimitiveSoaStore}.
+ *
+ * <p>Filtering, slicing, reversing and sorting move only source-row integers;
+ * the primitive data lanes remain untouched until materialization or an explicit
+ * full permutation is applied.
+ */
+public final class PrimitiveIndexView {
+    private final PrimitiveSoaStore store;
+    private final int[] rows;
+    private final long sourceVersion;
+
+    private PrimitiveIndexView(PrimitiveSoaStore store, int[] rows, long sourceVersion) {
+        this.store = store;
+        this.rows = rows;
+        this.sourceVersion = sourceVersion;
+    }
+
+    public static PrimitiveIndexView identity(PrimitiveSoaStore store) {
+        Objects.requireNonNull(store, "store");
+        long version = store.version();
+        int size = store.size();
+        int[] rows = new int[size];
+        for (int i = 0; i < size; i++) rows[i] = i;
+        if (version != store.version()) throw new java.util.ConcurrentModificationException();
+        return new PrimitiveIndexView(store, rows, version);
+    }
+
+    public int size() {
+        checkLive();
+        return rows.length;
+    }
+
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    public int sourceRow(int viewIndex) {
+        checkLive();
+        return rows[checkIndex(viewIndex)];
+    }
+
+    public long getBits(int lane, int viewIndex) {
+        checkLive();
+        return store.getBits(lane, rows[checkIndex(viewIndex)]);
+    }
+
+    public int rowIdAt(int viewIndex) {
+        checkLive();
+        return store.rowIdAt(rows[checkIndex(viewIndex)]);
+    }
+
+    public byte stateAt(int viewIndex) {
+        checkLive();
+        return store.stateAt(rows[checkIndex(viewIndex)]);
+    }
+
+    public PrimitiveIndexView filterLane(int lane, LongPredicate predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        checkLive();
+        int[] selected = new int[rows.length];
+        int count = 0;
+        for (int row : rows) {
+            if (predicate.test(store.getBits(lane, row))) selected[count++] = row;
+        }
+        checkLive();
+        return new PrimitiveIndexView(store,
+                count == selected.length ? selected : Arrays.copyOf(selected, count), sourceVersion);
+    }
+
+    public PrimitiveIndexView filterStateMask(int requiredMask) {
+        checkLive();
+        int[] selected = new int[rows.length];
+        int count = 0;
+        for (int row : rows) {
+            if ((store.stateAt(row) & requiredMask) == requiredMask) selected[count++] = row;
+        }
+        checkLive();
+        return new PrimitiveIndexView(store, Arrays.copyOf(selected, count), sourceVersion);
+    }
+
+    public PrimitiveIndexView slice(int fromInclusive, int toExclusive) {
+        checkLive();
+        if (fromInclusive < 0 || toExclusive < fromInclusive || toExclusive > rows.length) {
+            throw new IndexOutOfBoundsException();
+        }
+        return new PrimitiveIndexView(
+                store, Arrays.copyOfRange(rows, fromInclusive, toExclusive), sourceVersion);
+    }
+
+    public PrimitiveIndexView reversed() {
+        checkLive();
+        int[] reversed = Arrays.copyOf(rows, rows.length);
+        for (int left = 0, right = reversed.length - 1; left < right; left++, right--) {
+            int temp = reversed[left];
+            reversed[left] = reversed[right];
+            reversed[right] = temp;
+        }
+        return new PrimitiveIndexView(store, reversed, sourceVersion);
+    }
+
+    /**
+     * Sorts row IDs by lane then source row, reversing both comparisons when descending.
+     * The source lanes remain untouched. Worst-case comparison work is O(n log n),
+     * with O(log n) stack and no scratch arrays beyond the returned index copy.
+     */
+    public PrimitiveIndexView sortedByLane(int lane, boolean ascending) {
+        checkLive();
+        PrimitiveKind kind = store.laneKind(lane);
+        int[] sorted = Arrays.copyOf(rows, rows.length);
+        if (sorted.length > 1) quickSort(sorted, 0, sorted.length - 1, lane, kind, ascending);
+        checkLive();
+        return new PrimitiveIndexView(store, sorted, sourceVersion);
+    }
+
+    /**
+     * Exact first-signal Top-K over this view's existing primitive source row IDs.
+     *
+     * <p>The signal is the certified PrimitiveKind lane, not an approximate
+     * {@code @Sortable} heuristic. Source order and payloads are never mutated; only K
+     * indexes and optionally K cached lane signals are retained. K==N retains
+     * the existing full-sort path. O(n log K + K log K), O(K) extra words.
+     */
+    public PrimitiveIndexView topKByLane(int lane, int maximum, boolean ascending) {
+        checkLive();
+        store.laneKind(lane);
+        if (maximum < 0) throw new IllegalArgumentException("negative top-K maximum");
+        int count = Math.min(maximum, rows.length);
+        if (count == rows.length) return sortedByLane(lane, ascending);
+        int[] chosen = M3SortableTopK.select(store, rows, sourceVersion,
+                lane, count, ascending);
+        checkLive();
+        return new PrimitiveIndexView(store, chosen, sourceVersion);
+    }
+
+    /** Copies just this view's rows into a new aligned struct-of-arrays store. */
+    public PrimitiveSoaStore materialize() {
+        checkLive();
+        PrimitiveSoaStore copy = store.copyRows(rows);
+        checkLive();
+        return copy;
+    }
+
+    /**
+     * Physically applies this view as the store permutation.
+     *
+     * <p>The view must cover every source row exactly once. The store validates
+     * the permutation and publishes all reordered lane arrays together.
+     */
+    public void applyFullPermutation() {
+        checkLive();
+        store.reorder(rows);
+    }
+
+    public int[] toIndexArray() {
+        checkLive();
+        return Arrays.copyOf(rows, rows.length);
+    }
+
+    private void quickSort(
+            int[] data, int low, int high, int lane, PrimitiveKind kind, boolean ascending) {
+        int depth = 2 * (31 - Integer.numberOfLeadingZeros(high - low + 1));
+        sortRows(data, low, high, lane, kind, ascending, depth);
+    }
+
+    // Recurse only into the smaller partition; the depth budget also bounds hostile work.
+    private void sortRows(int[] data, int low, int high, int lane,
+            PrimitiveKind kind, boolean ascending, int depth) {
+        while (low < high) {
+            if (depth-- == 0) {
+                heapSortRows(data, low, high, lane, kind, ascending);
+                return;
+            }
+            int left = low;
+            int right = high;
+            int pivot = data[(low + high) >>> 1];
+            while (left <= right) {
+                while (compareRows(data[left], pivot, lane, kind, ascending) < 0) left++;
+                while (compareRows(data[right], pivot, lane, kind, ascending) > 0) right--;
+                if (left <= right) {
+                    swapRows(data, left++, right--);
+                }
+            }
+            if (right - low < high - left) {
+                if (low < right) sortRows(data, low, right, lane, kind, ascending, depth);
+                low = left;
+            } else {
+                if (left < high) sortRows(data, left, high, lane, kind, ascending, depth);
+                high = right;
+            }
+        }
+    }
+
+    // Reuses Synexia's primitive in-place heap mechanics over row IDs, never payload lanes.
+    private void heapSortRows(int[] data, int low, int high, int lane,
+            PrimitiveKind kind, boolean ascending) {
+        int count = high - low + 1;
+        for (int parent = (count >>> 1) - 1; parent >= 0; parent--) {
+            siftRows(data, low, count, parent, lane, kind, ascending);
+        }
+        for (int end = count - 1; end > 0; end--) {
+            swapRows(data, low, low + end);
+            siftRows(data, low, end, 0, lane, kind, ascending);
+        }
+    }
+
+    private void siftRows(int[] data, int base, int count, int parent, int lane,
+            PrimitiveKind kind, boolean ascending) {
+        while (parent < (count >>> 1)) {
+            int child = (parent << 1) + 1;
+            if (child + 1 < count && compareRows(data[base + child], data[base + child + 1],
+                    lane, kind, ascending) < 0) child++;
+            if (compareRows(data[base + parent], data[base + child], lane, kind, ascending) >= 0) return;
+            swapRows(data, base + parent, base + child);
+            parent = child;
+        }
+    }
+
+    private static void swapRows(int[] data, int left, int right) {
+        int value = data[left];
+        data[left] = data[right];
+        data[right] = value;
+    }
+
+    private int compareRows(
+            int leftRow, int rightRow, int lane, PrimitiveKind kind, boolean ascending) {
+        int comparison = kind.compareBits(
+                store.getBits(lane, leftRow),
+                store.getBits(lane, rightRow));
+        if (comparison == 0) comparison = Integer.compare(leftRow, rightRow);
+        return ascending ? comparison : -comparison;
+    }
+
+    private void checkLive() {
+        if (store.version() != sourceVersion) throw new java.util.ConcurrentModificationException();
+    }
+
+    private int checkIndex(int index) {
+        if (index < 0 || index >= rows.length) throw new IndexOutOfBoundsException(index);
+        return index;
+    }
+}

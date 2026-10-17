@@ -8324,5 +8324,18 @@
     "history_convergence_review_head": "5b2cbde34976ff5fe8bf6275bfbd9c58de6c34b0",
     "absorbed_product_evidence": "hsoliwal/M3jdk21#153@b11611609d378abba3a8a9e10edf9839a5c5676a",
     "runtime_dependency_rule": "M3JDK21 must not depend on Synexia at runtime; Synexia owns portable recipe/provenance only."
-  }
+  },
+  "optional_module_mappings": [
+    {
+      "module": "jdk.m3.collections",
+      "maven_profile": "m3-collections",
+      "mapping": "m3/docs/name-mapping.d/m3-filtered-collection-pack-20261017.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.m3.M3JdkCollectionPublicationOwners20261017",
+      "target_proof": "m3/tooling/module-packs/collections/build.py",
+      "existing_generic_module": "com.m3.collections",
+      "optional_exported_package": "com.m3.util"
+    }
+  ]
 }

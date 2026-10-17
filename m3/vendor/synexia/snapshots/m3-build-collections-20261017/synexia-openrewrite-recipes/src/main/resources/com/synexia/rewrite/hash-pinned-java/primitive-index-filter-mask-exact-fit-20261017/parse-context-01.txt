@@ -1,0 +1,121 @@
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.synexia.primitives;
+
+/**
+ * JVM heap pressure observations for M3-owned optional storage and growth.
+ * This is advisory: the JVM remains the sole allocator/GC authority, and live
+ * Java objects are never swapped solely because this utility reports pressure.
+ * Call at growth and bounded residency checkpoints, not on every add/get.
+ */
+public final class M3RuntimeHeap {
+    public enum Pressure { NORMAL, WARM, HIGH }
+
+    public record Snapshot(long maximumBytes, long committedBytes, long usedBytes) {
+        public Snapshot {
+            if (maximumBytes <= 0 || committedBytes < 0 || usedBytes < 0
+                    || usedBytes > committedBytes) {
+                throw new IllegalArgumentException("invalid heap snapshot");
+            }
+        }
+
+        public long freeToMaximum() {
+            return Math.max(0L, maximumBytes - usedBytes);
+        }
+
+        public long safetyReserve() {
+            // Reserve 1/32 of Xmx, bounded to 1..32 MiB when affordable.
+            return Math.min(maximumBytes / 32L, 32L << 20);
+        }
+
+        /** Pending bytes are peak *new* backing size while the old array remains live. */
+        public Pressure pressure(long pendingPeakBytes) {
+            if (pendingPeakBytes < 0) throw new IllegalArgumentException("negative peak");
+            if (maximumBytes == Long.MAX_VALUE) return Pressure.NORMAL; // JVM-reported unknown.
+            long projected = saturatingPlus(saturatingPlus(usedBytes, pendingPeakBytes),
+                    safetyReserve());
+            if (projected >= percent(maximumBytes, 85)) return Pressure.HIGH;
+            if (projected >= percent(maximumBytes, 70)) return Pressure.WARM;
+            return Pressure.NORMAL;
+        }
+    }
+
+    private M3RuntimeHeap() { }
+
+    public static Snapshot current() {
+        Runtime runtime = Runtime.getRuntime();
+        long committed = runtime.totalMemory();
+        long free = runtime.freeMemory();
+        return new Snapshot(runtime.maxMemory(), committed,
+                Math.max(0L, committed - Math.max(0L, free)));
+    }
+
+    /** Pure, deterministic growth policy. Never under-allocates the required capacity. */
+    public static long chooseCapacity(Snapshot heap, long required, long preferred,
+                                      int bytesPerElement) {
+        if (heap == null) throw new NullPointerException("heap");
+        if (required < 0 || preferred < required || bytesPerElement < 1) {
+            throw new IllegalArgumentException("invalid growth request");
+        }
+        if (heap.pressure(saturatingMultiply(preferred, bytesPerElement)) == Pressure.NORMAL) {
+            return preferred;
+        }
+        return required;
+    }
+
+    /** Called only when the backing array must grow. */
+    public static long chooseCapacity(long required, long preferred, int bytesPerElement) {
+        return chooseCapacity(current(), required, preferred, bytesPerElement);
+    }
+
+    /**
+     * Bounded amortization for append-heavy M3 collections under pressure.
+     *
+     * <p>Exact-size growth on every append makes copying a partially filled
+     * segment (or four facade metadata lanes) quadratic. At a real growth
+     * boundary we may retain at most one small 4 KiB quantum of slack, but
+     * only when the projected <em>full new allocation</em> plus reserve fits
+     * below Xmx. If no space is indicated, return the exact required length;
+     * this is advisory, not an allocation guarantee. Normal pressure retains
+     * the original geometric policy. A single wide element never triggers
+     * a gratuitous oversized allocation.</p>
+     */
+    public static long chooseAmortizedCapacity(Snapshot heap, long required,
+            long preferred, int bytesPerElement) {
+        long baseline = chooseCapacity(heap, required, preferred, bytesPerElement);
+        if (baseline != required || required == preferred
+                || heap.maximumBytes() == Long.MAX_VALUE) {
+            return baseline;
+        }
+        long quantum = 4096L / bytesPerElement;
+        if (quantum == 0L) return required;
+        long freeAfterReserve = Math.max(0L,
+                heap.freeToMaximum() - heap.safetyReserve());
+        long affordableElements = freeAfterReserve / bytesPerElement;
+        if (affordableElements <= required) return required;
+        long surplus = Math.min(quantum,
+                Math.min(preferred - required, affordableElements - required));
+        return required + surplus;
+    }
+
+    /** Sample JVM state only at backing growth, never for an ordinary append. */
+    public static long chooseAmortizedCapacity(long required, long preferred,
+            int bytesPerElement) {
+        return chooseAmortizedCapacity(current(), required, preferred, bytesPerElement);
+    }
+
+    private static long percent(long value, int p) {
+        return (value / 100L) * p + ((value % 100L) * p) / 100L;
+    }
+
+    private static long saturatingMultiply(long left, long right) {
+        if (left == 0L || right == 0L) return 0L;
+        return left > Long.MAX_VALUE / right ? Long.MAX_VALUE : left * right;
+    }
+
+    private static long saturatingPlus(long left, long right) {
+        return left > Long.MAX_VALUE - right ? Long.MAX_VALUE : left + right;
+    }
+}

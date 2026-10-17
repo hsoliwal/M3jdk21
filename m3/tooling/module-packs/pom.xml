@@ -43,6 +43,10 @@
   </plugins></build>
   <profiles>
     <profile>
+      <id>m3-collections</id>
+      <modules><module>../../collections</module><module>collections</module></modules>
+    </profile>
+    <profile>
       <id>m3-synexia-atom-pattern</id>
       <build>
         <plugins>
