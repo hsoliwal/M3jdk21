@@ -89,8 +89,7 @@ def main(argv: list[str] | None = None) -> int:
     payload = summary(read(args.receipt))
     if args.out is not None:
         args.out.parent.mkdir(parents=True, exist_ok=True)
-        args.out.write_text(json.dumps(payload, sort_keys=True, indent=2) + "
-", encoding="utf-8")
+        args.out.write_text(json.dumps(payload, sort_keys=True, indent=2) + "\n", encoding="utf-8")
     print(
         "PASS: Nebula proof-gated admission "
         f"disposition={payload['disposition']} root={payload['root']}"

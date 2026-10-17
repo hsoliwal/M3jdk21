@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 import tempfile
 import unittest
@@ -69,6 +70,10 @@ class NebulaProofAdmissionTest(unittest.TestCase):
             self.assertEqual(0, self.mod.main(["--out", str(out)]))
             self.assertEqual(first, out.read_text(encoding="utf-8"))
             self.assertIn('"disposition": "HOLD"', first)
+            self.assertEqual("HOLD", json.loads(first)["disposition"])
+            self.assertTrue(first.endswith("\n"), "physical JSON LF required")
+            self.assertFalse(first.endswith("\\n"), "no escaped literal LF terminator")
+            self.assertEqual(1, len(first) - len(first.rstrip("\n")))
 
 
 if __name__ == "__main__":
