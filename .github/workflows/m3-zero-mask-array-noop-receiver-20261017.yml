@@ -29,8 +29,8 @@ jobs:
         run: |
           set -euo pipefail
           printf '%s  %s\n' '968773eb7e044332b9c1a44040b49e3aa253e0f1464d8d9e38513e2ebcc8f6dd' 'm3/collections/src/main/java/com/m3/collections/M3LongArrayList.java' | sha256sum -c -
-          printf '%s  %s\n' 'c58ea41bc76dfadaacdcfc5bd84a612663496aec4d198b75c4e97fa974dcaeb1' 'm3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java' | sha256sum -c -
-          printf '%s  %s\n' '60ae0236fe44d1d78c6560fc4edd66963c1493a962ec200c535d8b08d0a13ab2' 'm3/collections/src/test/java/com/m3/collections/M3ZeroMaskArrayFastPathProof.java' | sha256sum -c -
+          printf '%s  %s\n' '6c21752b4a73bc110a5f6b7aebc808d216e5df157cd67f0542065627cc88cefc' 'm3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java' | sha256sum -c -
+          printf '%s  %s\n' 'edb173ca45a1d7b0194b95cdef00b1690307e43b8cb4bf0855d3b4e8377c1ffd' 'm3/collections/src/test/java/com/m3/collections/M3ZeroMaskArrayFastPathProof.java' | sha256sum -c -
           printf '%s  %s\n' '2235c5a6a917b4a1550bf98f3eb0b23bb96ad0f50bf295aee0253c85c92ed2b3' 'm3/collections/src/test/java/com/m3/collections/M3ZeroMaskArrayFastPathTest.java' | sha256sum -c -
           echo M3_ZERO_MASK_TARGET_SOURCE_SEAL_PASS
       - name: Compile actual full M3 module tests and compare public JVM descriptors
