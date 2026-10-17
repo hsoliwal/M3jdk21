@@ -1,0 +1,17 @@
+# path	before	after	template
+src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java	ABSENT	c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a	M3Boundary.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3CB.java	ABSENT	af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36	M3CB.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3CI.java	ABSENT	9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1	M3CI.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3Class.java	ABSENT	542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472	M3Class.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java	ABSENT	cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b	M3ClassFlags.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java	ABSENT	f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923	M3Constructor.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java	ABSENT	df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9	M3Descriptor.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3Field.java	ABSENT	a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481	M3Field.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3Member.java	ABSENT	c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1	M3Member.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java	ABSENT	f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be	M3MemberFlags.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java	ABSENT	0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b	M3MemberKind.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3Method.java	ABSENT	f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58	M3Method.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3PC.java	ABSENT	e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898	M3PC.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java	ABSENT	0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd	M3RecordComponent.java.txt
+src/test/java/com/m3/cb/CBProbe.java	ABSENT	c4ce29e9ec2295aadccd9fbac2141cf37b2a874edbd8054d44fbd9c8a72a159e	CBProbe.java.txt
+src/test/java/com/m3/cb/VmFixture.java	ABSENT	9815efc8ec24804c0ed35c7f5bdf2b10d98ebdb65b8298ef66074aa94d5f020c	VmFixture.java.txt

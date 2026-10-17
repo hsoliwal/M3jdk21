@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.OriginalMappingProvider20261017
+displayName: Qualify the original migration provider and reconcile its current mapping
+description: Reuse the existing strict text recipe to preserve current inputs and emit a reviewed provider plus exact canonical mapping successor.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-original-mapping-provider-20261017

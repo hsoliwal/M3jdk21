@@ -1,0 +1,17 @@
+{
+  "schema": "M3_ORIGINAL_MAPPING_PROVIDER_RECEIVER_BINDING_V1",
+  "repository": "hsoliwal/com.synexia",
+  "sourceCommit": "1119483289352f8d06b76bc88cf89b4781b864fa",
+  "sourcePullRequest": 12082,
+  "sourcePath": "synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
+  "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
+  "moduleGitTree": "94670bdb9d58f39f71e1df24386cb7f62887c664",
+  "pinsSha256": "25798408b07976edc062d6603f29533ea4fc25b12bc8086cf014288228ae04a8",
+  "workflowSha256": "8c9df6b1e0bd49225b2363da9219107fa46cba8e8ca77a01a6d47404df87c89d",
+  "workflowGitBlob": "c54377b9a29571c68c3bbc1d748b9024d2869f39",
+  "receiverBase": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "originalCanonicalPreimageGitBlob": "769874f3049070f07d3481c70ae9fa873807aecd",
+  "canonicalRecipePostimageGitBlob": "00c6890957e4a2998053f3979e01ad8e9e25fc16",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

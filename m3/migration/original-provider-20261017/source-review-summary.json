@@ -1,0 +1,28 @@
+{
+  "schema": "M3_ORIGINAL_PROVIDER_SOURCE_REVIEW_SUMMARY_V1",
+  "sourceCommit": "1119483289352f8d06b76bc88cf89b4781b864fa",
+  "assemblyAudit": {
+    "repository": "hsoliwal/com.synexia",
+    "gitBlob": "55465b31c28d2cde44c92b4b2dac400a8bcb6024",
+    "sdkFiles": 72,
+    "sdkBytes": 1869495,
+    "pinnedFiles": 71,
+    "reconstructedSdkTree": "94670bdb9d58f39f71e1df24386cb7f62887c664",
+    "sourceOnly": true
+  },
+  "sourceReviews": [
+    "81a82e636813c97cbf54cebabe2d65d7d4a130ff",
+    "bf7f674e453ec44fae18392c2b7f876cf4c3a622"
+  ],
+  "sourcePublication": {
+    "files": 83,
+    "allExactReadbacks": true
+  },
+  "currentRootReadPaths": 50,
+  "currentHashObligations": 80,
+  "receiverSparseInputs": 55,
+  "receiverBase": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "execution": "NOT_RUN",
+  "fullMigrationComplete": false,
+  "phaseAdvanced": false
+}
