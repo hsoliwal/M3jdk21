@@ -39,7 +39,9 @@ public final class M3ObjectProgressStandaloneProbe {
             ProgressMonitors.run(() -> check(ProgressMonitors.current() == root, "run"), root);
         }
         check(ProgressMonitors.current() == ProgressMonitor.NONE, "no scope leak");
+        ProgressMonitor zeroBudget = root.child("zero", 0L, 2L);
         root.cancelled = true;
+        check(zeroBudget.isCancelled(), "zero-work child still inherits cancellation");
         try {
             ProgressMonitors.run(() -> { throw new AssertionError("executed after cancellation"); }, root);
             throw new AssertionError("cancellation was ignored");
