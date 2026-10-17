@@ -19,6 +19,7 @@ import subprocess
 import sys
 import xml.etree.ElementTree as ET
 import zipfile
+from m3_long_mask_receipt import approved_successor, effective_hash
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -87,12 +88,14 @@ def main():
             if line and not line.startswith('#')]
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
+    successor = approved_successor()
     for path, expected in rows:
         relative = Path(path)
         if relative.is_absolute() or '..' in relative.parts or not path.startswith('m3/collections/'):
             raise SystemExit('Invalid receiver path: ' + path)
         source = REPO / relative
-        if not source.is_file() or digest(source) != expected:
+        accepted = effective_hash(path, expected, successor)
+        if not source.is_file() or digest(source) != accepted or (path in successor and source.is_symlink()):
             raise SystemExit('Installed source drift: ' + path)
     declared_java = {path for path, _ in rows if path.endswith('.java') and '/src/' in path}
     actual_java = {str(path.relative_to(REPO)) for path in (HERE / 'src').rglob('*.java')}
