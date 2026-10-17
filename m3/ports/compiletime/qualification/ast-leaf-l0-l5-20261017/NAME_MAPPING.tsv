@@ -1,0 +1,3 @@
+donor	receiver	intake_mode	phase	provenance
+com.synexia.mindex.ast.MIndexASTLeafIndex	com.m3.compiletime.M3ASTLeafIndex	INDEPENDENT_APACHE_MODULE	AST_PROVING_GROUND_ONLY	com.synexia#12073@ddc695cbea2702cda969ce813682a5fa052b8a83
+com.synexia.mindex.ast.MIndexAST	jdk.internal.mindex.M3AST	TARGET_OWNED_PORT	DEFERRED_RUNTIME_OWNER_ABSENT	m3/docs/name-mapping.json existing canonical planned identity
