@@ -68,6 +68,9 @@ public final class M3StateMaskArrays {
         requireAligned(rowSlots, stateBits);
         Objects.checkFromToIndex(from, to, rowSlots.length);
         checkMasks(requiredBits, forbiddenBits);
+        // With no required or forbidden state bits, all aligned pairs survive.
+        // Return the existing exclusive end without touching any array cell.
+        if (requiredBits == 0 && forbiddenBits == 0) return to;
         int write = from;
         for (int read = from; read < to; read++) {
             int state = stateBits[read] & 0xff;
