@@ -1,0 +1,46 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --< com.synexia.verification:m3-program-escape-precompute-recipe-proof >--
+[INFO] Building m3-program-escape-precompute-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-program-escape-precompute-recipe-proof ---
+[INFO] Copying 11 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-program-escape-precompute-recipe-proof ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-program-escape-precompute-recipe-proof ---
+[INFO] skip non existing resourceDirectory /tmp/m3-program-private/synexia-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-program-escape-precompute-recipe-proof ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-program-escape-precompute-recipe-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+[INFO] Running com.synexia.rewrite.M3TaskRecipeTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 27.54 s -- in com.synexia.rewrite.M3TaskRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ m3-program-escape-precompute-recipe-proof ---
+[INFO] Building jar: /tmp/m3-program-private/synexia-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/target/m3-program-escape-precompute-recipe-proof-1.jar
+[INFO] 
+[INFO] --- exec:3.5.0:exec (verify-program-escape-sdk-contract) @ m3-program-escape-precompute-recipe-proof ---
+M3_PROGRAM_ESCAPE_SDK_CONTRACT_PASS targets=5 sdk_tests=5 baseline_tests=18 candidate_tests=30
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:00 min
+[INFO] Finished at: 2026-10-17T12:13:31Z
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,2 @@
+Exception in thread "main" java.lang.AssertionError: SWAP_REFERENCE_ESCAPE_LOST expected=1 actual=0
+	at com.m3.compiletime.SwapFailureProbe.main(SwapFailureProbe.java:38)
