@@ -1,0 +1,90 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 long range map arrays and native mask parity
+on:
+  pull_request:
+    paths:
+      - "m3/collections/src/main/java/com/m3/collections/M3LongRangeMap.java"
+      - "m3/collections/src/test/java/com/m3/collections/M3LongRangeMap*.java"
+      - "m3/collections/qualification/long-range-map-20261017/**"
+      - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-long-range-map-20261017/**"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-long-range-map-20261017.yml"
+      - ".github/workflows/m3-long-range-map-java-jni-20261017.yml"
+  push:
+    branches: [m3/long-range-map-array-receiver-20261017]
+permissions:
+  contents: read
+jobs:
+  actual-sdk-core-and-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Fail closed on source recipe or original JNI owner drift
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 -S m3/collections/qualification/long-range-map-20261017/verify.py
+          python3 -S m3/collections/qualification/long-range-set-20261017/verify.py
+      - name: Actual Maven/OpenRewrite AST source generation and refusal tests
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/collections/qualification/long-range-map-20261017/recipe/pom.xml test
+          mvn -B -ntp -f m3/collections/qualification/long-range-set-20261017/recipe/pom.xml test
+      - name: Compile all incumbent M3 collection owners and new contracts with Java21
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof/classes proof/native
+          find m3/collections/src/main/java -name '*.java' -print0 | sort -z |
+            xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/classes
+          javac --release 21 -proc:none -Xlint:all -Werror -cp proof/classes -d proof/classes \
+            m3/collections/src/test/java/com/m3/collections/M3LongRangeSetSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRangeMapSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java
+          java -Xmx128m -cp proof/classes com.m3.collections.M3LongRangeMapSelfTest | tee proof/long-range-map-java.log
+          grep -q 'checks=1689303 seeded_operations=49152' proof/long-range-map-java.log
+          java -Xint -Xmx128m -cp proof/classes com.m3.collections.M3LongRangeMapSelfTest
+          java -Xmx128m -cp proof/classes com.m3.collections.M3LongRangeSetSelfTest
+          mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongRangeSetTest,M3LongRangeMapTest test
+      - name: Actual original C17 JNI native selector and two range-family tests
+        shell: bash
+        run: |
+          set -euxo pipefail
+          javac --release 21 -proc:none -h proof/native -cp proof/classes -d proof/classes \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+          gcc -std=c17 -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o proof/native/libm3_collections_pathmask.so
+          nm -D proof/native/libm3_collections_pathmask.so | grep Java_com_m3_collections_M3IndexPathMasks_selectNative
+          UBSAN_OPTIONS=halt_on_error=1 java -Xcheck:jni -Xmx128m \
+            -Djava.library.path="$PWD/proof/native" -cp proof/classes \
+            com.m3.collections.M3IndexPathMasksSelfTest --native | tee proof/index-path-native.log
+          grep -q 'JNI=true' proof/index-path-native.log
+          UBSAN_OPTIONS=halt_on_error=1 java -Xcheck:jni -Xmx128m \
+            -Djava.library.path="$PWD/proof/native" -cp proof/classes \
+            com.m3.collections.M3LongRangeMapSelfTest | tee proof/long-range-map-native.log
+          grep -q 'PASS M3_LONG_RANGE_MAP' proof/long-range-map-native.log
+          UBSAN_OPTIONS=halt_on_error=1 java -Xcheck:jni -Xmx128m \
+            -Djava.library.path="$PWD/proof/native" -cp proof/classes \
+            com.m3.collections.M3LongRangeSetSelfTest
+          python3 -S m3/collections/qualification/long-range-map-20261017/verify.py
+          git diff --exit-code
+      - name: Preserve exact-head receipts and native logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-range-map-receiver-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 30
+          path: |
+            proof/
+            m3/collections/qualification/long-range-map-20261017/recipe/target/surefire-reports/
+            m3/collections/target/surefire-reports/

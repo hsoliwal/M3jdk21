@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Jdk21LongRangeMap20261017
+displayName: Source-sealed sorted primitive long RangeMap over parallel arrays with Java/C17 mask selection
+description: Three ABSENT-before Java21 sources; no vendor API type impersonation, native ABI or existing public interface change.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-long-range-map-20261017

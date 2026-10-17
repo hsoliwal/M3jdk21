@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0
+field	value
+schema	M3_LONG_RANGE_MAP_RECEIVER_V1
+source_repository	hsoliwal/com.synexia
+source_pull_request	12180
+source_commit	d491ec56d4dab78236302e29163cbc94a942aa72
+source_recipe	com.synexia.m3.Jdk21LongRangeMap20261017
+product_repository	hsoliwal/M3jdk21
+base_stack_pr	1184
+base_stack_commit	92c8fe6456aeea45d150fc94f82152865e10f0cd
+core_owner	M3LongRangeMap
+existing_range_set	M3LongRangeSet from #1184
+existing_jni_owner	M3IndexPathMasks + libm3_collections_pathmask
+new_native_symbols	0
+local_maven_rewrite_tests	4 PASS
+local_generated_java_checks	1689303 x 2 JVM modes
+local_randomized_operations	49152 per JVM mode
+local_jni	NOT_EXECUTED_test_only_selector
+installed_image	NOT_EXECUTED
+phase	WAITING_FOR_STRING
+qualification	LOCAL_RECIPE_AND_STUB_JAVA_ONLY
