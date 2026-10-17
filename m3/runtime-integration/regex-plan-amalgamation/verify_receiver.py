@@ -17,6 +17,10 @@ for name, expected in FILES.items():
     file = ROOT / name
     if not file.is_file() or sha256(file.read_bytes()).hexdigest() != expected:
         sys.exit(f"M3_REGEX_AMALGAMATION_RECEIVER_FAIL source={name}")
+prior = Path(__file__).with_name("M3StringRegexDpBefore.java.txt")
+if not prior.is_file() or sha256(prior.read_bytes()).hexdigest() != (
+        "f875210dfb605799b6c8dbee53b28ad6383e000d90da775f7fd285464da7b2d3"):
+    sys.exit("M3_REGEX_AMALGAMATION_RECEIVER_FAIL before-snapshot")
 source = (ROOT / "src/java.base/share/classes/java/lang/M3StringRegexDp.java").read_text()
 for atom in (
     "if (rejectsByPrecompute(source, plan)) return NO_MATCH;",
