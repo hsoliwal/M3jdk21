@@ -55,6 +55,11 @@ public final class M3DonationPointerRecipe {
         return content.split(java.util.regex.Pattern.quote(exactLine), -1).length - 1;
     }
 
+    /** Count only two-space-indented root keys; nested four-space history is distinct. */
+    private static long rootCount(String content) {
+        return content.lines().filter(line -> line.startsWith(ROOT_MANIFEST_KEY)).count();
+    }
+
     public static String emit(String current, String successorSha256, String pinnedOriginal) {
         Objects.requireNonNull(current, "donation json");
         Objects.requireNonNull(pinnedOriginal, "reviewed original json");
@@ -64,7 +69,7 @@ public final class M3DonationPointerRecipe {
         String afterHash = newHashLine(successorSha256);
         if (count(pinnedOriginal, OLD_PATH) != 1 || count(pinnedOriginal, OLD_SHA) != 1
                 || count(pinnedOriginal, HISTORICAL_DUPLICATE) != 1
-                || count(pinnedOriginal, ROOT_MANIFEST_KEY) != 2
+                || rootCount(pinnedOriginal) != 2
                 || count(pinnedOriginal, HISTORICAL_DISTINCT) != 0) {
             throw new IllegalStateException("unexpected historical root manifest inventory");
         }
@@ -77,7 +82,7 @@ public final class M3DonationPointerRecipe {
                 || count(postimage, OLD_PATH) != 0
                 || count(postimage, HISTORICAL_DUPLICATE) != 0
                 || count(postimage, HISTORICAL_DISTINCT) != 1
-                || count(postimage, ROOT_MANIFEST_KEY) != 1) {
+                || rootCount(postimage) != 1) {
             throw new IllegalStateException("successor root manifest is not unique");
         }
         if (!current.equals(pinnedOriginal) && !current.equals(priorCandidate)
