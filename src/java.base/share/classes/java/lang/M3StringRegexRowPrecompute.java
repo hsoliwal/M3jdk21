@@ -27,6 +27,8 @@ final class M3StringRegexRowPrecompute {
     private final M3String[] values;
     private final int words;
     private final long[] postings;
+    private volatile M3StringAffixPrecompute affixes;
+    private int affixQueries;
 
     private M3StringRegexRowPrecompute(M3String[] inputs) {
         values = Objects.requireNonNull(inputs, "inputs").clone();
@@ -74,6 +76,25 @@ final class M3StringRegexRowPrecompute {
 
     M3String valueAt(int row) { return values[Objects.checkIndex(row, values.length)]; }
 
+    /** Admit lexical/reverse-lexical rank planes after repeated eligible queries. */
+    private M3StringAffixPrecompute reusedAffixes(Shape shape, String literal) {
+        if (values.length < 64 || literal.length() < 2
+                || shape != Shape.EXACT_LITERAL && shape != Shape.PREFIX_LITERAL
+                        && shape != Shape.SUFFIX_LITERAL) return null;
+        M3StringAffixPrecompute available = affixes;
+        if (available != null) return available;
+        synchronized (this) {
+            // Build on fourth eligible use. A memory-pressure refusal retries only
+            // every 128 further eligible uses rather than re-triggering on every call.
+            if (affixQueries != Integer.MAX_VALUE) affixQueries++;
+            if (affixes == null && (affixQueries == 4 || (affixQueries >= 128
+                    && (affixQueries & 127) == 0))) {
+                affixes = M3StringAffixPrecompute.tryPrepare(values);
+            }
+            return affixes;
+        }
+    }
+
     Prepared prepare(String regex, int flags) {
         Pattern pattern = Pattern.compile(Objects.requireNonNull(regex, "regex"), flags);
         Shape shape = Shape.GENERIC;
@@ -112,7 +133,7 @@ final class M3StringRegexRowPrecompute {
                 mask = null;
             }
         }
-        return new Prepared(pattern, shape, literal, mask);
+        return new Prepared(pattern, shape, literal, mask, reusedAffixes(shape, literal));
     }
 
     private static boolean plainAscii(String value) {
@@ -136,19 +157,46 @@ final class M3StringRegexRowPrecompute {
         private final Shape shape;
         private final String literal;
         private final long[] mask;
+        private final M3StringAffixPrecompute affix;
 
-        private Prepared(Pattern pattern, Shape shape, String literal, long[] mask) {
+        private Prepared(Pattern pattern, Shape shape, String literal, long[] mask,
+                M3StringAffixPrecompute affix) {
             this.pattern = pattern;
             this.shape = shape;
             this.literal = literal;
             this.mask = mask;
+            this.affix = affix;
         }
 
         Shape shape() { return shape; }
         long candidateMaskBytes() { return mask == null ? 0L : (long) mask.length * Long.BYTES; }
 
+        private int[] indexedCandidates() {
+            if (affix == null) return null;
+            boolean suffix = shape == Shape.SUFFIX_LITERAL;
+            M3StringAffixPrecompute.Range range = suffix
+                    ? affix.suffixRange(literal) : affix.prefixRange(literal);
+            // Dense intervals retain the existing posting/linear route. Avoid sorting
+            // most of the corpus merely to restore original encounter order.
+            if ((long) range.size() * 2L > values.length) return null;
+            int[] rows = affix.rowsInSourceOrder(range, suffix);
+            // Retain the existing mandatory-character posting evidence even on
+            // the affix route, so exact indexed candidates can only get smaller.
+            int count = 0;
+            for (int row : rows) {
+                if (mask != null && (mask[row >>> 6] & (1L << (row & 63))) == 0L) continue;
+                if (shape == Shape.EXACT_LITERAL && values[row].length() != literal.length()) {
+                    continue;
+                }
+                rows[count++] = row;
+            }
+            return count == rows.length ? rows : Arrays.copyOf(rows, count);
+        }
+
         /** Return an ordered list of original row coordinates, never M3String wrappers. */
         int[] candidateRows() {
+            int[] indexed = indexedCandidates();
+            if (indexed != null) return indexed;
             int[] selected = new int[Math.min(values.length, 64)];
             int size = 0;
             for (int word = 0; word < words; word++) {
