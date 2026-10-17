@@ -99,7 +99,14 @@ public final class M3ASTLeafIndex {
         TreeSet<String> seen = new TreeSet<>();
         int atoms = 0;
         for (FileFacts f : sorted) {
-            if (!seen.add(f.path)) throw new IllegalArgumentException("duplicate file path: " + f.path);
+            // Relative paths repeat legitimately across modules and projects. Source
+            // ownership is the framed (project, module, path) tuple; package is
+            // metadata within that source and cannot disambiguate a duplicate.
+            String ownerKey = frame(f.project) + frame(f.module) + frame(f.path);
+            if (!seen.add(ownerKey)) {
+                throw new IllegalArgumentException(
+                        "duplicate source in project/module: " + f.path);
+            }
             atoms = Math.addExact(atoms, f.atomIds.length);
         }
         int[] ids = new int[atoms];
