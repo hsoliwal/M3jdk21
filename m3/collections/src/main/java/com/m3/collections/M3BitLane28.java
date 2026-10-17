@@ -3,12 +3,19 @@ package com.m3.collections;
 
 /**
  * Lazy occupancy/flag lane. Each touched 4,096-slot logical block owns exactly 64 long words.
+ *
+ * <p>Exclusive rank, range cardinality and select reuse two primitive Fenwick levels:
+ * region counts and lazily allocated per-region block counts. Bitmap words and Java/JNI
+ * cardinality ABI remain unchanged. The lane is single-threaded; changes update both
+ * index levels only when a bit actually changes. Extra index bytes are reported separately.
  */
 public final class M3BitLane28 {
     /** Creates an empty instance with no populated storage. */
     public M3BitLane28() {}
 
     private final long[][][] regions = new long[M3Address28.REGION_COUNT][][];
+    private int[] regionFenwick;
+    private final int[][] blockFenwick = new int[M3Address28.REGION_COUNT][];
     private int allocatedRegions;
     private int allocatedBlocks;
     private int cardinality;
@@ -52,6 +59,7 @@ public final class M3BitLane28 {
             }
             words[wordIndex] &= ~mask;
             cardinality--;
+            adjustIndex(slot, -1);
             return;
         }
 
@@ -59,6 +67,7 @@ public final class M3BitLane28 {
         if ((words[wordIndex] & mask) == 0L) {
             words[wordIndex] |= mask;
             cardinality++;
+            adjustIndex(slot, 1);
         }
     }
 
@@ -86,6 +95,12 @@ public final class M3BitLane28 {
         return (long) allocatedBlocks
                 * M3Address28.OCCUPANCY_WORDS_PER_BLOCK
                 * Long.BYTES;
+    }
+
+    /** Index-array payload only; excludes Java array headers and historical occupancy bytes. */
+    public long indexPayloadBytes() {
+        return regionFenwick == null ? 0L :
+                ((long) allocatedRegions + 1L) * (M3Address28.REGION_COUNT + 1) * Integer.BYTES;
     }
 
     /** Returns the first set slot at or after from, or -1; MAX_SLOTS is a valid end. */
@@ -135,48 +150,61 @@ public final class M3BitLane28 {
         return -1;
     }
 
-    /** Counts set bits in [from, to), skipping absent regions and pages. */
+
+    /** Counts set bits in [from, to) using indexed exclusive-rank arithmetic. */
     public int cardinality(int from, int to) {
         M3Address28.checkRange(from, to);
-        if (from == 0 && to == M3Address28.MAX_SLOTS) return cardinality;
-        int count = 0;
-        while (from < to) {
-            long[][] region = regions[from >>> 20];
-            if (region == null) { from = Math.min(to, ((from >>> 20) + 1) << 20); continue; }
-            long[] page = region[(from >>> 12) & 255];
-            int end = Math.min(to, ((from >>> 12) + 1) << 12);
-            if (page != null) {
-                while (from < end) {
-                    int wordEnd = Math.min(end, (from | 63) + 1);
-                    long mask = (-1L << (from & 63)) & (-1L >>> (63 - ((wordEnd - 1) & 63)));
-                    count += Long.bitCount(page[(from & 4095) >>> 6] & mask);
-                    from = wordEnd;
-                }
-            } else from = end;
-        }
-        return count;
+        return rankUnchecked(to) - rankUnchecked(from);
     }
 
     /** Exclusive rank: number of set slots below end. */
-    public int rank(int end) { return cardinality(0, end); }
+    public int rank(int end) {
+        M3Address28.checkRange(0, end);
+        return rankUnchecked(end);
+    }
 
-    /** Returns the slot of the zero-based ordinal set bit, or -1 if ordinal is out of range. */
+    private int rankUnchecked(int end) {
+        if (regionFenwick == null) return 0;
+        int regionIndex = end >>> 20;
+        int result = prefix(regionFenwick, regionIndex);
+        if (regionIndex == M3Address28.REGION_COUNT) return result;
+        int blockIndex = (end >>> 12) & M3Address28.BLOCK_MASK;
+        int[] blockCounts = blockFenwick[regionIndex];
+        if (blockCounts != null) result += prefix(blockCounts, blockIndex);
+        int offset = end & M3Address28.OFFSET_MASK;
+        if (offset == 0) return result;
+        long[][] region = regions[regionIndex];
+        if (region == null) return result;
+        long[] words = region[blockIndex];
+        if (words == null) return result;
+        int wordEnd = offset >>> 6;
+        for (int i = 0; i < wordEnd; i++) result += Long.bitCount(words[i]);
+        int residue = offset & 63;
+        if (residue != 0) {
+            result += Long.bitCount(words[wordEnd] & ((1L << residue) - 1L));
+        }
+        return result;
+    }
+
+    /** Returns zero-based ordinal set slot, or -1 for an invalid ordinal. */
     public int select(int ordinal) {
         if (ordinal < 0 || ordinal >= cardinality) return -1;
-        for (int r = 0; r < regions.length; r++) {
-            long[][] region = regions[r];
-            if (region == null) continue;
-            for (int b = 0; b < region.length; b++) {
-                long[] page = region[b];
-                if (page == null) continue;
-                for (int w = 0; w < page.length; w++) {
-                    long word = page[w];
-                    int count = Long.bitCount(word);
-                    if (ordinal >= count) { ordinal -= count; continue; }
-                    while (ordinal-- > 0) word &= word - 1;
-                    return (r << 20) | (b << 12) | (w << 6) | Long.numberOfTrailingZeros(word);
-                }
+        int regionIndex = seek(regionFenwick, ordinal);
+        int insideRegion = ordinal - prefix(regionFenwick, regionIndex);
+        int[] blocks = blockFenwick[regionIndex];
+        int blockIndex = seek(blocks, insideRegion);
+        int insideBlock = insideRegion - prefix(blocks, blockIndex);
+        long[] page = regions[regionIndex][blockIndex];
+        for (int wordIndex = 0; wordIndex < page.length; wordIndex++) {
+            long word = page[wordIndex];
+            int matches = Long.bitCount(word);
+            if (insideBlock >= matches) {
+                insideBlock -= matches;
+                continue;
             }
+            while (insideBlock-- > 0) word &= word - 1;
+            return (regionIndex << 20) | (blockIndex << 12) | (wordIndex << 6)
+                    | Long.numberOfTrailingZeros(word);
         }
         throw new IllegalStateException("concurrent mutation of a single-threaded lane");
     }
@@ -193,12 +221,56 @@ public final class M3BitLane28 {
 
     private static native int cardinality0(long[][][] regions, int from, int to);
 
+
+    /** Fenwick metadata updates are allocation-free after ensureBlock has published both owners. */
+    private void adjustIndex(int slot, int delta) {
+        int regionIndex = slot >>> 20;
+        int blockIndex = (slot >>> 12) & M3Address28.BLOCK_MASK;
+        int[] blocks = blockFenwick[regionIndex];
+        if (blocks == null) {
+            throw new IllegalStateException("missing rank index for occupied slot");
+        }
+        increment(regionFenwick, regionIndex, delta);
+        increment(blocks, blockIndex, delta);
+    }
+
+    private static void increment(int[] tree, int index, int delta) {
+        for (int i = index + 1; i < tree.length; i += i & -i) tree[i] += delta;
+    }
+
+    private static int prefix(int[] tree, int exclusiveIndex) {
+        int result = 0;
+        for (int i = exclusiveIndex; i > 0; i -= i & -i) result += tree[i];
+        return result;
+    }
+
+    /** Fenwick select: find the bin containing a zero-based ordinal. */
+    private static int seek(int[] tree, int ordinal) {
+        int index = 0;
+        for (int step = Integer.highestOneBit(tree.length - 1); step != 0; step >>>= 1) {
+            int next = index + step;
+            if (next < tree.length && tree[next] <= ordinal) {
+                ordinal -= tree[next];
+                index = next;
+            }
+        }
+        return index;
+    }
+
     private long[] ensureBlock(int slot) {
         int regionIndex = M3Address28.region(slot);
         long[][] region = regions[regionIndex];
         if (region == null) {
-            region = new long[M3Address28.BLOCKS_PER_REGION][];
-            regions[regionIndex] = region;
+            // Allocate rank metadata before publishing this new region. An OOME cannot
+            // leave a newly set bit without its associated index storage.
+            long[][] newRegion = new long[M3Address28.BLOCKS_PER_REGION][];
+            int[] newIndex = new int[M3Address28.BLOCKS_PER_REGION + 1];
+            int[] newRegionsIndex = regionFenwick == null
+                    ? new int[M3Address28.REGION_COUNT + 1] : regionFenwick;
+            regions[regionIndex] = newRegion;
+            blockFenwick[regionIndex] = newIndex;
+            regionFenwick = newRegionsIndex;
+            region = newRegion;
             allocatedRegions++;
         }
         int blockIndex = M3Address28.block(slot);
