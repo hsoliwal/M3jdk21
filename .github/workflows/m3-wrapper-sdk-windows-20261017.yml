@@ -15,12 +15,17 @@ jobs:
       run:
         shell: bash
     steps:
-      - name: Preserve canonical source bytes on this ephemeral runner
-        run: git config --global core.autocrlf false
+      - name: Preserve canonical bytes and support long paths on this ephemeral runner
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.longpaths true
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
+          sparse-checkout: |
+            m3/collections
+          sparse-checkout-cone-mode: true
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
