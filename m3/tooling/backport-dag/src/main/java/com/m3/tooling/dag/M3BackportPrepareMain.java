@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.tooling.dag;
 
+import com.m3.a3.A3Mastery;
+import com.synexia.rewrite.M3RecipeMasteryPortableReceipt;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * CLI boundary for the existing A3 backport-preparation gate.
@@ -30,13 +33,26 @@ public final class M3BackportPrepareMain {
     }
 
     static ReceiptSummary run(String[] args) throws Exception {
-        if (args.length != 3) {
+        if (args.length != 5) {
             throw new IllegalArgumentException(
-                    "usage: M3BackportPrepareMain <repository-root> <output-root> <paths-file>");
+                    "usage: M3BackportPrepareMain <repository-root> <output-root> <paths-file>"
+                            + " <mastery-receipt> <mastery-root-sha256>");
         }
         Path root = Path.of(args[0]).toAbsolutePath().normalize();
-        Path output = Path.of(args[1]).toAbsolutePath().normalize();
-        Path pathsFile = Path.of(args[2]).toAbsolutePath().normalize();
+        // The same Synexia canonical verifier and path guards used by the A3 CLI.
+        // Never synthesize a Verified record from command-line options.
+        M3RecipeMasteryPortableReceipt.Verified mastery =
+                A3Mastery.verify(root, Path.of(args[3]), args[4]);
+        return run(root, Path.of(args[1]), Path.of(args[2]), mastery);
+    }
+
+    static ReceiptSummary run(
+            Path root, Path output, Path pathsFile,
+            M3RecipeMasteryPortableReceipt.Verified mastery) throws Exception {
+        Objects.requireNonNull(mastery, "mastery");
+        root = Objects.requireNonNull(root, "root").toAbsolutePath().normalize();
+        output = Objects.requireNonNull(output, "output").toAbsolutePath().normalize();
+        pathsFile = Objects.requireNonNull(pathsFile, "pathsFile").toAbsolutePath().normalize();
         if (!Files.isDirectory(root)) {
             throw new IllegalArgumentException("repository root not found: " + root);
         }
@@ -54,7 +70,7 @@ public final class M3BackportPrepareMain {
         }
 
         M3A3BackportPreparation.Receipt receipt =
-                M3A3BackportPreparation.prepare(root, output, targets);
+                M3A3BackportPreparation.prepare(root, output, targets, mastery);
         long changedJava =
                 receipt.rows().stream()
                         .filter(

@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+import com.synexia.rewrite.M3RecipeMasteryPortableReceipt;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -36,7 +38,7 @@ final class M3A3BackportPreparationTest {
         Files.writeString(nativeSource, "int m3_native_fixture() { return 7; }\n");
 
         var receipt =
-                M3A3BackportPreparation.prepare(
+                prepare(
                         root,
                         root.resolve("m3/build/backport-preparation"),
                         List.of(
@@ -87,7 +89,7 @@ final class M3A3BackportPreparationTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3A3BackportPreparation.prepare(
+                        prepare(
                                 root,
                                 root.resolve("m3/build/out"),
                                 List.of()));
@@ -95,7 +97,7 @@ final class M3A3BackportPreparationTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3A3BackportPreparation.prepare(
+                        prepare(
                                 root,
                                 root.resolve("m3/build/out"),
                                 List.of("../escape.java")));
@@ -103,10 +105,41 @@ final class M3A3BackportPreparationTest {
         assertThrows(
                 java.io.IOException.class,
                 () ->
-                        M3A3BackportPreparation.prepare(
+                        prepare(
                                 root,
                                 root.resolve("m3/build/out"),
                                 List.of("src/java.base/share/classes/example/Missing.java")));
+    }
+
+    @Test
+    @SuppressWarnings("removal") // This test intentionally calls the deprecated fail-closed entry.
+    void missingMasteryFailsClosedEvenForOtherwiseValidSource() throws Exception {
+        Path root = Files.createTempDirectory("m3-a3-mastery-required-");
+        Path source = root.resolve("src/java.base/share/classes/example/Sample.java");
+        Files.createDirectories(source.getParent());
+        Files.writeString(source, "final class Sample {}\\n");
+        Path out = root.resolve("m3/build/backport-preparation");
+        assertThrows(IllegalStateException.class,
+                () -> M3A3BackportPreparation.prepare(
+                        root, out, List.of("src/java.base/share/classes/example/Sample.java")));
+        assertThrows(NullPointerException.class,
+                () -> M3A3BackportPreparation.prepare(
+                        root, out, List.of("src/java.base/share/classes/example/Sample.java"), null));
+        assertFalse(Files.exists(out));
+    }
+
+    private static M3A3BackportPreparation.Receipt prepare(
+            Path root, Path out, List<String> paths) throws IOException {
+        return M3A3BackportPreparation.prepare(root, out, paths, fixtureMastery());
+    }
+
+    // The synthetic verified receipt is used only in the existing FILE-level
+    // unit test, as in A3ApplyTest. Production callers must verify actual
+    // signed/source-pinned mastery through A3Mastery.verify before invocation.
+    private static M3RecipeMasteryPortableReceipt.Verified fixtureMastery() {
+        return new M3RecipeMasteryPortableReceipt.Verified(
+                "1".repeat(64), "2".repeat(64), "3".repeat(64),
+                "EXHAUSTIVE", 3, 1, 1, 10_000, false, 0);
     }
 
     @Test
