@@ -1,0 +1,11 @@
+{
+ "status":"SOURCE_PREPARATION_ONLY",
+ "recipe":"com.synexia.m3.SdkSuperset20261017",
+ "path":".github/workflows/m3-sdk-superset-inputs.yml",
+ "before":"3f8be42ea94e816118d905ba7cd4ed50f827774d34704a8aeeaec7d0784ee639",
+ "after":"708d495c3576c112096e21882920cb2fa4f452bb4864f1ca3df31f529c60923e",
+ "gate":"Actual offline Maven/OpenRewrite: 5 Jupiter methods, zero failure/error/skipped; 256 bounded partial images; zero-change fixed point",
+ "finished_at":"2026-10-17T12:52:48Z",
+ "reason":"Original x64 input-capture job remains queued. The existing successful SDK provider capture used ARM; request the architecture-independent JAR input on that runner family. No cancellation or workflow gate weakening.",
+ "production_changes":0
+}
