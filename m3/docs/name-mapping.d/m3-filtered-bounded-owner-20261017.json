@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "source_repo": "hsoliwal/com.synexia",
+  "source_recipe_commit": "a9670e22d6b19a3fcf62441f3bc9922738539646",
+  "source_recipe_name": "com.synexia.m3.Jdk21FilteredBoundedOwner20261017",
+  "target_baseline": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "target_owner_map": [
+    {
+      "original": "java.util.NavigableSet lower/floor/ceiling/higher",
+      "target": "com.m3.collections.M3FilteredViews.NavigableSetView",
+      "disposition": "READ_ONLY_BEHAVIORAL_ATOM_REFINEMENT"
+    },
+    {
+      "original": "java.util.NavigableMap lower/floor/ceiling/higher",
+      "target": "com.m3.collections.M3FilteredViews.NavigableMapView",
+      "disposition": "READ_ONLY_BEHAVIORAL_ATOM_REFINEMENT"
+    },
+    {
+      "original": "java.util.NavigableSet lower/floor/ceiling/higher",
+      "target": "com.m3.collections.M3MutableFilteredViews.SetView",
+      "disposition": "MUTABLE_BEHAVIORAL_ATOM_REFINEMENT"
+    }
+  ],
+  "unchanged": [
+    "JDK public java.util API",
+    "M3 parent-owned array/index/offset/mask storage",
+    "read-only and mutable admission contracts",
+    "JNI M3IndexPathMasks symbols",
+    "external provider packages and licenses"
+  ],
+  "source_before_sha256": {
+    "M3FilteredViews.java": "d67a632f63647f033e71360858f8f1be1f93418880178a96437bb0605998ad5b",
+    "M3MutableFilteredViews.java": "bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65"
+  },
+  "source_after_sha256": {
+    "M3FilteredViews.java": "e378595bc38cbd5ca9031bd68b749c23b18092c22a1d5ae8b63c3725bcc883dc",
+    "M3MutableFilteredViews.java": "124c2bb89b362fe42486f83ced2420d23a90d15b6a25dc6721210c54385b2db2",
+    "M3BoundedFilteredNavigationContract.java": "f37ead5e6647b1f0ec7cf0d0723c2662508d1991bf0c967b298f2be737fd7c8d",
+    "M3BoundedFilteredNavigationTest.java": "96233e8fbdd4679d4e6a4e028581d84b3cdbf0bcf187c3beb5db4ed7645f3a8b"
+  },
+  "verification_status": "DRAFT_QUEUED_CI_NOT_PROVEN"
+}
