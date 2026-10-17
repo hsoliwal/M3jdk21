@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.compiletime;
 
@@ -43,7 +44,7 @@ import org.objectweb.asm.tree.analysis.SourceValue;
  * Build-time reference metadata for M3 item residency (m3/docs/m3-item-residency-metadata.md).
  * For every call site that obtains a transient item handle (an {@code INVOKE*} returning a
  * transient type or an array of it, or {@code NEW} of one) it records whether the reference
- * escapes, using forward def-use over ASM {@link SourceInterpreter} frames. Reuses PR #814's
+ * escapes, using prepared def-use masks over ASM {@link SourceInterpreter} frames. Reuses PR #814's
  * corpus walk order ({@code jrt:/} then sorted jars, sorted entries, module-info and versioned
  * entries skipped), its argument and log helpers and its 4,000,000-cell frame budget.
  *
@@ -272,9 +273,13 @@ public final class M3ItemReferenceScan {
             offsetMismatches++;
             bci = null;
         }
+        // A single site uses the corrected forward atom; preparation amortizes repeated sites.
+        // Share fixed frames and exact callee policy; budget refusal keeps the same classifier.
+        int[] prepared = frames == null || sites.size() == 1 ? null : M3EscapeFlow.prepare(this, m, frames);
         for (AbstractInsnNode site : sites) {
-            int mask = frames == null ? ANALYSIS_FAILED : M3EscapeFlow.escape(this, m, frames, site);
             int index = m.instructions.indexOf(site);
+            int mask = frames == null ? ANALYSIS_FAILED : prepared == null
+                    ? M3EscapeFlow.escape(this, m, frames, site) : prepared[index];
             int offset = bci == null ? -1 - ordinal[index] : bci[ordinal[index]];
             record(corpus, unit, cn, m, site, offset, mask);
         }

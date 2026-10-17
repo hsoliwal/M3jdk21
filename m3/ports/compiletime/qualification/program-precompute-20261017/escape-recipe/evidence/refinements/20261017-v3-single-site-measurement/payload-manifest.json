@@ -1,0 +1,37 @@
+{
+  "schema": "M3_PROGRAM_ESCAPE_PAYLOAD_V1",
+  "target_revision": "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e",
+  "source_recipe_revision": "81c4f19a5ce5a68da316ff6f2802f2041a684f31",
+  "targets": [
+    {
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3EscapeFlow.java",
+      "before_sha256": "7d07697c8211dae24fba49eb8f5011064abc80a850f254d76fb9c56644329894",
+      "after_sha256": "180488506ddfd0709530a7f164217d684389b4d5e77ce56b204bb0df4ad153de",
+      "resource": "m3__ports__compiletime__src__main__java__com__m3__compiletime__M3EscapeFlow.java.txt"
+    },
+    {
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralHarvester.java",
+      "before_sha256": "e4d1a2bced4ca3f33c743aa4be386ae546f5266f68473fd6e0f3fbba68f335f4",
+      "after_sha256": "31dd73ae6b8621eb326af013560fb1fca09650248fa67dba7daf526f7c385dd6",
+      "resource": "m3__ports__compiletime__src__main__java__com__m3__compiletime__M3GvasLiteralHarvester.java.txt"
+    },
+    {
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ItemReferenceScan.java",
+      "before_sha256": "d17344ac9c3488860e1487fe0072427c4a5688fc8a68393f8b782d92bd49a4ae",
+      "after_sha256": "39881510663e11b27b59fc5f1ff8e1ff86e793a2f5d7ef36cef42023aebbccbf",
+      "resource": "m3__ports__compiletime__src__main__java__com__m3__compiletime__M3ItemReferenceScan.java.txt"
+    },
+    {
+      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/M3EscapePreparedTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "ea8bed1a238df1964d11b49e3a5742f44f27ff262c0fe1741bbaa0bcf5a23dcb",
+      "resource": "m3__ports__compiletime__src__test__java__com__m3__compiletime__M3EscapePreparedTest.java.txt"
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-program-escape-precompute.json",
+      "before_sha256": "ABSENT",
+      "after_sha256": "469cfac93eae278aeb5914dc301a68efaf732baf3216b96009ca68308b8f0be0",
+      "resource": "m3__docs__name-mapping.d__m3-program-escape-precompute.json.txt"
+    }
+  ]
+}
