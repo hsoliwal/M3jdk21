@@ -52,6 +52,14 @@ public final class M3MapCursorNativeProof {
             check(fold(projected) == javaFold(projected), "Java/JNI primitive shadow parity");
             check(fold(projected) == fold(Arrays.copyOf(projected, projected.length)),
                     "JNI call did not retain caller array");
+            // Reuse this native peer for the new fused M3 snapshot API:
+            // predicates, sorting and reference projection stay in Java.
+            java.util.List<Integer> frozen = M3CollectionViews.filteredSortedSnapshot(
+                    backing.keySet(), key -> (key & 1) == 0,
+                    java.util.Comparator.naturalOrder());
+            int[] frozenIds = frozen.stream().mapToInt(Integer::intValue).toArray();
+            check(fold(frozenIds) == javaFold(frozenIds),
+                    "fused filtered/sorted snapshot JNI parity");
             if (size > 0) {
                 backing.put(Integer.MAX_VALUE - size, size);
                 int[] newer = filtered.keySet().stream().mapToInt(Integer::intValue).toArray();

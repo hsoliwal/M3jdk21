@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.FilteredSnapshotFusionReceiver20261017
+displayName: Add one-pass M3 filtered/sorted snapshot APIs without modifying JDK21 Collection contracts
+description: Exact four-target isolated M3JDK21 receiver using existing Synexia Maven/OpenRewrite Java LST snapshot engine.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-filtered-snapshot-fusion-20261017

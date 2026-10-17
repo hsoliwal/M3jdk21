@@ -1,0 +1,12 @@
+category	baseline	selected	time_space	compatibility_claim	decision_and_license
+filtered-snapshot	Inherited JDK Collection.toArray and M3 live filtered view	New opt-in filteredSnapshot using shared ArrayList selectedCopy	O(n)/O(k)	No old method rewritten, preserves JDK array identity and null-termination contracts	SELECT first-party Apache-2.0
+filtered-sorted-snapshot	Sorted stable List.sort on full collection	New filteredSortedSnapshot, filter once then List.sort	O(n+k log k)/O(k)	Preserves duplicate references, stable comparator ties and comparator null natural order	SELECT first-party Apache-2.0
+filtered-sorted-snapshot	JDK Streams filter/sorted/toList	Retain JDK stream as behavior reference	O(n+k log k) sorting	Different lifetime and provider side effects; not rewritten	ORACLE_ONLY JDK21
+filtered-snapshot	Guava Iterables.filter + ArrayList	Reuse existing M3CollectionViews owner	O(n)/O(k)	Guava live views and JDK detached snapshots are not equivalent	REFERENCE Guava Apache-2.0
+collection-semantic	Eclipse Collections select/reject	Reuse existing owner and stable JDK sort	Provider dependent	Distinguish lazy selection from detached snapshots	REFERENCE original Eclipse licensing
+collection-semantic	Apache Commons predicated collections	Reject substitution for filtered materialization	Provider dependent	Insertion-only predicates do not filter admitted survivors	REJECT_EQUITY Apache-2.0 reference
+collection-semantic	Spring MultiValueMap and CollectionUtils	No direct substitution	Provider dependent	Key/value and multiplicity semantics differ	REFERENCE Spring Apache-2.0
+algorithm-taxonomy	LeetCode stable sort/filter exercises	Use hostile comparator/tie tests only	O(k log k)	No solution/editorial body copied	CATEGORY_ONLY
+algorithm-taxonomy	HackerRank Java iterator and collection tasks	Use source iterator/metadata refusal cases only	O(n)	No challenge solution imported	CATEGORY_ONLY
+algorithm-taxonomy	GeeksForGeeks stable sort/null comparator cases	Use negative tests only	O(k log k)	No challenge code copied	CATEGORY_ONLY
+jni-composition	New native filter implementation	Reuse #988 unchanged test-only JNI C peer	O(k) bounded primitive shadow	Java owns predicate, GC refs and comparator; no extra JNI ABI	REUSE first-party Apache-2.0

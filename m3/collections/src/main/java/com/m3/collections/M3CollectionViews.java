@@ -92,6 +92,44 @@ public final class M3CollectionViews {
         return Collections.unmodifiableList(sorted);
     }
 
+    /**
+     * M3 additive API: detached encounter-order snapshot with one predicate
+     * evaluation per source occurrence. Unlike a backed filter, no later source
+     * additions/removals are reflected. Nulls and duplicate references survive.
+     * This never calls source.size(), performs no filter size prepass, and does
+     * not change Collection.toArray or any existing JDK/Synexia contract.
+     */
+    public static <E> List<E> filteredSnapshot(
+            Collection<? extends E> source, Predicate<? super E> predicate) {
+        return Collections.unmodifiableList(selectedCopy(source, predicate));
+    }
+
+    /**
+     * M3 additive API: fused filter and stable sort over one detached array
+     * owner. Comparator-equivalent elements remain distinct and preserve their
+     * original encounter order. A null comparator means natural ordering, as
+     * specified by List.sort; mutable element objects are not deep-copied.
+     */
+    public static <E> List<E> filteredSortedSnapshot(
+            Collection<? extends E> source, Predicate<? super E> predicate,
+            Comparator<? super E> comparator) {
+        ArrayList<E> selected = selectedCopy(source, predicate);
+        selected.sort(comparator);
+        return Collections.unmodifiableList(selected);
+    }
+
+    /** A cohesive one-pass behavioral atom shared by the two new M3 APIs. */
+    private static <E> ArrayList<E> selectedCopy(
+            Collection<? extends E> source, Predicate<? super E> predicate) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(predicate, "predicate");
+        ArrayList<E> selected = new ArrayList<>();
+        for (E element : source) {
+            if (predicate.test(element)) selected.add(element);
+        }
+        return selected;
+    }
+
     /** A live filter without per-element retained adapters. */
     private static class FilteredCollection<E> extends AbstractCollection<E> {
         protected final Collection<E> backing;
