@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 CPU mask run tool Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3CpuMaskRuns.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3CpuMaskRunsSelfTest.java'
+      - 'm3/collections/recipe/cpu-mask-runs-20261017/**'
+      - 'm3/collections/algorithm-catalog/cpu-mask-runs-20261017.tsv'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cpu-mask-runs-20261017/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-cpu-mask-runs-20261017.yml'
+      - '.github/workflows/m3-cpu-mask-runs-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check the collection receiver and compile tool
+        run: mvn -B -ntp -f m3/collections/pom.xml -DskipTests package
+      - name: Execute bounded CPU tool self-test
+        run: >
+          java -cp m3/collections/target/classes:m3/collections/target/test-classes
+          com.m3.collections.M3CpuMaskRunsSelfTest
+      - name: Parse Maven/OpenRewrite crate sources
+        run: mvn -B -ntp -f m3/collections/recipe/cpu-mask-runs-20261017/pom.xml -DskipTests package
