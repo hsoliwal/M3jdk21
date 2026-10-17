@@ -21,7 +21,7 @@ jobs:
       - name: Prove source-sealed OpenRewrite recipe and fixed point
         run: |
           set -eu
-          mvn -B -ntp -f m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml clean verify
+          mvn -B -ntp "-Dm3.receiver.root=$PWD" -f m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml clean verify
       - name: Verify current M3 collection owners and real Guava provider
         run: |
           set -eu

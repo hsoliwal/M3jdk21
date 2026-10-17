@@ -4,6 +4,7 @@
  */
 package com.synexia.rewrite;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -79,4 +80,23 @@ final class M3BiMapMainlineRecipeTest {
                 .build().activateRecipes("com.synexia.m3.BiMapMainline20261017");
         assertTrue(active.validateAll().stream().allMatch(v -> v.isValid()));
     }
+    /**
+     * The receiving build supplies -Dm3.receiver.root to bind the actual checked-in
+     * Java and C postimages. The convergence repo has no target runtime files.
+     */
+    @Test void exactInstalledReceiverWhenConfigured() throws Exception {
+        String selected = System.getProperty("m3.receiver.root");
+        if (selected == null) return;
+        Path root = Path.of(selected).toAbsolutePath().normalize();
+        for (var target : manifest().targets()) {
+            Path file = root.resolve(target.path()).normalize();
+            assertTrue(file.startsWith(root), "receiver path escapes target");
+            assertTrue(Files.isRegularFile(file), "receiver output missing: " + target.path());
+            String actual = Files.readString(file);
+            assertEquals(target.text(), actual, "installed source differs from canonical recipe");
+            assertEquals(target.after(), M3GpuToolJoinManifest.sha256(actual),
+                    "installed postimage digest differs from sealed recipe");
+        }
+    }
+
 }
