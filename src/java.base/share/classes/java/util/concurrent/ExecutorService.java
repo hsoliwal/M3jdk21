@@ -427,4 +427,22 @@ public interface ExecutorService extends Executor, AutoCloseable {
             }
         }
     }
+
+    /**
+     * Run a checked task with an explicitly borrowed progress monitor.
+     * Future cancellation and cooperative monitor cancellation remain distinct.
+     */
+    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
+        java.util.Objects.requireNonNull(task, "task");
+        java.util.Objects.requireNonNull(monitor, "monitor");
+        return submit((Callable<T>) () -> ProgressMonitors.call(task, monitor));
+    }
+
+    /** Avoids overloading submit(Runnable,T), which would change overload resolution. */
+    default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {
+        java.util.Objects.requireNonNull(task, "task");
+        java.util.Objects.requireNonNull(monitor, "monitor");
+        return submit((Runnable) () -> ProgressMonitors.run(task, monitor));
+    }
+
 }
