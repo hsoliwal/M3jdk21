@@ -4,3 +4,5 @@ com.synexia:cognix-eclipse-mechanics-core	org.osgi.framework.BundleContext	com.m
 com.synexia:cognix-eclipse-mechanics-adapters	org.eclipse.core.resources.IResourceDelta	com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot	M3LongArrayList/M3ObjectStateSlots28	YES
 com.synexia:synexia-m3index-collections	M3 reference/slot projection	com.m3.eclipse.framework.M3EclipseIndexedSnapshot	M3SlotAllocator28/M3Collections	YES
 com.synexia:cognix-eclipse-mechanics-adapters	org.osgi.framework.BundleActivator	com.m3.eclipse.framework.M3EclipseRuntimeActivator	ServiceRegistration<M3EclipseRuntimeServices>	YES
+com.synexia:synexia-m3index-collections	M3LongIndexProjection.filtered(byte[],int,Backend)	com.m3.collections.M3LongIndexProjection.filtered(byte[],int,int,Backend)	Existing index/offset arrays + optional M3IndexMaskCompactor JNI	ADDITIVE_JDK_API_UNCHANGED
+com.synexia:cognix-eclipse-mechanics-adapters	OSGi bundle list sorted/filtered by ID	com.m3.eclipse.framework.M3EclipseBundleSnapshot.sortedById/sortedWindowById	M3LongArrayList + M3LongIndexProjection	ECLIPSE_IDENTITY_PRESERVED
