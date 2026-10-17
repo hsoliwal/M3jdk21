@@ -27,9 +27,9 @@ public final class M3MaskBoundedCurrentRecipe {
     private record Pending(Path path, byte[] oldBytes, byte[] newBytes) { }
     private static final List<Spec> FILES = List.of(
             new Spec("m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java", "M3IndexMaskWindow.java",
-                    "dfaaf7b0d0c4f46657474eadb6f216dd68e920e327e153a0242ffe7ae6efbd9c", "e901aacee0842c4b32cce9ffcc53fb40ab6df4bdce3806d96628b9a177262750"),
+                    "dfaaf7b0d0c4f46657474eadb6f216dd68e920e327e153a0242ffe7ae6efbd9c", "9853795729a821c6d9c113ff169ebff5705a53affb6fbab5caefffc13104d6b1"),
             new Spec("m3/collections/src/main/native/collections/m3_index_mask_window.c", "m3_index_mask_window.c",
-                    "ddf23e3dab10bc2315ca4a8def699b0ee29ed3c8f457b7a13b7ab93cc1ddbff3", "027e91d4d6e0ddecd382cc7339835ee5d94971d07669dd76e982519fe8db9610"));
+                    "ddf23e3dab10bc2315ca4a8def699b0ee29ed3c8f457b7a13b7ab93cc1ddbff3", "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212"));
     private M3MaskBoundedCurrentRecipe() { }
 
     private static byte[] resource(String name) throws IOException {
