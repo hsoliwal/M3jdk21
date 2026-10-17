@@ -1,0 +1,41 @@
+{
+  "schema": "M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V3",
+  "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
+  "predecessor": {
+    "receiptPath": "m3/compatibility/synexia-string-phase-checker-successor-20261015-v2.json",
+    "receiptGitBlob": "52cacd20c406f57027734d2e78b405c8b6176e9f",
+    "receiptSha256": "e47b404b87e9748f323cfbca53f07fcde3c3d1a5b14f221e14df6a92613cb1b2",
+    "targetAfterGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+    "targetAfterSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3",
+    "frozenTargetPath": "m3/compatibility/fixtures/string-phase-checker-v2-20261017.py"
+  },
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "baseCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+    "recipeClass": "com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipe",
+    "sourceResourcePath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/out/check_string_phase.py",
+    "sourceResourceGitBlob": "368842c70f4671bac14ad902ed047a486109f27d",
+    "sourceResourceSha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+    "stateAtCapture": "DRAFT_CANDIDATE_NOT_QUALIFIED"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseCommit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+    "beforeGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+    "beforeSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3",
+    "afterGitBlob": "368842c70f4671bac14ad902ed047a486109f27d",
+    "afterSha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47"
+  },
+  "change": {
+    "relation": "HISTORICAL_PRECOMPUTE_TARGET_PIN_REFUSAL",
+    "historicalTargetGitBlob": "c45ae8696da18b15b7b9ee0267cc05aec1ae6c92",
+    "currentObservedTargetGitBlob": "0a88ed559b23def5d2229bba3316ea2268b4d720",
+    "v1HistoryPreserved": true,
+    "v2HistoryPreserved": true,
+    "runtimeProductFilesChanged": false,
+    "runtimePromotionAuthorized": false,
+    "runtimeAcceptance": "NOT_CLAIMED",
+    "performanceEvidence": "NOT_MEASURED"
+  }
+}

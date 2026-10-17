@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.StringHistoricalPrecomputePin
+displayName: M3 String historical precompute target pin
+description: >-
+  Strict source-sealed child of the existing String successor-chain family.
+  Reject forged historical target identities while preserving the distinct V2 live
+  owner, original mapping, both successor receipts and runtime holds.
+recipeList:
+  - com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipe

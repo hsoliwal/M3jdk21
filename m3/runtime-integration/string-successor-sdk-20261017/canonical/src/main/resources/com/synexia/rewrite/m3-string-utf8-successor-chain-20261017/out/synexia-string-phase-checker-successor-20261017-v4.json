@@ -1,0 +1,58 @@
+{
+  "schema": "M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V4",
+  "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
+  "predecessor": {
+    "receiptPath": "m3/compatibility/synexia-string-phase-checker-successor-20261017-v3.json",
+    "receiptGitBlob": "22d49606563cfb93d06024ba6ed34fd3fd682d6e",
+    "receiptSha256": "45a7b377ec949d75f12d030952eeab9b5175c42f4581a0d9e900ee994da7208c",
+    "targetAfterGitBlob": "368842c70f4671bac14ad902ed047a486109f27d",
+    "targetAfterSha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+    "frozenTargetPath": "m3/compatibility/fixtures/string-phase-checker-v3-20261017.py"
+  },
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "baseCommit": "1421c11c8d4b16b6ed02c72f61382e52f5ee8cee",
+    "recipeClass": "com.synexia.rewrite.M3StringUtf8SuccessorChainRecipe",
+    "sourceResourcePath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/out/check_string_phase.py",
+    "sourceResourceGitBlob": "8e4a94d8549143c9696d91881e4599ab2457a772",
+    "sourceResourceSha256": "d3deb2133cc94d0208e5b79e1c61d6b68804ba9387e954c2494a5ec8f7b83ccc",
+    "stateAtCapture": "DRAFT_CANDIDATE_NOT_QUALIFIED"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseCommit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+    "beforeGitBlob": "368842c70f4671bac14ad902ed047a486109f27d",
+    "beforeSha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+    "afterGitBlob": "8e4a94d8549143c9696d91881e4599ab2457a772",
+    "afterSha256": "d3deb2133cc94d0208e5b79e1c61d6b68804ba9387e954c2494a5ec8f7b83ccc"
+  },
+  "sourceChronology": {
+    "chainPath": "m3/synexia-import/current-full-borrow/string-target-successor-chain.tsv",
+    "historicalPrefixGitBlob": "4ef13745f3fdc265fc8df3f2d84a9f2ecd3b7516",
+    "currentChainGitBlob": "75d949e5aa2c8ff4e5c70d648e81fc0d37b68651",
+    "currentChainSha256": "cfdbd550ca16d6f28e718347409b328b677f473f1f498cb903da69c1cb386ca0",
+    "transitionCount": 3,
+    "targetPath": "src/java.base/share/classes/java/lang/M3String.java",
+    "predecessorGitBlob": "42399d411c1516a56a47dcdb10242960157b4677",
+    "successorGitBlob": "35ed998540e044eed8cb7596e2e2c019ae369bd3",
+    "synexiaPr": 11448,
+    "m3jdkPr": 898,
+    "state": "SOURCE_CANDIDATE_NOT_RUNTIME_ACCEPTED",
+    "utf8ReceiptPath": "m3/runtime-integration/utf8-cursor-20261014/RECEIPT.json",
+    "utf8ReceiptGitBlob": "e3ee12859fd0a272dfcf56e85741a95ac4acbf76",
+    "utf8ReceiptSha256": "510d635a87eac7f0d0dcfcb5901b1e985ed770571b5f98f46ae4bb286cdf9f68",
+    "utf8Qualification": "DRAFT_CANDIDATE_HOLD"
+  },
+  "change": {
+    "relation": "SOURCE_CANDIDATE_UTF8_CHRONOLOGY_RECONCILIATION",
+    "v1HistoryPreserved": true,
+    "v2HistoryPreserved": true,
+    "v3HistoryPreserved": true,
+    "runtimeProductFilesChanged": false,
+    "runtimePromotionAuthorized": false,
+    "receivingPhaseAdvanced": false,
+    "runtimeAcceptance": "NOT_CLAIMED",
+    "performanceEvidence": "NOT_MEASURED"
+  }
+}

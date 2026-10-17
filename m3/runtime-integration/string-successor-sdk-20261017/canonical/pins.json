@@ -1,0 +1,274 @@
+{
+  "schema": "M3_STRING_SUCCESSOR_RECEIVING_SDK_INPUTS_V1",
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "files": [
+    {
+      "path": "licenses/ADDITIONAL_LICENSE_INFO",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "unchangedGitBlob": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b"
+    },
+    {
+      "path": "licenses/ASSEMBLY_EXCEPTION",
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33",
+      "unchangedGitBlob": "429666664e9ff5029d51dc7f807e1ec9eff2dd9f"
+    },
+    {
+      "path": "licenses/GPL-2.0.txt",
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726",
+      "unchangedGitBlob": "8b400c7ab81b7b18baff3f81d597f5e511883134"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "unchangedGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "unchangedGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3StringHistoricalPrecomputePinRecipe.java",
+      "sha256": "8e188d4d9d482f7d345b0d37f3437aaa2d0ce6dee51967b145b56dfc3c411a70",
+      "unchangedGitBlob": "0bc92e10a154c64a5420059836c5b6d6c05d5820"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3StringUtf8SuccessorChainRecipe.java",
+      "sha256": "ac0c8fb10cd90f5344f043f6c61df4eb1dde9f8648074574e501b27ba8b0cea1",
+      "unchangedGitBlob": "99abb1217e1ffc8b70154425bdde8c497f531370"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "f6f297bf51b3fad08d1c491600cdc6574e9c5a2a781339fefc778e981119e6a4",
+      "unchangedGitBlob": "18dc26472123580d321325026947f5de8d8bdf84"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/before/check_string_phase.py",
+      "sha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3",
+      "unchangedGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/before/m3-string-precompute-observation-v2.tsv",
+      "sha256": "d29cc98a5611059b69e08edd3d7990c0dd37100fb16e95cbf2136716aa35f52d",
+      "unchangedGitBlob": "3f7ece2cebe1c429256acfa904134a6d0fd47ef5"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/before/RECEIPT.json",
+      "sha256": "510d635a87eac7f0d0dcfcb5901b1e985ed770571b5f98f46ae4bb286cdf9f68",
+      "unchangedGitBlob": "e3ee12859fd0a272dfcf56e85741a95ac4acbf76"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/before/string-source-target-map.tsv",
+      "sha256": "954714bf6ada59b7dd22e886f59a403a042141785697781869c78278a0bb9b98",
+      "unchangedGitBlob": "088ee2ae6ccc550af768ac17314d7b0d460e9cf3"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/before/string-target-successor-chain.tsv",
+      "sha256": "cfdbd550ca16d6f28e718347409b328b677f473f1f498cb903da69c1cb386ca0",
+      "unchangedGitBlob": "75d949e5aa2c8ff4e5c70d648e81fc0d37b68651"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/before/string-target-successors.tsv",
+      "sha256": "ab1c56d567e739a6a5d2f630ec667751a8821ebdab2857a225c2650d84ca7e25",
+      "unchangedGitBlob": "141806b3119342dfba2efe6487664ba3a0c53158"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/before/synexia-string-phase-checker-successor-20261013.json",
+      "sha256": "78fc05a0cb9b7f26e9a6226b2406cc38801f09040dc14e445e31651f7a9385af",
+      "unchangedGitBlob": "a0373fd42a1fe2b8104e3675abc1919254950fff"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/before/synexia-string-phase-checker-successor-20261015-v2.json",
+      "sha256": "e47b404b87e9748f323cfbca53f07fcde3c3d1a5b14f221e14df6a92613cb1b2",
+      "unchangedGitBlob": "52cacd20c406f57027734d2e78b405c8b6176e9f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/before/test_string_phase_successors.py",
+      "sha256": "55de1bbd8c7eb003b33e8c969fcfe4581d44a7abbbccc883d981daf2246fe130",
+      "unchangedGitBlob": "e23fa5f44554e9dc2c841040f06a68657637ae6f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/before/test_synexia_string_phase_checker_successor.py",
+      "sha256": "8cbf60faa89b6ab227a15d35b5e5cee000bff485f76216f51d8da98446e3432f",
+      "unchangedGitBlob": "1c1aeabe6212188815961f160fd719e862625bbe"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/manifest.tsv",
+      "sha256": "5bb1464433a252f38c38c1f8ab1240eb8c3f0760bbbc05551e8130d68b8b73c0",
+      "unchangedGitBlob": "b1f8c7749013d5b6e198e855d4dfe1d034331a58"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/out/check_string_phase.py",
+      "sha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+      "unchangedGitBlob": "368842c70f4671bac14ad902ed047a486109f27d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/out/string-phase-checker-v2-20261017.py",
+      "sha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3",
+      "unchangedGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/out/synexia-string-phase-checker-successor-20261017-v3.json",
+      "sha256": "45a7b377ec949d75f12d030952eeab9b5175c42f4581a0d9e900ee994da7208c",
+      "unchangedGitBlob": "22d49606563cfb93d06024ba6ed34fd3fd682d6e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/out/test_string_phase_successors.py",
+      "sha256": "992b8524d4ed3f1fabdd4f2685adb6d55eb23d9e3de0683675695afa71e03e75",
+      "unchangedGitBlob": "70f3abde194e3437ac4e6c68b1d320f82e7d896b"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-historical-precompute-pin-20261017/out/test_synexia_string_phase_checker_successor.py",
+      "sha256": "b569114a7e2e0d4380f1bbbb503f9a9c5c5914cdeca3aeebe4c9b4bab26c470f",
+      "unchangedGitBlob": "9a2c5b0a5583a04b145443df966e29369fcd707e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/check_string_phase.py",
+      "sha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+      "unchangedGitBlob": "368842c70f4671bac14ad902ed047a486109f27d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/m3-string-precompute-observation-v2.tsv",
+      "sha256": "d29cc98a5611059b69e08edd3d7990c0dd37100fb16e95cbf2136716aa35f52d",
+      "unchangedGitBlob": "3f7ece2cebe1c429256acfa904134a6d0fd47ef5"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/M3String.java",
+      "sha256": "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728",
+      "unchangedGitBlob": "35ed998540e044eed8cb7596e2e2c019ae369bd3"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/M3StringFacts.java",
+      "sha256": "2152c154d3cdece330667ee09675fd21d86f3b483a23a3156b8a3626c3f9f420",
+      "unchangedGitBlob": "d8dd7dc30db6a9e3897146572bd4a7755c954ffb"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/M3StringPool.java",
+      "sha256": "b58c82047f795807ff32229146c370c9e596eff19942a92cd0128ce4987d20ca",
+      "unchangedGitBlob": "0905414556ad0b698a5b5f835f53d12bc040bc8c"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/M3StringPositionPrecompute.java",
+      "sha256": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b",
+      "unchangedGitBlob": "c0074f4b144da23040e63e0ba8866d56d0d304ac"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/M3StringSearchPrecompute.java",
+      "sha256": "edae3c8d3afbd7c1b78aa3f88a4d3fdcd6bd03c9f8ee2ace3044255b44f571ac",
+      "unchangedGitBlob": "0a88ed559b23def5d2229bba3316ea2268b4d720"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/name-mapping.json",
+      "sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "unchangedGitBlob": "a44460f982940623cf6ba1ca625caeeaa889f633"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/RECEIPT.json",
+      "sha256": "510d635a87eac7f0d0dcfcb5901b1e985ed770571b5f98f46ae4bb286cdf9f68",
+      "unchangedGitBlob": "e3ee12859fd0a272dfcf56e85741a95ac4acbf76"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/string-phase-checker-v2-20261017.py",
+      "sha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3",
+      "unchangedGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/string-source-target-map.tsv",
+      "sha256": "954714bf6ada59b7dd22e886f59a403a042141785697781869c78278a0bb9b98",
+      "unchangedGitBlob": "088ee2ae6ccc550af768ac17314d7b0d460e9cf3"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/string-target-successor-chain.tsv",
+      "sha256": "cfdbd550ca16d6f28e718347409b328b677f473f1f498cb903da69c1cb386ca0",
+      "unchangedGitBlob": "75d949e5aa2c8ff4e5c70d648e81fc0d37b68651"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/string-target-successors.tsv",
+      "sha256": "ab1c56d567e739a6a5d2f630ec667751a8821ebdab2857a225c2650d84ca7e25",
+      "unchangedGitBlob": "141806b3119342dfba2efe6487664ba3a0c53158"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/synexia-string-phase-checker-successor-20261013.json",
+      "sha256": "78fc05a0cb9b7f26e9a6226b2406cc38801f09040dc14e445e31651f7a9385af",
+      "unchangedGitBlob": "a0373fd42a1fe2b8104e3675abc1919254950fff"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/synexia-string-phase-checker-successor-20261015-v2.json",
+      "sha256": "e47b404b87e9748f323cfbca53f07fcde3c3d1a5b14f221e14df6a92613cb1b2",
+      "unchangedGitBlob": "52cacd20c406f57027734d2e78b405c8b6176e9f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/synexia-string-phase-checker-successor-20261017-v3.json",
+      "sha256": "45a7b377ec949d75f12d030952eeab9b5175c42f4581a0d9e900ee994da7208c",
+      "unchangedGitBlob": "22d49606563cfb93d06024ba6ed34fd3fd682d6e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/test_string_phase_successors.py",
+      "sha256": "992b8524d4ed3f1fabdd4f2685adb6d55eb23d9e3de0683675695afa71e03e75",
+      "unchangedGitBlob": "70f3abde194e3437ac4e6c68b1d320f82e7d896b"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/before/test_synexia_string_phase_checker_successor.py",
+      "sha256": "b569114a7e2e0d4380f1bbbb503f9a9c5c5914cdeca3aeebe4c9b4bab26c470f",
+      "unchangedGitBlob": "9a2c5b0a5583a04b145443df966e29369fcd707e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/manifest.tsv",
+      "sha256": "c49a75e8d9f3ba81cd227c18a96cc7dc9e3581c0820347a14fc4d32abd381658",
+      "unchangedGitBlob": "734f4a22d4fd6714d8e19d0822f3587a7b5b87ab"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/out/check_string_phase.py",
+      "sha256": "d3deb2133cc94d0208e5b79e1c61d6b68804ba9387e954c2494a5ec8f7b83ccc",
+      "unchangedGitBlob": "8e4a94d8549143c9696d91881e4599ab2457a772"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/out/string-phase-checker-v3-20261017.py",
+      "sha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+      "unchangedGitBlob": "368842c70f4671bac14ad902ed047a486109f27d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/out/synexia-string-phase-checker-successor-20261017-v4.json",
+      "sha256": "991b62ef48f296f8eb935f698e5a6488dae46ca67083a6c4a8151033042a3de1",
+      "unchangedGitBlob": "8f71e6f5d6013c0a313ccf7db5a42d81fd5fd181"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/out/test_string_phase_successors.py",
+      "sha256": "169868492734241f6dfd1c43f865a9dcff4a515b8ac80adfd87045724569d44e",
+      "unchangedGitBlob": "6a364cc390570e00c31773abfe840b00a67f9390"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-string-utf8-successor-chain-20261017/out/test_synexia_string_phase_checker_successor.py",
+      "sha256": "17339f185938d513143fc97e749e2aa93bbfeee66c11f050a9264611074ea6a0",
+      "unchangedGitBlob": "d99088feaeaf0b4b59d9b3581fdb775518064153"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-string-historical-precompute-pin-20261017.yml",
+      "sha256": "ca25e94319cf666f4293205f991f27b2d5e3088dc114f2f0e600a9869d013798",
+      "unchangedGitBlob": "bc2b93be6687a9412c478cb0f7ceb8b006b86e9d"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-string-utf8-successor-chain-20261017.yml",
+      "sha256": "b6bb242cc6ea5333d35780ab6bf588a797751018ad6a92260a9a5e8018254860",
+      "unchangedGitBlob": "1b17e7ed0812273e48f39910fd0af16188e62d1a"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3StringHistoricalPrecomputePinRecipeTest.java",
+      "sha256": "efcf52bb0a9fc332feda16a2d245f17e3c2c011aa68eff2cd8dff7ecab4ffcf0",
+      "unchangedGitBlob": "d87f54324e5dc338ce1d2dc34639bda9dacfede4"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3StringUtf8SuccessorChainRecipeTest.java",
+      "sha256": "1a8388b0cc639f280194c5a3d264a59464e7622a0cd272403504423cb76099f4",
+      "unchangedGitBlob": "c1f3bd38c62250dc12a2951c7079be32c2f9e063"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "ddaead1c6d0d020c8c9e2579fb782bc3a83bac944f17273691c224893e9aa63e",
+      "unchangedGitBlob": "f94468ea41c739ba7ddef123a10880a396bc1a85"
+    }
+  ]
+}
