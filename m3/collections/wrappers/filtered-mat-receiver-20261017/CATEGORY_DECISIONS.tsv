@@ -1,0 +1,13 @@
+category	donor	decision	complexity	compatibility/proof	provenance
+FILTERED_LIST_BACKED	Synexia M3FilteredLists	RECEIVE_ADD_ONLY	O(n) cursor; O(1) retained metadata	JDK21 List/subList/reversed iterator and visible mutation; no overload changes	hsoliwal/com.synexia#11977
+FILTERED_COLLECTION_SET	M3JDK21 M3CollectionViews	PRESERVE	O(n) predicate scan	Already on stack #991; do not copy competing MAT generic filter	hsoliwal/M3jdk21#991
+FILTERED_SORTED_NAVIGABLE	M3JDK21 M3CollectionViews	PRESERVE	Owner seek + rejected count	Keep comparator stored-representative, ranges and descending behavior	hsoliwal/M3jdk21#991
+FILTERED_MAP	M3JDK21 M3FilteredMaps	PRESERVE	Owner-backed O(n) visible scans	Existing map owner and guarded entry contracts	hsoliwal/M3jdk21#991
+FILTERED_SORTED_SNAPSHOT	M3JDK21 M3CollectionViews	PRESERVE	O(n log n)	Existing comparator-based detached snapshots	hsoliwal/M3jdk21#990
+SIGNAL_SORT	Synexia MatIntOrder IEEE sortable keys	RECEIVE_MECHANISM	O(8n) unsigned radix; O(n) primitive scratch	One projection per member; Double.compare NaN/signed zero/stable duplicate ties	hsoliwal/com.synexia MatIntOrder blob 95e3bbc3fa014dde58c60895039adc630aaaf44e
+INT_INDEX_SELECTION	Synexia MatIntFilterKernel + C17	RECEIVE_JAVA_JNI	O(n); O(k) returned indices plus native staging n	Stable signed-int order; dense no extra copy; no object address escape	hsoliwal/com.synexia#11982 + #11985
+WRITABLE_MAP	Synexia M3WritableFilteredMaps	HOLD	O(n) map/navigation + batch scratch	Target M3FilteredMaps lacks borrowed storedRepresentativeKey static helper	hsoliwal/com.synexia#11976
+SORTED_MULTISET	Synexia M3FilteredSortedMultisets	HOLD	O(log n) ranked group queries	No canonical target M3IndexSortedMultiset/M3IndexCountKernel owner on current receiving branch	hsoliwal/com.synexia#11971
+ALGORITHM_CATEGORIES	LeetCode/HackerRank/GeeksforGeeks	TEST_TAXONOMY_ONLY	Not directly applicable	No source/editorial copying; JDK oracle and JNI parity decide correctness	https://leetcode.com/ ; https://www.hackerrank.com/ ; https://www.geeksforgeeks.org/
+FILTERED_LIST_RECIPE_CONVERGENCE	Synexia #11989 and M3JDK21 #1021	EXACT_SOURCE_BORROW	Identical runtime behavior, one copyright header difference	Five shared Java sources now Git-exact from earlier source and added JDK sorted-list interop oracle	hsoliwal/com.synexia#11989;hsoliwal/M3jdk21#1021
+FILTERED_LIST_OVERLOAD	M3JDK21 #1020	HOLD_SOURCE_OVERLOAD_SEMANTICS	Overload resolution can alter recompiled caller dispatch	Retain independent M3FilteredLists factory until signature-level approval	hsoliwal/M3jdk21#1020

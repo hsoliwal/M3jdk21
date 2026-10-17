@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3Jdk21FilteredMatReceiver20261017
+displayName: Receive validated filtered Lists, stable signal sorting and signed JNI filter to M3JDK21
+description: >-
+  Exact-source 9-Java and 1-C17 additive recipe from first-party Synexia donors.
+  Runtime compatibility, real native parity and whole JDK build remain separate proof gates.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-filtered-mat-receiver-20261017
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk21-filtered-mat-native-20261017
