@@ -137,6 +137,25 @@ public final class M3IndexPathMasks {
         }
         if (limit == 0 || next == count) return packWindow(next, 0);
 
+        // An identity expression admits all inspected path occurrences. Retain
+        // the original complete per-window physical-offset validation before writes.
+        // The JNI-required path continues through the unchanged original selector.
+        if (backend == Backend.JAVA && allStagesAdmit(requiredMasks, forbiddenMasks)) {
+            int admitted = Math.min(limit, count - next);
+            long logical = (long) first + (long) next * stride;
+            for (int i = 0; i < admitted; i++, logical += stride) {
+                int slot = physicalOffsets[(int) logical];
+                if (slot < 0 || slot >= capacity) {
+                    throw new IndexOutOfBoundsException("physical offset outside a state plane");
+                }
+            }
+            logical = (long) first + (long) next * stride;
+            for (int i = 0; i < admitted; i++, logical += stride) {
+                output[outputOffset + i] = orderedRows[(int) logical];
+            }
+            return packWindow(next + admitted, admitted);
+        }
+
         // Read-only preflight over precisely the elements this call will consume.
         // No output cell changes on invalid physical geometry.
         int stop = next;
