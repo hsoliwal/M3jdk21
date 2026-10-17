@@ -45,8 +45,25 @@ Java_com_m3_collections_M3IndexMaskWindow_scanNative(
     }
     if (limit == 0) return m3_window_result(first, 0);
 
-    jbyte marks[M3_MASK_WINDOW_CHUNK];
+    /* Remain inside this ABI: an unavailable required native symbol must still refuse. */
+    if ((required & excluded) != 0) return m3_window_result(n, 0);
     jint values[M3_MASK_WINDOW_CHUNK];
+    if ((required | excluded) == 0) {
+        jint count = n - first;
+        if (count > limit) count = limit;
+        for (jint copied = 0; copied < count;) {
+            jint take = count - copied;
+            if (take > M3_MASK_WINDOW_CHUNK) take = M3_MASK_WINDOW_CHUNK;
+            (*env)->GetIntArrayRegion(env, rows, first + copied, take, values);
+            if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+            (*env)->SetIntArrayRegion(env, output, output_offset + copied, take, values);
+            if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+            copied += take;
+        }
+        return m3_window_result(first + count, count);
+    }
+
+    jbyte marks[M3_MASK_WINDOW_CHUNK];
     jint selected[M3_MASK_WINDOW_CHUNK];
     jint next = first;
     jint written = 0;
@@ -56,9 +73,23 @@ Java_com_m3_collections_M3IndexMaskWindow_scanNative(
         if (take > M3_MASK_WINDOW_CHUNK) take = M3_MASK_WINDOW_CHUNK;
         (*env)->GetByteArrayRegion(env, states, next, take, marks);
         if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+        /* Locate the first admitted state before loading row payload. The emit loop
+         * has no per-selected-value load flag, keeping dense chunks straightforward. */
+        jint first_match = 0;
+        while (first_match < take) {
+            unsigned int flags = (unsigned int) (unsigned char) marks[first_match];
+            if ((flags & (unsigned int) required) == (unsigned int) required
+                    && (flags & (unsigned int) excluded) == 0U) break;
+            first_match++;
+        }
+        if (first_match == take) {
+            next += take;
+            continue;
+        }
         (*env)->GetIntArrayRegion(env, rows, next, take, values);
         if ((*env)->ExceptionCheck(env)) return (jlong) -1;
-        for (jint i = 0; i < take; i++) {
+        next += first_match;
+        for (jint i = first_match; i < take; i++) {
             unsigned int flags = (unsigned int) (unsigned char) marks[i];
             if ((flags & (unsigned int) required) == (unsigned int) required
                     && (flags & (unsigned int) excluded) == 0U) {

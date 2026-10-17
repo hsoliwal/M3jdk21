@@ -79,6 +79,13 @@ public final class M3IndexMaskWindow {
             return result;
         }
         if (limit == 0) return pack(firstIndex, 0);
+        // Keep the ordinary scan atom unchanged; dispatch constant expressions here.
+        if ((requiredMask & excludedMask) != 0) return pack(orderedRows.length, 0);
+        if ((requiredMask | excludedMask) == 0) {
+            int copied = Math.min(limit, orderedRows.length - firstIndex);
+            System.arraycopy(orderedRows, firstIndex, output, outputOffset, copied);
+            return pack(firstIndex + copied, copied);
+        }
         return scanJava(orderedRows, rowStates, firstIndex, requiredMask,
                 excludedMask, output, outputOffset, limit);
     }
