@@ -12,11 +12,12 @@ import java.util.concurrent.Executors;
 
 /** Differential Java 21 oracle over immutable source-byte ranges and primitive masks. */
 public final class ByteStatisticsChecks {
-    private static long checks;
+    private static final java.util.concurrent.atomic.AtomicLong checks =
+            new java.util.concurrent.atomic.AtomicLong();
     private ByteStatisticsChecks() { }
 
     private static void check(boolean accepted, String detail) {
-        checks++;
+        checks.incrementAndGet();
         if (!accepted) throw new AssertionError(detail);
     }
 
@@ -26,7 +27,7 @@ public final class ByteStatisticsChecks {
     }
 
     private static void refuse(Class<? extends Throwable> expected, Runnable action) {
-        checks++;
+        checks.incrementAndGet();
         try {
             action.run();
         } catch (Throwable thrown) {
@@ -147,7 +148,7 @@ public final class ByteStatisticsChecks {
         } finally {
             Thread.interrupted();
         }
-        System.out.println("M3_BYTE_STATISTICS_PASS assertions=" + checks
+        System.out.println("M3_BYTE_STATISTICS_PASS assertions=" + checks.get()
                 + " kernel=JAVA_256_BIN_MASK_RLE");
     }
 }
