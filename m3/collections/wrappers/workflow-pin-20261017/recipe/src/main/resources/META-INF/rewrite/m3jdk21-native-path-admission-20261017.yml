@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3Jdk21ExactNativePathAdmission20261017
+displayName: Narrow JNI C native path admission for the pinned M3JDK21 text recipe provider
+description: >-
+  Hash-pinned Java LST source transformation for the existing target-side
+  pinned M3HashPinnedTextSnapshotRecipe. The isolated parser-compatible
+  src/main/java alias is mapped byte-exact to the existing Maven
+  pinned-engine path; no public API or generic native path rule is changed.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-native-path-admission-20261017
