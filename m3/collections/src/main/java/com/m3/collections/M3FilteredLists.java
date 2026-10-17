@@ -53,6 +53,15 @@ public final class M3FilteredLists {
 
     /** Return a live List view which explicitly refuses all mutation methods. */
     public static <E> List<E> readOnlyFiltered(List<E> source, Predicate<? super E> predicate) {
+        // Fuse only this utility's read-only wrapper, keeping its original source
+        // predicate order. Never unwrap inside filtered(): writable views over a
+        // protected source must continue to reject mutations.
+        if (source instanceof StrictReadOnlyList<?> readOnly
+                && readOnly.delegate instanceof View<?> nested) {
+            @SuppressWarnings("unchecked")
+            View<E> previous = (View<E>) nested;
+            return new StrictReadOnlyList<>(filtered(previous, predicate));
+        }
         return new StrictReadOnlyList<>(filtered(source, predicate));
     }
 

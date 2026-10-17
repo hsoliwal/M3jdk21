@@ -755,7 +755,7 @@
       "source_blob_sha1": "ab51de6af292a2286ef3326398994a89b50725fc",
       "target": "com.m3.collections.M3FilteredLists",
       "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
-      "target_sha256": "5204f0a3eb29ce84107ba5fa40ee00943da277c99a37c8355bd1bc216ee074b5",
+      "target_sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
       "disposition": "ADDITIVE_RECIPE_SEALED_CANDIDATE_NOT_JDK_BACKEND_PROMOTION",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia",
@@ -780,6 +780,17 @@
         "source_contract": "Preserve ordered short circuit and exceptions; immutable O(depth) predicate terms, O(1) composition and constant stack",
         "jni_abi": "UNCHANGED",
         "acceptance": "DRAFT_UNTIL_HOSTED_MAVEN_JAVA21_MODULE_INSTALLED_RUNTIME_PROOF"
+      },
+      "readonly_depth_refinement": {
+        "recipe": "com.synexia.rewrite.M3Jdk21FilteredReadonlyDepth20261017",
+        "source_repo": "hsoliwal/com.synexia",
+        "source_parent": "7d0a1e201cf37370d9d2b15f1d3d504a0b0f4648",
+        "prior_target_sha256": "5204f0a3eb29ce84107ba5fa40ee00943da277c99a37c8355bd1bc216ee074b5",
+        "refined_target_sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
+        "contract": "Fuse nested strict read-only wrapper delegates only within readOnlyFiltered; do not unwrap generic writable filtered source",
+        "original_first_party_source": "Synexia M3FilteredLists, Apache-2.0",
+        "no_new_jni_abi": true,
+        "admission": "DRAFT_TARGET_SDK_JUNIT_JDK21_JNI_INSTALLED_PROOF_PENDING"
       }
     }
   ],
