@@ -37,6 +37,6 @@ jobs:
           distribution: temurin
           java-version: "21"
       - name: Compile and test installed exact Java21 owner and interpreter variant
-        run: sh m3/collections/qualification/stored-representative-20261017/verify.sh
+        run: bash m3/collections/qualification/stored-representative-20261017/verify.sh
       # The canonical Maven/OpenRewrite source-first recipe must also qualify
       # in Synexia; this thin job does not claim a whole-module Maven/JNI pass.
