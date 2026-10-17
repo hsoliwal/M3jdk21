@@ -1,0 +1,16 @@
+{
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_implementation_commit": "5a12e0d63f00b202c017726f42c3fb9a04c8c7c0",
+  "canonical_workflow_commit": "f562dba24b591b820b57a9bdb0c544bc35bf4696",
+  "canonical_path": "synexia-openrewrite-recipes/recipe-crates/collections-library-interop/contract-closure-20261016",
+  "recipe_execution_tree": "669c4f9139fecd30d87f1e56592492ba394e004e",
+  "recipe_execution_files": 21,
+  "recipe_name": "com.synexia.rewrite.M3CollectionsApacheClosure",
+  "generation": "Actual unchanged class-backed OpenRewrite SDK engines, lst=false source-custody mode, followed by strict Java21 and actual provider/JNI proof",
+  "receiving_outputs": "Seven new optional Apache source/POM files, plus eleven unchanged qualified predecessor outputs",
+  "local_verification": "Eight SDK tests plus gated delivery;23 Apache JUnit;43 inherited runtime JUnit;72000 range steps;20000 deque transfers;896 concurrent JNI aligned calls per release/UBSan run;optional module Maven23 tests",
+  "scope": "Bounded implemented Apache profiles, not complete five-provider, memory-pressure, full-reactor, static-analysis or installed-JDK admission",
+  "catalogue_and_goal": "See canonical GOAL.md, REVIEW.md, category-review.tsv, contract-ledger.tsv and provenance/origins.json at the pinned implementation commit",
+  "native_owner": "Existing M3CountAlgebra C17 JNI region implementation reused and requalified, not replaced",
+  "license": "First-party Apache-2.0; provider binary/source pins and upstream notice retained in canonical provenance; no competitive editorial source bodies copied"
+}

@@ -1,0 +1,4 @@
+# target	before	after	template
+m3/collections/interop/apache/src/test/java/com/m3/collections/interop/M3ApacheContractTest.java	ABSENT	29bc98dd5e658265d59ef02c320379f48b5ee0dd07858f8420fdbbe942c355db	M3ApacheContractTest.java.txt
+m3/collections/interop/apache/src/test/java/com/m3/collections/interop/M3ConcurrentClosureContract.java	ABSENT	86df3450ab50248e608fdf1861987a0f3464aad1949400ce2e36864189139561	M3ConcurrentClosureContract.java.txt
+m3/collections/interop/apache/src/test/java/com/m3/collections/interop/M3RangeClosureContract.java	ABSENT	6271b1745c21d6a1350efcbf7faebccd59257caded007bbfba35caee5c2d6cc9	M3RangeClosureContract.java.txt

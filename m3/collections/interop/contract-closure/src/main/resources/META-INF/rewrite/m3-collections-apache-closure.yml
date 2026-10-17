@@ -1,0 +1,27 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3CollectionsApacheClosure
+displayName: M3 Apache collections contract closure
+description: Source-sealed optional provider adaptation with separate runtime qualification.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: collections-library-interop
+      lst: false
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: collections-multiset
+      lst: false
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: collections-apache-tests
+      lst: false
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: collections-apache-counts
+      lst: false
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: collections-apache-maps
+      lst: false
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: collections-apache-collectors
+      lst: false
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: collections-multiset
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: collections-apache-module
