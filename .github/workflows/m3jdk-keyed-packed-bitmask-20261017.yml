@@ -1,0 +1,113 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 keyed packed-bit selection recipe and Java JNI contract
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk-keyed-packed-bitmask-20261017.yml'
+      - 'm3/collections/keyed/bit-selection-20261017/**'
+      - 'm3/collections/keyed/src/main/java/com/m3/collections/parallel/M3Parallel.java'
+      - 'm3/collections/keyed/src/main/java/com/m3/collections/parallel/M3SelectionBits.java'
+      - 'm3/collections/keyed/src/test/java/com/m3/collections/parallel/M3SelectionBitsSelfTest.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-sdk-and-real-owner-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout: |
+            m3/collections
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Run actual named OpenRewrite Java-LST recipe and qualification
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/keyed/bit-selection-20261017/recipe/pom.xml \
+            -Dm3.bits.sdk.output="$RUNNER_TEMP/m3-bits-sdk" clean test
+      - name: Check actual emitted-versus-installed SHA and five unchanged real M3 owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,os,subprocess
+          from pathlib import Path
+          root=Path.cwd()
+          sdk=Path(os.environ['RUNNER_TEMP'])/'m3-bits-sdk'
+          template=root/'m3/collections/keyed/bit-selection-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-selection-bits-20261017'
+          sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          rows=[]
+          for line in (template/'manifest.tsv').read_text().splitlines():
+              path,pre,post,name=line.split('\t')
+              rows.append(path)
+              assert sha(template/name)==post,(path,'template')
+              assert sha(sdk/path)==post,(path,'actual SDK output')
+              assert sha(root/path)==post,(path,'installed product output')
+              if pre!='ABSENT':
+                  assert sha(template/'pre'/name)==pre,(path,'source preimage')
+          assert len(rows)==3 and len(set(rows))==3 and (sdk/'SDK_RECEIPT.tsv').is_file()
+          sources=root/'m3/collections/src/main/java/com/m3/collections'
+          expected={
+            'M3LinkedHashMap.java':'ade59880b8c9b2bee1b32ae67ca9d29b7382d998',
+            'M3OrderedSlotMap.java':'e7be2297d19f22cf4dd4ef8b7d1424fe963063d9',
+            'M3SlotArrays.java':'e337c69710c871f8caa77a1afe53149f1fd705cc',
+            'M3SlotMap.java':'a7d20300717661c26897f0b69e1e5a83400a62ad',
+            'M3SlotSpliterators.java':'30cf137538353ac8e91514fff7c5db3903da8819'
+          }
+          for name,blob in expected.items():
+              assert subprocess.check_output(['git','hash-object',str(sources/name)],text=True).strip()==blob,name
+          print('M3_PACKED_SELECTION_REAL_SDK_AND_OWNER_SEAL_PASS',len(rows),len(expected))
+          PY
+      - name: Strict Java21 real-owner compilation, exact public ABI, and inherited regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes" "$RUNNER_TEMP/base-src" "$RUNNER_TEMP/base-classes"
+          src=m3/collections/src/main/java/com/m3/collections
+          keyed=m3/collections/keyed
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/classes" \
+            "$src"/{M3LinkedHashMap,M3OrderedSlotMap,M3SlotArrays,M3SlotMap,M3SlotSpliterators,M3CollectionViews,M3FilteredMaps}.java \
+            "$keyed"/src/main/java/com/m3/collections/parallel/*.java \
+            "$keyed"/src/test/java/com/m3/collections/parallel/*.java
+          cp "$keyed/bit-selection-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-selection-bits-20261017/pre/M3Parallel.java.txt" "$RUNNER_TEMP/base-src/M3Parallel.java"
+          javac --release 21 -proc:none -Xlint:all -Werror -cp "$RUNNER_TEMP/classes" \
+            -d "$RUNNER_TEMP/base-classes" "$RUNNER_TEMP/base-src/M3Parallel.java"
+          javap -public -s -cp "$RUNNER_TEMP/base-classes:$RUNNER_TEMP/classes" \
+            'com.m3.collections.parallel.M3Parallel' 'com.m3.collections.parallel.M3Parallel$Plan' > "$RUNNER_TEMP/before.txt"
+          javap -public -s -cp "$RUNNER_TEMP/classes" \
+            'com.m3.collections.parallel.M3Parallel' 'com.m3.collections.parallel.M3Parallel$Plan' > "$RUNNER_TEMP/after.txt"
+          diff -u "$RUNNER_TEMP/before.txt" "$RUNNER_TEMP/after.txt"
+          for name in M3SelectionBitsSelfTest M3ParallelSelfTest M3ExtensionsSelfTest M3SchedulingSelfTest M3ReuseSelfTest M3ReceiverInteropSelfTest; do
+            java -ea -Xmx512m -cp "$RUNNER_TEMP/classes" "com.m3.collections.parallel.$name"
+          done
+      - name: Check JNI parity, C++17 fatal UBSan and missing-native isolation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/native"
+          g++ -std=c++17 -shared -fPIC -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/keyed/native/m3_keyed.cpp -o "$RUNNER_TEMP/native/libm3_keyed.so"
+          for name in M3ParallelSelfTest M3ExtensionsSelfTest M3SchedulingSelfTest M3ReceiverInteropSelfTest; do
+            java -ea -Xcheck:jni -Xmx512m -Djava.library.path="$RUNNER_TEMP/native" \
+              -cp "$RUNNER_TEMP/classes" "com.m3.collections.parallel.$name" --native
+          done
+          for name in M3ParallelSelfTest M3ExtensionsSelfTest M3SchedulingSelfTest; do
+            java -ea -Xmx512m -Djava.library.path="$RUNNER_TEMP/no-native" \
+              -cp "$RUNNER_TEMP/classes" "com.m3.collections.parallel.$name" --missing-native
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-packed-selection-sdk-reports
+          path: m3/collections/keyed/bit-selection-20261017/recipe/target/surefire-reports/
+          retention-days: 7

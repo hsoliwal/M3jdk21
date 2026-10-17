@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.PackedKeyedSelection20261017
+displayName: Atomically packed stable keyed selection mask, without per-row flag objects
+description: Replace the boolean selection lane with atomic 64-bit primitive words without changing M3Parallel API or output ordering.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-selection-bits-20261017

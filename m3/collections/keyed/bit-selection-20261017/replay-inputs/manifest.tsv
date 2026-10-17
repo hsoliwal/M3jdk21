@@ -1,0 +1,3 @@
+m3/collections/keyed/src/main/java/com/m3/collections/parallel/M3Parallel.java	ff0bb5901c8a8f67ef2ec07ea794f829102c09495a91c3d2e3f0c316baa8b262	fcc99aea4817dcba989fd11ee147175637f7b3757f337786a1fc1afbb6454d6d	M3Parallel.java.txt
+m3/collections/keyed/src/main/java/com/m3/collections/parallel/M3SelectionBits.java	ABSENT	454beb4fe758e1f3cf1522654612f2cadcc339fa62a380a63dcf6f2134976f1a	M3SelectionBits.java.txt
+m3/collections/keyed/src/test/java/com/m3/collections/parallel/M3SelectionBitsSelfTest.java	ABSENT	97a9b928ab0e1bf3791fd2769b3f6b259d7f895ee568e17191c03fef99181b52	M3SelectionBitsSelfTest.java.txt
