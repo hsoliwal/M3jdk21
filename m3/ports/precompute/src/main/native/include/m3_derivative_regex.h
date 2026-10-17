@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-#ifndef SYNEXIA_M3_DERIVATIVE_REGEX_H
-#define SYNEXIA_M3_DERIVATIVE_REGEX_H
+#ifndef M3_PRECOMPUTE_DERIVATIVE_REGEX_H
+#define M3_PRECOMPUTE_DERIVATIVE_REGEX_H
 
 #include <stddef.h>
 #include <stdint.h>

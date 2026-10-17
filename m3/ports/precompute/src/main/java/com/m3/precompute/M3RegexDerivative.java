@@ -26,7 +26,7 @@ import java.util.TreeSet;
  * <p>Compilation hash-conses immutable algebraic nodes, memoizes derivatives, closes the reachable
  * derivative graph, minimizes equivalent states, quotients behaviorally identical alphabet
  * minterms, computes nullable/live/dead facts, and precomputes powers of equal-class transitions.
- * Runtime matching over an MIndex shadow therefore consumes RLE predicate runs with integer table
+ * Runtime matching over an M3 predicate shadow therefore consumes RLE predicate runs with integer table
  * lookups and no expression construction or backtracking. Intersection and complement are
  * first-class. Captures, lookarounds and backreferences remain with their existing owners.
  */
@@ -439,7 +439,7 @@ public final class M3RegexDerivative {
       this.units = units;
       try {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        digest.update("MIndexPreparedRuns/v1".getBytes(StandardCharsets.US_ASCII));
+        digest.update("M3PreparedRuns/v1".getBytes(StandardCharsets.US_ASCII));
         digest.update(owner.programSha256.getBytes(StandardCharsets.US_ASCII));
         ByteBuffer word = ByteBuffer.allocate(Long.BYTES).order(ByteOrder.BIG_ENDIAN);
         digest.update(word.putLong(units).array());
