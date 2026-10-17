@@ -172,6 +172,32 @@ public final class M3LongArrayDeque implements M3LongDeque {
     }
 
     /**
+     * Compact the existing circular long[] in logical encounter order using
+     * position-aligned byte flags (never physical slot or element value).
+     * Masks are caller-owned and not retained; no intermediate objects/arrays.
+     * Invalid masks fail before mutation. Not concurrent/snapshot-safe.
+     *
+     * @return removed occurrences
+     */
+    public int retainByStateMask(byte[] alignedStates, int requiredMask) {
+        M3IndexMaskCompactor.validate(alignedStates, size, requiredMask);
+        int previous = size;
+        int kept = 0;
+        for (int read = 0; read < previous; read++) {
+            if (M3IndexMaskCompactor.matches(alignedStates[read], requiredMask)) {
+                elements[physicalIndex(kept++)] = elements[physicalIndex(read)];
+            }
+        }
+        if (kept == previous) return 0;
+        for (int at = kept; at < previous; at++) {
+            elements[physicalIndex(at)] = 0L;
+        }
+        size = kept;
+        modCount++;
+        return previous - kept;
+    }
+
+    /**
      * Keeps matching values in-place in encounter order. On predicate failure, prior rejections
      * are committed, but the throwing value and untested suffix remain intact. The predicate must
      * not mutate this collection.
