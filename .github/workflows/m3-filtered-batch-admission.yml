@@ -1,0 +1,36 @@
+# Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
+name: M3 filtered sorted batch admission
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/FilteredBatchContracts.java'
+      - 'm3/collections/wrappers/batch-admission-20261017/**'
+      - '.github/workflows/m3-filtered-batch-admission.yml'
+permissions:
+  contents: read
+jobs:
+  recipe-and-native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          path: receiver
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/com.synexia
+          ref: b095e3c944d66a70d21c267e78ed0db197526a62
+          path: canonical
+          sparse-checkout: synexia-openrewrite-recipes/recipe-crates/collection-view-range-20261016/batch-admission-20261017
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Execute pinned recipe, emitted runtime and unchanged native consumer
+        shell: bash
+        run: |
+          bash receiver/m3/collections/wrappers/batch-admission-20261017/verify.sh \
+            "$GITHUB_WORKSPACE/receiver" "$GITHUB_WORKSPACE/canonical" "$RUNNER_TEMP/filtered-batch-admission"

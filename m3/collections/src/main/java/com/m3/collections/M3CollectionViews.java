@@ -316,12 +316,14 @@ public final class M3CollectionViews {
         @Override
         public boolean addAll(Collection<? extends E> elements) {
             Objects.requireNonNull(elements, "elements");
-            for (E element : elements) {
+            // Hand the owner only the references admitted by this traversal.
+            // Reuse the existing snapshot atom; never read the caller twice.
+            return backing.addAll(selectedCopy(elements, element -> {
                 if (!visible(element)) {
                     throw new IllegalArgumentException("element rejected by view predicate");
                 }
-            }
-            return backing.addAll(elements);
+                return true;
+            }));
         }
 
         @Override
