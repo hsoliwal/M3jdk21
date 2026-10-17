@@ -1,0 +1,69 @@
+{
+  "schema": "M3_QUALIFIED_REPLAY_INSTALL_V1",
+  "qualified_receipt_sha256": "845057646d1140391920ff0acc52a8e3c60a9e15dc7b8d46c10403724412f5e5",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "machine": "x86_64",
+  "steps": [
+    {
+      "command": [
+        "java",
+        "-cp",
+        "/mnt/data/m3-deep-filter/qualified-2/replay-classes",
+        "Replay",
+        "--apply",
+        "/mnt/data/m3-deep-filter/repo",
+        "/mnt/data/m3-deep-filter/repo"
+      ],
+      "stdout": "PASS M3 short flag replay changes=6\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "command": [
+        "java",
+        "-cp",
+        "/mnt/data/m3-deep-filter/qualified-2/replay-classes",
+        "Replay",
+        "--check",
+        "/mnt/data/m3-deep-filter/repo",
+        "/mnt/data/m3-deep-filter/repo"
+      ],
+      "stdout": "PASS M3 short flag replay changes=0\n",
+      "stderr": "",
+      "exit": 0
+    }
+  ],
+  "outputs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "sha256": "5da6837eee9112cb97725efff8fbcc1b95f455761d923f643e9a1158ba208989",
+      "git_blob": "e21fd9b277ce44a8c6efe4a4ffdf9f01a14a1d0b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java",
+      "sha256": "3f5c1016aeaee1081533ebcdb2dd29b8d620dab839024ff383bd0dfab47f2f72",
+      "git_blob": "400996d9331bf5c8bac9090a223aa0e8630825f1"
+    },
+    {
+      "path": "m3/collections/wrappers/deep-filter-20261017/native/m3_deep_filter_jni.c",
+      "sha256": "3f923c6762b0742acb92c52174481fa687416e83999dd1d698502d4b4b069438",
+      "git_blob": "3ca598112bd63cb4ec2439bc2f5adea56480b9af"
+    },
+    {
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java",
+      "sha256": "362dc9caf845360782b0c313ff871d35badd62883b8695a4c31a937f22f370b6",
+      "git_blob": "bcb6ae82460e3e536842b28df00c5c3f9fb6aa07"
+    },
+    {
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionTest.java",
+      "sha256": "830e2e484f231e6a3201827784600badaea95683bb486d6efc66a046bf8d5160",
+      "git_blob": "5530efa512f02374fb95b392263e84a9b72dd5c1"
+    },
+    {
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterNativeProof.java",
+      "sha256": "c78647c37fea7351ceb0ceef3bd4139cbcfc69190c8e5864d4694edfa8751023",
+      "git_blob": "a01ef105fe695a16c0cea532429aff996e452239"
+    }
+  ],
+  "maven_sdk_status": "NOT_EXECUTED_LOCALLY"
+}

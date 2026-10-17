@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.DeepFilterComposition20261017
+displayName: M3 deep filtered and sorted wrapper composition
+description: >-
+  Refine two source-sealed M3 wrapper atoms, preserving ordered predicates and
+  the existing Java/JNI ABI; include Java contract and native projection proofs.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-deep-filter-20261017
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-deep-filter-native-20261017

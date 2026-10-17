@@ -91,7 +91,7 @@ public final class M3FilteredMaps {
             if (source instanceof FilteredMap<?, ?> old) {
                 FilteredMap<K, V> prior = (FilteredMap<K, V>) old;
                 backing = prior.backing;
-                predicate = (key, value) -> prior.predicate.test(key, value) && filter.test(key, value);
+                predicate = M3CollectionViews.orderedAnd(prior.predicate, filter);
             } else {
                 backing = source;
                 predicate = filter;

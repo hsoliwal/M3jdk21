@@ -1,0 +1,81 @@
+## actual-replay-emission
+$ ['java', '-cp', '/mnt/data/m3-deep-filter/qualified-2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-deep-filter/repo', '/mnt/data/m3-deep-filter/qualified-2/generated']
+PASS M3 short flag replay changes=6
+
+EXIT=0
+
+## fixed-point-replay
+$ ['java', '-cp', '/mnt/data/m3-deep-filter/qualified-2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-deep-filter/repo', '/mnt/data/m3-deep-filter/qualified-2/generated']
+PASS M3 short flag replay changes=0
+
+EXIT=0
+
+## fixed-point-check
+$ ['java', '-cp', '/mnt/data/m3-deep-filter/qualified-2/replay-classes', 'Replay', '--check', '/mnt/data/m3-deep-filter/repo', '/mnt/data/m3-deep-filter/qualified-2/generated']
+PASS M3 short flag replay changes=0
+
+EXIT=0
+
+## generated-tiered
+$ ['java', '-ea', '-Xss256k', '-Xmx256m', '-Dm3.deep.depth=65536', '-cp', '/mnt/data/m3-deep-filter/qualified-2/classes', 'com.m3.collections.M3DeepFilterCompositionProof']
+M3_DEEP_FILTER_PASS checks=1312160 depth=65536 seeds=192
+
+EXIT=0
+
+## generated-interpreter
+$ ['java', '-ea', '-Xss256k', '-Xmx256m', '-Dm3.deep.depth=8192', '-Xint', '-cp', '/mnt/data/m3-deep-filter/qualified-2/classes', 'com.m3.collections.M3DeepFilterCompositionProof']
+M3_DEEP_FILTER_PASS checks=165280 depth=8192 seeds=192
+
+EXIT=0
+
+## generated-jni
+$ ['java', '-ea', '-Xss256k', '-Xmx256m', '-Xcheck:jni', '-Dm3.deep.native.library=/mnt/data/m3-deep-filter/qualified-2/libm3_deep_filter_jni.so', '-cp', '/mnt/data/m3-deep-filter/qualified-2/classes', 'com.m3.collections.M3DeepFilterNativeProof']
+M3_DEEP_FILTER_JNI_PASS checks=156 depth=65536
+
+EXIT=0
+
+## compile-generated-java
+$ ['javac', '--release', '21', '-proc:none', '-Xlint:all', '-Werror', '-h', '/mnt/data/m3-deep-filter/qualified-2/headers', '-d', '/mnt/data/m3-deep-filter/qualified-2/classes', '/mnt/data/m3-deep-filter/qualified-2/generated/m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java', '/mnt/data/m3-deep-filter/qualified-2/generated/m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java', '/mnt/data/m3-deep-filter/qualified-2/generated/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java', '/mnt/data/m3-deep-filter/qualified-2/generated/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterNativeProof.java']
+
+EXIT=0
+
+## compile-jni-ubsan
+$ ['gcc', '-std=c17', '-O2', '-Wall', '-Wextra', '-Werror', '-pedantic', '-fPIC', '-shared', '-fsanitize=undefined', '-fno-sanitize-recover=undefined', '-I/usr/lib/jvm/java-21-openjdk-amd64/include', '-I/usr/lib/jvm/java-21-openjdk-amd64/include/linux', '/mnt/data/m3-deep-filter/repo/m3/collections/wrappers/direct-projection-20261017/m3_map_cursor_jni.c', '/mnt/data/m3-deep-filter/qualified-2/generated/m3/collections/wrappers/deep-filter-20261017/native/m3_deep_filter_jni.c', '-o', '/mnt/data/m3-deep-filter/qualified-2/libm3_deep_filter_jni.so']
+
+EXIT=0
+
+## original-collection-witness [head/tail excerpt; full log digest in LOCAL_RECEIPT.json]
+$ ['java', '-Xss256k', '-Xmx256m', '-cp', '/mnt/data/m3-deep-filter/qualified-2/baseline', 'com.m3.collections.M3DeepFilterCompositionProof', 'collection-witness']
+Exception in thread "main" java.lang.StackOverflowError
+	at com.m3.collections.M3CollectionViews$FilteredCollection.lambda$new$0(M3CollectionViews.java:146)
+	at com.m3.collections.M3CollectionViews$FilteredCollection.lambda$new$0(M3CollectionViews.java:146)
+	at com.m3.collections.M3CollectionViews$FilteredCollection.lambda$new$0(M3CollectionViews.java:146)
+	at com.m3.collections.M3CollectionViews$FilteredCollection.lambda$new$0(M3CollectionViews.java:146)
+	at com.m3.collections.M3CollectionViews$FilteredCollection.lambda$new$0(M3CollectionViews.java:146)
+	at com.m3.collections.M3CollectionViews$FilteredCollection.lambda$new$0(M3CollectionViews.java:146)
+	at com.m3.collections.M3CollectionViews$FilteredCollection.lambda$new$0(M3CollectionViews.java:146)
+	at com.m3.collections.M3CollectionViews$FilteredCollection.lambda$new$0(M3CollectionViews.java:146)
+	at com.m3.collections.M3CollectionViews$FilteredCollection.lambda$new$0(M3CollectionViews.java:146)
+	at com.m3.collections.M3CollectionViews$FilteredCollection.lambda$new$0(M3CollectionViews.java:146)
+[repetitive stack frames omitted]
+	at com.m3.collections.M3DeepFilterCompositionProof.main(M3DeepFilterCompositionProof.java:273)
+
+EXIT=1
+
+## original-map-witness [head/tail excerpt; full log digest in LOCAL_RECEIPT.json]
+$ ['java', '-Xss256k', '-Xmx256m', '-cp', '/mnt/data/m3-deep-filter/qualified-2/baseline', 'com.m3.collections.M3DeepFilterCompositionProof', 'map-witness']
+Exception in thread "main" java.lang.StackOverflowError
+	at com.m3.collections.M3FilteredMaps$FilteredMap.lambda$new$0(M3FilteredMaps.java:94)
+	at com.m3.collections.M3FilteredMaps$FilteredMap.lambda$new$0(M3FilteredMaps.java:94)
+	at com.m3.collections.M3FilteredMaps$FilteredMap.lambda$new$0(M3FilteredMaps.java:94)
+	at com.m3.collections.M3FilteredMaps$FilteredMap.lambda$new$0(M3FilteredMaps.java:94)
+	at com.m3.collections.M3FilteredMaps$FilteredMap.lambda$new$0(M3FilteredMaps.java:94)
+	at com.m3.collections.M3FilteredMaps$FilteredMap.lambda$new$0(M3FilteredMaps.java:94)
+	at com.m3.collections.M3FilteredMaps$FilteredMap.lambda$new$0(M3FilteredMaps.java:94)
+	at com.m3.collections.M3FilteredMaps$FilteredMap.lambda$new$0(M3FilteredMaps.java:94)
+	at com.m3.collections.M3FilteredMaps$FilteredMap.lambda$new$0(M3FilteredMaps.java:94)
+	at com.m3.collections.M3FilteredMaps$FilteredMap.lambda$new$0(M3FilteredMaps.java:94)
+[repetitive stack frames omitted]
+	at com.m3.collections.M3DeepFilterCompositionProof.main(M3DeepFilterCompositionProof.java:276)
+
+EXIT=1
