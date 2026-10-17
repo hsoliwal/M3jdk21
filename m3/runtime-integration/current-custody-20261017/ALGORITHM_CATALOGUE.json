@@ -1,0 +1,35 @@
+{
+  "schema": "M3_ALGORITHM_CATALOGUE_EVALUATION_V1",
+  "category": "Content-addressed contract-preserving source custody",
+  "operation": "Classify exact current source cohort without admitting partial or unknown implementations",
+  "candidates": [
+    {
+      "candidate": "Existing66-target runtime applier plus exact independent current-cohort state",
+      "classification": "ADAPT",
+      "selected": true,
+      "correctnessEvidence": "Source/hash review only; actual Python/Git/Maven execution NOT_RUN",
+      "complexity": "Linear in bytes of72 bounded paths plus manifest validation; no heap-graph inference",
+      "compatibility": "Original CLI, historical before/after/superseded dispatch and four-owner MUTF8 guard preserved",
+      "license": "Apache-2.0 tooling; original source fixture licenses preserved"
+    },
+    {
+      "candidate": "Reseal old manifest or accept arbitrary successor superseded hashes",
+      "selected": false,
+      "reason": "Would lose immutable historical patch contract and whole-cohort all-or-none source custody"
+    },
+    {
+      "candidate": "New transformation or lifetime/regex engine",
+      "selected": false,
+      "reason": "Existing Maven/OpenRewrite adapter and manifest kernel cover this capability; no uncovered implementation gap"
+    }
+  ],
+  "sourceAlgorithmsChanged": false,
+  "runtimePerformance": "NOT_MEASURED",
+  "jniBehavior": "NOT_RUN",
+  "jdkBehavior": "NOT_RUN",
+  "sources": [
+    "https://github.com/hsoliwal/M3jdk21/tree/7ece73842aa4adc965decfa727d2a57b89d72556/m3/runtime-integration/recipe",
+    "https://github.com/hsoliwal/com.synexia/pull/12031"
+  ],
+  "precodeFoss": "79f39361a5f3d26a873a9b4d58900b4e2975ac07"
+}

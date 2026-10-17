@@ -1,0 +1,178 @@
+{
+  "schema": "M3_RUNTIME_CURRENT_CUSTODY_INDEPENDENT_FINAL_SOURCE_REVIEW_V1",
+  "reviewer": "/root/runtime_final_review",
+  "precodeFoss": "79f39361a5f3d26a873a9b4d58900b4e2975ac07",
+  "verdict": "PASS_FINAL_SOURCE_REVIEW_EXECUTION_NOT_RUN",
+  "targetCommit": "7ece73842aa4adc965decfa727d2a57b89d72556",
+  "freshSourceCheck": {
+    "commitRoot": "b4e29593172a53df67c172d6e024e13265e8048e",
+    "srcTree": "8b66ec1d84a468e0d9df15726dfe8be571a67412",
+    "sourceTreeTruncated": false,
+    "actualSrcRows": 68,
+    "matchedGitAndSizeRows": 68,
+    "remainingFourRows": "Bound to same exact commit/root by prior complete byte evidence45ad3fc25d0393c0f386665c66006e50c2671a26",
+    "all72CohortRowsMatchPriorRawGitSizeEvidence": true,
+    "all72SparsePatternsPresent": true
+  },
+  "sourceByteEvidence": "45ad3fc25d0393c0f386665c66006e50c2671a26",
+  "applier": {
+    "gitBlob": "69006c0a5f66c9e4a057957300117b90643bb3f1",
+    "sha256": "c25a6b4271d4c7e8c881adcd2a1500d06940ec58ab582d0ab4160a3436dfd2ad",
+    "originalFourOwnerMutf8GuardByteExact": true,
+    "originalHistoricalStateGitDispatchByteExact": true,
+    "separateCurrentCustodyState": true,
+    "historicalNoLaterAuxReads": true,
+    "cliNoFixtureReads": true
+  },
+  "tests": {
+    "applyGit": "69006c0a5f66c9e4a057957300117b90643bb3f1",
+    "applyRaw": "c25a6b4271d4c7e8c881adcd2a1500d06940ec58ab582d0ab4160a3436dfd2ad",
+    "testGit": "e4a68d3dd6c1a4568ce341f4166f8e394d98c22e",
+    "testRaw": "a8f86801f9343b9b61ce6159f3f978065caebf25f5f8d588b1fda4c66025872d",
+    "old8MethodsRetained": true,
+    "allMethods": [
+      "test_manifest_is_upstream_to_master_v2",
+      "test_current_tree_is_exact_superseded_fixed_point",
+      "test_every_current_target_matches_after_or_exact_superseded",
+      "test_patch_bytes_remain_content_addressed",
+      "test_each_unknown_drift_is_refused_without_partial_write",
+      "test_modified_utf8_owner_fanin_matches_canonical_donor",
+      "test_modified_utf8_partial_and_unreviewed_sources_are_refused",
+      "test_symlink_target_is_refused",
+      "test_exact_current_72_all_modes",
+      "test_historical_patch_66_round_trip",
+      "test_all_64_successor_masks",
+      "test_all_16_modified_utf8_masks",
+      "test_each_72_drift_missing_symlink_no_partial_writes",
+      "test_cohort_shape_path_and_hash_refusals",
+      "test_fixture_source_custody_guards",
+      "test_legacy_does_not_read_auxiliaries_or_fixtures",
+      "test_cli_does_not_read_fixture_data"
+    ],
+    "historicalAfterSeedValidated66": true
+  },
+  "cohort": {
+    "gitBlob": "629d1208f340ca87faab5c353eaebb8caeabe602",
+    "sha256": "a2481edf200087aa9efb0d2825ef95a083124bf32a8182359b04c56b2d022bb3",
+    "legacyManifest": "ebe4a76f7c11f86f1c1cef953940216f6793d321",
+    "legacyPatch": "a5abe528c303f689953731b1ba164e6e6bf53745",
+    "original66ManifestAndPatchUnmodified": true,
+    "fixtureAtoms": 11,
+    "fixtureBytes": 954180,
+    "fixtureLicenses": 3,
+    "currentFiles": 66,
+    "auxiliaries": 6,
+    "historicalAfter66ReconstructionValidatedAgainstManifest": true,
+    "afterAtomCount": 10,
+    "genuineLegacyAdmittedM3String": "70d1d03c109126fdda36c54da21b484bbe368fd9",
+    "sourceCustodyOnly": true
+  },
+  "workflow": {
+    "gitBlob": "298fb1da85879368475f18fe128c46f477de1857",
+    "sha256": "fa76297daada18a5b638fb3dbb117cc5b1d36dcc3ac1f7611e39accfd85d845c",
+    "donorJobBytes": 33345,
+    "derivedBytes": 27996,
+    "sourceByteDerivation": true,
+    "inverseByteExact": true,
+    "trailingLF": "New independent workflow finalLF separate from donor job separator",
+    "headerEquals": true,
+    "exactEdits": 11,
+    "failures": []
+  },
+  "execution": {
+    "formalAutoreview": "NOT_RUN_STORAGE_HOLD",
+    "Maven": "NOT_RUN",
+    "OpenRewrite": "NOT_RUN",
+    "PythonTests": "NOT_RUN",
+    "historicalGitReplay": "NOT_RUN",
+    "JNI": "NOT_RUN",
+    "matchedJdkJtreg": "NOT_RUN",
+    "performanceRetention": "NOT_RUN"
+  },
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "localOutput": false,
+  "refsMutated": false,
+  "verifier": {
+    "gitBlob": "02fc95bf2b3792aabffe3a64c59deac41b883b39",
+    "sha256": "3eb1e7001bfb0231ee3799bbad75390395faf8e4ad692807b0da87a0de3c5ae7",
+    "requiredPaths": 30,
+    "hardGitPins": 29,
+    "hardRawPins": 29,
+    "closureSelfTestExpectedRefusals": 115,
+    "reportSelfTestExpectedRefusals": 18,
+    "suites": {
+      "com.synexia.rewrite.M3RuntimeCurrentCustodyRecipeTest": [
+        "runtimeCurrentCustodyEveryPartialStateAndOrder",
+        "runtimeCurrentCustodyRefusesDriftMissingAndDuplicateOwnership"
+      ]
+    },
+    "runtimeTests": {
+      "RecipeTest": [
+        "test_manifest_is_upstream_to_master_v2",
+        "test_current_tree_is_exact_superseded_fixed_point",
+        "test_every_current_target_matches_after_or_exact_superseded",
+        "test_patch_bytes_remain_content_addressed",
+        "test_each_unknown_drift_is_refused_without_partial_write",
+        "test_modified_utf8_owner_fanin_matches_canonical_donor",
+        "test_modified_utf8_partial_and_unreviewed_sources_are_refused",
+        "test_symlink_target_is_refused"
+      ],
+      "CurrentCustodyTest": [
+        "test_exact_current_72_all_modes",
+        "test_historical_patch_66_round_trip",
+        "test_all_64_successor_masks",
+        "test_all_16_modified_utf8_masks",
+        "test_each_72_drift_missing_symlink_no_partial_writes",
+        "test_cohort_shape_path_and_hash_refusals",
+        "test_fixture_source_custody_guards",
+        "test_legacy_does_not_read_auxiliaries_or_fixtures",
+        "test_cli_does_not_read_fixture_data"
+      ]
+    },
+    "all29HardPinsMatchBPreMap": true,
+    "all21AResourcePinsMatch": true,
+    "allFourActualOwnersMustEqualMavenEmitted": true,
+    "all72CurrentSourceGitRawBytesChecked": true,
+    "allSevenBuildEvidenceGitRawChecked": true
+  },
+  "sdk": {
+    "core": "945fbd17431264b42ffe02047e1a81ed45e1facf",
+    "files": 31,
+    "bytes": 1811798,
+    "pins": "c071f6f1059faf2b3c7b0f39ed14dcfa344ffa5c",
+    "pinsSha256": "3e7f78490f13bd452ff36c2990ce7ab6c0e7f13be0ff3775dd5c81e6ca331ab3",
+    "requiredPinRows": 30,
+    "treeTruncated": false,
+    "all31TreePathsAndGitIdentitiesMatched": true,
+    "all31Modes100644": true,
+    "all30PinRawAndGitRowsMatch": true,
+    "sourceCheckpoint": "ad105131a0aa0b50b65e1615b78633478c28aa58",
+    "runtimeMapMatchesA17": true,
+    "sourceFindings": [],
+    "all31TreeGitModeAndByteCountsMatch": true,
+    "rawSourceReadbackProof": "31e625782b06949546bd907f117a5dad8255b754",
+    "all31RawSourceReadbackRowsBoundToFinalMap": true
+  },
+  "correctedFindings": [
+    {
+      "finding": "External map used JavaScript string length for cohort JSON, understating its UTF8 bytes by2",
+      "affected": "b47ed checkpoint.coreBytes and files[cohort629d].bytes",
+      "actualBlob": "629d1208f340ca87faab5c353eaebb8caeabe602",
+      "actualBytes": 45883,
+      "declaredBytes": 45881,
+      "actualSdkBytes": 1811798,
+      "recipeRawAndGitIdentitiesChanged": false,
+      "resolution": "Corrected metadata checkpointad105: actual UTF8cohort45883/core1811798; all31Tree mode/Git/size rows independently match; code/raw/Git unchanged"
+    }
+  ],
+  "actualRuntimeSourceFilesCheckedByEarlierProof": 72,
+  "unknowns": [
+    "Actual Maven/OpenRewrite and Python/git replay have not run",
+    "15minute/512MiB hosted measured fit is unmeasured",
+    "Current source custody does not qualify full String integration, runtime, JNI, matched JDK or performance"
+  ],
+  "atUtc": "2026-10-17 10:40:41 UTC",
+  "unresolvedSourceFindings": [],
+  "scope": "INDEPENDENT_SOURCE_AND_OBJECT_REVIEW_ONLY_NOT_EXECUTION"
+}

@@ -1,0 +1,9 @@
+# Provenance and licenses
+
+This work adapts the Synexia runtime integration applier6f04034d19b92ed55deba47b870c1d850a734a52 and tests e90bad7e46a39ec5c9b4c86f774a77116007ed0b at M3jdk21 receiving commit7ece73842aa4adc965decfa727d2a57b89d72556. Their Apache-2.0 headers remain. The original manifest ebe4a76f7c11f86f1c1cef953940216f6793d321 and runtime.patch a5abe528c303f689953731b1ba164e6e6bf53745 remain exact.
+
+The SDK directly reuses Apache-2.0 transformation adapter1c1b1b568d369f688f6953161636bf36b484bf5a, manifest kernel38df5f97bbeec8a8a8cfc77091d56bda925c07f2 and strict Maven POM d79867bcc09ad6329e12418e15907e54b8ab025f. Test/verifier patterns derive from047df9dd6d37d8ecc39e51905729d557d4a70b1f and20fdc0b6de51de46bcce615f16ad1dc0dabb1cd4. The independent hosted workflow adapts the bounded compiler job from189a9292a2150ef04df003ab07cb1febaed0f7f3; exact reversible edit evidence accompanies it.
+
+The eleven immutable historical/admitted fixture atoms are original M3jdk21/OpenJDK source bytes, individually pinned in the cohort and SDK inventory. They include hotspot classfile files and java.base source files. Original GPLv2-only or GPLv2 with Classpath Exception headers are preserved, along with LICENSE, ADDITIONAL_LICENSE_INFO and ASSEMBLY_EXCEPTION under SDK resources licenses/M3jdk21. These test-data bytes and the immutable legacy patch are not relicensed Apache-2.0. Their licenses remain those of the original files. Fixtures are not compiled as production sources; the CLI does not read them.
+
+OpenRewrite/JUnit/Maven dependencies retain their respective upstream licenses. No competitive-programming solution, new matcher, allocator, native engine or collection implementation is introduced by this source-custody phase. FOSS_REUSE_DECISION.tsv records donor inventory/classification before implementation; the algorithm catalogue records the selected existing mechanism and the explicit behavioral limits.

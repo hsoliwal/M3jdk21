@@ -1,0 +1,19 @@
+{
+  "schema": "M3_RUNTIME_RESOURCE_BASELINE_STATIC_AUDIT_V1",
+  "resourcesCheckpoint": "65a598913ce8d681d1fe129f89495214ecaa89d2",
+  "manifestGitBlob": "ebe4a76f7c11f86f1c1cef953940216f6793d321",
+  "cohortGitBlob": "629d1208f340ca87faab5c353eaebb8caeabe602",
+  "legacySources": 66,
+  "legacyViolations": [],
+  "historicalAfterSources": 66,
+  "historicalViolations": 0,
+  "beforeFiles": 30,
+  "beforeAbsent": 36,
+  "execution": "NOT_RUN_JS_METADATA_COMPARISON_ONLY",
+  "sourceOnly": true,
+  "Python": "NOT_RUN",
+  "gitApply": "NOT_RUN",
+  "runtimeQualified": false,
+  "jniQualified": false,
+  "phaseAdvanced": false
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "M3_RUNTIME_CURRENT_CUSTODY_SOURCE_BINDING_V1",
+  "repository": "hsoliwal/com.synexia",
+  "sourceCommit": "f2d1fc2be70a5df066e17c2592627e8f966bc8a8",
+  "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/12050",
+  "sourcePath": "synexia-openrewrite-recipes/recipes/m3-runtime-current-custody-20261017/sdk",
+  "receiverCorePath": "m3/runtime-integration/current-custody-20261017/sdk",
+  "moduleGitTree": "945fbd17431264b42ffe02047e1a81ed45e1facf",
+  "pinsSha256": "3e7f78490f13bd452ff36c2990ce7ab6c0e7f13be0ff3775dd5c81e6ca331ab3",
+  "openrewriteAdapterGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+  "manifestKernelGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "sourceCustodyOnly": true,
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

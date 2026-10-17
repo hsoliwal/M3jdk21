@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.RuntimeCurrentCustody
+displayName: Retain historical runtime replay and exact current source custody
+description: Generates four exact tooling and qualification owners while retaining two immutable historical inputs. Current source custody does not qualify runtime, JNI, JDK or performance.
+recipeList:
+  - com.synexia.rewrite.M3RuntimeCurrentCustodyRecipe

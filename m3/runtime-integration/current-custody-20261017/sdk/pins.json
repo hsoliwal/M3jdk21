@@ -1,0 +1,194 @@
+{
+  "schema": "M3_RUNTIME_CURRENT_CUSTODY_RECEIVING_SDK_INPUTS_V1",
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "runtimeTests": {
+    "RecipeTest": [
+      "test_manifest_is_upstream_to_master_v2",
+      "test_current_tree_is_exact_superseded_fixed_point",
+      "test_every_current_target_matches_after_or_exact_superseded",
+      "test_patch_bytes_remain_content_addressed",
+      "test_each_unknown_drift_is_refused_without_partial_write",
+      "test_modified_utf8_owner_fanin_matches_canonical_donor",
+      "test_modified_utf8_partial_and_unreviewed_sources_are_refused",
+      "test_symlink_target_is_refused"
+    ],
+    "CurrentCustodyTest": [
+      "test_exact_current_72_all_modes",
+      "test_historical_patch_66_round_trip",
+      "test_all_64_successor_masks",
+      "test_all_16_modified_utf8_masks",
+      "test_each_72_drift_missing_symlink_no_partial_writes",
+      "test_cohort_shape_path_and_hash_refusals",
+      "test_fixture_source_custody_guards",
+      "test_legacy_does_not_read_auxiliaries_or_fixtures",
+      "test_cli_does_not_read_fixture_data"
+    ]
+  },
+  "expectedRuntimeTestMethods": 17,
+  "expectedSdkMethods": 2,
+  "expectedOwnedPartialStates": 16,
+  "expectedSourceOrdersPerState": 2,
+  "expectedOwnershipRefusals": 16,
+  "expectedClosureRefusals": 115,
+  "expectedSurefireReportRefusals": 18,
+  "sourceCustodyPaths": 72,
+  "buildSourceEvidenceFiles": 7,
+  "execution": "NOT_RUN",
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "files": [
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "unchangedGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "unchangedGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3RuntimeCurrentCustodyRecipe.java",
+      "sha256": "ba840deff9e82910992753e0e12400cb3c7354765e801d5fc63c61d19e2e88c4",
+      "unchangedGitBlob": "b243bf67f4318c481e63e472dd9445821605c91e"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "unchangedGitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/before/apply.py",
+      "sha256": "d1e98695bbb175acd6661f1d6f2ad2eb9dc90c5a67cc18da280b4c20aee771a5",
+      "unchangedGitBlob": "6f04034d19b92ed55deba47b870c1d850a734a52"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/before/manifest.json",
+      "sha256": "12a749485fcd401d8fba311e5b8911f30e10988a63a14ebcbd11edac3fbee643",
+      "unchangedGitBlob": "ebe4a76f7c11f86f1c1cef953940216f6793d321"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/before/runtime.patch",
+      "sha256": "bfc58c6eb3c7540808839e937a0f64788d65eb64097d10407ecccf899560d0eb",
+      "unchangedGitBlob": "a5abe528c303f689953731b1ba164e6e6bf53745"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/before/test_recipe.py",
+      "sha256": "46d731debe97ab67d455078e493ce92f75c40481c2727868baa79ef6a7f8bad8",
+      "unchangedGitBlob": "e90bad7e46a39ec5c9b4c86f774a77116007ed0b"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/hotspot/share/classfile/javaClasses.cpp",
+      "sha256": "10816a3adb62ae3dd5b7fdefb79a43947637fb90924298ace56c8320ea4d60cb",
+      "unchangedGitBlob": "a766d1f62716bf96f99bc275afd7e57e12ce9de7"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/hotspot/share/classfile/javaClasses.hpp",
+      "sha256": "36a6ae73f908a42bd565ea8caca830f7de63e423092c92141f0fd4110dc75df3",
+      "unchangedGitBlob": "9052154399d82a077bbec99f92b9b4521e19ed2f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/hotspot/share/classfile/javaClasses.inline.hpp",
+      "sha256": "18edfbc5b4ae95130b6fcfe19fd9927abd0e4cc5504129d9a20b025b10f0b7a1",
+      "unchangedGitBlob": "0810b8c905e57745b9f84443b67c3b3fdd494bc4"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/lang/M3String.java",
+      "sha256": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b",
+      "unchangedGitBlob": "479d1f8145697d270af17f5e2d2f1c85f426fb33"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/lang/M3StringFacts.java",
+      "sha256": "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f",
+      "unchangedGitBlob": "763a76fb55a52576ca1a3edc48fcc214663f799e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/lang/M3StringPool.java",
+      "sha256": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b",
+      "unchangedGitBlob": "d97d0dd8f2c26599086ad817ed5d521b29593d2d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+      "sha256": "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4",
+      "unchangedGitBlob": "c45ae8696da18b15b7b9ee0267cc05aec1ae6c92"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/lang/String.java",
+      "sha256": "c49e422dfe0e6b83a2d51155f0d36b5223719dfefd211a96313705bc3ee253ca",
+      "unchangedGitBlob": "dd4033194bc27c640948b59bcc9085d4f357c74c"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+      "sha256": "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f",
+      "unchangedGitBlob": "7a13107628460134548a02095ca5985437a112bb"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/util/regex/Pattern.java",
+      "sha256": "d2828f7a76ae172204abe56cdf4e9df4b5fc0133bb65936b4e82aa9f7b9d105f",
+      "unchangedGitBlob": "ee1c1951a7498c191810bc1901fff48972cddd53"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/legacy-admitted/src/java.base/share/classes/java/lang/M3String.java",
+      "sha256": "24ac1f87c1b2022b08d695ae6b116e9376dad59ed0ffb86f52da0003dd3e036d",
+      "unchangedGitBlob": "70d1d03c109126fdda36c54da21b484bbe368fd9"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/licenses/M3jdk21/ADDITIONAL_LICENSE_INFO",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "unchangedGitBlob": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/licenses/M3jdk21/ASSEMBLY_EXCEPTION",
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33",
+      "unchangedGitBlob": "429666664e9ff5029d51dc7f807e1ec9eff2dd9f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/licenses/M3jdk21/LICENSE",
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726",
+      "unchangedGitBlob": "8b400c7ab81b7b18baff3f81d597f5e511883134"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/manifest.tsv",
+      "sha256": "26bd5136ac1e0216b891cd2537e0d809c60e7536169b564fd63d0e04cfe79f09",
+      "unchangedGitBlob": "795a72ce3a8060c0adb872030639802cdad11139"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/out/apply.py",
+      "sha256": "c25a6b4271d4c7e8c881adcd2a1500d06940ec58ab582d0ab4160a3436dfd2ad",
+      "unchangedGitBlob": "69006c0a5f66c9e4a057957300117b90643bb3f1"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/out/current-cohort-20261017.json",
+      "sha256": "a2481edf200087aa9efb0d2825ef95a083124bf32a8182359b04c56b2d022bb3",
+      "unchangedGitBlob": "629d1208f340ca87faab5c353eaebb8caeabe602"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/out/m3-runtime-current-custody.yml",
+      "sha256": "fa76297daada18a5b638fb3dbb117cc5b1d36dcc3ac1f7611e39accfd85d845c",
+      "unchangedGitBlob": "298fb1da85879368475f18fe128c46f477de1857"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/out/test_recipe.py",
+      "sha256": "a8f86801f9343b9b61ce6159f3f978065caebf25f5f8d588b1fda4c66025872d",
+      "unchangedGitBlob": "e4a68d3dd6c1a4568ce341f4166f8e394d98c22e"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-runtime-current-custody-20261017.yml",
+      "sha256": "9a00058b1405152dde75c97836539b549b2b9772cfe8c42a4cc1d6440261c6fe",
+      "unchangedGitBlob": "6ec42d564153a4d449a582572e35a3605e9ee23a"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3RuntimeCurrentCustodyRecipeTest.java",
+      "sha256": "af03be984576d471b72cc2cd8ef4c141a8eed394a87df4e28ac21ce35022065d",
+      "unchangedGitBlob": "e9b899ecc90278998248ee94934dbee3599f1835"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "3eb1e7001bfb0231ee3799bbad75390395faf8e4ad692807b0da87a0de3c5ae7",
+      "unchangedGitBlob": "02fc95bf2b3792aabffe3a64c59deac41b883b39"
+    }
+  ]
+}
