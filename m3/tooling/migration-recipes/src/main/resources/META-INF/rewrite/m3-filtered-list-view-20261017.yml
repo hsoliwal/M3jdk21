@@ -1,0 +1,8 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.FilteredListView20261017
+displayName: M3JDK21 live filtered List wrapper
+description: Exact source-sealed List-capability extension of the existing filtered collection owner.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-filtered-list-view-20261017

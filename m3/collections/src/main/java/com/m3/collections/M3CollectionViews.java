@@ -13,9 +13,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.NavigableSet;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.RandomAccess;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.Spliterator;
@@ -32,8 +34,10 @@ import java.util.function.Predicate;
  * ordering semantics of the backing collection.
  *
  * <p>Backed views are not automatically synchronized, serializable or snapshots.
- * Iterator removal is deliberately unsupported; bulk mutations and explicit
- * {@code remove} do write through to the underlying collection when supported.
+ * The generic selection iterator deliberately does not expose removal. Filtered
+ * List views additionally implement indexed and ListIterator mutations against
+ * the authoritative backing list. Bulk mutations and explicit {@code remove}
+ * write through when supported.
  *
  * <p>All live wrappers keep the supplied owner authoritative, including nested
  * filters and sorted ranges. They neither sort the owner nor build a second
@@ -53,7 +57,25 @@ public final class M3CollectionViews {
         if (backing instanceof NavigableSet<?>) return filtered((NavigableSet<E>) backing, predicate);
         if (backing instanceof SortedSet<?>) return filtered((SortedSet<E>) backing, predicate);
         if (backing instanceof Set<?>) return filtered((Set<E>) backing, predicate);
+        if (backing instanceof List<?>) return filtered((List<E>) backing, predicate);
         return new FilteredCollection<>(backing, predicate);
+    }
+
+    /**
+     * Returns a live filtered List whose indexes are indexes in the visible sequence.
+     *
+     * <p>No visible-index array is retained. Indexed operations map one requested
+     * visible coordinate to the authoritative backing list on demand. A terminal
+     * insertion maps to {@code backing.size()}, preserving hidden trailing values.
+     * The wrapper advertises {@link RandomAccess} only when the supplied list does.
+     */
+    public static <E> List<E> filtered(
+            List<E> backing, Predicate<? super E> predicate) {
+        Objects.requireNonNull(backing, "backing");
+        Objects.requireNonNull(predicate, "predicate");
+        return backing instanceof RandomAccess
+                ? new RandomAccessFilteredList<>(backing, predicate)
+                : new FilteredList<>(backing, predicate);
     }
 
     /** Retains runtime sorted capability and set equality in the live view. */
@@ -90,6 +112,40 @@ public final class M3CollectionViews {
         for (E element : source) sorted.add(element);
         sorted.sort(comparator);
         return Collections.unmodifiableList(sorted);
+    }
+
+    /**
+     * Detached encounter-order snapshot with one predicate evaluation per source
+     * occurrence. This deliberately does not call source.size() or create a
+     * preliminary filtered view.
+     */
+    public static <E> List<E> filteredSnapshot(
+            Collection<? extends E> source, Predicate<? super E> predicate) {
+        return Collections.unmodifiableList(selectedCopy(source, predicate));
+    }
+
+    /**
+     * Fused filter plus stable sort over one detached selected-reference owner.
+     * Comparator-equivalent elements remain distinct and retain encounter order.
+     */
+    public static <E> List<E> filteredSortedSnapshot(
+            Collection<? extends E> source, Predicate<? super E> predicate,
+            Comparator<? super E> comparator) {
+        ArrayList<E> selected = selectedCopy(source, predicate);
+        selected.sort(comparator);
+        return Collections.unmodifiableList(selected);
+    }
+
+    /** Shared one-pass snapshot-selection atom received from M3JDK21 #990. */
+    private static <E> ArrayList<E> selectedCopy(
+            Collection<? extends E> source, Predicate<? super E> predicate) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(predicate, "predicate");
+        ArrayList<E> selected = new ArrayList<>();
+        for (E element : source) {
+            if (predicate.test(element)) selected.add(element);
+        }
+        return selected;
     }
 
     /** A live filter without per-element retained adapters. */
@@ -214,6 +270,261 @@ public final class M3CollectionViews {
                 }
             }
             return changed;
+        }
+    }
+
+    /**
+     * Live List projection with visible-sequence indexes and no retained index.
+     *
+     * <p>Hidden elements keep their backing positions. For an insertion before an
+     * existing visible element, the new value is inserted immediately before that
+     * stored representative. The terminal visible boundary maps to the end of the
+     * backing list. ListIterator state is maintained in visible coordinates.</p>
+     */
+    private static class FilteredList<E> extends FilteredCollection<E> implements List<E> {
+        protected final List<E> list;
+
+        @SuppressWarnings("unchecked")
+        private FilteredList(List<E> source, Predicate<? super E> predicate) {
+            super(source, predicate);
+            this.list = (List<E>) super.backing;
+        }
+
+        @Override
+        public E get(int index) {
+            return list.get(backingIndex(index));
+        }
+
+        @Override
+        public E set(int index, E element) {
+            requireVisible(element);
+            return list.set(backingIndex(index), element);
+        }
+
+        @Override
+        public void add(int index, E element) {
+            requireVisible(element);
+            list.add(insertionBoundary(index), element);
+        }
+
+        @Override
+        public boolean addAll(int index, Collection<? extends E> elements) {
+            Objects.requireNonNull(elements, "elements");
+            int boundary = insertionBoundary(index);
+            for (E element : elements) requireVisible(element);
+            return list.addAll(boundary, elements);
+        }
+
+        @Override
+        public E remove(int index) {
+            return list.remove(backingIndex(index));
+        }
+
+        @Override
+        public boolean remove(Object candidate) {
+            ListIterator<E> iterator = list.listIterator();
+            while (iterator.hasNext()) {
+                E stored = iterator.next();
+                if (super.predicate.test(stored) && Objects.equals(stored, candidate)) {
+                    iterator.remove();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean contains(Object candidate) {
+            return indexOf(candidate) >= 0;
+        }
+
+        @Override
+        public int indexOf(Object candidate) {
+            int visible = 0;
+            for (E stored : list) {
+                if (super.predicate.test(stored)) {
+                    if (Objects.equals(stored, candidate)) return visible;
+                    visible++;
+                }
+            }
+            return -1;
+        }
+
+        @Override
+        public int lastIndexOf(Object candidate) {
+            int visible = 0;
+            int result = -1;
+            for (E stored : list) {
+                if (super.predicate.test(stored)) {
+                    if (Objects.equals(stored, candidate)) result = visible;
+                    visible++;
+                }
+            }
+            return result;
+        }
+
+        @Override
+        public ListIterator<E> listIterator() {
+            return listIterator(0);
+        }
+
+        @Override
+        public ListIterator<E> listIterator(int index) {
+            int currentSize = size();
+            if (index < 0 || index > currentSize) {
+                throw new IndexOutOfBoundsException(
+                        "visible index " + index + " outside [0," + currentSize + "]");
+            }
+            return new FilteredListIterator(index);
+        }
+
+        @Override
+        public List<E> subList(int fromIndex, int toIndex) {
+            int currentSize = size();
+            Objects.checkFromToIndex(fromIndex, toIndex, currentSize);
+            int from = insertionBoundary(fromIndex);
+            int to = insertionBoundary(toIndex);
+            return filtered(list.subList(from, to), super.predicate);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) return true;
+            if (!(other instanceof List<?> otherList) || otherList.size() != size()) return false;
+            Iterator<E> left = iterator();
+            Iterator<?> right = otherList.iterator();
+            while (left.hasNext() && right.hasNext()) {
+                if (!Objects.equals(left.next(), right.next())) return false;
+            }
+            return !left.hasNext() && !right.hasNext();
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 1;
+            for (E element : this) {
+                hash = 31 * hash + (element == null ? 0 : element.hashCode());
+            }
+            return hash;
+        }
+
+        private void requireVisible(E element) {
+            if (!super.predicate.test(element)) {
+                throw new IllegalArgumentException("element rejected by view predicate");
+            }
+        }
+
+        private int backingIndex(int visibleIndex) {
+            if (visibleIndex < 0) {
+                throw new IndexOutOfBoundsException("negative visible index: " + visibleIndex);
+            }
+            int visible = 0;
+            ListIterator<E> iterator = list.listIterator();
+            while (iterator.hasNext()) {
+                int backingIndex = iterator.nextIndex();
+                E element = iterator.next();
+                if (super.predicate.test(element)) {
+                    if (visible == visibleIndex) return backingIndex;
+                    visible++;
+                }
+            }
+            throw new IndexOutOfBoundsException(
+                    "visible index " + visibleIndex + " >= " + visible);
+        }
+
+        private int insertionBoundary(int visibleIndex) {
+            if (visibleIndex < 0) {
+                throw new IndexOutOfBoundsException("negative visible index: " + visibleIndex);
+            }
+            int visible = 0;
+            ListIterator<E> iterator = list.listIterator();
+            while (iterator.hasNext()) {
+                int backingIndex = iterator.nextIndex();
+                E element = iterator.next();
+                if (super.predicate.test(element)) {
+                    if (visible == visibleIndex) return backingIndex;
+                    visible++;
+                }
+            }
+            if (visible == visibleIndex) return list.size();
+            throw new IndexOutOfBoundsException(
+                    "visible index " + visibleIndex + " > " + visible);
+        }
+
+        private final class FilteredListIterator implements ListIterator<E> {
+            private int cursor;
+            private int lastReturned = -1;
+
+            private FilteredListIterator(int index) {
+                cursor = index;
+            }
+
+            @Override
+            public boolean hasNext() {
+                return cursor < FilteredList.this.size();
+            }
+
+            @Override
+            public E next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                E result = FilteredList.this.get(cursor);
+                lastReturned = cursor;
+                cursor++;
+                return result;
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return cursor > 0;
+            }
+
+            @Override
+            public E previous() {
+                if (!hasPrevious()) throw new NoSuchElementException();
+                cursor--;
+                E result = FilteredList.this.get(cursor);
+                lastReturned = cursor;
+                return result;
+            }
+
+            @Override
+            public int nextIndex() {
+                return cursor;
+            }
+
+            @Override
+            public int previousIndex() {
+                return cursor - 1;
+            }
+
+            @Override
+            public void remove() {
+                if (lastReturned < 0) throw new IllegalStateException();
+                FilteredList.this.remove(lastReturned);
+                if (lastReturned < cursor) cursor--;
+                lastReturned = -1;
+            }
+
+            @Override
+            public void set(E element) {
+                if (lastReturned < 0) throw new IllegalStateException();
+                FilteredList.this.set(lastReturned, element);
+            }
+
+            @Override
+            public void add(E element) {
+                FilteredList.this.add(cursor, element);
+                cursor++;
+                lastReturned = -1;
+            }
+        }
+    }
+
+    private static final class RandomAccessFilteredList<E> extends FilteredList<E>
+            implements RandomAccess {
+        private RandomAccessFilteredList(
+                List<E> source, Predicate<? super E> predicate) {
+            super(source, predicate);
         }
     }
 

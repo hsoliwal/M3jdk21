@@ -1,0 +1,14 @@
+category	candidate	source_or_project	license_role	decision	rationale
+live-filter-owner	M3CollectionViews.FilteredCollection	hsoliwal/M3jdk21 first-party	Apache-2.0 owner	REUSE	Already owns live backing+predicate, nested predicate flattening, unsized selection spliterator and visible-only bulk mutations.
+list-contract	java.util.List / ListIterator	OpenJDK 21 contract	Contract oracle only	ORACLE	Defines visible index, iterator state, equals/hashCode, subList and optional mutation behavior; no OpenJDK implementation copied.
+filtered-collection	Collections2.FilteredCollection	google/guava	Apache-2.0 comparison	REJECT_DIRECT_DONOR	Live filtered Collection semantics are useful comparison, but it intentionally does not expose List indexed semantics.
+filtered-iterator	Iterators.filter	google/guava	Apache-2.0 comparison	REJECT_DIRECT_DONOR	Useful lazy selection category, but returned iterator is unmodifiable and cannot satisfy indexed List/ListIterator behavior.
+validation-list	PredicatedList	apache/commons-collections	Apache-2.0 comparison	REJECT_DIRECT_DONOR	Decorator rejects invalid additions but does not hide pre-existing predicate-failing elements, so it is not a filtered projection.
+eager-select	MutableList.select	eclipse-collections	EPL-2.0 comparison	REJECT_DIRECT_DONOR	Selection produces a target collection/result; this task requires a backed live view with owner mutations preserved.
+collection-utils	CollectionUtils	spring-projects/spring-framework	Apache-2.0 comparison	REJECT_DIRECT_DONOR	Utility methods do not provide the required live indexed filtered List owner.
+stored-equality	M3FilteredMaps stored-representative rule	hsoliwal/M3jdk21 first-party	Apache-2.0 owner	REUSE_PATTERN	Confirms predicates must be evaluated on stored representatives; filtered List remove(Object)/contains cannot test only the equal caller probe.
+visible-index	Remove Element / filter sequence	LeetCode problem category	Taxonomy only	CATEGORY_ONLY	Adversarial compacted-index cases; no statement/editorial/solution code copied.
+visible-index	Java List operations	HackerRank problem category	Taxonomy only	CATEGORY_ONLY	Mutation/index boundary corpus ideas only; no solution code copied.
+visible-index	filter a List / iterator mutation	GeeksforGeeks problem category	Taxonomy only	CATEGORY_ONLY	Problem classification and hostile cases only; no implementation copied.
+random-access	marker preservation	JDK RandomAccess contract	Contract oracle only	SELECT	Expose RandomAccess only when the authoritative backing List exposes it.
+snapshot-fusion	M3JDK21 #990 filteredSnapshot/filteredSortedSnapshot	hsoliwal/M3jdk21 first-party	Apache-2.0 owner	REUSE	Absorb the already-qualified one-pass selectedCopy snapshot atom so this branch is a strict additive superset rather than a competing M3CollectionViews lineage.
