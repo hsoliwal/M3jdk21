@@ -479,6 +479,16 @@ final class M3StringFacts {
         return signal | (1L << (first & 63)) | (1L << (second & 63));
     }
 
+    /** Required bigram mask uses the same canonical text fact mixer; no new index. */
+    static long bigramSignal(char first, char second) {
+        return addBigramSignal(0L, first, second);
+    }
+
+    /** Required trigram mask uses the canonical UTF-16 sequence fact mixer. */
+    static long trigramSignal(char first, char second, char third) {
+        return addTrigramSignal(0L, first, second, third);
+    }
+
     private static long addBigramSignal(long signal, char first, char second) {
         return addNgramSignal(signal, ((long) first << 16) | second);
     }

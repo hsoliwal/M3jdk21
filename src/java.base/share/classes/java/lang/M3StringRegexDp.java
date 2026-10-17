@@ -84,9 +84,13 @@ final class M3StringRegexDp {
         if (length != 0 && plan.fixedLastUnit >= 0
                 && source.charAt(length - 1) != plan.fixedLastUnit) return true;
         M3StringFacts known = source.factsIfPrepared();
-        return known != null
-                && (known.bitSignal64 & plan.mandatoryUnitSignals)
-                        != plan.mandatoryUnitSignals;
+        return known != null && (
+                (known.bitSignal64 & plan.mandatoryUnitSignals)
+                        != plan.mandatoryUnitSignals
+                || (known.bigramSignal64 & plan.mandatoryBigramSignals)
+                        != plan.mandatoryBigramSignals
+                || (known.trigramSignal64 & plan.mandatoryTrigramSignals)
+                        != plan.mandatoryTrigramSignals);
     }
 
     private static Tables tables() {
@@ -244,9 +248,9 @@ final class M3StringRegexDp {
     private static long maximumRetainedPrimitiveBytes() {
         long perPlan = MAX_PATTERN_UNITS * (long) Integer.BYTES
                 + (MAX_BIT_ATOMS + 1L + 128L + 2L) * Long.BYTES + Integer.BYTES;
-        // Four new primitive pattern facts: min length, required signal and two
-        // fixed literal boundaries. Effects may retain evicted compiled plans.
-        perPlan += 3L * Integer.BYTES + Long.BYTES;
+        // Six precomputed facts: min length, required units/pairs/triples,
+        // and fixed boundaries. Effects may retain evicted compiled plans.
+        perPlan += 3L * Integer.BYTES + 3L * Long.BYTES;
         return (PLAN_SLOTS + (long) EFFECT_SLOTS) * perPlan
                 + EFFECT_SLOTS * 3L * Long.BYTES;
     }
@@ -275,6 +279,8 @@ final class M3StringRegexDp {
         final long dot;
         final int minimumUtf16Units;
         final long mandatoryUnitSignals;
+        final long mandatoryBigramSignals;
+        final long mandatoryTrigramSignals;
         final int fixedFirstUnit;
         final int fixedLastUnit;
 
@@ -283,17 +289,40 @@ final class M3StringRegexDp {
             this.units = units;
             int minimum = 0;
             long requiredSignals = 0L;
+            long requiredPairs = 0L;
+            long requiredTriples = 0L;
+            int consecutiveLiterals = 0;
+            char previous = 0;
+            char previous2 = 0;
             for (int atom : atoms) {
-                if ((atom & STAR) == 0) {
+                boolean mandatory = (atom & STAR) == 0;
+                char literal = (char) (atom & CODE_UNIT);
+                if (mandatory) {
                     minimum++;
-                    char literal = (char) (atom & CODE_UNIT);
                     if (literal != '.') {
                         requiredSignals |= M3StringFacts.codeUnitSignal(literal);
                     }
                 }
+                // Only adjacent, non-starred literal atoms are unavoidable
+                // neighbors in every full match. A dot or star breaks the run.
+                if (!mandatory || literal == '.') {
+                    consecutiveLiterals = 0;
+                    continue;
+                }
+                if (consecutiveLiterals >= 1) {
+                    requiredPairs |= M3StringFacts.bigramSignal(previous, literal);
+                }
+                if (consecutiveLiterals >= 2) {
+                    requiredTriples |= M3StringFacts.trigramSignal(previous2, previous, literal);
+                }
+                previous2 = previous;
+                previous = literal;
+                consecutiveLiterals++;
             }
             minimumUtf16Units = minimum;
             mandatoryUnitSignals = requiredSignals;
+            mandatoryBigramSignals = requiredPairs;
+            mandatoryTrigramSignals = requiredTriples;
             int first = atoms[0];
             int last = atoms[atoms.length - 1];
             fixedFirstUnit = (first & STAR) == 0
