@@ -12,6 +12,8 @@ import com.m3.rewrite.scope.M3RecipeScopeRegistry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.util.HexFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,24 @@ final class M3ReleaseJepAuthorityRepairRecipeTest {
     private static final String ROOT =
             "/com/m3/rewrite/backport/jdk21-hash-pinned-text/"
                     + "release-jep-authority-repair-20261006/";
+
+    @Test
+    void currentManifestHasJavaLexicalOrderAndUnmodifiedSourceHashes() throws Exception {
+        String previous = "";
+        String[] rows = resource(ROOT + "manifest.tsv").stripTrailing().split("\\n");
+        assertEquals(11, rows.length);
+        for (String line : rows) {
+            String[] fields = line.split("\\t", -1);
+            assertEquals(4, fields.length);
+            assertTrue(previous.compareTo(fields[0]) < 0, "unordered manifest: " + fields[0]);
+            previous = fields[0];
+            assertTrue("ABSENT".equals(fields[1]) || fields[1].matches("[0-9a-f]{64}"));
+            String actual = HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256")
+                            .digest(resource(ROOT + fields[3]).getBytes(StandardCharsets.UTF_8)));
+            assertEquals(fields[2], actual, fields[0]);
+        }
+    }
 
     @Test
     void metadataScopeAndNamedRecipeAreExplicit() {
@@ -83,8 +103,14 @@ final class M3ReleaseJepAuthorityRepairRecipeTest {
         assertTrue(catalogue.indexOf("25\t520\t") < catalogue.indexOf("25\t521\t"));
 
         String priority = after.get("m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv").printAll();
-        assertTrue(priority.contains("24\t404\tGenerational Shenandoah (Experimental)"));
-        assertFalse(priority.contains("26\t401\tValue Classes and Objects"));
+        // POST21_PRIORITY_COMPATIBILITY.tsv is JEP-first (jep, release, title),
+        // unlike the release-first JEP_CATALOGUE.tsv. Test the actual schema,
+        // not a reversed-column substring that can never match.
+        assertTrue(priority.startsWith("jep\trelease\ttitle\tclassification\t"));
+        assertTrue(priority.lines().anyMatch(line ->
+                line.startsWith("404\t24\tGenerational Shenandoah (Experimental)\t")));
+        assertFalse(priority.lines().anyMatch(line ->
+                line.startsWith("401\t26\tValue Classes and Objects\t")));
 
         String residue = after.get("m3/backports/JEP_RESIDUE_QUEUE.tsv").printAll();
         assertTrue(residue.contains("22\t423\tRegion Pinning for G1\tgc\tcandidate\t20\tMATERIALIZED_PACKET"));

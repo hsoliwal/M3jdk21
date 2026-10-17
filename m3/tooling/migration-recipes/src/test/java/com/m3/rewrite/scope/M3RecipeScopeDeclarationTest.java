@@ -40,8 +40,37 @@ final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
         assertEquals(16, com.synexia.rewrite.M3RecipeScopeRegistry.size());
-        assertEquals(19, M3RecipeScopeRegistry.targetOverlaySize());
-        assertEquals(35, M3RecipeScopeRegistry.size());
+        assertEquals(38, M3RecipeScopeRegistry.targetOverlaySize());
+        assertEquals(54, M3RecipeScopeRegistry.size());
+
+        // All 19 later source-retained bulk/parallel/Tornado receivers require at
+        // least MODULE scope. Their widening may not silently revert to FILE.
+        for (String target : List.of(
+                "com.m3.rewrite.backport.M3BulkExecutorGateRepairRecipe",
+                "com.m3.rewrite.backport.M3BulkExecutorNameMappingRecipe",
+                "com.m3.rewrite.backport.M3BulkExecutorPortRecipe",
+                "com.m3.rewrite.backport.M3BulkFreezeSourceBootstrapRecipe",
+                "com.m3.rewrite.backport.M3BulkLiveRegistrationRecoveryRecipe",
+                "com.m3.rewrite.backport.M3BulkOutputIsolationRecipe",
+                "com.m3.rewrite.backport.M3BulkOutputMetadataFastPathRecipe",
+                "com.m3.rewrite.backport.M3BulkRegistrationCiBootstrapRecipe",
+                "com.m3.rewrite.backport.M3BulkRegistrationFreezeReceiverRecipe",
+                "com.m3.rewrite.backport.M3BulkSchedulerProviderRecoveryRecipe",
+                "com.m3.rewrite.backport.M3BulkSchedulerRecoveryNameMappingRecipe",
+                "com.m3.rewrite.backport.M3BulkSchedulerRecoveryWorkflowRecipe",
+                "com.m3.rewrite.backport.M3ParallelBulkBridgeNameMappingRecipe",
+                "com.m3.rewrite.backport.M3ParallelBulkBridgeReceiverRecipe",
+                "com.m3.rewrite.backport.M3ParallelBulkCompilerRepairRecipe",
+                "com.m3.rewrite.backport.M3TornadoBulkAdapterMappingRecipe",
+                "com.m3.rewrite.backport.M3TornadoBulkAdapterPortRecipe",
+                "com.m3.rewrite.backport.M3TornadoBulkGeometryRepairReceiverRecipe",
+                "com.m3.rewrite.backport.M3TornadoProviderUpgradeReceiverRecipe")) {
+            var policy = M3RecipeScopeRegistry.require(target);
+            assertEquals(M3EditScope.MODULE, policy.minimumScope());
+            assertEquals(M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING, policy.contractMode());
+            assertFalse(policy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+        }
+
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -115,8 +144,10 @@ final class M3RecipeScopeDeclarationTest {
     @Test
     void fixedAndTargetInferredScopesFollowTheM3PromotionOrder() {
         var filePolicy = M3RecipeScopeRegistry.require(M3MIndexJoinedCharsViewRecipe.class);
-        assertEquals(M3EditScope.FILE, filePolicy.resolve(List.of("src/main/java/a/A.java")));
-        assertTrue(filePolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+        // Synexia's canonical JoinedChars source now requires MODULE scope.
+        // Never weaken it back to a FILE atom to satisfy a stale target fixture.
+        assertEquals(M3EditScope.MODULE, filePolicy.resolve(List.of("src/main/java/a/A.java")));
+        assertFalse(filePolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
         assertEquals(
                 com.synexia.rewrite.M3RecipeScopeRegistry
                         .require(M3MIndexJoinedCharsViewRecipe.class)
