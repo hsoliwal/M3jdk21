@@ -1,0 +1,274 @@
+{
+  "schema": "M3_STRING_SUCCESSOR_EXECUTED_QUALIFICATION_V1",
+  "sourcePr": 11973,
+  "sourceMainCommit": "4be49026cdbaf277a062fb294c519a80535ad42a",
+  "sourceWorkflowCommit": "0d696ca93ad5379af857e4bdb764aef6b5ffa7eb",
+  "receiverPr": 1005,
+  "receiverHead": "65c4f3faafd1d9888b5e9e2b7af814ffb89d5668",
+  "ciReportedSha": "45af9048c71d188468858b90a8c6cf2b67f592f1",
+  "run": 39006246116,
+  "job": 117319217620,
+  "jobConclusion": "success",
+  "mainCore": "12902bd47baa70fd524e91addb73541d9eece032",
+  "workflowCore": "8fad6e02544375c3c3f3977f07e2eac52f5ee6d0",
+  "mainSdk": {
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "closureRefusals": 171,
+    "reportRefusals": 50
+  },
+  "workflowSdk": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "closureRefusals": 40,
+    "reportRefusals": 22
+  },
+  "python": {
+    "baseline": {
+      "tests": 26,
+      "failures": 1,
+      "errors": 2
+    },
+    "successor": {
+      "tests": 29,
+      "result": "OK"
+    },
+    "custody": {
+      "tests": 13,
+      "result": "OK"
+    }
+  },
+  "precomputePorts": {
+    "javaPhase": {
+      "tests": 29,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "reason": "native-only test skipped in Java-only phase"
+    },
+    "nativeProfile": {
+      "tests": 29,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "c17Ctest": {
+      "tests": 1,
+      "failures": 0
+    },
+    "regexIndexChecks": 1457633,
+    "scope": "Existing precompute-port suites; not complete M3String/java.lang.String/JVM or full native ABI equivalence"
+  },
+  "artifact": {
+    "id": 12090938204,
+    "bytes": 74878,
+    "files": 22,
+    "sha256": "14136f7296162e9f47ce9ceba8209ef0bf84fec30770df7e4646efc9db97f7ff"
+  },
+  "inventory": [
+    {
+      "path": "canonical/target/sdk-receipt.json",
+      "bytes": 3693,
+      "sha256": "589122d48cea18c33dc1d48cc0cc2a8c4e1c21b10c280fad3848fc4d19712269",
+      "gitBlob": "4165b9b7611cb8427de962c8f46acbea94d273c4"
+    },
+    {
+      "path": "canonical/target/surefire-reports/TEST-com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipeTest.xml",
+      "bytes": 11882,
+      "sha256": "e2b94920127334e41f50d757409561975068954a00e75483ee4954a495a7ff73",
+      "gitBlob": "982a4d5d30480cf454b4075309f26bf31be103bb",
+      "counts": {
+        "tests": "3",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      "cases": [
+        {
+          "name": "emittedFocusedPythonRegressionsExposeBaselineAndAcceptCandidate(Path)",
+          "classname": "com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipeTest"
+        },
+        {
+          "name": "eachRequiredInputAndAdditionRefusesDriftMissingAndDuplicates",
+          "classname": "com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipeTest"
+        },
+        {
+          "name": "everyPartialStateAndBothOrdersReachExactFixedPoint",
+          "classname": "com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipeTest"
+        }
+      ]
+    },
+    {
+      "path": "canonical/target/surefire-reports/TEST-com.synexia.rewrite.M3StringUtf8SuccessorChainRecipeTest.xml",
+      "bytes": 11910,
+      "sha256": "2927519e3e0379ea555f8d63590e638a704b2e3f45e20d0ff9eb3c86a15476ad",
+      "gitBlob": "c5b661af31845708e26f8810e4e42cb3132bda0b",
+      "counts": {
+        "tests": "3",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      "cases": [
+        {
+          "name": "namedRecipeEmitsSerialHistoryAndCompletePythonSpectrum(Path)",
+          "classname": "com.synexia.rewrite.M3StringUtf8SuccessorChainRecipeTest"
+        },
+        {
+          "name": "eachRequiredInputAndAdditionRefusesDriftMissingAndDuplicates",
+          "classname": "com.synexia.rewrite.M3StringUtf8SuccessorChainRecipeTest"
+        },
+        {
+          "name": "everyPartialStateAndBothOrdersReachExactFixedPoint",
+          "classname": "com.synexia.rewrite.M3StringUtf8SuccessorChainRecipeTest"
+        }
+      ]
+    },
+    {
+      "path": "canonical/target/emitted/logs/v3-baseline.log",
+      "bytes": 6319,
+      "sha256": "b1363947dc75cbf27e8ec9c0763c992903b7ed8da5502f42bc65bc7e5f628525",
+      "gitBlob": "217ab8e1361d522f2b78fe08fd245c3d89a137d6",
+      "tail": "dc265fc8df3f2d84a9f2ecd3b7516\n+ 75d949e5aa2c8ff4e5c70d648e81fc0d37b68651\n\n\n----------------------------------------------------------------------\nRan 26 tests in 0.022s\n\nFAILED (failures=1, errors=2)\n"
+    },
+    {
+      "path": "canonical/target/emitted/logs/v4-candidate.log",
+      "bytes": 4239,
+      "sha256": "90cb6db012af7fcced96209e7b8be968b95d35f5ccd9630773fe7e9252b2e2d7",
+      "gitBlob": "e436ec72a7989ab8f9163fb9c57c08825e2d83b4",
+      "tail": "ied_successor_refuses (__main__.StringTargetSuccessorTest.test_unqualified_successor_refuses) ... ok\n\n----------------------------------------------------------------------\nRan 29 tests in 0.068s\n\nOK\n"
+    },
+    {
+      "path": "canonical/target/emitted/logs/v4-custody.log",
+      "bytes": 2144,
+      "sha256": "284b1d00cebdb59f6d93b00cb2400e1757e360b00ddbeea2e5a19421991f0907",
+      "gitBlob": "6351ebbf297591b3f699a59be27bdbc5b5a19daa",
+      "tail": "xiaStringPhaseCheckerSuccessorTest.test_v4_source_chain_and_immutable_utf8_hold_remain_exact) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.003s\n\nOK\n"
+    },
+    {
+      "path": "canonical/target/emitted/v3/m3/compatibility/fixtures/string-phase-checker-v2-20261017.py",
+      "bytes": 24427,
+      "sha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3",
+      "gitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d"
+    },
+    {
+      "path": "canonical/target/emitted/v3/m3/compatibility/synexia-string-phase-checker-successor-20261017-v3.json",
+      "bytes": 2185,
+      "sha256": "45a7b377ec949d75f12d030952eeab9b5175c42f4581a0d9e900ee994da7208c",
+      "gitBlob": "22d49606563cfb93d06024ba6ed34fd3fd682d6e"
+    },
+    {
+      "path": "canonical/target/emitted/v3/m3/compatibility/test_synexia_string_phase_checker_successor.py",
+      "bytes": 14870,
+      "sha256": "b569114a7e2e0d4380f1bbbb503f9a9c5c5914cdeca3aeebe4c9b4bab26c470f",
+      "gitBlob": "9a2c5b0a5583a04b145443df966e29369fcd707e"
+    },
+    {
+      "path": "canonical/target/emitted/v3/m3/synexia-import/current-full-borrow/check_string_phase.py",
+      "bytes": 24670,
+      "sha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+      "gitBlob": "368842c70f4671bac14ad902ed047a486109f27d"
+    },
+    {
+      "path": "canonical/target/emitted/v3/m3/synexia-import/current-full-borrow/test_string_phase_successors.py",
+      "bytes": 17062,
+      "sha256": "992b8524d4ed3f1fabdd4f2685adb6d55eb23d9e3de0683675695afa71e03e75",
+      "gitBlob": "70f3abde194e3437ac4e6c68b1d320f82e7d896b"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/compatibility/fixtures/string-phase-checker-v3-20261017.py",
+      "bytes": 24670,
+      "sha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+      "gitBlob": "368842c70f4671bac14ad902ed047a486109f27d"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/compatibility/synexia-string-phase-checker-successor-20261017-v4.json",
+      "bytes": 5458,
+      "sha256": "b9e78abacc2a7e6bdf9ac21711812381f476288af2a1e289cf8368ec66e75643",
+      "gitBlob": "1bf38b06df3bef3dc07e6c4d4f9c818561592cfe"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/compatibility/test_synexia_string_phase_checker_successor.py",
+      "bytes": 32062,
+      "sha256": "b39ed26dfbeef7d830d54c234d4c6de73a823b41412d3161a200c1a0e4389073",
+      "gitBlob": "68faa1c5f4c6807d6d162ee40eae362b6a683ce3"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/synexia-import/current-full-borrow/check_string_phase.py",
+      "bytes": 26562,
+      "sha256": "db38acfb6f2b04b5f119544e91642a3639bd6b73ae32e88f077e819b0a4375c1",
+      "gitBlob": "2f8b3b75c1de3110c30cf3b860b6fbad8f00fd72"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/synexia-import/current-full-borrow/string-target-owner-successor-chain-20261017.tsv",
+      "bytes": 528,
+      "sha256": "c56d86b7981dd31533a509aad97c25368df57b6e0297847dde8b3435e9c618ad",
+      "gitBlob": "c7b52d16a15277c0aa2a09fada6f1fb3840aa70e"
+    },
+    {
+      "path": "canonical/target/emitted/v4/m3/synexia-import/current-full-borrow/test_string_phase_successors.py",
+      "bytes": 27735,
+      "sha256": "48796f0fd1be609bd50c7b83293c5c08bcf6de3261298d818f41529926da16cc",
+      "gitBlob": "1c45ef4a88d6f941e158be2529b33e3dedbe4d89"
+    },
+    {
+      "path": "workflow-canonical/target/sdk-receipt.json",
+      "bytes": 1317,
+      "sha256": "f653c727652a6931bba0d81e18b46e5553be45a55c4c64a65bf1a5a6163f653a",
+      "gitBlob": "e10807eb2d6b9d9f26f3a16604c4f5d0e337eea4"
+    },
+    {
+      "path": "workflow-canonical/target/surefire-reports/TEST-com.synexia.rewrite.M3StringMatchedBuildAdmissionRecipeTest.xml",
+      "bytes": 11856,
+      "sha256": "52460b386542d61a25df4e324fbf8d7780d6d53aea937e52d3d3fed7d0defa1a",
+      "gitBlob": "fbfb9e9eed2e5e7a1ad214f811fb85dfdd3a9325",
+      "counts": {
+        "tests": "2",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      "cases": [
+        {
+          "name": "eachWorkflowRefusesDriftMissingAndDuplicateOwnership",
+          "classname": "com.synexia.rewrite.M3StringMatchedBuildAdmissionRecipeTest"
+        },
+        {
+          "name": "everyPartialStateAndOrderPreservesBothPipelinesAndHoldsFullBuild(Path)",
+          "classname": "com.synexia.rewrite.M3StringMatchedBuildAdmissionRecipeTest"
+        }
+      ]
+    },
+    {
+      "path": "workflow-canonical/target/emitted/matched-build-admission/.github/workflows/m3-first-release-admission.yml",
+      "bytes": 12738,
+      "sha256": "870a1319893f20b6906aa70a58e72f54b5a14b123ee23982bd78877d2d087f7d",
+      "gitBlob": "949e5ed7d43362ab14820947a8369006ea4dac90"
+    },
+    {
+      "path": "workflow-canonical/target/emitted/matched-build-admission/.github/workflows/mindex-string-backing.yml",
+      "bytes": 11297,
+      "sha256": "dbcce64499d3b189985137ea0f6580d7fc983b343536abca5fd7d3b6853be0b8",
+      "gitBlob": "2a92041b72e27aa38581c47bdd653e7c1e75ceab"
+    },
+    {
+      "path": "workflow-canonical/target/emitted/matched-build-admission/matched-build-not-admitted.log",
+      "bytes": 208,
+      "sha256": "173e37b05b94d2f521f993ea08be7aa92f425e0e7b863f77abd5d167979a53ae",
+      "gitBlob": "cd5b353e60cf23f3497e1e7d75deda4f34dd3672",
+      "tail": "JDK_OUTPUT_NOT_ADMITTED\nNo measured larger-output authorization is recorded for configure, build, images, resources and jtreg.\nThe bounded 512 MiB SDK reservation does not admit a complete JDK build.\n"
+    }
+  ],
+  "wholePhaseCli": "NOT_RUN",
+  "matchedJdkJtreg": "NOT_RUN",
+  "fullJdkOutputAdmission": "NOT_ADMITTED",
+  "formalAutoreview": "NOT_RUN",
+  "targetToolingAppliedByQualification": false,
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "continualOptimization": "ACTIVE"
+}

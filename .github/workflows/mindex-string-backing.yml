@@ -89,6 +89,8 @@ jobs:
         run: python3 m3/synexia-import/current-full-borrow/test_string_phase_successors.py -v
       - name: Verify full-borrow MIndexString to M3String custody
         run: python3 m3/synexia-import/current-full-borrow/check_string_phase.py
+      - name: Verify immutable String checker successor custody
+        run: python3 -I -S -B m3/compatibility/test_synexia_string_phase_checker_successor.py -v
       - name: Verify String completeness admission and refusal controls
         run: python3 m3/runtime-integration/test_string_completeness.py
       - name: Verify compiler-parsed M3 String layout
@@ -121,6 +123,13 @@ jobs:
           python3 m3/runtime-integration/check-m3string-concat-overflow-current.py
       - name: Check current M3 String regex split receiver
         run: python3 m3/runtime-integration/check-m3string-regex-split-current.py
+      - name: Require measured matched-JDK output admission
+        shell: bash
+        run: |
+          printf '%s\n' 'MATCHED_JDK_OUTPUT_NOT_ADMITTED' >&2
+          printf '%s\n' 'No measured larger-output authorization is recorded for configure, build, images, resources and jtreg.' >&2
+          printf '%s\n' 'The bounded 512 MiB SDK reservation does not admit a complete JDK build.' >&2
+          exit 1
       - name: Set up Java 20 boot JDK for OpenJDK 21 build
         uses: actions/setup-java@v4
         with:
