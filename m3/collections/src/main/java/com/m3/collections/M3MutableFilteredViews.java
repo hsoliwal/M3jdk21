@@ -17,6 +17,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -88,8 +89,10 @@ public final class M3MutableFilteredViews {
 
         @Override public boolean contains(Object value) {
             if (!source.contains(value)) return false;
-            @SuppressWarnings("unchecked") E typed = (E) value;
-            return predicate.test(typed);
+            @SuppressWarnings("unchecked") E alias = (E) value;
+            // The comparator may equate a query with a different stored
+            // representative; visibility belongs to the latter.
+            return predicate.test(source.ceiling(alias));
         }
 
         @Override public boolean add(E value) {
@@ -280,30 +283,64 @@ public final class M3MutableFilteredViews {
             return true;
         }
 
+        /**
+         * Resolve the actual retained key and value, not a comparator-equal
+         * caller alias. This lookup is read-only and allocates no M3 entries.
+         */
+        private Entry<K, V> storedEntry(Object key) {
+            if (!source.containsKey(key)) return null;
+            @SuppressWarnings("unchecked") K alias = (K) key;
+            return source.floorEntry(alias);
+        }
+
         private boolean hasVisibleKey(Object key) {
-            if (!source.containsKey(key)) return false;
-            @SuppressWarnings("unchecked") K typed = (K) key;
-            return predicate.test(typed, source.get(key));
+            return visible(storedEntry(key));
         }
 
         @Override public boolean containsKey(Object key) { return hasVisibleKey(key); }
         @Override public V get(Object key) {
-            return hasVisibleKey(key) ? source.get(key) : null;
+            Entry<K, V> retained = storedEntry(key);
+            return visible(retained) ? retained.getValue() : null;
         }
 
         @Override public V put(K key, V value) {
-            if (!predicate.test(key, value)) {
+            Entry<K, V> previous = storedEntry(key);
+            K effective = previous == null ? key : previous.getKey();
+            if (!predicate.test(effective, value)) {
                 throw new IllegalArgumentException("mapping rejected by filtered view");
             }
-            V prior = get(key);
+            V prior = visible(previous) ? previous.getValue() : null;
             source.put(key, value);
             return prior;
         }
 
+        /**
+         * Validate the effective *stored* representatives before any writes.
+         * The transient TreeMap holds only first-occurrence keys for new
+         * comparator classes; it is not a retained element/entry cache.
+         * This also handles input maps with distinct comparator-equal keys.
+         */
         @Override public void putAll(Map<? extends K, ? extends V> incoming) {
             Objects.requireNonNull(incoming, "incoming");
+            NavigableMap<K, K> newRepresentatives = null;
             for (Entry<? extends K, ? extends V> entry : incoming.entrySet()) {
-                if (!predicate.test(entry.getKey(), entry.getValue())) {
+                K key = entry.getKey();
+                Entry<K, V> existing = storedEntry(key);
+                K effective;
+                if (existing != null) {
+                    effective = existing.getKey();
+                } else {
+                    if (newRepresentatives == null) {
+                        newRepresentatives = new TreeMap<>(source.comparator());
+                    }
+                    if (newRepresentatives.containsKey(key)) {
+                        effective = newRepresentatives.get(key);
+                    } else {
+                        newRepresentatives.put(key, key);
+                        effective = key;
+                    }
+                }
+                if (!predicate.test(effective, entry.getValue())) {
                     throw new IllegalArgumentException("mapping rejected by filtered view");
                 }
             }
