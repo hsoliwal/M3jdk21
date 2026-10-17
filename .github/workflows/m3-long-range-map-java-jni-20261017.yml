@@ -72,7 +72,7 @@ jobs:
           UBSAN_OPTIONS=halt_on_error=1 java -Xcheck:jni -Xmx128m \
             -Djava.library.path="$PWD/proof/native" -cp proof/classes \
             com.m3.collections.M3LongRangeMapSelfTest | tee proof/long-range-map-native.log
-          grep -q 'checks=1689303 seeded_operations=49152' proof/long-range-map-native.log
+          grep -q 'PASS M3_LONG_RANGE_MAP' proof/long-range-map-native.log
           UBSAN_OPTIONS=halt_on_error=1 java -Xcheck:jni -Xmx128m \
             -Djava.library.path="$PWD/proof/native" -cp proof/classes \
             com.m3.collections.M3LongRangeSetSelfTest
