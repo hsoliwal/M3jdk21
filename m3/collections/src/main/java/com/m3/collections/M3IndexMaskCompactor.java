@@ -62,6 +62,29 @@ public final class M3IndexMaskCompactor {
     public static long[] selectLong(long[] orderedRows, byte[] rowStates, int requiredMask) {
         Objects.requireNonNull(orderedRows, "orderedRows");
         validate(rowStates, orderedRows.length, requiredMask);
+        return selectLongJava(orderedRows, rowStates, requiredMask);
+    }
+
+    /**
+     * Explicit optional JNI batch mask selection for 64-bit coordinate IDs.
+     * Java remains the oracle. This is a detached result, never a live view.
+     */
+    public static long[] selectLong(long[] orderedRows, byte[] rowStates,
+                                    int requiredMask, Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(rowStates, "rowStates");
+        Objects.requireNonNull(backend, "backend");
+        validate(rowStates, orderedRows.length, requiredMask);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            return selectLongNative(orderedRows, rowStates, requiredMask);
+        }
+        return selectLongJava(orderedRows, rowStates, requiredMask);
+    }
+
+    private static long[] selectLongJava(long[] orderedRows, byte[] rowStates, int requiredMask) {
         long[] selected = new long[countSelected(rowStates, requiredMask)];
         int written = 0;
         for (int i = 0; i < orderedRows.length; i++) {
@@ -124,6 +147,98 @@ public final class M3IndexMaskCompactor {
         return selected;
     }
 
+
+    /**
+     * Select a bounded window of primitive row indexes using an independently
+     * offset, position-aligned byte-state window. No input slice is copied.
+     *
+     * <p>The result is detached and preserves duplicate row IDs and encounter
+     * order. Caller-owned arrays must remain stable until the operation returns.
+     * A native backend is strictly opt-in; it cannot run Java predicates or
+     * retain array pointers. Valid ranges, including empty ranges, are checked
+     * before native dispatch.</p>
+     */
+    public static int[] selectWindow(int[] orderedRows, int rowOffset,
+                                     byte[] states, int stateOffset, int length,
+                                     int requiredMask, Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(states, "states");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
+        Objects.checkFromIndexSize(stateOffset, length, states.length);
+        requireMask(requiredMask);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            return selectWindowNative(orderedRows, rowOffset, states, stateOffset,
+                    length, requiredMask);
+        }
+        int[] selected = new int[countWindow(states, stateOffset, length, requiredMask)];
+        int written = 0;
+        for (int index = 0; index < length; index++) {
+            if (matches(states[stateOffset + index], requiredMask)) {
+                if (written == selected.length) {
+                    throw new ConcurrentModificationException("aligned selection states changed");
+                }
+                selected[written++] = orderedRows[rowOffset + index];
+            }
+        }
+        if (written != selected.length) {
+            throw new ConcurrentModificationException("aligned selection states changed");
+        }
+        return selected;
+    }
+
+    /** 64-bit index counterpart of {@link #selectWindow}, with no boxed IDs. */
+    public static long[] selectLongWindow(long[] orderedRows, int rowOffset,
+                                          byte[] states, int stateOffset, int length,
+                                          int requiredMask, Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(states, "states");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
+        Objects.checkFromIndexSize(stateOffset, length, states.length);
+        requireMask(requiredMask);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            return selectLongWindowNative(orderedRows, rowOffset, states, stateOffset,
+                    length, requiredMask);
+        }
+        long[] selected = new long[countWindow(states, stateOffset, length, requiredMask)];
+        int written = 0;
+        for (int index = 0; index < length; index++) {
+            if (matches(states[stateOffset + index], requiredMask)) {
+                if (written == selected.length) {
+                    throw new ConcurrentModificationException("aligned selection states changed");
+                }
+                selected[written++] = orderedRows[rowOffset + index];
+            }
+        }
+        if (written != selected.length) {
+            throw new ConcurrentModificationException("aligned selection states changed");
+        }
+        return selected;
+    }
+
+    private static int countWindow(byte[] states, int offset, int length, int mask) {
+        int selected = 0;
+        for (int index = 0; index < length; index++) {
+            if (matches(states[offset + index], mask)) {
+                selected++;
+            }
+        }
+        return selected;
+    }
+
+    private static native int[] selectWindowNative(int[] rows, int rowOffset,
+            byte[] states, int stateOffset, int length, int mask);
+
+    private static native long[] selectLongWindowNative(long[] rows, int rowOffset,
+            byte[] states, int stateOffset, int length, int mask);
+
     private static final class NativeLibrary {
         private static final boolean AVAILABLE;
 
@@ -142,4 +257,8 @@ public final class M3IndexMaskCompactor {
 
     private static native int[] selectNative(int[] orderedRows, byte[] rowStates,
                                               int requiredMask);
+
+    /** JNI bulk primitive mask kernel, no callbacks, handles or retained native pointers. */
+    private static native long[] selectLongNative(long[] orderedRows, byte[] rowStates,
+                                                  int requiredMask);
 }
