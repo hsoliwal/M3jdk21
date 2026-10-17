@@ -23,7 +23,8 @@ public final class M3IndexMaskCompactorSelfTest {
         compositionPreservesOrder(requireNative);
         allMasksAndLengths(requireNative);
         randomizedDifferential(requireNative);
-        primitiveOwnersAndLongIds();
+        windowSelectionContracts(requireNative);
+        primitiveOwnersAndLongIds(requireNative);
         System.out.println("PASS M3IndexMaskCompactorSelfTest checks=" + checks
                 + " JNI=" + requireNative);
     }
@@ -52,6 +53,25 @@ public final class M3IndexMaskCompactorSelfTest {
             eq(new int[] {-17}, M3IndexMaskCompactor.select(source, states, 255, nativeBackend));
             eq(source, M3IndexMaskCompactor.select(source, states, 0, nativeBackend));
         }
+        long[] ids = {Long.MIN_VALUE, 0L, Long.MAX_VALUE, Long.MIN_VALUE};
+        eq(ids, M3IndexMaskCompactor.selectLong(ids, states, 0, java));
+        eq(new long[] {0L}, M3IndexMaskCompactor.selectLong(ids, states, 255, java));
+        fails(NullPointerException.class,
+                () -> M3IndexMaskCompactor.selectLong(ids, states, 0, null));
+        fails(NullPointerException.class,
+                () -> M3IndexMaskCompactor.selectLong(null, states, 0, java));
+        fails(IllegalArgumentException.class,
+                () -> M3IndexMaskCompactor.selectLong(ids, new byte[3], 0, java));
+        fails(IllegalArgumentException.class,
+                () -> M3IndexMaskCompactor.selectLong(ids, states, -1, java));
+        fails(IllegalArgumentException.class,
+                () -> M3IndexMaskCompactor.selectLong(ids, states, 256, java));
+        if (nativeRun) {
+            eq(ids, M3IndexMaskCompactor.selectLong(ids, states, 0,
+                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+            eq(new long[] {0L}, M3IndexMaskCompactor.selectLong(ids, states, 255,
+                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+        }
     }
 
     private static void compositionPreservesOrder(boolean nativeRun) {
@@ -74,12 +94,23 @@ public final class M3IndexMaskCompactorSelfTest {
                 rows[i] = i % 9 - 4;
                 states[i] = (byte) ((i * 101 + (i >>> 3)) & 255);
             }
+            long[] longRows = new long[n];
+            for (int i = 0; i < n; i++) {
+                longRows[i] = i % 3 == 0 ? Long.MIN_VALUE : (i % 3 == 1 ? Long.MAX_VALUE : i - 700L);
+            }
             for (int mask = 0; mask < 256; mask++) {
                 int[] expected = oracle(rows, states, mask);
                 eq(expected, M3IndexMaskCompactor.select(rows, states, mask,
                         M3IndexMaskCompactor.Backend.JAVA));
                 if (nativeRun) {
                     eq(expected, M3IndexMaskCompactor.select(rows, states, mask,
+                            M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                }
+                long[] longExpected = M3IndexMaskCompactor.selectLong(longRows, states, mask);
+                eq(longExpected, M3IndexMaskCompactor.selectLong(longRows, states, mask,
+                        M3IndexMaskCompactor.Backend.JAVA));
+                if (nativeRun) {
+                    eq(longExpected, M3IndexMaskCompactor.selectLong(longRows, states, mask,
                             M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
                 }
             }
@@ -108,7 +139,7 @@ public final class M3IndexMaskCompactorSelfTest {
     }
 
     /** Differential test over actual primitive List and circular Deque owners. */
-    private static void primitiveOwnersAndLongIds() {
+    private static void primitiveOwnersAndLongIds(boolean nativeRun) {
         Random random = new Random(0x4d334d41534b5632L);
         for (int trial = 0; trial < 1_024; trial++) {
             int length = random.nextInt(288);
@@ -130,6 +161,12 @@ public final class M3IndexMaskCompactorSelfTest {
             long[] expected = new long[expectedValues.size()];
             for (int i = 0; i < expected.length; i++) expected[i] = expectedValues.get(i);
             eq(expected, M3IndexMaskCompactor.selectLong(inputs, states, required));
+            eq(expected, M3IndexMaskCompactor.selectLong(inputs, states, required,
+                    M3IndexMaskCompactor.Backend.JAVA));
+            if (nativeRun) {
+                eq(expected, M3IndexMaskCompactor.selectLong(inputs, states, required,
+                        M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+            }
             ok(M3IndexMaskCompactor.selectedCount(states, required) == expected.length);
 
             M3LongArrayList list = M3LongArrayList.copyOf(inputs);
@@ -176,6 +213,119 @@ public final class M3IndexMaskCompactorSelfTest {
                 if (fieldType.isArray()) ok(fieldType.getComponentType().isPrimitive());
             }
         }
+    }
+
+
+    /**
+     * Checked primitive offset views: independent logical row/mask offsets must
+     * be equivalent to detached JDK copyOfRange inputs, without copying them
+     * in the production code. Exhaustively test all 256 mask values over the
+     * JNI chunk/array-boundary lengths and asymmetric offsets.
+     */
+    private static void windowSelectionContracts(boolean nativeRun) {
+        int[] rows = new int[1044];
+        long[] longRows = new long[1044];
+        byte[] states = new byte[1044];
+        for (int i = 0; i < rows.length; i++) {
+            rows[i] = i % 7 == 0 ? Integer.MIN_VALUE : (i % 7 == 1
+                    ? Integer.MAX_VALUE : i % 13 - 6);
+            longRows[i] = i % 7 == 0 ? Long.MIN_VALUE : (i % 7 == 1
+                    ? Long.MAX_VALUE : i % 13 - 6L);
+            states[i] = (byte) ((i * 71 + (i >>> 2)) & 255);
+        }
+        int[] rowBefore = rows.clone();
+        long[] longBefore = longRows.clone();
+        byte[] masksBefore = states.clone();
+        var javaBackend = M3IndexMaskCompactor.Backend.JAVA;
+        var nativeBackend = M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
+        for (int size : new int[] {0, 1, 2, 255, 256, 257, 511, 512, 513, 1025}) {
+            for (int rowOffset : new int[] {0, 1, 7}) {
+                for (int maskOffset : new int[] {0, 2, 9}) {
+                    int[] expectedRows = Arrays.copyOfRange(rows, rowOffset, rowOffset + size);
+                    long[] expectedLongs = Arrays.copyOfRange(
+                            longRows, rowOffset, rowOffset + size);
+                    byte[] expectedStates = Arrays.copyOfRange(
+                            states, maskOffset, maskOffset + size);
+                    for (int mask = 0; mask < 256; mask++) {
+                        int[] expected = M3IndexMaskCompactor.select(
+                                expectedRows, expectedStates, mask, javaBackend);
+                        long[] expectedLong = M3IndexMaskCompactor.selectLong(
+                                expectedLongs, expectedStates, mask);
+                        eq(expected, M3IndexMaskCompactor.selectWindow(
+                                rows, rowOffset, states, maskOffset, size, mask, javaBackend));
+                        eq(expectedLong, M3IndexMaskCompactor.selectLongWindow(
+                                longRows, rowOffset, states, maskOffset, size, mask, javaBackend));
+                        if (nativeRun) {
+                            eq(expected, M3IndexMaskCompactor.selectWindow(
+                                    rows, rowOffset, states, maskOffset, size,
+                                    mask, nativeBackend));
+                            eq(expectedLong, M3IndexMaskCompactor.selectLongWindow(
+                                    longRows, rowOffset, states, maskOffset, size,
+                                    mask, nativeBackend));
+                        }
+                    }
+                }
+            }
+        }
+
+        Random random = new Random(0x4d33574f46465345L);
+        for (int trial = 0; trial < 512; trial++) {
+            int size = random.nextInt(1026);
+            int rowOffset = random.nextInt(rows.length - size + 1);
+            int maskOffset = random.nextInt(states.length - size + 1);
+            int mask = random.nextInt(256);
+            int[] candidateRows = Arrays.copyOfRange(rows, rowOffset, rowOffset + size);
+            long[] candidateLongs = Arrays.copyOfRange(
+                    longRows, rowOffset, rowOffset + size);
+            byte[] candidateMarks = Arrays.copyOfRange(
+                    states, maskOffset, maskOffset + size);
+            int[] expected = M3IndexMaskCompactor.select(
+                    candidateRows, candidateMarks, mask, javaBackend);
+            long[] expectedLong = M3IndexMaskCompactor.selectLong(
+                    candidateLongs, candidateMarks, mask);
+            eq(expected, M3IndexMaskCompactor.selectWindow(
+                    rows, rowOffset, states, maskOffset, size, mask, javaBackend));
+            eq(expectedLong, M3IndexMaskCompactor.selectLongWindow(
+                    longRows, rowOffset, states, maskOffset, size, mask, javaBackend));
+            if (nativeRun) {
+                eq(expected, M3IndexMaskCompactor.selectWindow(
+                        rows, rowOffset, states, maskOffset, size, mask, nativeBackend));
+                eq(expectedLong, M3IndexMaskCompactor.selectLongWindow(
+                        longRows, rowOffset, states, maskOffset, size, mask, nativeBackend));
+            }
+        }
+        eq(rowBefore, rows);
+        eq(longBefore, longRows);
+        ok(Arrays.equals(masksBefore, states));
+
+        eq(new int[0], M3IndexMaskCompactor.selectWindow(
+                rows, rows.length, states, states.length, 0, 255, javaBackend));
+        eq(new long[0], M3IndexMaskCompactor.selectLongWindow(
+                longRows, longRows.length, states, states.length, 0, 255, javaBackend));
+        for (var backend : M3IndexMaskCompactor.Backend.values()) {
+            fails(IndexOutOfBoundsException.class, () -> M3IndexMaskCompactor.selectWindow(
+                    rows, -1, states, 0, 1, 1, backend));
+            fails(IndexOutOfBoundsException.class, () -> M3IndexMaskCompactor.selectWindow(
+                    rows, 0, states, -1, 1, 1, backend));
+            fails(IndexOutOfBoundsException.class, () -> M3IndexMaskCompactor.selectWindow(
+                    rows, 0, states, 0, -1, 1, backend));
+            fails(IndexOutOfBoundsException.class, () -> M3IndexMaskCompactor.selectWindow(
+                    rows, Integer.MAX_VALUE, states, 0, 1, 1, backend));
+            fails(IndexOutOfBoundsException.class, () -> M3IndexMaskCompactor.selectLongWindow(
+                    longRows, 0, states, Integer.MAX_VALUE, 1, 1, backend));
+            fails(IllegalArgumentException.class, () -> M3IndexMaskCompactor.selectWindow(
+                    rows, 0, states, 0, 1, -1, backend));
+            fails(IllegalArgumentException.class, () -> M3IndexMaskCompactor.selectLongWindow(
+                    longRows, 0, states, 0, 1, 256, backend));
+            fails(NullPointerException.class, () -> M3IndexMaskCompactor.selectWindow(
+                    null, 0, states, 0, 1, 0, backend));
+            fails(NullPointerException.class, () -> M3IndexMaskCompactor.selectLongWindow(
+                    longRows, 0, null, 0, 1, 0, backend));
+        }
+        fails(NullPointerException.class, () -> M3IndexMaskCompactor.selectWindow(
+                rows, 0, states, 0, 1, 0, null));
+        fails(NullPointerException.class, () -> M3IndexMaskCompactor.selectLongWindow(
+                longRows, 0, states, 0, 1, 0, null));
     }
 
     private static void eq(long[] expected, long[] actual) {
