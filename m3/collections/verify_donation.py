@@ -83,6 +83,40 @@ def include_filtered_view_successor(historical_rows, receipt=_FILTERED_VIEW_RECE
     return [*historical_rows, *extra]
 
 
+# Additive M3IndexPathMasks receiving overlay. The pre-existing source manifest
+# and filtered/sorted receiver seal are immutable; this successor is exact and opt-in.
+_PATH_MASK_RECEIPT = HERE / 'recipe/index-path-masks-20261017/manifest.tsv'
+_PATH_MASK_SHA256 = '1cba7c9ed681fbe65653b75949558640ea5aa31a1e3c8f5d83d27f9197518020'
+_PATH_MASK_PATHS = (
+    'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java',
+    'm3/collections/src/main/native/collections/m3_index_path_masks.c',
+    'm3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java',
+    'm3/collections/src/test/java/com/m3/collections/M3IndexPathMasksTest.java',
+)
+
+
+def include_path_mask_successor(historical_rows, receipt=_PATH_MASK_RECEIPT):
+    """Admit only the four SHA-256 sealed Java/JNI path-mask receiver sources."""
+    if not receipt.exists() and not receipt.is_symlink():
+        return list(historical_rows)
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _PATH_MASK_SHA256:
+        raise SystemExit('Index-path-mask successor manifest missing, aliased or drifted')
+    entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
+    if len(entries) != len(_PATH_MASK_PATHS):
+        raise SystemExit('Index-path-mask successor must declare exactly four paths')
+    extra = []
+    for entry, expected_path in zip(entries, _PATH_MASK_PATHS):
+        if len(entry) != 4:
+            raise SystemExit('Malformed index-path-mask successor row')
+        path, before, after, template = entry
+        if (path != expected_path or before != 'ABSENT'
+                or len(after) != 64 or any(c not in '0123456789abcdef' for c in after)
+                or template != path.rsplit('/', 1)[1] + '.after'):
+            raise SystemExit('Unapproved index-path-mask receiver source: ' + path)
+        extra.append((path, after))
+    return [*historical_rows, *extra]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
@@ -125,7 +159,7 @@ def main():
         raise SystemExit('Installed source manifest drift: actual=' + digest(manifest) + ' expected=' + packet['installed_source_manifest_sha256'] + '; reconcile with canonical recipe before verifying')
     rows = [line.split('\t') for line in manifest.read_text().splitlines()
             if line and not line.startswith('#')]
-    rows = include_filtered_view_successor(rows)
+    rows = include_path_mask_successor(include_filtered_view_successor(rows))
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:

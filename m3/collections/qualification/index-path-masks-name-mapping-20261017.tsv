@@ -1,0 +1,3 @@
+target_symbol	canonical_recipe	canonical_commit	receiver_path	disposition
+com.m3.collections.M3IndexPathMasks	com.synexia.m3.Jdk21IndexPathMasks20261017	dd1c436df886426c90197848cc639af59b8e1807	m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java	TARGET_ADDITIVE_PENDING_GATES
+JNI:Java_com_m3_collections_M3IndexPathMasks_selectNative	com.synexia.m3.Jdk21IndexPathMasks20261017	dd1c436df886426c90197848cc639af59b8e1807	m3/collections/src/main/native/collections/m3_index_path_masks.c	TARGET_ADDITIVE_PENDING_GATES
