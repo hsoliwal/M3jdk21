@@ -33,6 +33,16 @@ jobs:
             exit 1
           fi
           grep -F 'NO_UOE: absent conditional remove' "$RUNNER_TEMP/red.log"
+      - name: Public M3FilteredViews factory descriptors must remain exact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-abi-new"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-abi-new" \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+          javap -classpath "$RUNNER_TEMP/m3-old-classes" -public -s com.m3.collections.M3FilteredViews > "$RUNNER_TEMP/abi-before.txt"
+          javap -classpath "$RUNNER_TEMP/m3-abi-new" -public -s com.m3.collections.M3FilteredViews > "$RUNNER_TEMP/abi-after.txt"
+          diff -u "$RUNNER_TEMP/abi-before.txt" "$RUNNER_TEMP/abi-after.txt"
       - name: Generated source must pass new and existing JDK contract oracles
         run: |
           mkdir -p "$RUNNER_TEMP/m3-new-classes"
