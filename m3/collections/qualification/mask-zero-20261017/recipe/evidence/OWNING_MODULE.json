@@ -1,0 +1,12 @@
+{
+  "schema": "M3_MASK_ZERO_OWNING_MODULE_V1",
+  "status": "UNAVAILABLE",
+  "command": "mvn -B -ntp -o -f m3/collections/pom.xml verify (existing module defaults)",
+  "exit_code": 1,
+  "reason": "Pinned org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1 is absent from the offline Maven cache",
+  "log": "owning-module-maven.log",
+  "log_sha256": "9635ca2514b5a54708d1f9c8f3700c3a5066d87fc9c0b02f43f82071c7cb17aa",
+  "substitute_artifact_used": false,
+  "pom_changed": false,
+  "separate_focused_qualification": "RESULTS.json"
+}

@@ -1,0 +1,7 @@
+category	donor	owner	candidate	selection	rejection	verification
+STABLE-INDEX-SELECTION	Synexia #11804 @ 9e22725d1e5c440487ce8d59cd1aa15ec217f793	M3IndexMaskCompactor	Java 2-pass primitive int[]	chosen O(k) exact result	O(n) scratch + second copy	TARGET_RECEIVING_CANDIDATE
+BYTE-MASK-JNI	Synexia C17 #11804	m3_index_mask_compactor.c	256 element JNI Regions	explicit native opt-in	pinned pointers or callbacks forbidden	TARGET_RECEIVING_CANDIDATE
+LONG-ID-SELECTION	Synexia array/mask mechanism	M3IndexMaskCompactor	long[] exact detached	chosen	boxed Long/Entry rejected	TARGET_RECEIVING_CANDIDATE
+LIST-FILTER	M3LongArrayList @ 855afe57a679aeb454052630de7beddcb25f5f8f	M3LongArrayList	in-place aligned mask	chosen	intermediate selected-List rejected	TARGET_RECEIVING_CANDIDATE
+DEQUE-FILTER	M3LongArrayDeque @ 855afe57a679aeb454052630de7beddcb25f5f8f	M3LongArrayDeque	wrapped-ring stable in-place	chosen	copied element lane rejected	TARGET_RECEIVING_CANDIDATE
+JDK-ORACLES	JDK ArrayList/ArrayDeque	self-test	contract-only reference	accepted	no JDK source copied	TARGET_RECEIVING_CANDIDATE

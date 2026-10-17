@@ -1,0 +1,12 @@
+M3 existing mask-family zero-mask refinement
+Copyright 2026 Hitesh Soliwal and contributors
+SPDX-License-Identifier: Apache-2.0
+
+This task retains and refines existing Apache-2.0 collection owners. Original
+Synexia primitive donor revision: 9e22725d1e5c440487ce8d59cd1aa15ec217f793.
+Original canonical receiving recipe: 7370b3e158e5463b76dc1639b1f943e6a597a446.
+Current M3jdk21 receiver: 4e29dc9d4141261e8763fbe9ffd6a20e017b1aff.
+Existing recipe provider custody: 3aa8e45d93f5fed721fdb64579b655f4a432a308.
+
+See LICENSE, DONOR_RECEIPT.json, SOURCE_PINS.json, and the retained original
+predecessor provenance and naming-map files for exact source lineage.

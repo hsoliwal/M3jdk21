@@ -181,6 +181,8 @@ public final class M3LongArrayDeque implements M3LongDeque {
      */
     public int retainByStateMask(byte[] alignedStates, int requiredMask) {
         M3IndexMaskCompactor.validate(alignedStates, size, requiredMask);
+        // Every logical position matches; retain the ring and iterator epoch as-is.
+        if (requiredMask == 0) return 0;
         int previous = size;
         int kept = 0;
         for (int read = 0; read < previous; read++) {

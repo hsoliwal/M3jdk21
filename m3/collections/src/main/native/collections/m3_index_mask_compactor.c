@@ -1,7 +1,8 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 /* JNI boundary: no callbacks, no pointer retention, no Java object graph walking.
  * Read fixed-size primitive chunks with Region API (no long-lived critical pins).
- * Two passes count then emit; input arrays are never mutated.
+ * Nonzero masks count then emit; zero masks copy rows without reading state payload.
+ * Input arrays are never mutated.
  */
 #include <jni.h>
 #include <stddef.h>
@@ -39,8 +40,21 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
         }
         return NULL;
     }
-    jbyte marks[M3_CHUNK];
     jint row_ids[M3_CHUNK];
+    if (required_mask == 0) {
+        jintArray all = (*env)->NewIntArray(env, n);
+        if (all == NULL) return NULL;
+        for (jsize offset = 0; offset < n;) {
+            jsize chunk = n - offset < M3_CHUNK ? n - offset : M3_CHUNK;
+            (*env)->GetIntArrayRegion(env, rows, offset, chunk, row_ids);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            (*env)->SetIntArrayRegion(env, all, offset, chunk, row_ids);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            offset += chunk;
+        }
+        return all;
+    }
+    jbyte marks[M3_CHUNK];
     jint selected[M3_CHUNK];
     jsize count = 0;
     for (jsize offset = 0; offset < n;) {

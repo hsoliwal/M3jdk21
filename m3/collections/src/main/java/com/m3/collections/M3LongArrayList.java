@@ -199,11 +199,13 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
      * position-aligned unsigned-byte mask; no per-element objects or scratch
      * result array. The caller owns the mask, which must remain stable.
      * Invalid masks fail before mutation. Not concurrent/snapshot-safe.
+     * A zero mask accepts every position and returns after validation in O(1).
      *
      * @return removed occurrences
      */
     public int retainByStateMask(byte[] alignedStates, int requiredMask) {
         M3IndexMaskCompactor.validate(alignedStates, size, requiredMask);
+        if (requiredMask == 0) return 0;
         int previous = size;
         int kept = 0;
         for (int read = 0; read < previous; read++) {

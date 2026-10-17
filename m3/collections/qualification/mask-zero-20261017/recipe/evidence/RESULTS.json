@@ -1,0 +1,2507 @@
+{
+  "schema": "M3_MASK_ZERO_QUALIFICATION_V1",
+  "status": "PASSED",
+  "target_preimage_revision": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "selector_retained_upstream_commit": "b598d98202aa38aafe45308ac8f7dbdc242bb36e",
+  "current_java_selector_unchanged": true,
+  "historical_receiving_postimages_verified": 6,
+  "current_sealed_owners": 6,
+  "strict_core_sources_each_variant": 99,
+  "contract_checks": {
+    "before-java": 19919,
+    "before-native": 24300,
+    "before-missing-native": 28,
+    "before-missing-symbol": 28,
+    "after-java": 19919,
+    "after-native": 24300,
+    "after-missing-native": 28,
+    "after-missing-symbol": 28
+  },
+  "actual_native_ubsan": "PASSED",
+  "explicit_native_missing_library_and_symbol": "REFUSED_AS_REQUIRED",
+  "native_artifacts": {
+    "before": {
+      "sha256": "349054036d9b02bf88a2570cc6e0cb0e4f45dc76bc80aac3c49b586703d8f01a",
+      "jni_symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+      "stack_usage": {
+        "libm3_collections_mask.so-m3_index_mask_compactor.su": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/before/m3/collections/src/main/native/collections/m3_index_mask_compactor.c:11:13:m3_throw_state_drift\t32\tstatic\n/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/before/m3/collections/src/main/native/collections/m3_index_mask_compactor.c:20:1:Java_com_m3_collections_M3IndexMaskCompactor_selectNative\t2432\tstatic\n"
+      }
+    },
+    "after": {
+      "sha256": "ae628f9bfc5594ec5add75f7d38ef142a54d343b5a5606805b7562f75b12965e",
+      "jni_symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+      "stack_usage": {
+        "libm3_collections_mask.so-m3_index_mask_compactor.su": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/after/m3/collections/src/main/native/collections/m3_index_mask_compactor.c:12:13:m3_throw_state_drift\t32\tstatic\n/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/after/m3/collections/src/main/native/collections/m3_index_mask_compactor.c:21:1:Java_com_m3_collections_M3IndexMaskCompactor_selectNative\t2432\tstatic\n"
+      }
+    }
+  },
+  "finite_cost_measurements": {
+    "before-jit": {
+      "cases": 90,
+      "nmt_reserved_bytes": 1916037489,
+      "nmt_committed_bytes": 169335153,
+      "metrics": [
+        {
+          "operation": "dequeRetain",
+          "length": 0,
+          "median_cpu_ns_per_operation": 27.448486328125,
+          "median_wall_ns_per_operation": 26.9619140625,
+          "allocated_bytes_per_operation": [
+            0.0,
+            0.05859375
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            48192,
+            48496
+          ]
+        },
+        {
+          "operation": "dequeRetain",
+          "length": 257,
+          "median_cpu_ns_per_operation": 4952.660400390625,
+          "median_wall_ns_per_operation": 8838.4892578125,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            56560,
+            64904
+          ]
+        },
+        {
+          "operation": "dequeRetain",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 18904.015625,
+          "median_wall_ns_per_operation": 19492.390625,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            81396,
+            81396
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 25.90576171875,
+          "median_wall_ns_per_operation": 25.384765625,
+          "allocated_bytes_per_operation": [
+            16.0,
+            16.0859375
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            48536,
+            48796
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 304.96484375,
+          "median_wall_ns_per_operation": 454.262451171875,
+          "allocated_bytes_per_operation": [
+            1048.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            67624,
+            68964
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 55158.59375,
+          "median_wall_ns_per_operation": 53021.265625,
+          "allocated_bytes_per_operation": [
+            262160.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            89900,
+            89908
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 188.05419921875,
+          "median_wall_ns_per_operation": 187.23583984375,
+          "allocated_bytes_per_operation": [
+            16.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            48824,
+            50420
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 835.899169921875,
+          "median_wall_ns_per_operation": 953.466796875,
+          "allocated_bytes_per_operation": [
+            2072.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            73816,
+            74092
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 132283.5625,
+          "median_wall_ns_per_operation": 469617.84375,
+          "allocated_bytes_per_operation": [
+            524304.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            102696,
+            112748
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 0,
+          "median_cpu_ns_per_operation": 30.103271484375,
+          "median_wall_ns_per_operation": 29.718505859375,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            48144,
+            48172
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 257,
+          "median_cpu_ns_per_operation": 435.489501953125,
+          "median_wall_ns_per_operation": 420.205810546875,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            54920,
+            55528
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 20250.5625,
+          "median_wall_ns_per_operation": 19756.5625,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            81372,
+            81396
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 239.93115234375,
+          "median_wall_ns_per_operation": 239.302490234375,
+          "allocated_bytes_per_operation": [
+            16.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            52228,
+            54228
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 1823.170654296875,
+          "median_wall_ns_per_operation": 1833.386962890625,
+          "allocated_bytes_per_operation": [
+            1048.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            76152,
+            78868
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 389879.53125,
+          "median_wall_ns_per_operation": 650167.765625,
+          "allocated_bytes_per_operation": [
+            262160.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            112108,
+            129312
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 0,
+          "median_cpu_ns_per_operation": 20.570556640625,
+          "median_wall_ns_per_operation": 20.17138671875,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            46564,
+            48132
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 257,
+          "median_cpu_ns_per_operation": 14.8291015625,
+          "median_wall_ns_per_operation": 6.865966796875,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            54436,
+            54564
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 595.140625,
+          "median_wall_ns_per_operation": 39.71875,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            81348,
+            81356
+          ]
+        }
+      ]
+    },
+    "before-interpreter": {
+      "cases": 90,
+      "nmt_reserved_bytes": 1684673699,
+      "nmt_committed_bytes": 139203747,
+      "metrics": [
+        {
+          "operation": "dequeRetain",
+          "length": 0,
+          "median_cpu_ns_per_operation": 202.6171875,
+          "median_wall_ns_per_operation": 185.9140625,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            41292,
+            41292
+          ]
+        },
+        {
+          "operation": "dequeRetain",
+          "length": 257,
+          "median_cpu_ns_per_operation": 79890.65625,
+          "median_wall_ns_per_operation": 144392.7578125,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41308,
+            41324
+          ]
+        },
+        {
+          "operation": "dequeRetain",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 13470057.25,
+          "median_wall_ns_per_operation": 16418955.0,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            43984,
+            43984
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 552.046875,
+          "median_wall_ns_per_operation": 512.5625,
+          "allocated_bytes_per_operation": [
+            16.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            41296,
+            41296
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 824.53125,
+          "median_wall_ns_per_operation": 800.765625,
+          "allocated_bytes_per_operation": [
+            1048.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41348,
+            41348
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 39531.25,
+          "median_wall_ns_per_operation": 38578.25,
+          "allocated_bytes_per_operation": [
+            262160.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            44196,
+            44196
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 428.0859375,
+          "median_wall_ns_per_operation": 405.0078125,
+          "allocated_bytes_per_operation": [
+            16.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            41296,
+            41296
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 2981.2578125,
+          "median_wall_ns_per_operation": 2944.1015625,
+          "allocated_bytes_per_operation": [
+            2072.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41348,
+            41348
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 108053.25,
+          "median_wall_ns_per_operation": 106720.75,
+          "allocated_bytes_per_operation": [
+            524304.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            46316,
+            46316
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 0,
+          "median_cpu_ns_per_operation": 204.15625,
+          "median_wall_ns_per_operation": 181.4296875,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            41212,
+            41292
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 257,
+          "median_cpu_ns_per_operation": 25298.7421875,
+          "median_wall_ns_per_operation": 55042.1875,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41308,
+            41308
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 4580327.25,
+          "median_wall_ns_per_operation": 4666900.25,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            43984,
+            43984
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 535.328125,
+          "median_wall_ns_per_operation": 495.6328125,
+          "allocated_bytes_per_operation": [
+            16.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            41296,
+            41296
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 3113.7578125,
+          "median_wall_ns_per_operation": 3067.265625,
+          "allocated_bytes_per_operation": [
+            1048.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41348,
+            41348
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 317335.0,
+          "median_wall_ns_per_operation": 315388.5,
+          "allocated_bytes_per_operation": [
+            262160.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            46316,
+            46316
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 0,
+          "median_cpu_ns_per_operation": 185.328125,
+          "median_wall_ns_per_operation": 166.078125,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            40376,
+            41124
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 257,
+          "median_cpu_ns_per_operation": 201.8125,
+          "median_wall_ns_per_operation": 181.5625,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41308,
+            41308
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 1349.0,
+          "median_wall_ns_per_operation": 723.75,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            43984,
+            43984
+          ]
+        }
+      ]
+    },
+    "after-jit": {
+      "cases": 90,
+      "nmt_reserved_bytes": 1906293439,
+      "nmt_committed_bytes": 159660735,
+      "metrics": [
+        {
+          "operation": "dequeRetain",
+          "length": 0,
+          "median_cpu_ns_per_operation": 60.85546875,
+          "median_wall_ns_per_operation": 59.79931640625,
+          "allocated_bytes_per_operation": [
+            0.0,
+            0.05859375
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            48008,
+            48184
+          ]
+        },
+        {
+          "operation": "dequeRetain",
+          "length": 257,
+          "median_cpu_ns_per_operation": 17.538330078125,
+          "median_wall_ns_per_operation": 10.9736328125,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            55924,
+            59740
+          ]
+        },
+        {
+          "operation": "dequeRetain",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 228.65625,
+          "median_wall_ns_per_operation": 120.625,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            78292,
+            78332
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 98.46337890625,
+          "median_wall_ns_per_operation": 97.452880859375,
+          "allocated_bytes_per_operation": [
+            16.0,
+            16.1015625
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            48200,
+            51436
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 372.420654296875,
+          "median_wall_ns_per_operation": 361.656982421875,
+          "allocated_bytes_per_operation": [
+            1048.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            62376,
+            65980
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 89230.640625,
+          "median_wall_ns_per_operation": 206796.8125,
+          "allocated_bytes_per_operation": [
+            262160.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            87608,
+            93288
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 427.88916015625,
+          "median_wall_ns_per_operation": 426.095703125,
+          "allocated_bytes_per_operation": [
+            16.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            53064,
+            53852
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 609.51171875,
+          "median_wall_ns_per_operation": 1559.675537109375,
+          "allocated_bytes_per_operation": [
+            2072.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            70632,
+            72604
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 187578.203125,
+          "median_wall_ns_per_operation": 483318.3125,
+          "allocated_bytes_per_operation": [
+            524304.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            104844,
+            115420
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 0,
+          "median_cpu_ns_per_operation": 54.923095703125,
+          "median_wall_ns_per_operation": 53.945556640625,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            47888,
+            47932
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 257,
+          "median_cpu_ns_per_operation": 20.673583984375,
+          "median_wall_ns_per_operation": 11.94384765625,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            55052,
+            55916
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 105.234375,
+          "median_wall_ns_per_operation": 68.40625,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            77980,
+            78292
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 365.917724609375,
+          "median_wall_ns_per_operation": 305.524658203125,
+          "allocated_bytes_per_operation": [
+            16.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            53980,
+            54396
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 681.486083984375,
+          "median_wall_ns_per_operation": 671.548583984375,
+          "allocated_bytes_per_operation": [
+            1048.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            74792,
+            74836
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 114531.78125,
+          "median_wall_ns_per_operation": 138268.734375,
+          "allocated_bytes_per_operation": [
+            262160.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            113112,
+            131920
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 0,
+          "median_cpu_ns_per_operation": 49.1435546875,
+          "median_wall_ns_per_operation": 48.179931640625,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            46244,
+            47864
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 257,
+          "median_cpu_ns_per_operation": 44.36767578125,
+          "median_wall_ns_per_operation": 12.309814453125,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            54420,
+            54972
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 114.171875,
+          "median_wall_ns_per_operation": 74.265625,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            77220,
+            77972
+          ]
+        }
+      ]
+    },
+    "after-interpreter": {
+      "cases": 90,
+      "nmt_reserved_bytes": 1684673569,
+      "nmt_committed_bytes": 139207713,
+      "metrics": [
+        {
+          "operation": "dequeRetain",
+          "length": 0,
+          "median_cpu_ns_per_operation": 200.515625,
+          "median_wall_ns_per_operation": 178.8671875,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            41180,
+            41260
+          ]
+        },
+        {
+          "operation": "dequeRetain",
+          "length": 257,
+          "median_cpu_ns_per_operation": 211.109375,
+          "median_wall_ns_per_operation": 196.2578125,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41344,
+            41360
+          ]
+        },
+        {
+          "operation": "dequeRetain",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 1531.5,
+          "median_wall_ns_per_operation": 999.0,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            43996,
+            43996
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 1264.984375,
+          "median_wall_ns_per_operation": 1616.09375,
+          "allocated_bytes_per_operation": [
+            16.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            41264,
+            41264
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 678.296875,
+          "median_wall_ns_per_operation": 660.234375,
+          "allocated_bytes_per_operation": [
+            1048.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41360,
+            41360
+          ]
+        },
+        {
+          "operation": "javaIntSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 52166.0,
+          "median_wall_ns_per_operation": 50864.5,
+          "allocated_bytes_per_operation": [
+            262160.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            44208,
+            44208
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 611.6640625,
+          "median_wall_ns_per_operation": 591.6875,
+          "allocated_bytes_per_operation": [
+            16.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            41264,
+            41264
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 897.84375,
+          "median_wall_ns_per_operation": 875.796875,
+          "allocated_bytes_per_operation": [
+            2072.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41360,
+            41360
+          ]
+        },
+        {
+          "operation": "javaLongSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 367955.0,
+          "median_wall_ns_per_operation": 529926.25,
+          "allocated_bytes_per_operation": [
+            524304.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            46328,
+            46328
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 0,
+          "median_cpu_ns_per_operation": 224.8203125,
+          "median_wall_ns_per_operation": 198.8671875,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            41152,
+            41176
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 257,
+          "median_cpu_ns_per_operation": 189.1875,
+          "median_wall_ns_per_operation": 170.6640625,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41344,
+            41344
+          ]
+        },
+        {
+          "operation": "listRetain",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 1634.0,
+          "median_wall_ns_per_operation": 1092.0,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            43996,
+            43996
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 0,
+          "median_cpu_ns_per_operation": 495.15625,
+          "median_wall_ns_per_operation": 477.125,
+          "allocated_bytes_per_operation": [
+            16.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            41264,
+            41332
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 257,
+          "median_cpu_ns_per_operation": 1015.1015625,
+          "median_wall_ns_per_operation": 992.0,
+          "allocated_bytes_per_operation": [
+            1048.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41360,
+            41360
+          ]
+        },
+        {
+          "operation": "nativeIntSelect",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 107070.25,
+          "median_wall_ns_per_operation": 105252.75,
+          "allocated_bytes_per_operation": [
+            262160.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            46328,
+            46328
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 0,
+          "median_cpu_ns_per_operation": 197.9375,
+          "median_wall_ns_per_operation": 182.578125,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            152
+          ],
+          "observed_rss_kb": [
+            40388,
+            41100
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 257,
+          "median_cpu_ns_per_operation": 197.8828125,
+          "median_wall_ns_per_operation": 180.4609375,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            6240
+          ],
+          "observed_rss_kb": [
+            41344,
+            41344
+          ]
+        },
+        {
+          "operation": "selectedCount",
+          "length": 65536,
+          "median_cpu_ns_per_operation": 1740.25,
+          "median_wall_ns_per_operation": 1168.0,
+          "allocated_bytes_per_operation": [
+            0.0
+          ],
+          "retained_owner_and_arrays_bytes": [
+            1572952
+          ],
+          "observed_rss_kb": [
+            43996,
+            43996
+          ]
+        }
+      ]
+    }
+  },
+  "tool_versions": {
+    "java": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode, sharing)",
+    "gcc": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0"
+  },
+  "source_inputs": {
+    "before": [
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java",
+        "sha256": "79cac12007699fb2983853af40c27e9b00d2475390d9d1f36c245ddfe7b317d3"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3Address28.java",
+        "sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3BitLane28.java",
+        "sha256": "011c7f61b442fb07bbc937cade8fa283175a574539ffdcf8c3d52ac4cb673626"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3BlockingDeque.java",
+        "sha256": "ac4ae1d0d2e9d10d39f15226d19bb92fd34d60da37bd0a8c822b731836c10577"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java",
+        "sha256": "3ccd42c38929179e855bcbfa1a6f54f9edb6968a210c65d013ed434ee592e680"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3Collections.java",
+        "sha256": "aa162790de8cb17341ba751c3fef6226196807157bf14d9f6516d3eaf687e926"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ConcurrentBitSet.java",
+        "sha256": "bb1486f22518957d1fa1f951ef78b312364de5a736aff17ae5a543fe1765a4c5"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ConcurrentIntLane28.java",
+        "sha256": "baaa8de6567da94efba77b1363b5629755e5394a6fe951976dc552622ddd0573"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongLane28.java",
+        "sha256": "727666e9ad92ab6ab1a41e625307baa70ef08c1397954c2aa362282a137c46ea"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongMap.java",
+        "sha256": "00b8882f22b664552ae9dae4c37ab243b7fc1fb8159b80b5b74e180b4dfd7698"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongSet.java",
+        "sha256": "7a7e71695a1106f6cefc43e2ba0883eec78abf44f4bf72ead6d094991d6366d6"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3DefaultProgressMonitor.java",
+        "sha256": "f0b52dec2ed7166f242bdd1076792dc3187fc2353d237af59df7b22403bf3d64"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
+        "sha256": "8be53dd0b4ccd1e0f226d4ad7a667bd986b21e51d150bea6f8ddae072bdf4966"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3EnumSet.java",
+        "sha256": "a4c359c8035efdf31edbe6f5c36808984bf3de628e9f7c293429a1c7578ce77c"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+        "sha256": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+        "sha256": "516dc16feff74bb21326e949b146bb0df72fec64fc903db48886a3c896465e6a"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+        "sha256": "fd880291f6119899e530e19b1dc622bb4f1ea51c6c136ab1c510d507c303c761"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "sha256": "e4d8fd83ec0acb9b94bdde5a138d797ccd539c0bb87fe60d419a52f910051fcb"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+        "sha256": "cc3584e7ba4bafc98f154e7f63560334d472e7c03bd04688860642cc9f87bc19"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+        "sha256": "11a04c1382f9358f9bb49da6df98fdb988144a649db30638965bfb25333b4be9"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntCollection.java",
+        "sha256": "2b489fd313a90881a5da424f4664e37842dbf244178e5a5b1c780c9639c70f81"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java",
+        "sha256": "055f45cbba3ff22d206cd1d805859c20ee2688cef5443323838ed6d3c061db14"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java",
+        "sha256": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+        "sha256": "b77352f6502182caf4caca55eda1073b74c2c0b1094e07d9c8c3fbabb8cc8418"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntIterator.java",
+        "sha256": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntLane28.java",
+        "sha256": "771b1450d137874e7c3e08d4e9bee405a6cf88aa6695a9fd4c3616be4ae34d18"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java",
+        "sha256": "523534ffb1824ffbdd7ac4f1dce04e9688f3f8a9b7ce637796100070df645b92"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java",
+        "sha256": "d713f4cd75b49becf6ed478cb5b9d5d971eadbebd90ead8a67c83722cb96eae1"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java",
+        "sha256": "71f6dcf76eeab67a78c902efbcd3a781931c49477656f84659245c9c8fd75d59"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEventBits.java",
+        "sha256": "e62aa39ad9da31a186235de8cbc63a83c84159833c1bab25747073bc8955289f"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEventGranularity.java",
+        "sha256": "0d5d821ebc7626e6e07dc4eba0146a2c36a5db906c9010ca1745a73e27cb2020"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEventPolicy.java",
+        "sha256": "e2504269d75b6d79b2e0fe2bcc3ce02719ff6ee326d8db478a083bc38dac1a2f"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEventSink.java",
+        "sha256": "2a45fb78a9d93614a9d2ed2f5bc1e42e922816fc4ae4123f4d2ac07288134e8d"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEventSource.java",
+        "sha256": "6e779fbed83ae72bb75588ad77028c9c644ae176284877e824828e3f5b97bf27"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEvents.java",
+        "sha256": "35d0a22624feb3dddbe8ba11235772d3579a72fc7128e17c15b3b596b7c6c28d"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyOperation.java",
+        "sha256": "588937f401355bac4971394a185e16e89eb5e32e2a8a8aa1b7ec761fb242d667"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyValueProvider.java",
+        "sha256": "a0daba82e6787bcacbf3811a04a094f9442c88d2ad3513e3029a9b0767f95b66"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyValueState.java",
+        "sha256": "c3374b459647735929490b6c01b633538e3232237e4dd52c565b4e95df0ddca4"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+        "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LinkedHashSet.java",
+        "sha256": "b429ed027228bdb39b366b7023630a4a4da7fbef660386798083f4f3e341c757"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+        "sha256": "31efffe0d25132b393178bec38906e5b977d8939a246a59115afeccb6a23e11b"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LockedMap.java",
+        "sha256": "ab4e57cd0e256e427a21cfbff9bd1c9e910d5f971d7d59051f8d25ec8347fbca"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LockedTreeMap.java",
+        "sha256": "26abeb1427bd90c278549a29f62c2b261f4e286fd36e7eb64a46bb5cdf24efd9"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LockedTreeSet.java",
+        "sha256": "060c8971d038ef82e80197864e00302c898d11d26a01b60791bf383954a79e09"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongArena28.java",
+        "sha256": "f797998ca57b353f7c44ae48f3d65eeaddec6182066cec0f56c8526d71355e60"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/before/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+        "sha256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/before/m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+        "sha256": "290a9037d22957983080b63bbf32d50286fc71a2a2e2a8ff1a6d16239617838c"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+        "sha256": "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
+        "sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java",
+        "sha256": "37755091b46aa1c21ea8ae56596f74209512f4ccc58bd1de702071fa3cb41cb3"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongDeque.java",
+        "sha256": "ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java",
+        "sha256": "cf9f15e9712b169768be2611a9eae98d317d47b07b7494b168bf81988e678341"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+        "sha256": "7274e4b0ab7a65be73e2a59d92e5b419a91261c954917428eba85f2dfccf03e6"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "sha256": "a69694a2ce22ca9599cb665e4845f5dee75d527b7c144fa3ea7fb4518ec2d3fa"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+        "sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLane28.java",
+        "sha256": "5e35c6c646389c582585b684a4e6224bb968cf2f7b669598eb88920ab1538960"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLaneStore28.java",
+        "sha256": "e12261ea8149c9b6cedcfb08915699ec344a57eaed15f68060a9927717eb44a1"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+        "sha256": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLinkedList28.java",
+        "sha256": "2db7c6ba3342a58fdce49c3e988ded51ece2de336575d225edb6cca75cd483c2"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongList.java",
+        "sha256": "7da7f46ea6bfb6dee64fe8a4eaeb914b07e537d10c3cb08ed20f440b1cfcd2dd"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java",
+        "sha256": "c456dc750c27dc100df3a032a422902288cb155645996703a9565ce85bcb2003"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java",
+        "sha256": "a9be525afc8c71fa191625dc69c60f76273299832744392435a5739006c8d15c"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+        "sha256": "7688d153817347490e2df39c71a283b142286fed14cb60ed731bc60d558a1ac3"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLongLinkedHashMap.java",
+        "sha256": "c2f74a1336ec435d7fbd031797a485ded70f21283bb8ace10aca09ed68fe9846"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java",
+        "sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongQueue.java",
+        "sha256": "50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java",
+        "sha256": "a199d9601ca4c36d8dbe3d1b95a8dd7da49d5f22a15ed29a7112665a38288c82"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java",
+        "sha256": "d1011f31158fa96c23722e6df2fd7ec9e9c1592fba860580330c42fb3f25f4f9"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongSequence.java",
+        "sha256": "d7cf703705bb68d1ff6c2455d7e94533baedf5c89a776f10e729c7a9410321eb"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java",
+        "sha256": "257a69f75483df729add39767532718f96ac3c9917bdadbe9a4be08f32caf933"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongSortedSnapshot.java",
+        "sha256": "37ce5651596e7b44bb2512d2bdc6ee8bba40bf95320c5c377162077032c69975"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java",
+        "sha256": "43a8b64af2ff4c014910d8b769615d5b60bcb23d52962c58c72050dd3e6f6c48"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongStack.java",
+        "sha256": "812c2df2bc73f04e6ab7551c48cea59bc8b5c877bd347266c287764db88e4c36"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java",
+        "sha256": "141b90d104cf9d8715e97b6a805314fd2a8fcc9fe10d3c81b1894cf744141d42"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+        "sha256": "bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java",
+        "sha256": "0e6e12dd48b62b8606de078e25a0b3a75b6d741d11bf9b5927d730d2f0110bd3"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ObjectIdentitySet.java",
+        "sha256": "6d6b6f58113a44438c721cd645efa45ac6c0f63842b164ebb33a94dce4066e3d"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java",
+        "sha256": "c8ffc48d43e98223ae37e722c5841b962217fb6b98daf561cba430eb3492bdc5"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java",
+        "sha256": "c56b6a29fd7da6ab1a1c3ac4b59cd0b6a15fc2b14a20c7c41975c12b57085c79"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java",
+        "sha256": "015242ae386c4366471cd7d26fab886a2c362b58029982b0108976342c4f3357"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3Progress.java",
+        "sha256": "01b387d63a1ddfb1b758e11fcee76366aea68ec391bc0d87234172857cb6a25d"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java",
+        "sha256": "6d4637c9b3de4481180d6459f1312aff90141b6ddf46b91aff886bab958339c9"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java",
+        "sha256": "f45282edf96cbf61f84df41e92c5ad958e577ea07a397bc8802c5bc8996aeb24"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ProgressScope.java",
+        "sha256": "8ad6c20a9661ec095fb4dcd0566b400130f9c13e9c4312a625ff2dfd0c40553b"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ProgressState.java",
+        "sha256": "1de191dc8e99a92f0aee3f8f24e665f9de49714f8571c0f5c3b047fbd43a6e6d"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3Residency.java",
+        "sha256": "240f63bf1cc6d1ce2681c338f8715e301913eeaf8a3cd69baebc5971b9cdaf67"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+        "sha256": "da761a6b4f10d9a3c9a61979a4ee238fd6d26492d1ba0e6daacdf371f6561058"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java",
+        "sha256": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java",
+        "sha256": "9a7487453e0bd2369b56e7e17dedb79e2eba8919944772ec0407c95833458ae7"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+        "sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+        "sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+        "sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java",
+        "sha256": "38df0ab511c2cdb43f957c16878da572484495f2d94ce851ad8342ca526b08a1"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SystemProgress.java",
+        "sha256": "683b4a0532ff40682d43a51ee9e38fb1c73de3a05e53d9ec5392e4ba29cdd29b"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3TransferQueue.java",
+        "sha256": "e4f3ad7fa0fb8e9f9c0bdf3530143b7fb525515d2e43d7cc479a4bceab81ebe7"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+        "sha256": "01582359b73d671f627f9bde3b266021c975bcf374f4c575fa43c05fd49218e8"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3TreeSet.java",
+        "sha256": "e55e48d581412955c468b8263d9f2b15bfb03b659f3b70f1187697853aeebc5c"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java",
+        "sha256": "1b1fd624108635fbb76e2608b066abfdaa4cc297b85f0052d84f17ac33c19d2a"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/package-info.java",
+        "sha256": "d1a378061968774e1b7a9e0e784039ae34b84efc22629cec2db0bae2f3117acc"
+      }
+    ],
+    "after": [
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java",
+        "sha256": "79cac12007699fb2983853af40c27e9b00d2475390d9d1f36c245ddfe7b317d3"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3Address28.java",
+        "sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3BitLane28.java",
+        "sha256": "011c7f61b442fb07bbc937cade8fa283175a574539ffdcf8c3d52ac4cb673626"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3BlockingDeque.java",
+        "sha256": "ac4ae1d0d2e9d10d39f15226d19bb92fd34d60da37bd0a8c822b731836c10577"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java",
+        "sha256": "3ccd42c38929179e855bcbfa1a6f54f9edb6968a210c65d013ed434ee592e680"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3Collections.java",
+        "sha256": "aa162790de8cb17341ba751c3fef6226196807157bf14d9f6516d3eaf687e926"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ConcurrentBitSet.java",
+        "sha256": "bb1486f22518957d1fa1f951ef78b312364de5a736aff17ae5a543fe1765a4c5"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ConcurrentIntLane28.java",
+        "sha256": "baaa8de6567da94efba77b1363b5629755e5394a6fe951976dc552622ddd0573"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongLane28.java",
+        "sha256": "727666e9ad92ab6ab1a41e625307baa70ef08c1397954c2aa362282a137c46ea"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongMap.java",
+        "sha256": "00b8882f22b664552ae9dae4c37ab243b7fc1fb8159b80b5b74e180b4dfd7698"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongSet.java",
+        "sha256": "7a7e71695a1106f6cefc43e2ba0883eec78abf44f4bf72ead6d094991d6366d6"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3DefaultProgressMonitor.java",
+        "sha256": "f0b52dec2ed7166f242bdd1076792dc3187fc2353d237af59df7b22403bf3d64"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
+        "sha256": "8be53dd0b4ccd1e0f226d4ad7a667bd986b21e51d150bea6f8ddae072bdf4966"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3EnumSet.java",
+        "sha256": "a4c359c8035efdf31edbe6f5c36808984bf3de628e9f7c293429a1c7578ce77c"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+        "sha256": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+        "sha256": "516dc16feff74bb21326e949b146bb0df72fec64fc903db48886a3c896465e6a"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+        "sha256": "fd880291f6119899e530e19b1dc622bb4f1ea51c6c136ab1c510d507c303c761"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/after/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "sha256": "e4d8fd83ec0acb9b94bdde5a138d797ccd539c0bb87fe60d419a52f910051fcb"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+        "sha256": "cc3584e7ba4bafc98f154e7f63560334d472e7c03bd04688860642cc9f87bc19"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+        "sha256": "11a04c1382f9358f9bb49da6df98fdb988144a649db30638965bfb25333b4be9"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntCollection.java",
+        "sha256": "2b489fd313a90881a5da424f4664e37842dbf244178e5a5b1c780c9639c70f81"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java",
+        "sha256": "055f45cbba3ff22d206cd1d805859c20ee2688cef5443323838ed6d3c061db14"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java",
+        "sha256": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+        "sha256": "b77352f6502182caf4caca55eda1073b74c2c0b1094e07d9c8c3fbabb8cc8418"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntIterator.java",
+        "sha256": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntLane28.java",
+        "sha256": "771b1450d137874e7c3e08d4e9bee405a6cf88aa6695a9fd4c3616be4ae34d18"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java",
+        "sha256": "523534ffb1824ffbdd7ac4f1dce04e9688f3f8a9b7ce637796100070df645b92"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java",
+        "sha256": "d713f4cd75b49becf6ed478cb5b9d5d971eadbebd90ead8a67c83722cb96eae1"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java",
+        "sha256": "71f6dcf76eeab67a78c902efbcd3a781931c49477656f84659245c9c8fd75d59"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEventBits.java",
+        "sha256": "e62aa39ad9da31a186235de8cbc63a83c84159833c1bab25747073bc8955289f"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEventGranularity.java",
+        "sha256": "0d5d821ebc7626e6e07dc4eba0146a2c36a5db906c9010ca1745a73e27cb2020"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEventPolicy.java",
+        "sha256": "e2504269d75b6d79b2e0fe2bcc3ce02719ff6ee326d8db478a083bc38dac1a2f"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEventSink.java",
+        "sha256": "2a45fb78a9d93614a9d2ed2f5bc1e42e922816fc4ae4123f4d2ac07288134e8d"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEventSource.java",
+        "sha256": "6e779fbed83ae72bb75588ad77028c9c644ae176284877e824828e3f5b97bf27"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyEvents.java",
+        "sha256": "35d0a22624feb3dddbe8ba11235772d3579a72fc7128e17c15b3b596b7c6c28d"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyOperation.java",
+        "sha256": "588937f401355bac4971394a185e16e89eb5e32e2a8a8aa1b7ec761fb242d667"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyValueProvider.java",
+        "sha256": "a0daba82e6787bcacbf3811a04a094f9442c88d2ad3513e3029a9b0767f95b66"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LazyValueState.java",
+        "sha256": "c3374b459647735929490b6c01b633538e3232237e4dd52c565b4e95df0ddca4"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+        "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LinkedHashSet.java",
+        "sha256": "b429ed027228bdb39b366b7023630a4a4da7fbef660386798083f4f3e341c757"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+        "sha256": "31efffe0d25132b393178bec38906e5b977d8939a246a59115afeccb6a23e11b"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LockedMap.java",
+        "sha256": "ab4e57cd0e256e427a21cfbff9bd1c9e910d5f971d7d59051f8d25ec8347fbca"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LockedTreeMap.java",
+        "sha256": "26abeb1427bd90c278549a29f62c2b261f4e286fd36e7eb64a46bb5cdf24efd9"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LockedTreeSet.java",
+        "sha256": "060c8971d038ef82e80197864e00302c898d11d26a01b60791bf383954a79e09"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongArena28.java",
+        "sha256": "f797998ca57b353f7c44ae48f3d65eeaddec6182066cec0f56c8526d71355e60"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/after/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+        "sha256": "3f358e900a10285b449e4721066457dafa0de035362e3f84faf400a0fbb65126"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/after/m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+        "sha256": "38967838262181f028717c6a8f0e0bce093d1ce5aca43419bc414d77ef6d9b9e"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+        "sha256": "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
+        "sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java",
+        "sha256": "37755091b46aa1c21ea8ae56596f74209512f4ccc58bd1de702071fa3cb41cb3"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongDeque.java",
+        "sha256": "ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java",
+        "sha256": "cf9f15e9712b169768be2611a9eae98d317d47b07b7494b168bf81988e678341"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+        "sha256": "7274e4b0ab7a65be73e2a59d92e5b419a91261c954917428eba85f2dfccf03e6"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "sha256": "a69694a2ce22ca9599cb665e4845f5dee75d527b7c144fa3ea7fb4518ec2d3fa"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+        "sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLane28.java",
+        "sha256": "5e35c6c646389c582585b684a4e6224bb968cf2f7b669598eb88920ab1538960"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLaneStore28.java",
+        "sha256": "e12261ea8149c9b6cedcfb08915699ec344a57eaed15f68060a9927717eb44a1"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+        "sha256": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLinkedList28.java",
+        "sha256": "2db7c6ba3342a58fdce49c3e988ded51ece2de336575d225edb6cca75cd483c2"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongList.java",
+        "sha256": "7da7f46ea6bfb6dee64fe8a4eaeb914b07e537d10c3cb08ed20f440b1cfcd2dd"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java",
+        "sha256": "c456dc750c27dc100df3a032a422902288cb155645996703a9565ce85bcb2003"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java",
+        "sha256": "a9be525afc8c71fa191625dc69c60f76273299832744392435a5739006c8d15c"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+        "sha256": "7688d153817347490e2df39c71a283b142286fed14cb60ed731bc60d558a1ac3"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongLongLinkedHashMap.java",
+        "sha256": "c2f74a1336ec435d7fbd031797a485ded70f21283bb8ace10aca09ed68fe9846"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java",
+        "sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongQueue.java",
+        "sha256": "50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java",
+        "sha256": "a199d9601ca4c36d8dbe3d1b95a8dd7da49d5f22a15ed29a7112665a38288c82"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java",
+        "sha256": "d1011f31158fa96c23722e6df2fd7ec9e9c1592fba860580330c42fb3f25f4f9"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongSequence.java",
+        "sha256": "d7cf703705bb68d1ff6c2455d7e94533baedf5c89a776f10e729c7a9410321eb"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java",
+        "sha256": "257a69f75483df729add39767532718f96ac3c9917bdadbe9a4be08f32caf933"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongSortedSnapshot.java",
+        "sha256": "37ce5651596e7b44bb2512d2bdc6ee8bba40bf95320c5c377162077032c69975"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java",
+        "sha256": "43a8b64af2ff4c014910d8b769615d5b60bcb23d52962c58c72050dd3e6f6c48"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongStack.java",
+        "sha256": "812c2df2bc73f04e6ab7551c48cea59bc8b5c877bd347266c287764db88e4c36"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java",
+        "sha256": "141b90d104cf9d8715e97b6a805314fd2a8fcc9fe10d3c81b1894cf744141d42"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+        "sha256": "bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java",
+        "sha256": "0e6e12dd48b62b8606de078e25a0b3a75b6d741d11bf9b5927d730d2f0110bd3"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ObjectIdentitySet.java",
+        "sha256": "6d6b6f58113a44438c721cd645efa45ac6c0f63842b164ebb33a94dce4066e3d"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java",
+        "sha256": "c8ffc48d43e98223ae37e722c5841b962217fb6b98daf561cba430eb3492bdc5"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java",
+        "sha256": "c56b6a29fd7da6ab1a1c3ac4b59cd0b6a15fc2b14a20c7c41975c12b57085c79"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java",
+        "sha256": "015242ae386c4366471cd7d26fab886a2c362b58029982b0108976342c4f3357"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3Progress.java",
+        "sha256": "01b387d63a1ddfb1b758e11fcee76366aea68ec391bc0d87234172857cb6a25d"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java",
+        "sha256": "6d4637c9b3de4481180d6459f1312aff90141b6ddf46b91aff886bab958339c9"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java",
+        "sha256": "f45282edf96cbf61f84df41e92c5ad958e577ea07a397bc8802c5bc8996aeb24"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ProgressScope.java",
+        "sha256": "8ad6c20a9661ec095fb4dcd0566b400130f9c13e9c4312a625ff2dfd0c40553b"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3ProgressState.java",
+        "sha256": "1de191dc8e99a92f0aee3f8f24e665f9de49714f8571c0f5c3b047fbd43a6e6d"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3Residency.java",
+        "sha256": "240f63bf1cc6d1ce2681c338f8715e301913eeaf8a3cd69baebc5971b9cdaf67"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+        "sha256": "da761a6b4f10d9a3c9a61979a4ee238fd6d26492d1ba0e6daacdf371f6561058"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java",
+        "sha256": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java",
+        "sha256": "9a7487453e0bd2369b56e7e17dedb79e2eba8919944772ec0407c95833458ae7"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+        "sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+        "sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+        "sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java",
+        "sha256": "38df0ab511c2cdb43f957c16878da572484495f2d94ce851ad8342ca526b08a1"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3SystemProgress.java",
+        "sha256": "683b4a0532ff40682d43a51ee9e38fb1c73de3a05e53d9ec5392e4ba29cdd29b"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3TransferQueue.java",
+        "sha256": "e4f3ad7fa0fb8e9f9c0bdf3530143b7fb525515d2e43d7cc479a4bceab81ebe7"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+        "sha256": "01582359b73d671f627f9bde3b266021c975bcf374f4c575fa43c05fd49218e8"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3TreeSet.java",
+        "sha256": "e55e48d581412955c468b8263d9f2b15bfb03b659f3b70f1187697853aeebc5c"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java",
+        "sha256": "1b1fd624108635fbb76e2608b066abfdaa4cc297b85f0052d84f17ac33c19d2a"
+      },
+      {
+        "path": "/workspace/scratch/5d405a20c026/repos/M3jdk21-array-atoms/m3/collections/src/main/java/com/m3/collections/package-info.java",
+        "sha256": "d1a378061968774e1b7a9e0e784039ae34b84efc22629cec2db0bae2f3117acc"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "label": "java-version",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-version"
+      ],
+      "exit_code": 0,
+      "log_sha256": "17dc57451d68f613c07b3d8f2d9ee18b179fe4eea3d208874d609ddb0f641e40"
+    },
+    {
+      "label": "gcc-version",
+      "argv": [
+        "/usr/bin/gcc",
+        "--version"
+      ],
+      "exit_code": 0,
+      "log_sha256": "cc08f972264fd3ba58abb3ebc6337013b225be267c91d2df9f29f066284fe2b6"
+    },
+    {
+      "label": "compile-native-missing-symbol-fixture",
+      "argv": [
+        "/usr/bin/gcc",
+        "-std=c17",
+        "-O2",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Wconversion",
+        "-Wshadow",
+        "-Werror",
+        "-fPIC",
+        "-shared",
+        "-I/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/include",
+        "-I/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/include/linux",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/proof/NoNativeSymbol.c",
+        "-o",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/missing-symbol/libm3_collections_mask.so"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "before-core-javac",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+        "-J-Xmx512m",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-h",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/headers",
+        "-d",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/classes",
+        "@/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/sources.args"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "before-contract-javac",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+        "-J-Xmx384m",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/classes",
+        "-d",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/classes",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/after/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "before-native-c17",
+      "argv": [
+        "/usr/bin/gcc",
+        "-std=c17",
+        "-O2",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Wconversion",
+        "-Wshadow",
+        "-Werror",
+        "-fPIC",
+        "-shared",
+        "-I/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/include",
+        "-I/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/include/linux",
+        "-fstack-usage",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/before/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "-o",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/native/libm3_collections_mask.so"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "before-native-symbols",
+      "argv": [
+        "nm",
+        "-D",
+        "--defined-only",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/native/libm3_collections_mask.so"
+      ],
+      "exit_code": 0,
+      "log_sha256": "0d5d38d294567db349e9643ba59469f2d4426877e293ed87ffb0fa6292d485f2"
+    },
+    {
+      "label": "before-java",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx384m",
+        "-Xverify:all",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/classes",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/missing-library",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest"
+      ],
+      "exit_code": 0,
+      "log_sha256": "30ff1e1d3ba3324cacc761ab80f87638eb1cb49773f1df8f0472b7be6ad90f13"
+    },
+    {
+      "label": "before-native",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx384m",
+        "-Xverify:all",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/classes",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/native",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest",
+        "--native"
+      ],
+      "exit_code": 0,
+      "log_sha256": "d060cf06136bbe79cf698f5e6f23e2e03c77fe98270008ab19e99cde8cc34bdb"
+    },
+    {
+      "label": "before-missing-native",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx384m",
+        "-Xverify:all",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/classes",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/missing-library",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest",
+        "--native-missing"
+      ],
+      "exit_code": 0,
+      "log_sha256": "41a09bc8e79001f1474c774513ef0b2d7ab6535c21b6235e49f5fd7388961ecc"
+    },
+    {
+      "label": "before-missing-symbol",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx384m",
+        "-Xverify:all",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/classes",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/missing-symbol",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest",
+        "--native-symbol-missing"
+      ],
+      "exit_code": 0,
+      "log_sha256": "8234c4f71ff730e0d101ab669c2fe4daa444f3e13196e2f495315a7a275cddf0"
+    },
+    {
+      "label": "after-core-javac",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+        "-J-Xmx512m",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-h",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/headers",
+        "-d",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/classes",
+        "@/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/sources.args"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "after-contract-javac",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+        "-J-Xmx384m",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/classes",
+        "-d",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/classes",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/after/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "after-native-c17",
+      "argv": [
+        "/usr/bin/gcc",
+        "-std=c17",
+        "-O2",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Wconversion",
+        "-Wshadow",
+        "-Werror",
+        "-fPIC",
+        "-shared",
+        "-I/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/include",
+        "-I/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/include/linux",
+        "-fstack-usage",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/after/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "-o",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/native/libm3_collections_mask.so"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "after-native-symbols",
+      "argv": [
+        "nm",
+        "-D",
+        "--defined-only",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/native/libm3_collections_mask.so"
+      ],
+      "exit_code": 0,
+      "log_sha256": "0d5d38d294567db349e9643ba59469f2d4426877e293ed87ffb0fa6292d485f2"
+    },
+    {
+      "label": "after-java",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx384m",
+        "-Xverify:all",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/classes",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/missing-library",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest"
+      ],
+      "exit_code": 0,
+      "log_sha256": "30ff1e1d3ba3324cacc761ab80f87638eb1cb49773f1df8f0472b7be6ad90f13"
+    },
+    {
+      "label": "after-native",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx384m",
+        "-Xverify:all",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/classes",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/native",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest",
+        "--native"
+      ],
+      "exit_code": 0,
+      "log_sha256": "d060cf06136bbe79cf698f5e6f23e2e03c77fe98270008ab19e99cde8cc34bdb"
+    },
+    {
+      "label": "after-missing-native",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx384m",
+        "-Xverify:all",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/classes",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/missing-library",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest",
+        "--native-missing"
+      ],
+      "exit_code": 0,
+      "log_sha256": "41a09bc8e79001f1474c774513ef0b2d7ab6535c21b6235e49f5fd7388961ecc"
+    },
+    {
+      "label": "after-missing-symbol",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx384m",
+        "-Xverify:all",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/classes",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/missing-symbol",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest",
+        "--native-symbol-missing"
+      ],
+      "exit_code": 0,
+      "log_sha256": "8234c4f71ff730e0d101ab669c2fe4daa444f3e13196e2f495315a7a275cddf0"
+    },
+    {
+      "label": "after-native-ubsan-c17",
+      "argv": [
+        "/usr/bin/gcc",
+        "-std=c17",
+        "-O2",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Wconversion",
+        "-Wshadow",
+        "-Werror",
+        "-fPIC",
+        "-shared",
+        "-I/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/include",
+        "-I/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/include/linux",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/sdk/after/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "-o",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/native-ubsan/libm3_collections_mask.so"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "after-native-ubsan-runtime",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xmx384m",
+        "-Xverify:all",
+        "-Xcheck:jni",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/native-ubsan",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/classes",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest",
+        "--native"
+      ],
+      "exit_code": 0,
+      "log_sha256": "d060cf06136bbe79cf698f5e6f23e2e03c77fe98270008ab19e99cde8cc34bdb"
+    },
+    {
+      "label": "cost-probe-javac",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/javac",
+        "-J-Xmx384m",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/classes",
+        "-d",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/classes",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/proof/SizeAgent.java",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/proof/MaskZeroCostProbe.java"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "size-agent-jar",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/jar",
+        "--create",
+        "--file",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/size-agent.jar",
+        "--manifest",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/agent.mf",
+        "-C",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/classes",
+        "SizeAgent.class"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "cost-before-jit",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xms64m",
+        "-Xmx384m",
+        "-XX:+UnlockDiagnosticVMOptions",
+        "-XX:NativeMemoryTracking=summary",
+        "-XX:+PrintNMTStatistics",
+        "-javaagent:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/size-agent.jar",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/native",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/classes:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/classes",
+        "MaskZeroCostProbe",
+        "--native"
+      ],
+      "exit_code": 0,
+      "log_sha256": "71d673ef45793c64eb86a2767b95883092201aed0039cddbb09fce14cc41fac5"
+    },
+    {
+      "label": "cost-before-interpreter",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xms64m",
+        "-Xmx384m",
+        "-Xint",
+        "-XX:+UnlockDiagnosticVMOptions",
+        "-XX:NativeMemoryTracking=summary",
+        "-XX:+PrintNMTStatistics",
+        "-javaagent:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/size-agent.jar",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/native",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/before/classes:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/classes",
+        "MaskZeroCostProbe",
+        "--native",
+        "--interpreted"
+      ],
+      "exit_code": 0,
+      "log_sha256": "44d76355abbbc270649e58288840a892208ecd4dc15e5bf45fe2b3fff5cd21e8"
+    },
+    {
+      "label": "cost-after-jit",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xms64m",
+        "-Xmx384m",
+        "-XX:+UnlockDiagnosticVMOptions",
+        "-XX:NativeMemoryTracking=summary",
+        "-XX:+PrintNMTStatistics",
+        "-javaagent:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/size-agent.jar",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/native",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/classes:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/classes",
+        "MaskZeroCostProbe",
+        "--native"
+      ],
+      "exit_code": 0,
+      "log_sha256": "337457349d866a9b61bf3e97b260f80edf912cb72269507eb883ab263aeaa894"
+    },
+    {
+      "label": "cost-after-interpreter",
+      "argv": [
+        "/workspace/scratch/5d405a20c026/toolchains/jdk-21.0.2+13/bin/java",
+        "-Xms64m",
+        "-Xmx384m",
+        "-Xint",
+        "-XX:+UnlockDiagnosticVMOptions",
+        "-XX:NativeMemoryTracking=summary",
+        "-XX:+PrintNMTStatistics",
+        "-javaagent:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/size-agent.jar",
+        "-Djava.library.path=/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/native",
+        "-cp",
+        "/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/after/classes:/workspace/scratch/5d405a20c026/repos/com.synexia/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017/target/runtime/cost/classes",
+        "MaskZeroCostProbe",
+        "--native",
+        "--interpreted"
+      ],
+      "exit_code": 0,
+      "log_sha256": "bd9fec9f8139f79eeb3edca240dc0d4abb520c4e38cc80f1fccc379d84d9c78c"
+    }
+  ],
+  "limits": [
+    "Linux x86_64 / stock Java21 / GCC only",
+    "matched finite resource probe, not a JMH or universal throughput claim",
+    "NMT and RSS are whole JVM/process observations, not attribution of every native byte to one kernel",
+    "retained byte measurement covers the existing list/deque owner objects and backing arrays; caller inputs and explicit detached outputs are separate",
+    "all allocation samples are retained; median count/retain allocation is checked, allowing visible one-time JVM/probe allocation outliers",
+    "unchanged nonzero selector behavior comes from current upstream; concurrent input mutation remains unsupported",
+    "owning Maven custom source artifact defaults, full JDK image, jtreg/JCK and hosted CI are separate gates"
+  ]
+}

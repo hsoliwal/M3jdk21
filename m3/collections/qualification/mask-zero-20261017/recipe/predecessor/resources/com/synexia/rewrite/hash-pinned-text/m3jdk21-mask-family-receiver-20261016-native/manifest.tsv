@@ -1,0 +1,2 @@
+# path	before_sha256	after_sha256	template
+m3/collections/src/main/native/collections/m3_index_mask_compactor.c	ABSENT	d7786cd5308f4a1e6743680d35e51f5f11a66b106abdb8f170edcb92b901d1cb	m3_index_mask_compactor.c.txt

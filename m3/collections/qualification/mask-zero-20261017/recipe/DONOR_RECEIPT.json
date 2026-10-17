@@ -1,0 +1,88 @@
+{
+  "source_revision": "7370b3e158e5463b76dc1639b1f943e6a597a446",
+  "source_pull_request": "https://github.com/hsoliwal/com.synexia/pull/11866",
+  "resources": [
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-mask-family-receiver-20261016.yml",
+      "git_blob_sha1": "3d601ab93ed426c2393c2e303ce5ed37c72ad9b0",
+      "local_path": "predecessor/resources/META-INF/rewrite/m3jdk21-mask-family-receiver-20261016.yml",
+      "sha256": "ab2389a0dab26800688582debd70115ab9c1767a5beecf3baac5f66057b1396d"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/M3IndexMaskCompactor.java.txt",
+      "git_blob_sha1": "240bbfb62ca949bfbd8abb0061cccad6630f7888",
+      "local_path": "predecessor/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/M3IndexMaskCompactor.java.txt",
+      "sha256": "8c1aaba72372c6caecfa35d4121a0b518888d64933bef428a8e61c15b3a746d9"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/M3IndexMaskCompactorSelfTest.java.txt",
+      "git_blob_sha1": "02db2523258c1f1dca676a2612579980321f46c7",
+      "local_path": "predecessor/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/M3IndexMaskCompactorSelfTest.java.txt",
+      "sha256": "86eb2c9a436aac6f6e5b99f5c275636ca272d849dd08aa07f8796271167c63a1"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/M3IndexMaskCompactorTest.java.txt",
+      "git_blob_sha1": "e9342d8064a19bb44ce31d470b33b1fd0c3777ff",
+      "local_path": "predecessor/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/M3IndexMaskCompactorTest.java.txt",
+      "sha256": "2d4273ec51e75d07e9f551d64e3059bb325253a41edbdb7eba5564040d1da3c0"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/M3LongArrayDeque.java.txt",
+      "git_blob_sha1": "cfe73fe987ec59d906807f8a7580bba8d371a946",
+      "local_path": "predecessor/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/M3LongArrayDeque.java.txt",
+      "sha256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/M3LongArrayList.java.txt",
+      "git_blob_sha1": "0ecf0a20c0f1195f79632e261de54117e204da42",
+      "local_path": "predecessor/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/M3LongArrayList.java.txt",
+      "sha256": "290a9037d22957983080b63bbf32d50286fc71a2a2e2a8ff1a6d16239617838c"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/manifest.tsv",
+      "git_blob_sha1": "4e72df8ff89176986ea013a856e388d6676031a7",
+      "local_path": "predecessor/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/manifest.tsv",
+      "sha256": "956e6b49d8d087538a2967f5046d263d459ef2383858bb3e0332e69c91cdde76"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/pre/M3LongArrayDeque.java.txt",
+      "git_blob_sha1": "82975f80ff5a3728dff54e1157c9d7f50d95241b",
+      "local_path": "predecessor/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/pre/M3LongArrayDeque.java.txt",
+      "sha256": "42cbfad68941221a81efc34d33356334a7c9625eb7031aeaee387e2583fa832d"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/pre/M3LongArrayList.java.txt",
+      "git_blob_sha1": "9f6ca2c726083921373f203be74095f8691de3f8",
+      "local_path": "predecessor/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-family-receiver-20261016/pre/M3LongArrayList.java.txt",
+      "sha256": "df1c03c44c3108cf6b9e34fe5ca49c7692dd63c2250f749ce25add792e12147d"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-mask-family-receiver-20261016-native/m3_index_mask_compactor.c.txt",
+      "git_blob_sha1": "f1a9488905807e6417dd267e125bfc44dbcc9297",
+      "local_path": "predecessor/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-mask-family-receiver-20261016-native/m3_index_mask_compactor.c.txt",
+      "sha256": "d7786cd5308f4a1e6743680d35e51f5f11a66b106abdb8f170edcb92b901d1cb"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-mask-family-receiver-20261016-native/manifest.tsv",
+      "git_blob_sha1": "09d36a95d24188bc93a51211854ac003c6559016",
+      "local_path": "predecessor/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-mask-family-receiver-20261016-native/manifest.tsv",
+      "sha256": "8cd25a3925257dc3f59d6ace27005ab06d19a9714ae8006857c9851286a482c9"
+    }
+  ],
+  "donors": [
+    {
+      "revision": "9e22725d1e5c440487ce8d59cd1aa15ec217f793",
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/M3IndexMaskCompactor.java",
+      "git_blob_sha1": "679aaeb7196a03b6682195e1191eca45fe638154",
+      "local_path": "donors/M3IndexMaskCompactor.java.txt",
+      "sha256": "fe6a5c272cc731508e789f379b932fae750d6e2a722882b733b92a5b63dabb5f"
+    },
+    {
+      "revision": "9e22725d1e5c440487ce8d59cd1aa15ec217f793",
+      "path": "synexia-primitives/src/main/native/m3_index_mask_compactor.c",
+      "git_blob_sha1": "0b14e236385b7dace734993bdf6fb0d0c38ec1fa",
+      "local_path": "donors/m3_index_mask_compactor.c.txt",
+      "sha256": "421567b6729a67faa07bf1c018bfe6c36cd367b07fec2d6c5f87897b5908e868"
+    }
+  ]
+}

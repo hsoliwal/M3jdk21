@@ -1,0 +1,12 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3Jdk21MaskFamilyReceiver20261016
+displayName: Receive array/mask-only collection selection into M3JDK21
+description: >
+  Exact Java 21 postimages of current primitive List and Deque owners and the
+  Synexia mask selector; JNI symbol is adapted to M3JDK target ownership.
+  No per-row objects, public java.util changes or Synexia runtime dependency.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-mask-family-receiver-20261016
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk21-mask-family-receiver-20261016-native

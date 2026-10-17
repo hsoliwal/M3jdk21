@@ -1,0 +1,36 @@
+{
+  "schema": "M3_MASK_ZERO_HANDOFF_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "4c80d407d6ec503a8c3a494ba79b94d132e155cd",
+  "canonical_path": "synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017",
+  "target_preimage_revision": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "canonical_publication_inventory_sha256": "cb62e66d85ff205ec1b237ccbb7447732f4034a9d78c5b7004de759e93322099",
+  "mirror_receipt_sha256": "ec88017e0a86505ba3bb226f457a32ad6fdfc6f4d572e7666547db1eefa0f4b9",
+  "target_postimages": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "sha256": "e4d8fd83ec0acb9b94bdde5a138d797ccd539c0bb87fe60d419a52f910051fcb"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+      "sha256": "38967838262181f028717c6a8f0e0bce093d1ce5aca43419bc414d77ef6d9b9e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "sha256": "3f358e900a10285b449e4721066457dafa0de035362e3f84faf400a0fbb65126"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java",
+      "sha256": "6e68fd5cb852e9d3587f446b2297d7051e5ffc99aa47c77da0e504060b9b1c77"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "sha256": "ee3ffd37036ca8ed76ca7cbe8bd74a0837abeb3081d5c18ef1b82b6e2f9653fc"
+    },
+    {
+      "path": ".github/workflows/m3-collections-mask-receiver.yml",
+      "sha256": "bc77fcff1d300464959e9fba3d0a86360ac33fc3519d0e42e03129e78108dbff"
+    }
+  ],
+  "status": "EXACT_CANONICAL_PROOF_CUSTODY"
+}

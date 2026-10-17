@@ -1,0 +1,90 @@
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.synexia.primitives;
+
+import java.util.Arrays;
+import java.util.Objects;
+
+/**
+ * Compacts an already-ordered primitive row index using a caller-precomputed state mask.
+ *
+ * <p>Position {@code i} in {@code rowStates} describes {@code orderedRows[i]};
+ * values are unsigned bytes for mask tests. The selected output retains the original
+ * index order and duplicate IDs. Neither input is mutated or retained. An explicit
+ * JNI backend is optional and never receives predicates, comparators or object refs.
+ *
+ * <p>Selection is O(n) time, O(k) returned slots (Java temporarily uses O(n)).
+ * Existing {@link PrimitiveIndexView} remains the canonical owner of primitive
+ * store version checks, sorting, and index composition; this stateless operation
+ * does not claim to turn a detached mask into a live store view.
+ */
+public final class M3IndexMaskCompactor {
+    /** Backends do not silently change based on machine configuration. */
+    public enum Backend { JAVA, NATIVE_REQUIRED }
+
+    private M3IndexMaskCompactor() {
+    }
+
+    /** Returns whether a compatible optional JNI binary could be loaded. */
+    public static boolean nativeAvailable() {
+        return NativeLibrary.AVAILABLE;
+    }
+
+    /**
+     * Select row IDs satisfying all {@code requiredMask} bits, preserving order.
+     * Exactly one input validation pass is performed before the JNI call.
+     * Source aliases may change after return; the output is always detached.
+     */
+    public static int[] select(int[] orderedRows, byte[] rowStates,
+                               int requiredMask, Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(rowStates, "rowStates");
+        Objects.requireNonNull(backend, "backend");
+        if (orderedRows.length != rowStates.length) {
+            throw new IllegalArgumentException("index and aligned state lengths differ");
+        }
+        if ((requiredMask & ~0xff) != 0) {
+            throw new IllegalArgumentException("required mask must fit an unsigned byte");
+        }
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            return selectNative(orderedRows, rowStates, requiredMask);
+        }
+        return selectJava(orderedRows, rowStates, requiredMask);
+    }
+
+    /** Java reference kernel; emits a copied index even when the mask selects all. */
+    static int[] selectJava(int[] orderedRows, byte[] rowStates, int requiredMask) {
+        int[] selected = new int[orderedRows.length];
+        int kept = 0;
+        for (int i = 0; i < orderedRows.length; i++) {
+            if (((rowStates[i] & 0xff) & requiredMask) == requiredMask) {
+                selected[kept++] = orderedRows[i];
+            }
+        }
+        return Arrays.copyOf(selected, kept);
+    }
+
+    private static final class NativeLibrary {
+        private static final boolean AVAILABLE;
+
+        static {
+            boolean loaded;
+            try {
+                System.loadLibrary("m3_index_mask");
+                loaded = true;
+            } catch (UnsatisfiedLinkError unsupported) {
+                // Java remains the default; only NATIVE_REQUIRED demands the library.
+                loaded = false;
+            }
+            AVAILABLE = loaded;
+        }
+    }
+
+    private static native int[] selectNative(int[] orderedRows, byte[] rowStates,
+                                              int requiredMask);
+}

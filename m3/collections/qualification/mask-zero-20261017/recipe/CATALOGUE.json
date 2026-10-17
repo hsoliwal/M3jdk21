@@ -1,0 +1,64 @@
+{
+  "schema": "M3_MASK_ZERO_CATALOGUE_V1",
+  "canonical_owner": "synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-mask-family-receiver-20261016/mask-zero-20261017",
+  "receiver_revision": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "public_owner_policy": "Refine existing M3 collection owners; no new public Java type or native ABI.",
+  "families": [
+    {
+      "owner": "M3IndexMaskCompactor",
+      "decision": "RETAIN_CURRENT_UPSTREAM_EXACT",
+      "upstream_commit": "b598d98202aa38aafe45308ac8f7dbdc242bb36e",
+      "reason": "Current Java owner already optimizes zero count and detached all-selected cloning; retain current nonzero semantics."
+    },
+    {
+      "owner": "M3LongArrayList.retainByStateMask",
+      "decision": "REFINE_EXISTING",
+      "selected": "Validated zero-mask identity return",
+      "complexity_before": "O(n)",
+      "complexity_after": "O(1) after existing validation",
+      "ownership": "Existing backing array and epoch unchanged"
+    },
+    {
+      "owner": "M3LongArrayDeque.retainByStateMask",
+      "decision": "REFINE_EXISTING",
+      "selected": "Validated zero-mask identity return",
+      "complexity_before": "O(n)",
+      "complexity_after": "O(1) after existing validation",
+      "ownership": "Existing ring, head, backing array and epoch unchanged"
+    },
+    {
+      "owner": "m3_index_mask_compactor.c/selectNative",
+      "decision": "REFINE_EXISTING",
+      "selected": "Zero-mask copy through existing JNI region operations in 256-int chunks",
+      "retained": "Full validation; required native routing; nonzero count/emit and drift checks",
+      "complexity_before": "O(n)",
+      "complexity_after": "O(n), skips state reads and state/count passes for zero mask",
+      "native_lifetime": "No native heap allocation, critical JNI, retained references, or callback"
+    },
+    {
+      "owner": "M3LongLane28.fill / M3IntLane28.fill",
+      "decision": "REVIEWED_NOT_SELECTED",
+      "reason": "Absent-region zero-fill skip is an independent candidate; not needed for this existing mask behavior atom."
+    }
+  ],
+  "provenance": {
+    "donor": "DONOR_RECEIPT.json",
+    "current": "SOURCE_PINS.json",
+    "predecessor_categories": "predecessor/CATEGORY_REVIEW.tsv",
+    "predecessor_provenance": "predecessor/PROVENANCE.tsv",
+    "existing_name_mapping": "predecessor/receiving/mask-selection-name-mapping-20261016.tsv"
+  },
+  "qualification": {
+    "sdk": "evidence/sdk-final.log",
+    "runtime": "evidence/RESULTS.json",
+    "owning_module": "evidence/OWNING_MODULE.json",
+    "finite_resource_cases": 360,
+    "claim_limit": "Finite matched proof and source complexity change, not universal throughput or reduced retained-memory claim"
+  },
+  "publication": {
+    "canonical_files": "PUBLICATION_FILES.tsv",
+    "target_changes": "TARGET_POSTIMAGES.tsv",
+    "proof_mirror": "m3/collections/qualification/mask-zero-20261017/recipe",
+    "commit_binding": "materialize_mirror.py requires actual immutable canonical commit"
+  }
+}

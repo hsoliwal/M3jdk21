@@ -1,0 +1,13 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.MaskZeroRefinement20261017
+displayName: Refine zero-mask primitive owner and native operations
+description: >
+  Exact current receiver refinements of the existing primitive list, wrapped deque,
+  JNI selector, contract test and incumbent qualification workflow. The current
+  Java selector remains an unchanged sealed input. All public validation and
+  explicit native routing precede the zero-mask specialization.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-mask-zero-20261017
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-mask-zero-20261017

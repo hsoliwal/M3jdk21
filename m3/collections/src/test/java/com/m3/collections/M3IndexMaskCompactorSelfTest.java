@@ -15,6 +15,15 @@ public final class M3IndexMaskCompactorSelfTest {
     }
 
     public static void main(String[] args) {
+        if (args.length == 1 && ("--native-missing".equals(args[0])
+                || "--native-symbol-missing".equals(args[0]))) {
+            nativeRequiredRefusal("--native-symbol-missing".equals(args[0]));
+            System.out.println("PASS M3IndexMaskCompactorSelfTest checks=" + checks + " " + args[0]);
+            return;
+        }
+        if (args.length > 1 || (args.length == 1 && !"--native".equals(args[0]))) {
+            throw new IllegalArgumentException("unknown self-test mode");
+        }
         boolean requireNative = args.length == 1 && "--native".equals(args[0]);
         if (requireNative && !M3IndexMaskCompactor.nativeAvailable()) {
             throw new AssertionError("actual JNI library required by qualification test");
@@ -24,8 +33,174 @@ public final class M3IndexMaskCompactorSelfTest {
         allMasksAndLengths(requireNative);
         randomizedDifferential(requireNative);
         primitiveOwnersAndLongIds();
+        zeroMaskContract(requireNative);
+        validationOrder();
+        if (requireNative) nativeKernelValidation();
         System.out.println("PASS M3IndexMaskCompactorSelfTest checks=" + checks
                 + " JNI=" + requireNative);
+    }
+
+    /** The identity selection still validates all inputs and returns detached arrays. */
+    private static void zeroMaskContract(boolean nativeRun) {
+        for (int length : new int[] {0, 1, 7, 255, 256, 257, 1025}) {
+            int[] rows = new int[length];
+            long[] values = new long[length];
+            byte[] states = new byte[length];
+            for (int i = 0; i < length; i++) {
+                rows[i] = i % 3 == 0 ? Integer.MIN_VALUE : i % 3 == 1 ? Integer.MAX_VALUE : -7;
+                values[i] = i % 3 == 0 ? Long.MIN_VALUE : i % 3 == 1 ? Long.MAX_VALUE : -7L;
+                states[i] = (byte) (i * 197);
+            }
+            byte[] statesBefore = states.clone();
+            ok(M3IndexMaskCompactor.selectedCount(states, 0) == length);
+            for (M3IndexMaskCompactor.Backend backend : M3IndexMaskCompactor.Backend.values()) {
+                if (!nativeRun && backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) continue;
+                int[] copy = M3IndexMaskCompactor.select(rows, states, 0, backend);
+                eq(rows, copy);
+                ok(rows != copy);
+                if (length != 0) {
+                    copy[0] = 19;
+                    ok(rows[0] == Integer.MIN_VALUE);
+                }
+            }
+            long[] copy = M3IndexMaskCompactor.selectLong(values, states, 0);
+            eq(values, copy);
+            ok(values != copy);
+            if (length != 0) {
+                copy[0] = 19;
+                ok(values[0] == Long.MIN_VALUE);
+            }
+            M3LongArrayList list = M3LongArrayList.copyOf(values);
+            list.ensureCapacity(length + 19);
+            M3LongArrayDeque deque = new M3LongArrayDeque(length + 19);
+            for (int i = length - 1; i >= 0; i--) deque.addFirst(values[i]);
+            for (Object owner : new Object[] {list, deque}) {
+                long[] storage = (long[]) field(owner, "elements");
+                long[] residentBefore = storage.clone();
+                int[] stateBefore = structuralState(owner);
+                M3LongIterator cursor = owner instanceof M3LongArrayList dense ? dense.iterator()
+                        : ((M3LongArrayDeque) owner).iterator();
+                int removed = owner instanceof M3LongArrayList dense ? dense.retainByStateMask(states, 0)
+                        : ((M3LongArrayDeque) owner).retainByStateMask(states, 0);
+                ok(removed == 0);
+                ok(storage == field(owner, "elements"));
+                eq(residentBefore, storage);
+                eq(stateBefore, structuralState(owner));
+                for (long value : values) {
+                    ok(cursor.hasNext());
+                    ok(cursor.nextLong() == value);
+                }
+                ok(!cursor.hasNext());
+            }
+            ok(Arrays.equals(statesBefore, states));
+        }
+    }
+
+    private static int[] structuralState(Object owner) {
+        return new int[] {(int) field(owner, "size"), (int) field(owner, "modCount"),
+                owner instanceof M3LongArrayDeque ? (int) field(owner, "head") : 0};
+    }
+
+    private static Object field(Object owner, String name) {
+        try {
+            var field = owner.getClass().getDeclaredField(name);
+            field.setAccessible(true);
+            return field.get(owner);
+        } catch (ReflectiveOperationException failure) {
+            throw new AssertionError(failure);
+        }
+    }
+
+    private static void validationOrder() {
+        var java = M3IndexMaskCompactor.Backend.JAVA;
+        int[] rows = {4};
+        byte[] states = {0};
+        failsMessage(NullPointerException.class, "orderedRows", () -> M3IndexMaskCompactor.select(null, null, -1, null));
+        failsMessage(NullPointerException.class, "rowStates", () -> M3IndexMaskCompactor.select(rows, null, -1, null));
+        failsMessage(NullPointerException.class, "backend", () -> M3IndexMaskCompactor.select(rows, new byte[0], -1, null));
+        failsMessage(IllegalArgumentException.class, "index and aligned state lengths differ",
+                () -> M3IndexMaskCompactor.select(rows, new byte[0], -1, java));
+        failsMessage(NullPointerException.class, "rowStates", () -> M3IndexMaskCompactor.selectedCount(null, 0));
+        failsMessage(NullPointerException.class, "orderedRows", () -> M3IndexMaskCompactor.selectLong(null, null, 0));
+        failsMessage(NullPointerException.class, "rowStates", () -> M3IndexMaskCompactor.selectLong(new long[1], null, 0));
+        failsMessage(IllegalArgumentException.class, "index and aligned state lengths differ",
+                () -> M3IndexMaskCompactor.selectLong(new long[1], new byte[0], 0));
+        M3LongArrayList list = M3LongArrayList.copyOf(new long[] {4});
+        M3LongArrayDeque deque = new M3LongArrayDeque();
+        deque.addFirst(4);
+        var listCursor = list.iterator();
+        var dequeCursor = deque.iterator();
+        int[] listState = structuralState(list), dequeState = structuralState(deque);
+        failsMessage(NullPointerException.class, "rowStates", () -> list.retainByStateMask(null, 0));
+        failsMessage(NullPointerException.class, "rowStates", () -> deque.retainByStateMask(null, 0));
+        failsMessage(IllegalArgumentException.class, "index and aligned state lengths differ",
+                () -> list.retainByStateMask(new byte[0], 0));
+        failsMessage(IllegalArgumentException.class, "index and aligned state lengths differ",
+                () -> deque.retainByStateMask(new byte[0], 0));
+        failsMessage(IllegalArgumentException.class, "index and aligned state lengths differ",
+                () -> list.retainByStateMask(new byte[0], 256));
+        failsMessage(IllegalArgumentException.class, "index and aligned state lengths differ",
+                () -> deque.retainByStateMask(new byte[0], 256));
+        eq(listState, structuralState(list));
+        eq(dequeState, structuralState(deque));
+        ok(listCursor.nextLong() == 4 && !listCursor.hasNext());
+        ok(dequeCursor.nextLong() == 4 && !dequeCursor.hasNext());
+        eq(new long[] {4}, list.toArray());
+        eq(new long[] {4}, deque.toArray());
+        ok(M3IndexMaskCompactor.selectedCount(states, 0) == 1);
+    }
+
+    /** Separate JVMs supply an absent library or a loaded library lacking this JNI symbol. */
+    private static void nativeRequiredRefusal(boolean loadedWithoutSymbol) {
+        ok(M3IndexMaskCompactor.nativeAvailable() == loadedWithoutSymbol);
+        var nativeBackend = M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
+        for (int length : new int[] {0, 1, 257}) {
+            int[] rows = new int[length];
+            byte[] states = new byte[length];
+            fails(UnsatisfiedLinkError.class, () -> M3IndexMaskCompactor.select(rows, states, 0, nativeBackend));
+        }
+        failsMessage(NullPointerException.class, "orderedRows", () -> M3IndexMaskCompactor.select(null, null, 0, nativeBackend));
+        failsMessage(NullPointerException.class, "rowStates", () -> M3IndexMaskCompactor.select(new int[1], null, 0, nativeBackend));
+        failsMessage(IllegalArgumentException.class, "index and aligned state lengths differ",
+                () -> M3IndexMaskCompactor.select(new int[1], new byte[0], 0, nativeBackend));
+        validationOrder();
+    }
+
+    /** Exercise the actual C boundary independently of the public Java preflight. */
+    private static void nativeKernelValidation() {
+        for (int mask : new int[] {-1, 256}) {
+            fails(IllegalArgumentException.class, () -> nativeDirect(new int[0], new byte[0], mask));
+        }
+        fails(IllegalArgumentException.class, () -> nativeDirect(null, new byte[0], 0));
+        fails(IllegalArgumentException.class, () -> nativeDirect(new int[0], null, 0));
+        fails(IllegalArgumentException.class, () -> nativeDirect(new int[1], new byte[0], 0));
+        eq(new int[] {7, -1, 7}, nativeDirect(new int[] {7, -1, 7}, new byte[] {0, -1, 1}, 0));
+    }
+
+    private static int[] nativeDirect(int[] rows, byte[] states, int mask) {
+        try {
+            var method = M3IndexMaskCompactor.class.getDeclaredMethod("selectNative", int[].class, byte[].class, int.class);
+            method.setAccessible(true);
+            return (int[]) method.invoke(null, rows, states, mask);
+        } catch (java.lang.reflect.InvocationTargetException failure) {
+            Throwable cause = failure.getCause();
+            if (cause instanceof RuntimeException runtime) throw runtime;
+            if (cause instanceof Error error) throw error;
+            throw new AssertionError(cause);
+        } catch (ReflectiveOperationException failure) {
+            throw new AssertionError(failure);
+        }
+    }
+
+    private static void failsMessage(Class<? extends Throwable> expected, String message, Runnable task) {
+        checks++;
+        try {
+            task.run();
+        } catch (Throwable thrown) {
+            if (expected.isInstance(thrown) && message.equals(thrown.getMessage())) return;
+            throw new AssertionError("exception order or message changed", thrown);
+        }
+        throw new AssertionError("expected " + expected.getSimpleName());
     }
 
     private static void boundaryContract(boolean nativeRun) {

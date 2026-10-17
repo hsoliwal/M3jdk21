@@ -1,0 +1,1 @@
+PASS M3IndexMaskCompactorSelfTest checks=28 --native-symbol-missing
