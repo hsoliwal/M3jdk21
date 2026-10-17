@@ -162,9 +162,37 @@ re-measured: the machine was shared with other agents during the run, and the sa
 `paint_walk` is the row walk of `BasicTreeUI.paint` for an 800x600 window (`getPathClosestTo`, `getVisiblePathsFrom`,
 `getBounds` and `getExpandedState` per row). Stock JList and JTable at 10^6 rows (the next leaves) are in the same TSV.
 
-## 7. Next leaves
+## 7. Leaf 2: `M3FixedHeightLayoutCache` (DOOP, the `largeModel` path)
 
-1. Arithmetic `FixedHeightLayoutCache` (the `largeModel` path), same method and differential.
+Stock `FixedHeightLayoutCache` (selected by `BasicTreeUI` when `largeModel` is set and the row height is positive) is
+already lazy: an `FHTreeStateNode` exists only for paths that were resolved, and only the state children of a node are
+kept, sorted by model child index. Its costs are the absolute `row` field kept in every state node and the linear
+walks over the sparse children:
+
+| Site | Cost |
+|---|---|
+| `adjustRowBy`, `resetChildrenRowsFrom`, `didExpand` | every expand, collapse, insert or remove rewrites the rows of all following expanded state nodes, recursing to the root |
+| `getChildAtModelIndex`, `getRowToModelIndex`, `addNode`, `getCountTo` | linear over the sparse children per level |
+| `getTotalChildCount` | recursive over the expanded subtree (or one sibling subtraction) |
+
+`sun.swing.tree.M3FixedHeightLayoutCache` keeps the same lazy state as int-id SoA lanes (parent, model index, depth,
+EXPANDED flag, model child count at expansion) and, per node, its state children as a sorted `int[]` of model indices
+plus a Fenwick tree of the rows below each expanded state child. No absolute row is stored anywhere: a row is the
+prefix sum `index + rowsBefore + 1` along the ancestors, a row maps to a node by binary search over the sorted
+indices with Fenwick descent, and expand, collapse, insert and remove update O(depth x log k) aggregates. The sorted
+lanes follow the stock class's own sorted insertion (`addNode`); the pinned AVL donors (SWT #197
+`VirtualTreeSiblingIndex`, Nebula `GridRowTree`) remain evidence for parents with very many *state* children, which
+the stock class does not optimize either. `getNodeDimensions` is called only where the stock class calls it
+(`getBounds`), with the same row and expanded arguments. The hook is the recipe of leaf 1 extended with one insertion
+at `createLayoutCache`'s start, behind the same `m3.swing.viewport` property (default off).
+
+Proof: the leaf-1 differential run in fixed mode (`-Ddiff.fixed=true`: stock `FixedHeightLayoutCache` vs the M3
+class, positive row heights, plus the `setRowHeight(0)` and `setRowHeight(-1)` IllegalArgumentException probes) and
+the JUnit scenario suite with JaCoCo. Results in section 5 and `m3/ports/swing-viewport/TESTS_TO_RUN.md`.
+
+## 8. Next leaves
+
+1. Leaf 2 above (done).
 2. `JTree` expansion table: `getExpandedDescendants` and `removeDescendantToggledPaths` iterate the whole table on
    every expansion; an expanded-path index keyed by parent removes the O(expanded) factor.
 3. `BasicTreeUI` paint by row index (inventory OH18 of `m3-swing-awt-viewport.md`): one `TreePath` per painted row only
