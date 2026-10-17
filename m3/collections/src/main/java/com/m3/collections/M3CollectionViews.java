@@ -114,6 +114,40 @@ public final class M3CollectionViews {
         return Collections.unmodifiableList(sorted);
     }
 
+    /**
+     * Detached encounter-order snapshot with one predicate evaluation per source
+     * occurrence. This deliberately does not call source.size() or create a
+     * preliminary filtered view.
+     */
+    public static <E> List<E> filteredSnapshot(
+            Collection<? extends E> source, Predicate<? super E> predicate) {
+        return Collections.unmodifiableList(selectedCopy(source, predicate));
+    }
+
+    /**
+     * Fused filter plus stable sort over one detached selected-reference owner.
+     * Comparator-equivalent elements remain distinct and retain encounter order.
+     */
+    public static <E> List<E> filteredSortedSnapshot(
+            Collection<? extends E> source, Predicate<? super E> predicate,
+            Comparator<? super E> comparator) {
+        ArrayList<E> selected = selectedCopy(source, predicate);
+        selected.sort(comparator);
+        return Collections.unmodifiableList(selected);
+    }
+
+    /** Shared one-pass snapshot-selection atom received from M3JDK21 #990. */
+    private static <E> ArrayList<E> selectedCopy(
+            Collection<? extends E> source, Predicate<? super E> predicate) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(predicate, "predicate");
+        ArrayList<E> selected = new ArrayList<>();
+        for (E element : source) {
+            if (predicate.test(element)) selected.add(element);
+        }
+        return selected;
+    }
+
     /** A live filter without per-element retained adapters. */
     private static class FilteredCollection<E> extends AbstractCollection<E> {
         protected final Collection<E> backing;
