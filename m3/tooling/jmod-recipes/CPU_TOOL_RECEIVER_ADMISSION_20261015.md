@@ -46,3 +46,15 @@ and hosted CI have not been executed as part of this source-transfer step**;
 full target-owned JMOD rebuild, jlink, real JNI, C1/C2/jtreg and tool API
 runtime certification remain **NOT_RUN**. Nothing in this admission
 check grants JDK release status or silently includes GPU.
+
+## 2026-10-17 additive quantization receiver
+
+The snapshot now admits the twenty-first Synexia CPU tool,
+`com.synexia.m3.model.quantize`, as a **mapped candidate** named
+`com.m3.tools.model.quantize`. The original 18 pending
+receivers remain unchanged and the independent signed-INT8
+candidate is the nineteenth. Two deferrals (CPU model distillation
+and optional WebGPU) remain. All receiver entries still say
+QUALIFICATION_PENDING; the detached receiving module and JNI
+have their own compile/runtime proof. See
+`CPU_TOOL_QUANTIZE_RECEIVER_20261017.md`.
