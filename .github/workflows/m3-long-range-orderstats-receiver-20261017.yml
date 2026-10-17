@@ -1,0 +1,60 @@
+name: M3 long range order statistics real Java21 and C17 JNI
+on:
+  push:
+    branches: ['m3/long-range-orderstats-receiver-20261017']
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRangeAlgebra*'
+      - 'm3/collections/algorithm-catalog/long-range-orderstats-20261017/**'
+      - '.github/workflows/m3-long-range-orderstats-receiver-20261017.yml'
+jobs:
+  java21-and-native-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Canonical source SHA-256 and independent catalogue
+        shell: bash
+        run: |
+          echo '17c6db8bf82e5d908a551fe53850a1d4ca00583fa6783bd093af48598038b0c6  m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java' | sha256sum -c -
+          echo 'da109872c25cf9a9a5af6ee38417c4cf5c7d5fcf7444418e499d03d908ecb6fc  m3/collections/src/test/java/com/m3/collections/M3LongRangeAlgebraContract.java' | sha256sum -c -
+          echo 'fb7de589799041359d6a973496e6f7c87ea87d7bc732e51acebd451c6f2af99f  m3/collections/src/test/java/com/m3/collections/M3LongRangeAlgebraTest.java' | sha256sum -c -
+          echo '77b3790b212a8ccf7434dd45b51c6cc65ea5245480e1b3f126a848adee3a0d25  m3/collections/algorithm-catalog/long-range-orderstats-20261017/CATEGORY_REVIEW.tsv' | sha256sum -c -
+          echo '44a9b7e738869b96fc0b212c575ac2a7eae591b75d3da23d05e42313533947cf  m3/collections/algorithm-catalog/long-range-orderstats-20261017/README.md' | sha256sum -c -
+      - name: Strict Java 21 actual M3 owners and differential
+        shell: bash
+        run: |
+          mkdir -p /tmp/m3-range-classes
+          javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-range-classes \
+            m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRangeSetSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRangeAlgebraContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java
+          java -ea -Xmx128m -cp /tmp/m3-range-classes com.m3.collections.M3LongRangeSetSelfTest
+          java -ea -Xmx128m -cp /tmp/m3-range-classes com.m3.collections.M3LongRangeAlgebraContract
+          java -ea -Xmx128m -cp /tmp/m3-range-classes com.m3.collections.M3IndexPathMasksSelfTest
+      - name: Existing C17 JNI path selector and checked runtime parity
+        shell: bash
+        run: |
+          mkdir -p /tmp/m3-range-native
+          cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared \
+            -I"${JAVA_HOME}/include" -I"${JAVA_HOME}/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o /tmp/m3-range-native/libm3_collections_pathmask.so
+          java -ea -Xcheck:jni -Xmx128m -Djava.library.path=/tmp/m3-range-native \
+            -cp /tmp/m3-range-classes com.m3.collections.M3IndexPathMasksSelfTest --native
+          java -ea -Xcheck:jni -Xmx128m -Djava.library.path=/tmp/m3-range-native \
+            -cp /tmp/m3-range-classes com.m3.collections.M3LongRangeSetSelfTest
+      - name: Real owning Maven/JUnit module regression
+        shell: bash
+        run: |
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3LongRangeAlgebraTest,M3LongRangeSetTest,M3IndexPathMasksTest test
