@@ -1,0 +1,10 @@
+field	value
+donor_repository	hsoliwal/com.synexia
+donor_source	synexia-primitives/src/main/java/com/synexia/primitives/M3FilteredDeques.java
+donor_sha256	4861ecd5be1718dea49cb97daf1f0bfe6d057e762546e4143a598ba1b08b64ed
+receiver_source	m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java
+receiver_sha256	6342d1acb4f406dc5b3c086d2db18966d7a5fc7f2b2a14c680ca520133165f0a
+source_revision	3307c77ae6ae6048d1665b27cddf1503fe3a1752
+donor_recipe	com.synexia.rewrite.M3FilteredDequesReceiver20261017
+license	Apache-2.0
+runtime_dependency_on_synexia	false
