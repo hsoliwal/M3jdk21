@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ApacheProviderContractRefinement20261017
+displayName: Refine Apache Commons provider contract against the sealed V1 oracle
+description: Replaces the exact original provider oracle with the reviewed refinement; activate this transition separately from the historical V1 installation recipe.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: apache-provider-contract-refinement
+      lst: false

@@ -40,7 +40,7 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          mkdir -p proof/providers proof/core proof/jni
+          mkdir -p proof/providers proof/core proof/interop proof/jni
           mvn -B -ntp -f m3/collections/interop/qualification/apache-collections-20261017/provider-pom.xml \
             org.apache.maven.plugins:maven-dependency-plugin:3.6.1:copy-dependencies \
             -DincludeScope=test -DoutputDirectory="$PWD/proof/providers"
@@ -51,8 +51,8 @@ jobs:
           set -euxo pipefail
           find m3/collections/src/main/java -name '*.java' -print0 | sort -z | \
             xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/core
-          CP="proof/core:$(find proof/providers -name '*.jar' | paste -sd: -)"
-          javac --release 21 -proc:none -Xlint:all -Werror -cp "$CP" -d proof/core \
+          CP="proof/interop:proof/core:$(find proof/providers -name '*.jar' | paste -sd: -)"
+          javac --release 21 -proc:none -Xlint:all -Werror -cp "$CP" -d proof/interop \
             m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheCollections.java \
             m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsContract.java \
             m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java

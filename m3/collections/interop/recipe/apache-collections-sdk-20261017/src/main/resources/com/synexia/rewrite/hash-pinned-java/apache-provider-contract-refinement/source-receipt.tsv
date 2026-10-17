@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+# Frozen original and refined source byte SHA-256 receipts; V1 resources remain unchanged.
+before	0c983a1132ba969d612742f4dfe7c5bcfa76f00bcfb7a8038ba4d7b2074ac488	original/src/test/java/com/m3/collections/interop/M3ApacheCollectionsContract.java
+after	0a15f1f7d992c1e5fb371e50e2ad7dad8fe880c259614f1293cfe585e106f875	packet/src/test/java/com/m3/collections/interop/M3ApacheCollectionsContract.java

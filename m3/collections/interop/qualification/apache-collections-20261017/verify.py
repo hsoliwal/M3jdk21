@@ -15,6 +15,18 @@ def digest(p):
         raise RuntimeError(f"missing or aliased: {p}")
     return hashlib.sha256(p.read_bytes()).hexdigest()
 
+REFINE=RES/"com/synexia/rewrite/hash-pinned-java/apache-provider-contract-refinement"
+refinements={}
+for line in (REFINE/"manifest.tsv").read_text().splitlines():
+    if not line or line.startswith("#"): continue
+    target,before,after,template=line.split("\t")
+    if target!="m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsContract.java" or target in refinements:
+        raise RuntimeError("Unexpected refinement owner")
+    if digest(REFINE/template)!=after:
+        raise RuntimeError("Refinement template drift")
+    refinements[target]=(before,after,REFINE/template)
+if len(refinements)!=1: raise RuntimeError("Expected one source-sealed oracle refinement")
+
 java_rows=[]
 for line in (JAVA/"manifest.tsv").read_text().splitlines():
     if not line or line.startswith("#"): continue
@@ -23,7 +35,12 @@ for line in (JAVA/"manifest.tsv").read_text().splitlines():
         raise RuntimeError("Java source manifest drift")
     original=ROOT/path
     source=JAVA/template
-    if digest(original)!=after or digest(source)!=after or original.read_bytes()!=source.read_bytes():
+    expected=after
+    payload=source
+    if path in refinements:
+        previous,expected,payload=refinements[path]
+        if previous!=after: raise RuntimeError("Refinement lineage differs from original recipe")
+    if digest(source)!=after or digest(original)!=expected or original.read_bytes()!=payload.read_bytes():
         raise RuntimeError(f"Java source not recipe output: {path}")
     java_rows.append((path,after,template))
 if len(java_rows)!=3 or [p for p,_,_ in java_rows]!=sorted(p for p,_,_ in java_rows):
@@ -36,4 +53,4 @@ if digest(TEXT/"pom.xml.before")!=before or digest(TEXT/template)!=after or dige
     raise RuntimeError("POM preimage/postimage not source sealed")
 if (ROOT/path).read_bytes()!=(TEXT/template).read_bytes():
     raise RuntimeError("Receiver POM not exact canonical output")
-print("PASS APACHE_COLLECTIONS_RECEIVER: three Java and one POM exact outputs")
+print("PASS APACHE_COLLECTIONS_RECEIVER: three Java and one POM exact outputs; oracle successor lineage verified")
