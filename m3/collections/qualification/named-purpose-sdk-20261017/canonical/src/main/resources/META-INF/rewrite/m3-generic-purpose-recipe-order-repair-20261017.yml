@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3GenericPurposeRecipeOrderRepair20261017
+displayName: Repair exact generic purpose recipe manifest order
+description: Preserve all owner bytes and digest cells while sorting manifest rows and aligning the SDK target inventory.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-generic-purpose-sdk-order-repair-20261017
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-generic-purpose-manifest-order-repair-20261017

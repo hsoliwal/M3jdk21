@@ -1,0 +1,11 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3NamedPurposeSdkBootstrap20261017
+displayName: Qualify named purpose SDK in the existing receiving lane
+description: >
+  Preserve the qualified purpose workflow and its original Java, JNI and 14-test
+  proof while appending independent named-recipe SDK qualification and evidence.
+  Reuse the unchanged hash-pinned Text provider; external metadata seals the new
+  receiving module without a source or module self-reference.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-named-purpose-sdk-bootstrap-20261017
