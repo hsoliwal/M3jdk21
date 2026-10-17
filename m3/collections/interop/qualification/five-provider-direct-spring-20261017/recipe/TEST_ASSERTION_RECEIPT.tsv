@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Source-sealed canonical source recipe proof change
+# 2026-10-17 strict JUnit overloaded assertEquals regression repair
+# New test assertions specify Integer.valueOf for boxed provider results.
+# No production Java, JNI, donor library code or ABI changed.
+file	before_git_sha	after_git_sha	before_sha256	after_sha256	notes
+M3SpringArrayContractTest.java.txt	337c31f48d7a2bc00af4d98cdb02dd493fee9ff4	76d010cd0a142ceb5a769c3a032f4a2568ec3d5b	1c5490610d49279a1ea482f633e119fe11556b29727a8845b6922cc2a5eab96f	2ab95d02abbc96c5693c50135b46e441be32af14d85f7b27000eecb3ae328417	five boxed int assertions
+M3FiveProviderDirectSdkTest.java.txt	765e2160a30bad7fc8172a6dcd97fa6dd7e4ec9d	e492d5c6f203b172ce199b319084c1215ec5b157	78a3007c0dfd909c86e6576330456d4245e868ec6c080901aa67cf8873f96b41	26ec8c9ce959ee2177bf04c907c633093a0cc5f28d5a3a71b41e14ed20400cda	two boxed int assertions

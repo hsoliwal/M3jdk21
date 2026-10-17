@@ -50,7 +50,7 @@ final class M3SpringArrayContractTest {
         actual.add("nullList", null);
         assertEquals(Arrays.asList((Integer) null), actual.get("nullList"));
         assertFalse(actual.toSingleValueMap().containsKey("empty"));
-        assertEquals(3, actual.toSingleValueMap().get("borrowed"));
+        assertEquals(Integer.valueOf(3), actual.toSingleValueMap().get("borrowed"));
     }
 
     @Test void detachedCopyVersusLiveViewAndUnsupportedSingletonMutation() {
@@ -59,9 +59,9 @@ final class M3SpringArrayContractTest {
         Map<String, Integer> copy = actual.toSingleValueMap();
         Map<String, Integer> live = actual.asSingleValueMap();
         actual.set("a", 2);
-        assertEquals(1, copy.get("a"));
-        assertEquals(2, live.get("a"));
-        assertEquals(2, live.put("a", 3));
+        assertEquals(Integer.valueOf(1), copy.get("a"));
+        assertEquals(Integer.valueOf(2), live.get("a"));
+        assertEquals(Integer.valueOf(2), live.put("a", 3));
         assertEquals(List.of(3), actual.get("a"));
         assertThrows(UnsupportedOperationException.class, () -> actual.get("a").add(4));
         assertNull(live.put("null", null));
@@ -69,7 +69,7 @@ final class M3SpringArrayContractTest {
         assertNull(actual.get("null"));
         assertEquals(actual.hashCode(), live.hashCode());
         assertEquals(actual.toString(), live.toString());
-        assertEquals(3, live.remove("a"));
+        assertEquals(Integer.valueOf(3), live.remove("a"));
         assertFalse(actual.containsKey("a"));
     }
 
