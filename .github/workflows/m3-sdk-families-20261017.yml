@@ -13,16 +13,46 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 30 # replay admitted v2 source predecessor without default-branch edits
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
-      - name: Maven verify source-sealed catalogue generator
+      - name: Qualify canonical v2 source then replay v3 source-sealed sorted atoms
         run: |
           set -eu
-          RECIPE=m3/collections/qualification/m3-sdk-families-20261017/recipe
-          mvn -B -ntp -f "$RECIPE/pom.xml" verify
-          java -cp "$RECIPE/target/classes" com.synexia.m3.M3CollectionSdkNamesRecipe --check .
+          ROOT=m3/collections/qualification/m3-sdk-families-20261017
+          V2="$ROOT/recipe"
+          V3="$ROOT/recipe-v3"
+          mvn -B -ntp -f "$V2/pom.xml" verify
+          mvn -B -ntp -f "$V3/pom.xml" verify
+          BASE=838866062b4a63622c8a80e33291414543de3009
+          TMP="$(mktemp -d)"
+          trap 'rm -rf "$TMP"' EXIT
+          for path in \
+            m3/collections/src/main/java/com/m3/collections/M3CollectionSdkCatalog.java \
+            m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java \
+            m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java \
+            m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3CollectionSdkSelfTest.java
+          do
+            mkdir -p "$TMP/$(dirname "$path")"
+            git show "$BASE:$path" > "$TMP/$path"
+          done
+          java -cp "$V2/target/classes" com.synexia.m3.M3CollectionSdkNamesRecipe --check "$TMP"
+          java -cp "$V3/target/classes" com.synexia.m3.M3SdkSortedContractRecipe --apply "$TMP"
+          java -cp "$V3/target/classes" com.synexia.m3.M3SdkSortedContractRecipe --check "$TMP"
+          java -cp "$V3/target/classes" com.synexia.m3.M3SdkSortedContractRecipe --check .
+          for path in \
+            m3/collections/src/main/java/com/m3/collections/M3CollectionSdkCatalog.java \
+            m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java \
+            m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java \
+            m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3CollectionSdkSelfTest.java
+          do
+            cmp "$TMP/$path" "$path"
+          done
       - name: Compile strict Java21 SDK catalogue and optional primitive/JDK adapters
         run: |
           set -eu
