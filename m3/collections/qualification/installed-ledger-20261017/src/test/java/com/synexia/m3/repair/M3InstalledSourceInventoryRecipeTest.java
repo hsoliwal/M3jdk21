@@ -81,9 +81,9 @@ final class M3InstalledSourceInventoryRecipeTest {
         // Red baseline: the old root had duplicate JSON keys; Python json.loads
         // silently preferred the historical value over the new verified manifest.
         String rootKey = "  \"installed_source_manifest\": ";
-        assertEquals(2, original.split(java.util.regex.Pattern.quote(rootKey), -1).length - 1);
-        assertEquals(2, live.split(java.util.regex.Pattern.quote(rootKey), -1).length - 1);
-        assertEquals(1, approved.split(java.util.regex.Pattern.quote(rootKey), -1).length - 1);
+        assertEquals(2, original.lines().filter(line -> line.startsWith(rootKey)).count());
+        assertEquals(2, live.lines().filter(line -> line.startsWith(rootKey)).count());
+        assertEquals(1, approved.lines().filter(line -> line.startsWith(rootKey)).count());
         assertTrue(approved.contains(
                 "\"historical_installed_source_manifest_20261008\": "
                 + "\"qualification/installed-source-enum-set-20261008.tsv\""));
