@@ -1,0 +1,93 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 live filtered List late-binding source receiver
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk21-filtered-list-latebinding-receiver-20261017.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsLateBinding*.java'
+      - 'm3/collections/name-mapping.json'
+      - 'm3/collections/qualification/M3_FILTERED_LIST_LATE_BINDING_20261017.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sealed-red-green-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 3
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prove all five receiving bytes match canonical Synexia recipe templates
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' '94e3976440ee1cec2477e73d7a77caeda2523969d53a9407a03b8adbd5d765d9' 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java' | sha256sum -c -
+          printf '%s  %s\n' '0644120fa274a984520ad84e7bc65efd54a11f062ef2bd45f8a4cf5c7db39998' 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsLateBindingProof.java' | sha256sum -c -
+          printf '%s  %s\n' '8bc03340abdeaf91b88d5b5a38b1371181e5be5e6230b91f2675d36b5d4da7cc' 'm3/collections/src/test/java/com/m3/collections/M3FilteredListsLateBindingTest.java' | sha256sum -c -
+          printf '%s  %s\n' '8f86a935384872f89d924361f89380e7befc78b307b21364942e10c6d27ec80c' 'm3/collections/name-mapping.json' | sha256sum -c -
+          printf '%s  %s\n' 'fe89afcdf1e7d746d4e9d85ccb1383b22f60fb20c480f5b77cbdc8a5a219108e' 'm3/collections/qualification/M3_FILTERED_LIST_LATE_BINDING_20261017.md' | sha256sum -c -
+          echo 'M3_FILTERED_LIST_RECEIVER_SEAL_PASS targets=5'
+      - name: Compile real owner; freeze red baseline and execute late-bound cursor proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          B="$(mktemp -d)"
+          trap 'rm -rf "$B"' EXIT
+          mkdir -p "$B/red/com/m3/collections" "$B/red-classes" "$B/green-classes"
+          OWNER=m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+          PROOF=m3/collections/src/test/java/com/m3/collections/M3FilteredListsLateBindingProof.java
+          git show "HEAD^:$OWNER" > "$B/red/com/m3/collections/M3FilteredLists.java"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$B/red-classes" \
+            "$B/red/com/m3/collections/M3FilteredLists.java" "$PROOF"
+          if java -ea -cp "$B/red-classes" com.m3.collections.M3FilteredListsLateBindingProof > "$B/red.log" 2>&1; then
+            echo "Original eager cursor must fail the frozen preterminal-mutation oracle"
+            exit 1
+          fi
+          grep -Fq 'preterminal stream construction must not evaluate predicate' "$B/red.log"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$B/green-classes" "$OWNER" "$PROOF"
+          java -ea -Xmx384m -cp "$B/green-classes" com.m3.collections.M3FilteredListsLateBindingProof
+          java -Xint -ea -Xmx384m -cp "$B/green-classes" com.m3.collections.M3FilteredListsLateBindingProof
+          javap -public -classpath "$B/red-classes" com.m3.collections.M3FilteredLists > "$B/red.api"
+          javap -public -classpath "$B/green-classes" com.m3.collections.M3FilteredLists > "$B/green.api"
+          diff -u "$B/red.api" "$B/green.api"
+      - name: No native-source edits or unrelated target owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check HEAD^ HEAD
+          if git diff --name-only HEAD^ HEAD | grep -E '(^src/java\.base/|^src/hotspot/|\.c$|\.cpp$|\.h$)'; then
+            echo 'Native/JDK runtime source changed outside sealed file scope'
+            exit 1
+          fi
+  real-maven-module-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Compile full M3 collections module and run new plus inherited List and sorted contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3FilteredListsTest,M3FilteredListsLateBindingTest,M3FilteredListsSortedInteropTest \
+            test
+          for name in M3FilteredListsTest M3FilteredListsLateBindingTest M3FilteredListsSortedInteropTest; do
+            REPORT="m3/collections/target/surefire-reports/com.m3.collections.${name}.txt"
+            test -s "$REPORT"
+            grep -E 'Tests run: [1-9][0-9]*, Failures: 0, Errors: 0, Skipped: 0' "$REPORT"
+          done
