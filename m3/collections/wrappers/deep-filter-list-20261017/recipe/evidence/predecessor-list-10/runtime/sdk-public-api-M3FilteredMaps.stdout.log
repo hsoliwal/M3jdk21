@@ -1,0 +1,11 @@
+Compiled from "M3FilteredMaps.java"
+public final class com.m3.collections.M3FilteredMaps {
+  public static <K, V> java.util.Map<K, V> filtered(java.util.Map<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/Map;Ljava/util/function/BiPredicate;)Ljava/util/Map;
+
+  public static <K, V> java.util.SortedMap<K, V> filtered(java.util.SortedMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/SortedMap;Ljava/util/function/BiPredicate;)Ljava/util/SortedMap;
+
+  public static <K, V> java.util.NavigableMap<K, V> filtered(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/NavigableMap;Ljava/util/function/BiPredicate;)Ljava/util/NavigableMap;
+}

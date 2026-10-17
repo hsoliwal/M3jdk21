@@ -1,0 +1,13 @@
+ M m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+ M m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+ M m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java
+ M m3/collections/src/main/java/com/m3/collections/M3FilteredSortedMultisets.java
+ M m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh
+ M m3/collections/wrappers/index-counted-receiver-20261017/verify.sh
+ M m3/collections/wrappers/writable-map-avl-20261017/verify.sh
+ M m3/docs/name-mapping.json
+?? m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py
+?? m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py
+?? m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java
+?? m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java
+?? m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredSortedMultisetsProof.java

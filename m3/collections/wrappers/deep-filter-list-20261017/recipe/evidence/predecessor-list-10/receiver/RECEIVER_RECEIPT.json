@@ -1,0 +1,73 @@
+{
+  "schema": "M3_WRAPPER_RECEIVER_CONTRACT_V1",
+  "status": "PASS",
+  "crate": "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017",
+  "recipe_owner": "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes",
+  "driver_sha256": "f461e520c893a7d6a45bd237c2e7f2ef9ac27392969908477b3d6c9b6f98d4b5",
+  "driver_in_sdk_source_binding": true,
+  "receiver_sha256": "24ce6011c0bc7d89fc863f8f809740b24d943cb40c5aaf9aba03adf0f222dadf",
+  "sdk_input_binding_sha256": "3b46aebbb4d74ab5b654656baa1c7b91d6a99a9b85268d203ec916f9744e20f6",
+  "sdk_results_sha256": "dfbf6113acdd3e3ed7020a01b6fe5805e5c2293f55609b6e323dcd4edbe260db",
+  "qualified_sdk_targets": {
+    "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java": "5da6837eee9112cb97725efff8fbcc1b95f455761d923f643e9a1158ba208989",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java": "c6db65bc2408ea44ef4395220f862b3cad9d824f1ee09558101381cb535c4b48",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java": "b6733c9cd447826710feaf2480febdaa9091f6367fd7ff3195f339cc6b08efcf",
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java": "362dc9caf845360782b0c313ff871d35badd62883b8695a4c31a937f22f370b6",
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java": "e21114b06618ba15d0808b06d1c9be2276ac0fff355e2cb9da5f7b7b0de58c04",
+    "m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py": "1876eb2150ddb7672bb42a0579ad6d19b32a6227c2bf38c5f74c964b5507d410",
+    "m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py": "0c9c1c2ee352b245d3913ccc2bc1f947d937f5840ca1f49d0d10518c3b987593",
+    "m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh": "71ce215837a0a169519fa39a4d1ebb60885e8fb4794c53183c5b06b0ed6c35ab",
+    "m3/collections/wrappers/writable-map-avl-20261017/verify.sh": "28e917b337967958a32e216ca0a5a49d265e64d43159c80ec29c6fb9e0678b37",
+    "m3/docs/name-mapping.json": "9609a806bc46b187513f82b31aa634d27f8408401af772eb7076563ff0973d8c"
+  },
+  "real_target_files_written": false,
+  "canonical_files_written": false,
+  "cases": [
+    {
+      "case": "check-no-write",
+      "exit_code": 0,
+      "expected_refusal": null,
+      "all_target_bytes_and_mtimes_unchanged": true
+    },
+    {
+      "case": "apply-all-ten",
+      "exit_code": 0,
+      "expected_refusal": null,
+      "exact_sdk_outputs": 10,
+      "existing_modes_preserved": true,
+      "unrelated_file_unchanged": true
+    },
+    {
+      "case": "second-apply-fixed-point",
+      "exit_code": 0,
+      "expected_refusal": null,
+      "all_target_bytes_and_mtimes_unchanged": true
+    },
+    {
+      "case": "late-target-drift-refusal",
+      "exit_code": 1,
+      "expected_refusal": "target source drift: m3/docs/name-mapping.json",
+      "drift_target": "m3/docs/name-mapping.json",
+      "all_target_bytes_and_mtimes_unchanged": true
+    },
+    {
+      "case": "stale-sdk-inputs-refusal",
+      "exit_code": 1,
+      "expected_refusal": "recipe changed after SDK qualification: crate/src/main/resources/META-INF/rewrite/m3-deep-filter-list-20261017.yml",
+      "all_target_bytes_and_mtimes_unchanged": true
+    },
+    {
+      "case": "altered-sdk-result-refusal",
+      "exit_code": 1,
+      "expected_refusal": "SDK result changed after qualification: m3/docs/name-mapping.json",
+      "all_target_bytes_and_mtimes_unchanged": true
+    },
+    {
+      "case": "symlink-parent-refusal",
+      "exit_code": 1,
+      "expected_refusal": "symlink target or parent is not admitted:",
+      "symlink_within_target_root": true,
+      "all_target_bytes_and_mtimes_unchanged": true
+    }
+  ]
+}

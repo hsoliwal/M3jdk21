@@ -1,0 +1,113 @@
+{
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_baseline": "37eba37dcbdf0c0222b494d07ba2fca401ce248f",
+  "target_parent_pr": 1031,
+  "recipe": "com.synexia.m3jdk.DeepFilteredListComposition20261017",
+  "canonical_recipe_publication": "Canonical recipe and qualified proof inputs converge in hsoliwal/com.synexia before product promotion",
+  "binary_carry_donor": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "0997991e2496ee07b69be5d245ebc0ed1bd9b1f3",
+    "pull_request": 1018,
+    "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+    "git_blob": "e21fd9b277ce44a8c6efe4a4ffdf9f01a14a1d0b",
+    "sha256": "5da6837eee9112cb97725efff8fbcc1b95f455761d923f643e9a1158ba208989",
+    "exact_transferred_helper_sha256": "1bd2b5434d2e4eb11b51af151ccb9049e101ab456f8f59b9f99d24ebed37310b",
+    "license": "Apache-2.0",
+    "lineage": "first-party target refinement returned to canonical Synexia recipe; not a prior landed Synexia runtime owner"
+  },
+  "targets": [
+    {
+      "target": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "pre_sha256": "e51e894c15dd0f6163cd8129fd20748660332b58f6fd8dc6e749fdec49e3c5c6",
+      "pre_git_blob": "2750647c832d5bec07940b032ad2a2f66f425072",
+      "post_sha256": "5da6837eee9112cb97725efff8fbcc1b95f455761d923f643e9a1158ba208989",
+      "post_git_blob": "e21fd9b277ce44a8c6efe4a4ffdf9f01a14a1d0b"
+    },
+    {
+      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "pre_sha256": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101",
+      "pre_git_blob": "e381d23e93702cea3ccd7d9c3f7ff5e0d56baaa6",
+      "post_sha256": "c6db65bc2408ea44ef4395220f862b3cad9d824f1ee09558101381cb535c4b48",
+      "post_git_blob": "ee0b65c5f067abefe1d514b9f0d75aadf30690b1"
+    },
+    {
+      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java",
+      "pre_sha256": "538f62a64fa5cbe1b0dd37251a7652121306d17365a7c5c111cb0d5ee7c52200",
+      "pre_git_blob": "2f18dcc2da338efaba63b7695ea28e2a0b3874a3",
+      "post_sha256": "b6733c9cd447826710feaf2480febdaa9091f6367fd7ff3195f339cc6b08efcf",
+      "post_git_blob": "309ac4fd0889096a461a38abe5629ad0c77c0658"
+    },
+    {
+      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredSortedMultisets.java",
+      "pre_sha256": "7decb8452352f7b2117d72ee6aa186f66870d04cd5af05818d3374151767bda8",
+      "pre_git_blob": "60cab39eda4363a079ab78fc2e2ec0b1a617c734",
+      "post_sha256": "2072782ece0252c9132f18ae9f10a6bca411c46c567b89ff98191006118e86e5",
+      "post_git_blob": "f5cf5e76e91d8a0896a3e27590ddba42fce7e026"
+    },
+    {
+      "target": "m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py",
+      "pre_sha256": "ABSENT",
+      "pre_git_blob": "ABSENT",
+      "post_sha256": "8eadcc8aef4de85b8d262fea018f60d21d690ddbe31ddfde0b326ebbeeb8e102",
+      "post_git_blob": "defdff28e16f72bfc7aae6c14fda4296a7a2a1c8"
+    },
+    {
+      "target": "m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py",
+      "pre_sha256": "ABSENT",
+      "pre_git_blob": "ABSENT",
+      "post_sha256": "5a7049e8356e83451fa19537688c39f9704cb659b864c5debdb6f10aa1e4e638",
+      "post_git_blob": "f05ae4dc36e04c8687e75957f78a18cf39d7ecae"
+    },
+    {
+      "target": "m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh",
+      "pre_sha256": "c8eaf88095e4f507278a5081b1177548951f54a0fc34f906f3e9e4683deeef1f",
+      "pre_git_blob": "b994f1a1a8e3dc67c2ef1466f751fd19e497e2c2",
+      "post_sha256": "3927a4956743124e5efa5e1b7a2ef61db63c38d8ba41b77be9d66bc52832b914",
+      "post_git_blob": "dbf3e5e27df039f000f297fea0606ada53749f92"
+    },
+    {
+      "target": "m3/collections/wrappers/index-counted-receiver-20261017/verify.sh",
+      "pre_sha256": "26c217d87efb722bcf98f52ec0c53cd71baea8aa7205a0c02c343a8156312a40",
+      "pre_git_blob": "18680a0cebb44bdf6a62092d661242aea6abdc04",
+      "post_sha256": "3ce1c8c93d7a8f0e0a06beca977dc236622633f932a7a30252f1560bd45d0373",
+      "post_git_blob": "fba0ae54263e7b1169d5c74046e5aa9515e0952a"
+    },
+    {
+      "target": "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java",
+      "pre_sha256": "ABSENT",
+      "pre_git_blob": "ABSENT",
+      "post_sha256": "362dc9caf845360782b0c313ff871d35badd62883b8695a4c31a937f22f370b6",
+      "post_git_blob": "bcb6ae82460e3e536842b28df00c5c3f9fb6aa07"
+    },
+    {
+      "target": "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java",
+      "pre_sha256": "ABSENT",
+      "pre_git_blob": "ABSENT",
+      "post_sha256": "e21114b06618ba15d0808b06d1c9be2276ac0fff355e2cb9da5f7b7b0de58c04",
+      "post_git_blob": "27a0f8c0069dbf5c28c19640eba282a7d8fef844"
+    },
+    {
+      "target": "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredSortedMultisetsProof.java",
+      "pre_sha256": "ABSENT",
+      "pre_git_blob": "ABSENT",
+      "post_sha256": "d50e1e6554a40de27d9d2c41ec5ab352302850753d0bf0fb90dfcf8bec92e015",
+      "post_git_blob": "8c5e44d594b5d1614a9cb3c03d4abbe4b0c70e96"
+    },
+    {
+      "target": "m3/collections/wrappers/writable-map-avl-20261017/verify.sh",
+      "pre_sha256": "9ac451c587b2cbf08fff7981ec3c2793b9914b97cb50760c813bc41648cb6d21",
+      "pre_git_blob": "d95acf1571efe11a0047475bbbdd9ab552c429fd",
+      "post_sha256": "e61fcdec0861f1796245edf4760b7182a29c10ddf4c423b478bd99efb69b4ebf",
+      "post_git_blob": "42e2906be7994e4ed4a35a3bd717b462c85bb2f4"
+    },
+    {
+      "target": "m3/docs/name-mapping.json",
+      "pre_sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "pre_git_blob": "a44460f982940623cf6ba1ca625caeeaa889f633",
+      "post_sha256": "8a734da492905c0d4bdc3d94fd3f41b4fefb3b1828a6b3fe15dcaa372e1e7adf",
+      "post_git_blob": "e6146fe8e00b046bc3ac1eed7323c1f3e25fb7ec"
+    }
+  ],
+  "target_parent_includes_pr": 1056,
+  "historical_list_map_preimages_baseline": "10ce8abaa279292c73e1c118628344cf0851d14a"
+}

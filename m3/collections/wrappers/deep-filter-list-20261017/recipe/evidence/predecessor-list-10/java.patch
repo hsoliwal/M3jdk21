@@ -1,0 +1,818 @@
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java b/m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+index 2750647..e21fd9b 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+@@ -19,6 +19,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ import java.util.Set;
+ import java.util.SortedSet;
+ import java.util.Spliterator;
++import java.util.function.BiPredicate;
+ import java.util.function.Consumer;
+ import java.util.function.Predicate;
+ 
+@@ -130,6 +131,102 @@
+         return selected;
+     }
+ 
++    /**
++     * Persistent binary-carry predicate composition shared by Set and Map views.
++     * Only M3-created conjunctions are opened; caller predicates remain opaque.
++     * Order, duplicate occurrences, short circuiting and thrown objects survive.
++     * A perfect subtree becomes an immutable prefix on append; only the smaller
++     * suffix is rebuilt. For d leaves, height is ceil(log2(d)), retained storage
++     * is O(d), append is O(log d), and testing allocates no traversal buffer.
++     * This bounds M3 composition frames, not recursion inside a caller predicate.
++     */
++    @SuppressWarnings("unchecked")
++    static <E> Predicate<E> orderedAnd(
++            Predicate<? super E> first, Predicate<? super E> next) {
++        Objects.requireNonNull(first, "first");
++        Objects.requireNonNull(next, "next");
++        FilterNode<Predicate<? super E>> prefix = first instanceof OrderedPredicate<?> old
++                ? ((OrderedPredicate<E>) old).root : new FilterNode<>(first);
++        return new OrderedPredicate<>(appendFilter(prefix, new FilterNode<>(next)));
++    }
++
++    @SuppressWarnings("unchecked")
++    static <K, V> BiPredicate<K, V> orderedAnd(
++            BiPredicate<? super K, ? super V> first,
++            BiPredicate<? super K, ? super V> next) {
++        Objects.requireNonNull(first, "first");
++        Objects.requireNonNull(next, "next");
++        FilterNode<BiPredicate<? super K, ? super V>> prefix = first instanceof OrderedBiPredicate<?, ?> old
++                ? ((OrderedBiPredicate<K, V>) old).root : new FilterNode<>(first);
++        return new OrderedBiPredicate<>(appendFilter(prefix, new FilterNode<>(next)));
++    }
++
++    private static final class FilterNode<P> {
++        private final P leaf;
++        private final FilterNode<P> left;
++        private final FilterNode<P> right;
++        private final int height;
++        private final boolean perfect;
++
++        private FilterNode(P leaf) {
++            this.leaf = leaf;
++            this.left = null;
++            this.right = null;
++            this.height = 0;
++            this.perfect = true;
++        }
++
++        private FilterNode(FilterNode<P> left, FilterNode<P> right) {
++            this.leaf = null;
++            this.left = left;
++            this.right = right;
++            this.height = Math.max(left.height, right.height) + 1;
++            this.perfect = left.perfect && right.perfect && left.height == right.height;
++        }
++    }
++
++    private static <P> FilterNode<P> appendFilter(FilterNode<P> prefix, FilterNode<P> leaf) {
++        if (prefix.perfect) return new FilterNode<>(prefix, leaf);
++        return new FilterNode<>(prefix.left, appendFilter(prefix.right, leaf));
++    }
++
++    private static final class OrderedPredicate<E> implements Predicate<E> {
++        private final FilterNode<Predicate<? super E>> root;
++
++        private OrderedPredicate(FilterNode<Predicate<? super E>> root) {
++            this.root = root;
++        }
++
++        @Override
++        public boolean test(E element) {
++            return evaluate(root, element);
++        }
++
++        private static <E> boolean evaluate(FilterNode<Predicate<? super E>> node, E element) {
++            if (node.leaf != null) return node.leaf.test(element);
++            return evaluate(node.left, element) && evaluate(node.right, element);
++        }
++    }
++
++    private static final class OrderedBiPredicate<K, V> implements BiPredicate<K, V> {
++        private final FilterNode<BiPredicate<? super K, ? super V>> root;
++
++        private OrderedBiPredicate(FilterNode<BiPredicate<? super K, ? super V>> root) {
++            this.root = root;
++        }
++
++        @Override
++        public boolean test(K key, V value) {
++            return evaluate(root, key, value);
++        }
++
++        private static <K, V> boolean evaluate(
++                FilterNode<BiPredicate<? super K, ? super V>> node, K key, V value) {
++            if (node.leaf != null) return node.leaf.test(key, value);
++            return evaluate(node.left, key, value) && evaluate(node.right, key, value);
++        }
++    }
++
+     /** A live filter without per-element retained adapters. */
+     private static class FilteredCollection<E> extends AbstractCollection<E> {
+         protected final Collection<E> backing;
+@@ -143,7 +240,7 @@
+                 FilteredCollection<E> previous = (FilteredCollection<E>) nested;
+                 this.backing = previous.backing;
+                 Predicate<? super E> existing = previous.predicate;
+-                this.predicate = element -> existing.test(element) && filter.test(element);
++                this.predicate = orderedAnd(existing, filter);
+             } else {
+                 this.backing = source;
+                 this.predicate = filter;
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+index e381d23..ee0b65c 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+@@ -104,7 +104,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+                 View<E> previous = (View<E>) nested;
+                 this.backing = previous.backing;
+                 Predicate<? super E> existing = previous.predicate;
+-                this.predicate = item -> existing.test(item) && filter.test(item);
++                this.predicate = M3CollectionViews.orderedAnd(existing, filter);
+             } else {
+                 this.backing = source;
+                 this.predicate = filter;
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java
+index 2f18dcc..309ac4f 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java
+@@ -110,7 +110,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+             if (source instanceof FilteredMap<?, ?> old) {
+                 FilteredMap<K, V> prior = (FilteredMap<K, V>) old;
+                 backing = prior.backing;
+-                predicate = (key, value) -> prior.predicate.test(key, value) && filter.test(key, value);
++                predicate = M3CollectionViews.orderedAnd(prior.predicate, filter);
+             } else {
+                 backing = source;
+                 predicate = filter;
+diff --git a/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java b/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java
+new file mode 100644
+index 0000000..bcb6ae8
+--- /dev/null
++++ b/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java
+@@ -0,0 +1,286 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import java.lang.reflect.Field;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Collection;
++import java.util.Collections;
++import java.util.Comparator;
++import java.util.Iterator;
++import java.util.LinkedHashMap;
++import java.util.LinkedHashSet;
++import java.util.List;
++import java.util.Map;
++import java.util.NavigableMap;
++import java.util.NavigableSet;
++import java.util.Objects;
++import java.util.Random;
++import java.util.Set;
++import java.util.SortedMap;
++import java.util.SortedSet;
++import java.util.Spliterator;
++import java.util.TreeMap;
++import java.util.TreeSet;
++import java.util.concurrent.CompletableFuture;
++import java.util.concurrent.atomic.AtomicInteger;
++import java.util.function.BiPredicate;
++import java.util.function.Predicate;
++
++/** Exact owner tests. Run with -Xss256k to expose linear predicate recursion. */
++public final class M3DeepFilterCompositionProof {
++    private static long checks;
++    private M3DeepFilterCompositionProof() { }
++    private static void check(boolean value, String label) {
++        if (!value) throw new AssertionError(label);
++        checks++;
++    }
++    private static void equal(Object expected, Object actual, String label) {
++        check(Objects.equals(expected, actual), label + ": " + expected + " != " + actual);
++    }
++    private static <T extends Throwable> T expect(Class<T> type, Runnable task) {
++        try { task.run(); }
++        catch (Throwable error) {
++            if (!type.isInstance(error)) throw new AssertionError("wrong failure", error);
++            checks++;
++            return type.cast(error);
++        }
++        throw new AssertionError("missing " + type.getName());
++    }
++    private static List<Integer> rows(Collection<Integer> view) {
++        return view.stream().toList();
++    }
++    private static Object field(Object object, String name) throws ReflectiveOperationException {
++        for (Class<?> c = object.getClass(); c != null; c = c.getSuperclass()) {
++            try {
++                Field f = c.getDeclaredField(name);
++                f.setAccessible(true);
++                return f.get(object);
++            } catch (NoSuchFieldException absent) { /* Continue through wrapper superclass. */ }
++        }
++        throw new NoSuchFieldException(name);
++    }
++    private static void shape(Object view, int leaves) throws ReflectiveOperationException {
++        Object predicate = field(view, "predicate");
++        Object root = field(predicate, "root");
++        int maximum = leaves <= 1 ? 0 : 32 - Integer.numberOfLeadingZeros(leaves - 1);
++        equal(maximum, field(root, "height"), "logarithmic composition height");
++        List<Object> pending = new ArrayList<>();
++        pending.add(root);
++        int seen = 0;
++        while (!pending.isEmpty()) {
++            Object node = pending.removeLast();
++            Object leaf = field(node, "leaf");
++            if (leaf != null) seen++;
++            else {
++                pending.add(field(node, "right"));
++                pending.add(field(node, "left"));
++            }
++            for (Field f : node.getClass().getDeclaredFields()) {
++                check(java.lang.reflect.Modifier.isFinal(f.getModifiers()), "mutable predicate node");
++            }
++        }
++        equal(leaves, seen, "no deduplicated predicate occurrences");
++    }
++    private static void deepCollection(int depth, boolean inspect) throws Exception {
++        ArrayList<Integer> source = new ArrayList<>(List.of(7));
++        AtomicInteger calls = new AtomicInteger();
++        Predicate<Integer> same = value -> { calls.incrementAndGet(); return value != null; };
++        Collection<Integer> view = source;
++        for (int i = 0; i < depth; i++) view = M3CollectionViews.filtered(view, same);
++        equal(0, calls.get(), "constructor evaluated predicates");
++        if (inspect) shape(view, depth);
++        Spliterator<Integer> spliterator = view.spliterator();
++        spliterator.estimateSize();
++        check(!spliterator.hasCharacteristics(Spliterator.SIZED), "false sized");
++        equal(0, calls.get(), "metadata evaluated predicates");
++        equal(List.of(7), rows(view), "deep collection traversal");
++        equal(depth, calls.get(), "repeated callback occurrence count");
++        source.add(9);
++        source.add(null);
++        equal(List.of(7, 9), rows(view), "deep collection stays live");
++        Collection<Integer> prefix = view;
++        Collection<Integer> reject = M3CollectionViews.filtered(view, value -> false);
++        equal(List.of(), rows(reject), "rejecting suffix");
++        equal(List.of(7, 9), rows(prefix), "append mutated retained prefix");
++        check(field(view, "backing") == source, "second element owner or wrapper chain");
++        check(view.remove(7), "deep removal");
++        view.clear();
++        equal(Arrays.asList((Integer) null), source, "hidden row survives clear");
++    }
++    private static void deepMap(int depth, boolean inspect) throws Exception {
++        Map<Integer, Integer> source = new LinkedHashMap<>();
++        source.put(7, 70);
++        AtomicInteger calls = new AtomicInteger();
++        BiPredicate<Integer, Integer> same = (key, value) -> {
++            calls.incrementAndGet(); return value != null;
++        };
++        Map<Integer, Integer> view = source;
++        for (int i = 0; i < depth; i++) view = M3FilteredMaps.filtered(view, same);
++        equal(0, calls.get(), "map constructor evaluated predicates");
++        if (inspect) shape(view, depth);
++        equal(70, view.get(7), "deep map get");
++        equal(depth, calls.get(), "map callback occurrences");
++        source.put(9, null);
++        equal(List.of(7), view.keySet().stream().toList(), "hidden null mapping");
++        Map<Integer, Integer> guarded = view;
++        expect(IllegalArgumentException.class, () -> guarded.entrySet().iterator().next().setValue(null));
++        equal(70, source.get(7), "guarded entry refusal changed source");
++        check(field(view, "backing") == source, "map retained wrapper chain");
++        Map<Integer, Integer> old = view;
++        view = M3FilteredMaps.filtered(view, (key, value) -> false);
++        check(view.isEmpty(), "map false suffix");
++        equal(70, old.get(7), "map append changed old plan");
++        old.clear();
++        check(source.size() == 1 && source.containsKey(9), "hidden map entry lost");
++    }
++    private static void sortedViews(int depth) throws Exception {
++        Comparator<Integer> order = Comparator.nullsFirst(Comparator.naturalOrder());
++        NavigableSet<Integer> source = new TreeSet<>(order);
++        source.addAll(Arrays.asList(null, -3, -2, -1, 0, 1, 2, 3));
++        Collection<Integer> erased = source;
++        NavigableSet<Integer> view = (NavigableSet<Integer>) M3CollectionViews.filtered(erased, Objects::nonNull);
++        for (int i = 1; i < depth; i++) view = M3CollectionViews.filtered(view, value -> true);
++        check(view.comparator() == order, "comparator identity lost");
++        NavigableSet<Integer> range = view.subSet(-2, true, 3, false).descendingSet();
++        equal(List.of(2, 1, 0, -1, -2), rows(range), "deep reversed bounded set");
++        equal(2, range.ceiling(100), "out-of-range descending navigation");
++        equal(-2, range.floor(-100), "out-of-range floor");
++        source.remove(1);
++        equal(List.of(2, 0, -1, -2), rows(range), "range not live");
++        equal(2, range.pollFirst(), "poll first through deep predicate");
++        check(!source.contains(2), "poll not write-through");
++        NavigableSet<Integer> frozen = Collections.unmodifiableNavigableSet(view);
++        expect(UnsupportedOperationException.class, () -> frozen.add(99));
++        SortedSet<Integer> nonNavigable = Collections.unmodifiableSortedSet(source);
++        SortedSet<Integer> sortedOnly = M3CollectionViews.filtered(nonNavigable, Objects::nonNull);
++        for (int i = 1; i < depth; i++) sortedOnly = M3CollectionViews.filtered(sortedOnly, value -> true);
++        equal(-3, sortedOnly.first(), "sorted-only capability");
++
++        NavigableMap<String, Integer> mapSource = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
++        mapSource.put("Alpha", 1); mapSource.put("Beta", 2); mapSource.put("Gamma", null);
++        NavigableMap<String, Integer> map = M3FilteredMaps.filtered(mapSource,
++                (key, value) -> Character.isUpperCase(key.charAt(0)) && value != null);
++        for (int i = 1; i < depth; i++) map = M3FilteredMaps.filtered(map, (key, value) -> true);
++        equal(1, map.get("ALPHA"), "stored comparator representative");
++        equal(List.of("Beta", "Alpha"), map.descendingKeySet().stream().toList(), "descending map keys");
++        equal("Alpha", map.subMap("A", true, "C", false).ceilingKey("0"), "bounded map lookup");
++        map.put("ALPHA", 4);
++        equal("Alpha", mapSource.firstKey(), "stored key replaced by probe");
++        equal(4, mapSource.get("alpha"), "map write did not reach source");
++        Map.Entry<String, Integer> snapshot = map.firstEntry();
++        expect(UnsupportedOperationException.class, () -> snapshot.setValue(8));
++        map.clear();
++        check(mapSource.size() == 1 && mapSource.containsKey("Gamma"), "hidden sorted mapping lost");
++        SortedMap<String, Integer> sortedMap = Collections.unmodifiableSortedMap(mapSource);
++        SortedMap<String, Integer> filteredMap = M3FilteredMaps.filtered(sortedMap, (key, value) -> true);
++        for (int i = 1; i < depth; i++) filteredMap = M3FilteredMaps.filtered(filteredMap, (key, value) -> true);
++        equal("Gamma", filteredMap.firstKey(), "sorted-only map");
++    }
++    private static void orderAndExceptions() {
++        for (int stop : new int[] {0, 1, 2, 7, 31, 32, 63, 127, 128, 255, 256}) {
++            List<Integer> trace = new ArrayList<>();
++            Collection<Integer> view = List.of(4);
++            for (int i = 0; i < 257; i++) {
++                int stage = i;
++                view = M3CollectionViews.filtered(view, value -> { trace.add(stage); return stage != stop; });
++            }
++            check(view.isEmpty(), "false predicate ignored");
++            equal(java.util.stream.IntStream.rangeClosed(0, stop).boxed().toList(), trace,
++                    "short-circuit order changed");
++            RuntimeException marker = new IllegalStateException("marker");
++            Map<Integer, Integer> map = new LinkedHashMap<>(Map.of(1, 2));
++            trace.clear();
++            for (int i = 0; i < 257; i++) {
++                int stage = i;
++                map = M3FilteredMaps.filtered(map, (key, value) -> {
++                    trace.add(stage);
++                    if (stage == stop) throw marker;
++                    return true;
++                });
++            }
++            Map<Integer, Integer> exact = map;
++            check(expect(RuntimeException.class, () -> exact.get(1)) == marker, "exception object replaced");
++            equal(java.util.stream.IntStream.rangeClosed(0, stop).boxed().toList(), trace,
++                    "exception order changed");
++        }
++        Collection<Integer> nulls = M3CollectionViews.filtered(Arrays.asList(null, 1), Objects::nonNull);
++        nulls = M3CollectionViews.filtered(nulls, n -> n > 0);
++        equal(List.of(1), rows(nulls), "null guard order");
++        Collection<Integer> existing = nulls;
++        expect(NullPointerException.class, () -> M3CollectionViews.filtered(existing, null));
++        expect(NullPointerException.class, () -> M3FilteredMaps.filtered(Map.of(1, 2), null));
++        Iterator<Integer> iterator = nulls.iterator();
++        iterator.next();
++        expect(UnsupportedOperationException.class, iterator::remove);
++    }
++    private static void differential() {
++        for (int seed = 0; seed < 192; seed++) {
++            Random random = new Random(seed);
++            List<Integer> input = new ArrayList<>();
++            for (int i = 0; i < 80; i++) input.add(random.nextInt(17) == 0 ? null : random.nextInt(101) - 50);
++            List<Predicate<Integer>> predicates = new ArrayList<>();
++            predicates.add(Objects::nonNull);
++            for (int i = 0; i < 1 + seed % 31; i++) {
++                int modulus = 2 + random.nextInt(13);
++                int residue = random.nextInt(modulus);
++                predicates.add(value -> Math.floorMod(value, modulus) != residue);
++            }
++            List<Integer> expected = new ArrayList<>();
++            for (Integer value : input) {
++                boolean keep = true;
++                for (Predicate<Integer> predicate : predicates) if (!predicate.test(value)) { keep = false; break; }
++                if (keep) expected.add(value);
++            }
++            Collection<Integer> view = input;
++            for (Predicate<Integer> predicate : predicates) view = M3CollectionViews.filtered(view, predicate);
++            equal(expected, rows(view), "differential list");
++            equal(expected, view.parallelStream().toList(), "parallel shared immutable plan");
++            equal(expected.size(), view.size(), "exact filtered size");
++            List<Integer> sorted = new ArrayList<>(expected); sorted.sort(Comparator.reverseOrder());
++            equal(sorted, M3CollectionViews.sortedSnapshot(view, Comparator.reverseOrder()), "stable snapshot");
++            Set<Integer> set = new LinkedHashSet<>(input);
++            Set<Integer> filteredSet = set;
++            for (Predicate<Integer> predicate : predicates) filteredSet = M3CollectionViews.filtered(filteredSet, predicate);
++            equal(new LinkedHashSet<>(expected), filteredSet, "set contract");
++            Map<Integer, Integer> backing = new LinkedHashMap<>();
++            for (int i = 0; i < input.size(); i++) backing.put(i, input.get(i));
++            Map<Integer, Integer> filtered = backing;
++            for (Predicate<Integer> predicate : predicates) filtered = M3FilteredMaps.filtered(filtered, (k, v) -> predicate.test(v));
++            equal(expected, filtered.values().stream().toList(), "map chain differential");
++            int checkpoint = input.size();
++            backing.put(checkpoint, 103);
++            boolean keep = predicates.stream().allMatch(predicate -> predicate.test(103));
++            check(filtered.containsKey(checkpoint) == keep, "live map new row");
++        }
++    }
++    private static void sharedPlanAndReentrancy() {
++        Collection<Integer> source = java.util.stream.IntStream.range(0, 1024).boxed().toList();
++        Collection<Integer> view = source;
++        for (int i = 0; i < 4096; i++) view = M3CollectionViews.filtered(view, value -> true);
++        Collection<Integer> immutable = view;
++        List<CompletableFuture<Long>> workers = new ArrayList<>();
++        for (int i = 0; i < 4; i++) workers.add(CompletableFuture.supplyAsync(() -> immutable.stream().count()));
++        for (CompletableFuture<Long> worker : workers) equal(1024L, worker.join(), "concurrent read plan");
++        Collection<Integer> reentrant = M3CollectionViews.filtered(view, value -> immutable.contains(value));
++        check(reentrant.contains(9), "reentrant traversal state corruption");
++    }
++    public static void main(String[] args) throws Exception {
++        int depth = Integer.getInteger("m3.deep.depth", 65_536);
++        if (depth < 2) throw new IllegalArgumentException("depth must be >= 2");
++        if (args.length != 0 && args[0].equals("collection-witness")) {
++            deepCollection(depth, false); return;
++        }
++        if (args.length != 0 && args[0].equals("map-witness")) {
++            deepMap(depth, false); return;
++        }
++        deepCollection(depth, true);
++        deepMap(depth, true);
++        sortedViews(Math.min(depth, 16_384));
++        orderAndExceptions();
++        differential();
++        sharedPlanAndReentrancy();
++        System.out.println("M3_DEEP_FILTER_PASS checks=" + checks + " depth=" + depth + " seeds=192");
++    }
++}
+diff --git a/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java b/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java
+new file mode 100644
+index 0000000..27a0f8c
+--- /dev/null
++++ b/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java
+@@ -0,0 +1,370 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import java.lang.reflect.Field;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Collection;
++import java.util.Collections;
++import java.util.Comparator;
++import java.util.ConcurrentModificationException;
++import java.util.LinkedList;
++import java.util.List;
++import java.util.ListIterator;
++import java.util.Objects;
++import java.util.Random;
++import java.util.RandomAccess;
++import java.util.function.Predicate;
++import java.util.regex.Pattern;
++
++/**
++ * Behavioral proof for the explicit List owner at deep predicate composition.
++ * Run the actual recipe output with Java21 and -Xss256k. This is a finite contract
++ * check, not a benchmark or a claim about recursion inside a caller predicate.
++ */
++public final class M3DeepFilteredListsProof {
++    private static long checks;
++
++    private M3DeepFilteredListsProof() { }
++
++    private static void check(boolean value, String label) {
++        if (!value) throw new AssertionError(label);
++        checks++;
++    }
++
++    private static void equal(Object expected, Object actual, String label) {
++        check(Objects.equals(expected, actual), label + ": " + expected + " != " + actual);
++    }
++
++    private static <T extends Throwable> T expect(Class<T> type, Runnable action) {
++        try { action.run(); }
++        catch (Throwable error) {
++            if (!type.isInstance(error)) throw new AssertionError("wrong failure", error);
++            checks++;
++            return type.cast(error);
++        }
++        throw new AssertionError("missing " + type.getName());
++    }
++
++    private static Object field(Object value, String name) throws ReflectiveOperationException {
++        Field result = value.getClass().getDeclaredField(name);
++        result.setAccessible(true);
++        return result.get(value);
++    }
++
++    private static <E> List<E> nested(List<E> source, Predicate<? super E> predicate, int depth) {
++        List<E> result = source;
++        for (int index = 0; index < depth; index++) {
++            result = M3FilteredLists.filtered(result, predicate);
++        }
++        return result;
++    }
++
++    private static void deepOwner(int depth) throws ReflectiveOperationException {
++        ArrayList<Integer> backing = new ArrayList<>(Arrays.asList(2, -1));
++        int[] calls = {0};
++        Predicate<Integer> positive = value -> { calls[0]++; return value > 0; };
++        List<Integer> view = nested(backing, positive, depth);
++        equal(0, calls[0], "construction evaluated predicate");
++        equal(1, view.size(), "deep size");
++        equal(depth + 1, calls[0], "duplicate predicate occurrences or short circuit changed");
++        check(field(view, "backing") == backing, "List retained another element owner");
++        Object root = field(field(view, "predicate"), "root");
++        equal(32 - Integer.numberOfLeadingZeros(depth - 1), field(root, "height"),
++                "List did not use the shared logarithmic-height composition");
++        check(!(view instanceof RandomAccess), "false random-access capability");
++
++        List<Integer> rejected = M3FilteredLists.filtered(view, value -> false);
++        equal(List.of(), new ArrayList<>(rejected), "rejecting suffix");
++        backing.add(4);
++        equal(List.of(2, 4), new ArrayList<>(view), "retained prefix changed or lost liveness");
++        equal(List.of(), new ArrayList<>(rejected), "rejected view changed selection");
++        equal(2, view.removeFirst(), "deep endpoint removal");
++        view.clear();
++        equal(List.of(-1), backing, "deep removal lost hidden elements");
++    }
++
++    private static void callbackContract() {
++        for (int stop : new int[] {0, 1, 2, 7, 31, 32, 63, 127, 128, 255, 256}) {
++            List<Integer> trace = new ArrayList<>();
++            List<Integer> view = List.of(9);
++            for (int index = 0; index < 257; index++) {
++                int stage = index;
++                view = M3FilteredLists.filtered(view, value -> {
++                    trace.add(stage);
++                    return stage != stop;
++                });
++            }
++            equal(0, view.size(), "false predicate ignored");
++            equal(java.util.stream.IntStream.rangeClosed(0, stop).boxed().toList(),
++                    trace, "List predicate order or short circuit changed");
++
++            trace.clear();
++            RuntimeException marker = new IllegalArgumentException("predicate marker " + stop);
++            List<Integer> throwing = List.of(9);
++            for (int index = 0; index < 257; index++) {
++                int stage = index;
++                throwing = M3FilteredLists.filtered(throwing, value -> {
++                    trace.add(stage);
++                    if (stage == stop) throw marker;
++                    return true;
++                });
++            }
++            List<Integer> exact = throwing;
++            check(expect(RuntimeException.class, exact::size) == marker,
++                    "exception object replaced");
++            equal(java.util.stream.IntStream.rangeClosed(0, stop).boxed().toList(),
++                    trace, "exception callback order changed");
++        }
++        List<Integer> nulls = M3FilteredLists.filtered(Arrays.asList(null, 1, -1), Objects::nonNull);
++        nulls = M3FilteredLists.filtered(nulls, value -> value > 0);
++        equal(List.of(1), new ArrayList<>(nulls), "null guard moved after a dereference");
++        List<Integer> existing = nulls;
++        expect(NullPointerException.class, () -> M3FilteredLists.filtered(existing, null));
++        expect(NullPointerException.class, () -> M3FilteredLists.filtered(null, Objects::nonNull));
++    }
++
++    private static void cursorContract(int depth) {
++        List<Integer> backing = new LinkedList<>(List.of(-1, 2, -3, 4, -5, 6, -7));
++        List<Integer> view = nested(backing, value -> value % 2 == 0, depth);
++        ListIterator<Integer> cursor = view.listIterator();
++        check(cursor.hasNext() && !cursor.hasPrevious(), "initial cursor endpoints");
++        equal(2, cursor.next(), "first selected value");
++        check(cursor.hasNext() && cursor.hasPrevious(), "reversible probes");
++        cursor.set(20);
++        equal(List.of(-1, 20, -3, 4, -5, 6, -7), backing, "set targeted a prefetched element");
++        cursor.remove();
++        equal(List.of(-1, -3, 4, -5, 6, -7), backing, "remove targeted a prefetched element");
++        equal(0, cursor.nextIndex(), "forward remove index");
++        equal(4, cursor.next(), "next after removal");
++        equal(4, cursor.previous(), "direction reversal");
++        check(cursor.hasNext() && !cursor.hasPrevious(), "backward reversible probes");
++        cursor.set(40);
++        cursor.remove();
++        equal(List.of(-1, -3, -5, 6, -7), backing, "backward remove lost hidden rows");
++        equal(0, cursor.nextIndex(), "backward remove index");
++        cursor.add(8);
++        equal(List.of(-1, -3, 8, -5, 6, -7), backing, "cursor insertion boundary");
++        expect(IllegalStateException.class, cursor::remove);
++        equal(8, cursor.previous(), "previous after insertion");
++        List<Integer> before = new ArrayList<>(backing);
++        expect(IllegalArgumentException.class, () -> cursor.set(9));
++        equal(before, backing, "rejected iterator set changed backing");
++        cursor.set(10);
++        equal(10, cursor.next(), "accepted iterator set");
++        equal(6, cursor.next(), "last selected value");
++        check(!cursor.hasNext(), "unexpected tail");
++        expect(java.util.NoSuchElementException.class, cursor::next);
++
++        RuntimeException marker = new IllegalStateException("probe failure");
++        List<String> failing = nested(new ArrayList<>(List.of("ok", "bad", "later")), text -> {
++            if (text.equals("bad")) throw marker;
++            return true;
++        }, depth);
++        ListIterator<String> probe = failing.listIterator();
++        equal("ok", probe.next(), "before predicate error");
++        check(expect(RuntimeException.class, probe::hasNext) == marker, "probe wrapped predicate failure");
++        expect(IllegalStateException.class, probe::hasNext);
++        expect(IllegalStateException.class, probe::remove);
++        equal("ok", failing.get(0), "failed iterator poisoned its view");
++        equal("ok", failing.iterator().next(), "failed iterator poisoned a new iterator");
++    }
++
++    private static void rangesAndReadOnly(int depth) {
++        ArrayList<Integer> backing = new ArrayList<>(List.of(-1, 2, -3, 4, -5, 6, -7));
++        List<Integer> view = nested(backing, value -> value % 2 == 0, depth);
++        List<Integer> range = view.subList(1, 3);
++        List<Integer> reversed = range.reversed();
++        equal(List.of(6, 4), new ArrayList<>(reversed), "deep reversed physical subList");
++        equal(6, reversed.set(0, 60), "reversed set result");
++        reversed.add(1, 40);
++        equal(List.of(-1, 2, -3, 4, -5, 40, 60, -7), backing, "reversed insertion wrote wrong span");
++        equal(List.of(2, 4, 40, 60), new ArrayList<>(view), "range mutation was detached");
++        equal(4, reversed.remove(2), "reversed removal");
++        equal(List.of(-1, 2, -3, -5, 40, 60, -7), backing, "range removal lost a hidden element");
++        equal(List.of(60, 40), new ArrayList<>(reversed), "reversed range stopped being live");
++
++        List<Integer> readOnly = M3FilteredLists.readOnlyFiltered(view, value -> true);
++        equal(List.of(60, 40, 2), new ArrayList<>(readOnly.reversed()), "read-only reversed order");
++        expect(UnsupportedOperationException.class, () -> readOnly.addAll(List.of()));
++        expect(UnsupportedOperationException.class, () -> readOnly.removeIf(value -> false));
++        expect(UnsupportedOperationException.class, () -> readOnly.reversed().subList(0, 0).clear());
++        expect(UnsupportedOperationException.class, () -> readOnly.listIterator().add(12));
++        List<Integer> exact = new ArrayList<>(backing);
++        expect(IllegalArgumentException.class, () -> view.addAll(List.of(12, 13, 14)));
++        equal(exact, backing, "rejected bulk insert was partly applied");
++
++        ArrayList<Integer> other = new ArrayList<>(List.of(2, -1, 4, 6));
++        List<Integer> otherView = nested(other, value -> value % 2 == 0, depth);
++        List<Integer> ordinarySpan = otherView.subList(0, 2);
++        other.add(8);
++        expect(ConcurrentModificationException.class, ordinarySpan::size);
++    }
++
++    private static final class Representative {
++        final int key;
++        final boolean visible;
++        Representative(int key, boolean visible) { this.key = key; this.visible = visible; }
++        @Override public boolean equals(Object other) {
++            return other instanceof Representative value && key == value.key;
++        }
++        @Override public int hashCode() { return key; }
++        @Override public String toString() { return key + ":" + visible; }
++    }
++
++    private static void storedRepresentatives(int depth) {
++        Representative hidden = new Representative(1, false);
++        Representative first = new Representative(1, true);
++        Representative second = new Representative(1, true);
++        ArrayList<Representative> backing = new ArrayList<>(List.of(hidden, first, second));
++        List<Representative> view = nested(backing, value -> value.visible, depth);
++        check(view.get(0) == first && view.get(1) == second, "stored references or duplicates changed");
++        check(view.remove(new Representative(1, false)), "visible equal stored occurrence was not removed");
++        check(backing.size() == 2 && backing.get(0) == hidden && backing.get(1) == second,
++                "query predicate or hidden equal representative affected remove");
++        view.clear();
++        check(backing.size() == 1 && backing.getFirst() == hidden, "hidden equal representative removed");
++    }
++
++    private static void compiledRegexAndStableSort(int depth) {
++        Predicate<String> prepared = Pattern.compile("a.*").asMatchPredicate();
++        ArrayList<String> backing = new ArrayList<>(Arrays.asList(
++                null, "beta", new String("a2"), "a1", "alpha", "A0", new String("a2"),
++                "\ud83d\ude00", "a\n", "a\u00e9"));
++        List<String> view = M3FilteredLists.filtered(backing, Objects::nonNull);
++        for (int stage = 1; stage < depth; stage++) {
++            view = M3FilteredLists.filtered(view, stage % 257 == 1 ? prepared : Objects::nonNull);
++        }
++        List<String> selected = backing.stream().filter(Objects::nonNull).filter(prepared).toList();
++        equal(selected, new ArrayList<>(view), "compiled full-match predicate composition");
++        Comparator<String> byLength = Comparator.comparingInt(String::length);
++        List<String> snapshot = M3CollectionViews.filteredSortedSnapshot(view, value -> true, byLength);
++        ArrayList<String> oracle = new ArrayList<>(selected);
++        oracle.sort(byLength);
++        equal(oracle, snapshot, "stable filtered sorted snapshot");
++        for (int index = 0; index < oracle.size(); index++) {
++            check(oracle.get(index) == snapshot.get(index), "stable comparator tie changed representative");
++        }
++        backing.add("a0");
++        equal(selected.size() + 1, view.size(), "compiled predicate view became detached");
++        equal(oracle, snapshot, "sorted snapshot retained live source");
++        equal("a0", view.removeLast(), "compiled predicate view removal");
++        check(backing.contains(null) && backing.contains("a\n"), "regex-hidden rows removed");
++        List<String> selectedView = view;
++        expect(IllegalArgumentException.class, () -> selectedView.add("beta"));
++    }
++
++    private static List<Integer> selected(Collection<Integer> backing, Predicate<Integer> predicate) {
++        ArrayList<Integer> result = new ArrayList<>();
++        for (Integer value : backing) if (predicate.test(value)) result.add(value);
++        return result;
++    }
++
++    private static int physical(List<Integer> backing, Predicate<Integer> predicate, int index) {
++        int visible = 0;
++        for (int position = 0; position < backing.size(); position++) {
++            if (predicate.test(backing.get(position)) && visible++ == index) return position;
++        }
++        if (visible == index) return backing.size();
++        throw new AssertionError("bad oracle index");
++    }
++
++    private static void differential(int seeds) {
++        for (int seed = 0; seed < seeds; seed++) {
++            Random random = new Random(seed);
++            int hiddenResidue = Math.floorMod(seed, 5);
++            Predicate<Integer> accepted = value -> value != null && value >= 0
++                    && Math.floorMod(value, 5) != hiddenResidue;
++            List<Integer> backing = seed % 2 == 0 ? new ArrayList<>() : new LinkedList<>();
++            for (int index = 0; index < 24; index++) backing.add(random.nextInt(41) - 20);
++            backing.add(null);
++            ArrayList<Integer> model = new ArrayList<>(backing);
++            List<Integer> view = nested(backing, accepted, 257 + seed % 64);
++            for (int operation = 0; operation < 32; operation++) {
++                List<Integer> visible = selected(model, accepted);
++                equal(visible, new ArrayList<>(view), "differential selection " + seed + "/" + operation);
++                equal(model, backing, "differential backing " + seed + "/" + operation);
++                int value = 100 + random.nextInt(100);
++                while (!accepted.test(value)) value++;
++                int kind = visible.isEmpty() ? 0 : random.nextInt(6);
++                switch (kind) {
++                    case 0 -> {
++                        int index = random.nextInt(visible.size() + 1);
++                        model.add(physical(model, accepted, index), value);
++                        view.add(index, value);
++                    }
++                    case 1 -> {
++                        int index = random.nextInt(visible.size());
++                        Integer expected = model.set(physical(model, accepted, index), value);
++                        equal(expected, view.set(index, value), "differential set result");
++                    }
++                    case 2 -> {
++                        int index = random.nextInt(visible.size());
++                        Integer expected = model.remove(physical(model, accepted, index));
++                        equal(expected, view.remove(index), "differential remove result");
++                    }
++                    case 3 -> {
++                        int index = random.nextInt(visible.size() + 1);
++                        ListIterator<Integer> cursor = view.listIterator(index);
++                        for (int back = index - 1; back >= 0; back--) {
++                            check(cursor.hasPrevious(), "missing previous");
++                            equal(visible.get(back), cursor.previous(), "differential backwards");
++                        }
++                        for (Integer expected : visible) {
++                            check(cursor.hasNext(), "missing next");
++                            equal(expected, cursor.next(), "differential forwards");
++                        }
++                        check(!cursor.hasNext(), "extra differential tail");
++                    }
++                    case 4 -> {
++                        ArrayList<Integer> reversed = new ArrayList<>(visible);
++                        Collections.reverse(reversed);
++                        equal(reversed, new ArrayList<>(view.reversed()), "differential reversed");
++                        int from = random.nextInt(visible.size() + 1);
++                        int to = from + random.nextInt(visible.size() - from + 1);
++                        equal(visible.subList(from, to), new ArrayList<>(view.subList(from, to)),
++                                "differential physical span");
++                    }
++                    case 5 -> {
++                        model.add(value);
++                        backing.add(value);
++                        model.add(-1);
++                        backing.add(-1);
++                    }
++                    default -> throw new AssertionError("unreachable operation");
++                }
++            }
++            equal(selected(model, accepted), new ArrayList<>(view), "final differential selection");
++            model.removeIf(accepted);
++            view.clear();
++            equal(model, backing, "differential hidden survivors");
++        }
++    }
++
++    public static void run(int depth, int seeds) throws ReflectiveOperationException {
++        if (depth < 2 || seeds < 1) throw new IllegalArgumentException("depth >= 2 and seeds >= 1 required");
++        checks = 0;
++        deepOwner(depth);
++        callbackContract();
++        cursorContract(depth);
++        rangesAndReadOnly(depth);
++        storedRepresentatives(depth);
++        compiledRegexAndStableSort(depth);
++        differential(seeds);
++        System.out.println("M3DeepFilteredListsProof checks=" + checks + " depth=" + depth + " seeds=" + seeds);
++    }
++
++    public static void main(String[] args) throws ReflectiveOperationException {
++        if (args.length > 0 && args[0].equals("--baseline-overflow")) {
++            int depth = args.length > 1 ? Integer.parseInt(args[1]) : 65536;
++            List<Integer> original = nested(List.of(1), value -> true, depth);
++            expect(StackOverflowError.class, original::size);
++            System.out.println("Original M3FilteredLists overflow reproduced at depth=" + depth);
++            return;
++        }
++        int depth = args.length > 0 ? Integer.parseInt(args[0]) : 65536;
++        int seeds = args.length > 1 ? Integer.parseInt(args[1]) : 192;
++        run(depth, seeds);
++    }
++}

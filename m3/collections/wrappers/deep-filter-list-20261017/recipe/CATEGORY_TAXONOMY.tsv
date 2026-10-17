@@ -1,0 +1,7 @@
+id	category	provider	url	use
+LC284	ITERATOR_LOOKAHEAD	LeetCode	https://leetcode.com/problems/peeking-iterator/	Taxonomy reference only; no challenge text or solution copied
+LC341	DEEP_ORDERED_TRAVERSAL	LeetCode	https://leetcode.com/problems/flatten-nested-list-iterator/description/	Taxonomy reference only; no challenge text or solution copied
+HR_ITERATOR	ENCOUNTER_ORDER_SELECTION	HackerRank	https://www.hackerrank.com/challenges/java-iterator/problem	Taxonomy reference only; no challenge text or solution copied
+HR_SORT	COMPARATOR_ORDERING	HackerRank	https://www.hackerrank.com/challenges/java-sort/problem	Taxonomy reference only; no challenge text or solution copied
+GFG_PREORDER	ORDERED_TREE_TRAVERSAL	GeeksforGeeks	https://www.geeksforgeeks.org/dsa/iterative-preorder-traversal/	Taxonomy reference only; no challenge text or solution copied
+

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/receiver-proof/receiver-cases-6t92r_s5/stale-inputs/crate/receive.py", line 130, in <module>
+    main()
+  File "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/receiver-proof/receiver-cases-6t92r_s5/stale-inputs/crate/receive.py", line 83, in main
+    raise ValueError("recipe changed after SDK qualification: " + path)
+ValueError: recipe changed after SDK qualification: crate/src/main/resources/META-INF/rewrite/m3-deep-filter-list-20261017.yml

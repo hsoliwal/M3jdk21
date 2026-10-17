@@ -1,0 +1,122 @@
+Compiled from "M3FilteredSortedMultisets.java"
+public final class com.m3.collections.M3FilteredSortedMultisets$View<E> extends java.util.AbstractCollection<E> {
+  public com.m3.collections.M3FilteredSortedMultisets$View<E> filtered(java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/function/Predicate;)Lcom/m3/collections/M3FilteredSortedMultisets$View;
+
+  public com.m3.collections.MIndexSpace<E> space();
+    descriptor: ()Lcom/m3/collections/MIndexSpace;
+
+  public java.util.Comparator<? super E> comparator();
+    descriptor: ()Ljava/util/Comparator;
+
+  public boolean readOnly();
+    descriptor: ()Z
+
+  public void forEachIdCount(com.m3.collections.M3IndexSortedMultiset$IdCountConsumer);
+    descriptor: (Lcom/m3/collections/M3IndexSortedMultiset$IdCountConsumer;)V
+
+  public int distinctSize();
+    descriptor: ()I
+
+  public long longSize();
+    descriptor: ()J
+
+  public int size();
+    descriptor: ()I
+
+  public boolean isEmpty();
+    descriptor: ()Z
+
+  public int count(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)I
+
+  public boolean contains(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public boolean add(E);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public int add(E, int);
+    descriptor: (Ljava/lang/Object;I)I
+
+  public boolean addAll(java.util.Collection<? extends E>);
+    descriptor: (Ljava/util/Collection;)Z
+
+  public boolean remove(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public int remove(java.lang.Object, int);
+    descriptor: (Ljava/lang/Object;I)I
+
+  public int setCount(E, int);
+    descriptor: (Ljava/lang/Object;I)I
+
+  public boolean setCount(E, int, int);
+    descriptor: (Ljava/lang/Object;II)Z
+
+  public java.util.Iterator<E> iterator();
+    descriptor: ()Ljava/util/Iterator;
+
+  public void clear();
+    descriptor: ()V
+
+  public boolean removeIf(java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/function/Predicate;)Z
+
+  public boolean removeAll(java.util.Collection<?>);
+    descriptor: (Ljava/util/Collection;)Z
+
+  public boolean retainAll(java.util.Collection<?>);
+    descriptor: (Ljava/util/Collection;)Z
+
+  public com.m3.collections.M3FilteredSortedMultisets$View<E> headMultiset(E, boolean);
+    descriptor: (Ljava/lang/Object;Z)Lcom/m3/collections/M3FilteredSortedMultisets$View;
+
+  public com.m3.collections.M3FilteredSortedMultisets$View<E> tailMultiset(E, boolean);
+    descriptor: (Ljava/lang/Object;Z)Lcom/m3/collections/M3FilteredSortedMultisets$View;
+
+  public com.m3.collections.M3FilteredSortedMultisets$View<E> subMultiset(E, boolean, E, boolean);
+    descriptor: (Ljava/lang/Object;ZLjava/lang/Object;Z)Lcom/m3/collections/M3FilteredSortedMultisets$View;
+
+  public com.m3.collections.M3FilteredSortedMultisets$View<E> descendingMultiset();
+    descriptor: ()Lcom/m3/collections/M3FilteredSortedMultisets$View;
+
+  public com.m3.collections.M3IndexSortedMultiset$Entry<E> firstEntry();
+    descriptor: ()Lcom/m3/collections/M3IndexSortedMultiset$Entry;
+
+  public com.m3.collections.M3IndexSortedMultiset$Entry<E> lastEntry();
+    descriptor: ()Lcom/m3/collections/M3IndexSortedMultiset$Entry;
+
+  public com.m3.collections.M3IndexSortedMultiset$Entry<E> pollFirstEntry();
+    descriptor: ()Lcom/m3/collections/M3IndexSortedMultiset$Entry;
+
+  public com.m3.collections.M3IndexSortedMultiset$Entry<E> pollLastEntry();
+    descriptor: ()Lcom/m3/collections/M3IndexSortedMultiset$Entry;
+
+  public long rankOf(E, boolean);
+    descriptor: (Ljava/lang/Object;Z)J
+
+  public E elementAtOccurrence(long);
+    descriptor: (J)Ljava/lang/Object;
+
+  public java.util.Spliterator<E> spliterator();
+    descriptor: ()Ljava/util/Spliterator;
+
+  public void forEach(java.util.function.Consumer<? super E>);
+    descriptor: (Ljava/util/function/Consumer;)V
+
+  public java.util.NavigableSet<E> elementSet();
+    descriptor: ()Ljava/util/NavigableSet;
+
+  public java.util.Set<com.m3.collections.M3IndexSortedMultiset$Entry<E>> entrySet();
+    descriptor: ()Ljava/util/Set;
+
+  public boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public int hashCode();
+    descriptor: ()I
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+}

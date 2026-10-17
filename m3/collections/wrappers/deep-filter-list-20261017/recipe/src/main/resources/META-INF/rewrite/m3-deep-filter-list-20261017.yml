@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.DeepFilteredListComposition20261017
+displayName: Extend ordered deep predicate composition across existing filtered wrappers
+description: >-
+  Transfer the exact first-party binary-carry predicate atom into the current
+  wrapper owners, preserve the writable-map and counted sorted-multiset receiver
+  supersets, and extend the existing explicit List and sorted-multiset views
+  without adding a public API or storage hierarchy.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-deep-filter-list-20261017
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-deep-filter-list-20261017

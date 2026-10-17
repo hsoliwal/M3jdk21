@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/receiver-proof/receiver-cases-6t92r_s5/source-drift/crate/receive.py", line 130, in <module>
+    main()
+  File "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/receiver-proof/receiver-cases-6t92r_s5/source-drift/crate/receive.py", line 107, in main
+    raise ValueError("target source drift: " + path)
+ValueError: target source drift: m3/docs/name-mapping.json

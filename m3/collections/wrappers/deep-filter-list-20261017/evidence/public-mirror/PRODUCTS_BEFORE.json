@@ -1,0 +1,67 @@
+{
+  "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java": {
+    "sha256": "5da6837eee9112cb97725efff8fbcc1b95f455761d923f643e9a1158ba208989",
+    "mode": 420,
+    "mtime_ns": 1792233577355938057
+  },
+  "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java": {
+    "sha256": "c6db65bc2408ea44ef4395220f862b3cad9d824f1ee09558101381cb535c4b48",
+    "mode": 420,
+    "mtime_ns": 1792233577357071040
+  },
+  "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java": {
+    "sha256": "b6733c9cd447826710feaf2480febdaa9091f6367fd7ff3195f339cc6b08efcf",
+    "mode": 420,
+    "mtime_ns": 1792233577357244611
+  },
+  "m3/collections/src/main/java/com/m3/collections/M3FilteredSortedMultisets.java": {
+    "sha256": "2072782ece0252c9132f18ae9f10a6bca411c46c567b89ff98191006118e86e5",
+    "mode": 420,
+    "mtime_ns": 1792233577357362468
+  },
+  "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java": {
+    "sha256": "362dc9caf845360782b0c313ff871d35badd62883b8695a4c31a937f22f370b6",
+    "mode": 420,
+    "mtime_ns": 1792233577358091895
+  },
+  "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java": {
+    "sha256": "e21114b06618ba15d0808b06d1c9be2276ac0fff355e2cb9da5f7b7b0de58c04",
+    "mode": 420,
+    "mtime_ns": 1792233577358191755
+  },
+  "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredSortedMultisetsProof.java": {
+    "sha256": "d50e1e6554a40de27d9d2c41ec5ab352302850753d0bf0fb90dfcf8bec92e015",
+    "mode": 420,
+    "mtime_ns": 1792233577358282822
+  },
+  "m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py": {
+    "sha256": "8eadcc8aef4de85b8d262fea018f60d21d690ddbe31ddfde0b326ebbeeb8e102",
+    "mode": 420,
+    "mtime_ns": 1792233577357619254
+  },
+  "m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py": {
+    "sha256": "5a7049e8356e83451fa19537688c39f9704cb659b864c5debdb6f10aa1e4e638",
+    "mode": 420,
+    "mtime_ns": 1792233577357712034
+  },
+  "m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh": {
+    "sha256": "3927a4956743124e5efa5e1b7a2ef61db63c38d8ba41b77be9d66bc52832b914",
+    "mode": 493,
+    "mtime_ns": 1792233577357812725
+  },
+  "m3/collections/wrappers/index-counted-receiver-20261017/verify.sh": {
+    "sha256": "3ce1c8c93d7a8f0e0a06beca977dc236622633f932a7a30252f1560bd45d0373",
+    "mode": 493,
+    "mtime_ns": 1792233577357948179
+  },
+  "m3/collections/wrappers/writable-map-avl-20261017/verify.sh": {
+    "sha256": "e61fcdec0861f1796245edf4760b7182a29c10ddf4c423b478bd99efb69b4ebf",
+    "mode": 493,
+    "mtime_ns": 1792233577358447279
+  },
+  "m3/docs/name-mapping.json": {
+    "sha256": "8a734da492905c0d4bdc3d94fd3f41b4fefb3b1828a6b3fe15dcaa372e1e7adf",
+    "mode": 420,
+    "mtime_ns": 1792233577358627981
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "M3_WRAPPER_MANIFEST_SEALS_V1",
+  "manifests": {
+    "java": {
+      "sha256": "d4f4b345672f0e3f6d7e71f5dd23f6e011ed7f7e7d9e356caf67730e61573cad",
+      "count": 7
+    },
+    "text": {
+      "sha256": "ee69271da7d7596726e31e3d0cdbd7bec2501aaa3ba576be235a48d2f28ca9f9",
+      "count": 6
+    }
+  }
+}

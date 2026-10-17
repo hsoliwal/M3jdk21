@@ -1,0 +1,27 @@
+{
+  "schema": "M3_WRAPPER_PORTABLE_HANDOFF_CHECK_V1",
+  "status": "PASS",
+  "checks": [
+    {
+      "lane": "java",
+      "rows": 5,
+      "sha256": "c5169cd31a7881cc78c95ad2b7fa63d67ebb46565f97b340876296efa2250442",
+      "original_core_preserved": true
+    },
+    {
+      "lane": "text",
+      "rows": 5,
+      "sha256": "47a146476db7cfe6058f29824b393b88a6c9654706301c369c88c9ef345ab164",
+      "original_core_preserved": true
+    },
+    {
+      "stale_prior_binding_refused": true,
+      "reason": "missing source input: receive.py"
+    },
+    {
+      "initial_fresh_maven_all_16_pass": true,
+      "binding_verified_for_initial_schema": true
+    }
+  ],
+  "final_canonical_schema_run_owner": "/root"
+}

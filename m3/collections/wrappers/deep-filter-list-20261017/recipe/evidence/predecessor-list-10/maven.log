@@ -1,0 +1,163 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----< com.synexia.verification:m3-deep-filter-list-recipe-proof >------
+[INFO] Building m3-deep-filter-list-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-deep-filter-list-recipe-proof ---
+[INFO] Copying 19 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-deep-filter-list-recipe-proof ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-deep-filter-list-recipe-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-deep-filter-list-recipe-proof ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-deep-filter-list-recipe-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.M3TaskRecipeTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 28.60 s -- in com.synexia.rewrite.M3TaskRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ m3-deep-filter-list-recipe-proof ---
+[INFO] Building jar: /workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017/target/m3-deep-filter-list-recipe-proof-1.jar
+[INFO] 
+[INFO] --- exec:3.5.0:exec (verify-wrapper-sdk-contract) @ m3-deep-filter-list-recipe-proof ---
+strict-sdk-java21 exit=0 
+list-tiered-depth65536 exit=0 M3DeepFilteredListsProof checks=55469 depth=65536 seeds=192
+donor-tiered-depth65536 exit=0 M3_DEEP_FILTER_PASS checks=1312160 depth=65536 seeds=192
+list-interpreter-depth8192 exit=0 M3DeepFilteredListsProof checks=55469 depth=8192 seeds=192
+donor-interpreter-depth8192 exit=0 M3_DEEP_FILTER_PASS checks=165280 depth=8192 seeds=192
+original-owner-strict-compile exit=0 
+original-list-overflow exit=0 Original M3FilteredLists overflow reproduced at depth=65536
+original-public-api-M3CollectionViews exit=0 Compiled from "M3CollectionViews.java"
+public final class com.m3.collections.M3CollectionViews {
+  public static <E> java.util.Collection<E> filtered(java.util.Collection<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/Collection;
+
+  public static <E> java.util.Set<E> filtered(java.util.Set<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Set;Ljava/util/function/Predicate;)Ljava/util/Set;
+
+  public static <E> java.util.SortedSet<E> filtered(java.util.SortedSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/SortedSet;Ljava/util/function/Predicate;)Ljava/util/SortedSet;
+
+  public static <E> java.util.NavigableSet<E> filtered(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/NavigableSet;Ljava/util/function/Predicate;)Ljava/util/NavigableSet;
+
+  public static <E> java.util.List<E> sortedSnapshot(java.util.Collection<? extends E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/Comparator;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSortedSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;Ljava/util/Comparator;)Ljava/util/List;
+}
+sdk-public-api-M3CollectionViews exit=0 Compiled from "M3CollectionViews.java"
+public final class com.m3.collections.M3CollectionViews {
+  public static <E> java.util.Collection<E> filtered(java.util.Collection<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/Collection;
+
+  public static <E> java.util.Set<E> filtered(java.util.Set<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Set;Ljava/util/function/Predicate;)Ljava/util/Set;
+
+  public static <E> java.util.SortedSet<E> filtered(java.util.SortedSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/SortedSet;Ljava/util/function/Predicate;)Ljava/util/SortedSet;
+
+  public static <E> java.util.NavigableSet<E> filtered(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/NavigableSet;Ljava/util/function/Predicate;)Ljava/util/NavigableSet;
+
+  public static <E> java.util.List<E> sortedSnapshot(java.util.Collection<? extends E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/Comparator;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSortedSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;Ljava/util/Comparator;)Ljava/util/List;
+}
+original-public-api-M3FilteredMaps exit=0 Compiled from "M3FilteredMaps.java"
+public final class com.m3.collections.M3FilteredMaps {
+  public static <K, V> java.util.Map<K, V> filtered(java.util.Map<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/Map;Ljava/util/function/BiPredicate;)Ljava/util/Map;
+
+  public static <K, V> java.util.SortedMap<K, V> filtered(java.util.SortedMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/SortedMap;Ljava/util/function/BiPredicate;)Ljava/util/SortedMap;
+
+  public static <K, V> java.util.NavigableMap<K, V> filtered(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/NavigableMap;Ljava/util/function/BiPredicate;)Ljava/util/NavigableMap;
+}
+sdk-public-api-M3FilteredMaps exit=0 Compiled from "M3FilteredMaps.java"
+public final class com.m3.collections.M3FilteredMaps {
+  public static <K, V> java.util.Map<K, V> filtered(java.util.Map<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/Map;Ljava/util/function/BiPredicate;)Ljava/util/Map;
+
+  public static <K, V> java.util.SortedMap<K, V> filtered(java.util.SortedMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/SortedMap;Ljava/util/function/BiPredicate;)Ljava/util/SortedMap;
+
+  public static <K, V> java.util.NavigableMap<K, V> filtered(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/NavigableMap;Ljava/util/function/BiPredicate;)Ljava/util/NavigableMap;
+}
+original-public-api-M3FilteredLists exit=0 Compiled from "M3FilteredLists.java"
+public final class com.m3.collections.M3FilteredLists {
+  public static <E> java.util.List<E> filtered(java.util.List<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/List;Ljava/util/function/Predicate;)Ljava/util/List;
+
+  public static <E> java.util.List<E> readOnlyFiltered(java.util.List<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/List;Ljava/util/function/Predicate;)Ljava/util/List;
+}
+sdk-public-api-M3FilteredLists exit=0 Compiled from "M3FilteredLists.java"
+public final class com.m3.collections.M3FilteredLists {
+  public static <E> java.util.List<E> filtered(java.util.List<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/List;Ljava/util/function/Predicate;)Ljava/util/List;
+
+  public static <E> java.util.List<E> readOnlyFiltered(java.util.List<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/List;Ljava/util/function/Predicate;)Ljava/util/List;
+}
+successor-refusal-proof exit=0 M3_DEEP_FILTER_SUCCESSOR_PROOF_PASS cases=17 accepted=2 refused=15 no_write=17
+retained-list-int-jni-five-collectors exit=0 M3_DEEP_FILTER_SUCCESSOR_PASS edge=filtered-list java_targets=5 historical=7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101 current=c6db65bc2408ea44ef4395220f862b3cad9d824f1ee09558101381cb535c4b48
+M3_JDK21_FILTERED_MAT_SOURCE_SEAL_PASS outputs=11
+PASS M3FilteredListsContract operations=32452 checks=755754
+PASS M3FilteredListsEdges checks=40
+PASS M3FilteredListsWorkProof rows=65537 predicate_calls=65538 split_payload=0
+M3_SIGNAL_SORT_PASS rounds=320
+DENSE_BYTES_PER_CALL=65552 EMPTY_BYTES_PER_CALL=65568
+MAT_INT_FILTER_DENSE_PASS checks=407
+DENSE_BYTES_PER_CALL=65552 EMPTY_BYTES_PER_CALL=65568
+MAT_INT_FILTER_DENSE_PASS checks=407
+DENSE_BYTES_PER_CALL=65552 EMPTY_BYTES_PER_CALL=65568
+MAT_INT_FILTER_DENSE_PASS checks=407
+DENSE_BYTES_PER_CALL=65552 EMPTY_BYTES_PER_CALL=65568
+MAT_INT_FILTER_DENSE_PASS checks=407
+DENSE_BYTES_PER_CALL=65552 EMPTY_BYTES_PER_CALL=65568
+MAT_INT_FILTER_DENSE_PASS checks=407
+DENSE_BYTES_PER_CALL=65552 EMPTY_BYTES_PER_CALL=65568
+MAT_INT_FILTER_DENSE_PASS checks=407
+retained-writable-map-avl exit=0 M3_DEEP_FILTER_SUCCESSOR_PASS edge=writable-map java_targets=5 historical=538f62a64fa5cbe1b0dd37251a7652121306d17365a7c5c111cb0d5ee7c52200 current=b6733c9cd447826710feaf2480febdaa9091f6367fd7ff3195f339cc6b08efcf
+M3_WRITABLE_MAP_SHA256_PASS rows=5
+M3_WRITABLE_MAP_OLD_PUBLIC_API_UNCHANGED
+M3_SORTED_BATCH_PUTALL_RUNTIME_PASS checks=137492 native=false
+M3_SORTED_BATCH_PUTALL_RUNTIME_PASS checks=137492 native=false
+M3_WRITABLE_MAP_JAVA21_PASS
+SDK_WRAPPER_RUNTIME_VALIDATION_COMPLETE commands=16 parent_inputs=34
+[INFO] 
+[INFO] --- exec:3.5.0:exec (verify-sdk-receiver-integrity) @ m3-deep-filter-list-recipe-proof ---
+M3_WRAPPER_RECEIVER_CONTRACT_PASS cases=7 targets=10 actual_sdk_results=true
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:12 min
+[INFO] Finished at: 2026-10-17T03:25:26-06:00
+[INFO] ------------------------------------------------------------------------

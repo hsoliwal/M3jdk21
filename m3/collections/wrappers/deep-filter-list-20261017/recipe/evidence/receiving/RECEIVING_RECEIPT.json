@@ -1,0 +1,137 @@
+{
+  "schema": "M3_WRAPPER_FROZEN_RECEIVING_V1",
+  "status": "PASS",
+  "source_crate": "/tmp/m3-publication/private/synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_worktree": "/workspace/scratch/edcb3bae74f7/m3-wrappers-final",
+  "target_parent": "37eba37dcbdf0c0222b494d07ba2fca401ce248f",
+  "frozen_input_inventory_sha256": "b344735609c47ca37323952ff8e79d83a8fe0fff080d7a6bdaf6e9a0bdb0fd3e",
+  "sdk": {
+    "counts": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "original_qualified_hashes_match": true,
+    "SDK_INPUTS.tsv": "314d9dd74e41889f180a806b3cc0670da1b63eaacc764925fea0becdbeee676a",
+    "SDK_RESULTS.tsv": "8a01499b4377ee7d6dd5e03ff252781d98ff67be0c8c77bd599c7fc8b8621985",
+    "SDK_TESTS.xml": "223490a4c139c5c0b05dfbbda76984d0a4c8f4470762c6aa9d26edafc4ed7469"
+  },
+  "runtime_retesting_performed": false,
+  "retained_qualified_contract_commands": 24,
+  "parent_inputs": {
+    "count": 61,
+    "inventory_sha256": "d31df2309df5e26ef2363d5908818b5a1a743e573dbd0ac0d46eec57a3a9c1d0",
+    "all_bytes_modes_mtimes_unchanged": true
+  },
+  "receiving_operations": [
+    {
+      "operation": "check",
+      "mode": "check",
+      "changes": 13,
+      "exit_code": 0,
+      "stdout_sha256": "d915c45968879e13792c752d82e2f67e6ef99f33c86015a5c042989920dde089",
+      "stderr_bytes": 0
+    },
+    {
+      "operation": "apply",
+      "mode": "apply",
+      "changes": 13,
+      "exit_code": 0,
+      "stdout_sha256": "d248a60a647c04fe988672e461809274b6d84a2b8e37312cc1b9ebf92dc9ca52",
+      "stderr_bytes": 0
+    },
+    {
+      "operation": "second-apply",
+      "mode": "apply",
+      "changes": 0,
+      "exit_code": 0,
+      "stdout_sha256": "8081d6755e75f540b502250571cef4df47e45f8b6864278a41d96ee5aa58cd1f",
+      "stderr_bytes": 0
+    }
+  ],
+  "check_all_74_bytes_modes_mtimes_unchanged": true,
+  "second_apply_all_74_bytes_modes_mtimes_unchanged": true,
+  "only_the_13_reviewed_targets_changed": true,
+  "target_outputs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "pre_sha256": "e51e894c15dd0f6163cd8129fd20748660332b58f6fd8dc6e749fdec49e3c5c6",
+      "post_sha256": "5da6837eee9112cb97725efff8fbcc1b95f455761d923f643e9a1158ba208989",
+      "mode": "0644"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "pre_sha256": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101",
+      "post_sha256": "c6db65bc2408ea44ef4395220f862b3cad9d824f1ee09558101381cb535c4b48",
+      "mode": "0644"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java",
+      "pre_sha256": "538f62a64fa5cbe1b0dd37251a7652121306d17365a7c5c111cb0d5ee7c52200",
+      "post_sha256": "b6733c9cd447826710feaf2480febdaa9091f6367fd7ff3195f339cc6b08efcf",
+      "mode": "0644"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredSortedMultisets.java",
+      "pre_sha256": "7decb8452352f7b2117d72ee6aa186f66870d04cd5af05818d3374151767bda8",
+      "post_sha256": "2072782ece0252c9132f18ae9f10a6bca411c46c567b89ff98191006118e86e5",
+      "mode": "0644"
+    },
+    {
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "362dc9caf845360782b0c313ff871d35badd62883b8695a4c31a937f22f370b6",
+      "mode": "0644"
+    },
+    {
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "e21114b06618ba15d0808b06d1c9be2276ac0fff355e2cb9da5f7b7b0de58c04",
+      "mode": "0644"
+    },
+    {
+      "path": "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredSortedMultisetsProof.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "d50e1e6554a40de27d9d2c41ec5ab352302850753d0bf0fb90dfcf8bec92e015",
+      "mode": "0644"
+    },
+    {
+      "path": "m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "8eadcc8aef4de85b8d262fea018f60d21d690ddbe31ddfde0b326ebbeeb8e102",
+      "mode": "0644"
+    },
+    {
+      "path": "m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "5a7049e8356e83451fa19537688c39f9704cb659b864c5debdb6f10aa1e4e638",
+      "mode": "0644"
+    },
+    {
+      "path": "m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh",
+      "pre_sha256": "c8eaf88095e4f507278a5081b1177548951f54a0fc34f906f3e9e4683deeef1f",
+      "post_sha256": "3927a4956743124e5efa5e1b7a2ef61db63c38d8ba41b77be9d66bc52832b914",
+      "mode": "0755"
+    },
+    {
+      "path": "m3/collections/wrappers/index-counted-receiver-20261017/verify.sh",
+      "pre_sha256": "26c217d87efb722bcf98f52ec0c53cd71baea8aa7205a0c02c343a8156312a40",
+      "post_sha256": "3ce1c8c93d7a8f0e0a06beca977dc236622633f932a7a30252f1560bd45d0373",
+      "mode": "0755"
+    },
+    {
+      "path": "m3/collections/wrappers/writable-map-avl-20261017/verify.sh",
+      "pre_sha256": "9ac451c587b2cbf08fff7981ec3c2793b9914b97cb50760c813bc41648cb6d21",
+      "post_sha256": "e61fcdec0861f1796245edf4760b7182a29c10ddf4c423b478bd99efb69b4ebf",
+      "mode": "0755"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "pre_sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "post_sha256": "8a734da492905c0d4bdc3d94fd3f41b4fefb3b1828a6b3fe15dcaa372e1e7adf",
+      "mode": "0644"
+    }
+  ]
+}

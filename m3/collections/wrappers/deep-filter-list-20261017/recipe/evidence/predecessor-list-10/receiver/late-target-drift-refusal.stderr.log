@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017/target/receiver-proof/receiver-cases-vz45eci2/source-drift/crate/receive.py", line 130, in <module>
+    main()
+  File "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017/target/receiver-proof/receiver-cases-vz45eci2/source-drift/crate/receive.py", line 107, in main
+    raise ValueError("target source drift: " + path)
+ValueError: target source drift: m3/docs/name-mapping.json

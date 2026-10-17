@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017/target/receiver-proof/receiver-cases-vz45eci2/symlink-parent/crate/receive.py", line 130, in <module>
+    main()
+  File "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017/target/receiver-proof/receiver-cases-vz45eci2/symlink-parent/crate/receive.py", line 104, in main
+    receiving = contained(target, path)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017/target/receiver-proof/receiver-cases-vz45eci2/symlink-parent/crate/receive.py", line 42, in contained
+    raise ValueError("symlink target or parent is not admitted: " + relative)
+ValueError: symlink target or parent is not admitted: m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java

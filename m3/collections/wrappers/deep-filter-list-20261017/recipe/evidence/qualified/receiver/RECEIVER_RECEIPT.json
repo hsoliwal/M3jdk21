@@ -1,0 +1,76 @@
+{
+  "schema": "M3_WRAPPER_RECEIVER_CONTRACT_V1",
+  "status": "PASS",
+  "crate": "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs",
+  "recipe_owner": "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes",
+  "driver_sha256": "3a15c7b7d156bc5a2935ff24c7d6166689ba245d451e4d80458bece39b5cf889",
+  "driver_in_sdk_source_binding": true,
+  "receiver_sha256": "24ce6011c0bc7d89fc863f8f809740b24d943cb40c5aaf9aba03adf0f222dadf",
+  "sdk_input_binding_sha256": "314d9dd74e41889f180a806b3cc0670da1b63eaacc764925fea0becdbeee676a",
+  "sdk_results_sha256": "8a01499b4377ee7d6dd5e03ff252781d98ff67be0c8c77bd599c7fc8b8621985",
+  "qualified_sdk_targets": {
+    "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java": "5da6837eee9112cb97725efff8fbcc1b95f455761d923f643e9a1158ba208989",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java": "c6db65bc2408ea44ef4395220f862b3cad9d824f1ee09558101381cb535c4b48",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java": "b6733c9cd447826710feaf2480febdaa9091f6367fd7ff3195f339cc6b08efcf",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredSortedMultisets.java": "2072782ece0252c9132f18ae9f10a6bca411c46c567b89ff98191006118e86e5",
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java": "362dc9caf845360782b0c313ff871d35badd62883b8695a4c31a937f22f370b6",
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java": "e21114b06618ba15d0808b06d1c9be2276ac0fff355e2cb9da5f7b7b0de58c04",
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredSortedMultisetsProof.java": "d50e1e6554a40de27d9d2c41ec5ab352302850753d0bf0fb90dfcf8bec92e015",
+    "m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py": "8eadcc8aef4de85b8d262fea018f60d21d690ddbe31ddfde0b326ebbeeb8e102",
+    "m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py": "5a7049e8356e83451fa19537688c39f9704cb659b864c5debdb6f10aa1e4e638",
+    "m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh": "3927a4956743124e5efa5e1b7a2ef61db63c38d8ba41b77be9d66bc52832b914",
+    "m3/collections/wrappers/index-counted-receiver-20261017/verify.sh": "3ce1c8c93d7a8f0e0a06beca977dc236622633f932a7a30252f1560bd45d0373",
+    "m3/collections/wrappers/writable-map-avl-20261017/verify.sh": "e61fcdec0861f1796245edf4760b7182a29c10ddf4c423b478bd99efb69b4ebf",
+    "m3/docs/name-mapping.json": "8a734da492905c0d4bdc3d94fd3f41b4fefb3b1828a6b3fe15dcaa372e1e7adf"
+  },
+  "real_target_files_written": false,
+  "canonical_files_written": false,
+  "cases": [
+    {
+      "case": "check-no-write",
+      "exit_code": 0,
+      "expected_refusal": null,
+      "all_target_bytes_and_mtimes_unchanged": true
+    },
+    {
+      "case": "apply-all-thirteen",
+      "exit_code": 0,
+      "expected_refusal": null,
+      "exact_sdk_outputs": 13,
+      "existing_modes_preserved": true,
+      "unrelated_file_unchanged": true
+    },
+    {
+      "case": "second-apply-fixed-point",
+      "exit_code": 0,
+      "expected_refusal": null,
+      "all_target_bytes_and_mtimes_unchanged": true
+    },
+    {
+      "case": "late-target-drift-refusal",
+      "exit_code": 1,
+      "expected_refusal": "target source drift: m3/docs/name-mapping.json",
+      "drift_target": "m3/docs/name-mapping.json",
+      "all_target_bytes_and_mtimes_unchanged": true
+    },
+    {
+      "case": "stale-sdk-inputs-refusal",
+      "exit_code": 1,
+      "expected_refusal": "recipe changed after SDK qualification: crate/src/main/resources/META-INF/rewrite/m3-deep-filter-list-20261017.yml",
+      "all_target_bytes_and_mtimes_unchanged": true
+    },
+    {
+      "case": "altered-sdk-result-refusal",
+      "exit_code": 1,
+      "expected_refusal": "SDK result changed after qualification: m3/docs/name-mapping.json",
+      "all_target_bytes_and_mtimes_unchanged": true
+    },
+    {
+      "case": "symlink-parent-refusal",
+      "exit_code": 1,
+      "expected_refusal": "symlink target or parent is not admitted:",
+      "symlink_within_target_root": true,
+      "all_target_bytes_and_mtimes_unchanged": true
+    }
+  ]
+}

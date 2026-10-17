@@ -1,0 +1,8 @@
+Compiled from "M3FilteredSortedMultisets.java"
+public final class com.m3.collections.M3FilteredSortedMultisets {
+  public static <E> com.m3.collections.M3FilteredSortedMultisets$View<E> filtered(com.m3.collections.M3IndexSortedMultiset<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Lcom/m3/collections/M3IndexSortedMultiset;Ljava/util/function/Predicate;)Lcom/m3/collections/M3FilteredSortedMultisets$View;
+
+  public static <E> com.m3.collections.M3FilteredSortedMultisets$View<E> readOnlyFiltered(com.m3.collections.M3IndexSortedMultiset<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Lcom/m3/collections/M3IndexSortedMultiset;Ljava/util/function/Predicate;)Lcom/m3/collections/M3FilteredSortedMultisets$View;
+}

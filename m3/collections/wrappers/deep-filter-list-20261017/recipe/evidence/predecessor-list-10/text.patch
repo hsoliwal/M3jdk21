@@ -1,0 +1,314 @@
+diff --git a/m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py b/m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py
+new file mode 100644
+index 0000000..28eb5d5
+--- /dev/null
++++ b/m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py
+@@ -0,0 +1,98 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++#!/usr/bin/env python3
++# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++# SPDX-License-Identifier: Apache-2.0
++"""Verify two exact historical-to-current recipe edges without rewriting receipts."""
++import argparse
++import hashlib
++from pathlib import Path
++
++
++TASK = "m3/collections/wrappers/deep-filter-list-20261017"
++CURRENT = TASK + "/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-deep-filter-list-20261017"
++CURRENT_MANIFEST = "c5169cd31a7881cc78c95ad2b7fa63d67ebb46565f97b340876296efa2250442"
++HISTORICAL_ROOT = "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/"
++EDGES = {
++    "filtered-list": (
++        "m3jdk21-filtered-mat-receiver-20261017",
++        "0d1ccc5298cab01e0717facd0d2054a98973fc8f0628b1bb504d2461be638fa3",
++        "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
++    ),
++    "writable-map": (
++        "m3jdk21-writable-map-avl-20261017",
++        "a9ae10da0ce772603996736b73c42d027e7a1b4b7879c105bb237fcd8c594e38",
++        "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java",
++    ),
++}
++
++
++def sha(data):
++    return hashlib.sha256(data).hexdigest()
++
++
++def checked_file(root, relative):
++    path = root / relative
++    cursor = path
++    while cursor != root:
++        if cursor.is_symlink():
++            raise ValueError("symlinked recipe input: " + relative)
++        if root not in cursor.parents:
++            raise ValueError("recipe path escaped root: " + relative)
++        cursor = cursor.parent
++    if not path.is_file():
++        raise ValueError("missing recipe input: " + relative)
++    return path.read_bytes()
++
++
++def manifest(root, directory, expected):
++    data = checked_file(root, directory + "/manifest.tsv")
++    if sha(data) != expected:
++        raise ValueError("exact manifest drift: " + directory)
++    rows = [line.split("\t") for line in data.decode("utf-8").splitlines()]
++    if any(len(row) != 4 for row in rows):
++        raise ValueError("manifest row width")
++    paths = [row[0] for row in rows]
++    if paths != sorted(set(paths)):
++        raise ValueError("manifest duplicate or unsorted path")
++    return {row[0]: row[1:] for row in rows}
++
++
++def verify(root, edge):
++    root = root.resolve(strict=True)
++    current = manifest(root, CURRENT, CURRENT_MANIFEST)
++    if len(current) != 5:
++        raise ValueError("incomplete current payload")
++    for path, (before, after, filename) in current.items():
++        payload = checked_file(root, CURRENT + "/" + filename)
++        if sha(payload) != after:
++            raise ValueError("current template drift: " + path)
++        if checked_file(root, path) != payload:
++            raise ValueError("current output drift: " + path)
++        if before != "ABSENT" and sha(checked_file(root, CURRENT + "/pre/" + filename)) != before:
++            raise ValueError("current preimage drift: " + path)
++
++    crate, historical_manifest, path = EDGES[edge]
++    directory = HISTORICAL_ROOT + crate
++    historical = manifest(root, directory, historical_manifest)
++    _, old_after, old_filename = historical[path]
++    new_before, new_after, new_filename = current[path]
++    original = checked_file(root, directory + "/" + old_filename)
++    if sha(original) != old_after:
++        raise ValueError("historical template drift: " + path)
++    if old_after != new_before:
++        raise ValueError("recipe edge does not meet: " + path)
++    if original != checked_file(root, CURRENT + "/pre/" + new_filename):
++        raise ValueError("historical bytes do not equal current preimage: " + path)
++    print("M3_DEEP_FILTER_SUCCESSOR_PASS edge=" + edge + " java_targets=5"
++          + " historical=" + old_after + " current=" + new_after)
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--root", type=Path, required=True)
++    parser.add_argument("--edge", choices=tuple(EDGES), required=True)
++    args = parser.parse_args()
++    verify(args.root, args.edge)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py b/m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py
+new file mode 100644
+index 0000000..e5e26b8
+--- /dev/null
++++ b/m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py
+@@ -0,0 +1,105 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++#!/usr/bin/env python3
++# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++# SPDX-License-Identifier: Apache-2.0
++"""Finite acceptance, drift-refusal and no-write checks for the emitted successor."""
++import argparse
++import hashlib
++from pathlib import Path
++import shutil
++import subprocess
++import sys
++import tempfile
++
++
++TASK = "m3/collections/wrappers/deep-filter-list-20261017"
++CURRENT = TASK + "/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-deep-filter-list-20261017"
++HISTORY = "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/"
++CRATES = ("m3jdk21-filtered-mat-receiver-20261017", "m3jdk21-writable-map-avl-20261017")
++LIST = "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java"
++MAP = "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java"
++COLLECTION = "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java"
++
++
++def inventory(root):
++    return {
++        str(path.relative_to(root)): (hashlib.sha256(path.read_bytes()).hexdigest(), path.stat().st_mtime_ns)
++        for path in root.rglob("*") if path.is_file()
++    }
++
++
++def fixture(root, target):
++    shutil.copytree(root / CURRENT, target / CURRENT)
++    for crate in CRATES:
++        shutil.copytree(root / HISTORY / crate, target / HISTORY / crate)
++    helper = target / TASK / "verify_successor.py"
++    helper.parent.mkdir(parents=True, exist_ok=True)
++    shutil.copyfile(root / TASK / "verify_successor.py", helper)
++    for line in (target / CURRENT / "manifest.tsv").read_text().splitlines():
++        path, _, _, filename = line.split("\t")
++        output = target / path
++        output.parent.mkdir(parents=True, exist_ok=True)
++        shutil.copyfile(target / CURRENT / filename, output)
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--root", type=Path, required=True)
++    args = parser.parse_args()
++    root = args.root.resolve(strict=True)
++    cases = []
++    with tempfile.TemporaryDirectory(prefix="m3-deep-filter-successor-proof-") as temporary:
++        base = Path(temporary) / "base"
++        fixture(root, base)
++
++        def run(label, mutate, expected, edge="filtered-list"):
++            target = Path(temporary) / label
++            shutil.copytree(base, target)
++            mutate(target)
++            before = inventory(target)
++            result = subprocess.run(
++                [sys.executable, str(target / TASK / "verify_successor.py"),
++                 "--root", str(target), "--edge", edge],
++                text=True, capture_output=True, timeout=10)
++            if (result.returncode == 0) != expected:
++                raise AssertionError(label + "\n" + result.stdout + result.stderr)
++            if expected and "M3_DEEP_FILTER_SUCCESSOR_PASS edge=" + edge not in result.stdout:
++                raise AssertionError("missing acceptance receipt: " + label)
++            if inventory(target) != before:
++                raise AssertionError("validator wrote input: " + label)
++            cases.append({"label": label, "accepted": expected})
++
++        def alter(target, path):
++            file = target / path
++            file.write_bytes(file.read_bytes() + b"\n# drift\n")
++
++        run("list-exact-successor", lambda target: None, True)
++        run("map-exact-successor", lambda target: None, True, "writable-map")
++        run("missing-list", lambda target: (target / LIST).unlink(), False)
++        run("missing-map", lambda target: (target / MAP).unlink(), False, "writable-map")
++        run("missing-companion", lambda target: (target / COLLECTION).unlink(), False)
++        run("changed-list", lambda target: alter(target, LIST), False)
++        run("changed-map", lambda target: alter(target, MAP), False, "writable-map")
++        run("changed-companion", lambda target: alter(target, COLLECTION), False)
++        run("changed-current-manifest", lambda target: alter(target, CURRENT + "/manifest.tsv"), False)
++        run("changed-current-payload", lambda target: alter(target, CURRENT + "/M3FilteredLists.java.txt"), False)
++        run("changed-current-preimage", lambda target: alter(target, CURRENT + "/pre/M3FilteredLists.java.txt"), False)
++        run("changed-history-manifest",
++            lambda target: alter(target, HISTORY + CRATES[0] + "/manifest.tsv"), False)
++        run("changed-history-payload",
++            lambda target: alter(target, HISTORY + CRATES[1] + "/M3FilteredMaps.java.txt"),
++            False, "writable-map")
++        run("historical-output-is-not-current",
++            lambda target: shutil.copyfile(target / CURRENT / "pre/M3FilteredLists.java.txt", target / LIST),
++            False)
++        run("unknown-edge", lambda target: None, False, "unqualified-owner")
++        proof = "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java"
++        run("missing-proof-output", lambda target: (target / proof).unlink(), False)
++        run("changed-proof-output", lambda target: alter(target, proof), False)
++    accepted = sum(case["accepted"] for case in cases)
++    print("M3_DEEP_FILTER_SUCCESSOR_PROOF_PASS cases=" + str(len(cases))
++          + " accepted=" + str(accepted) + " refused=" + str(len(cases) - accepted)
++          + " no_write=" + str(len(cases)))
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh b/m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh
+index b994f1a..e3cc9b5 100644
+--- a/m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh
++++ b/m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh
+@@ -4,8 +4,11 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ repo=$(CDPATH= cd -- "$(dirname -- "$0")/../../../.." && pwd)
+ python3 - "$repo" <<'PY'
+ from pathlib import Path
+-import hashlib, sys
++import hashlib, subprocess, sys
+ root=Path(sys.argv[1]).resolve()
++helper=root/'m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py'
++if hashlib.sha256(helper.read_bytes()).hexdigest()!='1876eb2150ddb7672bb42a0579ad6d19b32a6227c2bf38c5f74c964b5507d410':
++    raise SystemExit('M3_DEEP_FILTER_SUCCESSOR_VALIDATOR_DRIFT')
+ resources=root/'m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite'
+ total=0
+ for kind,crate in [('hash-pinned-java','m3jdk21-filtered-mat-receiver-20261017'),
+@@ -18,7 +21,10 @@
+         actual=(root/path).read_bytes()
+         assert before=='ABSENT',(path,'non-additive preimage')
+         assert hashlib.sha256(candidate).hexdigest()==after,(path,'bad recipe template')
+-        assert candidate==actual,(path,'target differs from canonical recipe')
++        if path=='m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java':
++            subprocess.run([sys.executable,str(helper),'--root',str(root),'--edge','filtered-list'],check=True)
++        else:
++            assert candidate==actual,(path,'target differs from canonical recipe')
+         rows.append(path);total+=1
+     assert rows==sorted(set(rows)) and len(rows)==(10 if kind=='hash-pinned-java' else 1)
+ print(f'M3_JDK21_FILTERED_MAT_SOURCE_SEAL_PASS outputs={total}')
+@@ -27,6 +33,7 @@
+ trap 'rm -rf "$build"' EXIT HUP INT TERM
+ src="$repo/m3/collections/src"
+ javac --release 21 -proc:none -Xlint:all -Werror -d "$build" \
++    "$src/main/java/com/m3/collections/M3CollectionViews.java" \
+     "$src/main/java/com/m3/collections/M3FilteredLists.java" \
+     "$src/main/java/com/m3/collections/M3SignalSortedViews.java" \
+     "$src/main/java/com/m3/collections/M3IntFilterKernel.java" \
+diff --git a/m3/collections/wrappers/writable-map-avl-20261017/verify.sh b/m3/collections/wrappers/writable-map-avl-20261017/verify.sh
+index d95acf1..3ddfd1a 100644
+--- a/m3/collections/wrappers/writable-map-avl-20261017/verify.sh
++++ b/m3/collections/wrappers/writable-map-avl-20261017/verify.sh
+@@ -4,8 +4,11 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ repo=$(CDPATH= cd -- "$(dirname -- "$0")/../../../.." && pwd)
+ python3 - "$repo" <<'PY'
+ from pathlib import Path
+-import hashlib, sys
++import hashlib, subprocess, sys
+ root=Path(sys.argv[1]).resolve()
++helper=root/'m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py'
++if hashlib.sha256(helper.read_bytes()).hexdigest()!='1876eb2150ddb7672bb42a0579ad6d19b32a6227c2bf38c5f74c964b5507d410':
++    raise SystemExit('M3_DEEP_FILTER_SUCCESSOR_VALIDATOR_DRIFT')
+ crate=root/'m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-writable-map-avl-20261017'
+ rows=[]
+ for row in (crate/'manifest.tsv').read_text(encoding='utf-8').splitlines():
+@@ -14,7 +17,9 @@
+     target=root/path
+     if hashlib.sha256(source.read_bytes()).hexdigest()!=after:
+         raise SystemExit('M3_WRITABLE_MAP_RECIPE_TEMPLATE_DRIFT: '+path)
+-    if target.read_bytes()!=source.read_bytes():
++    if path=='m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java':
++        subprocess.run([sys.executable,str(helper),'--root',str(root),'--edge','writable-map'],check=True)
++    elif target.read_bytes()!=source.read_bytes():
+         raise SystemExit('M3_WRITABLE_MAP_TARGET_DRIFT: '+path)
+     rows.append(path)
+ if len(rows)!=5 or rows!=sorted(set(rows)):
+diff --git a/m3/docs/name-mapping.json b/m3/docs/name-mapping.json
+index a44460f..adb0fa5 100644
+--- a/m3/docs/name-mapping.json
++++ b/m3/docs/name-mapping.json
+@@ -8275,6 +8275,29 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+         "source_license": "Apache-2.0",
+         "target_license_rule": "Preserve per-file OpenJDK and third-party rights; no Synexia runtime dependency."
+       }
++    },
++    {
++      "source_family": "Synexia filtered-list lineage and qualified first-party M3JDK deep-filter binary-carry composition",
++      "source_role": "Private convergence workspaces develop and compare reusable concepts before JDK/SWT product adaptation",
++      "source_repository": "hsoliwal/com.synexia",
++      "source_reviewed_commit": "11c94feb18155a53cc213708c353791132edc4a7",
++      "first_party_target_donor": {
++        "repository": "hsoliwal/M3jdk21",
++        "commit": "0997991e2496ee07b69be5d245ebc0ed1bd9b1f3",
++        "pr": 1018,
++        "M3CollectionViews_git_blob": "e21fd9b277ce44a8c6efe4a4ffdf9f01a14a1d0b"
++      },
++      "recipe": "com.synexia.m3jdk.DeepFilteredListComposition20261017",
++      "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017",
++      "target_family": "Existing external filtered Collection, Set, SortedSet, NavigableSet, List, Map, SortedMap and NavigableMap wrappers",
++      "public_api": "All three existing public wrapper surfaces and collection contracts remain unchanged.",
++      "status": "EXTERNAL_PROVING_GROUND_LOCAL_CONTRACT_GATES; GLOBAL_COLLECTION_PROMOTION_PENDING",
++      "rule": "Reuse exact ordered predicate atom in M3CollectionViews; route existing map/list conjunctions through it. O(log depth) wrapper-created evaluation stack, with unchanged callback order, multiplicity, short circuit and exception identity. Preserve writable map representative keys, AVL/sorted ranges and List live-view semantics.",
++      "preserved_baseline": "10ce8abaa279292c73e1c118628344cf0851d14a (#1031)",
++      "receiving_phase_advanced": false,
++      "phase_rule": "String remains active; this refines the already-existing external wrapper proving ground and does not replace global java.util implementations.",
++      "evidence": "m3/collections/wrappers/deep-filter-list-20261017/recipe/QUALIFICATION.md",
++      "license": "Apache-2.0, original notices retained; challenge/tutor sites supply taxonomy only."
+     }
+   ],
+   "recipe_authority": {

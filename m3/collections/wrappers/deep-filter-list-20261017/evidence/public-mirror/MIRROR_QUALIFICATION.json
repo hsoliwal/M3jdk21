@@ -1,0 +1,42 @@
+{
+  "schema": "M3_WRAPPER_PUBLIC_MIRROR_QUALIFICATION_V1",
+  "status": "PASS",
+  "public_snapshot": "/tmp/m3-publication/wrappers",
+  "mirror": "/tmp/m3-publication/wrappers/m3/collections/wrappers/deep-filter-list-20261017/recipe",
+  "bundled_recipe_owner": "/tmp/m3-publication/wrappers/m3/collections/wrappers/deep-filter-list-20261017/recipe/sdk-owner",
+  "canonical_files_exact": 202,
+  "bundled_owner_files_exact": 4,
+  "mirror_input_count": 206,
+  "received_product_count": 13,
+  "mirror_inventory_sha256": "642c06f5b068fd8387b016b05c61894fde66a0a083f4ce4b2f439104febf8aa8",
+  "SDK_INPUTS.tsv": "314d9dd74e41889f180a806b3cc0670da1b63eaacc764925fea0becdbeee676a",
+  "SDK_RESULTS.tsv": "8a01499b4377ee7d6dd5e03ff252781d98ff67be0c8c77bd599c7fc8b8621985",
+  "SDK_TESTS.xml": "7ad6360a4002e61830bb636d2b6ace2878769db0beb8ec9f57e0c97dfb4776b0",
+  "sdk_counts": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "original_qualified_input_and_result_hashes_match": true,
+  "receiver_operations": [
+    {
+      "mode": "check",
+      "targets": 13,
+      "changes": 0,
+      "exit_code": 0,
+      "all_219_bytes_modes_mtimes_unchanged": true
+    },
+    {
+      "mode": "apply",
+      "targets": 13,
+      "changes": 0,
+      "exit_code": 0,
+      "all_219_bytes_modes_mtimes_unchanged": true
+    }
+  ],
+  "runtime_retesting_performed": false,
+  "source_contract_doc_and_old_evidence_files_changed": false,
+  "maven_build_output_only_in_mirror_target": true,
+  "retained_evidence_root": "/tmp/m3-publication/wrapper-mirror-qualification"
+}

@@ -1,0 +1,459 @@
+{
+  "schema": "M3_DEEP_FILTER_LIST_SDK_CONTRACT_V1",
+  "status": "PASS",
+  "target": "/workspace/scratch/edcb3bae74f7/m3-wrappers-final",
+  "crate": "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs",
+  "required_parent_baseline": "37eba37dcbdf0c0222b494d07ba2fca401ce248f",
+  "java_home": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "javac_version": "javac 21.0.12.1",
+  "manifest_sha256": {
+    "java": "d4f4b345672f0e3f6d7e71f5dd23f6e011ed7f7e7d9e356caf67730e61573cad",
+    "text": "ee69271da7d7596726e31e3d0cdbd7bec2501aaa3ba576be235a48d2f28ca9f9"
+  },
+  "manifest_seals_sha256": "059fc64b33af76e313f6a1df959207dfd1c3d2891ac38b9ece5c5ddf25bb8e71",
+  "parent_inputs_sha256": "d31df2309df5e26ef2363d5908818b5a1a743e573dbd0ac0d46eec57a3a9c1d0",
+  "contract_script_sha256": "31ff6ed1dd09fa99b7a6ba808247e57a328fc9319851675a5b2902a3b8dc52f8",
+  "sdk_input_binding_verified": true,
+  "required_parent_files": 61,
+  "target_input_states": {
+    "m3/collections/src/main/java/com/m3/collections/M3IndexCountKernel.java": "4986dc9d3f411a0807399c4bd2a8db6f0e2b5d25e8c0f743b7632650b8a34950",
+    "m3/collections/src/main/java/com/m3/collections/M3IndexHeapAdmission.java": "1c5db2d3f6a54b160c8eddc39c1600b985cb2bb6bb1cd5237ea3f32d74afa21b",
+    "m3/collections/src/main/java/com/m3/collections/M3IndexNavigableSet.java": "44b3c7d04ae77339182912ee304556d9ea1768a5a9fab000fc36ca83fc6c00b2",
+    "m3/collections/src/main/java/com/m3/collections/M3IndexOrderedStore.java": "29963ada9bea037a0e2d174d2e0b24710661119b93e5e02599e794e629d0af8c",
+    "m3/collections/src/main/java/com/m3/collections/M3IndexRange.java": "0b8fe467c7be68bb2c3b6b2928b3c3ac714fa3c5496d600479d7458de2755190",
+    "m3/collections/src/main/java/com/m3/collections/M3IndexSortedMultiset.java": "c83bd91810419cac1a8d79b07511faec49d5ea9329684fae5ce603751ea3ce9c",
+    "m3/collections/src/main/java/com/m3/collections/M3IntFilterKernel.java": "c2039e3d99b19b8cc12f98636c6dafb9baaa21bcfc17cb5600d0a37a08dead1e",
+    "m3/collections/src/main/java/com/m3/collections/M3PendingSortedKeys.java": "c81330241d77463a5dd6536738afab8a40e84f99fdad6b32d945a69a0c495d67",
+    "m3/collections/src/main/java/com/m3/collections/M3SignalSortedViews.java": "8a02e1d4a4861b9129857a98a634454c98530dd03bc6eca7b90c22da12be90dd",
+    "m3/collections/src/main/java/com/m3/collections/M3WritableFilteredMaps.java": "15e89f634b89f049a0af02b9cfe326c155db83bbbbf3bdfd1f5eec126e345689",
+    "m3/collections/src/main/java/com/m3/collections/MIndexSpace.java": "4003805456efd4301eb4f1d10d70ec7a86597a8af917cfa692fcdb3a91daf1c1",
+    "m3/collections/src/main/native/collections/m3_count_kernel.c": "eb28d3bcb3b905c9ec3e7135ddcdd1062fff3374ca3c0f0f1b15501874394f1b",
+    "m3/collections/src/main/native/collections/m3_int_filter_jni.c": "d3201817cfa2292cfdf5732c8a183260c2722b9d576083a3396073d87112ac2b",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredListsContract.java": "e5addee9657a66a731ca8acf79c0682e96a1ad4d7dbab251f5196ab706b9826a",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredListsEdges.java": "3310337caf4552892d3dc8a944e749b479f73c381903565f1322542e192d2b0a",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredListsSortedInteropTest.java": "a43047f07d8cf421e286fa511daeb44c6487a89107900843d526ea20bcb6a539",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredListsTest.java": "589a2f683a5465c0491104993a5647fc7f861048b9d1ed50281bd64621ad405c",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredListsWorkProof.java": "37a55f9c6c577984fafb867bf59ea1c210bf835c5cef4d08880da48c0daf7aa6",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredSortedMultisetContract.java": "04211ea28e75e83d76ce1b1b17732e112b2f63deadb6d6ea4f9fd908d924c82c",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredSortedMultisetEdges.java": "09a37d220750ed437d786fa0890afde94bdc5420fa18234de47ca404684a442f",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredSortedMultisetsTest.java": "adcac24287519d1f39e69c2d50d8046a99e0044dc32849994ec550d4d4ef792e",
+    "m3/collections/src/test/java/com/m3/collections/M3IndexCountKernelJniParityProof.java": "b0ba1b65b8e48bcb989742c2adfc0b7f6459a0c3c109579a755d452cbe75da7a",
+    "m3/collections/src/test/java/com/m3/collections/M3IntFilterDenseContract.java": "8cb9a82d5f198ed8220174e592349a184ec4007ce79981b2814eb7201d0fb4bd",
+    "m3/collections/src/test/java/com/m3/collections/M3SignalSortedViewsSelfTest.java": "bd7044c45151f736617f438bfc827f44c8ea4c60d83c20f5d984e2938ae8e1b0",
+    "m3/collections/src/test/java/com/m3/collections/M3SortedBatchPutAllProof.java": "ba9ceb78147a5ba5f619fd5bf78ef99b86c95309a16bbec7d6091933125ed052",
+    "m3/collections/src/test/java/com/m3/collections/M3WritableFilteredMapsTest.java": "e23ec990ccc5cf48e803236449c42f6c5ed824d3dcf1628bf038fb16f92a5d96",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/M3FilteredSortedMultisetContract.java.txt": "04211ea28e75e83d76ce1b1b17732e112b2f63deadb6d6ea4f9fd908d924c82c",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/M3FilteredSortedMultisetEdges.java.txt": "09a37d220750ed437d786fa0890afde94bdc5420fa18234de47ca404684a442f",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/M3FilteredSortedMultisets.java.txt": "7decb8452352f7b2117d72ee6aa186f66870d04cd5af05818d3374151767bda8",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/M3FilteredSortedMultisetsTest.java.txt": "adcac24287519d1f39e69c2d50d8046a99e0044dc32849994ec550d4d4ef792e",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/M3IndexCountKernel.java.txt": "4986dc9d3f411a0807399c4bd2a8db6f0e2b5d25e8c0f743b7632650b8a34950",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/M3IndexCountKernelJniParityProof.java.txt": "b0ba1b65b8e48bcb989742c2adfc0b7f6459a0c3c109579a755d452cbe75da7a",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/M3IndexHeapAdmission.java.txt": "1c5db2d3f6a54b160c8eddc39c1600b985cb2bb6bb1cd5237ea3f32d74afa21b",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/M3IndexNavigableSet.java.txt": "44b3c7d04ae77339182912ee304556d9ea1768a5a9fab000fc36ca83fc6c00b2",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/M3IndexOrderedStore.java.txt": "29963ada9bea037a0e2d174d2e0b24710661119b93e5e02599e794e629d0af8c",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/M3IndexRange.java.txt": "0b8fe467c7be68bb2c3b6b2928b3c3ac714fa3c5496d600479d7458de2755190",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/M3IndexSortedMultiset.java.txt": "c83bd91810419cac1a8d79b07511faec49d5ea9329684fae5ce603751ea3ce9c",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/MIndexSpace.java.txt": "4003805456efd4301eb4f1d10d70ec7a86597a8af917cfa692fcdb3a91daf1c1",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-index-counted-20261017/manifest.tsv": "2aa484c379a428de4de13a77b722a06a8d889a0dc3248dbb930ebe14dadcd5bb",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-index-counted-native-20261017/m3_count_kernel.c.txt": "eb28d3bcb3b905c9ec3e7135ddcdd1062fff3374ca3c0f0f1b15501874394f1b",
+    "m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-index-counted-native-20261017/manifest.tsv": "a0e1ad5df135c36666397ec35e42ba42f92473a36fcd8e21f330f4c40c797773",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-mat-receiver-20261017/M3FilteredLists.java.txt": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-mat-receiver-20261017/M3FilteredListsContract.java.txt": "e5addee9657a66a731ca8acf79c0682e96a1ad4d7dbab251f5196ab706b9826a",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-mat-receiver-20261017/M3FilteredListsEdges.java.txt": "3310337caf4552892d3dc8a944e749b479f73c381903565f1322542e192d2b0a",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-mat-receiver-20261017/M3FilteredListsSortedInteropTest.java.txt": "a43047f07d8cf421e286fa511daeb44c6487a89107900843d526ea20bcb6a539",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-mat-receiver-20261017/M3FilteredListsTest.java.txt": "589a2f683a5465c0491104993a5647fc7f861048b9d1ed50281bd64621ad405c",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-mat-receiver-20261017/M3FilteredListsWorkProof.java.txt": "37a55f9c6c577984fafb867bf59ea1c210bf835c5cef4d08880da48c0daf7aa6",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-mat-receiver-20261017/M3IntFilterDenseContract.java.txt": "8cb9a82d5f198ed8220174e592349a184ec4007ce79981b2814eb7201d0fb4bd",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-mat-receiver-20261017/M3IntFilterKernel.java.txt": "c2039e3d99b19b8cc12f98636c6dafb9baaa21bcfc17cb5600d0a37a08dead1e",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-mat-receiver-20261017/M3SignalSortedViews.java.txt": "8a02e1d4a4861b9129857a98a634454c98530dd03bc6eca7b90c22da12be90dd",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-mat-receiver-20261017/M3SignalSortedViewsSelfTest.java.txt": "bd7044c45151f736617f438bfc827f44c8ea4c60d83c20f5d984e2938ae8e1b0",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-mat-receiver-20261017/manifest.tsv": "0d1ccc5298cab01e0717facd0d2054a98973fc8f0628b1bb504d2461be638fa3",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-writable-map-avl-20261017/M3FilteredMaps.java.txt": "538f62a64fa5cbe1b0dd37251a7652121306d17365a7c5c111cb0d5ee7c52200",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-writable-map-avl-20261017/M3PendingSortedKeys.java.txt": "c81330241d77463a5dd6536738afab8a40e84f99fdad6b32d945a69a0c495d67",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-writable-map-avl-20261017/M3SortedBatchPutAllProof.java.txt": "ba9ceb78147a5ba5f619fd5bf78ef99b86c95309a16bbec7d6091933125ed052",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-writable-map-avl-20261017/M3WritableFilteredMaps.java.txt": "15e89f634b89f049a0af02b9cfe326c155db83bbbbf3bdfd1f5eec126e345689",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-writable-map-avl-20261017/M3WritableFilteredMapsTest.java.txt": "e23ec990ccc5cf48e803236449c42f6c5ed824d3dcf1628bf038fb16f92a5d96",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-writable-map-avl-20261017/manifest.tsv": "a9ae10da0ce772603996736b73c42d027e7a1b4b7879c105bb237fcd8c594e38",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-writable-map-avl-20261017/pre/M3FilteredMaps.java.txt": "39e3698a6a9e1c494050f04bd9dbd13134dfbb748a075fa6a0535d3325c3dd9d",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-filtered-mat-native-20261017/m3_int_filter_jni.c.txt": "d3201817cfa2292cfdf5732c8a183260c2722b9d576083a3396073d87112ac2b",
+    "m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-filtered-mat-native-20261017/manifest.tsv": "fd82e2f0c7626b1951d4e119f7e8d5c749dff8b823b4e38386716c8f8ae02d68",
+    "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java": "e51e894c15dd0f6163cd8129fd20748660332b58f6fd8dc6e749fdec49e3c5c6",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java": "538f62a64fa5cbe1b0dd37251a7652121306d17365a7c5c111cb0d5ee7c52200",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredSortedMultisets.java": "7decb8452352f7b2117d72ee6aa186f66870d04cd5af05818d3374151767bda8",
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java": "ABSENT",
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java": "ABSENT",
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredSortedMultisetsProof.java": "ABSENT",
+    "m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py": "ABSENT",
+    "m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py": "ABSENT",
+    "m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh": "c8eaf88095e4f507278a5081b1177548951f54a0fc34f906f3e9e4683deeef1f",
+    "m3/collections/wrappers/index-counted-receiver-20261017/verify.sh": "26c217d87efb722bcf98f52ec0c53cd71baea8aa7205a0c02c343a8156312a40",
+    "m3/collections/wrappers/writable-map-avl-20261017/verify.sh": "9ac451c587b2cbf08fff7981ec3c2793b9914b97cb50760c813bc41648cb6d21",
+    "m3/docs/name-mapping.json": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac"
+  },
+  "actual_sdk_generated_files": {
+    "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java": "5da6837eee9112cb97725efff8fbcc1b95f455761d923f643e9a1158ba208989",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java": "c6db65bc2408ea44ef4395220f862b3cad9d824f1ee09558101381cb535c4b48",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java": "b6733c9cd447826710feaf2480febdaa9091f6367fd7ff3195f339cc6b08efcf",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredSortedMultisets.java": "2072782ece0252c9132f18ae9f10a6bca411c46c567b89ff98191006118e86e5",
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java": "362dc9caf845360782b0c313ff871d35badd62883b8695a4c31a937f22f370b6",
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java": "e21114b06618ba15d0808b06d1c9be2276ac0fff355e2cb9da5f7b7b0de58c04",
+    "m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredSortedMultisetsProof.java": "d50e1e6554a40de27d9d2c41ec5ab352302850753d0bf0fb90dfcf8bec92e015",
+    "m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py": "8eadcc8aef4de85b8d262fea018f60d21d690ddbe31ddfde0b326ebbeeb8e102",
+    "m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py": "5a7049e8356e83451fa19537688c39f9704cb659b864c5debdb6f10aa1e4e638",
+    "m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh": "3927a4956743124e5efa5e1b7a2ef61db63c38d8ba41b77be9d66bc52832b914",
+    "m3/collections/wrappers/index-counted-receiver-20261017/verify.sh": "3ce1c8c93d7a8f0e0a06beca977dc236622633f932a7a30252f1560bd45d0373",
+    "m3/collections/wrappers/writable-map-avl-20261017/verify.sh": "e61fcdec0861f1796245edf4760b7182a29c10ddf4c423b478bd99efb69b4ebf",
+    "m3/docs/name-mapping.json": "8a734da492905c0d4bdc3d94fd3f41b4fefb3b1828a6b3fe15dcaa372e1e7adf"
+  },
+  "commands": [
+    {
+      "label": "strict-sdk-java21",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3FilteredSortedMultisets.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredSortedMultisetsProof.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/MIndexSpace.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexHeapAdmission.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexOrderedStore.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexRange.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexCountKernel.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexNavigableSet.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexSortedMultiset.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/test/java/com/m3/collections/M3FilteredSortedMultisetContract.java"
+      ],
+      "exit_code": 0,
+      "seconds": 3.2489
+    },
+    {
+      "label": "list-tiered-depth65536",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xss256k",
+        "-Xmx256m",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "com.m3.collections.M3DeepFilteredListsProof",
+        "65536",
+        "192"
+      ],
+      "exit_code": 0,
+      "seconds": 2.1342
+    },
+    {
+      "label": "donor-tiered-depth65536",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xss256k",
+        "-Xmx256m",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "com.m3.collections.M3DeepFilterCompositionProof"
+      ],
+      "exit_code": 0,
+      "seconds": 1.064
+    },
+    {
+      "label": "list-interpreter-depth8192",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xint",
+        "-Xss256k",
+        "-Xmx256m",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "com.m3.collections.M3DeepFilteredListsProof",
+        "8192",
+        "192"
+      ],
+      "exit_code": 0,
+      "seconds": 16.8951
+    },
+    {
+      "label": "donor-interpreter-depth8192",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xint",
+        "-Xss256k",
+        "-Xmx256m",
+        "-Dm3.deep.depth=8192",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "com.m3.collections.M3DeepFilterCompositionProof"
+      ],
+      "exit_code": 0,
+      "seconds": 2.6425
+    },
+    {
+      "label": "sorted-multiset-tiered-depth65536",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xss256k",
+        "-Xmx256m",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "com.m3.collections.M3DeepFilteredSortedMultisetsProof",
+        "65536",
+        "64"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6601
+    },
+    {
+      "label": "sorted-multiset-interpreter-depth8192",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xint",
+        "-Xss256k",
+        "-Xmx256m",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "com.m3.collections.M3DeepFilteredSortedMultisetsProof",
+        "8192",
+        "64"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5331
+    },
+    {
+      "label": "original-owner-strict-compile",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/original",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/original-sources/M3CollectionViews.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/original-sources/M3FilteredLists.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/original-sources/M3FilteredMaps.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/original-sources/M3FilteredSortedMultisets.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredListsProof.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilteredSortedMultisetsProof.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/MIndexSpace.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexHeapAdmission.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexOrderedStore.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexRange.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexCountKernel.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexNavigableSet.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/main/java/com/m3/collections/M3IndexSortedMultiset.java",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/src/test/java/com/m3/collections/M3FilteredSortedMultisetContract.java"
+      ],
+      "exit_code": 0,
+      "seconds": 5.0648
+    },
+    {
+      "label": "original-list-overflow",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xss256k",
+        "-Xmx256m",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/original",
+        "com.m3.collections.M3DeepFilteredListsProof",
+        "--baseline-overflow",
+        "65536"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1098
+    },
+    {
+      "label": "original-sorted-multiset-overflow",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xss256k",
+        "-Xmx256m",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/original",
+        "com.m3.collections.M3DeepFilteredSortedMultisetsProof",
+        "--baseline-overflow",
+        "65536"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1586
+    },
+    {
+      "label": "original-public-api-M3CollectionViews",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/original",
+        "com.m3.collections.M3CollectionViews"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3643
+    },
+    {
+      "label": "sdk-public-api-M3CollectionViews",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "com.m3.collections.M3CollectionViews"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3407
+    },
+    {
+      "label": "original-public-api-M3FilteredMaps",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/original",
+        "com.m3.collections.M3FilteredMaps"
+      ],
+      "exit_code": 0,
+      "seconds": 0.343
+    },
+    {
+      "label": "sdk-public-api-M3FilteredMaps",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "com.m3.collections.M3FilteredMaps"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4125
+    },
+    {
+      "label": "original-public-api-M3FilteredLists",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/original",
+        "com.m3.collections.M3FilteredLists"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3384
+    },
+    {
+      "label": "sdk-public-api-M3FilteredLists",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "com.m3.collections.M3FilteredLists"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3565
+    },
+    {
+      "label": "original-public-api-M3FilteredSortedMultisets",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/original",
+        "com.m3.collections.M3FilteredSortedMultisets"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3105
+    },
+    {
+      "label": "sdk-public-api-M3FilteredSortedMultisets",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "com.m3.collections.M3FilteredSortedMultisets"
+      ],
+      "exit_code": 0,
+      "seconds": 0.2522
+    },
+    {
+      "label": "original-public-api-M3FilteredSortedMultisets$View",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/original",
+        "com.m3.collections.M3FilteredSortedMultisets$View"
+      ],
+      "exit_code": 0,
+      "seconds": 0.2381
+    },
+    {
+      "label": "sdk-public-api-M3FilteredSortedMultisets$View",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/build/current",
+        "com.m3.collections.M3FilteredSortedMultisets$View"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3328
+    },
+    {
+      "label": "successor-refusal-proof",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/wrappers/deep-filter-list-20261017/verify_successor_test.py",
+        "--root",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay"
+      ],
+      "exit_code": 0,
+      "seconds": 1.8959
+    },
+    {
+      "label": "retained-list-int-jni-five-collectors",
+      "command": [
+        "sh",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/wrappers/filtered-mat-receiver-20261017/verify.sh"
+      ],
+      "exit_code": 0,
+      "seconds": 7.7634
+    },
+    {
+      "label": "retained-writable-map-avl",
+      "command": [
+        "sh",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/wrappers/writable-map-avl-20261017/verify.sh"
+      ],
+      "exit_code": 0,
+      "seconds": 6.01
+    },
+    {
+      "label": "retained-index-counted-java-jni",
+      "command": [
+        "sh",
+        "/workspace/scratch/edcb3bae74f7/wrappers-work/sorted-multiset-recipe-inputs/target/contract-proof/overlay/m3/collections/wrappers/index-counted-receiver-20261017/verify.sh"
+      ],
+      "exit_code": 0,
+      "seconds": 6.8005
+    }
+  ],
+  "target_files_written": false
+}
