@@ -1,0 +1,5 @@
+# Additive, exact UTF-8 postimages; historical targets unchanged.
+counts/totals/README.md	ABSENT	a28f425678ffbb9c560fc35ce4e87a28aed0f46fb2f71fdffdd7e5afe743fc21	README.md.txt
+counts/totals/catalogue.tsv	ABSENT	c672cd711c623a69f534fb306e82cf043052f97fc890c8f2af7cd3adb520152a	catalogue.tsv.txt
+counts/totals/provenance.json	ABSENT	ac6c9af1d2152613de02ca4506859e56f990057dedfad2606b2e448ad8fc98cb	provenance.json.txt
+src/main/native/collections/m3_count_totals.c	ABSENT	bf1fc7d87f797c4047da75fc23ffc01d6f2fc5a89f1dcf9c70a819ffcf493ebd	m3_count_totals.c.txt

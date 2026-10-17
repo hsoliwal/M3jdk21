@@ -1,0 +1,33 @@
+{
+  "schema": "M3_COUNT_TOTALS_LOCAL_SDK_EVIDENCE_V1",
+  "date": "2026-10-16",
+  "receiver_baseline": "4191ebe76c972725b3ebc5a76771f0d56b43fb62",
+  "execution": "Actual retained OpenRewrite 8.17.1 Java/text providers with JUnit; local Maven executable unavailable",
+  "java": "OpenJDK 21.0.12.1 Linux x86-64",
+  "recipe_tests": {"tests": 8, "failures": 0, "errors": 0, "skipped": 0},
+  "new_runtime_tests": {"tests": 10, "failures": 0, "errors": 0, "skipped": 0},
+  "retained_runtime_tests": {"counted": 16, "interop": 42, "long_core": 13, "failures": 0, "errors": 0, "skipped": 0},
+  "original_allocation_failure_controls": 4,
+  "candidate_allocation_failure_passes": 4,
+  "compiled_core_main_units": 81,
+  "existing_public_api_owners_unchanged": 3,
+  "jni": "C17 warnings-as-errors, UBSan, -Xcheck:jni, real native calls",
+  "generated_targets": 7,
+  "fixed_point": "PASS",
+  "core_dependencies": ["java.base"],
+  "paired_heap_allocation_bytes_per_operation": {
+    "java_result_array_16384_counts": 131088,
+    "java_scalar_16384_counts": 0,
+    "jni_result_array_16384_counts": 131088,
+    "jni_scalar_16384_counts": 0,
+    "materialized_bag_intersection_2048_keys": 69768,
+    "scalar_bag_intersection_2048_keys": 48
+  },
+  "measurement_iterations": 300,
+  "performance_scope": "Observed Java heap allocation for this workload and JVM only; no throughput or universal zero-allocation claim",
+  "hosted_maven": "Must be established from the exact published head workflow",
+  "whole_library_completion": false,
+  "full_reactor": "NOT_RUN",
+  "installed_jdk": "NOT_RUN",
+  "phase_advance": false
+}
