@@ -573,7 +573,7 @@
       "canonical_recipe_pr": "hsoliwal/com.synexia#11975",
       "receiver_pr": "hsoliwal/M3jdk21 (stacked on #1003)",
       "current_preimage_sha256": "f875210dfb605799b6c8dbee53b28ad6383e000d90da775f7fd285464da7b2d3",
-      "candidate_postimage_sha256": "043c26a0f55ee2a0170bf907ee428dfd133696ce45bf0de44b822dc9e1e5e0e7",
+      "candidate_postimage_sha256": "4972d8c3a664867559273a63df340c042eab1fa40f21e7b2139422ed06f942ba",
       "status": "Draft candidate: existing Plan gains conservative minimum-length, mandatory literal signals and fixed edges; JDK Pattern remains authority; full matched runtime gates pending",
       "target_rule": "No duplicate regex grammar/cache, no extra String payload, no native ABI change; read only already-prepared canonical facts, preserve all public JDK semantics"
     }
