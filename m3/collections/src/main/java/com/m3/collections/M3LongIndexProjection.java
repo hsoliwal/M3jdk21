@@ -92,10 +92,36 @@ public final class M3LongIndexProjection {
         if (alignedStates.length != size()) {
             throw new IllegalArgumentException("mask must align with logical view size");
         }
-        // One borrowed scratch index range; existing kernel owns Java/JNI parity.
-        int[] viewIndices = physicalIndices();
-        int[] selected = M3IndexMaskCompactor.select(
-                viewIndices, alignedStates, requiredMask, backend);
+        // The optional JNI path preserves its existing input-snapshot boundary,
+        // native-required failure semantics, and exact Java-to-native contract.
+        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+            int[] viewIndices = physicalIndices();
+            int[] selected = M3IndexMaskCompactor.select(
+                    viewIndices, alignedStates, requiredMask, backend);
+            return new M3LongIndexProjection(values, selected, 0, selected.length, order);
+        }
+        // Java selection can use the already-private [from,to) index directory.
+        // No full-window copy is needed merely to compose another indexed view.
+        int selectedCount = M3IndexMaskCompactor.selectedCount(alignedStates, requiredMask);
+        if (selectedCount == size()) {
+            // Private indices and payload are immutable: reuse their physical window.
+            return new M3LongIndexProjection(values, indices, from, to, order);
+        }
+        int[] selected = new int[selectedCount];
+        int written = 0;
+        for (int i = 0; i < alignedStates.length; i++) {
+            if (M3IndexMaskCompactor.matches(alignedStates[i], requiredMask)) {
+                if (written == selected.length) {
+                    throw new java.util.ConcurrentModificationException(
+                            "aligned selection states changed");
+                }
+                selected[written++] = indices[from + i];
+            }
+        }
+        if (written != selected.length) {
+            throw new java.util.ConcurrentModificationException(
+                    "aligned selection states changed");
+        }
         return new M3LongIndexProjection(values, selected, 0, selected.length, order);
     }
 
