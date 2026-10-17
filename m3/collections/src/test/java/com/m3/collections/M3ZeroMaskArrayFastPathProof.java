@@ -67,6 +67,16 @@ public final class M3ZeroMaskArrayFastPathProof {
                 "zero masks retain exclusive offset");
         equalsInt(initialSlots, slots, "all-pass array index directory unchanged");
         equalsBytes(initialFlags, flags, "all-pass occurrence masks unchanged");
+        int previousState = M3StateMaskArrays.update(flags, 3, 0, 0);
+        check(previousState == (initialFlags[3] & 0xff),
+                "null bit-mask transition returns prior unsigned state");
+        equalsBytes(initialFlags, flags, "null state update leaves every byte unchanged");
+        refuses(IndexOutOfBoundsException.class,
+                () -> M3StateMaskArrays.update(flags, -1, 0, 0));
+        refuses(NullPointerException.class,
+                () -> M3StateMaskArrays.update(null, 0, 0, 0));
+        refuses(IllegalArgumentException.class,
+                () -> M3StateMaskArrays.update(flags, 3, 0x01, 0x01));
         check(M3StateMaskArrays.compactWindow(slots, flags, 0, 0, 0, 0) == 0,
                 "empty zero-mask interval");
         check(M3StateMaskArrays.compactWindow(slots, flags, slots.length, slots.length, 0, 0)
