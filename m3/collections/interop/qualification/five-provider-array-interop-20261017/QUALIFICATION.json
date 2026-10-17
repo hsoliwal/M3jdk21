@@ -1,0 +1,208 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "schema": "M3_FIVE_PROVIDER_ARRAY_INTEROP_QUALIFICATION_V1",
+  "status": "PASS",
+  "qualified_utc": "2026-10-17T13:55:26.367631+00:00",
+  "scope": "SEPARATELY_BUILT_COLLECTION_CORE_AND_OPTIONAL_PROVIDER_INTEROP",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_preimage_commit": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+  "target_preimage_tree": "0fc2098bebc968f2ac1fe6b1a74b8fc6f26acf54",
+  "equivalent_publication_parent": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "equivalent_publication_parent_tree": "0fc2098bebc968f2ac1fe6b1a74b8fc6f26acf54",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_task": "synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017",
+  "canonical_final_commit_pointer": "../../recipe/five-provider-array-interop-20261017/CANONICAL_SOURCE.json",
+  "runtime_canonical_commit_at_execution": "866e240ec1ac8600999d474eb7b8ce1930e326e3",
+  "runtime_unchanged_after_workflow_successor": true,
+  "core_source_identity": {
+    "path": "received-core-source-census.tsv",
+    "files": 236,
+    "sha256": "b8db6c7000d978ac967415777aee1fe071b049c78f84119a3a5afc04a14d1240",
+    "matches_all_three_execution_receipts": true,
+    "encoding": "UTF-8; sorted repository-relative path, TAB, SHA-256, LF; no header"
+  },
+  "recipe_sdk": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "recipe_targets": {
+    "java": 24,
+    "text": 18,
+    "total": 42
+  },
+  "recipe_input_identity_sha256": "e26019fd1b858d854fdf3e2f847c64a183194a00ef3bca1b331faa029a91054c",
+  "recipe_result_identity_sha256": "3c8d0b77764476a23e71f3695576a820421cac255037a1edad9bf94a1c298e34",
+  "recipe_java_manifest_sha256": "fa4bf1bdf855aca232bef585d48113307e11c96d8e547257e113ee94b137ff9b",
+  "recipe_text_manifest_sha256": "758e538f907b4ee25a98eb71c9b90cce01d76d26853cdcec5ae334d347067705",
+  "historical_interop_recipe_junit": {
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "historical_sdk_recipe_junit": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "historical_sdk_host": "Original31 recipe files and4 assertions unchanged; SHA-pinned SLF4J1.7.36 test classpath and narrow ClassGraph test-JVM package opening; original metadata, Java/JNI, fixed-point and negative controls execute.",
+  "core_junit": {
+    "tests": 211,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "core_main_sources": 117,
+  "core_test_sources": 107,
+  "interop_junit": {
+    "tests": 126,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "interop_suite_details": [
+    {
+      "name": "com.m3.collections.interop.M3ApacheCollectionsTest",
+      "tests": "6",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.m3.collections.interop.M3ApacheCountedTest",
+      "tests": "15",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.m3.collections.interop.M3ApacheMultivalueTest",
+      "tests": "13",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.m3.collections.interop.M3EclipseBagTest",
+      "tests": "20",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.m3.collections.interop.M3FiveProviderIntegrationTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.m3.collections.interop.M3GuavaContractTest",
+      "tests": "15",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.m3.collections.interop.M3LibraryClosureTest",
+      "tests": "20",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.m3.collections.interop.M3LibraryCollectionsTest",
+      "tests": "22",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.m3.collections.interop.M3SdkFamiliesTest",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ],
+  "guava_generated_cases": {
+    "bimap": 2539,
+    "multiset": 979,
+    "included_in_jupiter_wrappers": true
+  },
+  "native_object_counts": {
+    "status": "PASS",
+    "junit": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "native_library": "libm3_collections_pathmask.so",
+    "native_source_sha256": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+    "required_property": "m3.interop.requireNative=true",
+    "jvm_check": "-Xcheck:jni",
+    "undefined_behavior_sanitizer": "PASS"
+  },
+  "source_admission": {
+    "tests": 34,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "binding_selftest": {
+    "checks": 192,
+    "families": 5,
+    "bindings": 33
+  },
+  "api_surface": {
+    "factory_signatures": 33,
+    "added_factory_signatures": 11,
+    "collectors": 20,
+    "added_collectors": 9
+  },
+  "packaging": {
+    "core_dependencies": [
+      "java.base"
+    ],
+    "sdk_catalogue_byte_identity": "PASS",
+    "provider_metadata_and_six_original_notices_licenses": "PASS",
+    "dependency_jars": 23
+  },
+  "donor_revisions": {
+    "eclipse-collections11.1.0": "fb6abf7fe655ff04acf616158bce49725f2df5ad",
+    "guava33.4.8-jre": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+    "spring-framework6.2.0": "5024bb72279188f1d0dcfe19e8abdd4bdb9887c8",
+    "commons-collections4.6.0": "4107624de41aeed37985d2a069fad41992fd71a2"
+  },
+  "donor_checkout_scope": "Complete tracked source trees; shallow history; pinned Maven runtime/oracle artifacts remain optional dependencies.",
+  "performance": {
+    "universal_speedup": false,
+    "retained_heap_claim": false,
+    "probe": "count-owner-cost-rebased/COUNT_OWNER_COST.md",
+    "existing_count_updates_allocated_bytes": 0,
+    "interpretation": "M3 fresh construction was slower and had higher cumulative growth allocation than the three donor count owners in this diagnostic. Existing-count updates were zero-allocation for all four."
+  },
+  "counting_note": "Core Maven and standalone verifier repeat the same211tests; native repeats6 of them; Guava3518 generated cases execute inside Jupiter wrappers. Do not sum these as unique independent tests.",
+  "unqualified": [
+    "Whole five-ecosystem API/concrete-class superset",
+    "Serialization and concurrent shared-owner use",
+    "All immutable, primitive, sorted and grouped intrinsic result storage",
+    "Complete M3JDK image, full reactor, jtreg and HotSpot",
+    "Whole-repository offline source vendoring",
+    "Receiving phase promotion"
+  ],
+  "active_phase": "STRING",
+  "phase_advance": false,
+  "reproduce": [
+    "mvn -B -ntp -f m3/collections/interop/recipe/five-provider-array-interop-20261017/pom.xml -Drecipe.owner.root=$PWD/m3/collections/interop/recipe/five-provider-array-interop-20261017/sdk-owner test",
+    "python3 m3/collections/interop/recipe/five-provider-array-interop-20261017/receive.py --target \"$PWD\" --check",
+    "JUNIT_CONSOLE_JAR=/absolute/path/to/junit-platform-console-standalone-1.12.2.jar python3 m3/collections/verify_donation.py --cost-probe",
+    "mvn -B -ntp -f m3/collections/pom.xml install",
+    "mvn -B -ntp -f m3/collections/interop/pom.xml verify"
+  ]
+}

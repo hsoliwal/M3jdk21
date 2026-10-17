@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "initial_target_base": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "frozen_target_base": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+  "reason": "Target master merged intervening SDK, Apache, mask and state APIs while the task ran; preserve and requalify their superset.",
+  "paths": {
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java": "76609b94a23a682d98d541b5a0421f8c0bdfce05dce6f9cb253fa2e6bf89f62b",
+    "m3/collections/interop/pom.xml": "b1e7dd0817690de77ad1af8898d39e4edcab2ee005aeec709f39151d5981e9a3",
+    "m3/collections/interop/THIRD_PARTY_NOTICES.md": "758a1c85ad63ec2c6d7945d79c4bd53b7269f3804f668f2395c985b43ae042ad",
+    "m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java": "0b4f3600af352d2b22b35a520f98540a446c0a3494a9253cb0ef6c309a5f7bcb",
+    "m3/collections/verify_donation.py": "2e98edda477e2805586ffced0749c62bd2d9674727e84c65cc8b2511fbb622cb"
+  },
+  "obsolete_constructor_template": "Moved to historical diagnostic evidence; never applied to newbase",
+  "new_api_preservation": [
+    "Guava live filtered factories",
+    "Apache predicate decorators",
+    "SDK bindings",
+    "M3ObjectStateSlots28 matchingPositions/updateHandles",
+    "Current mask kernels and source receipt helpers"
+  ]
+}

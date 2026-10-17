@@ -1,0 +1,17 @@
+{
+  "master": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+  "repairs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java",
+      "before_sha256": "02893ff5d555ef577789ca82fdbbe043172219ae59202d10a51f2fa1337d9152",
+      "after_sha256": "a47439fe072b67482caa042167b48d0d7242dd59298a9f72d6f58ca2a2e4f0c6",
+      "change": "explicit public empty constructor only"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java",
+      "before_sha256": "76da13c95905f3a41b0e95acd89ff68e9ae12b665fec8fe804a5af37235a9641",
+      "after_sha256": "f6cfa201faab4dba7e719c874b257a422c0ec160e2c43ec558094f3e1bcf5047",
+      "change": "explicit public empty constructor only"
+    }
+  ]
+}

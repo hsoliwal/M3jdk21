@@ -1,0 +1,62 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------< com.synexia.m3.recipes:sdk-family-names-20261017 >----------
+[INFO] Building sdk-family-names-20261017 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ sdk-family-names-20261017 ---
+[INFO] Deleting /tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ sdk-family-names-20261017 ---
+[INFO] Copying 15 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ sdk-family-names-20261017 ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ sdk-family-names-20261017 ---
+[INFO] skip non existing resourceDirectory /tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ sdk-family-names-20261017 ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ sdk-family-names-20261017 ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.SdkFamilyNamesSdkTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.870 s -- in com.synexia.rewrite.SdkFamilyNamesSdkTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ sdk-family-names-20261017 ---
+[INFO] Building jar: /tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/sdk-family-names-20261017-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec:3.5.0:exec (source-metadata-jni-qualification) @ sdk-family-names-20261017 ---
+SdkFamilyReplay checks=1236 generated=13 fixedPointOrderings=32
+M3LibraryBindingsSelfTest checks=137 families=5 bindings=22
+M3LibraryBindingsSelfTest checks=137 families=5 bindings=22
+SdkSourceAudit originalFactories=18 unchanged; mapped=22; parseOnly=true
+Exception in thread "main" java.lang.AssertionError: return name guavaFilteredCollectionWrong
+	at SdkSourceAudit.main(SdkSourceAudit.java:58)
+SdkIndexMaskProof mode=native checks=167145 seededCases=4096
+SdkIndexMaskProof mode=native checks=167145 seededCases=4096
+SdkIndexMaskProof mode=java-missing-native checks=167146 seededCases=4096
+Exception in thread "main" java.lang.AssertionError: mask check 6432
+	at SdkIndexMaskProof.check(SdkIndexMaskProof.java:9)
+	at SdkIndexMaskProof.main(SdkIndexMaskProof.java:29)
+SdkFamilyReplay checks=1236 generated=13 fixedPointOrderings=32
+PASS: exact recipe emission; five-family metadata; 18 old method trees; Java/JNI; negative controls. NOT_RUN: actual donor compilation, donor JUnit, Maven SDK.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  11.473 s
+[INFO] Finished at: 2026-10-17T07:48:02-06:00
+[INFO] ------------------------------------------------------------------------

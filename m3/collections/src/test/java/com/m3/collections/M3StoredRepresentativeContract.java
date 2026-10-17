@@ -215,11 +215,16 @@ public final class M3StoredRepresentativeContract {
         yes(filtered.contains(visible), "identity-owned visible equals-equal reference");
         no(filtered.contains(new Key("same", true)), "identity source excludes foreign instance");
 
-        Collection<Key> duplicates = new ArrayList<>(Arrays.asList(hidden, visible));
+        List<Key> duplicates = new ArrayList<>(Arrays.asList(hidden, visible));
         Collection<Key> projected = M3FilteredViews.filter(duplicates, Key::keep);
         yes(projected.contains(new Key("same", false)),
                 "Collection contains if any stored equals member is visible");
-        duplicates.remove(visible);
+        yes(duplicates.remove(visible), "equals-based removal finds the first equal member");
+        yes(duplicates.size() == 1 && duplicates.get(0) == visible,
+                "ArrayList.remove(Object) removes the first equal hidden reference");
+        yes(projected.contains(new Key("same", false)),
+                "visible equals member remains after the hidden reference is removed");
+        yes(duplicates.remove(0) == visible, "index removal selects the visible stored reference");
         no(projected.contains(new Key("same", true)), "last visible equals member removed");
     }
 

@@ -1,0 +1,3 @@
+$ ['gcc', '-std=c17', '-O2', '-Wall', '-Wextra', '-Werror', '-fsanitize=undefined', '-fno-sanitize-recover=all', '-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include', '-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux', '-shared', '-fPIC', '/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/src/main/native/collections/segmented_bit_lane.c', '-o', '/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/libsegmented_bits.so']
+
+EXIT=0

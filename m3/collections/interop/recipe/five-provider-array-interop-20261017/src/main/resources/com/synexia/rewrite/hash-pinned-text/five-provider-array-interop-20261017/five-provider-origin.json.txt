@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_recipe": "com.synexia.m3.FiveProviderArrayInterop20261017",
+  "canonical_path": "synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017",
+  "canonical_revision_receipt": "recipe/five-provider-array-interop-20261017/CANONICAL_SOURCE.json",
+  "canonical_engine_base": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
+  "target_base": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+  "core_storage": [
+    "M3LinkedHashMap key-only directory",
+    "int[] counts",
+    "int[] flags",
+    "long exact total"
+  ],
+  "native_owner": "com.m3.collections.M3IndexPathMasks / m3_index_path_masks.c (existing source)",
+  "admission": "Exact Java pre/postimages via real OpenRewrite LST; exact text pre/postimages; missing/duplicate/drift refusal; fixed point",
+  "donors": [
+    {
+      "name": "eclipse-collections",
+      "repository": "eclipse/eclipse-collections",
+      "tag": "11.1.0",
+      "commit": "fb6abf7fe655ff04acf616158bce49725f2df5ad",
+      "compatibility_coordinate": "org.eclipse.collections:eclipse-collections:11.1.0",
+      "tracked_file_count": 3343,
+      "license_evidence": [
+        {
+          "path": "LICENSE-EPL-1.0.txt",
+          "sha256": "44277b2bec6093e4ac313afec251a4de599d24c4e768f8574d95b13a9d2d97b5",
+          "git_blob": "79e486c3d2c20397a987cc8785b8e62b8bbcbb52",
+          "bytes": 11232,
+          "immutable_url": "https://github.com/eclipse/eclipse-collections/blob/fb6abf7fe655ff04acf616158bce49725f2df5ad/LICENSE-EPL-1.0.txt"
+        },
+        {
+          "path": "LICENSE-EDL-1.0.txt",
+          "sha256": "47265c58c98e690bc9235656600be65af938f71f9ec056f8bf84f56f88b8a0ff",
+          "git_blob": "4e492acbfa2054917ae22b35cf6c03e9b3feff76",
+          "bytes": 1561,
+          "immutable_url": "https://github.com/eclipse/eclipse-collections/blob/fb6abf7fe655ff04acf616158bce49725f2df5ad/LICENSE-EDL-1.0.txt"
+        }
+      ],
+      "selected_source_evidence": [
+        {
+          "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/list/mutable/ListAdapter.java",
+          "sha256": "8da619668a7ddd5b8362f0a75b2e5870b7ae74689916c7209c223344480d948c",
+          "git_blob": "dba6fed0269bb9dbf347a585ddfbf136b783429c",
+          "bytes": 9598,
+          "immutable_url": "https://github.com/eclipse/eclipse-collections/blob/fb6abf7fe655ff04acf616158bce49725f2df5ad/eclipse-collections/src/main/java/org/eclipse/collections/impl/list/mutable/ListAdapter.java"
+        },
+        {
+          "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/map/mutable/MapAdapter.java",
+          "sha256": "7fc6c64c044d10413184be766c883f1ed38bf30c24c7bccf5aac3b14456e3252",
+          "git_blob": "a02fea62fec4a6692ddd80f911249e76240f536a",
+          "bytes": 4639,
+          "immutable_url": "https://github.com/eclipse/eclipse-collections/blob/fb6abf7fe655ff04acf616158bce49725f2df5ad/eclipse-collections/src/main/java/org/eclipse/collections/impl/map/mutable/MapAdapter.java"
+        },
+        {
+          "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/map/ordered/mutable/OrderedMapAdapter.java",
+          "sha256": "8ad2271f45584985c5e65de7e09c714876025d5b29ec03c1b18b52d6d51b3732",
+          "git_blob": "464ca1d35073449d93b78e75041134e3eea631b8",
+          "bytes": 25511,
+          "immutable_url": "https://github.com/eclipse/eclipse-collections/blob/fb6abf7fe655ff04acf616158bce49725f2df5ad/eclipse-collections/src/main/java/org/eclipse/collections/impl/map/ordered/mutable/OrderedMapAdapter.java"
+        },
+        {
+          "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/bag/mutable/AbstractHashBag.java",
+          "sha256": "3588987656dfd27db53784f71a959bf685b592b721a77938df365990b5b13a44",
+          "git_blob": "6a8a81b5cfd12ef193b344d84842aaaf51a32894",
+          "bytes": 11427,
+          "immutable_url": "https://github.com/eclipse/eclipse-collections/blob/fb6abf7fe655ff04acf616158bce49725f2df5ad/eclipse-collections/src/main/java/org/eclipse/collections/impl/bag/mutable/AbstractHashBag.java"
+        },
+        {
+          "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/bimap/mutable/AbstractMutableBiMap.java",
+          "sha256": "23b2f82d5af266e96a4f08ddc903c92ba9de61cbc41a6967a9f329d9e65db5cf",
+          "git_blob": "aeb85448bd5b2eacdd58c5e52a024611977f9e10",
+          "bytes": 36805,
+          "immutable_url": "https://github.com/eclipse/eclipse-collections/blob/fb6abf7fe655ff04acf616158bce49725f2df5ad/eclipse-collections/src/main/java/org/eclipse/collections/impl/bimap/mutable/AbstractMutableBiMap.java"
+        },
+        {
+          "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/bag/mutable/AbstractMutableBag.java",
+          "sha256": "11613b425c92d9989ddd15788214fcb5516197bb726910833ae3935157eaf80f",
+          "git_blob": "381dbbff5b090da9b2533168272bebe6563f5b65",
+          "bytes": 7042,
+          "immutable_url": "https://github.com/eclipse/eclipse-collections/blob/fb6abf7fe655ff04acf616158bce49725f2df5ad/eclipse-collections/src/main/java/org/eclipse/collections/impl/bag/mutable/AbstractMutableBag.java"
+        },
+        {
+          "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/bag/mutable/AbstractMutableBagIterable.java",
+          "sha256": "82db650cd22f4e7bdfc5df5bf8b3d3321a8ea594b99b912414033ef974da18d9",
+          "git_blob": "6d26bdff9030aa4f2bc76205ee253817c23903c3",
+          "bytes": 10710,
+          "immutable_url": "https://github.com/eclipse/eclipse-collections/blob/fb6abf7fe655ff04acf616158bce49725f2df5ad/eclipse-collections/src/main/java/org/eclipse/collections/impl/bag/mutable/AbstractMutableBagIterable.java"
+        }
+      ]
+    },
+    {
+      "name": "guava",
+      "repository": "google/guava",
+      "tag": "v33.4.8",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "compatibility_coordinate": "com.google.guava:guava:33.4.8-jre",
+      "tracked_file_count": 3356,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+          "bytes": 11358,
+          "immutable_url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/LICENSE"
+        }
+      ],
+      "selected_source_evidence": [
+        {
+          "path": "guava/src/com/google/common/collect/Multimaps.java",
+          "sha256": "fd378b6f32d5f9c648ca2f8f3bf97a84f2929d4cf9b3e2d423e224dfe51f4e1e",
+          "git_blob": "4c05fe0be9ccd52c5402c34c78b0cbf6ee3e61a0",
+          "bytes": 89112,
+          "immutable_url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/Multimaps.java"
+        },
+        {
+          "path": "guava/src/com/google/common/collect/Tables.java",
+          "sha256": "12df8e3b6a4a53f135c247d7a4bcc9ac6a7b368f5346131be34d22e05725036f",
+          "git_blob": "d5566a48ed058c57f7d6202e8cf361eb69ff77be",
+          "bytes": 25666,
+          "immutable_url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/Tables.java"
+        },
+        {
+          "path": "guava/src/com/google/common/collect/AbstractBiMap.java",
+          "sha256": "99638fac3b91919ae7621400d6462492c265ae8b3779f8a2e0b04a33323f3be2",
+          "git_blob": "26a2df528ed8957faa5417195810e9fa9c68d2c4",
+          "bytes": 14712,
+          "immutable_url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/AbstractBiMap.java"
+        },
+        {
+          "path": "guava/src/com/google/common/collect/BiMap.java",
+          "sha256": "189bd08ae6fee878f4196ac857964da645009f266f849684a4e9f5a06dcdc556",
+          "git_blob": "9adbff493fad52a1d4b195ed5ad0b830c6b2542a",
+          "bytes": 4253,
+          "immutable_url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/BiMap.java"
+        },
+        {
+          "path": "guava/src/com/google/common/collect/Multiset.java",
+          "sha256": "31b8543a17f2ea0bb5b301b05f3b1b4cd216138b3bf85c50dfa2a5eebba5e19f",
+          "git_blob": "2ec25bf35c3a00d1067a394d2639151e4696170e",
+          "bytes": 21369,
+          "immutable_url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/Multiset.java"
+        },
+        {
+          "path": "guava/src/com/google/common/collect/AbstractMultiset.java",
+          "sha256": "85d7111360e2684c88fb2c7bfff1ade04540da38cbe951a3286cf6df2d653964",
+          "git_blob": "55848b24b4969bf37a114e28d64221444d4dade2",
+          "bytes": 6003,
+          "immutable_url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/AbstractMultiset.java"
+        }
+      ]
+    },
+    {
+      "name": "spring-framework",
+      "repository": "spring-projects/spring-framework",
+      "tag": "v6.2.0",
+      "commit": "5024bb72279188f1d0dcfe19e8abdd4bdb9887c8",
+      "compatibility_coordinate": "org.springframework:spring-core:6.2.0",
+      "tracked_file_count": 10861,
+      "license_evidence": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "56dfc19e0dc836e30177332f73e8e6fbc297941acf3d906eec6eaaa46c2c452a",
+          "git_blob": "ff77379631504c17ad0a94dddc6803f0d3fb0fbb",
+          "bytes": 11360,
+          "immutable_url": "https://github.com/spring-projects/spring-framework/blob/5024bb72279188f1d0dcfe19e8abdd4bdb9887c8/LICENSE.txt"
+        }
+      ],
+      "selected_source_evidence": [
+        {
+          "path": "spring-core/src/main/java/org/springframework/util/MultiValueMap.java",
+          "sha256": "5708569f8d6d6de3ea0b70af9ba731e7b489cf718efa6b9eba19f23c9b422d62",
+          "git_blob": "262601a5a4aec430eb066a23b5571b7ffd80f8dd",
+          "bytes": 4385,
+          "immutable_url": "https://github.com/spring-projects/spring-framework/blob/5024bb72279188f1d0dcfe19e8abdd4bdb9887c8/spring-core/src/main/java/org/springframework/util/MultiValueMap.java"
+        },
+        {
+          "path": "spring-core/src/main/java/org/springframework/util/MultiValueMapAdapter.java",
+          "sha256": "f4922d4aa61f5d3477dd6971aca7e653747c45b3b024d1daa23aa7406d943c4e",
+          "git_blob": "4c7c2f1d133cccef1eab060524a71cd3de4b45a9",
+          "bytes": 4463,
+          "immutable_url": "https://github.com/spring-projects/spring-framework/blob/5024bb72279188f1d0dcfe19e8abdd4bdb9887c8/spring-core/src/main/java/org/springframework/util/MultiValueMapAdapter.java"
+        },
+        {
+          "path": "spring-core/src/main/java/org/springframework/util/LinkedMultiValueMap.java",
+          "sha256": "6e7ce8b67d77caf1d6c9badd4265b943c47d19660f90ae48e6eb09b46bfa6ec5",
+          "git_blob": "8faf71ea1ce0e705e84a04dfaaca82c03cc30241",
+          "bytes": 3653,
+          "immutable_url": "https://github.com/spring-projects/spring-framework/blob/5024bb72279188f1d0dcfe19e8abdd4bdb9887c8/spring-core/src/main/java/org/springframework/util/LinkedMultiValueMap.java"
+        },
+        {
+          "path": "spring-core/src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java",
+          "sha256": "db02cc8833691e76e66caa4de710d6a5791f85c1cb5bc42365813996547a5fa8",
+          "git_blob": "f02bb4ee94290adbd492d539fd09db21cfd993d1",
+          "bytes": 7494,
+          "immutable_url": "https://github.com/spring-projects/spring-framework/blob/5024bb72279188f1d0dcfe19e8abdd4bdb9887c8/spring-core/src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java"
+        },
+        {
+          "path": "spring-core/src/main/java/org/springframework/util/MultiToSingleValueMapAdapter.java",
+          "sha256": "be17242bbce20e3fe188674decf78af26fb6edc7e57158a460f337a2e763bef8",
+          "git_blob": "959a69b843ed0a0d5ce393b90ea7b4348d2df67e",
+          "bytes": 6064,
+          "immutable_url": "https://github.com/spring-projects/spring-framework/blob/5024bb72279188f1d0dcfe19e8abdd4bdb9887c8/spring-core/src/main/java/org/springframework/util/MultiToSingleValueMapAdapter.java"
+        },
+        {
+          "path": "spring-core/src/main/java/org/springframework/util/AutoPopulatingList.java",
+          "sha256": "9e531a2f29a64b2aceed79c4403d744fb521388d92205efbd9b55286139d018b",
+          "git_blob": "4a01bd50212856353862f18ae49c3c487c7fa35a",
+          "bytes": 8688,
+          "immutable_url": "https://github.com/spring-projects/spring-framework/blob/5024bb72279188f1d0dcfe19e8abdd4bdb9887c8/spring-core/src/main/java/org/springframework/util/AutoPopulatingList.java"
+        }
+      ]
+    },
+    {
+      "name": "commons-collections",
+      "repository": "apache/commons-collections",
+      "tag": "rel/commons-collections-4.6.0",
+      "commit": "4107624de41aeed37985d2a069fad41992fd71a2",
+      "compatibility_coordinate": "org.apache.commons:commons-collections4:4.6.0",
+      "tracked_file_count": 934,
+      "license_evidence": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "b1d2870f1a00e4d7f56576e5f0870cba109e041f8af66866cf5b499478e654e7",
+          "git_blob": "ff9ad4530f5716304e042cbac72cecd7c40f0e0e",
+          "bytes": 11359,
+          "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/LICENSE.txt"
+        },
+        {
+          "path": "NOTICE.txt",
+          "sha256": "b02ca2cac4b96fa1a9829573fbc61b2603e5325b5e72b22993921e98bf06aa54",
+          "git_blob": "8c3e93e4e86beb91f07001380fbec5253e2f5010",
+          "bytes": 181,
+          "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/NOTICE.txt"
+        }
+      ],
+      "selected_source_evidence": [
+        {
+          "path": "src/main/java/org/apache/commons/collections4/Bag.java",
+          "sha256": "2ee31b90ba348dfe1d0856429c10cf0e92b392f16fa284523d7e53747eed4ac9",
+          "git_blob": "7105db142318aba3534b2de2714354463a3551b0",
+          "bytes": 10593,
+          "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/Bag.java"
+        },
+        {
+          "path": "src/main/java/org/apache/commons/collections4/MultiSet.java",
+          "sha256": "b5f129b18adbfd7d3a3727b8ba9db90d82db9d0549ce233fdb98921e3702785c",
+          "git_blob": "b4f76a9c37bbf7e2841e03b723ff128a37e13ed2",
+          "bytes": 9423,
+          "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/MultiSet.java"
+        },
+        {
+          "path": "src/main/java/org/apache/commons/collections4/BidiMap.java",
+          "sha256": "eb8193201ca3a52fe352399e6964fc791c00a1f1ec523cbb28444309b7fff743",
+          "git_blob": "80d5cb88d9b3f84f66b781e5052a7e97f651231d",
+          "bytes": 6199,
+          "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/BidiMap.java"
+        },
+        {
+          "path": "src/main/java/org/apache/commons/collections4/bag/AbstractMapBag.java",
+          "sha256": "2deaa2d79d266845936fc6c37dd2f7d1fed0b5d4681cca00b3235117898e160f",
+          "git_blob": "f3e6bef27d302b1f13d19f2341e76704db7aca89",
+          "bytes": 19864,
+          "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/bag/AbstractMapBag.java"
+        },
+        {
+          "path": "src/main/java/org/apache/commons/collections4/multiset/AbstractMapMultiSet.java",
+          "sha256": "0a98fef7016ef0c2852b9d548691d1dbc11ab06b856ea309d60a85c244a3f431",
+          "git_blob": "429a1ed071f2b119f7769748928ebf6e0bcef926",
+          "bytes": 18306,
+          "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/multiset/AbstractMapMultiSet.java"
+        },
+        {
+          "path": "src/main/java/org/apache/commons/collections4/bidimap/AbstractDualBidiMap.java",
+          "sha256": "450ff8005f1ce8ab135e81fcfea3998934a5ea6278e2cd9f11a016a7d826221f",
+          "git_blob": "b7d6a2532fd4e915f469060990d083ec41880593",
+          "bytes": 25196,
+          "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/bidimap/AbstractDualBidiMap.java"
+        },
+        {
+          "path": "src/main/java/org/apache/commons/collections4/multimap/AbstractListValuedMap.java",
+          "sha256": "695d0c866645706d24b88244813d3eea7758736984353ec054f5de628ae94040",
+          "git_blob": "e2a4e865ec13fc59cb10c9ba05cfb5ba6ae2515b",
+          "bytes": 8554,
+          "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/multimap/AbstractListValuedMap.java"
+        },
+        {
+          "path": "src/main/java/org/apache/commons/collections4/multimap/AbstractSetValuedMap.java",
+          "sha256": "9d3bd0a73d53abfc6f251344704540707b44c7fcd74a332abfb4dae360c2174c",
+          "git_blob": "30d638a46150835667b12fa5110261803c65e4a5",
+          "bytes": 4090,
+          "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/multimap/AbstractSetValuedMap.java"
+        },
+        {
+          "path": "src/main/java/org/apache/commons/collections4/multimap/AbstractMultiValuedMap.java",
+          "sha256": "17f6a4184afd2784a6659f5ae147ead6d470178757df14cc07bcd59aea038e4e",
+          "git_blob": "7973e378a07cf022f334396814467918939e5f8a",
+          "bytes": 29295,
+          "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/multimap/AbstractMultiValuedMap.java"
+        }
+      ]
+    }
+  ],
+  "new_provider_families": [
+    "Guava Multiset",
+    "Guava BiMap",
+    "Apache ListValuedMap",
+    "Apache SetValuedMap",
+    "Apache BidiMap",
+    "Apache MultiSet",
+    "Apache Bag",
+    "Eclipse MutableBag",
+    "Eclipse MutableOrderedMap"
+  ],
+  "original_provider_families_retained": 18,
+  "original_stream_collectors_retained": 11,
+  "new_stream_collectors": 9,
+  "runtime_provider_sources": "Official pinned dependencies; M3 glue and Apache/Guava adaptations are separately attributed",
+  "full_library_api_coverage": "UNQUALIFIED; explicit family coverage only",
+  "installed_m3jdk_image": "UNQUALIFIED",
+  "repository_wide_offline_dependency_closure": "UNQUALIFIED; exact donor checkouts and local Maven cache used in task evidence",
+  "historical_receipts": "Existing donor-origin.json, recipe-receipt.tsv and qualification records retain their original preparation meaning",
+  "shared_owner_semantics": "Mutation is immediately visible through every facade. Equality, remove, overflow and return-value rules stay provider-specific. No concurrency or serialization contract.",
+  "initial_target_base": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "frozen_base_factory_signatures_retained": 22,
+  "new_factory_signatures": 11,
+  "total_factory_signatures_in_M3LibraryCollections": 33,
+  "apache_upgrade": {
+    "from": "4.5.0",
+    "to": "4.6.0",
+    "retained": "Existing predicated adapters and SDK bindings, with their tests"
+  },
+  "constructor_prerequisite": "Already integrated in frozen baseline; preserve all later state-slot APIs; no constructor source replacement"
+}

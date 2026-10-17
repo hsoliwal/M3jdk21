@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "source_repository": "apache/commons-collections",
+  "source_commit": "4107624de41aeed37985d2a069fad41992fd71a2",
+  "source_release": "4.6.0",
+  "spdx_license_id": "Apache-2.0",
+  "required_notice": "Apache Commons Collections\nCopyright 2001-2026 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (https://www.apache.org/).\n",
+  "template_lineage": {
+    "M3ApacheListValuedMap.java.txt": {
+      "adapted": [
+        "src/main/java/org/apache/commons/collections4/multimap/ArrayListValuedLinkedHashMap.java"
+      ],
+      "inherited": [
+        "src/main/java/org/apache/commons/collections4/multimap/AbstractListValuedMap.java",
+        "src/main/java/org/apache/commons/collections4/multimap/AbstractMultiValuedMap.java"
+      ],
+      "preserved_first_party_sdk_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+        "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheListValuedMap.java",
+        "git_blob": "0d26450c769053a7580cb0e9522be3596cf3b026",
+        "sha256": "7c74e242fb0bae5f853e335aed4d2d5695f9c1881af6325297641d29b06dcc82",
+        "immutable_url": "https://github.com/hsoliwal/M3jdk21/blob/f3c615693c41bac1bf6ff49ba53e83f85425bca0/m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheListValuedMap.java",
+        "spdx_license_id": "Apache-2.0",
+        "original_copyright": "Copyright 2026 Hitesh Soliwal and contributors.",
+        "source_recipe_family": "sdk-family-names-20261017",
+        "preserved_members": [
+          {
+            "declaration": "public M3ApacheListValuedMap()",
+            "body": "super(new M3LinkedHashMap<K, List<V>>());",
+            "ownership": "Existing first-party constructor retained verbatim"
+          },
+          {
+            "declaration": "protected List<V> createCollection()",
+            "body": "return new M3LinkedList<>();",
+            "ownership": "Existing first-party collection hook retained verbatim"
+          }
+        ],
+        "preservation": "Class name, generic parameters, superclass, public constructor and protected collection hook remain unchanged. Existing inherited Apache views remain donor-owned."
+      },
+      "adapted_members": [
+        {
+          "source_path": "src/main/java/org/apache/commons/collections4/multimap/ArrayListValuedLinkedHashMap.java",
+          "source_member": "inverted()",
+          "target_member": "public M3ApacheListValuedMap<V, K> inverted()",
+          "adaptation": "Retain the Apache 4.6.0 independent-inversion contract while constructing the result with the existing M3 constructor and collection hooks.",
+          "boundary": "The preserved first-party constructor/createCollection bodies are not attributed to this Apache adaptation."
+        }
+      ],
+      "template_postimage_sha256": "cf19153a45cddfeb01176f1483c5e89ce44249b1e99efe77711b6ecf5597d7dd"
+    },
+    "M3ApacheSetValuedMap.java.txt": {
+      "adapted": [
+        "src/main/java/org/apache/commons/collections4/multimap/LinkedHashSetValuedLinkedHashMap.java"
+      ],
+      "inherited": [
+        "src/main/java/org/apache/commons/collections4/multimap/AbstractSetValuedMap.java",
+        "src/main/java/org/apache/commons/collections4/multimap/AbstractMultiValuedMap.java"
+      ],
+      "preserved_first_party_sdk_source": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+        "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheSetValuedMap.java",
+        "git_blob": "0c6c519702653c2a6729d4585e4cb60895470547",
+        "sha256": "e44934cdb39484af881aa834fb6478b160c150a1b874bee4a03ed70c46e19547",
+        "immutable_url": "https://github.com/hsoliwal/M3jdk21/blob/f3c615693c41bac1bf6ff49ba53e83f85425bca0/m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheSetValuedMap.java",
+        "spdx_license_id": "Apache-2.0",
+        "original_copyright": "Copyright 2026 Hitesh Soliwal and contributors.",
+        "source_recipe_family": "sdk-family-names-20261017",
+        "preserved_members": [
+          {
+            "declaration": "public M3ApacheSetValuedMap()",
+            "body": "super(new M3LinkedHashMap<K, Set<V>>());",
+            "ownership": "Existing first-party constructor retained verbatim"
+          },
+          {
+            "declaration": "protected Set<V> createCollection()",
+            "body": "return new M3LinkedHashSet<>();",
+            "ownership": "Existing first-party collection hook retained verbatim"
+          }
+        ],
+        "preservation": "Class name, generic parameters, superclass, public constructor and protected collection hook remain unchanged. Existing inherited Apache views remain donor-owned."
+      },
+      "adapted_members": [
+        {
+          "source_path": "src/main/java/org/apache/commons/collections4/multimap/LinkedHashSetValuedLinkedHashMap.java",
+          "source_member": "inverted()",
+          "target_member": "public M3ApacheSetValuedMap<V, K> inverted()",
+          "adaptation": "Retain the Apache 4.6.0 independent-inversion contract while constructing the result with the existing M3 constructor and collection hooks.",
+          "boundary": "The preserved first-party constructor/createCollection bodies are not attributed to this Apache adaptation."
+        }
+      ],
+      "template_postimage_sha256": "cd8b8cf5805afd37a030f0c8fb8bc6388b544731fe81b06bbb02a6171a1bc8fd"
+    },
+    "M3ApacheBidiMap.java.txt": {
+      "adapted": [
+        "src/main/java/org/apache/commons/collections4/bidimap/DualLinkedHashBidiMap.java"
+      ],
+      "inherited": [
+        "src/main/java/org/apache/commons/collections4/bidimap/AbstractDualBidiMap.java"
+      ]
+    },
+    "M3ApacheCountIterator.java.txt": {
+      "adapted": [
+        "src/main/java/org/apache/commons/collections4/multiset/AbstractMapMultiSet.java",
+        "src/main/java/org/apache/commons/collections4/bag/AbstractMapBag.java"
+      ],
+      "inherited": []
+    },
+    "M3ApacheMultiSet.java.txt": {
+      "adapted": [
+        "src/main/java/org/apache/commons/collections4/multiset/AbstractMapMultiSet.java"
+      ],
+      "inherited": [
+        "src/main/java/org/apache/commons/collections4/multiset/AbstractMultiSet.java"
+      ]
+    },
+    "M3ApacheBag.java.txt": {
+      "adapted": [
+        "src/main/java/org/apache/commons/collections4/bag/AbstractMapBag.java"
+      ],
+      "inherited": []
+    }
+  },
+  "source_files": [
+    {
+      "path": "src/main/java/org/apache/commons/collections4/bag/AbstractMapBag.java",
+      "git_blob": "f3e6bef27d302b1f13d19f2341e76704db7aca89",
+      "sha256": "2deaa2d79d266845936fc6c37dd2f7d1fed0b5d4681cca00b3235117898e160f",
+      "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/bag/AbstractMapBag.java"
+    },
+    {
+      "path": "src/main/java/org/apache/commons/collections4/bidimap/AbstractDualBidiMap.java",
+      "git_blob": "b7d6a2532fd4e915f469060990d083ec41880593",
+      "sha256": "450ff8005f1ce8ab135e81fcfea3998934a5ea6278e2cd9f11a016a7d826221f",
+      "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/bidimap/AbstractDualBidiMap.java"
+    },
+    {
+      "path": "src/main/java/org/apache/commons/collections4/bidimap/DualLinkedHashBidiMap.java",
+      "git_blob": "7d39294dbdc3fb51a72561ac8e9de951f9423515",
+      "sha256": "a4e59dd6981e3a8a686bbafb563dc7227dccd29f0c782e9978bfb1428a3ce616",
+      "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/bidimap/DualLinkedHashBidiMap.java"
+    },
+    {
+      "path": "src/main/java/org/apache/commons/collections4/multimap/AbstractListValuedMap.java",
+      "git_blob": "e2a4e865ec13fc59cb10c9ba05cfb5ba6ae2515b",
+      "sha256": "695d0c866645706d24b88244813d3eea7758736984353ec054f5de628ae94040",
+      "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/multimap/AbstractListValuedMap.java"
+    },
+    {
+      "path": "src/main/java/org/apache/commons/collections4/multimap/AbstractMultiValuedMap.java",
+      "git_blob": "7973e378a07cf022f334396814467918939e5f8a",
+      "sha256": "17f6a4184afd2784a6659f5ae147ead6d470178757df14cc07bcd59aea038e4e",
+      "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/multimap/AbstractMultiValuedMap.java"
+    },
+    {
+      "path": "src/main/java/org/apache/commons/collections4/multimap/AbstractSetValuedMap.java",
+      "git_blob": "30d638a46150835667b12fa5110261803c65e4a5",
+      "sha256": "9d3bd0a73d53abfc6f251344704540707b44c7fcd74a332abfb4dae360c2174c",
+      "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/multimap/AbstractSetValuedMap.java"
+    },
+    {
+      "path": "src/main/java/org/apache/commons/collections4/multimap/ArrayListValuedLinkedHashMap.java",
+      "git_blob": "63b0ae3e8ab2d336783ed5257b50f20826e0c093",
+      "sha256": "b7d68c836fccaee73a0a46c1fca5e788d0dc3e757155d9f9796ea88db15cff63",
+      "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/multimap/ArrayListValuedLinkedHashMap.java"
+    },
+    {
+      "path": "src/main/java/org/apache/commons/collections4/multimap/LinkedHashSetValuedLinkedHashMap.java",
+      "git_blob": "305cbd8aa9b5b10962cdef5c84110863fa597207",
+      "sha256": "c94eec2105fd002d23b3b35513c014c07f2c09fda78f1ce9d5b283e40d5a13bb",
+      "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/multimap/LinkedHashSetValuedLinkedHashMap.java"
+    },
+    {
+      "path": "src/main/java/org/apache/commons/collections4/multiset/AbstractMapMultiSet.java",
+      "git_blob": "429a1ed071f2b119f7769748928ebf6e0bcef926",
+      "sha256": "0a98fef7016ef0c2852b9d548691d1dbc11ab06b856ea309d60a85c244a3f431",
+      "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/multiset/AbstractMapMultiSet.java"
+    },
+    {
+      "path": "src/main/java/org/apache/commons/collections4/multiset/AbstractMultiSet.java",
+      "git_blob": "9a56f6823f833e8eeae9bec1f73f656f2075611a",
+      "sha256": "3ce033435e33509576a07549c370af8fc9f8379e746be69b7e144663acbd5749",
+      "immutable_url": "https://github.com/apache/commons-collections/blob/4107624de41aeed37985d2a069fad41992fd71a2/src/main/java/org/apache/commons/collections4/multiset/AbstractMultiSet.java"
+    }
+  ],
+  "copied_license_templates": [
+    {
+      "template": "donor-apache-commons-collections-4.6.0-LICENSE.txt",
+      "donor_path": "LICENSE.txt",
+      "source_clone": "commons-collections",
+      "sha256": "b1d2870f1a00e4d7f56576e5f0870cba109e041f8af66866cf5b499478e654e7",
+      "bytes": 11359
+    },
+    {
+      "template": "donor-apache-commons-collections-4.6.0-NOTICE.txt",
+      "donor_path": "NOTICE.txt",
+      "source_clone": "commons-collections",
+      "sha256": "b02ca2cac4b96fa1a9829573fbc61b2603e5325b5e72b22993921e98bf06aa54",
+      "bytes": 181
+    },
+    {
+      "template": "donor-guava-33.4.8-LICENSE.txt",
+      "donor_path": "LICENSE",
+      "source_clone": "guava",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "template": "donor-spring-framework-6.2.0-LICENSE.txt",
+      "donor_path": "LICENSE.txt",
+      "source_clone": "spring-framework",
+      "sha256": "56dfc19e0dc836e30177332f73e8e6fbc297941acf3d906eec6eaaa46c2c452a",
+      "bytes": 11360
+    },
+    {
+      "template": "donor-eclipse-collections-11.1.0-LICENSE-EPL-1.0.txt",
+      "donor_path": "LICENSE-EPL-1.0.txt",
+      "source_clone": "eclipse-collections",
+      "sha256": "44277b2bec6093e4ac313afec251a4de599d24c4e768f8574d95b13a9d2d97b5",
+      "bytes": 11232
+    },
+    {
+      "template": "donor-eclipse-collections-11.1.0-LICENSE-EDL-1.0.txt",
+      "donor_path": "LICENSE-EDL-1.0.txt",
+      "source_clone": "eclipse-collections",
+      "sha256": "47265c58c98e690bc9235656600be65af938f71f9ec056f8bf84f56f88b8a0ff",
+      "bytes": 1561
+    }
+  ],
+  "test_origin": "Original independent Synexia/M3 test fixtures, no donor test source copied",
+  "retained_rights": "All adapted source templates retain ASF source license header, Apache-2.0 identifier and a 2026 Hitesh Soliwal/Synexia modification notice. The two pre-existing M3 multivalued-map templates additionally retain their original first-party SDK source copyright; their constructor and createCollection bodies retain first-party provenance, while Apache attribution identifies the added 4.6.0 inversion hook and inherited dependency behavior.",
+  "target_frozen_base": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+    "role": "Existing first-party SDK family source retained during additive Apache 4.6.0 reconciliation",
+    "baseline_apache_dependency": "4.5.0",
+    "candidate_apache_dependency": "4.6.0"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "--offline",
+    "-B",
+    "-ntp",
+    "-f",
+    "/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/interop/recipe/pom.xml",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-Dm3.collections.target=",
+    "test"
+  ],
+  "cwd": "/workspace/scratch/f0742e08085b/M3jdk21",
+  "JAVA_HOME": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "MAVEN_OPTS": "-Xmx2g -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts",
+  "recipe_materialization": "disabled by empty m3.collections.target",
+  "input_sha256": {
+    "m3/collections/interop/recipe/pom.xml": "452e7131063392ba736b106eb9dadf13b6236e069cd8ce6c2cd16974c3c9bbc4",
+    "m3/collections/interop/recipe/src/main/resources/META-INF/rewrite/m3-collections-library-interop.yml": "709e58675f8eec2e8c0f176fc647c5306a5785ac3311551a82e1e218f7d174a7",
+    "m3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/M3LibraryClosureTest.java.txt": "5ece9a369bcf5a223cb163ed0857534600fcd53bcc881f239956be15a4200f40",
+    "m3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/M3LibraryCollections.java.txt": "fa144a8c8617f190cdb1848bc28d3c9f6ae4302666a00c8ea3e904f25afc06fd",
+    "m3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/M3LibraryCollectionsTest.java.txt": "4bebee17ef96cefd2c779c76a0b190e27de311d136dec2de0fc5c05161ac199a",
+    "m3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/M3LibraryCollectors.java.txt": "8836aaca2113c3d25bffbf1a226394ffa0f6a7c7fbba826715a0aa96c5500a19",
+    "m3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/M3SpringMultiValueMap.java.txt": "cfd7a51bdce14f3e8f2b875d529006c3863049d10087a18b14ccad45f0fd669a",
+    "m3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv": "f10876db26e6bf7dc619e4eaedf3fad2f6e4a3c74838a29a26a30ea466c5cf9a",
+    "m3/collections/interop/recipe/src/test/java/com/synexia/rewrite/M3CollectionsLibraryInteropTest.java": "4f96067468c460bf5308c2383c1e59803a909693fe968ce6afe5718dc44f180b",
+    "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+  },
+  "started_utc": "2026-10-17T13:29:49Z",
+  "exit_code": 0,
+  "elapsed_seconds": 12.676,
+  "finished_utc": "2026-10-17T13:30:01Z",
+  "inputs_unchanged": true
+}

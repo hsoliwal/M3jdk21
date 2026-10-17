@@ -1,0 +1,206 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "schema": "M3_RECEIVED_CORE_EVIDENCE_V1",
+  "status": "PASS",
+  "mode": "RECEIVED_SOURCE_QUALIFICATION",
+  "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
+  "canonical_source_commit_at_execution": "866e240ec1ac8600999d474eb7b8ce1930e326e3",
+  "sdk_results_sha256_at_execution": "cb219035b789abcdcc28be9149b8ecbb000247adfd9859c01cc3e1db8ae02076",
+  "target_master_commit": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+  "target_root": "/workspace/scratch/f0742e08085b/M3jdk21",
+  "packaged_utc": "2026-10-17T13:42:31.104084+00:00",
+  "source_identity": {
+    "path": "received-core-source-census.tsv",
+    "files": 236,
+    "sha256": "b8db6c7000d978ac967415777aee1fe071b049c78f84119a3a5afc04a14d1240",
+    "matches_all_three_execution_receipts": true,
+    "encoding": "UTF-8; sorted repository-relative path, TAB, SHA-256, LF; no header"
+  },
+  "java_compile": "--release 21 -Xlint:all,-module -Werror",
+  "java_sources": 117,
+  "test_sources": 107,
+  "maven": {
+    "lifecycle": "install (includes verify)",
+    "offline": true,
+    "suites": 58,
+    "tests": 211,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "built_installed_jar_identical": true,
+    "source_installed_pom_identical": true
+  },
+  "standalone_verifier": {
+    "junit": {
+      "tests": 211,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "main_self_tests": [
+      "M3LazyTreeMapSelfTest:PASS",
+      "M3LazyValueStateSelfTest:PASS"
+    ],
+    "runtime_requires": [
+      "java.base"
+    ],
+    "packaged_license_provenance": "PASS",
+    "packaged_collection_resources": [
+      "m3/collections/src/main/resources/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv"
+    ]
+  },
+  "source_admission": {
+    "tests": 34,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "admission": {
+      "schema": "M3_SOURCE_ADMISSION_SUCCESSION_V1",
+      "historical_installed_manifest": {
+        "path": "m3/collections/qualification/installed-source-enum-set-20261014.tsv",
+        "sha256": "046e3aa7f4d9523a72657942fac62bcb7d7bb6eaafb928dbe1c1d87afed1252c"
+      },
+      "historical_successors": [
+        {
+          "path": "m3/collections/recipe/filtered-sorted-views-20261017/manifest.tsv",
+          "sha256": "828e24b44e4d0b98c6819bb9dd983d71084ae0661e1d81fe90bd0dd286c50ede"
+        },
+        {
+          "path": "m3/collections/recipe/stored-representative-20261017/manifest.tsv",
+          "sha256": "a62827ffafc18bd6d710d7898741d2114a0068b8ac9ee63aac02e55038e1f293"
+        },
+        {
+          "path": "m3/collections/recipe/index-path-masks-20261017/manifest.tsv",
+          "sha256": "1cba7c9ed681fbe65653b75949558640ea5aa31a1e3c8f5d83d27f9197518020"
+        },
+        {
+          "path": "m3/collections/qualification/object-state-offset-jni-20261017.tsv",
+          "sha256": "f371b00237b1219cad8d131703929c32a06a56df567943411c40549e2351d4d5"
+        }
+      ],
+      "historical_admission_helper": {
+        "path": "m3/collections/m3_object_state_offset_receipt.py",
+        "sha256": "5c238acdff67e47e0284eabfc1ea7a585c8f3e44d9d78e98f272df9935d84fd8"
+      },
+      "master_reconciliation": {
+        "target_commit": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+        "path": "m3/collections/recipe/five-provider-array-interop-20261017/master-source-manifest.tsv",
+        "sha256": "d5ae548c58ae31ea92898e90961a94743439956279bbd5dfb3293c7af052d163",
+        "source_census_sha256": "cf32fd1f8363b5cb8c25b712667dec4f541c14a2e9717ceb0f39ab607a5edb6a",
+        "existing_admission_gap": {
+          "unlisted_java_sources": 115,
+          "unlisted_native_sources": 9,
+          "unlisted_resources": 1,
+          "stale_java_digests": 8
+        }
+      },
+      "task_successor": {
+        "path": "m3/collections/recipe/five-provider-array-interop-20261017/source-manifest.tsv",
+        "sha256": "0cc34cf912f12928fa0b9a7b5aafdb48981140ea2fd99c70360caa5bb367a441",
+        "changed_or_added_paths": 6
+      },
+      "installed_source_census_sha256": "373cae4d211269549ea0092a74e6fb5359c28ad255d45dd8c90120863b6f1d6e",
+      "installed_receipt_rows": 240,
+      "java_sources": 224,
+      "native_sources": 11,
+      "resource_files": 1
+    }
+  },
+  "native": {
+    "standard": "c17",
+    "segmented_checked_jni": "PASS",
+    "segmented_boundary_ranges": 66,
+    "segmented_changing_random_ranges": 1200,
+    "undefined_behavior_sanitizer": "PASS",
+    "object_counts_checked_jni": {
+      "status": "PASS",
+      "junit": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "native_library": "libm3_collections_pathmask.so",
+      "native_source_sha256": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+      "required_property": "m3.interop.requireNative=true",
+      "jvm_check": "-Xcheck:jni",
+      "undefined_behavior_sanitizer": "PASS"
+    },
+    "runtime_native_owners_exercised": [
+      "segmented_bits",
+      "m3_index_path_masks"
+    ],
+    "source_custody_native_files": 11
+  },
+  "prepared_allocation": {
+    "status": "PASS",
+    "trials": 5,
+    "allocated_bytes_each": 0,
+    "scope": "Only the prepared loop on the recorded JVM; not streams or page growth."
+  },
+  "cost_probe": "DIAGNOSTIC_RECORDED",
+  "universal_performance_claim": false,
+  "artifacts": {
+    "maven_jar": {
+      "path": "/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/m3-collections-0.1.0-SNAPSHOT.jar",
+      "sha256": "0e19f670d75eab643dc047aae32975aeef1990d9dc005ce489dc4275aa9f47ec",
+      "bytes": 504469
+    },
+    "installed_maven_jar": {
+      "path": "/tmp/m3-maven-repository/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar",
+      "sha256": "0e19f670d75eab643dc047aae32975aeef1990d9dc005ce489dc4275aa9f47ec",
+      "bytes": 504469
+    },
+    "maven_pom": {
+      "path": "/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/pom.xml",
+      "sha256": "3a2602bb6b2a81b21b8b4dde6ebbf1f9172016c3df2a24f935ec76d16bf54f6d",
+      "bytes": 12012
+    },
+    "installed_maven_pom": {
+      "path": "/tmp/m3-maven-repository/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.pom",
+      "sha256": "3a2602bb6b2a81b21b8b4dde6ebbf1f9172016c3df2a24f935ec76d16bf54f6d",
+      "bytes": 12012
+    },
+    "standalone_verifier_jar": {
+      "path": "/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/m3-collections.jar",
+      "sha256": "917a3f883f371e99c2344bda101ecbf648bd6bb1295dac64baecd05e7248dd9c",
+      "bytes": 439345
+    },
+    "segmented_native_library": {
+      "path": "/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/libsegmented_bits.so",
+      "sha256": "3412c96056a0cec9e02410e06ff3046f3b62a07bcaec847070edbe52df5bfcfd",
+      "bytes": 17536
+    },
+    "pathmask_native_library": {
+      "path": "/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/libm3_collections_pathmask.so",
+      "sha256": "71b7045aaea30979436e579432ad19be1c4d34f744c62e8754339dadf539e352",
+      "bytes": 26408
+    }
+  },
+  "execution_receipts": {
+    "donation_verifier": {
+      "path": "/workspace/scratch/f0742e08085b/Synexia/synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017/evidence/received-core/execution/donation_verifier-execution.json",
+      "sha256": "1b29229622d78450e2142f96daae038649fdc1ea08b508cca4f109061797f2e2",
+      "bytes": 1312
+    },
+    "source_admission": {
+      "path": "/workspace/scratch/f0742e08085b/Synexia/synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017/evidence/received-core/execution/source_admission-execution.json",
+      "sha256": "cd979acc268eb29aa3fba88d87ade2c59ca6505e02e440c17bbf4ef4793de036",
+      "bytes": 1521
+    },
+    "core_maven_install": {
+      "path": "/workspace/scratch/f0742e08085b/Synexia/synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017/evidence/received-core/execution/core_maven_install-execution.json",
+      "sha256": "ef83093472375b80bc1baf0fb886322cd9f28346b5f991f22a237446f5b64bcd",
+      "bytes": 1387
+    }
+  },
+  "nonclaims": {
+    "full_reactor": "NOT_RUN",
+    "openjdk_jtreg_hotspot": "NOT_RUN",
+    "phase_advance": false,
+    "active_phase": "STRING",
+    "distinct_junit_count": "The same 211 tests ran in verifier and Maven; the 6 count tests were rerun with JNI required."
+  },
+  "successor_reuse": "These executions remain bound to the original source commit and SDK_RESULTS digest. A workflow-only successor can reuse them after comparing received-core-source-census.tsv and received-core-build-inputs.tsv; no later SDK run is asserted here."
+}

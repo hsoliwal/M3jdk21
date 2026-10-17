@@ -1,0 +1,17 @@
+provider	contract	storage	status	limits
+JDK	Map, Set, List, Deque, NavigableMap, NavigableSet	Existing M3 map/set/index-linked-list/tree owners	6 factories retained	Positional list access is O(n); not an installed JDK replacement
+Guava	ListMultimap, SetMultimap, SortedSetMultimap, Table	Existing M3 directories and value owners	4 factories retained	Provider result methods can allocate views and donor objects
+Guava	Multiset	M3ObjectCounts; primitive counts/flags	New default and shared-owner factories	Guava count overflow rejected; saturated int size; exact long owner total
+Guava	BiMap	Two M3LinkedHashMap owners	New factory	Duplicate values rejected; forcePut displaces; no serialization
+Eclipse	MutableMap, MutableList, MutableSet, MutableSortedMap, MutableSortedSet	Existing M3 owners with official adapters	5 factories retained	Intrinsic result allocation remains provider-defined
+Eclipse	MutableOrderedMap	M3LinkedHashMap with official OrderedMapAdapter	New factory and collector	newEmpty and other intrinsic allocating results can use donor storage
+Eclipse	MutableBag	M3ObjectCounts with AbstractMutableBag hierarchy	New default and shared-owner factories	Bounded count domain; immutable/primitive/sorted/grouped results remain donor-defined
+Spring	MultiValueMap, single-value bridge, AutoPopulatingList	Existing M3 directory/value/list owners	3 factories retained	Caller-supplied lists stay aliased; Spring6.2 single-value null anomaly retained
+Apache	ListValuedMap, SetValuedMap	Official abstract contracts with M3 directory and value owners	2 retained factories enhanced; 2 new collectors	Apache live-view semantics including donor-specific subList behavior
+Apache	BidiMap	Official AbstractDualBidiMap over two M3 maps	New factory and collector	put displaces duplicate values; collector rejects conflicts to preserve parallel composition
+Apache	MultiSet	M3ObjectCounts with AbstractMultiSet entry/unique views	New default and shared-owner factories	Per-key saturation; old-count returns; saturated int size
+Apache	Bag	M3ObjectCounts	New default and shared-owner factories	Legacy deprecated API: duplicate add false, remove(element) all copies, cardinality bulk operations
+M3	flags and signed-stride selection	Same stable slots as key directory; existing Java/JNI path-mask kernel	New M3ObjectCounts API	Flags require an existing element; O(distinct) snapshot metadata plus O(selected) key references; no native object addresses
+Cross-provider	20 collectors total	Independent M3 partial owners and ordered merges	11 retained + 9 added	No CONCURRENT or UNORDERED; no blanket closure of every donor allocating return
+Deferred	Concurrency, serialization, weak/reference variants, ranges, complete primitive APIs, all framework utilities	Unqualified	No full-superset claim	Separate contract and target-image gates remain open
+Retained additions	Guava filtered Collection/NavigableSet; Apache predicated factories; SDK bindings	Existing M3 owners and provider decorators	All frozen-base source and APIs retained	Apache dependency upgraded from4.5.0 to4.6.0 with retained tests

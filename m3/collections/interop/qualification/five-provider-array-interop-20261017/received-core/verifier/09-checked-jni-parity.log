@@ -1,0 +1,4 @@
+$ ['/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java', '-Xcheck:jni', '-cp', '/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/classes:/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/test-classes', 'SegmentedLaneNativeProbe', '/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/libsegmented_bits.so']
+JNI parity PASS: 66 boundary ranges, 1200 changing random ranges, checked JNI
+
+EXIT=0

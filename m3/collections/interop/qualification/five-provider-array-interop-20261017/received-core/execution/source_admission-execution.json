@@ -1,0 +1,30 @@
+{
+  "schema": "M3_RECEIVED_GATE_EXECUTION_V1",
+  "gate": "source_admission",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "canonical_source_commit": "866e240ec1ac8600999d474eb7b8ce1930e326e3",
+  "target_master_commit": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+  "target_root": "/workspace/scratch/f0742e08085b/M3jdk21",
+  "mode": "RECEIVED_SOURCE_QUALIFICATION",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-u",
+    "/workspace/scratch/f0742e08085b/Synexia/synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017/contract/test_source_admission.py",
+    "--target",
+    "/workspace/scratch/f0742e08085b/M3jdk21",
+    "--evidence",
+    "/tmp/m3-five-provider-received-f3c61569-20261017/source-admission"
+  ],
+  "started_utc": "2026-10-17T13:32:28.326960+00:00",
+  "finished_utc": "2026-10-17T13:32:29.946822+00:00",
+  "exit_code": 0,
+  "source_files_unchanged": true,
+  "verifier_sha256": "cf68c4bfabbf7b1a1defcbfd513980135c30d797175cd3000ff03e3f3735926a",
+  "sdk_results_sha256": "cb219035b789abcdcc28be9149b8ecbb000247adfd9859c01cc3e1db8ae02076",
+  "java_home": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "junit_console_sha256": "329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a",
+  "source_census_sha256": "b8db6c7000d978ac967415777aee1fe071b049c78f84119a3a5afc04a14d1240",
+  "log_sha256": "da42b49c1ec777392bdda1470e49c2b31c77ff099d8a5fa92d29c331f063409a",
+  "status": "PASS"
+}

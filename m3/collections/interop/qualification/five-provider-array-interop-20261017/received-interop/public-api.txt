@@ -1,0 +1,59 @@
+Compiled from "M3LibraryCollections.java"
+public final class com.m3.collections.interop.M3LibraryCollections {
+  public static <K, V> java.util.Map<K, V> jdkMap();
+  public static <E> java.util.Set<E> jdkSet();
+  public static <E> java.util.List<E> jdkList();
+  public static <E> java.util.Deque<E> jdkDeque();
+  public static <K, V> java.util.NavigableMap<K, V> jdkSortedMap(java.util.Comparator<? super K>);
+  public static <E> java.util.NavigableSet<E> jdkSortedSet(java.util.Comparator<? super E>);
+  public static <K, V> com.google.common.collect.ListMultimap<K, V> guavaListMultimap();
+  public static <K, V> com.google.common.collect.SetMultimap<K, V> guavaSetMultimap();
+  public static <K, V> com.google.common.collect.SortedSetMultimap<K, V> guavaSortedSetMultimap(java.util.Comparator<? super V>);
+  public static <R, C, V> com.google.common.collect.Table<R, C, V> guavaTable();
+  public static <K, V> org.eclipse.collections.api.map.MutableMap<K, V> eclipseMap();
+  public static <E> org.eclipse.collections.api.list.MutableList<E> eclipseList();
+  public static <E> org.eclipse.collections.api.set.MutableSet<E> eclipseSet();
+  public static <K, V> org.eclipse.collections.api.map.sorted.MutableSortedMap<K, V> eclipseSortedMap(java.util.Comparator<? super K>);
+  public static <E> org.eclipse.collections.api.set.sorted.MutableSortedSet<E> eclipseSortedSet(java.util.Comparator<? super E>);
+  public static <K, V> org.springframework.util.MultiValueMap<K, V> springMultiValueMap();
+  public static <K, V> org.springframework.util.MultiValueMap<K, V> springSingleValueMap();
+  public static <E> java.util.List<E> springAutoPopulatingList(org.springframework.util.AutoPopulatingList$ElementFactory<E>);
+  public static <E> com.google.common.collect.Multiset<E> guavaMultiset();
+  public static <E> com.google.common.collect.Multiset<E> guavaMultiset(com.m3.collections.M3ObjectCounts<E>);
+  public static <K, V> com.google.common.collect.BiMap<K, V> guavaBiMap();
+  public static <K, V> org.eclipse.collections.api.map.MutableOrderedMap<K, V> eclipseOrderedMap();
+  public static <E> org.eclipse.collections.api.bag.MutableBag<E> eclipseBag();
+  public static <E> org.eclipse.collections.api.bag.MutableBag<E> eclipseBag(com.m3.collections.M3ObjectCounts<E>);
+  public static <K, V> org.apache.commons.collections4.ListValuedMap<K, V> apacheListValuedMap();
+  public static <K, V> org.apache.commons.collections4.SetValuedMap<K, V> apacheSetValuedMap();
+  public static <K, V> org.apache.commons.collections4.BidiMap<K, V> apacheBidiMap();
+  public static <E> org.apache.commons.collections4.MultiSet<E> apacheMultiSet();
+  public static <E> org.apache.commons.collections4.MultiSet<E> apacheMultiSet(com.m3.collections.M3ObjectCounts<E>);
+  public static <E> org.apache.commons.collections4.Bag<E> apacheBag();
+  public static <E> org.apache.commons.collections4.Bag<E> apacheBag(com.m3.collections.M3ObjectCounts<E>);
+  public static <E> java.util.Collection<E> guavaFilteredCollection(com.m3.collections.M3LinkedList<E>, com.google.common.base.Predicate<? super E>);
+  public static <E> java.util.NavigableSet<E> guavaFilteredNavigableSet(com.m3.collections.M3TreeSet<E>, com.google.common.base.Predicate<? super E>);
+}
+Compiled from "M3LibraryCollectors.java"
+public final class com.m3.collections.interop.M3LibraryCollectors {
+  public static <E> java.util.stream.Collector<E, ?, java.util.List<E>> toList();
+  public static <E> java.util.stream.Collector<E, ?, java.util.Set<E>> toSet();
+  public static <T, K, V> java.util.stream.Collector<T, ?, java.util.Map<K, V>> toMap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>);
+  public static <T, K, V> java.util.stream.Collector<T, ?, java.util.Map<K, V>> toMap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>, java.util.function.BinaryOperator<V>);
+  public static <T, K, V> java.util.stream.Collector<T, ?, com.google.common.collect.ListMultimap<K, V>> toGuavaListMultimap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>);
+  public static <T, K, V> java.util.stream.Collector<T, ?, com.google.common.collect.SetMultimap<K, V>> toGuavaSetMultimap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>);
+  public static <T, K, V> java.util.stream.Collector<T, ?, com.google.common.collect.SortedSetMultimap<K, V>> toGuavaSortedSetMultimap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>, java.util.Comparator<? super V>);
+  public static <E> java.util.stream.Collector<E, ?, org.eclipse.collections.api.list.MutableList<E>> toEclipseList();
+  public static <E> java.util.stream.Collector<E, ?, org.eclipse.collections.api.set.MutableSet<E>> toEclipseSet();
+  public static <T, K, V> java.util.stream.Collector<T, ?, org.eclipse.collections.api.map.MutableMap<K, V>> toEclipseMap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>);
+  public static <T, K, V> java.util.stream.Collector<T, ?, org.springframework.util.MultiValueMap<K, V>> toSpringMultiValueMap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>);
+  public static <E> java.util.stream.Collector<E, ?, com.google.common.collect.Multiset<E>> toGuavaMultiset();
+  public static <E> java.util.stream.Collector<E, ?, org.apache.commons.collections4.MultiSet<E>> toApacheMultiSet();
+  public static <E> java.util.stream.Collector<E, ?, org.apache.commons.collections4.Bag<E>> toApacheBag();
+  public static <E> java.util.stream.Collector<E, ?, org.eclipse.collections.api.bag.MutableBag<E>> toEclipseBag();
+  public static <T, K, V> java.util.stream.Collector<T, ?, org.apache.commons.collections4.ListValuedMap<K, V>> toApacheListValuedMap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>);
+  public static <T, K, V> java.util.stream.Collector<T, ?, org.apache.commons.collections4.SetValuedMap<K, V>> toApacheSetValuedMap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>);
+  public static <T, K, V> java.util.stream.Collector<T, ?, org.eclipse.collections.api.map.MutableOrderedMap<K, V>> toEclipseOrderedMap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>);
+  public static <T, K, V> java.util.stream.Collector<T, ?, com.google.common.collect.BiMap<K, V>> toGuavaBiMap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>);
+  public static <T, K, V> java.util.stream.Collector<T, ?, org.apache.commons.collections4.BidiMap<K, V>> toApacheBidiMap(java.util.function.Function<? super T, ? extends K>, java.util.function.Function<? super T, ? extends V>);
+}

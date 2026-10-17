@@ -1,0 +1,29 @@
+$ ['/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java', '-Xcheck:jni', '-Dm3.interop.requireNative=true', '-Djava.library.path=/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification', '-jar', '/tmp/m3-toolchain/junit-platform-console-standalone-1.12.2.jar', 'execute', '--disable-banner', '--class-path', '/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/classes:/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/test-classes', '--select-class', 'com.m3.collections.M3ObjectCountsTest', '--fail-if-no-tests', '--reports-dir', '/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/object-counts-native-junit-reports']
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  └─ M3ObjectCountsTest ✔
+│     ├─ countOverflowAndInvalidInputLeaveCountsFlagsAndOrderUnchanged() ✔
+│     ├─ callbacksAndCancellationRetainExceptionIdentityAndRefuseReentrancy() ✔
+│     ├─ primitiveColumnsShareKeySlotsWithoutCountBoxesOrRetainedEntries() ✔
+│     ├─ flagWindowsAgreeWithScalarOracleForAllBitsOffsetsAndBothDirections() ✔
+│     ├─ differentialCountsNullCollisionsAndSlotReuse() ✔
+│     └─ distinctIteratorRemovalClearsFlagsAndRecycledSlots() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 516 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         6 tests found           ]
+[         0 tests skipped         ]
+[         6 tests started         ]
+[         0 tests aborted         ]
+[         6 tests successful      ]
+[         0 tests failed          ]
+
+
+EXIT=0

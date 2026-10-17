@@ -1,0 +1,7 @@
+$ ['/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/jar', '--describe-module', '--file', '/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/m3-collections.jar']
+com.m3.collections jar:file:///workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/m3-collections.jar!/module-info.class
+exports com.m3.collections
+requires java.base mandated
+
+
+EXIT=0

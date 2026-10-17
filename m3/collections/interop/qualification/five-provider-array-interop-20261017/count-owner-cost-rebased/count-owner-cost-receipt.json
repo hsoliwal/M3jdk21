@@ -1,0 +1,2390 @@
+{
+  "schemaVersion": 1,
+  "kind": "rebased-count-owner-cost-diagnostic",
+  "status": "PASS_FINITE_DIAGNOSTIC_ONLY",
+  "targetProductIntegrationProof": false,
+  "frozenTargetRevision": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+  "startedAtUtc": "2026-10-17T13:20:33.238659+00:00",
+  "finishedAtUtc": "2026-10-17T13:20:34.804499+00:00",
+  "runsExecutedForThisRebasedClassClosure": 1,
+  "harness": {
+    "path": "/workspace/scratch/f0742e08085b/Synexia/synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017/contract/CountOwnerCostProbe.java",
+    "sha256": "f2bd640ea83bb9ab328720fcd862ccdfc714808cc48cf571204fd1b956bdae3d"
+  },
+  "harnessUnchanged": true,
+  "measurement": {
+    "jvmProcesses": 1,
+    "sizes": [
+      4096,
+      65536
+    ],
+    "warmupRoundsPerSize": 6,
+    "warmupPlan": "Entire size corpus warmed before all measured rounds",
+    "sampleRoundsPerSize": 8,
+    "providerOrder": "M3,GUAVA_LINKED,APACHE_HASH,ECLIPSE_HASH on even rounds; exact reverse on odd rounds",
+    "heap": "512 MiB initial and maximum",
+    "collector": "G1",
+    "keyHash": "precreated record Key(id); hashCode=id",
+    "countFormula": "1 + (keyId & 3)",
+    "construction": "default capacity, fresh owner and fill, code already warmed",
+    "update": "4 rounds; each key at (position*2053+17)&(keys-1), add two then remove two; no distinct-key change",
+    "updateActionsPerKey": 8,
+    "flagsWriteActionsPerKey": 4,
+    "flagsSelect": "M3 only, required mask 1, forbidden mask 2, JAVA backend; full detached snapshot including metadata and result allocation",
+    "cpu": "ThreadMXBean current-thread CPU nanoseconds",
+    "allocation": "ThreadMXBean calling-thread cumulative allocated bytes, not retained heap",
+    "meterOverheadSubtracted": false,
+    "forcedGC": false,
+    "payloadKeyAllocationIncluded": false
+  },
+  "verified": {
+    "sampleRows": 160,
+    "allSamplesUsed": true,
+    "strictCompileExit": 0,
+    "executionExit": 0,
+    "allCountAndSelectionAssertionsPassed": true,
+    "measuredClassDirectoryUnchangedAcrossRun": true,
+    "countFingerprints": [
+      {
+        "keys": 4096,
+        "distinct": 4096,
+        "totalCount": 10240,
+        "countChecksum": 20981760
+      },
+      {
+        "keys": 65536,
+        "distinct": 65536,
+        "totalCount": 163840,
+        "countChecksum": 5368872960
+      }
+    ]
+  },
+  "environment": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "cpuModels": [
+      "AMD EPYC 9V74 80-Core Processor"
+    ],
+    "cpu.max": "800000 100000",
+    "memory.max": "8589934592",
+    "cpuset.cpus.effective": "0-8"
+  },
+  "jvmMetadata": [
+    "# probe=CountOwnerCostProbe-20261017; diagnostic=true; forks=1",
+    "# java=21.0.12.1+1-LTS; vm=OpenJDK 64-Bit Server VM; arch=amd64; processors=8",
+    "# warmups=6; samples=8; updateRounds=4; flagWriteRounds=4; warmupPlan=all-sizes-before-measurement",
+    "# initialCount=1+(keyId&3); keyHash=keyId; construction=default-capacity; updateOrder=(position*2053+17)&(keys-1)",
+    "# fresh_admit=warm-code-new-owner; current-thread-only=true; allocation=total-allocated-not-retained; no-forced-GC=true",
+    "# m3_flags_select=required:1,forbidden:2,backend:JAVA; selection-includes-metadata-and-result=true; donor-flag-equivalence=none",
+    "# verified_samples=160; sink=764635523764; last_result_class=java.util.Collections$UnmodifiableList"
+  ],
+  "measuredCoreClasses": {
+    "directory": "/tmp/m3-five-provider-current-master-20261017/classes",
+    "inventorySha256": "072924009cc1b8a7b9ac282494d3e876b7756a8d0527093fa86fc0ca92aa50e5",
+    "inventoryAlgorithm": "SHA-256 of UTF-8 compact sorted-key JSON array of sorted relative .class paths and their SHA-256 values",
+    "classFiles": 258,
+    "inventory": [
+      {
+        "path": "com/m3/collections/M3AdaptiveEnumLongMap.class",
+        "sha256": "bf37a1a96fe02a0cb054b18dce2f41ce7db9b1da00c4bff6413c68113a5b1504"
+      },
+      {
+        "path": "com/m3/collections/M3Address28.class",
+        "sha256": "6305c8ab4f9666ab32359e71329cece9e1d5cdc1cf20435ca789169f08e50796"
+      },
+      {
+        "path": "com/m3/collections/M3BitLane28.class",
+        "sha256": "1b0100e4d92e6b308069a9f57d79709306ce3abc82f35889d020f52122df0e97"
+      },
+      {
+        "path": "com/m3/collections/M3BlockingDeque$1.class",
+        "sha256": "fc2dd861ddf761a1b4a21f876103b2d5f132c886a57035a32eb47ff1dc6da73c"
+      },
+      {
+        "path": "com/m3/collections/M3BlockingDeque.class",
+        "sha256": "3c7097225d9c5214643a1c904196c14d8f02bb09839d5ce48885d7fae474638f"
+      },
+      {
+        "path": "com/m3/collections/M3ChildProgressMonitor.class",
+        "sha256": "1a6dbcdcb268db85f494aaca5b383456c4cdd2760a120fcdbed1f53a1d922104"
+      },
+      {
+        "path": "com/m3/collections/M3CollectionSdk.class",
+        "sha256": "7a112ed31432c1dcb3e418b3bfffaa81f59c22456394cffac89c7630041a506c"
+      },
+      {
+        "path": "com/m3/collections/M3CollectionSdkCatalog$1.class",
+        "sha256": "46c4562a1d539b1c31faacf3237b75aeb827e22a36211b0c09c2041a1ec71d24"
+      },
+      {
+        "path": "com/m3/collections/M3CollectionSdkCatalog$Disposition.class",
+        "sha256": "e52fa95d39db3d3732dc0b3aa23157d12943b078515156309d368f87b2e33d2d"
+      },
+      {
+        "path": "com/m3/collections/M3CollectionSdkCatalog$Family.class",
+        "sha256": "7ded5eb812a477366f9a7d8b35db51c37c48572172b6b09ec7a05da5e2121ac1"
+      },
+      {
+        "path": "com/m3/collections/M3CollectionSdkCatalog$Vendor.class",
+        "sha256": "a23a29485f2bdecc4ed2d3ff36b5c036682bf9881b5dda4e0c8f997d4bdca06d"
+      },
+      {
+        "path": "com/m3/collections/M3CollectionSdkCatalog.class",
+        "sha256": "46734cf88662b844af6e5af8b57551c241c4eb09d86ab700e6803473df73d964"
+      },
+      {
+        "path": "com/m3/collections/M3CollectionSdkNames$Disposition.class",
+        "sha256": "5b73668b4a6aee0d5d959a1d4378de1c349aee8ac829fe0c9a7c2b297c30995b"
+      },
+      {
+        "path": "com/m3/collections/M3CollectionSdkNames$Family.class",
+        "sha256": "22954ea9d1184d098311a27732bf7a616a65e26ee2ed0c1a9016f6a6e0bb4ef6"
+      },
+      {
+        "path": "com/m3/collections/M3CollectionSdkNames$Provider.class",
+        "sha256": "a58320e787f7d23c15ecbe9459e016ed0b0d4cb7a66cac72d6843dc5b7ac1994"
+      },
+      {
+        "path": "com/m3/collections/M3CollectionSdkNames.class",
+        "sha256": "db0c1ed558c890e881a7183dd7be83bc41793ac39024372d69f4019b087659d8"
+      },
+      {
+        "path": "com/m3/collections/M3Collections.class",
+        "sha256": "e541c9035dda96798ff33a1b5f541b20354b20ec9430a92fbd84d3bd274157a2"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentBitSet$SetBits.class",
+        "sha256": "7d9ded8169c272da5398cfedc6e1e1d8767e2cd37eb00460063a9e0833067135"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentBitSet.class",
+        "sha256": "8878acbc3a088bb78b42f64eab522cce520ac268d228e0e02ec313c47e37f1c1"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentIntLane28$Range.class",
+        "sha256": "dc9d1e448be347e10f4c591c7ecf510208e9e9dd7ce5dd9bd709a1f5ea70aad8"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentIntLane28.class",
+        "sha256": "bc241b4731c9591f0d95de49529596fdc59e7046f105345033dcb6cb7e7f546b"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongLane28$Range.class",
+        "sha256": "d5438f73aa3edbbf7c9d1c001839fd71fc16208ff890d8d02e654dc175db908b"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongLane28.class",
+        "sha256": "2da5b77e19c85a734f49253fa916221d281a37407462e7629be589dc839b170e"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongMap$PairLane.class",
+        "sha256": "30f1a7ebdbbb2fcd3d51d1b38f14cf50dc6747567f73a1721dc97a02212684df"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongMap.class",
+        "sha256": "2929d37571cc38fd0574fa29a9861928e35f2db8d3545855fa6c7bed3db1f996"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongSet$1.class",
+        "sha256": "406a231873b0c07dbde5a92b4196c2eb523c3b94e67e86a17ff1e481e24e1135"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongSet.class",
+        "sha256": "8014d2112ae06d6b9da0467d00cbb10767fc77f948d1a01b0629d43f840585b3"
+      },
+      {
+        "path": "com/m3/collections/M3DefaultProgressMonitor.class",
+        "sha256": "51368f5467b0477e6680cf2e0b0591703b1fbc97c52cbb07aa5f557586fc40b2"
+      },
+      {
+        "path": "com/m3/collections/M3EnumLongMap$EntryConsumer.class",
+        "sha256": "e51eac9a653b54b2924de86206ca4c57826e93e939d6819c7bc0ebf52a4d2ece"
+      },
+      {
+        "path": "com/m3/collections/M3EnumLongMap$OrdinalLongConsumer.class",
+        "sha256": "f68b289f6d311b7bd95a030a2532caa09e909fa3db275255e41e8960b8a88416"
+      },
+      {
+        "path": "com/m3/collections/M3EnumLongMap.class",
+        "sha256": "5d808ba5c14a5be2bc864c8b50be517577e73e53301e35b4ccca7d4e5fedb2a9"
+      },
+      {
+        "path": "com/m3/collections/M3EnumSet.class",
+        "sha256": "c8be2f9f64e2e53c828cb4b9c951cee95a5b1b8fd8bc74701c9e09669aef363d"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredLists$StrictReadOnlyList.class",
+        "sha256": "bf1b656b733b65f930e58773dac37f907dd8a717be35fac2178fde50ad500d23"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredLists$View$1.class",
+        "sha256": "827f5d5460b469af9369ecea17c417aed5da0896028b65bb7888c2a57e687238"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredLists$View$Cursor.class",
+        "sha256": "6f8aace1d698560020d46eae7edf1de5b2d02903e8195df72c99680430b607a7"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredLists$View.class",
+        "sha256": "059bbc7abda9f297eb55168aeb0db1f29261049fd1e87dc17b368f34d2581114"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredLists.class",
+        "sha256": "679cfae3334420974f35c07f2009bd634b92d7d8eb4e1780bf403eed339526f1"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredNavigableSet.class",
+        "sha256": "44224e3176cac3c1c05059f13300df6d05f70e163a4f51b5e535e8faec77e483"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$1.class",
+        "sha256": "aa202f5d125f5d83745ed8795d98a0b560f19978fb057ed9c9bad76e01096512"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$CollectionView.class",
+        "sha256": "7569d4133ad180e94aaf408a0609af81dd3a9c446b13171ed3490d5a03f86e76"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$NavigableMapView.class",
+        "sha256": "c64d4388ee29556d35d6132d5419f54afbb8e2e85f555e32cf75ac1ad90d549a"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$NavigableSetView.class",
+        "sha256": "2919d03fd5063307474aa73b9b7922e8b7df49d019e2cfdf03d017f605457104"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$SetView.class",
+        "sha256": "232423953b23ca410ec9c60406f78833d360477d19fdfa65af9a59bde3ce188d"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$SortedMapView$1$1.class",
+        "sha256": "2a6beeb9db97e71f61aa06783fa3a57864adb118c4d472126b98b5595a1400f9"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$SortedMapView$1.class",
+        "sha256": "6a7beeee67f69fb336593a6660a198a093cf5d2f0ed56b776e25ea7d44e158e6"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$SortedMapView.class",
+        "sha256": "5da06ad68bea837a1b63f4550071cf0112f0ad35c166b4b7f897265f2f203a60"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$SortedSetView.class",
+        "sha256": "079ab95e0d18296471fa1eeaeaed995c35b328b0f54e0033d19f6a7415c7791c"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews.class",
+        "sha256": "457123dc450e21d066a9945ded4e7bbcc3dd90327abc2e6945c5ca237ad8a983"
+      },
+      {
+        "path": "com/m3/collections/M3IndexMaskCompactor$Backend.class",
+        "sha256": "ba88b56db816f917e5d868c8b609c99726013335832bfd513f36e196f689c3e2"
+      },
+      {
+        "path": "com/m3/collections/M3IndexMaskCompactor$NativeLibrary.class",
+        "sha256": "5ff845f1cb4a7139d08cdc5557d9cbc2640a87352dfa0811d0f515e982fd5a73"
+      },
+      {
+        "path": "com/m3/collections/M3IndexMaskCompactor$NativeRange.class",
+        "sha256": "3e641acb119db0ac04b8b491aafbfe574e01b51c22475c520be4cf2309e1db2c"
+      },
+      {
+        "path": "com/m3/collections/M3IndexMaskCompactor.class",
+        "sha256": "9d6264981017e00a2a4c13f9d35fdb6146de00cb22206e5ad619ed080d37affa"
+      },
+      {
+        "path": "com/m3/collections/M3IndexMaskWindow.class",
+        "sha256": "e489dcee154104b84ede7715781dc4d3579ef06a8d4960f8e4ef8de38c218ee2"
+      },
+      {
+        "path": "com/m3/collections/M3IndexPathMasks$Backend.class",
+        "sha256": "69ffc92be9045903695b9831137f7b06f0bfa9a29eade87c0b94104552f04f3b"
+      },
+      {
+        "path": "com/m3/collections/M3IndexPathMasks$NativeLibrary.class",
+        "sha256": "a50b4ac101d0d7d0e3411e2d1c7be52a5fafc60e86264fa787b3095d8be4b3be"
+      },
+      {
+        "path": "com/m3/collections/M3IndexPathMasks.class",
+        "sha256": "7afb93d55e4e610a60c5e187fa61fe1f30dbaa73e37bbdf7d195623d61549988"
+      },
+      {
+        "path": "com/m3/collections/M3IndexPathRank$Window.class",
+        "sha256": "e648ef0505bd9606f0a5ad2585134799a8d8c7ca81f7a231a050263a27912df0"
+      },
+      {
+        "path": "com/m3/collections/M3IndexPathRank.class",
+        "sha256": "df7d0d70e3edc1e0415c6f7783c6c9eb402343e7bd90e9c8a3c5c6a345d95b80"
+      },
+      {
+        "path": "com/m3/collections/M3IndexedMultiValueMap$ValuesSnapshot.class",
+        "sha256": "080f5a2e61f8467082eaa12faf561fc4d2569d75234e8096f22f2b6b84a80354"
+      },
+      {
+        "path": "com/m3/collections/M3IndexedMultiValueMap.class",
+        "sha256": "4cc2eafd7b5915bd6ca91952cd10f775e9348625f967b155955571fc742f7983"
+      },
+      {
+        "path": "com/m3/collections/M3IntCollection$1.class",
+        "sha256": "de7b4df86a1a977c093fb04d14479706f9639de42a177da35754f94ffbad1904"
+      },
+      {
+        "path": "com/m3/collections/M3IntCollection.class",
+        "sha256": "90509dfff86850bdae32f2da3bb2be02a1824783d56937526abc07494280ec39"
+      },
+      {
+        "path": "com/m3/collections/M3IntHashSet$1.class",
+        "sha256": "712e6ad921ccc3f00cc6c673b4c3333f179382125492973298bb9f26693e4eba"
+      },
+      {
+        "path": "com/m3/collections/M3IntHashSet.class",
+        "sha256": "56e29ae445c4f9cf3ba08525b1f1cef24e2faafc181ca84c8f790f6219cc643a"
+      },
+      {
+        "path": "com/m3/collections/M3IntIntConsumer.class",
+        "sha256": "50b101ca3b714b3a3b4890b2fb6400b23c762ad349378639dc5a587b34dc19f0"
+      },
+      {
+        "path": "com/m3/collections/M3IntIntHashMap$1.class",
+        "sha256": "6746435fe748e3c84b7d131ff3f29b4db4d866d9e559fcea5d14b0b52e901a80"
+      },
+      {
+        "path": "com/m3/collections/M3IntIntHashMap.class",
+        "sha256": "cd76b9172dcadfbf4046bef3256acdd817d60e796765e57fe581437fc2773af4"
+      },
+      {
+        "path": "com/m3/collections/M3IntIterator.class",
+        "sha256": "5f6a9bc1a069a31d1380aefd5c425a731723db1283daee4e6450e9f4b9e297e6"
+      },
+      {
+        "path": "com/m3/collections/M3IntLane28.class",
+        "sha256": "ab23fd70b8fab30ddec19896939bcf79f3cedf47c941ab4c7b1c13fe96c99910"
+      },
+      {
+        "path": "com/m3/collections/M3IntLongConsumer.class",
+        "sha256": "c2a6384e5fc36a01e2d19b127018426870b4aae036a5034170ef5c4baeb02321"
+      },
+      {
+        "path": "com/m3/collections/M3IntLongHashMap$1.class",
+        "sha256": "638e673c9c4f7b937c8f3b7bc27b56dfe289e6387fa3caaef0c6e982bb0b92a0"
+      },
+      {
+        "path": "com/m3/collections/M3IntLongHashMap.class",
+        "sha256": "75eeeba267a1188308aac324e036cc869e840c4f4dc5a93a79264d824fc289ba"
+      },
+      {
+        "path": "com/m3/collections/M3IntPriorityQueue$1.class",
+        "sha256": "4426f8f4b90fefa6ea93a067d58fae5d5e66c3eb03372c07f0c4a0941f81e2ef"
+      },
+      {
+        "path": "com/m3/collections/M3IntPriorityQueue.class",
+        "sha256": "e3158dbd8771cb5ac48bcc5eeb3a14a4e5d3d209c72c454cafbf4d3bb44ef9c1"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventBits.class",
+        "sha256": "25b8807932eaa161476298ba56cb6503870ad86ed4df296abeac8be1f146757b"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventGranularity.class",
+        "sha256": "fe66b6e2ed27d9bb5992731509cae5650dd65dfc259c81915db8600ffb418b41"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventPolicy.class",
+        "sha256": "46ece6bb799b5dc6f534e80ad8ae226de4ab246ae3fe00e6eefb0b7588229eea"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventSink$NoOpHolder.class",
+        "sha256": "6393b7b11b6d5444928c83733f5a8b881d550dd08f99bd0f8c43694f3b8982ce"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventSink.class",
+        "sha256": "2a5c99ec9d494adbfb2215739ccb143672ae8691ac42a1cf1225934818d6f3b1"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventSource.class",
+        "sha256": "b6168035f1fd25d15956ececa0304e12038f319d259ed524b45853481ebb4b89"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEvents.class",
+        "sha256": "9759a5914eeb444cd19b9cb22b89315ad9ecdb7ddeadfb655857469811cef44b"
+      },
+      {
+        "path": "com/m3/collections/M3LazyOperation.class",
+        "sha256": "3e34292466d76a1035a77626ba724d4285ff8661b93f663386d22adb1cb30af5"
+      },
+      {
+        "path": "com/m3/collections/M3LazyValueProvider.class",
+        "sha256": "fcbd3f870b2a8305ea84088f443d5d92645810294b34c824360878f715ff0782"
+      },
+      {
+        "path": "com/m3/collections/M3LazyValueState.class",
+        "sha256": "0ad392af5e9112b292f585c9943a334bfd39872e2174fac9bea56b0523c4157b"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedHashMap$Table.class",
+        "sha256": "a9255db839a200723523ff2d38a83f70fba5b97f6a3f7b3d581df562b60d2c1e"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedHashMap.class",
+        "sha256": "0f6a0cae713ae9f546d888a31f23a6d03b76a08c06e39999b68df741dccc2941"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedHashSet.class",
+        "sha256": "23aab01787fc8e3fcce17dbb9d69563004d65bfaf11e184e912a2697c48b1cf0"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedList$1.class",
+        "sha256": "7eaf351c32bd6894914a2d07657d2e03dfe68420859c8a5131d2ece33227ac42"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedList$Storage.class",
+        "sha256": "6f5cc4dc092c0efc3486a1c160abb689f61bf3a35e3aa8cf4b1fded8bf5a3390"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedList.class",
+        "sha256": "cab88be9c1fbf7ced71ac1f46c27052a95eb0df02fe82caa57ad890eb444d20e"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap$1.class",
+        "sha256": "1944d37b99eb959f14afb0754e1c60efd1878154a5d73de4da601259a7393752"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap$2.class",
+        "sha256": "84273b2a142e2c9bd04b0ae2c432494df8e5ec6a3c06e5ffcdc34131652a3afd"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap$3.class",
+        "sha256": "f3adbdd0560a5e0674c9ac59aa538c0f53cc48166b5c5e01b7f74b4c097fa55b"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap$4.class",
+        "sha256": "e3dcf7f617c5280846b6f5b4ac0b3ecc7718a66585e38b01e81a308e6146d513"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap$SnapshotEntry.class",
+        "sha256": "7fc630def9dd226ac5351ebb37b7bf171c4a9b697d21531170cc322a4f3c94ad"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap.class",
+        "sha256": "70e29f9b88025f08be1a2fe034a660d9e30e6498ab4f55f170b17ded6ecd5f99"
+      },
+      {
+        "path": "com/m3/collections/M3LockedTreeMap.class",
+        "sha256": "3db50db8e5ac0671dda5ee4f7347969ad8db1b1d494899ef4aa694daebeb8164"
+      },
+      {
+        "path": "com/m3/collections/M3LockedTreeSet.class",
+        "sha256": "a7e08c8b6e4d7b4acfd4fa7a72e637b6f06ed4dd9fea4e84581310ddc5916778"
+      },
+      {
+        "path": "com/m3/collections/M3LongAddressKernel$NativeLibrary.class",
+        "sha256": "8dc0c05604e4dda2618c052bc1eab6e9119d41031211f53434dd3eb71436bda0"
+      },
+      {
+        "path": "com/m3/collections/M3LongAddressKernel.class",
+        "sha256": "0b85f982c282841386254065acea5144b2360957bc56410c24f4c9f8af49b4d4"
+      },
+      {
+        "path": "com/m3/collections/M3LongArena28.class",
+        "sha256": "11db58ff9861521260895b82141519006ca02b9f34865aa72eab871b4032e326"
+      },
+      {
+        "path": "com/m3/collections/M3LongArrayDeque$1.class",
+        "sha256": "b1aff41a0ed84ecbeac0cc1f34800fc0cd2ccc17c1a3d3ce2dfd839f3d69f8d9"
+      },
+      {
+        "path": "com/m3/collections/M3LongArrayDeque$2.class",
+        "sha256": "faabc64ed3c737a058b691bd81ef6f1a4447075b849dce3f15664022f26dc72f"
+      },
+      {
+        "path": "com/m3/collections/M3LongArrayDeque.class",
+        "sha256": "ad4be2b6214fe3b80260008789ea3bb6830ea9067cb5ad4a08ffca1445aec357"
+      },
+      {
+        "path": "com/m3/collections/M3LongArrayList$1.class",
+        "sha256": "6f25c63196d89b6f6277f609b86985d2d52d9d46c655a349414d9b945f3317d4"
+      },
+      {
+        "path": "com/m3/collections/M3LongArrayList.class",
+        "sha256": "13067dfee18834c653007154fa41ab93fbf37a62242f644318567b0669abb68e"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilterPlan$1.class",
+        "sha256": "6a89a2ebfcd35eb7cf41f6cbf16054cb78144209be3d25eda81afdacfe7b7f28"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilterPlan$IndexedSpliterator.class",
+        "sha256": "f423423ce5450d82be14b14e498ec8e630b1bd01e112ff1668264eb96b84b12e"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilterPlan.class",
+        "sha256": "95e55f4019811777cb82e9a77f42d68e756e1bd2698e70f6c2c1e24f7db014ca"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$1.class",
+        "sha256": "d8a91b7c0f1797df9f7421ed32f391909f0dc106500932b56939e664ed28409e"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$IndexSpliterator.class",
+        "sha256": "c28380d404366d597d8503ba7a61df1aef79e947b2a1fb40cd0b5a48b9689c1b"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView$1.class",
+        "sha256": "4a73fa1f2c9a18d4204e66a993e26d2d9594183533fe98d97e20ff62d744da36"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView$Cache.class",
+        "sha256": "fb3e2fa4ff29f6187963449658ff98dc2633e89f0629eaa667f6bd14ce67888b"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView.class",
+        "sha256": "a25a1ef9fcaa8936509a88d5e831c5eba15ab38fcd585cd86426d43cdc1fb432"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot.class",
+        "sha256": "628ffe91f00b524fc1ddd4200500ce25d87daf08cfad24b510dc051539566740"
+      },
+      {
+        "path": "com/m3/collections/M3LongCollection$1.class",
+        "sha256": "bb3f0f8e1d152cd3f45a94dae1502926bb0df4967cad9d438e33d2788bf24907"
+      },
+      {
+        "path": "com/m3/collections/M3LongCollection.class",
+        "sha256": "515ed3480be8df795ae3a467a76711bf9f51250ce69306c99c55bba58447bcb2"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$1.class",
+        "sha256": "bbe145e2c29823c205d14738a00aa8b7865be59f785a96f13c7845750791a524"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$BinarySetAlgebra.class",
+        "sha256": "eebe7fdacf89f99eac246fd000ed79b889457604630f4a3d9dc1b0c4f51a2fa6"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$BinarySetCursor.class",
+        "sha256": "f179b8a1af7441715597ddef744f8f83b2bcdd134e5eba7c8f9f5e4c9ebcea3c"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$Concatenation$1.class",
+        "sha256": "7597677c75ae12de7085556c009ff5425c94dc4343700a3db77b578f1659c0e3"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$Concatenation.class",
+        "sha256": "5ec93c6d6c96b518b074573acffd7e43b4debfbbac848ca119174cd8559c7fd6"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$Merge.class",
+        "sha256": "1dc7d9ff78ce7e47cda1d9a4b939f1b078c387b814e424c74309db3ecea20eda"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$SetOperation.class",
+        "sha256": "fc3209dc4f818476b5069872b6210dfbc024791eb2701a22332a29223586db67"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$Union.class",
+        "sha256": "5017e847f1ab23c04ef5efda99accf74930e139b9c3c5ac4889894988fc05154"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews.class",
+        "sha256": "bcb9bf8136312bca0c21fbe3d66949f9ea8eeaefb5ea2e23c896a44106dbfedf"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$1.class",
+        "sha256": "3927d8ca1ddc7f965a88257087cb85beaa3cbdf4fda223ca3a6db557b92a95db"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$Concat.class",
+        "sha256": "84c9701c2c5b28d6a413c2ddf2ace06436924a338266f900f9e33518bbdab151"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$Distinct.class",
+        "sha256": "2adadfbd976c2d839d846fede8c86ae358b67bfab5ceeaf8501341b3faa5f990"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$Filter.class",
+        "sha256": "4913a23996b425fed7120aad22e0605acb6d3e977b6b59bdd8178a8bf09554fd"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$Frame.class",
+        "sha256": "e060498b44dc00f358454ba1cfaa9fc5620089ea96f2fb50e32be5a3158fdcef"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$Limit.class",
+        "sha256": "4868b6a6a2bd742e31e8749991ed4b1878dfe4aa2fdd477e1c294fb363d895ad"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$MapValue.class",
+        "sha256": "7584c59c198126954cf089cb5157f1a25d660438ea4fc68259d3ff1037480182"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$Node.class",
+        "sha256": "834b4421687ea022f639cb8e2a3ef88348d7d84cd637a7819948fc596c73dcb2"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$Skip.class",
+        "sha256": "73141ce5eb1a93fca60ab836dbe9511e3aae6b858675c2bc300b99765d7eb3d5"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$Sort.class",
+        "sha256": "4956fe6d5a188c5ba9cc470f9a3efbd9ab724daf91f17a052d4f70bc2a683bd5"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$Source.class",
+        "sha256": "00e887e227db82b5485ba82a84de61d887c80bbfe7d4b5fb7bdfda0718e96b22"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$Stage.class",
+        "sha256": "fea16192a4281512e1f1e7bf146744c677f21b4f14a68c27d62f72e45c3ac897"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag$Unary.class",
+        "sha256": "cbdf366fc16eaefe79f5efa113133a077da0b8e717ef9718bec92570f4d1622f"
+      },
+      {
+        "path": "com/m3/collections/M3LongDag.class",
+        "sha256": "21e9012087783fee67efa56c7057625190ac27a36c3505903f3acdaf1ab4c486"
+      },
+      {
+        "path": "com/m3/collections/M3LongDeque.class",
+        "sha256": "da9c8cc8dd92be8d282fc2bbb3020f4b369290a4e2c48043d74dcb2f0bc02a52"
+      },
+      {
+        "path": "com/m3/collections/M3LongFilteredView$1.class",
+        "sha256": "fb494e89161b0dcbfa53f76b8e71f70c4d130a414b6e848ed05c1b5263654a96"
+      },
+      {
+        "path": "com/m3/collections/M3LongFilteredView$2.class",
+        "sha256": "91a28fa92297f64035d9e771ff2c689f2244677e99193636cd428a1be0d03f9c"
+      },
+      {
+        "path": "com/m3/collections/M3LongFilteredView.class",
+        "sha256": "fae7a399b1ae9773070febb35ce05c6401c64dc37b3726a7bccf9d33ccd7b9f7"
+      },
+      {
+        "path": "com/m3/collections/M3LongHashSet$1.class",
+        "sha256": "1330375364285f7ff4c44920e7facf594140c51858e5f1df8dd302938ceb5321"
+      },
+      {
+        "path": "com/m3/collections/M3LongHashSet.class",
+        "sha256": "b52f57534b785aa9c517cc58357efba6a0db56e067dd4d84af533fcb74264be0"
+      },
+      {
+        "path": "com/m3/collections/M3LongIndexProjection$Order.class",
+        "sha256": "54eff89dca14f041c2906ac2aa988b47a573732f6dd6c87a2b883aa9dd886c42"
+      },
+      {
+        "path": "com/m3/collections/M3LongIndexProjection.class",
+        "sha256": "82d850fb8a09e8379edeff77671a932a2303d535cd7dcc4956600630c0a7ba3e"
+      },
+      {
+        "path": "com/m3/collections/M3LongIterator.class",
+        "sha256": "27dc860fb4e54d0db92ab3de2aa48977024f4f7a23267c12d62181573aeacf3b"
+      },
+      {
+        "path": "com/m3/collections/M3LongLane28.class",
+        "sha256": "5b57c8270cab08d246dfaeb841f56a22184cf935071a04315571040c7675e41e"
+      },
+      {
+        "path": "com/m3/collections/M3LongLaneStore28$HandleConsumer.class",
+        "sha256": "b133cce6eefae4023a4cdb221624292dac4d8966f23c51c62456f4103b56cfb4"
+      },
+      {
+        "path": "com/m3/collections/M3LongLaneStore28.class",
+        "sha256": "ec017da97fb2aaec1d4ce985e292f73263bc31736fda2d83136ce619ea351ae9"
+      },
+      {
+        "path": "com/m3/collections/M3LongLinkedHashSet$1.class",
+        "sha256": "a5b61ead2ca519bd75b712fc9c8668d4d12c56867acf6395ca342a17b0028c33"
+      },
+      {
+        "path": "com/m3/collections/M3LongLinkedHashSet.class",
+        "sha256": "00ddaffa6433e13a8572422eae7c21eab540308e1b0d060b0b57640641b8c391"
+      },
+      {
+        "path": "com/m3/collections/M3LongLinkedList28.class",
+        "sha256": "57758a410bd9faaf4687dc897f233d2d95e922e19609a6490daa92112abd4195"
+      },
+      {
+        "path": "com/m3/collections/M3LongList.class",
+        "sha256": "8642c637a725f23ab6cf08255a424c8ec733f72671add97c824d25adbf09fa39"
+      },
+      {
+        "path": "com/m3/collections/M3LongListSpliterator.class",
+        "sha256": "7ca5f1aa09510aa513c1e5496bbd311a22660c3e72a930dcd8d82ca66852d99a"
+      },
+      {
+        "path": "com/m3/collections/M3LongLongConsumer.class",
+        "sha256": "533d6e1f33805fc3be80a267ccdc2d5e2a79b631850c7f5f7b98bf6b45dc8378"
+      },
+      {
+        "path": "com/m3/collections/M3LongLongHashMap$1.class",
+        "sha256": "b6c6ff23ae0fa458fe307c2371f0a4d513fef7b184c7c1c273a32faf7671029b"
+      },
+      {
+        "path": "com/m3/collections/M3LongLongHashMap.class",
+        "sha256": "3b3abc2581405043eefcd792f2433b717a5e79cb90196f3e7dd50ad572a5bb85"
+      },
+      {
+        "path": "com/m3/collections/M3LongLongLinkedHashMap$1.class",
+        "sha256": "3bd3310cf4bcac3807f23ef57f19a5037cd9d9d9d4927b399b51b971b710ca6d"
+      },
+      {
+        "path": "com/m3/collections/M3LongLongLinkedHashMap.class",
+        "sha256": "864027f466c4a044cfa850ce7b9cc4dde156ae6330c95dcd369c7dfb552e63b9"
+      },
+      {
+        "path": "com/m3/collections/M3LongPredicates$1.class",
+        "sha256": "965a8c47b3551830e90058fa904e282cc1763ec1dfe272f6d0401aebc879248c"
+      },
+      {
+        "path": "com/m3/collections/M3LongPredicates$Branch.class",
+        "sha256": "17515290f3f5ea2c89bc258a0e3e9f03e1556d32c082326d1e985df0a4e8fd57"
+      },
+      {
+        "path": "com/m3/collections/M3LongPredicates$Chain.class",
+        "sha256": "6ed91b24f5296b616145dd28ccbf3a61beded24bf29edd69f29055b0a8e376c6"
+      },
+      {
+        "path": "com/m3/collections/M3LongPredicates$Leaf.class",
+        "sha256": "419395d692a92a34fe6dd87207485fdc2d71e85984a34ad26200bf10e6eceea5"
+      },
+      {
+        "path": "com/m3/collections/M3LongPredicates$Node.class",
+        "sha256": "2ffc26ce5cc33c78cdf9663cf02a3f6aae309b933d61b4dfc3862c696679d6da"
+      },
+      {
+        "path": "com/m3/collections/M3LongPredicates.class",
+        "sha256": "33ae5f318e6d766e2ac05b49fff117dfebabcd183ae3ca492e650b04e6dd265e"
+      },
+      {
+        "path": "com/m3/collections/M3LongPriorityQueue$1.class",
+        "sha256": "ad3b9e0f3b92335bb7b4b7df5ed06b4ad76cb4a32ed7f74405ebb82c13218505"
+      },
+      {
+        "path": "com/m3/collections/M3LongPriorityQueue.class",
+        "sha256": "220338b7580fa0e52542c7b2aead0d76bb2769d9bd428efb586babd488d47fc5"
+      },
+      {
+        "path": "com/m3/collections/M3LongQueue.class",
+        "sha256": "aa30f394bff887882a6511ab148217b13dd8ec7b89b7cc98ad71afba0c35db21"
+      },
+      {
+        "path": "com/m3/collections/M3LongRankBatchNative.class",
+        "sha256": "9c340d754d484e91a0799cc5c44ebfed4872d799cd48e65032f933fead9d485e"
+      },
+      {
+        "path": "com/m3/collections/M3LongRankIndex.class",
+        "sha256": "86fd101468176e144c67d70d3ce043f47027d2ead0fbbbe05b9e118dccc8b716"
+      },
+      {
+        "path": "com/m3/collections/M3LongSequence.class",
+        "sha256": "d8db168936f54d25080ce3680c07f1d31d335fa9a267f4eb7aa78241e367d0f1"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedSet.class",
+        "sha256": "1d38f96f231e88d4a9d317525d789b4d3d053a7c13851c8e91f4b58ea6f823e8"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedSnapshot$1.class",
+        "sha256": "c55854df0b6dd9022bb6fd77aaef504fee04858d3f5d04acda70544cada1b6eb"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedSnapshot.class",
+        "sha256": "2b38977804130595d02c4c03cc44d9f85f08458e6787f3fe49063670941b5750"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedViews$1.class",
+        "sha256": "a8110f1490df3995a0888f72f1af62dae19d3591a33f8bcc6c6abb7fb6269b22"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedViews$Filtered.class",
+        "sha256": "8ece4e971df2f68eb26e65d7e7b4f374de165747ae1c0bb78c938f0e153d6520"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedViews$Unmodifiable.class",
+        "sha256": "56fc0681caf714342370250acb12f2568d05dfa8f35ec55f28a2634cc4316276"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedViews.class",
+        "sha256": "8ba5ddd6614d149a8221b4b6bd75adad0eebbef0be4d8a71c753cdd2787f0862"
+      },
+      {
+        "path": "com/m3/collections/M3LongStack.class",
+        "sha256": "846e099b4dc8f77ba80316e8a128d6becd661dc7605295a9ef51f399996207ce"
+      },
+      {
+        "path": "com/m3/collections/M3LongTreeSet$1.class",
+        "sha256": "2a40463f59ba9e578a60b54171a084287fe5547367db0d696449b24e61d798c9"
+      },
+      {
+        "path": "com/m3/collections/M3LongTreeSet$2.class",
+        "sha256": "3993b32a87b7ac92de138d5ea1ba2214f8d52dd4266e5c022a1bc9b380da7441"
+      },
+      {
+        "path": "com/m3/collections/M3LongTreeSet.class",
+        "sha256": "f630e5a6478f7f40c31b5f3e348167297fc20550f25734df6dba81535120713e"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$MapView$1.class",
+        "sha256": "02eb511a3871a3394a14ac3bb63a4d4419e3b7100df88e204aca9149c36c89c2"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$MapView$2.class",
+        "sha256": "1cc4db53fbbe337d3c93f5a88b6d37d0f7a57348618aa11b01d0773887c4c9b6"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$MapView$LiveEntry.class",
+        "sha256": "46b641487dc667c16b64490de84310c0e52a2c723e474a7a22254f82d61c1992"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$MapView.class",
+        "sha256": "aa176b7a125b7a21a0f69c3f0c360133d4270a0e9a7ae18ab001d77a6275e631"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$SetView$1.class",
+        "sha256": "335195500baf3e49800624c9eec88816adf815604b787aa654385afff6742b2b"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$SetView.class",
+        "sha256": "22c0f797c363a0150f8d820a69cbb2d997498f6e16c1e053c0dfc2ad0e0b6491"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews.class",
+        "sha256": "4b1729d3cce5b7b8d3c17eaffcfdbe5473f27de1b725c133dbbedb844de52124"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectCounts$1.class",
+        "sha256": "6d0ec08f3c1bd2ed4d069f734c154f8d714ec249120312319590b272978d9686"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectCounts$2.class",
+        "sha256": "7ad4b01e52e1875f167e9b69afb56049a1c9fdf87f9edd8e9f2bf892cf0768da"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectCounts.class",
+        "sha256": "c38dfadbc942d561adac632b009c18c172cca092ba2a49dc3254acc32b759032"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectIdentityMap.class",
+        "sha256": "6e0aaab34f6020468ffd264262f88b5ac3db5248ec676d52dcfee8b2583818bf"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectIdentitySet.class",
+        "sha256": "deae224962d261203d162598d2b24edc783b0f4cb4a1147d90e00ce18e9087a0"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectIndexSnapshot$Order.class",
+        "sha256": "cee0c512a34958c9160584a32506716d2d0ad0a9186034810a80f8434b37335c"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectIndexSnapshot.class",
+        "sha256": "da520350a1eac016a6bf3417f1e90b6e4c2476acdff45cede518f4d97569cac0"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$BudgetExceededException.class",
+        "sha256": "5b4e210da71e448653c3a02c122dba9aab11263e9f4d2d8fdf060d38055229be"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$Codec.class",
+        "sha256": "4307c5187f05f290f2574849aeef25ebede63fb4ac684be947c97c8bc16cb40a"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$Decision.class",
+        "sha256": "50ab95c923d512c7a2f175b6eeddd6992e8c6d0b9eae51dc33872a5becd4f365"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$Factory.class",
+        "sha256": "a8e9f2be66d0aa4d57c9ceb879085dcca6619a951a62ae0f171be7d8fc67c73f"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$HeapSnapshot.class",
+        "sha256": "4b4219a62340fdd27e1b1d25f8fcc9719326e8cb0a0d157f09e534ec38e90b55"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$ResidencyException.class",
+        "sha256": "1190d8d89e08b6e5846b197cfabbb876288ac8e8291379c613173a0ebdbfb58f"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$SpillStore.class",
+        "sha256": "79adf0d59fce08195f2e871cbd5b06735e1aa32d885894a596368d0fabffa6b8"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$State.class",
+        "sha256": "7289da26285bc95f6b85ce0088f478d2488597443aee3276b949310abbb4e297"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency.class",
+        "sha256": "f39bc461664c139d70b9ac9de8493dd1d3dc479d184978e099b1cdf29c4f5087"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectSlotStore28.class",
+        "sha256": "168d1761f3e165062d381543f6981d83e9846877ca35430b80686d3f16c01953"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectStateBatch28.class",
+        "sha256": "dcb56886a5cd340a12a7bb94678a899d8fe3ccb7441c0d467fc95b6479070adf"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectStateSlots28.class",
+        "sha256": "de35ef96e3dc69658a18dfc90eeeb4953f9734c4a6cc16da349cef5fbc0f9abc"
+      },
+      {
+        "path": "com/m3/collections/M3OrderedSlotMap$SetView.class",
+        "sha256": "63ce1bcfe8319a7cc614f5ee8592a843f68c858af8f9925da591522aa46c9ff4"
+      },
+      {
+        "path": "com/m3/collections/M3OrderedSlotMap$View.class",
+        "sha256": "b8efc2c32a22779c9738371b9d08417a45caffad66859f66fa5c5cd65b81944a"
+      },
+      {
+        "path": "com/m3/collections/M3OrderedSlotMap.class",
+        "sha256": "72c0d81c5edfb9d4a8d76b3a6d4e6cc4ada53a993f74e0f4636c1cdb89af1df5"
+      },
+      {
+        "path": "com/m3/collections/M3Progress$NullProgress.class",
+        "sha256": "2ef7a183fcd9d7db4db6771f6ca1156148515a58427b1557178127f81a2d5a3b"
+      },
+      {
+        "path": "com/m3/collections/M3Progress$Snapshot.class",
+        "sha256": "9e32bd9acee4d65b018b69e42e9ec65b9ff8db573263cc0bff068e3078e420af"
+      },
+      {
+        "path": "com/m3/collections/M3Progress$SubProgress.class",
+        "sha256": "182fcc8c47fc18407005a2298eabdfd3d5084d3da4013820cc5d3b99d13668a8"
+      },
+      {
+        "path": "com/m3/collections/M3Progress.class",
+        "sha256": "292c4a050ca91ac99d25b40c1c1402c8f3b421cd7039352401a79f40ec41bea5"
+      },
+      {
+        "path": "com/m3/collections/M3ProgressAdapters$LegacyAdapter.class",
+        "sha256": "13ba52b00c239ab631c0d4e0c8fa4b9fb433dfe9c1e6c1c17ca7ef7a3f077763"
+      },
+      {
+        "path": "com/m3/collections/M3ProgressAdapters.class",
+        "sha256": "29be5235243dde5a26e812f9f812b0ed7064cce653d02238ab9eb88bfad431dc"
+      },
+      {
+        "path": "com/m3/collections/M3ProgressMonitor.class",
+        "sha256": "03cd2da647042386e8b82f6c95a89b44efb11f40c87cd35fd2c7b25808a8c580"
+      },
+      {
+        "path": "com/m3/collections/M3ProgressScope.class",
+        "sha256": "67331794e91e2b54a22036ef04c8541aa6771a2ea32cc57d688d337ad7275463"
+      },
+      {
+        "path": "com/m3/collections/M3ProgressState.class",
+        "sha256": "928a75b36be4b5eb7257fe54ebd8db488405e4e40e559c4b73705890669c14fb"
+      },
+      {
+        "path": "com/m3/collections/M3Residency$Strategy.class",
+        "sha256": "e6bda47db7281e3a49b2c123ce37b257927cf0de7b8519789a5c0a9022516102"
+      },
+      {
+        "path": "com/m3/collections/M3Residency.class",
+        "sha256": "12a8a9225281c527e6c23c8cf2513a8e94e7c259d1e8965d9ebb57c0aeedc282"
+      },
+      {
+        "path": "com/m3/collections/M3ResidencyStateMaskIndex$Backend.class",
+        "sha256": "73e88e588db658f0ee57a3f6241e98f28e46689ce69899a72972efe38e79a1a6"
+      },
+      {
+        "path": "com/m3/collections/M3ResidencyStateMaskIndex$NativePeer.class",
+        "sha256": "16ed3abe35c8b058bd06dbd3a72499241ddfb3a743971425093c5bacc0f32edc"
+      },
+      {
+        "path": "com/m3/collections/M3ResidencyStateMaskIndex.class",
+        "sha256": "9db1620118f04c5cc56093be1b7bf628212408c4c1e93ebb2008aae6c82e36a7"
+      },
+      {
+        "path": "com/m3/collections/M3SignalOrder$Backend.class",
+        "sha256": "728297d27df72f07c3c5fc194207bd49f68dc249209dc152e92d9bf9ea454901"
+      },
+      {
+        "path": "com/m3/collections/M3SignalOrder.class",
+        "sha256": "41a06690bdd033a19f16c42186cb72933fbb9303e83270b0ff8629c5d9b0346a"
+      },
+      {
+        "path": "com/m3/collections/M3SignalOrderNative.class",
+        "sha256": "7b7dc3efaa33e420cfc65b970f0c67bf279d1f34231056fe663280ef0371b9de"
+      },
+      {
+        "path": "com/m3/collections/M3SlotAllocator28.class",
+        "sha256": "85289cae49be89da767a5e2fab98d61631c7ca59bdd8f5163f65d93669b0084a"
+      },
+      {
+        "path": "com/m3/collections/M3SlotArrays.class",
+        "sha256": "ff7512e76e008e1836860a20e93e33bc35e0a815b50c2587ed9c69afe3483bef"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap$1.class",
+        "sha256": "e183893aada8bbcaf617e82f0bef25ff8650da7d563b1cdcf3818fcdcbc4bcef"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap$2.class",
+        "sha256": "dd13be197cbb4fbd45c96cdfc5f29a9ab45f6c57b59843add624c5f5dd2b1eeb"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap$3.class",
+        "sha256": "84137c4f8bcd0f5c483b7a5d2bf0f8a0ac62302c1ce3e4e5730cbba2dcb2ed45"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap$4.class",
+        "sha256": "048b2fc56d20bd3f8543f5e796b0503cb60ee75b7c327ac6cb41130d7b9b41cb"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap$LiveEntry.class",
+        "sha256": "251908309cebf287a0384bf27ad6bd13d037e1b3d025a29fe95b179b276dc947"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap.class",
+        "sha256": "d4a2e63cebc6634613294a097ab6afbde317b0efa1ce8d604b57a461ad3e7e49"
+      },
+      {
+        "path": "com/m3/collections/M3SlotSpliterators$1.class",
+        "sha256": "86a990b304c29427cc70b7ac7c26f3037d740d1f1f469722b9e00deb2f46c79c"
+      },
+      {
+        "path": "com/m3/collections/M3SlotSpliterators$2.class",
+        "sha256": "8ac7be19ae87f2fe6afb19a11680c4b1521874ae22facf7a98b5e30ca5424942"
+      },
+      {
+        "path": "com/m3/collections/M3SlotSpliterators.class",
+        "sha256": "c370928235f05880f49d9e10933310931945b7c638cbb65818606bed1fe82e58"
+      },
+      {
+        "path": "com/m3/collections/M3SpanIndex$Backend.class",
+        "sha256": "0416619f1b6eca1857337316998265bf5a461cf5bafa98dc4f481a49e7a33252"
+      },
+      {
+        "path": "com/m3/collections/M3SpanIndex$Snapshot.class",
+        "sha256": "83e384b2de444c67bfeea88654177bee5923528281aba34e363897a2b0dd93f5"
+      },
+      {
+        "path": "com/m3/collections/M3SpanIndex.class",
+        "sha256": "d96415a3af39da1c577a6760784cab98be815ad7c871af3c9053e6c124ea9e99"
+      },
+      {
+        "path": "com/m3/collections/M3StateMaskArrays.class",
+        "sha256": "2b41c58efe30694b96d07f071bb1cba62370fdcfba9df4a469250378f85dceff"
+      },
+      {
+        "path": "com/m3/collections/M3SystemProgress.class",
+        "sha256": "25be7bd15feca53586e667d2a3b04a18ca24e12d8ae7e6700b3bb28594b9eec9"
+      },
+      {
+        "path": "com/m3/collections/M3TransferQueue$1.class",
+        "sha256": "300d5f86570b67f1295e595754557b5870327212948d6d4e108d2a5e652c9ff9"
+      },
+      {
+        "path": "com/m3/collections/M3TransferQueue.class",
+        "sha256": "93f4080bf4b76d5ef7e6d737cb06ab55cd4a4b07e16394d63b289c55755e949e"
+      },
+      {
+        "path": "com/m3/collections/M3TreeMap$Tree.class",
+        "sha256": "89e9bc4b12d3e3fdc24dfaa87d68bb978c8d0d3300567d71d53b5d0493f84afa"
+      },
+      {
+        "path": "com/m3/collections/M3TreeMap.class",
+        "sha256": "1b00e00956e9c91718f4d9fd57ca0d84bca05ed84e4f62af088e30bede73ea23"
+      },
+      {
+        "path": "com/m3/collections/M3TreeSet.class",
+        "sha256": "ef5164798231490cf4b9184094a7841ed3fc40f7fce23aef30634f40f124246c"
+      },
+      {
+        "path": "com/m3/collections/M3VirtualAccumulator.class",
+        "sha256": "d61f2a9ab27b3be379355a60a3cb484b28bfb5c1e4036270c12f7766ddcadec9"
+      },
+      {
+        "path": "com/m3/collections/M3VirtualCollector$Pair.class",
+        "sha256": "fa158e7ce08fc1a0821853c5d13cf05955b7596bec38c83ae7349b81a4ceb795"
+      },
+      {
+        "path": "com/m3/collections/M3VirtualCollector.class",
+        "sha256": "4b4ac57e9c6ca8200d1caee89c7453c32264fc3ce0eec11456adb3a056e3fbee"
+      },
+      {
+        "path": "com/m3/collections/M3WeakHashMap$KeyReference.class",
+        "sha256": "4fc51fd0c596d95dfb0b86a2aba9a3950af80a7ed8adf3804143f724c83b94af"
+      },
+      {
+        "path": "com/m3/collections/M3WeakHashMap.class",
+        "sha256": "94e964e4bcbeb74e8a75975e5bd1c30233ff8657434a2dbadad1d0f653deeb9e"
+      },
+      {
+        "path": "module-info.class",
+        "sha256": "440779e416e3a6e75114f6aa1631d00083d502855636b833a295e60226c150f6"
+      }
+    ],
+    "unchangedAcrossRun": true,
+    "qualification": "Diagnostic classes for frozen target plus proposed count owner and two minimal constructor repairs; not final named-recipe application or product-promotion proof"
+  },
+  "emittedProbeClasses": [
+    {
+      "path": "CountOwnerCostProbe$Corpus.class",
+      "sha256": "b0ee6364df3ec460b7860086894904c28cf94a4d022354ab3af2dab525580260"
+    },
+    {
+      "path": "CountOwnerCostProbe$Key.class",
+      "sha256": "96ac7aaf64705e46372078206c8e729e9248a1f5aa61f16777c1758a598594ac"
+    },
+    {
+      "path": "CountOwnerCostProbe$Meter.class",
+      "sha256": "bd4d70df01e778e92b82ba7abfb8d31e877a5b3970eaf39cd732ad1bec648bda"
+    },
+    {
+      "path": "CountOwnerCostProbe$Observation.class",
+      "sha256": "8a5cac6d465320107ba742f2142731f3c1469aa43864febde2ebb9d7e20b5a07"
+    },
+    {
+      "path": "CountOwnerCostProbe$Provider$1.class",
+      "sha256": "6d0b79241e431df8d6b032187c70339e9cdb879aeb239bc712040a8b559e1435"
+    },
+    {
+      "path": "CountOwnerCostProbe$Provider$2.class",
+      "sha256": "cb26d204753e627ef1a117598bdcd8c9e50cc705143f5fba461fdb02de915715"
+    },
+    {
+      "path": "CountOwnerCostProbe$Provider$3.class",
+      "sha256": "7cc3813b5802fe56e41b74759c40e6914fd352941da955142a3c26df2cd68e27"
+    },
+    {
+      "path": "CountOwnerCostProbe$Provider$4.class",
+      "sha256": "c5be6677cbcf1c2b962ccbe2555afeb6c3778e517e03c6574c47ef2828f2f5ed"
+    },
+    {
+      "path": "CountOwnerCostProbe$Provider.class",
+      "sha256": "f5051c516e37f528e3c7480aefbcde1b298f2aa469645da4c4c1735d93dbc235"
+    },
+    {
+      "path": "CountOwnerCostProbe$Sample.class",
+      "sha256": "7f0f0de86f713da68949921a30c36fb9a8a495c4b0c60ad1eab7f16955c0f31a"
+    },
+    {
+      "path": "CountOwnerCostProbe.class",
+      "sha256": "f4b7a6c6a30736df131e10f515595a2b68128322494d4bdb5e00d63eb437e59c"
+    }
+  ],
+  "artifactInputs": {
+    "/tmp/m3-maven-repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar": "f3d7f57f67fd622f4d468dfdd692b3a5e3909246c28017ac3263405f0fe617ed",
+    "/tmp/m3-maven-repository/com/google/errorprone/error_prone_annotations/2.36.0/error_prone_annotations-2.36.0.jar": "77440e270b0bc9a249903c5a076c36a722c4886ca4f42675f2903a1c53ed61a5",
+    "/tmp/m3-maven-repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
+    "/tmp/m3-maven-repository/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar": "4e0d0896bac5356cead277bac0283f09813e14417e3e84e0c86b573b54d218a3",
+    "/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections/11.1.0/eclipse-collections-11.1.0.jar": "8881749de791c28c6ccea621314a3a154cfe76ef77c30054b6e714c3dc76969d",
+    "/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections-api/11.1.0/eclipse-collections-api-11.1.0.jar": "1b8608ecf4e681f031c29a28c403f71476fe5df3a8f0c0dd8c7ad33b91984212"
+  },
+  "orderedClasspathClosure": {
+    "entries": [
+      {
+        "kind": "class-directory",
+        "path": "/tmp/m3-count-cost-rebased-20261017/classes",
+        "inventorySha256": "cbaa244118ea1dfa30e5ada0c0398f5f8d49a695a0bd424af5368da5c2ac5c6c"
+      },
+      {
+        "kind": "class-directory",
+        "path": "/tmp/m3-five-provider-current-master-20261017/classes",
+        "inventorySha256": "072924009cc1b8a7b9ac282494d3e876b7756a8d0527093fa86fc0ca92aa50e5"
+      },
+      {
+        "kind": "jar",
+        "path": "/tmp/m3-maven-repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar",
+        "sha256": "f3d7f57f67fd622f4d468dfdd692b3a5e3909246c28017ac3263405f0fe617ed"
+      },
+      {
+        "kind": "jar",
+        "path": "/tmp/m3-maven-repository/com/google/errorprone/error_prone_annotations/2.36.0/error_prone_annotations-2.36.0.jar",
+        "sha256": "77440e270b0bc9a249903c5a076c36a722c4886ca4f42675f2903a1c53ed61a5"
+      },
+      {
+        "kind": "jar",
+        "path": "/tmp/m3-maven-repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
+        "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab"
+      },
+      {
+        "kind": "jar",
+        "path": "/tmp/m3-maven-repository/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar",
+        "sha256": "4e0d0896bac5356cead277bac0283f09813e14417e3e84e0c86b573b54d218a3"
+      },
+      {
+        "kind": "jar",
+        "path": "/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections/11.1.0/eclipse-collections-11.1.0.jar",
+        "sha256": "8881749de791c28c6ccea621314a3a154cfe76ef77c30054b6e714c3dc76969d"
+      },
+      {
+        "kind": "jar",
+        "path": "/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections-api/11.1.0/eclipse-collections-api-11.1.0.jar",
+        "sha256": "1b8608ecf4e681f031c29a28c403f71476fe5df3a8f0c0dd8c7ad33b91984212"
+      }
+    ],
+    "sha256": "cfd5265b3f3c66f70026d499e7a459b6f1b8d7c4c2eb37309ed54ecf87e4cacd",
+    "algorithm": "SHA-256 of UTF-8 compact sorted-key JSON for the ordered classpath entry list. Directory hashes bind every sorted relative .class path and its SHA-256; JAR entries bind entire JAR bytes."
+  },
+  "compileCommand": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+    "--release",
+    "21",
+    "-Xlint:all,-processing",
+    "-Werror",
+    "-cp",
+    "/tmp/m3-five-provider-current-master-20261017/classes:/tmp/m3-maven-repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar:/tmp/m3-maven-repository/com/google/errorprone/error_prone_annotations/2.36.0/error_prone_annotations-2.36.0.jar:/tmp/m3-maven-repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/tmp/m3-maven-repository/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar:/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections/11.1.0/eclipse-collections-11.1.0.jar:/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections-api/11.1.0/eclipse-collections-api-11.1.0.jar",
+    "-d",
+    "/tmp/m3-count-cost-rebased-20261017/classes",
+    "/tmp/m3-count-cost-rebased-20261017/src/CountOwnerCostProbe.java"
+  ],
+  "runCommand": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+    "-Xms512m",
+    "-Xmx512m",
+    "-XX:+UseG1GC",
+    "-cp",
+    "/tmp/m3-count-cost-rebased-20261017/classes:/tmp/m3-five-provider-current-master-20261017/classes:/tmp/m3-maven-repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar:/tmp/m3-maven-repository/com/google/errorprone/error_prone_annotations/2.36.0/error_prone_annotations-2.36.0.jar:/tmp/m3-maven-repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/tmp/m3-maven-repository/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar:/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections/11.1.0/eclipse-collections-11.1.0.jar:/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections-api/11.1.0/eclipse-collections-api-11.1.0.jar",
+    "CountOwnerCostProbe"
+  ],
+  "rawSamples": {
+    "file": "count-owner-cost-samples.csv",
+    "sha256": "19353fd9e9de6ef6a84c2eb2c5bc523341caf6f82476c67142d82ca79f98a627"
+  },
+  "summary": [
+    {
+      "keys": 4096,
+      "phase": "fresh_admit",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 4096,
+      "cpuNanos": {
+        "min": 188279,
+        "median": 192661.0,
+        "max": 545069,
+        "samples": [
+          292154,
+          209622,
+          545069,
+          189181,
+          189601,
+          192105,
+          188279,
+          193217
+        ]
+      },
+      "wallNanos": {
+        "min": 187372,
+        "median": 191733.0,
+        "max": 543587,
+        "samples": [
+          289145,
+          208544,
+          543587,
+          188343,
+          188703,
+          191107,
+          187372,
+          192359
+        ]
+      },
+      "allocatedBytes": {
+        "min": 416408,
+        "median": 416408.0,
+        "max": 416408,
+        "samples": [
+          416408,
+          416408,
+          416408,
+          416408,
+          416408,
+          416408,
+          416408,
+          416408
+        ]
+      },
+      "totalCount": 10240,
+      "countChecksum": 20981760,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "update_existing",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 32768,
+      "cpuNanos": {
+        "min": 175760,
+        "median": 183797.5,
+        "max": 201619,
+        "samples": [
+          192395,
+          181209,
+          185185,
+          176922,
+          185295,
+          201619,
+          182410,
+          175760
+        ]
+      },
+      "wallNanos": {
+        "min": 175394,
+        "median": 183390.0,
+        "max": 200822,
+        "samples": [
+          190867,
+          180872,
+          184737,
+          176465,
+          184938,
+          200822,
+          182043,
+          175394
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "totalCount": 10240,
+      "countChecksum": 20981760,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "fresh_admit",
+      "provider": "GUAVA_LINKED",
+      "samples": 8,
+      "operationsPerSample": 4096,
+      "cpuNanos": {
+        "min": 136733,
+        "median": 147058.5,
+        "max": 175381,
+        "samples": [
+          154579,
+          159146,
+          139947,
+          138686,
+          136733,
+          142011,
+          175381,
+          152106
+        ]
+      },
+      "wallNanos": {
+        "min": 136265,
+        "median": 146375.0,
+        "max": 174953,
+        "samples": [
+          152970,
+          157948,
+          139249,
+          137957,
+          136265,
+          141533,
+          174953,
+          151217
+        ]
+      },
+      "allocatedBytes": {
+        "min": 295104,
+        "median": 295104.0,
+        "max": 295104,
+        "samples": [
+          295104,
+          295104,
+          295104,
+          295104,
+          295104,
+          295104,
+          295104,
+          295104
+        ]
+      },
+      "totalCount": 10240,
+      "countChecksum": 20981760,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "update_existing",
+      "provider": "GUAVA_LINKED",
+      "samples": 8,
+      "operationsPerSample": 32768,
+      "cpuNanos": {
+        "min": 137624,
+        "median": 173046.5,
+        "max": 205866,
+        "samples": [
+          137624,
+          178485,
+          167608,
+          139637,
+          200218,
+          205866,
+          154409,
+          187588
+        ]
+      },
+      "wallNanos": {
+        "min": 137026,
+        "median": 172599.5,
+        "max": 205549,
+        "samples": [
+          137026,
+          178008,
+          167191,
+          139249,
+          199770,
+          205549,
+          153531,
+          187131
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "totalCount": 10240,
+      "countChecksum": 20981760,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "fresh_admit",
+      "provider": "APACHE_HASH",
+      "samples": 8,
+      "operationsPerSample": 4096,
+      "cpuNanos": {
+        "min": 117805,
+        "median": 122041.5,
+        "max": 495215,
+        "samples": [
+          147970,
+          117805,
+          121851,
+          122232,
+          119357,
+          133948,
+          120218,
+          495215
+        ]
+      },
+      "wallNanos": {
+        "min": 117286,
+        "median": 121432.5,
+        "max": 494203,
+        "samples": [
+          146550,
+          117286,
+          121152,
+          121713,
+          118838,
+          133170,
+          119380,
+          494203
+        ]
+      },
+      "allocatedBytes": {
+        "min": 262328,
+        "median": 262328.0,
+        "max": 262328,
+        "samples": [
+          262328,
+          262328,
+          262328,
+          262328,
+          262328,
+          262328,
+          262328,
+          262328
+        ]
+      },
+      "totalCount": 10240,
+      "countChecksum": 20981760,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "update_existing",
+      "provider": "APACHE_HASH",
+      "samples": 8,
+      "operationsPerSample": 32768,
+      "cpuNanos": {
+        "min": 148571,
+        "median": 189957.0,
+        "max": 240287,
+        "samples": [
+          148571,
+          240287,
+          149482,
+          222510,
+          167829,
+          152055,
+          212085,
+          218544
+        ]
+      },
+      "wallNanos": {
+        "min": 147983,
+        "median": 189229.5,
+        "max": 239901,
+        "samples": [
+          147983,
+          239901,
+          149124,
+          221714,
+          167151,
+          151668,
+          211308,
+          218008
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "totalCount": 10240,
+      "countChecksum": 20981760,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "fresh_admit",
+      "provider": "ECLIPSE_HASH",
+      "samples": 8,
+      "operationsPerSample": 4096,
+      "cpuNanos": {
+        "min": 73740,
+        "median": 78001.0,
+        "max": 119948,
+        "samples": [
+          119948,
+          78677,
+          77325,
+          75242,
+          76564,
+          87509,
+          89903,
+          73740
+        ]
+      },
+      "wallNanos": {
+        "min": 73140,
+        "median": 76816.0,
+        "max": 107261,
+        "samples": [
+          107261,
+          76906,
+          76726,
+          74622,
+          76014,
+          86600,
+          89094,
+          73140
+        ]
+      },
+      "allocatedBytes": {
+        "min": 131528,
+        "median": 131528.0,
+        "max": 131528,
+        "samples": [
+          131528,
+          131528,
+          131528,
+          131528,
+          131528,
+          131528,
+          131528,
+          131528
+        ]
+      },
+      "totalCount": 10240,
+      "countChecksum": 20981760,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "update_existing",
+      "provider": "ECLIPSE_HASH",
+      "samples": 8,
+      "operationsPerSample": 32768,
+      "cpuNanos": {
+        "min": 110304,
+        "median": 113323.5,
+        "max": 146227,
+        "samples": [
+          111245,
+          146227,
+          117324,
+          114380,
+          112267,
+          111426,
+          110304,
+          122512
+        ]
+      },
+      "wallNanos": {
+        "min": 109936,
+        "median": 112929.5,
+        "max": 145879,
+        "samples": [
+          110265,
+          145879,
+          116835,
+          113941,
+          111918,
+          111077,
+          109936,
+          121913
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "totalCount": 10240,
+      "countChecksum": 20981760,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "flags_write",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 16384,
+      "cpuNanos": {
+        "min": 100158,
+        "median": 591167.5,
+        "max": 782442,
+        "samples": [
+          100158,
+          118907,
+          524729,
+          630165,
+          637045,
+          577107,
+          605228,
+          782442
+        ]
+      },
+      "wallNanos": {
+        "min": 99409,
+        "median": 590437.5,
+        "max": 780383,
+        "samples": [
+          99409,
+          115494,
+          523927,
+          629136,
+          636086,
+          576547,
+          604328,
+          780383
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "totalCount": 10240,
+      "countChecksum": 20981760,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "flags_select",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 4096,
+      "cpuNanos": {
+        "min": 76173,
+        "median": 84114.5,
+        "max": 110925,
+        "samples": [
+          106418,
+          78246,
+          81340,
+          91005,
+          86889,
+          76173,
+          79829,
+          110925
+        ]
+      },
+      "wallNanos": {
+        "min": 75594,
+        "median": 83570.5,
+        "max": 110365,
+        "samples": [
+          89765,
+          77797,
+          80781,
+          90406,
+          86360,
+          75594,
+          78769,
+          110365
+        ]
+      },
+      "allocatedBytes": {
+        "min": 89048,
+        "median": 89048.0,
+        "max": 89048,
+        "samples": [
+          89048,
+          89048,
+          89048,
+          89048,
+          89048,
+          89048,
+          89048,
+          89048
+        ]
+      },
+      "totalCount": 10240,
+      "countChecksum": 20981760,
+      "selected": 1365,
+      "selectionChecksum": 2796203
+    },
+    {
+      "keys": 65536,
+      "phase": "fresh_admit",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 65536,
+      "cpuNanos": {
+        "min": 1521488,
+        "median": 2374829.5,
+        "max": 4244175,
+        "samples": [
+          4244175,
+          3638380,
+          3461768,
+          2439270,
+          2310389,
+          1553416,
+          1521488,
+          1579996
+        ]
+      },
+      "wallNanos": {
+        "min": 1516550,
+        "median": 2881612.0,
+        "max": 31517008,
+        "samples": [
+          4235893,
+          3632251,
+          3458229,
+          31517008,
+          2304995,
+          1550952,
+          1516550,
+          1577952
+        ]
+      },
+      "allocatedBytes": {
+        "min": 7026112,
+        "median": 7026112.0,
+        "max": 7026112,
+        "samples": [
+          7026112,
+          7026112,
+          7026112,
+          7026112,
+          7026112,
+          7026112,
+          7026112,
+          7026112
+        ]
+      },
+      "totalCount": 163840,
+      "countChecksum": 5368872960,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "update_existing",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 524288,
+      "cpuNanos": {
+        "min": 5431381,
+        "median": 6380820.5,
+        "max": 11104081,
+        "samples": [
+          6164860,
+          6747034,
+          6596781,
+          10348329,
+          11104081,
+          5502397,
+          5786508,
+          5431381
+        ]
+      },
+      "wallNanos": {
+        "min": 5429813,
+        "median": 6376350.0,
+        "max": 11097632,
+        "samples": [
+          6161862,
+          6742816,
+          6590838,
+          10341757,
+          11097632,
+          5500538,
+          5783855,
+          5429813
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "totalCount": 163840,
+      "countChecksum": 5368872960,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "fresh_admit",
+      "provider": "GUAVA_LINKED",
+      "samples": 8,
+      "operationsPerSample": 65536,
+      "cpuNanos": {
+        "min": 1162064,
+        "median": 2198037.0,
+        "max": 3780822,
+        "samples": [
+          2807206,
+          2496495,
+          3106711,
+          3780822,
+          1899579,
+          1162064,
+          1244697,
+          1177157
+        ]
+      },
+      "wallNanos": {
+        "min": 1160184,
+        "median": 2195049.5,
+        "max": 3777268,
+        "samples": [
+          2804676,
+          2493418,
+          3101783,
+          3777268,
+          1896681,
+          1160184,
+          1242438,
+          1174105
+        ]
+      },
+      "allocatedBytes": {
+        "min": 4718848,
+        "median": 4718848.0,
+        "max": 4718848,
+        "samples": [
+          4718848,
+          4718848,
+          4718848,
+          4718848,
+          4718848,
+          4718848,
+          4718848,
+          4718848
+        ]
+      },
+      "totalCount": 163840,
+      "countChecksum": 5368872960,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "update_existing",
+      "provider": "GUAVA_LINKED",
+      "samples": 8,
+      "operationsPerSample": 524288,
+      "cpuNanos": {
+        "min": 4947513,
+        "median": 5965404.0,
+        "max": 7593816,
+        "samples": [
+          5935409,
+          5995399,
+          7593816,
+          7463428,
+          7433293,
+          5103495,
+          5768211,
+          4947513
+        ]
+      },
+      "wallNanos": {
+        "min": 4944804,
+        "median": 5959679.0,
+        "max": 7585288,
+        "samples": [
+          5929003,
+          5990355,
+          7585288,
+          7458182,
+          7427996,
+          5245585,
+          5763485,
+          4944804
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "totalCount": 163840,
+      "countChecksum": 5368872960,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "fresh_admit",
+      "provider": "APACHE_HASH",
+      "samples": 8,
+      "operationsPerSample": 65536,
+      "cpuNanos": {
+        "min": 979213,
+        "median": 2030624.0,
+        "max": 3051059,
+        "samples": [
+          2776611,
+          2449085,
+          3051059,
+          2935978,
+          1612163,
+          1022688,
+          1065151,
+          979213
+        ]
+      },
+      "wallNanos": {
+        "min": 977019,
+        "median": 2028309.0,
+        "max": 3046440,
+        "samples": [
+          2772438,
+          2446628,
+          3046440,
+          2933260,
+          1609990,
+          1019483,
+          1061305,
+          977019
+        ]
+      },
+      "allocatedBytes": {
+        "min": 4194552,
+        "median": 4194552.0,
+        "max": 4194552,
+        "samples": [
+          4194552,
+          4194552,
+          4194552,
+          4194552,
+          4194552,
+          4194552,
+          4194552,
+          4194552
+        ]
+      },
+      "totalCount": 163840,
+      "countChecksum": 5368872960,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "update_existing",
+      "provider": "APACHE_HASH",
+      "samples": 8,
+      "operationsPerSample": 524288,
+      "cpuNanos": {
+        "min": 5336010,
+        "median": 6767219.0,
+        "max": 8435981,
+        "samples": [
+          7123142,
+          6411296,
+          8435981,
+          8396732,
+          8362823,
+          5510379,
+          5336010,
+          5888289
+        ]
+      },
+      "wallNanos": {
+        "min": 5332326,
+        "median": 6762350.0,
+        "max": 8430513,
+        "samples": [
+          7117689,
+          6407011,
+          8430513,
+          8389742,
+          8356722,
+          5507229,
+          5332326,
+          5883585
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "totalCount": 163840,
+      "countChecksum": 5368872960,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "fresh_admit",
+      "provider": "ECLIPSE_HASH",
+      "samples": 8,
+      "operationsPerSample": 65536,
+      "cpuNanos": {
+        "min": 735181,
+        "median": 1560766.0,
+        "max": 2110713,
+        "samples": [
+          1974040,
+          1956243,
+          1905608,
+          2110713,
+          1215924,
+          735181,
+          754691,
+          757615
+        ]
+      },
+      "wallNanos": {
+        "min": 731770,
+        "median": 1557652.0,
+        "max": 2107468,
+        "samples": [
+          1969601,
+          1952295,
+          1902060,
+          2107468,
+          1213244,
+          731770,
+          752572,
+          753964
+        ]
+      },
+      "allocatedBytes": {
+        "min": 2097736,
+        "median": 2097736.0,
+        "max": 2097736,
+        "samples": [
+          2097736,
+          2097736,
+          2097736,
+          2097736,
+          2097736,
+          2097736,
+          2097736,
+          2097736
+        ]
+      },
+      "totalCount": 163840,
+      "countChecksum": 5368872960,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "update_existing",
+      "provider": "ECLIPSE_HASH",
+      "samples": 8,
+      "operationsPerSample": 524288,
+      "cpuNanos": {
+        "min": 3781843,
+        "median": 5898134.0,
+        "max": 6538435,
+        "samples": [
+          5768151,
+          6538435,
+          6028117,
+          6030090,
+          6254182,
+          3781843,
+          3924625,
+          4013697
+        ]
+      },
+      "wallNanos": {
+        "min": 3780252,
+        "median": 5893714.5,
+        "max": 6699611,
+        "samples": [
+          5762652,
+          6699611,
+          6024777,
+          6027311,
+          6249995,
+          3780252,
+          3923198,
+          4011020
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "totalCount": 163840,
+      "countChecksum": 5368872960,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "flags_write",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 262144,
+      "cpuNanos": {
+        "min": 1662067,
+        "median": 2601076.0,
+        "max": 2800556,
+        "samples": [
+          2407083,
+          1662067,
+          2467903,
+          2567651,
+          2634501,
+          2800556,
+          2787718,
+          2695090
+        ]
+      },
+      "wallNanos": {
+        "min": 1659555,
+        "median": 2598406.5,
+        "max": 2798637,
+        "samples": [
+          2385226,
+          1659555,
+          2455181,
+          2565357,
+          2631456,
+          2798637,
+          2785537,
+          2693569
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "totalCount": 163840,
+      "countChecksum": 5368872960,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "flags_select",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 65536,
+      "cpuNanos": {
+        "min": 906816,
+        "median": 1068931.5,
+        "max": 1737539,
+        "samples": [
+          1737539,
+          1526595,
+          1622558,
+          1190747,
+          906816,
+          947116,
+          910762,
+          907917
+        ]
+      },
+      "wallNanos": {
+        "min": 904129,
+        "median": 1067309.0,
+        "max": 1726565,
+        "samples": [
+          1726565,
+          1524642,
+          1613655,
+          1188957,
+          904129,
+          945661,
+          909727,
+          906703
+        ]
+      },
+      "allocatedBytes": {
+        "min": 1488592,
+        "median": 1488592.0,
+        "max": 1488592,
+        "samples": [
+          1488592,
+          1488592,
+          1488592,
+          1488592,
+          1488592,
+          1488592,
+          1488592,
+          1488592
+        ]
+      },
+      "totalCount": 163840,
+      "countChecksum": 5368872960,
+      "selected": 21845,
+      "selectionChecksum": 715827883
+    }
+  ],
+  "priorBaseEvidence": {
+    "directory": "../count-owner-cost",
+    "baseRevision": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+    "rawSamplesSha256": "ad6e18852999e406edeed414066555f6be3eab3d046becec539fcc405b579762",
+    "reportSha256BeforeExplicitRelabel": "88c01d563a88c1dcac3a259f23a891baf33616c6e166822cbe850ee7b96fdcd8",
+    "receiptSha256BeforeExplicitRelabel": "16d1077c7010a6bceed8d89f2afa935dbe7f875c92d9e272673a2e8c5c138e27",
+    "relation": "Earlier distinct class closure, explicitly prior-base only; not pooled or treated as an A/B performance comparison with this run."
+  },
+  "limitations": [
+    "Single shared-container JVM execution, not JMH, not a replicated statistical performance result.",
+    "All headline numbers are observed samples; they do not establish a universal speed, heap-size or scaling claim.",
+    "Default-capacity growth makes construction allocation include discarded intermediate arrays and tables.",
+    "M3 includes stable insertion order and flag columns; Apache HashMultiSet and Eclipse HashBag do not offer that feature combination.",
+    "Allocation meters exclude work on GC/JIT threads and do not measure retained graph size.",
+    "Current-thread CPU excludes CPU of other threads; wall time can include pauses and scheduling delays.",
+    "No JNI kernel, native memory, concurrency, null keys, full removals, provider views, bulk operations, presizing or large-count overflow measured.",
+    "Count samples use bounded positive counts for common semantics; existing separate differential tests own edge contracts.",
+    "Warmup is finite and does not prove every hot method has reached its final compilation tier.",
+    "The current class directory is a compiled diagnostic candidate that includes the proposed owner and two minimal constructor repairs; this evidence does not assert named-recipe application, product build, native/JNI proof or promotion.",
+    "CPU differences from the earlier class closure were observed in separate JVM executions and cannot be causally assigned to the rebase. No optimization or additional timing sweep was performed."
+  ]
+}

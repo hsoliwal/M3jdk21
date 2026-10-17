@@ -1,0 +1,136 @@
+{
+  "workflow": ".github/workflows/m3-sdk-family-names-20261017.yml",
+  "trigger": "m3/collections/interop/**",
+  "gate": "mvn -B -f m3/collections/recipes/sdk-family-names-20261017/pom.xml clean verify",
+  "read_only_analysis": true,
+  "frozen_base": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+  "baseline_drift_count": 3,
+  "current_drift_count": 10,
+  "mismatches": [
+    {
+      "path": "m3/collections/interop/pom.xml",
+      "mode": "GENERATED",
+      "accepted_sha256": [
+        "7144e37b9e553d4644ea1e8e997448c3a65dcb627b85cb9b9ae650d6c2500977",
+        "b1e7dd0817690de77ad1af8898d39e4edcab2ee005aeec709f39151d5981e9a3"
+      ],
+      "frozen_base_sha256": "b1e7dd0817690de77ad1af8898d39e4edcab2ee005aeec709f39151d5981e9a3",
+      "current_sha256": "6730e9f0ab3db90f4c8d4c93cbd9bd5cdf6681a91d55aed88d73ff6427651786",
+      "already_drifted_at_frozen_base": false,
+      "drifted_now": true
+    },
+    {
+      "path": "m3/collections/interop/sdk-family-bindings.tsv",
+      "mode": "GENERATED",
+      "accepted_sha256": [
+        "ABSENT",
+        "3eec888606c333effe39255423d1f25e2c4276716e8be357c0667e1fedb7fbd5"
+      ],
+      "frozen_base_sha256": "3eec888606c333effe39255423d1f25e2c4276716e8be357c0667e1fedb7fbd5",
+      "current_sha256": "c9de7a7f2cd7d5f8820d425ee2a944e41869e988d280c295064e558442efabb1",
+      "already_drifted_at_frozen_base": false,
+      "drifted_now": true
+    },
+    {
+      "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheListValuedMap.java",
+      "mode": "GENERATED",
+      "accepted_sha256": [
+        "ABSENT",
+        "7c74e242fb0bae5f853e335aed4d2d5695f9c1881af6325297641d29b06dcc82"
+      ],
+      "frozen_base_sha256": "7c74e242fb0bae5f853e335aed4d2d5695f9c1881af6325297641d29b06dcc82",
+      "current_sha256": "cf19153a45cddfeb01176f1483c5e89ce44249b1e99efe77711b6ecf5597d7dd",
+      "already_drifted_at_frozen_base": false,
+      "drifted_now": true
+    },
+    {
+      "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheSetValuedMap.java",
+      "mode": "GENERATED",
+      "accepted_sha256": [
+        "ABSENT",
+        "e44934cdb39484af881aa834fb6478b160c150a1b874bee4a03ed70c46e19547"
+      ],
+      "frozen_base_sha256": "e44934cdb39484af881aa834fb6478b160c150a1b874bee4a03ed70c46e19547",
+      "current_sha256": "cd8b8cf5805afd37a030f0c8fb8bc6388b544731fe81b06bbb02a6171a1bc8fd",
+      "already_drifted_at_frozen_base": false,
+      "drifted_now": true
+    },
+    {
+      "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java",
+      "mode": "GENERATED",
+      "accepted_sha256": [
+        "fa144a8c8617f190cdb1848bc28d3c9f6ae4302666a00c8ea3e904f25afc06fd",
+        "76609b94a23a682d98d541b5a0421f8c0bdfce05dce6f9cb253fa2e6bf89f62b"
+      ],
+      "frozen_base_sha256": "76609b94a23a682d98d541b5a0421f8c0bdfce05dce6f9cb253fa2e6bf89f62b",
+      "current_sha256": "48732bcf25f5fca5c9f684506c53608125cc14b27bed4981999cc54432da957d",
+      "already_drifted_at_frozen_base": false,
+      "drifted_now": true
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java",
+      "mode": "GENERATED",
+      "accepted_sha256": [
+        "ABSENT",
+        "7645be75ebd02a99fbbf64bf0996cc531bdff28d15f444a43914cf7a75461ea7"
+      ],
+      "frozen_base_sha256": "7645be75ebd02a99fbbf64bf0996cc531bdff28d15f444a43914cf7a75461ea7",
+      "current_sha256": "f1618f5890a5f43f1691dc87db9c5a24f4a9536b4ca7ce2ace74a81f138175d6",
+      "already_drifted_at_frozen_base": false,
+      "drifted_now": true
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java",
+      "mode": "GENERATED",
+      "accepted_sha256": [
+        "ABSENT",
+        "ec048dc96f50e35dd8f752f02bcdab13f38463023aafbf044aba15a9dfd1a401"
+      ],
+      "frozen_base_sha256": "ec048dc96f50e35dd8f752f02bcdab13f38463023aafbf044aba15a9dfd1a401",
+      "current_sha256": "4ef03ee935698da77434f2bfcd90429c2208c60fd77d3cb6b8ef06a0313abcb2",
+      "already_drifted_at_frozen_base": false,
+      "drifted_now": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "mode": "KEEP",
+      "accepted_sha256": [
+        "e4d8fd83ec0acb9b94bdde5a138d797ccd539c0bb87fe60d419a52f910051fcb",
+        "e4d8fd83ec0acb9b94bdde5a138d797ccd539c0bb87fe60d419a52f910051fcb"
+      ],
+      "frozen_base_sha256": "af78b910c1639030286023696da693890be5163cd0ffe6befef68748ff9450bc",
+      "current_sha256": "af78b910c1639030286023696da693890be5163cd0ffe6befef68748ff9450bc",
+      "already_drifted_at_frozen_base": true,
+      "drifted_now": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "mode": "KEEP",
+      "accepted_sha256": [
+        "a69694a2ce22ca9599cb665e4845f5dee75d527b7c144fa3ea7fb4518ec2d3fa",
+        "a69694a2ce22ca9599cb665e4845f5dee75d527b7c144fa3ea7fb4518ec2d3fa"
+      ],
+      "frozen_base_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "current_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "already_drifted_at_frozen_base": true,
+      "drifted_now": true
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "mode": "KEEP",
+      "accepted_sha256": [
+        "d7786cd5308f4a1e6743680d35e51f5f11a66b106abdb8f170edcb92b901d1cb",
+        "d7786cd5308f4a1e6743680d35e51f5f11a66b106abdb8f170edcb92b901d1cb"
+      ],
+      "frozen_base_sha256": "59b1bb47f2df09f1455e4ce2160becbeefd6da877ecddca4ad245a286d14fa48",
+      "current_sha256": "59b1bb47f2df09f1455e4ce2160becbeefd6da877ecddca4ad245a286d14fa48",
+      "already_drifted_at_frozen_base": true,
+      "drifted_now": true
+    }
+  ],
+  "enforcement": [
+    "SdkFamilyNamesSdkTest.inputs(false) compares KEEP text SHA to pinned before SHA",
+    "SdkFamilyReplay.main requires current installed hashes admitted before candidate output",
+    "verify.py requires current installed generated files to equal historical postimages"
+  ]
+}

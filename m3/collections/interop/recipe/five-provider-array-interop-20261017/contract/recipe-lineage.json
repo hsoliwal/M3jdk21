@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "canonical_snapshot_engine_source_repository": "https://github.com/hsoliwal/com.synexia",
+  "canonical_snapshot_engine_source_commit": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
+  "engine_files": {
+    "src/main/java/com/synexia/rewrite/M3EditScope.java": {
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "git_blob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db"
+    },
+    "src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java": {
+      "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+      "git_blob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40"
+    },
+    "src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java": {
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+      "git_blob": "9d0788d3717e017d58345c5c3e62022c2915a3c8"
+    },
+    "src/main/java/com/synexia/rewrite/M3ScopeInference.java": {
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
+      "git_blob": "d24729950508857280ea1b56d4e930f05137ec85"
+    }
+  },
+  "fixture_parent": "Prior constructor task qualification fixture in this task environment; reused byte-for-byte; no Git commit is asserted for these two fixture files.",
+  "fixture_files": {
+    "receive.py": {
+      "sha256": "24ce6011c0bc7d89fc863f8f809740b24d943cb40c5aaf9aba03adf0f222dadf",
+      "git_blob": "7b441c78df78c5c0dcc2f8a3526d588981880037"
+    },
+    "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java": {
+      "sha256": "015e2f8257c6e2b5573cecb32929cfbc8a41766a2bac4446172ccfab28b7ebb3",
+      "git_blob": "3ff7e6f49fd75a34d0991ced8d069b956da0ee49"
+    }
+  },
+  "constructor_postimage": {
+    "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12094",
+    "canonical_merge_commit": "12fc35908948dabd56abeda1665043cc495a8c45",
+    "target_pr": "https://github.com/hsoliwal/M3jdk21/pull/1107",
+    "target_git_blob": "ba17b0a264e8781b6f0a4ed33c2d067f6d53daaf"
+  }
+}

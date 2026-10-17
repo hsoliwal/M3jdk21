@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "source_count": 117,
+  "commands": [
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all,-module",
+        "-Werror",
+        "-d",
+        "/tmp/m3-five-provider-historical-sdk-fixture-20261017/current-workflow/core-classes",
+        "@/tmp/m3-five-provider-historical-sdk-fixture-20261017/current-workflow/core-sources"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.432766374000494
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/jar",
+        "--create",
+        "--file",
+        "/tmp/m3-five-provider-historical-sdk-fixture-20261017/current-workflow/m3-sdk-core.jar",
+        "-C",
+        "/tmp/m3-five-provider-historical-sdk-fixture-20261017/current-workflow/core-classes",
+        ".",
+        "-C",
+        "m3/collections/src/main/resources",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.2806320620002225
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "m3/collections/interop/target/classes:m3/collections/interop/target/test-classes",
+        "com.m3.collections.interop.M3LibraryBindingsSelfTest",
+        "m3/collections/interop/sdk-family-bindings.tsv"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.18456100999901537
+    }
+  ],
+  "packaged_resource": {
+    "name": "com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv",
+    "sha256": "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313",
+    "occurrences": 1,
+    "exact_source_bytes": true
+  },
+  "binding_main_output": "M3LibraryBindingsSelfTest checks=192 families=5 bindings=33\n",
+  "qualification": "Exact proposed workflow compile, package and thin-classpath binding commands; current sources from actual checkout. No install or repeated donor suite."
+}

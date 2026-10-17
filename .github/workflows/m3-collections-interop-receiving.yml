@@ -1,14 +1,13 @@
-name: M3 four-library receiver admission
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3 five-provider receiver admission
 on:
   pull_request:
     branches: [master]
     paths:
-      - 'm3/collections/interop/**'
-      - 'm3/collections/src/main/java/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'm3/collections/**'
+      - 'm3/tooling/migration-recipes/**'
       - '.github/workflows/m3-collections-interop-receiving.yml'
-  push:
-    branches: [aix/m3-collections-interop-receiving-20261015]
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,6 +18,8 @@ jobs:
   receiver-recipe-and-contracts:
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 30
+    env:
+      TASK: m3/collections/interop/recipe/five-provider-array-interop-20261017
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,103 +31,100 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Identify exact head and verify admitted production postimages
+      - name: Record exact head and verify the complete interop source census
         shell: bash
         run: |
           set -euxo pipefail
-          mkdir -p proof/core-classes/META-INF
+          mkdir -p proof
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; } > proof/identity.txt
-          ENGINE=m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-          test "$(git hash-object "$ENGINE")" = d58ca50dfaeb60f581b64f43545e688aca5c6530
           python3 - <<'PY'
           from pathlib import Path
-          import hashlib, subprocess
-          manifest = Path('m3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv')
-          rows = [line.split('\t') for line in manifest.read_text().splitlines() if line and not line.startswith('#')]
-          assert len(rows) == 5
-          expected = {row[0]: row[2] for row in rows}
+          import hashlib, os, subprocess
+          baseline = Path(os.environ['TASK']) / 'contract/interop-base-manifest.tsv'
+          successor = Path(os.environ['TASK']) / 'src/main/resources/com/synexia/rewrite/hash-pinned-java/five-provider-array-interop-20261017/manifest.tsv'
+          expected = dict(line.split('\t') for line in baseline.read_text().splitlines() if line and not line.startswith('#'))
+          for manifest in (successor,):
+              for line in manifest.read_text().splitlines():
+                  if not line or line.startswith('#'): continue
+                  name, before, after, resource = line.split('\t')
+                  if name.startswith('m3/collections/interop/src/'):
+                      if name in expected: assert before == expected[name], ('broken successor', name)
+                      else: assert before == 'ABSENT', ('missing predecessor', name)
+                      expected[name] = after
           tracked = set(subprocess.check_output(['git', 'ls-files', 'm3/collections/interop/src'], text=True).splitlines())
           assert tracked == set(expected), ('unexpected or missing source', tracked ^ set(expected))
-          receipt = []
           for name, wanted in sorted(expected.items()):
               path = Path(name)
               assert path.is_file() and not path.is_symlink(), name
-              actual = hashlib.sha256(path.read_bytes()).hexdigest()
-              assert actual == wanted, ('source drift', name, wanted, actual)
-              receipt.append(name + '\t' + actual)
-          Path('proof/admitted-postimages.tsv').write_text('\n'.join(receipt) + '\n')
-          print('ADMITTED_EXACT_POSTIMAGES', len(receipt))
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == wanted, ('source drift', name)
+          Path('proof/admitted-postimages.tsv').write_text(''.join(f'{name}\t{value}\n' for name, value in sorted(expected.items())))
+          print('ADMITTED_EXACT_POSTIMAGES', len(expected))
           PY
-      - name: Run all six actual recipe proofs before delivery
+      - name: Retain all six historical recipe fixture proofs
         shell: bash
         run: |
           set -euxo pipefail
-          mvn -B -ntp -f m3/collections/interop/recipe/pom.xml test 2>&1 | tee proof/recipe.log
-          cp -R m3/collections/interop/recipe/target/surefire-reports proof/recipe-all-six
-          python3 - <<'PY'
-          from pathlib import Path
-          import xml.etree.ElementTree as E
-          reports = list(Path('proof/recipe-all-six').glob('TEST-*.xml'))
-          assert reports, 'missing actual recipe reports'
-          roots = [E.parse(path).getroot() for path in reports]
-          totals = {k: sum(int(r.attrib.get(k, 0)) for r in roots) for k in ('tests', 'failures', 'errors', 'skipped')}
-          assert totals == {'tests': 6, 'failures': 0, 'errors': 0, 'skipped': 0}, totals
-          print('RECIPE_EXECUTED', totals)
-          PY
-      - name: Reapply tested recipe at installed fixed point
+          mvn -B -ntp -f m3/collections/interop/recipe/pom.xml test 2>&1 | tee proof/historical-recipe.log
+          cp -R m3/collections/interop/recipe/target/surefire-reports proof/historical-recipe-reports
+      - name: Run all five actual successor SDK proofs and check installed fixed point
         shell: bash
         run: |
           set -euxo pipefail
-          mvn -B -ntp -f m3/collections/interop/recipe/pom.xml \
-            '-Dtest=M3CollectionsLibraryInteropTest#exactOutputsFixedPointAndOptionalMaterialization' \
-            -Dm3.collections.target="$GITHUB_WORKSPACE" test 2>&1 | tee proof/recipe-delivery.log
-          cat m3/collections/interop/recipe-receipt.tsv | tee proof/recipe-receipt.tsv
-          git diff --exit-code -- m3/collections/interop/src m3/collections/interop/recipe-receipt.tsv
-      - name: Compile unchanged M3 core and verify the dependency boundary
+          mvn -B -ntp -f "$TASK/pom.xml" -Drecipe.owner.root="$GITHUB_WORKSPACE/$TASK/sdk-owner" test 2>&1 | tee proof/successor-recipe.log
+          python3 "$TASK/receive.py" --crate "$TASK" --target "$GITHUB_WORKSPACE" --check 2>&1 | tee proof/receiver.log
+          cp -R "$TASK/target/surefire-reports" proof/successor-recipe-reports
+          cp "$TASK/target/candidate/SDK_RESULTS.tsv" "$TASK/target/candidate/SDK_INPUTS.tsv" proof/
+      - name: Fetch and verify the exact JUnit console tool input
         shell: bash
         run: |
           set -euxo pipefail
-          find m3/collections/src/main/java -name '*.java' | sort > proof/core-sources.txt
-          sha256sum $(cat proof/core-sources.txt) > proof/core-source-hashes.txt
-          javac --release 21 -Xlint:all,-module -Werror -d proof/core-classes @proof/core-sources.txt 2>&1 | tee proof/core-compile.log
-          cp m3/collections/{LICENSE,NOTICE,provenance.json,name-mapping.json} proof/core-classes/META-INF/
-          jar --create --file proof/m3-collections.jar -C proof/core-classes .
-          jdeps --print-module-deps proof/m3-collections.jar | tee proof/core-module-deps.txt
+          JUNIT_CONSOLE_JAR="$RUNNER_TEMP/junit-platform-console-standalone-1.12.2.jar"
+          curl --fail --location --retry 3 -o "$JUNIT_CONSOLE_JAR" https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar
+          echo "329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a  $JUNIT_CONSOLE_JAR" | sha256sum --check
+          echo "JUNIT_CONSOLE_JAR=$JUNIT_CONSOLE_JAR" >> "$GITHUB_ENV"
+      - name: Verify the complete core and required Java/JNI count-and-flag parity
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 m3/collections/verify_donation.py 2>&1 | tee proof/core-native.log
+          JAR="$GITHUB_WORKSPACE/m3/collections/target/donation-verification/m3-collections.jar"
+          jdeps --print-module-deps "$JAR" | tee proof/core-module-deps.txt
           test "$(cat proof/core-module-deps.txt)" = java.base
-          JAR="$GITHUB_WORKSPACE/proof/m3-collections.jar"
           (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
             -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true)
-      - name: Compile and execute all 42 adapter and collector tests
+      - name: Compile and execute the complete provider and collector suites
         shell: bash
         run: |
           set -euxo pipefail
           mvn -B -ntp -f m3/collections/interop/pom.xml verify 2>&1 | tee proof/interop.log
           python3 - <<'PY'
           from pathlib import Path
-          import xml.etree.ElementTree as E
-          reports = list(Path('m3/collections/interop/target/surefire-reports').glob('TEST-*.xml'))
-          assert reports, 'missing actual runtime reports'
-          roots = [E.parse(path).getroot() for path in reports]
-          totals = {k: sum(int(r.attrib.get(k, 0)) for r in roots) for k in ('tests', 'failures', 'errors', 'skipped')}
-          assert totals == {'tests': 42, 'failures': 0, 'errors': 0, 'skipped': 0}, totals
-          print('RUNTIME_EXECUTED', totals)
+          import json, xml.etree.ElementTree as E
+          expected = json.loads(Path('m3/collections/interop/qualification/five-provider-array-interop-20261017/QUALIFICATION.json').read_text())
+          for name, directory, wanted in (
+              ('historical-recipe', Path('proof/historical-recipe-reports'), 6),
+              ('successor-recipe', Path('proof/successor-recipe-reports'), 5),
+              ('interop', Path('m3/collections/interop/target/surefire-reports'), expected['interop_junit']['tests'])):
+              roots = [E.parse(path).getroot() for path in directory.glob('TEST-*.xml')]
+              totals = {key: sum(int(root.attrib.get(key, 0)) for root in roots) for key in ('tests', 'failures', 'errors', 'skipped')}
+              assert totals == {'tests': wanted, 'failures': 0, 'errors': 0, 'skipped': 0}, (name, totals)
+              print(name, totals)
           PY
           javap -classpath m3/collections/interop/target/m3-collections-interop-0.1.0-SNAPSHOT.jar \
             com.m3.collections.interop.M3LibraryCollections \
-            com.m3.collections.interop.M3LibraryCollectors \
-            com.m3.collections.interop.M3SpringMultiValueMap > proof/interop-public-api.txt
-          git diff --exit-code -- m3/collections/src/main/java m3/tooling/migration-recipes/src/main/java m3/collections/interop/src
-      - name: Preserve actual resolved runtime dependency closure and hashes
+            com.m3.collections.interop.M3LibraryCollectors > proof/interop-public-api.txt
+          git diff --exit-code -- m3/collections/src m3/collections/interop/src m3/collections/verify_donation.py
+      - name: Record the resolved dependency closure
         shell: bash
         run: |
           set -euxo pipefail
           mvn -B -ntp -f m3/collections/interop/pom.xml \
             org.apache.maven.plugins:maven-dependency-plugin:3.6.1:copy-dependencies \
-            -DincludeScope=runtime -DprependGroupId=true \
-            -DoutputDirectory="$GITHUB_WORKSPACE/proof/runtime-dependencies" 2>&1 | tee proof/runtime-dependencies.log
-          find proof/runtime-dependencies -type f -name '*.jar' | sort | xargs sha256sum > proof/runtime-dependency-sha256.txt
-          test -s proof/runtime-dependency-sha256.txt
-      - name: Preserve exact admitted sources and executed reports including failures
+            -DincludeScope=test -DprependGroupId=true \
+            -DoutputDirectory="$GITHUB_WORKSPACE/proof/dependencies" 2>&1 | tee proof/dependencies.log
+          find proof/dependencies -type f -name '*.jar' | sort | xargs sha256sum > proof/dependency-sha256.txt
+          test -s proof/dependency-sha256.txt
+      - name: Preserve actual sources and executed reports including failures
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -134,7 +132,7 @@ jobs:
           retention-days: 30
           path: |
             proof/
-            m3/collections/interop/recipe/target/surefire-reports/
-            m3/collections/interop/recipe-receipt.tsv
+            m3/collections/target/donation-verification/
+            m3/collections/interop/recipe/five-provider-array-interop-20261017/target/candidate/
             m3/collections/interop/src/
             m3/collections/interop/target/

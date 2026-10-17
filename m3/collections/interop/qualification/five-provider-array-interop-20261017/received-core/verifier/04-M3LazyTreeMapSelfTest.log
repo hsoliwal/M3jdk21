@@ -1,0 +1,5 @@
+$ ['/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java', '-ea', '-cp', '/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/classes:/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/test-classes', 'com.m3.collections.M3LazyTreeMapSelfTest']
+PACKED_LAZY_STATE_OK null/reuse/growth/failure/recursion/mutation/cancellation/events/system-progress
+PACKED_LAZY_TREE_OK eager/lazy AVL differential=20000 views/entries/flags/progress/events
+
+EXIT=0

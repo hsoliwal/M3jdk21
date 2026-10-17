@@ -15,7 +15,7 @@
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2-m3-source-1</version><scope>test</scope></dependency>
   </dependencies>
   <build>
-    <resources><resource><directory>${project.basedir}</directory><targetPath>META-INF</targetPath>
+    <resources><resource><directory>${project.basedir}/src/main/resources</directory></resource><resource><directory>${project.basedir}</directory><targetPath>META-INF</targetPath>
       <includes><include>LICENSE</include><include>NOTICE</include><include>provenance.json</include><include>synexia-donation.json</include><include>name-mapping.json</include><include>SYNEXIA-DONATION-NOTICE.txt</include></includes>
     </resource></resources>
     <plugins>

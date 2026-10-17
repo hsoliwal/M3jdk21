@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 1,
+  "capturedAtUtc": "2026-10-17T13:32:51.805285+00:00",
+  "scope": "Compact provider evidence inventory; diagnostic runs remain distinct from final recipe-applied runtime qualification.",
+  "frozenTargetRevision": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+  "donorCheckouts": [
+    {
+      "provider": "eclipse-collections",
+      "repository": "eclipse/eclipse-collections",
+      "remote": "https://github.com/eclipse/eclipse-collections.git",
+      "clonePath": "/workspace/scratch/f0742e08085b/donors/eclipse-collections",
+      "tag": "11.1.0",
+      "commit": "fb6abf7fe655ff04acf616158bce49725f2df5ad",
+      "sourceScope": "Complete tracked-source checkout; shallow Git history",
+      "shallowHistory": true,
+      "workingTreeClean": true,
+      "trackedFiles": 3343,
+      "trackedJavaFiles": 2660,
+      "coordinate": "org.eclipse.collections:eclipse-collections:11.1.0"
+    },
+    {
+      "provider": "guava",
+      "repository": "google/guava",
+      "remote": "https://github.com/google/guava.git",
+      "clonePath": "/workspace/scratch/f0742e08085b/donors/guava",
+      "tag": "v33.4.8",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "sourceScope": "Complete tracked-source checkout; shallow Git history",
+      "shallowHistory": true,
+      "workingTreeClean": true,
+      "trackedFiles": 3356,
+      "trackedJavaFiles": 3267,
+      "coordinate": "com.google.guava:guava:33.4.8-jre"
+    },
+    {
+      "provider": "spring-framework",
+      "repository": "spring-projects/spring-framework",
+      "remote": "https://github.com/spring-projects/spring-framework.git",
+      "clonePath": "/workspace/scratch/f0742e08085b/donors/spring-framework",
+      "tag": "v6.2.0",
+      "commit": "5024bb72279188f1d0dcfe19e8abdd4bdb9887c8",
+      "sourceScope": "Complete tracked-source checkout; shallow Git history",
+      "shallowHistory": true,
+      "workingTreeClean": true,
+      "trackedFiles": 10861,
+      "trackedJavaFiles": 8803,
+      "coordinate": "org.springframework:spring-core:6.2.0"
+    },
+    {
+      "provider": "commons-collections",
+      "repository": "apache/commons-collections",
+      "remote": "https://github.com/apache/commons-collections.git",
+      "clonePath": "/workspace/scratch/f0742e08085b/donors/commons-collections",
+      "tag": "rel/commons-collections-4.6.0",
+      "commit": "4107624de41aeed37985d2a069fad41992fd71a2",
+      "sourceScope": "Complete tracked-source checkout; shallow Git history",
+      "shallowHistory": true,
+      "workingTreeClean": true,
+      "trackedFiles": 934,
+      "trackedJavaFiles": 677,
+      "coordinate": "org.apache.commons:commons-collections4:4.6.0"
+    }
+  ],
+  "jdkSourceScope": {
+    "repository": "hsoliwal/M3jdk21",
+    "currentFrozenRevision": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+    "initialIntakeRevision": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+    "scope": "Existing OpenJDK-derived source tree in the target fork; these provider diagnostics use the Java 21 toolchain and do not prove a rebuilt M3JDK VM."
+  },
+  "exactRuntimeAndOracleArtifacts": [
+    {
+      "coordinate": "com.google.guava:guava:33.4.8-jre",
+      "role": "runtime",
+      "jarPath": "/tmp/m3-maven-repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar",
+      "sha256": "f3d7f57f67fd622f4d468dfdd692b3a5e3909246c28017ac3263405f0fe617ed",
+      "versionVerifiedFrom": "META-INF/maven/com.google.guava/guava/pom.properties"
+    },
+    {
+      "coordinate": "com.google.guava:guava-testlib:33.4.8-jre",
+      "role": "official test oracle",
+      "jarPath": "/tmp/m3-maven-repository/com/google/guava/guava-testlib/33.4.8-jre/guava-testlib-33.4.8-jre.jar",
+      "sha256": "a58a38746f97e02ae3d067b74a25ad2b136650227baa7124ce03fa3bce4e8576",
+      "versionVerifiedFrom": "META-INF/maven/com.google.guava/guava-testlib/pom.properties"
+    },
+    {
+      "coordinate": "org.apache.commons:commons-collections4:4.6.0",
+      "role": "runtime",
+      "jarPath": "/tmp/m3-maven-repository/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar",
+      "sha256": "4e0d0896bac5356cead277bac0283f09813e14417e3e84e0c86b573b54d218a3",
+      "versionVerifiedFrom": "META-INF/maven/org.apache.commons/commons-collections4/pom.properties"
+    },
+    {
+      "coordinate": "org.eclipse.collections:eclipse-collections:11.1.0",
+      "role": "runtime",
+      "jarPath": "/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections/11.1.0/eclipse-collections-11.1.0.jar",
+      "sha256": "8881749de791c28c6ccea621314a3a154cfe76ef77c30054b6e714c3dc76969d",
+      "versionVerifiedFrom": "META-INF/maven/org.eclipse.collections/eclipse-collections/pom.properties"
+    },
+    {
+      "coordinate": "org.eclipse.collections:eclipse-collections-api:11.1.0",
+      "role": "runtime API",
+      "jarPath": "/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections-api/11.1.0/eclipse-collections-api-11.1.0.jar",
+      "sha256": "1b8608ecf4e681f031c29a28c403f71476fe5df3a8f0c0dd8c7ad33b91984212",
+      "versionVerifiedFrom": "META-INF/maven/org.eclipse.collections/eclipse-collections-api/pom.properties"
+    },
+    {
+      "coordinate": "org.springframework:spring-core:6.2.0",
+      "role": "runtime",
+      "jarPath": "/tmp/m3-maven-repository/org/springframework/spring-core/6.2.0/spring-core-6.2.0.jar",
+      "sha256": "3b82629da38717dd616a70ec1055f9a8e208d58132071a6314a32159f8bce162",
+      "versionVerifiedFrom": "META-INF/MANIFEST.MF:Implementation-Version"
+    }
+  ],
+  "providerDiagnostics": [
+    {
+      "id": "apache-prior-base",
+      "qualification": "PRIOR_BASE_DIAGNOSTIC_ONLY",
+      "sourceBase": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+      "coreScope": "Initial target core plus the accepted constructor repair, with the then-current count owner compiled beside Apache templates.",
+      "junitCounts": {
+        "tests": 28,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "jupiterTests": 28,
+      "differentialOperationAttempts": 19200,
+      "operationBreakdown": {
+        "listValuedMap": 3600,
+        "setValuedMap": 3600,
+        "bidiMap": 4800,
+        "multiSet": 3600,
+        "legacyBag": 3600
+      },
+      "historicalTestRename": "The historical M3ApacheCollectionsTest in this run is now M3ApacheMultivalueTest; it is not the six-test predicate class present on the rebased target.",
+      "runtime": "org.apache.commons:commons-collections4:4.6.0",
+      "evidenceDirectory": "evidence/provider-apache-prior-base",
+      "qualificationFileSha256": "6eedd4a2d57d83cafd769b3baf8c58ee758d0d27fbaf87f67a9af718ea0cffe6",
+      "summaryLogSha256": "709c8c340b4b87a6918b86d9d448fb2aff8e73936316796d1a1adeb5f44f2922"
+    },
+    {
+      "id": "apache-source-reconciliation",
+      "qualification": "FROZEN_BASE_SOURCE_RECONCILIATION_ON_PRIOR_CORE_DIAGNOSTIC",
+      "sourceBase": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+      "coreScope": "Apache sources reconciled to frozen f3c base, but executed against the existing corrected prior-core class directory; not the definitive rebased runtime gate.",
+      "junitCounts": {
+        "tests": 19,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "jupiterTests": 19,
+      "preservedPredicateTests": 6,
+      "renamedMultivalueAndBidiTests": 13,
+      "differentialOperationAttempts": 12000,
+      "apiFinding": "All original public/protected map descriptors retained; only inverted() and its bridge added.",
+      "baselineApache": "4.5.0",
+      "candidateApache": "4.6.0",
+      "evidenceDirectory": "evidence/provider-apache-source-reconciliation",
+      "qualificationFileSha256": "b309b6932e8bff41e96514a78245242ae5726cf6e30f652cad8be0438314c46d",
+      "summaryLogSha256": "0683a69f2c2adb8363617654e6f6e3375d5aca2205272d0aacf71ecb6e953cd6"
+    },
+    {
+      "id": "guava-prior-base",
+      "qualification": "PRIOR_BASE_DIAGNOSTIC_ONLY",
+      "sourceBase": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+      "coreScope": "Initial target core plus accepted constructor repair, with the then-current count owner and Guava templates.",
+      "junitCounts": {
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "jupiterTests": 15,
+      "nestedOfficialGeneratedCases": {
+        "BiMap": 2539,
+        "Multiset": 979,
+        "total": 3518
+      },
+      "countingNote": "The 3518 generated cases execute inside the 15 Jupiter wrapper/edge tests; these counts must not be added as disjoint Jupiter tests.",
+      "runtime": "com.google.guava:guava:33.4.8-jre",
+      "oracle": "com.google.guava:guava-testlib:33.4.8-jre",
+      "evidenceDirectory": "evidence/provider-guava-prior-base",
+      "qualificationFileSha256": "d70eaaa57746d4de63638f8cbc5fdb80fc8a36e5cd5c099fdda494bd65b71f43",
+      "summaryLogSha256": "c28fa143777d0481b1e80ef45bb76a602cde164ede8d804a3400d8994c30f892"
+    },
+    {
+      "id": "eclipse-prior-base",
+      "qualification": "PRIOR_BASE_DIAGNOSTIC_ONLY",
+      "sourceBase": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+      "coreScope": "Initial target core plus accepted constructor repair and the count-owner template current at that execution.",
+      "junitCounts": {
+        "tests": 20,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "jupiterTests": 20,
+      "differentialOperationAttempts": 7200,
+      "runtime": "org.eclipse.collections:eclipse-collections:11.1.0",
+      "scope": "Includes documented overflow and iterator donor counterexamples; it is not a claim of parity for excluded corrupt donor states.",
+      "evidenceDirectory": "evidence/provider-eclipse-prior-base",
+      "qualificationFileSha256": "2b393c29f2aad7c5f17d04ebcd8ff1f16ae285023b110bf44c15a42db1e21ae5",
+      "summaryLogSha256": "eb43b1f00543b45a7449f2a19752661f4907776d60478814e103bc3af37906b9"
+    },
+    {
+      "id": "sdk-preserved-rebased",
+      "qualification": "REBASED_DIAGNOSTIC_ONLY",
+      "sourceBase": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+      "coreScope": "Frozen f3c diagnostic core postimage at /tmp/m3-five-provider-current-master-20261017/classes with current 33-factory binding templates.",
+      "junitCounts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "jupiterTests": 7,
+      "bindingChecks": 192,
+      "families": 5,
+      "factoryBindings": 33,
+      "apacheDifferentialOperationAttempts": 8000,
+      "scope": "Preserved SDK API bindings, Apache map traces/owners/views, Spring cardinality, Guava filtered and sorted views; not final sealed receive/runtime gate.",
+      "evidenceDirectory": "evidence/provider-sdk-preserved-rebased",
+      "qualificationFileSha256": "2357be0d34310ec5b22abcdcc9b64b922857092a9c67ab787ea1c1da67a321c8",
+      "summaryLogSha256": "0e15b3b54d8ff5dddbf808dfb2b3521e96e254271504ef6799f6a6af84b90dee"
+    }
+  ],
+  "rebasedCostDiagnostic": {
+    "qualification": "REBASED_DIAGNOSTIC_ONLY",
+    "sourceBase": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+    "runs": 1,
+    "samples": 160,
+    "harnessSha256": "f2bd640ea83bb9ab328720fcd862ccdfc714808cc48cf571204fd1b956bdae3d",
+    "measuredCoreDirectory": "/tmp/m3-five-provider-current-master-20261017/classes",
+    "measuredCoreClosureSha256": "072924009cc1b8a7b9ac282494d3e876b7756a8d0527093fa86fc0ca92aa50e5",
+    "orderedClasspathClosureSha256": "cfd5265b3f3c66f70026d499e7a459b6f1b8d7c4c2eb37309ed54ecf87e4cacd",
+    "receipt": "evidence/count-owner-cost-rebased/count-owner-cost-receipt.json",
+    "receiptSha256": "a9bee3d907655b937828b9133f8dd2a76839662292fa1f2b503dea3c60ad65c9",
+    "observationsAt65536Keys": [
+      {
+        "phase": "fresh_admit",
+        "provider": "M3",
+        "operations": 65536,
+        "cpuMedianMs": 2.3748295,
+        "cpuRangeMs": [
+          1.521488,
+          4.244175
+        ],
+        "cumulativeAllocatedBytesMedian": 7026112.0,
+        "selectedKeys": 0
+      },
+      {
+        "phase": "update_existing",
+        "provider": "M3",
+        "operations": 524288,
+        "cpuMedianMs": 6.3808205,
+        "cpuRangeMs": [
+          5.431381,
+          11.104081
+        ],
+        "cumulativeAllocatedBytesMedian": 0.0,
+        "selectedKeys": 0
+      },
+      {
+        "phase": "fresh_admit",
+        "provider": "GUAVA_LINKED",
+        "operations": 65536,
+        "cpuMedianMs": 2.198037,
+        "cpuRangeMs": [
+          1.162064,
+          3.780822
+        ],
+        "cumulativeAllocatedBytesMedian": 4718848.0,
+        "selectedKeys": 0
+      },
+      {
+        "phase": "update_existing",
+        "provider": "GUAVA_LINKED",
+        "operations": 524288,
+        "cpuMedianMs": 5.965404,
+        "cpuRangeMs": [
+          4.947513,
+          7.593816
+        ],
+        "cumulativeAllocatedBytesMedian": 0.0,
+        "selectedKeys": 0
+      },
+      {
+        "phase": "fresh_admit",
+        "provider": "APACHE_HASH",
+        "operations": 65536,
+        "cpuMedianMs": 2.030624,
+        "cpuRangeMs": [
+          0.979213,
+          3.051059
+        ],
+        "cumulativeAllocatedBytesMedian": 4194552.0,
+        "selectedKeys": 0
+      },
+      {
+        "phase": "update_existing",
+        "provider": "APACHE_HASH",
+        "operations": 524288,
+        "cpuMedianMs": 6.767219,
+        "cpuRangeMs": [
+          5.33601,
+          8.435981
+        ],
+        "cumulativeAllocatedBytesMedian": 0.0,
+        "selectedKeys": 0
+      },
+      {
+        "phase": "fresh_admit",
+        "provider": "ECLIPSE_HASH",
+        "operations": 65536,
+        "cpuMedianMs": 1.560766,
+        "cpuRangeMs": [
+          0.735181,
+          2.110713
+        ],
+        "cumulativeAllocatedBytesMedian": 2097736.0,
+        "selectedKeys": 0
+      },
+      {
+        "phase": "update_existing",
+        "provider": "ECLIPSE_HASH",
+        "operations": 524288,
+        "cpuMedianMs": 5.898134,
+        "cpuRangeMs": [
+          3.781843,
+          6.538435
+        ],
+        "cumulativeAllocatedBytesMedian": 0.0,
+        "selectedKeys": 0
+      },
+      {
+        "phase": "flags_write",
+        "provider": "M3",
+        "operations": 262144,
+        "cpuMedianMs": 2.601076,
+        "cpuRangeMs": [
+          1.662067,
+          2.800556
+        ],
+        "cumulativeAllocatedBytesMedian": 0.0,
+        "selectedKeys": 0
+      },
+      {
+        "phase": "flags_select",
+        "provider": "M3",
+        "operations": 65536,
+        "cpuMedianMs": 1.0689315,
+        "cpuRangeMs": [
+          0.906816,
+          1.737539
+        ],
+        "cumulativeAllocatedBytesMedian": 1488592.0,
+        "selectedKeys": 21845
+      }
+    ],
+    "interpretation": "Bytes are cumulative admission/update/snapshot allocation, not retained heap. M3 admission uses more cumulative bytes in this finite workload; count updates and flag writes allocate zero bytes. Single-JVM CPU samples and earlier runs do not establish a universal speed ranking or causal rebase improvement.",
+    "priorBaseEvidenceRetained": "evidence/count-owner-cost, explicitly labeled prior-base; raw earlier samples remain unchanged."
+  },
+  "finalQualification": {
+    "status": "PENDING_ROOT_DEFINITIVE_INTEROP_SUITE",
+    "finalRuntimeTestsClaimedByThisInventory": false,
+    "note": "Root owns the final sealed receive/application and definitive interop runtime receipt. The successful diagnostics above must not substitute for that gate."
+  },
+  "countingLimits": [
+    "Differential operation counts count deterministic attempts, including no-op or exception paths, not only successful mutations.",
+    "Nested Guava generated cases are included in their Jupiter wrapper tests and must not be double-counted.",
+    "Prior and reconciled runs overlap and are not disjoint test coverage totals."
+  ],
+  "sourceAndContractPolicy": {
+    "readOnly": true,
+    "writes": "Existing compact reports copied only to packet/evidence; inventory written to requested /tmp path."
+  }
+}

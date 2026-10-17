@@ -2,6 +2,8 @@
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors */
 package com.m3.collections.interop;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
@@ -18,13 +20,20 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
+import org.apache.commons.collections4.Bag;
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.ListValuedMap;
+import org.apache.commons.collections4.MultiSet;
+import org.apache.commons.collections4.SetValuedMap;
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.springframework.util.MultiValueMap;
 
 /**
- * Stream result-owner closure for the supported M3/JDK/Guava/Eclipse/Spring contracts.
+ * Stream result-owner closure for the supported M3/JDK/Guava/Eclipse/Spring/Apache contracts.
  * All accumulation and merge targets are independently created M3-backed owners.
  *
  * <p>Collectors are deliberately neither CONCURRENT nor UNORDERED: parallel streams
@@ -124,5 +133,93 @@ public final class M3LibraryCollectors {
         return Collector.of(owner,
                 (map, item) -> map.add(keys.apply(item), values.apply(item)),
                 (left, right) -> { left.addAll(right); return left; });
+    }
+
+    /** Counts stream elements, retaining nulls and refusing per-element count overflow. */
+    public static <E> Collector<E, ?, Multiset<E>> toGuavaMultiset() {
+        return Collector.of(M3LibraryCollections::<E>guavaMultiset, Multiset<E>::add,
+                (left, right) -> { left.addAll(right); return left; });
+    }
+
+    /** Counts stream elements using Apache MultiSet saturation and old-count semantics. */
+    public static <E> Collector<E, ?, MultiSet<E>> toApacheMultiSet() {
+        return Collector.of(M3LibraryCollections::<E>apacheMultiSet, MultiSet<E>::add,
+                (left, right) -> {
+                    for (MultiSet.Entry<E> entry : right.entrySet()) {
+                        left.add(entry.getElement(), entry.getCount());
+                    }
+                    return left;
+                });
+    }
+
+    /** Legacy Bag collector; duplicate add returns do not affect stream accumulation. */
+    @SuppressWarnings("deprecation")
+    public static <E> Collector<E, ?, Bag<E>> toApacheBag() {
+        return Collector.of(M3LibraryCollections::<E>apacheBag, Bag<E>::add,
+                (left, right) -> {
+                    for (E element : right.uniqueSet()) left.add(element, right.getCount(element));
+                    return left;
+                });
+    }
+
+    /** Counts stream elements into an M3-owned Eclipse MutableBag. */
+    public static <E> Collector<E, ?, MutableBag<E>> toEclipseBag() {
+        return Collector.of(M3LibraryCollections::<E>eclipseBag, MutableBag<E>::add,
+                (left, right) -> { right.forEachWithOccurrences(left::addOccurrences); return left; });
+    }
+
+    /** Retains value order and duplicate pairs under Apache ListValuedMap semantics. */
+    public static <T, K, V> Collector<T, ?, ListValuedMap<K, V>> toApacheListValuedMap(
+            Function<? super T, ? extends K> keys, Function<? super T, ? extends V> values) {
+        Objects.requireNonNull(keys, "keys"); Objects.requireNonNull(values, "values");
+        Supplier<ListValuedMap<K, V>> owner = M3LibraryCollections::apacheListValuedMap;
+        return Collector.of(owner, (map, item) -> map.put(keys.apply(item), values.apply(item)),
+                (left, right) -> { left.putAll(right); return left; });
+    }
+
+    /** Suppresses duplicate pairs under Apache SetValuedMap semantics. */
+    public static <T, K, V> Collector<T, ?, SetValuedMap<K, V>> toApacheSetValuedMap(
+            Function<? super T, ? extends K> keys, Function<? super T, ? extends V> values) {
+        Objects.requireNonNull(keys, "keys"); Objects.requireNonNull(values, "values");
+        Supplier<SetValuedMap<K, V>> owner = M3LibraryCollections::apacheSetValuedMap;
+        return Collector.of(owner, (map, item) -> map.put(keys.apply(item), values.apply(item)),
+                (left, right) -> { left.putAll(right); return left; });
+    }
+
+    /** Ordered Eclipse map collector; duplicate keys are refused. */
+    public static <T, K, V> Collector<T, ?, MutableOrderedMap<K, V>> toEclipseOrderedMap(
+            Function<? super T, ? extends K> keys, Function<? super T, ? extends V> values) {
+        return uniqueMap(keys, values, M3LibraryCollections::<K, V>eclipseOrderedMap);
+    }
+
+    /** Guava BiMap collector; duplicate keys or values are refused in every partition. */
+    public static <T, K, V> Collector<T, ?, BiMap<K, V>> toGuavaBiMap(
+            Function<? super T, ? extends K> keys, Function<? super T, ? extends V> values) {
+        return uniqueBidi(keys, values, M3LibraryCollections::<K, V>guavaBiMap);
+    }
+
+    /**
+     * Apache BidiMap result collector. Duplicate keys and values are refused during
+     * collection, so parallel merging cannot silently discard input mappings.
+     * Subsequent result.put calls retain Apache's ordinary displacement semantics.
+     */
+    public static <T, K, V> Collector<T, ?, BidiMap<K, V>> toApacheBidiMap(
+            Function<? super T, ? extends K> keys, Function<? super T, ? extends V> values) {
+        return uniqueBidi(keys, values, M3LibraryCollections::<K, V>apacheBidiMap);
+    }
+
+    private static <T, K, V, M extends Map<K, V>> Collector<T, ?, M> uniqueBidi(
+            Function<? super T, ? extends K> keys, Function<? super T, ? extends V> values,
+            Supplier<M> owner) {
+        Objects.requireNonNull(keys, "keys"); Objects.requireNonNull(values, "values");
+        return Collector.of(owner,
+                (map, item) -> putUniqueBidi(map, keys.apply(item), values.apply(item)),
+                (left, right) -> { right.forEach((k, v) -> putUniqueBidi(left, k, v)); return left; });
+    }
+
+    private static <K, V> void putUniqueBidi(Map<K, V> map, K key, V value) {
+        Objects.requireNonNull(value, "value");
+        if (map.containsValue(value)) throw new IllegalStateException("duplicate value: " + value);
+        putUnique(map, key, value);
     }
 }

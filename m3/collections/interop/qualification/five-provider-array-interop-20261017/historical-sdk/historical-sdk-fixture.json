@@ -1,0 +1,26 @@
+{
+  "manifest_sha256": "3c992a514044453bc5784abf862701743f784ef67f5cfc4ee076ac073179efd7",
+  "external_source_commit": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "historical_postimages": {
+    ".github/workflows/m3-sdk-family-names-20261017.yml": "b2f3763e73f45e1914791f7f1e5af284c29d28bde277c3915f1a895a4e90cb66",
+    "m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv": "e316251a7daf20a6b22db9f18e733c733386385b75f61377d8a8b0ca8be75a08",
+    "m3/collections/interop/SDK_FAMILIES.md": "60a5ef222644344c21d6efed6629e8c42ff022a65fb920c818318e2340708203",
+    "m3/collections/interop/SDK_FAMILY_NOTICES.md": "2a0cfb54eb39e7120743673cde476297e2b1a51f67d14fb01aade18821383d67",
+    "m3/collections/interop/pom.xml": "b1e7dd0817690de77ad1af8898d39e4edcab2ee005aeec709f39151d5981e9a3",
+    "m3/collections/interop/sdk-family-bindings.tsv": "3eec888606c333effe39255423d1f25e2c4276716e8be357c0667e1fedb7fbd5",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheListValuedMap.java": "7c74e242fb0bae5f853e335aed4d2d5695f9c1881af6325297641d29b06dcc82",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheSetValuedMap.java": "e44934cdb39484af881aa834fb6478b160c150a1b874bee4a03ed70c46e19547",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBinding.java": "fdd00fecd40c07a94ad0faee0fd036d62cb3f9d15dda9309af9626cedc9627c2",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBindings.java": "46e13c91b108ccb886fa14c6df4a363488f12a35d4fef55c78fee51ac789edcd",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java": "76609b94a23a682d98d541b5a0421f8c0bdfce05dce6f9cb253fa2e6bf89f62b",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java": "7645be75ebd02a99fbbf64bf0996cc531bdff28d15f444a43914cf7a75461ea7",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java": "ec048dc96f50e35dd8f752f02bcdab13f38463023aafbf044aba15a9dfd1a401",
+    "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "e4d8fd83ec0acb9b94bdde5a138d797ccd539c0bb87fe60d419a52f910051fcb",
+    "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "a69694a2ce22ca9599cb665e4845f5dee75d527b7c144fa3ea7fb4518ec2d3fa",
+    "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "d7786cd5308f4a1e6743680d35e51f5f11a66b106abdb8f170edcb92b901d1cb",
+    "m3/collections/recipes/sdk-family-names-20261017/src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+    "m3/collections/recipes/sdk-family-names-20261017/src/main/java/com/synexia/rewrite/M3GpuToolJoinRecipe.java": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+    "m3/collections/recipes/sdk-family-names-20261017/src/main/java/com/synexia/rewrite/M3SdkFamilyNamesRecipe.java": "e6730ca760f268aad2d7ddce1dfa478594ce99b343f036de051ad73ab888223d"
+  },
+  "original_recipe_copied_without_source_edits": true
+}

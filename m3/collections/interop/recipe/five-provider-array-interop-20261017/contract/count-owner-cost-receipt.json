@@ -1,0 +1,2103 @@
+{
+  "schemaVersion": 1,
+  "kind": "bounded-count-owner-cost-diagnostic",
+  "recordedAtUtc": "2026-10-17T13:10:05.768542+00:00",
+  "status": "PASS_FINITE_DIAGNOSTIC_ONLY",
+  "targetProductIntegrationProof": false,
+  "measurement": {
+    "jvmProcesses": 1,
+    "sizes": [
+      4096,
+      65536
+    ],
+    "warmupRoundsPerSize": 6,
+    "warmupPlan": "Entire size corpus warmed before all measured rounds",
+    "sampleRoundsPerSize": 8,
+    "providerOrder": "M3,GUAVA_LINKED,APACHE_HASH,ECLIPSE_HASH on even rounds; exact reverse on odd rounds",
+    "heap": "512 MiB initial and maximum",
+    "collector": "G1",
+    "keyHash": "precreated record Key(id); hashCode=id",
+    "countFormula": "1 + (keyId & 3)",
+    "construction": "default capacity, fresh owner and fill, code already warmed",
+    "update": "4 rounds; each key at (position*2053+17)&(keys-1), add two then remove two; no distinct-key change",
+    "updateActionsPerKey": 8,
+    "flagsWriteActionsPerKey": 4,
+    "flagsSelect": "M3 only, required mask 1, forbidden mask 2, JAVA backend; full detached snapshot including metadata and result allocation",
+    "cpu": "ThreadMXBean current-thread CPU nanoseconds",
+    "allocation": "ThreadMXBean calling-thread cumulative allocated bytes, not retained heap",
+    "meterOverheadSubtracted": false,
+    "forcedGC": false,
+    "payloadKeyAllocationIncluded": false
+  },
+  "verified": {
+    "sampleRows": 160,
+    "allSamplesUsed": true,
+    "strictCompileExit": 0,
+    "executionExit": 0,
+    "allCountAndSelectionAssertionsPassed": true,
+    "countFingerprints": [
+      {
+        "keys": 4096,
+        "distinct": 4096,
+        "totalCount": 10240,
+        "countChecksum": 20981760
+      },
+      {
+        "keys": 65536,
+        "distinct": 65536,
+        "totalCount": 163840,
+        "countChecksum": 5368872960
+      }
+    ]
+  },
+  "environment": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "cpuModels": [
+      "AMD EPYC 9V74 80-Core Processor"
+    ],
+    "cpu.max": "800000 100000",
+    "memory.max": "8589934592",
+    "cpuset.cpus.effective": "0-8"
+  },
+  "jvmMetadata": [
+    "# probe=CountOwnerCostProbe-20261017; diagnostic=true; forks=1",
+    "# java=21.0.12.1+1-LTS; vm=OpenJDK 64-Bit Server VM; arch=amd64; processors=8",
+    "# warmups=6; samples=8; updateRounds=4; flagWriteRounds=4; warmupPlan=all-sizes-before-measurement",
+    "# initialCount=1+(keyId&3); keyHash=keyId; construction=default-capacity; updateOrder=(position*2053+17)&(keys-1)",
+    "# fresh_admit=warm-code-new-owner; current-thread-only=true; allocation=total-allocated-not-retained; no-forced-GC=true",
+    "# m3_flags_select=required:1,forbidden:2,backend:JAVA; selection-includes-metadata-and-result=true; donor-flag-equivalence=none",
+    "# verified_samples=160; sink=764635523764; last_result_class=java.util.Collections$UnmodifiableList"
+  ],
+  "sourceInputs": {
+    "/workspace/scratch/f0742e08085b/Synexia/synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017/contract/CountOwnerCostProbe.java": "8caa4c4da7bba440f6d39d317f802a503904dd4f198541f19cc484f4262b1b5c",
+    "/workspace/scratch/f0742e08085b/Synexia/synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017/src/main/resources/com/synexia/rewrite/hash-pinned-java/five-provider-array-interop-20261017/M3ObjectCounts.java.txt": "df16b4ca64445744b417d8f9303af433d53404643dd5863722b8005a8d9feff5"
+  },
+  "artifactInputs": {
+    "/tmp/m3-maven-repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar": "f3d7f57f67fd622f4d468dfdd692b3a5e3909246c28017ac3263405f0fe617ed",
+    "/tmp/m3-maven-repository/com/google/errorprone/error_prone_annotations/2.36.0/error_prone_annotations-2.36.0.jar": "77440e270b0bc9a249903c5a076c36a722c4886ca4f42675f2903a1c53ed61a5",
+    "/tmp/m3-maven-repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
+    "/tmp/m3-maven-repository/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar": "4e0d0896bac5356cead277bac0283f09813e14417e3e84e0c86b573b54d218a3",
+    "/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections/11.1.0/eclipse-collections-11.1.0.jar": "8881749de791c28c6ccea621314a3a154cfe76ef77c30054b6e714c3dc76969d",
+    "/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections-api/11.1.0/eclipse-collections-api-11.1.0.jar": "1b8608ecf4e681f031c29a28c403f71476fe5df3a8f0c0dd8c7ad33b91984212"
+  },
+  "coreClasses": {
+    "directory": "/tmp/m3-collections-env-constructor-proof-20261017/build/candidate-module",
+    "inventorySha256": "41a5d258a7945257411acae28b0f543fe25bb10b6c39bfb3ae8098316e12d95c",
+    "inventory": [
+      {
+        "path": "com/m3/collections/M3AdaptiveEnumLongMap.class",
+        "sha256": "bf37a1a96fe02a0cb054b18dce2f41ce7db9b1da00c4bff6413c68113a5b1504"
+      },
+      {
+        "path": "com/m3/collections/M3Address28.class",
+        "sha256": "6305c8ab4f9666ab32359e71329cece9e1d5cdc1cf20435ca789169f08e50796"
+      },
+      {
+        "path": "com/m3/collections/M3BitLane28.class",
+        "sha256": "4b3ac87d6c476fdad883eb851fe051c3dd59fe5a7a2fb9b6ef5b1d517a9747fa"
+      },
+      {
+        "path": "com/m3/collections/M3BlockingDeque$1.class",
+        "sha256": "fc2dd861ddf761a1b4a21f876103b2d5f132c886a57035a32eb47ff1dc6da73c"
+      },
+      {
+        "path": "com/m3/collections/M3BlockingDeque.class",
+        "sha256": "3c7097225d9c5214643a1c904196c14d8f02bb09839d5ce48885d7fae474638f"
+      },
+      {
+        "path": "com/m3/collections/M3ChildProgressMonitor.class",
+        "sha256": "1a6dbcdcb268db85f494aaca5b383456c4cdd2760a120fcdbed1f53a1d922104"
+      },
+      {
+        "path": "com/m3/collections/M3Collections.class",
+        "sha256": "e541c9035dda96798ff33a1b5f541b20354b20ec9430a92fbd84d3bd274157a2"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentBitSet$SetBits.class",
+        "sha256": "7d9ded8169c272da5398cfedc6e1e1d8767e2cd37eb00460063a9e0833067135"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentBitSet.class",
+        "sha256": "8878acbc3a088bb78b42f64eab522cce520ac268d228e0e02ec313c47e37f1c1"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentIntLane28$Range.class",
+        "sha256": "dc9d1e448be347e10f4c591c7ecf510208e9e9dd7ce5dd9bd709a1f5ea70aad8"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentIntLane28.class",
+        "sha256": "bc241b4731c9591f0d95de49529596fdc59e7046f105345033dcb6cb7e7f546b"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongLane28$Range.class",
+        "sha256": "d5438f73aa3edbbf7c9d1c001839fd71fc16208ff890d8d02e654dc175db908b"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongLane28.class",
+        "sha256": "2da5b77e19c85a734f49253fa916221d281a37407462e7629be589dc839b170e"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongMap$PairLane.class",
+        "sha256": "30f1a7ebdbbb2fcd3d51d1b38f14cf50dc6747567f73a1721dc97a02212684df"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongMap.class",
+        "sha256": "2929d37571cc38fd0574fa29a9861928e35f2db8d3545855fa6c7bed3db1f996"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongSet$1.class",
+        "sha256": "406a231873b0c07dbde5a92b4196c2eb523c3b94e67e86a17ff1e481e24e1135"
+      },
+      {
+        "path": "com/m3/collections/M3ConcurrentLongSet.class",
+        "sha256": "8014d2112ae06d6b9da0467d00cbb10767fc77f948d1a01b0629d43f840585b3"
+      },
+      {
+        "path": "com/m3/collections/M3DefaultProgressMonitor.class",
+        "sha256": "51368f5467b0477e6680cf2e0b0591703b1fbc97c52cbb07aa5f557586fc40b2"
+      },
+      {
+        "path": "com/m3/collections/M3EnumLongMap$EntryConsumer.class",
+        "sha256": "e51eac9a653b54b2924de86206ca4c57826e93e939d6819c7bc0ebf52a4d2ece"
+      },
+      {
+        "path": "com/m3/collections/M3EnumLongMap$OrdinalLongConsumer.class",
+        "sha256": "f68b289f6d311b7bd95a030a2532caa09e909fa3db275255e41e8960b8a88416"
+      },
+      {
+        "path": "com/m3/collections/M3EnumLongMap.class",
+        "sha256": "5d808ba5c14a5be2bc864c8b50be517577e73e53301e35b4ccca7d4e5fedb2a9"
+      },
+      {
+        "path": "com/m3/collections/M3EnumSet.class",
+        "sha256": "c8be2f9f64e2e53c828cb4b9c951cee95a5b1b8fd8bc74701c9e09669aef363d"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredLists$StrictReadOnlyList.class",
+        "sha256": "bf1b656b733b65f930e58773dac37f907dd8a717be35fac2178fde50ad500d23"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredLists$View$1.class",
+        "sha256": "827f5d5460b469af9369ecea17c417aed5da0896028b65bb7888c2a57e687238"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredLists$View$Cursor.class",
+        "sha256": "6f8aace1d698560020d46eae7edf1de5b2d02903e8195df72c99680430b607a7"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredLists$View.class",
+        "sha256": "059bbc7abda9f297eb55168aeb0db1f29261049fd1e87dc17b368f34d2581114"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredLists.class",
+        "sha256": "679cfae3334420974f35c07f2009bd634b92d7d8eb4e1780bf403eed339526f1"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredNavigableSet$1.class",
+        "sha256": "bb7ea47f9b5962f50c4f3d0981cbebb0e4ae45827c271169279b50d179e2fcf1"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredNavigableSet.class",
+        "sha256": "1944d174cd74ce408df906e0310493577e297604710f42f621800cdd058a7b4b"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$1.class",
+        "sha256": "aa202f5d125f5d83745ed8795d98a0b560f19978fb057ed9c9bad76e01096512"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$CollectionView.class",
+        "sha256": "7569d4133ad180e94aaf408a0609af81dd3a9c446b13171ed3490d5a03f86e76"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$NavigableMapView.class",
+        "sha256": "e709bfcbeb1ad39ec88c15deda7d88b37cbb3f782f6e674f50d1ff402fd57467"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$NavigableSetView.class",
+        "sha256": "cc975b877fe99522c9bb7b220319323b9b527d6cc7dfe1c1c3a59cb36d1ffb7e"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$SetView.class",
+        "sha256": "232423953b23ca410ec9c60406f78833d360477d19fdfa65af9a59bde3ce188d"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$SortedMapView$1$1.class",
+        "sha256": "88f4661f95555abc37deb0cb670b3de933d5f4cc7788f5b76f99bf219c018ef8"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$SortedMapView$1.class",
+        "sha256": "571ab3d951a880b5ea7ac2148b2a2afbcdfc575e993e607ca2f5bbd463bec8b2"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$SortedMapView.class",
+        "sha256": "e03263f99e71391b4854bbf23c52246f8959071a9b34766114f3fee8cf0e2386"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews$SortedSetView.class",
+        "sha256": "079ab95e0d18296471fa1eeaeaed995c35b328b0f54e0033d19f6a7415c7791c"
+      },
+      {
+        "path": "com/m3/collections/M3FilteredViews.class",
+        "sha256": "457123dc450e21d066a9945ded4e7bbcc3dd90327abc2e6945c5ca237ad8a983"
+      },
+      {
+        "path": "com/m3/collections/M3IndexMaskCompactor$Backend.class",
+        "sha256": "ba88b56db816f917e5d868c8b609c99726013335832bfd513f36e196f689c3e2"
+      },
+      {
+        "path": "com/m3/collections/M3IndexMaskCompactor$NativeLibrary.class",
+        "sha256": "c9a602a8ae45c96f8d471e9da1d32abb2581f146e511b78414f3bf466590aec2"
+      },
+      {
+        "path": "com/m3/collections/M3IndexMaskCompactor.class",
+        "sha256": "7825fccdc692ab16174ab11aed1c89c3dc42c41f18c49e83526b3c780debc526"
+      },
+      {
+        "path": "com/m3/collections/M3IndexMaskWindow.class",
+        "sha256": "fad3c70194c3c1204ab582ae33a0b482823017a87c686f6de0ac1b7616b38711"
+      },
+      {
+        "path": "com/m3/collections/M3IndexPathMasks$Backend.class",
+        "sha256": "49031b9ae570236e76c0d9c8a153f201691924b9f1bb335db55053cc23345060"
+      },
+      {
+        "path": "com/m3/collections/M3IndexPathMasks$NativeLibrary.class",
+        "sha256": "5d6a5f99e3a10c4d8585b12f55905af2700f14821ad260e658f5af4c8858bbd3"
+      },
+      {
+        "path": "com/m3/collections/M3IndexPathMasks.class",
+        "sha256": "e2bd925c9a5c9d6f24583db7d41377d340761f9ef97a5286a4e65a8276b2a400"
+      },
+      {
+        "path": "com/m3/collections/M3IntCollection$1.class",
+        "sha256": "de7b4df86a1a977c093fb04d14479706f9639de42a177da35754f94ffbad1904"
+      },
+      {
+        "path": "com/m3/collections/M3IntCollection.class",
+        "sha256": "90509dfff86850bdae32f2da3bb2be02a1824783d56937526abc07494280ec39"
+      },
+      {
+        "path": "com/m3/collections/M3IntHashSet$1.class",
+        "sha256": "712e6ad921ccc3f00cc6c673b4c3333f179382125492973298bb9f26693e4eba"
+      },
+      {
+        "path": "com/m3/collections/M3IntHashSet.class",
+        "sha256": "56e29ae445c4f9cf3ba08525b1f1cef24e2faafc181ca84c8f790f6219cc643a"
+      },
+      {
+        "path": "com/m3/collections/M3IntIntConsumer.class",
+        "sha256": "50b101ca3b714b3a3b4890b2fb6400b23c762ad349378639dc5a587b34dc19f0"
+      },
+      {
+        "path": "com/m3/collections/M3IntIntHashMap$1.class",
+        "sha256": "6746435fe748e3c84b7d131ff3f29b4db4d866d9e559fcea5d14b0b52e901a80"
+      },
+      {
+        "path": "com/m3/collections/M3IntIntHashMap.class",
+        "sha256": "cd76b9172dcadfbf4046bef3256acdd817d60e796765e57fe581437fc2773af4"
+      },
+      {
+        "path": "com/m3/collections/M3IntIterator.class",
+        "sha256": "5f6a9bc1a069a31d1380aefd5c425a731723db1283daee4e6450e9f4b9e297e6"
+      },
+      {
+        "path": "com/m3/collections/M3IntLane28.class",
+        "sha256": "ab23fd70b8fab30ddec19896939bcf79f3cedf47c941ab4c7b1c13fe96c99910"
+      },
+      {
+        "path": "com/m3/collections/M3IntLongConsumer.class",
+        "sha256": "c2a6384e5fc36a01e2d19b127018426870b4aae036a5034170ef5c4baeb02321"
+      },
+      {
+        "path": "com/m3/collections/M3IntLongHashMap$1.class",
+        "sha256": "638e673c9c4f7b937c8f3b7bc27b56dfe289e6387fa3caaef0c6e982bb0b92a0"
+      },
+      {
+        "path": "com/m3/collections/M3IntLongHashMap.class",
+        "sha256": "75eeeba267a1188308aac324e036cc869e840c4f4dc5a93a79264d824fc289ba"
+      },
+      {
+        "path": "com/m3/collections/M3IntPriorityQueue$1.class",
+        "sha256": "4426f8f4b90fefa6ea93a067d58fae5d5e66c3eb03372c07f0c4a0941f81e2ef"
+      },
+      {
+        "path": "com/m3/collections/M3IntPriorityQueue.class",
+        "sha256": "e3158dbd8771cb5ac48bcc5eeb3a14a4e5d3d209c72c454cafbf4d3bb44ef9c1"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventBits.class",
+        "sha256": "25b8807932eaa161476298ba56cb6503870ad86ed4df296abeac8be1f146757b"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventGranularity.class",
+        "sha256": "fe66b6e2ed27d9bb5992731509cae5650dd65dfc259c81915db8600ffb418b41"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventPolicy.class",
+        "sha256": "46ece6bb799b5dc6f534e80ad8ae226de4ab246ae3fe00e6eefb0b7588229eea"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventSink$NoOpHolder.class",
+        "sha256": "6393b7b11b6d5444928c83733f5a8b881d550dd08f99bd0f8c43694f3b8982ce"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventSink.class",
+        "sha256": "2a5c99ec9d494adbfb2215739ccb143672ae8691ac42a1cf1225934818d6f3b1"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEventSource.class",
+        "sha256": "b6168035f1fd25d15956ececa0304e12038f319d259ed524b45853481ebb4b89"
+      },
+      {
+        "path": "com/m3/collections/M3LazyEvents.class",
+        "sha256": "9759a5914eeb444cd19b9cb22b89315ad9ecdb7ddeadfb655857469811cef44b"
+      },
+      {
+        "path": "com/m3/collections/M3LazyOperation.class",
+        "sha256": "3e34292466d76a1035a77626ba724d4285ff8661b93f663386d22adb1cb30af5"
+      },
+      {
+        "path": "com/m3/collections/M3LazyValueProvider.class",
+        "sha256": "fcbd3f870b2a8305ea84088f443d5d92645810294b34c824360878f715ff0782"
+      },
+      {
+        "path": "com/m3/collections/M3LazyValueState.class",
+        "sha256": "0ad392af5e9112b292f585c9943a334bfd39872e2174fac9bea56b0523c4157b"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedHashMap$Table.class",
+        "sha256": "a9255db839a200723523ff2d38a83f70fba5b97f6a3f7b3d581df562b60d2c1e"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedHashMap.class",
+        "sha256": "0f6a0cae713ae9f546d888a31f23a6d03b76a08c06e39999b68df741dccc2941"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedHashSet.class",
+        "sha256": "23aab01787fc8e3fcce17dbb9d69563004d65bfaf11e184e912a2697c48b1cf0"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedList$1.class",
+        "sha256": "7eaf351c32bd6894914a2d07657d2e03dfe68420859c8a5131d2ece33227ac42"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedList$Storage.class",
+        "sha256": "6f5cc4dc092c0efc3486a1c160abb689f61bf3a35e3aa8cf4b1fded8bf5a3390"
+      },
+      {
+        "path": "com/m3/collections/M3LinkedList.class",
+        "sha256": "cab88be9c1fbf7ced71ac1f46c27052a95eb0df02fe82caa57ad890eb444d20e"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap$1.class",
+        "sha256": "1944d37b99eb959f14afb0754e1c60efd1878154a5d73de4da601259a7393752"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap$2.class",
+        "sha256": "84273b2a142e2c9bd04b0ae2c432494df8e5ec6a3c06e5ffcdc34131652a3afd"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap$3.class",
+        "sha256": "f3adbdd0560a5e0674c9ac59aa538c0f53cc48166b5c5e01b7f74b4c097fa55b"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap$4.class",
+        "sha256": "e3dcf7f617c5280846b6f5b4ac0b3ecc7718a66585e38b01e81a308e6146d513"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap$SnapshotEntry.class",
+        "sha256": "7fc630def9dd226ac5351ebb37b7bf171c4a9b697d21531170cc322a4f3c94ad"
+      },
+      {
+        "path": "com/m3/collections/M3LockedMap.class",
+        "sha256": "70e29f9b88025f08be1a2fe034a660d9e30e6498ab4f55f170b17ded6ecd5f99"
+      },
+      {
+        "path": "com/m3/collections/M3LockedTreeMap.class",
+        "sha256": "3db50db8e5ac0671dda5ee4f7347969ad8db1b1d494899ef4aa694daebeb8164"
+      },
+      {
+        "path": "com/m3/collections/M3LockedTreeSet.class",
+        "sha256": "a7e08c8b6e4d7b4acfd4fa7a72e637b6f06ed4dd9fea4e84581310ddc5916778"
+      },
+      {
+        "path": "com/m3/collections/M3LongArena28.class",
+        "sha256": "11db58ff9861521260895b82141519006ca02b9f34865aa72eab871b4032e326"
+      },
+      {
+        "path": "com/m3/collections/M3LongArrayDeque$1.class",
+        "sha256": "b1aff41a0ed84ecbeac0cc1f34800fc0cd2ccc17c1a3d3ce2dfd839f3d69f8d9"
+      },
+      {
+        "path": "com/m3/collections/M3LongArrayDeque$2.class",
+        "sha256": "faabc64ed3c737a058b691bd81ef6f1a4447075b849dce3f15664022f26dc72f"
+      },
+      {
+        "path": "com/m3/collections/M3LongArrayDeque.class",
+        "sha256": "ad4be2b6214fe3b80260008789ea3bb6830ea9067cb5ad4a08ffca1445aec357"
+      },
+      {
+        "path": "com/m3/collections/M3LongArrayList$1.class",
+        "sha256": "5cafa67c4141040cd44c183119ee1e2f22d617abc28af9202ea038c08ca59b83"
+      },
+      {
+        "path": "com/m3/collections/M3LongArrayList.class",
+        "sha256": "96c0b1c2094b4d91b8fa019ca5b35c79291136ecce23850cebeb524c1f7201a0"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$1.class",
+        "sha256": "d8a91b7c0f1797df9f7421ed32f391909f0dc106500932b56939e664ed28409e"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$IndexSpliterator.class",
+        "sha256": "c28380d404366d597d8503ba7a61df1aef79e947b2a1fb40cd0b5a48b9689c1b"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView$1.class",
+        "sha256": "4a73fa1f2c9a18d4204e66a993e26d2d9594183533fe98d97e20ff62d744da36"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView$Cache.class",
+        "sha256": "fb3e2fa4ff29f6187963449658ff98dc2633e89f0629eaa667f6bd14ce67888b"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView.class",
+        "sha256": "a25a1ef9fcaa8936509a88d5e831c5eba15ab38fcd585cd86426d43cdc1fb432"
+      },
+      {
+        "path": "com/m3/collections/M3LongBitmapFilteredSnapshot.class",
+        "sha256": "628ffe91f00b524fc1ddd4200500ce25d87daf08cfad24b510dc051539566740"
+      },
+      {
+        "path": "com/m3/collections/M3LongCollection$1.class",
+        "sha256": "bb3f0f8e1d152cd3f45a94dae1502926bb0df4967cad9d438e33d2788bf24907"
+      },
+      {
+        "path": "com/m3/collections/M3LongCollection.class",
+        "sha256": "515ed3480be8df795ae3a467a76711bf9f51250ce69306c99c55bba58447bcb2"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$1.class",
+        "sha256": "ecec16a505f30ed9e622580937dbc15a34faa04250e04e663bb12d1d4b535566"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$Concatenation$1.class",
+        "sha256": "5125c9a62f2e4ab3c825a2078652f0409f06a11ef74b0cc707a4618e71d0deca"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$Concatenation.class",
+        "sha256": "3ecbc43251f94b58e94136bf004acab02b4f613eb011c9354b3f1a78d70e6efa"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$Merge.class",
+        "sha256": "d8f279ac49e2839b67addd7a7bb799c82d19480443b058a26ec5a7ea4cc9006b"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews$Union.class",
+        "sha256": "1acf11dbd6f8dc3f5011c335bb0d7263993d117bca84a415d2083b678e132ea4"
+      },
+      {
+        "path": "com/m3/collections/M3LongCompositeViews.class",
+        "sha256": "f7ddf628e7bf3a185fd10003062f40d057bfef22567e4a3723f82707fed40e04"
+      },
+      {
+        "path": "com/m3/collections/M3LongDeque.class",
+        "sha256": "da9c8cc8dd92be8d282fc2bbb3020f4b369290a4e2c48043d74dcb2f0bc02a52"
+      },
+      {
+        "path": "com/m3/collections/M3LongFilteredView$1.class",
+        "sha256": "fb494e89161b0dcbfa53f76b8e71f70c4d130a414b6e848ed05c1b5263654a96"
+      },
+      {
+        "path": "com/m3/collections/M3LongFilteredView$2.class",
+        "sha256": "91a28fa92297f64035d9e771ff2c689f2244677e99193636cd428a1be0d03f9c"
+      },
+      {
+        "path": "com/m3/collections/M3LongFilteredView.class",
+        "sha256": "2efe23658d90559e3402b39704f53864149fa6c48c03af1a5315e141704131e8"
+      },
+      {
+        "path": "com/m3/collections/M3LongHashSet$1.class",
+        "sha256": "1330375364285f7ff4c44920e7facf594140c51858e5f1df8dd302938ceb5321"
+      },
+      {
+        "path": "com/m3/collections/M3LongHashSet.class",
+        "sha256": "b52f57534b785aa9c517cc58357efba6a0db56e067dd4d84af533fcb74264be0"
+      },
+      {
+        "path": "com/m3/collections/M3LongIndexProjection$Order.class",
+        "sha256": "54eff89dca14f041c2906ac2aa988b47a573732f6dd6c87a2b883aa9dd886c42"
+      },
+      {
+        "path": "com/m3/collections/M3LongIndexProjection.class",
+        "sha256": "cda416638bd1b405cbb97e14b3f59a0e16a83364d8ec447878b71bf3b024231d"
+      },
+      {
+        "path": "com/m3/collections/M3LongIterator.class",
+        "sha256": "27dc860fb4e54d0db92ab3de2aa48977024f4f7a23267c12d62181573aeacf3b"
+      },
+      {
+        "path": "com/m3/collections/M3LongLane28.class",
+        "sha256": "5b57c8270cab08d246dfaeb841f56a22184cf935071a04315571040c7675e41e"
+      },
+      {
+        "path": "com/m3/collections/M3LongLaneStore28$HandleConsumer.class",
+        "sha256": "b133cce6eefae4023a4cdb221624292dac4d8966f23c51c62456f4103b56cfb4"
+      },
+      {
+        "path": "com/m3/collections/M3LongLaneStore28.class",
+        "sha256": "ec017da97fb2aaec1d4ce985e292f73263bc31736fda2d83136ce619ea351ae9"
+      },
+      {
+        "path": "com/m3/collections/M3LongLinkedHashSet$1.class",
+        "sha256": "a5b61ead2ca519bd75b712fc9c8668d4d12c56867acf6395ca342a17b0028c33"
+      },
+      {
+        "path": "com/m3/collections/M3LongLinkedHashSet.class",
+        "sha256": "00ddaffa6433e13a8572422eae7c21eab540308e1b0d060b0b57640641b8c391"
+      },
+      {
+        "path": "com/m3/collections/M3LongLinkedList28.class",
+        "sha256": "57758a410bd9faaf4687dc897f233d2d95e922e19609a6490daa92112abd4195"
+      },
+      {
+        "path": "com/m3/collections/M3LongList.class",
+        "sha256": "8642c637a725f23ab6cf08255a424c8ec733f72671add97c824d25adbf09fa39"
+      },
+      {
+        "path": "com/m3/collections/M3LongListSpliterator.class",
+        "sha256": "7ca5f1aa09510aa513c1e5496bbd311a22660c3e72a930dcd8d82ca66852d99a"
+      },
+      {
+        "path": "com/m3/collections/M3LongLongConsumer.class",
+        "sha256": "533d6e1f33805fc3be80a267ccdc2d5e2a79b631850c7f5f7b98bf6b45dc8378"
+      },
+      {
+        "path": "com/m3/collections/M3LongLongHashMap$1.class",
+        "sha256": "b6c6ff23ae0fa458fe307c2371f0a4d513fef7b184c7c1c273a32faf7671029b"
+      },
+      {
+        "path": "com/m3/collections/M3LongLongHashMap.class",
+        "sha256": "3b3abc2581405043eefcd792f2433b717a5e79cb90196f3e7dd50ad572a5bb85"
+      },
+      {
+        "path": "com/m3/collections/M3LongLongLinkedHashMap$1.class",
+        "sha256": "3bd3310cf4bcac3807f23ef57f19a5037cd9d9d9d4927b399b51b971b710ca6d"
+      },
+      {
+        "path": "com/m3/collections/M3LongLongLinkedHashMap.class",
+        "sha256": "864027f466c4a044cfa850ce7b9cc4dde156ae6330c95dcd369c7dfb552e63b9"
+      },
+      {
+        "path": "com/m3/collections/M3LongPriorityQueue$1.class",
+        "sha256": "ad3b9e0f3b92335bb7b4b7df5ed06b4ad76cb4a32ed7f74405ebb82c13218505"
+      },
+      {
+        "path": "com/m3/collections/M3LongPriorityQueue.class",
+        "sha256": "220338b7580fa0e52542c7b2aead0d76bb2769d9bd428efb586babd488d47fc5"
+      },
+      {
+        "path": "com/m3/collections/M3LongQueue.class",
+        "sha256": "aa30f394bff887882a6511ab148217b13dd8ec7b89b7cc98ad71afba0c35db21"
+      },
+      {
+        "path": "com/m3/collections/M3LongRankBatchNative.class",
+        "sha256": "9c340d754d484e91a0799cc5c44ebfed4872d799cd48e65032f933fead9d485e"
+      },
+      {
+        "path": "com/m3/collections/M3LongRankIndex.class",
+        "sha256": "86fd101468176e144c67d70d3ce043f47027d2ead0fbbbe05b9e118dccc8b716"
+      },
+      {
+        "path": "com/m3/collections/M3LongSequence.class",
+        "sha256": "d8db168936f54d25080ce3680c07f1d31d335fa9a267f4eb7aa78241e367d0f1"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedSet.class",
+        "sha256": "1d38f96f231e88d4a9d317525d789b4d3d053a7c13851c8e91f4b58ea6f823e8"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedSnapshot$1.class",
+        "sha256": "c55854df0b6dd9022bb6fd77aaef504fee04858d3f5d04acda70544cada1b6eb"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedSnapshot.class",
+        "sha256": "2b38977804130595d02c4c03cc44d9f85f08458e6787f3fe49063670941b5750"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedViews$1.class",
+        "sha256": "a8110f1490df3995a0888f72f1af62dae19d3591a33f8bcc6c6abb7fb6269b22"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedViews$Filtered.class",
+        "sha256": "8ece4e971df2f68eb26e65d7e7b4f374de165747ae1c0bb78c938f0e153d6520"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedViews$Unmodifiable.class",
+        "sha256": "56fc0681caf714342370250acb12f2568d05dfa8f35ec55f28a2634cc4316276"
+      },
+      {
+        "path": "com/m3/collections/M3LongSortedViews.class",
+        "sha256": "5827fa16d4468eb635a055804b55f60261063efa6217aac8bf58f052379d471c"
+      },
+      {
+        "path": "com/m3/collections/M3LongStack.class",
+        "sha256": "846e099b4dc8f77ba80316e8a128d6becd661dc7605295a9ef51f399996207ce"
+      },
+      {
+        "path": "com/m3/collections/M3LongTreeSet$1.class",
+        "sha256": "2a40463f59ba9e578a60b54171a084287fe5547367db0d696449b24e61d798c9"
+      },
+      {
+        "path": "com/m3/collections/M3LongTreeSet$2.class",
+        "sha256": "3993b32a87b7ac92de138d5ea1ba2214f8d52dd4266e5c022a1bc9b380da7441"
+      },
+      {
+        "path": "com/m3/collections/M3LongTreeSet.class",
+        "sha256": "f630e5a6478f7f40c31b5f3e348167297fc20550f25734df6dba81535120713e"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$MapView$1.class",
+        "sha256": "02eb511a3871a3394a14ac3bb63a4d4419e3b7100df88e204aca9149c36c89c2"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$MapView$2.class",
+        "sha256": "1cc4db53fbbe337d3c93f5a88b6d37d0f7a57348618aa11b01d0773887c4c9b6"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$MapView$LiveEntry.class",
+        "sha256": "46b641487dc667c16b64490de84310c0e52a2c723e474a7a22254f82d61c1992"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$MapView.class",
+        "sha256": "aa176b7a125b7a21a0f69c3f0c360133d4270a0e9a7ae18ab001d77a6275e631"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$SetView$1.class",
+        "sha256": "335195500baf3e49800624c9eec88816adf815604b787aa654385afff6742b2b"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews$SetView.class",
+        "sha256": "22c0f797c363a0150f8d820a69cbb2d997498f6e16c1e053c0dfc2ad0e0b6491"
+      },
+      {
+        "path": "com/m3/collections/M3MutableFilteredViews.class",
+        "sha256": "4b1729d3cce5b7b8d3c17eaffcfdbe5473f27de1b725c133dbbedb844de52124"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectIdentityMap.class",
+        "sha256": "6e0aaab34f6020468ffd264262f88b5ac3db5248ec676d52dcfee8b2583818bf"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectIdentitySet.class",
+        "sha256": "deae224962d261203d162598d2b24edc783b0f4cb4a1147d90e00ce18e9087a0"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$BudgetExceededException.class",
+        "sha256": "5b4e210da71e448653c3a02c122dba9aab11263e9f4d2d8fdf060d38055229be"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$Codec.class",
+        "sha256": "4307c5187f05f290f2574849aeef25ebede63fb4ac684be947c97c8bc16cb40a"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$Decision.class",
+        "sha256": "50ab95c923d512c7a2f175b6eeddd6992e8c6d0b9eae51dc33872a5becd4f365"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$Factory.class",
+        "sha256": "a8e9f2be66d0aa4d57c9ceb879085dcca6619a951a62ae0f171be7d8fc67c73f"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$HeapSnapshot.class",
+        "sha256": "4b4219a62340fdd27e1b1d25f8fcc9719326e8cb0a0d157f09e534ec38e90b55"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$ResidencyException.class",
+        "sha256": "1190d8d89e08b6e5846b197cfabbb876288ac8e8291379c613173a0ebdbfb58f"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$SpillStore.class",
+        "sha256": "79adf0d59fce08195f2e871cbd5b06735e1aa32d885894a596368d0fabffa6b8"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency$State.class",
+        "sha256": "7289da26285bc95f6b85ce0088f478d2488597443aee3276b949310abbb4e297"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectResidency.class",
+        "sha256": "f39bc461664c139d70b9ac9de8493dd1d3dc479d184978e099b1cdf29c4f5087"
+      },
+      {
+        "path": "com/m3/collections/M3ObjectStateSlots28.class",
+        "sha256": "46b5361034eb0d39a069861c1f0f8577b5f5129d7921f38f4c4f83d62f0bf72e"
+      },
+      {
+        "path": "com/m3/collections/M3OrderedSlotMap$SetView.class",
+        "sha256": "63ce1bcfe8319a7cc614f5ee8592a843f68c858af8f9925da591522aa46c9ff4"
+      },
+      {
+        "path": "com/m3/collections/M3OrderedSlotMap$View.class",
+        "sha256": "b8efc2c32a22779c9738371b9d08417a45caffad66859f66fa5c5cd65b81944a"
+      },
+      {
+        "path": "com/m3/collections/M3OrderedSlotMap.class",
+        "sha256": "72c0d81c5edfb9d4a8d76b3a6d4e6cc4ada53a993f74e0f4636c1cdb89af1df5"
+      },
+      {
+        "path": "com/m3/collections/M3Progress$NullProgress.class",
+        "sha256": "2ef7a183fcd9d7db4db6771f6ca1156148515a58427b1557178127f81a2d5a3b"
+      },
+      {
+        "path": "com/m3/collections/M3Progress$Snapshot.class",
+        "sha256": "9e32bd9acee4d65b018b69e42e9ec65b9ff8db573263cc0bff068e3078e420af"
+      },
+      {
+        "path": "com/m3/collections/M3Progress$SubProgress.class",
+        "sha256": "182fcc8c47fc18407005a2298eabdfd3d5084d3da4013820cc5d3b99d13668a8"
+      },
+      {
+        "path": "com/m3/collections/M3Progress.class",
+        "sha256": "292c4a050ca91ac99d25b40c1c1402c8f3b421cd7039352401a79f40ec41bea5"
+      },
+      {
+        "path": "com/m3/collections/M3ProgressAdapters$LegacyAdapter.class",
+        "sha256": "13ba52b00c239ab631c0d4e0c8fa4b9fb433dfe9c1e6c1c17ca7ef7a3f077763"
+      },
+      {
+        "path": "com/m3/collections/M3ProgressAdapters.class",
+        "sha256": "29be5235243dde5a26e812f9f812b0ed7064cce653d02238ab9eb88bfad431dc"
+      },
+      {
+        "path": "com/m3/collections/M3ProgressMonitor.class",
+        "sha256": "03cd2da647042386e8b82f6c95a89b44efb11f40c87cd35fd2c7b25808a8c580"
+      },
+      {
+        "path": "com/m3/collections/M3ProgressScope.class",
+        "sha256": "67331794e91e2b54a22036ef04c8541aa6771a2ea32cc57d688d337ad7275463"
+      },
+      {
+        "path": "com/m3/collections/M3ProgressState.class",
+        "sha256": "928a75b36be4b5eb7257fe54ebd8db488405e4e40e559c4b73705890669c14fb"
+      },
+      {
+        "path": "com/m3/collections/M3Residency$Strategy.class",
+        "sha256": "e6bda47db7281e3a49b2c123ce37b257927cf0de7b8519789a5c0a9022516102"
+      },
+      {
+        "path": "com/m3/collections/M3Residency.class",
+        "sha256": "12a8a9225281c527e6c23c8cf2513a8e94e7c259d1e8965d9ebb57c0aeedc282"
+      },
+      {
+        "path": "com/m3/collections/M3SignalOrder$Backend.class",
+        "sha256": "728297d27df72f07c3c5fc194207bd49f68dc249209dc152e92d9bf9ea454901"
+      },
+      {
+        "path": "com/m3/collections/M3SignalOrder.class",
+        "sha256": "41a06690bdd033a19f16c42186cb72933fbb9303e83270b0ff8629c5d9b0346a"
+      },
+      {
+        "path": "com/m3/collections/M3SignalOrderNative.class",
+        "sha256": "7b7dc3efaa33e420cfc65b970f0c67bf279d1f34231056fe663280ef0371b9de"
+      },
+      {
+        "path": "com/m3/collections/M3SlotAllocator28.class",
+        "sha256": "85289cae49be89da767a5e2fab98d61631c7ca59bdd8f5163f65d93669b0084a"
+      },
+      {
+        "path": "com/m3/collections/M3SlotArrays.class",
+        "sha256": "ff7512e76e008e1836860a20e93e33bc35e0a815b50c2587ed9c69afe3483bef"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap$1.class",
+        "sha256": "e183893aada8bbcaf617e82f0bef25ff8650da7d563b1cdcf3818fcdcbc4bcef"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap$2.class",
+        "sha256": "dd13be197cbb4fbd45c96cdfc5f29a9ab45f6c57b59843add624c5f5dd2b1eeb"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap$3.class",
+        "sha256": "84137c4f8bcd0f5c483b7a5d2bf0f8a0ac62302c1ce3e4e5730cbba2dcb2ed45"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap$4.class",
+        "sha256": "048b2fc56d20bd3f8543f5e796b0503cb60ee75b7c327ac6cb41130d7b9b41cb"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap$LiveEntry.class",
+        "sha256": "251908309cebf287a0384bf27ad6bd13d037e1b3d025a29fe95b179b276dc947"
+      },
+      {
+        "path": "com/m3/collections/M3SlotMap.class",
+        "sha256": "d4a2e63cebc6634613294a097ab6afbde317b0efa1ce8d604b57a461ad3e7e49"
+      },
+      {
+        "path": "com/m3/collections/M3SlotSpliterators$1.class",
+        "sha256": "86a990b304c29427cc70b7ac7c26f3037d740d1f1f469722b9e00deb2f46c79c"
+      },
+      {
+        "path": "com/m3/collections/M3SlotSpliterators$2.class",
+        "sha256": "8ac7be19ae87f2fe6afb19a11680c4b1521874ae22facf7a98b5e30ca5424942"
+      },
+      {
+        "path": "com/m3/collections/M3SlotSpliterators.class",
+        "sha256": "c370928235f05880f49d9e10933310931945b7c638cbb65818606bed1fe82e58"
+      },
+      {
+        "path": "com/m3/collections/M3StateMaskArrays.class",
+        "sha256": "1843da8f797996192aafb672dc5ccd689b368c086baaf4f76d97a0ee0393bec4"
+      },
+      {
+        "path": "com/m3/collections/M3SystemProgress.class",
+        "sha256": "25be7bd15feca53586e667d2a3b04a18ca24e12d8ae7e6700b3bb28594b9eec9"
+      },
+      {
+        "path": "com/m3/collections/M3TransferQueue$1.class",
+        "sha256": "300d5f86570b67f1295e595754557b5870327212948d6d4e108d2a5e652c9ff9"
+      },
+      {
+        "path": "com/m3/collections/M3TransferQueue.class",
+        "sha256": "93f4080bf4b76d5ef7e6d737cb06ab55cd4a4b07e16394d63b289c55755e949e"
+      },
+      {
+        "path": "com/m3/collections/M3TreeMap$Tree.class",
+        "sha256": "89e9bc4b12d3e3fdc24dfaa87d68bb978c8d0d3300567d71d53b5d0493f84afa"
+      },
+      {
+        "path": "com/m3/collections/M3TreeMap.class",
+        "sha256": "1b00e00956e9c91718f4d9fd57ca0d84bca05ed84e4f62af088e30bede73ea23"
+      },
+      {
+        "path": "com/m3/collections/M3TreeSet.class",
+        "sha256": "ef5164798231490cf4b9184094a7841ed3fc40f7fce23aef30634f40f124246c"
+      },
+      {
+        "path": "com/m3/collections/M3WeakHashMap$KeyReference.class",
+        "sha256": "4fc51fd0c596d95dfb0b86a2aba9a3950af80a7ed8adf3804143f724c83b94af"
+      },
+      {
+        "path": "com/m3/collections/M3WeakHashMap.class",
+        "sha256": "94e964e4bcbeb74e8a75975e5bd1c30233ff8657434a2dbadad1d0f653deeb9e"
+      },
+      {
+        "path": "module-info.class",
+        "sha256": "440779e416e3a6e75114f6aa1631d00083d502855636b833a295e60226c150f6"
+      }
+    ],
+    "qualification": "Pre-existing independently compiled corrected M3 candidate classes; current owner template compiled beside probe. This is isolated diagnostic materialization, not the final named recipe application."
+  },
+  "compileCommand": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+    "--release",
+    "21",
+    "-Xlint:all,-processing",
+    "-Werror",
+    "-cp",
+    "/tmp/m3-collections-env-constructor-proof-20261017/build/candidate-module:/tmp/m3-maven-repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar:/tmp/m3-maven-repository/com/google/errorprone/error_prone_annotations/2.36.0/error_prone_annotations-2.36.0.jar:/tmp/m3-maven-repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/tmp/m3-maven-repository/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar:/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections/11.1.0/eclipse-collections-11.1.0.jar:/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections-api/11.1.0/eclipse-collections-api-11.1.0.jar",
+    "-d",
+    "/tmp/m3-count-cost-20261017/run2/classes",
+    "/tmp/m3-count-cost-20261017/run2/src/CountOwnerCostProbe.java",
+    "/tmp/m3-count-cost-20261017/run2/src/M3ObjectCounts.java"
+  ],
+  "runCommand": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+    "-Xms512m",
+    "-Xmx512m",
+    "-XX:+UseG1GC",
+    "-cp",
+    "/tmp/m3-count-cost-20261017/run2/classes:/tmp/m3-collections-env-constructor-proof-20261017/build/candidate-module:/tmp/m3-maven-repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar:/tmp/m3-maven-repository/com/google/errorprone/error_prone_annotations/2.36.0/error_prone_annotations-2.36.0.jar:/tmp/m3-maven-repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/tmp/m3-maven-repository/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar:/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections/11.1.0/eclipse-collections-11.1.0.jar:/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections-api/11.1.0/eclipse-collections-api-11.1.0.jar",
+    "CountOwnerCostProbe"
+  ],
+  "rawSamples": {
+    "file": "count-owner-cost-samples.csv",
+    "sha256": "ad6e18852999e406edeed414066555f6be3eab3d046becec539fcc405b579762"
+  },
+  "summary": [
+    {
+      "keys": 4096,
+      "phase": "fresh_admit",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 4096,
+      "cpuNanos": {
+        "min": 116994,
+        "median": 134986.0,
+        "max": 184554,
+        "samples": [
+          184554,
+          122212,
+          118195,
+          147760,
+          116994,
+          118145,
+          161159,
+          152697
+        ]
+      },
+      "wallNanos": {
+        "min": 116095,
+        "median": 133726.5,
+        "max": 181613,
+        "samples": [
+          181613,
+          121473,
+          117367,
+          145980,
+          116095,
+          117126,
+          158629,
+          150977
+        ]
+      },
+      "allocatedBytes": {
+        "min": 416408,
+        "median": 416408.0,
+        "max": 416408,
+        "samples": [
+          416408,
+          416408,
+          416408,
+          416408,
+          416408,
+          416408,
+          416408,
+          416408
+        ]
+      },
+      "countChecksum": 20981760,
+      "totalCount": 10240,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "update_existing",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 32768,
+      "cpuNanos": {
+        "min": 176803,
+        "median": 216281.0,
+        "max": 359043,
+        "samples": [
+          227257,
+          205305,
+          177764,
+          252245,
+          197493,
+          176803,
+          269860,
+          359043
+        ]
+      },
+      "wallNanos": {
+        "min": 176265,
+        "median": 214462.0,
+        "max": 356977,
+        "samples": [
+          224948,
+          203976,
+          177106,
+          250376,
+          196395,
+          176265,
+          267773,
+          356977
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "countChecksum": 20981760,
+      "totalCount": 10240,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "fresh_admit",
+      "provider": "GUAVA_LINKED",
+      "samples": 8,
+      "operationsPerSample": 4096,
+      "cpuNanos": {
+        "min": 65777,
+        "median": 71866.5,
+        "max": 144194,
+        "samples": [
+          79858,
+          69373,
+          73038,
+          70365,
+          70695,
+          65777,
+          144194,
+          110434
+        ]
+      },
+      "wallNanos": {
+        "min": 65088,
+        "median": 70952.0,
+        "max": 142515,
+        "samples": [
+          78888,
+          68593,
+          72139,
+          69605,
+          69765,
+          65088,
+          142515,
+          108504
+        ]
+      },
+      "allocatedBytes": {
+        "min": 295104,
+        "median": 295104.0,
+        "max": 295104,
+        "samples": [
+          295104,
+          295104,
+          295104,
+          295104,
+          295104,
+          295104,
+          295104,
+          295104
+        ]
+      },
+      "countChecksum": 20981760,
+      "totalCount": 10240,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "update_existing",
+      "provider": "GUAVA_LINKED",
+      "samples": 8,
+      "operationsPerSample": 32768,
+      "cpuNanos": {
+        "min": 111025,
+        "median": 120158.5,
+        "max": 197443,
+        "samples": [
+          115061,
+          112237,
+          117875,
+          127780,
+          111025,
+          122442,
+          197443,
+          176402
+        ]
+      },
+      "wallNanos": {
+        "min": 110256,
+        "median": 119564.5,
+        "max": 195114,
+        "samples": [
+          114432,
+          111637,
+          117286,
+          126681,
+          110256,
+          121843,
+          195114,
+          164067
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "countChecksum": 20981760,
+      "totalCount": 10240,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "fresh_admit",
+      "provider": "APACHE_HASH",
+      "samples": 8,
+      "operationsPerSample": 4096,
+      "cpuNanos": {
+        "min": 61011,
+        "median": 64476.0,
+        "max": 127890,
+        "samples": [
+          64646,
+          62883,
+          61821,
+          61011,
+          66849,
+          64306,
+          91987,
+          127890
+        ]
+      },
+      "wallNanos": {
+        "min": 60391,
+        "median": 63855.5,
+        "max": 125849,
+        "samples": [
+          64006,
+          62254,
+          61051,
+          60391,
+          65909,
+          63705,
+          90386,
+          125849
+        ]
+      },
+      "allocatedBytes": {
+        "min": 262328,
+        "median": 262328.0,
+        "max": 262328,
+        "samples": [
+          262328,
+          262328,
+          262328,
+          262328,
+          262328,
+          262328,
+          262328,
+          262328
+        ]
+      },
+      "countChecksum": 20981760,
+      "totalCount": 10240,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "update_existing",
+      "provider": "APACHE_HASH",
+      "samples": 8,
+      "operationsPerSample": 32768,
+      "cpuNanos": {
+        "min": 111216,
+        "median": 112331.5,
+        "max": 210612,
+        "samples": [
+          111656,
+          112096,
+          111216,
+          112567,
+          114910,
+          111435,
+          173908,
+          210612
+        ]
+      },
+      "wallNanos": {
+        "min": 110506,
+        "median": 111777.5,
+        "max": 208414,
+        "samples": [
+          110887,
+          111527,
+          110506,
+          112028,
+          114351,
+          110686,
+          172228,
+          208414
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "countChecksum": 20981760,
+      "totalCount": 10240,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "fresh_admit",
+      "provider": "ECLIPSE_HASH",
+      "samples": 8,
+      "operationsPerSample": 4096,
+      "cpuNanos": {
+        "min": 55543,
+        "median": 78572.0,
+        "max": 110854,
+        "samples": [
+          84015,
+          74311,
+          55843,
+          55543,
+          57285,
+          82833,
+          110854,
+          110123
+        ]
+      },
+      "wallNanos": {
+        "min": 54692,
+        "median": 77211.0,
+        "max": 155383,
+        "samples": [
+          82364,
+          72819,
+          55143,
+          54692,
+          56625,
+          81603,
+          109355,
+          155383
+        ]
+      },
+      "allocatedBytes": {
+        "min": 131528,
+        "median": 131528.0,
+        "max": 131528,
+        "samples": [
+          131528,
+          131528,
+          131528,
+          131528,
+          131528,
+          131528,
+          131528,
+          131528
+        ]
+      },
+      "countChecksum": 20981760,
+      "totalCount": 10240,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "update_existing",
+      "provider": "ECLIPSE_HASH",
+      "samples": 8,
+      "operationsPerSample": 32768,
+      "cpuNanos": {
+        "min": 108411,
+        "median": 116873.5,
+        "max": 171655,
+        "samples": [
+          155391,
+          122131,
+          108411,
+          111115,
+          108972,
+          111616,
+          171655,
+          158796
+        ]
+      },
+      "wallNanos": {
+        "min": 107622,
+        "median": 116149.5,
+        "max": 169856,
+        "samples": [
+          153681,
+          121302,
+          107622,
+          110466,
+          108443,
+          110997,
+          169856,
+          156836
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "countChecksum": 20981760,
+      "totalCount": 10240,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "flags_write",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 16384,
+      "cpuNanos": {
+        "min": 102181,
+        "median": 552494.5,
+        "max": 749913,
+        "samples": [
+          102181,
+          115361,
+          694270,
+          568844,
+          532550,
+          536145,
+          749913,
+          678717
+        ]
+      },
+      "wallNanos": {
+        "min": 101533,
+        "median": 550617.5,
+        "max": 746022,
+        "samples": [
+          101533,
+          113972,
+          692631,
+          566331,
+          530508,
+          534904,
+          746022,
+          674704
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "countChecksum": 20981760,
+      "totalCount": 10240,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 4096,
+      "phase": "flags_select",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 4096,
+      "cpuNanos": {
+        "min": 62172,
+        "median": 77915.5,
+        "max": 108291,
+        "samples": [
+          68582,
+          96443,
+          64906,
+          67040,
+          62172,
+          108291,
+          89563,
+          87249
+        ]
+      },
+      "wallNanos": {
+        "min": 61312,
+        "median": 76930.5,
+        "max": 106580,
+        "samples": [
+          67852,
+          95043,
+          63986,
+          66080,
+          61312,
+          106580,
+          88103,
+          86009
+        ]
+      },
+      "allocatedBytes": {
+        "min": 89048,
+        "median": 89048.0,
+        "max": 89048,
+        "samples": [
+          89048,
+          89048,
+          89048,
+          89048,
+          89048,
+          89048,
+          89048,
+          89048
+        ]
+      },
+      "countChecksum": 20981760,
+      "totalCount": 10240,
+      "selected": 1365,
+      "selectionChecksum": 2796203
+    },
+    {
+      "keys": 65536,
+      "phase": "fresh_admit",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 65536,
+      "cpuNanos": {
+        "min": 1483382,
+        "median": 1671656.0,
+        "max": 2033579,
+        "samples": [
+          2033579,
+          1636279,
+          1483382,
+          1510031,
+          1711310,
+          1702797,
+          1870491,
+          1640515
+        ]
+      },
+      "wallNanos": {
+        "min": 1479073,
+        "median": 1660141.0,
+        "max": 20691146,
+        "samples": [
+          2026807,
+          1632444,
+          1479073,
+          1506264,
+          1707838,
+          1683471,
+          20691146,
+          1636811
+        ]
+      },
+      "allocatedBytes": {
+        "min": 7026112,
+        "median": 7026112.0,
+        "max": 7026112,
+        "samples": [
+          7026112,
+          7026112,
+          7026112,
+          7026112,
+          7026112,
+          7026112,
+          7026112,
+          7026112
+        ]
+      },
+      "countChecksum": 5368872960,
+      "totalCount": 163840,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "update_existing",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 524288,
+      "cpuNanos": {
+        "min": 5407797,
+        "median": 5777474.5,
+        "max": 6254523,
+        "samples": [
+          6254523,
+          5439293,
+          5860688,
+          6033846,
+          6040316,
+          5407797,
+          5694261,
+          5572861
+        ]
+      },
+      "wallNanos": {
+        "min": 5406057,
+        "median": 5794261.5,
+        "max": 6248103,
+        "samples": [
+          6248103,
+          5497636,
+          5899259,
+          6028303,
+          6094532,
+          5406057,
+          5689264,
+          5571035
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "countChecksum": 5368872960,
+      "totalCount": 163840,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "fresh_admit",
+      "provider": "GUAVA_LINKED",
+      "samples": 8,
+      "operationsPerSample": 65536,
+      "cpuNanos": {
+        "min": 1165620,
+        "median": 1224672.5,
+        "max": 1731470,
+        "samples": [
+          1279950,
+          1207472,
+          1241873,
+          1192880,
+          1356894,
+          1731470,
+          1181724,
+          1165620
+        ]
+      },
+      "wallNanos": {
+        "min": 1163869,
+        "median": 1221847.5,
+        "max": 1690241,
+        "samples": [
+          1276148,
+          1204802,
+          1238893,
+          1189928,
+          1353955,
+          1690241,
+          1179293,
+          1163869
+        ]
+      },
+      "allocatedBytes": {
+        "min": 4718848,
+        "median": 4718848.0,
+        "max": 4718848,
+        "samples": [
+          4718848,
+          4718848,
+          4718848,
+          4718848,
+          4718848,
+          4718848,
+          4718848,
+          4718848
+        ]
+      },
+      "countChecksum": 5368872960,
+      "totalCount": 163840,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "update_existing",
+      "provider": "GUAVA_LINKED",
+      "samples": 8,
+      "operationsPerSample": 524288,
+      "cpuNanos": {
+        "min": 3942642,
+        "median": 4027638.5,
+        "max": 5764496,
+        "samples": [
+          5764496,
+          4019937,
+          3942642,
+          4119243,
+          3946207,
+          4035340,
+          3991675,
+          4115388
+        ]
+      },
+      "wallNanos": {
+        "min": 3988847,
+        "median": 4070499.5,
+        "max": 5754811,
+        "samples": [
+          5754811,
+          4017019,
+          4017099,
+          4148566,
+          4108527,
+          4032472,
+          3988847,
+          4190950
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "countChecksum": 5368872960,
+      "totalCount": 163840,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "fresh_admit",
+      "provider": "APACHE_HASH",
+      "samples": 8,
+      "operationsPerSample": 65536,
+      "cpuNanos": {
+        "min": 1069638,
+        "median": 1225333.5,
+        "max": 1399899,
+        "samples": [
+          1102417,
+          1200722,
+          1399899,
+          1076628,
+          1249945,
+          1250606,
+          1069638,
+          1368451
+        ]
+      },
+      "wallNanos": {
+        "min": 1066754,
+        "median": 1222072.0,
+        "max": 1418222,
+        "samples": [
+          1099432,
+          1197560,
+          1418222,
+          1074485,
+          1246584,
+          1248137,
+          1066754,
+          1365614
+        ]
+      },
+      "allocatedBytes": {
+        "min": 4194552,
+        "median": 4194552.0,
+        "max": 4194552,
+        "samples": [
+          4194552,
+          4194552,
+          4194552,
+          4194552,
+          4194552,
+          4194552,
+          4194552,
+          4194552
+        ]
+      },
+      "countChecksum": 5368872960,
+      "totalCount": 163840,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "update_existing",
+      "provider": "APACHE_HASH",
+      "samples": 8,
+      "operationsPerSample": 524288,
+      "cpuNanos": {
+        "min": 3920719,
+        "median": 4002240.0,
+        "max": 4224610,
+        "samples": [
+          4219122,
+          3987809,
+          3991354,
+          4185752,
+          3920719,
+          4013126,
+          3945586,
+          4224610
+        ]
+      },
+      "wallNanos": {
+        "min": 3916828,
+        "median": 3999207.0,
+        "max": 4221296,
+        "samples": [
+          4211762,
+          3984870,
+          3988025,
+          4179613,
+          3916828,
+          4010389,
+          3943438,
+          4221296
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "countChecksum": 5368872960,
+      "totalCount": 163840,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "fresh_admit",
+      "provider": "ECLIPSE_HASH",
+      "samples": 8,
+      "operationsPerSample": 65536,
+      "cpuNanos": {
+        "min": 843643,
+        "median": 892169.0,
+        "max": 1256205,
+        "samples": [
+          903731,
+          880607,
+          1013725,
+          860067,
+          1256205,
+          1244207,
+          843643,
+          854569
+        ]
+      },
+      "wallNanos": {
+        "min": 841956,
+        "median": 889542.0,
+        "max": 15918131,
+        "samples": [
+          901305,
+          877779,
+          15918131,
+          857789,
+          1252853,
+          1240515,
+          841956,
+          852292
+        ]
+      },
+      "allocatedBytes": {
+        "min": 2097736,
+        "median": 2097736.0,
+        "max": 2097736,
+        "samples": [
+          2097736,
+          2097736,
+          2097736,
+          2097736,
+          2097736,
+          2097736,
+          2097736,
+          2097736
+        ]
+      },
+      "countChecksum": 5368872960,
+      "totalCount": 163840,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "update_existing",
+      "provider": "ECLIPSE_HASH",
+      "samples": 8,
+      "operationsPerSample": 524288,
+      "cpuNanos": {
+        "min": 3509690,
+        "median": 3604089.5,
+        "max": 3876154,
+        "samples": [
+          3699030,
+          3876154,
+          3566674,
+          3682205,
+          3509690,
+          3575187,
+          3618541,
+          3589638
+        ]
+      },
+      "wallNanos": {
+        "min": 3507643,
+        "median": 3601925.0,
+        "max": 4095868,
+        "samples": [
+          3694524,
+          4095868,
+          3564639,
+          3679082,
+          3507643,
+          3570919,
+          3616847,
+          3587003
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "countChecksum": 5368872960,
+      "totalCount": 163840,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "flags_write",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 262144,
+      "cpuNanos": {
+        "min": 2131523,
+        "median": 2888196.5,
+        "max": 8808073,
+        "samples": [
+          8808073,
+          8269574,
+          2422866,
+          2131523,
+          2667769,
+          2871612,
+          2904781,
+          2908777
+        ]
+      },
+      "wallNanos": {
+        "min": 2128019,
+        "median": 2883855.0,
+        "max": 8801552,
+        "samples": [
+          8801552,
+          8264915,
+          2397895,
+          2128019,
+          2681211,
+          2864826,
+          2902884,
+          2906991
+        ]
+      },
+      "allocatedBytes": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "countChecksum": 5368872960,
+      "totalCount": 163840,
+      "selected": 0,
+      "selectionChecksum": 0
+    },
+    {
+      "keys": 65536,
+      "phase": "flags_select",
+      "provider": "M3",
+      "samples": 8,
+      "operationsPerSample": 65536,
+      "cpuNanos": {
+        "min": 895890,
+        "median": 932995.0,
+        "max": 1020985,
+        "samples": [
+          1020985,
+          933816,
+          932174,
+          980525,
+          950832,
+          920246,
+          895890,
+          905013
+        ]
+      },
+      "wallNanos": {
+        "min": 894735,
+        "median": 927864.5,
+        "max": 1018000,
+        "samples": [
+          1018000,
+          930739,
+          924990,
+          977149,
+          977179,
+          914534,
+          894735,
+          903278
+        ]
+      },
+      "allocatedBytes": {
+        "min": 1488592,
+        "median": 1488592.0,
+        "max": 1488592,
+        "samples": [
+          1488592,
+          1488592,
+          1488592,
+          1488592,
+          1488592,
+          1488592,
+          1488592,
+          1488592
+        ]
+      },
+      "countChecksum": 5368872960,
+      "totalCount": 163840,
+      "selected": 21845,
+      "selectionChecksum": 715827883
+    }
+  ],
+  "preliminaryWarmupSensitivity": {
+    "file": "count-owner-cost-warmup-sensitivity.csv",
+    "sha256": "aeef549307dc1c6b560d43d64d42e00470aa46945ad60849151cebc4da21a515",
+    "harnessSha256": "7d7b4d628b455ddf205e56acae2729bbe99d4e36c28fd820dcf2460f26ca05d8",
+    "ownerSha256": "caba4ddf7ccff577eab40bacc7bb2c9bafd557e00c6c88c8c1cabc673d0f6892",
+    "sampleRows": 160,
+    "initialPlan": "Warm six rounds and measure eight rounds at 4096, then repeat at 65536.",
+    "observedReasonForRevision": "At 4096, the Eclipse update had a median 524288 allocated bytes; at 65536 it had zero. The final plan warms the entire size corpus first. Both raw runs are retained; no rounds were excluded within either run.",
+    "interpretation": "The difference is consistent with warmup/JIT escape-analysis sensitivity; no compiler trace was captured to identify the exact optimization."
+  },
+  "structuralSourceEvidence": [
+    {
+      "provider": "M3",
+      "path": "/workspace/scratch/f0742e08085b/Synexia/synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017/src/main/resources/com/synexia/rewrite/hash-pinned-java/five-provider-array-interop-20261017/M3ObjectCounts.java.txt",
+      "sha256": "df16b4ca64445744b417d8f9303af433d53404643dd5863722b8005a8d9feff5",
+      "observation": "Parallel primitive int count/flag columns at existing M3 key-only stable slots; no per-key count wrapper is stored."
+    },
+    {
+      "provider": "M3",
+      "path": "/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+      "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
+      "observation": "Key-only Table uses reference and primitive arrays, with values array left empty; geometric array growth is included in admission allocation."
+    },
+    {
+      "provider": "GUAVA_LINKED",
+      "path": "/workspace/scratch/f0742e08085b/donors/guava/guava/src/com/google/common/collect/LinkedHashMultiset.java",
+      "sha256": "ee4c769f0103241a8fc1eade97b0d17895e5896fff885c4cd5f8c452122bcc31",
+      "observation": "Default linked multiset constructs a LinkedHashMap<E, Count> backing map."
+    },
+    {
+      "provider": "GUAVA_LINKED",
+      "path": "/workspace/scratch/f0742e08085b/donors/guava/guava/src/com/google/common/collect/AbstractMapBasedMultiset.java",
+      "sha256": "34a744d7836f8aa5c593c6376daf0f2dc1ac3e80d5e335ff696fe7aa9c189063",
+      "observation": "Admission creates Count(occurrences) for a newly distinct key."
+    },
+    {
+      "provider": "APACHE_HASH",
+      "path": "/workspace/scratch/f0742e08085b/donors/commons-collections/src/main/java/org/apache/commons/collections4/multiset/AbstractMapMultiSet.java",
+      "sha256": "0a98fef7016ef0c2852b9d548691d1dbc11ab06b856ea309d60a85c244a3f431",
+      "observation": "Stores Map<E, MutableInteger> and admits one MutableInteger per distinct key."
+    },
+    {
+      "provider": "ECLIPSE_HASH",
+      "path": "/workspace/scratch/f0742e08085b/donors/eclipse-collections/eclipse-collections/src/main/java/org/eclipse/collections/impl/bag/mutable/HashBag.java",
+      "sha256": "6d037901f75146ce49d27d35cfc142f32de556ae1e53e237671be11bbe93e4bb",
+      "observation": "Uses the donor primitive ObjectIntMaps mutable owner, not a boxed count map."
+    },
+    {
+      "provider": "ECLIPSE_HASH",
+      "path": "/workspace/scratch/f0742e08085b/donors/eclipse-collections/eclipse-collections/src/main/java/org/eclipse/collections/impl/bag/mutable/AbstractHashBag.java",
+      "sha256": "3588987656dfd27db53784f71a959bf685b592b721a77938df365990b5b13a44",
+      "observation": "Count operations delegate to MutableObjectIntMap; this donor already has primitive counters."
+    }
+  ],
+  "limitations": [
+    "Single shared-container JVM execution, not JMH, not a replicated statistical performance result.",
+    "All headline numbers are observed samples; they do not establish a universal speed, heap-size or scaling claim.",
+    "Default-capacity growth makes construction allocation include discarded intermediate arrays and tables.",
+    "M3 includes stable insertion order and flag columns; Apache HashMultiSet and Eclipse HashBag do not offer that feature combination.",
+    "Allocation meters exclude work on GC/JIT threads and do not measure retained graph size.",
+    "Current-thread CPU excludes CPU of other threads; wall time can include pauses and scheduling delays.",
+    "No JNI kernel, native memory, concurrency, null keys, full removals, provider views, bulk operations, presizing or large-count overflow measured.",
+    "Count samples use bounded positive counts for common semantics; existing separate differential tests own edge contracts.",
+    "Warmup is finite and does not prove every hot method has reached its final compilation tier."
+  ]
+}

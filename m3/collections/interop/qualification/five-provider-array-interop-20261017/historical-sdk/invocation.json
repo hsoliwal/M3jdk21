@@ -1,0 +1,137 @@
+{
+  "workflow_template": "/workspace/scratch/f0742e08085b/Synexia/synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017/src/main/resources/com/synexia/rewrite/hash-pinned-text/five-provider-array-interop-20261017/sdk-family-workflow.yml.txt",
+  "workflow_sha256": "115502b62ed7ead423c4df857d0a0b3d9ca23f92c389e48ab4e54cd34f2522fa",
+  "original_recipe": "/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/recipes/sdk-family-names-20261017",
+  "source_mirror_files": [
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/.gitignore",
+      "sha256": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/BASE_SHA",
+      "sha256": "7f80e803028a8f446ee05a9abab256f4b22926188e529ae0b18a256d2380f6d7"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/FILE_PASS_LEDGER.tsv",
+      "sha256": "17ddf6fcc721f83bf12c4a13b492ad0273247314ce51f63ed6a78f419be5598d"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/README.md",
+      "sha256": "e0cc7d16a5fe3c17c5c287682482c58c1c128035dd795338500c9d94b9eabf53"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/SOURCE_PINS.tsv",
+      "sha256": "19d07f26bbb9735d94eb2de74fbb4c983ce48c5ec62a70e8cfb56e9cb58b221e"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/before/m3/collections/interop/pom.xml",
+      "sha256": "7144e37b9e553d4644ea1e8e997448c3a65dcb627b85cb9b9ae650d6c2500977"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/before/m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java",
+      "sha256": "fa144a8c8617f190cdb1848bc28d3c9f6ae4302666a00c8ea3e904f25afc06fd"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/pom.xml",
+      "sha256": "0083ba7c20228b4812fe113ea57575e32b28f6cb3bd77438597826cca8c2472b"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/proof/SdkIndexMaskProof.java",
+      "sha256": "ce3b3f583e8a6b326adbed7220856e903b053c787fa0cc16d825b5f76aafb8e7"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/proof/SdkSourceAudit.java",
+      "sha256": "2fece3063b384aa17e42925a0669a1328c000e4d324181d244bc84395fbc04d9"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/sdk/SdkFamilyNamesSdkTest.java",
+      "sha256": "e3e8df230cc82b7793c99575ab9f0bb06c133ba187445da934a637c607cbb779"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/java/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/java/com/synexia/rewrite/M3SdkFamilyNamesRecipe.java",
+      "sha256": "e6730ca760f268aad2d7ddce1dfa478594ce99b343f036de051ad73ab888223d"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/java/com/synexia/rewrite/SdkFamilyReplay.java",
+      "sha256": "2f6a6ade3fbebcabab8d09506cb2769a3b686a9dc7c500b9828883dc2fb77bcf"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/META-INF/rewrite/m3-sdk-family-names.yml",
+      "sha256": "18695414c4d1900bb8c70d6b3f3bcf71c848905775ede0eadc386302563be91d"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/manifest.tsv",
+      "sha256": "3c992a514044453bc5784abf862701743f784ef67f5cfc4ee076ac073179efd7"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/.github/workflows/m3-sdk-family-names-20261017.yml",
+      "sha256": "b2f3763e73f45e1914791f7f1e5af284c29d28bde277c3915f1a895a4e90cb66"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv",
+      "sha256": "e316251a7daf20a6b22db9f18e733c733386385b75f61377d8a8b0ca8be75a08"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/SDK_FAMILIES.md",
+      "sha256": "60a5ef222644344c21d6efed6629e8c42ff022a65fb920c818318e2340708203"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/SDK_FAMILY_NOTICES.md",
+      "sha256": "2a0cfb54eb39e7120743673cde476297e2b1a51f67d14fb01aade18821383d67"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/pom.xml",
+      "sha256": "b1e7dd0817690de77ad1af8898d39e4edcab2ee005aeec709f39151d5981e9a3"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/sdk-family-bindings.tsv",
+      "sha256": "3eec888606c333effe39255423d1f25e2c4276716e8be357c0667e1fedb7fbd5"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheListValuedMap.java",
+      "sha256": "7c74e242fb0bae5f853e335aed4d2d5695f9c1881af6325297641d29b06dcc82"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheSetValuedMap.java",
+      "sha256": "e44934cdb39484af881aa834fb6478b160c150a1b874bee4a03ed70c46e19547"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBinding.java",
+      "sha256": "fdd00fecd40c07a94ad0faee0fd036d62cb3f9d15dda9309af9626cedc9627c2"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBindings.java",
+      "sha256": "46e13c91b108ccb886fa14c6df4a363488f12a35d4fef55c78fee51ac789edcd"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java",
+      "sha256": "76609b94a23a682d98d541b5a0421f8c0bdfce05dce6f9cb253fa2e6bf89f62b"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java",
+      "sha256": "7645be75ebd02a99fbbf64bf0996cc531bdff28d15f444a43914cf7a75461ea7"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java",
+      "sha256": "ec048dc96f50e35dd8f752f02bcdab13f38463023aafbf044aba15a9dfd1a401"
+    },
+    {
+      "path": "m3/collections/recipes/sdk-family-names-20261017/verify.py",
+      "sha256": "574a83b191a7de493ef270b9ce7ca47efeb14d68c235888efd444f4dc428b440"
+    }
+  ],
+  "fixture_preparation": "Unmodified embedded workflow Python body; isolated checkout mirror has exact original recipe bytes.",
+  "environment": {
+    "GITHUB_WORKSPACE": "/tmp/m3-five-provider-historical-sdk-fixture-20261017/checkout",
+    "RUNNER_TEMP": "/tmp/m3-five-provider-historical-sdk-fixture-20261017/runner",
+    "GITHUB_ENV": "/tmp/m3-five-provider-historical-sdk-fixture-20261017/github.env"
+  }
+}

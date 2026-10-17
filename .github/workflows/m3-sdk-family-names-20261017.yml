@@ -1,10 +1,14 @@
 # SPDX-License-Identifier: Apache-2.0
+# Canonical successor: com.synexia.m3.FiveProviderArrayInterop20261017.
+# The original 22-binding receipt remains a historical fixture contract;
+# installed successor sources and their 33 bindings are qualified separately below.
 name: M3 five-family SDK contracts
 on:
   pull_request:
     paths:
       - 'm3/collections/interop/**'
       - 'm3/collections/recipes/sdk-family-names-20261017/**'
+      - 'm3/collections/src/**'
       - '.github/workflows/m3-sdk-family-names-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -13,6 +17,8 @@ jobs:
   sdk-and-donors:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
+    env:
+      SUCCESSOR_TASK: m3/collections/interop/recipe/five-provider-array-interop-20261017
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -22,29 +28,182 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Actual recipe SDK and local Java/JNI gates
-        run: mvn -B -f m3/collections/recipes/sdk-family-names-20261017/pom.xml clean verify
-      - name: Build actual core, not substitute storage classes
+      - name: Materialize the exact original SDK-family fixture
+        shell: bash
         run: |
-          mkdir -p /tmp/m3-core
-          find m3/collections/src/main/java -name '*.java' > /tmp/m3-core-sources
-          javac --release 21 -proc:none -Xlint:all,-module -Werror -d /tmp/m3-core @/tmp/m3-core-sources
-          jar --create --file /tmp/m3-core.jar -C /tmp/m3-core .
-          mvn -B org.apache.maven.plugins:maven-install-plugin:3.1.2:install-file -Dfile=/tmp/m3-core.jar -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true
-      - name: Actual pinned donor libraries and SDK contracts
-        run: mvn -B -f m3/collections/interop/pom.xml clean verify
-      - name: Reject missing and skipped contract tests
+          set -euxo pipefail
+          mkdir -p proof
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json, os, shutil, subprocess
+          workspace = Path(os.environ['GITHUB_WORKSPACE'])
+          historical = Path(os.environ['RUNNER_TEMP']) / 'm3-sdk-family-historical-20261017'
+          historical.mkdir(parents=True, exist_ok=False)
+          task = Path('m3/collections/recipes/sdk-family-names-20261017')
+          shutil.copytree(workspace / task, historical / task,
+                          ignore=shutil.ignore_patterns('target', 'evidence'))
+          resources = historical / task / 'src/main/resources/com/synexia/rewrite/sdk-family-names-20261017'
+          manifest = resources / 'manifest.tsv'
+          sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+          assert sha(manifest) == '3c992a514044453bc5784abf862701743f784ef67f5cfc4ee076ac073179efd7'
+          commit = '4e29dc9d4141261e8763fbe9ffd6a20e017b1aff'
+          external = {
+              'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java',
+              'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java',
+              'm3/collections/src/main/native/collections/m3_index_mask_compactor.c',
+          }
+          restored = set()
+          admitted = {}
+          for line in manifest.read_text().splitlines():
+              name, before, after, template = line.split('\t')
+              target = historical / name
+              target.parent.mkdir(parents=True, exist_ok=True)
+              if template != 'KEEP':
+                  source = resources / template
+                  assert sha(source) == after, ('historical template drift', name)
+                  shutil.copyfile(source, target)
+              elif name in external:
+                  url = f'https://raw.githubusercontent.com/hsoliwal/M3jdk21/{commit}/{name}'
+                  subprocess.run(['curl', '--fail', '--location', '--retry', '3',
+                                  '--output', str(target), url], check=True)
+                  restored.add(name)
+              else:
+                  assert name.startswith(str(task) + '/'), ('unexpected historical owner', name)
+              assert sha(target) == after, ('historical source drift', name)
+              if template == 'KEEP':
+                  assert before == after, ('changed historical KEEP row', name)
+              admitted[name] = after
+          assert restored == external and len(admitted) == 19
+          proof = workspace / 'proof'
+          (proof / 'historical-sdk-fixture.json').write_text(json.dumps({
+              'manifest_sha256': sha(manifest), 'external_source_commit': commit,
+              'historical_postimages': admitted,
+              'original_recipe_copied_without_source_edits': True,
+          }, indent=2) + '\n')
+          with open(os.environ['GITHUB_ENV'], 'a') as environment:
+              environment.write(f'HISTORICAL_SDK_ROOT={historical}\n')
+          print('ADMITTED_HISTORICAL_POSTIMAGES', len(admitted))
+          PY
+      - name: Retain the original SDK, source, metadata, Java and JNI proofs
+        shell: bash
         run: |
+          set -euxo pipefail
+          HISTORICAL_TASK="$HISTORICAL_SDK_ROOT/m3/collections/recipes/sdk-family-names-20261017"
+          SDK_RUNTIME="$RUNNER_TEMP/m3-sdk-historical-test-runtime"
+          mkdir -p "$SDK_RUNTIME"
+          # Supply missing historical test-runtime logging without editing the old POM.
+          for artifact in slf4j-api slf4j-simple; do
+            curl --fail --location --retry 3 -o "$SDK_RUNTIME/$artifact-1.7.36.jar" \
+              "https://repo.maven.apache.org/maven2/org/slf4j/$artifact/1.7.36/$artifact-1.7.36.jar"
+          done
+          echo "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0  $SDK_RUNTIME/slf4j-api-1.7.36.jar" | sha256sum --check
+          echo "2f39bed943d624dfa8f4102d0571283a10870b6aa36f197a8a506f147010c10f  $SDK_RUNTIME/slf4j-simple-1.7.36.jar" | sha256sum --check
+          sha256sum "$SDK_RUNTIME"/*.jar > proof/historical-sdk-runtime-sha256.txt
+          # ClassGraph 4.8.165 needs this opening to scan the Java 21 application loader.
+          # Keep the original named-recipe discovery assertion and all other proofs intact.
+          mvn -B -ntp -f "$HISTORICAL_TASK/pom.xml" \
+            "-Dmaven.test.additionalClasspath=$SDK_RUNTIME/slf4j-api-1.7.36.jar,$SDK_RUNTIME/slf4j-simple-1.7.36.jar" \
+            -DargLine=--add-opens=java.base/jdk.internal.loader=ALL-UNNAMED \
+            clean verify 2>&1 | tee proof/historical-sdk.log
+          cp -R "$HISTORICAL_TASK/target/surefire-reports" proof/historical-sdk-reports
+          cp -R "$HISTORICAL_TASK/evidence" proof/historical-sdk-evidence
+      - name: Admit the exact installed successor source census and binding metadata
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, os, subprocess
+          task = Path(os.environ['SUCCESSOR_TASK'])
+          baseline = task / 'contract/interop-base-manifest.tsv'
+          java = task / 'src/main/resources/com/synexia/rewrite/hash-pinned-java/five-provider-array-interop-20261017/manifest.tsv'
+          text = task / 'src/main/resources/com/synexia/rewrite/hash-pinned-text/five-provider-array-interop-20261017/manifest.tsv'
+          expected = dict(line.split('\t') for line in baseline.read_text().splitlines()
+                          if line and not line.startswith('#'))
+          for line in java.read_text().splitlines():
+              if not line or line.startswith('#'): continue
+              name, before, after, resource = line.split('\t')
+              if name.startswith('m3/collections/interop/src/'):
+                  assert before == expected.get(name, 'ABSENT'), ('broken successor chain', name)
+                  expected[name] = after
+          tracked = set(subprocess.check_output(
+              ['git', 'ls-files', 'm3/collections/interop/src'], text=True).splitlines())
+          assert tracked == set(expected), ('unexpected or missing source', tracked ^ set(expected))
+          metadata = {'m3/collections/interop/pom.xml', 'm3/collections/interop/sdk-family-bindings.tsv'}
+          for line in text.read_text().splitlines():
+              if not line or line.startswith('#'): continue
+              name, before, after, resource = line.split('\t')
+              if name in metadata:
+                  expected[name] = after
+                  metadata.remove(name)
+          assert not metadata, ('unsealed current binding metadata', metadata)
+          for name, wanted in sorted(expected.items()):
+              path = Path(name)
+              assert path.is_file() and not path.is_symlink(), name
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == wanted, ('source drift', name)
+          Path('proof/current-sdk-postimages.tsv').write_text(
+              ''.join(f'{name}\t{value}\n' for name, value in sorted(expected.items())))
+          print('ADMITTED_CURRENT_SDK_POSTIMAGES', len(expected))
+          PY
+      - name: Build actual core classes and retain the SDK catalogue resource
+        shell: bash
+        run: |
+          set -euxo pipefail
+          CORE_CLASSES="$RUNNER_TEMP/m3-sdk-core-classes"
+          CORE_JAR="$RUNNER_TEMP/m3-sdk-core.jar"
+          mkdir -p "$CORE_CLASSES"
+          find m3/collections/src/main/java -name '*.java' > "$RUNNER_TEMP/m3-sdk-core-sources"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror -d "$CORE_CLASSES" @"$RUNNER_TEMP/m3-sdk-core-sources"
+          jar --create --file "$CORE_JAR" -C "$CORE_CLASSES" . -C m3/collections/src/main/resources .
+          python3 - "$CORE_JAR" <<'PY'
+          from pathlib import Path
+          import hashlib, sys, zipfile
+          name = 'com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv'
+          source = Path('m3/collections/src/main/resources') / name
+          with zipfile.ZipFile(sys.argv[1]) as jar:
+              assert jar.namelist().count(name) == 1, 'missing or duplicate SDK catalogue'
+              assert jar.read(name) == source.read_bytes(), 'packaged SDK catalogue drift'
+          Path('proof/current-core-catalogue.sha256').write_text(
+              hashlib.sha256(source.read_bytes()).hexdigest() + '  ' + name + '\n')
+          PY
+          (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.2:install-file \
+            -Dfile="$CORE_JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true)
+      - name: Actual pinned donor libraries and current SDK contracts
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/collections/interop/pom.xml clean verify 2>&1 | tee proof/current-donor-contracts.log
+          java -cp m3/collections/interop/target/classes:m3/collections/interop/target/test-classes \
+            com.m3.collections.interop.M3LibraryBindingsSelfTest \
+            m3/collections/interop/sdk-family-bindings.tsv | tee proof/current-33-binding-contracts.log
+      - name: Reject missing and skipped historical and current contract tests
+        shell: bash
+        run: |
+          set -euxo pipefail
           python3 - <<'PYTEST'
           from pathlib import Path
           import xml.etree.ElementTree as E
-          root=Path('m3/collections/interop/target/surefire-reports')
-          reports=list(root.glob('TEST-*M3SdkFamiliesTest.xml'))
-          assert len(reports)==1, 'missing new SDK contract suite'
-          suite=E.parse(reports[0]).getroot()
-          assert int(suite.get('tests','0'))==7, 'missing SDK methods'
-          assert all(int(suite.get(k,'0'))==0 for k in ('failures','errors','skipped'))
-          for report in root.glob('TEST-*.xml'):
-              s=E.parse(report).getroot()
-              assert all(int(s.get(k,'0'))==0 for k in ('failures','errors','skipped'))
+          for directory, pattern, wanted in (
+              ('proof/historical-sdk-reports', 'TEST-*SdkFamilyNamesSdkTest.xml', 4),
+              ('m3/collections/interop/target/surefire-reports', 'TEST-*M3SdkFamiliesTest.xml', 7),
+          ):
+              root = Path(directory)
+              reports = list(root.glob(pattern))
+              assert len(reports) == 1, ('missing SDK contract suite', pattern)
+              suite = E.parse(reports[0]).getroot()
+              assert int(suite.get('tests', '0')) == wanted, ('missing SDK methods', pattern)
+              for report in root.glob('TEST-*.xml'):
+                  result = E.parse(report).getroot()
+                  assert all(int(result.get(key, '0')) == 0 for key in ('failures', 'errors', 'skipped'))
           PYTEST
+      - name: Preserve historical and current contract evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-sdk-family-contracts-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 30
+          path: |
+            proof/
+            m3/collections/interop/target/surefire-reports/
+            ${{ runner.temp }}/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/surefire-reports/
+            ${{ runner.temp }}/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/evidence/

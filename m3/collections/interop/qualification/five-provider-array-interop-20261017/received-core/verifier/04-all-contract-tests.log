@@ -1,0 +1,321 @@
+$ ['/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java', '-jar', '/tmp/m3-toolchain/junit-platform-console-standalone-1.12.2.jar', 'execute', '--disable-banner', '--class-path', '/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/classes:/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/test-classes', '--scan-class-path', '--fail-if-no-tests', '--reports-dir', '/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/target/donation-verification/junit-reports']
+M3LongRankIndexSelfTest PASS native=false
+PASS M3_MUTABLE_FILTERED_VIEWS assertions=288223
+PASS M3FilteredListsEdges checks=40
+PASS M3FilteredListsContract operations=32452 checks=755754
+PASS M3FilteredListsWorkProof rows=65537 predicate_calls=65538 split_payload=0
+PASS M3IndexMaskCompactorSelfTest checks=12570 JNI=false
+PASS M3IndexPathRank Java21 deterministic differential: 36476 rank checks; 900 randomized paths
+M3_MASK_OFFSET_PROJECTION_PASS checks=28615 seed=5562870565234366513
+M3_BOUNDED_GATHER_PASS checks=11020139 fingerprint=-9036386136120340114 native=false
+PASS M3TombstoneReuseSelfTest checks=142438 saved_set_array_payload_bytes=72 saved_map_array_payload_bytes=136
+PASS M3_OBJECT_SLOT_INDEX checks=39
+PASS M3LongAddressKernelSelfTest checks=321298 native=false
+M3NativeIndexRangeSelfTest mode=none checks=529306 seededCases=2048
+PASS M3BitLane28FenwickSelfTest checks=21298 mutations=15000
+PASS M3LongSortedAlgebraSelfTest checks=508836
+PASS M3ZeroSlotCapacityContract checks=656464 operations=196611 physical=true
+M3_STORED_REPRESENTATIVE_CONTRACT_PASS assertions=69
+M3_LONG_DAG_CHECKS=291 RESULT=PASS
+PASS M3IndexMaskWindowRecoverySelfTest checks=7526 JNI=false
+PASS M3SignalOrderContract backend=JAVA checks=2009
+M3_ZERO_MASK_ARRAY_FAST_PATH_PASS checks=6176
+M3_RESIDENCY_STATE_MASK_PASS checks=9627 fingerprint=12197969927824375845 backend=java-only
+PACKED_LAZY_STATE_OK null/reuse/growth/failure/recursion/mutation/cancellation/events/system-progress
+PACKED_LAZY_TREE_OK eager/lazy AVL differential=20000 views/entries/flags/progress/events
+PASS M3MaskDenseSelectionProof checks=52564 nativeAvailable=false
+PASS M3IndexPathMasksSelfTest checks=1554 JNI=false
+M3SpanIndex Java21/JNI oracle: PASS 128804 assertions, JNI=false
+PASS M3_INDEX_MASK_WINDOW checks=15298 native=false
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ M3IntLanesTest ✔
+│  │  ├─ intLanesRetainOnlyPrimitiveFields() ✔
+│  │  ├─ priorityQueueMatchesJdkHeadContentsAndRemoval() ✔
+│  │  ├─ intIntMapMatchesJdkAcrossChurnIncludingZeroKey() ✔
+│  │  ├─ hashSetMatchesJdkAcrossChurnIncludingZeroAndRehash() ✔
+│  │  ├─ hashSetEdgeContractsAndFailFast() ✔
+│  │  └─ intIntMapEdgeContractsAndFailFast() ✔
+│  ├─ M3LongRankIndexTest ✔
+│  │  ├─ randomizedBoundsAndOptionalBatchParity() ✔
+│  │  ├─ freezesLiveFilteredInputWithoutMutatingSource() ✔
+│  │  └─ rejectsInvalidRangesAndDoesNotExposeRetainedArray() ✔
+│  ├─ M3FootprintContractTest ✔
+│  │  ├─ treeEmptyChecksStillInvokeComparatorAndRejectNull() ✔
+│  │  ├─ weakSecondHashFailureLeavesAnUsableEmptyOwner() ✔
+│  │  ├─ emptyHashLookupsStillEvaluateCallbacksAndFirstInsertRecovers() ✔
+│  │  ├─ mapViewsCreatedWhileEmptyRemainBackedAndFailFast() ✔
+│  │  ├─ representableAvlHeightFitsSignedByteEvenDuringInsertion() ✔
+│  │  ├─ separateEmptyOwnersNeverShareWritableSlots() ✔
+│  │  └─ listAndSetViewsWorkAcrossFirstInsertionClearAndReuse() ✔
+│  ├─ M3IntLongHashMapTest ✔
+│  │  ├─ matchesJdkAcrossChurnIncludingZeroKeyAndRehash() ✔
+│  │  └─ edgeContractsFailFastAndSizing() ✔
+│  ├─ M3ObjectResidencyBorrowTest ✔
+│  │  ├─ callbackExceptionAndReentrantReleasePreserveCount() ✔
+│  │  ├─ ExternalAndUnprovenOwnersNeverFastRetire() ✔
+│  │  ├─ independentBorrowersPreventEarlyReclamationAndStaleReuse() ✔
+│  │  └─ asynchronousBorrowKeepsEventOwnerUntilAck() ✔
+│  ├─ M3MutableFilteredViewsTest ✔
+│  │  └─ liveMutableNavigableContracts() ✔
+│  ├─ M3ObjectResidencyRuntimePressureTest ✔
+│  │  └─ targetUsesTheActualRunningJvmHeap() ✔
+│  ├─ M3FilteredListsTest ✔
+│  │  ├─ mutationAndNullEdges() ✔
+│  │  ├─ oracleHistories() ✔
+│  │  └─ linearTraversalEvidence() ✔
+│  ├─ M3SequenceContractTest ✔
+│  │  ├─ linkedListAndDequeDifferential() ✔
+│  │  ├─ listIteratorAlternatingMutations() ✔
+│  │  ├─ treeSetViewsAndPolls() ✔
+│  │  ├─ sublistAndReverseShareStructuralVersion() ✔
+│  │  ├─ streamsRetainEncounterOrderAndSortedComparator() ✔
+│  │  └─ orderedSetSequenceOperations() ✔
+│  ├─ M3IndexMaskCompactorTest ✔
+│  │  └─ stableMaskSelectionContract() ✔
+│  ├─ SegmentedPrimitiveStorageTest ✔
+│  │  ├─ addressRoundTripsAllBoundaries() ✔
+│  │  ├─ multiLaneStoreDoesNotMoveOtherHandlesOnRemoval() ✔
+│  │  ├─ linkedListKeepsOrderAcrossStableSlotReuse() ✔
+│  │  ├─ leanFactoryExposesStorageWithoutChoosingSemantics() ✔
+│  │  ├─ longIntAndBitLanesAllocateOnlyTouchedPaths() ✔
+│  │  ├─ allocatorRejectsStaleHandlesAfterReuse() ✔
+│  │  └─ segmentedArenaCrossesLeafBoundaryWithoutCopyingExistingOffsets() ✔
+│  ├─ M3IndexPathRankTest ✔
+│  │  ├─ boundedDeterministicDifferential() ✔
+│  │  └─ agreesWithOriginalJavaMaskSelector() ✔
+│  ├─ M3AdaptiveEnumLongMapTest ✔
+│  │  ├─ modeTransitionsAndOrdinalOrderInSparseMode() ✔
+│  │  ├─ narrowEnumIsDenseFromTheStartAndEdgeContracts() ✔
+│  │  ├─ foreignEnumKeysAreRejectedLikeJdkInBothModes() ✔
+│  │  ├─ wideEnumMatchesJdkAcrossMutationsAndModes() ✔
+│  │  └─ retainsOnlyTheActiveBackingAndNoKeyReferences() ✔
+│  ├─ M3JdkShapedPrimitiveCollectionsTest ✔
+│  │  ├─ priorityQueueMatchesJdkHeadContentsAndRemoval() ✔
+│  │  ├─ arrayListMatchesJdkAcrossDeterministicMutationSequence() ✔
+│  │  ├─ iteratorsAreFailFastOnStructuralMutation() ✔
+│  │  ├─ arrayDequeMatchesJdkOrderAndOccurrenceRemoval() ✔
+│  │  ├─ duplicateSetAddAndMapValueReplacementAreNonStructural() ✔
+│  │  ├─ hashSetMatchesJdkAcrossCollisionsDeletionAndRehash() ✔
+│  │  └─ hashMapMatchesJdkAcrossReplacementDeletionAndRehash() ✔
+│  ├─ M3LongIndexProjectionMaskOffsetTest ✔
+│  │  └─ composableOffsetSortedAndNativeMaskContracts() ✔
+│  ├─ M3LongAddressBoundedTest ✔
+│  │  └─ preservesOffsetsDuplicatesMasksAndPartialFailure() ✔
+│  ├─ SegmentedLaneBulkContractTest ✔
+│  │  ├─ intCopiesAndImportsMatchFlatArrays() ✔
+│  │  ├─ longCopiesMatchArraycopyAcrossBothOverlapDirections() ✔
+│  │  ├─ sparseRowsRetainAscendingSlotAndGenerationSemantics() ✔
+│  │  ├─ invalidRangesAreRejectedBeforeWriting() ✔
+│  │  ├─ sparseZeroPropagationAndExtremeEndpointsDoNotGrowHoles() ✔
+│  │  └─ bitmapRankSelectAndTraversalMatchBitSet() ✔
+│  ├─ M3TombstoneReuseTest ✔
+│  │  └─ tombstoneReusePreservesPrimitiveSetMapContracts() ✔
+│  ├─ M3ObjectSlotIndexTest ✔
+│  │  └─ contracts() ✔
+│  ├─ M3ObjectCountsTest ✔
+│  │  ├─ countOverflowAndInvalidInputLeaveCountsFlagsAndOrderUnchanged() ✔
+│  │  ├─ callbacksAndCancellationRetainExceptionIdentityAndRefuseReentrancy() ✔
+│  │  ├─ primitiveColumnsShareKeySlotsWithoutCountBoxesOrRetainedEntries() ✔
+│  │  ├─ flagWindowsAgreeWithScalarOracleForAllBitsOffsetsAndBothDirections() ✔
+│  │  ├─ differentialCountsNullCollisionsAndSlotReuse() ✔
+│  │  └─ distinctIteratorRemovalClearsFlagsAndRecycledSlots() ✔
+│  ├─ M3LongAddressKernelTest ✔
+│  │  └─ directAddressAndBatchParity() ✔
+│  ├─ M3FactoryContractTest ✔
+│  │  ├─ immutableAndJdkUtilityWrappers() ✔
+│  │  └─ allFactoryFamiliesAreUsable() ✔
+│  ├─ M3NativeIndexRangeTest ✔
+│  │  └─ snapshotContracts() ✔
+│  ├─ M3BitLane28FenwickTest ✔
+│  │  ├─ indexedRankSelectMatchesIndependentOrderedSetOracle() ✔
+│  │  └─ repeatedWriteNoopAndInvalidBoundsPreserveBitsAndCounts() ✔
+│  ├─ M3LongLinkedHashSetTest ✔
+│  │  ├─ matchesJdkSequencedSetAcrossChurnIncludingMovesAndRehash() ✔
+│  │  ├─ edgeContractsFailFastAndSizing() ✔
+│  │  └─ retainsOnlyPrimitiveLanes() ✔
+│  ├─ M3LongLongLinkedHashMapTest ✔
+│  │  ├─ matchesJdkSequencedMapAcrossChurnIncludingMovesAndRehash() ✔
+│  │  ├─ edgeContractsFailFastAndSizing() ✔
+│  │  └─ retainsOnlyPrimitiveLanes() ✔
+│  ├─ M3LongSortedAlgebraTest ✔
+│  │  └─ seededSortedSetAlgebraAndFilterComposition() ✔
+│  ├─ M3ZeroSlotCapacityTest ✔
+│  │  └─ primitiveZeroKeyIsNotAProbeSlot() ✔
+│  ├─ M3LongArrayListTest ✔
+│  │  ├─ boundsOwnershipAndStackExceptions() ✔
+│  │  ├─ directStreamsRetainOwnerAcrossStorageRelocation() ✔
+│  │  ├─ mixedOperationsMatchJdkValueOrder() ✔
+│  │  ├─ callbackFailurePreservesThrowingValueAndUnreadSuffix() ✔
+│  │  ├─ primitiveStorageAndCapacityChecksStayBounded() ✔
+│  │  ├─ structuralMutationsFailFastAndStackIsJdkShapedRemoval() ✔
+│  │  └─ sortDedupAndSearchPreserveSignedLongSemantics() ✔
+│  ├─ M3StoredRepresentativeTest ✔
+│  │  └─ storedRepresentativeAndBulkComparatorAliases() ✔
+│  ├─ M3ObjectIdentityTest ✔
+│  │  ├─ identityMapEdgeContractsRehashAndFailFast() ✔
+│  │  ├─ identityOwnersRetainOnlyFlatLanes() ✔
+│  │  ├─ identityMapMatchesJdkAcrossChurnWithNullKeyAndValues() ✔
+│  │  └─ identitySetMatchesJdkAcrossChurn() ✔
+│  ├─ M3LongDagJUnitTest ✔
+│  │  └─ primitiveDAGAndVirtualCollectorContracts() ✔
+│  ├─ M3LongTreeSetTest ✔
+│  │  ├─ filterInPlaceCommitsPriorRejectionsAndKeepsTheThrowingSuffix() ✔
+│  │  ├─ matchesJdkNavigableSetWithTinyPages() ✔
+│  │  ├─ growthSplitsPagesAndRemovalMergesAndTrimsThem() ✔
+│  │  ├─ sortedViewsAndUnionsWorkOverTheOwnerAsBackingSet() ✔
+│  │  ├─ edgeContractsFailFastAndSizing() ✔
+│  │  ├─ retainsOnlyPrimitiveLanes() ✔
+│  │  └─ matchesJdkNavigableSetAcrossChurnIncludingViewsAndFilters() ✔
+│  ├─ M3LongFilteredViewContractTest ✔
+│  │  ├─ differentialSeeded() ✔
+│  │  ├─ lateBindingStreamsAndNoSizeScan() ✔
+│  │  ├─ composableAndReadOnly() ✔
+│  │  ├─ fusedNestedPredicatesKeepEvaluationOrder() ✔
+│  │  └─ exceptionBoundaries() ✔
+│  ├─ M3NoRetainedStructuralEntryTest ✔
+│  │  ├─ storageRootsAndNestedOwnersHaveNoRetainedEntryNodeBucketOrCellFields() ✔
+│  │  ├─ returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage() ✔
+│  │  └─ onlySlotMapDefinesTheExplicitMapEntryCompatibilityProjection() ✔
+│  ├─ M3LazyObserverRegressionTest ✔
+│  │  ├─ deferredKeysPreserveNullFailureCancellationAndViewOrder() ✔
+│  │  ├─ rangeAndCachedValueObserversShareMutationGuard() ✔
+│  │  ├─ beforeTouchObserverCannotRetargetRecycledSlot() ✔
+│  │  ├─ successfulValueRemainsCoherentWhenCompletionObserverThrows() ✔
+│  │  └─ failureObserversCannotReplaceProviderExceptionOrPoisonRetry() ✔
+│  ├─ M3IndexMaskWindowRecoveryTest ✔
+│  │  └─ contract() ✔
+│  ├─ M3SignalOrderJUnitTest ✔
+│  │  └─ stableFilteredSignalOrderPreservesExactJavaSemantics() ✔
+│  ├─ M3LongArrayDequeTest ✔
+│  │  ├─ primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams() ✔
+│  │  ├─ callbackFailurePreservesThrowingValueAndUnreadSuffixAcrossRingWrap() ✔
+│  │  └─ queueAndIndexedViewsAreJdkShapedAliases() ✔
+│  ├─ M3ObjectResidencyTest ✔
+│  │  ├─ lazyCreateAndStableIntegerSlot() ✔
+│  │  ├─ strictScopeRejectsReturningTheProjection() ✔
+│  │  ├─ failedSwapLeavesOriginalProjectionResident() ✔
+│  │  ├─ exposedProjectionIsPinnedAndNeverSilentlyReplaced() ✔
+│  │  ├─ parentBitsRemainCanonicalAcrossProjectionRecreation() ✔
+│  │  ├─ rejectsUnknownFlagsAndIncompleteSwapConfiguration() ✔
+│  │  ├─ neverEvictsActiveSlotAndReportsUnrecoverableBudget() ✔
+│  │  ├─ lruDoesNotSpinWhenNoEvictionStrategyIsConfigured() ✔
+│  │  ├─ swapsToSecondaryAndRestoresWithoutChangingLogicalValue() ✔
+│  │  ├─ recreatesOnlyFromCanonicalParentState() ✔
+│  │  ├─ residencyAnnotationIsClassRetainedAndExplicit() ✔
+│  │  └─ exposedInstallIsPinnedFromTheMomentItEntersTheArena() ✔
+│  ├─ M3ZeroMaskArrayFastPathTest ✔
+│  │  └─ noOpWindowAndPrimitiveMaskCompactionStayContractIdentical() ✔
+│  ├─ M3ResidencyStateMaskTest ✔
+│  │  └─ deterministicJavaStateMaskAndIndexContract() ✔
+│  ├─ M3LazyTreeMapTest ✔
+│  │  └─ actualPackedTreeProviderContract() ✔
+│  ├─ M3JdkCollectionDifferentialTest ✔
+│  │  ├─ zeroCapacityRendezvousPreservesSynchronousQueueContract() ✔
+│  │  ├─ transferAcknowledgementTimeoutAndCancellationMatchJdk() ✔
+│  │  ├─ reversedSublistAndDefaultListMutationsMatchLinkedList() ✔
+│  │  ├─ lateBindingTraversalsFollowListSetAndMapViews() ✔
+│  │  ├─ blockedProducerInterruptionLeavesNoPhantomElement() ✔
+│  │  ├─ comparatorEquivalentKeysAndNestedBoundsMatchTreeMap() ✔
+│  │  ├─ boundedDequeWrapDrainAndTimedOperationsMatchJdk() ✔
+│  │  ├─ lockedMapAtomicCallbacksLoseNoUpdates() ✔
+│  │  ├─ everySortedSplitRetainsCustomComparatorAndEncounterOrder() ✔
+│  │  └─ sequencedNullAndAccessOrderOperationsMatchLinkedHashMap() ✔
+│  ├─ M3PrimitiveCollectionDifferentialTest ✔
+│  │  ├─ primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams() ✔
+│  │  ├─ primitiveListMatchesJdkAcrossGrowthCompactionSortingAndStreams() ✔
+│  │  └─ primitiveListSnapshotFilterFailureAndOwnerBoundStream() ✔
+│  ├─ M3MaskAllSelectionReceiverTest ✔
+│  │  └─ everyMaskAndDefensiveResultIsCorrect() ✔
+│  ├─ M3IndexPathMasksTest ✔
+│  │  └─ maskedIndexPathsPreserveDetachedOrderAndBounds() ✔
+│  ├─ M3ConcurrentLaneContractTest ✔
+│  │  ├─ racingPublicationAndAtomicAddsLoseNoUpdates() ✔
+│  │  ├─ parallelStreamsSplitFixedRangesWithoutLosingOrDuplicatingSlots() ✔
+│  │  ├─ intAtomicBoundaryAndSparsePreparation() ✔
+│  │  ├─ concurrentCollectionStreamsPreserveCapturedSnapshotsAndIndexOrder() ✔
+│  │  └─ atomicValuesWrapAndZeroWritesKeepPublicationLocations() ✔
+│  ├─ M3EnumSetTest ✔
+│  │  ├─ wideEnumMatchesJdkAcrossMutationsAndBulkOperations() ✔
+│  │  ├─ foreignEnumConstantsAreRejectedLikeJdk() ✔
+│  │  ├─ retainsOnlyPresenceWordsAndTheSharedUniverse() ✔
+│  │  └─ narrowEnumEdgeContractsMatchJdk() ✔
+│  ├─ M3FilteredListsSortedInteropTest ✔
+│  │  ├─ readonlyEmptyAndNestedReversedMutatorsRefuse() ✔
+│  │  └─ sourceDefinedReverseOrderAndLiveVisibility() ✔
+│  ├─ M3ConcurrentContractTest ✔
+│  │  ├─ mpmcRendezvousHasNoLossOrDuplicates() ✔
+│  │  ├─ mpmcTransferHasNoLossOrDuplicates() ✔
+│  │  ├─ atomicHashAndTreeCompute() ✔
+│  │  ├─ blockingWakeupTimeoutAndInterrupt() ✔
+│  │  ├─ concurrentStreamsUseSnapshotSizeAndSelfToStringTerminates() ✔
+│  │  ├─ mpmcBlockingDequeHasNoLossOrDuplicates() ✔
+│  │  ├─ drainFailureRetainsUndeliveredElement() ✔
+│  │  ├─ synchronousQueueHasNoCollectionCapacity() ✔
+│  │  ├─ blockingDequeDifferential() ✔
+│  │  ├─ transferBufferedDifferentialAndIteratorRecycling() ✔
+│  │  ├─ lockedRangeAndSetViews() ✔
+│  │  └─ transferWaitersCancellationAndTimeout() ✔
+│  ├─ M3MapContractTest ✔
+│  │  ├─ sequencedAndReversedHashViews() ✔
+│  │  ├─ iteratorDeletionPreservesAllTreeSuccessors() ✔
+│  │  ├─ collisionChainsRecyclingAndNull() ✔
+│  │  ├─ weakCleanupIsDeterministicAndDoesNotDeleteReusedKeys() ✔
+│  │  ├─ differential(String, Supplier, Supplier) ✔
+│  │  │  ├─ hash differential ✔
+│  │  │  ├─ tree differential ✔
+│  │  │  ├─ weak differential ✔
+│  │  │  └─ access differential ✔
+│  │  ├─ comparatorNullKeysAndEquality() ✔
+│  │  ├─ backedViewsAndCallbacks(String, Supplier, Supplier) ✔
+│  │  │  ├─ hash views ✔
+│  │  │  ├─ tree views ✔
+│  │  │  ├─ weak views ✔
+│  │  │  └─ access views ✔
+│  │  ├─ nestedRangeExceptionContractsMatchTreeMap() ✔
+│  │  ├─ treeRangesNavigationAndMutation() ✔
+│  │  ├─ sequencedEndpointsUseLiveAndDetachedEntriesCorrectly() ✔
+│  │  ├─ treeRotationsAndEveryDeletionOrder() ✔
+│  │  └─ entryAndKeyViewsRemoveNullValuedMappings() ✔
+│  ├─ M3SpanIndexTest ✔
+│  │  └─ compareAgainstSparseWidgetSpanOracle() ✔
+│  ├─ M3FilteredNavigableSetTest ✔
+│  │  ├─ preservesOrderingRangeSemanticsAndLiveBackingChanges() ✔
+│  │  ├─ comparatorEquivalentDifferentObjectsRemainMembers() ✔
+│  │  ├─ reversedComparatorAndEmptyResultsKeepNavigableContracts() ✔
+│  │  └─ readOnlyViewsRejectAllMutatorsIncludingIteratorRemove() ✔
+│  ├─ M3EnumLongMapTest ✔
+│  │  ├─ foreignEnumKeysAreRejectedLikeJdk() ✔
+│  │  ├─ wideEnumMatchesJdkAcrossMutationsAndOrdinalOrder() ✔
+│  │  ├─ retainsOnlyPrimitiveLanesAndTheSharedUniverse() ✔
+│  │  └─ narrowEnumAndEdgeContracts() ✔
+│  ├─ M3IndexMaskWindowTest ✔
+│  │  └─ sortedAndFilteredWindowContracts() ✔
+│  ├─ M3FilteredViewsTest ✔
+│  │  ├─ navigableMap() ✔
+│  │  ├─ navigableSet() ✔
+│  │  ├─ randomizedDivergence() ✔
+│  │  └─ collectionAndSet() ✔
+│  └─ M3ReceivingRecoveryTest ✔
+│     ├─ restoredSequenceAndCurrentListAreOneOwnerThroughTheFactory() ✔
+│     ├─ restoredDequeFactoryKeepsCurrentCallbackFailureAndNoOpSemantics() ✔
+│     └─ restoredFactoryKeepsCurrentSmallListSortInvalidation() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 14745 ms
+[        63 containers found      ]
+[         0 containers skipped    ]
+[        63 containers started    ]
+[         0 containers aborted    ]
+[        63 containers successful ]
+[         0 containers failed     ]
+[       211 tests found           ]
+[         0 tests skipped         ]
+[       211 tests started         ]
+[         0 tests aborted         ]
+[       211 tests successful      ]
+[         0 tests failed          ]
+
+
+EXIT=0

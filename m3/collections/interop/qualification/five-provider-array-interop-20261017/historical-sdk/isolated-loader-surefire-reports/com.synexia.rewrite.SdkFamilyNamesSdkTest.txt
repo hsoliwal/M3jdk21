@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: com.synexia.rewrite.SdkFamilyNamesSdkTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.350 s <<< FAILURE! -- in com.synexia.rewrite.SdkFamilyNamesSdkTest
+com.synexia.rewrite.SdkFamilyNamesSdkTest.namedRecipeDiscovered -- Time elapsed: 1.110 s <<< ERROR!
+org.openrewrite.RecipeException: Recipes not found: com.synexia.m3.SdkFamilyNames20261017
+	at org.openrewrite.config.Environment.activateRecipes(Environment.java:154)
+	at org.openrewrite.config.Environment.activateRecipes(Environment.java:160)
+	at com.synexia.rewrite.SdkFamilyNamesSdkTest.namedRecipeDiscovered(SdkFamilyNamesSdkTest.java:68)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

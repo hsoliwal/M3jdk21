@@ -1,0 +1,344 @@
+loader=jdk.internal.loader.ClassLoaders$AppClassLoader@639fee48
+resource=file:/tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/classes/META-INF/rewrite/m3-sdk-family-names.yml
+Oct 17, 2026 7:46:34 AM nonapi.io.github.classgraph.utils.LogNode flush
+INFO: 2026-10-17T07:46:34.404-0600	ClassGraph	ClassGraph version 4.8.165
+2026-10-17T07:46:34.405-0600	ClassGraph	Operating system: Linux 6.18.55 amd64
+2026-10-17T07:46:34.405-0600	ClassGraph	Java version: 21.0.12.1 / 21.0.12.1+1-LTS (Eclipse Adoptium)
+2026-10-17T07:46:34.405-0600	ClassGraph	Java home: /tmp/m3-toolchain/jdk-21.0.12.1+1
+2026-10-17T07:46:34.413-0600	ClassGraph	ScanSpec:
+2026-10-17T07:46:34.414-0600	ClassGraph	-- packageAcceptReject: accept: ["META-INF.rewrite"]; acceptPrefixes: ["", "/", "META-INF.", "META-INF.rewrite."]
+2026-10-17T07:46:34.414-0600	ClassGraph	-- packagePrefixAcceptReject: acceptPrefixes: ["META-INF.rewrite."]
+2026-10-17T07:46:34.414-0600	ClassGraph	-- pathAcceptReject: accept: ["META-INF/rewrite/"]; acceptPrefixes: ["", "/", "META-INF/", "META-INF/rewrite/"]
+2026-10-17T07:46:34.414-0600	ClassGraph	-- pathPrefixAcceptReject: acceptPrefixes: ["META-INF/rewrite/"]
+2026-10-17T07:46:34.414-0600	ClassGraph	-- classAcceptReject: 
+2026-10-17T07:46:34.414-0600	ClassGraph	-- classfilePathAcceptReject: 
+2026-10-17T07:46:34.414-0600	ClassGraph	-- classPackageAcceptReject: 
+2026-10-17T07:46:34.414-0600	ClassGraph	-- classPackagePathAcceptReject: 
+2026-10-17T07:46:34.414-0600	ClassGraph	-- moduleAcceptReject: 
+2026-10-17T07:46:34.414-0600	ClassGraph	-- jarAcceptReject: 
+2026-10-17T07:46:34.414-0600	ClassGraph	-- classpathElementResourcePathAcceptReject: 
+2026-10-17T07:46:34.414-0600	ClassGraph	-- libOrExtJarAcceptReject: 
+2026-10-17T07:46:34.415-0600	ClassGraph	-- scanJars: true
+2026-10-17T07:46:34.416-0600	ClassGraph	-- scanNestedJars: true
+2026-10-17T07:46:34.416-0600	ClassGraph	-- scanDirs: true
+2026-10-17T07:46:34.416-0600	ClassGraph	-- scanModules: true
+2026-10-17T07:46:34.416-0600	ClassGraph	-- enableClassInfo: false
+2026-10-17T07:46:34.416-0600	ClassGraph	-- enableFieldInfo: false
+2026-10-17T07:46:34.416-0600	ClassGraph	-- enableMethodInfo: false
+2026-10-17T07:46:34.416-0600	ClassGraph	-- enableAnnotationInfo: false
+2026-10-17T07:46:34.417-0600	ClassGraph	-- enableStaticFinalFieldConstantInitializerValues: false
+2026-10-17T07:46:34.417-0600	ClassGraph	-- enableInterClassDependencies: false
+2026-10-17T07:46:34.417-0600	ClassGraph	-- enableExternalClasses: false
+2026-10-17T07:46:34.417-0600	ClassGraph	-- enableSystemJarsAndModules: false
+2026-10-17T07:46:34.417-0600	ClassGraph	-- ignoreClassVisibility: false
+2026-10-17T07:46:34.417-0600	ClassGraph	-- ignoreFieldVisibility: false
+2026-10-17T07:46:34.417-0600	ClassGraph	-- ignoreMethodVisibility: false
+2026-10-17T07:46:34.417-0600	ClassGraph	-- disableRuntimeInvisibleAnnotations: false
+2026-10-17T07:46:34.417-0600	ClassGraph	-- extendScanningUpwardsToExternalClasses: true
+2026-10-17T07:46:34.417-0600	ClassGraph	-- allowedURLSchemes: null
+2026-10-17T07:46:34.417-0600	ClassGraph	-- addedClassLoaders: null
+2026-10-17T07:46:34.417-0600	ClassGraph	-- overrideClassLoaders: [jdk.internal.loader.ClassLoaders$AppClassLoader@639fee48]
+2026-10-17T07:46:34.418-0600	ClassGraph	-- addedModuleLayers: null
+2026-10-17T07:46:34.418-0600	ClassGraph	-- overrideModuleLayers: null
+2026-10-17T07:46:34.418-0600	ClassGraph	-- overrideClasspath: null
+2026-10-17T07:46:34.418-0600	ClassGraph	-- classpathElementFilters: null
+2026-10-17T07:46:34.418-0600	ClassGraph	-- initializeLoadedClasses: false
+2026-10-17T07:46:34.418-0600	ClassGraph	-- removeTemporaryFilesAfterScan: false
+2026-10-17T07:46:34.418-0600	ClassGraph	-- ignoreParentClassLoaders: true
+2026-10-17T07:46:34.418-0600	ClassGraph	-- ignoreParentModuleLayers: false
+2026-10-17T07:46:34.418-0600	ClassGraph	-- modulePathInfo: 
+2026-10-17T07:46:34.419-0600	ClassGraph	-- maxBufferedJarRAMSize: 67108864
+2026-10-17T07:46:34.419-0600	ClassGraph	-- enableMemoryMapping: false
+2026-10-17T07:46:34.419-0600	ClassGraph	-- enableMultiReleaseVersions: false
+2026-10-17T07:46:34.419-0600	ClassGraph	Number of worker threads: 14
+2026-10-17T07:46:34.425-0600	ClassGraph	Finding classpath
+2026-10-17T07:46:34.425-0600	ClassGraph	-- Finding classpath and modules
+2026-10-17T07:46:34.425-0600	ClassGraph	---- overrideClassLoaders() was called with an instance of jdk.internal.loader.ClassLoaders$AppClassLoader, which is a system classloader, so enableSystemJarsAndModules() was called automatically
+2026-10-17T07:46:34.425-0600	ClassGraph	---- overrideClassLoaders() was called with an instance of jdk.internal.loader.ClassLoaders$AppClassLoader, which is a system classloader, so the `java.lang.path` classpath will also be scanned
+2026-10-17T07:46:34.457-0600	ClassGraph	---- System modules found:
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.base, location=jrt:/java.base]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.compiler, location=jrt:/java.compiler]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.datatransfer, location=jrt:/java.datatransfer]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.desktop, location=jrt:/java.desktop]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.instrument, location=jrt:/java.instrument]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.logging, location=jrt:/java.logging]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.management, location=jrt:/java.management]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.management.rmi, location=jrt:/java.management.rmi]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.naming, location=jrt:/java.naming]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.net.http, location=jrt:/java.net.http]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.prefs, location=jrt:/java.prefs]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.rmi, location=jrt:/java.rmi]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.scripting, location=jrt:/java.scripting]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.security.jgss, location=jrt:/java.security.jgss]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.security.sasl, location=jrt:/java.security.sasl]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.smartcardio, location=jrt:/java.smartcardio]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.sql, location=jrt:/java.sql]
+2026-10-17T07:46:34.457-0600	ClassGraph	------ [module java.sql.rowset, location=jrt:/java.sql.rowset]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module java.transaction.xa, location=jrt:/java.transaction.xa]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module java.xml, location=jrt:/java.xml]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module java.xml.crypto, location=jrt:/java.xml.crypto]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.accessibility, location=jrt:/jdk.accessibility]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.attach, location=jrt:/jdk.attach]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.charsets, location=jrt:/jdk.charsets]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.compiler, location=jrt:/jdk.compiler]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.crypto.cryptoki, location=jrt:/jdk.crypto.cryptoki]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.crypto.ec, location=jrt:/jdk.crypto.ec]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.dynalink, location=jrt:/jdk.dynalink]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.editpad, location=jrt:/jdk.editpad]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.httpserver, location=jrt:/jdk.httpserver]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.internal.ed, location=jrt:/jdk.internal.ed]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.internal.jvmstat, location=jrt:/jdk.internal.jvmstat]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.internal.le, location=jrt:/jdk.internal.le]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.internal.opt, location=jrt:/jdk.internal.opt]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.jartool, location=jrt:/jdk.jartool]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.javadoc, location=jrt:/jdk.javadoc]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.jconsole, location=jrt:/jdk.jconsole]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.jdeps, location=jrt:/jdk.jdeps]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.jdi, location=jrt:/jdk.jdi]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.jdwp.agent, location=jrt:/jdk.jdwp.agent]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.jfr, location=jrt:/jdk.jfr]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.jlink, location=jrt:/jdk.jlink]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.jpackage, location=jrt:/jdk.jpackage]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.jshell, location=jrt:/jdk.jshell]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.jsobject, location=jrt:/jdk.jsobject]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.jstatd, location=jrt:/jdk.jstatd]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.localedata, location=jrt:/jdk.localedata]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.management, location=jrt:/jdk.management]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.management.agent, location=jrt:/jdk.management.agent]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.management.jfr, location=jrt:/jdk.management.jfr]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.naming.dns, location=jrt:/jdk.naming.dns]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.naming.rmi, location=jrt:/jdk.naming.rmi]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.net, location=jrt:/jdk.net]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.nio.mapmode, location=jrt:/jdk.nio.mapmode]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.random, location=jrt:/jdk.random]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.sctp, location=jrt:/jdk.sctp]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.security.auth, location=jrt:/jdk.security.auth]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.security.jgss, location=jrt:/jdk.security.jgss]
+2026-10-17T07:46:34.458-0600	ClassGraph	------ [module jdk.unsupported, location=jrt:/jdk.unsupported]
+2026-10-17T07:46:34.459-0600	ClassGraph	------ [module jdk.unsupported.desktop, location=jrt:/jdk.unsupported.desktop]
+2026-10-17T07:46:34.459-0600	ClassGraph	------ [module jdk.xml.dom, location=jrt:/jdk.xml.dom]
+2026-10-17T07:46:34.459-0600	ClassGraph	------ [module jdk.zipfs, location=jrt:/jdk.zipfs]
+2026-10-17T07:46:34.459-0600	ClassGraph	---- Scanning of non-system modules is not enabled
+2026-10-17T07:46:34.470-0600	ClassGraph	---- System jars:
+2026-10-17T07:46:34.470-0600	ClassGraph	------ Scanning disabled for lib or ext jar: /tmp/m3-toolchain/jdk-21.0.12.1+1/lib/jrt-fs.jar
+2026-10-17T07:46:34.470-0600	ClassGraph	---- ClassLoaderHandlers:
+2026-10-17T07:46:34.470-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.AntClassLoaderHandler
+2026-10-17T07:46:34.470-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.EquinoxClassLoaderHandler
+2026-10-17T07:46:34.470-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.EquinoxContextFinderClassLoaderHandler
+2026-10-17T07:46:34.470-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.FelixClassLoaderHandler
+2026-10-17T07:46:34.470-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.JBossClassLoaderHandler
+2026-10-17T07:46:34.470-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.WeblogicClassLoaderHandler
+2026-10-17T07:46:34.470-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.WebsphereLibertyClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.WebsphereTraditionalClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.OSGiDefaultClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.SpringBootRestartClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.TomcatWebappClassLoaderBaseHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.CxfContainerClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.PlexusClassWorldsClassRealmClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.QuarkusClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.UnoOneJarClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.ParentLastDelegationOrderTestClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.JPMSClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.URLClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.ClassGraphClassLoaderHandler
+2026-10-17T07:46:34.471-0600	ClassGraph	---- Finding unique classloaders in delegation order
+2026-10-17T07:46:34.476-0600	ClassGraph	---- Obtaining URLs from classloaders in delegation order
+2026-10-17T07:46:34.476-0600	ClassGraph	------ Ignoring parent classloader jdk.internal.loader.ClassLoaders$PlatformClassLoader@63d4e2ba, normally handled by nonapi.io.github.classgraph.classloaderhandler.JPMSClassLoaderHandler
+2026-10-17T07:46:34.476-0600	ClassGraph	------ Classloader jdk.internal.loader.ClassLoaders$AppClassLoader is handled by nonapi.io.github.classgraph.classloaderhandler.JPMSClassLoaderHandler
+2026-10-17T07:46:34.489-0600	ClassGraph	Opening classpath elements (took 0.001778 sec)
+2026-10-17T07:46:34.491-0600	ClassGraph	Finding nested classpath elements
+2026-10-17T07:46:34.491-0600	ClassGraph	Final classpath element order:
+2026-10-17T07:46:34.491-0600	ClassGraph	-- [module java.base, location=jrt:/java.base]
+2026-10-17T07:46:34.491-0600	ClassGraph	-- [module java.compiler, location=jrt:/java.compiler]
+2026-10-17T07:46:34.491-0600	ClassGraph	-- [module java.datatransfer, location=jrt:/java.datatransfer]
+2026-10-17T07:46:34.491-0600	ClassGraph	-- [module java.desktop, location=jrt:/java.desktop]
+2026-10-17T07:46:34.491-0600	ClassGraph	-- [module java.instrument, location=jrt:/java.instrument]
+2026-10-17T07:46:34.491-0600	ClassGraph	-- [module java.logging, location=jrt:/java.logging]
+2026-10-17T07:46:34.491-0600	ClassGraph	-- [module java.management, location=jrt:/java.management]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.management.rmi, location=jrt:/java.management.rmi]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.naming, location=jrt:/java.naming]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.net.http, location=jrt:/java.net.http]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.prefs, location=jrt:/java.prefs]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.rmi, location=jrt:/java.rmi]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.scripting, location=jrt:/java.scripting]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.security.jgss, location=jrt:/java.security.jgss]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.security.sasl, location=jrt:/java.security.sasl]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.smartcardio, location=jrt:/java.smartcardio]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.sql, location=jrt:/java.sql]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.sql.rowset, location=jrt:/java.sql.rowset]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.transaction.xa, location=jrt:/java.transaction.xa]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.xml, location=jrt:/java.xml]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module java.xml.crypto, location=jrt:/java.xml.crypto]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.accessibility, location=jrt:/jdk.accessibility]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.attach, location=jrt:/jdk.attach]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.charsets, location=jrt:/jdk.charsets]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.compiler, location=jrt:/jdk.compiler]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.crypto.cryptoki, location=jrt:/jdk.crypto.cryptoki]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.crypto.ec, location=jrt:/jdk.crypto.ec]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.dynalink, location=jrt:/jdk.dynalink]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.editpad, location=jrt:/jdk.editpad]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.httpserver, location=jrt:/jdk.httpserver]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.internal.ed, location=jrt:/jdk.internal.ed]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.internal.jvmstat, location=jrt:/jdk.internal.jvmstat]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.internal.le, location=jrt:/jdk.internal.le]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.internal.opt, location=jrt:/jdk.internal.opt]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.jartool, location=jrt:/jdk.jartool]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.javadoc, location=jrt:/jdk.javadoc]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.jconsole, location=jrt:/jdk.jconsole]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.jdeps, location=jrt:/jdk.jdeps]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.jdi, location=jrt:/jdk.jdi]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.jdwp.agent, location=jrt:/jdk.jdwp.agent]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.jfr, location=jrt:/jdk.jfr]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.jlink, location=jrt:/jdk.jlink]
+2026-10-17T07:46:34.492-0600	ClassGraph	-- [module jdk.jpackage, location=jrt:/jdk.jpackage]
+2026-10-17T07:46:34.493-0600	ClassGraph	-- [module jdk.jshell, location=jrt:/jdk.jshell]
+2026-10-17T07:46:34.493-0600	ClassGraph	-- [module jdk.jsobject, location=jrt:/jdk.jsobject]
+2026-10-17T07:46:34.493-0600	ClassGraph	-- [module jdk.jstatd, location=jrt:/jdk.jstatd]
+2026-10-17T07:46:34.493-0600	ClassGraph	-- [module jdk.localedata, location=jrt:/jdk.localedata]
+2026-10-17T07:46:34.493-0600	ClassGraph	-- [module jdk.management, location=jrt:/jdk.management]
+2026-10-17T07:46:34.493-0600	ClassGraph	-- [module jdk.management.agent, location=jrt:/jdk.management.agent]
+2026-10-17T07:46:34.493-0600	ClassGraph	-- [module jdk.management.jfr, location=jrt:/jdk.management.jfr]
+2026-10-17T07:46:34.493-0600	ClassGraph	-- [module jdk.naming.dns, location=jrt:/jdk.naming.dns]
+2026-10-17T07:46:34.493-0600	ClassGraph	-- [module jdk.naming.rmi, location=jrt:/jdk.naming.rmi]
+2026-10-17T07:46:34.496-0600	ClassGraph	-- [module jdk.net, location=jrt:/jdk.net]
+2026-10-17T07:46:34.496-0600	ClassGraph	-- [module jdk.nio.mapmode, location=jrt:/jdk.nio.mapmode]
+2026-10-17T07:46:34.496-0600	ClassGraph	-- [module jdk.random, location=jrt:/jdk.random]
+2026-10-17T07:46:34.496-0600	ClassGraph	-- [module jdk.sctp, location=jrt:/jdk.sctp]
+2026-10-17T07:46:34.496-0600	ClassGraph	-- [module jdk.security.auth, location=jrt:/jdk.security.auth]
+2026-10-17T07:46:34.496-0600	ClassGraph	-- [module jdk.security.jgss, location=jrt:/jdk.security.jgss]
+2026-10-17T07:46:34.497-0600	ClassGraph	-- [module jdk.unsupported, location=jrt:/jdk.unsupported]
+2026-10-17T07:46:34.497-0600	ClassGraph	-- [module jdk.unsupported.desktop, location=jrt:/jdk.unsupported.desktop]
+2026-10-17T07:46:34.497-0600	ClassGraph	-- [module jdk.xml.dom, location=jrt:/jdk.xml.dom]
+2026-10-17T07:46:34.497-0600	ClassGraph	-- [module jdk.zipfs, location=jrt:/jdk.zipfs]
+2026-10-17T07:46:34.497-0600	ClassGraph	Scanning classpath elements (took 0.207921 sec)
+2026-10-17T07:46:34.499-0600	ClassGraph	-- Scanning module java.base (took 0.203826 sec)
+2026-10-17T07:46:34.703-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.499-0600	ClassGraph	-- Scanning module java.compiler (took 0.048169 sec)
+2026-10-17T07:46:34.547-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.499-0600	ClassGraph	-- Scanning module java.datatransfer (took 0.040456 sec)
+2026-10-17T07:46:34.540-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.499-0600	ClassGraph	-- Scanning module java.desktop (took 0.202950 sec)
+2026-10-17T07:46:34.702-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.500-0600	ClassGraph	-- Scanning module java.instrument (took 0.102751 sec)
+2026-10-17T07:46:34.602-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.500-0600	ClassGraph	-- Scanning module java.logging (took 0.039427 sec)
+2026-10-17T07:46:34.539-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.503-0600	ClassGraph	-- Scanning module java.management (took 0.040732 sec)
+2026-10-17T07:46:34.543-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.503-0600	ClassGraph	-- Scanning module java.management.rmi (took 0.050841 sec)
+2026-10-17T07:46:34.553-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.503-0600	ClassGraph	-- Scanning module java.naming (took 0.141000 sec)
+2026-10-17T07:46:34.644-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.503-0600	ClassGraph	-- Scanning module java.net.http (took 0.032103 sec)
+2026-10-17T07:46:34.535-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.504-0600	ClassGraph	-- Scanning module java.prefs (took 0.033527 sec)
+2026-10-17T07:46:34.537-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.504-0600	ClassGraph	-- Scanning module java.rmi (took 0.094914 sec)
+2026-10-17T07:46:34.598-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.504-0600	ClassGraph	-- Scanning module java.scripting (took 0.036377 sec)
+2026-10-17T07:46:34.540-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.504-0600	ClassGraph	-- Scanning module java.security.jgss (took 0.044429 sec)
+2026-10-17T07:46:34.548-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.535-0600	ClassGraph	-- Scanning module java.security.sasl (took 0.019333 sec)
+2026-10-17T07:46:34.555-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.537-0600	ClassGraph	-- Scanning module java.smartcardio (took 0.040053 sec)
+2026-10-17T07:46:34.577-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.539-0600	ClassGraph	-- Scanning module java.sql (took 0.040892 sec)
+2026-10-17T07:46:34.580-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.540-0600	ClassGraph	-- Scanning module java.sql.rowset (took 0.037765 sec)
+2026-10-17T07:46:34.578-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.540-0600	ClassGraph	-- Scanning module java.transaction.xa (took 0.011981 sec)
+2026-10-17T07:46:34.552-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.543-0600	ClassGraph	-- Scanning module java.xml (took 0.121210 sec)
+2026-10-17T07:46:34.665-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.547-0600	ClassGraph	-- Scanning module java.xml.crypto (took 0.078393 sec)
+2026-10-17T07:46:34.626-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.548-0600	ClassGraph	-- Scanning module jdk.accessibility (took 0.000467 sec)
+2026-10-17T07:46:34.549-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.549-0600	ClassGraph	-- Scanning module jdk.attach (took 0.031607 sec)
+2026-10-17T07:46:34.580-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.552-0600	ClassGraph	-- Scanning module jdk.charsets (took 0.036925 sec)
+2026-10-17T07:46:34.589-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.554-0600	ClassGraph	-- Scanning module jdk.compiler (took 0.037145 sec)
+2026-10-17T07:46:34.591-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.555-0600	ClassGraph	-- Scanning module jdk.crypto.cryptoki (took 0.048488 sec)
+2026-10-17T07:46:34.603-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.577-0600	ClassGraph	-- Scanning module jdk.crypto.ec (took 0.041948 sec)
+2026-10-17T07:46:34.619-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.578-0600	ClassGraph	-- Scanning module jdk.dynalink (took 0.000430 sec)
+2026-10-17T07:46:34.578-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.578-0600	ClassGraph	-- Scanning module jdk.editpad (took 0.000228 sec)
+2026-10-17T07:46:34.578-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.578-0600	ClassGraph	-- Scanning module jdk.httpserver (took 0.000838 sec)
+2026-10-17T07:46:34.579-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.579-0600	ClassGraph	-- Scanning module jdk.internal.ed (took 0.000238 sec)
+2026-10-17T07:46:34.580-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.580-0600	ClassGraph	-- Scanning module jdk.internal.jvmstat (took 0.008615 sec)
+2026-10-17T07:46:34.588-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.580-0600	ClassGraph	-- Scanning module jdk.internal.le (took 0.001216 sec)
+2026-10-17T07:46:34.582-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.580-0600	ClassGraph	-- Scanning module jdk.internal.opt (took 0.004752 sec)
+2026-10-17T07:46:34.585-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.582-0600	ClassGraph	-- Scanning module jdk.jartool (took 0.000402 sec)
+2026-10-17T07:46:34.582-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.582-0600	ClassGraph	-- Scanning module jdk.javadoc (took 0.028267 sec)
+2026-10-17T07:46:34.610-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.585-0600	ClassGraph	-- Scanning module jdk.jconsole (took 0.001296 sec)
+2026-10-17T07:46:34.587-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.587-0600	ClassGraph	-- Scanning module jdk.jdeps (took 0.001976 sec)
+2026-10-17T07:46:34.589-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.588-0600	ClassGraph	-- Scanning module jdk.jdi (took 0.052361 sec)
+2026-10-17T07:46:34.641-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.589-0600	ClassGraph	-- Scanning module jdk.jdwp.agent (took 0.020831 sec)
+2026-10-17T07:46:34.609-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.589-0600	ClassGraph	-- Scanning module jdk.jfr (took 0.001550 sec)
+2026-10-17T07:46:34.591-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.591-0600	ClassGraph	-- Scanning module jdk.jlink (took 0.001035 sec)
+2026-10-17T07:46:34.592-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.591-0600	ClassGraph	-- Scanning module jdk.jpackage (took 0.029703 sec)
+2026-10-17T07:46:34.620-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.592-0600	ClassGraph	-- Scanning module jdk.jshell (took 0.032569 sec)
+2026-10-17T07:46:34.624-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.599-0600	ClassGraph	-- Scanning module jdk.jsobject (took 0.000197 sec)
+2026-10-17T07:46:34.599-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.599-0600	ClassGraph	-- Scanning module jdk.jstatd (took 0.000189 sec)
+2026-10-17T07:46:34.599-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.599-0600	ClassGraph	-- Scanning module jdk.localedata (took 0.036580 sec)
+2026-10-17T07:46:34.636-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.603-0600	ClassGraph	-- Scanning module jdk.management (took 0.039506 sec)
+2026-10-17T07:46:34.642-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.603-0600	ClassGraph	-- Scanning module jdk.management.agent (took 0.023795 sec)
+2026-10-17T07:46:34.627-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.609-0600	ClassGraph	-- Scanning module jdk.management.jfr (took 0.027192 sec)
+2026-10-17T07:46:34.637-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.610-0600	ClassGraph	-- Scanning module jdk.naming.dns (took 0.032297 sec)
+2026-10-17T07:46:34.643-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.619-0600	ClassGraph	-- Scanning module jdk.naming.rmi (took 0.021078 sec)
+2026-10-17T07:46:34.640-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.621-0600	ClassGraph	-- Scanning module jdk.net (took 0.000297 sec)
+2026-10-17T07:46:34.621-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.621-0600	ClassGraph	-- Scanning module jdk.nio.mapmode (took 0.000196 sec)
+2026-10-17T07:46:34.621-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.621-0600	ClassGraph	-- Scanning module jdk.random (took 0.000137 sec)
+2026-10-17T07:46:34.621-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.621-0600	ClassGraph	-- Scanning module jdk.sctp (took 0.000293 sec)
+2026-10-17T07:46:34.622-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.622-0600	ClassGraph	-- Scanning module jdk.security.auth (took 0.000231 sec)
+2026-10-17T07:46:34.622-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.622-0600	ClassGraph	-- Scanning module jdk.security.jgss (took 0.000269 sec)
+2026-10-17T07:46:34.622-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.622-0600	ClassGraph	-- Scanning module jdk.unsupported (took 0.000194 sec)
+2026-10-17T07:46:34.622-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.622-0600	ClassGraph	-- Scanning module jdk.unsupported.desktop (took 0.000153 sec)
+2026-10-17T07:46:34.623-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.623-0600	ClassGraph	-- Scanning module jdk.xml.dom (took 0.000418 sec)
+2026-10-17T07:46:34.623-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.623-0600	ClassGraph	-- Scanning module jdk.zipfs (took 0.000437 sec)
+2026-10-17T07:46:34.623-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:46:34.705-0600	ClassGraph	Classfile scanning is disabled
+2026-10-17T07:46:34.707-0600	ClassGraph	Total time: 0.218 sec
+
+classpath=
+resources=[]
+direct recipes=[com.synexia.m3.SdkFamilyNames20261017]
+environment recipes=[]

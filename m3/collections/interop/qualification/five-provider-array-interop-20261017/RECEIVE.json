@@ -1,0 +1,25 @@
+{
+  "schema": "M3_FINAL_SDK_RECEIVING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "canonical_commit": "e3b9fecc749f00bfe98b4bfb96e1d756bbc39401",
+  "initial_runtime_canonical_commit": "866e240ec1ac8600999d474eb7b8ce1930e326e3",
+  "target_preimage_commit": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+  "publication_parent_commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "publication_parent_tree_matches_qualified_preimage": true,
+  "initial_receiving": {
+    "targets": 41,
+    "changes": 41
+  },
+  "final_receiving": {
+    "targets": 42,
+    "changes": 1
+  },
+  "final_fixed_point": {
+    "targets": 42,
+    "changes": 0
+  },
+  "sdk_source_receipt_sha256": "e26019fd1b858d854fdf3e2f847c64a183194a00ef3bca1b331faa029a91054c",
+  "sdk_output_receipt_sha256": "3c8d0b77764476a23e71f3695576a820421cac255037a1edad9bf94a1c298e34",
+  "source_readback": "Canonical final manifest, workflow template and qualification bytes compared with authenticated GitHub content at immutable commit before receiving."
+}

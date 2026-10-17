@@ -1,0 +1,27 @@
+{
+  "schema": "M3_RECEIVED_GATE_EXECUTION_V1",
+  "gate": "donation_verifier",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "canonical_source_commit": "866e240ec1ac8600999d474eb7b8ce1930e326e3",
+  "target_master_commit": "f3c615693c41bac1bf6ff49ba53e83f85425bca0",
+  "target_root": "/workspace/scratch/f0742e08085b/M3jdk21",
+  "mode": "RECEIVED_SOURCE_QUALIFICATION",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-u",
+    "/workspace/scratch/f0742e08085b/M3jdk21/m3/collections/verify_donation.py",
+    "--cost-probe"
+  ],
+  "started_utc": "2026-10-17T13:32:28.308281+00:00",
+  "finished_utc": "2026-10-17T13:32:57.959812+00:00",
+  "exit_code": 0,
+  "source_files_unchanged": true,
+  "verifier_sha256": "cf68c4bfabbf7b1a1defcbfd513980135c30d797175cd3000ff03e3f3735926a",
+  "sdk_results_sha256": "cb219035b789abcdcc28be9149b8ecbb000247adfd9859c01cc3e1db8ae02076",
+  "java_home": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "junit_console_sha256": "329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a",
+  "source_census_sha256": "b8db6c7000d978ac967415777aee1fe071b049c78f84119a3a5afc04a14d1240",
+  "log_sha256": "e2805c52394415193bb71f4630468d6936adec2883c1b71681871bcb007ef772",
+  "status": "PASS"
+}

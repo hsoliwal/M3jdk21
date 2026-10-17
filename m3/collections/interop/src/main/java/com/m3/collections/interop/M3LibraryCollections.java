@@ -4,12 +4,15 @@
  */
 package com.m3.collections.interop;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.SortedSetMultimap;
 import com.google.common.collect.Table;
 import com.google.common.collect.Tables;
+import com.m3.collections.M3ObjectCounts;
 import com.m3.collections.M3LinkedHashMap;
 import com.m3.collections.M3LinkedHashSet;
 import com.m3.collections.M3LinkedList;
@@ -23,6 +26,14 @@ import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.Set;
+import org.apache.commons.collections4.Bag;
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.ListValuedMap;
+import org.apache.commons.collections4.MultiSet;
+import org.apache.commons.collections4.SetValuedMap;
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.map.MutableOrderedMap;
+import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
@@ -142,14 +153,60 @@ public final class M3LibraryCollections {
     public static <E> List<E> springAutoPopulatingList(AutoPopulatingList.ElementFactory<E> factory) {
         return new AutoPopulatingList<>(new M3LinkedList<E>(), factory);
     }
-    /** Apache ListValuedMap contract, not Guava ListMultimap or Spring MultiValueMap. */
-    public static <K, V> org.apache.commons.collections4.ListValuedMap<K, V> apacheListValuedMap() {
+
+    /** Guava count contract, with insertion-ordered distinct elements and primitive counts. */
+    public static <E> Multiset<E> guavaMultiset() { return new M3GuavaMultiset<>(); }
+
+    /** Guava view sharing the supplied count and flag columns; count overflow is rejected. */
+    public static <E> Multiset<E> guavaMultiset(M3ObjectCounts<E> owner) {
+        return new M3GuavaMultiset<>(owner);
+    }
+
+    /** Guava duplicate-value refusal and forcePut, over two M3 array-slot map owners. */
+    public static <K, V> BiMap<K, V> guavaBiMap() { return new M3GuavaBiMap<>(); }
+
+    /** Eclipse ordered-map operations over an insertion-ordered M3 map. */
+    public static <K, V> MutableOrderedMap<K, V> eclipseOrderedMap() {
+        return OrderedMapAdapter.adapt(new M3LinkedHashMap<>());
+    }
+
+    /** Eclipse occurrence contract over the shared M3 primitive count owner. */
+    public static <E> MutableBag<E> eclipseBag() { return new M3EclipseBag<>(); }
+
+    /** Eclipse view sharing the supplied count and flag columns. */
+    public static <E> MutableBag<E> eclipseBag(M3ObjectCounts<E> owner) {
+        return new M3EclipseBag<>(owner);
+    }
+
+    /** Apache list-valued map semantics, including duplicate values and live get views. */
+    public static <K, V> ListValuedMap<K, V> apacheListValuedMap() {
         return new M3ApacheListValuedMap<>();
     }
 
-    /** Apache SetValuedMap contract with M3-owned keys and value sets. */
-    public static <K, V> org.apache.commons.collections4.SetValuedMap<K, V> apacheSetValuedMap() {
+    /** Apache set-valued map semantics with M3 key directories and key-only value sets. */
+    public static <K, V> SetValuedMap<K, V> apacheSetValuedMap() {
         return new M3ApacheSetValuedMap<>();
+    }
+
+    /** Apache put displaces any key already owning the value; inverse identity is stable. */
+    public static <K, V> BidiMap<K, V> apacheBidiMap() { return new M3ApacheBidiMap<>(); }
+
+    /** Apache MultiSet old-count returns and per-element saturation over primitive counts. */
+    public static <E> MultiSet<E> apacheMultiSet() { return new M3ApacheMultiSet<>(); }
+
+    /** Apache MultiSet view sharing the supplied count and flag columns. */
+    public static <E> MultiSet<E> apacheMultiSet(M3ObjectCounts<E> owner) {
+        return new M3ApacheMultiSet<>(owner);
+    }
+
+    /** Legacy Apache Bag cardinality rules, including remove(element) removing all copies. */
+    @SuppressWarnings("deprecation")
+    public static <E> Bag<E> apacheBag() { return new M3ApacheBag<>(); }
+
+    /** Legacy Apache Bag view sharing the supplied count and flag columns. */
+    @SuppressWarnings("deprecation")
+    public static <E> Bag<E> apacheBag(M3ObjectCounts<E> owner) {
+        return new M3ApacheBag<>(owner);
     }
 
     /**

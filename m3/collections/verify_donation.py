@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026 by Hitesh Soliwal and contributors: seal exact-master admission gaps and the five-provider count/flag successor without rewriting historical receipts.
 # Modified 2026 by Hitesh Soliwal and contributors: qualify concurrent EnumSet in a new exact inventory; preserve all acceptance guards and historical receipts.
 # Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.
 """Verify the installed M3 collection donation with target-native Java/JNI checks.
@@ -19,6 +20,7 @@ import sys
 import xml.etree.ElementTree as ET
 import zipfile
 from m3_object_state_offset_receipt import include_successor as include_object_state_offset_successor
+from m3_object_state_offset_receipt import approved_successor as read_object_state_offset_successor
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -167,6 +169,221 @@ def include_path_mask_successor(historical_rows, receipt=_PATH_MASK_RECEIPT):
         extra.append((path, after))
     return [*historical_rows, *extra]
 
+# The original packet and its four successor receipts remain immutable. This
+# separate ledger reconciles only files already present at the exact cloned
+# master. It records an existing admission gap, not a change made by adapters.
+_MASTER_SOURCE_COMMIT = 'f3c615693c41bac1bf6ff49ba53e83f85425bca0'
+_MASTER_SOURCE_RECEIPT = HERE / 'recipe/five-provider-array-interop-20261017/master-source-manifest.tsv'
+_MASTER_SOURCE_RECEIPT_SHA256 = 'd5ae548c58ae31ea92898e90961a94743439956279bbd5dfb3293c7af052d163'
+_MASTER_SOURCE_PATHS_SHA256 = '5be1200c09ecfc74f779f44f7d0a920c713fcf808fd7f8e8b98c9a7a38e385b0'
+_HISTORICAL_SOURCE_CENSUS_SHA256 = '59aede4f036038b8ac6dbadadf6b668cc769601284519b8ce0218289d69abdd5'
+_MASTER_SOURCE_CENSUS_SHA256 = 'cf32fd1f8363b5cb8c25b712667dec4f541c14a2e9717ceb0f39ab607a5edb6a'
+_OBJECT_STATE_OFFSET_HELPER_SHA256 = '5c238acdff67e47e0284eabfc1ea7a585c8f3e44d9d78e98f272df9935d84fd8'
+_OBJECT_STATE_OFFSET_RECEIPT_SHA256 = 'f371b00237b1219cad8d131703929c32a06a56df567943411c40549e2351d4d5'
+
+# This task changes exactly six core source paths: a new count/flag owner and
+# its tests, two empty explicit constructors, and two corrected test oracles.
+_FIVE_PROVIDER_SOURCE_RECEIPT = HERE / 'recipe/five-provider-array-interop-20261017/source-manifest.tsv'
+_FIVE_PROVIDER_SOURCE_RECEIPT_SHA256 = '0cc34cf912f12928fa0b9a7b5aafdb48981140ea2fd99c70360caa5bb367a441'
+_FIVE_PROVIDER_SOURCE_PATHS_SHA256 = 'cc6617301df5aee5af4b4046810ac5cd9d5201386eaafff559608588d982915b'
+_FIVE_PROVIDER_SOURCE_CENSUS_SHA256 = '373cae4d211269549ea0092a74e6fb5359c28ad255d45dd8c90120863b6f1d6e'
+
+
+def _is_hex(value, length):
+    return (isinstance(value, str) and len(value) == length
+            and all(character in '0123456789abcdef' for character in value))
+
+
+def _receiver_relative_path(value):
+    if not isinstance(value, str):
+        raise SystemExit('Receiver path must be text')
+    relative = Path(value)
+    if (relative.is_absolute() or str(relative) != value or '..' in relative.parts
+            or '\\' in value or '\0' in value or not value.startswith('m3/collections/')):
+        raise SystemExit('Invalid receiver path: ' + value)
+    return relative
+
+
+def _require_unaliased_file(path, label):
+    path = Path(path).absolute()
+    if '..' in path.parts or any(part.is_symlink() for part in (path, *path.parents)):
+        raise SystemExit(label + ' is aliased: ' + str(path))
+    if not path.is_file():
+        raise SystemExit(label + ' is missing or not a regular file: ' + str(path))
+    return path
+
+
+def _checked_source_rows(rows, label):
+    current = {}
+    for cells in rows:
+        if not isinstance(cells, (list, tuple)) or len(cells) != 2:
+            raise SystemExit('Malformed ' + label + ' source row')
+        path, expected = cells
+        _receiver_relative_path(path)
+        if path in current:
+            raise SystemExit('Duplicate ' + label + ' source path: ' + path)
+        if not _is_hex(expected, 64):
+            raise SystemExit('Invalid ' + label + ' source digest: ' + path)
+        current[path] = expected
+    return current
+
+
+def _source_census_digest(rows):
+    return hashlib.sha256(''.join(path + '\t' + expected + '\n'
+        for path, expected in sorted(rows)).encode('utf-8')).hexdigest()
+
+
+def _include_source_successor(previous_rows, receipt, expected_receipt_digest,
+        row_count, expected_paths_digest, before_census, after_census, schema, label,
+        master_blobs=False):
+    """Require exact receipt bytes, exact ordered paths, and every prior digest."""
+    previous = _checked_source_rows(previous_rows, label + ' prior')
+    if _source_census_digest(previous.items()) != before_census:
+        raise SystemExit(label + ' predecessor census drift')
+    receipt = _require_unaliased_file(receipt, label + ' receipt')
+    if digest(receipt) != expected_receipt_digest:
+        raise SystemExit(label + ' receipt SHA-256 drift')
+    lines = receipt.read_text(encoding='utf-8').splitlines()
+    if (lines.count('# schema: ' + schema) != 1
+            or lines.count('# target_commit: ' + _MASTER_SOURCE_COMMIT) != 1):
+        raise SystemExit(label + ' receipt identity drift')
+    entries = [line.split('\t') for line in lines if line and not line.startswith('#')]
+    if len(entries) != row_count:
+        raise SystemExit(label + ' receipt source count drift')
+    current, paths = dict(previous), []
+    for cells in entries:
+        if len(cells) != 4:
+            raise SystemExit('Malformed ' + label + ' receipt row')
+        path, before, after, origin = cells
+        _receiver_relative_path(path)
+        if not path.startswith('m3/collections/src/') or path in paths:
+            raise SystemExit('Unapproved or duplicate ' + label + ' receipt path: ' + path)
+        if not _is_hex(after, 64) or (before != 'ABSENT' and not _is_hex(before, 64)):
+            raise SystemExit('Invalid ' + label + ' receipt digest: ' + path)
+        if ((master_blobs and not _is_hex(origin, 40))
+                or (not master_blobs and origin != path.rsplit('/', 1)[1] + '.txt')):
+            raise SystemExit('Invalid ' + label + ' source origin: ' + path)
+        if before == 'ABSENT':
+            if path in current:
+                raise SystemExit('Occupied new ' + label + ' source: ' + path)
+        elif current.get(path) != before:
+            raise SystemExit(label + ' source preimage drift: ' + path)
+        if before == after:
+            raise SystemExit('Unchanged ' + label + ' successor source: ' + path)
+        paths.append(path)
+        current[path] = after
+    path_digest = hashlib.sha256(''.join(path + '\n' for path in paths).encode('utf-8')).hexdigest()
+    if paths != sorted(paths) or path_digest != expected_paths_digest:
+        raise SystemExit(label + ' approved path census drift')
+    if _source_census_digest(current.items()) != after_census:
+        raise SystemExit(label + ' installed hash census drift')
+    return list(current.items())
+
+
+def include_master_source_reconciliation(previous_rows, receipt=_MASTER_SOURCE_RECEIPT):
+    """Account for the exact existing master gap without altering old receipts."""
+    return _include_source_successor(previous_rows, receipt, _MASTER_SOURCE_RECEIPT_SHA256,
+        133, _MASTER_SOURCE_PATHS_SHA256, _HISTORICAL_SOURCE_CENSUS_SHA256,
+        _MASTER_SOURCE_CENSUS_SHA256, 'M3_EXACT_MASTER_SOURCE_RECONCILIATION_V1',
+        'Exact-master reconciliation', master_blobs=True)
+
+
+def include_five_provider_source_successor(previous_rows, receipt=_FIVE_PROVIDER_SOURCE_RECEIPT):
+    """Admit only the six sealed task paths after exact-master reconciliation."""
+    return _include_source_successor(previous_rows, receipt, _FIVE_PROVIDER_SOURCE_RECEIPT_SHA256,
+        6, _FIVE_PROVIDER_SOURCE_PATHS_SHA256, _MASTER_SOURCE_CENSUS_SHA256,
+        _FIVE_PROVIDER_SOURCE_CENSUS_SHA256, 'M3_FIVE_PROVIDER_SOURCE_SUCCESSOR_V1',
+        'Five-provider source successor')
+
+
+def verify_source_census(rows, repo=REPO):
+    """Reject missing, changed, duplicate, unknown or symlinked source custody."""
+    current = _checked_source_rows(rows, 'installed')
+    if _source_census_digest(current.items()) != _FIVE_PROVIDER_SOURCE_CENSUS_SHA256:
+        raise SystemExit('Installed source hash census drift')
+    for path, expected in current.items():
+        source = _require_unaliased_file(repo / _receiver_relative_path(path), 'Installed source')
+        if digest(source) != expected:
+            raise SystemExit('Installed source drift: ' + path)
+    declared = {path for path in current if path.startswith('m3/collections/src/')}
+    actual = set()
+    source_root = repo / 'm3/collections/src'
+    if not source_root.is_dir() or any(part.is_symlink() for part in (source_root, *source_root.parents)):
+        raise SystemExit('Source census root missing or aliased')
+    for directory, names, files in os.walk(source_root, followlinks=False):
+        for name in names:
+            if (Path(directory) / name).is_symlink():
+                raise SystemExit('Symlinked source census directory: ' + str(Path(directory) / name))
+        for name in files:
+            source = _require_unaliased_file(Path(directory) / name, 'Source census member')
+            actual.add(source.relative_to(repo).as_posix())
+    if actual != declared:
+        raise SystemExit('Source set changed; qualify a successor packet: missing='
+                         + repr(sorted(declared - actual)) + ' unknown=' + repr(sorted(actual - declared)))
+    return {path for path in declared if path.endswith('.java')}
+
+
+def verify_source_admission(here=HERE, repo=REPO):
+    """Verify the complete immutable historical chain and its two exact successors."""
+    packet_path = _require_unaliased_file(here / 'synexia-donation.json', 'Donation packet')
+    packet = read_donation_packet(packet_path)
+    manifest_name = packet.get('installed_source_manifest', 'qualification/installed-source-enum-set-20261008.tsv')
+    if not isinstance(manifest_name, str):
+        raise SystemExit('Invalid installed source manifest path')
+    relative = _receiver_relative_path('m3/collections/' + manifest_name)
+    manifest = _require_unaliased_file(repo / relative, 'Historical installed source manifest')
+    if digest(manifest) != packet['installed_source_manifest_sha256']:
+        raise SystemExit('Installed source manifest drift; reconcile with canonical recipe before verifying')
+    rows = [line.split('\t') for line in manifest.read_text(encoding='utf-8').splitlines()
+            if line and not line.startswith('#')]
+    historical_receipts = []
+    for original, expected, include in (
+            (_FILTERED_VIEW_RECEIPT, _FILTERED_VIEW_SHA256, include_filtered_view_successor),
+            (_REPRESENTATIVE_RECEIPT, _REPRESENTATIVE_SHA256, include_stored_representative_successor),
+            (_PATH_MASK_RECEIPT, _PATH_MASK_SHA256, include_path_mask_successor)):
+        receipt = _require_unaliased_file(here / original.relative_to(HERE), 'Historical successor receipt')
+        rows = include(rows, receipt=receipt)
+        historical_receipts.append({'path': receipt.relative_to(repo).as_posix(), 'sha256': expected})
+    offset_helper = _require_unaliased_file(here / 'm3_object_state_offset_receipt.py',
+                                            'Historical object-state admission helper')
+    if digest(offset_helper) != _OBJECT_STATE_OFFSET_HELPER_SHA256:
+        raise SystemExit('Historical object-state admission helper SHA-256 drift')
+    offset_receipt = _require_unaliased_file(here / 'qualification/object-state-offset-jni-20261017.tsv',
+                                             'Historical object-state successor receipt')
+    approved_offsets = read_object_state_offset_successor(receipt=offset_receipt)
+    rows = include_object_state_offset_successor(rows, successor=approved_offsets)
+    historical_receipts.append({'path': offset_receipt.relative_to(repo).as_posix(),
+                                 'sha256': _OBJECT_STATE_OFFSET_RECEIPT_SHA256})
+    master_receipt = here / _MASTER_SOURCE_RECEIPT.relative_to(HERE)
+    task_receipt = here / _FIVE_PROVIDER_SOURCE_RECEIPT.relative_to(HERE)
+    rows = include_master_source_reconciliation(rows, receipt=master_receipt)
+    rows = include_five_provider_source_successor(rows, receipt=task_receipt)
+    declared_java = verify_source_census(rows, repo=repo)
+    admission = {
+        'schema': 'M3_SOURCE_ADMISSION_SUCCESSION_V1',
+        'historical_installed_manifest': {'path': manifest.relative_to(repo).as_posix(), 'sha256': digest(manifest)},
+        'historical_successors': historical_receipts,
+        'historical_admission_helper': {'path': offset_helper.relative_to(repo).as_posix(),
+                                         'sha256': _OBJECT_STATE_OFFSET_HELPER_SHA256},
+        'master_reconciliation': {
+            'target_commit': _MASTER_SOURCE_COMMIT,
+            'path': master_receipt.relative_to(repo).as_posix(),
+            'sha256': _MASTER_SOURCE_RECEIPT_SHA256,
+            'source_census_sha256': _MASTER_SOURCE_CENSUS_SHA256,
+            'existing_admission_gap': {'unlisted_java_sources': 115, 'unlisted_native_sources': 9,
+                                       'unlisted_resources': 1, 'stale_java_digests': 8},
+        },
+        'task_successor': {'path': task_receipt.relative_to(repo).as_posix(),
+                           'sha256': _FIVE_PROVIDER_SOURCE_RECEIPT_SHA256, 'changed_or_added_paths': 6},
+        'installed_source_census_sha256': _FIVE_PROVIDER_SOURCE_CENSUS_SHA256,
+        'installed_receipt_rows': len(rows),
+        'java_sources': len(declared_java),
+        'native_sources': sum(path.startswith('m3/collections/src/') and path.endswith('.c') for path, _ in rows),
+        'resource_files': sum(path.startswith('m3/collections/src/main/resources/') for path, _ in rows),
+    }
+    return manifest, rows, declared_java, admission
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
@@ -199,34 +416,7 @@ def main():
     version = run('01-java-version', [java_home / 'bin/java', '-version'])
     if 'version "21.' not in version and 'version "21"' not in version:
         raise SystemExit('The qualified baseline requires Java 21')
-    packet = read_donation_packet()
-    manifest_name = packet.get('installed_source_manifest', 'qualification/installed-source-enum-set-20261008.tsv')
-    manifest_relative = Path(manifest_name)
-    if manifest_relative.is_absolute() or '..' in manifest_relative.parts:
-        raise SystemExit('Invalid installed source manifest path')
-    manifest = HERE / manifest_relative
-    if digest(manifest) != packet['installed_source_manifest_sha256']:
-        raise SystemExit('Installed source manifest drift: actual=' + digest(manifest) + ' expected=' + packet['installed_source_manifest_sha256'] + '; reconcile with canonical recipe before verifying')
-    rows = [line.split('\t') for line in manifest.read_text().splitlines()
-            if line and not line.startswith('#')]
-    rows = include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows)))
-    rows = include_object_state_offset_successor(rows)
-    if len({row[0] for row in rows}) != len(rows):
-        raise SystemExit('Duplicate installed source path')
-    for path, expected in rows:
-        relative = Path(path)
-        if relative.is_absolute() or '..' in relative.parts or not path.startswith('m3/collections/'):
-            raise SystemExit('Invalid receiver path: ' + path)
-        source = REPO / relative
-        if (not source.is_file()
-                or (path.endswith("/M3ObjectStateSlots28.java")
-                    or path.endswith("/M3ObjectStateSlots28SelfTest.java")) and source.is_symlink()
-                or digest(source) != expected):
-            raise SystemExit('Installed source drift: ' + path)
-    declared_java = {path for path, _ in rows if path.endswith('.java') and '/src/' in path}
-    actual_java = {str(path.relative_to(REPO)) for path in (HERE / 'src').rglob('*.java')}
-    if declared_java != actual_java:
-        raise SystemExit('Java source set changed; qualify a successor packet')
+    manifest, rows, declared_java, admission = verify_source_admission()
     mains = sorted(REPO / path for path in declared_java if '/src/main/' in path)
     tests = sorted(REPO / path for path in declared_java if '/src/test/' in path)
     probes = [HERE / 'verification' / (name + '.java') for name in
@@ -236,6 +426,13 @@ def main():
     test_classes.mkdir()
     common = [java_home / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror']
     run('02-module-compile', common + ['-d', classes] + mains)
+    collection_resources = [(path, expected) for path, expected in rows
+                            if path.startswith('m3/collections/src/main/resources/')]
+    for path, expected in collection_resources:
+        relative_resource = Path(path).relative_to('m3/collections/src/main/resources')
+        destination = classes / relative_resource
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(REPO / path, destination)
     run('03-test-compile', common + ['-cp', str(classes) + os.pathsep + str(junit),
                                    '-d', test_classes] + tests + probes)
     runtime_classpath = str(classes) + os.pathsep + str(test_classes)
@@ -269,6 +466,10 @@ def main():
         for name in names:
             if archive.read('META-INF/' + name) != (HERE / name).read_bytes():
                 raise SystemExit('Packaged attribution/provenance mismatch: ' + name)
+        for path, expected in collection_resources:
+            name = Path(path).relative_to('m3/collections/src/main/resources').as_posix()
+            if hashlib.sha256(archive.read(name)).hexdigest() != expected:
+                raise SystemExit('Packaged collection resource drift: ' + path)
     native = HERE / 'src/main/native/collections/segmented_bit_lane.c'
     native_args = [os.environ.get('CC', 'gcc'), '-std=c17', '-O2', '-Wall', '-Wextra', '-Werror',
                    '-fsanitize=undefined', '-fno-sanitize-recover=all',
@@ -280,6 +481,28 @@ def main():
                                  'SegmentedLaneNativeProbe', library])
     run('10-prepared-allocation', [java_home / 'bin/java', '-Xbatch', '-cp', runtime_classpath,
                                   'PreparedLaneAllocationProbe'])
+    # The ordinary core scan exercises the Java backend. This separately counted
+    # gate requires the real path-mask JNI backend for count/flag window parity.
+    path_mask_native = HERE / 'src/main/native/collections/m3_index_path_masks.c'
+    path_mask_library = target / 'libm3_collections_pathmask.so'
+    run('10b-path-mask-native-static', native_args + ['-fsyntax-only', path_mask_native])
+    run('10c-path-mask-native-compile', native_args + ['-shared', '-fPIC', path_mask_native, '-o', path_mask_library])
+    native_count_reports = target / 'object-counts-native-junit-reports'
+    run('10d-object-counts-checked-jni', [java_home / 'bin/java', '-Xcheck:jni',
+        '-Dm3.interop.requireNative=true', '-Djava.library.path=' + str(target), '-jar', junit,
+        'execute', '--disable-banner', '--class-path', runtime_classpath,
+        '--select-class', 'com.m3.collections.M3ObjectCountsTest', '--fail-if-no-tests',
+        '--reports-dir', native_count_reports])
+    native_count_totals = {'tests': 0, 'failures': 0, 'errors': 0, 'skipped': 0}
+    for report in native_count_reports.glob('TEST-*.xml'):
+        suite = ET.parse(report).getroot()
+        for key in native_count_totals:
+            native_count_totals[key] += int(suite.attrib.get(key, '0'))
+    if (not native_count_totals['tests']
+            or any(native_count_totals[key] for key in ('failures', 'errors', 'skipped'))):
+        raise SystemExit('Object-counts JNI acceptance requires nonzero tests and no failures/errors/skips: '
+                         + repr(native_count_totals))
+
     if args.cost_probe:
         cost = run('11-collection-cost-probe', [java_home / 'bin/java', '-Xbatch', '-cp', runtime_classpath,
                                                'com.m3.collections.M3CollectionCostProbe'])
@@ -287,6 +510,13 @@ def main():
     receipt = {'copyright': 'Copyright 2026 Hitesh Soliwal and contributors', 'license': 'Apache-2.0', 'schema': 'M3_COLLECTION_RECEIVING_QUALIFICATION_V1',
                'scope': 'SEPARATELY_BUILT_COLLECTION_MODULE',
                'installed_source_manifest_sha256': digest(manifest),
+               'source_admission': admission,
+               'packaged_collection_resources': [path for path, _ in collection_resources],
+               'object_counts_checked_jni': {'status': 'PASS', 'junit': native_count_totals,
+                   'native_library': 'libm3_collections_pathmask.so',
+                   'native_source_sha256': digest(path_mask_native),
+                   'required_property': 'm3.interop.requireNative=true',
+                   'jvm_check': '-Xcheck:jni', 'undefined_behavior_sanitizer': 'PASS'},
                'java_sources': len(mains), 'test_sources': len(tests), 'junit': totals,
                'main_self_tests': ['M3LazyTreeMapSelfTest:PASS', 'M3LazyValueStateSelfTest:PASS'],
                'java_compile': '--release 21 -Xlint:all,-module -Werror',

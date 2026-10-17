@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FiveProviderArrayInterop20261017
+displayName: M3 five-provider collections over array slots and flags
+description: Applies exact qualified provider-adapter and primitive-count columns while preserving existing provider contracts and canonical recipe ownership.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: five-provider-array-interop-20261017
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: five-provider-array-interop-20261017

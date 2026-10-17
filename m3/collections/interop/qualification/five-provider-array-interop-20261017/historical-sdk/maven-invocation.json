@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "--strict-checksums",
+    "-s",
+    "/tmp/m3-maven-settings.xml",
+    "-B",
+    "-ntp",
+    "-f",
+    "/tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/pom.xml",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-Dmaven.test.additionalClasspath=/tmp/m3-maven-repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar,/tmp/m3-maven-repository/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar",
+    "-DargLine=--add-opens=java.base/jdk.internal.loader=ALL-UNNAMED",
+    "clean",
+    "verify"
+  ],
+  "cwd": "/tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017",
+  "JAVA_HOME": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "MAVEN_OPTS": "-Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts",
+  "semantics": "Original clean verify, untouched recipe and 19 historical postimages. Explicit pinned SLF4J1.7.36 test classpath plus forked-JVM opening of jdk.internal.loader restores pinned ClassGraph4.8.165 scanning under Java21; no assertions changed."
+}

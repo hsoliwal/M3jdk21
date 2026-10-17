@@ -20,12 +20,12 @@ public final class M3LibraryBindingsSelfTest {
     @FunctionalInterface private interface Action { void run() throws Exception; }
     public static void main(String[] args) throws Exception {
         var all = M3LibraryBindings.all();
-        check(all.size() == 22);
+        check(all.size() == 33);
         check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.JDK).size() == 6);
-        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.GUAVA).size() == 6);
-        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.ECLIPSE_COLLECTIONS).size() == 5);
+        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.GUAVA).size() == 9);
+        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.ECLIPSE_COLLECTIONS).size() == 8);
         check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.SPRING_FRAMEWORK).size() == 3);
-        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.APACHE_COMMONS_COLLECTIONS).size() == 2);
+        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.APACHE_COMMONS_COLLECTIONS).size() == 7);
         check(M3LibraryBindings.all() == all);
         fails(UnsupportedOperationException.class, () -> all.clear());
         for (var binding : all) {
@@ -53,7 +53,7 @@ public final class M3LibraryBindingsSelfTest {
         check(M3LibraryBindings.read(new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8))).equals(all));
         var line = text.lines().skip(1).findFirst().orElseThrow();
         String overload = line.replace("jdkMap\t\t", "jdkMap\tjava.util.Comparator\t");
-        check(M3LibraryBindings.read(new ByteArrayInputStream((text + overload + "\n").getBytes(StandardCharsets.UTF_8))).size() == 23);
+        check(M3LibraryBindings.read(new ByteArrayInputStream((text + overload + "\n").getBytes(StandardCharsets.UTF_8))).size() == 34);
         for (String bad : List.of(text + line + "\n", text.replace("GUAVA", "GUVAVA"),
                 text.replace("jdkMap", "apacheMap"), text.replace("com.m3.collections.M3LinkedHashMap", "java.util.HashMap"),
                 text.replace("java.util.Map", "org.springframework.util.MultiValueMap"),
@@ -63,6 +63,6 @@ public final class M3LibraryBindingsSelfTest {
         fails(java.nio.charset.CharacterCodingException.class,
                 () -> M3LibraryBindings.read(new ByteArrayInputStream(new byte[]{(byte)0xc3, 0x28})));
         fails(IllegalArgumentException.class, () -> M3LibraryBindings.read(new ByteArrayInputStream(new byte[1_048_577])));
-        System.out.println("M3LibraryBindingsSelfTest checks=" + checks + " families=5 bindings=22");
+        System.out.println("M3LibraryBindingsSelfTest checks=" + checks + " families=5 bindings=33");
     }
 }

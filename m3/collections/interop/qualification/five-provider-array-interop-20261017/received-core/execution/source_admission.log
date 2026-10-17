@@ -1,0 +1,42 @@
+$ ['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3', '-u', '/workspace/scratch/f0742e08085b/Synexia/synexia-openrewrite-recipes/recipes/m3-five-provider-array-interop-20261017/contract/test_source_admission.py', '--target', '/workspace/scratch/f0742e08085b/M3jdk21', '--evidence', '/tmp/m3-five-provider-received-f3c61569-20261017/source-admission']
+test_changed_historical_before_digest_refused (__main__.AdmissionContract.test_changed_historical_before_digest_refused) ... ok
+test_changed_historical_helper_refused (__main__.AdmissionContract.test_changed_historical_helper_refused) ... ok
+test_changed_historical_source_refused (__main__.AdmissionContract.test_changed_historical_source_refused) ... ok
+test_changed_master_receipt_refused (__main__.AdmissionContract.test_changed_master_receipt_refused) ... ok
+test_changed_object_state_offset_receipt_refused (__main__.AdmissionContract.test_changed_object_state_offset_receipt_refused) ... ok
+test_changed_reconciled_before_digest_refused (__main__.AdmissionContract.test_changed_reconciled_before_digest_refused) ... ok
+test_changed_reconciled_existing_source_refused (__main__.AdmissionContract.test_changed_reconciled_existing_source_refused) ... ok
+test_changed_reconciled_native_source_refused (__main__.AdmissionContract.test_changed_reconciled_native_source_refused) ... ok
+test_changed_reconciled_newly_admitted_source_refused (__main__.AdmissionContract.test_changed_reconciled_newly_admitted_source_refused) ... ok
+test_changed_task_source_refused (__main__.AdmissionContract.test_changed_task_source_refused) ... ok
+test_duplicate_installed_census_refused (__main__.AdmissionContract.test_duplicate_installed_census_refused) ... ok
+test_duplicate_packet_key_refused (__main__.AdmissionContract.test_duplicate_packet_key_refused) ... ok
+test_duplicate_predecessor_census_refused (__main__.AdmissionContract.test_duplicate_predecessor_census_refused) ... ok
+test_duplicate_receipt_row_refused (__main__.AdmissionContract.test_duplicate_receipt_row_refused) ... ok
+test_exact_current_source_chain_passes (__main__.AdmissionContract.test_exact_current_source_chain_passes) ... ok
+test_missing_historical_receipt_refused (__main__.AdmissionContract.test_missing_historical_receipt_refused) ... ok
+test_missing_historical_source_refused (__main__.AdmissionContract.test_missing_historical_source_refused) ... ok
+test_missing_master_receipt_refused (__main__.AdmissionContract.test_missing_master_receipt_refused) ... ok
+test_missing_object_state_offset_receipt_refused (__main__.AdmissionContract.test_missing_object_state_offset_receipt_refused) ... ok
+test_missing_resource_refused (__main__.AdmissionContract.test_missing_resource_refused) ... ok
+test_missing_task_receipt_refused (__main__.AdmissionContract.test_missing_task_receipt_refused) ... ok
+test_missing_task_source_refused (__main__.AdmissionContract.test_missing_task_source_refused) ... ok
+test_noncanonical_census_paths_refused (__main__.AdmissionContract.test_noncanonical_census_paths_refused) ... ok
+test_occupied_new_task_source_refused (__main__.AdmissionContract.test_occupied_new_task_source_refused) ... ok
+test_symlinked_historical_receipt_parent_refused (__main__.AdmissionContract.test_symlinked_historical_receipt_parent_refused) ... ok
+test_symlinked_known_source_directory_refused (__main__.AdmissionContract.test_symlinked_known_source_directory_refused) ... ok
+test_symlinked_receipt_parent_refused (__main__.AdmissionContract.test_symlinked_receipt_parent_refused) ... ok
+test_symlinked_source_refused_even_with_exact_bytes (__main__.AdmissionContract.test_symlinked_source_refused_even_with_exact_bytes) ... ok
+test_symlinked_task_receipt_refused (__main__.AdmissionContract.test_symlinked_task_receipt_refused) ... ok
+test_symlinked_unknown_census_directory_refused (__main__.AdmissionContract.test_symlinked_unknown_census_directory_refused) ... ok
+test_unknown_java_source_refused (__main__.AdmissionContract.test_unknown_java_source_refused) ... ok
+test_unknown_native_source_refused (__main__.AdmissionContract.test_unknown_native_source_refused) ... ok
+test_unknown_receipt_path_refused (__main__.AdmissionContract.test_unknown_receipt_path_refused) ... ok
+test_unknown_resource_refused (__main__.AdmissionContract.test_unknown_resource_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 1.351s
+
+OK
+
+EXIT=0

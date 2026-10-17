@@ -1,0 +1,638 @@
+loader=jdk.internal.loader.ClassLoaders$AppClassLoader@c387f44
+resource=file:/tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/classes/META-INF/rewrite/m3-sdk-family-names.yml
+Oct 17, 2026 7:47:09 AM nonapi.io.github.classgraph.utils.LogNode flush
+INFO: 2026-10-17T07:47:08.818-0600	ClassGraph	ClassGraph version 4.8.165
+2026-10-17T07:47:08.819-0600	ClassGraph	Operating system: Linux 6.18.55 amd64
+2026-10-17T07:47:08.819-0600	ClassGraph	Java version: 21.0.12.1 / 21.0.12.1+1-LTS (Eclipse Adoptium)
+2026-10-17T07:47:08.819-0600	ClassGraph	Java home: /tmp/m3-toolchain/jdk-21.0.12.1+1
+2026-10-17T07:47:08.828-0600	ClassGraph	ScanSpec:
+2026-10-17T07:47:08.829-0600	ClassGraph	-- packageAcceptReject: accept: ["META-INF.rewrite"]; acceptPrefixes: ["", "/", "META-INF.", "META-INF.rewrite."]
+2026-10-17T07:47:08.829-0600	ClassGraph	-- packagePrefixAcceptReject: acceptPrefixes: ["META-INF.rewrite."]
+2026-10-17T07:47:08.829-0600	ClassGraph	-- pathAcceptReject: accept: ["META-INF/rewrite/"]; acceptPrefixes: ["", "/", "META-INF/", "META-INF/rewrite/"]
+2026-10-17T07:47:08.829-0600	ClassGraph	-- pathPrefixAcceptReject: acceptPrefixes: ["META-INF/rewrite/"]
+2026-10-17T07:47:08.829-0600	ClassGraph	-- classAcceptReject: 
+2026-10-17T07:47:08.829-0600	ClassGraph	-- classfilePathAcceptReject: 
+2026-10-17T07:47:08.829-0600	ClassGraph	-- classPackageAcceptReject: 
+2026-10-17T07:47:08.829-0600	ClassGraph	-- classPackagePathAcceptReject: 
+2026-10-17T07:47:08.829-0600	ClassGraph	-- moduleAcceptReject: 
+2026-10-17T07:47:08.829-0600	ClassGraph	-- jarAcceptReject: 
+2026-10-17T07:47:08.829-0600	ClassGraph	-- classpathElementResourcePathAcceptReject: 
+2026-10-17T07:47:08.829-0600	ClassGraph	-- libOrExtJarAcceptReject: 
+2026-10-17T07:47:08.831-0600	ClassGraph	-- scanJars: true
+2026-10-17T07:47:08.831-0600	ClassGraph	-- scanNestedJars: true
+2026-10-17T07:47:08.831-0600	ClassGraph	-- scanDirs: true
+2026-10-17T07:47:08.831-0600	ClassGraph	-- scanModules: true
+2026-10-17T07:47:08.832-0600	ClassGraph	-- enableClassInfo: false
+2026-10-17T07:47:08.832-0600	ClassGraph	-- enableFieldInfo: false
+2026-10-17T07:47:08.832-0600	ClassGraph	-- enableMethodInfo: false
+2026-10-17T07:47:08.832-0600	ClassGraph	-- enableAnnotationInfo: false
+2026-10-17T07:47:08.832-0600	ClassGraph	-- enableStaticFinalFieldConstantInitializerValues: false
+2026-10-17T07:47:08.832-0600	ClassGraph	-- enableInterClassDependencies: false
+2026-10-17T07:47:08.832-0600	ClassGraph	-- enableExternalClasses: false
+2026-10-17T07:47:08.832-0600	ClassGraph	-- enableSystemJarsAndModules: false
+2026-10-17T07:47:08.833-0600	ClassGraph	-- ignoreClassVisibility: false
+2026-10-17T07:47:08.833-0600	ClassGraph	-- ignoreFieldVisibility: false
+2026-10-17T07:47:08.833-0600	ClassGraph	-- ignoreMethodVisibility: false
+2026-10-17T07:47:08.833-0600	ClassGraph	-- disableRuntimeInvisibleAnnotations: false
+2026-10-17T07:47:08.833-0600	ClassGraph	-- extendScanningUpwardsToExternalClasses: true
+2026-10-17T07:47:08.833-0600	ClassGraph	-- allowedURLSchemes: null
+2026-10-17T07:47:08.833-0600	ClassGraph	-- addedClassLoaders: null
+2026-10-17T07:47:08.833-0600	ClassGraph	-- overrideClassLoaders: [jdk.internal.loader.ClassLoaders$AppClassLoader@c387f44]
+2026-10-17T07:47:08.834-0600	ClassGraph	-- addedModuleLayers: null
+2026-10-17T07:47:08.834-0600	ClassGraph	-- overrideModuleLayers: null
+2026-10-17T07:47:08.834-0600	ClassGraph	-- overrideClasspath: null
+2026-10-17T07:47:08.834-0600	ClassGraph	-- classpathElementFilters: null
+2026-10-17T07:47:08.834-0600	ClassGraph	-- initializeLoadedClasses: false
+2026-10-17T07:47:08.834-0600	ClassGraph	-- removeTemporaryFilesAfterScan: false
+2026-10-17T07:47:08.834-0600	ClassGraph	-- ignoreParentClassLoaders: true
+2026-10-17T07:47:08.834-0600	ClassGraph	-- ignoreParentModuleLayers: false
+2026-10-17T07:47:08.835-0600	ClassGraph	-- modulePathInfo: 
+2026-10-17T07:47:08.835-0600	ClassGraph	-- maxBufferedJarRAMSize: 67108864
+2026-10-17T07:47:08.835-0600	ClassGraph	-- enableMemoryMapping: false
+2026-10-17T07:47:08.835-0600	ClassGraph	-- enableMultiReleaseVersions: false
+2026-10-17T07:47:08.836-0600	ClassGraph	Number of worker threads: 14
+2026-10-17T07:47:08.845-0600	ClassGraph	Finding classpath
+2026-10-17T07:47:08.846-0600	ClassGraph	-- Finding classpath and modules
+2026-10-17T07:47:08.846-0600	ClassGraph	---- overrideClassLoaders() was called with an instance of jdk.internal.loader.ClassLoaders$AppClassLoader, which is a system classloader, so enableSystemJarsAndModules() was called automatically
+2026-10-17T07:47:08.846-0600	ClassGraph	---- overrideClassLoaders() was called with an instance of jdk.internal.loader.ClassLoaders$AppClassLoader, which is a system classloader, so the `java.lang.path` classpath will also be scanned
+2026-10-17T07:47:08.874-0600	ClassGraph	---- System modules found:
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.base, location=jrt:/java.base]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.compiler, location=jrt:/java.compiler]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.datatransfer, location=jrt:/java.datatransfer]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.desktop, location=jrt:/java.desktop]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.instrument, location=jrt:/java.instrument]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.logging, location=jrt:/java.logging]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.management, location=jrt:/java.management]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.management.rmi, location=jrt:/java.management.rmi]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.naming, location=jrt:/java.naming]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.net.http, location=jrt:/java.net.http]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.prefs, location=jrt:/java.prefs]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.rmi, location=jrt:/java.rmi]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.scripting, location=jrt:/java.scripting]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.security.jgss, location=jrt:/java.security.jgss]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.security.sasl, location=jrt:/java.security.sasl]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.smartcardio, location=jrt:/java.smartcardio]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.sql, location=jrt:/java.sql]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.sql.rowset, location=jrt:/java.sql.rowset]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.transaction.xa, location=jrt:/java.transaction.xa]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.xml, location=jrt:/java.xml]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module java.xml.crypto, location=jrt:/java.xml.crypto]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.accessibility, location=jrt:/jdk.accessibility]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.attach, location=jrt:/jdk.attach]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.charsets, location=jrt:/jdk.charsets]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.compiler, location=jrt:/jdk.compiler]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.crypto.cryptoki, location=jrt:/jdk.crypto.cryptoki]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.crypto.ec, location=jrt:/jdk.crypto.ec]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.dynalink, location=jrt:/jdk.dynalink]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.editpad, location=jrt:/jdk.editpad]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.httpserver, location=jrt:/jdk.httpserver]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.internal.ed, location=jrt:/jdk.internal.ed]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.internal.jvmstat, location=jrt:/jdk.internal.jvmstat]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.internal.le, location=jrt:/jdk.internal.le]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.internal.opt, location=jrt:/jdk.internal.opt]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.jartool, location=jrt:/jdk.jartool]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.javadoc, location=jrt:/jdk.javadoc]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.jconsole, location=jrt:/jdk.jconsole]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.jdeps, location=jrt:/jdk.jdeps]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.jdi, location=jrt:/jdk.jdi]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.jdwp.agent, location=jrt:/jdk.jdwp.agent]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.jfr, location=jrt:/jdk.jfr]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.jlink, location=jrt:/jdk.jlink]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.jpackage, location=jrt:/jdk.jpackage]
+2026-10-17T07:47:08.874-0600	ClassGraph	------ [module jdk.jshell, location=jrt:/jdk.jshell]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.jsobject, location=jrt:/jdk.jsobject]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.jstatd, location=jrt:/jdk.jstatd]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.localedata, location=jrt:/jdk.localedata]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.management, location=jrt:/jdk.management]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.management.agent, location=jrt:/jdk.management.agent]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.management.jfr, location=jrt:/jdk.management.jfr]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.naming.dns, location=jrt:/jdk.naming.dns]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.naming.rmi, location=jrt:/jdk.naming.rmi]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.net, location=jrt:/jdk.net]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.nio.mapmode, location=jrt:/jdk.nio.mapmode]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.random, location=jrt:/jdk.random]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.sctp, location=jrt:/jdk.sctp]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.security.auth, location=jrt:/jdk.security.auth]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.security.jgss, location=jrt:/jdk.security.jgss]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.unsupported, location=jrt:/jdk.unsupported]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.unsupported.desktop, location=jrt:/jdk.unsupported.desktop]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.xml.dom, location=jrt:/jdk.xml.dom]
+2026-10-17T07:47:08.875-0600	ClassGraph	------ [module jdk.zipfs, location=jrt:/jdk.zipfs]
+2026-10-17T07:47:08.875-0600	ClassGraph	---- Scanning of non-system modules is not enabled
+2026-10-17T07:47:08.885-0600	ClassGraph	---- System jars:
+2026-10-17T07:47:08.885-0600	ClassGraph	------ Scanning disabled for lib or ext jar: /tmp/m3-toolchain/jdk-21.0.12.1+1/lib/jrt-fs.jar
+2026-10-17T07:47:08.885-0600	ClassGraph	---- ClassLoaderHandlers:
+2026-10-17T07:47:08.885-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.AntClassLoaderHandler
+2026-10-17T07:47:08.885-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.EquinoxClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.EquinoxContextFinderClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.FelixClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.JBossClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.WeblogicClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.WebsphereLibertyClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.WebsphereTraditionalClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.OSGiDefaultClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.SpringBootRestartClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.TomcatWebappClassLoaderBaseHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.CxfContainerClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.PlexusClassWorldsClassRealmClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.QuarkusClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.UnoOneJarClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.ParentLastDelegationOrderTestClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.JPMSClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.URLClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	------ nonapi.io.github.classgraph.classloaderhandler.ClassGraphClassLoaderHandler
+2026-10-17T07:47:08.886-0600	ClassGraph	---- Finding unique classloaders in delegation order
+2026-10-17T07:47:08.890-0600	ClassGraph	---- Obtaining URLs from classloaders in delegation order
+2026-10-17T07:47:08.890-0600	ClassGraph	------ Ignoring parent classloader jdk.internal.loader.ClassLoaders$PlatformClassLoader@2c8d66b2, normally handled by nonapi.io.github.classgraph.classloaderhandler.JPMSClassLoaderHandler
+2026-10-17T07:47:08.890-0600	ClassGraph	------ Classloader jdk.internal.loader.ClassLoaders$AppClassLoader is handled by nonapi.io.github.classgraph.classloaderhandler.JPMSClassLoaderHandler
+2026-10-17T07:47:08.895-0600	ClassGraph	-------- Found classpath element: /tmp/m3-five-provider-historical-sdk-fixture-20261017/discovery-probe
+2026-10-17T07:47:08.895-0600	ClassGraph	-------- Found classpath element: /tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/test-classes
+2026-10-17T07:47:08.895-0600	ClassGraph	-------- Found classpath element: /tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/classes
+2026-10-17T07:47:08.895-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar
+2026-10-17T07:47:08.895-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar
+2026-10-17T07:47:08.895-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar
+2026-10-17T07:47:08.895-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/ow2/asm/asm/9.3/asm-9.3.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/ow2/asm/asm-util/9.3/asm-util-9.3.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/ow2/asm/asm-tree/9.3/asm-tree-9.3.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar
+2026-10-17T07:47:08.896-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar
+2026-10-17T07:47:08.897-0600	ClassGraph	-------- Found classpath element: /tmp/m3-maven-repository/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar
+2026-10-17T07:47:08.898-0600	ClassGraph	-------- Found classpath element: /workspace/scratch/f0742e08085b
+2026-10-17T07:47:08.902-0600	ClassGraph	Opening classpath elements (took 0.065232 sec)
+2026-10-17T07:47:08.907-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar
+2026-10-17T07:47:08.910-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar
+2026-10-17T07:47:08.937-0600	ClassGraph	------ This is a multi-release jar, with versions: 9
+2026-10-17T07:47:08.907-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/ow2/asm/asm/9.3/asm-9.3.jar
+2026-10-17T07:47:08.907-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/ow2/asm/asm/9.3/asm-9.3.jar
+2026-10-17T07:47:08.907-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-five-provider-historical-sdk-fixture-20261017/discovery-probe/
+2026-10-17T07:47:08.907-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar
+2026-10-17T07:47:08.910-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar
+2026-10-17T07:47:08.907-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/ow2/asm/asm-util/9.3/asm-util-9.3.jar
+2026-10-17T07:47:08.907-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/ow2/asm/asm-util/9.3/asm-util-9.3.jar
+2026-10-17T07:47:08.908-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar
+2026-10-17T07:47:08.908-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar
+2026-10-17T07:47:08.908-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar
+2026-10-17T07:47:08.908-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar
+2026-10-17T07:47:08.908-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar
+2026-10-17T07:47:08.908-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar
+2026-10-17T07:47:08.908-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/test-classes/
+2026-10-17T07:47:08.909-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/ow2/asm/asm-tree/9.3/asm-tree-9.3.jar
+2026-10-17T07:47:08.909-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/ow2/asm/asm-tree/9.3/asm-tree-9.3.jar
+2026-10-17T07:47:08.910-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar
+2026-10-17T07:47:08.911-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar
+2026-10-17T07:47:08.928-0600	ClassGraph	------ This is a multi-release jar, with versions: 9
+2026-10-17T07:47:08.910-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar
+2026-10-17T07:47:08.911-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar
+2026-10-17T07:47:08.941-0600	ClassGraph	------ This is a multi-release jar, with versions: 9
+2026-10-17T07:47:08.910-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/classes/
+2026-10-17T07:47:08.910-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar
+2026-10-17T07:47:08.910-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar
+2026-10-17T07:47:08.934-0600	ClassGraph	------ This is a multi-release jar, with versions: 9, 11, 17, 21
+2026-10-17T07:47:08.934-0600	ClassGraph	------ META-INF/versions/21/com/fasterxml/jackson/core/io/doubleparser/FastDoubleSwar.class masks META-INF/versions/17/com/fasterxml/jackson/core/io/doubleparser/FastDoubleSwar.class
+2026-10-17T07:47:08.934-0600	ClassGraph	------ META-INF/versions/21/com/fasterxml/jackson/core/io/doubleparser/FastIntegerMath.class masks META-INF/versions/17/com/fasterxml/jackson/core/io/doubleparser/FastIntegerMath.class
+2026-10-17T07:47:08.934-0600	ClassGraph	------ META-INF/versions/21/com/fasterxml/jackson/core/io/doubleparser/FastDoubleSwar.class masks META-INF/versions/11/com/fasterxml/jackson/core/io/doubleparser/FastDoubleSwar.class
+2026-10-17T07:47:08.934-0600	ClassGraph	------ META-INF/versions/21/com/fasterxml/jackson/core/io/doubleparser/FastIntegerMath.class masks META-INF/versions/11/com/fasterxml/jackson/core/io/doubleparser/FastIntegerMath.class
+2026-10-17T07:47:08.934-0600	ClassGraph	------ META-INF/versions/11/com/fasterxml/jackson/core/io/doubleparser/BigSignificand.class masks com/fasterxml/jackson/core/io/doubleparser/BigSignificand.class
+2026-10-17T07:47:08.934-0600	ClassGraph	------ META-INF/versions/21/com/fasterxml/jackson/core/io/doubleparser/FastDoubleSwar.class masks com/fasterxml/jackson/core/io/doubleparser/FastDoubleSwar.class
+2026-10-17T07:47:08.934-0600	ClassGraph	------ META-INF/versions/21/com/fasterxml/jackson/core/io/doubleparser/FastIntegerMath.class masks com/fasterxml/jackson/core/io/doubleparser/FastIntegerMath.class
+2026-10-17T07:47:08.911-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar
+2026-10-17T07:47:08.911-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar
+2026-10-17T07:47:08.930-0600	ClassGraph	------ This is a multi-release jar, with versions: 9
+2026-10-17T07:47:08.911-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar
+2026-10-17T07:47:08.911-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar
+2026-10-17T07:47:08.941-0600	ClassGraph	------ This is a multi-release jar, with versions: 9
+2026-10-17T07:47:08.911-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.jar
+2026-10-17T07:47:08.911-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.jar
+2026-10-17T07:47:08.923-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar
+2026-10-17T07:47:08.923-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar
+2026-10-17T07:47:08.941-0600	ClassGraph	------ Found Automatic-Module-Name entry in manifest file: org.jboss.jandex
+2026-10-17T07:47:08.924-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar
+2026-10-17T07:47:08.924-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar
+2026-10-17T07:47:08.939-0600	ClassGraph	------ Found Automatic-Module-Name entry in manifest file: com.sun.jna.platform
+2026-10-17T07:47:08.925-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar
+2026-10-17T07:47:08.925-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar
+2026-10-17T07:47:08.938-0600	ClassGraph	------ Found Automatic-Module-Name entry in manifest file: com.sun.jna
+2026-10-17T07:47:08.928-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar
+2026-10-17T07:47:08.928-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar
+2026-10-17T07:47:08.939-0600	ClassGraph	------ Found Automatic-Module-Name entry in manifest file: org.apache.commons.compress
+2026-10-17T07:47:08.939-0600	ClassGraph	------ This is a multi-release jar, with versions: 9
+2026-10-17T07:47:08.928-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar
+2026-10-17T07:47:08.928-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar
+2026-10-17T07:47:08.940-0600	ClassGraph	------ Found Automatic-Module-Name entry in manifest file: org.apache.commons.io
+2026-10-17T07:47:08.940-0600	ClassGraph	------ This is a multi-release jar, with versions: 9
+2026-10-17T07:47:08.929-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar
+2026-10-17T07:47:08.929-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar
+2026-10-17T07:47:08.934-0600	ClassGraph	------ Found Automatic-Module-Name entry in manifest file: org.apache.commons.lang3
+2026-10-17T07:47:08.934-0600	ClassGraph	------ This is a multi-release jar, with versions: 9
+2026-10-17T07:47:08.930-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar
+2026-10-17T07:47:08.930-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar
+2026-10-17T07:47:08.937-0600	ClassGraph	------ Found Automatic-Module-Name entry in manifest file: micrometer.core
+2026-10-17T07:47:08.932-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar
+2026-10-17T07:47:08.932-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar
+2026-10-17T07:47:08.934-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar
+2026-10-17T07:47:08.934-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar
+2026-10-17T07:47:08.934-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar
+2026-10-17T07:47:08.934-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar
+2026-10-17T07:47:08.935-0600	ClassGraph	------ This is a multi-release jar, with versions: 9
+2026-10-17T07:47:08.934-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar
+2026-10-17T07:47:08.934-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar
+2026-10-17T07:47:08.943-0600	ClassGraph	------ This is a multi-release jar, with versions: 9
+2026-10-17T07:47:08.943-0600	ClassGraph	------ META-INF/versions/9/org/yaml/snakeyaml/internal/Logger$Level.class masks org/yaml/snakeyaml/internal/Logger$Level.class
+2026-10-17T07:47:08.943-0600	ClassGraph	------ META-INF/versions/9/org/yaml/snakeyaml/internal/Logger.class masks org/yaml/snakeyaml/internal/Logger.class
+2026-10-17T07:47:08.936-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar
+2026-10-17T07:47:08.936-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar
+2026-10-17T07:47:08.937-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar
+2026-10-17T07:47:08.937-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar
+2026-10-17T07:47:08.938-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar
+2026-10-17T07:47:08.938-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar
+2026-10-17T07:47:08.938-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar
+2026-10-17T07:47:08.938-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar
+2026-10-17T07:47:08.954-0600	ClassGraph	------ This is a multi-release jar, with versions: 9
+2026-10-17T07:47:08.954-0600	ClassGraph	------ META-INF/versions/9/org/junit/platform/commons/util/ModuleUtils.class masks org/junit/platform/commons/util/ModuleUtils.class
+2026-10-17T07:47:08.938-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar
+2026-10-17T07:47:08.938-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar
+2026-10-17T07:47:08.938-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar
+2026-10-17T07:47:08.938-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar
+2026-10-17T07:47:08.940-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar
+2026-10-17T07:47:08.940-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar
+2026-10-17T07:47:08.940-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar
+2026-10-17T07:47:08.940-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar
+2026-10-17T07:47:08.940-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar
+2026-10-17T07:47:08.941-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar
+2026-10-17T07:47:08.953-0600	ClassGraph	------ Found Automatic-Module-Name entry in manifest file: org.slf4j
+2026-10-17T07:47:08.941-0600	ClassGraph	-- Opening classpath element file:///tmp/m3-maven-repository/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar
+2026-10-17T07:47:08.941-0600	ClassGraph	---- Opening jar: file:///tmp/m3-maven-repository/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar
+2026-10-17T07:47:08.955-0600	ClassGraph	------ Found Automatic-Module-Name entry in manifest file: org.slf4j.simple
+2026-10-17T07:47:08.941-0600	ClassGraph	-- Opening classpath element file:///workspace/scratch/f0742e08085b/
+2026-10-17T07:47:08.968-0600	ClassGraph	Finding nested classpath elements
+2026-10-17T07:47:08.969-0600	ClassGraph	Final classpath element order:
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.base, location=jrt:/java.base]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.compiler, location=jrt:/java.compiler]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.datatransfer, location=jrt:/java.datatransfer]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.desktop, location=jrt:/java.desktop]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.instrument, location=jrt:/java.instrument]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.logging, location=jrt:/java.logging]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.management, location=jrt:/java.management]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.management.rmi, location=jrt:/java.management.rmi]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.naming, location=jrt:/java.naming]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.net.http, location=jrt:/java.net.http]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.prefs, location=jrt:/java.prefs]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.rmi, location=jrt:/java.rmi]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.scripting, location=jrt:/java.scripting]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.security.jgss, location=jrt:/java.security.jgss]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.security.sasl, location=jrt:/java.security.sasl]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.smartcardio, location=jrt:/java.smartcardio]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.sql, location=jrt:/java.sql]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.sql.rowset, location=jrt:/java.sql.rowset]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.transaction.xa, location=jrt:/java.transaction.xa]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.xml, location=jrt:/java.xml]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module java.xml.crypto, location=jrt:/java.xml.crypto]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.accessibility, location=jrt:/jdk.accessibility]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.attach, location=jrt:/jdk.attach]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.charsets, location=jrt:/jdk.charsets]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.compiler, location=jrt:/jdk.compiler]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.crypto.cryptoki, location=jrt:/jdk.crypto.cryptoki]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.crypto.ec, location=jrt:/jdk.crypto.ec]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.dynalink, location=jrt:/jdk.dynalink]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.editpad, location=jrt:/jdk.editpad]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.httpserver, location=jrt:/jdk.httpserver]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.internal.ed, location=jrt:/jdk.internal.ed]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.internal.jvmstat, location=jrt:/jdk.internal.jvmstat]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.internal.le, location=jrt:/jdk.internal.le]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.internal.opt, location=jrt:/jdk.internal.opt]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.jartool, location=jrt:/jdk.jartool]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.javadoc, location=jrt:/jdk.javadoc]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.jconsole, location=jrt:/jdk.jconsole]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.jdeps, location=jrt:/jdk.jdeps]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.jdi, location=jrt:/jdk.jdi]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.jdwp.agent, location=jrt:/jdk.jdwp.agent]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.jfr, location=jrt:/jdk.jfr]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.jlink, location=jrt:/jdk.jlink]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.jpackage, location=jrt:/jdk.jpackage]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.jshell, location=jrt:/jdk.jshell]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.jsobject, location=jrt:/jdk.jsobject]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.jstatd, location=jrt:/jdk.jstatd]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.localedata, location=jrt:/jdk.localedata]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.management, location=jrt:/jdk.management]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.management.agent, location=jrt:/jdk.management.agent]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.management.jfr, location=jrt:/jdk.management.jfr]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.naming.dns, location=jrt:/jdk.naming.dns]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.naming.rmi, location=jrt:/jdk.naming.rmi]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.net, location=jrt:/jdk.net]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.nio.mapmode, location=jrt:/jdk.nio.mapmode]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.random, location=jrt:/jdk.random]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.sctp, location=jrt:/jdk.sctp]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.security.auth, location=jrt:/jdk.security.auth]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.security.jgss, location=jrt:/jdk.security.jgss]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.unsupported, location=jrt:/jdk.unsupported]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.unsupported.desktop, location=jrt:/jdk.unsupported.desktop]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.xml.dom, location=jrt:/jdk.xml.dom]
+2026-10-17T07:47:08.969-0600	ClassGraph	-- [module jdk.zipfs, location=jrt:/jdk.zipfs]
+2026-10-17T07:47:08.970-0600	ClassGraph	-- file:///tmp/m3-five-provider-historical-sdk-fixture-20261017/discovery-probe/
+2026-10-17T07:47:08.970-0600	ClassGraph	-- file:///tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/test-classes/
+2026-10-17T07:47:08.970-0600	ClassGraph	-- file:///tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/classes/
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/ow2/asm/asm/9.3/asm-9.3.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/ow2/asm/asm-util/9.3/asm-util-9.3.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/ow2/asm/asm-tree/9.3/asm-tree-9.3.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- /tmp/m3-maven-repository/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar
+2026-10-17T07:47:08.970-0600	ClassGraph	-- file:///workspace/scratch/f0742e08085b/
+2026-10-17T07:47:08.970-0600	ClassGraph	Scanning classpath elements (took 0.197720 sec)
+2026-10-17T07:47:08.971-0600	ClassGraph	-- Scanning module java.base (took 0.190319 sec)
+2026-10-17T07:47:09.161-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.971-0600	ClassGraph	-- Scanning module java.compiler (took 0.105763 sec)
+2026-10-17T07:47:09.077-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.971-0600	ClassGraph	-- Scanning module java.datatransfer (took 0.040941 sec)
+2026-10-17T07:47:09.012-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.971-0600	ClassGraph	-- Scanning module java.desktop (took 0.185055 sec)
+2026-10-17T07:47:09.156-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.971-0600	ClassGraph	-- Scanning module java.instrument (took 0.037840 sec)
+2026-10-17T07:47:09.009-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.972-0600	ClassGraph	-- Scanning module java.logging (took 0.033154 sec)
+2026-10-17T07:47:09.005-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.972-0600	ClassGraph	-- Scanning module java.management (took 0.098922 sec)
+2026-10-17T07:47:09.071-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.972-0600	ClassGraph	-- Scanning module java.management.rmi (took 0.055587 sec)
+2026-10-17T07:47:09.027-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.976-0600	ClassGraph	-- Scanning module java.naming (took 0.128637 sec)
+2026-10-17T07:47:09.105-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.976-0600	ClassGraph	-- Scanning module java.net.http (took 0.042978 sec)
+2026-10-17T07:47:09.019-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.976-0600	ClassGraph	-- Scanning module java.prefs (took 0.045345 sec)
+2026-10-17T07:47:09.022-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.976-0600	ClassGraph	-- Scanning module java.rmi (took 0.026925 sec)
+2026-10-17T07:47:09.003-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.976-0600	ClassGraph	-- Scanning module java.scripting (took 0.037616 sec)
+2026-10-17T07:47:09.014-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:08.977-0600	ClassGraph	-- Scanning module java.security.jgss (took 0.047430 sec)
+2026-10-17T07:47:09.024-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.003-0600	ClassGraph	-- Scanning module java.security.sasl (took 0.002517 sec)
+2026-10-17T07:47:09.006-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.005-0600	ClassGraph	-- Scanning module java.smartcardio (took 0.000504 sec)
+2026-10-17T07:47:09.005-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.005-0600	ClassGraph	-- Scanning module java.sql (took 0.003155 sec)
+2026-10-17T07:47:09.008-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.006-0600	ClassGraph	-- Scanning module java.sql.rowset (took 0.062032 sec)
+2026-10-17T07:47:09.068-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.009-0600	ClassGraph	-- Scanning module java.transaction.xa (took 0.018642 sec)
+2026-10-17T07:47:09.027-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.009-0600	ClassGraph	-- Scanning module java.xml (took 0.077124 sec)
+2026-10-17T07:47:09.086-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.012-0600	ClassGraph	-- Scanning module java.xml.crypto (took 0.039658 sec)
+2026-10-17T07:47:09.052-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.014-0600	ClassGraph	-- Scanning module jdk.accessibility (took 0.000411 sec)
+2026-10-17T07:47:09.015-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.015-0600	ClassGraph	-- Scanning module jdk.attach (took 0.000410 sec)
+2026-10-17T07:47:09.015-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.015-0600	ClassGraph	-- Scanning module jdk.charsets (took 0.006717 sec)
+2026-10-17T07:47:09.022-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.019-0600	ClassGraph	-- Scanning module jdk.compiler (took 0.059683 sec)
+2026-10-17T07:47:09.079-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.022-0600	ClassGraph	-- Scanning module jdk.crypto.cryptoki (took 0.034903 sec)
+2026-10-17T07:47:09.057-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.022-0600	ClassGraph	-- Scanning module jdk.crypto.ec (took 0.054698 sec)
+2026-10-17T07:47:09.076-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.024-0600	ClassGraph	-- Scanning module jdk.dynalink (took 0.000679 sec)
+2026-10-17T07:47:09.025-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.025-0600	ClassGraph	-- Scanning module jdk.editpad (took 0.000204 sec)
+2026-10-17T07:47:09.025-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.025-0600	ClassGraph	-- Scanning module jdk.httpserver (took 0.000640 sec)
+2026-10-17T07:47:09.026-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.026-0600	ClassGraph	-- Scanning module jdk.internal.ed (took 0.000236 sec)
+2026-10-17T07:47:09.026-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.026-0600	ClassGraph	-- Scanning module jdk.internal.jvmstat (took 0.000636 sec)
+2026-10-17T07:47:09.026-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.027-0600	ClassGraph	-- Scanning module jdk.internal.le (took 0.048235 sec)
+2026-10-17T07:47:09.075-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.027-0600	ClassGraph	-- Scanning module jdk.internal.opt (took 0.000528 sec)
+2026-10-17T07:47:09.028-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.027-0600	ClassGraph	-- Scanning module jdk.jartool (took 0.008395 sec)
+2026-10-17T07:47:09.036-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.028-0600	ClassGraph	-- Scanning module jdk.javadoc (took 0.057668 sec)
+2026-10-17T07:47:09.085-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.036-0600	ClassGraph	-- Scanning module jdk.jconsole (took 0.005072 sec)
+2026-10-17T07:47:09.041-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.041-0600	ClassGraph	-- Scanning module jdk.jdeps (took 0.002369 sec)
+2026-10-17T07:47:09.043-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.043-0600	ClassGraph	-- Scanning module jdk.jdi (took 0.041397 sec)
+2026-10-17T07:47:09.085-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.052-0600	ClassGraph	-- Scanning module jdk.jdwp.agent (took 0.004159 sec)
+2026-10-17T07:47:09.056-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.056-0600	ClassGraph	-- Scanning module jdk.jfr (took 0.048727 sec)
+2026-10-17T07:47:09.105-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.057-0600	ClassGraph	-- Scanning module jdk.jlink (took 0.001305 sec)
+2026-10-17T07:47:09.058-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.058-0600	ClassGraph	-- Scanning module jdk.jpackage (took 0.000852 sec)
+2026-10-17T07:47:09.059-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.059-0600	ClassGraph	-- Scanning module jdk.jshell (took 0.014370 sec)
+2026-10-17T07:47:09.073-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.068-0600	ClassGraph	-- Scanning module jdk.jsobject (took 0.016244 sec)
+2026-10-17T07:47:09.084-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.071-0600	ClassGraph	-- Scanning module jdk.jstatd (took 0.013596 sec)
+2026-10-17T07:47:09.084-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.073-0600	ClassGraph	-- Scanning module jdk.localedata (took 0.020893 sec)
+2026-10-17T07:47:09.094-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.075-0600	ClassGraph	-- Scanning module jdk.management (took 0.000872 sec)
+2026-10-17T07:47:09.076-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.076-0600	ClassGraph	-- Scanning module jdk.management.agent (took 0.001498 sec)
+2026-10-17T07:47:09.077-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.077-0600	ClassGraph	-- Scanning module jdk.management.jfr (took 0.024685 sec)
+2026-10-17T07:47:09.101-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.077-0600	ClassGraph	-- Scanning module jdk.naming.dns (took 0.030700 sec)
+2026-10-17T07:47:09.107-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.078-0600	ClassGraph	-- Scanning module jdk.naming.rmi (took 0.020291 sec)
+2026-10-17T07:47:09.098-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.079-0600	ClassGraph	-- Scanning module jdk.net (took 0.000201 sec)
+2026-10-17T07:47:09.079-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.079-0600	ClassGraph	-- Scanning module jdk.nio.mapmode (took 0.000135 sec)
+2026-10-17T07:47:09.079-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.080-0600	ClassGraph	-- Scanning module jdk.random (took 0.000129 sec)
+2026-10-17T07:47:09.080-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.080-0600	ClassGraph	-- Scanning module jdk.sctp (took 0.003018 sec)
+2026-10-17T07:47:09.083-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.083-0600	ClassGraph	-- Scanning module jdk.security.auth (took 0.012882 sec)
+2026-10-17T07:47:09.096-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.084-0600	ClassGraph	-- Scanning module jdk.security.jgss (took 0.020124 sec)
+2026-10-17T07:47:09.104-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.084-0600	ClassGraph	-- Scanning module jdk.unsupported (took 0.000170 sec)
+2026-10-17T07:47:09.085-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.085-0600	ClassGraph	-- Scanning module jdk.unsupported.desktop (took 0.000129 sec)
+2026-10-17T07:47:09.085-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.085-0600	ClassGraph	-- Scanning module jdk.xml.dom (took 0.005514 sec)
+2026-10-17T07:47:09.090-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.085-0600	ClassGraph	-- Scanning module jdk.zipfs (took 0.019862 sec)
+2026-10-17T07:47:09.105-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.086-0600	ClassGraph	-- Scanning Path classpath element file:///tmp/m3-five-provider-historical-sdk-fixture-20261017/discovery-probe/ (took 0.002278 sec)
+2026-10-17T07:47:09.088-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.086-0600	ClassGraph	---- Scanning Path: /tmp/m3-five-provider-historical-sdk-fixture-20261017/discovery-probe (took 0.001981 sec)
+2026-10-17T07:47:09.090-0600	ClassGraph	-- Scanning Path classpath element file:///tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/test-classes/ (took 0.000341 sec)
+2026-10-17T07:47:09.091-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.090-0600	ClassGraph	---- Scanning Path: /tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/test-classes (took 0.000171 sec)
+2026-10-17T07:47:09.088-0600	ClassGraph	-- Scanning Path classpath element file:///tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/classes/ (took 0.008819 sec)
+2026-10-17T07:47:09.097-0600	ClassGraph	---- Classfile scanning is disabled
+2026-10-17T07:47:09.088-0600	ClassGraph	---- Scanning Path: /tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/classes (took 0.008706 sec)
+2026-10-17T07:47:09.096-0600	ClassGraph	------ Scanning Path: /tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/classes/META-INF (took 0.000747 sec)
+2026-10-17T07:47:09.096-0600	ClassGraph	-------- Scanning Path: /tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/classes/META-INF/rewrite (took 0.000476 sec)
+2026-10-17T07:47:09.097-0600	ClassGraph	---------- Found resource within accepted package: META-INF/rewrite/m3-sdk-family-names.yml
+2026-10-17T07:47:09.090-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar (took 0.005054 sec)
+2026-10-17T07:47:09.095-0600	ClassGraph	---- Classfile scanning is disabled
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.DeleteSourceFiles.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.FindCollidingSourceFiles.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.FindDeserializationErrors.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.FindGitProvenance.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.FindLstProvenance.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.FindParseFailures.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.FindQuarks.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.FindSourceFiles.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.IsInRepository.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.ListRuntimeClasspath.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.RenameFile.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.ScanningRecipe.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.SetFilePermissions.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.config.CompositeRecipe.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.config.DeclarativeRecipe.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.search.FindBuildMetadata.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.search.FindCommitters.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.search.FindParseToPrintInequality.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.text.AppendToTextFile.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.text.ChangeText.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.text.CreateTextFile.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.text.EndOfLineAtEndOfFile.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.text.Find.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.text.FindAndReplace.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within subpackage of accepted package: META-INF/rewrite/attribution/org.openrewrite.text.FindMultiselect.yml
+2026-10-17T07:47:09.092-0600	ClassGraph	---- Found resource within accepted package: META-INF/rewrite/core-categories.yml
+2026-10-17T07:47:09.091-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar (took 0.002266 sec)
+2026-10-17T07:47:09.093-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.093-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar (took 0.000225 sec)
+2026-10-17T07:47:09.093-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.093-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar (took 0.000498 sec)
+2026-10-17T07:47:09.094-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.094-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar (took 0.000083 sec)
+2026-10-17T07:47:09.094-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.094-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar (took 0.000045 sec)
+2026-10-17T07:47:09.094-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.094-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar (took 0.000153 sec)
+2026-10-17T07:47:09.094-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.094-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar (took 0.004027 sec)
+2026-10-17T07:47:09.098-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.094-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar (took 0.000431 sec)
+2026-10-17T07:47:09.095-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.095-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar (took 0.000215 sec)
+2026-10-17T07:47:09.095-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.095-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/ow2/asm/asm/9.3/asm-9.3.jar (took 0.000115 sec)
+2026-10-17T07:47:09.095-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.095-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/ow2/asm/asm-util/9.3/asm-util-9.3.jar (took 0.000139 sec)
+2026-10-17T07:47:09.095-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.095-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/ow2/asm/asm-tree/9.3/asm-tree-9.3.jar (took 0.000107 sec)
+2026-10-17T07:47:09.095-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.095-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.jar (took 0.005545 sec)
+2026-10-17T07:47:09.101-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.095-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar (took 0.000257 sec)
+2026-10-17T07:47:09.096-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.096-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar (took 0.006126 sec)
+2026-10-17T07:47:09.102-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.096-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar (took 0.000474 sec)
+2026-10-17T07:47:09.096-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.096-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar (took 0.001183 sec)
+2026-10-17T07:47:09.097-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.097-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar (took 0.000658 sec)
+2026-10-17T07:47:09.098-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.097-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar (took 0.000871 sec)
+2026-10-17T07:47:09.098-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.099-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar (took 0.000583 sec)
+2026-10-17T07:47:09.100-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.098-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar (took 0.000284 sec)
+2026-10-17T07:47:09.098-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.098-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar (took 0.000105 sec)
+2026-10-17T07:47:09.098-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.098-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar (took 0.000548 sec)
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.098-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar (took 0.000492 sec)
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.098-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar (took 0.000035 sec)
+2026-10-17T07:47:09.098-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.098-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar (took 0.000315 sec)
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.099-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar (took 0.000047 sec)
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.099-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar (took 0.000096 sec)
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.099-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar (took 0.000029 sec)
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.099-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar (took 0.000598 sec)
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.099-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar (took 0.000271 sec)
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.099-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar (took 0.000250 sec)
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.099-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar (took 0.000119 sec)
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.099-0600	ClassGraph	-- Scanning jarfile classpath element /tmp/m3-maven-repository/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar (took 0.000070 sec)
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.099-0600	ClassGraph	-- Scanning Path classpath element file:///workspace/scratch/f0742e08085b/ (took 0.000422 sec)
+2026-10-17T07:47:09.100-0600	ClassGraph	---- Classfile scanning is disabled, and no accepted resources found
+2026-10-17T07:47:09.099-0600	ClassGraph	---- Scanning Path: /workspace/scratch/f0742e08085b (took 0.000348 sec)
+2026-10-17T07:47:09.168-0600	ClassGraph	Classfile scanning is disabled
+2026-10-17T07:47:09.172-0600	ClassGraph	Total time: 0.269 sec
+
+classpath=/tmp/m3-five-provider-historical-sdk-fixture-20261017/discovery-probe:/tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/test-classes:/tmp/m3-five-provider-historical-sdk-fixture-20261017/runner/m3-sdk-family-historical-20261017/m3/collections/recipes/sdk-family-names-20261017/target/classes:/tmp/m3-maven-repository/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar:/tmp/m3-maven-repository/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar:/tmp/m3-maven-repository/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar:/tmp/m3-maven-repository/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar:/tmp/m3-maven-repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/tmp/m3-maven-repository/org/ow2/asm/asm-util/9.3/asm-util-9.3.jar:/tmp/m3-maven-repository/org/ow2/asm/asm-tree/9.3/asm-tree-9.3.jar:/tmp/m3-maven-repository/org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.jar:/tmp/m3-maven-repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar:/tmp/m3-maven-repository/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar:/tmp/m3-maven-repository/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar:/tmp/m3-maven-repository/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar:/tmp/m3-maven-repository/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar:/tmp/m3-maven-repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/tmp/m3-maven-repository/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar:/tmp/m3-maven-repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar:/tmp/m3-maven-repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/tmp/m3-maven-repository/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar:/tmp/m3-maven-repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/tmp/m3-maven-repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/tmp/m3-maven-repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/tmp/m3-maven-repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/tmp/m3-maven-repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/tmp/m3-maven-repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/tmp/m3-maven-repository/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/f0742e08085b
+resources=[META-INF/rewrite/m3-sdk-family-names.yml, META-INF/rewrite/attribution/org.openrewrite.config.DeclarativeRecipe.yml, META-INF/rewrite/attribution/org.openrewrite.ListRuntimeClasspath.yml, META-INF/rewrite/attribution/org.openrewrite.search.FindParseToPrintInequality.yml, META-INF/rewrite/attribution/org.openrewrite.config.CompositeRecipe.yml, META-INF/rewrite/attribution/org.openrewrite.ScanningRecipe.yml, META-INF/rewrite/attribution/org.openrewrite.text.CreateTextFile.yml, META-INF/rewrite/attribution/org.openrewrite.FindCollidingSourceFiles.yml, META-INF/rewrite/attribution/org.openrewrite.text.AppendToTextFile.yml, META-INF/rewrite/attribution/org.openrewrite.text.ChangeText.yml, META-INF/rewrite/attribution/org.openrewrite.IsInRepository.yml, META-INF/rewrite/attribution/org.openrewrite.FindGitProvenance.yml, META-INF/rewrite/attribution/org.openrewrite.text.EndOfLineAtEndOfFile.yml, META-INF/rewrite/attribution/org.openrewrite.search.FindBuildMetadata.yml, META-INF/rewrite/attribution/org.openrewrite.text.Find.yml, META-INF/rewrite/attribution/org.openrewrite.FindSourceFiles.yml, META-INF/rewrite/attribution/org.openrewrite.DeleteSourceFiles.yml, META-INF/rewrite/attribution/org.openrewrite.text.FindMultiselect.yml, META-INF/rewrite/attribution/org.openrewrite.search.FindCommitters.yml, META-INF/rewrite/attribution/org.openrewrite.SetFilePermissions.yml, META-INF/rewrite/attribution/org.openrewrite.FindQuarks.yml, META-INF/rewrite/attribution/org.openrewrite.FindParseFailures.yml, META-INF/rewrite/attribution/org.openrewrite.FindDeserializationErrors.yml, META-INF/rewrite/attribution/org.openrewrite.text.FindAndReplace.yml, META-INF/rewrite/attribution/org.openrewrite.FindLstProvenance.yml, META-INF/rewrite/attribution/org.openrewrite.RenameFile.yml, META-INF/rewrite/core-categories.yml]
+direct recipes=[com.synexia.m3.SdkFamilyNames20261017]
+environment recipes=[com.synexia.rewrite.M3GpuToolJoinRecipe, com.synexia.rewrite.M3SdkFamilyNamesRecipe, org.openrewrite.DeleteSourceFiles, org.openrewrite.FindCollidingSourceFiles, org.openrewrite.FindDeserializationErrors, org.openrewrite.FindGitProvenance, org.openrewrite.FindLstProvenance, org.openrewrite.FindParseFailures, org.openrewrite.FindQuarks, org.openrewrite.FindSourceFiles, org.openrewrite.IsInRepository, org.openrewrite.ListRuntimeClasspath, org.openrewrite.RenameFile, org.openrewrite.SetFilePermissions, org.openrewrite.config.CompositeRecipe, org.openrewrite.search.FindBuildMetadata, org.openrewrite.search.FindCommitters, org.openrewrite.search.FindParseToPrintInequality, org.openrewrite.text.AppendToTextFile, org.openrewrite.text.ChangeText, org.openrewrite.text.CreateTextFile, org.openrewrite.text.EndOfLineAtEndOfFile, org.openrewrite.text.Find, org.openrewrite.text.FindAndReplace, org.openrewrite.text.FindMultiselect, com.synexia.m3.SdkFamilyNames20261017]

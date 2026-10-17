@@ -1,0 +1,11 @@
+# Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
+category	candidate	decision	contract_and_storage_reason
+object-frequency-column	M3LinkedHashMap key-only stable slots	REUSE	Canonical Object[] key plane plus primitive hash/index/encounter links; add int[] counts and flags at the same slots, no boxed counts or handles
+metadata-mask-selection	M3IndexPathMasks Java/C17	REUSE	Existing signed offset/count/stride and required/forbidden mask semantics; no second native ABI or predicate execution in native code
+provider-multimaps	Apache AbstractListValuedMap and AbstractSetValuedMap 4.6.0	ADAPT	Protected owner factories preserve provider views over M3 directory and value containers
+bidirectional-map	Apache AbstractDualBidiMap 4.6.0	ADAPT	Protected forward/reverse owner seam preserves Apache value displacement and inverse identity
+bidirectional-map	Guava AbstractBiMap 33.4.8-jre	ADAPT	Apache-2.0 source with retained upstream attribution; M3 forward and inverse owners, Guava duplicate rejection and forcePut
+counted-provider-facades	Guava Multiset, Apache MultiSet and Eclipse MutableBag	DISTINCT_CONTRACTS	Separate facades required for return types, entry types, removal, overflow and equality rules; shared count owner is an explicit constructor choice
+frequency-queries	HackerRank Frequency Queries	EVIDENCE_ONLY	Frequency update and multiplicity boundary fixtures; no challenge solution code copied
+frequency-aggregation	LeetCode Top K Frequent Elements	EVIDENCE_ONLY	Count-first problem category; ranking is outside this adapter change; no solution or editorial copied
+counted-bag	GeeksforGeeks multiset/hash-table categories	UNREVIEWED_REFERENCE_CATEGORY	Not admitted as an inspected donor or correctness oracle; collision, duplicate-count and absent-removal fixtures are independently authored
