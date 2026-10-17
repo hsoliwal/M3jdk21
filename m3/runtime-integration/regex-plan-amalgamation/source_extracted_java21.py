@@ -19,7 +19,7 @@ STRING = "src/java.base/share/classes/java/lang/M3String.java"
 FACTS = "src/java.base/share/classes/java/lang/M3StringFacts.java"
 BEFORE = "e8320c0669740b7d3a579a9c1e408f6291b3d01f"
 BEFORE_SHA = "f875210dfb605799b6c8dbee53b28ad6383e000d90da775f7fd285464da7b2d3"
-AFTER_SHA = "043c26a0f55ee2a0170bf907ee428dfd133696ce45bf0de44b822dc9e1e5e0e7"
+AFTER_SHA = "4972d8c3a664867559273a63df340c042eab1fa40f21e7b2139422ed06f942ba"
 TEST_SHA = "23b49a26ce30586758afb8cc7a7fecaee5a70833943fd3598c5b703d2a516cd9"
 
 def run(command, **kwargs):
@@ -135,6 +135,7 @@ def rewrite_engine(source, class_name):
     return (source.replace("package java.lang;", "")
                   .replace("final class M3StringRegexDp {",
                            "final class " + class_name + " {")
+                  .replace("M3StringRegexDp.class", class_name + ".class")
                   .replace("private M3StringRegexDp() { }",
                            "private " + class_name + "() { }"))
 
@@ -155,7 +156,7 @@ def main():
         ]:
             (work / filename).write_text(content, encoding="utf-8")
         oracle = Path(__file__).with_name("RegexAmalgamationBeforeAfter.java")
-        run(["javac", "--release", "21", "-proc:none", "-Xlint:all", "-Werror",
+        run(["javac", "--release", "21", "-proc:none", "-Xlint:all,-auxiliaryclass", "-Werror",
              "-d", directory, str(work / "RegexBefore.java"),
              str(work / "RegexAfter.java"), str(work / "M3String.java"), str(oracle)])
         run(["java", "-Xms256m", "-Xmx256m", "-ea", "-cp", directory,
