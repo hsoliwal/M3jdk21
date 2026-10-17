@@ -342,6 +342,17 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /m3/runtime-integration/javac-regex-current-owner-20261017/
+            /m3/migration/regex-reconciliation-20261017/
+            /m3/docs/name-mapping.schema.json
+            /m3/migration/migration.py
+            /src/java.base/share/classes/jdk/internal/mindex/M3TQ.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java
+            /src/java.base/share/native/libjava/M3StateRelation.c
+            /src/java.base/share/native/libjava/m3_state_relation.h
+            /src/java.base/share/classes/java/lang/M3StringRegexDp.java
+            /test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java
+            /m3/docs/name-mapping.json
             /.github/workflows/m3-first-release-admission.yml
             /.gitattributes
       # Sparse checkout is capacity-checked before and after; only Maven is continuously monitored.
@@ -467,6 +478,8 @@ jobs:
           fixture = receiving / "fixture-canonical"
           context = receiving / "source-context"
           workflow = receiving / "workflow-canonical"
+          mapping = source / "m3/migration/regex-reconciliation-20261017/sdk"
+          mapping_workflow = receiving / "mapping-workflow-canonical"
           specifications = (
               ("current-canonical-source.json", "current-canonical",
                "d81ce3df2695611b8fb1f4b0670a317c78d81d30",
@@ -521,7 +534,11 @@ jobs:
                   if hashlib.sha256(data).hexdigest() != row["sha256"] or identity != row["gitBlob"]:
                       raise SystemExit("compiler source context file drift")
           verify_context()
-          workflow_metadata = json.loads((receiving / "workflow-canonical-source.json").read_bytes())
+          # The original workflow SDK remains immutable and executes against its frozen predecessor fixture.
+          predecessor_metadata = (receiving / "workflow-canonical-source.json").read_bytes()
+          if hashlib.sha256(predecessor_metadata).hexdigest() != "bcf127cea1e729efeae22e1a098f3935c869d8d04218169c7a6bbddc7a75413c":
+              raise SystemExit("frozen predecessor workflow SDK metadata drift")
+          workflow_metadata = json.loads(predecessor_metadata)
           if workflow_metadata["repository"] != "hsoliwal/com.synexia" or workflow_metadata["sourcePath"] != "synexia-openrewrite-recipes/recipes/m3-javac-regex-hosted-receiving-qualification-20261017/workflow-sdk" or workflow_metadata["receiverCorePath"] != "m3/runtime-integration/javac-regex-current-owner-20261017/workflow-canonical":
               raise SystemExit("compiler workflow SDK source metadata drift")
           if workflow_metadata["runtimeApplied"] is not False or workflow_metadata["phaseAdvanced"] is not False:
@@ -533,8 +550,30 @@ jobs:
               raise SystemExit("compiler workflow SDK tree or pins drift")
           checked_workflow = source / ".github/workflows/m3-first-release-admission.yml"
           sealed_workflow = workflow / "src/main/resources/com/synexia/rewrite/m3-javac-regex-hosted-receiving-qualification-20261017/out/m3-first-release-admission.yml"
-          if hashlib.sha256(checked_workflow.read_bytes()).digest() != hashlib.sha256(sealed_workflow.read_bytes()).digest():
-              raise SystemExit("checked-out compiler workflow differs from sealed recipe output")
+          if hashlib.sha256(sealed_workflow.read_bytes()).hexdigest() != "689f6e970fedc702f8d31c36c840954bfdb0da3ca5e4b38de18dbb78a23fadb2":
+              raise SystemExit("frozen predecessor workflow fixture drift")
+          mapping_binding = (mapping.parent / "source-binding.json").read_bytes()
+          if hashlib.sha256(mapping_binding).hexdigest() != "8c6aa71568828f0ddef6b6ecf0df637c478cb066adb204252bf531477f7e509e":
+              raise SystemExit("canonical mapping SDK source binding drift")
+          mapping_metadata = json.loads(mapping_binding)
+          mapping_tree = subprocess.check_output(["git", "rev-parse", "HEAD:m3/migration/regex-reconciliation-20261017/sdk"], cwd=source, text=True).strip()
+          if mapping_tree != "acb7e31ace0871a7a4d1630ff899a19e922a9d52" or mapping_metadata["sdk"]["core"] != mapping_tree:
+              raise SystemExit("canonical mapping SDK tree drift")
+          if hashlib.sha256((mapping / "pins.json").read_bytes()).hexdigest() != "99e64f97550dfebede86c8d0fabfd3d2de2700a51e3b302af4676b1aeb2c9ab2" or mapping_metadata["sdk"]["pinsSha256"] != "99e64f97550dfebede86c8d0fabfd3d2de2700a51e3b302af4676b1aeb2c9ab2":
+              raise SystemExit("canonical mapping SDK pins drift")
+          successor_metadata = json.loads((receiving / "mapping-workflow-canonical-source.json").read_bytes())
+          if successor_metadata["repository"] != "hsoliwal/com.synexia" or successor_metadata["sourcePath"] != "synexia-openrewrite-recipes/recipes/m3-canonical-mapping-hosted-qualification-20261017/workflow-sdk" or successor_metadata["receiverCorePath"] != "m3/runtime-integration/javac-regex-current-owner-20261017/mapping-workflow-canonical":
+              raise SystemExit("mapping workflow SDK source metadata drift")
+          if successor_metadata["runtimeApplied"] is not False or successor_metadata["phaseAdvanced"] is not False:
+              raise SystemExit("mapping workflow SDK cannot advance runtime or phase")
+          if successor_metadata["openrewriteAdapterGitBlob"] != "1c1b1b568d369f688f6953161636bf36b484bf5a" or successor_metadata["manifestKernelGitBlob"] != "38df5f97bbeec8a8a8cfc77091d56bda925c07f2":
+              raise SystemExit("mapping workflow SDK provider identity drift")
+          successor_tree = subprocess.check_output(["git", "rev-parse", "HEAD:" + successor_metadata["receiverCorePath"]], cwd=source, text=True).strip()
+          if successor_tree != successor_metadata["moduleGitTree"] or hashlib.sha256((mapping_workflow / "pins.json").read_bytes()).hexdigest() != successor_metadata["pinsSha256"]:
+              raise SystemExit("mapping workflow SDK tree or pins drift")
+          successor_workflow = mapping_workflow / "src/main/resources/com/synexia/rewrite/m3-canonical-mapping-hosted-qualification-20261017/out/m3-first-release-admission.yml"
+          if hashlib.sha256(checked_workflow.read_bytes()).digest() != hashlib.sha256(successor_workflow.read_bytes()).digest():
+              raise SystemExit("checked-out workflow differs from sealed successor recipe output")
           maven = ["mvn", "-B", "-ntp", "-s", str(root / "home" / ".m2" / "settings.xml"), "-gs", str(root / "home" / ".m2" / "global-settings.xml"), "-Dmaven.repo.local=" + str(root / "m2")]
           python = ["python3", "-I", "-S", "-B"]
           commands = [
@@ -547,6 +586,12 @@ jobs:
               python + [str(workflow / "verify.py")],
               maven + ["-f", str(workflow / "pom.xml"), "test"],
               python + [str(workflow / "verify.py"), "--reports"],
+              python + [str(mapping / "verify.py"), "--self-test", "--repository", str(source)],
+              maven + ["-f", str(mapping / "pom.xml"), "test"],
+              python + [str(mapping / "verify.py"), "--reports", "--repository", str(source)],
+              python + [str(mapping_workflow / "verify.py")],
+              maven + ["-f", str(mapping_workflow / "pom.xml"), "test"],
+              python + [str(mapping_workflow / "verify.py"), "--reports"],
               maven + ["-f", str(context / "synexia-openrewrite-recipes/crates/m3-javac-regex-current-owner-qualification-20261017/pom.xml"), "verify"],
           ]
           child = None
@@ -605,12 +650,20 @@ jobs:
                   "sourceCommit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
                   "sourceContextTree": context_tree,
                   "donatedSdkTests": 7, "workflowSdkTests": 2,
+                  "mappingSdkTests": 3, "mappingWorkflowSdkTests": 2,
+                  "totalSdkTests": 14, "supervisedCommands": 16,
                   "originalPlanCorpusChecks": plan_counts[0], "newContractChecks": 11552,
                   "charSequenceComparisons": 10800,
                   "compilerFactsContractChecks": matches[0],
                   "currentSdkReceiptSha256": hashlib.sha256((current / "target/sdk-receipt.json").read_bytes()).hexdigest(),
                   "fixtureSdkReceiptSha256": hashlib.sha256((fixture / "target/sdk-receipt.json").read_bytes()).hexdigest(),
                   "workflowSdkReceiptSha256": hashlib.sha256((workflow / "target/sdk-receipt.json").read_bytes()).hexdigest(),
+                  "mappingSdkReceiptSha256": hashlib.sha256((mapping / "target/sdk-receipt.json").read_bytes()).hexdigest(),
+                  "mappingWorkflowSdkReceiptSha256": hashlib.sha256((mapping_workflow / "target/sdk-receipt.json").read_bytes()).hexdigest(),
+                  "mappingDonorCommit": "347ac7363aea1e9a7527df64ad62184534089fdf",
+                  "mappingSdkTree": mapping_tree, "mappingWorkflowSdkTree": successor_tree,
+                  "predecessorWorkflowFixtureSha256": "689f6e970fedc702f8d31c36c840954bfdb0da3ca5e4b38de18dbb78a23fadb2",
+                  "wholeMigrationValidator": "NOT_RUN",
                   "logSha256": log_digest,
                   "scope": "DONATED_RECIPE_SDKS_AND_JDK_ONLY_FOUR_SOURCE_CONTRACTS",
                   "modifiedJdkQualified": False, "realMIndexBridgeQualified": False,
@@ -619,6 +672,7 @@ jobs:
               (root / "compiler-contract-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
               gate()
               print("PASS donated compiler SDK7 plus workflow SDK2 and JDK-only four-source contracts")
+              print("PASS canonical mapping SDK3 plus successor workflow SDK2; combined SDK14 supervisedCommands16")
               print("NOT_RUN real MIndex bridge, modified JDK/JNI/runtime/performance; phase remains unchanged")
           except BaseException:
               if child is not None and child.poll() is None:
@@ -656,6 +710,12 @@ jobs:
             m3-bounded-read-source/m3/runtime-integration/javac-regex-current-owner-20261017/workflow-canonical/target/sdk-receipt.json
             m3-bounded-read-source/m3/runtime-integration/javac-regex-current-owner-20261017/workflow-canonical/target/surefire-reports/TEST-*.xml
             m3-bounded-read-source/m3/runtime-integration/javac-regex-current-owner-20261017/workflow-canonical/target/emitted/
+            m3-bounded-read-source/m3/migration/regex-reconciliation-20261017/sdk/target/sdk-receipt.json
+            m3-bounded-read-source/m3/migration/regex-reconciliation-20261017/sdk/target/surefire-reports/TEST-*.xml
+            m3-bounded-read-source/m3/migration/regex-reconciliation-20261017/sdk/target/emitted/
+            m3-bounded-read-source/m3/runtime-integration/javac-regex-current-owner-20261017/mapping-workflow-canonical/target/sdk-receipt.json
+            m3-bounded-read-source/m3/runtime-integration/javac-regex-current-owner-20261017/mapping-workflow-canonical/target/surefire-reports/TEST-*.xml
+            m3-bounded-read-source/m3/runtime-integration/javac-regex-current-owner-20261017/mapping-workflow-canonical/target/emitted/
             ${{ runner.temp }}/m3-bounded-read-${{ github.run_id }}-${{ github.run_attempt }}/maven.log
             ${{ runner.temp }}/m3-bounded-read-${{ github.run_id }}-${{ github.run_attempt }}/compiler-contract-receipt.json
           include-hidden-files: true

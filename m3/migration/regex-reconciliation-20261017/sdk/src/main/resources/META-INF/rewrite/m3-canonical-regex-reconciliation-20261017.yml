@@ -1,0 +1,39 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.CanonicalRegexMappingReconciliation
+displayName: Reconcile current regex mapping custody
+description: Changes only the exact owned canonical JSON snapshot and refuses foreign source states.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-regex-family-reconciliation-20261017
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.CanonicalRegexMappingAppend
+displayName: Append ordered relation migration records
+description: Changes only the exact owned canonical JSON snapshot and refuses foreign source states.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-regex-family-append-20261017
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.CanonicalTqTargetLineage
+displayName: Retain current TQ target lineage
+description: Changes only the exact owned canonical JSON snapshot and refuses foreign source states.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-tq-target-lineage-20261017
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.CanonicalSparseRecipeSourceCustody
+displayName: Record historical sparse recipe source custody
+description: Changes only the exact owned canonical JSON snapshot and refuses foreign source states.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-sparse-recipe-custody-20261017
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.CanonicalRegexMappingRollback
+displayName: Restore the exact owned canonical mapping preimage
+description: Changes only the exact owned canonical JSON snapshot and refuses foreign source states.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-regex-family-rollback-20261017

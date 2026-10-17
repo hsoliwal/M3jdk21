@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CanonicalMappingHostedWorkflow
+displayName: Qualify canonical mapping with preserved hosted compiler recipe proofs
+description: >
+  Reuse the existing bounded hosted compiler worker to qualify the exact canonical mapping SDK and
+  this successor workflow recipe while retaining every predecessor SDK and both JDK-only contract mains.
+recipeList:
+  - com.synexia.rewrite.M3CanonicalMappingHostedWorkflowRecipe

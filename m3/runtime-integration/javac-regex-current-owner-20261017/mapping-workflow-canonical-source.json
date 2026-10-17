@@ -1,0 +1,16 @@
+{
+  "schema": "M3_CANONICAL_MAPPING_HOSTED_WORKFLOW_SOURCE_V1",
+  "repository": "hsoliwal/com.synexia",
+  "sourceCommit": "cdfce555fc13b5d34ce2c5ef2f23bc27714c59c6",
+  "sourcePullRequest": 12031,
+  "sourcePath": "synexia-openrewrite-recipes/recipes/m3-canonical-mapping-hosted-qualification-20261017/workflow-sdk",
+  "receiverCorePath": "m3/runtime-integration/javac-regex-current-owner-20261017/mapping-workflow-canonical",
+  "moduleGitTree": "8185889db69c1f348db1cdca2497eceb5757c04c",
+  "pinsSha256": "6c154614fdd47f276ba89f15846142aa21126fc2785d9cc6d1428ae75339f8e5",
+  "openrewriteAdapterGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+  "manifestKernelGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "precodeFoss": "8de042e3c34c9872ae3763b2045fa17bfb78032b",
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "execution": "NOT_RUN"
+}

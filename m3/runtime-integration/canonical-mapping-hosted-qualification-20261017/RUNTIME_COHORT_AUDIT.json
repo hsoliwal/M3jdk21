@@ -1,0 +1,1264 @@
+{
+  "schema": "M3_RUNTIME_RECIPE_COMPLETE_CURRENT_COHORT_AUDIT_V1",
+  "status": "COMPLETE_FINITE_COHORT_AND_DONOR_LINEAGE_AUDIT_NO_RESEAL",
+  "repository": "hsoliwal/M3jdk21",
+  "heads": [
+    {
+      "pr": 1041,
+      "head": "347ac7363aea1e9a7527df64ad62184534089fdf",
+      "rootTree": "f284855e44414a62ffb35a1041710521455268cf"
+    },
+    {
+      "pr": 1040,
+      "head": "069d7146733ff1d059c67220d5d5638d7c159ba3",
+      "rootTree": "75b1200a5462412993bd1d4e9e17884144d2b8af"
+    }
+  ],
+  "entireSrcTreeIdentical": "8b66ec1d84a468e0d9df15726dfe8be571a67412",
+  "manifest": {
+    "path": "m3/runtime-integration/recipe/manifest.json",
+    "git": "ebe4a76f7c11f86f1c1cef953940216f6793d321"
+  },
+  "apply": {
+    "path": "m3/runtime-integration/recipe/apply.py",
+    "git": "6f04034d19b92ed55deba47b870c1d850a734a52"
+  },
+  "tests": {
+    "path": "m3/runtime-integration/recipe/test_recipe.py",
+    "git": "e90bad7e46a39ec5c9b4c86f774a77116007ed0b"
+  },
+  "priorTwoDriftAudit": "3dd27c0e02a21a62ee308d14cd6bd67103bb5461",
+  "classificationMeaning": "AUTHORIZED_SUCCESSOR means exact manifest.superseded membership; it does not assert runtime qualification",
+  "counts": {
+    "BEFORE": 0,
+    "AFTER": 56,
+    "AUTHORIZED_SUCCESSOR": 4,
+    "DRIFT": 6,
+    "MISSING": 0,
+    "READ_ERROR": 0
+  },
+  "rawTargetReads": 66,
+  "rawTargetBytes": 2634119,
+  "rows": [
+    {
+      "path": "src/hotspot/share/cds/archiveHeapWriter.cpp",
+      "seal": {
+        "before": "e66950aa7450409cd03ffda597f35e5330875b1c055eaf15dfe16f0403566d2b",
+        "after": "fa8ea0f123a27055fde22d303dab7db87dc6f93ec8c8ebc34748ac4e6df27cf1"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "86ddd2bad4d506ec2876515cb26782368ff83472",
+      "actualSha256": "fa8ea0f123a27055fde22d303dab7db87dc6f93ec8c8ebc34748ac4e6df27cf1",
+      "bytes": 22567,
+      "manifestPosition": 0
+    },
+    {
+      "path": "src/hotspot/share/classfile/javaClasses.cpp",
+      "seal": {
+        "before": "a358a29d0d5687625eba69a6be0932c67d8a6d0ac0b05f1d225288cf6d6af91a",
+        "after": "10816a3adb62ae3dd5b7fdefb79a43947637fb90924298ace56c8320ea4d60cb",
+        "superseded": [
+          "933764d74cca6a40dc01fef1798c38d71a4ac0b754e5b17d9ed42d2a05bc68f6"
+        ]
+      },
+      "status": "AUTHORIZED_SUCCESSOR",
+      "actualGitBlob": "0baae939a004d90c7ed36f31bd01ca80fc6738b0",
+      "actualSha256": "933764d74cca6a40dc01fef1798c38d71a4ac0b754e5b17d9ed42d2a05bc68f6",
+      "bytes": 210928,
+      "manifestPosition": 1
+    },
+    {
+      "path": "src/hotspot/share/classfile/javaClasses.hpp",
+      "seal": {
+        "before": "88659079f7621ab864b7dde6c19c549e49be862cb1d9639108ac85ac473e93e5",
+        "after": "36a6ae73f908a42bd565ea8caca830f7de63e423092c92141f0fd4110dc75df3",
+        "superseded": [
+          "d20fa631a2df68353d7e0645690fbb36dd4a1d38c8ce99379596ded1aa912a59"
+        ]
+      },
+      "status": "AUTHORIZED_SUCCESSOR",
+      "actualGitBlob": "ac58f01e50946157e03c68bdd1f67762c06e4262",
+      "actualSha256": "d20fa631a2df68353d7e0645690fbb36dd4a1d38c8ce99379596ded1aa912a59",
+      "bytes": 63675,
+      "manifestPosition": 2
+    },
+    {
+      "path": "src/hotspot/share/classfile/javaClasses.inline.hpp",
+      "seal": {
+        "before": "02f638693052e072687f003cb7da9b2d7f34b40b87e89616b93b9d3581bf94a2",
+        "after": "18edfbc5b4ae95130b6fcfe19fd9927abd0e4cc5504129d9a20b025b10f0b7a1",
+        "superseded": [
+          "bbe505ccc6b5ab1482f0e0235284d625f0cc75181a7b0d418f2fb3c722d30cdf"
+        ]
+      },
+      "status": "AUTHORIZED_SUCCESSOR",
+      "actualGitBlob": "b74eb6e47879e7a5544007d756982053da1d9d0d",
+      "actualSha256": "bbe505ccc6b5ab1482f0e0235284d625f0cc75181a7b0d418f2fb3c722d30cdf",
+      "bytes": 17631,
+      "manifestPosition": 3
+    },
+    {
+      "path": "src/hotspot/share/classfile/stringTable.cpp",
+      "seal": {
+        "before": "ffa3118dfef5512305b4fb50e94c053e307c5e6fca1134b2cdb22193457da6b8",
+        "after": "129f6153a28d738e5dd9de8e0975b73735a3c6268046ec7b71f3f69adb460178"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "8a8fce78a36823f981523e80e976d6af862e6f13",
+      "actualSha256": "129f6153a28d738e5dd9de8e0975b73735a3c6268046ec7b71f3f69adb460178",
+      "bytes": 28798,
+      "manifestPosition": 4
+    },
+    {
+      "path": "src/hotspot/share/classfile/vmClassMacros.hpp",
+      "seal": {
+        "before": "26a9809aec481374f463c0c36857b939b17c360d0c828d7cd3f731a5e450933b",
+        "after": "e71ea245f54053fbdd099cc53f45dc4e2294d3d571e8412ccab2dbbc21f34a12"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "d498ad7718007bd8403563e92b2008eedd9641f5",
+      "actualSha256": "e71ea245f54053fbdd099cc53f45dc4e2294d3d571e8412ccab2dbbc21f34a12",
+      "bytes": 19479,
+      "manifestPosition": 5
+    },
+    {
+      "path": "src/hotspot/share/classfile/vmIntrinsics.cpp",
+      "seal": {
+        "before": "44609d2bfe3053e1c6e330de440cbb9473bdb499fc4d03a31ab1e3da0f9c6aa3",
+        "after": "eaa4cf151155de4a31cf47a5147ce842872ea453ef0a798954e05ea32200c5b9"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "5b4b5eaa797e9dd18cc93ce9e9d7629b07b4ff22",
+      "actualSha256": "eaa4cf151155de4a31cf47a5147ce842872ea453ef0a798954e05ea32200c5b9",
+      "bytes": 30284,
+      "manifestPosition": 6
+    },
+    {
+      "path": "src/hotspot/share/classfile/vmSymbols.hpp",
+      "seal": {
+        "before": "2f669bd835fc7c1696926f9e34e88e872a56c200b2511a537f1ec7344f3f1279",
+        "after": "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "f076921a54d8e475724de67b21c141cd547d7947",
+      "actualSha256": "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab",
+      "bytes": 85741,
+      "manifestPosition": 7
+    },
+    {
+      "path": "src/hotspot/share/gc/shared/stringdedup/stringDedup.cpp",
+      "seal": {
+        "before": "23b3aa46e740e746f05b483e371c627a6ec629026638b53085af8f4cb82cb333",
+        "after": "15cb52369aa1a879ccb2902adb94d5055647d4b82cf54e7409939fc6ba804377"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "ec6b8bb709d5675d90654c47492abdb6a38d85c8",
+      "actualSha256": "15cb52369aa1a879ccb2902adb94d5055647d4b82cf54e7409939fc6ba804377",
+      "bytes": 8085,
+      "manifestPosition": 8
+    },
+    {
+      "path": "src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp",
+      "seal": {
+        "before": "aea6dd85f2cdb2af3210386078138ed7fac45c6b8fe0c214516272281f5cb11a",
+        "after": "558422c57828be5e0f8d3fbdead9ee4fa0ab9f8b504487baa9199ebfb2b2dcd8"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "5f10e6ef78b876d3edc792e571bc4f9e895c65b6",
+      "actualSha256": "558422c57828be5e0f8d3fbdead9ee4fa0ab9f8b504487baa9199ebfb2b2dcd8",
+      "bytes": 28761,
+      "manifestPosition": 9
+    },
+    {
+      "path": "src/hotspot/share/jfr/recorder/jfrRecorder.cpp",
+      "seal": {
+        "before": "7649630972fa47fbd4cc5f76c8efa1c320a0f93f725c64d6016ca331305b7906",
+        "after": "98555ee5b3f195a468461f43428c1f2db535d2a85b38d239d220f3494c3ed6ec"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "2e7fb16cfb6192ac50f79194f616cd458d690d40",
+      "actualSha256": "98555ee5b3f195a468461f43428c1f2db535d2a85b38d239d220f3494c3ed6ec",
+      "bytes": 13621,
+      "manifestPosition": 10
+    },
+    {
+      "path": "src/hotspot/share/opto/stringopts.cpp",
+      "seal": {
+        "before": "2e03311c16a66564776d9b89671e49424df31b85f3ecb3b4407a8872ab12da64",
+        "after": "a278409363087f891f36fba0fd4c9d7ad2aee4784cd445a655d7fd07305127cd"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "20357eb74a387931b5dc210617c62c177a37c9cc",
+      "actualSha256": "a278409363087f891f36fba0fd4c9d7ad2aee4784cd445a655d7fd07305127cd",
+      "bytes": 74187,
+      "manifestPosition": 11
+    },
+    {
+      "path": "src/hotspot/share/prims/jni.cpp",
+      "seal": {
+        "before": "4d9d6b5e89f6c67e20f7d3d3b3a42ca6532dd51b108a1c6e02d9bfaf4c446c32",
+        "after": "ae1fdb7967a8c67bf1a29078387110d9f733b5055de7b61156c7562c098e2a04"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "c112cfd0a70f475d168ffbe0964627a3a23e3520",
+      "actualSha256": "ae1fdb7967a8c67bf1a29078387110d9f733b5055de7b61156c7562c098e2a04",
+      "bytes": 161395,
+      "manifestPosition": 12
+    },
+    {
+      "path": "src/hotspot/share/prims/jvmtiTagMap.cpp",
+      "seal": {
+        "before": "40464d1c54959521b073f751f06c68a0afdeed222d00aa21b7504a0f806d54d3",
+        "after": "477ba6e96bc62f5f315c3290e9c7f544bac6395731dda6bc4615103b714ddb13"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "4078de10aa2c0f211a0d392fd03c8876316c357d",
+      "actualSha256": "477ba6e96bc62f5f315c3290e9c7f544bac6395731dda6bc4615103b714ddb13",
+      "bytes": 109782,
+      "manifestPosition": 13
+    },
+    {
+      "path": "src/hotspot/share/runtime/arguments.cpp",
+      "seal": {
+        "before": "2693c76fa494e180c15f78915557c6c8773a773ed9ec9cfc9f27f853fb7580e4",
+        "after": "cde11381b3d49642dee5988d0188e6f3ffc0dcd3a7789b3abec12a00eb832dc5"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "fa1437ba38421d679a8ae4d22d7afec8422cb813",
+      "actualSha256": "cde11381b3d49642dee5988d0188e6f3ffc0dcd3a7789b3abec12a00eb832dc5",
+      "bytes": 161706,
+      "manifestPosition": 14
+    },
+    {
+      "path": "src/hotspot/share/runtime/globals.hpp",
+      "seal": {
+        "before": "784ba7989d4008145ce02cdd66cb74a7bbb899d2cdac91119ce2b80b57c88bc4",
+        "after": "cb97b8978fa8f94ad5c1088b1616f4aef14fef9b6f454f21bd96449a2a3e0fc3"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "cb3ed3f04401c48a3012b3d2eea5f61096f37fde",
+      "actualSha256": "cb97b8978fa8f94ad5c1088b1616f4aef14fef9b6f454f21bd96449a2a3e0fc3",
+      "bytes": 150668,
+      "manifestPosition": 15
+    },
+    {
+      "path": "src/hotspot/share/runtime/threads.cpp",
+      "seal": {
+        "before": "20d612428570fef24842a08e0628dbf4b660c9a4b86236124d900060cb7f3ed9",
+        "after": "d715f6bc169184ebb6e06b0ace2e8dd21f50077e1cdbfebc04b0fae73d7a0531"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "dc5b46f18124635d9beed4800ab2de55aaf751fe",
+      "actualSha256": "d715f6bc169184ebb6e06b0ace2e8dd21f50077e1cdbfebc04b0fae73d7a0531",
+      "bytes": 51519,
+      "manifestPosition": 16
+    },
+    {
+      "path": "src/hotspot/share/services/diagnosticCommand.cpp",
+      "seal": {
+        "before": "5861a3cb8fbf551681654e04deeb8c61b8b5a7913d9a4fb10ade48ee7b9a2611",
+        "after": "4673fdbcfde7930471ba9bc50dc69334570db017479a9531bf58776a705d400f"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "540eac7ab615c42d9ac1cdb8057ad244c3401ddc",
+      "actualSha256": "4673fdbcfde7930471ba9bc50dc69334570db017479a9531bf58776a705d400f",
+      "bytes": 44209,
+      "manifestPosition": 17
+    },
+    {
+      "path": "src/hotspot/share/services/finalizerService.cpp",
+      "seal": {
+        "before": "0ce3ca248b38336fb1039808afa9f2d3721cdaa4b03c85340888cc0a8f125438",
+        "after": "2438cc3588b1f937175e62e229feb1090a59c5aa18657fe03d64cd2a937029dc"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "561ef1e8672711fe567ef5d17902a6216cb0bd2a",
+      "actualSha256": "2438cc3588b1f937175e62e229feb1090a59c5aa18657fe03d64cd2a937029dc",
+      "bytes": 11735,
+      "manifestPosition": 18
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
+      "seal": {
+        "before": "13f92a675d002851095aca8464e30c52c2a27a2d585b4da6c7263a787c11242d",
+        "after": "a5e7213ca951fab21d6db842804a8abd79e90f924ec672de6c4c455cdebb47d5"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "ca697e5da074fabd6368aa79aceb9d40073ca661",
+      "actualSha256": "a5e7213ca951fab21d6db842804a8abd79e90f924ec672de6c4c455cdebb47d5",
+      "bytes": 76649,
+      "manifestPosition": 19
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "seal": {
+        "before": null,
+        "after": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b",
+        "superseded": [
+          "f88c545538e250c057809d86cb0727cbeb07bed69508b0c85197b0084247fa5c",
+          "24ac1f87c1b2022b08d695ae6b116e9376dad59ed0ffb86f52da0003dd3e036d"
+        ]
+      },
+      "status": "DRIFT",
+      "actualGitBlob": "35ed998540e044eed8cb7596e2e2c019ae369bd3",
+      "actualSha256": "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728",
+      "bytes": 55181,
+      "manifestPosition": 20
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringAtom.java",
+      "seal": {
+        "before": null,
+        "after": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f",
+        "superseded": [
+          "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "7e7645497d08d55cf9b5174e4f04e11c87a06bae",
+      "actualSha256": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f",
+      "bytes": 18589,
+      "manifestPosition": 21
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java",
+      "seal": {
+        "before": null,
+        "after": "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257",
+        "superseded": [
+          "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "6cbb277119f387aac772373d31621af64bea68d5",
+      "actualSha256": "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257",
+      "bytes": 6394,
+      "manifestPosition": 22
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+      "seal": {
+        "before": null,
+        "after": "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f",
+        "superseded": [
+          "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f",
+          "f1cc0ec9d4fd0bbc15d9c684e80b9907b60321cb15ad4fd7fa39f3cf973fc4cd",
+          "2152c154d3cdece330667ee09675fd21d86f3b483a23a3156b8a3626c3f9f420"
+        ]
+      },
+      "status": "AUTHORIZED_SUCCESSOR",
+      "actualGitBlob": "d8dd7dc30db6a9e3897146572bd4a7755c954ffb",
+      "actualSha256": "2152c154d3cdece330667ee09675fd21d86f3b483a23a3156b8a3626c3f9f420",
+      "bytes": 21176,
+      "manifestPosition": 23
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringOwner.java",
+      "seal": {
+        "before": null,
+        "after": "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74",
+        "superseded": [
+          "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "acd2a9584c65c384ddebd9159a8775d196ea0f8c",
+      "actualSha256": "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74",
+      "bytes": 5375,
+      "manifestPosition": 24
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+      "seal": {
+        "before": null,
+        "after": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b",
+        "superseded": [
+          "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b",
+          "10805981cf2e67607e134df4c1416a787d4c3523015e743ec3d52d47c0ed44f1",
+          "f8bac45d1623d25470e1b79beffa276f271db10e297ef5b434d5335c9d4c908b"
+        ]
+      },
+      "status": "DRIFT",
+      "actualGitBlob": "0905414556ad0b698a5b5f835f53d12bc040bc8c",
+      "actualSha256": "b58c82047f795807ff32229146c370c9e596eff19942a92cd0128ce4987d20ca",
+      "bytes": 59951,
+      "manifestPosition": 25
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+      "seal": {
+        "before": null,
+        "after": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b",
+        "superseded": [
+          "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "c0074f4b144da23040e63e0ba8866d56d0d304ac",
+      "actualSha256": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b",
+      "bytes": 11332,
+      "manifestPosition": 26
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+      "seal": {
+        "before": null,
+        "after": "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4",
+        "superseded": [
+          "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4"
+        ]
+      },
+      "status": "DRIFT",
+      "actualGitBlob": "0a88ed559b23def5d2229bba3316ea2268b4d720",
+      "actualSha256": "edae3c8d3afbd7c1b78aa3f88a4d3fdcd6bd03c9f8ee2ace3044255b44f571ac",
+      "bytes": 18867,
+      "manifestPosition": 27
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringTuple.java",
+      "seal": {
+        "before": null,
+        "after": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9",
+        "superseded": [
+          "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "0d4cfb75317e68d54244588a474eba98bf7df27b",
+      "actualSha256": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9",
+      "bytes": 4849,
+      "manifestPosition": 28
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "seal": {
+        "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
+        "after": "c49e422dfe0e6b83a2d51155f0d36b5223719dfefd211a96313705bc3ee253ca",
+        "superseded": [
+          "eed88205feda9f64b03515603e5807e3f83961ddeb99dae4ef84bd2034d6f568"
+        ]
+      },
+      "status": "DRIFT",
+      "actualGitBlob": "1454f1b34faea4f61f835ab054cc751c88c0b3c5",
+      "actualSha256": "b7a074c6f366397847538b6b1bc6a5e5fecfb94809ab70fda40ef58406595b13",
+      "bytes": 231515,
+      "manifestPosition": 29
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/StringConcatHelper.java",
+      "seal": {
+        "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",
+        "after": "2d25592220f776f019b562f89d9386fbfe188cd3f873306c8ad971027e65d6e6"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "b6a5ac36d90a0648c2653977ee8077995a645a0a",
+      "actualSha256": "2d25592220f776f019b562f89d9386fbfe188cd3f873306c8ad971027e65d6e6",
+      "bytes": 25392,
+      "manifestPosition": 30
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/System.java",
+      "seal": {
+        "before": "c51b88b6dc193b6447441769e24e89ebdbc3482796889a7506064bf07a7a8020",
+        "after": "4dcf8f1efbfe1b6ee1e9c5417fa3df50647bb55dc636411d783c844aa5e0847c"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "be9fda30d975bf6b31806b272252d10d7ea6d351",
+      "actualSha256": "4dcf8f1efbfe1b6ee1e9c5417fa3df50647bb55dc636411d783c844aa5e0847c",
+      "bytes": 118269,
+      "manifestPosition": 31
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java",
+      "seal": {
+        "before": "847d49e8b3b8de4183c4551c0965d9919ab942c0bef996d787f1f36174579010",
+        "after": "0bdcf30e2e090545d41e80566ca2b60d50d3a1c3e80e3dc849f1a22ecc3e11b8"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "a067c1e5bcf31ef9f199218bd66239f5b534f825",
+      "actualSha256": "0bdcf30e2e090545d41e80566ca2b60d50d3a1c3e80e3dc849f1a22ecc3e11b8",
+      "bytes": 62348,
+      "manifestPosition": 32
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+      "seal": {
+        "before": null,
+        "after": "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f",
+        "superseded": [
+          "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f"
+        ]
+      },
+      "status": "DRIFT",
+      "actualGitBlob": "2eb4ca854b6ef35d57d7a2599c97c3024ff81296",
+      "actualSha256": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531",
+      "bytes": 20991,
+      "manifestPosition": 33
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+      "seal": {
+        "before": "7ae5ae6dc7f763c152c8f872af98551f74abf67cc2a53e331056287226e949ca",
+        "after": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "b31fde7511bbdd3a139b330d85b66cae9a739224",
+      "actualSha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+      "bytes": 73418,
+      "manifestPosition": 34
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+      "seal": {
+        "before": "feccfd9bbb4208790fc4b3f2b21e9f12fce7040b22d0fff39086b5f73bd1813f",
+        "after": "d2828f7a76ae172204abe56cdf4e9df4b5fc0133bb65936b4e82aa9f7b9d105f"
+      },
+      "status": "DRIFT",
+      "actualGitBlob": "252e46fb57e824f30688eac3600bae9480511fc8",
+      "actualSha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+      "bytes": 236814,
+      "manifestPosition": 35
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java",
+      "seal": {
+        "before": "ccb649b92546459692c48b40ca75e960643e7ad234c8e1f43e1188504d3af29c",
+        "after": "b096377681dbc135d90f26abc972769557ae7c271d48ad59d241e149658438e3"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "072f08aeabcc5873cb13104467a1dcfed5b44d86",
+      "actualSha256": "b096377681dbc135d90f26abc972769557ae7c271d48ad59d241e149658438e3",
+      "bytes": 19390,
+      "manifestPosition": 36
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
+      "seal": {
+        "before": null,
+        "after": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+        "superseded": [
+          "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "14cdb999f5eab5be443044bff2d273fb4e4113fb",
+      "actualSha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+      "bytes": 2596,
+      "manifestPosition": 37
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+      "seal": {
+        "before": null,
+        "after": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+        "superseded": [
+          "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+      "actualSha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+      "bytes": 10427,
+      "manifestPosition": 38
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
+      "seal": {
+        "before": null,
+        "after": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+        "superseded": [
+          "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "2ad46058a5325483647af4af16858c329ae24665",
+      "actualSha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+      "bytes": 551,
+      "manifestPosition": 39
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java",
+      "seal": {
+        "before": null,
+        "after": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
+        "superseded": [
+          "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "f10f815fc1a59a0d1ea7ed45158b89178f128a1a",
+      "actualSha256": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
+      "bytes": 4114,
+      "manifestPosition": 40
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CB.java",
+      "seal": {
+        "before": null,
+        "after": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
+        "superseded": [
+          "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "0be655b7020f13f3df4265f68daf189bd039d86b",
+      "actualSha256": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
+      "bytes": 7771,
+      "manifestPosition": 41
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+      "seal": {
+        "before": null,
+        "after": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+        "superseded": [
+          "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "2acac4ad654a8af823fa46b483a42dd2f9c894c4",
+      "actualSha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+      "bytes": 61135,
+      "manifestPosition": 42
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
+      "seal": {
+        "before": null,
+        "after": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+        "superseded": [
+          "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "b95eee3c820f6054b4f70507dee101c9f456302f",
+      "actualSha256": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+      "bytes": 16841,
+      "manifestPosition": 43
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java",
+      "seal": {
+        "before": null,
+        "after": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
+        "superseded": [
+          "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "fc2152f63f4c404bce630b043d9138eaf96cb93e",
+      "actualSha256": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
+      "bytes": 1592,
+      "manifestPosition": 44
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java",
+      "seal": {
+        "before": null,
+        "after": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
+        "superseded": [
+          "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "4d708115e139a4ab938a4f9abd856f7fc98c5c00",
+      "actualSha256": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
+      "bytes": 2329,
+      "manifestPosition": 45
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "seal": {
+        "before": null,
+        "after": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+        "superseded": [
+          "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
+      "actualSha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "bytes": 1815,
+      "manifestPosition": 46
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Field.java",
+      "seal": {
+        "before": null,
+        "after": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
+        "superseded": [
+          "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "fad031da70ce813f52e5fc06479542a224bcd81a",
+      "actualSha256": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
+      "bytes": 2041,
+      "manifestPosition": 47
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java",
+      "seal": {
+        "before": null,
+        "after": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
+        "superseded": [
+          "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "513a1e8f5d55c074250d3b2747f041c19a1128e7",
+      "actualSha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
+      "bytes": 7842,
+      "manifestPosition": 48
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java",
+      "seal": {
+        "before": null,
+        "after": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
+        "superseded": [
+          "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "325e8e90ace21e71069665b74585c522b2c627b4",
+      "actualSha256": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
+      "bytes": 8134,
+      "manifestPosition": 49
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java",
+      "seal": {
+        "before": null,
+        "after": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01",
+        "superseded": [
+          "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "c2dc2371c730aa758ccc45e06ba4ab95661e5593",
+      "actualSha256": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01",
+      "bytes": 31729,
+      "manifestPosition": 50
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Member.java",
+      "seal": {
+        "before": null,
+        "after": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
+        "superseded": [
+          "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "d5f8e07afc304379d5165c9c5c1659855938b5b0",
+      "actualSha256": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
+      "bytes": 2493,
+      "manifestPosition": 51
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java",
+      "seal": {
+        "before": null,
+        "after": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be",
+        "superseded": [
+          "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "f68a952217d3eead4ed10a43de49c240d6b790f1",
+      "actualSha256": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be",
+      "bytes": 1722,
+      "manifestPosition": 52
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java",
+      "seal": {
+        "before": null,
+        "after": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b",
+        "superseded": [
+          "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "d211e6bc1e72ccc8e0ff821d26b3e30361750bc9",
+      "actualSha256": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b",
+      "bytes": 718,
+      "manifestPosition": 53
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Method.java",
+      "seal": {
+        "before": null,
+        "after": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58",
+        "superseded": [
+          "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "6bc2fe9176bdd9c95d732ecad105f03b62f4385e",
+      "actualSha256": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58",
+      "bytes": 2478,
+      "manifestPosition": 54
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3PC.java",
+      "seal": {
+        "before": null,
+        "after": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898",
+        "superseded": [
+          "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "b63fd9e457f7ac16bca8bf07dcb564069fdfef79",
+      "actualSha256": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898",
+      "bytes": 1686,
+      "manifestPosition": 55
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java",
+      "seal": {
+        "before": null,
+        "after": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
+        "superseded": [
+          "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "55f82a8486055d50e24d1a9b12b0636f9db876ed",
+      "actualSha256": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
+      "bytes": 1916,
+      "manifestPosition": 56
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
+      "seal": {
+        "before": null,
+        "after": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+        "superseded": [
+          "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "1116f4cb0ffd361e764688640adb53af8cabe86d",
+      "actualSha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+      "bytes": 1593,
+      "manifestPosition": 57
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java",
+      "seal": {
+        "before": null,
+        "after": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
+        "superseded": [
+          "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "5daedbe16dfc9377783b52d932e548cc44f0b335",
+      "actualSha256": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
+      "bytes": 2925,
+      "manifestPosition": 58
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "seal": {
+        "before": null,
+        "after": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+        "superseded": [
+          "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "533a07b77061e757d476627557413f6df1067d34",
+      "actualSha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+      "bytes": 17919,
+      "manifestPosition": 59
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
+      "seal": {
+        "before": null,
+        "after": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+        "superseded": [
+          "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "087aa55bef9b57189d03f3388fb2e1f360320b02",
+      "actualSha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+      "bytes": 6165,
+      "manifestPosition": 60
+    },
+    {
+      "path": "src/java.base/share/legal/synexia.md",
+      "seal": {
+        "before": null,
+        "after": "2d1d742093ddfd2424442ff27db87af57c9c2b7eb73e68670a05fc5f7d91860a",
+        "superseded": [
+          "2d1d742093ddfd2424442ff27db87af57c9c2b7eb73e68670a05fc5f7d91860a"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "b1b9cb02935482bb9e9351dcde267629d23d621f",
+      "actualSha256": "2d1d742093ddfd2424442ff27db87af57c9c2b7eb73e68670a05fc5f7d91860a",
+      "bytes": 14706,
+      "manifestPosition": 61
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+      "seal": {
+        "before": null,
+        "after": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+        "superseded": [
+          "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
+        ]
+      },
+      "status": "AFTER",
+      "actualGitBlob": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
+      "actualSha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+      "bytes": 3494,
+      "manifestPosition": 62
+    },
+    {
+      "path": "src/java.base/share/native/libjava/String.c",
+      "seal": {
+        "before": "4ca26f746733a6b954700fb14cad8a8a0a20100b834e5ad407a360c2b83cd311",
+        "after": "ee9d9bfa986259600d6fe95e21e3cb904a4f6541ce24c6391bc50715c6a054ef"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "69a57659e74c6433491932e64f15bc037e887d81",
+      "actualSha256": "ee9d9bfa986259600d6fe95e21e3cb904a4f6541ce24c6391bc50715c6a054ef",
+      "bytes": 4403,
+      "manifestPosition": 63
+    },
+    {
+      "path": "src/java.base/share/native/libjava/jni_util.c",
+      "seal": {
+        "before": "31596047469d6107b1e515eb04f3e9a9d98719ba50d2d9d753309eef51b2ce94",
+        "after": "4669c033c1b820ee90eb7fbe9f0c3ead9681312853e5675d360bb8db81e697f7"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "6845cf77682acc11d64836341c2f9ba052158990",
+      "actualSha256": "4669c033c1b820ee90eb7fbe9f0c3ead9681312853e5675d360bb8db81e697f7",
+      "bytes": 36934,
+      "manifestPosition": 64
+    },
+    {
+      "path": "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java",
+      "seal": {
+        "before": "d1f10780acf7d13ec54cf37eb2a49c1b845cc884ec30b583a6cd72521c213560",
+        "after": "f964925e59e6b1ef233d3508a6ba901afc9c4bf1430b60fc6ea0f71d6999cc86"
+      },
+      "status": "AFTER",
+      "actualGitBlob": "a45449e7386dc6bc80390e71a775af3fda554ba3",
+      "actualSha256": "f964925e59e6b1ef233d3508a6ba901afc9c4bf1430b60fc6ea0f71d6999cc86",
+      "bytes": 14779,
+      "manifestPosition": 65
+    }
+  ],
+  "readMethod": "Github exact-file API at pinned1041 head; batched4; no local IO; same src tree proves1040 source identity",
+  "execution": "NOT_RUN",
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "localOutput": false,
+  "refMutations": false,
+  "historyAndDirectReads": {
+    "recipeManifest": "ebe4a76f7c11f86f1c1cef953940216f6793d321",
+    "recipeApply": "6f04034d19b92ed55deba47b870c1d850a734a52",
+    "recipeTests": "e90bad7e46a39ec5c9b4c86f774a77116007ed0b",
+    "runtimePatch": {
+      "git": "a5abe528c303f689953731b1ba164e6e6bf53745",
+      "bytes": 607917,
+      "sha256": "bfc58c6eb3c7540808839e937a0f64788d65eb64097d10407ecccf899560d0eb",
+      "matchesManifest": true,
+      "noCR": true
+    },
+    "sameManifestApplyTestsInBothHeads": true,
+    "otherExternalReadsInApply": "No extra repository files beyond its manifest, historical patch and all66 target paths. CLI also invokes git apply --check/apply only for whole before↔after replay; not invoked by this audit.",
+    "testReads": "test_recipe.py imports apply.py and reads the same manifest; seed_current copies all66 current targets into tempfile.TemporaryDirectory(), then checks snapshots/current custody/unknown drift/MUTF8/symlink. Existing test temp defaults need separately admitted routing before execution.",
+    "adjacentCharArrayGate": {
+      "applyGit": "3e1a29bedd5f508d1217d81f712d5351f2e56a5d",
+      "manifestGit": "244a5bd23f38065cb5d9e9fcacc3eb397c145a89",
+      "legacyNames": [
+        "src/java.base/share/classes/java/lang/MIndexString.java",
+        "m3/runtime-integration/tests/MIndexStringInvariant.java"
+      ],
+      "replacementPins": [
+        {
+          "path": "src/java.base/share/classes/java/lang/M3String.java",
+          "git": "35ed998540e044eed8cb7596e2e2c019ae369bd3",
+          "matchesAuditedCurrent": true
+        },
+        {
+          "path": "m3/runtime-integration/tests/M3StringInvariant.java",
+          "git": "a39f876f0d3065d0754f8381e57aa097b6051e35",
+          "actualGit": "a39f876f0d3065d0754f8381e57aa097b6051e35"
+        }
+      ],
+      "note": "Separate two-owner legacy migration recipe already uses exact superseded_by identities. It must not be widened while repairing66 runtime custody."
+    }
+  },
+  "lineage": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "classification": "DRIFT_WITH_KNOWN_CANONICAL_SERIAL_DESCENDANTS_NOT_ADMITTED",
+      "priorAudit": "3dd27c0e02a21a62ee308d14cd6bd67103bb5461",
+      "exactWholeOwnerChain": [
+        {
+          "stage": "latest historical admitted owner",
+          "targetCommit": "134e84519e3eb3d75328527e3181c4cb5adbbe45",
+          "gitBlob": "70d1d03c109126fdda36c54da21b484bbe368fd9",
+          "bytes": 52985,
+          "sha256": "24ac1f87c1b2022b08d695ae6b116e9376dad59ed0ffb86f52da0003dd3e036d"
+        },
+        {
+          "stage": "tuple stream cursor",
+          "targetCommit": "bde4aa6f4f30ecbbc919af95252dab573d546eb3",
+          "sourceCommit": "06e8ff9c217689709b6b166c658e78aeb434fd16",
+          "sourceRecipeClass": "2115d4bb457a33bf84b434057902d641e2c018cf",
+          "sourceRecipeName": "com.synexia.m3.Jdk21TupleStreamCursor",
+          "sourceResourceRoot": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk21-string-tuple-cursor/",
+          "sourceResourceTree": "bf2433ad94e632f7157f6370f8161e021a80ce72",
+          "manifestGitBlob": "f90a41abad505e77e19fde72fee40a6b7fc61fa8",
+          "gitBlob": "4fb87fd70ffe5c8d75d17db9c28b44bc9b574704",
+          "bytes": 55041,
+          "sha256": "88716098c89b30502cb6287629259a577608ababfe8154db6090939cc64f0656",
+          "recipeJUnit": "cf5784ec2591bcec5aad79cc27954d8cde01a6c0",
+          "jtregPostimage": "4d19e74a9afe3978594eb065330e47fb3fb8b36f"
+        },
+        {
+          "stage": "composite literal search cursor",
+          "targetCommit": "a79b274f2cd2b4d0fe3865ca18b231f1850bf692",
+          "sourceRecipeClass": "24332ade897efa6fed8e71067ff8bb64347a9d16",
+          "sourceRecipeName": "com.synexia.m3.Jdk21CompositeSearchCursor",
+          "sourceResourceRoot": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk21-composite-search-cursor/",
+          "sourceResourceTree": "3b071f289b75f95f59a13834619d9d176bd669de",
+          "manifestGitBlob": "efb3e42efe6050583ccd2b0f9c88dc6541c8e276",
+          "gitBlob": "42399d411c1516a56a47dcdb10242960157b4677",
+          "bytes": 55033,
+          "sha256": "d4dcb3f3320e42a977001254cdd9ac58105cea0a427839ec81d945912476943f",
+          "searchPostimage": "dfbb91cc169916cd0a95798f4cd2151c3407df4c",
+          "jtregPostimage": "074c4baaf86128b8c260248f83edbbd931b05feb"
+        },
+        {
+          "stage": "UTF8 scalar-run cursor",
+          "targetCommit": "104978e5118dfb49f7514eb1b0b01631e09a5aa5",
+          "sourceCommit": "4f9b2646d74ab39031a54d1f56d6777c52a21852",
+          "sourceRecipe": "com.synexia.rewrite.M3Jdk21Utf8CursorReuse",
+          "sourceAtomPath": "synexia-openrewrite-recipes/recipes/text-boundaries-20261014/src/main/java/com/synexia/rewrite/text/M3Utf8CursorAtom.java",
+          "sourceAtomGitBlob": "93c8df099358931fb7ee29c5408ae6d0c88514b9",
+          "atomProofGitBlob": "20bcde7bd40af2c4101dbfc4314da5ac9c0e2bdc",
+          "manifestGitBlob": "9a64ff003d4c8aef8d4ef6800652acc67c44c967",
+          "gitBlob": "35ed998540e044eed8cb7596e2e2c019ae369bd3",
+          "sha256": "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728",
+          "targetReceipt": "e3ee12859fd0a272dfcf56e85741a95ac4acbf76",
+          "receiptScope": "DRAFT_CANDIDATE_HOLD; source receipt historical Maven blocked and SDK/unmodified M3 runtime unexecuted.",
+          "inverseAudit": "Removing only two cursor declaration lines and reverting three calls inside encodeUtf8 restored entire42399 owner byte-exact in RAM."
+        }
+      ],
+      "utf8QualificationBoundary": {
+        "canonicalSourceMetadata": "1004b801a129c947cda44d8b829af4f1be09e0be",
+        "sourcePr": 11964,
+        "sourceCommit": "903346ea342e0abbdee5fa8849a341848ba259b9",
+        "core": "b57eb5b8e1845df4fc13d30f747607caa382a4e3",
+        "receivingProvider": "2530c533003a8a17d0e782728d98a4dfebe13651",
+        "canonicalCurrentProvider": "39c3a6c99f94ab53eb1eab8bc2eb8c691638cd35",
+        "originalFiveTestSource": "b735eb59bf2b7f6167674d2bf8a345679e55d49f",
+        "testScope": "Whole42399→35ed exact output/fixedpoint, real JavaParser requirement, missing/duplicate/drift refusals and unrelated owner protection.",
+        "parentReportedObservation": "5 receiving2530 SDK tests PASS in actual390092 synthetic6a740 job; canonical39c and full matched JDK/M3/JNI remain NOT_RUN.",
+        "runtimeApplied": false,
+        "phaseAdvanced": false
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+      "classification": "DRIFT_WITH_EXACT_SOURCE_SEALED_POSTIMAGE_NOT_ADMITTED",
+      "targetOwnerCommit": "bd68daa7849a3390473d61237c81d5c423f5bb42",
+      "targetParent": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
+      "canonicalSourceCommit": "ed7da73bc2c1fd958e9d250acf308e8bb46c7b9e",
+      "recipe": "com.synexia.m3.M3Jdk21LeafCursor20261015",
+      "engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+      "descriptor": {
+        "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-leaf-cursor-20261015.yml",
+        "git": "35e4f6220b49f4cfba6bd547a8700aa9d8ef1fff"
+      },
+      "manifest": {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-leaf-cursor-20261015/manifest.tsv",
+        "git": "eed598522d2b17579f023ab5eb2b71a5e47f4964"
+      },
+      "before": {
+        "git": "514247a2e6c3704e03a9b47682f74e481f66585f",
+        "sha256": "f8bac45d1623d25470e1b79beffa276f271db10e297ef5b434d5335c9d4c908b",
+        "alreadyInRuntimeSuperseded": true
+      },
+      "after": {
+        "git": "0905414556ad0b698a5b5f835f53d12bc040bc8c",
+        "sha256": "b58c82047f795807ff32229146c370c9e596eff19942a92cd0128ce4987d20ca"
+      },
+      "jtreg": {
+        "key": "leafTest",
+        "path": "test/jdk/java/lang/String/M3StringLeafCursorCanonicalTest.java",
+        "git": "e61909f7696638d1ffc78fb50ce920fd7a1b0da3",
+        "sha256": "8892ad50b51cd77595433dc42d2694d9e05d6359cbeafb79501a03e1c11b982a",
+        "bytes": 5743
+      },
+      "receiverReceipt": {
+        "path": "m3/runtime-integration/leaf-cursor-receipt-20261015.md",
+        "git": "13b2a36514736d6357cb8ccf130fede577ee059b"
+      },
+      "sourceQualifier": {
+        "root": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-leaf-cursor-20261015",
+        "pom": "a8c093e2a0aafafcdc22977244c5e76de1ec03a8",
+        "verifier": "d0b87afa73792542f1dbbff249c3c288241f0aaa"
+      },
+      "contract": "Only private LeafCursor and ArrayDeque import replace transient M3String ranges with owner+primitive-coordinate stack; original order/coalescing/canonical identity retained; owner references cleared on pop; no public String/JNI/payload ABI change.",
+      "existingReceiptClaims": "StockJava21 model169848 assertions and separate44789 String oracle; actual canonical SDK/M3JDK/HotSpot/jtreg/JNI/GC pressure remain explicitly NOT_RUN. Claims not reexecuted by this audit."
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+      "classification": "DRIFT_WITH_KNOWN_SERIAL_SOURCE_LINEAGE_NOT_ADMITTED",
+      "priorAudit": {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "manifestAfter": "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4",
+        "manifestSuperseded": [
+          "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4"
+        ],
+        "currentGitBlob": "0a88ed559b23def5d2229bba3316ea2268b4d720",
+        "currentBytes": 18867,
+        "currentSha256": "edae3c8d3afbd7c1b78aa3f88a4d3fdcd6bd03c9f8ee2ace3044255b44f571ac",
+        "lineage": [
+          {
+            "commit": "a79b274f2cd2b4d0fe3865ca18b231f1850bf692",
+            "gitBlob": "dfbb91cc169916cd0a95798f4cd2151c3407df4c"
+          },
+          {
+            "commit": "8822fe9101ef69430973b073fa40c12a310d08cc",
+            "gitBlob": "ac68eacd6ee4e6048ab424542ccf5c2cf5595908",
+            "description": "trigram tuple cursor scan"
+          },
+          {
+            "commit": "ecc155e127153674c6a14c459bde0f612e7bab65",
+            "gitBlob": "0a88ed559b23def5d2229bba3316ea2268b4d720",
+            "description": "one-line canonical Objects import repair"
+          }
+        ],
+        "firstHashOnlyRepairWouldNotCloseKnownFailure": true
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "classification": "DRIFT_WITH_EXACT_CANONICAL_STRING_POSTIMAGE_NOT_ADMITTED",
+      "targetOwnerCommit": "c8ff37c8673b578f2dd472dc46961dbc91c5a4cc",
+      "targetParent": "9e419c5f88e41397cd65712b6e7995ba11d44ccb",
+      "receiverPr": 870,
+      "sourcePr": 11278,
+      "sourcePrHead": "261ece512a316690874c971b9a7b935731d3526b",
+      "recipe": "com.synexia.rewrite.M3Jdk21RegexDotStarDp",
+      "engines": [
+        "M3HashPinnedJavaSnapshotRecipe",
+        "M3HashPinnedTextSnapshotRecipe"
+      ],
+      "descriptor": "ba2fdc02825c9d77076ee2f4a8e50a61053c20c4",
+      "manifest": "2eccecbcc6590d6e6753303b3f8af08c3dac900f",
+      "stringTemplateExactCurrent": "1454f1b34faea4f61f835ab054cc751c88c0b3c5",
+      "stringBeforeSha256": "eed88205feda9f64b03515603e5807e3f83961ddeb99dae4ef84bd2034d6f568",
+      "stringBeforeAlreadyInManifestSuperseded": true,
+      "originalAdditionalOwners": {
+        "dpTemplate": "9a4df49bb40d3a9e3ff87df3c27dd5d9fffb36df",
+        "testTemplate": "0bf0b26444a3e6918b4cfc9bca95d0750a061fb1"
+      },
+      "actualDpNow": {
+        "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+        "git": "164c3a369de2b888b5e5b532d0553352acccd032",
+        "outsideRuntimeManifest": true
+      },
+      "contract": "Adds tri-state bounded existing-M3-owner dot/star route only after null/literal path; original JDK Pattern.matches fallback remains; surrogate/unsupported syntax/work limits refuse; no new public/JNI API. Current DP evolved beyond initial create-only recipe and must remain a distinct current owner.",
+      "proofBoundary": "Historical patch-module smoke/model claims are not full current modified-JDK/jtreg proof. Do not replay old ADD-only DP recipe over current164c or transfer candidate relation/pressure qualification."
+    },
+    {
+      "paths": [
+        "src/java.base/share/classes/java/util/regex/Pattern.java",
+        "src/java.base/share/classes/java/util/regex/M3PatternQuery.java"
+      ],
+      "classification": "DRIFT_WITH_EXACT_SEALED_COMPILED_DP_THEN_FRONTIER_LINEAGE_NOT_ADMITTED",
+      "compiledDp": {
+        "targetCommit": "18f10cd995a4d68f43cb6fedd983413388c7f9cc",
+        "canonicalSourceCommit": "40a609520ad2b4dea21f8b3697eef73f3cefdab4",
+        "recipe": "com.synexia.m3.PatternDp",
+        "class": "4be9cafb1377e7ddfe195fafdedfea3f81ef2ab5",
+        "manifest": "45f1859dde2fe3d07271d6aa002959c1408d98ea",
+        "descriptor": "e504e5413fe9750d49b043787c5644af6c360117",
+        "queryBefore": "7a13107628460134548a02095ca5985437a112bb",
+        "queryAfter": "741864212f351408f5ff18b5a37671cebc0c1632",
+        "patternBefore": "ee1c1951a7498c191810bc1901fff48972cddd53",
+        "patternAfterExactCurrent": "252e46fb57e824f30688eac3600bae9480511fc8",
+        "receiverReceipt": "d79de4d3a973c6a81b804728fc8dee9e2dd382f7",
+        "sdkTests": [
+          {
+            "path": "synexia-openrewrite-recipes/recipes/m3-pattern-dp-20261014/src/test/java/com/synexia/rewrite/M3PatternDpRecipeTest.java",
+            "git": "c62457eda54db6b1ee44162a5e066cd3bf017d27"
+          },
+          {
+            "path": "synexia-openrewrite-recipes/recipes/m3-pattern-dp-20261014/src/test/java/com/synexia/rewrite/M3PatternDpCustodyTest.java",
+            "git": "aa60554d9d6b0ff3346303f072a43d831792c482"
+          }
+        ],
+        "jtreg": "38550b92abab9e51cc7eeb4d193057224b87cdfe",
+        "contract": "Reuse compiled JDK predicates and bounded Boolean row; exact Matcher fallback; public/stateful regex contract remains authority."
+      },
+      "frontier": {
+        "targetScalarCommit": "072c2ff660c7ca36aba1d488672ce1ab02f27d2a",
+        "scalarQuery": "5c453c53df900aefca8585c031d6dd68e7e8aa5f",
+        "targetWideCommit": "e057fc0c4080821abebab9d4c5567c7e3763a910",
+        "wideQueryExactCurrent": "2eb4ca854b6ef35d57d7a2599c97c3024ff81296",
+        "canonicalWideSourceCommit": "25bbf2ba6a6fa134c72a049e8f4763011dc7576c",
+        "recipe": "com.synexia.rewrite.M3PatternAsciiReceive20261014",
+        "manifestAtExactWideSource": {
+          "git": "d3d8112ac658444d3e16570fe4d8f879870125c5",
+          "sha256": "7d1122846f22aecc0265fbee8c86562ee4e5d6b63003d0967646c2fffcafc4b0"
+        },
+        "sdkTestAtExactWideSource": {
+          "git": "0fbe7c44883dfeb44ea78d3a4b933ec7d0c623df",
+          "methods": [
+            "schedulerExactOutputAndFixedPoint",
+            "refusalAndUnrelatedData"
+          ]
+        },
+        "currentFiveOwnerCohort": [
+          "2eb4ca854b6ef35d57d7a2599c97c3024ff81296",
+          "af50b74953870e3d94d6ec319c3fc4f59e56ceb3",
+          "7939fcb615f0e31045283eb8659cf223f516f666",
+          "e412ab17c42fd7875380e657a2643e388d562776",
+          "fdab20de4b99b35b562425dd55ef36f94512dc23"
+        ],
+        "allFiveExactToWideManifest": true,
+        "realDependenciesAlreadyWithin66": {
+          "M3TQ": "533a07b77061e757d476627557413f6df1067d34",
+          "M3StringBacking": "5daedbe16dfc9377783b52d932e548cc44f0b335"
+        },
+        "evidence": "51ac1acc03f8a521beb90ba6f47a26c63bfa0756",
+        "sourceStaleGate": {
+          "receiverMetadataSourceRevision": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
+          "sourceFilesAtThatRevision": "404 for both class and manifest in this audit",
+          "latestPr11445Manifest": "ae4261e9ef2a3e791d8debb0a8b72bd8d93dc490",
+          "latestManifestRole": "Current installed2eb is PREIMAGE for a later BMP candidate21b59, not latest postimage. Pin exact25bb wide manifest; do not rerun latest source recipe blindly."
+        },
+        "contract": "<=63 scalar preserved;64..256 atoms use <=5localfrontier words, fixed work bounds and old rolling fallback; surrogate UNKNOWN and dead-frontier checks retained. JNI only independent test oracle. Existing scoped proof records realtargetclasses on stockJDK, not target-built String/HotSpot/GC/CDS. Maven/OpenRewrite full SDK remains separately unproved in historical receipt."
+      }
+    }
+  ],
+  "staleGatesAndAcceptance": [
+    "apply.py --check deterministically rejects first drift M3String.java at manifest position20 before reaching other five. Source hash mismatch alone does not establish behavioral incompatibility; checker is correctly fail-closed against its historical admitted envelope.",
+    "test_current_tree_is_exact_superseded_fixed_point and test_every_current_target_matches_after_or_exact_superseded cannot satisfy their contracts on this pinned cohort. No Python tests were executed here.",
+    "test_each_unknown_drift_is_refused_without_partial_write requires an admitted baseline. With six existing drifts, an individual mutation may be refused at an earlier unrelated owner, so negative-path coverage cannot be inferred from passing refusal assertions alone.",
+    "Historical patch remains exact and all four nativeMUTF8 fan-in owners match their explicitly admitted exact hashes. Preserve historical receipts/patch/manifests and the existing all-or-none four-owner refusal.",
+    "New source-sealed descendant evidence does not turn six DRIFT rows into runtime-authorized successors. Complete current Java/native/JDK/jtreg/platform compatibility, current-owner recipe SDK fixedpoint/refusals, source-custody and storage admission remain separate acceptance.",
+    "A finite repair must close all66 exact current states, preserve every old receipt and historical before/after replay semantics, refuse unknown and partial successor combinations and remain nonmutating at current fixedpoint for check/apply/reverse. No hash-only allowlist insertion is justified by this read-only report."
+  ],
+  "nextAuthorizedScope": "READ_ONLY_AUDIT_COMPLETE. No runtime manifest/apply/test edits or reseal in this phase. Root may select finite existing donor recipes after recording a physical borrow-first decision for any future custody repair.",
+  "sourceCodeOrRecipesChanged": false,
+  "architectureAdded": false,
+  "executedRuntimeTests": "NOT_RUN"
+}

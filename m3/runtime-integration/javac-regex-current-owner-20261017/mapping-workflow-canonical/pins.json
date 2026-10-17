@@ -1,0 +1,59 @@
+{
+  "schema": "M3_CANONICAL_MAPPING_HOSTED_WORKFLOW_RECEIVING_SDK_INPUTS_V1",
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "files": [
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "unchangedGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "unchangedGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3CanonicalMappingHostedWorkflowRecipe.java",
+      "sha256": "ab9f1e6ef3282bf35d11fab33e85b3c5cdb3a748589d5cf283b05d5b9d428450",
+      "unchangedGitBlob": "adc9c59d8b9e28927b81489e93441054bbc98241"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "unchangedGitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-canonical-mapping-hosted-qualification-20261017/before/m3-first-release-admission.yml",
+      "sha256": "689f6e970fedc702f8d31c36c840954bfdb0da3ca5e4b38de18dbb78a23fadb2",
+      "unchangedGitBlob": "c8e9b91b4c61377eaaa27e603e2a970b920f19b7"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-canonical-mapping-hosted-qualification-20261017/manifest.tsv",
+      "sha256": "6fbd0da9c8c770b75f2850b8e9c6313e4b1a77667997764fd4634f12a3a646a2",
+      "unchangedGitBlob": "8e725208642000fabbf6277ac31a8d971782a2ca"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/m3-canonical-mapping-hosted-qualification-20261017/out/m3-first-release-admission.yml",
+      "sha256": "88ca043886bf8fcc4c9cc5488ad23bdb17ac005187fe44e17794874dd626d18d",
+      "unchangedGitBlob": "189a9292a2150ef04df003ab07cb1febaed0f7f3"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-canonical-mapping-hosted-qualification-20261017.yml",
+      "sha256": "23ed4f90fa8e5dc53c989a86d2a5aba9e5ef267c5e0409270ebfae343574ba9f",
+      "unchangedGitBlob": "e792d521da8d112588fbf313a7413c0b972455f0"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3CanonicalMappingHostedWorkflowRecipeTest.java",
+      "sha256": "5a4c49fd99724b692f51d252b7edeb19938709a6b1d63cb5583a524058a7225c",
+      "unchangedGitBlob": "047df9dd6d37d8ecc39e51905729d557d4a70b1f"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "a86f2e475f24ba1bc0e11a8dc790595788d66ba05b8eb069a898ef01ff85d470",
+      "unchangedGitBlob": "20fdc0b6de51de46bcce615f16ad1dc0dabb1cd4"
+    }
+  ]
+}
