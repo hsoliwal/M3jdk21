@@ -42,7 +42,7 @@ with TemporaryDirectory(prefix="m3-affix-strings-proof-") as directory:
             "-Xlint:all,-serial", "-Werror", "-d", tmp,
             *sources, package / "M3StringAffixPrecompute.java",
             package / "M3StringRegexRowPrecompute.java")
-    for main in ("AffixIndexProof", "RegexRowProof"):
+    for main in ("AffixIndexProof", "RegexRowProof", "AffixRankBeforeAfter"):
         execute("java", "-Xmx512m", "-cp", tmp, "com.m3.affix." + main)
     utilpath = tmp / "java/util"
     utilpath.mkdir(parents=True)
