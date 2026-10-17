@@ -106,6 +106,15 @@ The upstream-inventory workflow exports:
 - `COMPATIBILITY_QUEUE.tsv`;
 - `COMPATIBILITY_QUEUE.summary.json`.
 
+## Actual-source presence witness
+
+[JEP_SOURCE_WITNESS.md](JEP_SOURCE_WITNESS.md) documents the read-only, per-JEP
+source-hash audit. The Maven verify phase emits
+`target/jep-source-witness.tsv` for all 85 released JEP rows, differentiating
+missing packets, unverified receipts, matching named source blobs, drift and
+invalid receipt evidence. **A hash match is not Java-21 compatibility, complete
+implementation, upstream provenance, runtime proof, or promotion authority.**
+
 ## Algorithm evidence catalogue
 
 A3 algorithm evidence lives in ALGORITHM_CATALOGUE.tsv. One row is one JDK-owned/adapted algorithm
