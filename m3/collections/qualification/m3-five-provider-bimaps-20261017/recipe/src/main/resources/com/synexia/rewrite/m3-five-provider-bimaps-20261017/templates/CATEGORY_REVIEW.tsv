@@ -1,0 +1,9 @@
+category	provider	upstream_contract	existing_m3_backend	decision	complexity	provenance
+BIJECTION	Guava	com.google.common.collect.BiMap	com.m3.collections.M3LinkedHashMap<K,V> x2	M3GuavaBiMap: unique value refusal, forcePut and live inverse	Expected O(1) lookups, O(n) adversarial collisions	Guava API only; first-party Apache-2.0; no copied Guava code
+BIJECTION	Apache Commons Collections	org.apache.commons.collections4.BidiMap	com.m3.collections.M3LinkedHashMap<K,V> x2	Reuse upstream AbstractDualBidiMap views and MapIterator, replace only Map owners	Expected O(1) lookups; same as delegate	Apache 4.5.0 API and abstract class via dependency; no vendored vendor code
+BIJECTION	JDK	java.util.Map	Existing M3LinkedHashMap	Reuse JDK Map contract; no renamed java.util classes	Expected O(1) hash	OpenJDK API reference only
+BAG_MULTIMAP	Eclipse Collections	org.eclipse.collections.api.map.MutableMap	Existing MapAdapter.adapt(M3LinkedHashMap)	Retain existing M3LibraryCollections.eclipseMap, do not fake Eclipse BiMap	Delegated	Eclipse11.1.0 EPL-1.0/EDL-1.0 notices retained
+MULTIVALUE_MAP	Spring	org.springframework.util.MultiValueMap	Existing M3SpringMultiValueMap	Retain distinct key-count, absent/empty and aliasing semantics	Delegated	Spring6.2.0 Apache-2.0 dependency
+TWO_POINTER_ARRAY	LeetCode	Remove Element #27	existing M3StateMaskArrays	Reuse precomputed index masks; irrelevant to Java object equality	O(n)	Challenge taxonomy only; no source copied
+BIT_MASK	HackerRank	Bit Manipulation	existing M3IndexMaskCompactor	Reuse admitted native mask selector where primitive batch worth JNI crossing	O(n)	Taxonomy only
+INDEX_VIEW	GeeksforGeeks	Hashing data structure categories	existing M3SlotMap/M3LinkedHashMap	Indexed two-map bijection avoids per-record stored Entry nodes	Expected O(1) probes	Taxonomy only
