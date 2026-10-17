@@ -92,12 +92,11 @@ public final class M3LongIndexProjection {
         if (alignedStates.length != size()) {
             throw new IllegalArgumentException("mask must align with logical view size");
         }
-        // The optional JNI path preserves its existing input-snapshot boundary,
-        // native-required failure semantics, and exact Java-to-native contract.
+        // The index directory is already privately owned and immutable. The range ABI
+        // reads it directly; older binaries retain their original native-copy route.
         if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
-            int[] viewIndices = physicalIndices();
-            int[] selected = M3IndexMaskCompactor.select(
-                    viewIndices, alignedStates, requiredMask, backend);
+            int[] selected = M3IndexMaskCompactor.selectNativeRange(
+                    indices, from, size(), alignedStates, requiredMask);
             return new M3LongIndexProjection(values, selected, 0, selected.length, order);
         }
         // Java selection can use the already-private [from,to) index directory.
@@ -132,6 +131,12 @@ public final class M3LongIndexProjection {
     public M3LongIndexProjection sortedDescending() { return sorted(true); }
 
     private M3LongIndexProjection sorted(boolean descending) {
+        Order requested = descending ? Order.DESCENDING : Order.ASCENDING;
+        if (order == requested || size() < 2) {
+            // A slice/filter retains its direction and tie order; do not re-sort an
+            // immutable directory already in the requested order or copy its window.
+            return new M3LongIndexProjection(values, indices, from, to, requested);
+        }
         int[] current = physicalIndices();
         int size = current.length;
         if (size < 2) {
