@@ -201,21 +201,27 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
     for (jint position = 0; position < length;) {
         jint remaining = length - position;
         jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
-        (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
-        if ((*env)->ExceptionCheck(env)) return NULL;
+        if (mask != 0) {
+            (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+        }
         (*env)->GetIntArrayRegion(env, rows, row_offset + position, chunk, values);
         if ((*env)->ExceptionCheck(env)) return NULL;
-        jsize batch = 0;
-        for (jsize i = 0; i < chunk; i++) {
-            unsigned int flags = (unsigned int)(unsigned char)marks[i];
-            if ((flags & (unsigned int)mask) == (unsigned int)mask) accepted[batch++] = values[i];
+        jsize batch = chunk;
+        if (mask != 0) {
+            batch = 0;
+            for (jsize i = 0; i < chunk; i++) {
+                unsigned int flags = (unsigned int)(unsigned char)marks[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) accepted[batch++] = values[i];
+            }
         }
         if (batch > kept - written) {
             m3_throw_state_drift(env);
             return NULL;
         }
         if (batch > 0) {
-            (*env)->SetIntArrayRegion(env, result, written, batch, accepted);
+            /* Zero-mask identity copies the row chunk without reading aligned states. */
+            (*env)->SetIntArrayRegion(env, result, written, batch, mask == 0 ? values : accepted);
             if ((*env)->ExceptionCheck(env)) return NULL;
             written += batch;
         }
@@ -247,21 +253,27 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
     for (jint position = 0; position < length;) {
         jint remaining = length - position;
         jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
-        (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
-        if ((*env)->ExceptionCheck(env)) return NULL;
+        if (mask != 0) {
+            (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+        }
         (*env)->GetLongArrayRegion(env, rows, row_offset + position, chunk, values);
         if ((*env)->ExceptionCheck(env)) return NULL;
-        jsize batch = 0;
-        for (jsize i = 0; i < chunk; i++) {
-            unsigned int flags = (unsigned int)(unsigned char)marks[i];
-            if ((flags & (unsigned int)mask) == (unsigned int)mask) accepted[batch++] = values[i];
+        jsize batch = chunk;
+        if (mask != 0) {
+            batch = 0;
+            for (jsize i = 0; i < chunk; i++) {
+                unsigned int flags = (unsigned int)(unsigned char)marks[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) accepted[batch++] = values[i];
+            }
         }
         if (batch > kept - written) {
             m3_throw_state_drift(env);
             return NULL;
         }
         if (batch > 0) {
-            (*env)->SetLongArrayRegion(env, result, written, batch, accepted);
+            /* Keep the same detached, exact-sized copy contract as the int window. */
+            (*env)->SetLongArrayRegion(env, result, written, batch, mask == 0 ? values : accepted);
             if ((*env)->ExceptionCheck(env)) return NULL;
             written += batch;
         }
