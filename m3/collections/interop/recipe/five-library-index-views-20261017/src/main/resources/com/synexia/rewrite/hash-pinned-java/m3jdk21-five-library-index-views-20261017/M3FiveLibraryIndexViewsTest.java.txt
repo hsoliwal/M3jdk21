@@ -120,6 +120,7 @@ final class M3FiveLibraryIndexViewsTest {
             }
             if (n == 0) order = new int[0];
             else for (int i = 0; i < m; i++) order[i] = random.nextInt(n);
+            int[] originalOrder = order.clone();
             var view = M3FiveLibraryIndexViews.capture(keys, values, order, states);
             int required = random.nextInt(256), forbidden = random.nextInt(256);
             var expected = new ArrayList<Integer>();
@@ -139,7 +140,7 @@ final class M3FiveLibraryIndexViewsTest {
             for (int i = 0; i < positions.size(); i++) {
                 assertEquals(positions.get(i).intValue(), actual.physicalIndexAt(i));
             }
-            assertArrayEquals(order, Arrays.copyOf(order, order.length));
+            assertArrayEquals(originalOrder, order);
         }
     }
 }
