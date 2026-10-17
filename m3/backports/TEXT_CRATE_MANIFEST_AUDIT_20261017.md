@@ -62,3 +62,38 @@ This change touches **no OpenJDK product source** and does not grant target
 mutation/feature completion authority. Synexia remains the canonical donor
 of reusable A3 transformations; M3JDK21 owns these exact target resource
 receipts. Keep review draft until hosted tests complete.
+
+## Additional Java-source crate audit: 72 / 72
+
+I also audited **all 72** existing crate directories under
+`m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/`
+using the matching current `M3Jdk21HashPinnedSnapshotRecipe` four-column
+schema and the actual crate-root resource file listings.
+
+Exactly **one** Java manifest fails the structural checks:
+
+- `jdk22-m3-string-stream-traversal/manifest.tsv` retained the correct
+  three target paths and template/source hash bytes, but its columns
+  physically appeared as `path, template, before, after` under the
+  `path, before, after, template` header. In particular the parser
+  misinterpreted 64-byte hashes as template filenames.
+- This PR reorders **columns only** for all three rows. It preserves
+  the immutable `M3String.java`, `String.java`, and
+  `M3StringStreamsTest.java` target names, exact SHA-256 pre/post
+  values, and original Java resource bytes unchanged.
+- An additional named JUnit test calls the existing hash-verifying
+  `targetPaths()` API for all 3 Java and all 3 text source owners.
+  No new parser or path-validator implementation is introduced.
+
+**Overall audited denominator:** 144 source-sealed crate manifests
+(72 Java, 72 plain-text). Five structurally malformed manifests were
+identified: four plain text (three repaired in this PR, one in #1015)
+and one Java (repaired in this PR). The scan checked row widths,
+canonical target-path ordering and whether declared flat template
+filenames exist in their crate directories. Actual template SHA-256,
+OpenRewrite replay and Java21 runtime proofs remain distinct acceptance
+gates, not claims from this file-level audit.
+
+For source ownership, the repaired M3 String Java crate remains a
+candidate. No `java.lang.String` or HotSpot product class was
+changed by these manifest corrections.
