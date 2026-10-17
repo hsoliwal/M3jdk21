@@ -7,6 +7,7 @@
 package jdk.internal.mindex;
 
 import java.util.Objects;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Target-owned Boolean dot/star execution plan; not a Pattern parser or public JDK API.
@@ -231,6 +232,382 @@ public final class M3RegexDpPlan {
         return rows;
     }
 
+    /** Requested execution policy. JNI and CUDA are strict; PREFER_JNI may use Java. */
+    public enum BatchBackend { JAVA, JNI, CUDA, PREFER_JNI }
+
+    /** Execution actually performed. An empty batch has no backend execution. */
+    public enum BatchExecution { NONE, JAVA, JNI, CUDA }
+
+    /**
+     * Admission limits for a derived batch. Primitive bytes bound the Java coordinates,
+     * one invocation's result arrays, numeric staging image and simultaneous CPU/CUDA images.
+     * Object headers, effect references and pre-existing immutable Effects are not counted.
+     * Concurrent invocations each own their result arrays; this is not a process heap quota.
+     * State visits conservatively bound preparation and all row evaluations in one call.
+     */
+    public record BatchLimits(int maxEffects, int maxRows, int maxTupleEffects,
+                              long maxPrimitiveBytes, long maxStateVisits) {
+        public BatchLimits {
+            if (maxEffects < 0 || maxRows < 0 || maxTupleEffects < 0
+                    || maxPrimitiveBytes < 0 || maxStateVisits < 0) {
+                throw new IllegalArgumentException("negative prepared batch limit");
+            }
+        }
+
+        public static BatchLimits defaults() {
+            return new BatchLimits(65_536, 65_536, 1_048_576, 64L << 20, 64_000_000L);
+        }
+    }
+
+    private static final int BATCH_ABI = 1;
+    private static final int BATCH_ROWS_PER_CALL = 16_384;
+    private static final int BATCH_EFFECTS_PER_CALL = 65_536;
+
+    /**
+     * Prepare full-match rows over existing Effects, without reading or retaining text.
+     * Offsets are CSR boundaries: row r contains tupleEffects[offsets[r]..offsets[r+1]).
+     * Empty rows and empty Effects are identities. Null means the candidate exceeds a
+     * budget, never NO_MATCH. Malformed coordinates and foreign-plan Effects are errors.
+     */
+    public PreparedBatch prepareBatch(Effect[] effects, int[] tupleEffects, int[] offsets,
+                                      BatchLimits limits, Runnable checkpoint) {
+        return prepareBatch(null, effects, tupleEffects, offsets, null, limits, checkpoint);
+    }
+
+    /**
+     * Prepare rows with a fixed prefix and suffix. Each answer is the complete-input
+     * truth of prefix + row + suffix; this does not implement regex search or assertions.
+     * Affixes remain open at their joins, including high/low surrogate pairs split there.
+     */
+    public PreparedBatch prepareBatch(Effect prefix, Effect[] effects, int[] tupleEffects,
+                                      int[] offsets, Effect suffix, BatchLimits limits,
+                                      Runnable checkpoint) {
+        Objects.requireNonNull(effects, "effects");
+        Objects.requireNonNull(tupleEffects, "tupleEffects");
+        Objects.requireNonNull(offsets, "offsets");
+        Objects.requireNonNull(limits, "limits");
+        check(checkpoint);
+        if (offsets.length == 0) throw new IllegalArgumentException("missing row boundary");
+        int rowCount = offsets.length - 1;
+        int affixes = (prefix == null ? 0 : 1) + (suffix == null ? 0 : 1);
+        long effectCount = (long) effects.length + affixes;
+        if (effectCount > limits.maxEffects || rowCount > limits.maxRows
+                || tupleEffects.length > limits.maxTupleEffects) return null;
+        long stride = 2L + 2L * states;
+        long imageBytes = Math.addExact(Math.multiplyExact(effectCount, stride * Long.BYTES),
+                Math.addExact((long) states * Long.BYTES,
+                        ((long) tupleEffects.length + offsets.length) * Integer.BYTES));
+        // One CPU host image, one CUDA host/device image, staging, and conservative spare
+        // room for bounded workspaces. This bounds numeric allocations, not total JVM heap.
+        long primitiveBytes = Math.addExact(Math.multiplyExact(5L, imageBytes),
+                Math.addExact(((long) tupleEffects.length + offsets.length) * Integer.BYTES,
+                        (long) rowCount * (Long.BYTES * 2L + 2L) + BATCH_ROWS_PER_CALL + 512L));
+        long visits = Math.addExact(effectCount * 4L * states + 3L * states + 6L * states * states,
+                Math.addExact((long) tupleEffects.length * 2L * states, rowCount));
+        if (primitiveBytes > limits.maxPrimitiveBytes || visits > limits.maxStateVisits
+                || effectCount * stride > Integer.MAX_VALUE) return null;
+
+        // Snapshot coordinates before validation. No caller-owned mutable array is retained.
+        Effect[] pinned = new Effect[(int) effectCount];
+        System.arraycopy(effects, 0, pinned, 0, effects.length);
+        int prefixIndex = prefix == null ? -1 : effects.length;
+        int suffixIndex = suffix == null ? -1 : effects.length + (prefix == null ? 0 : 1);
+        if (prefix != null) pinned[prefixIndex] = prefix;
+        if (suffix != null) pinned[suffixIndex] = suffix;
+        int[] tuples = tupleEffects.clone();
+        int[] starts = offsets.clone();
+        long[] lengths = new long[rowCount];
+        for (int i = 0; i < pinned.length; i++) {
+            if ((i & 255) == 0) check(checkpoint);
+            requireEffect(pinned[i]);
+        }
+        if (starts[0] != 0 || starts[rowCount] != tuples.length) {
+            throw new IllegalArgumentException("row boundaries must cover all tuple effects");
+        }
+        long affixLength = Math.addExact(prefix == null ? 0L : prefix.length,
+                suffix == null ? 0L : suffix.length);
+        for (int row = 0; row < rowCount; row++) {
+            check(checkpoint);
+            int start = starts[row], end = starts[row + 1];
+            if (start < 0 || end < start || end > tuples.length) {
+                throw new IllegalArgumentException("invalid prepared row boundary");
+            }
+            long length = affixLength;
+            for (int at = start; at < end; at++) {
+                if ((at & 255) == 0) check(checkpoint);
+                int atom = tuples[at];
+                if (atom < 0 || atom >= effects.length) {
+                    throw new IllegalArgumentException("invalid prepared effect index");
+                }
+                length = Math.addExact(length, pinned[atom].length);
+            }
+            lengths[row] = length;
+            if (end - start > BATCH_EFFECTS_PER_CALL) return null;
+        }
+        // Context-specific witnesses are private derived query state. Existing all-state
+        // Effects stay immutable and retain every ordinary and boundary lane.
+        long seed = prefix == null ? initial : applyRows(prefix.rows, initial);
+        boolean seedHigh = prefix != null && prefix.trailingHigh;
+        long suffixWithoutHigh = suffixPreimage(suffix, false);
+        long suffixWithHigh = suffixPreimage(suffix, true);
+        check(checkpoint);
+        return new PreparedBatch(pinned, tuples, starts, lengths, prefixIndex, suffixIndex,
+                primitiveBytes, imageBytes, seed, seedHigh, suffixWithoutHigh, suffixWithHigh);
+    }
+
+    /** Accepting preimage of one fixed suffix, including complete-input surrogate flush. */
+    private long suffixPreimage(Effect suffix, boolean incomingHigh) {
+        if (suffix == null || suffix.length == 0) {
+            return incomingHigh ? dotPreimage(accepting) : accepting;
+        }
+        long targets = suffix.trailingHigh ? dotPreimage(accepting) : accepting;
+        long[] relation = incomingHigh && suffix.withoutLeadingLow != null
+                ? suffix.withoutLeadingLow : suffix.rows;
+        long witness = preimage(relation, targets);
+        return incomingHigh ? dotPreimage(witness) : witness;
+    }
+
+    /** Reverse existential observation scans all entry rows; it never changes a cached row. */
+    private long preimage(long[] rows, long targets) {
+        long witness = 0;
+        for (int state = 0; state < states; state++) {
+            if ((rows[state] & targets) != 0) witness |= 1L << state;
+        }
+        return witness;
+    }
+
+    private long dotPreimage(long targets) {
+        long witness = 0;
+        for (int state = 0; state < states; state++) {
+            if ((advanceMatched(1L << state, dots) & targets) != 0) witness |= 1L << state;
+        }
+        return witness;
+    }
+
+    private void requireEffect(Effect effect) {
+        Objects.requireNonNull(effect, "effect");
+        if (effect.plan != this) throw new IllegalArgumentException("different regex plan");
+    }
+
+    /** Immutable complete-input answers, with exact UTF-16 lengths and an execution receipt. */
+    public static final class BatchResult {
+        private final byte[] answers;
+        private final long[] lengths;
+        private final BatchExecution execution;
+
+        private BatchResult(byte[] answers, long[] lengths, BatchExecution execution) {
+            this.answers = answers;
+            this.lengths = lengths;
+            this.execution = execution;
+        }
+
+        public int rowCount() { return answers.length; }
+        public boolean matches(int row) { return answers[Objects.checkIndex(row, answers.length)] != 0; }
+        public long utf16Length(int row) { return lengths[Objects.checkIndex(row, lengths.length)]; }
+        public BatchExecution execution() { return execution; }
+    }
+
+    /**
+     * Reusable, closeable numeric execution view of existing immutable Effects. It owns no
+     * canonical text, parser or effect cache. Native tables are prepared lazily and retained
+     * once per backend. Fixed affixes become one open seed and two boundary-aware suffix
+     * acceptance preimages; row execution visits only its tuple fragments. Close waits for
+     * active native chunks, releases both images and drops
+     * the Java pins. Checkpoints always run outside lifecycle locks and can safely close it.
+     */
+    public final class PreparedBatch implements AutoCloseable {
+        private final ReentrantReadWriteLock lifecycle = new ReentrantReadWriteLock(true);
+        private final int rowCount;
+        private final int prefixIndex, suffixIndex;
+        private final long primitiveBytesBound, imageBytes;
+        private final long seed, suffixWithoutHigh, suffixWithHigh;
+        private final boolean seedHigh;
+        private Effect[] effects;
+        private int[] tuples, offsets;
+        private long[] lengths;
+        private long jniHandle, cudaHandle;
+        private boolean closed;
+
+        private PreparedBatch(Effect[] effects, int[] tuples, int[] offsets, long[] lengths,
+                              int prefixIndex, int suffixIndex,
+                              long primitiveBytesBound, long imageBytes, long seed, boolean seedHigh,
+                              long suffixWithoutHigh, long suffixWithHigh) {
+            this.effects = effects;
+            this.tuples = tuples;
+            this.offsets = offsets;
+            this.lengths = lengths;
+            this.rowCount = lengths.length;
+            this.prefixIndex = prefixIndex;
+            this.suffixIndex = suffixIndex;
+            this.primitiveBytesBound = primitiveBytesBound;
+            this.imageBytes = imageBytes;
+            this.seed = seed;
+            this.seedHigh = seedHigh;
+            this.suffixWithoutHigh = suffixWithoutHigh;
+            this.suffixWithHigh = suffixWithHigh;
+        }
+
+        public int rowCount() { return rowCount; }
+        public long primitiveBytesBound() { return primitiveBytesBound; }
+        public boolean isOpen() {
+            lifecycle.readLock().lock();
+            try { return !closed; }
+            finally { lifecycle.readLock().unlock(); }
+        }
+
+        /**
+         * Evaluate every row, with the same checkpoint boundaries for all backends.
+         * JNI absence is eligible only for PREFER_JNI fallback. Runtime failures, invalid
+         * geometry and cancellation propagate, and never become a definitive false answer.
+         */
+        public BatchResult matches(BatchBackend backend, Runnable checkpoint) {
+            Objects.requireNonNull(backend, "backend");
+            check(checkpoint);
+            byte[] answers;
+            long[] resultLengths;
+            BatchExecution execution;
+            lifecycle.writeLock().lock();
+            try {
+                ensureOpen();
+                answers = new byte[rowCount];
+                resultLengths = lengths.clone();
+                execution = rowCount == 0 ? BatchExecution.NONE : chooseBackend(backend);
+            } finally { lifecycle.writeLock().unlock(); }
+            int start = 0;
+            while (start < rowCount) {
+                check(checkpoint);
+                lifecycle.readLock().lock();
+                try {
+                    ensureOpen();
+                    int end = chunkEnd(start);
+                    if (execution == BatchExecution.JAVA) {
+                        for (int row = start; row < end; row++) {
+                            answers[row] = (byte) (matchRow(row) ? 1 : 0);
+                        }
+                    } else if (execution == BatchExecution.JNI) {
+                        batchEvaluate0(jniHandle, start, end, answers, start);
+                    } else {
+                        batchCudaEvaluate0(cudaHandle, start, end, answers, start);
+                    }
+                    for (int row = start; row < end; row++) {
+                        if (answers[row] != 0 && answers[row] != 1) {
+                            throw new IllegalStateException("invalid prepared regex truth result");
+                        }
+                    }
+                    start = end;
+                } finally { lifecycle.readLock().unlock(); }
+            }
+            check(checkpoint);
+            return new BatchResult(answers, resultLengths, execution);
+        }
+
+        private BatchExecution chooseBackend(BatchBackend backend) {
+            if (backend == BatchBackend.JAVA) return BatchExecution.JAVA;
+            boolean cuda = backend == BatchBackend.CUDA;
+            if ((cuda ? cudaHandle : jniHandle) == 0) {
+                try {
+                    int abi = cuda ? batchCudaAbi0() : batchAbi0();
+                    if (abi != BATCH_ABI) {
+                        if (backend == BatchBackend.PREFER_JNI) return BatchExecution.JAVA;
+                        throw new UnsupportedOperationException("prepared regex ABI mismatch");
+                    }
+                    long[] lanes = packedEffects();
+                    long[] dotRows = identityRows();
+                    advanceRows(dotRows, dots);
+                    long handle = cuda
+                            ? batchCudaCreate0(lanes, dotRows, states, initial, accepting,
+                                    tuples, offsets, prefixIndex, suffixIndex, imageBytes)
+                            : batchCreate0(lanes, dotRows, states, initial, accepting,
+                                    tuples, offsets, prefixIndex, suffixIndex, imageBytes);
+                    if (handle == 0) throw new IllegalStateException("prepared regex returned no handle");
+                    if (cuda) cudaHandle = handle;
+                    else jniHandle = handle;
+                } catch (UnsatisfiedLinkError unavailable) {
+                    if (backend == BatchBackend.PREFER_JNI) return BatchExecution.JAVA;
+                    throw new UnsupportedOperationException("prepared regex " + backend + " unavailable", unavailable);
+                }
+            }
+            return cuda ? BatchExecution.CUDA : BatchExecution.JNI;
+        }
+
+        private long[] packedEffects() {
+            int stride = 2 + 2 * states;
+            long[] lanes = new long[Math.multiplyExact(effects.length, stride)];
+            for (int i = 0; i < effects.length; i++) {
+                Effect effect = effects[i];
+                int base = i * stride;
+                lanes[base] = effect.length;
+                lanes[base + 1] = (effect.withoutLeadingLow == null ? 0L : 1L)
+                        | (effect.trailingHigh ? 2L : 0L);
+                System.arraycopy(effect.rows, 0, lanes, base + 2, states);
+                System.arraycopy(effect.withoutLeadingLow == null ? effect.rows : effect.withoutLeadingLow,
+                        0, lanes, base + 2 + states, states);
+            }
+            return lanes;
+        }
+
+        private int chunkEnd(int start) {
+            int end = start;
+            int used = 0;
+            while (end < rowCount && end - start < BATCH_ROWS_PER_CALL) {
+                int next = offsets[end + 1] - offsets[end];
+                if (end != start && used + next > BATCH_EFFECTS_PER_CALL) break;
+                used += next;
+                end++;
+            }
+            return end;
+        }
+
+        private boolean matchRow(int row) {
+            long frontier = seed;
+            boolean pendingHigh = seedHigh;
+            int start = offsets[row], end = offsets[row + 1];
+            for (int at = start; at < end; at++) {
+                Effect effect = effects[tuples[at]];
+                if (effect.length == 0) continue;
+                long[] relation = effect.rows;
+                if (pendingHigh) {
+                    frontier = advanceMatched(frontier, dots);
+                    if (effect.withoutLeadingLow != null) relation = effect.withoutLeadingLow;
+                }
+                frontier = applyRows(relation, frontier);
+                pendingHigh = effect.trailingHigh;
+            }
+            return (frontier & (pendingHigh ? suffixWithHigh : suffixWithoutHigh)) != 0;
+        }
+
+        private void ensureOpen() {
+            if (closed) throw new IllegalStateException("prepared regex batch is closed");
+        }
+
+        @Override public void close() {
+            lifecycle.writeLock().lock();
+            try {
+                if (closed) return;
+                closed = true;
+                long cpu = jniHandle, gpu = cudaHandle;
+                jniHandle = cudaHandle = 0;
+                effects = null;
+                tuples = offsets = null;
+                lengths = null;
+                try { if (cpu != 0) batchClose0(cpu); }
+                finally { if (gpu != 0) batchCudaClose0(gpu); }
+            } finally { lifecycle.writeLock().unlock(); }
+        }
+    }
+
+    /**
+     * Explicit internal attachment of the optional CUDA provider. The provider uses this
+     * plan's numeric Effects and distinct JNI symbols; it does not replace libjava or add
+     * another regex parser. No library is loaded implicitly by a String operation.
+     */
+    public static void loadCudaBatchProvider(String absolutePath) {
+        System.load(Objects.requireNonNull(absolutePath, "absolutePath"));
+        if (batchCudaAbi0() != BATCH_ABI) {
+            throw new UnsupportedOperationException("prepared regex CUDA ABI mismatch");
+        }
+    }
+
     public final class Effect {
         private final M3RegexDpPlan plan = M3RegexDpPlan.this;
         private final long[] rows;
@@ -384,4 +761,16 @@ public final class M3RegexDpPlan {
     static native long[] compose0(long[] left, long[] right);
     static native long[] composeStructured0(long[] left, long[] right);
     static native long[] repeat0(long[] rows, long count, boolean structured);
+    static native int batchAbi0();
+    static native long batchCreate0(long[] lanes, long[] dotRows, int states,
+            long initial, long accepting, int[] tuples, int[] offsets,
+            int prefix, int suffix, long maxImageBytes);
+    static native void batchEvaluate0(long handle, int start, int end, byte[] answers, int answerOffset);
+    static native void batchClose0(long handle);
+    static native int batchCudaAbi0();
+    static native long batchCudaCreate0(long[] lanes, long[] dotRows, int states,
+            long initial, long accepting, int[] tuples, int[] offsets,
+            int prefix, int suffix, long maxImageBytes);
+    static native void batchCudaEvaluate0(long handle, int start, int end, byte[] answers, int answerOffset);
+    static native void batchCudaClose0(long handle);
 }

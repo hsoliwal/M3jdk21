@@ -9,9 +9,9 @@ import sys
 ROOT = Path(__file__).resolve().parents[3]
 FILES = {
     "src/java.base/share/classes/java/lang/M3StringRegexDp.java":
-        "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e",
+        "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4",
     "test/jdk/java/lang/String/M3StringRegexDpTest.java":
-        "971290714bb056831ad844288e66562f88fa87fbf0c4cd17fa0716f9df797ffc",
+        "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a",
     "src/java.base/share/classes/java/lang/M3StringFacts.java":
         "d18122b42e9e4bcb76fd3e807467a59160e012d7ac249efe9cc71e5f6b8faa22"
 }
@@ -28,7 +28,7 @@ for atom in (
     "if (rejectsByPrecompute(source, plan)) return NO_MATCH;",
     "source.factsIfPrepared()",
     "minimumUtf16Units = minimum;",
-    "mandatoryUnitSignals = required;",
+    "mandatoryUnitSignals = requiredSignals;",
     "fixedFirstUnit =",
     "fixedLastUnit =",
     "mandatoryBigramSignals = requiredPairs;",
@@ -39,5 +39,5 @@ for atom in (
 ):
     if atom not in source:
         sys.exit("M3_REGEX_AMALGAMATION_RECEIVER_FAIL lost=" + atom)
-print("M3_REGEX_AMALGAMATION_RECEIVER_PASS files=2 native_untouched=true"
+print("M3_REGEX_AMALGAMATION_RECEIVER_PASS files=3 native_untouched=true"
       " m3_string_owner_unchanged=true")

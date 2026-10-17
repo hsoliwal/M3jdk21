@@ -7,8 +7,8 @@ import sys
 root = Path(__file__).resolve().parents[3]
 expected = {
   "src/java.base/share/classes/java/lang/M3StringFacts.java": "d18122b42e9e4bcb76fd3e807467a59160e012d7ac249efe9cc71e5f6b8faa22",
-  "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e",
-  "test/jdk/java/lang/String/M3StringRegexDpTest.java": "971290714bb056831ad844288e66562f88fa87fbf0c4cd17fa0716f9df797ffc",
+  "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4",
+  "test/jdk/java/lang/String/M3StringRegexDpTest.java": "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a",
 }
 for relative, wanted in expected.items():
   p = root / relative

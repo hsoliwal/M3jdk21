@@ -576,6 +576,63 @@
       "candidate_postimage_sha256": "4972d8c3a664867559273a63df340c042eab1fa40f21e7b2139422ed06f942ba",
       "status": "Draft candidate: existing Plan gains conservative minimum-length, mandatory literal signals and fixed edges; JDK Pattern remains authority; full matched runtime gates pending",
       "target_rule": "No duplicate regex grammar/cache, no extra String payload, no native ABI change; read only already-prepared canonical facts, preserve all public JDK semantics"
+    },
+    {
+      "scope": "STRING",
+      "status": "REVIEW_CANDIDATE_WITH_EXECUTED_LOCAL_GATES",
+      "source": "Synexia MIndexRegexProgram/MIndexRegexAtomAlgebra composition lineage and existing M3StringRegexDp grammar",
+      "source_role": "Private convergence workspace for concept refinement, reusable recipes, and donor comparison before product adaptation",
+      "source_blob_reviewed": {
+        "MIndexRegexAtomAlgebra.java": "797d245dbf172ebbd2d2eca7006cef664de41aaa",
+        "MIndexRegexTokenEffectTable.java": "f1ae1b55c752219fa79e105e539b819bd385da6c"
+      },
+      "target": "java.lang.M3StringRegexDp.Plan and java.lang.M3StringRegexDp.tryMatch",
+      "target_path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+      "target_base_commit": "3bbb4712fb20adba1405741db8457164b9f436f5",
+      "target_before_git_blob": "90f61b4649858af48dbaf48f06016389e55e2014",
+      "target_before_sha256": "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e",
+      "target_after_sha256": "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4",
+      "canonical_recipe_owner": "hsoliwal/com.synexia",
+      "recipe_implementation": "Reuse existing com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe and canonical hash-pinned text emission machinery",
+      "runtime_rule": "Reuse the existing exact weak-owner/range/Plan/incoming effect entry before bounded affix scans. Two int literal boundary lengths reference existing atoms; use forward CodeUnitCursor over canonical source coordinates. Never retain source spelling or a second payload.",
+      "semantics_rule": "Only definitive negative affix proofs return NO_MATCH; successful affix guards proceed to existing exact DP. ASCII literal/dot/star grammar, work bounds, Java line terminators, Pattern fallback, weak cache identities, and native ABI remain unchanged.",
+      "resource_rule": "At most 2,560 extra retained primitive bytes across existing slot bounds; no additional cache owner. New scans use at most the existing 128-unit admitted pattern budget. Compatible cold calls can incur additional bounded reads; uncomputed warm negative proofs still repeat the guard.",
+      "tested": "47,904 exact full-class Java21 fixture checks, compiled jtreg source; five cache identity lanes, zero-read warm exact hit, UTF16 surrogate UNKNOWN, prepared-fact resolution, shared slices, prefix/suffix near-miss work bounds",
+      "pending": [
+        "matched M3JDK jtreg with M3 on/off and CompactStrings variants",
+        "matched native/HotSpot integration",
+        "full Java regex suite",
+        "product CPU/retained-heap/native-process-memory qualification"
+      ],
+      "receiving_phase_advanced": false,
+      "notes": "Append a successor mapping; preserve historical #1003/#1004/#1029 mappings and the full-family unevaluated ledger. Full-match affix guards do not claim general lookingAt/find/suffix acceptance.",
+      "source_reviewed_commit": "11c94feb18155a53cc213708c353791132edc4a7",
+      "source_default_branch": "develop",
+      "recipe": "com.synexia.m3jdk.RopeAffixPreparedEffects20261017",
+      "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017",
+      "evidence": "m3/runtime-integration/regex-rope-affix-effects/recipe/QUALIFICATION.md"
+    },
+    {
+      "source": "Synexia MIndexRegexAtomAlgebra, MIndexRegexTokenEffectTable and prepared executor lifecycle; existing M3RegexDpPlan UTF-16 Effects",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_reviewed_commit": "11c94feb18155a53cc213708c353791132edc4a7",
+      "source_role": "Private convergence workspace; compare concepts and qualify product-specific Java/JNI adaptations",
+      "recipe": "com.synexia.m3jdk.RopeAffixPreparedEffects20261017",
+      "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017",
+      "existing_target_owner": "jdk.internal.mindex.M3RegexDpPlan",
+      "target_paths": [
+        "src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java",
+        "src/java.base/share/native/libjava/M3RegexDpPlan.c"
+      ],
+      "status": "REVIEW_CANDIDATE_JAVA_JNI_LOCAL_CONTRACT_GATES; MATCHED_PRODUCT_GATES_PENDING",
+      "semantics": "Existing full-match relation effects only. Prepare fixed prefix once as an open frontier with pending-high state; prepare two exact suffix acceptance preimages. Rows traverse only ordered variable fragment references. Preserve supplementary/unpaired UTF-16 semantics across every join.",
+      "ownership": "Existing immutable Effect references pinned in a closeable bounded prepared batch. No second String payload, parser, regex grammar, cache owner or shared row narrowing. JNI uses validated opaque handles and bounded numeric images.",
+      "limits": "Bound row count, tuple references, primitive image bytes, state visits and chunk size before allocation; cancellation checkpoints outside lifecycle locks; close releases Java/native images.",
+      "cuda": "Optional source-reviewed provider remains in private convergence workspace. No nvcc/device qualification or GPU speedup claim; no implicit String loading.",
+      "public_api": "Existing public JDK interfaces are unchanged; new batch entry points are in the established internal owner only.",
+      "receiving_phase_advanced": false,
+      "evidence": "m3/runtime-integration/regex-rope-affix-effects/recipe/QUALIFICATION.md",
+      "license": "Preserve GPL-2.0-only WITH Classpath-exception-2.0 target files; Apache-2.0 recipe ownership; retain all donor notices."
     }
   ],
   "imported_donor_sources": [],

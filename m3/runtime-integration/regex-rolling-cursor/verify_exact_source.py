@@ -9,9 +9,9 @@ import sys
 ROOT = Path(__file__).resolve().parents[3]
 files = {
     "src/java.base/share/classes/java/lang/M3StringRegexDp.java":
-        "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e",
+        "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4",
     "test/jdk/java/lang/String/M3StringRegexDpTest.java":
-        "971290714bb056831ad844288e66562f88fa87fbf0c4cd17fa0716f9df797ffc"
+        "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a"
 }
 for file, expected in files.items():
     path = ROOT / file

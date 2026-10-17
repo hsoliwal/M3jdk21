@@ -56,6 +56,23 @@ final class M3StringRegexDp {
             if (plan == null || ((long) m + 1) * (plan.atoms.length + 1) > MAX_DP_CELLS) {
                 return UNKNOWN;
             }
+            if (plan.closure != null && m >= MIN_EFFECT_UNITS) {
+                M3StringOwner owner = source.owner();
+                long coordinate = ((long) source.start() << 32) | Integer.toUnsignedLong(m);
+                long incoming = plan.closure[0];
+                int slot = (System.identityHashCode(owner) ^ System.identityHashCode(plan)
+                        ^ Long.hashCode(Long.rotateLeft(coordinate, 13) ^ incoming))
+                        & (EFFECT_SLOTS - 1);
+                Effect effect = cache.effects.get(slot);
+                // A previously exact whole-range effect has already validated
+                // this immutable text. Do not charge its warm hits for affixes.
+                // UNKNOWN remains eligible for a new necessary-condition proof.
+                if (effect != null && effect.owner.get() == owner && effect.plan == plan
+                        && effect.coordinate == coordinate && effect.incoming == incoming
+                        && effect.outgoing != UNKNOWN) {
+                    return (effect.outgoing & (1L << plan.atoms.length)) != 0 ? MATCH : NO_MATCH;
+                }
+            }
             // Amalgamate cached pattern minima/edge literals with already-prepared
             // canonical text signals before entering either execution engine.
             if (rejectsByPrecompute(source, plan)) return NO_MATCH;
@@ -73,8 +90,9 @@ final class M3StringRegexDp {
     /**
      * Conservative pre-match gate shared by the rolling-DP and bitset/effect
      * engines. Positive candidate facts are never accepted as regex truth.
-     * Never force a text scan merely to reject a candidate: only already
-     * published canonical owner/range facts are consulted.
+     * Signals use only already published canonical owner/range facts. Exact
+     * mandatory literal boundaries use the existing code-unit cursor, without
+     * materializing the text or preparing facts for the whole source.
      */
     private static boolean rejectsByPrecompute(M3String source, Plan plan) {
         int length = source.length();
@@ -84,13 +102,30 @@ final class M3StringRegexDp {
         if (length != 0 && plan.fixedLastUnit >= 0
                 && source.charAt(length - 1) != plan.fixedLastUnit) return true;
         M3StringFacts known = source.factsIfPrepared();
-        return known != null && (
+        if (known != null && (
                 (known.bitSignal64 & plan.mandatoryUnitSignals)
                         != plan.mandatoryUnitSignals
                 || (known.bigramSignal64 & plan.mandatoryBigramSignals)
                         != plan.mandatoryBigramSignals
                 || (known.trigramSignal64 & plan.mandatoryTrigramSignals)
-                        != plan.mandatoryTrigramSignals);
+                        != plan.mandatoryTrigramSignals)) return true;
+
+        if (plan.literalPrefixUnits > 1 || plan.literalSuffixUnits > 1) {
+            M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(source);
+            // The first/last units were checked above. Both remaining ranges
+            // advance forwards so a cursor retains each scalar interval.
+            for (int i = 1; i < plan.literalPrefixUnits; i++) {
+                if (units.at(i) != (char) plan.atoms[i]) return true;
+            }
+            int sourceStart = length - plan.literalSuffixUnits;
+            int atomStart = plan.atoms.length - plan.literalSuffixUnits;
+            for (int i = 0; i < plan.literalSuffixUnits - 1; i++) {
+                if (units.at(sourceStart + i) != (char) plan.atoms[atomStart + i]) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static Tables tables() {
@@ -248,9 +283,10 @@ final class M3StringRegexDp {
     private static long maximumRetainedPrimitiveBytes() {
         long perPlan = MAX_PATTERN_UNITS * (long) Integer.BYTES
                 + (MAX_BIT_ATOMS + 1L + 128L + 2L) * Long.BYTES + Integer.BYTES;
-        // Six precomputed facts: min length, required units/pairs/triples,
-        // and fixed boundaries. Effects may retain evicted compiled plans.
-        perPlan += 3L * Integer.BYTES + 3L * Long.BYTES;
+        // Eight precomputed facts: min length, required units/pairs/triples,
+        // fixed boundaries and literal boundary lengths. Effects may retain
+        // evicted compiled plans.
+        perPlan += 5L * Integer.BYTES + 3L * Long.BYTES;
         return (PLAN_SLOTS + (long) EFFECT_SLOTS) * perPlan
                 + EFFECT_SLOTS * 3L * Long.BYTES;
     }
@@ -283,6 +319,8 @@ final class M3StringRegexDp {
         final long mandatoryTrigramSignals;
         final int fixedFirstUnit;
         final int fixedLastUnit;
+        final int literalPrefixUnits;
+        final int literalSuffixUnits;
 
         Plan(int[] atoms, int units) {
             this.atoms = atoms;
@@ -323,6 +361,14 @@ final class M3StringRegexDp {
             mandatoryUnitSignals = requiredSignals;
             mandatoryBigramSignals = requiredPairs;
             mandatoryTrigramSignals = requiredTriples;
+            int prefix = 0;
+            while (prefix < atoms.length && (atoms[prefix] & STAR) == 0
+                    && (atoms[prefix] & CODE_UNIT) != '.') {
+                prefix++;
+            }
+            literalPrefixUnits = prefix;
+            // The final uninterrupted literal run from the same gram pass.
+            literalSuffixUnits = consecutiveLiterals;
             int first = atoms[0];
             int last = atoms[atoms.length - 1];
             fixedFirstUnit = (first & STAR) == 0

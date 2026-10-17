@@ -19,8 +19,8 @@ STRING = "src/java.base/share/classes/java/lang/M3String.java"
 FACTS = "src/java.base/share/classes/java/lang/M3StringFacts.java"
 BEFORE = "e8320c0669740b7d3a579a9c1e408f6291b3d01f"
 BEFORE_SHA = "f875210dfb605799b6c8dbee53b28ad6383e000d90da775f7fd285464da7b2d3"
-AFTER_SHA = "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e"
-TEST_SHA = "971290714bb056831ad844288e66562f88fa87fbf0c4cd17fa0716f9df797ffc"
+AFTER_SHA = "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4"
+TEST_SHA = "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a"
 
 def run(command, **kwargs):
     outcome = subprocess.run(command, check=False, **kwargs)
@@ -168,7 +168,7 @@ def main():
             ("M3String.java", fixture_owner()),
         ]:
             (work / filename).write_text(content, encoding="utf-8")
-        oracle = Path(__file__).with_name("RegexAmalgamationBeforeAfter.java")
+        oracle = Path(__file__).parent / "src/test/java/RegexAmalgamationBeforeAfter.java"
         run(["javac", "--release", "21", "-proc:none", "-Xlint:all,-auxiliaryclass", "-Werror",
              "-d", directory, str(work / "RegexBefore.java"),
              str(work / "RegexAfter.java"), str(work / "M3String.java"), str(oracle)])
