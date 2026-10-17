@@ -1,0 +1,117 @@
+{
+  "schema": "M3_CANONICAL_REGEX_MAPPING_RECONCILIATION_V1",
+  "atUtc": "2026-10-17 08:43:45 UTC",
+  "baseCommit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+  "sourceCommit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+  "authority": "m3/docs/name-mapping.json migration.records; existing name-mapping.schema.json and migration.py remain unchanged",
+  "precodeFoss": "05cdea4750e4e53d2960e2d2661d0f642f51ae48",
+  "stages": {
+    "A": {
+      "git": "a44460f982940623cf6ba1ca625caeeaa889f633",
+      "sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "records": 56
+    },
+    "B": {
+      "git": "5b423f474830923ce816a528e172ac96757cb99a",
+      "sha256": "daad1f0947f85d88179d6653fcffc5b66070c27f22bce9bf8853e076a45b60aa",
+      "records": 60,
+      "operation": "append four records only"
+    },
+    "C": {
+      "git": "e504ecfb8991cf3f0f10406b2b3dd356ed70fa67",
+      "sha256": "d115f231d02264036402920be8427f50a05661cd9ea3dbf0794c67c0ab8e10ab",
+      "records": 60,
+      "operation": "refresh TQ target custody and retain previous target lineage"
+    },
+    "D": {
+      "git": "188b06b9e25edb3373825d59d12b97ad1d2d1dce",
+      "sha256": "d9f17863e6325f7085967152ea725dfa9ab1b3b97ed21ee221a006e74fc10091",
+      "records": 60,
+      "operation": "record the unavailable receiving recipe under its actual historical source commit"
+    }
+  },
+  "replay": {
+    "entry": "com.m3.CanonicalRegexMappingReconciliation",
+    "eligibility": "exact A or exact D; intermediate B/C require their explicit stage recipe",
+    "rollback": "com.m3.CanonicalRegexMappingRollback",
+    "rollbackEligibility": "exact D to exact A only; foreign edits refuse",
+    "separateStages": [
+      "CanonicalRegexMappingAppend",
+      "CanonicalTqTargetLineage",
+      "CanonicalSparseRecipeSourceCustody"
+    ],
+    "automaticNestedCompositionClaimed": false
+  },
+  "conservation": {
+    "oldRecords": 56,
+    "unchangedOldRecords": 54,
+    "existingRecordsMetadataUpdated": 2,
+    "addedRecords": 4,
+    "oldStatusContractTestFieldsPreserved": true,
+    "oldTopLevelMappings": 55,
+    "oldGates": 20,
+    "appendInverse": "EXACT_A_BYTES",
+    "tqDeltaInverse": "EXACT_B_BYTES",
+    "sourceCustodyDeltaInverse": "EXACT_C_BYTES"
+  },
+  "sdk": {
+    "path": "m3/migration/regex-reconciliation-20261017/sdk",
+    "core": "acb7e31ace0871a7a4d1630ff899a19e922a9d52",
+    "pins": "468a8604a5cb7324c9c6c268253157ed8be3a061",
+    "pinsSha256": "99e64f97550dfebede86c8d0fabfd3d2de2700a51e3b302af4676b1aeb2c9ab2",
+    "files": 24,
+    "sourceBytes": 2718717,
+    "donor": "4a38e39d0755462d40c2b22548b87abde938ea0b",
+    "tests": 3,
+    "closureRefusals": 73,
+    "reportRefusals": 21,
+    "operationRefusals": 15,
+    "intermediateFullEntryRefusals": 2,
+    "retainedOutputs": 5,
+    "actual": "NOT_RUN",
+    "dedicatedQualification": "NOT_SCHEDULED"
+  },
+  "sourceCustodyAudit": {
+    "implementedRecords": 26,
+    "targetRows": 30,
+    "uniqueTargetPaths": 29,
+    "targetComparisons": "MATCH",
+    "receivingRecipeRows": 24,
+    "receivingRecipeComparisons": "MATCH",
+    "historicalSparseRecipe": {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72",
+      "git": "2fdaa30d27463bb9e9bff5064cbd4015571d3aa9",
+      "sha256": "725a5dbccbfa4ff834586c21f9c495fffec985dd9d9033f86fc6e808ea421fa2",
+      "bytes": 395,
+      "existsAtCurrentSource515f": false,
+      "existsAtReceivingE28": false
+    }
+  },
+  "coverage": {
+    "records": 60,
+    "statusCounts": {
+      "implemented-tested": 1,
+      "implemented-unverified": 25,
+      "pending": 32,
+      "blocked": 2
+    },
+    "completionBlockers": 158,
+    "reportRendererDonor": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7 render_report/completion_errors",
+    "reportGeneration": "RAM rendition of existing pure renderer rules; original Python CLI NOT_RUN"
+  },
+  "actual": {
+    "independentSourceAndByteReview": "PASS",
+    "pythonGlobalValidate": "NOT_RUN",
+    "physicalCheckoutSymlinkGates": "NOT_RUN",
+    "maven": "NOT_RUN",
+    "matchedCompleteJdk": "NOT_RUN",
+    "jni": "NOT_RUN",
+    "runtimeAcceptance": "NOT_RUN",
+    "formalAutoreview": "NOT_RUN_STORAGE_HOLD",
+    "runtimeApplied": false,
+    "phaseAdvanced": false
+  },
+  "goal": "ACTIVE",
+  "storage": "ACTIVE_HOLD"
+}
