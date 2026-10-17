@@ -1,0 +1,39 @@
+name: M3JDK21 filtered stored representative receiver Java21
+
+on:
+  push:
+    branches:
+      - m3/filtered-stored-representative-20261017
+  pull_request:
+    paths:
+      - "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java"
+      - "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java"
+      - "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentative*"
+      - "m3/collections/qualification/stored-representative-20261017/**"
+      - ".github/workflows/m3-stored-representative-receiver-20261017.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  source-and-behavior:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+            m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java
+            m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java
+            m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeTest.java
+            m3/collections/qualification/stored-representative-20261017/
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Compile and test installed exact Java21 owner and interpreter variant
+        run: sh m3/collections/qualification/stored-representative-20261017/verify.sh
+      # The canonical Maven/OpenRewrite source-first recipe must also qualify
+      # in Synexia; this thin job does not claim a whole-module Maven/JNI pass.
