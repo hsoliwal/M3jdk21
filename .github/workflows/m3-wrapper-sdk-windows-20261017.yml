@@ -1,0 +1,59 @@
+name: M3 wrapper SDK Windows qualification
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/wrappers/boundaries-20261017/**'
+      - '.github/workflows/m3-wrapper-sdk-windows-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sdk-windows:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Preserve canonical source bytes on this ephemeral runner
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prepare source-sealed resources only
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 https://github.com/hsoliwal/M3jdk21.git 11dde1eac33cea2a8b90baba8c155eabec341144
+          python m3/collections/wrappers/boundaries-20261017/prepare.py
+      - name: Actual Maven SDK generation and refusal suite
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/wrappers/recipe/pom.xml \
+            -Dtest=M3WrapperBoundaryRecipeTest \
+            -Dm3.boundary.output="$RUNNER_TEMP/m3-boundary-sdk-output" test
+      - name: Install only actual SDK output then compile and test Java21
+        run: |
+          set -euo pipefail
+          python m3/collections/wrappers/boundaries-20261017/prepare.py \
+            --install-sdk-output "$RUNNER_TEMP/m3-boundary-sdk-output"
+          mkdir -p "$RUNNER_TEMP/m3-boundary-classes"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-boundary-classes" \
+            m3/collections/src/main/java/com/m3/collections/M3MappedViews.java \
+            m3/collections/wrappers/src/test/java/com/m3/collections/M3WrapperBoundaryProof.java
+          java -ea -cp "$RUNNER_TEMP/m3-boundary-classes" com.m3.collections.M3WrapperBoundaryProof
+          java -ea -cp "$RUNNER_TEMP/m3-boundary-classes" com.m3.collections.M3WrapperBoundaryProof overflow
+          git diff --check
+      - name: Preserve independent Windows SDK outputs and reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-wrapper-sdk-windows
+          path: |
+            ${{ runner.temp }}/m3-boundary-sdk-output
+            m3/collections/wrappers/recipe/target/surefire-reports
+          if-no-files-found: error
