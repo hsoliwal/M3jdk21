@@ -62,6 +62,29 @@ public final class M3IndexMaskCompactor {
     public static long[] selectLong(long[] orderedRows, byte[] rowStates, int requiredMask) {
         Objects.requireNonNull(orderedRows, "orderedRows");
         validate(rowStates, orderedRows.length, requiredMask);
+        return selectLongJava(orderedRows, rowStates, requiredMask);
+    }
+
+    /**
+     * Explicit optional JNI batch mask selection for 64-bit coordinate IDs.
+     * Java remains the oracle. This is a detached result, never a live view.
+     */
+    public static long[] selectLong(long[] orderedRows, byte[] rowStates,
+                                    int requiredMask, Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(rowStates, "rowStates");
+        Objects.requireNonNull(backend, "backend");
+        validate(rowStates, orderedRows.length, requiredMask);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            return selectLongNative(orderedRows, rowStates, requiredMask);
+        }
+        return selectLongJava(orderedRows, rowStates, requiredMask);
+    }
+
+    private static long[] selectLongJava(long[] orderedRows, byte[] rowStates, int requiredMask) {
         long[] selected = new long[countSelected(rowStates, requiredMask)];
         int written = 0;
         for (int i = 0; i < orderedRows.length; i++) {
@@ -142,4 +165,8 @@ public final class M3IndexMaskCompactor {
 
     private static native int[] selectNative(int[] orderedRows, byte[] rowStates,
                                               int requiredMask);
+
+    /** JNI bulk primitive mask kernel, no callbacks, handles or retained native pointers. */
+    private static native long[] selectLongNative(long[] orderedRows, byte[] rowStates,
+                                                  int requiredMask);
 }

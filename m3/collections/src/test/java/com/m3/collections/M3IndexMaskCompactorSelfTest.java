@@ -23,7 +23,7 @@ public final class M3IndexMaskCompactorSelfTest {
         compositionPreservesOrder(requireNative);
         allMasksAndLengths(requireNative);
         randomizedDifferential(requireNative);
-        primitiveOwnersAndLongIds();
+        primitiveOwnersAndLongIds(requireNative);
         System.out.println("PASS M3IndexMaskCompactorSelfTest checks=" + checks
                 + " JNI=" + requireNative);
     }
@@ -52,6 +52,25 @@ public final class M3IndexMaskCompactorSelfTest {
             eq(new int[] {-17}, M3IndexMaskCompactor.select(source, states, 255, nativeBackend));
             eq(source, M3IndexMaskCompactor.select(source, states, 0, nativeBackend));
         }
+        long[] ids = {Long.MIN_VALUE, 0L, Long.MAX_VALUE, Long.MIN_VALUE};
+        eq(ids, M3IndexMaskCompactor.selectLong(ids, states, 0, java));
+        eq(new long[] {0L}, M3IndexMaskCompactor.selectLong(ids, states, 255, java));
+        fails(NullPointerException.class,
+                () -> M3IndexMaskCompactor.selectLong(ids, states, 0, null));
+        fails(NullPointerException.class,
+                () -> M3IndexMaskCompactor.selectLong(null, states, 0, java));
+        fails(IllegalArgumentException.class,
+                () -> M3IndexMaskCompactor.selectLong(ids, new byte[3], 0, java));
+        fails(IllegalArgumentException.class,
+                () -> M3IndexMaskCompactor.selectLong(ids, states, -1, java));
+        fails(IllegalArgumentException.class,
+                () -> M3IndexMaskCompactor.selectLong(ids, states, 256, java));
+        if (nativeRun) {
+            eq(ids, M3IndexMaskCompactor.selectLong(ids, states, 0,
+                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+            eq(new long[] {0L}, M3IndexMaskCompactor.selectLong(ids, states, 255,
+                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+        }
     }
 
     private static void compositionPreservesOrder(boolean nativeRun) {
@@ -74,12 +93,23 @@ public final class M3IndexMaskCompactorSelfTest {
                 rows[i] = i % 9 - 4;
                 states[i] = (byte) ((i * 101 + (i >>> 3)) & 255);
             }
+            long[] longRows = new long[n];
+            for (int i = 0; i < n; i++) {
+                longRows[i] = i % 3 == 0 ? Long.MIN_VALUE : (i % 3 == 1 ? Long.MAX_VALUE : i - 700L);
+            }
             for (int mask = 0; mask < 256; mask++) {
                 int[] expected = oracle(rows, states, mask);
                 eq(expected, M3IndexMaskCompactor.select(rows, states, mask,
                         M3IndexMaskCompactor.Backend.JAVA));
                 if (nativeRun) {
                     eq(expected, M3IndexMaskCompactor.select(rows, states, mask,
+                            M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                }
+                long[] longExpected = M3IndexMaskCompactor.selectLong(longRows, states, mask);
+                eq(longExpected, M3IndexMaskCompactor.selectLong(longRows, states, mask,
+                        M3IndexMaskCompactor.Backend.JAVA));
+                if (nativeRun) {
+                    eq(longExpected, M3IndexMaskCompactor.selectLong(longRows, states, mask,
                             M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
                 }
             }
@@ -108,7 +138,7 @@ public final class M3IndexMaskCompactorSelfTest {
     }
 
     /** Differential test over actual primitive List and circular Deque owners. */
-    private static void primitiveOwnersAndLongIds() {
+    private static void primitiveOwnersAndLongIds(boolean nativeRun) {
         Random random = new Random(0x4d334d41534b5632L);
         for (int trial = 0; trial < 1_024; trial++) {
             int length = random.nextInt(288);
@@ -130,6 +160,12 @@ public final class M3IndexMaskCompactorSelfTest {
             long[] expected = new long[expectedValues.size()];
             for (int i = 0; i < expected.length; i++) expected[i] = expectedValues.get(i);
             eq(expected, M3IndexMaskCompactor.selectLong(inputs, states, required));
+            eq(expected, M3IndexMaskCompactor.selectLong(inputs, states, required,
+                    M3IndexMaskCompactor.Backend.JAVA));
+            if (nativeRun) {
+                eq(expected, M3IndexMaskCompactor.selectLong(inputs, states, required,
+                        M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+            }
             ok(M3IndexMaskCompactor.selectedCount(states, required) == expected.length);
 
             M3LongArrayList list = M3LongArrayList.copyOf(inputs);
