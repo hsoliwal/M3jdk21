@@ -563,6 +563,22 @@
       "source_revision_receipt": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
       "target_rule": "Actual upstream tool implementations and APIs retained. M3-owned internal source recipes; no shadow implementation, API rename, java.base replacement or runtime phase advancement.",
       "license": "Preserve Apache and embedded notices; SLF4J MIT; first-party recipe/integration Apache-2.0"
+
+    },
+    {
+      "source": "OpenJDK JDK-8371656 HashMap.putAll optimizations (27 GA)",
+      "source_revision": "13c92d0d4d137c7d83a946d1fcd2dfc5686e7b51",
+      "source_git_repo": "openjdk/jdk",
+      "source_path": "src/java.base/share/classes/java/util/HashMap.java",
+      "source_license": "GPLv2 with Classpath exception",
+      "target": "java.util.HashMap",
+      "target_path": "src/java.base/share/classes/java/util/HashMap.java",
+      "internal_optimization_owner": "java.util.HashMap.putHashMapEntries",
+      "recipe": "com.synexia.m3.Jdk27HashMapBulk20261017",
+      "canonical_recipe_pr": "hsoliwal/com.synexia#11969",
+      "receiver_test": "test/jdk/java/util/HashMap/M3HashMapBulkCopyTest.java",
+      "status": "candidate backport installed on draft branch; java.base patch testing and target runtime/jtreg gates pending; String-first receiving priority unchanged",
+      "target_rule": "Preserve public Map contracts and fallback for nonexact HashMap source types; no Synexia runtime dependency, no new M3 payload owner or native ABI."
     }
   ],
   "imported_donor_sources": [],
