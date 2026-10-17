@@ -1,0 +1,4 @@
+# path	before	after	template
+m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	cfe0eb7335e3945f35b4a9763e11e0a7dff6c672f7014733f15e876b0b06909e	83cd0889654b821f2e2b344b08192eda38c5d9b954a7213a95767e270fab8914	M3CollectionViews.java.txt
+m3/collections/src/test/java/com/m3/collections/M3FilteredListViewSelfTest.java	ABSENT	d9daf0c5daca212eabc88d4d7b216a4fd12a2b9ac0291aa2498e64888890b04e	M3FilteredListViewSelfTest.java.txt
+m3/collections/src/test/java/com/m3/collections/M3FilteredListViewTest.java	ABSENT	9c216a7ae72348644bb5af3c5362d52943b0b0edb50cd4c5972f6fc3cc18f0c8	M3FilteredListViewTest.java.txt
