@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.FilteredMapDirectProjectionReceiver20261017
+displayName: Source-sealed M3JDK21 isolated collection module direct projection
+description: Target-specific three-output receiver using the retained canonical Synexia OpenRewrite snapshot engine; no JDK java.base changes.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-direct-map-projection-20261017
