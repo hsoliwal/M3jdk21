@@ -102,7 +102,7 @@ public final class RegexRollingBeforeAfter {
                 throw new AssertionError("old/new trial=" + trial);
             }
             if (before >= 0) {
-                boolean expected = Pattern.matches(pattern, raw.toString());
+                boolean expected = Pattern.matches(pattern.toString(), raw.toString());
                 checks++;
                 if ((before == 1) != expected) {
                     throw new AssertionError("Pattern parity trial=" + trial);
@@ -120,7 +120,7 @@ public final class RegexRollingBeforeAfter {
                 throw new AssertionError("slice cursor trial=" + trial);
             }
             if (oldSlice >= 0) {
-                boolean expected = Pattern.matches(pattern,
+                boolean expected = Pattern.matches(pattern.toString(),
                         raw.substring(begin, end));
                 checks++;
                 if ((oldSlice == 1) != expected) {
