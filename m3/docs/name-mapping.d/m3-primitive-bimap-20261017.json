@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "source_synexia_commit": "22a9f028071e83191809cf5d85728ef54eaae256",
+  "source_recipe": "com.synexia.m3.Jdk21PrimitiveBiMap20261017",
+  "target_base": "14268ef0dc4d043d7cdbe96d4c25f7b88a4656f1",
+  "target": "com.m3.collections.M3LongBiMap",
+  "disposition": "PRIMITIVE_ANALOGUE_ONLY",
+  "storage": "reuse two M3LongLongHashMap parallel long[] key/value lanes and byte[] occupancy flags",
+  "api_mappings": [
+    {
+      "source": "com.google.common.collect.BiMap",
+      "source_owner": "google/guava@5e82f2f528fbbd970e00748025b48e3eb42ed702",
+      "license": "Apache-2.0",
+      "status": "primitive analogue, not Guava interface implementation"
+    },
+    {
+      "source": "org.eclipse.collections.api.bimap.BiMap",
+      "source_owner": "eclipse-collections/eclipse-collections@ff113f40cc43b3903f3d1c8cdbc95d3ebd6623db",
+      "license": "EPL-1.0 AND EDL-1.0 per source",
+      "status": "primitive analogue, not Eclipse interface implementation"
+    },
+    {
+      "source": "org.apache.commons.collections4.BidiMap",
+      "source_owner": "apache/commons-collections@0b545e2f21ee8f2e8269201b5754465d76db70c7",
+      "license": "Apache-2.0",
+      "status": "primitive analogue, not Apache interface implementation"
+    },
+    {
+      "source": "org.springframework.util.MultiValueMap",
+      "source_owner": "spring-projects/spring-framework@49adc91c7e41eaafb52fc11e1210989894bda1f3",
+      "license": "Apache-2.0",
+      "status": "separate unrelated multivalue contract; no BiMap substitution"
+    },
+    {
+      "source": "java.util.Map",
+      "source_owner": "OpenJDK 21",
+      "license": "GPL-2.0-with-classpath-exception",
+      "status": "JDK API retained; M3 primitive type not a Map"
+    }
+  ],
+  "qualification": "DRAFT_HOLD_REAL_OWNER_MAVEN_OPENREWRITE_PROOFS_PENDING"
+}
