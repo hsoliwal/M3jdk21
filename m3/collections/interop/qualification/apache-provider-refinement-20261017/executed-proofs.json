@@ -1,0 +1,44 @@
+[
+  {
+    "proof": "core80-02",
+    "mode": "core",
+    "passed": true,
+    "inputs_unchanged": true,
+    "exit_code": 0
+  },
+  {
+    "proof": "provider-compile-02",
+    "mode": "provider-compile",
+    "passed": true,
+    "inputs_unchanged": true,
+    "exit_code": 0
+  },
+  {
+    "proof": "provider-runtime-01",
+    "mode": "provider",
+    "passed": true,
+    "inputs_unchanged": true,
+    "exit_code": 0
+  },
+  {
+    "proof": "apache-junit-01",
+    "mode": "junit",
+    "passed": true,
+    "inputs_unchanged": true,
+    "exit_code": 0
+  },
+  {
+    "proof": "recipe-composite-02",
+    "mode": "recipe",
+    "passed": true,
+    "inputs_unchanged": true,
+    "exit_code": 0
+  },
+  {
+    "proof": "sdk-custody-01",
+    "mode": "sdk-custody",
+    "passed": true,
+    "inputs_unchanged": true,
+    "exit_code": 0
+  }
+]

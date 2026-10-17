@@ -1,0 +1,35 @@
+{
+  "scope": "existing Apache ListValuedMap and SetValuedMap provider qualification",
+  "base_commit": "2fff90986d745dab1a1b84bafbccbd8f4c0c6513",
+  "prior_receiver_pr": 1143,
+  "provider": {
+    "artifact": "org.apache.commons:commons-collections4:4.5.0",
+    "license": "Apache-2.0",
+    "mode": "WRAP; unchanged production adapter"
+  },
+  "snapshot_engines": [
+    {
+      "path": "engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "donor_repository": "hsoliwal/M3jdk21",
+      "donor_commit": "976bb5c6c58439a772124d62e1c7103d3b8428c1",
+      "git_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+      "license": "Apache-2.0",
+      "decision": "DIRECT_IMPORT"
+    },
+    {
+      "path": "engine-src/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "donor_repository": "hsoliwal/com.synexia",
+      "donor_commit": "bc1634ab0387288e677afd563a01782b90aae618",
+      "git_blob": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
+      "license": "Apache-2.0",
+      "decision": "DIRECT_IMPORT"
+    }
+  ],
+  "contract_transition": {
+    "before_sha256": "0c983a1132ba969d612742f4dfe7c5bcfa76f00bcfb7a8038ba4d7b2074ac488",
+    "after_sha256": "0a15f1f7d992c1e5fb371e50e2ad7dad8fe880c259614f1293cfe585e106f875"
+  },
+  "review_status": "INDEPENDENT_REVIEW_PENDING",
+  "ci_status": "PENDING",
+  "full_library_contract_admission": false
+}
