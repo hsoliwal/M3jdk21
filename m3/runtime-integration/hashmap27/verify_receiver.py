@@ -6,7 +6,7 @@ from hashlib import sha256
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 FILES = {
     "src/java.base/share/classes/java/util/HashMap.java":
         "8e5a059db03409858132297dd68811e16c19fc83d91d4449bdeca824f073605f",
