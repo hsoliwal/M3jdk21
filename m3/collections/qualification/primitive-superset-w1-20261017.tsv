@@ -1,0 +1,13 @@
+# path	before_sha256	after_sha256	template
+m3/collections/src/main/java/com/m3/collections/DenseHash.java	ABSENT	0bbb0c8fa381d545f55b6daceed9e7a9d63167b0b2b63acc95a80d4f42c5fb94	DenseHash.java.txt
+m3/collections/src/main/java/com/m3/collections/LongBitSet.java	ABSENT	03e64351510708d2cabe015867a0f4bdeacabf0f6f18f223b876e231f2bbe35d	LongBitSet.java.txt
+m3/collections/src/main/java/com/m3/collections/PrimitiveArrayDeque.java	ABSENT	e655bb104d2a053a1c90ca7261dced3f84f6a8f8ce50243419c9e43cb8e90361	PrimitiveArrayDeque.java.txt
+m3/collections/src/main/java/com/m3/collections/PrimitiveArrayList.java	ABSENT	96f90162c4d6dd4be8451802c98480fa6e3fc689aefa55cfb8d9cf87698addaf	PrimitiveArrayList.java.txt
+m3/collections/src/main/java/com/m3/collections/PrimitiveBigArray.java	ABSENT	5e343e461ba7129fc8b046fa56284af03718568d2eef7adc8facae4d77a8f542	PrimitiveBigArray.java.txt
+m3/collections/src/main/java/com/m3/collections/PrimitiveHandleTable.java	ABSENT	468ff7dff4422056f75e66e4d425ecc7c99f17676555e65b38e5c06d8becc74c	PrimitiveHandleTable.java.txt
+m3/collections/src/main/java/com/m3/collections/PrimitiveKind.java	ABSENT	ee27e005e11a2d55a05b0314d57983f91c991dff3ce729a1f64388c97f7a9028	PrimitiveKind.java.txt
+m3/collections/src/main/java/com/m3/collections/PrimitivePrimitiveHashMap.java	ABSENT	8bf0790eff9156ccc9b0b6086a67b77835e638d992814fb3f259f377e16913d9	PrimitivePrimitiveHashMap.java.txt
+m3/collections/src/main/java/com/m3/collections/PrimitiveQueue.java	ABSENT	c13fe1930fbbbeb7a2d5c4ba2856238a342c271478cce151dcac573af5892afc	PrimitiveQueue.java.txt
+m3/collections/src/main/java/com/m3/collections/PrimitiveSoaStore.java	ABSENT	5bc34d932d36d2f9fc9b74d4d7989c695540f50d202dd8a1c2b0033207253027	PrimitiveSoaStore.java.txt
+m3/collections/src/main/java/com/m3/collections/PrimitiveSortedGapMap.java	ABSENT	c0c01eeadb9f6c9c300df07027a372cb95561420f678725148b5a4a9ce00bf5c	PrimitiveSortedGapMap.java.txt
+m3/collections/src/main/java/com/m3/collections/PrimitiveStack.java	ABSENT	4478ccaa90311e675f7516f95669256dad10424a6b12d0f9a8f060dcb68786a8	PrimitiveStack.java.txt
