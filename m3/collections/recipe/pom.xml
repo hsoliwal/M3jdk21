@@ -19,7 +19,7 @@
     <sourceDirectory>${repo.root}/m3/tooling/migration-recipes/src/main/java</sourceDirectory>
     <resources><resource>
       <directory>${repo.root}/m3/tooling/migration-recipes/src/main/resources</directory>
-      <includes><include>com/synexia/rewrite/hash-pinned-java/m3-collection-lanes/**</include><include>com/synexia/rewrite/segmented-lane-native/**</include><include>META-INF/rewrite/m3-collection-lanes.yml</include></includes>
+      <includes><include>com/synexia/rewrite/hash-pinned-java/m3-collection-lanes/**</include><include>com/synexia/rewrite/hash-pinned-java/m3-filtered-list-view-20261017/**</include><include>com/synexia/rewrite/segmented-lane-native/**</include><include>META-INF/rewrite/m3-collection-lanes.yml</include><include>META-INF/rewrite/m3-filtered-list-view-20261017.yml</include></includes>
     </resource></resources>
     <plugins>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
