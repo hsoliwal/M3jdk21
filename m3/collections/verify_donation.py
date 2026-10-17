@@ -166,6 +166,42 @@ def include_path_mask_successor(historical_rows, receipt=_PATH_MASK_RECEIPT):
         extra.append((path, after))
     return [*historical_rows, *extra]
 
+
+# Exact M3 Collection SDK 2026-10-17 source successor; older receipts remain immutable.
+_SDK_RECEIPT = HERE / 'sdk/SDK_SOURCE_MANIFEST.tsv'
+_SDK_SHA256 = 'b6b9816aad15cd24b924b5c47c06e9d7b4f3840edeeeb80673f0c56d8b7b7b00'
+_SDK_PATHS = (
+    'm3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java',
+    'm3/collections/src/main/java/com/m3/collections/M3IndexPartitions.java',
+    'm3/collections/src/main/java/com/m3/collections/M3LongBag.java',
+    'm3/collections/src/test/java/com/m3/collections/M3CollectionSdkJUnitTest.java',
+    'm3/collections/src/test/java/com/m3/collections/M3CollectionSdkSelfTest.java',
+)
+
+
+def include_sdk_successor(prior_rows, receipt=_SDK_RECEIPT):
+    """Admit only the exact five independently generated SDK Java sources."""
+    if not receipt.exists() and not receipt.is_symlink():
+        return list(prior_rows)
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _SDK_SHA256:
+        raise SystemExit('SDK source manifest missing, aliased or modified')
+    entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
+    if len(entries) != len(_SDK_PATHS):
+        raise SystemExit('Expected five SDK source paths')
+    existing = {path for path, _ in prior_rows}
+    if len(existing) != len(prior_rows):
+        raise SystemExit('Duplicate inherited SDK source path')
+    extra = []
+    for row, expected in zip(entries, _SDK_PATHS):
+        if (len(row) != 4 or row[0] != expected or row[1] != 'ABSENT'
+                or len(row[2]) != 64
+                or any(char not in '0123456789abcdef' for char in row[2])
+                or row[3] != expected.rsplit('/', 1)[1] + '.after'
+                or row[0] in existing):
+            raise SystemExit('SDK source receipt drift: ' + expected)
+        extra.append((row[0], row[2]))
+    return [*prior_rows, *extra]
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
@@ -208,7 +244,7 @@ def main():
         raise SystemExit('Installed source manifest drift: actual=' + digest(manifest) + ' expected=' + packet['installed_source_manifest_sha256'] + '; reconcile with canonical recipe before verifying')
     rows = [line.split('\t') for line in manifest.read_text().splitlines()
             if line and not line.startswith('#')]
-    rows = include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows)))
+    rows = include_sdk_successor(include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows))))
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
