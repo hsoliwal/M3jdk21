@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.PurposeWrapperJdkReceiver20261017
+displayName: Receive high-grade Synexia purpose-specific Java21 collection wrappers into M3JDK21
+description: Exact source-sealed 11-file Java LST copy from first-party donor owners; JDK public APIs unchanged.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-purpose-wrapper-receiver-20261017
