@@ -755,7 +755,7 @@
       "source_blob_sha1": "ab51de6af292a2286ef3326398994a89b50725fc",
       "target": "com.m3.collections.M3FilteredLists",
       "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
-      "target_sha256": "94e3976440ee1cec2477e73d7a77caeda2523969d53a9407a03b8adbd5d765d9",
+      "target_sha256": "5204f0a3eb29ce84107ba5fa40ee00943da277c99a37c8355bd1bc216ee074b5",
       "disposition": "ADDITIVE_RECIPE_SEALED_CANDIDATE_NOT_JDK_BACKEND_PROMOTION",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia",
@@ -770,6 +770,16 @@
         "source_contract": "Binding of View spliterator iterator deferred until first valid tryAdvance; fail-fast after binding preserved",
         "status": "DRAFT_TARGET_RUNTIME_QUALIFICATION_PENDING",
         "jni_symbols": "UNCHANGED"
+      },
+      "deep_filter_plan_refinement": {
+        "recipe": "com.synexia.rewrite.M3Jdk21FilteredListStackSafe20261017",
+        "origin": "hsoliwal/com.synexia",
+        "original_target_sha256": "94e3976440ee1cec2477e73d7a77caeda2523969d53a9407a03b8adbd5d765d9",
+        "refined_target_sha256": "5204f0a3eb29ce84107ba5fa40ee00943da277c99a37c8355bd1bc216ee074b5",
+        "expression_donor": "hsoliwal/M3jdk21@67feb628e55d886d4a82fd8bc4e8a3a63fe2c967:src/java.base/share/classes/java/util/CollectionViews.java",
+        "source_contract": "Preserve ordered short circuit and exceptions; immutable O(depth) predicate terms, O(1) composition and constant stack",
+        "jni_abi": "UNCHANGED",
+        "acceptance": "DRAFT_UNTIL_HOSTED_MAVEN_JAVA21_MODULE_INSTALLED_RUNTIME_PROOF"
       }
     }
   ],
