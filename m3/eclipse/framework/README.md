@@ -53,3 +53,21 @@ JFace/Workbench event loops, real Equinox resolver/activation qualification, JDT
 refactoring internals, EMF notifications/proxy semantics or PDE launch.
 See `ECLIPSE_FORWARDING_COVERAGE.tsv`, and keep unqualified subsystems
 explicitly marked instead of claiming total Eclipse coverage.
+
+## Composite mask, filtered/sorted and windowed bundle projections
+
+The canonical OpenRewrite recipe `com.synexia.rewrite.M3EclipseMaskSort` adds
+required/excluded state masks to the existing `M3LongIndexProjection` without
+changing its original required-only API or payload owner. Java selects physical
+index IDs directly; optional JNI reuses the existing `m3_collections_mask` ABI
+through a single precomputed eligibility byte plane.
+
+`M3EclipseBundleSnapshot.sortedById` and `sortedWindowById` order captured
+long bundle IDs by stable indexed mergesort, then materialize only original
+Equinox Bundle references. Checked windows operate after filtering and sorting.
+The capability is detached and read-only; bundle lifecycle stays with Equinox.
+
+Algorithm evaluation: `m3/collections/algorithm-catalog/eclipse-m3-mask-sort-20261017.tsv`.
+Tests cover signed values, stable ties, duplicate occurrences, random mask cases,
+window boundaries and opt-in JNI parity. Real Maven/OSGi runtime and resource
+benchmarks remain proof gates, not inferred from recipe source presence.
