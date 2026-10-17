@@ -29,3 +29,7 @@ Named recipe: `com.synexia.m3jdk.FilteredListView20261017`.
 Reusable engine: `com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe`.
 
 The recipe/test/resources were committed before the three product/test postimages, and installed targets are byte-identical to their sealed templates.
+
+## Additive branch convergence
+
+The owner postimage also absorbs the already-qualified first-party M3JDK21 #990 `filteredSnapshot` and `filteredSortedSnapshot` APIs plus their shared one-pass `selectedCopy` atom. This avoids losing those methods when the generic filtered-wrapper and snapshot-fusion branches converge.
