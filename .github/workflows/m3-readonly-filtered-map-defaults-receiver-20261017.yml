@@ -32,7 +32,7 @@ jobs:
             echo "The original source unexpectedly passed the new oracle"
             exit 1
           fi
-          grep -F 'NO_UOE: absent putIfAbsent' "$RUNNER_TEMP/red.log"
+          grep -F 'NO_UOE: absent conditional remove' "$RUNNER_TEMP/red.log"
       - name: Generated source must pass new and existing JDK contract oracles
         run: |
           mkdir -p "$RUNNER_TEMP/m3-new-classes"
