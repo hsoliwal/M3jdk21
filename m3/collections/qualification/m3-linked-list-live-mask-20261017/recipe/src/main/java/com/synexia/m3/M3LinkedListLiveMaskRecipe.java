@@ -22,7 +22,7 @@ public final class M3LinkedListLiveMaskRecipe {
     public static final String ORACLE =
             "m3/collections/src/test/java/com/m3/collections/M3LinkedListLiveMaskContract.java";
     public static final String BEFORE = "31efffe0d25132b393178bec38906e5b977d8939a246a59115afeccb6a23e11b";
-    public static final String AFTER = "cf3cb92edb93b3dd7bd6e602ea2cc9df98ef01900d7b5dfe4c1d0363e8fbe069";
+    public static final String AFTER = "1f9a2315db0f9a695402b47a7f6f1e124ed08e186e3460f9ce9757b324bd43c0";
     public static final String TEST = "56253c26a1f4e13c7c314642f328ea754d8135e9839606f9a71a55eecbf75919";
     private M3LinkedListLiveMaskRecipe() { }
     private static byte[] template(String name, String expected) throws IOException {

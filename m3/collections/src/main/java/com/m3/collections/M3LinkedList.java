@@ -125,7 +125,8 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
         private Object[] values = M3SlotArrays.EMPTY_OBJECTS;
         private int[] before = M3SlotArrays.EMPTY_INTS, after = M3SlotArrays.EMPTY_INTS;
         /** Physical-slot occupancy: one bit per slot, not one Java Node or Entry. */
-        private long[] liveMask = new long[0];
+        private static final long[] EMPTY_LIVE_MASK = new long[0];
+        private long[] liveMask = EMPTY_LIVE_MASK;
         private int first = -1, last = -1, free = -1, size, used;
 
         private boolean live(int slot) {
