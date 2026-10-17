@@ -37,13 +37,13 @@
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/manifest.tsv",
-      "sha256": "45ee3c5e9a998eaf9e57f823116e10b7b95ace4d024b1222c03baad36b4a4f36",
-      "unchangedGitBlob": "22acd0ba1ac066278da8db0332c399be5d17409e"
+      "sha256": "119a51be465639f0f4afd4c443996151ea2cc6d85bb64d010834f8bd84d35186",
+      "unchangedGitBlob": "d5a60393069448a2c78a6d9832cd052546195c9d"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/m3-first-release-admission.yml",
-      "sha256": "e05b0bd7b9a60746410a38900f4d9a065adb938168f2c2b403749cb8f0393fa0",
-      "unchangedGitBlob": "433bc08c8e063c44c0459a01de39ffad57c0432e"
+      "sha256": "870a1319893f20b6906aa70a58e72f54b5a14b123ee23982bd78877d2d087f7d",
+      "unchangedGitBlob": "949e5ed7d43362ab14820947a8369006ea4dac90"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/mindex-string-backing.yml",
@@ -62,8 +62,8 @@
     },
     {
       "path": "verify.py",
-      "sha256": "e191cad38ab1d1fe530cd3bee59e84bc28501eac195aae2f1be5639c1e41c591",
-      "unchangedGitBlob": "362ddae75f418fd0d3b63375c4214fac60084475"
+      "sha256": "cf7130365aaa349a2ea810c7e90e55fcf49c39c940e5426a378c88974b9667e3",
+      "unchangedGitBlob": "464a43e490cffba1d0734a9e8bbe880d2f0904e3"
     }
   ]
 }

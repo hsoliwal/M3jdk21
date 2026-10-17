@@ -152,8 +152,8 @@ jobs:
           root = pathlib.Path("m3/runtime-integration/string-successor-sdk-20261017")
           metadata = json.loads((root / "canonical-source.json").read_text(encoding="utf-8"))
           assert metadata["repository"] == "hsoliwal/com.synexia"
-          assert metadata["commit"] == "1cfeb7fc7270a670abf0129237b4975e446c4ede"
-          assert metadata["moduleGitTree"] == "c7ae190b6842afbcf0fe7cff47fd73dc369ccfbc"
+          assert metadata["commit"] == "4be49026cdbaf277a062fb294c519a80535ad42a"
+          assert metadata["moduleGitTree"] == "12902bd47baa70fd524e91addb73541d9eece032"
           assert metadata["openrewriteAdapterGitBlob"] == "1c1b1b568d369f688f6953161636bf36b484bf5a"
           assert metadata["manifestKernelGitBlob"] == "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
           assert metadata["receiverCorePath"] == str(root / "canonical")
@@ -164,7 +164,7 @@ jobs:
               text=True).strip()
           assert actual == metadata["moduleGitTree"], "canonical receiving core tree drift"
           pins = (root / "canonical/pins.json").read_bytes()
-          assert hashlib.sha256(pins).hexdigest() == "5f7efe5023de83cb9739a23a85b5a0d5c698161e7a7c43f524b59fcbee550f61"
+          assert hashlib.sha256(pins).hexdigest() == "93a14c96379d598daf86d0ecfc12aa58a5464e06defa4158e77d35408919c3bb"
           assert shutil.disk_usage(".").free - (512 << 20) >= (8 << 30), "SDK scratch reserve"
           print("M3_STRING_SUCCESSOR_RECEIVING_CORE_TREE_EXACT " + actual)
           guard = json.loads((root / "workflow-canonical-source.json").read_text(encoding="utf-8"))

@@ -14,11 +14,11 @@ from pathlib import Path, PurePosixPath
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent
-SUITES = {"com.synexia.rewrite.M3StringMatchedBuildAdmissionRecipeTest":["everyPartialStateAndOrderPreservesBothPipelinesAndHoldsFullBuild","eachWorkflowRefusesDriftMissingAndDuplicateOwnership"]}
+SUITES = {"com.synexia.rewrite.M3StringMatchedBuildAdmissionRecipeTest":["everyPartialStateAndOrderPreservesBothPipelinesAndHoldsFullBuild(Path)","eachWorkflowRefusesDriftMissingAndDuplicateOwnership"]}
 REQUIRED_PATHS = ["pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java","pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java","pinned-engine/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipe.java","pom.xml","src/main/resources/META-INF/rewrite/m3-string-matched-build-admission-20261017.yml","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/m3-first-release-admission.yml","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/mindex-string-backing.yml","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/manifest.tsv","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/m3-first-release-admission.yml","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/mindex-string-backing.yml","src/test/java/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipeTest.java","verify.py"]
-REQUIRED_GIT_BLOBS = {"pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java":"38df5f97bbeec8a8a8cfc77091d56bda925c07f2","pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java":"1c1b1b568d369f688f6953161636bf36b484bf5a","pinned-engine/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipe.java":"0b81dc7b2b8682681a136d5dcffdb8a6526bd849","pom.xml":"d79867bcc09ad6329e12418e15907e54b8ab025f","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/m3-first-release-admission.yml":"1f0924995cae52819e1bcf76a4d0b4385a287b96","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/mindex-string-backing.yml":"793ea270938003a40f8d54f831b4d189e1f91f97","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/manifest.tsv":"22acd0ba1ac066278da8db0332c399be5d17409e","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/m3-first-release-admission.yml":"433bc08c8e063c44c0459a01de39ffad57c0432e","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/mindex-string-backing.yml":"2a92041b72e27aa38581c47bdd653e7c1e75ceab","src/main/resources/META-INF/rewrite/m3-string-matched-build-admission-20261017.yml":"a4bb79181a8b5cc126ff8c65abfccdb5a524dec5","src/test/java/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipeTest.java":"77e3aa1f80cbb73fb4c2974444efa5657e55d687"}
-REQUIRED_SHA256 = {"pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java":"56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999","pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java":"ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec","pinned-engine/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipe.java":"ffff0c1b6a4012821f7e5bab6b0e04d6a83a9725e208d9fd6c4f0b9f2a3731c5","pom.xml":"f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/m3-first-release-admission.yml":"b44c1590ecbf1df53403ad810601c8fde071e556a149a26f4bec8bf7c8be06d6","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/mindex-string-backing.yml":"ed0f0e4a9577f85a88860df2e226eb010a8bb7b793fcd8201764329c981d25da","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/manifest.tsv":"45ee3c5e9a998eaf9e57f823116e10b7b95ace4d024b1222c03baad36b4a4f36","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/m3-first-release-admission.yml":"e05b0bd7b9a60746410a38900f4d9a065adb938168f2c2b403749cb8f0393fa0","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/mindex-string-backing.yml":"dbcce64499d3b189985137ea0f6580d7fc983b343536abca5fd7d3b6853be0b8","src/main/resources/META-INF/rewrite/m3-string-matched-build-admission-20261017.yml":"e33d975adb1fbc8589ff4e2e0697192d5289a44b60fb12f8a30aa872e84075fe","src/test/java/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipeTest.java":"9067bf486456ddbd70a4199828061e66dfab4cea73473ebfeec125b743d60b29"}
-RECEIVER_OUTPUTS = {".github/workflows/m3-first-release-admission.yml":"e05b0bd7b9a60746410a38900f4d9a065adb938168f2c2b403749cb8f0393fa0",".github/workflows/mindex-string-backing.yml":"dbcce64499d3b189985137ea0f6580d7fc983b343536abca5fd7d3b6853be0b8"}
+REQUIRED_GIT_BLOBS = {"pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java":"38df5f97bbeec8a8a8cfc77091d56bda925c07f2","pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java":"1c1b1b568d369f688f6953161636bf36b484bf5a","pinned-engine/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipe.java":"0b81dc7b2b8682681a136d5dcffdb8a6526bd849","pom.xml":"d79867bcc09ad6329e12418e15907e54b8ab025f","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/m3-first-release-admission.yml":"1f0924995cae52819e1bcf76a4d0b4385a287b96","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/mindex-string-backing.yml":"793ea270938003a40f8d54f831b4d189e1f91f97","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/manifest.tsv":"d5a60393069448a2c78a6d9832cd052546195c9d","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/m3-first-release-admission.yml":"949e5ed7d43362ab14820947a8369006ea4dac90","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/mindex-string-backing.yml":"2a92041b72e27aa38581c47bdd653e7c1e75ceab","src/main/resources/META-INF/rewrite/m3-string-matched-build-admission-20261017.yml":"a4bb79181a8b5cc126ff8c65abfccdb5a524dec5","src/test/java/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipeTest.java":"77e3aa1f80cbb73fb4c2974444efa5657e55d687"}
+REQUIRED_SHA256 = {"pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java":"56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999","pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java":"ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec","pinned-engine/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipe.java":"ffff0c1b6a4012821f7e5bab6b0e04d6a83a9725e208d9fd6c4f0b9f2a3731c5","pom.xml":"f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/m3-first-release-admission.yml":"b44c1590ecbf1df53403ad810601c8fde071e556a149a26f4bec8bf7c8be06d6","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/before/mindex-string-backing.yml":"ed0f0e4a9577f85a88860df2e226eb010a8bb7b793fcd8201764329c981d25da","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/manifest.tsv":"119a51be465639f0f4afd4c443996151ea2cc6d85bb64d010834f8bd84d35186","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/m3-first-release-admission.yml":"870a1319893f20b6906aa70a58e72f54b5a14b123ee23982bd78877d2d087f7d","src/main/resources/com/synexia/rewrite/m3-string-matched-build-admission-20261017/out/mindex-string-backing.yml":"dbcce64499d3b189985137ea0f6580d7fc983b343536abca5fd7d3b6853be0b8","src/main/resources/META-INF/rewrite/m3-string-matched-build-admission-20261017.yml":"e33d975adb1fbc8589ff4e2e0697192d5289a44b60fb12f8a30aa872e84075fe","src/test/java/com/synexia/rewrite/M3StringMatchedBuildAdmissionRecipeTest.java":"9067bf486456ddbd70a4199828061e66dfab4cea73473ebfeec125b743d60b29"}
+RECEIVER_OUTPUTS = {".github/workflows/m3-first-release-admission.yml":"870a1319893f20b6906aa70a58e72f54b5a14b123ee23982bd78877d2d087f7d",".github/workflows/mindex-string-backing.yml":"dbcce64499d3b189985137ea0f6580d7fc983b343536abca5fd7d3b6853be0b8"}
 
 def validate_report(data: bytes, classname: str, methods: list[str]) -> dict[str, int]:
     root = ET.fromstring(data)
@@ -102,7 +102,81 @@ def receiver(repository: Path, pins: dict) -> None:
             raise ValueError("receiving String tooling output drift: " + name)
 
 
+def self_test_reports() -> None:
+    """Prove exact provider-derived names without stripping parameter signatures."""
+    # Independent literal oracle matches the sealed Java methods and pinned provider.
+    expected_suites = {"com.synexia.rewrite.M3StringMatchedBuildAdmissionRecipeTest":["everyPartialStateAndOrderPreservesBothPipelinesAndHoldsFullBuild(Path)","eachWorkflowRefusesDriftMissingAndDuplicateOwnership"]}
+    if SUITES != expected_suites:
+        raise AssertionError("sealed SDK report inventory drift")
+    refused = 0
+    for classname, methods in expected_suites.items():
+        def suite() -> ET.Element:
+            root = ET.Element("testsuite", {
+                "tests": str(len(methods)), "failures": "0", "errors": "0", "skipped": "0",
+            })
+            for method in methods:
+                ET.SubElement(root, "testcase", {"name": method, "classname": classname})
+            return root
+
+        def reject(root: ET.Element) -> None:
+            nonlocal refused
+            try:
+                validate_report(ET.tostring(root, encoding="utf-8"), classname, methods)
+            except ValueError:
+                refused += 1
+            else:
+                raise AssertionError("malformed SDK report admitted")
+
+        baseline = suite()
+        if validate_report(ET.tostring(baseline, encoding="utf-8"), classname, methods) != {
+                "tests": len(methods), "failures": 0, "errors": 0, "skipped": 0}:
+            raise AssertionError("exact provider SDK report refused")
+        for index, method in enumerate(methods):
+            if method.endswith("(Path)"):
+                bare = method[:-6]
+                alternatives = (
+                    bare, bare + "()", bare + "(String)", bare + "(java.nio.file.Path)",
+                    bare + "(Path, Path)", bare + "(Path[])", method + "[1]",
+                )
+            else:
+                alternatives = (method + "()", method + "(Path)", method + "[1]")
+            for wrong_name in alternatives:
+                changed = suite()
+                changed.findall("testcase")[index].set("name", wrong_name)
+                reject(changed)
+        changed = suite()
+        changed.findall("testcase")[-1].set("name", methods[0])
+        reject(changed)
+        changed = suite()
+        changed.remove(changed.findall("testcase")[-1])
+        reject(changed)
+        changed = suite()
+        ET.SubElement(changed, "testcase", {"name": "unreviewed", "classname": classname})
+        reject(changed)
+        changed = suite()
+        changed.findall("testcase")[0].set("classname", classname + "Unreviewed")
+        reject(changed)
+        for tag in ("failure", "error", "skipped"):
+            changed = suite()
+            ET.SubElement(changed.findall("testcase")[0], tag)
+            reject(changed)
+        for field in ("tests", "failures", "errors", "skipped"):
+            changed = suite()
+            changed.set(field, str(len(methods) + 1) if field == "tests" else "1")
+            reject(changed)
+        changed = suite()
+        changed.tag = "testsuites"
+        reject(changed)
+    expected_refusals = sum(
+        sum(7 if method.endswith("(Path)") else 3 for method in methods) + 12
+        for methods in expected_suites.values())
+    if refused != expected_refusals:
+        raise AssertionError("SDK report refusal coverage drift")
+    print("M3_STRING_MATCHED_BUILD_SUREFIRE_SELFTEST_PASS refused=" + str(refused))
+
+
 def self_test(pins: dict, pins_data: bytes) -> None:
+    self_test_reports()
     global ROOT
     original = ROOT
     (original / "target").mkdir(exist_ok=True)

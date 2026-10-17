@@ -282,8 +282,8 @@
     },
     {
       "path": "verify.py",
-      "sha256": "87c9a77a4598026c0288173bd0312b2389339414a6137ec83d5e52112f6a773f",
-      "unchangedGitBlob": "530bd680a38db62a093f56e731c6dcfcb0f79c3e"
+      "sha256": "09844dffc459ee61d67308ac78881239deffa6d59b92ea82a9960c2214162aeb",
+      "unchangedGitBlob": "38105e3f16666e9d65cf95317423d714728ddeb8"
     }
   ]
 }
