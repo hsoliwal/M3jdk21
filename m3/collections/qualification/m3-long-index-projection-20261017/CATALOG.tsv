@@ -1,0 +1,7 @@
+problem_category	problem_reference	candidate	choice	complexity	license/provenance	status
+STABLE_INDIRECT_SORT	LeetCode #88 Merge Sorted Array (taxonomy only)	primitive-index stable bottom-up mergesort	SELECTED	O(n log n) time / O(n) int-index scratch	Original Apache-2.0 M3 recipe; challenge idea only, no code copied	JAVA_ORACLE_GREEN
+STABLE_INDEXED_SORT	HackerRank Fraudulent Activity Notifications (array/rank taxonomy)	value snapshot plus int[] indirect ordering	SELECTED	O(1) indexed read / O(n) index	Original Apache-2.0 M3 implementation; no HackerRank code copied	JAVA_ORACLE_GREEN
+MASK_FILTER	GeeksforGeeks stable array filtering/compaction categories	M3IndexMaskCompactor.select(...) Java/JNI	REUSE	O(n) scan / O(k) result; temporary O(n) index window	Existing M3-owned Java/JNI kernel; no third-party code copied	JNI_PARITY_PENDING_TARGET
+IMMUTABLE_SLICE	JDK Arrays.copyOfRange reference baseline	metadata offsets into owned immutable payload/index	SELECTED	O(1) view / O(1) access	JDK specification API reference only; original M3 source	JAVA_ORACLE_GREEN
+COLLECTIONS_DONOR	Apache Commons Collections CollectionUtils (Apache-2.0)	generic filter/transform wrapper	REFERENCE_ONLY	typically predicate-driven O(n) traversal	https://github.com/apache/commons-collections ; Apache-2.0	NO_CODE_COPIED
+FULL_JDK_BACKEND	java.util List/Map/Set families	indirect snapshot distinct from live collections	DEFER	contract proof required	OpenJDK per-file licensing preserved	NOT_A_REPLACEMENT
