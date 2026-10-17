@@ -1,0 +1,199 @@
+{
+  "schema": "M3_RUNTIME_CURRENT_DP_DIRECT_DEPENDENCY_SOURCE_AUDIT_V1",
+  "atUtc": "2026-10-17 09:53:26 UTC",
+  "status": "FINITE_DIRECT_DEPENDENCY_SOURCE_AUDIT_NO_CODE_OR_RUNTIME_ACCEPTANCE",
+  "repository": "hsoliwal/M3jdk21",
+  "commit": "7ece73842aa4adc965decfa727d2a57b89d72556",
+  "existingRuntimeManifest": {
+    "git": "ebe4a76f7c11f86f1c1cef953940216f6793d321",
+    "applyGit": "6f04034d19b92ed55deba47b870c1d850a734a52",
+    "testsGit": "e90bad7e46a39ec5c9b4c86f774a77116007ed0b",
+    "patchGit": "a5abe528c303f689953731b1ba164e6e6bf53745"
+  },
+  "priorCompleteCohortAudit": {
+    "repository": "hsoliwal/com.synexia",
+    "git": "c90091edc8a5eb9d719e71c9d21ff15a9d4992c1",
+    "scope": "Inherited 66-owner classification; this report independently traces actual DP/native/build direct edges, not a second independent full66 audit."
+  },
+  "currentAdditionalProductionSources": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+      "git": "164c3a369de2b888b5e5b532d0553352acccd032",
+      "bytes": 12692,
+      "sha256": "9a5d9511b996d780f26672e2f5dc6ccc0a2747fe33f0c5ef1a9c62629564a41e",
+      "license": "GPL-2.0 with Classpath exception; original header retained by immutable Git object",
+      "inHistorical66": false
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3StringRegexDp.c",
+      "git": "d9f36a89e95458ac843b32bee8aa34a809909e6b",
+      "bytes": 8429,
+      "sha256": "81440eb281b6401777d02a3ae28787f9d87b12ae10af426a7c78f58a5c9a723c",
+      "license": "GPL-2.0 with Classpath exception; original header retained by immutable Git object",
+      "inHistorical66": false
+    }
+  ],
+  "actualEdges": [
+    {
+      "from": "src/java.base/share/classes/java/lang/String.java",
+      "to": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+      "kind": "Installed boolean regex route owner; six-owner reviewer verifies caller"
+    },
+    {
+      "from": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+      "to": [
+        "M3String",
+        "M3StringOwner",
+        "M3StringTuple",
+        "M3StringAtom"
+      ],
+      "kind": "Custom Java dependencies already in historical66"
+    },
+    {
+      "from": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+      "to": "src/java.base/share/native/libjava/M3StringRegexDp.c",
+      "kind": "private static native advance0; JNIEXPORT Java_java_lang_M3StringRegexDp_advance0"
+    },
+    {
+      "from": "src/java.base/share/native/libjava/M3StringRegexDp.c",
+      "to": "java_lang_M3StringRegexDp.h",
+      "kind": "Generated javac -h header, not a tracked source artifact"
+    },
+    {
+      "from": "src/java.base/share/native/libjava/M3StringRegexDp.c",
+      "to": [
+        "jni.h",
+        "stdint.h",
+        "stddef.h"
+      ],
+      "kind": "Existing standard JDK/toolchain headers; no new custom M3 dependency"
+    }
+  ],
+  "jniSignature": {
+    "java": "advance0(long address,int capacity,int start,int length,int width,boolean bigEndian,long incoming,int[] atoms,long[] closure) -> long",
+    "descriptor": "(JIIIIZJ[I[J)J",
+    "cSymbol": "Java_java_lang_M3StringRegexDp_advance0",
+    "observedDeclarationMatches": true,
+    "registration": "Direct JNIEXPORT symbol; no custom RegisterNatives table in this kernel",
+    "actualHeaderOrExportVerified": false
+  },
+  "buildEvidence": [
+    {
+      "path": "make/modules/java.base/Lib.gmk",
+      "git": "1e0f66726d06746b951b5a4f1d4498ace5c0b406",
+      "sha256": "b097a927a83875b4b4c92ce5c3b9ecd4e4acb4d81962719d31d6df7ae0adad47",
+      "bytes": 8636
+    },
+    {
+      "path": "make/modules/java.base/lib/CoreLibraries.gmk",
+      "git": "8b1a0a90fd4aa3fd455c78507dbfc491a3046d73",
+      "sha256": "13ff8e34221af4f6c2ff814dee1a9abdab848519788d22df66060407321a58e4",
+      "bytes": 7034
+    },
+    {
+      "path": "make/common/modules/LibCommon.gmk",
+      "git": "2450d2d1e0374f9aa249cd560f5f512bf5e51831",
+      "sha256": "6888b0b8215ec7054d7ae68ea0b2a131a3d20213cda734cedfb50a8c34918521",
+      "bytes": 2408
+    },
+    {
+      "path": "make/common/JdkNativeCompilation.gmk",
+      "git": "6a963ac2c498a4621028af368885aa06aae2578e",
+      "sha256": "3bd35406e90008b557b069939e295228bf0cbcc258e2d24768e501426816116b",
+      "bytes": 9221
+    },
+    {
+      "path": "make/CompileJavaModules.gmk",
+      "git": "b1b7a83498d353efe3ff2464d5d9d6220bb835b9",
+      "sha256": "45941b0fb6da4dd5284db9fada24f4aff51fcdf39ba23bc13cee8052273bee5e",
+      "bytes": 5741
+    },
+    {
+      "path": "make/common/JavaCompilation.gmk",
+      "git": "ff7c90e5785860141672d7f8ea5754bf27cef6e0",
+      "sha256": "17d8d9f367a1fdade41f024534f1f45b0b89bc358b62260225a92807faaaa8e5",
+      "bytes": 23071
+    },
+    {
+      "path": "make/modules/java.base/Java.gmk",
+      "git": "90350557b37e97213741704fabb13e85edcb8f48",
+      "sha256": "2600add7880b11284270bf61dd82d5cc317ee471a082e5277689597329222c51",
+      "bytes": 2150
+    }
+  ],
+  "buildInference": [
+    "Lib.gmk includes lib/CoreLibraries.gmk; CoreLibraries requests SetupJdkLibrary BUILD_LIBJAVA NAME java without excluding the new DP C source.",
+    "JdkNativeCompilation defaults java.base/java source directories to platform/native/libjava and share/native/libjava and adds generated module header directory.",
+    "CompileJavaModules passes HEADERS support/headers; JavaCompilation emits -h headers in module compilation.",
+    "java.base Java.gmk has no M3 class exclusion. No new source build hook or tracked generated header is required.",
+    "These are source-level inferences only; generated headers, compiler output, symbol export, link and runtime invocation remain unverified."
+  ],
+  "nonEdges": {
+    "correction": "Installed DP164c does not reference M3DotStarRelations or M3StateRelation. The future relation dispatch candidate must not be confused with installed code.",
+    "separateRelationFamily": [
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
+        "git": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+        "bytes": 8838,
+        "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
+        "git": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+        "bytes": 2138,
+        "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
+      },
+      {
+        "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+        "git": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+        "bytes": 5899,
+        "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
+      },
+      {
+        "path": "src/java.base/share/native/libjava/m3_state_relation.h",
+        "git": "18a02e228129827da486edc5b316790af6135310",
+        "bytes": 1021,
+        "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"
+      }
+    ],
+    "separateEdges": [
+      "M3DotStarRelations -> M3StateRelation",
+      "M3StateRelation native composeNative/repeatNative -> M3StateRelation.c -> m3_state_relation.h"
+    ],
+    "requiredForActualDpClosure": false
+  },
+  "custodyBoundary": [
+    "Any new current-custody branch must bind every66 current owner plus actual finite current auxiliary dependencies and preserve legacy manifest/patch bytes.",
+    "Require exact all4 modified-UTF8 fan-in on current and historical branches.",
+    "Historical before/after/superseded forward/reverse semantics must not require later-created auxiliaries.",
+    "Unknown or partial successor combinations and auxiliary missing/drift must refuse with zero writes.",
+    "Current check/apply/reverse fixedpoint is source custody only and must not transfer String/JDK/JNI behavior acceptance."
+  ],
+  "observedHostedJob": {
+    "run": 39022335124,
+    "job": 117366460448,
+    "status": "queued",
+    "conclusion": null,
+    "steps": null,
+    "logsUrl": null,
+    "method": "Supported fetch_workflow_run_jobs; direct job GET rejected by connector allowed-endpoint policy",
+    "actionsTaken": "No rerun, cancel or runner changes"
+  },
+  "unresolvedDirectCustomM3DependencyEdges": [],
+  "execution": {
+    "python": "NOT_RUN",
+    "maven": "NOT_RUN",
+    "build": "NOT_RUN",
+    "generatedHeader": "NOT_RUN",
+    "nativeExportOrLink": "NOT_RUN",
+    "modifiedJdk": "NOT_RUN",
+    "jni": "NOT_RUN",
+    "runtimeAcceptance": "NOT_RUN"
+  },
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "sourceCodeChanged": false,
+  "refMutations": false,
+  "localWrites": false,
+  "method": "Approved GitHub source reads; official MIT js-sha256 v0.11.1 RAM hashing. No local tool execution or cache activity."
+}

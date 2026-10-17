@@ -1,0 +1,85 @@
+{
+  "schema": "M3_COMPLETE_MIGRATION_GOAL_PROGRESS_V1",
+  "utc": "2026-10-17T10:40:56Z",
+  "goal": {
+    "status": "active",
+    "objective": "Continuously implement, verify, and optimize the complete MIndex*/MatIndex*/SubMIndex* migration from hsoliwal/com.synexia to hsoliwal/M3jdk21 and its java.lang.String integration. Follow the user's twelve-pass specification and borrow-first doctrine; preserve source contracts and durable source-to-target mappings; advance Route A, safe compiler lowering (Route B), and matched complete-JDK integration (Route C) independently; measure performance and heap/native/mapped retention; fix evidenced defects; maintain recipes, coverage, exact-candidate receipts, draft PRs, TODO and resume records. Keep the continual optimization goal active across milestones; never treat a partial port, passing explicit-view tests, a manifest, or a draft PR as completion of the complete migration or ongoing optimization.",
+    "scopeReduced": false
+  },
+  "routes": {
+    "A": "Current runtime mapping and explicit-view acceptance remain partial/unverified.",
+    "B": "Current compiler source/fixture qualification is pending actual hosted execution; transparent safe lowering and real MIndex bridge are not qualified.",
+    "C": "Matched complete-JDK/native/jtreg/installed-image gates remain open."
+  },
+  "sourceInventory": "INCOMPLETE_BOUNDED_FILENAME_CENSUS_IS_NOT_COMPLETE_SYMBOL_INVENTORY",
+  "acceptance": "NOT_COMPLETE",
+  "canonicalCoverage": {
+    "records": 60,
+    "historicallyTested": 1,
+    "implementedUnverified": 25,
+    "pending": 32,
+    "blocked": 2,
+    "completionBlockers": 158,
+    "originalCli": "NOT_RUN"
+  },
+  "openWork": [
+    "Execute this exact sealed Maven/OpenRewrite SDK, its emitted bytes, all17 real Python methods and actual66-path Git reverse/forward/reapply on an admitted hosted runner.",
+    "Keep the original66 manifest/runtime.patch byte exact and all72 source custody bytes exact; source custody alone does not establish runtime/behavior.",
+    "Observe prior exact hosted39022335124/job117366460448 without rerun; currently queued with runner0 and zero steps.",
+    "Run original unchanged mapping Python validator/report only with a genuine qualified dependency provider and exact sparse root.",
+    "Continue collection restoration using existing four donor recipes and current installed inventory; 45historical target rows are42absent+3exactpreimages.",
+    "Continue all twelve passes and complete symbol inventory, Java/JNI behavior, matched installed JDK, performance and heap/native/mapped retention measurements."
+  ],
+  "storage": {
+    "protection": "ACTIVE",
+    "bulk": "HOLD",
+    "nativeTemp": "K:\\codex-work\\agent-temp\\",
+    "controlSha256": "9dd68b48586a776700f2e9d4eee45a0bc568ccee7b6c2270bfab855570bd457d",
+    "localWrites": "No local source/Git/build/cache outputs. Small admitted S controls only, and separately gated permitted memory pointers; keep bulk/C output holds ACTIVE.",
+    "lastMeasured": {
+      "K": 204800,
+      "S": 26197381120,
+      "C": 26007359488,
+      "utc": "2026-10-17T10:40:56Z",
+      "observationOnly": true
+    },
+    "reserveBytes": 8589934592
+  },
+  "documentationAuthority": "Immutable source objects, exact candidate receipts and executed proofs; chat summaries and Git ancestry do not establish received code or runtime qualification.",
+  "wrapperDependencyInventory": {
+    "gitBlob": "44f22e347e18840333903feaf7809e2ec485fe4b",
+    "existingTargets": 45,
+    "absent": 42,
+    "exactPreimages": 3,
+    "sourcePayloadBytes": 609869,
+    "execution": "NOT_RUN"
+  },
+  "milestone": "Exact current runtime source custody recipe and independent hosted qualification candidate",
+  "sourceCustodyCandidate": {
+    "cohortPaths": 72,
+    "legacyPatchPaths": 66,
+    "legacyAfter": 56,
+    "modifiedUtf8Owners": 4,
+    "currentSuccessors": 6,
+    "extraCustodyPaths": 6,
+    "productionDependenciesAmongExtras": 2,
+    "proofAndMappingCompanions": 4,
+    "sourceCustodyOnly": true,
+    "execution": "NOT_RUN",
+    "runtimeQualified": false,
+    "jniQualified": false,
+    "jdkQualified": false,
+    "performanceQualified": false,
+    "phaseAdvanced": false,
+    "sdk": {
+      "gitTree": "945fbd17431264b42ffe02047e1a81ed45e1facf",
+      "files": 31,
+      "bytes": 1811798,
+      "pinsGitBlob": "c071f6f1059faf2b3c7b0f39ed14dcfa344ffa5c",
+      "pinsSha256": "3e7f78490f13bd452ff36c2990ce7ab6c0e7f13be0ff3775dd5c81e6ca331ab3",
+      "SDKMethods": 2,
+      "runtimeMethods": 17,
+      "execution": "NOT_RUN"
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "schema": "M3_RUNTIME_CUSTODY_SDK_AUTHOR_RAW_READBACK_V1",
+  "utc": "2026-10-17T10:40:56Z",
+  "repository": "hsoliwal/com.synexia",
+  "tree": "945fbd17431264b42ffe02047e1a81ed45e1facf",
+  "files": {
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/hotspot/share/classfile/javaClasses.cpp": {
+      "gitBlob": "a766d1f62716bf96f99bc275afd7e57e12ce9de7",
+      "sha256": "10816a3adb62ae3dd5b7fdefb79a43947637fb90924298ace56c8320ea4d60cb",
+      "bytes": 210778
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/hotspot/share/classfile/javaClasses.hpp": {
+      "gitBlob": "9052154399d82a077bbec99f92b9b4521e19ed2f",
+      "sha256": "36a6ae73f908a42bd565ea8caca830f7de63e423092c92141f0fd4110dc75df3",
+      "bytes": 63628
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/hotspot/share/classfile/javaClasses.inline.hpp": {
+      "gitBlob": "0810b8c905e57745b9f84443b67c3b3fdd494bc4",
+      "sha256": "18edfbc5b4ae95130b6fcfe19fd9927abd0e4cc5504129d9a20b025b10f0b7a1",
+      "bytes": 17405
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/lang/M3String.java": {
+      "gitBlob": "479d1f8145697d270af17f5e2d2f1c85f426fb33",
+      "sha256": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b",
+      "bytes": 50142
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/lang/M3StringFacts.java": {
+      "gitBlob": "763a76fb55a52576ca1a3edc48fcc214663f799e",
+      "sha256": "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f",
+      "bytes": 16442
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/lang/M3StringPool.java": {
+      "gitBlob": "d97d0dd8f2c26599086ad817ed5d521b29593d2d",
+      "sha256": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b",
+      "bytes": 49772
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java": {
+      "gitBlob": "c45ae8696da18b15b7b9ee0267cc05aec1ae6c92",
+      "sha256": "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4",
+      "bytes": 16541
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/lang/String.java": {
+      "gitBlob": "dd4033194bc27c640948b59bcc9085d4f357c74c",
+      "sha256": "c49e422dfe0e6b83a2d51155f0d36b5223719dfefd211a96313705bc3ee253ca",
+      "bytes": 231024
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/util/regex/M3PatternQuery.java": {
+      "gitBlob": "7a13107628460134548a02095ca5985437a112bb",
+      "sha256": "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f",
+      "bytes": 9495
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/historical-after/src/java.base/share/classes/java/util/regex/Pattern.java": {
+      "gitBlob": "ee1c1951a7498c191810bc1901fff48972cddd53",
+      "sha256": "d2828f7a76ae172204abe56cdf4e9df4b5fc0133bb65936b4e82aa9f7b9d105f",
+      "bytes": 235968
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/legacy-admitted/src/java.base/share/classes/java/lang/M3String.java": {
+      "gitBlob": "70d1d03c109126fdda36c54da21b484bbe368fd9",
+      "sha256": "24ac1f87c1b2022b08d695ae6b116e9376dad59ed0ffb86f52da0003dd3e036d",
+      "bytes": 52985
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/licenses/M3jdk21/LICENSE": {
+      "gitBlob": "8b400c7ab81b7b18baff3f81d597f5e511883134",
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726",
+      "bytes": 19274
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/licenses/M3jdk21/ADDITIONAL_LICENSE_INFO": {
+      "gitBlob": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "bytes": 2114
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/licenses/M3jdk21/ASSEMBLY_EXCEPTION": {
+      "gitBlob": "429666664e9ff5029d51dc7f807e1ec9eff2dd9f",
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33",
+      "bytes": 1514
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/before/apply.py": {
+      "gitBlob": "6f04034d19b92ed55deba47b870c1d850a734a52",
+      "sha256": "d1e98695bbb175acd6661f1d6f2ad2eb9dc90c5a67cc18da280b4c20aee771a5",
+      "bytes": 4692
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/before/test_recipe.py": {
+      "gitBlob": "e90bad7e46a39ec5c9b4c86f774a77116007ed0b",
+      "sha256": "46d731debe97ab67d455078e493ce92f75c40481c2727868baa79ef6a7f8bad8",
+      "bytes": 6925
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/before/manifest.json": {
+      "gitBlob": "ebe4a76f7c11f86f1c1cef953940216f6793d321",
+      "sha256": "12a749485fcd401d8fba311e5b8911f30e10988a63a14ebcbd11edac3fbee643",
+      "bytes": 18689
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/before/runtime.patch": {
+      "gitBlob": "a5abe528c303f689953731b1ba164e6e6bf53745",
+      "sha256": "bfc58c6eb3c7540808839e937a0f64788d65eb64097d10407ecccf899560d0eb",
+      "bytes": 607917
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/out/apply.py": {
+      "gitBlob": "69006c0a5f66c9e4a057957300117b90643bb3f1",
+      "sha256": "c25a6b4271d4c7e8c881adcd2a1500d06940ec58ab582d0ab4160a3436dfd2ad",
+      "bytes": 15113
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/out/current-cohort-20261017.json": {
+      "gitBlob": "629d1208f340ca87faab5c353eaebb8caeabe602",
+      "sha256": "a2481edf200087aa9efb0d2825ef95a083124bf32a8182359b04c56b2d022bb3",
+      "bytes": 45883
+    },
+    "pinned-engine/com/synexia/rewrite/M3RuntimeCurrentCustodyRecipe.java": {
+      "gitBlob": "b243bf67f4318c481e63e472dd9445821605c91e",
+      "sha256": "ba840deff9e82910992753e0e12400cb3c7354765e801d5fc63c61d19e2e88c4",
+      "bytes": 860
+    },
+    "src/main/resources/META-INF/rewrite/m3-runtime-current-custody-20261017.yml": {
+      "gitBlob": "6ec42d564153a4d449a582572e35a3605e9ee23a",
+      "sha256": "9a00058b1405152dde75c97836539b549b2b9772cfe8c42a4cc1d6440261c6fe",
+      "bytes": 458
+    },
+    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java": {
+      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "bytes": 10964
+    },
+    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java": {
+      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "bytes": 5187
+    },
+    "pom.xml": {
+      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "bytes": 2678
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/out/m3-runtime-current-custody.yml": {
+      "gitBlob": "298fb1da85879368475f18fe128c46f477de1857",
+      "sha256": "fa76297daada18a5b638fb3dbb117cc5b1d36dcc3ac1f7611e39accfd85d845c",
+      "bytes": 28857
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/out/test_recipe.py": {
+      "gitBlob": "e4a68d3dd6c1a4568ce341f4166f8e394d98c22e",
+      "sha256": "a8f86801f9343b9b61ce6159f3f978065caebf25f5f8d588b1fda4c66025872d",
+      "bytes": 25082
+    },
+    "src/main/resources/com/synexia/rewrite/m3-runtime-current-custody-20261017/manifest.tsv": {
+      "gitBlob": "795a72ce3a8060c0adb872030639802cdad11139",
+      "sha256": "26bd5136ac1e0216b891cd2537e0d809c60e7536169b564fd63d0e04cfe79f09",
+      "bytes": 1054
+    },
+    "src/test/java/com/synexia/rewrite/M3RuntimeCurrentCustodyRecipeTest.java": {
+      "gitBlob": "e9b899ecc90278998248ee94934dbee3599f1835",
+      "sha256": "af03be984576d471b72cc2cd8ef4c141a8eed394a87df4e28ac21ce35022065d",
+      "bytes": 16234
+    },
+    "verify.py": {
+      "gitBlob": "02fc95bf2b3792aabffe3a64c59deac41b883b39",
+      "sha256": "3eb1e7001bfb0231ee3799bbad75390395faf8e4ad692807b0da87a0de3c5ae7",
+      "bytes": 33872
+    },
+    "pins.json": {
+      "gitBlob": "c071f6f1059faf2b3c7b0f39ed14dcfa344ffa5c",
+      "sha256": "3e7f78490f13bd452ff36c2990ce7ab6c0e7f13be0ff3775dd5c81e6ca331ab3",
+      "bytes": 10251
+    }
+  },
+  "coreFileCount": 31,
+  "coreUtf8Bytes": 1811798,
+  "eachRawSha256AndUtf8BytesMatched": true,
+  "pins": {
+    "gitBlob": "c071f6f1059faf2b3c7b0f39ed14dcfa344ffa5c",
+    "sha256": "3e7f78490f13bd452ff36c2990ce7ab6c0e7f13be0ff3775dd5c81e6ca331ab3"
+  },
+  "bytecountCorrection": "Cohort629d is45883 UTF8 bytes, not45881 UTF16 stringlength; total1811798. Git/core/pins/recipe bytes were unchanged.",
+  "execution": "NOT_RUN",
+  "sourceCustodyOnly": true,
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "M3_RUNTIME_CURRENT_CUSTODY_TASK_STATUS_V1",
+  "utc": "2026-10-17T10:40:56Z",
+  "status": "SOURCE_REVIEWED_DRAFT_CANDIDATE_EXECUTION_NOT_RUN",
+  "canonicalSourceParent": "cdfce555fc13b5d34ce2c5ef2f23bc27714c59c6",
+  "receiverParent": "7ece73842aa4adc965decfa727d2a57b89d72556",
+  "sourceRecipeRoot": "synexia-openrewrite-recipes/recipes/m3-runtime-current-custody-20261017/sdk",
+  "receiverRecipeRoot": "m3/runtime-integration/current-custody-20261017/sdk",
+  "core": "945fbd17431264b42ffe02047e1a81ed45e1facf",
+  "coreFiles": 31,
+  "coreBytes": 1811798,
+  "pins": {
+    "gitBlob": "c071f6f1059faf2b3c7b0f39ed14dcfa344ffa5c",
+    "sha256": "3e7f78490f13bd452ff36c2990ce7ab6c0e7f13be0ff3775dd5c81e6ca331ab3"
+  },
+  "sourceCustodyPaths": 72,
+  "legacyPatchPaths": 66,
+  "immutablePatch": "a5abe528c303f689953731b1ba164e6e6bf53745",
+  "immutableManifest": "ebe4a76f7c11f86f1c1cef953940216f6793d321",
+  "sourceOnly": true,
+  "productSourceChanged": false,
+  "generatedOwners": 4,
+  "keepOwners": 2,
+  "authoredCases": {
+    "sdkMethods": 2,
+    "positiveApplications": 32,
+    "ownerRefusals": 16,
+    "closureRefusals": 115,
+    "reportRefusals": 18,
+    "runtimeMethods": 17,
+    "successorMasks": 64,
+    "modifiedUtf8Masks": 16
+  },
+  "execution": {
+    "maven": "NOT_RUN",
+    "openrewrite": "NOT_RUN",
+    "python": "NOT_RUN",
+    "historicalGitReplay": "NOT_RUN",
+    "actionlint": "NOT_RUN",
+    "formalAutoreview": "NOT_RUN_STORAGE_HOLD",
+    "matchedJdk": "NOT_RUN",
+    "JNI": "NOT_RUN",
+    "performanceAndRetention": "NOT_RUN"
+  },
+  "sourceReview": "Independent source/hash review only; no source findings after UTF8 bytecount metadata correction. This is not executed proof.",
+  "runtimeApplied": false,
+  "runtimeQualified": false,
+  "jniQualified": false,
+  "jdkQualified": false,
+  "performanceQualified": false,
+  "phaseAdvanced": false,
+  "continualGoal": "ACTIVE",
+  "storage": {
+    "protection": "ACTIVE",
+    "bulk": "HOLD",
+    "nativeTemp": "K:\\codex-work\\agent-temp\\",
+    "noLocalSourceGitBuildCacheWrites": true
+  },
+  "previousHostedObservation": {
+    "run": 39022335124,
+    "job": 117366460448,
+    "head": "7ece73842aa4adc965decfa727d2a57b89d72556",
+    "status": "queued",
+    "runnerId": 0,
+    "executedSteps": 0,
+    "rerunRequested": false
+  },
+  "requiredNext": "Run the exact four-command independent hosted job on an admitted runner, inspect actual named test counts/emitted bytes/receipts and repair recipes if execution reveals a defect. Do not merge or advance behavioral acceptance from source hashes."
+}

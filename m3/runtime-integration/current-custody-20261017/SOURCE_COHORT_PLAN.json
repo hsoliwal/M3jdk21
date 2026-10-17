@@ -1,0 +1,623 @@
+{
+  "schema": "M3_RUNTIME_CURRENT_CUSTODY_READ_ONLY_INVENTORY_AND_PLAN_V1",
+  "status": "READ_ONLY_COHORT_AND_DONOR_INVENTORY_COMPLETE_NO_NEW_RECIPE_CODE",
+  "targetRepository": "hsoliwal/M3jdk21",
+  "targetHead": "7ece73842aa4adc965decfa727d2a57b89d72556",
+  "targetRootTree": "b4e29593172a53df67c172d6e024e13265e8048e",
+  "targetSrcTree": "8b66ec1d84a468e0d9df15726dfe8be571a67412",
+  "srcTreeMatchesC900": true,
+  "sourceAudit": "c90091edc8a5eb9d719e71c9d21ff15a9d4992c1",
+  "priorAudit": "3dd27c0e02a21a62ee308d14cd6bd67103bb5461",
+  "legacyOwners": {
+    "apply": "6f04034d19b92ed55deba47b870c1d850a734a52",
+    "manifest": "ebe4a76f7c11f86f1c1cef953940216f6793d321",
+    "tests": "e90bad7e46a39ec5c9b4c86f774a77116007ed0b",
+    "patch": "a5abe528c303f689953731b1ba164e6e6bf53745",
+    "patchSha256": "bfc58c6eb3c7540808839e937a0f64788d65eb64097d10407ecccf899560d0eb",
+    "manifestMustRemainByteExact": true,
+    "patchMustRemainByteExact": true,
+    "baselineTargets": 66,
+    "classifications": {
+      "BEFORE": 0,
+      "AFTER": 56,
+      "AUTHORIZED_SUCCESSOR": 4,
+      "DRIFT": 6,
+      "MISSING": 0,
+      "READ_ERROR": 0
+    }
+  },
+  "runtimeAndJNIProof": "NOT_RUN",
+  "donorInterfaces": [
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "7ece73842aa4adc965decfa727d2a57b89d72556",
+      "path": "m3/runtime-integration/recipe/apply.py",
+      "git": "6f04034d19b92ed55deba47b870c1d850a734a52",
+      "license": "Apache-2.0",
+      "classification": "ADAPT",
+      "interfaces": [
+        "digest(bytes)->sha256",
+        "verify_mutf8_fanin(manifest,observed=None)->None or ValueError",
+        "apply(target:Path,reverse=False,check=False)->before|after|superseded",
+        "CLI --target/--check/--reverse"
+      ],
+      "fit": "Reuse full66 path/hash/symlink/patch guards, exact4-owner MUTF8 all-or-none guard, original before/after patch dispatch and superseded nonmutating fixedpoint. Add separate full current-cohort branch only."
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "7ece73842aa4adc965decfa727d2a57b89d72556",
+      "path": "m3/runtime-integration/recipe/test_recipe.py",
+      "git": "e90bad7e46a39ec5c9b4c86f774a77116007ed0b",
+      "license": "Apache-2.0",
+      "classification": "ADAPT",
+      "interfaces": [
+        "RecipeTest.seed_current(target)",
+        "RecipeTest.snapshot(target)",
+        "eight existing unittest methods"
+      ],
+      "fit": "Preserve eight test methods and old assertions using genuine historical fixtures where necessary; add a passing admitted baseline and exact-path refusal attribution before every mutation."
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "revision": "ea94f34c364e08144d558cf269d48b6e2d1b904f",
+      "git": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "license": "Apache-2.0",
+      "classification": "DIRECT_IMPORT",
+      "path": "workflow SDK pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "interfaces": [
+        "protected resourceRoot()",
+        "ScanningRecipe Inventory/scanner/generate/visitor",
+        "M3GpuToolJoinManifest4-cell TSV KEEP/CHANGE/ADD/removal data"
+      ],
+      "fit": "Existing exact multiowner transformation and batch refusal engine; no new compiler or installer engine. Scanned batch must be held on any error; engine explicitly is not a filesystem multi-file transaction."
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "revision": "ea94f34c364e08144d558cf269d48b6e2d1b904f",
+      "git": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "license": "Apache-2.0",
+      "classification": "DIRECT_IMPORT",
+      "path": "workflow SDK pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "interfaces": [
+        "load(root,resourceResolver,checkpoint)",
+        "targets()/target(path)/scan()",
+        "Scan.observe/requireAdmissible/editing",
+        "sha256(String)"
+      ],
+      "fit": "Preserve exact before/after/source custody, missing/duplicate/drift/change-after-scan refusal and fixedpoint."
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "revision": "ea94f34c364e08144d558cf269d48b6e2d1b904f",
+      "git": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "license": "Apache-2.0",
+      "classification": "DIRECT_IMPORT",
+      "path": "workflow SDK/pom.xml",
+      "interfaces": [
+        "Maven validate runs python3 -I -S -B verify.py --self-test",
+        "Java21 proc:none -Xlint:all -Werror",
+        "Surefire3.2.5 failIfNoTests",
+        "rewrite-core8.17.1/JUnit5.10.2 standalone dependency surface"
+      ],
+      "fit": "Reuse strict standalone SDK and actual named report gate; do not relabel target reactor fork/bootstrap as qualified."
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "git": "047df9dd6d37d8ecc39e51905729d557d4a70b1f",
+      "checkpoint": "c57b30e0092442b61af423f4ee4e74f5b3f3c640",
+      "core": "8185889db69c1f348db1cdca2497eceb5757c04c",
+      "license": "Apache-2.0",
+      "classification": "ADAPT",
+      "interfaces": [
+        "Two bare JUnit methods activate named composite recipe",
+        "2^n partial target states and reversed source order",
+        "exact emitted bytes/fixedpoint/unknown/missing/duplicate refusals",
+        "strict verifier20fdc0b6de51de46bcce615f16ad1dc0dabb1cd4"
+      ],
+      "fit": "Reuse recently independently reviewed finite exact transformation qualification. Tests are source donors, not executed proof."
+    }
+  ],
+  "dependencyClosure": {
+    "algorithm": "Bounded direct M3 source-reference inventory with comments/string literals excluded, then exact target-class fixedpoint. Source parse/build/link execution not claimed.",
+    "existing66JavaNodes": [
+      {
+        "type": "M3String",
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "gitBlob": "35ed998540e044eed8cb7596e2e2c019ae369bd3",
+        "sha256": "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728",
+        "directM3Refs": [
+          "M3StringAtom",
+          "M3StringFacts",
+          "M3StringOwner",
+          "M3StringPool",
+          "M3StringPositionPrecompute",
+          "M3StringSearchPrecompute",
+          "M3StringTuple"
+        ]
+      },
+      {
+        "type": "M3StringPool",
+        "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+        "gitBlob": "0905414556ad0b698a5b5f835f53d12bc040bc8c",
+        "sha256": "b58c82047f795807ff32229146c370c9e596eff19942a92cd0128ce4987d20ca",
+        "directM3Refs": [
+          "M3String",
+          "M3StringAtom",
+          "M3StringOwner",
+          "M3StringTuple"
+        ]
+      },
+      {
+        "type": "M3StringSearchPrecompute",
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "gitBlob": "0a88ed559b23def5d2229bba3316ea2268b4d720",
+        "sha256": "edae3c8d3afbd7c1b78aa3f88a4d3fdcd6bd03c9f8ee2ace3044255b44f571ac",
+        "directM3Refs": [
+          "M3String",
+          "M3StringOwner",
+          "M3TQ"
+        ]
+      },
+      {
+        "type": "String",
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "gitBlob": "1454f1b34faea4f61f835ab054cc751c88c0b3c5",
+        "sha256": "b7a074c6f366397847538b6b1bc6a5e5fecfb94809ab70fda40ef58406595b13",
+        "directM3Refs": [
+          "M3String",
+          "M3StringCodePointPrecompute",
+          "M3StringFacts",
+          "M3StringPool",
+          "M3StringRegexDp",
+          "M3StringSearchPrecompute"
+        ]
+      },
+      {
+        "type": "M3PatternQuery",
+        "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+        "gitBlob": "2eb4ca854b6ef35d57d7a2599c97c3024ff81296",
+        "sha256": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531",
+        "directM3Refs": [
+          "M3TQ"
+        ]
+      },
+      {
+        "type": "Pattern",
+        "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+        "gitBlob": "252e46fb57e824f30688eac3600bae9480511fc8",
+        "sha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+        "directM3Refs": [
+          "M3PatternQuery",
+          "M3TQ"
+        ]
+      },
+      {
+        "type": "M3StringAtom",
+        "path": "src/java.base/share/classes/java/lang/M3StringAtom.java",
+        "gitBlob": "7e7645497d08d55cf9b5174e4f04e11c87a06bae",
+        "sha256": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f",
+        "directM3Refs": [
+          "M3String",
+          "M3StringFacts",
+          "M3StringOwner"
+        ]
+      },
+      {
+        "type": "M3StringFacts",
+        "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        "gitBlob": "d8dd7dc30db6a9e3897146572bd4a7755c954ffb",
+        "sha256": "2152c154d3cdece330667ee09675fd21d86f3b483a23a3156b8a3626c3f9f420",
+        "directM3Refs": [
+          "M3String"
+        ]
+      },
+      {
+        "type": "M3StringOwner",
+        "path": "src/java.base/share/classes/java/lang/M3StringOwner.java",
+        "gitBlob": "acd2a9584c65c384ddebd9159a8775d196ea0f8c",
+        "sha256": "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74",
+        "directM3Refs": [
+          "M3String",
+          "M3StringAtom",
+          "M3StringFacts",
+          "M3StringTuple"
+        ]
+      },
+      {
+        "type": "M3StringPositionPrecompute",
+        "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+        "gitBlob": "c0074f4b144da23040e63e0ba8866d56d0d304ac",
+        "sha256": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b",
+        "directM3Refs": [
+          "M3String",
+          "M3StringFacts",
+          "M3StringOwner"
+        ]
+      },
+      {
+        "type": "M3StringTuple",
+        "path": "src/java.base/share/classes/java/lang/M3StringTuple.java",
+        "gitBlob": "0d4cfb75317e68d54244588a474eba98bf7df27b",
+        "sha256": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9",
+        "directM3Refs": [
+          "M3String",
+          "M3StringFacts",
+          "M3StringOwner"
+        ]
+      },
+      {
+        "type": "M3TQ",
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+        "gitBlob": "533a07b77061e757d476627557413f6df1067d34",
+        "sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+        "directM3Refs": [
+          "M3StringBacking"
+        ]
+      },
+      {
+        "type": "M3StringCodePointPrecompute",
+        "path": "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java",
+        "gitBlob": "6cbb277119f387aac772373d31621af64bea68d5",
+        "sha256": "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257",
+        "directM3Refs": [
+          "M3String",
+          "M3StringOwner"
+        ]
+      },
+      {
+        "type": "M3StringBacking",
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java",
+        "gitBlob": "5daedbe16dfc9377783b52d932e548cc44f0b335",
+        "sha256": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
+        "directM3Refs": []
+      }
+    ],
+    "ownFieldExcluded": "String.M3_JOINED_STRINGS is a field, not an external type",
+    "productionAuxiliaries": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+        "gitBlob": "164c3a369de2b888b5e5b532d0553352acccd032",
+        "sha256": "9a5d9511b996d780f26672e2f5dc6ccc0a2747fe33f0c5ef1a9c62629564a41e",
+        "bytes": 12692,
+        "requiredBy": "String.matches existing M3StringRegexDp.tryMatch route",
+        "license": "GPLv2 with Classpath exception; preserve original header"
+      },
+      {
+        "path": "src/java.base/share/native/libjava/M3StringRegexDp.c",
+        "gitBlob": "d9f36a89e95458ac843b32bee8aa34a809909e6b",
+        "sha256": "81440eb281b6401777d02a3ae28787f9d87b12ae10af426a7c78f58a5c9a723c",
+        "bytes": 8429,
+        "requiredBy": "M3StringRegexDp.advance0 JNI implementation Java_java_lang_M3StringRegexDp_advance0",
+        "license": "GPLv2 with Classpath exception; preserve original header"
+      }
+    ],
+    "sourceCohortAuxiliaries": [
+      {
+        "path": "test/jdk/java/util/regex/M3PatternAsciiFrontierTest.java",
+        "gitBlob": "af50b74953870e3d94d6ec319c3fc4f59e56ceb3",
+        "sha256": "cf6a14457f69669d1b83bdd6722a4211fba918970e1b9e9a8bc7b1c2a5f28325",
+        "bytes": 19970,
+        "requiredBy": "Exact five-owner canonical25bb wide-frontier recipe output cohort; not runtime behavior proof"
+      },
+      {
+        "path": "test/jdk/java/util/regex/libM3PatternAsciiFrontierTest.c",
+        "gitBlob": "7939fcb615f0e31045283eb8659cf223f516f666",
+        "sha256": "21910b084279f21c799c59d56e9194202ea60b3300a298ea7c5b24f6e7eab793",
+        "bytes": 6077,
+        "requiredBy": "Exact five-owner canonical25bb wide-frontier recipe output cohort; not runtime behavior proof"
+      },
+      {
+        "path": "m3/docs/name-mapping.d/m3-pattern-ascii-frontier.json",
+        "gitBlob": "e412ab17c42fd7875380e657a2643e388d562776",
+        "sha256": "32698ea8869841acc6de1273ca6d4e3b386b4f657f990e4095fed01808f473ce",
+        "bytes": 1972,
+        "requiredBy": "Exact five-owner canonical25bb wide-frontier recipe output cohort; not runtime behavior proof"
+      },
+      {
+        "path": "m3/compatibility/m3-pattern-ascii-receive-20261014.json",
+        "gitBlob": "fdab20de4b99b35b562425dd55ef36f94512dc23",
+        "sha256": "97b06b93477f80079ccc85a11d8edfce248ba57053075d29d1530e2016385590",
+        "bytes": 1841,
+        "requiredBy": "Exact five-owner canonical25bb wide-frontier recipe output cohort; not runtime behavior proof"
+      }
+    ],
+    "minimumCurrentEnvelopePaths": 72,
+    "newTrackedGeneratedHeaders": [],
+    "generatedHeaderBoundary": "java_lang_M3StringRegexDp.h is javac -h output; no tracked-header pin or new M3 module to invent.",
+    "alreadyWithin66Native": {
+      "path": "src/java.base/share/native/libjava/String.c",
+      "gitBlob": "69a57659e74c6433491932e64f15bc037e887d81",
+      "symbols": [
+        "Java_java_lang_M3String_nativeByteShadow",
+        "Java_java_lang_M3String_nativeCharShadow"
+      ]
+    },
+    "notAnInstalledDependency": [
+      "M3DotStarRelations780c/M3StateRelationea90 and nativeC610/header18a are a separate pending candidate family; actual DP164c does not reference them"
+    ],
+    "buildSourceEvidence": [
+      {
+        "path": "make/modules/java.base/Lib.gmk",
+        "gitBlob": "1e0f66726d06746b951b5a4f1d4498ace5c0b406",
+        "sha256": "b097a927a83875b4b4c92ce5c3b9ecd4e4acb4d81962719d31d6df7ae0adad47",
+        "source": "Independent reviewer raw reads at7ece",
+        "role": "Build inclusion/generated-header source inference only; no build/export/JNI pass"
+      },
+      {
+        "path": "make/modules/java.base/lib/CoreLibraries.gmk",
+        "gitBlob": "8b1a0a90fd4aa3fd455c78507dbfc491a3046d73",
+        "sha256": "13ff8e34221af4f6c2ff814dee1a9abdab848519788d22df66060407321a58e4",
+        "source": "Independent reviewer raw reads at7ece",
+        "role": "Build inclusion/generated-header source inference only; no build/export/JNI pass"
+      },
+      {
+        "path": "make/common/modules/LibCommon.gmk",
+        "gitBlob": "2450d2d1e0374f9aa249cd560f5f512bf5e51831",
+        "sha256": "6888b0b8215ec7054d7ae68ea0b2a131a3d20213cda734cedfb50a8c34918521",
+        "source": "Independent reviewer raw reads at7ece",
+        "role": "Build inclusion/generated-header source inference only; no build/export/JNI pass"
+      },
+      {
+        "path": "make/common/JdkNativeCompilation.gmk",
+        "gitBlob": "6a963ac2c498a4621028af368885aa06aae2578e",
+        "sha256": "3bd35406e90008b557b069939e295228bf0cbcc258e2d24768e501426816116b",
+        "source": "Independent reviewer raw reads at7ece",
+        "role": "Build inclusion/generated-header source inference only; no build/export/JNI pass"
+      },
+      {
+        "path": "make/CompileJavaModules.gmk",
+        "gitBlob": "b1b7a83498d353efe3ff2464d5d9d6220bb835b9",
+        "sha256": "45941b0fb6da4dd5284db9fada24f4aff51fcdf39ba23bc13cee8052273bee5e",
+        "source": "Independent reviewer raw reads at7ece",
+        "role": "Build inclusion/generated-header source inference only; no build/export/JNI pass"
+      },
+      {
+        "path": "make/common/JavaCompilation.gmk",
+        "gitBlob": "ff7c90e5785860141672d7f8ea5754bf27cef6e0",
+        "sha256": "17d8d9f367a1fdade41f024534f1f45b0b89bc358b62260225a92807faaaa8e5",
+        "source": "Independent reviewer raw reads at7ece",
+        "role": "Build inclusion/generated-header source inference only; no build/export/JNI pass"
+      },
+      {
+        "path": "make/modules/java.base/Java.gmk",
+        "gitBlob": "90350557b37e97213741704fabb13e85edcb8f48",
+        "sha256": "2600add7880b11284270bf61dd82d5cc317ee471a082e5277689597329222c51",
+        "source": "Independent reviewer raw reads at7ece",
+        "role": "Build inclusion/generated-header source inference only; no build/export/JNI pass"
+      }
+    ],
+    "buildSourceConclusion": "libjava source discovery includes M3StringRegexDp.c, Java module compilation uses javac -h and default generated headers. Actual header/export/link/JNI execution NOT_RUN; seven build files are evidence beyond the minimum72 source-custody paths."
+  },
+  "wideCanonicalManifest": {
+    "sourceRevision": "25bbf2ba6a6fa134c72a049e8f4763011dc7576c",
+    "git": "d3d8112ac658444d3e16570fe4d8f879870125c5",
+    "sha256": "7d1122846f22aecc0265fbee8c86562ee4e5d6b63003d0967646c2fffcafc4b0",
+    "role": "Exact installed2eb wide owner is this manifest POSTIMAGE; latest candidate source manifest would treat2eb as PREIMAGE and must not be blindly reapplied",
+    "historicalMetadataSourceRevisionStale": "8200bd6a... metadata remains pinned historical custody, not substituted for exact25bb source lineage"
+  },
+  "historicalReplayFixtures": {
+    "strategy": "Seed all66 from current target; replace exactly10 paths with immutable historicalAFTER fixture bytes; verify every one of66 hashes equals unchanged legacy manifest.after before any replay. Then use REAL git apply --reverse/forward with unchanged runtime.patch, verify all66 upstream before (including36 absent) and all66 after on each transition.",
+    "existingBeforeFiles": 30,
+    "absentBeforeFiles": 36,
+    "fixtureCount": 10,
+    "fixtureBytes": 901195,
+    "fixtures": [
+      {
+        "path": "src/hotspot/share/classfile/javaClasses.cpp",
+        "git": "a766d1f62716bf96f99bc275afd7e57e12ce9de7",
+        "bytes": 210778,
+        "sha256": "10816a3adb62ae3dd5b7fdefb79a43947637fb90924298ace56c8320ea4d60cb",
+        "matches": true,
+        "licenseHeaders": " * Copyright (c) 1997, 2023, Oracle and/or its affiliates. All rights reserved.\n * under the terms of the GNU General Public License version 2 only, as\n * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License\n * You should have received a copy of the GNU General Public License version"
+      },
+      {
+        "path": "src/hotspot/share/classfile/javaClasses.hpp",
+        "git": "9052154399d82a077bbec99f92b9b4521e19ed2f",
+        "bytes": 63628,
+        "sha256": "36a6ae73f908a42bd565ea8caca830f7de63e423092c92141f0fd4110dc75df3",
+        "matches": true,
+        "licenseHeaders": " * Copyright (c) 1997, 2023, Oracle and/or its affiliates. All rights reserved.\n * under the terms of the GNU General Public License version 2 only, as\n * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License\n * You should have received a copy of the GNU General Public License version"
+      },
+      {
+        "path": "src/hotspot/share/classfile/javaClasses.inline.hpp",
+        "git": "0810b8c905e57745b9f84443b67c3b3fdd494bc4",
+        "bytes": 17405,
+        "sha256": "18edfbc5b4ae95130b6fcfe19fd9927abd0e4cc5504129d9a20b025b10f0b7a1",
+        "matches": true,
+        "licenseHeaders": " * Copyright (c) 2015, 2023, Oracle and/or its affiliates. All rights reserved.\n * under the terms of the GNU General Public License version 2 only, as\n * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License\n * You should have received a copy of the GNU General Public License version"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "git": "479d1f8145697d270af17f5e2d2f1c85f426fb33",
+        "bytes": 50142,
+        "sha256": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b",
+        "matches": true,
+        "licenseHeaders": " * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.\n * GPLv2 with the Classpath exception."
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        "git": "763a76fb55a52576ca1a3edc48fcc214663f799e",
+        "bytes": 16442,
+        "sha256": "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f",
+        "matches": true,
+        "licenseHeaders": " * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.\n * GPLv2 with the Classpath exception."
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+        "git": "d97d0dd8f2c26599086ad817ed5d521b29593d2d",
+        "bytes": 49772,
+        "sha256": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b",
+        "matches": true,
+        "licenseHeaders": " * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.\n * GPLv2 with the Classpath exception."
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "git": "c45ae8696da18b15b7b9ee0267cc05aec1ae6c92",
+        "bytes": 16541,
+        "sha256": "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4",
+        "matches": true,
+        "licenseHeaders": " * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.\n * GPLv2 with the Classpath exception."
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "git": "dd4033194bc27c640948b59bcc9085d4f357c74c",
+        "bytes": 231024,
+        "sha256": "c49e422dfe0e6b83a2d51155f0d36b5223719dfefd211a96313705bc3ee253ca",
+        "matches": true,
+        "licenseHeaders": " * Copyright (c) 1994, 2023, Oracle and/or its affiliates. All rights reserved.\n * under the terms of the GNU General Public License version 2 only, as\n * particular file as subject to the \"Classpath\" exception as provided\n * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License\n * You should have received a copy of the GNU General Public License version"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+        "git": "7a13107628460134548a02095ca5985437a112bb",
+        "bytes": 9495,
+        "sha256": "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f",
+        "matches": true,
+        "licenseHeaders": " * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.\n * GPLv2 with the Classpath exception."
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+        "git": "ee1c1951a7498c191810bc1901fff48972cddd53",
+        "bytes": 235968,
+        "sha256": "d2828f7a76ae172204abe56cdf4e9df4b5fc0133bb65936b4e82aa9f7b9d105f",
+        "matches": true,
+        "licenseHeaders": " * Copyright (c) 1999, 2023, Oracle and/or its affiliates. All rights reserved.\n * under the terms of the GNU General Public License version 2 only, as\n * particular file as subject to the \"Classpath\" exception as provided\n * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License\n * You should have received a copy of the GNU General Public License version"
+      }
+    ],
+    "fullIndexRows": [
+      {
+        "path": "src/hotspot/share/classfile/javaClasses.cpp",
+        "beforeGit": "a7582e535e6e50988eddcf639309e6f32880c9f7",
+        "afterGit": "a766d1f62716bf96f99bc275afd7e57e12ce9de7",
+        "status": "AUTHORIZED_SUCCESSOR",
+        "afterSha256": "10816a3adb62ae3dd5b7fdefb79a43947637fb90924298ace56c8320ea4d60cb",
+        "currentGit": "0baae939a004d90c7ed36f31bd01ca80fc6738b0"
+      },
+      {
+        "path": "src/hotspot/share/classfile/javaClasses.hpp",
+        "beforeGit": "84ce35ba7672d91c83c56af4b8865cf3af3ee680",
+        "afterGit": "9052154399d82a077bbec99f92b9b4521e19ed2f",
+        "status": "AUTHORIZED_SUCCESSOR",
+        "afterSha256": "36a6ae73f908a42bd565ea8caca830f7de63e423092c92141f0fd4110dc75df3",
+        "currentGit": "ac58f01e50946157e03c68bdd1f67762c06e4262"
+      },
+      {
+        "path": "src/hotspot/share/classfile/javaClasses.inline.hpp",
+        "beforeGit": "960d5d224c5bb333e5a2a63efe9365331f771719",
+        "afterGit": "0810b8c905e57745b9f84443b67c3b3fdd494bc4",
+        "status": "AUTHORIZED_SUCCESSOR",
+        "afterSha256": "18edfbc5b4ae95130b6fcfe19fd9927abd0e4cc5504129d9a20b025b10f0b7a1",
+        "currentGit": "b74eb6e47879e7a5544007d756982053da1d9d0d"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "beforeGit": "0000000000000000000000000000000000000000",
+        "afterGit": "479d1f8145697d270af17f5e2d2f1c85f426fb33",
+        "status": "DRIFT",
+        "afterSha256": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b",
+        "currentGit": "35ed998540e044eed8cb7596e2e2c019ae369bd3"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        "beforeGit": "0000000000000000000000000000000000000000",
+        "afterGit": "763a76fb55a52576ca1a3edc48fcc214663f799e",
+        "status": "AUTHORIZED_SUCCESSOR",
+        "afterSha256": "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f",
+        "currentGit": "d8dd7dc30db6a9e3897146572bd4a7755c954ffb"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+        "beforeGit": "0000000000000000000000000000000000000000",
+        "afterGit": "d97d0dd8f2c26599086ad817ed5d521b29593d2d",
+        "status": "DRIFT",
+        "afterSha256": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b",
+        "currentGit": "0905414556ad0b698a5b5f835f53d12bc040bc8c"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "beforeGit": "0000000000000000000000000000000000000000",
+        "afterGit": "c45ae8696da18b15b7b9ee0267cc05aec1ae6c92",
+        "status": "DRIFT",
+        "afterSha256": "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4",
+        "currentGit": "0a88ed559b23def5d2229bba3316ea2268b4d720"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "beforeGit": "5c234d4dfacac9e642578483640d4e6b41488beb",
+        "afterGit": "dd4033194bc27c640948b59bcc9085d4f357c74c",
+        "status": "DRIFT",
+        "afterSha256": "c49e422dfe0e6b83a2d51155f0d36b5223719dfefd211a96313705bc3ee253ca",
+        "currentGit": "1454f1b34faea4f61f835ab054cc751c88c0b3c5"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+        "beforeGit": "0000000000000000000000000000000000000000",
+        "afterGit": "7a13107628460134548a02095ca5985437a112bb",
+        "status": "DRIFT",
+        "afterSha256": "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f",
+        "currentGit": "2eb4ca854b6ef35d57d7a2599c97c3024ff81296"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+        "beforeGit": "45c48ddab542f4f0b31884de84ffd862a29519f1",
+        "afterGit": "ee1c1951a7498c191810bc1901fff48972cddd53",
+        "status": "DRIFT",
+        "afterSha256": "d2828f7a76ae172204abe56cdf4e9df4b5fc0133bb65936b4e82aa9f7b9d105f",
+        "currentGit": "252e46fb57e824f30688eac3600bae9480511fc8"
+      }
+    ],
+    "licenseRule": "All10 blobs retain original GPLv2 or GPLv2+Classpath headers verbatim. Test-only fixture resources must retain target LICENSE/ADDITIONAL_LICENSE_INFO/assembly notices. Apache recipe engine does not relicense source fixtures.",
+    "mockedSubprocessForbidden": true
+  },
+  "finiteChangesProposed": [
+    {
+      "path": "m3/runtime-integration/recipe/apply.py",
+      "kind": "CHANGE",
+      "boundary": "Add separate sealed-current-cohort loader/validator and exact all66+6aux recognition, with path/symlink/hash checks before admission. Preserve original MUTF8 guard and historical before/after/superseded dispatch and patch bytes. Exact current check/apply/reverse return current-custody without mutation; any partial six-successor or requiredaux mismatch refuses. Historical branch does not need auxiliaries created later."
+    },
+    {
+      "path": "m3/runtime-integration/recipe/test_recipe.py",
+      "kind": "CHANGE",
+      "boundary": "Preserve eight existing methods, use genuine historical snapshots for old-manifest-specific assertions, and add current/partial/aux/refusal/historical replay tests with per-mutation baseline admission."
+    },
+    {
+      "path": "m3/runtime-integration/recipe/current-cohort-20261017.json",
+      "kind": "ADD",
+      "boundary": "Exactly66 legacy keys plus separate six current auxiliaries, all Git/raw/size identities, exact original manifest+patch digests, donor lineage refs, sourceCustodyOnly=true and runtime/JNI/phase flags false. Source custody is precomputed data, not an independent six-hash superseded allowlist."
+    },
+    {
+      "path": "m3/runtime-integration/recipe/current-custody-20261017/",
+      "kind": "ADD",
+      "boundary": "Ten exact historicalAFTER fixture resources and custody/license metadata, sourced from immutable patch fullindex Git objects; finite901195B no full repository snapshot."
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-runtime-current-custody-20261017/",
+      "kind": "ADD",
+      "boundary": "Reusable Maven/OpenRewrite thin recipe with borrowed1c/38df/d798, strict pins/verifier and named JUnit tests. KEEP unchanged manifest+runtime.patch, CHANGE exact apply/test, ADD cohort/fixture metadata. Derive output by recipe; repair recipe and rerun, no output hand edits."
+    }
+  ],
+  "mandatoryNewTests": [
+    "Exact full current66+6 auxiliary baseline succeeds independently for check/apply/reverse and all bytes remain unchanged.",
+    "All64 masks of six new successor owners: exact current mask only admitted as current-custody; zero current mask follows historical semantics; each nonempty proper mask explicitly refuses partial-current-cohort without writes.",
+    "All16 masks of four MUTF8 owners preserve original all-or-none semantics; unknown native/facts bytes and malformed fan-in seal remain refused.",
+    "For each66 original target, admit baseline first; inject one unknown byte state and assert exact mutated path/error, then snapshot equality. No earlier unrelated drift may satisfy the refusal.",
+    "For each six auxiliary, admit baseline first, then unknown/missing/symlink individually refuses current branch without modifying original66 or any auxiliary; historical branch remains independent of later auxiliaries.",
+    "Reject added/removed/duplicated cohort keys, changed legacy manifest/patch pins, malformed paths, symlink path/parent and partial requiredaux state.",
+    "Seed genuine historicalAFTER from56 exact workspace files plus10 immutable fixtures; real reverse->all66BEFORE->forward->all66AFTER->reverse/reapply; assert each whole-file hash and creation/removal, never mocked git.",
+    "Named OpenRewrite recipe exact target output/fixedpoint, complete partial target-state/source-order permutations, KEEP preservation and unknown/missing/duplicate ownership refusals; strict closure and named Surefire report selftest probes.",
+    "Source custody outputs/receipts explicitly retain runtime/JNI/JDK/performance NOT_RUN and phaseAdvanced=false; no status field says behavior qualified."
+  ],
+  "gatesBeforeCode": "Root must physically record borrow-first FOSS decision before any new recipe or applier/test code. This JSON is inventory/proposed scope only.",
+  "execution": {
+    "localPython": "NOT_RUN",
+    "localJava": "NOT_RUN",
+    "Maven": "NOT_RUN",
+    "OpenRewrite": "NOT_RUN",
+    "gitApplyReplay": "NOT_RUN",
+    "matchedJdk": "NOT_RUN",
+    "JNI": "NOT_RUN",
+    "performance": "NOT_RUN"
+  },
+  "localOutput": false,
+  "codeChanged": false,
+  "refsMutated": false
+}
