@@ -249,7 +249,7 @@ public final class M3Jdk21HashPinnedTextSnapshotRecipe
                     || previous.compareTo(cells[0]) >= 0
                     || !("ABSENT".equals(cells[1]) || sha(cells[1]))
                     || !sha(cells[2])
-                    || !crateTemplatePath(cells[3])) {
+                    || !cells[3].matches("[A-Za-z0-9_.-]+")) {
                 throw new IllegalStateException(
                         "invalid M3JDK21 text crate manifest row");
             }
@@ -266,32 +266,6 @@ public final class M3Jdk21HashPinnedTextSnapshotRecipe
             throw new IllegalStateException("M3JDK21 text crate target budget");
         }
         return List.copyOf(targets);
-    }
-
-    /**
-     * Accept a strict classpath-relative template name, optionally in a
-     * nested crate-local directory such as templates/fixture.txt.
-     *
-     * <p>Never permit traversal, absolute/URI forms, backslashes, empty
-     * segments, control bytes, or Git metadata. The original single-file
-     * resource format remains valid. This validates a classpath resource
-     * name only; it does not relax the source target path or hash gates.
-     */
-    static boolean crateTemplatePath(String value) {
-        if (value == null || value.isEmpty() || value.length() > 1024
-                || value.startsWith("/") || value.indexOf('\\') >= 0
-                || value.indexOf(':') >= 0
-                || value.chars().anyMatch(Character::isISOControl)) {
-            return false;
-        }
-        for (String segment : value.split("/", -1)) {
-            if (!segment.matches("[A-Za-z0-9_.-]+")
-                    || ".".equals(segment) || "..".equals(segment)
-                    || ".git".equalsIgnoreCase(segment)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     static boolean jdkTextPath(String value) {
