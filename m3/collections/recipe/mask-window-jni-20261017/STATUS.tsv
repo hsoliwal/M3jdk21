@@ -1,0 +1,9 @@
+gate	state	evidence
+Java21_contract_local	PASS	7,404,104 Java-only selected checks
+checked_JNI_local	PASS	14,808,185 checks with Linux native compiled C17
+exact_prepost_manifest	READY	SHA-256 and Git blobs in sealed source catalogue
+Maven_OpenRewrite_SDK	NOT_RUN	full owning repository gate pending
+full_OpenJDK_jtreg	NOT_RUN	matched image required
+JNI_multiarch_GC	NOT_RUN	x86-64 local only
+production_benchmark	NOT_RUN	CPU and retained allocation evidence pending
+review	DRAFT_HOLD	no automatic merge

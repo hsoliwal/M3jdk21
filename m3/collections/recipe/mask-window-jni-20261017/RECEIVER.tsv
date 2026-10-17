@@ -1,0 +1,9 @@
+field	value
+schema	M3JDK21_M3_MASK_WINDOW_RECEIVER_20261017
+canonical_repo	hsoliwal/com.synexia
+canonical_recipe	com.synexia.rewrite.M3Jdk21MaskWindowJni20261017
+canonical_commit	2ef5df0b76a4790b532785aab71e5d64f163911f
+java_target	m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java
+native_target	m3/collections/src/main/native/collections/m3_index_mask_compactor.c
+java21_selected_contract	PASS_14808185_CHECKED_JNI
+runtime_promotion	HOLD_FULL_BUILD_JTREG_AND_NATIVE_PLATFORM
