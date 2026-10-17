@@ -1,0 +1,11 @@
+item	status	scope	evidence
+source_templates	PASS	4 exact Java postimages	verify.py SHA256
+java21_compile	PASS	M3IndexPathRank + standalone differential	javac --release 21 -Xlint:all -Werror
+java21_differential	PASS	900 randomized paths + 36,476 rank points + word boundaries	M3IndexPathRankSelfTest
+python_template_verifier	PASS	exact four source/templates, path ordering, expected digests	verify.py
+maven_openrewrite	NOT_RUN	M3HashPinnedJavaSnapshotRecipe LST apply/replay/refusal	Maven not present in isolated runtime; CI gate in PR
+junit	NOT_RUN	M3IndexPathRankTest	CI gate in PR
+jni_parity	NOT_RUN	180 deterministic native vs Java vs rank paths	-Xcheck:jni CI gate required
+openjdk_jtreg	NOT_RUN	java.base and full JDK image	No OpenJDK behavior replacement requested
+performance	NOT_RUN	cold build vs repeated rank/select, heap/native bytes	No throughput or speedup claim
+runtime_promotion	BLOCKED	STRING -> arrays -> collections	No full reactor and phase acceptance
