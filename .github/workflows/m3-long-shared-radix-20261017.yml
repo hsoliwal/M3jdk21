@@ -1,0 +1,55 @@
+name: M3 long index shared Java and JNI radix proof
+on:
+  push:
+    branches: [m3/long-index-shared-radix-20261017]
+  pull_request:
+    paths:
+      - "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java"
+      - "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java"
+      - "m3/collections/qualification/m3-long-shared-radix-20261017/**"
+      - ".github/workflows/m3-long-shared-radix-20261017.yml"
+permissions:
+  contents: read
+jobs:
+  jdk21-real-jni:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Compare exact installed Java postimages with canonical Synexia recipe
+        run: python3 m3/collections/qualification/m3-long-shared-radix-20261017/verify.py
+      - name: Strict compile real product owners and stable signed-long proof
+        run: |
+          mkdir -p "$RUNNER_TEMP/m3-shared-radix"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-shared-radix" \
+            m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java \
+            m3/collections/qualification/m3-long-shared-radix-20261017/M3LongSharedRadixProof.java
+      - name: Java signed-long / stable tie / slice differential
+        run: java -ea -cp "$RUNNER_TEMP/m3-shared-radix" com.m3.collections.M3LongSharedRadixProof
+      - name: Compile unchanged C17 radix JNI with undefined-behavior sanitizer
+        run: |
+          gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_signal_order_jni.c \
+            -o "$RUNNER_TEMP/libm3signalorder.so"
+      - name: Execute real native radix with checked JNI and Java reference oracle
+        run: |
+          java -ea -Xcheck:jni \
+            -Dm3.collections.signal.native=true \
+            -Djava.library.path="$RUNNER_TEMP" \
+            -cp "$RUNNER_TEMP/m3-shared-radix" \
+            com.m3.collections.M3LongSharedRadixProof jni
+      # Release still requires full reactor, modified JDK21, JCK/JTReg, allocation/RSS A/B.

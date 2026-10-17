@@ -111,6 +111,16 @@ public final class M3SignalOrder {
         return bits ^ ((bits >> 63) | Long.MIN_VALUE);
     }
 
+    /** Reuse our original stable radix atom for exact unsigned 64-bit keys and row coordinates. */
+    static void sortUnsignedKeyRows(long[] keys, int[] rowIds) {
+        Objects.requireNonNull(keys, "keys");
+        Objects.requireNonNull(rowIds, "rowIds");
+        if (keys.length != rowIds.length) {
+            throw new IllegalArgumentException("key/row lane length mismatch");
+        }
+        sortJava(keys, rowIds);
+    }
+
     /** Stable unsigned-key LSD radix; uses caller-local primitive workspaces only. */
     private static void sortJava(long[] keys, int[] rows) {
         if (keys.length < 2) return;

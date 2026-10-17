@@ -167,6 +167,67 @@ public final class M3LongIndexProjection {
         return position < 0 ? -1 : position - from;
     }
 
+    /** Exact signed-long stable index ordering using the existing primitive radix engine. */
+    public M3LongIndexProjection sortedAscending(M3SignalOrder.Backend backend) {
+        return sortedWithKeyPlane(false, Objects.requireNonNull(backend, "backend"));
+    }
+
+    /** Reverse signed-long stable ordering, retaining duplicate encounter ties. */
+    public M3LongIndexProjection sortedDescending(M3SignalOrder.Backend backend) {
+        return sortedWithKeyPlane(true, Objects.requireNonNull(backend, "backend"));
+    }
+
+    private M3LongIndexProjection sortedWithKeyPlane(
+            boolean descending, M3SignalOrder.Backend backend) {
+        if (backend == M3SignalOrder.Backend.NATIVE_REQUIRED
+                && !M3SignalOrderNative.available()) {
+            throw new UnsatisfiedLinkError("m3signalorder JNI is unavailable");
+        }
+        return sortedUnsignedKeys(physicalIndices(), descending, backend);
+    }
+
+    /**
+     * Long.MIN_VALUE sign flip creates monotone unsigned keys for signed order.
+     * Complement reverses the full order while preserving equal-key stability.
+     * The original long payload never moves or enters JNI; only numeric keys
+     * and physical integer coordinates are sorted.
+     */
+    private M3LongIndexProjection sortedUnsignedKeys(
+            int[] rowIds, boolean descending, M3SignalOrder.Backend backend) {
+        int length = rowIds.length;
+        if (length > 1) {
+            long[] keys = new long[length];
+            for (int index = 0; index < length; index++) {
+                long original = M3LongAddressKernel.loadPhysicalUnchecked(values, rowIds[index]);
+                long normalized = original ^ Long.MIN_VALUE;
+                keys[index] = descending ? ~normalized : normalized;
+            }
+            if (backend == M3SignalOrder.Backend.NATIVE_REQUIRED) {
+                M3SignalOrderNative.sort(keys, rowIds);
+            } else {
+                M3SignalOrder.sortUnsignedKeyRows(keys, rowIds);
+            }
+        }
+        return new M3LongIndexProjection(values, rowIds, 0, length,
+                descending ? Order.DESCENDING : Order.ASCENDING);
+    }
+
+    /**
+     * Avoid additional radix workspaces for small arrays or heap pressure.
+     * Retain the previous stable merge algorithm as the admitted fallback.
+     * Estimate from JVM available heap, not caller-provided sizing hints.
+     */
+    private static boolean admitRadix(int length) {
+        if (length < 4096) return false;
+        Runtime runtime = Runtime.getRuntime();
+        long max = runtime.maxMemory();
+        long used = Math.max(0L, runtime.totalMemory() - runtime.freeMemory());
+        long available = Math.max(0L, max - used);
+        long required = 24L * length + 256L * Integer.BYTES;
+        long reserve = Math.min(16L << 20, max >>> 4);
+        return available > required + reserve;
+    }
+
     /** Stable signed-long sort; only the primitive index vector is permuted. */
     public M3LongIndexProjection sortedAscending() { return sorted(false); }
 
@@ -179,6 +240,9 @@ public final class M3LongIndexProjection {
         if (size < 2) {
             return new M3LongIndexProjection(values, current, 0, size,
                     descending ? Order.DESCENDING : Order.ASCENDING);
+        }
+        if (admitRadix(size)) {
+            return sortedUnsignedKeys(current, descending, M3SignalOrder.Backend.JAVA);
         }
         int[] scratch = new int[size];
         // long arithmetic prevents 2*width and base+2*width overflow at large sizes.
