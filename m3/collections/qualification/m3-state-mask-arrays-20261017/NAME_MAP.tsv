@@ -1,0 +1,5 @@
+canonical_donor	target_owner	mode	decision
+Synexia:M3StateMaskArraysRecipe	com.m3.collections.M3StateMaskArrays	INDEPENDENT_APACHE_MODULE	ADDITIVE_PROVING_GROUND_ONLY
+Synexia:M3StateMaskArraysRecipe	java.util.Collection/java.util.List/java.util.Map	TARGET_OWNED_PORT	DEFERRED_NOT_ADMITTED
+M3JDK21:M3IndexMaskCompactor	com.m3.collections.M3StateMaskArrays.select	REUSE	UNMODIFIED_JAVA_JNI_BACKEND
+M3JDK21:M3SlotAllocator28	com.m3.collections.M3StateMaskArrays	SEPARATE_OWNER	NO_SLOT_LIFETIME_TRANSFER
