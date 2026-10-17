@@ -34,8 +34,18 @@ jobs:
           echo 'a8b537381b64899e263eb481a95a83ae40a9b7ed8109fe401f2329c750419267  m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java' | sha256sum -c -
           echo '3ae1258c36fc4366af6d5f7aadeb3709acb51b9d98baca3061985ced9a02e7fd  m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java' | sha256sum -c -
           echo '19c42a55d5d7e470767a62d9f549b7990fe6ae4bebc4728b588e5be857169a89  m3/collections/interop/sdk-family-bindings.tsv' | sha256sum -c -
-      - name: Java 21 owning M3 collection module
-        run: mvn -B -ntp -f m3/collections/pom.xml install
+      - name: Qualified existing M3 core and Java/JNI source admission
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/collections/verify_donation.py
+          JAR="$GITHUB_WORKSPACE/m3/collections/target/donation-verification/m3-collections.jar"
+          test -f "$JAR"
+          test "$(jdeps --print-module-deps "$JAR")" = "java.base"
+          (cd "$RUNNER_TEMP" && mvn -B -ntp \
+            org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
+            -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections \
+            -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true)
       - name: All real five-provider dependency JUnit regression
         run: mvn -B -ntp -f m3/collections/interop/pom.xml verify
       - name: Existing real C17 JNI mask backend
