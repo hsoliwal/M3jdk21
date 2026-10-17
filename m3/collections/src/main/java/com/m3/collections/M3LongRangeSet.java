@@ -25,6 +25,9 @@ public final class M3LongRangeSet {
     private long[] ends;
     private int size;
     private int revision;
+    // Lazily derived unsigned 64-bit cumulative end ranks; invalidated by mutation.
+    // A single long[] plane, never a per-range boxed prefix object.
+    private long[] cumulative;
 
     public M3LongRangeSet() {
         this(0);
@@ -84,6 +87,7 @@ public final class M3LongRangeSet {
         starts[first] = start;
         ends[first] = end;
         size = resulting;
+        cumulative = null;
         revision++;
     }
 
@@ -118,6 +122,7 @@ public final class M3LongRangeSet {
             Arrays.fill(ends, resulting, size, 0L);
         }
         size = resulting;
+        cumulative = null;
         revision++;
     }
 
@@ -146,13 +151,162 @@ public final class M3LongRangeSet {
         return index < size && starts[index] < toExclusive;
     }
 
-    /** Exact count, including intervals wider than Long.MAX_VALUE. */
-    public BigInteger cardinality() {
-        BigInteger count = BigInteger.ZERO;
+    /** Build one ephemeral/reusable primitive index plane for rank/select. */
+    private void prepareRanks() {
+        if (cumulative != null) return;
+        long[] prepared = new long[size];
+        long count = 0L;
         for (int i = 0; i < size; i++) {
-            count = count.add(BigInteger.valueOf(ends[i]).subtract(BigInteger.valueOf(starts[i])));
+            // Native signed subtraction is deliberately interpreted as unsigned.
+            // The whole representable half-open signed long domain has at most
+            // 2^64 - 1 elements, so the accumulated unsigned count never wraps.
+            count += ends[i] - starts[i];
+            prepared[i] = count;
         }
-        return count;
+        cumulative = prepared;
+    }
+
+    private static BigInteger unsigned(long value) {
+        return new BigInteger(Long.toUnsignedString(value));
+    }
+
+    /**
+     * O(1) after O(r) lazy rank preparation. No per-interval BigInteger storage.
+     * Exact counts through spans wider than signed long range.
+     */
+    public BigInteger cardinality() {
+        if (size == 0) return BigInteger.ZERO;
+        prepareRanks();
+        return unsigned(cumulative[size - 1]);
+    }
+
+    /**
+     * Count elements strictly less than {@code point} in signed natural order.
+     * O(log r) after one O(r) lazy preparation, with unsigned 64-bit indexes.
+     */
+    public BigInteger rank(long point) {
+        if (size == 0) return BigInteger.ZERO;
+        prepareRanks();
+        int slot = firstEndingAfter(point);
+        if (slot == size) return unsigned(cumulative[size - 1]);
+        long before = slot == 0 ? 0L : cumulative[slot - 1];
+        return unsigned(starts[slot] >= point ? before : before + point - starts[slot]);
+    }
+
+    /**
+     * Select zero-based ordinal from the entire signed-sorted union.
+     * O(log r) after one O(r) lazy preparation; no boxing of each point.
+     * @throws IndexOutOfBoundsException when ordinal is outside [0, cardinality)
+     */
+    public long select(BigInteger ordinal) {
+        Objects.requireNonNull(ordinal, "ordinal");
+        if (ordinal.signum() < 0 || ordinal.compareTo(cardinality()) >= 0) {
+            throw new IndexOutOfBoundsException("range ordinal outside cardinality");
+        }
+        long unsignedOrdinal = ordinal.longValue(); // exact low 64-bit bit pattern
+        int lo = 0, hi = size;
+        while (lo < hi) {
+            int middle = lo + ((hi - lo) >>> 1);
+            if (Long.compareUnsigned(cumulative[middle], unsignedOrdinal) <= 0) {
+                lo = middle + 1;
+            } else {
+                hi = middle;
+            }
+        }
+        long preceding = lo == 0 ? 0L : cumulative[lo - 1];
+        return starts[lo] + (unsignedOrdinal - preceding); // exact signed coordinate, modular arithmetic
+    }
+
+    /**
+     * Append already-sorted interval to a result under construction.
+     * Never allocates an entry object; merges touching bounds in O(1).
+     */
+    private void appendSorted(long start, long end) {
+        if (start >= end) return;
+        if (size != 0 && ends[size - 1] >= start) {
+            if (end > ends[size - 1]) ends[size - 1] = end;
+            return;
+        }
+        reserve(size + 1);
+        starts[size] = start;
+        ends[size] = end;
+        size++;
+    }
+
+    /** Linear-time immutable union of two sorted array/index-backed owners. */
+    public M3LongRangeSet union(M3LongRangeSet other) {
+        Objects.requireNonNull(other, "other");
+        if (other == this) return snapshot();
+        M3LongRangeSet result = new M3LongRangeSet();
+        int a = 0, b = 0;
+        while (a < size || b < other.size) {
+            if (b == other.size || (a < size && starts[a] <= other.starts[b])) {
+                result.appendSorted(starts[a], ends[a]);
+                a++;
+            } else {
+                result.appendSorted(other.starts[b], other.ends[b]);
+                b++;
+            }
+        }
+        return result;
+    }
+
+    /** Linear-time intersection without a per-range object or third array payload. */
+    public M3LongRangeSet intersection(M3LongRangeSet other) {
+        Objects.requireNonNull(other, "other");
+        if (other == this) return snapshot();
+        M3LongRangeSet result = new M3LongRangeSet();
+        int a = 0, b = 0;
+        while (a < size && b < other.size) {
+            result.appendSorted(Math.max(starts[a], other.starts[b]),
+                    Math.min(ends[a], other.ends[b]));
+            if (ends[a] <= other.ends[b]) a++;
+            else b++;
+        }
+        return result;
+    }
+
+    /**
+     * Linear-time difference {@code this \ other}; source owners are never mutated.
+     */
+    public M3LongRangeSet difference(M3LongRangeSet other) {
+        Objects.requireNonNull(other, "other");
+        if (other == this) return new M3LongRangeSet();
+        M3LongRangeSet result = new M3LongRangeSet();
+        int b = 0;
+        for (int a = 0; a < size; a++) {
+            long cursor = starts[a], end = ends[a];
+            while (b < other.size && other.ends[b] <= cursor) b++;
+            int probe = b;
+            while (probe < other.size && other.starts[probe] < end) {
+                if (other.starts[probe] > cursor) {
+                    result.appendSorted(cursor, other.starts[probe]);
+                }
+                if (other.ends[probe] >= end) {
+                    cursor = end;
+                    break;
+                }
+                cursor = Math.max(cursor, other.ends[probe]);
+                probe++;
+            }
+            if (cursor < end) result.appendSorted(cursor, end);
+            b = probe;
+        }
+        return result;
+    }
+
+    /** Difference of unions in linear time; unlike generic range APIs, bounds are half-open. */
+    public M3LongRangeSet symmetricDifference(M3LongRangeSet other) {
+        Objects.requireNonNull(other, "other");
+        return difference(other).union(other.difference(this));
+    }
+
+    /** Finite signed-long complement clipped to the caller's half-open domain. */
+    public M3LongRangeSet complement(long fromInclusive, long toExclusive) {
+        valid(fromInclusive, toExclusive);
+        M3LongRangeSet scope = new M3LongRangeSet();
+        scope.add(fromInclusive, toExclusive);
+        return scope.difference(this);
     }
 
     /** Defensive snapshot of the packed start coordinate lane. */
@@ -176,6 +330,7 @@ public final class M3LongRangeSet {
         System.arraycopy(starts, 0, copy.starts, 0, size);
         System.arraycopy(ends, 0, copy.ends, 0, size);
         copy.size = size;
+        if (cumulative != null) copy.cumulative = Arrays.copyOf(cumulative, size);
         return copy;
     }
 
@@ -212,6 +367,7 @@ public final class M3LongRangeSet {
         Arrays.fill(starts, 0, size, 0L);
         Arrays.fill(ends, 0, size, 0L);
         size = 0;
+        cumulative = null;
         revision++;
     }
 
