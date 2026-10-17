@@ -78,6 +78,20 @@ final class M3InstalledSourceInventoryRecipeTest {
         assertEquals(approved, M3DonationPointerRecipe.emit(approved, manifestSha, original));
         assertTrue(approved.contains("\"installed_source_manifest\": \"qualification/installed-source-20261017.tsv\""));
         assertTrue(approved.contains("\"installed_source_manifest_sha256\": \"" + manifestSha + "\""));
+        // Red baseline: the old root had duplicate JSON keys; Python json.loads
+        // silently preferred the historical value over the new verified manifest.
+        String rootKey = "  \"installed_source_manifest\": ";
+        assertEquals(2, original.split(java.util.regex.Pattern.quote(rootKey), -1).length - 1);
+        assertEquals(2, live.split(java.util.regex.Pattern.quote(rootKey), -1).length - 1);
+        assertEquals(1, approved.split(java.util.regex.Pattern.quote(rootKey), -1).length - 1);
+        assertTrue(approved.contains(
+                "\"historical_installed_source_manifest_20261008\": "
+                + "\"qualification/installed-source-enum-set-20261008.tsv\""));
+        assertTrue(!approved.contains(
+                "  \"installed_source_manifest\": \"qualification/installed-source-enum-set-20261008.tsv\""));
+        assertEquals(approved, M3DonationPointerRecipe.emit(
+                M3CollectionDependencyRepair.resource(CRATE, "synexia-donation.json.txt"),
+                manifestSha, original));
         assertThrows(IllegalStateException.class,
                 () -> M3DonationPointerRecipe.emit(live + "\n{ \"attacker\": true }",
                         manifestSha, original));
