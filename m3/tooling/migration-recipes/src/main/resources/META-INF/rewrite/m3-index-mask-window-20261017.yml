@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Reuse canonical Synexia Maven/OpenRewrite Java hash-pinned source-receiver recipe.
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.IndexMaskWindow20261017
+displayName: M3JDK21 bounded ordered mask selection receiver
+description: Exact Java 21 source-sealed candidate, with separate C JNI source custody and Java/JNI parity gates.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-index-mask-window-20261017
