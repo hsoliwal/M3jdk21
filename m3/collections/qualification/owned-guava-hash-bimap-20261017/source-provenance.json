@@ -105,5 +105,14 @@
     "independent_execution": false
   },
   "hosted_ci": "PENDING",
-  "publication_parent": "4598bfc398d3024e7ea67e42034e857a53a1b378"
+  "publication_parent": "4598bfc398d3024e7ea67e42034e857a53a1b378",
+  "publication_review": {
+    "prototype_commit": "3a68eb63341f48b0d2ad35a38344f4a8edb2867e",
+    "finding": "CI downloaded fixed coordinates without enforcing locally executed oracle SHA256",
+    "fix": "verify_provider_artifacts.py checks bothGuava andallthreeannotation lengths/SHA256 before hostedcompile/runtime",
+    "actual_local_artifact_verification": "guava-provider-custody-01 PASS",
+    "source_recheck": "PENDING",
+    "commands": "DISABLED",
+    "reviewer_protocol_fixture_authorship": "DISCLOSED"
+  }
 }

@@ -36,7 +36,11 @@ jobs:
           done
           JRE="$HOME/.m2/repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar"
           ANDROID="$HOME/.m2/repository/com/google/guava/guava/33.4.8-android/guava-33.4.8-android.jar"
-          ANNOTATIONS="$HOME/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:$HOME/.m2/repository/com/google/errorprone/error_prone_annotations/2.36.0/error_prone_annotations-2.36.0.jar:$HOME/.m2/repository/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar"
+          JSPECIFY="$HOME/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar"
+          ERROR_PRONE="$HOME/.m2/repository/com/google/errorprone/error_prone_annotations/2.36.0/error_prone_annotations-2.36.0.jar"
+          J2OBJC="$HOME/.m2/repository/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar"
+          python3 -I -S -B m3/collections/qualification/owned-guava-hash-bimap-20261017/verify_provider_artifacts.py "$JRE" "$ANDROID" "$JSPECIFY" "$ERROR_PRONE" "$J2OBJC"
+          ANNOTATIONS="$JSPECIFY:$ERROR_PRONE:$J2OBJC"
           CP="proof/classes:$JRE:$ANNOTATIONS"
           find m3/collections/implementations/guava/src/main/java m3/collections/implementations/guava/src/test/java m3/collections/qualification/owned-guava-hash-bimap-20261017 -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -cp "$CP" -d proof/classes
           java -Xmx512m -cp "$CP" com.m3.collections.guava.M3HashBiMapCommonSelfTest guava-33.4.8-jre.jar

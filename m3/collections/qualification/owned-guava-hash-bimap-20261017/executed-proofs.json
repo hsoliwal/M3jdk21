@@ -111,6 +111,13 @@
       "passed": true,
       "inputs_unchanged": true,
       "log_sha256": "ee88bd198d4a25c9e34c173c5d330576e8187f4edbaf64dfa701d7d7b4e5b242"
+    },
+    {
+      "name": "guava-provider-custody-01",
+      "mode": "guava-provider-custody",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "58a62e582a1ecde2a927bb67ca5793d740ab946337ebc9b6e8b7cd6744c46a0d"
     }
   ],
   "negative_receipts_retained": true,
