@@ -11,3 +11,4 @@ visible-index	Remove Element / filter sequence	LeetCode problem category	Taxonom
 visible-index	Java List operations	HackerRank problem category	Taxonomy only	CATEGORY_ONLY	Mutation/index boundary corpus ideas only; no solution code copied.
 visible-index	filter a List / iterator mutation	GeeksforGeeks problem category	Taxonomy only	CATEGORY_ONLY	Problem classification and hostile cases only; no implementation copied.
 random-access	marker preservation	JDK RandomAccess contract	Contract oracle only	SELECT	Expose RandomAccess only when the authoritative backing List exposes it.
+snapshot-fusion	M3JDK21 #990 filteredSnapshot/filteredSortedSnapshot	hsoliwal/M3jdk21 first-party	Apache-2.0 owner	REUSE	Absorb the already-qualified one-pass selectedCopy snapshot atom so this branch is a strict additive superset rather than a competing M3CollectionViews lineage.
