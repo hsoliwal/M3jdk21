@@ -36,6 +36,9 @@ import java.util.Objects;
  * primitive arrays and batched scalar queries.</p>
  */
 public final class M3SpanIndex {
+
+    /** Preserve the original public zero-argument constructor; no span allocation. */
+    public M3SpanIndex() { }
     public enum Backend { JAVA, NATIVE_REQUIRED }
 
     private int[] starts = M3SlotArrays.EMPTY_INTS;

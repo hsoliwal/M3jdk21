@@ -1,0 +1,3 @@
+$ ["gcc", "-std=c17", "-O2", "-g", "-fno-omit-frame-pointer", "-fPIC", "-shared", "-Wall", "-Wextra", "-Werror", "-I/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/include", "-I/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/include/linux", "-I/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/native/headers", "-I/workspace/scratch/4f99f40718f0/m3-implementation/baseline/com.synexia/synexia-common/src/main/native/collections", "/workspace/scratch/4f99f40718f0/m3-implementation/baseline/com.synexia/synexia-common/src/main/native/collections/packed_stable_filter.c", "-o", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/native/libM3WrapperStableFilter.so"]
+
+EXIT 0

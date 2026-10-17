@@ -1,0 +1,3 @@
+$ ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/javac", "-Xlint:all", "-Werror", "-proc:none", "--release", "21", "-cp", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/baseline-classes:/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/primitive-baseline-classes", "-d", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/allocation-probe-classes", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/tests/M3WrapperAllocationProbe.java"]
+
+EXIT 0

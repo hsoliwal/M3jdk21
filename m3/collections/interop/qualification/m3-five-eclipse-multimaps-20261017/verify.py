@@ -36,7 +36,7 @@ def prove():
         raise ValueError("six exact source paths required, unique and sorted")
     pinned={
         "M3LinkedHashMap.java": "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
-        "M3LinkedList.java": "da39d792baf7311691d2d6e8398adf62f3aa88a8",
+        "M3LinkedList.java": "744d1c488b8342c98e49d2cfd3465c0f558b199d",
         "M3LinkedHashSet.java": "e1ac806d1ebe8aac1b9efe7bcfbaa3f675e7d0d6",
     }
     for name, sha in pinned.items():

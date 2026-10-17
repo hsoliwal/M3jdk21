@@ -41,18 +41,21 @@ public final class M3ApacheCollections {
     private M3ApacheCollections() { }
 
     /** Apache list admission semantics with M3 linked-index storage. */
+    @SuppressWarnings("deprecation")
     public static <E> PredicatedList<E> predicatedList(Predicate<? super E> predicate) {
         return PredicatedList.predicatedList(new M3LinkedList<>(),
                 Objects.requireNonNull(predicate, "predicate"));
     }
 
     /** Apache set admission semantics with M3 array/slot-backed membership. */
+    @SuppressWarnings("deprecation")
     public static <E> PredicatedSet<E> predicatedSet(Predicate<? super E> predicate) {
         return PredicatedSet.predicatedSet(new M3LinkedHashSet<>(),
                 Objects.requireNonNull(predicate, "predicate"));
     }
 
     /** Apache sorted-set admission semantics; range views preserve M3 comparator ownership. */
+    @SuppressWarnings("deprecation")
     public static <E> PredicatedSortedSet<E> predicatedSortedSet(
             Comparator<? super E> order, Predicate<? super E> predicate) {
         return PredicatedSortedSet.predicatedSortedSet(
@@ -61,12 +64,14 @@ public final class M3ApacheCollections {
     }
 
     /** Apache map key/value admission over M3 reference key/value index lanes. */
+    @SuppressWarnings("deprecation")
     public static <K, V> PredicatedMap<K, V> predicatedMap(
             Predicate<? super K> keys, Predicate<? super V> values) {
         return PredicatedMap.predicatedMap(new M3LinkedHashMap<>(), keys, values);
     }
 
     /** Apache sorted-map key/value admission over the existing M3 tree index. */
+    @SuppressWarnings("deprecation")
     public static <K, V> PredicatedSortedMap<K, V> predicatedSortedMap(
             Comparator<? super K> order, Predicate<? super K> keys,
             Predicate<? super V> values) {

@@ -1,3 +1,4 @@
+// Copyright 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.arrays;
 
@@ -89,6 +90,7 @@ public final class M3Arrays {
 
         public int length() { return data.length; }
         public byte byteAt(int index) { return data[Objects.checkIndex(index, data.length)]; }
+        public int segmentCount() { return data.length == 0 ? 0 : 1; }
         public M3ByteArrayView slice(int start, int end) {
             Objects.checkFromToIndex(start, end, data.length);
             return start == 0 && end == data.length ? this : new ByteSlice(this, start, end);
@@ -170,6 +172,7 @@ public final class M3Arrays {
 
         public int length() { return data.length; }
         public char charAt(int index) { return data[Objects.checkIndex(index, data.length)]; }
+        public int segmentCount() { return data.length == 0 ? 0 : 1; }
         public M3Utf16Facts facts() { return facts; }
         public M3Utf16ArrayView subSequence(int start, int end) {
             Objects.checkFromToIndex(start, end, data.length);
@@ -327,8 +330,17 @@ public final class M3Arrays {
     }
 
     private static int locate(int[] ends, int index) {
-        int found = java.util.Arrays.binarySearch(ends, index + 1);
-        return found >= 0 ? found : -found - 1;
+        // Reuse the half-open upper-bound atom: the containing segment has the
+        // first cumulative end greater than index, even when empty segments
+        // repeat a boundary. No descriptor or immutable payload is discarded.
+        int low = 0;
+        int high = ends.length;
+        while (low < high) {
+            int middle = low + ((high - low) >>> 1);
+            if (ends[middle] <= index) low = middle + 1;
+            else high = middle;
+        }
+        return low;
     }
 
     private static List<ByteBuffer> buffers(M3ByteArrayView source, int start, int length) {

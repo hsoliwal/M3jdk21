@@ -1,0 +1,79 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.m3:m3-arrays >--------------------------
+[INFO] Building M3 immutable array substrate 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-arrays ---
+[INFO] Copying 3 resources from  to target/classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-arrays ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 8 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- exec:3.3.0:exec (configure-native) @ m3-arrays ---
+-- The C compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Found JNI: /tmp/m3-ast-product-build/images/jdk/include  found components: AWT JVM
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /workspace/scratch/13309be96b09/collections-work/received/m3/arrays/target/native
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-arrays ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/13309be96b09/collections-work/received/m3/arrays/src/test/resources
+[INFO] 
+[INFO] --- exec:3.3.0:exec (build-native) @ m3-arrays ---
+[ 16%] Building C object CMakeFiles/m3_arrays.dir/m3_arrays.c.o
+[ 33%] Building C object CMakeFiles/m3_arrays.dir/m3_arrays_jni.c.o
+[ 50%] Linking C shared library libm3_arrays.so
+[ 50%] Built target m3_arrays
+[ 66%] Building C object CMakeFiles/m3_arrays_checks.dir/tests/m3_arrays_checks.c.o
+[ 83%] Building C object CMakeFiles/m3_arrays_checks.dir/m3_arrays.c.o
+[100%] Linking C executable m3_arrays_checks
+[100%] Built target m3_arrays_checks
+[INFO] 
+[INFO] --- exec:3.3.0:exec (test-native) @ m3-arrays ---
+Internal ctest changing into directory: /workspace/scratch/13309be96b09/collections-work/received/m3/arrays/target/native
+Test project /workspace/scratch/13309be96b09/collections-work/received/m3/arrays/target/native
+    Start 1: m3_arrays_checks
+1/1 Test #1: m3_arrays_checks .................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.00 sec
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-arrays ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug release 21 module-path] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-arrays ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.arrays.M3ArrayNativeTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.058 s -- in com.m3.arrays.M3ArrayNativeTest
+[INFO] Running com.m3.arrays.M3ArraysTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.047 s -- in com.m3.arrays.M3ArraysTest
+[INFO] Running com.m3.arrays.M3ArrayEmptySegmentsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.465 s -- in com.m3.arrays.M3ArrayEmptySegmentsTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ m3-arrays ---
+[INFO] Building jar: /workspace/scratch/13309be96b09/collections-work/received/m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.109 s
+[INFO] Finished at: 2026-10-17T07:31:29-06:00
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Jdk21LongRangeArrays20261017
+displayName: Admit primitive half-open long RangeSet over parallel arrays and 32-bit state index masks
+description: Three absent-before Java21 source/test files with exact SHA-256 and existing Java/C17 JNI selector; provider APIs remain distinct.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-long-range-array-flags-20261017

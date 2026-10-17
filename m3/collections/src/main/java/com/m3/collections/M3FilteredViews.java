@@ -8,6 +8,7 @@ import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
@@ -60,12 +61,12 @@ public final class M3FilteredViews {
 
     public static <K, V> SortedMap<K, V> filterEntries(SortedMap<K, V> source,
             BiPredicate<? super K, ? super V> predicate) {
-        return new SortedMapView<>(source, predicate);
+        return Collections.unmodifiableSortedMap(new SortedMapView<>(source, predicate));
     }
 
     public static <K, V> NavigableMap<K, V> filterEntries(NavigableMap<K, V> source,
             BiPredicate<? super K, ? super V> predicate) {
-        return new NavigableMapView<>(source, predicate);
+        return Collections.unmodifiableNavigableMap(new NavigableMapView<>(source, predicate));
     }
 
     private static <E> Iterator<E> filtered(Iterator<E> source,
@@ -220,25 +221,43 @@ public final class M3FilteredViews {
             return predicate.test(nav.ceiling(alias));
         }
         /**
-         * One bounded range traversal per navigation query.  This preserves the backing
-         * comparator's representative and exception behavior without repeating tree
-         * searches for every rejected element.
+         * Bounded views admit navigation queries outside their own endpoints,
+         * whereas subSet/headSet/tailSet may reject those same query endpoints.
+         * Start from the backing JDK navigational result, never the query alias.
+         * A null result can also designate a real comparator-admitted null member.
          */
+        private boolean nullIsCandidate(E query, boolean forward, boolean inclusive) {
+            Comparator<? super E> order = nav.comparator();
+            if (order == null || nav.isEmpty()
+                    || (nav.first() != null && nav.last() != null)) return false;
+            int direction = order.compare(null, query);
+            return forward ? (inclusive ? direction >= 0 : direction > 0)
+                    : (inclusive ? direction <= 0 : direction < 0);
+        }
         private E firstVisible(Iterator<E> cursor) {
             Iterator<E> selected = M3FilteredViews.filtered(cursor, predicate);
             return selected.hasNext() ? selected.next() : null;
         }
+        private E navigate(E candidate, E query, boolean forward, boolean inclusive) {
+            if (candidate == null && !nullIsCandidate(query, forward, inclusive)) return null;
+            if (predicate.test(candidate)) return candidate;
+            // The candidate is an actual member within this backing range; strict
+            // successor/predecessor views are therefore legal even on nested subSets.
+            Iterator<E> remaining = forward ? nav.tailSet(candidate, false).iterator()
+                    : nav.headSet(candidate, false).descendingIterator();
+            return firstVisible(remaining);
+        }
         @Override public E lower(E e) {
-            return firstVisible(nav.headSet(e, false).descendingIterator());
+            return navigate(nav.lower(e), e, false, false);
         }
         @Override public E floor(E e) {
-            return firstVisible(nav.headSet(e, true).descendingIterator());
+            return navigate(nav.floor(e), e, false, true);
         }
         @Override public E ceiling(E e) {
-            return firstVisible(nav.tailSet(e, true).iterator());
+            return navigate(nav.ceiling(e), e, true, true);
         }
         @Override public E higher(E e) {
-            return firstVisible(nav.tailSet(e, false).iterator());
+            return navigate(nav.higher(e), e, true, false);
         }
         @Override public E first() {
             Iterator<E> values = iterator();
@@ -255,7 +274,9 @@ public final class M3FilteredViews {
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
-        @Override public Iterator<E> descendingIterator() { return descendingSet().iterator(); }
+        @Override public Iterator<E> descendingIterator() {
+            return filtered(nav.descendingSet().iterator(), predicate);
+        }
         @Override public NavigableSet<E> subSet(E from, boolean inclusiveFrom,
                 E to, boolean inclusiveTo) {
             return new NavigableSetView<>(nav.subSet(from, inclusiveFrom, to, inclusiveTo), predicate);
@@ -289,7 +310,10 @@ public final class M3FilteredViews {
                 if (predicate.test(entry.getKey(), entry.getValue())) count++;
             return count;
         }
-        @Override public boolean isEmpty() { return !entrySet().iterator().hasNext(); }
+        @Override public boolean isEmpty() {
+            return !filtered(sorted.entrySet().iterator(),
+                    item -> predicate.test(item.getKey(), item.getValue())).hasNext();
+        }
         /**
          * Called only after containsKey has established membership. The
          * comparator's tail range exposes the actual retained key, including

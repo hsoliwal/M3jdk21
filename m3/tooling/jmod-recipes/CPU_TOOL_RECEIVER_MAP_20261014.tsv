@@ -18,3 +18,4 @@ com.synexia.m3.constraint.interval	com.m3.tools.constraint.interval	INDEPENDENT_
 com.synexia.m3.codec.varint	com.m3.tools.codec.varint	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
 com.synexia.m3.verify.sha256	com.m3.tools.verify.sha256	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
 com.synexia.m3.plan.priority	com.m3.tools.plan.priority	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING
+com.synexia.m3.model.quantize	com.m3.tools.model.quantize	INDEPENDENT_APACHE_MODULE	OPTIONAL_TOOLING	QUALIFICATION_PENDING

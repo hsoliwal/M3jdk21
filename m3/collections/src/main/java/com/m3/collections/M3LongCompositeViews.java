@@ -42,10 +42,12 @@ public final class M3LongCompositeViews {
         for (T source : result) Objects.requireNonNull(source, "source");
         return result;
     }
-    private static Spliterator.OfLong cursorSpliterator(M3LongIterator cursor, int flags) {
+    private static Spliterator.OfLong cursorSpliterator(M3LongCollection source, int flags) {
         return new Spliterator.OfLong() {
+            private M3LongIterator cursor;
             public boolean tryAdvance(LongConsumer action) {
                 Objects.requireNonNull(action, "action");
+                if (cursor == null) cursor = source.iterator();
                 if (!cursor.hasNext()) return false;
                 action.accept(cursor.nextLong());
                 return true;
@@ -105,7 +107,7 @@ public final class M3LongCompositeViews {
             };
         }
         public Spliterator.OfLong longSpliterator() {
-            return cursorSpliterator(iterator(), Spliterator.ORDERED | Spliterator.NONNULL);
+            return cursorSpliterator(this, Spliterator.ORDERED | Spliterator.NONNULL);
         }
     }
     private static final class Union implements M3LongSortedSet {
@@ -140,7 +142,7 @@ public final class M3LongCompositeViews {
             return size == result.length ? result : Arrays.copyOf(result, size);
         }
         public Spliterator.OfLong longSpliterator() {
-            return cursorSpliterator(iterator(), Spliterator.ORDERED | Spliterator.NONNULL
+            return cursorSpliterator(this, Spliterator.ORDERED | Spliterator.NONNULL
                     | Spliterator.SORTED | Spliterator.DISTINCT);
         }
         public long first() { M3LongIterator i = iterator(); if (!i.hasNext()) throw new NoSuchElementException(); return i.nextLong(); }
@@ -234,7 +236,7 @@ public final class M3LongCompositeViews {
         }
 
         @Override public Spliterator.OfLong longSpliterator() {
-            return cursorSpliterator(iterator(), Spliterator.ORDERED
+            return cursorSpliterator(this, Spliterator.ORDERED
                     | Spliterator.SORTED | Spliterator.DISTINCT | Spliterator.NONNULL);
         }
 

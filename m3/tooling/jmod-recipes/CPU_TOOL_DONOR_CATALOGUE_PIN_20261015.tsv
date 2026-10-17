@@ -20,3 +20,4 @@ com.synexia.m3.verify.sha256	com.synexia.m3.verify.sha256.Sha256	PROVENANCE	IMPL
 com.synexia.m3.plan.priority	com.synexia.m3.plan.priority.StablePriorityQueue	SCHEDULING	IMPLEMENTED	Apache-2.0
 com.synexia.m3.model.distill	com.synexia.m3.model.distill.Distillation	MODEL_DISTILL	IMPLEMENTED	Apache-2.0
 com.synexia.m3.compute.webgpu	com.synexia.m3.compute.webgpu.WebGpuCompute	WEBGPU	IMPLEMENTED	Apache-2.0
+com.synexia.m3.model.quantize	com.synexia.m3.model.quantize.BlockInt8Quantizer	MODEL_QUANTIZE	IMPLEMENTED	Apache-2.0

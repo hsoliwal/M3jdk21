@@ -130,7 +130,7 @@ public final class M3LibraryCollections {
      * single-value copies. Unlike Guava, size counts distinct keys. Supplied lists stay aliased.
      */
     public static <K, V> MultiValueMap<K, V> springMultiValueMap() {
-        return new M3SpringMultiValueMap<>();
+        return new M3SpringArrayMultiValueMap<>();
     }
 
     /** Spring's single-value-to-multi-value view; no multi-value emulation is promised. */
@@ -169,4 +169,9 @@ public final class M3LibraryCollections {
         return com.google.common.collect.Sets.filter(
                 Objects.requireNonNull(owner, "owner"), Objects.requireNonNull(predicate, "predicate"));
     }
+    /** Guava's real bidirectional-map interface backed by two indexed M3 map lanes. */
+    public static <K, V> com.google.common.collect.BiMap<K, V> guavaBiMap() {
+        return new M3GuavaBiMap<>();
+    }
+
 }
