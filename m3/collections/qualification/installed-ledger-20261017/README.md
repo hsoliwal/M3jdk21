@@ -8,10 +8,10 @@ the `master` branch and not a replacement of the JDK21 public collection APIs.
 [Existing M3 collection contracts run 38998743680](https://github.com/hsoliwal/M3jdk21/actions/runs/38998743680)
 on #999 failed two execution jobs:
 1. `verify_donation.py --cost-probe`: after verified JDK21 and 1.12.2 JUnit artifacts,
-   old installed source manifest digest **actual**
+   PR #999 synthetic merge checkout installed manifest **actual**
    `6627c851e6a879e28c0434b41f988669c118649e04a4d89bcf30102aa9e767ed`
    versus **expected** `90e6e4adcc6a9224b6ca7f85b5d01b950ed8c368fcc660b04ce56fda59eae689`.
-   The old manifest has fewer file paths than the installed set. Do not change the
+   The pinned head retains the expected historical manifest SHA; the old inventory still has fewer paths than the installed Java source set. Treat the synthetic merge-tree hash mismatch as a separate Git ref custody discrepancy. Do not change the
    expected SHA alone or weaken duplicate/path checks: generate a NEW complete
    path + SHA256 manifest for this exact source epoch, and update only the root
    JSON receipt pointer; retain all original/historical manifests and nested JSON.
