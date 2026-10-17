@@ -45,6 +45,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python3 -I -S -B m3/runtime-integration/string-successor-sdk-20261017/canonical/verify.py
+          python3 -I -S -B m3/runtime-integration/utf8-cursor-20261014/recipe/canonical/verify.py
           base="$(git merge-base origin/master HEAD || true)"
           if test -n "$base"; then
             git diff --check "$base"...HEAD
